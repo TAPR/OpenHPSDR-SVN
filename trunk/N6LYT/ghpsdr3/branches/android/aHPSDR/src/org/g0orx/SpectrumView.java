@@ -6,16 +6,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.util.Log;
 
 public class SpectrumView extends View implements OnTouchListener {
 
 	public SpectrumView(Context context, int width,int height,Connection connection) {
 		super(context);
+System.err.println("SpectrumView: width="+width+" height="+height);
 		this.connection = connection;
 		paint = new Paint();
 		WIDTH=width;
@@ -31,12 +30,14 @@ public class SpectrumView extends View implements OnTouchListener {
 				waterfall.setPixel(x, y, Color.BLACK);
 			}
 		}
-		
 		average=waterfallLow;
-
 		this.setOnTouchListener(this);
 	}
 
+	public void setConnection(Connection connection) {
+		this.connection=connection;	
+	}
+	
 	void setSensors(float sensor1,float sensor2,float sensor3) {
 		
 		if(sensor2>(-1.9F+4.0F)) {
@@ -65,7 +66,6 @@ public class SpectrumView extends View implements OnTouchListener {
 			paint.setColor(Color.GRAY);
 			int V = spectrumHigh - spectrumLow;
 			int numSteps = V / 20;
-			int pixelStepSize = HEIGHT / numSteps;
 			for (int i = 1; i < numSteps; i++) {
 				int num = spectrumHigh - i * 20;
 				int y = (int) Math.floor((spectrumHigh - num) * HEIGHT / V);
@@ -109,7 +109,7 @@ public class SpectrumView extends View implements OnTouchListener {
 			                                       (connection.getFrequency()%1000000)/1000,
 			                                       (connection.getFrequency()%1000));
 			canvas.drawText(fs + " "
-					+ connection.getStringMode(), 100, 30, paint);
+					+ connection.getStringMode(), 50, 30, paint);
 			
 			//DEBUG
 			//canvas.drawText(Integer.toString(waterfallLow), WIDTH/2, 30, paint);
@@ -127,9 +127,11 @@ public class SpectrumView extends View implements OnTouchListener {
 			canvas.drawBitmap(waterfall, 1, HEIGHT, paint);
 
 			// draw the S-Meter
-			int smeter=connection.getMeter()+127;
-			//paint.setColor(Color.GREEN);
-			//canvas.drawText(Integer.toString(dbm)+"dBm", WIDTH-100, 25, paint);
+			int dbm=connection.getMeter();
+			int smeter=dbm+127;
+			paint.setColor(Color.GREEN);
+			paint.setTextSize(16.0F);
+			canvas.drawText(Integer.toString(dbm)+" dBm", WIDTH-200, 25, paint);
 			paint.setColor(Color.RED);
 			canvas.drawRect(WIDTH-125,10,(WIDTH-125)+smeter,25, paint);
 			paint.setColor(Color.GREEN);
@@ -150,7 +152,6 @@ public class SpectrumView extends View implements OnTouchListener {
 				}
 				canvas.drawLine(WIDTH-125+54+i, 25, WIDTH-125+54+i, y, paint);
 			}
-			
 			paint.setTextSize(8.0F);
 			canvas.drawText("3", WIDTH-125+18-2, 35, paint);
 			canvas.drawText("6", WIDTH-125+36-2, 35, paint);
@@ -169,7 +170,9 @@ public class SpectrumView extends View implements OnTouchListener {
 			paint.setColor(0xffffffff);
 			canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
 			paint.setColor(Color.RED);
-			canvas.drawText("Server is busy - please wait", 20, canvas
+			//canvas.drawText("Server is busy - please wait", 20, canvas
+			//		.getHeight() / 2, paint);
+			canvas.drawText(connection.getStatus(), 20, canvas
 					.getHeight() / 2, paint);
 		}
 	}
@@ -178,7 +181,6 @@ public class SpectrumView extends View implements OnTouchListener {
 			int sampleRate) {
 
 		// scroll the waterfall down
-
 		waterfall.getPixels(pixels, 0, WIDTH, 0, 0, WIDTH, HEIGHT - 1);
 		waterfall.setPixels(pixels, 0, WIDTH, 0, 1, WIDTH, HEIGHT - 1);
 
@@ -215,8 +217,8 @@ public class SpectrumView extends View implements OnTouchListener {
 		filterLeft = (filterLow - (-sampleRate / 2)) * WIDTH / sampleRate;
 		filterRight = (filterHigh - (-sampleRate / 2)) * WIDTH / sampleRate;
 
-		waterfallLow=(average/WIDTH)-10;
-		waterfallHigh=waterfallLow+60;
+		waterfallLow=(average/WIDTH)-5;
+		waterfallHigh=waterfallLow+55;
 		
 		this.postInvalidate();
 	}

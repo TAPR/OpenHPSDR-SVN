@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.media.AudioManager;
 
 public class AHPSDRActivity extends Activity implements SensorEventListener {
 	/** Called when the activity is first created. */
@@ -27,28 +31,69 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		setTitle("aHPSDR: ");
+		
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
-        mGravity = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        mGravity = mSensorManager.getDefaultSensor(Sensor.TYPE_ALL);
         
-		Display display = getWindowManager().getDefaultDisplay(); 
-		int width = display.getWidth();
-		int height = display.getHeight();
+        SharedPreferences prefs = getSharedPreferences("aHPSDR", 0);
+        band=prefs.getInt("Band", BAND_20);
+		filter=prefs.getInt("Filter",FILTER_5);
+		mode=prefs.getInt("Mode",MODE_USB);
+		frequency=prefs.getLong("Frequency",14200000L);
+		filterLow=prefs.getInt("FilterLow",150);
+		filterHigh=prefs.getInt("FilterHigh", 2850);
+		gain=prefs.getInt("gain", 80);
+		agc=prefs.getInt("AGC", AGC_LONG);
+		fps=prefs.getInt("Fps", FPS_10);
+		server=prefs.getString("Server", "g0orx.dyndns.org");
+		receiver=prefs.getInt("Receiver", 0);
 		
-		connection = new Connection(server, BASE_PORT + receiver,width);
+		Display display = getWindowManager().getDefaultDisplay(); 
+		width = display.getWidth();
+		height = display.getHeight();
+		
+		connection = new Connection(server, BASE_PORT+receiver, width);
 
-		update = new Update(connection);
+		//update = new Update(connection);
 
 		spectrumView = new SpectrumView(this, width, height, connection);
 
 		connection.setSpectrumView(spectrumView);
 
 		setContentView(spectrumView);
-
+		
+		setTitle("aHPSDR: "+server+" (rx"+receiver+")");
+        
 	}
+
+	@Override
+    protected void onStop(){
+System.err.println("AHPSDRActivity.onStop");
+        super.onStop();
+        
+        update.close();
+        connection.close();
+
+        SharedPreferences prefs = getSharedPreferences("aHPSDR", 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("Band", band);
+        editor.putInt("Filter", filter);
+		editor.putInt("Mode", connection.getMode());
+		editor.putLong("Frequency", connection.getFrequency());
+		editor.putInt("FilterLow", connection.getFilterLow());
+		editor.putInt("FilterHigh", connection.getFilterHigh());
+		editor.putInt("Gain", gain);
+		editor.putInt("AGC", agc);
+		editor.putInt("Fps", fps);
+		editor.putString("Server", server);
+		editor.putInt("Receiver", receiver);
+		editor.commit();
+    }
 
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
@@ -73,44 +118,42 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 
 	public void onStart() {
 		super.onStart();
-		Log.i("Jmonitor", "onStart");
+		Log.i("AHPSDR", "onStart");
 
 	}
 
 	public void onResume() {
 		super.onResume();
-		Log.i("Jmonitor", "onResume");
+		Log.i("AHPSDR", "onResume");
 		mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_NORMAL);
-		connection.start();
-		connection.setFrequency(7048000);
-		connection.setMode(0);
-		connection.setFilter(-2850, -150);
-		connection.setGain(80);
-		connection.setAGC(AGC_LONG);
+		if(!connection.isRunning()) {
+		    connection.start();
+		}
+		connection.setFrequency(frequency);
+		connection.setMode(mode);
+		connection.setFilter(filterLow, filterHigh);
+		connection.setGain(gain);
+		connection.setAGC(agc);
+		update=new Update(connection);
+		update.setFps(fps);
 		update.start();
 	}
 
 	public void onPause() {
 		super.onPause();
 		mSensorManager.unregisterListener(this);
-		update.stop();
-		connection.close();
-		Log.i("Jmonitor", "onPause");
-	}
-
-	public void onStop() {
-		super.onStop();
-		Log.i("Jmonitor", "onStop");
 		update.close();
 		connection.close();
+		Log.i("AHPSDR", "onPause");
 	}
 
 	public void onDestroy() {
 		super.onDestroy();
-		Log.i("Jmonitor", "onDestroy");
+		Log.i("AHPSDR", "onDestroy");
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, MENU_CONNECTION,0, "Connection");
 		menu.add(0, MENU_BAND, 0, "Band");
 		menu.add(0, MENU_MODE, 0, "Mode");
 		menu.add(0, MENU_FILTER, 0, "FILTER");
@@ -127,28 +170,9 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 		case MENU_QUIT:
 			this.finish();
 			break;
-		case MENU_BAND:
-			showDialog(MENU_BAND);
+	    default:
+			showDialog(item.getItemId());
 			break;
-		case MENU_MODE:
-			showDialog(MENU_MODE);
-			break;
-		case MENU_FILTER:
-			showDialog(MENU_FILTER);
-			break;
-		case MENU_AGC:
-			showDialog(MENU_AGC);
-			break;
-		case MENU_DSP:
-			showDialog(MENU_DSP);
-			break;
-		case MENU_GAIN:
-			showDialog(MENU_GAIN);
-			break;
-		case MENU_FPS:
-			showDialog(MENU_FPS);
-			break;
-
 		}
 		return true;
 	}
@@ -159,6 +183,39 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 
 		dialog = null;
 		switch (id) {
+		case MENU_CONNECTION:
+			builder = new AlertDialog.Builder(this);
+			builder.setTitle("Enter server name or ip address.");
+			final EditText input = new EditText(this);
+			input.setText(server);
+			builder.setView(input);
+			builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					String value = input.getText().toString().trim();
+					System.err.println("Server: "+value);
+					update.close();
+					mode=connection.getMode();
+					frequency=connection.getFrequency();
+					filterLow=connection.getFilterLow();
+					filterHigh=connection.getFilterHigh();
+					connection.close();
+					server=value;	
+					connection = new Connection(server, BASE_PORT + receiver,width);
+					connection.setSpectrumView(spectrumView);
+					connection.start();
+					connection.setFrequency(frequency);
+					connection.setMode(mode);
+					connection.setFilter(filterLow, filterHigh);
+					connection.setGain(gain);
+					connection.setAGC(agc);
+					update=new Update(connection);					
+					spectrumView.setConnection(connection);
+					update.setFps(fps);
+					update.start();
+				}
+			});
+			builder.show();
+			break;
 		case MENU_BAND:
 			builder = new AlertDialog.Builder(this);
 			builder.setTitle("Select a Band");
@@ -245,7 +302,8 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 			builder.setSingleChoiceItems(modes, connection.getMode(),
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int item) {
-							connection.setMode(item);
+							mode=item;
+							connection.setMode(mode);
 							switch (item) {
 							case MODE_LSB:
 								connection.setFilter(-2850, -150);
@@ -316,10 +374,11 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 				break;
 			}
 			if (filters != null) {
-				builder.setSingleChoiceItems(ssbFilters, FILTER_5,
+				builder.setSingleChoiceItems(filters, filter,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int item) {
-								switch (item) {
+								filter=item;
+								switch (filter) {
 								case FILTER_0:
 									switch (connection.getMode()) {
 									case MODE_LSB:
@@ -654,6 +713,8 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int item) {
 							//
+							agc=item;
+							connection.setAGC(agc);
 							dialog.dismiss();
 						}
 					});
@@ -687,10 +748,11 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 		case MENU_GAIN:
 			builder = new AlertDialog.Builder(this);
 			builder.setTitle("Select Gain");
-			builder.setSingleChoiceItems(gains, GAIN_30,
+			builder.setSingleChoiceItems(gains, gain,
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int item) {
-							connection.setGain(item * 10);
+							gain=item;
+							connection.setGain((gain+1)*10);
 							dialog.dismiss();
 						}
 					});
@@ -699,10 +761,11 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 		case MENU_FPS:
 			builder = new AlertDialog.Builder(this);
 			builder.setTitle("Select FPS");
-			builder.setSingleChoiceItems(fpss, FPS_10,
+			builder.setSingleChoiceItems(fpss, fps,
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int item) {
-							update.setFps(item);
+							fps=item;
+							update.setFps(fps+1);
 							dialog.dismiss();
 						}
 					});
@@ -714,6 +777,9 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 		}
 		return dialog;
 	}
+	
+	private int width;
+	private int height;
 
 	private SensorManager mSensorManager;
     private Sensor mGravity;
@@ -721,6 +787,7 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 	private Connection connection;
 	private SpectrumView spectrumView;
 	private Update update;
+	
 
 	public static final int MENU_QUIT = 0;
 	public static final int MENU_BAND = 1;
@@ -730,11 +797,13 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 	public static final int MENU_DSP = 5;
 	public static final int MENU_GAIN = 6;
 	public static final int MENU_FPS = 7;
+	public static final int MENU_CONNECTION = 8;
 
 	public static final CharSequence[] bands = { "160", "80", "60", "40", "30",
 			"20", "17", "15", "12", "10", "6", "GEN", "WWV" };
 
-	private int band = BAND_40;
+	private int band = BAND_20;
+	private long frequency=14200000L;
 
 	public static final int BAND_160 = 0;
 	public static final int BAND_80 = 1;
@@ -750,6 +819,8 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 	public static final int BAND_GEN = 11;
 	public static final int BAND_WWV = 12;
 
+	private int mode = MODE_USB;
+	
 	public static final CharSequence[] modes = { "LSB", "USB", "DSB", "CWL",
 			"CWU", "FMN", "AM", "DIGU", "SPEC", "DIGL", "SAM", "DRM" };
 	public static final int MODE_LSB = 0;
@@ -786,8 +857,7 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 	public static final CharSequence[] gains = { "0", "10", "20", "30", "40",
 			"50", "60", "70", "80", "90", "100" };
 
-	public int gain = 30;
-	
+	public int gain = 80;
 	
 	public static final int GAIN_0 = 0;
 	public static final int GAIN_10 = 1;
@@ -802,22 +872,25 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 	public static final int GAIN_100 = 10;
 	
     public static final CharSequence[] fpss = { "1", "2", "3", "4", "5",
-		"6", "7", "8", "9", "10", "11", "12" };
+		"6", "7", "8", "9", "10", "11", "12", "13", "14", "15" };
 	
-    public int fps = 10;
+    public int fps = FPS_10;
     
-	public static final int FPS_1 = 1;
-	public static final int FPS_2 = 2;
-	public static final int FPS_3 = 3;
-	public static final int FPS_4 = 4;
-	public static final int FPS_5 = 5;
-	public static final int FPS_6 = 6;
-	public static final int FPS_7 = 7;
-	public static final int FPS_8 = 8;
-	public static final int FPS_9 = 9;
-	public static final int FPS_10 = 10;
-	public static final int FPS_11 = 11;
-	public static final int FPS_12 = 12;
+	public static final int FPS_1 = 0;
+	public static final int FPS_2 = 1;
+	public static final int FPS_3 = 2;
+	public static final int FPS_4 = 3;
+	public static final int FPS_5 = 4;
+	public static final int FPS_6 = 5;
+	public static final int FPS_7 = 6;
+	public static final int FPS_8 = 7;
+	public static final int FPS_9 = 8;
+	public static final int FPS_10 = 9;
+	public static final int FPS_11 = 10;
+	public static final int FPS_12 = 11;
+	public static final int FPS_13 = 12;
+	public static final int FPS_14 = 13;
+	public static final int FPS_15 = 14;
 	
 
 	public static final CharSequence[] ssbFilters = { "5.0k", "4.4k", "3.8k",
@@ -827,7 +900,10 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 	public static final CharSequence[] amFilters = { "16.0k", "12.0k", "10.0k",
 			"8.0k", "6.6k", "5.2k", "4.0k", "3.1k", "2.9k", "2.0k" };
 
-	private int filter = FILTER_5;
+	private int filter = FILTER_3;
+	
+	private int filterLow=150;
+	private int filterHigh=2875;
 
 	public static final int FILTER_0 = 0;
 	public static final int FILTER_1 = 1;
@@ -843,7 +919,7 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 	private int cwPitch = 600;
 
 	private String server = "g0orx.dyndns.org";
-	private static final int BASE_PORT = 8000;
+	private int BASE_PORT = 8000;
 	private int port = 8000;
 	private int receiver = 0;
 	
