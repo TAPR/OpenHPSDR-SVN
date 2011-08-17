@@ -212,8 +212,12 @@ void Audio::process_audio(char* header,char* buffer,int length) {
     aLawDecode(buffer,length);
     if(audio_out!=NULL) {
         //qDebug() << "writing audio data length=: " <<  decoded_buffer.length();
-        while(written<decoded_buffer.length()) {
-            written+=audio_out->write(&decoded_buffer.data()[written],decoded_buffer.length()-written);
+        //while(written<decoded_buffer.length()) {
+        //    written+=audio_out->write(&decoded_buffer.data()[written],decoded_buffer.length()-written);
+        //}
+        written=audio_out->write(decoded_buffer.data(),decoded_buffer.length());
+        if(written!=decoded_buffer.length()) {
+            // qDebug() << "process_audio: dropped audio data: length="<<decoded_buffer.length()<<"written="<<written;
         }
     }
 }
