@@ -485,8 +485,10 @@ void UI::updateSpectrum() {
 
 void UI::spectrumBuffer(char* header,char* buffer) {
     //qDebug() << "spectrumBuffer";
-    int length=atoi(&header[26]);
-    sampleRate=atoi(&header[32]);
+    //int length=atoi(&header[26]);
+    int length=((header[7]&0xFF)<<8)+(header[8]&0xFF);
+    //sampleRate=atoi(&header[32]);
+    sampleRate=((header[9]&0xFF)<<24)+((header[10]&0xFF)<<16)+((header[11]&0xFF)<<8)+(header[12]&0xFF);
     widget.spectrumFrame->updateSpectrum(header,buffer,length);
     widget.waterfallFrame->updateWaterfall(header,buffer,length);
     connection.freeBuffers(header,buffer);
@@ -495,7 +497,8 @@ void UI::spectrumBuffer(char* header,char* buffer) {
 
 void UI::audioBuffer(char* header,char* buffer) {
     //qDebug() << "audioBuffer";
-    int length=atoi(&header[26]);
+    //int length=atoi(&header[26]);
+    int length=((header[7]&0xFF)<<8)+(header[8]&0xFF);
     if(audio_buffers==0) {
         first_audio_header=header;
         first_audio_buffer=buffer;
