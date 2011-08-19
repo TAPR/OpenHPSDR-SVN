@@ -420,9 +420,12 @@ void Spectrum::updateSpectrum(char* header,char* buffer,int width) {
 
     //qDebug() << "updateSpectrum: width=" << width() << " height=" << height();
     //meter = atoi(&header[40]);
-    meter = atoi(&header[14]);
-    subrx_meter = atoi(&header[20]);
-    sampleRate = atoi(&header[32]);
+    //meter = atoi(&header[14]);
+    meter=((header[3]&0xFF)<<8)+(header[4]&0xFF);
+    //subrx_meter = atoi(&header[20]);
+    subrx_meter=((header[5]&0xFF)<<8)+(header[6]&0xFF);
+    //sampleRate = atoi(&header[32]);
+    sampleRate=((header[9]&0xFF)<<24)+((header[10]&0xFF)<<16)+((header[11]&0xFF)<<8)+(header[12]&0xFF);
 
     //qDebug() << "updateSpectrum: samplerate=" << sampleRate;
 

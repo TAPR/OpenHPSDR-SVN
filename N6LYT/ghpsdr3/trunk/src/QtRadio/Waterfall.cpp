@@ -216,7 +216,8 @@ void Waterfall::updateWaterfall(char*header,char* buffer,int size) {
 
     //qDebug() << "updateWaterfall: " << width() << ":" << height();
 
-    sampleRate = atoi(&header[32]);
+    //sampleRate = atoi(&header[32]);
+    sampleRate=((header[9]&0xFF)<<24)+((header[10]&0xFF)<<16)+((header[11]&0xFF)<<8)+(header[12]&0xFF);
 
     if(image.width()!=width() ||
        image.height()!=height()) {

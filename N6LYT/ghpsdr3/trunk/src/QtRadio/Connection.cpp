@@ -127,7 +127,8 @@ void Connection::socketData() {
             bytes+=thisRead;
             //qDebug() << "READ_HEADER: read " << bytes << " of " << HEADER_SIZE;
             if(bytes==HEADER_SIZE) {
-                length=atoi(&hdr[26]);
+                //length=atoi(&hdr[26]);
+                length=((hdr[7]&0xFF)<<8)+(hdr[8]&0xFF);
                 buffer=(char*)malloc(length);
                 bytes=0;
                 state=READ_BUFFER;
