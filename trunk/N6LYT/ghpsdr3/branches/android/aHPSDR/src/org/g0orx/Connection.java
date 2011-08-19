@@ -147,23 +147,22 @@ System.err.println("Connection.run");
 System.err.println("Connection.run: exit");
 	}
 
+	private short getShort(byte[] buffer,int offset) {
+		short result;
+		result=(short)(((buffer[offset]&0xFF)<<8)+(buffer[offset+1]&0xFF));
+		return result;
+	}
+	
+	private int getInt(byte[] buffer,int offset) {
+		int result;
+		result=((buffer[offset]&0xFF)<<24)|((buffer[offset+1]&0xFF)<<16)|((buffer[offset+2]&0xFF)<<8)|(buffer[offset+3]&0xFF);
+		return result;
+	}
+	
 	private void processSpectrumBuffer(byte[] header, byte[] buffer) {
-		int j;
-		String s;
-
-		j = 0;
-		while (header[j + 32] != '\0') {
-			j++;
-		}
-		s = new String(header, 32, j);
-		sampleRate = Integer.parseInt(s);
-
-		j = 0;
-		while (header[j + 40] != '\0') {
-			j++;
-		}
-		s = new String(header, 40, j);
-		meter = Integer.parseInt(s);
+		
+        sampleRate=getInt(header,9);        
+        meter=getShort(header,3);
 
 		for (int i = 0; i < BUFFER_SIZE; i++) {
 			samples[i] = -(buffer[i] & 0xFF);
@@ -186,13 +185,11 @@ System.err.println("Connection.run: exit");
 				- audioTrack.getPlaybackHeadPosition();
 		// Log.d("AudioTrack","waitingToSend="+waitingToSend);
 		if (waitingToSend < AUDIO_BUFFER_SIZE) {
-			// audioTrack.pause();
 			audioSampleCount += audioTrack.write(decodedBuffer, 0,
 					AUDIO_BUFFER_SIZE);
 		} else {
 			Log.d("AudioTrack", "dropping buffer");
 		}
-		// audioTrack.play();
 	}
 
 	public synchronized void sendCommand(String command) {
@@ -333,16 +330,16 @@ System.err.println("Connection.run: exit");
 	private int mode;
 	private int sampleRate;
 	private int band;
-	private int meter;
+	private short meter;
 	private int agc;
 
 	private int cwPitch = 600;
 
-	byte[] commandBuffer = new byte[32];
+	private byte[] commandBuffer = new byte[32];
 
 	private int[] samples;
 	private int audioSampleCount;
-	short[] decodedBuffer = new short[AUDIO_BUFFER_SIZE];
+	private short[] decodedBuffer = new short[AUDIO_BUFFER_SIZE];
 
 	private AudioTrack audioTrack;
 	private String status = "";
@@ -360,7 +357,7 @@ System.err.println("Connection.run: exit");
 	public static final int modeSAM = 10;
 	public static final int modeDRM = 11;
 
-	private String[] modes = { "LSB", "USB", "DSB", "CWL", "CWU", "FMN", "AM",
+	private static final String[] modes = { "LSB", "USB", "DSB", "CWL", "CWU", "FMN", "AM",
 			"DIGU", "SPEC", "DIGL", "SAM", "DRM" };
 
 	private static short[] aLawDecode = new short[256];

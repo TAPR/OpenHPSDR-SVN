@@ -302,7 +302,13 @@ System.err.println("SpectrumView: width="+width+" height="+height);
 				break;
 			}
 		}
-
+		
+		try {
+		    Thread.sleep(50);
+		} catch (Exception e) {
+			System.err.println("onTouch: "+e.toString());
+		}
+		
 		return true;
 	}
 	
