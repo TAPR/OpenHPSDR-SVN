@@ -681,22 +681,34 @@ void client_set_samples(float* samples,int size) {
 
     // first byte is the buffer type
     client_samples[0]=SPECTRUM_BUFFER;
-    sprintf(&client_samples[1],"%f",HEADER_VERSION);
+//    sprintf(&client_samples[1],"%f",HEADER_VERSION);
+    client_samples[1]=HEADER_VERSION;
+    client_samples[2]=HEADER_SUBVERSION;
 
     // next 6 bytes contain the main rx s meter
-    sprintf(&client_samples[14],"%d",(int)meter);
+//    sprintf(&client_samples[14],"%d",(int)meter);
+    client_samples[3]=((int)meter>>8)&0xFF;
+    client_samples[4]=(int)meter&0xFF;
 
     // next 6 bytes contain the subrx s meter
-    sprintf(&client_samples[20],"%d",(int)subrx_meter);
+//    sprintf(&client_samples[20],"%d",(int)subrx_meter);
+    client_samples[5]=((int)subrx_meter>>8)&0xFF;
+    client_samples[6]=(int)subrx_meter&0xFF;
 
     // next 6 bytes contain data length
-    sprintf(&client_samples[26],"%d",size);
+//    sprintf(&client_samples[26],"%d",size);
+    client_samples[7]=(size>>8)&0xFF;
+    client_samples[8]=size&0xFF;
 
     // next 8 bytes contain the sample rate
-    sprintf(&client_samples[32],"%d",sampleRate);
+//    sprintf(&client_samples[32],"%d",sampleRate);
+    client_samples[9]=(sampleRate>>24)&0xFF;
+    client_samples[10]=(sampleRate>>16)&0xFF;
+    client_samples[11]=(sampleRate>>8)&0xFF;
+    client_samples[12]=sampleRate&0xFF;
 
     // next 8 bytes contain the meter - for compatability
-    sprintf(&client_samples[40],"%d",(int)meter);
+//    sprintf(&client_samples[40],"%d",(int)meter);
 
     slope=(float)SAMPLE_BUFFER_SIZE/(float)size;
     for(i=0;i<size;i++) {

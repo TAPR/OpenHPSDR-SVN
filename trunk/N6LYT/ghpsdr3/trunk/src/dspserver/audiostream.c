@@ -93,8 +93,14 @@ void audio_stream_put_samples(short left_sample,short right_sample) {
         audio_stream_buffer_insert++;
         if(audio_stream_buffer_insert==audio_buffer_size) {
             audio_buffer[0]=AUDIO_BUFFER;
-            sprintf(&audio_buffer[1],"%f",HEADER_VERSION);
-            sprintf(&audio_buffer[26],"%d",audio_buffer_size*audio_channels);
+            //sprintf(&audio_buffer[1],"%f",HEADER_VERSION);
+            audio_buffer[1]=HEADER_VERSION;
+            audio_buffer[2]=HEADER_SUBVERSION;
+
+            //sprintf(&audio_buffer[26],"%d",audio_buffer_size*audio_channels);
+            int size=audio_buffer_size*audio_channels;
+            audio_buffer[7]=(size>>8)&0xFF;
+            audio_buffer[8]=size&0xFF;
             client_send_audio();
             audio_stream_buffer_insert=0;
         }
