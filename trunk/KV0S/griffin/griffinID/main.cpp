@@ -2,13 +2,13 @@
 * \file main.cpp
 * \brief Code files for the main function as part of the Griffin ID program
 * \author David R. Larsen, KV0S
-* \version 1.0.0
+* \version 1.0.1
 * \date August 14, 2011
 */
 
 
 
-/* Copyright (C) 2010 - David R. Larsen, KV0S
+/* Copyright (C) 2011 - David R. Larsen, KV0S
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
 * as published by the Free Software Foundation; either version 2
