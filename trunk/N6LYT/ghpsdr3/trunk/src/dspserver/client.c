@@ -58,9 +58,9 @@ static pthread_t client_thread_id;
 
 static int client_terminate=0;
 
-#define BASE_PORT 8000
+static int BASE_PORT=8000;
 
-static int port=BASE_PORT;
+static int port;
 
 static int serverSocket;
 static int clientSocket;
@@ -83,6 +83,9 @@ void client_set_samples(float* samples,int size);
 
 static unsigned char* client_samples;
 
+void client_set_base_port(int port) {
+    BASE_PORT=port;
+}
 
 float getFilterSizeCalibrationOffset() {
     int size=1024; // dspBufferSize
