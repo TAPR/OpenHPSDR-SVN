@@ -9,4 +9,6 @@
 #define AUDIO_BUFFER        1
 #define BANDSCOPE_BUFFER    2
 
-#define HEADER_VERSION  1.1
+//#define HEADER_VERSION  1.1
+#define HEADER_VERSION  2
+#define HEADER_SUBVERSION  0
