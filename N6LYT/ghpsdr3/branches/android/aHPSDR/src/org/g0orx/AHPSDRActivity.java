@@ -37,8 +37,8 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		
-        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
-        mGravity = mSensorManager.getDefaultSensor(Sensor.TYPE_ALL);
+        //mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        //mGravity = mSensorManager.getDefaultSensor(Sensor.TYPE_ALL);
         
         SharedPreferences prefs = getSharedPreferences("aHPSDR", 0);
         band=prefs.getInt("Band", BAND_20);
@@ -125,7 +125,7 @@ System.err.println("AHPSDRActivity.onStop");
 	public void onResume() {
 		super.onResume();
 		Log.i("AHPSDR", "onResume");
-		mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_NORMAL);
+		//mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_NORMAL);
 		if(!connection.isRunning()) {
 		    connection.start();
 		}
@@ -141,7 +141,7 @@ System.err.println("AHPSDRActivity.onStop");
 
 	public void onPause() {
 		super.onPause();
-		mSensorManager.unregisterListener(this);
+		//mSensorManager.unregisterListener(this);
 		update.close();
 		connection.close();
 		Log.i("AHPSDR", "onPause");
