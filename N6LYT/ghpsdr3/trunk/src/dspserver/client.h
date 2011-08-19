@@ -28,3 +28,4 @@
 void client_init(int receiver);
 void client_set_timing();
 void client_send_audio();
+void client_set_base_port(int port);

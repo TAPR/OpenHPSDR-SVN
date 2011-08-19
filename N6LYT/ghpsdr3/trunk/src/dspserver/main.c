@@ -107,6 +107,7 @@ struct option longOptions[] = {
     {"server",required_argument, 0, 2},
     {"offset",required_argument, 0, 3},
     {"timing",no_argument, 0, 4},
+    {"baseport",required_argument, 0, 5},
     {0,0,0,0}
 };
 
@@ -141,6 +142,10 @@ void processCommands(int argc,char** argv) {
             case 4:
                 client_set_timing();
                 break;
+           case 5:
+                client_set_base_port(atoi(optarg));
+                break;
+
 	    default:
                 fprintf(stderr,"Usage: \n");
                 fprintf(stderr,"  dspserver --receivers N (default 1)\n");
