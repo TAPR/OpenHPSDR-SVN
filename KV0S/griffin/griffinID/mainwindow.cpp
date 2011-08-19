@@ -8,7 +8,7 @@
 
 
 
-/* Copyright (C) 2010 - David R. Larsen, KV0S
+/* Copyright (C) 2011 - David R. Larsen, KV0S
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
 * as published by the Free Software Foundation; either version 2
@@ -47,13 +47,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QCoreApplication::setOrganizationDomain("openhpsdr.org" );
     QCoreApplication::setApplicationName("griffinID");
 
-
-
     this->setWindowTitle("Griffin ID program");
     ui->call_lineEdit->setInputMask(">NN9NNN");
 
     About *abd = new About();
-    abd->setVersion( QString( "1.0." ) );
+    abd->setVersion( QString( "1.0.1" ) );
+
+    Dialog *dlg = new Dialog();
+
 
     loadGridBox();
     loadPowerBox();
@@ -96,6 +97,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->lon_doubleSpinBox,SIGNAL(valueChanged(double)),this,SLOT(lonLocationUpdate(double)));
     connect(ui->actionSave_WSPR,SIGNAL(triggered()),this,SLOT(outputWSPRfile()));
     connect(ui->actionSave_QRSS,SIGNAL(triggered()),this,SLOT(outputQRSSfile()));
+    connect(ui->actionHelp,SIGNAL(triggered()),dlg,SLOT(show()));
+
+
 }
 
 /**
@@ -303,3 +307,4 @@ void MainWindow::outputQRSSfile( )
     out << "END;" << endl;
     file.close();
  }
+
