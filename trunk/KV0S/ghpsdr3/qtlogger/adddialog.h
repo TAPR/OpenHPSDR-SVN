@@ -28,6 +28,7 @@ public:
     QTime *time;
     Ui::addDialog *ui;
     void setFrequency( QString *freq );
+    void setMode( QString *mod );
     void setHeader( QStringList *hdr );
     void setModel( QStandardItemModel *model );
     QStandardItemModel* localmodel;

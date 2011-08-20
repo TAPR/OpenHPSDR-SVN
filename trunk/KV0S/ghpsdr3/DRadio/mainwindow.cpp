@@ -24,10 +24,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateFreq(int val)
 {
-   float value = (float)val;
-   float freq = 14.0 + ((value/100) * 0.350);
-   ui->label->setText(QString("%1").number(freq,'f',6));
-   QByteArray message = "frequency "+QByteArray::number(freq);
+   QString strFrequency;
+   long freq = 14000000 + long(val * 1000);
+   strFrequency.sprintf("%lld.%03lld.%03lld",freq/1000000,freq%1000000/1000,freq%1000);
+   ui->label->setText(strFrequency);
+   QByteArray message = QByteArray("frequency ");
+   message.append(strFrequency);
    sender->broadcastDatagram( message );
 }
 

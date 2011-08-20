@@ -46,14 +46,16 @@ void addDialog::reset()
 void addDialog::addContact()
 {
     qDebug() << "in addContact";
+
     QString contact = ui->contact_lineEdit->text();
     int numb = contact.toInt() + 1;
     ui->contact_lineEdit->setText( QString("%1").number(numb) );
-    QStandardItem *it = new QStandardItem(ui->callsignLineEdit->text());
-    qDebug() << it->text();
-    qDebug() << *selectedhdr;
-    *selectedhdr << "CALL";
-    localmodel->setItem( contact.toInt(), selectedhdr->indexOf("CALL"), it );
+    //QStandardItem *it = new QStandardItem(ui->callsignLineEdit->text());
+    //qDebug() << it->text();
+    //qDebug() << *selectedhdr;
+    //*selectedhdr << "CALL";
+    //qDebug() << *selectedhdr;
+    //localmodel->setItem( contact.toInt(), selectedhdr->indexOf("CALL"), it );
 
     this->close();
 
@@ -89,3 +91,7 @@ void addDialog::setModel(QStandardItemModel *model)
     localmodel = model;
 }
 
+void addDialog::setMode(QString *mod)
+{
+    ui->modeComboBox->setCurrentIndex( ui->modeComboBox->findText( *mod ));
+}
