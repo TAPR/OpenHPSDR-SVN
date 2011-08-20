@@ -20,6 +20,12 @@ public:
 
 private:
     Ui::Dialog *ui;
+    QList <QUrl> oldsource;
+
+private slots:
+    void home();
+    void back();
+    void updatesource( QUrl newsource );
 };
 
 #endif // DIALOG_H
