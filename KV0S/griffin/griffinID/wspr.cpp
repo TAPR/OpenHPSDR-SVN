@@ -81,7 +81,7 @@ void WSPR::convolution()
 {
     int k = 0;
     int nstate = 0;
-    int jmax = sizeof( packed );
+    //int jmax = sizeof( packed );
     //qDebug() << "jmax" << jmax;
     for( int j=0; j!= sizeof( packed ); j++ )
     {
@@ -113,14 +113,14 @@ void WSPR::interleave()
     for(int i=0; i!=162; i++ )
     {
        // j0 := bit reversed_values_smaller_than_161[i]
-       unsigned char j0;
+       unsigned char j0 = 0x00;
        int p=-1;
        for(int k=0; p!=i; k++ )
        {
           for(int j=0; j!=8; j++ )   // j0:=bit_reverse(k)
              j0 = ((k>>j)&1) | (j0<<1);
-          if(j0<162)
-           p++;
+             if(j0<162)
+               p++;
        }
        symbol2[j0]=symbol[i]; //interleave
     }
