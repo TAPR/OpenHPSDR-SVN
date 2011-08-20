@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui help
+QT       += core gui
 
 TARGET = griffinID
 TEMPLATE = app
@@ -25,3 +25,6 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     dialog.ui
+
+RESOURCES += \
+    griffinid.qrc

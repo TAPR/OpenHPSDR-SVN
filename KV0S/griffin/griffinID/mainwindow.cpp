@@ -43,9 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-    QCoreApplication::setOrganizationName("openhpsdr" );
-    QCoreApplication::setOrganizationDomain("openhpsdr.org" );
-    QCoreApplication::setApplicationName("griffinID");
+
 
     this->setWindowTitle("Griffin ID program");
     ui->call_lineEdit->setInputMask(">NN9NNN");
@@ -54,7 +52,6 @@ MainWindow::MainWindow(QWidget *parent) :
     abd->setVersion( QString( "1.0.1" ) );
 
     Dialog *dlg = new Dialog();
-
 
     loadGridBox();
     loadPowerBox();
