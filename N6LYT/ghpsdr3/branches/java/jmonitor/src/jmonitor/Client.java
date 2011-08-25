@@ -139,37 +139,11 @@ public class Client extends Thread {
 
     private void processSpectrumBuffer(byte[] buffer) {
         int j;
-        //System.err.println("getSpectrum: read "+Integer.toString(bytes)+" bytes");
-        // Strings sent with NULL terminator
-        //j = 0;
-        //while (buffer[j] != '\0')j++;
-        //frequency=new String(buffer,0,j);
-        //j=0;
-        //while(buffer[j+14]!='\0') j++;
-        //filterLow=new String(buffer,14,j);
-        //j=0;
-        //while(buffer[j+20]!='\0') j++;
-        //filterHigh=new String(buffer,20,j);
-        //j = 0;
-        //while (buffer[j+26] != '\0') j++;
-        //mode=new String(buffer,26,j);
-        j = 0;
-        while (buffer[j + 32] != '\0') {
-            j++;
-        }
-        sampleRate = new String(buffer, 32, j);
-        j = 0;
-        while (buffer[j + 40] != '\0') {
-            j++;
-        }
-        try {
-            meter = Integer.parseInt(new String(buffer, 40, j));
-        } catch (NumberFormatException e) {
-            meter=-121;
-        }
+        sampleRate = ((buffer[9] & 0xFF) << 24) + ((buffer[10] & 0xFF) << 16) + ((buffer[11] & 0xFF) << 8) + (buffer[12] & 0xFF);
+        meter=(short)(((buffer[3]&0xFF)<<8)+(buffer[4]&0xFF));
 
         for (int i = 0; i < SAMPLES; i++) {
-            samples[i] = -(buffer[i + 48] & 0xFF) - 30;
+            samples[i] = -(buffer[i + 48] & 0xFF);
         }
 
         listener.updateSamples(this.getSamples(),this.getFilterLow(),this.getFilterHigh(),this.getSampleRate());
@@ -211,7 +185,7 @@ public class Client extends Thread {
     }
 
     public int getSampleRate() {
-        return Integer.parseInt(sampleRate);
+        return sampleRate;
     }
 
     public void setFrequency(long frequency) {
@@ -233,7 +207,7 @@ public class Client extends Thread {
     }
 
     public int getMeter() {
-        return meter-30;
+        return meter;
     }
 
     public int getCWPitch() {
@@ -299,9 +273,10 @@ public class Client extends Thread {
     private int filterLow;
     private int filterHigh;
     private int mode;
-    private String sampleRate;
+    //private String sampleRate;
+    private int sampleRate;
     private int band;
-    private int meter;
+    private short meter;
     private int agc;
 
     private int cwPitch=600;

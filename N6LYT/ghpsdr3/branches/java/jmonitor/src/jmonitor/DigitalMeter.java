@@ -106,7 +106,7 @@ public class DigitalMeter extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    private int dbm = 121;
+    private int dbm = -121;
     private int max = 0;
     private int count = 0;
 }
