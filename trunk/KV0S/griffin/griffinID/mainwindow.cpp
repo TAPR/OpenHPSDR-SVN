@@ -46,14 +46,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     this->setWindowTitle("Griffin ID program");
-    ui->call_lineEdit->setInputMask(">NN9NNN");
+
+    QRegExp re("^[A-z]+[0-9]?[A-z]+");
+    QValidator *valid = new QRegExpValidator( re, this );
+    ui->call_lineEdit->setValidator( valid );
 
     About *abd = new About();
     abd->setVersion( QString( "1.0.1" ) );
 
     Dialog *dlg = new Dialog();
 
-    loadGridBox();
+    //loadGridBox();
     loadPowerBox();
 
     ui->call_lineEdit->setText( settings.value("call").toString() );
@@ -62,29 +65,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lon_doubleSpinBox->setValue( settings.value("lon").toDouble());
     ui->power_comboBox->setCurrentIndex( settings.value("power").toInt() );
 
+
+
     wspr = new WSPR();
     qrss = new QRSS();
 
 
-    // test->packing("KV0S  ", "EM38", 20);
-    // test->convolution();
-    // test->interleave();
 
-    /*for( int i= 0; i < 11; i++ )
-    {
-        qDebug() << test->packed[i];
-    }
-    char* str = test->getSymbol();
-    for( int i= 0; i < 162; i++ )
-    {
-        qDebug() << QString("%1").arg(str[i],1,2);
-    }
-    char* str2 = test->symbol2;
-    for( int i= 0; i < 162; i++ )
-    {
-        qDebug() << QString("%1").arg(str2[i],1,10 );
-    }
-    */
 
     connect( ui->actionQuit,SIGNAL(triggered()),this,SLOT(close()));
     //connect(ui->actionSave_as,SIGNAL(triggered()),this,SLOT(writeString()));
@@ -95,7 +82,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSave_WSPR,SIGNAL(triggered()),this,SLOT(outputWSPRfile()));
     connect(ui->actionSave_QRSS,SIGNAL(triggered()),this,SLOT(outputQRSSfile()));
     connect(ui->actionHelp,SIGNAL(triggered()),dlg,SLOT(show()));
-
+    connect(ui->call_lineEdit,SIGNAL(editingFinished()),this,SLOT(checkCall()));
 
 }
 
@@ -146,7 +133,12 @@ void MainWindow::latLocationUpdate( double latval )
    //qDebug() << QString( gridsq );
    int idx = ui->grid_comboBox->findText( gridsq );
    //qDebug() << idx;
-   ui->grid_comboBox->setCurrentIndex( idx );
+   if( idx == -1 )
+   {
+      ui->grid_comboBox->addItem( gridsq );
+   }else{
+      ui->grid_comboBox->setCurrentIndex( idx );
+   }
 }
 
 /**
@@ -165,7 +157,12 @@ void MainWindow::lonLocationUpdate( double lonval )
    gridsq = gridsq.mid(0,4);
    int idx = ui->grid_comboBox->findText( gridsq );
    //qDebug() << idx;
-   ui->grid_comboBox->setCurrentIndex( idx );
+   if( idx == -1 )
+   {
+      ui->grid_comboBox->addItem( gridsq );
+   }else{
+      ui->grid_comboBox->setCurrentIndex( idx );
+   }
 }
 
 /**
@@ -305,3 +302,10 @@ void MainWindow::outputQRSSfile( )
     file.close();
  }
 
+void MainWindow::checkCall()
+{
+    QString prefix, num, suffix;
+    QString call = ui->call_lineEdit->text();
+    ui->call_lineEdit->setText( call.toUpper() );
+
+}
