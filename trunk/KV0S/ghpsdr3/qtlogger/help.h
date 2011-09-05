@@ -1,6 +1,6 @@
 /**
-* \file main.cpp
-* \brief Code files for the Main function as part of the QtLogger program
+* \file help.h
+* \brief Header files for the Help functions as part of the QtLogger program
 * \author David R. Larsen, KV0S
 * \version 1.0.2
 * \date August 21, 2011
@@ -27,14 +27,35 @@
 
 
 
-#include <QtGui/QApplication>
-#include "mainwindow.h"
+#ifndef HELP_H
+#define HELP_H
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+#include <QDialog>
+#include <QTextBrowser>
+#include <QStringList>
+#include <QList>
 
-    return a.exec();
+namespace Ui {
+    class Help;
 }
+
+class Help : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit Help(QWidget *parent = 0);
+    ~Help();
+    //QString *path;
+
+private:
+    Ui::Help *ui;
+    QList <QUrl> oldsource;
+
+private slots:
+    void home();
+    void back();
+    void updatesource( QUrl newsource );
+};
+
+#endif // HELP_H

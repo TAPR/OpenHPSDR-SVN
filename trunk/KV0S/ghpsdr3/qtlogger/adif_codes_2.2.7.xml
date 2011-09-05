@@ -6887,4 +6887,66 @@
       <prefix>DU9</prefix>
    </item>
 </choices>
+<choices id="band" xml:lang="EN" version="(version 2.2.7, by KV0S, following example by AA6YQ &amp; WA5ZNU )">
+  <item>
+    <label>160m</label>
+    <lower>1.8</lower>
+    <upper>2.0</upper>
+    <value>160m</value>
+  </item> 
+  <item>
+    <label>80m</label>
+    <lower>3.5</lower>
+    <upper>4.0</upper>
+    <value>80m</value>
+  </item>  
+  <item>
+    <label>40m</label>
+    <lower>7.0</lower>
+    <upper>7.4</upper>
+    <value>40m</value>
+  </item>  
+  <item>
+    <label>30m</label>
+    <lower>10.0</lower>
+    <upper>10.15</upper>
+    <value>30m</value>
+  </item>  
+  <item>
+    <label>14m</label>
+    <lower>14.0</lower>
+    <upper>14.35</upper>
+    <value>20m</value>
+  </item>  
+  <item>
+    <label>17m</label>
+    <lower>18.086</lower>
+    <upper>18.168</upper>
+    <value>17m</value>
+  </item>  
+  <item>
+    <label>15m</label>
+    <lower>21.0</lower>
+    <upper>21.45</upper>
+    <value>15m</value>
+  </item>  
+  <item>
+    <label>12m</label>
+    <lower>24.89</lower>
+    <upper>24.99</upper>
+    <value>12m</value>
+  </item>  
+  <item>
+    <label>10m</label>
+    <lower>28.00</lower>
+    <upper>29.7</upper>
+    <value>10m</value>
+  </item>  
+  <item>
+    <label>6m</label>
+    <lower>50.00</lower>
+    <upper>54.00</upper>
+    <value>6m</value>
+  </item>  
+</choices>
 </enumerations>

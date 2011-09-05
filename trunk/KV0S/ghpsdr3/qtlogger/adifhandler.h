@@ -3,7 +3,9 @@
 
 #include <QXmlDefaultHandler>
 #include <QHash>
-#include <QMap>
+
+#include "range.h"
+
 
 class AdifHandler : public QXmlDefaultHandler
 {
@@ -20,7 +22,10 @@ public:
     QString dataString;
     QStringList mode;
     QStringList country;
-    QMap <QString, QString> ARRLSections;
+    QHash <QString, QString> ARRLSections;
+    QStringList subdivisions;
+    QHash <QString, Range> band;
+
 
 signals:
 
@@ -31,10 +36,14 @@ private:
     bool initem;
     bool inlabel;
     bool invalue;
+    bool inlower;
+    bool inupper;
     QString ename;
     QString iname;
     QString label;
     QString value;
+    QString upper;
+    QString lower;
     QHash <QString,QString> attr;
 };
 
