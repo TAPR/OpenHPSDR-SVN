@@ -14,8 +14,8 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>hpsdr5.svg</normaloff>hpsdr5.svg</iconset>
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/icons/hpsdr5.svg</normaloff>:/icons/icons/hpsdr5.svg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -101,8 +101,15 @@
   </action>
   <action name="actionAdd">
    <property name="icon">
-    <iconset>
-     <normaloff>plus-green.svg</normaloff>plus-green.svg</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/plus-green.svg</normaloff>
+     <normalon>:/icons/icons/plus-green.svg</normalon>
+     <disabledoff>:/icons/icons/plus-green.svg</disabledoff>
+     <disabledon>:/icons/icons/plus-green.svg</disabledon>
+     <activeoff>:/icons/icons/plus-green.svg</activeoff>
+     <activeon>:/icons/icons/plus-green.svg</activeon>
+     <selectedoff>:/icons/icons/plus-green.svg</selectedoff>
+     <selectedon>:/icons/icons/plus-green.svg</selectedon>:/icons/icons/plus-green.svg</iconset>
    </property>
    <property name="text">
     <string>Add</string>
@@ -125,6 +132,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

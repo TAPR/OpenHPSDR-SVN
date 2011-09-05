@@ -768,14 +768,30 @@
   <tabstop>rxrstBox</tabstop>
   <tabstop>nameEdit</tabstop>
   <tabstop>qthEdit</tabstop>
-  <tabstop>freqEdit</tabstop>
-  <tabstop>eventBox</tabstop>
+  <tabstop>gridsqEdit</tabstop>
+  <tabstop>countryEdit</tabstop>
+  <tabstop>subdivisionEdit</tabstop>
+  <tabstop>countyEdit</tabstop>
   <tabstop>checkEdit</tabstop>
+  <tabstop>contactBox</tabstop>
   <tabstop>addButton</tabstop>
   <tabstop>resetButton</tabstop>
   <tabstop>cancelButton</tabstop>
+  <tabstop>freqEdit</tabstop>
+  <tabstop>modeEdit</tabstop>
+  <tabstop>eventBox</tabstop>
   <tabstop>dateEdit</tabstop>
   <tabstop>timeEdit</tabstop>
+  <tabstop>operatorEdit</tabstop>
+  <tabstop>homeqthEdit</tabstop>
+  <tabstop>homegridEdit</tabstop>
+  <tabstop>stationEdit</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>qslrcvdEdit</tabstop>
+  <tabstop>qslrcvdviaBox</tabstop>
+  <tabstop>qslsentEdit</tabstop>
+  <tabstop>qslsentviaBox</tabstop>
+  <tabstop>tabWidget</tabstop>
  </tabstops>
  <resources/>
  <connections/>
