@@ -67,6 +67,9 @@ public:
 
     void setBandLimits(long long min,long long max);
 
+    void setSquelch(bool state);
+    void setSquelchVal(float val);
+
 signals:
     void frequencyMoved(int steps,int step);
     void frequencyChanged(long long frequency);
@@ -74,6 +77,7 @@ signals:
     void spectrumLowChanged(int low);
     void waterfallHighChanged(int high);
     void waterfallLowChanged(int low);
+    void squelchValueChanged(int step);
 
 protected:
     void paintEvent(QPaintEvent*);
@@ -118,6 +122,12 @@ private:
     long long subRxFrequency;
     QString strSubRxFrequency;
     bool subRx;
+
+    bool squelch;
+    float squelchVal;
+    int squelchY;
+    bool showSquelchControl;
+    bool settingSquelch;
 
     long long band_min;
     long long band_max;

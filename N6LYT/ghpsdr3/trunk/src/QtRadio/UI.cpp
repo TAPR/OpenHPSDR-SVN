@@ -80,6 +80,13 @@ UI::UI() {
     connect(widget.actionGain_90,SIGNAL(triggered()),this,SLOT(actionGain_90()));
     connect(widget.actionGain_100,SIGNAL(triggered()),this,SLOT(actionGain_100()));
 
+    connect(widget.actionSquelchEnable,SIGNAL(triggered()),this,SLOT(actionSquelch()));
+    connect(widget.actionSquelch_60,SIGNAL(triggered()),this,SLOT(actionSquelch_60()));
+    connect(widget.actionSquelch_80,SIGNAL(triggered()),this,SLOT(actionSquelch_80()));
+    connect(widget.actionSquelch_100,SIGNAL(triggered()),this,SLOT(actionSquelch_100()));
+    connect(widget.actionSquelch_120,SIGNAL(triggered()),this,SLOT(actionSquelch_120()));
+    connect(widget.actionSquelch_140,SIGNAL(triggered()),this,SLOT(actionSquelch_140()));
+
     connect(widget.actionKeypad, SIGNAL(triggered()),this,SLOT(actionKeypad()));
     connect(&keypad,SIGNAL(setKeypadFrequency(long long)),this,SLOT(setKeypadFrequency(long long)));
 
@@ -164,6 +171,10 @@ UI::UI() {
     connect(widget.spectrumFrame, SIGNAL(waterfallLowChanged(int)),
             this,SLOT(waterfallLowChanged(int)));
 
+    connect(widget.spectrumFrame, SIGNAL(squelchValueChanged(int)),
+            this,SLOT(squelchValueChanged(int)));
+
+
     // connect up waterfall frame
     connect(widget.waterfallFrame, SIGNAL(frequencyMoved(int,int)),
             this, SLOT(frequencyMoved(int,int)));
@@ -205,6 +216,8 @@ UI::UI() {
     subRxGain=100;
     agc=AGC_SLOW;
     cwPitch=600;
+    squelch=false;
+    squelchValue=-100;
 
     audio_device=0;
     audio_sample_rate=configure.getSampleRate();
@@ -266,6 +279,7 @@ void UI::loadSettings() {
     settings.beginGroup("UI");
     if(settings.contains("gain")) gain=subRxGain=settings.value("gain").toInt();
     if(settings.contains("agc")) agc=settings.value("agc").toInt();
+    if(settings.contains("squelch")) squelchValue=settings.value("squelch").toInt();
     settings.endGroup();
 }
 
@@ -288,6 +302,7 @@ void UI::saveSettings() {
     settings.setValue("gain",gain);
     settings.setValue("subRxGain",subRxGain);
     settings.setValue("agc",agc);
+    settings.setValue("squelch",squelchValue);
     settings.endGroup();
 
 }
@@ -453,6 +468,8 @@ void UI::connected() {
     command.clear(); QTextStream(&command) << "SetNR " << (widget.actionNR->isChecked()?"true":"false");
     connection.sendCommand(command);
     command.clear(); QTextStream(&command) << "SetNB " << (widget.actionNB->isChecked()?"true":"false");
+    connection.sendCommand(command);
+    command.clear(); QTextStream(&command) << "SetSquelchState off";
     connection.sendCommand(command);
 
     //command.clear(); QTextStream(&command) << "SetDCBlock 1";
@@ -1611,4 +1628,86 @@ void UI::deleteXVTR(int index) {
 
 void UI::selectXVTR(QAction* action) {
     xvtr.select(action);
+}
+
+void UI::actionSquelch() {
+    if(squelch) {
+        squelch=false;
+        QString command;
+        command.clear(); QTextStream(&command) << "SetSquelchState off";
+        connection.sendCommand(command);
+        widget.spectrumFrame->setSquelch(false);
+        widget.actionSquelchEnable->setChecked(false);
+    } else {
+        squelch=true;
+        QString command;
+        command.clear(); QTextStream(&command) << "SetSquelchVal " << squelchValue;
+        connection.sendCommand(command);
+        command.clear(); QTextStream(&command) << "SetSquelchState on";
+        connection.sendCommand(command);
+        widget.spectrumFrame->setSquelch(true);
+        widget.spectrumFrame->setSquelchVal(squelchValue);
+        widget.actionSquelchEnable->setChecked(true);
+    }
+
+}
+
+void UI::actionSquelch_60() {
+    squelchValue=-60;
+    if(squelch) {
+        QString command;
+        command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
+        connection.sendCommand(command);
+        widget.spectrumFrame->setSquelchVal(squelchValue);
+    }
+}
+
+void UI::actionSquelch_80() {
+    squelchValue=-80;
+    if(squelch) {
+        QString command;
+        command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
+        connection.sendCommand(command);
+        widget.spectrumFrame->setSquelchVal(squelchValue);
+    }
+}
+
+void UI::actionSquelch_100() {
+    squelchValue=-100;
+    if(squelch) {
+        QString command;
+        command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
+        connection.sendCommand(command);
+        widget.spectrumFrame->setSquelchVal(squelchValue);
+    }
+}
+
+void UI::actionSquelch_120() {
+    squelchValue=-120;
+    if(squelch) {
+        QString command;
+        command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
+        connection.sendCommand(command);
+        widget.spectrumFrame->setSquelchVal(squelchValue);
+    }
+}
+
+void UI::actionSquelch_140() {
+    squelchValue=-140;
+    if(squelch) {
+        QString command;
+        command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
+        connection.sendCommand(command);
+        widget.spectrumFrame->setSquelchVal(squelchValue);
+    }
+}
+
+void UI::squelchValueChanged(int val) {
+    squelchValue=squelchValue+val;
+    if(squelch) {
+        QString command;
+        command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
+        connection.sendCommand(command);
+        widget.spectrumFrame->setSquelchVal(squelchValue);
+    }
 }

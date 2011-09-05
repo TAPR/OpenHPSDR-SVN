@@ -104,6 +104,14 @@ public slots:
     void actionGain_90();
     void actionGain_100();
 
+    void actionSquelch();
+    void actionSquelch_60();
+    void actionSquelch_80();
+    void actionSquelch_100();
+    void actionSquelch_120();
+    void actionSquelch_140();
+    void squelchValueChanged(int);
+
     void actionKeypad();
     void setKeypadFrequency(long long);
 
@@ -276,6 +284,8 @@ private:
 
     KeypadDialog keypad;
 
+    bool squelch;
+    float squelchValue;
 };
 
 #endif	/* _UI_H */
