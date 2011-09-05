@@ -82,7 +82,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSave_WSPR,SIGNAL(triggered()),this,SLOT(outputWSPRfile()));
     connect(ui->actionSave_QRSS,SIGNAL(triggered()),this,SLOT(outputQRSSfile()));
     connect(ui->actionHelp,SIGNAL(triggered()),dlg,SLOT(show()));
-    connect(ui->call_lineEdit,SIGNAL(editingFinished()),this,SLOT(checkCall()));
+    connect(ui->call_lineEdit,SIGNAL(textChanged(QString)),this,SLOT(checkCall(QString)));
 
 }
 
@@ -302,10 +302,7 @@ void MainWindow::outputQRSSfile( )
     file.close();
  }
 
-void MainWindow::checkCall()
+void MainWindow::checkCall(QString call)
 {
-    QString prefix, num, suffix;
-    QString call = ui->call_lineEdit->text();
     ui->call_lineEdit->setText( call.toUpper() );
-
 }

@@ -80,7 +80,7 @@ private slots:
     void lonLocationUpdate( double lonval );
     void outputWSPRfile();
     void outputQRSSfile();
-    void checkCall();
+    void checkCall( QString call );
 };
 
 #endif // MAINWINDOW_H
