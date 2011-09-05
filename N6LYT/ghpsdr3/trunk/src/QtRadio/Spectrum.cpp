@@ -133,6 +133,8 @@ void Spectrum::mousePressEvent(QMouseEvent* event) {
     if(squelch) {
         if(event->pos().y()==squelchY) {
             settingSquelch=true;
+        } else {
+            settingSquelch=false;
         }
     }
 }
@@ -183,6 +185,7 @@ void Spectrum::mouseReleaseEvent(QMouseEvent* event) {
     } else {
     if(moved) {
         emit frequencyMoved(move,100);
+        button=-1;
     } else {
         float hzPixel = sampleRate/width();  // spectrum resolution: Hz/pixel
 

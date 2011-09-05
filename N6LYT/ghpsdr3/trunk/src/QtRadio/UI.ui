@@ -198,6 +198,12 @@
     </property>
     <addaction name="actionSquelchEnable"/>
    </widget>
+   <widget class="QMenu" name="menuTransmit">
+    <property name="title">
+     <string>Transmit</string>
+    </property>
+    <addaction name="actionMOX"/>
+   </widget>
    <addaction name="menuReceiver"/>
    <addaction name="menuAudio"/>
    <addaction name="menuSquelch"/>
@@ -209,6 +215,7 @@
    <addaction name="menuSpectrum"/>
    <addaction name="menuHardware"/>
    <addaction name="menuBookmarks"/>
+   <addaction name="menuTransmit"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -803,6 +810,11 @@
   <action name="actionSquelch_60">
    <property name="text">
     <string>-60</string>
+   </property>
+  </action>
+  <action name="actionMOX">
+   <property name="text">
+    <string>MOX</string>
    </property>
   </action>
  </widget>

@@ -29,6 +29,7 @@
 #include <QtCore>
 #include <QtMultimedia/QAudioFormat>
 #include <QtMultimedia/QAudioOutput>
+#include <QtMultimedia/QAudioInput>
 #include <QtMultimedia/QAudioDeviceInfo>
 #include <QtGui/QComboBox>
 
@@ -55,13 +56,20 @@ public:
     int get_sample_rate();
     int get_channels();
 
+    void mox(bool state);
+
+public slots:
+    void readyRead();
+
 private:
     void aLawDecode(char* buffer,int length);
     void init_decodetable();
     QAudioFormat     audio_format;
     QAudioOutput*    audio_output;
+    QAudioInput*     audio_input;
     QAudioDeviceInfo audio_device;
     QIODevice*       audio_out;
+    QIODevice*       audio_in;
     QByteArray       decoded_buffer;
     short decodetable[256];
 
