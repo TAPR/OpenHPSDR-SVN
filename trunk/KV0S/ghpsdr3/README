@@ -1,0 +1,5 @@
+This directory contains my work that is realted to the ghpsdr3.
+
+DRadio is a small Dummy Radio to produce the need QtDspServer output need to pass frequency and mode to the QtLogger program
+
+QtLogger is a basic Ham logging program for ghpsdr3
