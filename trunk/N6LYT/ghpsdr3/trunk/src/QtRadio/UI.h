@@ -217,6 +217,8 @@ public slots:
     void selectXVTR(QAction* action);
     void selectBookmark(QAction* action);
 
+    void actionMox();
+
 signals:
     void subRxStateChanged(bool state);
 
@@ -286,6 +288,8 @@ private:
 
     bool squelch;
     float squelchValue;
+
+    bool mox;
 };
 
 #endif	/* _UI_H */

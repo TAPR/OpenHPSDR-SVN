@@ -144,7 +144,7 @@ UI::UI() {
     connect(widget.actionBookmarkThisFrequency,SIGNAL(triggered()),this,SLOT(actionBookmark()));
     connect(widget.actionEditBookmarks,SIGNAL(triggered()),this,SLOT(editBookmarks()));
 
-
+    connect(widget.actionMOX,SIGNAL(triggered()),this,SLOT(actionMox()));
 
     // connect up band and frequency changes
     connect(&band,SIGNAL(bandChanged(int,int)),this,SLOT(bandChanged(int,int)));
@@ -218,6 +218,7 @@ UI::UI() {
     cwPitch=600;
     squelch=false;
     squelchValue=-100;
+    mox=false;
 
     audio_device=0;
     audio_sample_rate=configure.getSampleRate();
@@ -1710,4 +1711,10 @@ void UI::squelchValueChanged(int val) {
         connection.sendCommand(command);
         widget.spectrumFrame->setSquelchVal(squelchValue);
     }
+}
+
+void UI::actionMox() {
+    qDebug()<<"actionMox";
+    mox=!mox;
+    audio.mox(mox);
 }

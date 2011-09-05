@@ -133,7 +133,10 @@ void Audio::get_audio_devices(QComboBox* comboBox) {
 
     audio_output = new QAudioOutput(audio_device, audio_format, this);
 
+    audio_input = new QAudioInput(audio_device, audio_format, this);
+
     qDebug() << "QAudioOutput: error=" << audio_output->error() << " state=" << audio_output->state();
+    qDebug() << "QAudioInput: error=" << audio_input->error() << " state=" << audio_input->state();
 
     audio_out = audio_output->start();
 
@@ -182,6 +185,7 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
     }
 
     audio_output = new QAudioOutput(audio_device, audio_format, this);
+    audio_input = new QAudioInput(audio_device, audio_format, this);
 
     qDebug() << "QAudioOutput: error=" << audio_output->error() << " state=" << audio_output->state();
 
@@ -268,4 +272,18 @@ void Audio::init_decodetable() {
     }
 }
 
+void Audio::mox(bool state) {
+    qDebug()<<"Audio::mox"<<state;
+    if(state) {
+        audio_in=audio_input->start();
+        connect(audio_in,SIGNAL(readyRead()),this,SLOT(readyRead()));
+    } else {
+        audio_input->stop();
+        disconnect(audio_in,SIGNAL(readyRead()));
+    }
+}
+
+void Audio::readyRead() {
+    qDebug()<<"readyRead!";
+}
 
