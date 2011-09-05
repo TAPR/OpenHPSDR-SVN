@@ -284,6 +284,7 @@ void Audio::mox(bool state) {
 }
 
 void Audio::readyRead() {
-    qDebug()<<"readyRead!";
+    qDebug()<<"readyRead:"<<audio_in->bytesAvailable();
+
 }
 

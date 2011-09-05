@@ -163,7 +163,7 @@ void Spectrum::mouseMoveEvent(QMouseEvent* event){
     } else {
         if(settingSquelch) {
             int delta=squelchY-event->pos().y();
-            fprintf(stderr,"squelchValueChanged %d\n",delta);
+            //fprintf(stderr,"squelchValueChanged %d\n",delta);
             emit squelchValueChanged(delta);
             //squelchY=event->pos().y();
         } else {
@@ -252,7 +252,7 @@ void Spectrum::wheelEvent(QWheelEvent *event) {
     } else if((event->pos().x()>(width()-50)) & squelch) {
         // wheel event on right side, change squelch
         int delta=event->delta()/8/15;
-        fprintf(stderr,"squelchValueChanged %d\n",delta);
+        //fprintf(stderr,"squelchValueChanged %d\n",delta);
         emit squelchValueChanged(delta);
     } else {
         // wheel event
