@@ -114,6 +114,7 @@ void Xvtr::select(QAction* action) {
     if(currentXvtrAction!=NULL) {
         currentXvtrAction->setChecked(false);
     }
+
     // find the entry
     for(int i=0;i<xvtrs.size();i++) {
         currentXvtr=xvtrs.at(i);
@@ -144,7 +145,7 @@ long long Xvtr::getMaxFrequency() {
 }
 
 long long Xvtr::getIFFrequency() {
-    return currentXvtr->getMaxFrequency();
+    return currentXvtr->getIFFrequency();
 }
 
 

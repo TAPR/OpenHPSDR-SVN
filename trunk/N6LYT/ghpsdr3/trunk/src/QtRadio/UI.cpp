@@ -219,6 +219,7 @@ UI::UI() {
     squelch=false;
     squelchValue=-100;
     mox=false;
+    ifFrequency=0LL;
 
     audio_device=0;
     audio_sample_rate=configure.getSampleRate();
@@ -404,7 +405,7 @@ void UI::connected() {
 
     // send initial settings
     frequency=band.getFrequency();
-    command.clear(); QTextStream(&command) << "setFrequency " << frequency;
+    command.clear(); QTextStream(&command) << "setFrequency " << frequency-ifFrequency;
     connection.sendCommand(command);
     widget.spectrumFrame->setFrequency(frequency);
     widget.waterfallFrame->setFrequency(frequency);
@@ -736,7 +737,7 @@ void UI::bandChanged(int previousBand,int newBand) {
     }
 
     QString command;
-    command.clear(); QTextStream(&command) << "setFrequency " << frequency;
+    command.clear(); QTextStream(&command) << "setFrequency " << frequency-ifFrequency;
     connection.sendCommand(command);
 
     widget.spectrumFrame->setFrequency(frequency);
@@ -753,6 +754,7 @@ void UI::bandChanged(int previousBand,int newBand) {
     BandLimit limits=band.getBandLimits(band.getFrequency()-(samplerate/2),band.getFrequency()+(samplerate/2));
     widget.spectrumFrame->setBandLimits(limits.min(),limits.max());
 
+    ifFrequency=0LL;
 }
 
 void UI::modeChanged(int previousMode,int newMode) {
@@ -1133,7 +1135,7 @@ void UI::frequencyChanged(long long f) {
 
     frequency=f;
     command.clear();
-    QTextStream(&command) << "setFrequency " << f;
+    QTextStream(&command) << "setFrequency " << f-ifFrequency;
 
     band.setFrequency(f);
     connection.sendCommand(command);
@@ -1164,9 +1166,15 @@ void UI::frequencyMoved(int increment,int step) {
         setSubRxPan();
 
     } else {
-        band.setFrequency(band.getFrequency()-(long long)(increment*step));
-        frequency=band.getFrequency();
-        command.clear(); QTextStream(&command) << "setFrequency " << frequency;
+        if(ifFrequency==0LL) {
+            band.setFrequency(band.getFrequency()-(long long)(increment*step));
+            frequency=band.getFrequency();
+        } else {
+            xvtr.setFrequency(xvtr.getFrequency()-(long long)(increment*step));
+            frequency=xvtr.getFrequency();
+        }
+        command.clear(); QTextStream(&command) << "setFrequency " << frequency-ifFrequency;
+        qDebug()<<command<<"("<<frequency<<","<<ifFrequency<<")";
         widget.spectrumFrame->setFrequency(frequency);
         widget.waterfallFrame->setFrequency(frequency);
         connection.sendCommand(command);
@@ -1629,6 +1637,34 @@ void UI::deleteXVTR(int index) {
 
 void UI::selectXVTR(QAction* action) {
     xvtr.select(action);
+    ifFrequency=xvtr.getIFFrequency();
+
+    frequency=xvtr.getFrequency();
+    int samplerate = widget.spectrumFrame->samplerate();
+    if(subRx) {
+        if ((subRxFrequency < (frequency - (samplerate / 2))) || (subRxFrequency > (frequency + (samplerate / 2)))) {
+            subRxFrequency=frequency;
+        }
+    }
+
+    QString command;
+    command.clear(); QTextStream(&command) << "setFrequency " << frequency-ifFrequency;
+    connection.sendCommand(command);
+
+    widget.spectrumFrame->setFrequency(frequency);
+    widget.spectrumFrame->setSubRxFrequency(subRxFrequency);
+    widget.spectrumFrame->setHigh(band.getSpectrumHigh());
+    widget.spectrumFrame->setLow(band.getSpectrumLow());
+    widget.waterfallFrame->setFrequency(frequency);
+    widget.waterfallFrame->setSubRxFrequency(subRxFrequency);
+    widget.waterfallFrame->setHigh(band.getWaterfallHigh());
+    widget.waterfallFrame->setLow(band.getWaterfallLow());
+
+
+    widget.spectrumFrame->setBand(xvtr.getTitle());
+    BandLimit limits=band.getBandLimits(xvtr.getFrequency()-(samplerate/2),xvtr.getFrequency()+(samplerate/2));
+    widget.spectrumFrame->setBandLimits(limits.min(),limits.max());
+
 }
 
 void UI::actionSquelch() {

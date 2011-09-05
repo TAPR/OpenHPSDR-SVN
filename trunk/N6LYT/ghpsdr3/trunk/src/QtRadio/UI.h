@@ -269,6 +269,7 @@ private:
     int cwPitch;
 
     long long frequency;
+    long long ifFrequency;
 
     int fps;
 
