@@ -6,7 +6,7 @@
 
 QT       += core gui network xml
 
-TARGET = QtLogger2
+TARGET = QtLogger
 TEMPLATE = app
 
 
