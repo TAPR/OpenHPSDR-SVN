@@ -10,9 +10,10 @@ logHandler::logHandler() : QXmlDefaultHandler()
     tablerow = 0;
 }
 
-logHandler::logHandler( QStandardItemModel* model ) : QXmlDefaultHandler()
+logHandler::logHandler( QStandardItemModel *model, QStringList* hdr ) : QXmlDefaultHandler()
 {
-    headerlist = new QStringList();
+
+    headerlist = new QStringList( *hdr);
     localmodel = model;
     inrecord = false;
     headerflag = false;
@@ -54,12 +55,12 @@ bool logHandler::endElement(const QString &namespaceURI, const QString &localNam
             {
                headerlist->append( QString( qName.toUpper()) );
             }else{
-               qDebug() << "in endElement " << qName << datavalue << tablerow;
+               //qDebug() << "in endElement " << qName << datavalue << tablerow;
                QStandardItem *it = new QStandardItem( datavalue );
-               qDebug() << it->text();
-               qDebug() << *headerlist;
+               //qDebug() << it->text();
+               //qDebug() << *headerlist;
                tablecol = headerlist->indexOf(qName.toUpper());
-               qDebug() << tablerow << tablecol << it->text();
+               //qDebug() << tablerow << tablecol << it->text();
                localmodel->setItem( tablerow, tablecol, it );
             }
         }
@@ -107,6 +108,8 @@ void logHandler::setModel(QStandardItemModel *model)
 
 QStandardItemModel* logHandler::getModel()
 {
+    //qDebug() << "in Loghandler ";
+    //qDebug() << "in Loghandler " << localmodel->item(1,1)->text();
     return( localmodel );
 }
 

@@ -27,6 +27,14 @@ bool AdifHandler::startElement( const QString&, const QString&, const QString &n
     {
         invalue = true;
     }
+    else if( inchoice && initem && name == "lower")
+    {
+        inlower = true;
+    }
+    else if( inchoice && initem && name == "upper")
+    {
+        inupper = true;
+    }
     else if( inchoice && name == "item")
     {
         initem = true;
@@ -57,6 +65,15 @@ bool AdifHandler::endElement(const QString &namespaceURI, const QString &localNa
     {
         invalue = false;
     }
+    else if ( qName == "lower" )
+    {
+        inlower = false;
+    }
+    else if ( qName == "upper" )
+    {
+        inupper = false;
+    }
+
     else if( qName == "item")
     {
         //qDebug() << "in endElement " << ename << label << value;
@@ -68,11 +85,22 @@ bool AdifHandler::endElement(const QString &namespaceURI, const QString &localNa
         {
             country.append( value );
         }
+        else if( ename == "subdivisions")
+        {
+            subdivisions.append( value );
+        }
+        else if( ename == "band")
+        {
+            band[value] = Range( lower, upper ) ;
+            //qDebug() << label << value << lower << upper;
+        }
 
         initem = false;
         iname = "";
         value = "";
         label = "";
+        lower = "";
+        upper = "";
     }
     else if ( qName == "choices")
     {
@@ -102,6 +130,14 @@ bool AdifHandler::characters(const QString &ch)
     else if( inchoice && initem && invalue )
     {
         value = ch;
+    }
+    else if( inchoice && initem && inlower )
+    {
+        lower = ch;
+    }
+    else if( inchoice && initem && inupper)
+    {
+        upper = ch;
     }
 
     //qDebug() << ename << iname << ch;

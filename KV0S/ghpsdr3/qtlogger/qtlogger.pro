@@ -1,37 +1,54 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2011-04-23T13:36:54
+# Project created by QtCreator 2011-08-21T11:31:13
 #
 #-------------------------------------------------
 
-QT       += core gui xml network
+QT       += core gui network xml
 
-TARGET = qtlogger
+TARGET = QtLogger2
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    adif.cpp \
+    data.cpp \
     about.cpp \
-    loaddata.cpp \
-    savedata.cpp \
+    help.cpp \
     adddialog.cpp \
     adifhandler.cpp \
-    loghandler.cpp
+    range.cpp \
+    loghandler.cpp \
+    adif.cpp
 
 HEADERS  += mainwindow.h \
-    adif.h \
     about.h \
-    loaddata.h \
-    savedata.h \
+    data.h \
+    help.h \
     adddialog.h \
     adifhandler.h \
-    loghandler.h
+    range.h \
+    loghandler.h \
+    adif.h
 
 FORMS    += mainwindow.ui \
-    addDialog.ui \
+    help.ui \
+    adddialog.ui \
 
 OTHER_FILES += \
-    adif_codes_2.2.7.xml \
-    qtlogger.xsl
+    help/daveStyle.css \
+    help/QtLogger.html
+
+RESOURCES += \
+    resources.qrc
+
+
+
+
+
+
+
+
+
+
+

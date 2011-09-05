@@ -12,7 +12,7 @@ class logHandler : public QXmlDefaultHandler
 
 public:
     explicit logHandler();
-    explicit logHandler( QStandardItemModel* model );
+    explicit logHandler( QStandardItemModel *model, QStringList *hdr );
     bool startDocument();
     bool startElement(const QString &namespaceURI, const QString &localName, const QString &qName,  const QXmlAttributes &attrs);
     bool endElement(const QString &namespaceURI, const QString &localName, const QString &qName);

@@ -1,43 +1,47 @@
-/** 
-* \file 
-* \brief 
-* \author David R. Larsen 
-* \version 1.0
-* \date 
+/**
+* \file mainwindow.h
+* \brief Header files for the MainWindow functions as part of the QtLogger program
+* \author David R. Larsen, KV0S
+* \version 1.0.2
+* \date August 21, 2011
 */
 
 
 
-/* Copyright (C) 2010 - David R. Larsen 
+/* Copyright (C) 2011 - David R. Larsen, KV0S
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
 * as published by the Free Software Foundation; either version 2
 * of the License, or (at your option) any later version.
-* 
+*
 * This program is distributed in the hope that it will be useful,
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 * GNU General Public License for more details.
-* 
+*
 * You should have received a copy of the GNU General Public License
 * along with this program; if not, write to the Free Software
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-* 
+*
 */
+
 
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QTextStream>
-
-#include "adif.h"
-#include "about.h"
-#include "savedata.h"
-#include "loaddata.h"
-#include "adddialog.h"
+#include <QString>
 #include <QUdpSocket>
+#include <QScrollBar>
+
+#include "about.h"
+#include "help.h"
+#include "data.h"
+#include "adddialog.h"
+#include "adifhandler.h"
+#include "range.h"
+
 
 namespace Ui {
     class MainWindow;
@@ -50,28 +54,28 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    QStandardItemModel *model;
-    loadData *dta;
-    saveData *save;
-    QString getVersion();
     QString version;
-    QStringList *modes;
-    QStringList *country;
     void readDefinitions( QString filename );
 
 private slots:
     void update();
-    void newFile();
-    void readFile();
-    void addItem();
+    void writeData();
     void processPendingDatagrams();
+    void updateStatus();
+    void closeDown();
 
 private:
     Ui::MainWindow *ui;
+    Data *data;
     addDialog *add;
-    QString *type;
     QUdpSocket *udpSocket;
     QString parseDatagrams( QString data );
+    QStringList *modes;
+    QStringList *country;
+    QStringList *subdivisions;
+    QHash <QString, Range> bands;
+
+
 };
 
 #endif // MAINWINDOW_H

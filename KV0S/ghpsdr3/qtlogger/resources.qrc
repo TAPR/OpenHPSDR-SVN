@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>hpsdr5.svg</file>
+        <file>plus-green.svg</file>
+    </qresource>
+</RCC>
