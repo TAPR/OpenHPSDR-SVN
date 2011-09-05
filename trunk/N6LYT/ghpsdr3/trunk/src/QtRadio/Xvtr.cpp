@@ -8,6 +8,7 @@
 
 Xvtr::Xvtr() {
     currentXvtr=NULL;
+    currentXvtrAction=NULL;
 }
 
 // SLOTS
@@ -59,9 +60,6 @@ void Xvtr::loadSettings(QSettings* settings) {
             } else {
                 filter=5;
             }
-
-
-
             add(title,minFrequency,maxFrequency,ifFrequency,frequency,mode,filter);
         }
     }
@@ -95,6 +93,7 @@ void Xvtr::buildMenu(QMenu* menu) {
     for(int i=0;i<xvtrs.size();++i) {
         xvtr=xvtrs.at(i);
         action=new QAction(xvtr->getTitle(),this);
+        action->setCheckable(true);
         menu->addAction(action);
 
         //need an event for the new action

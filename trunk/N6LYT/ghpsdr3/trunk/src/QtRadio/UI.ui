@@ -192,8 +192,15 @@
     </property>
     <addaction name="actionPolyphase"/>
    </widget>
+   <widget class="QMenu" name="menuSquelch">
+    <property name="title">
+     <string>Squelch</string>
+    </property>
+    <addaction name="actionSquelchEnable"/>
+   </widget>
    <addaction name="menuReceiver"/>
    <addaction name="menuAudio"/>
+   <addaction name="menuSquelch"/>
    <addaction name="menuBand"/>
    <addaction name="menuMode"/>
    <addaction name="menuFilter"/>
@@ -763,6 +770,39 @@
   <action name="actionKeypad">
    <property name="text">
     <string>Keypad</string>
+   </property>
+  </action>
+  <action name="actionSquelchEnable">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>On</string>
+   </property>
+  </action>
+  <action name="actionSquelch_80">
+   <property name="text">
+    <string>-80</string>
+   </property>
+  </action>
+  <action name="actionSquelch_100">
+   <property name="text">
+    <string>-100</string>
+   </property>
+  </action>
+  <action name="actionSquelch_120">
+   <property name="text">
+    <string>-120</string>
+   </property>
+  </action>
+  <action name="actionSquelch_140">
+   <property name="text">
+    <string>-140</string>
+   </property>
+  </action>
+  <action name="actionSquelch_60">
+   <property name="text">
+    <string>-60</string>
    </property>
   </action>
  </widget>

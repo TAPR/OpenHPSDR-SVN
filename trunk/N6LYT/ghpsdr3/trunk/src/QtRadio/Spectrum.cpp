@@ -60,6 +60,10 @@ Spectrum::Spectrum(QWidget*& widget) {
     subrx_maxMeter=-121;
     subrx_meterCount=0;
 
+    button=-1;
+    showSquelchControl=false;
+    settingSquelch=false;
+
     plot.clear();
 }
 
@@ -125,6 +129,12 @@ void Spectrum::mousePressEvent(QMouseEvent* event) {
     button=event->button();
     startX=lastX=event->pos().x();
     moved=0;
+
+    if(squelch) {
+        if(event->pos().y()==squelchY) {
+            settingSquelch=true;
+        }
+    }
 }
 
 void Spectrum::mouseMoveEvent(QMouseEvent* event){
@@ -134,7 +144,30 @@ void Spectrum::mouseMoveEvent(QMouseEvent* event){
 
     moved=1;
 
-    if (! move==0) emit frequencyMoved(move,100);
+    if(button==-1) {
+        //if(event->pos().x()>(width()-50)) {
+        //    showSquelchControl=true;
+        //} else {
+        //    showSquelchControl=false;
+        //}
+
+        if(squelch && (event->pos().y()==squelchY)) {
+            showSquelchControl=true;
+            this->setCursor(Qt::SizeVerCursor);
+        } else {
+            showSquelchControl=false;
+            this->setCursor(Qt::ArrowCursor);
+        }
+    } else {
+        if(settingSquelch) {
+            int delta=squelchY-event->pos().y();
+            fprintf(stderr,"squelchValueChanged %d\n",delta);
+            emit squelchValueChanged(delta);
+            //squelchY=event->pos().y();
+        } else {
+            if (!move==0) emit frequencyMoved(move,100);
+        }
+    }
 }
 
 void Spectrum::mouseReleaseEvent(QMouseEvent* event) {
@@ -142,6 +175,12 @@ void Spectrum::mouseReleaseEvent(QMouseEvent* event) {
     lastX=event->pos().x();
     //qDebug() << __FUNCTION__ << ": " << event->pos().x() << " move:" << move;
 
+    if(squelch && settingSquelch) {
+        button=-1;
+        //convert squelchY to value
+        settingSquelch=false;
+
+    } else {
     if(moved) {
         emit frequencyMoved(move,100);
     } else {
@@ -177,32 +216,19 @@ void Spectrum::mouseReleaseEvent(QMouseEvent* event) {
 
         emit frequencyMoved(-(long long)(freqOffsetPixel*hzPixel)/100,100);
 
+        button=-1;
+    }
     }
 }
 
 void Spectrum::wheelEvent(QWheelEvent *event) {
     //qDebug() << __FUNCTION__ << "Delta: " << event->delta() << "y: " << event->pos().y() << " heigth:" << height();
 
-    if(event->pos().x() > 50) {
-        // wheel event on the right side
-        // change frequency
-        float vOfs = (float)event->pos().y() / (float)height();
-        //qDebug() << "wheelEvent vOfs: " << vOfs;
-
-        if (vOfs > 0.75) {
-            emit frequencyMoved(event->delta()/8/15,100);
-        } else if (vOfs > 0.50) {
-            emit frequencyMoved(event->delta()/8/15,50);
-        } else if (vOfs > 0.25) {
-            emit frequencyMoved(event->delta()/8/15,25);
-        } else {
-            emit frequencyMoved(event->delta()/8/15,10);
-        }
-    } else {
+    if(event->pos().x() < 50) {
         // wheel event on the left side, change the vertical axis values
         float shift =  (float)(event->delta()/8/15 * 5)                    // phy steps of wheel * 5
                      * ((float)(spectrumHigh - spectrumLow) / height());   // dBm / pixel on vertical axis
-       
+
         if (event->buttons() == Qt::MidButton) {
            // change the vertical axis range
            //qDebug() << __FUNCTION__ << " change vertical axis scale: " << shift;
@@ -220,6 +246,26 @@ void Spectrum::wheelEvent(QWheelEvent *event) {
           emit waterfallLowChanged  (spectrumLow+(int)shift);
 
        }
+    } else if((event->pos().x()>(width()-50)) & squelch) {
+        // wheel event on right side, change squelch
+        int delta=event->delta()/8/15;
+        fprintf(stderr,"squelchValueChanged %d\n",delta);
+        emit squelchValueChanged(delta);
+    } else {
+        // wheel event
+        // change frequency
+        float vOfs = (float)event->pos().y() / (float)height();
+        //qDebug() << "wheelEvent vOfs: " << vOfs;
+
+        if (vOfs > 0.75) {
+            emit frequencyMoved(event->delta()/8/15,100);
+        } else if (vOfs > 0.50) {
+            emit frequencyMoved(event->delta()/8/15,50);
+        } else if (vOfs > 0.25) {
+            emit frequencyMoved(event->delta()/8/15,25);
+        } else {
+            emit frequencyMoved(event->delta()/8/15,10);
+        }
     }
 }
 
@@ -317,6 +363,26 @@ void Spectrum::paintEvent(QPaintEvent*) {
     // draw cursor
     painter.setPen(QPen(Qt::red, 1));
     painter.drawLine(width()/2,0,width()/2,height());
+
+    // draw the squelch
+    if(settingSquelch || showSquelchControl) {
+        painter.setPen(QPen(Qt::red, 1,Qt::DashLine));
+        painter.drawLine(0,squelchY,width(),squelchY);
+        painter.setFont(QFont("Arial", 10));
+        text.sprintf("%s","Squelch");
+        painter.drawText(width()-48,squelchY,text);
+    } else if(squelch) {
+        painter.setPen(QPen(Qt::red, 1));
+        painter.drawLine(0,squelchY,width(),squelchY);
+        painter.setFont(QFont("Arial", 10));
+        text.sprintf("%s","Squelch");
+        painter.drawText(width()-48,squelchY,text);
+
+        //if(showSquelchControl) {
+        //    painter.setPen(QPen(Qt::red, 1));
+        //    painter.drawLine(width()-50,squelchY-10,width()-50,squelchY+10);
+        //}
+    }
 
     // show the frequency
     painter.setPen(QPen(Qt::green,1));
@@ -447,6 +513,17 @@ void Spectrum::updateSpectrum(char* header,char* buffer,int width) {
 
     //qDebug() << "updateSpectrum: repaint";
     this->repaint();
+}
+
+
+void Spectrum::setSquelch(bool state) {
+    squelch=state;
+    QFrame::setMouseTracking(state);
+}
+
+void Spectrum::setSquelchVal(float val) {
+    squelchVal=val;
+    squelchY=(int) floor(((float) spectrumHigh - squelchVal)*(float) height() / (float) (spectrumHigh - spectrumLow));
 }
 
 
