@@ -105,11 +105,7 @@ public slots:
     void actionGain_100();
 
     void actionSquelch();
-    void actionSquelch_60();
-    void actionSquelch_80();
-    void actionSquelch_100();
-    void actionSquelch_120();
-    void actionSquelch_140();
+    void actionSquelchReset();
     void squelchValueChanged(int);
 
     void actionKeypad();

@@ -163,7 +163,8 @@ void Spectrum::mouseMoveEvent(QMouseEvent* event){
     } else {
         if(settingSquelch) {
             int delta=squelchY-event->pos().y();
-            //fprintf(stderr,"squelchValueChanged %d\n",delta);
+            delta=int((float)delta*((float)(spectrumHigh-spectrumLow)/(float)height()));
+            //qDebug()<<"squelchValueChanged"<<delta<<"squelchY="<<squelchY<<" y="<<event->pos().y();
             emit squelchValueChanged(delta);
             //squelchY=event->pos().y();
         } else {
@@ -369,12 +370,14 @@ void Spectrum::paintEvent(QPaintEvent*) {
 
     // draw the squelch
     if(settingSquelch || showSquelchControl) {
+        squelchY=(int) floor(((float) spectrumHigh - squelchVal)*(float) height() / (float) (spectrumHigh - spectrumLow));
         painter.setPen(QPen(Qt::red, 1,Qt::DashLine));
         painter.drawLine(0,squelchY,width(),squelchY);
         painter.setFont(QFont("Arial", 10));
         text.sprintf("%s","Squelch");
         painter.drawText(width()-48,squelchY,text);
     } else if(squelch) {
+        squelchY=(int) floor(((float) spectrumHigh - squelchVal)*(float) height() / (float) (spectrumHigh - spectrumLow));
         painter.setPen(QPen(Qt::red, 1));
         painter.drawLine(0,squelchY,width(),squelchY);
         painter.setFont(QFont("Arial", 10));
@@ -527,6 +530,7 @@ void Spectrum::setSquelch(bool state) {
 void Spectrum::setSquelchVal(float val) {
     squelchVal=val;
     squelchY=(int) floor(((float) spectrumHigh - squelchVal)*(float) height() / (float) (spectrumHigh - spectrumLow));
+    //qDebug()<<"Spectrum::setSquelchVal"<<val<<"squelchY="<<squelchY;
 }
 
 

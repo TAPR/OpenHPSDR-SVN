@@ -197,6 +197,8 @@
      <string>Squelch</string>
     </property>
     <addaction name="actionSquelchEnable"/>
+    <addaction name="separator"/>
+    <addaction name="actionSquelchReset"/>
    </widget>
    <widget class="QMenu" name="menuTransmit">
     <property name="title">
@@ -815,6 +817,11 @@
   <action name="actionMOX">
    <property name="text">
     <string>MOX</string>
+   </property>
+  </action>
+  <action name="actionSquelchReset">
+   <property name="text">
+    <string>Reset</string>
    </property>
   </action>
  </widget>
