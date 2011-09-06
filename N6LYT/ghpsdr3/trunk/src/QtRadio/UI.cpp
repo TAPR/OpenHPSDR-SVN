@@ -81,11 +81,7 @@ UI::UI() {
     connect(widget.actionGain_100,SIGNAL(triggered()),this,SLOT(actionGain_100()));
 
     connect(widget.actionSquelchEnable,SIGNAL(triggered()),this,SLOT(actionSquelch()));
-    connect(widget.actionSquelch_60,SIGNAL(triggered()),this,SLOT(actionSquelch_60()));
-    connect(widget.actionSquelch_80,SIGNAL(triggered()),this,SLOT(actionSquelch_80()));
-    connect(widget.actionSquelch_100,SIGNAL(triggered()),this,SLOT(actionSquelch_100()));
-    connect(widget.actionSquelch_120,SIGNAL(triggered()),this,SLOT(actionSquelch_120()));
-    connect(widget.actionSquelch_140,SIGNAL(triggered()),this,SLOT(actionSquelch_140()));
+    connect(widget.actionSquelchReset,SIGNAL(triggered()),this,SLOT(actionSquelchReset()));
 
     connect(widget.actionKeypad, SIGNAL(triggered()),this,SLOT(actionKeypad()));
     connect(&keypad,SIGNAL(setKeypadFrequency(long long)),this,SLOT(setKeypadFrequency(long long)));
@@ -1689,48 +1685,8 @@ void UI::actionSquelch() {
 
 }
 
-void UI::actionSquelch_60() {
-    squelchValue=-60;
-    if(squelch) {
-        QString command;
-        command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
-        connection.sendCommand(command);
-        widget.spectrumFrame->setSquelchVal(squelchValue);
-    }
-}
-
-void UI::actionSquelch_80() {
-    squelchValue=-80;
-    if(squelch) {
-        QString command;
-        command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
-        connection.sendCommand(command);
-        widget.spectrumFrame->setSquelchVal(squelchValue);
-    }
-}
-
-void UI::actionSquelch_100() {
+void UI::actionSquelchReset() {
     squelchValue=-100;
-    if(squelch) {
-        QString command;
-        command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
-        connection.sendCommand(command);
-        widget.spectrumFrame->setSquelchVal(squelchValue);
-    }
-}
-
-void UI::actionSquelch_120() {
-    squelchValue=-120;
-    if(squelch) {
-        QString command;
-        command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
-        connection.sendCommand(command);
-        widget.spectrumFrame->setSquelchVal(squelchValue);
-    }
-}
-
-void UI::actionSquelch_140() {
-    squelchValue=-140;
     if(squelch) {
         QString command;
         command.clear(); QTextStream(&command) << "SetSquelchVal "<<squelchValue;
