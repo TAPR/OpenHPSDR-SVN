@@ -95,6 +95,7 @@ ECHO.
 ECHO A. Program using Penelope_v1.1
 ECHO B. Program using Penelope_v1.2
 ECHO C. Program using Penelope_v1.3
+ECHO D. Program using Penelope_v1.4
 ECHO Q. Quit
 ECHO.
 SET Choice=
@@ -118,6 +119,9 @@ GOTO CONTINUE
 GOTO CONTINUE
 :ItemC
 %DIRECTORY% -c USB-Blaster Penelope_v1.3.cdf
+GOTO CONTINUE
+:ItemD
+%DIRECTORY% -c USB-Blaster Penelope_v1.4.cdf
 GOTO CONTINUE
 :CONTINUE
 PAUSE
