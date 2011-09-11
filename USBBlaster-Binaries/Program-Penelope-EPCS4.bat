@@ -107,6 +107,7 @@ ECHO.
 IF /I '%Choice%'=='A' GOTO ItemA
 IF /I '%Choice%'=='B' GOTO ItemB
 IF /I '%Choice%'=='C' GOTO ItemC
+IF /I '%Choice%'=='D' GOTO ItemD
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
 ECHO.
