@@ -471,20 +471,20 @@ namespace PowerSDR
 		public FilterForm filterRX2Form;
 		//public FWCForm fwcForm;
 		public FLEX5000LLHWForm flex5000LLHWForm;
-		public FLEX5000DebugForm flex5000DebugForm;
+		//public FLEX5000DebugForm flex5000DebugForm;
 		public FWCMixForm fwcMixForm;
 		public FLEX3000MixerForm flex3000MixerForm;
 		public FWCAntForm fwcAntForm;
 		public FLEX5000RelayForm flex5000RelayForm;
 		public FWCATUForm fwcAtuForm;
         public FLEX3000ATUForm flex3000ATUForm;
-		public FWCTestForm fwcTestForm;
+		//public FWCTestForm fwcTestForm;
 		public FLEX5000LPFForm flex5000LPFForm;
 		public FWCCalForm fwcCalForm;
-		public FLEX5000ProdTestForm flex5000ProdTestForm;
-		public FLEX5000FinalTestForm flex5000FinalTestForm;
+		//public FLEX5000ProdTestForm flex5000ProdTestForm;
+		//public FLEX5000FinalTestForm flex5000FinalTestForm;
 		public FLEX5000RX2CalForm flex5000RX2CalForm;
-        public FLEX3000TestForm flex3000TestForm;
+        //public FLEX3000TestForm flex3000TestForm;
         public DSPTestForm dspTestForm;
         public PreSelForm preSelForm;
         public Predistest predistForm;
@@ -1576,8 +1576,8 @@ namespace PowerSDR
 				{
 					SetupForm.ResetFLEX5000();
 					CheckCalData();
-					for(int i=0; i<8; i++)
-						flex5000DebugForm.SetPAPot(i, (byte)pa_bias_table[0][i]);
+					//for(int i=0; i<8; i++)
+					//	flex5000DebugForm.SetPAPot(i, (byte)pa_bias_table[0][i]);
 					if(!FWCEEPROM.TRXChecksumPresent)
 					{
 						WriteTRXChecksums();
@@ -2076,8 +2076,8 @@ namespace PowerSDR
             this.txtVFOBFreq = new System.Windows.Forms.TextBoxTS();
             this.btnBandHF = new System.Windows.Forms.ButtonTS();
             this.grpMultimeter = new System.Windows.Forms.GroupBoxTS();
-            this.txtMultiText = new System.Windows.Forms.TextBoxTS();
             this.picMultiMeterDigital = new System.Windows.Forms.PictureBox();
+            this.txtMultiText = new System.Windows.Forms.TextBoxTS();
             this.lblMultiSMeter = new System.Windows.Forms.LabelTS();
             this.lblTuneStep = new System.Windows.Forms.LabelTS();
             this.grpVFOBetween = new System.Windows.Forms.GroupBoxTS();
@@ -5698,15 +5698,24 @@ namespace PowerSDR
             // grpMultimeter
             // 
             this.grpMultimeter.BackColor = System.Drawing.Color.Transparent;
+            this.grpMultimeter.Controls.Add(this.picMultiMeterDigital);
             this.grpMultimeter.Controls.Add(this.comboMeterTXMode);
             this.grpMultimeter.Controls.Add(this.comboMeterRXMode);
             this.grpMultimeter.Controls.Add(this.txtMultiText);
-            this.grpMultimeter.Controls.Add(this.picMultiMeterDigital);
             this.grpMultimeter.Controls.Add(this.lblMultiSMeter);
             this.grpMultimeter.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.grpMultimeter, "grpMultimeter");
             this.grpMultimeter.Name = "grpMultimeter";
             this.grpMultimeter.TabStop = false;
+            // 
+            // picMultiMeterDigital
+            // 
+            this.picMultiMeterDigital.BackColor = System.Drawing.Color.Black;
+            this.picMultiMeterDigital.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            resources.ApplyResources(this.picMultiMeterDigital, "picMultiMeterDigital");
+            this.picMultiMeterDigital.Name = "picMultiMeterDigital";
+            this.picMultiMeterDigital.TabStop = false;
+            this.picMultiMeterDigital.Paint += new System.Windows.Forms.PaintEventHandler(this.picMultiMeterDigital_Paint);
             // 
             // txtMultiText
             // 
@@ -5717,15 +5726,6 @@ namespace PowerSDR
             this.txtMultiText.Name = "txtMultiText";
             this.txtMultiText.ReadOnly = true;
             this.txtMultiText.GotFocus += new System.EventHandler(this.HideFocus);
-            // 
-            // picMultiMeterDigital
-            // 
-            this.picMultiMeterDigital.BackColor = System.Drawing.Color.Black;
-            this.picMultiMeterDigital.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            resources.ApplyResources(this.picMultiMeterDigital, "picMultiMeterDigital");
-            this.picMultiMeterDigital.Name = "picMultiMeterDigital";
-            this.picMultiMeterDigital.TabStop = false;
-            this.picMultiMeterDigital.Paint += new System.Windows.Forms.PaintEventHandler(this.picMultiMeterDigital_Paint);
             // 
             // lblMultiSMeter
             // 
@@ -7596,11 +7596,11 @@ namespace PowerSDR
 					if(fwc_init && index == 0 &&
 						(current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
 					{
-						if(flex5000DebugForm != null && !flex5000DebugForm.IsDisposed)
-						{
-							for(int i=0; i<8; i++)
-								flex5000DebugForm.SetPAPot(i, (byte)pa_bias_table[index][i]);
-						}
+						//if(flex5000DebugForm != null && !flex5000DebugForm.IsDisposed)
+						//{
+						//	for(int i=0; i<8; i++)
+						//		flex5000DebugForm.SetPAPot(i, (byte)pa_bias_table[index][i]);
+						//}
 					}
 				}
 				else if(name.StartsWith("rx1_level_table"))
@@ -8880,11 +8880,11 @@ namespace PowerSDR
                 FWCEEPROM.TRXChecksumPresent = false;
             }
 
-			if(flex5000DebugForm != null && !flex5000DebugForm.IsDisposed)
-			{
-				for(int i=0; i<8; i++)
-					flex5000DebugForm.SetPAPot(i, (byte)pa_bias_table[0][i]);
-			}
+			//if(flex5000DebugForm != null && !flex5000DebugForm.IsDisposed)
+			//{
+			//	for(int i=0; i<8; i++)
+			//		flex5000DebugForm.SetPAPot(i, (byte)pa_bias_table[0][i]);
+			//}
 			p.SetPercent((count+=8)/total_reads);
 			Application.DoEvents();
 
@@ -11310,8 +11310,10 @@ namespace PowerSDR
             if (adc_fwd == 0 && adc_rev == 0) return 1.0;
             if (adc_rev > adc_fwd) return 50.0;
 
-            double sqrt_r_over_f = Math.Sqrt(r / f);
-            return (1.0 + sqrt_r_over_f) / (1.0 - sqrt_r_over_f);
+            //double sqrt_r_over_f = Math.Sqrt(r / f);
+           // return (1.0 + sqrt_r_over_f) / (1.0 - sqrt_r_over_f);
+            double swr = (f + r) / (f - r);
+            return swr;
         }
 
         public double FWCSWR(int adc_fwd, int adc_rev)
@@ -12896,8 +12898,8 @@ namespace PowerSDR
 				return false;
 			}
 
-			for(int i=0; i<8; i++)
-				flex5000DebugForm.SetPAPot(i, 0);
+			//for(int i=0; i<8; i++)
+			//	flex5000DebugForm.SetPAPot(i, 0);
 
 			FWC.SetPABias(true);
             tx_cal = true;
@@ -12916,13 +12918,13 @@ namespace PowerSDR
 			//MessageBox.Show("Driver Baseline: "+baseline.ToString("f3"));
 			Debug.WriteLine("baseline: "+baseline.ToString("f3"));
 
-			for(int i=0; i<4; i++)
-				flex5000DebugForm.SetPAPot(i, 128);
+			//for(int i=0; i<4; i++)
+			//	flex5000DebugForm.SetPAPot(i, 128);
 
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(0, Q2+=10);
+			//	flex5000DebugForm.SetPAPot(0, Q2+=10);
 				if(Q2 < 128)
 				{
 					FWC.SetPABias(false);
@@ -12941,13 +12943,13 @@ namespace PowerSDR
 			}
 			while(current < baseline + 0.002);
 			progress.SetPercent(++counter/(float)16);
-			flex5000DebugForm.SetPAPot(0, 0);
+			//flex5000DebugForm.SetPAPot(0, 0);
 			Q2-=10;
 
 			do 
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(2, Q3+=10);
+			//	flex5000DebugForm.SetPAPot(2, Q3+=10);
 				if(Q3 < 128)
 				{
 					FWC.SetPABias(false);
@@ -12966,7 +12968,7 @@ namespace PowerSDR
 			}
 			while(current < baseline + 0.002);
 			progress.SetPercent(++counter/(float)16);
-			flex5000DebugForm.SetPAPot(2, 0);	
+			//flex5000DebugForm.SetPAPot(2, 0);	
 			Q3-=10;
 			Debug.WriteLine("Starting points  Q2:"+Q2+"  Q3:"+Q3);
 			//MessageBox.Show("Starting points  Q2:"+Q2.ToString()+"  Q3:"+Q3.ToString());
@@ -12975,7 +12977,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(0, Q2+=5);
+			//	flex5000DebugForm.SetPAPot(0, Q2+=5);
 				if(Q2 < 128)
 				{
 					FWC.SetPABias(false);
@@ -12998,7 +13000,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(0, Q2+=1);
+				//flex5000DebugForm.SetPAPot(0, Q2+=1);
 				if(Q2 < 128)
 				{
 					FWC.SetPABias(false);
@@ -13026,7 +13028,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(2, Q3+=5);
+				//flex5000DebugForm.SetPAPot(2, Q3+=5);
 				Thread.Sleep(50);
 				current = ReadDriverBias(3);
 				if(current > driver_limit) goto high_current;
@@ -13038,7 +13040,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(2, Q3+=1);
+				//flex5000DebugForm.SetPAPot(2, Q3+=1);
 				Thread.Sleep(50);
 				current = ReadDriverBias(3);
 				if(current > driver_limit) goto high_current;
@@ -13055,7 +13057,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(0, ++Q2);
+				//flex5000DebugForm.SetPAPot(0, ++Q2);
 				Thread.Sleep(50);
 				current = ReadDriverBias(3);
 				if(current > driver_limit) goto high_current;
@@ -13067,14 +13069,14 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(0, --Q2);
+				//flex5000DebugForm.SetPAPot(0, --Q2);
 				Thread.Sleep(100);
 				current = ReadDriverBias(5);
 				if(current > driver_limit) goto high_current;
 			}
 			while(current > baseline + q3_current + driver_target/2);
 			progress.SetPercent(++counter/(float)16);
-			flex5000DebugForm.SetPAPot(0, ++Q2);
+			//flex5000DebugForm.SetPAPot(0, ++Q2);
 			current = ReadDriverBias(5);
 			q2_current = current - q3_current - baseline;
 			Debug.WriteLine("Q2 Current: "+q2_current.ToString("f3")+"  Q2:"+Q2);
@@ -13084,7 +13086,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(2, ++Q3);
+				//flex5000DebugForm.SetPAPot(2, ++Q3);
 				Thread.Sleep(50);
 				current = ReadDriverBias(3);
 				if(current > driver_limit) goto high_current;
@@ -13096,14 +13098,14 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(2, --Q3);
+				//flex5000DebugForm.SetPAPot(2, --Q3);
 				Thread.Sleep(100);
 				current = ReadDriverBias(5);
 				if(current > driver_limit) goto high_current;
 			}
 			while(current > baseline + q2_current + driver_target/2);
 			progress.SetPercent(++counter/(float)16);
-			flex5000DebugForm.SetPAPot(2, ++Q3);
+			//flex5000DebugForm.SetPAPot(2, ++Q3);
 			current = ReadDriverBias(5);
 			q3_current = current - q2_current - baseline;
 			Debug.WriteLine("Q3 Current: "+q3_current.ToString("f3")+"  Q3:"+Q3);
@@ -13121,7 +13123,7 @@ namespace PowerSDR
 					if(!progress.Visible) goto end;
 					if(q2_current > driver_target/2) Q2_fine--;
 					else Q2_fine++;
-					flex5000DebugForm.SetPAPot(1, Q2_fine);
+					//flex5000DebugForm.SetPAPot(1, Q2_fine);
 					Thread.Sleep(50);
 					current = ReadDriverBias(5);
 					q2_current = current - q3_current - baseline;
@@ -13138,7 +13140,7 @@ namespace PowerSDR
 					if(!progress.Visible) goto end;
 					if(q3_current > driver_target/2) Q3_fine--;
 					else Q3_fine++;
-					flex5000DebugForm.SetPAPot(3, Q3_fine);
+					//flex5000DebugForm.SetPAPot(3, Q3_fine);
 					Thread.Sleep(50);
 					current = ReadDriverBias(5);
 					q3_current = current - q2_current - baseline;
@@ -13165,12 +13167,12 @@ namespace PowerSDR
 			//MessageBox.Show("Final baseline: "+baseline.ToString("f3"));
 			Debug.WriteLine("baseline: "+baseline.ToString("f3"));
 			for(int i=4; i<8; i++)
-				flex5000DebugForm.SetPAPot(i, 128);
+				//flex5000DebugForm.SetPAPot(i, 128);
 
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(4, Q4+=10);
+				//flex5000DebugForm.SetPAPot(4, Q4+=10);
 				if(Q4 < 128)
 				{
 					FWC.SetPABias(false);
@@ -13189,12 +13191,12 @@ namespace PowerSDR
 			}
 			while(current < baseline + 0.005);
 			progress.SetPercent(++counter/(float)16);
-			flex5000DebugForm.SetPAPot(4, Q4-=10);
+			//flex5000DebugForm.SetPAPot(4, Q4-=10);
 
 			do 
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(6, Q1+=10);
+				//flex5000DebugForm.SetPAPot(6, Q1+=10);
 				if(Q1 < 128)
 				{
 					FWC.SetPABias(false);
@@ -13213,7 +13215,7 @@ namespace PowerSDR
 			}
 			while(current < baseline + 0.005);
 			progress.SetPercent(++counter/(float)16);
-			flex5000DebugForm.SetPAPot(6, Q1-=10);
+			//flex5000DebugForm.SetPAPot(6, Q1-=10);
 			Debug.WriteLine("Starting points  Q4:"+Q4+"  Q1:"+Q1);
 			//MessageBox.Show("Starting points  Q4:"+Q4.ToString()+"  Q1:"+Q1.ToString());
 
@@ -13221,7 +13223,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(4, Q4+=5);
+				//flex5000DebugForm.SetPAPot(4, Q4+=5);
 				if(Q4 < 128)
 				{
 					FWC.SetPABias(false);
@@ -13244,7 +13246,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(4, Q4+=1);
+				// flex5000DebugForm.SetPAPot(4, Q4+=1);
 				if(Q4 < 128)
 				{
 					FWC.SetPABias(false);
@@ -13272,7 +13274,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(6, Q1+=5);
+				// flex5000DebugForm.SetPAPot(6, Q1+=5);
 				if(Q1 < 128)
 				{
 					FWC.SetPABias(false);
@@ -13295,7 +13297,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(6, Q1+=1);
+				// flex5000DebugForm.SetPAPot(6, Q1+=1);
 				if(Q1 < 128)
 				{
 					FWC.SetPABias(false);
@@ -13323,7 +13325,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(4, ++Q4);
+				// flex5000DebugForm.SetPAPot(4, ++Q4);
 				Thread.Sleep(50);
                 current = ReadFinalBias(3, true);
 				if(current > final_limit) goto high_current;
@@ -13335,14 +13337,14 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(4, --Q4);
+				// flex5000DebugForm.SetPAPot(4, --Q4);
 				Thread.Sleep(100);
                 current = ReadFinalBias(5, true);
 				if(current > final_limit) goto high_current;
 			}
 			while(current > baseline + q1_current + final_target/2);
 			progress.SetPercent(++counter/(float)16);
-			flex5000DebugForm.SetPAPot(4, ++Q4);
+			// flex5000DebugForm.SetPAPot(4, ++Q4);
             current = ReadFinalBias(5, true);
 			q4_current = current - q1_current - baseline;
 			Debug.WriteLine("Q4 Current: "+q4_current.ToString("f3")+"  Q4:"+Q4);	
@@ -13352,7 +13354,7 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(6, ++Q1);
+				// flex5000DebugForm.SetPAPot(6, ++Q1);
 				Thread.Sleep(50);
                 current = ReadFinalBias(3, true);
 				if(current > final_limit) goto high_current;
@@ -13364,14 +13366,14 @@ namespace PowerSDR
 			do
 			{
 				if(!progress.Visible) goto end;
-				flex5000DebugForm.SetPAPot(6, --Q1);
+				// flex5000DebugForm.SetPAPot(6, --Q1);
 				Thread.Sleep(100);
                 current = ReadFinalBias(5, true);
 				if(current > final_limit) goto high_current;
 			}
 			while(current > baseline + q4_current + final_target/2);
 			progress.SetPercent(++counter/(float)16);
-			flex5000DebugForm.SetPAPot(6, ++Q1);
+			// flex5000DebugForm.SetPAPot(6, ++Q1);
             current = ReadFinalBias(5, true);
 			q1_current = current - q4_current - baseline;
 			Debug.WriteLine("Q1 Current: "+q1_current.ToString("f3")+"  Q1:"+Q1);
@@ -13386,7 +13388,7 @@ namespace PowerSDR
 					if(!progress.Visible) goto end;
 					if(q4_current > final_target/2) Q4_fine--;
 					else Q4_fine++;
-					flex5000DebugForm.SetPAPot(5, Q4_fine);
+					// flex5000DebugForm.SetPAPot(5, Q4_fine);
 					Thread.Sleep(50);
                     current = ReadFinalBias(5, true);
 					q4_current = current - q1_current - baseline;
@@ -13403,7 +13405,7 @@ namespace PowerSDR
 					if(!progress.Visible) goto end;
 					if(q1_current > final_target/2) Q1_fine--;
 					else Q1_fine++;
-					flex5000DebugForm.SetPAPot(7, Q1_fine);
+					// flex5000DebugForm.SetPAPot(7, Q1_fine);
 					Thread.Sleep(50);
                     current = ReadFinalBias(5, true);
 					q1_current = current - q4_current - baseline;
@@ -13424,8 +13426,8 @@ namespace PowerSDR
 			progress.Hide();			
 			if(progress.Text != "")
 			{
-				for(int i=0; i<8; i++)
-					pa_bias_table[index][i] = flex5000DebugForm.GetPAPot(i);
+				//for(int i=0; i<8; i++)
+				//	pa_bias_table[index][i] = flex5000DebugForm.GetPAPot(i);
 			}
 			return ret_val;
 		high_current:
@@ -13460,10 +13462,10 @@ namespace PowerSDR
 			}
 			sum /= num_avg;
 			float current = (float)sum/4096*2.5f; // 50 milliohm
-			if(((byte)(FWCEEPROM.PARev>>8)) == 0) current /= 2; // 100 milliohm
-			flex5000DebugForm.SetADCText(current.ToString("f3")+" A");
-			if(flex5000FinalTestForm != null) 
-				flex5000FinalTestForm.UpdateDriverBiasDebug(current);
+			//if(((byte)(FWCEEPROM.PARev>>8)) == 0) current /= 2; // 100 milliohm
+			//flex5000DebugForm.SetADCText(current.ToString("f3")+" A");
+			//if(flex5000FinalTestForm != null) 
+			//	flex5000FinalTestForm.UpdateDriverBiasDebug(current);
 			return current;
 		}
 
@@ -13479,9 +13481,9 @@ namespace PowerSDR
 			}
 			sum /= num_avg;
 			float current = (float)sum/4096*2.5f*10;
-			flex5000DebugForm.SetADCText(current.ToString("f3")+" A");
-			if(flex5000FinalTestForm != null && show_debug) 
-				flex5000FinalTestForm.UpdateFinalBiasDebug(current);
+			//flex5000DebugForm.SetADCText(current.ToString("f3")+" A");
+			//if(flex5000FinalTestForm != null && show_debug) 
+			//	flex5000FinalTestForm.UpdateFinalBiasDebug(current);
 			return current;
 		}
 
@@ -13775,7 +13777,7 @@ namespace PowerSDR
 				t2.Start();
 				for(int i=c1_global_min; i>=0 && i<=255; i+=(c1_step*c1_dir))
 				{
-					flex5000DebugForm.SetTRXPot(1, (byte)i);
+					// flex5000DebugForm.SetTRXPot(1, (byte)i);
 					FWC.TRXPotSetRDAC(1, i);
 					Thread.Sleep(200);
 
@@ -13871,7 +13873,7 @@ namespace PowerSDR
 				c1_count++;
 				Debug.WriteLine("t2 c1("+c1_count+"): "+t2.Duration);
 
-				flex5000DebugForm.SetTRXPot(1, (byte)c1_global_min);
+				// flex5000DebugForm.SetTRXPot(1, (byte)c1_global_min);
 				FWC.TRXPotSetRDAC(1, c1_global_min);
 
 				if(!progressing) break;
@@ -13884,7 +13886,7 @@ namespace PowerSDR
 				t2.Start();
 				for(int i=c2_global_min; i>=0 && i<=255; i+=(c2_step*c2_dir))
 				{
-					flex5000DebugForm.SetTRXPot(2, (byte)i);
+					// flex5000DebugForm.SetTRXPot(2, (byte)i);
 					FWC.TRXPotSetRDAC(2, i);
 					Thread.Sleep(200);
 
@@ -13980,7 +13982,7 @@ namespace PowerSDR
 				c2_count++;
 				Debug.WriteLine("t2 c2("+c2_count+"): "+t2.Duration);
 
-				flex5000DebugForm.SetTRXPot(2, (byte)c2_global_min);
+				// flex5000DebugForm.SetTRXPot(2, (byte)c2_global_min);
 				FWC.TRXPotSetRDAC(2, c2_global_min);
 
 				if(!progressing) break;
@@ -13993,7 +13995,7 @@ namespace PowerSDR
 				t2.Start();
 				for(int i=c3_global_min; i>=0 && i<=255; i+=(c3_step*c3_dir))
 				{
-					flex5000DebugForm.SetTRXPot(3, (byte)i);
+					// flex5000DebugForm.SetTRXPot(3, (byte)i);
 					FWC.TRXPotSetRDAC(3, i);
 					Thread.Sleep(200);
 
@@ -14089,7 +14091,7 @@ namespace PowerSDR
 				c3_count++;
 				Debug.WriteLine("t2 c3("+c3_count+"): "+t2.Duration);
 
-				flex5000DebugForm.SetTRXPot(3, (byte)c3_global_min);
+				// flex5000DebugForm.SetTRXPot(3, (byte)c3_global_min);
 				FWC.TRXPotSetRDAC(3, c3_global_min);
 
 				if(!progressing) break;
@@ -14102,7 +14104,7 @@ namespace PowerSDR
 				t2.Start();
 				for(int i=c0_global_min; i>=0 && i<=255; i+=(c0_step*c0_dir))
 				{
-					flex5000DebugForm.SetTRXPot(0, (byte)i);
+					// flex5000DebugForm.SetTRXPot(0, (byte)i);
 					FWC.TRXPotSetRDAC(0, i);
 					Thread.Sleep(200);
 
@@ -14198,7 +14200,7 @@ namespace PowerSDR
 				c0_count++;
 				Debug.WriteLine("t2 c0("+c0_count+"): "+t2.Duration);
 
-				flex5000DebugForm.SetTRXPot(0, (byte)c0_global_min);
+				// flex5000DebugForm.SetTRXPot(0, (byte)c0_global_min);
 				FWC.TRXPotSetRDAC(0, c0_global_min);
 
 				if(!progressing) break;
@@ -14213,10 +14215,10 @@ namespace PowerSDR
 				if(!progress.Visible) progress.Text = "";
 				else
 				{
-					flex5000DebugForm.SetTRXPot(0, (byte)c0_global_min);
-					flex5000DebugForm.SetTRXPot(1, (byte)c1_global_min);
-					flex5000DebugForm.SetTRXPot(2, (byte)c2_global_min);
-					flex5000DebugForm.SetTRXPot(3, (byte)c3_global_min);
+					// flex5000DebugForm.SetTRXPot(0, (byte)c0_global_min);
+					// flex5000DebugForm.SetTRXPot(1, (byte)c1_global_min);
+					// flex5000DebugForm.SetTRXPot(2, (byte)c2_global_min);
+					// flex5000DebugForm.SetTRXPot(3, (byte)c3_global_min);
 					tx_carrier_table[(int)tx_band][0] = c0_global_min;
 					tx_carrier_table[(int)tx_band][1] = c1_global_min;
 					tx_carrier_table[(int)tx_band][2] = c2_global_min;
@@ -19545,7 +19547,7 @@ namespace PowerSDR
                                 chkX2TR.Text = "";
                                 chkX2TR.Enabled = false;
                             }
-                            if (flex5000DebugForm == null) flex5000DebugForm = new FLEX5000DebugForm(this);
+                           // if (flex5000DebugForm == null) flex5000DebugForm = new FLEX5000DebugForm(this);
 
                             //chkFullDuplex.Visible = true;
                             panelAntenna.Visible = true;
@@ -19619,7 +19621,7 @@ namespace PowerSDR
                             chkX2TR.Text = "";
                             chkX2TR.Enabled = false;
 
-                            if (flex5000DebugForm == null) flex5000DebugForm = new FLEX5000DebugForm(this);
+                           // if (flex5000DebugForm == null) flex5000DebugForm = new FLEX5000DebugForm(this);
 
                             //chkFullDuplex.Visible = true;
                             panelAntenna.Visible = false;
@@ -21826,13 +21828,13 @@ namespace PowerSDR
 							SetupForm.ImagePhaseTX = tx_image_phase_table[(int)b];
 						}
 
-						if(flex5000DebugForm != null && !flex5000DebugForm.IsDisposed)
-						{
-							flex5000DebugForm.SetTRXPot(0, (byte)tx_carrier_table[(int)b][0]);
-							flex5000DebugForm.SetTRXPot(1, (byte)tx_carrier_table[(int)b][1]);
-							flex5000DebugForm.SetTRXPot(2, (byte)tx_carrier_table[(int)b][2]);
-							flex5000DebugForm.SetTRXPot(3, (byte)tx_carrier_table[(int)b][3]);
-						}
+					//	if(flex5000DebugForm != null && !flex5000DebugForm.IsDisposed)
+					//	{
+						//	flex5000DebugForm.SetTRXPot(0, (byte)tx_carrier_table[(int)b][0]);
+						//	flex5000DebugForm.SetTRXPot(1, (byte)tx_carrier_table[(int)b][1]);
+						//	flex5000DebugForm.SetTRXPot(2, (byte)tx_carrier_table[(int)b][2]);
+						//	flex5000DebugForm.SetTRXPot(3, (byte)tx_carrier_table[(int)b][3]);
+						//}
 
 						uint temp = 0;
 						for(int i=0; i<4; i++)
@@ -22701,8 +22703,8 @@ namespace PowerSDR
                 {
                     if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
                         comboMeterTXMode.Items.Insert(1, "Ref Pwr");
-                   // if (!comboMeterTXMode.Items.Contains("SWR"))
-                    //    comboMeterTXMode.Items.Insert(2, "SWR");
+                    if (!comboMeterTXMode.Items.Contains("SWR"))
+                        comboMeterTXMode.Items.Insert(2, "SWR");
 
                     if (comboMeterTXMode.SelectedIndex < 0)
                         comboMeterTXMode.SelectedIndex = 0;
@@ -24375,6 +24377,9 @@ namespace PowerSDR
 								break;
 							case MeterTXMode.FORWARD_POWER:
 							case MeterTXMode.REVERSE_POWER:
+                                if (!alexpresent)
+                                    num = (num * 100);
+
 							switch((int)g.DpiX)
 							{
 								case 96:
@@ -24599,10 +24604,11 @@ namespace PowerSDR
 									break;
 								case MeterTXMode.FORWARD_POWER:
 								case MeterTXMode.REVERSE_POWER:
-									if((fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
+									if((alexpresent || fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
 										(pa_present && VFOAFreq < 30.0))
 										output = num.ToString("f0")+" W";
-									else output = (num*1000).ToString("f0")+" mW";
+									//else output = (num*1000).ToString("f0")+" mW";
+									else output = (num*10).ToString("f0")+" mW";
 									break;
 								case MeterTXMode.SWR:
 									output = num.ToString("f1")+" : 1";
@@ -24780,7 +24786,7 @@ namespace PowerSDR
 								break;
 							case MeterTXMode.FORWARD_POWER:
 							case MeterTXMode.REVERSE_POWER:
-								if(pa_present || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
+								if(alexpresent || pa_present || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
 								{
 									g.FillRectangle(low_brush, 0, H-4, (int)(W*0.75), 2);
 									g.FillRectangle(high_brush, (int)(W*0.75), H-4, (int)(W*0.25)-10, 2);
@@ -25082,8 +25088,9 @@ namespace PowerSDR
 									break;
 								case MeterTXMode.FORWARD_POWER:
 								case MeterTXMode.REVERSE_POWER:
-									if((fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
-										(pa_present && VFOAFreq < 30.0))
+									//if((fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
+										//(pa_present && VFOAFreq < 30.0))
+                                    if(alexpresent)
 										output = num.ToString("f0")+" W";
 									else output = num.ToString("f0")+" mW";
 									break;
@@ -27506,27 +27513,27 @@ namespace PowerSDR
 					case Keys.D:
 						if(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
 						{
-							if(flex5000DebugForm == null || flex5000DebugForm.IsDisposed)
-								flex5000DebugForm = new FLEX5000DebugForm(this);
-							flex5000DebugForm.Show();
-							flex5000DebugForm.Focus();
+							//if(flex5000DebugForm == null || flex5000DebugForm.IsDisposed)
+							//	flex5000DebugForm = new FLEX5000DebugForm(this);
+							//flex5000DebugForm.Show();
+							//flex5000DebugForm.Focus();
 						}
 						break;
 					case Keys.F:
 						if(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
 						{
-							flex5000FinalTestForm = new FLEX5000FinalTestForm(this);
-							flex5000FinalTestForm.Show();
-							flex5000FinalTestForm.Focus();
+							//flex5000FinalTestForm = new FLEX5000FinalTestForm(this);
+							//flex5000FinalTestForm.Show();
+							//flex5000FinalTestForm.Focus();
 						}
 						break;
 					case Keys.I:
 						if(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
 						{
-							if(fwcTestForm == null || fwcTestForm.IsDisposed)
-								fwcTestForm = new FWCTestForm(this);
-							fwcTestForm.Show();
-							fwcTestForm.Focus();
+							//if(fwcTestForm == null || fwcTestForm.IsDisposed)
+							//	fwcTestForm = new FWCTestForm(this);
+							//fwcTestForm.Show();
+							//fwcTestForm.Focus();
 						}
 						break;
 					case Keys.O:
@@ -27539,9 +27546,9 @@ namespace PowerSDR
                             case Model.FLEX3000:
                                 if (fwc_init)
                                 {
-                                    flex5000ProdTestForm = new FLEX5000ProdTestForm(this);
-                                    flex5000ProdTestForm.Show();
-                                    flex5000ProdTestForm.Focus();
+                                  //  flex5000ProdTestForm = new FLEX5000ProdTestForm(this);
+                                  //  flex5000ProdTestForm.Show();
+                                  //  flex5000ProdTestForm.Focus();
                                 }
                                 break;
                             case Model.SDR1000:
@@ -29259,7 +29266,7 @@ namespace PowerSDR
 			if(fwcMixForm != null) fwcMixForm.Hide();
 			if(flex3000MixerForm != null) flex3000MixerForm.Hide();
 			if(flex5000LLHWForm != null) flex5000LLHWForm.Hide();
-			if(flex5000DebugForm != null) flex5000DebugForm.Hide();
+			//if(flex5000DebugForm != null) flex5000DebugForm.Hide();
 			if(fwcAntForm != null) fwcAntForm.Hide();
 			if(fwcAtuForm != null) fwcAtuForm.Hide();
             if(predistForm != null) predistForm.Hide();
@@ -29300,7 +29307,7 @@ namespace PowerSDR
 			if(fwcMixForm != null) fwcMixForm.Close();
 			if(flex3000MixerForm != null) flex3000MixerForm.Close();
 			if(flex5000LLHWForm != null) flex5000LLHWForm.Close();
-			if(flex5000DebugForm != null) flex5000DebugForm.Close();
+			//if(flex5000DebugForm != null) flex5000DebugForm.Close();
 			if(fwcAntForm != null) fwcAntForm.Close();
 			if(fwcAtuForm != null) fwcAtuForm.Close();
             if (predistForm != null) predistForm.Close();
@@ -30528,7 +30535,7 @@ namespace PowerSDR
 						break;
 					case MeterTXMode.FORWARD_POWER:
 					case MeterTXMode.REVERSE_POWER:
-						if(pa_present || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
+						if(alexpresent || pa_present || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
 							lblMultiSMeter.Text = "1      5     10    50   100  120+";
 						else
 							lblMultiSMeter.Text = "0      0.1     0.2     0.5        1.0";

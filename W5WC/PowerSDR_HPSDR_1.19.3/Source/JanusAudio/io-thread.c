@@ -1199,17 +1199,15 @@ void IOThreadMainLoop(void) {
                                                             FPGAWriteBufp[writebufpos] =  (VFOfreq >> 24) & 0xff; // byte 0 of freq
                                                         }
 														else if ( out_control_idx == 2 ) {  /* send power out level */
-															if (HermesPowerEnabled) {
+															if (HermesPowerEnabled && XmitBit != 0) 
+															{
 															    FPGAWriteBufp[writebufpos] = (unsigned char)(OutputPowerFactor & 0xff);
-															    if ( lastOutPower != (FPGAWriteBufp[writebufpos] & 0xff ) ) { 
-																lastOutPower = FPGAWriteBufp[writebufpos] & 0xff ; 
-																printf("outPower: %u\n", lastOutPower);  fflush(stdout); 
+                                                                //printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
 															} 
-															else {
+															else 
+															{
                                                                 FPGAWriteBufp[writebufpos] = 0;
 															}
-														   }
-
 														} 
                                                         else {
 															FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
