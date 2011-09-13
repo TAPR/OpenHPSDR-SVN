@@ -4186,7 +4186,7 @@
     <value>grpMultimeter</value>
   </data>
   <data name="&gt;&gt;comboMeterTXMode.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="comboMeterRXMode.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -4213,7 +4213,7 @@
     <value>grpMultimeter</value>
   </data>
   <data name="&gt;&gt;comboMeterRXMode.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="chkSquelch.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -10182,33 +10182,6 @@
   <data name="&gt;&gt;btnBandHF.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="txtMultiText.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 18pt</value>
-  </data>
-  <data name="txtMultiText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="txtMultiText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 35</value>
-  </data>
-  <data name="txtMultiText.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="txtMultiText.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;txtMultiText.Name" xml:space="preserve">
-    <value>txtMultiText</value>
-  </data>
-  <data name="&gt;&gt;txtMultiText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.4, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtMultiText.Parent" xml:space="preserve">
-    <value>grpMultimeter</value>
-  </data>
-  <data name="&gt;&gt;txtMultiText.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="picMultiMeterDigital.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -10234,6 +10207,33 @@
     <value>grpMultimeter</value>
   </data>
   <data name="&gt;&gt;picMultiMeterDigital.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtMultiText.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 18pt</value>
+  </data>
+  <data name="txtMultiText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="txtMultiText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 35</value>
+  </data>
+  <data name="txtMultiText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="txtMultiText.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;txtMultiText.Name" xml:space="preserve">
+    <value>txtMultiText</value>
+  </data>
+  <data name="&gt;&gt;txtMultiText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.4, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtMultiText.Parent" xml:space="preserve">
+    <value>grpMultimeter</value>
+  </data>
+  <data name="&gt;&gt;txtMultiText.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="lblMultiSMeter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -11275,7 +11275,7 @@
     <value>Stretch</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1016, 681</value>
+    <value>1016, 680</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -11323,7 +11323,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v1.19.3.4   baseSVN 3444 (W5WC - 8/15/11)</value>
+    <value>PowerSDR™/OpenHPSDR v1.19.3.4   baseSVN 3444 (W5WC - 9/11/11)</value>
   </data>
   <data name="&gt;&gt;mainMenu1.Name" xml:space="preserve">
     <value>mainMenu1</value>

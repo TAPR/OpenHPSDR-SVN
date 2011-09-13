@@ -1501,6 +1501,11 @@ namespace PowerSDR
         private RadioButtonTS radSpaceBarMicMute;
         private RadioButtonTS radSpaceBarVOX;
         private RadioButtonTS radSpaceBarPTT;
+        public TextBoxTS txtAdcVolts2;
+        public TextBoxTS txtAdcVolts1;
+        public TextBoxTS txtAdcValue;
+        public TextBoxTS txtAdcWatts1;
+        public TextBoxTS txtAdcWatts2;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -1551,7 +1556,7 @@ namespace PowerSDR
             Audio.IN_TX_L = 4;
             Audio.IN_TX_R = 5;
             comboDisplayLabelAlign.Text = "Auto";
-            comboTXLabelAlign.Text = "Auto"; 
+            comboTXLabelAlign.Text = "Auto";
             comboDisplayDriver.Text = "GDI+";
             comboDSPPhoneRXBuf.Text = "4096";
             comboDSPPhoneTXBuf.Text = "2048";
@@ -1671,7 +1676,7 @@ namespace PowerSDR
             tbGridFineAlpha_Scroll(this, e);
             tbTXVGridFineAlpha_Scroll(this, e);
             tbHGridColorAlpha_Scroll(this, e);
-            tbTXHGridColorAlpha_Scroll(this, e); 
+            tbTXHGridColorAlpha_Scroll(this, e);
             tbMultiRXFilterAlpha_Scroll(this, e);
             tbTXZeroLineAlpha_Scroll(this, e);
             tbTXTextAlpha_Scroll(this, e);
@@ -2076,6 +2081,11 @@ namespace PowerSDR
             this.labelTS50 = new System.Windows.Forms.LabelTS();
             this.labelTS39 = new System.Windows.Forms.LabelTS();
             this.tpHPSDR = new System.Windows.Forms.TabPage();
+            this.txtAdcWatts2 = new System.Windows.Forms.TextBoxTS();
+            this.txtAdcValue = new System.Windows.Forms.TextBoxTS();
+            this.txtAdcWatts1 = new System.Windows.Forms.TextBoxTS();
+            this.txtAdcVolts2 = new System.Windows.Forms.TextBoxTS();
+            this.txtAdcVolts1 = new System.Windows.Forms.TextBoxTS();
             this.grpVersion = new System.Windows.Forms.GroupBoxTS();
             this.lblPenelopeFWVer = new System.Windows.Forms.LabelTS();
             this.lblMercuryFWVer = new System.Windows.Forms.LabelTS();
@@ -8260,6 +8270,11 @@ namespace PowerSDR
             // tpHPSDR
             // 
             this.tpHPSDR.BackColor = System.Drawing.SystemColors.Control;
+            this.tpHPSDR.Controls.Add(this.txtAdcWatts2);
+            this.tpHPSDR.Controls.Add(this.txtAdcValue);
+            this.tpHPSDR.Controls.Add(this.txtAdcWatts1);
+            this.tpHPSDR.Controls.Add(this.txtAdcVolts2);
+            this.tpHPSDR.Controls.Add(this.txtAdcVolts1);
             this.tpHPSDR.Controls.Add(this.grpVersion);
             this.tpHPSDR.Controls.Add(this.groupBoxTS1);
             this.tpHPSDR.Controls.Add(this.groupBoxMicSource);
@@ -8272,6 +8287,46 @@ namespace PowerSDR
             this.tpHPSDR.TabIndex = 7;
             this.tpHPSDR.Text = "HPSDR";
             this.tpHPSDR.Paint += new System.Windows.Forms.PaintEventHandler(this.tpHPSDR_Paint);
+            // 
+            // txtAdcWatts2
+            // 
+            this.txtAdcWatts2.Location = new System.Drawing.Point(459, 188);
+            this.txtAdcWatts2.Name = "txtAdcWatts2";
+            this.txtAdcWatts2.Size = new System.Drawing.Size(100, 20);
+            this.txtAdcWatts2.TabIndex = 10;
+            this.txtAdcWatts2.Visible = false;
+            // 
+            // txtAdcValue
+            // 
+            this.txtAdcValue.Location = new System.Drawing.Point(459, 33);
+            this.txtAdcValue.Name = "txtAdcValue";
+            this.txtAdcValue.Size = new System.Drawing.Size(100, 20);
+            this.txtAdcValue.TabIndex = 9;
+            this.txtAdcValue.Visible = false;
+            // 
+            // txtAdcWatts1
+            // 
+            this.txtAdcWatts1.Location = new System.Drawing.Point(459, 148);
+            this.txtAdcWatts1.Name = "txtAdcWatts1";
+            this.txtAdcWatts1.Size = new System.Drawing.Size(100, 20);
+            this.txtAdcWatts1.TabIndex = 8;
+            this.txtAdcWatts1.Visible = false;
+            // 
+            // txtAdcVolts2
+            // 
+            this.txtAdcVolts2.Location = new System.Drawing.Point(459, 111);
+            this.txtAdcVolts2.Name = "txtAdcVolts2";
+            this.txtAdcVolts2.Size = new System.Drawing.Size(100, 20);
+            this.txtAdcVolts2.TabIndex = 6;
+            this.txtAdcVolts2.Visible = false;
+            // 
+            // txtAdcVolts1
+            // 
+            this.txtAdcVolts1.Location = new System.Drawing.Point(459, 72);
+            this.txtAdcVolts1.Name = "txtAdcVolts1";
+            this.txtAdcVolts1.Size = new System.Drawing.Size(100, 20);
+            this.txtAdcVolts1.TabIndex = 5;
+            this.txtAdcVolts1.Visible = false;
             // 
             // grpVersion
             // 
@@ -23169,6 +23224,7 @@ namespace PowerSDR
             this.tpPennyCtrl.ResumeLayout(false);
             this.grpPennyExtCtrl.ResumeLayout(false);
             this.tpHPSDR.ResumeLayout(false);
+            this.tpHPSDR.PerformLayout();
             this.grpVersion.ResumeLayout(false);
             this.groupBoxTS1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udMaxFreq)).EndInit();
@@ -23580,7 +23636,7 @@ namespace PowerSDR
             udTXGridMax.Value = Display.TXSpectrumGridMax;
             udTXGridMin.Value = Display.TXSpectrumGridMin;
             udTXGridStep.Value = Display.TXSpectrumGridStep;
-  
+
         }
 
         private void InitDSPTab()
@@ -27273,8 +27329,8 @@ namespace PowerSDR
             console.SetMicGain();
         }
 
-    
-    private void btnAudioVoltTest1_Click(object sender, System.EventArgs e)
+
+        private void btnAudioVoltTest1_Click(object sender, System.EventArgs e)
         {
             sound_card = 1;
 
@@ -29077,7 +29133,7 @@ namespace PowerSDR
 
         private void udVOXGain_ValueChanged(object sender, System.EventArgs e)
         {
-            Audio.VOXGain = (float)udVOXGain.Value /10000.0f;
+            Audio.VOXGain = (float)udVOXGain.Value / 10000.0f;
         }
 
         private void udTXVOXHangTime_ValueChanged(object sender, System.EventArgs e)
@@ -29370,7 +29426,7 @@ namespace PowerSDR
             console.InfoButtonsColor = clrbtnInfoButtonsColor.Color;
         }
 
-       private void clrbtnPeakBackground_Changed(object sender, System.EventArgs e)
+        private void clrbtnPeakBackground_Changed(object sender, System.EventArgs e)
         {
             console.PeakBackgroundColor = clrbtnPeakBackground.Color;
         }
@@ -30350,7 +30406,7 @@ namespace PowerSDR
             }
 
             UpdateSigGenScaleVisible();
-			UpdateSigGenPulseVisible();
+            UpdateSigGenPulseVisible();
         }
 
         private void radSigGenRXInput_CheckedChanged(object sender, System.EventArgs e)
@@ -30387,20 +30443,20 @@ namespace PowerSDR
             {
                 case "Tone": b = true; break;
                 case "Pulse": b = true; break;
-           }
+            }
 
             switch (cmboSigGenTXMode.Text)
             {
                 case "Tone": b = true; break;
                 case "Pulse": b = true; break;
-           }
+            }
 
             lblTestGenScale.Visible = b;
             udTestGenScale.Visible = b;
             Audio.SineFreq1 = (double)udTestFreq.Value;
         }
 
-       private void UpdateSigGenPulseVisible()
+        private void UpdateSigGenPulseVisible()
         {
             bool b = false;
             switch (cmboSigGenRXMode.Text)
@@ -30420,7 +30476,7 @@ namespace PowerSDR
         }
 
 
-		
+
         private void cmboSigGenTXMode_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (cmboSigGenTXMode.SelectedIndex < 0) return;
@@ -31306,7 +31362,7 @@ namespace PowerSDR
         private void clrbtnMeterEdgeBackground_Changed(object sender, System.EventArgs e)
         {
             console.EdgeMeterBackgroundColor = Color.FromArgb(tbMeterEdgeBackgroundAlpha.Value, clrbtnMeterEdgeBackground.Color);
-           // console.EdgeMeterBackgroundColor = clrbtnMeterEdgeBackground.Color;
+            // console.EdgeMeterBackgroundColor = clrbtnMeterEdgeBackground.Color;
         }
 
         private void clrbtnEdgeIndicator_Changed(object sender, System.EventArgs e)
@@ -32073,10 +32129,10 @@ namespace PowerSDR
         {
             udFMDev.Value = tbFMDev.Value;
         }
-		
+
         private void udPulseDuty_ValueChanged(object sender, EventArgs e)
         {
-            Audio.PulseDuty = (double)udPulseDuty.Value/100.0;
+            Audio.PulseDuty = (double)udPulseDuty.Value / 100.0;
         }
 
         private void udPulsePeriod_ValueChanged(object sender, EventArgs e)
@@ -32098,7 +32154,7 @@ namespace PowerSDR
                 rad12288MHzPenny.Checked = false;
                 rad12288MHzPenny.Enabled = false;
                 grpPennyExtCtrl.Enabled = false;
-                chkPennyExtCtrl.Enabled = false;                
+                chkPennyExtCtrl.Enabled = false;
                 JanusAudio.EnableHermesPower(0);
                 /*if (!chkPennyPresent.Checked)
                 {
@@ -32122,8 +32178,8 @@ namespace PowerSDR
                 }
                 console.PennyPresent = false;
                 //console.PennyLanePresent = true;
-                chkGeneralRXOnly.Enabled = true;  
-                
+                chkGeneralRXOnly.Enabled = true;
+
                 JanusAudio.EnableHermesPower(1);
             }
             console.PennyLanePresent = chkPennyLane.Checked;
@@ -32154,7 +32210,7 @@ namespace PowerSDR
                     chkGeneralRXOnly.Checked = true;
                     chkGeneralRXOnly.Enabled = false;
                 } */
-                				
+
             }
             else
             {
@@ -32171,9 +32227,9 @@ namespace PowerSDR
                     grpPennyExtCtrl.Enabled = true;
                 }
                 //console.PennyPresent = true;
-               // chkGeneralRXOnly.Enabled = true;  
+                // chkGeneralRXOnly.Enabled = true;  
                 console.PennyLanePresent = false;
-                
+
                 JanusAudio.EnableHermesPower(0);
             }
             console.PennyPresent = chkPennyPresent.Checked;
@@ -33164,7 +33220,7 @@ namespace PowerSDR
             {
                 try // this will take an exception in the conversion for Metis .. 
                 {
-                    lblOzyFX2.Text = Convert.ToUInt32(JanusAudio.getFX2FirmwareVersionString()).ToString("Ozy FX2: 0000 00 00"); 
+                    lblOzyFX2.Text = Convert.ToUInt32(JanusAudio.getFX2FirmwareVersionString()).ToString("Ozy FX2: 0000 00 00");
                 }
                 catch (Exception)
                 {
@@ -33172,26 +33228,26 @@ namespace PowerSDR
                 }
                 if (console.HPSDRisMetis)
                 {
-                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Metis: 0\\.0"); 
-                    lblOzyFX2.Text = ""; 
+                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Metis: 0\\.0");
+                    lblOzyFX2.Text = "";
                 }
                 else
                 {
-                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0"); 
+                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0");
                 }
                 if (console.MercuryPresent)
-                lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0");
+                    lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0");
                 else lblMercuryFWVer.Text = "Mercury: N/A";
                 if (console.PennyPresent || console.PennyLanePresent)
-                lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penny[Lane]: 0\\.0");
+                    lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penny[Lane]: 0\\.0");
                 else lblPenelopeFWVer.Text = "Penny[Lane]: N/A";
 
- /*               int rc = JanusAudio.GetHaveSync();
-                if (rc == 1)
-                    lblSyncData.Text = "FrameSync: Yes";
-                else
-                    lblSyncData.Text = "FrameSync: No"; 
-*/
+                /*               int rc = JanusAudio.GetHaveSync();
+                               if (rc == 1)
+                                   lblSyncData.Text = "FrameSync: Yes";
+                               else
+                                   lblSyncData.Text = "FrameSync: No"; 
+               */
             }
         }
 
@@ -33667,7 +33723,7 @@ namespace PowerSDR
         private void chkPTTOutDelay_CheckedChanged(object sender, EventArgs e)
         {
             udGenPTTOutDelay.Enabled = chkPTTOutDelay.Checked;
-            console.Hdw.PTTODelayControl = chkPTTOutDelay.Checked;           
+            console.Hdw.PTTODelayControl = chkPTTOutDelay.Checked;
         }
 
         private void udMoxDelay_ValueChanged(object sender, EventArgs e)
@@ -33792,12 +33848,12 @@ namespace PowerSDR
             toolTip1.SetToolTip(tbTXTextAlpha, tbTXTextAlpha.Value.ToString());
         }
 
-       /* private void chkTXCal_CheckedChanged(object sender, EventArgs e)
-        {
-            udTXDisplayCalOffset.Enabled = chkTXCal.Checked;
-            Display.TXDisplayCalControl = chkTXCal.Checked;
-            //udTXDisplayCalOffset_ValueChanged(this, EventArgs.Empty);
-        }*/
+        /* private void chkTXCal_CheckedChanged(object sender, EventArgs e)
+         {
+             udTXDisplayCalOffset.Enabled = chkTXCal.Checked;
+             Display.TXDisplayCalControl = chkTXCal.Checked;
+             //udTXDisplayCalOffset_ValueChanged(this, EventArgs.Empty);
+         }*/
 
         private void chkGridControl_CheckedChanged(object sender, EventArgs e)
         {
@@ -33827,11 +33883,6 @@ namespace PowerSDR
         private void radSpaceBarMicMute_CheckedChanged(object sender, EventArgs e)
         {
             this.console.SpaceBarMicMute = radSpaceBarMicMute.Checked;
-        }
-
-        private void radSpaceBarMicMute_CheckedChanged_1(object sender, EventArgs e)
-        {
-
         }
 
     }
