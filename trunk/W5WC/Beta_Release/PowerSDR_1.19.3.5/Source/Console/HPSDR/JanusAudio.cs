@@ -326,7 +326,7 @@ namespace PowerSDR
 			return fwVersionMsg; 
 		} 
 		 
-		public static bool forceFWGood = false;
+		public static bool forceFWGood = true; //false;
 
 		private static bool legacyDotDashPTT = false;
 
@@ -630,22 +630,9 @@ namespace PowerSDR
 		// 
 		public static float computeFwdPower() 
 		{
-            //int power_int = 0;
             int power_int = JanusAudio.getFwdPower();
 			double power_f = (double)power_int; 
 			double result; 
-           /* switch (pwr_mode)
-            {
-                case "fwd":
-                   power_int = JanusAudio.getFwdPower();
-                   break;
-                case "rev":
-                   power_int = JanusAudio.getRefPower();
-                   break;
-                case "alex_fwd":
-                   power_int = JanusAudio.getAlexFwdPower();
-                   break;
-            }*/
             
 			if ( power_int <= 2095 ) 
 			{ 
@@ -697,136 +684,51 @@ namespace PowerSDR
 
         public static float computeRefPower()
         {
-            //int power_int = 0;
-            int power_int = JanusAudio.getRefPower();
-            double power_f = (double)power_int;
-            double result;
-          /*  switch (pwr_mode)
-            {
-                case "fwd":
-                    power_int = JanusAudio.getFwdPower();
-                    break;
-                case "rev":
-                    power_int = JanusAudio.getRefPower();
-                    break;
-                case "alex_fwd":
-                    power_int = JanusAudio.getAlexFwdPower();
-                    break;
-            }*/
+            // Console c = Console.getConsole();
+            int adc = JanusAudio.getRefPower();
+            // int adc = JanusAudio.getFwdPower();
 
-            if (power_int <= 2095)
-            {
-                if (power_int <= 874)
-                {
-                    if (power_int <= 113)
-                    {
-                        result = 0.0;
-                    }
-                    else  // > 113 
-                    {
-                        result = (power_f - 113.0) * 0.065703;
-                    }
-                }
-                else  // > 874 
-                {
-                    if (power_int <= 1380)
-                    {
-                        result = 50.0 + ((power_f - 874.0) * 0.098814);
-                    }
-                    else  // > 1380 
-                    {
-                        result = 100.0 + ((power_f - 1380.0) * 0.13986);
-                    }
-                }
-            }
-            else  // > 2095 
-            {
-                if (power_int <= 3038)
-                {
-                    if (power_int <= 2615)
-                    {
-                        result = 200.0 + ((power_f - 2095.0) * 0.192308);
-                    }
-                    else  // > 2615, <3038 
-                    {
-                        result = 300.0 + ((power_f - 2615.0) * 0.236407);
-                    }
-                }
-                else  // > 3038 
-                {
-                    result = 400.0 + ((power_f - 3038.0) * 0.243902);
-                }
-            }
+            float maxAdcBits = 4096.0f;
+            float maxVolts = 3.3f;
+            float voltsPerBit = (maxVolts / maxAdcBits);
+            float Voltage = adc * voltsPerBit;
+            float Watts = (Voltage * Voltage) / 0.09f;
 
-            result = result / 1000;  //convert to watts 
-            return (float)result;
+            // c.SetupForm.txtAdcValue.Text = adc.ToString();
+            // c.SetupForm.txtAdcVolts1.Text = Voltage.ToString();
+            // c.SetupForm.txtAdcWatts1.Text = Watts.ToString();
+
+            return Watts;
+
         }
 
         public static float computeAlexFwdPower()
         {
-            //int power_int = 0;
-            int power_int = JanusAudio.getAlexFwdPower();
-            double power_f = (double)power_int;
-            double result;
-          /*  switch (pwr_mode)
-            {
-                case "fwd":
-                    power_int = JanusAudio.getFwdPower();
-                    break;
-                case "rev":
-                    power_int = JanusAudio.getRevPower();
-                    break;
-                case "alex_fwd":
-                    power_int = JanusAudio.getAlexFwdPower();
-                    break;
-            }*/
+            //  Console c = Console.getConsole();
+            int adc = JanusAudio.getAlexFwdPower();
+            //int adc = JanusAudio.getFwdPower();
 
-            if (power_int <= 2095)
-            {
-                if (power_int <= 874)
-                {
-                    if (power_int <= 113)
-                    {
-                        result = 0.0;
-                    }
-                    else  // > 113 
-                    {
-                        result = (power_f - 113.0) * 0.065703;
-                    }
-                }
-                else  // > 874 
-                {
-                    if (power_int <= 1380)
-                    {
-                        result = 50.0 + ((power_f - 874.0) * 0.098814);
-                    }
-                    else  // > 1380 
-                    {
-                        result = 100.0 + ((power_f - 1380.0) * 0.13986);
-                    }
-                }
-            }
-            else  // > 2095 
-            {
-                if (power_int <= 3038)
-                {
-                    if (power_int <= 2615)
-                    {
-                        result = 200.0 + ((power_f - 2095.0) * 0.192308);
-                    }
-                    else  // > 2615, <3038 
-                    {
-                        result = 300.0 + ((power_f - 2615.0) * 0.236407);
-                    }
-                }
-                else  // > 3038 
-                {
-                    result = 400.0 + ((power_f - 3038.0) * 0.243902);
-                }
-            }
+            float maxAdcBits = 4096.0f;
+            float maxVolts = 3.3f;
+            float voltsPerBit = (maxVolts / maxAdcBits);
+            float Voltage = adc * voltsPerBit;
+            float Watts = (Voltage * Voltage) / 0.09f;
 
-            result = result / 1000;  //convert to watts 
-            return (float)result;
+            // c.SetupForm.txtAdcValue.Text = adc.ToString();
+            // c.SetupForm.txtAdcVolts1.Text = Voltage.ToString();
+            // c.SetupForm.txtAdcWatts1.Text = Watts.ToString();
+
+            //double watts = 0.0;
+            //double volts = (double)adc / 4096 * 3.3;
+            //double volts = (double)(adc * 3.3) / 4096;
+            //double pow = Math.Pow(volts, 2) / .09;
+            //pow = Math.Max(pow, 0.0);
+            //c.SetupForm.txtAdcWatts2.Text = pow.ToString();
+            // watts = (volts * volts) / 0.09;
+
+            // c.SetupForm.txtAdcVolts2.Text = volts.ToString();
+            // c.SetupForm.txtAdcWatts2.Text = watts.ToString();
+            return Watts;
         }
 
         [DllImport("JanusAudio.dll")]
