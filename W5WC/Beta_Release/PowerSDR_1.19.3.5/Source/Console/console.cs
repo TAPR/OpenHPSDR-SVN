@@ -1800,6 +1800,7 @@ namespace PowerSDR
             this.mnuNB = new System.Windows.Forms.MenuItem();
             this.mnuNB2 = new System.Windows.Forms.MenuItem();
             this.mnuBIN = new System.Windows.Forms.MenuItem();
+            this.mnuMultiRX = new System.Windows.Forms.MenuItem();
             this.mnuDisplayControls = new System.Windows.Forms.MenuItem();
             this.mnuShowTopControls = new System.Windows.Forms.MenuItem();
             this.mnuShowBandControls = new System.Windows.Forms.MenuItem();
@@ -2127,7 +2128,6 @@ namespace PowerSDR
             this.radBandVHF0 = new System.Windows.Forms.RadioButtonTS();
             this.panelRX2DSP = new System.Windows.Forms.PanelTS();
             this.ptbSquelch = new PowerSDR.PrettyTrackBar();
-            this.mnuMultiRX = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX2RF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterShift)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterWidth)).BeginInit();
@@ -2450,6 +2450,12 @@ namespace PowerSDR
             this.mnuBIN.Index = 6;
             resources.ApplyResources(this.mnuBIN, "mnuBIN");
             this.mnuBIN.Click += new System.EventHandler(this.mnuDSP_Click);
+            // 
+            // mnuMultiRX
+            // 
+            this.mnuMultiRX.Index = 7;
+            resources.ApplyResources(this.mnuMultiRX, "mnuMultiRX");
+            this.mnuMultiRX.Click += new System.EventHandler(this.mnuDSP_Click);
             // 
             // mnuDisplayControls
             // 
@@ -6054,12 +6060,6 @@ namespace PowerSDR
             this.ptbSquelch.TabStop = false;
             this.ptbSquelch.Value = -150;
             this.ptbSquelch.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbSquelch_Scroll);
-            // 
-            // mnuMultiRX
-            // 
-            this.mnuMultiRX.Index = 7;
-            resources.ApplyResources(this.mnuMultiRX, "mnuMultiRX");
-            this.mnuMultiRX.Click += new System.EventHandler(this.mnuDSP_Click);
             // 
             // Console
             // 
@@ -11544,8 +11544,10 @@ namespace PowerSDR
             if (adc_fwd == 0 && adc_rev == 0) return 1.0;
             if (adc_rev > adc_fwd) return 50.0;
 
-            double sqrt_r_over_f = Math.Sqrt(r / f);
-            return (1.0 + sqrt_r_over_f) / (1.0 - sqrt_r_over_f);
+            //double sqrt_r_over_f = Math.Sqrt(r / f);
+            //return (1.0 + sqrt_r_over_f) / (1.0 - sqrt_r_over_f);
+            double swr = (f + r) / (f - r);
+            return swr;
         }
 		
 		public double FWCSWR(int adc_fwd, int adc_rev)
@@ -23042,8 +23044,8 @@ namespace PowerSDR
                 {
                     if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
                         comboMeterTXMode.Items.Insert(1, "Ref Pwr");
-                   // if (!comboMeterTXMode.Items.Contains("SWR"))
-                    //    comboMeterTXMode.Items.Insert(2, "SWR");
+                    if (!comboMeterTXMode.Items.Contains("SWR"))
+                        comboMeterTXMode.Items.Insert(2, "SWR");
 
                     if (comboMeterTXMode.SelectedIndex < 0)
                         comboMeterTXMode.SelectedIndex = 0;
@@ -24740,6 +24742,9 @@ namespace PowerSDR
 								break;
 							case MeterTXMode.FORWARD_POWER:
 							case MeterTXMode.REVERSE_POWER:
+                                if (!alexpresent)
+                                    num = (num * 100);
+
 							switch((int)g.DpiX)
 							{
 								case 96:
@@ -24964,10 +24969,10 @@ namespace PowerSDR
 									break;
 								case MeterTXMode.FORWARD_POWER:
 								case MeterTXMode.REVERSE_POWER:
-									if((fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
+									if((alexpresent || fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
 										(pa_present && VFOAFreq < 30.0))
 										output = num.ToString("f0")+" W";
-									else output = (num*1000).ToString("f0")+" mW";
+									else output = (num*10).ToString("f0")+" mW";
 									break;
 								case MeterTXMode.SWR:
 									output = num.ToString("f1")+" : 1";
@@ -25145,7 +25150,7 @@ namespace PowerSDR
 								break;
 							case MeterTXMode.FORWARD_POWER:
 							case MeterTXMode.REVERSE_POWER:
-								if(pa_present || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
+								if(alexpresent || pa_present || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
 								{
 									g.FillRectangle(low_brush, 0, H-4, (int)(W*0.75), 2);
 									g.FillRectangle(high_brush, (int)(W*0.75), H-4, (int)(W*0.25)-10, 2);
@@ -25447,7 +25452,7 @@ namespace PowerSDR
 									break;
 								case MeterTXMode.FORWARD_POWER:
 								case MeterTXMode.REVERSE_POWER:
-									if((fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
+									if((alexpresent || fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
 										(pa_present && VFOAFreq < 30.0))
 										output = num.ToString("f0")+" W";
 									else output = num.ToString("f0")+" mW";
@@ -30201,7 +30206,7 @@ namespace PowerSDR
                     case DSPMode.AM:
                     case DSPMode.SAM:
                     case DSPMode.FMN:
-                        freq -= 0.011025;
+                        //freq -= 0.011025; w5wc-1
                         break;
                     /*case DSPMode.DRM:
                         freq -= 0.012;
@@ -31990,7 +31995,7 @@ namespace PowerSDR
 					case DSPMode.AM:
 					case DSPMode.SAM:
 					case DSPMode.FMN:
-						tx_freq -= 0.011025;
+						//tx_freq -= 0.011025; w5wc-1
 						break;
 					case DSPMode.USB:
 					case DSPMode.DIGU:
@@ -32102,7 +32107,7 @@ namespace PowerSDR
 					case DSPMode.AM:
 					case DSPMode.SAM:
 					case DSPMode.FMN:
-						if(mox) freq -= 0.011025;
+						//if(mox) freq -= 0.011025; w5wc-1
 						break;
 					case DSPMode.USB:
 					case DSPMode.DIGU:
@@ -32444,7 +32449,7 @@ namespace PowerSDR
 					case DSPMode.AM:
 					case DSPMode.SAM:
 					case DSPMode.FMN:
-						freq -= 0.011025;
+						//freq -= 0.011025; w5wc-1
 						break;
 					case DSPMode.USB:
 					case DSPMode.DIGU:
@@ -32657,7 +32662,7 @@ namespace PowerSDR
 					case DSPMode.AM:
 					case DSPMode.SAM:
 					case DSPMode.FMN:
-						tx_freq -= 0.011025;
+						//tx_freq -= 0.011025; w5wc-1
 						break;
 					case DSPMode.USB:
 					case DSPMode.DIGU:
@@ -34950,7 +34955,7 @@ namespace PowerSDR
                         chkPLTone.Enabled = true;
 
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						//radio.GetDSPTX(0).TXOsc = 11025.0; //w5wc-1
 					}
                     panelModeSpecificPhone.BringToFront();
                     chkANF.Enabled = true;
@@ -34967,7 +34972,7 @@ namespace PowerSDR
 						chkBIN.Checked = false;
 						chkBIN.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0; // w5wc-1
 					}
                     panelModeSpecificPhone.BringToFront();
                     chkPLTone.Checked = false;
@@ -34986,7 +34991,7 @@ namespace PowerSDR
 						chkBIN.Checked = false;
 						chkBIN.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0; // w5wc-1
 					}
                     panelModeSpecificPhone.BringToFront();
                     chkPLTone.Checked = false;
@@ -38351,7 +38356,7 @@ namespace PowerSDR
 						chkBIN.Checked = false;
 						chkBIN.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0; //w5wc-1
 					}
 					break;
 				case DSPMode.AM:
@@ -38364,7 +38369,7 @@ namespace PowerSDR
 						chkBIN.Checked = false;
 						chkBIN.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0; // w5wc-1
 					}
 					break;
 				case DSPMode.SAM:
@@ -38378,7 +38383,7 @@ namespace PowerSDR
 						chkBIN.Checked = false;
 						chkBIN.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0; // w5wc-1
 					}
 					break;
 				case DSPMode.DIGL:
