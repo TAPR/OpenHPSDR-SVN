@@ -25088,10 +25088,9 @@ namespace PowerSDR
 									break;
 								case MeterTXMode.FORWARD_POWER:
 								case MeterTXMode.REVERSE_POWER:
-									//if((fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
-										//(pa_present && VFOAFreq < 30.0))
-                                    if(alexpresent)
-										output = num.ToString("f0")+" W";
+									if((alexpresent || fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
+										(pa_present && VFOAFreq < 30.0))
+ 									output = num.ToString("f0")+" W";
 									else output = num.ToString("f0")+" mW";
 									break;
 								case MeterTXMode.SWR:
@@ -29824,7 +29823,7 @@ namespace PowerSDR
                     case DSPMode.AM:
                     case DSPMode.SAM:
                     case DSPMode.FMN:
-                        freq -= 0.011025;
+                        //freq -= 0.011025;
                         break;
                     /*case DSPMode.DRM:
                         freq -= 0.012;
@@ -31714,7 +31713,7 @@ namespace PowerSDR
 					case DSPMode.AM:
 					case DSPMode.SAM:
 					case DSPMode.FMN:
-						if(mox) freq -= 0.011025;
+						//if(mox) freq -= 0.011025;
 						break;
 					case DSPMode.USB:
 					case DSPMode.DIGU:
@@ -32056,7 +32055,7 @@ namespace PowerSDR
 					case DSPMode.AM:
 					case DSPMode.SAM:
 					case DSPMode.FMN:
-						freq -= 0.011025;
+						//freq -= 0.011025;
 						break;
 					case DSPMode.USB:
 					case DSPMode.DIGU:
@@ -34545,7 +34544,7 @@ namespace PowerSDR
                         chkPLTone.Enabled = true;
 
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0;
 					}
                     panelModeSpecificPhone.BringToFront();
                     chkANF.Enabled = true;
@@ -34562,7 +34561,7 @@ namespace PowerSDR
 						chkBIN.Checked = false;
 						chkBIN.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0;
 					}
                     panelModeSpecificPhone.BringToFront();
                     chkPLTone.Checked = false;
@@ -34581,7 +34580,7 @@ namespace PowerSDR
 						chkBIN.Checked = false;
 						chkBIN.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0;
 					}
                     panelModeSpecificPhone.BringToFront();
                     chkPLTone.Checked = false;
@@ -37963,7 +37962,7 @@ namespace PowerSDR
 						chkBIN.Checked = false;
 						chkBIN.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0;
 					}
 					break;
 				case DSPMode.AM:
@@ -37976,7 +37975,7 @@ namespace PowerSDR
 						chkBIN.Checked = false;
 						chkBIN.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0;
 					}
 					break;
 				case DSPMode.SAM:
@@ -37990,7 +37989,7 @@ namespace PowerSDR
 						chkBIN.Checked = false;
 						chkBIN.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-						radio.GetDSPTX(0).TXOsc = 11025.0;
+						// radio.GetDSPTX(0).TXOsc = 11025.0;
 					}
 					break;
 				case DSPMode.DIGL:
