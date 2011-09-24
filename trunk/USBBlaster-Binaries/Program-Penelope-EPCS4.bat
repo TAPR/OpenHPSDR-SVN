@@ -96,6 +96,7 @@ ECHO A. Program using Penelope_v1.1
 ECHO B. Program using Penelope_v1.2
 ECHO C. Program using Penelope_v1.3
 ECHO D. Program using Penelope_v1.4
+ECHO E. Program using Penelope_V1.5
 ECHO Q. Quit
 ECHO.
 SET Choice=
@@ -108,6 +109,7 @@ IF /I '%Choice%'=='A' GOTO ItemA
 IF /I '%Choice%'=='B' GOTO ItemB
 IF /I '%Choice%'=='C' GOTO ItemC
 IF /I '%Choice%'=='D' GOTO ItemD
+IF /I '%Choice%'=='E' GOTO ItemE
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
 ECHO.
@@ -123,6 +125,9 @@ GOTO CONTINUE
 GOTO CONTINUE
 :ItemD
 %DIRECTORY% -c USB-Blaster Penelope_v1.4.cdf
+GOTO CONTINUE
+:ItemE
+%DIRECTORY% -c USB-Blaster Penelope_v1.5.cdf
 GOTO CONTINUE
 :CONTINUE
 PAUSE
