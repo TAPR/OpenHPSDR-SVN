@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPSDR_USB_LIB_V1.1", "HPSDR_USB_LIB_V1.1.csproj", "{CAAC4594-93AC-40DD-9109-AC4D18397D1E}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{CAAC4594-93AC-40DD-9109-AC4D18397D1E}.Debug.ActiveCfg = Debug|.NET
+		{CAAC4594-93AC-40DD-9109-AC4D18397D1E}.Debug.Build.0 = Debug|.NET
+		{CAAC4594-93AC-40DD-9109-AC4D18397D1E}.Release.ActiveCfg = Release|.NET
+		{CAAC4594-93AC-40DD-9109-AC4D18397D1E}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
