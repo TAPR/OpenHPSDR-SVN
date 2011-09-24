@@ -2821,6 +2821,12 @@ namespace PowerSDR
             this.tpAlexControl = new System.Windows.Forms.TabPage();
             this.tcAlexControl = new System.Windows.Forms.TabControl();
             this.tpAlexFilterControl = new System.Windows.Forms.TabPage();
+            this.chkAlex20BPHPF = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlex6_5BPHPF = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlex9_5BPHPF = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlex6BPHPF = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlex13BPHPF = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlex1_5BPHPF = new System.Windows.Forms.CheckBoxTS();
             this.labelTS134 = new System.Windows.Forms.LabelTS();
             this.labelTS133 = new System.Windows.Forms.LabelTS();
             this.panelTS6 = new System.Windows.Forms.PanelTS();
@@ -3865,12 +3871,6 @@ namespace PowerSDR
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
-            this.chkAlex1_5BPHPF = new System.Windows.Forms.CheckBoxTS();
-            this.chkAlex13BPHPF = new System.Windows.Forms.CheckBoxTS();
-            this.chkAlex6BPHPF = new System.Windows.Forms.CheckBoxTS();
-            this.chkAlex9_5BPHPF = new System.Windows.Forms.CheckBoxTS();
-            this.chkAlex6_5BPHPF = new System.Windows.Forms.CheckBoxTS();
-            this.chkAlex20BPHPF = new System.Windows.Forms.CheckBoxTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -13854,6 +13854,66 @@ namespace PowerSDR
             this.tpAlexFilterControl.Text = "Filters";
             this.tpAlexFilterControl.UseVisualStyleBackColor = true;
             // 
+            // chkAlex20BPHPF
+            // 
+            this.chkAlex20BPHPF.AutoSize = true;
+            this.chkAlex20BPHPF.Image = null;
+            this.chkAlex20BPHPF.Location = new System.Drawing.Point(10, 136);
+            this.chkAlex20BPHPF.Name = "chkAlex20BPHPF";
+            this.chkAlex20BPHPF.Size = new System.Drawing.Size(15, 14);
+            this.chkAlex20BPHPF.TabIndex = 107;
+            this.chkAlex20BPHPF.UseVisualStyleBackColor = true;
+            // 
+            // chkAlex6_5BPHPF
+            // 
+            this.chkAlex6_5BPHPF.AutoSize = true;
+            this.chkAlex6_5BPHPF.Image = null;
+            this.chkAlex6_5BPHPF.Location = new System.Drawing.Point(10, 58);
+            this.chkAlex6_5BPHPF.Name = "chkAlex6_5BPHPF";
+            this.chkAlex6_5BPHPF.Size = new System.Drawing.Size(15, 14);
+            this.chkAlex6_5BPHPF.TabIndex = 106;
+            this.chkAlex6_5BPHPF.UseVisualStyleBackColor = true;
+            // 
+            // chkAlex9_5BPHPF
+            // 
+            this.chkAlex9_5BPHPF.AutoSize = true;
+            this.chkAlex9_5BPHPF.Image = null;
+            this.chkAlex9_5BPHPF.Location = new System.Drawing.Point(10, 84);
+            this.chkAlex9_5BPHPF.Name = "chkAlex9_5BPHPF";
+            this.chkAlex9_5BPHPF.Size = new System.Drawing.Size(15, 14);
+            this.chkAlex9_5BPHPF.TabIndex = 105;
+            this.chkAlex9_5BPHPF.UseVisualStyleBackColor = true;
+            // 
+            // chkAlex6BPHPF
+            // 
+            this.chkAlex6BPHPF.AutoSize = true;
+            this.chkAlex6BPHPF.Image = null;
+            this.chkAlex6BPHPF.Location = new System.Drawing.Point(10, 160);
+            this.chkAlex6BPHPF.Name = "chkAlex6BPHPF";
+            this.chkAlex6BPHPF.Size = new System.Drawing.Size(15, 14);
+            this.chkAlex6BPHPF.TabIndex = 104;
+            this.chkAlex6BPHPF.UseVisualStyleBackColor = true;
+            // 
+            // chkAlex13BPHPF
+            // 
+            this.chkAlex13BPHPF.AutoSize = true;
+            this.chkAlex13BPHPF.Image = null;
+            this.chkAlex13BPHPF.Location = new System.Drawing.Point(10, 110);
+            this.chkAlex13BPHPF.Name = "chkAlex13BPHPF";
+            this.chkAlex13BPHPF.Size = new System.Drawing.Size(15, 14);
+            this.chkAlex13BPHPF.TabIndex = 103;
+            this.chkAlex13BPHPF.UseVisualStyleBackColor = true;
+            // 
+            // chkAlex1_5BPHPF
+            // 
+            this.chkAlex1_5BPHPF.AutoSize = true;
+            this.chkAlex1_5BPHPF.Image = null;
+            this.chkAlex1_5BPHPF.Location = new System.Drawing.Point(10, 32);
+            this.chkAlex1_5BPHPF.Name = "chkAlex1_5BPHPF";
+            this.chkAlex1_5BPHPF.Size = new System.Drawing.Size(15, 14);
+            this.chkAlex1_5BPHPF.TabIndex = 102;
+            this.chkAlex1_5BPHPF.UseVisualStyleBackColor = true;
+            // 
             // labelTS134
             // 
             this.labelTS134.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -18054,7 +18114,7 @@ namespace PowerSDR
             this.udLMSANFgain.TabIndex = 3;
             this.toolTip1.SetToolTip(this.udLMSANFgain, "Determines the adaptation rate of the filter.");
             this.udLMSANFgain.Value = new decimal(new int[] {
-            10,
+            100,
             0,
             0,
             0});
@@ -29094,66 +29154,6 @@ namespace PowerSDR
             this.radioButtonTS6.TabStop = true;
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
-            // 
-            // chkAlex1_5BPHPF
-            // 
-            this.chkAlex1_5BPHPF.AutoSize = true;
-            this.chkAlex1_5BPHPF.Image = null;
-            this.chkAlex1_5BPHPF.Location = new System.Drawing.Point(10, 32);
-            this.chkAlex1_5BPHPF.Name = "chkAlex1_5BPHPF";
-            this.chkAlex1_5BPHPF.Size = new System.Drawing.Size(15, 14);
-            this.chkAlex1_5BPHPF.TabIndex = 102;
-            this.chkAlex1_5BPHPF.UseVisualStyleBackColor = true;
-            // 
-            // chkAlex13BPHPF
-            // 
-            this.chkAlex13BPHPF.AutoSize = true;
-            this.chkAlex13BPHPF.Image = null;
-            this.chkAlex13BPHPF.Location = new System.Drawing.Point(10, 110);
-            this.chkAlex13BPHPF.Name = "chkAlex13BPHPF";
-            this.chkAlex13BPHPF.Size = new System.Drawing.Size(15, 14);
-            this.chkAlex13BPHPF.TabIndex = 103;
-            this.chkAlex13BPHPF.UseVisualStyleBackColor = true;
-            // 
-            // chkAlex6BPHPF
-            // 
-            this.chkAlex6BPHPF.AutoSize = true;
-            this.chkAlex6BPHPF.Image = null;
-            this.chkAlex6BPHPF.Location = new System.Drawing.Point(10, 160);
-            this.chkAlex6BPHPF.Name = "chkAlex6BPHPF";
-            this.chkAlex6BPHPF.Size = new System.Drawing.Size(15, 14);
-            this.chkAlex6BPHPF.TabIndex = 104;
-            this.chkAlex6BPHPF.UseVisualStyleBackColor = true;
-            // 
-            // chkAlex9_5BPHPF
-            // 
-            this.chkAlex9_5BPHPF.AutoSize = true;
-            this.chkAlex9_5BPHPF.Image = null;
-            this.chkAlex9_5BPHPF.Location = new System.Drawing.Point(10, 84);
-            this.chkAlex9_5BPHPF.Name = "chkAlex9_5BPHPF";
-            this.chkAlex9_5BPHPF.Size = new System.Drawing.Size(15, 14);
-            this.chkAlex9_5BPHPF.TabIndex = 105;
-            this.chkAlex9_5BPHPF.UseVisualStyleBackColor = true;
-            // 
-            // chkAlex6_5BPHPF
-            // 
-            this.chkAlex6_5BPHPF.AutoSize = true;
-            this.chkAlex6_5BPHPF.Image = null;
-            this.chkAlex6_5BPHPF.Location = new System.Drawing.Point(10, 58);
-            this.chkAlex6_5BPHPF.Name = "chkAlex6_5BPHPF";
-            this.chkAlex6_5BPHPF.Size = new System.Drawing.Size(15, 14);
-            this.chkAlex6_5BPHPF.TabIndex = 106;
-            this.chkAlex6_5BPHPF.UseVisualStyleBackColor = true;
-            // 
-            // chkAlex20BPHPF
-            // 
-            this.chkAlex20BPHPF.AutoSize = true;
-            this.chkAlex20BPHPF.Image = null;
-            this.chkAlex20BPHPF.Location = new System.Drawing.Point(10, 136);
-            this.chkAlex20BPHPF.Name = "chkAlex20BPHPF";
-            this.chkAlex20BPHPF.Size = new System.Drawing.Size(15, 14);
-            this.chkAlex20BPHPF.TabIndex = 107;
-            this.chkAlex20BPHPF.UseVisualStyleBackColor = true;
             // 
             // Setup
             // 
