@@ -1,0 +1,170 @@
+Simulator report for Ozy_Janus
+Wed Feb 04 21:39:50 2009
+Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. |Ozy_Janus|Tx_fifo:Tx_fifo|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|altsyncram_f3e1:FIFOram|altsyncram_akj1:altsyncram1|ALTSYNCRAM
+  6. |Ozy_Janus|Rx_fifo:Rx_fifo|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram|altsyncram_mkj1:altsyncram1|ALTSYNCRAM
+  7. |Ozy_Janus|sld_signaltap:auto_signaltap_0|sld_signaltap_impl:sld_signaltap_body|altsyncram:\stp_non_zero_ram_gen:stp_buffer_ram|altsyncram_39p3:auto_generated|ALTSYNCRAM
+  8. Coverage Summary
+  9. Complete 1/0-Value Coverage
+ 10. Missing 1-Value Coverage
+ 11. Missing 0-Value Coverage
+ 12. Simulator INI Usage
+ 13. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2008 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------+
+; Simulator Summary ;
++------+------------+
+; Type ; Value      ;
++------+------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                         ;
++--------------------------------------------------------------------------------------------+---------------+---------------+
+; Option                                                                                     ; Setting       ; Default Value ;
++--------------------------------------------------------------------------------------------+---------------+---------------+
+; Simulation mode                                                                            ; Timing        ; Timing        ;
+; Start time                                                                                 ; 0 ns          ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF          ;               ;
+; Vector input source                                                                        ; Ozy_Janus.vwf ;               ;
+; Add pins automatically to simulation output waveforms                                      ; Off           ; On            ;
+; Check outputs                                                                              ; Off           ; Off           ;
+; Report simulation coverage                                                                 ; On            ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On            ; On            ;
+; Display missing 1-value coverage report                                                    ; On            ; On            ;
+; Display missing 0-value coverage report                                                    ; On            ; On            ;
+; Detect setup and hold time violations                                                      ; Off           ; Off           ;
+; Detect glitches                                                                            ; Off           ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off           ; Off           ;
+; Generate Signal Activity File                                                              ; Off           ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off           ; Off           ;
+; Group bus channels in simulation results                                                   ; Off           ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On            ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE    ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off           ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off           ;               ;
+; Perform Glitch Filtering in Timing Simulation                                              ; Auto          ; Auto          ;
++--------------------------------------------------------------------------------------------+---------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; |Ozy_Janus|Tx_fifo:Tx_fifo|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|altsyncram_f3e1:FIFOram|altsyncram_akj1:altsyncram1|ALTSYNCRAM ;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+Memory report data cannot be output to ASCII.
+Please use Quartus II to view the memory report data.
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; |Ozy_Janus|Rx_fifo:Rx_fifo|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram|altsyncram_mkj1:altsyncram1|ALTSYNCRAM ;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+Memory report data cannot be output to ASCII.
+Please use Quartus II to view the memory report data.
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; |Ozy_Janus|sld_signaltap:auto_signaltap_0|sld_signaltap_impl:sld_signaltap_body|altsyncram:\stp_non_zero_ram_gen:stp_buffer_ram|altsyncram_39p3:auto_generated|ALTSYNCRAM ;
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+Memory report data cannot be output to ASCII.
+Please use Quartus II to view the memory report data.
+
+
++------------------+
+; Coverage Summary ;
++------+-----------+
+; Type ; Value     ;
++------+-----------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++-------------------------------------------------+
+; Complete 1/0-Value Coverage                     ;
++-----------+------------------+------------------+
+; Node Name ; Output Port Name ; Output Port Type ;
++-----------+------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++-------------------------------------------------+
+; Missing 1-Value Coverage                        ;
++-----------+------------------+------------------+
+; Node Name ; Output Port Name ; Output Port Type ;
++-----------+------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++-------------------------------------------------+
+; Missing 0-Value Coverage                        ;
++-----------+------------------+------------------+
+; Node Name ; Output Port Name ; Output Port Type ;
++-----------+------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
+    Info: Processing started: Wed Feb 04 21:39:34 2009
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
+Info: Can't find specified vector source file "C:/Documents and Settings/Kirk/Desktop/OzyJanus/Ozy_Janus.vwf"
+Warning: Can't display state machine states -- register holding state machine bit "|Ozy_Janus|led_blinker:BLINK_D4|LED_state.LED_IDLE" was synthesized away
+Warning: Can't display state machine states -- register holding state machine bit "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.TLV_LR_HI" was synthesized away
+Warning: Can't display state machine states -- register holding state machine bit "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.TLV_WL" was synthesized away
+Warning: Can't display state machine states -- register holding state machine bit "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.TLV_LR_LO" was synthesized away
+Warning: Can't display state machine states -- register holding state machine bit "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.TLV_WH" was synthesized away
+Warning: Can't display state machine states -- register holding state machine bit "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.TLV_IDLE" was synthesized away
+Warning: Can't display state machine states -- register holding state machine bit "|Ozy_Janus|sync_usb:usb1|FX_state.FX_T2" was synthesized away
+Warning: Can't display state machine states -- register holding state machine bit "|Ozy_Janus|sync_usb:usb1|FX_state.FX_F5" was synthesized away
+Error: No valid vector source file specified and default file "C:/Documents and Settings/Kirk/Desktop/OzyJanus/Ozy_Janus.cvwf" does not exist
+Error: Quartus II Simulator was unsuccessful. 1 error, 8 warnings
+    Error: Peak virtual memory: 166 megabytes
+    Error: Processing ended: Wed Feb 04 21:39:50 2009
+    Error: Elapsed time: 00:00:16
+    Error: Total CPU time (on all processors): 00:00:10
+
+
