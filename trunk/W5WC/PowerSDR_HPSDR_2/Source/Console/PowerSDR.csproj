@@ -695,8 +695,6 @@
     <PreBuildEvent>
     </PreBuildEvent>
     <PostBuildEvent>copy "$(ProjectDir)CAT\CATStructs.xml" "$(OutDir)";
-copy "$(ProjectDir)..\..\lib\FFTW\libfftw3f-3.dll" "$(OutDir)"
-copy "$(ProjectDIR)..\JanusAudio\OzyFirmwareBinaries\*" "$(OutDir)"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>
