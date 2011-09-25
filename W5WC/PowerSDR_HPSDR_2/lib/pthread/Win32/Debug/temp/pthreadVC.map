@@ -1,6 +1,6 @@
  pthreadVC
 
- Timestamp is 4dd0cedd (Mon May 16 02:14:37 2011)
+ Timestamp is 4e7e69af (Sat Sep 24 18:37:19 2011)
 
  Preferred load address is 10000000
 
@@ -13,7 +13,7 @@
  0002:0000017c 00000004H .CRT$XIAA               DATA
  0002:00000180 00000004H .CRT$XIZ                DATA
  0002:00000190 000007f0H .rdata                  DATA
- 0002:00000980 0000006bH .rdata$debug            DATA
+ 0002:00000980 00000064H .rdata$debug            DATA
  0002:000009f0 00000004H .rdata$sxdata           DATA
  0002:000009f4 00000004H .rtc$IAA                DATA
  0002:000009f8 00000004H .rtc$IMZ                DATA
@@ -400,8 +400,8 @@
  0002:00000174       ___xc_z                    1000b174     MSVCRTD:cinitexe.obj
  0002:00000178       ___xi_a                    1000b178     MSVCRTD:cinitexe.obj
  0002:00000180       ___xi_z                    1000b180     MSVCRTD:cinitexe.obj
- 0002:000001ac       __pRawDllMain              1000b1ac     MSVCRTD:crtdll.obj
  0002:000001ac       __pDefaultRawDllMain       1000b1ac     MSVCRTD:crtdll.obj
+ 0002:000001ac       __pRawDllMain              1000b1ac     MSVCRTD:crtdll.obj
  0002:000001b0       ??_C@_0DA@FJPPCPEH@f?3?2dd?2vctools?2crt_bld?2self_x86?2c@ 1000b1b0     MSVCRTD:crtdll.obj
  0002:000001e0       ??_C@_0BO@GNIAFIKK@Unknown?5Runtime?5Check?5Error?6?$AN?$AA@ 1000b1e0     MSVCRTD:_error_.obj
  0002:00000200       ??_C@_0CM@NGINOKPC@Stack?5memory?5around?5_alloca?5was?5@ 1000b200     MSVCRTD:_error_.obj
@@ -476,8 +476,7 @@
  0003:00000104       _ptw32_interlocked_compare_exchange 1000e104     pthread.obj
  0003:00000108       _ptw32_register_cancelation 1000e108     pthread.obj
  0003:00000114       ?wsprintffp@@3P6AHPADPBDZZA 1000e114     MSVCRTD:_error_.obj
- 0003:00000444       __forceCRTManifestRTM      1000e444     MSVCRTD:crtmanifestrtm.obj
- 0003:00000448       ?__type_info_root_node@@3U__type_info_node@@A 1000e448     MSVCRTD:tncleanup.obj
+ 0003:00000444       ?__type_info_root_node@@3U__type_info_node@@A 1000e444     MSVCRTD:tncleanup.obj
  0003:00000460       _ptw32_spinlock_test_init_lock 1000e460     <common>
  0003:00000480       _ptw32_cond_list_lock      1000e480     <common>
  0003:000004a0       _ptw32_rwlock_test_init_lock 1000e4a0     <common>
