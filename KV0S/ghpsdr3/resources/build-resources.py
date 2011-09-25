@@ -29,7 +29,8 @@ for line in data:
       # print nline
       temp = string.strip(nline[0:PrefixFieldEnd])
       prefix = string.strip(temp,'*#') 
-      pref = re.split( ',', prefix )
+      pstr = re.sub( '\([0-9]+\)', '', prefix )
+      pref = re.split( ',', pstr )
       #print "comma string", pref
       country = string.strip(nline[PrefixFieldEnd:EntityFieldEnd])
       cont = string.strip(nline[EntityFieldEnd:ContFieldEnd])
@@ -39,14 +40,30 @@ for line in data:
       print "   <country>"
       for p in pref:
 	 if( string.find( p, "-" ) > 0 ):
-	   print "hyphen string"
-	   if( re.match( "([A-Z]+)", p ) > 0 ):
+	   #print "hyphen string"
+	   if( re.match( "[A-Z][A-Z]", p ) > 0 ):
 	     slist = re.split( '-', p )
 	     end = ord(slist[1][1]) - ord(slist[0][1])
-	     print "Two Character", end
+	     for i in range(ord(slist[0][1]), ord(slist[1][1])):
+	        print "      <prefix>%s</prefix>" % (slist[0][0] + chr(i))
+	    
+	     print "      <prefix>%s</prefix>" % (slist[1])
+	   elif( re.match( "([0-9][A-Z])", p ) > 0 ):
+	     slist = re.split( '-', p )
+	     end = ord(slist[1][1]) - ord(slist[0][1])
+	     for i in range(ord(slist[0][1]), ord(slist[1][1])):
+	        print "      <prefix>%s</prefix>" % (slist[0][0] + chr(i))
+	    
+	     print "      <prefix>%s</prefix>" % (slist[1])
 	   elif( re.match( "([A-Z][0-9])", p ) > 0 ):
-	     print "Character Number"
-	   print "      <prefix>%s</prefix>" % string.strip( p )
+	     slist = re.split( '-', p )
+	     end = ord(slist[1]) - ord(slist[0][1])
+	     for i in range(ord(slist[0][1]), ord(slist[1])):
+	        print "      <prefix>%s</prefix>" % (slist[0][0] + chr(i))
+	    
+	     print "      <prefix>%s</prefix>" % (slist[0][0]+ slist[1])
+	     #print "Character Number", slist[0][1], slist[1], end
+	   #print "      <prefix>%s</prefix>" % string.strip( p )
 	 else:
            print "      <prefix>%s</prefix>" % string.strip( p )
          
