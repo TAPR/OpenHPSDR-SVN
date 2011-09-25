@@ -32380,6 +32380,12 @@ namespace PowerSDR
                 tcGeneral.SelectedIndex = 0;
             }
 
+            if (tcGeneral.TabPages.Contains(tpInfo))
+            {
+                tcGeneral.TabPages.Remove(tpInfo);
+                tcGeneral.SelectedIndex = 0;
+            }
+ 
             if (!tcGeneral.TabPages.Contains(tpHPSDR))
             {
                 Common.TabControlInsert(tcGeneral, tpHPSDR, 1);
@@ -32689,10 +32695,6 @@ namespace PowerSDR
                 false);
             if (done) MessageBox.Show("Level Calibration complete.");
             btnGeneralCalLevelStart.Enabled = true;
-            //txtMeterOffset.Text = console.MultiMeterCalOffset.ToString();
-            //console.txtDisplayOffset.Text = console.RX1DisplayCalOffset.ToString();
-            //MeterOffset = console.MultiMeterCalOffset;
-            //DisplayOffset = console.RX1DisplayCalOffset;
             UpdateDisplayMeter();
 
         }

@@ -82,19 +82,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>HEVWPJyzbKKBzwwPXSOh5uzpoB0=</dsig:DigestValue>
+        <dsig:DigestValue>mg7MY7rNxphpqizrEQGzE5qI9GY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="4636672">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="4624384">
       <assemblyIdentity name="PowerSDR" version="2.2.3.1" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>21pYLLYa/JKB4F0brPa4k16ifx0=</dsig:DigestValue>
+        <dsig:DigestValue>1kI0FsWYX1PnAI0eDAqPoyGn/tU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
