@@ -42698,7 +42698,7 @@ namespace PowerSDR
             this.bandToolStripMenuItem.Visible = true;
             this.modeToolStripMenuItem.Visible = true;
             int minWidth = 600;
-            int minHeight = 400;
+            int minHeight = 200;
 
             if (this.showTopControls)
             {
