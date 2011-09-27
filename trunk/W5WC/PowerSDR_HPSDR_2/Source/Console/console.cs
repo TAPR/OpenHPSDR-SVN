@@ -7557,10 +7557,9 @@ namespace PowerSDR
             radModeSPEC_CheckedChanged(this, EventArgs.Empty);*/
             CalcDisplayFreq();
             CpuUsage();
+
             tune_step_index--;					// Setup wheel tuning
             ChangeTuneStepUp();
-            //wheel_tune_index--;					// Setup wheel tuning
-            //ChangeWheelTuneLeft();
             UpdateDisplayOffsets();
 
             SetupForm.initCATandPTTprops();   // wjt added -- get console props setup for cat and ptt 
@@ -8146,7 +8145,7 @@ namespace PowerSDR
 			/*for(int i=0; i<32; i++)
 				a.Add("fwc_att_offset["+i.ToString()+"]/"+fwc_att_offset[i].ToString());*/
 
-			//a.Add("wheel_tune_index/"+wheel_tune_index.ToString());		// Save wheel tune value
+			a.Add("wheel_tune_index/"+tune_step_index.ToString());		// Save wheel tune value
 
 			a.Add("vfob_dsp_mode/"+((int)vfob_dsp_mode).ToString());			// Save VFO B values 
 			a.Add("vfob_filter/"+((int)vfob_filter).ToString());
@@ -8157,8 +8156,6 @@ namespace PowerSDR
 			a.Add("console_height/"+this.Height.ToString());
 			a.Add("setup_top/"+SetupForm.Top.ToString());
 			a.Add("setup_left/"+SetupForm.Left.ToString());
-			//a.Add("mem_top/"+MemForm.Top.ToString());
-			//a.Add("mem_left/"+MemForm.Left.ToString());
             a.Add("rxonly_hf_enabled/" + rxonly_hf_enabled.ToString());
             a.Add("mon_recall/" + mon_recall.ToString());
 
@@ -8635,9 +8632,9 @@ namespace PowerSDR
 					case "current_datetime_mode":
 						CurrentDateTimeMode = (DateTimeMode)(Int32.Parse(val));
 						break;
-					//case "wheel_tune_index":
-					//	wheel_tune_index = Int32.Parse(val);
-					//	break;
+					case "wheel_tune_index":
+						tune_step_index = Int32.Parse(val);
+						break;
 					case "txtMemoryQuick":
 						txtMemoryQuick.Text = val;
 						break;
@@ -10720,183 +10717,6 @@ namespace PowerSDR
 
 			VFOAFreq = freq;
 		}
-
-/*		public void MemoryRecall(int mode, int filter, double freq, int step, int agc, int squelch)
-		{
-			// Set mode, filter, and frequency, mouse wheel tune step
-			// and AGC according to passed parameters
-
-			SaveBand();
-			last_band = "";
-			RX1DSPMode = (DSPMode)mode;
-			//			((RadioButton)mode_list[mode]).Checked = true;
-			if(rx1_dsp_mode != DSPMode.DRM &&
-				rx1_dsp_mode != DSPMode.SPEC)
-				RX1Filter = (Filter)filter;
-			VFOAFreq = Math.Round(freq, 6);
-			txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-			comboAGC.SelectedIndex = agc;
-			ptbSquelch.Value = squelch;
-            ptbSquelch_Scroll(this, EventArgs.Empty);
-			wheel_tune_index = step;
-            switch (wheel_tune_index)
-            {
-                case 0:
-                    txtWheelTune.Text = "1Hz";
-                    break;
-                case 1:
-                    txtWheelTune.Text = "10Hz";
-                    break;
-                case 2:
-                    txtWheelTune.Text = "50Hz";
-                    break;
-                case 3:
-                    txtWheelTune.Text = "100Hz";
-                    break;
-                case 4:
-                    txtWheelTune.Text = "250Hz";
-                    break;
-                case 5:
-                    txtWheelTune.Text = "500Hz";
-                    break;
-                case 6:
-                    txtWheelTune.Text = "1kHz";
-                    break;
-                case 7:
-                    txtWheelTune.Text = "5kHz";
-                    break;
-                case 8:
-                    txtWheelTune.Text = "9kHz";
-                    break;
-                case 9:
-                    txtWheelTune.Text = "10kHz";
-                    break;
-                case 10:
-                    txtWheelTune.Text = "100kHz";
-                    break;
-                case 11:
-                    txtWheelTune.Text = "250kHz";
-                    break;
-                case 12:
-                    txtWheelTune.Text = "500kHz";
-                    break;
-                case 13:
-                    txtWheelTune.Text = "1MHz";
-                    break;
-                case 14:
-                    txtWheelTune.Text = "10MHz";
-                    break;
-            }
-		}
-
-		private void ChangeWheelTuneLeft()
-		{
-			// change mouse wheel tuning step one digit to the left
-			wheel_tune_index = (wheel_tune_index+1)%wheel_tune_list.Length;
-			switch(wheel_tune_index)
-			{
-				case 0: 
-					txtWheelTune.Text = "1Hz";
-					break;
-				case 1:
-					txtWheelTune.Text = "10Hz";
-					break;
-				case 2:
-					txtWheelTune.Text = "50Hz";
-					break;
-				case 3: 
-					txtWheelTune.Text = "100Hz";
-					break;
-				case 4:
-					txtWheelTune.Text = "250Hz";
-					break;
-				case 5:
-					txtWheelTune.Text = "500Hz";
-					break;
-				case 6: 
-					txtWheelTune.Text = "1kHz";
-					break;
-				case 7:
-					txtWheelTune.Text = "5kHz";
-					break;
-				case 8:
-					txtWheelTune.Text = "9kHz";
-					break;
-				case 9:
-					txtWheelTune.Text = "10kHz";
-					break;
-				case 10:
-					txtWheelTune.Text = "100kHz";
-					break;
-                case 11:
-                    txtWheelTune.Text = "250kHz";
-                    break;
-                case 12:
-                    txtWheelTune.Text = "500kHz";
-                    break;
-				case 13:
-					txtWheelTune.Text = "1MHz";
-					break;
-				case 14:
-					txtWheelTune.Text = "10MHz";
-					break;
-			}
-		}
-
-		private void ChangeWheelTuneRight()
-		{
-			// change mouse wheel tuning step one digit to the right
-			int length = wheel_tune_list.Length;
-			wheel_tune_index = (wheel_tune_index-1 + length)%length;
-			switch(wheel_tune_index)
-			{
-				case 0: 
-					txtWheelTune.Text = "1Hz";
-					break;
-				case 1:
-					txtWheelTune.Text = "10Hz";
-					break;
-				case 2:
-					txtWheelTune.Text = "50Hz";
-					break;
-				case 3: 
-					txtWheelTune.Text = "100Hz";
-					break;
-				case 4:
-					txtWheelTune.Text = "250Hz";
-					break;
-				case 5:
-					txtWheelTune.Text = "500Hz";
-					break;
-				case 6: 
-					txtWheelTune.Text = "1kHz";
-					break;
-				case 7:
-					txtWheelTune.Text = "5kHz";
-					break;
-				case 8:
-					txtWheelTune.Text = "9kHz";
-					break;
-				case 9:
-					txtWheelTune.Text = "10kHz";
-					break;
-				case 10:
-					txtWheelTune.Text = "100kHz";
-					break;
-                case 11:
-                    txtWheelTune.Text = "250kHz";
-                    break;
-                case 12:
-                    txtWheelTune.Text = "500kHz";
-                    break;
-				case 13:
-					txtWheelTune.Text = "1MHz";
-					break;
-				case 14:
-					txtWheelTune.Text = "10MHz";
-					break;
-			}
-		} */
 
         private void ChangeTuneStepUp()
         {
@@ -39185,11 +39005,11 @@ namespace PowerSDR
 
 		private void ckQuickPlay_CheckedChanged(object sender, System.EventArgs e)
 		{
-           if (!mox)
-            {
-                ckQuickPlay.Checked = false;
-                return;
-            }
+          // if (!mox)
+          //  {
+           //     ckQuickPlay.Checked = false;
+           //     return;
+           // }
 			
 			if (ckQuickPlay.Checked)
 			{
@@ -42698,7 +42518,7 @@ namespace PowerSDR
             this.bandToolStripMenuItem.Visible = true;
             this.modeToolStripMenuItem.Visible = true;
             int minWidth = 600;
-            int minHeight = 200;
+            int minHeight = 210;
 
             if (this.showTopControls)
             {

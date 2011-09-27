@@ -6176,7 +6176,7 @@ namespace PowerSDR
                     if (display_cursor_y > H)
                     {
                         g.DrawLine(p, display_cursor_x, H, display_cursor_x, H + H);
-                        g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
+                        if (ShowCTHLine) g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
                     }
                     else g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H + H);               
                 }
@@ -6185,7 +6185,7 @@ namespace PowerSDR
                     if (display_cursor_y <= H)
                     {
                         g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
-                        g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
+                        if (ShowCTHLine) g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
                     }
                 } 
 			}

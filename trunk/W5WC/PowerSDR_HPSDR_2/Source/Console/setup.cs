@@ -9125,29 +9125,29 @@ namespace PowerSDR
             // labelTS59
             // 
             this.labelTS59.Image = null;
-            this.labelTS59.Location = new System.Drawing.Point(9, 217);
+            this.labelTS59.Location = new System.Drawing.Point(5, 217);
             this.labelTS59.Name = "labelTS59";
             this.labelTS59.Size = new System.Drawing.Size(40, 16);
             this.labelTS59.TabIndex = 378;
             this.labelTS59.Text = "VHF11";
-            this.labelTS59.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTS59.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS60
             // 
             this.labelTS60.Image = null;
-            this.labelTS60.Location = new System.Drawing.Point(9, 201);
+            this.labelTS60.Location = new System.Drawing.Point(5, 201);
             this.labelTS60.Name = "labelTS60";
             this.labelTS60.Size = new System.Drawing.Size(40, 16);
             this.labelTS60.TabIndex = 377;
             this.labelTS60.Text = "VHF10";
-            this.labelTS60.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTS60.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS61
             // 
             this.labelTS61.Image = null;
             this.labelTS61.Location = new System.Drawing.Point(6, 185);
             this.labelTS61.Name = "labelTS61";
-            this.labelTS61.Size = new System.Drawing.Size(40, 16);
+            this.labelTS61.Size = new System.Drawing.Size(35, 16);
             this.labelTS61.TabIndex = 376;
             this.labelTS61.Text = "VHF9";
             this.labelTS61.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -9157,7 +9157,7 @@ namespace PowerSDR
             this.labelTS62.Image = null;
             this.labelTS62.Location = new System.Drawing.Point(6, 169);
             this.labelTS62.Name = "labelTS62";
-            this.labelTS62.Size = new System.Drawing.Size(40, 16);
+            this.labelTS62.Size = new System.Drawing.Size(35, 16);
             this.labelTS62.TabIndex = 375;
             this.labelTS62.Text = "VHF8";
             this.labelTS62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -9167,7 +9167,7 @@ namespace PowerSDR
             this.labelTS63.Image = null;
             this.labelTS63.Location = new System.Drawing.Point(6, 153);
             this.labelTS63.Name = "labelTS63";
-            this.labelTS63.Size = new System.Drawing.Size(40, 16);
+            this.labelTS63.Size = new System.Drawing.Size(35, 16);
             this.labelTS63.TabIndex = 374;
             this.labelTS63.Text = "VHF7";
             this.labelTS63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -9177,7 +9177,7 @@ namespace PowerSDR
             this.labelTS64.Image = null;
             this.labelTS64.Location = new System.Drawing.Point(6, 137);
             this.labelTS64.Name = "labelTS64";
-            this.labelTS64.Size = new System.Drawing.Size(40, 16);
+            this.labelTS64.Size = new System.Drawing.Size(35, 16);
             this.labelTS64.TabIndex = 373;
             this.labelTS64.Text = "VHF6";
             this.labelTS64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -9187,7 +9187,7 @@ namespace PowerSDR
             this.labelTS65.Image = null;
             this.labelTS65.Location = new System.Drawing.Point(6, 121);
             this.labelTS65.Name = "labelTS65";
-            this.labelTS65.Size = new System.Drawing.Size(40, 16);
+            this.labelTS65.Size = new System.Drawing.Size(35, 16);
             this.labelTS65.TabIndex = 372;
             this.labelTS65.Text = "VHF5";
             this.labelTS65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -9197,7 +9197,7 @@ namespace PowerSDR
             this.labelTS66.Image = null;
             this.labelTS66.Location = new System.Drawing.Point(6, 105);
             this.labelTS66.Name = "labelTS66";
-            this.labelTS66.Size = new System.Drawing.Size(40, 16);
+            this.labelTS66.Size = new System.Drawing.Size(35, 16);
             this.labelTS66.TabIndex = 371;
             this.labelTS66.Text = "VHF4";
             this.labelTS66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -9207,7 +9207,7 @@ namespace PowerSDR
             this.labelTS67.Image = null;
             this.labelTS67.Location = new System.Drawing.Point(6, 89);
             this.labelTS67.Name = "labelTS67";
-            this.labelTS67.Size = new System.Drawing.Size(40, 16);
+            this.labelTS67.Size = new System.Drawing.Size(35, 16);
             this.labelTS67.TabIndex = 370;
             this.labelTS67.Text = "VHF3";
             this.labelTS67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -9217,7 +9217,7 @@ namespace PowerSDR
             this.labelTS68.Image = null;
             this.labelTS68.Location = new System.Drawing.Point(6, 73);
             this.labelTS68.Name = "labelTS68";
-            this.labelTS68.Size = new System.Drawing.Size(40, 16);
+            this.labelTS68.Size = new System.Drawing.Size(35, 16);
             this.labelTS68.TabIndex = 369;
             this.labelTS68.Text = "VHF2";
             this.labelTS68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -9227,7 +9227,7 @@ namespace PowerSDR
             this.labelTS69.Image = null;
             this.labelTS69.Location = new System.Drawing.Point(6, 57);
             this.labelTS69.Name = "labelTS69";
-            this.labelTS69.Size = new System.Drawing.Size(40, 16);
+            this.labelTS69.Size = new System.Drawing.Size(35, 16);
             this.labelTS69.TabIndex = 368;
             this.labelTS69.Text = "VHF1";
             this.labelTS69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -9237,7 +9237,7 @@ namespace PowerSDR
             this.labelTS70.Image = null;
             this.labelTS70.Location = new System.Drawing.Point(6, 41);
             this.labelTS70.Name = "labelTS70";
-            this.labelTS70.Size = new System.Drawing.Size(40, 16);
+            this.labelTS70.Size = new System.Drawing.Size(35, 16);
             this.labelTS70.TabIndex = 367;
             this.labelTS70.Text = "VHF0";
             this.labelTS70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11352,7 +11352,7 @@ namespace PowerSDR
             this.labelTS28.Image = null;
             this.labelTS28.Location = new System.Drawing.Point(6, 217);
             this.labelTS28.Name = "labelTS28";
-            this.labelTS28.Size = new System.Drawing.Size(40, 16);
+            this.labelTS28.Size = new System.Drawing.Size(32, 16);
             this.labelTS28.TabIndex = 198;
             this.labelTS28.Text = "2m";
             this.labelTS28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11362,7 +11362,7 @@ namespace PowerSDR
             this.labelTS29.Image = null;
             this.labelTS29.Location = new System.Drawing.Point(6, 201);
             this.labelTS29.Name = "labelTS29";
-            this.labelTS29.Size = new System.Drawing.Size(40, 16);
+            this.labelTS29.Size = new System.Drawing.Size(32, 16);
             this.labelTS29.TabIndex = 197;
             this.labelTS29.Text = "6m";
             this.labelTS29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11372,7 +11372,7 @@ namespace PowerSDR
             this.labelTS30.Image = null;
             this.labelTS30.Location = new System.Drawing.Point(6, 185);
             this.labelTS30.Name = "labelTS30";
-            this.labelTS30.Size = new System.Drawing.Size(40, 16);
+            this.labelTS30.Size = new System.Drawing.Size(32, 16);
             this.labelTS30.TabIndex = 196;
             this.labelTS30.Text = "10m";
             this.labelTS30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11382,7 +11382,7 @@ namespace PowerSDR
             this.labelTS31.Image = null;
             this.labelTS31.Location = new System.Drawing.Point(6, 169);
             this.labelTS31.Name = "labelTS31";
-            this.labelTS31.Size = new System.Drawing.Size(40, 16);
+            this.labelTS31.Size = new System.Drawing.Size(32, 16);
             this.labelTS31.TabIndex = 195;
             this.labelTS31.Text = "12m";
             this.labelTS31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11392,7 +11392,7 @@ namespace PowerSDR
             this.labelTS32.Image = null;
             this.labelTS32.Location = new System.Drawing.Point(6, 153);
             this.labelTS32.Name = "labelTS32";
-            this.labelTS32.Size = new System.Drawing.Size(40, 16);
+            this.labelTS32.Size = new System.Drawing.Size(32, 16);
             this.labelTS32.TabIndex = 194;
             this.labelTS32.Text = "15m";
             this.labelTS32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11402,7 +11402,7 @@ namespace PowerSDR
             this.labelTS33.Image = null;
             this.labelTS33.Location = new System.Drawing.Point(6, 137);
             this.labelTS33.Name = "labelTS33";
-            this.labelTS33.Size = new System.Drawing.Size(40, 16);
+            this.labelTS33.Size = new System.Drawing.Size(32, 16);
             this.labelTS33.TabIndex = 193;
             this.labelTS33.Text = "17m";
             this.labelTS33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11412,7 +11412,7 @@ namespace PowerSDR
             this.labelTS34.Image = null;
             this.labelTS34.Location = new System.Drawing.Point(6, 121);
             this.labelTS34.Name = "labelTS34";
-            this.labelTS34.Size = new System.Drawing.Size(40, 16);
+            this.labelTS34.Size = new System.Drawing.Size(32, 16);
             this.labelTS34.TabIndex = 192;
             this.labelTS34.Text = "20m";
             this.labelTS34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11422,7 +11422,7 @@ namespace PowerSDR
             this.labelTS35.Image = null;
             this.labelTS35.Location = new System.Drawing.Point(6, 105);
             this.labelTS35.Name = "labelTS35";
-            this.labelTS35.Size = new System.Drawing.Size(40, 16);
+            this.labelTS35.Size = new System.Drawing.Size(32, 16);
             this.labelTS35.TabIndex = 191;
             this.labelTS35.Text = "30m";
             this.labelTS35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11432,7 +11432,7 @@ namespace PowerSDR
             this.labelTS36.Image = null;
             this.labelTS36.Location = new System.Drawing.Point(6, 89);
             this.labelTS36.Name = "labelTS36";
-            this.labelTS36.Size = new System.Drawing.Size(40, 16);
+            this.labelTS36.Size = new System.Drawing.Size(32, 16);
             this.labelTS36.TabIndex = 190;
             this.labelTS36.Text = "40m";
             this.labelTS36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11442,7 +11442,7 @@ namespace PowerSDR
             this.labelTS37.Image = null;
             this.labelTS37.Location = new System.Drawing.Point(6, 73);
             this.labelTS37.Name = "labelTS37";
-            this.labelTS37.Size = new System.Drawing.Size(40, 16);
+            this.labelTS37.Size = new System.Drawing.Size(32, 16);
             this.labelTS37.TabIndex = 189;
             this.labelTS37.Text = "60m";
             this.labelTS37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11452,7 +11452,7 @@ namespace PowerSDR
             this.labelTS38.Image = null;
             this.labelTS38.Location = new System.Drawing.Point(6, 57);
             this.labelTS38.Name = "labelTS38";
-            this.labelTS38.Size = new System.Drawing.Size(40, 16);
+            this.labelTS38.Size = new System.Drawing.Size(32, 16);
             this.labelTS38.TabIndex = 188;
             this.labelTS38.Text = "80m";
             this.labelTS38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -11462,7 +11462,7 @@ namespace PowerSDR
             this.labelTS41.Image = null;
             this.labelTS41.Location = new System.Drawing.Point(3, 41);
             this.labelTS41.Name = "labelTS41";
-            this.labelTS41.Size = new System.Drawing.Size(40, 16);
+            this.labelTS41.Size = new System.Drawing.Size(35, 16);
             this.labelTS41.TabIndex = 187;
             this.labelTS41.Text = "160m";
             this.labelTS41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
