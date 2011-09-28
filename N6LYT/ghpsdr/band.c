@@ -87,73 +87,73 @@ gboolean displayHF=TRUE;
 */
 /* ----------------------------------------------------------------------------*/
 BANDSTACK_ENTRY bandstack160[] =
-    {{1810000LL,modeCWL,filterF4,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120},
-     {1835000LL,modeCWU,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120},
-     {1845000LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120}};
+    {{1810000LL,modeCWL,filterF4,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
+     {1835000LL,modeCWU,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
+     {1845000LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstack80[] =
-    {{3501000LL,modeCWL,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120},
-     {3751000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120},
-     {3850000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120}};
+    {{3501000LL,modeCWL,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
+     {3751000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
+     {3850000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstack60[] =
-    {{5330500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120},
-     {5346500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120},
-     {5366500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120},
-     {5371500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120},
-     {5403500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120}};
+    {{5330500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
+     {5346500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
+     {5366500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
+     {5371500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
+     {5403500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstack40[] =
-    {{7001000LL,modeCWL,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120},
-     {7152000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120},
-     {7255000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120}};
+    {{7001000LL,modeCWL,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
+     {7152000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
+     {7255000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstack30[] =
-    {{10120000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {10130000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {10140000LL,modeCWU,filterF4,200,2800,200,2800,100,0,-50,-150,10,-90,-120}};
+    {{10120000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {10130000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {10140000LL,modeCWU,filterF4,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstack20[] =
-    {{14010000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {14230000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {14336000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120}};
+    {{14010000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {14230000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {14336000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstack18[] =
-    {{18068600LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {18125000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {18140000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120}};
+    {{18068600LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {18125000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {18140000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstack15[] =
-    {{21001000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {21255000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {21300000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120}};
+    {{21001000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {21255000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {21300000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstack12[] =
-    {{24895000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {24900000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {24910000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120}};
+    {{24895000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {24900000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {24910000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstack10[] =
-    {{28010000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {28300000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120},
-     {28400000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120}};
+    {{28010000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {28300000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
+     {28400000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstack50[] =
-    {{50010000LL,modeCWU,filterF0,200,2800,200,2800,100,1,-50,-150,10,-90,-120},
-     {50125000LL,modeUSB,filterF5,200,2800,200,2800,100,1,-50,-150,10,-90,-120},
-     {50200000LL,modeUSB,filterF5,200,2800,200,2800,100,1,-50,-150,10,-90,-120}};
+    {{50010000LL,modeCWU,filterF0,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0},
+     {50125000LL,modeUSB,filterF5,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0},
+     {50200000LL,modeUSB,filterF5,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstackGEN[] =
-    {{909000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120},
-     {5975000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120},
-     {13845000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120}};
+    {{909000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0},
+     {5975000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0},
+     {13845000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK_ENTRY bandstackWWV[] =
-    {{2500000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120},
-     {5000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120},
-     {10000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120},
-     {15000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120},
-     {20000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120}};
+    {{2500000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0},
+     {5000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0},
+     {10000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0},
+     {15000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0},
+     {20000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0}};
 
 BANDSTACK bandstack[BANDS];
 
@@ -189,19 +189,19 @@ BAND_LIMITS bandLimits[NUM_BAND_LIMITS] = {
 * @brief xvtr
 */
 /* ----------------------------------------------------------------------------*/
-XVTR_ENTRY xvtr[12]=
-    {{"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}};
+static XVTR_ENTRY xvtr[12]=
+    {{"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0}};
 
 void setTuningMode(int mode);
 void setBand(int band);
@@ -310,8 +310,10 @@ void setXVTRTitles() {
     } else {
         gtk_widget_set_sensitive(buttonBand12,TRUE);
     }
+
     gtk_button_set_label((GtkButton*)buttonBand13,"");
     gtk_widget_set_sensitive(buttonBand13,FALSE);
+
     gtk_button_set_label((GtkButton*)buttonBand14,"HF");
 }
 
@@ -327,9 +329,10 @@ void setXVTRTitles() {
 void selectBand(GtkWidget* widget) {
     GtkWidget* label;
     BANDSTACK_ENTRY* entry;
-    XVTR_ENTRY* xvtr_entry;
+    //XVTR_ENTRY* xvtr_entry;
     int current;
 
+fprintf(stderr,"selectBand\n");
     resetSubRx();
 
     if(currentBandButton) {
@@ -344,6 +347,7 @@ void selectBand(GtkWidget* widget) {
     //save current
     if(currentBandButton) {
         if(displayHF) {
+fprintf(stderr,"selectBand: save current HF band %d\n",band);
             currentHFButton=currentBandButton;
             current=bandstack[band].current_entry;
             entry=&bandstack[band].entry[current];
@@ -361,24 +365,31 @@ void selectBand(GtkWidget* widget) {
             entry->spectrumStep=spectrumSTEP;
             entry->waterfallHigh=waterfallHighThreshold;
             entry->waterfallLow=waterfallLowThreshold;
+            entry->alexRxAntenna=alexRxAntenna;
+            entry->alexRxOnlyAntenna=alexRxOnlyAntenna;
+            entry->alexTxAntenna=alexTxAntenna;
         } else {
+fprintf(stderr,"selectBand: save current XVTR band %d\n",xvtr_band);
             currentXVTRButton=currentBandButton;
-            xvtr_entry=&xvtr[xvtr_band];
-            xvtr_entry->rxFrequency=frequencyA;
-            xvtr_entry->txFrequency=frequencyB;
-            xvtr_entry->mode=mode;
-            xvtr_entry->filter=filter;
-            xvtr_entry->var1Low=filterVar1Low;
-            xvtr_entry->var1High=filterVar1High;
-            xvtr_entry->var2Low=filterVar2Low;
-            xvtr_entry->var2High=filterVar2High;
-            xvtr_entry->step=frequencyIncrement;
-            xvtr_entry->preamp=preamp;
-            xvtr_entry->spectrumHigh=spectrumMAX;
-            xvtr_entry->spectrumLow=spectrumMIN;
-            xvtr_entry->spectrumStep=spectrumSTEP;
-            xvtr_entry->waterfallHigh=waterfallHighThreshold;
-            xvtr_entry->waterfallLow=waterfallLowThreshold;
+            //xvtr_entry=&xvtr[xvtr_band];
+            xvtr[xvtr_band].rxFrequency=frequencyA;
+            xvtr[xvtr_band].txFrequency=frequencyB;
+            xvtr[xvtr_band].mode=mode;
+            xvtr[xvtr_band].filter=filter;
+            xvtr[xvtr_band].var1Low=filterVar1Low;
+            xvtr[xvtr_band].var1High=filterVar1High;
+            xvtr[xvtr_band].var2Low=filterVar2Low;
+            xvtr[xvtr_band].var2High=filterVar2High;
+            xvtr[xvtr_band].step=frequencyIncrement;
+            xvtr[xvtr_band].preamp=preamp;
+            xvtr[xvtr_band].spectrumHigh=spectrumMAX;
+            xvtr[xvtr_band].spectrumLow=spectrumMIN;
+            xvtr[xvtr_band].spectrumStep=spectrumSTEP;
+            xvtr[xvtr_band].waterfallHigh=waterfallHighThreshold;
+            xvtr[xvtr_band].waterfallLow=waterfallLowThreshold;
+            xvtr[xvtr_band].alexRxAntenna=alexRxAntenna;
+            xvtr[xvtr_band].alexRxOnlyAntenna=alexRxOnlyAntenna;
+            xvtr[xvtr_band].alexTxAntenna=alexTxAntenna;
         }
     }
 
@@ -457,6 +468,11 @@ void selectBand(GtkWidget* widget) {
             spectrumSTEP=entry->spectrumStep;
             waterfallHighThreshold=entry->waterfallHigh;
             waterfallLowThreshold=entry->waterfallLow;
+
+fprintf(stderr,"entry\n");
+            setAlexRxAntenna(entry->alexRxAntenna);
+            setAlexRxOnlyAntenna(entry->alexRxOnlyAntenna);
+            setAlexTxAntenna(entry->alexTxAntenna);
         } else {
             currentBandButton=widget;
 
@@ -486,25 +502,39 @@ void selectBand(GtkWidget* widget) {
                 xvtr_band=bandGen;
             }
 
-            xvtr_entry=&xvtr[xvtr_band];
-            setMode(xvtr_entry->mode);
-            filterVar1Low=xvtr_entry->var1Low;
-            filterVar1High=xvtr_entry->var1High;
-            filterVar2Low=xvtr_entry->var2Low;
-            filterVar2High=xvtr_entry->var2High;
-            setFilter(xvtr_entry->filter);
-            setLOFrequency(xvtr_entry->rxFrequencyLO);
-            setAFrequency(xvtr_entry->rxFrequency);
-            setIncrement(xvtr_entry->step);
+fprintf(stderr,"xvtr_band=%d name=%s\n",xvtr_band,xvtr[xvtr_band].name);
+fprintf(stderr,"xvtr[%d]: spectrumLow=%d spectrumHigh=%d\n",
+               xvtr_band,
+               xvtr[xvtr_band].spectrumLow,
+               xvtr[xvtr_band].spectrumHigh);
+fprintf(stderr,"xvtr[%d]: alexRxAntenna=%d alexRxOnlyAntenna=%d alexTxAntenna=%d\n",
+               xvtr_band,
+               xvtr[xvtr_band].alexRxAntenna,
+               xvtr[xvtr_band].alexRxOnlyAntenna,
+               xvtr[xvtr_band].alexTxAntenna);
+            //xvtr_entry=&xvtr[xvtr_band];
+            setMode(xvtr[xvtr_band].mode);
+            filterVar1Low=xvtr[xvtr_band].var1Low;
+            filterVar1High=xvtr[xvtr_band].var1High;
+            filterVar2Low=xvtr[xvtr_band].var2Low;
+            filterVar2High=xvtr[xvtr_band].var2High;
+            setFilter(xvtr[xvtr_band].filter);
+            setLOFrequency(xvtr[xvtr_band].rxFrequencyLO);
+            setAFrequency(xvtr[xvtr_band].rxFrequency);
+            setIncrement(xvtr[xvtr_band].step);
 
-            setPreamp(xvtr_entry->preamp);
-            forcePreamp(xvtr_entry->preamp);
+            setPreamp(xvtr[xvtr_band].preamp);
+            forcePreamp(xvtr[xvtr_band].preamp);
 
-            spectrumMAX=xvtr_entry->spectrumHigh;
-            spectrumMIN=xvtr_entry->spectrumLow;
-            spectrumSTEP=xvtr_entry->spectrumStep;
-            waterfallHighThreshold=xvtr_entry->waterfallHigh;
-            waterfallLowThreshold=xvtr_entry->waterfallLow;
+            spectrumMAX=xvtr[xvtr_band].spectrumHigh;
+            spectrumMIN=xvtr[xvtr_band].spectrumLow;
+            spectrumSTEP=xvtr[xvtr_band].spectrumStep;
+            waterfallHighThreshold=xvtr[xvtr_band].waterfallHigh;
+            waterfallLowThreshold=xvtr[xvtr_band].waterfallLow;
+
+            setAlexRxAntenna(xvtr[xvtr_band].alexRxAntenna);
+            setAlexRxOnlyAntenna(xvtr[xvtr_band].alexRxOnlyAntenna);
+            setAlexTxAntenna(xvtr[xvtr_band].alexTxAntenna);
 
         }
     }
@@ -590,9 +620,10 @@ int remoteSetBand(gpointer *data) {
 * @param b -- band value.
 */
 /* ----------------------------------------------------------------------------*/
-void forceBand(int b) {
+void forceBand(int b,int setup) {
     GtkWidget* label;
     GtkWidget* widget;
+fprintf(stderr,"forceBand %d\n",b);
     switch(b) {
         case band160:
             widget=buttonBand1;
@@ -644,13 +675,33 @@ void forceBand(int b) {
     label=gtk_bin_get_child((GtkBin*)widget);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
 
-    currentBandButton=widget;
 
     if(displayHF) {
         band=b;
     } else {
         xvtr_band=b;
+fprintf(stderr,"forceBand: xvtr_band=%d\n",xvtr_band);
+fprintf(stderr,"forceBand: %d,%d,%d %d,%d,%d\n",
+               xvtr[xvtr_band].alexRxAntenna,
+               xvtr[xvtr_band].alexRxOnlyAntenna,
+               xvtr[xvtr_band].alexTxAntenna,
+               alexRxAntenna,
+               alexRxOnlyAntenna,
+               alexTxAntenna);
+
+        if(setup) {
+            setAlexRxAntenna(alexRxAntenna);
+            setAlexRxOnlyAntenna(alexRxOnlyAntenna);
+            setAlexTxAntenna(alexTxAntenna);
+        } else {
+            setAlexRxAntenna(xvtr[xvtr_band].alexRxAntenna);
+            setAlexRxOnlyAntenna(xvtr[xvtr_band].alexRxOnlyAntenna);
+            setAlexTxAntenna(xvtr[xvtr_band].alexTxAntenna);
+        }
+
     }
+
+    currentBandButton=widget;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -808,7 +859,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_show(buttonBand14);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand14,1,2,3,4);
 
-    configureXVTRButton();
+    configureXVTRButton(FALSE);
 
     if(!displayHF) {
         setXVTRTitles();
@@ -856,7 +907,7 @@ void bandSaveState() {
     char string[128];
     int current;
     BANDSTACK_ENTRY* entry;
-    XVTR_ENTRY* xvtr_entry;
+    //XVTR_ENTRY* xvtr_entry;
 
     //save current band info
     if(displayHF) {
@@ -876,22 +927,29 @@ void bandSaveState() {
         entry->spectrumStep=spectrumSTEP;
         entry->waterfallHigh=waterfallHighThreshold;
         entry->waterfallLow=waterfallLowThreshold;
+        entry->alexRxAntenna=alexRxAntenna;
+        entry->alexRxOnlyAntenna=alexRxOnlyAntenna;
+        entry->alexTxAntenna=alexTxAntenna;
     } else {
-        xvtr_entry=&xvtr[xvtr_band];
-        xvtr_entry->rxFrequency=frequencyA;
-        xvtr_entry->txFrequency=frequencyB;
-        xvtr_entry->mode=mode;
-        xvtr_entry->filter=filter;
-        xvtr_entry->var1Low=filterVar1Low;
-        xvtr_entry->var1High=filterVar1High;
-        xvtr_entry->var2Low=filterVar2Low;
-        xvtr_entry->var2High=filterVar2High;
-        xvtr_entry->step=frequencyIncrement;
-        xvtr_entry->preamp=preamp;
-        xvtr_entry->spectrumHigh=spectrumMAX;
-        xvtr_entry->spectrumLow=spectrumMIN;
-        xvtr_entry->spectrumStep=spectrumSTEP;
-        xvtr_entry->waterfallHigh=waterfallHighThreshold;
+        //xvtr_entry=&xvtr[xvtr_band];
+        xvtr[xvtr_band].rxFrequency=frequencyA;
+        xvtr[xvtr_band].txFrequency=frequencyB;
+        xvtr[xvtr_band].mode=mode;
+        xvtr[xvtr_band].filter=filter;
+        xvtr[xvtr_band].var1Low=filterVar1Low;
+        xvtr[xvtr_band].var1High=filterVar1High;
+        xvtr[xvtr_band].var2Low=filterVar2Low;
+        xvtr[xvtr_band].var2High=filterVar2High;
+        xvtr[xvtr_band].step=frequencyIncrement;
+        xvtr[xvtr_band].preamp=preamp;
+        xvtr[xvtr_band].spectrumHigh=spectrumMAX;
+        xvtr[xvtr_band].spectrumLow=spectrumMIN;
+        xvtr[xvtr_band].spectrumStep=spectrumSTEP;
+        xvtr[xvtr_band].waterfallHigh=waterfallHighThreshold;
+        xvtr[xvtr_band].alexRxAntenna=alexRxAntenna;
+        xvtr[xvtr_band].alexRxOnlyAntenna=alexRxOnlyAntenna;
+        xvtr[xvtr_band].alexTxAntenna=alexTxAntenna;
+fprintf(stderr,"bandSaveState: xvtr[%d] %d,%d,%d\n",xvtr_band,alexRxAntenna,alexRxOnlyAntenna,alexTxAntenna);
     }
 
     int b;
@@ -966,6 +1024,17 @@ void bandSaveState() {
             sprintf(name,"band.%d.stack.%d.waterfallLow",b,stack);
             setProperty(name,string);
 
+            sprintf(string,"%d",entry->alexRxAntenna);
+            sprintf(name,"band.%d.stack.%d.alexRxAntenna",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",entry->alexRxOnlyAntenna);
+            sprintf(name,"band.%d.stack.%d.alexRxOnlyAntenna",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",entry->alexTxAntenna);
+            sprintf(name,"band.%d.stack.%d.alexTxAntenna",b,stack);
+            setProperty(name,string);
         }
     }
 
@@ -974,44 +1043,110 @@ void bandSaveState() {
 
     // save xvtr entries
     for(b=0;b<12;b++) {
-        xvtr_entry=&xvtr[b];
+        //xvtr_entry=&xvtr[b];
 
-        if(strcmp(xvtr_entry->name,"")!=0) {
+        if(strcmp(xvtr[b].name,"")!=0) {
             sprintf(name,"xvtr.%d.name",b);
-            setProperty(name,xvtr_entry->name);
+            setProperty(name,xvtr[b].name);
 
-            sprintf(string,"%lld",xvtr_entry->rxFrequency);
+            sprintf(string,"%lld",xvtr[b].rxFrequency);
             sprintf(name,"xvtr.%d.rxFrequency",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->rxFrequencyMin);
+            sprintf(string,"%lld",xvtr[b].rxFrequencyMin);
             sprintf(name,"xvtr.%d.rxFrequencyMin",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->rxFrequencyMax);
+            sprintf(string,"%lld",xvtr[b].rxFrequencyMax);
             sprintf(name,"xvtr.%d.rxFrequencyMax",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->rxFrequencyLO);
+            sprintf(string,"%lld",xvtr[b].rxFrequencyLO);
             sprintf(name,"xvtr.%d.rxFrequencyLO",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->txFrequency);
+            sprintf(string,"%lld",xvtr[b].txFrequency);
             sprintf(name,"xvtr.%d.txFrequency",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->txFrequencyMin);
+            sprintf(string,"%lld",xvtr[b].txFrequencyMin);
             sprintf(name,"xvtr.%d.txFrequencyMin",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->txFrequencyMax);
+            sprintf(string,"%lld",xvtr[b].txFrequencyMax);
             sprintf(name,"xvtr.%d.txFrequencyMax",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->txFrequencyLO);
+            sprintf(string,"%lld",xvtr[b].txFrequencyLO);
             sprintf(name,"xvtr.%d.txFrequencyLO",b);
             setProperty(name,string);
 
+            sprintf(string,"%d",xvtr[b].mode);
+            sprintf(name,"xvtr.%d.mode",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].filter);
+            sprintf(name,"xvtr.%d.filter",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].var1Low);
+            sprintf(name,"xvtr.%d.var1Low",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].var1High);
+            sprintf(name,"xvtr.%d.var1High",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].var2Low);
+            sprintf(name,"xvtr.%d.var2Low",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].var2High);
+            sprintf(name,"xvtr.%d.var2High",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].step);
+            sprintf(name,"xvtr.%d.step",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].preamp);
+            sprintf(name,"xvtr.%d.preamp",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].spectrumHigh);
+            sprintf(name,"xvtr.%d.spectrumHigh",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].spectrumLow);
+            sprintf(name,"xvtr.%d.spectrumLow",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].spectrumStep);
+            sprintf(name,"xvtr.%d.spectrumStep",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].waterfallHigh);
+            sprintf(name,"xvtr.%d.waterfallHigh",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].waterfallLow);
+            sprintf(name,"xvtr.%d.waterfallLow",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",xvtr[b].alexRxAntenna);
+            sprintf(name,"xvtr.%d.alexRxAntenna",b);
+            setProperty(name,string);
+fprintf(stderr,"bandSaveState %s=%s\n",name,string);
+
+            sprintf(string,"%d",xvtr[b].alexRxOnlyAntenna);
+            sprintf(name,"xvtr.%d.alexRxOnlyAntenna",b);
+            setProperty(name,string);
+fprintf(stderr,"bandSaveState %s=%s\n",name,string);
+
+            sprintf(string,"%d",xvtr[b].alexTxAntenna);
+            sprintf(name,"xvtr.%d.alexTxAntenna",b);
+            setProperty(name,string);
+fprintf(stderr,"bandSaveState %s=%s\n",name,string);
         }
     }
 
@@ -1028,7 +1163,7 @@ void bandSaveState() {
 */
 /* ----------------------------------------------------------------------------*/
 
-void configureXVTRButton() {
+void configureXVTRButton(int setup) {
     int i;
     int count=0;
     for(i=0;i<12;i++) {
@@ -1060,10 +1195,10 @@ void configureXVTRButton() {
                     }
                 }
             }
-            forceBand(xvtr_band);
+fprintf(stderr,"configureXVTRButton %d\n",setup);
+            forceBand(xvtr_band,setup);
         }
     }
-
 }
 
 /* --------------------------------------------------------------------------*/
@@ -1079,7 +1214,7 @@ void bandRestoreState() {
     char name[128];
     BANDSTACK_ENTRY* entry;
     int current;
-    XVTR_ENTRY* xvtr_entry;
+    //XVTR_ENTRY* xvtr_entry;
  
     // setup default bandstacks
     bandstack[0].entries=3;
@@ -1193,101 +1328,137 @@ void bandRestoreState() {
             value=getProperty(name);
             if(value) entry->waterfallLow=atoi(value);
 
+            sprintf(name,"band.%d.stack.%d.alexRxAntenna",b,stack);
+            value=getProperty(name);
+            if(value) entry->alexRxAntenna=atoi(value);
+
+            sprintf(name,"band.%d.stack.%d.alexRxOnlyAntenna",b,stack);
+            value=getProperty(name);
+            if(value) entry->alexRxOnlyAntenna=atoi(value);
+
+            sprintf(name,"band.%d.stack.%d.alexTxAntenna",b,stack);
+            value=getProperty(name);
+            if(value) entry->alexTxAntenna=atoi(value);
+
         }
     }
 
     // setup XVTR
     for(b=0;b<12;b++) {
-        xvtr_entry=&xvtr[b];
+        //xvtr_entry=&xvtr[b];
 
         sprintf(name,"xvtr.%d.name",b);
         value=getProperty(name);
         if(value) {
-            strcpy(xvtr_entry->name,value);
+fprintf(stderr,"%s=%s\n",name,value);
+            strcpy(xvtr[b].name,value);
 
             sprintf(name,"xvtr.%d.rxFrequency",b);
             value=getProperty(name);
-            if(value) xvtr_entry->rxFrequency=atoll(value);
+            if(value) xvtr[b].rxFrequency=atoll(value);
 
             sprintf(name,"xvtr.%d.rxFrequencyMin",b);
             value=getProperty(name);
-            if(value) xvtr_entry->rxFrequencyMin=atoll(value);
+            if(value) xvtr[b].rxFrequencyMin=atoll(value);
 
             sprintf(name,"xvtr.%d.rxFrequencyMax",b);
             value=getProperty(name);
-            if(value) xvtr_entry->rxFrequencyMax=atoll(value);
+            if(value) xvtr[b].rxFrequencyMax=atoll(value);
 
             sprintf(name,"xvtr.%d.rxFrequencyLO",b);
             value=getProperty(name);
-            if(value) xvtr_entry->rxFrequencyLO=atoll(value);
+            if(value) xvtr[b].rxFrequencyLO=atoll(value);
 
             sprintf(name,"xvtr.%d.txFrequency",b);
             value=getProperty(name);
-            if(value) xvtr_entry->txFrequency=atoll(value);
+            if(value) xvtr[b].txFrequency=atoll(value);
 
             sprintf(name,"xvtr.%d.txFrequencyMin",b);
             value=getProperty(name);
-            if(value) xvtr_entry->txFrequencyMin=atoll(value);
+            if(value) xvtr[b].txFrequencyMin=atoll(value);
 
             sprintf(name,"xvtr.%d.txFrequencyMax",b);
             value=getProperty(name);
-            if(value) xvtr_entry->txFrequencyMax=atoll(value);
+            if(value) xvtr[b].txFrequencyMax=atoll(value);
 
             sprintf(name,"xvtr.%d.txFrequencyLO",b);
             value=getProperty(name);
-            if(value) xvtr_entry->txFrequencyLO=atoll(value);
+            if(value) xvtr[b].txFrequencyLO=atoll(value);
 
             sprintf(name,"xvtr.%d.mode",b);
             value=getProperty(name);
-            if(value) xvtr_entry->mode=atoi(value);
+            if(value) xvtr[b].mode=atoi(value);
 
             sprintf(name,"xvtr.%d.filter",b);
             value=getProperty(name);
-            if(value) xvtr_entry->filter=atoi(value);
+            if(value) xvtr[b].filter=atoi(value);
 
             sprintf(name,"xvtr.%d.var1Low",b);
             value=getProperty(name);
-            if(value) xvtr_entry->var1Low=atoi(value);
+            if(value) xvtr[b].var1Low=atoi(value);
 
             sprintf(name,"xvtr.%d.var1High",b);
             value=getProperty(name);
-            if(value) xvtr_entry->var1High=atoi(value);
+            if(value) xvtr[b].var1High=atoi(value);
 
             sprintf(name,"xvtr.%d.var2Low",b);
             value=getProperty(name);
-            if(value) xvtr_entry->var2Low=atoi(value);
+            if(value) xvtr[b].var2Low=atoi(value);
 
             sprintf(name,"xvtr.%d.var2High",b);
             value=getProperty(name);
-            if(value) xvtr_entry->var2High=atoi(value);
+            if(value) xvtr[b].var2High=atoi(value);
 
             sprintf(name,"xvtr.%d.step",b);
             value=getProperty(name);
-            if(value) xvtr_entry->step=atoi(value);
+            if(value) xvtr[b].step=atoi(value);
 
             sprintf(name,"xvtr.%d.preamp",b);
             value=getProperty(name);
-            if(value) xvtr_entry->preamp=atoi(value);
+            if(value) xvtr[b].preamp=atoi(value);
 
             sprintf(name,"xvtr.%d.spectrumHigh",b);
             value=getProperty(name);
-            if(value) xvtr_entry->spectrumHigh=atoi(value);
+            if(value) xvtr[b].spectrumHigh=atoi(value);
+fprintf(stderr,"%s=%s\n",name,value);
 
             sprintf(name,"xvtr.%d.spectrumLow",b);
             value=getProperty(name);
-            if(value) xvtr_entry->spectrumLow=atoi(value);
+            if(value) xvtr[b].spectrumLow=atoi(value);
+fprintf(stderr,"%s=%s\n",name,value);
 
             sprintf(name,"xvtr.%d.spectrumStep",b);
             value=getProperty(name);
-            if(value) xvtr_entry->spectrumStep=atoi(value);
+            if(value) xvtr[b].spectrumStep=atoi(value);
     
             sprintf(name,"xvtr.%d.waterfallHigh",b);
             value=getProperty(name);
-            if(value) xvtr_entry->waterfallHigh=atoi(value);
+            if(value) xvtr[b].waterfallHigh=atoi(value);
 
             sprintf(name,"xvtr.%d.waterfallLow",b);
             value=getProperty(name);
-            if(value) xvtr_entry->waterfallLow=atoi(value);
+            if(value) xvtr[b].waterfallLow=atoi(value);
+
+            sprintf(name,"xvtr.%d.alexRxAntenna",b);
+            value=getProperty(name);
+            if(value) xvtr[b].alexRxAntenna=atoi(value);
+fprintf(stderr,"%s=%s\n",name,value);
+
+            sprintf(name,"xvtr.%d.alexRxOnlyAntenna",b);
+            value=getProperty(name);
+            if(value) xvtr[b].alexRxOnlyAntenna=atoi(value);
+fprintf(stderr,"%s=%s\n",name,value);
+
+            sprintf(name,"xvtr.%d.alexTxAntenna",b);
+            value=getProperty(name);
+            if(value) xvtr[b].alexTxAntenna=atoi(value);
+fprintf(stderr,"%s=%s\n",name,value);
+
+fprintf(stderr,"xvtr[%d] %d,%d,%d\n",
+               b,
+               xvtr[b].alexRxAntenna,
+               xvtr[b].alexRxOnlyAntenna,
+               xvtr[b].alexTxAntenna);
         }
 
     }
@@ -1321,4 +1492,34 @@ BAND_LIMITS* getBandLimits(long long minDisplay,long long maxDisplay) {
 
 XVTR_ENTRY* getXvtrEntry(int i) {
     return &xvtr[i];
+}
+
+void bandSetAlexRxAntenna(int a) {
+    int current;
+    current=bandstack[band].current_entry;
+    if(displayHF) {
+        bandstack[band].entry[current].alexRxAntenna=a;
+    } else {
+        xvtr[xvtr_band].alexRxAntenna=0;
+    }    
+}
+
+void bandSetAlexRxOnlyAntenna(int a) {
+    int current;
+    current=bandstack[band].current_entry;
+    if(displayHF) {
+        bandstack[band].entry[current].alexRxOnlyAntenna=a;
+    } else {
+        xvtr[xvtr_band].alexRxOnlyAntenna=0;
+    }    
+}
+
+void bandSetAlexTxAntenna(int a) {
+    int current;
+    current=bandstack[band].current_entry;
+    if(displayHF) {
+        bandstack[band].entry[current].alexTxAntenna=a;
+    } else {
+        xvtr[xvtr_band].alexTxAntenna=0;
+    }    
 }

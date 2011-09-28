@@ -48,6 +48,7 @@ GtkWidget* spectrumStepSpinButton;
 GtkWidget* spectrumRateLabel;
 GtkWidget* spectrumRateSpinButton;
 
+GtkWidget* waterfallAutomaticCheckButton;
 GtkWidget* waterfallHighLabel;
 GtkWidget* waterfallHighSpinButton;
 GtkWidget* waterfallLowLabel;
@@ -73,14 +74,15 @@ void spectrumHighChanged(GtkSpinButton* spinButton,gpointer data);
 void spectrumLowChanged(GtkSpinButton* spinButton,gpointer data);
 void spectrumStepChanged(GtkSpinButton* spinButton,gpointer data);
 void spectrumRateChanged(GtkSpinButton* spinButton,gpointer data);
+void waterfallAutomaticChanged(GtkToggleButton* toggleButton,gpointer data);
 void waterfallHighChanged(GtkSpinButton* spinButton,gpointer data);
 void waterfallLowChanged(GtkSpinButton* spinButton,gpointer data);
 void bandscopeHighChanged(GtkSpinButton* spinButton,gpointer data);
 void bandscopeLowChanged(GtkSpinButton* spinButton,gpointer data);
 void cwPitchChanged(GtkSpinButton* spinButton,gpointer data);
-void spectrumAverageChanged(GtkToggleButton* spinButton,gpointer data);
+void spectrumAverageChanged(GtkToggleButton* toggleButton,gpointer data);
 void spectrumSmoothingChanged(GtkSpinButton* spinButton,gpointer data);
-void bandscopeAverageChanged(GtkToggleButton* spinButton,gpointer data);
+void bandscopeAverageChanged(GtkToggleButton* toggleButton,gpointer data);
 void bandscopeSmoothingChanged(GtkSpinButton* spinButton,gpointer data);
 
 /* --------------------------------------------------------------------------*/
@@ -129,88 +131,95 @@ GtkWidget* displaySetupUI() {
 
 
         // add waterfall controls
+        waterfallAutomaticCheckButton=gtk_check_button_new_with_label("Waterfall Automatic");
+        gtk_toggle_button_set_active((GtkToggleButton*)waterfallAutomaticCheckButton,(gboolean)waterfallAutomatic);
+        gtk_widget_show(waterfallAutomaticCheckButton);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,waterfallAutomaticCheckButton,250,140);
+        g_signal_connect(G_OBJECT(waterfallAutomaticCheckButton),"toggled",G_CALLBACK(waterfallAutomaticChanged),NULL);
+
+
         waterfallHighLabel=gtk_label_new("Waterfall High");
         gtk_widget_show(waterfallHighLabel);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,waterfallHighLabel,10,140);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,waterfallHighLabel,10,170);
         waterfallHighSpinButton=gtk_spin_button_new_with_range(-200,200,5);
         gtk_spin_button_set_value((GtkSpinButton*)waterfallHighSpinButton,(double)waterfallHighThreshold);
         g_signal_connect(G_OBJECT(waterfallHighSpinButton),"value-changed",G_CALLBACK(waterfallHighChanged),NULL);
         gtk_widget_show(waterfallHighSpinButton);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,waterfallHighSpinButton,250,140);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,waterfallHighSpinButton,250,170);
 
         waterfallLowLabel=gtk_label_new("Waterfall Low");
         gtk_widget_show(waterfallLowLabel);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,waterfallLowLabel,10,170);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,waterfallLowLabel,10,200);
         waterfallLowSpinButton=gtk_spin_button_new_with_range(-200,200,5);
         gtk_spin_button_set_value((GtkSpinButton*)waterfallLowSpinButton,(double)waterfallLowThreshold);
         g_signal_connect(G_OBJECT(waterfallLowSpinButton),"value-changed",G_CALLBACK(waterfallLowChanged),NULL);
         gtk_widget_show(waterfallLowSpinButton);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,waterfallLowSpinButton,250,170);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,waterfallLowSpinButton,250,200);
 
         // add bandscope controls
         bandscopeHighLabel=gtk_label_new("Bandscope High");
         gtk_widget_show(bandscopeHighLabel);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeHighLabel,10,210);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeHighLabel,10,240);
         bandscopeHighSpinButton=gtk_spin_button_new_with_range(-200,200,5);
         gtk_spin_button_set_value((GtkSpinButton*)bandscopeHighSpinButton,(double)bandscopeMAX);
         g_signal_connect(G_OBJECT(bandscopeHighSpinButton),"value-changed",G_CALLBACK(bandscopeHighChanged),NULL);
         gtk_widget_show(bandscopeHighSpinButton);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeHighSpinButton,250,210);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeHighSpinButton,250,240);
 
         bandscopeLowLabel=gtk_label_new("Bandscope Low");
         gtk_widget_show(bandscopeLowLabel);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeLowLabel,10,240);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeLowLabel,10,270);
         bandscopeLowSpinButton=gtk_spin_button_new_with_range(-200,200,5);
         gtk_spin_button_set_value((GtkSpinButton*)bandscopeLowSpinButton,(double)bandscopeMIN);
         g_signal_connect(G_OBJECT(bandscopeLowSpinButton),"value-changed",G_CALLBACK(bandscopeLowChanged),NULL);
         gtk_widget_show(bandscopeLowSpinButton);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeLowSpinButton,250,240);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeLowSpinButton,250,270);
 
         // add cw pitch
         cwPitchLabel=gtk_label_new("CW Pitch");
         gtk_widget_show(cwPitchLabel);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,cwPitchLabel,10,280);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,cwPitchLabel,10,310);
         cwPitchSpinButton=gtk_spin_button_new_with_range(200,1000,50);
         gtk_spin_button_set_value((GtkSpinButton*)cwPitchSpinButton,(double)cwPitch);
         g_signal_connect(G_OBJECT(cwPitchSpinButton),"value-changed",G_CALLBACK(cwPitchChanged),NULL);
         gtk_widget_show(cwPitchSpinButton);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,cwPitchSpinButton,250,280);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,cwPitchSpinButton,250,310);
 
         // add Spectrum Average checkbox
         spectrumAverageCheckButton=gtk_check_button_new_with_label("Spectrum Averaging");
         gtk_toggle_button_set_active((GtkToggleButton*)spectrumAverageCheckButton,(gboolean)spectrumAverage);
         gtk_widget_show(spectrumAverageCheckButton);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,spectrumAverageCheckButton,250,320);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,spectrumAverageCheckButton,250,350);
         g_signal_connect(G_OBJECT(spectrumAverageCheckButton),"toggled",G_CALLBACK(spectrumAverageChanged),NULL);
 
         // add Spectrum Smoothing
         spectrumSmoothingLabel=gtk_label_new("SpectrumAverage Smoothing");
         gtk_widget_show(spectrumSmoothingLabel);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,spectrumSmoothingLabel,10,360);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,spectrumSmoothingLabel,10,390);
         spectrumSmoothingSpinButton=gtk_spin_button_new_with_range(0.0,1.0,0.1);
         gtk_spin_button_set_value((GtkSpinButton*)spectrumSmoothingSpinButton,(double)spectrumAverageSmoothing);
         g_signal_connect(G_OBJECT(spectrumSmoothingSpinButton),"value-changed",G_CALLBACK(spectrumSmoothingChanged),NULL);
         gtk_widget_show(spectrumSmoothingSpinButton);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,spectrumSmoothingSpinButton,250,360);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,spectrumSmoothingSpinButton,250,390);
 
         // add Bandscope Average checkbox
         bandscopeAverageCheckButton=gtk_check_button_new_with_label("Bandscope Averaging");
         gtk_toggle_button_set_active((GtkToggleButton*)bandscopeAverageCheckButton,(gboolean)bandscopeAverage);
         gtk_widget_show(bandscopeAverageCheckButton);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeAverageCheckButton,250,400);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeAverageCheckButton,250,430);
         g_signal_connect(G_OBJECT(bandscopeAverageCheckButton),"toggled",G_CALLBACK(bandscopeAverageChanged),NULL);
 
         // add Bandscope Smoothing
         bandscopeSmoothingLabel=gtk_label_new("Bandscope Average Smoothing");
         gtk_widget_show(bandscopeSmoothingLabel);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeSmoothingLabel,10,440);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeSmoothingLabel,10,470);
         bandscopeSmoothingSpinButton=gtk_spin_button_new_with_range(0.0,1.0,0.1);
         gtk_spin_button_set_value((GtkSpinButton*)bandscopeSmoothingSpinButton,(double)bandscopeAverageSmoothing);
         g_signal_connect(G_OBJECT(bandscopeSmoothingSpinButton),"value-changed",G_CALLBACK(bandscopeSmoothingChanged),NULL);
         gtk_widget_show(bandscopeSmoothingSpinButton);
-        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeSmoothingSpinButton,250,440);
+        gtk_fixed_put((GtkFixed*)setupDisplayFixed,bandscopeSmoothingSpinButton,250,470);
 
-        gtk_widget_set_size_request(GTK_WIDGET(setupDisplayFixed),600,480);
+        gtk_widget_set_size_request(GTK_WIDGET(setupDisplayFixed),600,510);
         gtk_widget_show(setupDisplayFixed);
 
     return setupDisplayFixed;
@@ -259,6 +268,17 @@ void spectrumStepChanged(GtkSpinButton* spinButton,gpointer data) {
 */
 void spectrumRateChanged(GtkSpinButton* spinButton,gpointer data) {
     setSpectrumUpdateRate(gtk_spin_button_get_value(spinButton));
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Waterfall automatic changed
+* 
+* @param spinButton
+* @param data
+*/
+void waterfallAutomaticChanged(GtkToggleButton* button,gpointer data) {
+    waterfallAutomatic=gtk_toggle_button_get_active(button);
 }
 
 /* --------------------------------------------------------------------------*/

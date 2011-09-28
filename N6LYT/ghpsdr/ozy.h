@@ -68,6 +68,16 @@ extern "C" {
 #define LT2208_RANDOM_OFF         0x00
 #define LT2208_RANDOM_ON          0x10
 
+int penelopeForwardPower;
+int alexForwardPower;
+int alexReversePower;
+int AIN3;
+int AIN4;
+int AIN6;
+int IO1; // 1 is inactive
+int IO2;
+int IO3;
+
 int speed;
 int class;
 int lt2208Dither;
@@ -82,11 +92,22 @@ int sampleRate;
 
 int mox;
 
-int forwardPower;
+int pennyLane;
+
+#define BUFFER_SIZE 1024
+
+int buffer_size;
+
+int alexRxAntenna;
+int alexTxAntenna;
+int alexRxOnlyAntenna;
+
 
 void ozy_set_metis();
 void ozy_set_interface(char*);
 char* ozy_get_interface();
+void setPennyLane(int);
+void setDriveLevelChanged(int);
 
 
 /* --------------------------------------------------------------------------*/
@@ -220,6 +241,11 @@ void ozyRestoreState();
 * @return
 */
 void setSpeed(int s);
+
+
+void setAlexRxAntenna(int a);
+void setAlexTxAntenna(int a);
+void setAlexRxOnlyAntenna(int a);
 
 #ifdef	__cplusplus
 }

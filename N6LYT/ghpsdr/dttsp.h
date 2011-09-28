@@ -169,3 +169,7 @@ extern int SetRXOutputGain(unsigned int thread, unsigned subrx, double gain);
 * @return 
 */
 extern int SetRXPan(unsigned int thread, unsigned subrx, float pos);
+
+
+extern void NewKeyer (float freq, int niambic, float gain, float ramp, float wpm, float SampleRate);
+

@@ -50,6 +50,7 @@ int spectrumMAX;
 int spectrumMIN;
 int spectrumSTEP;
 
+gboolean waterfallAutomatic;
 float waterfallHighThreshold;
 float waterfallLowThreshold;
 

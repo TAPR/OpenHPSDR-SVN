@@ -1,9 +1,9 @@
 /** 
-* @file transmit.h
-* @brief Tranmsit files for GHPSDR
+* @file alex_tx_test.h
+* @brief Alex Rx Test functions
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
-* @date 2009-04-11
+* @date 2009-04-12
 */
 
 
@@ -25,20 +25,14 @@
 * 
 */
 
-double rfGain;
-double micGain;
 
-int tuning;
-double tuningPhase;
+//
+// alex_tx_test.h
+//
 
-int testing;
-
-int fullDuplex;
-
-/* --------------------------------------------------------------------------*/
 /** 
-* @brief Build Transmit User Interface 
-* 
-* @return GtkWidget pointer 
+* @brief  Alex Tx Test UI
 */
-GtkWidget* buildTransmitUI();
+GtkWidget* alexTxTestUI();
+
+void alex_tx_test_load(char* filename);

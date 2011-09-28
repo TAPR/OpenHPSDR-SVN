@@ -33,6 +33,7 @@
 #include "display_setup.h"
 #include "hpsdr_setup.h"
 #include "xvtr_setup.h"
+#include "alex_setup.h"
 
 GtkWidget* setupWindow=NULL;
 GtkWidget* setupNotebook;
@@ -71,6 +72,10 @@ void ghpsdr_setup() {
         gtk_notebook_append_page(GTK_NOTEBOOK(setupNotebook),page,gtk_label_new("XVTR"));
         gtk_widget_show(page);
 
+        page=alexSetupUI();
+        gtk_notebook_append_page(GTK_NOTEBOOK(setupNotebook),page,gtk_label_new("Alex"));
+        gtk_widget_show(page);
+
         //hardwareInit();
         //clock122_88Init();
         //clock10Init();
@@ -90,7 +95,7 @@ void ghpsdr_setup() {
 */
 void quitSetup() {
     saveXvtrSettings();
-    configureXVTRButton();
+    configureXVTRButton(TRUE);
     gtk_widget_destroy(setupWindow);
     setupWindow=NULL;
 }

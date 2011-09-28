@@ -375,7 +375,8 @@ void setAFrequency(long long f) {
         int thisBand=getBand(f);
         if(band!=thisBand) {
             if(band!=-1) {
-                forceBand(thisBand);
+fprintf(stderr,"setAFrequency\n");
+                forceBand(thisBand,FALSE);
             }
         }
     }
@@ -1144,7 +1145,7 @@ void vfoRestoreState() {
 int vfoTransmit(gpointer data) {
     int state=*(int*)data;
 
-fprintf(stderr,"vfoTransmit: %d\n",state);
+//fprintf(stderr,"vfoTransmit: %d\n",state);
 
     free(data);
 

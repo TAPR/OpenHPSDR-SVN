@@ -55,11 +55,16 @@ gboolean displayHF;
 
 void bandSaveState();
 void bandRestoreState();
-void forceBand(int band);
-void configureXVTRButton();
+void forceBand(int band,int setup);
+void configureXVTRButton(int setup);
 GtkWidget* buildBandUI();
 
 int remoteSetBand(gpointer *data);
 
+void bandSetAlexRxAntenna(int a);
+void bandSetAlexRxOnlyAntenna(int a);
+void bandSetAlexTxAntenna(int a);
+
 BAND_LIMITS* getBandLimits(long long minDisplay,long long maxDisplay);
 XVTR_ENTRY* getXvtrEntry(int i);
+

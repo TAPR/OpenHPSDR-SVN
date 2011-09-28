@@ -43,6 +43,9 @@ struct _BANDSTACK_ENTRY {
     int spectrumStep;
     int waterfallHigh;
     int waterfallLow;
+    int alexRxAntenna;
+    int alexRxOnlyAntenna;
+    int alexTxAntenna;
 };
 
 typedef struct _BANDSTACK_ENTRY BANDSTACK_ENTRY;

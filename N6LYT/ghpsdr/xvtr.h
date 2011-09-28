@@ -52,6 +52,9 @@ struct _XVTR_ENTRY {
     int spectrumStep;
     int waterfallHigh;
     int waterfallLow;
+    int alexRxAntenna;
+    int alexRxOnlyAntenna;
+    int alexTxAntenna;
 };
 
 typedef struct _XVTR_ENTRY XVTR_ENTRY;

@@ -24,6 +24,9 @@
 * 
 */
 
+
+//#define ALEX_TEST
+
 GdkColor background;
 GdkColor buttonBackground;
 GdkColor bandButtonBackground;
@@ -40,6 +43,8 @@ GdkColor subrxFilterColor;
 GdkColor verticalColor;
 GdkColor horizontalColor;
 GdkColor spectrumTextColor;
+
+GtkWidget* mainWindow;
 
 char propertiesPath[128];
 

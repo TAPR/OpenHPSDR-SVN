@@ -36,5 +36,5 @@
 #else
 #define BUTTON_WIDTH 50
 #define BUTTON_HEIGHT 25
-#define LARGE_BUTTON_WIDTH 100
+#define LARGE_BUTTON_WIDTH 60
 #endif

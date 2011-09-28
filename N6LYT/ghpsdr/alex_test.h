@@ -1,9 +1,9 @@
 /** 
-* @file transmit.h
-* @brief Tranmsit files for GHPSDR
+* @file alex_test.h
+* @brief Alex Test
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
-* @date 2009-04-11
+* @date 2009-04-12
 */
 
 
@@ -25,20 +25,26 @@
 * 
 */
 
-double rfGain;
-double micGain;
 
-int tuning;
-double tuningPhase;
+//
+// alex_test.h
+//
 
-int testing;
+struct _ALEX_TEST {
+    int id;
+    long long frequency;
+    int rf_det_level;
+    int rf_fwd_level;
+    int rf_rev_level;
+    char rf_source[8];
+    char rf_min_level[64];
+    char rf_max_level[64];
+    char description[64];
+    GtkWidget* testWidget;
+    GtkWidget* frequencyWidget;
+    GtkWidget* levelWidget;
+    char pause[64];
+};
 
-int fullDuplex;
+typedef struct _ALEX_TEST ALEX_TEST;
 
-/* --------------------------------------------------------------------------*/
-/** 
-* @brief Build Transmit User Interface 
-* 
-* @return GtkWidget pointer 
-*/
-GtkWidget* buildTransmitUI();

@@ -52,11 +52,13 @@ GtkWidget* rfGainScale;
 GtkWidget* micGainFrame;
 GtkWidget* micGainScale;
 
-double rfGain=0.1;
+double rfGain=255.0;
 double micGain=1.0;
 
 int tuning=0;
 double tuningPhase=0;
+
+int testing=0;
 
 int fullDuplex=1;
 
@@ -125,7 +127,6 @@ void tuneButtonCallback(GtkWidget* widget,gpointer data) {
 
 fprintf(stderr,"tuneButtonCallback: %d\n", state);
 
-    //vfoTransmit(state);
     int *vfoState=malloc(sizeof(int));
     *vfoState=state;
 fprintf(stderr,"g_idle_add: vfoTransmit\n");
@@ -180,6 +181,7 @@ fprintf(stderr,"g_idle_add: vfoTransmit\n");
 */
 void rfGainChanged(GtkWidget* widget,gpointer data) {
     rfGain=gtk_range_get_value((GtkRange*)rfGainScale);
+    setDriveLevelChanged((int)rfGain);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -239,7 +241,7 @@ GtkWidget* buildTransmitUI() {
     gtk_widget_modify_bg(rfGainFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(rfGainFrame)),GTK_STATE_NORMAL,&white);
 
-    rfGainScale=gtk_hscale_new_with_range(0.1,0.5,0.01);
+    rfGainScale=gtk_hscale_new_with_range(0,255,1);
 
     g_signal_connect(G_OBJECT(rfGainScale),"value-changed",G_CALLBACK(rfGainChanged),NULL);
     gtk_range_set_value((GtkRange*)rfGainScale,rfGain);
