@@ -556,8 +556,8 @@ void selectFilter(GtkWidget* widget) {
             break;
     }
     
-    //sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
-    //writeCommand(temp);
+    //fprintf(stderr,"setFilter %d %d\n",filterLow,filterHigh);
+
     SetRXFilter(0,0,(double)filterLow,(double)filterHigh);
     SetRXFilter(0,1,(double)filterLow,(double)filterHigh);
     SetTXFilter(1,(double)filterLow,(double)filterHigh);

@@ -48,7 +48,7 @@ int mercury_software_version=0;
 int penelope_software_version=0;
 int ozy_software_version=0;
 
-int forwardPower=0;
+int penelopeForwardPower=0;
 int alexForwardPower=0;
 int alexReversePower=0;
 int AIN3=0;
@@ -82,19 +82,19 @@ unsigned char control_out[5]={0x00,0x00,0x00,0x00,0x00};
 
 int output_sample_increment=2; // 1=48000 2=96000 4=192000
 
-int buffer_size=1024;
+int buffer_size=BUFFER_SIZE;
 
-float left_input_buffer[1024];
-float right_input_buffer[1024];
+float left_input_buffer[BUFFER_SIZE];
+float right_input_buffer[BUFFER_SIZE];
 
-float mic_left_buffer[1024];
-float mic_right_buffer[1024];
+float mic_left_buffer[BUFFER_SIZE];
+float mic_right_buffer[BUFFER_SIZE];
 
-float left_output_buffer[1024];
-float right_output_buffer[1024];
+float left_output_buffer[BUFFER_SIZE];
+float right_output_buffer[BUFFER_SIZE];
 
-float left_tx_buffer[1024];
-float right_tx_buffer[1024];
+float left_tx_buffer[BUFFER_SIZE];
+float right_tx_buffer[BUFFER_SIZE];
 
 int samples=0;
 
@@ -139,6 +139,9 @@ int ptt=0;
 int dot=0;
 int dash=0;
 
+int pennyLane=0;       // default is Penelope
+int driveLevel=255;    // default is max
+int driveLevelChanged=0; // force drive level to be sent
 
 int timing=0;
 static struct timeb start_time;
@@ -148,12 +151,25 @@ static int sample_count=0;
 static int metis=0;
 static char interface[128];
 
+int alexRxAntenna=0;
+int alexTxAntenna=0;
+int alexRxOnlyAntenna=0;
+
 void ozy_set_metis() {
     metis=1;
 }
 
 void ozy_set_interface(char* iface) {
     strcpy(interface,iface);
+}
+
+void setPennyLane(int state) {
+    pennyLane=state;
+}
+
+void setDriveLevelChanged(int level) {
+    driveLevel=level;
+    driveLevelChanged=1;
 }
 
 char* ozy_get_interface() {
@@ -189,6 +205,8 @@ void process_ozy_input_buffer(char* buffer) {
     int last_dot;
     int last_dash;
 
+    double gain;
+
     if(buffer[b++]==SYNC && buffer[b++]==SYNC && buffer[b++]==SYNC) {
         // extract control bytes
         control_in[0]=buffer[b++];
@@ -204,12 +222,15 @@ void process_ozy_input_buffer(char* buffer) {
         dash=(control_in[0]&0x02)==0x02;
         dot=(control_in[0]&0x04)==0x04;
 
+//fprintf(stderr,"%02X ptt=%d dot=%d dash=%d\n",control_in[0],ptt,dot,dash);
+
         if(ptt!=last_ptt || dot!=last_dot || dash!=last_dash) {
-            //vfoTransmit(ptt | dot | dash);
             int *vfoState=malloc(sizeof(int));
             *vfoState=ptt|dot|dash;
             g_idle_add(vfoTransmit,(gpointer)vfoState);
         }
+
+        mox=mox|ptt|dot|dash;
 
         switch((control_in[0]>>3)&0x1F) {
 
@@ -232,12 +253,12 @@ void process_ozy_input_buffer(char* buffer) {
             }
             break;
         case 1:
-            forwardPower=(control_in[1]<<8)+control_in[2]; // from Penelope or Hermes
+            penelopeForwardPower=(control_in[1]<<8)+control_in[2]; // from Penelope or Hermes
             
             alexForwardPower=(control_in[3]<<8)+control_in[4]; // from Alex or Apollo
             break;
         case 2:
-            alexForwardPower=(control_in[1]<<8)+control_in[2]; // from Alex or Apollo
+            alexReversePower=(control_in[1]<<8)+control_in[2]; // from Alex or Apollo
             AIN3=(control_in[3]<<8)+control_in[4]; // from Pennelope or Hermes
             break;
         case 3:
@@ -260,13 +281,23 @@ void process_ozy_input_buffer(char* buffer) {
 
             left_sample_float=(float)left_sample/8388607.0; // 24 bit sample
             right_sample_float=(float)right_sample/8388607.0; // 24 bit sample
-            mic_sample_float=(float)mic_sample/32767.0*micGain; // 16 bit sample
+            mic_sample_float=((float)mic_sample/32767.0f)*micGain; // 16 bit sample
 
             // add to buffer
-            left_input_buffer[samples]=left_sample_float;
-            right_input_buffer[samples]=right_sample_float;
-            mic_left_buffer[samples]=mic_sample_float;
-            mic_right_buffer[samples]=0.0f;
+            if(mox) {
+                left_input_buffer[samples]=0.0;
+                right_input_buffer[samples]=0.0;
+            } else {
+                left_input_buffer[samples]=left_sample_float;
+                right_input_buffer[samples]=right_sample_float;
+            }
+            if(testing) {
+                mic_left_buffer[samples]=0.0f;
+                mic_right_buffer[samples]=0.0f;
+            } else {
+                mic_left_buffer[samples]=mic_sample_float;
+                mic_right_buffer[samples]=0.0f;
+            }
             samples++;
 
             if(timing) {
@@ -279,6 +310,8 @@ void process_ozy_input_buffer(char* buffer) {
                 }
             }
 
+            key_thread_process(1.0, dash, dot, TRUE);
+
             // when we have enough samples give them to DttSP and get the results
             if(samples==buffer_size) {
                 // give to DttSP and get any output
@@ -288,83 +321,36 @@ void process_ozy_input_buffer(char* buffer) {
 
                 // transmit
                 if(mox) {
-                    
-                    //if(tuning) {
-                    //    tuningPhase=sineWave(mic_left_buffer,1024,tuningPhase,(double)cwPitch);
-                    //} 
-
-                    if(!tuning) {
-
-                        Audio_Callback (mic_left_buffer,mic_right_buffer,
-                                        left_tx_buffer,right_tx_buffer, buffer_size, 1);
-/*
-                    } else {
-                        switch(mode) {
-                            case modeUSB:
-                            case modeCWU:
-                                cwFillBuffers(left_tx_buffer,right_tx_buffer,1024);
-                                //tuningPhase=cwSignal(left_tx_buffer,right_tx_buffer,1024,tuningPhase,(double)cwPitch);
-                                break;
-                            case modeLSB:
-                            case modeCWL:
-                                cwFillBuffers(right_tx_buffer,left_tx_buffer,1024);
-                                //tuningPhase=cwSignal(right_tx_buffer,left_tx_buffer,1024,tuningPhase,(double)cwPitch);
-                                break;
-                        }
-*/
-                    }
-
-                } else if(dot) {
-                    switch(mode) {
-                        case modeUSB:
-                        case modeCWU:
-                            tuningPhase=cwSignal(left_tx_buffer,right_tx_buffer,1024,tuningPhase,(double)cwPitch);
-                            break;
-                        case modeLSB:
-                        case modeCWL:
-                            tuningPhase=cwSignal(right_tx_buffer,left_tx_buffer,1024,tuningPhase,(double)cwPitch);
-                            break;
-                    }
-                } else if (dash) {
-                    switch(mode) {
-                        case modeUSB:
-                        case modeCWU:
-                            tuningPhase=cwSignal(left_tx_buffer,right_tx_buffer,1024,tuningPhase,(double)cwPitch);
-                            break;
-                        case modeLSB:
-                        case modeCWL:
-                            tuningPhase=cwSignal(right_tx_buffer,left_tx_buffer,1024,tuningPhase,(double)cwPitch);
-                            break;
+                    if(tuning) {
+                        sineWave(mic_left_buffer,buffer_size,tuningPhase,(double)cwPitch);
+                        tuningPhase=sineWave(mic_right_buffer,buffer_size,tuningPhase,(double)cwPitch);
+                    } else if(testing) {
+                        //sineWave(mic_left_buffer,buffer_size,tuningPhase,(double)0);
+                        //tuningPhase=sineWave(mic_right_buffer,buffer_size,tuningPhase,(double)cwPitch);
+                    } else if(mode==modeCWU || mode==modeCWL) {
+                        CWtoneExchange(mic_left_buffer, mic_right_buffer, buffer_size);
+                        //sineWave(mic_left_buffer,buffer_size,tuningPhase,(double)cwPitch);
+                        //tuningPhase=sineWave(mic_right_buffer,buffer_size,tuningPhase,(double)cwPitch);
                     }
                 }
 
                 // process the output
+                Audio_Callback (mic_left_buffer,mic_right_buffer,
+                                left_tx_buffer,right_tx_buffer, buffer_size, 1);
+
+
+                if(pennyLane) {
+                    gain=1.0;
+                } else {
+                    gain=rfGain/255.0;
+                }
                 for(j=0;j<buffer_size;j+=output_sample_increment) {
                     left_rx_sample=(short)(left_output_buffer[j]*32767.0);
                     right_rx_sample=(short)(right_output_buffer[j]*32767.0);
 
                     if(mox || ptt || dot || dash ) {
-                        if(tuning) {
-                            switch(mode) {
-                                case modeUSB:
-                                case modeCWU:
-                                    left_tx_sample=cwSin[cwIndex]*rfGain;
-                                    right_tx_sample=cwCos[cwIndex]*rfGain;
-                                    cwIndex++;
-                                    if(cwIndex>=240) cwIndex=0;
-                                    break;
-                                case modeLSB:
-                                case modeCWL:
-                                    left_tx_sample=cwCos[cwIndex]*rfGain;
-                                    right_tx_sample=cwSin[cwIndex]*rfGain;
-                                    cwIndex++;
-                                    if(cwIndex>=240) cwIndex=0;
-                                    break;
-                            }
-                        } else {
-                            left_tx_sample=(short)(left_tx_buffer[j]*32767.0*rfGain);
-                            right_tx_sample=(short)(right_tx_buffer[j]*32767.0*rfGain);
-                        }
+                        left_tx_sample=(short)(left_tx_buffer[j]*32767.0*gain);
+                        right_tx_sample=(short)(right_tx_buffer[j]*32767.0*gain);
                     } else {
                         left_tx_sample=0;
                         right_tx_sample=0;
@@ -417,6 +403,13 @@ void process_ozy_input_buffer(char* buffer) {
                                 output_buffer[7]=ddsBFrequency;
                             }
                             frequencyBChanged=0;
+                        } else if(driveLevelChanged && pennyLane) { 
+                            output_buffer[3]=0x12|(mox&0x01);
+                            output_buffer[4]=driveLevel;
+                            output_buffer[5]=0;
+                            output_buffer[6]=0;
+                            output_buffer[7]=0;
+                            driveLevelChanged=0;
                         } else {
                             output_buffer[3]=control_out[0];
                             output_buffer[4]=control_out[1];
@@ -428,7 +421,6 @@ void process_ozy_input_buffer(char* buffer) {
                                 output_buffer[7]=control_out[4];
                             }
                         }
-
 
                         if(metis) {
                             metis_write(0x02,output_buffer,OZY_BUFFER_SIZE);
@@ -744,28 +736,21 @@ void setSpeed(int s) {
     if(s==SPEED_48KHZ) {
         output_sample_increment=1;
         sampleRate=48000;
-        SetSampleRate((double)sampleRate);
-        SetRXOsc(0,0,0.0);
-        setFilter(filter);
-        setMode(mode);
-        SetRXOutputGain(0,0,volume/100.0);
     } else if(s==SPEED_96KHZ) {
         output_sample_increment=2;
         sampleRate=96000;
-        SetSampleRate((double)sampleRate);
-        SetRXOsc(0,0,0.0);
-        setFilter(filter);
-        setMode(mode);
-        SetRXOutputGain(0,0,volume/100.0);
     } else if(s==SPEED_192KHZ) {
         output_sample_increment=4;
         sampleRate=192000;
-        SetSampleRate((double)sampleRate);
-        SetRXOsc(0,0,0.0);
-        setFilter(filter);
-        setMode(mode);
-        SetRXOutputGain(0,0,volume/100.0);
     }
+
+    SetSampleRate((double)sampleRate);
+    SetRXOsc(0,0,0.0);
+    SetTXOsc(1,0.0);
+    setFilter(filter);
+    setMode(mode);
+    SetRXOutputGain(0,0,volume/100.0);
+    SetKeyerSampleRate((float)sampleRate);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -914,6 +899,8 @@ int ozy_init() {
             | LT2208_DITHER_ON
             | LT2208_RANDOM_ON;
     control_out[4] = 0;
+
+    tuningPhase=0.0;
 
     if(metis) {
         int found;
@@ -1072,6 +1059,8 @@ void ozySaveState() {
     setProperty("speed",string);
     sprintf(string,"%d",sampleRate);
     setProperty("sampleRate",string);
+    sprintf(string,"%d",pennyLane);
+    setProperty("pennyLane",string);
 
 }
 
@@ -1098,7 +1087,8 @@ void ozyRestoreState() {
     }
     value=getProperty("class");
     if(value) {
-        setMode(atoi(value));
+        //setMode(atoi(value));
+        setClass(atoi(value));
     }
     value=getProperty("lt2208Dither");
     if(value) {
@@ -1124,5 +1114,41 @@ void ozyRestoreState() {
     if(value) {
         sampleRate=atoi(value);
     }
+    value=getProperty("pennyLane");
+    if(value) {
+        pennyLane=atoi(value);
+    }
 }
 
+void setAlexRxAntenna(int a) {
+fprintf(stderr,"setAlexRxAntenna: %d\n",a);
+    alexRxAntenna=a;
+    if(!mox) {
+        control_out[4]=control_out[4]&0xFC;
+        control_out[4]=control_out[4]|a;
+    }
+}
+
+void setAlexTxAntenna(int a) {
+fprintf(stderr,"setAlexTxAntenna: %d\n",a);
+    alexTxAntenna=a;
+    if(mox) {
+        control_out[4]=control_out[4]&0xFC;
+        control_out[4]=control_out[4]|a;
+    }
+}
+
+void setAlexRxOnlyAntenna(int a) {
+fprintf(stderr,"setAlexRxOnlyAntenna: %d\n",a);
+    alexRxOnlyAntenna=a;
+    if(!mox) {
+        control_out[3]=control_out[3]&0x9F;
+        control_out[3]=control_out[3]|(a<<5);
+
+        if(a!=0) {
+            control_out[3]=control_out[3]|0x80;
+        } else {
+            control_out[3]=control_out[3]&0x7F;
+        }
+    }
+}

@@ -36,6 +36,7 @@
 #define METER_BUFFER_SIZE MAX_RX*RX_METER_POINTS
 
 int meterMode;
+int meterDbm;
 
 void setMeterMode(int mode);
 void updateMeter(float sample);

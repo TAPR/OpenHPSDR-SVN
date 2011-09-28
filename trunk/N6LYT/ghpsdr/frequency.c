@@ -122,7 +122,9 @@ struct frequency_info frequencyInfo[]=
         {14175000LL, 14224999LL, "20M Ext/Adv SSB",                band20, TRUE},
         {14225000LL, 14229999LL, "20M SSB",                        band20, TRUE},
         {14230000LL, 14230000LL, "20M SSTV",                       band20, TRUE},
-        {14230000LL, 14285999LL, "20M SSB",                        band20, TRUE},
+        {14230000LL, 14284999LL, "20M SSB",                        band20, TRUE},
+        {14285000LL, 14285000LL, "20M SSB QRP Calling Frequency",  band20, TRUE},
+        {14285000LL, 14285999LL, "20M SSB",                        band20, TRUE},
         {14286000LL, 14286000LL, "20M AM Calling Frequency",       band20, TRUE},
         {14286001LL, 14349999LL, "20M SSB",                        band20, TRUE},
 

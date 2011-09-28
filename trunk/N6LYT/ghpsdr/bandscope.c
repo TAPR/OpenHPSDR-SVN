@@ -92,7 +92,7 @@ GtkWidget* buildBandscopeUI() {
     
     // prepare the fft (time domain to frequency domain)
     //timebuf=(fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
-    timebuf=(double*)fftwf_malloc(sizeof(double)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
+    timebuf=(float*)fftwf_malloc(sizeof(double)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
     freqbuf=(fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
     //plan=fftwf_plan_dft_1d(BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER,timebuf,freqbuf,FFTW_FORWARD,FFTW_MEASURE);
     plan=fftwf_plan_dft_r2c_1d(BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER,timebuf,freqbuf,FFTW_MEASURE);

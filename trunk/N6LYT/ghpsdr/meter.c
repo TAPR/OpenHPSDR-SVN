@@ -75,7 +75,7 @@ void updateOff();
 * @return 
 */
 float getFilterSizeCalibrationOffset() {
-    int size=1024; // dspBufferSize
+    int size=buffer_size;
     float i=log10((float)size);
     return 3.0f*(11.0f-i);
 }
@@ -291,19 +291,19 @@ void meterDbmDrawSignal() {
         layout = pango_layout_new(context);
         pango_layout_set_width(layout,120*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        if(mox) {
-#ifdef NETBOOK
-            sprintf(temp,"<span foreground='#FF0000' background='#000000' font_desc='Sans Bold 8'>%0.3f Watts</span>",(float)forwardPower/5000.0);
-#else
-            sprintf(temp,"<span foreground='#FF0000' background='#000000' font_desc='Sans Bold 12'>%0.3f Watts</span>",(float)forwardPower/5000.0);
-#endif
-        } else {
+//        if(mox) {
+//#ifdef NETBOOK
+//            sprintf(temp,"<span foreground='#FF0000' background='#000000' font_desc='Sans Bold 8'>%0.3f Watts</span>",(float)forwardPower/5000.0);
+//#else
+//            sprintf(temp,"<span foreground='#FF0000' background='#000000' font_desc='Sans Bold 12'>%0.3f Watts</span>",(float)forwardPower/5000.0);
+//#endif
+//        } else {
 #ifdef NETBOOK
             sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 8'>%d dBm    </span>",meterDbm);
 #else
             sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 12'>%d dBm    </span>",meterDbm);
 #endif
-        }
+//        }
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(dbmPixmap),gc,20,0,layout);
 

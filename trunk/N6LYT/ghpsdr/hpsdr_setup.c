@@ -69,6 +69,8 @@ GtkWidget* alexAttenuation30Db;
 GtkWidget* hpsdrHalfDuplex;
 GtkWidget* hpsdrFullDuplex;
 
+GtkWidget* pennyLaneWidget;
+
 void speed48ButtonCallback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setSpeed(0);
@@ -186,6 +188,14 @@ void hpsdrFullDuplexButtonCallback(GtkWidget* widget,gpointer data) {
     }
 }
 
+void pennyLaneButtonCallback(GtkWidget* widget,gpointer data) {
+    if(GTK_TOGGLE_BUTTON(widget)->active) {
+        setPennyLane(1);
+    } else {
+        setPennyLane(0);
+    }
+}
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief hpsdr setup UI
@@ -203,7 +213,7 @@ GtkWidget* hpsdrSetupUI() {
     label=gtk_label_new(text);
     gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    sprintf(text,"Ozy software version: %d",get_ozy_software_version());
+    sprintf(text,"Ozy/Metis software version: %d",get_ozy_software_version());
     label=gtk_label_new(text);
     gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
@@ -211,7 +221,7 @@ GtkWidget* hpsdrSetupUI() {
     label=gtk_label_new(text);
     gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    sprintf(text,"Penelope software version: %d",get_penelope_software_version());
+    sprintf(text,"Penelope/PennyLane software version: %d",get_penelope_software_version());
     label=gtk_label_new(text);
     gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
@@ -356,6 +366,17 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
 
+    box=gtk_hbox_new(FALSE,3);
+    label=gtk_label_new("PennyLane/Hermes:		");
+    gtk_widget_show(label);
+    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+    pennyLaneWidget=gtk_check_button_new_with_label("PennyLane/Hermes");
+    gtk_widget_show(pennyLaneWidget);
+    gtk_box_pack_start(GTK_BOX(box),pennyLaneWidget,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(pennyLaneWidget),"clicked",G_CALLBACK(pennyLaneButtonCallback),NULL);
+    gtk_widget_show(box);
+    gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
+
     switch(speed) {
         case 0:
             gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(speed48K),TRUE);
@@ -420,6 +441,7 @@ GtkWidget* hpsdrSetupUI() {
             break;
     }
 
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(pennyLaneWidget),pennyLane);
 
     gtk_widget_show(hpsdrPage);
     return hpsdrPage;

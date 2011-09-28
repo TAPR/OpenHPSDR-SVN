@@ -1,11 +1,10 @@
 /** 
-* @file transmit.h
-* @brief Tranmsit files for GHPSDR
+* @file alex_setup.h
+* @brief Setup functions
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
-* @date 2009-04-11
+* @date 2009-04-12
 */
-
 
 /* Copyright (C) 
 * 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
@@ -25,20 +24,13 @@
 * 
 */
 
-double rfGain;
-double micGain;
 
-int tuning;
-double tuningPhase;
-
-int testing;
-
-int fullDuplex;
+//
+// alex_setup.h
+//
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Build Transmit User Interface 
-* 
-* @return GtkWidget pointer 
+* @brief hpsdr setup UI
 */
-GtkWidget* buildTransmitUI();
+GtkWidget* alexSetupUI();

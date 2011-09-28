@@ -80,7 +80,6 @@
 */
 
 
-
 // main.c
 //
 // GTK+ 2.0 implementation of Beppe's Main control panel
@@ -131,6 +130,9 @@
 #include "audiostream.h"
 #include "metis.h"
 #include "cw.h"
+#include "test.h"
+#include "alex_rx_test.h"
+#include "alex_tx_test.h"
 
 GdkColor background;
 GdkColor buttonBackground;
@@ -153,6 +155,7 @@ GtkWidget* mainFixed;
 
 GtkWidget* buttonExit;
 GtkWidget* buttonSetup;
+GtkWidget* buttonTest;
 
 
 GtkWidget* vfoWindow;
@@ -263,6 +266,18 @@ void exitCallback(GtkWidget* widget,gpointer data) {
 /* ----------------------------------------------------------------------------*/
 void setupCallback(GtkWidget* widget,gpointer data) {
     ghpsdr_setup();
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback when test button is pressed
+* 
+* @param widget
+* @param data
+*/
+/* ----------------------------------------------------------------------------*/
+void testCallback(GtkWidget* widget,gpointer data) {
+    test_setup();
 }
 
 /* --------------------------------------------------------------------------*/
@@ -403,7 +418,22 @@ void buildMainUI() {
 #ifdef NETBOOK
     gtk_fixed_put((GtkFixed*)mainFixed,buttonSetup,82,0);
 #else
-    gtk_fixed_put((GtkFixed*)mainFixed,buttonSetup,105,0);
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonSetup,70,0);
+#endif
+
+#ifdef ALEX_TEST
+    buttonTest = gtk_button_new_with_label ("Test");
+    gtk_widget_modify_bg(buttonTest, GTK_STATE_NORMAL, &buttonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonTest);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonTest),LARGE_BUTTON_WIDTH,BUTTON_HEIGHT);
+    g_signal_connect(G_OBJECT(buttonTest),"clicked",G_CALLBACK(testCallback),NULL);
+    gtk_widget_show(buttonTest);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonTest,162,0);
+#else
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonTest,140,0);
+#endif
 #endif
 
     // add the vfo window
@@ -653,18 +683,19 @@ void restoreState() {
 * @brief Options structure
 */
 /* ----------------------------------------------------------------------------*/
-struct option longOptions[] = {
-    {"sound-card",required_argument, 0, 0},
-    {"sample-rate",required_argument, 0, 1},
-    {"property-path",required_argument, 0, 2},
-    {"timing",no_argument, 0, 3},
-    {"metis",no_argument, 0, 4},
-    {"interface",required_argument, 0, 5},
+static struct option longOptions[] = {
+    {"sound-card",required_argument, NULL, 'c'},
+    {"sample-rate",required_argument, NULL, 's'},
+    {"property-path",required_argument, NULL, 'p'},
+    {"timing",no_argument, NULL, 't'},
+    {"metis",no_argument, NULL, 'm'},
+    {"interface",required_argument, NULL, 'i'},
+    {0,0,0,0}
 };
 
-char* shortOptions="";
+static char* shortOptions="c:s:p:tmi:";
 
-int optionIndex;
+static int optionIndex=0;
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -674,28 +705,42 @@ int optionIndex;
 * @param argv
 */
 /* ----------------------------------------------------------------------------*/
-void processCommands(int argc,char** argv) {
+void processCommands(int argc,char* argv[]) {
     int c;
-    while((c=getopt_long(argc,argv,shortOptions,longOptions,&optionIndex)!=EOF)) {
-        switch(optionIndex) {
-            case 0:
+    while(1) {
+        c=getopt_long(argc,argv,shortOptions,longOptions,&optionIndex);
+        if(c==-1) break;
+        switch(c) {
+            case 'c':
                 strcpy(soundCardName,optarg);
                 break;
-            case 1:
+            case 's':
                 sampleRate=atoi(optarg);
                 break;
-            case 2:
+            case 'p':
                 strcpy(propertyPath,optarg);
                 break;
-            case 3:
+            case 't':
                 timing=1;
                 break;
-            case 4:
+            case 'm':
                 ozy_set_metis();
                 break;
-            case 5:
+            case 'i':
                 ozy_set_interface(optarg);
                 break;
+            case '?':
+                fprintf(stderr,"Usage:\n");
+                fprintf(stderr,"    ghpsdr --metis\n");
+                fprintf(stderr,"             --interface if\n");
+                fprintf(stderr,"             --sound-card s\n");
+                fprintf(stderr,"             --property-path path\n");
+                fprintf(stderr,"             --sample-rate 48000|96000|192000\n");
+                fprintf(stderr,"             --timing\n");
+                exit(0);
+                break;
+            default:
+                exit(0);
         }
     }
 }
@@ -715,7 +760,6 @@ int main(int argc,char* argv[]) {
     GtkWidget* dialog;
     gint result;
     int i;
-    char message[128];
 
     gtk_init(&argc,&argv);
 
@@ -727,6 +771,11 @@ int main(int argc,char* argv[]) {
     processCommands(argc,argv);
     loadProperties(propertyPath);
 
+#ifdef ALEX_TEST
+    alex_rx_test_load("alex_rx_test.csv");
+    alex_tx_test_load("alex_tx_test.csv");
+#endif
+
     init_cw();
 
     // initialize DttSP
@@ -734,12 +783,13 @@ int main(int argc,char* argv[]) {
     Release_Update();
     SetTRX(0,FALSE); // thread 0 is for receive
     SetTRX(1,TRUE);  // thread 1 is for transmit
-    SetThreadProcessingMode(0,2);
-    SetThreadProcessingMode(1,2);
+    SetThreadProcessingMode(0,2); // set thread 0 to RUN
+    SetThreadProcessingMode(1,2); // set thread 1 to RUN
     SetSubRXSt(0,0,TRUE);
 
-    reset_for_buflen(0,1024);
-    reset_for_buflen(1,1024);
+    reset_for_buflen(0,buffer_size);
+    reset_for_buflen(1,buffer_size);
+
 
     // initialize ozy (default 48K)
     ozyRestoreState();
@@ -793,12 +843,12 @@ int main(int argc,char* argv[]) {
                 break;
 
             case -3: // did not find metis
-                sprintf(message,"Cannot locate Metis on interface %s!",ozy_get_interface());
                 dialog = gtk_message_dialog_new (NULL,
                                                  GTK_DIALOG_DESTROY_WITH_PARENT,
                                                  GTK_MESSAGE_ERROR,
                                                  GTK_BUTTONS_YES_NO,
-                                                 message);
+                                                 "Cannot locate Metis on interface %s!",
+                                                 ozy_get_interface());
                 gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Retry?");
                 gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
                 result = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -824,6 +874,11 @@ int main(int argc,char* argv[]) {
     cwPitch =600;
 
     restoreInitialState();
+
+    SetKeyerResetSize(4096);
+    NewKeyer(600.0f,TRUE,0.0f,3.0f,25.0f,48000.0f);
+    SetKeyerPerf(FALSE);
+    StartKeyer();
 
     initColors();
     //gtk_key_snooper_install((GtkKeySnoopFunc)keyboardSnooper,NULL);
@@ -875,12 +930,14 @@ int main(int argc,char* argv[]) {
 
     restoreState();
 
+
     // build the Main UI
     buildMainUI();
 
     setSoundcard(getSoundcardId(soundCardName));
 
     audio_stream_init();
+
 
     gtk_main();
 

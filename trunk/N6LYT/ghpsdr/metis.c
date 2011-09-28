@@ -370,7 +370,7 @@ int metis_write(unsigned char ep,char* buffer,int length) {
 
 void metis_send_buffer(char* buffer,int length) {
 //fprintf(stderr,"metis_send_buffer\n");
-    if(sendto(discovery_socket,buffer,length,0,(struct sockaddr*)&data_addr,data_addr_length)<0) {
+    if(sendto(discovery_socket,buffer,length,0,(struct sockaddr*)&data_addr,data_addr_length)!=length) {
         perror("sendto socket failed for metis_send_data\n");
         exit(1);
     }
