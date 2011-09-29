@@ -87,73 +87,73 @@ gboolean displayHF=TRUE;
 */
 /* ----------------------------------------------------------------------------*/
 BANDSTACK_ENTRY bandstack160[] =
-    {{1810000LL,modeCWL,filterF4,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
-     {1835000LL,modeCWU,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
-     {1845000LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0}};
+    {{1810000LL,modeCWL,filterF4,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {1835000LL,modeCWU,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {1845000LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack80[] =
-    {{3501000LL,modeCWL,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
-     {3751000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
-     {3850000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0}};
+    {{3501000LL,modeCWL,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {3751000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {3850000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack60[] =
-    {{5330500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
-     {5346500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
-     {5366500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
-     {5371500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
-     {5403500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0}};
+    {{5330500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {5346500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {5366500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {5371500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {5403500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack40[] =
-    {{7001000LL,modeCWL,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
-     {7152000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0},
-     {7255000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0}};
+    {{7001000LL,modeCWL,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {7152000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {7255000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack30[] =
-    {{10120000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {10130000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {10140000LL,modeCWU,filterF4,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
+    {{10120000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {10130000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {10140000LL,modeCWU,filterF4,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack20[] =
-    {{14010000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {14230000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {14336000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
+    {{14010000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {14230000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {14336000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack18[] =
-    {{18068600LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {18125000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {18140000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
+    {{18068600LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {18125000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {18140000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack15[] =
-    {{21001000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {21255000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {21300000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
+    {{21001000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {21255000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {21300000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack12[] =
-    {{24895000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {24900000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {24910000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
+    {{24895000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {24900000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {24910000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack10[] =
-    {{28010000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {28300000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0},
-     {28400000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0}};
+    {{28010000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {28300000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {28400000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack50[] =
-    {{50010000LL,modeCWU,filterF0,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0},
-     {50125000LL,modeUSB,filterF5,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0},
-     {50200000LL,modeUSB,filterF5,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0}};
+    {{50010000LL,modeCWU,filterF0,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0,0},
+     {50125000LL,modeUSB,filterF5,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0,0},
+     {50200000LL,modeUSB,filterF5,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstackGEN[] =
-    {{909000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0},
-     {5975000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0},
-     {13845000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0}};
+    {{909000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0,0},
+     {5975000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0,0},
+     {13845000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstackWWV[] =
-    {{2500000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0},
-     {5000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0},
-     {10000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0},
-     {15000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0},
-     {20000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0}};
+    {{2500000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0,0},
+     {5000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0,0},
+     {10000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0,0},
+     {15000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0,0},
+     {20000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 BANDSTACK bandstack[BANDS];
 
@@ -190,131 +190,218 @@ BAND_LIMITS bandLimits[NUM_BAND_LIMITS] = {
 */
 /* ----------------------------------------------------------------------------*/
 static XVTR_ENTRY xvtr[12]=
-    {{"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140,0,0,0}};
+    {{"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0}};
 
 void setTuningMode(int mode);
 void setBand(int band);
 void setIncrement(int increment);
 
 void setHFTitles() {
+    GtkWidget* label;
     gtk_button_set_label((GtkButton*)buttonBand1,"160");
     gtk_widget_set_sensitive(buttonBand1,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand1);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand2,"80");
     gtk_widget_set_sensitive(buttonBand2,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand2);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand3,"60");
     gtk_widget_set_sensitive(buttonBand3,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand3);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand4,"40");
     gtk_widget_set_sensitive(buttonBand4,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand4);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand5,"30");
     gtk_widget_set_sensitive(buttonBand5,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand5);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand6,"20");
     gtk_widget_set_sensitive(buttonBand6,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand6);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand7,"17");
     gtk_widget_set_sensitive(buttonBand7,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand7);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand8,"15");
     gtk_widget_set_sensitive(buttonBand8,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand8);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand9,"12");
     gtk_widget_set_sensitive(buttonBand9,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand9);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand10,"10");
     gtk_widget_set_sensitive(buttonBand10,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand10);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand11,"6");
     gtk_widget_set_sensitive(buttonBand11,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand11);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand12,"GEN");
     gtk_widget_set_sensitive(buttonBand12,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand12);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand13,"WWV");
     gtk_widget_set_sensitive(buttonBand13,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand13);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand14,"XVTR");
+    gtk_widget_set_sensitive(buttonBand14,TRUE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand4);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
 }
 
 void setXVTRTitles() {
+    GtkWidget* label;
     gtk_button_set_label((GtkButton*)buttonBand1,xvtr[0].name);
     if(strcmp(xvtr[0].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand1,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand1,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand1);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand2,xvtr[1].name);
     if(strcmp(xvtr[1].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand2,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand2,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand2);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand3,xvtr[2].name);
     if(strcmp(xvtr[2].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand3,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand3,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand3);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand4,xvtr[3].name);
     if(strcmp(xvtr[3].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand4,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand4,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand4);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand5,xvtr[4].name);
     if(strcmp(xvtr[4].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand5,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand5,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand5);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand6,xvtr[5].name);
     if(strcmp(xvtr[5].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand6,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand6,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand6);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand7,xvtr[6].name);
     if(strcmp(xvtr[6].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand7,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand7,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand7);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand8,xvtr[7].name);
     if(strcmp(xvtr[7].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand8,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand8,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand8);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand9,xvtr[8].name);
     if(strcmp(xvtr[8].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand9,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand9,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand9);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand10,xvtr[9].name);
     if(strcmp(xvtr[9].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand10,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand10,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand10);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand11,xvtr[10].name);
     if(strcmp(xvtr[10].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand11,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand11,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand11);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     gtk_button_set_label((GtkButton*)buttonBand12,xvtr[11].name);
     if(strcmp(xvtr[11].name,"")==0) {
         gtk_widget_set_sensitive(buttonBand12,FALSE);
     } else {
         gtk_widget_set_sensitive(buttonBand12,TRUE);
+        label=gtk_bin_get_child((GtkBin*)buttonBand12);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
 
     gtk_button_set_label((GtkButton*)buttonBand13,"");
     gtk_widget_set_sensitive(buttonBand13,FALSE);
+    label=gtk_bin_get_child((GtkBin*)buttonBand13);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
 
     gtk_button_set_label((GtkButton*)buttonBand14,"HF");
+    label=gtk_bin_get_child((GtkBin*)buttonBand14);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
 }
 
 

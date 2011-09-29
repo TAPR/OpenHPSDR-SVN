@@ -46,6 +46,7 @@ struct _BANDSTACK_ENTRY {
     int alexRxAntenna;
     int alexRxOnlyAntenna;
     int alexTxAntenna;
+    int alexAttenuation;
 };
 
 typedef struct _BANDSTACK_ENTRY BANDSTACK_ENTRY;

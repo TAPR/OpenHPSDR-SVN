@@ -1,11 +1,10 @@
 /** 
-* @file version.h
-* @brief Version information
+* @file test.h
+* @brief Test functions
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
 * @date 2009-04-12
 */
-// version.h
 
 /* Copyright (C) 
 * 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
@@ -25,4 +24,13 @@
 * 
 */
 
-#define VERSION "0.8"
+
+//
+// test.h
+//
+
+GtkWidget* testWindow;
+
+void ghpsdr_test();
+
+void ghpsdr_test_update();
