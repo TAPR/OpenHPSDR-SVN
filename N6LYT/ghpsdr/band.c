@@ -419,7 +419,6 @@ void selectBand(GtkWidget* widget) {
     //XVTR_ENTRY* xvtr_entry;
     int current;
 
-fprintf(stderr,"selectBand\n");
     resetSubRx();
 
     if(currentBandButton) {
@@ -434,7 +433,6 @@ fprintf(stderr,"selectBand\n");
     //save current
     if(currentBandButton) {
         if(displayHF) {
-fprintf(stderr,"selectBand: save current HF band %d\n",band);
             currentHFButton=currentBandButton;
             current=bandstack[band].current_entry;
             entry=&bandstack[band].entry[current];
@@ -455,8 +453,8 @@ fprintf(stderr,"selectBand: save current HF band %d\n",band);
             entry->alexRxAntenna=alexRxAntenna;
             entry->alexRxOnlyAntenna=alexRxOnlyAntenna;
             entry->alexTxAntenna=alexTxAntenna;
+            entry->alexAttenuation=alexAttenuation;
         } else {
-fprintf(stderr,"selectBand: save current XVTR band %d\n",xvtr_band);
             currentXVTRButton=currentBandButton;
             //xvtr_entry=&xvtr[xvtr_band];
             xvtr[xvtr_band].rxFrequency=frequencyA;
@@ -477,6 +475,7 @@ fprintf(stderr,"selectBand: save current XVTR band %d\n",xvtr_band);
             xvtr[xvtr_band].alexRxAntenna=alexRxAntenna;
             xvtr[xvtr_band].alexRxOnlyAntenna=alexRxOnlyAntenna;
             xvtr[xvtr_band].alexTxAntenna=alexTxAntenna;
+            xvtr[xvtr_band].alexAttenuation=alexAttenuation;
         }
     }
 
@@ -556,10 +555,11 @@ fprintf(stderr,"selectBand: save current XVTR band %d\n",xvtr_band);
             waterfallHighThreshold=entry->waterfallHigh;
             waterfallLowThreshold=entry->waterfallLow;
 
-fprintf(stderr,"entry\n");
             setAlexRxAntenna(entry->alexRxAntenna);
             setAlexRxOnlyAntenna(entry->alexRxOnlyAntenna);
             setAlexTxAntenna(entry->alexTxAntenna);
+
+            setAlexAttenuation(entry->alexAttenuation);
         } else {
             currentBandButton=widget;
 
@@ -589,16 +589,6 @@ fprintf(stderr,"entry\n");
                 xvtr_band=bandGen;
             }
 
-fprintf(stderr,"xvtr_band=%d name=%s\n",xvtr_band,xvtr[xvtr_band].name);
-fprintf(stderr,"xvtr[%d]: spectrumLow=%d spectrumHigh=%d\n",
-               xvtr_band,
-               xvtr[xvtr_band].spectrumLow,
-               xvtr[xvtr_band].spectrumHigh);
-fprintf(stderr,"xvtr[%d]: alexRxAntenna=%d alexRxOnlyAntenna=%d alexTxAntenna=%d\n",
-               xvtr_band,
-               xvtr[xvtr_band].alexRxAntenna,
-               xvtr[xvtr_band].alexRxOnlyAntenna,
-               xvtr[xvtr_band].alexTxAntenna);
             //xvtr_entry=&xvtr[xvtr_band];
             setMode(xvtr[xvtr_band].mode);
             filterVar1Low=xvtr[xvtr_band].var1Low;
@@ -622,6 +612,8 @@ fprintf(stderr,"xvtr[%d]: alexRxAntenna=%d alexRxOnlyAntenna=%d alexTxAntenna=%d
             setAlexRxAntenna(xvtr[xvtr_band].alexRxAntenna);
             setAlexRxOnlyAntenna(xvtr[xvtr_band].alexRxOnlyAntenna);
             setAlexTxAntenna(xvtr[xvtr_band].alexTxAntenna);
+
+            setAlexAttenuation(xvtr[xvtr_band].alexAttenuation);
 
         }
     }
@@ -710,7 +702,6 @@ int remoteSetBand(gpointer *data) {
 void forceBand(int b,int setup) {
     GtkWidget* label;
     GtkWidget* widget;
-fprintf(stderr,"forceBand %d\n",b);
     switch(b) {
         case band160:
             widget=buttonBand1;
@@ -767,14 +758,6 @@ fprintf(stderr,"forceBand %d\n",b);
         band=b;
     } else {
         xvtr_band=b;
-fprintf(stderr,"forceBand: xvtr_band=%d\n",xvtr_band);
-fprintf(stderr,"forceBand: %d,%d,%d %d,%d,%d\n",
-               xvtr[xvtr_band].alexRxAntenna,
-               xvtr[xvtr_band].alexRxOnlyAntenna,
-               xvtr[xvtr_band].alexTxAntenna,
-               alexRxAntenna,
-               alexRxOnlyAntenna,
-               alexTxAntenna);
 
         if(setup) {
             setAlexRxAntenna(alexRxAntenna);
@@ -1017,6 +1000,7 @@ void bandSaveState() {
         entry->alexRxAntenna=alexRxAntenna;
         entry->alexRxOnlyAntenna=alexRxOnlyAntenna;
         entry->alexTxAntenna=alexTxAntenna;
+        entry->alexAttenuation=alexAttenuation;
     } else {
         //xvtr_entry=&xvtr[xvtr_band];
         xvtr[xvtr_band].rxFrequency=frequencyA;
@@ -1036,7 +1020,7 @@ void bandSaveState() {
         xvtr[xvtr_band].alexRxAntenna=alexRxAntenna;
         xvtr[xvtr_band].alexRxOnlyAntenna=alexRxOnlyAntenna;
         xvtr[xvtr_band].alexTxAntenna=alexTxAntenna;
-fprintf(stderr,"bandSaveState: xvtr[%d] %d,%d,%d\n",xvtr_band,alexRxAntenna,alexRxOnlyAntenna,alexTxAntenna);
+        xvtr[xvtr_band].alexAttenuation=alexAttenuation;
     }
 
     int b;
@@ -1121,6 +1105,10 @@ fprintf(stderr,"bandSaveState: xvtr[%d] %d,%d,%d\n",xvtr_band,alexRxAntenna,alex
 
             sprintf(string,"%d",entry->alexTxAntenna);
             sprintf(name,"band.%d.stack.%d.alexTxAntenna",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",entry->alexAttenuation);
+            sprintf(name,"band.%d.stack.%d.alexAttenuation",b,stack);
             setProperty(name,string);
         }
     }
@@ -1223,17 +1211,18 @@ fprintf(stderr,"bandSaveState: xvtr[%d] %d,%d,%d\n",xvtr_band,alexRxAntenna,alex
             sprintf(string,"%d",xvtr[b].alexRxAntenna);
             sprintf(name,"xvtr.%d.alexRxAntenna",b);
             setProperty(name,string);
-fprintf(stderr,"bandSaveState %s=%s\n",name,string);
 
             sprintf(string,"%d",xvtr[b].alexRxOnlyAntenna);
             sprintf(name,"xvtr.%d.alexRxOnlyAntenna",b);
             setProperty(name,string);
-fprintf(stderr,"bandSaveState %s=%s\n",name,string);
 
             sprintf(string,"%d",xvtr[b].alexTxAntenna);
             sprintf(name,"xvtr.%d.alexTxAntenna",b);
             setProperty(name,string);
-fprintf(stderr,"bandSaveState %s=%s\n",name,string);
+
+            sprintf(string,"%d",xvtr[b].alexAttenuation);
+            sprintf(name,"xvtr.%d.alexAttenuation",b);
+            setProperty(name,string);
         }
     }
 
@@ -1282,7 +1271,6 @@ void configureXVTRButton(int setup) {
                     }
                 }
             }
-fprintf(stderr,"configureXVTRButton %d\n",setup);
             forceBand(xvtr_band,setup);
         }
     }
@@ -1427,6 +1415,9 @@ void bandRestoreState() {
             value=getProperty(name);
             if(value) entry->alexTxAntenna=atoi(value);
 
+            sprintf(name,"band.%d.stack.%d.alexAttenuation",b,stack);
+            value=getProperty(name);
+            if(value) entry->alexAttenuation=atoi(value);
         }
     }
 
@@ -1437,7 +1428,6 @@ void bandRestoreState() {
         sprintf(name,"xvtr.%d.name",b);
         value=getProperty(name);
         if(value) {
-fprintf(stderr,"%s=%s\n",name,value);
             strcpy(xvtr[b].name,value);
 
             sprintf(name,"xvtr.%d.rxFrequency",b);
@@ -1507,12 +1497,10 @@ fprintf(stderr,"%s=%s\n",name,value);
             sprintf(name,"xvtr.%d.spectrumHigh",b);
             value=getProperty(name);
             if(value) xvtr[b].spectrumHigh=atoi(value);
-fprintf(stderr,"%s=%s\n",name,value);
 
             sprintf(name,"xvtr.%d.spectrumLow",b);
             value=getProperty(name);
             if(value) xvtr[b].spectrumLow=atoi(value);
-fprintf(stderr,"%s=%s\n",name,value);
 
             sprintf(name,"xvtr.%d.spectrumStep",b);
             value=getProperty(name);
@@ -1529,23 +1517,18 @@ fprintf(stderr,"%s=%s\n",name,value);
             sprintf(name,"xvtr.%d.alexRxAntenna",b);
             value=getProperty(name);
             if(value) xvtr[b].alexRxAntenna=atoi(value);
-fprintf(stderr,"%s=%s\n",name,value);
 
             sprintf(name,"xvtr.%d.alexRxOnlyAntenna",b);
             value=getProperty(name);
             if(value) xvtr[b].alexRxOnlyAntenna=atoi(value);
-fprintf(stderr,"%s=%s\n",name,value);
 
             sprintf(name,"xvtr.%d.alexTxAntenna",b);
             value=getProperty(name);
             if(value) xvtr[b].alexTxAntenna=atoi(value);
-fprintf(stderr,"%s=%s\n",name,value);
 
-fprintf(stderr,"xvtr[%d] %d,%d,%d\n",
-               b,
-               xvtr[b].alexRxAntenna,
-               xvtr[b].alexRxOnlyAntenna,
-               xvtr[b].alexTxAntenna);
+            sprintf(name,"xvtr.%d.alexAttenuation",b);
+            value=getProperty(name);
+            if(value) xvtr[b].alexAttenuation=atoi(value);
         }
 
     }

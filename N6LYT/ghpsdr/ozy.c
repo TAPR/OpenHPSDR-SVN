@@ -448,6 +448,7 @@ void process_ozy_input_buffer(char* buffer) {
         fprintf(stderr,"%s: process_ozy_input_buffer: did not find sync\n",
                 asctime(gmt));
         dump_ozy_buffer("input buffer",buffer);
+        exit(1);
     }
 
 }
@@ -1121,7 +1122,6 @@ void ozyRestoreState() {
 }
 
 void setAlexRxAntenna(int a) {
-fprintf(stderr,"setAlexRxAntenna: %d\n",a);
     alexRxAntenna=a;
     if(!mox) {
         control_out[4]=control_out[4]&0xFC;
@@ -1130,7 +1130,6 @@ fprintf(stderr,"setAlexRxAntenna: %d\n",a);
 }
 
 void setAlexTxAntenna(int a) {
-fprintf(stderr,"setAlexTxAntenna: %d\n",a);
     alexTxAntenna=a;
     if(mox) {
         control_out[4]=control_out[4]&0xFC;
@@ -1139,7 +1138,6 @@ fprintf(stderr,"setAlexTxAntenna: %d\n",a);
 }
 
 void setAlexRxOnlyAntenna(int a) {
-fprintf(stderr,"setAlexRxOnlyAntenna: %d\n",a);
     alexRxOnlyAntenna=a;
     if(!mox) {
         control_out[3]=control_out[3]&0x9F;
