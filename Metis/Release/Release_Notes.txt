@@ -15,4 +15,6 @@ V1.3 Released  14 Apr 2011 - Added sequence number to wide bandscope data.(VK6AP
 
 V1.4 Released 14 Aug 2011  - Added support for FWD and REV power from Penny(Lane).
 
+V1.5 Released 24 Sep 2011  _ Added support for manual selection of Alex Relays. Moved Hermes/PennyLane drive level to C&C data.
+
 
