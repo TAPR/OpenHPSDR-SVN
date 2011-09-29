@@ -26,52 +26,46 @@ for line in data:
    idx = idx + 1
    if idx > StartReadLines and idx < LastReadLines: 
       nline = string.rstrip( string.expandtabs(line))
-      # print nline
       temp = string.strip(nline[0:PrefixFieldEnd])
       prefix = string.strip(temp,'*#') 
       pstr = re.sub( '\([0-9]+\)', '', prefix )
       pref = re.split( ',', pstr )
-      #print "comma string", pref
       country = string.strip(nline[PrefixFieldEnd:EntityFieldEnd])
       cont = string.strip(nline[EntityFieldEnd:ContFieldEnd])
       ITU = string.strip(nline[ContFieldEnd:ITUFieldEnd])
       CQ = string.strip(nline[ITUFieldEnd:CQFieldEnd])
       code = string.strip(nline[CQFieldEnd:CodeFieldEnd])
-      print "   <country>"
+      pstr_lst = []  
       for p in pref:
 	 if( string.find( p, "-" ) > 0 ):
-	   #print "hyphen string"
 	   if( re.match( "[A-Z][A-Z]", p ) > 0 ):
 	     slist = re.split( '-', p )
 	     end = ord(slist[1][1]) - ord(slist[0][1])
 	     for i in range(ord(slist[0][1]), ord(slist[1][1])):
-	        print "      <prefix>%s</prefix>" % (slist[0][0] + chr(i))
+                pstr_lst.append(slist[0][0] + chr(i))
 	    
-	     print "      <prefix>%s</prefix>" % (slist[1])
-	   elif( re.match( "([0-9][A-Z])", p ) > 0 ):
+	     pstr_lst.append(slist[1])
+           elif( re.match( "([0-9][A-Z])", p ) > 0 ):
 	     slist = re.split( '-', p )
 	     end = ord(slist[1][1]) - ord(slist[0][1])
 	     for i in range(ord(slist[0][1]), ord(slist[1][1])):
-	        print "      <prefix>%s</prefix>" % (slist[0][0] + chr(i))
+	        pstr_lst.append(slist[0][0] + chr(i))
 	    
-	     print "      <prefix>%s</prefix>" % (slist[1])
+	     pstr_lst.append(slist[1])
 	   elif( re.match( "([A-Z][0-9])", p ) > 0 ):
 	     slist = re.split( '-', p )
 	     end = ord(slist[1]) - ord(slist[0][1])
 	     for i in range(ord(slist[0][1]), ord(slist[1])):
-	        print "      <prefix>%s</prefix>" % (slist[0][0] + chr(i))
+	        pstr_lst.append(slist[0][0] + chr(i))
 	    
-	     print "      <prefix>%s</prefix>" % (slist[0][0]+ slist[1])
-	     #print "Character Number", slist[0][1], slist[1], end
-	   #print "      <prefix>%s</prefix>" % string.strip( p )
-	 else:
-           print "      <prefix>%s</prefix>" % string.strip( p )
-         
+	     pstr_lst.append(slist[0][0] + slist[1])
+         else:
+           pstr_lst.append( p )
+      print "   <country code=\"%s\" prefix=\"%s\">" % (code, ', '.join( pstr_lst ))
       print "      <name>%s</name>" % country
       print "      <cont>%s</cont>" % cont
       print "      <ITU>%s</ITU>" % ITU
       print "      <CQ>%s</CQ>" % CQ
-      print "      <code>%s</code>" % code
       print "   </country>"
 
 print "</resources>"
