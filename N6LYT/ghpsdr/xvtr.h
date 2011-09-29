@@ -55,6 +55,7 @@ struct _XVTR_ENTRY {
     int alexRxAntenna;
     int alexRxOnlyAntenna;
     int alexTxAntenna;
+    int alexAttenuation;
 };
 
 typedef struct _XVTR_ENTRY XVTR_ENTRY;
