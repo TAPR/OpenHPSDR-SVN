@@ -65,6 +65,8 @@ void rxAnt1Callback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setAlexRxAntenna(0);
         bandSetAlexRxAntenna(0);
+        setAlexRxOnlyAntenna(0);
+        bandSetAlexRxOnlyAntenna(0);
     }
 }
 
@@ -72,6 +74,8 @@ void rxAnt2Callback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setAlexRxAntenna(1);
         bandSetAlexRxAntenna(1);
+        setAlexRxOnlyAntenna(0);
+        bandSetAlexRxOnlyAntenna(0);
     }
 }
 
@@ -79,15 +83,17 @@ void rxAnt3Callback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setAlexRxAntenna(2);
         bandSetAlexRxAntenna(2);
-    }
-}
-
-void rxNoneCallback(GtkWidget* widget,gpointer data) {
-    if(GTK_TOGGLE_BUTTON(widget)->active) {
         setAlexRxOnlyAntenna(0);
         bandSetAlexRxOnlyAntenna(0);
     }
 }
+
+//void rxNoneCallback(GtkWidget* widget,gpointer data) {
+//    if(GTK_TOGGLE_BUTTON(widget)->active) {
+//        setAlexRxOnlyAntenna(0);
+//        bandSetAlexRxOnlyAntenna(0);
+//    }
+//}
 
 void rxR1Callback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
@@ -197,22 +203,23 @@ GtkWidget* alexSetupUI() {
     gtk_widget_show(rxAnt3);
     gtk_box_pack_start(GTK_BOX(box),rxAnt3,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(rxAnt3),"clicked",G_CALLBACK(rxAnt3Callback),NULL);
-    gtk_widget_show(box);
-    gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
+//    gtk_widget_show(box);
+//    gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
 
-    box=gtk_hbox_new(FALSE,2);
-    label=gtk_label_new("Rx Only");
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    gtk_widget_show(box);
-    gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
+//    box=gtk_hbox_new(FALSE,2);
+//    label=gtk_label_new("Rx Only");
+//    gtk_widget_show(label);
+//    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+//    gtk_widget_show(box);
+//    gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
 
-    box=gtk_hbox_new(FALSE,2);
-    rxNone=gtk_radio_button_new_with_label(NULL,"None");
-    gtk_widget_show(rxNone);
-    gtk_box_pack_start(GTK_BOX(box),rxNone,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(rxNone),"clicked",G_CALLBACK(rxNoneCallback),NULL);
-    rxR1=gtk_radio_button_new_with_label(gtk_radio_button_group(GTK_RADIO_BUTTON(rxNone)),"Rx 1");
+//    box=gtk_hbox_new(FALSE,2);
+//    rxNone=gtk_radio_button_new_with_label(NULL,"None");
+//    gtk_widget_show(rxNone);
+//    gtk_box_pack_start(GTK_BOX(box),rxNone,FALSE,FALSE,2);
+//    g_signal_connect(G_OBJECT(rxNone),"clicked",G_CALLBACK(rxNoneCallback),NULL);
+
+    rxR1=gtk_radio_button_new_with_label(gtk_radio_button_group(GTK_RADIO_BUTTON(rxAnt3)),"Rx 1");
     gtk_widget_show(rxR1);
     gtk_box_pack_start(GTK_BOX(box),rxR1,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(rxR1),"clicked",G_CALLBACK(rxR1Callback),NULL);
