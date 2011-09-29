@@ -56,6 +56,11 @@ GtkWidget* txAnt1;
 GtkWidget* txAnt2;
 GtkWidget* txAnt3;
 
+GtkWidget* alexAttenuation0dB;
+GtkWidget* alexAttenuation10dB;
+GtkWidget* alexAttenuation20dB;
+GtkWidget* alexAttenuation30dB;
+
 void rxAnt1Callback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setAlexRxAntenna(0);
@@ -126,6 +131,29 @@ void txAnt3Callback(GtkWidget* widget,gpointer data) {
     }
 }
 
+void alexAttenuation0dBButtonCallback(GtkWidget* widget,gpointer data) {
+    if(GTK_TOGGLE_BUTTON(widget)->active) {
+        setAlexAttenuation(0);
+    }
+}
+
+void alexAttenuation10dBButtonCallback(GtkWidget* widget,gpointer data) {
+    if(GTK_TOGGLE_BUTTON(widget)->active) {
+        setAlexAttenuation(1);
+    }
+}
+
+void alexAttenuation20dBButtonCallback(GtkWidget* widget,gpointer data) {
+    if(GTK_TOGGLE_BUTTON(widget)->active) {
+        setAlexAttenuation(2);
+    }
+}
+
+void alexAttenuation30dBButtonCallback(GtkWidget* widget,gpointer data) {
+    if(GTK_TOGGLE_BUTTON(widget)->active) {
+        setAlexAttenuation(3);
+    }
+}
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -222,6 +250,34 @@ GtkWidget* alexSetupUI() {
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
 
+    box=gtk_hbox_new(FALSE,5);
+    label=gtk_label_new("Alex Attenuation");
+    gtk_widget_show(label);
+    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+    gtk_widget_show(box);
+    gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
+
+    box=gtk_hbox_new(FALSE,2);
+    alexAttenuation0dB=gtk_radio_button_new_with_label(NULL,"0dB");
+    gtk_widget_show(alexAttenuation0dB);
+    gtk_box_pack_start(GTK_BOX(box),alexAttenuation0dB,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(alexAttenuation0dB),"clicked",G_CALLBACK(alexAttenuation0dBButtonCallback),NULL);
+    alexAttenuation10dB=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(alexAttenuation0dB),"10dB");
+    gtk_widget_show(alexAttenuation10dB);
+    gtk_box_pack_start(GTK_BOX(box),alexAttenuation10dB,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(alexAttenuation10dB),"clicked",G_CALLBACK(alexAttenuation10dBButtonCallback),NULL);
+    alexAttenuation20dB=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(alexAttenuation0dB),"20dB");
+    gtk_widget_show(alexAttenuation20dB);
+    gtk_box_pack_start(GTK_BOX(box),alexAttenuation20dB,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(alexAttenuation20dB),"clicked",G_CALLBACK(alexAttenuation20dBButtonCallback),NULL);
+    alexAttenuation30dB=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(alexAttenuation0dB),"30dB");
+    gtk_widget_show(alexAttenuation30dB);
+    gtk_box_pack_start(GTK_BOX(box),alexAttenuation30dB,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(alexAttenuation30dB),"clicked",G_CALLBACK(alexAttenuation30dBButtonCallback),NULL);
+    gtk_widget_show(box);
+    gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
+
+
     switch(alexRxAntenna) {
         case 0:
             gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxAnt1),TRUE);
@@ -262,6 +318,20 @@ GtkWidget* alexSetupUI() {
             break;
     }
 
+    switch(alexAttenuation) {
+        case 0:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(alexAttenuation0dB),TRUE);
+            break;
+        case 1:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(alexAttenuation10dB),TRUE);
+            break;
+        case 2:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(alexAttenuation20dB),TRUE);
+            break;
+        case 3:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(alexAttenuation30dB),TRUE);
+            break;
+    }
 
     gtk_widget_show(alexPage);
     return alexPage;

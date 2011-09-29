@@ -61,11 +61,6 @@ GtkWidget* modeClassE;
 GtkWidget* janusMicSource;
 GtkWidget* penelopeMicSource;
 
-GtkWidget* alexAttenuation0Db;
-GtkWidget* alexAttenuation10Db;
-GtkWidget* alexAttenuation20Db;
-GtkWidget* alexAttenuation30Db;
-
 GtkWidget* hpsdrHalfDuplex;
 GtkWidget* hpsdrFullDuplex;
 
@@ -149,30 +144,6 @@ void janusMicSourceButtonCallback(GtkWidget* widget,gpointer data) {
 void penelopeMicSourceButtonCallback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setMicSource(1);
-    }
-}
-
-void alexAttenuation0DbButtonCallback(GtkWidget* widget,gpointer data) {
-    if(GTK_TOGGLE_BUTTON(widget)->active) {
-        setAlexAttenuation(0);
-    }
-}
-
-void alexAttenuation10DbButtonCallback(GtkWidget* widget,gpointer data) {
-    if(GTK_TOGGLE_BUTTON(widget)->active) {
-        setAlexAttenuation(1);
-    }
-}
-
-void alexAttenuation20DbButtonCallback(GtkWidget* widget,gpointer data) {
-    if(GTK_TOGGLE_BUTTON(widget)->active) {
-        setAlexAttenuation(2);
-    }
-}
-
-void alexAttenuation30DbButtonCallback(GtkWidget* widget,gpointer data) {
-    if(GTK_TOGGLE_BUTTON(widget)->active) {
-        setAlexAttenuation(3);
     }
 }
 
@@ -325,29 +296,6 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(penelopeMicSource);
     gtk_box_pack_start(GTK_BOX(box),penelopeMicSource,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(penelopeMicSource),"clicked",G_CALLBACK(penelopeMicSourceButtonCallback),NULL);
-    gtk_widget_show(box);
-    gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
-
-    box=gtk_hbox_new(FALSE,5);
-    label=gtk_label_new("Alex Attenuation:			");
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    alexAttenuation0Db=gtk_radio_button_new_with_label(NULL,"0Db		");
-    gtk_widget_show(alexAttenuation0Db);
-    gtk_box_pack_start(GTK_BOX(box),alexAttenuation0Db,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(alexAttenuation0Db),"clicked",G_CALLBACK(alexAttenuation0DbButtonCallback),NULL);
-    alexAttenuation10Db=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(alexAttenuation0Db),"10Db	");
-    gtk_widget_show(alexAttenuation10Db);
-    gtk_box_pack_start(GTK_BOX(box),alexAttenuation10Db,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(alexAttenuation10Db),"clicked",G_CALLBACK(alexAttenuation10DbButtonCallback),NULL);
-    alexAttenuation20Db=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(alexAttenuation0Db),"20Db	");
-    gtk_widget_show(alexAttenuation20Db);
-    gtk_box_pack_start(GTK_BOX(box),alexAttenuation20Db,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(alexAttenuation20Db),"clicked",G_CALLBACK(alexAttenuation20DbButtonCallback),NULL);
-    alexAttenuation30Db=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(alexAttenuation0Db),"30Db	");
-    gtk_widget_show(alexAttenuation30Db);
-    gtk_box_pack_start(GTK_BOX(box),alexAttenuation30Db,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(alexAttenuation30Db),"clicked",G_CALLBACK(alexAttenuation30DbButtonCallback),NULL);
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
 
