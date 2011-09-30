@@ -270,6 +270,14 @@ void process_ozy_input_buffer(char* buffer) {
             break;
         }
 
+if(xmit) {
+    float fwd=(float)alexForwardPower/100.0F;
+    float rev=(float)alexReversePower/100.0F;
+
+    float gamma=sqrt(rev/fwd);
+    float vswr=(1.0F+gamma)/(1.0F-gamma);
+    fprintf(stderr,"fwd=%f rev=%f vswr=%f\n",fwd,rev,vswr);
+}
         // extract the 63 samples
         for(i=0;i<63;i++) {
 
