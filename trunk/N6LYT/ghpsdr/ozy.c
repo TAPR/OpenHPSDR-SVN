@@ -342,7 +342,8 @@ void process_ozy_input_buffer(char* buffer) {
                 if(pennyLane) {
                     gain=1.0;
                 } else {
-                    gain=rfGain/255.0;
+                    //gain=rfGain/255.0;
+                    gain=rfGain;
                 }
 
                 for(j=0;j<buffer_size;j+=output_sample_increment) {
