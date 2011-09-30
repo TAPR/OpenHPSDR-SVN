@@ -44,6 +44,7 @@ void quitSetup();
 void ghpsdr_setup_update() {
     if(setupWindow!=NULL) {
         updateDisplaySetup();
+        updateAlexSetup();
     }
 }
 

@@ -284,7 +284,13 @@ GtkWidget* alexSetupUI() {
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
 
+    updateAlexSetup();
 
+    gtk_widget_show(alexPage);
+    return alexPage;
+}
+
+void updateAlexSetup() {
     if(alexRxOnlyAntenna==0) {
         switch(alexRxAntenna) {
             case 0:
@@ -339,6 +345,4 @@ GtkWidget* alexSetupUI() {
             break;
     }
 
-    gtk_widget_show(alexPage);
-    return alexPage;
 }

@@ -34,3 +34,5 @@
 * @brief hpsdr setup UI
 */
 GtkWidget* alexSetupUI();
+
+void updateAlexSetup();
