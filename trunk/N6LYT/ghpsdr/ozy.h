@@ -91,6 +91,7 @@ int preamp;
 int sampleRate;
 
 int mox;
+int xmit;
 
 int pennyLane;
 

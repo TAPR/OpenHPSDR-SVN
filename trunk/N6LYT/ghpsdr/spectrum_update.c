@@ -97,7 +97,7 @@ gint spectrumUpdate(gpointer data) {
 void updateSamples() {
     int thread;
     thread=0;
-    if(mox && !fullDuplex) thread=1;
+    if(xmit && !fullDuplex) thread=1;
 
     switch(spectrumMode) {
         case spectrumSPECTRUM:

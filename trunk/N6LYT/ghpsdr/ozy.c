@@ -133,11 +133,12 @@ int preamp=0;          // default preamp off
 
 int sampleRate=96000;  // default 48k
 
-int mox=0;             // default not transmitting
-
+int mox=0;
 int ptt=0;
 int dot=0;
 int dash=0;
+
+int xmit=0;  // not transmitting
 
 int pennyLane=0;       // default is Penelope
 int driveLevel=255;    // default is max
@@ -204,6 +205,7 @@ void process_ozy_input_buffer(char* buffer) {
     int last_ptt;
     int last_dot;
     int last_dash;
+    int last_xmit;
 
     double gain;
 
@@ -222,16 +224,17 @@ void process_ozy_input_buffer(char* buffer) {
         dash=(control_in[0]&0x02)==0x02;
         dot=(control_in[0]&0x04)==0x04;
 
-//fprintf(stderr,"%02X ptt=%d dot=%d dash=%d\n",control_in[0],ptt,dot,dash);
+        last_xmit=xmit;
+        xmit=mox|ptt|dot|dash;
 
-        if(ptt!=last_ptt || dot!=last_dot || dash!=last_dash) {
-            int *vfoState=malloc(sizeof(int));
-            *vfoState=ptt|dot|dash;
-            g_idle_add(vfoTransmit,(gpointer)vfoState);
-        }
+        int *vfoState=malloc(sizeof(int));
+        *vfoState=xmit;
+        g_idle_add(vfoTransmit,(gpointer)vfoState);
 
-        mox=mox|ptt|dot|dash;
-
+//if(xmit!=last_xmit) {
+//    fprintf(stderr,"ozy: xmit=%d mox=%d ptt=%d dot=%d dash=%d\n", xmit,mox,ptt,dot,dash);
+//    fprintf(stderr,"ozy: testing=%d tuning=%d\n", testing,tuning);
+//}
         switch((control_in[0]>>3)&0x1F) {
 
         case 0:
@@ -284,13 +287,14 @@ void process_ozy_input_buffer(char* buffer) {
             mic_sample_float=((float)mic_sample/32767.0f)*micGain; // 16 bit sample
 
             // add to buffer
-            if(mox) {
+            if(xmit) { // mute the input
                 left_input_buffer[samples]=0.0;
                 right_input_buffer[samples]=0.0;
             } else {
                 left_input_buffer[samples]=left_sample_float;
                 right_input_buffer[samples]=right_sample_float;
             }
+
             if(testing) {
                 mic_left_buffer[samples]=0.0f;
                 mic_right_buffer[samples]=0.0f;
@@ -314,23 +318,19 @@ void process_ozy_input_buffer(char* buffer) {
 
             // when we have enough samples give them to DttSP and get the results
             if(samples==buffer_size) {
-                // give to DttSP and get any output
-                // receive
+                // process the input
                 Audio_Callback (left_input_buffer,right_input_buffer,
                                 left_output_buffer,right_output_buffer, buffer_size, 0);
 
                 // transmit
-                if(mox) {
+                if(xmit) {
                     if(tuning) {
                         sineWave(mic_left_buffer,buffer_size,tuningPhase,(double)cwPitch);
                         tuningPhase=sineWave(mic_right_buffer,buffer_size,tuningPhase,(double)cwPitch);
                     } else if(testing) {
-                        //sineWave(mic_left_buffer,buffer_size,tuningPhase,(double)0);
-                        //tuningPhase=sineWave(mic_right_buffer,buffer_size,tuningPhase,(double)cwPitch);
+                        // leave alone
                     } else if(mode==modeCWU || mode==modeCWL) {
                         CWtoneExchange(mic_left_buffer, mic_right_buffer, buffer_size);
-                        //sineWave(mic_left_buffer,buffer_size,tuningPhase,(double)cwPitch);
-                        //tuningPhase=sineWave(mic_right_buffer,buffer_size,tuningPhase,(double)cwPitch);
                     }
                 }
 
@@ -344,19 +344,18 @@ void process_ozy_input_buffer(char* buffer) {
                 } else {
                     gain=rfGain/255.0;
                 }
+
                 for(j=0;j<buffer_size;j+=output_sample_increment) {
                     left_rx_sample=(short)(left_output_buffer[j]*32767.0);
                     right_rx_sample=(short)(right_output_buffer[j]*32767.0);
 
-                    if(mox || ptt || dot || dash ) {
+                    if(xmit) {
                         left_tx_sample=(short)(left_tx_buffer[j]*32767.0*gain);
                         right_tx_sample=(short)(right_tx_buffer[j]*32767.0*gain);
                     } else {
                         left_tx_sample=0;
                         right_tx_sample=0;
                     }
-
-                    //audio_stream_put_samples(left_rx_sample,right_rx_sample);
 
                     output_buffer[output_buffer_index++]=left_rx_sample>>8;
                     output_buffer[output_buffer_index++]=left_rx_sample;
@@ -371,6 +370,10 @@ void process_ozy_input_buffer(char* buffer) {
                         output_buffer[0]=SYNC;
                         output_buffer[1]=SYNC;
                         output_buffer[2]=SYNC;
+
+                        // set mox
+                        control_out[0]=control_out[0]&0xFE;
+                        control_out[0]=control_out[0]|(xmit&0x01);
 
                         if(splitChanged) {
                             output_buffer[3]=control_out[0];
@@ -404,7 +407,7 @@ void process_ozy_input_buffer(char* buffer) {
                             }
                             frequencyBChanged=0;
                         } else if(driveLevelChanged && pennyLane) { 
-                            output_buffer[3]=0x12|(mox&0x01);
+                            output_buffer[3]=0x12|(xmit&0x01);
                             output_buffer[4]=driveLevel;
                             output_buffer[5]=0;
                             output_buffer[6]=0;
@@ -585,6 +588,10 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
             output_buffer[1]=SYNC;
             output_buffer[2]=SYNC;
 
+            // set if transmitting
+            control_out[0]=control_out[0]&0xFE;
+            control_out[0]=control_out[0]|(xmit&0x01);
+
             if(splitChanged) {
                 output_buffer[3]=control_out[0];
                 output_buffer[4]=control_out[1];
@@ -720,8 +727,6 @@ void getSpectrumSamples(char *samples) {
 */
 void setMOX(int state) {
     mox=state;
-    control_out[0]=control_out[0]&0xFE;
-    control_out[0]=control_out[0]|(state&0x01);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -1123,7 +1128,7 @@ void ozyRestoreState() {
 
 void setAlexRxAntenna(int a) {
     alexRxAntenna=a;
-    if(!mox) {
+    if(!xmit) {
         control_out[4]=control_out[4]&0xFC;
         control_out[4]=control_out[4]|a;
     }
@@ -1131,7 +1136,7 @@ void setAlexRxAntenna(int a) {
 
 void setAlexTxAntenna(int a) {
     alexTxAntenna=a;
-    if(mox) {
+    if(xmit) {
         control_out[4]=control_out[4]&0xFC;
         control_out[4]=control_out[4]|a;
     }
@@ -1139,7 +1144,7 @@ void setAlexTxAntenna(int a) {
 
 void setAlexRxOnlyAntenna(int a) {
     alexRxOnlyAntenna=a;
-    if(!mox) {
+    if(!xmit) {
         control_out[3]=control_out[3]&0x9F;
         control_out[3]=control_out[3]|(a<<5);
 

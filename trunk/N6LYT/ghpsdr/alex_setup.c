@@ -258,7 +258,7 @@ GtkWidget* alexSetupUI() {
     gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
 
     box=gtk_hbox_new(FALSE,5);
-    label=gtk_label_new("Alex Attenuation");
+    label=gtk_label_new("Attenuation");
     gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
     gtk_widget_show(box);
@@ -285,31 +285,30 @@ GtkWidget* alexSetupUI() {
     gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
 
 
-    switch(alexRxAntenna) {
-        case 0:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxAnt1),TRUE);
-            break;
-        case 1:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxAnt2),TRUE);
-            break;
-        case 2:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxAnt3),TRUE);
-            break;
-    }
-
-    switch(alexRxOnlyAntenna) {
-        case 0:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxNone),TRUE);
-            break;
-        case 1:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxR1),TRUE);
-            break;
-        case 2:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxR2),TRUE);
-            break;
-        case 3:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxRXV),TRUE);
-            break;
+    if(alexRxOnlyAntenna==0) {
+        switch(alexRxAntenna) {
+            case 0:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxAnt1),TRUE);
+                break;
+            case 1:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxAnt2),TRUE);
+                break;
+            case 2:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxAnt3),TRUE);
+                break;
+        }
+    } else {
+        switch(alexRxOnlyAntenna) {
+            case 1:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxR1),TRUE);
+                break;
+            case 2:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxR2),TRUE);
+                break;
+            case 3:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxRXV),TRUE);
+                break;
+        }
     }
 
 
