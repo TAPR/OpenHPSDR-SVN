@@ -160,7 +160,7 @@ gboolean dbm_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     layout = pango_layout_new (context);
     pango_layout_set_width(layout,160*PANGO_SCALE);
     pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-    if(mox) {
+    if(xmit) {
         pango_layout_set_markup (layout, "<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 12'>Watts    </span>", -1);
     } else {
         pango_layout_set_markup (layout, "<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 12'>dBm    </span>", -1);
@@ -291,7 +291,7 @@ void meterDbmDrawSignal() {
         layout = pango_layout_new(context);
         pango_layout_set_width(layout,120*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-//        if(mox) {
+//        if(xmit) {
 //#ifdef NETBOOK
 //            sprintf(temp,"<span foreground='#FF0000' background='#000000' font_desc='Sans Bold 8'>%0.3f Watts</span>",(float)forwardPower/5000.0);
 //#else

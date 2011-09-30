@@ -1151,10 +1151,10 @@ int vfoTransmit(gpointer data) {
 
     if(bSplit) {
         bTransmitting=state;
-        //updateVfoBDisplay();
+        updateVfoBDisplay();
     } else {
         aTransmitting=state;
-        //updateVfoADisplay();
+        updateVfoADisplay();
     }
     return 0;
 }

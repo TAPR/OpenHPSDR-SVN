@@ -276,7 +276,7 @@ void setHFTitles() {
     gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     gtk_button_set_label((GtkButton*)buttonBand14,"XVTR");
     gtk_widget_set_sensitive(buttonBand14,TRUE);
-    label=gtk_bin_get_child((GtkBin*)buttonBand4);
+    label=gtk_bin_get_child((GtkBin*)buttonBand14);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
     gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
 }
