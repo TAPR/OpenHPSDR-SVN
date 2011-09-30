@@ -16148,7 +16148,7 @@ namespace PowerSDR
                 VFOAFreq = freq;									// set VFOA frequency
 
                 Filter am_filter = RX1Filter;					// save current AM filter
-                RX1Filter = Filter.F1;						// set filter to 500Hz
+                RX1Filter = Filter.F1;						   // set filter to 500Hz
 
                 PreampMode preamp = RX1PreampMode;				// save current preamp mode
                 RX1PreampMode = PreampMode.HPSDR_ON;			// set to high
@@ -16165,7 +16165,7 @@ namespace PowerSDR
                 int progress_divisor;
                 if (alexpresent)
                 {
-                    progress_divisor = 270; //390;
+                    progress_divisor = 390;
                 }
                 else
                 {
@@ -42894,49 +42894,47 @@ namespace PowerSDR
             if (sender == null) return;
             if (sender.GetType() != typeof(ToolStripMenuItem)) return;
             string menu_item = ((ToolStripMenuItem)sender).Text;
-            //ToolStripMenuItem miClicked = (ToolStripMenuItem)sender;
-            //string menu_item = miClicked.Text;
 
             switch (menu_item)
             {
                 case "160":
-                    radBand160.Checked = true;
+                    radBand160.PerformClick();
                     break;
                 case "80":
-                    radBand80.Checked = true;
+                    radBand80.PerformClick();
                     break;
                 case "60":
-                    radBand60.Checked = true;
+                    radBand60.PerformClick();
                     break;
                 case "40":
-                    radBand40.Checked = true;
+                    radBand40.PerformClick();
                     break;
                 case "30":
-                    radBand30.Checked = true;
+                    radBand30.PerformClick();
                     break;
                 case "20":
-                    radBand20.Checked = true;
+                    radBand20.PerformClick();
                     break;
                 case "17":
-                    radBand17.Checked = true;
+                    radBand17.PerformClick();
                     break;
                 case "15":
-                    radBand15.Checked = true;
+                    radBand15.PerformClick();
                     break;
                 case "12":
-                    radBand12.Checked = true;
+                    radBand12.PerformClick();
                     break;
                 case "10":
-                    radBand10.Checked = true;
+                    radBand10.PerformClick();
                     break;
                 case "6":
-                    radBand6.Checked = true;
+                    radBand6.PerformClick();
                     break;
                 case "WWV":
-                    radBandWWV.Checked = true;
+                    radBandWWV.PerformClick();
                     break;
                 case "GEN":
-                    radBandGEN.Checked = true;
+                    radBandGEN.PerformClick();
                     break;
             }
         }
