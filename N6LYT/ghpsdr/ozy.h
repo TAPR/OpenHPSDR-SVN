@@ -103,6 +103,7 @@ int alexRxAntenna;
 int alexTxAntenna;
 int alexRxOnlyAntenna;
 
+float vswr;
 
 void ozy_set_metis();
 void ozy_set_interface(char*);

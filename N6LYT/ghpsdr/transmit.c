@@ -125,11 +125,8 @@ void tuneButtonCallback(GtkWidget* widget,gpointer data) {
         state=1;
     }
 
-fprintf(stderr,"tuneButtonCallback: %d\n", state);
-
     int *vfoState=malloc(sizeof(int));
     *vfoState=state;
-fprintf(stderr,"g_idle_add: vfoTransmit\n");
     g_idle_add(vfoTransmit,(gpointer)vfoState);
 
     setMOX(state);
