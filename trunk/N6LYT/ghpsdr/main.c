@@ -1,4 +1,5 @@
 /** 
+
 * \file main.c
 * \brief Main file for the GHPSDR Software Defined Radio Graphic Interface. 
 * \author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
@@ -792,7 +793,7 @@ int main(int argc,char* argv[]) {
 
 
     // initialize ozy (default 48K)
-    ozyRestoreState();
+    //ozyRestoreState();
     do {
         switch(ozy_init()) {
             case -1: // cannot find ozy

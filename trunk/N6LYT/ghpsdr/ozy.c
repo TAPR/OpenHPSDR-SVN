@@ -156,6 +156,10 @@ int alexRxAntenna=0;
 int alexTxAntenna=0;
 int alexRxOnlyAntenna=0;
 
+float vswr=0.0;
+
+int debug_control1=0;
+
 void ozy_set_metis() {
     metis=1;
 }
@@ -208,6 +212,7 @@ void process_ozy_input_buffer(char* buffer) {
     int last_xmit;
 
     double gain;
+
 
     if(buffer[b++]==SYNC && buffer[b++]==SYNC && buffer[b++]==SYNC) {
         // extract control bytes
@@ -275,8 +280,8 @@ if(xmit) {
     float rev=(float)alexReversePower/100.0F;
 
     float gamma=sqrt(rev/fwd);
-    float vswr=(1.0F+gamma)/(1.0F-gamma);
-    fprintf(stderr,"fwd=%f rev=%f vswr=%f\n",fwd,rev,vswr);
+    vswr=(1.0F+gamma)/(1.0F-gamma);
+    //fprintf(stderr,"fwd=%f rev=%f vswr=%f\n",fwd,rev,vswr);
 }
         // extract the 63 samples
         for(i=0;i<63;i++) {
@@ -384,6 +389,11 @@ if(xmit) {
                         control_out[0]=control_out[0]&0xFE;
                         control_out[0]=control_out[0]|(xmit&0x01);
 
+if(control_out[1]!=debug_control1) {
+    fprintf(stderr,"control_out[1]=%02X\n",control_out[1]);
+    debug_control1=control_out[1];
+}
+
                         if(splitChanged) {
                             output_buffer[3]=control_out[0];
                             output_buffer[4]=control_out[1];
@@ -469,6 +479,10 @@ void ozy_prime() {
     int i;
     int bytes;
 
+if(control_out[1]!=debug_control1) {
+    fprintf(stderr,"control_out[1]=%02X\n",control_out[1]);
+    debug_control1=control_out[1];
+}
     output_buffer[0]=SYNC;
     output_buffer[1]=SYNC;
     output_buffer[2]=SYNC;
@@ -777,7 +791,7 @@ void setSpeed(int s) {
 void set10MHzSource(int source) {
     clock10MHz=source;
     control_out[1]=control_out[1]&0xF3;
-    control_out[1]=control_out[1]|(source<<2);
+    control_out[1]=control_out[1]|(clock10MHz<<2);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -898,12 +912,14 @@ void setLT2208Random(int random) {
 int ozy_init() {
     int rc;
 
+    fprintf(stderr,"ozy_init\n");
+
     //
     setSpeed(speed);
 
     // setup defaults
     control_out[0] = MOX_DISABLED;
-    control_out[1] = CONFIG_MERCURY
+    control_out[1] = CONFIG_BOTH
             | MERCURY_122_88MHZ_SOURCE
             | MERCURY_10MHZ_SOURCE
             | speed
@@ -914,6 +930,8 @@ int ozy_init() {
             | LT2208_DITHER_ON
             | LT2208_RANDOM_ON;
     control_out[4] = 0;
+
+    ozyRestoreState();
 
     tuningPhase=0.0;
 
