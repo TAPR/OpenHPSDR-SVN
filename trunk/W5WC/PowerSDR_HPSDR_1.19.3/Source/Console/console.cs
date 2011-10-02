@@ -690,8 +690,8 @@ namespace PowerSDR
 		public PowerSDR.RemoteProfiles ProfileForm;
 
         //EHR 25Mar08
-        private TDxInput.Device TDxDevice;
-        private TDxInput.Sensor TDxSensor;
+       // private TDxInput.Device TDxDevice;
+       // private TDxInput.Sensor TDxSensor;
 
 		private bool initializing = true;
 
@@ -6336,7 +6336,7 @@ namespace PowerSDR
 			mnuUCB.Visible = true;
 #endif
             // EHR add nav support
-            try
+          /*  try
             {
                 TDxDevice = new TDxInput.DeviceClass();
                 TDxSensor = TDxDevice.Sensor;
@@ -6352,7 +6352,7 @@ namespace PowerSDR
                 //MessageBox.Show("SpaceNavigator not installed.", "No Navigator",
                 //MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            // EHR end
+            // EHR end */
 
             Thread.Sleep(100);
             UpdateBandStackRegisters();
@@ -39390,16 +39390,16 @@ namespace PowerSDR
             }
         }
 
-        private static bool TDxButtonState = false;
-        private static bool TDxCurrentVFO = false; //VFOA
+       // private static bool TDxButtonState = false;
+       // private static bool TDxCurrentVFO = false; //VFOA
 
         private void timer_navigate_Tick(object sender, System.EventArgs e)
         {
-            if (TDxSensor == null)
+          /*  if (TDxSensor == null)
                 return;
             TDxInput.Vector3D t = TDxSensor.Translation;
             TDxInput.AngleAxis r = TDxSensor.Rotation;
-           /* TDxDevice.Keyboard.IsKeyDown(1);
+            TDxDevice.Keyboard.IsKeyDown(1);
             double del;
             int val;
 
