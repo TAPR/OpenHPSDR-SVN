@@ -40,7 +40,7 @@ namespace PowerSDR
     using System.Text;
     using System.IO;
     using System.IO.Ports;
-    using TDxInput;
+   // using TDxInput;
 
     public class Setup : System.Windows.Forms.Form
     {
