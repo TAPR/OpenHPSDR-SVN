@@ -56,7 +56,7 @@ namespace PowerSDR
     using SDRSerialSupportII;
     using PortTalk;
     using HPSDR_USB_LIB_V1;
-    using Flex.TNF;
+    //using Flex.TNF;
 
 	#region Enums
 
@@ -750,8 +750,8 @@ namespace PowerSDR
         private string machineName = System.Environment.MachineName;
 
         //EHR 25Mar08
-        private TDxInput.Device TDxDevice;
-        private TDxInput.Sensor TDxSensor;
+       // private TDxInput.Device TDxDevice;
+       // private TDxInput.Sensor TDxSensor;
 
 		private bool initializing = true;
 
@@ -7047,7 +7047,7 @@ namespace PowerSDR
 
         private void InitConsole()
         {
-            // EHR add nav support
+         /*   // EHR add nav support
             try
             {
                 TDxDevice = new TDxInput.DeviceClass();
@@ -7064,7 +7064,7 @@ namespace PowerSDR
                 //MessageBox.Show("SpaceNavigator not installed.", "No Navigator",
                 //MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            // EHR end
+            // EHR end */
 
             Thread.Sleep(100);
             UpdateBandStackRegisters();
@@ -41302,7 +41302,7 @@ namespace PowerSDR
 
         private void timer_navigate_Tick(object sender, System.EventArgs e)
         {
-            if (TDxSensor == null)
+          /*  if (TDxSensor == null)
                 return;
             TDxInput.Vector3D t = TDxSensor.Translation;
             TDxInput.AngleAxis r = TDxSensor.Rotation;
@@ -41319,7 +41319,7 @@ namespace PowerSDR
                 TDxButtonState = false;
                 //click
                 TDxCurrentVFO = !TDxCurrentVFO;
-            }
+            } 
 
             if (spacenav_controlvfos)
             {
@@ -41369,7 +41369,7 @@ namespace PowerSDR
                     ptbFilterWidth.Value = val;
                     ptbFilterWidth_Scroll(this.ptbFilterWidth, EventArgs.Empty);
                 }
-            }
+            }*/
         }
 
         public void PressKeyboardButton(Keys keyCode)

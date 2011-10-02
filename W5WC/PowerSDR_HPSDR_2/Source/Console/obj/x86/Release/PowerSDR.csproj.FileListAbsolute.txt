@@ -218,7 +218,6 @@ C:\Users\Doug\Desktop\Beta_Release\PowerSDR_HPSDR_2\Source\Console\obj\x86\Relea
 C:\Users\Doug\Desktop\Beta_Release\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.exe.manifest
 C:\Users\Doug\Desktop\Beta_Release\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.application
 C:\Users\Doug\Desktop\Beta_Release\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.exe
-C:\Users\Doug\Desktop\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\Interop.TDxInput.dll
 C:\Users\Doug\Desktop\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.csproj.ResolveComReference.cache
 C:\Users\Doug\Desktop\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.exe
 C:\Users\Doug\Desktop\PowerSDR_HPSDR_2\bin\Release\PowerSDR.exe.manifest
