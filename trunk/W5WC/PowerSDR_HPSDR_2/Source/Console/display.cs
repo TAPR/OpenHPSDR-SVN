@@ -37,7 +37,7 @@ namespace PowerSDR
     using System.Drawing.Imaging;
     using System.Threading;
     using System.Windows.Forms;
-    using Flex.TNF;
+   // using Flex.TNF;
 
     //using Microsoft.DirectX;
     //using Microsoft.DirectX.Direct3D;
