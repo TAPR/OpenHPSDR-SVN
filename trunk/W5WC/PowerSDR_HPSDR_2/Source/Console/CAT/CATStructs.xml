@@ -128,14 +128,14 @@
 	</catstruct>
 	<catstruct code="CN">
 		<desc>ctcss function</desc>
-		<active>false</active>
+		<active>true</active>
 		<nsetparms>2</nsetparms>
 		<ngetparms>0</ngetparms>
 		<nansparms>2</nansparms>
 	</catstruct>
 	<catstruct code="CT">
 		<desc>ctcss function status</desc>
-		<active>false</active>
+		<active>true</active>
 		<nsetparms>1</nsetparms>
 		<ngetparms>0</ngetparms>
 		<nansparms>1</nansparms>
@@ -380,7 +380,7 @@
 	</catstruct>
 	<catstruct code="OF">
 		<desc>offset frequency</desc>
-		<active>false</active>
+		<active>true</active>
 		<nsetparms>9</nsetparms>
 		<ngetparms>0</ngetparms>
 		<nansparms>9</nansparms>
@@ -394,7 +394,7 @@
 	</catstruct>
 	<catstruct code="OS">
 		<desc>offset function status</desc>
-		<active>false</active>
+		<active>true</active>
 		<nsetparms>1</nsetparms>
 		<ngetparms>0</ngetparms>
 		<nansparms>1</nansparms>
@@ -971,7 +971,7 @@
 		<active>true</active>
 		<nsetparms>-1</nsetparms>
 		<ngetparms>0</ngetparms>
-		<nansparms>10</nansparms>
+		<nansparms>12</nansparms>
 	</catstruct>
 	<catstruct code="ZZID">
 		<desc>extended SetRigType</desc>
@@ -1861,5 +1861,467 @@
     <nsetparms>0</nsetparms>
     <ngetparms>-1</ngetparms>
     <nansparms>-1</nansparms>
+  </catstruct>
+  <catstruct code="ZZVI">
+    <desc>VAC Input Cable</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>2</nansparms>
+  </catstruct>
+  <catstruct code="ZZVM">
+    <desc>VAC Driver</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>2</nansparms>
+  </catstruct>
+  <catstruct code="ZZVO">
+    <desc>VAC Output Cable</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>2</nansparms>
+  </catstruct>
+  <catstruct code="ZZRV">
+    <desc>Primary Input Voltage</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZBY">
+    <desc>Closes the console</desc>
+    <active>true</active>
+    <nsetparms>0</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>-1</nansparms>
+   </catstruct>
+  <catstruct code="ZZAC">
+    <desc>Sets or reads the step size</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>2</nansparms>
+  </catstruct>
+  <catstruct code="ZZAD">
+    <desc>Moves VFOA down nn Tune Steps</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>-1</nansparms>
+  </catstruct>
+  <catstruct code="ZZAU">
+    <desc>Moves VFOA up nn Tune Steps</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>-1</nansparms>
+  </catstruct>
+  <catstruct code="ZZBM">
+    <desc>Moves VFO B down nn Tune Steps</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>-1</nansparms>
+  </catstruct>
+  <catstruct code="ZZBP">
+    <desc>Moves VFO B up nn Tune Steps</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>-1</nansparms>
+  </catstruct>
+  <catstruct code="ZZKM">
+    <desc>Sends CWX macro</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>-1</nansparms>
+  </catstruct>
+  <catstruct code="ZZBT">
+    <desc>RX2Band</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZME">
+    <desc>RX2 DSP Mode</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>2</nansparms>
+  </catstruct>
+  <catstruct code="ZZFJ">
+    <desc>RX2 DSP Filter</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>2</nansparms>
+  </catstruct>
+  <catstruct code="ZZDU">
+    <desc>DDUTil Status</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>126</nansparms>
+  </catstruct>
+  <catstruct code="ZZSN">
+    <desc>Radio serial number</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>9</nansparms>
+  </catstruct>
+  <catstruct code="ZZVJ">
+    <desc>VAC Use RX2</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZBA">
+    <desc>RX2 down one band</desc>
+    <active>false</active>
+    <nsetparms>0</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>0</nansparms>
+  </catstruct>
+  <catstruct code="ZZBB">
+    <desc>RX2 up one band</desc>
+    <active>false</active>
+    <nsetparms>0</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>0</nansparms>
+  </catstruct>
+  <catstruct code="ZZTV">
+    <desc>Transmit VFO Freq</desc>
+    <active>true</active>
+    <nsetparms>11</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>11</nansparms>
+  </catstruct>
+  <catstruct code="ZZTM">
+    <desc>TX AF Monitor Gain</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZWT">
+    <desc>F1500 Mixer Mic Gain</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZWU">
+    <desc>F1500 Mixer FlexWire In Gain</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZWV">
+    <desc>F1500 Mixer Phones out Level</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZWW">
+    <desc>F1500 Mixer FlexWire Out Level</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZOL">
+    <desc>DigL Click Tune Offset</desc>
+    <active>true</active>
+    <nsetparms>4</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZOU">
+    <desc>DigU Click Tune Offset</desc>
+    <active>true</active>
+    <nsetparms>4</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZSY">
+    <desc>VFO Sync Button</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZPB">
+    <desc>RX2 Preamp Button</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZNC">
+    <desc>RX2 NB Button</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZND">
+    <desc>RX2 NB2 Button</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZDF">
+    <desc>CAT Diversity Form</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZDE">
+    <desc>Diversity Form Enable</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZAS">
+    <desc>RX2 AGCT</desc>
+    <active>true</active>
+    <nsetparms>4</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZPY">
+    <desc>Disply Zoom</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZLA">
+    <desc>RX0 Gain</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZLB">
+    <desc>RX0 Stereo Bal</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZLC">
+    <desc>RX1 Gain</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZLD">
+    <desc>RX1 Stereo Bal</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZDY">
+    <desc>DX Level</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>2</nansparms>
+  </catstruct>
+  <catstruct code="ZZPE">
+    <desc>Display Pan Position</desc>
+    <active>true</active>
+    <nsetparms>4</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZKO">
+    <desc>CWX Form Control</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZLE">
+    <desc>RX2 audio level</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZLF">
+    <desc>RX2 Stereo Balance</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZIO">
+    <desc>Installed options</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZEM">
+    <desc>Verbose CAT Errors</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZOS">
+    <desc>Offset Direction</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZOT">
+    <desc>Repeater Freq Offset</desc>
+    <active>true</active>
+    <nsetparms>9</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>9</nansparms>
+  </catstruct>
+  <catstruct code="ZZTA">
+    <desc>CTCSS Enable</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZTB">
+    <desc>CTCSS Frequency</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>2</nansparms>
+  </catstruct>
+  <catstruct code="ZZFD">
+    <desc>FM Deviation</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZMV">
+    <desc>Get Memory Channel Count</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZMW">
+    <desc>Get Memory Channel Name</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>3</ngetparms>
+    <nansparms>20</nansparms>
+  </catstruct>
+  <catstruct code="ZZMX">
+    <desc>Memeory List</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>3</ngetparms>
+    <nansparms>0</nansparms>
+  </catstruct>
+  <catstruct code="ZZMY">
+    <desc>Save Memory Channel</desc>
+    <active>true</active>
+    <nsetparms>0</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>-1</nansparms>
+  </catstruct>
+  <catstruct code="ZZMZ">
+    <desc>Edit Memory Channel</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>0</nansparms>
+  </catstruct>
+  <catstruct code="ZZSV">
+    <desc>RX2 Squelch Button</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZSX">
+    <desc>RX2 Squelch Threshold</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZML">
+    <desc>Mode List</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>83</nansparms>
+  </catstruct>
+  <catstruct code="ZZSS">
+    <desc>CWX Stop</desc>
+    <active>true</active>
+    <nsetparms>0</nsetparms>
+    <ngetparms>-1</ngetparms>
+    <nansparms>-1</nansparms>
+  </catstruct>
+  <catstruct code="ZZDP">
+    <desc>Sprectrum Grid Max</desc>
+    <active>true</active>
+    <nsetparms>4</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZDQ">
+    <desc>Spectrum Grid Min</desc>
+    <active>true</active>
+    <nsetparms>4</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZDR">
+    <desc>Spectrum Grid Step</desc>
+    <active>true</active>
+    <nsetparms>2</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>2</nansparms>
+  </catstruct>
+  <catstruct code="ZZDN">
+    <desc>Waterfall Low Level</desc>
+    <active>true</active>
+    <nsetparms>4</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZDO">
+    <desc>Waterfall High Level</desc>
+    <active>true</active>
+    <nsetparms>4</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZMB">
+    <desc>RX2 Mute</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
   </catstruct>
 </catstructs>
