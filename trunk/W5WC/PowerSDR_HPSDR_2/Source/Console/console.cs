@@ -1284,7 +1284,7 @@ namespace PowerSDR
         private ToolStripMenuItem NB2ToolStripMenuItem;
         private ToolStripMenuItem BINToolStripMenuItem;
         private ToolStripMenuItem MultiRXToolStripMenuItem;
-        private ToolStripMenuItem bandToolStripMenuItem;
+        public ToolStripMenuItem bandToolStripMenuItem;
         private ToolStripMenuItem bandtoolStripMenuItem1;
         private ToolStripMenuItem bandtoolStripMenuItem2;
         private ToolStripMenuItem bandtoolStripMenuItem3;
@@ -1297,7 +1297,7 @@ namespace PowerSDR
         private ToolStripMenuItem bandtoolStripMenuItem11;
         private ToolStripMenuItem bandtoolStripMenuItem12;
         private ToolStripMenuItem bandtoolStripMenuItem13;
-        private ToolStripMenuItem modeToolStripMenuItem;
+        public ToolStripMenuItem modeToolStripMenuItem;
         private ToolStripMenuItem lSBToolStripMenuItem;
         private ToolStripMenuItem uSBToolStripMenuItem;
         private ToolStripMenuItem dSBToolStripMenuItem;
@@ -1534,7 +1534,7 @@ namespace PowerSDR
 			else if(list.Count == 0)
 			{
 				//fwc_init = FWCMidi.Open();
-                fwc_init = Pal.Init();
+                //fwc_init = Pal.Init();
                 FWC.SetPalCallback();
 			}
 
@@ -7687,7 +7687,7 @@ namespace PowerSDR
         public bool NoJanusSend = false;
 		public void ExitConsole()
 		{
-            try
+          /*  try
             {
                 if (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)
                     Pal.Exit();
@@ -7695,7 +7695,7 @@ namespace PowerSDR
             catch (Exception)
             {
 
-            }
+            }*/
 			if(SetupForm != null)		// make sure Setup form is deallocated
 				SetupForm.Dispose();
 			if(CWXForm != null)			// make sure CWX form is deallocated
@@ -20554,7 +20554,7 @@ namespace PowerSDR
                         if (!fwc_init)
                         {
                             //fwc_init = FWCMidi.Open();
-                            fwc_init = Pal.Init();
+                           // fwc_init = Pal.Init();
                             if (fwc_init)
                             {
                                 FWCEEPROM.Init();
@@ -20624,7 +20624,7 @@ namespace PowerSDR
                         if (!fwc_init)
                         {
                             //fwc_init = FWCMidi.Open();
-                            fwc_init = Pal.Init();
+                           // fwc_init = Pal.Init();
                             if (fwc_init)
                             {
                                 FWCEEPROM.Init();
@@ -34604,7 +34604,7 @@ namespace PowerSDR
 							case DisplayMode.PANAFALL:
 							case DisplayMode.PANASCOPE:
                                  int low_x=0, high_x=0;
-								int vfoa_x, vfoa_sub_x = 0;
+								int vfoa_sub_x = 0;
 								int vfoa_sub_low_x = 0;
 								int vfoa_sub_high_x = 0;
 								if(rx2_enabled && e.Y > picDisplay.Height / 2)//rx2
@@ -41503,8 +41503,18 @@ namespace PowerSDR
             double vfo = VFOAFreq;
             if (chkRIT.Checked) vfo += (double)udRIT.Value * 1e-6;
 
-            int low = radio.GetDSPRX(0, 0).RXFilterLow;
-            int high = radio.GetDSPRX(0, 0).RXFilterHigh;
+            switch (rx1_dsp_mode)
+            {
+                case (DSPMode.CWL):
+                    vfo += cw_pitch * 1e-6;
+                    break;
+                case (DSPMode.CWU):
+                    vfo -= cw_pitch * 1e-6;
+                    break;
+            }
+
+            int low = radio.GetDSPRX(0, 0).RXFilterLow - 200;
+            int high = radio.GetDSPRX(0, 0).RXFilterHigh + 200;
 
             List<Notch> l = NotchList.NotchesInBW(vfo, low, high);
             if (l.Count == 0)
@@ -41521,10 +41531,14 @@ namespace PowerSDR
             foreach (Notch n in l)
             {
                 // translate RF to audio frequency
-                double audio_freq = (n.Freq - vfo) * 1e6; // now in Hz
+                double audio_freq = Math.Abs((n.Freq - vfo)) * 1e6; // now in Hz
 
                 for (int x = 0; x < n.Depth; x++)
+                {
+                    if (audio_freq > 0)
                     addNotch(0, 0, count++, audio_freq, n.BW);
+                }
+
                 if (count >= 9) // don't enable more than 9 notches!
                     break;
             }
@@ -41553,6 +41567,16 @@ namespace PowerSDR
             if (rx2_enabled) vfo = VFOASubFreq;
             if (chkRIT.Checked) vfo += (double)udRIT.Value * 1e-6;
 
+            switch (rx1_dsp_mode)
+            {
+                case (DSPMode.CWL):
+                    vfo += cw_pitch * 1e-6;
+                    break;
+                case (DSPMode.CWU):
+                    vfo -= cw_pitch * 1e-6;
+                    break;
+            }
+
             int low = radio.GetDSPRX(0, 1).RXFilterLow;
             int high = radio.GetDSPRX(0, 1).RXFilterHigh;
 
@@ -41574,7 +41598,10 @@ namespace PowerSDR
                 double audio_freq = (n.Freq - vfo) * 1e6; // now in Hz
 
                 for (int x = 0; x < n.Depth; x++)
-                    addNotch(0, 1, count++, audio_freq, n.BW);
+                {
+                    if (audio_freq > 0)
+                        addNotch(0, 1, count++, audio_freq, n.BW);
+                }
                 if (count >= 9) // don't enable more than 9 notches!
                     break;
             }
@@ -42344,8 +42371,8 @@ namespace PowerSDR
             this.filterToolStripMenuItem.Visible = false;
             this.dSPToolStripMenuItem.Visible = false;
             this.displayControlsToolStripMenuItem.Visible = false;
-            this.bandToolStripMenuItem.Visible = false;
-            this.modeToolStripMenuItem.Visible = false;
+            this.bandToolStripMenuItem.Visible = false; 
+            this.modeToolStripMenuItem.Visible = false; 
             int minWidth = console_basis_size.Width;
             int minHeight = (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK) ?
                 console_basis_size.Height - (panelRX2Filter.Height + 8) :
@@ -42515,8 +42542,8 @@ namespace PowerSDR
             this.dSPToolStripMenuItem.Visible = true;
             this.filterToolStripMenuItem.Visible = true;
             this.displayControlsToolStripMenuItem.Visible = true;
-            this.bandToolStripMenuItem.Visible = true;
-            this.modeToolStripMenuItem.Visible = true;
+            this.bandToolStripMenuItem.Visible = !SetupForm.chkShowBandControls.Checked;
+            this.modeToolStripMenuItem.Visible = !SetupForm.chkShowModeControls.Checked;
             int minWidth = 600;
             int minHeight = 210;
 
@@ -42898,43 +42925,43 @@ namespace PowerSDR
             switch (menu_item)
             {
                 case "160":
-                    radBand160.PerformClick();
+                    radBand160_Click(this, EventArgs.Empty);
                     break;
                 case "80":
-                    radBand80.PerformClick();
+                    radBand80_Click(this, EventArgs.Empty);
                     break;
                 case "60":
-                    radBand60.PerformClick();
+                    radBand60_Click(this, EventArgs.Empty);
                     break;
                 case "40":
-                    radBand40.PerformClick();
+                    radBand40_Click(this, EventArgs.Empty);
                     break;
                 case "30":
-                    radBand30.PerformClick();
+                    radBand30_Click(this, EventArgs.Empty);
                     break;
                 case "20":
-                    radBand20.PerformClick();
+                    radBand20_Click(this, EventArgs.Empty);
                     break;
                 case "17":
-                    radBand17.PerformClick();
+                    radBand17_Click(this, EventArgs.Empty);
                     break;
                 case "15":
-                    radBand15.PerformClick();
+                    radBand15_Click(this, EventArgs.Empty);
                     break;
                 case "12":
-                    radBand12.PerformClick();
+                    radBand12_Click(this, EventArgs.Empty);
                     break;
                 case "10":
-                    radBand10.PerformClick();
+                    radBand10_Click(this, EventArgs.Empty);
                     break;
                 case "6":
-                    radBand6.PerformClick();
+                    radBand6_Click(this, EventArgs.Empty);
                     break;
                 case "WWV":
-                    radBandWWV.PerformClick();
+                    radBandWWV_Click(this, EventArgs.Empty);
                     break;
                 case "GEN":
-                    radBandGEN.PerformClick();
+                    radBandGEN_Click(this, EventArgs.Empty);
                     break;
             }
         }

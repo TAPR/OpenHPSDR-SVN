@@ -31785,7 +31785,7 @@ namespace PowerSDR
             {
                 if (!console.fwc_init)
                 {
-                    console.fwc_init = Pal.Init();
+                   // console.fwc_init = Pal.Init();
                     if (console.fwc_init)
                     {
                         FWCEEPROM.Init();
@@ -35306,6 +35306,7 @@ namespace PowerSDR
         {
             this.console.ShowTopControls = chkShowTopControls.Checked;
             this.console.topControlsToolStripMenuItem.Checked = chkShowTopControls.Checked;
+            this.console.bandToolStripMenuItem.Visible = !chkShowBandControls.Checked;
 
             if (this.console.CollapsedDisplay)
                 this.console.CollapseDisplay();
@@ -35315,6 +35316,7 @@ namespace PowerSDR
         {
             this.console.ShowBandControls = chkShowBandControls.Checked;
             this.console.bandControlsToolStripMenuItem.Checked = chkShowBandControls.Checked;
+            this.console.modeToolStripMenuItem.Visible = !chkShowModeControls.Checked;
 
             if (this.console.CollapsedDisplay)
                 this.console.CollapseDisplay();

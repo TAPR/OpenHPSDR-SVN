@@ -2597,7 +2597,7 @@ namespace PowerSDR
 
 		public static void SetPalCallback()
 		{
-			Pal.SetCallback(callback);
+			//Pal.SetCallback(callback);
 		}
 
         public static bool GetStatus()
