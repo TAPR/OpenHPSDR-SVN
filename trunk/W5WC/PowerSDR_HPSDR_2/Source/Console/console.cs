@@ -502,6 +502,7 @@ namespace PowerSDR
 		public EQForm EQForm;
 		public FilterForm filterRX1Form;
 		public FilterForm filterRX2Form;
+        public DiversityForm diversityForm;
 		//public FWCForm fwcForm;
 		public FLEX5000LLHWForm flex5000LLHWForm;
 		public FLEX5000DebugForm flex5000DebugForm;
@@ -18679,7 +18680,170 @@ namespace PowerSDR
                 swap_vfo_ab_tx = value;
             }
         }
- 
+
+
+        public int RX0Gain
+        {
+            get
+            {
+                if (ptbRX0Gain != null) return ptbRX0Gain.Value;
+                else return -1;
+            }
+            set
+            {
+                if (ptbRX0Gain != null) ptbRX0Gain.Value = value;
+                ptbRX0Gain_Scroll(this, EventArgs.Empty);
+            }
+        }
+
+        public int PanMainRX
+        {
+            get
+            {
+                if (ptbPanMainRX != null) return ptbPanMainRX.Value;
+                else return -1;
+            }
+            set
+            {
+                if (ptbPanMainRX != null) ptbPanMainRX.Value = value;
+                ptbPanMainRX_Scroll(this, EventArgs.Empty);
+            }
+        }
+
+
+        public int RX1Gain
+        {
+            get
+            {
+                if (ptbRX1Gain != null) return ptbRX1Gain.Value;
+                else return -1;
+            }
+            set
+            {
+                if (ptbRX1Gain != null) ptbRX1Gain.Value = value;
+                ptbRX1Gain_Scroll(this, EventArgs.Empty);
+            }
+        }
+
+        public int PanSubRX
+        {
+            get
+            {
+                if (ptbPanSubRX != null) return ptbPanSubRX.Value;
+                else return -1;
+            }
+            set
+            {
+                if (ptbPanSubRX != null) ptbPanSubRX.Value = value;
+                ptbPanSubRX_Scroll(this, EventArgs.Empty);
+            }
+        }
+
+        public int RX2Gain
+        {
+            get
+            {
+                if (ptbRX2Gain != null) return ptbRX2Gain.Value;
+                else return -1;
+            }
+            set
+            {
+                if (ptbRX2Gain != null) ptbRX2Gain.Value = value;
+                ptbRX2Gain_Scroll(this, EventArgs.Empty);
+            }
+        }
+
+        public int RX2Pan
+        {
+            get
+            {
+                if (ptbRX2Pan != null) return ptbRX2Pan.Value;
+                else return -1;
+            }
+            set
+            {
+                if (ptbRX2Pan != null) ptbRX2Pan.Value = value;
+                ptbRX2Pan_Scroll(this, EventArgs.Empty);
+            }
+        }
+
+
+        public bool CATDiversityEnable
+        {
+            get
+            {
+                if (diversityForm != null)
+                    return diversityForm.CATEnable;
+                else
+                    return false;
+            }
+            set
+            {
+                if (diversityForm != null)
+                    if (value)
+                        diversityForm.CATEnable = true;
+                    else
+                        diversityForm.CATEnable = false;
+            }
+        }
+
+        public bool CATDiversityForm
+        {
+            get
+            {
+                if (diversityForm == null || diversityForm.IsDisposed)
+                    return false;
+                else
+                    return true;
+            }
+            set
+            {
+                if (value)
+                {
+                    if (diversityForm == null || diversityForm.IsDisposed)
+                        diversityForm = new DiversityForm(this);
+                    diversityForm.Focus();
+                    this.Invoke(new MethodInvoker(diversityForm.Show));
+                }
+                else
+                    if (diversityForm != null)
+                        this.Invoke(new MethodInvoker(diversityForm.Close));
+            }
+        }
+
+        public bool CATCWXForm
+        {
+            get
+            {
+                if (CWXForm == null || CWXForm.IsDisposed)
+                    return false;
+                else
+                    return true;
+            }
+            set
+            {
+                if (value)
+                {
+                    cWXToolStripMenuItem.PerformClick();
+                }
+                else
+                    if (CWXForm != null)
+                        this.Invoke(new MethodInvoker(CWXForm.Close));
+            }
+        }
+
+        public bool VFOATX
+        {
+            get { return chkVFOATX.Checked; }
+            set { chkVFOATX.Checked = value; }
+        }
+
+        public bool VFOBTX
+        {
+            get { return chkVFOBTX.Checked; }
+            set { chkVFOBTX.Checked = value; }
+        }
+
         private string db_file_name = "";
         public string DBFileName
         {

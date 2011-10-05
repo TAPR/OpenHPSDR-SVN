@@ -31543,6 +31543,18 @@ namespace PowerSDR
             get { return chkDigUIsUSB.Checked; }
         }
 
+        public int DigU_CT_Offset
+        {
+            get { return (int)udOptClickTuneOffsetDIGU.Value; }
+            set { udOptClickTuneOffsetDIGU.Value = value; }
+        }
+
+        public int DigL_CT_Offset
+        {
+            get { return (int)udOptClickTuneOffsetDIGL.Value; }
+            set { udOptClickTuneOffsetDIGL.Value = value; }
+        }
+
         // Added 06/21/05 BT for CAT commands
 
         public int CATNB1Threshold
