@@ -6927,6 +6927,9 @@
   <data name="chkTNF.ToolTip" xml:space="preserve">
     <value>Turns the Manual Tracking Notch Filter(s) on/off</value>
   </data>
+  <data name="chkTNF.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;chkTNF.Name" xml:space="preserve">
     <value>chkTNF</value>
   </data>
@@ -6965,6 +6968,9 @@
   </data>
   <data name="btnTNFAdd.ToolTip" xml:space="preserve">
     <value>Add a Manual Tracking Notch Filter</value>
+  </data>
+  <data name="btnTNFAdd.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;btnTNFAdd.Name" xml:space="preserve">
     <value>btnTNFAdd</value>
@@ -7539,6 +7545,24 @@
   <data name="modeToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="notchFilterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 22</value>
+  </data>
+  <data name="notchFilterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Notch Filter</value>
+  </data>
+  <data name="addNotchFilterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 22</value>
+  </data>
+  <data name="addNotchFilterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Add Notch Filter</value>
+  </data>
+  <data name="notchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 20</value>
+  </data>
+  <data name="notchToolStripMenuItem.Text" xml:space="preserve">
+    <value>NF</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -7563,6 +7587,9 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <metadata name="timerNotchZoom.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>292, 54</value>
+  </metadata>
   <data name="lblRF2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
@@ -12438,9 +12465,6 @@
   <data name="&gt;&gt;panelModeSpecificFM.ZOrder" xml:space="preserve">
     <value>38</value>
   </data>
-  <metadata name="timerNotchZoom.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>292, 54</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -12536,7 +12560,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v2.2.3(ß) (W5WC - 10/4/11) </value>
+    <value>PowerSDR™/OpenHPSDR v2.2.3 (W5WC - 10/6/11) </value>
   </data>
   <data name="&gt;&gt;timer_cpu_meter.Name" xml:space="preserve">
     <value>timer_cpu_meter</value>
@@ -12998,6 +13022,24 @@
     <value>dRMToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;dRMToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;notchToolStripMenuItem.Name" xml:space="preserve">
+    <value>notchToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;notchToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;notchFilterToolStripMenuItem.Name" xml:space="preserve">
+    <value>notchFilterToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;notchFilterToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addNotchFilterToolStripMenuItem.Name" xml:space="preserve">
+    <value>addNotchFilterToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;addNotchFilterToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;timerNotchZoom.Name" xml:space="preserve">
