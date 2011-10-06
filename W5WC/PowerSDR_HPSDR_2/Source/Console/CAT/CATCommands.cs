@@ -1657,14 +1657,14 @@ namespace PowerSDR
 			{
 				return parser.Error1;
 			}
-
 		}
 
 		// Reads the CPU Usage
 		public string ZZCU()
 		{
-            return parser.Error1;
-			//return console.CpuUsage.ToString("f").PadLeft(6,'0');
+            //return parser.Error1;
+           // return console.cpu_usage.ToString("f").PadLeft(6, '0');
+            return String.Format("{0:000.00}", console.cpu_usage.NextValue());
 		}
 
 		// Sets or reads the Display Average status
@@ -1687,7 +1687,7 @@ namespace PowerSDR
 		}
 
         //Sets or reads the Diversity Form Enable Button
-       /* public string ZZDE(string s)
+        public string ZZDE(string s)
         {
             if (console.CurrentModel == Model.FLEX5000  && console.CATDiversityForm)
             {
@@ -1725,11 +1725,11 @@ namespace PowerSDR
 
                 return parser.Error1;
             }
-        } */
+        } 
 
 
         //Opens or closes the Diversity Form
-      /*  public string ZZDF(string s)
+        public string ZZDF(string s)
         {
             if (console.CurrentModel == Model.FLEX5000 )
             {
@@ -1763,7 +1763,7 @@ namespace PowerSDR
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
             }
-        }*/
+        }
 
 		// Sets or reads the current display mode
 		public string ZZDM(string s)
@@ -1825,10 +1825,100 @@ namespace PowerSDR
 			}
 
 		}
-
         //Constructs the state word for DDUtil
         //read only
         public string ZZDU()
+        {
+            int old = parser.nAns;
+            string sep = ":";
+            string status = "";
+
+            parser.nAns = 1;
+            status += ZZSW("") + sep;
+            status += ZZSP("") + sep;
+            status += ZZTU("") + sep;
+            status += ZZTX("") + sep;
+           // if (console.CurrentModel == Model.FLEX5000)
+           // {
+               // status += ZZOA("") + sep;
+               // if (FWCEEPROM.RX2OK)
+                //    status += ZZOB("") + sep;
+               // else
+                 //   status += "0:";
+               // status += ZZOC("") + sep;
+               // if (FWCEEPROM.RX2OK)
+               //     status += ZZRS("") + sep;
+               // else
+                    status += "0:";
+          //  }
+          //  else
+            status += "0:0:0:0:";
+           // if (FWCEEPROM.RX2OK)
+              //  status += ZZRT("") + sep;
+           // else
+            //status += "0:";
+            status += ZZDM("") + sep;
+            status += ZZGT("") + sep;
+            status += ZZMU("") + sep;
+            status += ZZXS("") + sep;
+
+            parser.nAns = 2;
+            status += ZZAC("") + sep;
+            status += ZZMD("") + sep;
+           // if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK)
+           // {
+            //    status += ZZME("") + sep;
+             //   status += ZZFJ("") + sep;
+           // }
+          //  else
+            status += "00:00:";
+            status += ZZFI("") + sep;
+
+            parser.nAns = 3;
+           // if (console.CurrentModel == Model.FLEX5000)
+           // {
+            //    status += ZZOF("") + sep;
+             //   if (FWCEEPROM.RX2OK)
+             //       status += ZZBT("") + sep;
+             //   else
+             //       status += "000:";
+           // }
+           // else
+            status += "000:000:";
+            status += ZZPC("") + sep;
+            status += ZZBS("") + sep;
+            status += ZZAG("") + sep;
+            status += ZZKS("") + sep;
+            status += ZZTO("") + sep;
+
+            parser.nAns = 4;
+           // if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000)
+            //    status += ZZRV() + sep;
+           // else
+            status += "0000:";
+            status += ZZSM("0") + sep;
+
+            parser.nAns = 5;
+            status += ZZRF("") + sep;
+            //if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000)
+             //   status += ZZTS() + sep;
+           // else
+            status += "00000:";
+            status += ZZXF("") + sep;
+
+            parser.nAns = 6;
+            status += ZZCU() + sep;
+
+            parser.nAns = 11;
+            status += ZZFA("") + sep;
+            status += ZZFB("");
+            parser.nAns = old;
+            return status;
+        }
+
+        //Constructs the state word for DDUtil
+        //read only
+   /*     public string ZZDU()
         {
             int old = parser.nAns;
             string sep = ":";
@@ -1876,7 +1966,7 @@ namespace PowerSDR
             status += ZZFB("");
             parser.nAns = old;
             return status;
-        }
+        } */
 
 
 		/// <summary>

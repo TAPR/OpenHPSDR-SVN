@@ -678,10 +678,10 @@ namespace PowerSDR
 					rtncmd = cmdlist.ZZDA(suffix);
 					break;
                 case "ZZDE":
-                   // rtncmd = cmdlist.ZZDE(suffix);
+                    rtncmd = cmdlist.ZZDE(suffix);
                     break;
                 case "ZZDF":
-                   // rtncmd = cmdlist.ZZDF(suffix);
+                    rtncmd = cmdlist.ZZDF(suffix);
                     break;
 				case "ZZDM":
 					rtncmd = cmdlist.ZZDM(suffix);
