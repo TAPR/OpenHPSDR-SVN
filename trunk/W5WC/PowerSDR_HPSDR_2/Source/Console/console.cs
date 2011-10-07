@@ -7422,15 +7422,6 @@ namespace PowerSDR
                     Hdw.StandBy();						// initialize hardware device
                     break;
 
-                case Model.FLEX5000:
-                    if (fwc_init)
-                        fwcMixForm = new FWCMixForm(this);
-                    break;
-                case Model.FLEX3000:
-                    if (fwc_init)
-                        flex3000MixerForm = new FLEX3000MixerForm(this);
-                    break;
-
                 case Model.HPSDR:
                 case Model.HERMES:
                     // kd5tfd bug bug .. why are we going thru Hdw for HPSDR .. we should not need it. 
@@ -7662,6 +7653,12 @@ namespace PowerSDR
             if (comboMeterTXMode.Items.Count > 0 && comboMeterTXMode.SelectedIndex < 0)
                 comboMeterTXMode.SelectedIndex = 0;
             chkMOX.Enabled = false;
+
+            if (!collapsedDisplay)
+            {
+                modeToolStripMenuItem.Visible = false;
+                bandToolStripMenuItem.Visible = false;
+            }
 
             //siolisten = new SIOListenerII(this);
         }
