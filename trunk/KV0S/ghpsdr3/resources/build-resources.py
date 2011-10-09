@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from urllib2 import urlopen
 import string
 import re
@@ -18,6 +20,7 @@ CQFieldEnd = 69
 CodeFieldEnd = 75
 
 print "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"
+print "<?xml-stylesheet type=\"text/xsl\" href=\"country.xsl\"?>"
 print "<resources>"
 
 data = urlopen( TextFileName ).readlines()
@@ -27,7 +30,8 @@ for line in data:
    if idx > StartReadLines and idx < LastReadLines: 
       nline = string.rstrip( string.expandtabs(line))
       temp = string.strip(nline[0:PrefixFieldEnd])
-      prefix = string.strip(temp,'*#') 
+      temp1 = string.strip(temp,'*#') 
+      prefix = string.strip(temp1, ' ') 
       pstr = re.sub( '\([0-9]+\)', '', prefix )
       pref = re.split( ',', pstr )
       country = string.strip(nline[PrefixFieldEnd:EntityFieldEnd])
@@ -61,8 +65,8 @@ for line in data:
 	     pstr_lst.append(slist[0][0] + slist[1])
          else:
            pstr_lst.append( p )
-      print "   <country code=\"%s\" prefix=\"%s\">" % (code, ', '.join( pstr_lst ))
-      print "      <name>%s</name>" % country
+      print "   <country code=\"%s\" prefix=\"%s\">" % (code, ','.join( pstr_lst ))
+      print "      <name>%s</name>" % string.replace(country, '&', '&amp;' )
       print "      <cont>%s</cont>" % cont
       print "      <ITU>%s</ITU>" % ITU
       print "      <CQ>%s</CQ>" % CQ
