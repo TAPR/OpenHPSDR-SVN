@@ -39340,11 +39340,11 @@ namespace PowerSDR
 
         private void tpHPSDR_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            if (console.PowerOn)
+            if (console.PowerOn && !radGenModelHermes.Checked)
             {
                 try // this will take an exception in the conversion for Metis .. 
                 {
-                    lblOzyFX2.Text = Convert.ToUInt32(JanusAudio.getFX2FirmwareVersionString()).ToString("Ozy FX2: 0000 00 00"); 
+                    lblOzyFX2.Text = Convert.ToUInt32(JanusAudio.getFX2FirmwareVersionString()).ToString("Ozy FX2: 0000 00 00");
                 }
                 catch (Exception)
                 {
@@ -39352,26 +39352,33 @@ namespace PowerSDR
                 }
                 if (console.HPSDRisMetis)
                 {
-                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Metis: 0\\.0"); 
-                    lblOzyFX2.Text = ""; 
+                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Metis: 0\\.0");
+                    lblOzyFX2.Text = "";
                 }
                 else
                 {
-                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0"); 
+                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0");
                 }
                 if (console.MercuryPresent)
-                lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0");
-                else lblMercuryFWVer.Text = "Mercury: N/A";
+                    lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0");
+                else lblMercuryFWVer.Text = "Mercury: n/a";
                 if (console.PennyPresent || console.PennyLanePresent)
-                lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penny[Lane]: 0\\.0");
-                else lblPenelopeFWVer.Text = "Penny[Lane]: N/A";
+                    lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penny[Lane]: 0\\.0");
+                else lblPenelopeFWVer.Text = "Penny[Lane]: n/a";
 
- /*               int rc = JanusAudio.GetHaveSync();
-                if (rc == 1)
-                    lblSyncData.Text = "FrameSync: Yes";
-                else
-                    lblSyncData.Text = "FrameSync: No"; 
-*/
+                /*               int rc = JanusAudio.GetHaveSync();
+                               if (rc == 1)
+                                   lblSyncData.Text = "FrameSync: Yes";
+                               else
+                                   lblSyncData.Text = "FrameSync: No"; 
+               */
+            }
+            else
+            {
+                lblOzyFX2.Text = "Ozy FX2: n/a";
+                lblOzyFWVer.Text = "Ozy: n/a";
+                lblMercuryFWVer.Text = "Mercury: n/a";
+                lblPenelopeFWVer.Text = "Penny[Lane]: n/a";
             }
         }
 
