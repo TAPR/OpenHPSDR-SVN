@@ -6783,6 +6783,7 @@ namespace PowerSDR
             this.btnWizard.TabIndex = 22;
             this.btnWizard.Text = "Wizard...";
             this.toolTip1.SetToolTip(this.btnWizard, "Run the Startup Wizard.");
+            this.btnWizard.Visible = false;
             this.btnWizard.Click += new System.EventHandler(this.btnWizard_Click);
             // 
             // chkGeneralRXOnly
@@ -29880,10 +29881,10 @@ namespace PowerSDR
             }
 
             if (skin == "")
-                comboAppSkin.Text = "Default";
+                comboAppSkin.Text = "OpenHPSDR-Gray"; //"Default";
             else if (comboAppSkin.Items.Contains(skin))
                 comboAppSkin.Text = skin;
-            else comboAppSkin.Text = "Default";
+            else comboAppSkin.Text = "OpenHPSDR-Gray"; //"Default";
         }
 
         private void InitWindowTypes()

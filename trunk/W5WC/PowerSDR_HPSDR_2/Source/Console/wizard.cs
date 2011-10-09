@@ -1744,7 +1744,9 @@ namespace PowerSDR
             {
                 model = Model.HPSDR;
                 //if (grpModel.Visible)
-                    pictureBox1.Image = null;// new Bitmap(GetResource("PowerSDR.images.hpsdr.jpg"));
+                pictureBox1.Image = null;
+                pictureBox1.Visible = false;
+                //pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.hpsdr.jpg"));
             }
 
         }
