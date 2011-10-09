@@ -653,6 +653,7 @@
     <EmbeddedResource Include="images\flex-3000.jpg" />
     <Content Include="hpsdr5-64.ico" />
     <Content Include="images\hpsdr.jpg" />
+    <Content Include="images\Merc-v3.jpg" />
     <Content Include="images\PowerSDR.ico" />
   </ItemGroup>
   <ItemGroup>
