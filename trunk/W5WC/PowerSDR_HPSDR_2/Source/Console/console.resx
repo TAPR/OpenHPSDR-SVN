@@ -7711,7 +7711,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelPower.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>40</value>
   </data>
   <data name="panelFilter.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -8575,7 +8575,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificCW.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>38</value>
   </data>
   <data name="panelRX2Filter.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10072,7 +10072,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificPhone.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>39</value>
   </data>
   <data name="panelModeSpecificDigital.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10234,7 +10234,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificDigital.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>45</value>
   </data>
   <data name="panelDisplay.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10570,7 +10570,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelMode.ZOrder" xml:space="preserve">
-    <value>43</value>
+    <value>41</value>
   </data>
   <data name="panelBandHF.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10600,7 +10600,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelBandHF.ZOrder" xml:space="preserve">
-    <value>44</value>
+    <value>42</value>
   </data>
   <data name="txtVFOAFreq.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 20.25pt</value>
@@ -12157,7 +12157,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelBandVHF.ZOrder" xml:space="preserve">
-    <value>45</value>
+    <value>43</value>
   </data>
   <data name="panelRX2DSP.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -12463,7 +12463,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificFM.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>44</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -12560,7 +12560,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v2.2.3 (W5WC - 10/9/11) </value>
+    <value>PowerSDR™/OpenHPSDR v2.2.3 (W5WC - 10/10/11) </value>
   </data>
   <data name="&gt;&gt;timer_cpu_meter.Name" xml:space="preserve">
     <value>timer_cpu_meter</value>

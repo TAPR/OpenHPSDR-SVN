@@ -2680,7 +2680,7 @@ namespace PowerSDR
             this.udCWBreakInDelay.Name = "udCWBreakInDelay";
             this.toolTip1.SetToolTip(this.udCWBreakInDelay, resources.GetString("udCWBreakInDelay.ToolTip"));
             this.udCWBreakInDelay.Value = new decimal(new int[] {
-            60,
+            300,
             0,
             0,
             0});
@@ -6812,14 +6812,14 @@ namespace PowerSDR
             this.Controls.Add(this.panelDisplay);
             this.Controls.Add(this.ptbSquelch);
             this.Controls.Add(this.panelFilter);
-            this.Controls.Add(this.panelModeSpecificFM);
-            this.Controls.Add(this.panelModeSpecificDigital);
             this.Controls.Add(this.panelModeSpecificCW);
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelPower);
             this.Controls.Add(this.panelMode);
             this.Controls.Add(this.panelBandHF);
             this.Controls.Add(this.panelBandVHF);
+            this.Controls.Add(this.panelModeSpecificFM);
+            this.Controls.Add(this.panelModeSpecificDigital);
             this.KeyPreview = true;
             this.Name = "Console";
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Console_MouseWheel);
@@ -11881,9 +11881,10 @@ namespace PowerSDR
 				}
 			}
 
-			RX1Band = b;
-			UpdateBandButtonColors();
-		}
+            Band old_band = rx1_band;
+            RX1Band = b;
+            if (old_band != b) UpdateBandButtonColors();
+        }
 
 		private void SetRX2Band(Band b)
 		{
@@ -11902,8 +11903,10 @@ namespace PowerSDR
 				}
 			}
 
-			TXBand = b;
-			UpdateBandButtonColors();
+            Band old_band = tx_band;
+            TXBand = b;
+            if (old_band != b)
+                UpdateBandButtonColors();
 
 			if(!(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
 			{
@@ -23879,7 +23882,7 @@ namespace PowerSDR
 			set	{ chkDisplayAVG.Checked = value; }
 		}
 
-		private double break_in_delay = 60;
+		private double break_in_delay = 300;
 		public double BreakInDelay
 		{
 			get { return break_in_delay; }
