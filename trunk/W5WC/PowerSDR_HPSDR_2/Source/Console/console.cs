@@ -1313,9 +1313,6 @@ namespace PowerSDR
         private ToolStripMenuItem dRMToolStripMenuItem;
         private ToolStripMenuItem bandtoolStripMenuItem14;
         private System.Windows.Forms.Timer timerNotchZoom;
-        private ToolStripMenuItem notchToolStripMenuItem;
-        private ToolStripMenuItem notchFilterToolStripMenuItem;
-        private ToolStripMenuItem addNotchFilterToolStripMenuItem;
 		private CheckBoxTS chkFullDuplex;
 
 		#endregion
@@ -2129,9 +2126,6 @@ namespace PowerSDR
             this.dIGLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dIGUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dRMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notchFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNotchFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerNotchZoom = new System.Windows.Forms.Timer(this.components);
             this.lblRF2 = new System.Windows.Forms.LabelTS();
             this.ptbRX2Squelch = new PowerSDR.PrettyTrackBar();
@@ -4701,8 +4695,7 @@ namespace PowerSDR
             this.dSPToolStripMenuItem,
             this.displayControlsToolStripMenuItem,
             this.bandToolStripMenuItem,
-            this.modeToolStripMenuItem,
-            this.notchToolStripMenuItem});
+            this.modeToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -5134,27 +5127,6 @@ namespace PowerSDR
             this.dRMToolStripMenuItem.Name = "dRMToolStripMenuItem";
             resources.ApplyResources(this.dRMToolStripMenuItem, "dRMToolStripMenuItem");
             this.dRMToolStripMenuItem.Click += new System.EventHandler(this.mnuMode_Click);
-            // 
-            // notchToolStripMenuItem
-            // 
-            this.notchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.notchFilterToolStripMenuItem,
-            this.addNotchFilterToolStripMenuItem});
-            this.notchToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.notchToolStripMenuItem.Name = "notchToolStripMenuItem";
-            resources.ApplyResources(this.notchToolStripMenuItem, "notchToolStripMenuItem");
-            // 
-            // notchFilterToolStripMenuItem
-            // 
-            this.notchFilterToolStripMenuItem.Name = "notchFilterToolStripMenuItem";
-            resources.ApplyResources(this.notchFilterToolStripMenuItem, "notchFilterToolStripMenuItem");
-            this.notchFilterToolStripMenuItem.Click += new System.EventHandler(this.notchFilterToolStripMenuItem_Click);
-            // 
-            // addNotchFilterToolStripMenuItem
-            // 
-            this.addNotchFilterToolStripMenuItem.Name = "addNotchFilterToolStripMenuItem";
-            resources.ApplyResources(this.addNotchFilterToolStripMenuItem, "addNotchFilterToolStripMenuItem");
-            this.addNotchFilterToolStripMenuItem.Click += new System.EventHandler(this.addNotchFilterToolStripMenuItem_Click);
             // 
             // timerNotchZoom
             // 
@@ -41416,7 +41388,7 @@ namespace PowerSDR
             UpdateRX1Notches();
             UpdateRX1SubNotches();
             UpdateRX2Notches();
-        }
+        } 
 
         private void toolStripNotchRemember_Click(object sender, EventArgs e)
         {
@@ -41643,7 +41615,6 @@ namespace PowerSDR
             UpdateRX1SubNotches();
             UpdateRX2Notches();
             Display.TNFActive = chkTNF.Checked;
-            notchFilterToolStripMenuItem.Checked = Display.TNFActive;// chkTNF.Checked;
         }
 
         private int default_notch_width = 100;
@@ -43275,16 +43246,6 @@ namespace PowerSDR
                     bandtoolStripMenuItem13.Checked = radBandGEN.Checked;
                     break;
             }
-        }
-
-        private void notchFilterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            chkTNF.Checked = !chkTNF.Checked;
-        }
-
-        private void addNotchFilterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            btnTNFAdd_Click(this, EventArgs.Empty);
         }
  
    	}
