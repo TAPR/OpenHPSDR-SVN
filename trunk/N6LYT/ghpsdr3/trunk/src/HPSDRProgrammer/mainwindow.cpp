@@ -48,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    isMetis=true;
+
     receiveThread=NULL;
     rawReceiveThread=NULL;
     discovery=NULL;
@@ -69,6 +71,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(quit()));
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(about()));
     connect(ui->interfaceComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(interfaceSelected(int)));
+    connect(ui->hermesRadioButton,SIGNAL(clicked()),this,SLOT(hermesSelected()));
+    connect(ui->metisRadioButton,SIGNAL(clicked()),this,SLOT(metisSelected()));
     connect(ui->browsePushButton,SIGNAL(clicked()),this,SLOT(browse()));
     connect(ui->programPushButton,SIGNAL(clicked()),this,SLOT(program()));
     connect(ui->erasePushButton,SIGNAL(clicked()),this,SLOT(erase()));
@@ -142,7 +146,6 @@ void MainWindow::interfaceSelected(int index) {
         ui->interfaceLabel->setText("");
         status("Inteface is not a valid network device");
     } else {
-        QString text;
         text.sprintf("MAC=%s  IP=%ld.%ld.%ld.%ld",
                      hwAddress.toAscii().constData(),
                      (ip>>24)&0xFF,(ip>>16)&0xFF,(ip>>8)&0xFF,ip&0xFF);
@@ -156,6 +159,29 @@ void MainWindow::interfaceSelected(int index) {
         hw[5]=(unsigned char)hwAddress.mid(15,2).toInt(&ok,16);
 
     }
+}
+
+void MainWindow::metisSelected() {
+    isMetis=true;
+    ui->tabWidget->setTabText(0,"Metis Programmer");
+    ui->tabWidget->setTabText(1,"Metis Boot Loader");
+    ui->programmerDeviceLabel->setText("Metis:");
+    if(ui->tabWidget->currentIndex()==1) {
+        ui->tabWidget_2->setTabEnabled(4,ui->metisRadioButton->isChecked());
+    }
+    ui->jumperLabel->setText("Check that there is a jumper on JP1 of Metis and that it has been power cycled.");
+}
+
+void MainWindow::hermesSelected() {
+    isMetis=false;
+    ui->tabWidget->setTabText(0,"Hermes Programmer");
+    ui->tabWidget->setTabText(1,"Hermes Boot Loader");
+    ui->programmerDeviceLabel->setText("Hermes:");
+    if(ui->tabWidget->currentIndex()==1) {
+        ui->tabWidget_2->setTabEnabled(4,ui->metisRadioButton->isChecked());
+    }
+    ui->jumperLabel->setText("Check that there is a jumper on J12 of Hermes and that it has been power cycled.");
+
 }
 
 // SLOT - browse - called when the "Browse ..." button on the Program tab is pressed.
@@ -382,7 +408,6 @@ void MainWindow::getMAC() {
 
 // SLOT - macAddress - called when the reply packet is received containg the Metis MAC address.
 void MainWindow::macAddress(unsigned char* mac) {
-    QString text;
     text.sprintf("%02X:%02X:%02X:%02X:%02X:%02X",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
     ui->macLineEdit->setText(text);
     status("Metis MAC address read successfully");
@@ -428,7 +453,6 @@ void MainWindow::getIP() {
 
 // SLOT - ipAddress - called when the reply packet is received containing Metis IP address.
 void MainWindow::ipAddress(unsigned char* ip) {
-    QString text;
     text.sprintf("%d",ip[0]);
     ui->ipALineEdit->setText(text);
     text.sprintf("%d",ip[1]);
@@ -509,7 +533,8 @@ void MainWindow::setIP() {
                 status("send write ip command failed");
                 idle();
             } else {
-                status("Written Metis IP address");
+                text.sprintf("Written %s IP address",isMetis?"Metis":"Hermes");
+                status(text);
             }
         }
 
@@ -544,14 +569,16 @@ void MainWindow::erase_timeout() {
 // private function to send command to read MAC address from Metis
 void MainWindow::readMAC() {
     eraseTimeouts=0;
-    status("Reading Metis MAC Address ...");
+    text.sprintf("Reading %s MAC address ...",isMetis?"Metis":"Hermes");
+    status(text);
     sendRawCommand(READ_METIS_MAC);
 }
 
 // private function to read the IP address from Metis.
 void MainWindow::readIP() {
     eraseTimeouts=0;
-    status("Reading Metis IP address ...");
+    text.sprintf("Reading %s IP address ...",isMetis?"Metis":"Hermes");
+    status(text);
     sendRawCommand(READ_METIS_IP);
 }
 
@@ -644,7 +671,6 @@ void MainWindow::sendData() {
 
     receiveThread->send((const char*)buffer,sizeof(buffer));
 
-    QString text;
     int p=(offset+256)*100/(end-start);
     if(p!=percent) {
         if((p%20)==0) {
@@ -699,7 +725,6 @@ void MainWindow::sendRawData() {
             status("send data command failed");
             idle();
         } else {
-            QString text;
             int p=offset*100/(end-start);
             if(p!=percent) {
                 if((p%20)==0) {
@@ -757,7 +782,6 @@ void MainWindow::sendJTAGData() {
             status("send data command failed");
             idle();
         } else {
-            QString text;
             int p=offset*100/(end-start);
             if(p!=percent) {
                 if((p%20)==0) {
@@ -813,7 +837,6 @@ void MainWindow::sendJTAGFlashData() {
             status("send data command failed");
             idle();
         } else {
-            QString text;
             int p=offset*100/(end-start);
             if(p!=percent) {
                 if((p%20)==0) {
@@ -855,7 +878,8 @@ void MainWindow::eraseCompleted() {
         qDebug()<<"received eraseCompleted when state is READ_IP";
         break;
     case WRITE_IP:
-        status("Metis IP written successfully");
+        text.sprintf("%s IP address written successfully",isMetis?"Metis":"Hermes");
+        status(text);
         idle();
         break;
     case JTAG_INTERROGATE:
@@ -943,7 +967,8 @@ void MainWindow::nextBuffer() {
         } else {
             ui->metisComboBox->clear();
             metis.clear();
-            status("Please wait for Metis to restart.");
+            text.sprintf("Please wait for %s to restart.",isMetis?"Metis":"Hermes");
+            status(text);
             status("If using DHCP this can take up to 5 seconds.");
             status("To use other functions you will need to run Discovery again.");
         }
@@ -966,7 +991,8 @@ void MainWindow::timeout() {
             qDebug()<<"eraseTimeouts="<<eraseTimeouts;
             if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
                 status("Error: erase timeout.");
-                status("Have you set the jumper at JP1 on Metis and power cycled?");
+                text.sprintf("Have you set the jumper at JP1 on %s and power cycled?",isMetis?"Metis":"Hermes");
+                status(text);
                 idle();
                 QApplication::restoreOverrideCursor();
             }
@@ -1037,7 +1063,8 @@ void MainWindow::idle() {
 void MainWindow::discover() {
     ui->statusListWidget->clear();
     status("");
-    status("Metis Discovery");
+    text.sprintf("%s Discovery",isMetis?"Metis":"Hermes");
+    status(text);
 
     ui->metisComboBox->clear();
     metis.clear();
@@ -1075,8 +1102,7 @@ void MainWindow::discovery_timeout() {
     // enable the Discovery button
     ui->discoverPushButton->setDisabled(false);
 
-    QString text;
-    text.sprintf("Discovery found %d Metis card(s)",ui->metisComboBox->count());
+    text.sprintf("Discovery found %d %s card(s)",ui->metisComboBox->count(),isMetis?"Metis":"Hermes");
     status(text);
     if(ui->metisComboBox->count()==0) {
         status("Make sure the correct interface is selected.");
@@ -1106,8 +1132,7 @@ void MainWindow::tabChanged(int index) {
     bootloader=(index==1);
     ui->tabWidget_2->setTabEnabled(2,bootloader);
     ui->tabWidget_2->setTabEnabled(3,bootloader);
-    ui->tabWidget_2->setTabEnabled(4,bootloader);
-
+    ui->tabWidget_2->setTabEnabled(4,bootloader&ui->metisRadioButton->isChecked());
 }
 
 void MainWindow::jtagInterrogate() {

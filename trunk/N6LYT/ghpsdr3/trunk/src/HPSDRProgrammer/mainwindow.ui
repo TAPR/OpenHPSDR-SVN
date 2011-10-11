@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>821</width>
-    <height>593</height>
+    <height>644</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,13 +18,13 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>80</y>
+      <y>130</y>
       <width>801</width>
       <height>91</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="programmerTab">
      <attribute name="title">
@@ -33,7 +33,7 @@
      <widget class="QPushButton" name="discoverPushButton">
       <property name="geometry">
        <rect>
-        <x>670</x>
+        <x>690</x>
         <y>10</y>
         <width>98</width>
         <height>27</height>
@@ -46,9 +46,9 @@
      <widget class="QComboBox" name="metisComboBox">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>70</x>
         <y>10</y>
-        <width>571</width>
+        <width>611</width>
         <height>27</height>
        </rect>
       </property>
@@ -66,12 +66,12 @@
        <string>Metis:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="programmerDeviceLabel">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>10</x>
         <y>20</y>
-        <width>67</width>
+        <width>101</width>
         <height>17</height>
        </rect>
       </property>
@@ -97,7 +97,7 @@
        <string>You must be running with Administrator privileges to be able to read/write raw ethernet frames.</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="jumperLabel">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -107,7 +107,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Check that there is a jumper on JP1 of Metis and that it has been power cycled.</string>
+       <string>Check that there is a jumper on JP1 of Metis/Hermes and that it has been power cycled.</string>
       </property>
      </widget>
     </widget>
@@ -116,13 +116,13 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>180</y>
+      <y>230</y>
       <width>801</width>
       <height>161</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="programTab">
      <attribute name="title">
@@ -146,7 +146,7 @@
        <rect>
         <x>130</x>
         <y>10</y>
-        <width>541</width>
+        <width>551</width>
         <height>27</height>
        </rect>
       </property>
@@ -452,7 +452,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>360</y>
+      <y>400</y>
       <width>801</width>
       <height>201</height>
      </rect>
@@ -491,6 +491,48 @@
      </property>
      <property name="text">
       <string>No interfaces found.</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>571</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Device</string>
+    </property>
+    <widget class="QRadioButton" name="metisRadioButton">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>20</y>
+       <width>117</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Metis</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="hermesRadioButton">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>20</y>
+       <width>117</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hermes</string>
      </property>
     </widget>
    </widget>
