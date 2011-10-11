@@ -76,6 +76,8 @@ public slots:
     void quit();
     void about();
     void interfaceSelected(int);
+    void metisSelected();
+    void hermesSelected();
     void browse();
     void program();
     void erase();
@@ -144,6 +146,10 @@ private:
 #ifdef Q_WS_MAC
     char* myPath;
 #endif
+
+    QString text;
+
+    bool isMetis;
 
     Interfaces interfaces;
     long ip;
