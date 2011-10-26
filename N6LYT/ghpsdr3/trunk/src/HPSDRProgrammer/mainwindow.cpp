@@ -1132,6 +1132,17 @@ void MainWindow::metisSelected(int index) {
     if(index>=0) {
         metisIP=metis.at(index)->getIpAddress();
         metisHostAddress=metis.at(index)->getHostAddress();
+
+        if(isMetis) {
+            if(metis.at(index)->getBoard()==1) {
+                status("Warning: you have Metis selected but board selected is Hermes!");
+            }
+        } else {
+            if(metis.at(index)->getBoard()==0) {
+                status("Warning: you have Hermes selected but board selected is Metis!");
+            }
+
+        }
     }
 }
 
