@@ -290,8 +290,6 @@ void MainWindow::bootloaderProgram() {
 }
 
 void MainWindow::flashProgram() {
-    int on=1;
-    int rc;
 
     size=blocks;
     data_command=PROGRAM_METIS_FLASH;
@@ -354,8 +352,6 @@ void MainWindow::bootloaderErase() {
 }
 
 void MainWindow::flashErase() {
-    int on=1;
-    int rc;
 
     qDebug()<<"MainWindow::flashErase";
 
@@ -963,7 +959,8 @@ void MainWindow::nextBuffer() {
     } else {
         status("Programming device completed successfully.");
         if(bootloader) {
-            status("Remember to remove JP1 when you power cycle.");
+            text.sprintf("Remember to remove %s when you power cycle.",isMetis?"JP1":"JP12");
+            status(text);
         } else {
             ui->metisComboBox->clear();
             metis.clear();
@@ -991,7 +988,7 @@ void MainWindow::timeout() {
             qDebug()<<"eraseTimeouts="<<eraseTimeouts;
             if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
                 status("Error: erase timeout.");
-                text.sprintf("Have you set the jumper at JP1 on %s and power cycled?",isMetis?"Metis":"Hermes");
+                text.sprintf("Have you set the jumper at %s on %s and power cycled?",isMetis?"JP1":"JP12",isMetis?"Metis":"Hermes");
                 status(text);
                 idle();
                 QApplication::restoreOverrideCursor();
@@ -1009,13 +1006,15 @@ void MainWindow::timeout() {
     case READ_MAC:
         status("Error: timeout reading MAC address!");
         status("Check that the correct interface is selected.");
-        status("Check that there is a jumper at JP1 on Metis.");
+        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"JP12",isMetis?"Metis":"Hermes");
+        status(text);
         idle();
         break;
     case READ_IP:
         status("Error: timeout reading IP address!");
         status("Check that the correct interface is selected.");
-        status("Check that there is a jumper at JP1 on Metis.");
+        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"JP12",isMetis?"Metis":"Hermes");
+        status(text);
         idle();
         break;
     case WRITE_IP:
@@ -1024,7 +1023,8 @@ void MainWindow::timeout() {
     case JTAG_INTERROGATE:
         status("Error: timeout reading interrogating JTAG chain!");
         status("Check that the correct interface is selected.");
-        status("Check that there is a jumper at JP1 on Metis.");
+        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"JP12",isMetis?"Metis":"Hermes");
+        status(text);
         idle();
         break;
     case JTAG_PROGRAM:
@@ -1102,11 +1102,11 @@ void MainWindow::discovery_timeout() {
     // enable the Discovery button
     ui->discoverPushButton->setDisabled(false);
 
-    text.sprintf("Discovery found %d %s card(s)",ui->metisComboBox->count(),isMetis?"Metis":"Hermes");
+    text.sprintf("Discovery found %d card(s)",ui->metisComboBox->count());
     status(text);
     if(ui->metisComboBox->count()==0) {
         status("Make sure the correct interface is selected.");
-        status("Make sure that there is no jumper on JP1.");
+        text.sprintf("Make sure that there is no jumper on %s.",isMetis?"JP1":"JP12");
     }
     QApplication::restoreOverrideCursor();
 }
@@ -1114,10 +1114,17 @@ void MainWindow::discovery_timeout() {
 void MainWindow::metis_found(Metis* m) {
 
     if(htonl(m->getIpAddress())!=ip) {
-        qDebug() << "metis_found";
         metis.append(m);
         ui->metisComboBox->addItem(m->toString());
         status(m->toString());
+        if(isMetis) {
+            if(m->getBoard()!=0) {
+                status("Warning: you have Metis selected but board is Hermes!");
+            }
+        } else if(m->getBoard()!=1) {
+            status("Warning: you have Hermes selected but board is Metis!");
+        }
+
     }
 }
 
@@ -1395,7 +1402,8 @@ void MainWindow::nextJTAGBuffer() {
             sendJTAGFlashData();
         } else {
             status("Loaded Flash successfully.");
-            status("Remember to remove JP1 when you power cycle");
+            text.sprintf("Remember to remove %s when you power cycle",isMetis?"JP1":"JP12");
+            status(text);
             idle();
         }
     }
