@@ -27,15 +27,19 @@
 class Metis
 {
 public:
-    Metis(long ipaddr,unsigned char* macaddr);
+    Metis(long ipaddr,unsigned char* macaddr,unsigned char software_version,unsigned char board_type);
     long getIpAddress();
     unsigned char* getMACAddress();
     QString getHostAddress();
     QString toString();
+    unsigned char getVersion();
+    unsigned char getBoard();
 
 private:
     long ipaddress;
     unsigned char macaddress[6];
+    unsigned char version;
+    unsigned char board;
 };
 
 #endif // METIS_H
