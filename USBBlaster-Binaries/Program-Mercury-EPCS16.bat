@@ -65,8 +65,7 @@ SET DIRECTORY=c:\altera\90sp2\qprogrammer\bin\quartus_pgm
 GOTO LOOP
 
 :Q91
-#  SET DIRECTORY=c:\altera\91\qprogrammer\bin\quartus_pgm
-SET DIRECTORY=C:\altera\91sp1\qprogrammer\bin\quartus_pgm
+SET DIRECTORY=c:\altera\91\qprogrammer\bin\quartus_pgm
 GOTO LOOP
 
 :Q91sp1
