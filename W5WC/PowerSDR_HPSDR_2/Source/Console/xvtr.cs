@@ -4792,7 +4792,7 @@ namespace PowerSDR
             // 
             // XVTRForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
             this.ClientSize = new System.Drawing.Size(896, 454);
             this.Controls.Add(this.chkUseXVTRTUNPWR);
             this.Controls.Add(this.udRXGain15);

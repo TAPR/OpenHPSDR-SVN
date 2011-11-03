@@ -158,7 +158,7 @@ namespace PowerSDR
 			// 
 			// ProductionDebug
 			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
 			this.ClientSize = new System.Drawing.Size(292, 266);
 			this.Controls.Add(this.groupBox1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

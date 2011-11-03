@@ -197,7 +197,7 @@ namespace PowerSDR
             // 
             // Predistest
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
             this.ClientSize = new System.Drawing.Size(292, 110);
             this.Controls.Add(this.udPhase);
             this.Controls.Add(this.lblPhase);

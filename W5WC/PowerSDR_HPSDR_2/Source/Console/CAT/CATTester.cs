@@ -142,7 +142,7 @@ namespace PowerSDR
 			// 
 			// CATTester
 			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
 			this.ClientSize = new System.Drawing.Size(536, 382);
 			this.Controls.Add(this.btnExecute);
 			this.Controls.Add(this.dataGrid1);

@@ -381,8 +381,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HPSDR\OzySDR1kControl.cs" />
-    <Compile Include="notch.cs" />
-    <Compile Include="notchlist.cs" />
+    <Compile Include="notch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="notchlist.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="paqualify.cs">
       <SubType>Form</SubType>
     </Compile>

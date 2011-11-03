@@ -428,7 +428,7 @@ namespace PowerSDR
             // 
             // WaveControl
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
             this.ClientSize = new System.Drawing.Size(416, 302);
             this.Controls.Add(this.chkQuickPlay);
             this.Controls.Add(this.chkQuickRec);

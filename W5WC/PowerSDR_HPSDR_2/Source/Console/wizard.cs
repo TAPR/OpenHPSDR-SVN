@@ -934,7 +934,7 @@ namespace PowerSDR
             // 
             // SetupWizard
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
             this.ClientSize = new System.Drawing.Size(488, 286);
             this.Controls.Add(this.grpModel);
             this.Controls.Add(this.groupBox2);

@@ -718,7 +718,7 @@ namespace PowerSDR
             // 
             // FLEX5000RX2CalForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
             this.ClientSize = new System.Drawing.Size(392, 486);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label1);

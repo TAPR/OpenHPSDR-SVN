@@ -1189,7 +1189,7 @@ namespace PowerSDR
             // 
             // FLEX5000ProdTestForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
             this.ClientSize = new System.Drawing.Size(592, 486);
             this.Controls.Add(this.btnPostFence);
             this.Controls.Add(this.grpIO);

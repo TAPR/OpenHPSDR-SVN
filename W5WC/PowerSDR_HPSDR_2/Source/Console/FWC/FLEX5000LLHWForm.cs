@@ -2154,7 +2154,7 @@ namespace PowerSDR
             // 
             // FLEX5000LLHWForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
             this.ClientSize = new System.Drawing.Size(640, 494);
             this.Controls.Add(this.lblATUC);
             this.Controls.Add(this.udATUC);
