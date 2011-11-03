@@ -130,7 +130,7 @@ namespace PowerSDR
 			// InputBox
 			// 
 			this.AcceptButton = this.btnOK;
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
 			this.ClientSize = new System.Drawing.Size(304, 102);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);

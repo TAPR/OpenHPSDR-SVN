@@ -18420,7 +18420,7 @@ namespace PowerSDR
             this.tbDSPImagePhaseTX.Maximum = 400;
             this.tbDSPImagePhaseTX.Minimum = -400;
             this.tbDSPImagePhaseTX.Name = "tbDSPImagePhaseTX";
-            this.tbDSPImagePhaseTX.Size = new System.Drawing.Size(160, 42);
+            this.tbDSPImagePhaseTX.Size = new System.Drawing.Size(160, 45);
             this.tbDSPImagePhaseTX.TabIndex = 3;
             this.tbDSPImagePhaseTX.TickFrequency = 50;
             this.toolTip1.SetToolTip(this.tbDSPImagePhaseTX, "Sets the phase offset between the I and Q channels.  ");
@@ -18442,7 +18442,7 @@ namespace PowerSDR
             this.tbDSPImageGainTX.Maximum = 500;
             this.tbDSPImageGainTX.Minimum = -500;
             this.tbDSPImageGainTX.Name = "tbDSPImageGainTX";
-            this.tbDSPImageGainTX.Size = new System.Drawing.Size(160, 42);
+            this.tbDSPImageGainTX.Size = new System.Drawing.Size(160, 45);
             this.tbDSPImageGainTX.TabIndex = 4;
             this.tbDSPImageGainTX.TickFrequency = 50;
             this.toolTip1.SetToolTip(this.tbDSPImageGainTX, "Sets the amplitude/gain offset between the I and Q channels.  ");
@@ -20029,13 +20029,12 @@ namespace PowerSDR
             // 
             this.grpTXMonitor.Controls.Add(this.lblTXAF);
             this.grpTXMonitor.Controls.Add(this.udTXAF);
-            this.grpTXMonitor.Location = new System.Drawing.Point(152, 204);
+            this.grpTXMonitor.Location = new System.Drawing.Point(305, 8);
             this.grpTXMonitor.Name = "grpTXMonitor";
             this.grpTXMonitor.Size = new System.Drawing.Size(120, 56);
             this.grpTXMonitor.TabIndex = 51;
             this.grpTXMonitor.TabStop = false;
             this.grpTXMonitor.Text = "Monitor";
-            this.grpTXMonitor.Visible = false;
             // 
             // lblTXAF
             // 
@@ -27589,7 +27588,7 @@ namespace PowerSDR
             this.tkbarTestGenFreq.Location = new System.Drawing.Point(16, 140);
             this.tkbarTestGenFreq.Maximum = 20000;
             this.tkbarTestGenFreq.Name = "tkbarTestGenFreq";
-            this.tkbarTestGenFreq.Size = new System.Drawing.Size(344, 42);
+            this.tkbarTestGenFreq.Size = new System.Drawing.Size(344, 45);
             this.tkbarTestGenFreq.TabIndex = 1;
             this.tkbarTestGenFreq.TickFrequency = 1000;
             this.toolTip1.SetToolTip(this.tkbarTestGenFreq, "Sets the frequency of the signal.");
@@ -29158,7 +29157,6 @@ namespace PowerSDR
             // 
             // Setup
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(616, 357);
             this.Controls.Add(this.btnExportDB);
             this.Controls.Add(this.btnImportDB);

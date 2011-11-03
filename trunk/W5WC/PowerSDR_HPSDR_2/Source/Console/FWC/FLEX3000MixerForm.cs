@@ -397,7 +397,7 @@ namespace PowerSDR
             // 
             // FLEX3000MixerForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
             this.ClientSize = new System.Drawing.Size(320, 230);
             this.Controls.Add(this.grpOutput);
             this.Controls.Add(this.grpInput);

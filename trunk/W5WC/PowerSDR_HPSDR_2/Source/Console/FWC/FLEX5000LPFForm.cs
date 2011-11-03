@@ -425,7 +425,7 @@ namespace PowerSDR
 			// 
 			// FLEX5000LPFForm
 			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
 			this.ClientSize = new System.Drawing.Size(344, 214);
 			this.Controls.Add(this.grpRX2);
 			this.Controls.Add(this.grpRX1);

@@ -99,7 +99,7 @@ namespace PowerSDR
 			// 
 			// Progress
 			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
 			this.ClientSize = new System.Drawing.Size(330, 56);
 			this.Controls.Add(this.btnAbort);
 			this.Controls.Add(this.panel1);

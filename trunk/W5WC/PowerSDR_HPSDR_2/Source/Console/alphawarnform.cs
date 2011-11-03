@@ -115,7 +115,7 @@ namespace PowerSDR
 			// 
 			// AlphaWarnForm
 			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
 			this.BackColor = System.Drawing.SystemColors.ControlText;
 			this.ClientSize = new System.Drawing.Size(416, 268);
 			this.Controls.Add(this.btnContinue);

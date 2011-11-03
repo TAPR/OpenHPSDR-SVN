@@ -109,7 +109,7 @@ namespace PowerSDR
 			// 
 			// FWCTestForm
 			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
 			this.ClientSize = new System.Drawing.Size(152, 78);
 			this.Controls.Add(this.txtTemp);
 			this.Controls.Add(this.txtVolts);
