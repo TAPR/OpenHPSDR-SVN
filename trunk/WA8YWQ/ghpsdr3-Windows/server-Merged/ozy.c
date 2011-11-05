@@ -99,8 +99,8 @@ static pthread_t playback_thread_id;
 static int configure=6;
 static int rx_frame=0;
 static int tx_frame=0;
-static int receivers=1;
-static int current_receiver=0;
+int receivers=1;
+int current_receiver=0;
 
 static int speed=1;
 static int sample_rate=96000;
@@ -157,6 +157,7 @@ static char ozy_fpga[64];
 static unsigned char ozy_output_buffer[OZY_BUFFER_SIZE];
 static int ozy_output_buffer_index=OZY_HEADER_SIZE;
 
+int MetisWriteFrame(int endpoint, char *bufp, int buflen);
 
 static char filename[256];
 static int record=0;
@@ -215,21 +216,21 @@ int create_ozy_thread() {
         rc=pthread_create(&playback_thread_id,NULL,playback_thread,NULL);
         if(rc != 0) {
             fprintf(stderr,"pthread_create failed on playback_thread: rc=%d\n", rc);
-            exit(1);
+            exit(13);
         }
     } else {
         // create a thread to read/write to EP6/EP2
         rc=pthread_create(&ep6_ep2_io_thread_id,NULL,ozy_ep6_ep2_io_thread,NULL);
         if(rc != 0) {
             fprintf(stderr,"pthread_create failed on ozy_ep6_io_thread: rc=%d\n", rc);
-            exit(1);
+            exit(14);
         }
 
         // create a thread to read from EP4
         rc=pthread_create(&ep4_io_thread_id,NULL,ozy_ep4_io_thread,NULL);
         if(rc != 0) {
             fprintf(stderr,"pthread_create failed on ozy_ep4_io_thread: rc=%d\n", rc);
-            exit(1);
+            exit(15);
         }
     }
 
@@ -268,10 +269,17 @@ void ozy_set_playback(char* f) {
 fprintf(stderr,"starting playback: %s\n",filename);
 }
 
+/**
+ * Set the number of receivers to be supported by this server
+ * \param r The number of receivers: 1, 2, 3, or 4
+ * This value (less one) is embedded into the command & control bytes that are sent to Mercury.
+ * Thus it determines how the I & Q samples read from EP6 are placed in the data stream to dspservers.
+ */
+
 void ozy_set_receivers(int r) {
     if(r>MAX_RECEIVERS) {
         fprintf(stderr,"MAX Receivers is 8!\n");
-        exit(1);
+        exit(16);
     }
     receivers=r;
     control_out[4] &= 0xc7;
@@ -281,6 +289,13 @@ void ozy_set_receivers(int r) {
 int ozy_get_receivers() {
     return receivers;
 }
+
+/**
+ * Set the sample rate for I & Q data to be sent from Mercury to the PC via USB EP6
+ * \param r One of 48000, 96000, or 192000
+ * The value is used to set bits in the command & control bytes sent to Mercury.
+ * These bits determine the decimation factor in Mercury's FPGA
+ */
 
 void ozy_set_sample_rate(int r) {
     switch(r) {
@@ -301,7 +316,7 @@ void ozy_set_sample_rate(int r) {
             break;
         default:
             fprintf(stderr,"Invalid sample rate (48000,96000,192000)!\n");
-            exit(1);
+            exit(17);
             break;
     }
     control_out[1] &= 0xfc;
@@ -320,6 +335,16 @@ void ozy_set_playback_sleep(int sleep) {
 int ozy_get_sample_rate() {
     return sample_rate;
 }
+
+/**
+ * Initialize Ozy and set up the UDP socket thru which I & Q data will be sent to dspserver(s)
+ * On Windows, first call init_hpsdr.
+ * On Linux, all initialization happens here.
+ * Several USB frames are sent to Ozy to ensure that it has all the correct command & control values
+ * Then each receiver is given an initial frequency (currently all are set to 7.056 MHz),
+ * and USB frames are again sent so that Ozy / Mercury have this frequency for the digital downconversion
+ * performed in Mercury's FPGA.
+ */
 
 int ozy_init() {
     int rc = 0;
@@ -344,7 +369,7 @@ int ozy_init() {
     rc = ozy_open();
     if (rc != 0) {
         fprintf(stderr,"Cannot locate Ozy\n");
-        exit(1);
+        exit(28);
     }
 
     // load Ozy FW
@@ -370,8 +395,9 @@ ozy_open();
     }
 
 
-    for(i=0;i<receivers;i++) {
-        current_receiver=i;
+    for(i = current_receiver = 0; i < receivers; i++) {
+//        current_receiver=i;		//write_ozy_output_buffer() increments current_receiver
+//		receiver[current_receiver].frequency_changed;	// make sure each receiver's initial frequency is set
         write_ozy_output_buffer();
     }
 
@@ -380,6 +406,12 @@ ozy_open();
 fprintf(stderr,"server configured for %d receivers at %d\n",receivers,sample_rate);
     return rc;
 }
+
+/**
+ * "Forever" read blocks from Ozy's EP6 and call process_ozy_input_buffer().
+ * OZY_BUFFERS determines how many (nominally 512 byte) buffers are to be read at once.
+ * \param arg Void pointer to nothing, not used.
+ */
 
 void* ozy_ep6_ep2_io_thread(void* arg) {
     unsigned char *input_buffer = NULL;
@@ -391,6 +423,11 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
         // read an input buffer (blocks until all bytes read)
         bytes=ozy_read(0x86,input_buffer,OZY_BUFFER_SIZE*ozy_buffers);
         if (bytes < 0) {
+	// -22 EINVAL invalid argument
+			// -116 ETIMEDOUT request timed out
+			// -12 ENOMEM memory allocation error
+			// -5 EIO general I/O error
+			// -2 ENOENT no such file or directory
             fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead read failed %d\n",bytes);
         } else if (bytes != OZY_BUFFER_SIZE*ozy_buffers) {
             fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead only read %d bytes\n",bytes);
@@ -403,12 +440,13 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
                 bytes=fwrite(input_buffer,sizeof(char),OZY_BUFFER_SIZE*ozy_buffers,recording);
             }
         }
-
+#if 0
         current_receiver++;
 
         if(current_receiver==receivers) {
             current_receiver=0;
         }
+#endif
     }
 	free(input_buffer);
 }
@@ -445,8 +483,11 @@ fprintf(stderr,"restarting playback: %s\n",filename);
 	free(input_buffer);
 }
 
+static char MetisBuffer[1050];			// space for two 512 byte data records plus a Metis header
+int	 MetisBufIndex = 0;
+
 void write_ozy_output_buffer() {
-    int bytes;
+    int bytes = OZY_BUFFER_SIZE;
 
     ozy_output_buffer[0]=SYNC;
     ozy_output_buffer[1]=SYNC;
@@ -460,7 +501,7 @@ void write_ozy_output_buffer() {
         ozy_output_buffer[6]=control_out[3];
         ozy_output_buffer[7]=control_out[4];
     } else if(receiver[current_receiver].frequency_changed) {
-        ozy_output_buffer[3]=control_out[0]|((current_receiver+2)<<1);
+        ozy_output_buffer[3]=control_out[0]|((current_receiver+2)<<1);		// C0
         ozy_output_buffer[4]=receiver[current_receiver].frequency>>24;
         ozy_output_buffer[5]=receiver[current_receiver].frequency>>16;
         ozy_output_buffer[6]=receiver[current_receiver].frequency>>8;
@@ -474,19 +515,30 @@ void write_ozy_output_buffer() {
         ozy_output_buffer[7]=control_out[4];
     }
 
-#if AllowMetis
-    if(metis) {
-        bytes=metis_write(0x02,ozy_output_buffer,OZY_BUFFER_SIZE);
-        if(bytes!=OZY_BUFFER_SIZE) {
-            perror("OzyBulkWrite failed");
-        }
+
+    if(metis) 
+	{	// accumulate two ozy buffers to send at once to Metis
+
+		memcpy(MetisBuffer + MetisBufIndex, ozy_output_buffer, OZY_BUFFER_SIZE);
+		MetisBufIndex += OZY_BUFFER_SIZE;
+		if (MetisBufIndex > OZY_BUFFER_SIZE)	// first time MetisBufIndex will be == OZY_BUFFER_SIZE
+		{	
+//        bytes=metis_write(0x02,ozy_output_buffer,OZY_BUFFER_SIZE);
+			bytes = MetisWriteFrame(0x02, MetisBuffer, MetisBufIndex);
+			if(bytes != MetisBufIndex) {
+				perror("MetisWriteFrame failed in write_ozy_output_buffer()");
+			}
+			MetisBufIndex = 0;
+            if( (++current_receiver) == receivers) current_receiver=0; 
+		}
     } else 
-#endif
+
 	{
         bytes=ozy_write(0x02,ozy_output_buffer,OZY_BUFFER_SIZE);
         if(bytes!=OZY_BUFFER_SIZE) {
-            perror("OzyBulkWrite failed");
+            perror("OzyBulkWrite failed in write_ozy_output_buffer()");
         }
+        if( (++current_receiver) == receivers) current_receiver=0; 
     }
 
 if(tx_frame<10) {
@@ -496,19 +548,94 @@ if(tx_frame<10) {
 
 }
 
+void ForceCandCFrames(int count) { 
+	int	numwritten;	
+	unsigned char buf[1024];
+	int	i; 
+#if 0
+	memset(buf,	0, sizeof(buf)); 
+
+	
+	buf[0] = 0x7f; 
+	buf[1] = 0x7f; 
+	buf[2] = 0x7f; 
+	buf[3] = XmitBit;									  /* c0	*/ 
+	buf[4] = (SampleRateIn2Bits	& 3) | ( C1Mask	& 0xfc ); /* c1	*/
+	buf[5] = PennyOCBits <<	1;							  /* c2	*/
+	buf[6] = (MercAtten | MercDither	| MercPreamp | MercRandom |	AlexRxAnt |	AlexRxOut) & 0xff; /* c3 */
+	buf[7] = AlexTxAnt & 0x3;
+
+	buf[512] = 0x7f; 
+	buf[513] = 0x7f; 
+	buf[514] = 0x7f; 
+	buf[515] = 2;									  /* c0	*/ 
+	buf[516] = (VFOfreq	>> 24) & 0xff;	/* byte	0 of freq -	c1	*/
+	buf[517] = (VFOfreq	>> 16) & 0xff;	/* byte	1 of freq -	c2	*/
+	buf[518] = (VFOfreq	>> 8) &	0xff;	/* byte	2 of freq -	c3	*/ 
+	buf[519] = VFOfreq & 0xff;			/* byte	3 of freq -	c4	*/	
+#endif
+//	if (  FPGATestMode ) { 
+//		memcpy(buf+8, fpga_test_buf+8, 512-8); 
+//		memcpy(buf+8+512, fpga_test_buf+8, 512-8); 
+//	} 
+	for	( i	= 0; i < count;	i++	) 
+	{	
+//		if ( isMetis ) 
+//		{ 
+//			numwritten = MetisBulkWrite(2, buf, sizeof(buf)); 
+			write_ozy_output_buffer();	
+//		} 
+//		else { 
+//			numwritten = OzyBulkWrite(OzyH,	0x02, buf, sizeof(buf));
+//		}
+	}
+	   for(i = 0; i < receivers; i++) // Set frequency for all receivers
+	   {
+			current_receiver=i;
+			receiver[current_receiver].frequency_changed = 1;
+			write_ozy_output_buffer();
+	   }
+	   current_receiver = 0;
+
+} 
+
+void ForceCandCFrame(void) { 
+	ForceCandCFrames(1); 
+} 
+
+int MetisBulkRead(int endpoint, char *bufp, int buflen);
+
 void process_ozy_input_buffer(char* buffer) {
+//void process_ozy_input_buffer(void) {
     int b=0;
     int b_max;
     int r;
     int left_sample,right_sample,mic_sample;
     float left_sample_float,right_sample_float,mic_sample_float;
-    int rc;
-    int i;
-    int bytes;
 
+//    int bytes;
+//	char buffer[512];
+//	int endpoint = 6;
+
+//	int pad = 0;
+//	  switch(receivers) {
+//            case 1: pad=0; break;
+//            case 2: pad=0; break;
+//            case 3: pad=4; break;
+//            case 4: pad=10; break;
+//            case 5: pad=24; break;
+//            case 6: pad=10; break;
+//            case 7: pad=20; break;
+//            case 8: pad=4; break;
+//        }
+
+//	bytes = MetisBulkRead(endpoint, buffer, 512 - pad);
+	
 if(rx_frame<10) {
     dump_ozy_buffer("received from Ozy:",rx_frame,buffer);
 }
+
+//	for ( ; buffer[b] == 0; ++b) ;
 
     if(buffer[b++]==SYNC && buffer[b++]==SYNC && buffer[b++]==SYNC) {
 
@@ -580,6 +707,12 @@ if(rx_frame<10) {
                 right_sample  = (int)((signed char)buffer[b++]) << 16;
                 right_sample += (int)((unsigned char)buffer[b++]) << 8;
                 right_sample += (int)((unsigned char)buffer[b++]);
+//				if (abs(left_sample) > 1000)			// With Ozy interface, # receivers = 4, sometimes get single very large sample value
+//				{	left_sample = right_sample;			// on only one channel.  Replace the nasty one with the value from the other channel
+//				}
+//				if (abs(right_sample) > 1000) 
+//				{	right_sample = left_sample;			// ######
+//				}
                 left_sample_float=(float)left_sample/8388607.0; // 24 bit sample
                 right_sample_float=(float)right_sample/8388607.0; // 24 bit sample
                 receiver[r].input_buffer[samples]=left_sample_float;
@@ -622,7 +755,7 @@ if(rx_frame<10) {
     } else {
         fprintf(stderr,"SYNC error\n");
         dump_ozy_buffer("SYNC ERROR",rx_frame,buffer);
-        exit(1);
+      //  exit(18);
     }
 
 
@@ -632,13 +765,12 @@ if(rx_frame<10) {
 void* ozy_ep4_io_thread(void* arg) {
     unsigned char buffer[BANDSCOPE_BUFFER_SIZE*2];
     int bytes;
-    int i;
 
     while(1) {
         bytes=ozy_read(0x84,(void*)(bandscope.buffer),sizeof(buffer));
         if (bytes < 0) {
             fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead failed %d bytes\n",bytes);
-            exit(1);
+            exit(19);
         } else if (bytes != BANDSCOPE_BUFFER_SIZE*2) {
             fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead only read %d bytes\n",bytes);
             exit(1);
@@ -668,7 +800,6 @@ void process_bandscope_buffer(char* buffer) {
 }
 
 void process_ozy_output_buffer(float *left_output_buffer,float *right_output_buffer,int mox) {
-    unsigned char ozy_samples[1024*8];
     int j,c;
     short left_rx_sample;
     short right_rx_sample;
@@ -700,7 +831,7 @@ void process_ozy_output_buffer(float *left_output_buffer,float *right_output_buf
             ozy_output_buffer[ozy_output_buffer_index++]=right_tx_sample>>8;
             ozy_output_buffer[ozy_output_buffer_index++]=right_tx_sample;
 
-            if(ozy_output_buffer_index==OZY_BUFFER_SIZE) {
+            if(ozy_output_buffer_index>=OZY_BUFFER_SIZE) {
                 write_ozy_output_buffer();
                 ozy_output_buffer_index=OZY_HEADER_SIZE;
             }

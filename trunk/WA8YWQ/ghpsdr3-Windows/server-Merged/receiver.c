@@ -54,16 +54,23 @@ static char response[80];
 
 static unsigned long sequence=0L;
 
+/**
+ * - Set the client pointer to NULL for each receiver in the array receiver[].
+ * - Open one UDP socket that will be used to send I & Q receive samples to each dspserver.
+ *   At this point port 11002 is used, but the port number will be dynamically changed as
+ *   samples are sent to each dspserver.
+ */
 void init_receivers() {
     int i;
     for(i=0;i<MAX_RECEIVERS;i++) {
         receiver[i].client=(CLIENT*)NULL;
+		receiver[i].id = i;
     }
 
     iq_socket=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
     if(iq_socket<0) {
         perror("create socket failed for iq_socket\n");
-        exit(1);
+        exit(20);
     }
 
     iq_length=sizeof(iq_addr);
@@ -74,11 +81,17 @@ void init_receivers() {
 
     if(bind(iq_socket,(struct sockaddr*)&iq_addr,iq_length)<0) {
         perror("bind socket failed for iq socket");
-        exit(1);
+        exit(21);
     }
 
 }
 
+/**
+ * \param rx Integer = receiver number, 0, 1, 2, or 3
+ * Store pointer to struct client in receiver array.
+ * \param client Pointer to struct client
+ * Set receiver number in struct client.
+ */
 char* attach_receiver(int rx,CLIENT* client) {
 
     if(client->receiver_state==RECEIVER_ATTACHED) {
@@ -95,7 +108,7 @@ char* attach_receiver(int rx,CLIENT* client) {
     
     client->receiver_state=RECEIVER_ATTACHED;
     receiver[rx].client=client;
-    client->receiver=rx;;
+    client->receiver=rx;
 
     sprintf(response,"%s %d",OK,ozy_get_sample_rate());
 
@@ -121,6 +134,11 @@ char* detach_receiver(int rx,CLIENT* client) {
     return OK;
 }
 
+/**
+ * Store the new frequency for this receiver in its struct client, and set the corresponding "frequency has changed" flag
+ * \param client Pointer to struct client
+ * \param frequency Long integer = frequency to which this receiver is tuned, in Hz
+ */
 char* set_frequency(CLIENT* client,long frequency) {
     if(client->receiver_state==RECEIVER_DETACHED) {
         return CLIENT_DETACHED;
@@ -136,6 +154,12 @@ char* set_frequency(CLIENT* client,long frequency) {
     return OK;
 }
 
+/**
+ * - Place the IQ port number into a struct sockaddr_in, confusingly named "client", which will be passed to sendto().
+ * - Copy data from this receiver's buffer into a temporary buffer & send the samples to dspserver using sendto().
+ * If SMALL_PACKETS is defined, the UDP packets are limited to a maximum of 512 bytes.
+  * \param rx Integer = receiver number, 0, 1, 2, or 3
+*/
 void send_IQ_buffer(int rx) {
     struct sockaddr_in client;
     int client_length;
@@ -178,7 +202,7 @@ void send_IQ_buffer(int rx) {
                 rc=sendto(iq_socket,(char*)&buffer,sizeof(buffer),0,(struct sockaddr*)&client,client_length);
                 if(rc<=0) {
                     perror("sendto failed for iq data");
-                    exit(1);
+                    exit(22);
                 }
                 offset+=buffer.length;
             }
@@ -188,7 +212,7 @@ void send_IQ_buffer(int rx) {
             rc=sendto(iq_socket,receiver[rx].input_buffer,sizeof(receiver[rx].input_buffer),0,(struct sockaddr*)&client,client_length);
             if(rc<=0) {
                 perror("sendto failed for iq data");
-                exit(1);
+                exit(23);
             }
 #endif
  

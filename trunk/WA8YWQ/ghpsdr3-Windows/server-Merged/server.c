@@ -50,6 +50,8 @@
 #include "bandscope.h"
 #include "metis.h"
 
+/** command line options:  --option value
+ */
 static struct option long_options[] = {
     {"receivers",required_argument, 0, 0},
     {"samplerate",required_argument, 0, 1},
@@ -76,6 +78,9 @@ static char* eInterface="eth0";
 
 void process_args(int argc,char* argv[]);
 
+int nativeInitMetis(void);
+int MetisStartReadThread(void);
+
 int main(int argc,char* argv[]) {
 
 #ifndef __linux__
@@ -84,10 +89,10 @@ int main(int argc,char* argv[]) {
         int err;
 
         wVersionRequested = MAKEWORD(1, 1);
-        err = WSAStartup(wVersionRequested, &wsaData);          // initialize Windows sockets
+        err = WSAStartup(wVersionRequested, &wsaData);          // initialize Windows sockets -- now done in Metis.c
 #endif
 
-		ozy_set_receivers(1);	// set default values
+		ozy_set_receivers(4);	// set default values
 		ozy_set_sample_rate(48000);
 
 
@@ -97,18 +102,22 @@ int main(int argc,char* argv[]) {
 #define sleep Sleep
 #endif
 
-#if AllowMetis
-    if(metis) {
-        metis_discover(eInterface);
+// #### over-ride process_args()    --- for debugging, when there is not a command line
+	metis = 0;		// ####
+	ozy_set_metis(metis);	// ####
+
+    if(metis == 1) 
+	{	nativeInitMetis();
+        // metis_discover(eInterface);
         sleep(1);
         // see if we have any Metis boards
-        fprintf(stderr,"Found %d Metis cards\n",metis_found());
-        if(metis_found()==0) {
-            exit(1);
-        }
+//        fprintf(stderr,"Found %d Metis cards\n",metis_found());
+//        if(metis_found()==0) {
+//            exit(24);
+//			}
         ozy_set_buffers(2);
     }
-#endif
+
 
     init_receivers();
     init_bandscope();
@@ -116,9 +125,9 @@ int main(int argc,char* argv[]) {
     create_listener_thread();
 
     if(metis) {
-#if AllowMetis
-        metis_start_receive_thread();
-#endif
+
+        MetisStartReadThread();		// djm version was   metis_start_receive_thread();
+
     } else {
         create_ozy_thread();
     }
@@ -132,6 +141,19 @@ int main(int argc,char* argv[]) {
     }
 }
 
+/**
+ * Call getopt_long() to process command line arguments and store values:
+ * - receivers: 1, 2, 3, or 4,
+ * - samplerate: 48000, 96000, or 192000, 
+ * - preamp: on or off,
+ * - dither: on or off,
+ * - random: on or off,
+ * - 10mhzsource: atlas, penelope, or mercury:  0, 1, 2
+ * - 122.88mhzsource: penelope or mercury: 0, 1
+ * - Micsource: janus or penelope: 0, 1
+ * - class: other or E: 0, 1
+ * - timing
+ */
 void process_args(int argc,char* argv[]) {
     int i;
 
@@ -250,7 +272,7 @@ void process_args(int argc,char* argv[]) {
                 fprintf(stderr,"         --timing 1\n");
                 fprintf(stderr,"         --metis\n");
                 fprintf(stderr,"         --interface if\n");
-                exit(1);
+                exit(25);
                 break;
                
         }

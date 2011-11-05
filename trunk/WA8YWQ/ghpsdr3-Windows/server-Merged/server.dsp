@@ -65,7 +65,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /GZ /c
-# ADD CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /GZ /c
+# ADD CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FR /YX /FD /GZ /c
 # ADD BASE RSC /l 0x409 /d "_DEBUG"
 # ADD RSC /l 0x409 /d "_DEBUG"
 BSC32=bscmake.exe
@@ -107,6 +107,10 @@ SOURCE=.\listener.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\metis.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\ozy.c
 # End Source File
 # Begin Source File
@@ -119,7 +123,15 @@ SOURCE=.\receiver.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\ringbuf.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\server.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\transmitter.c
 # End Source File
 # Begin Source File
 
@@ -151,6 +163,10 @@ SOURCE=.\messages.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\metis.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\ozy.h
 # End Source File
 # Begin Source File
@@ -172,6 +188,10 @@ SOURCE=.\sched.h
 # Begin Source File
 
 SOURCE=.\semaphore.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\transmitter.h
 # End Source File
 # Begin Source File
 
