@@ -29,7 +29,7 @@
 #define AllowMetis 1
 #else
 #include <winsock.h>
-#define AllowMetis 0			// #### temporarily exclude all calls to metis code, to enable testing of USB interface
+#define AllowMetis 1
 #endif
 
 

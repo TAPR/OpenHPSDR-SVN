@@ -58,7 +58,7 @@ void create_listener_thread() {
     rc=pthread_create(&thread_id,NULL,listener_thread,NULL);
     if(rc<0) {
         perror("pthread_create listener_thread failed");
-        exit(1);
+        exit(7);
     }
     
 }
@@ -72,10 +72,11 @@ void* listener_thread(void* arg) {
     int on=1;
 
     // create TCP socket to listen on
+	// The dspserver for every receiver will request a connection on this port
     s=socket(AF_INET,SOCK_STREAM,0);
     if(s<0) {
         perror("Listen socket failed");
-        exit(1);
+        exit(8);
     }
 
     setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
@@ -87,7 +88,7 @@ void* listener_thread(void* arg) {
     address.sin_port=htons(LISTEN_PORT);
     if(bind(s,(struct sockaddr*)&address,sizeof(address))<0) {
         perror("Command bind failed");
-        exit(1);
+        exit(9);
     }
 
 fprintf(stderr,"Listening for TCP connections on port %d\n",LISTEN_PORT);
@@ -96,25 +97,29 @@ fprintf(stderr,"Listening for TCP connections on port %d\n",LISTEN_PORT);
 
         if(listen(s,6)<0) {
             perror("Command listen failed");
-            exit(1);
+            exit(10);
         }
 
         client=malloc(sizeof(CLIENT));
         client->address_length=sizeof(client->address);
         client->iq_port=-1;
 
+		// A connection request has been received
+		// Accept it, creating a TCP socket through which communication (sending & receiving) can take place.
         if((client->socket=accept(s,(struct sockaddr*)&client->address,&client->address_length))<0) {
             perror("Command accept failed");
-            exit(1);
+            exit(11);
         }
         
 fprintf(stderr,"client socket %d\n",client->socket);
 fprintf(stderr,"client connected: %s:%d\n",inet_ntoa(client->address.sin_addr),ntohs(client->address.sin_port));
+		// Launch a client_thread to process commands sent by dspserver.
+		// Each dspserver gets its own client_thread.
 
         rc=pthread_create(&client->thread_id,NULL,client_thread,(void *)client);
         if(rc<0) {
             perror("pthread_create command_thread failed");
-            exit(1);
+            exit(12);
         }
 
     }

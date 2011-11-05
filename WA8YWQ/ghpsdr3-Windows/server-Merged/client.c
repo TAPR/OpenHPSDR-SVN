@@ -48,6 +48,10 @@
 #include "bandscope.h"
 #include "messages.h"
 
+extern RECEIVER receiver[MAX_RECEIVERS];
+extern int current_receiver;
+int MercuryAudioReceiver = 0;		// the one receiver whose demodulated audio is to be sent to Mercury's headphone / speaker output
+
 short audio_port=AUDIO_PORT;
 
 char* parse_command(CLIENT* client,char* command);
@@ -78,6 +82,8 @@ fprintf(stderr,"client connected: %s:%d\n",inet_ntoa(client->address.sin_addr),n
 //fprintf(stderr,"response(Rx%d): '%s'\n",client->receiver,response);
     }
 
+
+	// Shut down
     if(client->receiver_state==RECEIVER_ATTACHED) {
         receiver[client->receiver].client=(CLIENT*)NULL;
         client->receiver_state=RECEIVER_DETACHED;
@@ -103,11 +109,25 @@ fprintf(stderr,"client disconnected: %s:%d\n",inet_ntoa(client->address.sin_addr
 	return (void *) NULL;
 }
 
+/**
+ * Recognize the following command strings, sent from a dspserver:
+ * - attach ReceiverNumber  (0, 1, 2, or 3)
+ * - detach ReceiverNumber
+ * - frequency f (f is an integer, Hz)
+ * - start iq port
+ * - start bandscope port
+ * - stop iq n
+ * - stop bandscope
+
+ * \param client A pointer to struct client
+ * \param command A null-terminated string to be scanned for one of the above commands
+ * \return OK or INVALID_COMMAND
+ */
 char* parse_command(CLIENT* client,char* command) {
-    
+    int selectAudio;
     char* token;
 
-//fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
+fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
 
     token=strtok(command," \r\n");
     if(token!=NULL) {
@@ -149,12 +169,16 @@ char* parse_command(CLIENT* client,char* command) {
                     token=strtok(NULL," \r\n");
                     if(token!=NULL) {
                         client->iq_port=atoi(token);
-                    }
+						// Remember the last receiver started, so that one will send demodulated data back to Ozy / Mercury.
+						// Eventually, there'll be a command to select whose audio goes to the headphone / speaker output.
+						MercuryAudioReceiver = client->receiver;
 
+                    }
+						// Start a thread to handle demodulated audio from this receiver.
                     //if(pthread_create(&receiver[client->receiver].audio_thread_id,NULL,audio_thread,&receiver[client->receiver])!=0) {
                     if(pthread_create(&receiver[client->receiver].audio_thread_id,NULL,audio_thread,client)!=0) {
                         fprintf(stderr,"failed to create audio thread for rx %d\n",client->receiver);
-                        exit(1);
+                        exit(26);
                     }
                     return OK;
                 } else if(strcmp(token,"bandscope")==0) {
@@ -192,6 +216,21 @@ char* parse_command(CLIENT* client,char* command) {
                 // invalid command string
                 return INVALID_COMMAND;
             }
+		} else if (strcmp(token, "selectAudio") == 0) 
+		{	// change selection of which receiver's audio goes to Mercury headphone output
+			token = strtok(NULL, " \r\n");
+			if (token != NULL) 
+			{	selectAudio = atoi(token);
+				if (   (selectAudio >= 0) 
+					&& (selectAudio < ozy_get_receivers() ) 
+					&& (receiver[selectAudio].client != NULL)
+					)
+				{	MercuryAudioReceiver = selectAudio;
+					return OK;
+				}
+				else return RECEIVER_INVALID;
+			}
+			else return RECEIVER_INVALID;
         } else if(strcmp(token,"preamp")==0) {
             token=strtok(NULL," \r\n");
             if(token!=NULL) {
@@ -266,7 +305,7 @@ fprintf(stderr,"audio_thread port=%d\n",audio_port+(rx->id*2));
     rx->audio_socket=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
     if(rx->audio_socket<0) {
         perror("create socket failed for server audio socket");
-        exit(1);
+        exit(4);
     }
 
     setsockopt(rx->audio_socket, SOL_SOCKET, SO_REUSEADDR, (char *)&on, sizeof(on));
@@ -279,7 +318,7 @@ fprintf(stderr,"audio_thread port=%d\n",audio_port+(rx->id*2));
 
     if(bind(rx->audio_socket,(struct sockaddr*)&audio,audio_length)<0) {
         perror("bind socket failed for server audio socket");
-        exit(1);
+        exit(5);
     }
 
     fprintf(stderr,"listening for rx %d audio on port %d\n",rx->id,audio_port+(rx->id*2));
@@ -289,9 +328,10 @@ fprintf(stderr,"audio_thread port=%d\n",audio_port+(rx->id*2));
         bytes_read=recvfrom(rx->audio_socket,(char *)rx->output_buffer,sizeof(rx->output_buffer),0,(struct sockaddr*)&audio,&audio_length);
         if(bytes_read<0) {
             perror("recvfrom socket failed for audio buffer");
-            exit(1);
+            exit(6);
         }
 
+		if (rx->id == MercuryAudioReceiver)		// if this receiver is selected, send the demodulated audio to Mercury's headphone output
         process_ozy_output_buffer(rx->output_buffer,&rx->output_buffer[BUFFER_SIZE],client->mox);
 
     }

@@ -52,6 +52,7 @@ typedef struct _client {
     int mox;
 } CLIENT;
 
+extern int MercuryAudioReceiver;		// The one receiver whose demodulated audio is to be sent to Mercury's headphone / speaker output.
 
 void* client_thread(void* arg);
 

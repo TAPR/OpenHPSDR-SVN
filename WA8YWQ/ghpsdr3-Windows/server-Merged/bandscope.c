@@ -68,7 +68,7 @@ void init_bandscope() {
 
     if(bind(bs_socket,(struct sockaddr*)&bs_addr,bs_length)<0) {
         perror("bind socket failed for bs socket");
-        exit(1);
+        exit(2);
     }
 
 }
@@ -127,7 +127,7 @@ void send_bandscope_buffer() {
                 rc=sendto(bs_socket,(char*)&buffer,sizeof(buffer),0,(struct sockaddr*)&client,client_length);
                 if(rc<=0) {
                     perror("sendto failed for bandscope data");
-                    exit(1);
+                    exit(3);
                 }
                 offset+=buffer.length;
             }
