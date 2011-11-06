@@ -105,7 +105,7 @@ char* parse_command(CLIENT* client,char* command) {
     
     char* token;
 
-//fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
+fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
 
     token=strtok(command," \r\n");
     if(token!=NULL) {

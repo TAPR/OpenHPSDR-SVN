@@ -194,7 +194,7 @@
     </font>
    </property>
    <property name="text">
-    <string>for Metis.</string>
+    <string>for Hermes and Metis.</string>
    </property>
   </widget>
   <widget class="QLabel" name="versionLabel">
