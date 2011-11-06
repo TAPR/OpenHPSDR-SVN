@@ -442,7 +442,7 @@ void Spectrum::setFrequency(long long f) {
     subRxFrequency=f;
     strFrequency.sprintf("%lld.%03lld.%03lld",f/1000000,f%1000000/1000,f%1000);
     strSubRxFrequency.sprintf("%lld.%03lld.%03lld",f/1000000,f%1000000/1000,f%1000);
-    //qDebug() << "Spectrum:setFrequency: " << f;
+    qDebug() << "Spectrum:setFrequency: " << f;
 }
 
 void Spectrum::setSubRxFrequency(long long f) {
@@ -474,6 +474,7 @@ void Spectrum::setReceiver(int r) {
 
 void Spectrum::setMode(QString m) {
     mode=m;
+    qDebug() << "Spectrum:setMode: " << m;
     repaint();
 }
 
