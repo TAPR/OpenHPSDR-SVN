@@ -107,12 +107,10 @@ namespace PowerSDR
         /// <returns></returns>
         public static bool Restore(string name, string p, Form f)
         {
-            Skin.path = p + "\\" + name;
+            path = p + "\\" + name;
             Skin.name = name;
 
-            if (File.Exists(path + "\\" + f.Name + "\\" + f.Name + pic_file_ext))
-                f.BackgroundImage = Image.FromFile(path + "\\" + f.Name + "\\" + f.Name + pic_file_ext);
-            else f.BackgroundImage = null;
+            f.BackgroundImage = File.Exists(path + "\\" + f.Name + "\\" + f.Name + pic_file_ext) ? Image.FromFile(path + "\\" + f.Name + "\\" + f.Name + pic_file_ext) : null;
 
             foreach (Control c in f.Controls) // load in images
                 ReadImages(c);
@@ -160,9 +158,7 @@ namespace PowerSDR
 
         private static void Save(Control c, XmlTextWriter writer)
         {
-            Control temp;
-
-            temp = c as Button;
+            Control temp = c as Button;
             if (temp != null)
             {
                 SaveButton((Button)c, writer);
@@ -344,9 +340,7 @@ namespace PowerSDR
 
         private static void ReadImages(Control c)
         {
-            Control temp;
-
-            temp = c as GroupBox;
+            Control temp = c as GroupBox;
             if (temp != null)
             {
                 GroupBox grp = (GroupBox)c;
@@ -863,26 +857,17 @@ namespace PowerSDR
                 ctrl.ImageList.Images.IndexOfKey(ImageState.DisabledDown.ToString()) >= 0 &&
                 ctrl.ImageList.Images.IndexOfKey(ImageState.DisabledUp.ToString()) >= 0)
             {
-                if (ctrl.Checked)
-                    state = ImageState.DisabledDown;
-                else
-                    state = ImageState.DisabledUp;
+                state = ctrl.Checked ? ImageState.DisabledDown : ImageState.DisabledUp;
             }
             else if (ctrl.Focused && 
                 ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedDown.ToString()) >= 0 &&
                 ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedUp.ToString()) >= 0)
             {
-                if (ctrl.Checked)
-                    state = ImageState.FocusedDown;
-                else
-                    state = ImageState.FocusedUp;
+                state = ctrl.Checked ? ImageState.FocusedDown : ImageState.FocusedUp;
             }
             else
             {
-                if (ctrl.Checked)
-                    state = ImageState.NormalDown;
-                else
-                    state = ImageState.NormalUp;
+                state = ctrl.Checked ? ImageState.NormalDown : ImageState.NormalUp;
             }
 
             SetCheckBoxImageState(ctrl, state);
@@ -1256,10 +1241,7 @@ namespace PowerSDR
                 ctrl.ImageList.Images.IndexOfKey(ImageState.DisabledDown.ToString()) >= 0 &&
                 ctrl.ImageList.Images.IndexOfKey(ImageState.DisabledUp.ToString()) >= 0)
             {
-                if (ctrl.Checked)
-                    state = ImageState.DisabledDown;
-                else
-                    state = ImageState.DisabledUp;
+                state = ctrl.Checked ? ImageState.DisabledDown : ImageState.DisabledUp;
             }
             else if (ctrl.Focused &&
                 ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedDown.ToString()) >= 0 &&
@@ -1272,10 +1254,7 @@ namespace PowerSDR
             }
             else
             {
-                if (ctrl.Checked)
-                    state = ImageState.NormalDown;
-                else
-                    state = ImageState.NormalUp;
+                state = ctrl.Checked ? ImageState.NormalDown : ImageState.NormalUp;
             }
 
             SetRadioButtonImageState(ctrl, state);
@@ -1414,9 +1393,7 @@ namespace PowerSDR
                 ctrl.BackgroundImage = Image.FromFile(s + "back" + pic_file_ext);
             else ctrl.BackgroundImage = null;
 
-            if(File.Exists(s + "head" + pic_file_ext))
-                ctrl.HeadImage = Image.FromFile(s + "head" + pic_file_ext);
-            else ctrl.HeadImage = null;
+            ctrl.HeadImage = File.Exists(s + "head" + pic_file_ext) ? Image.FromFile(s + "head" + pic_file_ext) : null;
 
             ctrl.Invalidate();
         }
@@ -1543,9 +1520,7 @@ namespace PowerSDR
 
         private static void SetBackgroundImage(Control c)
         {
-            if (File.Exists(path + "\\" + c.TopLevelControl.Name + "\\" + c.Name + pic_file_ext))
-                c.BackgroundImage = Image.FromFile(path + "\\" + c.TopLevelControl.Name + "\\" + c.Name + pic_file_ext);
-            else c.BackgroundImage = null;
+            c.BackgroundImage = File.Exists(path + "\\" + c.TopLevelControl.Name + "\\" + c.Name + pic_file_ext) ? Image.FromFile(path + "\\" + c.TopLevelControl.Name + "\\" + c.Name + pic_file_ext) : null;
         }
 
         #endregion

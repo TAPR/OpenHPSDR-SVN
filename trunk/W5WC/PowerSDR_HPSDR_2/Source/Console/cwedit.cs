@@ -28,17 +28,13 @@
 
 namespace PowerSDR
 {
-    using System;
-    using System.Drawing;
     using System.Diagnostics;
-    using System.Collections;
-    using System.ComponentModel;
     using System.Windows.Forms;
 
 	/// <summary>
 	/// Summary description for cwedit.
 	/// </summary>
-	public class cwedit : System.Windows.Forms.Form
+	public class cwedit : Form
 	{
 		#region startup/exit stuff
 		private System.ComponentModel.IContainer components;

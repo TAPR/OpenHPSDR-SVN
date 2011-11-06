@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{831AEB2F-CA78-4057-85D7-32B4816ED6AE}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -381,12 +381,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HPSDR\OzySDR1kControl.cs" />
-    <Compile Include="notch.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="notchlist.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="notch.cs" />
+    <Compile Include="notchlist.cs" />
     <Compile Include="paqualify.cs">
       <SubType>Form</SubType>
     </Compile>

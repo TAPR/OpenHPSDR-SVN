@@ -17,15 +17,6 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-
-using System;
-using System.Runtime.InteropServices;
-using System.Diagnostics; 
-// using PowerSDR.Console; 
-
-// using HPSDR_USB_LIB_V1;
-
-
 //
 // this module contains code to support the Penelope Transmitter board 
 // 
@@ -105,14 +96,7 @@ namespace PowerSDR
 			} 
 			else 
 			{ 
-				if ( tx ) 
-				{ 
-					bits = TXBitMasks[idx]; 
-				}
-				else 
-				{
-					bits = RXBitMasks[idx];
-				}
+				bits = tx ? TXBitMasks[idx] : RXBitMasks[idx];
 			}
 			System.Console.WriteLine("Bits: " + bits + " Band: " + (int)band); 
 			JanusAudio.SetPennyOCBits(bits);

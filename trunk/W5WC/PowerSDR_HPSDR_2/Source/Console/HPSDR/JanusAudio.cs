@@ -23,7 +23,6 @@ namespace PowerSDR
     using System.Threading;
     using System.Runtime.InteropServices;
     using System.Diagnostics;
-    using System.Text;
     using HPSDR_USB_LIB_V1;
 
 	//

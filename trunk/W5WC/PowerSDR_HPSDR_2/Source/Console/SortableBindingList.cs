@@ -28,11 +28,6 @@
 // ref: (http://www.tech.windowsapplication1.com/content/sortable-binding-list-custom-data-objects)
 //=================================================================
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace PowerSDR
 {
     public class SortableBindingList<T> : System.ComponentModel.BindingList<T>

@@ -23,13 +23,9 @@
 #define DBG_PRINT
 
 using System;
-using System.IO;
 using System.Text;
-using System.Collections;
-using System.Threading;
 using System.Windows.Forms; // needed for MessageBox (wjt)
 using System.Text.RegularExpressions;
-using System.Diagnostics;
 using SDRSerialSupportII;
 
 namespace PowerSDR

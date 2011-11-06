@@ -28,19 +28,15 @@
 //=================================================================
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
     [DefaultEvent("Scroll")]
-    public partial class PrettyTrackBar : PictureBox
+    public class PrettyTrackBar : PictureBox
     {
         #region Variable Declaration
 

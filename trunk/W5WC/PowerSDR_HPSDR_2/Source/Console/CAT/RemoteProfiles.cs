@@ -1,7 +1,3 @@
-using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml;
@@ -12,16 +8,16 @@ namespace PowerSDR
 	/// <summary>
 	/// Summary description for RemoteProfiles.
 	/// </summary>
-	public class RemoteProfiles : System.Windows.Forms.Form
+	public class RemoteProfiles : Form
 	{
-		private System.Windows.Forms.Button btnClose;
+		private Button btnClose;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
 		private XmlDocument pdoc;
-		private System.Windows.Forms.ComboBox cboProfiles;
+		private ComboBox cboProfiles;
 		private Console console;
 		private CATParser parser;
 		private string model;

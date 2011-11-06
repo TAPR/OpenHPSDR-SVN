@@ -26,24 +26,6 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
-using System.Globalization;
-using System.IO;
-using System.IO.Ports;
-using System.Net;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Text;
-using System.Windows.Forms;
-
 namespace PowerSDR
 {
 	public class ProcessSampleThreadController

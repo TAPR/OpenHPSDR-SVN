@@ -1,5 +1,3 @@
-using System;
-
 namespace PowerSDR.HPSDR
 {
 	/// <summary>

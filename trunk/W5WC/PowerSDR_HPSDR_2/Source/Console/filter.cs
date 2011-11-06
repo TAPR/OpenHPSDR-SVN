@@ -28,9 +28,7 @@
 
 namespace PowerSDR
 {
-    using System;
-
-	/// <summary>
+    /// <summary>
 	/// Summary description for filter.
 	/// </summary>
 	public class FilterPreset

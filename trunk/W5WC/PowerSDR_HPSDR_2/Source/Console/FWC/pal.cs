@@ -25,7 +25,7 @@
 //    Austin, TX 78750
 //    USA
 //=================================================================
-using System;
+
 using System.Runtime.InteropServices;
 
 namespace PowerSDR

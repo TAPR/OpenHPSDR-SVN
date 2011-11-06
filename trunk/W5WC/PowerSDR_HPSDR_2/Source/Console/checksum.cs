@@ -29,10 +29,8 @@
 namespace PowerSDR
 {
     using System;
-    using System.IO;
-    using System.Windows.Forms;
 
-	/// <summary>
+    /// <summary>
 	/// Summary description for checksum.
 	/// </summary>
 	public class Checksum
