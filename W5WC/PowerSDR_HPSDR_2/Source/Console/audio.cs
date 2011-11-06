@@ -39,7 +39,6 @@ namespace PowerSDR
     using System.Collections;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
-    using System.Threading;
     using System.Windows.Forms;
 
 	public class Audio
@@ -1458,18 +1457,14 @@ namespace PowerSDR
                                 tx_dsp_mode == DSPMode.FM ||
                                 tx_dsp_mode == DSPMode.DIGL ||
                                 tx_dsp_mode == DSPMode.DIGU)
-                            {    
-                               
+                            {
                                 peak = MaxSample(tx_in_l, tx_in_r, frameCount);
 
                                 // compare power to threshold
-                                if (peak > vox_threshold)
-                                    vox_active = true;
-                                else
-                                    vox_active = false;
+                                vox_active = peak > vox_threshold;
                             }
 
-					#endregion
+			        #endregion
 
 					if (tx_dsp_mode == DSPMode.CWU || tx_dsp_mode == DSPMode.CWL)
 					{
@@ -2160,10 +2155,7 @@ namespace PowerSDR
                             peak = MaxSample(vox_l, vox_r, frameCount);
 
                             // compare power to threshold
-                            if (peak > vox_threshold)
-                                vox_active = true;
-                            else
-                                vox_active = false;
+                            vox_active = peak > vox_threshold;
                         }
                     }
                     #endregion
@@ -2721,8 +2713,7 @@ namespace PowerSDR
                 #endregion
             }
 
-            if (!localmox) DoScope(out_l_ptr1, frameCount);
-            else DoScope(out_l_ptr2, frameCount);
+            DoScope(!localmox ? out_l_ptr1 : out_l_ptr2, frameCount);
 
             out_l1 = out_l_ptr1;
             out_r1 = out_r_ptr1;
@@ -3205,13 +3196,10 @@ namespace PowerSDR
                             tx_dsp_mode == DSPMode.DIGL ||
                             tx_dsp_mode == DSPMode.DIGU)
 						{
-							peak = MaxSample(tx_in_l, tx_in_r, frameCount);
+						    peak = MaxSample(tx_in_l, tx_in_r, frameCount);
 
 							// compare power to threshold
-							if(peak > vox_threshold) 
-								vox_active = true;
-							else 
-								vox_active = false;
+						    vox_active = peak > vox_threshold;
 						}
 					}
 					#endregion
@@ -3614,10 +3602,9 @@ namespace PowerSDR
 					break;
 			}
 
-			if(!localmox) DoScope(out_l_ptr1, frameCount);
-			else DoScope(out_l_ptr2, frameCount);
+		    DoScope(!localmox ? out_l_ptr1 : out_l_ptr2, frameCount);
 
-			if(wave_record)
+		    if(wave_record)
 			{
 				if(!localmox)
 				{
@@ -4706,76 +4693,85 @@ namespace PowerSDR
 			phase_buf_l = new float[block_size1];
 			phase_buf_r = new float[block_size1];
             if (console.fwc_init && (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000))
-            {
-                switch (console.CurrentModel)
+                unsafe
                 {
-                    case Model.FLEX5000:
-                        in_rx1_l = 0;
-                        in_rx1_r = 1;
-                        break;
-                    case Model.FLEX3000:
-                        in_rx1_l = 1;
-                        in_rx1_r = 0;
-                        break;
+                    switch (console.CurrentModel)
+                    {
+                        case Model.FLEX5000:
+                            in_rx1_l = 0;
+                            in_rx1_r = 1;
+                            break;
+                        case Model.FLEX3000:
+                            in_rx1_l = 1;
+                            in_rx1_r = 0;
+                            break;
+                    }
+                    in_rx2_l = 2;
+                    in_rx2_r = 3;
+                    //in_tx_l = 5;
+                    //in_tx_r = 6;
+                    retval = StartAudio(ref callback8, (uint) block_size1, sample_rate1, host1, input_dev1, output_dev1,
+                                        8, 0, latency1);
                 }
-                in_rx2_l = 2;
-                in_rx2_r = 3;
-                //in_tx_l = 5;
-                //in_tx_r = 6;
-                retval = StartAudio(ref callback8, (uint)block_size1, sample_rate1, host1, input_dev1, output_dev1, 8, 0, latency1);
-            }
             else
-            {
-                if (num_channels == 2)
-                    retval = StartAudio(ref callback1, (uint)block_size1, sample_rate1, host1, input_dev1, output_dev1, num_channels, 0, latency1);
-                else if (num_channels == 4)
+                unsafe
                 {
-                    if (console.CurrentModel == Model.HPSDR || 
-                        console.CurrentModel == Model.HERMES)
-                        retval = StartAudio(ref callback3port, 
-                            (uint)block_size1, 
-                            sample_rate1, 
-                            host1, 
-                            input_dev1, 
-                            output_dev1, 
-                            num_channels, 
-                            0, 
-                            latency1);
-                    else 
-                    retval = StartAudio(ref callback4port, 
-                        (uint)block_size1, 
-                        sample_rate1, 
-                        host1, 
-                        input_dev1, 
-                        output_dev1, 
-                        num_channels, 
-                        0, 
-                        latency1);
+                    switch (num_channels)
+                    {
+                        case 2:
+                            retval = StartAudio(ref callback1, (uint) block_size1, sample_rate1, host1, input_dev1,
+                                                output_dev1, num_channels, 0, latency1);
+                            break;
+                        case 4:
+                            if (console.CurrentModel == Model.HPSDR ||
+                                console.CurrentModel == Model.HERMES)
+                                retval = StartAudio(ref callback3port,
+                                                    (uint) block_size1,
+                                                    sample_rate1,
+                                                    host1,
+                                                    input_dev1,
+                                                    output_dev1,
+                                                    num_channels,
+                                                    0,
+                                                    latency1);
+                            else
+                                retval = StartAudio(ref callback4port,
+                                                    (uint) block_size1,
+                                                    sample_rate1,
+                                                    host1,
+                                                    input_dev1,
+                                                    output_dev1,
+                                                    num_channels,
+                                                    0,
+                                                    latency1);
+                            break;
+                    }
                 }
-            }
-			
-			if(!retval) return retval;
+
+		    if(!retval) return retval;
 
             if (vac_enabled)
-            {
-                int num_chan = 1;
-                // ehr add for multirate iq to vac
-                int sample_rate = sample_rate2;
-                int block_size = block_size_vac;
-                int latency = latency2;
-                if (vac_output_iq)
+                unsafe
                 {
-                    num_chan = 2;
-                    sample_rate = sample_rate1;
-                    block_size = block_size1;
-                    //latency = 250;
+                    int num_chan = 1;
+                    // ehr add for multirate iq to vac
+                    int sample_rate = sample_rate2;
+                    int block_size = block_size_vac;
+                    int latency = latency2;
+                    if (vac_output_iq)
+                    {
+                        num_chan = 2;
+                        sample_rate = sample_rate1;
+                        block_size = block_size1;
+                        //latency = 250;
+                    }
+                    else if (vac_stereo) num_chan = 2;
+                    // ehr end				
+                    vac_rb_reset = true;
+                    retval = StartAudio_NonJanus(ref callbackVAC, (uint) block_size, sample_rate, host2, input_dev2,
+                                                 output_dev2, num_chan, 1, latency);
                 }
-                else if (vac_stereo) num_chan = 2;
-                // ehr end				
-                vac_rb_reset = true;
-                retval = StartAudio_NonJanus(ref callbackVAC, (uint)block_size, sample_rate, host2, input_dev2, output_dev2, num_chan, 1, latency);
-            }
-			return retval;
+		    return retval;
 		}
         
 		private static bool using_janus_audio = false;
@@ -4870,10 +4866,7 @@ namespace PowerSDR
 			outparam.suggestedLatency = ((float)latency_ms/1000);
 			
 			int error = 0;
-			if(callback_num == 0)
-				error = PA19.PA_OpenStream(out stream1, &inparam, &outparam, sample_rate, block_size, 0, callback, 0);
-			else	
-				error = PA19.PA_OpenStream(out stream2, &inparam, &outparam, sample_rate, block_size, 0, callback, 1);
+			error = callback_num == 0 ? PA19.PA_OpenStream(out stream1, &inparam, &outparam, sample_rate, block_size, 0, callback, 0) : PA19.PA_OpenStream(out stream2, &inparam, &outparam, sample_rate, block_size, 0, callback, 1);
 			
 			if(error != 0)
 			{
@@ -4881,13 +4874,10 @@ namespace PowerSDR
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
-			
-			if(callback_num == 0)
-				error = PA19.PA_StartStream(stream1);
-			else
-				error = PA19.PA_StartStream(stream2);
 
-			if(error != 0)
+		    error = PA19.PA_StartStream(callback_num == 0 ? stream1 : stream2);
+
+		    if(error != 0)
 			{
 				MessageBox.Show(PA19.PA_GetErrorText(error), "PortAudio Error", 
 					MessageBoxButtons.OK, MessageBoxIcon.Error);

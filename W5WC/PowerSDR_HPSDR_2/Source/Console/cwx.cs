@@ -42,15 +42,12 @@ namespace PowerSDR
     using System.IO;
     using System.Drawing;
     using System.Diagnostics;
-    using System.Collections;
     using System.Threading;
-    using System.ComponentModel;
     using System.Windows.Forms;
     using System.Runtime.InteropServices;
     using System.Text;
-    using System.Text.RegularExpressions;
 
-	/// <summary>
+    /// <summary>
 	///  CWX is the cw memory and keyboard handler.
 	/// </summary>
 	public class CWX : System.Windows.Forms.Form

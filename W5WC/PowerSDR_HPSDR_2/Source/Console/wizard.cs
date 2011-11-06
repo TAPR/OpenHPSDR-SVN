@@ -29,16 +29,12 @@
 using System;
 using System.Drawing;
 using System.Collections;
-using System.ComponentModel;
 using System.IO;
-using System.Reflection;
-using System.Resources;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class SetupWizard : System.Windows.Forms.Form
+	public class SetupWizard : Form
 	{
 		#region Variable Declaration
 

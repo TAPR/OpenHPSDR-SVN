@@ -1,7 +1,3 @@
-using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
 
@@ -10,19 +6,19 @@ namespace PowerSDR
 	/// <summary>
 	/// Summary description for tester.
 	/// </summary>
-	public class CATTester : System.Windows.Forms.Form
+	public class CATTester : Form
 	{
 
-		private System.Windows.Forms.Button btnExit;
-		private System.Windows.Forms.TextBoxTS txtInput;
-		private System.Windows.Forms.TextBoxTS txtResult;
+		private Button btnExit;
+		private TextBoxTS txtInput;
+		private TextBoxTS txtResult;
 		private Console console;
 		private CATParser parser;
-		private System.Windows.Forms.LabelTS label1;
-		private System.Windows.Forms.LabelTS label2;
+		private LabelTS label1;
+		private LabelTS label2;
 		private DataSet ds;
-		private System.Windows.Forms.DataGrid dataGrid1;
-		private System.Windows.Forms.Button btnExecute;
+		private DataGrid dataGrid1;
+		private Button btnExecute;
 
 		/// <summary>
 		/// Required designer variable.

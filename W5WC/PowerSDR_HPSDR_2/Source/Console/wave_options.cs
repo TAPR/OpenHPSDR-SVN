@@ -26,11 +26,6 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace PowerSDR
@@ -38,7 +33,7 @@ namespace PowerSDR
 	/// <summary>
 	/// Summary description for WaveOptions.
 	/// </summary>
-	public class WaveOptions : System.Windows.Forms.Form
+	public class WaveOptions : Form
 	{
 		#region Variable Declaration
 

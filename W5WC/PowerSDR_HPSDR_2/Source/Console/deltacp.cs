@@ -28,7 +28,6 @@
 
 namespace PowerSDR
 {
-    using System;
     using System.Runtime.InteropServices;
     using System.Text;
 

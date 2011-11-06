@@ -27,15 +27,11 @@
 //=================================================================
 
 using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class XVTRForm : System.Windows.Forms.Form
+	public class XVTRForm : Form
 	{
 		#region Variable Declaration
 

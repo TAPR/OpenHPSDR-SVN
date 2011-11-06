@@ -1,7 +1,4 @@
 using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace PowerSDR
@@ -9,7 +6,7 @@ namespace PowerSDR
 	/// <summary>
 	/// Summary description for predistest.
 	/// </summary>
-	public class Predistest : System.Windows.Forms.Form
+	public class Predistest : Form
 	{
 		#region Variable Declaration
 

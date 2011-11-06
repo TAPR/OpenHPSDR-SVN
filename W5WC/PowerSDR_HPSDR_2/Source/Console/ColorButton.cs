@@ -38,15 +38,14 @@
 namespace PowerSDR
 {
     using System;
-    using System.Diagnostics;
     using System.Drawing;
     using System.ComponentModel;
     using System.Windows.Forms;
 
     [ DefaultEvent ( "Changed" ) ]
-	public class ColorButton : System.Windows.Forms.ButtonTS
+	public class ColorButton : ButtonTS
 	{
-		private System.ComponentModel.Container components = null;
+		private Container components = null;
 
 		private Color buttonColor = Color.Transparent;
 		private string autoButton = "Automatic";	// set to "" for not auto button

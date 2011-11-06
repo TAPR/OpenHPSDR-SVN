@@ -37,7 +37,6 @@ namespace PowerSDR
 {
     using System;
     using System.Threading;
-    using System.Diagnostics;
     using System.Windows.Forms;
     using System.IO.Ports;
 

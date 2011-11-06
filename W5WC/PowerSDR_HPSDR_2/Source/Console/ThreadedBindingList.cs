@@ -28,8 +28,6 @@
 // taken from http://stackoverflow.com/questions/455766/how-do-you-correctly-update-a-databound-datagridview-from-a-background-thread
 //=================================================================
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 

@@ -27,18 +27,16 @@
 //=================================================================
 
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class WaveControl : System.Windows.Forms.Form
+	public class WaveControl : Form
 	{
 		#region Variable Declaration
 		

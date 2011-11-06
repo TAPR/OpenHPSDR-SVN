@@ -26,16 +26,15 @@
 //    USA
 //=================================================================
 
+using System.Linq;
+
 namespace PowerSDR
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Drawing.Imaging;
-    using System.Threading;
     using System.Windows.Forms;
    // using Flex.TNF;
 
@@ -1644,10 +1643,9 @@ namespace PowerSDR
 		private static void DrawPhaseGrid(ref Graphics g, int W, int H, bool bottom)
 		{
 			// draw background
-    		if(bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
-			else g.FillRectangle(display_background_brush, 0, 0, W, H);
+		    g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
 
-			for(double i=0.50; i < 3; i+=.50)	// draw 3 concentric circles
+		    for(double i=0.50; i < 3; i+=.50)	// draw 3 concentric circles
 			{
 				if(bottom) g.DrawEllipse(grid_pen, (int)(W/2-H*i/2), H+(int)(H/2-H*i/2), (int)(H*i), (int)(H*i));
 				else g.DrawEllipse(grid_pen, (int)(W/2-H*i/2), (int)(H/2-H*i/2), (int)(H*i), (int)(H*i));
@@ -1658,11 +1656,10 @@ namespace PowerSDR
 
 		private static void DrawScopeGrid(ref Graphics g, int W, int H, bool bottom)
 		{
-			// draw background
-    		if(bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
-			else g.FillRectangle(display_background_brush, 0, 0, W, H);
+		    // draw background
+		    g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
 
-           /* using (Pen grid_pen = new Pen(grid_color))
+		    /* using (Pen grid_pen = new Pen(grid_color))
 			if(bottom)
 			{
 				g.DrawLine(grid_pen, 0, H+H/2, W, H+H/2);	// draw horizontal line
@@ -1677,16 +1674,15 @@ namespace PowerSDR
             using (SolidBrush brush = new SolidBrush(Color.Red))
 			if(high_swr && !bottom)
 				g.DrawString("High SWR", font14, brush, 245, 20);
-        }
+		}
 
-		private static void DrawSpectrumGrid(ref Graphics g, int W, int H, bool bottom)
+	    private static void DrawSpectrumGrid(ref Graphics g, int W, int H, bool bottom)
 		{
  
 			// draw background
-            if(bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
-			else g.FillRectangle(display_background_brush, 0, 0, W, H);
+	        g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
 
-			int low = 0;								// init limit variables
+	        int low = 0;								// init limit variables
 			int high = 0;
 
 			int center_line_x = (int)(-(double)low/(high-low)*W);
@@ -2047,8 +2043,7 @@ namespace PowerSDR
         {
 
             // draw background
-            if (bottom) g.FillRectangle(tx_display_background_brush, 0, H, W, H);
-            else g.FillRectangle(tx_display_background_brush, 0, 0, W, H);
+            g.FillRectangle(tx_display_background_brush, 0, bottom ? H : 0, W, H);
 
             int low = 0;								// init limit variables
             int high = 0;
@@ -2410,10 +2405,9 @@ namespace PowerSDR
 		private static void DrawPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
 		{
 			// draw background
-           if (bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
-            else g.FillRectangle(display_background_brush, 0, 0, W, H); 
- 
-			bool local_mox = false;
+		    g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
+
+		    bool local_mox = false;
             if (mox && rx == 1 && !tx_on_vfob) local_mox = true;
             if (mox && rx == 2 && tx_on_vfob) local_mox = true;
            // if (rx == 2) local_mox = false;
@@ -2627,10 +2621,7 @@ namespace PowerSDR
             if (!local_mox)
             {
                 List<Notch> notches;
-                if (!bottom)
-                    notches = NotchList.NotchesInBW((double)vfoa_hz * 1e-6, Low, High);
-                else
-                    notches = NotchList.NotchesInBW((double)vfob_hz * 1e-6, Low, High);
+                notches = !bottom ? NotchList.NotchesInBW(vfoa_hz * 1e-6, Low, High) : NotchList.NotchesInBW((double)vfob_hz * 1e-6, Low, High);
 
 //
                 //draw notch bars in this for loop
@@ -2894,10 +2885,7 @@ namespace PowerSDR
             {
                 if (local_mox && !tx_on_vfob)
                 {
-                    if (split_enabled)
-                        vfo = vfoa_sub_hz;
-                    else
-                        vfo = vfoa_hz;
+                    vfo = split_enabled ? vfoa_sub_hz : vfoa_hz;
                     vfo += xit_hz;
                 }
                 else vfo = vfoa_hz + rit_hz;
@@ -3280,10 +3268,7 @@ namespace PowerSDR
             if (current_click_tune_mode != ClickTuneMode.Off)
             {
                 Pen p;
-                if (current_click_tune_mode == ClickTuneMode.VFOA)
-                    p = grid_text_pen;
-                else //if (current_click_tune_mode == ClickTuneMode.VFOB)
-                    p = Pens.Red;
+                p = current_click_tune_mode == ClickTuneMode.VFOA ? grid_text_pen : Pens.Red;
                 //else if (current_click_tune_mode == ClickTuneMode.VFOAC)
                 //  p = Pens.Blue;
                 // else p = Pens.Green;
@@ -3299,8 +3284,8 @@ namespace PowerSDR
                 {
                     if (ClickTuneFilter)
                     {
-                        double freq_low = freq + (double)filter_low;
-                        double freq_high = freq + (double)filter_high;
+                        double freq_low = freq + filter_low;
+                        double freq_high = freq + filter_high;
                         int x1 = (int)((freq_low - Low) / (High - Low) * W);
                         int x2 = (int)((freq_high - Low) / (High - Low) * W);
                         //g.FillRectangle(display_filter_brush, x1, top, x2 - x1, H - top);
@@ -3331,8 +3316,7 @@ namespace PowerSDR
         private static void DrawTXPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
         {
             // draw background
-            if (bottom) g.FillRectangle(tx_display_background_brush, 0, H, W, H);
-            else g.FillRectangle(tx_display_background_brush, 0, 0, W, H);
+            g.FillRectangle(tx_display_background_brush, 0, bottom ? H : 0, W, H);
 
             bool local_mox = mox;
             if (rx == 2) local_mox = false;
@@ -3530,10 +3514,7 @@ namespace PowerSDR
 
             if (local_mox)
             {
-                if (split_enabled)
-                    vfo = vfoa_sub_hz;
-                else
-                    vfo = vfoa_hz;
+                vfo = split_enabled ? vfoa_sub_hz : vfoa_hz;
                 vfo += xit_hz;
             }
             else if (rx == 1)
@@ -4015,10 +3996,9 @@ namespace PowerSDR
 		private static void DrawWaterfallGrid(ref Graphics g, int W, int H, int rx, bool bottom)
 		{
 			// draw background
-    		if(bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
-			else g.FillRectangle(display_background_brush, 0, 0, W, H);
-            
-			int low = rx_display_low;					// initialize variables
+		    g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
+
+		    int low = rx_display_low;					// initialize variables
 			int high = rx_display_high;
 			int mid_w = W/2;
 			int[] step_list = {10, 20, 25, 50};
@@ -4152,11 +4132,8 @@ namespace PowerSDR
 			
 			if(mox)
 			{
-				if(split_enabled)
-					vfo = vfoa_sub_hz;
-				else
-					vfo = vfoa_hz;
-				vfo += xit_hz;
+			    vfo = split_enabled ? vfoa_sub_hz : vfoa_hz;
+			    vfo += xit_hz;
 			}
 			else if(rx==1)
 			{
@@ -4616,15 +4593,14 @@ namespace PowerSDR
 
 		private static void DrawOffBackground(Graphics g, int W, int H, bool bottom)
 		{
-			// draw background
-    		if(bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
-			else g.FillRectangle(display_background_brush, 0, 0, W, H);
+		    // draw background
+		    g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
 
- 			if(high_swr && !bottom)
+		    if(high_swr && !bottom)
 				g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
 		}
 
-		private static float[] scope_min = new float[W];
+	    private static float[] scope_min = new float[W];
 		public static float[] ScopeMin
 		{
 			get { return scope_min; }
@@ -4682,9 +4658,7 @@ namespace PowerSDR
 			if(current_click_tune_mode != ClickTuneMode.Off)
 			{
 				Pen p;
-				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = grid_text_pen;
-				else p = Pens.Red;
+				p = current_click_tune_mode == ClickTuneMode.VFOA ? grid_text_pen : Pens.Red;
 				if(bottom) g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H+H);
 				else g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
 				g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
@@ -4863,9 +4837,7 @@ namespace PowerSDR
 			if(current_click_tune_mode != ClickTuneMode.Off)
 			{
 				Pen p;
-				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = grid_text_pen;
-				else p = Pens.Red;
+				p = current_click_tune_mode == ClickTuneMode.VFOA ? grid_text_pen : Pens.Red;
 				g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
 				g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
 			}            
@@ -4920,16 +4892,11 @@ namespace PowerSDR
 				g.DrawRectangle(data_line_pen, points[i].X, points[i].Y, 1, 1);
 
 			// draw long cursor
-			if(current_click_tune_mode != ClickTuneMode.Off)
-			{
-				Pen p;
-				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = grid_text_pen;
-				else p = Pens.Red;
-				if(bottom) g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
-				else g.DrawLine(p, display_cursor_x, H, display_cursor_x, H+H);
-				g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
-			}
+		    if (current_click_tune_mode == ClickTuneMode.Off) return;
+		    Pen p = current_click_tune_mode == ClickTuneMode.VFOA ? grid_text_pen : Pens.Red;
+		    if(bottom) g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
+		    else g.DrawLine(p, display_cursor_x, H, display_cursor_x, H+H);
+		    g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
 		}
 
 		private static Point[] points;
@@ -5086,11 +5053,8 @@ namespace PowerSDR
 			// draw long cursor
 			if(current_click_tune_mode != ClickTuneMode.Off)
 			{
-				Pen p;
-				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = grid_text_pen;
-				else p = Pens.Red;
-				if(bottom)
+			    Pen p = current_click_tune_mode == ClickTuneMode.VFOA ? grid_text_pen : Pens.Red;
+			    if(bottom)
 				{
 					g.DrawLine(p, display_cursor_x, H, display_cursor_x, H+H);
 					g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
@@ -5102,7 +5066,7 @@ namespace PowerSDR
 				}
 			}
 
-			return true;
+		    return true;
 		}
 
 /*		private static Point[] points;
@@ -5518,31 +5482,17 @@ namespace PowerSDR
            // draw notch zoom if enabled
             if (tnf_zoom)
             {
-                
-                List<Notch> notches;
-                if (!bottom)
-                    notches = NotchList.NotchesInBW((double)vfoa_hz * 1e-6, Low, High);
-                else
-                    notches = NotchList.NotchesInBW((double)vfob_hz * 1e-6, Low, High);
+                List<Notch> notches = !bottom ? NotchList.NotchesInBW(vfoa_hz * 1e-6, Low, High) : NotchList.NotchesInBW(vfob_hz * 1e-6, Low, High);
 
-                Notch notch = null;
-                foreach (Notch n in notches)
-                {
-                    if (n.Details)
-                    {
-                        notch = n;
-                        break;
-                    }
-                }
+                Notch notch = notches.FirstOrDefault(n => n.Details);
 
                 if (notch != null && 
                     ((bottom && notch.RX == 2) ||
                     (!bottom && notch.RX == 1)))
                 {
                     // draw zoom background
-                    if (bottom) g.FillRectangle(new SolidBrush(Color.FromArgb(230, 0, 0, 0)), 0, H, W, H / zoom_height);
-                    else g.FillRectangle(new SolidBrush(Color.FromArgb(230, 0, 0, 0)), 0, 0, W, H / zoom_height);
-                    
+                    g.FillRectangle(new SolidBrush(Color.FromArgb(230, 0, 0, 0)), 0, bottom ? H : 0, W, H/zoom_height);
+
 
                     // calculate data needed for zoomed notch
                     long rf_freq = vfoa_hz;
@@ -5619,10 +5569,8 @@ namespace PowerSDR
                         notch_zoom_right_x = notch_zoom_left_x + 1;
 
                     //draw zoomed notch bars
-                    if (!bottom)
-                        drawNotchBar(g, notch, notch_zoom_left_x, notch_zoom_right_x, 0, (int)(H / zoom_height), c1, c2);
-                    else
-                        drawNotchBar(g, notch, notch_zoom_left_x, notch_zoom_right_x, H, (int)(H / zoom_height), c1, c2);
+                    drawNotchBar(g, notch, notch_zoom_left_x, notch_zoom_right_x, !bottom ? 0 : H, (int) (H/zoom_height),
+                                 c1, c2);
                     // draw data
                     start_sample_index = (BUFFER_SIZE >> 1) + (int)((low * BUFFER_SIZE) / sample_rate);
                     num_samples = (int)((high - low) * BUFFER_SIZE / sample_rate);
@@ -6167,11 +6115,8 @@ namespace PowerSDR
 			// draw long cursor
 			if(current_click_tune_mode != ClickTuneMode.Off)
 			{
-				Pen p;
-				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = grid_text_pen;
-				else p = Pens.Red;
-                if (bottom)
+			    Pen p = current_click_tune_mode == ClickTuneMode.VFOA ? grid_text_pen : Pens.Red;
+			    if (bottom)
                 {
                     if (display_cursor_y > H)
                     {
@@ -6187,10 +6132,10 @@ namespace PowerSDR
                         g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
                         if (ShowCTHLine) g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
                     }
-                } 
+                }
 			}
 
-			return true;
+		    return true;
 		}
 
 		unsafe static private bool DrawHistogram(Graphics g, int W, int H)
@@ -6355,10 +6300,7 @@ namespace PowerSDR
 			// draw long cursor
 			if(current_click_tune_mode != ClickTuneMode.Off)
 			{
-				Pen p;
-				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = grid_text_pen;
-				else p = Pens.Red;
+			    Pen p = current_click_tune_mode == ClickTuneMode.VFOA ? grid_text_pen : Pens.Red;
 				g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
 				g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
  			} 

@@ -17,21 +17,9 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-
-using System;
-using System.Runtime.InteropServices;
-using System.Diagnostics; 
-// using PowerSDR.Console; 
-
-// using HPSDR_USB_LIB_V1;
-
-
-//
 // this module contains code to support the Alex Filter and Antenna Selection board 
 // 
 // 
-
-
 
 namespace PowerSDR
 {
@@ -128,14 +116,7 @@ namespace PowerSDR
 				{
 					if ( freq >= 26.465 ) 
 					{ 
-						if ( freq >= 39.85 ) 
-						{ 
-							result  = Band.B6M;
-						}
-						else /* >26.465 <39.85 */
-						{
-							result = Band.B10M; 
-						} 
+						result = freq >= 39.85 ? Band.B6M : Band.B10M; 
 					}
 					else /* >23.17  <26.465 */
 					{
@@ -146,14 +127,7 @@ namespace PowerSDR
 				{ 
 					if ( freq >= 16.209 ) 
 					{ 
-						if ( freq >= 19.584 ) 
-						{ 
-							result = Band.B15M;
-						} 
-						else 
-						{
-							result = Band.B17M;
-						}
+						result = freq >= 19.584 ? Band.B15M : Band.B17M;
 					}
 					else 
 					{ 
@@ -165,14 +139,7 @@ namespace PowerSDR
 			{
 				if ( freq  >= 6.20175 ) 
 				{
-					if ( freq >= 8.7 ) 
-					{ 
-						result = Band.B30M;
-					} 
-					else 
-					{ 
-						result = Band.B40M;
-					} 
+					result = freq >= 8.7 ? Band.B30M : Band.B40M; 
 				}
 				else 
 				{ 
@@ -182,14 +149,7 @@ namespace PowerSDR
 					}
 					else 
 					{
-						if ( freq >= 2.75 ) 
-						{
-							result = Band.B80M;
-						}
-						else 
-						{
-							result = Band.B160M;
-						}
+						result = freq >= 2.75 ? Band.B80M : Band.B160M;
 					}
 				} 
 			}
@@ -238,14 +198,7 @@ namespace PowerSDR
 			else 
 			{ 
 				rx_ant = RxOnlyAnt[idx]; 
-				if ( rx_ant != 0 ) 
-				{ 
-					rx_out = 1; 
-				} 
-				else 
-				{ 
-					rx_out = 0;  
-				} 
+				rx_out = rx_ant != 0 ? 1 : 0; 
 				tx_ant = RxAnt[idx]; 
 			} 
 			JanusAudio.SetAlexAntBits(rx_ant, tx_ant, rx_out); 

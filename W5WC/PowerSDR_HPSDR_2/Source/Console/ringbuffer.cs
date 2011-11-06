@@ -30,7 +30,6 @@
 //=================================================================
 
 using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace PowerSDR
@@ -39,11 +38,11 @@ namespace PowerSDR
     {
         #region Variable Declaration
 
-        private float[] buf; /// actual internal buffer used to store the data
+        private readonly float[] buf; /// actual internal buffer used to store the data
         private int wptr;	/// Write Pointer
         private int rptr;	/// Read Pointer
-        private int size;	/// Size of the RingBuffer
-        private int mask;	/// mask used to speed reads/writes
+        private readonly int size;	/// Size of the RingBuffer
+        private readonly int mask;	/// mask used to speed reads/writes
 
         #endregion
 
@@ -353,11 +352,11 @@ namespace PowerSDR
     {
         #region Variable Declaration
 
-        private byte[] buf; /// actual internal buffer used to store the data
+        private readonly byte[] buf; /// actual internal buffer used to store the data
         private int wptr;	/// Write Pointer
         private int rptr;	/// Read Pointer
-        private int size;	/// Size of the RingBuffer
-        private int mask;	/// mask used to speed reads/writes
+        private readonly int size;	/// Size of the RingBuffer
+        private readonly int mask;	/// mask used to speed reads/writes
 
         #endregion
 

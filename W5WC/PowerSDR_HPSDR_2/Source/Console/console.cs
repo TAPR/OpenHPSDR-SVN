@@ -32,34 +32,33 @@
 //#define INTERLEAVED
 //#define SPLIT_INTERLEAVED
 //#define SDRX
+// ReSharper disable SuggestUseVarKeywordEvident
+// ReSharper disable LocalizableElement
+// ReSharper disable RedundantThisQualifier
 
 namespace PowerSDR
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Drawing2D;
-    using System.Drawing.Imaging;
     using System.Drawing.Text;
     using System.Globalization;
     using System.IO;
     using System.IO.Ports;
     using System.Net;
     using System.Reflection;
-    using System.Runtime.InteropServices;
     using System.Threading;
     using System.Text;
     using System.Windows.Forms;
-    using SDRSerialSupportII;
-    using PortTalk;
     using HPSDR_USB_LIB_V1;
     //using Flex.TNF;
 
 	#region Enums
 
+// ReSharper disable InconsistentNaming
 	public enum FWCATUMode
 	{
 		FIRST = -1,
@@ -537,17 +536,14 @@ namespace PowerSDR
         private int rx1_fm_squelch_threshold_scroll = 0;
         private int rx2_fm_squelch_threshold_scroll = 0;
 
+// ReSharper disable RedundantDefaultFieldInitializer
         private long rx2_last_cal_date_time = 0;
 		private uint rx2_serial_num = 0;
 
         public MemoryForm memoryForm;
-        private MemoryList memoryList;
-        public MemoryList MemoryList
-        {
-            get { return memoryList; }
-        }
+	    public MemoryList MemoryList { get; private set; }
 
-        //public Memory MemForm;
+	    //public Memory MemForm;
 		private HW hw;										// will eventually be an array of rigs to support multiple radios
 
 
@@ -557,7 +553,7 @@ namespace PowerSDR
 
 		private bool run_setup_wizard;						// Used to run the wizard the first time the software comes up
 		private bool show_alpha_warning = false;
-        private bool show_mobile_warning = false;
+     //   private bool show_mobile_warning = false;
 
 		private int band_160m_index;						// These band indexes are used to keep track of which
 		private int band_80m_index;							// location in the bandstack was last saved/recalled
@@ -1691,7 +1687,7 @@ namespace PowerSDR
 
 			if(run_setup_wizard)
 			{
-				SetupWizard w = new SetupWizard(this, 0);
+				var w = new SetupWizard(this, 0);
 				w.ShowDialog();
 				if(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
 				{
@@ -7414,8 +7410,8 @@ namespace PowerSDR
             WaveForm = new WaveControl(this);	// create Wave form
             WaveForm.StartPosition = FormStartPosition.Manual;
  
-            memoryList = MemoryList.Restore();
-            memoryList.CheckVersion();
+            MemoryList = MemoryList.Restore();
+            MemoryList.CheckVersion();
 
             InitMemoryFrontPanel();
 
@@ -7558,9 +7554,9 @@ namespace PowerSDR
             SetupForm.initCATandPTTprops();   // wjt added -- get console props setup for cat and ptt 
             if (CmdLineArgs != null)
             {
-                for (int i = 0; i < CmdLineArgs.Length; i++)
+                foreach (string t in CmdLineArgs)
                 {
-                    switch (CmdLineArgs[i])
+                    switch (t)
                     {
                         case "--disable-swr-prot-at-my-risk":
                             DisableSWRProtection = true;
@@ -7570,7 +7566,7 @@ namespace PowerSDR
                             Audio.high_pwr_am = true;
                             MessageBox.Show("high power am");
                             break;
-                        // the next 4 opts are for various experimental HPSDR xmit and receive options 							
+                            // the next 4 opts are for various experimental HPSDR xmit and receive options 							
 
                         case "--force-16bit-IQ":
                             Force16bitIQ = true;
@@ -7611,7 +7607,7 @@ namespace PowerSDR
                         case "--CfgMercury":
                         case "--CfgBoth":
                         case "--PennyMic":
-                            string title_text = JanusAudio.setC1Opts(CmdLineArgs[i]);
+                            string title_text = JanusAudio.setC1Opts(t);
                             if (title_text != null)
                             {
                                 this.Text = this.Text + " " + title_text;
@@ -7723,6 +7719,7 @@ namespace PowerSDR
 			ArrayList a = new ArrayList();
 
 			foreach(Control c in this.Controls)			// For each control
+
 			{
                 // if it is a groupbox or panel, check for sub controls
 				if(c.GetType() == typeof(GroupBoxTS) || c.GetType() == typeof(PanelTS))		
@@ -8704,12 +8701,12 @@ namespace PowerSDR
 						if(val == "1")
 							run_setup_wizard = false;
 						break;
-					case "show_alpha_warning":
-						show_alpha_warning = bool.Parse(val);
-						break;
-                    case "show_mobile_warning":
-                        show_mobile_warning = bool.Parse(val);
-                        break;
+					//case "show_alpha_warning":
+					//	show_alpha_warning = bool.Parse(val);
+					//	break;
+                   // case "show_mobile_warning":
+                    //    show_mobile_warning = bool.Parse(val);
+                    //    break;
 					case "rx1_image_gain_table":
 						string[] list = val.Split('|');
 						for(int i=0; i<=(int)Band.B6M && i < list.Length; i++)
@@ -10429,9 +10426,7 @@ namespace PowerSDR
                 RadioButtonTS b = c as RadioButtonTS;
                 if (b != null)
                 {
-                    if (b.Text == "2")
-                        b.Enabled = XVTRPresent;
-                    else b.Enabled = true;
+                    b.Enabled = b.Text != "2" || XVTRPresent;
 
                     if (b.BackColor == vfo_text_dark_color)
                         b.BackColor = button_selected_color;
@@ -10489,20 +10484,16 @@ namespace PowerSDR
 
             foreach (Control c in panelFilter.Controls)
 			{
-				if(c.GetType() == typeof(RadioButtonTS) && c.Name.IndexOf("Var") < 0)
-				{
-					string name = c.Name;
-					int begin, len;
-					begin = name.IndexOf("Filter")+6;
-					len = name.Length-begin;
+			    if (c.GetType() != typeof (RadioButtonTS) || c.Name.IndexOf("Var") >= 0) continue;
+			    string name = c.Name;
+			    int len;
+			    int begin = name.IndexOf("Filter")+6;
+			    len = name.Length-begin;
 
-					int filter_width = Int32.Parse(name.Substring(begin, len));
-					if(filter_width < lowcutoff)
-					{
-						c.Enabled = false;
-						((RadioButtonTS)c).Checked = false;
-					}
-				}
+			    int filter_width = Int32.Parse(name.Substring(begin, len));
+			    if (filter_width >= lowcutoff) continue;
+			    c.Enabled = false;
+			    ((RadioButtonTS)c).Checked = false;
 			}
 		}
 
@@ -36096,9 +36087,7 @@ namespace PowerSDR
 							rx1_freq += (cw_pitch*0.0000010);
 							break;
 						case DSPMode.CWL:
-                           // chkANF.Checked = false;
-                           // chkANF.Enabled = false;
-							break;
+ 							break;
 						default:
 							rx1_freq -= (cw_pitch*0.0000010);
 							break;
@@ -36127,7 +36116,7 @@ namespace PowerSDR
 
                     ptbSquelch.Minimum = -160;
                     ptbSquelch.Maximum = 0;
-
+                    if (!collapsedDisplay)
                     picSquelch.Visible = true;
 
                     ptbSquelch.Value = rx1_squelch_threshold_scroll;
@@ -36534,14 +36523,6 @@ namespace PowerSDR
 			
 			txtVFOAFreq_LostFocus(this, EventArgs.Empty);
 			ptbPWR_Scroll(this, EventArgs.Empty);
-			if(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-			{
-				if(chkVFOSplit.Checked || full_duplex)
-					txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-				bool tx1, tx2, tx3;
-				if(flex5000RelayForm != null)
-					flex5000RelayForm.UpdateRelayState(out tx1, out tx2, out tx3);
-			}
 		}
 
         private void radModeButton_CheckedChanged(object sender, System.EventArgs e)
@@ -36557,173 +36538,65 @@ namespace PowerSDR
                 case "LSB":
                     SetRX1Mode(DSPMode.LSB);
                     lblModeLabel.Text = radModeLSB.Text;
-                    lSBToolStripMenuItem.Checked = radModeLSB.Checked;
                     break;
                 case "USB":
                     SetRX1Mode(DSPMode.USB);
                     lblModeLabel.Text = radModeUSB.Text;
-                    uSBToolStripMenuItem.Checked = radModeUSB.Checked;
-                    break;
+                     break;
                 case "DSB":
                     SetRX1Mode(DSPMode.DSB);
                     lblModeLabel.Text = radModeDSB.Text;
-                    dSBToolStripMenuItem.Checked = radModeDSB.Checked;
-                    break;
+                     break;
                 case "CWL":
                     SetRX1Mode(DSPMode.CWL);
                     lblModeLabel.Text = radModeCWL.Text;
-                    cWLToolStripMenuItem.Checked = radModeCWL.Checked;
-                    break;
+                     break;
                 case "CWU":
                     SetRX1Mode(DSPMode.CWU);
                     lblModeLabel.Text = radModeCWU.Text;
-                    cWUToolStripMenuItem.Checked = radModeCWU.Checked;
-                    break;
+                     break;
                 case "FM":
                     SetRX1Mode(DSPMode.FM);
                     lblModeLabel.Text = radModeFMN.Text;
-                    fMToolStripMenuItem.Checked = radModeFMN.Checked;
-                    break;
+                     break;
                 case "AM":
                     SetRX1Mode(DSPMode.AM);
                     lblModeLabel.Text = radModeAM.Text;
-                    aMToolStripMenuItem.Checked = radModeAM.Checked;
-                    break;
+                      break;
                 case "SAM":
                     SetRX1Mode(DSPMode.SAM);
                     lblModeLabel.Text = radModeSAM.Text;
-                    sAMToolStripMenuItem.Checked = radModeSAM.Checked;
-                    break;
+                      break;
                 case "SPEC":
                     SetRX1Mode(DSPMode.SPEC);
                     lblModeLabel.Text = radModeSPEC.Text;
-                    sPECToolStripMenuItem.Checked = radModeSPEC.Checked;
-                    break;
+                     break;
                 case "DIGL":
                     SetRX1Mode(DSPMode.DIGL);
                     lblModeLabel.Text = radModeDIGL.Text;
-                    lSBToolStripMenuItem.Checked = radModeLSB.Checked;
-                    break;
+                     break;
                 case "DIGU":
                     SetRX1Mode(DSPMode.DIGU);
                     lblModeLabel.Text = radModeDIGU.Text;
-                    dIGUToolStripMenuItem.Checked = radModeDIGU.Checked;
                     break;
                 case "DRM":
                     SetRX1Mode(DSPMode.DRM);
                     lblModeLabel.Text = radModeDRM.Text;
-                    dRMToolStripMenuItem.Checked = radModeDRM.Checked;
-                    break;
+                     break;
             }
+            lSBToolStripMenuItem.Checked = radModeLSB.Checked;
+            uSBToolStripMenuItem.Checked = radModeUSB.Checked;
+            dSBToolStripMenuItem.Checked = radModeDSB.Checked;
+            cWLToolStripMenuItem.Checked = radModeCWL.Checked;
+            cWUToolStripMenuItem.Checked = radModeCWU.Checked;
+            fMToolStripMenuItem.Checked = radModeFMN.Checked;
+            aMToolStripMenuItem.Checked = radModeAM.Checked;
+            sAMToolStripMenuItem.Checked = radModeSAM.Checked;
+            sPECToolStripMenuItem.Checked = radModeSPEC.Checked;
+            dIGLToolStripMenuItem.Checked = radModeDIGL.Checked;
+            dIGUToolStripMenuItem.Checked = radModeDIGU.Checked;
+            dRMToolStripMenuItem.Checked = radModeDRM.Checked;
         }
-
-/*		private void radModeLSB_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeLSB.Checked)
-			{
-				SetRX1Mode(DSPMode.LSB);
-                lblModeLabel.Text = radModeLSB.Text;
-			}
-		}
-
-		private void radModeUSB_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeUSB.Checked)
-			{
-				SetRX1Mode(DSPMode.USB);
-                lblModeLabel.Text = radModeUSB.Text;
-            }
-		}
-
-		private void radModeDSB_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeDSB.Checked)
-			{
-				SetRX1Mode(DSPMode.DSB);
-                lblModeLabel.Text = radModeDSB.Text;
-            }
-		}
-
-		private void radModeCWL_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeCWL.Checked)
-			{
-				SetRX1Mode(DSPMode.CWL);
-                lblModeLabel.Text = radModeCWL.Text;
-            }
-		}
-
-		private void radModeCWU_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeCWU.Checked)
-			{
-				SetRX1Mode(DSPMode.CWU);
-                lblModeLabel.Text = radModeCWU.Text;
-            }
-		}
-
-		private void radModeFMN_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeFMN.Checked)
-			{
-				SetRX1Mode(DSPMode.FM);
-                lblModeLabel.Text = radModeFMN.Text;
-            }
-		}
-
-		private void radModeAM_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeAM.Checked)
-			{
-				SetRX1Mode(DSPMode.AM);
-                lblModeLabel.Text = radModeAM.Text;
-            }
-		}
-
-		private void radModeSAM_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeSAM.Checked)
-			{
-				SetRX1Mode(DSPMode.SAM);
-                lblModeLabel.Text = radModeSAM.Text;
-            }
-		}
-
-		private void radModeDIGU_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeDIGU.Checked)
-			{
-				SetRX1Mode(DSPMode.DIGU);
-                lblModeLabel.Text = radModeDIGU.Text;
-            }
-		}
-
-		private void radModeSPEC_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeSPEC.Checked)
-			{
-				SetRX1Mode(DSPMode.SPEC);
-                lblModeLabel.Text = radModeSPEC.Text;
-            }
-		}
-
-		private void radModeDIGL_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeDIGL.Checked)
-			{
-				SetRX1Mode(DSPMode.DIGL);
-                lblModeLabel.Text = radModeDIGL.Text;
-            }
-		}
-
-		private void radModeDRM_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radModeDRM.Checked)
-			{
-				SetRX1Mode(DSPMode.DRM);
-                lblModeLabel.Text = radModeDRM.Text;
-            }
-		} */
 
 		#endregion
 
@@ -36853,7 +36726,6 @@ namespace PowerSDR
 					}
 					return;
 			}
-
 			UpdateRX1Filters(low, high);
 		}
 
@@ -36861,6 +36733,9 @@ namespace PowerSDR
         {
             if (sender == null) return;
             if (sender.GetType() != typeof(RadioButtonTS)) return;
+            RadioButtonTS radioBtnTS = (RadioButtonTS)sender;
+            if (!radioBtnTS.Checked) return;
+
             string radiobut = ((RadioButtonTS)sender).Name;
 
             switch (radiobut)
@@ -36868,62 +36743,52 @@ namespace PowerSDR
                 case "radFilter1":
                     SetRX1Filter(Filter.F1);
                     lblFilterLabel.Text = radFilter1.Text;
-                    FilterToolStripMenuItem1.Checked = radFilter1.Checked;
                     FilterToolStripMenuItem1.Text = radFilter1.Text;
                     break;
                 case "radFilter2":
                     SetRX1Filter(Filter.F2);
                     lblFilterLabel.Text = radFilter2.Text;
-                    FilterToolStripMenuItem2.Checked = radFilter2.Checked;
                     FilterToolStripMenuItem2.Text = radFilter2.Text;
                     break;
                 case "radFilter3":
                     SetRX1Filter(Filter.F3);
                     lblFilterLabel.Text = radFilter3.Text;
-                    FilterToolStripMenuItem3.Checked = radFilter3.Checked;
-                    FilterToolStripMenuItem3.Text = radFilter3.Text;
+                      FilterToolStripMenuItem3.Text = radFilter3.Text;
                     break;
                 case "radFilter4":
                     SetRX1Filter(Filter.F4);
                     lblFilterLabel.Text = radFilter4.Text;
-                    FilterToolStripMenuItem4.Checked = radFilter4.Checked;
                     FilterToolStripMenuItem4.Text = radFilter4.Text;
                     break;
                 case "radFilter5":
                     SetRX1Filter(Filter.F5);
                     lblFilterLabel.Text = radFilter5.Text;
-                    FilterToolStripMenuItem5.Checked = radFilter5.Checked;
                     FilterToolStripMenuItem5.Text = radFilter5.Text;
                     break;
                 case "radFilter6":
                     SetRX1Filter(Filter.F6);
                     lblFilterLabel.Text = radFilter6.Text;
-                    FilterToolStripMenuItem6.Checked = radFilter6.Checked;
                     FilterToolStripMenuItem6.Text = radFilter6.Text;
                     break;
                 case "radFilter7":
                     SetRX1Filter(Filter.F7);
                     lblFilterLabel.Text = radFilter7.Text;
-                    FilterToolStripMenuItem7.Checked = radFilter7.Checked;
-                    FilterToolStripMenuItem7.Text = radFilter7.Text;
+                      FilterToolStripMenuItem7.Text = radFilter7.Text;
                     break;
                 case "radFilter8":
                     SetRX1Filter(Filter.F8);
                     lblFilterLabel.Text = radFilter8.Text;
-                    FilterToolStripMenuItem8.Checked = radFilter8.Checked;
-                    FilterToolStripMenuItem8.Text = radFilter8.Text;
+                      FilterToolStripMenuItem8.Text = radFilter8.Text;
                     break;
                 case "radFilter9":
                     SetRX1Filter(Filter.F9);
                     lblFilterLabel.Text = radFilter9.Text;
-                    FilterToolStripMenuItem9.Checked = radFilter9.Checked;
-                    FilterToolStripMenuItem9.Text = radFilter9.Text;
+                     FilterToolStripMenuItem9.Text = radFilter9.Text;
                     break;
                 case "radFilter10":
                     SetRX1Filter(Filter.F10);
                     lblFilterLabel.Text = radFilter10.Text;
-                    FilterToolStripMenuItem10.Checked = radFilter10.Checked;
-                    FilterToolStripMenuItem10.Text = radFilter10.Text;
+                      FilterToolStripMenuItem10.Text = radFilter10.Text;
                     break;
                 case "radFilterVar1":
                     SetRX1Filter(Filter.VAR1);
@@ -36934,6 +36799,16 @@ namespace PowerSDR
                     lblFilterLabel.Text = radFilterVar2.Text;
                     break;
             }
+            FilterToolStripMenuItem1.Checked = radFilter1.Checked;
+            FilterToolStripMenuItem2.Checked = radFilter2.Checked;
+            FilterToolStripMenuItem3.Checked = radFilter3.Checked;
+            FilterToolStripMenuItem4.Checked = radFilter4.Checked;
+            FilterToolStripMenuItem5.Checked = radFilter5.Checked;
+            FilterToolStripMenuItem6.Checked = radFilter6.Checked;
+            FilterToolStripMenuItem7.Checked = radFilter7.Checked;
+            FilterToolStripMenuItem8.Checked = radFilter8.Checked;
+            FilterToolStripMenuItem9.Checked = radFilter9.Checked;
+            FilterToolStripMenuItem10.Checked = radFilter10.Checked;
         }
 
  /*       private void radFilter1_CheckedChanged(object sender, System.EventArgs e)
@@ -42392,7 +42267,7 @@ namespace PowerSDR
             lineinarrayfill = true;
         }
 
-        private byte[] Penny_TLV320 = new byte[2];
+        private readonly byte[] Penny_TLV320 = new byte[2];
         private byte[] Penny_TLV320_data = new byte[18];
         public bool SetMicGain()
         {
@@ -42400,27 +42275,23 @@ namespace PowerSDR
             {
                 if (HPSDRisMetis)
                 {
-                    int v;
-
-                    if (mic_boost) v = 1;
-                    else v = 0;
+                    var v = mic_boost ? 1 : 0;
                     JanusAudio.SetMicBoost(v);
 
-                    if (line_in) v = 1;
-                    else v = 0;
+                    v = line_in ? 1 : 0;
                     JanusAudio.SetLineIn(v);
                 }
                 else
                 {
-                    IntPtr oz_hdev = JanusAudio.OzyOpen();
-                    IntPtr usb_hdev = JanusAudio.OzyHandleToRealHandle(oz_hdev);
+                    var oz_hdev = JanusAudio.OzyOpen();
+                    var usb_hdev = JanusAudio.OzyHandleToRealHandle(oz_hdev);
 
                     // need to select the config data depending on the Mic Gain (20dB) or line in selected
                     if (line_in)
                     {
                         if(!lineinarrayfill) MakeLineInList();
 
-                        int lineboost = Array.IndexOf(lineinboost, line_in_boost.ToString());
+                        var lineboost = Array.IndexOf(lineinboost, line_in_boost.ToString());
 
                         Penny_TLV320_data = new byte[] { 0x1e, 0x00,                    
                                                          0x12, 0x01, 
@@ -42460,20 +42331,18 @@ namespace PowerSDR
                     // set the I2C interface speed to 400kHZ
                     if (!(OZY.Set_I2C_Speed(usb_hdev, 1)))
                     {
-                        MessageBox.Show("Unable to set I2C speed to 400kHz", "System Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(@"Unable to set I2C speed to 400kHz", @"System Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
 
                     // send the configuration data to the TLV320 on Penelope or PennyLane 
-                    for (int x = 0; x < 16; x += 2)
+                    for (var x = 0; x < 16; x += 2)
                     {
                         Penny_TLV320[0] = Penny_TLV320_data[x]; Penny_TLV320[1] = Penny_TLV320_data[x + 1];
-                        if (!(OZY.Write_I2C(usb_hdev, 0x1b, Penny_TLV320)))
-                        {
-                            MessageBox.Show("Unable to configure TLV320 on Penelope via I2C", "System Eror!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            // break out of the configuration loop 
-                            break;
-                        }                       
+                        if ((OZY.Write_I2C(usb_hdev, 0x1b, Penny_TLV320))) continue;
+                        MessageBox.Show(@"Unable to configure TLV320 on Penelope via I2C", @"System Eror!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // break out of the configuration loop 
+                        break;
                     }
                     JanusAudio.OzyClose(oz_hdev);
                 }
@@ -43005,9 +42874,7 @@ namespace PowerSDR
             if (sender == null) return;
             if (sender.GetType() != typeof(ToolStripMenuItem)) return;
             string menu_item = ((ToolStripMenuItem)sender).Name;
-           // ToolStripMenuItem miClicked = (ToolStripMenuItem)sender;
-           // string menu_item = miClicked.Name;
-
+ 
             switch (menu_item)
             {
                 case "FilterToolStripMenuItem1":
@@ -43127,8 +42994,6 @@ namespace PowerSDR
             if (sender == null) return;
             if (sender.GetType() != typeof(ToolStripMenuItem)) return;
             string menu_item = ((ToolStripMenuItem)sender).Text;
-            //ToolStripMenuItem miClicked = (ToolStripMenuItem)sender;
-            //string menu_item = miClicked.Text;
 
             switch (menu_item)
             {
@@ -43195,51 +43060,23 @@ namespace PowerSDR
         {
             if (sender == null) return;
             if (sender.GetType() != typeof(RadioButtonTS)) return;
-            string radiobut = ((RadioButtonTS)sender).Text;
+            RadioButtonTS radioBtnTS = (RadioButtonTS)sender;
+            if (!radioBtnTS.Checked) return;
 
-            switch (radiobut)
-            {
-                case "160":
-                    bandtoolStripMenuItem1.Checked = radBand160.Checked;
-                    break;
-                case "80":
+                     bandtoolStripMenuItem1.Checked = radBand160.Checked;
                     bandtoolStripMenuItem2.Checked = radBand80.Checked;
-                    break;
-                case "60":
-                    bandtoolStripMenuItem3.Checked = radBand60.Checked;
-                    break;
-                case "40":
+                     bandtoolStripMenuItem3.Checked = radBand60.Checked;
                     bandtoolStripMenuItem4.Checked = radBand40.Checked;
-                    break;
-                case "30":
                     bandtoolStripMenuItem5.Checked = radBand30.Checked;
-                    break;
-                case "20":
                     bandtoolStripMenuItem14.Checked = radBand20.Checked;                  
-                    break;
-                case "17":
-                    bandtoolStripMenuItem7.Checked = radBand17.Checked;
-                    break;
-                case "15":
-                    bandtoolStripMenuItem8.Checked = radBand15.Checked;
-                    break;
-                case "12":
-                    bandtoolStripMenuItem9.Checked = radBand12.Checked;
-                    break;
-                case "10":
-                    bandtoolStripMenuItem10.Checked = radBand10.Checked;
-                    break;
-                case "6":
-                    bandtoolStripMenuItem11.Checked = radBand6.Checked;
-                    break;
-                case "WWV":
-                    bandtoolStripMenuItem12.Checked = radBandWWV.Checked;
-                    break;
-                case "GEN":
-                    bandtoolStripMenuItem13.Checked = radBandGEN.Checked;
-                    break;
-            }
-        }
+                      bandtoolStripMenuItem7.Checked = radBand17.Checked;
+                     bandtoolStripMenuItem8.Checked = radBand15.Checked;
+                     bandtoolStripMenuItem9.Checked = radBand12.Checked;
+                     bandtoolStripMenuItem10.Checked = radBand10.Checked;
+                     bandtoolStripMenuItem11.Checked = radBand6.Checked;
+                     bandtoolStripMenuItem12.Checked = radBandWWV.Checked;
+                     bandtoolStripMenuItem13.Checked = radBandGEN.Checked;
+         }
  
    	}
 }

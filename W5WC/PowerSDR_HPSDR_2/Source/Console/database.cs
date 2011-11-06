@@ -32,12 +32,9 @@ namespace PowerSDR
     using System.Data;
     using System.Windows.Forms;
     using System.Collections;
-    using System.Diagnostics;
-    using System.Globalization;
     using System.IO;
-    using System.Threading;
 
-	class DB
+    class DB
 	{
 		#region Variable Declaration
 

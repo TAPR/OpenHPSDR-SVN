@@ -30,8 +30,6 @@ namespace PortTalk
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Threading;
-    using System.Diagnostics;
     using System.IO;
     using System.Windows.Forms;
     using Microsoft.Win32;
