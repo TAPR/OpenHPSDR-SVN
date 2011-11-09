@@ -107,6 +107,7 @@ ECHO J. Program using Mercury_v2.9a
 ECHO K. Program using Mercury_Apollo_Test ** not for general use!
 ECHO L. Program using Mercury_v3.0
 ECHO Leu. Program using Mercury_eu_V3.0
+ECHO M. Program using Mercury_v3.1
 ECHO.
 ECHO Z. Mercury Test (carrier at 7.68MHz)
 ECHO Q. Quit
@@ -132,6 +133,7 @@ IF /I '%Choice%'=='J' GOTO ItemJ
 IF /I '%Choice%'=='K' GOTO ItemK
 IF /I '%Choice%'=='L' GOTO ItemL
 IF /I '%Choice%'=='Leu' GOTO ItemLEU
+IF /I '%Choice%'=='M' GOTO ItemM
 IF /I '%Choice%'=='Z' GOTO ItemZ
 
 IF /I '%Choice%'=='Q' GOTO End
@@ -176,6 +178,9 @@ GOTO CONTINUE
 GOTO CONTINUE
 :ItemLEU
 %DIRECTORY% -c USB-Blaster mercury_eu_v3.0.cdf
+GOTO CONTINUE
+:ItemM
+%DIRECTORY% -c USB-Blaster mercury_v3.1.cdf
 GOTO CONTINUE
 :ItemZ
 %DIRECTORY% -c USB-Blaster mercury_test.cdf
