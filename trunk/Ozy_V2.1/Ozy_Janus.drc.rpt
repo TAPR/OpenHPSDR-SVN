@@ -1,0 +1,799 @@
+Design Assistant report for Ozy_Janus
+Wed Nov 09 19:54:39 2011
+Quartus II Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Design Assistant Summary
+  3. Design Assistant Settings
+  4. High Violations
+  5. Medium Violations
+  6. Information only Violations
+  7. Design Assistant Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2011 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------+
+; Design Assistant Summary                                                ;
++-----------------------------------+-------------------------------------+
+; Design Assistant Status           ; Analyzed - Wed Nov 09 19:54:39 2011 ;
+; Revision Name                     ; Ozy_Janus                           ;
+; Top-level Entity Name             ; Ozy_Janus                           ;
+; Family                            ; Cyclone II                          ;
+; Total Critical Violations         ; 0                                   ;
+; Total High Violations             ; 140                                 ;
+; - Rule D101                       ; 140                                 ;
+; Total Medium Violations           ; 3                                   ;
+; - Rule C104                       ; 3                                   ;
+; Total Information only Violations ; 108                                 ;
+; - Rule T101                       ; 58                                  ;
+; - Rule T102                       ; 50                                  ;
++-----------------------------------+-------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Design Assistant Settings                                                                                                                                                                                                                                                                                ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+----+
+; Option                                                                                                                                                                                                                                                                               ; Setting      ; To ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+----+
+; Design Assistant mode                                                                                                                                                                                                                                                                ; Post-Fitting ;    ;
+; Threshold value for clock net not mapped to clock spines rule                                                                                                                                                                                                                        ; 25           ;    ;
+; Minimum number of clock port feed by gated clocks                                                                                                                                                                                                                                    ; 30           ;    ;
+; Minimum number of node fan-out                                                                                                                                                                                                                                                       ; 30           ;    ;
+; Maximum number of nodes to report                                                                                                                                                                                                                                                    ; 50           ;    ;
+; Rule C101: Gated clock should be implemented according to the Altera standard scheme                                                                                                                                                                                                 ; On           ;    ;
+; Rule C102: Logic cell should not be used to generate an inverted clock signal                                                                                                                                                                                                        ; On           ;    ;
+; Rule C103: Gated clock does not feed at least a pre-defined number of clock ports to effectively save power                                                                                                                                                                          ; On           ;    ;
+; Rule C104: Clock signal source should drive only clock input ports                                                                                                                                                                                                                   ; On           ;    ;
+; Rule C105: Clock signal should be a global signal (Rule applies during post-fitting analysis. This rule applies during both post-fitting analysis and post-synthesis analysis if the design targets a MAX 3000 or MAX 7000 device. For more information, see the Help for the rule.) ; On           ;    ;
+; Rule C106: Clock signal source should not drive registers triggered by different clock edges                                                                                                                                                                                         ; On           ;    ;
+; Rule R101: Combinational logic used as a reset signal should be synchronized                                                                                                                                                                                                         ; On           ;    ;
+; Rule R102: External reset signals should be synchronized using two cascaded registers                                                                                                                                                                                                ; On           ;    ;
+; Rule R103: External reset signal should be correctly synchronized                                                                                                                                                                                                                    ; On           ;    ;
+; Rule R104: The reset signal that is generated in one clock domain and used in another clock domain should be correctly synchronized                                                                                                                                                  ; On           ;    ;
+; Rule R105: The reset signal that is generated in one clock domain and used in another clock domain should be synchronized                                                                                                                                                            ; On           ;    ;
+; Rule T101: Nodes with more than the specified number of fan-outs                                                                                                                                                                                                                     ; On           ;    ;
+; Rule T102: Top nodes with the highest number of fan-outs                                                                                                                                                                                                                             ; On           ;    ;
+; Rule A101: Design should not contain combinational loops                                                                                                                                                                                                                             ; On           ;    ;
+; Rule A102: Register output should not drive its own control signal directly or through combinational logic                                                                                                                                                                           ; On           ;    ;
+; Rule A103: Design should not contain delay chains                                                                                                                                                                                                                                    ; On           ;    ;
+; Rule A104: Design should not contain ripple clock structures                                                                                                                                                                                                                         ; On           ;    ;
+; Rule A105: Pulses should not be implemented asynchronously                                                                                                                                                                                                                           ; On           ;    ;
+; Rule A106: Multiple pulses should not be generated in design                                                                                                                                                                                                                         ; On           ;    ;
+; Rule A107: Design should not contain SR latches                                                                                                                                                                                                                                      ; On           ;    ;
+; Rule A108: Design should not contain latches                                                                                                                                                                                                                                         ; On           ;    ;
+; Rule S101: Output enable and input of the same tri-state node should not be driven by same signal source                                                                                                                                                                             ; On           ;    ;
+; Rule S102: Synchronous port and asynchronous port of the same register should not be driven by the same signal source                                                                                                                                                                ; On           ;    ;
+; Rule S103: More than one asynchronous port of a register should not be driven by the same signal source                                                                                                                                                                              ; On           ;    ;
+; Rule S104: Clock port and any other port of a register should not be driven by the same signal source                                                                                                                                                                                ; On           ;    ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains                                                                                                                                                                                        ; On           ;    ;
+; Rule D102: Multiple data bits that are transferred across asynchronous clock domains are synchronized, but not all bits may be aligned in the receiving clock domain                                                                                                                 ; On           ;    ;
+; Rule D103: Data bits are not correctly synchronized when transferred between asynchronous clock domains                                                                                                                                                                              ; On           ;    ;
+; Rule M101: Data bits are not synchronized when transferred to the state machine of asynchronous clock domains                                                                                                                                                                        ; On           ;    ;
+; Rule M102: No reset signal defined to initialize the state machine                                                                                                                                                                                                                   ; On           ;    ;
+; Rule M103: State machine should not contain an unreachable state                                                                                                                                                                                                                     ; On           ;    ;
+; Rule M104: State machine should not contain a deadlock state                                                                                                                                                                                                                         ; On           ;    ;
+; Rule M105: State machine should not contain a dead transition                                                                                                                                                                                                                        ; On           ;    ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+----+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; High Violations                                                                                                                                  ;
++---------------------------------------------------------------------------------------------------------------+----------------------------------+
+; Rule name                                                                                                     ; Name                             ;
++---------------------------------------------------------------------------------------------------------------+----------------------------------+
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 1   ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; cdc_sync:cdc_jrdy|sigb[0]        ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_sync:cdc_jack|q1[0]          ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 2   ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; clk_lrclk_gen:clrgen|LRCLK       ;
+;  Destination node(s) from clock "IF_clk"                                                                      ; cdc_sync:cdc_clr|q1[0]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|TLV_state~3     ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|TLV_state~4     ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|TLV_state~2     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 3   ;                                  ;
+;  Source node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                        ; I2S_xmit:J_LRAudio|xmit_rdy      ;
+;  Destination node(s) from clock "IF_clk"                                                                      ; cdc_sync:cdc_jrdy|q1[0]          ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 4   ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; C12_rst                          ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|xmit_rdy      ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|TLV_state~3     ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|TLV_state~4     ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|TLV_state~2     ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[31] ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[15] ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[30] ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[14] ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[29] ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[13] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 5   ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_sync:cdc_jack|sigb[0]        ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|xmit_rdy      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 6   ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:dfs|b_data_ack           ;
+;  Destination node(s) from clock "IF_clk"                                                                      ; cdc_mcp:dfs|cdc_sync:ack|q1[0]   ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 7   ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; clk_lrclk_gen:lrgen|Brise        ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|TLV_state~4     ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|TLV_state~2     ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|bit_count[3]    ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|bit_count[1]    ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|bit_count[0]    ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_IQPWM|bit_count[2]    ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 8   ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; cdc_mcp:dfs|a_rdy                ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:dfs|cdc_sync:rdy|q1[0]   ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 9   ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; IF_DFS0                          ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:dfs|b_data[0]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 10  ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; IF_DFS1                          ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:dfs|b_data[1]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 11  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:lra|b_data[31]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[31] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 12  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:lra|b_data[15]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[15] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 13  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:lra|b_data[30]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[30] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 14  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:iqp|b_data_ack           ;
+;  Destination node(s) from clock "IF_clk"                                                                      ; cdc_mcp:iqp|cdc_sync:ack|q1[0]   ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 15  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:lra|b_data[14]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[14] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 16  ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; IF_Left_Data[15]                 ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:lra|b_data[31]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 17  ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; IF_Right_Data[15]                ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:lra|b_data[15]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 18  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:lra|b_data[29]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[29] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 19  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:lra|b_data[13]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[13] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 20  ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; IF_Left_Data[14]                 ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:lra|b_data[30]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 21  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:lra|b_data[28]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[28] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 22  ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; IF_Right_Data[14]                ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:lra|b_data[14]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 23  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:lra|b_data[12]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[12] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 24  ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; IF_Left_Data[13]                 ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:lra|b_data[29]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 25  ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; cdc_mcp:iqp|a_rdy                ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:iqp|cdc_sync:rdy|q1[0]   ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 26  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:lra|b_data[27]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[27] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 27  ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; IF_Right_Data[13]                ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:lra|b_data[13]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 28  ;                                  ;
+;  Source node(s) from clock "C5"                                                                               ; cdc_mcp:lra|b_data[11]           ;
+;  Destination node(s) from clock "clk_lrclk_gen:clrgen|BCLK"                                                   ; I2S_xmit:J_LRAudio|last_data[11] ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 29  ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; IF_Left_Data[12]                 ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:lra|b_data[28]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 30  ;                                  ;
+;  Source node(s) from clock "IF_clk"                                                                           ; IF_Right_Data[12]                ;
+;  Destination node(s) from clock "C5"                                                                          ; cdc_mcp:lra|b_data[12]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 31  ;                                  ;
+;  Structure 31                                                                                                 ; cdc_mcp:lra|b_data[26]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 32  ;                                  ;
+;  Structure 32                                                                                                 ; cdc_mcp:lra|b_data[10]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 33  ;                                  ;
+;  Structure 33                                                                                                 ; IF_Left_Data[11]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 34  ;                                  ;
+;  Structure 34                                                                                                 ; IF_Right_Data[11]                ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 35  ;                                  ;
+;  Structure 35                                                                                                 ; cdc_mcp:lra|b_data[25]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 36  ;                                  ;
+;  Structure 36                                                                                                 ; cdc_mcp:lra|b_data[9]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 37  ;                                  ;
+;  Structure 37                                                                                                 ; IF_Left_Data[10]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 38  ;                                  ;
+;  Structure 38                                                                                                 ; cdc_mcp:lra|b_data[24]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 39  ;                                  ;
+;  Structure 39                                                                                                 ; IF_Right_Data[10]                ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 40  ;                                  ;
+;  Structure 40                                                                                                 ; cdc_mcp:lra|b_data[8]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 41  ;                                  ;
+;  Structure 41                                                                                                 ; IF_Left_Data[9]                  ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 42  ;                                  ;
+;  Structure 42                                                                                                 ; IF_Right_Data[9]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 43  ;                                  ;
+;  Structure 43                                                                                                 ; cdc_mcp:lra|b_data[23]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 44  ;                                  ;
+;  Structure 44                                                                                                 ; cdc_mcp:lra|b_data[7]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 45  ;                                  ;
+;  Structure 45                                                                                                 ; IF_Left_Data[8]                  ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 46  ;                                  ;
+;  Structure 46                                                                                                 ; cdc_mcp:lra|b_data[22]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 47  ;                                  ;
+;  Structure 47                                                                                                 ; IF_Right_Data[8]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 48  ;                                  ;
+;  Structure 48                                                                                                 ; cdc_mcp:lra|b_data[6]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 49  ;                                  ;
+;  Structure 49                                                                                                 ; IF_Left_Data[7]                  ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 50  ;                                  ;
+;  Structure 50                                                                                                 ; cdc_mcp:lra|b_data[21]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 51  ;                                  ;
+;  Structure 51                                                                                                 ; IF_Right_Data[7]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 52  ;                                  ;
+;  Structure 52                                                                                                 ; cdc_mcp:lra|b_data[5]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 53  ;                                  ;
+;  Structure 53                                                                                                 ; IF_Left_Data[6]                  ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 54  ;                                  ;
+;  Structure 54                                                                                                 ; cdc_mcp:lra|b_data[20]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 55  ;                                  ;
+;  Structure 55                                                                                                 ; IF_Right_Data[6]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 56  ;                                  ;
+;  Structure 56                                                                                                 ; cdc_mcp:lra|b_data[4]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 57  ;                                  ;
+;  Structure 57                                                                                                 ; IF_Left_Data[5]                  ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 58  ;                                  ;
+;  Structure 58                                                                                                 ; cdc_mcp:lra|b_data[19]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 59  ;                                  ;
+;  Structure 59                                                                                                 ; IF_Right_Data[5]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 60  ;                                  ;
+;  Structure 60                                                                                                 ; cdc_mcp:lra|b_data[3]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 61  ;                                  ;
+;  Structure 61                                                                                                 ; IF_Left_Data[4]                  ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 62  ;                                  ;
+;  Structure 62                                                                                                 ; cdc_mcp:lra|b_data[18]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 63  ;                                  ;
+;  Structure 63                                                                                                 ; IF_Right_Data[4]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 64  ;                                  ;
+;  Structure 64                                                                                                 ; cdc_mcp:lra|b_data[2]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 65  ;                                  ;
+;  Structure 65                                                                                                 ; IF_Left_Data[3]                  ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 66  ;                                  ;
+;  Structure 66                                                                                                 ; IF_Right_Data[3]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 67  ;                                  ;
+;  Structure 67                                                                                                 ; cdc_mcp:lra|b_data[17]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 68  ;                                  ;
+;  Structure 68                                                                                                 ; cdc_mcp:lra|b_data[1]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 69  ;                                  ;
+;  Structure 69                                                                                                 ; IF_Left_Data[2]                  ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 70  ;                                  ;
+;  Structure 70                                                                                                 ; IF_Right_Data[2]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 71  ;                                  ;
+;  Structure 71                                                                                                 ; cdc_mcp:lra|b_data[0]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 72  ;                                  ;
+;  Structure 72                                                                                                 ; cdc_mcp:lra|b_data[16]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 73  ;                                  ;
+;  Structure 73                                                                                                 ; IF_Left_Data[1]                  ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 74  ;                                  ;
+;  Structure 74                                                                                                 ; IF_Right_Data[1]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 75  ;                                  ;
+;  Structure 75                                                                                                 ; IF_Right_Data[0]                 ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 76  ;                                  ;
+;  Structure 76                                                                                                 ; IF_Left_Data[0]                  ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 77  ;                                  ;
+;  Structure 77                                                                                                 ; cdc_mcp:iqp|b_data[31]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 78  ;                                  ;
+;  Structure 78                                                                                                 ; cdc_mcp:iqp|b_data[15]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 79  ;                                  ;
+;  Structure 79                                                                                                 ; cdc_mcp:iqp|b_data[30]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 80  ;                                  ;
+;  Structure 80                                                                                                 ; cdc_mcp:iqp|b_data[14]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 81  ;                                  ;
+;  Structure 81                                                                                                 ; IF_I_PWM[15]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 82  ;                                  ;
+;  Structure 82                                                                                                 ; IF_Q_PWM[15]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 83  ;                                  ;
+;  Structure 83                                                                                                 ; cdc_mcp:iqp|b_data[29]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 84  ;                                  ;
+;  Structure 84                                                                                                 ; cdc_mcp:iqp|b_data[13]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 85  ;                                  ;
+;  Structure 85                                                                                                 ; IF_I_PWM[14]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 86  ;                                  ;
+;  Structure 86                                                                                                 ; IF_Q_PWM[14]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 87  ;                                  ;
+;  Structure 87                                                                                                 ; cdc_mcp:iqp|b_data[28]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 88  ;                                  ;
+;  Structure 88                                                                                                 ; cdc_mcp:iqp|b_data[12]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 89  ;                                  ;
+;  Structure 89                                                                                                 ; IF_I_PWM[13]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 90  ;                                  ;
+;  Structure 90                                                                                                 ; IF_Q_PWM[13]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 91  ;                                  ;
+;  Structure 91                                                                                                 ; cdc_mcp:iqp|b_data[27]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 92  ;                                  ;
+;  Structure 92                                                                                                 ; cdc_mcp:iqp|b_data[11]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 93  ;                                  ;
+;  Structure 93                                                                                                 ; IF_I_PWM[12]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 94  ;                                  ;
+;  Structure 94                                                                                                 ; IF_Q_PWM[12]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 95  ;                                  ;
+;  Structure 95                                                                                                 ; cdc_mcp:iqp|b_data[26]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 96  ;                                  ;
+;  Structure 96                                                                                                 ; cdc_mcp:iqp|b_data[10]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 97  ;                                  ;
+;  Structure 97                                                                                                 ; IF_I_PWM[11]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 98  ;                                  ;
+;  Structure 98                                                                                                 ; cdc_mcp:iqp|b_data[25]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 99  ;                                  ;
+;  Structure 99                                                                                                 ; IF_Q_PWM[11]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 100 ;                                  ;
+;  Structure 100                                                                                                ; cdc_mcp:iqp|b_data[9]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 101 ;                                  ;
+;  Structure 101                                                                                                ; IF_I_PWM[10]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 102 ;                                  ;
+;  Structure 102                                                                                                ; cdc_mcp:iqp|b_data[24]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 103 ;                                  ;
+;  Structure 103                                                                                                ; IF_Q_PWM[10]                     ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 104 ;                                  ;
+;  Structure 104                                                                                                ; cdc_mcp:iqp|b_data[8]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 105 ;                                  ;
+;  Structure 105                                                                                                ; IF_I_PWM[9]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 106 ;                                  ;
+;  Structure 106                                                                                                ; cdc_mcp:iqp|b_data[23]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 107 ;                                  ;
+;  Structure 107                                                                                                ; IF_Q_PWM[9]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 108 ;                                  ;
+;  Structure 108                                                                                                ; cdc_mcp:iqp|b_data[7]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 109 ;                                  ;
+;  Structure 109                                                                                                ; IF_I_PWM[8]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 110 ;                                  ;
+;  Structure 110                                                                                                ; IF_Q_PWM[8]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 111 ;                                  ;
+;  Structure 111                                                                                                ; cdc_mcp:iqp|b_data[22]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 112 ;                                  ;
+;  Structure 112                                                                                                ; cdc_mcp:iqp|b_data[6]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 113 ;                                  ;
+;  Structure 113                                                                                                ; IF_I_PWM[7]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 114 ;                                  ;
+;  Structure 114                                                                                                ; cdc_mcp:iqp|b_data[21]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 115 ;                                  ;
+;  Structure 115                                                                                                ; IF_Q_PWM[7]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 116 ;                                  ;
+;  Structure 116                                                                                                ; cdc_mcp:iqp|b_data[5]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 117 ;                                  ;
+;  Structure 117                                                                                                ; IF_I_PWM[6]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 118 ;                                  ;
+;  Structure 118                                                                                                ; IF_Q_PWM[6]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 119 ;                                  ;
+;  Structure 119                                                                                                ; cdc_mcp:iqp|b_data[20]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 120 ;                                  ;
+;  Structure 120                                                                                                ; cdc_mcp:iqp|b_data[4]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 121 ;                                  ;
+;  Structure 121                                                                                                ; IF_I_PWM[5]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 122 ;                                  ;
+;  Structure 122                                                                                                ; cdc_mcp:iqp|b_data[19]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 123 ;                                  ;
+;  Structure 123                                                                                                ; IF_Q_PWM[5]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 124 ;                                  ;
+;  Structure 124                                                                                                ; cdc_mcp:iqp|b_data[3]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 125 ;                                  ;
+;  Structure 125                                                                                                ; IF_I_PWM[4]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 126 ;                                  ;
+;  Structure 126                                                                                                ; cdc_mcp:iqp|b_data[18]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 127 ;                                  ;
+;  Structure 127                                                                                                ; IF_Q_PWM[4]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 128 ;                                  ;
+;  Structure 128                                                                                                ; cdc_mcp:iqp|b_data[2]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 129 ;                                  ;
+;  Structure 129                                                                                                ; IF_I_PWM[3]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 130 ;                                  ;
+;  Structure 130                                                                                                ; IF_Q_PWM[3]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 131 ;                                  ;
+;  Structure 131                                                                                                ; cdc_mcp:iqp|b_data[17]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 132 ;                                  ;
+;  Structure 132                                                                                                ; cdc_mcp:iqp|b_data[1]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 133 ;                                  ;
+;  Structure 133                                                                                                ; IF_I_PWM[2]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 134 ;                                  ;
+;  Structure 134                                                                                                ; IF_Q_PWM[2]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 135 ;                                  ;
+;  Structure 135                                                                                                ; cdc_mcp:iqp|b_data[16]           ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 136 ;                                  ;
+;  Structure 136                                                                                                ; cdc_mcp:iqp|b_data[0]            ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 137 ;                                  ;
+;  Structure 137                                                                                                ; IF_I_PWM[1]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 138 ;                                  ;
+;  Structure 138                                                                                                ; IF_Q_PWM[1]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 139 ;                                  ;
+;  Structure 139                                                                                                ; IF_I_PWM[0]                      ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 140 ;                                  ;
+;  Structure 140                                                                                                ; IF_Q_PWM[0]                      ;
++---------------------------------------------------------------------------------------------------------------+----------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Medium Violations                                                                                               ;
++--------------------------------------------------------------------+--------------------------------------------+
+; Rule name                                                          ; Name                                       ;
++--------------------------------------------------------------------+--------------------------------------------+
+; Rule C104: Clock signal source should drive only clock input ports ; IF_clk                                     ;
+;  Clock ports destination node(s) list                              ; async_usb:usb1|SLWR                        ;
+;  Clock ports destination node(s) list                              ; IF_rst                                     ;
+;  Clock ports destination node(s) list                              ; async_usb:usb1|FX_state~5                  ;
+;  Clock ports destination node(s) list                              ; async_usb:usb1|FX_state~3                  ;
+;  Clock ports destination node(s) list                              ; async_usb:usb1|FX_state~2                  ;
+;  Clock ports destination node(s) list                              ; async_usb:usb1|FX_state~4                  ;
+;  Clock ports destination node(s) list                              ; IF_RESET.i0                                ;
+;  Clock ports destination node(s) list                              ; clkmult3:cm3|altpll:altpll_component|_clk0 ;
+;  Clock ports destination node(s) list                              ; async_usb:usb1|FX_state~6                  ;
+;  Clock ports destination node(s) list                              ; async_usb:usb1|FX_Burst_cnt[7]             ;
+;  Non-clock ports destination node(s) list                          ; C48_clk~0                                  ;
+; Rule C104: Clock signal source should drive only clock input ports ; C5                                         ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|LRCLK                 ;
+;  Clock ports destination node(s) list                              ; C12_cgen_rst                               ;
+;  Clock ports destination node(s) list                              ; C12_rst                                    ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|LRCLK_cnt[4]          ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|LRCLK_cnt[0]          ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|BCLK                  ;
+;  Clock ports destination node(s) list                              ; cdc_sync:cdc_jack|sigb[0]                  ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|LRCLK_cnt[1]          ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|Bfall                 ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|LRCLK_cnt[3]          ;
+;  Non-clock ports destination node(s) list                          ; I2S_rcv:J_IQ|bc0                           ;
+; Rule C104: Clock signal source should drive only clock input ports ; clk_lrclk_gen:clrgen|BCLK                  ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_LRAudio|xmit_rdy                ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|TLV_state~3               ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|TLV_state~4               ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|TLV_state~2               ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|bit_count[3]              ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|bit_count[1]              ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|bit_count[0]              ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|bit_count[2]              ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_LRAudio|data[15]                ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_LRAudio|last_data[31]           ;
+;  Non-clock ports destination node(s) list                          ; I2S_rcv:J_MIC|bc0                          ;
++--------------------------------------------------------------------+--------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Information only Violations                                                                                                     ;
++------------------------------------------------------------------+----------------------------------------------------+---------+
+; Rule name                                                        ; Name                                               ; Fan-Out ;
++------------------------------------------------------------------+----------------------------------------------------+---------+
+; Rule T101: Nodes with more than the specified number of fan-outs ; IF_clk~clkctrl                                     ; 2552    ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; IF_rst                                             ; 934     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; clkmult3:cm3|altpll:altpll_component|_locked       ; 829     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; IF_conf[1]                                         ; 62      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; IF_time_stamp~1                                    ; 31      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ1~0           ; 34      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ3~0           ; 31      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Tx_fifo_ctrl:TXFC|IF_chan[0]                       ; 80      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Tx_fifo_ctrl:TXFC|IF_chan[1]                       ; 72      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; async_usb:usb1|SLEN                                ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; clkmult3:cm3|altpll:altpll_component|_clk0~clkctrl ; 1324    ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; C5~clkctrl                                         ; 128     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; C12_cgen_rst                                       ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; clk_lrclk_gen:clrgen|BCLK~clkctrl                  ; 108     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; C12_rst                                            ; 145     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; I2S_xmit:J_LRAudio|TLV_state.TLV_IDLE~0            ; 66      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ|rcv_flag                            ; 50      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; I2S_xmit:J_LRAudio|TLV_state.TLV_WL~0              ; 31      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; I2S_xmit:J_LRAudio|TLV_state.TLV_WH~0              ; 31      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_xmit:P_IQPWM|NW_state.NW_WAIT~0              ; 71      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ2~0           ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Tx_fifo_ctrl:TXFC|tx_addr[0]                       ; 34      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:p_ser|irdy                               ; 44      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:p_ser|rcv_flag                           ; 46      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:SPD|DB_LEN~1                             ; 48      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:P_MIC|DB_LEN~1                           ; 56      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:p_ser|rdata~1                            ; 44      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ1|rcv_flag                           ; 49      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ3|rcv_flag                           ; 49      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ2|rcv_flag                           ; 49      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ|DB_LEN~1                            ; 56      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ2|rdata~1                            ; 48      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ1|rdata~1                            ; 48      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ3|rdata~1                            ; 48      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ|rdata~1                             ; 48      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:m_ver2|DB_LEN~1                          ; 72      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:m_ser|DB_LEN~1                           ; 72      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:m_ver3|DB_LEN~1                          ; 72      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:p_ser|DB_LEN~1                           ; 68      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:m_ver4|DB_LEN~1                          ; 72      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ3|DB_LEN~1                           ; 56      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ1|DB_LEN~1                           ; 56      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ2|DB_LEN~1                           ; 56      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_xmit:CCxmit|NW_state.NW_WAIT~0               ; 94      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; IF_count[28]                                       ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; SPI_SCK~clkctrl                                    ; 40      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; I2S_xmit:J_LRAudio|data~17                         ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; cdc_mcp:lra|b_data~1                               ; 64      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_xmit:CCxmit|id~90                            ; 87      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; CC_address[2]                                      ; 36      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; IF_frequency[4][0]~42                              ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; CC_address[1]                                      ; 54      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; CC_address[0]                                      ; 53      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; IF_frequency~40                                    ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; IF_frequency~35                                    ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; IF_frequency~38                                    ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; IF_frequency~37                                    ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_xmit:P_IQPWM|id~35                           ; 64      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; IF_clk~clkctrl                                     ; 2552    ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; clkmult3:cm3|altpll:altpll_component|_clk0~clkctrl ; 1324    ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; IF_rst                                             ; 934     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; clkmult3:cm3|altpll:altpll_component|_locked       ; 829     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; C12_rst                                            ; 145     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; C5~clkctrl                                         ; 128     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; clk_lrclk_gen:clrgen|BCLK~clkctrl                  ; 108     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:CCxmit|NW_state.NW_WAIT~0               ; 94      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:CCxmit|id~90                            ; 87      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Tx_fifo_ctrl:TXFC|IF_chan[0]                       ; 80      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:m_ver4|DB_LEN~1                          ; 72      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:m_ser|DB_LEN~1                           ; 72      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:m_ver3|DB_LEN~1                          ; 72      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Tx_fifo_ctrl:TXFC|IF_chan[1]                       ; 72      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:m_ver2|DB_LEN~1                          ; 72      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:P_IQPWM|NW_state.NW_WAIT~0              ; 71      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:p_ser|DB_LEN~1                           ; 68      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; I2S_xmit:J_LRAudio|TLV_state.TLV_IDLE~0            ; 66      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; cdc_mcp:lra|b_data~1                               ; 64      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:P_IQPWM|id~35                           ; 64      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; IF_conf[1]                                         ; 62      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ1|DB_LEN~1                           ; 56      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ|DB_LEN~1                            ; 56      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ2|DB_LEN~1                           ; 56      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:P_MIC|DB_LEN~1                           ; 56      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ3|DB_LEN~1                           ; 56      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; CC_address[1]                                      ; 54      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; CC_address[0]                                      ; 53      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ|rcv_flag                            ; 50      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ3|rcv_flag                           ; 49      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ1|rcv_flag                           ; 49      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ2|rcv_flag                           ; 49      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ3|rdata~1                            ; 48      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ|rdata~1                             ; 48      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ1|rdata~1                            ; 48      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ2|rdata~1                            ; 48      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:SPD|DB_LEN~1                             ; 48      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:p_ser|rcv_flag                           ; 46      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:p_ser|irdy                               ; 44      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:p_ser|rdata~1                            ; 44      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; SPI_SCK~clkctrl                                    ; 40      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; CC_address[2]                                      ; 36      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Tx_fifo_ctrl:TXFC|tx_addr[0]                       ; 34      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ1~0           ; 34      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; C12_cgen_rst                                       ; 33      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; async_usb:usb1|SLEN                                ; 33      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; IF_frequency[4][0]~42                              ; 32      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; IF_frequency~38                                    ; 32      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; IF_frequency~40                                    ; 32      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ2~0           ; 32      ;
++------------------------------------------------------------------+----------------------------------------------------+---------+
+
+
++---------------------------+
+; Design Assistant Messages ;
++---------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Design Assistant
+    Info: Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Web Edition
+    Info: Processing started: Wed Nov 09 19:54:36 2011
+Info: Command: quartus_drc --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
+Info: Reading SDC File: 'Ozy_Janus.sdc'
+Info: Deriving PLL Clocks
+    Info: create_generated_clock -source {cm3|altpll_component|pll|inclk[0]} -multiply_by 3 -duty_cycle 50.00 -name {clkmult3:cm3|altpll:altpll_component|_clk0} {cm3|altpll_component|pll|clk[0]}
+Warning: Original Global Fmax translated from QSF using derive_clocks
+Info: Deriving Clocks
+    Info: create_clock -period 20.833 -name IF_clk IF_clk
+    Info: create_clock -period 20.833 -name C5 C5
+    Info: create_clock -period 20.833 -name clk_lrclk_gen:clrgen|BCLK clk_lrclk_gen:clrgen|BCLK
+    Info: create_clock -period 20.833 -name SPI_SCK SPI_SCK
+Warning: Ignored filter at Ozy_Janus.sdc(32): IFCLK could not be matched with a port or pin or register or keeper or net
+Warning: Ignored create_clock at Ozy_Janus.sdc(32): Argument <targets> is not an object ID
+    Info: create_clock -period "20.833 ns" \
+             -name {IFCLK} {IFCLK}
+Warning: Ignored filter at Ozy_Janus.sdc(38): CLK_12MHZ could not be matched with a port or pin or register or keeper or net
+Warning: Ignored create_clock at Ozy_Janus.sdc(38): Argument <targets> is not an object ID
+    Info: create_clock -period "81.380 ns" \
+             -name {CLK_12MHZ} {CLK_12MHZ}
+Warning: Ignored filter at Ozy_Janus.sdc(44): PCLK_12MHZ could not be matched with a port or pin or register or keeper or net
+Warning: Ignored create_clock at Ozy_Janus.sdc(44): Argument <targets> is not an object ID
+    Info: create_clock -period "80.000 ns" \
+             -name {PCLK_12MHZ} {PCLK_12MHZ}
+Warning: Ignored filter at Ozy_Janus.sdc(50): MCLK_12MHZ could not be matched with a port or pin or register or keeper or net
+Warning: Ignored create_clock at Ozy_Janus.sdc(50): Argument <targets> is not an object ID
+    Info: create_clock -period "20.833 ns" \
+             -name {MCLK_12MHZ} {MCLK_12MHZ}
+Warning: Overwriting existing clock: SPI_SCK
+Warning: Ignored filter at Ozy_Janus.sdc(62): FX2_CLK could not be matched with a port or pin or register or keeper or net
+Warning: Ignored create_clock at Ozy_Janus.sdc(62): Argument <targets> is not an object ID
+    Info: create_clock -period "20.833 ns" \
+             -name {FX2_CLK} {FX2_CLK}
+Warning: Ignored filter at Ozy_Janus.sdc(69): BCLK could not be matched with a port or pin or register or keeper or net
+Warning: Ignored create_generated_clock at Ozy_Janus.sdc(69): Argument <targets> is not an object ID
+    Info: create_generated_clock -multiply_by 1  \
+                       -source CLK_12MHZ \
+                       -name {BCLK} \
+                       {BCLK}
+Warning: Ignored create_generated_clock at Ozy_Janus.sdc(69): Argument -source is not an object ID
+Warning: Ignored filter at Ozy_Janus.sdc(78): LRCLK could not be matched with a port or pin or register or keeper or net
+Warning: Ignored create_generated_clock at Ozy_Janus.sdc(78): Argument <targets> is not an object ID
+    Info: create_generated_clock -divide_by 64 -multiply_by 1  \
+                       -source CLK_12MHZ \
+                       -name {LRCLK} \
+                       {LRCLK}
+Warning: Ignored create_generated_clock at Ozy_Janus.sdc(78): Argument -source is not an object ID
+Warning: Ignored filter at Ozy_Janus.sdc(87): CBCLK could not be matched with a port or pin or register or keeper or net
+Warning: Ignored create_generated_clock at Ozy_Janus.sdc(87): Argument <targets> is not an object ID
+    Info: create_generated_clock -divide_by 4 -multiply_by 1  \
+                       -source CLK_12MHZ \
+                       -name {CBCLK} \
+                       {CBCLK}
+Warning: Ignored create_generated_clock at Ozy_Janus.sdc(87): Argument -source is not an object ID
+Warning: Ignored filter at Ozy_Janus.sdc(96): CLRCLK could not be matched with a port or pin or register or keeper or net
+Warning: Ignored create_generated_clock at Ozy_Janus.sdc(96): Argument <targets> is not an object ID
+    Info: create_generated_clock -divide_by 256 -multiply_by 1  \
+                       -source CLK_12MHZ \
+                       -name {CLRCLK} \
+                       {CLRCLK}
+Warning: Ignored create_generated_clock at Ozy_Janus.sdc(96): Argument -source is not an object ID
+Warning: Ignored filter at Ozy_Janus.sdc(136): *dcfifo_01j1*|delayed_wrptr_g[*] could not be matched with a keeper
+Warning: Ignored filter at Ozy_Janus.sdc(136): *dcfifo_01j1*|*rs_dgwp|*dffpipe5|dffe6a[*] could not be matched with a keeper
+Warning: Ignored set_false_path at Ozy_Janus.sdc(136): Argument <from> is an empty collection
+    Info: set_false_path -from [get_keepers {*dcfifo_01j1*|delayed_wrptr_g[*]}] -to [get_keepers {*dcfifo_01j1*|*rs_dgwp|*dffpipe5|dffe6a[*]}]
+Warning: Ignored set_false_path at Ozy_Janus.sdc(136): Argument <to> is an empty collection
+Warning: Ignored filter at Ozy_Janus.sdc(137): *dcfifo_01j1*|rdptr_g[*] could not be matched with a keeper
+Warning: Ignored filter at Ozy_Janus.sdc(137): *dcfifo_01j1*|*ws_dgrp|*dffpipe7|dffe8a[*] could not be matched with a keeper
+Warning: Ignored set_false_path at Ozy_Janus.sdc(137): Argument <from> is an empty collection
+    Info: set_false_path -from [get_keepers {*dcfifo_01j1*|rdptr_g[*]}] -to [get_keepers {*dcfifo_01j1*|*ws_dgrp|*dffpipe7|dffe8a[*]}]
+Warning: Ignored set_false_path at Ozy_Janus.sdc(137): Argument <to> is an empty collection
+Warning: Ignored filter at Ozy_Janus.sdc(138): *dcfifo_oqj1*|delayed_wrptr_g[*] could not be matched with a keeper
+Warning: Ignored filter at Ozy_Janus.sdc(138): *dcfifo_oqj1*|*rs_dgwp|*dffpipe5|dffe6a[*] could not be matched with a keeper
+Warning: Ignored set_false_path at Ozy_Janus.sdc(138): Argument <from> is an empty collection
+    Info: set_false_path -from [get_keepers {*dcfifo_oqj1*|delayed_wrptr_g[*]}] -to [get_keepers {*dcfifo_oqj1*|*rs_dgwp|*dffpipe5|dffe6a[*]}]
+Warning: Ignored set_false_path at Ozy_Janus.sdc(138): Argument <to> is an empty collection
+Warning: Ignored filter at Ozy_Janus.sdc(139): *dcfifo_oqj1*|rdptr_g[*] could not be matched with a keeper
+Warning: Ignored filter at Ozy_Janus.sdc(139): *dcfifo_oqj1*|*ws_dgrp|*dffpipe7|dffe8a[*] could not be matched with a keeper
+Warning: Ignored set_false_path at Ozy_Janus.sdc(139): Argument <from> is an empty collection
+    Info: set_false_path -from [get_keepers {*dcfifo_oqj1*|rdptr_g[*]}] -to [get_keepers {*dcfifo_oqj1*|*ws_dgrp|*dffpipe7|dffe8a[*]}]
+Warning: Ignored set_false_path at Ozy_Janus.sdc(139): Argument <to> is an empty collection
+Warning: Ignored filter at Ozy_Janus.sdc(148): MCLK_12MHZ could not be matched with a clock
+Warning: Ignored filter at Ozy_Janus.sdc(148): FX2_CLK could not be matched with a clock
+Warning: Ignored filter at Ozy_Janus.sdc(148): PCLK_12MHZ could not be matched with a clock
+Warning: Ignored filter at Ozy_Janus.sdc(148): BCLK could not be matched with a clock
+Warning: Ignored filter at Ozy_Janus.sdc(148): CBCLK could not be matched with a clock
+Warning: Ignored filter at Ozy_Janus.sdc(148): CLK_12MHZ could not be matched with a clock
+Warning: Ignored filter at Ozy_Janus.sdc(148): CLRCLK could not be matched with a clock
+Warning: Ignored filter at Ozy_Janus.sdc(148): LRCLK could not be matched with a clock
+Warning: Ignored filter at Ozy_Janus.sdc(148): IFCLK could not be matched with a clock
+Critical Warning: (High) Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains. (Value defined:2). Found 140 asynchronous clock domain interface structure(s) related to this rule.
+    Critical Warning: Node  "cdc_sync:cdc_jrdy|sigb[0]"
+    Critical Warning: Node  "clk_lrclk_gen:clrgen|LRCLK"
+    Critical Warning: Node  "I2S_xmit:J_LRAudio|xmit_rdy"
+    Critical Warning: Node  "C12_rst"
+    Critical Warning: Node  "cdc_sync:cdc_jack|sigb[0]"
+    Critical Warning: Node  "cdc_mcp:dfs|b_data_ack"
+    Critical Warning: Node  "clk_lrclk_gen:lrgen|Brise"
+    Critical Warning: Node  "cdc_mcp:dfs|a_rdy"
+    Critical Warning: Node  "IF_DFS0"
+    Critical Warning: Node  "IF_DFS1"
+    Critical Warning: Node  "cdc_mcp:lra|b_data[31]"
+    Critical Warning: Node  "cdc_mcp:lra|b_data[15]"
+    Critical Warning: Node  "cdc_mcp:lra|b_data[30]"
+    Critical Warning: Node  "cdc_mcp:iqp|b_data_ack"
+    Critical Warning: Node  "cdc_mcp:lra|b_data[14]"
+    Critical Warning: Node  "IF_Left_Data[15]"
+    Critical Warning: Node  "IF_Right_Data[15]"
+    Critical Warning: Node  "cdc_mcp:lra|b_data[29]"
+    Critical Warning: Node  "cdc_mcp:lra|b_data[13]"
+    Critical Warning: Node  "IF_Left_Data[14]"
+    Critical Warning: Node  "cdc_mcp:lra|b_data[28]"
+    Critical Warning: Node  "IF_Right_Data[14]"
+    Critical Warning: Node  "cdc_mcp:lra|b_data[12]"
+    Critical Warning: Node  "IF_Left_Data[13]"
+    Critical Warning: Node  "cdc_mcp:iqp|a_rdy"
+    Critical Warning: Node  "cdc_mcp:lra|b_data[27]"
+    Critical Warning: Node  "IF_Right_Data[13]"
+    Critical Warning: Node  "cdc_mcp:lra|b_data[11]"
+    Critical Warning: Node  "IF_Left_Data[12]"
+    Critical Warning: Node  "IF_Right_Data[12]"
+    Info: Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
+Warning: (Medium) Rule C104: Clock signal source should drive only clock input ports. Found 3 nodes related to this rule.
+    Warning: Node  "IF_clk"
+    Warning: Node  "C5"
+    Warning: Node  "clk_lrclk_gen:clrgen|BCLK"
+Info: (Information) Rule T101: Nodes with more than the specified number of fan-outs. (Value defined:30). Found 58 node(s) with highest fan-out.
+    Info: Node  "IF_clk~clkctrl"
+    Info: Node  "IF_rst"
+    Info: Node  "clkmult3:cm3|altpll:altpll_component|_locked"
+    Info: Node  "IF_conf[1]"
+    Info: Node  "IF_time_stamp~1"
+    Info: Node  "Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ1~0"
+    Info: Node  "Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ3~0"
+    Info: Node  "Tx_fifo_ctrl:TXFC|IF_chan[0]"
+    Info: Node  "Tx_fifo_ctrl:TXFC|IF_chan[1]"
+    Info: Node  "async_usb:usb1|SLEN"
+    Info: Node  "clkmult3:cm3|altpll:altpll_component|_clk0~clkctrl"
+    Info: Node  "C5~clkctrl"
+    Info: Node  "C12_cgen_rst"
+    Info: Node  "clk_lrclk_gen:clrgen|BCLK~clkctrl"
+    Info: Node  "C12_rst"
+    Info: Node  "I2S_xmit:J_LRAudio|TLV_state.TLV_IDLE~0"
+    Info: Node  "NWire_rcv:M_IQ|rcv_flag"
+    Info: Node  "I2S_xmit:J_LRAudio|TLV_state.TLV_WL~0"
+    Info: Node  "I2S_xmit:J_LRAudio|TLV_state.TLV_WH~0"
+    Info: Node  "NWire_xmit:P_IQPWM|NW_state.NW_WAIT~0"
+    Info: Node  "Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ2~0"
+    Info: Node  "Tx_fifo_ctrl:TXFC|tx_addr[0]"
+    Info: Node  "NWire_rcv:p_ser|irdy"
+    Info: Node  "NWire_rcv:p_ser|rcv_flag"
+    Info: Node  "NWire_rcv:SPD|DB_LEN~1"
+    Info: Node  "NWire_rcv:P_MIC|DB_LEN~1"
+    Info: Node  "NWire_rcv:p_ser|rdata~1"
+    Info: Node  "NWire_rcv:M_IQ1|rcv_flag"
+    Info: Node  "NWire_rcv:M_IQ3|rcv_flag"
+    Info: Node  "NWire_rcv:M_IQ2|rcv_flag"
+    Info: Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
+Info: (Information) Rule T102: Top nodes with the highest number of fan-outs. (Value defined:50). Found 50 node(s) with highest fan-out.
+    Info: Node  "IF_clk~clkctrl"
+    Info: Node  "clkmult3:cm3|altpll:altpll_component|_clk0~clkctrl"
+    Info: Node  "IF_rst"
+    Info: Node  "clkmult3:cm3|altpll:altpll_component|_locked"
+    Info: Node  "C12_rst"
+    Info: Node  "C5~clkctrl"
+    Info: Node  "clk_lrclk_gen:clrgen|BCLK~clkctrl"
+    Info: Node  "NWire_xmit:CCxmit|NW_state.NW_WAIT~0"
+    Info: Node  "NWire_xmit:CCxmit|id~90"
+    Info: Node  "Tx_fifo_ctrl:TXFC|IF_chan[0]"
+    Info: Node  "NWire_rcv:m_ver4|DB_LEN~1"
+    Info: Node  "NWire_rcv:m_ser|DB_LEN~1"
+    Info: Node  "NWire_rcv:m_ver3|DB_LEN~1"
+    Info: Node  "Tx_fifo_ctrl:TXFC|IF_chan[1]"
+    Info: Node  "NWire_rcv:m_ver2|DB_LEN~1"
+    Info: Node  "NWire_xmit:P_IQPWM|NW_state.NW_WAIT~0"
+    Info: Node  "NWire_rcv:p_ser|DB_LEN~1"
+    Info: Node  "I2S_xmit:J_LRAudio|TLV_state.TLV_IDLE~0"
+    Info: Node  "cdc_mcp:lra|b_data~1"
+    Info: Node  "NWire_xmit:P_IQPWM|id~35"
+    Info: Node  "IF_conf[1]"
+    Info: Node  "NWire_rcv:M_IQ1|DB_LEN~1"
+    Info: Node  "NWire_rcv:M_IQ|DB_LEN~1"
+    Info: Node  "NWire_rcv:M_IQ2|DB_LEN~1"
+    Info: Node  "NWire_rcv:P_MIC|DB_LEN~1"
+    Info: Node  "NWire_rcv:M_IQ3|DB_LEN~1"
+    Info: Node  "CC_address[1]"
+    Info: Node  "CC_address[0]"
+    Info: Node  "NWire_rcv:M_IQ|rcv_flag"
+    Info: Node  "NWire_rcv:M_IQ3|rcv_flag"
+    Info: Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
+Info: Design Assistant information: finished post-fitting analysis of current design -- generated 108 information messages and 143 warning messages
+Info: Quartus II Design Assistant was successful. 0 errors, 84 warnings
+    Info: Peak virtual memory: 235 megabytes
+    Info: Processing ended: Wed Nov 09 19:54:39 2011
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:04
+
+

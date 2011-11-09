@@ -1,0 +1,125 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow Model Setup 'clkmult3:cm3|altpll:altpll_component|_clk0'
+Slack : -0.633
+TNS   : -5.788
+
+Type  : Slow Model Setup 'IF_clk'
+Slack : 4.984
+TNS   : 0.000
+
+Type  : Slow Model Setup 'C5'
+Slack : 5.099
+TNS   : 0.000
+
+Type  : Slow Model Setup 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 14.432
+TNS   : 0.000
+
+Type  : Slow Model Setup 'SPI_SCK'
+Slack : 15.765
+TNS   : 0.000
+
+Type  : Slow Model Hold 'C5'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'IF_clk'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'SPI_SCK'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'clkmult3:cm3|altpll:altpll_component|_clk0'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'clkmult3:cm3|altpll:altpll_component|_clk0'
+Slack : 2.230
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'IF_clk'
+Slack : 7.349
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'C5'
+Slack : 9.174
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'SPI_SCK'
+Slack : 9.174
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 9.174
+TNS   : 0.000
+
+Type  : Fast Model Setup 'clkmult3:cm3|altpll:altpll_component|_clk0'
+Slack : 4.259
+TNS   : 0.000
+
+Type  : Fast Model Setup 'IF_clk'
+Slack : 6.799
+TNS   : 0.000
+
+Type  : Fast Model Setup 'C5'
+Slack : 9.453
+TNS   : 0.000
+
+Type  : Fast Model Setup 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 18.392
+TNS   : 0.000
+
+Type  : Fast Model Setup 'SPI_SCK'
+Slack : 19.101
+TNS   : 0.000
+
+Type  : Fast Model Hold 'IF_clk'
+Slack : -0.396
+TNS   : -62.722
+
+Type  : Fast Model Hold 'C5'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'SPI_SCK'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'clkmult3:cm3|altpll:altpll_component|_clk0'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'clkmult3:cm3|altpll:altpll_component|_clk0'
+Slack : 2.472
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'IF_clk'
+Slack : 8.289
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'C5'
+Slack : 9.416
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'SPI_SCK'
+Slack : 9.416
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 9.416
+TNS   : 0.000
+
+------------------------------------------------------------
