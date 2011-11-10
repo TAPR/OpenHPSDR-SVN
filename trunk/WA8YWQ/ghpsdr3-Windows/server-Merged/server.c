@@ -103,8 +103,8 @@ int main(int argc,char* argv[]) {
 #endif
 
 // #### over-ride process_args()    --- for debugging, when there is not a command line
-	metis = 0;		// ####
-	ozy_set_metis(metis);	// ####
+//	metis = 0;		// ####
+//	ozy_set_metis(metis);	// ####
 
     if(metis == 1) 
 	{	nativeInitMetis();
