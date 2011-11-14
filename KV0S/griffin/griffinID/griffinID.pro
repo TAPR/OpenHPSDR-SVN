@@ -26,3 +26,7 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     dialog.ui
 
+RESOURCES += \
+    recources.qrc
+
+
