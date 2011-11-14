@@ -83,7 +83,7 @@ GOTO LOOP
 SET DIRECTORY=c:\altera\10.1sp1\qprogrammer\bin\quartus_pgm
 GOTO LOOP
 
-:Q101sp1
+:Q110sp1
 SET DIRECTORY=c:\altera\11.0sp1\qprogrammer\bin\quartus_pgm
 GOTO LOOP
 
@@ -131,7 +131,6 @@ GOTO CONTINUE
 :ItemE
 %DIRECTORY% -c USB-Blaster Penelope_v1.5.cdf
 GOTO CONTINUE
-:CONTINUE
 :ItemF
 %DIRECTORY% -c USB-Blaster Penelope_v1.6.cdf
 GOTO CONTINUE
