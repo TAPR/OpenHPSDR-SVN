@@ -610,6 +610,7 @@ void process_ozy_input_buffer(char* buffer) {
     int b=0;
     int b_max;
     int r;
+	int i;
     int left_sample,right_sample,mic_sample;
     float left_sample_float,right_sample_float,mic_sample_float;
 
@@ -753,7 +754,14 @@ if(rx_frame<10) {
         }
 
     } else {
-        fprintf(stderr,"SYNC error\n");
+		int syncLoc = -1;
+		for (i = 0; i < 509; ++i) 
+		{	if ( (buffer[i] == SYNC) && (buffer[i+1] == SYNC) && (buffer[i+2] == SYNC) ) 
+			{	syncLoc = i;
+				break;
+			}
+		}
+        fprintf(stderr,"SYNC error.  syncLoc = %d\n", syncLoc);
         dump_ozy_buffer("SYNC ERROR",rx_frame,buffer);
       //  exit(18);
     }

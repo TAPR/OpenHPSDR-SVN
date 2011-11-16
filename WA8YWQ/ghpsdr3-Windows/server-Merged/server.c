@@ -92,53 +92,35 @@ int main(int argc,char* argv[]) {
         err = WSAStartup(wVersionRequested, &wsaData);          // initialize Windows sockets -- now done in Metis.c
 #endif
 
-		ozy_set_receivers(4);	// set default values
-		ozy_set_sample_rate(48000);
-
-
     process_args(argc,argv);
 
 #ifndef __linux__
 #define sleep Sleep
 #endif
 
-// #### over-ride process_args()    --- for debugging, when there is not a command line
-//	metis = 0;		// ####
-//	ozy_set_metis(metis);	// ####
+#if 0
+	// #### simulate command line
+	metis=1;
+    ozy_set_metis(metis);
+	ozy_set_receivers(4);
+#endif
 
     if(metis == 1) 
 	{	nativeInitMetis();
-        // metis_discover(eInterface);
         sleep(1);
-        // see if we have any Metis boards
-//        fprintf(stderr,"Found %d Metis cards\n",metis_found());
-//        if(metis_found()==0) {
-//            exit(24);
-//			}
         ozy_set_buffers(2);
     }
-
 
     init_receivers();
     init_bandscope();
 
     create_listener_thread();
 
-    if(metis) {
+    if(metis) MetisStartReadThread();
+    else      create_ozy_thread();
 
-        MetisStartReadThread();		// djm version was   metis_start_receive_thread();
+    while(1) {	sleep(10);	 }
 
-    } else {
-        create_ozy_thread();
-    }
-
-    while(1) {
-#ifdef __linux__
-        sleep(10);
-#else   // Windows
-        Sleep(10);
-#endif
-    }
 }
 
 /**

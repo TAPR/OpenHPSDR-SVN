@@ -18,8 +18,6 @@
  *
  */
 
-
-
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -29,20 +27,11 @@
 #include <windows.h> 
 #include <winsock2.h>
 #include <ws2tcpip.h>
-//#include <wspiapi.h>
-//#include <Iphlpapi.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
 void process_ozy_input_buffer(char* buffer);
-
-#define KD5TFDVK6APHAUDIO_API
-
-//#pragma comment(lib, "ws2_32.lib")
-//#pragma comment(lib, "IPHLPAPI.lib")
-
-#define OBSOLETE (0) 
 
 int isMetis; 
 SOCKET listenSock; 
@@ -62,7 +51,7 @@ sem_t MetisReadThreadInitSem;
 #define NUM_RINGBUF_FRAMES (200)
 void *MetisEP6RingBuf = NULL; 
 pthread_t MetisReadThreadID; 
-int MetisLastRecvSeq = 0; 
+unsigned int MetisLastRecvSeq = 0; 
 char MetisMACAddr[6] = { 0, 0, 0, 0, 0, 0 }; 
 
 
@@ -74,216 +63,6 @@ extern void Dump(FILE *ofile,                /* file handle to dump to - assumed
 {
 	// ########   NULL IMPLEMENTATION   ##########
 }
-
-
-
-#if 0 
-KD5TFDVK6APHAUDIO_API int getNetworkAddrs(int addrs[], int addr_count) { 
-	int addrs_used = 0; 
-	IP_ADAPTER_ADDRESSES addrbuf[5]; 
-	PIP_ADAPTER_ADDRESSES paddrs = addrbuf; 
-	PIP_ADAPTER_ADDRESSES p; 
-
-	ULONG addrbufsize = sizeof(addrbuf); 	
-	IP_ADAPTER_UNICAST_ADDRESS *unip; 
-	ULONG rc;
-	CHAR ipaddrbuf[100]; 
-	DWORD ipaddrbuflen; 
-
-
-	printf("addrbufsize is: %d\n", addrbufsize); 
-	memset(addrbuf, 0, sizeof(addrbuf)); 
-
-	rc = GetAdaptersAddresses(AF_INET,  GAA_FLAG_SKIP_MULTICAST, NULL, 
-		                            paddrs, &addrbufsize); 
-	if ( rc == ERROR_BUFFER_OVERFLOW ) {  /* buf too small, realloc and try again */ 
-		printf("initial buf too small - regrouping\n"); 
-		printf("needed addrbufsize is: %d\n", addrbufsize); 
-		paddrs = malloc(addrbufsize); 
-		if ( paddrs == NULL ) { 
-			printf("malloc failed!\n"); fflush(stdout); 
-			return -1;
-		}
-		memset(paddrs, 0, addrbufsize); 
-		rc = GetAdaptersAddresses(AF_INET,  GAA_FLAG_SKIP_MULTICAST, NULL, 
-		                            paddrs, &addrbufsize); 
-	}
-	
-	if ( rc != ERROR_SUCCESS ) { 
-		printf("GetAdpatersAddresses returned %d\n", rc); fflush(stdout); 
-		if ( paddrs != addrbuf ) { 
-			free(paddrs);
-		}
-		return -1;
-	} 
-	p = paddrs; 
-	while ( p != NULL ) { 
-		printf("Name: %s\n", p->AdapterName); 
-		printf("Friendly Name: %S\n", p->FriendlyName); 
-		
-		unip = p->FirstUnicastAddress; 
-		if ( unip == NULL ) { 
-			printf("FirstUnicastAddress is null!!!\n"); 
-		} 
-		while ( unip != NULL ) { 
-			struct sockaddr_in *saddrp; 
-			ipaddrbuflen = sizeof(ipaddrbuf); 
-			WSAAddressToString(unip->Address.lpSockaddr, unip->Address.iSockaddrLength, NULL, ipaddrbuf,  &ipaddrbuflen); 			
-			printf("    %s\n", ipaddrbuf); 
-			Dump(stdout, (unsigned char *)(unip->Address.lpSockaddr), unip->Address.iSockaddrLength, "sockaddr"); 
-			saddrp = (struct sockaddr_in *)(unip->Address.lpSockaddr); 
-			printf("addr: 0x%08x\n", saddrp->sin_addr.S_un.S_addr);
-			if ( addrs_used < addr_count ) { 
-				addrs[addrs_used] = saddrp->sin_addr.S_un.S_addr;
-				++addrs_used;
-			}
-			unip = unip->Next;				
-		} 
-		p = p->Next; 
-	}
-	if ( paddrs != addrbuf ) { 
-		free(paddrs);
-	}
-	printf("getNetworkAddrs returning: %d\n", addrs_used); 
-	fflush(stdout); 
-
-	return addrs_used; 
-} 
-#endif
-
-#if 0
-/* get MAC addr for a given adapter - returns 0 on success, !0 otherwise */ 
-int getMACaddr(int addr_wanted, char mac[6]) { 
-	int addrs_used = 0; 
-
-
-	IP_ADAPTER_ADDRESSES addrbuf[5]; 
-	PIP_ADAPTER_ADDRESSES paddrs = addrbuf; 
-	PIP_ADAPTER_ADDRESSES p; 
-
-	ULONG addrbufsize = sizeof(addrbuf); 	
-	IP_ADAPTER_UNICAST_ADDRESS *unip; 
-
-	ULONG rc;
-	CHAR ipaddrbuf[100]; 
-	DWORD ipaddrbuflen; 
-
-
-	printf("addr_wanted:  0x%08x\n", addr_wanted); 
-	printf("addrbufsize is: %d\n", addrbufsize); 
-	memset(addrbuf, 0, sizeof(addrbuf)); 
-
-	rc = GetAdaptersAddresses(AF_INET,  GAA_FLAG_SKIP_MULTICAST, NULL, 
-		                            paddrs, &addrbufsize); 
-	if ( rc == ERROR_BUFFER_OVERFLOW ) {  /* buf too small, realloc and try again */ 
-		printf("initial buf too small - regrouping\n"); 
-		printf("needed addrbufsize is: %d\n", addrbufsize); 
-		paddrs = malloc(addrbufsize); 
-		if ( paddrs == NULL ) { 
-			printf("malloc failed!\n"); fflush(stdout); 
-			return -1;
-		}
-		memset(paddrs, 0, addrbufsize); 
-		rc = GetAdaptersAddresses(AF_INET,  GAA_FLAG_SKIP_MULTICAST, NULL, 
-		                            paddrs, &addrbufsize); 
-	}
-	
-	if ( rc != ERROR_SUCCESS ) { 
-		printf("GetAdpatersAddresses returned %d\n", rc); fflush(stdout); 
-		if ( paddrs != addrbuf ) { 
-			free(paddrs);
-		}
-		return -1;
-	} 
-	p = paddrs; 
-	while ( p != NULL ) { 
-		printf("Name: %s\n", p->AdapterName); 
-		printf("Friendly Name: %S\n", p->FriendlyName); 
-		
-		unip = p->FirstUnicastAddress; 
-		if ( unip == NULL ) { 
-			printf("FirstUnicastAddress is null!!!\n"); 
-		} 
-		while ( unip != NULL ) { 
-			struct sockaddr_in *saddrp; 			
-			ipaddrbuflen = sizeof(ipaddrbuf); 
-			WSAAddressToString(unip->Address.lpSockaddr, unip->Address.iSockaddrLength, NULL, ipaddrbuf,  &ipaddrbuflen); 			
-			printf("    %s\n", ipaddrbuf); 
-			Dump(stdout, (unsigned char *)(unip->Address.lpSockaddr), unip->Address.iSockaddrLength, "sockaddr"); 
-			saddrp = (struct sockaddr_in *)(unip->Address.lpSockaddr); 
-			printf("addr: 0x%08x\n", saddrp->sin_addr.S_un.S_addr);
-			if ( saddrp->sin_addr.S_un.S_addr == addr_wanted ) {  /* found adapter we're looking for, now find appropriate broadcast addr */ 
-				printf("found matching addr!\n"); 
-				memcpy(mac, p->PhysicalAddress, min(p->PhysicalAddressLength, 6));
-				if ( paddrs != addrbuf ) { 
-					free(paddrs);
-				}
-				return 0;
-			}
-			else { 
-				unip = unip->Next;
-			} 
-		} 
-		p = p->Next; 
-	}
-
-	/* if we get here we did not find matching addr!! */ 
-	if ( paddrs != addrbuf ) { 
-		free(paddrs);
-	}
-	return -1; 
-} 
-#endif 
-
-#if 0 
-void oldlistNetworkAddrs(void) { 
-	struct addrinfo hints; 
-	struct addrinfo *results = NULL; 
-	struct addrinfo *addrp = NULL; 
-	int addrcount = 0; 
-	int rc; 
-
-	memset(&hints, 0, sizeof(hints));
-	hints.ai_family = AF_INET; 
-	// hints.ai_socktype = SOCK_DGRAM; 
-	// hints.ai_protocol = IPPROTO_UDP;
-
-	rc = getaddrinfo(NULL, NULL, &hints, &results); 
-	if (  rc != 0 ) { 
-		printf("getaddrinfo failed rc=%d\n", rc); fflush(stdout); 
-		return; 
-	} 
-
-	addrp = results;
-
-	while ( addrp != NULL ) { 
-		++addrcount; 
-		printf("   name: >%s<\n", addrp->ai_canonname); 
-		addrp = addrp->ai_next;
-	} 
-	printf("%d adapters found\n", addrcount); fflush(stdout); 
-	return;
-} 
-#endif 
-
-
- /* returns 0 on success, non zero on failure */ 
- int initWSA(void) { 
-	 int rc;
-	 int addrs[10]; 
-	 if ( WSAinitialized ) { 
-		 return 0;
-	 }
-	 WSAinitialized = 1; 
-	 rc = WSAStartup(MAKEWORD(2,2), &WSAdata);
-	 if ( rc != 0 ) { 
-		 printf("WSAStartup failed with rc=%d\n", rc); 
-	 }
-	 /* getNetworkAddrs(addrs, 10);  */ 
-	 return rc; 
- }
-
-
 
 
 SOCKET createSocket(int portnum) { 
@@ -365,9 +144,6 @@ SOCKET createSocket(int portnum) {
 	return rc; 
  } 
 
-
-
-
  u_long doDiscovery() { 
 	 // SOCKET outsock; 
 	 int rc; 
@@ -435,10 +211,8 @@ SOCKET createSocket(int portnum) {
  u_long MetisAddr = 0; 
 struct sockaddr_in MetisSockAddr; 
 
-int WSA_inited = 0; 
 
-
-KD5TFDVK6APHAUDIO_API void DeInitMetisSockets(void) {
+void DeInitMetisSockets(void) {
 	if ( listenSock != (SOCKET)0 ) { 
 		shutdown(listenSock, SD_BOTH); 
 		closesocket(listenSock); 
@@ -452,7 +226,7 @@ KD5TFDVK6APHAUDIO_API void DeInitMetisSockets(void) {
 
 
 /* returns 0 on success, != 0 otherwise */ 
-KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
+int nativeInitMetis(char *netaddr) {
 
 	int rc; 
 	u_long metis_addr; 
@@ -462,17 +236,6 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 	int sndbufsize; 
 	
 	isMetis = 1; 
-#if 0						// WSA is initialized in server
-	if ( !WSA_inited ) { 
-		rc = initWSA(); 
-		if ( rc != 0 ) { 
-			return rc; 
-		} 
-		WSA_inited = 1; 
-		printf("initWSA ok!"); 
-
-	}
-#endif
 	if ( listenSock == (SOCKET)0 ) { 
 
 		listenSock = createSocket(0); 
@@ -540,17 +303,17 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 
 
 
-KD5TFDVK6APHAUDIO_API int GetMetisIPAddr(void) { 
+int GetMetisIPAddr(void) { 
 	return MetisAddr; 
 } 
 
-KD5TFDVK6APHAUDIO_API void GetMetisMACAddr(char addr_bytes[]) { 
+void GetMetisMACAddr(char addr_bytes[]) { 
 	memcpy(addr_bytes, MetisMACAddr, 6); 
 } 
 
 int SendStartToMetis(void) 	 {
 
-	 int starting_seq; 
+	 unsigned int starting_seq; 
 	 unsigned char packetbuf[64];
 	 unsigned char fbuf[2000]; 
 
@@ -589,7 +352,7 @@ int SendStartToMetis(void) 	 {
 /* returns 0 if metis appears to have stopped, !0 otherwise */
 int SendStopToMetis(void) 	 {
 	 
-	 int starting_seq; 
+	 unsigned int starting_seq; 
 	 unsigned char packetbuf[64];
 
 	 int i;  
@@ -665,12 +428,16 @@ int MetisReadDirect(char *bufp, int buflen) {
 	return 0; 
 } 
 
+#define SYNC 0x7f
 
 void MetisReadThreadMainLoop() { 
+	int i;
 	int rc; 
 	int dumpbuf = 1; 
 	
 	unsigned char readbuf[1600]; 
+	unsigned char processBuf[512];
+
 	struct sockaddr_in fromaddr; 
 	int fromlen; 
 	unsigned int endpoint; 
@@ -682,7 +449,7 @@ void MetisReadThreadMainLoop() {
 		fromlen = sizeof(fromaddr); 
 		rc = recvfrom(listenSock, readbuf, sizeof(readbuf), 0, (struct sockaddr *)&fromaddr, &fromlen); 
 		if ( rc < 0 ) {  /* failed */ 
-			printf("recvfrom on listenSock failed!\n");  fflush(stdout); 
+			printf("recvfrom on listenSock in MetisReadThreadManiLoop() failed, return code = #d\n", rc);  fflush(stdout); 
 			Sleep(10); /* stay out of a tight loop */ 
 			continue; /* go try again */ 
 		} 
@@ -700,23 +467,21 @@ void MetisReadThreadMainLoop() {
 				} 
 				MetisLastRecvSeq = seqnum;
 				if ( endpoint == 6 ) 
-				{ 
-//					putRingBuffer(MetisEP6RingBuf, readbuf+8 , 1024) ; 
-
-					process_ozy_input_buffer(readbuf+8);
+				{
 #if 0
-					current_receiver++;
-					if(current_receiver==receivers) { current_receiver=0; }
+					int syncLoc = -1;
+					for (i = 8; i < 1029; ++i) 
+					{	if ( (readbuf[i] == SYNC) && (readbuf[i+1] == SYNC) && (readbuf[i+2] == SYNC) ) 
+						{	syncLoc = i;
+							break;
+						}
+					}
+					if (syncLoc >= 8) putRingBuffer(MetisEP6RingBuf, readbuf + syncLoc /* readbuf+8 */ , 1032 - syncLoc) ;
 #endif
-                    process_ozy_input_buffer(readbuf+520);
-#if 0
-					current_receiver++;
-					if(current_receiver==receivers) { current_receiver=0; }
-#endif    
+					putRingBuffer(MetisEP6RingBuf, readbuf + 8, 1024);
 
-//					process_ozy_input_buffer();
-//					process_ozy_input_buffer();
-  
+//					process_ozy_input_buffer(readbuf+8);
+//                  process_ozy_input_buffer(readbuf+520);
 				}
 				else { 
 					printf("ignoring data for ep %d\n", endpoint); 
@@ -732,7 +497,13 @@ void MetisReadThreadMainLoop() {
 		} 
 		else { 
 			printf("ignoring short frame size=%d\n", rc); 
-		} 		
+		} 
+
+		skipToSYNC(MetisEP6RingBuf);
+		while (getCountRingBuffer(MetisEP6RingBuf) > 512)
+		{	getRingBuffer(MetisEP6RingBuf, processBuf, 512, 1);
+			process_ozy_input_buffer(processBuf);
+		}
 	}
 	return; 
 } 
@@ -764,13 +535,13 @@ int MetisStartReadThread(void) {
 	int rc; 
 
 	do { 
-
-
 		/* allocate ring buffer */ 
+
 		MetisEP6RingBuf = createRingBuffer(512 * NUM_RINGBUF_FRAMES); 
 		if ( MetisEP6RingBuf == NULL ) { 
 			return -1; 
 		} 
+
 		sem_init(&MetisReadThreadInitSem, 0, 0);
 		rc = pthread_create(&MetisReadThreadID, NULL, MetisReadThreadMain, NULL);
 		if ( rc != 0 ) {  // failed
@@ -807,6 +578,7 @@ void MetisStopReadThread(void) {
 	return; 
 } 
 
+#if 0
 /* read data from the ringbuffer */ 
 int MetisBulkRead(int endpoint, char *bufp, int buflen) { 
 	int result; 
@@ -831,7 +603,7 @@ int MetisBulkRead(int endpoint, char *bufp, int buflen) {
 #endif 
 	return result;
 } 
-
+#endif
 
 /* write data to Metis board */ 
 unsigned int MetisOutBoundSeqNum; 
