@@ -175,6 +175,10 @@ SOURCE=.\ozyio.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\private.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\pthread.h
 # End Source File
 # Begin Source File
