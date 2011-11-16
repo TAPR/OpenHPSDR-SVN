@@ -1,0 +1,167 @@
+Subject:
+Re: [hpsdr] Can't Connect to Teamspeak
+From:
+Jeremy McDermond <mcdermj@xenotropic.com>
+Date:
+12:21 PM
+To:
+Mike F <mikecf100@gmail.com>
+CC:
+hpsdr@lists.openhpsdr.org
+X-Account-Key:
+account2
+X-UIDL:
+1321042941.6789_0.a.lds,S=5921
+X-Mozilla-Status:
+0011
+X-Mozilla-Status2:
+00000000
+Return-Path:
+<hpsdr-bounces@lists.openhpsdr.org>
+X-Spam-Checker-Version:
+SpamAssassin 3.3.1 (2010-03-16) on d.spam.sonic.net
+X-Spam-Status:
+No, score=0.0 required=5.0 tests=RCVD_IN_DNSWL_NONE autolearn=disabled version=3.3.1
+Received:
+from b.mx.sonic.net (b.mx.sonic.net [69.12.208.74]) by a.lds.sonic.net (8.13.8.Beta0-Sonic/8.13.7) with ESMTP id pABKMKSF006606 for <mcquate@lds.sonic.net>; Fri, 11 Nov 2011 12:22:20 -0800
+Received:
+from diego.dreamhost.com (diego.dreamhost.com [66.33.216.104]) by b.mx.sonic.net (8.13.8.Beta0-Sonic/8.13.7) with ESMTP id pABKMD9O031847 for <mcquate@sonic.net>; Fri, 11 Nov 2011 12:22:16 -0800
+Received:
+from diego.dreamhost.com (localhost [127.0.0.1]) by diego.dreamhost.com (Postfix) with ESMTP id 3DDE948003; Fri, 11 Nov 2011 12:22:12 -0800 (PST)
+X-Original-To:
+hpsdr@lists.openhpsdr.org
+Received:
+from mail.xenotropic.com (tsunami.xenotropic.com [198.178.136.10]) by diego.dreamhost.com (Postfix) with ESMTP id B445848002 for <hpsdr@lists.openhpsdr.org>; Fri, 11 Nov 2011 12:22:08 -0800 (PST)
+Received:
+from localhost (localhost [127.0.0.1]) by mail.xenotropic.com (Postfix) with ESMTP id 4DC515B1D864; Fri, 11 Nov 2011 12:22:08 -0800 (PST)
+X-Virus-Scanned:
+amavisd-new at xenotropic.com
+Received:
+from mail.xenotropic.com ([127.0.0.1]) by localhost (tsunami.xenotropic.com [127.0.0.1]) (amavisd-new, port 10024) with ESMTP id iuoYdGbefapN; Fri, 11 Nov 2011 12:22:08 -0800 (PST)
+Received:
+from monarchy.xenotropic.com (monarchy.xenotropic.com [198.178.136.199]) by mail.xenotropic.com (Postfix) with ESMTP id 01EA85B1D859; Fri, 11 Nov 2011 12:22:08 -0800 (PST)
+MIME-Version:
+1.0 (Apple Message framework v1251.1)
+In-Reply-To:
+<336EC3B0-14A5-480F-B652-98F17C6118FE@xenotropic.com>
+Message-ID:
+<E5015196-6736-4B04-B6AE-1D47C8DEAB67@xenotropic.com>
+References:
+<4EBD7AA0.6040107@gmail.com> <336EC3B0-14A5-480F-B652-98F17C6118FE@xenotropic.com>
+X-Mailer:
+Apple Mail (2.1251.1)
+X-BeenThere:
+hpsdr@lists.openhpsdr.org
+X-Mailman-Version:
+2.1.14
+Precedence:
+list
+List-Id:
+High Performance Software Defined Radio Discussion List <hpsdr-openhpsdr.org>
+List-Unsubscribe:
+<http://lists.openhpsdr.org/options.cgi/hpsdr-openhpsdr.org>, <mailto:hpsdr-request@lists.openhpsdr.org?subject=unsubscribe>
+List-Archive:
+<http://lists.openhpsdr.org/pipermail/hpsdr-openhpsdr.org>
+List-Post:
+<mailto:hpsdr@lists.openhpsdr.org>
+List-Help:
+<mailto:hpsdr-request@lists.openhpsdr.org?subject=help>
+List-Subscribe:
+<http://lists.openhpsdr.org/listinfo.cgi/hpsdr-openhpsdr.org>, <mailto:hpsdr-request@lists.openhpsdr.org?subject=subscribe>
+Content-Type:
+text/plain; charset="us-ascii"
+Content-Transfer-Encoding:
+7bit
+Errors-To:
+hpsdr-bounces@lists.openhpsdr.org
+Sender:
+hpsdr-bounces@lists.openhpsdr.org
+X-Sonic-SB-IP-RBLs:
+IP RBLs .
+
+***** High Performance Software Defined Radio Discussion List *****
+
+In case the service is not available by this evening, there is a ts2 available at:
+ts12.teamspeakhost.com:8802  "normal" teamspeak host
+
+ts.nh6z.net:8767
+
+and a ts3 instance available at:
+
+ts.nh6z.net:9987
+
+The password to both is PlayRadio
+
+The group is welcome to use either for the meeting if necessary.
+
+On Nov 11, 2011, at 11:54 AM, Jeremy McDermond wrote:
+
+> > ***** High Performance Software Defined Radio Discussion List *****
+> > 
+> > It appears as though the TS provider is having issues.  Their DNS has dropped off of the net.  Not even their web site seems to be up.
+> > 
+> > monarchy:~ mcdermj$ dig www.teamspeakhost.com.
+> > 
+> > ; <<>> DiG 9.7.3-P3 <<>> www.teamspeakhost.com.
+> > ;; global options: +cmd
+> > ;; Got answer:
+> > ;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 51860
+> > ;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 0
+> > 
+> > ;; QUESTION SECTION:
+> > ;www.teamspeakhost.com.		IN	A
+> > 
+> > ;; AUTHORITY SECTION:
+> > teamspeakhost.com.	3553	IN	SOA	dns1.registrar-servers.com. hostmaster.registrar-servers.com. 2011111000 10001 1801 604801 3601
+> > 
+> > ;; Query time: 0 msec
+> > ;; SERVER: 198.178.136.10#53(198.178.136.10)
+> > ;; WHEN: Fri Nov 11 11:52:00 2011
+> > ;; MSG SIZE  rcvd: 109
+> > 
+> > On Nov 11, 2011, at 11:42 AM, Mike F wrote:
+> > 
+>> >> ***** High Performance Software Defined Radio Discussion List *****
+>> >> 
+>> >> I connect regularly to the Friday night Teamspeak session using the url teamspeak.openhpsdr.org:8802.  I tried today to verify that it works at my present QTH and got a socket error # 11004.  Looking on the net, I found that this occurs when it can't find the IP address for the url. This explaination is verified because when I try to ping either teamspeak.openhpsdr.org:8802 or teamspeak.openhpsdr.org, I get a cannot find error.  I verified the ping process by pinging other known sites.
+>> >> 
+>> >> Suggestions??
+>> >> 
+>> >> Mike Fager, K7SR
+>> >> _______________________________________________
+>> >> HPSDR Discussion List
+>> >> To post msg: hpsdr@openhpsdr.org
+>> >> Subscription help: http://lists.openhpsdr.org/listinfo.cgi/hpsdr-openhpsdr.org
+>> >> HPSDR web page: http://openhpsdr.org
+>> >> Archives: http://lists.openhpsdr.org/pipermail/hpsdr-openhpsdr.org/
+> > 
+> > 
+> > --
+> > Jeremy McDermond (NH6Z)
+> > Xenotropic Systems
+> > mcdermj@xenotropic.com
+> > 
+> > 
+> > 
+> > _______________________________________________
+> > HPSDR Discussion List
+> > To post msg: hpsdr@openhpsdr.org
+> > Subscription help: http://lists.openhpsdr.org/listinfo.cgi/hpsdr-openhpsdr.org
+> > HPSDR web page: http://openhpsdr.org
+> > Archives: http://lists.openhpsdr.org/pipermail/hpsdr-openhpsdr.org/
+
+--
+Jeremy McDermond (NH6Z)
+Xenotropic Systems
+mcdermj@xenotropic.com
+
+
+
+_______________________________________________
+HPSDR Discussion List
+To post msg: hpsdr@openhpsdr.org
+Subscription help: http://lists.openhpsdr.org/listinfo.cgi/hpsdr-openhpsdr.org
+HPSDR web page: http://openhpsdr.org
+Archives: http://lists.openhpsdr.org/pipermail/hpsdr-openhpsdr.org/
+
+
