@@ -1,0 +1,13 @@
+SOFTWARE LICENSE AGREEMENT:
+FlexRadio Systems hereby grants to you (an individual) the irrevocable, personal, exclusive, and transferable right to install and activate the Software on as many separate computers for your personal and non-commercial use. Sharing this Software with other individuals or allowing other individuals to view the contents of this Software is in violation of this license.  The use of this software and images with third-party software or variants of PowerSDR other than SVN and official releases FlexRadio Systems PowerSDR™ is in direct violation of this software agreement and applicable copyrights.
+
+
+LIMITED WARRANTY:
+(A) The Software and accompanying written materials are provided on an “as is” basis without any warranties of any kind including, but not limited to, any implied warranties of merchantability or fitness for any particular purpose.  No oral or written information or advice given by FlexRadio Systems or employees shall create a warranty, or in any way increase the scope of this warranty, and you may not rely on and such information or advice.  FlexRadio Systems does not guarantee, or make any representations regarding the use or the results of use, of the Software or written materials in terms of correctness, accuracy, reliability  or otherwise, and the entire risk as to the results and performance of the Software is assumed by you, the user. If the Software or written materials are defective, you, and not FlexRadio Systems or employees, assume the entire cost of all necessary servicing, repair or correction other than expressly described above.
+
+(B) Neither FlexRadio Systems or anyone else who has been involved in the creation, production or delivery of this product shall be liable for any direct, indirect, special, consequential or incidental damages (including damages for loss of business, profits, business interruption, loss of business information and the like) arising out of the use or inability to use such software related to this agreement, even if FlexRadio Systems has been advised of the possibility of such damages.  
+
+
+ACKNOWLEDGMENT:
+By installing the software, you are acknowledging that you have read and understand the fore going and that you agree to be bound by its terms and conditions.  You also agree that this agreement is the complete and exclusive statement of agreement between the parties and supersedes all proposed or prior agreements, oral or written, and any other communications between the parties relating to the license.
+
