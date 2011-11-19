@@ -1,0 +1,9 @@
+; PortTalk.def : Declares the module parameters for the DLL.
+
+LIBRARY      "PortTalk"
+
+EXPORTS
+	outport
+	inport
+	InitPortTalk
+	ExitPortTalk
