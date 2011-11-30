@@ -345,17 +345,30 @@ namespace PowerSDR
                {
                     penny_ver = getPenelopeFWVersion();
                     mercury_ver = getMercuryFWVersion();
-                    if ((metis_ver[0] == (byte)20) && ((c.PennyPresent || c.PennyLanePresent) && penny_ver < 15) ||
-                        (c.MercuryPresent && mercury_ver < 30))
+                    if ((metis_ver[0] == (byte)15) && ((c.PennyPresent || c.PennyLanePresent) && penny_ver != 15) ||
+                        (c.MercuryPresent && mercury_ver != 30))
                     {
-                        fwVersionMsg = "Invalid Firmware Level. Metis v2.0 requires Penny(Lane) v1.5 and Mercury v3.0\n";
+                        fwVersionMsg = "Invalid Firmware Level. Metis v1.5 requires Penny(Lane) v1.5 and Mercury v3.0\n";
                         result = false;
                         c.SetupForm.alex_fw_good = false;
                     }
                     else c.SetupForm.alex_fw_good = true;
                 }                    
 				//System.Console.WriteLine("!! METIS TODO firmware check stubbed"); 
-				return result; 
+                else if (c.MercuryPresent || (c.PennyPresent || c.PennyLanePresent))
+                {
+                    penny_ver = getPenelopeFWVersion();
+                    mercury_ver = getMercuryFWVersion();
+                    if ((metis_ver[0] == (byte)16) && ((c.PennyPresent || c.PennyLanePresent) && penny_ver != 16) ||
+                        (c.MercuryPresent && mercury_ver != 31))
+                    {
+                        fwVersionMsg = "Invalid Firmware Level. Metis v1.6 requires Penny(Lane) v1.6 and Mercury v3.1\n";
+                        result = false;
+                        c.SetupForm.alex_fw_good = false;
+                    }
+                    else c.SetupForm.alex_fw_good = true;
+                }
+                return result; 
             } 
 			
             string fx2_version_string = getFX2FirmwareVersionString();
@@ -419,11 +432,20 @@ namespace PowerSDR
                 }
 
                 if ((ozy_ver == 20) &&
-                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver < 15) ||
-                    (c != null && c.MercuryPresent && (merc_ver < 30))))
+                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 15) ||
+                    (c != null && c.MercuryPresent && (merc_ver != 30))))
                 {
                     result = false;
                     fwVersionMsg = "Invalid Firmware Level. Ozy v2.0 requires Penny(Lane) v1.5 and Mercury v3.0\n";
+                    c.SetupForm.alex_fw_good = false;
+                }
+
+                if ((ozy_ver == 21) &&
+                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16) ||
+                    (c != null && c.MercuryPresent && (merc_ver != 31))))
+                {
+                    result = false;
+                    fwVersionMsg = "Invalid Firmware Level. Ozy v2.1 requires Penny(Lane) v1.6 and Mercury v3.1\n";
                     c.SetupForm.alex_fw_good = false;
                 }
                 else c.SetupForm.alex_fw_good = true;

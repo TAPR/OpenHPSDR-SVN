@@ -899,8 +899,8 @@ unsigned char HermesFilt = 0;
                                                         samples_this_sync = 0;
                                                         ++SyncGainedCount;
                                                         HaveSync = 1;
-                                                        // printf("sync gained: bufnum: %d i: %d\n", buf_num, i);
-                                                        // printf("\nSG");
+                                                         printf("sync gained: bufnum: %d i: %d\n", buf_num, i);
+                                                         printf("\nSG");
                                                 }
                                                 break;
 
