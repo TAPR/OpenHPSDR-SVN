@@ -826,10 +826,10 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;ptbCWSpeed.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="udCWPitch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 20</value>
+    <value>201, 10</value>
   </data>
   <data name="udCWPitch.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 20</value>
@@ -850,7 +850,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;udCWPitch.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="udCWBreakInDelay.Location" type="System.Drawing.Point, System.Drawing">
     <value>152, 24</value>
@@ -940,7 +940,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;chkShowTXCWFreq.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="chkCWVAC.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -955,7 +955,7 @@
     <value>Off</value>
   </data>
   <data name="chkCWVAC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 20</value>
+    <value>265, 10</value>
   </data>
   <data name="chkCWVAC.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 19</value>
@@ -982,7 +982,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;chkCWVAC.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="chkCWDisableMonitor.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -1015,7 +1015,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;chkCWDisableMonitor.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="chkCWIambic.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -1048,7 +1048,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;chkCWIambic.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="udRX2FilterHigh.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3142,7 +3142,7 @@
     <value>Off</value>
   </data>
   <data name="chkVACStereo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 24</value>
+    <value>7, 24</value>
   </data>
   <data name="chkVACStereo.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 16</value>
@@ -3166,7 +3166,7 @@
     <value>grpVACStereo</value>
   </data>
   <data name="&gt;&gt;chkVACStereo.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="comboVACSampleRate.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -3194,6 +3194,12 @@
   </data>
   <data name="comboVACSampleRate.Items7" xml:space="preserve">
     <value>48000</value>
+  </data>
+  <data name="comboVACSampleRate.Items8" xml:space="preserve">
+    <value>96000</value>
+  </data>
+  <data name="comboVACSampleRate.Items9" xml:space="preserve">
+    <value>192000</value>
   </data>
   <data name="comboVACSampleRate.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 24</value>
@@ -6334,7 +6340,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;chkCWDisableTXDisplay.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="chkShowCWZero.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -6367,7 +6373,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;chkShowCWZero.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="radFMDeviation5kHz.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -6982,6 +6988,69 @@
     <value>panelDisplay2</value>
   </data>
   <data name="&gt;&gt;btnTNFAdd.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkCWVACIQ.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="chkCWVACIQ.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="chkCWVACIQ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 35</value>
+  </data>
+  <data name="chkCWVACIQ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 16</value>
+  </data>
+  <data name="chkCWVACIQ.TabIndex" type="System.Int32, mscorlib">
+    <value>119</value>
+  </data>
+  <data name="chkCWVACIQ.Text" xml:space="preserve">
+    <value>IQ Enable</value>
+  </data>
+  <data name="chkCWVACIQ.ToolTip" xml:space="preserve">
+    <value>Enable I/Q to VAC</value>
+  </data>
+  <data name="&gt;&gt;chkCWVACIQ.Name" xml:space="preserve">
+    <value>chkCWVACIQ</value>
+  </data>
+  <data name="&gt;&gt;chkCWVACIQ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=2.2.3.1, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkCWVACIQ.Parent" xml:space="preserve">
+    <value>panelModeSpecificCW</value>
+  </data>
+  <data name="&gt;&gt;chkCWVACIQ.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkVACIQEnabled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="chkVACIQEnabled.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 50</value>
+  </data>
+  <data name="chkVACIQEnabled.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 16</value>
+  </data>
+  <data name="chkVACIQEnabled.TabIndex" type="System.Int32, mscorlib">
+    <value>81</value>
+  </data>
+  <data name="chkVACIQEnabled.Text" xml:space="preserve">
+    <value>IQ Enable</value>
+  </data>
+  <data name="chkVACIQEnabled.ToolTip" xml:space="preserve">
+    <value>Click this button if the third party software will open the Virtual Audio Cable in 2 channel (stereo) mode.</value>
+  </data>
+  <data name="&gt;&gt;chkVACIQEnabled.Name" xml:space="preserve">
+    <value>chkVACIQEnabled</value>
+  </data>
+  <data name="&gt;&gt;chkVACIQEnabled.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=2.2.3.1, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkVACIQEnabled.Parent" xml:space="preserve">
+    <value>grpVACStereo</value>
+  </data>
+  <data name="&gt;&gt;chkVACIQEnabled.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -8338,7 +8407,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;lblCWSpeed.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblCWBreakInDelay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -8389,13 +8458,13 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;grpSemiBreakIn.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblCWPitchFreq.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
   <data name="lblCWPitchFreq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 20</value>
+    <value>121, 10</value>
   </data>
   <data name="lblCWPitchFreq.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 16</value>
@@ -8416,7 +8485,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;lblCWPitchFreq.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="panelAntenna.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -8536,7 +8605,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;panelAntenna.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="panelModeSpecificCW.Location" type="System.Drawing.Point, System.Drawing">
     <value>504, 424</value>
@@ -8557,7 +8626,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificCW.ZOrder" xml:space="preserve">
-    <value>44</value>
+    <value>43</value>
   </data>
   <data name="panelRX2Filter.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10054,7 +10123,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificPhone.ZOrder" xml:space="preserve">
-    <value>45</value>
+    <value>44</value>
   </data>
   <data name="panelModeSpecificDigital.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10123,13 +10192,13 @@
     <value>194, 76</value>
   </data>
   <data name="grpVACStereo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 56</value>
+    <value>96, 76</value>
   </data>
   <data name="grpVACStereo.TabIndex" type="System.Int32, mscorlib">
     <value>78</value>
   </data>
   <data name="grpVACStereo.Text" xml:space="preserve">
-    <value>Mono/Stereo</value>
+    <value>Chnls / IQ</value>
   </data>
   <data name="&gt;&gt;grpVACStereo.Name" xml:space="preserve">
     <value>grpVACStereo</value>
@@ -10216,7 +10285,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificDigital.ZOrder" xml:space="preserve">
-    <value>43</value>
+    <value>42</value>
   </data>
   <data name="panelDisplay.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -12445,7 +12514,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificFM.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>45</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -12542,7 +12611,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v2.2.3 (W5WC - 11/5/11) </value>
+    <value>PowerSDR™/OpenHPSDR v2.2.3 (W5WC - 11/30/11) </value>
   </data>
   <data name="&gt;&gt;timer_cpu_meter.Name" xml:space="preserve">
     <value>timer_cpu_meter</value>

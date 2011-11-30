@@ -69,7 +69,9 @@ namespace PowerSDR
 		Model model;
         bool alex_present = false;
         bool mercury_present = false;
-        bool penelope_present = false; 
+        bool penelope_present = false;
+        bool pennylane_present = false;
+        bool excalibur_present = false;
 
 		Console console;
 		private System.Windows.Forms.ButtonTS btnPrevious;
@@ -117,6 +119,11 @@ namespace PowerSDR
         private System.Windows.Forms.CheckBoxTS chkPenny;
         private System.Windows.Forms.CheckBoxTS chkAlex;
         private RadioButtonTS radGenModelHPSDR;
+        private RadioButtonTS radGenModelHermes;
+        private CheckBoxTS chkPennyLane;
+        private CheckBoxTS chkExcalibur;
+        private RadioButtonTS radOzy;
+        private RadioButtonTS radMetis;
         private System.ComponentModel.Container components = null;
 
 		#endregion
@@ -171,7 +178,10 @@ namespace PowerSDR
                 case Model.HPSDR:
                     radGenModelHPSDR.Checked = true;
                     break;
-			}
+                case Model.HERMES:
+                    radGenModelHermes.Checked = true;
+                    break;
+            }
 
 			CurPage = Page.WELCOME;
 			btnNext_Click(this, EventArgs.Empty);
@@ -206,6 +216,7 @@ namespace PowerSDR
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.grpModel = new System.Windows.Forms.GroupBoxTS();
+            this.radGenModelHermes = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelHPSDR = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelFLEX5000 = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelDemoNone = new System.Windows.Forms.RadioButtonTS();
@@ -243,6 +254,10 @@ namespace PowerSDR
             this.btnNext = new System.Windows.Forms.ButtonTS();
             this.btnPrevious = new System.Windows.Forms.ButtonTS();
             this.groupBoxHPSDR_Hardware = new System.Windows.Forms.GroupBoxTS();
+            this.radOzy = new System.Windows.Forms.RadioButtonTS();
+            this.radMetis = new System.Windows.Forms.RadioButtonTS();
+            this.chkExcalibur = new System.Windows.Forms.CheckBoxTS();
+            this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
             this.chkAlex = new System.Windows.Forms.CheckBoxTS();
             this.chkPenny = new System.Windows.Forms.CheckBoxTS();
             this.chkMercury = new System.Windows.Forms.CheckBoxTS();
@@ -279,6 +294,7 @@ namespace PowerSDR
             // 
             // grpModel
             // 
+            this.grpModel.Controls.Add(this.radGenModelHermes);
             this.grpModel.Controls.Add(this.radGenModelHPSDR);
             this.grpModel.Controls.Add(this.radGenModelFLEX5000);
             this.grpModel.Controls.Add(this.radGenModelDemoNone);
@@ -292,11 +308,23 @@ namespace PowerSDR
             this.grpModel.Text = "Model";
             this.grpModel.Visible = false;
             // 
+            // radGenModelHermes
+            // 
+            this.radGenModelHermes.AutoSize = true;
+            this.radGenModelHermes.Image = null;
+            this.radGenModelHermes.Location = new System.Drawing.Point(19, 45);
+            this.radGenModelHermes.Name = "radGenModelHermes";
+            this.radGenModelHermes.Size = new System.Drawing.Size(71, 17);
+            this.radGenModelHermes.TabIndex = 8;
+            this.radGenModelHermes.Text = "HERMES";
+            this.radGenModelHermes.UseVisualStyleBackColor = true;
+            this.radGenModelHermes.CheckedChanged += new System.EventHandler(this.radGenModelHermes_CheckedChanged);
+            // 
             // radGenModelHPSDR
             // 
             this.radGenModelHPSDR.AutoSize = true;
             this.radGenModelHPSDR.Image = null;
-            this.radGenModelHPSDR.Location = new System.Drawing.Point(16, 120);
+            this.radGenModelHPSDR.Location = new System.Drawing.Point(19, 20);
             this.radGenModelHPSDR.Name = "radGenModelHPSDR";
             this.radGenModelHPSDR.Size = new System.Drawing.Size(63, 17);
             this.radGenModelHPSDR.TabIndex = 7;
@@ -308,42 +336,46 @@ namespace PowerSDR
             // 
             this.radGenModelFLEX5000.Checked = true;
             this.radGenModelFLEX5000.Image = null;
-            this.radGenModelFLEX5000.Location = new System.Drawing.Point(16, 24);
+            this.radGenModelFLEX5000.Location = new System.Drawing.Point(16, 126);
             this.radGenModelFLEX5000.Name = "radGenModelFLEX5000";
             this.radGenModelFLEX5000.Size = new System.Drawing.Size(88, 24);
             this.radGenModelFLEX5000.TabIndex = 6;
             this.radGenModelFLEX5000.TabStop = true;
             this.radGenModelFLEX5000.Text = "FLEX-5000";
+            this.radGenModelFLEX5000.Visible = false;
             this.radGenModelFLEX5000.CheckedChanged += new System.EventHandler(this.radGenModelFLEX5000_CheckedChanged);
             // 
             // radGenModelDemoNone
             // 
             this.radGenModelDemoNone.Image = null;
-            this.radGenModelDemoNone.Location = new System.Drawing.Point(16, 96);
+            this.radGenModelDemoNone.Location = new System.Drawing.Point(16, 106);
             this.radGenModelDemoNone.Name = "radGenModelDemoNone";
             this.radGenModelDemoNone.Size = new System.Drawing.Size(88, 24);
             this.radGenModelDemoNone.TabIndex = 5;
             this.radGenModelDemoNone.Text = "Demo/None";
+            this.radGenModelDemoNone.Visible = false;
             this.radGenModelDemoNone.CheckedChanged += new System.EventHandler(this.radGenModelDemoNone_CheckedChanged);
             // 
             // radGenModelSoftRock40
             // 
             this.radGenModelSoftRock40.Image = null;
-            this.radGenModelSoftRock40.Location = new System.Drawing.Point(16, 72);
+            this.radGenModelSoftRock40.Location = new System.Drawing.Point(19, 100);
             this.radGenModelSoftRock40.Name = "radGenModelSoftRock40";
             this.radGenModelSoftRock40.Size = new System.Drawing.Size(88, 24);
             this.radGenModelSoftRock40.TabIndex = 4;
             this.radGenModelSoftRock40.Text = "Soft Rock 40";
+            this.radGenModelSoftRock40.Visible = false;
             this.radGenModelSoftRock40.CheckedChanged += new System.EventHandler(this.radGenModelSoftRock40_CheckedChanged);
             // 
             // radGenModelSDR1000
             // 
             this.radGenModelSDR1000.Image = null;
-            this.radGenModelSDR1000.Location = new System.Drawing.Point(16, 48);
+            this.radGenModelSDR1000.Location = new System.Drawing.Point(16, 80);
             this.radGenModelSDR1000.Name = "radGenModelSDR1000";
             this.radGenModelSDR1000.Size = new System.Drawing.Size(88, 24);
             this.radGenModelSDR1000.TabIndex = 3;
             this.radGenModelSDR1000.Text = "SDR-1000";
+            this.radGenModelSDR1000.Visible = false;
             this.radGenModelSDR1000.CheckedChanged += new System.EventHandler(this.radGenModelSDR1000_CheckedChanged);
             // 
             // groupBox2
@@ -868,21 +900,69 @@ namespace PowerSDR
             // 
             // groupBoxHPSDR_Hardware
             // 
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.radOzy);
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.radMetis);
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkExcalibur);
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkPennyLane);
             this.groupBoxHPSDR_Hardware.Controls.Add(this.chkAlex);
             this.groupBoxHPSDR_Hardware.Controls.Add(this.chkPenny);
             this.groupBoxHPSDR_Hardware.Controls.Add(this.chkMercury);
-            this.groupBoxHPSDR_Hardware.Location = new System.Drawing.Point(20, 69);
+            this.groupBoxHPSDR_Hardware.Location = new System.Drawing.Point(20, 32);
             this.groupBoxHPSDR_Hardware.Name = "groupBoxHPSDR_Hardware";
-            this.groupBoxHPSDR_Hardware.Size = new System.Drawing.Size(128, 120);
+            this.groupBoxHPSDR_Hardware.Size = new System.Drawing.Size(171, 157);
             this.groupBoxHPSDR_Hardware.TabIndex = 21;
             this.groupBoxHPSDR_Hardware.TabStop = false;
             this.groupBoxHPSDR_Hardware.Text = "HPSDR Hardware";
             this.groupBoxHPSDR_Hardware.Visible = false;
             // 
+            // radOzy
+            // 
+            this.radOzy.AutoSize = true;
+            this.radOzy.Checked = true;
+            this.radOzy.Image = null;
+            this.radOzy.Location = new System.Drawing.Point(114, 20);
+            this.radOzy.Name = "radOzy";
+            this.radOzy.Size = new System.Drawing.Size(43, 17);
+            this.radOzy.TabIndex = 24;
+            this.radOzy.TabStop = true;
+            this.radOzy.Text = "Ozy";
+            this.radOzy.UseVisualStyleBackColor = true;
+            // 
+            // radMetis
+            // 
+            this.radMetis.AutoSize = true;
+            this.radMetis.Image = null;
+            this.radMetis.Location = new System.Drawing.Point(114, 46);
+            this.radMetis.Name = "radMetis";
+            this.radMetis.Size = new System.Drawing.Size(50, 17);
+            this.radMetis.TabIndex = 23;
+            this.radMetis.Text = "Metis";
+            this.radMetis.UseVisualStyleBackColor = true;
+            // 
+            // chkExcalibur
+            // 
+            this.chkExcalibur.Image = null;
+            this.chkExcalibur.Location = new System.Drawing.Point(16, 123);
+            this.chkExcalibur.Name = "chkExcalibur";
+            this.chkExcalibur.Size = new System.Drawing.Size(80, 24);
+            this.chkExcalibur.TabIndex = 22;
+            this.chkExcalibur.Text = "Excalibur";
+            this.chkExcalibur.CheckedChanged += new System.EventHandler(this.chkExcalibur_CheckedChanged);
+            // 
+            // chkPennyLane
+            // 
+            this.chkPennyLane.Image = null;
+            this.chkPennyLane.Location = new System.Drawing.Point(16, 70);
+            this.chkPennyLane.Name = "chkPennyLane";
+            this.chkPennyLane.Size = new System.Drawing.Size(80, 24);
+            this.chkPennyLane.TabIndex = 3;
+            this.chkPennyLane.Text = "PennyLane";
+            this.chkPennyLane.CheckedChanged += new System.EventHandler(this.chkPennyLane_CheckedChanged);
+            // 
             // chkAlex
             // 
             this.chkAlex.Image = null;
-            this.chkAlex.Location = new System.Drawing.Point(16, 88);
+            this.chkAlex.Location = new System.Drawing.Point(16, 97);
             this.chkAlex.Name = "chkAlex";
             this.chkAlex.Size = new System.Drawing.Size(80, 24);
             this.chkAlex.TabIndex = 2;
@@ -892,7 +972,7 @@ namespace PowerSDR
             // chkPenny
             // 
             this.chkPenny.Image = null;
-            this.chkPenny.Location = new System.Drawing.Point(16, 56);
+            this.chkPenny.Location = new System.Drawing.Point(16, 43);
             this.chkPenny.Name = "chkPenny";
             this.chkPenny.Size = new System.Drawing.Size(80, 24);
             this.chkPenny.TabIndex = 1;
@@ -902,7 +982,7 @@ namespace PowerSDR
             // chkMercury
             // 
             this.chkMercury.Image = null;
-            this.chkMercury.Location = new System.Drawing.Point(16, 24);
+            this.chkMercury.Location = new System.Drawing.Point(16, 16);
             this.chkMercury.Name = "chkMercury";
             this.chkMercury.Size = new System.Drawing.Size(80, 24);
             this.chkMercury.TabIndex = 0;
@@ -930,7 +1010,6 @@ namespace PowerSDR
             // 
             // SetupWizard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
             this.ClientSize = new System.Drawing.Size(488, 286);
             this.Controls.Add(this.grpModel);
             this.Controls.Add(this.groupBox2);
@@ -970,6 +1049,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand80)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand160)).EndInit();
             this.groupBoxHPSDR_Hardware.ResumeLayout(false);
+            this.groupBoxHPSDR_Hardware.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -998,11 +1078,7 @@ namespace PowerSDR
 					groupBox2.Visible = false;
 					lblCombo.Visible = false;
 					grpModel.Visible = false;
-					lblMessage1.Text = "Welcome to the PowerSDR Setup Wizard.  This Setup Wizard is " +
-						"intended to simplify the setup process by providing you with an easy-to-use " +
-						"question/answer format.  Suggestions to improve this wizard are encouraged " +
-						"and can be emailed to support@flex-radio.com or posted on our Feature Request " +
-						"tool at http://support.flex-radio.com/.";
+                    lblMessage1.Text = "Welcome to the PowerSDR Setup Wizard.";
 					lblMessage2.Text = "";
 					pictureBox1.Image = null;
 					pictureBox1.Visible = false;
@@ -1046,8 +1122,7 @@ namespace PowerSDR
 					lblCombo.Visible = false;
 					grpModel.Visible = true;
 					lblMessage1.Text = "Please select the model of the radio you will be using.";
-					lblMessage2.Text = "If you are just trying out the software or will be running " +
-						"the software without any hardware connected, select the Demo/None option.";
+					lblMessage2.Text = " ";
 					radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
 					radGenModelSDR1000_CheckedChanged(this, EventArgs.Empty);
 					radGenModelSoftRock40_CheckedChanged(this, EventArgs.Empty);
@@ -1248,9 +1323,7 @@ namespace PowerSDR
 					groupBox2.Visible = false;
 					grpModel.Visible = false;
 					lblCombo.Visible = false;
-					lblMessage1.Text = "Setup is now complete.  To run this wizard again, select Setup " +
-						"from the main form and click the wizard button.  To close the wizard, click " +
-						"the Finish button.";
+					lblMessage1.Text = "Setup is now complete. ";
 					lblMessage2.Visible = false;
 					pictureBox1.Image = null;
 					pictureBox1.Visible = false;
@@ -1304,6 +1377,7 @@ namespace PowerSDR
 							btnFinished.Focus();
 							break;
                         case Model.HPSDR:
+                        case Model.HERMES:
                             CurPage = Page.HPSDR_HARDWARE_SELECT;
                             btnNext.Focus();
                             break;
@@ -1442,7 +1516,7 @@ namespace PowerSDR
                 case Page.FINISHED:
 					if(model == Model.FLEX5000 || model == Model.FLEX3000)
 						CurPage = Page.MODEL;
-                    else if (model == Model.HPSDR)
+                    else if (model == Model.HPSDR || model == Model.HERMES)
                         CurPage = Page.HPSDR_HARDWARE_SELECT;
                     else
 						CurPage = Page.SOUND_CARD;
@@ -1519,11 +1593,19 @@ namespace PowerSDR
 				case Model.FLEX3000:
                     break;
                 case Model.HERMES:
+                    console.SetupForm.PennyLanePresent = pennylane_present;
+                    console.SetupForm.MercuryPresent = mercury_present;
+                    console.SetupForm.AlexPresent = alex_present;
+                    console.SetupForm.forceAudioSampleRate1("192000");
                     break;
                 case Model.HPSDR:
                     console.SetupForm.PenelopePresent = penelope_present;
+                    console.SetupForm.PennyLanePresent = pennylane_present;
                     console.SetupForm.MercuryPresent = mercury_present;
                     console.SetupForm.AlexPresent = alex_present;
+                    console.SetupForm.ExcaliburPresent = excalibur_present;
+                    console.SetupForm.radOzyUSB.Checked = radOzy.Checked;
+                    console.SetupForm.radMetis.Checked = radMetis.Checked;
                     console.SetupForm.forceAudioSampleRate1("192000");
   					break;
 				default:
@@ -1692,13 +1774,13 @@ namespace PowerSDR
 				{
 					model = Model.FLEX5000;
 					//if(grpModel.Visible)
-						pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.flex-5000.jpg"));
+                    pictureBox1.Image = null; //new Bitmap(GetResource("PowerSDR.images.flex-5000.jpg"));
 				}
 				else
 				{
 					model = Model.FLEX3000;
 					//if(grpModel.Visible)
-						pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.flex-3000.jpg"));
+                    pictureBox1.Image = null;// new Bitmap(GetResource("PowerSDR.images.flex-3000.jpg"));
 				}
 			}
 		}
@@ -1709,7 +1791,7 @@ namespace PowerSDR
 			{
 				model = Model.SDR1000;
 				//if(grpModel.Visible)
-					pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.sdr-1000.jpg"));
+                pictureBox1.Image = null;// new Bitmap(GetResource("PowerSDR.images.sdr-1000.jpg"));
 			}
 		}
 
@@ -1743,23 +1825,67 @@ namespace PowerSDR
                 pictureBox1.Image = null;
                 pictureBox1.Visible = false;
                 //pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.hpsdr.jpg"));
+                chkMercury.Enabled = true;
+                chkPennyLane.Enabled = true;
+                chkPenny.Enabled = true;
+                chkExcalibur.Enabled = true;
+                chkAlex.Enabled = true;
+                chkMercury.Checked = false;
+                chkPennyLane.Checked = false;
+                chkMercury.Checked = false;
+                chkAlex.Checked = false;
+                chkExcalibur.Checked = false;
+                radOzy.Enabled = true;
             }
-
         }
-	
+
+        private void radGenModelHermes_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelHermes.Checked)
+            {
+                model = Model.HERMES;
+                //if (grpModel.Visible)
+                pictureBox1.Image = null;
+                pictureBox1.Visible = false;
+                //pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.hpsdr.jpg"));
+                chkMercury.Checked = radGenModelHermes.Checked;
+                chkPennyLane.Checked = radGenModelHermes.Checked;
+                chkMercury.Enabled = false;
+                chkPennyLane.Enabled = false;
+                chkPenny.Enabled = false;
+                chkPenny.Checked = false;
+                chkExcalibur.Enabled = false;
+                chkExcalibur.Checked = false;
+                chkAlex.Checked = false;
+                radMetis.Checked = true;
+                radOzy.Enabled = false;
+            }
+        }
+
         private void chkMercury_CheckedChanged(object sender, System.EventArgs e)
         {
             mercury_present = chkMercury.Checked;
-
         }
         private void chkPenny_CheckedChanged(object sender, System.EventArgs e)
         {
-            penelope_present = chkPenny.Checked;
+             penelope_present = chkPenny.Checked;
+             if (chkPenny.Checked) chkPennyLane.Checked = false;
+        }
+
+        private void chkPennyLane_CheckedChanged(object sender, System.EventArgs e)
+        {
+            pennylane_present = chkPennyLane.Checked;
+            if (chkPennyLane.Checked) chkPenny.Checked = false;
         }
 
         private void chkAlex_CheckedChanged(object sender, System.EventArgs e)
         {
             alex_present = chkAlex.Checked;
+        }
+
+        private void chkExcalibur_CheckedChanged(object sender, System.EventArgs e)
+        {
+            excalibur_present = chkExcalibur.Checked;
         }
         #endregion
     }

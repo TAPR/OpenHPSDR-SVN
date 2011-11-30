@@ -1790,7 +1790,8 @@ namespace PowerSDR
                                 x = W;
                                 break;
                         }
-
+                        console.DisplayGridX = x;
+                        console.DisplayGridW = (int)(x + size.Width);
                         y -= 8;
                         if (y + 9 < H)
                         {
@@ -1890,7 +1891,8 @@ namespace PowerSDR
                                 x = W;
                                 break;
                         }
-
+                        console.DisplayGridX = x;
+                        console.DisplayGridW = (int)(x + size.Width);
                         y -= 8;
                         if (y + 9 < H)
                         {
@@ -2008,6 +2010,8 @@ namespace PowerSDR
                                 break;
                         }
 
+                        console.DisplayGridX = x;
+                        console.DisplayGridW = (int)(x + size.Width);
                         y -= 8;
                         if (y + 9 < H)
                         {
@@ -3223,7 +3227,6 @@ namespace PowerSDR
                     if (bottom) g.DrawLine(hgrid_pen, 0, H + y, W, H + y);
                     else g.DrawLine(hgrid_pen, 0, y, W, y);
 
-
                     // Draw horizontal line labels
                     if (i != 1) // avoid intersecting vertical and horizontal labels
                     {
@@ -3231,7 +3234,7 @@ namespace PowerSDR
                         string label = num.ToString();
                         if (label.Length == 3)
                             xOffset = (int)g.MeasureString("-", font9).Width - 2;
-                        int offset = (int)(label.Length * 4.1);
+                       // int offset = (int)(label.Length * 4.1);
                         SizeF size = g.MeasureString(label, font9);
 
                         int x = 0;
@@ -3253,7 +3256,9 @@ namespace PowerSDR
                                 x = W;
                                 break;
                         }
-
+                        console.DisplayGridX = x;
+                        console.DisplayGridW = (int)(x + size.Width);
+                       // label = label + size.Width.ToString();
                         y -= 8;
                         if (y + 9 < H)
                         {

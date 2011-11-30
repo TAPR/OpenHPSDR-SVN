@@ -485,7 +485,7 @@ namespace PowerSDR
         private Thread update_rx1_dds_thread;
         private Thread update_rx2_dds_thread;
         private Thread update_tx_dds_thread;
-        private Thread audio_watchdog_thread;
+        //private Thread audio_watchdog_thread;
        // private Thread digital_watchdog_thread;
 		//private HiPerfTimer polltimer;
 
@@ -617,7 +617,7 @@ namespace PowerSDR
 		//private int wheel_tune_index;		
        // An index into the above array
 
-        private bool fcenter = true;
+       // private bool fcenter = true;
 
 		private RadioButtonTS[] vhf_text;
 		private bool was_panadapter = false;				// used to restore panadater when switching to spectrum DSP mode
@@ -741,6 +741,10 @@ namespace PowerSDR
 		private HiPerfTimer break_in_timer;
 		public double avg_vox_pwr = 0.0;
         public string pwr_mode;
+        private bool gridmaxadjust = false;
+        private bool gridminadjust = false;
+        private bool wfmaxadjust = false;
+        private bool wfminadjust = false;
 
 		// BT 11/05/2007
 		public PowerSDR.RemoteProfiles ProfileForm;
@@ -1309,6 +1313,8 @@ namespace PowerSDR
         private ToolStripMenuItem bandtoolStripMenuItem14;
         private System.Windows.Forms.Timer timerNotchZoom;
         private PrettyTrackBar ptbFMMic;
+        private CheckBoxTS chkVACIQEnabled;
+        private CheckBoxTS chkCWVACIQ;
 		private CheckBoxTS chkFullDuplex;
 
 		#endregion
@@ -2042,6 +2048,8 @@ namespace PowerSDR
             this.chkFMTXRev = new System.Windows.Forms.CheckBoxTS();
             this.chkTNF = new System.Windows.Forms.CheckBoxTS();
             this.btnTNFAdd = new System.Windows.Forms.ButtonTS();
+            this.chkCWVACIQ = new System.Windows.Forms.CheckBoxTS();
+            this.chkVACIQEnabled = new System.Windows.Forms.CheckBoxTS();
             this.picSquelch = new System.Windows.Forms.PictureBox();
             this.picRX2Squelch = new System.Windows.Forms.PictureBox();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
@@ -3381,7 +3389,9 @@ namespace PowerSDR
             resources.GetString("comboVACSampleRate.Items4"),
             resources.GetString("comboVACSampleRate.Items5"),
             resources.GetString("comboVACSampleRate.Items6"),
-            resources.GetString("comboVACSampleRate.Items7")});
+            resources.GetString("comboVACSampleRate.Items7"),
+            resources.GetString("comboVACSampleRate.Items8"),
+            resources.GetString("comboVACSampleRate.Items9")});
             this.comboVACSampleRate.Name = "comboVACSampleRate";
             this.toolTip1.SetToolTip(this.comboVACSampleRate, resources.GetString("comboVACSampleRate.ToolTip"));
             this.comboVACSampleRate.SelectedIndexChanged += new System.EventHandler(this.comboVACSampleRate_SelectedIndexChanged);
@@ -4558,6 +4568,24 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.btnTNFAdd, resources.GetString("btnTNFAdd.ToolTip"));
             this.btnTNFAdd.Click += new System.EventHandler(this.btnTNFAdd_Click);
             // 
+            // chkCWVACIQ
+            // 
+            resources.ApplyResources(this.chkCWVACIQ, "chkCWVACIQ");
+            this.chkCWVACIQ.ForeColor = System.Drawing.Color.White;
+            this.chkCWVACIQ.Image = null;
+            this.chkCWVACIQ.Name = "chkCWVACIQ";
+            this.toolTip1.SetToolTip(this.chkCWVACIQ, resources.GetString("chkCWVACIQ.ToolTip"));
+            this.chkCWVACIQ.CheckedChanged += new System.EventHandler(this.chkCWVACIQ_CheckedChanged);
+            // 
+            // chkVACIQEnabled
+            // 
+            this.chkVACIQEnabled.ForeColor = System.Drawing.Color.White;
+            this.chkVACIQEnabled.Image = null;
+            resources.ApplyResources(this.chkVACIQEnabled, "chkVACIQEnabled");
+            this.chkVACIQEnabled.Name = "chkVACIQEnabled";
+            this.toolTip1.SetToolTip(this.chkVACIQEnabled, resources.GetString("chkVACIQEnabled.ToolTip"));
+            this.chkVACIQEnabled.CheckedChanged += new System.EventHandler(this.chkVACIQEnabled_CheckedChanged);
+            // 
             // picSquelch
             // 
             this.picSquelch.BackColor = System.Drawing.SystemColors.ControlText;
@@ -5345,6 +5373,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelModeSpecificCW, "panelModeSpecificCW");
             this.panelModeSpecificCW.BackColor = System.Drawing.Color.Transparent;
+            this.panelModeSpecificCW.Controls.Add(this.chkCWVACIQ);
             this.panelModeSpecificCW.Controls.Add(this.chkShowCWZero);
             this.panelModeSpecificCW.Controls.Add(this.chkCWDisableTXDisplay);
             this.panelModeSpecificCW.Controls.Add(this.ptbCWSpeed);
@@ -5936,6 +5965,7 @@ namespace PowerSDR
             // 
             // grpVACStereo
             // 
+            this.grpVACStereo.Controls.Add(this.chkVACIQEnabled);
             this.grpVACStereo.Controls.Add(this.chkVACStereo);
             this.grpVACStereo.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.grpVACStereo, "grpVACStereo");
@@ -6784,10 +6814,10 @@ namespace PowerSDR
             this.Controls.Add(this.panelMode);
             this.Controls.Add(this.panelBandHF);
             this.Controls.Add(this.panelBandVHF);
-            this.Controls.Add(this.panelModeSpecificFM);
             this.Controls.Add(this.panelModeSpecificDigital);
             this.Controls.Add(this.panelModeSpecificCW);
             this.Controls.Add(this.panelModeSpecificPhone);
+            this.Controls.Add(this.panelModeSpecificFM);
             this.KeyPreview = true;
             this.Name = "Console";
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Console_MouseWheel);
@@ -24475,7 +24505,22 @@ namespace PowerSDR
 			}
 		}
 
-		private int audio_driver_index1 = 0;
+        private bool vaciq_enabled = false;
+        public bool VACIQEnabled
+        {
+            get { return vaciq_enabled; }
+            set
+            {
+                vaciq_enabled = value;
+                Audio.VACOutputIQ = value;
+                if (chkVACIQEnabled != null) chkVACIQEnabled.Checked = value;
+                if (chkCWVAC != null) chkCWVACIQ.Checked = value;
+               // if (chkPhoneVAC != null) chkPhoneVAC.Checked = value;
+               // if (chkFMVAC != null) chkFMVAC.Checked = value;
+            }
+        }
+
+        private int audio_driver_index1 = 0;
 		public int AudioDriverIndex1
 		{
 			get { return audio_driver_index1; }
@@ -24696,7 +24741,27 @@ namespace PowerSDR
 			}
 		}
 
-		private int display_fps = 15;
+        private int display_grid_x = 0;
+        public int DisplayGridX
+        {
+            get { return display_grid_x; }
+            set
+            {
+                display_grid_x = value;
+            }
+        }
+
+        private int display_grid_w = 0;
+        public int DisplayGridW
+        {
+            get { return display_grid_w; }
+            set
+            {
+                display_grid_w = value;
+            }
+        }
+
+        private int display_fps = 15;
 		private int display_delay = 1000 / 15;
 		public int DisplayFPS
 		{
@@ -28795,29 +28860,6 @@ namespace PowerSDR
             }
         }
 
-        private void AudioWatchdog()
-        {
-            int limit = sample_rate1 / Audio.BlockSize;
-            int count = 0;
-            HiPerfTimer t = new HiPerfTimer();
-            t.Start();
-
-            while (chkPower.Checked)
-            {
-                if (Audio.EmptyBuffers > limit) // 1 second dropout
-                {
-                    Audio.TestMute = false;
-                    count++;
-                    Audio.StopAudio1();
-                    if (vac_enabled) 
-                        Audio.StopAudioVAC();
-                    Thread.Sleep(500);
-                    this.Invoke(new MethodInvoker(AudioStart));
-                }
-                Thread.Sleep(3000);
-            }
-        }
-
         private void AudioStart()
         {
             Audio.Start();
@@ -30190,24 +30232,6 @@ namespace PowerSDR
                     update_rx2_dds_thread.Start();
                 }
 
-                if(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                {
-                    audio_watchdog_thread = new Thread(new ThreadStart(AudioWatchdog));
-                    audio_watchdog_thread.Name = "Audio Watchdog Thread";
-                    audio_watchdog_thread.Priority = ThreadPriority.Lowest; 
-                    audio_watchdog_thread.IsBackground = true;                    
-                    audio_watchdog_thread.Start();
-                }
-
-             /*   if (current_model == Model.HPSDR || current_model == Model.HERMES) //test for buffer drain
-                {
-                    digital_watchdog_thread = new Thread(new ThreadStart(DigitalWatchdog));
-                    digital_watchdog_thread.Name = "Digital Watchdog Thread";
-                    digital_watchdog_thread.Priority = ThreadPriority.Lowest;
-                    digital_watchdog_thread.IsBackground = true;
-                    digital_watchdog_thread.Start();
-                } */
-
                 if (!rx_only)
                 {
                     chkMOX.Enabled = true;
@@ -31147,7 +31171,13 @@ namespace PowerSDR
 			else chkVACEnabled.BackColor = SystemColors.Control;
 		}
 
-		private void chkNoiseGate_CheckedChanged(object sender, System.EventArgs e)
+        private void chkVACIQEnabled_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (SetupForm != null) SetupForm.VACIQEnable = chkVACIQEnabled.Checked;
+            vaciq_enabled = chkVACIQEnabled.Checked;          
+        }
+
+        private void chkNoiseGate_CheckedChanged(object sender, System.EventArgs e)
 		{
 			if(SetupForm != null) SetupForm.NoiseGateEnabled = chkNoiseGate.Checked;
 
@@ -32488,7 +32518,12 @@ namespace PowerSDR
 			else chkCWVAC.BackColor = SystemColors.Control;
 		}
 
-		private void chkCWIambic_CheckedChanged(object sender, System.EventArgs e)
+        private void chkCWVACIQ_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (SetupForm != null) SetupForm.VACIQEnable = chkCWVACIQ.Checked;
+         }
+
+        private void chkCWIambic_CheckedChanged(object sender, System.EventArgs e)
 		{
 			if(SetupForm != null) SetupForm.CWIambic = chkCWIambic.Checked;
 		}
@@ -34153,8 +34188,7 @@ namespace PowerSDR
         private int notch_drag_max_delta_y = 0;
         private bool notch_zoom = false;
 
-
-        private void picDisplay_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void picDisplay_MouseMove(object sender, MouseEventArgs e)
         {
             Cursor next_cursor = null;
             try
@@ -34243,6 +34277,34 @@ namespace PowerSDR
                         string temp_text = rf_freq.ToString("f6") + " MHz";
                         int jper = temp_text.IndexOf(separator) + 4;
                         txtDisplayCursorFreq.Text = String.Copy(temp_text.Insert(jper, " "));
+
+                        if (!mox)
+                        {
+                            //Color grid_text_color = Display.GridTextColor;
+                            if ((e.X > display_grid_x && e.X < display_grid_w) &&
+                                (e.Y < picDisplay.Height / 2 && e.Y > 10))
+                            {
+                                // Display.GridTextColor = Color.Red;
+                                Cursor = Cursors.PanNorth;
+                                gridmaxadjust = true;
+                                gridminadjust = false;
+                            }
+                            else if ((e.X > display_grid_x && e.X < display_grid_w) &&
+                                (e.Y > picDisplay.Height / 2 && e.Y < picDisplay.Height - 10))
+                            {
+                                // Display.GridTextColor = Color.Green;
+                                Cursor = Cursors.PanSouth;
+                                gridminadjust = true;
+                                gridmaxadjust = false;
+                            }
+                            else
+                            {
+                                //  Display.GridTextColor = SetupForm.clrbtnText.Color;
+                                Cursor = Cursors.Cross;
+                                gridmaxadjust = false;
+                                gridminadjust = false;
+                            }
+                        }
                         break;
                     case DisplayMode.PANADAPTER:
                     case DisplayMode.WATERFALL:
@@ -34256,10 +34318,64 @@ namespace PowerSDR
                             case DisplayMode.PANADAPTER:
                                 y = PixelToDb(e.Y);
                                 txtDisplayCursorPower.Text = y.ToString("f1") + "dBm";
+                                if (!mox)
+                                {
+                                    //Color grid_text_color = Display.GridTextColor;
+                                    if ((e.X > display_grid_x && e.X < display_grid_w) &&
+                                        (e.Y < picDisplay.Height / 2 && e.Y > 10))
+                                    {
+                                        // Display.GridTextColor = Color.Red;
+                                        Cursor = Cursors.PanNorth;
+                                        gridmaxadjust = true;
+                                        gridminadjust = false;
+                                    }
+                                    else if ((e.X > display_grid_x && e.X < display_grid_w) &&
+                                        (e.Y > picDisplay.Height / 2 && e.Y < picDisplay.Height - 10))
+                                    {
+                                        // Display.GridTextColor = Color.Green;
+                                        Cursor = Cursors.PanSouth;
+                                        gridminadjust = true;
+                                        gridmaxadjust = false;
+                                    }
+                                    else
+                                    {
+                                        //  Display.GridTextColor = SetupForm.clrbtnText.Color;
+                                        Cursor = Cursors.Cross;
+                                        gridmaxadjust = false;
+                                        gridminadjust = false;
+                                    }
+                                }
                                 break;
                             case DisplayMode.WATERFALL:
                                 y = WaterfallPixelToTime(e.Y);
                                 txtDisplayCursorPower.Text = (y / 1000.0f).ToString("f1") + "sec";
+                                if (!mox)
+                                {
+                                    //Color grid_text_color = Display.GridTextColor;
+                                    if ((e.X > 5 && e.X < 25) &&
+                                        (e.Y < picDisplay.Height / 2 && e.Y > 10))
+                                    {
+                                        // Display.GridTextColor = Color.Red;
+                                        Cursor = Cursors.SizeNS;
+                                        wfmaxadjust = true;
+                                        wfminadjust = false;
+                                    }
+                                    else if ((e.X > 5 && e.X < 25) &&
+                                        (e.Y > picDisplay.Height / 2 && e.Y < picDisplay.Height - 10))
+                                    {
+                                        // Display.GridTextColor = Color.Green;
+                                        Cursor = Cursors.SizeNS;
+                                        wfminadjust = true;
+                                        wfmaxadjust = false;
+                                    }
+                                    else
+                                    {
+                                        //  Display.GridTextColor = SetupForm.clrbtnText.Color;
+                                        Cursor = Cursors.Cross;
+                                        wfmaxadjust = false;
+                                        wfminadjust = false;
+                                    }
+                                }
                                 break;
                             case DisplayMode.PANAFALL:
                                 if (e.Y < picDisplay.Height / 2)
@@ -34554,7 +34670,7 @@ namespace PowerSDR
 			Cursor = Cursors.Default;
 		}
 
-		private void picDisplay_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+		private void picDisplay_MouseDown(object sender, MouseEventArgs e)
 		{
 			switch(e.Button)
 			{
@@ -34596,7 +34712,7 @@ namespace PowerSDR
                                             break;
                                     }
                                 }
-
+                                
                                 int low = (int)PixelToHz(e.X - 3);
                                 int high = (int)PixelToHz(e.X + 3);
 
@@ -34633,6 +34749,60 @@ namespace PowerSDR
                                                 list[index].RX = 2;
                                         }
                                     }
+                                }
+                                break;
+                        }
+                    }
+
+                    if (!mox)
+                    {
+                        switch (Display.CurrentDisplayMode)
+                        {
+                            case DisplayMode.PANADAPTER:
+                            case DisplayMode.HISTOGRAM:
+                            case DisplayMode.SPECTRUM:
+
+                                if (gridmaxadjust)
+                                {
+                                    decimal val = SetupForm.udDisplayGridMax.Value;
+                                    val += 5;
+
+                                    if (val > SetupForm.udDisplayGridMax.Maximum)
+                                        val = SetupForm.udDisplayGridMax.Maximum;
+
+                                    SetupForm.udDisplayGridMax.Value = val;
+                                }
+                                if (gridminadjust)
+                                {
+                                    decimal val = SetupForm.udDisplayGridMin.Value;
+                                    val += 5;
+
+                                    if (val > SetupForm.udDisplayGridMin.Maximum)
+                                        val = SetupForm.udDisplayGridMin.Maximum;
+
+                                    SetupForm.udDisplayGridMin.Value = val;
+                                }
+                                break;
+                             case DisplayMode.WATERFALL:
+                                if (wfmaxadjust)
+                                {
+                                    decimal val = SetupForm.udDisplayWaterfallHighLevel.Value;
+                                    val += 5;
+
+                                    if (val > SetupForm.udDisplayWaterfallHighLevel.Maximum)
+                                        val = SetupForm.udDisplayWaterfallHighLevel.Maximum;
+
+                                    SetupForm.udDisplayWaterfallHighLevel.Value = val;
+                                }
+                                if (wfminadjust)
+                                {
+                                    decimal val = SetupForm.udDisplayWaterfallLowLevel.Value;
+                                    val += 5;
+
+                                    if (val > SetupForm.udDisplayWaterfallLowLevel.Maximum)
+                                        val = SetupForm.udDisplayWaterfallLowLevel.Maximum;
+
+                                    SetupForm.udDisplayWaterfallLowLevel.Value = val;
                                 }
                                 break;
                         }
@@ -34989,6 +35159,47 @@ namespace PowerSDR
                         toolStripNotchVeryDeep.Checked = (lst[0].Depth == 3);
                     }
                     else
+                        if (gridmaxadjust)
+                        {
+                            decimal val = SetupForm.udDisplayGridMax.Value;
+                            val -= 5;
+
+                            if (val < SetupForm.udDisplayGridMax.Minimum)
+                                val = SetupForm.udDisplayGridMax.Minimum;
+
+                            SetupForm.udDisplayGridMax.Value = val;
+                        }
+                        else  if (gridminadjust)
+                    {
+                        decimal val = SetupForm.udDisplayGridMin.Value;
+                        val -= 5;
+
+                        if (val < SetupForm.udDisplayGridMin.Minimum)
+                            val = SetupForm.udDisplayGridMin.Minimum;
+
+                        SetupForm.udDisplayGridMin.Value = val;
+                    }              
+                    else if (wfmaxadjust)
+                    {
+                        decimal val = SetupForm.udDisplayWaterfallHighLevel.Value;
+                        val -= 5;
+
+                        if (val < SetupForm.udDisplayWaterfallHighLevel.Minimum)
+                            val = SetupForm.udDisplayWaterfallHighLevel.Minimum;
+
+                        SetupForm.udDisplayWaterfallHighLevel.Value = val;
+                    }
+                    else if (wfminadjust)
+                    {
+                        decimal val = SetupForm.udDisplayWaterfallLowLevel.Value;
+                        val -= 5;
+
+                        if (val < SetupForm.udDisplayWaterfallLowLevel.Minimum)
+                            val = SetupForm.udDisplayWaterfallLowLevel.Minimum;
+
+                        SetupForm.udDisplayWaterfallLowLevel.Value = val;
+                    }
+                    else
                     {
    					switch(current_click_tune_mode)
 					{
@@ -35017,7 +35228,7 @@ namespace PowerSDR
 			}
 		}
 
-		private void picDisplay_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+		private void picDisplay_MouseUp(object sender, MouseEventArgs e)
 		{
 			if(e.Button == MouseButtons.Left)
 			{
@@ -35073,27 +35284,31 @@ namespace PowerSDR
 			}
 		}
 
-		private void picDisplay_DoubleClick(object sender, System.EventArgs e)
+		private void picDisplay_DoubleClick(object sender, EventArgs e)
 		{
 			int new_val = (int)PixelToDb(display_cursor_y);
-			if(!mox) //RX1
-			{
-	                if (rx1_dsp_mode == DSPMode.FM)
-                    return;
+            if (!(gridmaxadjust || gridminadjust))
+            {
+                if (!mox) //RX1
+                {
+                    if (rx1_dsp_mode == DSPMode.FM)
+                        return;
 
-				if (new_val > ptbSquelch.Maximum) new_val = ptbSquelch.Maximum;
-                if (new_val < ptbSquelch.Minimum) new_val = ptbSquelch.Minimum;
-                ptbSquelch.Value = new_val;
-                ptbSquelch_Scroll(this, EventArgs.Empty);
-			}
-			else // TX
-			{
-				new_val += 24;
-                if (new_val > ptbNoiseGate.Maximum) new_val = ptbNoiseGate.Maximum;
-                if (new_val < ptbNoiseGate.Minimum) new_val = ptbNoiseGate.Minimum;
-                ptbNoiseGate.Value = new_val;
-                ptbNoiseGate_Scroll(this, EventArgs.Empty);
-			}
+                    if (new_val > ptbSquelch.Maximum) new_val = ptbSquelch.Maximum;
+                    if (new_val < ptbSquelch.Minimum) new_val = ptbSquelch.Minimum;
+                    ptbSquelch.Value = new_val;
+                    ptbSquelch_Scroll(this, EventArgs.Empty);
+                }
+                else // TX
+                {
+                    new_val += 24;
+                    if (new_val > ptbNoiseGate.Maximum) new_val = ptbNoiseGate.Maximum;
+                    if (new_val < ptbNoiseGate.Minimum) new_val = ptbNoiseGate.Minimum;
+                    ptbNoiseGate.Value = new_val;
+                    ptbNoiseGate_Scroll(this, EventArgs.Empty);
+                }
+            }
+
 		}
 
 		private void picDisplay_Resize(object sender, System.EventArgs e)
