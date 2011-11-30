@@ -34356,7 +34356,7 @@ namespace PowerSDR
                                         (e.Y < picDisplay.Height / 2 && e.Y > 10))
                                     {
                                         // Display.GridTextColor = Color.Red;
-                                        Cursor = Cursors.SizeNS;
+                                        Cursor = Cursors.PanNorth;
                                         wfmaxadjust = true;
                                         wfminadjust = false;
                                     }
@@ -34364,7 +34364,7 @@ namespace PowerSDR
                                         (e.Y > picDisplay.Height / 2 && e.Y < picDisplay.Height - 10))
                                     {
                                         // Display.GridTextColor = Color.Green;
-                                        Cursor = Cursors.SizeNS;
+                                        Cursor = Cursors.PanSouth;
                                         wfminadjust = true;
                                         wfmaxadjust = false;
                                     }
