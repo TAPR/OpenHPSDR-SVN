@@ -337,11 +337,11 @@ namespace PowerSDR
                     if ((metis_ver[0] >= (byte)14) && (penny_ver < 14) ||
                         (metis_ver[0] <= (byte)13) && (penny_ver > 13))
                     {
-                       fwVersionMsg = "Invalid Firmware Level. Metis v1.9 requires Penelope v1.4 or PennyLane v1.4\n";
+                       fwVersionMsg = "Invalid Firmware Level. Metis v1.4 requires Penelope v1.4 or PennyLane v1.4\n";
                        result = false;
                     }
                 }    
-                else if (c.MercuryPresent || (c.PennyPresent || c.PennyLanePresent))
+                 if (c.MercuryPresent || (c.PennyPresent || c.PennyLanePresent))
                {
                     penny_ver = getPenelopeFWVersion();
                     mercury_ver = getMercuryFWVersion();
@@ -352,10 +352,9 @@ namespace PowerSDR
                         result = false;
                         c.SetupForm.alex_fw_good = false;
                     }
-                    else c.SetupForm.alex_fw_good = true;
                 }                    
 				//System.Console.WriteLine("!! METIS TODO firmware check stubbed"); 
-                else if (c.MercuryPresent || (c.PennyPresent || c.PennyLanePresent))
+                  if (c.MercuryPresent || (c.PennyPresent || c.PennyLanePresent))
                 {
                     penny_ver = getPenelopeFWVersion();
                     mercury_ver = getMercuryFWVersion();
@@ -366,7 +365,11 @@ namespace PowerSDR
                         result = false;
                         c.SetupForm.alex_fw_good = false;
                     }
-                    else c.SetupForm.alex_fw_good = true;
+                    else 
+                    { 
+                        result = true;
+                        c.SetupForm.alex_fw_good = true; 
+                    }
                 }
                 return result; 
             } 
@@ -448,7 +451,11 @@ namespace PowerSDR
                     fwVersionMsg = "Invalid Firmware Level. Ozy v2.1 requires Penny(Lane) v1.6 and Mercury v3.1\n";
                     c.SetupForm.alex_fw_good = false;
                 }
-                else c.SetupForm.alex_fw_good = true;
+                else
+                {
+                    result = true;
+                    c.SetupForm.alex_fw_good = true;
+                }
 
 
               /*  if ((ozy_ver < 13) ||
