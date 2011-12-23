@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     data->setMinimumHeader();
 
     add = new addDialog();
-    readDefinitions("../qtlogger/adif_codes_2.2.7.xml");
+    readDefinitions("../QtLogger/adif_codes_2.2.7.xml");
 
     add->loadmodeComboBox( modes );
     add->loadcountryComboBox( country );
