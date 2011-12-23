@@ -1,0 +1,9 @@
+This program has been compiled on Linux and Windows using the Qt 4.7.4 
+and Qt Creator 2.3. Compiler availiable from http://qt.nokia.com/
+
+Note that the adif-2.2.7.xml, Help directory and the svg files need 
+to be in the same directory as the exicutable at the current time for 
+the program to function correctly.
+
+Dave, KV0S
+
