@@ -34,6 +34,7 @@
 #include <QString>
 #include <QUdpSocket>
 #include <QScrollBar>
+#include <QLabel>
 
 #include "about.h"
 #include "help.h"
@@ -41,6 +42,8 @@
 #include "adddialog.h"
 #include "adifhandler.h"
 #include "range.h"
+#include "preferences.h"
+#include "lastcontact.h"
 
 
 namespace Ui {
@@ -57,23 +60,41 @@ public:
     QString version;
     void readDefinitions( QString filename );
 
+
 private slots:
     void update();
     void writeData();
     void processPendingDatagrams();
     void updateStatus();
+    void updateOwner();
+    void updateView();
     void closeDown();
+    void removeTableRow(QModelIndex idx);
+    void setDeleteFlag( bool flg );
+    void setOwner( QString );
+    void setQTH( QString );
+    void setGrid( QString );
+    void setStation( QString );
+    void setLogDirectory();
+
 
 private:
     Ui::MainWindow *ui;
     Data *data;
     addDialog *add;
+    Preferences * pref;
+    lastContact * last;
     QUdpSocket *udpSocket;
     QString parseDatagrams( QString data );
     QStringList *modes;
     QStringList *country;
     QStringList *subdivisions;
     QHash <QString, Range> bands;
+    QSettings settings;
+    QLabel *logfileIndicator;
+    bool deleteFlag;
+
+
 
 
 };

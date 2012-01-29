@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icons/icons/QtLogger.svg</normaloff>:/icons/icons/QtLogger.svg</iconset>
+    <normaloff>:/icons/QtLogger.svg</normaloff>:/icons/QtLogger.svg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -39,7 +39,7 @@
      <x>0</x>
      <y>0</y>
      <width>631</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="focusPolicy">
@@ -52,6 +52,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionLog_Directory"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionQuit"/>
@@ -69,8 +70,18 @@
      <string>Contacts</string>
     </property>
     <addaction name="actionAdd"/>
+    <addaction name="actionLast_Contact"/>
+    <addaction name="separator"/>
+    <addaction name="actionDelete"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionPreferences"/>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuView"/>
    <addaction name="menuContacts"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -82,6 +93,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionAdd"/>
+   <addaction name="actionDelete"/>
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="font">
@@ -103,14 +115,7 @@
   <action name="actionAdd">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/plus-green.svg</normaloff>
-     <normalon>:/icons/icons/plus-green.svg</normalon>
-     <disabledoff>:/icons/icons/plus-green.svg</disabledoff>
-     <disabledon>:/icons/icons/plus-green.svg</disabledon>
-     <activeoff>:/icons/icons/plus-green.svg</activeoff>
-     <activeon>:/icons/icons/plus-green.svg</activeon>
-     <selectedoff>:/icons/icons/plus-green.svg</selectedoff>
-     <selectedon>:/icons/icons/plus-green.svg</selectedon>:/icons/icons/plus-green.svg</iconset>
+     <normaloff>:/icons/plus-green.svg</normaloff>:/icons/plus-green.svg</iconset>
    </property>
    <property name="text">
     <string>Add</string>
@@ -125,10 +130,46 @@
    <property name="text">
     <string>Open</string>
    </property>
+   <property name="toolTip">
+    <string>Open open an XML or ADIF log file</string>
+   </property>
   </action>
   <action name="actionSave">
    <property name="text">
     <string>Save</string>
+   </property>
+   <property name="toolTip">
+    <string> Save an XML or ADIF log file</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/minus-red.svg</normaloff>:/icons/minus-red.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete button must be toggled on to delete rows.</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionLog_Directory">
+   <property name="text">
+    <string>Log Directory</string>
+   </property>
+  </action>
+  <action name="actionLast_Contact">
+   <property name="text">
+    <string>Last Contact</string>
    </property>
   </action>
  </widget>

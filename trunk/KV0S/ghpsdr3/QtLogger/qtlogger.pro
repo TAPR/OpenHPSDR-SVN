@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     adifhandler.cpp \
     range.cpp \
     loghandler.cpp \
-    adif.cpp
+    adif.cpp \
+    preferences.cpp \
+    lastcontact.cpp
 
 HEADERS  += mainwindow.h \
     about.h \
@@ -29,11 +31,15 @@ HEADERS  += mainwindow.h \
     adifhandler.h \
     range.h \
     loghandler.h \
-    adif.h
+    adif.h \
+    preferences.h \
+    lastcontact.h
 
 FORMS    += mainwindow.ui \
     help.ui \
     adddialog.ui \
+    preferences.ui \
+    lastcontact.ui
 
 OTHER_FILES += \
     help/daveStyle.css \

@@ -27,6 +27,7 @@
 
 
 
+
 #include "data.h"
 
 Data::Data(QWidget *parent) :
@@ -44,11 +45,15 @@ Data::~Data()
 
 void Data::setMinimumHeader()
 {
-    *hdr << "CALL" << "QSO_DATE" << "TIME_ON";
+    *hdr << "CALL" << "NAME" << "QSO_DATE" << "TIME_ON";
     *hdr << "FREQ" << "MODE" << "BAND";
     *hdr << "TX_RST"<< "RX_RST" << "COUNTRY";
-    *hdr << "NAME" << "QTH" << "STATE" << "EVENT";
+    *hdr << "QTH" << "GRIDSQUARE" << "STATE" << "CNTY";
+    *hdr << "COMMENT" << "EVENT";
     *hdr << "CONTACT" << "CHECK";
+    *hdr << "OPERATOR" << "HOME_QTH" << "HOME_GRID" << "STATION_CALL";
+    *hdr << "QSL_SENT" <<"QSL_SENT_VIA";
+    *hdr << "QSL_RCVD" << "QSL_RCVD_VIA";
     //qDebug() << *hdr;
 }
 
@@ -88,7 +93,7 @@ void Data::writeXmlData( QString filename )
       stream << QString("<?xml-stylesheet type=\"text/xsl\" href=\"qtlogger.xsl\" ?>") << endl;
       stream << QString("<AmateurRadioLog>") << endl;
       stream << QString("  <header>") << endl;
-      stream << QString("    <file>") << endl;
+      stream << QString("    <program>") << endl;
       stream << QString("      <author>Dave Larsen KV0S</author>") << endl;
       stream << QString("      <info>For more information see: http://openhpsdr.org</info>") << endl;
       stream << QString("      <created>");
@@ -96,7 +101,7 @@ void Data::writeXmlData( QString filename )
       stream << QString(" UTC</created>") << endl;
       stream << QString("      <program>QtLogger</program>") << endl;
       stream << QString("      <programversion>%1</programversion>").arg( "1.0.1" ) << endl;  // fix to mainWindow version
-      stream << QString("    </file>") << endl;
+      stream << QString("    </program>") << endl;
       stream << QString("  </header>") << endl;
       stream << QString("  <contacts>") << endl;
 
@@ -108,14 +113,14 @@ void Data::writeXmlData( QString filename )
               QStandardItem * it;
               QString value;
               QString name;
-              int size;
+              //int size = 0;
               it = model->item(i,j);
               if( !(it == 0) )
               {
                  name = (model->horizontalHeaderItem(j))->text();
                  value = (model->item(i,j))->text();
                  value.remove(QRegExp(" $"));
-                 size = value.length();
+                 //size = value.length();
                  stream << QString("     <");
                  stream << name.toLower();
                  stream << QString(">");
@@ -137,8 +142,10 @@ void Data::writeXmlData( QString filename )
 QString* Data::readData()
 {
     QString *filetype = new QString();
-    filename =  QFileDialog::getOpenFileName(this, tr("Open File"),"",tr("Files (*.xml *.adif *.adi)"));
-     //qDebug() << filename << " returned " << endl;
+    QString fname = settings.value("filename").toString();
+    filename =  QFileDialog::getOpenFileName(this, tr("Open File"),fname,tr("Files (*.xml *.adif *.adi)"));
+    //qDebug() << "in data::readData" << filename << " returned " << endl;
+    settings.setValue("filename", filename );
     if( filename.contains("xml"))
     {
         readXMLHeader( filename );
@@ -159,9 +166,9 @@ void Data::readXMLHeader( QString filename )
    QFile *file = new QFile(filename);
    if( !file->open(QFile::ReadOnly) )
    {
-       qDebug() << "Open failed." << endl;
+       qDebug() << "Open XML Header file failed.";
    }else{
-       qDebug() << "Open success." << endl;
+       qDebug() << "Open XML Header file success.";
    }
    QXmlSimpleReader logxmlReader;
    QXmlInputSource *source = new QXmlInputSource( file );
@@ -176,11 +183,11 @@ void Data::readXMLHeader( QString filename )
 
    if( !ok )
    {
-       qDebug() << "Parsing failed." << endl;
+       qDebug() << "Parsing XML Data file failed.";
    }
    hdr = loghandler->getHeaders();
    hdr->removeDuplicates();
-   qDebug() << hdr->size() << *hdr << endl;
+   //qDebug() << hdr->size() << *hdr << endl;
    columns = hdr->size();
    //*selectedhdr = QStringList(*hdr);
    //qDebug() << *selectedhdr << endl;
@@ -192,9 +199,9 @@ void Data::readXMLData()
     QFile *file = new QFile(filename);
     if( !file->open(QFile::ReadOnly) )
     {
-        qDebug() << "Open failed." << endl;
+        qDebug() << "Open XML Data file failed.";
     }else{
-        qDebug() << "Open success." << endl;
+        qDebug() << "Open XML Data file success.";
     }
     QXmlSimpleReader logxmlReader;
     QXmlInputSource *source = new QXmlInputSource( file );
@@ -210,11 +217,11 @@ void Data::readXMLData()
 
     if( !ok )
     {
-        qDebug() << "Parsing failed." << endl;
+        qDebug() << "Parsing XML Data file failed." << endl;
     }
     //qDebug() << (model->item(1,1))->text();
-    qDebug() << "from Loghandler " << loghandler->getModel()->item(1,1);
-    qDebug() << "in readXMLData " << model->item(1,1);
+    //qDebug() << "from Loghandler " << loghandler->getModel()->item(1,1);
+    //qDebug() << "in readXMLData " << model->item(1,1);
     rows = loghandler->getRows();
     emit refresh();
     file->close();
@@ -301,7 +308,7 @@ void Data::readADIFHeader( QString filename )
            hdr->removeDuplicates();
        }while(!line.isNull());
        //qDebug() << "in loadHeader";
-       qDebug() << hdr->size() << *hdr << endl;
+       //qDebug() << hdr->size() << *hdr << endl;
        columns = hdr->size();
        //*selectedhdr = QStringList(*hdr);
        //qDebug() << *selectedhdr;
@@ -350,7 +357,7 @@ void Data::readADIFData()
        emit refresh();
 
   }else{
-         qDebug() << " Could not open file " << filename << endl;
+         qDebug() << " Could not open ADIF file " << filename << endl;
   }
   data.close();
 }
@@ -359,7 +366,8 @@ void Data::readADIFData()
 
 void Data::queryFilename()
 {
-    filename =  QFileDialog::getOpenFileName(this, tr("Open File"),"",tr("Files (*.adif *.adi)"));
+    QString dname = settings.value("directory").toString();
+    filename =  QFileDialog::getOpenFileName(this, tr("Open File"),dname,tr("Files (*.adif *.adi)"));
     //qDebug() << filename << " returned " << endl;
 }
 
@@ -371,6 +379,15 @@ void Data::setFilename( QString fname )
 QString Data::getFilename()
 {
     return filename;
+}
+void Data::setDirname( QString dname )
+{
+    dirname = dname;
+}
+
+QString Data::getDirname()
+{
+    return dirname;
 }
 
 
@@ -390,3 +407,12 @@ int Data::getColumns()
     qDebug() << columns;
     return columns;
 }
+
+void Data::removeRow( QModelIndex idx )
+{
+    int row = idx.row();
+    model->removeRow(row, idx );
+
+}
+
+
