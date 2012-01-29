@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle( tr("QT Logger") );
+    this->setWindowTitle( tr("QtLogger") );
 
     version = "1.1.1";
 
