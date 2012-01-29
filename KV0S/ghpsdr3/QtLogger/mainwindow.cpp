@@ -78,7 +78,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     udpSocket = new QUdpSocket(this);
-    udpSocket->bind( 45454, QUdpSocket::ShareAddress );
+    udpSocket->bind( 11500, QUdpSocket::ShareAddress );
 
     statusBar ()->addPermanentWidget (logfileIndicator);
 
@@ -321,8 +321,16 @@ void MainWindow::processPendingDatagrams()
               QString output = QString("%1").arg(datagram.data());
               if( output.contains("frequency")){
                  QString datastr = parseDatagrams(output);
-                 qDebug() << datastr;
-                 add->setFrequency( datastr );
+                 if(datastr.contains("."))
+                 {
+                     //qDebug() << datastr;
+                     add->setFrequency( datastr );
+                 }else{
+                     double freqnum = (datastr.toDouble() / 1000000.0);
+                     //qDebug() << datastr << freqnum;
+                     add->setFrequency( QString("%1").arg(freqnum,6) );
+                 }
+
               }else if( output.contains("mode")){
                  QString datastr = parseDatagrams(output);
                  qDebug() << datastr;
