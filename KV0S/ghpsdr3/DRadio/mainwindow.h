@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "sender.h"
+#include "frequencysender.h"
 
 namespace Ui {
     class MainWindow;
@@ -16,7 +16,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    Sender *sender;
+    FrequencySender *sender;
 
 private:
     Ui::MainWindow *ui;
