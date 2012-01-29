@@ -35,6 +35,7 @@
 #include <QHash>
 #include <QCompleter>
 #include <QHashIterator>
+#include <QSettings>
 
 #include "data.h"
 #include "range.h"
@@ -63,18 +64,24 @@ public:
     void loadbandsData( QHash <QString, Range> band );
     QHash <QString, Range> bandData;
     void callreset();
+    bool callsign_filter;
 
 private:
     Ui::addDialog *ui;
+    QSettings settings;
+
 
 signals:
     void newdata();
+    void ownerChanged();
+    void prefixChanged(QString);
 
 private slots:
     void reset();
     void addContact();
     void updateTime();
     void updateCall();
+    void updateOwner();
 };
 
 #endif // ADDDIALOG_H

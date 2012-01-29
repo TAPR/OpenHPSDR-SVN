@@ -1,7 +1,11 @@
 <RCC>
-    <qresource prefix="/icons">
-        <file>icons/hpsdr5.svg</file>
+    <qresource prefix="/">
+        <file>icons/minus-red.svg</file>
         <file>icons/plus-green.svg</file>
         <file>icons/QtLogger.svg</file>
+        <file>icons/filefolder16.svg</file>
+        <file>icons/filefolder32.svg</file>
+        <file>icons/filefoldergrey16.svg</file>
+        <file>icons/filefoldergrey32.svg</file>
     </qresource>
 </RCC>

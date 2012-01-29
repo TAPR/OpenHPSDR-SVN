@@ -37,20 +37,32 @@ addDialog::addDialog(QWidget *parent) :
 
     date = new QDate();
     time = new QTime();
+    callsign_filter = true;
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
     timer->start(1000);
 
-
-    QRegExp rx("^[A-z]{1,2}[0-9]{1}[A-z]{1,3}[/]{1}[A-z0-9]+");
+    QRegExp rx("^[A-z0-9]{1,2}[0-9]{1}[A-z]{1,3}[/]{1}[A-z0-9]+");
     QRegExpValidator  *valid = new QRegExpValidator(rx,this);
-    ui->callEdit->setValidator( valid );
+    callsign_filter = settings.value("callsign_filter").toBool();
+    if(  callsign_filter ){
+       ui->callEdit->setValidator( valid );
+    }else{
+       ui->callEdit->setValidator( 0 );
+    }
+
+    reset();
 
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->resetButton,SIGNAL(clicked()),this,SLOT(reset()));
     connect(ui->addButton,SIGNAL(clicked()),this,SLOT(addContact()));
     connect(ui->callEdit,SIGNAL(textChanged(QString)),this,SLOT(updateCall()));
+    connect(ui->operatorEdit,SIGNAL(textChanged(QString)),this,SLOT(updateOwner()));
+    connect(ui->homeqthEdit,SIGNAL(textChanged(QString)),this,SLOT(updateOwner()));
+    connect(ui->homegridEdit,SIGNAL(textChanged(QString)),this,SLOT(updateOwner()));
+    connect(ui->stationEdit,SIGNAL(textChanged(QString)),this,SLOT(updateOwner()));
+
 }
 
 addDialog::~addDialog()
@@ -69,7 +81,21 @@ void addDialog::reset()
     ui->subdivisionEdit->clear();
     ui->qthEdit->clear();
     ui->checkEdit->clear();
-
+    ui->gridsqEdit->clear();
+    ui->commentEdit->clear();
+    ui->countyEdit->clear();
+    ui->operatorEdit->setText(settings.value("operator").toString());
+    ui->homeqthEdit->setText(settings.value("home_qth").toString());
+    ui->homegridEdit->setText(settings.value("home_grid").toString());
+    ui->stationEdit->setText(settings.value("station_call").toString());
+    callsign_filter = settings.value("callsign_filter").toBool();
+    if(  callsign_filter ){
+       QRegExp rx("^[A-z0-9]{1,2}[0-9]{1}[A-z]{1,3}[/]{1}[A-z0-9]+");
+       QRegExpValidator  *valid = new QRegExpValidator(rx,this);
+       ui->callEdit->setValidator( valid );
+    }else{
+       ui->callEdit->setValidator( 0 );
+    }
 }
 
 void addDialog::callreset()
@@ -85,6 +111,15 @@ void addDialog::setFrequency( QString freq )
 void addDialog::setMode( QString modestr)
 {
     ui->modeEdit->setText( modestr );
+}
+
+void addDialog::updateOwner()
+{
+    settings.setValue("operator",ui->operatorEdit->text());
+    settings.setValue("home_qth", ui->homeqthEdit->text());
+    settings.setValue("home_grid",ui->homegridEdit->text());
+    settings.setValue("station_call", ui->stationEdit->text());
+    emit ownerChanged();
 }
 
 void addDialog::updateTime()
@@ -106,12 +141,24 @@ void addDialog::addContact()
     record["TX_RST"] = ui->txrstBox->currentText();
     record["NAME"] = ui->nameEdit->text();
     record["QTH"] = ui->qthEdit->text();
+    record["GRIDSQUARE"] = ui->gridsqEdit->text();
     record["MODE"] = ui->modeEdit->text();
     record["COUNTRY"] = ui->countryEdit->text();
     record["STATE"] = ui->subdivisionEdit->text();
+    record["CNTY"] = ui->countyEdit->text();
     record["EVENT"] = ui->eventBox->currentText();
     record["CHECK"] = ui->checkEdit->text();
+    record["COMMENT"] = ui->commentEdit->text();
     record["BAND"] = getBand(ui->freqEdit->text());
+    record["OPERATOR"] = ui->operatorEdit->text();
+    record["HOME_QTH"] = ui->homeqthEdit->text();
+    record["HOME_GRID"] = ui->homegridEdit->text();
+    record["STATION_CALL"] = ui->stationEdit->text();
+    record["QSL_SENT"] = ui->qslsentEdit->text();
+    record["QSL_SENT_VIA"] = ui->qslsentviaBox->currentText();
+    record["QSL_RCVD"] = ui->qslrcvdEdit->text();
+    record["QSL_RCVD_VIA"] = ui->qslrcvdviaBox->currentText();
+
 
     //qDebug() << getBand(ui->freqEdit->text()) << ui->freqEdit->text();
     contact++;
@@ -125,7 +172,7 @@ QString addDialog::getBand( QString fstr )
     QString bandstr;
     fstr = ui->freqEdit->text().mid(0,5);
     double f = fstr.toDouble();
-    //qDebug() << f << bandData["160m"].lower;
+    qDebug() << f << bandData["160m"].lower;
     QHashIterator<QString, Range> i(bandData);
     while (i.hasNext()) {
         i.next();
@@ -142,6 +189,8 @@ void addDialog::updateCall()
 {
     QString call = ui->callEdit->text();
     ui->callEdit->setText( call.toUpper() );
+    QString prefix = call.toUpper();
+    emit( prefixChanged("^"+prefix));
 }
 
 void addDialog::loadmodeComboBox(QStringList *modes)

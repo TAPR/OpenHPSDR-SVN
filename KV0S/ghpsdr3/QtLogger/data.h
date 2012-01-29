@@ -41,6 +41,7 @@
 #include <QRegExp>
 #include <QRegExpValidator>
 #include <QDebug>
+#include <QSettings>
 
 #include "loghandler.h"
 #include "adif.h"
@@ -59,11 +60,19 @@ public:
     void updateRowColumns();
     QStandardItemModel *model;
     void setFilename( QString fname );
+    void setDirname( QString dname );
     QString getFilename();
+    QString getDirname();
     int getRows();
     int getColumns();
     QString freqstr;
     QString modestr;
+    QSettings settings;
+    QString operatorstr;
+    QString qthstr;
+    QString gridstr;
+    QString stationstr;
+
 
 signals:
     void refresh();
@@ -78,13 +87,16 @@ public slots:
     void readXMLData();
     void queryFilename();
     void updateHeaders();
+    void removeRow( QModelIndex idx );
 
 private:
     QStringList *hdr;
     QStringList *selectedhdr;
     QString filename;
+    QString dirname;
     int rows;
     int columns;
+
 
 
 };
