@@ -12,9 +12,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    sender.cpp
+    frequencysender.cpp
 
 HEADERS  += mainwindow.h \
-    sender.h
+    sender.h \
+    frequencysender.h
 
 FORMS    += mainwindow.ui
