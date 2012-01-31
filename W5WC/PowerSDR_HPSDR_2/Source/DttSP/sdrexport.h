@@ -3,6 +3,7 @@
 This file is part of a program that implements a Software-Defined Radio.
 
 Copyright (C) 2004, 2005, 2006 by Frank Brickle, AB2KT and Bob McGwier, N4HY
+Copyright (C) 2011 Warren Pratt, NR0V - Changes for AGC, ALC, Leveler, Compressor
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -62,6 +63,8 @@ Bridgewater, NJ 08807
 #include <spectrum.h>
 #include <diversity.h>
 #include <common.h>
+#include <wcpagc.h>
+#include <compress.h>
 
 //------------------------------------------------------------------------
 // max no. simultaneous receivers
@@ -154,6 +157,8 @@ extern struct _rx
     ComplexFIR coef;
     FiltOvSv ovsv;
     COMPLEX *save;
+	double low;		// (NR0V)
+	double high;
   } filt,filt2;
 
   DCBlocker dcb;
@@ -184,11 +189,17 @@ extern struct _rx
 	  BOOLEAN flag;
   } banr, banf;
 
-  struct
+  //struct
+  //{
+    //DTTSPAGC gen;
+    //BOOLEAN flag;
+  //} dttspagc;
+
+  struct //(NR0V)
   {
-    DTTSPAGC gen;
+    WCPAGC gen;
     BOOLEAN flag;
-  } dttspagc;
+  } wcpagc;
   
   struct
   {
@@ -248,9 +259,9 @@ extern struct _rx
 //------------------------------------------------------------------------
 extern struct _tx
 {
-  struct
+  struct // (NR0V) modified
   {
-    CXB i, ic, o, oc;
+    CXB i, i_pre, o, o_pre;
   } buf;
   IQ iqfix;
 
@@ -315,11 +326,23 @@ extern struct _tx
     int num;
   } squelch;
 
-  struct
+  //struct
+  //{
+    //DTTSPAGC gen;
+    //BOOLEAN flag;
+  //} leveler, alc;
+
+  struct // (NR0V)
   {
-    DTTSPAGC gen;
-    BOOLEAN flag;
+	  WCPAGC gen;
+	  BOOLEAN flag;
   } leveler, alc;
+
+  struct // (NR0V)
+  {
+	  COMPRESSOR gen;
+	  BOOLEAN flag;
+  } compressor;
 
   struct
   {
@@ -333,11 +356,11 @@ extern struct _tx
     BOOLEAN flag;
   } spr;
 
-  struct
-  {
-    BOOLEAN flag;
-    WSCompander gen;
-  } cpd;
+  //struct
+  //{
+    //BOOLEAN flag;
+    //WSCompander gen;
+  //} cpd;
 
   struct
   {

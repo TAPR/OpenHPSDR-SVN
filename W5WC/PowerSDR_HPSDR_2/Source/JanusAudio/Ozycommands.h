@@ -35,6 +35,8 @@ extern "C" {
 /* Vendor Request Types */   
 #define VRT_VENDOR_IN       	0xC0
 #define VRT_VENDOR_OUT      	0x40
+#define VRQ_SDR1K_CTL           0x0d
+#define SDR1KCTRL_READ_VERSION  0x7
 
 /* Vendor In Commands */
 #define	VRQ_I2C_READ		0x81	// wValueL: i2c address; length: how much to read
@@ -58,13 +60,13 @@ extern "C" {
 #define VRQ_FPGA_SET_RESET  	0x04	// wValueL: {0,1}
 #define VRQ_MULTI_WRITE     	0x05
 #define VRQ_REQ_I2C_WRITE  	0x08	// wValueL: i2c address; data: data
-//#define VRQ_REQ_SPI_WRITE 	0x09	// wValue: optional header bytes
+#define VRQ_REQ_SPI_WRITE 	0x09	// wValue: optional header bytes
 					// wIndexH:	enables
 					// wIndexL:	format
 					// len: how much to write
 														
-//#define VRQ_I2C_SPEED_SET  	0x0B  	// wValueL: {0,1}
-//#define VRQ_CPU_SPEED_SET   	0x0C 	// wValueL: {0, 1, 2}
+#define VRQ_I2C_SPEED_SET  	0x0B  	// wValueL: {0,1}
+#define VRQ_CPU_SPEED_SET   0x0C 	// wValueL: {0, 1, 2}
 
 #ifdef	__cplusplus
 }

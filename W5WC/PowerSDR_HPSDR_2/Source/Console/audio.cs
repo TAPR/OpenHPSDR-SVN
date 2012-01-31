@@ -533,7 +533,6 @@ namespace PowerSDR
         #region Local Copies of External Properties
 
         private static bool mox;
-
         public static bool MOX
         {
             set { mox = value; }
@@ -542,21 +541,18 @@ namespace PowerSDR
         private static unsafe void* cs_vac;
 
         private static bool mon;
-
         public static bool MON
         {
             set { mon = value; }
         }
 
         private static bool full_duplex;
-
         public static bool FullDuplex
         {
             set { full_duplex = value; }
         }
 
         private static bool vac_enabled;
-
         public static bool VACEnabled
         {
             set
@@ -569,7 +565,6 @@ namespace PowerSDR
         }
 
         private static bool vac_bypass;
-
         public static bool VACBypass
         {
             get { return vac_bypass; }
@@ -577,7 +572,6 @@ namespace PowerSDR
         }
 
         private static bool vac_rb_reset;
-
         public static bool VACRBReset
         {
             set { vac_rb_reset = value; }
@@ -585,7 +579,6 @@ namespace PowerSDR
         }
 
         private static double vac_preamp = 1.0;
-
         public static double VACPreamp
         {
             get { return vac_preamp; }
@@ -597,7 +590,6 @@ namespace PowerSDR
         }
 
         private static double vac_rx_scale = 1.0;
-
         public static double VACRXScale
         {
             get { return vac_rx_scale; }
@@ -621,7 +613,6 @@ namespace PowerSDR
         }
 
         private static DSPMode tx_dsp_mode = DSPMode.LSB;
-
         public static DSPMode TXDSPMode
         {
             get { return tx_dsp_mode; }
@@ -629,7 +620,6 @@ namespace PowerSDR
         }
 
         private static int sample_rate1 = 48000;
-
         public static int SampleRate1
         {
             get { return sample_rate1; }
@@ -642,7 +632,6 @@ namespace PowerSDR
         }
 
         private static int sample_rate2 = 48000;
-
         public static int SampleRate2
         {
             get { return sample_rate2; }
@@ -654,7 +643,6 @@ namespace PowerSDR
         }
 
         private static int block_size1 = 1024;
-
         public static int BlockSize
         {
             get { return block_size1; }
@@ -662,7 +650,6 @@ namespace PowerSDR
         }
 
         private static int block_size_vac = 2048;
-
         public static int BlockSizeVAC
         {
             get { return block_size_vac; }
@@ -670,7 +657,6 @@ namespace PowerSDR
         }
 
         private static double audio_volts1 = 2.23;
-
         public static double AudioVolts1
         {
             get { return audio_volts1; }
@@ -678,70 +664,60 @@ namespace PowerSDR
         }
 
         private static bool vac_stereo;
-
         public static bool VACStereo
         {
             set { vac_stereo = value; }
         }
 
         private static bool vac_output_iq;
-
         public static bool VACOutputIQ
         {
             set { vac_output_iq = value; }
         }
 
         private static bool vac_output_rx2;
-
         public static bool VACOutputRX2
         {
             set { vac_output_rx2 = value; }
         }
 
         private static float iq_phase;
-
         public static float IQPhase
         {
             set { iq_phase = value; }
         }
 
         private static float iq_gain = 1.0f;
-
         public static float IQGain
         {
             set { iq_gain = value; }
         }
 
         private static float iq_phase2;
-
         public static float IQPhase2
         {
             set { iq_phase2 = value; }
         }
 
         private static float iq_gain2 = 1.0f;
-
         public static float IQGain2
         {
             set { iq_gain2 = value; }
         }
 
         private static bool vac_correct_iq = true;
-
         public static bool VACCorrectIQ
         {
             set { vac_correct_iq = value; }
         }
 
         private static SoundCard soundcard = SoundCard.UNSUPPORTED_CARD;
-
         public static SoundCard CurSoundCard
         {
             set { soundcard = value; }
         }
 
         private static bool vox_active = false;
-
         public static bool VOXActive
         {
             get { return vox_active; }
@@ -749,7 +725,6 @@ namespace PowerSDR
         }
 
         private static int num_channels = 2;
-
         public static int NumChannels
         {
             get { return num_channels; }
@@ -757,7 +732,6 @@ namespace PowerSDR
         }
 
         private static int host1 = 0;
-
         public static int Host1
         {
             get { return host1; }
@@ -765,7 +739,6 @@ namespace PowerSDR
         }
 
         private static int host2 = 0;
-
         public static int Host2
         {
             get { return host2; }
@@ -773,7 +746,6 @@ namespace PowerSDR
         }
 
         private static int input_dev1 = 0;
-
         public static int Input1
         {
             get { return input_dev1; }
@@ -781,7 +753,6 @@ namespace PowerSDR
         }
 
         private static int input_dev2 = 0;
-
         public static int Input2
         {
             get { return input_dev2; }
@@ -789,7 +760,6 @@ namespace PowerSDR
         }
 
         private static int output_dev1 = 0;
-
         public static int Output1
         {
             get { return output_dev1; }
@@ -797,7 +767,6 @@ namespace PowerSDR
         }
 
         private static int output_dev2 = 0;
-
         public static int Output2
         {
             get { return output_dev2; }
@@ -805,7 +774,6 @@ namespace PowerSDR
         }
 
         private static int latency1 = 0;
-
         public static int Latency1
         {
             get { return latency1; }
@@ -813,69 +781,81 @@ namespace PowerSDR
         }
 
         private static int latency2 = 120;
-
         public static int Latency2
         {
             set { latency2 = value; }
         }
 
         private static float min_in_l = float.MaxValue;
-
         public static float MinInL
         {
             get { return min_in_l; }
         }
 
         private static float min_in_r = float.MaxValue;
-
         public static float MinInR
         {
             get { return min_in_r; }
         }
 
         private static float min_out_l = float.MaxValue;
-
         public static float MinOutL
         {
             get { return min_out_l; }
         }
 
         private static float min_out_r = float.MaxValue;
-
         public static float MinOutR
         {
             get { return min_out_r; }
         }
 
         private static float max_in_l = float.MaxValue;
-
         public static float MaxInL
         {
             get { return max_in_l; }
         }
 
         private static float max_in_r = float.MaxValue;
-
         public static float MaxInR
         {
             get { return max_in_r; }
         }
 
         private static float max_out_l = float.MaxValue;
-
         public static float MaxOutL
         {
             get { return max_out_l; }
         }
 
         private static float max_out_r = float.MaxValue;
-
         public static float MaxOutR
         {
             get { return max_out_r; }
         }
 
         public static bool MuteOutput { get; set; }
+
+        private static int ramp_time = 5; // in ms
+        private static int ramp_samples; // total samples to complete the ramp
+        private static int ramp_count = 0;
+        private static double ramp_step;
+        private static bool ramp = false;
+        public static bool Ramp
+        {
+            get { return ramp; }
+            set
+            {
+                if (value)
+                {
+                    ramp_samples = (int)(ramp_time * 1e-3 * sample_rate1);
+                    ramp_step = Math.PI / 2.0 / ramp_samples;
+                    ramp_count = 0;
+                }
+                ramp = value;
+            }
+        }
+
 
         #endregion
 
@@ -1986,6 +1966,32 @@ namespace PowerSDR
                     break;
             }
 
+            if (localmox && ramp)
+            {
+                for (int i = 0; i < frameCount; i++)
+                {
+                    float scale = (float)Math.Cos(ramp_count * ramp_step);
+                    //Debug.WriteLine("ramp scale: " + scale.ToString("f6"));
+
+                    out_l_ptr2[i] *= scale;
+                    out_r_ptr2[i] *= scale;
+
+                    if (++ramp_count > ramp_samples)
+                    {
+                        // clear the rest of the TX buffer
+                        for (int j = i + 1; j < frameCount; j++)
+                        {
+                            out_l_ptr2[i] = 0.0f;
+                            out_r_ptr2[i] = 0.0f;
+                        }
+
+                        mox = false;
+                        ramp = false;
+                        break;
+                    }
+                }
+            }
+
             if (scope)
             {
                 if (!localmox)
@@ -2129,9 +2135,9 @@ namespace PowerSDR
                 ScaleBuffer(out_r1, out_r1, frameCount, (float) monitor_volume);
                 ClearBuffer(out_l2, frameCount);
                 ClearBuffer(out_r2, frameCount);
-            }
-            else
-            {
+           }
+           else
+           {
                 double tx_vol = TXScale;
                 //if(tx_output_signal != SignalSource.RADIO)
                 //	tx_vol = 1.0;
@@ -2160,16 +2166,6 @@ namespace PowerSDR
                 }
 
             }
-
-           // if (!localmox) // RX Mode
-           // {
-               // ClearBuffer(out_l2, frameCount);
-               // ClearBuffer(out_r2, frameCount);
-                //console.buffiszero = true;
-               // ScaleBuffer(out_l2, out_l2, frameCount, (float)monitor_volume);
-               // ScaleBuffer(out_r2, out_r2, frameCount, (float)monitor_volume);
-
-          //  }
 
 #if(MINMAX)
 			Debug.Write(MaxSample(out_l2, out_r2, frameCount).ToString("f6")+",");

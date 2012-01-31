@@ -30,7 +30,7 @@ namespace PowerSDR
     using System;
     using System.Runtime.CompilerServices;
     using System.Threading;
-    using HPSDR_USB_LIB_V1;
+   // using HPSDR_USB_LIB_V1;
 
 	public class OzySDR1kControl
 	{
@@ -154,7 +154,7 @@ namespace PowerSDR
 		{
 			byte[] buf = new byte[1]; 
 
-			int rc = libUSB_Interface.usb_control_msg(usbDevHandle, 
+            int rc = JanusAudio.WriteControlMsg(usbDevHandle,
 				VRT_VENDOR_IN, 
 				VRQ_SDR1K_CTL, 
 				SDR1KCTRL_READ_STATUS, 
@@ -199,7 +199,7 @@ namespace PowerSDR
 		private int latch(byte latchid, byte data) 
 		{ 			
 			
-            int rc = libUSB_Interface.usb_control_msg(usbDevHandle, 
+            int rc = 0; JanusAudio.WriteControlMsg(usbDevHandle,
                                                       VRT_VENDOR_OUT, 
                                                       VRQ_SDR1K_CTL, 
                                                       SDR1KCTRL_LATCH, 
@@ -215,7 +215,7 @@ namespace PowerSDR
 		[MethodImpl(MethodImplOptions.Synchronized)]
 		private int dds_reset() 
 		{ 
-			int rc = libUSB_Interface.usb_control_msg(usbDevHandle, 
+            int rc = JanusAudio.WriteControlMsg(usbDevHandle,
 				VRT_VENDOR_OUT, 
 				VRQ_SDR1K_CTL, 
 				SDR1KCTRL_DDS_RESET, 
@@ -231,7 +231,7 @@ namespace PowerSDR
 		[MethodImpl(MethodImplOptions.Synchronized)]
 		private int dds_write(byte addr, byte data) 
 		{ 
-			int rc = libUSB_Interface.usb_control_msg(usbDevHandle, 
+            int rc = JanusAudio.WriteControlMsg(usbDevHandle,
 				VRT_VENDOR_OUT, 
 				VRQ_SDR1K_CTL, 
 				SDR1KCTRL_DDS_WRITE, 
@@ -247,7 +247,7 @@ namespace PowerSDR
 		[MethodImpl(MethodImplOptions.Synchronized)]
 		private int sr_load(byte reg, byte data) 
 		{ 
-			int rc = libUSB_Interface.usb_control_msg(usbDevHandle, 
+            int rc = JanusAudio.WriteControlMsg(usbDevHandle,
 				VRT_VENDOR_OUT, 
 				VRQ_SDR1K_CTL, 
 				SDR1KCTRL_SR_LOAD, 

@@ -221,6 +221,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\compress.c"
+				>
+			</File>
+			<File
 				RelativePath=".\correctIQ.c"
 				>
 			</File>
@@ -369,6 +373,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\wcpAGC.c"
+				>
+			</File>
+			<File
 				RelativePath=".\window.c"
 				>
 			</File>
@@ -404,6 +412,10 @@
 			</File>
 			<File
 				RelativePath=".\complex.h"
+				>
+			</File>
+			<File
+				RelativePath=".\compress.h"
 				>
 			</File>
 			<File
@@ -564,6 +576,10 @@
 			</File>
 			<File
 				RelativePath=".\update.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wcpAGC.h"
 				>
 			</File>
 			<File

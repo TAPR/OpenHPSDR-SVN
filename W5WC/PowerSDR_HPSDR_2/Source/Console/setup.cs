@@ -658,7 +658,7 @@ namespace PowerSDR
         private CheckBoxTS chkTXVOXEnabled;
         private LabelTS lblTXVOXHangTime;
         private NumericUpDownTS udTXVOXHangTime;
-        private TrackBarTS tbDSPAGCHangThreshold;
+        public TrackBarTS tbDSPAGCHangThreshold;
         private LabelTS lblDSPAGCHangThreshold;
         private LabelTS lblDSPAGCHangTime;
         private NumericUpDownTS udDSPAGCHangTime;
@@ -1460,8 +1460,8 @@ namespace PowerSDR
         private ComboBoxTS comboTXLabelAlign;
         private LabelTS lblTXAlign;
         private NumericUpDownTS udTXGridStep;
-        private NumericUpDownTS udTXGridMin;
-        private NumericUpDownTS udTXGridMax;
+        public NumericUpDownTS udTXGridMin;
+        public NumericUpDownTS udTXGridMax;
         private LabelTS lblTXGridStep;
         private LabelTS lblTXGridMin;
         private LabelTS lblTXGridMax;
@@ -1858,6 +1858,10 @@ namespace PowerSDR
         public CheckBoxTS chkAlex6BPHPF;
         public CheckBoxTS chkAlex13BPHPF;
         public CheckBoxTS chkAlex1_5BPHPF;
+        private CheckBoxTS chkDisplayAGCGainLine;
+        private CheckBoxTS chkAGCGainSpectrumLine;
+        private CheckBoxTS chkAGCDisplayHangLine;
+        private CheckBoxTS chkAGCHangSpectrumLine;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -2002,7 +2006,7 @@ namespace PowerSDR
             if (radGenModelFLEX5000.Checked && DB.GetVars("Options").Count != 0)
                 radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
 
-            //ForceAllEvents();
+            ForceAllEvents();
             EventArgs e = EventArgs.Empty;
             comboGeneralLPTAddr_LostFocus(this, e);
             chkGeneralSpurRed_CheckedChanged(this, e);
@@ -2015,7 +2019,7 @@ namespace PowerSDR
             udDSPImagePhaseTX_ValueChanged(this, e);
             udDSPImageGainTX_ValueChanged(this, e);
             udDSPCWPitch_ValueChanged(this, e);
-            tbDSPAGCHangThreshold_Scroll(this, e);
+           // tbDSPAGCHangThreshold_Scroll(this, e);
             udTXFilterHigh_ValueChanged(this, e);
             udTXFilterLow_ValueChanged(this, e);
             tbRX1FilterAlpha_Scroll(this, e);
@@ -3179,6 +3183,10 @@ namespace PowerSDR
             this.lblDSPALCAttack = new System.Windows.Forms.LabelTS();
             this.lblDSPALCThreshold = new System.Windows.Forms.LabelTS();
             this.grpDSPAGC = new System.Windows.Forms.GroupBoxTS();
+            this.chkAGCHangSpectrumLine = new System.Windows.Forms.CheckBoxTS();
+            this.chkAGCDisplayHangLine = new System.Windows.Forms.CheckBoxTS();
+            this.chkAGCGainSpectrumLine = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisplayAGCGainLine = new System.Windows.Forms.CheckBoxTS();
             this.tbDSPAGCHangThreshold = new System.Windows.Forms.TrackBarTS();
             this.lblDSPAGCHangThreshold = new System.Windows.Forms.LabelTS();
             this.lblDSPAGCHangTime = new System.Windows.Forms.LabelTS();
@@ -3312,6 +3320,8 @@ namespace PowerSDR
             this.lblPAGainByBand160 = new System.Windows.Forms.LabelTS();
             this.udPAGain160 = new System.Windows.Forms.NumericUpDownTS();
             this.chkPA6 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPANewCal = new System.Windows.Forms.CheckBoxTS();
+            this.rtxtPACalReq = new System.Windows.Forms.RichTextBox();
             this.grpPABandOffset = new System.Windows.Forms.GroupBoxTS();
             this.lblPABandOffset10 = new System.Windows.Forms.LabelTS();
             this.lblPABandOffset12 = new System.Windows.Forms.LabelTS();
@@ -3333,8 +3343,6 @@ namespace PowerSDR
             this.udPAADC60 = new System.Windows.Forms.NumericUpDownTS();
             this.udPAADC40 = new System.Windows.Forms.NumericUpDownTS();
             this.udPAADC30 = new System.Windows.Forms.NumericUpDownTS();
-            this.chkPANewCal = new System.Windows.Forms.CheckBoxTS();
-            this.rtxtPACalReq = new System.Windows.Forms.RichTextBox();
             this.tpAppearance = new System.Windows.Forms.TabPage();
             this.tcAppearance = new System.Windows.Forms.TabControl();
             this.tpAppearanceGeneral = new System.Windows.Forms.TabPage();
@@ -4805,7 +4813,7 @@ namespace PowerSDR
             this.radAlexT2_6.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_6.TabIndex = 1;
             this.radAlexT2_6.UseVisualStyleBackColor = true;
-            this.radAlexT2_6.CheckedChanged += new System.EventHandler(this.radAlexT_6_CheckedChanged);
+            this.radAlexT2_6.Click += new System.EventHandler(this.radAlexT_6_Click);
             // 
             // radAlexT1_6
             // 
@@ -4818,7 +4826,7 @@ namespace PowerSDR
             this.radAlexT1_6.TabStop = true;
             this.radAlexT1_6.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_6.UseVisualStyleBackColor = true;
-            this.radAlexT1_6.CheckedChanged += new System.EventHandler(this.radAlexT_6_CheckedChanged);
+            this.radAlexT1_6.Click += new System.EventHandler(this.radAlexT_6_Click);
             // 
             // radAlexT3_6
             // 
@@ -4829,7 +4837,7 @@ namespace PowerSDR
             this.radAlexT3_6.TabIndex = 2;
             this.radAlexT3_6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_6.UseVisualStyleBackColor = true;
-            this.radAlexT3_6.CheckedChanged += new System.EventHandler(this.radAlexT_6_CheckedChanged);
+            this.radAlexT3_6.Click += new System.EventHandler(this.radAlexT_6_Click);
             // 
             // panel22
             // 
@@ -4851,7 +4859,7 @@ namespace PowerSDR
             this.radAlexT2_10.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_10.TabIndex = 1;
             this.radAlexT2_10.UseVisualStyleBackColor = true;
-            this.radAlexT2_10.CheckedChanged += new System.EventHandler(this.radAlexT_10_CheckedChanged);
+            this.radAlexT2_10.Click += new System.EventHandler(this.radAlexT_10_Click);
             // 
             // radAlexT1_10
             // 
@@ -4864,7 +4872,7 @@ namespace PowerSDR
             this.radAlexT1_10.TabStop = true;
             this.radAlexT1_10.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_10.UseVisualStyleBackColor = true;
-            this.radAlexT1_10.CheckedChanged += new System.EventHandler(this.radAlexT_10_CheckedChanged);
+            this.radAlexT1_10.Click += new System.EventHandler(this.radAlexT_10_Click);
             // 
             // radAlexT3_10
             // 
@@ -4875,7 +4883,7 @@ namespace PowerSDR
             this.radAlexT3_10.TabIndex = 2;
             this.radAlexT3_10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_10.UseVisualStyleBackColor = true;
-            this.radAlexT3_10.CheckedChanged += new System.EventHandler(this.radAlexT_10_CheckedChanged);
+            this.radAlexT3_10.Click += new System.EventHandler(this.radAlexT_10_Click);
             // 
             // panel21
             // 
@@ -4897,7 +4905,7 @@ namespace PowerSDR
             this.radAlexT2_12.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_12.TabIndex = 1;
             this.radAlexT2_12.UseVisualStyleBackColor = true;
-            this.radAlexT2_12.CheckedChanged += new System.EventHandler(this.radAlexT_12_CheckedChanged);
+            this.radAlexT2_12.Click += new System.EventHandler(this.radAlexT_12_Click);
             // 
             // radAlexT1_12
             // 
@@ -4910,7 +4918,7 @@ namespace PowerSDR
             this.radAlexT1_12.TabStop = true;
             this.radAlexT1_12.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_12.UseVisualStyleBackColor = true;
-            this.radAlexT1_12.CheckedChanged += new System.EventHandler(this.radAlexT_12_CheckedChanged);
+            this.radAlexT1_12.Click += new System.EventHandler(this.radAlexT_12_Click);
             // 
             // radAlexT3_12
             // 
@@ -4921,7 +4929,7 @@ namespace PowerSDR
             this.radAlexT3_12.TabIndex = 2;
             this.radAlexT3_12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_12.UseVisualStyleBackColor = true;
-            this.radAlexT3_12.CheckedChanged += new System.EventHandler(this.radAlexT_12_CheckedChanged);
+            this.radAlexT3_12.Click += new System.EventHandler(this.radAlexT_12_Click);
             // 
             // panel20
             // 
@@ -4943,7 +4951,7 @@ namespace PowerSDR
             this.radAlexT2_15.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_15.TabIndex = 1;
             this.radAlexT2_15.UseVisualStyleBackColor = true;
-            this.radAlexT2_15.CheckedChanged += new System.EventHandler(this.radAlexT_15_CheckedChanged);
+            this.radAlexT2_15.Click += new System.EventHandler(this.radAlexT_15_Click);
             // 
             // radAlexT1_15
             // 
@@ -4956,7 +4964,7 @@ namespace PowerSDR
             this.radAlexT1_15.TabStop = true;
             this.radAlexT1_15.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_15.UseVisualStyleBackColor = true;
-            this.radAlexT1_15.CheckedChanged += new System.EventHandler(this.radAlexT_15_CheckedChanged);
+            this.radAlexT1_15.Click += new System.EventHandler(this.radAlexT_15_Click);
             // 
             // radAlexT3_15
             // 
@@ -4967,7 +4975,7 @@ namespace PowerSDR
             this.radAlexT3_15.TabIndex = 2;
             this.radAlexT3_15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_15.UseVisualStyleBackColor = true;
-            this.radAlexT3_15.CheckedChanged += new System.EventHandler(this.radAlexT_15_CheckedChanged);
+            this.radAlexT3_15.Click += new System.EventHandler(this.radAlexT_15_Click);
             // 
             // panel19
             // 
@@ -4989,7 +4997,7 @@ namespace PowerSDR
             this.radAlexT2_17.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_17.TabIndex = 1;
             this.radAlexT2_17.UseVisualStyleBackColor = true;
-            this.radAlexT2_17.CheckedChanged += new System.EventHandler(this.radAlexT_17_CheckedChanged);
+            this.radAlexT2_17.Click += new System.EventHandler(this.radAlexT_17_Click);
             // 
             // radAlexT1_17
             // 
@@ -5002,7 +5010,7 @@ namespace PowerSDR
             this.radAlexT1_17.TabStop = true;
             this.radAlexT1_17.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_17.UseVisualStyleBackColor = true;
-            this.radAlexT1_17.CheckedChanged += new System.EventHandler(this.radAlexT_17_CheckedChanged);
+            this.radAlexT1_17.Click += new System.EventHandler(this.radAlexT_17_Click);
             // 
             // radAlexT3_17
             // 
@@ -5013,7 +5021,7 @@ namespace PowerSDR
             this.radAlexT3_17.TabIndex = 2;
             this.radAlexT3_17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_17.UseVisualStyleBackColor = true;
-            this.radAlexT3_17.CheckedChanged += new System.EventHandler(this.radAlexT_17_CheckedChanged);
+            this.radAlexT3_17.Click += new System.EventHandler(this.radAlexT_17_Click);
             // 
             // panel18
             // 
@@ -5035,7 +5043,7 @@ namespace PowerSDR
             this.radAlexT2_20.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_20.TabIndex = 1;
             this.radAlexT2_20.UseVisualStyleBackColor = true;
-            this.radAlexT2_20.CheckedChanged += new System.EventHandler(this.radAlexT_20_CheckedChanged);
+            this.radAlexT2_20.Click += new System.EventHandler(this.radAlexT_20_Click);
             // 
             // radAlexT1_20
             // 
@@ -5048,7 +5056,7 @@ namespace PowerSDR
             this.radAlexT1_20.TabStop = true;
             this.radAlexT1_20.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_20.UseVisualStyleBackColor = true;
-            this.radAlexT1_20.CheckedChanged += new System.EventHandler(this.radAlexT_20_CheckedChanged);
+            this.radAlexT1_20.Click += new System.EventHandler(this.radAlexT_20_Click);
             // 
             // radAlexT3_20
             // 
@@ -5059,7 +5067,7 @@ namespace PowerSDR
             this.radAlexT3_20.TabIndex = 2;
             this.radAlexT3_20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_20.UseVisualStyleBackColor = true;
-            this.radAlexT3_20.CheckedChanged += new System.EventHandler(this.radAlexR_20_CheckedChanged);
+            this.radAlexT3_20.Click += new System.EventHandler(this.radAlexT_20_Click);
             // 
             // panel17
             // 
@@ -5081,7 +5089,7 @@ namespace PowerSDR
             this.radAlexT2_30.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_30.TabIndex = 1;
             this.radAlexT2_30.UseVisualStyleBackColor = true;
-            this.radAlexT2_30.CheckedChanged += new System.EventHandler(this.radAlexT_30_CheckedChanged);
+            this.radAlexT2_30.Click += new System.EventHandler(this.radAlexT_30_Click);
             // 
             // radAlexT1_30
             // 
@@ -5094,7 +5102,7 @@ namespace PowerSDR
             this.radAlexT1_30.TabStop = true;
             this.radAlexT1_30.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_30.UseVisualStyleBackColor = true;
-            this.radAlexT1_30.CheckedChanged += new System.EventHandler(this.radAlexT_30_CheckedChanged);
+            this.radAlexT1_30.Click += new System.EventHandler(this.radAlexT_30_Click);
             // 
             // radAlexT3_30
             // 
@@ -5105,7 +5113,7 @@ namespace PowerSDR
             this.radAlexT3_30.TabIndex = 2;
             this.radAlexT3_30.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_30.UseVisualStyleBackColor = true;
-            this.radAlexT3_30.CheckedChanged += new System.EventHandler(this.radAlexT_30_CheckedChanged);
+            this.radAlexT3_30.Click += new System.EventHandler(this.radAlexT_30_Click);
             // 
             // panel16
             // 
@@ -5127,7 +5135,7 @@ namespace PowerSDR
             this.radAlexT2_40.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_40.TabIndex = 1;
             this.radAlexT2_40.UseVisualStyleBackColor = true;
-            this.radAlexT2_40.CheckedChanged += new System.EventHandler(this.radAlexT_40_CheckedChanged);
+            this.radAlexT2_40.Click += new System.EventHandler(this.radAlexT_40_Click);
             // 
             // radAlexT1_40
             // 
@@ -5140,7 +5148,7 @@ namespace PowerSDR
             this.radAlexT1_40.TabStop = true;
             this.radAlexT1_40.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_40.UseVisualStyleBackColor = true;
-            this.radAlexT1_40.CheckedChanged += new System.EventHandler(this.radAlexT_40_CheckedChanged);
+            this.radAlexT1_40.Click += new System.EventHandler(this.radAlexT_40_Click);
             // 
             // radAlexT3_40
             // 
@@ -5151,7 +5159,7 @@ namespace PowerSDR
             this.radAlexT3_40.TabIndex = 2;
             this.radAlexT3_40.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_40.UseVisualStyleBackColor = true;
-            this.radAlexT3_40.CheckedChanged += new System.EventHandler(this.radAlexT_40_CheckedChanged);
+            this.radAlexT3_40.Click += new System.EventHandler(this.radAlexT_40_Click);
             // 
             // panel15
             // 
@@ -5173,7 +5181,7 @@ namespace PowerSDR
             this.radAlexT2_60.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_60.TabIndex = 1;
             this.radAlexT2_60.UseVisualStyleBackColor = true;
-            this.radAlexT2_60.CheckedChanged += new System.EventHandler(this.radAlexT_60_CheckedChanged);
+            this.radAlexT2_60.Click += new System.EventHandler(this.radAlexT_60_Click);
             // 
             // radAlexT1_60
             // 
@@ -5186,7 +5194,7 @@ namespace PowerSDR
             this.radAlexT1_60.TabStop = true;
             this.radAlexT1_60.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_60.UseVisualStyleBackColor = true;
-            this.radAlexT1_60.CheckedChanged += new System.EventHandler(this.radAlexT_60_CheckedChanged);
+            this.radAlexT1_60.Click += new System.EventHandler(this.radAlexT_60_Click);
             // 
             // radAlexT3_60
             // 
@@ -5197,7 +5205,7 @@ namespace PowerSDR
             this.radAlexT3_60.TabIndex = 2;
             this.radAlexT3_60.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_60.UseVisualStyleBackColor = true;
-            this.radAlexT3_60.CheckedChanged += new System.EventHandler(this.radAlexT_60_CheckedChanged);
+            this.radAlexT3_60.Click += new System.EventHandler(this.radAlexT_60_Click);
             // 
             // panel14
             // 
@@ -5219,7 +5227,7 @@ namespace PowerSDR
             this.radAlexT2_80.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_80.TabIndex = 1;
             this.radAlexT2_80.UseVisualStyleBackColor = true;
-            this.radAlexT2_80.CheckedChanged += new System.EventHandler(this.radAlexT_80_CheckedChanged);
+            this.radAlexT2_80.Click += new System.EventHandler(this.radAlexT_80_Click);
             // 
             // radAlexT1_80
             // 
@@ -5232,7 +5240,7 @@ namespace PowerSDR
             this.radAlexT1_80.TabStop = true;
             this.radAlexT1_80.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_80.UseVisualStyleBackColor = true;
-            this.radAlexT1_80.CheckedChanged += new System.EventHandler(this.radAlexT_80_CheckedChanged);
+            this.radAlexT1_80.Click += new System.EventHandler(this.radAlexT_80_Click);
             // 
             // radAlexT3_80
             // 
@@ -5243,7 +5251,7 @@ namespace PowerSDR
             this.radAlexT3_80.TabIndex = 2;
             this.radAlexT3_80.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_80.UseVisualStyleBackColor = true;
-            this.radAlexT3_80.CheckedChanged += new System.EventHandler(this.radAlexT_80_CheckedChanged);
+            this.radAlexT3_80.Click += new System.EventHandler(this.radAlexT_80_Click);
             // 
             // panel11
             // 
@@ -6025,7 +6033,7 @@ namespace PowerSDR
             this.radAlexT2_160.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_160.TabIndex = 7;
             this.radAlexT2_160.UseVisualStyleBackColor = true;
-            this.radAlexT2_160.CheckedChanged += new System.EventHandler(this.radAlexT_160_CheckedChanged);
+            this.radAlexT2_160.Click += new System.EventHandler(this.radAlexT_160_Click);
             // 
             // radAlexT1_160
             // 
@@ -6038,7 +6046,7 @@ namespace PowerSDR
             this.radAlexT1_160.TabStop = true;
             this.radAlexT1_160.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_160.UseVisualStyleBackColor = true;
-            this.radAlexT1_160.CheckedChanged += new System.EventHandler(this.radAlexT_160_CheckedChanged);
+            this.radAlexT1_160.Click += new System.EventHandler(this.radAlexT_160_Click);
             // 
             // radAlexT3_160
             // 
@@ -6049,7 +6057,7 @@ namespace PowerSDR
             this.radAlexT3_160.TabIndex = 8;
             this.radAlexT3_160.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_160.UseVisualStyleBackColor = true;
-            this.radAlexT3_160.CheckedChanged += new System.EventHandler(this.radAlexT_160_CheckedChanged);
+            this.radAlexT3_160.Click += new System.EventHandler(this.radAlexT_160_Click);
             // 
             // panel1
             // 
@@ -6311,7 +6319,7 @@ namespace PowerSDR
             this.tcSetup.Location = new System.Drawing.Point(8, 8);
             this.tcSetup.Name = "tcSetup";
             this.tcSetup.SelectedIndex = 0;
-            this.tcSetup.Size = new System.Drawing.Size(592, 312);
+            this.tcSetup.Size = new System.Drawing.Size(592, 330);
             this.tcSetup.TabIndex = 16;
             // 
             // tpGeneral
@@ -6319,7 +6327,7 @@ namespace PowerSDR
             this.tpGeneral.Controls.Add(this.tcGeneral);
             this.tpGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpGeneral.Name = "tpGeneral";
-            this.tpGeneral.Size = new System.Drawing.Size(584, 286);
+            this.tpGeneral.Size = new System.Drawing.Size(584, 304);
             this.tpGeneral.TabIndex = 3;
             this.tpGeneral.Text = "General";
             // 
@@ -7646,7 +7654,7 @@ namespace PowerSDR
             0,
             0});
             this.udRFDelay.Minimum = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
@@ -7655,7 +7663,7 @@ namespace PowerSDR
             this.udRFDelay.TabIndex = 22;
             this.toolTip1.SetToolTip(this.udRFDelay, "Sets the Delay period to wait after TX before RF output.");
             this.udRFDelay.Value = new decimal(new int[] {
-            30,
+            20,
             0,
             0,
             0});
@@ -7688,7 +7696,7 @@ namespace PowerSDR
             0,
             0});
             this.udMoxDelay.Minimum = new decimal(new int[] {
-            5,
+            0,
             0,
             0,
             0});
@@ -15570,7 +15578,7 @@ namespace PowerSDR
             this.tpAudio.Controls.Add(this.tcAudio);
             this.tpAudio.Location = new System.Drawing.Point(4, 22);
             this.tpAudio.Name = "tpAudio";
-            this.tpAudio.Size = new System.Drawing.Size(584, 286);
+            this.tpAudio.Size = new System.Drawing.Size(584, 304);
             this.tpAudio.TabIndex = 0;
             this.tpAudio.Text = "Audio";
             // 
@@ -16518,7 +16526,7 @@ namespace PowerSDR
             this.tpDisplay.Controls.Add(this.grpDisplaySpectrumGrid);
             this.tpDisplay.Location = new System.Drawing.Point(4, 22);
             this.tpDisplay.Name = "tpDisplay";
-            this.tpDisplay.Size = new System.Drawing.Size(584, 286);
+            this.tpDisplay.Size = new System.Drawing.Size(584, 304);
             this.tpDisplay.TabIndex = 2;
             this.tpDisplay.Text = "Display";
             // 
@@ -17545,7 +17553,7 @@ namespace PowerSDR
             this.tpDSP.Controls.Add(this.tcDSP);
             this.tpDSP.Location = new System.Drawing.Point(4, 22);
             this.tpDSP.Name = "tpDSP";
-            this.tpDSP.Size = new System.Drawing.Size(584, 286);
+            this.tpDSP.Size = new System.Drawing.Size(584, 304);
             this.tpDSP.TabIndex = 1;
             this.tpDSP.Text = "DSP";
             // 
@@ -19459,6 +19467,10 @@ namespace PowerSDR
             // 
             // grpDSPAGC
             // 
+            this.grpDSPAGC.Controls.Add(this.chkAGCHangSpectrumLine);
+            this.grpDSPAGC.Controls.Add(this.chkAGCDisplayHangLine);
+            this.grpDSPAGC.Controls.Add(this.chkAGCGainSpectrumLine);
+            this.grpDSPAGC.Controls.Add(this.chkDisplayAGCGainLine);
             this.grpDSPAGC.Controls.Add(this.tbDSPAGCHangThreshold);
             this.grpDSPAGC.Controls.Add(this.lblDSPAGCHangThreshold);
             this.grpDSPAGC.Controls.Add(this.lblDSPAGCHangTime);
@@ -19475,10 +19487,62 @@ namespace PowerSDR
             this.grpDSPAGC.Controls.Add(this.lblDSPAGCFixed);
             this.grpDSPAGC.Location = new System.Drawing.Point(8, 8);
             this.grpDSPAGC.Name = "grpDSPAGC";
-            this.grpDSPAGC.Size = new System.Drawing.Size(168, 232);
+            this.grpDSPAGC.Size = new System.Drawing.Size(230, 270);
             this.grpDSPAGC.TabIndex = 31;
             this.grpDSPAGC.TabStop = false;
             this.grpDSPAGC.Text = "AGC";
+            // 
+            // chkAGCHangSpectrumLine
+            // 
+            this.chkAGCHangSpectrumLine.Checked = true;
+            this.chkAGCHangSpectrumLine.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAGCHangSpectrumLine.Image = null;
+            this.chkAGCHangSpectrumLine.Location = new System.Drawing.Point(139, 246);
+            this.chkAGCHangSpectrumLine.Name = "chkAGCHangSpectrumLine";
+            this.chkAGCHangSpectrumLine.Size = new System.Drawing.Size(85, 16);
+            this.chkAGCHangSpectrumLine.TabIndex = 51;
+            this.chkAGCHangSpectrumLine.Text = "Spectrum";
+            this.toolTip1.SetToolTip(this.chkAGCHangSpectrumLine, "Check this box to show AGC Hang Threshold line across the spectrum.");
+            this.chkAGCHangSpectrumLine.CheckedChanged += new System.EventHandler(this.chkAGCHangSpectrumLine_CheckedChanged);
+            // 
+            // chkAGCDisplayHangLine
+            // 
+            this.chkAGCDisplayHangLine.Checked = true;
+            this.chkAGCDisplayHangLine.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAGCDisplayHangLine.Image = null;
+            this.chkAGCDisplayHangLine.Location = new System.Drawing.Point(11, 246);
+            this.chkAGCDisplayHangLine.Name = "chkAGCDisplayHangLine";
+            this.chkAGCDisplayHangLine.Size = new System.Drawing.Size(122, 18);
+            this.chkAGCDisplayHangLine.TabIndex = 50;
+            this.chkAGCDisplayHangLine.Text = "Display Hang Line";
+            this.toolTip1.SetToolTip(this.chkAGCDisplayHangLine, "Check this box to Display the AGC Hang Threshold Control on the bandscope.");
+            this.chkAGCDisplayHangLine.CheckedChanged += new System.EventHandler(this.chkAGCDisplayHangLine_CheckedChanged);
+            // 
+            // chkAGCGainSpectrumLine
+            // 
+            this.chkAGCGainSpectrumLine.Checked = true;
+            this.chkAGCGainSpectrumLine.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAGCGainSpectrumLine.Image = null;
+            this.chkAGCGainSpectrumLine.Location = new System.Drawing.Point(139, 224);
+            this.chkAGCGainSpectrumLine.Name = "chkAGCGainSpectrumLine";
+            this.chkAGCGainSpectrumLine.Size = new System.Drawing.Size(85, 16);
+            this.chkAGCGainSpectrumLine.TabIndex = 49;
+            this.chkAGCGainSpectrumLine.Text = "Spectrum";
+            this.toolTip1.SetToolTip(this.chkAGCGainSpectrumLine, "Check this box to show AGC Gain line across spectrum.");
+            this.chkAGCGainSpectrumLine.CheckedChanged += new System.EventHandler(this.chkAGCGainSpectrumLine_CheckedChanged);
+            // 
+            // chkDisplayAGCGainLine
+            // 
+            this.chkDisplayAGCGainLine.Checked = true;
+            this.chkDisplayAGCGainLine.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDisplayAGCGainLine.Image = null;
+            this.chkDisplayAGCGainLine.Location = new System.Drawing.Point(11, 224);
+            this.chkDisplayAGCGainLine.Name = "chkDisplayAGCGainLine";
+            this.chkDisplayAGCGainLine.Size = new System.Drawing.Size(122, 16);
+            this.chkDisplayAGCGainLine.TabIndex = 48;
+            this.chkDisplayAGCGainLine.Text = "Display Gain Line";
+            this.toolTip1.SetToolTip(this.chkDisplayAGCGainLine, "Check this box to Display the AGC Gain Control on the bandscope.");
+            this.chkDisplayAGCGainLine.CheckedChanged += new System.EventHandler(this.chkDisplayAGCGainLine_CheckedChanged);
             // 
             // tbDSPAGCHangThreshold
             // 
@@ -19487,7 +19551,7 @@ namespace PowerSDR
             this.tbDSPAGCHangThreshold.Location = new System.Drawing.Point(8, 168);
             this.tbDSPAGCHangThreshold.Maximum = 100;
             this.tbDSPAGCHangThreshold.Name = "tbDSPAGCHangThreshold";
-            this.tbDSPAGCHangThreshold.Size = new System.Drawing.Size(144, 16);
+            this.tbDSPAGCHangThreshold.Size = new System.Drawing.Size(204, 24);
             this.tbDSPAGCHangThreshold.TabIndex = 47;
             this.tbDSPAGCHangThreshold.TickFrequency = 10;
             this.tbDSPAGCHangThreshold.Scroll += new System.EventHandler(this.tbDSPAGCHangThreshold_Scroll);
@@ -19497,7 +19561,7 @@ namespace PowerSDR
             this.lblDSPAGCHangThreshold.Image = null;
             this.lblDSPAGCHangThreshold.Location = new System.Drawing.Point(8, 144);
             this.lblDSPAGCHangThreshold.Name = "lblDSPAGCHangThreshold";
-            this.lblDSPAGCHangThreshold.Size = new System.Drawing.Size(88, 16);
+            this.lblDSPAGCHangThreshold.Size = new System.Drawing.Size(144, 16);
             this.lblDSPAGCHangThreshold.TabIndex = 46;
             this.lblDSPAGCHangThreshold.Text = "Hang Threshold:";
             // 
@@ -19533,7 +19597,7 @@ namespace PowerSDR
             this.udDSPAGCHangTime.Size = new System.Drawing.Size(48, 20);
             this.udDSPAGCHangTime.TabIndex = 44;
             this.udDSPAGCHangTime.Value = new decimal(new int[] {
-            250,
+            2000,
             0,
             0,
             0});
@@ -19559,7 +19623,7 @@ namespace PowerSDR
             0,
             -2147483648});
             this.udDSPAGCMaxGaindB.Name = "udDSPAGCMaxGaindB";
-            this.udDSPAGCMaxGaindB.Size = new System.Drawing.Size(40, 20);
+            this.udDSPAGCMaxGaindB.Size = new System.Drawing.Size(48, 20);
             this.udDSPAGCMaxGaindB.TabIndex = 6;
             this.toolTip1.SetToolTip(this.udDSPAGCMaxGaindB, "This provides for a “threshold” AGC.  Irrespective of how weak a signal is, no ga" +
                     "in over this Max Gain is applied.");
@@ -19580,7 +19644,7 @@ namespace PowerSDR
             0});
             this.udDSPAGCSlope.Location = new System.Drawing.Point(104, 24);
             this.udDSPAGCSlope.Maximum = new decimal(new int[] {
-            10,
+            20,
             0,
             0,
             0});
@@ -19624,7 +19688,7 @@ namespace PowerSDR
             this.udDSPAGCDecay.Size = new System.Drawing.Size(48, 20);
             this.udDSPAGCDecay.TabIndex = 12;
             this.udDSPAGCDecay.Value = new decimal(new int[] {
-            250,
+            2000,
             0,
             0,
             0});
@@ -19704,7 +19768,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDSPAGCFixedGaindB.Location = new System.Drawing.Point(104, 200);
+            this.udDSPAGCFixedGaindB.Location = new System.Drawing.Point(104, 195);
             this.udDSPAGCFixedGaindB.Maximum = new decimal(new int[] {
             120,
             0,
@@ -19752,7 +19816,7 @@ namespace PowerSDR
             this.tpTransmit.Controls.Add(this.grpTXNoiseGate);
             this.tpTransmit.Location = new System.Drawing.Point(4, 22);
             this.tpTransmit.Name = "tpTransmit";
-            this.tpTransmit.Size = new System.Drawing.Size(584, 286);
+            this.tpTransmit.Size = new System.Drawing.Size(584, 304);
             this.tpTransmit.TabIndex = 5;
             this.tpTransmit.Text = "Transmit";
             // 
@@ -20555,12 +20619,12 @@ namespace PowerSDR
             // tpPowerAmplifier
             // 
             this.tpPowerAmplifier.Controls.Add(this.grpPAGainByBand);
-            this.tpPowerAmplifier.Controls.Add(this.grpPABandOffset);
             this.tpPowerAmplifier.Controls.Add(this.chkPANewCal);
             this.tpPowerAmplifier.Controls.Add(this.rtxtPACalReq);
+            this.tpPowerAmplifier.Controls.Add(this.grpPABandOffset);
             this.tpPowerAmplifier.Location = new System.Drawing.Point(4, 22);
             this.tpPowerAmplifier.Name = "tpPowerAmplifier";
-            this.tpPowerAmplifier.Size = new System.Drawing.Size(584, 286);
+            this.tpPowerAmplifier.Size = new System.Drawing.Size(584, 304);
             this.tpPowerAmplifier.TabIndex = 8;
             this.tpPowerAmplifier.Text = "PA Settings";
             // 
@@ -20636,11 +20700,10 @@ namespace PowerSDR
             this.grpPAGainByBand.Location = new System.Drawing.Point(8, 8);
             this.grpPAGainByBand.Name = "grpPAGainByBand";
             this.grpPAGainByBand.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.grpPAGainByBand.Size = new System.Drawing.Size(430, 272);
+            this.grpPAGainByBand.Size = new System.Drawing.Size(573, 272);
             this.grpPAGainByBand.TabIndex = 1;
             this.grpPAGainByBand.TabStop = false;
             this.grpPAGainByBand.Text = "Gain By Band (dB)";
-            this.grpPAGainByBand.Visible = false;
             // 
             // lblPAGainByBandVHF13
             // 
@@ -21847,6 +21910,29 @@ namespace PowerSDR
             this.chkPA6.Text = "6";
             this.chkPA6.Visible = false;
             // 
+            // chkPANewCal
+            // 
+            this.chkPANewCal.Enabled = false;
+            this.chkPANewCal.Image = null;
+            this.chkPANewCal.Location = new System.Drawing.Point(461, 248);
+            this.chkPANewCal.Name = "chkPANewCal";
+            this.chkPANewCal.Size = new System.Drawing.Size(120, 32);
+            this.chkPANewCal.TabIndex = 83;
+            this.chkPANewCal.Text = "Use Advanced Calibration Routine";
+            this.chkPANewCal.Visible = false;
+            this.chkPANewCal.CheckedChanged += new System.EventHandler(this.chkPANewCal_CheckedChanged);
+            // 
+            // rtxtPACalReq
+            // 
+            this.rtxtPACalReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtxtPACalReq.Location = new System.Drawing.Point(328, 16);
+            this.rtxtPACalReq.Name = "rtxtPACalReq";
+            this.rtxtPACalReq.ReadOnly = true;
+            this.rtxtPACalReq.Size = new System.Drawing.Size(224, 112);
+            this.rtxtPACalReq.TabIndex = 82;
+            this.rtxtPACalReq.Text = resources.GetString("rtxtPACalReq.Text");
+            this.rtxtPACalReq.Visible = false;
+            // 
             // grpPABandOffset
             // 
             this.grpPABandOffset.Controls.Add(this.lblPABandOffset10);
@@ -21869,6 +21955,7 @@ namespace PowerSDR
             this.grpPABandOffset.Controls.Add(this.udPAADC60);
             this.grpPABandOffset.Controls.Add(this.udPAADC40);
             this.grpPABandOffset.Controls.Add(this.udPAADC30);
+            this.grpPABandOffset.Enabled = false;
             this.grpPABandOffset.Location = new System.Drawing.Point(373, 131);
             this.grpPABandOffset.Name = "grpPABandOffset";
             this.grpPABandOffset.Size = new System.Drawing.Size(208, 152);
@@ -22247,33 +22334,12 @@ namespace PowerSDR
             0});
             this.udPAADC30.LostFocus += new System.EventHandler(this.udPAADC30_LostFocus);
             // 
-            // chkPANewCal
-            // 
-            this.chkPANewCal.Image = null;
-            this.chkPANewCal.Location = new System.Drawing.Point(461, 248);
-            this.chkPANewCal.Name = "chkPANewCal";
-            this.chkPANewCal.Size = new System.Drawing.Size(120, 32);
-            this.chkPANewCal.TabIndex = 83;
-            this.chkPANewCal.Text = "Use Advanced Calibration Routine";
-            this.chkPANewCal.CheckedChanged += new System.EventHandler(this.chkPANewCal_CheckedChanged);
-            // 
-            // rtxtPACalReq
-            // 
-            this.rtxtPACalReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtxtPACalReq.Location = new System.Drawing.Point(328, 16);
-            this.rtxtPACalReq.Name = "rtxtPACalReq";
-            this.rtxtPACalReq.ReadOnly = true;
-            this.rtxtPACalReq.Size = new System.Drawing.Size(224, 112);
-            this.rtxtPACalReq.TabIndex = 82;
-            this.rtxtPACalReq.Text = resources.GetString("rtxtPACalReq.Text");
-            this.rtxtPACalReq.Visible = false;
-            // 
             // tpAppearance
             // 
             this.tpAppearance.Controls.Add(this.tcAppearance);
             this.tpAppearance.Location = new System.Drawing.Point(4, 22);
             this.tpAppearance.Name = "tpAppearance";
-            this.tpAppearance.Size = new System.Drawing.Size(584, 286);
+            this.tpAppearance.Size = new System.Drawing.Size(584, 304);
             this.tpAppearance.TabIndex = 6;
             this.tpAppearance.Text = "Appearance";
             // 
@@ -24134,7 +24200,7 @@ namespace PowerSDR
             this.tpKeyboard.Controls.Add(this.grpKBCW);
             this.tpKeyboard.Location = new System.Drawing.Point(4, 22);
             this.tpKeyboard.Name = "tpKeyboard";
-            this.tpKeyboard.Size = new System.Drawing.Size(584, 286);
+            this.tpKeyboard.Size = new System.Drawing.Size(584, 304);
             this.tpKeyboard.TabIndex = 4;
             this.tpKeyboard.Text = "Keyboard";
             // 
@@ -24829,7 +24895,7 @@ namespace PowerSDR
             this.tpExtCtrl.Controls.Add(this.grpExtRX);
             this.tpExtCtrl.Location = new System.Drawing.Point(4, 22);
             this.tpExtCtrl.Name = "tpExtCtrl";
-            this.tpExtCtrl.Size = new System.Drawing.Size(584, 286);
+            this.tpExtCtrl.Size = new System.Drawing.Size(584, 304);
             this.tpExtCtrl.TabIndex = 11;
             this.tpExtCtrl.Text = "Ext. Ctrl";
             // 
@@ -26850,7 +26916,7 @@ namespace PowerSDR
             this.tpCAT.Controls.Add(this.grpRTTYOffset);
             this.tpCAT.Location = new System.Drawing.Point(4, 22);
             this.tpCAT.Name = "tpCAT";
-            this.tpCAT.Size = new System.Drawing.Size(584, 286);
+            this.tpCAT.Size = new System.Drawing.Size(584, 304);
             this.tpCAT.TabIndex = 10;
             this.tpCAT.Text = "CAT Control";
             // 
@@ -27244,7 +27310,7 @@ namespace PowerSDR
             this.tpTests.Controls.Add(this.grpTestAudioBalance);
             this.tpTests.Location = new System.Drawing.Point(4, 22);
             this.tpTests.Name = "tpTests";
-            this.tpTests.Size = new System.Drawing.Size(584, 286);
+            this.tpTests.Size = new System.Drawing.Size(584, 304);
             this.tpTests.TabIndex = 7;
             this.tpTests.Text = "Tests";
             // 
@@ -28084,7 +28150,7 @@ namespace PowerSDR
             // btnExportDB
             // 
             this.btnExportDB.Image = null;
-            this.btnExportDB.Location = new System.Drawing.Point(224, 328);
+            this.btnExportDB.Location = new System.Drawing.Point(224, 352);
             this.btnExportDB.Name = "btnExportDB";
             this.btnExportDB.Size = new System.Drawing.Size(112, 23);
             this.btnExportDB.TabIndex = 22;
@@ -28095,7 +28161,7 @@ namespace PowerSDR
             // btnImportDB
             // 
             this.btnImportDB.Image = null;
-            this.btnImportDB.Location = new System.Drawing.Point(108, 328);
+            this.btnImportDB.Location = new System.Drawing.Point(108, 352);
             this.btnImportDB.Name = "btnImportDB";
             this.btnImportDB.Size = new System.Drawing.Size(112, 23);
             this.btnImportDB.TabIndex = 21;
@@ -28106,7 +28172,7 @@ namespace PowerSDR
             // btnResetDB
             // 
             this.btnResetDB.Image = null;
-            this.btnResetDB.Location = new System.Drawing.Point(8, 328);
+            this.btnResetDB.Location = new System.Drawing.Point(8, 352);
             this.btnResetDB.Name = "btnResetDB";
             this.btnResetDB.Size = new System.Drawing.Size(96, 23);
             this.btnResetDB.TabIndex = 20;
@@ -28118,7 +28184,7 @@ namespace PowerSDR
             // btnApply
             // 
             this.btnApply.Image = null;
-            this.btnApply.Location = new System.Drawing.Point(524, 328);
+            this.btnApply.Location = new System.Drawing.Point(524, 352);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 19;
@@ -28129,7 +28195,7 @@ namespace PowerSDR
             // btnCancel
             // 
             this.btnCancel.Image = null;
-            this.btnCancel.Location = new System.Drawing.Point(443, 328);
+            this.btnCancel.Location = new System.Drawing.Point(443, 352);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 18;
@@ -28140,7 +28206,7 @@ namespace PowerSDR
             // btnOK
             // 
             this.btnOK.Image = null;
-            this.btnOK.Location = new System.Drawing.Point(362, 328);
+            this.btnOK.Location = new System.Drawing.Point(362, 352);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 17;
@@ -29161,7 +29227,9 @@ namespace PowerSDR
             // 
             // Setup
             // 
-            this.ClientSize = new System.Drawing.Size(616, 357);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(616, 387);
             this.Controls.Add(this.btnExportDB);
             this.Controls.Add(this.btnImportDB);
             this.Controls.Add(this.btnResetDB);
@@ -30512,14 +30580,32 @@ namespace PowerSDR
             // DSP Tab
             udLMSANF_ValueChanged(this, e);
             udLMSNR_ValueChanged(this, e);
-            udDSPImagePhaseTX_ValueChanged(this, e);
-            udDSPImageGainTX_ValueChanged(this, e);
-            udDSPAGCFixedGaindB_ValueChanged(this, e);
-            udDSPAGCMaxGaindB_ValueChanged(this, e);
+           // udDSPImagePhaseTX_ValueChanged(this, e);
+           // udDSPImageGainTX_ValueChanged(this, e);
             udDSPCWPitch_ValueChanged(this, e);
             comboDSPWindow_SelectedIndexChanged(this, e);
             udDSPNB_ValueChanged(this, e);
             udDSPNB2_ValueChanged(this, e);
+            //AGC
+            udDSPAGCFixedGaindB_ValueChanged(this, e);
+            udDSPAGCMaxGaindB_ValueChanged(this, e);
+            udDSPAGCSlope_ValueChanged(this, e);
+            udDSPAGCAttack_ValueChanged(this, e);
+            udDSPAGCDecay_ValueChanged(this, e);
+            udDSPAGCHangTime_ValueChanged(this, e);
+            tbDSPAGCHangThreshold_Scroll(this, e);
+            //Leveler
+            chkDSPLevelerEnabled_CheckedChanged(this, e);
+            udDSPLevelerThreshold_ValueChanged(this, e);
+            udDSPLevelerAttack_ValueChanged(this, e);
+            udDSPLevelerDecay_ValueChanged(this, e);
+            udDSPLevelerHangTime_ValueChanged(this, e);
+            //ALC
+            chkDSPALCEnabled_CheckedChanged(this, e);
+            udDSPALCThreshold_ValueChanged(this, e);
+            udDSPALCAttack_ValueChanged(this, e);
+            udDSPALCDecay_ValueChanged(this, e);
+            udDSPALCHangTime_ValueChanged(this, e);
 
             // Transmit Tab
             udTXFilterHigh_ValueChanged(this, e);
@@ -30986,7 +31072,13 @@ namespace PowerSDR
             }
             set
             {
-                if (udDSPAGCMaxGaindB != null) udDSPAGCMaxGaindB.Value = value;
+                if (udDSPAGCMaxGaindB != null)
+                {
+                    if (value > udDSPAGCMaxGaindB.Maximum) value = (int)udDSPAGCMaxGaindB.Maximum;
+                    if (value < udDSPAGCMaxGaindB.Minimum) value = (int)udDSPAGCMaxGaindB.Minimum;
+
+                    udDSPAGCMaxGaindB.Value = value;
+                }
             }
         }
 
@@ -30999,7 +31091,55 @@ namespace PowerSDR
             }
             set
             {
-                if (udDSPAGCFixedGaindB != null) udDSPAGCFixedGaindB.Value = value;
+                if (udDSPAGCFixedGaindB != null)
+                {
+                    if (value > udDSPAGCFixedGaindB.Maximum) value = (int)udDSPAGCFixedGaindB.Maximum;
+                    if (value < udDSPAGCFixedGaindB.Minimum) value = (int)udDSPAGCFixedGaindB.Minimum;
+
+                    udDSPAGCFixedGaindB.Value = value;
+                }
+            }
+        }
+
+        public int AGCHangThreshold
+        {
+            set
+            {
+                if (tbDSPAGCHangThreshold != null)
+                {
+                    if (value > tbDSPAGCHangThreshold.Maximum) value = (int)tbDSPAGCHangThreshold.Maximum;
+                    if (value < tbDSPAGCHangThreshold.Minimum) value = (int)tbDSPAGCHangThreshold.Minimum;
+                    tbDSPAGCHangThreshold.Value = value;
+                    lblDSPAGCHangThreshold.Text = "Hang Threshold: " + tbDSPAGCHangThreshold.Value.ToString();
+                   // tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
+                }                
+            }
+        }
+
+        public int SetAGCHangThres
+        {
+            set
+            {
+                if (tbDSPAGCHangThreshold != null)
+                {
+                    if (value > tbDSPAGCHangThreshold.Maximum) value = (int)tbDSPAGCHangThreshold.Maximum;
+                    if (value < tbDSPAGCHangThreshold.Minimum) value = (int)tbDSPAGCHangThreshold.Minimum;
+                    
+                    if (tbDSPAGCHangThreshold.Value == 0)
+                    {
+                        tbDSPAGCHangThreshold.Value = value + 1;
+                        tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
+                        tbDSPAGCHangThreshold.Value = tbDSPAGCHangThreshold.Value - 1;
+                        tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
+                    }
+                    else 
+                    {
+                        tbDSPAGCHangThreshold.Value = value - 1;
+                        tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
+                        tbDSPAGCHangThreshold.Value = tbDSPAGCHangThreshold.Value + 1;
+                        tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
+                    }
+                }                
             }
         }
 
@@ -32000,10 +32140,10 @@ namespace PowerSDR
                 grpDSPImageRejectTX.Visible = true;
             }
 
-            grpPAGainByBand.Visible = (!b && chkGeneralPAPresent.Checked);
-            chkPANewCal.Visible = (!b && chkGeneralPAPresent.Checked);
+            grpPAGainByBand.Visible = true;
+            chkPANewCal.Visible = false;
 
-            rtxtPACalReq.Visible = !b;
+            rtxtPACalReq.Visible = false;
 
             if (b)
             {
@@ -32233,6 +32373,7 @@ namespace PowerSDR
                 lblRFDelay.Visible = true;
                 grpImpulseTest.Visible = false;
                 chkCWKeyerMonoCable.Visible = false;
+               // chkGeneralPAPresent.Checked = true;
 
                 if (is_hermes)
                 {
@@ -32304,7 +32445,7 @@ namespace PowerSDR
                 udAudioVoltage1.Enabled = true;
                 btnAudioVoltTest1.Visible = true;
 
-                grpPAGainByBand.Visible = chkGeneralPAPresent.Checked;
+                grpPAGainByBand.Visible = true;
                 grpGeneralHardwareSDR1000.Visible = true;
                 grpGeneralDDS.Visible = true;
                 grpGenCalRXImage.Visible = true;
@@ -32553,8 +32694,8 @@ namespace PowerSDR
         {
             console.PAPresent = chkGeneralPAPresent.Checked;
             chkGeneralATUPresent.Visible = chkGeneralPAPresent.Checked;
-            grpPAGainByBand.Visible = chkGeneralPAPresent.Checked;
-            rtxtPACalReq.Visible = chkGeneralPAPresent.Checked;
+            grpPAGainByBand.Visible = true;
+            rtxtPACalReq.Visible = false;
 
             if (!chkGeneralPAPresent.Checked)
                 chkGeneralATUPresent.Checked = false;
@@ -34894,6 +35035,7 @@ namespace PowerSDR
 
         private void tbDSPAGCHangThreshold_Scroll(object sender, System.EventArgs e)
         {
+            lblDSPAGCHangThreshold.Text = "Hang Threshold: " + tbDSPAGCHangThreshold.Value.ToString();
             console.radio.GetDSPRX(0, 0).RXAGCHangThreshold = (int)tbDSPAGCHangThreshold.Value;
             console.radio.GetDSPRX(0, 1).RXAGCHangThreshold = (int)tbDSPAGCHangThreshold.Value;
         }
@@ -36758,13 +36900,13 @@ namespace PowerSDR
             console.GetState();
             if (console.EQForm != null) Common.RestoreForm(console.EQForm, "EQForm", false);
             if (console.XVTRForm != null) Common.RestoreForm(console.XVTRForm, "XVTR", false);
-            if (console.ProdTestForm != null) Common.RestoreForm(console.ProdTestForm, "ProdTest", false);
+           // if (console.ProdTestForm != null) Common.RestoreForm(console.ProdTestForm, "ProdTest", false);
 
             SaveOptions();					// save all database values
             console.SaveState();
             if (console.EQForm != null) Common.SaveForm(console.EQForm, "EQForm");
             if (console.XVTRForm != null) Common.SaveForm(console.XVTRForm, "XVTR");
-            if (console.ProdTestForm != null) Common.SaveForm(console.ProdTestForm, "ProdTest");
+           // if (console.ProdTestForm != null) Common.SaveForm(console.ProdTestForm, "ProdTest");
 
             udTransmitTunePower_ValueChanged(this, EventArgs.Empty);
             //console.ResetMemForm();
@@ -38086,7 +38228,7 @@ namespace PowerSDR
                 switch (e.KeyCode)
                 {
                     case Keys.A:
-                        chkPANewCal.Visible = true;
+                        //chkPANewCal.Visible = true;
                         grpPAGainByBand.Visible = true;
                         break;
                     case Keys.O:
@@ -39057,11 +39199,60 @@ namespace PowerSDR
             ProcessAlexAntRadioButton(sender, Band.B6M, false);
         }
 
-        private void radAlexR_2_CheckedChanged(object sender, System.EventArgs e)
+        private void radAlexR_160_Click(object sender, System.EventArgs e)
         {
-            ProcessAlexAntRadioButton(sender, Band.B2M, false);
+            ProcessAlexAntRadioButton(sender, Band.B160M, false);
         }
 
+        private void radAlexR_80_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B80M, false);
+        }
+
+        private void radAlexR_60_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B60M, false);
+        }
+
+        private void radAlexR_40_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B40M, false);
+        }
+
+        private void radAlexR_30_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B30M, false);
+        }
+
+        private void radAlexR_20_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B20M, false);
+        }
+
+        private void radAlexR_17_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B17M, false);
+        }
+
+        private void radAlexR_15_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B15M, false);
+        }
+
+        private void radAlexR_12_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B12M, false);
+        }
+
+        private void radAlexR_10_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B10M, false);
+        }
+
+        private void radAlexR_6_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B6M, false);
+        }
 
         private void radAlexT_160_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -39118,9 +39309,59 @@ namespace PowerSDR
             ProcessAlexAntRadioButton(sender, Band.B6M, true);
         }
 
-        private void radAlexT_2_CheckedChanged(object sender, System.EventArgs e)
+        private void radAlexT_160_Click(object sender, System.EventArgs e)
         {
-            ProcessAlexAntRadioButton(sender, Band.B2M, true);
+            ProcessAlexAntRadioButton(sender, Band.B160M, true);
+        }
+
+        private void radAlexT_80_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B80M, true);
+        }
+
+        private void radAlexT_60_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B60M, true);
+        }
+
+        private void radAlexT_40_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B40M, true);
+        }
+
+        private void radAlexT_30_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B30M, true);
+        }
+
+        private void radAlexT_20_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B20M, true);
+        }
+
+        private void radAlexT_17_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B17M, true);
+        }
+
+        private void radAlexT_15_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B15M, true);
+        }
+
+        private void radAlexT_12_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B12M, true);
+        }
+
+        private void radAlexT_10_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B10M, true);
+        }
+
+        private void radAlexT_6_Click(object sender, System.EventArgs e)
+        {
+            ProcessAlexAntRadioButton(sender, Band.B6M, true);
         }
 
         //~~~
@@ -39234,7 +39475,6 @@ namespace PowerSDR
             int idx = (int)band - (int)Band.B160M;
 
             RadioButtonTS[] buttons = is_xmit ? AlexTxAntButtons[idx] : AlexRxAntButtons[idx];
-
             int ant = 0;
 
             // find which button was changed 
@@ -40519,7 +40759,49 @@ namespace PowerSDR
         {
             console.AlexHPFBypass = chkAlexHPFBypass.Checked;
         }
-     }
+
+        private void radAlexT3_60_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radAlexT3_17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radAlexT3_12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radAlexT3_6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkDisplayAGCGainLine_CheckedChanged(object sender, EventArgs e)
+        {
+           // Display.DisplayAGCGainLine = chkDisplayAGCGainLine.Checked;
+            console.DisplayAGCGainLine = chkDisplayAGCGainLine.Checked;
+        }
+
+        private void chkAGCDisplayHangLine_CheckedChanged(object sender, EventArgs e)
+        {
+           // Display.DisplayAGCHangLine = chkAGCDisplayHangLine.Checked;
+            console.DisplayAGCHangLine = chkAGCDisplayHangLine.Checked;
+        }
+
+        private void chkAGCGainSpectrumLine_CheckedChanged(object sender, EventArgs e)
+        {
+            Display.DisplayAGCGainSpectrumLine = chkAGCGainSpectrumLine.Checked;
+        }
+
+        private void chkAGCHangSpectrumLine_CheckedChanged(object sender, EventArgs e)
+        {
+            Display.DisplayAGCHangSpectrumLine = chkAGCHangSpectrumLine.Checked;
+        }
+      }
 
 	#region PADeviceInfo Helper Class
 
