@@ -361,7 +361,10 @@ namespace PowerSDR
 		[DllImport("DttSP.dll", EntryPoint="SetRXAGCTop")]///
 		public static extern void SetRXAGCMaxGain(uint thread, uint subrx, double max_agc);
 
-		[DllImport("DttSP.dll", EntryPoint="SetRXAGCAttack")]///
+        [DllImport("DttSP.dll", EntryPoint = "GetRXAGCTop")]///
+        public static extern void GetRXAGCMaxGain(uint thread, uint subrx, double *max_agc);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetRXAGCAttack")]///
 		public static extern void SetRXAGCAttack(uint thread, uint subrx, int attack);
 		/*public static void SetRXAGCAttack(uint thread, uint subrx, int attack)
 		{
@@ -394,7 +397,22 @@ namespace PowerSDR
 		[DllImport("DttSP.dll", EntryPoint="SetRXAGCHangThreshold")]///
 		public static extern void SetRXAGCHangThreshold(uint thread, uint subrx, int hangthreshold);
 
-		[DllImport("DttSP.dll", EntryPoint="SetTXAMCarrierLevel")]///
+        [DllImport("DttSP.dll", EntryPoint = "GetRXAGCHangThreshold")]///
+        public static extern void GetRXAGCHangThreshold(uint thread, uint subrx, int *hangthreshold);
+
+        [DllImport("DttSP.dll", EntryPoint = "GetRXAGCThresh")]
+        public static extern void GetRXAGCThresh(uint thread, uint subrx, double *thresh);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetRXAGCThresh")]
+        public static extern void SetRXAGCThresh(uint thread, uint subrx, double thresh);
+
+        [DllImport("DttSP.dll", EntryPoint = "GetRXAGCHangLevel")]
+        public static extern void GetRXAGCHangLevel(uint thread, uint subrx, double* hang_level);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetRXAGCHangLevel")]
+        public static extern void SetRXAGCHangLevel(uint thread, uint subrx, double hang_level);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetTXAMCarrierLevel")]///
 		public static extern void SetTXAMCarrierLevel(uint thread, double carrier_level);
 
 		[DllImport("DttSP.dll", EntryPoint="SetTXALCBot")]///
@@ -450,12 +468,18 @@ namespace PowerSDR
 
 		[DllImport("DttSP.dll", EntryPoint="SetTXSquelchSt")]///
 		public static extern void SetTXSquelchState(uint thread, bool state);
-
+#if false
 		[DllImport("DttSP.dll", EntryPoint="SetTXCompandSt")]///
 		public static extern void SetTXCompandSt(uint thread, bool state);
 
 		[DllImport("DttSP.dll", EntryPoint="SetTXCompand")]///
 		public static extern void SetTXCompand(uint thread, double setit);
+#endif
+        [DllImport("DttSP.dll", EntryPoint = "SetTXCompressorSt")]///
+        public static extern void SetTXCompressorSt(uint thread, bool state);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetTXCompressor")]///
+        public static extern void SetTXCompressor(uint thread, double setit);
 
 		[DllImport("DttSP.dll", EntryPoint="SetPWSmode")]///
 		public static extern void SetPWSmode(uint thread, uint subrx, bool setit);

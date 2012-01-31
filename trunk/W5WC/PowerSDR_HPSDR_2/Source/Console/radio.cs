@@ -616,12 +616,12 @@ namespace PowerSDR
 				{
 					case AGCMode.LONG:
 						rx_agc_attack = rx_agc_attack_dsp = 2;
-						rx_agc_hang = rx_agc_hang_dsp = 750;
+						rx_agc_hang = rx_agc_hang_dsp = 2000;
 						rx_agc_decay = rx_agc_decay_dsp = 2000;
 						break;
 					case AGCMode.SLOW:
 						rx_agc_attack = rx_agc_attack_dsp = 2;
-						rx_agc_hang = rx_agc_hang_dsp = 500;
+						rx_agc_hang = rx_agc_hang_dsp = 1000;
 						rx_agc_decay = rx_agc_decay_dsp = 500;
 						break;					
 					case AGCMode.MED:
@@ -632,7 +632,7 @@ namespace PowerSDR
 					case AGCMode.FAST:
 						rx_agc_attack = rx_agc_attack_dsp = 2;
 						rx_agc_hang = rx_agc_hang_dsp = 100;
-						rx_agc_decay = rx_agc_decay_dsp = 100;
+						rx_agc_decay = rx_agc_decay_dsp = 50;
 						break;
 				}
 
@@ -2104,8 +2104,9 @@ namespace PowerSDR
 				{
 					if(value != tx_compand_on_dsp || force)
 					{
-						DttSP.SetTXCompandSt(thread, value);
-						tx_compand_on_dsp = value;
+						//DttSP.SetTXCompandSt(thread, value);
+                        DttSP.SetTXCompressorSt(thread, value);
+                        tx_compand_on_dsp = value;
 						//Debug.WriteLine("TXCompandOn: "+value.ToString());
 					}
 				}
@@ -2125,8 +2126,9 @@ namespace PowerSDR
 				{
 					if(value != tx_compand_level_dsp || force)
 					{
-						DttSP.SetTXCompand(thread, value);
-						tx_compand_level_dsp = value;
+						//DttSP.SetTXCompand(thread, value);
+                        DttSP.SetTXCompressor(thread, value);
+                        tx_compand_level_dsp = value;
 						//Debug.WriteLine("TXCompandLevel: "+value.ToString("f2"));
 					}
 				}

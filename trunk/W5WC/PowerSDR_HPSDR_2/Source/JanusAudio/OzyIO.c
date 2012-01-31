@@ -256,9 +256,9 @@ KD5TFDVK6APHAUDIO_API int  OzyBulkRead(struct OzyHandle *h, int ep, void* buffer
 	return rc; 
 }
 
-KD5TFDVK6APHAUDIO_API int LoadFirmware(char *filename) {
-    int myvid = OZY_VID;
-    int mypid = OZY_PID;
+KD5TFDVK6APHAUDIO_API int LoadFirmware(int VID, int PID, char *filename) {
+    int myvid = VID;
+    int mypid = PID;
 	  
     usb_dev_handle *hdev = NULL;
     struct usb_bus *bus = NULL;
@@ -330,9 +330,9 @@ KD5TFDVK6APHAUDIO_API int LoadFirmware(char *filename) {
     return 0;
 }
         
-KD5TFDVK6APHAUDIO_API int LoadFPGA(char *filename) {
-    int myvid = OZY_VID;		
-    int mypid = OZY_PID;		
+KD5TFDVK6APHAUDIO_API int LoadFPGA(int VID, int PID, char *filename) {
+    int myvid = VID; //OZY_VID;		
+    int mypid = PID; //OZY_PID;		
            
     usb_dev_handle *hdev = NULL;
     struct usb_bus *bus = NULL;
@@ -376,3 +376,87 @@ KD5TFDVK6APHAUDIO_API int LoadFPGA(char *filename) {
     return 0;    
 }
 
+KD5TFDVK6APHAUDIO_API int GetOzyID(struct usb_dev_handle *hdev, 
+								   unsigned char *buffer, 
+								   int length)
+{
+    int count;
+    int nsize = 8;      
+    
+   // if (qswasinit == _FALSE) return -1;
+    if (length != nsize) return -1;
+    
+    count = usb_control_msg(hdev, 
+                            VRT_VENDOR_IN, 
+                            VRQ_SDR1K_CTL, 
+                            SDR1KCTRL_READ_VERSION, 
+                            0, // index
+                            buffer, 
+                            nsize, 
+                            1000);
+    if (count != nsize) 
+        return -1;
+    else
+        return count;
+}
+#if 0
+KD5TFDVK6APHAUDIO_API int Write_I2C(struct usb_dev_handle *hdev, 
+                      int i2c_addr, 
+                      unsigned char *buffer, 
+                      int length)
+{
+    return (Write_Command(hdev,
+                         VRQ_REQ_I2C_WRITE,
+                         i2c_addr,
+                         0,
+                         buffer,
+                         length));
+
+}
+#endif
+
+KD5TFDVK6APHAUDIO_API int WriteControlMsg(struct usb_dev_handle *hdev,
+                                          int requesttype,
+                                          int request, 
+                                          int value, 
+                                          int index, 
+                                          unsigned char *bytes, 
+                                          int length,
+										  int timeout)
+{
+    int r = usb_control_msg(hdev, requesttype, request, value, index,
+                            (char *) bytes, length, timeout);
+    
+    if (r < 0) {
+        if (errno != EPIPE)
+            printf("usb control message failed: %s\n", usb_strerror());
+    }
+    return r;
+
+}
+
+KD5TFDVK6APHAUDIO_API int WriteI2C(struct usb_dev_handle *hdev, 
+								   int i2c_addr, 
+								   unsigned char *buffer, int length)
+{
+    return (Write_I2c(hdev, i2c_addr, 
+             buffer, length));    
+}
+
+KD5TFDVK6APHAUDIO_API int Set_I2C_Speed(struct usb_dev_handle *hdev, int speed)
+{
+            int ret = usb_control_msg(hdev,
+                VRT_VENDOR_OUT,
+                VRQ_I2C_SPEED_SET,
+                speed,
+                0x00,
+                0,
+                0,
+                1000
+                );
+
+            if (ret < 0)
+                return FALSE;
+            else
+                return TRUE;
+}

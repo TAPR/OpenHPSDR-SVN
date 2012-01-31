@@ -154,12 +154,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ad9854.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ad9854_v2.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="HPSDR\Alex.cs" />
     <Compile Include="alphawarnform.cs">
       <SubType>Form</SubType>
@@ -386,7 +380,6 @@
     <Compile Include="paqualify.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="parallel.cs" />
     <Compile Include="HPSDR\Penny.cs" />
     <Compile Include="portaudio.cs">
       <SubType>Code</SubType>
@@ -399,12 +392,6 @@
     </Compile>
     <Compile Include="process_sample_thread_controller.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="production_debug.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="production_test.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="progress.cs">
       <SubType>Form</SubType>
@@ -604,14 +591,6 @@
       <DependentUpon>predistest.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="production_debug.resx">
-      <DependentUpon>production_debug.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="production_test.resx">
-      <DependentUpon>production_test.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="progress.resx">
       <DependentUpon>progress.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -653,7 +632,6 @@
     <EmbeddedResource Include="images\flex-3000.jpg" />
     <Content Include="hpsdr5-64.ico" />
     <Content Include="images\hpsdr.jpg" />
-    <Content Include="images\Merc-v3.jpg" />
     <Content Include="images\PowerSDR.ico" />
   </ItemGroup>
   <ItemGroup>

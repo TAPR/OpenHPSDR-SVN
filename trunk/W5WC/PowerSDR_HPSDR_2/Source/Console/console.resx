@@ -2689,7 +2689,7 @@
     <value>49</value>
   </data>
   <data name="lblRF.Text" xml:space="preserve">
-    <value>AGC-T:</value>
+    <value>AGC Gain:</value>
   </data>
   <data name="lblRF.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -2764,7 +2764,7 @@
     <value>Off</value>
   </data>
   <data name="chkDX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 44</value>
+    <value>7, 123</value>
   </data>
   <data name="chkDX.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 24</value>
@@ -2780,6 +2780,9 @@
   </data>
   <data name="chkDX.ToolTip" xml:space="preserve">
     <value>Enables higher compression ratios on the Compander (CPDR)</value>
+  </data>
+  <data name="chkDX.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;chkDX.Name" xml:space="preserve">
     <value>chkDX</value>
@@ -2917,7 +2920,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkCPDR.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 70</value>
+    <value>7, 43</value>
   </data>
   <data name="chkCPDR.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 24</value>
@@ -2926,13 +2929,13 @@
     <value>35</value>
   </data>
   <data name="chkCPDR.Text" xml:space="preserve">
-    <value>CPDR</value>
+    <value>COMP</value>
   </data>
   <data name="chkCPDR.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
   <data name="chkCPDR.ToolTip" xml:space="preserve">
-    <value>Compander Enable</value>
+    <value>Compressor Enable</value>
   </data>
   <data name="&gt;&gt;chkCPDR.Name" xml:space="preserve">
     <value>chkCPDR</value>
@@ -3001,7 +3004,7 @@
     <value>Off</value>
   </data>
   <data name="chkVOX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 96</value>
+    <value>7, 68</value>
   </data>
   <data name="chkVOX.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 24</value>
@@ -3043,7 +3046,7 @@
     <value>Off</value>
   </data>
   <data name="chkNoiseGate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 122</value>
+    <value>7, 93</value>
   </data>
   <data name="chkNoiseGate.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 24</value>
@@ -7057,7 +7060,7 @@
     <value>Off</value>
   </data>
   <data name="picSquelch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 422</value>
+    <value>17, 421</value>
   </data>
   <data name="picSquelch.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 3</value>
@@ -8626,7 +8629,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificCW.ZOrder" xml:space="preserve">
-    <value>43</value>
+    <value>45</value>
   </data>
   <data name="panelRX2Filter.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -9664,7 +9667,7 @@
     <value>Off</value>
   </data>
   <data name="picNoiseGate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 142</value>
+    <value>65, 113</value>
   </data>
   <data name="picNoiseGate.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 3</value>
@@ -9691,7 +9694,7 @@
     <value>Off</value>
   </data>
   <data name="lblNoiseGateVal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 126</value>
+    <value>159, 98</value>
   </data>
   <data name="lblNoiseGateVal.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 16</value>
@@ -9724,7 +9727,7 @@
     <value>Off</value>
   </data>
   <data name="ptbNoiseGate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 122</value>
+    <value>57, 93</value>
   </data>
   <data name="ptbNoiseGate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -9754,7 +9757,7 @@
     <value>Off</value>
   </data>
   <data name="picVOX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 116</value>
+    <value>65, 88</value>
   </data>
   <data name="picVOX.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 3</value>
@@ -9781,7 +9784,7 @@
     <value>Off</value>
   </data>
   <data name="ptbVOX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 96</value>
+    <value>57, 68</value>
   </data>
   <data name="ptbVOX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -9814,7 +9817,7 @@
     <value>Off</value>
   </data>
   <data name="lblVOXVal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 99</value>
+    <value>159, 72</value>
   </data>
   <data name="lblVOXVal.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 16</value>
@@ -9847,7 +9850,7 @@
     <value>Off</value>
   </data>
   <data name="ptbCPDR.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 70</value>
+    <value>57, 43</value>
   </data>
   <data name="ptbCPDR.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -9880,10 +9883,10 @@
     <value>Off</value>
   </data>
   <data name="lblCPDRVal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 73</value>
+    <value>159, 46</value>
   </data>
   <data name="lblCPDRVal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 16</value>
+    <value>44, 16</value>
   </data>
   <data name="lblCPDRVal.TabIndex" type="System.Int32, mscorlib">
     <value>110</value>
@@ -9913,7 +9916,7 @@
     <value>Off</value>
   </data>
   <data name="ptbDX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 44</value>
+    <value>57, 121</value>
   </data>
   <data name="ptbDX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -9926,6 +9929,9 @@
   </data>
   <data name="ptbDX.TabIndex" type="System.Int32, mscorlib">
     <value>109</value>
+  </data>
+  <data name="ptbDX.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;ptbDX.Name" xml:space="preserve">
     <value>ptbDX</value>
@@ -9946,7 +9952,7 @@
     <value>Off</value>
   </data>
   <data name="lblDXVal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 47</value>
+    <value>159, 125</value>
   </data>
   <data name="lblDXVal.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 16</value>
@@ -9959,6 +9965,9 @@
   </data>
   <data name="lblDXVal.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
+  </data>
+  <data name="lblDXVal.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;lblDXVal.Name" xml:space="preserve">
     <value>lblDXVal</value>
@@ -10123,7 +10132,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificPhone.ZOrder" xml:space="preserve">
-    <value>44</value>
+    <value>42</value>
   </data>
   <data name="panelModeSpecificDigital.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10285,7 +10294,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificDigital.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>44</value>
   </data>
   <data name="panelDisplay.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -12514,7 +12523,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificFM.ZOrder" xml:space="preserve">
-    <value>45</value>
+    <value>43</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -12522,8 +12531,8 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>38</value>
   </metadata>
-  <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
-    <value>5, 13</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -12611,7 +12620,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v2.2.3 (W5WC - 11/30/11) </value>
+    <value>PowerSDR™/OpenHPSDR v2.2.3 (W5WC - 1/30/12) </value>
   </data>
   <data name="&gt;&gt;timer_cpu_meter.Name" xml:space="preserve">
     <value>timer_cpu_meter</value>

@@ -35,6 +35,7 @@ namespace PowerSDR
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Drawing.Imaging;
+    using System.Diagnostics;
     using System.Windows.Forms;
    // using Flex.TNF;
 
@@ -94,6 +95,9 @@ namespace PowerSDR
                     DrawBackground();
             }
         }
+
+        public static Rectangle AGCKnee = new Rectangle();
+        public static Rectangle AGCHang = new Rectangle();
 
         //Color notch_on_color = Color.DarkGreen;
         //Color notch_highlight_color = Color.Chartreuse;
@@ -480,6 +484,34 @@ namespace PowerSDR
         {
             get { return grid_control; }
             set { grid_control = value; }
+        }
+
+        private static bool display_agc_gain_line = true;
+        public static bool DisplayAGCGainLine
+        {
+            get { return display_agc_gain_line; }
+            set { display_agc_gain_line = value; }
+        }
+
+        private static bool display_agc_gain_spectrum_line = true;
+        public static bool DisplayAGCGainSpectrumLine
+        {
+            get { return display_agc_gain_spectrum_line; }
+            set { display_agc_gain_spectrum_line = value; }
+        }
+
+        private static bool display_agc_hang_line = true;
+        public static bool DisplayAGCHangLine
+        {
+            get { return display_agc_hang_line; }
+            set { display_agc_hang_line = value; }
+        }
+
+        private static bool display_agc_hang_spectrum_line = true;
+        public static bool DisplayAGCHangSpectrumLine
+        {
+            get { return display_agc_hang_spectrum_line; }
+            set { display_agc_hang_spectrum_line = value; }
         }
 
         private static bool tx_grid_control = true;
@@ -1198,7 +1230,9 @@ namespace PowerSDR
             }
         }
 
-        
+        private static SolidBrush pana_text_brush = new SolidBrush(Color.Khaki);
+        private static Font pana_font = new Font("Tahoma", 7F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
         private static Pen dhp = new Pen(Color.FromArgb(0, 255, 0)),				
                            dhp1 = new Pen(Color.FromArgb(150, 0, 0, 255)),
                            dhp2 = new Pen(Color.FromArgb(150, 255, 0, 0));
@@ -1418,7 +1452,7 @@ namespace PowerSDR
             // shade in the notch
             g.FillRectangle(new SolidBrush(c), left, top, width, height);
 
-            // draw a left and right line on the side of the rectancle if wide enough
+            // draw a left and right line on the side of the rectangle if wide enough
             if (width > 2 && tnf_active)
             {
                 g.DrawLine(p, left, top, left, top + height - 1);
@@ -2406,7 +2440,7 @@ namespace PowerSDR
                 g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
         }
         static float zoom_height = 1.5f;   // Should be > 1.  H = H/zoom_height
-		private static void DrawPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
+		unsafe private static void DrawPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
 		{
 			// draw background
 		    g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
@@ -2429,10 +2463,10 @@ namespace PowerSDR
 			int filter_low, filter_high;
 			int center_line_x = (int)(-(double)Low / (High - Low) * W);
 
-            int[] r_x0 = new int[1];
-            int[] r_x1 = new int[1];
-            int[] r_x2 = new int[1];
-            double f_center = vfoa_hz;
+           // int[] r_x0 = new int[1];
+           // int[] r_x1 = new int[1];
+            //int[] r_x2 = new int[1];
+            //double f_center = vfoa_hz;
 
             if (local_mox) // get filter limits
 			{
@@ -2512,39 +2546,51 @@ namespace PowerSDR
 			}
             // draw RX filter
 			//if(!(local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)))
-            if (!local_mox)// && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
+            try
             {
-                double f_vfo = vfoa_hz;
-                double f_low = f_vfo + filter_low;
-                double f_high = f_vfo + filter_high;
+                if (!local_mox)// && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
+                {
+                   // double f_vfo = vfoa_hz;
+                   // double f_low = f_vfo + filter_low;
+                   // double f_high = f_vfo + filter_high;
 
-                f_vfo -= f_center;
-                f_low -= f_center;
-                f_high -= f_center;
-                r_x0[0] = (int)Math.Round((f_vfo - Low) / width * W);
-                r_x1[0] = (int)Math.Round((f_low - Low) / width * W);
-                r_x2[0] = (int)Math.Round((f_high - Low) / width * W);
+                   // f_vfo -= f_center;
+                   // f_low -= f_center;
+                   // f_high -= f_center;
+                   // r_x0[0] = (int)Math.Round((f_vfo - Low) / width * W);
+                   // r_x1[0] = (int)Math.Round((f_low - Low) / width * W);
+                   // r_x2[0] = (int)Math.Round((f_high - Low) / width * W);
 
-				// get filter screen coordinates
-				int filter_left_x = (int)((float)(filter_low - Low) / (High - Low) * W);
-				int filter_right_x = (int)((float)(filter_high - Low) / (High - Low) * W);
+                    // get filter screen coordinates
+                    int filter_left_x = (int)((float)(filter_low - Low) / (High - Low) * W);
+                    int filter_right_x = (int)((float)(filter_high - Low) / (High - Low) * W);
 
-				// make the filter display at least one pixel wide.
-				if(filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
+                    // make the filter display at least one pixel wide.
+                    if (filter_left_x == filter_right_x) 
+                        filter_right_x = filter_left_x + 1;
+                   // if (r_x1[0] == r_x2[0]) 
+                      //  r_x2[0] = r_x1[0] + 1;
 
-				if(bottom)
-				{
-					g.FillRectangle(display_filter_brush,	// draw filter overlay
-						filter_left_x, H + top, filter_right_x-filter_left_x, H + H - top);
-				}
-				else
-				{
-                    g.FillRectangle(display_filter_brush, r_x1[0], top, r_x2[0] - r_x1[0], H - top);
+                    if (bottom)
+                    {
+                        g.FillRectangle(display_filter_brush,	// draw filter overlay
+                            filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top);
+                    }
+                    else
+                    {
+                        //g.FillRectangle(display_filter_brush, r_x1[0], top, r_x2[0] - r_x1[0], H - top);
 
-					//g.FillRectangle(display_filter_brush,	// draw filter overlay
-					//	filter_left_x, top, filter_right_x - filter_left_x, H - top);
+
+                            g.FillRectangle(display_filter_brush,	// draw filter overlay
+                                filter_left_x, top, filter_right_x - filter_left_x, H - top);
+
+                     }
                 }
-			}
+            }
+            catch
+            {
+                Debug.WriteLine("Broke");
+            }
 
 			if(!local_mox && draw_tx_filter &&
 				(rx1_dsp_mode != DSPMode.CWL && rx1_dsp_mode != DSPMode.CWU))
@@ -2851,10 +2897,10 @@ namespace PowerSDR
                 }
                 else
                 {
-                   // g.DrawLine(grid_zero_pen, center_line_x, top, center_line_x, H);
-                   // g.DrawLine(grid_zero_pen, center_line_x + 1, top, center_line_x + 1, H);
-                    g.DrawLine(grid_zero_pen, r_x0[0], top, r_x0[0], H);
-                    g.DrawLine(grid_zero_pen, r_x0[0] + 1, top, r_x0[0] + 1, H);
+                    g.DrawLine(grid_zero_pen, center_line_x, top, center_line_x, H);
+                    g.DrawLine(grid_zero_pen, center_line_x + 1, top, center_line_x + 1, H);
+                   // g.DrawLine(grid_zero_pen, r_x0[0], top, r_x0[0], H);
+                    //g.DrawLine(grid_zero_pen, r_x0[0] + 1, top, r_x0[0] + 1, H);
                 }
             }
 
@@ -3314,8 +3360,123 @@ namespace PowerSDR
                 }
             }
 
+            if (console.PowerOn)
+            {
+                // get filter screen coordinates
+                int filter_left_x = (int)((float)(filter_low - Low) / (High - Low) * W);
+                int filter_right_x = (int)((float)(filter_high - Low) / (High - Low) * W);
+                int x1_gain, x2_gain, x3_gain, x1_hang, x2_hang, x3_hang;
+                if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
+
+                if (display_agc_gain_spectrum_line)
+                {
+                    x1_gain = 40;
+                    x2_gain = W - 40;
+                    x3_gain = 50;
+                }
+                else
+                {
+                    x1_gain = filter_left_x;
+                    x2_gain = filter_right_x;
+                    x3_gain = x1_gain;
+                }
+
+                if (display_agc_hang_spectrum_line)
+                {
+                    x1_hang = 40;
+                    x2_hang = W - 40;
+                    x3_hang = 50;
+                }
+                else
+                {
+                    x1_hang = filter_left_x;
+                    x2_hang = filter_right_x;
+                    x3_hang = x1_hang;
+                }
+
+                float cal_offset = 0.0f;
+                switch (console.RX1AGCMode)
+                {
+                    case AGCMode.FIXD:
+                        cal_offset = -18.0f;
+                        break;
+                    default:
+                        cal_offset = 60.0f + (rx1_display_cal_offset +
+                            (rx1_preamp_offset - alex_preamp_offset));
+                        break;
+                }
+                // get AGC-T level
+                double thresh = 0.0; ;
+                float agcknee_y_value = 0.0f;
+                double hang;
+                int agc_hang_y = 0;
+                int agc_fixed_gain = console.SetupForm.AGCFixedGain;
+                string agc = "";
+
+                // get Hang Threshold level
+                DttSP.GetRXAGCHangLevel(0, 0, &hang);
+
+                DttSP.GetRXAGCThresh(0, 0, &thresh);
+                //thresh = Math.Round(thresh);
+                //Debug.WriteLine("thresh:" + thresh);
+
+                switch (console.RX1AGCMode)
+                {
+                    case AGCMode.FIXD:
+                        agcknee_y_value = dBToPixel(-(float)agc_fixed_gain + cal_offset);
+                        // Debug.WriteLine("agcknee_y_D:" + agcknee_y_value);
+                        agc = "-F";
+                        break;
+                    default:
+                        agcknee_y_value = dBToPixel((float)thresh + cal_offset);
+
+                       // if (display_agc_hang_line)
+                            if (display_agc_hang_line && console.RX1AGCMode != AGCMode.MED && console.RX1AGCMode != AGCMode.FAST)
+                            {
+                            agc_hang_y = (int)dBToPixel((float)hang + cal_offset);
+                            AGCHang.Height = 8; AGCHang.Width = 8; AGCHang.X = 40;
+                            AGCHang.Y = agc_hang_y - (AGCHang.Height);
+                            g.FillRectangle(Brushes.Yellow, AGCHang);
+                            using (Pen p = new Pen(Color.Yellow))
+                            {
+                                p.DashStyle = DashStyle.Dot;
+                                g.DrawLine(p, x1_hang, agc_hang_y, x2_hang, agc_hang_y);
+                                g.DrawString("-H", pana_font, pana_text_brush, AGCHang.X + AGCHang.Width, AGCHang.Y - 4);
+                            }
+                        }
+                            agc = "-G";                      
+                        break;
+                }
+
+                if (display_agc_gain_line)
+                {
+                    AGCKnee.Height = 8; AGCKnee.Width = 8; AGCKnee.X = 40;
+                    AGCKnee.Y = (int)agcknee_y_value - AGCKnee.Height;
+                    g.FillRectangle(Brushes.YellowGreen, AGCKnee);
+                    using (Pen p = new Pen(Color.YellowGreen))
+                    {
+                        p.DashStyle = DashStyle.Dot;
+                        g.DrawLine(p, x1_gain, agcknee_y_value, x2_gain, agcknee_y_value);
+                        g.DrawString(agc, pana_font, pana_text_brush, AGCKnee.X + AGCKnee.Width, AGCKnee.Y - 4);
+                    }
+                }             
+            }
+
 			if(high_swr && rx == 1)
 				g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
+        }
+
+        private static float dBToPixel(float dB)
+        {
+            return (float)(spectrum_grid_max - dB) * Target.Height / (spectrum_grid_max - spectrum_grid_min);
+        }
+
+        private static float PixelToDb(float y)
+        {            
+                if (y <= H / 2) y *= 2.0f;
+                else y = (y - H / 2) * 2.0f;
+            
+            return (float)(spectrum_grid_max - y * (double)(spectrum_grid_max - spectrum_grid_min) / H);
         }
 
         private static void DrawTXPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
@@ -3962,6 +4123,9 @@ namespace PowerSDR
                             x = W;
                             break;
                     }
+
+                    console.DisplayGridX = x;
+                    console.DisplayGridW = (int)(x + size.Width);
 
                     y -= 8;
                     if (y + 9 < H)

@@ -23,7 +23,7 @@ namespace PowerSDR
     using System.Threading;
     using System.Runtime.InteropServices;
     using System.Diagnostics;
-    using HPSDR_USB_LIB_V1;
+   // using HPSDR_USB_LIB_V1;
 
 	//
 	// routines to access audio from kd5tfd/vk6aph fpga based audio 
@@ -49,7 +49,7 @@ namespace PowerSDR
 		// null for error 
 		private static string getOzyFirmwareString() 
 		{
-			IntPtr oz_h = JanusAudio.OzyOpen(); 
+			IntPtr oz_h = OzyOpen(); 
 			
 			if ( oz_h == (IntPtr)0 ) 
 			{ 
@@ -63,11 +63,14 @@ namespace PowerSDR
 			} 
 
 			byte[] buf = new byte[8]; 
-			int rc = libUSB_Interface.usb_control_msg(usb_h, 
-				                                      OzySDR1kControl.VRT_VENDOR_IN, 
-				                                      OzySDR1kControl.VRQ_SDR1K_CTL, 
-				                                      OzySDR1kControl.SDR1KCTRL_READ_VERSION, 
-				                                      0, buf, buf.Length, 1000); 
+           // int rc = WriteControlMsg(usb_h, 
+				                    //OzySDR1kControl.VRT_VENDOR_IN, //0xC0
+				                   // OzySDR1kControl.VRQ_SDR1K_CTL, //0x0d
+				                   // OzySDR1kControl.SDR1KCTRL_READ_VERSION, // 0x7
+				                   // 0, buf, buf.Length, 1000); 
+
+            int rc = GetOzyID(usb_h, buf, buf.Length);
+
 			// System.Console.WriteLine("read version rc: " + rc); 
            
 			string result = null;
@@ -330,7 +333,248 @@ namespace PowerSDR
 
 			if  ( c != null && c.HPSDRisMetis )  
 			{
+                GetMetisCodeVersion(metis_ver);                   
+
+               if (c.PowerOn)
+               {
+                   byte metis_vernum = metis_ver[0];
+                    mercury_ver = getMercuryFWVersion();
+                    penny_ver = getPenelopeFWVersion();
+                    int mercury2_ver = getMercury2FWVersion();
+
+                   switch(metis_vernum)
+                   {
+                         case 13:
+                           if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 13)) ||
+                               (c != null && c.MercuryPresent && (mercury_ver != 29)))
+                           {
+                               result = false;
+                               c.SetupForm.alex_fw_good = false;
+                               c.PowerOn = false;
+                           }
+                           break;
+                         case 14:
+                           if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 14)) ||
+                               (c != null && c.MercuryPresent && (mercury_ver != 29)))
+                           {
+                               result = false;
+                               c.SetupForm.alex_fw_good = false;
+                               c.PowerOn = false;
+                           }
+                           break;
+                       case 15:
+                           if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 15)) ||
+                               (c != null && c.MercuryPresent && (mercury_ver != 30)))
+                           {
+                               result = false;
+                               c.SetupForm.alex_fw_good = false;
+                               c.PowerOn = false;
+                           }
+                          break;
+                      case 16:
+                           if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16)) ||
+                               (c != null && c.MercuryPresent && (mercury_ver != 31)))
+                           {
+                               result = false;
+                               c.SetupForm.alex_fw_good = false;
+                               c.PowerOn = false;
+                           }
+                          break;
+                       case 17:
+                           if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
+                               (c != null && c.MercuryPresent && (mercury_ver != 32)))
+                           {
+                               result = false;
+                               c.SetupForm.alex_fw_good = false;
+                               c.PowerOn = false;
+                           }
+                           break;
+                       default:
+                           result = false;
+                           c.SetupForm.alex_fw_good = false;
+                           c.PowerOn = false;
+                           break;
+                  }
+ 
+                  if (!result)
+                    fwVersionMsg = "Invalid Firmware.\nYou have Metis: " + metis_ver[0].ToString("0\\.0") + 
+                                                           "\nMercury:" + mercury_ver.ToString("0\\.0") +
+                                                             "\nPenny:" + penny_ver.ToString("0\\.0");
+              }                    
+				return result; 
+            }
+
+            string fx2_version_string = getFX2FirmwareVersionString();
+           // int merc_ver = 0;
+            int ozy_ver = 0;
+            //System.Console.WriteLine("fx2: " + fx2_version_string); 
+            //System.Console.WriteLine("ozy: " + ozy_ver); 
+            //System.Console.WriteLine("merc: " + merc_ver); 
+            //System.Console.WriteLine("penny: " + penny_ver); 
+
+            if (fx2_version_string.CompareTo("20090524") >= 0)
+            {
+                do
+                {
+                    ozy_ver = getOzyFWVersion();
+                }
+                while (ozy_ver < 12);
+
+                if (c.MercuryPresent)
+                {
+                    do
+                    {
+                        mercury_ver = getMercuryFWVersion();
+                    }
+                    while (mercury_ver < 26);
+                }
+
+                if (c.PennyPresent || c.PennyLanePresent)
+                {
+                    do
+                    {
+                        Thread.Sleep(500);
+                        penny_ver = getPenelopeFWVersion();
+                        if (penny_ver < 11)
+                        {
+                            Thread.Sleep(500);
+                            penny_ver = getPenelopeFWVersion();
+                            if (penny_ver > 0) break;
+                            penny_ver = getPenelopeFWVersion();
+                            if (penny_ver == 0) break;
+                        }
+                    }
+                    while (penny_ver <= 10);
+                }
+
+                switch (ozy_ver)
+                {
+                    case 18:
+                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 13)) ||
+                             (c != null && c.MercuryPresent && (mercury_ver != 29)))
+                        {
+                            result = false;
+                            c.SetupForm.alex_fw_good = false;
+                            c.PowerOn = false;
+                        }
+                        break;
+                    case 19:
+                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 14)) ||
+                             (c != null && c.MercuryPresent && (mercury_ver != 29)))
+                        {
+                            result = false;
+                            c.SetupForm.alex_fw_good = false;
+                            c.PowerOn = false;
+                        }
+                        break;
+                    case 20:
+                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 15)) ||
+                           (c != null && c.MercuryPresent && (mercury_ver != 30)))
+                        {
+                            result = false;
+                            c.SetupForm.alex_fw_good = false;
+                            c.PowerOn = false;
+                        }
+                        break;
+                    case 21:
+                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16)) ||
+                            (c != null && c.MercuryPresent && (mercury_ver != 31)))
+                        {
+                            result = false;
+                            c.SetupForm.alex_fw_good = false;
+                            c.PowerOn = false;
+                        }
+                        break;
+                    case 22:
+                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
+                            (c != null && c.MercuryPresent && (mercury_ver != 32)))
+                        {
+                            result = false;
+                            c.SetupForm.alex_fw_good = false;
+                            c.PowerOn = false;
+                        }
+                        break;
+                    default:
+                        result = false;
+                        c.SetupForm.alex_fw_good = false;
+                        c.PowerOn = false;
+                        break;
+                }
+
+                if (!result)
+                    fwVersionMsg = "Invalid Firmware.\nYou have Ozy: " + ozy_ver.ToString("0\\.0") +
+                                                           "\nMercury:" + mercury_ver.ToString("0\\.0") +
+                                                             "\nPenny:" + penny_ver.ToString("0\\.0");
+            }
+            return result;
+        }
+
+#if false
+                if ((ozy_ver == 18) &&
+                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver > 13)) ||
+                   ((ozy_ver == 19) &&
+                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver < 14))))
+                {
+                    result = false;
+                    fwVersionMsg = "Invalid Firmware Level. Ozy v1.9 requires Penelope v1.4 or PennyLane v1.4\n";
+                }
+                else 
+                  if ((ozy_ver == 20) &&
+                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 15) ||
+                    (c != null && c.MercuryPresent && (merc_ver != 30))))
+                {
+                    result = false;
+                    fwVersionMsg = "Invalid Firmware Level. Ozy v2.0 requires Penny(Lane) v1.5 and Mercury v3.0\n";
+                    c.SetupForm.alex_fw_good = false;
+                }
+                else 
+                  if ((ozy_ver == 21) &&
+                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16) ||
+                    (c != null && c.MercuryPresent && (merc_ver != 31))))
+                {
+                    result = false;
+                    fwVersionMsg = "Invalid Firmware Level. Ozy v2.1 requires Penny(Lane) v1.6 and Mercury v3.1\n";
+                    c.SetupForm.alex_fw_good = false;
+                }
+                else 
+                  if ((ozy_ver == 22) &&
+                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17) ||
+                    (c != null && c.MercuryPresent && (merc_ver != 32))))
+                {
+                    result = false;
+                    fwVersionMsg = "Invalid Firmware Level. Ozy v2.2 requires Penny(Lane) v1.7 and Mercury v3.2\n";
+                    c.SetupForm.alex_fw_good = false;
+                }
+                else
+                {
+                    result = true;
+                    c.SetupForm.alex_fw_good = true;
+                }
+            }
+            return result;
+        } 
+#endif
+#if false
+        private static bool fwVersionsGood() 
+		{
+          //  return true;
+
+             if (forceFWGood == true)
+            {
+                System.Console.WriteLine("Firmware ver check forced good!");
+                return true;
+            }
+
+            bool result = true;
+			Console c = Console.getConsole();
+            int penny_ver = 0;
+            int mercury_ver = 0;
+            byte[] metis_ver = new byte[1];
+
+			if  ( c != null && c.HPSDRisMetis )  
+			{
                 GetMetisCodeVersion(metis_ver);
+
                 if (c.PennyPresent || c.PennyLanePresent)
                 {
                     penny_ver = getPenelopeFWVersion();
@@ -354,7 +598,7 @@ namespace PowerSDR
                     }
                 }                    
 				//System.Console.WriteLine("!! METIS TODO firmware check stubbed"); 
-                  if (c.MercuryPresent || (c.PennyPresent || c.PennyLanePresent))
+                  if (!result && (c.MercuryPresent || (c.PennyPresent || c.PennyLanePresent)))
                 {
                     penny_ver = getPenelopeFWVersion();
                     mercury_ver = getMercuryFWVersion();
@@ -371,7 +615,24 @@ namespace PowerSDR
                         c.SetupForm.alex_fw_good = true; 
                     }
                 }
-                return result; 
+                  if (!result && (c.MercuryPresent || (c.PennyPresent || c.PennyLanePresent)))
+                  {
+                      penny_ver = getPenelopeFWVersion();
+                      mercury_ver = getMercuryFWVersion();
+                      if ((metis_ver[0] == (byte)17) && ((c.PennyPresent || c.PennyLanePresent) && penny_ver != 17) ||
+                          (c.MercuryPresent && mercury_ver != 32))
+                      {
+                          fwVersionMsg = "Invalid Firmware Level. Metis v1.7 requires Penny(Lane) v1.7 and Mercury v3.2\n";
+                          result = false;
+                          c.SetupForm.alex_fw_good = false;
+                      }
+                      else
+                      {
+                          result = true;
+                          c.SetupForm.alex_fw_good = true;
+                      }
+                  }
+                  return result; 
             } 
 			
             string fx2_version_string = getFX2FirmwareVersionString();
@@ -457,6 +718,19 @@ namespace PowerSDR
                     c.SetupForm.alex_fw_good = true;
                 }
 
+                if ((ozy_ver == 22) &&
+                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17) ||
+                    (c != null && c.MercuryPresent && (merc_ver != 32))))
+                {
+                    result = false;
+                    fwVersionMsg = "Invalid Firmware Level. Ozy v2.2 requires Penny(Lane) v1.7 and Mercury v3.2\n";
+                    c.SetupForm.alex_fw_good = false;
+                }
+                else
+                {
+                    result = true;
+                    c.SetupForm.alex_fw_good = true;
+                }
 
               /*  if ((ozy_ver < 13) ||
                    (c != null && c.MercuryPresent && (merc_ver < 27)) ||
@@ -477,8 +751,8 @@ namespace PowerSDR
            }
                 return result;
 		} 
-
-		// returns -101 for firmware version error 
+#endif
+        // returns -101 for firmware version error 
 		unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send) 
 		{ 			
 			if ( initOzy() != 0 )  
@@ -819,6 +1093,63 @@ namespace PowerSDR
             c.SetMicGain();
         }
   
+        // Ozyutils
+ 		[DllImport("JanusAudio.dll")]
+        unsafe extern public static int GetOzyID(IntPtr usb_h, byte[] bytes, int length);
+
+        //[DllImport("JanusAudio.dll")]
+       // unsafe extern public static bool Write_I2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe extern public static bool WriteI2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
+        
+        [DllImport("JanusAudio.dll")]
+        unsafe extern public static bool Set_I2C_Speed(IntPtr hdev, int speed);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe extern public static int WriteControlMsg(IntPtr hdev, int requesttype, int request, int value, 
+                                              int index, byte[] bytes, int length, int timeout);
+#if false
+        [DllImport("JanusAudio.dll")]
+        extern public static int LoadFirmware(int VID, int PID, String filename);
+
+        [DllImport("JanusAudio.dll")]
+        extern public static int LoadFPGA(int VID, int PID, String filename);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe extern public static int ReadI2C(int i2c_addr, byte* buffer, int length);
+
+        //[DllImport("JanusAudio.dll")]
+        //unsafe extern public static int WriteI2C(IntPtr usb_h, int i2c_addr, byte* buffer, int length);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe extern public static int ReadEEPROM(int i2c_addr, int offset, byte* buffer, int length);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe extern public static int WriteEEPROM(int i2c_addr, int offset, byte* buffer, int length);
+
+        public static int LoadOzyFirmware(string path, string filename)
+        {
+            string firmnamepath = path + "\\" + filename;
+
+            if (File.Exists(firmnamepath))
+            {
+                return LoadFirmware(0xfffe, 0x7, firmnamepath);
+            }
+            else return -1;
+        }
+
+        public static int LoadOzyFPGA(string path, string filename)
+        {
+            string fpganamepath = path + "\\" + filename;
+
+            if (File.Exists(fpganamepath))
+            {
+                return LoadFPGA(0xfffe, 0x7, fpganamepath);
+            }
+            else return -1;
+        }
+#endif
 //		public static bool CWptt() 
 //		{ 			
 //			if ( ( GetDotDash() & 0x3 ) != 0  ) 

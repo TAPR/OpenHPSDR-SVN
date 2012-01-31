@@ -33,7 +33,7 @@ namespace PowerSDR
 {
     using System;
     using System.Threading;
-    using PortTalk;
+    //using PortTalk;
 
 	public class HW
 	{
@@ -175,7 +175,7 @@ namespace PowerSDR
 
 		public HW(int addr)
 		{
-			Parallel.InitPortTalk();
+			//Parallel.InitPortTalk();
 			lpt_addr = (ushort)addr;
 			write_reg = new Register8WriteDel(UpdateRegister8);
 
@@ -193,7 +193,7 @@ namespace PowerSDR
 
 		~HW()
 		{
-			Parallel.ExitPortTalk();
+			//Parallel.ExitPortTalk();
 		}
 
 
@@ -835,9 +835,9 @@ namespace PowerSDR
 
 		private void LatchRegister(ushort lpt, byte addr, byte data)
 		{
-			Parallel.outport(lpt, data);
-			Parallel.outport((ushort)(lpt+2), addr);
-			Parallel.outport((ushort)(lpt+2), PIO_NONE);
+			//Parallel.outport(lpt, data);
+			//Parallel.outport((ushort)(lpt+2), addr);
+			//Parallel.outport((ushort)(lpt+2), PIO_NONE);
 		}
 
 		private void UpdateRegister8(byte data, object user_data)
@@ -995,10 +995,11 @@ namespace PowerSDR
 
         private void PTTODelay()
         {
-            HiPerfTimer t1 = new HiPerfTimer();
-                t1.Start();
-                t1.Stop();
-                while (t1.DurationMsec < ptt_out_delay) t1.Stop();
+           // HiPerfTimer t1 = new HiPerfTimer();
+             //   t1.Start();
+              //  t1.Stop();
+              //  while (t1.DurationMsec < ptt_out_delay) t1.Stop();
+                Thread.Sleep(ptt_out_delay);
                 JanusAudio.SetXmitBit(0);
         }
 
@@ -1106,7 +1107,7 @@ namespace PowerSDR
 				}
 			else
                 {
-				return Parallel.inport((ushort)(lpt_addr+1));
+                    return 0;// Parallel.inport((ushort)(lpt_addr + 1));
                 }
 		}
 
