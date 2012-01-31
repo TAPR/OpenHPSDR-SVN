@@ -1,3 +1,0 @@
-C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_1.19.3\Source\HPSDR_USB_LIB_V1.1\bin\Release\HPSDR_USB_LIB_V1.1.dll
-C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_1.19.3\Source\HPSDR_USB_LIB_V1.1\obj\x86\Release\ResolveAssemblyReference.cache
-C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_1.19.3\Source\HPSDR_USB_LIB_V1.1\obj\x86\Release\HPSDR_USB_LIB_V1.1.dll
