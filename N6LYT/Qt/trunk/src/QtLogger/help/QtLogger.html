@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+<html>
+<header>
+<title>QtLogger program</title>
+<link rel="stylesheet" type="text/css" href="daveStyle.css" />
+</header>
+<body>
+<hr class="full"/> 
+<h2> QtLogger program</h2>
+
+<p>QtLogger is a Amateur Radio logging program to log radio contacts. The prgram is designed to work with the ghpsdr3 program s suite written by John, Melton G0ORX/N6LYT.  The logger should pickup the frequency and Mode from a running dspserver.</p>
+
+<h3>Features</h3>
+
+<dl>
+<dt>Radio data tracking</dt>
+<dd>QtLogger listens for a UDP broadcast of the radio frewquency and mode and set these feilds to teh current values. </dd>
+<dt>Read and write XML file</dt>
+<dd> The base file format is XML which is in a format similar to the common ADIF files used by other logging programs.  The XML file comes with an XSLT file that allows for viewing of the log file witha web browser.</dd>
+<dt>Read and write ADIF file</dt>
+<dd>The program can read and write ADIF file formats for compatibility with other logging programs or LOTW.  </dd>
+<dt>Read categorical data an XML file</dt>
+<dd>Categorical data is stored in XML such as countries and subdivisions. these are used to auto complete these fields.  </dd>
+<dt>Date and Time auto input using the system clock</dt>
+<dd>the add contact dialog tracts the current data and time of the computer system clock and record them when the contact is stored.  </dd>
+<dt>Callsigns must conform to standard Amateur Protocal</dt>
+<dd>All callsign are checked against a validator for a correctly formed callsign.  The / place suffixes are allowed in this check.   </dd>
+<dt>Logical tabbing sequence and autocompletion<dt>
+</dl>
+
+
+<div align="right">
+<hr class="full"/>  
+<small>Author: Dave Larsen, KV0S<br/>
+August 21, 2011</small>
+</body>
+</html> 
