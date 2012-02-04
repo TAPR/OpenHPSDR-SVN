@@ -1,0 +1,62 @@
+QtHPSDR
+
+Dependencies:
+------------
+
+qt4.8
+fftw3
+
+
+To Build:
+--------
+
+cd ~/Qt/trunk/src/QtHPSDRServer
+qmake
+make
+cd ~/Qt/trunk/src/QtDSPServer
+qmake
+make
+cd ~/Qt/trunk/src/QtRadio
+qmake
+make
+
+
+You can also use qtcreator to load the projects and build the applications.
+
+To Run:
+------
+
+See qthpsdr.pdf for default TCP and UDP port used.
+
+cd ~/Qt/trunk/bin
+./QtHPSDRServer
+
+
+QtHPSDRServer is a Qt application.
+
+The Configure tab is used to setup the hardware configuration.
+
+Note that currently there is only support for Metis, not Ozy (coming soon).
+
+Select the Interface that Metis is connected to and click on the Discover button.  The list of Metis devices found on the interface will be populated in the Metis list box.
+
+Select which cards you have populated.
+
+Setup the configuration required and click on the Save button.
+
+Note that there are 2 check boxes for Auto Start and Auto Start DSPServer.
+
+If Auto Start is checked then whenever you start the server from the command line it will try to start running using the selected interface and Metis.
+
+If you have not checked Auto Start then when run from the command line it will require you to go to the Status page and click on the Start button.
+
+If Auto Start DSPServer is checked then whenever you start the server from the command line it will also try to start QtDSPServer for each receiver configured.
+
+If Auto Start DSPServer is not checked then you will have to start QtDSPServer from the command line.
+
+QtRadio is much the same as before. There is a Mox button and also a menu item Transmit->Mox that has the same function.  By default the Microphone audio input is from the Penelope/Pennylane board.  You can select the option Transmit->Remote Mic and it will use the microphone audio from the client computer.
+
+
+More detailed information to come ...
+
+John g0orx/n6lyt

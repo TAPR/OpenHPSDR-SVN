@@ -1,0 +1,36 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2012-01-28T15:10:13
+#
+#-------------------------------------------------
+
+QT       += core gui network
+
+TARGET = ../../bin/QtHPSDRServer
+TEMPLATE = app
+
+
+SOURCES += main.cpp\
+        mainwindow.cpp \
+    client/client.cpp \
+    hpsdr/server.cpp \
+    client/clientlistener.cpp \
+    hpsdr/alex.cpp \
+    hpsdr/discovery.cpp \
+    hpsdr/error.cpp \
+    hpsdr/interfaces.cpp \
+    hpsdr/metis.cpp \
+    hpsdr/receiver.cpp
+
+HEADERS  += mainwindow.h \
+    client/client.h \
+    hpsdr/server.h \
+    client/clientlistener.h \
+    hpsdr/alex.h \
+    hpsdr/discovery.h \
+    hpsdr/error.h \
+    hpsdr/interfaces.h \
+    hpsdr/metis.h \
+    hpsdr/receiver.h
+
+FORMS    += mainwindow.ui
