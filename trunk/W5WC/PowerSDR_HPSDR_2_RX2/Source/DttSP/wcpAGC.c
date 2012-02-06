@@ -80,7 +80,7 @@ WCPAGC newWcpAGC (	AGCMODE mode,
 	a->tau_hang_decay = tau_hang_decay;
 	strcpy (a->tag, tag);
 	//assign constants
-	a->ring_buffsize = 1920;
+	a->ring_buffsize = 19200;
 	//do one-time initialization
 	a->out_index = -1;
 	a->ring_max = 0.0;
@@ -137,9 +137,9 @@ void delWcpAGC (WCPAGC a)
 
 void WcpAGC_flushbuf (WCPAGC a)
 {
-	memset ((void *)a->ring, 0, sizeof(double)*1920*2);
+	memset ((void *)a->ring, 0, sizeof(double)*19200*2);
 	a->ring_max = 0.0;
-	memset ((void *)a->abs_ring, 0, sizeof(double)*1920);
+	memset ((void *)a->abs_ring, 0, sizeof(double)*19200);
 }
 
 void WcpAGC (WCPAGC a)
