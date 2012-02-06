@@ -26,7 +26,7 @@ Receiver::Receiver(int local_port) {
     frequency_changed=0;
     play_audio=0;
     client=NULL;
-    client_type=QString("");
+    client_type=QString("Disconnected");
 
     dspServer=NULL;
 }
@@ -326,7 +326,7 @@ QString Receiver::getDspServerInfo() {
     if(dspServer!=NULL) {
         return QString::number(getProcessID(dspServer));
     }
-    return QString("");
+    return QString("Unknown");
 }
 
 quint64 Receiver::getProcessID(const QProcess* proc)

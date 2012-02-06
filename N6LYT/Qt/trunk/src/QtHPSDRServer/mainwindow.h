@@ -73,7 +73,6 @@ private:
     QStandardItemModel model;
     QStringList labels;
 
-    void restoreSettings();
     void saveSettings();
 
     QString getConfigDir();

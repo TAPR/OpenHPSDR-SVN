@@ -57,7 +57,8 @@ Startup::Startup(int argv, char* argc[]) {
     // startup the client listener
     Connection::getInstance()->setConnection(host,serverPort);
     Data::getInstance();
-    ClientListener::getInstance()->setPort(clientPort);
+    ClientListener::getInstance()->setup(clientPort,receiver);
+
 
     // Configure DttSP
     Setup_SDR();

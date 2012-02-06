@@ -341,7 +341,7 @@ int Server::startReceiver(Client* c,int rx,QHostAddress host,int port) {
 }
 
 int Server::setClientType(Client* c,int rx,QString type) {
-    qDebug()<<"Server::setClientType:"<<type;
+    qDebug()<<"Server::setClientType: rx:"<<rx<<" type:"<<type;
     if(receiver[rx]->getClient()!=c) {
         return -1;
     }
