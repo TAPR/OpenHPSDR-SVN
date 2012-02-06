@@ -62,8 +62,8 @@ typedef struct _wcpagc
 	int in_index;
 	int attack_buffsize;
 
-	double ring[19200][2];
-	double abs_ring[19200];
+	double ring[1920][2];
+	double abs_ring[1920];
 	int ring_buffsize;
 	double ring_max;
 
