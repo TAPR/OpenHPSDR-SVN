@@ -283,6 +283,7 @@ qDebug()<<"Server::clearMetis";
 void Server::addMetis(Metis metis) {
 qDebug()<<"Server::addMetis";
     metisCards.append(metis);
+    metisDetail=metis.toString();
 }
 
 int Server::getMetisCount() {

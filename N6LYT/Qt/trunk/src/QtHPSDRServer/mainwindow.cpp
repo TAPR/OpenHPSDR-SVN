@@ -210,12 +210,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     updateInterfaces();
 
+    qDebug()<<"interface:"<<server->getInterface();
     index=ui->comboBoxInterface->findText(server->getInterface());
     if(index!=-1) {
         ui->comboBoxInterface->setCurrentIndex(index);
     }
+
+    qDebug()<<"after updateInterfaces interface:"<<server->getInterface();
     if(server->getInterface()!="") {
         server->bind();
+
         actionDiscover();
         index=ui->comboBoxMetis->findText(server->getMetisDetail());
         if(index!=-1) {
