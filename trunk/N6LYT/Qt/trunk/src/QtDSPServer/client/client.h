@@ -24,7 +24,7 @@ class Client : public QObject
 {
     Q_OBJECT
 public:
-    explicit Client(QTcpSocket* s,QObject *parent = 0);
+    explicit Client(QTcpSocket* s,int rx,QObject *parent = 0);
     void send();
     QHostAddress getPeerAddress();
     void sendAudio(float* left,float* right,int length);
@@ -41,6 +41,7 @@ public slots:
 
 private:
     QTcpSocket* socket;
+    int receiver;
 
     float getFilterSizeCalibrationOffset();
 

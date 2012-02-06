@@ -12,7 +12,7 @@ class ClientListener : public QObject
     Q_OBJECT
 public:
     static ClientListener* getInstance();
-    void setPort(int p);
+    void setup(int p,int rx);
     QList<Client*> getClients();
     void sendAudio(float* left,float* right, int length);
 
@@ -30,6 +30,7 @@ private:
 
     QTcpServer socket;
     int port;
+    int receiver;
 
     QList<Client*> clients;
 

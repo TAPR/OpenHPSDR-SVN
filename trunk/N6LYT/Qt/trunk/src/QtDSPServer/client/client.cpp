@@ -8,9 +8,10 @@
 
 #include <QStringList>
 
-Client::Client(QTcpSocket* s,QObject *parent) :
+Client::Client(QTcpSocket* s,int rx,QObject *parent) :
     QObject(parent)
 {
+    qDebug()<<"Client: rx:"<<rx;
     multimeterCalibrationOffset=-41.0f;
     displayCalibrationOffset=-48.0f;
     squelchCalibrationOffset=-21.0f;
@@ -20,9 +21,12 @@ Client::Client(QTcpSocket* s,QObject *parent) :
 
     audio_port=0;
 
+    receiver=rx;
     socket=s;
     connect(s,SIGNAL(readyRead()),this,SLOT(readyRead()));
     connect(s,SIGNAL(disconnected()),this,SLOT(disconnected()));
+
+
 }
 
 void Client::disconnected() {
@@ -30,6 +34,14 @@ void Client::disconnected() {
     socket=NULL;
     audio_port=0;
     emit disconnected(this);
+
+    QString command;
+    command.append(QString("client "));
+    command.append(QString::number(receiver));
+    command.append(QString(" "));
+    command.append(QString("Disconnected"));
+    //emit sendCommand(command);
+    Connection::getInstance()->sendCommand(command);
 }
 
 QHostAddress Client::getPeerAddress() {
@@ -60,7 +72,7 @@ void Client::readyRead() {
                 // arg[1] frequency
                 QString command;
                 command.append(QString("frequency "));
-                command.append(QString("0")); // receiver
+                command.append(QString::number(receiver));
                 command.append(QString(" "));
                 command.append(args[1]);
                 //emit sendCommand(command);
@@ -126,7 +138,7 @@ void Client::readyRead() {
                 client_type=args[1];
                 QString command;
                 command.append(QString("client "));
-                command.append(QString("0")); // receiver
+                command.append(QString::number(receiver));
                 command.append(QString(" "));
                 command.append(args[1]);
                 //emit sendCommand(command);
@@ -208,7 +220,9 @@ void Client::readyRead() {
             } else if (args[0]=="mox") {
                 // args[1] state
                 QString command;
-                command.append(QString("mox 0 ")); // fix - default receiver
+                command.append(QString("mox "));
+                command.append(QString::number(receiver));
+                command.append(QString(" "));
                 command.append(args[1]);
                 Connection::getInstance()->sendCommand(command);
                 Data::getInstance()->setMox(args[1].toInt());
@@ -242,7 +256,7 @@ void Client::readyRead() {
                 // arg[2] band
                 QString command;
                 command.append(QString("frequency "));
-                command.append(QString("0")); // receiver
+                command.append(QString::number(receiver));
                 command.append(QString(" "));
                 command.append(args[1]);
                 command.append(QString(" "));

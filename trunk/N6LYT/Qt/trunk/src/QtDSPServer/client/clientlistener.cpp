@@ -14,16 +14,17 @@ ClientListener::ClientListener(QObject *parent) :
 
 }
 
-void ClientListener::setPort(int p) {
+void ClientListener::setup(int p,int rx) {
     qDebug()<<"ClientListener: listening on port:"<<p;
     port=p;
+    receiver=rx;
     connect(&socket,SIGNAL(newConnection()),this,SLOT(newConnection()));
     socket.listen(QHostAddress::Any,port);
 }
 
 void ClientListener::newConnection() {
     QTcpSocket* clientSocket=socket.nextPendingConnection();
-    Client* client=new Client(clientSocket,this);
+    Client* client=new Client(clientSocket,receiver,this);
     clients.append(client);
     connect(client,SIGNAL(disconnected(Client*)),this,SLOT(disconnected(Client*)));
 }

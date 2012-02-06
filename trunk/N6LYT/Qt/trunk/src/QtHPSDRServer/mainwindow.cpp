@@ -190,6 +190,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->checkBoxPennylane->setChecked(server->getPennylane());
     ui->checkBoxExcalibur->setChecked(server->getExcalibur());
     ui->checkBoxAlex->setChecked(server->getAlex());
+    ui->checkBoxRandom->setChecked(server->getRandom());
+    ui->checkBoxDither->setChecked(server->getDither());
 
     int index=ui->comboBoxSampleRate->findText(QString::number(server->getSampleRate()));
     if(index!=-1) {
@@ -220,7 +222,6 @@ MainWindow::MainWindow(QWidget *parent) :
             ui->comboBoxMetis->setCurrentIndex(index);
         }
     }
-    restoreSettings();
 
     ui->checkBoxAutoStartServer->setChecked(server->getAutoStart());
     ui->checkBoxAutoStartDSPServer->setChecked(server->getAutoStartDsp());
@@ -241,9 +242,6 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     updateClientList();
-}
-
-void MainWindow::restoreSettings() {
 }
 
 void MainWindow::saveSettings() {
