@@ -382,7 +382,7 @@ namespace PowerSDR
                           break;
                        case 17:
                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                               (c != null && c.MercuryPresent && (mercury_ver != 32)))
+                               (c != null && c.MercuryPresent && (mercury_ver != 71)))
                            {
                                result = false;
                                c.SetupForm.alex_fw_good = false;
@@ -487,7 +487,7 @@ namespace PowerSDR
                         break;
                     case 22:
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 32)))
+                            (c != null && c.MercuryPresent && (mercury_ver != 71)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
