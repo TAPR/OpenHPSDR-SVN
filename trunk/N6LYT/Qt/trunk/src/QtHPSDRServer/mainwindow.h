@@ -6,6 +6,7 @@
 #include <QDir>
 #include <QFile>
 #include <QStandardItemModel>
+#include <QTimer>
 
 #include <hpsdr/interfaces.h>
 #include <hpsdr/server.h>
@@ -66,6 +67,7 @@ public slots:
 
     void firmwareVersionChanged();
 
+    void timeout();
 
 private:
     Ui::MainWindow *ui;
@@ -122,6 +124,8 @@ private:
     Alex* alex;
 
     void updateInterfaces();
+
+    QTimer timer;
 
 };
 

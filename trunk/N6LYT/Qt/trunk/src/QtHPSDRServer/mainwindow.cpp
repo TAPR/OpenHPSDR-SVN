@@ -230,6 +230,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->checkBoxAutoStartServer->setChecked(server->getAutoStart());
     ui->checkBoxAutoStartDSPServer->setChecked(server->getAutoStartDsp());
 
+    ui->labelReceived->setText(QString("0"));
+    ui->labelTransmitted->setText(QString("0"));
+    ui->labelSequenceErrors->setText(QString("0"));
+
     clientListener=new ClientListener();
     clientListener->configure(settings);
 
@@ -241,8 +245,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->checkBoxAutoStartServer,SIGNAL(clicked()),this,SLOT(autoStartSelected()));
     connect(ui->checkBoxAutoStartDSPServer,SIGNAL(clicked()),this,SLOT(autoStartDSPSelected()));
 
+    connect(&timer,SIGNAL(timeout()),this,SLOT(timeout()));
+    timer.setInterval(5000); // 5  seconds
+
     if(server->getAutoStart()) {
         server->start();
+        timer.start();
     }
 
     updateClientList();
@@ -281,12 +289,20 @@ void MainWindow::actionStartStop() {
     if(running) {
         ui->pushButtonStartStop->setText(QString("Start"));
         server->stop();
+        timer.stop();
         running=false;
     } else {
         ui->pushButtonStartStop->setText(QString("Stop"));
         server->start();
+        timer.start();
         running=true;
     }
+}
+
+void MainWindow::timeout() {
+    ui->labelReceived->setText(QString::number(server->getReceivedFrames()));
+    ui->labelTransmitted->setText(QString::number(server->getTransmittedFrames()));
+    ui->labelSequenceErrors->setText(QString::number(server->getReceiveSequenceError()));
 }
 
 void MainWindow::saveConfiguration() {
