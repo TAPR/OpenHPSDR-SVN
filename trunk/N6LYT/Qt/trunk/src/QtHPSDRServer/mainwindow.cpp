@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButtonDiscover,SIGNAL(clicked()),this,SLOT(actionDiscover()));
     connect(ui->comboBoxMetis,SIGNAL(activated(QString)),this,SLOT(metisCardSelected(QString)));
 
+    connect(ui->spinBoxReceivers,SIGNAL(valueChanged(int)),this,SLOT(receiversChanged(int)));
 
     // setup configuration
     settings=new QSettings("QtHPSDRServer.ini",QSettings::IniFormat);
@@ -192,6 +193,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->checkBoxAlex->setChecked(server->getAlex());
     ui->checkBoxRandom->setChecked(server->getRandom());
     ui->checkBoxDither->setChecked(server->getDither());
+    ui->spinBoxReceivers->setValue(server->getReceivers());
 
     int index=ui->comboBoxSampleRate->findText(QString::number(server->getSampleRate()));
     if(index!=-1) {
@@ -214,16 +216,20 @@ MainWindow::MainWindow(QWidget *parent) :
     index=ui->comboBoxInterface->findText(server->getInterface());
     if(index!=-1) {
         ui->comboBoxInterface->setCurrentIndex(index);
+    } else {
+        // interface not found
+        server->setInterface("");
     }
 
     qDebug()<<"after updateInterfaces interface:"<<server->getInterface();
     if(server->getInterface()!="") {
         server->bind();
-
         actionDiscover();
         index=ui->comboBoxMetis->findText(server->getMetisDetail());
         if(index!=-1) {
             ui->comboBoxMetis->setCurrentIndex(index);
+        } else {
+            server->setMetisDetail("");
         }
     }
 
@@ -245,12 +251,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->checkBoxAutoStartServer,SIGNAL(clicked()),this,SLOT(autoStartSelected()));
     connect(ui->checkBoxAutoStartDSPServer,SIGNAL(clicked()),this,SLOT(autoStartDSPSelected()));
 
+    connect(ui->tableViewClients,SIGNAL(clicked(QModelIndex)),this,SLOT(clientSelected(QModelIndex)));
     connect(&timer,SIGNAL(timeout()),this,SLOT(timeout()));
     timer.setInterval(5000); // 5  seconds
 
-    if(server->getAutoStart()) {
-        server->start();
-        timer.start();
+    if((server->getInterface()!="")&&(server->getMetisDetail()!="")) {
+        if(server->getAutoStart()) {
+            actionStartStop();
+        }
     }
 
     updateClientList();
@@ -567,6 +575,10 @@ void MainWindow::update122_88MHzClockSources() {
     if(server->getPennylane()) ui->comboBox122_88MHzClockSource->addItem(QString("Pennylane"));
 }
 
+void MainWindow::receiversChanged(int r) {
+    server->setReceivers(r);
+}
+
 void MainWindow::sampleRateSelected(QString rate) {
     server->setSampleRate(rate.toInt());
 }
@@ -589,6 +601,18 @@ void MainWindow::clientDisconnected() {
     qDebug()<<"MainWindow::clientDisconnected";
     // update the client list
     updateClientList();
+}
+
+void MainWindow::clientSelected(QModelIndex index) {
+    int row=index.row();
+    int column=index.column();
+
+    //qDebug()<<"MainWindow::clientSelected: row:"<<row<<" column"<<column;
+
+    if(column==3) {
+        server->enableAudio(row);
+        updateClientList();
+    }
 }
 
 MainWindow::~MainWindow()

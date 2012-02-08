@@ -47,6 +47,8 @@ public slots:
     void excaliburSelected();
     void alexSelected();
 
+    void receiversChanged(int r);
+
     void autoStartSelected();
     void autoStartDSPSelected();
 
@@ -64,6 +66,8 @@ public slots:
     void clientConnected();
     void clientDisconnected();
     void updateClientList();
+
+    void clientSelected(QModelIndex);
 
     void firmwareVersionChanged();
 

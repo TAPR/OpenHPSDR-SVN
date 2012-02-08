@@ -994,6 +994,12 @@ QStringList Server::getReceiverInfo(int r) {
     return info;
 }
 
+void Server::enableAudio(int rx) {
+    for(int i=0;i<receivers;i++) {
+            receiver[i]->setPlayAudio(i==rx);
+    }
+}
+
 void Server::playAudio(float *buffer) {
     //  buffer contains 1024 Left Audio Samples, Right Audio Samples and Transmit I samples, Transmit Q samples.
     //qDebug()<<"Server::playAudio";

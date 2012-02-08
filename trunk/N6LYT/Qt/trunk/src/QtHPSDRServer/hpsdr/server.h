@@ -151,6 +151,7 @@ public:
     void setAlexTxAntenna(int a);
     void setAlexRxOnlyAntenna(int a);
 
+    void enableAudio(int rx);
 
 protected:
     Server();
