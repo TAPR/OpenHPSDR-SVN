@@ -42,11 +42,11 @@ Startup::Startup(int argv, char* argc[]) {
         if (rxArg.indexIn(argc[i]) != -1 ) {
             receiver=rxArg.cap(1).toInt();
         } else if (clientArg.indexIn(argc[i]) != -1 ) {
-            clientPort=rxArg.cap(1).toInt();
+            clientPort=clientArg.cap(1).toInt();
         } else if (serverArg.indexIn(argc[i]) != -1 ) {
-            serverPort=rxArg.cap(1).toInt();
+            serverPort=serverArg.cap(1).toInt();
         } else if (hostArg.indexIn(argc[i]) != -1 ) {
-            host=rxArg.cap(1);
+            host=hostArg.cap(1);
         }
     }
     qDebug()<<"receiver:"<<receiver;

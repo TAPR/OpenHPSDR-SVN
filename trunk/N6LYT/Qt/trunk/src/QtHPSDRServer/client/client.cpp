@@ -40,6 +40,8 @@ void Client::readyRead() {
                 } else {
                     response.append("OK ");
                     response.append(QString::number(server->getSampleRate()));
+                    // add configuration information
+
                 }
             } else if (args[0]=="detach") {
                 // args[1] receiver
