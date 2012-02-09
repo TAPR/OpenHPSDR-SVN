@@ -57,13 +57,14 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 		width = display.getWidth();
 		height = display.getHeight();
 		
-		connection = new Connection(server, BASE_PORT+receiver, width);
+		//connection = new Connection(server, BASE_PORT+receiver, width);
+		connection=null;
 
 		//update = new Update(connection);
 
 		spectrumView = new SpectrumView(this, width, height, connection);
 
-		connection.setSpectrumView(spectrumView);
+		//connection.setSpectrumView(spectrumView);
 
 		setContentView(spectrumView);
 		
@@ -73,7 +74,7 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 
 	@Override
     protected void onStop(){
-System.err.println("AHPSDRActivity.onStop");
+        Log.i("AHPSDRActivity","onStop");
         super.onStop();
         
         update.close();
@@ -126,14 +127,19 @@ System.err.println("AHPSDRActivity.onStop");
 		super.onResume();
 		Log.i("AHPSDR", "onResume");
 		//mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_NORMAL);
-		if(!connection.isRunning()) {
+		if(connection==null) {
+			connection = new Connection(server, BASE_PORT+receiver, width);
+			spectrumView.setConnection(connection);
+			connection.setSpectrumView(spectrumView);
+			connection.connect();
 		    connection.start();
+		    connection.setFrequency(frequency);
+		    connection.setMode(mode);
+		    connection.setFilter(filterLow, filterHigh);
+		    connection.setGain(gain);
+		    connection.setAGC(agc);
 		}
-		connection.setFrequency(frequency);
-		connection.setMode(mode);
-		connection.setFilter(filterLow, filterHigh);
-		connection.setGain(gain);
-		connection.setAGC(agc);
+		
 		update=new Update(connection);
 		update.setFps(fps);
 		update.start();
@@ -141,20 +147,26 @@ System.err.println("AHPSDRActivity.onStop");
 
 	public void onPause() {
 		super.onPause();
+		Log.i("AHPSDR", "onPause");
 		//mSensorManager.unregisterListener(this);
 		update.close();
-		connection.close();
-		Log.i("AHPSDR", "onPause");
+		//connection.close();
+		//connection=null;
 	}
 
 	public void onDestroy() {
 		super.onDestroy();
 		Log.i("AHPSDR", "onDestroy");
+		update.close();
+		connection.close();
+		connection=null;
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, MENU_CONNECTION,0, "Connection");
+		menu.add(0, MENU_RECEIVER,0, "Receiver");
 		menu.add(0, MENU_BAND, 0, "Band");
+		menu.add(0, MENU_FREQUENCY, 0, "Frequency");
 		menu.add(0, MENU_MODE, 0, "Mode");
 		menu.add(0, MENU_FILTER, 0, "FILTER");
 		menu.add(0, MENU_AGC, 0, "AGC");
@@ -192,7 +204,7 @@ System.err.println("AHPSDRActivity.onStop");
 			builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					String value = input.getText().toString().trim();
-					System.err.println("Server: "+value);
+					Log.i("Server",value);
 					update.close();
 					mode=connection.getMode();
 					frequency=connection.getFrequency();
@@ -202,6 +214,7 @@ System.err.println("AHPSDRActivity.onStop");
 					server=value;	
 					connection = new Connection(server, BASE_PORT + receiver,width);
 					connection.setSpectrumView(spectrumView);
+					connection.connect();
 					connection.start();
 					connection.setFrequency(frequency);
 					connection.setMode(mode);
@@ -212,9 +225,42 @@ System.err.println("AHPSDRActivity.onStop");
 					spectrumView.setConnection(connection);
 					update.setFps(fps);
 					update.start();
+					dialog.dismiss();
 				}
 			});
 			builder.show();
+			break;
+		case MENU_RECEIVER:
+			builder = new AlertDialog.Builder(this);
+			builder.setTitle("Select Reveiver");
+			builder.setSingleChoiceItems(receivers, receiver,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int item) {
+							Log.i("Receiver",Integer.toString(item));
+							update.close();
+							mode=connection.getMode();
+							frequency=connection.getFrequency();
+							filterLow=connection.getFilterLow();
+							filterHigh=connection.getFilterHigh();
+							connection.close();
+							receiver=item;	
+							connection = new Connection(server, BASE_PORT + receiver,width);
+							connection.setSpectrumView(spectrumView);
+							connection.connect();
+							connection.start();
+							connection.setFrequency(frequency);
+							connection.setMode(mode);
+							connection.setFilter(filterLow, filterHigh);
+							connection.setGain(gain);
+							connection.setAGC(agc);
+							update=new Update(connection);					
+							spectrumView.setConnection(connection);
+							update.setFps(fps);
+							update.start();
+							dialog.dismiss();
+						}
+					});
+			dialog = builder.create();
 			break;
 		case MENU_BAND:
 			builder = new AlertDialog.Builder(this);
@@ -296,6 +342,22 @@ System.err.println("AHPSDRActivity.onStop");
 					});
 			dialog = builder.create();
 			break;
+                case MENU_FREQUENCY:
+                        builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Enter frequency (in Hz):");
+                        final EditText freq = new EditText(this);
+                        builder.setView(freq);
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                        String value = freq.getText().toString().trim();
+                                        Log.i("Frequency",value);
+                                        connection.setFrequency(Long.parseLong(value));
+                                        dialog.dismiss();
+                                }
+                        });
+                        dialog = builder.create();
+                        //builder.show();
+                        break;
 		case MENU_MODE:
 			builder = new AlertDialog.Builder(this);
 			builder.setTitle("Select a Mode");
@@ -789,6 +851,15 @@ System.err.println("AHPSDRActivity.onStop");
 	private Update update;
 	
 
+	public static final CharSequence[] receivers = { "0", "1", "2", "3" };
+	
+    public int receiver = RX_0;
+    
+	public static final int RX_0 = 0;
+	public static final int RX_1 = 1;
+	public static final int RX_2 = 2;
+	public static final int RX_3 = 3;
+	
 	public static final int MENU_QUIT = 0;
 	public static final int MENU_BAND = 1;
 	public static final int MENU_MODE = 2;
@@ -798,6 +869,8 @@ System.err.println("AHPSDRActivity.onStop");
 	public static final int MENU_GAIN = 6;
 	public static final int MENU_FPS = 7;
 	public static final int MENU_CONNECTION = 8;
+	public static final int MENU_RECEIVER = 9;
+	public static final int MENU_FREQUENCY = 10;
 
 	public static final CharSequence[] bands = { "160", "80", "60", "40", "30",
 			"20", "17", "15", "12", "10", "6", "GEN", "WWV" };
@@ -921,7 +994,6 @@ System.err.println("AHPSDRActivity.onStop");
 	private String server = "g0orx.dyndns.org";
 	private int BASE_PORT = 8000;
 	private int port = 8000;
-	private int receiver = 0;
 	
 	private float xAxisLevel=-1.9F;
 	

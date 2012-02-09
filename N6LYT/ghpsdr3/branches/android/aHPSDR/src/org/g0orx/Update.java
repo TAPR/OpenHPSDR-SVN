@@ -1,5 +1,7 @@
 package org.g0orx;
 
+import android.util.Log;
+
 public class Update extends Thread {
 
 	public Update(Connection connection) {
@@ -7,7 +9,7 @@ public class Update extends Thread {
 	}
 
 	public void run() {
-		// Log.i("Update","run");
+		Log.i("Update","run");
 		while (running) {
 			connection.getSpectrum();
 			try {
@@ -16,9 +18,11 @@ public class Update extends Thread {
 
 			}
 		}
+		Log.i("Update","exit run");
 	}
 
 	public void close() {
+		Log.i("Update","close");
 		running = false;
 	}
 
