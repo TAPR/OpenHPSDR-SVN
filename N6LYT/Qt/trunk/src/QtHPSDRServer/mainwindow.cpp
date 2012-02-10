@@ -236,6 +236,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->checkBoxAutoStartServer->setChecked(server->getAutoStart());
     ui->checkBoxAutoStartDSPServer->setChecked(server->getAutoStartDsp());
 
+
+    ui->labelMetisVersion->setText(QString(""));
+    ui->labelMercuryVersion->setText(QString(""));
+    ui->labelPenelopeVersion->setText(QString(""));
+
     ui->labelReceived->setText(QString("0"));
     ui->labelTransmitted->setText(QString("0"));
     ui->labelSequenceErrors->setText(QString("0"));
@@ -686,7 +691,6 @@ void MainWindow::updateClientList() {
     ui->tableViewClients->setColumnWidth(3,50);
     ui->tableViewClients->setColumnWidth(4,100);
     ui->tableViewClients->setColumnWidth(5,100);
-
 
 }
 

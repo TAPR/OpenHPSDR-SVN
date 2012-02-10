@@ -11,6 +11,7 @@
 #include "interfaces.h"
 #include "metis.h"
 #include "receiver.h"
+#include "xvtr.h"
 #include "error.h"
 #include "../client/client.h"
 
@@ -153,6 +154,8 @@ public:
 
     void enableAudio(int rx);
 
+    QList<XVTR*> getXvtrs();
+
 protected:
     Server();
 
@@ -277,6 +280,8 @@ private:
     float audio_gain;
 
     QSettings* settings;
+
+    QList<XVTR*> xvtrs;
 };
 
 #endif // SERVER_H

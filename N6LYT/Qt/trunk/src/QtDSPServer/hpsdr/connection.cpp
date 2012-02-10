@@ -86,13 +86,28 @@ void Connection::readyRead() {
 
     pending.removeFirst();
 
-    if(args[0]=="OK") {
-        if(args.length()==2) {
-            // must be sampleRate
-            sampleRate=args[1].toInt();
-        }
-    } else {
+    switch(args.length()) {
+    case 0:
+        qDebug()<<"response had no args";
+        break;
+    case 1:
+        // just OK
+        break;
+    case 2:
+        // OK and samplerate
+        sampleRate=args[1].toInt();
+        qDebug()<<"sampleRate:"<<sampleRate;
+        break;
+    case 3:
+        // OK and samplerate and config
+        sampleRate=args[1].toInt();
+        qDebug()<<"sampleRate:"<<sampleRate;
+        qDebug()<<"config:"<<args[2];
+        break;
+    default:
         qDebug()<<"Connection::readReady: "<<buffer;
+        break;
+
     }
 
     emit sendNext();

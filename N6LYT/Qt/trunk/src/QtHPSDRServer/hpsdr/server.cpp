@@ -88,6 +88,17 @@ void Server::configure(QSettings* mysettings) {
     metis_buffer_index=8;
     mox=false;
 
+    int x=settings->value("xvtrs",0).toInt();
+    XVTR* xvtr;
+    for(int i=0;i<x;i++) {
+        xvtr=new XVTR();
+        xvtr->setLabel(settings->value("xvtrlabel"+QString::number(i),"").toString());
+        xvtr->setMinFrequency(settings->value("xvtrminfrequency"+QString::number(i),0).toLongLong());
+        xvtr->setMaxFrequency(settings->value("xvtrmaxfrequency"+QString::number(i),0).toLongLong());
+        xvtr->setLOFrequency(settings->value("xvtrlofrequency"+QString::number(i),0).toLongLong());
+        xvtrs.append(xvtr);
+    }
+
 }
 
 void Server::save() {
@@ -131,6 +142,15 @@ void Server::save() {
 
     settings->setValue("autostart",auto_start);
     settings->setValue("autostartdsp",auto_start_dsp);
+
+    XVTR* xvtr;
+    for(int i=0;i<xvtrs.count();i++) {
+        xvtr=xvtrs.at(i);
+        settings->setValue("xvtrlabel"+QString::number(i),xvtr->getLabel());
+        settings->setValue("xvtrminfrequency"+QString::number(i),xvtr->getMinFrequency());
+        settings->setValue("xvtrmaxfrequency"+QString::number(i),xvtr->getMaxFrequency());
+        settings->setValue("xvtrlofrequency"+QString::number(i),xvtr->getLOFrequency());
+    }
 }
 
 Interfaces* Server::getInterfaces() {
@@ -1225,3 +1245,6 @@ void Server::setAlexRxOnlyAntenna(int a) {
     }
 }
 
+QList<XVTR*> Server::getXvtrs() {
+    return xvtrs;
+}
