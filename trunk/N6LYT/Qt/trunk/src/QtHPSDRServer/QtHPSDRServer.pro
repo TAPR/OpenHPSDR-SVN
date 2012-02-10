@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     hpsdr/error.cpp \
     hpsdr/interfaces.cpp \
     hpsdr/metis.cpp \
-    hpsdr/receiver.cpp
+    hpsdr/receiver.cpp \
+    hpsdr/xvtr.cpp
 
 HEADERS  += mainwindow.h \
     client/client.h \
@@ -34,6 +35,7 @@ HEADERS  += mainwindow.h \
     hpsdr/error.h \
     hpsdr/interfaces.h \
     hpsdr/metis.h \
-    hpsdr/receiver.h
+    hpsdr/receiver.h \
+    hpsdr/xvtr.h
 
 FORMS    += mainwindow.ui
