@@ -3,7 +3,14 @@ TARGET = ../../bin/QtDSPServer
 TEMPLATE = app
 CONFIG += CONSOLE
 CONFIG += debug
+
+unix {
 LIBS += -lfftw3f
+}
+
+win32 {
+LIBS += -L../../../../fftw-3.3-dll32 -lfftw3f-3 -L../../../../ -lpthreadGC2 -lws2_32
+}
 
 QMAKE_CXXFLAGS += -fpermissive
 

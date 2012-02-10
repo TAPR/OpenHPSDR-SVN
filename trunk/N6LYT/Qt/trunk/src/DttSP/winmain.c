@@ -276,14 +276,14 @@ Audio_Callback (float *input_l, float *input_r, float *output_l,
 
         i=thread;
 	if (top[i].susp)
-	{
+    {
 		memset (output_l, 0, nframes * sizeof (float));
 		memset (output_r, 0, nframes * sizeof (float));
 		return;
 	}
 
 	if (b)
-	{
+    {
 		//fprintf(stdout,"Audio_Callback: call reset_system_audio\n"), fflush(stdout);
 		reset_system_audio(nframes);
 		memset (output_l, 0, nframes * sizeof (float));
@@ -313,7 +313,7 @@ Audio_Callback (float *input_l, float *input_r, float *output_l,
 			}
 		}
 		else
-		{	// rb pathology
+        {	// rb pathology
 			//fprintf(stdout,"Audio_Callback-2: rb out pathology\n"), fflush(stdout);
 //			reset_system_audio(nframes);
 //			memset (output_l, 0, nframes * sizeof (float));
@@ -330,16 +330,18 @@ Audio_Callback (float *input_l, float *input_r, float *output_l,
 			ringb_float_write (top[i].jack.auxr.i.r, (float *) input_r, nframes);
 		}
 		else
-		{	// rb pathology
+        {	// rb pathology
 			//fprintf(stdout,"Audio_Callback-3: rb in pathology\n"), fflush(stdout);
-//			reset_system_audio(nframes);
+//          reset_system_audio(nframes);
 //			memset (output_l, 0, nframes * sizeof (float));
 //			memset (output_r, 0, nframes * sizeof (float));
 		}
 
 		// if enough accumulated in ring, fire dsp
-		if (ringb_float_read_space (top[i].jack.ring.i.l) >= top[i].hold.size.frames)
+        if (ringb_float_read_space (top[i].jack.ring.i.l) >= top[i].hold.size.frames){
+            //fprintf(stderr,"sem_post sync.buf.sem\n");
 			sem_post (&top[i].sync.buf.sem);
+        }
 	//}
 }
 
@@ -619,12 +621,16 @@ Audio_Callback2 (float **input, float **output, unsigned int nframes)
 DttSP_EXP void
 process_samples_thread (unsigned int proc_thread)
 {
+    //fprintf(stderr,"process_samples_thread: entry %d\n",top[proc_thread].running);
 	while (top[proc_thread].running)
 	{
-		sem_wait (&top[proc_thread].sync.buf.sem);
+        //fprintf(stderr,"process_samples_thread: wait sync.buf.sem\n");
+        //sem_wait (&top[proc_thread].sync.buf.sem);
 		while (gethold(proc_thread)) 
 		{
-			sem_wait (&top[proc_thread].sync.upd.sem);
+            //fprintf(stderr,"process_samples_thread: wait sync.upd.sem\n");
+            //sem_wait (&top[proc_thread].sync.upd.sem);
+            //fprintf(stderr,"process_samples_thread: state:%d\n",top[proc_thread].state);
 			switch (top[proc_thread].state)
 			{
 				case RUN_MUTE:
@@ -644,6 +650,7 @@ process_samples_thread (unsigned int proc_thread)
 			puthold (proc_thread);
 		}
 	}
+    fprintf(stderr,"process_samples_thread: exit\n");
 }
 
 
@@ -652,6 +659,8 @@ void
 closeup ()
 {
 	unsigned int thread;
+
+    fprintf(stderr,"closeup\n");
 	for(thread = 0; thread<3;thread++) 
 	{
 		top[thread].running = FALSE;
@@ -718,6 +727,7 @@ setup_system_audio (unsigned int thread)
 PRIVATE void
 setup_threading (unsigned int thread)
 {
+    fprintf(stderr,"setup_threading\n");
 	top[thread].susp = FALSE;
 	sem_init (&top[thread].sync.upd.sem, 0, 0);
 	sem_init (&top[thread].sync.buf.sem, 0, 0);	
@@ -761,7 +771,7 @@ fprintf(stderr,"I am inside setup\n"),fflush(stderr);
 	{
 		top[thread].pid = getpid(); // GetCurrentThreadId ();
         //top[thread].uid = 0L;
-		top[thread].start_tv = now_tv ();
+        //top[thread].start_tv = now_tv ();
 		top[thread].running = TRUE;
 		top[thread].verbose = FALSE;
 		if (thread != 1) top[thread].state = RUN_PLAY;

@@ -11,7 +11,6 @@ ClientListener* ClientListener::getInstance() {
 ClientListener::ClientListener(QObject *parent) :
     QObject(parent)
 {
-
 }
 
 void ClientListener::setup(int p,int rx) {

@@ -9,6 +9,9 @@ QT       += core gui network
 TARGET = ../../bin/QtHPSDRServer
 TEMPLATE = app
 
+win32 {
+LIBS += -lws2_32
+}
 
 SOURCES += main.cpp\
         mainwindow.cpp \

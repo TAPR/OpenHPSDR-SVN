@@ -4,6 +4,10 @@
 #include "connection.h"
 #include "../client/clientlistener.h"
 
+#ifdef Q_WS_WIN
+#include <winsock2.h>
+#endif
+
 #include <QDebug>
 
 Data* Data::instance = NULL;
@@ -33,6 +37,13 @@ void Data::setConnection(QString h,int r,int l) {
     // listen for datagrams on local port
     udpSocket = new QUdpSocket(this);
     udpSocket->bind(QHostAddress::LocalHost, local_port);
+
+#ifdef Q_WS_WIN
+    int v=32768;
+    if(::setsockopt(udpSocket->socketDescriptor(),SOL_SOCKET,SO_RCVBUF,(char*)&v,sizeof(v))==-1) {
+        qDebug()<<"Data::setConnection: error using setsockopt";
+    }
+#endif
      
     connect(udpSocket, SIGNAL(readyRead()),
                 this, SLOT(readPendingDatagrams()));
@@ -45,14 +56,21 @@ void Data::readPendingDatagrams() {
     QByteArray datagram;
     QHostAddress sender;
     quint16 senderPort;
-
+    qint64 bytes;
+    qint64 bytes_read;
     datagram.resize(512);
+
 
     while (udpSocket->hasPendingDatagrams())  {
 
-        udpSocket->readDatagram(datagram.data(), udpSocket->pendingDatagramSize(),
+        bytes=udpSocket->pendingDatagramSize();
+        //qDebug()<<"pedingDatagramSize:"<<udpSocket->pendingDatagramSize();
+        bytes_read=udpSocket->readDatagram(datagram.data(), bytes,
                                 &sender, &senderPort);
  
+        if(bytes_read!=bytes) {
+            qDebug()<<"readDatagram: bytes:"<<bytes<<" bytes_read:"<<bytes_read;
+        }
         // processTheDatagram(datagram);
         //     8 bytes sequency number
         //     2 byte offset
@@ -74,6 +92,7 @@ void Data::readPendingDatagrams() {
         this_length=(datagram.data()[10]&0xFF)<<8 |
                     (datagram.data()[11]&0xFF);
 
+        //qDebug()<<"sequence:"<<this_sequence<<" offset:"<<this_offset<<" length:"<<this_length;
         if(this_offset==0) {
             offset=0;
             sequence=this_sequence;
@@ -88,8 +107,19 @@ void Data::readPendingDatagrams() {
 
                     // process the data
                     //qDebug()<<"Audio_Callback: IQ";
-                    Audio_Callback(input_buffer,&input_buffer[1024],output_buffer,&output_buffer[1024],1024,0);
 
+                    Audio_Callback(input_buffer,&input_buffer[1024],output_buffer,&output_buffer[1024],1024,0);
+/*
+                    int input_zeros=0;
+                    int output_zeros=0;
+                    for(int i=0;i<1024;i++) {
+                        if(input_buffer[i]==0.0F) input_zeros++;
+                        if(input_buffer[i+1024]==0.0F) input_zeros++;
+                        if(output_buffer[i]==0.0F) output_zeros++;
+                        if(output_buffer[i+1024]==0.0F) output_zeros++;
+                    }
+                    qDebug()<<"input_zeros:"<<input_zeros<<" output_zeros:"<<output_zeros;
+*/
 /*
    need to fix to handle full duplex when remote audio
 */
@@ -118,7 +148,9 @@ void Data::readPendingDatagrams() {
                     }
                 }
             } else {
-qDebug()<<"Data::readPendingDatagrams: missing IQ frames";
+                qDebug()<<"Data::readPendingDatagrams: missing IQ frames:"
+                         <<" expected:"<<QString::number(sequence)<<":"<<QString::number(offset)
+                         <<" got:"<<QString::number(this_sequence)<<":"<<QString::number(this_offset);
             }
         }
     }

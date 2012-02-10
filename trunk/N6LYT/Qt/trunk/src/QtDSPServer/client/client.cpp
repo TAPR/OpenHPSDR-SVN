@@ -56,6 +56,7 @@ void Client::readyRead() {
     while(socket->canReadLine()) {
         QString buffer(socket->readLine(1024));
         buffer.chop(1); // remove the new line
+        //qDebug()<<"client:"<<buffer;
         QStringList args=buffer.split(" ");
         switch(args.length()){
         case 1:
