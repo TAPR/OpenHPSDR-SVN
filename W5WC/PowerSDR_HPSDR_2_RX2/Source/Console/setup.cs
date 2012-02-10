@@ -16336,7 +16336,6 @@ namespace PowerSDR
             this.chkAudioRX2toVAC.Size = new System.Drawing.Size(88, 16);
             this.chkAudioRX2toVAC.TabIndex = 2;
             this.chkAudioRX2toVAC.Text = "Use RX2";
-            this.chkAudioRX2toVAC.Visible = false;
             this.chkAudioRX2toVAC.CheckedChanged += new System.EventHandler(this.chkAudioRX2toVAC_CheckedChanged);
             // 
             // chkAudioCorrectIQ
@@ -16348,6 +16347,7 @@ namespace PowerSDR
             this.chkAudioCorrectIQ.Size = new System.Drawing.Size(88, 16);
             this.chkAudioCorrectIQ.TabIndex = 1;
             this.chkAudioCorrectIQ.Text = "Calibrate I/Q";
+            this.chkAudioCorrectIQ.Visible = false;
             this.chkAudioCorrectIQ.CheckedChanged += new System.EventHandler(this.chkAudioCorrectIQ_CheckChanged);
             // 
             // chkAudioIQtoVAC
@@ -38779,7 +38779,7 @@ namespace PowerSDR
             if (power && chkAudioEnableVAC.Checked)
                 console.PowerOn = true;
 
-            chkAudioCorrectIQ.Enabled = chkAudioIQtoVAC.Checked;
+            //chkAudioCorrectIQ.Enabled = chkAudioIQtoVAC.Checked;
             chkAudioRX2toVAC.Enabled = chkAudioIQtoVAC.Checked;
         }
  
