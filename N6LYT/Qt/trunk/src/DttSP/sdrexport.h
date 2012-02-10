@@ -321,10 +321,11 @@ typedef enum _runmode
 extern struct _top
 {
   //DWORD pid;
-  int pid;
+  long long pid;
+
   //uid_t uid;
 
-  struct timeval start_tv;
+  //struct timeval start_tv;
 
   BOOLEAN running, verbose;
   RUNMODE state;

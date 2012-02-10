@@ -8,11 +8,19 @@
 
 #ifdef Q_WS_WIN
 #include <windows.h>
+#include <winsock2.h>
 #endif
 
 Receiver::Receiver(int local_port) {
     udpSocket = new QUdpSocket(this);
     udpSocket->bind(QHostAddress::LocalHost, local_port);
+
+#ifdef Q_WS_WIN
+    int v=4096;
+    if(::setsockopt(udpSocket->socketDescriptor(),SOL_SOCKET,SO_RCVBUF,(char*)&v,sizeof(v))==-1) {
+        qDebug()<<"Data::setConnection: error using setsockopt";
+    }
+#endif
 
     connect(udpSocket, SIGNAL(readyRead()),
                 this, SLOT(readPendingDatagrams()));

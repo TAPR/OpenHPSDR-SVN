@@ -126,6 +126,7 @@ fdsize (int fd)
 
 #define MILLION (1000000)
 
+#ifdef EXCLUDED
 // return current tv
 struct timeval
 now_tv (void)
@@ -182,6 +183,8 @@ since (struct timeval *tv)
 	struct timeval nt = now_tv (), dt = diff_tv (&nt, tv);
 	return fmt_tv (&dt);
 }
+
+#endif
 
 // linear integer interpolation:
 // real vector v, n long, -> real vector u, m long
