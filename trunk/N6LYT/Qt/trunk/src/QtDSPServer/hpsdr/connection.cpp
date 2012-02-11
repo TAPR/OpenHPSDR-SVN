@@ -20,6 +20,7 @@ qDebug()<<"Connection::Connection";
     connected=false;
     messageSent=false;
     connect(this,SIGNAL(sendNext()),this,SLOT(sendNextCommand()));
+    configuration=NULL;
 }
 
 void Connection::isConnected() {
@@ -39,6 +40,10 @@ void Connection::setConnection(QString host,int port) {
     connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
     connect(socket,SIGNAL(disconnected()),this,SLOT(isDisconnected()));
     socket->connectToHost(QHostAddress(host),port);
+}
+
+QString Connection::getConfiguration() {
+    return stringConfiguration;
 }
 
 void Connection::sendNextCommand() {
@@ -74,6 +79,7 @@ void Connection::readyRead() {
     QString buffer(socket->readLine(1024));
     buffer.chop(1); // remove nl
     QStringList args=buffer.split(" ");
+    QDomNodeList elements;
 
     if(args.length()<=0) {
         qDebug()<<"Connection::readyRead: no args!";
@@ -94,15 +100,19 @@ void Connection::readyRead() {
         // just OK
         break;
     case 2:
-        // OK and samplerate
-        sampleRate=args[1].toInt();
-        qDebug()<<"sampleRate:"<<sampleRate;
-        break;
-    case 3:
-        // OK and samplerate and config
-        sampleRate=args[1].toInt();
-        qDebug()<<"sampleRate:"<<sampleRate;
-        qDebug()<<"config:"<<args[2];
+        // OK and configuration
+        stringConfiguration=args[1];
+        configuration=new QDomDocument();
+        configuration->setContent(stringConfiguration);
+        elements=configuration->elementsByTagName("samplerate");
+        if(elements.length()>=1) {
+            sampleRate=elements.at(0).toElement().text().toInt();
+            qDebug()<<"samplerate:"<<sampleRate;
+        } else {
+            qDebug()<<"missing samplerate. default to 96000";
+            sampleRate=96000;
+        }
+
         break;
     default:
         qDebug()<<"Connection::readReady: "<<buffer;

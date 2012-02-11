@@ -6,6 +6,8 @@
 #include <QTcpSocket>
 #include <QUrl>
 #include <QMutex>
+#include <QtXml/QDomDocument>
+#include <QtXml/QDomNodeList>
 
 
 class Connection : public QObject {
@@ -14,6 +16,7 @@ public:
     static Connection* getInstance();
     void setConnection(QString host,int port);
     int getSampleRate();
+    QString getConfiguration();
 protected:
     Connection();
 signals:
@@ -41,6 +44,9 @@ private:
     int sampleRate;
 
     QMutex mutex;
+
+    QString stringConfiguration;
+    QDomDocument* configuration;
 };
 
 #endif // CONNECTION_H

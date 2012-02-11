@@ -10,7 +10,11 @@
 #include "g711u.h"
 #include "g721.h"
 
+#define HEADER_SIZE 13
+
 #define SPECTRUM_BUFFER 0
+#define CONFIG_BUFFER 1
+
 #define HEADER_VERSION 2
 #define HEADER_SUBVERSION 0
 

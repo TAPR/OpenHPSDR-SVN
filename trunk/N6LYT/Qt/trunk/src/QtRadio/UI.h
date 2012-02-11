@@ -177,6 +177,8 @@ public slots:
     //void audioBuffer(char* header,char* buffer);
     void spectrumBuffer(char* header,char* buffer);
 
+    void configBuffer(char* header,char*buffer);
+
     void bandChanged(int previousBand,int newBand);
     void modeChanged(int previousMode,int newMode);
     void filtersChanged(FiltersBase* previousFilters,FiltersBase* newFilters);

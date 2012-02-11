@@ -36,8 +36,7 @@
 #include "Buffer.h"
 
 #define SPECTRUM_BUFFER     0
-#define AUDIO_BUFFER        1
-#define BANDSCOPE_BUFFER    2
+#define CONFIG_BUFFER       1
 
 #define HEADER_SIZE 13
 
@@ -66,9 +65,8 @@ signals:
     void isConnected();
     void disconnected(QString message);
     void header(char* header);
-    void audioBuffer(char* header,char* buffer);
     void spectrumBuffer(char* header,char* buffer);
-    void bandscopeBuffer(char* header,char* buffer);
+    void configBuffer(char* header,char* buffer);
 
 private:
     static Connection* instance;
