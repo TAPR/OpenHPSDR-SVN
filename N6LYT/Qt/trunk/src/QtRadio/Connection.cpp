@@ -163,11 +163,8 @@ void Connection::processBuffer() {
     // emit a signal to show what buffer we have
     if(nextHeader[0]==SPECTRUM_BUFFER) {
         emit spectrumBuffer(nextHeader,nextBuffer);
-    } else if(nextHeader[0]==AUDIO_BUFFER) {
-        emit audioBuffer(nextHeader,nextBuffer);
-    } else if(nextHeader[0]==BANDSCOPE_BUFFER) {
-        //qDebug() << "socketData: bandscope";
-        emit bandscopeBuffer(nextHeader,nextBuffer);
+    } else if(nextHeader[0]==CONFIG_BUFFER) {
+        emit configBuffer(nextHeader,nextBuffer);
     } else {
         qDebug() << "Connection::socketData: invalid header: " << nextHeader[0];
     }

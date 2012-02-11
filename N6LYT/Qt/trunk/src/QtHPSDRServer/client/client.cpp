@@ -57,8 +57,6 @@ void Client::readyRead() {
                     response.append("Error: Service unavailable");
                 } else {
                     response.append("OK ");
-                    response.append(QString::number(server->getSampleRate()));
-                    response.append(" ");
 
                     response.append("<radio>");
                     response.append("<type>");

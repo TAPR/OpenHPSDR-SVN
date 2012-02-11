@@ -70,6 +70,8 @@ UI::UI() {
     connect(Connection::getInstance(),SIGNAL(spectrum(QByteArray)),this,SLOT(spectrumBuffer(QByteArray)));
     connect(Connection::getInstance(),SIGNAL(connected()),this,SLOT(connected()));
 
+    connect(Connection::getInstance(),SIGNAL(configBuffer(char*,char*)),this,SLOT(configBuffer(char*,char*)));
+
     connect(widget.actionConfig,SIGNAL(triggered()),this,SLOT(actionConfigure()));
 
     connect(widget.actionMuteMainRx,SIGNAL(triggered()),this,SLOT(actionMuteMainRx()));
@@ -611,27 +613,14 @@ void UI::spectrumBuffer(char* header,char* buffer) {
     widget.spectrumFrame->updateSpectrum(header,buffer,length);
     widget.waterfallFrame->updateWaterfall(header,buffer,length);
 }
-/*
-void UI::audioBuffer(char* header,char* buffer) {
-    //qDebug() << "audioBuffer";
-    //int length=atoi(&header[26]);
-    int length=((header[7]&0xFF)<<8)+(header[8]&0xFF);
-    if(audio_buffers==0) {
-        first_audio_header=header;
-        first_audio_buffer=buffer;
-        audio_buffers++;
-    } else if(audio_buffers==1) {
-        audio_buffers++;
-        audio.process_audio(first_audio_header,first_audio_buffer,length);
-        //connection.freeBuffers(first_audio_header,first_audio_buffer);
-        audio.process_audio(header,buffer,length);
-        //connection.freeBuffers(header,buffer);
-    } else {
-        audio.process_audio(header,buffer,length);
-        //connection.freeBuffers(header,buffer);
-    }
+
+void UI::configBuffer(char *header, char *buffer) {
+    int length=((header[3]&0xFF)<<8)+(header[4]&0xFF);
+    QByteArray config(buffer,length);
+    qDebug()<<"configBuffer:"<<config;
+
 }
-*/
+
 void UI::actionSubRx() {
     if(subRx) {
         // on, so turn off

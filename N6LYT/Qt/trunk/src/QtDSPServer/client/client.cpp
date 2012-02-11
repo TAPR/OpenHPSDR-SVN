@@ -53,7 +53,9 @@ QHostAddress Client::getPeerAddress() {
 void Client::readyRead() {
     //Server* server=Server::getInstance();
     QByteArray response;
+    QString config;
     while(socket->canReadLine()) {
+        response.resize(0);
         QString buffer(socket->readLine(1024));
         buffer.chop(1); // remove the new line
         //qDebug()<<"client:"<<buffer;
@@ -102,7 +104,7 @@ void Client::readyRead() {
                     subrx_meter=CalculateRXMeter(0,1,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
                 }
 
-                response.resize(n+13); // spectrum data * HEADER
+                response.resize(n+HEADER_SIZE); // spectrum data * HEADER
 
                 response.data()[0]=SPECTRUM_BUFFER;
                 response.data()[1]=HEADER_VERSION;
@@ -133,7 +135,7 @@ void Client::readyRead() {
                         if(spectrumBuffer[j]>max)
                             max=spectrumBuffer[j];
                     }
-                    response.data()[i+13]=(unsigned char)-(max+displayCalibrationOffset/*+preampOffset*/);
+                    response.data()[i+HEADER_SIZE]=(unsigned char)-(max+displayCalibrationOffset/*+preampOffset*/);
                 }
             } else if (args[0]=="client") {
                 client_type=args[1];
@@ -337,7 +339,28 @@ void Client::readyRead() {
                 qDebug()<<"Client::readyRead:"<<buffer;
                 qDebug()<<"Client::readyRead: port:"<<audio_port<<" rate:"<<audio_rate<<" chanels:"<<audio_channels<<" encoding:"<<audio_encoding;
 
+                config=Connection::getInstance()->getConfiguration();
+                if(!config.isNull()) {
+                    int length=config.length();
+                    response.resize(HEADER_SIZE+config.length());  // type, version, subversion,length and config data
 
+                    response.data()[0]=CONFIG_BUFFER;
+                    response.data()[1]=HEADER_VERSION;
+                    response.data()[2]=HEADER_SUBVERSION;
+                    response.data()[3]=(length>>8)&0xFF;  // samples length
+                    response.data()[4]=length&0xFF;
+                    response.data()[5]=0;                 // unused
+                    response.data()[6]=0;
+                    response.data()[7]=0;
+                    response.data()[8]=0;
+                    response.data()[9]=0;
+                    response.data()[10]=0;
+                    response.data()[11]=0;
+                    response.data()[12]=0;
+                    for(int i=0;i<length;i++) {
+                        response.data()[HEADER_SIZE+i]=config.at(i).toAscii();
+                    }
+                }
                 //response.append("OK ");
                 //response.append(QString::number(sampleRate));
             } else {
@@ -353,7 +376,9 @@ void Client::readyRead() {
         }
         //response.append("\n");
         if(response.length()>0) {
+            qDebug()<<"sending response:"<<response.length()<<" bytes";
             socket->write(response);
+
         }
     }
 }

@@ -1,4 +1,4 @@
-QT = core network
+QT = core network xml
 TARGET = ../../bin/QtDSPServer
 TEMPLATE = app
 CONFIG += CONSOLE
