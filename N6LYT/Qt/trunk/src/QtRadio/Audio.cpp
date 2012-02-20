@@ -28,6 +28,8 @@
 Audio::Audio() {
     remote_port=0;
 
+    sequence=0;
+
     audio_output=NULL;
     audio_out=NULL;
     sampleRate=8000;
@@ -37,7 +39,7 @@ Audio::Audio() {
 
     audio_buffer_size=sampleRate*audio_channels*sizeof(short);
     input_buffer=(char*)malloc(audio_buffer_size);
-    encoded_buffer_size=(sampleRate*audio_channels)/50; // 20ms
+    encoded_buffer_size=8+((sampleRate*audio_channels)/50); // 20ms + 8 byte sequence
     encoded_buffer=(char*)malloc(encoded_buffer_size);
 
     output_buffer=(char*)malloc(encoded_buffer_size);
@@ -53,6 +55,8 @@ Audio::Audio() {
     audio_format.setSampleSize(16);
     audio_format.setCodec("audio/pcm");
     audio_format.setByteOrder(audio_byte_order);
+
+    skip=false;
 }
 
 Audio::~Audio() {
@@ -67,6 +71,10 @@ void Audio::init(int p) {
     socket->bind(port, QUdpSocket::ShareAddress);
     connect(socket,SIGNAL(readyRead()),this,SLOT(networkReadyRead()));
 
+}
+
+void Audio::reset() {
+    sequence=0;
 }
 
 int Audio::get_sample_rate() {
@@ -86,7 +94,7 @@ void Audio::initialize_audio() {
     qDebug()<<"Audio::initialize_audio: encoding:"<<audio_encoding<<" rate:"<<sampleRate<<" channels:"<<audio_channels;
 
     audio_buffer_size=sampleRate*audio_channels*sizeof(short);
-    encoded_buffer_size=(sampleRate*audio_channels)/50; // 20ms
+    encoded_buffer_size=8+((sampleRate*audio_channels)/50); // 20ms + 8 byte sequence
     if(audio_encoding==ENCODING_PCM) {
         encoded_buffer_size=encoded_buffer_size*2;
     }
@@ -211,7 +219,7 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
         free(encoded_buffer);
         audio_buffer_size=sampleRate*audio_channels*sizeof(short)/50; // 20ms
         input_buffer=(char*)malloc(audio_buffer_size);
-        encoded_buffer_size=(sampleRate*audio_channels)/50; // 20ms
+        encoded_buffer_size=8+((sampleRate*audio_channels)/50); // 20ms
         encoded_buffer=(char*)malloc(encoded_buffer_size);
         free(output_buffer);
         free(decoded_buffer);
@@ -223,7 +231,7 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
         free(encoded_buffer);
         audio_buffer_size=sampleRate*audio_channels*sizeof(short)/50;
         input_buffer=(char*)malloc(audio_buffer_size);
-        encoded_buffer_size=(sampleRate*audio_channels)/50; // 20ms
+        encoded_buffer_size=8+((sampleRate*audio_channels)/50); // 20ms
         encoded_buffer=(char*)malloc(encoded_buffer_size);
         free(output_buffer);
         free(decoded_buffer);
@@ -235,7 +243,7 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
         free(encoded_buffer);
         audio_buffer_size=sampleRate*audio_channels*sizeof(short)/50;
         input_buffer=(char*)malloc(audio_buffer_size);
-        encoded_buffer_size=(sampleRate*audio_channels*sizeof(short))/50; // 20ms
+        encoded_buffer_size=8+((sampleRate*audio_channels*sizeof(short))/50); // 20ms
         encoded_buffer=(char*)malloc(encoded_buffer_size);
         free(output_buffer);
         free(decoded_buffer);
@@ -247,7 +255,7 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
         free(encoded_buffer);
         audio_buffer_size=sampleRate*audio_channels*sizeof(short)/50;
         input_buffer=(char*)malloc(audio_buffer_size);
-        encoded_buffer_size=(sampleRate*audio_channels)/50/2; // 20ms
+        encoded_buffer_size=8+((sampleRate*audio_channels)/50/2); // 20ms
         encoded_buffer=(char*)malloc(encoded_buffer_size);
         free(output_buffer);
         free(decoded_buffer);
@@ -260,7 +268,7 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
         free(encoded_buffer);
         audio_buffer_size=sampleRate*audio_channels*sizeof(short)/50;
         input_buffer=(char*)malloc(audio_buffer_size);
-        encoded_buffer_size=(sampleRate*audio_channels)/50; // 20ms
+        encoded_buffer_size=8+((sampleRate*audio_channels)/50); // 20ms
         encoded_buffer=(char*)malloc(encoded_buffer_size);
         free(output_buffer);
         free(decoded_buffer);
@@ -330,6 +338,8 @@ void Audio::mox(bool state) {
 
 void Audio::readyRead() {
     qint64 bytes;
+
+    qDebug()<<"readyRead";
     bytes=audio_in->read(input_buffer,(qint64)sizeof(input_buffer));
 
     short left;
@@ -457,6 +467,7 @@ void Audio::networkReadyRead() {
     QHostAddress host;
     quint16 port;
     int length;
+    qint64 this_sequence;
     while(socket->hasPendingDatagrams()) {
         length=socket->readDatagram(output_buffer,encoded_buffer_size,&host,&port);
         if(remote_port==0) {
@@ -469,6 +480,28 @@ void Audio::networkReadyRead() {
             short left;
             short right;
             decoded_nibble=0;
+
+            // first 8 bytes are sequence
+            this_sequence=(output_buffer[0]&0xFF)<<56;
+            this_sequence+=(output_buffer[1]&0xFF)<<48;
+            this_sequence+=(output_buffer[2]&0xFF)<<40;
+            this_sequence+=(output_buffer[3]&0xFF)<<32;
+            this_sequence+=(output_buffer[4]&0xFF)<<24;
+            this_sequence+=(output_buffer[5]&0xFF)<<16;
+            this_sequence+=(output_buffer[6]&0xFF)<<8;
+            this_sequence+=(output_buffer[7]&0xFF);
+
+            if(this_sequence!=sequence) {
+                qDebug()<<"this_sequence:"<<this_sequence<<" expected:"<<sequence;
+            }
+
+            if((sequence%50)==0) {
+                qDebug()<<sequence;
+            }
+
+            sequence=this_sequence+1;
+            i=8;
+
             while(i<length) {
                 switch(audio_encoding) {
                 case ENCODING_G711A:
@@ -579,11 +612,20 @@ void Audio::networkReadyRead() {
                     }
                 }
             }
-            if(audio_out->bytesToWrite()<(2*j)) {
-                audio_out->write(decoded_buffer,(qint64)j);
+
+            if(skip) {
+                qDebug()<<"audio: skipping";
+                skip=false;
+            } else {
+                int bytes_written=audio_out->write(decoded_buffer,(qint64)j);
+                if(bytes_written!=j) {
+                    qDebug()<<"audio bytes_written:"<<bytes_written<<" expected:"<<j;
+                    skip=true;
+                }
             }
+
         } else {
-            qDebug()<<"Audio::networkReadyRead: length not audio_buffer_size: "<<length;
+            qDebug()<<"Audio::networkReadyRead: length not encoded_buffer_size: "<<length;
         }
 
     }

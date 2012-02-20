@@ -109,17 +109,7 @@ void Data::readPendingDatagrams() {
                     //qDebug()<<"Audio_Callback: IQ";
 
                     Audio_Callback(input_buffer,&input_buffer[1024],output_buffer,&output_buffer[1024],1024,0);
-/*
-                    int input_zeros=0;
-                    int output_zeros=0;
-                    for(int i=0;i<1024;i++) {
-                        if(input_buffer[i]==0.0F) input_zeros++;
-                        if(input_buffer[i+1024]==0.0F) input_zeros++;
-                        if(output_buffer[i]==0.0F) output_zeros++;
-                        if(output_buffer[i+1024]==0.0F) output_zeros++;
-                    }
-                    qDebug()<<"input_zeros:"<<input_zeros<<" output_zeros:"<<output_zeros;
-*/
+
 /*
    need to fix to handle full duplex when remote audio
 */
@@ -143,6 +133,7 @@ void Data::readPendingDatagrams() {
 
                     if(mox && mic_remote) {
                         // tx I/Q samples from the received microphone samples
+                        qDebug()<<"remote mox";
                     } else {
                         send();
                     }

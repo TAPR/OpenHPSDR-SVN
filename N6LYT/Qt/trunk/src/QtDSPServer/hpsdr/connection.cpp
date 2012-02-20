@@ -32,6 +32,7 @@ void Connection::isConnected() {
 void Connection::isDisconnected() {
     qDebug()<<"Connection::isDisconnected";
     connected=false;
+    emit disconnected();
 }
 
 void Connection::setConnection(QString host,int port) {
@@ -112,7 +113,7 @@ void Connection::readyRead() {
             qDebug()<<"missing samplerate. default to 96000";
             sampleRate=96000;
         }
-
+        emit setSampleRate(sampleRate);
         break;
     default:
         qDebug()<<"Connection::readReady: "<<buffer;

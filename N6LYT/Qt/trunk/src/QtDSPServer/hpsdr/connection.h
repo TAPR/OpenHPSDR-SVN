@@ -21,12 +21,16 @@ protected:
     Connection();
 signals:
     void sendNext();
+    void setSampleRate(int); //sampleRate
+    void disconnected();
+
 public slots:
     void readyRead();
     void isConnected();
     void isDisconnected();
     void sendNextCommand();
     void sendCommand(QString);
+
 private:
     static Connection* instance;
 

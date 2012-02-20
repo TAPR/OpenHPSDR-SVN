@@ -5,6 +5,7 @@
 #include <QHostAddress>
 #include <QTcpSocket>
 #include <QUdpSocket>
+#include <QMutex>
 
 #include "g711a.h"
 #include "g711u.h"
@@ -72,6 +73,9 @@ private:
     G711u g711u;
     G721  g721;
 
+    QMutex mutex;
+
+    qint64 sequence;
 };
 
 #endif // CLIENT_H

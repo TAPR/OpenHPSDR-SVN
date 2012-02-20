@@ -21,6 +21,10 @@ Client::Client(QTcpSocket* s,int rx,QObject *parent) :
 
     audio_port=0;
 
+    audioBufferOffset=0;
+
+    sequence=0;
+
     receiver=rx;
     socket=s;
     connect(s,SIGNAL(readyRead()),this,SLOT(readyRead()));
@@ -300,24 +304,24 @@ void Client::readyRead() {
         case 6:
             if(args[0]=="connect") {
                 // arg[1] port
-                // arg[2] size
-                // arg[3] rate
-                // arg[4] channels
-                // arg[5] encoding
+                // arg[2] rate
+                // arg[3] channels
+                // arg[4] encoding
+                // arg[5] client type
                 audio_port=args[1].toInt();
-                audio_size=args[2].toInt();
-                audio_rate=args[3].toInt();
-                audio_channels=args[4].toInt();
-                if(args[5]=="G711a") {
+                audio_rate=args[2].toInt();
+                audio_channels=args[3].toInt();
+                qDebug()<<"connect: PCM audio_port:"<<audio_port<<" audio_rate:"<<audio_rate<<" encoding:"<<args[5]<<" channels:"<<audio_channels;
+                if(args[4]=="G711a") {
                     audio_encoding=ENCODING_G711A;
                     audioBufferSize=1*audio_channels*(audio_rate/50);   // 8 bits per sample
-                } else if(args[5]=="G711u") {
+                } else if(args[4]=="G711u") {
                     audio_encoding=ENCODING_G711U;
                     audioBufferSize=1*audio_channels*(audio_rate/50);   // 8 bits per sample
-                } else if(args[5]=="PCM") {
+                } else if(args[4]=="PCM") {
                     audio_encoding=ENCODING_PCM;
                     audioBufferSize=2*audio_channels*(audio_rate/50);   // 16 bits per sample
-                } else if(args[5]=="G721") {
+                } else if(args[4]=="G721") {
                     audio_encoding=ENCODING_G721;
                     audioBufferSize=(audio_channels*(audio_rate/50))/2; // 4 bits per sample
                 } else {
@@ -326,12 +330,25 @@ void Client::readyRead() {
                     audioBufferSize=1*audio_channels*(audio_rate/50);
                 }
 
+                client_type=args[5];
+
+                audioBufferSize+=8;  // 8 byte sequence
+
                 qDebug()<<"connect port="<<audio_port;
                 audioSocket=new QUdpSocket();
                 audioSocket->bind(11000);
 
                 audioBuffer.resize(audioBufferSize);
-                audioBufferOffset=0;
+                audioBuffer.data()[0]=sequence>>56;
+                audioBuffer.data()[1]=sequence>>48;
+                audioBuffer.data()[2]=sequence>>40;
+                audioBuffer.data()[3]=sequence>>32;
+                audioBuffer.data()[4]=sequence>>24;
+                audioBuffer.data()[5]=sequence>>16;
+                audioBuffer.data()[6]=sequence>>8;
+                audioBuffer.data()[7]=sequence;
+
+                audioBufferOffset=8;
                 audioBufferCount=0;
 
                 connect(audioSocket,SIGNAL(readyRead()),this,SLOT(receiveAudio()));
@@ -361,6 +378,14 @@ void Client::readyRead() {
                         response.data()[HEADER_SIZE+i]=config.at(i).toAscii();
                     }
                 }
+
+                QString command;
+                command.append(QString("client "));
+                command.append(QString::number(receiver));
+                command.append(QString(" "));
+                command.append(client_type);
+                Connection::getInstance()->sendCommand(command);
+
                 //response.append("OK ");
                 //response.append(QString::number(sampleRate));
             } else {
@@ -376,7 +401,7 @@ void Client::readyRead() {
         }
         //response.append("\n");
         if(response.length()>0) {
-            qDebug()<<"sending response:"<<response.length()<<" bytes";
+            //qDebug()<<"sending response:"<<response.length()<<" bytes";
             socket->write(response);
 
         }
@@ -385,10 +410,21 @@ void Client::readyRead() {
 
 void Client::sendAudio(float* left,float* right,int length) {
     if(audio_port!=0) {
+
+        mutex.lock();
+        //qDebug()<<"sendAudio: audio_rate:"<<audio_rate<<" sampleRate:"<<sampleRate<<" encoding:"<<audio_encoding<<" channels:"<<audio_channels;
         int downsample=(sampleRate/audio_rate);
         for(int i=0;i<length;i+=downsample) {
-            short l=(short)(left[i]*32767.0F);
-            short r=(short)(right[i]*32767.0F);
+            float sum_left=0.0F;
+            float sum_right=0.0F;
+
+            for(int j=0;j<downsample;j++) {
+                sum_left+=left[i+j];
+                sum_right+=right[i+j];
+            }
+            short l=(short)(sum_left/(float)downsample*32767.0F);
+            short r=(short)(sum_right/(float)downsample*32767.0F);
+
             int v;
             int vl;
             int vr;
@@ -397,6 +433,7 @@ void Client::sendAudio(float* left,float* right,int length) {
                 switch(audio_channels) {
                 case 1:
                     audioBuffer.data()[audioBufferOffset++]=g711a.encode((l+r)/2);
+                    audioBuffer.data()[audioBufferOffset++]=g711a.encode(l);
                     break;
                 case 2:
                     audioBuffer.data()[audioBufferOffset++]=g711a.encode(l);
@@ -453,10 +490,25 @@ void Client::sendAudio(float* left,float* right,int length) {
                 int sent=audioSocket->writeDatagram(audioBuffer.data(),(quint64)audioBuffer.length(),socket->peerAddress(),audio_port);
                 if(sent<=0) {
                     qDebug()<<"audio writeDatagram failed:"<<audioSocket->errorString();
+                } else if(sent<audioBuffer.length()) {
+                    qDebug()<<"audio writeDatagram failed: length:"<<sent<<" expected:"<<audioBuffer.length();
                 }
-                audioBufferOffset=0;
+
+                // setup for next
+                sequence++;
+                audioBuffer.data()[0]=sequence>>56;
+                audioBuffer.data()[1]=sequence>>48;
+                audioBuffer.data()[2]=sequence>>40;
+                audioBuffer.data()[3]=sequence>>32;
+                audioBuffer.data()[4]=sequence>>24;
+                audioBuffer.data()[5]=sequence>>16;
+                audioBuffer.data()[6]=sequence>>8;
+                audioBuffer.data()[7]=sequence;
+
+                audioBufferOffset=8;
             }
         }
+        mutex.unlock();
     }
 }
 
