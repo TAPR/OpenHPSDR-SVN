@@ -24,7 +24,7 @@ public:
     Startup(int argc, char *argv[]);
 
 public slots:
-    void sampleRate(int);
+    void setSampleRate(int);
 
 protected:
 

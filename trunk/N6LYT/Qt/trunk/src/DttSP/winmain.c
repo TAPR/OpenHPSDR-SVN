@@ -625,7 +625,7 @@ process_samples_thread (unsigned int proc_thread)
 	while (top[proc_thread].running)
 	{
         //fprintf(stderr,"process_samples_thread: wait sync.buf.sem\n");
-        //sem_wait (&top[proc_thread].sync.buf.sem);
+        sem_wait (&top[proc_thread].sync.buf.sem);
 		while (gethold(proc_thread)) 
 		{
             //fprintf(stderr,"process_samples_thread: wait sync.upd.sem\n");

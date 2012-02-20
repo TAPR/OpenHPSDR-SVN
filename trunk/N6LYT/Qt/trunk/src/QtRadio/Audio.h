@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Audio.h
  * Author: John Melton, G0ORX/N6LYT
  *
@@ -61,6 +61,7 @@ public:
     virtual ~Audio();
     void init(int p);
     void initialize_audio();
+    void reset();
     void select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioFormat::Endian byteOrder,QString encoding);
     void get_audio_devices(QComboBox* comboBox);
 
@@ -109,6 +110,9 @@ private:
     char* output_buffer;
     char* decoded_buffer;
     int decoded_nibble;
+
+    qint64 sequence;
+    bool skip;
 
 };
 

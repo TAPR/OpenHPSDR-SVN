@@ -55,9 +55,11 @@ Startup::Startup(int argv, char* argc[]) {
     qDebug()<<"host:"<<host;
 
     // startup the client listener
+    connect(Connection::getInstance(),SIGNAL(setSampleRate(int)),this,SLOT(setSampleRate(int)));
     Connection::getInstance()->setConnection(host,serverPort);
     Data::getInstance();
     ClientListener::getInstance()->setup(clientPort,receiver);
+
 
 
     // Configure DttSP
@@ -106,4 +108,8 @@ Startup::Startup(int argv, char* argc[]) {
 }
 
 
-
+void Startup::setSampleRate(int rate) {
+    SetSampleRate(96000.0);
+    reset_for_buflen(0,1024);
+    reset_for_buflen(1,1024);
+}

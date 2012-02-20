@@ -65,7 +65,6 @@ UI::UI() {
 
     connect(Connection::getInstance(),SIGNAL(isConnected()),this,SLOT(connected()));
     connect(Connection::getInstance(),SIGNAL(disconnected(QString)),this,SLOT(disconnected(QString)));
-//    connect(Connection::getInstance(),SIGNAL(audioBuffer(char*,char*)),this,SLOT(audioBuffer(char*,char*)));
     connect(Connection::getInstance(),SIGNAL(spectrumBuffer(char*,char*)),this,SLOT(spectrumBuffer(char*,char*)));
     connect(Connection::getInstance(),SIGNAL(spectrum(QByteArray)),this,SLOT(spectrumBuffer(QByteArray)));
     connect(Connection::getInstance(),SIGNAL(connected()),this,SLOT(connected()));
@@ -416,6 +415,7 @@ void UI::actionConnect() {
     widget.spectrumFrame->setReceiver(configure.getReceiver());
 
     // when we get the response a signal is sent to connected()
+
 }
 
 void UI::actionDisconnect() {
@@ -439,15 +439,11 @@ void UI::connected() {
 
     configure.connected(TRUE);
 
-    command.clear();
-    command.append(QString("client QtRadio"));
-    Connection::getInstance()->sendCommand(command);
+    audio->reset();
 
     command.clear();
     command.append(QString("connect "));
     command.append(QString::number(10900+configure.getReceiver()));
-    command.append(QString(" "));
-    command.append(QString::number(audio->get_sample_rate()/50));
     command.append(QString(" "));
     command.append(QString::number(audio->get_sample_rate()));
     command.append(QString(" "));
@@ -467,6 +463,8 @@ void UI::connected() {
         command.append(QString("G721"));
         break;
     }
+    command.append(QString(" "));
+    command.append(QString("QtRadio"));
 
     qDebug()<<"UI::connected: "<<command;
     Connection::getInstance()->sendCommand(command);
