@@ -154,7 +154,7 @@ public:
 
     void enableAudio(int rx);
 
-    QList<XVTR*> getXvtrs();
+    XVTR* getXvtrs();
 
 protected:
     Server();
@@ -270,6 +270,8 @@ private:
     Receiver* receiver[4];
     int current_receiver;
 
+    long long loFrequency;
+
     int send_rx_frequency;
     int send_tx_frequency;
 
@@ -281,7 +283,7 @@ private:
 
     QSettings* settings;
 
-    QList<XVTR*> xvtrs;
+    XVTR xvtrs[4];
 };
 
 #endif // SERVER_H

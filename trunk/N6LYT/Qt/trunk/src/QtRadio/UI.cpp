@@ -43,6 +43,7 @@
 #include "FMNFilters.h"
 #include "DIGLFilters.h"
 #include "DIGUFilters.h"
+#include "Xvtr.h"
 #include "XvtrEntry.h"
 
 UI::UI() {
@@ -613,9 +614,18 @@ void UI::spectrumBuffer(char* header,char* buffer) {
 }
 
 void UI::configBuffer(char *header, char *buffer) {
+
     int length=((header[3]&0xFF)<<8)+(header[4]&0xFF);
     QByteArray config(buffer,length);
     qDebug()<<"configBuffer:"<<config;
+
+    QDomDocument* configuration=new QDomDocument();
+    configuration->setContent(config);
+
+    configure.setHardwareConfiguration(configuration);
+
+    xvtr.configure(configuration);
+    xvtr.buildMenu(widget.menuXVTR);
 
 }
 
@@ -823,7 +833,7 @@ void UI::bandChanged(int previousBand,int newBand) {
 
     command.clear();
     command.append(QString("frequency "));
-    command.append(QString::number(frequency-ifFrequency));
+    command.append(QString::number(frequency));
     command.append(QString(" "));
     command.append(QString::number(newBand));
     Connection::getInstance()->sendCommand(command);
@@ -1278,7 +1288,7 @@ void UI::frequencyMoved(int increment,int step) {
         }
         command.clear();
         command.append(QString("frequency "));
-        command.append(QString::number(frequency-ifFrequency));
+        command.append(QString::number(frequency));
         freqsender->broadcastDatagram(QByteArray().append(command));
         Connection::getInstance()->sendCommand(command);
         widget.spectrumFrame->setFrequency(frequency);
@@ -1754,11 +1764,13 @@ QString UI::stringFrequency(long long frequency) {
 void UI::addXVTR(QString title,long long minFrequency,long long maxFrequency,long long ifFrequency,long long freq,int m,int filt) {
 
     qDebug()<<"UI::addXVTR"<<title;
+    /*
     xvtr.add(title,minFrequency,maxFrequency,ifFrequency,freq,m,filt);
 
     // update the menu
     xvtr.buildMenu(widget.menuXVTR);
     configure.updateXvtrList(&xvtr);
+    */
 }
 
 void UI::deleteXVTR(int index) {
@@ -1772,7 +1784,6 @@ void UI::deleteXVTR(int index) {
 void UI::selectXVTR(QAction* action) {
     xvtr.select(action);
     ifFrequency=xvtr.getIFFrequency();
-
     frequency=xvtr.getFrequency();
     int samplerate = widget.spectrumFrame->samplerate();
     if(subRx) {
@@ -1783,7 +1794,9 @@ void UI::selectXVTR(QAction* action) {
 
     command.clear();
     command.append(QString("frequency "));
-    command.append(QString::number(frequency-ifFrequency));
+    command.append(QString::number(frequency));
+    command.append(QString(" "));
+    command.append(QString::number(xvtr.getEntry()));  /// BANDS+xvtr
     Connection::getInstance()->sendCommand(command);
 
     widget.spectrumFrame->setFrequency(frequency);
@@ -1794,7 +1807,6 @@ void UI::selectXVTR(QAction* action) {
     widget.waterfallFrame->setSubRxFrequency(subRxFrequency);
     widget.waterfallFrame->setHigh(band.getWaterfallHigh());
     widget.waterfallFrame->setLow(band.getWaterfallLow());
-
 
     widget.spectrumFrame->setBand(xvtr.getTitle());
     BandLimit limits=band.getBandLimits(xvtr.getFrequency()-(samplerate/2),xvtr.getFrequency()+(samplerate/2));

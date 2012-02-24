@@ -38,6 +38,9 @@
 #include <QtMultimedia/QAudioFormat>
 #endif
 #include <QVector>
+#include <QtXml/QDomDocument>
+#include <QtXml/QDomNodeList>
+
 
 #include <QTime>
 

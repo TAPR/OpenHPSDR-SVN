@@ -39,7 +39,7 @@ Audio::Audio() {
 
     audio_buffer_size=sampleRate*audio_channels*sizeof(short);
     input_buffer=(char*)malloc(audio_buffer_size);
-    encoded_buffer_size=8+((sampleRate*audio_channels)/50); // 20ms + 8 byte sequence
+    encoded_buffer_size=8+((sampleRate*audio_channels)/AUDIO_FRAMES_PER_SECOND); // 20ms + 8 byte sequence
     encoded_buffer=(char*)malloc(encoded_buffer_size);
 
     output_buffer=(char*)malloc(encoded_buffer_size);
@@ -94,7 +94,7 @@ void Audio::initialize_audio() {
     qDebug()<<"Audio::initialize_audio: encoding:"<<audio_encoding<<" rate:"<<sampleRate<<" channels:"<<audio_channels;
 
     audio_buffer_size=sampleRate*audio_channels*sizeof(short);
-    encoded_buffer_size=8+((sampleRate*audio_channels)/50); // 20ms + 8 byte sequence
+    encoded_buffer_size=8+((sampleRate*audio_channels)/AUDIO_FRAMES_PER_SECOND); // + 8 byte sequence
     if(audio_encoding==ENCODING_PCM) {
         encoded_buffer_size=encoded_buffer_size*2;
     }
@@ -217,9 +217,9 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
         audio_encoding=ENCODING_G711A;
         free(input_buffer);
         free(encoded_buffer);
-        audio_buffer_size=sampleRate*audio_channels*sizeof(short)/50; // 20ms
+        audio_buffer_size=sampleRate*audio_channels*sizeof(short)/AUDIO_FRAMES_PER_SECOND; // 20ms
         input_buffer=(char*)malloc(audio_buffer_size);
-        encoded_buffer_size=8+((sampleRate*audio_channels)/50); // 20ms
+        encoded_buffer_size=8+((sampleRate*audio_channels)/AUDIO_FRAMES_PER_SECOND); // 20ms
         encoded_buffer=(char*)malloc(encoded_buffer_size);
         free(output_buffer);
         free(decoded_buffer);
@@ -229,9 +229,9 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
         audio_encoding=ENCODING_G711U;
         free(input_buffer);
         free(encoded_buffer);
-        audio_buffer_size=sampleRate*audio_channels*sizeof(short)/50;
+        audio_buffer_size=sampleRate*audio_channels*sizeof(short)/AUDIO_FRAMES_PER_SECOND;
         input_buffer=(char*)malloc(audio_buffer_size);
-        encoded_buffer_size=8+((sampleRate*audio_channels)/50); // 20ms
+        encoded_buffer_size=8+((sampleRate*audio_channels)/AUDIO_FRAMES_PER_SECOND); // 20ms
         encoded_buffer=(char*)malloc(encoded_buffer_size);
         free(output_buffer);
         free(decoded_buffer);
@@ -241,9 +241,9 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
         audio_encoding=ENCODING_PCM;
         free(input_buffer);
         free(encoded_buffer);
-        audio_buffer_size=sampleRate*audio_channels*sizeof(short)/50;
+        audio_buffer_size=sampleRate*audio_channels*sizeof(short)/AUDIO_FRAMES_PER_SECOND;
         input_buffer=(char*)malloc(audio_buffer_size);
-        encoded_buffer_size=8+((sampleRate*audio_channels*sizeof(short))/50); // 20ms
+        encoded_buffer_size=8+((sampleRate*audio_channels*sizeof(short))/AUDIO_FRAMES_PER_SECOND); // 20ms
         encoded_buffer=(char*)malloc(encoded_buffer_size);
         free(output_buffer);
         free(decoded_buffer);
@@ -253,9 +253,9 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
         audio_encoding=ENCODING_G721;
         free(input_buffer);
         free(encoded_buffer);
-        audio_buffer_size=sampleRate*audio_channels*sizeof(short)/50;
+        audio_buffer_size=sampleRate*audio_channels*sizeof(short)/AUDIO_FRAMES_PER_SECOND;
         input_buffer=(char*)malloc(audio_buffer_size);
-        encoded_buffer_size=8+((sampleRate*audio_channels)/50/2); // 20ms
+        encoded_buffer_size=8+((sampleRate*audio_channels)/AUDIO_FRAMES_PER_SECOND/2); // 20ms
         encoded_buffer=(char*)malloc(encoded_buffer_size);
         free(output_buffer);
         free(decoded_buffer);
@@ -266,9 +266,9 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
         audio_encoding=ENCODING_G711A;
         free(input_buffer);
         free(encoded_buffer);
-        audio_buffer_size=sampleRate*audio_channels*sizeof(short)/50;
+        audio_buffer_size=sampleRate*audio_channels*sizeof(short)/AUDIO_FRAMES_PER_SECOND;
         input_buffer=(char*)malloc(audio_buffer_size);
-        encoded_buffer_size=8+((sampleRate*audio_channels)/50); // 20ms
+        encoded_buffer_size=8+((sampleRate*audio_channels)/AUDIO_FRAMES_PER_SECOND); // 20ms
         encoded_buffer=(char*)malloc(encoded_buffer_size);
         free(output_buffer);
         free(decoded_buffer);
@@ -495,13 +495,14 @@ void Audio::networkReadyRead() {
                 qDebug()<<"this_sequence:"<<this_sequence<<" expected:"<<sequence;
             }
 
-            if((sequence%50)==0) {
-                qDebug()<<sequence;
-            }
+
+            //if((sequence%AUDIO_FRAMES_PER_SECOND)==0) {
+            //    qDebug()<<sequence;
+            //}
 
             sequence=this_sequence+1;
-            i=8;
 
+            i=8;
             while(i<length) {
                 switch(audio_encoding) {
                 case ENCODING_G711A:
@@ -613,16 +614,7 @@ void Audio::networkReadyRead() {
                 }
             }
 
-            if(skip) {
-                qDebug()<<"audio: skipping";
-                skip=false;
-            } else {
-                int bytes_written=audio_out->write(decoded_buffer,(qint64)j);
-                if(bytes_written!=j) {
-                    qDebug()<<"audio bytes_written:"<<bytes_written<<" expected:"<<j;
-                    skip=true;
-                }
-            }
+            audio_out->write(decoded_buffer,(qint64)j);
 
         } else {
             qDebug()<<"Audio::networkReadyRead: length not encoded_buffer_size: "<<length;

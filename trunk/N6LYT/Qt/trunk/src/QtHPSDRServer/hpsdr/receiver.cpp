@@ -146,6 +146,8 @@ int Receiver::setFrequency(Client* c,long f) {
 qDebug()<<"setFrequency: Invalid session!";
         return -1;
     }
+
+    qDebug()<<"Receiver::setFrequency:"<<f;
     frequency=f;
     frequency_changed=1;
     return 0;
@@ -156,6 +158,9 @@ int Receiver::setFrequency(Client* c,long f,int b) {
 qDebug()<<"setFrequency: Invalid session!";
         return -1;
     }
+
+    qDebug()<<"Receiver::setFrequency:"<<f<<" band:"<<b;
+
     frequency=f;
     frequency_changed=1;
 

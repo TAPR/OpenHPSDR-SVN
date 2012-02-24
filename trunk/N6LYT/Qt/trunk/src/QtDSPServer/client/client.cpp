@@ -314,20 +314,20 @@ void Client::readyRead() {
                 qDebug()<<"connect: PCM audio_port:"<<audio_port<<" audio_rate:"<<audio_rate<<" encoding:"<<args[5]<<" channels:"<<audio_channels;
                 if(args[4]=="G711a") {
                     audio_encoding=ENCODING_G711A;
-                    audioBufferSize=1*audio_channels*(audio_rate/50);   // 8 bits per sample
+                    audioBufferSize=1*audio_channels*(audio_rate/AUDIO_FRAMES_PER_SECOND);   // 8 bits per sample
                 } else if(args[4]=="G711u") {
                     audio_encoding=ENCODING_G711U;
-                    audioBufferSize=1*audio_channels*(audio_rate/50);   // 8 bits per sample
+                    audioBufferSize=1*audio_channels*(audio_rate/AUDIO_FRAMES_PER_SECOND);   // 8 bits per sample
                 } else if(args[4]=="PCM") {
                     audio_encoding=ENCODING_PCM;
-                    audioBufferSize=2*audio_channels*(audio_rate/50);   // 16 bits per sample
+                    audioBufferSize=2*audio_channels*(audio_rate/AUDIO_FRAMES_PER_SECOND);   // 16 bits per sample
                 } else if(args[4]=="G721") {
                     audio_encoding=ENCODING_G721;
-                    audioBufferSize=(audio_channels*(audio_rate/50))/2; // 4 bits per sample
+                    audioBufferSize=(audio_channels*(audio_rate/AUDIO_FRAMES_PER_SECOND))/2; // 4 bits per sample
                 } else {
                     // default
                     audio_encoding=ENCODING_G711A;
-                    audioBufferSize=1*audio_channels*(audio_rate/50);
+                    audioBufferSize=1*audio_channels*(audio_rate/AUDIO_FRAMES_PER_SECOND);
                 }
 
                 client_type=args[5];
@@ -403,7 +403,6 @@ void Client::readyRead() {
         if(response.length()>0) {
             //qDebug()<<"sending response:"<<response.length()<<" bytes";
             socket->write(response);
-
         }
     }
 }
@@ -519,13 +518,13 @@ void Client::receiveAudio() {
     int size;
     switch(audio_encoding) {
     case ENCODING_G711A:
-        size=audio_rate/50;
+        size=audio_rate/AUDIO_FRAMES_PER_SECOND;
         break;
     case ENCODING_G711U:
-        size=audio_rate/50;
+        size=audio_rate/AUDIO_FRAMES_PER_SECOND;
         break;
     case ENCODING_PCM:
-        size=2*audio_rate/50;
+        size=2*audio_rate/AUDIO_FRAMES_PER_SECOND;
         break;
     }
 

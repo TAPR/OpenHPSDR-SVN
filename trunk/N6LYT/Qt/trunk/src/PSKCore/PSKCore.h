@@ -267,7 +267,7 @@ private:
     QMutex tcpMutex;
     QUdpSocket* udpSocket;
     int m_pBufferIndex;
-    char udpBuffer[8+((8000*1*2)/50)]; // (sampleRate*audio_channels*2)/50
+    char udpBuffer[8+((8000*1*2)/100)]; // (sampleRate*audio_channels*2)/50
 
     bool hasConnection;
     int band;

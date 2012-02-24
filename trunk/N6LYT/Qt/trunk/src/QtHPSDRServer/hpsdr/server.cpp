@@ -67,6 +67,16 @@ void Server::configure(QSettings* mysettings) {
         receiver[i]->setPlayAudio(i==0);
     }
 
+    qDebug()<<"Server::configure: init xvtrs";
+    for(int i=0;i<4;i++) {
+        xvtrs[i].setLabel(QString());
+        xvtrs[i].setMinFrequency(0);
+        xvtrs[i].setMaxFrequency(0);
+        xvtrs[i].setLOFrequency(0);
+        xvtrs[i].setRx(0);
+        xvtrs[i].setTx(0);
+    }
+
     state=Server::STOPPED;
 
     receive_sequence=0;
@@ -88,17 +98,18 @@ void Server::configure(QSettings* mysettings) {
     metis_buffer_index=8;
     mox=false;
 
-    int x=settings->value("xvtrs",0).toInt();
     XVTR* xvtr;
-    for(int i=0;i<x;i++) {
-        xvtr=new XVTR();
+    for(int i=0;i<4;i++) {
+        xvtr=&xvtrs[i];
         xvtr->setLabel(settings->value("xvtrlabel"+QString::number(i),"").toString());
         xvtr->setMinFrequency(settings->value("xvtrminfrequency"+QString::number(i),0).toLongLong());
         xvtr->setMaxFrequency(settings->value("xvtrmaxfrequency"+QString::number(i),0).toLongLong());
         xvtr->setLOFrequency(settings->value("xvtrlofrequency"+QString::number(i),0).toLongLong());
-        xvtrs.append(xvtr);
+        xvtr->setRx(settings->value("xvtrrxant"+QString::number(i),0).toInt());
+        xvtr->setTx(settings->value("xvtrtxant"+QString::number(i),0).toInt());
     }
 
+    loFrequency=(long long)0;
 }
 
 void Server::save() {
@@ -144,12 +155,14 @@ void Server::save() {
     settings->setValue("autostartdsp",auto_start_dsp);
 
     XVTR* xvtr;
-    for(int i=0;i<xvtrs.count();i++) {
-        xvtr=xvtrs.at(i);
+    for(int i=0;i<4;i++) {
+        xvtr=&xvtrs[i];
         settings->setValue("xvtrlabel"+QString::number(i),xvtr->getLabel());
         settings->setValue("xvtrminfrequency"+QString::number(i),xvtr->getMinFrequency());
         settings->setValue("xvtrmaxfrequency"+QString::number(i),xvtr->getMaxFrequency());
         settings->setValue("xvtrlofrequency"+QString::number(i),xvtr->getLOFrequency());
+        settings->setValue("xvtrrxant"+QString::number(i),xvtr->getRx());
+        settings->setValue("xvtrtxant"+QString::number(i),xvtr->getTx());
     }
 }
 
@@ -383,7 +396,7 @@ int Server::setFrequency(Client* c,int rx,long frequency) {
     if(receiver[rx]->getClient()!=c) {
         return -1;
     }
-    receiver[rx]->setFrequency(c,frequency);
+    receiver[rx]->setFrequency(c,frequency-loFrequency);
     emit clientStateChanged();
     return 0;
 }
@@ -392,28 +405,62 @@ int Server::setFrequencyAndBand(Client* c,int rx,long frequency,int b) {
     if(receiver[rx]->getClient()!=c) {
         return -1;
     }
-    receiver[rx]->setFrequency(c,frequency,band);
+
+    band=b;
+
+    if(band<BANDS) {
+        loFrequency=0;
+    } else {
+        loFrequency=xvtrs[band-BANDS].getLOFrequency();
+    }
+
+    qDebug()<<"Server::setFrequencyAndBand: band:"<<band<<" lo:"<<loFrequency;
+
+    receiver[rx]->setFrequency(c,frequency-loFrequency,band);
 
     if(band!=b) {
         band=b;
+
         if(alex) {
             int a;
-            if(mox) {
-                setAlexTxAntenna(Alex::getInstance()->getTx(band));
+            if(band>=BANDS) {
+                // xvtr
+                if(mox) {
+                    setAlexTxAntenna(xvtrs[band-BANDS].getTx());
+                } else {
+                    a=xvtrs[band-BANDS].getRx();
+                    qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
+                    switch(a) {
+                    case ANT1:  // 0 - 0
+                    case ANT2:  // 1 - 1
+                    case ANT3:  // 2 - 2
+                        setAlexRxAntenna(a);
+                        break;
+                    case RX1:  // 3 - 1
+                    case RX2:  // 4 - 2
+                    case XVRX: // 5 - 3
+                        setAlexRxOnlyAntenna(a-2);
+                        break;
+                    }
+                }
             } else {
-                a=Alex::getInstance()->getRx(band);
-                qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
-                switch(a) {
-                case ANT1:  // 0 - 0
-                case ANT2:  // 1 - 1
-                case ANT3:  // 2 - 2
-                    setAlexRxAntenna(a);
-                    break;
-                case RX1:  // 3 - 1
-                case RX2:  // 4 - 2
-                case XVRX: // 5 - 3
-                    setAlexRxOnlyAntenna(a-2);
-                    break;
+                if(mox) {
+                    setAlexTxAntenna(Alex::getInstance()->getTx(band));
+                } else {
+                    a=Alex::getInstance()->getRx(band);
+                    qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
+                    switch(a) {
+                    case ANT1:  // 0 - 0
+                    case ANT2:  // 1 - 1
+                    case ANT3:  // 2 - 2
+                        setAlexRxAntenna(a);
+                        break;
+                    case RX1:  // 3 - 1
+                    case RX2:  // 4 - 2
+                    case XVRX: // 5 - 3
+                        setAlexRxOnlyAntenna(a-2);
+                        break;
+                    }
                 }
             }
         }
@@ -1245,6 +1292,6 @@ void Server::setAlexRxOnlyAntenna(int a) {
     }
 }
 
-QList<XVTR*> Server::getXvtrs() {
+XVTR* Server::getXvtrs() {
     return xvtrs;
 }

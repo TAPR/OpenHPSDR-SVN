@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Configure.h
  * Author: John Melton, G0ORX/N6LYT
  *
@@ -28,13 +28,14 @@
 
 #include <QSettings>
 #include <QDebug>
-#ifdef Q_OS_MAC
+
 #include <QtMultimedia/QAudioFormat>
 #include <QtMultimedia/QAudioDeviceInfo>
-#else
-#include <QtMultimedia/QAudioFormat>
-#include <QtMultimedia/QAudioDeviceInfo>
-#endif
+
+#include <QtXml/QDomDocument>
+#include <QtXml/QDomNodeList>
+
+#include <QStandardItemModel>
 
 #include "ui_Configure.h"
 
@@ -87,6 +88,9 @@ public:
     double getNbThreshold();
     double getSdromThreshold();
 
+
+    void setHardwareConfiguration(QDomDocument* doc);
+
 signals:
     void hostChanged(QString host);
     void receiverChanged(int receiver);
@@ -120,6 +124,7 @@ signals:
     void deleteXVTR(int index);
 
 
+
 public slots:
     void slotHostChanged(int selection);
     void slotReceiverChanged(int receiver);
@@ -149,6 +154,7 @@ public slots:
 
 private:
     Ui::Configure widget;
+    void printTree(QDomElement element,QString indent);
 };
 
 #endif	/* _CONFIGURE_H */

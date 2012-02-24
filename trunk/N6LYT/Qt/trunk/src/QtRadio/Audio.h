@@ -51,7 +51,7 @@
 #define ENCODING_G721 3
 
 // 8000/50 for 20ms
-#define AUDIO_BUFFER_SIZE 160
+#define AUDIO_FRAMES_PER_SECOND 100
 
 class Audio : public QObject {
     Q_OBJECT
