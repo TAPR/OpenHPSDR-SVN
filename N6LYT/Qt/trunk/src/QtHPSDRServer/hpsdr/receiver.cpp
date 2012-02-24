@@ -147,7 +147,7 @@ qDebug()<<"setFrequency: Invalid session!";
         return -1;
     }
 
-    qDebug()<<"Receiver::setFrequency:"<<f;
+    //qDebug()<<"Receiver::setFrequency:"<<f;
     frequency=f;
     frequency_changed=1;
     return 0;
@@ -159,7 +159,7 @@ qDebug()<<"setFrequency: Invalid session!";
         return -1;
     }
 
-    qDebug()<<"Receiver::setFrequency:"<<f<<" band:"<<b;
+    //qDebug()<<"Receiver::setFrequency:"<<f<<" band:"<<b;
 
     frequency=f;
     frequency_changed=1;

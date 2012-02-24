@@ -414,7 +414,7 @@ int Server::setFrequencyAndBand(Client* c,int rx,long frequency,int b) {
         loFrequency=xvtrs[band-BANDS].getLOFrequency();
     }
 
-    qDebug()<<"Server::setFrequencyAndBand: band:"<<band<<" lo:"<<loFrequency;
+    //qDebug()<<"Server::setFrequencyAndBand: band:"<<band<<" lo:"<<loFrequency;
 
     receiver[rx]->setFrequency(c,frequency-loFrequency,band);
 
@@ -429,7 +429,7 @@ int Server::setFrequencyAndBand(Client* c,int rx,long frequency,int b) {
                     setAlexTxAntenna(xvtrs[band-BANDS].getTx());
                 } else {
                     a=xvtrs[band-BANDS].getRx();
-                    qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
+                    //qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
                     switch(a) {
                     case ANT1:  // 0 - 0
                     case ANT2:  // 1 - 1
@@ -448,7 +448,7 @@ int Server::setFrequencyAndBand(Client* c,int rx,long frequency,int b) {
                     setAlexTxAntenna(Alex::getInstance()->getTx(band));
                 } else {
                     a=Alex::getInstance()->getRx(band);
-                    qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
+                    //qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
                     switch(a) {
                     case ANT1:  // 0 - 0
                     case ANT2:  // 1 - 1

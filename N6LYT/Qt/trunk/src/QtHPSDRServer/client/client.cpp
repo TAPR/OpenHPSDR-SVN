@@ -162,7 +162,7 @@ void Client::readyRead() {
             break;
         case 3:
             if (args[0]=="frequency") {
-                qDebug()<<buffer;
+                //qDebug()<<buffer;
                 // superceeded by version below in case 4:
                 // args[1] receiver
                 // args[2] frequency
@@ -190,7 +190,7 @@ void Client::readyRead() {
             break;
         case 4:
             if(args[0]=="frequency") {
-                qDebug()<<buffer;
+                //qDebug()<<buffer;
                 // args[1] receiver
                 // args[2] frequency
                 // args[3] band (for alex control)
