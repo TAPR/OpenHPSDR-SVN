@@ -24,6 +24,7 @@
 #define ENCODING_PCM 2
 #define ENCODING_G721 3
 
+#define AUDIO_FRAMES_PER_SECOND 100
 
 class Client : public QObject
 {

@@ -110,6 +110,11 @@ void Data::readPendingDatagrams() {
 
                     Audio_Callback(input_buffer,&input_buffer[1024],output_buffer,&output_buffer[1024],1024,0);
 
+                    /*
+                      if(BPSK) {
+
+                      }
+                      */
 /*
    need to fix to handle full duplex when remote audio
 */

@@ -57,6 +57,104 @@ MainWindow::MainWindow(QWidget *parent) :
 
     alex=Alex::getInstance();
     alex->configure(settings);
+    configureAlex();
+    connect(ui->pushButtonAlexSave,SIGNAL(clicked()),this,SLOT(alexSaveConfiguration()));
+
+
+    server=Server::getInstance();
+    server->configure(settings);
+
+    configureXvtr();
+    connect(ui->pushButtonXvtrSave,SIGNAL(clicked()),this,SLOT(xvtrSaveConfiguration()));
+
+    ui->radioButtonHermes->setChecked(server->getHermes());
+    ui->radioButtonHPSDR->setChecked(server->getHPSDR());
+    ui->radioButtonOzy->setChecked(server->getOzy());
+    ui->radioButtonMetis->setChecked(server->getMetis());
+    ui->checkBoxMercury->setChecked(server->getMercury());
+    ui->checkBoxPenelope->setChecked(server->getPenelope());
+    ui->checkBoxPennylane->setChecked(server->getPennylane());
+    ui->checkBoxExcalibur->setChecked(server->getExcalibur());
+    ui->checkBoxAlex->setChecked(server->getAlex());
+    ui->checkBoxRandom->setChecked(server->getRandom());
+    ui->checkBoxDither->setChecked(server->getDither());
+    ui->spinBoxReceivers->setValue(server->getReceivers());
+
+    int index=ui->comboBoxSampleRate->findText(QString::number(server->getSampleRate()));
+    if(index!=-1) {
+        ui->comboBoxSampleRate->setCurrentIndex(index);
+    }
+
+    index=ui->comboBox10MHzClockSource->findText(server->get10MHzClock());
+    if(index!=-1) {
+        ui->comboBox10MHzClockSource->setCurrentIndex(index);
+    }
+
+    index=ui->comboBox122_88MHzClockSource->findText(server->get122_88MHzClock());
+    if(index!=-1) {
+        ui->comboBox122_88MHzClockSource->setCurrentIndex(index);
+    }
+
+    updateInterfaces();
+
+    qDebug()<<"interface:"<<server->getInterface();
+    index=ui->comboBoxInterface->findText(server->getInterface());
+    if(index!=-1) {
+        ui->comboBoxInterface->setCurrentIndex(index);
+    } else {
+        // interface not found
+        server->setInterface("");
+    }
+
+    qDebug()<<"after updateInterfaces interface:"<<server->getInterface();
+    if(server->getInterface()!="") {
+        server->bind();
+        actionDiscover();
+        index=ui->comboBoxMetis->findText(server->getMetisDetail());
+        if(index!=-1) {
+            ui->comboBoxMetis->setCurrentIndex(index);
+        } else {
+            server->setMetisDetail("");
+        }
+    }
+
+    ui->checkBoxAutoStartServer->setChecked(server->getAutoStart());
+    ui->checkBoxAutoStartDSPServer->setChecked(server->getAutoStartDsp());
+
+
+    ui->labelMetisVersion->setText(QString(""));
+    ui->labelMercuryVersion->setText(QString(""));
+    ui->labelPenelopeVersion->setText(QString(""));
+
+    ui->labelReceived->setText(QString("0"));
+    ui->labelTransmitted->setText(QString("0"));
+    ui->labelSequenceErrors->setText(QString("0"));
+
+    clientListener=new ClientListener();
+    clientListener->configure(settings);
+
+    connect(clientListener,SIGNAL(clientConnected()),this,SLOT(updateClientList()));
+    connect(clientListener,SIGNAL(clientDisconnected()),this,SLOT(updateClientList()));
+    connect(server,SIGNAL(clientStateChanged()),this,SLOT(updateClientList()));
+    connect(server,SIGNAL(firmwareVersionChanged()),this,SLOT(firmwareVersionChanged()));
+
+    connect(ui->checkBoxAutoStartServer,SIGNAL(clicked()),this,SLOT(autoStartSelected()));
+    connect(ui->checkBoxAutoStartDSPServer,SIGNAL(clicked()),this,SLOT(autoStartDSPSelected()));
+
+    connect(ui->tableViewClients,SIGNAL(clicked(QModelIndex)),this,SLOT(clientSelected(QModelIndex)));
+    connect(&timer,SIGNAL(timeout()),this,SLOT(timeout()));
+    timer.setInterval(5000); // 5  seconds
+
+    if((server->getInterface()!="")&&(server->getMetisDetail()!="")) {
+        if(server->getAutoStart()) {
+            actionStartStop();
+        }
+    }
+
+    updateClientList();
+}
+
+void MainWindow::configureAlex() {
     ui->radioButton160RxAnt1->setChecked((alex->getRx(BAND_160)==ANT1));
     ui->radioButton160RxAnt2->setChecked((alex->getRx(BAND_160)==ANT2));
     ui->radioButton160RxAnt3->setChecked((alex->getRx(BAND_160)==ANT3));
@@ -176,97 +274,42 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->radioButtonGENTxAnt1->setChecked((alex->getTx(BAND_GEN)==ANT1));
     ui->radioButtonGENTxAnt2->setChecked((alex->getTx(BAND_GEN)==ANT2));
     ui->radioButtonGENTxAnt3->setChecked((alex->getTx(BAND_GEN)==ANT3));
+}
 
-    connect(ui->pushButtonAlexSave,SIGNAL(clicked()),this,SLOT(alexSaveConfiguration()));
+void MainWindow::configureXvtr() {
+    XVTR* xvtrs=server->getXvtrs();
 
-    server=Server::getInstance();
-    server->configure(settings);
+    XVTR* xvtr=&xvtrs[0];
+    ui->lineEditXvtrLabel0->setText(xvtr->getLabel());
+    ui->lineEditXvtrMinFrequency0->setText(QString::number(xvtr->getMinFrequency()));
+    ui->lineEditXvtrMaxFrequency0->setText(QString::number(xvtr->getMaxFrequency()));
+    ui->lineEditXvtrLOFrequency0->setText(QString::number(xvtr->getLOFrequency()));
+    ui->comboBoxXvtrRxAnt0->setCurrentIndex(xvtr->getRx());
+    ui->comboBoxXvtrTxAnt0->setCurrentIndex(xvtr->getTx());
 
-    ui->radioButtonHermes->setChecked(server->getHermes());
-    ui->radioButtonHPSDR->setChecked(server->getHPSDR());
-    ui->radioButtonOzy->setChecked(server->getOzy());
-    ui->radioButtonMetis->setChecked(server->getMetis());
-    ui->checkBoxMercury->setChecked(server->getMercury());
-    ui->checkBoxPenelope->setChecked(server->getPenelope());
-    ui->checkBoxPennylane->setChecked(server->getPennylane());
-    ui->checkBoxExcalibur->setChecked(server->getExcalibur());
-    ui->checkBoxAlex->setChecked(server->getAlex());
-    ui->checkBoxRandom->setChecked(server->getRandom());
-    ui->checkBoxDither->setChecked(server->getDither());
-    ui->spinBoxReceivers->setValue(server->getReceivers());
+    xvtr=&xvtrs[1];
+    ui->lineEditXvtrLabel1->setText(xvtr->getLabel());
+    ui->lineEditXvtrMinFrequency1->setText(QString::number(xvtr->getMinFrequency()));
+    ui->lineEditXvtrMaxFrequency1->setText(QString::number(xvtr->getMaxFrequency()));
+    ui->lineEditXvtrLOFrequency1->setText(QString::number(xvtr->getLOFrequency()));
+    ui->comboBoxXvtrRxAnt1->setCurrentIndex(xvtr->getRx());
+    ui->comboBoxXvtrTxAnt1->setCurrentIndex(xvtr->getTx());
 
-    int index=ui->comboBoxSampleRate->findText(QString::number(server->getSampleRate()));
-    if(index!=-1) {
-        ui->comboBoxSampleRate->setCurrentIndex(index);
-    }
+    xvtr=&xvtrs[2];
+    ui->lineEditXvtrLabel2->setText(xvtr->getLabel());
+    ui->lineEditXvtrMinFrequency2->setText(QString::number(xvtr->getMinFrequency()));
+    ui->lineEditXvtrMaxFrequency2->setText(QString::number(xvtr->getMaxFrequency()));
+    ui->lineEditXvtrLOFrequency2->setText(QString::number(xvtr->getLOFrequency()));
+    ui->comboBoxXvtrRxAnt2->setCurrentIndex(xvtr->getRx());
+    ui->comboBoxXvtrTxAnt2->setCurrentIndex(xvtr->getTx());
 
-    index=ui->comboBox10MHzClockSource->findText(server->get10MHzClock());
-    if(index!=-1) {
-        ui->comboBox10MHzClockSource->setCurrentIndex(index);
-    }
-
-    index=ui->comboBox122_88MHzClockSource->findText(server->get122_88MHzClock());
-    if(index!=-1) {
-        ui->comboBox122_88MHzClockSource->setCurrentIndex(index);
-    }
-
-    updateInterfaces();
-
-    qDebug()<<"interface:"<<server->getInterface();
-    index=ui->comboBoxInterface->findText(server->getInterface());
-    if(index!=-1) {
-        ui->comboBoxInterface->setCurrentIndex(index);
-    } else {
-        // interface not found
-        server->setInterface("");
-    }
-
-    qDebug()<<"after updateInterfaces interface:"<<server->getInterface();
-    if(server->getInterface()!="") {
-        server->bind();
-        actionDiscover();
-        index=ui->comboBoxMetis->findText(server->getMetisDetail());
-        if(index!=-1) {
-            ui->comboBoxMetis->setCurrentIndex(index);
-        } else {
-            server->setMetisDetail("");
-        }
-    }
-
-    ui->checkBoxAutoStartServer->setChecked(server->getAutoStart());
-    ui->checkBoxAutoStartDSPServer->setChecked(server->getAutoStartDsp());
-
-
-    ui->labelMetisVersion->setText(QString(""));
-    ui->labelMercuryVersion->setText(QString(""));
-    ui->labelPenelopeVersion->setText(QString(""));
-
-    ui->labelReceived->setText(QString("0"));
-    ui->labelTransmitted->setText(QString("0"));
-    ui->labelSequenceErrors->setText(QString("0"));
-
-    clientListener=new ClientListener();
-    clientListener->configure(settings);
-
-    connect(clientListener,SIGNAL(clientConnected()),this,SLOT(updateClientList()));
-    connect(clientListener,SIGNAL(clientDisconnected()),this,SLOT(updateClientList()));
-    connect(server,SIGNAL(clientStateChanged()),this,SLOT(updateClientList()));
-    connect(server,SIGNAL(firmwareVersionChanged()),this,SLOT(firmwareVersionChanged()));
-
-    connect(ui->checkBoxAutoStartServer,SIGNAL(clicked()),this,SLOT(autoStartSelected()));
-    connect(ui->checkBoxAutoStartDSPServer,SIGNAL(clicked()),this,SLOT(autoStartDSPSelected()));
-
-    connect(ui->tableViewClients,SIGNAL(clicked(QModelIndex)),this,SLOT(clientSelected(QModelIndex)));
-    connect(&timer,SIGNAL(timeout()),this,SLOT(timeout()));
-    timer.setInterval(5000); // 5  seconds
-
-    if((server->getInterface()!="")&&(server->getMetisDetail()!="")) {
-        if(server->getAutoStart()) {
-            actionStartStop();
-        }
-    }
-
-    updateClientList();
+    xvtr=&xvtrs[3];
+    ui->lineEditXvtrLabel3->setText(xvtr->getLabel());
+    ui->lineEditXvtrMinFrequency3->setText(QString::number(xvtr->getMinFrequency()));
+    ui->lineEditXvtrMaxFrequency3->setText(QString::number(xvtr->getMaxFrequency()));
+    ui->lineEditXvtrLOFrequency3->setText(QString::number(xvtr->getLOFrequency()));
+    ui->comboBoxXvtrRxAnt3->setCurrentIndex(xvtr->getRx());
+    ui->comboBoxXvtrTxAnt3->setCurrentIndex(xvtr->getTx());
 }
 
 void MainWindow::saveSettings() {
@@ -445,6 +488,42 @@ void MainWindow::alexSaveConfiguration() {
     if(ui->radioButtonGENTxAnt3->isChecked()) alex->setTx(BAND_GEN,ANT3);
 
     alex->save();
+}
+
+void MainWindow::xvtrSaveConfiguration() {
+    XVTR* xvtrs=server->getXvtrs();
+
+    XVTR* xvtr=&xvtrs[0];
+    xvtr->setLabel(ui->lineEditXvtrLabel0->text());
+    xvtr->setMinFrequency(ui->lineEditXvtrMinFrequency0->text().toInt());
+    xvtr->setMaxFrequency(ui->lineEditXvtrMaxFrequency0->text().toInt());
+    xvtr->setLOFrequency(ui->lineEditXvtrLOFrequency0->text().toInt());
+    xvtr->setRx(ui->comboBoxXvtrRxAnt0->currentIndex());
+    xvtr->setTx(ui->comboBoxXvtrTxAnt0->currentIndex());
+
+    xvtr=&xvtrs[1];
+    xvtr->setLabel(ui->lineEditXvtrLabel1->text());
+    xvtr->setMinFrequency(ui->lineEditXvtrMinFrequency1->text().toInt());
+    xvtr->setMaxFrequency(ui->lineEditXvtrMaxFrequency1->text().toInt());
+    xvtr->setLOFrequency(ui->lineEditXvtrLOFrequency1->text().toInt());
+    xvtr->setRx(ui->comboBoxXvtrRxAnt1->currentIndex());
+    xvtr->setTx(ui->comboBoxXvtrTxAnt1->currentIndex());
+
+    xvtr=&xvtrs[2];
+    xvtr->setLabel(ui->lineEditXvtrLabel2->text());
+    xvtr->setMinFrequency(ui->lineEditXvtrMinFrequency2->text().toInt());
+    xvtr->setMaxFrequency(ui->lineEditXvtrMaxFrequency2->text().toInt());
+    xvtr->setLOFrequency(ui->lineEditXvtrLOFrequency2->text().toInt());
+    xvtr->setRx(ui->comboBoxXvtrRxAnt2->currentIndex());
+    xvtr->setTx(ui->comboBoxXvtrTxAnt2->currentIndex());
+
+    xvtr=&xvtrs[3];
+    xvtr->setLabel(ui->lineEditXvtrLabel3->text());
+    xvtr->setMinFrequency(ui->lineEditXvtrMinFrequency3->text().toInt());
+    xvtr->setMaxFrequency(ui->lineEditXvtrMaxFrequency3->text().toInt());
+    xvtr->setLOFrequency(ui->lineEditXvtrLOFrequency3->text().toInt());
+    xvtr->setRx(ui->comboBoxXvtrRxAnt3->currentIndex());
+    xvtr->setTx(ui->comboBoxXvtrTxAnt3->currentIndex());
 }
 
 void MainWindow::hpsdrSelected() {

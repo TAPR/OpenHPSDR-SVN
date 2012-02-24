@@ -1754,7 +1754,7 @@ void CPSKCore::connected() {
     sendCommand(command);
 
     command.clear();
-    command.append(QString("mode 1")); // always USB?
+    command.append(QString("mode 7")); // 1 USB, 7 DIGU, 8 SPEC
     sendCommand(command);
 
     command.clear();
@@ -1798,6 +1798,9 @@ void CPSKCore::udpReadyRead() {
                 this_sequence+=(udpBuffer[7]&0xFF);
                 if(this_sequence!=sequence) {
                     qDebug()<<"udpReadyRead: this_sequence:"<<this_sequence<<" expected:"<<sequence;
+                }
+                if(sequence%100==0) {
+                    qDebug()<<sequence;
                 }
                 sequence=this_sequence+1;
                 int i=8;

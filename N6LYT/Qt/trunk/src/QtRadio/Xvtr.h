@@ -5,6 +5,8 @@
 #include <QAction>
 #include <QString>
 #include <QSettings>
+#include <QtXml/QDomDocument>
+#include <QtXml/QDomNodeList>
 
 #include "XvtrEntry.h"
 
@@ -14,9 +16,10 @@ class Xvtr : public QObject {
 public:
     Xvtr();
     void buildMenu(QMenu* menu);
-    void add(QString,long long,long long,long long,long long,int,int);
+    void add(int,QString,long long,long long,long long,long long,int,int);
     void del(int index);
     void select(QAction* action);
+    int getEntry();
     QString getTitle();
     long long getMinFrequency();
     long long getMaxFrequency();
@@ -32,6 +35,7 @@ public:
     int count();
     XvtrEntry* getXvtrAt(int index);
 
+    void configure(QDomDocument* configuration);
     void loadSettings(QSettings* settings);
     void saveSettings(QSettings* settings);
 

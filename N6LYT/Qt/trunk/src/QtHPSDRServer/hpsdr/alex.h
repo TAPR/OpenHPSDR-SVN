@@ -40,6 +40,10 @@ public:
     int getRx(int band);
     int getTx(int band);
     
+    QString getRxAntenna(int band);
+    QString getTxAntenna(int band);
+    QString getBand(int band);
+
 protected:
     Alex(QObject *parent = 0);
 

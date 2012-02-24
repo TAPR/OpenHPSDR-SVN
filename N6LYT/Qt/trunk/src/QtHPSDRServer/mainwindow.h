@@ -11,6 +11,7 @@
 #include <hpsdr/interfaces.h>
 #include <hpsdr/server.h>
 #include <hpsdr/alex.h>
+#include <hpsdr/xvtr.h>
 
 #include <client/clientlistener.h>
 
@@ -62,6 +63,7 @@ public slots:
     void metisCardSelected(QString);
 
     void alexSaveConfiguration();
+    void xvtrSaveConfiguration();
 
     void clientConnected();
     void clientDisconnected();
@@ -79,13 +81,14 @@ private:
     QStandardItemModel model;
     QStringList labels;
 
+    QSettings* settings;
     void saveSettings();
-
     QString getConfigDir();
     QString configDir;
     QString configFileName;
 
-    QSettings* settings;
+    void configureAlex();
+    void configureXvtr();
 
     void update10MHzClockSources();
     void update122_88MHzClockSources();

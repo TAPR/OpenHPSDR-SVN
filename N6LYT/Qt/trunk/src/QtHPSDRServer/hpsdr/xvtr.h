@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+#include "alex.h"
+
 class XVTR : public QObject
 {
     Q_OBJECT
@@ -13,12 +15,19 @@ public:
     void setMinFrequency(qint64 f);
     void setMaxFrequency(qint64 f);
     void setLOFrequency(qint64 f);
+    void setRx(int ant);
+    void setTx(int ant);
+
 
     QString getLabel();
     qint64 getMinFrequency();
     qint64 getMaxFrequency();
     qint64 getLOFrequency();
-    
+    int getRx();
+    int getTx();
+    QString getRxAntenna();
+    QString getTxAntenna();
+
 signals:
     
 public slots:
@@ -28,6 +37,8 @@ private:
     qint64 minFrequency;
     qint64 maxFrequency;
     qint64 LOFrequency;
+    int rxAnt;
+    int txAnt;
 };
 
 #endif // XVTR_H

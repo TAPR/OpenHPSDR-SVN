@@ -77,7 +77,7 @@ void Connection::sendCommand(QString command) {
 }
 
 void Connection::readyRead() {
-    QString buffer(socket->readLine(1024));
+    QString buffer(socket->readLine(2048));
     buffer.chop(1); // remove nl
     QStringList args=buffer.split(" ");
     QDomNodeList elements;
@@ -103,6 +103,8 @@ void Connection::readyRead() {
     case 2:
         // OK and configuration
         stringConfiguration=args[1];
+        qDebug()<<"readRead: config.length:"<<stringConfiguration.length();
+        qDebug()<<"readyRead: config:"<<stringConfiguration;
         configuration=new QDomDocument();
         configuration->setContent(stringConfiguration);
         elements=configuration->elementsByTagName("samplerate");

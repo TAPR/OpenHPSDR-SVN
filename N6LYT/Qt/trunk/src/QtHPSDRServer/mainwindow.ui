@@ -19,7 +19,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>791</width>
+      <width>821</width>
       <height>511</height>
      </rect>
     </property>
@@ -83,7 +83,7 @@
        <rect>
         <x>160</x>
         <y>30</y>
-        <width>131</width>
+        <width>81</width>
         <height>17</height>
        </rect>
       </property>
@@ -96,7 +96,7 @@
        <rect>
         <x>160</x>
         <y>50</y>
-        <width>131</width>
+        <width>81</width>
         <height>17</height>
        </rect>
       </property>
@@ -109,7 +109,7 @@
        <rect>
         <x>160</x>
         <y>70</y>
-        <width>131</width>
+        <width>81</width>
         <height>17</height>
        </rect>
       </property>
@@ -258,7 +258,7 @@
      <widget class="QTableView" name="tableViewClients">
       <property name="geometry">
        <rect>
-        <x>290</x>
+        <x>250</x>
         <y>30</y>
         <width>552</width>
         <height>271</height>
@@ -2941,147 +2941,530 @@
      <attribute name="title">
       <string>XVTR</string>
      </attribute>
-     <widget class="QListView" name="listView">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>20</y>
-        <width>721</width>
-        <height>321</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_39">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>360</y>
-        <width>51</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Label:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXVTRLabel">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>350</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_40">
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>390</y>
-        <width>101</width>
+        <y>20</y>
+        <width>41</width>
         <height>17</height>
        </rect>
       </property>
       <property name="text">
-       <string>Min Freq (Hz):</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXVTRMinFreq">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>380</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
+       <string>Label</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_41">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>420</y>
+        <x>160</x>
+        <y>20</y>
         <width>101</width>
         <height>17</height>
        </rect>
       </property>
       <property name="text">
-       <string>Max Freq (Hz):</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXVTRMaxFreq">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>410</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
+       <string>Min Frequency</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_42">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>450</y>
+        <x>280</x>
+        <y>20</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max Frequency</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_43">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>20</y>
         <width>91</width>
         <height>17</height>
        </rect>
       </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
       <property name="text">
-       <string>LO Freq (Hz):</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       <string>LO Frequency</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEditXVTRLOFreq">
+     <widget class="QLabel" name="label_44">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>440</y>
+        <x>550</x>
+        <y>20</y>
+        <width>91</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Alex Rx Ant</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_45">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>20</y>
+        <width>81</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Alex Tx Ant</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBoxXvtrRxAnt0">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>40</y>
+        <width>85</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Ant 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RX 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RX 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>XV RX</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comboBox_2">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>40</y>
+        <width>85</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBoxXvtrTxAnt0">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>40</y>
+        <width>85</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Ant 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RX Only</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrLabel0">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>40</y>
+        <width>81</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrMinFrequency0">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>40</y>
         <width>113</width>
         <height>27</height>
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButtonXVTRAdd">
+     <widget class="QLineEdit" name="lineEditXvtrMaxFrequency0">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>400</y>
-        <width>97</width>
+        <x>280</x>
+        <y>40</y>
+        <width>113</width>
         <height>27</height>
        </rect>
-      </property>
-      <property name="text">
-       <string>Add</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButtonXVTRDelete">
+     <widget class="QLineEdit" name="lineEditXvtrLOFrequency0">
       <property name="geometry">
        <rect>
-        <x>490</x>
-        <y>400</y>
+        <x>410</x>
+        <y>40</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrMinFrequency1">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>70</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrMaxFrequency1">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>70</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrLOFrequency1">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>70</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBoxXvtrRxAnt1">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>70</y>
+        <width>85</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Ant 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RX 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RX 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>XV RX</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comboBoxXvtrTxAnt1">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>70</y>
+        <width>85</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Ant 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 3</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrLabel1">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>70</y>
+        <width>81</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrLabel2">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>100</y>
+        <width>81</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrMinFrequency2">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>100</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrMaxFrequency2">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>100</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrLOFrequency2">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>100</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBoxXvtrRxAnt2">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>100</y>
+        <width>85</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Ant 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RX 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RX 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>XV RX</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comboBoxXvtrTxAnt2">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>100</y>
+        <width>85</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Ant 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 3</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrLabel3">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>130</y>
+        <width>81</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrMinFrequency3">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>130</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrMaxFrequency3">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>130</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditXvtrLOFrequency3">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>130</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBoxXvtrRxAnt3">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>130</y>
+        <width>85</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Ant 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RX 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RX 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>XV RX</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comboBoxXvtrTxAnt3">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>130</y>
+        <width>85</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Ant 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ant 3</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QPushButton" name="pushButtonXvtrSave">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>210</y>
         <width>97</width>
         <height>27</height>
        </rect>
       </property>
       <property name="text">
-       <string>Delete</string>
+       <string>Save</string>
       </property>
      </widget>
     </widget>

@@ -64,6 +64,8 @@ Configure::Configure() {
 
     widget.ifFrequencyLineEdit->setText("28000000");
 
+    //widget.textEditConfiguration->setEnabled(false);
+
     connect(widget.spectrumHighSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSpectrumHighChanged(int)));
     connect(widget.spectrumLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSpectrumLowChanged(int)));
     connect(widget.fpsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotFpsChanged(int)));
@@ -154,6 +156,9 @@ void Configure::connected(bool state) {
     widget.rxSpinBox->setDisabled(state);
 
 
+    if(!state) {
+        widget.textEditConfiguration->clear();
+    }
 }
 
 void Configure::loadSettings(QSettings* settings) {
@@ -497,4 +502,32 @@ void Configure::slotXVTRDelete() {
 
     qDebug()<<"Configure::slotXVTRDelete"<<index;
     emit deleteXVTR(index);
+}
+
+void Configure::setHardwareConfiguration(QDomDocument* doc) {
+    // print out the element names of all elements that are direct children
+    // of the outermost element.
+
+    QStandardItemModel *model = new QStandardItemModel();
+    model->clear();
+
+    printTree(doc->documentElement(),"");
+
+
+}
+
+void Configure::printTree(QDomElement element,QString indent) {
+    QDomNode n = element.firstChild();
+    if(n.isText()) {
+        widget.textEditConfiguration->append(indent+element.tagName()+": "+n.nodeValue());
+    } else {
+        widget.textEditConfiguration->append(indent+element.tagName());
+        while(!n.isNull()) {
+            QDomElement e = n.toElement(); // try to convert the node to an element.
+            if(!e.isNull()) {
+                printTree(e,indent+"    ");
+            }
+            n = n.nextSibling();
+        }
+    }
 }

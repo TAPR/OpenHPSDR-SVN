@@ -105,3 +105,87 @@ int Alex::getTx(int band) {
     qDebug()<<"Alex::getTx: invalid band:"<<band;
     return 0;
 }
+
+QString Alex::getRxAntenna(int band) {
+    QString result="Unknown_"+QString::number(band);
+    switch(getRx(band)) {
+    case ANT1:
+        result="ANT_1";
+        break;
+    case ANT2:
+        result="ANT_2";
+        break;
+    case ANT3:
+        result="ANT_3";
+        break;
+    case RX1:
+        result="RX_1";
+        break;
+    case RX2:
+        result="RX_1";
+        break;
+    case XVRX:
+        result="XVRX";
+        break;
+    }
+    return result;
+}
+
+QString Alex::getTxAntenna(int band) {
+    QString result="Unknown_"+QString::number(band);
+    switch(getTx(band)) {
+    case ANT1:
+        result="ANT_1";
+        break;
+    case ANT2:
+        result="ANT_2";
+        break;
+    case ANT3:
+        result="ANT_3";
+        break;
+    }
+    return result;
+}
+
+QString Alex::getBand(int band) {
+    QString result="Unknown_"+QString::number(band);
+    switch(band) {
+    case BAND_160:
+        result="BAND_160";
+        break;
+    case BAND_80:
+        result="BAND_80";
+        break;
+    case BAND_60:
+        result="BAND_60";
+        break;
+    case BAND_40:
+        result="BAND_40";
+        break;
+    case BAND_30:
+        result="BAND_30";
+        break;
+    case BAND_20:
+        result="BAND_20";
+        break;
+    case BAND_17:
+        result="BAND_17";
+        break;
+    case BAND_15:
+        result="BAND_15";
+        break;
+    case BAND_12:
+        result="BAND_12";
+        break;
+    case BAND_10:
+        result="BAND_10";
+        break;
+    case BAND_6:
+        result="BAND_6";
+        break;
+    case BAND_GEN:
+        result="BAND_GEN";
+        break;
+    }
+    return result;
+}

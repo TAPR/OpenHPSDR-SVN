@@ -20,6 +20,7 @@ void Xvtr::triggered() {
 // public functions
 
 void Xvtr::loadSettings(QSettings* settings) {
+    /*
     int count;
     QString s;
     QString title;
@@ -64,9 +65,12 @@ void Xvtr::loadSettings(QSettings* settings) {
         }
     }
     settings->endGroup();
+
+    */
 }
 
 void Xvtr::saveSettings(QSettings* settings) {
+    /*
     QString s;
     XvtrEntry* entry;
 
@@ -84,6 +88,73 @@ void Xvtr::saveSettings(QSettings* settings) {
         settings->setValue(s,entry->getIFFrequency());
     }
     settings->endGroup();
+    */
+}
+
+void Xvtr::configure(QDomDocument* configuration) {
+    int xvtrEntry;
+    QString xvtrLabel;
+    long long xvtrMinFrequency;
+    long long xvtrMaxFrequency;
+    long long xvtrLOFrequency;
+
+    // walk through the DOM tree and extract the XVTR configuration
+    QDomElement element=configuration->documentElement();
+    QDomNode n=element.firstChild();
+    while(!n.isNull()) {
+        qDebug()<<"UI::configBuffer: node:"<<n.nodeName();
+        if(n.nodeName()=="xvtr") {
+            QDomNode xvtrNode=n.firstChild();
+            QDomNode xvtrElement;
+            while(!xvtrNode.isNull()) {
+                qDebug()<<"    "<<xvtrNode.nodeName();
+                if(xvtrNode.nodeName()=="entry") {
+                    xvtrElement=xvtrNode.firstChild();
+                    if(!xvtrElement.isNull()) {
+                        if(xvtrElement.isText()) {
+                            xvtrEntry=xvtrElement.nodeValue().toInt();
+                        }
+                    }
+                } else if(xvtrNode.nodeName()=="label") {
+                    xvtrElement=xvtrNode.firstChild();
+                    if(!xvtrElement.isNull()) {
+                        if(xvtrElement.isText()) {
+                            xvtrLabel=xvtrElement.nodeValue();
+                        }
+                    }
+                } else if(xvtrNode.nodeName()=="minfreq") {
+                    xvtrElement=xvtrNode.firstChild();
+                    if(!xvtrElement.isNull()) {
+                        if(xvtrElement.isText()) {
+                            xvtrMinFrequency=xvtrElement.nodeValue().toLongLong();
+                        }
+                    }
+
+                } else if(xvtrNode.nodeName()=="maxfreq") {
+                    xvtrElement=xvtrNode.firstChild();
+                    if(!xvtrElement.isNull()) {
+                        if(xvtrElement.isText()) {
+                            xvtrMaxFrequency=xvtrElement.nodeValue().toLongLong();
+                        }
+                    }
+                } else if(xvtrNode.nodeName()=="lofreq") {
+                    xvtrElement=xvtrNode.firstChild();
+                    if(!xvtrElement.isNull()) {
+                        if(xvtrElement.isText()) {
+                            xvtrLOFrequency=xvtrElement.nodeValue().toLongLong();
+                        }
+                    }
+                }
+                xvtrNode=xvtrNode.nextSibling();
+            }
+            //qDebug()<<xvtrLabel<<": "<<xvtrMinFrequency<<":"<<xvtrMaxFrequency<<":"<<xvtrLOFrequency;
+
+            add(xvtrEntry,xvtrLabel,xvtrMinFrequency,xvtrMaxFrequency,xvtrLOFrequency,xvtrMinFrequency,0,0);
+        }
+        n=n.nextSibling();
+    }
+
+
 }
 
 void Xvtr::buildMenu(QMenu* menu) {
@@ -101,9 +172,9 @@ void Xvtr::buildMenu(QMenu* menu) {
     }
 }
 
-void Xvtr::add(QString title, long long minFrequency, long long maxFrequency, long long ifFrequency,long long frequency,int mode,int filter) {
+void Xvtr::add(int entry, QString title, long long minFrequency, long long maxFrequency, long long ifFrequency,long long frequency,int mode,int filter) {
     qDebug()<<"Xvtr::add"<<title;
-    xvtrs.append(new XvtrEntry(title,minFrequency,maxFrequency,ifFrequency,frequency,mode,filter));
+    xvtrs.append(new XvtrEntry(entry,title,minFrequency,maxFrequency,ifFrequency,frequency,mode,filter));
 }
 
 void Xvtr::del(int index) {
@@ -130,6 +201,10 @@ void Xvtr::select(QAction* action) {
         currentXvtrAction=action;
     }
 
+}
+
+int Xvtr::getEntry() {
+    return currentXvtr->getEntry();
 }
 
 QString Xvtr::getTitle() {

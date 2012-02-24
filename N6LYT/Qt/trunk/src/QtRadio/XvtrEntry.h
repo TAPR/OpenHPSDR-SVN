@@ -7,7 +7,8 @@ class XvtrEntry
 {
 public:
     XvtrEntry();
-    XvtrEntry(QString t,long long minF,long long maxF,long long ifF,long long freq,int m,int filt);
+    XvtrEntry(int e,QString t,long long minF,long long maxF,long long ifF,long long freq,int m,int filt);
+    int getEntry();
     QString getTitle();
     long long getMinFrequency();
     long long getMaxFrequency();
@@ -20,6 +21,7 @@ public:
     void setFilter(int f);
 
 private:
+    int entry;
     QString title;
     long long minFrequency;
     long long maxFrequency;
