@@ -35,6 +35,7 @@
 #include <QUdpSocket>
 #include <QScrollBar>
 #include <QLabel>
+#include <QStandardItemModel>
 
 #include "about.h"
 #include "help.h"
@@ -44,6 +45,7 @@
 #include "range.h"
 #include "preferences.h"
 #include "lastcontact.h"
+#include "ctyxmlreader.h"
 
 
 namespace Ui {
@@ -59,6 +61,8 @@ public:
     ~MainWindow();
     QString version;
     void readDefinitions( QString filename );
+    QStandardItemModel *model;
+    CtyXmlReader *ctyreader;
 
 
 private slots:
@@ -76,6 +80,7 @@ private slots:
     void setGrid( QString );
     void setStation( QString );
     void setLogDirectory();
+    void setSupportDirectory();
 
 
 private:
@@ -93,6 +98,7 @@ private:
     QSettings settings;
     QLabel *logfileIndicator;
     bool deleteFlag;
+
 
 
 

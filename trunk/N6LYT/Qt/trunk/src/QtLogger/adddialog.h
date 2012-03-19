@@ -36,9 +36,11 @@
 #include <QCompleter>
 #include <QHashIterator>
 #include <QSettings>
+#include <QSortFilterProxyModel>
 
 #include "data.h"
 #include "range.h"
+#include "ctyxmlreader.h"
 
 
 namespace Ui {
@@ -58,6 +60,8 @@ public:
     void setFrequency( QString freq );
     void setMode( QString modestr );
     QString getBand( QString fstr );
+    QStandardItemModel *model;
+    QSortFilterProxyModel *proxyModel;
     void loadmodeComboBox(QStringList *modes);
     void loadcountryComboBox(QStringList *country);
     void loadsubdivisionsComboBox(QStringList *subdivisions);
@@ -71,10 +75,11 @@ private:
     QSettings settings;
 
 
+
 signals:
     void newdata();
     void ownerChanged();
-    void prefixChanged(QString);
+    void prefixChanged( QString );
 
 private slots:
     void reset();
@@ -82,6 +87,8 @@ private slots:
     void updateTime();
     void updateCall();
     void updateOwner();
+    void updateFilter( QString str );
+
 };
 
 #endif // ADDDIALOG_H

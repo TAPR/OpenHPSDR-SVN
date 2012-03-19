@@ -35,9 +35,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle( tr("QtLogger") );
+    this->setWindowTitle( tr("QT Logger") );
 
     version = "1.1.1";
+
+
+    this->setMouseTracking(true);
+    this->setBackgroundRole(QPalette::Base);
 
     QCoreApplication::setOrganizationName("openhpsdr");
     QCoreApplication::setOrganizationDomain("openhpsdr.org");
@@ -57,6 +61,8 @@ MainWindow::MainWindow(QWidget *parent) :
     data->setMinimumHeader();
 
     add = new addDialog( this );
+
+
     readDefinitions("../QtLogger/adif_codes_2.2.7.xml");
 
 
@@ -96,8 +102,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionLast_Contact,SIGNAL(triggered()),last,SLOT(show()));
     connect(ui->actionOpen,SIGNAL(triggered()),this,SLOT(updateStatus()));
     connect(ui->actionSave,SIGNAL(triggered()),this,SLOT(writeData()));
+    connect(ui->actionSupport_Directory,SIGNAL(triggered()),this,SLOT(setSupportDirectory()));
     connect(ui->actionLog_Directory,SIGNAL(triggered()),this,SLOT(setLogDirectory()));
     connect(ui->tableView,SIGNAL(clicked(QModelIndex)),this,SLOT(removeTableRow(QModelIndex)));
+    connect(ui->tableView,SIGNAL(activated(QModelIndex)),ui->tableView,SLOT(resizeRowsToContents()));
     connect(ui->actionAdd,SIGNAL(triggered()),add,SLOT(show()));
     connect(add,SIGNAL(newdata()),this,SLOT(update()));
     connect(data,SIGNAL(refresh()),this,SLOT(update()));
@@ -105,6 +113,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(add,SIGNAL(ownerChanged()),this,SLOT(updateOwner()));
     connect(add,SIGNAL(prefixChanged(QString)),last->proxyModel,SLOT(setFilterRegExp(QString)));
     connect(add,SIGNAL(prefixChanged(QString)),last,SLOT(setCallLabel(QString)));
+    connect(add,SIGNAL(prefixChanged(QString)),add->proxyModel,SLOT(setFilterRegExp(QString)));
 }
 
 
@@ -291,7 +300,7 @@ void MainWindow::updateView()
 
 void MainWindow::writeData()
 {
-    QString dname = settings.value("directory").toString();
+    QString dname = settings.value("LDirectory").toString();
     QString filename =  QFileDialog::getSaveFileName(this, tr("Save File"),dname,tr("Files (*.xml *.adif *.adi)"));
     data->setFilename( filename );
     settings.setValue("filename", filename);
@@ -321,16 +330,8 @@ void MainWindow::processPendingDatagrams()
               QString output = QString("%1").arg(datagram.data());
               if( output.contains("frequency")){
                  QString datastr = parseDatagrams(output);
-                 if(datastr.contains("."))
-                 {
-                     //qDebug() << datastr;
-                     add->setFrequency( datastr );
-                 }else{
-                     double freqnum = (datastr.toDouble() / 1000000.0);
-                     //qDebug() << datastr << freqnum;
-                     add->setFrequency( QString("%1").arg(freqnum,6) );
-                 }
-
+                 qDebug() << datastr;
+                 add->setFrequency( datastr );
               }else if( output.contains("mode")){
                  QString datastr = parseDatagrams(output);
                  qDebug() << datastr;
@@ -372,11 +373,13 @@ void MainWindow::readDefinitions( QString filename )
   if( !ok )
   {
       qDebug() << "Parsing Definition file failed." << endl;
-
   }
+
+  ui->statusBar->showMessage( QString("Loading Country definitions from \"%1\"").arg("/home/dlarsen/src/test-xmlreader/DXCCcountries.xml") );
+
   modes = new QStringList( handler->mode );
-  country = new QStringList( handler->country );
-  subdivisions = new QStringList( handler->subdivisions );
+  country = new QStringList( );
+  subdivisions = new QStringList( );
   bands = QHash <QString, Range>( handler->band );
   //qDebug() << bands["160m"].lower;
 }
@@ -409,6 +412,7 @@ void MainWindow::removeTableRow(QModelIndex idx)
     }
 }
 
+
 void MainWindow::setOwner(QString operatorstrn)
 {
     data->operatorstr = QString(operatorstrn);
@@ -431,9 +435,21 @@ void MainWindow::setStation(QString stationstrn)
 
 void MainWindow::setLogDirectory()
 {
-    QString dname = settings.value("directory").toString();
+    QString dname = settings.value("LDirectory").toString();
     QString dirname =  QFileDialog::getExistingDirectory(this, tr("Log Directory"),dname);
     data->setDirname( dirname );
-    settings.setValue("directory", dirname);
+    settings.setValue("LDirectory", dirname);
     ui->statusBar->showMessage( QString("Log Directory set to \"%1\"").arg(dirname) );
 }
+
+void MainWindow::setSupportDirectory()
+{
+    QString dname = settings.value("SDdirectory").toString();
+    QString dirname =  QFileDialog::getExistingDirectory(this, tr("Support Directory"),dname);
+    data->setDirname( dirname );
+    settings.setValue("SDirectory", dirname);
+    ui->actionSupport_Directory->setToolTip(QString("Support Directory %1").arg(dirname));
+    ui->statusBar->showMessage( QString("Support Directory set to \"%1\"").arg(dirname) );
+}
+
+
