@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     loghandler.cpp \
     adif.cpp \
     preferences.cpp \
-    lastcontact.cpp
+    lastcontact.cpp \
+    ctyxmlreader.cpp
 
 HEADERS  += mainwindow.h \
     about.h \
@@ -33,7 +34,8 @@ HEADERS  += mainwindow.h \
     loghandler.h \
     adif.h \
     preferences.h \
-    lastcontact.h
+    lastcontact.h \
+    ctyxmlreader.h
 
 FORMS    += mainwindow.ui \
     help.ui \

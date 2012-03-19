@@ -35,6 +35,9 @@ addDialog::addDialog(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle( "Add Contact" );
 
+    this->setMouseTracking(true);
+    this->setBackgroundRole(QPalette::Base);
+
     date = new QDate();
     time = new QTime();
     callsign_filter = true;
@@ -52,6 +55,28 @@ addDialog::addDialog(QWidget *parent) :
        ui->callEdit->setValidator( 0 );
     }
 
+    model = new QStandardItemModel();
+    CtyXmlReader reader( model );
+    QFile* filecty = new QFile( "../QtLogger/DXCCcountries.xml" );
+    if (!filecty->open(QIODevice::ReadOnly | QIODevice::Text))
+             return;
+
+    reader.read( filecty );
+
+    proxyModel = new QSortFilterProxyModel(this);
+    proxyModel->setSourceModel( model );
+    proxyModel->setFilterKeyColumn(3);
+    proxyModel->setDynamicSortFilter( false );
+    QCompleter *cty_completer = new QCompleter( proxyModel, this );
+    cty_completer->setCompletionColumn(1);
+    ui->countryBox->setModel( proxyModel );
+    ui->countryBox->setCompleter( cty_completer );
+    QCompleter *sub_completer = new QCompleter( proxyModel, this );
+    sub_completer->setCompletionColumn(3);
+    ui->subdivisionBox->setModel( proxyModel );
+    ui->subdivisionBox->setModelColumn(2);
+    ui->subdivisionBox->setCompleter( cty_completer );
+
     reset();
 
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(close()));
@@ -62,7 +87,7 @@ addDialog::addDialog(QWidget *parent) :
     connect(ui->homeqthEdit,SIGNAL(textChanged(QString)),this,SLOT(updateOwner()));
     connect(ui->homegridEdit,SIGNAL(textChanged(QString)),this,SLOT(updateOwner()));
     connect(ui->stationEdit,SIGNAL(textChanged(QString)),this,SLOT(updateOwner()));
-
+    connect(ui->callEdit,SIGNAL(textChanged(QString)),this,SLOT(updateFilter(QString)));
 }
 
 addDialog::~addDialog()
@@ -77,8 +102,8 @@ void addDialog::reset()
     ui->timeEdit->setText(time->currentTime().toString());
     ui->callEdit->clear();
     ui->nameEdit->clear();
-    ui->countryEdit->clear();
-    ui->subdivisionEdit->clear();
+    //ui->countryBox->clear();
+    //ui->subdivisionBox->clear();
     ui->qthEdit->clear();
     ui->checkEdit->clear();
     ui->gridsqEdit->clear();
@@ -125,7 +150,8 @@ void addDialog::updateOwner()
 void addDialog::updateTime()
 {
     ui->dateEdit->setText(date->currentDate().toString("yyyy:MM:dd"));
-    ui->timeEdit->setText(time->currentTime().toString());
+    QTime UtcTime  = QDateTime::currentDateTime ().toTimeSpec(Qt::UTC).time();
+    ui->timeEdit->setText(UtcTime.toString());
 }
 
 void addDialog::addContact()
@@ -143,8 +169,8 @@ void addDialog::addContact()
     record["QTH"] = ui->qthEdit->text();
     record["GRIDSQUARE"] = ui->gridsqEdit->text();
     record["MODE"] = ui->modeEdit->text();
-    record["COUNTRY"] = ui->countryEdit->text();
-    record["STATE"] = ui->subdivisionEdit->text();
+    record["COUNTRY"] = ui->countryBox->currentText();
+    record["STATE"] = ui->subdivisionBox->currentText();
     record["CNTY"] = ui->countyEdit->text();
     record["EVENT"] = ui->eventBox->currentText();
     record["CHECK"] = ui->checkEdit->text();
@@ -202,19 +228,40 @@ void addDialog::loadmodeComboBox(QStringList *modes)
 
 void addDialog::loadcountryComboBox(QStringList *country)
 {
-    QCompleter *countryCompleter = new QCompleter( *country, this);
-    countryCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    ui->countryEdit->setCompleter(countryCompleter);
+    //QCompleter *countryCompleter = new QCompleter( *country, this);
+    //countryCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    //ui->countryEdit->setCompleter(countryCompleter);
 }
 
 void addDialog::loadsubdivisionsComboBox(QStringList *subdivisions)
 {
-    QCompleter *subdivisionsCompleter = new QCompleter( *subdivisions, this);
-    subdivisionsCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    ui->subdivisionEdit->setCompleter(subdivisionsCompleter);
+    //QCompleter *subdivisionsCompleter = new QCompleter( *subdivisions, this);
+    //subdivisionsCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    //ui->subdivisionEdit->setCompleter(subdivisionsCompleter);
 }
 
 void addDialog::loadbandsData( QHash <QString, Range> band )
 {
     bandData = QHash <QString, Range>( band );
 }
+
+void addDialog::updateFilter( QString str )
+{
+    QString prefix="";
+    QRegExp rx("(\\w+)(\\w*)(\\d+)");
+    int pos=0;
+    ui->callEdit->setText( str.toUpper() );
+    proxyModel->sort(3);
+    rx.indexIn(str);
+    pos = rx.matchedLength();
+    prefix = str.toUpper().left(pos);
+    //prefix = rx.cap(1);
+    qDebug() << "F1" << str << prefix << pos;
+
+
+    //prefix = str.toUpper().left(3);
+
+    emit( prefixChanged("^"+prefix));
+}
+
+
