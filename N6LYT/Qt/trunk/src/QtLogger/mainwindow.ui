@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>631</width>
-    <height>478</height>
+    <width>672</width>
+    <height>495</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,12 +38,15 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>631</width>
+     <width>672</width>
      <height>26</height>
     </rect>
    </property>
    <property name="focusPolicy">
     <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="toolTip">
+    <string/>
    </property>
    <property name="nativeMenuBar">
     <bool>true</bool>
@@ -52,11 +55,12 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionSupport_Directory"/>
+    <addaction name="separator"/>
     <addaction name="actionLog_Directory"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionQuit"/>
-    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -103,6 +107,9 @@
    </property>
   </widget>
   <action name="actionQuit">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Quit</string>
    </property>
@@ -128,7 +135,7 @@
   </action>
   <action name="actionOpen">
    <property name="text">
-    <string>Open</string>
+    <string>Open Log</string>
    </property>
    <property name="toolTip">
     <string>Open open an XML or ADIF log file</string>
@@ -170,6 +177,11 @@
   <action name="actionLast_Contact">
    <property name="text">
     <string>Last Contact</string>
+   </property>
+  </action>
+  <action name="actionSupport_Directory">
+   <property name="text">
+    <string>Support Directory</string>
    </property>
   </action>
  </widget>
