@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon Jan 30 17:14:50 2012
-**      by: Qt User Interface Compiler version 4.7.4
+** Created: Tue Mar 20 21:55:51 2012
+**      by: Qt User Interface Compiler version 4.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -39,6 +39,7 @@ public:
     QAction *actionPreferences;
     QAction *actionLog_Directory;
     QAction *actionLast_Contact;
+    QAction *actionSupport_Directory;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QTableView *tableView;
@@ -54,12 +55,13 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(631, 478);
+        MainWindow->resize(672, 495);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/QtLogger.svg"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
         actionQuit = new QAction(MainWindow);
         actionQuit->setObjectName(QString::fromUtf8("actionQuit"));
+        actionQuit->setCheckable(false);
         actionAbout = new QAction(MainWindow);
         actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
         actionAdd = new QAction(MainWindow);
@@ -85,6 +87,8 @@ public:
         actionLog_Directory->setObjectName(QString::fromUtf8("actionLog_Directory"));
         actionLast_Contact = new QAction(MainWindow);
         actionLast_Contact->setObjectName(QString::fromUtf8("actionLast_Contact"));
+        actionSupport_Directory = new QAction(MainWindow);
+        actionSupport_Directory->setObjectName(QString::fromUtf8("actionSupport_Directory"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -103,7 +107,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 631, 26));
+        menuBar->setGeometry(QRect(0, 0, 672, 26));
         menuBar->setFocusPolicy(Qt::NoFocus);
         menuBar->setNativeMenuBar(true);
         menuFile = new QMenu(menuBar);
@@ -127,11 +131,12 @@ public:
         menuBar->addAction(menuView->menuAction());
         menuBar->addAction(menuContacts->menuAction());
         menuBar->addAction(menuHelp->menuAction());
+        menuFile->addAction(actionSupport_Directory);
+        menuFile->addSeparator();
         menuFile->addAction(actionLog_Directory);
         menuFile->addAction(actionOpen);
         menuFile->addAction(actionSave);
         menuFile->addAction(actionQuit);
-        menuFile->addSeparator();
         menuHelp->addAction(actionHelp);
         menuHelp->addAction(actionAbout);
         menuContacts->addAction(actionAdd);
@@ -154,7 +159,7 @@ public:
         actionAbout->setText(QApplication::translate("MainWindow", "About", 0, QApplication::UnicodeUTF8));
         actionAdd->setText(QApplication::translate("MainWindow", "Add", 0, QApplication::UnicodeUTF8));
         actionHelp->setText(QApplication::translate("MainWindow", "Help", 0, QApplication::UnicodeUTF8));
-        actionOpen->setText(QApplication::translate("MainWindow", "Open", 0, QApplication::UnicodeUTF8));
+        actionOpen->setText(QApplication::translate("MainWindow", "Open Log", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         actionOpen->setToolTip(QApplication::translate("MainWindow", "Open open an XML or ADIF log file", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
@@ -169,6 +174,10 @@ public:
         actionPreferences->setText(QApplication::translate("MainWindow", "Preferences", 0, QApplication::UnicodeUTF8));
         actionLog_Directory->setText(QApplication::translate("MainWindow", "Log Directory", 0, QApplication::UnicodeUTF8));
         actionLast_Contact->setText(QApplication::translate("MainWindow", "Last Contact", 0, QApplication::UnicodeUTF8));
+        actionSupport_Directory->setText(QApplication::translate("MainWindow", "Support Directory", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        menuBar->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0, QApplication::UnicodeUTF8));
         menuContacts->setTitle(QApplication::translate("MainWindow", "Contacts", 0, QApplication::UnicodeUTF8));

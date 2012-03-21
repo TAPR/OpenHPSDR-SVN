@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>576</width>
-    <height>412</height>
+    <width>648</width>
+    <height>448</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,12 +45,15 @@
                <pointsize>9</pointsize>
               </font>
              </property>
+             <property name="toolTip">
+              <string>Current Date from system clock</string>
+             </property>
             </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>Time</string>
+              <string>UTC</string>
              </property>
             </widget>
            </item>
@@ -60,6 +63,9 @@
               <font>
                <pointsize>9</pointsize>
               </font>
+             </property>
+             <property name="toolTip">
+              <string extracomment="System time from clock"/>
              </property>
             </widget>
            </item>
@@ -77,6 +83,9 @@
                <pointsize>15</pointsize>
               </font>
              </property>
+             <property name="statusTip">
+              <string>Callsign for the contact</string>
+             </property>
             </widget>
            </item>
            <item row="3" column="0">
@@ -88,6 +97,9 @@
            </item>
            <item row="3" column="1">
             <widget class="QComboBox" name="txrstBox">
+             <property name="toolTip">
+              <string>Transmitted Signal strength</string>
+             </property>
              <property name="editable">
               <bool>true</bool>
              </property>
@@ -255,6 +267,9 @@
              <property name="focusPolicy">
               <enum>Qt::WheelFocus</enum>
              </property>
+             <property name="toolTip">
+              <string comment="Received signal strength"/>
+             </property>
              <property name="editable">
               <bool>true</bool>
              </property>
@@ -418,7 +433,17 @@
             </widget>
            </item>
            <item row="5" column="1">
-            <widget class="QLineEdit" name="nameEdit"/>
+            <widget class="QLineEdit" name="nameEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Name of contact</string>
+             </property>
+            </widget>
            </item>
            <item row="6" column="0">
             <widget class="QLabel" name="label_8">
@@ -428,7 +453,14 @@
             </widget>
            </item>
            <item row="6" column="1">
-            <widget class="QLineEdit" name="qthEdit"/>
+            <widget class="QLineEdit" name="qthEdit">
+             <property name="toolTip">
+              <string>Location of contact</string>
+             </property>
+             <property name="statusTip">
+              <string/>
+             </property>
+            </widget>
            </item>
            <item row="7" column="0">
             <widget class="QLabel" name="label_23">
@@ -438,7 +470,11 @@
             </widget>
            </item>
            <item row="7" column="1">
-            <widget class="QLineEdit" name="gridsqEdit"/>
+            <widget class="QLineEdit" name="gridsqEdit">
+             <property name="toolTip">
+              <string>Maidenhead grid for the contact</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -452,7 +488,11 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLineEdit" name="freqEdit"/>
+            <widget class="QLineEdit" name="freqEdit">
+             <property name="toolTip">
+              <string>Frequency read from QtRadio</string>
+             </property>
+            </widget>
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="label_6">
@@ -484,6 +524,9 @@
            </item>
            <item row="6" column="1">
             <widget class="QComboBox" name="eventBox">
+             <property name="toolTip">
+              <string>An event flag</string>
+             </property>
              <property name="editable">
               <bool>true</bool>
              </property>
@@ -495,7 +538,11 @@
             </widget>
            </item>
            <item row="8" column="1">
-            <widget class="QLineEdit" name="checkEdit"/>
+            <widget class="QLineEdit" name="checkEdit">
+             <property name="toolTip">
+              <string>Check number from contact</string>
+             </property>
+            </widget>
            </item>
            <item row="8" column="0">
             <widget class="QLabel" name="label_14">
@@ -505,13 +552,11 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QLineEdit" name="modeEdit"/>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="countryEdit"/>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLineEdit" name="subdivisionEdit"/>
+            <widget class="QLineEdit" name="modeEdit">
+             <property name="toolTip">
+              <string>Mode read from QtRadio</string>
+             </property>
+            </widget>
            </item>
            <item row="9" column="1">
             <widget class="QSpinBox" name="contactBox">
@@ -519,6 +564,9 @@
               <font>
                <pointsize>9</pointsize>
               </font>
+             </property>
+             <property name="toolTip">
+              <string>count of your conatcts for this event</string>
              </property>
              <property name="minimum">
               <number>1</number>
@@ -536,12 +584,42 @@
             </widget>
            </item>
            <item row="5" column="1">
-            <widget class="QLineEdit" name="countyEdit"/>
+            <widget class="QLineEdit" name="countyEdit">
+             <property name="toolTip">
+              <string>County of the contact</string>
+             </property>
+            </widget>
            </item>
            <item row="5" column="0">
             <widget class="QLabel" name="label_24">
              <property name="text">
               <string>County</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="countryBox">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="toolTip">
+              <string>Country, will change as you enter callsign</string>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+             <property name="frame">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QComboBox" name="subdivisionBox">
+             <property name="toolTip">
+              <string>Subdivision, will change as you enter callsign</string>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -557,7 +635,11 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="commentEdit"/>
+            <widget class="QLineEdit" name="commentEdit">
+             <property name="toolTip">
+              <string>Comment</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -790,8 +872,6 @@
   <tabstop>qthEdit</tabstop>
   <tabstop>gridsqEdit</tabstop>
   <tabstop>commentEdit</tabstop>
-  <tabstop>countryEdit</tabstop>
-  <tabstop>subdivisionEdit</tabstop>
   <tabstop>countyEdit</tabstop>
   <tabstop>checkEdit</tabstop>
   <tabstop>addButton</tabstop>
