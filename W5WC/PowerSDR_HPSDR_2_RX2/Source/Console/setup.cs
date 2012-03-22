@@ -26,8 +26,6 @@
 //    USA
 //=================================================================
 
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PowerSDR
 {
@@ -43,9 +41,10 @@ namespace PowerSDR
     using System.Text;
     using System.IO;
     using System.IO.Ports;
-    //using TDxInput;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public class Setup : Form
+    public partial class Setup : Form
     {
         #region Variable Declaration
 
@@ -55,9 +54,6 @@ namespace PowerSDR
         private int sound_card;
         private bool initializing;
         public bool alex_fw_good = false;
-
-// ReSharper disable SuggestUseVarKeywordEvident
-// ReSharper disable RedundantNameQualifier
         private TabPage tpDSP;
         private TabPage tpDisplay;
         private NumericUpDownTS udDisplayGridStep;
@@ -1927,8 +1923,10 @@ namespace PowerSDR
             comboAudioSoundCard.Text = "Unsupported Card";
             comboAudioSampleRate1.SelectedIndex = 0;
             comboAudioSampleRate2.Text = "48000";
-            comboAudioBuffer1.Text = "1024";
+            comboAudioSampleRate3.Text = "48000";
+            comboAudioBuffer1.Text = "2048";
             comboAudioBuffer2.Text = "512";
+            comboAudioBuffer3.Text = "512";
             comboAudioChannels1.Text = "6";
             Audio.IN_RX1_L = 0;
             Audio.IN_RX1_R = 1;
@@ -1938,13 +1936,13 @@ namespace PowerSDR
             Audio.IN_TX_R = 5;
             comboDisplayLabelAlign.Text = "Auto";
             comboColorPalette.Text = "enhanced";
-            comboTXLabelAlign.Text = "Auto"; 
+            comboTXLabelAlign.Text = "Auto";
             comboDisplayDriver.Text = "GDI+";
-            comboDSPPhoneRXBuf.Text = "4096";
+            comboDSPPhoneRXBuf.Text = "2048";
             comboDSPPhoneTXBuf.Text = "2048";
-            comboDSPCWRXBuf.Text = "4096";
+            comboDSPCWRXBuf.Text = "2048";
             comboDSPCWTXBuf.Text = "2048";
-            comboDSPDigRXBuf.Text = "4096";
+            comboDSPDigRXBuf.Text = "2048";
             comboDSPDigTXBuf.Text = "2048";
             comboDSPWindow.SelectedIndex = (int)Window.BLKHARRIS;
             comboKeyerConnKeyLine.SelectedIndex = 0;
@@ -2001,6 +1999,10 @@ namespace PowerSDR
                 comboAudioDriver2.Items.Count > 0)
                 comboAudioDriver2.SelectedIndex = 0;
 
+            if (comboAudioDriver3.SelectedIndex < 0 &&
+                comboAudioDriver3.Items.Count > 0)
+                comboAudioDriver3.SelectedIndex = 0;
+
             if (comboAudioMixer1.SelectedIndex < 0 &&
                 comboAudioMixer1.Items.Count > 0)
                 comboAudioMixer1.SelectedIndex = 0;
@@ -2055,12 +2057,13 @@ namespace PowerSDR
             tbGridFineAlpha_Scroll(this, e);
             tbTXVGridFineAlpha_Scroll(this, e);
             tbHGridColorAlpha_Scroll(this, e);
-            tbTXHGridColorAlpha_Scroll(this, e); 
+            tbTXHGridColorAlpha_Scroll(this, e);
             tbMultiRXFilterAlpha_Scroll(this, e);
             tbTXZeroLineAlpha_Scroll(this, e);
             tbTXTextAlpha_Scroll(this, e);
             tbMeterEdgeBackgroundAlpha_Scroll(this, e);
             checkHPSDRDefaults(this, e);
+            chkAlexPresent_CheckedChanged(this, e);
 
             for (int i = 0; i < 2; i++)
                 for (int j = 0; j < 2; j++)
@@ -2074,7 +2077,7 @@ namespace PowerSDR
 
             //tkbarTestGenFreq.Value = console.CWPitch;
         }
-
+#if false
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -2086,11 +2089,11 @@ namespace PowerSDR
             }
             base.Dispose(disposing);
         }
-
+#endif
         #endregion
 
-        #region Windows Form Designer generated code
-
+        // #region Windows Form Designer generated code
+#if false
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -30200,7 +30203,8 @@ namespace PowerSDR
             this.ResumeLayout(false);
 
         }
-        #endregion
+#endif
+        // #endregion
 
         #region Init Routines
         // ======================================================
@@ -30304,7 +30308,7 @@ namespace PowerSDR
             udTXGridMax.Value = Display.TXSpectrumGridMax;
             udTXGridMin.Value = Display.TXSpectrumGridMin;
             udTXGridStep.Value = Display.TXSpectrumGridStep;
-  
+
         }
 
         private void InitDSPTab()
@@ -30468,10 +30472,10 @@ namespace PowerSDR
             }
 
             if (skin == "")
-                comboAppSkin.Text = "OpenHPSDR-Gray"; //"Default";
+                comboAppSkin.Text = "Default";
             else if (comboAppSkin.Items.Contains(skin))
                 comboAppSkin.Text = skin;
-            else comboAppSkin.Text = "OpenHPSDR-Gray"; //"Default";
+            else comboAppSkin.Text = "Default";
         }
 
         private void InitWindowTypes()
@@ -30488,6 +30492,7 @@ namespace PowerSDR
         {
             comboAudioDriver1.Items.Clear();
             comboAudioDriver2.Items.Clear();
+            comboAudioDriver3.Items.Clear();
             int host_index = 0;
             foreach (string PAHostName in Audio.GetPAHosts())
             {
@@ -30495,7 +30500,13 @@ namespace PowerSDR
                     Audio.GetPAOutputDevices(host_index).Count > 0)
                 {
                     comboAudioDriver1.Items.Add(new PADeviceInfo(PAHostName, host_index));
-                    comboAudioDriver2.Items.Add(new PADeviceInfo(PAHostName, host_index));
+                    if (PAHostName != "Windows WASAPI")
+                    {
+                        comboAudioDriver2.Items.Add(new PADeviceInfo(PAHostName, host_index));
+                        comboAudioDriver3.Items.Add(new PADeviceInfo(PAHostName, host_index));
+                    }
+                    // comboAudioDriver1.Items.Add(new PADeviceInfo(PAHostName, host_index));
+                    // comboAudioDriver2.Items.Add(new PADeviceInfo(PAHostName, host_index));
                 }
                 host_index++; //Increment host index
             }
@@ -30527,6 +30538,20 @@ namespace PowerSDR
             a = Audio.GetPAOutputDevices(host);
             foreach (PADeviceInfo p in a)
                 comboAudioOutput2.Items.Add(p);
+        }
+
+        private void GetDevices3()
+        {
+            comboAudioInput3.Items.Clear();
+            comboAudioOutput3.Items.Clear();
+            int host = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Index;
+            ArrayList a = Audio.GetPAInputDevices(host);
+            foreach (PADeviceInfo p in a)
+                comboAudioInput3.Items.Add(p);
+
+            a = Audio.GetPAOutputDevices(host);
+            foreach (PADeviceInfo p in a)
+                comboAudioOutput3.Items.Add(p);
         }
 
         private void ControlList(Control c, ref ArrayList a)
@@ -30585,14 +30610,14 @@ namespace PowerSDR
                     a.Add(c.Name + "/" + clr.R + "." + clr.G + "." + clr.B + "." + clr.A);
                 }
 #if(DEBUG)
-				else if(c.GetType() == typeof(GroupBox) ||
-					c.GetType() == typeof(CheckBox) ||
-					c.GetType() == typeof(ComboBox) ||
-					c.GetType() == typeof(NumericUpDown) ||
-					c.GetType() == typeof(RadioButton) ||
-					c.GetType() == typeof(TextBox) ||
-					c.GetType() == typeof(TrackBar))
-					Debug.WriteLine(c.Name+" needs to be converted to a Thread Safe control.");
+                else if (c.GetType() == typeof(GroupBox) ||
+                    c.GetType() == typeof(CheckBox) ||
+                    c.GetType() == typeof(ComboBox) ||
+                    c.GetType() == typeof(NumericUpDown) ||
+                    c.GetType() == typeof(RadioButton) ||
+                    c.GetType() == typeof(TextBox) ||
+                    c.GetType() == typeof(TrackBar))
+                    Debug.WriteLine(c.Name + " needs to be converted to a Thread Safe control.");
 #endif
             }
 
@@ -30893,7 +30918,7 @@ namespace PowerSDR
                 {
                     foreach (Control c2 in c.Controls)
                     {
-                        if (c2.GetType() != typeof (ComboBoxTS)) continue;
+                        if (c2.GetType() != typeof(ComboBoxTS)) continue;
                         ComboBoxTS combo = (ComboBoxTS)c2;
                         combo.Items.Clear();
                         foreach (Keys k in KeyList)
@@ -31097,8 +31122,8 @@ namespace PowerSDR
             // DSP Tab
             udLMSANF_ValueChanged(this, e);
             udLMSNR_ValueChanged(this, e);
-           // udDSPImagePhaseTX_ValueChanged(this, e);
-           // udDSPImageGainTX_ValueChanged(this, e);
+            // udDSPImagePhaseTX_ValueChanged(this, e);
+            // udDSPImageGainTX_ValueChanged(this, e);
             udDSPCWPitch_ValueChanged(this, e);
             comboDSPWindow_SelectedIndexChanged(this, e);
             udDSPNB_ValueChanged(this, e);
@@ -31197,14 +31222,6 @@ namespace PowerSDR
             return s;
         }
 
-        public string TXProfile
-        {
-            get {
-                return comboTXProfileName != null ? comboTXProfileName.Text : "";
-            }
-            set { if (comboTXProfileName != null) comboTXProfileName.Text = value; }
-        }
-
         public void GetTxProfiles()
         {
             comboTXProfileName.Items.Clear();
@@ -31257,6 +31274,143 @@ namespace PowerSDR
         #endregion
 
         #region Properties
+
+        public string TXProfile
+        {
+            get
+            {
+                return comboTXProfileName != null ? comboTXProfileName.Text : "";
+            }
+            set { if (comboTXProfileName != null) comboTXProfileName.Text = value; }
+        }
+
+        public int VACDriver
+        {
+            get
+            {
+                return comboAudioDriver2.SelectedIndex;
+            }
+            set
+            {
+                if ((comboAudioDriver2.Items.Count - 1) > value)
+                {
+                    comboAudioDriver2.SelectedIndex = value;
+                }
+            }
+        }
+
+        public int VAC2Driver
+        {
+            get
+            {
+                return comboAudioDriver3.SelectedIndex;
+            }
+            set
+            {
+                if ((comboAudioDriver3.Items.Count - 1) > value)
+                {
+                    comboAudioDriver3.SelectedIndex = value;
+                }
+            }
+        }
+
+        public int VACInputCable
+        {
+            get
+            {
+                return comboAudioInput2.SelectedIndex;
+            }
+            set
+            {
+                if ((comboAudioInput2.Items.Count - 1) > value)
+                {
+                    comboAudioInput2.SelectedIndex = value;
+                }
+            }
+        }
+
+        public int VAC2InputCable
+        {
+            get
+            {
+                return comboAudioInput3.SelectedIndex;
+            }
+            set
+            {
+                if ((comboAudioInput3.Items.Count - 1) > value)
+                {
+                    comboAudioInput3.SelectedIndex = value;
+                }
+            }
+        }
+
+        public int VACOutputCable
+        {
+            get
+            {
+                return comboAudioOutput2.SelectedIndex;
+            }
+            set
+            {
+                if ((comboAudioOutput2.Items.Count - 1) > value)
+                {
+                    comboAudioOutput2.SelectedIndex = value;
+                }
+            }
+        }
+
+        public int VAC2OutputCable
+        {
+            get
+            {
+                return comboAudioOutput3.SelectedIndex;
+            }
+            set
+            {
+                if ((comboAudioOutput3.Items.Count - 1) > value)
+                {
+                    comboAudioOutput3.SelectedIndex = value;
+                }
+            }
+        }
+
+        public bool VACUseRX2
+        {
+            get
+            {
+                if (chkAudioRX2toVAC != null && IQOutToVAC)
+                {
+                    return chkAudioRX2toVAC.Checked;
+                }
+                else return false;
+            }
+            set
+            {
+                if (chkAudioRX2toVAC != null && IQOutToVAC)
+                {
+                    chkAudioRX2toVAC.Checked = value;
+                }
+            }
+        }
+
+        public bool VAC2UseRX2
+        {
+            get
+            {
+                if (chkVAC2UseRX2 != null && IQOutToVAC)
+                {
+                    return chkVAC2UseRX2.Checked;
+                }
+                else return false;
+            }
+            set
+            {
+                if (chkVAC2UseRX2 != null && IQOutToVAC)
+                {
+                    chkVAC2UseRX2.Checked = value;
+                }
+            }
+        }
 
         public bool CATEnabled
         {
@@ -31409,6 +31563,49 @@ namespace PowerSDR
             }
         }
 
+        public string VAC2SampleRate
+        {
+            get
+            {
+                if (comboAudioSampleRate3 != null) return comboAudioSampleRate3.Text;
+                else return "";
+            }
+            set
+            {
+                if (comboAudioSampleRate3 != null) comboAudioSampleRate3.Text = value;
+            }
+        }
+
+        public string VAC1BufferSize
+        {
+            get
+            {
+                if (comboAudioBuffer2 != null)
+                    return comboAudioBuffer2.Text;
+                else return "";
+            }
+            set
+            {
+                if (comboAudioBuffer2 != null)
+                    comboAudioBuffer2.Text = value;
+            }
+        }
+
+        public string VAC2BufferSize
+        {
+            get
+            {
+                if (comboAudioBuffer3 != null)
+                    return comboAudioBuffer3.Text;
+                else return "";
+            }
+            set
+            {
+                if (comboAudioBuffer3 != null)
+                    comboAudioBuffer3.Text = value;
+            }
+        }
+
         public bool IQOutToVAC
         {
             get
@@ -31422,6 +31619,45 @@ namespace PowerSDR
             }
         }
 
+        public bool VAC2DirectIQ
+        {
+            get
+            {
+                if (chkVAC2DirectIQ != null) return chkVAC2DirectIQ.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkVAC2DirectIQ != null) chkVAC2DirectIQ.Checked = value;
+            }
+        }
+
+        public bool VAC1Calibrate
+        {
+            get
+            {
+                if (chkAudioCorrectIQ != null) return chkAudioIQtoVAC.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkAudioCorrectIQ != null) chkAudioIQtoVAC.Checked = value;
+            }
+        }
+
+        public bool VAC2Calibrate
+        {
+            get
+            {
+                if (chkVAC2DirectIQCal != null) return chkVAC2DirectIQ.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkVAC2DirectIQCal != null) chkVAC2DirectIQ.Checked = value;
+            }
+        }
+
         public bool VACStereo
         {
             get
@@ -31432,6 +31668,19 @@ namespace PowerSDR
             set
             {
                 if (chkAudio2Stereo != null) chkAudio2Stereo.Checked = value;
+            }
+        }
+
+        public bool VAC2Stereo
+        {
+            get
+            {
+                if (chkAudioStereo3 != null) return chkAudioStereo3.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkAudioStereo3 != null) chkAudioStereo3.Checked = value;
             }
         }
 
@@ -31500,6 +31749,19 @@ namespace PowerSDR
             }
         }
 
+        public int VAC2RXGain
+        {
+            get
+            {
+                if (udVAC2GainRX != null) return (int)udVAC2GainRX.Value;
+                else return -99;
+            }
+            set
+            {
+                if (udVAC2GainRX != null) udVAC2GainRX.Value = value;
+            }
+        }
+
         public int VACTXGain
         {
             get
@@ -31510,6 +31772,19 @@ namespace PowerSDR
             set
             {
                 if (udAudioVACGainTX != null) udAudioVACGainTX.Value = value;
+            }
+        }
+
+        public int VAC2TXGain
+        {
+            get
+            {
+                if (udVAC2GainTX != null) return (int)udVAC2GainTX.Value;
+                else return -99;
+            }
+            set
+            {
+                if (udVAC2GainTX != null) udVAC2GainTX.Value = value;
             }
         }
 
@@ -31646,20 +31921,20 @@ namespace PowerSDR
                 if (tbDSPAGCHangThreshold != null)
                 {
                     tbDSPAGCHangThreshold.Value = value;
-                   // tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
+                    // tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
                 }
 
             }
         }
 
-       public int SetAGCRX2HangThreshold
+        public int SetAGCRX2HangThreshold
         {
             set
             {
                 if (tbDSPAGCRX2HangThreshold != null)
                 {
                     //tbDSPAGCRX2HangThreshold.Value = value;
-                   // tbDSPAGCRX2HangThreshold_Scroll(this, EventArgs.Empty);
+                    // tbDSPAGCRX2HangThreshold_Scroll(this, EventArgs.Empty);
                     if (value > tbDSPAGCRX2HangThreshold.Maximum) value = (int)tbDSPAGCRX2HangThreshold.Maximum;
                     if (value < tbDSPAGCRX2HangThreshold.Minimum) value = (int)tbDSPAGCRX2HangThreshold.Minimum;
 
@@ -31682,32 +31957,32 @@ namespace PowerSDR
             }
         }
 
-       public int SetAGCHangThres
-       {
-           set
-           {
-               if (tbDSPAGCHangThreshold != null)
-               {
-                   if (value > tbDSPAGCHangThreshold.Maximum) value = (int)tbDSPAGCHangThreshold.Maximum;
-                   if (value < tbDSPAGCHangThreshold.Minimum) value = (int)tbDSPAGCHangThreshold.Minimum;
+        public int SetAGCHangThres
+        {
+            set
+            {
+                if (tbDSPAGCHangThreshold != null)
+                {
+                    if (value > tbDSPAGCHangThreshold.Maximum) value = (int)tbDSPAGCHangThreshold.Maximum;
+                    if (value < tbDSPAGCHangThreshold.Minimum) value = (int)tbDSPAGCHangThreshold.Minimum;
 
-                   if (tbDSPAGCHangThreshold.Value == 0)
-                   {
-                       tbDSPAGCHangThreshold.Value = value + 1;
-                       tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
-                       tbDSPAGCHangThreshold.Value = tbDSPAGCHangThreshold.Value - 1;
-                       tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
-                   }
-                   else
-                   {
-                       tbDSPAGCHangThreshold.Value = value - 1;
-                       tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
-                       tbDSPAGCHangThreshold.Value = tbDSPAGCHangThreshold.Value + 1;
-                       tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
-                   }
-               }
-           }
-       }
+                    if (tbDSPAGCHangThreshold.Value == 0)
+                    {
+                        tbDSPAGCHangThreshold.Value = value + 1;
+                        tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
+                        tbDSPAGCHangThreshold.Value = tbDSPAGCHangThreshold.Value - 1;
+                        tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
+                    }
+                    else
+                    {
+                        tbDSPAGCHangThreshold.Value = value - 1;
+                        tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
+                        tbDSPAGCHangThreshold.Value = tbDSPAGCHangThreshold.Value + 1;
+                        tbDSPAGCHangThreshold_Scroll(this, EventArgs.Empty);
+                    }
+                }
+            }
+        }
 
         public int TXFilterHigh
         {
@@ -31728,6 +32003,34 @@ namespace PowerSDR
                 if (value > udTXFilterLow.Maximum) value = (int)udTXFilterLow.Maximum;
                 if (value < udTXFilterLow.Minimum) value = (int)udTXFilterLow.Minimum;
                 udTXFilterLow.Value = value;
+            }
+        }
+
+        public int TXFilterHighSave
+        {
+            get { return (int)udTXFilterHighSave.Value; }
+            set
+            {
+                if (console.TXBand != Band.B60M)
+                {
+                    if (value > udTXFilterHighSave.Maximum) value = (int)udTXFilterHighSave.Maximum;
+                    if (value < udTXFilterHighSave.Minimum) value = (int)udTXFilterHighSave.Minimum;
+                    udTXFilterHighSave.Value = value;
+                }
+            }
+        }
+
+        public int TXFilterLowSave
+        {
+            get { return (int)udTXFilterLowSave.Value; }
+            set
+            {
+                if (console.TXBand != Band.B60M)
+                {
+                    if (value > udTXFilterLowSave.Maximum) value = (int)udTXFilterLowSave.Maximum;
+                    if (value < udTXFilterLowSave.Minimum) value = (int)udTXFilterLowSave.Minimum;
+                    udTXFilterLowSave.Value = value;
+                }
             }
         }
 
@@ -31787,12 +32090,18 @@ namespace PowerSDR
             set { chkAudioEnableVAC.Checked = value; }
         }
 
+        public bool VAC2Enable
+        {
+            get { return chkVAC2Enable.Checked; }
+            set { chkVAC2Enable.Checked = value; }
+        }
+
         public bool VACIQEnable
         {
             get { return chkAudioIQtoVAC.Checked; }
             set { chkAudioIQtoVAC.Checked = value; }
         }
-        
+
         public int SoundCardIndex
         {
             get { return comboAudioSoundCard.SelectedIndex; }
@@ -32491,7 +32800,7 @@ namespace PowerSDR
             {
                 if (!console.fwc_init)
                 {
-                   // console.fwc_init = Pal.Init();
+                    // console.fwc_init = Pal.Init();
                     if (console.fwc_init)
                     {
                         FWCEEPROM.Init();
@@ -32945,7 +33254,7 @@ namespace PowerSDR
                 lblRFDelay.Visible = true;
                 grpImpulseTest.Visible = false;
                 chkCWKeyerMonoCable.Visible = false;
-               // chkGeneralPAPresent.Checked = true;
+                // chkGeneralPAPresent.Checked = true;
 
                 if (is_hermes)
                 {
@@ -32953,12 +33262,12 @@ namespace PowerSDR
                     grpOzyType.Visible = true;
                     grpOzyType.Enabled = true;
                     // make sure one of these is checked 
-                  //  if (radOzyUSB.Checked == false && radMetis.Checked == false)
-                  //  {
-                        radMetis.Checked = true;
-                        grpMetisAddr.Visible = true;
-                   // }
-                        radOzyUSB.Enabled = false;
+                    //  if (radOzyUSB.Checked == false && radMetis.Checked == false)
+                    //  {
+                    radMetis.Checked = true;
+                    grpMetisAddr.Visible = true;
+                    // }
+                    radOzyUSB.Enabled = false;
                 }
                 else
                 {
@@ -32977,7 +33286,7 @@ namespace PowerSDR
                 chkGeneralSpurRed.Enabled = false;
                 chkAudioExpert.Checked = false;
                 chkAudioExpert.Visible = false;
-                console.DisableSR();
+                // console.DisableSR();
                 chkGeneralEnableX2.Checked = false;
                 chkGeneralEnableX2.Enabled = true;
 
@@ -33032,7 +33341,7 @@ namespace PowerSDR
                 chkGeneralSpurRed.Checked = true;
                 chkGeneralSpurRed.Enabled = true;
 
-                console.EnableSR();
+                // console.EnableSR();
 
                 chkGeneralEnableX2.Checked = false;
                 chkGeneralEnableX2.Enabled = true;
@@ -33064,19 +33373,25 @@ namespace PowerSDR
 
         public void AddHPSDRPages()
         {
-            
+
             /*if (tcGeneral.TabPages.Contains(tpRX2))
             {
                 tcGeneral.TabPages.Remove(tpRX2);
                 tcGeneral.SelectedIndex = 0;
             }*/
 
+            if (tcAudio.TabPages.Contains(tpVAC2))
+            {
+                tcAudio.TabPages.Remove(tpVAC2);
+                tcAudio.SelectedIndex = 0;
+            }
+
             if (tcGeneral.TabPages.Contains(tpInfo))
             {
                 tcGeneral.TabPages.Remove(tpInfo);
                 tcGeneral.SelectedIndex = 0;
             }
- 
+
             if (!tcGeneral.TabPages.Contains(tpHPSDR))
             {
                 Common.TabControlInsert(tcGeneral, tpHPSDR, 1);
@@ -33130,7 +33445,7 @@ namespace PowerSDR
             }
             console.MaxFreq = (double)udMaxFreq.Value;
 
-          //  panelRX2LevelCal.Visible = console.rx2_preamp_present;
+            //  panelRX2LevelCal.Visible = console.rx2_preamp_present;
         }
 
         public void RemoveHPSDRPages()
@@ -33150,18 +33465,18 @@ namespace PowerSDR
                 tcGeneral.TabPages.Remove(tpAlexControl);
                 tcGeneral.SelectedIndex = 0;
             }
-          /*  if (!tcGeneral.TabPages.Contains(tpRX2))
-            {
-                Common.TabControlInsert(tcGeneral, tpRX2, 4);
-            }
-            else
-            {
-                if (tcGeneral.TabPages.IndexOf(tpRX2) != 4)
-                {
-                    tcGeneral.TabPages.Remove(tpRX2);
-                    Common.TabControlInsert(tcGeneral, tpRX2, 4);
-                }
-            }*/
+            /*  if (!tcGeneral.TabPages.Contains(tpRX2))
+              {
+                  Common.TabControlInsert(tcGeneral, tpRX2, 4);
+              }
+              else
+              {
+                  if (tcGeneral.TabPages.IndexOf(tpRX2) != 4)
+                  {
+                      tcGeneral.TabPages.Remove(tpRX2);
+                      Common.TabControlInsert(tcGeneral, tpRX2, 4);
+                  }
+              }*/
             console.MaxFreq = 65.0;
         }
 
@@ -33231,7 +33546,7 @@ namespace PowerSDR
             tpTransmit.Enabled = !chkGeneralRXOnly.Checked;
             tpPowerAmplifier.Enabled = !chkGeneralRXOnly.Checked;
             grpTestTXIMD.Enabled = !chkGeneralRXOnly.Checked;
-       }
+        }
 
         private void chkGeneralUSBPresent_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -33739,6 +34054,29 @@ namespace PowerSDR
             if (power && val != old_val) console.PowerOn = true;
         }
 
+        private void chkVAC2Enable_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool val = chkVAC2Enable.Checked;
+            bool old_val = console.VAC2Enabled;
+
+            if (val)
+            {
+                if (comboAudioDriver3.SelectedIndex < 0 &&
+                    comboAudioDriver3.Items.Count > 0)
+                    comboAudioDriver3.SelectedIndex = 0;
+            }
+
+            bool power = console.PowerOn;
+            if (power && val != old_val)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            console.VAC2Enabled = val;
+            if (power && val != old_val) console.PowerOn = true;
+        }
+
         private void comboAudioChannels1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboAudioChannels1.SelectedIndex < 0) return;
@@ -33787,6 +34125,32 @@ namespace PowerSDR
                 console.PowerOn = true;
         }
 
+        private void comboAudioDriver3_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioDriver3.SelectedIndex < 0) return;
+
+            int old_driver = Audio.Host3;
+            int new_driver = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Index;
+            bool power = console.PowerOn;
+
+            if (power && chkVAC2Enable.Checked && old_driver != new_driver)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            console.AudioDriverIndex3 = new_driver;
+            Audio.Host3 = new_driver;
+            GetDevices3();
+            if (comboAudioInput3.Items.Count != 0)
+                comboAudioInput3.SelectedIndex = 0;
+            if (comboAudioOutput3.Items.Count != 0)
+                comboAudioOutput3.SelectedIndex = 0;
+
+            if (power && chkVAC2Enable.Checked && old_driver != new_driver)
+                console.PowerOn = true;
+        }
+
         private void comboAudioInput2_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboAudioInput2.SelectedIndex < 0) return;
@@ -33808,6 +34172,27 @@ namespace PowerSDR
                 console.PowerOn = true;
         }
 
+        private void comboAudioInput3_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioInput3.SelectedIndex < 0) return;
+
+            int old_input = Audio.Input3;
+            int new_input = ((PADeviceInfo)comboAudioInput3.SelectedItem).Index;
+            bool power = console.PowerOn;
+
+            if (power && chkVAC2Enable.Checked && old_input != new_input)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            console.AudioInputIndex3 = new_input;
+            Audio.Input3 = new_input;
+
+            if (power && chkVAC2Enable.Checked && old_input != new_input)
+                console.PowerOn = true;
+        }
+
         private void comboAudioOutput2_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboAudioOutput2.SelectedIndex < 0) return;
@@ -33825,6 +34210,26 @@ namespace PowerSDR
             Audio.Output2 = new_output;
 
             if (power && chkAudioEnableVAC.Checked && old_output != new_output)
+                console.PowerOn = true;
+        }
+
+        private void comboAudioOutput3_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioOutput3.SelectedIndex < 0) return;
+
+            int old_output = Audio.Output3;
+            int new_output = ((PADeviceInfo)comboAudioOutput3.SelectedItem).Index;
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked && old_output != new_output)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            console.AudioOutputIndex3 = new_output;
+            Audio.Output3 = new_output;
+
+            if (power && chkVAC2Enable.Checked && old_output != new_output)
                 console.PowerOn = true;
         }
 
@@ -33922,6 +34327,27 @@ namespace PowerSDR
                 console.PowerOn = true;
         }
 
+        private void comboAudioSampleRate3_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioSampleRate3.SelectedIndex < 0) return;
+
+            int old_rate = console.SampleRate3;
+            int new_rate = Int32.Parse(comboAudioSampleRate3.Text);
+            bool poweron = console.PowerOn;
+
+            if (poweron && chkVAC2Enable.Checked && new_rate != old_rate)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            console.SampleRate3 = new_rate;
+            console.VAC2SampleRate = comboAudioSampleRate3.Text;
+
+            if (poweron && chkVAC2Enable.Checked && new_rate != old_rate)
+                console.PowerOn = true;
+        }
+
         private void comboAudioBuffer1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboAudioBuffer1.SelectedIndex < 0) return;
@@ -33975,6 +34401,26 @@ namespace PowerSDR
                 console.PowerOn = true;
         }
 
+        private void comboAudioBuffer3_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioBuffer3.SelectedIndex < 0) return;
+
+            int old_size = console.BlockSize3;
+            int new_size = Int32.Parse(comboAudioBuffer3.Text);
+            bool power = console.PowerOn;
+
+            if (power && chkVAC2Enable.Checked && old_size != new_size)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            console.BlockSize3 = new_size;
+
+            if (power && chkVAC2Enable.Checked && old_size != new_size)
+                console.PowerOn = true;
+        }
+
         private void udAudioLatency1_ValueChanged(object sender, System.EventArgs e)
         {
             bool power = console.PowerOn;
@@ -34004,6 +34450,21 @@ namespace PowerSDR
                 console.PowerOn = true;
         }
 
+        private void udVAC2Latency_ValueChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            Audio.Latency3 = (int)udVAC2Latency.Value;
+
+            if (power && chkVAC2Enable.Checked)
+                console.PowerOn = true;
+        }
+        
         private void udAudioVoltage1_ValueChanged(object sender, System.EventArgs e)
         {
             if (udAudioVoltage1.Focused &&
@@ -34067,11 +34528,28 @@ namespace PowerSDR
                 Thread.Sleep(100);
             }
 
-            console.SecondSoundCardStereo = chkAudio2Stereo.Checked;
+            console.VACSoundCardStereo = chkAudio2Stereo.Checked;
             console.VACStereo = chkAudio2Stereo.Checked;
             chkVACCombine.Enabled = chkAudio2Stereo.Checked;
 
             if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+        }
+
+        private void chkAudioStereo3_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            console.VAC2SoundCardStereo = chkAudio2Stereo.Checked;
+            console.VAC2Stereo = chkAudioStereo3.Checked;
+            chkVAC2Combine.Enabled = chkAudioStereo3.Checked;
+
+            if (power && chkVAC2Enable.Checked)
                 console.PowerOn = true;
         }
 
@@ -34081,15 +34559,32 @@ namespace PowerSDR
             console.VACRXGain = (int)udAudioVACGainRX.Value;
         }
 
+        private void udVAC2GainRX_ValueChanged(object sender, System.EventArgs e)
+        {
+            Audio.VAC2RXScale = Math.Pow(10.0, (int)udVAC2GainRX.Value / 20.0);
+            console.VAC2RXGain = (int)udVAC2GainRX.Value;
+        }
+
         private void udAudioVACGainTX_ValueChanged(object sender, System.EventArgs e)
         {
             Audio.VACPreamp = Math.Pow(10.0, (int)udAudioVACGainTX.Value / 20.0);
             console.VACTXGain = (int)udAudioVACGainTX.Value;
         }
 
+        private void udVAC2GainTX_ValueChanged(object sender, System.EventArgs e)
+        {
+            Audio.VAC2TXScale = Math.Pow(10.0, (int)udVAC2GainTX.Value / 20.0);
+            console.VAC2TXGain = (int)udVAC2GainTX.Value;
+        }
+
         private void chkAudioVACAutoEnable_CheckedChanged(object sender, System.EventArgs e)
         {
             console.VACAutoEnable = chkAudioVACAutoEnable.Checked;
+        }
+
+        private void chkVAC2AutoEnable_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.VAC2AutoEnable = chkVAC2AutoEnable.Checked;
         }
 
         private void udAudioLineIn1_ValueChanged(object sender, System.EventArgs e)
@@ -34141,6 +34636,24 @@ namespace PowerSDR
                 console.PowerOn = true;
         }
 
+        private void chkVAC2LatencyManual_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            udVAC2Latency.Enabled = chkVAC2LatencyManual.Checked;
+
+            if (!chkVAC2LatencyManual.Checked)
+                Audio.Latency3 = 120;
+
+            if (power && chkVAC2Enable.Checked)
+                console.PowerOn = true;
+        }
+
         private void chkAudioMicBoost_CheckedChanged(object sender, System.EventArgs e)
         {
             console.MicBoost = chkAudioMicBoost.Checked;
@@ -34152,8 +34665,8 @@ namespace PowerSDR
             //console.SetMicGain();
         }
 
-    
-    private void btnAudioVoltTest1_Click(object sender, System.EventArgs e)
+
+        private void btnAudioVoltTest1_Click(object sender, System.EventArgs e)
         {
             sound_card = 1;
 
@@ -36025,7 +36538,7 @@ namespace PowerSDR
 
         private void udVOXGain_ValueChanged(object sender, System.EventArgs e)
         {
-            Audio.VOXGain = (float)udVOXGain.Value /10000.0f;
+            Audio.VOXGain = (float)udVOXGain.Value / 10000.0f;
         }
 
         private void udTXVOXHangTime_ValueChanged(object sender, System.EventArgs e)
@@ -36326,7 +36839,7 @@ namespace PowerSDR
             console.InfoButtonsColor = clrbtnInfoButtonsColor.Color;
         }
 
-       private void clrbtnPeakBackground_Changed(object sender, System.EventArgs e)
+        private void clrbtnPeakBackground_Changed(object sender, System.EventArgs e)
         {
             console.PeakBackgroundColor = clrbtnPeakBackground.Color;
         }
@@ -37297,7 +37810,7 @@ namespace PowerSDR
             }
 
             UpdateSigGenScaleVisible();
-			UpdateSigGenPulseVisible();
+            UpdateSigGenPulseVisible();
         }
 
         private void radSigGenRXInput_CheckedChanged(object sender, System.EventArgs e)
@@ -37334,20 +37847,20 @@ namespace PowerSDR
             {
                 case "Tone": b = true; break;
                 case "Pulse": b = true; break;
-           }
+            }
 
             switch (cmboSigGenTXMode.Text)
             {
                 case "Tone": b = true; break;
                 case "Pulse": b = true; break;
-           }
+            }
 
             lblTestGenScale.Visible = b;
             udTestGenScale.Visible = b;
             Audio.SineFreq1 = (double)udTestFreq.Value;
         }
 
-       private void UpdateSigGenPulseVisible()
+        private void UpdateSigGenPulseVisible()
         {
             bool b = false;
             switch (cmboSigGenRXMode.Text)
@@ -37367,7 +37880,7 @@ namespace PowerSDR
         }
 
 
-		
+
         private void cmboSigGenTXMode_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (cmboSigGenTXMode.SelectedIndex < 0) return;
@@ -37546,13 +38059,13 @@ namespace PowerSDR
             console.GetState();
             if (console.EQForm != null) Common.RestoreForm(console.EQForm, "EQForm", false);
             if (console.XVTRForm != null) Common.RestoreForm(console.XVTRForm, "XVTR", false);
-           // if (console.ProdTestForm != null) Common.RestoreForm(console.ProdTestForm, "ProdTest", false);
+            // if (console.ProdTestForm != null) Common.RestoreForm(console.ProdTestForm, "ProdTest", false);
 
             SaveOptions();					// save all database values
             console.SaveState();
             if (console.EQForm != null) Common.SaveForm(console.EQForm, "EQForm");
             if (console.XVTRForm != null) Common.SaveForm(console.XVTRForm, "XVTR");
-           // if (console.ProdTestForm != null) Common.SaveForm(console.ProdTestForm, "ProdTest");
+            // if (console.ProdTestForm != null) Common.SaveForm(console.ProdTestForm, "ProdTest");
 
             udTransmitTunePower_ValueChanged(this, EventArgs.Empty);
             //console.ResetMemForm();
@@ -38253,7 +38766,7 @@ namespace PowerSDR
         private void clrbtnMeterEdgeBackground_Changed(object sender, System.EventArgs e)
         {
             console.EdgeMeterBackgroundColor = Color.FromArgb(tbMeterEdgeBackgroundAlpha.Value, clrbtnMeterEdgeBackground.Color);
-           // console.EdgeMeterBackgroundColor = clrbtnMeterEdgeBackground.Color;
+            // console.EdgeMeterBackgroundColor = clrbtnMeterEdgeBackground.Color;
         }
 
         private void clrbtnEdgeIndicator_Changed(object sender, System.EventArgs e)
@@ -38779,13 +39292,35 @@ namespace PowerSDR
             if (power && chkAudioEnableVAC.Checked)
                 console.PowerOn = true;
 
-            //chkAudioCorrectIQ.Enabled = chkAudioIQtoVAC.Checked;
+            chkAudioCorrectIQ.Enabled = chkAudioIQtoVAC.Checked;
             chkAudioRX2toVAC.Enabled = chkAudioIQtoVAC.Checked;
         }
- 
+
+        private void chkVAC2DirectIQ_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            Audio.VAC2OutputIQ = chkVAC2DirectIQ.Checked;
+
+            if (power && chkVAC2Enable.Checked)
+                console.PowerOn = true;
+
+            chkVAC2DirectIQCal.Enabled = chkVAC2DirectIQ.Checked;
+        }
+
         private void chkAudioCorrectIQ_CheckChanged(object sender, System.EventArgs e)
         {
             Audio.VACCorrectIQ = chkAudioCorrectIQ.Checked;
+        }
+
+        private void chkVAC2IQCal_CheckChanged(object sender, System.EventArgs e)
+        {
+            Audio.VAC2CorrectIQ = chkVAC2DirectIQCal.Checked;
         }
 
         private void chkRX2AutoMuteRX1OnVFOBTX_CheckedChanged(object sender, System.EventArgs e)
@@ -38951,6 +39486,11 @@ namespace PowerSDR
             Audio.VACOutputRX2 = chkAudioRX2toVAC.Checked;
         }
 
+        private void chkVAC2UseRX2_CheckedChanged(object sender, EventArgs e)
+        {
+            console.VAC2RX2 = chkVAC2UseRX2.Checked;
+        }
+
         private void chkGenOptionsShowATUPopup_CheckedChanged(object sender, System.EventArgs e)
         {
             if (console.flex3000ATUForm != null && !console.flex3000ATUForm.IsDisposed)
@@ -39018,10 +39558,10 @@ namespace PowerSDR
         {
             DB.ds.WriteXml(saveFileDialog1.FileName, XmlWriteMode.WriteSchema);
         }
-		
+
         private void udPulseDuty_ValueChanged(object sender, EventArgs e)
         {
-            Audio.PulseDuty = (double)udPulseDuty.Value/100.0;
+            Audio.PulseDuty = (double)udPulseDuty.Value / 100.0;
         }
 
         private void udPulsePeriod_ValueChanged(object sender, EventArgs e)
@@ -39044,7 +39584,7 @@ namespace PowerSDR
                 rad12288MHzPenny.Enabled = false;
                 grpPennyExtCtrl.Enabled = false;
                 chkPennyExtCtrl.Checked = false;
-                chkPennyExtCtrl.Enabled = false;                
+                chkPennyExtCtrl.Enabled = false;
                 JanusAudio.EnableHermesPower(0);
             }
             else
@@ -39065,15 +39605,15 @@ namespace PowerSDR
                 //console.PennyLanePresent = true;
                 chkGeneralRXOnly.Enabled = true;
                 chkGeneralRXOnly.Enabled = false;
-                
+
                 JanusAudio.EnableHermesPower(1);
             }
             console.PennyLanePresent = chkPennyLane.Checked;
             JanusAudio.SetC1Bits(bits);
             checkHPSDRDefaults(sender, e);
             JanusAudio.fwVersionsChecked = false;
-       }
- 
+        }
+
         private void chkPennyPresent_CheckedChanged(object sender, System.EventArgs e)
         {
             int bits = JanusAudio.GetC1Bits();
@@ -39089,7 +39629,7 @@ namespace PowerSDR
                 rad12288MHzPenny.Enabled = false;
                 grpPennyExtCtrl.Enabled = false;
                 chkPennyExtCtrl.Checked = false;
-                chkPennyExtCtrl.Enabled = false;               				
+                chkPennyExtCtrl.Enabled = false;
             }
             else
             {
@@ -39106,9 +39646,9 @@ namespace PowerSDR
                     grpPennyExtCtrl.Enabled = true;
                 }
                 //console.PennyPresent = true;
-               // chkGeneralRXOnly.Enabled = true;  
+                // chkGeneralRXOnly.Enabled = true;  
                 console.PennyLanePresent = false;
-                
+
                 JanusAudio.EnableHermesPower(0);
             }
             console.PennyPresent = chkPennyPresent.Checked;
@@ -39152,8 +39692,8 @@ namespace PowerSDR
 
             if (!chkPennyPresent.Checked && !chkPennyLane.Checked)
             {
-                 chkGeneralRXOnly.Checked = true;
-                 chkGeneralRXOnly.Enabled = false;
+                chkGeneralRXOnly.Checked = true;
+                chkGeneralRXOnly.Enabled = false;
             }
             else
             {
@@ -39186,7 +39726,7 @@ namespace PowerSDR
             checkHPSDRDefaults(sender, e);
             console.MercuryPresent = chkMercuryPresent.Checked;
             JanusAudio.fwVersionsChecked = false;
-       }
+        }
 
         private void chkAlexPresent_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -39198,14 +39738,16 @@ namespace PowerSDR
                 {
                     grpAlexAntCtrl.Enabled = false;
                 }
+                console.chkSR.Enabled = true;
             }
             else
             {
                 chkAlexAntCtrl.Checked = false;
                 chkAlexAntCtrl.Enabled = false;
-               // grpAlexAntCtrl.Enabled = false;
+                // grpAlexAntCtrl.Enabled = false;
                 radAlexAutoCntl.Checked = true;
                 radAlexManualCntl.Enabled = false;
+                console.chkSR.Enabled = false;
             }
             console.AlexPresent = chkAlexPresent.Checked;
             console.SetComboPreampForHPSDR();
@@ -40089,8 +40631,8 @@ namespace PowerSDR
 
             if (sender == null) return;
             if (sender.GetType() != typeof(CheckBoxTS)) return;
-          //  CheckBoxTS chkBxTS = (CheckBoxTS)sender;
-          //  if (!chkBxTS.Checked) return;
+            //  CheckBoxTS chkBxTS = (CheckBoxTS)sender;
+            //  if (!chkBxTS.Checked) return;
 
             int idx = (int)band - (int)Band.B160M;
 
@@ -40761,6 +41303,7 @@ namespace PowerSDR
                     break;
             }
             console.CurrentRegion = CurrentRegion;
+            console.Init60mChannels();
         }
 
         private void radMicIn_CheckedChanged(object sender, EventArgs e)
@@ -40805,7 +41348,7 @@ namespace PowerSDR
                 grpMetisAddr.Visible = false;
                 radMicIn_CheckedChanged(this, EventArgs.Empty);
                 radLineIn_CheckedChanged(this, EventArgs.Empty);
- 
+
             }
             else
             {
@@ -40822,12 +41365,12 @@ namespace PowerSDR
                 radOzyUSB.Checked = false;
                 console.HPSDRisMetis = true;
                 grpMetisAddr.Visible = true;
-                radMicIn_CheckedChanged(this, EventArgs.Empty); 
+                radMicIn_CheckedChanged(this, EventArgs.Empty);
                 radLineIn_CheckedChanged(this, EventArgs.Empty);
-              //  lblLineInBoost.Visible = false;
-              //  udLineInBoost.Visible = false;
-              //  chk20dbMicBoost.Visible = true;
- 
+                //  lblLineInBoost.Visible = false;
+                //  udLineInBoost.Visible = false;
+                //  chk20dbMicBoost.Visible = true;
+
             }
             else
             {
@@ -40867,7 +41410,7 @@ namespace PowerSDR
         private void chkPTTOutDelay_CheckedChanged(object sender, EventArgs e)
         {
             udGenPTTOutDelay.Enabled = chkPTTOutDelay.Checked;
-            console.Hdw.PTTODelayControl = chkPTTOutDelay.Checked;           
+            console.Hdw.PTTODelayControl = chkPTTOutDelay.Checked;
         }
 
         private void udMoxDelay_ValueChanged(object sender, EventArgs e)
@@ -40992,12 +41535,12 @@ namespace PowerSDR
             toolTip1.SetToolTip(tbTXTextAlpha, tbTXTextAlpha.Value.ToString());
         }
 
-       /* private void chkTXCal_CheckedChanged(object sender, EventArgs e)
-        {
-            udTXDisplayCalOffset.Enabled = chkTXCal.Checked;
-            Display.TXDisplayCalControl = chkTXCal.Checked;
-            //udTXDisplayCalOffset_ValueChanged(this, EventArgs.Empty);
-        }*/
+        /* private void chkTXCal_CheckedChanged(object sender, EventArgs e)
+         {
+             udTXDisplayCalOffset.Enabled = chkTXCal.Checked;
+             Display.TXDisplayCalControl = chkTXCal.Checked;
+             //udTXDisplayCalOffset_ValueChanged(this, EventArgs.Empty);
+         }*/
 
         private void chkGridControl_CheckedChanged(object sender, EventArgs e)
         {
@@ -41057,7 +41600,7 @@ namespace PowerSDR
 
             Penny.getPenny().setBandBitMask(Band.VHF1, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
-         }
+        }
 
         private void chkPenOCrcvVHF2_CheckedChanged(object sender, EventArgs e)
         {
@@ -41072,7 +41615,7 @@ namespace PowerSDR
 
             Penny.getPenny().setBandBitMask(Band.VHF2, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
-         }
+        }
 
         private void chkPenOCrcvVHF3_CheckedChanged(object sender, EventArgs e)
         {
@@ -41087,7 +41630,7 @@ namespace PowerSDR
 
             Penny.getPenny().setBandBitMask(Band.VHF3, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
-         }
+        }
 
         private void chkPenOCrcvVHF4_CheckedChanged(object sender, EventArgs e)
         {
@@ -41117,7 +41660,7 @@ namespace PowerSDR
 
             Penny.getPenny().setBandBitMask(Band.VHF5, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
-         }
+        }
 
         private void chkPenOCrcvVHF6_CheckedChanged(object sender, EventArgs e)
         {
@@ -41132,7 +41675,7 @@ namespace PowerSDR
 
             Penny.getPenny().setBandBitMask(Band.VHF6, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
-         }
+        }
 
         private void chkPenOCrcvVHF7_CheckedChanged(object sender, EventArgs e)
         {
@@ -41147,7 +41690,7 @@ namespace PowerSDR
 
             Penny.getPenny().setBandBitMask(Band.VHF7, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
-         }
+        }
 
         private void chkPenOCrcvVHF8_CheckedChanged(object sender, EventArgs e)
         {
@@ -41393,24 +41936,26 @@ namespace PowerSDR
         {
             int val = 0;
             if (radAlexAutoCntl.Checked)
-            { 
+            {
                 val = 0;
                 JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
                 radBPHPFled.Checked = true;
+                console.chkSR.Checked = true;
             }
             if (radAlexManualCntl.Checked)
             {
-               // if (alex_fw_good)
-               // {
-                    val = 1;
-                    console.AlexPresent = chkAlexPresent.Checked;
-               // }
-               // else
-               // {
-               //     val = 0;
-               //     radAlexManualCntl.Checked = false;
+                // if (alex_fw_good)
+                // {
+                val = 1;
+                console.AlexPresent = chkAlexPresent.Checked;
+                console.chkSR.Checked = false;
+                // }
+                // else
+                // {
+                //     val = 0;
+                //     radAlexManualCntl.Checked = false;
                 //    radAlexManualCntl.Enabled = false;
-               // }
+                // }
             }
             JanusAudio.SetAlexManEnable(val);
         }
@@ -41480,36 +42025,63 @@ namespace PowerSDR
             Display.RX2HangSpectrumLine = chkRX2HangSpectrumLine.Checked;
         }
 
-     }
+    }
 
-	#region PADeviceInfo Helper Class
+    #region PADeviceInfo Helper Class
 
-	public class PADeviceInfo
-	{
-		private string 	_Name;
-		private int		_Index;
+    public class PADeviceInfo
+    {
+        private string _Name;
+        private int _Index;
 
-		public string Name
-		{
-			get { return _Name;	}
-		}
+        public string Name
+        {
+            get { return _Name; }
+        }
 
-		public int Index
-		{
-			get { return _Index; }
-		}
+        public int Index
+        {
+            get { return _Index; }
+        }
 
-		public PADeviceInfo(String argName, int argIndex)
-		{
-			_Name = argName;
-			_Index = argIndex;
-		}
+        public PADeviceInfo(String argName, int argIndex)
+        {
+            _Name = argName;
+            _Index = argIndex;
+        }
 
-		public override string ToString()
-		{
-			return _Name;
-		}
-	}
+        public override string ToString()
+        {
+            return _Name;
+        }
+    }
 
-	#endregion
+    #endregion
+
+    #region 60m Channels Class
+
+    public class Channel60m
+    {
+        private double freq;
+        public Channel60m(double f)
+            : base()
+        {
+            freq = f;
+        }
+
+        public double Freq
+        {
+            get
+            {
+                return freq;
+            }
+            set
+            {
+                freq = value;
+            }
+        }
+    }
+
+    #endregion
+
 }
