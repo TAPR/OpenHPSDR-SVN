@@ -1862,6 +1862,8 @@ namespace PowerSDR
         private CheckBoxTS chkAGCGainSpectrumLine;
         private CheckBoxTS chkAGCDisplayHangLine;
         private CheckBoxTS chkAGCHangSpectrumLine;
+        private NumericUpDownTS udTXFilterLowSave;
+        private NumericUpDownTS udTXFilterHighSave;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -2037,6 +2039,7 @@ namespace PowerSDR
             tbTXTextAlpha_Scroll(this, e);
             tbMeterEdgeBackgroundAlpha_Scroll(this, e);
             checkHPSDRDefaults(this, e);
+            chkAlexPresent_CheckedChanged(this, e);
 
             for (int i = 0; i < 2; i++)
                 for (int j = 0; j < 2; j++)
@@ -3882,6 +3885,8 @@ namespace PowerSDR
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
+            this.udTXFilterLowSave = new System.Windows.Forms.NumericUpDownTS();
+            this.udTXFilterHighSave = new System.Windows.Forms.NumericUpDownTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -4311,6 +4316,8 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS35)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS36)).BeginInit();
             this.panelTS4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterHighSave)).BeginInit();
             this.SuspendLayout();
             // 
             // tpAlexAntCtrl
@@ -16339,6 +16346,7 @@ namespace PowerSDR
             // 
             // udAudioLatency2
             // 
+            this.udAudioLatency2.Enabled = false;
             this.udAudioLatency2.Increment = new decimal(new int[] {
             1,
             0,
@@ -19803,6 +19811,8 @@ namespace PowerSDR
             // 
             // tpTransmit
             // 
+            this.tpTransmit.Controls.Add(this.udTXFilterLowSave);
+            this.tpTransmit.Controls.Add(this.udTXFilterHighSave);
             this.tpTransmit.Controls.Add(this.grpBoxMic);
             this.tpTransmit.Controls.Add(this.chkTXExpert);
             this.tpTransmit.Controls.Add(this.grpTXProfileDef);
@@ -29225,6 +29235,64 @@ namespace PowerSDR
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
+            // udTXFilterLowSave
+            // 
+            this.udTXFilterLowSave.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udTXFilterLowSave.Location = new System.Drawing.Point(341, 112);
+            this.udTXFilterLowSave.Maximum = new decimal(new int[] {
+            20000,
+            0,
+            0,
+            0});
+            this.udTXFilterLowSave.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udTXFilterLowSave.Name = "udTXFilterLowSave";
+            this.udTXFilterLowSave.Size = new System.Drawing.Size(56, 20);
+            this.udTXFilterLowSave.TabIndex = 62;
+            this.toolTip1.SetToolTip(this.udTXFilterLowSave, "Saved Low Frequency TX Filter Cutoff");
+            this.udTXFilterLowSave.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.udTXFilterLowSave.Visible = false;
+            // 
+            // udTXFilterHighSave
+            // 
+            this.udTXFilterHighSave.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udTXFilterHighSave.Location = new System.Drawing.Point(341, 85);
+            this.udTXFilterHighSave.Maximum = new decimal(new int[] {
+            20000,
+            0,
+            0,
+            0});
+            this.udTXFilterHighSave.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udTXFilterHighSave.Name = "udTXFilterHighSave";
+            this.udTXFilterHighSave.Size = new System.Drawing.Size(56, 20);
+            this.udTXFilterHighSave.TabIndex = 61;
+            this.toolTip1.SetToolTip(this.udTXFilterHighSave, "Saved High Frequency TX Filter Cutoff");
+            this.udTXFilterHighSave.Value = new decimal(new int[] {
+            3100,
+            0,
+            0,
+            0});
+            this.udTXFilterHighSave.Visible = false;
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -29687,6 +29755,8 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS36)).EndInit();
             this.panelTS4.ResumeLayout(false);
             this.panelTS4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterHighSave)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -29951,10 +30021,10 @@ namespace PowerSDR
             }
 
             if (skin == "")
-                comboAppSkin.Text = "OpenHPSDR-Gray"; //"Default";
+                comboAppSkin.Text = "Default";
             else if (comboAppSkin.Items.Contains(skin))
                 comboAppSkin.Text = skin;
-            else comboAppSkin.Text = "OpenHPSDR-Gray"; //"Default";
+            else comboAppSkin.Text = "Default";
         }
 
         private void InitWindowTypes()
@@ -31165,6 +31235,34 @@ namespace PowerSDR
             }
         }
 
+        public int TXFilterHighSave
+        {
+            get { return (int)udTXFilterHighSave.Value; }
+            set
+            {
+                if (console.TXBand != Band.B60M)
+                {
+                    if (value > udTXFilterHighSave.Maximum) value = (int)udTXFilterHighSave.Maximum;
+                    if (value < udTXFilterHighSave.Minimum) value = (int)udTXFilterHighSave.Minimum;
+                    udTXFilterHighSave.Value = value;
+                }
+            }
+        }
+
+        public int TXFilterLowSave
+        {
+            get { return (int)udTXFilterLowSave.Value; }
+            set
+            {
+                if (console.TXBand != Band.B60M)
+                {
+                    if (value > udTXFilterLowSave.Maximum) value = (int)udTXFilterLowSave.Maximum;
+                    if (value < udTXFilterLowSave.Minimum) value = (int)udTXFilterLowSave.Minimum;
+                    udTXFilterLowSave.Value = value;
+                }
+            }
+        }
+        
         public bool Polyphase
         {
             get { return chkSpectrumPolyphase.Checked; }
@@ -32405,7 +32503,7 @@ namespace PowerSDR
                 chkGeneralSpurRed.Enabled = false;
                 chkAudioExpert.Checked = false;
                 chkAudioExpert.Visible = false;
-                console.DisableSR();
+               // console.DisableSR();
                 chkGeneralEnableX2.Checked = false;
                 chkGeneralEnableX2.Enabled = true;
 
@@ -32460,7 +32558,7 @@ namespace PowerSDR
                 chkGeneralSpurRed.Checked = true;
                 chkGeneralSpurRed.Enabled = true;
 
-                console.EnableSR();
+               // console.EnableSR();
 
                 chkGeneralEnableX2.Checked = false;
                 chkGeneralEnableX2.Enabled = true;
@@ -38539,6 +38637,7 @@ namespace PowerSDR
                 {
                     grpAlexAntCtrl.Enabled = false;
                 }
+                console.chkSR.Enabled = true;
             }
             else
             {
@@ -38547,6 +38646,7 @@ namespace PowerSDR
                // grpAlexAntCtrl.Enabled = false;
                 radAlexAutoCntl.Checked = true;
                 radAlexManualCntl.Enabled = false;
+                console.chkSR.Enabled = false;
             }
             console.AlexPresent = chkAlexPresent.Checked;
             console.SetComboPreampForHPSDR();
@@ -40084,13 +40184,14 @@ namespace PowerSDR
                     break;
                 case "United States":
                     CurrentRegion = FRSRegion.US;
-                    console.Extended = false;
+                    Display.Init();
                     break;
                 case "Extended":
                     console.Extended = true;
                     break;
             }
             console.CurrentRegion = CurrentRegion;
+            console.Init60mChannels();
         }
 
         private void radMicIn_CheckedChanged(object sender, EventArgs e)
@@ -40135,7 +40236,6 @@ namespace PowerSDR
                 grpMetisAddr.Visible = false;
                 radMicIn_CheckedChanged(this, EventArgs.Empty);
                 radLineIn_CheckedChanged(this, EventArgs.Empty);
- 
             }
             else
             {
@@ -40727,6 +40827,7 @@ namespace PowerSDR
                 val = 0;
                 JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
                 radBPHPFled.Checked = true;
+                console.chkSR.Checked = true;
             }
             if (radAlexManualCntl.Checked)
             {
@@ -40734,6 +40835,7 @@ namespace PowerSDR
                // {
                     val = 1;
                     console.AlexPresent = chkAlexPresent.Checked;
+                    console.chkSR.Checked = false;
                // }
                // else
                // {
@@ -40833,4 +40935,30 @@ namespace PowerSDR
 	}
 
 	#endregion
+
+    #region 60m Channels Class
+
+    public class Channel60m
+    {
+        private double freq;
+        public Channel60m(double f)
+            : base()
+        {
+            freq = f;
+        }
+
+        public double Freq
+        {
+            get
+            {
+                return freq;
+            }
+            set
+            {
+                freq = value;
+            }
+        }
+    }
+
+    #endregion
 }

@@ -123,10 +123,6 @@
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files\Microsoft.NET\Primary Interop Assemblies\adodb.dll</HintPath>
       <AssemblyFolderKey>hklm\primary interop assemblies</AssemblyFolderKey>
     </Reference>
-    <Reference Include="HPSDR_USB_LIB_V1.1, Version=1.0.3728.21593, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\HPSDR_USB_LIB_V1.1\obj\Release\HPSDR_USB_LIB_V1.1.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
