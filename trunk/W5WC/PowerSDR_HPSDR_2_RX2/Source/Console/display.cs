@@ -37,10 +37,6 @@ namespace PowerSDR
     using System.Drawing.Imaging;
     using System.Diagnostics;
     using System.Windows.Forms;
-    // using Flex.TNF;
-
-    //using Microsoft.DirectX;
-    //using Microsoft.DirectX.Direct3D;
 
     class Display
     {
@@ -112,7 +108,7 @@ namespace PowerSDR
         private static Color notch_perm_on_color = Color.DarkGreen;
         private static Color notch_perm_highlight_color = Color.Chartreuse;
         private static Color notch_off_color = Color.Gray;
-
+        
         private static double notch_zoom_start_freq;
         public static double NotchZoomStartFreq
         {
@@ -1317,10 +1313,6 @@ namespace PowerSDR
                 new_display_data_bottom[i] = -200.0f;
                 current_display_data_bottom[i] = -200.0f;
             }
-
-            /*if(!DirectXInit()) console.SetupForm.DirectX = false;
-            if(current_display_engine != DisplayEngine.DIRECT_X)
-                DirectXRelease();*/
         }
 
         public static void DrawBackground()
@@ -1519,7 +1511,6 @@ namespace PowerSDR
                 }
             }
         }
-
         #endregion
 
         #region GDI+

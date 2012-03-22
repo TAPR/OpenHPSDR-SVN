@@ -598,7 +598,7 @@
     <value>panelOptions</value>
   </data>
   <data name="&gt;&gt;chkFWCATU.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="comboTuneMode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -640,7 +640,7 @@
     <value>panelOptions</value>
   </data>
   <data name="&gt;&gt;comboTuneMode.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="chkX2TR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -679,7 +679,7 @@
     <value>panelOptions</value>
   </data>
   <data name="&gt;&gt;chkX2TR.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="chkFWCATUBypass.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -718,7 +718,7 @@
     <value>panelOptions</value>
   </data>
   <data name="&gt;&gt;chkFWCATUBypass.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="chkSR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -742,13 +742,13 @@
     <value>35</value>
   </data>
   <data name="chkSR.Text" xml:space="preserve">
-    <value>SR</value>
+    <value>ALEX</value>
   </data>
   <data name="chkSR.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
   <data name="chkSR.ToolTip" xml:space="preserve">
-    <value>Spur Reduction</value>
+    <value>Alex Auto/Manual Control</value>
   </data>
   <data name="&gt;&gt;chkSR.Name" xml:space="preserve">
     <value>chkSR</value>
@@ -760,7 +760,7 @@
     <value>panelOptions</value>
   </data>
   <data name="&gt;&gt;chkSR.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="chkPower.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3223,7 +3223,7 @@
     <value>13</value>
   </data>
   <data name="comboDigTXProfile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 124</value>
+    <value>83, 126</value>
   </data>
   <data name="comboDigTXProfile.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 21</value>
@@ -3244,7 +3244,7 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;comboDigTXProfile.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="chkVACEnabled.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3256,7 +3256,7 @@
     <value>Off</value>
   </data>
   <data name="chkVACEnabled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 20</value>
+    <value>146, 23</value>
   </data>
   <data name="chkVACEnabled.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -3283,7 +3283,7 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;chkVACEnabled.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="chkVACStereo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -3988,7 +3988,7 @@
     <value>grpVFOA</value>
   </data>
   <data name="&gt;&gt;chkVFOATX.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="txtWheelTune.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4057,7 +4057,7 @@
     <value>grpVFOB</value>
   </data>
   <data name="&gt;&gt;chkVFOBTX.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="comboMeterTXMode.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -4582,7 +4582,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkRX2SR.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 78</value>
+    <value>2, 78</value>
   </data>
   <data name="chkRX2SR.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -5929,13 +5929,13 @@
     <value>Off</value>
   </data>
   <data name="ptbVACRXGain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 38</value>
+    <value>15, 26</value>
   </data>
   <data name="ptbVACRXGain.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="ptbVACRXGain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 24</value>
+    <value>113, 24</value>
   </data>
   <data name="ptbVACRXGain.TabIndex" type="System.Int32, mscorlib">
     <value>64</value>
@@ -5953,7 +5953,7 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;ptbVACRXGain.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="ptbVACTXGain.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -5962,13 +5962,13 @@
     <value>Off</value>
   </data>
   <data name="ptbVACTXGain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 86</value>
+    <value>15, 89</value>
   </data>
   <data name="ptbVACTXGain.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="ptbVACTXGain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 24</value>
+    <value>113, 24</value>
   </data>
   <data name="ptbVACTXGain.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
@@ -5986,7 +5986,7 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;ptbVACTXGain.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="radDisplayZoom05.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -7140,6 +7140,48 @@
   <data name="&gt;&gt;chkRX2Mute.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="chkVAC2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="chkVAC2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="chkVAC2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="chkVAC2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 47</value>
+  </data>
+  <data name="chkVAC2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="chkVAC2.TabIndex" type="System.Int32, mscorlib">
+    <value>145</value>
+  </data>
+  <data name="chkVAC2.Text" xml:space="preserve">
+    <value>VAC2</value>
+  </data>
+  <data name="chkVAC2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="chkVAC2.ToolTip" xml:space="preserve">
+    <value>Enable VAC 2</value>
+  </data>
+  <data name="chkVAC2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;chkVAC2.Name" xml:space="preserve">
+    <value>chkVAC2</value>
+  </data>
+  <data name="&gt;&gt;chkVAC2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkVAC2.Parent" xml:space="preserve">
+    <value>panelModeSpecificDigital</value>
+  </data>
+  <data name="&gt;&gt;chkVAC2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
@@ -8017,13 +8059,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelRX2Power.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>39</value>
   </data>
   <data name="radRX1Show.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
   <data name="radRX1Show.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 54</value>
+    <value>142, 80</value>
   </data>
   <data name="radRX1Show.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 17</value>
@@ -8047,7 +8089,7 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;radRX1Show.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="radRX2Show.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -8056,7 +8098,7 @@
     <value>Off</value>
   </data>
   <data name="radRX2Show.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 89</value>
+    <value>142, 100</value>
   </data>
   <data name="radRX2Show.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 17</value>
@@ -8080,7 +8122,7 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;radRX2Show.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="ptbRX2Squelch.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -9067,7 +9109,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificCW.ZOrder" xml:space="preserve">
-    <value>43</value>
+    <value>41</value>
   </data>
   <data name="panelRX2Filter.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10690,7 +10732,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificPhone.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>42</value>
   </data>
   <data name="panelModeSpecificDigital.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10698,14 +10740,68 @@
   <data name="panelModeSpecificDigital.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="lblVACTXIndicator.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="lblVACTXIndicator.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 72</value>
+  </data>
+  <data name="lblVACTXIndicator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 16</value>
+  </data>
+  <data name="lblVACTXIndicator.TabIndex" type="System.Int32, mscorlib">
+    <value>144</value>
+  </data>
+  <data name="lblVACTXIndicator.Text" xml:space="preserve">
+    <value>VAC1</value>
+  </data>
+  <data name="&gt;&gt;lblVACTXIndicator.Name" xml:space="preserve">
+    <value>lblVACTXIndicator</value>
+  </data>
+  <data name="&gt;&gt;lblVACTXIndicator.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblVACTXIndicator.Parent" xml:space="preserve">
+    <value>panelModeSpecificDigital</value>
+  </data>
+  <data name="&gt;&gt;lblVACTXIndicator.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblVACRXIndicator.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="lblVACRXIndicator.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 10</value>
+  </data>
+  <data name="lblVACRXIndicator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 16</value>
+  </data>
+  <data name="lblVACRXIndicator.TabIndex" type="System.Int32, mscorlib">
+    <value>143</value>
+  </data>
+  <data name="lblVACRXIndicator.Text" xml:space="preserve">
+    <value>VAC1</value>
+  </data>
+  <data name="&gt;&gt;lblVACRXIndicator.Name" xml:space="preserve">
+    <value>lblVACRXIndicator</value>
+  </data>
+  <data name="&gt;&gt;lblVACRXIndicator.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblVACRXIndicator.Parent" xml:space="preserve">
+    <value>panelModeSpecificDigital</value>
+  </data>
+  <data name="&gt;&gt;lblVACRXIndicator.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="lblDigTXProfile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
   <data name="lblDigTXProfile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 124</value>
+    <value>12, 124</value>
   </data>
   <data name="lblDigTXProfile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 16</value>
+    <value>70, 22</value>
   </data>
   <data name="lblDigTXProfile.TabIndex" type="System.Int32, mscorlib">
     <value>80</value>
@@ -10714,7 +10810,7 @@
     <value>TX Profile:</value>
   </data>
   <data name="lblDigTXProfile.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;lblDigTXProfile.Name" xml:space="preserve">
     <value>lblDigTXProfile</value>
@@ -10726,16 +10822,16 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;lblDigTXProfile.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="lblRXGain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
   <data name="lblRXGain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 20</value>
+    <value>49, 10</value>
   </data>
   <data name="lblRXGain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 16</value>
+    <value>107, 16</value>
   </data>
   <data name="lblRXGain.TabIndex" type="System.Int32, mscorlib">
     <value>72</value>
@@ -10753,10 +10849,10 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;lblRXGain.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="grpVACStereo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 76</value>
+    <value>224, 76</value>
   </data>
   <data name="grpVACStereo.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 76</value>
@@ -10777,16 +10873,16 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;grpVACStereo.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="lblTXGain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
   <data name="lblTXGain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 68</value>
+    <value>49, 72</value>
   </data>
   <data name="lblTXGain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 16</value>
+    <value>70, 16</value>
   </data>
   <data name="lblTXGain.TabIndex" type="System.Int32, mscorlib">
     <value>74</value>
@@ -10804,10 +10900,10 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;lblTXGain.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="grpDIGSampleRate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 12</value>
+    <value>225, 11</value>
   </data>
   <data name="grpDIGSampleRate.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 56</value>
@@ -10828,7 +10924,7 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;grpDIGSampleRate.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="panelModeSpecificDigital.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -10852,7 +10948,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificDigital.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>40</value>
   </data>
   <data name="panelDisplay.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -11280,45 +11376,6 @@
   <data name="&gt;&gt;lblRX1MuteVFOA.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblModeLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblModeLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 6.75pt, style=Bold</value>
-  </data>
-  <data name="lblModeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="lblModeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 20</value>
-  </data>
-  <data name="lblModeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 11</value>
-  </data>
-  <data name="lblModeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>122</value>
-  </data>
-  <data name="lblModeLabel.Text" xml:space="preserve">
-    <value>MODE</value>
-  </data>
-  <data name="lblModeLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="lblModeLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;lblModeLabel.Name" xml:space="preserve">
-    <value>lblModeLabel</value>
-  </data>
-  <data name="&gt;&gt;lblModeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblModeLabel.Parent" xml:space="preserve">
-    <value>grpVFOA</value>
-  </data>
-  <data name="&gt;&gt;lblModeLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="lblFilterLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -11356,58 +11413,52 @@
     <value>grpVFOA</value>
   </data>
   <data name="&gt;&gt;lblFilterLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
-  <data name="panelVFOASubHover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 80</value>
+  <data name="lblModeLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="panelVFOASubHover.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 1</value>
+  <data name="lblModeLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 6.75pt, style=Bold</value>
   </data>
-  <data name="panelVFOASubHover.TabIndex" type="System.Int32, mscorlib">
-    <value>118</value>
+  <data name="lblModeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
   </data>
-  <data name="panelVFOASubHover.Visible" type="System.Boolean, mscorlib">
+  <data name="lblModeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 20</value>
+  </data>
+  <data name="lblModeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 11</value>
+  </data>
+  <data name="lblModeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>122</value>
+  </data>
+  <data name="lblModeLabel.Text" xml:space="preserve">
+    <value>MODE</value>
+  </data>
+  <data name="lblModeLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="lblModeLabel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelVFOASubHover.Name" xml:space="preserve">
-    <value>panelVFOASubHover</value>
+  <data name="&gt;&gt;lblModeLabel.Name" xml:space="preserve">
+    <value>lblModeLabel</value>
   </data>
-  <data name="&gt;&gt;panelVFOASubHover.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblModeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;panelVFOASubHover.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblModeLabel.Parent" xml:space="preserve">
     <value>grpVFOA</value>
   </data>
-  <data name="&gt;&gt;panelVFOASubHover.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="panelVFOAHover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 49</value>
-  </data>
-  <data name="panelVFOAHover.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 2</value>
-  </data>
-  <data name="panelVFOAHover.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;panelVFOAHover.Name" xml:space="preserve">
-    <value>panelVFOAHover</value>
-  </data>
-  <data name="&gt;&gt;panelVFOAHover.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelVFOAHover.Parent" xml:space="preserve">
-    <value>grpVFOA</value>
-  </data>
-  <data name="&gt;&gt;panelVFOAHover.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;lblModeLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="txtVFOALSD.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 15.75pt</value>
   </data>
   <data name="txtVFOALSD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 23</value>
+    <value>177, 25</value>
   </data>
   <data name="txtVFOALSD.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 24</value>
@@ -11431,7 +11482,82 @@
     <value>grpVFOA</value>
   </data>
   <data name="&gt;&gt;txtVFOALSD.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtVFOAMSD.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 20.25pt</value>
+  </data>
+  <data name="txtVFOAMSD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 16</value>
+  </data>
+  <data name="txtVFOAMSD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 38</value>
+  </data>
+  <data name="txtVFOAMSD.TabIndex" type="System.Int32, mscorlib">
+    <value>116</value>
+  </data>
+  <data name="txtVFOAMSD.Text" xml:space="preserve">
+    <value>12345</value>
+  </data>
+  <data name="txtVFOAMSD.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtVFOAMSD.Name" xml:space="preserve">
+    <value>txtVFOAMSD</value>
+  </data>
+  <data name="&gt;&gt;txtVFOAMSD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtVFOAMSD.Parent" xml:space="preserve">
+    <value>grpVFOA</value>
+  </data>
+  <data name="&gt;&gt;txtVFOAMSD.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="panelVFOASubHover.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 80</value>
+  </data>
+  <data name="panelVFOASubHover.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 1</value>
+  </data>
+  <data name="panelVFOASubHover.TabIndex" type="System.Int32, mscorlib">
+    <value>118</value>
+  </data>
+  <data name="panelVFOASubHover.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;panelVFOASubHover.Name" xml:space="preserve">
+    <value>panelVFOASubHover</value>
+  </data>
+  <data name="&gt;&gt;panelVFOASubHover.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelVFOASubHover.Parent" xml:space="preserve">
+    <value>grpVFOA</value>
+  </data>
+  <data name="&gt;&gt;panelVFOASubHover.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="panelVFOAHover.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 49</value>
+  </data>
+  <data name="panelVFOAHover.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 2</value>
+  </data>
+  <data name="panelVFOAHover.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;panelVFOAHover.Name" xml:space="preserve">
+    <value>panelVFOAHover</value>
+  </data>
+  <data name="&gt;&gt;panelVFOAHover.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelVFOAHover.Parent" xml:space="preserve">
+    <value>grpVFOA</value>
+  </data>
+  <data name="&gt;&gt;panelVFOAHover.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="txtVFOABand.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
@@ -11461,36 +11587,6 @@
     <value>grpVFOA</value>
   </data>
   <data name="&gt;&gt;txtVFOABand.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="txtVFOAMSD.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 20.25pt</value>
-  </data>
-  <data name="txtVFOAMSD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 16</value>
-  </data>
-  <data name="txtVFOAMSD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 38</value>
-  </data>
-  <data name="txtVFOAMSD.TabIndex" type="System.Int32, mscorlib">
-    <value>116</value>
-  </data>
-  <data name="txtVFOAMSD.Text" xml:space="preserve">
-    <value>14.195000</value>
-  </data>
-  <data name="txtVFOAMSD.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtVFOAMSD.Name" xml:space="preserve">
-    <value>txtVFOAMSD</value>
-  </data>
-  <data name="&gt;&gt;txtVFOAMSD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtVFOAMSD.Parent" xml:space="preserve">
-    <value>grpVFOA</value>
-  </data>
-  <data name="&gt;&gt;txtVFOAMSD.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="btnHidden.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -11547,11 +11643,62 @@
   <data name="&gt;&gt;grpVFOA.ZOrder" xml:space="preserve">
     <value>28</value>
   </data>
+  <data name="panelVFOBHover.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 49</value>
+  </data>
+  <data name="panelVFOBHover.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 2</value>
+  </data>
+  <data name="panelVFOBHover.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;panelVFOBHover.Name" xml:space="preserve">
+    <value>panelVFOBHover</value>
+  </data>
+  <data name="&gt;&gt;panelVFOBHover.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelVFOBHover.Parent" xml:space="preserve">
+    <value>grpVFOB</value>
+  </data>
+  <data name="&gt;&gt;panelVFOBHover.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtVFOBBand.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 12pt</value>
+  </data>
+  <data name="txtVFOBBand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 56</value>
+  </data>
+  <data name="txtVFOBBand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 26</value>
+  </data>
+  <data name="txtVFOBBand.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="txtVFOBBand.Text" xml:space="preserve">
+    <value>40M CW Extra</value>
+  </data>
+  <data name="txtVFOBBand.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;txtVFOBBand.Name" xml:space="preserve">
+    <value>txtVFOBBand</value>
+  </data>
+  <data name="&gt;&gt;txtVFOBBand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtVFOBBand.Parent" xml:space="preserve">
+    <value>grpVFOB</value>
+  </data>
+  <data name="&gt;&gt;txtVFOBBand.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="txtVFOBLSD.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 15.75pt</value>
   </data>
   <data name="txtVFOBLSD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 23</value>
+    <value>177, 25</value>
   </data>
   <data name="txtVFOBLSD.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 24</value>
@@ -11575,37 +11722,7 @@
     <value>grpVFOB</value>
   </data>
   <data name="&gt;&gt;txtVFOBLSD.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblRX2MuteVFOB.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 6.75pt, style=Bold</value>
-  </data>
-  <data name="lblRX2MuteVFOB.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="lblRX2MuteVFOB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 36</value>
-  </data>
-  <data name="lblRX2MuteVFOB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 11</value>
-  </data>
-  <data name="lblRX2MuteVFOB.TabIndex" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <data name="lblRX2MuteVFOB.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblRX2MuteVFOB.Name" xml:space="preserve">
-    <value>lblRX2MuteVFOB</value>
-  </data>
-  <data name="&gt;&gt;lblRX2MuteVFOB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblRX2MuteVFOB.Parent" xml:space="preserve">
-    <value>grpVFOB</value>
-  </data>
-  <data name="&gt;&gt;lblRX2MuteVFOB.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lblRX2FilterLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -11644,7 +11761,37 @@
     <value>grpVFOB</value>
   </data>
   <data name="&gt;&gt;lblRX2FilterLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
+  </data>
+  <data name="lblRX2MuteVFOB.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 6.75pt, style=Bold</value>
+  </data>
+  <data name="lblRX2MuteVFOB.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="lblRX2MuteVFOB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>45, 36</value>
+  </data>
+  <data name="lblRX2MuteVFOB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 11</value>
+  </data>
+  <data name="lblRX2MuteVFOB.TabIndex" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="lblRX2MuteVFOB.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblRX2MuteVFOB.Name" xml:space="preserve">
+    <value>lblRX2MuteVFOB</value>
+  </data>
+  <data name="&gt;&gt;lblRX2MuteVFOB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblRX2MuteVFOB.Parent" xml:space="preserve">
+    <value>grpVFOB</value>
+  </data>
+  <data name="&gt;&gt;lblRX2MuteVFOB.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="lblRX2ModeLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -11683,58 +11830,37 @@
     <value>grpVFOB</value>
   </data>
   <data name="&gt;&gt;lblRX2ModeLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
-  <data name="panelVFOBHover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 49</value>
+  <data name="txtVFOBMSD.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 20.25pt</value>
   </data>
-  <data name="panelVFOBHover.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 2</value>
+  <data name="txtVFOBMSD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 16</value>
   </data>
-  <data name="panelVFOBHover.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="txtVFOBMSD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 38</value>
   </data>
-  <data name="&gt;&gt;panelVFOBHover.Name" xml:space="preserve">
-    <value>panelVFOBHover</value>
+  <data name="txtVFOBMSD.TabIndex" type="System.Int32, mscorlib">
+    <value>117</value>
   </data>
-  <data name="&gt;&gt;panelVFOBHover.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="txtVFOBMSD.Text" xml:space="preserve">
+    <value>12345</value>
   </data>
-  <data name="&gt;&gt;panelVFOBHover.Parent" xml:space="preserve">
-    <value>grpVFOB</value>
+  <data name="txtVFOBMSD.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="&gt;&gt;panelVFOBHover.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;txtVFOBMSD.Name" xml:space="preserve">
+    <value>txtVFOBMSD</value>
   </data>
-  <data name="txtVFOBBand.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 12pt</value>
-  </data>
-  <data name="txtVFOBBand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 56</value>
-  </data>
-  <data name="txtVFOBBand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 26</value>
-  </data>
-  <data name="txtVFOBBand.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="txtVFOBBand.Text" xml:space="preserve">
-    <value>40M CW Extra</value>
-  </data>
-  <data name="txtVFOBBand.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;txtVFOBBand.Name" xml:space="preserve">
-    <value>txtVFOBBand</value>
-  </data>
-  <data name="&gt;&gt;txtVFOBBand.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtVFOBMSD.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtVFOBBand.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtVFOBMSD.Parent" xml:space="preserve">
     <value>grpVFOB</value>
   </data>
-  <data name="&gt;&gt;txtVFOBBand.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;txtVFOBMSD.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="lblVFOBLSD.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 16pt</value>
@@ -11773,36 +11899,6 @@
     <value>grpVFOB</value>
   </data>
   <data name="&gt;&gt;lblVFOBLSD.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="txtVFOBMSD.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 20.25pt</value>
-  </data>
-  <data name="txtVFOBMSD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 16</value>
-  </data>
-  <data name="txtVFOBMSD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 38</value>
-  </data>
-  <data name="txtVFOBMSD.TabIndex" type="System.Int32, mscorlib">
-    <value>117</value>
-  </data>
-  <data name="txtVFOBMSD.Text" xml:space="preserve">
-    <value>14.195000</value>
-  </data>
-  <data name="txtVFOBMSD.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtVFOBMSD.Name" xml:space="preserve">
-    <value>txtVFOBMSD</value>
-  </data>
-  <data name="&gt;&gt;txtVFOBMSD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=2.2.3.2, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtVFOBMSD.Parent" xml:space="preserve">
-    <value>grpVFOB</value>
-  </data>
-  <data name="&gt;&gt;txtVFOBMSD.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="txtVFOBFreq.Font" type="System.Drawing.Font, System.Drawing">
@@ -13183,7 +13279,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificFM.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>43</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -13280,7 +13376,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v2.2.3 (W5WC - 2/10/12)  RX2</value>
+    <value>PowerSDR™/OpenHPSDR v2.2.3 (3/22/12)  RX2</value>
   </data>
   <data name="&gt;&gt;timer_cpu_meter.Name" xml:space="preserve">
     <value>timer_cpu_meter</value>

@@ -413,6 +413,9 @@
     <Compile Include="setup.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="setup.designer.cs">
+      <DependentUpon>setup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Skin.cs" />
     <Compile Include="SortableBindingList.cs" />
     <Compile Include="splash.cs">
