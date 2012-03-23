@@ -41274,8 +41274,8 @@ namespace PowerSDR
                     CurrentRegion = FRSRegion.Australia;
                     console.Extended = false;
                     break;
-                case "Germany":
-                    CurrentRegion = FRSRegion.Germany;
+                case "Europe":
+                    CurrentRegion = FRSRegion.Europe;
                     console.Extended = false;
                     break;
                 case "Italy":
@@ -41296,6 +41296,42 @@ namespace PowerSDR
                     break;
                 case "United States":
                     CurrentRegion = FRSRegion.US;
+                    console.Extended = false;
+                    break;
+                case "Norway":
+                    CurrentRegion = FRSRegion.Norway;
+                    console.Extended = false;
+                    break; 
+                case "Denmark":
+                    CurrentRegion = FRSRegion.Denmark;
+                    console.Extended = false;
+                    break;
+                case "Latvia":
+                    CurrentRegion = FRSRegion.Latvia;
+                    console.Extended = false;
+                    break;
+                case "Slovakia":
+                    CurrentRegion = FRSRegion.Slovakia;
+                    console.Extended = false;
+                    break;
+                case "Bulgaria":
+                    CurrentRegion = FRSRegion.Bulgaria;
+                    console.Extended = false;
+                    break;
+                case "Greece":
+                    CurrentRegion = FRSRegion.Greece;
+                    console.Extended = false;
+                    break;
+                case "Hungary":
+                    CurrentRegion = FRSRegion.Hungary;
+                    console.Extended = false;
+                    break;
+                case "Netherlands":
+                    CurrentRegion = FRSRegion.Netherlands;
+                    console.Extended = false;
+                    break;
+                case "France":
+                    CurrentRegion = FRSRegion.France;
                     console.Extended = false;
                     break;
                 case "Extended":

@@ -157,12 +157,12 @@ namespace PowerSDR
         public int CompareTo(object obj)
         {
             if (obj == null) return 1;
-            return this.freq.CompareTo(((Notch)obj).freq);
+            return freq.CompareTo(((Notch)obj).freq);
         }
 
         public Notch Copy()
         {
-            return new Notch(this.freq, this.bw, this.permanent, this.depth);
+            return new Notch(freq, bw, permanent, depth);
         }
     }
 }
