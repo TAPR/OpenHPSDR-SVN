@@ -292,7 +292,7 @@ namespace PowerSDR
         FIRST = -1,
         US = 0,
         Spain = 1,
-        Germany = 2,
+        Europe = 2,
         UK = 3,
         Italy_Plus = 4,
         Japan = 5,
@@ -304,7 +304,9 @@ namespace PowerSDR
         Bulgaria = 11,
         Greece = 12,
         Hungary = 13,
-        Extended = 14,
+        Netherlands = 14,
+        France = 15,
+        Extended = 16,
         LAST,
     }
 
@@ -11512,7 +11514,7 @@ namespace PowerSDR
                     else
                         return Band.GEN;
 
-                case FRSRegion.Germany:
+                case FRSRegion.Europe:
                     if (freq >= 1.81 && freq <= 2.0)
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 3.8)
@@ -11875,6 +11877,66 @@ namespace PowerSDR
                         return Band.B10M;
                     else if (freq >= 50.0 && freq <= 52.0)
                         return Band.B10M;
+                    else if (freq >= 144.0 && freq <= 148.0)
+                        return Band.B2M;
+                    else if (freq == 2.5 || freq == 5.0 ||
+                        freq == 10.0 || freq == 15.0 ||
+                        freq == 20.0)
+                        return Band.WWV;
+                    else
+                        return Band.GEN;
+ 
+                case FRSRegion.Netherlands:
+                    if (freq >= 1.81 && freq <= 1.88)
+                        return Band.B160M;
+                    else if (freq >= 3.5 && freq <= 3.8)
+                        return Band.B80M;
+                    else if (freq >= 7.0 && freq <= 7.2)
+                        return Band.B40M;
+                    else if (freq >= 10.1 && freq <= 10.15)
+                        return Band.B30M;
+                    else if (freq >= 14.0 && freq <= 14.35)
+                        return Band.B20M;
+                    else if (freq >= 18.068 && freq <= 18.168)
+                        return Band.B17M;
+                    else if (freq >= 21.0 && freq <= 21.45)
+                        return Band.B15M;
+                    else if (freq >= 24.89 && freq <= 24.99)
+                        return Band.B12M;
+                    else if (freq >= 28.0 && freq <= 29.7)
+                        return Band.B10M;
+                    else if (freq >= 50.0 && freq <= 52.0)
+                        return Band.B6M;
+                    else if (freq >= 144.0 && freq <= 148.0)
+                        return Band.B2M;
+                    else if (freq == 2.5 || freq == 5.0 ||
+                        freq == 10.0 || freq == 15.0 ||
+                        freq == 20.0)
+                        return Band.WWV;
+                    else
+                        return Band.GEN;
+
+                case FRSRegion.France:
+                    if (freq >= 1.81 && freq <= 2.0)
+                        return Band.B160M;
+                    else if (freq >= 3.5 && freq <= 3.8)
+                        return Band.B80M;
+                    else if (freq >= 7.0 && freq <= 7.2)
+                        return Band.B40M;
+                    else if (freq >= 10.1 && freq <= 10.15)
+                        return Band.B30M;
+                    else if (freq >= 14.0 && freq <= 14.35)
+                        return Band.B20M;
+                    else if (freq >= 18.068 && freq <= 18.168)
+                        return Band.B17M;
+                    else if (freq >= 21.0 && freq <= 21.45)
+                        return Band.B15M;
+                    else if (freq >= 24.89 && freq <= 24.99)
+                        return Band.B12M;
+                    else if (freq >= 28.0 && freq <= 29.7)
+                        return Band.B10M;
+                    else if (freq >= 50.08 && freq <= 51.2)
+                        return Band.B6M;
                     else if (freq >= 144.0 && freq <= 148.0)
                         return Band.B2M;
                     else if (freq == 2.5 || freq == 5.0 ||
@@ -12656,7 +12718,7 @@ namespace PowerSDR
                     else if (f >= 50.0 && f <= 54.0) ret_val = true;
                     else ret_val = false;
                     break;
-                case FRSRegion.Germany:
+                case FRSRegion.Europe:
                     if (f >= 1.81 && f <= 2.0) ret_val = true;
                     else if (f >= 3.5 && f <= 3.8) ret_val = true;
                     else if (f >= 7.0 && f <= 7.2) ret_val = true;
@@ -12749,6 +12811,110 @@ namespace PowerSDR
                     else if (f >= 24.89 && f <= 24.99) ret_val = true;
                     else if (f >= 28.0 && f <= 29.7) ret_val = true;
                     else if (f >= 50.0 && f <= 54.0) ret_val = true;
+                    else ret_val = false;
+                    break;
+                case FRSRegion.Denmark: // 6
+                    if (f >= 1.81 && f <= 2.0) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 5.25 && f <= 5.45) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else if (f >= 50.0 && f <= 52.0) ret_val = true;
+                    else ret_val = false;
+                    break;
+                case FRSRegion.Latvia: // 7
+                    if (f >= 1.81 && f <= 2.0) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else if (f >= 50.0 && f <= 51.0) ret_val = true;
+                    else ret_val = false;
+                    break;
+                case FRSRegion.Slovakia: // 8
+                    if (f >= 1.81 && f <= 2.0) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else if (f >= 50.0 && f <= 52.0) ret_val = true;
+                    else ret_val = false;
+                    break;
+                case FRSRegion.Bulgaria: // 9
+                    if (f >= 1.81 && f <= 1.85) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else if (f >= 50.05 && f <= 50.2) ret_val = true;
+                    else ret_val = false;
+                    break;
+                case FRSRegion.Greece: // 10
+                    if (f >= 1.81 && f <= 1.85) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else ret_val = false;
+                    break;
+                case FRSRegion.Hungary: // 11
+                    if (f >= 1.81 && f <= 2.0) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.1) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else if (f >= 50.0 && f <= 52.0) ret_val = true;
+                    else ret_val = false;
+                    break;
+                case FRSRegion.Netherlands: // 12
+                    if (f >= 1.81 && f <= 1.88) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else if (f >= 50.0 && f <= 52.0) ret_val = true;
+                    else ret_val = false;
+                    break;
+                case FRSRegion.France:
+                    if (f >= 1.81 && f <= 2.0) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else if (f >= 50.08 && f <= 51.2) ret_val = true;
                     else ret_val = false;
                     break;
                 default:
