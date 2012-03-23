@@ -3205,6 +3205,8 @@ namespace PowerSDR
             this.udDSPAGCFixedGaindB = new System.Windows.Forms.NumericUpDownTS();
             this.lblDSPAGCFixed = new System.Windows.Forms.LabelTS();
             this.tpTransmit = new System.Windows.Forms.TabPage();
+            this.udTXFilterLowSave = new System.Windows.Forms.NumericUpDownTS();
+            this.udTXFilterHighSave = new System.Windows.Forms.NumericUpDownTS();
             this.grpBoxMic = new System.Windows.Forms.GroupBoxTS();
             this.radLineIn = new System.Windows.Forms.RadioButtonTS();
             this.radMicIn = new System.Windows.Forms.RadioButtonTS();
@@ -3885,8 +3887,6 @@ namespace PowerSDR
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
-            this.udTXFilterLowSave = new System.Windows.Forms.NumericUpDownTS();
-            this.udTXFilterHighSave = new System.Windows.Forms.NumericUpDownTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -4144,6 +4144,8 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCAttack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCFixedGaindB)).BeginInit();
             this.tpTransmit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterHighSave)).BeginInit();
             this.grpBoxMic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udMicGainMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMicGainMax)).BeginInit();
@@ -4316,8 +4318,6 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS35)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS36)).BeginInit();
             this.panelTS4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterHighSave)).BeginInit();
             this.SuspendLayout();
             // 
             // tpAlexAntCtrl
@@ -6676,7 +6676,7 @@ namespace PowerSDR
             this.comboFRSRegion.FormattingEnabled = true;
             this.comboFRSRegion.Items.AddRange(new object[] {
             "Australia",
-            "Germany",
+            "Europe",
             "Italy",
             "Japan",
             "Spain",
@@ -6689,6 +6689,8 @@ namespace PowerSDR
             "Bulgaria",
             "Greece",
             "Hungary",
+            "Netherlands",
+            "France",
             "Extended"});
             this.comboFRSRegion.Location = new System.Drawing.Point(3, 20);
             this.comboFRSRegion.Name = "comboFRSRegion";
@@ -19830,6 +19832,64 @@ namespace PowerSDR
             this.tpTransmit.TabIndex = 5;
             this.tpTransmit.Text = "Transmit";
             // 
+            // udTXFilterLowSave
+            // 
+            this.udTXFilterLowSave.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udTXFilterLowSave.Location = new System.Drawing.Point(341, 112);
+            this.udTXFilterLowSave.Maximum = new decimal(new int[] {
+            20000,
+            0,
+            0,
+            0});
+            this.udTXFilterLowSave.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udTXFilterLowSave.Name = "udTXFilterLowSave";
+            this.udTXFilterLowSave.Size = new System.Drawing.Size(56, 20);
+            this.udTXFilterLowSave.TabIndex = 62;
+            this.toolTip1.SetToolTip(this.udTXFilterLowSave, "Saved Low Frequency TX Filter Cutoff");
+            this.udTXFilterLowSave.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.udTXFilterLowSave.Visible = false;
+            // 
+            // udTXFilterHighSave
+            // 
+            this.udTXFilterHighSave.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udTXFilterHighSave.Location = new System.Drawing.Point(341, 85);
+            this.udTXFilterHighSave.Maximum = new decimal(new int[] {
+            20000,
+            0,
+            0,
+            0});
+            this.udTXFilterHighSave.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udTXFilterHighSave.Name = "udTXFilterHighSave";
+            this.udTXFilterHighSave.Size = new System.Drawing.Size(56, 20);
+            this.udTXFilterHighSave.TabIndex = 61;
+            this.toolTip1.SetToolTip(this.udTXFilterHighSave, "Saved High Frequency TX Filter Cutoff");
+            this.udTXFilterHighSave.Value = new decimal(new int[] {
+            3100,
+            0,
+            0,
+            0});
+            this.udTXFilterHighSave.Visible = false;
+            // 
             // grpBoxMic
             // 
             this.grpBoxMic.Controls.Add(this.radLineIn);
@@ -29235,64 +29295,6 @@ namespace PowerSDR
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
-            // udTXFilterLowSave
-            // 
-            this.udTXFilterLowSave.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.udTXFilterLowSave.Location = new System.Drawing.Point(341, 112);
-            this.udTXFilterLowSave.Maximum = new decimal(new int[] {
-            20000,
-            0,
-            0,
-            0});
-            this.udTXFilterLowSave.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udTXFilterLowSave.Name = "udTXFilterLowSave";
-            this.udTXFilterLowSave.Size = new System.Drawing.Size(56, 20);
-            this.udTXFilterLowSave.TabIndex = 62;
-            this.toolTip1.SetToolTip(this.udTXFilterLowSave, "Saved Low Frequency TX Filter Cutoff");
-            this.udTXFilterLowSave.Value = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.udTXFilterLowSave.Visible = false;
-            // 
-            // udTXFilterHighSave
-            // 
-            this.udTXFilterHighSave.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.udTXFilterHighSave.Location = new System.Drawing.Point(341, 85);
-            this.udTXFilterHighSave.Maximum = new decimal(new int[] {
-            20000,
-            0,
-            0,
-            0});
-            this.udTXFilterHighSave.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udTXFilterHighSave.Name = "udTXFilterHighSave";
-            this.udTXFilterHighSave.Size = new System.Drawing.Size(56, 20);
-            this.udTXFilterHighSave.TabIndex = 61;
-            this.toolTip1.SetToolTip(this.udTXFilterHighSave, "Saved High Frequency TX Filter Cutoff");
-            this.udTXFilterHighSave.Value = new decimal(new int[] {
-            3100,
-            0,
-            0,
-            0});
-            this.udTXFilterHighSave.Visible = false;
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -29576,6 +29578,8 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCAttack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCFixedGaindB)).EndInit();
             this.tpTransmit.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterHighSave)).EndInit();
             this.grpBoxMic.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udMicGainMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMicGainMax)).EndInit();
@@ -29755,8 +29759,6 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS36)).EndInit();
             this.panelTS4.ResumeLayout(false);
             this.panelTS4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udTXFilterHighSave)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -40162,8 +40164,8 @@ namespace PowerSDR
                     CurrentRegion = FRSRegion.Australia;
                     console.Extended = false;
                     break;
-                case "Germany":
-                    CurrentRegion = FRSRegion.Germany;
+                case "Europe":
+                    CurrentRegion = FRSRegion.Europe;
                     console.Extended = false;
                     break;
                 case "Italy":
@@ -40185,6 +40187,42 @@ namespace PowerSDR
                 case "United States":
                     CurrentRegion = FRSRegion.US;
                     Display.Init();
+                    break;
+                case "Norway":
+                    CurrentRegion = FRSRegion.Norway;
+                    console.Extended = false;
+                    break;
+                case "Denmark":
+                    CurrentRegion = FRSRegion.Denmark;
+                    console.Extended = false;
+                    break;
+                case "Latvia":
+                    CurrentRegion = FRSRegion.Latvia;
+                    console.Extended = false;
+                    break;
+                case "Slovakia":
+                    CurrentRegion = FRSRegion.Slovakia;
+                    console.Extended = false;
+                    break;
+                case "Bulgaria":
+                    CurrentRegion = FRSRegion.Bulgaria;
+                    console.Extended = false;
+                    break;
+                case "Greece":
+                    CurrentRegion = FRSRegion.Greece;
+                    console.Extended = false;
+                    break;
+                case "Hungary":
+                    CurrentRegion = FRSRegion.Hungary;
+                    console.Extended = false;
+                    break;
+                case "Netherlands":
+                    CurrentRegion = FRSRegion.Netherlands;
+                    console.Extended = false;
+                    break;
+                case "France":
+                    CurrentRegion = FRSRegion.France;
+                    console.Extended = false;
                     break;
                 case "Extended":
                     console.Extended = true;
