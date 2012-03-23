@@ -2462,6 +2462,7 @@ namespace PowerSDR
             if (high_swr && !bottom)
                 g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
         }
+
         static float zoom_height = 1.5f;   // Should be > 1.  H = H/zoom_height
         unsafe private static void DrawPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
         {
@@ -2485,6 +2486,7 @@ namespace PowerSDR
             int y_range = spectrum_grid_max - spectrum_grid_min;
             int filter_low, filter_high;
             int center_line_x = (int)(-(double)Low / (High - Low) * W);
+            int[] band_edge_list;
 
             int[] r_x0 = new int[2];
             int[] r_x1 = new int[2];
@@ -3093,7 +3095,7 @@ namespace PowerSDR
                             }
                             else goto default;
 
-                        case FRSRegion.Germany:
+                        case FRSRegion.Europe:
                             if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
@@ -3185,6 +3187,7 @@ namespace PowerSDR
                             if (actual_fgrid == 1.8 || actual_fgrid == 1.875 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.7 ||
                                 actual_fgrid == 3.776 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 5.26 || actual_fgrid == 5.41 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
                                 actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
                                 actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
@@ -3271,9 +3274,19 @@ namespace PowerSDR
 
             }
 
-            int[] band_edge_list = { 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
+            switch (console.CurrentRegion)
+            {
+                case FRSRegion.Norway:
+                band_edge_list = new int[]{ 5260000, 5410000, 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
 				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
 				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
+                break;
+                default:
+                band_edge_list = new int[]{ 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
+				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
+				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
+                break;
+            }
 
             for (int i = 0; i < band_edge_list.Length; i++)
             {
@@ -3960,7 +3973,7 @@ namespace PowerSDR
                             else
                                 goto default;
 
-                        case FRSRegion.Germany:
+                        case FRSRegion.Europe:
                             if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
@@ -4560,7 +4573,7 @@ namespace PowerSDR
                             else
                                 goto default;
 
-                        case FRSRegion.Germany:
+                        case FRSRegion.Europe:
                             if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
