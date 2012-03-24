@@ -33320,12 +33320,12 @@ namespace PowerSDR
                     }
                 }
             }
-
-            if (RX1IsIn60m()) freq -= ModeFreqOffset(rx1_dsp_mode);
+            double freq60m = freq;
+            if (RX1IsIn60m()) freq60m -= ModeFreqOffset(rx1_dsp_mode);
 
             // update Band Info
             string bandInfo;
-            bool transmit_allowed = DB.BandText(freq, out bandInfo);
+            bool transmit_allowed = DB.BandText(freq60m, out bandInfo);
             if (!transmit_allowed)
             {
                 txtVFOABand.BackColor = out_of_band_color;
@@ -34112,9 +34112,16 @@ namespace PowerSDR
                 }
             }
 
+            double freq60m = freq;
+
+            if (RX2IsIn60m())
+                freq60m -= ModeFreqOffset(rx2_dsp_mode);
+            else if (RX1IsIn60m())
+                freq60m -= ModeFreqOffset(rx1_dsp_mode);
+
             // update Band Info
             string bandInfo;
-            bool transmit = DB.BandText(freq, out bandInfo);
+            bool transmit = DB.BandText(freq60m, out bandInfo);
             if (transmit == false)
             {
                 txtVFOBBand.BackColor = Color.DimGray;
