@@ -34668,8 +34668,8 @@ namespace PowerSDR
                 case DSPMode.USB:
                 case DSPMode.DIGU:
                 case DSPMode.DSB:
-                    if (RX1IsOn60mChannel())
-                        tx_freq -= ModeFreqOffset(rx1_dsp_mode) + cw_pitch * 1e-6;
+                   // if (RX1IsOn60mChannel())
+                      //  tx_freq -= ModeFreqOffset(rx1_dsp_mode) + cw_pitch * 1e-6;
                     if (chkTUN.Checked) tx_freq -= cw_pitch * 1e-6;
                     break;
                 case DSPMode.LSB:
