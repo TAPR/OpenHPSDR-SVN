@@ -150,7 +150,9 @@ void addDialog::updateOwner()
 void addDialog::updateTime()
 {
     ui->dateEdit->setText(date->currentDate().toString("yyyy:MM:dd"));
+    QDate UtcDate  = QDateTime::currentDateTime ().toTimeSpec(Qt::UTC).date();
     QTime UtcTime  = QDateTime::currentDateTime ().toTimeSpec(Qt::UTC).time();
+    ui->dateEdit->setText(UtcDate.toString("yyyy:MM:dd"));
     ui->timeEdit->setText(UtcTime.toString());
 }
 
