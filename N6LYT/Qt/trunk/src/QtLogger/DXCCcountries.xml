@@ -624,7 +624,7 @@
       	<CQ>36</CQ>
       </subdivision>
    </country>
-   <country code="090" prefix="9Y,9Z">
+   <country code="090" >
       <name>Trinidad &amp; Tobago</name>
       <cont>SA</cont>
       <subdivision prefix="9Y0,9Y1,9Y2,9Y3,9Y4,9Y5,9Y6,9Y7,9Y8,9Y9"  >
@@ -641,7 +641,7 @@
    <country code="402" >
       <name>Botswana</name>
       <cont>AF</cont>
-      <subdivision prefix="A2" >
+      <subdivision prefix="A2,A21,A22,A23,A24,A25,A26,A27,A28,A29,A20" >
 	 <name>Botswana</name>
          <ITU>57</ITU>
          <CQ>38</CQ>
@@ -650,7 +650,7 @@
    <country code="160" >
       <name>Tonga</name>
       <cont>OC</cont>
-      <subdivision  prefix="A3" >
+      <subdivision  prefix="A3,A31,A32,A33,A34,A35,A36,A37,A38,A39,A30" >
 	<name>Tonga</name> 
         <ITU>62</ITU>
         <CQ>32</CQ>
@@ -659,7 +659,7 @@
    <country code="370" >
       <name>Oman</name>
       <cont>AS</cont>
-      <subdivision prefix="A4"  >
+      <subdivision prefix="A4,A41,A42,A43,A44,A45,A46,A47,A48,A49,A40"  >
 	<name>Oman</name>
         <ITU>39</ITU>
         <CQ>21</CQ>
@@ -668,7 +668,7 @@
    <country code="306" >
       <name>Bhutan</name>
       <cont>AS</cont>
-      <subdivision prefix="A5" >
+      <subdivision prefix="A5,A51,A52,A53,A54,A55,A56,A57,A58,A59,A50" >
 	<name>Bhutan</name>
         <ITU>41</ITU>
         <CQ>22</CQ>
@@ -677,7 +677,7 @@
    <country code="391" >
       <name>United Arab Emirates</name>
       <cont>AS</cont>
-      <subdivision  prefix="A6" >
+      <subdivision  prefix="A6,A61,A62,A63,A64,A65,A66,A67,A68,A69,A60" >
 	<name>United Arab Emirates</name>
         <ITU>39</ITU>
         <CQ>21</CQ>
@@ -686,7 +686,7 @@
    <country code="376" >
       <name>Qatar</name>
       <cont>AS</cont>
-      <subdivision prefix="A7"  >
+      <subdivision prefix="A7,A71,A72,A73,A74,A75,A76,A77,A78,A79,A70"  >
 	<name>Qatar</name>
         <ITU>39</ITU>
         <CQ>21</CQ>
@@ -695,7 +695,7 @@
    <country code="304" >
       <name>Bahrain</name>
       <cont>AS</cont>
-      <subdivision prefix="A9"  >
+      <subdivision prefix="A9,A91,A92,A93,A94,A95,A96,A97,A98,A99,A90"  >
 	<name>Bahrain</name>
         <ITU>39</ITU>
         <CQ>21</CQ>
@@ -1794,7 +1794,7 @@
    <country code="157" >
       <name>Nauru</name>
       <cont>OC</cont>
-      <subdivision prefix="C2" >
+      <subdivision prefix="C2,C21,C22,C23,C24,C25,C26,C27,C28,C29,C20" >
 	<name>Nauru</name>
         <ITU>65</ITU>
         <CQ>31</CQ>
@@ -1803,25 +1803,25 @@
    <country code="203" >
       <name>Andorra</name>
       <cont>EU</cont>
-      <subdivision  prefix="C3" >
+      <subdivision prefix="C3,C31,C32,C33,C34,C35,C36,C37,C38,C39,C30" >
 	<name>Andorra</name>
         <ITU>27</ITU>
         <CQ>14</CQ>
       </subdivision>
    </country>
-   <country code="422" prefix="C5">
+   <country code="422" >
       <name>The Gambia</name>
       <cont>AF</cont>
-      <subdivision prefix="C5" >
+      <subdivision prefix="C5,C51,C52,C53,C54,C55,C56,C57,C58,C59,C50" >
 	<name>The Gambia</name>
         <ITU>46</ITU>
         <CQ>35</CQ>
       </subdivision>
    </country>
-   <country code="060" prefix="C6">
+   <country code="060" >
       <name>Bahamas</name>
       <cont>NA</cont>
-      <subdivision prefix="C6"  >
+      <subdivision prefix="C6,C61,C62,C63,C64,C65,C66,C67,C68,C69,C60" >
 	<name>Bahamas</name>
         <ITU>11</ITU>
         <CQ>08</CQ>
@@ -1830,7 +1830,12 @@
    <country code="181" >
       <name>Mozambique</name>
       <cont>AF</cont>
-      <subdivision prefix="C8,C9"  >
+      <subdivision prefix="C8,C81,C82,C83,C84,C85,C86,C87,C88,C89,C80" >
+	<name>Mozambique</name>
+        <ITU>53</ITU>
+        <CQ>37</CQ>
+      </subdivision>
+      <subdivision prefix="C9,C91,C92,C93,C94,C95,C96,C97,C98,C99,C90" >
 	<name>Mozambique</name>
         <ITU>53</ITU>
         <CQ>37</CQ>
@@ -1934,7 +1939,7 @@
         <CQ>33</CQ>
       </subdivision>
    </country>
-   <country code="104" prefix="CP">
+   <country code="104" >
       <name>Bolivia</name>
       <cont>SA</cont>
       <subdivision prefix="CP0,CP1,CP2,CP3,CP4,CP5,CP6,CP7,CP8,CP9"  >
@@ -1992,7 +1997,12 @@
    <country code="401" >
       <name>Angola</name>
       <cont>AF</cont>
-      <subdivision prefix="D2,D3"  >
+      <subdivision prefix="D2D21,D22,D23,D24,D25,D26,D27,D28,D29,D20"  >
+	<name>Angola</name>
+        <ITU>52</ITU>
+        <CQ>36</CQ>
+      </subdivision>
+      <subdivision prefix="D3,D31,D32,D33,D34,D35,D36,D37,D38,D39,D30"  >
 	<name>Angola</name>
         <ITU>52</ITU>
         <CQ>36</CQ>
@@ -2001,7 +2011,7 @@
    <country code="409" >
       <name>Cape Verde</name>
       <cont>AF</cont>
-      <subdivision prefix="D4"  >
+      <subdivision prefix="D4,D41,D42,D43,D44,D45,D46,D47,D48,D49,D40"  >
         <name>Cape Verde</name>
         <ITU>46</ITU>
         <CQ>35</CQ>
@@ -2010,7 +2020,7 @@
    <country code="411" >
       <name>Comoros</name>
       <cont>AF</cont>
-      <subdivision  prefix="D6" > 
+      <subdivision prefix="D6,D61,D62,D63,D64,D65,D66,D67,D68,D69,D60"  >
         <name>Comoros</name>
         <ITU>53</ITU>
         <CQ>39</CQ>
@@ -2060,6 +2070,26 @@
         <CQ>14</CQ>
       </subdivision>
       <subdivision prefix="DL0,DL1,DL2,DL3,DL4,DL5,DL6,DL7,DL8,DL9">
+        <name>Fed. Rep. of Germany</name>
+        <ITU>28</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="DM0,DM1,DM2,DM3,DM4,DM5,DM6,DM7,DM8,DM9">
+        <name>Former East Germany</name>
+        <ITU>28</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="DP0,DP1,DP2,DP3,DP4,DP5,DP6,DP7,DP8,DP9">
+        <name>Fed. Rep. of Germany</name>
+        <ITU>28</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="DQ0,DQ1,DQ2,DQ3,DQ4,DQ5,DQ6,DQ7,DQ8,DQ9">
+        <name>Fed. Rep. of Germany</name>
+        <ITU>28</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="DR0,DR1,DR2,DR3,DR4,DR5,DR6,DR7,DR8,DR9">
         <name>Fed. Rep. of Germany</name>
         <ITU>28</ITU>
         <CQ>14</CQ>
@@ -2158,7 +2188,7 @@
    <country code="051" >
       <name>Eritrea</name>
       <cont>AF</cont>
-      <subdivision prefix="E3"  >
+      <subdivision prefix="E3,E31,E32,E33,E34,E35,E36,E37,E38,E39,E30"  >
         <name>Eritrea</name>
         <ITU>48</ITU>
         <CQ>37</CQ>
@@ -2167,7 +2197,7 @@
    <country code="510" >
       <name>Palestine</name>
       <cont>AS</cont>
-      <subdivision prefix="E4"  >
+      <subdivision prefix="E4,E41,E42,E43,E44,E45,E46,E47,E48,E49,E40"  >
         <name>Palestine</name>
         <ITU>39</ITU>
         <CQ>20</CQ>
@@ -2176,7 +2206,7 @@
    <country code="191" >
       <name>N. Cook Is.</name>
       <cont>OC</cont>
-      <subdivision prefix="E5"  >
+      <subdivision prefix="E5,E51,E52,E53,E54,E55,E56,E57,E58,E59,E50"  >
         <name>N. Cook Is.</name>
         <ITU>62</ITU>
         <CQ>32</CQ>
@@ -2185,7 +2215,7 @@
    <country code="234" >
       <name>S. Cook Is.</name>
       <cont>OC</cont>
-      <subdivision  prefix="E5"  >
+      <subdivision prefix="E5,E51,E52,E53,E54,E55,E56,E57,E58,E59,E50"  >
         <name>S. Cook Is.</name>
         <ITU>62</ITU>
         <CQ>32</CQ>
@@ -2194,7 +2224,7 @@
    <country code="501" >
       <name>Bosnia-Herzegovina</name>
       <cont>EU</cont>
-      <subdivision prefix="E7"  >
+      <subdivision prefix="E7,E71,E72,E73,E74,E75,E76,E77,E78,E79,E70"  >
         <name>Bosnia-Herzegovina</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
@@ -2393,7 +2423,7 @@
    <country code="053" >
       <name>Ethiopia</name>
       <cont>AF</cont>
-      <subdivision prefix="ET"  >
+      <subdivision prefix="ET1,ET2,ET3,ET4,ET5,ET6,ET7,ET8,ET9,ET0"  >
         <name>Ethiopia</name>
         <ITU>48</ITU>
         <CQ>37</CQ>
@@ -2474,7 +2504,7 @@
    <country code="135" >
       <name>Kyrgyzstan</name>
       <cont>AS</cont>
-      <subdivision  prefix="EX" >
+      <subdivision  prefix="EX1,EX2,EX3,EX4,EX5,EX6,EX7,EX8,EX9,EX0" >
         <name>Kyrgyzstan</name>
         <ITU>30,31</ITU>
         <CQ>17</CQ>
@@ -2483,7 +2513,7 @@
    <country code="262" >
       <name>Tajikistan</name>
       <cont>AS</cont>
-      <subdivision prefix="EY"  >
+      <subdivision  prefix="EY1,EY2,EY3,EY4,EY5,EY6,EY7,EY8,EY9,EY0" >
         <name>Tajikistan</name>
         <ITU>30</ITU>
         <CQ>17</CQ>
@@ -2492,7 +2522,7 @@
    <country code="280" >
       <name>Turkmenistan</name>
       <cont>AS</cont>
-      <subdivision  prefix="EZ" >
+      <subdivision  prefix="EZ1,EZ2,EZ3,EZ4,EZ5,EZ6,EZ7,EZ8,EZ9,EZ0" >
         <name>Turkmenistan</name>
         <ITU>30</ITU>
         <CQ>17</CQ>
@@ -2516,7 +2546,57 @@
         <ITU>27</ITU>
         <CQ>14</CQ>
       </subdivision>
-      <subdivision prefix="FC,FD,FE,FF,FI,FL,FN,FU,FV,FX,FZ"  >
+      <subdivision prefix="FC1,FC2,FC3,FC4,FC5,FC6,FC7,FC8,FC9,FC0"  >
+        <name>France</name>
+        <ITU>27</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="FD1,FD2,FD3,FD4,FD5,FD6,FD7,FD8,FD9,FD0"  >
+        <name>France</name>
+        <ITU>27</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="FE1,FE2,FE3,FE4,FE5,FE6,FE7,FE8,FE9,FE0"  >
+        <name>France</name>
+        <ITU>27</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="FF1,FF2,FF3,FF4,FF5,FF6,FF7,FF8,FF9,FF0"  >
+        <name>France</name>
+        <ITU>27</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="FI1,FI2,FI3,FI4,FI5,FI6,FI7,FI8,FI9,FI0"  >
+        <name>France</name>
+        <ITU>27</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="FL1,FL2,FL3,FL4,FL5,FL6,FL7,FL8,FL9,FL0"  >
+        <name>France</name>
+        <ITU>27</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="FN1,FN2,FN3,FN4,FN5,FN6,FN7,FN8,FN9,FN0"  >
+        <name>France</name>
+        <ITU>27</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="FU1,FU2,FU3,FU4,FU5,FU6,FU7,FU8,FU9,FU0"  >
+        <name>France</name>
+        <ITU>27</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="FV1,FV2,FV3,FV4,FV5,FV6,FV7,FV8,FV9,FV0"  >
+        <name>France</name>
+        <ITU>27</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="FX1,FX2,FX3,FX4,FX5,FX6,FX7,FX8,FX9,FX0"  >
+        <name>France</name>
+        <ITU>27</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="FZ1,FZ2,FZ3,FZ4,FZ5,FZ6,FZ7,FZ8,FZ9,FZ0"  >
         <name>France</name>
         <ITU>27</ITU>
         <CQ>14</CQ>
@@ -3166,7 +3246,7 @@
         <CQ>07</CQ>
       </subdivision>
    </country>
-   <country code="137" prefix="HL">
+   <country code="137" >
       <name>Republic of Korea</name>
       <cont>AS</cont>
       <subdivision  prefix="HL1"  >
@@ -3547,7 +3627,7 @@
    <country code="382">
       <name>Djibouti</name>
       <cont>AF</cont>
-      <subdivision   prefix="J2"  > 
+      <subdivision   prefix="J2,J21,J22,J23,J24,J25,J26,J27,J28,J29,J20"  > 
         <name>Djibouti</name>
         <ITU>48</ITU>
         <CQ>37</CQ>
@@ -3556,7 +3636,7 @@
    <country code="077">
       <name>Grenada</name>
       <cont>NA</cont>
-      <subdivision   prefix="J3"  >
+      <subdivision   prefix="J3,J31,J32,J33,J34,J35,J36,J37,J38,J39,J30"  > 
         <name>Grenada</name>
         <ITU>11</ITU>
         <CQ>08</CQ>
@@ -3565,7 +3645,7 @@
    <country code="109" >
       <name>Guinea-Bissau</name>
       <cont>AF</cont>
-      <subdivision  prefix="J5"  >
+      <subdivision   prefix="J5,J51,J52,J53,J54,J55,J56,J57,J58,J59,J50"  > 
         <name>Guinea-Bissau</name>
         <ITU>46</ITU>
         <CQ>35</CQ>
@@ -3574,7 +3654,7 @@
    <country code="097" >
       <name>St. Lucia</name>
       <cont>NA</cont>
-      <subdivision   prefix="J6" >
+      <subdivision   prefix="J5,J51,J52,J53,J54,J55,J56,J57,J58,J59,J50"  > 
         <name>St. Lucia</name>
         <ITU>11</ITU>
         <CQ>08</CQ>
@@ -3583,7 +3663,7 @@
    <country code="095">
       <name>Dominica</name>
       <cont>NA</cont>
-      <subdivision   prefix="J7"  >
+      <subdivision   prefix="J7,J71,J72,J73,J74,J75,J76,J77,J78,J79,J70"  > 
         <name>Dominica</name>
         <ITU>11</ITU>
         <CQ>08</CQ>
@@ -3592,7 +3672,7 @@
    <country code="098" >
       <name>St. Vincent</name>
       <cont>NA</cont>
-      <subdivision  prefix="J8"  >
+      <subdivision   prefix="J8,J81,J82,J83,J84,J85,J86,J87,J88,J89,J80"  > 
         <name>St. Vincent</name>
         <ITU>11</ITU>
         <CQ>08</CQ>
@@ -4195,7 +4275,72 @@
    <country code="266" >
       <name>Norway</name>
       <cont>EU</cont>
-      <subdivision  prefix="LA,LB,LC,LD,LE,LF,LG,LH,LI,LJ,LK,LL,LM,LN" >
+      <subdivision  prefix="LA1,LA2,LA3,LA4,LA5,LA6,LA7,LA8,LA9,LA0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LB1,LB2,LB3,LB4,LB5,LB6,LB7,LB8,LB9,LB0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LC1,LC2,LC3,LC4,LC5,LC6,LC7,LC8,LC9,LC0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LD1,LD2,LD3,LD4,LD5,LD6,LD7,LD8,LD9,LD0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LE1,LE2,LE3,LE4,LE5,LE6,LE7,LE8,LE9,LE0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LF1,LF2,LF3,LF4,LF5,LF6,LF7,LF8,LF9,LF0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LG1,LG2,LG3,LG4,LG5,LG6,LG7,LG8,LG9,LG0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LH1,LH2,LH3,LH4,LH5,LH6,LH7,LH8,LH9,LH0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LI1,LI2,LI3,LI4,LI5,LI6,LI7,LI8,LI9,LI0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LJ1,LJ2,LJ3,LJ4,LJ5,LJ6,LJ7,LJ8,LJ9,LJ0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LK1,LK2,LK3,LK4,LK5,LK6,LK7,LK8,LK9,LK0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LL1,LL2,LL3,LL4,LL5,LL6,LL7,LL8,LL9,LL0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LM1,LM2,LM3,LM4,LM5,LM6,LM7,LM8,LM9,LM0" >
+        <name>Norway</name>
+        <ITU>18</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision  prefix="LN1,LN2,LN3,LN4,LN5,LN6,LN7,LN8,LN9,LN0" >
         <name>Norway</name>
         <ITU>18</ITU>
         <CQ>14</CQ>
@@ -4713,7 +4858,7 @@
    <country code="163" >
       <name>Papua New Guinea</name>
       <cont>OC</cont>
-      <subdivision prefix="P2"  >
+      <subdivision prefix="P2,P21,P22,P23,p24,P25,P26,P27,P28,P29,P20"  >
         <name>Papua New Guinea</name>
         <ITU>51</ITU>
         <CQ>28</CQ>
@@ -4722,7 +4867,52 @@
    <country code="091" >
       <name>Aruba</name>
       <cont>SA</cont>
-      <subdivision  prefix="P4" >
+      <subdivision  prefix="P41" >
+        <name>Aruba</name>
+        <ITU>11</ITU>
+        <CQ>09</CQ>
+      </subdivision>
+      <subdivision  prefix="P42" >
+        <name>Aruba</name>
+        <ITU>11</ITU>
+        <CQ>09</CQ>
+      </subdivision>
+      <subdivision  prefix="P43" >
+        <name>Aruba</name>
+        <ITU>11</ITU>
+        <CQ>09</CQ>
+      </subdivision>
+      <subdivision  prefix="P44" >
+        <name>Aruba</name>
+        <ITU>11</ITU>
+        <CQ>09</CQ>
+      </subdivision>
+      <subdivision  prefix="P45" >
+        <name>Aruba</name>
+        <ITU>11</ITU>
+        <CQ>09</CQ>
+      </subdivision>
+      <subdivision  prefix="P46" >
+        <name>Aruba</name>
+        <ITU>11</ITU>
+        <CQ>09</CQ>
+      </subdivision>
+      <subdivision  prefix="P47" >
+        <name>Aruba</name>
+        <ITU>11</ITU>
+        <CQ>09</CQ>
+      </subdivision>
+      <subdivision  prefix="P48" >
+        <name>Aruba</name>
+        <ITU>11</ITU>
+        <CQ>09</CQ>
+      </subdivision>
+      <subdivision  prefix="P49" >
+        <name>Aruba</name>
+        <ITU>11</ITU>
+        <CQ>09</CQ>
+      </subdivision>
+      <subdivision  prefix="P40" >
         <name>Aruba</name>
         <ITU>11</ITU>
         <CQ>09</CQ>
@@ -4731,7 +4921,7 @@
    <country code="344" >
       <name>DPR of Korea</name>
       <cont>AS</cont>
-      <subdivision prefix="P5"  >
+      <subdivision prefix="P5,P51,P52,P53,P54,P55,P56,P57,P58,P59,P50"  >
         <name>DPR of Korea</name>
         <ITU>44</ITU>
         <CQ>25</CQ>
@@ -4877,6 +5067,51 @@
       </subdivision>
       <subdivision prefix="PW8"  >
         <name>Rondonia</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PX1"  >
+        <name>Rio de Janerio</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PX2"  >
+        <name>Sao Paulo</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PX3"  >
+        <name>Rio Grande do Sul</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PX4"  >
+        <name>Minas Gerais</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PX5"  >
+        <name>Parana</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PX6"  >
+        <name>Bahia</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PX7"  >
+        <name>Pernambuco</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PX8"  >
+        <name>Para</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PX9"  >
+        <name>Mato Grosso</name>
         <ITU>(D)</ITU>
         <CQ>11</CQ>
       </subdivision>
@@ -5262,7 +5497,12 @@
    </country>
    <country code="305" >
      <name>Bangladesh</name>
-     <subdivision prefix="S2,S3">
+     <subdivision prefix="S2,S21,S22,S23,S24,S25,S26,S27,S28,S29,S20">
+       <name>Bangladesh</name>
+       <ITU>41</ITU>
+       <CQ>22</CQ>
+     </subdivision>
+     <subdivision prefix="S3,S31,S32,S33,S34,S35,S36,S37,S38,S39,S30">
        <name>Bangladesh</name>
        <ITU>41</ITU>
        <CQ>22</CQ>
@@ -5270,7 +5510,7 @@
    </country>
    <country code="499" >
      <name>Slovenia</name>
-     <subdivision prefix="S5">
+     <subdivision prefix="S5,S51,S52,S53,S54,S55,S56,S57,S58,S59,S50">
        <name>Slovenia</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
@@ -5278,7 +5518,7 @@
    </country>
    <country code="381" >
      <name>Singapore</name>
-     <subdivision prefix="S6">
+     <subdivision prefix="S6,S61,S62,S63,S64,S65,S66,S67,S68,S69,S60">
        <name>Singapore</name>
        <ITU>27</ITU>
        <CQ>14</CQ>
@@ -5286,7 +5526,7 @@
    </country>
    <country code="381" >
      <name>Seychelles</name>
-     <subdivision prefix="S7">
+     <subdivision prefix="S7,S71,S72,S73,S74,S75,S76,S77,S78,S79,S70">
        <name>Seychelles</name>
        <ITU>53</ITU>
        <CQ>39</CQ>
@@ -5294,7 +5534,7 @@
    </country>
    <country code="462" >
      <name>South Africa</name>
-     <subdivision prefix="S8">
+     <subdivision prefix="S8,S81,S82,S83,S84,S85,S86,S87,S88,S89,S80">
        <name>South Africa</name>
        <ITU>57</ITU>
        <CQ>38</CQ>
@@ -5302,7 +5542,7 @@
    </country>
    <country code="462" >
      <name>Sao Tome and Principe</name>
-     <subdivision prefix="S9">
+     <subdivision prefix="S9,S91,S92,S93,S94,S95,S96,S97,S98,S99,S90">
        <name>Sao Tome and Principe</name>
        <ITU>47</ITU>
        <CQ>36</CQ>
@@ -5511,7 +5751,7 @@
    <country code="478" >
      <name>Tuvalu</name>
      <cont>OC</cont>
-     <subdivision prefix="T2">
+     <subdivision prefix="T2,T21,T22,T23,T24,T25,T26,T27,T28,T29,T20">
        <name>Tuvalu</name>
        <ITU>65</ITU>
        <CQ>31</CQ>
@@ -5556,7 +5796,7 @@
    <country code="232" >
      <name>Somalia</name>
      <cont>AF</cont>
-     <subdivision prefix="T5,60">
+     <subdivision prefix="T5,T51,T52,T53,T54,T55,T56,T57,T58,T59,T50,60">
        <name>Somalia</name>
        <ITU>48</ITU>
        <CQ>37</CQ>
@@ -6016,7 +6256,7 @@
    <country code="094" >
      <name>Antigua &amp; Barbuda</name>
      <cont>NA</cont>
-     <subdivision prefix="V2">
+     <subdivision prefix="V2,V21,V22,V23,V24,V25,V26,V27,V28,V29,V20">
        <name>Antigua &amp; Barbuda</name>
        <ITU>11</ITU>
        <CQ>08</CQ>
@@ -6025,7 +6265,7 @@
    <country code="066" >
      <name>Belise</name>
      <cont>NA</cont>
-     <subdivision prefix="V3">
+     <subdivision prefix="V3,V31,V32,V33,V34,V35,V36,V37,V38,V39,V30">
        <name>Belise</name>
        <ITU>11</ITU>
        <CQ>07</CQ>
@@ -6034,7 +6274,7 @@
    <country code="294" >
      <name>St. Kitts &amp; Nevis</name>
      <cont>NA</cont>
-     <subdivision prefix="V4">
+     <subdivision prefix="V4,V41,V42,V43,V44,V45,V46,V47,V48,V49,V40">
        <name>St. Kitts &amp; Nevis</name>
        <ITU>11</ITU>
        <CQ>08</CQ>
@@ -6043,7 +6283,7 @@
    <country code="464" >
      <name>Namibia</name>
      <cont>AF</cont>
-     <subdivision prefix="V5">
+     <subdivision prefix="V5,V51,V52,V53,V54,V55,V56,V57,V58,V59,V50">
        <name>Namibia</name>
        <ITU>57</ITU>
        <CQ>38</CQ>
@@ -6052,7 +6292,7 @@
    <country code="173" >
      <name>Mirconesia</name>
      <cont>OC</cont>
-     <subdivision prefix="V6">
+     <subdivision prefix="V6,V61,V62,V63,V64,V65,V66,V67,V68,V69,V60">
        <name>Mirconesia</name>
        <ITU>65</ITU>
        <CQ>27</CQ>
@@ -6061,7 +6301,7 @@
    <country code="168" >
      <name>Marshall Is.</name>
      <cont>OC</cont>
-     <subdivision prefix="V7">
+     <subdivision prefix="V7,V71,V72,V73,V74,V75,V76,V77,V78,V79,V70">
        <name>Marshall Is.</name>
        <ITU>65</ITU>
        <CQ>28</CQ>
@@ -6070,7 +6310,7 @@
    <country code="345" >
      <name>Brunei Darussalam</name>
      <cont>OC</cont>
-     <subdivision prefix="V8">
+     <subdivision prefix="V8,V81,V82,V83,V84,V85,V86,V87,V88,V89,V80">
        <name>Brunei Darussalam</name>
        <ITU>54</ITU>
        <CQ>28</CQ>
@@ -6664,7 +6904,7 @@
    <country code="452" >
      <name>Zimbabwe</name>
      <cont>AF</cont>
-     <subdivision prefix="Z2">
+     <subdivision prefix="Z2,Z21,Z22,Z23,Z24,Z25,Z26,Z27,Z28,Z29,Z20">
        <name>Zimbabwe</name>
        <ITU>53</ITU>
        <CQ>38</CQ>
@@ -6673,7 +6913,7 @@
    <country code="502" >
      <name>Macedonia</name>
      <cont>EU</cont>
-     <subdivision prefix="Z3">
+     <subdivision prefix="Z3,Z31,Z32,Z33,Z34,Z35,Z36,Z37,Z38,Z39,Z30">
        <name>Macedonis</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
