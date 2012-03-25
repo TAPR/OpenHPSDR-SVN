@@ -1938,6 +1938,31 @@
         <ITU>37</ITU>
         <CQ>33</CQ>
       </subdivision>
+      <subdivision prefix="5C1,5C2,5C3,5C4,5C5,5C6,5C7,5C8,5C9,5C0"  >
+	<name>Morocco</name>
+        <ITU>37</ITU>
+        <CQ>33</CQ>
+      </subdivision>
+      <subdivision prefix="5D1,5D2,5D3,5D4,5D5,5D6,5D7,5D8,5D9,5D0"  >
+	<name>Morocco</name>
+        <ITU>37</ITU>
+        <CQ>33</CQ>
+      </subdivision>
+      <subdivision prefix="5E1,5E2,5E3,5E4,5E5,5E6,5E7,5E8,5E9,5E0"  >
+	<name>Morocco</name>
+        <ITU>37</ITU>
+        <CQ>33</CQ>
+      </subdivision>
+      <subdivision prefix="5F1,5F2,5F3,5F4,5F5,5F6,5F7,5F8,5F9,5F0"  >
+	<name>Morocco</name>
+        <ITU>37</ITU>
+        <CQ>33</CQ>
+      </subdivision>
+      <subdivision prefix="5G1,5G2,5G3,5G4,5G5,5G6,5G7,5G8,5G9,5G0"  >
+	<name>Morocco</name>
+        <ITU>37</ITU>
+        <CQ>33</CQ>
+      </subdivision>
    </country>
    <country code="104" >
       <name>Bolivia</name>
@@ -1956,11 +1981,26 @@
         <ITU>37</ITU>
         <CQ>14</CQ>
       </subdivision>
+      <subdivision prefix="CR0,CR1,CR2,CR3,CR4,CR5,CR6,CR7,CR8,CR9"  >
+	<name>Portugal</name>
+        <ITU>37</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="CS0,CS1,CS2,CS3,CS4,CS5,CS6,CS7,CS8,CS9"  >
+	<name>Portugal</name>
+        <ITU>37</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="CT0,CT1,CT2,CT3,CT4,CT5,CT6,CT7,CT8,CT9"  >
+	<name>Portugal</name>
+        <ITU>37</ITU>
+        <CQ>14</CQ>
+      </subdivision>
    </country>
    <country code="256" >
       <name>Madeira Is.</name>
       <cont>AF</cont>
-      <subdivision prefix="CT3"  >
+      <subdivision prefix="CT3,CQ3,CT9,CQ9"  >
 	<name>Madeira Is.</name>
         <ITU>36</ITU>
         <CQ>33</CQ>
@@ -1969,8 +2009,48 @@
    <country code="149" >
       <name>Azores</name>
       <cont>EU</cont>
-      <subdivision prefix="CU0,CU1,CU2,CU3,CU4,CU5,CU6,CU7,CU8,CU9"  >
-	<name>Azores</name>
+      <subdivision prefix="CU1"  >
+	<name>Santa Maria Island</name>
+        <ITU>36</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="CU2"  >
+	<name>Sao Miguel Island</name>
+        <ITU>36</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="CU3"  >
+	<name>Terceira Island</name>
+        <ITU>36</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="CU4"  >
+	<name>Graciosa Island</name>
+        <ITU>36</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="CU5"  >
+	<name>Sao Jorge Island</name>
+        <ITU>36</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="CU6"  >
+	<name>Pico Island</name>
+        <ITU>36</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="CU7"  >
+	<name>Faial Island</name>
+        <ITU>36</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="CU8"  >
+	<name>Flores Island</name>
+        <ITU>36</ITU>
+        <CQ>14</CQ>
+      </subdivision>
+      <subdivision prefix="CU9"  >
+	<name>Corvo Island</name>
         <ITU>36</ITU>
         <CQ>14</CQ>
       </subdivision>
@@ -2098,7 +2178,7 @@
    <country code="375" >
       <name>Philippines</name>
       <cont>OC</cont>
-      <subdivision prefix="DU1,4F1"  >
+      <subdivision prefix="DU1,DV1,DW1,DX1,DY1,DZ1,4F1"  >
         <name>National Captial Region</name>
         <ITU>50</ITU>
         <CQ>27</CQ>
@@ -2107,7 +2187,7 @@
    <country code="375" >
       <name>Philippines</name>
       <cont>OC</cont>
-      <subdivision prefix="DU2,4F2"  >
+      <subdivision prefix="DU2,DV2,DW2,DX2,DY2,DZ2,4F2"  >
         <name>Ilcos</name>
         <ITU>50</ITU>
         <CQ>27</CQ>
@@ -2116,7 +2196,7 @@
    <country code="375" >
       <name>Philippines</name>
       <cont>OC</cont>
-      <subdivision prefix="DU3,4F3"  >
+      <subdivision prefix="DU3,DV3,DW3,DX3,DY3,DZ3,4F3"  >
         <name>Central Luzon</name>
         <ITU>50</ITU>
         <CQ>27</CQ>
@@ -2125,7 +2205,7 @@
    <country code="375" >
       <name>Philippines</name>
       <cont>OC</cont>
-      <subdivision prefix="DU4,4F4"  >
+      <subdivision prefix="DU4,DV4,DW4,DX4,DY4,DZ4,4F4"  >
         <name>Bicol</name>
         <ITU>50</ITU>
         <CQ>27</CQ>
@@ -2134,7 +2214,7 @@
    <country code="375" >
       <name>Philippines</name>
       <cont>OC</cont>
-      <subdivision prefix="DU5,4F5"  >
+      <subdivision prefix="DU5,DV5,DW5,DX5,DY5,DZ5,4F5"  >
         <name>Eastern Visayas</name>
         <ITU>50</ITU>
         <CQ>27</CQ>
@@ -2143,7 +2223,7 @@
    <country code="375" >
       <name>Philippines</name>
       <cont>OC</cont>
-      <subdivision prefix="DU6,4F6"  >
+      <subdivision prefix="DU6,DV6,DW6,DX6,DY6,DZ6,4F6"  >
         <name>Eastern Visayas</name>
         <ITU>50</ITU>
         <CQ>27</CQ>
@@ -2152,7 +2232,7 @@
    <country code="375" >
       <name>Philippines</name>
       <cont>OC</cont>
-      <subdivision prefix="DU7,4F7"  >
+      <subdivision prefix="DU7,DV7,DW7,DX7,DY7,DZ7,4F7"  >
         <name>Western Visayas</name>
         <ITU>50</ITU>
         <CQ>27</CQ>
@@ -2161,7 +2241,7 @@
    <country code="375" >
       <name>Philippines</name>
       <cont>OC</cont>
-      <subdivision prefix="DU8,4F8"  >
+      <subdivision prefix="DU8,DV8,DW8,DX8,DY8,DZ8,4F8"  >
         <name>Western Mindanao</name>
         <ITU>50</ITU>
         <CQ>27</CQ>
@@ -2170,7 +2250,7 @@
    <country code="375" >
       <name>Philippines</name>
       <cont>OC</cont>
-      <subdivision prefix="DU9,4F9"  >
+      <subdivision prefix="DU9,DV9,DW9,DX9,DY9,DZ9,4F9"  >
         <name>Northern Mindanao</name>
         <ITU>50</ITU>
         <CQ>27</CQ>
@@ -2179,7 +2259,7 @@
    <country code="375" >
       <name>Philippines</name>
       <cont>OC</cont>
-      <subdivision prefix="DU0,4F0"  >
+      <subdivision prefix="DU0,DV0,DW0,DX0,DY0,DZ0,4F0"  >
         <name>Special Event Station</name>
         <ITU>50</ITU>
         <CQ>27</CQ>
@@ -3494,57 +3574,62 @@
    <country code="248" >
       <name>Italy</name>
       <cont>EU</cont>
-      <subdivision   prefix="I1,IK1,IW1,IO1,IZ1" >
+      <subdivision   prefix="I1,II1,IK1,IW1,IO1,IQ1,IR1,IU1,IZ1" >
         <name>Piemonte &amp; Liguria</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
       </subdivision>
-      <subdivision   prefix="I2,IK2,IO2,IW2,IZ2" >
+      <subdivision   prefix="I2,II2,IK2,IW2,IO2,IQ2,IR2,IU2,IZ2" >
         <name>Lombardia</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
       </subdivision>
-      <subdivision   prefix="I3,IK3,IO3,IW3E,IW3F,IW3G,IW3H,IW3I,IW3J,IW3K,IW3L,IW3M,IW3N,IW3O,IW3P,IZ3" >
+      <subdivision   prefix="I3,II3,IK3,IW3E,IW3F,IW3G,IW3H,IW3I,IW3J,IW3K,IW3L,IW3M,IW3N,IW3O,IW3P,IZ3" >
         <name>Veneto</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
       </subdivision>
-      <subdivision   prefix="IN3,IO3,IW3A,IW3B,IW3C,IW3D" >
+      <subdivision   prefix="IN3,IO3,IR3,IW3A,IW3B,IW3C,IW3D" >
         <name>Trentio A.A.</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
       </subdivision>
-      <subdivision   prefix="IV3,IW3Q,IW3R,IW3S,IW3T,IW3U,IW3V,IW3W,IW3X,IW3Y,IW3Z" >
+      <subdivision   prefix="IU3,IV3,IW3Q,IW3R,IW3S,IW3T,IW3U,IW3V,IW3W,IW3X,IW3Y,IW3Z" >
         <name>Friuli V.G.</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
       </subdivision>
-      <subdivision   prefix="I4,IK4,IO4,IW4,IZ4" >
+      <subdivision   prefix="I4,II4,IK4,IW4,IO4,IQ4,IR4,IU4,IZ4" >
         <name>Emilia Romagna</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
       </subdivision>
-      <subdivision   prefix="I5,IK5,IO5,IW5,IZ5" >
+      <subdivision   prefix="I5,II5,IK5,IW5,IO5,IQ5,IR5,IU5,IZ5" >
         <name>Toscana</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
       </subdivision>
-      <subdivision   prefix="I6,IK6,IO6,IW6,IZ6" >
+      <subdivision   prefix="I6,II6,IK6,IW6,IO6,IQ6,IR6,IU6,IZ6" >
         <name>Marche &amp; Abruzzo</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
       </subdivision>
-      <subdivision   prefix="I7,IK7,IO7,IW7,IZ7" >
+      <subdivision   prefix="I7,II7,IK7,IW7,IO7,IQ7,IR7,IU7,IZ7" >
         <name>Puglia &amp; East Basilicata</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
       </subdivision>
-      <subdivision   prefix="I8,IK8,IO8,IW8,IZ8" >
+      <subdivision   prefix="I8,II8,IK8,IW8,IO8,IQ8,IR8,IU8,IZ8" >
         <name>Campania, Molise Calabria &amp; West Basilicata</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
       </subdivision>
-      <subdivision   prefix="I0,IK0,IO0,IW0,IZ0" >
+      <subdivision   prefix="II9,IO9,IR9,IU9" >
+        <name>Special Event</name>
+        <ITU>28</ITU>
+        <CQ>15</CQ>
+      </subdivision>
+      <subdivision   prefix="I0,II0,IK0,IW0,IO0,IQ0,IR0,IU0,IZ0" >
         <name>Lazio &amp; Umbria</name>
         <ITU>28</ITU>
         <CQ>15</CQ>
@@ -4230,7 +4315,7 @@
    <country code="006" >
       <name>Alaska</name>
       <cont>NA</cont>
-      <subdivision  prefix="KL,AL,NL,WL"  >
+      <subdivision  prefix="KL7,AL7,NL7,WL7"  >
         <name>Alaska</name>
         <ITU>1,2</ITU>
         <CQ>1</CQ>
@@ -4459,7 +4544,7 @@
         <ITU>14,</ITU>
         <CQ>13</CQ>
       </subdivision>
-      <subdivision prefix="LO1X,LP1X,LQ1X,LR1X,LX1X,LT1X,LU1X,LV1X,LW1X"  >
+      <subdivision prefix="LO1X,LP1X,LQ1X,LR1X,,LT1X,LU1X,LV1X,LW1X"  >
         <name>Santa Cruz &amp; Tierra Del Fuego</name>
         <ITU>14,</ITU>
         <CQ>13</CQ>
@@ -4521,12 +4606,12 @@
         <ITU>28</ITU>
         <CQ>20</CQ>
       </subdivision>
-      <subdivision  prefix="LZ1,LZ3,LZ5,LZ7" >
+      <subdivision  prefix="LZ1,LZ3,LZ5,LZ7,LZ9" >
         <name>Southern Bulgaria</name>
         <ITU>28</ITU>
         <CQ>20</CQ>
       </subdivision>
-      <subdivision  prefix="LZ2,LZ4,LZ6" >
+      <subdivision  prefix="LZ2,LZ4,LZ6,LZ8" >
         <name>Northen Bulgaria</name>
         <ITU>28</ITU>
         <CQ>20</CQ>
@@ -5025,6 +5110,11 @@
         <ITU>(D)</ITU>
         <CQ>11</CQ>
       </subdivision>
+      <subdivision prefix="PR5"  >
+        <name>Santa Catarina</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
       <subdivision prefix="PR7"  >
         <name>Paraiba</name>
         <ITU>(D)</ITU>
@@ -5050,6 +5140,11 @@
         <ITU>(D)</ITU>
         <CQ>11</CQ>
       </subdivision>
+      <subdivision prefix="PT5"  >
+        <name>Santa Catarina</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
       <subdivision prefix="PT7"  >
         <name>Ceara</name>
         <ITU>(D)</ITU>
@@ -5062,6 +5157,36 @@
       </subdivision>
       <subdivision prefix="PV8"  >
         <name>Roraima</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PU1"  >
+        <name>Espirito Santo</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PU2"  >
+        <name>Goias</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PU5"  >
+        <name>Santa Catarina</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PU6"  >
+        <name>Sergipe</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PU7"  >
+        <name>Alagoas</name>
+        <ITU>(D)</ITU>
+        <CQ>11</CQ>
+      </subdivision>
+      <subdivision prefix="PU8"  >
+        <name>Amazonas</name>
         <ITU>(D)</ITU>
         <CQ>11</CQ>
       </subdivision>
@@ -5595,47 +5720,47 @@
    <country code="269" >
      <name>Poland</name>
      <cont>EU</cont>
-     <subdivision prefix="SN1,SO1,SP1,SQ1,SR1">
+     <subdivision prefix="SN1,SO1,SP1,SQ1,SR1,HF1">
        <name>Zacodniopomorskie</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
      </subdivision>
-     <subdivision prefix="SN2,SO2,SP2,SQ2,SR2">
+     <subdivision prefix="SN2,SO2,SP2,SQ2,SR2,HF2">
        <name>Pomorskie, Kujawsko - Podlaskie</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
      </subdivision>
-     <subdivision prefix="SN3,SO3,SP3,SQ3,SR3">
+     <subdivision prefix="SN3,SO3,SP3,SQ3,SR3,HF3">
        <name>Wielkopolskie, Lubuskie</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
      </subdivision>
-     <subdivision prefix="SN4,SO4,SP4,SQ4,SR4">
+     <subdivision prefix="SN4,SO4,SP4,SQ4,SR4,HF4">
        <name>Warminsko - Mazurskie, Podlaskie</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
      </subdivision>
-     <subdivision prefix="SN5,SO5,SP5,SQ5,SR5">
+     <subdivision prefix="SN5,SO5,SP5,SQ5,SR5,HF5">
        <name>Mazowieckie</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
      </subdivision>
-     <subdivision prefix="SN6,SO6,SP6,SQ6,SR6">
+     <subdivision prefix="SN6,SO6,SP6,SQ6,SR6,HF6">
        <name>Dolnoslaskie, Opolskie</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
      </subdivision>
-     <subdivision prefix="SN7,SO7,SP7,SQ7,SR7">
+     <subdivision prefix="SN7,SO7,SP7,SQ7,SR7,HF7">
        <name>Lodzkie, Swietokrzyskie</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
      </subdivision>
-     <subdivision prefix="SN8,SO8,SP8,SQ8,SR8">
+     <subdivision prefix="SN8,SO8,SP8,SQ8,SR8,HF8">
        <name>Lubelskie, Podkarpackie</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
      </subdivision>
-     <subdivision prefix="SN9,SO9,SP9,SQ9,SR9">
+     <subdivision prefix="SN9,SO9,SP9,SQ9,SR9,HF9">
        <name>Slaskie, Malopolskie</name>
        <ITU>28</ITU>
        <CQ>15</CQ>
