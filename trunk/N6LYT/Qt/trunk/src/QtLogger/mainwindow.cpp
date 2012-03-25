@@ -330,8 +330,8 @@ void MainWindow::processPendingDatagrams()
               QString output = QString("%1").arg(datagram.data());
               if( output.contains("frequency")){
                  QString datastr = parseDatagrams(output);
-                 qDebug() << datastr;
-                 add->setFrequency( datastr );
+                 qDebug() << (datastr.toDouble())/1000000.0;
+                 add->setFrequency( QString("%1").arg((datastr.toDouble()/1000000.0),0,'f',6) );
               }else if( output.contains("mode")){
                  QString datastr = parseDatagrams(output);
                  qDebug() << datastr;
