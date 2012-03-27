@@ -6128,7 +6128,8 @@ namespace PowerSDR
                 duration = (int)timer_waterfall2.DurationMsec;
             }
 
-            if (duration > waterfall_update_period)
+            if ((duration > waterfall_update_period) || (duration < 0))
+            //if (duration > waterfall_update_period)
             {
                 if (rx == 1) timer_waterfall.Start();
                 else if (rx == 2) timer_waterfall2.Start();
