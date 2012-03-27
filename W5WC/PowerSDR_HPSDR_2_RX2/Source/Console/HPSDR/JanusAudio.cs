@@ -313,12 +313,6 @@ namespace PowerSDR
 		// and set fwVersionmsg to point to an appropriate message
 		private static bool fwVersionsGood() 
 		{
-             if (forceFWGood == true)
-            {
-                System.Console.WriteLine("Firmware ver check forced good!");
-                return true;
-            }
-
             bool result = true;
 			Console c = Console.getConsole();
             int penny_ver = 0;
@@ -326,7 +320,13 @@ namespace PowerSDR
             byte[] metis_ver = new byte[1];
             int mercury2_ver = 0;
 
-			if  ( c != null && c.HPSDRisMetis )  
+            if (forceFWGood == true || c.CurrentModel == Model.HERMES)
+            {
+                System.Console.WriteLine("Firmware ver check forced good!");
+                return true;
+            }
+
+            if (c != null && c.HPSDRisMetis)  
 			{
                 GetMetisCodeVersion(metis_ver);                   
 
