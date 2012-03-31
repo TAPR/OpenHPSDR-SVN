@@ -39642,7 +39642,9 @@ namespace PowerSDR
                 {
                     lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0");
                 }
+
                 lblMercuryFWVer.Text = console.MercuryPresent ? JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0") : "Mercury: n/a";
+
                 if (console.PennyPresent || console.PennyLanePresent)
                     lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penny[Lane]: 0\\.0");
                 else lblPenelopeFWVer.Text = "Penny[Lane]: n/a";
@@ -39656,10 +39658,10 @@ namespace PowerSDR
             }
             else
             {
-                lblOzyFX2.Text = "Ozy FX2: n/a";
-                lblOzyFWVer.Text = "Ozy: n/a";
-                lblMercuryFWVer.Text = "Mercury: n/a";
-                lblPenelopeFWVer.Text = "Penny[Lane]: n/a";
+                lblOzyFX2.Text = JanusAudio.getMercuryFWVersion().ToString("Hermes: 0\\.0");
+                lblOzyFWVer.Text = "";
+                lblMercuryFWVer.Text = "";
+                lblPenelopeFWVer.Text = "";
             }
         }
 
