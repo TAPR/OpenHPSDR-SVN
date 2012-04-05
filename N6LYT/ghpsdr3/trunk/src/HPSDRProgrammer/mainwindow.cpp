@@ -406,7 +406,7 @@ void MainWindow::getMAC() {
 void MainWindow::macAddress(unsigned char* mac) {
     text.sprintf("%02X:%02X:%02X:%02X:%02X:%02X",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
     ui->macLineEdit->setText(text);
-    status("Metis MAC address read successfully");
+    text.sprintf("%s MAC address read successfully",isMetis?"Metis":"Hermes");
     idle();
 }
 
@@ -457,7 +457,8 @@ void MainWindow::ipAddress(unsigned char* ip) {
     ui->ipCLineEdit->setText(text);
     text.sprintf("%d",ip[3]);
     ui->ipDLineEdit->setText(text);
-    status("Metis IP address read successfully");
+    text.sprintf("%s IP address read successfully",isMetis?"Metis":"Hermes");
+    status(text);
     idle();
 }
 
