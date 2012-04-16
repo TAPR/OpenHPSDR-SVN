@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   UI.h
  * Author: John Melton, G0ORX/N6LYT
  *
@@ -50,7 +50,7 @@
 #include "Connection.h"
 //#include "connection.h"
 #include "Spectrum.h"
-#include "Band.h"
+#include "bands.h"
 #include "BandLimit.h"
 #include "Mode.h"
 #include "Filters.h"
@@ -123,21 +123,7 @@ public slots:
     void squelchValueChanged(int);
 
     void actionKeypad();
-    void setKeypadFrequency(long long);
-
-    void action160();
-    void action80();
-    void action60();
-    void action40();
-    void action30();
-    void action20();
-    void action17();
-    void action15();
-    void action12();
-    void action10();
-    void action6();
-    void actionGen();
-    void actionWWV();
+    void setKeypadFrequency(quint64);
 
     void actionCWL();
     void actionCWU();
@@ -182,11 +168,11 @@ public slots:
 
     void configBuffer(char* header,char*buffer);
 
-    void bandChanged(int previousBand,int newBand);
+    void bandChanged(int band);
     void modeChanged(int previousMode,int newMode);
     void filtersChanged(FiltersBase* previousFilters,FiltersBase* newFilters);
     void filterChanged(int previousFilter,int newFilter);
-    void frequencyChanged(long long frequency);
+    void frequencyChanged(quint64 frequency);
 
     void updateSpectrum();
 
@@ -224,7 +210,7 @@ public slots:
     void bookmarkUpdated(int,QString);
     void bookmarkSelected(int entry);
 
-    void addXVTR(QString,long long,long long,long long,long long,int,int);
+    void addXVTR(QString,quint64,quint64,quint64,quint64,int,int);
     void deleteXVTR(int index);
     void selectXVTR(QAction* action);
     void selectBookmark(QAction* action);
@@ -232,10 +218,16 @@ public slots:
     void actionMox();
     void actionRemoteMic();
 
+    void hardwareActionTriggered();
+    void hardwareChoiceTriggered();
+
 signals:
     void subRxStateChanged(bool state);
 
 private:
+
+    QSettings* settings;
+
     bool isConnected;
 
     void setSubRxPan();
@@ -246,7 +238,9 @@ private:
 
     void appendBookmark(Bookmark* bookmark);
 
-    QString stringFrequency(long long frequency);
+    QString stringFrequency(quint64 frequency);
+
+    void configOptions(QDomDocument* configuration);
 
     QString getConfigDir();
     QString configDir;
@@ -266,9 +260,7 @@ private:
     int subRxGain;
     bool subRx;
 
-    long long subRxFrequency;
-    //Connection connection;
-    Band band;
+    Bands bands;
     Mode mode;
     Filters filters;
     CWLFilters cwlFilters;
@@ -288,8 +280,9 @@ private:
 
     int cwPitch;
 
-    long long frequency;
-    long long ifFrequency;
+    qint64 frequency;
+    qint64 ifFrequency;
+    qint64 subRxFrequency;
 
     int fps;
 

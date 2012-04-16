@@ -72,7 +72,7 @@ public:
     void setWaterfallLow(int low);
 
     QAudioFormat::Endian getByteOrder();
-    int getSampleRate();
+    int getAudioSampleRate();
     int getChannels();
     
     int getNrTaps();
@@ -90,6 +90,12 @@ public:
 
 
     void setHardwareConfiguration(QDomDocument* doc);
+
+    QString getServerType();
+    long getMinFrequency();
+    long getMaxFrequency();
+    int getSampleRate();
+
 
 signals:
     void hostChanged(QString host);
@@ -120,7 +126,7 @@ signals:
     void nbThresholdChanged(double threshold);
     void sdromThresholdChanged(double threshold);
 
-    void addXVTR(QString title,long long minFrequency,long long maxFrequency,long long ifFrequency,long long freq,int m,int filt);
+    void addXVTR(QString title,quint64 minFrequency,quint64 maxFrequency,quint64 ifFrequency,quint64 freq,int m,int filt);
     void deleteXVTR(int index);
 
 
@@ -155,6 +161,11 @@ public slots:
 private:
     Ui::Configure widget;
     void printTree(QDomElement element,QString indent);
+
+    QString serverType;
+    int sampleRate;
+    long minFrequency;
+    long maxFrequency;
 };
 
 #endif	/* _CONFIGURE_H */

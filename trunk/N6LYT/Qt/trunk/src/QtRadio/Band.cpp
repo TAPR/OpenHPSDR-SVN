@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Band.cpp
  * Author: John Melton, G0ORX/N6LYT
  * 
@@ -25,381 +25,352 @@
 
 #include "Band.h"
 #include "Mode.h"
+#include "../Common/Bands.h"
 
-Band::Band() {
-    int i;
+Band::Band(QString label, int id, int min,int max,QSettings *settings) {
 
-    currentBand=BAND_40;
-    currentStack=0;
-    for(i=0;i<BAND_LAST;i++) {
-        stack[i]=0;
+    // setup defaults
+    this->label=label;
+    this->id=id;
+    bandLimit.setMin(min);
+    bandLimit.setMax(max);
+
+    // update from settings
+    settings->beginGroup("BAND_"+label);
+    if(settings->contains("id")) this->id=settings->value("id").toInt();
+    if(settings->contains("label")) this->label=settings->value("label").toString();
+    if(settings->contains("minfrequency")) bandLimit.setMin(settings->value("minfrequency").toLongLong());
+    if(settings->contains("maxfrequency")) bandLimit.setMax(settings->value("maxfrequency").toLongLong());
+
+    // default bandstack entries
+    for(int i=0;i<BANDSTACK_ENTRIES;i++) {
+        bandstack[i].setFrequency(min);
+        bandstack[i].setFilter(0);
+        bandstack[i].setMode(0);
+        bandstack[i].setSpectrumHigh(-40);
+        bandstack[i].setSpectrumLow(-140);
+        bandstack[i].setWaterfallHigh(-60);
+        bandstack[i].setWaterfallLow(-125);
+    }
+    // default band specific bandstack entries
+    switch(id) {
+    case HAM_BAND_160:
+        bandstack[0].setFrequency(1820000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(3);
+        bandstack[1].setFrequency(1840000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(3);
+        bandstack[2].setFrequency(1900000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(0);
+        bandstack[3].setFrequency(1920000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(0);
+        bandstack[4].setFrequency(1940000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(0);
+        break;
+    case HAM_BAND_80:
+        bandstack[0].setFrequency(1820000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(3);
+        bandstack[1].setFrequency(1840000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(3);
+        bandstack[2].setFrequency(1900000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(0);
+        bandstack[3].setFrequency(1920000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(0);
+        bandstack[4].setFrequency(1940000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(0);
+        break;
+    case HAM_BAND_60:
+        bandstack[0].setFrequency(3520000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(3);
+        bandstack[1].setFrequency(3540000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(3);
+        bandstack[2].setFrequency(3600000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(0);
+        bandstack[3].setFrequency(3650000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(0);
+        bandstack[4].setFrequency(3750000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(0);
+        break;
+    case HAM_BAND_40:
+        bandstack[0].setFrequency(7010000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(3);
+        bandstack[1].setFrequency(70400000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(3);
+        bandstack[2].setFrequency(7050000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(0);
+        bandstack[3].setFrequency(7100000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(0);
+        bandstack[4].setFrequency(7150000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(0);
+        break;
+    case HAM_BAND_30:
+        bandstack[0].setFrequency(10200000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(10300000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(10400000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(10100000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(10140000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_20:
+        bandstack[0].setFrequency(14010000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(14020000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(14050000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(14150000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(14250000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_17:
+        bandstack[0].setFrequency(18070000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(18096000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(18100000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(18120000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(18150000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_15:
+        bandstack[0].setFrequency(21030000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(21070000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(21100000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(21200000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(21300000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_12:
+        bandstack[0].setFrequency(24900000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(24930000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(24950000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(24960000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(24970000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_10:
+        bandstack[0].setFrequency(28030000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(28070000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(28100000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(28500000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(29000000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_6:
+        bandstack[0].setFrequency(50030000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(50070000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(50100000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(50500000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(51500000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_4:
+        bandstack[0].setFrequency(70030000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(70070000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(70100000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(70200000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(70300000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_144:
+        bandstack[0].setFrequency(144050000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(144100000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(144150000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(144300000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(145000000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_432:
+        bandstack[0].setFrequency(430050000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(430100000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(430300000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(432150000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(432800000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_1240:
+        bandstack[0].setFrequency(1240100000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(1272000000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(1296000000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(1296600000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(1299000000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case HAM_BAND_2400:
+        bandstack[0].setFrequency(2310100000);
+        bandstack[0].setFilter(5);
+        bandstack[0].setMode(4);
+        bandstack[1].setFrequency(2310300000);
+        bandstack[1].setFilter(5);
+        bandstack[1].setMode(4);
+        bandstack[2].setFrequency(2310500000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(1);
+        bandstack[3].setFrequency(2320000000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(1);
+        bandstack[4].setFrequency(2330000000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(1);
+        break;
+    case AIR_BAND:
+        bandstack[0].setFrequency(121800000);
+        bandstack[0].setFilter(3);
+        bandstack[0].setMode(MODE_AM);
+        bandstack[1].setFrequency(124225000);
+        bandstack[1].setFilter(3);
+        bandstack[1].setMode(MODE_AM);
+        bandstack[2].setFrequency(126825000);
+        bandstack[2].setFilter(3);
+        bandstack[2].setMode(MODE_AM);
+        bandstack[3].setFrequency(118000000);
+        bandstack[3].setFilter(3);
+        bandstack[3].setMode(MODE_AM);
+        bandstack[4].setFrequency(127000000);
+        bandstack[4].setFilter(3);
+        bandstack[4].setMode(MODE_AM);
+        break;
+    default:
+        for(int i=0;i<BANDSTACK_ENTRIES;i++) {
+            bandstack[i].setFrequency(min);
+            bandstack[i].setFilter(3);
+            bandstack[i].setMode(MODE_AM);
+            bandstack[i].setSpectrumHigh(-40);
+            bandstack[i].setSpectrumLow(-140);
+            bandstack[i].setWaterfallHigh(-60);
+            bandstack[i].setWaterfallLow(-125);
+        }
+        break;
     }
 
-    // bandstack entries max of BANDSTACK_ENTRIES or frequency 0
-    bandstack[BAND_160][0].setFrequency(1810000LL);
-    bandstack[BAND_160][0].setMode(MODE_CWL);
-    bandstack[BAND_160][0].setFilter(4);
-    bandstack[BAND_160][0].setSpectrumHigh(-40);
-    bandstack[BAND_160][0].setSpectrumLow(-140);
-    bandstack[BAND_160][0].setWaterfallHigh(-60);
-    bandstack[BAND_160][0].setWaterfallLow(-125);
-    bandstack[BAND_160][1].setFrequency(1835000LL);
-    bandstack[BAND_160][1].setMode(MODE_LSB);
-    bandstack[BAND_160][1].setFilter(4);
-    bandstack[BAND_160][1].setSpectrumHigh(-40);
-    bandstack[BAND_160][1].setSpectrumLow(-140);
-    bandstack[BAND_160][1].setWaterfallHigh(-60);
-    bandstack[BAND_160][1].setWaterfallLow(-125);
-    bandstack[BAND_160][2].setFrequency(1845000LL);
-    bandstack[BAND_160][2].setMode(MODE_LSB);
-    bandstack[BAND_160][2].setFilter(3);
-    bandstack[BAND_160][2].setSpectrumHigh(-40);
-    bandstack[BAND_160][2].setSpectrumLow(-140);
-    bandstack[BAND_160][2].setWaterfallHigh(-60);
-    bandstack[BAND_160][2].setWaterfallLow(-125);
-    bandstack[BAND_160][3].setFrequency(0LL);
+    for(int i=0;i<BANDSTACK_ENTRIES;i++) {
+        settings->beginGroup("BANDSTACK_"+QString::number(i));
+        if(settings->contains("frequency")) bandstack[i].setFrequency(settings->value("frequency").toLongLong());
+        if(settings->contains("filter")) bandstack[i].setFilter(settings->value("filter").toInt());
+        if(settings->contains("mode")) bandstack[i].setMode(settings->value("mode").toInt());
+        if(settings->contains("spectrumhigh")) bandstack[i].setSpectrumHigh(settings->value("spectrumhigh").toInt());
+        if(settings->contains("spectrumlow")) bandstack[i].setSpectrumLow(settings->value("spectrumlow").toInt());
+        if(settings->contains("waterfallhigh")) bandstack[i].setWaterfallHigh(settings->value("waterfallhigh").toInt());
+        if(settings->contains("waterfalllow")) bandstack[i].setWaterfallLow(settings->value("waterfalllow").toInt());
+        settings->endGroup();
+    }
 
-    bandstack[BAND_80][0].setFrequency(3501000LL);
-    bandstack[BAND_80][0].setMode(MODE_CWL);
-    bandstack[BAND_80][0].setFilter(4);
-    bandstack[BAND_80][0].setSpectrumHigh(-40);
-    bandstack[BAND_80][0].setSpectrumLow(-140);
-    bandstack[BAND_80][0].setWaterfallHigh(-60);
-    bandstack[BAND_80][0].setWaterfallLow(-125);
-    bandstack[BAND_80][1].setFrequency(3751000LL);
-    bandstack[BAND_80][1].setMode(MODE_LSB);
-    bandstack[BAND_80][1].setFilter(3);
-    bandstack[BAND_80][1].setSpectrumHigh(-40);
-    bandstack[BAND_80][1].setSpectrumLow(-140);
-    bandstack[BAND_80][1].setWaterfallHigh(-60);
-    bandstack[BAND_80][1].setWaterfallLow(-125);
-    bandstack[BAND_80][2].setFrequency(3850000LL);
-    bandstack[BAND_80][2].setMode(MODE_LSB);
-    bandstack[BAND_80][2].setFilter(3);
-    bandstack[BAND_80][2].setSpectrumHigh(-40);
-    bandstack[BAND_80][2].setSpectrumLow(-140);
-    bandstack[BAND_80][2].setWaterfallHigh(-60);
-    bandstack[BAND_80][2].setWaterfallLow(-125);
-    bandstack[BAND_80][3].setFrequency(0LL);
-
-    bandstack[BAND_60][0].setFrequency(5330500LL);
-    bandstack[BAND_60][0].setMode(MODE_CWL);
-    bandstack[BAND_60][0].setFilter(3);
-    bandstack[BAND_60][0].setSpectrumHigh(-40);
-    bandstack[BAND_60][0].setSpectrumLow(-140);
-    bandstack[BAND_60][0].setWaterfallHigh(-60);
-    bandstack[BAND_60][0].setWaterfallLow(-125);
-    bandstack[BAND_60][1].setFrequency(5346500LL);
-    bandstack[BAND_60][1].setMode(MODE_LSB);
-    bandstack[BAND_60][1].setFilter(3);
-    bandstack[BAND_60][1].setSpectrumHigh(-40);
-    bandstack[BAND_60][1].setSpectrumLow(-140);
-    bandstack[BAND_60][1].setWaterfallHigh(-60);
-    bandstack[BAND_60][1].setWaterfallLow(-125);
-    bandstack[BAND_60][2].setFrequency(5366500LL);
-    bandstack[BAND_60][2].setMode(MODE_LSB);
-    bandstack[BAND_60][2].setFilter(3);
-    bandstack[BAND_60][2].setSpectrumHigh(-40);
-    bandstack[BAND_60][2].setSpectrumLow(-140);
-    bandstack[BAND_60][2].setWaterfallHigh(-60);
-    bandstack[BAND_60][2].setWaterfallLow(-125);
-    bandstack[BAND_60][3].setFrequency(5371500LL);
-    bandstack[BAND_60][3].setMode(MODE_LSB);
-    bandstack[BAND_60][3].setFilter(3);
-    bandstack[BAND_60][3].setSpectrumHigh(-40);
-    bandstack[BAND_60][3].setSpectrumLow(-140);
-    bandstack[BAND_60][3].setWaterfallHigh(-60);
-    bandstack[BAND_60][3].setWaterfallLow(-125);
-    bandstack[BAND_60][4].setFrequency(5403500LL);
-    bandstack[BAND_60][4].setMode(MODE_LSB);
-    bandstack[BAND_60][4].setFilter(3);
-    bandstack[BAND_60][4].setSpectrumHigh(-40);
-    bandstack[BAND_60][4].setSpectrumLow(-140);
-    bandstack[BAND_60][4].setWaterfallHigh(-60);
-    bandstack[BAND_60][4].setWaterfallLow(-125);
-
-    bandstack[BAND_40][0].setFrequency(7001000LL);
-    bandstack[BAND_40][0].setMode(MODE_CWL);
-    bandstack[BAND_40][0].setFilter(4);
-    bandstack[BAND_40][0].setSpectrumHigh(-40);
-    bandstack[BAND_40][0].setSpectrumLow(-140);
-    bandstack[BAND_40][0].setWaterfallHigh(-60);
-    bandstack[BAND_40][0].setWaterfallLow(-125);
-    bandstack[BAND_40][1].setFrequency(7056000LL);
-    bandstack[BAND_40][1].setMode(MODE_LSB);
-    bandstack[BAND_40][1].setFilter(3);
-    bandstack[BAND_40][1].setSpectrumHigh(-40);
-    bandstack[BAND_40][1].setSpectrumLow(-140);
-    bandstack[BAND_40][1].setWaterfallHigh(-60);
-    bandstack[BAND_40][1].setWaterfallLow(-125);
-    bandstack[BAND_40][2].setFrequency(7120000LL);
-    bandstack[BAND_40][2].setMode(MODE_LSB);
-    bandstack[BAND_40][2].setFilter(3);
-    bandstack[BAND_40][2].setSpectrumHigh(-40);
-    bandstack[BAND_40][2].setSpectrumLow(-140);
-    bandstack[BAND_40][2].setWaterfallHigh(-60);
-    bandstack[BAND_40][2].setWaterfallLow(-125);
-    bandstack[BAND_40][3].setFrequency(0LL);
-
-    bandstack[BAND_30][0].setFrequency(10120000LL);
-    bandstack[BAND_30][0].setMode(MODE_CWU);
-    bandstack[BAND_30][0].setFilter(4);
-    bandstack[BAND_30][0].setSpectrumHigh(-40);
-    bandstack[BAND_30][0].setSpectrumLow(-140);
-    bandstack[BAND_30][0].setWaterfallHigh(-60);
-    bandstack[BAND_30][0].setWaterfallLow(-125);
-    bandstack[BAND_30][1].setFrequency(10130000LL);
-    bandstack[BAND_30][1].setMode(MODE_CWU);
-    bandstack[BAND_30][1].setFilter(4);
-    bandstack[BAND_30][1].setSpectrumHigh(-40);
-    bandstack[BAND_30][1].setSpectrumLow(-140);
-    bandstack[BAND_30][1].setWaterfallHigh(-60);
-    bandstack[BAND_30][1].setWaterfallLow(-125);
-    bandstack[BAND_30][2].setFrequency(10140000LL);
-    bandstack[BAND_30][2].setMode(MODE_CWU);
-    bandstack[BAND_30][2].setFilter(4);
-    bandstack[BAND_30][2].setSpectrumHigh(-40);
-    bandstack[BAND_30][2].setSpectrumLow(-140);
-    bandstack[BAND_30][2].setWaterfallHigh(-60);
-    bandstack[BAND_30][2].setWaterfallLow(-125);
-    bandstack[BAND_30][3].setFrequency(0LL);
-
-    bandstack[BAND_20][0].setFrequency(14010000LL);
-    bandstack[BAND_20][0].setMode(MODE_CWU);
-    bandstack[BAND_20][0].setFilter(4);
-    bandstack[BAND_20][0].setSpectrumHigh(-40);
-    bandstack[BAND_20][0].setSpectrumLow(-140);
-    bandstack[BAND_20][0].setWaterfallHigh(-60);
-    bandstack[BAND_20][0].setWaterfallLow(-125);
-    bandstack[BAND_20][1].setFrequency(14230000LL);
-    bandstack[BAND_20][1].setMode(MODE_USB);
-    bandstack[BAND_20][1].setFilter(3);
-    bandstack[BAND_20][1].setSpectrumHigh(-40);
-    bandstack[BAND_20][1].setSpectrumLow(-140);
-    bandstack[BAND_20][1].setWaterfallHigh(-60);
-    bandstack[BAND_20][1].setWaterfallLow(-125);
-    bandstack[BAND_20][2].setFrequency(14336000LL);
-    bandstack[BAND_20][2].setMode(MODE_USB);
-    bandstack[BAND_20][2].setFilter(3);
-    bandstack[BAND_20][2].setSpectrumHigh(-40);
-    bandstack[BAND_20][2].setSpectrumLow(-140);
-    bandstack[BAND_20][2].setWaterfallHigh(-60);
-    bandstack[BAND_20][2].setWaterfallLow(-125);
-    bandstack[BAND_20][3].setFrequency(0LL);
-
-    bandstack[BAND_17][0].setFrequency(18068600LL);
-    bandstack[BAND_17][0].setMode(MODE_CWU);
-    bandstack[BAND_17][0].setFilter(4);
-    bandstack[BAND_17][0].setSpectrumHigh(-40);
-    bandstack[BAND_17][0].setSpectrumLow(-140);
-    bandstack[BAND_17][0].setWaterfallHigh(-60);
-    bandstack[BAND_17][0].setWaterfallLow(-125);
-    bandstack[BAND_17][1].setFrequency(18125000LL);
-    bandstack[BAND_17][1].setMode(MODE_USB);
-    bandstack[BAND_17][1].setFilter(3);
-    bandstack[BAND_17][1].setSpectrumHigh(-40);
-    bandstack[BAND_17][1].setSpectrumLow(-140);
-    bandstack[BAND_17][1].setWaterfallHigh(-60);
-    bandstack[BAND_17][1].setWaterfallLow(-125);
-    bandstack[BAND_17][2].setFrequency(18140000LL);
-    bandstack[BAND_17][2].setMode(MODE_USB);
-    bandstack[BAND_17][2].setFilter(3);
-    bandstack[BAND_17][2].setSpectrumHigh(-40);
-    bandstack[BAND_17][2].setSpectrumLow(-140);
-    bandstack[BAND_17][2].setWaterfallHigh(-60);
-    bandstack[BAND_17][2].setWaterfallLow(-125);
-    bandstack[BAND_17][3].setFrequency(0LL);
-
-    bandstack[BAND_15][0].setFrequency(21001000LL);
-    bandstack[BAND_15][0].setMode(MODE_CWU);
-    bandstack[BAND_15][0].setFilter(4);
-    bandstack[BAND_15][0].setSpectrumHigh(-40);
-    bandstack[BAND_15][0].setSpectrumLow(-140);
-    bandstack[BAND_15][0].setWaterfallHigh(-60);
-    bandstack[BAND_15][0].setWaterfallLow(-125);
-    bandstack[BAND_15][1].setFrequency(21255000LL);
-    bandstack[BAND_15][1].setMode(MODE_USB);
-    bandstack[BAND_15][1].setFilter(3);
-    bandstack[BAND_15][1].setSpectrumHigh(-40);
-    bandstack[BAND_15][1].setSpectrumLow(-140);
-    bandstack[BAND_15][1].setWaterfallHigh(-60);
-    bandstack[BAND_15][1].setWaterfallLow(-125);
-    bandstack[BAND_15][2].setFrequency(21300000LL);
-    bandstack[BAND_15][2].setMode(MODE_USB);
-    bandstack[BAND_15][2].setFilter(3);
-    bandstack[BAND_15][2].setSpectrumHigh(-40);
-    bandstack[BAND_15][2].setSpectrumLow(-140);
-    bandstack[BAND_15][2].setWaterfallHigh(-60);
-    bandstack[BAND_15][2].setWaterfallLow(-125);
-    bandstack[BAND_15][3].setFrequency(0LL);
-
-    bandstack[BAND_12][0].setFrequency(24895000LL);
-    bandstack[BAND_12][0].setMode(MODE_CWU);
-    bandstack[BAND_12][0].setFilter(4);
-    bandstack[BAND_12][0].setSpectrumHigh(-40);
-    bandstack[BAND_12][0].setSpectrumLow(-140);
-    bandstack[BAND_12][0].setWaterfallHigh(-60);
-    bandstack[BAND_12][0].setWaterfallLow(-125);
-    bandstack[BAND_12][1].setFrequency(24900000LL);
-    bandstack[BAND_12][1].setMode(MODE_CWU);
-    bandstack[BAND_12][1].setFilter(4);
-    bandstack[BAND_12][1].setSpectrumHigh(-40);
-    bandstack[BAND_12][1].setSpectrumLow(-140);
-    bandstack[BAND_12][1].setWaterfallHigh(-60);
-    bandstack[BAND_12][1].setWaterfallLow(-125);
-    bandstack[BAND_12][2].setFrequency(24910000LL);
-    bandstack[BAND_12][2].setMode(MODE_CWU);
-    bandstack[BAND_12][2].setFilter(4);
-    bandstack[BAND_12][2].setSpectrumHigh(-40);
-    bandstack[BAND_12][2].setSpectrumLow(-140);
-    bandstack[BAND_12][2].setWaterfallHigh(-60);
-    bandstack[BAND_12][2].setWaterfallLow(-125);
-    bandstack[BAND_12][3].setFrequency(0LL);
-
-    bandstack[BAND_10][0].setFrequency(28010000LL);
-    bandstack[BAND_10][0].setMode(MODE_CWU);
-    bandstack[BAND_10][0].setFilter(4);
-    bandstack[BAND_10][0].setSpectrumHigh(-40);
-    bandstack[BAND_10][0].setSpectrumLow(-140);
-    bandstack[BAND_10][0].setWaterfallHigh(-60);
-    bandstack[BAND_10][0].setWaterfallLow(-125);
-    bandstack[BAND_10][1].setFrequency(28300000LL);
-    bandstack[BAND_10][1].setMode(MODE_USB);
-    bandstack[BAND_10][1].setFilter(3);
-    bandstack[BAND_10][1].setSpectrumHigh(-40);
-    bandstack[BAND_10][1].setSpectrumLow(-140);
-    bandstack[BAND_10][1].setWaterfallHigh(-60);
-    bandstack[BAND_10][1].setWaterfallLow(-125);
-    bandstack[BAND_10][2].setFrequency(28400000LL);
-    bandstack[BAND_10][2].setMode(MODE_USB);
-    bandstack[BAND_10][2].setFilter(3);
-    bandstack[BAND_10][2].setSpectrumHigh(-40);
-    bandstack[BAND_10][2].setSpectrumLow(-140);
-    bandstack[BAND_10][2].setWaterfallHigh(-60);
-    bandstack[BAND_10][2].setWaterfallLow(-125);
-    bandstack[BAND_10][3].setFrequency(0LL);
-
-    bandstack[BAND_6][0].setFrequency(50010000LL);
-    bandstack[BAND_6][0].setMode(MODE_CWU);
-    bandstack[BAND_6][0].setFilter(4);
-    bandstack[BAND_6][0].setSpectrumHigh(-40);
-    bandstack[BAND_6][0].setSpectrumLow(-140);
-    bandstack[BAND_6][0].setWaterfallHigh(-60);
-    bandstack[BAND_6][0].setWaterfallLow(-125);
-    bandstack[BAND_6][1].setFrequency(50125000LL);
-    bandstack[BAND_6][1].setMode(MODE_USB);
-    bandstack[BAND_6][1].setFilter(3);
-    bandstack[BAND_6][1].setSpectrumHigh(-40);
-    bandstack[BAND_6][1].setSpectrumLow(-140);
-    bandstack[BAND_6][1].setWaterfallHigh(-60);
-    bandstack[BAND_6][1].setWaterfallLow(-125);
-    bandstack[BAND_6][2].setFrequency(50200000LL);
-    bandstack[BAND_6][2].setMode(MODE_USB);
-    bandstack[BAND_6][2].setFilter(3);
-    bandstack[BAND_6][2].setSpectrumHigh(-40);
-    bandstack[BAND_6][2].setSpectrumLow(-140);
-    bandstack[BAND_6][2].setWaterfallHigh(-60);
-    bandstack[BAND_6][2].setWaterfallLow(-125);
-    bandstack[BAND_6][3].setFrequency(0LL);
-
-    bandstack[BAND_GEN][0].setFrequency(909000LL);
-    bandstack[BAND_GEN][0].setMode(MODE_AM);
-    bandstack[BAND_GEN][0].setFilter(3);
-    bandstack[BAND_GEN][0].setSpectrumHigh(-40);
-    bandstack[BAND_GEN][0].setSpectrumLow(-140);
-    bandstack[BAND_GEN][0].setWaterfallHigh(-60);
-    bandstack[BAND_GEN][0].setWaterfallLow(-125);
-    bandstack[BAND_GEN][1].setFrequency(6145000LL);
-    bandstack[BAND_GEN][1].setMode(MODE_AM);
-    bandstack[BAND_GEN][1].setFilter(3);
-    bandstack[BAND_GEN][1].setSpectrumHigh(-40);
-    bandstack[BAND_GEN][1].setSpectrumLow(-140);
-    bandstack[BAND_GEN][1].setWaterfallHigh(-60);
-    bandstack[BAND_GEN][1].setWaterfallLow(-125);
-    bandstack[BAND_GEN][2].setFrequency(11765000LL);
-    bandstack[BAND_GEN][2].setMode(MODE_AM);
-    bandstack[BAND_GEN][2].setFilter(3);
-    bandstack[BAND_GEN][2].setSpectrumHigh(-40);
-    bandstack[BAND_GEN][2].setSpectrumLow(-140);
-    bandstack[BAND_GEN][2].setWaterfallHigh(-60);
-    bandstack[BAND_GEN][2].setWaterfallLow(-125);
-    bandstack[BAND_GEN][3].setFrequency(15400000LL);
-    bandstack[BAND_GEN][3].setMode(MODE_AM);
-    bandstack[BAND_GEN][3].setFilter(3);
-    bandstack[BAND_GEN][3].setSpectrumHigh(-40);
-    bandstack[BAND_GEN][3].setSpectrumLow(-140);
-    bandstack[BAND_GEN][3].setWaterfallHigh(-60);
-    bandstack[BAND_GEN][3].setWaterfallLow(-125);
-    bandstack[BAND_GEN][4].setFrequency(17795000LL);
-    bandstack[BAND_GEN][4].setMode(MODE_AM);
-    bandstack[BAND_GEN][4].setFilter(3);
-    bandstack[BAND_GEN][4].setSpectrumHigh(-40);
-    bandstack[BAND_GEN][4].setSpectrumLow(-140);
-    bandstack[BAND_GEN][4].setWaterfallHigh(-60);
-    bandstack[BAND_GEN][4].setWaterfallLow(-125);
-
-    bandstack[BAND_WWV][0].setFrequency(2500000LL);
-    bandstack[BAND_WWV][0].setMode(MODE_AM);
-    bandstack[BAND_WWV][0].setFilter(3);
-    bandstack[BAND_WWV][0].setSpectrumHigh(-40);
-    bandstack[BAND_WWV][0].setSpectrumLow(-140);
-    bandstack[BAND_WWV][0].setWaterfallHigh(-60);
-    bandstack[BAND_WWV][0].setWaterfallLow(-125);
-    bandstack[BAND_WWV][1].setFrequency(5000000LL);
-    bandstack[BAND_WWV][1].setMode(MODE_AM);
-    bandstack[BAND_WWV][1].setFilter(3);
-    bandstack[BAND_WWV][1].setSpectrumHigh(-40);
-    bandstack[BAND_WWV][1].setSpectrumLow(-140);
-    bandstack[BAND_WWV][1].setWaterfallHigh(-60);
-    bandstack[BAND_WWV][1].setWaterfallLow(-125);
-    bandstack[BAND_WWV][2].setFrequency(10000000LL);
-    bandstack[BAND_WWV][2].setMode(MODE_AM);
-    bandstack[BAND_WWV][2].setFilter(3);
-    bandstack[BAND_WWV][2].setSpectrumHigh(-40);
-    bandstack[BAND_WWV][2].setSpectrumLow(-140);
-    bandstack[BAND_WWV][2].setWaterfallHigh(-60);
-    bandstack[BAND_WWV][2].setWaterfallLow(-125);
-    bandstack[BAND_WWV][3].setFrequency(15000000LL);
-    bandstack[BAND_WWV][3].setMode(MODE_AM);
-    bandstack[BAND_WWV][3].setFilter(3);
-    bandstack[BAND_WWV][3].setSpectrumHigh(-40);
-    bandstack[BAND_WWV][3].setSpectrumLow(-140);
-    bandstack[BAND_WWV][3].setWaterfallHigh(-60);
-    bandstack[BAND_WWV][3].setWaterfallLow(-125);
-    bandstack[BAND_WWV][4].setFrequency(20000000LL);
-    bandstack[BAND_WWV][4].setMode(MODE_AM);
-    bandstack[BAND_WWV][4].setFilter(3);
-    bandstack[BAND_WWV][4].setSpectrumHigh(-40);
-    bandstack[BAND_WWV][4].setSpectrumLow(-140);
-    bandstack[BAND_WWV][4].setWaterfallHigh(-60);
-    bandstack[BAND_WWV][4].setWaterfallLow(-125);
-
-    limits.clear();
-    limits << BandLimit(1800000LL,2000000LL);
-    limits << BandLimit(3500000LL,4000000LL);
-    limits << BandLimit(5330500LL,5403500LL);
-    limits << BandLimit(7000000LL,7300000LL);
-    limits << BandLimit(10100000LL,10150000LL);
-    limits << BandLimit(14000000LL,14350000LL);
-    limits << BandLimit(18068000LL,18168000LL);
-    limits << BandLimit(21000000LL,21450000LL);
-    limits << BandLimit(24890000LL,24990000LL);
-    limits << BandLimit(28000000LL,29700000LL);
-    limits << BandLimit(50000000LL,54000000LL);
-    limits << BandLimit(144000000LL,148000000LL);
-    limits << BandLimit(222000000LL,224980000LL);
-    limits << BandLimit(420000000LL,450000000LL);
-    limits << BandLimit(902000000LL,928000000LL);
-    limits << BandLimit(1240000000LL,1300000000LL);
-    limits << BandLimit(2300000000LL,2450000000LL);
-    limits << BandLimit(3456000000LL,3456400000LL);
-    limits << BandLimit(5760000000LL,5760400000LL);
-    limits << BandLimit(10368000000LL,10368400000LL);
-    limits << BandLimit(24192000000LL,24192400000LL);
-    limits << BandLimit(47088000000LL,47088400000LL);
-    limits << BandLimit(0l,0L);
-
-
+    currentStack=0;
+    if(settings->contains("currentstack")) currentStack=settings->value("currentstack").toInt();
+    settings->endGroup();
 }
 
 Band::~Band() {
@@ -407,208 +378,40 @@ Band::~Band() {
     
 }
 
-void Band::loadSettings(QSettings* settings) {
-    int i,j;
-    QString s;
-
-
-    settings->beginGroup("Band");
-    if(settings->contains("currentBand")) {
-        currentBand=settings->value("currentBand").toInt();
-        currentStack=settings->value("currentStack").toInt();
-        for(i=0;i<BAND_LAST;i++) {
-            s.sprintf("stack.%d",i);
-            stack[i]=settings->value(s).toInt();
-            qDebug() << "Band::loadSettings: " << i << " stack=" << stack[i];
-            for(j=0;j<BANDSTACK_ENTRIES;j++) {
-                s.sprintf("frequency.%d.%d",i,j);
-                bandstack[i][j].setFrequency(settings->value(s).toLongLong());
-                qDebug() << "Band::loadSettings: " << i << ":" << j << "=" << bandstack[i][j].getFrequency();
-                if(bandstack[i][j].getFrequency()==0LL) break;
-                s.sprintf("filter.%d.%d",i,j);
-                bandstack[i][j].setFilter(settings->value(s).toInt());
-                s.sprintf("mode.%d.%d",i,j);
-                bandstack[i][j].setMode(settings->value(s).toInt());
-                //            bandstack[i][j].setStep(settings->value("step").toInt());
-                s.sprintf("spectrumHigh.%d.%d",i,j);
-                bandstack[i][j].setSpectrumHigh(settings->value(s).toInt());
-                s.sprintf("spectrumLow.%d.%d",i,j);
-                bandstack[i][j].setSpectrumLow(settings->value(s).toInt());
-                s.sprintf("waterfallHigh.%d.%d",i,j);
-                bandstack[i][j].setWaterfallHigh(settings->value(s).toInt());
-                s.sprintf("waterfallLow.%d.%d",i,j);
-                bandstack[i][j].setWaterfallLow(settings->value(s).toInt());
-            }
-        }
-        settings->endGroup();
-    }
+int Band::getId() {
+    return id;
 }
 
-void Band::saveSettings(QSettings* settings) {
-    int i,j;
-    QString s;
-    
-    settings->beginGroup("Band");
-    settings->setValue("currentBand",currentBand);
-    settings->setValue("currentStack",currentStack);
 
-    for(i=0;i<BAND_LAST;i++) {
-        s.sprintf("stack.%d",i);
-        settings->setValue(s,stack[i]);
-        for(j=0;j<BANDSTACK_ENTRIES;j++) {
-            if(bandstack[i][j].getFrequency()!=0LL) {
-                s.sprintf("frequency.%d.%d",i,j);
-                settings->setValue(s,bandstack[i][j].getFrequency());
-                s.sprintf("filter.%d.%d",i,j);
-                settings->setValue(s,bandstack[i][j].getFilter());
-                s.sprintf("mode.%d.%d",i,j);
-                settings->setValue(s,bandstack[i][j].getMode());
-                s.sprintf("spectrumHigh.%d.%d",i,j);
-                settings->setValue(s,bandstack[i][j].getSpectrumHigh());
-                s.sprintf("spectrumLow.%d.%d",i,j);
-                settings->setValue(s,bandstack[i][j].getSpectrumLow());
-                s.sprintf("waterfallHigh.%d.%d",i,j);
-                settings->setValue(s,bandstack[i][j].getWaterfallHigh());
-                s.sprintf("waterfallLow.%d.%d",i,j);
-                settings->setValue(s,bandstack[i][j].getWaterfallLow());
-            } else {
-                break;
-            }
-        }
-    }
+
+void Band::saveSettings(QSettings* settings) {
     
+    settings->beginGroup("Band_"+label);
+    settings->setValue("currentstack",currentStack);
+    for(int i=0;i<BANDSTACK_ENTRIES;i++) {
+        settings->beginGroup("BANDSTACK_"+QString::number(i));
+        settings->setValue("frequency",bandstack[i].getFrequency());
+        settings->setValue("filter",bandstack[i].getFilter());
+        settings->setValue("mode",bandstack[i].getMode());
+        settings->setValue("spectrumhigh",bandstack[i].getSpectrumHigh());
+        settings->setValue("spectrumlow",bandstack[i].getSpectrumLow());
+        settings->setValue("waterfallhigh",bandstack[i].getWaterfallHigh());
+        settings->setValue("waterfalllow",bandstack[i].getWaterfallLow());
+        settings->endGroup();
+    }
     settings->endGroup();
 }
 
-void Band::initBand(int b) {
-    currentBand=b;
-    emit bandChanged(currentBand, currentBand);
-}
-
-void Band::selectBand(int b) {
-    int previousBand=currentBand;
-    currentBand=b;
-
-    qDebug() << "Band::selectBand: previousBand:" << previousBand << " currentBand:" << currentBand << " currentStack:" << currentStack;
-    if(previousBand==currentBand) {
-        // step through band stack
-        currentStack++;
-        if(currentStack == BANDSTACK_ENTRIES) {
-            currentStack = 0;
-        } else if (bandstack[currentBand][currentStack].getFrequency() == 0LL) {
-            currentStack = 0;
-        }
-        stack[currentBand]=currentStack;
-    } else {
-        // new band
-        qDebug() << "Band::selectBand: new band: stack: " << stack[currentBand];
-        currentStack=stack[currentBand];
+void Band::nextBandStackEntry() {
+    currentStack++;
+    if(currentStack==BANDSTACK_ENTRIES) {
+        currentStack=0;
     }
-
-    qDebug() << "selectBand " << currentBand << ":" << currentStack << " f=" << bandstack[currentBand][currentStack].getFrequency();
-    
-    emit bandChanged(previousBand,currentBand);
-
 }
 
-int Band::getBand() {
-    return currentBand;
-}
-
-QString Band::getStringBand() {
-    QString b="Gen";
-
-    b=getStringBand(currentBand);
-
-    b.append("(");
-    b.append(QString::number(currentStack));
-    b.append(")");
-
-    return b;
-}
-
-QString Band::getStringBand(int band) {
-    QString b="Gen";
-
-    switch(band) {
-        case BAND_160:
-            b="160 Mtrs";
-            break;
-        case BAND_80:
-            b="80 Mtrs";
-            break;
-        case BAND_60:
-            b="60 Mtrs";
-            break;
-        case BAND_40:
-            b="40 Mtrs";
-            break;
-        case BAND_30:
-            b="30 Mtrs";
-            break;
-        case BAND_20:
-            b="20 Mtrs";
-            break;
-        case BAND_17:
-            b="17 Mtrs";
-            break;
-        case BAND_15:
-            b="15 Mtrs";
-            break;
-        case BAND_12:
-            b="12 Mtrs";
-            break;
-        case BAND_10:
-            b="10 Mtrs";
-            break;
-        case BAND_6:
-            b="6 Mtrs";
-            break;
-        case BAND_GEN:
-            b="Gen";
-            break;
-        case BAND_WWV:
-            b="WWV";
-            break;
-    }
-
-    return b;
-}
-
-long long Band::bandSelected(int b,long long currentFrequency) {
-    long long f;
-
-    // save the current frequency in the current bandstack entry
-    bandstack[currentBand][currentStack].setFrequency(currentFrequency);
-
-    if(currentBand==b) {
-        // step through band stack
-        currentStack++;
-        if(currentStack==BANDSTACK_ENTRIES) {
-            currentStack=0;
-        } else if(bandstack[currentBand][currentStack].getFrequency()==0LL) {
-            currentStack=0;
-        }
-        
-
-        qDebug() << "same band currentStack " << currentStack;
-
-    } else {
-        // save the current stack
-        stack[currentBand]=currentStack;
-
-        // change the band
-        currentBand=b;
-        // get the last stack entry used
-        currentStack=stack[currentBand];
-
-        qDebug() << "change band currentStack " << currentStack;
-        
-    }
-    
-    f = bandstack[currentBand][currentStack].getFrequency();
-
-    return f;
+QString Band::getLabel() {
+    qDebug()<<"Band::getLabel:"<<label;
+    return label;
 }
 
 int Band::getBandStackEntry() {
@@ -616,80 +419,67 @@ int Band::getBandStackEntry() {
 }
 
 
-long long Band::getFrequency() {
-    return bandstack[currentBand][currentStack].getFrequency();
+quint64 Band::getFrequency() {
+    return bandstack[currentStack].getFrequency();
 }
 
 int Band::getMode() {
-    return bandstack[currentBand][currentStack].getMode();
+    return bandstack[currentStack].getMode();
 }
 
 int Band::getFilter() {
-    return bandstack[currentBand][currentStack].getFilter();
+    qDebug()<<"Band::getFilter: currentStack:"<<currentStack;
+    return bandstack[currentStack].getFilter();
 }
 
 int Band::getStep() {
-    return bandstack[currentBand][currentStack].getStep();
+    return bandstack[currentStack].getStep();
 }
 
 int Band::getSpectrumHigh() {
-    return bandstack[currentBand][currentStack].getSpectrumHigh();
+    return bandstack[currentStack].getSpectrumHigh();
 }
 
 int Band::getSpectrumLow() {
-    return bandstack[currentBand][currentStack].getSpectrumLow();
+    return bandstack[currentStack].getSpectrumLow();
 }
 
 int Band::getWaterfallHigh() {
-    return bandstack[currentBand][currentStack].getWaterfallHigh();
+    return bandstack[currentStack].getWaterfallHigh();
 }
 
 int Band::getWaterfallLow() {
-    return bandstack[currentBand][currentStack].getWaterfallLow();
+    return bandstack[currentStack].getWaterfallLow();
 }
 
-BandLimit Band::getBandLimits(long long minDisplay, long long maxDisplay) {
-    BandLimit result=limits.at(limits.size()-1);
-
-    qDebug() << "Band::getBandLimits: " << minDisplay << "," << maxDisplay;
-    for(int i=0;i<limits.size();i++) {
-        result=limits.at(i);
-
-        if((result.min()>=minDisplay&&result.min()<=maxDisplay) || // band min within the display
-           (result.max()<=maxDisplay&&result.max()>=minDisplay) || // band max within the display
-           (minDisplay>=result.min()&&maxDisplay<=result.max())) { // display within a band
-            break;
-        }
-    }
-
-    return result;
-
+BandLimit* Band::getBandLimits() {
+    return &bandLimit;
 }
 
-void Band::setFrequency(long long f) {
-    bandstack[currentBand][currentStack].setFrequency(f);
+void Band::setFrequency(quint64 f) {
+    bandstack[currentStack].setFrequency(f);
 }
 
 void Band::setMode(int m) {
-    bandstack[currentBand][currentStack].setMode(m);
+    bandstack[currentStack].setMode(m);
 }
 
 void Band::setFilter(int f) {
-    bandstack[currentBand][currentStack].setFilter(f);
+    bandstack[currentStack].setFilter(f);
 }
 
 void Band::setSpectrumHigh(int h) {
-    bandstack[currentBand][currentStack].setSpectrumHigh(h);
+    bandstack[currentStack].setSpectrumHigh(h);
 }
 
 void Band::setSpectrumLow(int l) {
-    bandstack[currentBand][currentStack].setSpectrumLow(l);
+    bandstack[currentStack].setSpectrumLow(l);
 }
 
 void Band::setWaterfallHigh(int h) {
-    bandstack[currentBand][currentStack].setWaterfallHigh(h);
+    bandstack[currentStack].setWaterfallHigh(h);
 }
 
 void Band::setWaterfallLow(int l) {
-    bandstack[currentBand][currentStack].setWaterfallLow(l);
+    bandstack[currentStack].setWaterfallLow(l);
 }

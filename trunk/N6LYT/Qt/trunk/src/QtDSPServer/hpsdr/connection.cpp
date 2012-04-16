@@ -79,7 +79,7 @@ void Connection::sendCommand(QString command) {
 void Connection::readyRead() {
     QString buffer(socket->readLine(2048));
     buffer.chop(1); // remove nl
-    QStringList args=buffer.split(" ");
+    QStringList args=buffer.split(":");
     QDomNodeList elements;
 
     if(args.length()<=0) {

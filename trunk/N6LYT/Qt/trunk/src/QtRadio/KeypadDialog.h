@@ -15,7 +15,7 @@ class KeypadDialog : public QDialog
 public:
     explicit KeypadDialog(QWidget *parent = 0);
     ~KeypadDialog();
-    long long getFrequency();
+    quint64 getFrequency();
     void clear();
 
 public slots:
@@ -34,14 +34,14 @@ public slots:
     void clicked(QAbstractButton*);
 
 signals:
-    void setKeypadFrequency(long long);
+    void setKeypadFrequency(quint64);
 
 private:
     Ui::KeypadDialog *ui;
 
     void showFrequency();
 
-    //long long frequency;
+    //quint64 frequency;
     QString frequency;
 };
 

@@ -46,12 +46,12 @@ void Bandscope::paintEvent(QPaintEvent*) {
 
     // plot the vertical frequency lines
     float hzPerPixel=(float)61440000/(float)width();
-    long long f=0;
+    quint64 f=0;
 
     for(int i=0;i<width();i++) {
-        f=(long long)(hzPerPixel*(float)i);
+        f=(quint64)(hzPerPixel*(float)i);
         if(f>0) {
-            if((f%10000000)<(long long)hzPerPixel) {
+            if((f%10000000)<(quint64)hzPerPixel) {
                 painter.setOpacity(0.5);
                 painter.setPen(QPen(Qt::white, 1,Qt::DotLine));
                 painter.drawLine(i, 0, i, height());

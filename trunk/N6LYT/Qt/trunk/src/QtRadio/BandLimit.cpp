@@ -18,18 +18,24 @@
 
 #include "BandLimit.h"
 BandLimit::BandLimit() {
+}
+
+BandLimit::~BandLimit() {
 
 }
 
-BandLimit::BandLimit(long long min,long long max) {
-        min_frequency=min;
-        max_frequency=max;
+void BandLimit::setMin(quint64 min) {
+    min_frequency=min;
 }
 
-long long BandLimit::min() {
+void BandLimit::setMax(quint64 max) {
+    max_frequency=max;
+}
+
+quint64 BandLimit::getMin() {
     return min_frequency;
 }
 
-long long BandLimit::max() {
+quint64 BandLimit::getMax() {
     return max_frequency;
 }

@@ -37,7 +37,7 @@ void Bookmark::setBand(int b) {
     band=b;
 }
 
-    void Bookmark::setFrequency(long long f) {
+    void Bookmark::setFrequency(quint64 f) {
         frequency=f;
     }
 
@@ -81,7 +81,7 @@ void Bookmark::setBand(int b) {
         return band;
     }
 
-    long long Bookmark::getFrequency() {
+    quint64 Bookmark::getFrequency() {
         return frequency;
     }
 

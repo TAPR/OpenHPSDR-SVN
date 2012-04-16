@@ -19,17 +19,23 @@
 #ifndef BANDLIMIT_H
 #define BANDLIMIT_H
 
-class BandLimit
-{
+#include <QObject>
+
+class BandLimit : public QObject {
+    Q_OBJECT
 public:
     BandLimit();
-    BandLimit(long long min,long long max);
-    long long min();
-    long long max();
+    BandLimit(const BandLimit& orig);
+
+    virtual ~BandLimit();
+    void setMin(quint64 min);
+    void setMax(quint64 max);
+    quint64 getMin();
+    quint64 getMax();
 
 private:
-    long long min_frequency;
-    long long max_frequency;
+    quint64 min_frequency;
+    quint64 max_frequency;
 
 };
 

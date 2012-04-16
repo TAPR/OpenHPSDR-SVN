@@ -63,30 +63,26 @@
     <property name="title">
      <string>Band</string>
     </property>
-    <widget class="QMenu" name="menuXVTR">
+    <widget class="QMenu" name="menuHam">
      <property name="title">
-      <string>XVTR</string>
+      <string>Ham</string>
+     </property>
+    </widget>
+    <widget class="QMenu" name="menuXvtr">
+     <property name="title">
+      <string>Xvtr</string>
+     </property>
+    </widget>
+    <widget class="QMenu" name="menuBroadcast">
+     <property name="title">
+      <string>Broadcast</string>
      </property>
     </widget>
     <addaction name="actionKeypad"/>
     <addaction name="separator"/>
-    <addaction name="action160"/>
-    <addaction name="action80"/>
-    <addaction name="action60"/>
-    <addaction name="action40"/>
-    <addaction name="action30"/>
-    <addaction name="action20"/>
-    <addaction name="action17"/>
-    <addaction name="action15"/>
-    <addaction name="action12"/>
-    <addaction name="action10"/>
-    <addaction name="action6"/>
-    <addaction name="separator"/>
-    <addaction name="actionGen"/>
-    <addaction name="actionWWV"/>
-    <addaction name="separator"/>
-    <addaction name="menuXVTR"/>
-    <addaction name="separator"/>
+    <addaction name="menuHam"/>
+    <addaction name="menuXvtr"/>
+    <addaction name="menuBroadcast"/>
    </widget>
    <widget class="QMenu" name="menuMode">
     <property name="title">
@@ -172,10 +168,6 @@
     <property name="title">
      <string>Hardware</string>
     </property>
-    <addaction name="actionPreamp"/>
-    <addaction name="separator"/>
-    <addaction name="actionDither"/>
-    <addaction name="actionRandom"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -844,6 +836,21 @@
    </property>
    <property name="text">
     <string>Remote Mic</string>
+   </property>
+  </action>
+  <action name="action160_2">
+   <property name="text">
+    <string>160</string>
+   </property>
+  </action>
+  <action name="action144">
+   <property name="text">
+    <string>144</string>
+   </property>
+  </action>
+  <action name="action60_2">
+   <property name="text">
+    <string>60</string>
    </property>
   </action>
  </widget>

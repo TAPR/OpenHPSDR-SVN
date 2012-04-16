@@ -35,7 +35,7 @@ public:
     Bookmark();
     void setTitle(QString title);
     void setBand(int b);
-    void setFrequency(long long f);
+    void setFrequency(quint64 f);
     void setMode(int m);
     void setFilter(int f);
     void setStep(int s);
@@ -46,7 +46,7 @@ public:
 
     QString getTitle();
     int getBand();
-    long long getFrequency();
+    quint64 getFrequency();
     int getMode();
     int getFilter();
     int getStep();
@@ -59,7 +59,7 @@ public:
 private:
     QString title;
     int band;
-    long long frequency;
+    quint64 frequency;
     int mode;
     int filter;
     int step;

@@ -55,6 +55,7 @@ void Server::configure(QSettings* mysettings) {
     setMicBoost(settings->value("micboost",false).toBool());
     setMicGain(settings->value("micgain",0.25F).toFloat());
     setAudioGain(settings->value("audiogain",0.25F).toFloat());
+    setAlexAttenuation(settings->value("alexattenuation",0).toInt());
 
     auto_start=settings->value("autostart",false).toBool();
     auto_start_dsp=settings->value("autostartdsp",false).toBool();
@@ -150,6 +151,7 @@ void Server::save() {
     settings->setValue("micboost",mic_boost);
     settings->setValue("micgain",mic_gain);
     settings->setValue("audiogain",audio_gain);
+    settings->setValue("alexattenuation",alexAttenuation);
 
     settings->setValue("autostart",auto_start);
     settings->setValue("autostartdsp",auto_start_dsp);
@@ -396,6 +398,21 @@ int Server::setFrequency(Client* c,int rx,long frequency) {
     if(receiver[rx]->getClient()!=c) {
         return -1;
     }
+
+    if(band<XVTR_BAND) {
+        // check frequency range within MIN_FREQUENCY and MAX_FREQUENCY
+        if(frequency<MIN_FREQUENCY) {
+            frequency=MIN_FREQUENCY;
+        } else if(frequency>MAX_FREQUENCY) {
+            frequency=MAX_FREQUENCY;
+        }
+    } else {
+        if(frequency<xvtrs[band-XVTR_BAND].getMinFrequency()) {
+            frequency=xvtrs[band-XVTR_BAND].getMinFrequency();
+        } else if(frequency>xvtrs[band-XVTR_BAND].getMaxFrequency()) {
+            frequency=xvtrs[band-XVTR_BAND].getMaxFrequency();
+        }
+    }
     receiver[rx]->setFrequency(c,frequency-loFrequency);
     emit clientStateChanged();
     return 0;
@@ -406,15 +423,24 @@ int Server::setFrequencyAndBand(Client* c,int rx,long frequency,int b) {
         return -1;
     }
 
-    band=b;
-
-    if(band<BANDS) {
+    if(b<XVTR_BAND) {
         loFrequency=0;
+        // check frequency range within MIN_FREQUENCY and MAX_FREQUENCY
+        if(frequency<MIN_FREQUENCY) {
+            frequency=MIN_FREQUENCY;
+        } else if(frequency>MAX_FREQUENCY) {
+            frequency=MAX_FREQUENCY;
+        }
     } else {
-        loFrequency=xvtrs[band-BANDS].getLOFrequency();
+        loFrequency=xvtrs[b-XVTR_BAND].getLOFrequency();
+        if(frequency<xvtrs[band-XVTR_BAND].getMinFrequency()) {
+            frequency=xvtrs[band-XVTR_BAND].getMinFrequency();
+        } else if(frequency>xvtrs[band-XVTR_BAND].getMaxFrequency()) {
+            frequency=xvtrs[band-XVTR_BAND].getMaxFrequency();
+        }
     }
 
-    //qDebug()<<"Server::setFrequencyAndBand: band:"<<band<<" lo:"<<loFrequency;
+    qDebug()<<"Server::setFrequencyAndBand: band:"<<band<<" lo:"<<loFrequency;
 
     receiver[rx]->setFrequency(c,frequency-loFrequency,band);
 
@@ -423,13 +449,13 @@ int Server::setFrequencyAndBand(Client* c,int rx,long frequency,int b) {
 
         if(alex) {
             int a;
-            if(band>=BANDS) {
+            if(band>=XVTR_BAND) {
                 // xvtr
                 if(mox) {
-                    setAlexTxAntenna(xvtrs[band-BANDS].getTx());
+                    setAlexTxAntenna(xvtrs[band-XVTR_BAND].getTx());
                 } else {
-                    a=xvtrs[band-BANDS].getRx();
-                    //qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
+                    a=xvtrs[band-XVTR_BAND].getRx();
+                    qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
                     switch(a) {
                     case ANT1:  // 0 - 0
                     case ANT2:  // 1 - 1
@@ -448,7 +474,7 @@ int Server::setFrequencyAndBand(Client* c,int rx,long frequency,int b) {
                     setAlexTxAntenna(Alex::getInstance()->getTx(band));
                 } else {
                     a=Alex::getInstance()->getRx(band);
-                    //qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
+                    qDebug()<<"Server::setFrequency: Alex Rx Antenna: "<<a;
                     switch(a) {
                     case ANT1:  // 0 - 0
                     case ANT2:  // 1 - 1
@@ -883,10 +909,22 @@ QString Server::get122_88MHzClock() {
     return clock122_88MHz;
 }
 
+void Server::setAlexAttenuation(int v) {
+    qDebug()<<"Server::setAlexAttenuation:"<<v;
+    alexAttenuation=v;
+    control_out[3]=control_out[3]&0xFC;
+    control_out[3]=control_out[3]|v;
+}
+
+int Server::getAlexAttenuation() {
+    return alexAttenuation;
+}
+
 void Server::setPreamp(bool s) {
+    qDebug()<<"Server::setPreamp:"<<s;
     int p=0;
     preamp=s;
-    if(s) p==1;
+    if(preamp) p=1;
     control_out[3]=control_out[3]&0xFB;
     control_out[3]=control_out[3]|(p<<2);
 }
@@ -1152,7 +1190,6 @@ void Server::playAudio(float *buffer) {
                     metis_buffer[5]=control_out[2];
                     metis_buffer[6]=control_out[3];
                     metis_buffer[7]=control_out[4];
-
                 }
                 current_receiver++;
                 if(current_receiver>=receivers) {
@@ -1294,4 +1331,173 @@ void Server::setAlexRxOnlyAntenna(int a) {
 
 XVTR* Server::getXvtrs() {
     return xvtrs;
+}
+
+QString Server::getConfig() {
+    QString response;
+
+    response.append("<radio>");
+    response.append("<type>");
+    if(getHPSDR()) {
+        response.append("HPSDR");
+    } else if(getHermes()) {
+        response.append("Hermes");
+    }
+    response.append("</type>");
+
+    response.append("<id>");
+    response.append("G0ORX");
+    response.append("</id>");
+
+    response.append("<version>");
+    response.append(QString::number(getOzySoftwareVersion()));
+    response.append("</version>");
+
+    response.append("<samplerate>");
+    response.append(QString::number(getSampleRate()));
+    response.append("</samplerate>");
+
+    response.append("<minfrequency>");
+    response.append(QString::number(MIN_FREQUENCY));
+    response.append("</minfrequency>");
+    response.append("<maxfrequency>");
+    response.append(QString::number(MAX_FREQUENCY));
+    response.append("</maxfrequency>");
+
+    response.append("<receiver>");
+    response.append("<type>Mercury</type>");
+    response.append("<version>");
+    response.append(QString::number(getMercurySoftwareVersion()));
+    response.append("</version>");
+    response.append("<receivers>");
+    response.append(QString::number(getReceivers()));
+    response.append("</receivers>");
+    response.append("</receiver>");
+
+    response.append("<control>");
+    response.append("<id>preamp</id>");
+    response.append("<state>");
+    response.append(QString(getPreamp()?"true":"false"));
+    response.append("</state>");
+    response.append("</control>");
+
+    response.append("<control>");
+    response.append("<id>dither</id>");
+    response.append("<state>");
+    response.append(QString(getDither()?"true":"false"));
+    response.append("</state>");
+    response.append("</control>");
+
+    response.append("<control>");
+    response.append("<id>random</id>");
+    response.append("<state>");
+    response.append(QString(getRandom()?"true":"false"));
+    response.append("</state>");
+    response.append("</control>");
+
+    if(getAlex()) {
+        response.append("<control>");
+        response.append("<id>attenuation</id>");
+        response.append("<choice>");
+        response.append("0dB");
+        response.append("</choice>");
+        response.append("<choice>");
+        response.append("10dB");
+        response.append("</choice>");
+        response.append("<choice>");
+        response.append("20dB");
+        response.append("</choice>");
+        response.append("<choice>");
+        response.append("30dB");
+        response.append("</choice>");
+        response.append("</control>");
+    }
+
+
+
+    response.append("<exciter>");
+    if(getPenelope()) {
+        response.append("<type>Penelope</type>");
+    } else if(getPennylane()) {
+        response.append("<type>Pennylane</type>");
+    }
+    response.append("<version>");
+    response.append(QString::number(getPenelopeSoftwareVersion()));
+    response.append("</version>");
+    response.append("</exciter>");
+
+    if(getAlex()) {
+        Alex* alex=Alex::getInstance();
+        response.append("<alex>");
+
+        for(int i=0;i<=HAM_BAND_LAST;i++) {
+            response.append("<"+alex->getBand(i)+">");
+            response.append("<rx>");
+            response.append(alex->getRxAntenna(i));
+            response.append("</rx>");
+            response.append("<tx>");
+            response.append(alex->getTxAntenna(i));
+            response.append("</tx>");
+            response.append("</"+alex->getBand(i)+">");
+        }
+
+        response.append("</alex>");
+    }
+
+    XVTR* xvtr;
+    for(int i=0;i<XVTRS;i++) {
+        xvtr=&xvtrs[i];
+        if(xvtr->getLabel()!="") {
+            response.append("<xvtr>");
+            response.append("<entry>");
+            response.append(QString::number(i+XVTR_BAND));
+            response.append("</entry>");
+            response.append("<label>");
+            response.append(xvtr->getLabel());
+            response.append("</label>");
+            response.append("<minfreq>");
+            response.append(QString::number(xvtr->getMinFrequency()));
+            response.append("</minfreq>");
+            response.append("<maxfreq>");
+            response.append(QString::number(xvtr->getMaxFrequency()));
+            response.append("</maxfreq>");
+            response.append("<lofreq>");
+            response.append(QString::number(xvtr->getLOFrequency()));
+            response.append("</lofreq>");
+            response.append("<rxant>");
+            response.append(xvtr->getRxAntenna());
+            response.append("</rxant>");
+            response.append("<txant>");
+            response.append(xvtr->getTxAntenna());
+            response.append("</txant>");
+            response.append("</xvtr>");
+        }
+    }
+
+    response.append("</radio>");
+
+    return response;
+}
+
+void Server::setHardware(QString option,QString value) {
+    qDebug()<<"Server::setHardware:"<<option<<","<<value;
+    if(option=="preamp") {
+        setPreamp(value=="on");
+    } else if(option=="dither") {
+        setDither(value=="on");
+    } else if(option=="random") {
+        setRandom(value=="on");
+    } else if(option=="attenuation") {
+        int v=0;
+        if(value=="0dB") {
+            v=0;
+        } else if(value=="10dB") {
+            v=1;
+        } else if(value=="20dB") {
+            v=2;
+        } else if(value=="30dB") {
+            v=3;
+        }
+        setAlexAttenuation(v);
+    }
 }

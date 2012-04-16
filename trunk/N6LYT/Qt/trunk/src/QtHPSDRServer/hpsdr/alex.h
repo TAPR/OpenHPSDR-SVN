@@ -4,21 +4,7 @@
 #include <QSettings>
 #include <QObject>
 
-#define BAND_160 0
-#define BAND_80 1
-#define BAND_60 2
-#define BAND_40 3
-#define BAND_30 4
-#define BAND_20 5
-#define BAND_17 6
-#define BAND_15 7
-#define BAND_12 8
-#define BAND_10 9
-#define BAND_6 10
-#define BAND_GEN 11
-
-#define BANDS 12
-
+#include "../Common/Bands.h"
 
 #define ANT1 0
 #define ANT2 1
@@ -57,8 +43,8 @@ private:
 
     QSettings* settings;
 
-    int rx[BANDS];
-    int tx[BANDS];
+    int rx[HAM_BAND_LAST+1];
+    int tx[HAM_BAND_LAST+1];
 };
 
 #endif // ALEX_H

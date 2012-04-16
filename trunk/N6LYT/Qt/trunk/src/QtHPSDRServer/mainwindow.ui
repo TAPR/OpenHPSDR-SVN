@@ -3233,6 +3233,11 @@
         <string>Ant 3</string>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>RX Only</string>
+       </property>
+      </item>
      </widget>
      <widget class="QLineEdit" name="lineEditXvtrLabel1">
       <property name="geometry">
@@ -3348,6 +3353,11 @@
         <string>Ant 3</string>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>RX Only</string>
+       </property>
+      </item>
      </widget>
      <widget class="QLineEdit" name="lineEditXvtrLabel3">
       <property name="geometry">
@@ -3453,6 +3463,11 @@
         <string>Ant 3</string>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>RX Only</string>
+       </property>
+      </item>
      </widget>
      <widget class="QPushButton" name="pushButtonXvtrSave">
       <property name="geometry">
@@ -3476,7 +3491,7 @@
      <x>0</x>
      <y>0</y>
      <width>876</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

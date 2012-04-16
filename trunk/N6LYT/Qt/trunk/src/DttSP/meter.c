@@ -31,7 +31,7 @@ The DTTS Microwave Society
 Bridgewater, NJ 08807
 */
 
-#include <meter.h>
+#include <../DttSP/meter.h>
 
 // snapshot of current measurements
 /*void

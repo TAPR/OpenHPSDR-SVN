@@ -34,7 +34,7 @@ public:
     BandStackEntry();
     virtual ~BandStackEntry();
 
-    void setFrequency(long long f);
+    void setFrequency(quint64 f);
     void setMode(int m);
     void setFilter(int f);
     void setStep(int s);
@@ -43,7 +43,7 @@ public:
     void setWaterfallHigh(int high);
     void setWaterfallLow(int low);
 
-    long long getFrequency();
+    quint64 getFrequency();
     int getMode();
     int getFilter();
     int getStep();
@@ -53,7 +53,7 @@ public:
     int getWaterfallLow();
 
 private:
-    long long frequency;
+    quint64 frequency;
     int mode;
     int filter;
     int step;
