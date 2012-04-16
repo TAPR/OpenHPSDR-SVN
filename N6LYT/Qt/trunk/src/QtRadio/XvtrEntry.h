@@ -7,27 +7,27 @@ class XvtrEntry
 {
 public:
     XvtrEntry();
-    XvtrEntry(int e,QString t,long long minF,long long maxF,long long ifF,long long freq,int m,int filt);
+    XvtrEntry(int e,QString t,quint64 minF,quint64 maxF,quint64 ifF,quint64 freq,int m,int filt);
     int getEntry();
     QString getTitle();
-    long long getMinFrequency();
-    long long getMaxFrequency();
-    long long getIFFrequency();
-    long long getFrequency();
+    quint64 getMinFrequency();
+    quint64 getMaxFrequency();
+    quint64 getIFFrequency();
+    quint64 getFrequency();
     int getMode();
     int getFilter();
-    void setFrequency(long long f);
+    void setFrequency(quint64 f);
     void setMode(int m);
     void setFilter(int f);
 
 private:
     int entry;
     QString title;
-    long long minFrequency;
-    long long maxFrequency;
-    long long ifFrequency;
+    quint64 minFrequency;
+    quint64 maxFrequency;
+    quint64 ifFrequency;
 
-    long long frequency;
+    quint64 frequency;
     int mode;
     int filter;
 };

@@ -3,7 +3,7 @@
 XvtrEntry::XvtrEntry() {
 }
 
-XvtrEntry::XvtrEntry(int e,QString t,long long minF,long long maxF,long long ifF,long long freq,int m,int filt) {
+XvtrEntry::XvtrEntry(int e,QString t,quint64 minF,quint64 maxF,quint64 ifF,quint64 freq,int m,int filt) {
     entry=e;
     title=t;
     minFrequency=minF;
@@ -22,19 +22,19 @@ QString XvtrEntry::getTitle() {
     return title;
 }
 
-long long XvtrEntry::getMinFrequency() {
+quint64 XvtrEntry::getMinFrequency() {
     return minFrequency;
 }
 
-long long XvtrEntry::getMaxFrequency() {
+quint64 XvtrEntry::getMaxFrequency() {
     return maxFrequency;
 }
 
-long long XvtrEntry::getIFFrequency() {
+quint64 XvtrEntry::getIFFrequency() {
     return ifFrequency;
 }
 
-long long XvtrEntry::getFrequency() {
+quint64 XvtrEntry::getFrequency() {
     return frequency;
 }
 
@@ -46,7 +46,7 @@ int XvtrEntry::getFilter() {
     return filter;
 }
 
-void XvtrEntry::setFrequency(long long f) {
+void XvtrEntry::setFrequency(quint64 f) {
     frequency=f;
 }
 

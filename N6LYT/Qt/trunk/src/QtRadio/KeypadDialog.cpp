@@ -36,8 +36,8 @@ KeypadDialog::~KeypadDialog()
     delete ui;
 }
 
-long long KeypadDialog::getFrequency() {
-    return (long long)(frequency.toDouble()*1000000.0);
+quint64 KeypadDialog::getFrequency() {
+    return (quint64)(frequency.toDouble()*1000000.0);
 }
 
 void KeypadDialog::clear() {
@@ -48,8 +48,8 @@ void KeypadDialog::clear() {
 void KeypadDialog::clicked(QAbstractButton* button) {
     qDebug()<<"KeypadDialog::clicked "<<button->text();
     if(button->text()=="&OK") {
-        if((long long)(frequency.toDouble()*1000000.0)!=0) {
-            emit setKeypadFrequency((long long)(frequency.toDouble()*1000000.0));
+        if((quint64)(frequency.toDouble()*1000000.0)!=0) {
+            emit setKeypadFrequency((quint64)(frequency.toDouble()*1000000.0));
         }
     } else if(button->text()=="Reset") {
         frequency="";

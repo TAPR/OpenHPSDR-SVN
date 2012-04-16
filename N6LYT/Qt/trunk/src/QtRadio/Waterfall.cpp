@@ -148,8 +148,8 @@ void Waterfall::mouseReleaseEvent(QMouseEvent* event) {
     } else {
         float hzPixel = sampleRate/width();  // spectrum resolution: Hz/pixel
 
-        long freqOffsetPixel;
-        long long f = frequency - (sampleRate/2) + (event->pos().x()*hzPixel);
+        qint64 freqOffsetPixel;
+        qint64 f = frequency - (sampleRate/2) + (event->pos().x()*hzPixel);
         if(subRx) {
             freqOffsetPixel = (subRxFrequency-f)/hzPixel;
             if (button == Qt::LeftButton) {
@@ -176,7 +176,7 @@ void Waterfall::mouseReleaseEvent(QMouseEvent* event) {
             }
         }
 
-        emit frequencyMoved(-(long long)(freqOffsetPixel*hzPixel)/100,100);
+        emit frequencyMoved(-(qint64)(freqOffsetPixel*hzPixel)/100,100);
 
     }
 }
@@ -333,14 +333,14 @@ void Waterfall::setSampleRate(int r) {
     sampleRate=r;
 }
 
-void Waterfall::setFrequency(long long f) {
+void Waterfall::setFrequency(qint64 f) {
     frequency=f;
     subRxFrequency=f;
 
     //qDebug() << "Spectrum:setFrequency: " << f;
 }
 
-void Waterfall::setSubRxFrequency(long long f) {
+void Waterfall::setSubRxFrequency(qint64 f) {
     subRxFrequency=f;
     //qDebug() << "Spectrum:setSubRxFrequency: " << f;
 }

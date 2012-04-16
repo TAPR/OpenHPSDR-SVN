@@ -36,8 +36,6 @@ Bridgewater, NJ 08807
 
 #include <common.h>
 
-
-
 IQ
 newCorrectIQ (REAL phase, REAL gain, REAL mu)
 {

@@ -31,7 +31,7 @@ BandStackEntry::BandStackEntry() {
 BandStackEntry::~BandStackEntry() {
 }
 
-void BandStackEntry::setFrequency(long long f) {
+void BandStackEntry::setFrequency(quint64 f) {
     frequency=f;
 }
 
@@ -64,7 +64,7 @@ void BandStackEntry::setWaterfallLow(int low) {
 }
 
 
-long long BandStackEntry::getFrequency() {
+quint64 BandStackEntry::getFrequency() {
     return frequency;
 }
 

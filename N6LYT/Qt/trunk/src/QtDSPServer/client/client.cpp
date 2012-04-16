@@ -15,7 +15,6 @@ Client::Client(QTcpSocket* s,int rx,QObject *parent) :
     multimeterCalibrationOffset=-41.0f;
     displayCalibrationOffset=-48.0f;
     squelchCalibrationOffset=-21.0f;
-    sampleRate=Connection::getInstance()->getSampleRate();
 
     sampleRate=96000;
 
@@ -120,6 +119,8 @@ void Client::readyRead() {
                 response.data()[6]=(int)meter&0xFF;
                 response.data()[7]=((int)subrx_meter>>8)&0xFF; // sub rx meter
                 response.data()[8]=(int)subrx_meter&0xFF;
+
+                sampleRate=Connection::getInstance()->getSampleRate();
                 response.data()[9]=(sampleRate>>24)&0xFF; // sample rate
                 response.data()[10]=(sampleRate>>16)&0xFF;
                 response.data()[11]=(sampleRate>>8)&0xFF;
@@ -277,6 +278,14 @@ void Client::readyRead() {
                 SetRXFilter(0,0,args[1].toDouble(),args[2].toDouble());
                 SetRXFilter(0,1,args[1].toDouble(),args[2].toDouble());
                 SetTXFilter(1,args[1].toDouble(),args[2].toDouble());
+            } else if(args[0]=="hardware") {
+                QString command;
+                command.append(args[0]);
+                command.append(QString(" "));
+                command.append(args[1]);
+                command.append(QString(" "));
+                command.append(args[2]);
+                Connection::getInstance()->sendCommand(command);
             }  else {
                 qDebug()<<"Error: InvalidCommand:"<<buffer;
             }
@@ -410,6 +419,8 @@ void Client::readyRead() {
 void Client::sendAudio(float* left,float* right,int length) {
     if(audio_port!=0) {
 
+
+        sampleRate=Connection::getInstance()->getSampleRate();
         mutex.lock();
         //qDebug()<<"sendAudio: audio_rate:"<<audio_rate<<" sampleRate:"<<sampleRate<<" encoding:"<<audio_encoding<<" channels:"<<audio_channels;
         int downsample=(sampleRate/audio_rate);
@@ -432,7 +443,6 @@ void Client::sendAudio(float* left,float* right,int length) {
                 switch(audio_channels) {
                 case 1:
                     audioBuffer.data()[audioBufferOffset++]=g711a.encode((l+r)/2);
-                    audioBuffer.data()[audioBufferOffset++]=g711a.encode(l);
                     break;
                 case 2:
                     audioBuffer.data()[audioBufferOffset++]=g711a.encode(l);
@@ -527,6 +537,9 @@ void Client::receiveAudio() {
         size=2*audio_rate/AUDIO_FRAMES_PER_SECOND;
         break;
     }
+
+
+    sampleRate=Connection::getInstance()->getSampleRate();
 
     char buffer[size];
     while(audioSocket->bytesAvailable()>=size) {

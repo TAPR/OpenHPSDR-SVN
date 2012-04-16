@@ -45,8 +45,8 @@ public:
     void setGeometry(QRect rect);
     void initialize();
     void setSampleRate(int r);
-    void setFrequency(long long f);
-    void setSubRxFrequency(long long f);
+    void setFrequency(qint64 f);
+    void setSubRxFrequency(qint64 f);
     void setFilter(int low,int high);
     void updateSpectrum(char* header,char* buffer,int width);
     int samplerate();
@@ -65,7 +65,7 @@ public:
     void setHost(QString h);
     void setReceiver(int r);
 
-    void setBandLimits(long long min,long long max);
+    void setBandLimits(qint64 min,qint64 max);
 
     void setSquelch(bool state);
     void setSquelchVal(float val);
@@ -74,7 +74,7 @@ public:
 
 signals:
     void frequencyMoved(int steps,int step);
-    void frequencyChanged(long long frequency);
+    void frequencyChanged(qint64 frequency);
     void spectrumHighChanged(int high);
     void spectrumLowChanged(int low);
     void waterfallHighChanged(int high);
@@ -110,6 +110,8 @@ private:
     int moved;
 
     int sampleRate;
+    int step;
+
     short meter;
     int maxMeter;
     int meterCount;
@@ -119,9 +121,9 @@ private:
 
     int filterLow;
     int filterHigh;
-    long long frequency;
+    qint64 frequency;
     QString strFrequency;
-    long long subRxFrequency;
+    qint64 subRxFrequency;
     QString strSubRxFrequency;
     bool subRx;
 
@@ -131,8 +133,8 @@ private:
     bool showSquelchControl;
     bool settingSquelch;
 
-    long long band_min;
-    long long band_max;
+    qint64 band_min;
+    qint64 band_max;
 
     QVector <QPoint> plot;
 

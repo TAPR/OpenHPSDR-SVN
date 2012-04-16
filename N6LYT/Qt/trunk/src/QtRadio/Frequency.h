@@ -20,13 +20,13 @@
 #define FREQUENCY_H
 
 #include "FrequencyInfo.h"
-#include <Band.h>
+#include <bands.h>
 
 class Frequency
 {
 public:
     Frequency();
-    FrequencyInfo getFrequencyInfo(long long frequency);
+    FrequencyInfo getFrequencyInfo(quint64 frequency);
 private:
     QVector <FrequencyInfo> info;
 };

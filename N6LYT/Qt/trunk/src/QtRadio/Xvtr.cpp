@@ -24,10 +24,10 @@ void Xvtr::loadSettings(QSettings* settings) {
     int count;
     QString s;
     QString title;
-    long long minFrequency;
-    long long maxFrequency;
-    long long ifFrequency;
-    long long frequency;
+    quint64 minFrequency;
+    quint64 maxFrequency;
+    quint64 ifFrequency;
+    quint64 frequency;
     int mode;
     int filter;
 
@@ -94,15 +94,15 @@ void Xvtr::saveSettings(QSettings* settings) {
 void Xvtr::configure(QDomDocument* configuration) {
     int xvtrEntry;
     QString xvtrLabel;
-    long long xvtrMinFrequency;
-    long long xvtrMaxFrequency;
-    long long xvtrLOFrequency;
+    quint64 xvtrMinFrequency;
+    quint64 xvtrMaxFrequency;
+    quint64 xvtrLOFrequency;
 
     // walk through the DOM tree and extract the XVTR configuration
     QDomElement element=configuration->documentElement();
     QDomNode n=element.firstChild();
     while(!n.isNull()) {
-        qDebug()<<"UI::configBuffer: node:"<<n.nodeName();
+        //qDebug()<<"Xvtr::confige: node:"<<n.nodeName();
         if(n.nodeName()=="xvtr") {
             QDomNode xvtrNode=n.firstChild();
             QDomNode xvtrElement;
@@ -153,14 +153,12 @@ void Xvtr::configure(QDomDocument* configuration) {
         }
         n=n.nextSibling();
     }
-
-
 }
 
 void Xvtr::buildMenu(QMenu* menu) {
     XvtrEntry* xvtr;
     QAction* action;
-    menu->clear();
+    //menu->clear();
     for(int i=0;i<xvtrs.size();++i) {
         xvtr=xvtrs.at(i);
         action=new QAction(xvtr->getTitle(),this);
@@ -172,7 +170,7 @@ void Xvtr::buildMenu(QMenu* menu) {
     }
 }
 
-void Xvtr::add(int entry, QString title, long long minFrequency, long long maxFrequency, long long ifFrequency,long long frequency,int mode,int filter) {
+void Xvtr::add(int entry, QString title, quint64 minFrequency, quint64 maxFrequency, quint64 ifFrequency,quint64 frequency,int mode,int filter) {
     qDebug()<<"Xvtr::add"<<title;
     xvtrs.append(new XvtrEntry(entry,title,minFrequency,maxFrequency,ifFrequency,frequency,mode,filter));
 }
@@ -200,7 +198,10 @@ void Xvtr::select(QAction* action) {
         action->setChecked(true);
         currentXvtrAction=action;
     }
+}
 
+void Xvtr::deselect() {
+    currentXvtrAction->setChecked(false);
 }
 
 int Xvtr::getEntry() {
@@ -211,15 +212,15 @@ QString Xvtr::getTitle() {
     return currentXvtr->getTitle();
 }
 
-long long Xvtr::getMinFrequency() {
+quint64 Xvtr::getMinFrequency() {
     return currentXvtr->getMinFrequency();
 }
 
-long long Xvtr::getMaxFrequency() {
+quint64 Xvtr::getMaxFrequency() {
     return currentXvtr->getMaxFrequency();
 }
 
-long long Xvtr::getIFFrequency() {
+quint64 Xvtr::getIFFrequency() {
     return currentXvtr->getIFFrequency();
 }
 
@@ -232,7 +233,7 @@ XvtrEntry* Xvtr::getXvtrAt(int index) {
     return xvtrs.at(index);
 }
 
-long long Xvtr::getFrequency() {
+quint64 Xvtr::getFrequency() {
     return currentXvtr->getFrequency();
 }
 
@@ -244,7 +245,7 @@ int Xvtr::getFilter() {
     return currentXvtr->getFilter();
 }
 
-void Xvtr::setFrequency(long long f) {
+void Xvtr::setFrequency(quint64 f) {
     currentXvtr->setFrequency(f);
 }
 

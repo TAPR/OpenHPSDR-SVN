@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network multimedia xml
+QT       += core gui network multimedia xml opengl
 
 #CONFIG += mobility
 #MOBILITY = multimedia
@@ -55,7 +55,8 @@ SOURCES += main.cpp\
     g711a.cpp \
     g711u.cpp \
     FreqSender.cpp \
-    g721.cpp
+    g721.cpp \
+    bands.cpp
         
 
 HEADERS  += \ 
@@ -99,7 +100,8 @@ HEADERS  += \
     g711a.h \
     g711u.h \
     FreqSender.h \
-    g721.h
+    g721.h \
+    bands.h
 
 FORMS    += \   
     UI.ui \

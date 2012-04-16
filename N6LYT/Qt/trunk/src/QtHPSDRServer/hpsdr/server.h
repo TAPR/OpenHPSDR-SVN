@@ -15,6 +15,11 @@
 #include "error.h"
 #include "../client/client.h"
 
+#define MIN_FREQUENCY 100
+#define MAX_FREQUENCY 55000000
+
+#define XVTRS 4
+
 class Server : public QThread {
     Q_OBJECT
 public:
@@ -24,6 +29,8 @@ public:
     void save();
 
     int bind();
+
+    QString getConfig();
 
     Interfaces* getInterfaces();
 
@@ -94,6 +101,7 @@ public:
     void setMicBoost(bool s);
     void setAutoStart(bool s);
     void setAutoStartDsp(bool s);
+    void setAlexAttenuation(int v);
 
     int getSampleRate();
     int getReceivers();
@@ -108,6 +116,7 @@ public:
     bool getMicBoost();
     bool getAutoStart();
     bool getAutoStartDsp();
+    int getAlexAttenuation();
 
     void sendBuffer();
 
@@ -155,6 +164,8 @@ public:
     void enableAudio(int rx);
 
     XVTR* getXvtrs();
+
+    void setHardware(QString option,QString value);
 
 protected:
     Server();
@@ -219,6 +230,7 @@ private:
     bool auto_start;
     bool auto_start_dsp;
 
+    int alexAttenuation;
     int alexRxAntenna;
     int alexTxAntenna;
     int alexRxOnlyAntenna;
@@ -283,7 +295,7 @@ private:
 
     QSettings* settings;
 
-    XVTR xvtrs[4];
+    XVTR xvtrs[XVTRS];
 };
 
 #endif // SERVER_H

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtNetwork/QTcpSocket>
 
+
 class Client : public QObject
 {
     Q_OBJECT
@@ -21,6 +22,9 @@ public slots:
 
 private:
     QTcpSocket* socket;
+
+    int band;
+    long long frequency;
 };
 
 #endif // CLIENT_H

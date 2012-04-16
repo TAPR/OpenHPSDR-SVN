@@ -30,7 +30,7 @@
 #include "UI.h"
 #include "About.h"
 #include "Configure.h"
-#include "Band.h"
+#include "bands.h"
 #include "Mode.h"
 #include "FiltersBase.h"
 #include "CWLFilters.h"
@@ -49,6 +49,9 @@
 UI::UI() {
     widget.setupUi(this);
     configFileName=getConfigDir()+"/"+QCoreApplication::applicationName()+".ini";
+    settings=new QSettings(configFileName,QSettings::IniFormat);
+
+
 
     widget.gridLayout->setContentsMargins(2,2,2,2);
     widget.gridLayout->setVerticalSpacing(0);
@@ -92,21 +95,7 @@ UI::UI() {
     connect(widget.actionSquelchReset,SIGNAL(triggered()),this,SLOT(actionSquelchReset()));
 
     connect(widget.actionKeypad, SIGNAL(triggered()),this,SLOT(actionKeypad()));
-    connect(&keypad,SIGNAL(setKeypadFrequency(long long)),this,SLOT(setKeypadFrequency(long long)));
-
-    connect(widget.action160, SIGNAL(triggered()),this,SLOT(action160()));
-    connect(widget.action80, SIGNAL(triggered()),this,SLOT(action80()));
-    connect(widget.action60, SIGNAL(triggered()),this,SLOT(action60()));
-    connect(widget.action40, SIGNAL(triggered()),this,SLOT(action40()));
-    connect(widget.action30, SIGNAL(triggered()),this,SLOT(action30()));
-    connect(widget.action20, SIGNAL(triggered()),this,SLOT(action20()));
-    connect(widget.action17, SIGNAL(triggered()),this,SLOT(action17()));
-    connect(widget.action15, SIGNAL(triggered()),this,SLOT(action15()));
-    connect(widget.action12, SIGNAL(triggered()),this,SLOT(action12()));
-    connect(widget.action10, SIGNAL(triggered()),this,SLOT(action10()));
-    connect(widget.action6, SIGNAL(triggered()),this,SLOT(action6()));
-    connect(widget.actionGen, SIGNAL(triggered()),this,SLOT(actionGen()));
-    connect(widget.actionWWV, SIGNAL(triggered()),this,SLOT(actionWWV()));
+    connect(&keypad,SIGNAL(setKeypadFrequency(quint64)),this,SLOT(setKeypadFrequency(quint64)));
 
     connect(widget.actionCWL,SIGNAL(triggered()),this,SLOT(actionCWL()));
     connect(widget.actionCWU,SIGNAL(triggered()),this,SLOT(actionCWU()));
@@ -153,8 +142,8 @@ UI::UI() {
     connect(widget.actionRemoteMic,SIGNAL(triggered()),this,SLOT(actionRemoteMic()));
 
     // connect up band and frequency changes
-    connect(&band,SIGNAL(bandChanged(int,int)),this,SLOT(bandChanged(int,int)));
-//    connect(&band,SIGNAL(frequencyChanged(long long)),this,SLOT(frequencyChanged(long long)));
+    connect(&bands,SIGNAL(bandSelected(int)),this,SLOT(bandChanged(int)));
+//    connect(&band,SIGNAL(frequencyChanged(quint64)),this,SLOT(frequencyChanged(quint64)));
 
     // connect up mode changes
     connect(&mode,SIGNAL(modeChanged(int,int)),this,SLOT(modeChanged(int,int)));
@@ -166,8 +155,8 @@ UI::UI() {
     // connect up spectrum frame
     connect(widget.spectrumFrame, SIGNAL(frequencyMoved(int,int)),
             this, SLOT(frequencyMoved(int,int)));
-    connect(widget.spectrumFrame, SIGNAL(frequencyChanged(long long)),
-            this, SLOT(frequencyChanged(long long)));
+    connect(widget.spectrumFrame, SIGNAL(frequencyChanged(quint64)),
+            this, SLOT(frequencyChanged(quint64)));
     connect(widget.spectrumFrame, SIGNAL(spectrumHighChanged(int)),
             this,SLOT(spectrumHighChanged(int)));
     connect(widget.spectrumFrame, SIGNAL(spectrumLowChanged(int)),
@@ -211,7 +200,7 @@ UI::UI() {
     connect(&bookmarks,SIGNAL(bookmarkSelected(QAction*)),this,SLOT(selectBookmark(QAction*)));
     connect(&bookmarkDialog,SIGNAL(accepted()),this,SLOT(addBookmark()));
 
-    connect(&configure,SIGNAL(addXVTR(QString,long long,long long,long long,long long,int,int)),this,SLOT(addXVTR(QString,long long,long long,long long,long long,int,int)));
+    connect(&configure,SIGNAL(addXVTR(QString,quint64,quint64,quint64,quint64,int,int)),this,SLOT(addXVTR(QString,quint64,quint64,quint64,quint64,int,int)));
     connect(&configure,SIGNAL(deleteXVTR(int)),this,SLOT(deleteXVTR(int)));
 
 
@@ -236,7 +225,7 @@ UI::UI() {
     ifFrequency=0LL;
 
     audio_device=0;
-    audio_sample_rate=configure.getSampleRate();
+    audio_sample_rate=configure.getAudioSampleRate();
     audio_channels=configure.getChannels();
     audio_byte_order=configure.getByteOrder();
 
@@ -263,18 +252,14 @@ UI::UI() {
 
     fps=configure.getFps();
 
-    configure.updateXvtrList(&xvtr);
-    xvtr.buildMenu(widget.menuXVTR);
-
     widget.spectrumFrame->setHost(configure.getHost());
     widget.spectrumFrame->setReceiver(configure.getReceiver());
 
     widget.actionSubrx->setDisabled(TRUE);
     widget.actionMuteSubRx->setDisabled(TRUE);
 
-    band.initBand(band.getBand());
+    mode.setMode(MODE_USB);
 
-    
 }
 
 UI::~UI() {
@@ -292,17 +277,12 @@ void UI::actionAbout() {
 }
 
 void UI::loadSettings() {
-    // Configure template loader and cache
-    QSettings* settings=new QSettings(configFileName,QSettings::IniFormat);
-
-    qDebug() << "saveSettings: " << settings->fileName();
-
-    band.loadSettings(settings);
+    bands.loadSettings(settings);
     xvtr.loadSettings(settings);
     configure.loadSettings(settings);
     configure.updateXvtrList(&xvtr);
     bookmarks.loadSettings(settings);
-    bookmarks.buildMenu(widget.menuView_Bookmarks);
+    bookmarks.buildMenu(widget.menuView_Bookmarks,&bands);
 
     settings->beginGroup("UI");
     if(settings->contains("gain")) gain=subRxGain=settings->value("gain").toInt();
@@ -315,14 +295,10 @@ void UI::saveSettings() {
     QString s;
     Bookmark* bookmark;
 
-    QSettings* settings=new QSettings(configFileName,QSettings::IniFormat);
-
-    qDebug() << "saveSettings: " << settings->fileName();
-
     settings->clear();
 
     configure.saveSettings(settings);
-    band.saveSettings(settings);
+    bands.saveSettings(settings);
     xvtr.saveSettings(settings);
     bookmarks.saveSettings(settings);
 
@@ -356,7 +332,7 @@ void UI::spectrumHighChanged(int high) {
 
     widget.spectrumFrame->setHigh(high);
     configure.setSpectrumHigh(high);
-    band.setSpectrumHigh(high);
+    bands.setSpectrumHigh(high);
 }
 
 void UI::spectrumLowChanged(int low) {
@@ -364,7 +340,7 @@ void UI::spectrumLowChanged(int low) {
 
     widget.spectrumFrame->setLow(low);
     configure.setSpectrumLow(low);
-    band.setSpectrumLow(low);
+    bands.setSpectrumLow(low);
 }
 
 void UI::fpsChanged(int f) {
@@ -381,7 +357,7 @@ void UI::waterfallHighChanged(int high) {
 
     widget.waterfallFrame->setHigh(high);
     configure.setWaterfallHigh(high);
-    band.setWaterfallHigh(high);
+    bands.setWaterfallHigh(high);
 }
 
 void UI::waterfallLowChanged(int low) {
@@ -389,7 +365,7 @@ void UI::waterfallLowChanged(int low) {
 
     widget.waterfallFrame->setLow(low);
     configure.setWaterfallLow(low);
-    band.setWaterfallLow(low);
+    bands.setWaterfallLow(low);
 }
 
 void UI::waterfallAutomaticChanged(bool state) {
@@ -471,20 +447,78 @@ void UI::connected() {
     Connection::getInstance()->sendCommand(command);
 
 
+
+}
+
+void UI::disconnected(QString message) {
+    qDebug() << "UI::disconnected: " << message;
+
+    widget.statusbar->showMessage(message,0);
+
+    widget.actionConnectToServer->setEnabled(TRUE);
+    widget.actionDisconnectFromServer->setDisabled(TRUE);
+    widget.actionSubrx->setDisabled(TRUE);
+    widget.actionMuteSubRx->setDisabled(TRUE);
+
+    spectrumTimer.stop();
+
+    configure.connected(FALSE);
+}
+
+void UI::updateSpectrum() {
+    command.clear();
+    command.append(QString("getspectrum "));
+    command.append(QString::number(widget.spectrumFrame->width()));
+    Connection::getInstance()->sendCommand(command);
+}
+
+void UI::spectrumBuffer(char* header,char* buffer) {
+    int length=((header[3]&0xFF)<<8)+(header[4]&0xFF);
+    sampleRate=((header[9]&0xFF)<<24)+((header[10]&0xFF)<<16)+((header[11]&0xFF)<<8)+(header[12]&0xFF);
+    widget.spectrumFrame->updateSpectrum(header,buffer,length);
+    widget.waterfallFrame->updateWaterfall(header,buffer,length);
+}
+
+void UI::configBuffer(char *header, char *buffer) {
+
+    int length=((header[3]&0xFF)<<8)+(header[4]&0xFF);
+    QByteArray config(buffer,length);
+
+    qDebug()<<"configBuffer:"<<config;
+
+    QDomDocument* configuration=new QDomDocument();
+    configuration->setContent(config);
+
+    configOptions(configuration);
+
+    configure.setHardwareConfiguration(configuration);
+    widget.spectrumFrame->setSampleRate(configure.getSampleRate());
+    widget.waterfallFrame->setSampleRate(configure.getSampleRate());
+
+    // setup bands based on frequency range
+    bands.setupBands(configure.getMinFrequency(),configure.getMaxFrequency());
+    bands.buildMenu(widget.menuHam,widget.menuBroadcast);
+
+    xvtr.configure(configuration);
+    xvtr.buildMenu(widget.menuXvtr);
+
+    bookmarks.buildMenu(widget.menuView_Bookmarks,&bands);
+
     // send initial settings
-    frequency=band.getFrequency();
+    quint64 frequency=bands.getFrequency();
+    QString command;
     command.clear();
     command.append(QString("frequency "));
     command.append(QString::number(frequency));
     command.append(QString(" "));
-    command.append(QString::number(band.getBand()));
+    command.append(QString::number(bands.getBand()));
     Connection::getInstance()->sendCommand(command);
     widget.spectrumFrame->setFrequency(frequency);
     widget.waterfallFrame->setFrequency(frequency);
 
     command.clear();
     command.append(QString("mode "));
-    command.append(QString::number(band.getMode()));
+    command.append(QString::number(bands.getMode()));
     Connection::getInstance()->sendCommand(command);
 
     int low,high;
@@ -541,7 +575,7 @@ void UI::connected() {
     command.append(QString(" "));
     command.append(QString::number(configure.getAnfLeak()));
     Connection::getInstance()->sendCommand(command);
-    
+
     command.clear();
     command.append(QString("nrvals "));
     command.append(QString::number(configure.getNrTaps()));
@@ -552,7 +586,7 @@ void UI::connected() {
     command.append(QString(" "));
     command.append(QString::number(configure.getNrLeak()));
     Connection::getInstance()->sendCommand(command);
-    
+
 
     command.clear();
     command.append(QString("nbvals "));
@@ -582,50 +616,6 @@ void UI::connected() {
     qDebug()<<"UI::connected: calling updateSpectrum";
     spectrumTimer.start(1000/fps);
     updateSpectrum();
-}
-
-void UI::disconnected(QString message) {
-    qDebug() << "UI::disconnected: " << message;
-
-    widget.statusbar->showMessage(message,0);
-
-    widget.actionConnectToServer->setEnabled(TRUE);
-    widget.actionDisconnectFromServer->setDisabled(TRUE);
-    widget.actionSubrx->setDisabled(TRUE);
-    widget.actionMuteSubRx->setDisabled(TRUE);
-
-    spectrumTimer.stop();
-
-    configure.connected(FALSE);
-}
-
-void UI::updateSpectrum() {
-    command.clear();
-    command.append(QString("getspectrum "));
-    command.append(QString::number(widget.spectrumFrame->width()));
-    Connection::getInstance()->sendCommand(command);
-}
-
-void UI::spectrumBuffer(char* header,char* buffer) {
-    int length=((header[3]&0xFF)<<8)+(header[4]&0xFF);
-    sampleRate=((header[9]&0xFF)<<24)+((header[10]&0xFF)<<16)+((header[11]&0xFF)<<8)+(header[12]&0xFF);
-    widget.spectrumFrame->updateSpectrum(header,buffer,length);
-    widget.waterfallFrame->updateWaterfall(header,buffer,length);
-}
-
-void UI::configBuffer(char *header, char *buffer) {
-
-    int length=((header[3]&0xFF)<<8)+(header[4]&0xFF);
-    QByteArray config(buffer,length);
-    qDebug()<<"configBuffer:"<<config;
-
-    QDomDocument* configuration=new QDomDocument();
-    configuration->setContent(config);
-
-    configure.setHardwareConfiguration(configuration);
-
-    xvtr.configure(configuration);
-    xvtr.buildMenu(widget.menuXVTR);
 
 }
 
@@ -642,9 +632,9 @@ void UI::actionSubRx() {
 
         // check frequency in range
         int samplerate = widget.spectrumFrame->samplerate();
-        long long frequency=band.getFrequency();
+        quint64 frequency=bands.getFrequency();
         if ((subRxFrequency < (frequency - (samplerate / 2))) || (subRxFrequency > (frequency + (samplerate / 2)))) {
-            subRxFrequency=band.getFrequency();
+            subRxFrequency=bands.getFrequency();
         }
         widget.spectrumFrame->setSubRxState(TRUE);
         widget.waterfallFrame->setSubRxState(TRUE);
@@ -677,153 +667,19 @@ void UI::actionKeypad() {
     keypad.show();
 }
 
-void UI::setKeypadFrequency(long long f) {
+void UI::setKeypadFrequency(quint64 f) {
     frequencyChanged(f);
+
+    // clear the band for manually set frequency
+    widget.spectrumFrame->setBand("");
 }
 
-void UI::action160() {
-    band.selectBand(BAND_160);
-}
-
-void UI::action80() {
-    band.selectBand(BAND_80);
-}
-
-void UI::action60() {
-    band.selectBand(BAND_60);
-}
-
-void UI::action40() {
-    band.selectBand(BAND_40);
-}
-
-void UI::action30() {
-    band.selectBand(BAND_30);
-}
-
-void UI::action20() {
-    band.selectBand(BAND_20);
-}
-
-void UI::action17() {
-    band.selectBand(BAND_17);
-}
-
-void UI::action15() {
-    band.selectBand(BAND_15);
-}
-
-void UI::action12() {
-    band.selectBand(BAND_12);
-}
-
-void UI::action10() {
-    band.selectBand(BAND_10);
-}
-
-void UI::action6() {
-    band.selectBand(BAND_6);
-}
-
-void UI::actionGen() {
-    band.selectBand(BAND_GEN);
-}
-
-void UI::actionWWV() {
-    band.selectBand(BAND_WWV);
-}
-
-void UI::bandChanged(int previousBand,int newBand) {
-    qDebug() << "UI::bandChanged: " << previousBand << "," << newBand;
-    // uncheck previous band
-    switch(previousBand) {
-        case BAND_160:
-            widget.action160->setChecked(FALSE);
-            break;
-        case BAND_80:
-            widget.action80->setChecked(FALSE);
-            break;
-        case BAND_60:
-            widget.action60->setChecked(FALSE);
-            break;
-        case BAND_40:
-            widget.action40->setChecked(FALSE);
-            break;
-        case BAND_30:
-            widget.action30->setChecked(FALSE);
-            break;
-        case BAND_20:
-            widget.action20->setChecked(FALSE);
-            break;
-        case BAND_17:
-            widget.action17->setChecked(FALSE);
-            break;
-        case BAND_15:
-            widget.action15->setChecked(FALSE);
-            break;
-        case BAND_12:
-            widget.action12->setChecked(FALSE);
-            break;
-        case BAND_10:
-            widget.action10->setChecked(FALSE);
-            break;
-        case BAND_6:
-            widget.action6->setChecked(FALSE);
-            break;
-        case BAND_GEN:
-            widget.actionGen->setChecked(FALSE);
-            break;
-        case BAND_WWV:
-            widget.actionWWV->setChecked(FALSE);
-            break;
-    }
-
-    // check new band
-    switch(newBand) {
-        case BAND_160:
-            widget.action160->setChecked(TRUE);
-            break;
-        case BAND_80:
-            widget.action80->setChecked(TRUE);
-            break;
-        case BAND_60:
-            widget.action60->setChecked(TRUE);
-            break;
-        case BAND_40:
-            widget.action40->setChecked(TRUE);
-            break;
-        case BAND_30:
-            widget.action30->setChecked(TRUE);
-            break;
-        case BAND_20:
-            widget.action20->setChecked(TRUE);
-            break;
-        case BAND_17:
-            widget.action17->setChecked(TRUE);
-            break;
-        case BAND_15:
-            widget.action15->setChecked(TRUE);
-            break;
-        case BAND_12:
-            widget.action12->setChecked(TRUE);
-            break;
-        case BAND_10:
-            widget.action10->setChecked(TRUE);
-            break;
-        case BAND_6:
-            widget.action6->setChecked(TRUE);
-            break;
-        case BAND_GEN:
-            widget.actionGen->setChecked(TRUE);
-            break;
-        case BAND_WWV:
-            widget.actionWWV->setChecked(TRUE);
-            break;
-    }
+void UI::bandChanged(int band) {
+    qDebug() << "UI::bandChanged: " << band;
 
     // get the band setting
-    mode.setMode(band.getMode());
-    frequency=band.getFrequency();
+    mode.setMode(bands.getMode());
+    frequency=bands.getFrequency();
     int samplerate = widget.spectrumFrame->samplerate();
     if(subRx) {
         if ((subRxFrequency < (frequency - (samplerate / 2))) || (subRxFrequency > (frequency + (samplerate / 2)))) {
@@ -835,22 +691,22 @@ void UI::bandChanged(int previousBand,int newBand) {
     command.append(QString("frequency "));
     command.append(QString::number(frequency));
     command.append(QString(" "));
-    command.append(QString::number(newBand));
+    command.append(QString::number(band));
     Connection::getInstance()->sendCommand(command);
 
     widget.spectrumFrame->setFrequency(frequency);
     widget.spectrumFrame->setSubRxFrequency(subRxFrequency);
-    widget.spectrumFrame->setHigh(band.getSpectrumHigh());
-    widget.spectrumFrame->setLow(band.getSpectrumLow());
+    widget.spectrumFrame->setHigh(bands.getSpectrumHigh());
+    widget.spectrumFrame->setLow(bands.getSpectrumLow());
     widget.waterfallFrame->setFrequency(frequency);
     widget.waterfallFrame->setSubRxFrequency(subRxFrequency);
-    widget.waterfallFrame->setHigh(band.getWaterfallHigh());
-    widget.waterfallFrame->setLow(band.getWaterfallLow());
+    widget.waterfallFrame->setHigh(bands.getWaterfallHigh());
+    widget.waterfallFrame->setLow(bands.getWaterfallLow());
 
 
-    widget.spectrumFrame->setBand(band.getStringBand());
-    BandLimit limits=band.getBandLimits(band.getFrequency()-(samplerate/2),band.getFrequency()+(samplerate/2));
-    widget.spectrumFrame->setBandLimits(limits.min(),limits.max());
+    widget.spectrumFrame->setBand(bands.getLabel()+" ("+QString::number(bands.getBandStackEntry())+")");
+    BandLimit* limits=bands.getBandLimits(bands.getFrequency()-(samplerate/2),bands.getFrequency()+(samplerate/2));
+    widget.spectrumFrame->setBandLimits(limits->getMin(),limits->getMax());
 
     ifFrequency=0LL;
 }
@@ -1049,61 +905,61 @@ void UI::filtersChanged(FiltersBase* previousFilters,FiltersBase* newFilters) {
 void UI::actionCWL() {
     mode.setMode(MODE_CWL);
     filters.selectFilters(&cwlFilters);
-    band.setMode(MODE_CWL);
+    bands.setMode(MODE_CWL);
 }
 
 void UI::actionCWU() {
     mode.setMode(MODE_CWU);
     filters.selectFilters(&cwuFilters);
-    band.setMode(MODE_CWU);
+    bands.setMode(MODE_CWU);
 }
 
 void UI::actionLSB() {
     mode.setMode(MODE_LSB);
     filters.selectFilters(&lsbFilters);
-    band.setMode(MODE_LSB);
+    bands.setMode(MODE_LSB);
 }
 
 void UI::actionUSB() {
     mode.setMode(MODE_USB);
     filters.selectFilters(&usbFilters);
-    band.setMode(MODE_USB);
+    bands.setMode(MODE_USB);
 }
 
 void UI::actionDSB() {
     mode.setMode(MODE_DSB);
     filters.selectFilters(&dsbFilters);
-    band.setMode(MODE_DSB);
+    bands.setMode(MODE_DSB);
 }
 
 void UI::actionAM() {
     mode.setMode(MODE_AM);
     filters.selectFilters(&amFilters);
-    band.setMode(MODE_AM);
+    bands.setMode(MODE_AM);
 }
 
 void UI::actionSAM() {
     mode.setMode(MODE_SAM);
     filters.selectFilters(&samFilters);
-    band.setMode(MODE_SAM);
+    bands.setMode(MODE_SAM);
 }
 
 void UI::actionFMN() {
     mode.setMode(MODE_FMN);
     filters.selectFilters(&fmnFilters);
-    band.setMode(MODE_FMN);
+    bands.setMode(MODE_FMN);
 }
 
 void UI::actionDIGL() {
     mode.setMode(MODE_DIGL);
     filters.selectFilters(&diglFilters);
-    band.setMode(MODE_DIGL);
+    bands.setMode(MODE_DIGL);
 }
 
 void UI::actionDIGU() {
     mode.setMode(MODE_DIGU);
     filters.selectFilters(&diguFilters);
-    band.setMode(MODE_DIGU);
+    bands.setMode(MODE_DIGU);
 }
 
 void UI::actionFilter0() {
@@ -1237,14 +1093,14 @@ void UI::filterChanged(int previousFilter,int newFilter) {
     widget.spectrumFrame->setFilter(low,high);
     widget.spectrumFrame->setFilter(filters.getText());
     widget.waterfallFrame->setFilter(low,high);
-    band.setFilter(newFilter);
+    bands.setFilter(newFilter);
 }
 
-void UI::frequencyChanged(long long f) {
+void UI::frequencyChanged(quint64 f) {
     //qDebug() << __FUNCTION__ << ": " << f;
 
     frequency=f;
-    band.setFrequency(f);
+    bands.setFrequency(f);
     command.clear();
     command.append(QString("frequency "));
     command.append(QString::number(frequency));
@@ -1255,15 +1111,11 @@ void UI::frequencyChanged(long long f) {
 }
 
 void UI::frequencyMoved(int increment,int step) {
-
-    //qDebug() << __FUNCTION__ << ": increment=" << increment << " step=" << step;
-
-    long long f;
-
+    qint64 f;
     if(subRx) {
-        long long diff;
-        long long frequency = band.getFrequency();
-        f=subRxFrequency+(long long)(increment*step);
+        qint64 diff;
+        qint64 frequency = bands.getFrequency();
+        f=subRxFrequency+(qint64)(increment*step);
         int samplerate = widget.spectrumFrame->samplerate();
         if ((f >= (frequency - (samplerate / 2))) && (f <= (frequency + (samplerate / 2)))) {
             subRxFrequency = f;
@@ -1280,10 +1132,10 @@ void UI::frequencyMoved(int increment,int step) {
 
     } else {
         if(ifFrequency==0LL) {
-            band.setFrequency(band.getFrequency()-(long long)(increment*step));
-            frequency=band.getFrequency();
+            bands.setFrequency(bands.getFrequency()-(quint64)(increment*step));
+            frequency=bands.getFrequency();
         } else {
-            xvtr.setFrequency(xvtr.getFrequency()-(long long)(increment*step));
+            xvtr.setFrequency(xvtr.getFrequency()-(quint64)(increment*step));
             frequency=xvtr.getFrequency();
         }
         command.clear();
@@ -1628,7 +1480,7 @@ void UI::sdromThresholdChanged(double threshold) {
 void UI::actionBookmark() {
     QString strFrequency=stringFrequency(frequency);
     bookmarkDialog.setTitle(strFrequency);
-    bookmarkDialog.setBand(band.getStringBand());
+    bookmarkDialog.setBand(bands.getLabel());
     bookmarkDialog.setFrequency(strFrequency);
     bookmarkDialog.setMode(mode.getStringMode());
     bookmarkDialog.setFilter(filters.getText());
@@ -1639,22 +1491,22 @@ void UI::addBookmark() {
     qDebug() << "addBookmark";
     Bookmark* bookmark=new Bookmark();
     bookmark->setTitle(bookmarkDialog.getTitle());
-    bookmark->setBand(band.getBand());
-    bookmark->setFrequency(band.getFrequency());
+    bookmark->setBand(bands.getBand());
+    bookmark->setFrequency(bands.getFrequency());
     bookmark->setMode(mode.getMode());
     bookmark->setFilter(filters.getFilter());
     bookmarks.add(bookmark);
-    bookmarks.buildMenu(widget.menuView_Bookmarks);
+    bookmarks.buildMenu(widget.menuView_Bookmarks,&bands);
 }
 
 void UI::selectBookmark(QAction* action) {
 
     bookmarks.select(action);
 
-    band.selectBand(bookmarks.getBand());
+    bands.selectBand(bookmarks.getBand());
 
     frequency=bookmarks.getFrequency();
-    band.setFrequency(frequency);
+    bands.setFrequency(frequency);
     command.clear();
     command.append(QString("frequency "));
     command.append(QString::number(frequency));
@@ -1691,7 +1543,7 @@ void UI::editBookmarks() {
 void UI::bookmarkDeleted(int entry) {
     //qDebug() << "UI::bookmarkDeleted: " << entry;
     bookmarks.remove(entry);
-    bookmarks.buildMenu(widget.menuView_Bookmarks);
+    bookmarks.buildMenu(widget.menuView_Bookmarks,&bands);
 }
 
 void UI::bookmarkUpdated(int entry,QString title) {
@@ -1709,7 +1561,7 @@ void UI::bookmarkSelected(int entry) {
         FiltersBase* filters;
 
         bookmarksEditDialog->setTitle(bookmark->getTitle());
-        bookmarksEditDialog->setBand(band.getStringBand(bookmark->getBand()));
+        bookmarksEditDialog->setBand(bands.getLabel(bookmark->getBand()));
         bookmarksEditDialog->setFrequency(stringFrequency(bookmark->getFrequency()));
         bookmarksEditDialog->setMode(mode.getStringMode(bookmark->getMode()));
 
@@ -1755,13 +1607,13 @@ void UI::bookmarkSelected(int entry) {
     }
 }
 
-QString UI::stringFrequency(long long frequency) {
+QString UI::stringFrequency(quint64 frequency) {
     QString strFrequency;
     strFrequency.sprintf("%lld.%03lld.%03lld",frequency/1000000,frequency%1000000/1000,frequency%1000);
     return strFrequency;
 }
 
-void UI::addXVTR(QString title,long long minFrequency,long long maxFrequency,long long ifFrequency,long long freq,int m,int filt) {
+void UI::addXVTR(QString title,quint64 minFrequency,quint64 maxFrequency,quint64 ifFrequency,quint64 freq,int m,int filt) {
 
     qDebug()<<"UI::addXVTR"<<title;
     /*
@@ -1777,12 +1629,14 @@ void UI::deleteXVTR(int index) {
     xvtr.del(index);
 
     // update the menu
-    xvtr.buildMenu(widget.menuXVTR);
-    configure.updateXvtrList(&xvtr);
+    //xvtr.buildMenu(widget.menuXVTR);
+    //configure.updateXvtrList(&xvtr);
 }
 
 void UI::selectXVTR(QAction* action) {
+
     xvtr.select(action);
+
     ifFrequency=xvtr.getIFFrequency();
     frequency=xvtr.getFrequency();
     int samplerate = widget.spectrumFrame->samplerate();
@@ -1801,16 +1655,16 @@ void UI::selectXVTR(QAction* action) {
 
     widget.spectrumFrame->setFrequency(frequency);
     widget.spectrumFrame->setSubRxFrequency(subRxFrequency);
-    widget.spectrumFrame->setHigh(band.getSpectrumHigh());
-    widget.spectrumFrame->setLow(band.getSpectrumLow());
+    widget.spectrumFrame->setHigh(bands.getSpectrumHigh());
+    widget.spectrumFrame->setLow(bands.getSpectrumLow());
     widget.waterfallFrame->setFrequency(frequency);
     widget.waterfallFrame->setSubRxFrequency(subRxFrequency);
-    widget.waterfallFrame->setHigh(band.getWaterfallHigh());
-    widget.waterfallFrame->setLow(band.getWaterfallLow());
+    widget.waterfallFrame->setHigh(bands.getWaterfallHigh());
+    widget.waterfallFrame->setLow(bands.getWaterfallLow());
 
     widget.spectrumFrame->setBand(xvtr.getTitle());
-    BandLimit limits=band.getBandLimits(xvtr.getFrequency()-(samplerate/2),xvtr.getFrequency()+(samplerate/2));
-    widget.spectrumFrame->setBandLimits(limits.min(),limits.max());
+    BandLimit* limits=bands.getBandLimits(xvtr.getFrequency()-(samplerate/2),xvtr.getFrequency()+(samplerate/2));
+    widget.spectrumFrame->setBandLimits(limits->getMin(),limits->getMax());
 
 }
 
@@ -1835,7 +1689,6 @@ void UI::actionSquelch() {
         widget.spectrumFrame->setSquelchVal(squelchValue);
         widget.actionSquelchEnable->setChecked(true);
     }
-
 }
 
 void UI::actionSquelchReset() {
@@ -1926,4 +1779,97 @@ QString UI::getConfigDir() {
     qDebug("Cannot find config file %s",qPrintable(configFileName));
     configDir=binDir;
     return configDir;
+}
+
+void UI::configOptions(QDomDocument* configuration) {
+
+    QString id;
+    QString state;
+    QString choice;
+    QVector<QString> choices;
+
+    // walk through the DOM tree and extract the hardware config options
+    QDomElement element=configuration->documentElement();
+    QDomNode n=element.firstChild();
+    while(!n.isNull()) {
+        if(n.nodeName()=="control") {
+            choices.clear();
+            QDomNode controlNode=n.firstChild();
+            QDomNode controlElement;
+            while(!controlNode.isNull()) {
+                if(controlNode.nodeName()=="id") {
+                    controlElement=controlNode.firstChild();
+                    if(!controlElement.isNull()) {
+                        if(controlElement.isText()) {
+                            id=controlElement.nodeValue();
+                        }
+                    }
+                } else if(controlNode.nodeName()=="state") {
+                    controlElement=controlNode.firstChild();
+                    if(!controlElement.isNull()) {
+                        if(controlElement.isText()) {
+                            state=controlElement.nodeValue();
+                        }
+                    }
+                } else if(controlNode.nodeName()=="choice") {
+                    controlElement=controlNode.firstChild();
+                    if(!controlElement.isNull()) {
+                        if(controlElement.isText()) {
+                            choices.append(controlElement.nodeValue());
+                        }
+                    }
+                }
+                controlNode=controlNode.nextSibling();
+            }
+            if(choices.isEmpty()) {
+                qDebug()<<"control: "<<id<<":"<<state;
+                QAction* action;
+                action=new QAction(id,this);
+                action->setCheckable(true);
+                if(state=="true") action->setChecked(true);
+                widget.menuHardware->addAction(action);
+                connect(action,SIGNAL(triggered()),this,SLOT(hardwareActionTriggered()));
+            } else {
+                qDebug()<<"control: "<<id;
+                QMenu* menu;
+                menu=new QMenu(id);
+                QActionGroup* actionGroup=new QActionGroup(menu);
+                for(int i=0;i<choices.size();i++) {
+                    qDebug()<<"    "<<choices.at(i);
+                    QAction* action;
+                    action=new QAction(choices.at(i),this);
+                    action->setCheckable(true);
+                    action->setActionGroup(actionGroup);
+                    menu->addAction(action);
+                    connect(action,SIGNAL(triggered()),this,SLOT(hardwareChoiceTriggered()));
+                }
+                widget.menuHardware->addMenu(menu);
+
+            }
+        }
+        n=n.nextSibling();
+    }
+}
+
+void UI::hardwareActionTriggered() {
+    QAction *action = qobject_cast<QAction *>(sender());
+    qDebug()<<"hardwareActionTriggered:"<<action->text()<<":"<<action->isChecked();
+    command.clear();
+    command.append("hardware ");
+    command.append(action->text());
+    command.append(" ");
+    command.append(action->isChecked()?"on":"off");
+    Connection::getInstance()->sendCommand(command);
+}
+
+void UI::hardwareChoiceTriggered() {
+    QAction *action = qobject_cast<QAction *>(sender());
+    QMenu *menu=(QMenu*)action->actionGroup()->parent();
+    qDebug()<<"hardwareChoiceTriggered:"<<action->text()<<":"<<menu->title();
+    command.clear();
+    command.append("hardware ");
+    command.append(menu->title());
+    command.append(" ");
+    command.append(action->text());
+    Connection::getInstance()->sendCommand(command);
 }

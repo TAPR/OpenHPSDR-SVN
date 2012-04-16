@@ -121,8 +121,8 @@ SetThreadProcessingMode(unsigned int thread, RUNMODE runmode)
 DttSP_EXP int
 SetMode (unsigned int thread, unsigned int subrx, SDRMODE m)
 {
-	int rtn=0;
-fprintf(stderr,"SetMode thread=%d subrx=%d mode=%d\n",thread,subrx,m);
+    int rtn=0;
+
 	sem_wait(&top[thread].sync.upd.sem);
 	tx[thread].mode = m;
 	if (tx[thread].mode == LSB) tx[thread].hlb.gen->invert = TRUE;
@@ -232,9 +232,6 @@ SetRXFilter (unsigned int thread, unsigned int subrx, double low_frequency, doub
 	fftwf_plan ptmp;
 	COMPLEX *zcvec;
 
-fprintf(stderr, "DSP: SetRXFilter(%u, %u, %f, %f)\n", thread, subrx, low_frequency, high_frequency);
-	//fflush(stderr);
-
 	if (fabs (low_frequency) >= 0.5 * uni[thread].samplerate)
 		rtn = -1;
 	if (fabs (high_frequency) >= 0.5 * uni[thread].samplerate)
@@ -324,6 +321,7 @@ SetRXOsc (unsigned int thread, unsigned subrx, double newfreq)
 DttSP_EXP int
 SetTXOsc (unsigned int thread, double newfreq)
 {
+    fprintf(stderr,"DttSP::SetTXOsc:%d,%f\n",thread,newfreq);
 	if (fabs (newfreq) >= 0.5 * uni[thread].samplerate)
 		return -1;
 

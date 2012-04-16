@@ -4,7 +4,7 @@
 #include <QMenu>
 
 #include "Bookmarks.h"
-
+#include "bands.h"
 
 Bookmarks::Bookmarks() {
     currentBookmark=NULL;
@@ -17,7 +17,7 @@ void Bookmarks::triggered() {
     emit bookmarkSelected(action);
 }
 
-void Bookmarks::buildMenu(QMenu* menu) {
+void Bookmarks::buildMenu(QMenu* menu,Bands *bands) {
     Bookmark* bookmark;
     QAction* action;
 
@@ -25,13 +25,17 @@ void Bookmarks::buildMenu(QMenu* menu) {
     menu->clear();
     for(int i=0;i<bookmarks.size();++i) {
         bookmark=bookmarks.at(i);
-        action=new QAction(bookmark->getTitle(),this);
-        menu->addAction(action);
 
-        //need an event for the new action
-        connect(action,SIGNAL(triggered()),this,SLOT(triggered()));
+        // validate that the remote server supports this
+        if(bands->exists(bookmark->getBand())) {
+            action=new QAction(bookmark->getTitle(),this);
+            menu->addAction(action);
 
-        qDebug()<<"  added "<<action->text();
+            //need an event for the new action
+            connect(action,SIGNAL(triggered()),this,SLOT(triggered()));
+
+            qDebug()<<"  added "<<action->text();
+        }
     }
 }
 
@@ -92,7 +96,7 @@ void Bookmarks::loadSettings(QSettings* settings) {
     settings->endGroup();
 }
 
-void Bookmarks::add(QString title,int band,long long frequency,int mode,int filter) {
+void Bookmarks::add(QString title,int band,quint64 frequency,int mode,int filter) {
     qDebug() << "Bookmarks::add";
     Bookmark* bookmark=new Bookmark();
     bookmark->setTitle(title);
@@ -142,7 +146,7 @@ int Bookmarks::getBand() {
     return currentBookmark->getBand();
 }
 
-long long Bookmarks::getFrequency() {
+quint64 Bookmarks::getFrequency() {
     return currentBookmark->getFrequency();
 }
 

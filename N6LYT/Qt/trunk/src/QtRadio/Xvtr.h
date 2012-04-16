@@ -16,19 +16,20 @@ class Xvtr : public QObject {
 public:
     Xvtr();
     void buildMenu(QMenu* menu);
-    void add(int,QString,long long,long long,long long,long long,int,int);
+    void add(int,QString,quint64,quint64,quint64,quint64,int,int);
     void del(int index);
     void select(QAction* action);
+    void deselect();
     int getEntry();
     QString getTitle();
-    long long getMinFrequency();
-    long long getMaxFrequency();
-    long long getIFFrequency();
+    quint64 getMinFrequency();
+    quint64 getMaxFrequency();
+    quint64 getIFFrequency();
 
-    long long getFrequency();
+    quint64 getFrequency();
     int getMode();
     int getFilter();
-    void setFrequency(long long f);
+    void setFrequency(quint64 f);
     void setMode(int m);
     void setFilter(int f);
 

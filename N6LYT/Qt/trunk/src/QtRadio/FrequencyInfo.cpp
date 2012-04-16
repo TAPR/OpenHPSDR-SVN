@@ -21,7 +21,7 @@
 FrequencyInfo::FrequencyInfo() {
 }
 
-FrequencyInfo::FrequencyInfo(long long min,long long max,QString descr,int b,bool t) {
+FrequencyInfo::FrequencyInfo(quint64 min,quint64 max,QString descr,int b,bool t) {
     minFrequency=min;
     maxFrequency=max;
     description=descr;
@@ -41,6 +41,6 @@ bool FrequencyInfo::canTransmit() {
     return transmit;
 }
 
-bool FrequencyInfo::isFrequency(long long frequency) {
+bool FrequencyInfo::isFrequency(quint64 frequency) {
     return frequency>=minFrequency && frequency<=maxFrequency;
 }

@@ -52,8 +52,8 @@ public:
     bool getAutomatic();
 
     void setSampleRate(int r);
-    void setFrequency(long long f);
-    void setSubRxFrequency(long long f);
+    void setFrequency(qint64 f);
+    void setSubRxFrequency(qint64 f);
     void setFilter(int low,int high);
     void setSubRxState(bool state);
 
@@ -97,8 +97,8 @@ private:
     int sampleRate;
     int filterLow;
     int filterHigh;
-    long long frequency;
-    long long subRxFrequency;
+    qint64 frequency;
+    qint64 subRxFrequency;
     bool subRx;
 };
 

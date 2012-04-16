@@ -391,7 +391,7 @@ int Configure::getChannels() {
     return widget.audioChannelsSpinBox->value();
 }
 
-int Configure::getSampleRate() {
+int Configure::getAudioSampleRate() {
     return widget.sampleRateComboBox->currentText().toInt();
 }
 
@@ -450,9 +450,9 @@ double Configure::getNbThreshold() {
 void Configure::slotXVTRAdd() {
 
     QString title;
-    long long minFrequency;
-    long long maxFrequency;
-    long long ifFrequency;
+    quint64 minFrequency;
+    quint64 maxFrequency;
+    quint64 ifFrequency;
 
     // check name is present
     title=widget.titleLineEdit->text();
@@ -513,21 +513,57 @@ void Configure::setHardwareConfiguration(QDomDocument* doc) {
 
     printTree(doc->documentElement(),"");
 
-
+    qDebug()<<"Configure::printTree: "<<serverType<<","<<sampleRate<<","<<minFrequency<<","<<maxFrequency;
 }
 
 void Configure::printTree(QDomElement element,QString indent) {
     QDomNode n = element.firstChild();
     if(n.isText()) {
+        qDebug()<<element.tagName()<<":"<<n.nodeValue();
         widget.textEditConfiguration->append(indent+element.tagName()+": "+n.nodeValue());
+        // save interesting information
+        if(element.tagName()=="type") {
+            serverType=n.nodeValue();
+        } else if(element.tagName()=="samplerate") {
+            sampleRate=n.nodeValue().toInt();
+        } else if(element.tagName()=="minfrequency") {
+            minFrequency=n.nodeValue().toLong();
+        } else if(element.tagName()=="maxfrequency") {
+            maxFrequency=n.nodeValue().toLong();
+        }
     } else {
+        qDebug()<<element.tagName();
         widget.textEditConfiguration->append(indent+element.tagName());
         while(!n.isNull()) {
             QDomElement e = n.toElement(); // try to convert the node to an element.
             if(!e.isNull()) {
+                if(e.hasAttributes()) {
+                    QDomNamedNodeMap attributes=e.attributes();
+                    qDebug()<<"attributes:"<<attributes.count();
+                    for(int i=0;i<attributes.count();i++) {
+                        QDomNode a=attributes.item(i);
+                        qDebug()<<"attribute: "<<a.nodeName()<<":"<<a.nodeValue();
+                    }
+                }
                 printTree(e,indent+"    ");
             }
             n = n.nextSibling();
         }
     }
+}
+
+QString Configure::getServerType() {
+    return serverType;
+}
+
+long Configure::getMinFrequency() {
+    return minFrequency;
+}
+
+long Configure::getMaxFrequency() {
+    return maxFrequency;
+}
+
+int Configure::getSampleRate() {
+    return sampleRate;
 }

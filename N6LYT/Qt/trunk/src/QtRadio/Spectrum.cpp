@@ -36,6 +36,7 @@ Spectrum::Spectrum(QWidget*& widget) {
     sMeterMain=new Meter("Main Rx");
     sMeterSub=new Meter("Sub Rx");
     sampleRate=96000;
+    step=100;
     spectrumHigh=-40;
     spectrumLow=-160;
     filterLow=-3450;
@@ -97,13 +98,16 @@ void Spectrum::initialize() {
 
 void Spectrum::setSampleRate(int r) {
     sampleRate=r;
+    step=sampleRate*100/96000;
+
+    qDebug()<<"Spectrum::setSampleRate:"<<sampleRate<<","<<step;
 }
 
 int Spectrum::samplerate() {
     return sampleRate;
 }
 
-void Spectrum::setBandLimits(long long min,long long max) {
+void Spectrum::setBandLimits(qint64 min,qint64 max) {
 
     qDebug() << "Spectrum::setBandLimits: " << min << "," << max;
     band_min=min;
@@ -165,7 +169,7 @@ void Spectrum::mouseMoveEvent(QMouseEvent* event){
             delta=int((float)delta*((float)(spectrumHigh-spectrumLow)/(float)height()));
             emit squelchValueChanged(delta);
         } else {
-            if (!move==0) emit frequencyMoved(move,100);
+            if (!move==0) emit frequencyMoved(move,step);
         }
     }
 }
@@ -181,13 +185,13 @@ void Spectrum::mouseReleaseEvent(QMouseEvent* event) {
 
     } else {
         if(moved) {
-            emit frequencyMoved(move,100);
+            emit frequencyMoved(move,step);
             button=-1;
         } else {
             float hzPixel = sampleRate/width();  // spectrum resolution: Hz/pixel
 
-            long freqOffsetPixel;
-            long long f = frequency - (sampleRate/2) + (event->pos().x()*hzPixel);
+            qint64 freqOffsetPixel;
+            qint64 f = frequency - (sampleRate/2) + (event->pos().x()*hzPixel);
             if(subRx) {    
                 freqOffsetPixel = (subRxFrequency-f)/hzPixel;
                 if (button == Qt::LeftButton) {
@@ -214,7 +218,14 @@ void Spectrum::mouseReleaseEvent(QMouseEvent* event) {
                 }
             }
 
-            emit frequencyMoved(-(long long)(freqOffsetPixel*hzPixel)/100,100);
+            qDebug()<<"Spectrum::mouseReleaseEvent: hzPixel:"<<hzPixel;
+            qDebug()<<"Spectrum::mouseReleaseEvent: sampleRate:"<<sampleRate;
+            qDebug()<<"Spectrum::mouseReleaseEvent: lastX:"<<lastX;
+            qDebug()<<"Spectrum::mouseReleaseEvent: f:"<<f;
+            qDebug()<<"Spectrum::mouseReleaseEvent: frequency:"<<frequency;
+            qDebug()<<"Spectrum::mouseReleaseEvent: freqOffsetPixel:"<<freqOffsetPixel;
+            qDebug()<<"Spectrum::mouseReleaseEvent: "<<(-(qint64)(freqOffsetPixel*hzPixel)/step);
+            emit frequencyMoved(-(qint64)(freqOffsetPixel*hzPixel)/step,step);
             button=-1;
         }
     }
@@ -257,7 +268,7 @@ void Spectrum::wheelEvent(QWheelEvent *event) {
         //qDebug() << "wheelEvent v: " << v;
 
         if (v > 0.75) {
-            emit frequencyMoved(event->delta()/8/15,100);
+            emit frequencyMoved(event->delta()/8/15,step);
         } else if (v > 0.50) {
             emit frequencyMoved(event->delta()/8/15,50);
         } else if (v > 0.25) {
@@ -324,12 +335,12 @@ void Spectrum::paintEvent(QPaintEvent*) {
     
     // plot the vertical frequency lines
     float hzPerPixel=(float)sampleRate/(float)width();
-    long long f=frequency-(sampleRate/2);
+    qint64 f=frequency-(sampleRate/2);
 
     for(int i=0;i<width();i++) {
-        f=frequency-(sampleRate/2)+(long long)(hzPerPixel*(float)i);
+        f=frequency-(sampleRate/2)+(qint64)(hzPerPixel*(float)i);
         if(f>0) {
-            if((f%10000)<(long long)hzPerPixel) {
+            if((f%10000)<(qint64)hzPerPixel) {
                 painter.setOpacity(0.5);
                 painter.setPen(QPen(Qt::white, 1,Qt::DotLine));
                 painter.drawLine(i, 0, i, height());
@@ -344,17 +355,17 @@ void Spectrum::paintEvent(QPaintEvent*) {
     }
 
     // draw the band limits
-    long long min_display=frequency-(sampleRate/2);
-    long long max_display=frequency+(sampleRate/2);
+    qint64 min_display=frequency-(sampleRate/2);
+    qint64 max_display=frequency+(sampleRate/2);
     if(band_min!=0LL && band_max!=0LL) {
         int i;
         painter.setPen(QPen(Qt::red, 2));
         if((min_display<band_min)&&(max_display>band_min)) {
-            i=(band_min-min_display)/(long long)hzPerPixel;
+            i=(band_min-min_display)/(qint64)hzPerPixel;
             painter.drawLine(i,0,i,height());
         }
         if((min_display<band_max)&&(max_display>band_max)) {
-            i=(band_max-min_display)/(long long)hzPerPixel;
+            i=(band_max-min_display)/(qint64)hzPerPixel;
             painter.drawLine(i+1,0,i+1,height());
         }
     }
@@ -436,14 +447,14 @@ void Spectrum::paintEvent(QPaintEvent*) {
     }
 }
 
-void Spectrum::setFrequency(long long f) {
+void Spectrum::setFrequency(qint64 f) {
     frequency=f;
     subRxFrequency=f;
     strFrequency.sprintf("%lld.%03lld.%03lld",f/1000000,f%1000000/1000,f%1000);
     strSubRxFrequency.sprintf("%lld.%03lld.%03lld",f/1000000,f%1000000/1000,f%1000);
 }
 
-void Spectrum::setSubRxFrequency(long long f) {
+void Spectrum::setSubRxFrequency(qint64 f) {
     subRxFrequency=f;
     strSubRxFrequency.sprintf("%lld.%03lld.%03lld",f/1000000,f%1000000/1000,f%1000);
 }

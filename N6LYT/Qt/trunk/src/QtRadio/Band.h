@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Band.h
  * Author: John Melton, G0ORX/N6LYT
  *
@@ -34,36 +34,24 @@
 #include "BandStackEntry.h"
 #include "BandLimit.h"
 
-
-#define BAND_160 0
-#define BAND_80  1
-#define BAND_60  2
-#define BAND_40  3
-#define BAND_30  4
-#define BAND_20  5
-#define BAND_17  6
-#define BAND_15  7
-#define BAND_12  8
-#define BAND_10  9
-#define BAND_6   10
-#define BAND_GEN 11
-#define BAND_WWV 12
-#define BAND_LAST 13
-#define BAND_XVTR BAND_LAST
-
 #define BANDSTACK_ENTRIES 5
 
 class Band : public QObject {
     Q_OBJECT
 public:
-    Band();
+    Band(QString label,int id, int min,int max,QSettings* settings);
     virtual ~Band();
-    void initBand(int b);
-    void selectBand(int b);
-    long long bandSelected(int b,long long currentFrequency);
+
+    int getId();
+    QString getLabel();
+
+    //void initBand(int b);
+    //void selectBand(int b);
+    //quint64 bandSelected(int b,quint64 currentFrequency);
+    void nextBandStackEntry();
     int getBandStackEntry();
-    void setFrequency(long long f);
-    long long getFrequency();
+    void setFrequency(quint64 f);
+    quint64 getFrequency();
     int getBand();
     QString getStringBand();
     QString getStringBand(int band);
@@ -82,17 +70,30 @@ public:
     void setWaterfallLow(int l);
     void loadSettings(QSettings* settings);
     void saveSettings(QSettings* settings);
-    BandLimit getBandLimits(long long min, long long max);
+    BandLimit* getBandLimits();
+
+    void setupBands(long min,long max);
 
 signals:
     void bandChanged(int previousBand,int newBand);
 
 private:
-    int currentBand;
+    QString label;
+    int id;
+    int stackEntry;
+    quint64 minFrequency;
+    quint64 maxFrequency;
+
+    BandStackEntry bandstack[BANDSTACK_ENTRIES];
     int currentStack;
+
+    BandLimit bandLimit;
+    /*
+    int currentBand;
     int stack[BAND_LAST];
     BandStackEntry bandstack[BAND_LAST][BANDSTACK_ENTRIES];
     QVector <BandLimit> limits;
+    */
 };
 
 #endif	/* BAND_H */

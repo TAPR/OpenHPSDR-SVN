@@ -25,14 +25,14 @@
 class FrequencyInfo {
 public:
     FrequencyInfo();
-    FrequencyInfo(long long min,long long max,QString descr,int b,bool t);
+    FrequencyInfo(quint64 min,quint64 max,QString descr,int b,bool t);
     QString getDescription();
-    bool isFrequency(long long frequency);
+    bool isFrequency(quint64 frequency);
     int getBand();
     bool canTransmit();
 private:
-    long long minFrequency;
-    long long maxFrequency;
+    quint64 minFrequency;
+    quint64 maxFrequency;
     QString description;
     int band;
     bool transmit;
