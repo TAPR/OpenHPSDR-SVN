@@ -67,11 +67,18 @@ xrcv_ack --------------------------------------+      +-------------------------
 Note:  The receiver has new data ready when rcv_rdy goes high
        xmit_ack should be asserted while rcv_rdy = 1
        xmit_ack should be deasserted once rcv_rdy goes low or immediately after getting new data
+       
+       
+ 21 March 2012 - 	Receiver code does not provide first received data since it is used for synchronisation.
+						Code modified to provide a xrcv_rdy pulse when first data is received so that an 
+						exact number of bytes can be transferred as is required for the wideband data. 
+						Once first data have been received then no longer an issue. P. Harman VK6APH 
+       
 */
 
 `timescale 1ns/100ps
 
-module NWire_rcv (irst, iclk, xrst, xclk, xrcv_data, xrcv_rdy, xrcv_ack, din);
+module NWire_rcv (irst, iclk, xrst, xclk, xrcv_data, xrcv_rdy, xrcv_ack, din, pulse);
 
 parameter DATA_BITS    = 32;            // Number of data bits (logic 0 or 1) to transmit: must be > 5
 parameter SLOWEST_FREQ = 10000;
@@ -92,6 +99,7 @@ output wire [DATA_BITS-1:0] xrcv_data;  // recieve data
 output wire                 xrcv_rdy;   // receive data is ready
 input  wire                 xrcv_ack;   // used to clear xrcv_rdy
 input  wire                 din;        // Nwire interface serial data input
+output 						pulse;
 
 // local registers
 reg          [DS:0] tb_cnt;
@@ -114,6 +122,7 @@ wire         [DS:0] tb_min, tb_max;
 reg [DATA_BITS-1:0] idata;  // recieve data
 reg                 irdy;
 wire                iack;
+reg 				strobe;
 
 localparam TB_IDLE   = 0,
            TB_DB     = 1,
@@ -130,7 +139,7 @@ generate
 if (ICLK_FREQ == XCLK_FREQ)
 begin: SAME_CLK
   assign xrcv_data = idata;
-  assign xrcv_rdy  = irdy;
+  assign xrcv_rdy  = irdy | pulse;
   assign iack      = xrcv_ack;
 end
 else // ICLK_FREQ != XCLK_FREQ
@@ -140,7 +149,7 @@ begin: DIFF_CLK
   reg ia1, ia0;
 
   assign xrcv_data = xd1;
-  assign xrcv_rdy  = xr2;
+  assign xrcv_rdy  = xr2 | pulse;
   assign iack      = ia1;
 
   always @(posedge xclk) 
@@ -247,6 +256,10 @@ end
 
 always @*
 begin
+	if (TB_state_next == TB_SYNC)
+		strobe = 1'b1;
+	else strobe =  1'b0;
+
    case(TB_state)
      TB_IDLE:
      begin
@@ -307,6 +320,20 @@ begin
    endcase
 end
 
+
+// create a short pulse on the negative edge of the have sync signal 
+
+wire pulse;
+reg p1;
+always @(posedge xclk)
+begin
+  if (xrst)
+    p1 <= 1'b0;
+  else
+    p1 <= strobe; // sig must be synchronous to clk
+end
+
+assign pulse = strobe & !p1; // one clk wide signal at the rising edge of sig
 
 function integer clogb2;
 input [31:0] depth;
