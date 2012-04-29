@@ -18,7 +18,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-//  Tx_MAC - Copyright 2009, 2010, 2011  Phil Harman VK6APH
+//  Tx_MAC - Copyright 2009, 2010, 2011, 2012  Phil Harman VK6APH
 
 
 
@@ -36,9 +36,9 @@
 	PHY_Tx_clock    --+    +----+    +----+    +----+    +----+    +----+    +----+    +----+  		25MHz
 	
 						   +-----------------------------------------------------------------
-	Tx_CTL     ------------+
+	Tx_CTL------------+
 	
-	                       +---------+---------+---------+---------+---------+---------+---------+
+	                  +---------+---------+---------+---------+---------+---------+---------+
 	TD					   +---------+---------+---------+---------+---------+---------+---------+
 	
 	nibble (100T)          3:0       7:4       3:0       7:4       3:0       7:4       3:0       7:4
@@ -51,10 +51,10 @@
     
     
     	            +----+    +----+    +----+    +----+    +----+    +----+    +----+    +----+    
-	PHY_Tx_clock    +    +----+    +----+    +----+    +----+    +----+    +----+    +----+  		125MHz
+	PHY_Tx_clock   +    +----+    +----+    +----+    +----+    +----+    +----+    +----+  		125MHz
 		
 						   +-----------------------------------------------------------------
-	Tx_CTL     ------------+
+	Tx_CTL -----------+
 	
 	                       +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
 	TD					   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -91,11 +91,11 @@
 	Change log:
 	
 
-	2011 Mar  11    - Send DHCP server IP address as an option in DHCP_request.
-	     Apr   2    - Reset sequence number when not running rather than when Discovery received. 
-					- Add run state and Metis software version to Discovery reply.
-			   3    - Add wide band spectrum and on/off enable
-	     May   13   - Added independant serial number for wide bandscope data.
+	2011 Mar  11    	- Send DHCP server IP address as an option in DHCP_request.
+	     Apr   2    	- Reset sequence number when not running rather than when Discovery received. 
+							- Add run state and Metis software version to Discovery reply.
+			   3    		- Add wide band spectrum and on/off enable
+	     May   13   	- Added independant serial number for wide bandscope data.
 
 */
 
@@ -108,72 +108,70 @@ module Tx_MAC (Tx_clock, Tx_clock_2, IF_rst, Send_ARP,ping_reply,
 			   Ping_PC_MAC, Ping_PC_IP, Length, speed_100T, Tx_reset, run, wide_spectrum,
 			   IP_valid, printf, IP_lease, DHCP_IP, DHCP_MAC, DHCP_request_renew, DHCP_request_renew_sent,
 			   erase_done, erase_done_ACK, send_more, send_more_ACK, Metis_serialno,
-			   sp_fifo_rddata, sp_fifo_rdreq, sp_fifo_rdempty, sp_fifo_rdused );
+			   sp_fifo_rddata, sp_fifo_rdreq, have_sp_data);
 			   
 			   
 			   
-input  Tx_clock;				// 25MHz for 100T
-input  Tx_clock_2;				// clock/2
-input  IF_rst;					// reset signal
-input  Send_ARP;				// high to send ARP response
-input  ping_reply;				// high to send ping response
-input  [7:0]PHY_Tx_data;		// data to send to PHY
+input  Tx_clock;						// 25MHz for 100T
+input  Tx_clock_2;					// clock/2
+input  IF_rst;							// reset signal
+input  Send_ARP;						// high to send ARP response
+input  ping_reply;					// high to send ping response
+input  [7:0]PHY_Tx_data;			// data to send to PHY
 input  [10:0]PHY_Tx_rdused;		// data available in Tx fifo  
-input  [7:0]ping_data[0:59];    // data to send back 	
-input  DHCP_discover; 			// high when requested
-input  [47:0]This_MAC;			// MAC address of this Metis board
-input  [31:0]SIADDR;			// IP address of server that provided IP address
-input  DHCP_request;			// high when request required
-input  METIS_discovery;			// high when reply required
-input  [31:0]PC_IP;				// IP address of the PC we are connecting to
-input  [47:0]PC_MAC;			// MAC address of the PC we are connecting to
-input  [15:0]Port;			    // Port on the PC we are sending to
-input  [31:0]This_IP;			// IP address provided by PC or DHCP at start up
-input  [47:0]ARP_PC_MAC;		// MAC address of PC requesting ARP
-input  [31:0]ARP_PC_IP;			// IP address of PC requesting ARP
-input  [47:0]Ping_PC_MAC;		// MAC address of PC requesting ping
-input  [31:0]Ping_PC_IP;		// IP address of PC requesting ping
-input  [15:0]Length;			// Lenght of packet - used by ping
-input  speed_100T;				// high for 100T,low for 1000T       ************  check
-input  Tx_reset;				// high to prevent I&Q data being sent
-input  run;						// high to enable data to be sent
-input  wide_spectrum;			// high to enable wide spectrum data to be sent
-input  IP_valid;				// high when we have a valid IP address 
-input  printf;					// high when we want to send debug data
-input  [31:0]IP_lease;			// *** test data - IP lease time in seconds
-input  [31:0]DHCP_IP;			// IP address of DHCP server
-input  [47:0]DHCP_MAC;			// MAC address of DHCP server 
-input  DHCP_request_renew;		// set when renew required
-input  erase_done;				// set when we what to tell the PC we have completed the EPCS16 erase
-input  send_more;				// set when we want the next block of 256 bytes for the EPCS16
+input  [7:0]ping_data[0:59];    	// data to send back 	
+input  DHCP_discover; 				// high when requested
+input  [47:0]This_MAC;				// MAC address of this Metis board
+input  [31:0]SIADDR;					// IP address of server that provided IP address
+input  DHCP_request;					// high when request required
+input  METIS_discovery;				// high when reply required
+input  [31:0]PC_IP;					// IP address of the PC we are connecting to
+input  [47:0]PC_MAC;					// MAC address of the PC we are connecting to
+input  [15:0]Port;			    	// Port on the PC we are sending to
+input  [31:0]This_IP;				// IP address provided by PC or DHCP at start up
+input  [47:0]ARP_PC_MAC;			// MAC address of PC requesting ARP
+input  [31:0]ARP_PC_IP;				// IP address of PC requesting ARP
+input  [47:0]Ping_PC_MAC;			// MAC address of PC requesting ping
+input  [31:0]Ping_PC_IP;			// IP address of PC requesting ping
+input  [15:0]Length;					// Lenght of packet - used by ping
+input  speed_100T;					// high for 100T,low for 1000T       ************  check
+input  Tx_reset;						// high to prevent I&Q data being sent
+input  run;								// high to enable data to be sent
+input  wide_spectrum;				// high to enable wide spectrum data to be sent
+input  IP_valid;						// high when we have a valid IP address 
+input  printf;							// high when we want to send debug data
+input  [31:0]IP_lease;				// *** test data - IP lease time in seconds
+input  [31:0]DHCP_IP;				// IP address of DHCP server
+input  [47:0]DHCP_MAC;				// MAC address of DHCP server 
+input  DHCP_request_renew;			// set when renew required
+input  erase_done;					// set when we what to tell the PC we have completed the EPCS16 erase
+input  send_more;						// set when we want the next block of 256 bytes for the EPCS16
 input  [7:0]Metis_serialno;		// Metis code version
 input  [7:0]sp_fifo_rddata;		// raw ACD data from Mercury for wide bandscope
-input  sp_fifo_rdempty;			// SP_fifo read empty
-input  [12:0]sp_fifo_rdused;	// SP_fifo contents
-//input  sp_fifo_rdfull;			// set when SP_fifo is full
+input  have_sp_data;					// set when sp fifo has data available
 
-output LED;						// show MAC is doing something!
-output Tx_fifo_rdreq;			// high to indicate read from Tx fifo required
-output Tx_CTL;					// high to enable write to PHY
-output ARP_sent;				// high indicates ARP has been sent
-output ping_sent;				// high indicates ping reply has been sent
-output [3:0]TD;					// nibble to send to PHY
-output DHCP_discover_sent;		// high when has been sent
-output DHCP_request_sent;       // high when has been sent
+
+output LED;								// show MAC is doing something!
+output Tx_fifo_rdreq;				// high to indicate read from Tx fifo required
+output Tx_CTL;							// high to enable write to PHY
+output ARP_sent;						// high indicates ARP has been sent
+output ping_sent;						// high indicates ping reply has been sent
+output [3:0]TD;						// nibble to send to PHY
+output DHCP_discover_sent;			// high when has been sent
+output DHCP_request_sent;       	// high when has been sent
 output METIS_discover_sent;		// high when has been sent ** pulse
 output DHCP_request_renew_sent;	// high when has been sent
-output erase_done_ACK;			// set when we have sent erase of EPCS16 complete to PC
-output send_more_ACK;			// set when we confirm we have requested more EPCS data from PC
-output sp_fifo_rdreq;			// SP_fifo read require signal
-
+output erase_done_ACK;				// set when we have sent erase of EPCS16 complete to PC
+output send_more_ACK;				// set when we confirm we have requested more EPCS data from PC
+output sp_fifo_rdreq;				// SP_fifo read require signal
 
 
 // HPSDR specific			
-parameter HPSDR_frame = 8'h01;  // HPSDR Frame type 
+parameter HPSDR_frame = 8'h01;  	// HPSDR Frame type 
 // parameter end_point = 8'h06;	// HPSDR end point - 6 to indicate fifo write 
-parameter Type_1 = 8'hEF;	    // Ethernet Frame type
+parameter Type_1 = 8'hEF;	    	// Ethernet Frame type
 parameter Type_2 = 8'hFE;
-localparam TxPort = 16'd1024;	// Metis 'from' port
+localparam TxPort = 16'd1024;		// Metis 'from' port
 
 localparam	RESET = 0,
 			UDP  = 1,
@@ -189,7 +187,7 @@ localparam	RESET = 0,
 			CRC = 11;
 
 			
-wire [31:0] CRC32;				   	// holds 802.3 CRC result 
+wire [31:0] CRC32;				   // holds 802.3 CRC result 
 reg  [31:0] temp_CRC32 = 0; 
 
 reg  [31:0] sequence_number = 0;
@@ -198,18 +196,20 @@ reg  [31:0] spec_seq_number = 0;
 
 reg [6:0] state_Tx;             	// state for FX2
 reg [10:0] data_count;
+reg [10:0] sp_data_count;
 reg reset_CRC;
 reg [7:0] Tx_data;
 reg [4:0] gap_count;
-reg ARP_sent;					    // true when we have replied to an ARP request
-reg LED; 						    // Test LED
+reg ARP_sent;					    	// true when we have replied to an ARP request
+reg LED; 						    	// Test LED
 reg erase_done_ACK;					// set when we have sent erase of EPCS16 complete to PC
 reg send_more_ACK;					// set when we confirm we have requested more EPCS data from PC
 reg [31:0]Discovery_IP;				// IP address of PC doing Discovery
 reg [47:0]Discovery_MAC;			// MAC address of PC doing Discovery
 reg [15:0]Discovery_Port;			// Port Address of PC doing Discovery
-
-reg [7:0]end_point; 				// USB end point equivalent 8'h06 for IQ data and 8'h04 for Spectrum
+		
+reg [7:0]end_point; 					// USB end point equivalent 8'h06 for IQ data and 8'h04 for Spectrum
+wire have_sp_data;					// set when spectrum data is available
 
 // calculate the IP checksum, big-endian style
 // The 0xC935 is fixed and made up of the 16 bit add of the header data. *** this will need changing if we change payload size  ****
@@ -303,10 +303,9 @@ reg [3:0]interframe;
 reg printf;
 reg DHCP_request_renew_sent;
 reg Metis_discover_sent;
-reg [7:0] frame;				// HPSDR frame type; 0x02 for Discovery reply, 
-								//                   0x03 for EPCS16 erase complete and 
-								//				     0x04 for send next 256 bytes for EPCS16 program
-
+reg [7:0] frame;							// HPSDR frame type; 0x02 for Discovery reply, 
+												//                   0x03 for EPCS16 erase complete and 
+												//				     0x04 for send next 256 bytes for EPCS16 program
 
 always @ * 
 case(rdaddress)
@@ -336,40 +335,40 @@ case(rdaddress)
   20: pkt_data <= 8'h08;
   21: pkt_data <= 8'h00;
  // IP header 
-  22: pkt_data <= 8'h45;				// Version
-  23: pkt_data <= 8'h00;				// Type of service
-  24: pkt_data <= 8'h04;				// length ***** CHANGE CHECKSUM IF LENGTH CHANGES *****
-  25: pkt_data <= 8'h24;				// total of 1060 bytes, 1032 UDP data + 8 UDP header + 20 IP header
-  26: pkt_data <= 8'h00;				// Identification
+  22: pkt_data <= 8'h45;						// Version
+  23: pkt_data <= 8'h00;						// Type of service
+  24: pkt_data <= 8'h04;						// length ***** CHANGE CHECKSUM IF LENGTH CHANGES *****
+  25: pkt_data <= 8'h24;						// total of 1060 bytes, 1032 UDP data + 8 UDP header + 20 IP header
+  26: pkt_data <= 8'h00;						// Identification
   27: pkt_data <= 8'h00;
-  28: pkt_data <= 8'h00;				// Flags, Fragment
+  28: pkt_data <= 8'h00;						// Flags, Fragment
   29: pkt_data <= 8'h00;
-  30: pkt_data <= 8'h80;				// Time to live
-  31: pkt_data <= 8'h11;				// Protocol (0x11 = UDP)
-  32: pkt_data <= IPchecksum3[15:8];	// Checksum
+  30: pkt_data <= 8'h80;						// Time to live
+  31: pkt_data <= 8'h11;						// Protocol (0x11 = UDP)
+  32: pkt_data <= IPchecksum3[15:8];		// Checksum
   33: pkt_data <= IPchecksum3[ 7:0];
-  34: pkt_data <= This_IP[31:24];		// Source IP Address is IP address allocated to this board
+  34: pkt_data <= This_IP[31:24];			// Source IP Address is IP address allocated to this board
   35: pkt_data <= This_IP[23:16];
   36: pkt_data <= This_IP[15:8];
   37: pkt_data <= This_IP[7:0];
-  38: pkt_data <= PC_IP[31:24];			// Destination PC IP Address
+  38: pkt_data <= PC_IP[31:24];				// Destination PC IP Address
   39: pkt_data <= PC_IP[23:16];
   40: pkt_data <= PC_IP[15:8];
   41: pkt_data <= PC_IP[7:0];
 // UDP header
-  42: pkt_data <= TxPort[15:8];			// 'from' port = 1024
+  42: pkt_data <= TxPort[15:8];				// 'from' port = 1024
   43: pkt_data <= TxPort[7:0];
-  44: pkt_data <= Port[15:8];			// destination port assigned by PC during Metis Discovery (i.e. PC 'from' Port)
+  44: pkt_data <= Port[15:8];					// destination port assigned by PC during Metis Discovery (i.e. PC 'from' Port)
   45: pkt_data <= Port[7:0];
-  46: pkt_data <= 8'h04;				// length
-  47: pkt_data <= 8'h10;	    		// total of 1040 bytes (1032 UDP data + 8 UDP header)
-  48: pkt_data <= 8'h00;				// UDP Checksum (set to all zero which is valid for IP4 but not IP6)
+  46: pkt_data <= 8'h04;						// length
+  47: pkt_data <= 8'h10;	    				// total of 1040 bytes (1032 UDP data + 8 UDP header)
+  48: pkt_data <= 8'h00;						// UDP Checksum (set to all zero which is valid for IP4 but not IP6)
   49: pkt_data <= 8'h00;
 // Start of Payload
-  50: pkt_data <= Type_1;	    		// Ethernet Frame type 0xEFFE (HPSDR)
-  51: pkt_data <= Type_2;
-  52: pkt_data <= HPSDR_frame;			// HPSDR Frame type 
-  53: pkt_data <= end_point;			// HPSDR end point
+  50: pkt_data <= Type_1;	    				// Ethernet Frame type 0xEFFE (HPSDR)
+  51: pkt_data <= Type_2;	
+  52: pkt_data <= HPSDR_frame;				// HPSDR Frame type 
+  53: pkt_data <= end_point;					// HPSDR end point
   54: pkt_data <= (state_Tx == SPECTRUM) ? spec_seq_number[31:24] : sequence_number[31:24]; // 32bit sequence numbers 
   55: pkt_data <= (state_Tx == SPECTRUM) ? spec_seq_number[23:16] : sequence_number[23:16];
   56: pkt_data <= (state_Tx == SPECTRUM) ? spec_seq_number[15:8]  : sequence_number[15:8];
@@ -392,13 +391,13 @@ case(rdaddress)
  106: pkt_data <= 8'h55;
  107: pkt_data <= 8'hD5;
 // Ethernet header
- 108: pkt_data <= ARP_PC_MAC[47:40];	// MAC address of PC requesting ARP
+ 108: pkt_data <= ARP_PC_MAC[47:40];		// MAC address of PC requesting ARP
  109: pkt_data <= ARP_PC_MAC[39:32];
  110: pkt_data <= ARP_PC_MAC[31:24];
  111: pkt_data <= ARP_PC_MAC[23:16];
  112: pkt_data <= ARP_PC_MAC[15:8];
  113: pkt_data <= ARP_PC_MAC[7:0];
- 114: pkt_data <= This_MAC[47:40];		// MAC address of this Metis board
+ 114: pkt_data <= This_MAC[47:40];			// MAC address of this Metis board
  115: pkt_data <= This_MAC[39:32];
  116: pkt_data <= This_MAC[31:24];
  117: pkt_data <= This_MAC[23:16];
@@ -407,31 +406,31 @@ case(rdaddress)
  // ARP reply 
  120: pkt_data <= 8'h08;
  121: pkt_data <= 8'h06;
- 122: pkt_data <= 8'h00;				// Hardware type
+ 122: pkt_data <= 8'h00;						// Hardware type
  123: pkt_data <= 8'h01;
- 124: pkt_data <= 8'h08;				// Protocol Type
+ 124: pkt_data <= 8'h08;						// Protocol Type
  125: pkt_data <= 8'h00;
- 126: pkt_data <= 8'h06;				// Hardware Length
- 127: pkt_data <= 8'h04;				// Protocol Length
- 128: pkt_data <= 8'h00;				// Operation, ARP reply, 0x0002
+ 126: pkt_data <= 8'h06;						// Hardware Length
+ 127: pkt_data <= 8'h04;						// Protocol Length
+ 128: pkt_data <= 8'h00;						// Operation, ARP reply, 0x0002
  129: pkt_data <= 8'h02;
- 130: pkt_data <= This_MAC[47:40];		// MAC address of this Metis board
+ 130: pkt_data <= This_MAC[47:40];			// MAC address of this Metis board
  131: pkt_data <= This_MAC[39:32];
  132: pkt_data <= This_MAC[31:24];
  133: pkt_data <= This_MAC[23:16];
  134: pkt_data <= This_MAC[15:8];
  135: pkt_data <= This_MAC[7:0];
- 136: pkt_data <= This_IP[31:24];		// IP address assigned to this Metis board
+ 136: pkt_data <= This_IP[31:24];			// IP address assigned to this Metis board
  137: pkt_data <= This_IP[23:16];
  138: pkt_data <= This_IP[15:8];
  139: pkt_data <= This_IP[7:0];
- 140: pkt_data <= ARP_PC_MAC[47:40];	// MAC address of PC requesting ARP
+ 140: pkt_data <= ARP_PC_MAC[47:40];		// MAC address of PC requesting ARP
  141: pkt_data <= ARP_PC_MAC[39:32];
  142: pkt_data <= ARP_PC_MAC[31:24];
  143: pkt_data <= ARP_PC_MAC[23:16];
  144: pkt_data <= ARP_PC_MAC[15:8];
  145: pkt_data <= ARP_PC_MAC[7:0];
- 146: pkt_data <= ARP_PC_IP[31:24]; 	// IP address of PC requesting ARP
+ 146: pkt_data <= ARP_PC_IP[31:24]; 		// IP address of PC requesting ARP
  147: pkt_data <= ARP_PC_IP[23:16]; 	
  148: pkt_data <= ARP_PC_IP[15:8];  	
  149: pkt_data <= ARP_PC_IP[7:0];   	
@@ -450,7 +449,7 @@ case(rdaddress)
  206: pkt_data <= 8'h55;
  207: pkt_data <= 8'hD5;
 // Ethernet header
- 208: pkt_data <= Ping_PC_MAC[47:40]; 	// MAC address of PC requesting the ping
+ 208: pkt_data <= Ping_PC_MAC[47:40]; 		// MAC address of PC requesting the ping
  209: pkt_data <= Ping_PC_MAC[39:32];
  210: pkt_data <= Ping_PC_MAC[31:24];
  211: pkt_data <= Ping_PC_MAC[23:16];
@@ -465,29 +464,29 @@ case(rdaddress)
  220: pkt_data <= 8'h08;
  221: pkt_data <= 8'h00;
  // IP header 
- 222: pkt_data <= 8'h45;				// Version
- 223: pkt_data <= 8'h00;				// Type of service
- 224: pkt_data <= Length[15:8];//8'h00;				// length
- 225: pkt_data <= Length[7:0];//8'h3C;				// total of 60 bytes
- 226: pkt_data <= 8'h00;				// Identification
+ 222: pkt_data <= 8'h45;						// Version
+ 223: pkt_data <= 8'h00;						// Type of service
+ 224: pkt_data <= Length[15:8];//8'h00;	// length
+ 225: pkt_data <= Length[7:0];//8'h3C;		// total of 60 bytes
+ 226: pkt_data <= 8'h00;						// Identification
  227: pkt_data <= 8'h00;
- 228: pkt_data <= 8'h00;				// Flags, Fragment
+ 228: pkt_data <= 8'h00;						// Flags, Fragment
  229: pkt_data <= 8'h00;
- 230: pkt_data <= 8'h80;				// Time to live
- 231: pkt_data <= 8'h01;				// Protocol (0x01 = ICMP - ping)   
- 232: pkt_data <= ICMPchecksum3[15:8];	// Checksum
+ 230: pkt_data <= 8'h80;						// Time to live
+ 231: pkt_data <= 8'h01;						// Protocol (0x01 = ICMP - ping)   
+ 232: pkt_data <= ICMPchecksum3[15:8];		// Checksum
  233: pkt_data <= ICMPchecksum3[ 7:0];
- 234: pkt_data <= This_IP[31:24];		// IP Address of this Metis board
+ 234: pkt_data <= This_IP[31:24];			// IP Address of this Metis board
  235: pkt_data <= This_IP[23:16];
  236: pkt_data <= This_IP[15:8];
  237: pkt_data <= This_IP[7:0];
- 238: pkt_data <= Ping_PC_IP[31:24];	// IP address of PC requesting the ping
+ 238: pkt_data <= Ping_PC_IP[31:24];		// IP address of PC requesting the ping
  239: pkt_data <= Ping_PC_IP[23:16];
  240: pkt_data <= Ping_PC_IP[15:8];
  241: pkt_data <= Ping_PC_IP[7:0];
 // ICMP packet 
- 242: pkt_data <= 8'h00;				// 0x00 echo reply, 0x08 for request
- 243: pkt_data <= 8'h00;				// code
+ 242: pkt_data <= 8'h00;						// 0x00 echo reply, 0x08 for request
+ 243: pkt_data <= 8'h00;						// code
  244: pkt_data <= ping_check_sum[15:8];	// Checksum 
  245: pkt_data <= ping_check_sum[7:0];
 // Start data - 36 bytes 
@@ -505,7 +504,7 @@ case(rdaddress)
  306: pkt_data <= 8'h55;
  307: pkt_data <= 8'hD5;
 // Ethernet header
- 308: pkt_data <= 8'hFF;				// Destination MAC is FF FF FF FF FF FF
+ 308: pkt_data <= 8'hFF;						// Destination MAC is FF FF FF FF FF FF
  309: pkt_data <= 8'hFF;
  310: pkt_data <= 8'hFF;
  311: pkt_data <= 8'hFF;
@@ -520,34 +519,34 @@ case(rdaddress)
  320: pkt_data <= 8'h08;
  321: pkt_data <= 8'h00;
  // IP header 
- 322: pkt_data <= 8'h45;				// Version
- 323: pkt_data <= 8'h00;				// Type of service
+ 322: pkt_data <= 8'h45;						// Version
+ 323: pkt_data <= 8'h00;						// Type of service
  324: pkt_data <= UDP_DHCP_length[15:8];	// length
- 325: pkt_data <= UDP_DHCP_length[7:0];		// UDP data + 8 UDP header + 20 IP header
- 326: pkt_data <= 8'h00;				// Identification
+ 325: pkt_data <= UDP_DHCP_length[7:0];	// UDP data + 8 UDP header + 20 IP header
+ 326: pkt_data <= 8'h00;						// Identification
  327: pkt_data <= 8'h00;
- 328: pkt_data <= 8'h00;				// Flags, Fragment
+ 328: pkt_data <= 8'h00;						// Flags, Fragment
  329: pkt_data <= 8'h00;
- 330: pkt_data <= 8'h80;				// Time to live
- 331: pkt_data <= 8'h11;				// Protocol (0x11 = UDP)
- 332: pkt_data <= DHCPchecksum3[15:8];	// Checksum
+ 330: pkt_data <= 8'h80;						// Time to live
+ 331: pkt_data <= 8'h11;						// Protocol (0x11 = UDP)
+ 332: pkt_data <= DHCPchecksum3[15:8];		// Checksum
  333: pkt_data <= DHCPchecksum3[ 7:0];
- 334: pkt_data <= 8'h00;				// Source IP Address
+ 334: pkt_data <= 8'h00;						// Source IP Address
  335: pkt_data <= 8'h00;
  336: pkt_data <= 8'h00;
  337: pkt_data <= 8'h00;
- 338: pkt_data <= 8'hFF;				// Destination IP Address
+ 338: pkt_data <= 8'hFF;						// Destination IP Address
  339: pkt_data <= 8'hFF;
  340: pkt_data <= 8'hFF;
  341: pkt_data <= 8'hFF;
 // UDP header
- 342: pkt_data <= 8'h00;				// source port = 68
+ 342: pkt_data <= 8'h00;						// source port = 68
  343: pkt_data <= 8'h44;
- 344: pkt_data <= 8'h00;				// destination port = 67
+ 344: pkt_data <= 8'h00;						// destination port = 67
  345: pkt_data <= 8'h43;
- 346: pkt_data <= DHCP_length[15:8];	// length
- 347: pkt_data <= DHCP_length[7:0];	    // total of 252 bytes (244 UDP data + 8 UDP header)
- 348: pkt_data <= 8'h00;				// UDP Checksum (set to all zero which is valid for IP4 but not IP6)
+ 346: pkt_data <= DHCP_length[15:8];		// length
+ 347: pkt_data <= DHCP_length[7:0];	    	// total of 252 bytes (244 UDP data + 8 UDP header)
+ 348: pkt_data <= 8'h00;						// UDP Checksum (set to all zero which is valid for IP4 but not IP6)
  349: pkt_data <= 8'h00; 
  // DHCP Discover
  350: pkt_data <= 8'h01;
@@ -562,12 +561,12 @@ case(rdaddress)
  358: pkt_data <= This_MAC[15:8];
  359: pkt_data <= This_MAC[7:0]; 
  // 202 x 0x00
- 360: pkt_data <= 8'h63;			// Magic Cookie
+ 360: pkt_data <= 8'h63;						// Magic Cookie
  361: pkt_data <= 8'h82;
  362: pkt_data <= 8'h53;
  363: pkt_data <= 8'h63;
  // Options
- 364: pkt_data <= 8'h35;			// Options
+ 364: pkt_data <= 8'h35;						// Options
  365: pkt_data <= 8'h01;
  366: pkt_data <= 8'h01;
  // End
@@ -586,7 +585,7 @@ case(rdaddress)
  406: pkt_data <= 8'h55;
  407: pkt_data <= 8'hD5;
 // Ethernet header
- 408: pkt_data <= 8'hFF;				// Destination MAC is FF FF FF FF FF FF
+ 408: pkt_data <= 8'hFF;							// Destination MAC is FF FF FF FF FF FF
  409: pkt_data <= 8'hFF;
  410: pkt_data <= 8'hFF;
  411: pkt_data <= 8'hFF;
@@ -601,34 +600,34 @@ case(rdaddress)
  420: pkt_data <= 8'h08;
  421: pkt_data <= 8'h00;
  // IP header 
- 422: pkt_data <= 8'h45;				// Version
- 423: pkt_data <= 8'h00;				// Type of service
+ 422: pkt_data <= 8'h45;							// Version
+ 423: pkt_data <= 8'h00;							// Type of service
  424: pkt_data <= UDP_DHCP_req_length[15:8];	// length
- 425: pkt_data <= UDP_DHCP_req_length[7:0];		// UDP data + 8 UDP header + 20 IP header
- 426: pkt_data <= 8'h00;				// Identification
+ 425: pkt_data <= UDP_DHCP_req_length[7:0];	// UDP data + 8 UDP header + 20 IP header
+ 426: pkt_data <= 8'h00;							// Identification
  427: pkt_data <= 8'h00;
- 428: pkt_data <= 8'h00;				// Flags, Fragment
+ 428: pkt_data <= 8'h00;							// Flags, Fragment
  429: pkt_data <= 8'h00;
- 430: pkt_data <= 8'h80;				// Time to live
- 431: pkt_data <= 8'h11;				// Protocol (0x11 = UDP)
+ 430: pkt_data <= 8'h80;							// Time to live
+ 431: pkt_data <= 8'h11;							// Protocol (0x11 = UDP)
  432: pkt_data <= DHCP_req_checksum3[15:8];	// Checksum
  433: pkt_data <= DHCP_req_checksum3[ 7:0];
- 434: pkt_data <= 8'h00;				// Source IP Address
+ 434: pkt_data <= 8'h00;							// Source IP Address
  435: pkt_data <= 8'h00;
  436: pkt_data <= 8'h00;
  437: pkt_data <= 8'h00;
- 438: pkt_data <= 8'hFF;				// Destination IP Address
+ 438: pkt_data <= 8'hFF;							// Destination IP Address
  439: pkt_data <= 8'hFF;
  440: pkt_data <= 8'hFF;
  441: pkt_data <= 8'hFF;
 // UDP header
- 442: pkt_data <= 8'h00;				// source port = 68
+ 442: pkt_data <= 8'h00;							// source port = 68
  443: pkt_data <= 8'h44;
- 444: pkt_data <= 8'h00;				// destination port = 67
+ 444: pkt_data <= 8'h00;							// destination port = 67
  445: pkt_data <= 8'h43;
- 446: pkt_data <= DHCP_req_length[15:8];	// length
- 447: pkt_data <= DHCP_req_length[7:0];	    // total of 252 bytes (246 UDP data + 8 UDP header)
- 448: pkt_data <= 8'h00;				// UDP Checksum (set to all zero which is valid for IP4 but not IP6)
+ 446: pkt_data <= DHCP_req_length[15:8];		// length
+ 447: pkt_data <= DHCP_req_length[7:0];		// total of 252 bytes (246 UDP data + 8 UDP header)
+ 448: pkt_data <= 8'h00;							// UDP Checksum (set to all zero which is valid for IP4 but not IP6)
  449: pkt_data <= 8'h00; 
  // DHCP Request
  450: pkt_data <= 8'h01;
@@ -643,23 +642,23 @@ case(rdaddress)
  458: pkt_data <= This_MAC[15:8];
  459: pkt_data <= This_MAC[7:0]; 
  // 202 x 0x00
- 460: pkt_data <= 8'h63;			// Magic Cookie
+ 460: pkt_data <= 8'h63;						// Magic Cookie
  461: pkt_data <= 8'h82;
  462: pkt_data <= 8'h53;
  463: pkt_data <= 8'h63;
  // Options
- 464: pkt_data <= 8'h35;			// Options
+ 464: pkt_data <= 8'h35;						// Options
  465: pkt_data <= 8'h01;
  466: pkt_data <= 8'h03;
  467: pkt_data <= 8'h32;				 		
  468: pkt_data <= 8'h04;
- 469: pkt_data <= This_IP[31:24];	// IP address being accepted
+ 469: pkt_data <= This_IP[31:24];			// IP address being accepted
  470: pkt_data <= This_IP[23:16];
  471: pkt_data <= This_IP[15:8];
  472: pkt_data <= This_IP[7:0];
  473: pkt_data <= 8'h36;
  474: pkt_data <= 8'h04;
- 475: pkt_data <= DHCP_IP[31:24];	// IP address of DHCP server
+ 475: pkt_data <= DHCP_IP[31:24];			// IP address of DHCP server
  476: pkt_data <= DHCP_IP[23:16];
  477: pkt_data <= DHCP_IP[15:8];
  478: pkt_data <= DHCP_IP[7:0];
@@ -693,40 +692,40 @@ case(rdaddress)
  520: pkt_data <= 8'h08;
  521: pkt_data <= 8'h00;
  // IP header 
- 522: pkt_data <= 8'h45;				// Version
- 523: pkt_data <= 8'h00;				// Type of service
- 524: pkt_data <= 8'h00;				// length  ***** CHANGE CHECKSUM IF LENGTH CHANGES *****
- 525: pkt_data <= 8'h58;				// total of 88 bytes, 60 UDP data + 8 UDP header + 20 IP header
- 526: pkt_data <= 8'h00;				// Identification
+ 522: pkt_data <= 8'h45;						// Version
+ 523: pkt_data <= 8'h00;						// Type of service
+ 524: pkt_data <= 8'h00;						// length  ***** CHANGE CHECKSUM IF LENGTH CHANGES *****
+ 525: pkt_data <= 8'h58;						// total of 88 bytes, 60 UDP data + 8 UDP header + 20 IP header
+ 526: pkt_data <= 8'h00;						// Identification
  527: pkt_data <= 8'h00;
- 528: pkt_data <= 8'h00;				// Flags, Fragment
+ 528: pkt_data <= 8'h00;						// Flags, Fragment
  529: pkt_data <= 8'h00;
- 530: pkt_data <= 8'h80;				// Time to live
- 531: pkt_data <= 8'h11;				// Protocol (0x11 = UDP)
- 532: pkt_data <= DISchecksum3[15:8];	// Checksum  			
+ 530: pkt_data <= 8'h80;						// Time to live
+ 531: pkt_data <= 8'h11;						// Protocol (0x11 = UDP)
+ 532: pkt_data <= DISchecksum3[15:8];		// Checksum  			
  533: pkt_data <= DISchecksum3[ 7:0];
- 534: pkt_data <= This_IP[31:24];		// Source IP Address
+ 534: pkt_data <= This_IP[31:24];			// Source IP Address
  535: pkt_data <= This_IP[23:16];
  536: pkt_data <= This_IP[15:8];
  537: pkt_data <= This_IP[7:0];
- 538: pkt_data <= Discovery_IP[31:24];			// Destination PC IP Address
+ 538: pkt_data <= Discovery_IP[31:24];		// Destination PC IP Address
  539: pkt_data <= Discovery_IP[23:16];
  540: pkt_data <= Discovery_IP[15:8];
  541: pkt_data <= Discovery_IP[7:0];
 // UDP header
- 542: pkt_data <= TxPort[15:8];			// 'from' port
+ 542: pkt_data <= TxPort[15:8];				// 'from' port
  543: pkt_data <= TxPort[7:0];
  544: pkt_data <= Discovery_Port[15:8];	// destination port assigned by PC
  545: pkt_data <= Discovery_Port[7:0];
- 546: pkt_data <= 8'h00;				// length
- 547: pkt_data <= 8'h44;	    		// total of 68 bytes (60 UDP data + 8 UDP header)
- 548: pkt_data <= 8'h00;				// UDP Checksum (set to all zero which is valid for IP4 but not IP6)
+ 546: pkt_data <= 8'h00;						// length
+ 547: pkt_data <= 8'h44;	    				// total of 68 bytes (60 UDP data + 8 UDP header)
+ 548: pkt_data <= 8'h00;						// UDP Checksum (set to all zero which is valid for IP4 but not IP6)
  549: pkt_data <= 8'h00;
 // Start of Payload
- 550: pkt_data <= Type_1;	    		// Ethernet Frame type 0xEFFE (HPSDR)
+ 550: pkt_data <= Type_1;	    				// Ethernet Frame type 0xEFFE (HPSDR)
  551: pkt_data <= Type_2;
- 552: pkt_data <= frame + run;			// HPSDR Frame type = discovery reply = 0x02 or 0x03 if running
- 553: pkt_data <= This_MAC[47:40];		// This Metis MAC Address
+ 552: pkt_data <= frame + run;				// HPSDR Frame type = discovery reply = 0x02 or 0x03 if running
+ 553: pkt_data <= This_MAC[47:40];			// This Metis MAC Address
  554: pkt_data <= This_MAC[39:32];
  555: pkt_data <= This_MAC[31:24];
  556: pkt_data <= This_MAC[23:16];
@@ -754,14 +753,14 @@ case(rdaddress)
  611 : pkt_data <= 8'hFF;
  612 : pkt_data <= 8'hFF;
  613 : pkt_data <= 8'hFF;
- 614 : pkt_data <= This_MAC[47:40]; 		// MAC address of this Metis Board
+ 614 : pkt_data <= This_MAC[47:40]; 	// MAC address of this Metis Board
  615 : pkt_data <= This_MAC[39:32]; 
  616 : pkt_data <= This_MAC[31:24];
  617 : pkt_data <= This_MAC[23:16]; 
  618 : pkt_data <= This_MAC[15:8];  
  619 : pkt_data <= This_MAC[7:0];   
 // Start of Payload
- 620: pkt_data <= 8'hEF;	    		// Ethernet Frame type 0xEFFF (printf)
+ 620: pkt_data <= 8'hEF;	    			// Ethernet Frame type 0xEFFF (printf)
  621: pkt_data <= 8'hFF;
  622: pkt_data <= HPSDR_frame;			// HPSDR Frame type 
  623: pkt_data <= 8'hFF;
@@ -792,7 +791,7 @@ case(rdaddress)
  648: pkt_data <= DHCP_MAC[31:24];
  649: pkt_data <= DHCP_MAC[23:16];
  650: pkt_data <= DHCP_MAC[15:8];
- 651: pkt_data <= DHCP_MAC[7:0];		// when changing add one and edit code 		
+ 651: pkt_data <= DHCP_MAC[7:0];			// when changing add one and edit code 		
   // followed by data 
   // then CRC32 at 58
 
@@ -808,7 +807,7 @@ case(rdaddress)
  706: pkt_data <= 8'h55;
  707: pkt_data <= 8'hD5;
 // Ethernet header
- 708: pkt_data <= DHCP_MAC[47:40];				// DHCP Server MAC 
+ 708: pkt_data <= DHCP_MAC[47:40];		// DHCP Server MAC 
  709: pkt_data <= DHCP_MAC[39:32];
  710: pkt_data <= DHCP_MAC[31:24];
  711: pkt_data <= DHCP_MAC[23:16];
@@ -823,8 +822,8 @@ case(rdaddress)
  720: pkt_data <= 8'h08;
  721: pkt_data <= 8'h00;
  // IP header 
- 722: pkt_data <= 8'h45;						// Version
- 723: pkt_data <= 8'h00;						// Type of service
+ 722: pkt_data <= 8'h45;					// Version
+ 723: pkt_data <= 8'h00;					// Type of service
  724: pkt_data <= UDP_DHCP_req_renew_length[15:8];	// length
  725: pkt_data <= UDP_DHCP_req_renew_length[7:0];		// 244 UDP data + 8 UDP header + 20 IP header
  726: pkt_data <= 8'h00;					// Identification
@@ -835,11 +834,11 @@ case(rdaddress)
  731: pkt_data <= 8'h11;					// Protocol (0x11 = UDP)
  732: pkt_data <= DHCP_req_renew_checksum3[15:8];	// Checksum
  733: pkt_data <= DHCP_req_renew_checksum3[ 7:0];
- 734: pkt_data <= This_IP[31:24];			// Source IP Address is IP address allocated to this board
+ 734: pkt_data <= This_IP[31:24];		// Source IP Address is IP address allocated to this board
  735: pkt_data <= This_IP[23:16];
  736: pkt_data <= This_IP[15:8];
  737: pkt_data <= This_IP[7:0];
- 738: pkt_data <= DHCP_IP[31:24];			// DHCP Server IP Address
+ 738: pkt_data <= DHCP_IP[31:24];		// DHCP Server IP Address
  739: pkt_data <= DHCP_IP[23:16];
  740: pkt_data <= DHCP_IP[15:8];
  741: pkt_data <= DHCP_IP[7:0];
@@ -879,12 +878,12 @@ case(rdaddress)
  770: pkt_data <= This_MAC[15:8];
  771: pkt_data <= This_MAC[7:0]; 
  // 202 x 0x00
- 772: pkt_data <= 8'h63;			// Magic Cookie
+ 772: pkt_data <= 8'h63;					// Magic Cookie
  773: pkt_data <= 8'h82;
  774: pkt_data <= 8'h53;
  775: pkt_data <= 8'h63;
  // Options
- 776: pkt_data <= 8'h35;			// Options  NOTE: No IP requested nor Server IP as per rfc2131
+ 776: pkt_data <= 8'h35;					// Options  NOTE: No IP requested nor Server IP as per rfc2131
  777: pkt_data <= 8'h01;
  778: pkt_data <= 8'h03;
  // End
@@ -909,6 +908,7 @@ assign UDP_DHCP_req_renew_length = DHCP_req_renew_length + 16'd20;
 
 always @ (negedge Tx_clock_2)	// clock at half speed since we read bytes but write nibbles
 begin
+
 case(state_Tx)
 
 RESET:
@@ -920,7 +920,7 @@ RESET:
 	rdaddress <= 0;
 	ARP_sent <= 0;
 	ping_sent <= 0;
-	ping_check_temp <= 0;					// reset ping check sum calculation
+	ping_check_temp <= 0;									// reset ping check sum calculation
 	ck_count <= 0;
 	zero_count <= 0;
 	DHCP_discover_sent <= 0;
@@ -930,12 +930,13 @@ RESET:
 	interframe <= 0;
 	erase_done_ACK <= 0;
 	send_more_ACK <= 0;
+
 	
         if (IF_rst)
 			state_Tx <= RESET;
-		else begin
+		  else begin
 			if (run == 1'b0) begin
-				sequence_number <= 0;  // reset sequence numbers when not running.
+				sequence_number <= 0;  						// reset sequence numbers when not running.
 				spec_seq_number <= 0;
 			end 
 			if (printf) begin
@@ -943,7 +944,7 @@ RESET:
 				state_Tx <= PRINTF;
 			end 
 			else if (DHCP_discover) begin
-				rdaddress <= 300;				// point to start of DHCP table	
+				rdaddress <= 300;								// point to start of DHCP table	
 				state_Tx <= DHCP_DISCOVER;		
 			end 
 			else if (DHCP_request) begin
@@ -954,57 +955,56 @@ RESET:
 				rdaddress <= 700;
 				state_Tx <= DHCP_REQUEST_RENEW;
 			end		 
-			else if (Send_ARP) begin			// Pending ARP request
-				rdaddress <= 100;				// point to start of ARP table	
+			else if (Send_ARP) begin						// Pending ARP request
+				rdaddress <= 100;								// point to start of ARP table	
 				state_Tx <= ARP;
 			end
 			else if (ping_reply)begin
-				rdaddress <= 200;				// point to ping checksum code
+				rdaddress <= 200;								// point to ping checksum code
 				state_Tx <= PING1;
 			end
 			else if (METIS_discovery && IP_valid) begin		// only respond if we have a valid IP address
 				Discovery_IP <= PC_IP;						// reply to the requesting PC without changing IP etc for other commands
 				Discovery_MAC <= PC_MAC;
 				Discovery_Port <= Port;
-				rdaddress <= 500;							// point to start of discovery reply table
+				rdaddress <= 500;								// point to start of discovery reply table
 				frame <= 8'h02;								// Discovery reply type
 				METIS_discover_sent <= 1'b1;				// let Rx_MAC know Discovery has been responded to
 				state_Tx <= METIS_DISCOVERY;
 			end 
-			else if (erase_done && IP_valid) begin			// only respond if we have a valid IP address
+			else if (erase_done && IP_valid) begin		// only respond if we have a valid IP address
 				erase_done_ACK <= 1'b1; 					// ACK the ASMI request
-				rdaddress <= 500;							// point to start of discovery reply table
+				rdaddress <= 500;								// point to start of discovery reply table
 				frame <= 8'h03;								// erase_done reply type
 				state_Tx <= METIS_DISCOVERY;
 			end	
-			else if (send_more && IP_valid) begin			// only respond if we have a valid IP address
+			else if (send_more && IP_valid) begin		// only respond if we have a valid IP address
 				send_more_ACK <= 1'b1; 						// ACK the ASMI request
-				rdaddress <= 500;							// point to start of discovery reply table
+				rdaddress <= 500;								// point to start of discovery reply table
 				frame <= 8'h04;								// send_more reply type
 				state_Tx <= METIS_DISCOVERY;
 			end				
 			else if (PHY_Tx_rdused > 1023  && !Tx_reset && run) begin	// wait until we have at least 1024 bytes in Tx fifo
 				rdaddress <= 0;											// and we have completed a Metis Discovery
 				state_Tx <= UDP;
-				//state_Tx <= RESET;						// ***** inhibit TX for testing
-			end	
-			else if (sp_fifo_rdused > 1023 && !Tx_reset  && wide_spectrum) begin	// wait until Spectrum fifo has enough data
-				rdaddress <= 0;
+				//state_Tx <= RESET;							// ***** inhibit TX for testing
+			end
+   		else if (have_sp_data) begin					// Spectrum fifo has data so send it
+				rdaddress <= 0;																	
 				state_Tx <= SPECTRUM;
 			end
-			else
-				state_Tx <= RESET;	
+			else	state_Tx <= RESET;
 		end
    end
 
 // start sending UDP/IP data   
 UDP:
 	begin
-		end_point <= 8'h06;							// USB I&Q equivalent end point - EP6
-		if (rdaddress != 58)						// keep sending until we reach the end of the fixed data 
+		end_point <= 8'h06;									// USB I&Q equivalent end point - EP6
+		if (rdaddress != 58)									// keep sending until we reach the end of the fixed data 
 		begin
 			Tx_data <= pkt_data;
-			sync_Tx_CTL <= 1'b1;					// enable write to PHY
+			sync_Tx_CTL <= 1'b1;								// enable write to PHY
 			rdaddress <= rdaddress + 1'b1;
 			state_Tx <= UDP;
 		end 
@@ -1013,13 +1013,13 @@ UDP:
 		begin
 			if (data_count != 1024) begin
 				Tx_data <= PHY_Tx_data;  				
-				data_count <= data_count + 1'b1;		// increment loop counter
+				data_count <= data_count + 1'b1;			// increment loop counter
 				state_Tx <= UDP;
 			end
 			else begin
-				temp_CRC32 <= CRC32;					// grab the CRC data since it will change next clock pulse
-				Tx_data <= CRC32[7:0];					// send CRC32 to PHY
-				rdaddress <= 58; 						// point to end of CRC table 
+    			temp_CRC32 <= CRC32;							// grab the CRC data since it will change next clock pulse
+				Tx_data <= CRC32[7:0];						// send CRC32 to PHY
+				rdaddress <= 58; 								// point to end of CRC table 
               sequence_number <= sequence_number + 1'b1; 	// increment sequence number 
 				state_Tx <= CRC;
 			end 
@@ -1029,7 +1029,7 @@ UDP:
 	if (data_count == 1023) Tx_fifo_rdreq <= 1'b0;		// stop reading from Tx_fifo		
 		
 	if (rdaddress == 7)
-		reset_CRC <= 1'b1; 								// start CRC32 generation
+		reset_CRC <= 1'b1; 									// start CRC32 generation
 	else 
 		reset_CRC <= 1'b0;
   end 	
@@ -1037,21 +1037,21 @@ UDP:
 
 METIS_DISCOVERY:
 	begin
-		if (rdaddress != 560) begin					// keep sending until we reach the end of the data 
+		if (rdaddress != 560) begin						// keep sending until we reach the end of the data 
 			Tx_data <= pkt_data;
-			sync_Tx_CTL <= 1'b1;					// enable write to PHY
+			sync_Tx_CTL <= 1'b1;								// enable write to PHY
 			rdaddress <= rdaddress + 1'b1;
 			state_Tx <= METIS_DISCOVERY;
 		end
-		else if (zero_count < 50)begin				// send 50 x 0x00s
+		else if (zero_count < 50)begin					// send 50 x 0x00s
 			Tx_data <= 8'h00;
 			zero_count <= zero_count + 1'b1;
 			state_Tx <= METIS_DISCOVERY;	
 		end 
 		else begin
-    			temp_CRC32 <= CRC32;					// grab the CRC data since it will change next clock pulse
-				Tx_data <= CRC32[7:0];					// send CRC32 to PHY
-				rdaddress <= 58; 						// point to end of CRC table 
+    			temp_CRC32 <= CRC32;							// grab the CRC data since it will change next clock pulse
+				Tx_data <= CRC32[7:0];						// send CRC32 to PHY
+				rdaddress <= 58; 								// point to end of CRC table 
 				state_Tx <= CRC;
 		end  
 	  if (rdaddress == 507)
@@ -1066,26 +1066,26 @@ ARP:
 	begin
 	LED <= 1'b1;
 		if (rdaddress != 150) begin					
-			sync_Tx_CTL <= 1'b1;					// enable write to PHY 
+			sync_Tx_CTL <= 1'b1;								// enable write to PHY 
 			Tx_data <= pkt_data;
 			rdaddress <= rdaddress + 1'b1;
 			state_Tx <= ARP; 
 		end
-		else if (zero_count < 18)begin				// send 18 x 0x00s
+		else if (zero_count < 18)begin					// send 18 x 0x00s
 			Tx_data <= 8'h00;
 			zero_count <= zero_count + 1'b1;
 			state_Tx <= ARP;	
 		end 
 		else begin
-			ARP_sent <= 1'b1;						// set APR sent flag
-			temp_CRC32 <= CRC32;					// grab the CRC data since it will change next clock pulse
-			Tx_data <= CRC32[7:0];					// send CRC32 to PHY
-			rdaddress <= 58; 						// point to end of CRC table
+			ARP_sent <= 1'b1;									// set APR sent flag
+			temp_CRC32 <= CRC32;								// grab the CRC data since it will change next clock pulse
+			Tx_data <= CRC32[7:0];							// send CRC32 to PHY
+			rdaddress <= 58; 									// point to end of CRC table
 			state_Tx <= CRC;
 		end
 		
 	if (rdaddress == 107)
-		reset_CRC <= 1'b1; 							// start CRC32 generation
+		reset_CRC <= 1'b1; 									// start CRC32 generation
 	else 
 		reset_CRC <= 1'b0;
 	
@@ -1095,9 +1095,9 @@ ARP:
 // sum, apply one's complement then complement 	
 PING1:
 	begin
-		if (ck_count != (Length - 24)) begin  // add all the ping data as 16 bits, 
+		if (ck_count != (Length - 24)) begin  			// add all the ping data as 16 bits, 
 			ping_check_temp <= ping_check_temp + {16'b0,ping_data[ck_count], ping_data[ck_count + 1]};
-			ck_count <= ck_count + 8'd2;		// get next two bytes
+			ck_count <= ck_count + 8'd2;					// get next two bytes
 			state_Tx <= PING1;	
 		end
 		else if (ping_check_temp >> 16 != 0) begin   // do one's complement 
@@ -1113,28 +1113,28 @@ PING1:
 // respond to ping
 PING2:	
 	begin
-		if (rdaddress != 246)						// keep sending until we reach the end of the fixed data 
+		if (rdaddress != 246)								// keep sending until we reach the end of the fixed data 
 		begin
 			Tx_data <= pkt_data;
-			sync_Tx_CTL <= 1'b1;					// enable write to PHY
+			sync_Tx_CTL <= 1'b1;								// enable write to PHY
 			rdaddress <= rdaddress + 1'b1;
 			state_Tx <= PING2;
 		end 
 		else if (data_count != (Length - 24)) begin	// send contents of ping_data in bytes
 			Tx_data <=  ping_data[data_count];	
-			data_count <= data_count + 1'd1;		// increment loop counter
+			data_count <= data_count + 1'd1;				// increment loop counter
 			state_Tx <= PING2;
 		end
 		else begin
-			ping_sent <= 1'b1;						// set ping sent flag
-			temp_CRC32 <= CRC32;					// grab the CRC data since it will change next clock pulse
-			Tx_data <= CRC32[7:0];					// send CRC32 to PHY
-			rdaddress <= 58; 						// point to end of CRC table
+			ping_sent <= 1'b1;								// set ping sent flag
+			temp_CRC32 <= CRC32;								// grab the CRC data since it will change next clock pulse
+			Tx_data <= CRC32[7:0];							// send CRC32 to PHY
+			rdaddress <= 58; 									// point to end of CRC table
 			state_Tx <= CRC;
 		end		
 		
 	if (rdaddress == 207)
-		reset_CRC <= 1'b1; 							// start CRC32 generation
+		reset_CRC <= 1'b1; 									// start CRC32 generation
 	else 
 		reset_CRC <= 1'b0;			
 	end 
@@ -1143,12 +1143,12 @@ PING2:
 DHCP_DISCOVER:
 	begin
 		if (rdaddress < 354) begin					
-			sync_Tx_CTL <= 1'b1;					// enable write to PHY 
+			sync_Tx_CTL <= 1'b1;								// enable write to PHY 
 			Tx_data <= pkt_data;
 			rdaddress <= rdaddress + 1'b1;
 			state_Tx <= DHCP_DISCOVER; 
 		end
-		else if (zero_count < 24)begin				// send 24 x 0x00s
+		else if (zero_count < 24)begin					// send 24 x 0x00s
 				Tx_data <= 8'h00;
 				zero_count <= zero_count + 1'b1;
 				state_Tx <= DHCP_DISCOVER;	
@@ -1158,26 +1158,26 @@ DHCP_DISCOVER:
 				rdaddress <= rdaddress + 1'b1;
 				state_Tx <= DHCP_DISCOVER;
 		end
-		else if (zero_count < 226)begin				// send 202 x 0x00s
+		else if (zero_count < 226)begin					// send 202 x 0x00s
 				Tx_data <= 8'h00;
 				zero_count <= zero_count + 1'b1;
 				state_Tx <= DHCP_DISCOVER;	
 		end 
-		else if (rdaddress < 368) begin				// send the balance of the data				
+		else if (rdaddress < 368) begin					// send the balance of the data				
 				Tx_data <= pkt_data;
 				rdaddress <= rdaddress + 1'b1;
 				state_Tx <= DHCP_DISCOVER;
 		end
 		else begin
-			temp_CRC32 <= CRC32;					// grab the CRC data since it will change next clock pulse
-			Tx_data <= CRC32[7:0];					// send CRC32 to PHY
-			rdaddress <= 58; 						// point to end of CRC table
-			DHCP_discover_sent <= 1'b1;				// indicate we have sent the request
+			temp_CRC32 <= CRC32;								// grab the CRC data since it will change next clock pulse
+			Tx_data <= CRC32[7:0];							// send CRC32 to PHY
+			rdaddress <= 58; 									// point to end of CRC table
+			DHCP_discover_sent <= 1'b1;					// indicate we have sent the request
 			state_Tx <= CRC;
 		end
 		
 	if (rdaddress == 307)
-		reset_CRC <= 1'b1; 							// start CRC32 generation
+		reset_CRC <= 1'b1; 									// start CRC32 generation
 	else 
 		reset_CRC <= 1'b0;
 		
@@ -1186,12 +1186,12 @@ DHCP_DISCOVER:
 DHCP_REQUEST:
 	begin
 		if (rdaddress < 454) begin					
-			sync_Tx_CTL <= 1'b1;					// enable write to PHY 
+			sync_Tx_CTL <= 1'b1;								// enable write to PHY 
 			Tx_data <= pkt_data;
 			rdaddress <= rdaddress + 1'b1;
 			state_Tx <= DHCP_REQUEST; 
 		end
-		else if (zero_count < 24)begin				// send 34 x 0x00s
+		else if (zero_count < 24)begin					// send 34 x 0x00s
 				Tx_data <= 8'h00;
 				zero_count <= zero_count + 1'b1;
 				state_Tx <= DHCP_REQUEST;	
@@ -1201,26 +1201,26 @@ DHCP_REQUEST:
 				rdaddress <= rdaddress + 1'b1;
 				state_Tx <= DHCP_REQUEST;
 		end
-		else if (zero_count < 226)begin				// send 202 x 0x00s
+		else if (zero_count < 226)begin					// send 202 x 0x00s
 				Tx_data <= 8'h00;
 				zero_count <= zero_count + 1'b1;
 				state_Tx <= DHCP_REQUEST;	
 		end 
-		else if (rdaddress < 480) begin				// send the balance of the data				
+		else if (rdaddress < 480) begin					// send the balance of the data				
 				Tx_data <= pkt_data;
 				rdaddress <= rdaddress + 1'b1;
 				state_Tx <= DHCP_REQUEST;
 		end
 		else begin
-			temp_CRC32 <= CRC32;					// grab the CRC data since it will change next clock pulse
-			Tx_data <= CRC32[7:0];					// send CRC32 to PHY
-			rdaddress <= 58; 						// point to end of CRC table
-			DHCP_request_sent <= 1'b1;				// indicate we have sent the request
+			temp_CRC32 <= CRC32;								// grab the CRC data since it will change next clock pulse
+			Tx_data <= CRC32[7:0];							// send CRC32 to PHY
+			rdaddress <= 58; 									// point to end of CRC table
+			DHCP_request_sent <= 1'b1;						// indicate we have sent the request
 			state_Tx <= CRC;
 		end
 		
 		if (rdaddress == 407)
-			reset_CRC <= 1'b1; 							// start CRC32 generation
+			reset_CRC <= 1'b1; 								// start CRC32 generation
 		else 
 			reset_CRC <= 1'b0;
 		
@@ -1230,12 +1230,12 @@ DHCP_REQUEST:
 DHCP_REQUEST_RENEW:
 	begin
 		if (rdaddress < 766) begin					
-			sync_Tx_CTL <= 1'b1;					// enable write to PHY 
+			sync_Tx_CTL <= 1'b1;								// enable write to PHY 
 			Tx_data <= pkt_data;
 			rdaddress <= rdaddress + 1'b1;
 			state_Tx <= DHCP_REQUEST_RENEW; 
 		end
-		else if (zero_count < 12)begin				// send 12 x 0x00s
+		else if (zero_count < 12)begin					// send 12 x 0x00s
 				Tx_data <= 8'h00;
 				zero_count <= zero_count + 1'b1;
 				state_Tx <= DHCP_REQUEST_RENEW;	
@@ -1245,26 +1245,26 @@ DHCP_REQUEST_RENEW:
 				rdaddress <= rdaddress + 1'b1;
 				state_Tx <= DHCP_REQUEST_RENEW;
 		end
-		else if (zero_count < 214)begin				// send 202 x 0x00s
+		else if (zero_count < 214)begin					// send 202 x 0x00s
 				Tx_data <= 8'h00;
 				zero_count <= zero_count + 1'b1;
 				state_Tx <= DHCP_REQUEST_RENEW;	
 		end 
-		else if (rdaddress < 780) begin				// send the balance of the data				
+		else if (rdaddress < 780) begin					// send the balance of the data				
 				Tx_data <= pkt_data;
 				rdaddress <= rdaddress + 1'b1;
 				state_Tx <= DHCP_REQUEST_RENEW;
 		end
 		else begin
-			temp_CRC32 <= CRC32;					// grab the CRC data since it will change next clock pulse
-			Tx_data <= CRC32[7:0];					// send CRC32 to PHY
-			rdaddress <= 58; 						// point to end of CRC table
-			DHCP_request_renew_sent <= 1'b1;		// indicate we have sent the request
+			temp_CRC32 <= CRC32;								// grab the CRC data since it will change next clock pulse
+			Tx_data <= CRC32[7:0];							// send CRC32 to PHY
+			rdaddress <= 58; 									// point to end of CRC table
+			DHCP_request_renew_sent <= 1'b1;				// indicate we have sent the request
 			state_Tx <= CRC;
 		end
 		
 		if (rdaddress == 707)
-			reset_CRC <= 1'b1; 							// start CRC32 generation
+			reset_CRC <= 1'b1; 								// start CRC32 generation
 		else 
 			reset_CRC <= 1'b0;
 		
@@ -1275,23 +1275,23 @@ DHCP_REQUEST_RENEW:
 // for debug - send data as raw Ethernet broadcast	
 PRINTF:
 	begin
-		if (rdaddress != 652)						// end of table + 1  i.e. keep sending until we reach the end of the data 
+		if (rdaddress != 652)								// end of table + 1  i.e. keep sending until we reach the end of the data 
 		begin
 			Tx_data <= pkt_data;
-			sync_Tx_CTL <= 1'b1;					// enable write to PHY
+			sync_Tx_CTL <= 1'b1;								// enable write to PHY
 			rdaddress <= rdaddress + 1'b1;
 			state_Tx <= PRINTF;
 		end
 		// now send 60 bytes of 0x00 
 		else if (data_count != 60) begin
 			Tx_data <= 0;  				
-			data_count <= data_count + 1'b1;		// increment loop counter
+			data_count <= data_count + 1'b1;				// increment loop counter
 			state_Tx <= PRINTF;
 		end
 		else begin
-    			temp_CRC32 <= CRC32;					// grab the CRC data since it will change next clock pulse
-				Tx_data <= CRC32[7:0];					// send CRC32 to PHY
-				rdaddress <= 58; 						// point to end of CRC table 
+    			temp_CRC32 <= CRC32;							// grab the CRC data since it will change next clock pulse
+				Tx_data <= CRC32[7:0];						// send CRC32 to PHY
+				rdaddress <= 58; 								// point to end of CRC table 
 				state_Tx <= CRC;
 		end  
 	  if (rdaddress == 607)
@@ -1303,36 +1303,37 @@ PRINTF:
 // send raw ADC data from Mercury. Spectrum data has its own independant sequence number.
 SPECTRUM:
 	begin
-		end_point <= 8'h04;							// USB Spectrum equivalent end point - EP4
-		if (rdaddress != 58)						// keep sending until we reach the end of the fixed data 
-		begin 										// but skip sequence number
+		end_point <= 8'h04;									// USB Spectrum equivalent end point - EP4
+		if (rdaddress != 58)									// keep sending until we reach the end of the fixed data 
+		begin 													// but skip sequence number
 			Tx_data <= pkt_data;
-			sync_Tx_CTL <= 1'b1;					// enable write to PHY
+			sync_Tx_CTL <= 1'b1;								// enable write to PHY
 			rdaddress <= rdaddress + 1'b1;
 			state_Tx <= SPECTRUM;
 		end 
 		else 
 		// read the Tx fifo data 
 		begin
-			if (data_count != 1024) begin
-				Tx_data <= sp_fifo_rddata;  			// read data from SP_fifo	
-				data_count <= data_count + 1'b1;		// increment loop counter
+			if (sp_data_count != 1024) begin
+				Tx_data <= sp_fifo_rddata;  					// read data from SP_fifo	
+				sp_data_count <= sp_data_count + 1'b1;				// increment loop counter
 				state_Tx <= SPECTRUM;
 			end
 			else begin
-    			temp_CRC32 <= CRC32;					// grab the CRC data since it will change next clock pulse
-				Tx_data <= CRC32[7:0];					// send CRC32 to PHY
-				rdaddress <= 58; 						// point to end of CRC table
-				spec_seq_number <= spec_seq_number + 1'b1; // increment spectrum sequence number 
+				sp_data_count <= 0;									// reset data counter for next time 
+    			temp_CRC32 <= CRC32;									// grab the CRC data since it will change next clock pulse
+				Tx_data <= CRC32[7:0];								// send CRC32 to PHY
+				rdaddress <= 58; 										// point to end of CRC table
+				spec_seq_number <= spec_seq_number + 1'b1; 	// increment spectrum sequence number 
 				state_Tx <= CRC;
 			end 
-		end  											// done, so now add the remainder of the CRC32 
+		end  																// done, so now add the remainder of the CRC32 
 		
-	if (rdaddress == 57) sp_fifo_rdreq <= 1'b1;			// enable read from SP_fifo on next clock
-	if (data_count == 1023) sp_fifo_rdreq <= 1'b0;		// stop reading from SP_fifo		
+	if (rdaddress == 57) sp_fifo_rdreq <= 1'b1;				// enable read from SP_fifo on next clock
+	if (sp_data_count == 1023) sp_fifo_rdreq <= 1'b0;			// stop reading from SP_fifo	
 		
 	if (rdaddress == 7)
-		reset_CRC <= 1'b1; 								// start CRC32 generation
+		reset_CRC <= 1'b1; 											// start CRC32 generation
 	else 
 		reset_CRC <= 1'b0;
   end 	
@@ -1346,9 +1347,9 @@ CRC:
 			state_Tx <= CRC;     
 		end
 		else begin
-			sync_Tx_CTL <= 1'b0;							// disable PHY write
+			sync_Tx_CTL <= 1'b0;									// disable PHY write
 			if (interframe == 10) begin						// delay between frames should be 960/96nS min
-				state_Tx <= RESET; 							// send complete, loop back to start
+				state_Tx <= RESET; 								// send complete, loop back to start
 			end 	
 			else interframe <= interframe + 1'b1;
 		end
