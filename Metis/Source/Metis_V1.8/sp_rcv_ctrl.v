@@ -34,7 +34,7 @@
 
 
 module sp_rcv_ctrl (clk, reset, spd_rdy, spd_ack, 
-					sp_fifo_wrempty, sp_fifo_wrfull, write );
+					sp_fifo_wrempty, sp_fifo_wrfull, write, have_sp_data );
 
 input wire clk;
 input wire spd_rdy;
@@ -44,6 +44,7 @@ input wire reset;
 
 output reg  spd_ack;
 output wire write;
+output wire have_sp_data;
 
 reg state;
 reg sp_wrreq;
@@ -80,6 +81,7 @@ endcase
 end
 
 assign write = (sp_wrreq && wrenable);   // gate fifo write pulse
+assign have_sp_data = !wrenable;			 // indicate data is availble to be read
 
 
 endmodule

@@ -702,8 +702,10 @@ Tx_MAC Tx_MAC_inst (.Tx_clock(Tx_clock), .Tx_clock_2(Tx_clock_2), .IF_rst(IF_rst
 			        .erase_done(erase_done), .erase_done_ACK(erase_done_ACK), .send_more(send_more),
 			        .send_more_ACK(send_more_ACK), .Metis_serialno(Metis_serialno),
 			        .sp_fifo_rddata(sp_fifo_rddata), .sp_fifo_rdreq(sp_fifo_rdreq), 
-			        .sp_fifo_rdused(sp_fifo_rdused), .wide_spectrum(wide_spectrum)
+			        .wide_spectrum(wide_spectrum), 
+					  .have_sp_data(have_sp_data)
 			        ); 
+	
 	
 //------------------------------------------------------------------------
 //   Tx_fifo  (1024 words) Dual clock FIFO - Altera Megafunction (dcfifo)
@@ -986,61 +988,62 @@ FIFO #(RX_FIFO_SZ) RXF (.rst(IF_rst), .clk (IF_clk), .full(IF_Rx_fifo_full), .us
        
 							   SP_fifo
 						---------------------
-		  sp_fifo_wdata |data[15:0]	   wrfull| sp_fifo_wrfull
-						|				     |
-		sp_fifo_wrreq	|wrreq		  wrempty| sp_fifo_wrempty
-						|					 |
-				IF_clk	|>wrclk	             |
+	 sp_fifo_wdata |data[15:0]	   wrfull| sp_fifo_wrfull
+						|				         |
+	sp_fifo_wrreq	|wrreq	     wrempty| sp_fifo_wrempty
+						|				         |
+			IF_clk	|>wrclk [11:0]wrusedw| sp_fifo_wrused
 						---------------------
-		sp_fifo_rdreq	|rdreq		   q[7:0]| sp_fifo_rddata
+	sp_fifo_rdreq	|rdreq		   q[7:0]| sp_fifo_rddata
 						|                    | 
-						|					 |
-			Tx_clock_2	|>rdclk		         | 
-						|		[12:0]rdusedw| sp_fifo_rdused
+						|				         |
+		Tx_clock_2	|>rdclk		         | 
+						|		               | 
 						---------------------
 						|                    |
-		IF_rst OR 		|aclr                |
-		sp_fifo_full OR ---------------------
-		!run	
-	     				
-				
+	   IF_rst OR   |aclr                |
+		!run   	   |                    |
+	    				---------------------
+		
 */
 
 reg [15:0]sp_fifo_wdata;
 wire  spd_rdy;
 wire  sp_fifo_rdreq;
 wire [7:0]sp_fifo_rddata;
-wire [12:0]sp_fifo_rdused;
 wire sp_fifo_wrempty;
 wire sp_fifo_wrfull;
 wire sp_fifo_wrreq;
-
-
-
-
-SP_fifo  SPF (.aclr(IF_rst || sp_fifo_wrfull || !run), .wrclk (IF_clk), .rdclk(Tx_clock_2), 
-             .wrreq (sp_fifo_wrreq), .data (sp_fifo_wdata), .rdreq (sp_fifo_rdreq), .rdusedw(sp_fifo_rdused),
-             .q(sp_fifo_rddata), .wrfull(sp_fifo_wrfull), .wrempty(sp_fifo_wrempty)); 
+wire [11:0]sp_fifo_wrused;
 
 
 //--------------------------------------------------
 //  Receive Wideband Spectrum Data from Mercury
 //--------------------------------------------------
 
-//	Note: at power on Mercury will send Spectrum data until trigger (Atlas_C21) goes high to low.
-//  It then only sends data on trigger going high.
+//	When wide_spectrum is set and sp_fifo_wrempty then a trigger is sent to Mercury (Atlas_C21) which sends 4k words 
+//  of consecutive ADC samples.
 //  Reset fifo when !run so the data always starts at a known state.
 
 wire spd_ack;
+wire have_sp_data;
 
-NWire_rcv #(.DATA_BITS(16), .ICLK_FREQ(125000000), .XCLK_FREQ(48000000), .SLOWEST_FREQ(80000))
+
+SP_fifo  SPF (.aclr(IF_rst | !run), .wrclk (IF_clk), .rdclk(Tx_clock_2), 
+             .wrreq (sp_fifo_wrreq), .data (sp_fifo_wdata), .rdreq (sp_fifo_rdreq),
+             .q(sp_fifo_rddata), .wrfull(sp_fifo_wrfull), .wrempty(sp_fifo_wrempty), .wrusedw(sp_fifo_wrused)); 
+
+
+NWire_rcv #(.DATA_BITS(16), .ICLK_FREQ(125000000), .XCLK_FREQ(48000000), .SLOWEST_FREQ(80000))  
        SPD (.irst(C125_rst), .iclk(C125_clk), .xrst(IF_rst), .xclk(IF_clk),
             .xrcv_rdy(spd_rdy), .xrcv_ack(spd_ack), .xrcv_data(sp_fifo_wdata), .din(ATLAS_A12) );
 
-assign ATLAS_C21 = spd_rdy;  // since we control when the SP_fifo has 4096 words we can permanently request data from Mercury
+assign ATLAS_C21 =  sp_fifo_wrempty & wide_spectrum;  // get wideband data when SP fifo is empty and wide spectrum is selected
+
 
 sp_rcv_ctrl SPC (.clk(IF_clk), .reset(IF_rst), .spd_rdy(spd_rdy), .spd_ack(spd_ack), 
-				 .sp_fifo_wrempty(sp_fifo_wrempty), .sp_fifo_wrfull(sp_fifo_wrfull), .write(sp_fifo_wrreq));
+				 .sp_fifo_wrempty(sp_fifo_wrempty), .sp_fifo_wrfull(sp_fifo_wrfull), .write(sp_fifo_wrreq), .have_sp_data(have_sp_data));
+
 
 
 
