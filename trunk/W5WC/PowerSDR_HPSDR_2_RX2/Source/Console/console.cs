@@ -12142,7 +12142,7 @@ namespace PowerSDR
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 4.0)
                         return Band.B80M;
-                     else if (freq >= 5.1 && freq <= 5.5)
+                    else if (freq >= 5.1 && freq <= 5.5)
                         return Band.B60M;
                     else if (freq >= 7.0 && freq <= 7.3)
                         return Band.B40M;
@@ -12234,7 +12234,7 @@ namespace PowerSDR
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 4.0)
                         return Band.B80M;
-                     else if (freq >= 5.25 && freq <= 5.41)
+                    else if (freq >= 5.25 && freq <= 5.41)
                         return Band.B60M;
                     else if (freq >= 7.0 && freq <= 7.3)
                         return Band.B40M;
@@ -12568,64 +12568,64 @@ namespace PowerSDR
                         return Band.GEN;
 
                 case FRSRegion.Netherlands:
-                 if (freq >= 1.81 && freq <= 1.88)
-                    return Band.B160M;
-                else if (freq >= 3.5 && freq <= 3.8)
-                    return Band.B80M;
-                else if (freq >= 7.0 && freq <= 7.2)
-                    return Band.B40M;
-                else if (freq >= 10.1 && freq <= 10.15)
-                    return Band.B30M;
-                else if (freq >= 14.0 && freq <= 14.35)
-                    return Band.B20M;
-                else if (freq >= 18.068 && freq <= 18.168)
-                    return Band.B17M;
-                else if (freq >= 21.0 && freq <= 21.45)
-                    return Band.B15M;
-                else if (freq >= 24.89 && freq <= 24.99)
-                    return Band.B12M;
-                else if (freq >= 28.0 && freq <= 29.7)
-                    return Band.B10M;
-                else if (freq >= 50.0 && freq <= 52.0)
-                    return Band.B6M;
-                else if (freq >= 144.0 && freq <= 148.0)
-                    return Band.B2M;
-                else if (freq == 2.5 || freq == 5.0 ||
-                    freq == 10.0 || freq == 15.0 ||
-                    freq == 20.0)
-                    return Band.WWV;
-                else
-                    return Band.GEN;
-            
-                case FRSRegion.France:            
-                if (freq >= 1.81 && freq <= 2.0)
-                    return Band.B160M;
-                else if (freq >= 3.5 && freq <= 3.8)
-                    return Band.B80M;
-                else if (freq >= 7.0 && freq <= 7.2)
-                    return Band.B40M;
-                else if (freq >= 10.1 && freq <= 10.15)
-                    return Band.B30M;
-                else if (freq >= 14.0 && freq <= 14.35)
-                    return Band.B20M;
-                else if (freq >= 18.068 && freq <= 18.168)
-                    return Band.B17M;
-                else if (freq >= 21.0 && freq <= 21.45)
-                    return Band.B15M;
-                else if (freq >= 24.89 && freq <= 24.99)
-                    return Band.B12M;
-                else if (freq >= 28.0 && freq <= 29.7)
-                    return Band.B10M;
-                else if (freq >= 50.08 && freq <= 51.2)
-                    return Band.B6M;
-                else if (freq >= 144.0 && freq <= 148.0)
-                    return Band.B2M;
-                else if (freq == 2.5 || freq == 5.0 ||
-                    freq == 10.0 || freq == 15.0 ||
-                    freq == 20.0)
-                    return Band.WWV;
-                else
-                    return Band.GEN;
+                    if (freq >= 1.81 && freq <= 1.88)
+                        return Band.B160M;
+                    else if (freq >= 3.5 && freq <= 3.8)
+                        return Band.B80M;
+                    else if (freq >= 7.0 && freq <= 7.2)
+                        return Band.B40M;
+                    else if (freq >= 10.1 && freq <= 10.15)
+                        return Band.B30M;
+                    else if (freq >= 14.0 && freq <= 14.35)
+                        return Band.B20M;
+                    else if (freq >= 18.068 && freq <= 18.168)
+                        return Band.B17M;
+                    else if (freq >= 21.0 && freq <= 21.45)
+                        return Band.B15M;
+                    else if (freq >= 24.89 && freq <= 24.99)
+                        return Band.B12M;
+                    else if (freq >= 28.0 && freq <= 29.7)
+                        return Band.B10M;
+                    else if (freq >= 50.0 && freq <= 52.0)
+                        return Band.B6M;
+                    else if (freq >= 144.0 && freq <= 148.0)
+                        return Band.B2M;
+                    else if (freq == 2.5 || freq == 5.0 ||
+                        freq == 10.0 || freq == 15.0 ||
+                        freq == 20.0)
+                        return Band.WWV;
+                    else
+                        return Band.GEN;
+
+                case FRSRegion.France:
+                    if (freq >= 1.81 && freq <= 2.0)
+                        return Band.B160M;
+                    else if (freq >= 3.5 && freq <= 3.8)
+                        return Band.B80M;
+                    else if (freq >= 7.0 && freq <= 7.2)
+                        return Band.B40M;
+                    else if (freq >= 10.1 && freq <= 10.15)
+                        return Band.B30M;
+                    else if (freq >= 14.0 && freq <= 14.35)
+                        return Band.B20M;
+                    else if (freq >= 18.068 && freq <= 18.168)
+                        return Band.B17M;
+                    else if (freq >= 21.0 && freq <= 21.45)
+                        return Band.B15M;
+                    else if (freq >= 24.89 && freq <= 24.99)
+                        return Band.B12M;
+                    else if (freq >= 28.0 && freq <= 29.7)
+                        return Band.B10M;
+                    else if (freq >= 50.08 && freq <= 51.2)
+                        return Band.B6M;
+                    else if (freq >= 144.0 && freq <= 148.0)
+                        return Band.B2M;
+                    else if (freq == 2.5 || freq == 5.0 ||
+                        freq == 10.0 || freq == 15.0 ||
+                        freq == 20.0)
+                        return Band.WWV;
+                    else
+                        return Band.GEN;
             }
 
             return Band.GEN;
@@ -34668,8 +34668,8 @@ namespace PowerSDR
                 case DSPMode.USB:
                 case DSPMode.DIGU:
                 case DSPMode.DSB:
-                   // if (RX1IsOn60mChannel())
-                      //  tx_freq -= ModeFreqOffset(rx1_dsp_mode) + cw_pitch * 1e-6;
+                    // if (RX1IsOn60mChannel())
+                    //  tx_freq -= ModeFreqOffset(rx1_dsp_mode) + cw_pitch * 1e-6;
                     if (chkTUN.Checked) tx_freq -= cw_pitch * 1e-6;
                     break;
                 case DSPMode.LSB:
@@ -43550,7 +43550,7 @@ namespace PowerSDR
 
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);
 
-                // if (chkRX2.Checked)
+                if (chkRX2.Checked)
                 {
                     Audio.RX2AutoMuteTX = true;
                     Audio.FullDuplex = !mute_rx1_on_vfob_tx;
@@ -43563,7 +43563,7 @@ namespace PowerSDR
                         chkVFOSplit.Checked = false;
                 }
 
-                if (chkRX2.Checked && chkVAC2.Checked && chkRX2.Checked)
+                if (chkRX2.Checked && chkVAC2.Checked)
                 {
                     ptbVACRXGain.Value = vac2_rx_gain;
                     ptbVACRXGain_Scroll(this, EventArgs.Empty);
@@ -43573,12 +43573,12 @@ namespace PowerSDR
                     chkVACStereo.Checked = vac2_stereo;
                 }
 
-                if (!chkRX2.Checked || chkVFOBTX.Checked)    //in case of VU/XVTR-split error
+                if (chkRX2.Checked == false && chkVFOBTX.Checked)    //in case of VU/XVTR-split error
                     chkVFOSplit.Checked = true;
             }
             else // button is unchecked
             {
-                if (!(chkRX2.Checked && chkVAC2.Checked && chkRX2.Checked))
+                if (!(chkRX2.Checked && chkVAC2.Checked))
                 {
                     ptbVACRXGain.Value = vac_rx_gain;
                     ptbVACRXGain_Scroll(this, EventArgs.Empty);
@@ -43589,7 +43589,7 @@ namespace PowerSDR
                 }
 
                 chkVFOBTX.BackColor = SystemColors.Control;
-                // if (chkRX2.Checked)
+                if (chkRX2.Checked)
                 {
                     Audio.RX2AutoMuteTX = mute_rx2_on_vfoa_tx;
                     Audio.FullDuplex = false;
