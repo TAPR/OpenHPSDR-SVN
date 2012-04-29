@@ -340,7 +340,6 @@ namespace PowerSDR
                    switch(metis_vernum)
                    {
                        case 16:
-                       case 17:
                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16)) ||
                                (c != null && c.MercuryPresent && (mercury_ver != 31)))
                            {
@@ -349,9 +348,18 @@ namespace PowerSDR
                                c.PowerOn = false;
                            }
                           break;
-                       case 71: // K5SO Diversity
-                           if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 71)) ||
-                               (c != null && c.MercuryPresent && (mercury_ver != 71)))
+                       case 17:
+                          if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16 && penny_ver != 17)) ||
+                              (c != null && c.MercuryPresent && (mercury_ver != 31 && mercury_ver != 71)))
+                          {
+                              result = false;
+                              c.SetupForm.alex_fw_good = false;
+                              c.PowerOn = false;
+                          }
+                          break;
+                       case 18: // K5SO Diversity & non-diversity
+                           if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
+                               (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 72)))
                            {
                                result = false;
                                c.SetupForm.alex_fw_good = false;
@@ -366,7 +374,7 @@ namespace PowerSDR
                            break;
                   }
 
-                   if (mercury2_ver < 71) //check if physical rx2 present
+                   if (mercury2_ver < 32) //check if physical rx2 present
                        c.rx2_preamp_present = false;
                    else
                        c.rx2_preamp_present = true;
@@ -462,9 +470,9 @@ namespace PowerSDR
                             c.PowerOn = false;
                         }
                         break;
-                    case 71: // K5SO Diversity
-                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 71)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 71)))
+                    case 22: // K5SO Diversity & non-diversity
+                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
+                            (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 72)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
@@ -478,7 +486,7 @@ namespace PowerSDR
                         break;
                 }
 
-                if (mercury2_ver < 71) //check if physical rx2 present
+                if (mercury2_ver < 32) //check if physical rx2 present
                     c.rx2_preamp_present = false;
                 else
                     c.rx2_preamp_present = true;

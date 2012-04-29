@@ -6350,7 +6350,7 @@ namespace PowerSDR
             if (power && chkVAC2Enable.Checked)
                 console.PowerOn = true;
         }
-        
+
         private void udAudioVoltage1_ValueChanged(object sender, System.EventArgs e)
         {
             if (udAudioVoltage1.Focused &&
@@ -12651,7 +12651,9 @@ namespace PowerSDR
             }
             else
             {
-                lblOzyFX2.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0");
+                byte[] ver_bytes = new byte[1];
+                JanusAudio.GetMetisCodeVersion(ver_bytes);
+                lblOzyFX2.Text = ver_bytes[0].ToString("Hermes: 0\\.0");
                 lblOzyFWVer.Text = "";
                 lblMercuryFWVer.Text = "";
                 lblMercury2FWVer.Text = "";
@@ -12669,7 +12671,8 @@ namespace PowerSDR
             JanusAudio.GetMetisMACAddr(mac_bytes);
             lblMetisMAC.Text = BitConverter.ToString(mac_bytes).Replace("-", ":").ToLower();
             JanusAudio.GetMetisCodeVersion(ver_bytes);
-            lblMetisCodeVersion.Text = BitConverter.ToString(ver_bytes);
+           // lblMetisCodeVersion.Text = BitConverter.ToString(ver_bytes);
+            lblMetisCodeVersion.Text = ver_bytes[0].ToString("0\\.0");
             JanusAudio.GetMetisBoardID(id_bytes);
             lblMetisBoardID.Text = BitConverter.ToString(id_bytes);
             return;
@@ -13187,7 +13190,7 @@ namespace PowerSDR
                 case "Norway":
                     CurrentRegion = FRSRegion.Norway;
                     console.Extended = false;
-                    break; 
+                    break;
                 case "Denmark":
                     CurrentRegion = FRSRegion.Denmark;
                     console.Extended = false;
