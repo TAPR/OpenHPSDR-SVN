@@ -39658,7 +39658,22 @@ namespace PowerSDR
             }
             else
             {
-                lblOzyFX2.Text = JanusAudio.getMercuryFWVersion().ToString("Hermes: 0\\.0");
+
+                int metis_ip_addr = JanusAudio.GetMetisIPAddr();
+               // lblMetisIP.Text = IPStringFromInt(metis_ip_addr);
+                byte[] mac_bytes = new byte[6];
+               // byte[] ver_bytes = new byte[1];
+                byte[] id_bytes = new byte[1];
+                JanusAudio.GetMetisMACAddr(mac_bytes);
+               // lblMetisMAC.Text = BitConverter.ToString(mac_bytes).Replace("-", ":").ToLower();
+               // JanusAudio.GetMetisCodeVersion(ver_bytes);
+               // lblMetisCodeVersion.Text = BitConverter.ToString(ver_bytes);
+               // JanusAudio.GetMetisBoardID(id_bytes);
+               // lblMetisBoardID.Text = BitConverter.ToString(id_bytes);
+
+                byte[] ver_bytes = new byte[1];
+                JanusAudio.GetMetisCodeVersion(ver_bytes);
+                lblOzyFX2.Text = ver_bytes[0].ToString("Hermes: 0\\.0");
                 lblOzyFWVer.Text = "";
                 lblMercuryFWVer.Text = "";
                 lblPenelopeFWVer.Text = "";
@@ -39675,7 +39690,8 @@ namespace PowerSDR
             JanusAudio.GetMetisMACAddr(mac_bytes);
             lblMetisMAC.Text = BitConverter.ToString(mac_bytes).Replace("-", ":").ToLower();
             JanusAudio.GetMetisCodeVersion(ver_bytes);
-            lblMetisCodeVersion.Text = BitConverter.ToString(ver_bytes);
+           // lblMetisCodeVersion.Text = BitConverter.ToString(ver_bytes);
+            lblMetisCodeVersion.Text = ver_bytes[0].ToString("0\\.0");
             JanusAudio.GetMetisBoardID(id_bytes);
             lblMetisBoardID.Text = BitConverter.ToString(id_bytes);
             return;
