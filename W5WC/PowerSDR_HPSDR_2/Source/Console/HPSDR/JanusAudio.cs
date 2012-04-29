@@ -373,14 +373,6 @@ namespace PowerSDR
                             }
                             break;
                         case 16:
-                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16)) ||
-                                (c != null && c.MercuryPresent && (mercury_ver != 31)))
-                            {
-                                result = false;
-                                c.SetupForm.alex_fw_good = false;
-                                c.PowerOn = false;
-                            }
-                            break;
                         case 17:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 31)))
@@ -390,9 +382,9 @@ namespace PowerSDR
                                 c.PowerOn = false;
                             }
                             break;
-                        case 71: // K5SO Diversity
-                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 71)) ||
-                                (c != null && c.MercuryPresent && (mercury_ver != 11)))
+                       case 18: // K5SO Diversity & non-diversity
+                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
+                                (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 72)))
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
@@ -495,9 +487,9 @@ namespace PowerSDR
                             c.PowerOn = false;
                         }
                         break;
-                    case 71: // K5SO Diversity
-                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 71)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 71)))
+                    case 22: // K5SO Diversity & non-diversity
+                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
+                            (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 72)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
