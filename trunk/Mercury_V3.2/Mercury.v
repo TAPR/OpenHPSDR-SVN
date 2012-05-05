@@ -79,6 +79,25 @@
 						FPGA in order to minimize the current drawn from the 5V rail.
 						 
 						Released as MERCURY_v3.1.  Built with Quartus V11.0 sp1.
+						
+	 21 Apr 2012 - Changes by Joe, K5SO:
+							 
+						1)  Implemented new USB Protocol C&C bit C4[7] when C0 = 0, "common_Merc_freq" to signal that all
+						Mercury boards should use the same frequency.
+						
+						2) Implemented new USB Protocol C&C bits C1[3:1] when C0 = 0001_010x, "RxN_preamps" to indicate which
+						preamps are to be active when multiple Mercury boards are in use (C1[3:1] = 0000 -> no preamps ON, C1[3:1] = 0001
+						-> Mercury 1 preamp ON, C1[3:1] = 0011 -> Mercury 1 preamp and Mercury 2 preamp both ON, etc).
+						
+						3) reduced the size of clock_select from 4'b0000 to 3'b000 to be consistent with C&C bits C1[4:2] when C0 = 0.
+						
+						4) increased the Metis/Ozy-to-Atlas broadcast size from 87 bits to 91 bits to include the "RxN_preamps" and 
+						"common_Merc_freq" variables for Mercury in the broadcast receiver section.  
+						
+						5) added logic selection code to allow only one Mercury board (Merc_ID = 3'b000) to send wideband spectrum
+						data to Atlas bus line A12 when multiple Mercury boards are present on the Atlas bus). 
+						
+						Released as MERCURY_V3.2.  Bulit with Quartus V11.1 sp1.
 	 
 */
 	
