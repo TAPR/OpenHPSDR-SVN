@@ -142,7 +142,7 @@ IF /I '%Choice%'=='K' GOTO ItemK
 IF /I '%Choice%'=='L' GOTO ItemL
 IF /I '%Choice%'=='Leu' GOTO ItemLEU
 IF /I '%Choice%'=='M' GOTO ItemM
-IF /I '%Choice%'=='M' GOTO ItemN
+IF /I '%Choice%'=='N' GOTO ItemN
 IF /I '%Choice%'=='Z' GOTO ItemZ
 
 IF /I '%Choice%'=='Q' GOTO End
