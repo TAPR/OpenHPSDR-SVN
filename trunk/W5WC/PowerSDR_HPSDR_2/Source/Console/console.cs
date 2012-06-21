@@ -11417,9 +11417,9 @@ namespace PowerSDR
             {
                 if (freq >= 0.0 && freq <= 2.75)
                     return Band.B160M;
-                else if (freq > 2.75 && freq < 5.3305)
+                else if (freq > 2.75 && freq < 5.0)
                     return Band.B80M;
-                else if (freq >= 5.3305 && freq < 7.0)
+                else if (freq >= 5.0 && freq < 7.0)
                     return Band.B60M;
                 else if (freq >= 7.0 && freq <= 8.7)
                     return Band.B40M;
@@ -11457,7 +11457,7 @@ namespace PowerSDR
                     //else if (freq == 5.3305 || freq == 5.3465 ||
                     //freq == 5.3665 || freq == 5.3715 ||
                     // freq == 5.4035)
-                    else if (freq >= 5.1 && freq <= 5.5)
+                    else if (freq >= 5.0 && freq <= 6.0)
                         return Band.B60M;
                     else if (freq >= 7.0 && freq <= 7.3)
                         return Band.B40M;
@@ -11677,7 +11677,7 @@ namespace PowerSDR
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 3.8)
                         return Band.B80M;
-                    else if (freq >= 5.25 && freq <= 5.45)
+                    else if (freq >= 5.0 && freq <= 6.0)
                         return Band.B60M;
                     else if (freq >= 7.0 && freq <= 7.2)
                         return Band.B40M;
@@ -11709,7 +11709,7 @@ namespace PowerSDR
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 3.8)
                         return Band.B80M;
-                    else if (freq >= 5.25 && freq <= 5.45)
+                    else if (freq >= 5.0 && freq <= 6.0)
                         return Band.B60M;
                     else if (freq >= 7.0 && freq <= 7.2)
                         return Band.B40M;
@@ -41612,7 +41612,7 @@ namespace PowerSDR
             {
                 dsp_buf_phone_rx = value;
                 UpdateDSPBufRX1();
-                UpdateDSPBufRX2();
+               // UpdateDSPBufRX2();
             }
         }
 
@@ -41635,7 +41635,7 @@ namespace PowerSDR
             {
                 dsp_buf_cw_rx = value;
                 UpdateDSPBufRX1();
-                UpdateDSPBufRX2();
+               // UpdateDSPBufRX2();
             }
         }
 
@@ -41658,7 +41658,7 @@ namespace PowerSDR
             {
                 dsp_buf_dig_rx = value;
                 UpdateDSPBufRX1();
-                UpdateDSPBufRX2();
+               // UpdateDSPBufRX2();
             }
         }
 
