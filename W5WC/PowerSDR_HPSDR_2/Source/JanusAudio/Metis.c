@@ -63,7 +63,7 @@ extern void Dump(FILE *ofile,                /* file handle to dump to - assumed
 
 
 
-#if 0 
+#if 1 
 KD5TFDVK6APHAUDIO_API int getNetworkAddrs(int addrs[], int addr_count) { 
 	int addrs_used = 0; 
 	IP_ADAPTER_ADDRESSES addrbuf[5]; 
@@ -256,7 +256,7 @@ void oldlistNetworkAddrs(void) {
  /* returns 0 on success, non zero on failure */ 
  int initWSA(void) { 
 	 int rc;
-	 int addrs[10]; 
+	 /* int addrs[10];  */ 
 	 if ( WSAinitialized ) { 
 		 return 0;
 	 }
@@ -265,14 +265,12 @@ void oldlistNetworkAddrs(void) {
 	 if ( rc != 0 ) { 
 		 printf("WSAStartup failed with rc=%d\n", rc); 
 	 }
-	 /* getNetworkAddrs(addrs, 10);  */ 
+	 /* getNetworkAddrs(addrs, 10);    */ 
 	 return rc; 
  }
 
 
-
-
-SOCKET createSocket(int portnum) { 
+SOCKET createSocket(int portnum, u_long addr) { 
 	struct sockaddr_in bind_addr; 
 	int addrcount = 0; 
 	int rc; 
@@ -292,7 +290,7 @@ SOCKET createSocket(int portnum) {
 	memset(&bind_addr, 0, sizeof(bind_addr)); 
 	
 	bind_addr.sin_family = AF_INET; 
-	bind_addr.sin_addr.S_un.S_addr = INADDR_ANY; // inet_addr("10.1.1.15"); 
+	bind_addr.sin_addr.S_un.S_addr = addr; // INADDR_ANY; // inet_addr("10.1.1.15"); 
 	bind_addr.sin_port = htons(portnum); 
 	
 	rc = bind(sock, (struct sockaddr *)&bind_addr, (int)sizeof(bind_addr)); 
@@ -350,8 +348,6 @@ SOCKET createSocket(int portnum) {
 	rc = recvfrom(s, buf, buflen, flags, (SOCKADDR *)fromsockp, fromlenp); 
 	return rc; 
  } 
-
-
 
 
  u_long doDiscovery() { 
@@ -414,8 +410,7 @@ SOCKET createSocket(int portnum) {
 				printf("disc reply rc=%d\n", rc); 
 			} 
 		}
-	 }
-					
+	 }					
 	 fflush(stdout); 
 	 return 0; 
  }
@@ -447,7 +442,10 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 	u_long myaddr; 
 	unsigned char macbuf[6]; 
 	int i; 
+	int j; 
 	int sndbufsize; 
+	int addrs[10]; 
+	int addr_count; 
 	
 	isMetis = 1; 
 
@@ -461,9 +459,18 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 
 	}
 
-	if ( listenSock == (SOCKET)0 ) { 
+ 
+	addr_count =  getNetworkAddrs(addrs, 10);   
+	printf("addr_count: %d\n", addr_count); 
+	for ( j = 0; j < addr_count; j++ ) { 
 
-		listenSock = createSocket(0); 
+		if ( listenSock == (SOCKET)0 ) { 
+			closesocket(listenSock); 
+			listenSock = (SOCKET)0; 
+		}
+
+
+		listenSock = createSocket(0, addrs[j]); 
 
 		if ( listenSock == INVALID_SOCKET ) { 
 			printf("createSocket on listenSock failed.\n");
@@ -481,50 +488,40 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 		if ( rc == SOCKET_ERROR ) { 
 			printf("CreateSockets Warning: setsockopt SO_RCVBUF failed!\n"); 
 		}
-	}
-
-//	if ( discoverySock == (SOCKET)0 ) { 
-//
-//		discoverySock = createSocket(1025); 
-//
-//		if ( discoverySock == INVALID_SOCKET ) { 
-//			printf("createSocket on discoverySock failed.\n");
-//			return -2; 
-//		} 
-//	}
-
-
-
-	//myaddr = inet_addr(netaddr);
-	//printf("myaddr: 0x%08x\n", myaddr); 
-	//rc = getMACaddr(myaddr, macbuf); 
-	//if ( rc == 0 ) { 
-	//	printf("mac addr: "); 
-	//	for ( i = 0;  i < 6; i++ ) { 
-	//		printf("%02x", macbuf[i]); 
-	//	} 
-	//	printf("\n"); 
-	//} 
-	//else { 
-	//	printf("getMACaddr failed!!\n"); 		
-	//}
-
-	metis_addr = doDiscovery(); 
-	printf("metis_addr: 0x%08x\n", metis_addr); 
-
-	fflush(stdout);
-	MetisAddr = metis_addr; 
-
-	MetisSockAddr.sin_family = AF_INET;
-	MetisSockAddr.sin_port = htons(1024); 
-	MetisSockAddr.sin_addr.s_addr = metis_addr;
 	
-	if ( metis_addr == 0 ) { 
-		return -4; 
+
+
+
+
+		//myaddr = inet_addr(netaddr);
+		//printf("myaddr: 0x%08x\n", myaddr); 
+		//rc = getMACaddr(myaddr, macbuf); 
+		//if ( rc == 0 ) { 
+		//	printf("mac addr: "); 
+		//	for ( i = 0;  i < 6; i++ ) { 
+		//		printf("%02x", macbuf[i]); 
+		//	} 
+		//	printf("\n"); 
+		//} 
+		//else { 
+		//	printf("getMACaddr failed!!\n"); 		
+		//}
+
+		metis_addr = doDiscovery(); 
+		if ( metis_addr != 0 ) { 
+			printf("metis_addr: 0x%08x\n", metis_addr); 
+			fflush(stdout);
+			MetisAddr = metis_addr; 
+
+			MetisSockAddr.sin_family = AF_INET;
+			MetisSockAddr.sin_port = htons(1024); 
+			MetisSockAddr.sin_addr.s_addr = metis_addr;
+			return 0; 
+		}
 	}
 
-
-	return 0; 
+	/* if we get here no metis was found */ 
+	return -4; 
 }
 
 
