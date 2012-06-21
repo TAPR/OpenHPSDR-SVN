@@ -12105,9 +12105,9 @@ namespace PowerSDR
             {
                 if (freq >= 0.0 && freq <= 2.75)
                     return Band.B160M;
-                else if (freq > 2.75 && freq < 5.3305)
+                else if (freq > 2.75 && freq < 5.0)
                     return Band.B80M;
-                else if (freq >= 5.3305 && freq < 7.0)
+                else if (freq >= 5.0 && freq < 7.0)
                     return Band.B60M;
                 else if (freq >= 7.0 && freq <= 8.7)
                     return Band.B40M;
@@ -16899,7 +16899,8 @@ namespace PowerSDR
             Filter filter = RX1Filter;						// save current filter
 
             DSPMode dsp_mode = rx1_dsp_mode;				// save current demod mode
-            RX1DSPMode = DSPMode.SAM;						// set DSP to AM
+           // RX1DSPMode = DSPMode.SAM;						// set DSP to AM
+            RX1DSPMode = DSPMode.DSB;						// set DSP to AM
 
             bool rit_on = chkRIT.Checked;					// save current RIT state
             chkRIT.Checked = false;							// set RIT to Off
@@ -16921,7 +16922,7 @@ namespace PowerSDR
             SetupForm.ClockOffset = 0;
             FWCDDSClockCorrection = 0;
 
-            Thread.Sleep(200);
+           Thread.Sleep(200);
             //int ret = 0;
 
             float[] buf = new float[Display.BUFFER_SIZE];
@@ -16970,13 +16971,28 @@ namespace PowerSDR
 
             //System.Console.WriteLine("diff is: " + diff);
 
-            if (ModelIsHPSDRorHermes())
-            {
+          //  if (ModelIsHPSDRorHermes())
+          //  {
                 double correct_factor = 1.0d - ((double)diff / (double)(freq * 1000000.0));
                 SetupForm.HPSDRFreqCorrectFactor = correct_factor;
-                goto end;
-            }
-
+             //   goto end;
+           // }
+           // Thread.Sleep(100);
+            FreqCalibrationRunning = false;
+            SetupForm.RXOnly = rx_only;				    	// restore RX Only setting
+            RX1Filter = am_filter;							// restore AM filter
+            RX1DSPMode = dsp_mode;							// restore DSP mode
+            RX1Filter = filter;								// restore filter
+            chkRIT.Checked = rit_on;						// restore RIT state
+            RITValue = rit_value;							// restore RIT value
+            VFOAFreq = float.Parse(vfo_freq_text);			// restore frequency
+            SetupForm.DSPPhoneRXBuffer = dsp_buf_size;		// restore DSP buffer size
+            SetupForm.Polyphase = polyphase;				// restore polyphase
+            calibration_running = false;
+            //FreqCalibrationRunning = false;
+            return retval;
+ 
+#if false
             // Calculate the DDS offset
             int offset = 0;
             switch (current_model)
@@ -17084,9 +17100,10 @@ namespace PowerSDR
 
             SetupForm.ClockOffset += offset;				// Offset the clock based on the difference
             retval = true;
-
+//#endif
         end:
-            //SetupForm.RXOnly = rx_only;					// restore RX Only setting
+            Thread.Sleep(500);
+            SetupForm.RXOnly = rx_only;				    	// restore RX Only setting
             RX1Filter = am_filter;							// restore AM filter
             RX1DSPMode = dsp_mode;							// restore DSP mode
             RX1Filter = filter;								// restore filter
@@ -17098,6 +17115,7 @@ namespace PowerSDR
             calibration_running = false;
             FreqCalibrationRunning = false;
             return retval;
+#endif
         }
 
         public bool CalibrateLevel(float level, float freq, Progress progress, bool suppress_errors)
@@ -42930,8 +42948,7 @@ namespace PowerSDR
         private void UpdateDSPBufRX1()
         {
             int size = 2048;
-            int rx1bufsize = radio.GetDSPRX(0, 0).BufferSize;
-            //Debug.WriteLine(" RX1Bufsize1:\n" + rx1bufsize);
+            
             switch (rx1_dsp_mode)
             {
                 case DSPMode.LSB:
@@ -42976,7 +42993,7 @@ namespace PowerSDR
                 RX1FilterSizeCalOffset = (float)offset;
                 radio.GetDSPRX(0, 0).BufferSize = size;
                 radio.GetDSPRX(0, 1).BufferSize = size;
-                // Debug.WriteLine(" RX1Bufsize2:\n" + size);
+                
                 if (!initializing)
                 {
                     RadioDSP.SyncStatic();
@@ -43010,8 +43027,7 @@ namespace PowerSDR
         private void UpdateDSPBufRX2()
         {
             int size = 2048;
-            int rx2buf1size = radio.GetDSPRX(1, 0).BufferSize;
-            //Debug.WriteLine(" RX2Bufsize1:\n" + rx2buf1size);
+           
             switch (rx2_dsp_mode)
             {
                 case DSPMode.LSB:
@@ -43043,8 +43059,8 @@ namespace PowerSDR
                 case 256: offset = 12; break;
             }
 
-            if (radio.GetDSPRX(1, 0).BufferSize != size ||
-                radio.GetDSPRX(1, 1).BufferSize != size)
+            if (radio.GetDSPRX(1, 0).BufferSize != size)// ||
+              //  radio.GetDSPRX(1, 1).BufferSize != size)
             {
                 bool poweron = PowerOn;
                 if (poweron)
@@ -43055,41 +43071,36 @@ namespace PowerSDR
 
                 RX2FilterSizeCalOffset = (float)offset;
                 radio.GetDSPRX(1, 0).BufferSize = size;
-                radio.GetDSPRX(1, 1).BufferSize = size;
-                // int rx2buf2size = radio.GetDSPRX(1, 0).BufferSize;
-                // Debug.WriteLine(" RX2Bufsize2:\n" + rx2buf2size);
-
-
+               // radio.GetDSPRX(1, 1).BufferSize = size;
+                
                 if (!initializing)
                 {
                     RadioDSP.SyncStatic();
 
-                    for (int i = 1; i < 2; i++)
-                    {
-                        for (int j = 0; j < 2; j++)
-                        {
-                            RadioDSPRX dsp_rx = radio.GetDSPRX(i, j);
+                   // for (int i = 1; i < 2; i++)
+                   // {
+                       // for (int j = 0; j < 2; j++)
+                       // {
+                            RadioDSPRX dsp_rx = radio.GetDSPRX(1, 0);
                             dsp_rx.Update = false;
                             dsp_rx.Force = true;
                             dsp_rx.Update = true;
                             dsp_rx.Force = false;
-                        }
-                    }
+                       // }
+                   // }
 
-                    for (int i = 0; i < 1; i++)
-                    {
-                        RadioDSPTX dsp_tx = radio.GetDSPTX(i);
+                   // for (int i = 0; i < 1; i++)
+                  //  {
+                        RadioDSPTX dsp_tx = radio.GetDSPTX(0);
                         dsp_tx.Update = false;
                         dsp_tx.Force = true;
                         dsp_tx.Update = true;
                         dsp_tx.Force = false;
-                    }
+                   // }
                 }
-
-                //if(poweron) PowerOn = true;
-                // int rx2buf3size = radio.GetDSPRX(1, 0).BufferSize;
-                // Debug.WriteLine(" RX2Bufsize3:\n" + rx2buf3size);
-
+              
+                if(poweron) PowerOn = true;
+                
             }
         }
 
