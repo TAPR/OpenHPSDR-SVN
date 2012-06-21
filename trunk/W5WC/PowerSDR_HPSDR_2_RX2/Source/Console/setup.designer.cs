@@ -16369,7 +16369,7 @@
             // 
             // comboDSPPhoneRXBuf
             // 
-            this.comboDSPPhoneRXBuf.DisplayMember = "2048";
+            this.comboDSPPhoneRXBuf.DisplayMember = "4096";
             this.comboDSPPhoneRXBuf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDSPPhoneRXBuf.DropDownWidth = 64;
             this.comboDSPPhoneRXBuf.Items.AddRange(new object[] {
