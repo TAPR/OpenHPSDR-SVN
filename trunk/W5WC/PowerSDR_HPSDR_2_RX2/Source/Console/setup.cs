@@ -4672,6 +4672,19 @@ namespace PowerSDR
             }
         }
 
+        private bool firmware_bypass = false;
+        public bool FirmwareBypass
+        {
+            get
+            {
+                return firmware_bypass;
+            }
+            set
+            {
+                firmware_bypass = value;
+            }
+        }
+
 
         #endregion
 
@@ -11490,7 +11503,7 @@ namespace PowerSDR
                 console.PennyPresent = false;
                 //console.PennyLanePresent = true;
                 chkGeneralRXOnly.Enabled = true;
-                chkGeneralRXOnly.Enabled = false;
+               // chkGeneralRXOnly.Enabled = false;
 
                 JanusAudio.EnableHermesPower(1);
             }
@@ -11579,11 +11592,11 @@ namespace PowerSDR
             if (!chkPennyPresent.Checked && !chkPennyLane.Checked)
             {
                 chkGeneralRXOnly.Checked = true;
-                chkGeneralRXOnly.Enabled = false;
+               // chkGeneralRXOnly.Enabled = false;
             }
             else
             {
-                chkGeneralRXOnly.Enabled = true;
+               // chkGeneralRXOnly.Enabled = true;
                 chkGeneralRXOnly.Checked = false;
             }
             return;
@@ -13948,6 +13961,11 @@ namespace PowerSDR
         private void chkRX2HangSpectrumLine_CheckedChanged(object sender, EventArgs e)
         {
             Display.RX2HangSpectrumLine = chkRX2HangSpectrumLine.Checked;
+        }
+
+        private void chkFirmwareByp_CheckedChanged(object sender, EventArgs e)
+        {
+            firmware_bypass = chkFirmwareByp.Checked;
         }
 
     }

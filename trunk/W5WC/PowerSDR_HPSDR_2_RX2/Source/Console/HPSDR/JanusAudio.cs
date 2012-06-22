@@ -359,7 +359,7 @@ namespace PowerSDR
                           break;
                        case 18: // K5SO Diversity & non-diversity
                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                               (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 72)))
+                               (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 33 && mercury_ver != 72)))
                            {
                                result = false;
                                c.SetupForm.alex_fw_good = false;
@@ -378,7 +378,9 @@ namespace PowerSDR
                        c.rx2_preamp_present = false;
                    else
                        c.rx2_preamp_present = true;
- 
+
+                   if (c.SetupForm.FirmwareBypass == true) result = true;
+
                    if (!result)
                    fwVersionMsg = "Invalid Firmware.\nYou have Metis: " + metis_ver[0].ToString("0\\.0") + 
                                                   "\nMercury:" + mercury_ver.ToString("0\\.0") +
@@ -491,10 +493,12 @@ namespace PowerSDR
                 else
                     c.rx2_preamp_present = true;
 
+                if (c.SetupForm.FirmwareBypass == true) result = true;
+
                 if (!result)
                     fwVersionMsg = "Invalid Firmware.\nYou have Ozy: " + ozy_ver.ToString("0\\.0") +
-                                                           "\nMercury:" + mercury_ver.ToString("0\\.0") +
-                                                             "\nPenny:" + penny_ver.ToString("0\\.0");
+                                                           "\nMercury: " + mercury_ver.ToString("0\\.0") +
+                                                             "\nPenny: " + penny_ver.ToString("0\\.0");
             }
             return result;
         }
