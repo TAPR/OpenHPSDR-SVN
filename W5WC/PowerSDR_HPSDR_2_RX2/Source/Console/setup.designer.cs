@@ -1875,6 +1875,7 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
+            this.chkFirmwareByp = new System.Windows.Forms.CheckBoxTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -11651,6 +11652,7 @@
             // 
             // grpVersion
             // 
+            this.grpVersion.Controls.Add(this.chkFirmwareByp);
             this.grpVersion.Controls.Add(this.lblMercury2FWVer);
             this.grpVersion.Controls.Add(this.lblPenelopeFWVer);
             this.grpVersion.Controls.Add(this.lblMercuryFWVer);
@@ -11658,7 +11660,7 @@
             this.grpVersion.Controls.Add(this.lblOzyFX2);
             this.grpVersion.Location = new System.Drawing.Point(288, 128);
             this.grpVersion.Name = "grpVersion";
-            this.grpVersion.Size = new System.Drawing.Size(289, 128);
+            this.grpVersion.Size = new System.Drawing.Size(289, 145);
             this.grpVersion.TabIndex = 4;
             this.grpVersion.TabStop = false;
             this.grpVersion.Text = "Firmware Versions";
@@ -28157,6 +28159,18 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
+            // chkFirmwareByp
+            // 
+            this.chkFirmwareByp.AutoSize = true;
+            this.chkFirmwareByp.Image = null;
+            this.chkFirmwareByp.Location = new System.Drawing.Point(11, 122);
+            this.chkFirmwareByp.Name = "chkFirmwareByp";
+            this.chkFirmwareByp.Size = new System.Drawing.Size(139, 17);
+            this.chkFirmwareByp.TabIndex = 5;
+            this.chkFirmwareByp.Text = "Bypass Firmware Check";
+            this.chkFirmwareByp.UseVisualStyleBackColor = true;
+            this.chkFirmwareByp.CheckedChanged += new System.EventHandler(this.chkFirmwareByp_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -28277,6 +28291,7 @@
             this.grpPennyExtCtrl.ResumeLayout(false);
             this.tpHPSDR.ResumeLayout(false);
             this.grpVersion.ResumeLayout(false);
+            this.grpVersion.PerformLayout();
             this.groupBoxRXOptions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udMaxFreq)).EndInit();
             this.groupBoxMicSource.ResumeLayout(false);
@@ -28693,5 +28708,6 @@
         public System.Windows.Forms.CheckBoxTS chkVAC2Enable;
         private System.Windows.Forms.NumericUpDownTS udTXFilterLowSave;
         private System.Windows.Forms.NumericUpDownTS udTXFilterHighSave;
+        private System.Windows.Forms.CheckBoxTS chkFirmwareByp;
     }
 }
