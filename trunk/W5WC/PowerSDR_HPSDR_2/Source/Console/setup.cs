@@ -1864,6 +1864,7 @@ namespace PowerSDR
         private CheckBoxTS chkAGCHangSpectrumLine;
         private NumericUpDownTS udTXFilterLowSave;
         private NumericUpDownTS udTXFilterHighSave;
+        private CheckBoxTS chkFirmwareByp;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -2808,6 +2809,7 @@ namespace PowerSDR
             this.labelTS39 = new System.Windows.Forms.LabelTS();
             this.tpHPSDR = new System.Windows.Forms.TabPage();
             this.grpVersion = new System.Windows.Forms.GroupBoxTS();
+            this.chkFirmwareByp = new System.Windows.Forms.CheckBoxTS();
             this.lblPenelopeFWVer = new System.Windows.Forms.LabelTS();
             this.lblMercuryFWVer = new System.Windows.Forms.LabelTS();
             this.lblOzyFWVer = new System.Windows.Forms.LabelTS();
@@ -13527,16 +13529,29 @@ namespace PowerSDR
             // 
             // grpVersion
             // 
+            this.grpVersion.Controls.Add(this.chkFirmwareByp);
             this.grpVersion.Controls.Add(this.lblPenelopeFWVer);
             this.grpVersion.Controls.Add(this.lblMercuryFWVer);
             this.grpVersion.Controls.Add(this.lblOzyFWVer);
             this.grpVersion.Controls.Add(this.lblOzyFX2);
             this.grpVersion.Location = new System.Drawing.Point(288, 128);
             this.grpVersion.Name = "grpVersion";
-            this.grpVersion.Size = new System.Drawing.Size(156, 128);
+            this.grpVersion.Size = new System.Drawing.Size(156, 151);
             this.grpVersion.TabIndex = 4;
             this.grpVersion.TabStop = false;
             this.grpVersion.Text = "Firmware Versions";
+            // 
+            // chkFirmwareByp
+            // 
+            this.chkFirmwareByp.AutoSize = true;
+            this.chkFirmwareByp.Image = null;
+            this.chkFirmwareByp.Location = new System.Drawing.Point(8, 128);
+            this.chkFirmwareByp.Name = "chkFirmwareByp";
+            this.chkFirmwareByp.Size = new System.Drawing.Size(139, 17);
+            this.chkFirmwareByp.TabIndex = 4;
+            this.chkFirmwareByp.Text = "Bypass Firmware Check";
+            this.chkFirmwareByp.UseVisualStyleBackColor = true;
+            this.chkFirmwareByp.CheckedChanged += new System.EventHandler(this.chkFirmwareByp_CheckedChanged);
             // 
             // lblPenelopeFWVer
             // 
@@ -29412,6 +29427,7 @@ namespace PowerSDR
             this.grpPennyExtCtrl.ResumeLayout(false);
             this.tpHPSDR.ResumeLayout(false);
             this.grpVersion.ResumeLayout(false);
+            this.grpVersion.PerformLayout();
             this.groupBoxRXOptions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udMaxFreq)).EndInit();
             this.groupBoxMicSource.ResumeLayout(false);
@@ -32002,6 +32018,19 @@ namespace PowerSDR
             set
             {
                 txtDisplayOffset.Text = value.ToString();
+            }
+        }
+
+        private bool firmware_bypass = false;
+        public bool FirmwareBypass
+        {
+            get
+            {
+                return firmware_bypass;
+            }
+            set
+            {
+                firmware_bypass = value;
             }
         }
 
@@ -38505,7 +38534,7 @@ namespace PowerSDR
                 console.PennyPresent = false;
                 //console.PennyLanePresent = true;
                 chkGeneralRXOnly.Enabled = true;
-                chkGeneralRXOnly.Enabled = false;
+               // chkGeneralRXOnly.Enabled = false;
                 
                 JanusAudio.EnableHermesPower(1);
             }
@@ -38594,7 +38623,7 @@ namespace PowerSDR
             if (!chkPennyPresent.Checked && !chkPennyLane.Checked)
             {
                  chkGeneralRXOnly.Checked = true;
-                 chkGeneralRXOnly.Enabled = false;
+                // chkGeneralRXOnly.Enabled = false;
             }
             else
             {
@@ -40958,6 +40987,12 @@ namespace PowerSDR
         private void chkAGCHangSpectrumLine_CheckedChanged(object sender, EventArgs e)
         {
             Display.DisplayAGCHangSpectrumLine = chkAGCHangSpectrumLine.Checked;
+        }
+
+        private void chkFirmwareByp_CheckedChanged(object sender, EventArgs e)
+        {
+          //  if (chkFirmwareByp.Checked) firmware_bypass = true;
+            firmware_bypass = chkFirmwareByp.Checked;
         }
       }
 

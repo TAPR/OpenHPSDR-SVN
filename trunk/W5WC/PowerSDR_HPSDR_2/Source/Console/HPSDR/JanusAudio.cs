@@ -398,6 +398,8 @@ namespace PowerSDR
                             break;
                     }
 
+                    if (c.SetupForm.FirmwareBypass == true) result = true;
+
                     if (!result)
                         fwVersionMsg = "Invalid Firmware.\nYou have Metis: " + metis_ver[0].ToString("0\\.0") +
                                                                "\nMercury:" + mercury_ver.ToString("0\\.0") +
@@ -502,6 +504,8 @@ namespace PowerSDR
                         c.PowerOn = false;
                         break;
                 }
+
+                if (c.SetupForm.FirmwareBypass == true) result = true;
 
                 if (!result)
                     fwVersionMsg = "Invalid Firmware.\nYou have Ozy: " + ozy_ver.ToString("0\\.0") +
