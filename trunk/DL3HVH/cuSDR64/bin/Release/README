@@ -1,0 +1,185 @@
+SDR front end for HPSDR
+
+http://openhpsdr.org/index.php
+
+
+***********************************************************************
+OS, needed software and recommended hardware:
+
+
+- Windows Win7, Windows XP, 32 or 64 Bit.
+
+- You probaly need the Microsoft Visual C++ 2010 Redistributable Package (x64):
+  http://www.microsoft.com/downloads/de-de/details.aspx?familyid=bd512d9e-43c8-4655-81bf-9350143d5867
+
+- OpenGL capable graphic processor; must be at least OpenGL version 2.0.
+  It has been tested on Nvidia and Ati (now AMD) chips. Also, Intel
+  onboard graphic chips have been tested.
+
+- At least a DualCore processor, better: QuadCore. Reference: on my
+  Intel i7 2600K with Nvidia GTX560Ti graphic card the CPU utilization
+  is 12 to 14% on average, and 5% GPU usage with four receivers running.
+ 
+- If you see a lot of "missed packages" in the console window, try to
+  connect Metis directly to your PC, or lower the sample rate. GigaBit
+  network recommended.
+
+***********************************************************************
+Current limitations:
+
+- This version is still Beta !
+
+- Only Rx by now.
+
+- Chirp-Decoder/QtDSP modes have been disabled currently.
+
+- "External" DSP mode, i.e. server functionality, is disabled currently
+  (although implemented).
+
+- This version does not yet contain OpenCL kernels. Thus, you don't have
+  to install any OpenCL SDKs (Intel, Nvidia,..) yet.
+
+- not all functionality of the DttSP package is used currently.
+
+***********************************************************************
+list of changes:
+
+v0.2.1:
+
+- The DOS command window is replaced now by a log file. This file 
+  ("cuSDR.log") is normally placed in the directory where cuSDR is 
+  started. If you have problems with the application, I would be glad
+  if you could send me this log file.
+  
+  
+v0.2.0:
+
+- many small changes/improvements/bug fixes
+- corrected a device discovery problem when more than one device is
+  in the local network (Metis/Hermes)
+- Panadapter display (Filter, Frequency etc.)
+- finally a slider for the AGC gain (DttSP and QtDSP)
+- first instance of the QtDSP package, the Qt-adaptation of the 
+  SharpDSP package. Note: QtDSP package is not yet completed; e.g.
+  the S-Meter is not yet working.
+- first implementation of Warren Pratt's, NR0V, ingenious AGC function.
+- Hermes (RX) support
+- Alexiares support prepared
+- First steps for the Tx path added; "Transmit" Tab added; "Ext Ctrl" Tab 
+  added; "PA" Tab added; "Alex" Tab added
+
+v0.1.10:
+
+- added averaging for wide band panadapter
+- fixed problem that Mercury/Metis are not correctly initialized after
+  the first "Start" if more than one receiver is selected.
+- fixed wrong debug message in DOS-console after hitting "Start"
+  command ("send Start command to Metis at ...")
+- fixed receiver display layout when switching from view1 to view2
+  
+v0.1.09:
+
+- fixed problem when clicking the Windows close button and app is running
+- fixed missing GUI link / filter and filter group changes
+- fixed crashes when changing sample rate during receiving: inserted an
+  additional mutex in method dspProcessing()
+- changed method initMetis() to connect to Metis/Hermes: it is now based on
+  a time out
+- fixed some graphical problems when showing hair cross
+- hair cross is switched off now when you switch receiver
+
+V0.1.08
+
+Changes:
+- minor changes on the GUI; new S-Meter
+
+
+***********************************************************************
+Since there is no manual yet, here are the most important things to know,
+but the GUI should mostly be self-explaining.
+
+The application is controlled by a number of widgets which opens by hitting
+the corresponding buttons, some of which are currently disabled. Just try
+before hitting "Start" to find out where to control all the parameters.
+Note, some of Buttons are disabled if the application is running (i.e
+receiving), that is, they can only be altered after hitting "Stop".
+
+If you are connecting Metis directly to the PC, chose the correct network
+adapter with an APIPA address (see Metis manual) in the HPSDR widget.
+Otherwise, if you are on a local LAN with DHCP server, the application will
+check for the active network adapter. Remember, if your PC has already an
+IP address, e.g. from your router, and you disconnect the PC from the network
+in order to connect Metis to your PC, you have to deactivate and re-activate
+your network adapter (or simply restart you PC). This is NOT necessary if
+your PC has two network adapters, of course.
+
+If you want to enable more than one receiver, please go to the "HPSDR" widget
+(-> HPSDR Button) when the application is stopped. Then choose in the right
+bottom the number of receivers. The corresponding number of receiver panels
+should show up. Then press "Start" and feel lucky. On the main button panel,
+right, you choose the receiver to control and listen to.
+
+Every receiver panel can be controlled by itself. The scales are zoom-able
+(right mouse button). The dBm scale can be moved by the left mouse button.
+Mouse wheel for controlling frequency if you are in the panadapter. You can
+also drag in the panadapter holding down the left mouse button to change
+frequency.
+
+If you move your mouse over the big frequency display, you can alter the
+digits by the mouse wheel directly. Clicking on the digits alter the mouse
+wheel's step size. The receiver panels are sizable. You can shut off the
+waterfall display by dragging the frequency scales to the bottom of each
+panel. Note, if you close a waterfall display by dragging the frequency scale
+to the bottom, there is nearly no change of CPU utilization due to the use of
+framebuffer objects of OpenGL.
+
+On the Display widget you have some control over FPS and colors. Higher FPS
+means, more data per time unit are sent to the receiver panels, and more CPU
+resources are needed. Waterfall update is bound from below by 20 ms. The
+ESCAPE key switches between full screen view and normal view.
+
+A lot of parameters are stored in a file settings.ini. You can copy/rename/edit
+this file, but always a file named settings.ini will be used. If you enter wrong
+values, the application will take default values. If you loose settings.ini, the
+application will create one for you.
+
+Have fun!
+
+***********************************************************************
+Acknowledgements:
+
+The writing of this software would not have been possible without
+previous work on famous software packages like:
+
+- Catherine Moss' SDRMAX3 for QSR1: notably the best SDR-GUI written
+  ever, at least in my eyes. I took her design idea for the zoom-able
+  scales - with personal permission. It's a wonderful smooth,
+  intelligent and working GUI concept!
+
+- the SharpDSP package of Phil Covington (N8VB), which is used in KISS
+  Konsole, and which has been the starting point for my CudaSharpDSP
+  package.
+
+- the wonderful KISS Konsole experimental software and all who have
+  contributed to it, and where I started to learn about SDR programming,
+  with lots of explanations. Special thanks to George, K9TRV and Phil,
+  VK6APH, with whom I had some longer discussions about KISS code and
+  techniques in the beginnings.
+
+- the DttSP package, which I use currently for DSP processing.
+
+- the MultiRx multiplexer function from gHPSDR3 by John Melton,
+  G0ORX/N6LYT. Great stuff.
+
+- People, who worked on PowerSDR; the Waterfall color scale from is taken
+  from PowerSDR :-P
+
+- to all Qt/OpenGL/OpenCL developers and their big number of example
+  code and snippets!
+
+Big thanks to the makers/contributors/organizers of the HPSDR hardware!
+
+
+Hermann, DL3HVH
+
+The author can be reached at hvh.net@gmail.com
