@@ -270,6 +270,12 @@ void QGLWidebandPanel::setupConnections() {
 		this,
 		SLOT(setPanGridStatus(bool)));
 
+	CHECKED_CONNECT(
+		m_settings, 
+		SIGNAL(preampChanged(QObject *, int)), 
+		this, 
+		SLOT(setPreamp(QObject *, int)));
+
 	//CHECKED_CONNECT(
 	//	m_settings, 
 	//	SIGNAL(spectrumAveragingCntChanged(int)), 
@@ -469,9 +475,18 @@ void QGLWidebandPanel::drawSpectrum() {
 				vertexColorArrayBg[2*i+1].y = 0.3 * m_gf;
 				vertexColorArrayBg[2*i+1].z = 0.3 * m_bf;
 
-				vertexColorArray[i].x = m_r * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
-				vertexColorArray[i].y = m_g * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
-				vertexColorArray[i].z = m_b * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
+				if (m_Preamp) {
+
+					vertexColorArray[i].x = m_r * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - 20.0f));
+					vertexColorArray[i].y = m_g * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - 20.0f));
+					vertexColorArray[i].z = m_b * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - 20.0f));
+				}
+				else {
+
+					vertexColorArray[i].x = m_r * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
+					vertexColorArray[i].y = m_g * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
+					vertexColorArray[i].z = m_b * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
+				}
 
 				vertexArrayBg[2*i].x = (GLfloat)(i/scaleMult);
 				vertexArrayBg[2*i].y = (GLfloat)(yTop - yScale * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - m_dBmPanLogGain));
@@ -526,9 +541,19 @@ void QGLWidebandPanel::drawSpectrum() {
 				idx += deltaIdx;
 	
 				mutex.lock();
-				vertexColorArray[i].x = m_r	* (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
-				vertexColorArray[i].y = m_g * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
-				vertexColorArray[i].z = m_b * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
+
+				if (m_Preamp) {
+
+					vertexColorArray[i].x = m_r	* (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - 20.0f));
+					vertexColorArray[i].y = m_g * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - 20.0f));
+					vertexColorArray[i].z = m_b * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - 20.0f));
+				}
+				else {
+
+					vertexColorArray[i].x = m_r	* (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
+					vertexColorArray[i].y = m_g * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
+					vertexColorArray[i].z = m_b * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
+				}
 				mutex.unlock();
 				
 				vertexArray[i].x = (GLfloat)(i/scaleMult);
@@ -586,7 +611,11 @@ void QGLWidebandPanel::drawSpectrum() {
 				mutex.unlock();
 
 				vertexArrayBg[2*i].x = (GLfloat)(i/scaleMult);
-				vertexArrayBg[2*i].y = (GLfloat)(yTop - yScale * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - m_dBmPanLogGain));
+				if (m_Preamp)
+					vertexArrayBg[2*i].y = (GLfloat)(yTop - yScale * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - m_dBmPanLogGain - 20.0f));
+				else
+					vertexArrayBg[2*i].y = (GLfloat)(yTop - yScale * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - m_dBmPanLogGain));
+
 				vertexArrayBg[2*i].z = -2.0f;
 
 				vertexArrayBg[2*i+1].x = (GLfloat)(i/scaleMult);
@@ -1817,6 +1846,14 @@ void QGLWidebandPanel::setSpectrumAveragingCnt(int value) {
 			m_scale = 1.0f;
 
 	mutex.unlock();
+}
+
+void QGLWidebandPanel::setPreamp(QObject* sender, int value) {
+
+	Q_UNUSED(sender)
+	
+	m_Preamp = value;
+	update();
 }
 
 void QGLWidebandPanel::setPanadapterColors() {

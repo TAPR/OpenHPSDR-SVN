@@ -1850,7 +1850,11 @@ void OGLDisplayPanel::setSMeterValue(int rx, float value) {
 
 			if (m_sMeterDisplayTime.elapsed() > 200) {
 				
-				m_sMeterOrgValue = value - 37.7f;
+				if (m_preamp)
+					m_sMeterOrgValue = value - 37.7f;
+				else
+					m_sMeterOrgValue = value - 17.7f;
+
 				m_sMeterDisplayTime.restart();
 			}
 			//m_sMeterOrgValue = value - 37.7f;

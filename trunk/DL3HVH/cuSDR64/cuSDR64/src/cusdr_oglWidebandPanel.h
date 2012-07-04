@@ -177,6 +177,7 @@ private:
 	int			m_smallFontHeight;
 	int			m_cnt;
 	int			m_specAveragingCnt;
+	int			m_Preamp;
 	
 	float		m_cameraDistance;
 
@@ -246,6 +247,7 @@ private slots:
 	void	setSpectrumAveragingCnt(int value);
 	void	setPanadapterColors();
 	void	setPanGridStatus(bool value);
+	void	setPreamp(QObject* sender, int value);
 
 	void	getRegion(QPoint p);
 	void	sampleRateChanged(QObject* sender, int value);
