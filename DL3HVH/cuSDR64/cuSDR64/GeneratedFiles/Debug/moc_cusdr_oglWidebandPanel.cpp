@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_oglWidebandPanel.h'
 **
-** Created: Wed 4. Jul 21:06:07 2012
+** Created: Wed 4. Jul 21:51:37 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_QGLWidebandPanel[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      24,   14, // methods
+      25,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -49,14 +49,15 @@ static const uint qt_meta_data_QGLWidebandPanel[] = {
      606,  446,   17,   17, 0x08,
      635,   17,   17,   17, 0x08,
      657,  446,   17,   17, 0x08,
-     682,  680,   17,   17, 0x08,
-     713,  700,   17,   17, 0x08,
-     745,  446,   17,   17, 0x08,
-     767,  446,   17,   17, 0x08,
-     788,  446,   17,   17, 0x08,
-     809,  446,   17,   17, 0x08,
-     829,  446,   17,   17, 0x08,
-     849,  446,   17,   17, 0x08,
+     693,  680,   17,   17, 0x08,
+     719,  717,   17,   17, 0x08,
+     737,  680,   17,   17, 0x08,
+     769,  446,   17,   17, 0x08,
+     791,  446,   17,   17, 0x08,
+     812,  446,   17,   17, 0x08,
+     833,  446,   17,   17, 0x08,
+     853,  446,   17,   17, 0x08,
+     873,  446,   17,   17, 0x08,
 
        0        // eod
 };
@@ -79,8 +80,8 @@ static const char qt_meta_stringdata_QGLWidebandPanel[] = {
     "setWidebandSpectrumBuffer(const float*)\0"
     "setSpectrumAveragingCnt(int)\0"
     "setPanadapterColors()\0setPanGridStatus(bool)\0"
-    "p\0getRegion(QPoint)\0sender,value\0"
-    "sampleRateChanged(QObject*,int)\0"
+    "sender,value\0setPreamp(QObject*,int)\0"
+    "p\0getRegion(QPoint)\0sampleRateChanged(QObject*,int)\0"
     "freqScaleUpdate(bool)\0freqScaleRenew(bool)\0"
     "dBmScaleUpdate(bool)\0dBmScaleRenew(bool)\0"
     "panGridUpdate(bool)\0panGridRenew(bool)\0"
@@ -109,14 +110,15 @@ void QGLWidebandPanel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 13: _t->setSpectrumAveragingCnt((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 14: _t->setPanadapterColors(); break;
         case 15: _t->setPanGridStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 16: _t->getRegion((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
-        case 17: _t->sampleRateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 18: _t->freqScaleUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 19: _t->freqScaleRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 20: _t->dBmScaleUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 21: _t->dBmScaleRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 22: _t->panGridUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 23: _t->panGridRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 16: _t->setPreamp((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 17: _t->getRegion((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
+        case 18: _t->sampleRateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 19: _t->freqScaleUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 20: _t->freqScaleRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 21: _t->dBmScaleUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 22: _t->dBmScaleRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 23: _t->panGridUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 24: _t->panGridRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -154,9 +156,9 @@ int QGLWidebandPanel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 25)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 25;
     }
     return _id;
 }
