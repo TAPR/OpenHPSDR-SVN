@@ -2093,26 +2093,38 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 		io.ccRx.dot    = (bool)((io.control_in[0] & 0x04) == 0x04);
 		io.ccRx.lt2208 = (bool)((io.control_in[1] & 0x01) == 0x01);
 
-		if (io.ccRx.lt2208) { // toggle ADC signal
+		//if (io.ccRx.lt2208) { // toggle ADC signal
 
-			if (adcToggle) {
-					settings->setADCOverflow(2);
-					adcToggle = false;
-			}
-		}
-		else {
-			
-			if (!adcToggle) {
-				settings->setADCOverflow(1);
-				adcToggle = true;
-			}
-		}
+		//	if (adcToggle) {
+		//			settings->setADCOverflow(2);
+		//			adcToggle = false;
+		//	}
+		//}
+		//else {
+		//	
+		//	if (!adcToggle) {
+		//		settings->setADCOverflow(1);
+		//		adcToggle = true;
+		//	}
+		//}
 
 		io.ccRx.roundRobin = (uchar)(io.control_in[0] >> 3);
         switch (io.ccRx.roundRobin) { // cycle through C0
 
 			case 0:
 
+				if (io.ccRx.lt2208) { // toggle ADC signal
+					if (adcToggle) {
+						settings->setADCOverflow(2);
+						adcToggle = false;
+					}
+				}
+				else {
+					if (!adcToggle) {
+						settings->setADCOverflow(1);
+						adcToggle = true;
+					}
+				}
 				//qDebug() << "CC: " << io.ccRx.roundRobin;
 				if (m_hwInterface == QSDR::Hermes) {
 
@@ -2220,41 +2232,41 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 				//qDebug() << "ain4Volts: " << io.ain4Volts << "supplyVolts" << io.supplyVolts;
 				break;
 
-			case 4:
+			//case 4:
 
 				// more than 1 Mercury module (currently not usable)
 				//qDebug() << "CC: " << io.ccRx.roundRobin;
-				switch (io.receivers) {
+				//switch (io.receivers) {
 
-					case 1:
-						io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
-						//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208;
-						break;
+				//	case 1:
+				//		io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
+				//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208;
+				//		break;
 
-					case 2:
-						io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
-						io.ccRx.mercury2_LT2208 = (bool)((io.control_in[2] & 0x02) == 0x02);
-						//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
-						break;
+				//	case 2:
+				//		io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
+				//		io.ccRx.mercury2_LT2208 = (bool)((io.control_in[2] & 0x02) == 0x02);
+				//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
+				//		break;
 
-					case 3:
-						io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
-						io.ccRx.mercury2_LT2208 = (bool)((io.control_in[2] & 0x02) == 0x02);
-						io.ccRx.mercury3_LT2208 = (bool)((io.control_in[3] & 0x02) == 0x02);
-						//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
-						//qDebug() << "mercury3_LT2208: " << io.ccRx.mercury3_LT2208;
-						break;
+				//	case 3:
+				//		io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
+				//		io.ccRx.mercury2_LT2208 = (bool)((io.control_in[2] & 0x02) == 0x02);
+				//		io.ccRx.mercury3_LT2208 = (bool)((io.control_in[3] & 0x02) == 0x02);
+				//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
+				//		//qDebug() << "mercury3_LT2208: " << io.ccRx.mercury3_LT2208;
+				//		break;
 
-					case 4:
-						io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
-						io.ccRx.mercury2_LT2208 = (bool)((io.control_in[2] & 0x02) == 0x02);
-						io.ccRx.mercury3_LT2208 = (bool)((io.control_in[3] & 0x02) == 0x02);
-						io.ccRx.mercury4_LT2208 = (bool)((io.control_in[4] & 0x02) == 0x02);
-						//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
-						//qDebug() << "mercury3_LT2208: " << io.ccRx.mercury3_LT2208 << "mercury4_LT2208" << io.ccRx.mercury4_LT2208;
-						break;
-				}
-				break;
+				//	case 4:
+				//		io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
+				//		io.ccRx.mercury2_LT2208 = (bool)((io.control_in[2] & 0x02) == 0x02);
+				//		io.ccRx.mercury3_LT2208 = (bool)((io.control_in[3] & 0x02) == 0x02);
+				//		io.ccRx.mercury4_LT2208 = (bool)((io.control_in[4] & 0x02) == 0x02);
+				//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
+				//		//qDebug() << "mercury3_LT2208: " << io.ccRx.mercury3_LT2208 << "mercury4_LT2208" << io.ccRx.mercury4_LT2208;
+				//		break;
+				//}
+				//break;
 		}
 
         switch (io.receivers) {
