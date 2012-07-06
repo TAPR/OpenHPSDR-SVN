@@ -51,6 +51,7 @@ HPSDRWidget::HPSDRWidget(QWidget *parent)
 	, m_hpsdrHardware(m_settings->getHPSDRHardware())
 	, m_dataEngineState(QSDR::DataEngineDown)
 	, m_numberOfReceivers(1)
+	//, m_socketBufferSize(16)
 {
 	setMinimumWidth(m_minimumWidgetWidth);
 	setContentsMargins(4, 8, 4, 0);
@@ -81,8 +82,11 @@ HPSDRWidget::HPSDRWidget(QWidget *parent)
 
 	createDeviceNetworkInterfaceGroup();
 	createDeviceSearchGroup();
+	createsocketBufferSizeGroup();
 	createSource10MhzExclusiveGroup();
 	createSource122_88MhzExclusiveGroup();
+
+	setSocketBufSize(this, m_settings->getSocketBufferSize());
 
 	QBoxLayout *mainLayout = new QBoxLayout(QBoxLayout::TopToBottom, this);
 	mainLayout->setSpacing(5);
@@ -118,17 +122,22 @@ HPSDRWidget::HPSDRWidget(QWidget *parent)
 	QHBoxLayout *hbox5 = new QHBoxLayout();
 	hbox5->setSpacing(0);
 	hbox5->setContentsMargins(4, 0, 4, 0);
-	hbox5->addWidget(source10MhzExclusiveGroup);
+	hbox5->addWidget(socketBufferSizeGroupBox);
 
 	QHBoxLayout *hbox6 = new QHBoxLayout();
 	hbox6->setSpacing(0);
 	hbox6->setContentsMargins(4, 0, 4, 0);
-	hbox6->addWidget(source122_88MhzExclusiveGroup);
+	hbox6->addWidget(source10MhzExclusiveGroup);
 
 	QHBoxLayout *hbox7 = new QHBoxLayout();
 	hbox7->setSpacing(0);
 	hbox7->setContentsMargins(4, 0, 4, 0);
-	hbox7->addWidget(numberOfReceiversGroup());
+	hbox7->addWidget(source122_88MhzExclusiveGroup);
+
+	QHBoxLayout *hbox8 = new QHBoxLayout();
+	hbox8->setSpacing(0);
+	hbox8->setContentsMargins(4, 0, 4, 0);
+	hbox8->addWidget(numberOfReceiversGroup());
 
 	mainLayout->addLayout(hbox1);
 	mainLayout->addLayout(hbox2);
@@ -137,6 +146,7 @@ HPSDRWidget::HPSDRWidget(QWidget *parent)
 	mainLayout->addLayout(hbox5);
 	mainLayout->addLayout(hbox6);
 	mainLayout->addLayout(hbox7);
+	mainLayout->addLayout(hbox8);
 	mainLayout->addStretch();
 	setLayout(mainLayout);
 
@@ -175,6 +185,12 @@ void HPSDRWidget::setupConnections() {
 		SIGNAL(metisChanged(TNetworkDevicecard)), 
 		this, 
 		SLOT(setCurrentNetworkDevice(TNetworkDevicecard)));
+
+	CHECKED_CONNECT(
+		m_settings, 
+		SIGNAL(socketBufferSizeChanged(QObject*, int)), 
+		this, 
+		SLOT(setSocketBufSize(QObject*, int)));
 
 	/*CHECKED_CONNECT(
 		m_settings, 
@@ -687,6 +703,57 @@ void HPSDRWidget::createDeviceSearchGroup() {
 	searchNetworkDeviceGroupBox->setFont(QFont("Arial", 8));
 }
 
+void HPSDRWidget::createsocketBufferSizeGroup() {
+
+	socketBufSizeBtn = new AeroButton("Enable", this);
+	socketBufSizeBtn->setRoundness(10);
+	socketBufSizeBtn->setFixedSize(btn_width2, btn_height);
+	socketBufSizeBtn->setBtnState(AeroButton::OFF);
+	
+	CHECKED_CONNECT(
+		socketBufSizeBtn, 
+		SIGNAL(clicked()), 
+		this, 
+		SLOT(socketBufSizeBtnClicked()));
+
+	socketBufferSizes = new QComboBox();
+
+	socketBufferSizes->setStyleSheet(m_settings->getComboBoxStyle());
+	socketBufferSizes->addItem("16 kB");
+	socketBufferSizes->addItem("32 kB");
+	socketBufferSizes->addItem("64 kB");
+	socketBufferSizes->addItem("128 kB");
+	socketBufferSizes->addItem("256 kB");
+	socketBufferSizes->setEnabled(false);
+
+	CHECKED_CONNECT(
+		socketBufferSizes, 
+		SIGNAL(currentIndexChanged(int)), 
+		this, 
+		SLOT(setSocketBufferSize(int)));
+	 
+
+	QHBoxLayout *hbox1 = new QHBoxLayout();
+	hbox1->setSpacing(1);
+	//hbox1->addStretch();
+	hbox1->addWidget(socketBufSizeBtn);
+	hbox1->addSpacing(3);
+	hbox1->addStretch();
+	hbox1->addWidget(socketBufferSizes);
+
+	QVBoxLayout *vbox = new QVBoxLayout();
+	vbox->setSpacing(3);
+	vbox->addSpacing(5);
+	vbox->addLayout(hbox1);
+	vbox->addSpacing(5);
+
+	socketBufferSizeGroupBox = new QGroupBox(tr("Socket Buffer Size"), this);
+	socketBufferSizeGroupBox->setMinimumWidth(m_minimumGroupBoxWidth);
+	socketBufferSizeGroupBox->setLayout(vbox);
+	socketBufferSizeGroupBox->setStyleSheet(m_settings->getWidgetStyle());
+	socketBufferSizeGroupBox->setFont(QFont("Arial", 8));
+}
+
 
 // ************************************************************************
 
@@ -966,6 +1033,27 @@ void HPSDRWidget::interfaceBtnClicked() {
 void HPSDRWidget::searchHPSDRDeviceBtnClicked() {
 
 	m_settings->searchHpsdrNetworkDevices();
+}
+
+void HPSDRWidget::socketBufSizeBtnClicked() {
+
+	if (socketBufSizeBtn->btnState() == AeroButton::OFF) {
+
+		socketBufferSizes->setEnabled(true);
+		setSocketBufSize(this, m_settings->getSocketBufferSize());
+		m_settings->setManualSocketBufferSize(this, true);
+		socketBufSizeBtn->setText("Disable");
+		socketBufSizeBtn->setBtnState(AeroButton::ON);
+	}
+	else {
+
+		socketBufferSizes->setEnabled(false);
+		m_settings->setManualSocketBufferSize(this, false);
+		socketBufSizeBtn->setText("Enable");
+		socketBufSizeBtn->setBtnState(AeroButton::OFF);
+	}
+
+	socketBufSizeBtn->update();
 }
 
 void HPSDRWidget::hpsdrHardwareChanged() {
@@ -1553,6 +1641,64 @@ void HPSDRWidget::setCurrentNetworkDevice(TNetworkDevicecard card) {
 		if (dev.ip_address == card.ip_address) networkDeviceIPAdresses->setCurrentIndex(i);
 		i++;
 	}	
+}
+
+void HPSDRWidget::setSocketBufSize(QObject *sender, int size) {
+
+	//Q_UNUSED (sender)
+	if (sender == this) return;
+
+	m_socketBufferSize = size;
+
+	switch (m_socketBufferSize) {
+
+		case 16:
+			socketBufferSizes->setCurrentIndex(0);
+			break;
+
+		case 32:
+			socketBufferSizes->setCurrentIndex(1);
+			break;
+
+		case 64:
+			socketBufferSizes->setCurrentIndex(2);
+			break;
+
+		case 128:
+			socketBufferSizes->setCurrentIndex(3);
+			break;
+
+		case 256:
+			socketBufferSizes->setCurrentIndex(4);
+			break;
+	}
+	
+}
+
+void HPSDRWidget::setSocketBufferSize(int value) {
+
+	switch (value) {
+
+		case 0:
+			m_settings->setSocketBufferSize(this, 16);
+			break;
+
+		case 1:
+			m_settings->setSocketBufferSize(this, 32);
+			break;
+
+		case 2:
+			m_settings->setSocketBufferSize(this, 64);
+			break;
+
+		case 3:
+			m_settings->setSocketBufferSize(this, 128);
+			break;
+
+		case 4:
+			m_settings->setSocketBufferSize(this, 256);
+			break;
+	}
 }
 
 // **********************

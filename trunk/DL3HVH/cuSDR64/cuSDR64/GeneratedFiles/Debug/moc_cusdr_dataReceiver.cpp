@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_dataReceiver.h'
 **
-** Created: Wed 4. Jul 21:06:10 2012
+** Created: Fri 6. Jul 11:11:53 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_DataReceiver[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -38,7 +38,8 @@ static const uint qt_meta_data_DataReceiver[] = {
       51,   13,   13,   13, 0x0a,
       76,   13,   13,   13, 0x0a,
       93,   87,   13,   13, 0x08,
-     154,   13,   13,   13, 0x08,
+     167,  154,   13,   13, 0x08,
+     208,   13,   13,   13, 0x08,
 
        0        // eod
 };
@@ -48,6 +49,7 @@ static const char qt_meta_stringdata_DataReceiver[] = {
     "stop()\0initDataReceiverSocket()\0"
     "readData()\0error\0"
     "displayDataReceiverSocketError(QAbstractSocket::SocketError)\0"
+    "sender,value\0setManualSocketBufferSize(QObject*,bool)\0"
     "readMetisData()\0"
 };
 
@@ -62,7 +64,8 @@ void DataReceiver::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 2: _t->initDataReceiverSocket(); break;
         case 3: _t->readData(); break;
         case 4: _t->displayDataReceiverSocketError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
-        case 5: _t->readMetisData(); break;
+        case 5: _t->setManualSocketBufferSize((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 6: _t->readMetisData(); break;
         default: ;
         }
     }
@@ -100,9 +103,9 @@ int DataReceiver::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

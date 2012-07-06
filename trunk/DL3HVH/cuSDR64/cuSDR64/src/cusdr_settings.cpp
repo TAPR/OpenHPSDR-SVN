@@ -80,6 +80,7 @@ Settings::Settings(QObject *parent)
 	, m_mercuryReceivers(1)
 	, m_currentReceiver(0)
 	, m_hpsdrNetworkDevices(0)
+	, m_manualSocketBufferSize(false)
 {
 	// temporarily
 	m_pennyLanePresence = false;
@@ -97,7 +98,7 @@ Settings::Settings(QObject *parent)
 	settings = new QSettings(QCoreApplication::applicationDirPath() +  "/" + settingsFilename, QSettings::IniFormat);
 
 	m_titleString = "cuSDR";
-	m_versionString = "v0.2.1";
+	m_versionString = "v0.2.1.1";
 
 	// get styles
 	//m_sdrStyle = sdrStyle;
@@ -404,6 +405,10 @@ int Settings::loadSettings() {
 	value = settings->value("network/metis_port", 1024).toInt();
 	if (value < 0 || value > 65535) value = 1024;
 	m_metisPort = value;
+
+	value = settings->value("network/socketBufferSize", 32).toInt();
+	if (value != 16 && value != 32 && value != 64 && value != 128 && value != 256) value = 32;
+	m_socketBufferSize = value;
 	
 
 	// HPSDR hardware
@@ -938,6 +943,7 @@ int Settings::saveSettings() {
 	settings->setValue("network/listen_port", m_listenerPort);
 	settings->setValue("network/audio_port", m_audioPort);
 	settings->setValue("network/metis_port", m_metisPort);
+	settings->setValue("network/socketBufferSize", m_socketBufferSize);
 
 	
 	// HPSDR hardware
@@ -1726,6 +1732,18 @@ void Settings::clientDisconnected(int client) {
 void Settings::setRxConnectedStatus(QObject* sender, int rx, bool value) {
 
 	emit rxConnectedStatusChanged(sender, rx, value);
+}
+
+void Settings::setSocketBufferSize(QObject *sender, int value) {
+
+	m_socketBufferSize = value;
+	emit socketBufferSizeChanged(sender, value);
+}
+
+void Settings::setManualSocketBufferSize(QObject *sender, bool value) {
+
+	m_manualSocketBufferSize = value;
+	emit manualSocketBufferChanged(sender, m_manualSocketBufferSize);
 }
  
  

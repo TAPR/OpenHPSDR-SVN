@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_hpsdrWidget.h'
 **
-** Created: Wed 4. Jul 21:10:16 2012
+** Created: Fri 6. Jul 13:17:55 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_HPSDRWidget[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      28,   14, // methods
+      31,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -38,29 +38,32 @@ static const uint qt_meta_data_HPSDRWidget[] = {
  // slots: signature, parameters, type, tag, flags
      108,   91,   12,   12, 0x0a,
      143,   12,   12,   12, 0x0a,
-     169,   12,   12,   12, 0x0a,
-     192,   12,   12,   12, 0x0a,
-     213,   12,   12,   12, 0x0a,
-     239,   12,   12,   12, 0x0a,
-     262,   12,   12,   12, 0x0a,
-     287,   12,   12,   12, 0x0a,
-     309,   12,   12,   12, 0x0a,
-     336,   12,   12,   12, 0x0a,
-     390,  361,   12,   12, 0x08,
-     496,   12,   12,   12, 0x08,
-     515,   12,   12,   12, 0x08,
-     536,   12,   12,   12, 0x08,
+     181,  169,   12,   12, 0x0a,
+     212,   12,   12,   12, 0x0a,
+     235,   12,   12,   12, 0x0a,
+     256,   12,   12,   12, 0x0a,
+     282,   12,   12,   12, 0x0a,
+     305,   12,   12,   12, 0x0a,
+     330,   12,   12,   12, 0x0a,
+     352,   12,   12,   12, 0x0a,
+     379,   12,   12,   12, 0x0a,
+     433,  404,   12,   12, 0x08,
+     539,   12,   12,   12, 0x08,
      558,   12,   12,   12, 0x08,
-     601,  588,   12,   12, 0x08,
-     635,  588,   12,   12, 0x08,
-     669,  663,   12,   12, 0x08,
-     692,  687,   12,   12, 0x08,
-     745,  740,   12,   12, 0x08,
-     789,   12,   12,   12, 0x08,
-     818,  812,   12,   12, 0x08,
-     848,   12,   12,   12, 0x08,
-     865,   12,   12,   12, 0x08,
-     881,   12,   12,   12, 0x08,
+     579,   12,   12,   12, 0x08,
+     601,   12,   12,   12, 0x08,
+     631,   12,   12,   12, 0x08,
+     663,  657,   12,   12, 0x08,
+     701,  688,   12,   12, 0x08,
+     735,  688,   12,   12, 0x08,
+     769,  763,   12,   12, 0x08,
+     792,  787,   12,   12, 0x08,
+     845,  840,   12,   12, 0x08,
+     889,   12,   12,   12, 0x08,
+     912,  657,   12,   12, 0x08,
+     942,   12,   12,   12, 0x08,
+     959,   12,   12,   12, 0x08,
+     975,   12,   12,   12, 0x08,
 
        0        // eod
 };
@@ -70,7 +73,8 @@ static const char qt_meta_stringdata_HPSDRWidget[] = {
     "closeEvent(QObject*)\0message\0"
     "messageEvent(QString)\0niName,ipAddress\0"
     "addDeviceNICEntry(QString,QString)\0"
-    "addNICChangedConnection()\0"
+    "addNICChangedConnection()\0sender,size\0"
+    "setSocketBufSize(QObject*,int)\0"
     "hpsdrHardwareChanged()\0hwInterfaceChanged()\0"
     "penelopePresenceChanged()\0"
     "pennyPresenceChanged()\0mercuryPresenceChanged()\0"
@@ -82,12 +86,14 @@ static const char qt_meta_stringdata_HPSDRWidget[] = {
     "setHPSDRHardware()\0source10MhzChanged()\0"
     "interfaceBtnClicked()\0"
     "searchHPSDRDeviceBtnClicked()\0"
-    "sender,value\0setClientConnected(QObject*,bool)\0"
+    "socketBufSizeBtnClicked()\0value\0"
+    "setSocketBufferSize(int)\0sender,value\0"
+    "setClientConnected(QObject*,bool)\0"
     "setConnected(QObject*,bool)\0index\0"
     "setDeviceNIC(int)\0list\0"
     "setNetworkDeviceList(QList<TNetworkDevicecard>)\0"
     "card\0setCurrentNetworkDevice(TNetworkDevicecard)\0"
-    "setNumberOfReceivers()\0value\0"
+    "setNumberOfReceivers()\0"
     "numberOfReceiversChanged(int)\0"
     "disableButtons()\0enableButtons()\0"
     "setView()\0"
@@ -104,29 +110,32 @@ void HPSDRWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2: _t->messageEvent((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 3: _t->addDeviceNICEntry((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         case 4: _t->addNICChangedConnection(); break;
-        case 5: _t->hpsdrHardwareChanged(); break;
-        case 6: _t->hwInterfaceChanged(); break;
-        case 7: _t->penelopePresenceChanged(); break;
-        case 8: _t->pennyPresenceChanged(); break;
-        case 9: _t->mercuryPresenceChanged(); break;
-        case 10: _t->alexPresenceChanged(); break;
-        case 11: _t->excaliburPresenceChanged(); break;
-        case 12: _t->source122_88MhzChanged(); break;
-        case 13: _t->systemStateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDR::_Error(*)>(_a[2])),(*reinterpret_cast< QSDR::_HWInterfaceMode(*)>(_a[3])),(*reinterpret_cast< QSDR::_ServerMode(*)>(_a[4])),(*reinterpret_cast< QSDR::_DataEngineState(*)>(_a[5]))); break;
-        case 14: _t->setHPSDRHardware(); break;
-        case 15: _t->source10MhzChanged(); break;
-        case 16: _t->interfaceBtnClicked(); break;
-        case 17: _t->searchHPSDRDeviceBtnClicked(); break;
-        case 18: _t->setClientConnected((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 19: _t->setConnected((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 20: _t->setDeviceNIC((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 21: _t->setNetworkDeviceList((*reinterpret_cast< QList<TNetworkDevicecard>(*)>(_a[1]))); break;
-        case 22: _t->setCurrentNetworkDevice((*reinterpret_cast< TNetworkDevicecard(*)>(_a[1]))); break;
-        case 23: _t->setNumberOfReceivers(); break;
-        case 24: _t->numberOfReceiversChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 25: _t->disableButtons(); break;
-        case 26: _t->enableButtons(); break;
-        case 27: _t->setView(); break;
+        case 5: _t->setSocketBufSize((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 6: _t->hpsdrHardwareChanged(); break;
+        case 7: _t->hwInterfaceChanged(); break;
+        case 8: _t->penelopePresenceChanged(); break;
+        case 9: _t->pennyPresenceChanged(); break;
+        case 10: _t->mercuryPresenceChanged(); break;
+        case 11: _t->alexPresenceChanged(); break;
+        case 12: _t->excaliburPresenceChanged(); break;
+        case 13: _t->source122_88MhzChanged(); break;
+        case 14: _t->systemStateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDR::_Error(*)>(_a[2])),(*reinterpret_cast< QSDR::_HWInterfaceMode(*)>(_a[3])),(*reinterpret_cast< QSDR::_ServerMode(*)>(_a[4])),(*reinterpret_cast< QSDR::_DataEngineState(*)>(_a[5]))); break;
+        case 15: _t->setHPSDRHardware(); break;
+        case 16: _t->source10MhzChanged(); break;
+        case 17: _t->interfaceBtnClicked(); break;
+        case 18: _t->searchHPSDRDeviceBtnClicked(); break;
+        case 19: _t->socketBufSizeBtnClicked(); break;
+        case 20: _t->setSocketBufferSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 21: _t->setClientConnected((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 22: _t->setConnected((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 23: _t->setDeviceNIC((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 24: _t->setNetworkDeviceList((*reinterpret_cast< QList<TNetworkDevicecard>(*)>(_a[1]))); break;
+        case 25: _t->setCurrentNetworkDevice((*reinterpret_cast< TNetworkDevicecard(*)>(_a[1]))); break;
+        case 26: _t->setNumberOfReceivers(); break;
+        case 27: _t->numberOfReceiversChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 28: _t->disableButtons(); break;
+        case 29: _t->enableButtons(); break;
+        case 30: _t->setView(); break;
         default: ;
         }
     }
@@ -164,9 +173,9 @@ int HPSDRWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 28)
+        if (_id < 31)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 28;
+        _id -= 31;
     }
     return _id;
 }

@@ -39,6 +39,8 @@ DataReceiver::DataReceiver(THPSDRParameter *ioData)
 	, m_stopped(false)
 	, m_sendEP4(false)
 	, m_dataReceiverSocketOn(false)
+	, m_socketBufferSize(m_settings->getSocketBufferSize())
+	, m_manualBufferSize(m_settings->getManualSocketBufferSize())
 {
 	m_metisGetDataSignature.resize(3);
 	m_metisGetDataSignature[0] = (char)0xEF;
@@ -48,6 +50,12 @@ DataReceiver::DataReceiver(THPSDRParameter *ioData)
 
 	m_datagram.resize(1032);
 	m_wbDatagram.resize(0);
+
+	CHECKED_CONNECT(
+		m_settings, 
+		SIGNAL(manualSocketBufferChanged(QObject*, bool)), 
+		this, 
+		SLOT(setManualSocketBufferSize(QObject*, bool)));
 }
 
 DataReceiver::~DataReceiver() {
@@ -71,20 +79,29 @@ void DataReceiver::initDataReceiverSocket() {
 	m_dataReceiverSocket = new QUdpSocket();
 
 	int newBufferSize;
-	if (io->samplerate == 192000) {
 
-		newBufferSize = 64 * 1032;
-		DATA_RECEIVER_DEBUG << "initDataReceiverSocket socket buffer size set to 64 kB.";
+	if (m_manualBufferSize) {
+
+		newBufferSize = m_socketBufferSize * 1032;
+		DATA_RECEIVER_DEBUG << "initDataReceiverSocket socket buffer size set to " << m_socketBufferSize << " kB.";
 	}
-	else if (io->samplerate == 96000) {
+	else {
 
-		newBufferSize = 32 * 1032;
-		DATA_RECEIVER_DEBUG << "initDataReceiverSocket socket buffer size set to 32 kB.";
-	}
-	else if (io->samplerate == 48000) {
+		if (io->samplerate == 192000) {
 
-		newBufferSize = 16 * 1032;
-		DATA_RECEIVER_DEBUG << "initDataReceiverSocket socket buffer size set to 16 kB.";
+			newBufferSize = 64 * 1032;
+			DATA_RECEIVER_DEBUG << "initDataReceiverSocket socket buffer size set to 64 kB.";
+		}
+		else if (io->samplerate == 96000) {
+
+			newBufferSize = 32 * 1032;
+			DATA_RECEIVER_DEBUG << "initDataReceiverSocket socket buffer size set to 32 kB.";
+		}
+		else if (io->samplerate == 48000) {
+
+			newBufferSize = 16 * 1032;
+			DATA_RECEIVER_DEBUG << "initDataReceiverSocket socket buffer size set to 16 kB.";
+		}
 	}
 
 	if (m_dataReceiverSocket->bind(QHostAddress(m_settings->getHPSDRDeviceLocalAddr()), 
@@ -211,4 +228,12 @@ void DataReceiver::readData() {
 void DataReceiver::displayDataReceiverSocketError(QAbstractSocket::SocketError error) {
 
 	DATA_RECEIVER_DEBUG << "displayDataReceiverSocketError data receiver socket error: " << error;
+}
+
+void DataReceiver::setManualSocketBufferSize(QObject *sender, bool value) {
+
+	Q_UNUSED (sender)
+
+	m_manualBufferSize = value;
+	m_socketBufferSize = m_settings->getSocketBufferSize();
 }
