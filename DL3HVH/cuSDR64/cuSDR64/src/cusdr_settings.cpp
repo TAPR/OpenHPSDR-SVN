@@ -98,7 +98,7 @@ Settings::Settings(QObject *parent)
 	settings = new QSettings(QCoreApplication::applicationDirPath() +  "/" + settingsFilename, QSettings::IniFormat);
 
 	m_titleString = "cuSDR";
-	m_versionString = "v0.2.1.1";
+	m_versionString = "v0.2.1.2";
 
 	// get styles
 	//m_sdrStyle = sdrStyle;
@@ -463,10 +463,12 @@ int Settings::loadSettings() {
 	setSampleRate(this, value);
 	
 	str = settings->value("server/preamp", "off").toString();
-	if (str.toLower() == "on")
+	/*if (str.toLower() == "on")
 		m_mercuryPreamp = 1;
 	else
-		m_mercuryPreamp = 0;
+		m_mercuryPreamp = 0;*/
+	m_mercuryPreamp = 1;
+
 
 	str = settings->value("server/dither", "off").toString();
 	if (str.toLower() == "on")

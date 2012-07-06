@@ -719,6 +719,7 @@ void HPSDRWidget::createsocketBufferSizeGroup() {
 	socketBufferSizes = new QComboBox();
 
 	socketBufferSizes->setStyleSheet(m_settings->getComboBoxStyle());
+	socketBufferSizes->addItem("8 kB");
 	socketBufferSizes->addItem("16 kB");
 	socketBufferSizes->addItem("32 kB");
 	socketBufferSizes->addItem("64 kB");
@@ -1652,24 +1653,28 @@ void HPSDRWidget::setSocketBufSize(QObject *sender, int size) {
 
 	switch (m_socketBufferSize) {
 
-		case 16:
+		case 8:
 			socketBufferSizes->setCurrentIndex(0);
 			break;
 
-		case 32:
+		case 16:
 			socketBufferSizes->setCurrentIndex(1);
 			break;
 
-		case 64:
+		case 32:
 			socketBufferSizes->setCurrentIndex(2);
 			break;
 
-		case 128:
+		case 64:
 			socketBufferSizes->setCurrentIndex(3);
 			break;
 
-		case 256:
+		case 128:
 			socketBufferSizes->setCurrentIndex(4);
+			break;
+
+		case 256:
+			socketBufferSizes->setCurrentIndex(5);
 			break;
 	}
 	
@@ -1680,22 +1685,26 @@ void HPSDRWidget::setSocketBufferSize(int value) {
 	switch (value) {
 
 		case 0:
-			m_settings->setSocketBufferSize(this, 16);
+			m_settings->setSocketBufferSize(this, 8);
 			break;
 
 		case 1:
-			m_settings->setSocketBufferSize(this, 32);
+			m_settings->setSocketBufferSize(this, 16);
 			break;
 
 		case 2:
-			m_settings->setSocketBufferSize(this, 64);
+			m_settings->setSocketBufferSize(this, 32);
 			break;
 
 		case 3:
-			m_settings->setSocketBufferSize(this, 128);
+			m_settings->setSocketBufferSize(this, 64);
 			break;
 
 		case 4:
+			m_settings->setSocketBufferSize(this, 128);
+			break;
+
+		case 5:
 			m_settings->setSocketBufferSize(this, 256);
 			break;
 	}
