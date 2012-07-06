@@ -701,6 +701,8 @@ signals:
 	void newHPSDRDeviceNIC(QString nicName, QString ipAddress);
 	void serverNICChanged(int);
 	void hpsdrDeviceNICChanged(int);
+	void socketBufferSizeChanged(QObject* sender, int value);
+	void manualSocketBufferChanged(QObject* sender, bool value);
 	//void metisCardListChanged(QList<TMetiscard> list);
 	void metisCardListChanged(const QList<TNetworkDevicecard> &list);
 	void metisChanged(TNetworkDevicecard card);
@@ -903,6 +905,8 @@ public:
 	bool getJanusPresence()			{ return m_janusPresence; }
 	bool getMetisPresence()			{ return m_metisPresence; }
 	int  getHWInterfaceVersion()	{ return m_hwInterfaceVersion; }
+	int  getSocketBufferSize()		{ return m_socketBufferSize; }
+	bool getManualSocketBufferSize() { return m_manualSocketBufferSize; }
 
 	bool getWideBandStatus()		{ return m_wideBandStatus; }
 	bool getWideBandData()			{ return m_wideBandData; }
@@ -1064,6 +1068,8 @@ public slots:
 	void clientDisconnected(int client);
 	void setFramesPerSecond(QObject *sender, int value);
 	void setMouseWheelFreqStep(QObject *sender, double value);
+	void setSocketBufferSize(QObject *sender, int value);
+	void setManualSocketBufferSize(QObject *sender, bool value);
 
 	void setSpectrumSize(int value);
 	void setdBmPanScaleMin(int rx, qreal value);
@@ -1198,6 +1204,7 @@ private:
 	bool	m_wideBandData;
 	bool	m_pboFound;
 	bool	m_fboFound;
+	bool	m_manualSocketBufferSize;
 
 	bool	m_mercuryPresence;
 	bool	m_penelopePresence;
@@ -1214,6 +1221,7 @@ private:
 	int		m_hpsdrHardware;
 	int		m_hpsdrNetworkDevices;
 	int		m_NetworkInterfacesNo;
+	int		m_socketBufferSize;
 	int		m_mercuryVersion;
 	int		m_penelopeVersion;
 	int		m_pennyLaneVersion;

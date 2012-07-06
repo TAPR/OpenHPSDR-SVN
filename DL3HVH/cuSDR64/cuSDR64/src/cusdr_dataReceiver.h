@@ -53,8 +53,9 @@ public slots:
 	void	readData();
 	
 private slots:
-	void	displayDataReceiverSocketError(QAbstractSocket::SocketError error);
-	void	readMetisData();
+	void displayDataReceiverSocketError(QAbstractSocket::SocketError error);
+	void setManualSocketBufferSize(QObject *sender, bool value);
+	void readMetisData();
 	
 private:
 	Settings*		m_settings;
@@ -75,8 +76,10 @@ private:
 	long	m_oldSequenceWideBand;
 
 	int		m_wbCount;
+	int		m_socketBufferSize;
 
 	bool	m_sendEP4;
+	bool	m_manualBufferSize;
 	
 	volatile bool	m_stopped;
 

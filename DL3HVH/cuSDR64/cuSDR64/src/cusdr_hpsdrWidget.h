@@ -48,6 +48,7 @@ public:
 public slots:
 	void	addDeviceNICEntry(QString niName, QString ipAddress);
 	void	addNICChangedConnection();
+	void	setSocketBufSize(QObject *sender, int size);
 	void	hpsdrHardwareChanged();
 	void	hwInterfaceChanged();
 	void	penelopePresenceChanged();
@@ -78,10 +79,12 @@ private:
 	QGroupBox*	source122_88MhzExclusiveGroup;
 	QGroupBox*	deviceNIGroupBox;
 	QGroupBox*	searchNetworkDeviceGroupBox;
+	QGroupBox*	socketBufferSizeGroupBox;
 	QGroupBox*	numberOfReceiversGroup();
 	
 	QComboBox*	networkDeviceInterfaces;
 	QComboBox*	networkDeviceIPAdresses;
+	QComboBox*	socketBufferSizes;
 	
 	AeroButton*	networkPresenceBtn;
 	AeroButton*	noHWBtn;
@@ -112,6 +115,8 @@ private:
 	AeroButton*	view2Btn;
 	AeroButton*	view3Btn;
 
+	AeroButton*	socketBufSizeBtn;
+
 	QList<AeroButton *>	hardwareBtnList;
 	QList<AeroButton *>	source10MhzBtnList;
 	QList<AeroButton *>	viewBtnList;
@@ -129,10 +134,12 @@ private:
 	int		m_minimumGroupBoxWidth;
 	int		m_numberOfReceivers;
 	int		m_hpsdrHardware;
+	int		m_socketBufferSize;
 
 	void	setupConnections();
 	void	createDeviceNetworkInterfaceGroup();
 	void	createDeviceSearchGroup();
+	void	createsocketBufferSizeGroup();
 	void	createSource10MhzExclusiveGroup();
 	void	createSource122_88MhzExclusiveGroup();
 
@@ -148,6 +155,8 @@ private slots:
 	void	source10MhzChanged();
 	void	interfaceBtnClicked();
 	void	searchHPSDRDeviceBtnClicked();
+	void	socketBufSizeBtnClicked();
+	void	setSocketBufferSize(int value);
 	void	setClientConnected(QObject *sender, bool value);
 	void	setConnected(QObject *sender, bool value);
 	void	setDeviceNIC(int index);
