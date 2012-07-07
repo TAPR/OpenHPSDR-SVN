@@ -27,24 +27,75 @@ OS, needed software and recommended hardware:
 ***********************************************************************
 Current limitations:
 
-- Only Rx by now
+- This version is still Beta !
 
-- If you start the application a DOS console window opens also. This is
-  just for debugging purposes. If you have problems with the application
-  I would be glad if you could send me the content of the console.
+- Only Rx by now.
 
-- Chirp-Decoder has been disabled currently (although implemented)
+- Chirp-Decoder/QtDSP modes have been disabled currently.
 
 - "External" DSP mode, i.e. server functionality, is disabled currently
-  (although implemented)
+  (although implemented).
 
-- no OpenCL kernels yet
+- This version does not yet contain OpenCL kernels. Thus, you don't have
+  to install any OpenCL SDKs (Intel, Nvidia,..) yet.
 
-- when switching the number of receivers and restarting, Metis/Mercury
-  sometimes send strange data. In this case just hit "Stop" and "Start"
-  again. I'm not sure if this is a problem of cuSDR, or Metis or Mercury.
+- not all functionality of the DttSP package is used currently.
 
-- not all functionality of the DttSP package is used currently
+***********************************************************************
+list of changes:
+
+v0.2.1.2:
+
+- Minor correction of the wideband display data wrt 20 dB attn.
+
+v0.2.1:
+
+- The DOS command window is replaced now by a log file. This file 
+  ("cuSDR.log") is normally placed in the directory where cuSDR is 
+  started. If you have problems with the application, I would be glad
+  if you could send me this log file.
+  
+  
+v0.2.0:
+
+- many small changes/improvements/bug fixes
+- corrected a device discovery problem when more than one device is
+  in the local network (Metis/Hermes)
+- Panadapter display (Filter, Frequency etc.)
+- finally a slider for the AGC gain (DttSP and QtDSP)
+- first instance of the QtDSP package, the Qt-adaptation of the 
+  SharpDSP package. Note: QtDSP package is not yet completed; e.g.
+  the S-Meter is not yet working.
+- first implementation of Warren Pratt's, NR0V, ingenious AGC function.
+- Hermes (RX) support
+- Alexiares support prepared
+- First steps for the Tx path added; "Transmit" Tab added; "Ext Ctrl" Tab 
+  added; "PA" Tab added; "Alex" Tab added
+
+v0.1.10:
+
+- added averaging for wide band panadapter
+- fixed problem that Mercury/Metis are not correctly initialized after
+  the first "Start" if more than one receiver is selected.
+- fixed wrong debug message in DOS-console after hitting "Start"
+  command ("send Start command to Metis at ...")
+- fixed receiver display layout when switching from view1 to view2
+  
+v0.1.09:
+
+- fixed problem when clicking the Windows close button and app is running
+- fixed missing GUI link / filter and filter group changes
+- fixed crashes when changing sample rate during receiving: inserted an
+  additional mutex in method dspProcessing()
+- changed method initMetis() to connect to Metis/Hermes: it is now based on
+  a time out
+- fixed some graphical problems when showing hair cross
+- hair cross is switched off now when you switch receiver
+
+V0.1.08
+
+Changes:
+- minor changes on the GUI; new S-Meter
 
 
 ***********************************************************************
@@ -124,9 +175,10 @@ previous work on famous software packages like:
 - the MultiRx multiplexer function from gHPSDR3 by John Melton,
   G0ORX/N6LYT. Great stuff.
 
-- the Waterfall color scale from PowerSDR :-P
+- People, who worked on PowerSDR; the Waterfall color scale from is taken
+  from PowerSDR :-P
 
-- to all Qt/OpenGL/Cuda developers and their big number of example
+- to all Qt/OpenGL/OpenCL developers and their big number of example
   code and snippets!
 
 Big thanks to the makers/contributors/organizers of the HPSDR hardware!
@@ -135,32 +187,3 @@ Big thanks to the makers/contributors/organizers of the HPSDR hardware!
 Hermann, DL3HVH
 
 The author can be reached at hvh.net@gmail.com
-
-***********************************************************************
-list of changes:
-v0.1.10:
-
-- added averaging for wide band panadapter
-- fixed problem that Mercury/Metis are not correctly initialized after
-  the first "Start" if more than one receiver is selected.
-- fixed wrong debug message in DOS-console after hitting "Start"
-  command ("send Start command to Metis at ...")
-- fixed receiver display layout when switching from view1 to view2
-  
-v0.1.09:
-
-- fixed problem when clicking the Windows close button and app is running
-- fixed missing GUI link / filter and filter group changes
-- fixed crashes when changing sample rate during receiving: inserted an
-  additional mutex in method dspProcessing()
-- changed method initMetis() to connect to Metis/Hermes: it is now based on
-  a time out
-- fixed some graphical problems when showing hair cross
-- hair cross is switched off now when you switch receiver
-
-V0.1.08
-
-Changes:
-- minor changes on the GUI; new S-Meter
-
-

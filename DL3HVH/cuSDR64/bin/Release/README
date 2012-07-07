@@ -44,6 +44,10 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.2.1.2:
+
+- Minor correction of the wideband display data wrt 20 dB attn.
+
 v0.2.1:
 
 - The DOS command window is replaced now by a log file. This file 
