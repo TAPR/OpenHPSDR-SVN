@@ -1,13 +1,13 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_hpsdrTabWidget.h'
 **
-** Created: Wed 4. Jul 21:06:08 2012
+** Created: Sat 7. Jul 09:06:39 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../src/cusdr_hpsdrTabWidget.h"
+#include "../../../src/cusdr_hpsdrTabWidget.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'cusdr_hpsdrTabWidget.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
