@@ -1,13 +1,13 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_txWidget.h'
 **
-** Created: Wed 4. Jul 21:06:04 2012
+** Created: Sat 7. Jul 09:06:35 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../src/cusdr_txWidget.h"
+#include "../../../src/cusdr_txWidget.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'cusdr_txWidget.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63

@@ -55,156 +55,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_audio_engine.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_audio_engine.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_audio_settingsdialog.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_audio_settingsdialog.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_audio_spectrumanalyser.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_audio_spectrumanalyser.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_audio_waveform.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_audio_waveform.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_audioReceiver.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_audioReceiver.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_buttons.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_buttons.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_chirpProcessor.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_chirpProcessor.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_chirpWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_chirpWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_colorTriangle.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_colorTriangle.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_dataEngine.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_dataEngine.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_dataReceiver.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_dataReceiver.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_DttSP.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_DttSP.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_fft.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_fft.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_filter.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_filter.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_graphicOptionsWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_graphicOptionsWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_mainWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_mainWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_oglInfo.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_oglInfo.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_oglReceiverPanel.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_oglReceiverPanel.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_oglWidebandPanel.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_oglWidebandPanel.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_oglWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_oglWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_radioWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_radioWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_receiver.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_receiver.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_server.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_server.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_serverWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_serverWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_settings.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_settings.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
     <ClCompile Include="src\cusdr_buttons.cpp">
       <Filter>Source Dateien</Filter>
     </ClCompile>
@@ -249,9 +99,6 @@
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Dateien</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_cusdr.cpp">
-      <Filter>Generierte Dateien</Filter>
     </ClCompile>
     <ClCompile Include="src\cusdr_oglInfo.cpp">
       <Filter>Source Dateien\OpenGL</Filter>
@@ -304,20 +151,8 @@
     <ClCompile Include="src\cusdr_oglText.cpp">
       <Filter>Source Dateien\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_oglDisplayPanel.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_oglDisplayPanel.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
     <ClCompile Include="src\cusdr_oglDisplayPanel.cpp">
       <Filter>Source Dateien\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_oglDistancePanel.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_oglDistancePanel.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
     </ClCompile>
     <ClCompile Include="src\cusdr_oglDistancePanel.cpp">
       <Filter>Source Dateien\OpenGL</Filter>
@@ -328,101 +163,35 @@
     <ClCompile Include="src\cusdr_filter.cpp">
       <Filter>Source Dateien\DSP Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_dspEngine.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_dspEngine.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
     <ClCompile Include="src\cusdr_dspEngine.cpp">
       <Filter>Source Dateien\DSP Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\cusdr_agc.cpp">
       <Filter>Source Dateien\DSP Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_agc.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_agc.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
     <ClCompile Include="src\cusdr_inlineSpectrum.cpp">
       <Filter>Source Dateien\DSP Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_inlineSpectrum.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_inlineSpectrum.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_wpagc.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_wpagc.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
     </ClCompile>
     <ClCompile Include="src\cusdr_wpagc.cpp">
       <Filter>Source Dateien\DSP Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_hpsdrIO.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_hpsdrIO.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
     <ClCompile Include="src\cusdr_hpsdrIO.cpp">
       <Filter>Source Dateien\Data Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_alexWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_alexWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
     </ClCompile>
     <ClCompile Include="src\cusdr_alexWidget.cpp">
       <Filter>Source Dateien</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_pennyWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_pennyWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
     <ClCompile Include="src\cusdr_pennyWidget.cpp">
       <Filter>Source Dateien</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_hpsdrTabWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_hpsdrTabWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
     </ClCompile>
     <ClCompile Include="src\cusdr_hpsdrTabWidget.cpp">
       <Filter>Source Dateien</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_hpsdrWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_hpsdrWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
     <ClCompile Include="src\cusdr_hpsdrWidget.cpp">
       <Filter>Source Dateien</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_emptyWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_emptyWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
     <ClCompile Include="src\cusdr_emptyWidget.cpp">
       <Filter>Source Dateien</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_txWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_txWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
     </ClCompile>
     <ClCompile Include="src\cusdr_txWidget.cpp">
       <Filter>Source Dateien</Filter>
@@ -430,14 +199,245 @@
     <ClCompile Include="src\cusdr_imageblur.cpp">
       <Filter>Source Dateien</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cusdr_receiverWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_cusdr_receiverWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
     <ClCompile Include="src\cusdr_receiverWidget.cpp">
       <Filter>Source Dateien</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_wpagc.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_wpagc.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_txWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_txWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_settings.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_settings.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_serverWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_serverWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_server.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_server.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_receiverWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_receiverWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_receiver.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_receiver.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_radioWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_radioWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_pennyWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_pennyWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_oglWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_oglWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_oglWidebandPanel.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_oglWidebandPanel.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_oglReceiverPanel.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_oglReceiverPanel.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_oglInfo.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_oglInfo.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_oglDistancePanel.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_oglDistancePanel.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_oglDisplayPanel.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_oglDisplayPanel.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_mainWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_mainWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_inlineSpectrum.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_inlineSpectrum.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_hpsdrWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_hpsdrWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_hpsdrTabWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_hpsdrTabWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_hpsdrIO.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_hpsdrIO.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_graphicOptionsWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_graphicOptionsWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_filter.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_filter.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_fft.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_fft.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_emptyWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_emptyWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_DttSP.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_DttSP.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_dspEngine.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_dspEngine.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_dataReceiver.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_dataReceiver.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_dataEngine.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_dataEngine.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_colorTriangle.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_colorTriangle.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_chirpWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_chirpWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_chirpProcessor.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_chirpProcessor.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_buttons.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_buttons.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_audio_waveform.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_audio_waveform.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_audio_spectrumanalyser.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_audio_spectrumanalyser.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_audio_settingsdialog.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_audio_settingsdialog.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_audio_engine.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_audio_engine.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_audioReceiver.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_audioReceiver.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_alexWidget.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_alexWidget.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_agc.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_agc.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="res\qrc_cusdr.cpp">
+      <Filter>Generierte Dateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -467,9 +467,6 @@
     </CustomBuild>
     <CustomBuild Include="src\cusdr_settings.h">
       <Filter>Header Dateien</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Resources\cusdr.qrc">
-      <Filter>Resource Dateien</Filter>
     </CustomBuild>
     <CustomBuild Include="src\cusdr_audio_engine.h">
       <Filter>Header Dateien\Audio Engine</Filter>
@@ -563,6 +560,9 @@
     </CustomBuild>
     <CustomBuild Include="src\cusdr_receiverWidget.h">
       <Filter>Header Dateien</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\cusdr.qrc">
+      <Filter>Resource Dateien</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -703,9 +703,99 @@
     <None Include="Resources\cl\vectoradd.cl">
       <Filter>Resource Dateien</Filter>
     </None>
+    <None Include="res\img\close.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\close_high.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\hide.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\hide_high.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\minimize.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\minimize_high.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\maximize.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\maximize_high.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\leftTop.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\leftMiddle.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\leftBottom.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\left.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\rightTop.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\rightMiddle.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\rightBottom.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\right.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\topBorder.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\bottomBorder.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\drawer.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\left_arrow.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\right_arrow.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\up_arrow.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\down_arrow.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\cusdrLogo.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\cuSDR_32.ico">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\cuSDR_64.ico">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\cusdrLogo2.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\cusdr4.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\img\hpsdr4.png">
+      <Filter>Resource Dateien</Filter>
+    </None>
+    <None Include="res\cl\vectoradd.cl">
+      <Filter>Resource Dateien</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resources\cusdr.rc">
+    <ResourceCompile Include="res\cusdr.rc">
       <Filter>Resource Dateien</Filter>
     </ResourceCompile>
   </ItemGroup>

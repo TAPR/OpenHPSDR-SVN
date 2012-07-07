@@ -1,13 +1,13 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_audio_settingsdialog.h'
 **
-** Created: Wed 4. Jul 21:06:00 2012
+** Created: Sat 7. Jul 09:06:31 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../src/cusdr_audio_settingsdialog.h"
+#include "../../../src/cusdr_audio_settingsdialog.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'cusdr_audio_settingsdialog.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
