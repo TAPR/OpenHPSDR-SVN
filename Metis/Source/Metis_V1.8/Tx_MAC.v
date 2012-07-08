@@ -989,7 +989,7 @@ RESET:
 				state_Tx <= UDP;
 				//state_Tx <= RESET;							// ***** inhibit TX for testing
 			end
-   		else if (have_sp_data) begin					// Spectrum fifo has data so send it
+   		else if (have_sp_data & wide_spectrum) begin	// Spectrum fifo has data and wide spectrum is selected so send it
 				rdaddress <= 0;																	
 				state_Tx <= SPECTRUM;
 			end

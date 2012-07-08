@@ -19,7 +19,7 @@
 
 
 
-// EEPROM - copyright 2010, 2011 Phil Harman VK6APH
+// EEPROM - copyright 2010, 2011, 2012 Phil Harman VK6APH
 
 /*
 	change log:
@@ -38,78 +38,78 @@
 	
 	Waveforms:
 	
-			   +-------+
+			     +-------+
 	read   ----+       +-----------------------------------------------------------------------------------------------------------
 	
-			--------+																									   		  +------
-	CS			    +--------------------------------------------------------------------------------------------  ||		 -----+
+			--------+																									   		       +------
+	CS			     +--------------------------------------------------------------------------------------------  ||		 -----+
 	
 						0   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14   0   1   2   3   4   5   6   7      ----- 48   
 					   +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+   
-	SCK     -----------+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
+	SCK -----------+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
 	
-	SI      --------+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-					| 0	 | 0 | 0 | 0 | 0 | 0 | 1 | 1 |A7 |A6 |A5 |A4 |A3 |A2 |A1 |A0 |   |   |   |   |   |   |   |   |   |
+	SI    --------+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+					  | 0	 | 0 | 0 | 0 | 0 | 0 | 1 | 1 |A7 |A6 |A5 |A4 |A3 |A2 |A1 |A0 |   |   |   |   |   |   |   |   |   |
 			--------+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+  
 					<--------read instruction-------><---------address--------------->
 																			 		 +---+---+---+---+---+---+---+---+---+
 	SO																				 |D7 |D6 |D5 |D4 |D3 |D2 |D1 |D0 | Next byte follows
 			-------------------------------------------------------------------------+---+---+---+---+---+---+---+---+---+
 																					 <-----------data out------------------------> 
-																															     +-----------	
+				                              																											     +-----------	
 	ready   ---------------------------------------------------------------------------------------------------------------------+
  
  
 	For write operations first use Write Enable Sequence (WREN)
  
- 			   +-------+
+ 			     +-------+
 	write  ----+       +----------------------------------------
 	
-			--------+									 +------
+		  --------+									           +------
 	CS			    +------------------------------------+
 	
-					    0   1   2   3   4   5   6   7     
-					   +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ 
+					        0   1   2   3   4   5   6   7     
+				          +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ 
 	SCK     -----------+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+--------
 	
-	SI      --------+----+---+---+---+---+---+---+---+
-					| 0	 | 0 | 0 | 0 | 0 | 1 | 1 | 0 |
+	SI    --------+----+---+---+---+---+---+---+---+
+					  | 0	 | 0 | 0 | 0 | 0 | 1 | 1 | 0 |
 			--------+----+---+---+---+---+---+---+---+ 
-					<--------------WREN-------------->
+					  <--------------WREN-------------->
  
  
 	Then write the data 
 
 	
-			--------+																									   		  +------
-	CS			    +--------------------------------------------------------------------------------------------  ||		 -----+
+			--------+																									   		                        +------
+	CS		        +--------------------------------------------------------------------------------------------  ||		 -----+
 	
-						0   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14   0   1   2   3   4   5   6   7      ----- 32   
-					   +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+   
+					        0   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14   0   1   2   3   4   5   6   7      ----- 32   
+					       +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+   
 	SCK     -----------+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
 	
-	SI      --------+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-					| 0	 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |A7 |A6 |A5 |A4 |A3 |A2 |A1 |A0 |D7 |D6 |D5 |D4 |D3 |D2 |D1 |D0 | Next byte
+	SI    --------+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+					  | 0	 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |A7 |A6 |A5 |A4 |A3 |A2 |A1 |A0 |D7 |D6 |D5 |D4 |D3 |D2 |D1 |D0 | Next byte
 			--------+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+  
-					<--------write instruction-------><---------address--------------><---------data------------------------------>
+				     <-------write instruction-------><---------address--------------><---------data------------------------------>
 
  
  	Followed by Write Disable Sequence (WRDI) *** automatically set following a Write so not required 
  
 	
-			--------+									 +------
-	CS			    +------------------------------------+
-	
-					    0   1   2   3   4   5   6   7     
-					   +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ 
+			--------+									         +------
+	CS			     +------------------------------------+
+	   
+					        0   1   2   3   4   5   6   7     
+					       +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ 
 	SCK     -----------+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+--------
 	
-	SI      --------+----+---+---+---+---+---+---+---+
-					| 0	 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
+	SI    --------+----+---+---+---+---+---+---+---+
+					  | 0	 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
 			--------+----+---+---+---+---+---+---+---+ 
 					<--------------WRDI-------------->
  
- 														  +-----	
+ 														               +-----	
 	ready   ----------------------------------------------+
 
  
@@ -145,9 +145,9 @@ reg [7:0]EEPROM_write_enable;
 reg [3:0]EEPROM;
 reg [47:0]This_MAC;
 reg [31:0]This_IP;
-reg MAC_ready;					// high when we have a MAC address available
-reg IP_ready;					// high when we have an IP address available
-reg IP_flag;					// set when we are processing an IP request
+reg MAC_ready;						// high when we have a MAC address available
+reg IP_ready;						// high when we have an IP address available
+reg IP_flag;						// set when we are processing an IP request
 reg IP_write_done;				// set when IP address has been written to memory
 
 localparam	WREN = 8'h06;
@@ -157,11 +157,11 @@ begin
 	case (EEPROM)
 	0:	begin
 		shift_count <= 0; 							// reset shift counter
-		IP_flag <= 0;								// reset IP flag
+		IP_flag <= 0;									// reset IP flag
 		MAC_ready <= 0;								// reset ready flags
 		IP_write_done <= 0;
 		IP_ready  <= 0;
-			if (read_MAC) begin 					// loop until we get a command
+			if (read_MAC) begin 						// loop until we get a command
 				EEPROM_read <= 16'h03FA; 			// set read address where MAC is located
 				CS <= 0;
 				SI <= EEPROM_read[15];
@@ -172,7 +172,7 @@ begin
 				EEPROM_read <= 16'h0300;			// set read address where IP is located
 				CS <= 0;
 				SI <= EEPROM_read[15];
-				IP_flag <= 1'b1;					// indicate we are processing an IP request
+				IP_flag <= 1'b1;						// indicate we are processing an IP request
 				EEPROM <= 1;
 			end
 			else if (write_IP) begin				// write enable memeory
@@ -190,9 +190,9 @@ begin
 		EEPROM <= EEPROM + 1'b1;
 		end 
 	2:	begin
-		SCK <= 0;									// toggle clock 		
-			if (shift_count != 15) begin			// Count to 15 since bit 0 was available at state 0
-				SI <= EEPROM_read[15];				// SI data needs to be available on negative edge of SCK
+		SCK <= 0;												// toggle clock 		
+			if (shift_count != 15) begin					// Count to 15 since bit 0 was available at state 0
+				SI <= EEPROM_read[15];						// SI data needs to be available on negative edge of SCK
 				shift_count <= shift_count + 1'b1;	
 				EEPROM <= 1;
 				end
@@ -211,22 +211,22 @@ begin
 					SCK <= 1'b1;
 				end
 				else begin
-					IP_ready <= 1'b1;				// set read flag
+					IP_ready <= 1'b1;						// set read flag
 					CS <= 1'b1;
-					EEPROM <= 5;					// done so delay then back to start
+					EEPROM <= 5;							// done so delay then back to start
 				end
 			end
 
-			else if (shift_count != 49) begin 
+			else if (shift_count != 48) begin 
 				This_MAC <= {This_MAC[46:0],SO};
 				shift_count <= shift_count + 1'b1;
 				EEPROM <= EEPROM + 1'b1;
 				SCK <= 1'b1;
 			end
 			else begin
-				MAC_ready <= 1'b1;					// set ready flag
-				CS <= 1'b1;							// set CS high to indicate end of command
-				EEPROM <= 5;						// done so delay then back to start
+				MAC_ready <= 1'b1;						// set ready flag
+				CS <= 1'b1;									// set CS high to indicate end of command
+				EEPROM <= 5;								// done so delay then back to start
 			end 
 		end
 	// toggle clock	
@@ -246,15 +246,15 @@ begin
 		EEPROM <= EEPROM + 1'b1;
 		end 
 	7:	begin
-		SCK <= 0;									// toggle clock 		
+		SCK <= 0;											// toggle clock 		
 			if (shift_count != 7) begin				// Count to 7 since bit 0 was available at state 0
-				SI <= EEPROM_write_enable[7];		// SI data needs to be available on negative edge of SCK
+				SI <= EEPROM_write_enable[7];			// SI data needs to be available on negative edge of SCK
 				shift_count <= shift_count + 1'b1;	
 				EEPROM <= 6;
 				end
 			else begin
-				shift_count <= 0;					// reset shift count for next state
-				CS <= 1'b1;							// set CS high to indicate end of command
+				shift_count <= 0;							// reset shift count for next state
+				CS <= 1'b1;									// set CS high to indicate end of command
 				EEPROM <= EEPROM + 1'b1;   
 			end 
 		end 
@@ -276,17 +276,17 @@ begin
 		end
 		 
 	11:	begin 
-		SCK <= 0;									// toggle clock		
-			if (shift_count != 47) begin			// Count to 47 since bit 0 was available at state 8
-				SI <= EEPROM_write[47];				// SI data needs to be available on negative edge of SCK
+		SCK <= 0;												// toggle clock		
+			if (shift_count != 47) begin					// Count to 47 since bit 0 was available at state 8
+				SI <= EEPROM_write[47];						// SI data needs to be available on negative edge of SCK
 				shift_count <= shift_count + 1'b1;	
 				EEPROM <= 10;
 				end
 			else begin
 				shift_count <= 0;
-				CS <= 1'b1;							// set CS high to indicate end of command
-				IP_write_done <= 1'b1;				// set write done flag
-				EEPROM <= 5; // EEPROM + 1'b1;   
+				CS <= 1'b1;										// set CS high to indicate end of command
+				IP_write_done <= 1'b1;						// set write done flag
+				EEPROM <= 5; 									// EEPROM + 1'b1;   
 			end 
 		end 	
 
