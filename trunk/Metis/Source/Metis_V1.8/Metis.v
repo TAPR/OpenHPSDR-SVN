@@ -35,7 +35,45 @@
 			          - Added PennyLane/Hermes Drive level to existing C&C data rather than an additional nWire. Removed C18 connection
 			 
 			 
-**** Built using Quartus V9.1 sp2 ****
+			 Nov    9 - 1) Extended the length of the Atlas broadcast from 84 bits to 87 bits  
+								to be able to send the three "multiRx_mode" bits to Mercury so that  
+								Mercury can tell when multiple-receivers-on-a-single-Mercury" mode is  
+								being used so that Alex filters are bypassed when automatic filter  
+								switching mode is active.
+
+							2) Fixed bugs in the Tx_fifo_ctrl: TXFC module to implement proper  
+								transmission of SYNC bytes and IQ stream interleaving for the number  
+								of receiver data streams that are requested by the PC.
+
+							3) Added the Chirp 1PPS GPS input signal from Atlas A13 and included  
+								a time stamp signal in the LSB of the 16 bits of mic data in  
+								accordance with reception of the 1PPS signal.
+								
+						 - Released as V1.6
+						 
+		2012 Mar 22  - Fixed bug in wide spectrum code where data was discontinuous. Problem was that the NWire receiver 
+						   was not decoding the very first word sent from Mercury. This caused the data to spread across consecutive 4k blocks.
+							NWire_rcv uses the first word to sync its sampling rate. Fix was to generate a 'fake' spd_rdy signal from 
+							NWire_rcv when sync first detected.  The architecture was changed so that when the wide spectrum FIFO is empty it 
+							requests 4096 words from Mercury. The empty signal sends a 'trigger' pulse to Mercury on Atlas C21. The trigger
+							signal causes Mercury to fill its FIFO with 4k words and then send them to the spectrum FIFO on Metis. When full
+							this signals Tx_MAC to read out 8 by 1024 byte blocks.  The trigger is only active when wide_spectrum is selected.
+							
+						 - Released as V1.7
+						 
+		      Apr 29 - Changes by Joe, K5SO, for support of multiple Mercury cards and receivers.
+				
+					     - Released as V1.8
+						  
+				Jul 08  - Prevent wideband data being sent when not selected.
+				        - Default 122.88MHz clock source is now Penny(Lane). This still enables Mercury to provide the clock since this 
+						    is jumper selected but fixes a logic error if Mercury is fed from the 122.88MHz clock from Penny(Lane)
+						  - Fixed bug in EEPROM.v where the MAC address was altered by the presence of a fixed IP address.
+						  
+
+//------------------------------------------------------------
+//		Built using Quartus V11.1 sp2
+//------------------------------------------------------------
 			         
 
 					  
@@ -1218,7 +1256,7 @@ assign  IF_PHY_drdy = have_room & ~IF_PHY_rdempty;
 	
 	Decode clock sources, when IF_Rx_ctrl_0[7:1] = 0,  IF_Rx_ctrl_1[4:2] indicates the following
 	
-	x00  = 10MHz reference from Atlas bus ie Gibraltar
+	x00  = 10MHz reference from Atlas bus ie Excalibur
 	x01  = 10MHz reference from Penelope
 	x10  = 10MHz reference from Mercury
 	0xx  = 12.288MHz source from Penelope 
@@ -1313,7 +1351,7 @@ begin
   begin // set up default values - 0 for now
     // RX_CONTROL_1
     {IF_DFS1, IF_DFS0} <= 2'b00;   // speed 
-    IF_clock_s         <= 3'b100; // clock source - default Mercury (122.88MHz) & Altas/Excalibur (10MHz)
+    IF_clock_s         <= 3'b000;  // clock source - default Penny(Lane) (122.88MHz) & Altas/Excalibur (10MHz)
     IF_conf            <= 2'b00;   // configuration
      // RX_CONTROL_2
     IF_mode            <= 1'b0;    // mode, normal or Class E PA
