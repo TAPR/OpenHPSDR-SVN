@@ -10,9 +10,9 @@ rem Mercury v3.0 Penelope v1.5
 rem loadFPGA 0xfffe 0x0007 Ozy_Janus.v20.rbf
 
 rem Mercury v3.1 Penelope v1.6
-loadFPGA 0xfffe 0x0007 Ozy_Janus.v21.rbf
+rem loadFPGA 0xfffe 0x0007 Ozy_Janus.v21.rbf
 
 rem Mercury v3.2 Penelope v1.7
-rem loadFPGA 0xfffe 0x0007 Ozy_Janus.v22.rbf
+loadFPGA 0xfffe 0x0007 Ozy_Janus.v22.rbf
 
 
