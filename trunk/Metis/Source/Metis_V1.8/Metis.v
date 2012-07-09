@@ -63,6 +63,22 @@
 						 
 		      Apr 29 - Changes by Joe, K5SO, for support of multiple Mercury cards and receivers.
 				
+							1)  implements the new wideband spectrum code (increasing the wideband FIFO size to 4K from 1K) for Metis,
+
+							2) implements the new USB protocol C&C bit for C4(7) when C0 = 0, "common_Merc_freq" to signal that all
+							Mercury boards should use the same frequency, 
+
+							3) implements the new UBS protocol C&C bits C1(3:0) when C0 = 0001010x, "RxN_preamps" to indicate which
+							   preamps are to be active when multiple Mercury boards are in use
+							   (i.e., C1 = 0000 -> no preamps ON; C1 = 0001 -> preamp on Merc 1 ON; C1 = 0011 -> preamps on Merc 1 and Merc 2 ON; etc)
+
+							4) reduced the clock selection variable, IF_clock_s, from 4'b0000 size to 3'b000 size to be consistent
+							   with C&C bits C1(4:2) in the PC-to-HPSDR USB Protocol document and to keep the Metis/Ozy broadcast
+							   size to the minimum necessary,
+
+							5) increased the Metis/Ozy-to-Atlas broadcast size from 87 bits to 91bits on all boards in order to
+							   include the "RxN_preamps" and "common_Merc_freq" variables for Mercury in the broadcast
+				
 					     - Released as V1.8
 						  
 				Jul 08  - Prevent wideband data being sent when not selected.
