@@ -111,6 +111,8 @@ private:
 	AeroButton*	rx3Btn;
 	AeroButton*	rx4Btn;
 
+	AeroButton*	rx1to2Btn;
+
 	AeroButton*	view1Btn;
 	AeroButton*	view2Btn;
 	AeroButton*	view3Btn;
@@ -163,6 +165,7 @@ private slots:
 	void	setNetworkDeviceList(QList<TNetworkDevicecard> list);
 	void	setCurrentNetworkDevice(TNetworkDevicecard card);
 	void	setNumberOfReceivers();
+	void	setShow1on2();
 	void	numberOfReceiversChanged(int value);
 	void	disableButtons();
 	void	enableButtons();

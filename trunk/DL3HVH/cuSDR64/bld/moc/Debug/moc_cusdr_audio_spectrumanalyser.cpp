@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_audio_spectrumanalyser.h'
 **
-** Created: Sat 7. Jul 09:06:42 2012
+** Created: Mon 9. Jul 22:40:33 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!

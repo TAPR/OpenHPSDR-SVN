@@ -545,7 +545,8 @@ void OGLWidget::setFrequency(QObject* sender, bool value, int rx, long freq) {
 	
 	//if (m_serverMode == QSDR::InternalDSP && !m_rxWidgetList.empty())
 	if ((m_serverMode == QSDR::DttSP || m_serverMode == QSDR::QtDSP) && !m_rxWidgetList.empty())
-		m_rxWidgetList.at(rx)->setFrequency(this, true, freq);
+		//m_rxWidgetList.at(rx)->setFrequency(this, true, freq);
+		m_rxWidgetList.at(rx)->setFrequency(this, true, rx, freq);
 	//else if (m_serverMode == QSDR::InternalDSP && m_distDisplay != 0)
 	else if ((m_serverMode == QSDR::DttSP || m_serverMode == QSDR::QtDSP) && m_distDisplay != 0)
 		m_distDisplay->setFrequency(this, true, freq);

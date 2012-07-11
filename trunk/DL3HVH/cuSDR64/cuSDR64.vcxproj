@@ -57,8 +57,9 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(ConfigurationName)</OutDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\bin\$(Configuration)\</OutDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(ConfigurationName)</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\bin\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\bin\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\bld\o\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\bld\o\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -124,7 +125,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>..\bin\Release\$(ProjectName).exe</OutputFile>
+      <OutputFile>.\bin\$(ConfigurationName)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(NVSDKCOMPUTE_ROOT)\C\common\lib;$(NVSDKCOMPUTE_ROOT)\OpenCL\common\lib\x64;$(ProjectDir)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>libfftw.lib;libfftw3f-3_x64.lib;wsock32.lib;Version.lib;Psapi.lib;QtOpenCL.lib;qtmain.lib;QtCore4.lib;QtGui4.lib;QtMultimedia4.lib;QtOpenGL4.lib;opengl32.lib;glu32.lib;QtNetwork4.lib;%(AdditionalDependencies)</AdditionalDependencies>

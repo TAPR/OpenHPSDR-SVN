@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_hpsdrWidget.h'
 **
-** Created: Sat 7. Jul 09:06:33 2012
+** Created: Wed 11. Jul 19:55:41 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_HPSDRWidget[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      31,   14, // methods
+      32,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,10 +60,11 @@ static const uint qt_meta_data_HPSDRWidget[] = {
      792,  787,   12,   12, 0x08,
      845,  840,   12,   12, 0x08,
      889,   12,   12,   12, 0x08,
-     912,  657,   12,   12, 0x08,
-     942,   12,   12,   12, 0x08,
-     959,   12,   12,   12, 0x08,
-     975,   12,   12,   12, 0x08,
+     912,   12,   12,   12, 0x08,
+     926,  657,   12,   12, 0x08,
+     956,   12,   12,   12, 0x08,
+     973,   12,   12,   12, 0x08,
+     989,   12,   12,   12, 0x08,
 
        0        // eod
 };
@@ -93,7 +94,7 @@ static const char qt_meta_stringdata_HPSDRWidget[] = {
     "setDeviceNIC(int)\0list\0"
     "setNetworkDeviceList(QList<TNetworkDevicecard>)\0"
     "card\0setCurrentNetworkDevice(TNetworkDevicecard)\0"
-    "setNumberOfReceivers()\0"
+    "setNumberOfReceivers()\0setShow1on2()\0"
     "numberOfReceiversChanged(int)\0"
     "disableButtons()\0enableButtons()\0"
     "setView()\0"
@@ -132,10 +133,11 @@ void HPSDRWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 24: _t->setNetworkDeviceList((*reinterpret_cast< QList<TNetworkDevicecard>(*)>(_a[1]))); break;
         case 25: _t->setCurrentNetworkDevice((*reinterpret_cast< TNetworkDevicecard(*)>(_a[1]))); break;
         case 26: _t->setNumberOfReceivers(); break;
-        case 27: _t->numberOfReceiversChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 28: _t->disableButtons(); break;
-        case 29: _t->enableButtons(); break;
-        case 30: _t->setView(); break;
+        case 27: _t->setShow1on2(); break;
+        case 28: _t->numberOfReceiversChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 29: _t->disableButtons(); break;
+        case 30: _t->enableButtons(); break;
+        case 31: _t->setView(); break;
         default: ;
         }
     }
@@ -173,9 +175,9 @@ int HPSDRWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 31)
+        if (_id < 32)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 31;
+        _id -= 32;
     }
     return _id;
 }

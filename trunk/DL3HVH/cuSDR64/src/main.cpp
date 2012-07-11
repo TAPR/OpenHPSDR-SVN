@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 		#error("You need Qt v4.8.0 or later to compile this");
 	#endif
 
-	//qInstallMsgHandler(cuSDRMessageHandler);
+	qInstallMsgHandler(cuSDRMessageHandler);
     QApplication app(argc, argv);
 
     Settings::instance(&app);

@@ -57,6 +57,9 @@ DataEngine::DataEngine(QObject *parent)
 	, m_dataEngineState(QSDR::DataEngineDown)
 	, m_spectrumSize(settings->getSpectrumSize())
 	, m_hpsdrDevices(0)
+	, m_metisFW(0)
+	, m_mercuryFW(0)
+	, m_hermesFW(0)
 	, m_networkDeviceRunning(false)
 	, m_soundFileLoaded(false)
 	, m_audioProcessorRunning(false)
@@ -100,8 +103,6 @@ DataEngine::DataEngine(QObject *parent)
 	else
 		m_scale = 1.0f;
 
-	memset(m_tmpBuf, 0, 2*BUFFER_SIZE * sizeof(float));
-
 	currentRx = 0;
 	m_hpsdrIO = 0;
 	m_dataReceiver = 0;
@@ -110,6 +111,11 @@ DataEngine::DataEngine(QObject *parent)
 	m_audioReceiver = 0;
 	m_audioProcessor = 0;
 	m_chirpProcessor = 0;
+
+	settings->setMercuryVersion(0);
+	settings->setPenelopeVersion(0);
+	settings->setMetisVersion(0);
+	settings->setHermesVersion(0);
 	
 	setupConnections();
 }
@@ -396,7 +402,7 @@ bool DataEngine::startDataEngineWithoutConnection() {
 	}
 }
 
-bool DataEngine::startDataEngineWithConnection() {
+bool DataEngine::findHPSDRDevices() {
 
 	if (!m_hpsdrIO) createHpsdrIO();
 
@@ -422,7 +428,6 @@ bool DataEngine::startDataEngineWithConnection() {
 						m_hwInterface, 
 						m_serverMode,
 						QSDR::DataEngineDown);
-		return false;
 	}
 	else {
 
@@ -448,17 +453,135 @@ bool DataEngine::startDataEngineWithConnection() {
 		io.networkIOMutex.unlock();
 		stopHpsdrIO();
 
-		// as it says..
-		initReceivers();
+		if (getFirmwareVersions()) return true;
+	}
 
-		if (!m_dataReceiver) createDataReceiver();
-		if (!m_dataProcessor) createDataProcessor();
-		//if (m_serverMode == QSDR::InternalDSP && !m_wbDataProcessor)
-		if ((m_serverMode == QSDR::DttSP || m_serverMode == QSDR::QtDSP) && !m_wbDataProcessor)
-			createWideBandDataProcessor();
-		if (!m_audioProcessor) createAudioProcessor();
-		if ((m_serverMode == QSDR::ChirpWSPR) && !m_chirpProcessor)
-			createChirpDataProcessor();
+	return false;
+}
+
+bool DataEngine::getFirmwareVersions() {
+
+	// as it says..
+	initReceivers();
+
+	if (!m_dataReceiver) createDataReceiver();
+		
+	if (!m_dataProcessor) createDataProcessor();
+
+	switch (m_serverMode) {
+
+		case QSDR::DttSP:
+			
+			for (int i = 0; i < settings->getNumberOfReceivers(); i++)
+				initDttSPInterface(i);
+				
+			// turn time stamping off
+			setTimeStamp(this, false);
+
+			for (int i = 0; i < io.receivers; i++) {
+
+				rxList[i]->setConnectedStatus(true);
+				setDttspFrequency(this, true, i, settings->getFrequencies().at(i));
+			}
+
+			settings->setRxList(rxList);
+			connectDTTSP();
+			//dttspProcessing = new QFutureWatcher<int>(this);
+
+			break;
+
+		case QSDR::QtDSP:
+
+			for (int i = 0; i < settings->getNumberOfReceivers(); i++)
+				initDSPEngine(i);
+
+			// turn time stamping off
+			setTimeStamp(this, false);
+
+			for (int i = 0; i < io.receivers; i++) {
+
+				rxList[i]->setConnectedStatus(true);
+				setFrequency(this, true, i, settings->getFrequencies().at(i));
+			}
+
+			settings->setRxList(rxList);
+			connectQTDSP();
+
+			break;
+
+		default:
+
+			sendMessage("no valid server mode.");
+						
+			settings->setSystemState(
+							this, 
+							QSDR::ServerModeError, 
+							m_hwInterface, 
+							m_serverMode, 
+							QSDR::DataEngineDown);
+
+			return false;
+	}	// end switch (m_serverMode)
+
+	// data receiver thread
+	if (!startDataReceiver(QThread::HighPriority)) {//  ::NormalPriority)) {
+
+		DATA_ENGINE_DEBUG << "data receiver thread could not be started.";
+		return false;
+	}
+
+	// IQ data processing thread
+	if (!startDataProcessor(QThread::NormalPriority)) {
+
+		DATA_ENGINE_DEBUG << "data processor thread could not be started.";
+		return false;
+	}
+
+	setSampleRate(this, settings->getSampleRate());
+
+	// pre-conditioning
+	for (int i = 0; i < io.receivers; i++)
+		sendInitFramesToNetworkDevice(i);
+				
+	if ((m_serverMode == QSDR::DttSP || m_serverMode == QSDR::QtDSP))
+		networkDeviceStartStop(0x01); // 0x01 for starting Metis without wide band data
+		
+	m_networkDeviceRunning = true;
+
+	settings->setSystemState(
+					this, 
+					QSDR::NoError, 
+					m_hwInterface, 
+					m_serverMode, 
+					QSDR::DataEngineUp);
+
+	// just give it a little time to get the firmware versions
+	Sleep(100);
+
+	m_metisFW = settings->getMetisVersion();
+	m_mercuryFW = settings->getMercuryVersion();
+	m_hermesFW = settings->getHermesVersion();
+
+	return true;
+}
+
+bool DataEngine::start() {
+
+	// as it says..
+	initReceivers();
+
+	if (!m_dataReceiver) createDataReceiver();
+		
+	if (!m_dataProcessor) createDataProcessor();
+		
+	if ((m_serverMode == QSDR::DttSP || m_serverMode == QSDR::QtDSP) && !m_wbDataProcessor)
+		createWideBandDataProcessor();
+		
+	if (!m_audioProcessor) 
+		createAudioProcessor();
+
+	if ((m_serverMode == QSDR::ChirpWSPR) && !m_chirpProcessor)
+		createChirpDataProcessor();
 		
 		switch (m_serverMode) {
 
@@ -640,24 +763,10 @@ bool DataEngine::startDataEngineWithConnection() {
 			QSDR::DataEngineUp);
 
 		return true;
-	} // if (m_hpsdrDevices == 0)
+	//} // if (m_hpsdrDevices == 0)
 }
 
-bool DataEngine::startDataEngine() {
-
-	switch (m_hwInterface) {
-
-		case QSDR::NoInterfaceMode:
-			return startDataEngineWithoutConnection();
-			
-		case QSDR::Metis:
-		case QSDR::Hermes:
-			return startDataEngineWithConnection();
-	}
-	return false;
-}
-
-void DataEngine::stopDataEngine() {
+void DataEngine::stop() {
 
 	if (m_dataEngineState == QSDR::DataEngineUp) {
 		
@@ -702,6 +811,9 @@ void DataEngine::stopDataEngine() {
 
 		while (!io.au_queue.isEmpty())
 			io.au_queue.dequeue();
+
+		while (!m_specAv_queue.isEmpty())
+			m_specAv_queue.dequeue();
 
 		QCoreApplication::processEvents();
 
@@ -754,6 +866,13 @@ void DataEngine::stopDataEngine() {
 	m_found = 0;
 	m_hpsdrDevices = 0;
 
+	settings->setMercuryVersion(0);
+	settings->setPenelopeVersion(0);
+	settings->setMetisVersion(0);
+	settings->setHermesVersion(0);
+
+	settings->resetWidebandSpectrumBuffer();
+
 	/*disconnect(
 		SIGNAL(iqDataReady(int)),
 		this,
@@ -766,6 +885,35 @@ void DataEngine::stopDataEngine() {
 		SLOT(setFrequency(QObject*, bool, int, long)));
 
 	DATA_ENGINE_DEBUG << "shut down done.";
+}
+
+bool DataEngine::initDataEngine() {
+
+	if (m_hwInterface == QSDR::NoInterfaceMode) {
+		
+		return startDataEngineWithoutConnection();
+	}
+	else {
+			
+		if (findHPSDRDevices()) {
+		
+			if (m_mercuryFW > 0 || m_hermesFW > 0) {
+
+				stop();
+
+				DATA_ENGINE_DEBUG << "got firmware versions:";
+				DATA_ENGINE_DEBUG << "	Metis firmware:  " << m_metisFW;
+				DATA_ENGINE_DEBUG << "	Mercury firmware:  " << m_mercuryFW;
+				DATA_ENGINE_DEBUG << "	Hermes firmware: " << m_hermesFW;
+				DATA_ENGINE_DEBUG << "stopping and restarting data engine.";
+
+				return start();
+			}
+			else
+				DATA_ENGINE_DEBUG << "did not get firmware versions!";
+		}
+	}
+	return false;
 }
 
 
@@ -1719,6 +1867,13 @@ void DataEngine::stopDataProcessor() {
 
 void DataEngine::createWideBandDataProcessor() {
 
+	int size;
+
+	if (m_mercuryFW > 32 || m_hermesFW > 16)
+		size = 16 * BUFFER_SIZE; // 16k wide band data
+	else
+		size = 4 * BUFFER_SIZE; // 4k wide band data
+	
 	m_wbDataProcessor = new WideBandDataProcessor(this);
 
 	CHECKED_CONNECT(
@@ -1736,17 +1891,25 @@ void DataEngine::createWideBandDataProcessor() {
 		case QSDR::DttSP:
 		case QSDR::QtDSP:
 
-			m_wbFFT = new QFFT(this, 4*BUFFER_SIZE);
+			m_wbFFT = new QFFT(this, size);
 			
 			// wide band data complex buffer
-			io.cpxWBIn	= mallocCPX(4*BUFFER_SIZE);
-			io.cpxWBOut	= mallocCPX(4*BUFFER_SIZE);
+			io.cpxWBIn	= mallocCPX(size);
+			io.cpxWBOut	= mallocCPX(size);
 
-			memset(io.cpxWBIn, 0, 4*BUFFER_SIZE * sizeof(CPX));
-			memset(io.cpxWBOut, 0, 4*BUFFER_SIZE * sizeof(CPX));
-			memset(io.wbWindow, 0, 4*BUFFER_SIZE * sizeof(float));
+			io.wbWindow.resize(size);
+			io.wbWindow.fill(0.0f);
+
+			memset(io.cpxWBIn, 0, size * sizeof(CPX));
+			memset(io.cpxWBOut, 0, size * sizeof(CPX));
+			//memset(io.wbWindow, 0, size * sizeof(float));
 			
-			QFilter::MakeWindow(12, 4*BUFFER_SIZE, io.wbWindow); // 12 = BLACKMANHARRIS_WINDOW
+			QFilter::MakeWindow(12, size, (float *)io.wbWindow.data()); // 12 = BLACKMANHARRIS_WINDOW
+
+			tmpBuf.resize(size/2);
+			tmpBuf.fill(0.0f);
+			avgBuf.resize(size/2);
+			avgBuf.fill(0.0f);
 			
 			break;
 
@@ -2153,7 +2316,7 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 			
 					if (io.ccRx.networkDeviceFirmwareVersion != io.control_in[4]) {
 						io.ccRx.networkDeviceFirmwareVersion = io.control_in[4];
-						settings->setHWInterfaceVersion(io.ccRx.networkDeviceFirmwareVersion);
+						settings->setMetisVersion(io.ccRx.networkDeviceFirmwareVersion);
 						m_message = "Metis firmware version: %1.";
 
 						sendMessage(m_message.arg(QString::number(io.control_in[4])));
@@ -2403,8 +2566,15 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 
 void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 
+	int size;
+
+	if (m_mercuryFW > 32 || m_hermesFW > 16)
+		size = 32 * BUFFER_SIZE; // 16k wide band data
+	else
+		size = 8 * BUFFER_SIZE; // 4k wide band data
+	
 	qint64 length = buffer.length();
-	if (buffer.length() != 8*BUFFER_SIZE) {
+	if (buffer.length() != size) {
 
 		DATA_PROCESSOR_DEBUG << "wrong wide band buffer length" << length;
 		return;
@@ -2412,7 +2582,7 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 
 	int s;
 	float sample;
-	float norm = 1.0f / 32768.0;
+	float norm = 1.0f / (4 * size);
 	float mean = 0.0f;
 	
 	for (int i = 0; i < length; i += 2) {
@@ -2429,13 +2599,13 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 		io.cpxWBIn[i/2].im = io.cpxWBIn[i/2].re;//sample * io.wbWindow[i/2];
 	}
 
-	m_wbFFT->DoFFTWForward(io.cpxWBIn, io.cpxWBOut, 4*BUFFER_SIZE);
+	m_wbFFT->DoFFTWForward(io.cpxWBIn, io.cpxWBOut, size/2);
 	
 	// averaging
 	if (m_wbSpectrumAveraging) {
 		
-		QVector<float>	m_specBuf(2*BUFFER_SIZE);
-		for (int i = 0; i < 2*BUFFER_SIZE; i++) {
+		QVector<float>	m_specBuf(size/4);
+		for (int i = 0; i < size/4; i++) {
 
 			m_specBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
 		}
@@ -2443,31 +2613,36 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 		m_specAv_queue.enqueue(m_specBuf);
 		if (m_specAv_queue.size() <= m_specAveragingCnt) {
 	
-			for (int i = 0; i < 2*BUFFER_SIZE; i++)
-				m_tmpBuf[i] += m_specAv_queue.last().data()[i];
+			for (int i = 0; i < size/4; i++)
+				tmpBuf[i] += m_specAv_queue.last().data()[i];
+				//m_tmpBuf[i] += m_specAv_queue.last().data()[i];
 
 			return;
 		}
 	
-		for (int i = 0; i < 2*BUFFER_SIZE; i++) {
+		for (int i = 0; i < size/4; i++) {
 
-			m_tmpBuf[i] -= m_specAv_queue.first().at(i);
+			tmpBuf[i] -= m_specAv_queue.first().at(i);
+			tmpBuf[i] += m_specAv_queue.last().at(i);
+			avgBuf[i] = tmpBuf.at(i) * m_scale;
+			/*m_tmpBuf[i] -= m_specAv_queue.first().at(i);
 			m_tmpBuf[i] += m_specAv_queue.last().at(i);
-			m_avgBuf[i] = m_tmpBuf[i] * m_scale;
+			m_avgBuf[i] = m_tmpBuf[i] * m_scale;*/
 		}
 
-		settings->setWidebandSpectrumBuffer(m_avgBuf);
+		settings->setWidebandSpectrumBuffer(avgBuf);
+		//settings->setWidebandSpectrumBuffer(m_avgBuf);
 		m_specAv_queue.dequeue();
 	}
 	else {
 
-		for (int i = 0; i < 4*BUFFER_SIZE; i++)
-			m_tmpBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
+		for (int i = 0; i < size/4; i++)
+			//m_tmpBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
+			tmpBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
 
-		settings->setWidebandSpectrumBuffer(m_tmpBuf);
+		settings->setWidebandSpectrumBuffer(tmpBuf);
+		//settings->setWidebandSpectrumBuffer(m_tmpBuf);
 	}
-
-	//settings->setWidebandSpectrumBuffer(m_wbSpectrumBuffer);
 }
 
 void DataEngine::processFileBuffer(const QList<qreal> buffer) {
@@ -3346,9 +3521,6 @@ void DataEngine::setWbSpectrumAveraging(bool value) {
 void DataEngine::setWbSpectrumAveragingCnt(int value) {
 	
 	//spectrumBufferMutex.lock();
-	
-	memset(m_tmpBuf, 0, 2 * BUFFER_SIZE * sizeof(float));
-
 	while (!m_specAv_queue.isEmpty())
 		m_specAv_queue.dequeue();
 

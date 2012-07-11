@@ -75,6 +75,7 @@ private:
 	long	m_sequenceWideBand;
 	long	m_oldSequenceWideBand;
 
+	int		m_wbBuffers;
 	int		m_wbCount;
 	int		m_socketBufferSize;
 

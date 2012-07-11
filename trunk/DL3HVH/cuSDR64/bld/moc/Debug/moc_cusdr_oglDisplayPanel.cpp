@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_oglDisplayPanel.h'
 **
-** Created: Sat 7. Jul 09:06:34 2012
+** Created: Mon 9. Jul 22:40:25 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -61,11 +61,11 @@ static const uint qt_meta_data_OGLDisplayPanel[] = {
      787,  392,   16,   16, 0x08,
      810,  392,   16,   16, 0x08,
      834,  392,   16,   16, 0x08,
-     861,  126,   16,   16, 0x08,
-     895,  126,   16,   16, 0x08,
-     924,  126,   16,   16, 0x08,
-     972,  963,   16,   16, 0x08,
-     998,  392,   16,   16, 0x08,
+     855,  126,   16,   16, 0x08,
+     889,  126,   16,   16, 0x08,
+     918,  126,   16,   16, 0x08,
+     966,  957,   16,   16, 0x08,
+     992,  392,   16,   16, 0x08,
 
        0        // eod
 };
@@ -92,8 +92,7 @@ static const char qt_meta_stringdata_OGLDisplayPanel[] = {
     "setPenelopePresence(bool)\0"
     "setAlexPresence(bool)\0setExcaliburPresence(bool)\0"
     "setHermesVersion(int)\0setMercuryVersion(int)\0"
-    "setPenelopeVersion(int)\0"
-    "setHWInterfaceVersion(int)\0"
+    "setPenelopeVersion(int)\0setMetisVersion(int)\0"
     "setExcaliburVersion(QObject*,int)\0"
     "setAlexVersion(QObject*,int)\0"
     "setMouseWheelFreqStep(QObject*,double)\0"
@@ -136,7 +135,7 @@ void OGLDisplayPanel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 24: _t->setHermesVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 25: _t->setMercuryVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 26: _t->setPenelopeVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 27: _t->setHWInterfaceVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 27: _t->setMetisVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 28: _t->setExcaliburVersion((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 29: _t->setAlexVersion((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 30: _t->setMouseWheelFreqStep((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;

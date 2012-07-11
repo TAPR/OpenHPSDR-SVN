@@ -313,9 +313,9 @@ void OGLDisplayPanel::setupConnections() {
 
 	CHECKED_CONNECT(
 		m_settings, 
-		SIGNAL(hwInterfaceVersionChanged(int)), 
+		SIGNAL(metisVersionChanged(int)), 
 		this, 
-		SLOT(setHWInterfaceVersion(int)));
+		SLOT(setMetisVersion(int)));
 
 	CHECKED_CONNECT(
 		m_settings, 
@@ -2394,7 +2394,7 @@ void OGLDisplayPanel::setHermesVersion(int value) {
 	m_hermesVersion.append(str.setNum(value%10));
 }
 
-void OGLDisplayPanel::setHWInterfaceVersion(int value) {
+void OGLDisplayPanel::setMetisVersion(int value) {
 
 	QString str;
 	switch (m_hwInterface) {

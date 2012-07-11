@@ -24,7 +24,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-//#define LOG_GRAPHICS
+#define LOG_GRAPHICS
 
 #include "cusdr_oglReceiverPanel.h"
 
@@ -50,6 +50,7 @@ QGLReceiverPanel::QGLReceiverPanel(QWidget *parent, int rx)
 		, m_hwInterface(m_settings->getHWInterface())
 		, m_dataEngineState(QSDR::DataEngineDown)
 		, m_currentReceiver(m_settings->getCurrentReceiver())
+		, m_frequencyRxOnRx(0)
 		, m_sampleRate(m_settings->getSampleRate())
 		, m_downRate(m_settings->getChirpDownSampleRate())
 		, m_spectrumAveraging(m_settings->getSpectrumAveraging())
@@ -330,11 +331,11 @@ void QGLReceiverPanel::setupConnections() {
 		this, 
 		SLOT(freqRulerPositionChanged(float, int)));
 
-	/*CHECKED_CONNECT(
+	CHECKED_CONNECT(
 		m_settings, 
 		SIGNAL(frequencyChanged(QObject *, bool, int, long)), 
 		this, 
-		SLOT(setFrequency(QObject *, bool, int, long)));*/
+		SLOT(setFrequency(QObject *, bool, int, long)));
 
 	CHECKED_CONNECT(
 		m_settings, 
@@ -407,6 +408,12 @@ void QGLReceiverPanel::setupConnections() {
 		SIGNAL(preampChanged(QObject *, int)), 
 		this, 
 		SLOT(setPreamp(QObject *, int)));
+
+	CHECKED_CONNECT(
+		m_settings, 
+		SIGNAL(coupledRxChanged(QObject *, int)), 
+		this, 
+		SLOT(setCoupledRx(QObject *, int)));
 }
 
 void QGLReceiverPanel::initializeGL() {
@@ -992,6 +999,33 @@ void QGLReceiverPanel::drawPanFilter() {
 		glEnd();
 		glEnable(GL_MULTISAMPLE);
 	}
+
+	// draw a frequency line from a different receiver
+	if (m_frequencyRxOnRx != 0) {
+		
+		y1 = m_waterfallRect.top();
+		y2 = m_waterfallRect.bottom();
+	
+		if (y2 > y1 + 3) {
+
+			qreal unit = (qreal)((m_sampleRate * m_freqScaleZoomFactor) / m_panRect.width());
+			qreal df = m_frequency - m_rxDataList.at(m_frequencyRxOnRx%10 - 1).frequency;
+
+			GLint dx = (GLint)(df/unit);
+			GLint x = m_panRect.width()/2 - dx;
+			
+			color = QColor(255, 255, 0, 255);
+
+			glDisable(GL_MULTISAMPLE);
+			glLineWidth(2);
+			glColor4ub(color.red(), color.green(), color.blue(), color.alpha());
+			glBegin(GL_LINES);
+				glVertex3f(x-1, y1, 4.0f);
+				glVertex3f(x-1, y2, 4.0f);
+			glEnd();
+			glEnable(GL_MULTISAMPLE);
+		}
+	}
 }
 
 void QGLReceiverPanel::drawWaterfall() {
@@ -1316,6 +1350,8 @@ void QGLReceiverPanel::drawReceiverInfo() {
 	}
 
 	// main frequency display
+	if (m_panRect.height() > 15) {
+
 	int alpha;
 	if (m_receiver == m_settings->getCurrentReceiver())
 		alpha = 255;
@@ -1358,7 +1394,7 @@ void QGLReceiverPanel::drawReceiverInfo() {
 		m_oglTextFreq2->renderText(x + 41, 5, 5.0f, str.arg(f2, 3, 10, QLatin1Char('0')));
 		m_oglTextFreq1->renderText(x + 63, 5, 5.0f, "MHz");
 	}
-	
+	}
 	//m_oglTextFreq1->renderText(x + 126, 15 - 1, "MHz");
 }
 
@@ -1762,7 +1798,7 @@ void QGLReceiverPanel::setupDisplayRegions(QSize size) {
 	m_dBmScalePanadapterUpdate = true;
 	m_panGridUpdate = true;
 	
-	GRAPHICS_DEBUG << "***************************************************************************";
+	/*GRAPHICS_DEBUG << "***************************************************************************";
 	GRAPHICS_DEBUG << "receiver:" << m_receiver;
 	GRAPHICS_DEBUG << "total size" << size.height();
 	GRAPHICS_DEBUG << "sizes (top, bottom, height):";
@@ -1770,7 +1806,7 @@ void QGLReceiverPanel::setupDisplayRegions(QSize size) {
 	GRAPHICS_DEBUG << "waterfallRect" << m_waterfallRect.top() << m_waterfallRect.bottom() << m_waterfallRect.height();
 	GRAPHICS_DEBUG << "freqScalePanRect" << m_freqScalePanRect.top() << m_freqScalePanRect.bottom() << m_freqScalePanRect.height();
 	GRAPHICS_DEBUG << "dBmScalePanRect" << m_dBmScalePanRect.top() << m_dBmScalePanRect.bottom() << m_dBmScalePanRect.height();
-	GRAPHICS_DEBUG << "";
+	GRAPHICS_DEBUG << "";*/
 	
 }
 
@@ -2259,14 +2295,27 @@ void QGLReceiverPanel::timerEvent(QTimerEvent *) {
  
 //********************************************************************
  
-void QGLReceiverPanel::setFrequency(QObject *sender, bool value, long freq) {
+void QGLReceiverPanel::setFrequency(QObject *sender, bool value, int rx, long freq) {
 
 	Q_UNUSED(sender)
 	Q_UNUSED(value)
 	
-	m_frequency = freq;
-	m_freqScalePanadapterUpdate = true;
-	m_panGridUpdate = true;
+	for (int i = 0; i < m_settings->getNumberOfReceivers(); i++) {
+
+		m_rxDataList[i].frequency = freq;
+	}
+
+	if (rx == m_receiver) {
+		
+		m_frequency = freq;
+		m_freqScalePanadapterUpdate = true;
+		m_panGridUpdate = true;
+	}
+	/*else {
+
+		m_otherFrequency = freq;
+		GRAPHICS_DEBUG << "freq from Rx " << rx << " : " << m_otherFrequency;
+	}*/
 
 	update();
 }
@@ -2292,6 +2341,14 @@ void QGLReceiverPanel::setCurrentReceiver(int value) {
 
 	m_panGridUpdate = true;
 	update();
+}
+
+void QGLReceiverPanel::setCoupledRx(QObject* sender, int value) {
+
+	Q_UNUSED(sender)
+
+	m_frequencyRxOnRx = value;
+	GRAPHICS_DEBUG << "showing frequency of Rx " << m_frequencyRxOnRx/10 << " on Rx " << m_frequencyRxOnRx%10;
 }
 
 void QGLReceiverPanel::freqRulerPositionChanged(float pos, int rx) {

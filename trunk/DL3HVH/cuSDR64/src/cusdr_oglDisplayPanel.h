@@ -286,7 +286,7 @@ private slots:
 	void	setHermesVersion(int value);
 	void	setMercuryVersion(int value);
 	void	setPenelopeVersion(int value);
-	void	setHWInterfaceVersion(int value);
+	void	setMetisVersion(int value);
 	void	setExcaliburVersion(QObject *sender, int value);
 	void	setAlexVersion(QObject *sender, int value);
 

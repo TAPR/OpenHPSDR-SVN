@@ -88,6 +88,7 @@ Settings::Settings(QObject *parent)
 	//qRegisterMetaType<THPSDRParameter>();
 	qRegisterMetaType<TNetworkDevicecard>();
 	qRegisterMetaType<QList<TNetworkDevicecard>>();
+	qRegisterMetaType<qVectorFloat>("qVectorFloat");
 
 	startTime = QDateTime::currentDateTime();
 
@@ -97,8 +98,8 @@ Settings::Settings(QObject *parent)
 	settingsFilename = "settings.ini";
 	settings = new QSettings(QCoreApplication::applicationDirPath() +  "/" + settingsFilename, QSettings::IniFormat);
 
-	m_titleString = "cuSDR";
-	m_versionString = "v0.2.1.2";
+	m_titleString = "cuSDR64 BETA";
+	m_versionString = "v0.2.2.0";
 
 	// get styles
 	//m_sdrStyle = sdrStyle;
@@ -348,6 +349,7 @@ QString Settings::getVolSliderStyle()		{ return volSliderStyle; }
 QString Settings::getSplitterStyle()		{ return splitterStyle; }
 QString Settings::getFrameStyle()			{ return frameStyle; }
 QString Settings::getTabWidgetStyle()		{ return tabWidgetStyle; }
+
 //QString Settings::getNewSliderStyle()		{ return m_newSliderStyle; }
 
 //********************************************
@@ -1851,13 +1853,13 @@ void Settings::setExcaliburPresence(bool value) {
 	emit excaliburPresenceChanged(m_excaliburPresence);
 }
 
-void Settings::setHWInterfaceVersion(int value) {
+void Settings::setMetisVersion(int value) {
 
 	QMutexLocker locker(&mutex);
-	m_hwInterfaceVersion = value;
+	m_metisVersion = value;
 	locker.unlock();
 
-	emit hwInterfaceVersionChanged(m_hwInterfaceVersion);
+	emit metisVersionChanged(m_metisVersion);
 }
 
 void Settings::setProtocolSync(int value) {
@@ -1898,6 +1900,17 @@ void Settings::setReceivers(QObject *sender, int value) {
 	locker.unlock();
 
 	emit numberOfRXChanged(sender, value);
+}
+
+void Settings::setCoupledReceivers(QObject *sender, int value) {
+
+	if (value == 0)
+		m_frequencyRx1onRx2 = false;
+	else
+	if (value == 12)
+		m_frequencyRx1onRx2 = true;
+
+	emit coupledRxChanged(sender, value);
 }
 
 void Settings::setReceiver(QObject *sender, int value) {
@@ -2064,6 +2077,7 @@ void Settings::setFrequency(QObject *sender, bool value, int rx, long frequency)
 		if (m_receiverDataList[rx].frequency == frequency) return;
 		//m_centerFrequencies[rx] = frequency;
 		m_receiverDataList[rx].frequency = frequency;
+		//qDebug() << "frequency Rx " << rx << " : " << m_receiverDataList[rx].frequency;
 		HamBand band = getBandFromFrequency(m_bandList, frequency);
 		m_receiverDataList[rx].hamBand = band;
 		m_receiverDataList[rx].lastFrequencyList[(int) band] = frequency;
@@ -2106,9 +2120,14 @@ void Settings::setSMeterValue(int rx, float value) {
 	emit sMeterValueChanged(rx, value);
 }
 
-void Settings::setWidebandSpectrumBuffer(const float* buffer) {
+void Settings::setWidebandSpectrumBuffer(const qVectorFloat &buffer) {
 
 	emit widebandSpectrumBufferChanged(buffer);
+}
+
+void Settings::resetWidebandSpectrumBuffer() {
+
+	emit widebandSpectrumBufferReset();
 }
  
 //**************************************
