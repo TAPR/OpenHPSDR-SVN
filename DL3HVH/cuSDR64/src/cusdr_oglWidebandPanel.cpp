@@ -133,16 +133,15 @@ QGLWidebandPanel::QGLWidebandPanel(QWidget *parent)
 	m_displayTime.start();
 	m_resizeTime.start();
 
-	memset(m_wbSpectrumBuffer, -10000, 4 * BUFFER_SIZE * sizeof(float));
-	
+	m_wbSpectrumBuffer.resize(8 * BUFFER_SIZE);
+	m_wbSpectrumBuffer.fill(-1000.0f);
+
 	m_dBmPanLogGain = 75;//69; // allow user to calibrate this value
 	
 	if (m_specAveragingCnt > 0)
 		m_scale = 1.0f / m_specAveragingCnt;
 	else
 		m_scale = 1.0f;
-
-	memset(m_tmpBuf, 0, SAMPLE_BUFFER_SIZE * sizeof(float));
 
 	m_frequencyScaleFBO = 0;
 	m_dBmScaleFBO = 0;
@@ -234,11 +233,23 @@ void QGLWidebandPanel::setupConnections() {
 					QSDRGraphics::_Panadapter,
 					QSDRGraphics::_WaterfallColorScheme)));
 
-	CHECKED_CONNECT(
+	/*CHECKED_CONNECT(
 		m_settings,
 		SIGNAL(widebandSpectrumBufferChanged(const float*)),
 		this,
-		SLOT(setWidebandSpectrumBuffer(const float*)));
+		SLOT(setWidebandSpectrumBuffer(const float*)));*/
+
+	CHECKED_CONNECT(
+		m_settings,
+		SIGNAL(widebandSpectrumBufferChanged(const qVectorFloat &)),
+		this,
+		SLOT(setWidebandSpectrumBuffer(const qVectorFloat &)));
+
+	CHECKED_CONNECT(
+		m_settings,
+		SIGNAL(widebandSpectrumBufferReset()),
+		this,
+		SLOT(resetWidebandSpectrumBuffer()));
 
 	CHECKED_CONNECT(
 		m_settings, 
@@ -362,6 +373,7 @@ void QGLWidebandPanel::drawSpectrum() {
 
 	// x scale
 	int newBufferSize = 0;
+	int deltaBufferSize = 0;
 	int idx = 0;
 	int lIdx = 0;
 	int rIdx = 0;
@@ -369,8 +381,16 @@ void QGLWidebandPanel::drawSpectrum() {
 
 	qreal scaleMult = 1.0;
 	
-	newBufferSize	= qFloor(2.0 * BUFFER_SIZE * m_freqScaleZoomFactor);
-	deltaIdx		= qFloor(m_displayDelta * (2.0 * BUFFER_SIZE / MAXFREQUENCY));
+	if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16) {
+
+		newBufferSize = qFloor(8.0 * BUFFER_SIZE * m_freqScaleZoomFactor);
+		deltaIdx = qFloor(m_displayDelta * (8.0 * BUFFER_SIZE / MAXFREQUENCY));
+	}
+	else {
+
+		newBufferSize = qFloor(2.0 * BUFFER_SIZE * m_freqScaleZoomFactor);
+		deltaIdx = qFloor(m_displayDelta * (2.0 * BUFFER_SIZE / MAXFREQUENCY));
+	}
 	
 	qreal frequencyScale = (qreal)(1.0f * newBufferSize / width);
 	
@@ -453,6 +473,7 @@ void QGLWidebandPanel::drawSpectrum() {
 			
 			for (int i = 0; i < vertexArrayLength; i++) {
 
+				idx = 0;
 				lIdx = (int)floor((qreal)(i * frequencyScale / scaleMult));
 				rIdx = (int)floor((qreal)(i * frequencyScale / scaleMult) + frequencyScale / scaleMult);
 
@@ -600,6 +621,7 @@ void QGLWidebandPanel::drawSpectrum() {
 					}
 				}
 				idx += deltaIdx;
+				//idx += deltaBufferSize/2;
 
 				mutex.lock();
 				vertexColorArrayBg[2*i].x = m_redST;
@@ -1459,7 +1481,7 @@ void QGLWidebandPanel::mouseMoveEvent(QMouseEvent* event) {
 				qreal newMax = m_dBmPanMax - unit * dPos.y();
 
 				if (newMin > MINDBM && newMax < MAXDBM) {
-
+				
 					m_dBmPanMin = newMin;
 					m_dBmPanMax = newMax;
 
@@ -1480,7 +1502,7 @@ void QGLWidebandPanel::mouseMoveEvent(QMouseEvent* event) {
 				else if (dPos.y() < 0)
 					m_dBmPanDelta = -1.0f;
 				
-				m_dBmPanMin += m_dBmPanDelta;
+				//m_dBmPanMin += m_dBmPanDelta;
 				m_dBmPanMax -= m_dBmPanDelta;
 
 				if (qAbs(m_dBmPanMax - m_dBmPanMin) < 10) {
@@ -1511,16 +1533,18 @@ void QGLWidebandPanel::mouseMoveEvent(QMouseEvent* event) {
 				if (m_freqScaleZoomFactor < 1.0) {
 
 					QPoint dPos = m_mouseDownPos - pos;
-					if (dPos.x() > 0)
-						m_displayDelta += 100000.0;
-					else if (dPos.x() < 0)
-						m_displayDelta -= 100000.0;
 
-					if (m_displayDelta < 0)
+					qreal unit = (qreal)((MAXFREQUENCY * m_freqScaleZoomFactor) / m_freqScaleRect.width());
+					qreal deltaFreq = unit * dPos.x();
+
+					m_displayDelta += deltaFreq;
+					//qDebug() << "m_displayDelta " << m_displayDelta;
+					
+					if (m_displayDelta < 0) 
 						m_displayDelta = 0.0;
 
 					if (m_displayDelta > MAXFREQUENCY * (1 - m_freqScaleZoomFactor))
-						m_displayDelta -= 100000.0;
+						m_displayDelta -= deltaFreq;
 
 					m_mouseDownPos = pos;
 					m_freqScaleUpdate = true;
@@ -1532,13 +1556,30 @@ void QGLWidebandPanel::mouseMoveEvent(QMouseEvent* event) {
 			else if (event->buttons() == Qt::RightButton) {
 				
 				QPoint dPos = m_mouseDownPos - pos;
-				if (dPos.x() > 0)
+
+				//qreal unit = (qreal)((MAXFREQUENCY * m_freqScaleZoomFactor) / m_freqScaleRect.width());
+				//qreal deltaFreq = unit * dPos.x();
+
+				if (dPos.x() > 0) {
+
 					m_freqScaleZoomFactor += 0.005f;
+					
+					/*if (m_displayDelta > 0) {
+						
+						m_displayDelta += deltaFreq;
+
+						if (m_displayDelta < 0) 
+							m_displayDelta = 0.0;
+
+						if (m_displayDelta > MAXFREQUENCY * (1 - m_freqScaleZoomFactor))
+							m_displayDelta -= deltaFreq;
+					}*/
+				}
 				else if (dPos.x() < 0)
 					m_freqScaleZoomFactor -= 0.005f;
 
 				if (m_freqScaleZoomFactor > 1.0) m_freqScaleZoomFactor = 1.0f;
-				if (m_freqScaleZoomFactor < 0.3) m_freqScaleZoomFactor = 0.3f;
+				if (m_freqScaleZoomFactor < 0.24) m_freqScaleZoomFactor = 0.24f;
 
 				m_mouseDownPos = pos;
 				m_freqScaleUpdate = true;
@@ -1639,133 +1680,149 @@ void QGLWidebandPanel::setCurrentReceiver(int value) {
 	update();
 }
 
-void QGLWidebandPanel::setSpectrumBuffer(const float *buffer) {
+//void QGLWidebandPanel::setSpectrumBuffer(const float *buffer) {
+//
+//	if (m_settings->getSpectrumAveraging()) {
+//
+//		QVector<float>	m_specBuf(SAMPLE_BUFFER_SIZE);
+//
+//		//spectrumBufferMutex.lock();
+//
+//		memcpy(
+//			(float *) m_specBuf.data(),
+//			(float *) &buffer[0],
+//			SAMPLE_BUFFER_SIZE * sizeof(float));
+//
+//		specAv_queue.enqueue(m_specBuf);
+//		if (specAv_queue.size() <= m_specAveragingCnt) {
+//	
+//			for (int i = 0; i < SAMPLE_BUFFER_SIZE; i++)
+//				m_tmpBuf[i] += specAv_queue.last().data()[i];
+//
+//			//spectrumBufferMutex.unlock();
+//			return;
+//		}
+//	
+//		for (int i = 0; i < SAMPLE_BUFFER_SIZE; i++) {
+//
+//				m_tmpBuf[i] -= specAv_queue.first().at(i);
+//				m_tmpBuf[i] += specAv_queue.last().at(i);
+//				m_avgBuf[i] = m_tmpBuf[i] * m_scale;
+//		}
+//
+//		computeDisplayBins(m_avgBuf);
+//		specAv_queue.dequeue();
+//	
+//		//spectrumBufferMutex.unlock();
+//	}
+//	else
+//		computeDisplayBins(buffer);
+//}
 
-	if (m_settings->getSpectrumAveraging()) {
+//void QGLWidebandPanel::computeDisplayBins(const float *panBuffer) {
+//
+//	//int newSampleSize = 0;
+//	//int deltaSampleSize = 0;
+//	//int idx = 0;
+//	//int lIdx = 0;
+//	//int rIdx = 0;
+//	//qreal localMax;
+//
+//	//if (m_serverMode == QSDR::ChirpWSPRFile) {
+//	//	
+//	//	newSampleSize = (int)floor(2 * BUFFER_SIZE * m_displayData.freqScaleZoomFactor);
+//	//	deltaSampleSize = 2 * BUFFER_SIZE - newSampleSize;
+//	//}
+//	//else {
+//
+//	//	newSampleSize = (int)floor(4 * BUFFER_SIZE * m_displayData.freqScaleZoomFactor);
+//	//	deltaSampleSize = 4 * BUFFER_SIZE - newSampleSize;
+//	//}
+//
+//	//if (deltaSampleSize%2 != 0) {
+//	//	deltaSampleSize += 1;
+//	//	newSampleSize -= 1;
+//	//}
+//
+//	//m_panScale = (qreal)(1.0 * newSampleSize / m_panRectWidth);
+//	//m_scaleMultOld = m_displayData.scaleMult;
+//	//	
+//	//if (m_panScale < 0.125) {
+//	//	m_displayData.scaleMult = 0.0625;
+//	//}
+//	//else if (m_panScale < 0.25) {
+//	//	m_displayData.scaleMult = 0.125;
+//	//}
+//	//else if (m_panScale < 0.5) {
+//	//	m_displayData.scaleMult = 0.25;
+//	//}
+//	//else if (m_panScale < 1.0) {
+//	//	m_displayData.scaleMult = 0.5;
+//	//}
+//	//else {
+//	//	m_displayData.scaleMult = 1.0;
+//	//}
+//
+//	//m_panSpectrumBinsLength = (GLint)(m_displayData.scaleMult * m_panRectWidth);
+//
+//	//if (m_scaleMultOld != m_displayData.scaleMult) {
+//
+//	//	m_displayData.waterfallUpdate = true;
+//	//}
+//
+//	//m_displayData.waterfallPixel.clear();
+//	//m_displayData.waterfallPixel.resize(4 * m_panRectWidth);
+//
+//	//m_displayData.panadapterBins.clear();
+//	//
+//	//for (int i = 0; i < m_panSpectrumBinsLength; i++) {
+//	//		
+//	//	idx = 0;
+//	//	lIdx = (int)floor((qreal)(i * m_panScale / m_displayData.scaleMult));
+//	//	rIdx = (int)floor((qreal)(i * m_panScale / m_displayData.scaleMult) + m_panScale / m_displayData.scaleMult);
+//	//				
+//	//	// max value; later we try mean value also!
+//	//	localMax = -10000.0F;
+//	//	for (int j = lIdx; j < rIdx; j++) {
+//
+//	//		if (panBuffer[j] > localMax) {
+//
+//	//			localMax = panBuffer[j];
+//	//			idx = j;
+//	//		}
+//	//	}
+//	//	idx += deltaSampleSize/2;
+//	//			
+//	//	m_displayData.panadapterBins << panBuffer[idx] - m_displayData.dBmPanMin - m_dBmPanLogGain;
+//
+//	//update();
+//	////updateGL();
+//}
 
-		QVector<float>	m_specBuf(SAMPLE_BUFFER_SIZE);
-
-		//spectrumBufferMutex.lock();
-
-		memcpy(
-			(float *) m_specBuf.data(),
-			(float *) &buffer[0],
-			SAMPLE_BUFFER_SIZE * sizeof(float));
-
-		specAv_queue.enqueue(m_specBuf);
-		if (specAv_queue.size() <= m_specAveragingCnt) {
-	
-			for (int i = 0; i < SAMPLE_BUFFER_SIZE; i++)
-				m_tmpBuf[i] += specAv_queue.last().data()[i];
-
-			//spectrumBufferMutex.unlock();
-			return;
-		}
-	
-		for (int i = 0; i < SAMPLE_BUFFER_SIZE; i++) {
-
-				m_tmpBuf[i] -= specAv_queue.first().at(i);
-				m_tmpBuf[i] += specAv_queue.last().at(i);
-				m_avgBuf[i] = m_tmpBuf[i] * m_scale;
-		}
-
-		computeDisplayBins(m_avgBuf);
-		specAv_queue.dequeue();
-	
-		//spectrumBufferMutex.unlock();
-	}
-	else
-		computeDisplayBins(buffer);
-}
-
-void QGLWidebandPanel::computeDisplayBins(const float *panBuffer) {
-
-	//int newSampleSize = 0;
-	//int deltaSampleSize = 0;
-	//int idx = 0;
-	//int lIdx = 0;
-	//int rIdx = 0;
-	//qreal localMax;
-
-	//if (m_serverMode == QSDR::ChirpWSPRFile) {
-	//	
-	//	newSampleSize = (int)floor(2 * BUFFER_SIZE * m_displayData.freqScaleZoomFactor);
-	//	deltaSampleSize = 2 * BUFFER_SIZE - newSampleSize;
-	//}
-	//else {
-
-	//	newSampleSize = (int)floor(4 * BUFFER_SIZE * m_displayData.freqScaleZoomFactor);
-	//	deltaSampleSize = 4 * BUFFER_SIZE - newSampleSize;
-	//}
-
-	//if (deltaSampleSize%2 != 0) {
-	//	deltaSampleSize += 1;
-	//	newSampleSize -= 1;
-	//}
-
-	//m_panScale = (qreal)(1.0 * newSampleSize / m_panRectWidth);
-	//m_scaleMultOld = m_displayData.scaleMult;
-	//	
-	//if (m_panScale < 0.125) {
-	//	m_displayData.scaleMult = 0.0625;
-	//}
-	//else if (m_panScale < 0.25) {
-	//	m_displayData.scaleMult = 0.125;
-	//}
-	//else if (m_panScale < 0.5) {
-	//	m_displayData.scaleMult = 0.25;
-	//}
-	//else if (m_panScale < 1.0) {
-	//	m_displayData.scaleMult = 0.5;
-	//}
-	//else {
-	//	m_displayData.scaleMult = 1.0;
-	//}
-
-	//m_panSpectrumBinsLength = (GLint)(m_displayData.scaleMult * m_panRectWidth);
-
-	//if (m_scaleMultOld != m_displayData.scaleMult) {
-
-	//	m_displayData.waterfallUpdate = true;
-	//}
-
-	//m_displayData.waterfallPixel.clear();
-	//m_displayData.waterfallPixel.resize(4 * m_panRectWidth);
-
-	//m_displayData.panadapterBins.clear();
-	//
-	//for (int i = 0; i < m_panSpectrumBinsLength; i++) {
-	//		
-	//	idx = 0;
-	//	lIdx = (int)floor((qreal)(i * m_panScale / m_displayData.scaleMult));
-	//	rIdx = (int)floor((qreal)(i * m_panScale / m_displayData.scaleMult) + m_panScale / m_displayData.scaleMult);
-	//				
-	//	// max value; later we try mean value also!
-	//	localMax = -10000.0F;
-	//	for (int j = lIdx; j < rIdx; j++) {
-
-	//		if (panBuffer[j] > localMax) {
-
-	//			localMax = panBuffer[j];
-	//			idx = j;
-	//		}
-	//	}
-	//	idx += deltaSampleSize/2;
-	//			
-	//	m_displayData.panadapterBins << panBuffer[idx] - m_displayData.dBmPanMin - m_dBmPanLogGain;
-
-	//update();
-	////updateGL();
-}
-
-void QGLWidebandPanel::setWidebandSpectrumBuffer(const float *buffer) {
+//void QGLWidebandPanel::setWidebandSpectrumBuffer(const float *buffer) {
+void QGLWidebandPanel::setWidebandSpectrumBuffer(const qVectorFloat &buffer) {
 
 	mutex.lock();
-		////memcpy(m_wbSpectrumBuffer, &buffer[4*BUFFER_SIZE], 4*BUFFER_SIZE * sizeof(float));
-		memcpy(m_wbSpectrumBuffer, buffer, 2*BUFFER_SIZE * sizeof(float));
-	mutex.unlock();
+	if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16) {
 
+		if (m_wbSpectrumBuffer.size() != 8 * BUFFER_SIZE)
+			m_wbSpectrumBuffer.resize(8 * BUFFER_SIZE);
+	}
+	else {
+
+		if (m_wbSpectrumBuffer.size() != 2 * BUFFER_SIZE)
+			m_wbSpectrumBuffer.resize(2 * BUFFER_SIZE);
+	}
+
+	m_wbSpectrumBuffer = buffer;
+	mutex.unlock();
 	update();
+}
+
+void QGLWidebandPanel::resetWidebandSpectrumBuffer() {
+
+	m_wbSpectrumBuffer.resize(8 * BUFFER_SIZE);
+	m_wbSpectrumBuffer.fill(-1000.0f);
 }
 
 void QGLWidebandPanel::systemStateChanged(
@@ -1792,7 +1849,8 @@ void QGLWidebandPanel::systemStateChanged(
 		return;
 	else {
 
-		memset(m_wbSpectrumBuffer, -10000, 4 * BUFFER_SIZE * sizeof(float));
+		//memset(m_wbSpectrumBuffer, -10000, 4 * BUFFER_SIZE * sizeof(float));
+		memset(&m_wbSpectrumBuffer, -10000, 4 * BUFFER_SIZE * sizeof(float));
 		m_serverMode = mode;
 	}
 
@@ -1830,24 +1888,24 @@ void QGLWidebandPanel::graphicModeChanged(
 }
 
  
-void QGLWidebandPanel::setSpectrumAveragingCnt(int value) {
-
-	mutex.lock();
-
-		memset(m_tmpBuf, 0, SAMPLE_BUFFER_SIZE * sizeof(float));
-
-		while (!specAv_queue.isEmpty())
-			specAv_queue.dequeue();
-
-		m_specAveragingCnt = value;
-
-		if (m_specAveragingCnt > 0)
-			m_scale = 1.0f / m_specAveragingCnt;
-		else
-			m_scale = 1.0f;
-
-	mutex.unlock();
-}
+//void QGLWidebandPanel::setSpectrumAveragingCnt(int value) {
+//
+//	mutex.lock();
+//
+//		memset(m_tmpBuf, 0, SAMPLE_BUFFER_SIZE * sizeof(float));
+//
+//		while (!specAv_queue.isEmpty())
+//			specAv_queue.dequeue();
+//
+//		m_specAveragingCnt = value;
+//
+//		if (m_specAveragingCnt > 0)
+//			m_scale = 1.0f / m_specAveragingCnt;
+//		else
+//			m_scale = 1.0f;
+//
+//	mutex.unlock();
+//}
 
 void QGLWidebandPanel::setPreamp(QObject* sender, int value) {
 

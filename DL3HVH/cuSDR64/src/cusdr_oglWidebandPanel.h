@@ -53,7 +53,7 @@ public slots:
 	//QSize minimumSizeHint() const;
 	QSize sizeHint() const;
 
-	void setSpectrumBuffer(const float *buffer);
+	//void setSpectrumBuffer(const float *buffer);
 	//void setFrequency(QObject *sender, bool value, long freq);
 
 protected:
@@ -152,9 +152,8 @@ private:
 	qreal		m_dBmPanMin;
 	qreal		m_dBmPanMax;
 
-	float		m_wbSpectrumBuffer[4*BUFFER_SIZE];
-	float		m_tmpBuf[SAMPLE_BUFFER_SIZE];
-	float		m_avgBuf[SAMPLE_BUFFER_SIZE];
+	qVectorFloat m_wbSpectrumBuffer;
+
 	float		m_scale;
 	float		m_distMax;
 
@@ -213,7 +212,7 @@ private:
 	//******************************************************************
 	void saveGLState();
 	void restoreGLState();
-	void computeDisplayBins(const float* panBuffer);
+	//void computeDisplayBins(const float* panBuffer);
 
 	void drawSpectrum();
 	void drawVerticalScale();
@@ -243,8 +242,9 @@ private slots:
 	void	setCurrentReceiver(int value);
 	void	setFrequency(QObject *sender, bool value, int rx, long freq);
 	void	setupDisplayRegions(QSize size);
-	void	setWidebandSpectrumBuffer(const float *buffer);
-	void	setSpectrumAveragingCnt(int value);
+	void	setWidebandSpectrumBuffer(const qVectorFloat &buffer);
+	void	resetWidebandSpectrumBuffer();
+	//void	setSpectrumAveragingCnt(int value);
 	void	setPanadapterColors();
 	void	setPanGridStatus(bool value);
 	void	setPreamp(QObject* sender, int value);

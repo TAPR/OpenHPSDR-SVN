@@ -571,6 +571,19 @@ QGroupBox *HPSDRWidget::numberOfReceiversGroup() {
 		this, 
 		SLOT(setNumberOfReceivers()));
 
+	rx1to2Btn = new AeroButton("Link 1+2", this);
+	rx1to2Btn->setRoundness(10);
+	rx1to2Btn->setFixedSize(btn_width2, btn_height);
+	rx1to2Btn->setBtnState(AeroButton::OFF);
+	rx1to2Btn->setEnabled(false);
+	//rxBtnList.append(rx1Btn);
+	
+	CHECKED_CONNECT(
+		rx1to2Btn, 
+		SIGNAL(released()), 
+		this, 
+		SLOT(setShow1on2()));
+
 	view1Btn = new AeroButton("View 1", this);
 	view1Btn->setRoundness(10);
 	view1Btn->setFixedSize(btn_width2, btn_height);
@@ -618,6 +631,8 @@ QGroupBox *HPSDRWidget::numberOfReceiversGroup() {
 	hbox1->addWidget(rx2Btn);
 	hbox1->addWidget(rx3Btn);
 	hbox1->addWidget(rx4Btn);
+	hbox1->addSpacing(6);
+	hbox1->addWidget(rx1to2Btn);
 
 	QHBoxLayout *hbox2 = new QHBoxLayout();
 	hbox2->setSpacing(6);
@@ -625,6 +640,7 @@ QGroupBox *HPSDRWidget::numberOfReceiversGroup() {
 	hbox2->addWidget(view1Btn);
 	hbox2->addWidget(view2Btn);
 	//hbox2->addWidget(view3Btn);
+	hbox2->addSpacing(63);
 	
 	QVBoxLayout *vbox = new QVBoxLayout();
 	vbox->setSpacing(4);
@@ -1305,6 +1321,8 @@ void HPSDRWidget::setNumberOfReceivers() {
 		view1Btn->setEnabled(false);
 		view2Btn->setEnabled(false);
 		//view3Btn->setEnabled(false);
+
+		rx1to2Btn->setEnabled(false);
 	}
 	else {
 		
@@ -1314,9 +1332,34 @@ void HPSDRWidget::setNumberOfReceivers() {
 
 		view1Btn->setEnabled(true);
 		view2Btn->setEnabled(true);
+
+		if (m_numberOfReceivers == 2)
+			rx1to2Btn->setEnabled(true);
+		else {
+
+			m_settings->setCoupledReceivers(this, 0);
+			rx1to2Btn->setBtnState(AeroButton::OFF);
+			rx1to2Btn->setEnabled(true);
+		}
 	}
 
 	m_settings->setReceivers(this, m_numberOfReceivers);
+}
+
+void HPSDRWidget::setShow1on2() {
+
+	if (rx1to2Btn->btnState() == AeroButton::OFF) {
+
+		m_settings->setCoupledReceivers(this, 12);
+		rx1to2Btn->setBtnState(AeroButton::ON);
+	}
+	else {
+
+		m_settings->setCoupledReceivers(this, 0);
+		rx1to2Btn->setBtnState(AeroButton::OFF);
+	}
+
+	rx1to2Btn->update();
 }
 
 void HPSDRWidget::numberOfReceiversChanged(int value) {

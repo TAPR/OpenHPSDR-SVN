@@ -44,6 +44,26 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.2.2.0:
+
+- In order to ensure backward compatibility to HPSDR firmware versions,
+  the start procedure has been changed. Now a first start is performed 
+  to read out the firmware versions of the connected HPSDR hardware. 
+  Then, with the correct initializations wrt the firmware versions, the 
+  final start is launched. This causes in general a longer starting time.
+  
+- Added possibility to show wide band data with 16k sample size (Hermes 
+  firmware > v1.6, Mercury firmware > v3.2).
+  
+- If there are two receivers selected, you now have the possibility to
+  link the center frequency displays of the two receivers in the Waterfall
+  display. This only makes sense if both receivers are on the same band.
+  Then you can drag the frequency rulers of, e.g. receiver 1, to show only
+  the Panadapter display, and receiver 2 to show only the Waterfall display.
+  In this way you have a moving Panadapter display (receiver 1 in this case)
+  and a fixed Waterfall display (receiver 2) with a line showing the 
+  frequency of receiver 1.
+  
 v0.2.1.2:
 
 - Minor correction of the wideband display data wrt 20 dB attn.

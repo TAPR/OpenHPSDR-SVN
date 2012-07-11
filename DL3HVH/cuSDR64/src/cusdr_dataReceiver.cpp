@@ -190,7 +190,14 @@ void DataReceiver::readMetisData() {
 						m_wbDatagram.append(m_datagram.mid(METIS_HEADER_SIZE, BUFFER_SIZE));
 						m_wbCount++;
 					}
-					if (m_wbCount == 8) { // we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples
+					// if we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples, m_wbBuffers = 8
+					// we have 16384 * 16 bit = 32 * 1024 raw consecutive ADC samples, m_wbBuffers = 32
+					if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16)
+						m_wbBuffers = 32;
+					else
+						m_wbBuffers = 8;
+
+					if (m_wbCount == m_wbBuffers) {
 
 						// enqueue
 						io->wb_queue.enqueue(m_wbDatagram);

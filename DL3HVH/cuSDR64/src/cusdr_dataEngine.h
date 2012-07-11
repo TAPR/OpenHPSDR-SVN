@@ -96,8 +96,8 @@ public:
 public slots:
 	void	newMessage(QString msg);
 
-	bool	startDataEngine();
-	void	stopDataEngine();
+	bool	initDataEngine();
+	void	stop();
 
 	// set Server parameter
 	void	setRxPeerAddress(int rx, QHostAddress address);
@@ -172,8 +172,10 @@ private:
 	void	networkDeviceStartStop(char value);
 	void	sendInitFramesToNetworkDevice(int rx);
 	
+	bool	start();
 	bool	startDataEngineWithoutConnection();
-	bool	startDataEngineWithConnection();
+	bool	findHPSDRDevices();
+	bool	getFirmwareVersions();
 	bool	startDttSPInterface(int rx);
 	void	initDttSPInterface(int rx);
 	void	initDttSPInterfaceS();
@@ -250,6 +252,9 @@ private:
 
 	QQueue<QVector<float>>	m_specAv_queue;
 
+	qVectorFloat	tmpBuf;
+	qVectorFloat	avgBuf;
+
 	TMeterType		m_meterType;
 
 	
@@ -281,6 +286,9 @@ private:
 	float	m_mainVolume;
 
 	int		m_hpsdrDevices;
+	int		m_metisFW;
+	int		m_hermesFW;
+	int		m_mercuryFW;
 	int		m_configure;
 	int		m_timeout;
 	int		m_txFrame;
@@ -314,13 +322,11 @@ private:
 	float	m_sMeterCalibrationOffset;
 	float	m_micSample_float;
 	float	m_spectrumBuffer[SAMPLE_BUFFER_SIZE];
-	float	m_wbSpectrumBuffer[2*BUFFER_SIZE];
-	float	m_tmpBuf[2*BUFFER_SIZE];
-	float	m_avgBuf[2*BUFFER_SIZE];
 
 	int		m_spectrumCounter;
-	QList<int>	m_specCntList;
 	int		m_specAveragingCnt;
+
+	QList<int>	m_specCntList;
 
 	qint64		m_audioFileBufferPosition;
     qint64		m_audioFileBufferLength;

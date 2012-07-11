@@ -55,7 +55,8 @@ public slots:
 	QSize sizeHint() const;
 
 	void setSpectrumBuffer(const float *buffer);
-	void setFrequency(QObject *sender, bool value, long freq);
+	//void setFrequency(QObject *sender, bool value, long freq);
+	void	setFrequency(QObject *sender, bool value, int rx, long freq);
 
 protected:
     void initializeGL();
@@ -184,6 +185,7 @@ private:
 	unsigned int timer;
 
 	int			m_receiver;
+	int			m_frequencyRxOnRx;
 	int			m_spectrumSize;
 	int			m_oldWidth;
 	int			m_oldPanRectHeight;
@@ -216,6 +218,7 @@ private:
 	int			m_waterfallLineCnt;
 
 	long		m_frequency;
+	long		m_otherFrequency;
 	long		m_oldFreq;
 
 	bool		m_spectrumVertexColorUpdate;
@@ -303,7 +306,7 @@ private slots:
 
 	void	setupConnections();
 	void	setCurrentReceiver(int value);
-	//void	setFrequency(QObject *sender, bool value, int rx, long freq);
+	void	setCoupledRx(QObject* sender, int value);
 	void	setFilterFrequencies(QObject *sender, int rx, qreal lo, qreal hi);
 	void	setPreamp(QObject* sender, int value);
 	void	setupDisplayRegions(QSize size);

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_audio_engine.h'
 **
-** Created: Sat 7. Jul 09:06:31 2012
+** Created: Mon 9. Jul 22:40:22 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!

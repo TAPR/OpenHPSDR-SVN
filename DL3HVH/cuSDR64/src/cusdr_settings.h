@@ -55,36 +55,6 @@
 // test for OpenCL
 #include "qclcontext.h"
 
-//// **************************************
-//// logging
-//#ifdef LOG_ALL
-//#define LOG_SETTINGS
-//#define LOG_MAIN
-//#define LOG_SERVER
-//#define LOG_DATA_ENGINE
-//#define LOG_DATA_RECEIVER
-//#define LOG_DATA_PROCESSOR
-//#define LOG_NETWORKDIALOG
-//#define LOG_HPSDRIO
-//#define LOG_AUDIO_ENGINE
-//#define LOG_AUDIO_WAVFILE
-//#define LOG_AUDIO_RECEIVER
-//#define LOG_AUDIO_PROCESSOR
-//#define LOG_CHIRP_PROCESSOR
-//#define LOG_DTTSP_API
-//#define LOG_SPECTRUMANALYSER
-//#define LOG_WAVEFORM
-//#define LOG_PAINT_EVENT
-//#define LOG_GRAPHICS
-//#define LOG_WBGRAPHICS
-//#define LOG_DISPLAYPANEL
-//#define LOG_CUDAGRAPH
-//#define LOG_SERVER_WIDGET
-//#define LOG_CHIRP_WIDGET
-//#define LOG_RECEIVER
-//#define LOG_FUTUREWATCHER
-//#define LOG_ALEX_WIDGET
-//#endif
 
 // **************************************
 // messages
@@ -364,6 +334,8 @@ enum {
 // **************************************
 // type definitions
 
+typedef QVector<float> qVectorFloat;
+
 typedef struct _frequency {
 
 	int	freqMHz;
@@ -424,10 +396,10 @@ typedef struct _hpsdrParameter {
 	uchar	control_out[5];
 
 	uchar	output_buffer[IO_BUFFER_SIZE];
-	//float			in_buffer[2*BUFFER_SIZE];
-	float			out_buffer[2*BUFFER_SIZE];
+	//float	in_buffer[2*BUFFER_SIZE];
+	float	out_buffer[2*BUFFER_SIZE];
 
-	float			wbWindow[4*BUFFER_SIZE];
+	qVectorFloat	wbWindow;
 
 	CPX*	cpxIn;
 	CPX*	cpxOut;
@@ -561,6 +533,7 @@ typedef struct t_panadapterColors {
 
 } TPanadapterColors;
 
+
 typedef enum {
 
 	SIGNAL_STRENGTH,
@@ -679,7 +652,8 @@ signals:
 	void sMeterValueChanged(int rx, float value);
 	void spectrumBufferChanged(int rx, const float* buffer);
 	void postSpectrumBufferChanged(int rx, const float* buffer);
-	void widebandSpectrumBufferChanged(const float* buffer);
+	void widebandSpectrumBufferChanged(const qVectorFloat &buffer);
+	void widebandSpectrumBufferReset();
 	void rxListChanged(QList<HPSDRReceiver *> rxList);
 	void clientConnectedChanged(QObject* sender, bool connect);
 	void clientNoConnectedChanged(QObject* sender, int client);
@@ -734,7 +708,7 @@ signals:
 	void pennyLaneVersionChanged(int value);
 	void alexPresenceChanged(bool value);
 	void excaliburPresenceChanged(bool value);
-	void hwInterfaceVersionChanged(int value);
+	void metisVersionChanged(int value);
 
 	void protocolSyncChanged(int value);
 	void adcOverflowChanged(int value);
@@ -742,6 +716,7 @@ signals:
 	void rcveIQSignalChanged(int value);
 
 	void numberOfRXChanged(QObject *sender, int value);
+	void coupledRxChanged(QObject *sender, int value);
 	void sampleRateChanged(QObject *sender, int value);
 	void preampChanged(QObject *sender, int value);
 	void ditherChanged(QObject *sender, int value);
@@ -904,7 +879,7 @@ public:
 	bool getExcaliburPresence()		{ return m_excaliburPresence; }
 	bool getJanusPresence()			{ return m_janusPresence; }
 	bool getMetisPresence()			{ return m_metisPresence; }
-	int  getHWInterfaceVersion()	{ return m_hwInterfaceVersion; }
+	int  getMetisVersion()			{ return m_metisVersion; }
 	int  getSocketBufferSize()		{ return m_socketBufferSize; }
 	bool getManualSocketBufferSize() { return m_manualSocketBufferSize; }
 
@@ -913,12 +888,13 @@ public:
 
 	bool getPanGridStatus()			{ return m_panGrid; }
 
-	int getMercurySpeed()			{ return m_mercurySpeed; }
-	int	getOutputSampleIncrement()	{ return m_outputSampleIncrement; }
-	int getNumberOfReceivers()		{ return m_mercuryReceivers; }
+	int		getMercurySpeed()			{ return m_mercurySpeed; }
+	int		getOutputSampleIncrement()	{ return m_outputSampleIncrement; }
+	int		getNumberOfReceivers()		{ return m_mercuryReceivers; }
 	//int	getCurrentReceivers()		{ return m_mercuryReceivers; }
-	int getCurrentReceiver()		{ return m_currentReceiver; }
-	int getSampleRate()				{ return m_sampleRate; }
+	int		getCurrentReceiver()		{ return m_currentReceiver; }
+	bool	getFrequencyRx1onRx2()		{ return m_frequencyRx1onRx2; }
+	int		getSampleRate()				{ return m_sampleRate; }
 
 	int getMercuryPreamp()			{ return m_mercuryPreamp; }
 	int getMercuryDither()			{ return m_mercuryDither; }
@@ -1003,7 +979,8 @@ public slots:
 	void setSMeterValue(int rx, float value);
 	void setSpectrumBuffer(int rx, const float*);
 	void setPostSpectrumBuffer(int rx, const float*);
-	void setWidebandSpectrumBuffer(const float*);
+	void setWidebandSpectrumBuffer(const qVectorFloat &buffer);
+	void resetWidebandSpectrumBuffer();
 	void setRxList(QList<HPSDRReceiver *> rxList);
 	void setMetisCardList(QList<TNetworkDevicecard> list);
 	void searchHpsdrNetworkDevices();
@@ -1042,7 +1019,7 @@ public slots:
 	void setPennyLaneVersion(int value);
 	void setAlexPresence(bool value);
 	void setExcaliburPresence(bool value);
-	void setHWInterfaceVersion(int value);
+	void setMetisVersion(int value);
 
 	void setIQPort(QObject *sender, int rx, int port);
 
@@ -1054,6 +1031,7 @@ public slots:
 	void setReceivers(QObject *sender, int value);
 	void setReceiver(QObject *sender, int value);
 	void setCurrentReceiver(int value);
+	void setCoupledReceivers(QObject *sender, int value);
 	void setSampleRate(QObject *sender, int value);
 	void setPreamp(QObject *sender, int value);
 	void setDither(QObject *sender, int value);
@@ -1218,6 +1196,8 @@ private:
 	bool	m_specAveraging;
 	bool	m_panGrid;
 
+	bool	m_frequencyRx1onRx2;
+
 	int		m_hpsdrHardware;
 	int		m_hpsdrNetworkDevices;
 	int		m_NetworkInterfacesNo;
@@ -1226,7 +1206,7 @@ private:
 	int		m_penelopeVersion;
 	int		m_pennyLaneVersion;
 	int		m_hermesVersion;
-	int		m_hwInterfaceVersion;
+	int		m_metisVersion;
 
 	int		m_clientNoConnected;
 	int		m_minimumWidgetWidth;
