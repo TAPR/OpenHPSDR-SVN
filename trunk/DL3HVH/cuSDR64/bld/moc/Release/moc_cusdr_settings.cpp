@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_settings.h'
 **
-** Created: Wed 11. Jul 22:41:28 2012
+** Created: Sun 15. Jul 21:11:15 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!

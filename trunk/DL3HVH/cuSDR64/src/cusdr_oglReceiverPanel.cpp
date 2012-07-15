@@ -92,7 +92,7 @@ QGLReceiverPanel::QGLReceiverPanel(QWidget *parent, int rx)
 	setMouseTracking(true);
 	setFocusPolicy(Qt::StrongFocus);
 
-	GRAPHICS_DEBUG << "set spectrum buffer size to:" << m_spectrumSize;
+	GRAPHICS_DEBUG << "set spectrum buffer size to: " << m_spectrumSize;
 
 	setupDisplayRegions(size());
 	m_oldWidth = size().width();
@@ -114,10 +114,11 @@ QGLReceiverPanel::QGLReceiverPanel(QWidget *parent, int rx)
 	m_waterfallTime = m_rxDataList.at(m_receiver).waterfallTime;
 	m_waterfallOffsetLo = m_rxDataList.at(m_receiver).waterfallOffsetLo;
 	m_waterfallOffsetHi = m_rxDataList.at(m_receiver).waterfallOffsetHi;
-		
 
 	m_filterLowerFrequency = m_rxDataList.at(m_receiver).filterLo;
 	m_filterUpperFrequency = m_rxDataList.at(m_receiver).filterHi;
+
+	averager = new DualModeAverager(this, m_spectrumSize);
 
 	m_tinyFont.setStyleStrategy(QFont::PreferAntialias);
 	m_tinyFont.setFixedPitch(true);
@@ -771,8 +772,8 @@ void QGLReceiverPanel::drawPanVerticalScale() {
 				m_dBmScaleFBO = 0;
 			}
 			m_dBmScaleFBO = new QGLFramebufferObject(width, height);
-			if (m_dBmScaleFBO)
-				GRAPHICS_DEBUG << "m_dBmScaleFBO generated.";
+			//if (m_dBmScaleFBO)
+			//	GRAPHICS_DEBUG << "m_dBmScaleFBO generated.";
 			
 		}
 
@@ -814,8 +815,8 @@ void QGLReceiverPanel::drawPanHorizontalScale() {
 			}
 
 			m_frequencyScaleFBO = new QGLFramebufferObject(width, height);
-			if (m_frequencyScaleFBO)
-				GRAPHICS_DEBUG << "m_frequencyScaleFBO generated.";
+			//if (m_frequencyScaleFBO)
+			//	GRAPHICS_DEBUG << "m_frequencyScaleFBO generated.";
 		}
 
 		glPushAttrib(GL_VIEWPORT_BIT);
@@ -870,8 +871,8 @@ void QGLReceiverPanel::drawPanadapterGrid() {
 			}
 
 			m_panadapterGridFBO = new QGLFramebufferObject(width, height);
-			if (m_panadapterGridFBO)
-				GRAPHICS_DEBUG << "m_panadapterGridFBO generated.";
+			//if (m_panadapterGridFBO)
+			//	GRAPHICS_DEBUG << "m_panadapterGridFBO generated.";
 		}
 
 		glPushAttrib(GL_VIEWPORT_BIT);
@@ -1074,16 +1075,16 @@ void QGLReceiverPanel::drawWaterfall() {
 				//format.setAttachment(QGLFramebufferObject::CombinedDepthStencil);
 
 				m_waterfallLineFBO = new QGLFramebufferObject(width, 1);
-				if (m_waterfallLineFBO)
-				GRAPHICS_DEBUG << "m_waterfallLineFBO generated.";
+				//if (m_waterfallLineFBO)
+				//GRAPHICS_DEBUG << "m_waterfallLineFBO generated.";
 
 				m_waterfallFBO = new QGLFramebufferObject(width, height);
-				if (m_waterfallFBO)
-				GRAPHICS_DEBUG << "m_waterfallFBO generated.";
+				//if (m_waterfallFBO)
+				//GRAPHICS_DEBUG << "m_waterfallFBO generated.";
 
 				m_textureFBO = new QGLFramebufferObject(width, height);
-				if (m_textureFBO)
-				GRAPHICS_DEBUG << "m_textureFBO generated.";
+				//if (m_textureFBO)
+				//GRAPHICS_DEBUG << "m_textureFBO generated.";
 				
 			}	
 			else {
@@ -2362,6 +2363,60 @@ void QGLReceiverPanel::freqRulerPositionChanged(float pos, int rx) {
 	}
 }
 
+//void QGLReceiverPanel::setSpectrumBuffer(const float *buffer) {
+//
+//	if (m_spectrumAveraging) {
+//	
+//		QVector<float> specBuf(m_spectrumSize);
+//		QVector<float> avg;
+//
+//		//spectrumBufferMutex.lock();
+//
+//		memcpy(
+//			(float *) specBuf.data(),
+//			(float *) &buffer[0],
+//			m_spectrumSize * sizeof(float));
+//
+//		specAv_queue.enqueue(specBuf);
+//		if (specAv_queue.size() <= m_specAveragingCnt) {
+//	
+//			for (int i = 0; i < m_spectrumSize; i++) {
+//				
+//				if (m_tmp.size() < m_spectrumSize)
+//					m_tmp << specAv_queue.last().data()[i];
+//				else
+//					m_tmp[i] += specAv_queue.last().data()[i];
+//			}
+//			//spectrumBufferMutex.unlock();
+//			return;
+//		}
+//	
+//		for (int i = 0; i < m_spectrumSize; i++) {
+//
+//			m_tmp[i] -= specAv_queue.first().at(i);
+//			m_tmp[i] += specAv_queue.last().at(i);
+//			avg << m_tmp.at(i) * m_scale;
+//		}
+//
+//		computeDisplayBins(avg, buffer);
+//		specAv_queue.dequeue();
+//	
+//		avg.clear();
+//		//spectrumBufferMutex.unlock();
+//	}
+//	else {
+//
+//		QVector<float> specBuf(m_spectrumSize);
+//
+//		memcpy(
+//			(float *) specBuf.data(),
+//			(float *) &buffer[0],
+//			m_spectrumSize * sizeof(float));
+//
+//		computeDisplayBins(specBuf, buffer);
+//	}
+//}
+
 void QGLReceiverPanel::setSpectrumBuffer(const float *buffer) {
 
 	if (m_spectrumAveraging) {
@@ -2376,31 +2431,34 @@ void QGLReceiverPanel::setSpectrumBuffer(const float *buffer) {
 			(float *) &buffer[0],
 			m_spectrumSize * sizeof(float));
 
-		specAv_queue.enqueue(specBuf);
-		if (specAv_queue.size() <= m_specAveragingCnt) {
-	
-			for (int i = 0; i < m_spectrumSize; i++) {
-				
-				if (m_tmp.size() < m_spectrumSize)
-					m_tmp << specAv_queue.last().data()[i];
-				else
-					m_tmp[i] += specAv_queue.last().data()[i];
-			}
-			//spectrumBufferMutex.unlock();
-			return;
-		}
-	
-		for (int i = 0; i < m_spectrumSize; i++) {
+		averager->ProcessDBAverager(specBuf, specBuf);
+		computeDisplayBins(specBuf, buffer);
 
-			m_tmp[i] -= specAv_queue.first().at(i);
-			m_tmp[i] += specAv_queue.last().at(i);
-			avg << m_tmp.at(i) * m_scale;
-		}
-
-		computeDisplayBins(avg, buffer);
-		specAv_queue.dequeue();
+		//specAv_queue.enqueue(specBuf);
+		//if (specAv_queue.size() <= m_specAveragingCnt) {
 	
-		avg.clear();
+		//	for (int i = 0; i < m_spectrumSize; i++) {
+		//		
+		//		if (m_tmp.size() < m_spectrumSize)
+		//			m_tmp << specAv_queue.last().data()[i];
+		//		else
+		//			m_tmp[i] += specAv_queue.last().data()[i];
+		//	}
+		//	//spectrumBufferMutex.unlock();
+		//	return;
+		//}
+	
+		//for (int i = 0; i < m_spectrumSize; i++) {
+
+		//	m_tmp[i] -= specAv_queue.first().at(i);
+		//	m_tmp[i] += specAv_queue.last().at(i);
+		//	avg << m_tmp.at(i) * m_scale;
+		//}
+
+		//computeDisplayBins(avg, buffer);
+		//specAv_queue.dequeue();
+	
+		//avg.clear();
 		//spectrumBufferMutex.unlock();
 	}
 	else {
@@ -2417,7 +2475,6 @@ void QGLReceiverPanel::setSpectrumBuffer(const float *buffer) {
 }
 
 void QGLReceiverPanel::computeDisplayBins(const QVector<float> &panBuffer, const float *waterfallBuffer) {
-//void QGLReceiverPanel::computeDisplayBins(const float *panBuffer, const float *waterfallBuffer) {
 
 	int newSampleSize = 0;
 	int deltaSampleSize = 0;
@@ -2433,8 +2490,6 @@ void QGLReceiverPanel::computeDisplayBins(const QVector<float> &panBuffer, const
 	}
 	else {
 
-		/*newSampleSize = (int)floor(4 * BUFFER_SIZE * m_freqScaleZoomFactor);
-		deltaSampleSize = 4 * BUFFER_SIZE - newSampleSize;*/
 		newSampleSize = (int)floor(m_spectrumSize * m_freqScaleZoomFactor);
 		deltaSampleSize = m_spectrumSize - newSampleSize;
 	}

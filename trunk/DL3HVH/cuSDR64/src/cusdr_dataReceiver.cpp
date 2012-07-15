@@ -144,6 +144,18 @@ void DataReceiver::initDataReceiverSocket() {
 
 void DataReceiver::readMetisData() {
 
+	/*if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16)
+		m_wbDatagram.resize(2*BIGWIDEBANDSIZE);
+	else
+		m_wbDatagram.resize(0);*/
+
+	// if we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples, m_wbBuffers = 8
+	// we have 16384 * 16 bit = 32 * 1024 raw consecutive ADC samples, m_wbBuffers = 32
+	if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16)
+		m_wbBuffers = BIGWIDEBANDSIZE / 512;
+	else
+		m_wbBuffers = SMALLWIDEBANDSIZE / 512;
+
 	while (m_dataReceiverSocket->hasPendingDatagrams()) {
 
 		if (m_dataReceiverSocket->readDatagram(m_datagram.data(), m_datagram.size()) == METIS_DATA_SIZE) {
@@ -183,20 +195,15 @@ void DataReceiver::readMetisData() {
 					m_oldSequenceWideBand = m_sequenceWideBand;
 
 					// check for the last 3 bits of m_sequenceWideBand being 0, then copy over the payload
-					if ((0x07 & m_datagram[7]) == 0)	m_sendEP4 = true;
+					if ((0x07 & m_datagram[7]) == 0) m_sendEP4 = true;
 
 					if (m_sendEP4) {
 						
 						m_wbDatagram.append(m_datagram.mid(METIS_HEADER_SIZE, BUFFER_SIZE));
+						//m_wbDatagram.replace(m_wbCount * BUFFER_SIZE, BUFFER_SIZE, m_datagram.mid(METIS_HEADER_SIZE));
 						m_wbCount++;
 					}
-					// if we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples, m_wbBuffers = 8
-					// we have 16384 * 16 bit = 32 * 1024 raw consecutive ADC samples, m_wbBuffers = 32
-					if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16)
-						m_wbBuffers = 32;
-					else
-						m_wbBuffers = 8;
-
+					
 					if (m_wbCount == m_wbBuffers) {
 
 						// enqueue
@@ -204,6 +211,11 @@ void DataReceiver::readMetisData() {
 						m_wbDatagram.resize(0);
 						m_wbCount = 0;
 					}
+
+					//// enqueue
+					//io->wb_queue.enqueue(m_wbDatagram);
+					////m_wbDatagram.resize(0);
+					//if (m_wbCount == m_wbBuffers) m_wbCount = 0;
 				}
 			}
 		}

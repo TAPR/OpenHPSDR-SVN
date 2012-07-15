@@ -44,6 +44,15 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.2.2.1:
+
+- A new averaging method has been implemented. This method is taken from
+  Richard Lyons' book 'Understanding Digital Signal Processing', 3rd ed.,
+  p.791. It is called 'Dual-Mode Averaging', and consists of an exponential
+  averaging together with a fast way of blending the moving averager.
+  Note, this method introduces also a noise reduction, which can be seen
+  on the 16k wide band spectrum if you turn averaging on and off.
+  
 v0.2.2.0:
 
 - In order to ensure backward compatibility to HPSDR firmware versions,

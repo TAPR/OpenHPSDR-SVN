@@ -32,6 +32,7 @@
 #include "cusdr_settings.h"
 //#include "cusdr_oglTextRenderer.h"
 #include "cusdr_oglText.h"
+#include "cusdr_dualModeAverager.h"
 
 #include <QPixmap>
 #include <QImage>
@@ -90,6 +91,8 @@ private:
 	QTime			freqChangeTimer;
 	
 	//QGLWidget		*m_shareWidget;
+
+	DualModeAverager*	averager;
 
 	TScale			m_frequencyScale;
 	TScale			m_dBmScale;
