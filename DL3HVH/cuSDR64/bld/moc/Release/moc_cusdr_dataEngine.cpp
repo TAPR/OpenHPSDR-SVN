@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_dataEngine.h'
 **
-** Created: Wed 11. Jul 22:41:33 2012
+** Created: Sun 15. Jul 21:11:16 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_DataEngine[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      87,   14, // methods
+      86,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -111,15 +111,14 @@ static const uint qt_meta_data_DataEngine[] = {
     2633,   11,   11,   11, 0x08,
     2661,  428,   11,   11, 0x08,
     2685,  537,   11,   11, 0x08,
-    2714,  537,   11,   11, 0x08,
-    2745,   11,   11,   11, 0x08,
-    2763,   11,   11,   11, 0x08,
-    2781, 1023,   11,   11, 0x08,
-    2820, 1023,   11,   11, 0x08,
-    2873, 2859,   11,   11, 0x08,
-    2931, 2915,   11,   11, 0x08,
-    2999, 2969,   11,   11, 0x08,
-    3053,  621,   11,   11, 0x08,
+    2714,   11,   11,   11, 0x08,
+    2732,   11,   11,   11, 0x08,
+    2750, 1023,   11,   11, 0x08,
+    2789, 1023,   11,   11, 0x08,
+    2842, 2828,   11,   11, 0x08,
+    2900, 2884,   11,   11, 0x08,
+    2968, 2938,   11,   11, 0x08,
+    3022,  621,   11,   11, 0x08,
 
        0        // eod
 };
@@ -200,7 +199,6 @@ static const char qt_meta_stringdata_DataEngine[] = {
     "searchHpsdrNetworkDevices()\0"
     "setCurrentReceiver(int)\0"
     "setWbSpectrumAveraging(bool)\0"
-    "setWbSpectrumAveragingCnt(int)\0"
     "dttspProcessing()\0qtdspProcessing()\0"
     "setDttSPMainVolume(QObject*,int,float)\0"
     "setQtDSPMainVolume(QObject*,int,float)\0"
@@ -296,15 +294,14 @@ void DataEngine::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 75: _t->searchHpsdrNetworkDevices(); break;
         case 76: _t->setCurrentReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 77: _t->setWbSpectrumAveraging((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 78: _t->setWbSpectrumAveragingCnt((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 79: _t->dttspProcessing(); break;
-        case 80: _t->qtdspProcessing(); break;
-        case 81: _t->setDttSPMainVolume((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< float(*)>(_a[3]))); break;
-        case 82: _t->setQtDSPMainVolume((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< float(*)>(_a[3]))); break;
-        case 83: _t->setAudioFileFormat((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< const QAudioFormat(*)>(_a[2]))); break;
-        case 84: _t->setAudioFilePosition((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2]))); break;
-        case 85: _t->setAudioFileBuffer((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2])),(*reinterpret_cast< qint64(*)>(_a[3])),(*reinterpret_cast< const QByteArray(*)>(_a[4]))); break;
-        case 86: _t->setAudioFileBuffer((*reinterpret_cast< const QList<qreal>(*)>(_a[1]))); break;
+        case 78: _t->dttspProcessing(); break;
+        case 79: _t->qtdspProcessing(); break;
+        case 80: _t->setDttSPMainVolume((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< float(*)>(_a[3]))); break;
+        case 81: _t->setQtDSPMainVolume((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< float(*)>(_a[3]))); break;
+        case 82: _t->setAudioFileFormat((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< const QAudioFormat(*)>(_a[2]))); break;
+        case 83: _t->setAudioFilePosition((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2]))); break;
+        case 84: _t->setAudioFileBuffer((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2])),(*reinterpret_cast< qint64(*)>(_a[3])),(*reinterpret_cast< const QByteArray(*)>(_a[4]))); break;
+        case 85: _t->setAudioFileBuffer((*reinterpret_cast< const QList<qreal>(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -342,9 +339,9 @@ int DataEngine::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 87)
+        if (_id < 86)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 87;
+        _id -= 86;
     }
     return _id;
 }

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_oglReceiverPanel.h'
 **
-** Created: Wed 11. Jul 21:23:24 2012
+** Created: Sat 14. Jul 23:41:01 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!

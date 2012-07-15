@@ -439,6 +439,15 @@
     <ClCompile Include="res\qrc_cusdr.cpp">
       <Filter>Generierte Dateien</Filter>
     </ClCompile>
+    <ClCompile Include="bld\moc\Debug\moc_cusdr_dualModeAverager.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\moc\Release\moc_cusdr_dualModeAverager.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cusdr_dualModeAverager.cpp">
+      <Filter>Source Dateien\DSP Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\cusdr_buttons.h">
@@ -563,6 +572,9 @@
     </CustomBuild>
     <CustomBuild Include="res\cusdr.qrc">
       <Filter>Resource Dateien</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\cusdr_dualModeAverager.h">
+      <Filter>Header Dateien\DSP Engine</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

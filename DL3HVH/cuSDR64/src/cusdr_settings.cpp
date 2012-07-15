@@ -98,8 +98,8 @@ Settings::Settings(QObject *parent)
 	settingsFilename = "settings.ini";
 	settings = new QSettings(QCoreApplication::applicationDirPath() +  "/" + settingsFilename, QSettings::IniFormat);
 
-	m_titleString = "cuSDR64 BETA";
-	m_versionString = "v0.2.2.0";
+	m_titleString = "cuSDR64 BETA ";
+	m_versionString = "v0.2.2.1";
 
 	// get styles
 	//m_sdrStyle = sdrStyle;
@@ -1428,6 +1428,7 @@ void Settings::setSystemState(
 	SETTINGS_DEBUG	<< "hwInterface: " << qPrintable(getHWInterfaceModeString(m_hwInterface));
 	SETTINGS_DEBUG	<< "serverMode: " << qPrintable(getServerModeString(m_serverMode));
 	SETTINGS_DEBUG	<< "dataEngineState: " << qPrintable(getHDataEngineStateString(m_dataEngineState));
+	SETTINGS_DEBUG	<< " ";
 
 	emit systemStateChanged(this, m_systemError, m_hwInterface, m_serverMode, m_dataEngineState);
 }

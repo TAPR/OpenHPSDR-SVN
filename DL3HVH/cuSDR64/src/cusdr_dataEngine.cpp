@@ -257,12 +257,6 @@ void DataEngine::setupConnections() {
 
 	CHECKED_CONNECT(
 		settings, 
-		SIGNAL(spectrumAveragingCntChanged(int)), 
-		this, 
-		SLOT(setWbSpectrumAveragingCnt(int)));
-
-	CHECKED_CONNECT(
-		settings, 
 		SIGNAL(networkDeviceNumberChanged(int)), 
 		this, 
 		SLOT(setHPSDRDeviceNumber(int)));
@@ -811,9 +805,6 @@ void DataEngine::stop() {
 
 		while (!io.au_queue.isEmpty())
 			io.au_queue.dequeue();
-
-		while (!m_specAv_queue.isEmpty())
-			m_specAv_queue.dequeue();
 
 		QCoreApplication::processEvents();
 
@@ -1870,9 +1861,9 @@ void DataEngine::createWideBandDataProcessor() {
 	int size;
 
 	if (m_mercuryFW > 32 || m_hermesFW > 16)
-		size = 16 * BUFFER_SIZE; // 16k wide band data
+		size = BIGWIDEBANDSIZE;
 	else
-		size = 4 * BUFFER_SIZE; // 4k wide band data
+		size = SMALLWIDEBANDSIZE;
 	
 	m_wbDataProcessor = new WideBandDataProcessor(this);
 
@@ -1896,21 +1887,20 @@ void DataEngine::createWideBandDataProcessor() {
 			// wide band data complex buffer
 			io.cpxWBIn	= mallocCPX(size);
 			io.cpxWBOut	= mallocCPX(size);
+			io.cpxWBTmp	= mallocCPX(size);
 
 			io.wbWindow.resize(size);
 			io.wbWindow.fill(0.0f);
 
 			memset(io.cpxWBIn, 0, size * sizeof(CPX));
 			memset(io.cpxWBOut, 0, size * sizeof(CPX));
+			memset(io.cpxWBTmp, 0, size * sizeof(CPX));
 			//memset(io.wbWindow, 0, size * sizeof(float));
 			
 			QFilter::MakeWindow(12, size, (float *)io.wbWindow.data()); // 12 = BLACKMANHARRIS_WINDOW
 
-			tmpBuf.resize(size/2);
-			tmpBuf.fill(0.0f);
-			avgBuf.resize(size/2);
-			avgBuf.fill(0.0f);
-			
+			m_wbAverager = new DualModeAverager(this, size/2);
+
 			break;
 
 		case QSDR::ExternalDSP:
@@ -2569,14 +2559,14 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 	int size;
 
 	if (m_mercuryFW > 32 || m_hermesFW > 16)
-		size = 32 * BUFFER_SIZE; // 16k wide band data
+		size = 2 * BIGWIDEBANDSIZE;
 	else
-		size = 8 * BUFFER_SIZE; // 4k wide band data
+		size = 2 * SMALLWIDEBANDSIZE;
 	
 	qint64 length = buffer.length();
 	if (buffer.length() != size) {
 
-		DATA_PROCESSOR_DEBUG << "wrong wide band buffer length" << length;
+		DATA_PROCESSOR_DEBUG << "wrong wide band buffer length: " << length;
 		return;
 	}
 
@@ -2602,47 +2592,26 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 	m_wbFFT->DoFFTWForward(io.cpxWBIn, io.cpxWBOut, size/2);
 	
 	// averaging
+	QVector<float>	specBuf(size/4);
+
+	wbMutex.lock();
 	if (m_wbSpectrumAveraging) {
 		
-		QVector<float>	m_specBuf(size/4);
-		for (int i = 0; i < size/4; i++) {
+		for (int i = 0; i < size/4; i++)
+			specBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
 
-			m_specBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
-		}
-
-		m_specAv_queue.enqueue(m_specBuf);
-		if (m_specAv_queue.size() <= m_specAveragingCnt) {
-	
-			for (int i = 0; i < size/4; i++)
-				tmpBuf[i] += m_specAv_queue.last().data()[i];
-				//m_tmpBuf[i] += m_specAv_queue.last().data()[i];
-
-			return;
-		}
-	
-		for (int i = 0; i < size/4; i++) {
-
-			tmpBuf[i] -= m_specAv_queue.first().at(i);
-			tmpBuf[i] += m_specAv_queue.last().at(i);
-			avgBuf[i] = tmpBuf.at(i) * m_scale;
-			/*m_tmpBuf[i] -= m_specAv_queue.first().at(i);
-			m_tmpBuf[i] += m_specAv_queue.last().at(i);
-			m_avgBuf[i] = m_tmpBuf[i] * m_scale;*/
-		}
-
-		settings->setWidebandSpectrumBuffer(avgBuf);
-		//settings->setWidebandSpectrumBuffer(m_avgBuf);
-		m_specAv_queue.dequeue();
+		m_wbAverager->ProcessDBAverager(specBuf, specBuf);
+		wbMutex.unlock();
 	}
 	else {
 
 		for (int i = 0; i < size/4; i++)
-			//m_tmpBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
-			tmpBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
+			specBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
 
-		settings->setWidebandSpectrumBuffer(tmpBuf);
-		//settings->setWidebandSpectrumBuffer(m_tmpBuf);
+		wbMutex.unlock();
 	}
+
+	settings->setWidebandSpectrumBuffer(specBuf);
 }
 
 void DataEngine::processFileBuffer(const QList<qreal> buffer) {
@@ -3505,34 +3474,11 @@ void DataEngine::setAgcGain(QObject *sender, int rx, int value) {
 
 void DataEngine::setWbSpectrumAveraging(bool value) {
 
-	//spectrumBufferMutex.lock();
-	
-	if (m_wbSpectrumAveraging == value) 
-		return;
-	else {
-
-		setWbSpectrumAveragingCnt(m_specAveragingCnt);
-		m_wbSpectrumAveraging = value;
-	}
-	
-	//spectrumBufferMutex.unlock();
+	wbMutex.lock();
+	m_wbSpectrumAveraging = value;
+	wbMutex.unlock();
 }
 
-void DataEngine::setWbSpectrumAveragingCnt(int value) {
-	
-	//spectrumBufferMutex.lock();
-	while (!m_specAv_queue.isEmpty())
-		m_specAv_queue.dequeue();
-
-	m_specAveragingCnt = value;
-
-	if (m_specAveragingCnt > 0)
-		m_scale = 1.0f / m_specAveragingCnt;
-	else
-		m_scale = 1.0f;
-
-	//spectrumBufferMutex.unlock();
-}
  
 //**************************************************
 // DttSP control

@@ -93,6 +93,9 @@
 #define SAMPLE_BUFFER_SIZE			4096
 
 #define								SMALL_PACKETS
+#define BIGWIDEBANDSIZE				16384
+//#define BIGWIDEBANDSIZE				32768
+#define SMALLWIDEBANDSIZE			4096
 
 
 // **************************************
@@ -405,6 +408,7 @@ typedef struct _hpsdrParameter {
 	CPX*	cpxOut;
 	CPX*	cpxWBIn;
 	CPX*	cpxWBOut;
+	CPX*	cpxWBTmp;
 	CPX*	cpxTmp;
 
 	QByteArray	audioDatagram;

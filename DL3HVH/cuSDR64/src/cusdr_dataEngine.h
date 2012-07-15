@@ -55,6 +55,7 @@
 #include "cusdr_chirpProcessor.h"
 #include "cusdr_audioReceiver.h"
 #include "cusdr_hpsdrIO.h"
+#include "cusdr_dualModeAverager.h"
 
 //using namespace QtConcurrent;
 
@@ -228,6 +229,7 @@ private:
 	QHpsdrIO*					m_hpsdrIO;
 
 	QFFT*						m_wbFFT;
+	DualModeAverager*			m_wbAverager;
 	
 	QThreadEx					*m_netIOThread;
 	QThreadEx					*m_dataRcvrThread;
@@ -238,6 +240,7 @@ private:
 	QThreadEx					*m_audioProcThread;
 
 	QMutex		m_mutex;
+	QMutex		wbMutex;
 
 	QString		m_message;
 
@@ -250,10 +253,10 @@ private:
 	QSDR::_HWInterfaceMode	m_hwInterface;
 	QSDR::_DataEngineState	m_dataEngineState;
 
-	QQueue<QVector<float>>	m_specAv_queue;
+	//QQueue<QVector<float>>	m_specAv_queue;
 
-	qVectorFloat	tmpBuf;
-	qVectorFloat	avgBuf;
+	//qVectorFloat	tmpBuf;
+	//qVectorFloat	avgBuf;
 
 	TMeterType		m_meterType;
 
@@ -352,8 +355,7 @@ private slots:
 	void	searchHpsdrNetworkDevices();
 	void	setCurrentReceiver(int rx);
 	void	setWbSpectrumAveraging(bool value);
-	void	setWbSpectrumAveragingCnt(int value);
-
+	
 	void	dttspProcessing();
 	void	qtdspProcessing();
 	//void	dspProcessing(int rx);

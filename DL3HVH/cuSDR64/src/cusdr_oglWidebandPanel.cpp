@@ -133,7 +133,7 @@ QGLWidebandPanel::QGLWidebandPanel(QWidget *parent)
 	m_displayTime.start();
 	m_resizeTime.start();
 
-	m_wbSpectrumBuffer.resize(8 * BUFFER_SIZE);
+	m_wbSpectrumBuffer.resize(BIGWIDEBANDSIZE / 2);
 	m_wbSpectrumBuffer.fill(-1000.0f);
 
 	m_dBmPanLogGain = 75;//69; // allow user to calibrate this value
@@ -380,16 +380,16 @@ void QGLWidebandPanel::drawSpectrum() {
 	int deltaIdx = 0;
 
 	qreal scaleMult = 1.0;
-	
+
 	if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16) {
 
-		newBufferSize = qFloor(8.0 * BUFFER_SIZE * m_freqScaleZoomFactor);
-		deltaIdx = qFloor(m_displayDelta * (8.0 * BUFFER_SIZE / MAXFREQUENCY));
+		newBufferSize = qFloor(BIGWIDEBANDSIZE / 2 * m_freqScaleZoomFactor);
+		deltaIdx = qFloor(m_displayDelta * (BIGWIDEBANDSIZE / 2 * MAXFREQUENCY));
 	}
 	else {
 
-		newBufferSize = qFloor(2.0 * BUFFER_SIZE * m_freqScaleZoomFactor);
-		deltaIdx = qFloor(m_displayDelta * (2.0 * BUFFER_SIZE / MAXFREQUENCY));
+		newBufferSize = qFloor(SMALLWIDEBANDSIZE / 2 * m_freqScaleZoomFactor);
+		deltaIdx = qFloor(m_displayDelta * (SMALLWIDEBANDSIZE / 2 / MAXFREQUENCY));
 	}
 	
 	qreal frequencyScale = (qreal)(1.0f * newBufferSize / width);
@@ -1580,6 +1580,7 @@ void QGLWidebandPanel::mouseMoveEvent(QMouseEvent* event) {
 
 				if (m_freqScaleZoomFactor > 1.0) m_freqScaleZoomFactor = 1.0f;
 				if (m_freqScaleZoomFactor < 0.24) m_freqScaleZoomFactor = 0.24f;
+				//if (m_freqScaleZoomFactor < 0.12) m_freqScaleZoomFactor = 0.12f;
 
 				m_mouseDownPos = pos;
 				m_freqScaleUpdate = true;
@@ -1805,13 +1806,13 @@ void QGLWidebandPanel::setWidebandSpectrumBuffer(const qVectorFloat &buffer) {
 	mutex.lock();
 	if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16) {
 
-		if (m_wbSpectrumBuffer.size() != 8 * BUFFER_SIZE)
-			m_wbSpectrumBuffer.resize(8 * BUFFER_SIZE);
+		if (m_wbSpectrumBuffer.size() != BIGWIDEBANDSIZE / 2)
+			m_wbSpectrumBuffer.resize(BIGWIDEBANDSIZE / 2);
 	}
 	else {
 
-		if (m_wbSpectrumBuffer.size() != 2 * BUFFER_SIZE)
-			m_wbSpectrumBuffer.resize(2 * BUFFER_SIZE);
+		if (m_wbSpectrumBuffer.size() != SMALLWIDEBANDSIZE / 2)
+			m_wbSpectrumBuffer.resize(SMALLWIDEBANDSIZE / 2);
 	}
 
 	m_wbSpectrumBuffer = buffer;
@@ -1821,7 +1822,7 @@ void QGLWidebandPanel::setWidebandSpectrumBuffer(const qVectorFloat &buffer) {
 
 void QGLWidebandPanel::resetWidebandSpectrumBuffer() {
 
-	m_wbSpectrumBuffer.resize(8 * BUFFER_SIZE);
+	m_wbSpectrumBuffer.resize(BIGWIDEBANDSIZE / 2);
 	m_wbSpectrumBuffer.fill(-1000.0f);
 }
 
