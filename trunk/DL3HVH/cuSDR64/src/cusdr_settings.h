@@ -779,6 +779,7 @@ signals:
 	void spectrumSizeChanged(int value);
 	void panadapterColorChanged();
 	void panGridStatusChanged(bool value);
+	void peakHoldStatusChanged(bool value);
 
 	void spectrumAveragingChanged(bool value);
 	void spectrumAveragingCntChanged(int value);
@@ -891,6 +892,7 @@ public:
 	bool getWideBandData()			{ return m_wideBandData; }
 
 	bool getPanGridStatus()			{ return m_panGrid; }
+	bool getPeakHoldStatus()		{ return m_peakHold; }
 
 	int		getMercurySpeed()			{ return m_mercurySpeed; }
 	int		getOutputSampleIncrement()	{ return m_outputSampleIncrement; }
@@ -1115,6 +1117,7 @@ public slots:
 
 	void setPanadapterColors(TPanadapterColors type);
 	void setPanGrid(bool value);
+	void setPeakHold(bool value);
 	void setFramesPerSecond(int value);
 	void setGraphicResolution(int value);
 
@@ -1199,6 +1202,7 @@ private:
 	//bool	main_mute;
 	bool	m_specAveraging;
 	bool	m_panGrid;
+	bool	m_peakHold;
 
 	bool	m_frequencyRx1onRx2;
 

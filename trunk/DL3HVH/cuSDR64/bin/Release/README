@@ -44,6 +44,11 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.2.2.2:
+
+- Peak Hold for the Panadapter has been added. Works currently only for 
+  display style 'Line'.
+
 v0.2.2.1:
 
 - A new averaging method has been implemented. This method is taken from

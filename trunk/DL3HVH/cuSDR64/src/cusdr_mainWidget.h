@@ -68,6 +68,7 @@ public slots:
 	void		wideBandBtnClickedEvent();
 	void		avgBtnClickedEvent();
 	void		gridBtnClickedEvent();
+	void		peakHoldBtnClickedEvent();
 	void		resizeWidget();
 	
 	void		showWidgetEvent(QObject *sender);
@@ -147,7 +148,6 @@ private:
 	RadioWidget*		m_radioWidget;
 	ServerWidget*		m_serverWidget;
 	ChirpWidget*		m_chirpWidget;
-	//HPSDRWidget*		m_hpsdrWidget;
 	HPSDRTabWidget*		m_hpsdrTabWidget;
 	AlexWidget*			m_alexWidget;
 	PennyWidget*		m_pennyWidget;
@@ -177,6 +177,7 @@ private:
 	AeroButton			*quitBtn;
 	
 	AeroButton			*avgBtn;
+	AeroButton			*peakHoldBtn;
 	AeroButton			*gridBtn;
 	AeroButton			*lastFreqBtn;
 
@@ -226,6 +227,7 @@ private slots:
     void setExternalDSPMode();
     void setChirpWSPRMode();
 	void setCudaDSPMode();
+	void setPeakHoldStatus(bool);
 	//void setAlexPresence(bool value);
 	//void setPennyPresence(bool value);
 	void getNetworkInterfaces();
