@@ -81,6 +81,7 @@ Settings::Settings(QObject *parent)
 	, m_currentReceiver(0)
 	, m_hpsdrNetworkDevices(0)
 	, m_manualSocketBufferSize(false)
+	, m_peakHold(false)
 {
 	// temporarily
 	m_pennyLanePresence = false;
@@ -99,7 +100,7 @@ Settings::Settings(QObject *parent)
 	settings = new QSettings(QCoreApplication::applicationDirPath() +  "/" + settingsFilename, QSettings::IniFormat);
 
 	m_titleString = "cuSDR64 BETA ";
-	m_versionString = "v0.2.2.1";
+	m_versionString = "v0.2.2.2";
 
 	// get styles
 	//m_sdrStyle = sdrStyle;
@@ -2565,6 +2566,16 @@ void Settings::setPanGrid(bool value) {
 	locker.unlock();
 
 	emit panGridStatusChanged(m_panGrid);
+}
+
+void Settings::setPeakHold(bool value) {
+
+	QMutexLocker locker(&mutex);
+		if (m_peakHold == value) return;
+		m_peakHold = value;
+	locker.unlock();
+
+	emit peakHoldStatusChanged(m_peakHold);
 }
 
 void Settings::setWaterfallTime(int rx, int value) {

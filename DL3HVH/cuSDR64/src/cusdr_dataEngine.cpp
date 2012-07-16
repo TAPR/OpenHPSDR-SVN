@@ -111,6 +111,7 @@ DataEngine::DataEngine(QObject *parent)
 	m_audioReceiver = 0;
 	m_audioProcessor = 0;
 	m_chirpProcessor = 0;
+	m_wbAverager = 0;
 
 	settings->setMercuryVersion(0);
 	settings->setPenelopeVersion(0);
@@ -861,6 +862,8 @@ void DataEngine::stop() {
 	settings->setPenelopeVersion(0);
 	settings->setMetisVersion(0);
 	settings->setHermesVersion(0);
+
+	//settings->setPeakHold(false);
 
 	settings->resetWidebandSpectrumBuffer();
 
@@ -1961,6 +1964,9 @@ void DataEngine::stopWideBandDataProcessor() {
 		delete m_wbFFT;
 		freeCPX(io.cpxWBIn);
 		freeCPX(io.cpxWBOut);
+
+		if (m_wbAverager)
+			delete m_wbAverager;
 		
 		DATA_ENGINE_DEBUG << "wide band data processor thread deleted.";
 	}

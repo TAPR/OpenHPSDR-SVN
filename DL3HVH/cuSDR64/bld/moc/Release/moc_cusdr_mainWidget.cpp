@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_mainWidget.h'
 **
-** Created: Wed 11. Jul 22:41:31 2012
+** Created: Mon 16. Jul 22:21:51 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      43,   14, // methods
+      45,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -43,39 +43,41 @@ static const uint qt_meta_data_MainWindow[] = {
      201,   11,   11,   11, 0x0a,
      222,   11,   11,   11, 0x0a,
      244,   11,   11,   11, 0x0a,
-     266,  259,   11,   11, 0x0a,
-     292,  259,   11,   11, 0x0a,
-     335,  319,   11,   11, 0x0a,
-     365,  259,   11,   11, 0x0a,
-     389,  259,   11,   11, 0x0a,
-     419,  259,   11,   11, 0x0a,
-     483,  454,   11,   11, 0x08,
-     589,   11,   11,   11, 0x08,
-     618,   11,   11,   11, 0x08,
-     636,   11,   11,   11, 0x08,
-     657,   11,   11,   11, 0x08,
-     681,   11,   11,   11, 0x08,
-     695,   11,   11,   11, 0x08,
-     712,   12,   11,   11, 0x08,
-     733,   11,   11,   11, 0x08,
-     749,   11,   11,   11, 0x08,
-     766,  761,   11,   11, 0x08,
-     799,   11,   11,   11, 0x08,
-     816,  813,   11,   11, 0x08,
-     846,  833,   11,   11, 0x08,
-     881,   11,   11,   11, 0x08,
-     902,   11,   11,   11, 0x08,
-     917,   11,   11,   11, 0x08,
-     932,   11,   11,   11, 0x08,
-     953,   11,   11,   11, 0x08,
-     972,   11,   11,   11, 0x08,
-     989,   11,   11,   11, 0x08,
-    1018, 1012,   11,   11, 0x08,
-    1037, 1012,   11,   11, 0x08,
-    1053,   11,   11,   11, 0x08,
-    1072,   11,   11,   11, 0x08,
-    1098, 1094,   11,   11, 0x08,
-    1133,   11,   11,   11, 0x08,
+     270,   11,   11,   11, 0x0a,
+     292,  285,   11,   11, 0x0a,
+     318,  285,   11,   11, 0x0a,
+     361,  345,   11,   11, 0x0a,
+     391,  285,   11,   11, 0x0a,
+     415,  285,   11,   11, 0x0a,
+     445,  285,   11,   11, 0x0a,
+     509,  480,   11,   11, 0x08,
+     615,   11,   11,   11, 0x08,
+     644,   11,   11,   11, 0x08,
+     662,   11,   11,   11, 0x08,
+     683,   11,   11,   11, 0x08,
+     707,   11,   11,   11, 0x08,
+     721,   11,   11,   11, 0x08,
+     738,   12,   11,   11, 0x08,
+     759,   11,   11,   11, 0x08,
+     775,   11,   11,   11, 0x08,
+     792,  787,   11,   11, 0x08,
+     825,   11,   11,   11, 0x08,
+     842,  839,   11,   11, 0x08,
+     872,  859,   11,   11, 0x08,
+     907,   11,   11,   11, 0x08,
+     928,   11,   11,   11, 0x08,
+     943,   11,   11,   11, 0x08,
+     958,   11,   11,   11, 0x08,
+     979,   11,   11,   11, 0x08,
+     998,   11,   11,   11, 0x08,
+    1015,   11,   11,   11, 0x08,
+    1039,   11,   11,   11, 0x08,
+    1068, 1062,   11,   11, 0x08,
+    1087, 1062,   11,   11, 0x08,
+    1103,   11,   11,   11, 0x08,
+    1122,   11,   11,   11, 0x08,
+    1148, 1144,   11,   11, 0x08,
+    1183,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -89,7 +91,8 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "widgetBtnClickedEvent()\0"
     "wideBandBtnClickedEvent()\0"
     "avgBtnClickedEvent()\0gridBtnClickedEvent()\0"
-    "resizeWidget()\0sender\0showWidgetEvent(QObject*)\0"
+    "peakHoldBtnClickedEvent()\0resizeWidget()\0"
+    "sender\0showWidgetEvent(QObject*)\0"
     "closeWidgetEvent(QObject*)\0sender,fileName\0"
     "loadWavFile(QObject*,QString)\0"
     "suspendSignal(QObject*)\0"
@@ -109,8 +112,8 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "setInternalDSPMode()\0setDttSPMode()\0"
     "setQtDSPMode()\0setExternalDSPMode()\0"
     "setChirpWSPRMode()\0setCudaDSPMode()\0"
-    "getNetworkInterfaces()\0value\0"
-    "setMainVolume(int)\0setAGCGain(int)\0"
+    "setPeakHoldStatus(bool)\0getNetworkInterfaces()\0"
+    "value\0setMainVolume(int)\0setAGCGain(int)\0"
     "getLastFrequency()\0showNetworkIODialog()\0"
     "str\0addNetworkIOComboBoxEntry(QString)\0"
     "clearNetworkIOComboBoxEntry()\0"
@@ -131,40 +134,42 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 6: _t->wideBandBtnClickedEvent(); break;
         case 7: _t->avgBtnClickedEvent(); break;
         case 8: _t->gridBtnClickedEvent(); break;
-        case 9: _t->resizeWidget(); break;
-        case 10: _t->showWidgetEvent((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
-        case 11: _t->closeWidgetEvent((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
-        case 12: _t->loadWavFile((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
-        case 13: _t->suspendSignal((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
-        case 14: _t->startPlaybackSignal((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
-        case 15: _t->showSettingsDialogSignal((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
-        case 16: _t->systemStateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDR::_Error(*)>(_a[2])),(*reinterpret_cast< QSDR::_HWInterfaceMode(*)>(_a[3])),(*reinterpret_cast< QSDR::_ServerMode(*)>(_a[4])),(*reinterpret_cast< QSDR::_DataEngineState(*)>(_a[5]))); break;
-        case 17: _t->ctrlDisplayBtnClickedEvent(); break;
-        case 18: _t->closeMainWindow(); break;
-        case 19: _t->maximizeMainWindow(); break;
-        case 20: _t->setMainWindowGeometry(); break;
-        case 21: _t->updateTitle(); break;
-        case 22: _t->initialMessage(); break;
-        case 23: _t->showMessage((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 24: _t->setFullScreen(); break;
-        case 25: _t->getRegion(); break;
-        case 26: _t->setServerMode((*reinterpret_cast< QSDR::_ServerMode(*)>(_a[1]))); break;
-        case 27: _t->setReceiver(); break;
-        case 28: _t->setReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 29: _t->setNumberOfReceivers((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 30: _t->setInternalDSPMode(); break;
-        case 31: _t->setDttSPMode(); break;
-        case 32: _t->setQtDSPMode(); break;
-        case 33: _t->setExternalDSPMode(); break;
-        case 34: _t->setChirpWSPRMode(); break;
-        case 35: _t->setCudaDSPMode(); break;
-        case 36: _t->getNetworkInterfaces(); break;
-        case 37: _t->setMainVolume((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 38: _t->setAGCGain((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 39: _t->getLastFrequency(); break;
-        case 40: _t->showNetworkIODialog(); break;
-        case 41: _t->addNetworkIOComboBoxEntry((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 42: _t->clearNetworkIOComboBoxEntry(); break;
+        case 9: _t->peakHoldBtnClickedEvent(); break;
+        case 10: _t->resizeWidget(); break;
+        case 11: _t->showWidgetEvent((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
+        case 12: _t->closeWidgetEvent((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
+        case 13: _t->loadWavFile((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 14: _t->suspendSignal((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
+        case 15: _t->startPlaybackSignal((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
+        case 16: _t->showSettingsDialogSignal((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
+        case 17: _t->systemStateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDR::_Error(*)>(_a[2])),(*reinterpret_cast< QSDR::_HWInterfaceMode(*)>(_a[3])),(*reinterpret_cast< QSDR::_ServerMode(*)>(_a[4])),(*reinterpret_cast< QSDR::_DataEngineState(*)>(_a[5]))); break;
+        case 18: _t->ctrlDisplayBtnClickedEvent(); break;
+        case 19: _t->closeMainWindow(); break;
+        case 20: _t->maximizeMainWindow(); break;
+        case 21: _t->setMainWindowGeometry(); break;
+        case 22: _t->updateTitle(); break;
+        case 23: _t->initialMessage(); break;
+        case 24: _t->showMessage((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 25: _t->setFullScreen(); break;
+        case 26: _t->getRegion(); break;
+        case 27: _t->setServerMode((*reinterpret_cast< QSDR::_ServerMode(*)>(_a[1]))); break;
+        case 28: _t->setReceiver(); break;
+        case 29: _t->setReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 30: _t->setNumberOfReceivers((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 31: _t->setInternalDSPMode(); break;
+        case 32: _t->setDttSPMode(); break;
+        case 33: _t->setQtDSPMode(); break;
+        case 34: _t->setExternalDSPMode(); break;
+        case 35: _t->setChirpWSPRMode(); break;
+        case 36: _t->setCudaDSPMode(); break;
+        case 37: _t->setPeakHoldStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 38: _t->getNetworkInterfaces(); break;
+        case 39: _t->setMainVolume((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 40: _t->setAGCGain((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 41: _t->getLastFrequency(); break;
+        case 42: _t->showNetworkIODialog(); break;
+        case 43: _t->addNetworkIOComboBoxEntry((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 44: _t->clearNetworkIOComboBoxEntry(); break;
         default: ;
         }
     }
@@ -202,9 +207,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 43)
+        if (_id < 45)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 43;
+        _id -= 45;
     }
     return _id;
 }

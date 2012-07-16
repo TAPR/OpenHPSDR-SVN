@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_settings.h'
 **
-** Created: Sun 15. Jul 21:11:15 2012
+** Created: Mon 16. Jul 22:21:51 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,12 +23,12 @@ static const uint qt_meta_data_Settings[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-     251,   14, // methods
+     253,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-     123,       // signalCount
+     124,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
       18,   10,    9,    9, 0x05,
@@ -145,145 +145,147 @@ static const uint qt_meta_data_Settings[] = {
     4485,    9,    9,    9, 0x05,
     4510,  778,    9,    9, 0x05,
     4537,  778,    9,    9, 0x05,
-    4568,  778,    9,    9, 0x05,
-    4601,  375,    9,    9, 0x05,
-    4631,  375,    9,    9, 0x05,
-    4666,  375,    9,    9, 0x05,
-    4701,  778,    9,    9, 0x05,
-    4728,  375,    9,    9, 0x05,
-    4758,  375,    9,    9, 0x05,
-    4788,  778,    9,    9, 0x05,
+    4565,  778,    9,    9, 0x05,
+    4596,  778,    9,    9, 0x05,
+    4629,  375,    9,    9, 0x05,
+    4659,  375,    9,    9, 0x05,
+    4694,  375,    9,    9, 0x05,
+    4729,  778,    9,    9, 0x05,
+    4756,  375,    9,    9, 0x05,
+    4786,  375,    9,    9, 0x05,
     4816,  778,    9,    9, 0x05,
+    4844,  778,    9,    9, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-    4844,   40,    9,    9, 0x0a,
-    4872,  990,    9,    9, 0x0a,
-    4902, 1079,    9,    9, 0x0a,
-    4931, 1121,    9,    9, 0x0a,
-    4955, 1864,    9,    9, 0x0a,
-    4976,  778,    9,    9, 0x0a,
-    4997,  778,    9,    9, 0x0a,
-    5018, 1941,    9,    9, 0x0a,
-    5052,   88,    9,    9, 0x0a,
-    5170, 5154,    9,    9, 0x0a,
-    5259,  346,    9,    9, 0x0a,
-    5279,  375,    9,    9, 0x0a,
-    5309, 5305,    9,    9, 0x0a,
-    5345, 5305,    9,    9, 0x0a,
-    5385,  508,    9,    9, 0x0a,
-    5425,    9,    9,    9, 0x0a,
-    5455,  589,    9,    9, 0x0a,
-    5488, 1380,    9,    9, 0x0a,
-    5532,    9,    9,    9, 0x0a,
+    4872,   40,    9,    9, 0x0a,
+    4900,  990,    9,    9, 0x0a,
+    4930, 1079,    9,    9, 0x0a,
+    4959, 1121,    9,    9, 0x0a,
+    4983, 1864,    9,    9, 0x0a,
+    5004,  778,    9,    9, 0x0a,
+    5025,  778,    9,    9, 0x0a,
+    5046, 1941,    9,    9, 0x0a,
+    5080,   88,    9,    9, 0x0a,
+    5198, 5182,    9,    9, 0x0a,
+    5287,  346,    9,    9, 0x0a,
+    5307,  375,    9,    9, 0x0a,
+    5337, 5333,    9,    9, 0x0a,
+    5373, 5333,    9,    9, 0x0a,
+    5413,  508,    9,    9, 0x0a,
+    5453,    9,    9,    9, 0x0a,
+    5483,  589,    9,    9, 0x0a,
+    5516, 1380,    9,    9, 0x0a,
     5560,    9,    9,    9, 0x0a,
-    5581,  778,    9,    9, 0x0a,
-    5607, 1433,    9,    9, 0x0a,
-    5647, 1503,    9,    9, 0x0a,
-    5682,    9,    9,    9, 0x0a,
-    5712, 1156,    9,    9, 0x0a,
-    5755, 1156,    9,    9, 0x0a,
-    5790,  778,    9,    9, 0x0a,
-    5830, 5824,    9,    9, 0x0a,
-    5861, 5824,    9,    9, 0x0a,
-    5884, 5824,    9,    9, 0x0a,
-    5908, 5824,    9,    9, 0x0a,
-    5931, 1600,    9,    9, 0x0a,
-    5963, 1600,    9,    9, 0x0a,
-    6005, 1694,    9,    9, 0x0a,
-    6037, 1694,    9,    9, 0x0a,
-    6069, 1694,    9,    9, 0x0a,
-    6100, 1694,    9,    9, 0x0a,
-    6131,  990,    9,    9, 0x0a,
-    6165,  686,    9,    9, 0x0a,
-    6200,  930,    9,    9, 0x0a,
-    6240,  739,    9,    9, 0x0a,
-    6265,  990,    9,    9, 0x0a,
-    6293,  778,    9,    9, 0x0a,
-    6315,  778,    9,    9, 0x0a,
-    6337,  778,    9,    9, 0x0a,
-    6362,  778,    9,    9, 0x0a,
-    6385,  778,    9,    9, 0x0a,
-    6411,  778,    9,    9, 0x0a,
-    6435,  778,    9,    9, 0x0a,
-    6462,  778,    9,    9, 0x0a,
-    6487,  778,    9,    9, 0x0a,
-    6509,  778,    9,    9, 0x0a,
-    6536,  778,    9,    9, 0x0a,
-    6557, 2928,    9,    9, 0x0a,
-    6585,  778,    9,    9, 0x0a,
-    6606,  778,    9,    9, 0x0a,
-    6626,  778,    9,    9, 0x0a,
-    6641,  778,    9,    9, 0x0a,
-    6656,  990,    9,    9, 0x0a,
-    6683,  990,    9,    9, 0x0a,
-    6709,  778,    9,    9, 0x0a,
-    6733,  990,    9,    9, 0x0a,
-    6767,  990,    9,    9, 0x0a,
+    5588,    9,    9,    9, 0x0a,
+    5609,  778,    9,    9, 0x0a,
+    5635, 1433,    9,    9, 0x0a,
+    5675, 1503,    9,    9, 0x0a,
+    5710,    9,    9,    9, 0x0a,
+    5740, 1156,    9,    9, 0x0a,
+    5783, 1156,    9,    9, 0x0a,
+    5818,  778,    9,    9, 0x0a,
+    5858, 5852,    9,    9, 0x0a,
+    5889, 5852,    9,    9, 0x0a,
+    5912, 5852,    9,    9, 0x0a,
+    5936, 5852,    9,    9, 0x0a,
+    5959, 1600,    9,    9, 0x0a,
+    5991, 1600,    9,    9, 0x0a,
+    6033, 1694,    9,    9, 0x0a,
+    6065, 1694,    9,    9, 0x0a,
+    6097, 1694,    9,    9, 0x0a,
+    6128, 1694,    9,    9, 0x0a,
+    6159,  990,    9,    9, 0x0a,
+    6193,  686,    9,    9, 0x0a,
+    6228,  930,    9,    9, 0x0a,
+    6268,  739,    9,    9, 0x0a,
+    6293,  990,    9,    9, 0x0a,
+    6321,  778,    9,    9, 0x0a,
+    6343,  778,    9,    9, 0x0a,
+    6365,  778,    9,    9, 0x0a,
+    6390,  778,    9,    9, 0x0a,
+    6413,  778,    9,    9, 0x0a,
+    6439,  778,    9,    9, 0x0a,
+    6463,  778,    9,    9, 0x0a,
+    6490,  778,    9,    9, 0x0a,
+    6515,  778,    9,    9, 0x0a,
+    6537,  778,    9,    9, 0x0a,
+    6564,  778,    9,    9, 0x0a,
+    6585, 2928,    9,    9, 0x0a,
+    6613,  778,    9,    9, 0x0a,
+    6634,  778,    9,    9, 0x0a,
+    6654,  778,    9,    9, 0x0a,
+    6669,  778,    9,    9, 0x0a,
+    6684,  990,    9,    9, 0x0a,
+    6711,  990,    9,    9, 0x0a,
+    6737,  778,    9,    9, 0x0a,
+    6761,  990,    9,    9, 0x0a,
     6795,  990,    9,    9, 0x0a,
-    6819,  990,    9,    9, 0x0a,
-    6843,  990,    9,    9, 0x0a,
-    6867, 2582,    9,    9, 0x0a,
-    6896, 2582,    9,    9, 0x0a,
-    6929, 2582,    9,    9, 0x0a,
-    6956,  990,    9,    9, 0x0a,
-    6979,  990,    9,    9, 0x0a,
-    7003, 2808,    9,    9, 0x0a,
-    7053, 7040,    9,    9, 0x0a,
-    7076,  868,    9,    9, 0x0a,
-    7100,  990,    9,    9, 0x0a,
-    7133,  990,    9,    9, 0x0a,
-    7172,  990,    9,    9, 0x0a,
-    7206,  990,    9,    9, 0x0a,
-    7247,  778,    9,    9, 0x0a,
-    7268,  375,    9,    9, 0x0a,
-    7297,  375,    9,    9, 0x0a,
-    7326,  778,    9,    9, 0x0a,
-    7350,  778,    9,    9, 0x0a,
-    7374,  778,    9,    9, 0x0a,
-    7400,  778,    9,    9, 0x0a,
-    7426,  778,    9,    9, 0x0a,
-    7450,  778,    9,    9, 0x0a,
-    7472, 2975,    9,    9, 0x0a,
-    7505, 3027,    9,    9, 0x0a,
-    7538, 3027,    9,    9, 0x0a,
-    7571,  930,    9,    9, 0x0a,
-    7600, 3149,    9,    9, 0x0a,
-    7642, 7638,    9,    9, 0x0a,
-    7684, 7677,    9,    9, 0x0a,
-    7720, 7716,    9,    9, 0x0a,
-    7752, 3485,    9,    9, 0x0a,
-    7790, 3541,    9,    9, 0x0a,
-    7824, 3595,    9,    9, 0x0a,
-    7874, 3679,    9,    9, 0x0a,
-    7908,  778,    9,    9, 0x0a,
-    7931,  778,    9,    9, 0x0a,
-    7954,  778,    9,    9, 0x0a,
-    7979,  778,    9,    9, 0x0a,
-    8005,  778,    9,    9, 0x0a,
-    8035,  778,    9,    9, 0x0a,
-    8064,  778,    9,    9, 0x0a,
-    8087,  778,    9,    9, 0x0a,
-    8110,  778,    9,    9, 0x0a,
-    8132,  778,    9,    9, 0x0a,
-    8150,  778,    9,    9, 0x0a,
-    8184,  778,    9,    9, 0x0a,
-    8218, 3991,    9,    9, 0x0a,
-    8254, 4208,    9,    9, 0x0a,
-    8302, 4285,    9,    9, 0x0a,
-    8352, 4364,    9,    9, 0x0a,
-    8399,  778,    9,    9, 0x0a,
-    8427, 8422,    9,    9, 0x0a,
-    8466,  778,    9,    9, 0x0a,
-    8483,  778,    9,    9, 0x0a,
-    8507,  778,    9,    9, 0x0a,
-    8533,  778,    9,    9, 0x0a,
-    8560,  778,    9,    9, 0x0a,
-    8589,  375,    9,    9, 0x0a,
-    8615,  375,    9,    9, 0x0a,
-    8646,  375,    9,    9, 0x0a,
-    8677,  778,    9,    9, 0x0a,
-    8700,    9,    9,    9, 0x0a,
-    8734,    9, 8722,    9, 0x0a,
+    6823,  990,    9,    9, 0x0a,
+    6847,  990,    9,    9, 0x0a,
+    6871,  990,    9,    9, 0x0a,
+    6895, 2582,    9,    9, 0x0a,
+    6924, 2582,    9,    9, 0x0a,
+    6957, 2582,    9,    9, 0x0a,
+    6984,  990,    9,    9, 0x0a,
+    7007,  990,    9,    9, 0x0a,
+    7031, 2808,    9,    9, 0x0a,
+    7081, 7068,    9,    9, 0x0a,
+    7104,  868,    9,    9, 0x0a,
+    7128,  990,    9,    9, 0x0a,
+    7161,  990,    9,    9, 0x0a,
+    7200,  990,    9,    9, 0x0a,
+    7234,  990,    9,    9, 0x0a,
+    7275,  778,    9,    9, 0x0a,
+    7296,  375,    9,    9, 0x0a,
+    7325,  375,    9,    9, 0x0a,
+    7354,  778,    9,    9, 0x0a,
+    7378,  778,    9,    9, 0x0a,
+    7402,  778,    9,    9, 0x0a,
+    7428,  778,    9,    9, 0x0a,
+    7454,  778,    9,    9, 0x0a,
+    7478,  778,    9,    9, 0x0a,
+    7500, 2975,    9,    9, 0x0a,
+    7533, 3027,    9,    9, 0x0a,
+    7566, 3027,    9,    9, 0x0a,
+    7599,  930,    9,    9, 0x0a,
+    7628, 3149,    9,    9, 0x0a,
+    7670, 7666,    9,    9, 0x0a,
+    7712, 7705,    9,    9, 0x0a,
+    7748, 7744,    9,    9, 0x0a,
+    7780, 3485,    9,    9, 0x0a,
+    7818, 3541,    9,    9, 0x0a,
+    7852, 3595,    9,    9, 0x0a,
+    7902, 3679,    9,    9, 0x0a,
+    7936,  778,    9,    9, 0x0a,
+    7959,  778,    9,    9, 0x0a,
+    7982,  778,    9,    9, 0x0a,
+    8007,  778,    9,    9, 0x0a,
+    8033,  778,    9,    9, 0x0a,
+    8063,  778,    9,    9, 0x0a,
+    8092,  778,    9,    9, 0x0a,
+    8115,  778,    9,    9, 0x0a,
+    8138,  778,    9,    9, 0x0a,
+    8160,  778,    9,    9, 0x0a,
+    8178,  778,    9,    9, 0x0a,
+    8212,  778,    9,    9, 0x0a,
+    8246, 3991,    9,    9, 0x0a,
+    8282, 4208,    9,    9, 0x0a,
+    8330, 4285,    9,    9, 0x0a,
+    8380, 4364,    9,    9, 0x0a,
+    8427,  778,    9,    9, 0x0a,
+    8455, 8450,    9,    9, 0x0a,
+    8494,  778,    9,    9, 0x0a,
+    8511,  778,    9,    9, 0x0a,
+    8529,  778,    9,    9, 0x0a,
+    8553,  778,    9,    9, 0x0a,
+    8579,  778,    9,    9, 0x0a,
+    8606,  778,    9,    9, 0x0a,
+    8635,  375,    9,    9, 0x0a,
+    8661,  375,    9,    9, 0x0a,
+    8692,  375,    9,    9, 0x0a,
+    8723,  778,    9,    9, 0x0a,
+    8746,    9,    9,    9, 0x0a,
+    8780,    9, 8768,    9, 0x0a,
 
        0        // eod
 };
@@ -413,6 +415,7 @@ static const char qt_meta_stringdata_Settings[] = {
     "spectrumSizeChanged(int)\0"
     "panadapterColorChanged()\0"
     "panGridStatusChanged(bool)\0"
+    "peakHoldStatusChanged(bool)\0"
     "spectrumAveragingChanged(bool)\0"
     "spectrumAveragingCntChanged(int)\0"
     "waterfallTimeChanged(int,int)\0"
@@ -524,7 +527,8 @@ static const char qt_meta_stringdata_Settings[] = {
     "setChirpSpectrumList(QList<FrequencySpectrum>)\0"
     "moveDisplayWidget(int)\0type\0"
     "setPanadapterColors(TPanadapterColors)\0"
-    "setPanGrid(bool)\0setFramesPerSecond(int)\0"
+    "setPanGrid(bool)\0setPeakHold(bool)\0"
+    "setFramesPerSecond(int)\0"
     "setGraphicResolution(int)\0"
     "setSpectrumAveraging(bool)\0"
     "setSpectrumAveragingCnt(int)\0"
@@ -654,144 +658,146 @@ void Settings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 110: _t->spectrumSizeChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 111: _t->panadapterColorChanged(); break;
         case 112: _t->panGridStatusChanged((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 113: _t->spectrumAveragingChanged((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 114: _t->spectrumAveragingCntChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 115: _t->waterfallTimeChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 116: _t->waterfallOffesetLoChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 117: _t->waterfallOffesetHiChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 118: _t->sMeterHoldTimeChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 119: _t->dBmScaleMinChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
-        case 120: _t->dBmScaleMaxChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
-        case 121: _t->dBmScaleWBMinChanged((*reinterpret_cast< qreal(*)>(_a[1]))); break;
-        case 122: _t->dBmScaleWBMaxChanged((*reinterpret_cast< qreal(*)>(_a[1]))); break;
-        case 123: _t->setMainPower((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 124: _t->setDefaultSkin((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 125: _t->setSettingsFilename((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 126: _t->setSettingsLoaded((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 127: _t->setCallsign((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 128: _t->setPBOPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 129: _t->setFBOPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 130: _t->setMainVolume((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< float(*)>(_a[3]))); break;
-        case 131: _t->setSystemState((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDR::_Error(*)>(_a[2])),(*reinterpret_cast< QSDR::_HWInterfaceMode(*)>(_a[3])),(*reinterpret_cast< QSDR::_ServerMode(*)>(_a[4])),(*reinterpret_cast< QSDR::_DataEngineState(*)>(_a[5]))); break;
-        case 132: _t->setGraphicsState((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDRGraphics::_Panadapter(*)>(_a[2])),(*reinterpret_cast< QSDRGraphics::_WaterfallColorScheme(*)>(_a[3]))); break;
-        case 133: _t->setMultiRxView((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 134: _t->setSMeterValue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2]))); break;
-        case 135: _t->setSpectrumBuffer((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const float*(*)>(_a[2]))); break;
-        case 136: _t->setPostSpectrumBuffer((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const float*(*)>(_a[2]))); break;
-        case 137: _t->setWidebandSpectrumBuffer((*reinterpret_cast< const qVectorFloat(*)>(_a[1]))); break;
-        case 138: _t->resetWidebandSpectrumBuffer(); break;
-        case 139: _t->setRxList((*reinterpret_cast< QList<HPSDRReceiver*>(*)>(_a[1]))); break;
-        case 140: _t->setMetisCardList((*reinterpret_cast< QList<TNetworkDevicecard>(*)>(_a[1]))); break;
-        case 141: _t->searchHpsdrNetworkDevices(); break;
-        case 142: _t->clearMetisCardList(); break;
-        case 143: _t->setHPSDRDeviceNumber((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 144: _t->setCurrentMetisCard((*reinterpret_cast< TNetworkDevicecard(*)>(_a[1]))); break;
-        case 145: _t->addNetworkIOComboBoxEntry((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 146: _t->clearNetworkIOComboBoxEntry(); break;
-        case 147: _t->addServerNetworkInterface((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 148: _t->addHPSDRDeviceNIC((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 149: _t->setNumberOfNetworkInterfaces((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 150: _t->setServerNetworkInterface((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 151: _t->setHPSDRDeviceNIC((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 152: _t->setServerWidgetNIC((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 153: _t->setHPSDRWidgetNIC((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 154: _t->setServerAddr((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 155: _t->setHPSDRDeviceLocalAddr((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 156: _t->setServerPort((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< quint16(*)>(_a[2]))); break;
-        case 157: _t->setListenPort((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< quint16(*)>(_a[2]))); break;
-        case 158: _t->setAudioPort((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< quint16(*)>(_a[2]))); break;
-        case 159: _t->setMetisPort((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< quint16(*)>(_a[2]))); break;
-        case 160: _t->setClientConnected((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 161: _t->setClientNoConnected((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 162: _t->setRxConnectedStatus((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
-        case 163: _t->setAudioRx((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 164: _t->setConnected((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 165: _t->setHermesVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 166: _t->setHPSDRHardware((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 167: _t->setMercuryPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 168: _t->setMercuryVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 169: _t->setPenelopePresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 170: _t->setPenelopeVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 171: _t->setPennyLanePresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 172: _t->setPennyLaneVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 173: _t->setAlexPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 174: _t->setExcaliburPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 175: _t->setMetisVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 176: _t->setIQPort((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
-        case 177: _t->setProtocolSync((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 178: _t->setADCOverflow((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 179: _t->setSendIQ((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 180: _t->setRcveIQ((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 181: _t->setReceivers((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 182: _t->setReceiver((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 183: _t->setCurrentReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 184: _t->setCoupledReceivers((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 185: _t->setSampleRate((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 186: _t->setPreamp((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 187: _t->setDither((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 188: _t->setRandom((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 189: _t->set10MhzSource((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 190: _t->set122_88MhzSource((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 191: _t->setMicSource((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 192: _t->setClass((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 193: _t->setTiming((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 194: _t->setFrequency((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< long(*)>(_a[4]))); break;
-        case 195: _t->setFrequency((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< long(*)>(_a[2]))); break;
-        case 196: _t->clientDisconnected((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 197: _t->setFramesPerSecond((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 198: _t->setMouseWheelFreqStep((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
-        case 199: _t->setSocketBufferSize((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 200: _t->setManualSocketBufferSize((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 201: _t->setSpectrumSize((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 202: _t->setdBmPanScaleMin((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
-        case 203: _t->setdBmPanScaleMax((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
-        case 204: _t->setdBmWBScaleMin((*reinterpret_cast< qreal(*)>(_a[1]))); break;
-        case 205: _t->setdBmWBScaleMax((*reinterpret_cast< qreal(*)>(_a[1]))); break;
-        case 206: _t->setdBmDistScaleMin((*reinterpret_cast< qreal(*)>(_a[1]))); break;
-        case 207: _t->setdBmDistScaleMax((*reinterpret_cast< qreal(*)>(_a[1]))); break;
-        case 208: _t->setWideBandStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 209: _t->setWideBandData((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 210: _t->setHamBand((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< HamBand(*)>(_a[3]))); break;
-        case 211: _t->setDSPMode((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< DSPMode(*)>(_a[3]))); break;
-        case 212: _t->setAGCMode((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< AGCMode(*)>(_a[3]))); break;
-        case 213: _t->setAGCGain((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
-        case 214: _t->setRXFilter((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< qreal(*)>(_a[3])),(*reinterpret_cast< qreal(*)>(_a[4]))); break;
-        case 215: _t->setOpenCLDevices((*reinterpret_cast< QList<QCLDevice>(*)>(_a[1]))); break;
-        case 216: _t->setFreqRulerPosition((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 217: _t->setWideBandRulerPosition((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 218: _t->setAudioFormat((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< const QAudioFormat(*)>(_a[2]))); break;
-        case 219: _t->setAudioPosition((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2]))); break;
-        case 220: _t->setAudioBuffer((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2])),(*reinterpret_cast< qint64(*)>(_a[3])),(*reinterpret_cast< const QByteArray(*)>(_a[4]))); break;
-        case 221: _t->switchToChirpSignalMode((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
-        case 222: _t->setLowerChirpFreq((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 223: _t->setUpperChirpFreq((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 224: _t->setChirpAmplitude((*reinterpret_cast< qreal(*)>(_a[1]))); break;
-        case 225: _t->setChirpSamplingFreq((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 226: _t->setChirpBufferDurationUs((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 227: _t->setChirpRepetitionTimes((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 228: _t->setChirpReceiver((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 229: _t->setChirpAvgLength((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 230: _t->setChirpFFTShow((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 231: _t->setChirpUSB((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 232: _t->setChirpFilterLowerFrequency((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 233: _t->setChirpFilterUpperFrequency((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 234: _t->setChirpBuffer((*reinterpret_cast< qint64(*)>(_a[1])),(*reinterpret_cast< const QList<qreal>(*)>(_a[2]))); break;
-        case 235: _t->setChirpSpectrumBuffer((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2])),(*reinterpret_cast< const float*(*)>(_a[3]))); break;
-        case 236: _t->setChirpSpectrum((*reinterpret_cast< qint64(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2])),(*reinterpret_cast< const FrequencySpectrum(*)>(_a[3]))); break;
-        case 237: _t->setChirpSpectrumList((*reinterpret_cast< const QList<FrequencySpectrum>(*)>(_a[1]))); break;
-        case 238: _t->moveDisplayWidget((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 239: _t->setPanadapterColors((*reinterpret_cast< TPanadapterColors(*)>(_a[1]))); break;
-        case 240: _t->setPanGrid((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 241: _t->setFramesPerSecond((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 242: _t->setGraphicResolution((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 243: _t->setSpectrumAveraging((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 244: _t->setSpectrumAveragingCnt((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 245: _t->setWaterfallTime((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 246: _t->setWaterfallOffesetLo((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 247: _t->setWaterfallOffesetHi((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 248: _t->setSMeterHoldTime((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 249: _t->showNetworkIODialog(); break;
-        case 250: { QList<long> _r = _t->getFrequencies();
+        case 113: _t->peakHoldStatusChanged((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 114: _t->spectrumAveragingChanged((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 115: _t->spectrumAveragingCntChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 116: _t->waterfallTimeChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 117: _t->waterfallOffesetLoChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 118: _t->waterfallOffesetHiChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 119: _t->sMeterHoldTimeChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 120: _t->dBmScaleMinChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
+        case 121: _t->dBmScaleMaxChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
+        case 122: _t->dBmScaleWBMinChanged((*reinterpret_cast< qreal(*)>(_a[1]))); break;
+        case 123: _t->dBmScaleWBMaxChanged((*reinterpret_cast< qreal(*)>(_a[1]))); break;
+        case 124: _t->setMainPower((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 125: _t->setDefaultSkin((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 126: _t->setSettingsFilename((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 127: _t->setSettingsLoaded((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 128: _t->setCallsign((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 129: _t->setPBOPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 130: _t->setFBOPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 131: _t->setMainVolume((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< float(*)>(_a[3]))); break;
+        case 132: _t->setSystemState((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDR::_Error(*)>(_a[2])),(*reinterpret_cast< QSDR::_HWInterfaceMode(*)>(_a[3])),(*reinterpret_cast< QSDR::_ServerMode(*)>(_a[4])),(*reinterpret_cast< QSDR::_DataEngineState(*)>(_a[5]))); break;
+        case 133: _t->setGraphicsState((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDRGraphics::_Panadapter(*)>(_a[2])),(*reinterpret_cast< QSDRGraphics::_WaterfallColorScheme(*)>(_a[3]))); break;
+        case 134: _t->setMultiRxView((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 135: _t->setSMeterValue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2]))); break;
+        case 136: _t->setSpectrumBuffer((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const float*(*)>(_a[2]))); break;
+        case 137: _t->setPostSpectrumBuffer((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const float*(*)>(_a[2]))); break;
+        case 138: _t->setWidebandSpectrumBuffer((*reinterpret_cast< const qVectorFloat(*)>(_a[1]))); break;
+        case 139: _t->resetWidebandSpectrumBuffer(); break;
+        case 140: _t->setRxList((*reinterpret_cast< QList<HPSDRReceiver*>(*)>(_a[1]))); break;
+        case 141: _t->setMetisCardList((*reinterpret_cast< QList<TNetworkDevicecard>(*)>(_a[1]))); break;
+        case 142: _t->searchHpsdrNetworkDevices(); break;
+        case 143: _t->clearMetisCardList(); break;
+        case 144: _t->setHPSDRDeviceNumber((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 145: _t->setCurrentMetisCard((*reinterpret_cast< TNetworkDevicecard(*)>(_a[1]))); break;
+        case 146: _t->addNetworkIOComboBoxEntry((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 147: _t->clearNetworkIOComboBoxEntry(); break;
+        case 148: _t->addServerNetworkInterface((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 149: _t->addHPSDRDeviceNIC((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 150: _t->setNumberOfNetworkInterfaces((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 151: _t->setServerNetworkInterface((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 152: _t->setHPSDRDeviceNIC((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 153: _t->setServerWidgetNIC((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 154: _t->setHPSDRWidgetNIC((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 155: _t->setServerAddr((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 156: _t->setHPSDRDeviceLocalAddr((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 157: _t->setServerPort((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< quint16(*)>(_a[2]))); break;
+        case 158: _t->setListenPort((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< quint16(*)>(_a[2]))); break;
+        case 159: _t->setAudioPort((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< quint16(*)>(_a[2]))); break;
+        case 160: _t->setMetisPort((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< quint16(*)>(_a[2]))); break;
+        case 161: _t->setClientConnected((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 162: _t->setClientNoConnected((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 163: _t->setRxConnectedStatus((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
+        case 164: _t->setAudioRx((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 165: _t->setConnected((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 166: _t->setHermesVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 167: _t->setHPSDRHardware((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 168: _t->setMercuryPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 169: _t->setMercuryVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 170: _t->setPenelopePresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 171: _t->setPenelopeVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 172: _t->setPennyLanePresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 173: _t->setPennyLaneVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 174: _t->setAlexPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 175: _t->setExcaliburPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 176: _t->setMetisVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 177: _t->setIQPort((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 178: _t->setProtocolSync((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 179: _t->setADCOverflow((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 180: _t->setSendIQ((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 181: _t->setRcveIQ((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 182: _t->setReceivers((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 183: _t->setReceiver((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 184: _t->setCurrentReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 185: _t->setCoupledReceivers((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 186: _t->setSampleRate((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 187: _t->setPreamp((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 188: _t->setDither((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 189: _t->setRandom((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 190: _t->set10MhzSource((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 191: _t->set122_88MhzSource((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 192: _t->setMicSource((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 193: _t->setClass((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 194: _t->setTiming((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 195: _t->setFrequency((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< long(*)>(_a[4]))); break;
+        case 196: _t->setFrequency((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< long(*)>(_a[2]))); break;
+        case 197: _t->clientDisconnected((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 198: _t->setFramesPerSecond((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 199: _t->setMouseWheelFreqStep((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
+        case 200: _t->setSocketBufferSize((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 201: _t->setManualSocketBufferSize((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 202: _t->setSpectrumSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 203: _t->setdBmPanScaleMin((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
+        case 204: _t->setdBmPanScaleMax((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
+        case 205: _t->setdBmWBScaleMin((*reinterpret_cast< qreal(*)>(_a[1]))); break;
+        case 206: _t->setdBmWBScaleMax((*reinterpret_cast< qreal(*)>(_a[1]))); break;
+        case 207: _t->setdBmDistScaleMin((*reinterpret_cast< qreal(*)>(_a[1]))); break;
+        case 208: _t->setdBmDistScaleMax((*reinterpret_cast< qreal(*)>(_a[1]))); break;
+        case 209: _t->setWideBandStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 210: _t->setWideBandData((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 211: _t->setHamBand((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< HamBand(*)>(_a[3]))); break;
+        case 212: _t->setDSPMode((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< DSPMode(*)>(_a[3]))); break;
+        case 213: _t->setAGCMode((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< AGCMode(*)>(_a[3]))); break;
+        case 214: _t->setAGCGain((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 215: _t->setRXFilter((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< qreal(*)>(_a[3])),(*reinterpret_cast< qreal(*)>(_a[4]))); break;
+        case 216: _t->setOpenCLDevices((*reinterpret_cast< QList<QCLDevice>(*)>(_a[1]))); break;
+        case 217: _t->setFreqRulerPosition((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 218: _t->setWideBandRulerPosition((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 219: _t->setAudioFormat((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< const QAudioFormat(*)>(_a[2]))); break;
+        case 220: _t->setAudioPosition((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2]))); break;
+        case 221: _t->setAudioBuffer((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2])),(*reinterpret_cast< qint64(*)>(_a[3])),(*reinterpret_cast< const QByteArray(*)>(_a[4]))); break;
+        case 222: _t->switchToChirpSignalMode((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
+        case 223: _t->setLowerChirpFreq((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 224: _t->setUpperChirpFreq((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 225: _t->setChirpAmplitude((*reinterpret_cast< qreal(*)>(_a[1]))); break;
+        case 226: _t->setChirpSamplingFreq((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 227: _t->setChirpBufferDurationUs((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 228: _t->setChirpRepetitionTimes((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 229: _t->setChirpReceiver((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 230: _t->setChirpAvgLength((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 231: _t->setChirpFFTShow((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 232: _t->setChirpUSB((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 233: _t->setChirpFilterLowerFrequency((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 234: _t->setChirpFilterUpperFrequency((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 235: _t->setChirpBuffer((*reinterpret_cast< qint64(*)>(_a[1])),(*reinterpret_cast< const QList<qreal>(*)>(_a[2]))); break;
+        case 236: _t->setChirpSpectrumBuffer((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2])),(*reinterpret_cast< const float*(*)>(_a[3]))); break;
+        case 237: _t->setChirpSpectrum((*reinterpret_cast< qint64(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2])),(*reinterpret_cast< const FrequencySpectrum(*)>(_a[3]))); break;
+        case 238: _t->setChirpSpectrumList((*reinterpret_cast< const QList<FrequencySpectrum>(*)>(_a[1]))); break;
+        case 239: _t->moveDisplayWidget((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 240: _t->setPanadapterColors((*reinterpret_cast< TPanadapterColors(*)>(_a[1]))); break;
+        case 241: _t->setPanGrid((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 242: _t->setPeakHold((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 243: _t->setFramesPerSecond((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 244: _t->setGraphicResolution((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 245: _t->setSpectrumAveraging((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 246: _t->setSpectrumAveragingCnt((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 247: _t->setWaterfallTime((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 248: _t->setWaterfallOffesetLo((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 249: _t->setWaterfallOffesetHi((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 250: _t->setSMeterHoldTime((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 251: _t->showNetworkIODialog(); break;
+        case 252: { QList<long> _r = _t->getFrequencies();
             if (_a[0]) *reinterpret_cast< QList<long>*>(_a[0]) = _r; }  break;
         default: ;
         }
@@ -830,9 +836,9 @@ int Settings::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 251)
+        if (_id < 253)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 251;
+        _id -= 253;
     }
     return _id;
 }
@@ -1624,72 +1630,79 @@ void Settings::panGridStatusChanged(bool _t1)
 }
 
 // SIGNAL 113
-void Settings::spectrumAveragingChanged(bool _t1)
+void Settings::peakHoldStatusChanged(bool _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 113, _a);
 }
 
 // SIGNAL 114
-void Settings::spectrumAveragingCntChanged(int _t1)
+void Settings::spectrumAveragingChanged(bool _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 114, _a);
 }
 
 // SIGNAL 115
-void Settings::waterfallTimeChanged(int _t1, int _t2)
+void Settings::spectrumAveragingCntChanged(int _t1)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 115, _a);
 }
 
 // SIGNAL 116
-void Settings::waterfallOffesetLoChanged(int _t1, int _t2)
+void Settings::waterfallTimeChanged(int _t1, int _t2)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 116, _a);
 }
 
 // SIGNAL 117
-void Settings::waterfallOffesetHiChanged(int _t1, int _t2)
+void Settings::waterfallOffesetLoChanged(int _t1, int _t2)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 117, _a);
 }
 
 // SIGNAL 118
-void Settings::sMeterHoldTimeChanged(int _t1)
+void Settings::waterfallOffesetHiChanged(int _t1, int _t2)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 118, _a);
 }
 
 // SIGNAL 119
-void Settings::dBmScaleMinChanged(int _t1, qreal _t2)
+void Settings::sMeterHoldTimeChanged(int _t1)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 119, _a);
 }
 
 // SIGNAL 120
-void Settings::dBmScaleMaxChanged(int _t1, qreal _t2)
+void Settings::dBmScaleMinChanged(int _t1, qreal _t2)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 120, _a);
 }
 
 // SIGNAL 121
-void Settings::dBmScaleWBMinChanged(qreal _t1)
+void Settings::dBmScaleMaxChanged(int _t1, qreal _t2)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 121, _a);
 }
 
 // SIGNAL 122
-void Settings::dBmScaleWBMaxChanged(qreal _t1)
+void Settings::dBmScaleWBMinChanged(qreal _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 122, _a);
+}
+
+// SIGNAL 123
+void Settings::dBmScaleWBMaxChanged(qreal _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 123, _a);
 }
 QT_END_MOC_NAMESPACE

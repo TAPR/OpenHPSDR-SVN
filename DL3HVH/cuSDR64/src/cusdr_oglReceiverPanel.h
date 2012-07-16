@@ -89,6 +89,7 @@ private:
 	QTime			m_resizeTime;
 	QTime			waterfallTimer;
 	QTime			freqChangeTimer;
+	QTime			peakHoldTimer;
 	
 	//QGLWidget		*m_shareWidget;
 
@@ -100,6 +101,7 @@ private:
 	QList<TReceiver>	m_rxDataList;
 	
 	QVector<qreal>					m_panadapterBins;
+	QVector<qreal>					m_panPeakHoldBins;
 	QVarLengthArray<TGL_ubyteRGBA>	m_waterfallPixel;
 
 	QQueue<QVector<float>>			specAv_queue;
@@ -239,10 +241,12 @@ private:
 	bool		m_spectrumAveragingOld;
 	bool		m_crossHairCursor;
 	bool		m_panGrid;
+	bool		m_peakHold;
 	bool		m_filterChanged;
 	bool		m_showFilterLeftBoundary;
 	bool		m_showFilterRightBoundary;
 	bool		m_highlightFilter;
+	bool		m_resize;
 	
 	qreal		m_panFrequencyScale;
 	qreal		m_freqScaleZoomFactor;
@@ -317,6 +321,7 @@ private slots:
 	void	setSpectrumAveraging(bool value);
 	void	setSpectrumAveragingCnt(int value);
 	void	setPanGridStatus(bool value);
+	void	setPeakHoldStatus(bool value);
 	void	setPanadapterColors();
 	void	getRegion(QPoint p);
 	void	freqRulerPositionChanged(float pos, int rx);

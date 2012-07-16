@@ -372,6 +372,12 @@ void MainWindow::setupConnections() {
 		this,
 		SLOT(clearNetworkIOComboBoxEntry()));
 
+	/*CHECKED_CONNECT(
+		m_settings, 
+		SIGNAL(peakHoldStatusChanged(bool)),
+		this,
+		SLOT(setPeakHoldStatus(bool)));*/
+
 	CHECKED_CONNECT(
 		m_graphicOptionsWidget, 
 		SIGNAL(messageEvent(QString)), 
@@ -899,6 +905,17 @@ void MainWindow::createSecondBtnGroup() {
 		SIGNAL(clicked()), 
 		this, 
 		SLOT(gridBtnClickedEvent()));
+
+	peakHoldBtn = new AeroButton("Peak Hold", this);
+	peakHoldBtn->setRoundness(10);
+	peakHoldBtn->setFixedSize(btn_width1, btn_height3);
+	peakHoldBtn->setBtnState(AeroButton::OFF);
+
+	CHECKED_CONNECT(
+		peakHoldBtn, 
+		SIGNAL(clicked()), 
+		this, 
+		SLOT(peakHoldBtnClickedEvent()));
 	
 	lastFreqBtn = new AeroButton("last Freq", this);
 	lastFreqBtn->setRoundness(10);
@@ -992,6 +1009,7 @@ void MainWindow::createSecondBtnGroup() {
 	secondBtnLayout->addWidget(rx4Btn);*/
 
 	secondBtnLayout->addWidget(avgBtn);
+	secondBtnLayout->addWidget(peakHoldBtn);
 	secondBtnLayout->addWidget(gridBtn);
 	secondBtnLayout->addStretch();
 	secondBtnLayout->addWidget(m_agcGainLabel);
@@ -1380,6 +1398,31 @@ void MainWindow::gridBtnClickedEvent() {
 		gridBtn->setBtnState(AeroButton::OFF);
 		m_settings->setPanGrid(false);
 	}
+}
+
+/*!
+	\brief switch Peak Hold function on/off.
+*/
+void MainWindow::peakHoldBtnClickedEvent() {
+
+	if (peakHoldBtn->btnState() == AeroButton::OFF) {
+
+		peakHoldBtn->setBtnState(AeroButton::ON);
+		m_settings->setPeakHold(true);
+	}
+	else if (peakHoldBtn->btnState() == AeroButton::ON) {
+
+		peakHoldBtn->setBtnState(AeroButton::OFF);
+		m_settings->setPeakHold(false);
+	}
+}
+
+/*!
+	\brief switch peak hold Button
+*/
+void MainWindow::setPeakHoldStatus(bool) {
+
+	peakHoldBtn->setBtnState(AeroButton::OFF);
 }
 
 /*!

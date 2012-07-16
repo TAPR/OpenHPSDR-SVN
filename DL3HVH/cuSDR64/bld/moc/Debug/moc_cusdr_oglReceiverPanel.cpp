@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_oglReceiverPanel.h'
 **
-** Created: Sat 14. Jul 23:41:01 2012
+** Created: Mon 16. Jul 21:12:48 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_QGLReceiverPanel[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      25,   14, // methods
+      26,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -51,13 +51,14 @@ static const uint qt_meta_data_QGLReceiverPanel[] = {
      693,  504,   17,   17, 0x08,
      720,  504,   17,   17, 0x08,
      749,  504,   17,   17, 0x08,
-     772,   17,   17,   17, 0x08,
-     796,  794,   17,   17, 0x08,
-     821,  814,   17,   17, 0x08,
-     857,  534,   17,   17, 0x08,
-     898,  889,   17,   17, 0x08,
-     924,  889,   17,   17, 0x08,
-     955,  889,   17,   17, 0x08,
+     772,  504,   17,   17, 0x08,
+     796,   17,   17,   17, 0x08,
+     820,  818,   17,   17, 0x08,
+     845,  838,   17,   17, 0x08,
+     881,  534,   17,   17, 0x08,
+     922,  913,   17,   17, 0x08,
+     948,  913,   17,   17, 0x08,
+     979,  913,   17,   17, 0x08,
 
        0        // eod
 };
@@ -83,9 +84,9 @@ static const char qt_meta_stringdata_QGLReceiverPanel[] = {
     "setupDisplayRegions(QSize)\0"
     "setSpectrumAveraging(bool)\0"
     "setSpectrumAveragingCnt(int)\0"
-    "setPanGridStatus(bool)\0setPanadapterColors()\0"
-    "p\0getRegion(QPoint)\0pos,rx\0"
-    "freqRulerPositionChanged(float,int)\0"
+    "setPanGridStatus(bool)\0setPeakHoldStatus(bool)\0"
+    "setPanadapterColors()\0p\0getRegion(QPoint)\0"
+    "pos,rx\0freqRulerPositionChanged(float,int)\0"
     "sampleRateChanged(QObject*,int)\0"
     "rx,value\0setWaterfallTime(int,int)\0"
     "setWaterfallOffesetLo(int,int)\0"
@@ -117,13 +118,14 @@ void QGLReceiverPanel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 15: _t->setSpectrumAveraging((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 16: _t->setSpectrumAveragingCnt((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 17: _t->setPanGridStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 18: _t->setPanadapterColors(); break;
-        case 19: _t->getRegion((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
-        case 20: _t->freqRulerPositionChanged((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 21: _t->sampleRateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 22: _t->setWaterfallTime((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 23: _t->setWaterfallOffesetLo((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 24: _t->setWaterfallOffesetHi((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 18: _t->setPeakHoldStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 19: _t->setPanadapterColors(); break;
+        case 20: _t->getRegion((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
+        case 21: _t->freqRulerPositionChanged((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 22: _t->sampleRateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 23: _t->setWaterfallTime((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 24: _t->setWaterfallOffesetLo((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 25: _t->setWaterfallOffesetHi((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
     }
@@ -161,9 +163,9 @@ int QGLReceiverPanel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 25)
+        if (_id < 26)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 25;
+        _id -= 26;
     }
     return _id;
 }

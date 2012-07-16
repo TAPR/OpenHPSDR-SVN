@@ -49,6 +49,7 @@ QGLReceiverPanel::QGLReceiverPanel(QWidget *parent, int rx)
 		, m_serverMode(m_settings->getCurrentServerMode())
 		, m_hwInterface(m_settings->getHWInterface())
 		, m_dataEngineState(QSDR::DataEngineDown)
+		, m_resize(true)
 		, m_currentReceiver(m_settings->getCurrentReceiver())
 		, m_frequencyRxOnRx(0)
 		, m_sampleRate(m_settings->getSampleRate())
@@ -83,6 +84,7 @@ QGLReceiverPanel::QGLReceiverPanel(QWidget *parent, int rx)
 		, m_highlightFilter(false)
 		, m_showFilterLeftBoundary(false)
 		, m_showFilterRightBoundary(false)
+		, m_peakHold(false)
 {
 	QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 
@@ -190,6 +192,7 @@ QGLReceiverPanel::QGLReceiverPanel(QWidget *parent, int rx)
 	m_displayTime.start();
 	m_resizeTime.start();
 	waterfallTimer.start();
+	peakHoldTimer.start();
 	//freqChangeTimer.start();
 	
 	memset(m_spectrumBuffer, -10000, m_spectrumSize * sizeof(float));
@@ -391,6 +394,12 @@ void QGLReceiverPanel::setupConnections() {
 		SIGNAL(panGridStatusChanged(bool)),
 		this,
 		SLOT(setPanGridStatus(bool)));
+
+	CHECKED_CONNECT(
+		m_settings, 
+		SIGNAL(peakHoldStatusChanged(bool)),
+		this,
+		SLOT(setPeakHoldStatus(bool)));
 
 	/*CHECKED_CONNECT(
 		m_settings, 
@@ -602,11 +611,16 @@ void QGLReceiverPanel::drawPanadapter() {
 	glScissor(x1, size().height() - y2, x2, height);
 	glEnable(GL_SCISSOR_TEST);
 
+	spectrumBufferMutex.lock();
+
 	TGL3float *vertexArray = new TGL3float[vertexArrayLength];
 	TGL3float *vertexColorArray = new TGL3float[vertexArrayLength];
 
 	TGL3float *vertexArrayBg = new TGL3float[2*vertexArrayLength];
 	TGL3float *vertexColorArrayBg = new TGL3float[2*vertexArrayLength];
+
+	TGL3float *vertexArrayPH = new TGL3float[vertexArrayLength];
+	TGL3float *vertexColorArrayPH = new TGL3float[vertexArrayLength];
 	
 	switch (m_panadapterMode) {
 
@@ -667,28 +681,61 @@ void QGLReceiverPanel::drawPanadapter() {
 			for (int i = 0; i < vertexArrayLength; i++) {
 	
 				mutex.lock();
-				vertexColorArray[i].x = m_red;
-				vertexColorArray[i].y = m_green;
-				vertexColorArray[i].z = m_blue;
+
+				if (!m_peakHold) {
+				
+					vertexColorArray[i].x = m_red;
+					vertexColorArray[i].y = m_green;
+					vertexColorArray[i].z = m_blue;
+				}
+				else {
+					
+					vertexColorArray[i].x = 0.6;// * m_red;
+					vertexColorArray[i].y = 0.6;// * m_green;
+					vertexColorArray[i].z = 0.6;// * m_blue;
+
+					vertexColorArrayPH[i].x = m_red;
+					vertexColorArrayPH[i].y = m_green;
+					vertexColorArrayPH[i].z = m_blue;
+				}
 				mutex.unlock();
 				
 				vertexArray[i].x = (GLfloat)(i/m_scaleMult);
 				vertexArray[i].y = (GLfloat)(yTop - yScale * m_panadapterBins.at(i));
 				vertexArray[i].z = -1.0;
+				
+				if (m_peakHold) {
+					
+					vertexArrayPH[i].x = (GLfloat)(i/m_scaleMult);
+					vertexArrayPH[i].y = (GLfloat)(yTop - yScale * m_panPeakHoldBins.at(i));
+					vertexArrayPH[i].z = -0.5;
+				}
 			}
 		
 			glEnableClientState(GL_VERTEX_ARRAY);
 			glEnableClientState(GL_COLOR_ARRAY);
-				
+			
 			glVertexPointer(3, GL_FLOAT, 0, vertexArray);
 			glColorPointer(3, GL_FLOAT, 0, vertexColorArray);
 			glDrawArrays(GL_LINE_STRIP, 0, vertexArrayLength);
+			
+			if (m_peakHold) {
+				
+				glVertexPointer(3, GL_FLOAT, 0, vertexArrayPH);
+				glColorPointer(3, GL_FLOAT, 0, vertexColorArrayPH);
+				glDrawArrays(GL_LINE_STRIP, 0, vertexArrayLength);
+			}
 			
 			glDisableClientState(GL_VERTEX_ARRAY);
 			glDisableClientState(GL_COLOR_ARRAY);
 
 			delete[] vertexArray;
 			delete[] vertexColorArray;
+
+			if (m_peakHold) {
+				
+				delete[] vertexArrayPH;
+			}
 			delete[] vertexArrayBg;
 			delete[] vertexColorArrayBg;
 
@@ -741,6 +788,7 @@ void QGLReceiverPanel::drawPanadapter() {
 
 			break;
 	}
+	spectrumBufferMutex.unlock();
 
 	glDisable(GL_MULTISAMPLE);
 	glDisable(GL_LINE_SMOOTH);
@@ -1740,6 +1788,7 @@ void QGLReceiverPanel::resizeGL(int iWidth, int iHeight) {
 
 	m_spectrumVertexColorUpdate = true;
 	m_waterfallUpdate = true;
+	m_resize = true;
 	
 	glFinish();
 
@@ -2301,6 +2350,15 @@ void QGLReceiverPanel::setFrequency(QObject *sender, bool value, int rx, long fr
 	Q_UNUSED(sender)
 	Q_UNUSED(value)
 	
+	if (m_peakHold) {
+		
+		spectrumBufferMutex.lock();
+		m_panPeakHoldBins.clear();
+		m_panPeakHoldBins.resize(m_panSpectrumBinsLength);
+		m_panPeakHoldBins.fill(-500.0);
+		spectrumBufferMutex.unlock();
+	}
+
 	for (int i = 0; i < m_settings->getNumberOfReceivers(); i++) {
 
 		m_rxDataList[i].frequency = freq;
@@ -2536,9 +2594,32 @@ void QGLReceiverPanel::computeDisplayBins(const QVector<float> &panBuffer, const
 	m_waterfallPixel.resize(4 * m_panRectWidth);
 
 	m_panadapterBins.clear();
+
+	/*if (m_peakHold && peakHoldTimer.elapsed() > 10000) {
+		
+		spectrumBufferMutex.lock();
+		m_panPeakHoldBins.clear();
+		m_panPeakHoldBins.resize(m_panSpectrumBinsLength);
+		m_panPeakHoldBins.fill(-500.0);
+		spectrumBufferMutex.unlock();
+
+		peakHoldTimer.restart();
+	}*/
+
+	if (m_resize) {
+		
+		spectrumBufferMutex.lock();
+		m_panPeakHoldBins.clear();
+		m_panPeakHoldBins.resize(m_panSpectrumBinsLength);
+		m_panPeakHoldBins.fill(-500.0);
+		spectrumBufferMutex.unlock();
+
+		m_resize = false;
+	}
 	
 	for (int i = 0; i < m_panSpectrumBinsLength; i++) {
-			
+		
+		qreal max;
 		idx = 0;
 		lIdx = (int)floor((qreal)(i * m_panScale / m_scaleMult));
 		rIdx = (int)floor((qreal)(i * m_panScale / m_scaleMult) + m_panScale / m_scaleMult);
@@ -2565,6 +2646,11 @@ void QGLReceiverPanel::computeDisplayBins(const QVector<float> &panBuffer, const
 
 			m_panadapterBins << panBuffer[idx] - m_dBmPanMin - m_dBmPanLogGain;
 			pColor = getWaterfallColorAtPixel(waterfallBuffer[idx] - m_dBmPanLogGain);
+		}
+
+		if (m_peakHold && (m_panadapterBins.at(i) > m_panPeakHoldBins.at(i))) {
+
+			m_panPeakHoldBins[i] = m_panadapterBins.at(i);
 		}
 
 		
@@ -2822,6 +2908,21 @@ void QGLReceiverPanel::setPanGridStatus(bool value) {
 	 spectrumBufferMutex.unlock();
 
 	 update();
+}
+
+void QGLReceiverPanel::setPeakHoldStatus(bool value) {
+
+	spectrumBufferMutex.lock();
+
+	if (m_peakHold == value) 
+		return;
+	else
+		m_peakHold = value;
+	
+	m_panPeakHoldBins.clear();
+	m_panPeakHoldBins.resize(m_panSpectrumBinsLength);
+	m_panPeakHoldBins.fill(-500.0);
+	spectrumBufferMutex.unlock();
 }
 
 void QGLReceiverPanel::sampleRateChanged(QObject *sender, int value) {
