@@ -100,7 +100,7 @@ Settings::Settings(QObject *parent)
 	settings = new QSettings(QCoreApplication::applicationDirPath() +  "/" + settingsFilename, QSettings::IniFormat);
 
 	m_titleString = "cuSDR64 BETA ";
-	m_versionString = "v0.2.2.2";
+	m_versionString = "v0.2.2.3";
 
 	// get styles
 	//m_sdrStyle = sdrStyle;

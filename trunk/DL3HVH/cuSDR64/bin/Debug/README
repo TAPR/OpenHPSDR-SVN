@@ -44,6 +44,13 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.2.2.3:
+
+- Bug fix in the Peak-Hold function; zooming on the frequency scale can
+  cause a crash of the application.
+  
+- Added Peak-Hold for the other display styles.
+
 v0.2.2.2:
 
 - Peak Hold for the Panadapter has been added. Works currently only for 
