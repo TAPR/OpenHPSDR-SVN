@@ -246,7 +246,7 @@ private:
 	bool		m_showFilterLeftBoundary;
 	bool		m_showFilterRightBoundary;
 	bool		m_highlightFilter;
-	bool		m_resize;
+	bool		m_peakHoldBufferResize;
 	
 	qreal		m_panFrequencyScale;
 	qreal		m_freqScaleZoomFactor;
