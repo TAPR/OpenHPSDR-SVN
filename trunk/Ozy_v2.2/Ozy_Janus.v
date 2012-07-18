@@ -509,7 +509,7 @@ wire          IF_tx_IQ_mic_ack;
 wire   [47:0] IF_IQ_Data;
 wire   [15:0] IF_mic_Data;
 wire    [2:0] IF_chan; // which Mercury receiver channel Tx_fifo_ctrl.v is interested in
-reg     [2:0] IF_last_chan; // number of Mercury channels to send back to PC
+wire    [2:0] IF_last_chan; // number of Mercury channels to send back to PC
 
 always @*
 begin
@@ -552,6 +552,7 @@ generate
                 .xrcv_data(IF_M_IQ_Data[c]), .din(MDOUT[c]) );
   end
 endgenerate
+
    
 
 // Get I2S DOUT IQ data from Janus
@@ -595,8 +596,13 @@ reg             ADC_OVERLOAD3;
 reg             ADC_OVERLOAD4;
 wire   [RFSZ:0] RX_USED;
 wire            IF_tx_fifo_clr;
+reg       [2:0] IF_merc;
 
 assign RX_USED = {IF_Rx_fifo_full,IF_Rx_fifo_used};
+
+// Note: 0 for Mercury will be replaced by a number we get from the PC; i.e., IF_merc
+assign IF_last_chan = IF_conf[1] ? IF_merc : 3'b0; 
+
 
 Tx_fifo_ctrl #(RX_FIFO_SZ, TX_FIFO_SZ) TXFC 
            (IF_rst, IF_clk, IF_tx_fifo_wdata, IF_tx_fifo_wreq, IF_tx_fifo_full,
@@ -953,9 +959,7 @@ reg         IF_Rout;     		// Rx1 out on Alex
 reg   [1:0] IF_RX_relay; 		// Rx relay setting on Alex 
 reg  [31:0] IF_frequency [0:4]; // Penny, Merc1, Merc2, Merc3, Merc4
 reg         IF_duplex;
-reg 		IF_Mic_boost;			// Sets mic gain on Penny TLV320, 0 = 0dB, 1 = 20dB boost.
 reg   [7:0] IF_Drive_Level; 	// Tx drive level for PennyLane and Hermes
-reg         IF_Line_in;			// Selects input, mic = 0, line = 1
 reg  [14:0] IF_Alex;				// Alex relay swiching when in manual mode.
 reg         IF_time_stamp;		// if set 1PPS input is connected to LSB of mic data, rest are zero
 reg         common_Merc_freq;	// 0 = permit independent freqs to Mercury boards, 1 = common freq for all Mercury boards
@@ -973,6 +977,7 @@ begin
     {IF_DFS1, IF_DFS0} <= 2'b00;   // speed 
     IF_clock_s         <= 3'b100; // clock source - default Mercury
     IF_conf            <= 2'b00;   // configuration
+    IF_mic             <= 1'b0;    // decode microphone source
      // RX_CONTROL_2
     IF_mode            <= 1'b0;    // mode, normal or Class E PA
     IF_OC              <= 7'b0;    // open collectors on Penelope
@@ -986,10 +991,8 @@ begin
     // RX_CONTROL_4
     IF_TX_relay        <= 2'b0;    // Alex Tx Relays
     IF_duplex          <= 1'b0;    // not in duplex mode
-    IF_last_chan       <= 3'b000;  // default single receiver
-    IF_Mic_boost       <= 1'b0;    // mic boost off    
+    IF_merc            <= 3'b000;  // default single receiver
     IF_Drive_Level     <= 8'b0;	  // drive at minimum 
-    IF_Line_in	        <= 1'b0;	  // mic input selected
     IF_Alex			     <= 15'b0;   // Alex manual relay selection
 	 IF_time_stamp		  <= 1'b0;	  // 1PPS time stamp
 	 common_Merc_freq   <= 1'b0;    // default, permit independent Mercury board freqs
@@ -1003,6 +1006,7 @@ begin
       {IF_DFS1, IF_DFS0}  <= IF_Rx_ctrl_1[1:0]; // decode speed 
       IF_clock_s          <= IF_Rx_ctrl_1[4:2]; // decode clock source 
       IF_conf             <= IF_Rx_ctrl_1[6:5]; // decode configuration
+      IF_mic              <= IF_Rx_ctrl_1[7];   // decode microphone source
       // RX_CONTROL_2
       IF_mode             <= IF_Rx_ctrl_2[0];   // decode mode, normal or Class E PA
       IF_OC               <= IF_Rx_ctrl_2[7:1]; // decode open collectors on Penelope
@@ -1016,16 +1020,18 @@ begin
       // RX_CONTROL_4
       IF_TX_relay         <= IF_Rx_ctrl_4[1:0]; // decode Alex Tx Relays
       IF_duplex           <= IF_Rx_ctrl_4[2];   // save duplex mode
-      IF_last_chan	     <= IF_Rx_ctrl_4[5:3]; // number of IQ streams to send to PC
+      IF_merc     	     <= IF_Rx_ctrl_4[5:3]; // number of IQ streams to send to PC
 		IF_time_stamp       <= IF_Rx_ctrl_4[6];   // 1PPS time stamp
 		common_Merc_freq    <= IF_Rx_ctrl_4[7];   // force common freq to all Mercury boards
 
     end
     if (IF_Rx_ctrl_0[7:1] == 7'b0001_001)
     begin
-	  IF_Mic_boost		  <= IF_Rx_ctrl_2[0];   // decode mic boost 0 = 0dB, 1 = 20dB
+	  //Note: Mic-boost and Line-in settings are not handled via C&C bytes when Ozy is used, unlike when Metis is 
+	  //used for HPSDR/PC comm, the Mic-boost and Line-in settings are sent to the TLV320 on Penny via
+	  //the I2C bus as a result of the PC program calling Write_I2c() in the PC program to instruct the FX2 on Ozy 
+	  //to send those values to the TLV320 on Penny when Ozy is present on the Atlas bus
 	  IF_Drive_Level	  <= IF_Rx_ctrl_1;	    // decode drive level for PennyLane and Hermes 
-	  IF_Line_in		  <= IF_Rx_ctrl_2[1];   // decode input, 0 = mic, 1 = line 
 	  IF_Alex 			  <= {IF_Rx_ctrl_2[6], IF_Rx_ctrl_4[6:0], IF_Rx_ctrl_3[6:0]}; // Alex manual relay selections
 	 end
     if (IF_Rx_ctrl_0[7:1] == 7'b0001_010)
