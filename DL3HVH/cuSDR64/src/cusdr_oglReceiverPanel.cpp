@@ -290,6 +290,9 @@ QGLReceiverPanel::~QGLReceiverPanel() {
 		m_panadapterGridFBO = 0;
 	}
 
+	if (averager)
+		delete averager;
+
 	while (!specAv_queue.isEmpty())
 		specAv_queue.dequeue();
 }
@@ -699,15 +702,13 @@ void QGLReceiverPanel::drawPanadapter() {
 			glDisableClientState(GL_VERTEX_ARRAY);
 			glDisableClientState(GL_COLOR_ARRAY); 
 
-			delete[] vertexArray;
+			/*delete[] vertexArray;
 			delete[] vertexColorArray;
 			delete[] vertexArrayBg;
 			delete[] vertexColorArrayBg;
-			if (m_peakHold) {
-				
-				delete[] vertexArrayPH;
-			}
-
+			delete[] vertexArrayPH;
+			delete[] vertexColorArrayPH;*/
+			
 			break;
 
 		case QSDRGraphics::Line:
@@ -762,15 +763,11 @@ void QGLReceiverPanel::drawPanadapter() {
 			glDisableClientState(GL_VERTEX_ARRAY);
 			glDisableClientState(GL_COLOR_ARRAY);
 
-			delete[] vertexArray;
+			/*delete[] vertexArray;
 			delete[] vertexColorArray;
-
-			if (m_peakHold) {
-				
-				delete[] vertexArrayPH;
-			}
+			delete[] vertexArrayPH;
 			delete[] vertexArrayBg;
-			delete[] vertexColorArrayBg;
+			delete[] vertexColorArrayBg;*/
 
 			break;
 
@@ -853,18 +850,25 @@ void QGLReceiverPanel::drawPanadapter() {
 			//glEnable(GL_MULTISAMPLE);
 			//glEnable(GL_LINE_SMOOTH);
 
-			delete[] vertexArray;
+			/*delete[] vertexArray;
 			delete[] vertexColorArray;
 			delete[] vertexArrayBg;
 			delete[] vertexColorArrayBg;
-			if (m_peakHold) {
-
-				delete[] vertexArrayBgPH;
-			}
-
+			delete[] vertexArrayBgPH;
+			delete[] vertexColorArrayBgPH;*/
+			
 			break;
 	}
 	//spectrumBufferMutex.unlock();
+
+	delete[] vertexArray;
+	delete[] vertexColorArray;
+	delete[] vertexArrayBg;
+	delete[] vertexColorArrayBg;
+	delete[] vertexArrayBgPH;
+	delete[] vertexColorArrayBgPH;
+	delete[] vertexArrayPH;
+	delete[] vertexColorArrayPH;
 
 	glDisable(GL_MULTISAMPLE);
 	glDisable(GL_LINE_SMOOTH);
@@ -2433,6 +2437,7 @@ void QGLReceiverPanel::setFrequency(QObject *sender, bool value, int rx, long fr
 	if (m_peakHold) {
 		
 		//spectrumBufferMutex.lock();
+		m_panPeakHoldBins.clear();
 		m_panPeakHoldBins.resize(m_panSpectrumBinsLength);
 		m_panPeakHoldBins.fill(-500.0);
 		//spectrumBufferMutex.unlock();
@@ -2571,31 +2576,6 @@ void QGLReceiverPanel::setSpectrumBuffer(const float *buffer) {
 		averager->ProcessDBAverager(specBuf, specBuf);
 		computeDisplayBins(specBuf, buffer);
 
-		//specAv_queue.enqueue(specBuf);
-		//if (specAv_queue.size() <= m_specAveragingCnt) {
-	
-		//	for (int i = 0; i < m_spectrumSize; i++) {
-		//		
-		//		if (m_tmp.size() < m_spectrumSize)
-		//			m_tmp << specAv_queue.last().data()[i];
-		//		else
-		//			m_tmp[i] += specAv_queue.last().data()[i];
-		//	}
-		//	//spectrumBufferMutex.unlock();
-		//	return;
-		//}
-	
-		//for (int i = 0; i < m_spectrumSize; i++) {
-
-		//	m_tmp[i] -= specAv_queue.first().at(i);
-		//	m_tmp[i] += specAv_queue.last().at(i);
-		//	avg << m_tmp.at(i) * m_scale;
-		//}
-
-		//computeDisplayBins(avg, buffer);
-		//specAv_queue.dequeue();
-	
-		//avg.clear();
 		//spectrumBufferMutex.unlock();
 	}
 	else {
@@ -2688,7 +2668,7 @@ void QGLReceiverPanel::computeDisplayBins(const QVector<float> &panBuffer, const
 	if (m_peakHoldBufferResize) {
 		
 		//spectrumBufferMutex.lock();
-		//m_panPeakHoldBins.clear();
+		m_panPeakHoldBins.clear();
 		m_panPeakHoldBins.resize(m_panSpectrumBinsLength);
 		m_panPeakHoldBins.fill(-500.0);
 		//spectrumBufferMutex.unlock();
@@ -2731,7 +2711,7 @@ void QGLReceiverPanel::computeDisplayBins(const QVector<float> &panBuffer, const
 
 			m_panPeakHoldBins[i] = m_panadapterBins.at(i);
 		}
-
+				
 		
 		TGL_ubyteRGBA color;
 		color.red   = (uchar)(pColor.red());
@@ -2998,7 +2978,7 @@ void QGLReceiverPanel::setPeakHoldStatus(bool value) {
 	else
 		m_peakHold = value;
 	
-	//m_panPeakHoldBins.clear();
+	m_panPeakHoldBins.clear();
 	m_panPeakHoldBins.resize(m_panSpectrumBinsLength);
 	m_panPeakHoldBins.fill(-500.0);
 	spectrumBufferMutex.unlock();

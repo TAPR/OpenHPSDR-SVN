@@ -44,6 +44,10 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.2.2.4:
+
+- Important bug fix: memory leak closed !
+
 v0.2.2.3:
 
 - Bug fix in the Peak-Hold function; zooming on the frequency scale can
