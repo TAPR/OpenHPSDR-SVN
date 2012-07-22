@@ -1266,7 +1266,7 @@ AudiofileBuffer::~AudiofileBuffer() {
 	reallocate(0);
 }
 
-void AudiofileBuffer::reallocate( int length ) {
+void AudiofileBuffer::reallocate(int length) {
 	
 	if (m_data) delete [] ((char*)m_data);
 	
@@ -1278,7 +1278,6 @@ void AudiofileBuffer::reallocate( int length ) {
 	else 
 		m_data = 0;
 };
-
 
 AudiofileBuffer *AudiofileBuffer::loadWav(QString fileName) {
 	
@@ -1377,7 +1376,6 @@ AudiofileBuffer *AudiofileBuffer::loadWav(QString fileName) {
 
      delete wavFile;
  };
-
 
 AUDIO_SAMPLE_TYPE AudiofileBuffer::sampleFunction8bitMono(AudiofileBuffer *abuffer, int pos, int channel) {
 

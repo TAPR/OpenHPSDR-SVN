@@ -32,6 +32,7 @@
 #include <QRect>
 #include <QColor>
 #include <QVarLengthArray>
+#include <QGLFramebufferObject>
 #include <QtCore/qmath.h>
 
 

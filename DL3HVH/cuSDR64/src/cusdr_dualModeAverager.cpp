@@ -37,6 +37,7 @@ DualModeAverager::DualModeAverager(QObject *parent, int size)
 	m_tmp.resize(m_size);
 	
 	cnt = 0;
+	k = 1.0f/m_length;
 
 	CHECKED_CONNECT(
 		m_settings, 
@@ -54,14 +55,14 @@ void DualModeAverager::ProcessDBAverager(qVectorFloat &in, qVectorFloat &out) {
 	if (cnt < m_length) {
 
 		for (int i = 0; i < m_size; i++)
-			out[i] = m_tmp.at(i) + (1.0f/m_length) * in.at(i);
+			out[i] = m_tmp.at(i) + k * in.at(i);
 
 		cnt++;
 	}
 	else {
 		
 		for (int i = 0; i < m_size; i++)
-			out[i] = m_tmp.at(i) + (1.0f/m_length) * (in.at(i) - m_tmp.at(i));
+			out[i] = m_tmp.at(i) + k * (in.at(i) - m_tmp.at(i));
 	}
 	mutex.unlock();
 
@@ -72,6 +73,7 @@ void DualModeAverager::setAveragingLength(int value) {
 
 	mutex.lock();
 	m_length = value;
+	k = 1.0f/m_length;
 	cnt = 0;
 
 	m_tmp.fill(0.0f);

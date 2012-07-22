@@ -392,7 +392,7 @@ public:
 	AudiofileBuffer();
 	virtual ~AudiofileBuffer();
 	
-	static AudiofileBuffer *loadWav( QString fileName );
+	static AudiofileBuffer *loadWav(QString fileName);
 	//static AudiofileBuffer *loadWav( FILE *wavFile );	// support for stdio
 	
 	void reallocate( int length );
@@ -408,10 +408,10 @@ public:
 	inline SAMPLE_FUNCTION_TYPE getSampleFunction() { return m_sampleFunction; }
 
 	// static implementations of sample functions
-	static AUDIO_SAMPLE_TYPE sampleFunction8bitMono( AudiofileBuffer *abuffer, int pos, int channel );
-	static AUDIO_SAMPLE_TYPE sampleFunction16bitMono( AudiofileBuffer *abuffer, int pos, int channel );
-	static AUDIO_SAMPLE_TYPE sampleFunction8bitStereo( AudiofileBuffer *abuffer, int pos, int channel );
-	static AUDIO_SAMPLE_TYPE sampleFunction16bitStereo( AudiofileBuffer *abuffer, int pos, int channel );
+	static AUDIO_SAMPLE_TYPE sampleFunction8bitMono(AudiofileBuffer *abuffer, int pos, int channel);
+	static AUDIO_SAMPLE_TYPE sampleFunction16bitMono(AudiofileBuffer *abuffer, int pos, int channel);
+	static AUDIO_SAMPLE_TYPE sampleFunction8bitStereo(AudiofileBuffer *abuffer, int pos, int channel);
+	static AUDIO_SAMPLE_TYPE sampleFunction16bitStereo(AudiofileBuffer *abuffer, int pos, int channel);
 
 protected:
 	SAMPLE_FUNCTION_TYPE m_sampleFunction;

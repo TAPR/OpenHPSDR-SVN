@@ -50,6 +50,7 @@ OGLDisplayPanel::OGLDisplayPanel(QWidget *parent)
 	, m_height(100)//(120)
 	, m_syncStatus(0)
 	, m_adcStatus(0)
+	, m_packetLossStatus(0)
 	, m_sendIQStatus(0)
 	, m_recvAudioStatus(0)
 	, m_lowerRectY(12)
@@ -77,6 +78,8 @@ OGLDisplayPanel::OGLDisplayPanel(QWidget *parent)
 	, m_sMeterMinValueB(1000.0f)
 	, m_sMeterMaxValueB(-1000.0f)
 	, m_sMeterHoldTime(m_settings->getSMeterHoldTime())
+	, m_sMeterPrevHoldTimeMax(0)
+	, m_sMeterPrevHoldTimeMin(0)
 	, m_smeterUpdate(true)
 	, m_smeterRenew(true)
 	, m_sMeterAvg(true)
@@ -367,6 +370,12 @@ void OGLDisplayPanel::setupConnections() {
 
 	CHECKED_CONNECT(
 		m_settings, 
+		SIGNAL(packetLossChanged(int)), 
+		this, 
+		SLOT(setPacketLossStatus(int)));
+
+	CHECKED_CONNECT(
+		m_settings, 
 		SIGNAL(sendIQSignalChanged(int)), 
 		this, 
 		SLOT(setSendIQStatus(int)));
@@ -403,6 +412,9 @@ void OGLDisplayPanel::setupTextstrings() {
 
 	m_ADCString = QString("ADC");
 	m_adcWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_ADCString).width();
+
+	m_PacketLossString = QString("IP Packets");
+	m_packetLossWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_PacketLossString).width();
 
 	m_sendIQString = QString("send IQ");
 	m_sendIQWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_sendIQString).width();
@@ -553,6 +565,30 @@ void OGLDisplayPanel::paintUpperRegion() {
 	qglColor(QColor(0, 0, 0));
 	m_oglTextSmallItalic->renderText(m_syncWidth + 11, y1 + m_upperRectY, m_ADCString);
 
+	// Packet loss status
+	str = QString(m_PacketLossString);
+	rect = QRect(x1+63, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 5, fontHeight + 4);
+
+	switch (m_packetLossStatus) {
+
+		case 0:
+			drawGLRect(rect, QColor(68, 68, 68), -2.0f);
+			//qglColor(QColor(100, 100, 100));
+			break;
+
+		case 1:
+			drawGLRect(rect, QColor(56, 242, 115), -2.0f);
+			//qglColor(QColor(56, 242, 115));
+			break;
+
+		case 2:
+			drawGLRect(rect, QColor(242, 56, 109), -2.0f);
+			//qglColor(QColor(242, 56, 109));
+			break;
+	}
+	qglColor(QColor(0, 0, 0));
+	m_oglTextSmallItalic->renderText(m_syncWidth + m_adcWidth + 18, y1 + m_upperRectY, m_PacketLossString);
+
 	// send IQ data status
 	//str = QString(m_sendIQString);
 	//rect = QRect(x1+63, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 6, fontHeight + 4);
@@ -602,7 +638,7 @@ void OGLDisplayPanel::paintUpperRegion() {
 	//m_oglTextSmallItalic->renderText(m_syncWidth + m_adcWidth + m_sendIQWidth + 29, y1 + m_upperRectY, m_recvAudioString);
 
 	//int d = m_syncWidth + m_adcWidth + m_sendIQWidth + m_recvAudioWidth + 40;
-	int d = m_syncWidth + m_adcWidth + 50;
+	int d = m_syncWidth + m_adcWidth + m_packetLossWidth + 40;
 
 	// Metis status
 	str = m_metisString;
@@ -893,6 +929,9 @@ void OGLDisplayPanel::paintSMeter() {
 	GLint width = m_smeterRect.width();
 	GLint height = m_smeterRect.height();
 	GLint x1 = m_smeterRect.left();
+	GLint x2 = x1 + width;
+	GLint y1 = m_smeterRect.top();
+	GLint y2 = y1 + height;
 	
 	float X = m_smeterRect.left() + width/2.0f;
 	float Y = 370;
@@ -928,6 +967,10 @@ void OGLDisplayPanel::paintSMeter() {
 	QRect rect = QRect(m_rxRect.right() + m_sMeterOffset, 0, m_sMeterWidth, height);
 	renderTexture(rect, m_smeterFBO->texture(), -1.0f);
 	
+	// set a scissor box
+	glScissor(x1, size().height() - y2, x2, height);
+	glEnable(GL_SCISSOR_TEST);
+
 	if (m_dataEngineState == QSDR::DataEngineUp) {
 
 		// S-Meter hold value
@@ -979,6 +1022,9 @@ void OGLDisplayPanel::paintSMeter() {
 
 		glEnable(GL_MULTISAMPLE);
 	}
+
+	// disable scissor box
+	glDisable(GL_SCISSOR_TEST);
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
@@ -1796,10 +1842,21 @@ void OGLDisplayPanel::setSMeterValue(int rx, float value) {
 
 			if (tmp > m_sMeterMaxValueA) m_sMeterMaxValueA = tmp;
 
-			if (m_sMeterMaxTimer.elapsed() > m_sMeterHoldTime) {
+			int elapsedTimeMax = m_sMeterMaxTimer.elapsed();
+			if (elapsedTimeMax > m_sMeterHoldTime) {
 
-				m_sMeterMaxValueA = tmp;
-				m_sMeterMaxTimer.restart();
+				if (m_sMeterPrevHoldTimeMax <= 0) 
+					m_sMeterPrevHoldTimeMax = 1500;
+				
+				m_sMeterMaxValueA -= (float)(elapsedTimeMax - m_sMeterPrevHoldTimeMax) / 40;
+				m_sMeterPrevHoldTimeMax = elapsedTimeMax;
+
+				if ((qRound(m_sMeterMaxValueA) <= qRound(tmp)) || (m_sMeterMaxValueA <= tmp)) {
+					
+					m_sMeterMaxValueA = tmp;
+					m_sMeterMaxTimer.restart();
+					m_sMeterPrevHoldTimeMax = 0;
+				}
 			}
 
 			if (m_sMeterMinTimer.elapsed() > m_sMeterHoldTime) {
@@ -1833,17 +1890,53 @@ void OGLDisplayPanel::setSMeterValue(int rx, float value) {
 
 			if (tmp > m_sMeterMaxValueB) m_sMeterMaxValueB = tmp;
 
-			if (m_sMeterMaxTimer.elapsed() > m_sMeterHoldTime) {
+			/*if (m_sMeterMaxTimer.elapsed() > m_sMeterHoldTime) {
 
 				m_sMeterMaxValueB = tmp;
 				m_sMeterMaxTimer.restart();
+			}*/
+
+			int elapsedTimeMax = m_sMeterMaxTimer.elapsed();
+			if (elapsedTimeMax > m_sMeterHoldTime) {
+
+				if (m_sMeterPrevHoldTimeMax <= 0) 
+					m_sMeterPrevHoldTimeMax = m_sMeterHoldTime;
+				
+				// slowly reduce the peak hold level (taken from SDRMAX3 by (c) Cathy Moss)
+				m_sMeterMaxValueB -= (float)(elapsedTimeMax - m_sMeterPrevHoldTimeMax) / 15;
+				m_sMeterPrevHoldTimeMax = elapsedTimeMax;
+
+				if ((qRound(m_sMeterMaxValueB) <= qRound(tmp)) || (m_sMeterMaxValueB <= tmp)) {
+					
+					m_sMeterMaxValueB = tmp;
+					m_sMeterMaxTimer.restart();
+					m_sMeterPrevHoldTimeMax = 0;
+				}
 			}
 
-			if (m_sMeterMinTimer.elapsed() > m_sMeterHoldTime) {
+			int elapsedTimeMin = m_sMeterMinTimer.elapsed();
+			if (elapsedTimeMin > m_sMeterHoldTime) {
+
+				if (m_sMeterPrevHoldTimeMin <= 0) 
+					m_sMeterPrevHoldTimeMin = m_sMeterHoldTime;
+				
+				// slowly increase the minimum hold level (taken from SDRMAX3 by (c) Cathy Moss)
+				m_sMeterMinValueB += (float)(elapsedTimeMin - m_sMeterPrevHoldTimeMin) / 15;
+				m_sMeterPrevHoldTimeMin = elapsedTimeMin;
+
+				if ((qRound(m_sMeterMinValueB) >= qRound(tmp)) || (m_sMeterMinValueB >= tmp)) {
+					
+					m_sMeterMinValueB = tmp;
+					m_sMeterMinTimer.restart();
+					m_sMeterPrevHoldTimeMin = 0;
+				}
+			}
+
+			/*if (m_sMeterMinTimer.elapsed() > m_sMeterHoldTime) {
 
 				m_sMeterMinValueB = tmp;
 				m_sMeterMinTimer.restart();
-			}
+			}*/
 
 			m_sMeterValue = tmp * 0.13f + m_sMeterValue * 0.87f;
 			//m_sMeterValue = 57.0f;
@@ -2224,11 +2317,53 @@ void OGLDisplayPanel::setSyncStatus(int value) {
 
 	m_syncStatus = value;
 	update();
+
+	QTimer::singleShot(50, this, SLOT(updateSyncStatus()));
+}
+
+void OGLDisplayPanel::updateSyncStatus() {
+
+	if (m_dataEngineState == QSDR::DataEngineUp)
+		m_syncStatus = 1;
+	else
+		m_syncStatus = 0;
+
+	update();
 }
 
 void OGLDisplayPanel::setADCStatus(int value) {
 
 	m_adcStatus = value;
+	update();
+
+	QTimer::singleShot(50, this, SLOT(updateADCStatus()));
+}
+
+void OGLDisplayPanel::updateADCStatus() {
+
+	if (m_dataEngineState == QSDR::DataEngineUp)
+		m_adcStatus = 1;
+	else
+		m_adcStatus = 0;
+
+	update();
+}
+
+void OGLDisplayPanel::setPacketLossStatus(int value) {
+
+	m_packetLossStatus = value;
+	update();
+
+	QTimer::singleShot(50, this, SLOT(updatePacketLossStatus()));
+}
+
+void OGLDisplayPanel::updatePacketLossStatus() {
+
+	if (m_dataEngineState == QSDR::DataEngineUp)
+		m_packetLossStatus = 1;
+	else
+		m_packetLossStatus = 0;
+
 	update();
 }
 
@@ -2461,6 +2596,7 @@ void OGLDisplayPanel::systemStateChanged(
 		
 			setSyncStatus(0);
 			setADCStatus(0);
+			setPacketLossStatus(0);
 			setSendIQStatus(0);
 			setRecvAudioStatus(0);
 		}

@@ -42,6 +42,8 @@
 
 void cuSDRMessageHandler(QtMsgType type, const char *msg) {
 
+	Q_UNUSED(type)
+
     QString txt;
     QDateTime date;
 

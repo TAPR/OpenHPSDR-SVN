@@ -94,7 +94,7 @@ private:
 	
 	THPSDRParameter	*io;
 
-	QQueue<QVector<float>>  average_queue;
+	QQueue<QVector<float> >  average_queue;
 
 	float			m_tmpBuf[FULL_BUFFERSIZE];
 	float			m_outBuf[FULL_BUFFERSIZE];

@@ -51,6 +51,7 @@ public slots:
 	void	stop();
 	void	initDataReceiverSocket();
 	void	readData();
+	//void	setWidebandBuffers(int value);
 	
 private slots:
 	void displayDataReceiverSocketError(QAbstractSocket::SocketError error);
@@ -65,6 +66,8 @@ private:
 	QByteArray		m_wbDatagram;
 	QByteArray		m_metisGetDataSignature;
 	QString			m_message;
+
+	QTime			m_packetLossTime;
 
 	THPSDRParameter	*io;
 
@@ -81,6 +84,7 @@ private:
 
 	bool	m_sendEP4;
 	bool	m_manualBufferSize;
+	bool	m_packetsToggle;
 	
 	volatile bool	m_stopped;
 

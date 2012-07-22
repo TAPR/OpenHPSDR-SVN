@@ -80,7 +80,7 @@ private:
 	QSDR::_HWInterfaceMode		m_hwInterface;
 	QSDR::_DataEngineState		m_dataEngineState;
 
-	QSDRGraphics::_Panadapter			m_panadapterMode;
+	QSDRGraphics::_Panadapter	m_panadapterMode;
 	
 	QTime			m_displayTime;
 	QTime			m_resizeTime;
@@ -94,7 +94,7 @@ private:
 	QList<TReceiver>	m_rxDataList;
 	
 	QVector<qreal>					m_panadapterBins;
-	QQueue<QVector<float>>			specAv_queue;
+	QQueue<QVector<float> >			specAv_queue;
 
 	QGLFramebufferObject*			m_frequencyScaleFBO;
 	QGLFramebufferObject*			m_dBmScaleFBO;

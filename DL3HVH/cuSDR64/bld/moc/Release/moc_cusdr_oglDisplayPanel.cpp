@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_oglDisplayPanel.h'
 **
-** Created: Wed 11. Jul 22:41:26 2012
+** Created: Sun 22. Jul 16:54:04 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_OGLDisplayPanel[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      33,   14, // methods
+      37,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -45,27 +45,31 @@ static const uint qt_meta_data_OGLDisplayPanel[] = {
      398,  392,   16,   16, 0x08,
      417,  392,   16,   16, 0x08,
      435,  392,   16,   16, 0x08,
-     456,  392,   16,   16, 0x08,
-     480,  392,   16,   16, 0x08,
-     504,  126,   16,   16, 0x08,
-     528,  126,   16,   16, 0x08,
-     555,  126,   16,   16, 0x08,
-     579,  126,   16,   16, 0x08,
-     603,  126,   16,   16, 0x08,
-     632,  126,   16,   16, 0x08,
-     665,  392,   16,   16, 0x08,
+     460,  392,   16,   16, 0x08,
+     481,  392,   16,   16, 0x08,
+     505,  392,   16,   16, 0x08,
+     529,  126,   16,   16, 0x08,
+     553,  126,   16,   16, 0x08,
+     580,  126,   16,   16, 0x08,
+     604,  126,   16,   16, 0x08,
+     628,  126,   16,   16, 0x08,
+     657,  126,   16,   16, 0x08,
      690,  392,   16,   16, 0x08,
-     716,  392,   16,   16, 0x08,
-     738,  392,   16,   16, 0x08,
-     765,  392,   16,   16, 0x08,
-     787,  392,   16,   16, 0x08,
-     810,  392,   16,   16, 0x08,
-     834,  392,   16,   16, 0x08,
-     855,  126,   16,   16, 0x08,
-     889,  126,   16,   16, 0x08,
-     918,  126,   16,   16, 0x08,
-     966,  957,   16,   16, 0x08,
-     992,  392,   16,   16, 0x08,
+     715,  392,   16,   16, 0x08,
+     741,  392,   16,   16, 0x08,
+     763,  392,   16,   16, 0x08,
+     790,  392,   16,   16, 0x08,
+     812,  392,   16,   16, 0x08,
+     835,  392,   16,   16, 0x08,
+     859,  392,   16,   16, 0x08,
+     880,  126,   16,   16, 0x08,
+     914,  126,   16,   16, 0x08,
+     943,  126,   16,   16, 0x08,
+     991,  982,   16,   16, 0x08,
+    1017,  392,   16,   16, 0x08,
+    1040,   16,   16,   16, 0x08,
+    1059,   16,   16,   16, 0x08,
+    1077,   16,   16,   16, 0x08,
 
        0        // eod
 };
@@ -82,8 +86,9 @@ static const char qt_meta_stringdata_OGLDisplayPanel[] = {
     "_ServerMode,QSDR::_DataEngineState)\0"
     "size\0setupDisplayRegions(QSize)\0value\0"
     "setSyncStatus(int)\0setADCStatus(int)\0"
-    "setSendIQStatus(int)\0setRecvAudioStatus(int)\0"
-    "setCurrentReceiver(int)\0setPreamp(QObject*,int)\0"
+    "setPacketLossStatus(int)\0setSendIQStatus(int)\0"
+    "setRecvAudioStatus(int)\0setCurrentReceiver(int)\0"
+    "setPreamp(QObject*,int)\0"
     "setReceivers(QObject*,int)\0"
     "setDither(QObject*,int)\0setRandom(QObject*,int)\0"
     "set10mhzSource(QObject*,int)\0"
@@ -97,7 +102,8 @@ static const char qt_meta_stringdata_OGLDisplayPanel[] = {
     "setAlexVersion(QObject*,int)\0"
     "setMouseWheelFreqStep(QObject*,double)\0"
     "rx,value\0setSMeterValue(int,float)\0"
-    "setSMeterHoldTime(int)\0"
+    "setSMeterHoldTime(int)\0updateSyncStatus()\0"
+    "updateADCStatus()\0updatePacketLossStatus()\0"
 };
 
 void OGLDisplayPanel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -119,28 +125,32 @@ void OGLDisplayPanel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 8: _t->setupDisplayRegions((*reinterpret_cast< QSize(*)>(_a[1]))); break;
         case 9: _t->setSyncStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 10: _t->setADCStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->setSendIQStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: _t->setRecvAudioStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 13: _t->setCurrentReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 14: _t->setPreamp((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 15: _t->setReceivers((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 16: _t->setDither((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 17: _t->setRandom((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 18: _t->set10mhzSource((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 19: _t->set122_88mhzSource((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 20: _t->setMercuryPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 21: _t->setPenelopePresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 22: _t->setAlexPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 23: _t->setExcaliburPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 24: _t->setHermesVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 25: _t->setMercuryVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 26: _t->setPenelopeVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 27: _t->setMetisVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 28: _t->setExcaliburVersion((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 29: _t->setAlexVersion((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 30: _t->setMouseWheelFreqStep((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
-        case 31: _t->setSMeterValue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2]))); break;
-        case 32: _t->setSMeterHoldTime((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: _t->setPacketLossStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: _t->setSendIQStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: _t->setRecvAudioStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->setCurrentReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->setPreamp((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 16: _t->setReceivers((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 17: _t->setDither((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 18: _t->setRandom((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 19: _t->set10mhzSource((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 20: _t->set122_88mhzSource((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 21: _t->setMercuryPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 22: _t->setPenelopePresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 23: _t->setAlexPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 24: _t->setExcaliburPresence((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 25: _t->setHermesVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 26: _t->setMercuryVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 27: _t->setPenelopeVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 28: _t->setMetisVersion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 29: _t->setExcaliburVersion((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 30: _t->setAlexVersion((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 31: _t->setMouseWheelFreqStep((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
+        case 32: _t->setSMeterValue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2]))); break;
+        case 33: _t->setSMeterHoldTime((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 34: _t->updateSyncStatus(); break;
+        case 35: _t->updateADCStatus(); break;
+        case 36: _t->updatePacketLossStatus(); break;
         default: ;
         }
     }
@@ -178,9 +188,9 @@ int OGLDisplayPanel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 33)
+        if (_id < 37)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 33;
+        _id -= 37;
     }
     return _id;
 }

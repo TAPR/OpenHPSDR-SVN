@@ -126,6 +126,7 @@ private:
 
 	QString		m_SYNCString;
 	QString		m_ADCString;
+	QString		m_PacketLossString;
 	QString		m_sendIQString;
 	QString		m_recvAudioString;
 	QString		m_AttnString;
@@ -203,6 +204,7 @@ private:
 	int		m_digitPosition;
 	int		m_syncStatus;
 	int		m_adcStatus;
+	int		m_packetLossStatus;
 	int		m_sendIQStatus;
 	int		m_recvAudioStatus;
 	int		m_receivers;
@@ -214,6 +216,7 @@ private:
 	
 	int		m_syncWidth;
 	int		m_adcWidth;
+	int		m_packetLossWidth;
 	int		m_sendIQWidth;
 	int		m_recvAudioWidth;
 	int		m_AttnWidth;
@@ -227,6 +230,8 @@ private:
 	int		m_freqDigitsPosY;
 	int		m_sMeterPosY;
 	int		m_sMeterHoldTime;
+	int		m_sMeterPrevHoldTimeMax;
+	int		m_sMeterPrevHoldTimeMin;
 	int		m_sMeterMeanValueCnt;
 	
 	qreal	m_mouseWheelFreqStep;
@@ -269,6 +274,7 @@ private slots:
 
 	void	setSyncStatus(int value);
 	void	setADCStatus(int value);
+	void	setPacketLossStatus(int value);
 	void	setSendIQStatus(int value);
 	void	setRecvAudioStatus(int value);
 	void	setCurrentReceiver(int value);
@@ -294,6 +300,9 @@ private slots:
 
 	void	setSMeterValue(int rx, float value);
 	void	setSMeterHoldTime(int value);
+	void	updateSyncStatus();
+	void	updateADCStatus();
+	void	updatePacketLossStatus();
 
 signals:
 	void showEvent(QObject *sender);

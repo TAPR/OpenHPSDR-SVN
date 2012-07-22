@@ -1,6 +1,6 @@
 /**
-* @file  cusdr_main.cpp
-* @brief main window class for cuSDR
+* @file  cusdr_mainWidget.cpp
+* @brief main window widget class for cuSDR
 * @author Hermann von Hasseln, DL3HVH
 * @version 0.1
 * @date 2011-01-06
@@ -106,10 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
 	m_radioWidget = new RadioWidget(this);
 	m_serverWidget = new ServerWidget(this);
 	m_chirpWidget = new ChirpWidget(this);
-	//m_hpsdrWidget = new HPSDRWidget(this);
 	m_hpsdrTabWidget = new HPSDRTabWidget(this);
-	//m_alexWidget = new AlexWidget(this);
-	//m_pennyWidget = new PennyWidget();
 	
 	setAutoFillBackground(true);
 	setMouseTracking(true);
@@ -778,10 +775,12 @@ void MainWindow::createMainBtnGroup() {
 		this, 
 		SLOT(closeMainWindow()));
 
+	QColor col = QColor(90, 90, 90);
+
 	nullBtn = new AeroButton(this);
 	nullBtn->setRoundness(0);
 	nullBtn->setFixedHeight(btn_height1);
-	nullBtn->setHighlight(QColor(90, 90, 90));
+	nullBtn->setHighlight(col);
 	nullBtn->setEnabled(false);
 		
 	mainBtnLayout->addWidget(startBtn);
@@ -1328,15 +1327,21 @@ void MainWindow::startButtonClickedEvent() {
 	if (startBtn->btnState() == AeroButton::OFF) {
 
 		startBtn->setBtnState(AeroButton::ON);
-		startBtn->setColorOn(QColor(180, 0, 0));
-		startBtn->setHighlight(QColor(250, 0, 0));
+
+		QColor col = QColor(180, 0, 0);
+		startBtn->setColorOn(col);
+
+		col = QColor(250, 0, 0);
+		startBtn->setHighlight(col);
 		startBtn->setText("Stop");
 		m_settings->setMainPower(this, true);
 	}
 	else if (startBtn->btnState() == AeroButton::ON) {
 
 		startBtn->setBtnState(AeroButton::OFF);
-		startBtn->setHighlight(QColor(0x91, 0xeb, 0xff));
+
+		QColor col = QColor(0x91, 0xeb, 0xff);
+		startBtn->setHighlight(col);
 		startBtn->setText("Start");
 		m_settings->saveSettings();
 		m_settings->setMainPower(this, false);

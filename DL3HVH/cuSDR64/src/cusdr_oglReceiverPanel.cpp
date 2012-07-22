@@ -2999,7 +2999,6 @@ void QGLReceiverPanel::setPreamp(QObject* sender, int value) {
 	Q_UNUSED(sender)
 	
 	m_Preamp = value;
-	GRAPHICS_DEBUG << "m_Preamp" << m_Preamp;
 	update();
 }
 

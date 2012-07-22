@@ -38,9 +38,11 @@ DataReceiver::DataReceiver(THPSDRParameter *ioData)
 	, m_wbCount(0)
 	, m_stopped(false)
 	, m_sendEP4(false)
+	, m_packetsToggle(true)
 	, m_dataReceiverSocketOn(false)
 	, m_socketBufferSize(m_settings->getSocketBufferSize())
 	, m_manualBufferSize(m_settings->getManualSocketBufferSize())
+	, m_wbBuffers(m_settings->getWidebandBuffers() - 1)
 {
 	m_metisGetDataSignature.resize(3);
 	m_metisGetDataSignature[0] = (char)0xEF;
@@ -50,6 +52,8 @@ DataReceiver::DataReceiver(THPSDRParameter *ioData)
 
 	m_datagram.resize(1032);
 	m_wbDatagram.resize(0);
+
+	m_packetLossTime.start();
 
 	CHECKED_CONNECT(
 		m_settings, 
@@ -133,6 +137,7 @@ void DataReceiver::initDataReceiverSocket() {
 		DATA_RECEIVER_DEBUG << "data receiver socket bound successful to local port" << m_dataReceiverSocket->localPort();
 
 		m_dataReceiverSocketOn = true;
+		m_settings->setPacketLoss(1);
 	}
 	else {
 		
@@ -143,18 +148,6 @@ void DataReceiver::initDataReceiverSocket() {
 }
 
 void DataReceiver::readMetisData() {
-
-	/*if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16)
-		m_wbDatagram.resize(2*BIGWIDEBANDSIZE);
-	else
-		m_wbDatagram.resize(0);*/
-
-	// if we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples, m_wbBuffers = 8
-	// we have 16384 * 16 bit = 32 * 1024 raw consecutive ADC samples, m_wbBuffers = 32
-	if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16)
-		m_wbBuffers = BIGWIDEBANDSIZE / 512;
-	else
-		m_wbBuffers = SMALLWIDEBANDSIZE / 512;
 
 	while (m_dataReceiverSocket->hasPendingDatagrams()) {
 
@@ -169,10 +162,18 @@ void DataReceiver::readMetisData() {
 					m_sequence += (m_datagram[6] & 0xFF) << 8;
 					m_sequence += (m_datagram[7] & 0xFF);
 
-					if (m_sequence != m_oldSequence + 1)
+					if (m_sequence != m_oldSequence + 1) {
+
 						DATA_RECEIVER_DEBUG	<< "readData missed " << m_sequence - m_oldSequence 
 											<< " packages.";// error:" << m_dataReceiverSocket->errorString();
-				
+
+						if (m_packetLossTime.elapsed() > 100) {
+							
+							m_settings->setPacketLoss(2);
+							m_packetLossTime.restart();
+						}
+					}
+
 					m_oldSequence = m_sequence;
 
 					// enqueue first half of the HPSDR frame from Metis
@@ -188,34 +189,37 @@ void DataReceiver::readMetisData() {
 					m_sequenceWideBand += (m_datagram[6] & 0xFF) << 8;
 					m_sequenceWideBand += (m_datagram[7] & 0xFF);
 
-					if (m_sequenceWideBand != m_oldSequenceWideBand + 1)
+					if (m_sequenceWideBand != m_oldSequenceWideBand + 1) {
+
 						DATA_RECEIVER_DEBUG	<< "wideband readData missed " << m_sequenceWideBand - m_oldSequenceWideBand 
 											<< " packages.";// error:" << m_dataReceiverSocket->errorString();
-				
-					m_oldSequenceWideBand = m_sequenceWideBand;
 
-					// check for the last 3 bits of m_sequenceWideBand being 0, then copy over the payload
-					if ((0x07 & m_datagram[7]) == 0) m_sendEP4 = true;
-
-					if (m_sendEP4) {
-						
-						m_wbDatagram.append(m_datagram.mid(METIS_HEADER_SIZE, BUFFER_SIZE));
-						//m_wbDatagram.replace(m_wbCount * BUFFER_SIZE, BUFFER_SIZE, m_datagram.mid(METIS_HEADER_SIZE));
-						m_wbCount++;
+						if (m_packetLossTime.elapsed() > 100) {
+							
+							m_settings->setPacketLoss(2);
+							m_packetLossTime.restart();
+						}
 					}
 					
-					if (m_wbCount == m_wbBuffers) {
+					m_oldSequenceWideBand = m_sequenceWideBand;
 
-						// enqueue
-						io->wb_queue.enqueue(m_wbDatagram);
-						m_wbDatagram.resize(0);
+					// three 'if's from KISS Konsole
+					if ((m_wbBuffers & m_datagram[7]) == 0) {
+						
+						m_sendEP4 = true;
 						m_wbCount = 0;
 					}
 
-					//// enqueue
-					//io->wb_queue.enqueue(m_wbDatagram);
-					////m_wbDatagram.resize(0);
-					//if (m_wbCount == m_wbBuffers) m_wbCount = 0;
+					if (m_sendEP4)
+						m_wbDatagram.append(m_datagram.mid(METIS_HEADER_SIZE, BUFFER_SIZE));
+						
+					if (m_wbCount++ == m_wbBuffers) {
+
+						// enqueue
+						m_sendEP4 = false;
+						io->wb_queue.enqueue(m_wbDatagram);
+						m_wbDatagram.resize(0);
+					}
 				}
 			}
 		}
@@ -243,6 +247,11 @@ void DataReceiver::readData() {
 	}
 	m_stopped = false;
 }
+
+//void DataReceiver::setWidebandBuffers(int value) {
+//
+//	m_wbBuffers = value;
+//}
 
 void DataReceiver::displayDataReceiverSocketError(QAbstractSocket::SocketError error) {
 

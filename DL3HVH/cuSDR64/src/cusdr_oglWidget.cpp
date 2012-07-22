@@ -41,7 +41,7 @@ OGLWidget::OGLWidget(QWidget *parent)
 		, m_numberOfReceivers(m_settings->getNumberOfReceivers())
 		, m_multiRxView(m_settings->getMultiRxView())
 		, m_widebandPanel(false)
-		, m_wideBandStatus(m_settings->getWideBandStatus())
+		, m_wideBandDisplayStatus(m_settings->getWideBandStatus())
 		, m_minWidebandDisplayHeight(120)
 {
 	setAutoFillBackground(true);
@@ -54,6 +54,10 @@ OGLWidget::OGLWidget(QWidget *parent)
 
 	m_wbDisplay = 0;
 	m_distDisplay = 0;
+
+	m_topSplitter = 0;
+	m_bottomSplitter = 0;
+	m_widebandSplitter = 0;
 
 	if (m_serverMode == QSDR::DttSP || m_serverMode == QSDR::ChirpWSPR)
 		m_settings->setSpectrumSize(4096);
@@ -82,6 +86,12 @@ OGLWidget::~OGLWidget() {
 
 		delete m_distDisplay;
 		m_distDisplay = 0;
+	}
+
+	if (m_widebandSplitter) {
+		
+		delete m_widebandSplitter;
+		m_widebandSplitter = 0;
 	}
 
 	for (int i = 0; i < m_numberOfReceivers; i++) {
@@ -337,7 +347,7 @@ void OGLWidget::initReceiverDisplays(int rx, int view) {
 				frame->setStyleSheet(m_settings->getFrameStyle());
 				frame->setLayout(m_rxBoxLayoutList.at(0));
 
-				if (m_widebandPanel && m_wideBandStatus)
+				if (m_widebandPanel && m_wideBandDisplayStatus)
 					m_topSplitter->addWidget(m_widebandSplitter);
 
 				m_topSplitter->addWidget(frame);
@@ -349,7 +359,7 @@ void OGLWidget::initReceiverDisplays(int rx, int view) {
 				frame->setFrameShape(QFrame::NoFrame);
 				frame->setLayout(m_rxBoxLayoutList.at(rx-1));
 
-				if (m_widebandPanel && m_wideBandStatus) {
+				if (m_widebandPanel && m_wideBandDisplayStatus && m_settings->getWideBandData()) {
 
 					frame->setStyleSheet(m_settings->getFrameStyle());
 					m_topSplitter->addWidget(m_widebandSplitter);
@@ -384,7 +394,7 @@ void OGLWidget::initReceiverDisplays(int rx, int view) {
 				frame->setStyleSheet(m_settings->getFrameStyle());
 				frame->setLayout(m_rxBoxLayoutList.at(rx-1));
 
-				if (m_widebandPanel && m_wideBandStatus)
+				if (m_widebandPanel && m_wideBandDisplayStatus)
 					m_bottomSplitter->addWidget(m_widebandSplitter);
 
 				m_bottomSplitter->addWidget(m_topSplitter);
@@ -396,7 +406,7 @@ void OGLWidget::initReceiverDisplays(int rx, int view) {
 				frame->setFrameShape(QFrame::NoFrame);
 				frame->setLayout(m_rxBoxLayoutList.at(rx-1));
 
-				if (m_widebandPanel && m_wideBandStatus) {
+				if (m_widebandPanel && m_wideBandDisplayStatus) {
 
 					frame->setStyleSheet(m_settings->getFrameStyle());
 					//m_bottomSplitter->addWidget(m_widebandSplitter);
@@ -496,9 +506,24 @@ void OGLWidget::setNumberOfReceivers(QObject* sender, int value) {
 		m_wbDisplay = 0;
 	}
 
-	if (m_widebandSplitter != 0)
-		delete m_widebandSplitter;
+	/*if (m_topSplitter) {
 
+		delete m_topSplitter;
+		m_topSplitter = 0;
+	}
+
+	if (m_bottomSplitter) {
+		
+		delete m_bottomSplitter;
+		m_bottomSplitter = 0;
+	}*/
+
+	if (m_widebandSplitter) {
+		
+		delete m_widebandSplitter;
+		m_widebandSplitter = 0;
+	}
+		
 	if (m_settings->getWideBandData())
 		initWidebandDisplay();
 
@@ -554,9 +579,9 @@ void OGLWidget::setFrequency(QObject* sender, bool value, int rx, long freq) {
 
 void OGLWidget::setWideBandStatus(bool value) {
 
-	m_wideBandStatus = value;
+	m_wideBandDisplayStatus = value;
 
-	if (m_wideBandStatus)
+	if (m_wideBandDisplayStatus)
 		initWidebandDisplay();
 
 	initReceiverDisplays(m_numberOfReceivers, m_multiRxView);

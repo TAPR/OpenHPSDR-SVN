@@ -83,7 +83,7 @@ private:
 	QSDRGraphics::_WaterfallColorScheme m_waterColorScheme;
 
 	QVector<qreal>						m_widebandPanSpectrumBins;
-	QQueue<QVector<float>>				specAv_queue;
+	QQueue<QVector<float> >				specAv_queue;
 	QList<TReceiver>					m_rxDataList;
 
 	QGLFramebufferObject				*m_frequencyScaleFBO;

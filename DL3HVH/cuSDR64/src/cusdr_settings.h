@@ -31,6 +31,7 @@
 #include <QObject>
 #include <QSettings>
 #include <QDateTime>
+#include <QTimer>
 #include <QErrorMessage>
 #include <QFile>
 #include <QFont>
@@ -416,8 +417,8 @@ typedef struct _hpsdrParameter {
 	QHQueue<QByteArray>		iq_queue;
 	QHQueue<QByteArray>		au_queue;
 	QHQueue<QByteArray>		wb_queue;
-	QHQueue<QList<qreal>>	chirp_queue;
-	QHQueue<QList<qreal>>	data_queue;
+	QHQueue<QList<qreal> >	chirp_queue;
+	QHQueue<QList<qreal> >	data_queue;
 
 	QList<qreal> inputBuffer;
 
@@ -716,6 +717,7 @@ signals:
 
 	void protocolSyncChanged(int value);
 	void adcOverflowChanged(int value);
+	void packetLossChanged(int value);
 	void sendIQSignalChanged(int value);
 	void rcveIQSignalChanged(int value);
 
@@ -888,8 +890,9 @@ public:
 	int  getSocketBufferSize()		{ return m_socketBufferSize; }
 	bool getManualSocketBufferSize() { return m_manualSocketBufferSize; }
 
-	bool getWideBandStatus()		{ return m_wideBandStatus; }
+	bool getWideBandStatus()		{ return m_wideBandDisplayStatus; }
 	bool getWideBandData()			{ return m_wideBandData; }
+	int  getWidebandBuffers()		{ return m_wbBuffers; }
 
 	bool getPanGridStatus()			{ return m_panGrid; }
 	bool getPeakHoldStatus()		{ return m_peakHold; }
@@ -1031,6 +1034,7 @@ public slots:
 
 	void setProtocolSync(int value);
 	void setADCOverflow(int value);
+	void setPacketLoss(int value);
 	void setSendIQ(int value);
 	void setRcveIQ(int value);
 
@@ -1054,6 +1058,7 @@ public slots:
 	void setMouseWheelFreqStep(QObject *sender, double value);
 	void setSocketBufferSize(QObject *sender, int value);
 	void setManualSocketBufferSize(QObject *sender, bool value);
+	void setWidebandBuffers(QObject *sender, int value);
 
 	void setSpectrumSize(int value);
 	void setdBmPanScaleMin(int rx, qreal value);
@@ -1134,6 +1139,8 @@ public slots:
 
 	QList<long> getFrequencies();
 	
+private slots:
+
 private:
 	QMutex mutex;
 
@@ -1146,7 +1153,7 @@ private:
 
 	QDateTime		startTime;
 	QDateTime		now;
-		
+
 	QHostAddress	m_hostAddress;
 
 	quint16			m_serverPort;
@@ -1185,7 +1192,7 @@ private:
 	bool	m_settingsLoaded;
 	bool	m_connected;
 	bool	m_clientConnected;
-	bool	m_wideBandStatus;
+	bool	m_wideBandDisplayStatus;
 	bool	m_wideBandData;
 	bool	m_pboFound;
 	bool	m_fboFound;
@@ -1203,6 +1210,7 @@ private:
 	bool	m_specAveraging;
 	bool	m_panGrid;
 	bool	m_peakHold;
+	bool	m_packetsToggle;
 
 	bool	m_frequencyRx1onRx2;
 
@@ -1240,6 +1248,7 @@ private:
 	int		m_graphicResolution;
 	int		m_multiRxView;
 
+	int		m_wbBuffers;
 	int		m_spectrumSize;
 	int		m_specAveragingCnt;
 	int		m_sMeterHoldTime;
@@ -1351,7 +1360,7 @@ class NullDebug {
 
 public:
     template <typename T>
-    NullDebug& operator<<(const T&) { return *this; }
+    NullDebug& operator << (const T) { return *this; }
 };
 
 inline NullDebug nullDebug() { return NullDebug(); }
