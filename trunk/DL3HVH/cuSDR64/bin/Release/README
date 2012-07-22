@@ -41,8 +41,26 @@ Current limitations:
 
 - not all functionality of the DttSP package is used currently.
 
+- Don't forget to put your call sign in the 'user' section of settings.ini !
+
 ***********************************************************************
 list of changes:
+
+v0.2.2.5:
+
+- Bug fixes (wide band, multi-Rx views, and more)
+
+- S-Meter min/max-Bar (the red/orange one) improved: slow reset.
+
+- Added an IP-packet 'LED' in order to indicate if there are packet losses.
+  Useful if you encounter audio distortions caused by network problems.
+  
+- Added timers to control the SYNC, ADC, and IP Packets LEDs.
+
+only cuSDR32:
+
+- Provided *.pro/*.pri files, and tested compilation under minGW.
+  (gcc-Version 4.7.0)
 
 v0.2.2.4:
 
@@ -191,6 +209,11 @@ A lot of parameters are stored in a file settings.ini. You can copy/rename/edit
 this file, but always a file named settings.ini will be used. If you enter wrong
 values, the application will take default values. If you loose settings.ini, the
 application will create one for you.
+
+In the settings.ini there is a parameter in the server section called 
+'widebandData'. If 'widebandData=off', Metis/Hermes will be initialzed without
+sending wide band data, if 'widebandData=on', with sending wide band data.
+Be careful when editing settings.ini.
 
 Have fun!
 

@@ -52,6 +52,8 @@ private:
 	int		m_length;
 	int		cnt;
 
+	float	k;
+
 private slots:
 	void setAveragingLength(int value);
 };

@@ -557,6 +557,16 @@ bool DataEngine::getFirmwareVersions() {
 	m_mercuryFW = settings->getMercuryVersion();
 	m_hermesFW = settings->getHermesVersion();
 
+	// if we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples, m_wbBuffers = 8
+	// we have 16384 * 16 bit = 32 * 1024 raw consecutive ADC samples, m_wbBuffers = 32
+	int wbBuffers = 0;
+	if (m_mercuryFW > 32 || m_hermesFW > 16)
+		wbBuffers = BIGWIDEBANDSIZE / 512;
+	else
+		wbBuffers = SMALLWIDEBANDSIZE / 512;
+
+	settings->setWidebandBuffers(this, wbBuffers);
+
 	return true;
 }
 
@@ -732,6 +742,10 @@ bool DataEngine::start() {
 			DATA_ENGINE_DEBUG << "audio processor thread could not be started.";
 			return false;
 		}
+
+		// start Sync,ADC timers
+		m_SyncChangedTime.start();
+		m_ADCChangedTime.start();
 
 		// just give them a little time..
 		Sleep(100);
@@ -2234,11 +2248,11 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 
 	if (buffer.at(s++) == SYNC && buffer.at(s++) == SYNC && buffer.at(s++) == SYNC) {
 
-		if (syncToggle) { // toggle sync signal
+		//if (syncToggle) { // toggle sync signal
 
-			settings->setProtocolSync(1);
-			syncToggle = false;
-		}
+		//	settings->setProtocolSync(1);
+		//	syncToggle = false;
+		//}
 
         // extract control bytes
         io.control_in[0] = buffer.at(s++);
@@ -2273,17 +2287,26 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 			case 0:
 
 				if (io.ccRx.lt2208) { // toggle ADC signal
-					if (adcToggle) {
+					
+					if (m_ADCChangedTime.elapsed() > 50) {
+
 						settings->setADCOverflow(2);
-						adcToggle = false;
+						m_ADCChangedTime.restart();
 					}
 				}
-				else {
-					if (!adcToggle) {
-						settings->setADCOverflow(1);
-						adcToggle = true;
-					}
-				}
+
+				//if (io.ccRx.lt2208) { // toggle ADC signal
+				//	if (adcToggle) {
+				//		settings->setADCOverflow(2);
+				//		adcToggle = false;
+				//	}
+				//}
+				//else {
+				//	if (!adcToggle) {
+				//		settings->setADCOverflow(1);
+				//		adcToggle = true;
+				//	}
+				//}
 				//qDebug() << "CC: " << io.ccRx.roundRobin;
 				if (m_hwInterface == QSDR::Hermes) {
 
@@ -2552,11 +2575,17 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
     } 
 	else {
 
-		if (!syncToggle) {
+		if (m_SyncChangedTime.elapsed() > 50) {
+
+			settings->setProtocolSync(2);
+			m_SyncChangedTime.restart();
+		}
+
+		/*if (!syncToggle) {
 			
 			settings->setProtocolSync(2);
 			syncToggle = true;
-		}
+		}*/
 	}
 }
 
@@ -2600,21 +2629,21 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 	// averaging
 	QVector<float>	specBuf(size/4);
 
-	wbMutex.lock();
+	m_wbMutex.lock();
 	if (m_wbSpectrumAveraging) {
 		
 		for (int i = 0; i < size/4; i++)
 			specBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
 
 		m_wbAverager->ProcessDBAverager(specBuf, specBuf);
-		wbMutex.unlock();
+		m_wbMutex.unlock();
 	}
 	else {
 
 		for (int i = 0; i < size/4; i++)
 			specBuf[i] = (float)(10.0 * log10(MagCPX(io.cpxWBOut[i]) + 1.5E-45));
 
-		wbMutex.unlock();
+		m_wbMutex.unlock();
 	}
 
 	settings->setWidebandSpectrumBuffer(specBuf);
@@ -3480,9 +3509,9 @@ void DataEngine::setAgcGain(QObject *sender, int rx, int value) {
 
 void DataEngine::setWbSpectrumAveraging(bool value) {
 
-	wbMutex.lock();
+	m_wbMutex.lock();
 	m_wbSpectrumAveraging = value;
-	wbMutex.unlock();
+	m_wbMutex.unlock();
 }
 
  

@@ -240,31 +240,23 @@ private:
 	QThreadEx					*m_audioProcThread;
 
 	QMutex		m_mutex;
-	QMutex		wbMutex;
+	QMutex		m_wbMutex;
 
 	QString		m_message;
 
 	QByteArray	m_commandDatagram;
 	QByteArray	m_datagram;
 
+	QTime			m_SyncChangedTime;
+	QTime			m_ADCChangedTime;
 	QElapsedTimer	m_timer;
 
 	QSDR::_ServerMode		m_serverMode;
 	QSDR::_HWInterfaceMode	m_hwInterface;
 	QSDR::_DataEngineState	m_dataEngineState;
 
-	//QQueue<QVector<float>>	m_specAv_queue;
-
-	//qVectorFloat	tmpBuf;
-	//qVectorFloat	avgBuf;
-
 	TMeterType		m_meterType;
-
-	
-	//bool	timer;
-	//qint64	oldtime;
-	//qint64	newtime;
-
+		
 	bool	m_restart;
 	bool	m_networkDeviceRunning;
 	bool	m_soundFileLoaded;

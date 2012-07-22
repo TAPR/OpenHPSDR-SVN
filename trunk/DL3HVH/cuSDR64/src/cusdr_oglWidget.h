@@ -72,7 +72,7 @@ private:
 	QTime						m_displayTime;
 
 	bool	m_widebandPanel;
-	bool	m_wideBandStatus;
+	bool	m_wideBandDisplayStatus;
 
 	int		m_numberOfReceivers;
 	int		m_multiRxView;

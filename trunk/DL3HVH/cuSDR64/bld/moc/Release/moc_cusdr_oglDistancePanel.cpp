@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_oglDistancePanel.h'
 **
-** Created: Wed 11. Jul 22:41:26 2012
+** Created: Sun 22. Jul 16:54:05 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!

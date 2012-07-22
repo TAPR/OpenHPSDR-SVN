@@ -1,6 +1,6 @@
 /**
-* @file  cusdr_main.h
-* @brief main window header file for cuSDR
+* @file  cusdr_mainWidget.h
+* @brief main window widget header file for cuSDR
 * @author Hermann von Hasseln, DL3HVH
 * @version 0.1
 * @date 2011-01-06

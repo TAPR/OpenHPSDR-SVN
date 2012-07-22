@@ -82,13 +82,14 @@ Settings::Settings(QObject *parent)
 	, m_hpsdrNetworkDevices(0)
 	, m_manualSocketBufferSize(false)
 	, m_peakHold(false)
+	, m_packetsToggle(true)
 {
 	// temporarily
 	m_pennyLanePresence = false;
 
 	//qRegisterMetaType<THPSDRParameter>();
 	qRegisterMetaType<TNetworkDevicecard>();
-	qRegisterMetaType<QList<TNetworkDevicecard>>();
+	qRegisterMetaType<QList<TNetworkDevicecard> >();
 	qRegisterMetaType<qVectorFloat>("qVectorFloat");
 
 	startTime = QDateTime::currentDateTime();
@@ -100,7 +101,7 @@ Settings::Settings(QObject *parent)
 	settings = new QSettings(QCoreApplication::applicationDirPath() +  "/" + settingsFilename, QSettings::IniFormat);
 
 	m_titleString = "cuSDR64 BETA ";
-	m_versionString = "v0.2.2.4";
+	m_versionString = "v0.2.2.5";
 
 	// get styles
 	//m_sdrStyle = sdrStyle;
@@ -131,6 +132,10 @@ Settings::Settings(QObject *parent)
 	m_bandList = getHamBandFrequencies();
 	m_bandTextList = getHamBandText();
 	m_defaultFilterList = getDefaultFilterFrequencies();
+
+	//m_packetLossTimer = new QTimer(this);
+	//m_packetLossTimer->setSingleShot(true);
+	//m_packetLossTime.start();
 
 	//// ****************************
 	//// check for OpenCL devices
@@ -485,18 +490,20 @@ int Settings::loadSettings() {
 	else
 		m_mercuryRandom = 0;
 
-	str = settings->value("server/wideband", "off").toString();
-	if (str.toLower() == "on")
-		m_wideBandStatus = true;
-	else
-		m_wideBandStatus = false;
-
 	str = settings->value("server/widebandData", "on").toString();
 	if (str.toLower() == "on")
 		m_wideBandData = true;
 	else
 		m_wideBandData = false;
 
+	str = settings->value("server/widebandDisplay", "off").toString();
+	if (str.toLower() == "on")
+		m_wideBandDisplayStatus = true;
+	else
+		m_wideBandDisplayStatus = false;
+
+	if (!m_wideBandData) m_wideBandDisplayStatus = false;
+	
 	str = settings->value("server/10mhzsource", "mercury").toString();
 	if (str == "atlas")
 		m_10MHzSource = 0;
@@ -1045,15 +1052,17 @@ int Settings::saveSettings() {
 	else
 		settings->setValue("server/random", "off");
 
-	if (m_wideBandStatus)
-		settings->setValue("server/wideband", "on");
-	else
-		settings->setValue("server/wideband", "off");
-
 	if (m_wideBandData)
 		settings->setValue("server/widebandData", "on");
 	else
 		settings->setValue("server/widebandData", "off");
+
+	if (!m_wideBandData) m_wideBandDisplayStatus = false;
+
+	if (m_wideBandDisplayStatus)
+		settings->setValue("server/widebandDisplay", "on");
+	else
+		settings->setValue("server/widebandDisplay", "off");
 
 	if (m_10MHzSource == 0)
 		settings->setValue("server/10mhzsource", "atlas");
@@ -1172,55 +1181,55 @@ int Settings::saveSettings() {
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency160m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(0));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(0));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency80m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(1));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(1));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency60m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(2));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(2));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency40m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(3));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(3));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency30m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(4));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(4));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency20m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(5));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(5));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency17m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(6));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(6));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency15m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(7));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(7));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency12m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(8));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(8));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency10m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(9));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(9));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequency6m");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(10));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(10));
 
 		str = m_rxStringList.at(i);
 		str.append("/lastFrequencyGen");
-		settings->setValue(str, m_receiverDataList.at(i).lastFrequencyList.at(11));
+		settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(11));
 
 		str = m_rxStringList.at(i);
 		str.append("/frequency");
-		settings->setValue(str, m_receiverDataList[i].frequency);
+		settings->setValue(str, (int)m_receiverDataList[i].frequency);
 	}
 	
 
@@ -1429,7 +1438,7 @@ void Settings::setSystemState(
 	SETTINGS_DEBUG	<< "hwInterface: " << qPrintable(getHWInterfaceModeString(m_hwInterface));
 	SETTINGS_DEBUG	<< "serverMode: " << qPrintable(getServerModeString(m_serverMode));
 	SETTINGS_DEBUG	<< "dataEngineState: " << qPrintable(getHDataEngineStateString(m_dataEngineState));
-	SETTINGS_DEBUG	<< " ";
+	qDebug() << " ";
 
 	emit systemStateChanged(this, m_systemError, m_hwInterface, m_serverMode, m_dataEngineState);
 }
@@ -1874,6 +1883,11 @@ void Settings::setADCOverflow(int value) {
 	emit adcOverflowChanged(value);
 }
 
+void Settings::setPacketLoss(int value) {
+
+	emit packetLossChanged(value);
+}
+
 void Settings::setSendIQ(int value) {
 
 	emit sendIQSignalChanged(value);
@@ -2095,9 +2109,9 @@ void Settings::setIQPort(QObject *sender, int rx, int port) {
 
 void Settings::setWideBandStatus(bool value) {
 
-	m_wideBandStatus = value;
+	m_wideBandDisplayStatus = value;
 
-	emit wideBandStausChanged(value);
+	emit wideBandStausChanged(m_wideBandDisplayStatus);
 }
 
 void Settings::setWideBandData(bool value) {
@@ -2105,6 +2119,13 @@ void Settings::setWideBandData(bool value) {
 	m_wideBandData = value;
 
 	emit wideBandDataChanged(value);
+}
+
+void Settings::setWidebandBuffers(QObject *sender, int value) {
+
+	Q_UNUSED(sender)
+
+	m_wbBuffers = value;
 }
  
 void Settings::setSpectrumBuffer(int rx, const float* buffer) {

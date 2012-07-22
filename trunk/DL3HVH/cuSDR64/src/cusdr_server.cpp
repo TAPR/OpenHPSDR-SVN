@@ -279,7 +279,7 @@ char *HPSDRServer::attachReceiver(int rx, int client) {
 	m_settings->setClientNoConnected(this, client);
 	
 	static char resp[80];
-    sprintf_s(resp, "%s %d", "OK", m_settings->getSampleRate());
+    //sprintf_s(resp, "%s %d", "OK", m_settings->getSampleRate());
 	
 	m_settings->setRxList(m_rxList);
 
@@ -333,14 +333,14 @@ char *HPSDRServer::parseCommand(char *command, int client) {
 
     m_message = tr("[client %1]: command '%2'.");
 	
-    token = strtok_s(command, seps, &next_token);
+    //token = strtok_s(command, seps, &next_token);
 
     if (token != NULL) {	
 		
 		if (strcmp(token, "attach") == 0) {
 			
 			// select receiver
-            token = strtok_s(NULL, seps, &next_token);
+            //token = strtok_s(NULL, seps, &next_token);
 
             if (token != NULL) {
 				
@@ -354,7 +354,7 @@ char *HPSDRServer::parseCommand(char *command, int client) {
         } else if (strcmp(token, "detach") == 0) {
 			
 			// select receiver
-            token = strtok_s(NULL, seps, &next_token);
+            //token = strtok_s(NULL, seps, &next_token);
 
             if (token != NULL) {
 
@@ -369,7 +369,7 @@ char *HPSDRServer::parseCommand(char *command, int client) {
         } else if (strcmp(token, "frequency") == 0)	{
 			
 			// set frequency
-            token = strtok_s(NULL, seps, &next_token);
+            //token = strtok_s(NULL, seps, &next_token);
 
             if (token != NULL) {
 				
@@ -381,13 +381,13 @@ char *HPSDRServer::parseCommand(char *command, int client) {
 
         } else if (strcmp(token, "start") == 0) {
 			
-			token = strtok_s(NULL, seps, &next_token);
+			//token = strtok_s(NULL, seps, &next_token);
 
             if (token != NULL) {
 				
 				if (strcmp(token, "iq") == 0) {
 					
-					token = strtok_s(NULL, seps, &next_token);
+					//token = strtok_s(NULL, seps, &next_token);
 
 					if (token != NULL) {
 						
@@ -410,7 +410,7 @@ char *HPSDRServer::parseCommand(char *command, int client) {
 
 				} else if (strcmp(token, "bandscope") == 0) {
 					
-					token = strtok_s(NULL, seps, &next_token);
+					//token = strtok_s(NULL, seps, &next_token);
 
                     if (token != NULL) {
 						
@@ -432,7 +432,7 @@ char *HPSDRServer::parseCommand(char *command, int client) {
 
         } else if (strcmp(token, "stop" ) == 0) {
 			
-			token = strtok_s(NULL, seps, &next_token);
+			//token = strtok_s(NULL, seps, &next_token);
 
             if (token != NULL) {
 				
@@ -459,7 +459,7 @@ char *HPSDRServer::parseCommand(char *command, int client) {
 		else if (strcmp(token, "selectAudio") == 0) {
 			
 			// change selection of which receiver's audio goes to Mercury headphone output
-			token = strtok_s(NULL, seps, &next_token);
+			//token = strtok_s(NULL, seps, &next_token);
 			if (token != NULL) {
 				
 				selectAudio = atoi(token);

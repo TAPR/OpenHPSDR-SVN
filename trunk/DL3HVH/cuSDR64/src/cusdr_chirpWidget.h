@@ -139,7 +139,7 @@ private:
 	FrequencySpectrum   m_spectrum;
 
 	QList<FrequencySpectrum>	m_spectrumList;
-	QList<QVector<Stripe>>		m_stripeList;
+	QList<QVector<Stripe> >		m_stripeList;
 
 	int stripeIndex(qreal frequency) const;
     QPair<qreal, qreal> stripeRange(int stripeIndex) const;

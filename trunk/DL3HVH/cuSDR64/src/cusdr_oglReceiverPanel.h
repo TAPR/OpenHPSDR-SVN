@@ -41,6 +41,7 @@
 #include <QQueue>
 #include <QDebug>
 #include <QtOpenGL/QGLWidget>
+#include <QGLFramebufferObject>
 
 
 class QGLReceiverPanel : public QGLWidget {
@@ -104,7 +105,7 @@ private:
 	QVector<qreal>					m_panPeakHoldBins;
 	QVarLengthArray<TGL_ubyteRGBA>	m_waterfallPixel;
 
-	QQueue<QVector<float>>			specAv_queue;
+	QQueue<QVector<float> >			specAv_queue;
 
 	QGLFramebufferObject			*m_frequencyScaleFBO;
 	QGLFramebufferObject			*m_dBmScaleFBO;

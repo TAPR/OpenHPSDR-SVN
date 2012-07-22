@@ -381,7 +381,7 @@ void QGLWidebandPanel::drawSpectrum() {
 
 	qreal scaleMult = 1.0;
 
-	if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16) {
+	/*if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16) {
 
 		newBufferSize = qFloor(BIGWIDEBANDSIZE / 2 * m_freqScaleZoomFactor);
 		deltaIdx = qFloor(m_displayDelta * (BIGWIDEBANDSIZE / 2 * MAXFREQUENCY));
@@ -390,7 +390,12 @@ void QGLWidebandPanel::drawSpectrum() {
 
 		newBufferSize = qFloor(SMALLWIDEBANDSIZE / 2 * m_freqScaleZoomFactor);
 		deltaIdx = qFloor(m_displayDelta * (SMALLWIDEBANDSIZE / 2 / MAXFREQUENCY));
-	}
+	}*/
+
+	int bufLen = m_wbSpectrumBuffer.size();
+
+	newBufferSize = qFloor(bufLen * m_freqScaleZoomFactor);
+	deltaIdx = qFloor(m_displayDelta * (bufLen * MAXFREQUENCY));
 	
 	qreal frequencyScale = (qreal)(1.0f * newBufferSize / width);
 	
@@ -488,6 +493,8 @@ void QGLWidebandPanel::drawSpectrum() {
 				}
 				idx += deltaIdx;
 
+				mutex.lock();
+
 				vertexColorArrayBg[2*i].x = m_rf;
 				vertexColorArrayBg[2*i].y = m_gf;
 				vertexColorArrayBg[2*i].z = m_bf;
@@ -528,6 +535,8 @@ void QGLWidebandPanel::drawSpectrum() {
 					vertexArray[i].y = (GLfloat)(yTop - yScale * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - m_dBmPanLogGain));
 					vertexArray[i].z = -1.0;
 				}
+
+				mutex.unlock();
 			}
 	
 			glEnableClientState(GL_VERTEX_ARRAY);
@@ -573,7 +582,7 @@ void QGLWidebandPanel::drawSpectrum() {
 				vertexColorArray[i].x = m_r	* (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
 				vertexColorArray[i].y = m_g * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
 				vertexColorArray[i].z = m_b * (yScaleColor * (m_wbSpectrumBuffer[idx] - m_dBmPanMin));
-				mutex.unlock();
+				
 				
 				vertexArray[i].x = (GLfloat)(i/scaleMult);
 				if (m_Preamp)
@@ -581,6 +590,8 @@ void QGLWidebandPanel::drawSpectrum() {
 				else
 					vertexArray[i].y = (GLfloat)(yTop - yScale * (m_wbSpectrumBuffer[idx] - m_dBmPanMin - m_dBmPanLogGain));
 				vertexArray[i].z = -1.0;
+
+				mutex.unlock();
 			}
 		
 			glEnableClientState(GL_VERTEX_ARRAY);
@@ -631,7 +642,6 @@ void QGLWidebandPanel::drawSpectrum() {
 				vertexColorArrayBg[2*i+1].x = m_redSB;
 				vertexColorArrayBg[2*i+1].y = m_greenSB;
 				vertexColorArrayBg[2*i+1].z = m_blueSB;
-				mutex.unlock();
 
 				vertexArrayBg[2*i].x = (GLfloat)(i/scaleMult);
 				if (m_Preamp)
@@ -644,6 +654,8 @@ void QGLWidebandPanel::drawSpectrum() {
 				vertexArrayBg[2*i+1].x = (GLfloat)(i/scaleMult);
 				vertexArrayBg[2*i+1].y = (GLfloat)yTop;
 				vertexArrayBg[2*i+1].z = -2.0f;
+
+				mutex.unlock();
 			}
 			
 			glEnableClientState(GL_VERTEX_ARRAY);
@@ -1803,8 +1815,10 @@ void QGLWidebandPanel::setCurrentReceiver(int value) {
 //void QGLWidebandPanel::setWidebandSpectrumBuffer(const float *buffer) {
 void QGLWidebandPanel::setWidebandSpectrumBuffer(const qVectorFloat &buffer) {
 
+	//int length = buffer.size();
+
 	mutex.lock();
-	if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16) {
+	/*if (m_settings->getMercuryVersion() > 32 || m_settings->getHermesVersion() > 16) {
 
 		if (m_wbSpectrumBuffer.size() != BIGWIDEBANDSIZE / 2)
 			m_wbSpectrumBuffer.resize(BIGWIDEBANDSIZE / 2);
@@ -1813,10 +1827,13 @@ void QGLWidebandPanel::setWidebandSpectrumBuffer(const qVectorFloat &buffer) {
 
 		if (m_wbSpectrumBuffer.size() != SMALLWIDEBANDSIZE / 2)
 			m_wbSpectrumBuffer.resize(SMALLWIDEBANDSIZE / 2);
-	}
+	}*/
 
+	//m_wbSpectrumBuffer.clear();
+	m_wbSpectrumBuffer.resize(buffer.size());
 	m_wbSpectrumBuffer = buffer;
 	mutex.unlock();
+
 	update();
 }
 
