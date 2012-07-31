@@ -68,8 +68,9 @@ private:
 	QFont			m_titleFont;
 	QFont			m_smallFont;
 
-	QString			lineedit_style;
-	
+	//QString			lineedit_style;
+	QString			m_callSingText;
+
 	QColor			m_currentColor;
 	QColor			m_newColor;
 
@@ -78,9 +79,12 @@ private:
 	QGroupBox*		m_wideBandSpectrumOptions;
 	QGroupBox*		m_sMeterOptions;
 	QGroupBox*		m_colorChooserWidget;
+	QGroupBox*		m_callSignEditor;
+
+	QLineEdit*		callSignLineEdit;
 		
-	QComboBox*      m_inputDeviceComboBox;
-    QComboBox*      m_outputDeviceComboBox;
+	//QComboBox*      m_inputDeviceComboBox;
+    //QComboBox*      m_outputDeviceComboBox;
 
 	QSpinBox*		m_averagingFilterSpinBox;
 	QSpinBox*		m_framesPerSecondSpinBox;
@@ -122,6 +126,7 @@ private:
 	AeroButton*		m_setWideBandSolidBottom;
 	AeroButton*		m_setDistanceLine;
 	AeroButton*		m_setDistanceLineFilling;
+	AeroButton*		m_setCallSignBtn;
 
 	AeroButton*		m_waterfallSimpleBtn;
 	AeroButton*		m_waterfallEnhancedBtn;
@@ -161,6 +166,7 @@ private:
 	void	createWaterfallSpectrumOptions();
 	void	createSMeterOptions();
 	void	createColorChooserWidget();
+	void	createCallSignEditor();
 
 private slots:
 	void	systemStateChanged(
@@ -192,6 +198,8 @@ private slots:
 	void 	fpsValueChanged(int value);
 	void	averagingFilterCntChanged(int value);
 	void	sampleRateChanged(QObject *sender, int value);
+	void	callSignTextChanged(const QString &text);
+	void	callSignChanged();
 	
 signals:
 	void	colorChanged(const QColor &color);

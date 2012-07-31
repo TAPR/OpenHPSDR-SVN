@@ -89,7 +89,7 @@
 // **************************************
 // receiver settings
 
-#define MAX_RECEIVERS				4
+#define MAX_RECEIVERS				7
 #define BUFFER_SIZE					1024
 #define SAMPLE_BUFFER_SIZE			4096
 
@@ -430,7 +430,8 @@ typedef struct _hpsdrParameter {
 	QWaitCondition devicefound;
 	//QMutex iqMutex;
 
-	QHostAddress	metisIPAddress;
+	QHostAddress	hpsdrDeviceIPAddress;
+	QString			hpsdrDeviceName;
 
 	TCCParameterRx	ccRx;
 	TCCParameterTx	ccTx;
@@ -684,7 +685,7 @@ signals:
 	void manualSocketBufferChanged(QObject* sender, bool value);
 	//void metisCardListChanged(QList<TMetiscard> list);
 	void metisCardListChanged(const QList<TNetworkDevicecard> &list);
-	void metisChanged(TNetworkDevicecard card);
+	void hpsdrDeviceChanged(TNetworkDevicecard card);
 	void networkDeviceNumberChanged(int value);
 	void networkIOComboBoxEntryAdded(QString str);
 	void clearNetworkIOComboBoxEntrySignal();
@@ -695,9 +696,12 @@ signals:
 	void listenPortChanged(QObject *sender, quint16 port);
 	void audioPortChanged(QObject *sender, quint16 port);
 	void metisPortChanged(QObject *sender, quint16 port);
+	
 	void showNetworkIO();
+	void showWarning(const QString &msg);
 
-	void callsignChanged(QString callsign );
+	//void callsignChanged(const QString &callsign);
+	void callsignChanged();
 
 	void mouseWheelFreqStepChanged(QObject *sender, double value);
 	void mainVolumeChanged(QObject *sender, int rx, float volume );
@@ -838,7 +842,12 @@ public:
 
 	QString getSDRStyle();
 	QString getWidgetStyle();
+	QString getMainWindowStyle();
+	QString getDockStyle();
+	QString getToolbarStyle();
+	QString getStatusbarStyle();
 	QString getMessageBoxStyle();
+	QString getLineEditStyle();
 	QString getDialogStyle();
 	QString getColorDialogStyle();
 	QString getItemStyle();
@@ -862,7 +871,7 @@ public:
 	quint16 audioPort()					{ return m_audioPort; }
 	quint16	metisPort()					{ return m_metisPort; }
 
-	TNetworkDevicecard			getCurrentMetisCard()		{ return m_currentMetisCard; }
+	TNetworkDevicecard			getCurrentMetisCard()		{ return m_currentHPSDRDevice; }
 	QList<TNetworkDevicecard>	getMetisCardsList()			{ return m_metisCards; }
 	QList<TReceiver>			getReceiverDataList()		{ return m_receiverDataList; }
 	QList<THamBandFrequencies>	getBandFrequencyList()		{ return m_bandList; }
@@ -965,7 +974,7 @@ public slots:
 	void	setDefaultSkin(QObject *sender, bool value);
 	void	setSettingsFilename(QString filename);
 	void	setSettingsLoaded(bool loaded);
-	void	setCallsign(QString callsign);
+	void	setCallsign(const QString &callsign);
 
 	void	setPBOPresence(bool value);
 	void	setFBOPresence(bool value);
@@ -995,7 +1004,7 @@ public slots:
 	void searchHpsdrNetworkDevices();
 	void clearMetisCardList();
 	void setHPSDRDeviceNumber(int value);
-	void setCurrentMetisCard(TNetworkDevicecard card);
+	void setCurrentHPSDRDevice(TNetworkDevicecard card);
 	void addNetworkIOComboBoxEntry(QString str);
 	void clearNetworkIOComboBoxEntry();
 	void addServerNetworkInterface(QString nicName, QString ipAddress);
@@ -1136,6 +1145,7 @@ public slots:
 	void setSMeterHoldTime(int value);
 
 	void showNetworkIODialog();
+	void showWarningDialog(const QString &msg);
 
 	QList<long> getFrequencies();
 	
@@ -1174,7 +1184,7 @@ private:
 	QSDRGraphics::_WaterfallColorScheme		m_waterfallColorScheme;
 	//QSDRGraphics::_Colors			m_colorItem;
 
-	TNetworkDevicecard			m_currentMetisCard;
+	TNetworkDevicecard			m_currentHPSDRDevice;
 	QList<TNetworkDevicecard>	m_metisCards;
 	QList<TReceiver>			m_receiverDataList;
 	QList<THamBandFrequencies>	m_bandList;

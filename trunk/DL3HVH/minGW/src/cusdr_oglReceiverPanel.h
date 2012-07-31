@@ -53,7 +53,7 @@ public:
 	~QGLReceiverPanel();
 
 public slots:
-	//QSize minimumSizeHint() const;
+	QSize minimumSizeHint() const;
 	QSize sizeHint() const;
 
 	void setSpectrumBuffer(const float *buffer);

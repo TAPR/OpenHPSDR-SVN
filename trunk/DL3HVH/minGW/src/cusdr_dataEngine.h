@@ -91,8 +91,6 @@ public:
 
 	bool 	audioProcessorRunning() { return m_audioProcessorRunning; }
 	bool	clientConnected;
-	bool	syncToggle;
-	bool	adcToggle;
 	
 public slots:
 	void	newMessage(QString msg);
@@ -243,6 +241,7 @@ private:
 	QMutex		m_wbMutex;
 
 	QString		m_message;
+	QString		m_HPSDRDevice;
 
 	QByteArray	m_commandDatagram;
 	QByteArray	m_datagram;
@@ -284,6 +283,7 @@ private:
 	int		m_metisFW;
 	int		m_hermesFW;
 	int		m_mercuryFW;
+	int		m_fwCount;
 	int		m_configure;
 	int		m_timeout;
 	int		m_txFrame;
@@ -342,6 +342,7 @@ private slots:
 	void	sendMessage(QString msg);
 	void	sendReceiverMessage(QString msg);
 
+	//void	setCurrentNetworkDevice(TNetworkDevicecard card);
 	void	setHPSDRDeviceNumber(int value);
 	void	rxListChanged(QList<HPSDRReceiver *> rxList);
 	void	searchHpsdrNetworkDevices();
