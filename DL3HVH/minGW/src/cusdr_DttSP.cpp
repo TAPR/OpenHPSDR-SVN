@@ -36,7 +36,7 @@ QDttSP::QDttSP(QObject *parent, int thread)
 	, m_settings(Settings::instance())
 	, m_dttspOn(false)
 {
-	// horrible hack to load the 4 different dll's for DttSP
+	// horrible hack to load the 7 different dll's for DttSP
 	QString str = "DttSP%1.dll";
 	str = str.arg(m_thread);
 	QByteArray ba = str.toUtf8();

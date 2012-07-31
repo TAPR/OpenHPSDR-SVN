@@ -30,6 +30,7 @@
 
 #include <QWidget>
 #include <QGroupBox>
+#include <QSpinBox>
 #include <QLineEdit>
 
 #include "cusdr_buttons.h"
@@ -85,6 +86,9 @@ private:
 	QComboBox*	networkDeviceInterfaces;
 	QComboBox*	networkDeviceIPAdresses;
 	QComboBox*	socketBufferSizes;
+	QComboBox*	m_receiverComboBox;
+
+	QLabel*		m_receiversLabel;
 	
 	AeroButton*	networkPresenceBtn;
 	AeroButton*	noHWBtn;
@@ -106,16 +110,19 @@ private:
 	AeroButton*	penelope2Btn;
 	AeroButton*	mercury2Btn;
 
-	AeroButton*	rx1Btn;
+	/*AeroButton*	rx1Btn;
 	AeroButton*	rx2Btn;
 	AeroButton*	rx3Btn;
 	AeroButton*	rx4Btn;
+	AeroButton*	rx5Btn;
+	AeroButton*	rx6Btn;
+	AeroButton*	rx7Btn;*/
 
 	AeroButton*	rx1to2Btn;
 
-	AeroButton*	view1Btn;
+	/*AeroButton*	view1Btn;
 	AeroButton*	view2Btn;
-	AeroButton*	view3Btn;
+	AeroButton*	view3Btn;*/
 
 	AeroButton*	socketBufSizeBtn;
 
@@ -164,7 +171,7 @@ private slots:
 	void	setDeviceNIC(int index);
 	void	setNetworkDeviceList(QList<TNetworkDevicecard> list);
 	void	setCurrentNetworkDevice(TNetworkDevicecard card);
-	void	setNumberOfReceivers();
+	void	setNumberOfReceivers(int value);
 	void	setShow1on2();
 	void	numberOfReceiversChanged(int value);
 	void	disableButtons();

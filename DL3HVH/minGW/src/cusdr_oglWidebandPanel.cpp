@@ -68,6 +68,8 @@ QGLWidebandPanel::QGLWidebandPanel(QWidget *parent)
 {
 	QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 	
+	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
 	setAutoBufferSwap(true);
 	setAutoFillBackground(false);
 	
@@ -197,10 +199,16 @@ QGLWidebandPanel::~QGLWidebandPanel() {
 	}
 }
 
+QSize QGLWidebandPanel::minimumSizeHint() const {
+	
+	return QSize(width(), 50);
+	//return QSize(width(), height());
+}
+
 QSize QGLWidebandPanel::sizeHint() const {
 	
 	//return QSize(width(), height());
-	return QSize(width(), 5);
+	return QSize(width(), 120);
 }
 
 void QGLWidebandPanel::setupConnections() {

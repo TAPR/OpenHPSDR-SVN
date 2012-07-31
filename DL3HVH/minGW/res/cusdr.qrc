@@ -29,6 +29,5 @@
         <file>img/cusdrLogo2.png</file>
         <file>img/cusdr4.png</file>
         <file>img/hpsdr4.png</file>
-        <file>cl/vectoradd.cl</file>
     </qresource>
 </RCC>

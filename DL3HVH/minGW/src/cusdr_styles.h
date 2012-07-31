@@ -38,6 +38,17 @@ QString colorDialogStyle = QString::fromUtf8(
 		"background-color: rgba(30, 30, 30, 255); "
 		"color: rgb(166, 196, 208); ");
 
+QString mainWindowStyle = QString::fromUtf8(
+		"QMainWindow::separator {"
+		"	background: rgba(166, 196, 208, 130);"
+		"	width: 3px;"
+		"	height: 3px;"
+		"}"
+		"QMainWindow::separator:hover {"
+		"	background: rgba(166, 196, 208, 200);"
+		"}"
+		);
+
 QString	widgetStyle = QString::fromUtf8(
 		//"background-color: rgba(0, 0, 0, 255); "
 		"QGroupBox { "
@@ -63,10 +74,61 @@ QString	tableStyle = QString::fromUtf8(
 		"border: 0px solid; ");
 
 QString	messageBoxStyle = QString::fromUtf8(
-		"border: 0px solid rgba(60, 60, 60, 255); "
+		"border: 0px solid rgba(166, 196, 208, 255); "
 		"border-right-width: 0px; "
 		"color: rgb(166, 196, 208); "
 		"background-color: rgba(0, 0, 0, 255); ");
+
+QString	lineEditStyle = QString::fromUtf8(
+		"border: 1px solid rgba(60, 60, 60, 255); "
+		//"border-right-width: 0px; "
+		"color: rgb(166, 196, 208); "
+		"background-color: rgba(0, 0, 0, 255); ");
+
+QString toolbarStyle = QString::fromUtf8(
+		"QToolBar {"
+		"	border: 0px solid rgba(0, 0, 0, 255); "
+		//"border-right-width: 0px; "
+		"	color: rgb(166, 196, 208); "
+		"	background-color: rgba(0, 0, 0, 255); "
+		"}"
+		"QToolBar::handle {"
+		//"	background-color: rgba(0, 0, 0, 255); "
+		"}"
+		);
+
+QString statusbarStyle = QString::fromUtf8(
+		"QStatusBar {"
+		//"border: 0px solid rgba(60, 60, 60, 255); "
+		//"border-right-width: 0px; "
+		"	color: rgb(166, 196, 208); "
+		"	background-color: rgba(0, 0, 0, 255); "
+		"}"
+		"QStatusBar::item {"
+		"	border: 1px rgba(60, 60, 60, 255);"
+		"	border-radius: 0px;"
+		"}"
+		);
+
+QString	dockStyle = QString::fromUtf8(
+		"QDockWidget {"
+		"	color: rgba(166, 196, 208, 255);"
+		"	border: 1px solid rgba(60, 60, 60, 255);"
+		"}"
+		//"background-color: rgba(0, 0, 0, 255); "
+		"QDockWidget::title {"
+		"	text-align: left;"
+		//"	background: rgba(60, 60, 60, 255);"
+		"	background: qlineargradient(y1:0, y2:1, stop: 0 #a0a0a0, stop: 0.5 #202020, stop: 1 #404040); "
+		//"	border: 1px solid rgba(60, 60, 60, 255);"
+		//"	border-radius: 2px;"
+		"	padding-left: 5px;"
+		"}"
+		"QDockWidget::close-button, QDockWidget::float-button {"
+		"	border: 1px solid transparent;"
+		"	background: rgba(166, 196, 208, 255);"
+		"	padding: 1px;"
+		"}");
 
 QString	comboBoxStyle = QString::fromUtf8(
 		"QComboBox { "
