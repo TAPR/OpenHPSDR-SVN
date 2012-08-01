@@ -776,7 +776,7 @@ unsigned char HermesFilt = 0;
         int outbuflen; // size of *outbufp in bytes
         int writebufpos = 0;
         int sample_bufp_size;
-        int sample_is_left;
+//        int sample_is_left;
 		int rx_sample_loops = 1;
         int buf_num = 0;
         unsigned char RxOverrun = 0;
@@ -1558,19 +1558,17 @@ unsigned char HermesFilt = 0;
 													   out_control_idx = 3;
 													break;
 												    case 3: //rx2 vfo
-													   //out_control_idx = 4;
-                                                       out_control_idx = (HermesPowerEnabled || isMetis || AlexEnabled) ? 6 : 7;
+													  // out_control_idx = 4;
+                                                       out_control_idx = 6;//(HermesPowerEnabled || isMetis || AlexEnabled) ? 6 : 7;
 													break;
 												    case 4: //rx3 vfo
-													  // out_control_idx = 0;
-                                                       out_control_idx = 5;
+                                                      out_control_idx = 5;
 													break; 
 												    case 5: //rx4 vfo
-                                                       out_control_idx = (HermesPowerEnabled || isMetis || AlexEnabled) ? 6 : 7;
+                                                       out_control_idx = 6;//(HermesPowerEnabled || isMetis || AlexEnabled) ? 6 : 7;
 													break;
-												    case 6: 
-                                                       //out_control_idx = 0;
-                                                       out_control_idx = 7;
+												    case 6: //Alex filters
+                                                        out_control_idx = 7;
 												    break;
 												    case 7: //Preamp controls
                                                        out_control_idx = 0;

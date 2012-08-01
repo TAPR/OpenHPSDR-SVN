@@ -23088,7 +23088,6 @@ namespace PowerSDR
                 JanusAudio.SetVFOfreqRX1(rx1_dds_freq_mhz);
                 if (PowerOn)
                 {
-                    //JanusAudio.SetVFOfreqRX1(fwc_dds_freq);
                     if (SetupForm.radAlexManualCntl.Checked)
                         SetHWFilters(fwc_dds_freq);
 
@@ -23139,7 +23138,7 @@ namespace PowerSDR
         }
 
         //private uint last_tw = 0;
-        private double fwc_dds_freq = 7.0;
+        private double fwc_dds_freq = 10.0;
         public double FWCDDSFreq
         {
             get { return fwc_dds_freq; }
@@ -23150,13 +23149,13 @@ namespace PowerSDR
                 double f = fwc_dds_freq + vfo_offset;
                 rx1_dds_freq_mhz = f;
                 rx1_dds_freq_updated = true;
-                radio.GetDSPRX(0, 0).RXOsc = 0.0;
+               // radio.GetDSPRX(0, 0).RXOsc = 0.0;
                 UpdateRX1DDSFreq();
                 // System.Console.WriteLine("rx1dds: " + rx1_dds_freq_mhz);
             }
         }
 
-        private double rx2_dds_freq = 7.0;
+        private double rx2_dds_freq = 10.0;
         public double RX2DDSFreq
         {
             get { return rx2_dds_freq; }
@@ -23167,7 +23166,7 @@ namespace PowerSDR
                 double f = rx2_dds_freq + rx2_vfo_offset;
                 rx2_dds_freq_mhz = f;// (float)f;
                 rx2_dds_freq_updated = true;
-                radio.GetDSPRX(1, 0).RXOsc = 0.0;
+              //  radio.GetDSPRX(1, 0).RXOsc = 0.0;
                 UpdateRX2DDSFreq();
                 // System.Console.WriteLine("rx2dds: " + rx2_dds_freq_mhz);
             }
@@ -33410,10 +33409,6 @@ namespace PowerSDR
                 AudioMOXChanged(tx);
                 if (rf_delay > 0) Thread.Sleep(rf_delay);
                 HdwMOXChanged(tx, freq);
-
-                //DttSP.FlushAllBufs(1, true);
-                // DttSP.SetThreadProcessingMode(1, 2);
-
             }
             else
             {

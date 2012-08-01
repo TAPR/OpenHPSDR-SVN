@@ -443,6 +443,14 @@ KD5TFDVK6APHAUDIO_API int WriteI2C(struct usb_dev_handle *hdev,
              buffer, length));    
 }
 
+KD5TFDVK6APHAUDIO_API int ReadI2C(struct usb_dev_handle *hdev, 
+								   int i2c_addr, 
+								   unsigned char *buffer, int length)
+{
+    return (Read_I2c(hdev, i2c_addr, 
+             buffer, length));    
+}
+
 KD5TFDVK6APHAUDIO_API int Set_I2C_Speed(struct usb_dev_handle *hdev, int speed)
 {
             int ret = usb_control_msg(hdev,

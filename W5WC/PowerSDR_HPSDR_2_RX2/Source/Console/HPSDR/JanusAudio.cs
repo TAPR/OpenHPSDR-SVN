@@ -359,7 +359,7 @@ namespace PowerSDR
                           break;
                        case 18: // K5SO Diversity & non-diversity
                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                               (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 33 && mercury_ver != 72)))
+                               (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 73)))
                            {
                                result = false;
                                c.SetupForm.alex_fw_good = false;
@@ -474,7 +474,7 @@ namespace PowerSDR
                         break;
                     case 22: // K5SO Diversity & non-diversity
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 72)))
+                            (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 73)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
@@ -661,13 +661,13 @@ namespace PowerSDR
 		unsafe public static extern int GetDiagData(int *a, int count);  // get diag data, count is how many slots are in array 
 
 		[DllImport("JanusAudio.dll")]
-		unsafe public static extern void SetRX1VFOfreq(double f);  // tell aux hardware current freq -- in MHz 
+		unsafe public static extern void SetRX1VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetRX2VFOfreq(double f);  // tell aux hardware current freq -- in MHz 
+        unsafe public static extern void SetRX2VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetTXVFOfreq(double f);  // tell aux hardware current freq -- in MHz 
+        unsafe public static extern void SetTXVFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
 
 		public static void freqCorrectionChanged() 
@@ -677,15 +677,17 @@ namespace PowerSDR
 			{ 
 				if ( !c.FreqCalibrationRunning )    // we can't be applying freq correction when cal is running 
 				{ 
-					SetRX1VFOfreq(lastVFOfreq); 
-				}
+					SetVFOfreqRX1(lastVFORX1freq);
+                    SetVFOfreqRX2(lastVFORX2freq);
+                    SetVFOfreqTX(lastVFOTXfreq);
+                }
 			}
 		}
 
-		private static double lastVFOfreq = 0.0; 
+		private static double lastVFORX1freq = 0.0; 
 		unsafe public static void SetVFOfreqRX1(double f) 
 		{ 
-			lastVFOfreq = f; 
+			lastVFORX1freq = f; 
 			Console c; 
 			double correction_factor; 
 			c = Console.getConsole(); 
@@ -700,16 +702,17 @@ namespace PowerSDR
 			} 
 			//f = f * 1000000;  // mhz -> hz 
            // f = (float)((double)(f * 1000000.0) * correction_factor);
-            double f_freq = (f * 1000000.0) * correction_factor;
+            int f_freq = (int)((f * 1000000.0) * correction_factor);
             // System.Console.WriteLine("corrected freq: " + f);
 			SetRX1VFOfreq(f_freq);
            // c.SetupForm.txtDDSVFO.Text = f_freq.ToString();
            // System.Console.WriteLine("rx1vfo: " + f_freq);
 		}
+        private static double lastVFORX2freq = 0.0;
         unsafe public static void SetVFOfreqRX2(double f)
         {
            // System.Console.WriteLine("rx2ddsJA: " + f);
-            lastVFOfreq = f;
+            lastVFORX2freq = f;
             Console c;
             double correction_factor;
             c = Console.getConsole();
@@ -724,16 +727,17 @@ namespace PowerSDR
             }
             //f = f * 1000000;  // mhz -> hz 
             // f = (float)((double)(f * 1000000.0) * correction_factor);
-            double f_freq = (f * 1000000.0) * correction_factor;
+            int f_freq = (int)((f * 1000000.0) * correction_factor);
             // System.Console.WriteLine("corrected freq: " + f);
             SetRX2VFOfreq(f_freq);
             // c.SetupForm.txtDDSVFO.Text = f_freq.ToString();
           //  System.Console.WriteLine("rx2vfo: " + f_freq);
         }
 
+        private static double lastVFOTXfreq = 0.0;
         unsafe public static void SetVFOfreqTX(double f)
         {
-            lastVFOfreq = f;
+            lastVFOTXfreq = f;
             Console c;
             double correction_factor;
             c = Console.getConsole();
@@ -748,7 +752,7 @@ namespace PowerSDR
             }
             //f = f * 1000000;  // mhz -> hz 
             // f = (float)((double)(f * 1000000.0) * correction_factor);
-            double f_freq = (f * 1000000.0) * correction_factor;
+            int f_freq = (int)((f * 1000000.0) * correction_factor);
             // System.Console.WriteLine("corrected freq: " + f);
             SetTXVFOfreq(f_freq);
             // c.SetupForm.txtDDSVFO.Text = f_freq.ToString();
@@ -977,6 +981,9 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe extern public static bool WriteI2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe extern public static bool ReadI2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
         
         [DllImport("JanusAudio.dll")]
         unsafe extern public static bool Set_I2C_Speed(IntPtr hdev, int speed);
