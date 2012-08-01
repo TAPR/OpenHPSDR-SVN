@@ -384,7 +384,7 @@ namespace PowerSDR
                             break;
                        case 18: // K5SO Diversity & non-diversity
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                                (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 33 && mercury_ver != 72)))
+                                (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 73)))
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
@@ -491,7 +491,16 @@ namespace PowerSDR
                         break;
                     case 22: // K5SO Diversity & non-diversity
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 72)))
+                            (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 73)))
+                        {
+                            result = false;
+                            c.SetupForm.alex_fw_good = false;
+                            c.PowerOn = false;
+                        }
+                        break;
+                    case 80: // K5SO Diversity & non-diversity
+                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 80)) ||
+                            (c != null && c.MercuryPresent && (mercury_ver != 80 && mercury_ver != 73)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
@@ -1109,6 +1118,9 @@ namespace PowerSDR
         [DllImport("JanusAudio.dll")]
         unsafe extern public static bool WriteI2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
 
+        [DllImport("JanusAudio.dll")]
+        unsafe extern public static bool ReadI2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
+        
         [DllImport("JanusAudio.dll")]
         unsafe extern public static bool Set_I2C_Speed(IntPtr hdev, int speed);
 

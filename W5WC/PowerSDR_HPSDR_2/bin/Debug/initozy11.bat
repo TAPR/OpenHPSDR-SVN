@@ -3,6 +3,6 @@ msecsleep 3000
 rem loadFPGA 0xfffe 0x0007 Ozy_Janus.v18.rbf
 rem loadFPGA 0xfffe 0x0007 Ozy_Janus.v19.rbf
 rem loadFPGA 0xfffe 0x0007 Ozy_Janus.v21.rbf
-loadFPGA 0xfffe 0x0007 Ozy_Janus.v22.rbf
-
+rem loadFPGA 0xfffe 0x0007 Ozy_Janus.v22.rbf
+loadFPGA 0xfffe 0x0007 Ozy_Janus.v80.rbf
 

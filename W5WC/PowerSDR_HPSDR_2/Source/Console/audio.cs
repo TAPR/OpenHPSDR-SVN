@@ -443,7 +443,7 @@ namespace PowerSDR
             set
             {
                 in_tx_l = value;
-                switch (in_tx_l)
+             /*   switch (in_tx_l)
                 {
                     case 4:
                     case 5:
@@ -453,7 +453,7 @@ namespace PowerSDR
                     case 7:
                         in_tx_r = 4;
                         break;
-                }
+                }*/
             }
         }
 

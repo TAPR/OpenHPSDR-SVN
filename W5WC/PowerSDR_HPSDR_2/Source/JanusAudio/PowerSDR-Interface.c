@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include "KD5TFD-VK6APH-Audio.h"
 #include "private.h"
-
+#include "Ozyutils.h"
 
 //
 // StartAudio -- called when we need to start reading audio and passing it to PowerSDR via the callback.
@@ -640,28 +640,49 @@ KD5TFDVK6APHAUDIO_API void SetLegacyDotDashPTT(int bit) {
 
 KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() { 
 	int n; 
+	if ( !isMetis ) { 
+		//getI2CByte(I2C_MERC1_ADC_OFS);
+		//getI2CByte(I2C_MERC2_ADC_OFS);
+		//getI2CByte(I2C_MERC3_ADC_OFS);
+		//getI2CBytes(I2C_MERC4_ADC_OFS);
+	}
 	n = ADC_Overloads; 
 	ADC_Overloads = 0; 
 	return n; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercuryFWVersion() { 
+	if ( !isMetis ) { 
+		//getI2CByte(I2C_MERC1_FW);
+	}
 	return MercuryFWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury2FWVersion() { 
+	if ( !isMetis ) { 
+		//getI2CByte(I2C_MERC2_FW);
+	}
 	return Mercury2FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury3FWVersion() { 
+	if ( !isMetis ) { 
+		//getI2CByte(I2C_MERC3_FW);
+	}
 	return Mercury3FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury4FWVersion() { 
+	if ( !isMetis ) { 
+		//getI2CByte(I2C_MERC4_FW);
+	}
 	return Mercury4FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getPenelopeFWVersion() { 
+	if ( !isMetis ) { 
+		//getI2CByte(I2C_PENNY_FW);
+	}
 	return PenelopeFWVersion; 
 } 
 
@@ -674,15 +695,24 @@ KD5TFDVK6APHAUDIO_API int getHaveSync() {
 } 
 
 KD5TFDVK6APHAUDIO_API int getFwdPower() { 
+	if ( !isMetis ) { 
+		//getI2CBytes(I2C_PENNY_ALC);
+	}
 	return FwdPower; 
 } 
 
-KD5TFDVK6APHAUDIO_API int getRefPower() { 
-	return RefPower; 
+KD5TFDVK6APHAUDIO_API int getAlexFwdPower() { 
+	if ( !isMetis ) { 
+		//getI2CBytes(I2C_PENNY_FWD);
+	}
+	return AlexFwdPower; 
 } 
 
-KD5TFDVK6APHAUDIO_API int getAlexFwdPower() { 
-	return AlexFwdPower; 
+KD5TFDVK6APHAUDIO_API int getRefPower() { 
+	if ( !isMetis ) { 
+		//getI2CBytes(I2C_PENNY_REV);
+	}
+	return RefPower; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getControlByteIn(int n) { 

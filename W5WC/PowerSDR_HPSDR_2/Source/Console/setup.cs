@@ -1911,10 +1911,8 @@ namespace PowerSDR
             comboAudioChannels1.Text = "2";
             Audio.IN_RX1_L = 0;
             Audio.IN_RX1_R = 1;
-            Audio.IN_RX2_L = 2;
-            Audio.IN_RX2_R = 3;
-            Audio.IN_TX_L = 4;
-            Audio.IN_TX_R = 5;
+            Audio.IN_TX_L = 2;
+            Audio.IN_TX_R = 3;
             comboDisplayLabelAlign.Text = "Auto";
             comboColorPalette.Text = "enhanced";
             comboTXLabelAlign.Text = "Auto"; 
@@ -34454,6 +34452,10 @@ namespace PowerSDR
                     console.PowerEnabled = true;
                     comboAudioChannels1.Text = "4";
                     comboAudioChannels1.Enabled = false;
+                    Audio.IN_RX1_L = 0;
+                    Audio.IN_RX1_R = 1;
+                    Audio.IN_TX_L = 2;
+                    Audio.IN_TX_R = 3;
                     break; // Janus Ozy 
 
 
