@@ -1,6 +1,4 @@
 C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.csproj.ResolveComReference.cache
-C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\bin\Release\PowerSDR.exe.manifest
-C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\bin\Release\PowerSDR.application
 C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\bin\Release\PowerSDR.exe
 C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\ResolveAssemblyReference.cache
 C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.AlphaWarnForm.resources
@@ -47,6 +45,4 @@ C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\Source\Console\obj\x86\Rel
 C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.SetupWizard.resources
 C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.XVTRForm.resources
 C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.csproj.GenerateResource.Cache
-C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.exe.manifest
-C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.application
 C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_2\Source\Console\obj\x86\Release\PowerSDR.exe
