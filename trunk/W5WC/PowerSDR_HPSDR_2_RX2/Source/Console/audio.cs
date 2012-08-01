@@ -421,7 +421,7 @@ namespace PowerSDR
             set { in_rx1_r = value; }
         }
 
-        private static int in_rx2_l = 4;
+        private static int in_rx2_l = 2;
 
         public static int IN_RX2_L
         {
@@ -429,7 +429,7 @@ namespace PowerSDR
             set { in_rx2_l = value; }
         }
 
-        private static int in_rx2_r = 5;
+        private static int in_rx2_r = 3;
 
         public static int IN_RX2_R
         {
@@ -437,7 +437,7 @@ namespace PowerSDR
             set { in_rx2_r = value; }
         }
 
-        private static int in_tx_l = 2;
+        private static int in_tx_l = 4;
 
         public static int IN_TX_L
         {
@@ -445,7 +445,7 @@ namespace PowerSDR
             set
             {
                 in_tx_l = value;
-                switch (in_tx_l)
+               /* switch (in_tx_l)
                 {
                     case 4:
                     case 5:
@@ -455,11 +455,11 @@ namespace PowerSDR
                     case 7:
                         in_tx_r = 4;
                         break;
-                }
+                }*/
             }
         }
 
-        private static int in_tx_r = 3;
+        private static int in_tx_r = 5;
 
         public static int IN_TX_R
         {

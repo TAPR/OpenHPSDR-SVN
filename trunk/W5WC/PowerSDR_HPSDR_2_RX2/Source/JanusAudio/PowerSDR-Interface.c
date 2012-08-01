@@ -355,28 +355,28 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 
 
 // ff in hz 
-KD5TFDVK6APHAUDIO_API void SetRX1VFOfreq(double ff) {
-         VFOfreq_rx1 = (int)ff;
+KD5TFDVK6APHAUDIO_API void SetRX1VFOfreq(int rx1) {
+         VFOfreq_rx1 = rx1;
        return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetRX2VFOfreq(double ff) {
-       VFOfreq_rx2 = (int)ff;
+KD5TFDVK6APHAUDIO_API void SetRX2VFOfreq(int rx2) {
+       VFOfreq_rx2 = rx2;
        return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetRX3VFOfreq(double ff) {
-         VFOfreq_rx3 = (int)ff;
+KD5TFDVK6APHAUDIO_API void SetRX3VFOfreq(int rx3) {
+         VFOfreq_rx3 = rx3;
        return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetRX4VFOfreq(double ff) {
-       VFOfreq_rx4 = (int)ff;
+KD5TFDVK6APHAUDIO_API void SetRX4VFOfreq(int rx4) {
+       VFOfreq_rx4 = rx4;
        return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(double ff) {
-       VFOfreq_tx = (int)ff;
+KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(int tx) {
+       VFOfreq_tx = tx;
         return;
 }
 

@@ -76,11 +76,11 @@ extern KD5TFDVK6APHAUDIO_API void StopAudio(void);
 extern KD5TFDVK6APHAUDIO_API int GetDotDashBits(void);
 extern KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
 extern KD5TFDVK6APHAUDIO_API int GetDiagData(int *a, int count);
-extern KD5TFDVK6APHAUDIO_API void SetRX1VFOfreq(double f);
-extern KD5TFDVK6APHAUDIO_API void SetRX2VFOfreq(double f);
-extern KD5TFDVK6APHAUDIO_API void SetRX3VFOfreq(double f);
-extern KD5TFDVK6APHAUDIO_API void SetRX4VFOfreq(double f);
-extern KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(double f);
+//extern KD5TFDVK6APHAUDIO_API void SetRX1VFOfreq(double f);
+//extern KD5TFDVK6APHAUDIO_API void SetRX2VFOfreq(double f);
+//extern KD5TFDVK6APHAUDIO_API void SetRX3VFOfreq(double f);
+//extern KD5TFDVK6APHAUDIO_API void SetRX4VFOfreq(double f);
+//extern KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(double f);
 //extern KD5TFDVK6APHAUDIO_API void SetAlexEnable(int bit);
 
 #if 0
@@ -110,6 +110,7 @@ extern KD5TFDVK6APHAUDIO_API int LoadFPGA(int VID, int PID, char * filename);
 extern KD5TFDVK6APHAUDIO_API int GetOzyID(struct usb_dev_handle *hdev, unsigned char *buffer, int length);
 extern KD5TFDVK6APHAUDIO_API int Write_I2C(struct usb_dev_handle *hdev, int i2c_addr, unsigned char *buffer, int length);
 extern KD5TFDVK6APHAUDIO_API int WriteI2C(struct usb_dev_handle *hdev, int i2c_addr, unsigned char *buffer, int length);
+extern KD5TFDVK6APHAUDIO_API int ReadI2C(struct usb_dev_handle *hdev, int i2c_addr, unsigned char *buffer, int length);
 extern KD5TFDVK6APHAUDIO_API int Set_I2C_Speed(struct usb_dev_handle *hdev, int speed);
 extern KD5TFDVK6APHAUDIO_API int WriteControlMsg(struct usb_dev_handle *hdev, int requesttype, int request, int value, 
                                               int index, unsigned char *bytes, int length, int timeout);
