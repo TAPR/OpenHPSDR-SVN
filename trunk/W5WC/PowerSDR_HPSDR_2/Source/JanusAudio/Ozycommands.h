@@ -68,6 +68,22 @@ extern "C" {
 #define VRQ_I2C_SPEED_SET  	0x0B  	// wValueL: {0,1}
 #define VRQ_CPU_SPEED_SET   0x0C 	// wValueL: {0, 1, 2}
 
+// Ozy I2C commands for polling firmware versions, power levels, ADC overload.
+#define I2C_MERC1_FW  0x10 // Mercury firmware version
+#define I2C_MERC2_FW  0x11
+#define I2C_MERC3_FW  0x12
+#define I2C_MERC4_FW  0x13
+
+#define I2C_MERC1_ADC_OFS 0x14 // adc overflow status
+#define I2C_MERC2_ADC_OFS 0x15
+#define I2C_MERC3_ADC_OFS 0x16
+#define I2C_MERC4_ADC_OFS 0x17
+
+#define I2C_PENNY_FW  0x20 // Penny firmware version
+#define I2C_PENNY_ALC 0x21 // Penny forward power
+#define I2C_PENNY_FWD 0x22 // Penny forward power from Alex
+#define I2C_PENNY_REV 0x23 // Penny reverse power from Alex
+
 #ifdef	__cplusplus
 }
 #endif

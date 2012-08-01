@@ -375,6 +375,49 @@ KD5TFDVK6APHAUDIO_API int LoadFPGA(int VID, int PID, char *filename) {
     
     return 0;    
 }
+getI2CByte(int i2c_value) {
+    unsigned char *bufp = NULL;
+    int count;    
+    int *usb_h = NULL;
+
+    bufp = (unsigned char *)malloc(sizeof(char));
+
+    OzyH = OzyOpen();
+    usb_h = OzyHandleToRealHandle(OzyH);
+
+    count = usb_control_msg(usb_h, 
+                            VRT_VENDOR_IN, 
+                            VRQ_I2C_READ, 
+                            i2c_value, 
+                            0, // index
+                            bufp, 
+                            sizeof(bufp), 
+                            1000);
+    OzyClose(OzyH);
+
+}
+
+getI2CBytes(int i2c_value) {
+    unsigned char *bufp = NULL;
+    int count;    
+    int *usb_h = NULL;
+
+    bufp = (unsigned char *)malloc(sizeof(char)*2);
+
+    OzyH = OzyOpen();
+    usb_h = OzyHandleToRealHandle(OzyH);
+
+    count = usb_control_msg(usb_h, 
+                            VRT_VENDOR_IN, 
+                            VRQ_I2C_READ, 
+                            i2c_value, 
+                            0, // index
+                            bufp, 
+                            sizeof(bufp),
+                            1000);
+    OzyClose(OzyH);
+
+}
 
 KD5TFDVK6APHAUDIO_API int GetOzyID(struct usb_dev_handle *hdev, 
 								   unsigned char *buffer, 
@@ -440,6 +483,14 @@ KD5TFDVK6APHAUDIO_API int WriteI2C(struct usb_dev_handle *hdev,
 								   unsigned char *buffer, int length)
 {
     return (Write_I2c(hdev, i2c_addr, 
+             buffer, length));    
+}
+
+KD5TFDVK6APHAUDIO_API int ReadI2C(struct usb_dev_handle *hdev, 
+								   int i2c_addr, 
+								   unsigned char *buffer, int length)
+{
+    return (Read_I2c(hdev, i2c_addr, 
              buffer, length));    
 }
 
