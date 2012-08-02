@@ -1,99 +1,104 @@
-fm_demod.o: fm_demod.c fm_demod.h fromsys.h /usr/include/sys/types.h \
- /usr/include/features.h /usr/include/bits/predefs.h \
- /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
- /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
- /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/include/time.h /usr/lib/gcc/x86_64-linux-gnu/4.4.5/include/stddef.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/sigset.h \
- /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/pthreadtypes.h /usr/include/sys/stat.h \
- /usr/include/bits/stat.h /usr/include/xlocale.h /usr/include/fcntl.h \
- /usr/include/bits/fcntl.h /usr/include/bits/fcntl2.h \
- /usr/include/stdlib.h /usr/include/bits/waitflags.h \
- /usr/include/bits/waitstatus.h /usr/include/alloca.h \
- /usr/include/bits/stdlib.h /usr/include/stdio.h /usr/include/libio.h \
- /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.4.5/include/stdarg.h \
- /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
- /usr/include/bits/stdio.h /usr/include/bits/stdio2.h \
- /usr/include/ctype.h /usr/include/string.h /usr/include/bits/string.h \
- /usr/include/bits/string2.h /usr/include/bits/string3.h \
- /usr/include/math.h /usr/include/bits/huge_val.h \
- /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h \
- /usr/include/bits/inf.h /usr/include/bits/nan.h \
- /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h \
- /usr/include/bits/mathinline.h /usr/include/assert.h iosdr.h banal.h \
- defs.h datatypes.h complex.h splitfields.h bufvec.h cxops.h fastrig.h \
- update.h lmadf.h fftw3.h fftw3_fix.h ovsv.h filter.h window.h \
- oscillator.h
+fm_demod.o: fm_demod.c fm_demod.h fromsys.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h /usr/include/features.h \
+ /usr/include/arm-linux-gnueabihf/bits/predefs.h \
+ /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h /usr/include/time.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/4.6/include/stddef.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/sigset.h \
+ /usr/include/arm-linux-gnueabihf/bits/time.h \
+ /usr/include/arm-linux-gnueabihf/sys/sysmacros.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/sys/stat.h \
+ /usr/include/arm-linux-gnueabihf/bits/stat.h /usr/include/xlocale.h \
+ /usr/include/fcntl.h /usr/include/arm-linux-gnueabihf/bits/fcntl.h \
+ /usr/include/stdlib.h /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h /usr/include/alloca.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/4.6/include/stdarg.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/ctype.h \
+ /usr/include/string.h /usr/include/arm-linux-gnueabihf/bits/string.h \
+ /usr/include/arm-linux-gnueabihf/bits/string2.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/huge_val.h \
+ /usr/include/arm-linux-gnueabihf/bits/huge_valf.h \
+ /usr/include/arm-linux-gnueabihf/bits/huge_vall.h \
+ /usr/include/arm-linux-gnueabihf/bits/inf.h \
+ /usr/include/arm-linux-gnueabihf/bits/nan.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathdef.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h /usr/include/assert.h \
+ iosdr.h banal.h defs.h datatypes.h complex.h splitfields.h bufvec.h \
+ cxops.h fastrig.h update.h lmadf.h fftw3.h fftw3_fix.h ovsv.h filter.h \
+ window.h oscillator.h
 
 fm_demod.h:
 
 fromsys.h:
 
-/usr/include/sys/types.h:
+/usr/include/arm-linux-gnueabihf/sys/types.h:
 
 /usr/include/features.h:
 
-/usr/include/bits/predefs.h:
+/usr/include/arm-linux-gnueabihf/bits/predefs.h:
 
-/usr/include/sys/cdefs.h:
+/usr/include/arm-linux-gnueabihf/sys/cdefs.h:
 
-/usr/include/bits/wordsize.h:
+/usr/include/arm-linux-gnueabihf/bits/wordsize.h:
 
-/usr/include/gnu/stubs.h:
+/usr/include/arm-linux-gnueabihf/gnu/stubs.h:
 
-/usr/include/gnu/stubs-64.h:
+/usr/include/arm-linux-gnueabihf/bits/types.h:
 
-/usr/include/bits/types.h:
-
-/usr/include/bits/typesizes.h:
+/usr/include/arm-linux-gnueabihf/bits/typesizes.h:
 
 /usr/include/time.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.4.5/include/stddef.h:
+/usr/lib/gcc/arm-linux-gnueabihf/4.6/include/stddef.h:
 
 /usr/include/endian.h:
 
-/usr/include/bits/endian.h:
+/usr/include/arm-linux-gnueabihf/bits/endian.h:
 
-/usr/include/bits/byteswap.h:
+/usr/include/arm-linux-gnueabihf/bits/byteswap.h:
 
-/usr/include/sys/select.h:
+/usr/include/arm-linux-gnueabihf/sys/select.h:
 
-/usr/include/bits/select.h:
+/usr/include/arm-linux-gnueabihf/bits/select.h:
 
-/usr/include/bits/sigset.h:
+/usr/include/arm-linux-gnueabihf/bits/sigset.h:
 
-/usr/include/bits/time.h:
+/usr/include/arm-linux-gnueabihf/bits/time.h:
 
-/usr/include/sys/sysmacros.h:
+/usr/include/arm-linux-gnueabihf/sys/sysmacros.h:
 
-/usr/include/bits/pthreadtypes.h:
+/usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h:
 
-/usr/include/sys/stat.h:
+/usr/include/arm-linux-gnueabihf/sys/stat.h:
 
-/usr/include/bits/stat.h:
+/usr/include/arm-linux-gnueabihf/bits/stat.h:
 
 /usr/include/xlocale.h:
 
 /usr/include/fcntl.h:
 
-/usr/include/bits/fcntl.h:
-
-/usr/include/bits/fcntl2.h:
+/usr/include/arm-linux-gnueabihf/bits/fcntl.h:
 
 /usr/include/stdlib.h:
 
-/usr/include/bits/waitflags.h:
+/usr/include/arm-linux-gnueabihf/bits/waitflags.h:
 
-/usr/include/bits/waitstatus.h:
+/usr/include/arm-linux-gnueabihf/bits/waitstatus.h:
 
 /usr/include/alloca.h:
-
-/usr/include/bits/stdlib.h:
 
 /usr/include/stdio.h:
 
@@ -103,43 +108,39 @@ fromsys.h:
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.4.5/include/stdarg.h:
+/usr/lib/gcc/arm-linux-gnueabihf/4.6/include/stdarg.h:
 
-/usr/include/bits/stdio_lim.h:
+/usr/include/arm-linux-gnueabihf/bits/stdio_lim.h:
 
-/usr/include/bits/sys_errlist.h:
+/usr/include/arm-linux-gnueabihf/bits/sys_errlist.h:
 
-/usr/include/bits/stdio.h:
-
-/usr/include/bits/stdio2.h:
+/usr/include/arm-linux-gnueabihf/bits/stdio.h:
 
 /usr/include/ctype.h:
 
 /usr/include/string.h:
 
-/usr/include/bits/string.h:
+/usr/include/arm-linux-gnueabihf/bits/string.h:
 
-/usr/include/bits/string2.h:
-
-/usr/include/bits/string3.h:
+/usr/include/arm-linux-gnueabihf/bits/string2.h:
 
 /usr/include/math.h:
 
-/usr/include/bits/huge_val.h:
+/usr/include/arm-linux-gnueabihf/bits/huge_val.h:
 
-/usr/include/bits/huge_valf.h:
+/usr/include/arm-linux-gnueabihf/bits/huge_valf.h:
 
-/usr/include/bits/huge_vall.h:
+/usr/include/arm-linux-gnueabihf/bits/huge_vall.h:
 
-/usr/include/bits/inf.h:
+/usr/include/arm-linux-gnueabihf/bits/inf.h:
 
-/usr/include/bits/nan.h:
+/usr/include/arm-linux-gnueabihf/bits/nan.h:
 
-/usr/include/bits/mathdef.h:
+/usr/include/arm-linux-gnueabihf/bits/mathdef.h:
 
-/usr/include/bits/mathcalls.h:
+/usr/include/arm-linux-gnueabihf/bits/mathcalls.h:
 
-/usr/include/bits/mathinline.h:
+/usr/include/arm-linux-gnueabihf/bits/mathinline.h:
 
 /usr/include/assert.h:
 
