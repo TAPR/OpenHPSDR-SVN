@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_inlineSpectrum.h'
 **
-** Created: Sun 22. Jul 16:54:04 2012
+** Created: Mon 30. Jul 19:05:39 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!

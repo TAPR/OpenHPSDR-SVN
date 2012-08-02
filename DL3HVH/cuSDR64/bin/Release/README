@@ -41,10 +41,21 @@ Current limitations:
 
 - not all functionality of the DttSP package is used currently.
 
-- Don't forget to put your call sign in the 'user' section of settings.ini !
-
 ***********************************************************************
 list of changes:
+
+v0.3.0.1:
+
+- Major change on the GUI. Introduced docking windows. Note please: this
+  is still highly experimental.
+  
+- Edit your Call Sign in the Display settings.
+
+v0.2.2.6:
+
+- Changed way of getting firmware version numbers.
+
+- Added warnings if another hardware has been selected as was discovered.
 
 v0.2.2.5:
 

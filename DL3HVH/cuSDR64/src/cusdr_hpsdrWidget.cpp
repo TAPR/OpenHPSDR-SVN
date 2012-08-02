@@ -182,7 +182,7 @@ void HPSDRWidget::setupConnections() {
 
 	CHECKED_CONNECT(
 		m_settings, 
-		SIGNAL(metisChanged(TNetworkDevicecard)), 
+		SIGNAL(hpsdrDeviceChanged(TNetworkDevicecard)), 
 		this, 
 		SLOT(setCurrentNetworkDevice(TNetworkDevicecard)));
 
@@ -523,54 +523,28 @@ void HPSDRWidget::createSource122_88MhzExclusiveGroup() {
 
 QGroupBox *HPSDRWidget::numberOfReceiversGroup() {
 
-	rx1Btn = new AeroButton("1", this);
-	rx1Btn->setRoundness(10);
-	rx1Btn->setFixedSize(24, btn_height);
-	rx1Btn->setBtnState(AeroButton::ON);
-	rxBtnList.append(rx1Btn);
+	m_receiverComboBox = new QComboBox(this);
+	m_receiverComboBox->setStyleSheet(m_settings->getComboBoxStyle());
+	m_receiverComboBox->setMinimumContentsLength(4);
+	m_receiverComboBox->addItem("1");
+	m_receiverComboBox->addItem("2");
+	m_receiverComboBox->addItem("3");
+	m_receiverComboBox->addItem("4");
+	m_receiverComboBox->addItem("5");
+	m_receiverComboBox->addItem("6");
+	m_receiverComboBox->addItem("7");
+	//m_receiverComboBox->setEnabled(false);
+
+	CHECKED_CONNECT(
+		m_receiverComboBox,
+		SIGNAL(currentIndexChanged(int)),
+		this,
+		SLOT(setNumberOfReceivers(int)));
+
+	m_receiversLabel = new QLabel("Receivers:", this);
+    m_receiversLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
+	m_receiversLabel->setStyleSheet(m_settings->getLabelStyle());
 	
-	CHECKED_CONNECT(
-		rx1Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setNumberOfReceivers()));
-
-	rx2Btn = new AeroButton("2", this);
-	rx2Btn->setRoundness(10);
-	rx2Btn->setFixedSize(24, btn_height);
-	rx2Btn->setBtnState(AeroButton::OFF);
-	rxBtnList.append(rx2Btn);
-
-	CHECKED_CONNECT(
-		rx2Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setNumberOfReceivers()));
-
-	rx3Btn = new AeroButton("3", this);
-	rx3Btn->setRoundness(10);
-	rx3Btn->setFixedSize(24, btn_height);
-	rx3Btn->setBtnState(AeroButton::OFF);
-	rxBtnList.append(rx3Btn);
-
-	CHECKED_CONNECT(
-		rx3Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setNumberOfReceivers()));
-
-	rx4Btn = new AeroButton("4", this);
-	rx4Btn->setRoundness(10);
-	rx4Btn->setFixedSize(24, btn_height);
-	rx4Btn->setBtnState(AeroButton::OFF);
-	rxBtnList.append(rx4Btn);
-
-	CHECKED_CONNECT(
-		rx4Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setNumberOfReceivers()));
-
 	rx1to2Btn = new AeroButton("Link 1+2", this);
 	rx1to2Btn->setRoundness(10);
 	rx1to2Btn->setFixedSize(btn_width2, btn_height);
@@ -584,7 +558,7 @@ QGroupBox *HPSDRWidget::numberOfReceiversGroup() {
 		this, 
 		SLOT(setShow1on2()));
 
-	view1Btn = new AeroButton("View 1", this);
+	/*view1Btn = new AeroButton("View 1", this);
 	view1Btn->setRoundness(10);
 	view1Btn->setFixedSize(btn_width2, btn_height);
 	view1Btn->setBtnState(AeroButton::OFF);
@@ -608,7 +582,7 @@ QGroupBox *HPSDRWidget::numberOfReceiversGroup() {
 		view2Btn, 
 		SIGNAL(released()), 
 		this, 
-		SLOT(setView()));
+		SLOT(setView()));*/
 
 	/*view3Btn = new AeroButton("View 3", this);
 	view3Btn->setRoundness(10);
@@ -626,27 +600,26 @@ QGroupBox *HPSDRWidget::numberOfReceiversGroup() {
 
 	QHBoxLayout *hbox1 = new QHBoxLayout();
 	hbox1->setSpacing(5);
+	//hbox1->addStretch();
+	hbox1->addWidget(m_receiversLabel);
 	hbox1->addStretch();
-	hbox1->addWidget(rx1Btn);
-	hbox1->addWidget(rx2Btn);
-	hbox1->addWidget(rx3Btn);
-	hbox1->addWidget(rx4Btn);
+	hbox1->addWidget(m_receiverComboBox);
 	hbox1->addSpacing(6);
 	hbox1->addWidget(rx1to2Btn);
 
-	QHBoxLayout *hbox2 = new QHBoxLayout();
-	hbox2->setSpacing(6);
-	hbox2->addStretch();
-	hbox2->addWidget(view1Btn);
-	hbox2->addWidget(view2Btn);
-	//hbox2->addWidget(view3Btn);
-	hbox2->addSpacing(63);
+	//QHBoxLayout *hbox2 = new QHBoxLayout();
+	//hbox2->setSpacing(6);
+	//hbox2->addStretch();
+	//hbox2->addWidget(view1Btn);
+	//hbox2->addWidget(view2Btn);
+	////hbox2->addWidget(view3Btn);
+	//hbox2->addSpacing(63);
 	
 	QVBoxLayout *vbox = new QVBoxLayout();
 	vbox->setSpacing(4);
 	vbox->addSpacing(6);
 	vbox->addLayout(hbox1);
-	vbox->addLayout(hbox2);
+	//vbox->addLayout(hbox2);
 	
 	QGroupBox *groupBox = new QGroupBox(tr("Number of Receivers"), this);
 	groupBox->setMinimumWidth(m_minimumGroupBoxWidth);
@@ -1294,32 +1267,14 @@ void HPSDRWidget::source122_88MhzChanged() {
 	}
 }
 
-void HPSDRWidget::setNumberOfReceivers() {
+void HPSDRWidget::setNumberOfReceivers(int receivers) {
 
-	AeroButton *button = qobject_cast<AeroButton *>(sender());
-	int rx = rxBtnList.indexOf(button);
-
-	foreach (AeroButton *btn, rxBtnList) {
-
-		btn->setBtnState(AeroButton::OFF);
-		btn->update();
-	}
-
-	button->setBtnState(AeroButton::ON);
-	button->update();
-
-	m_numberOfReceivers = rx + 1;
-
-	foreach (AeroButton *btn, viewBtnList) {
-
-		btn->setBtnState(AeroButton::OFF);
-		btn->update();
-	}
+	m_numberOfReceivers = receivers+1;
 
 	if (m_numberOfReceivers == 1) {
 
-		view1Btn->setEnabled(false);
-		view2Btn->setEnabled(false);
+		//view1Btn->setEnabled(false);
+		//view2Btn->setEnabled(false);
 		//view3Btn->setEnabled(false);
 
 		rx1to2Btn->setEnabled(false);
@@ -1327,11 +1282,11 @@ void HPSDRWidget::setNumberOfReceivers() {
 	else {
 		
 		m_settings->setMultiRxView(0);
-		view1Btn->setBtnState(AeroButton::ON);
-		view1Btn->update();
+		//view1Btn->setBtnState(AeroButton::ON);
+		//view1Btn->update();
 
-		view1Btn->setEnabled(true);
-		view2Btn->setEnabled(true);
+		//view1Btn->setEnabled(true);
+		//view2Btn->setEnabled(true);
 
 		if (m_numberOfReceivers == 2)
 			rx1to2Btn->setEnabled(true);
@@ -1383,17 +1338,17 @@ void HPSDRWidget::numberOfReceiversChanged(int value) {
 
 	if (m_numberOfReceivers == 1) {
 
-		view1Btn->setEnabled(false);
-		view2Btn->setEnabled(false);
+		//view1Btn->setEnabled(false);
+		//view2Btn->setEnabled(false);
 	}
 	else {
 		
 		m_settings->setMultiRxView(0);
-		view1Btn->setBtnState(AeroButton::ON);
-		view1Btn->update();
+		//view1Btn->setBtnState(AeroButton::ON);
+		//view1Btn->update();
 
-		view1Btn->setEnabled(true);
-		view2Btn->setEnabled(true);
+		//view1Btn->setEnabled(true);
+		//view2Btn->setEnabled(true);
 	}
 }
 
@@ -1477,31 +1432,14 @@ void HPSDRWidget::disableButtons() {
 		this, 
 		SLOT(source122_88MhzChanged()));
 
-	disconnect(
-		rx1Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setNumberOfReceivers()));
+	m_receiverComboBox->setEnabled(false);
+	/*disconnect(
+		m_receiverComboBox,
+		SIGNAL(currentIndexChanged(int)),
+		this,
+		SLOT(setNumberOfReceivers(int)));*/
 
-	disconnect(
-		rx2Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setNumberOfReceivers()));
-
-	disconnect(
-		rx3Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setNumberOfReceivers()));
-
-	disconnect(
-		rx4Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setNumberOfReceivers()));
-
-	disconnect(
+	/*disconnect(
 		view1Btn, 
 		SIGNAL(released()), 
 		this, 
@@ -1511,7 +1449,7 @@ void HPSDRWidget::disableButtons() {
 		view2Btn, 
 		SIGNAL(released()), 
 		this, 
-		SLOT(setView()));
+		SLOT(setView()));*/
 
 	disconnect(
 		searchNetworkDeviceBtn, 
@@ -1600,7 +1538,15 @@ void HPSDRWidget::enableButtons() {
 		this, 
 		SLOT(source122_88MhzChanged()));
 
-	CHECKED_CONNECT(
+	m_receiverComboBox->setEnabled(true);
+
+	/*CHECKED_CONNECT(
+		m_receiverComboBox,
+		SIGNAL(currentIndexChanged(int)),
+		this,
+		SLOT(setNumberOfReceivers(int)));*/
+
+	/*CHECKED_CONNECT(
 		rx1Btn, 
 		SIGNAL(released()), 
 		this, 
@@ -1625,6 +1571,24 @@ void HPSDRWidget::enableButtons() {
 		SLOT(setNumberOfReceivers()));
 
 	CHECKED_CONNECT(
+		rx5Btn, 
+		SIGNAL(released()), 
+		this, 
+		SLOT(setNumberOfReceivers()));
+
+	CHECKED_CONNECT(
+		rx6Btn, 
+		SIGNAL(released()), 
+		this, 
+		SLOT(setNumberOfReceivers()));
+
+	CHECKED_CONNECT(
+		rx7Btn, 
+		SIGNAL(released()), 
+		this, 
+		SLOT(setNumberOfReceivers()));*/
+
+	/*CHECKED_CONNECT(
 		view1Btn, 
 		SIGNAL(released()), 
 		this, 
@@ -1634,7 +1598,7 @@ void HPSDRWidget::enableButtons() {
 		view2Btn, 
 		SIGNAL(released()), 
 		this, 
-		SLOT(setView()));
+		SLOT(setView()));*/
 
 	CHECKED_CONNECT(
 		searchNetworkDeviceBtn, 

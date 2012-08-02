@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_oglWidebandPanel.h'
 **
-** Created: Sun 22. Jul 16:54:08 2012
+** Created: Mon 30. Jul 19:05:42 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_QGLWidebandPanel[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      24,   14, // methods
+      25,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -38,25 +38,26 @@ static const uint qt_meta_data_QGLWidebandPanel[] = {
 
  // slots: signature, parameters, type, tag, flags
      124,   17,  118,   17, 0x0a,
-     164,  135,   17,   17, 0x08,
-     297,  270,   17,   17, 0x08,
-     388,   17,   17,   17, 0x08,
-     413,  407,   17,   17, 0x08,
-     458,  437,   17,   17, 0x08,
-     500,  495,   17,   17, 0x08,
-     534,  527,   17,   17, 0x08,
-     574,   17,   17,   17, 0x08,
-     604,   17,   17,   17, 0x08,
-     626,  407,   17,   17, 0x08,
-     662,  649,   17,   17, 0x08,
-     688,  686,   17,   17, 0x08,
-     706,  649,   17,   17, 0x08,
-     738,  407,   17,   17, 0x08,
-     760,  407,   17,   17, 0x08,
-     781,  407,   17,   17, 0x08,
-     802,  407,   17,   17, 0x08,
-     822,  407,   17,   17, 0x08,
-     842,  407,   17,   17, 0x08,
+     142,   17,  118,   17, 0x0a,
+     182,  153,   17,   17, 0x08,
+     315,  288,   17,   17, 0x08,
+     406,   17,   17,   17, 0x08,
+     431,  425,   17,   17, 0x08,
+     476,  455,   17,   17, 0x08,
+     518,  513,   17,   17, 0x08,
+     552,  545,   17,   17, 0x08,
+     592,   17,   17,   17, 0x08,
+     622,   17,   17,   17, 0x08,
+     644,  425,   17,   17, 0x08,
+     680,  667,   17,   17, 0x08,
+     706,  704,   17,   17, 0x08,
+     724,  667,   17,   17, 0x08,
+     756,  425,   17,   17, 0x08,
+     778,  425,   17,   17, 0x08,
+     799,  425,   17,   17, 0x08,
+     820,  425,   17,   17, 0x08,
+     840,  425,   17,   17, 0x08,
+     860,  425,   17,   17, 0x08,
 
        0        // eod
 };
@@ -65,7 +66,8 @@ static const char qt_meta_stringdata_QGLWidebandPanel[] = {
     "QGLWidebandPanel\0\0sender\0showEvent(QObject*)\0"
     "closeEvent(QObject*)\0msg\0messageEvent(QString)\0"
     "x,y\0coordChanged(int,int)\0QSize\0"
-    "sizeHint()\0sender,err,hwmode,mode,state\0"
+    "minimumSizeHint()\0sizeHint()\0"
+    "sender,err,hwmode,mode,state\0"
     "systemStateChanged(QObject*,QSDR::_Error,QSDR::_HWInterfaceMode,QSDR::"
     "_ServerMode,QSDR::_DataEngineState)\0"
     "sender,panMode,colorScheme\0"
@@ -95,27 +97,29 @@ void QGLWidebandPanel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 1: _t->closeEvent((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
         case 2: _t->messageEvent((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 3: _t->coordChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 4: { QSize _r = _t->sizeHint();
+        case 4: { QSize _r = _t->minimumSizeHint();
             if (_a[0]) *reinterpret_cast< QSize*>(_a[0]) = _r; }  break;
-        case 5: _t->systemStateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDR::_Error(*)>(_a[2])),(*reinterpret_cast< QSDR::_HWInterfaceMode(*)>(_a[3])),(*reinterpret_cast< QSDR::_ServerMode(*)>(_a[4])),(*reinterpret_cast< QSDR::_DataEngineState(*)>(_a[5]))); break;
-        case 6: _t->graphicModeChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDRGraphics::_Panadapter(*)>(_a[2])),(*reinterpret_cast< QSDRGraphics::_WaterfallColorScheme(*)>(_a[3]))); break;
-        case 7: _t->setupConnections(); break;
-        case 8: _t->setCurrentReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 9: _t->setFrequency((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< long(*)>(_a[4]))); break;
-        case 10: _t->setupDisplayRegions((*reinterpret_cast< QSize(*)>(_a[1]))); break;
-        case 11: _t->setWidebandSpectrumBuffer((*reinterpret_cast< const qVectorFloat(*)>(_a[1]))); break;
-        case 12: _t->resetWidebandSpectrumBuffer(); break;
-        case 13: _t->setPanadapterColors(); break;
-        case 14: _t->setPanGridStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 15: _t->setPreamp((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 16: _t->getRegion((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
-        case 17: _t->sampleRateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 18: _t->freqScaleUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 19: _t->freqScaleRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 20: _t->dBmScaleUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 21: _t->dBmScaleRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 22: _t->panGridUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 23: _t->panGridRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 5: { QSize _r = _t->sizeHint();
+            if (_a[0]) *reinterpret_cast< QSize*>(_a[0]) = _r; }  break;
+        case 6: _t->systemStateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDR::_Error(*)>(_a[2])),(*reinterpret_cast< QSDR::_HWInterfaceMode(*)>(_a[3])),(*reinterpret_cast< QSDR::_ServerMode(*)>(_a[4])),(*reinterpret_cast< QSDR::_DataEngineState(*)>(_a[5]))); break;
+        case 7: _t->graphicModeChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDRGraphics::_Panadapter(*)>(_a[2])),(*reinterpret_cast< QSDRGraphics::_WaterfallColorScheme(*)>(_a[3]))); break;
+        case 8: _t->setupConnections(); break;
+        case 9: _t->setCurrentReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: _t->setFrequency((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< long(*)>(_a[4]))); break;
+        case 11: _t->setupDisplayRegions((*reinterpret_cast< QSize(*)>(_a[1]))); break;
+        case 12: _t->setWidebandSpectrumBuffer((*reinterpret_cast< const qVectorFloat(*)>(_a[1]))); break;
+        case 13: _t->resetWidebandSpectrumBuffer(); break;
+        case 14: _t->setPanadapterColors(); break;
+        case 15: _t->setPanGridStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 16: _t->setPreamp((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 17: _t->getRegion((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
+        case 18: _t->sampleRateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 19: _t->freqScaleUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 20: _t->freqScaleRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 21: _t->dBmScaleUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 22: _t->dBmScaleRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 23: _t->panGridUpdate((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 24: _t->panGridRenew((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -153,9 +157,9 @@ int QGLWidebandPanel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 25)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 25;
     }
     return _id;
 }

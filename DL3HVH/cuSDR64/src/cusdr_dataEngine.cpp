@@ -90,8 +90,6 @@ DataEngine::DataEngine(QObject *parent)
 	, m_chirpStart(false)
 	, m_chirpStartSample(0)
 	, clientConnected(false)
-	, syncToggle(true)
-	, adcToggle(false)
 	, m_sMeterCalibrationOffset(0.0f)//(35.0f)
 	, m_meterType(SIGNAL_STRENGTH)
 	//, m_meterType(AVG_SIGNAL_STRENGTH)
@@ -438,10 +436,11 @@ bool DataEngine::findHPSDRDevices() {
 			sendMessage(m_message.arg(i).arg(metisList.at(i).ip_address.toString()).arg((char *) &metisList.at(i).mac_address));
 		}
 
-		io.metisIPAddress = settings->getCurrentMetisCard().ip_address;
-		DATA_ENGINE_DEBUG << "using HPSDR network device at " << qPrintable(io.metisIPAddress.toString());
+		io.hpsdrDeviceIPAddress = settings->getCurrentMetisCard().ip_address;
+		io.hpsdrDeviceName = settings->getCurrentMetisCard().boardName;
+		DATA_ENGINE_DEBUG << "using HPSDR network device at " << qPrintable(io.hpsdrDeviceIPAddress.toString());
 		m_message = "using device @ %2.";
-		sendMessage(m_message.arg(io.metisIPAddress.toString()));
+		sendMessage(m_message.arg(io.hpsdrDeviceIPAddress.toString()));
 		Sleep(100);
 
 		// stop the discovery thread
@@ -455,6 +454,8 @@ bool DataEngine::findHPSDRDevices() {
 }
 
 bool DataEngine::getFirmwareVersions() {
+
+	m_fwCount = 0;
 
 	// as it says..
 	initReceivers();
@@ -557,6 +558,42 @@ bool DataEngine::getFirmwareVersions() {
 	m_mercuryFW = settings->getMercuryVersion();
 	m_hermesFW = settings->getHermesVersion();
 
+	if (m_metisFW != 0 &&  io.hpsdrDeviceName == "Hermes") {
+
+		stop();
+
+		QString msg = "Metis selected, but Hermes found!";
+		settings->showWarningDialog(msg);
+		return false;
+	}
+
+	if (m_hermesFW != 0 && io.hpsdrDeviceName == "Metis") {
+
+		stop();
+
+		QString msg = "Hermes selected, but Metis found!";
+		settings->showWarningDialog(msg);
+		return false;
+	}
+
+	if (m_mercuryFW < 33 && settings->getNumberOfReceivers() > 4 && io.hpsdrDeviceName == "Metis") {
+
+		stop();
+
+		QString msg = "Mercury FW < V3.3 has only 4 receivers!";
+		settings->showWarningDialog(msg);
+		return false;
+	}
+
+	if (m_hermesFW < 18 && settings->getNumberOfReceivers() > 2 && io.hpsdrDeviceName == "Hermes") {
+
+		stop();
+
+		QString msg = "Hermes FW < V1.8 has only 2 receivers!";
+		settings->showWarningDialog(msg);
+		return false;
+	}
+
 	// if we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples, m_wbBuffers = 8
 	// we have 16384 * 16 bit = 32 * 1024 raw consecutive ADC samples, m_wbBuffers = 32
 	int wbBuffers = 0;
@@ -571,6 +608,8 @@ bool DataEngine::getFirmwareVersions() {
 }
 
 bool DataEngine::start() {
+
+	m_fwCount = 0;
 
 	// as it says..
 	initReceivers();
@@ -1504,7 +1543,7 @@ void DataEngine::sendInitFramesToNetworkDevice(int rx) {
 				
 	for (int i = 0; i < 1; i++) {
 		
-		if (socket.writeDatagram(initDatagram.data(), initDatagram.size(), io.metisIPAddress, METIS_PORT) < 0)
+		if (socket.writeDatagram(initDatagram.data(), initDatagram.size(), io.hpsdrDeviceIPAddress, METIS_PORT) < 0)
 			DATA_ENGINE_DEBUG << "error sending init data to device: " << qPrintable(socket.errorString());
 		else {
 
@@ -2248,13 +2287,7 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 
 	if (buffer.at(s++) == SYNC && buffer.at(s++) == SYNC && buffer.at(s++) == SYNC) {
 
-		//if (syncToggle) { // toggle sync signal
-
-		//	settings->setProtocolSync(1);
-		//	syncToggle = false;
-		//}
-
-        // extract control bytes
+		// extract control bytes
         io.control_in[0] = buffer.at(s++);
         io.control_in[1] = buffer.at(s++);
         io.control_in[2] = buffer.at(s++);
@@ -2266,27 +2299,13 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 		io.ccRx.dot    = (bool)((io.control_in[0] & 0x04) == 0x04);
 		io.ccRx.lt2208 = (bool)((io.control_in[1] & 0x01) == 0x01);
 
-		//if (io.ccRx.lt2208) { // toggle ADC signal
-
-		//	if (adcToggle) {
-		//			settings->setADCOverflow(2);
-		//			adcToggle = false;
-		//	}
-		//}
-		//else {
-		//	
-		//	if (!adcToggle) {
-		//		settings->setADCOverflow(1);
-		//		adcToggle = true;
-		//	}
-		//}
 
 		io.ccRx.roundRobin = (uchar)(io.control_in[0] >> 3);
         switch (io.ccRx.roundRobin) { // cycle through C0
 
 			case 0:
 
-				if (io.ccRx.lt2208) { // toggle ADC signal
+				if (io.ccRx.lt2208) { // check ADC signal
 					
 					if (m_ADCChangedTime.elapsed() > 50) {
 
@@ -2295,18 +2314,6 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 					}
 				}
 
-				//if (io.ccRx.lt2208) { // toggle ADC signal
-				//	if (adcToggle) {
-				//		settings->setADCOverflow(2);
-				//		adcToggle = false;
-				//	}
-				//}
-				//else {
-				//	if (!adcToggle) {
-				//		settings->setADCOverflow(1);
-				//		adcToggle = true;
-				//	}
-				//}
 				//qDebug() << "CC: " << io.ccRx.roundRobin;
 				if (m_hwInterface == QSDR::Hermes) {
 
@@ -2317,39 +2324,43 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 					//qDebug() << "Hermes IO 1: " << io.ccRx.hermesI01 << "2: " << io.ccRx.hermesI02 << "3: " << io.ccRx.hermesI03 << "4: " << io.ccRx.hermesI04;
 				}
 
-				if (m_hwInterface == QSDR::Metis) {
+				if (m_fwCount < 100) {
+
+					if (m_hwInterface == QSDR::Metis) {
 				
-					if (io.ccRx.mercuryFirmwareVersion != io.control_in[2]) {
-						io.ccRx.mercuryFirmwareVersion = io.control_in[2];
-						settings->setMercuryVersion(io.ccRx.mercuryFirmwareVersion);
-						m_message = "Mercury firmware version: %1.";
-						sendMessage(m_message.arg(QString::number(io.control_in[2])));
-					}
+						if (io.ccRx.mercuryFirmwareVersion != io.control_in[2]) {
+							io.ccRx.mercuryFirmwareVersion = io.control_in[2];
+							settings->setMercuryVersion(io.ccRx.mercuryFirmwareVersion);
+							m_message = "Mercury firmware version: %1.";
+							sendMessage(m_message.arg(QString::number(io.control_in[2])));
+						}
 			
-					if (io.ccRx.penelopeFirmwareVersion != io.control_in[3]) {
-						io.ccRx.penelopeFirmwareVersion = io.control_in[3];
-						settings->setPenelopeVersion(io.ccRx.penelopeFirmwareVersion);
-						m_message = "Penelope firmware version: %1.";
-						sendMessage(m_message.arg(QString::number(io.control_in[3])));
-					}
+						if (io.ccRx.penelopeFirmwareVersion != io.control_in[3]) {
+							io.ccRx.penelopeFirmwareVersion = io.control_in[3];
+							settings->setPenelopeVersion(io.ccRx.penelopeFirmwareVersion);
+							m_message = "Penelope firmware version: %1.";
+							sendMessage(m_message.arg(QString::number(io.control_in[3])));
+						}
 			
-					if (io.ccRx.networkDeviceFirmwareVersion != io.control_in[4]) {
-						io.ccRx.networkDeviceFirmwareVersion = io.control_in[4];
-						settings->setMetisVersion(io.ccRx.networkDeviceFirmwareVersion);
-						m_message = "Metis firmware version: %1.";
+						if (io.ccRx.networkDeviceFirmwareVersion != io.control_in[4]) {
+							io.ccRx.networkDeviceFirmwareVersion = io.control_in[4];
+							settings->setMetisVersion(io.ccRx.networkDeviceFirmwareVersion);
+							m_message = "Metis firmware version: %1.";
 
-						sendMessage(m_message.arg(QString::number(io.control_in[4])));
+							sendMessage(m_message.arg(QString::number(io.control_in[4])));
+						}
 					}
-				}
-				else if (m_hwInterface == QSDR::Hermes) {
+					else if (m_hwInterface == QSDR::Hermes) {
 
-					if (io.ccRx.networkDeviceFirmwareVersion != io.control_in[4]) {
-						io.ccRx.networkDeviceFirmwareVersion = io.control_in[4];
-						settings->setHermesVersion(io.ccRx.networkDeviceFirmwareVersion);
-						m_message = "Hermes firmware version: %1.";
+						if (io.ccRx.networkDeviceFirmwareVersion != io.control_in[4]) {
+							io.ccRx.networkDeviceFirmwareVersion = io.control_in[4];
+							settings->setHermesVersion(io.ccRx.networkDeviceFirmwareVersion);
+							m_message = "Hermes firmware version: %1.";
 
-						sendMessage(m_message.arg(QString::number(io.control_in[4])));
+							sendMessage(m_message.arg(QString::number(io.control_in[4])));
+						}
 					}
+					m_fwCount++;
 				}
 				break;
 
@@ -2580,12 +2591,6 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 			settings->setProtocolSync(2);
 			m_SyncChangedTime.restart();
 		}
-
-		/*if (!syncToggle) {
-			
-			settings->setProtocolSync(2);
-			syncToggle = true;
-		}*/
 	}
 }
 
@@ -3139,6 +3144,11 @@ void DataEngine::setHPSDRDeviceNumber(int value) {
 	m_hpsdrDevices = value;
 }
 
+//void DataEngine::setCurrentNetworkDevice(TNetworkDevicecard card) {
+//
+//	m_HPSDRDevice = card.boardName;
+//}
+
 void DataEngine::rxListChanged(QList<HPSDRReceiver *> list) {
 
 	io.mutex.lock();
@@ -3660,9 +3670,6 @@ DataProcessor::DataProcessor(DataEngine *de, QSDR::_ServerMode serverMode)
 	, m_IQSequence(0L)
 	, m_socketConnected(false)
 {
-	m_dataEngine->syncToggle = true;
-	m_dataEngine->adcToggle = false;
-
 	m_IQDatagram.resize(0);
 	
 	/*m_cpxIn	= mallocCPX(2*BUFFER_SIZE);
@@ -3946,7 +3953,7 @@ void AudioProcessor::stop() {
 void AudioProcessor::initAudioProcessorSocket() {
 
 	m_audioProcessorSocket = new QUdpSocket();
-	m_audioProcessorSocket->connectToHost(m_dataEngine->io.metisIPAddress, METIS_PORT);
+	m_audioProcessorSocket->connectToHost(m_dataEngine->io.hpsdrDeviceIPAddress, METIS_PORT);
 
 	//m_audioProcessorSocket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 	//m_audioProcessorSocket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);

@@ -87,6 +87,8 @@ OGLDisplayPanel::OGLDisplayPanel(QWidget *parent)
 {
 	QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 
+	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+
 	setAutoBufferSwap(true);
 	setAutoFillBackground(false);
 	setMouseTracking(true);
@@ -233,7 +235,8 @@ QSize OGLDisplayPanel::minimumSizeHint() const {
 
 QSize OGLDisplayPanel::sizeHint() const {
 	
-	return QSize(width(), height());
+	//return QSize(width(), height());
+	return QSize(width(), m_height);
 }
 
 void OGLDisplayPanel::setupConnections() {

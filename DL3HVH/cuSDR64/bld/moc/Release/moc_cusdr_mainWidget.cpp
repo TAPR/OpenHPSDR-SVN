@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_mainWidget.h'
 **
-** Created: Sun 22. Jul 16:54:09 2012
+** Created: Tue 31. Jul 11:33:49 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      45,   14, // methods
+      47,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,23 +61,25 @@ static const uint qt_meta_data_MainWindow[] = {
      759,   11,   11,   11, 0x08,
      775,   11,   11,   11, 0x08,
      792,  787,   11,   11, 0x08,
-     825,   11,   11,   11, 0x08,
-     842,  839,   11,   11, 0x08,
-     872,  859,   11,   11, 0x08,
-     907,   11,   11,   11, 0x08,
-     928,   11,   11,   11, 0x08,
-     943,   11,   11,   11, 0x08,
-     958,   11,   11,   11, 0x08,
-     979,   11,   11,   11, 0x08,
-     998,   11,   11,   11, 0x08,
-    1015,   11,   11,   11, 0x08,
-    1039,   11,   11,   11, 0x08,
-    1068, 1062,   11,   11, 0x08,
-    1087, 1062,   11,   11, 0x08,
-    1103,   11,   11,   11, 0x08,
-    1122,   11,   11,   11, 0x08,
-    1148, 1144,   11,   11, 0x08,
-    1183,   11,   11,   11, 0x08,
+     828,  825,   11,   11, 0x08,
+     858,  845,   11,   11, 0x08,
+     893,   11,   11,   11, 0x08,
+     914,   11,   11,   11, 0x08,
+     929,   11,   11,   11, 0x08,
+     944,   11,   11,   11, 0x08,
+     965,   11,   11,   11, 0x08,
+     984,   11,   11,   11, 0x08,
+    1001,   11,   11,   11, 0x08,
+    1025,   11,   11,   11, 0x08,
+    1054, 1048,   11,   11, 0x08,
+    1073, 1048,   11,   11, 0x08,
+    1089,   11,   11,   11, 0x08,
+    1108,   11,   11,   11, 0x08,
+    1134, 1130,   11,   11, 0x08,
+    1171, 1161,   11,   11, 0x08,
+    1211, 1207,   11,   11, 0x08,
+    1246,   11,   11,   11, 0x08,
+    1276, 1048,   11,   11, 0x08,
 
        0        // eod
 };
@@ -106,17 +108,20 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "setMainWindowGeometry()\0updateTitle()\0"
     "initialMessage()\0showMessage(QString)\0"
     "setFullScreen()\0getRegion()\0mode\0"
-    "setServerMode(QSDR::_ServerMode)\0"
-    "setReceiver()\0rx\0setReceiver(int)\0"
-    "sender,value\0setNumberOfReceivers(QObject*,int)\0"
+    "setServerMode(QSDR::_ServerMode)\0rx\0"
+    "setReceiver(int)\0sender,value\0"
+    "setNumberOfReceivers(QObject*,int)\0"
     "setInternalDSPMode()\0setDttSPMode()\0"
     "setQtDSPMode()\0setExternalDSPMode()\0"
     "setChirpWSPRMode()\0setCudaDSPMode()\0"
     "setPeakHoldStatus(bool)\0getNetworkInterfaces()\0"
     "value\0setMainVolume(int)\0setAGCGain(int)\0"
     "getLastFrequency()\0showNetworkIODialog()\0"
+    "msg\0showWarningDialog(QString)\0rx,buffer\0"
+    "setSpectrumBuffer(int,const float*)\0"
     "str\0addNetworkIOComboBoxEntry(QString)\0"
     "clearNetworkIOComboBoxEntry()\0"
+    "widebandVisibilityChanged(bool)\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -153,23 +158,25 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 25: _t->setFullScreen(); break;
         case 26: _t->getRegion(); break;
         case 27: _t->setServerMode((*reinterpret_cast< QSDR::_ServerMode(*)>(_a[1]))); break;
-        case 28: _t->setReceiver(); break;
-        case 29: _t->setReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 30: _t->setNumberOfReceivers((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 31: _t->setInternalDSPMode(); break;
-        case 32: _t->setDttSPMode(); break;
-        case 33: _t->setQtDSPMode(); break;
-        case 34: _t->setExternalDSPMode(); break;
-        case 35: _t->setChirpWSPRMode(); break;
-        case 36: _t->setCudaDSPMode(); break;
-        case 37: _t->setPeakHoldStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 38: _t->getNetworkInterfaces(); break;
-        case 39: _t->setMainVolume((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 40: _t->setAGCGain((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 41: _t->getLastFrequency(); break;
-        case 42: _t->showNetworkIODialog(); break;
-        case 43: _t->addNetworkIOComboBoxEntry((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 44: _t->clearNetworkIOComboBoxEntry(); break;
+        case 28: _t->setReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 29: _t->setNumberOfReceivers((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 30: _t->setInternalDSPMode(); break;
+        case 31: _t->setDttSPMode(); break;
+        case 32: _t->setQtDSPMode(); break;
+        case 33: _t->setExternalDSPMode(); break;
+        case 34: _t->setChirpWSPRMode(); break;
+        case 35: _t->setCudaDSPMode(); break;
+        case 36: _t->setPeakHoldStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 37: _t->getNetworkInterfaces(); break;
+        case 38: _t->setMainVolume((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 39: _t->setAGCGain((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 40: _t->getLastFrequency(); break;
+        case 41: _t->showNetworkIODialog(); break;
+        case 42: _t->showWarningDialog((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 43: _t->setSpectrumBuffer((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const float*(*)>(_a[2]))); break;
+        case 44: _t->addNetworkIOComboBoxEntry((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 45: _t->clearNetworkIOComboBoxEntry(); break;
+        case 46: _t->widebandVisibilityChanged((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -180,7 +187,7 @@ const QMetaObjectExtraData MainWindow::staticMetaObjectExtraData = {
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_MainWindow,
+    { &QMainWindow::staticMetaObject, qt_meta_stringdata_MainWindow,
       qt_meta_data_MainWindow, &staticMetaObjectExtraData }
 };
 
@@ -198,18 +205,18 @@ void *MainWindow::qt_metacast(const char *_clname)
     if (!_clname) return 0;
     if (!strcmp(_clname, qt_meta_stringdata_MainWindow))
         return static_cast<void*>(const_cast< MainWindow*>(this));
-    return QWidget::qt_metacast(_clname);
+    return QMainWindow::qt_metacast(_clname);
 }
 
 int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 45)
+        if (_id < 47)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 45;
+        _id -= 47;
     }
     return _id;
 }
@@ -296,6 +303,82 @@ int NetworkIODialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 3;
+    }
+    return _id;
+}
+static const uint qt_meta_data_WarningDialog[] = {
+
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       2,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      19,   15,   14,   14, 0x0a,
+      46,   14,   14,   14, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_WarningDialog[] = {
+    "WarningDialog\0\0msg\0setWarningMessage(QString)\0"
+    "okBtnClicked()\0"
+};
+
+void WarningDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        WarningDialog *_t = static_cast<WarningDialog *>(_o);
+        switch (_id) {
+        case 0: _t->setWarningMessage((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 1: _t->okBtnClicked(); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObjectExtraData WarningDialog::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject WarningDialog::staticMetaObject = {
+    { &QDialog::staticMetaObject, qt_meta_stringdata_WarningDialog,
+      qt_meta_data_WarningDialog, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &WarningDialog::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *WarningDialog::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *WarningDialog::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_WarningDialog))
+        return static_cast<void*>(const_cast< WarningDialog*>(this));
+    return QDialog::qt_metacast(_clname);
+}
+
+int WarningDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QDialog::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
     }
     return _id;
 }

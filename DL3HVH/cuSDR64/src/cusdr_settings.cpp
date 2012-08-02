@@ -101,7 +101,7 @@ Settings::Settings(QObject *parent)
 	settings = new QSettings(QCoreApplication::applicationDirPath() +  "/" + settingsFilename, QSettings::IniFormat);
 
 	m_titleString = "cuSDR64 BETA ";
-	m_versionString = "v0.2.2.5";
+	m_versionString = "v0.3.0.1";
 
 	// get styles
 	//m_sdrStyle = sdrStyle;
@@ -126,9 +126,15 @@ Settings::Settings(QObject *parent)
 
 		TReceiver receiverData;
 		m_receiverDataList.append(receiverData);
+
+		QString str = "receiver";
+		QString num;
+		num.setNum(i);
+		str.append(num);
+
+		m_rxStringList << str;
 	}
 
-	m_rxStringList << "receiver0" << "receiver1" << "receiver2" << "receiver3";
 	m_bandList = getHamBandFrequencies();
 	m_bandTextList = getHamBandText();
 	m_defaultFilterList = getDefaultFilterFrequencies();
@@ -340,7 +346,12 @@ QString	Settings::getErrorString(QSDR::_Error err) {
 
 QString Settings::getSDRStyle()				{ return sdrStyle; }
 QString Settings::getWidgetStyle()			{ return widgetStyle; }
+QString Settings::getMainWindowStyle()		{ return mainWindowStyle; }
+QString Settings::getDockStyle()			{ return dockStyle; }
+QString Settings::getToolbarStyle()			{ return toolbarStyle; }
+QString Settings::getStatusbarStyle()		{ return statusbarStyle; }
 QString Settings::getMessageBoxStyle()		{ return messageBoxStyle; }
+QString Settings::getLineEditStyle()		{ return lineEditStyle; }
 QString Settings::getDialogStyle()			{ return dialogStyle; }
 QString Settings::getColorDialogStyle()		{ return colorDialogStyle; }
 QString Settings::getItemStyle()			{ return itemStyle; }
@@ -1503,17 +1514,17 @@ void Settings::setSettingsLoaded(bool value) {
 	emit settingsLoadedChanged(m_settingsLoaded);
 }
 
-void Settings::setCallsign(QString callsign) {
+void Settings::setCallsign(const QString &callsign) {
 
-	callsign = callsign.trimmed();
+	QString cs = callsign.trimmed();
 
 	QMutexLocker locker(&mutex);
-	if (m_callsignString == callsign.trimmed()) 
+	if (m_callsignString == cs) 
 		return;
-	m_callsignString = callsign.trimmed();
+	m_callsignString = cs;
 	locker.unlock();
 
-	emit callsignChanged(callsign);
+	emit callsignChanged();
 }
 
 void Settings::setRxList(QList<HPSDRReceiver *> rxList) {
@@ -1548,11 +1559,11 @@ void Settings::clearMetisCardList() {
 	//emit metisCardListChanged(m_metisCards);
 }
 
-void Settings::setCurrentMetisCard(TNetworkDevicecard card) {
+void Settings::setCurrentHPSDRDevice(TNetworkDevicecard card) {
 
-	m_currentMetisCard = card;
+	m_currentHPSDRDevice = card;
 
-	emit metisChanged(m_currentMetisCard);
+	emit hpsdrDeviceChanged(m_currentHPSDRDevice);
 }
 
 void Settings::setHPSDRDeviceNumber(int value) {
@@ -1564,6 +1575,11 @@ void Settings::setHPSDRDeviceNumber(int value) {
 void Settings::showNetworkIODialog() {
 
 	emit showNetworkIO();
+}
+
+void Settings::showWarningDialog(const QString &msg) {
+
+	emit showWarning(msg);
 }
 
 void Settings::addNetworkIOComboBoxEntry(QString str) {

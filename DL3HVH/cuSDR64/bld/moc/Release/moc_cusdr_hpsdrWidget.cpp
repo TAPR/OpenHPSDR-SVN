@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_hpsdrWidget.h'
 **
-** Created: Sun 22. Jul 16:54:04 2012
+** Created: Mon 30. Jul 19:05:38 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -59,12 +59,12 @@ static const uint qt_meta_data_HPSDRWidget[] = {
      769,  763,   12,   12, 0x08,
      792,  787,   12,   12, 0x08,
      845,  840,   12,   12, 0x08,
-     889,   12,   12,   12, 0x08,
-     912,   12,   12,   12, 0x08,
-     926,  657,   12,   12, 0x08,
-     956,   12,   12,   12, 0x08,
-     973,   12,   12,   12, 0x08,
-     989,   12,   12,   12, 0x08,
+     889,  657,   12,   12, 0x08,
+     915,   12,   12,   12, 0x08,
+     929,  657,   12,   12, 0x08,
+     959,   12,   12,   12, 0x08,
+     976,   12,   12,   12, 0x08,
+     992,   12,   12,   12, 0x08,
 
        0        // eod
 };
@@ -94,7 +94,7 @@ static const char qt_meta_stringdata_HPSDRWidget[] = {
     "setDeviceNIC(int)\0list\0"
     "setNetworkDeviceList(QList<TNetworkDevicecard>)\0"
     "card\0setCurrentNetworkDevice(TNetworkDevicecard)\0"
-    "setNumberOfReceivers()\0setShow1on2()\0"
+    "setNumberOfReceivers(int)\0setShow1on2()\0"
     "numberOfReceiversChanged(int)\0"
     "disableButtons()\0enableButtons()\0"
     "setView()\0"
@@ -132,7 +132,7 @@ void HPSDRWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 23: _t->setDeviceNIC((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 24: _t->setNetworkDeviceList((*reinterpret_cast< QList<TNetworkDevicecard>(*)>(_a[1]))); break;
         case 25: _t->setCurrentNetworkDevice((*reinterpret_cast< TNetworkDevicecard(*)>(_a[1]))); break;
-        case 26: _t->setNumberOfReceivers(); break;
+        case 26: _t->setNumberOfReceivers((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 27: _t->setShow1on2(); break;
         case 28: _t->numberOfReceiversChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 29: _t->disableButtons(); break;

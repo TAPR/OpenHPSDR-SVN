@@ -171,7 +171,7 @@ int QHpsdrIO::findHPSDRDevices() {
 				mc.boardName = str;
 				HPSDRIO_DEBUG << "Device board ID: " <<  no; 
 				HPSDRIO_DEBUG << "Device is: " << qPrintable(str);
-								
+
 				m_deviceCards.append(mc);
 
 				/*str = mc.ip_address.toString();
@@ -196,7 +196,7 @@ int QHpsdrIO::findHPSDRDevices() {
 
 	if (devicesFound == 1) {
 
-		m_settings->setCurrentMetisCard(m_deviceCards.at(0));
+		m_settings->setCurrentHPSDRDevice(m_deviceCards.at(0));
 		HPSDRIO_DEBUG << "Device selected: " << qPrintable(m_deviceCards.at(0).ip_address.toString());
 	}
 	return devicesFound;
@@ -215,12 +215,12 @@ void QHpsdrIO::displayDiscoverySocketError(QAbstractSocket::SocketError error) {
 
 //void NetworkIO::metisDeviceChanged(int index) {
 //
-//    //m_settings->setCurrentMetisCard(m_metisCards.at(index));
+//    //m_settings->setCurrentHPSDRDevice(m_metisCards.at(index));
 //}
 
 //void NetworkIO::okBtnClicked() {
 //
-//	m_settings->setCurrentMetisCard(m_metisCards.at(m_metisDeviceComboBox->currentIndex()));
+//	m_settings->setCurrentHPSDRDevice(m_metisCards.at(m_metisDeviceComboBox->currentIndex()));
 //	NETWORKDIALOG_DEBUG << "Metis selected: " << m_metisCards.at(m_metisDeviceComboBox->currentIndex()).ip_address.toString();
 //	accept();
 //}
@@ -312,7 +312,7 @@ void QHpsdrIO::clear() {
 //
 //void NetworkIODialog::okBtnClicked() {
 //
-//	//m_settings->setCurrentMetisCard(m_metisCards.at(m_metisDeviceComboBox->currentIndex()));
+//	//m_settings->setCurrentHPSDRDevice(m_metisCards.at(m_metisDeviceComboBox->currentIndex()));
 //	NETWORKDIALOG_DEBUG << "Metis selected: " << m_metisCards.at(m_metisDeviceComboBox->currentIndex()).ip_address.toString();
 //	accept();
 //}
