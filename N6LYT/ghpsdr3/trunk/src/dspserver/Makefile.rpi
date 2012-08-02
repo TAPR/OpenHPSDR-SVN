@@ -4,7 +4,7 @@
 CC=gcc 
 LINK=gcc
 #OPTIONS=-g -O3 -msse -msse3 -ffast-math -march=core2 -Wall
-OPTIONS=-g -O3 -Wall
+OPTIONS=-g -O3 -Wall -march=armv6 -mfpu=vfp -mfloat-abi=hard
 INCLUDES=-I. 
 LIBS=-L. -L../DttSP -lDttSP -lpthread\
      -lm -lfftw3f 
