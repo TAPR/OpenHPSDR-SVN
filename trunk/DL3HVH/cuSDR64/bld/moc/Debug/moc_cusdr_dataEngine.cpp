@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_dataEngine.h'
 **
-** Created: Sun 22. Jul 13:17:34 2012
+** Created: Mon 30. Jul 19:03:58 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!

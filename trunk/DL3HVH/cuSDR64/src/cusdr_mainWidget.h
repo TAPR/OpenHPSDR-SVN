@@ -27,11 +27,14 @@
 #ifndef CUSDR_MAIN_H
 #define CUSDR_MAIN_H
 
-#include <QtGui>
+#include <QMainWindow>
+#include <QStyleOptionToolBar>
 #include <QWidget>
+#include <QListWidget>
 #include <QTimer>
 #include <QNetworkInterface>
 #include <QSlider>
+#include <QMessageBox>
 
 #include "cusdr_settings.h"
 #include "cusdr_buttons.h"
@@ -42,14 +45,19 @@
 #include "cusdr_alexWidget.h"
 #include "cusdr_pennyWidget.h"
 #include "cusdr_radioWidget.h"
-#include "cusdr_oglWidget.h"
+//#include "cusdr_oglWidget.h"
+#include "cusdr_oglWidebandPanel.h"
+#include "cusdr_oglReceiverPanel.h"
 #include "cusdr_oglDisplayPanel.h"
 #include "cusdr_graphicOptionsWidget.h"
 #include "cusdr_server.h"
 
-class NetworkIODialog;
 
-class MainWindow : public QWidget {
+class NetworkIODialog;
+class WarningDialog;
+
+
+class MainWindow : public QMainWindow {
 
     Q_OBJECT
 
@@ -83,9 +91,15 @@ private:
 	void		setupConnections();
 	void		setupLayout();
 	void		createModeMenu();
+	void		createViewMenu();
+	//void		createWidgetList();
 	void		createMainBtnGroup();
 	void		createConsoleWidget();
-	void		createSecondBtnGroup();
+	void		createDisplayPanel();
+	void		createStatusBar();
+	void		initWidebandDisplay();
+	void		initReceiverPanels(int rx);
+
 	void		updateFromSettings();
 
 private:
@@ -95,27 +109,23 @@ private:
 	QSDR::_HWInterfaceMode		m_hwInterface;
 	QSDR::_DataEngineState		m_dataEngineState;
 
+	QToolBar*					mainBtnToolBar;
+	QToolBar*					displayPanelToolBar;
+	
+	QMainWindow*				centralwidget;
+
+	QList<QGLReceiverPanel *>	rxWidgetList;
+
+	QDockWidget*				widebandDock;
+	QDockWidget*				rx1Dock;
+	QList<QDockWidget*>			dockWidgetList;
+	QList<QDockWidget*>			rxDockWidgetList;
+	
 	QList<QHostAddress>			m_ipList;
 	QList<QNetworkInterface>	m_niList;
 
 	QSize		m_oldSize;
 	QPoint		m_oldPosition;
-	
-	bool		m_resizeFrame;
-	bool		m_mousePressed;
-	bool		m_quitHighBotton;
-	bool		m_fullScreen;
-	bool		m_cudaPresence;
-	bool		m_mover;
-	bool		m_msgBrowserVisible;
-
-	double		m_alpha;
-
-	int			m_deltaX_max;
-    int			m_deltaY_max;
-	int			m_resizePosition;
-
-	int			m_oldSampleRate;
 
 	QPixmap		m_originalPixmap;
 	QPixmap		m_widgetMask;
@@ -153,51 +163,67 @@ private:
 	PennyWidget*		m_pennyWidget;
 	GraphicOptionsWidget*	m_graphicOptionsWidget;
 	OGLDisplayPanel*	m_oglDisplayPanel;
-	OGLWidget*			m_oglWidget;
+	//OGLWidget*			m_oglWidget;
 	//CudaInfoWidget*		m_cudaInfoWidget;
 
+	QGLWidebandPanel*	m_wbDisplay;
+
 	NetworkIODialog*	m_netIODialog;
+	WarningDialog*		m_warningDialog;
 
 	//QList<QCLDevice>		m_clDevices;
 	
-	AeroButton			*startBtn;
-	AeroButton			*serverBtn;
-	AeroButton			*hpsdrBtn;
-	AeroButton			*alexBtn;
-	AeroButton			*pennyBtn;
-	AeroButton			*serverLogBtn;
-	AeroButton			*modeBtn;
-	AeroButton			*chirpBtn;
-	AeroButton			*openclBtn;
-	//AeroButton			*cudaGraphBtn;
-	AeroButton			*rxCtrlBtn;
-	AeroButton			*wideBandBtn;
-	AeroButton			*ctrlDisplayBtn;
-	AeroButton			*displayBtn;
-	AeroButton			*quitBtn;
+	AeroButton*		startBtn;
+	AeroButton*		serverBtn;
+	AeroButton*		hpsdrBtn;
+	AeroButton*		serverLogBtn;
+	AeroButton*		modeBtn;
+	AeroButton*		viewBtn;
+	AeroButton*		chirpBtn;
+	AeroButton*		openclBtn;
+	//AeroButton*		cudaGraphBtn;
+	AeroButton*		rxCtrlBtn;
+	AeroButton*		wideBandBtn;
+	AeroButton*		ctrlDisplayBtn;
+	AeroButton*		displayBtn;
+	AeroButton*		quitBtn;
+	AeroButton*		nullBtn;
 	
-	AeroButton			*avgBtn;
-	AeroButton			*peakHoldBtn;
-	AeroButton			*gridBtn;
-	AeroButton			*lastFreqBtn;
-
-	AeroButton			*rx1Btn;
-	AeroButton			*rx2Btn;
-	AeroButton			*rx3Btn;
-	AeroButton			*rx4Btn;
-
-	AeroButton			*nullBtn;
-	
+	AeroButton*		avgBtn;
+	AeroButton*		peakHoldBtn;
+	AeroButton*		gridBtn;
+	AeroButton*		lastFreqBtn;
+		
 	QList<AeroButton *>	mainBtnList;
-	QList<AeroButton *>	rxBtnList;
-	QList<QWidget *>	widgetList;
+	//QList<AeroButton *>	rxBtnList;
+	//QList<QWidget *>	widgetList;
 
-	QMenu*		m_modeMenu;
+	QMenu*			modeMenu;
+	QMenu*			viewMenu;
+
 	QAction*	m_internalDSPModeAction;
 	QAction*	m_dttspModeAction;
 	QAction*	m_qtdspModeAction;
     QAction*	m_externalDSPModeAction;
     QAction*	m_chirpWSPRAction;
+
+
+	bool		m_resizeFrame;
+	bool		m_mousePressed;
+	bool		m_quitHighBotton;
+	bool		m_fullScreen;
+	bool		m_cudaPresence;
+	bool		m_mover;
+	bool		m_msgBrowserVisible;
+
+	double		m_alpha;
+
+	int			m_deltaX_max;
+    int			m_deltaY_max;
+	int			m_resizePosition;
+	int			m_numberOfReceivers;
+
+	int			m_oldSampleRate;
 
 private slots:
 	void systemStateChanged(
@@ -218,7 +244,7 @@ private slots:
 	void getRegion();
 
 	void setServerMode(QSDR::_ServerMode mode);
-	void setReceiver();
+	//void setReceiver();
 	void setReceiver(int rx);
 	void setNumberOfReceivers(QObject *sender, int value);
 	void setInternalDSPMode();
@@ -237,8 +263,14 @@ private slots:
 	void getLastFrequency();
 
 	void showNetworkIODialog();
+	void showWarningDialog(const QString &msg);
+
+	void setSpectrumBuffer(int rx, const float* buffer);
+
 	void addNetworkIOComboBoxEntry(QString str);
 	void clearNetworkIOComboBoxEntry();
+
+	void widebandVisibilityChanged(bool value);
 
 protected:
 	void getSelectedFrame(QPoint p);
@@ -294,5 +326,43 @@ private slots:
 	void	okBtnClicked();
 };
 
+
+//***************************************************************************
+// WarningDialog class
+
+class WarningDialog : public QDialog {
+
+    Q_OBJECT
+
+public:
+    WarningDialog(QWidget *parent = 0);
+    ~WarningDialog();
+
+public slots:
+	void setWarningMessage(const QString &msg);
+	
+protected:
+	void paintEvent(QPaintEvent *event);
+
+private:
+	Settings*		m_settings;
+
+	QFont			m_titleFont;
+	//QPixmap			m_warningIcon;
+
+	QLabel*			m_warningLabel;
+
+	AeroButton*		okBtn;
+
+	QString			m_message;
+
+	int		m_btnWidth;
+	int		m_btnHeight;
+	int		m_msgFontWidth;
+	int		m_msgFontHeight;
+    
+private slots:
+	void	okBtnClicked();
+};
 
 #endif // CUSDR_MAIN_H

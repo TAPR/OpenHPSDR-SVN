@@ -48,8 +48,8 @@
 #endif
 
 #define window_height1		56
-#define window_height2		600
-#define window_width		800
+#define window_height2		750
+#define window_width		1000
 #define btn_width1			65
 #define btn_width2			54
 #define btn_height1			17
@@ -70,17 +70,19 @@
 	- find network connections.
 */
 MainWindow::MainWindow(QWidget *parent)
-	: QWidget(parent)
+	: QMainWindow(parent)
 	, m_settings(Settings::instance())
 	, m_serverMode(m_settings->getCurrentServerMode())
 	, m_hwInterface(m_settings->getHWInterface())
 	, m_dataEngineState(QSDR::DataEngineDown)
 	, m_fullScreen(false)
-	, m_modeMenu(new QMenu(this))
+	, modeMenu(new QMenu(this))
+	, viewMenu(new QMenu(this))
 	, m_cudaPresence(false)
 	, m_mover(false)
 	, m_resizePosition(0)
 	, m_oldSampleRate(m_settings->getSampleRate())
+	, m_numberOfReceivers(m_settings->getNumberOfReceivers())
 {	
 	QPalette palette;
 	QColor color = Qt::black;
@@ -99,15 +101,28 @@ MainWindow::MainWindow(QWidget *parent)
 		m_smallFont.setFamily("Arial");
 	#endif
 
+	this->setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowNestedDocks);
+	this->setMinimumSize(QSize(window_width, window_height2));
+	this->setStyleSheet(m_settings->getSDRStyle());
+	//this->menuBar()->setStyleSheet(m_settings->getMenuStyle());
+
+	centralwidget = new QMainWindow(this);
+	centralwidget->setWindowFlags(Qt::Widget);
+	centralwidget->setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowNestedDocks);
+	centralwidget->setStyleSheet(m_settings->getMainWindowStyle());
+	centralwidget->setContextMenuPolicy(Qt::NoContextMenu);  //setStyleSheet(m_settings->getMenuStyle());
+
 	m_dataEngine = new DataEngine(this);
 	m_hpsdrServer = new HPSDRServer(this);
-	m_oglDisplayPanel = new OGLDisplayPanel(this);
+	//m_oglDisplayPanel = new OGLDisplayPanel(this);
 	m_graphicOptionsWidget = new GraphicOptionsWidget(this);
 	m_radioWidget = new RadioWidget(this);
 	m_serverWidget = new ServerWidget(this);
 	m_chirpWidget = new ChirpWidget(this);
 	m_hpsdrTabWidget = new HPSDRTabWidget(this);
 	
+	m_wbDisplay = 0;
+
 	setAutoFillBackground(true);
 	setMouseTracking(true);
 
@@ -121,14 +136,15 @@ MainWindow::MainWindow(QWidget *parent)
 
 	m_resizeTimer = new QTimer(this);
 	
-	m_oglWidget = new OGLWidget(this);
+	//m_oglWidget = new OGLWidget(this);
+	//m_oglWidget = new OGLWidget();
 
-	// we collect the widgets in the widgetList
-	widgetList.append(m_radioWidget);	
-	widgetList.append(m_serverWidget);
-	widgetList.append(m_hpsdrTabWidget);
-	widgetList.append(m_chirpWidget);
-	widgetList.append(m_graphicOptionsWidget);
+	//// we collect the widgets in the widgetList
+	//widgetList.append(m_radioWidget);	
+	//widgetList.append(m_serverWidget);
+	//widgetList.append(m_hpsdrTabWidget);
+	//widgetList.append(m_chirpWidget);
+	//widgetList.append(m_graphicOptionsWidget);
 	updateTitle();
 
 	MAIN_DEBUG << "main window init done";
@@ -254,18 +270,6 @@ void MainWindow::setupConnections() {
 		this, 
 		SLOT(showWidgetEvent(QObject *)));
 
-	/*CHECKED_CONNECT(
-		m_hpsdrWidget, 
-		SIGNAL(closeEvent(QObject *)), 
-		this, 
-		SLOT(closeWidgetEvent(QObject *)));
-
-	CHECKED_CONNECT(
-		m_hpsdrWidget, 
-		SIGNAL(messageEvent(QString)), 
-		this, 
-		SLOT(showMessage(QString)));*/
-
 	CHECKED_CONNECT(
 		m_hpsdrTabWidget, 
 		SIGNAL(closeEvent(QObject *)), 
@@ -333,6 +337,12 @@ void MainWindow::setupConnections() {
 		this,
 		SLOT(setReceiver(int)));
 
+	CHECKED_CONNECT(
+		m_settings, 
+		SIGNAL(callsignChanged()),
+		this,
+		SLOT(updateTitle()));
+
 	/*CHECKED_CONNECT(
 		m_settings, 
 		SIGNAL(alexPresenceChanged(bool)),
@@ -359,6 +369,12 @@ void MainWindow::setupConnections() {
 
 	CHECKED_CONNECT(
 		m_settings, 
+		SIGNAL(showWarning(const QString &)),
+		this,
+		SLOT(showWarningDialog(const QString &)));
+
+	CHECKED_CONNECT(
+		m_settings, 
 		SIGNAL(networkIOComboBoxEntryAdded(QString)),
 		this,
 		SLOT(addNetworkIOComboBoxEntry(QString)));
@@ -368,6 +384,12 @@ void MainWindow::setupConnections() {
 		SIGNAL(clearNetworkIOComboBoxEntrySignal()),
 		this,
 		SLOT(clearNetworkIOComboBoxEntry()));
+
+	CHECKED_CONNECT(
+		m_settings,
+		SIGNAL(spectrumBufferChanged(int, const float*)),
+		this,
+		SLOT(setSpectrumBuffer(int, const float*)));
 
 	/*CHECKED_CONNECT(
 		m_settings, 
@@ -393,38 +415,26 @@ void MainWindow::setupConnections() {
 	- get network interfaces
 */
 void MainWindow::setup() {
-
-	this->setMinimumSize(QSize(window_width, window_height2));
 	
-	//QIcon icon;
-	//icon.addFile(QString::fromUtf8("cuSDR_big.ico"), QSize(), QIcon::Normal, QIcon::Off);
-	//this->setWindowIcon(icon);
-	this->setStyleSheet(m_settings->getSDRStyle());
-	
-	//m_alpha = 255;
-	//m_widgetMask = QPixmap(this->width(), this->height());
-
-	// create button groups
-	createMainBtnGroup();
-	createSecondBtnGroup();
-	
-	// create console widget
 	createConsoleWidget();
+	createDisplayPanel();
 
-	// setup main layout
+	addToolBarBreak(Qt::TopToolBarArea);
+	
+	createMainBtnGroup();
+	createStatusBar();
+	createModeMenu();
+	createViewMenu();
+	
+	initWidebandDisplay();
+	initReceiverPanels(MAX_RECEIVERS);
+	
 	setupLayout();
 
-	// create server mode menu
-	createModeMenu();
-
 	initialMessage();
-	messagesBtnClickedEvent();
 
 	if (m_settings->getWideBandStatus())
 		wideBandBtnClickedEvent();
-
-	m_quitHighBotton = false;
-	m_resizeFrame = true;
 
 	setupConnections();
 	updateFromSettings();
@@ -434,6 +444,9 @@ void MainWindow::setup() {
 
 	// init network IO dialog to HPSDR components
 	m_netIODialog = new NetworkIODialog();
+
+	// init warning dialog
+	m_warningDialog = new WarningDialog();
 
 	// setup connection for the NIC lists of the server and hpsdr widgets.
 	// We need to add these connections after detecting the network interfaces.
@@ -453,106 +466,232 @@ void MainWindow::setup() {
 	//}
 	//m_settings->setOpenCLDevices(clDevices);
 
-	
 	//m_tlw = this;
-	setNumberOfReceivers(this, 1);
+	//setNumberOfReceivers(this, 1);
 
-	m_oglDisplayPanel->updateGL();
+	//m_oglDisplayPanel->updateGL();
+
+	setCentralWidget(centralwidget);
 }
 
+/*!
+	\brief creates the display panel and puts it on a QToolBar.
+*/
+void MainWindow::createDisplayPanel() {
+
+	m_oglDisplayPanel = new OGLDisplayPanel(this);
+	
+	displayPanelToolBar = new QToolBar(tr("Display Panel"));
+	displayPanelToolBar->setMovable(false);
+	displayPanelToolBar->setStyleSheet(m_settings->getToolbarStyle());
+	displayPanelToolBar->addWidget(m_oglDisplayPanel);
+
+	addToolBar(displayPanelToolBar);
+}
  
 /*!
 	\brief updates the OpenGL widget.
 */
 void MainWindow::update() {
 
-	if (m_oglWidget)
-		m_oglWidget->update();
+	//if (m_oglWidget)
+	//	m_oglWidget->update();
 }
 
  
 /*!
-	\brief set up the main layout with borders.
+	\brief set up the main layout.
 */
 void MainWindow::setupLayout() {
 
-	/*m_topBorder = new FrameWidget(this);
-	m_topBorder->setEdge(FrameWidget::Top);
-	
-	m_leftBorder = new FrameWidget(this);
-	m_leftBorder->setEdge(FrameWidget::Left);
-	
-	m_rightBorder = new FrameWidget(this);
-	m_rightBorder->setEdge(FrameWidget::Right);
+	//rx1Dock = new QDockWidget(tr("Receiver 1"), this);
+	//rx1Dock->setFeatures(QDockWidget::DockWidgetFloatable | QDockWidget::DockWidgetMovable);
+	//rx1Dock->setStyleSheet(m_settings->getDockStyle());
+	//rx1Dock->setWidget(rxWidgetList.at(0));
 
-	m_leftTopAngleBorder = new FrameWidget(this);
-	m_leftTopAngleBorder->setEdge(FrameWidget::TopLeft);
-	
-	m_leftBottomAngleBorder = new FrameWidget(this);
-	m_leftBottomAngleBorder->setEdge(FrameWidget::BottomLeft);
-	
-	m_rightTopAngleBorder  = new FrameWidget(this);
-	m_rightTopAngleBorder->setEdge(FrameWidget::TopRight);
-	
-	m_rightBottomAngleBorder = new FrameWidget(this);
-	m_rightBottomAngleBorder->setEdge(FrameWidget::BottomRight);
-	
-	m_bottomBorder = new FrameWidget(this);
-	m_bottomBorder->setEdge(FrameWidget::Bottom);*/
-	
-	// main content
-	m_contentLayout = new QGridLayout(this);
-	//m_contentLayout->setVerticalSpacing(3);
-	m_contentLayout->setVerticalSpacing(0);
-	m_contentLayout->setHorizontalSpacing(0);
-	//setContentsMargins(0, 0, 4, 0);
-	//m_contentLayout->setContentsMargins(1, 1, 1, 1);
-	m_contentLayout->setContentsMargins(2, 0, 2, 0);
-	m_contentLayout->addWidget(m_oglDisplayPanel, 0, 0, 1, 2, Qt::AlignTop);
-	m_contentLayout->addWidget(m_buttonWidget, 1, 0, 1, 2, Qt::AlignTop);
-	m_contentLayout->addWidget(m_secondButtonWidget, 2, 0, 1, 2, Qt::AlignTop);
-	//setContentsMargins(0, 0, 6, 0);
-	m_contentLayout->addWidget(m_oglWidget, 3, 0, 1, 1);
-	m_contentLayout->addWidget(m_radioWidget, 3, 1, 2, 1);
-	m_contentLayout->addWidget(m_serverWidget, 3, 1, 2, 1);
-	m_contentLayout->addWidget(m_hpsdrTabWidget, 3, 1, 2, 1);
-	m_contentLayout->addWidget(m_chirpWidget, 3, 1, 2, 1);
-	//if (m_cudaPresence)
-	//	m_contentLayout->addWidget(m_cudaInfoWidget, 3, 1, 2, 1);
-	m_contentLayout->addWidget(m_graphicOptionsWidget, 3, 1, 2, 1);
-	m_contentLayout->addWidget(m_msgBrowser, 4, 0, 1, 1);
-	m_contentLayout->setColumnStretch(0, 2);
+	////centralwidget->addDockWidget(Qt::BottomDockWidgetArea, rx1Dock);
+	//addDockWidget(Qt::BottomDockWidgetArea, rx1Dock);
 
-	//m_innerWidget->setContentsMargins(0, 0, 0, 0);
-	//m_innerWidget->setLayout(m_contentLayout);
+	//widebandDock = new QDockWidget(tr("Wideband"), this);
+	//widebandDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
+ //   widebandDock->setFeatures(QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetFloatable | QDockWidget::DockWidgetMovable);
+	//widebandDock->setStyleSheet(m_settings->getDockStyle());
+ //   widebandDock->setWidget(m_wbDisplay);
+	//
+	////centralwidget->addDockWidget(Qt::TopDockWidgetArea, widebandDock);
+	//addDockWidget(Qt::TopDockWidgetArea, widebandDock);
+	//widebandDock->hide();
 
-	/*QGridLayout *mainLayout = new QGridLayout(this);
-	mainLayout->setVerticalSpacing(0);
-	mainLayout->setHorizontalSpacing(0);
-	mainLayout->setContentsMargins (0, 0, 0, 0);
-	mainLayout->setRowMinimumHeight(3, 20);
-	mainLayout->setRowStretch(2, 3);
-	mainLayout->setColumnStretch(1, 3);
+	//CHECKED_CONNECT(
+	//	widebandDock,
+	//	SIGNAL(visibilityChanged(bool)),
+	//	this,
+	//	SLOT(widebandVisibilityChanged(bool)));
 
-	mainLayout->addWidget(m_titlebar, 0, 0, 1, 3);
-	mainLayout->addWidget(m_leftTopAngleBorder, 1, 0);
-	mainLayout->addWidget(m_topBorder, 1, 1);
-	mainLayout->addWidget(m_rightTopAngleBorder, 1, 2);
 
-	mainLayout->addWidget(m_leftBorder, 2, 0);
-	mainLayout->addWidget(m_innerWidget, 2, 1);
-	mainLayout->addWidget(m_dummyLabel, 2, 1);
-	mainLayout->addWidget(m_rightBorder, 2, 2);
-	mainLayout->addWidget(m_leftBottomAngleBorder, 3, 0);
-	mainLayout->addWidget(m_bottomBorder, 3, 1);
-	mainLayout->addWidget(m_rightBottomAngleBorder, 3, 2);
+	QDockWidget* dock = new QDockWidget(tr("Log"), this);
+    dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	dock->setStyleSheet(m_settings->getDockStyle());
+	dock->setMaximumWidth(245);
+	dock->setMinimumWidth(245);
+	dock->setWidget(m_msgBrowser);
+	dockWidgetList.append(dock);
+
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+	dock->hide();
+
+
+	dock = new QDockWidget(tr("Rx Ctrl"), this);
+    dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	dock->setStyleSheet(m_settings->getDockStyle());
+	dock->setMaximumWidth(245);
+	dock->setMinimumWidth(245);
+	dock->setWidget(m_radioWidget);
+	dockWidgetList.append(dock);
+
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+	dock->hide();
+
+
+	dock = new QDockWidget(tr("Server Ctrl"), this);
+    dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	dock->setStyleSheet(m_settings->getDockStyle());
+	dock->setMaximumWidth(245);
+	dock->setMinimumWidth(245);
+	dock->setWidget(m_serverWidget);
+	dockWidgetList.append(dock);
+
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+	dock->hide();
+
+
+	dock = new QDockWidget(tr("HPSDR Ctrl"), this);
+    dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	dock->setStyleSheet(m_settings->getDockStyle());
+	dock->setMaximumWidth(245);
+	dock->setMinimumWidth(245);
+	dock->setWidget(m_hpsdrTabWidget);
+	dockWidgetList.append(dock);
+
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+	dock->hide();
+
+
+	dock = new QDockWidget(tr("Chirp Ctrl"), this);
+    dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	dock->setStyleSheet(m_settings->getDockStyle());
+	dock->setMaximumWidth(245);
+	dock->setMinimumWidth(245);
+	dock->setWidget(m_chirpWidget);
+	dockWidgetList.append(dock);
+
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+	dock->hide();
+
+
+	dock = new QDockWidget(tr("Display Ctrl"), this);
+    dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	dock->setStyleSheet(m_settings->getDockStyle());
+	dock->setMaximumWidth(245);
+	dock->setMinimumWidth(245);
+	dock->setWidget(m_graphicOptionsWidget);
+	dockWidgetList.append(dock);
+
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+	dock->hide();
+
+	// receiver and wideband panel docks
+	centralwidget->setCentralWidget(rxWidgetList.at(0));
+
+	/*rx1Dock = new QDockWidget(tr("Receiver 1"), this);
+	rx1Dock->setFeatures(QDockWidget::DockWidgetFloatable | QDockWidget::DockWidgetMovable);
+	rx1Dock->setStyleSheet(m_settings->getDockStyle());
+	rx1Dock->setWidget(rxWidgetList.at(0));
+
+	centralwidget->addDockWidget(Qt::BottomDockWidgetArea, rx1Dock);*/
 	
-	setLayout(mainLayout);*/
+	widebandDock = new QDockWidget(tr("Wideband"), this);
+	widebandDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
+    widebandDock->setFeatures(QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetFloatable | QDockWidget::DockWidgetMovable);
+	widebandDock->setStyleSheet(m_settings->getDockStyle());
+    widebandDock->setWidget(m_wbDisplay);
+	
+	centralwidget->addDockWidget(Qt::TopDockWidgetArea, widebandDock);
+	//addDockWidget(Qt::TopDockWidgetArea, widebandDock);
+	widebandDock->hide();
 
-	setLayout(m_contentLayout);
+	CHECKED_CONNECT(
+		widebandDock,
+		SIGNAL(visibilityChanged(bool)),
+		this,
+		SLOT(widebandVisibilityChanged(bool)));
+
+	for (int i = 1; i < MAX_RECEIVERS; i++) {
+
+		QString str = "Receiver ";
+		QString num = QString::number(i+1);
+		str.append(num);
+		dock = new QDockWidget(str, this);
+		//dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+		//dock->setFeatures(QDockWidget::DockWidgetFloatable | QDockWidget::DockWidgetMovable);
+		//dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+		dock->setStyleSheet(m_settings->getDockStyle());
+		//dock->setMaximumWidth(245);
+		//dock->setMinimumWidth(245);
+		dock->setWidget(rxWidgetList.at(i));
+		rxDockWidgetList.append(dock);
+
+		centralwidget->addDockWidget(Qt::BottomDockWidgetArea, dock);
+		dock->hide();
+
+		//viewMenu->addAction(dock->toggleViewAction());
+	}
+
+	for (int i = 0; i < (int)(MAX_RECEIVERS-1)/2; i++) {
+
+		centralwidget->splitDockWidget(rxDockWidgetList.at(i), rxDockWidgetList.at(i+3), Qt::Vertical);
+	}
+
+	//viewMenu->addAction(dock->toggleViewAction());
 }
 
- 
+void MainWindow::initWidebandDisplay() {
+
+	if (m_wbDisplay) {
+
+		delete m_wbDisplay;
+		m_wbDisplay = 0;
+	}
+	
+	m_wbDisplay = new QGLWidebandPanel(this);
+}
+
+/*!
+	\brief create the receiver panels.
+*/
+void MainWindow::initReceiverPanels(int rx) {
+
+	rxWidgetList.clear();
+	
+	for (int i = 0; i < rx; i++) {
+	
+		QGLReceiverPanel *rxPanel = new QGLReceiverPanel(this, i);
+		rxWidgetList.append(rxPanel);
+    }
+}
+
+void MainWindow::createStatusBar() {
+
+	statusBar()->setStyleSheet(m_settings->getStatusbarStyle());
+    statusBar()->showMessage(tr("Ready"));
+}
+
 /*!
 	\brief create the console widget.
 */
@@ -566,22 +705,27 @@ void MainWindow::createConsoleWidget() {
 
 	m_msgBrowser = new QPlainTextEdit(this);
 	m_msgBrowser->setReadOnly(true);
-	m_msgBrowser->setLineWrapMode(QPlainTextEdit::NoWrap);
+	//m_msgBrowser->setLineWrapMode(QPlainTextEdit::NoWrap);
 	m_msgBrowser->setFont(browserFont);
 	m_msgBrowser->setStyleSheet(m_settings->getMessageBoxStyle());
 }
-
  
 /*!
 	\brief create the main button group.
 */
 void MainWindow::createMainBtnGroup() {
 
+	//QStyleOptionToolBar btnToolbarStyle;
+	mainBtnToolBar = new QToolBar(tr("Main Buttons"));
+	//mainBtnToolBar = addToolBar(tr("Main Buttons"));
+	mainBtnToolBar->setMovable(false);
+	mainBtnToolBar->setStyleSheet(m_settings->getToolbarStyle());
+	
 	m_buttonWidget = new QWidget(this);
 
-	QHBoxLayout *mainBtnLayout = new QHBoxLayout(this);
-	mainBtnLayout->setSpacing(0);
-	mainBtnLayout->setMargin(0);
+	QHBoxLayout *firstBtnLayout = new QHBoxLayout(this);
+	firstBtnLayout->setSpacing(0);
+	firstBtnLayout->setMargin(0);
 	
 	startBtn = new AeroButton("Start", this);
 	startBtn->setRoundness(10);
@@ -593,7 +737,7 @@ void MainWindow::createMainBtnGroup() {
 		this, 
 		SLOT(startButtonClickedEvent()));
 
-	ctrlDisplayBtn = new AeroButton("Radio", this);
+	/*ctrlDisplayBtn = new AeroButton("Radio", this);
 	ctrlDisplayBtn->setRoundness(10);
 	ctrlDisplayBtn->setFixedSize(btn_width1, btn_height1);
 	ctrlDisplayBtn->setBtnState(AeroButton::ON);
@@ -602,17 +746,24 @@ void MainWindow::createMainBtnGroup() {
 		ctrlDisplayBtn, 
 		SIGNAL(clicked()), 
 		this, 
-		SLOT(ctrlDisplayBtnClickedEvent()));
+		SLOT(ctrlDisplayBtnClickedEvent()));*/
 
 	serverLogBtn = new AeroButton("Log", this);
 	serverLogBtn->setRoundness(10);
 	serverLogBtn->setFixedSize(btn_width1, btn_height1);
+	mainBtnList.append(serverLogBtn);
+
+	/*CHECKED_CONNECT(
+		serverLogBtn, 
+		SIGNAL(clicked()), 
+		this, 
+		SLOT(messagesBtnClickedEvent()));*/
 
 	CHECKED_CONNECT(
 		serverLogBtn, 
 		SIGNAL(clicked()), 
 		this, 
-		SLOT(messagesBtnClickedEvent()));
+		SLOT(widgetBtnClickedEvent()));
 
 	rxCtrlBtn = new AeroButton("Rx Ctrl", this);
 	rxCtrlBtn->setRoundness(10);
@@ -649,40 +800,6 @@ void MainWindow::createMainBtnGroup() {
 		SIGNAL(clicked()), 
 		this, 
 		SLOT(widgetBtnClickedEvent()));
-
-	/*alexBtn = new AeroButton("Alex", this);
-	alexBtn->setRoundness(10);
-	alexBtn->setFixedSize(btn_width1, btn_height1);
-	mainBtnList.append(alexBtn);
-
-	if (!m_settings->getAlexPresence()) {
-
-		alexBtn->setEnabled(false);
-		alexBtn->hide();
-	}
-
-	CHECKED_CONNECT(
-		alexBtn, 
-		SIGNAL(clicked()), 
-		this, 
-		SLOT(widgetBtnClickedEvent()));*/
-
-	/*pennyBtn = new AeroButton("Penelope", this);
-	pennyBtn->setRoundness(10);
-	pennyBtn->setFixedSize(btn_width1, btn_height1);
-	mainBtnList.append(pennyBtn);
-
-	if (!m_settings->getPenelopePresence() && !m_settings->getPennyLanePresence()) {
-
-		pennyBtn->setEnabled(false);
-		pennyBtn->hide();
-	}
-
-	CHECKED_CONNECT(
-		pennyBtn, 
-		SIGNAL(clicked()), 
-		this, 
-		SLOT(widgetBtnClickedEvent()));*/
 
 	chirpBtn = new AeroButton("Chirp", this);
 	chirpBtn->setRoundness(10);
@@ -761,6 +878,18 @@ void MainWindow::createMainBtnGroup() {
 		this, 
 		SLOT(widgetBtnClickedEvent()));
 
+	QColor col = QColor(90, 90, 90);
+
+	nullBtn = new AeroButton(this);
+	nullBtn->setRoundness(0);
+	nullBtn->setFixedHeight(btn_height1);
+	nullBtn->setHighlight(col);
+	nullBtn->setEnabled(false);
+
+	viewBtn = new AeroButton("View Rx", this);
+	viewBtn->setRoundness(10);
+	viewBtn->setFixedSize(btn_width1, btn_height1);
+
 	modeBtn = new AeroButton("Mode", this);
 	modeBtn->setRoundness(10);
 	modeBtn->setFixedSize(btn_width1, btn_height1);
@@ -774,42 +903,23 @@ void MainWindow::createMainBtnGroup() {
 		SIGNAL(clicked()), 
 		this, 
 		SLOT(closeMainWindow()));
-
-	QColor col = QColor(90, 90, 90);
-
-	nullBtn = new AeroButton(this);
-	nullBtn->setRoundness(0);
-	nullBtn->setFixedHeight(btn_height1);
-	nullBtn->setHighlight(col);
-	nullBtn->setEnabled(false);
-		
-	mainBtnLayout->addWidget(startBtn);
-	mainBtnLayout->addWidget(ctrlDisplayBtn);
-	mainBtnLayout->addWidget(serverLogBtn);
-	mainBtnLayout->addWidget(rxCtrlBtn);
-	mainBtnLayout->addWidget(serverBtn);
-	mainBtnLayout->addWidget(hpsdrBtn);
-	//mainBtnLayout->addWidget(alexBtn);
-	//mainBtnLayout->addWidget(pennyBtn);
-	mainBtnLayout->addWidget(chirpBtn);
-	mainBtnLayout->addWidget(wideBandBtn);
-	//mainBtnLayout->addWidget(openclBtn);
-	mainBtnLayout->addWidget(displayBtn);
-	mainBtnLayout->addWidget(nullBtn);
-	mainBtnLayout->addWidget(modeBtn);
-	mainBtnLayout->addWidget(quitBtn);
+			
+	firstBtnLayout->addWidget(startBtn);
+	//firstBtnLayout->addWidget(ctrlDisplayBtn);
+	firstBtnLayout->addWidget(serverLogBtn);
+	firstBtnLayout->addWidget(rxCtrlBtn);
+	firstBtnLayout->addWidget(serverBtn);
+	firstBtnLayout->addWidget(hpsdrBtn);
+	firstBtnLayout->addWidget(chirpBtn);
+	firstBtnLayout->addWidget(wideBandBtn);
+	//firstBtnLayout->addWidget(openclBtn);
+	firstBtnLayout->addWidget(displayBtn);
+	firstBtnLayout->addWidget(nullBtn);
+	//firstBtnLayout->addStretch();
+	firstBtnLayout->addWidget(viewBtn);
+	firstBtnLayout->addWidget(modeBtn);
+	firstBtnLayout->addWidget(quitBtn);
 	
-	m_buttonWidget->setLayout(mainBtnLayout);
-}
-
- 
-/*!
-	\brief create a second button group.
-*/
-void MainWindow::createSecondBtnGroup() {
-
-	m_secondButtonWidget = new QWidget(this);
-
 	QHBoxLayout *secondBtnLayout = new QHBoxLayout(this);
 	secondBtnLayout->setSpacing(0);
 	secondBtnLayout->setMargin(0);
@@ -916,7 +1026,7 @@ void MainWindow::createSecondBtnGroup() {
 		this, 
 		SLOT(peakHoldBtnClickedEvent()));
 	
-	lastFreqBtn = new AeroButton("last Freq", this);
+	lastFreqBtn = new AeroButton(" ", this);
 	lastFreqBtn->setRoundness(10);
 	lastFreqBtn->setFixedSize(btn_width1, btn_height3);
 	lastFreqBtn->setBtnState(AeroButton::OFF);
@@ -926,87 +1036,7 @@ void MainWindow::createSecondBtnGroup() {
 		SIGNAL(clicked()), 
 		this, 
 		SLOT(getLastFrequency()));
-
-	// rx Buttons
-	/*rxBtn = new AeroButton("Rx", this);
-	rxBtn->setRoundness(0);
-	rxBtn->setFixedSize(22, btn_height3);
-	rxBtn->setHighlight(QColor(90, 90, 90));
-	rxBtn->setEnabled(false);*/
-
-	m_rxLabel = new QLabel("Rx:", this);
-    m_rxLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
-	m_rxLabel->setStyleSheet(m_settings->getLabelStyle());
-
-	rx1Btn = new AeroButton("1", this);
-	rx1Btn->setRoundness(10);
-	rx1Btn->setFixedSize(22, btn_height3);
-	rx1Btn->setBtnState(AeroButton::ON);
-	rxBtnList.append(rx1Btn);
-	
-	CHECKED_CONNECT(
-		rx1Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setReceiver()));
-
-	rx2Btn = new AeroButton("2", this);
-	rx2Btn->setRoundness(10);
-	rx2Btn->setFixedSize(22, btn_height3);
-	rx2Btn->setBtnState(AeroButton::OFF);
-	rxBtnList.append(rx2Btn);
-
-	CHECKED_CONNECT(
-		rx2Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setReceiver()));
-
-	rx3Btn = new AeroButton("3", this);
-	rx3Btn->setRoundness(10);
-	rx3Btn->setFixedSize(22, btn_height3);
-	rx3Btn->setBtnState(AeroButton::OFF);
-	rxBtnList.append(rx3Btn);
-
-	CHECKED_CONNECT(
-		rx3Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setReceiver()));
-
-	rx4Btn = new AeroButton("4", this);
-	rx4Btn->setRoundness(10);
-	rx4Btn->setFixedSize(22, btn_height3);
-	rx4Btn->setBtnState(AeroButton::OFF);
-	rxBtnList.append(rx4Btn);
-
-	CHECKED_CONNECT(
-		rx4Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setReceiver()));
-
-	/*secondBtnLayout->addWidget(avgBtn);
-	secondBtnLayout->addWidget(gridBtn);
-	secondBtnLayout->addStretch();
-	secondBtnLayout->addWidget(m_agcGainLabel);
-	secondBtnLayout->addWidget(m_agcGainSlider);
-	secondBtnLayout->addSpacing(-50);
-	secondBtnLayout->addWidget(m_agcGainLevelLabel);
-	secondBtnLayout->addSpacing(40);
-	secondBtnLayout->addWidget(m_volumeLabel);
-	secondBtnLayout->addWidget(m_volumeSlider);
-	secondBtnLayout->addSpacing(-50);
-	secondBtnLayout->addWidget(m_volLevelLabel);
-	secondBtnLayout->addSpacing(40);
-	secondBtnLayout->addSpacing(10);
-	secondBtnLayout->addWidget(lastFreqBtn);
-	secondBtnLayout->addWidget(m_rxLabel);
-	secondBtnLayout->addWidget(rx1Btn);
-	secondBtnLayout->addWidget(rx2Btn);
-	secondBtnLayout->addWidget(rx3Btn);
-	secondBtnLayout->addWidget(rx4Btn);*/
-
+			
 	secondBtnLayout->addWidget(avgBtn);
 	secondBtnLayout->addWidget(peakHoldBtn);
 	secondBtnLayout->addWidget(gridBtn);
@@ -1020,13 +1050,18 @@ void MainWindow::createSecondBtnGroup() {
 	secondBtnLayout->addWidget(m_volLevelLabel);
 	secondBtnLayout->addSpacing(10);
 	secondBtnLayout->addWidget(lastFreqBtn);
-	secondBtnLayout->addWidget(m_rxLabel);
-	secondBtnLayout->addWidget(rx1Btn);
-	secondBtnLayout->addWidget(rx2Btn);
-	secondBtnLayout->addWidget(rx3Btn);
-	secondBtnLayout->addWidget(rx4Btn);
 	
-	m_secondButtonWidget->setLayout(secondBtnLayout);
+	QVBoxLayout *btnLayout = new QVBoxLayout(this);
+	btnLayout->setSpacing(2);
+	btnLayout->setMargin(0);
+	btnLayout->addLayout(firstBtnLayout);
+	btnLayout->addLayout(secondBtnLayout);
+
+	m_buttonWidget->setLayout(btnLayout);
+
+	mainBtnToolBar->addWidget(m_buttonWidget);
+
+	addToolBar(mainBtnToolBar);
 }
 
 /*!
@@ -1034,30 +1069,22 @@ void MainWindow::createSecondBtnGroup() {
 */
 void MainWindow::createModeMenu() {
 
-	m_modeMenu->setStyleSheet(m_settings->getMenuStyle());
-    modeBtn->setMenu(m_modeMenu);
+	modeMenu->setStyleSheet(m_settings->getMenuStyle());
+    modeBtn->setMenu(modeMenu);
 
-    //m_internalDSPModeAction = m_modeMenu->addAction(tr("internal DSP"));
-	m_qtdspModeAction = m_modeMenu->addAction(tr("QtDSP"));
-	m_dttspModeAction = m_modeMenu->addAction(tr("DttSP"));
-    m_externalDSPModeAction = m_modeMenu->addAction(tr("extDSP"));
-    m_chirpWSPRAction = m_modeMenu->addAction(tr("ChirpWSPR"));
+    m_qtdspModeAction = modeMenu->addAction(tr("QtDSP"));
+	m_dttspModeAction = modeMenu->addAction(tr("DttSP"));
+    m_externalDSPModeAction = modeMenu->addAction(tr("extDSP"));
+    m_chirpWSPRAction = modeMenu->addAction(tr("ChirpWSPR"));
 
-    //m_internalDSPModeAction->setCheckable(true);
-	m_qtdspModeAction->setCheckable(false);
+    m_qtdspModeAction->setCheckable(false);
 	m_dttspModeAction->setCheckable(true);
     m_externalDSPModeAction->setCheckable(false);
     m_chirpWSPRAction->setCheckable(false);
 	
 	setServerMode(m_serverMode);
 
-    /*CHECKED_CONNECT(
-		m_internalDSPModeAction, 
-		SIGNAL(triggered(bool)), 
-		this, 
-		SLOT(setInternalDSPMode()));*/
-
-	if (m_qtdspModeAction->isCheckable()) {
+    if (m_qtdspModeAction->isCheckable()) {
 		
 		CHECKED_CONNECT(
 			m_qtdspModeAction, 
@@ -1094,6 +1121,15 @@ void MainWindow::createModeMenu() {
 	}
 }
  
+/*!
+	\brief create the receiver's dock windows view menu.
+*/
+void MainWindow::createViewMenu() {
+
+	viewMenu->setStyleSheet(m_settings->getMenuStyle());
+    viewBtn->setMenu(viewMenu);
+}
+
 //*******************************************************************************
  
 /*!
@@ -1177,6 +1213,15 @@ void MainWindow::systemStateChanged(
 	if (!change) return;
 }
  
+
+void MainWindow::setSpectrumBuffer(int rx, const float *buffer) {
+
+	if ((m_serverMode == QSDR::DttSP || m_serverMode == QSDR::QtDSP) && !rxWidgetList.empty())
+		rxWidgetList.at(rx)->setSpectrumBuffer(buffer);
+	//else if ((m_serverMode == QSDR::ChirpWSPR || m_serverMode == QSDR::ChirpWSPRFile) && m_distDisplay != 0)
+	//	m_distDisplay->setSpectrumBuffer(buffer);
+}
+
 /*!
 	\brief closes the application and shuts down all engines.
 */
@@ -1299,13 +1344,15 @@ void MainWindow::widgetBtnClickedEvent() {
 	AeroButton *button = qobject_cast<AeroButton *>(sender());
 	int on = mainBtnList.indexOf(button);
 
-	foreach(QWidget *widget, widgetList) {
+	//foreach(QWidget *widget, widgetList) {
+	foreach(QDockWidget *dockWidget, dockWidgetList) {
 
-		int off = widgetList.indexOf(widget);
+		//int off = widgetList.indexOf(widget);
+		int off = dockWidgetList.indexOf(dockWidget);
 
-		if (widget->isVisible()) {
+		if (dockWidget->isVisible()) {
 				
-			widget->hide();
+			dockWidget->hide();
 			mainBtnList.at(off)->setBtnState(AeroButton::OFF);
 			mainBtnList.at(off)->update();
 		}
@@ -1313,7 +1360,7 @@ void MainWindow::widgetBtnClickedEvent() {
 
 			button->setBtnState(AeroButton::ON);
 			button->update();
-			widgetList.at(on)->show();
+			dockWidgetList.at(on)->show();
 		}
 	}
 }
@@ -1358,16 +1405,27 @@ void MainWindow::wideBandBtnClickedEvent() {
 
 		wideBandBtn->setBtnState(AeroButton::ON);
 		m_settings->setWideBandStatus(true);
+		widebandDock->show();
 		showMessage("[server]: wide band data on.");
 	}
 	else if (wideBandBtn->btnState() == AeroButton::ON) {
 
 		wideBandBtn->setBtnState(AeroButton::OFF);
 		m_settings->setWideBandStatus(false);
+		widebandDock->hide();
 		showMessage("[server]: wide band data off.");
 	}
 }
 
+void MainWindow::widebandVisibilityChanged(bool value) {
+
+	if (value)
+		wideBandBtn->setBtnState(AeroButton::ON);
+	else
+		wideBandBtn->setBtnState(AeroButton::OFF);
+
+	wideBandBtn->update();
+}
  
 /*!
 	\brief switch Panadapter Spectrum Averaging Filter on/off.
@@ -1442,6 +1500,7 @@ void MainWindow::getLastFrequency() {
 void MainWindow::showMessage(QString message) {
 
 	m_msgBrowser->appendPlainText(message);
+	//statusBar()->showMessage(message);
 }
 
  
@@ -1475,38 +1534,9 @@ void MainWindow::closeWidgetEvent(
 {
 	if (!sender) return;
 }
-
- 
-void MainWindow::setReceiver() {
-
-	AeroButton *button = qobject_cast<AeroButton *>(sender());
-	int rx = rxBtnList.indexOf(button);
-
-	foreach(AeroButton *btn, rxBtnList) {
-
-		btn->setBtnState(AeroButton::OFF);
-		btn->update();
-	}
-
-	rxBtnList[rx]->setBtnState(AeroButton::ON);
-	rxBtnList[rx]->update();
-	m_settings->setCurrentReceiver(rx);
-	m_dataEngine->io.currentReceiver = rx;
-	m_volumeSlider->setValue((int)(m_settings->getMainVolume(rx) * 100));
-	m_agcGainSlider->setValue((int)(m_settings->getAGCGain(rx) * 100));
-}
-
  
 void MainWindow::setReceiver(int rx) {
 
-	foreach(AeroButton *btn, rxBtnList) {
-
-		btn->setBtnState(AeroButton::OFF);
-		btn->update();
-	}
-
-	rxBtnList[rx]->setBtnState(AeroButton::ON);
-	rxBtnList[rx]->update();
 	m_settings->setCurrentReceiver(rx);
 	m_dataEngine->io.currentReceiver = rx;
 	m_volumeSlider->setValue((int)(m_settings->getMainVolume(rx) * 100));
@@ -1523,68 +1553,21 @@ void MainWindow::setNumberOfReceivers(
 ) {
 	Q_UNUSED(sender)
 
-	switch(value) {
-	
-		case 1:
-			rx1Btn->setEnabled(true);
-			rx2Btn->setEnabled(false);
-			rx3Btn->setEnabled(false);
-			rx4Btn->setEnabled(false);
-			break;
-			
-		case 2:
-			rx1Btn->setEnabled(true);
-			rx2Btn->setEnabled(true);
-			rx3Btn->setEnabled(false);
-			rx4Btn->setEnabled(false);
-			break;
+	viewMenu->clear();
+	for (int i = 0; i < value-1; i++) {
+		
+		viewMenu->addAction(rxDockWidgetList.at(i)->toggleViewAction());
+		if (!rxDockWidgetList.at(i)->isVisible())
+			rxDockWidgetList.at(i)->show();
+	}
 
-		case 3:
-			rx1Btn->setEnabled(true);
-			rx2Btn->setEnabled(true);
-			rx3Btn->setEnabled(true);
-			rx4Btn->setEnabled(false);
-			break;
-
-		case 4:
-			rx1Btn->setEnabled(true);
-			rx2Btn->setEnabled(true);
-			rx3Btn->setEnabled(true);
-			rx4Btn->setEnabled(true);
-			break;
+	for (int i = value-1; i < MAX_RECEIVERS-1; i++) {
+		
+		if (rxDockWidgetList.at(i)->isVisible())
+			rxDockWidgetList.at(i)->hide();
 	}
 }
 
- 
-
-//void MainWindow::noOfReceiversChanged() {
-//
-
-//
-//	if (rx1Btn->btnState() == AeroButton::ON) {
-//
-//		m_settings->setReceivers(this, 1);
-//		emit changeNoOfReceivers(this, 1);
-//	}
-//
-//	if (rx2Btn->btnState() == AeroButton::ON) {
-//
-//		m_settings->setReceivers(this, 2);
-//		emit changeNoOfReceivers(this, 2);
-//	}
-//
-//	if (rx3Btn->btnState() == AeroButton::ON) {
-//
-//		m_settings->setReceivers(this, 3);
-//		emit changeNoOfReceivers(this, 3);
-//	}
-//
-//	if (rx4Btn->btnState() == AeroButton::ON) {
-//
-//		m_settings->setReceivers(this, 4);
-//		emit changeNoOfReceivers(this, 4);
-//	}
-//}
  
 /*!
 	\brief set the main volume.
@@ -1963,6 +1946,12 @@ void MainWindow::showNetworkIODialog() {
 	m_netIODialog->exec();
 }
 
+void MainWindow::showWarningDialog(const QString &str) {
+
+	m_warningDialog->setWarningMessage(str);
+	m_warningDialog->exec();
+}
+
 void MainWindow::addNetworkIOComboBoxEntry(QString str) {
 
 	m_netIODialog->addDeviceComboBoxItem(str);
@@ -1980,8 +1969,7 @@ void MainWindow::initialMessage() {
 
 	QString str = m_settings->versionStr();
 	str.prepend("cuSDR ");
-	//str.append(". OpenCL enabled HPSDR Front end (C) 2010-2012 Hermann von Hasseln, DL3HVH.\n");
-	str.append(". OpenGL enabled HPSDR Front end (C) 2010-2012 Hermann von Hasseln, DL3HVH.\n");
+	str.append(". \nOpenGL enabled HPSDR Front end \n(C) 2010-2012 Hermann von Hasseln, DL3HVH.\n");
 	m_msgBrowser->appendPlainText(str);
 	m_msgBrowser->appendPlainText("");
 }
@@ -2394,7 +2382,8 @@ void MainWindow::resizeEvent(
 	
 	//QTimer::singleShot(10, this, SLOT(getRegion()));
 	//m_resizeFrame = true;
-	
+	//displayPanelToolBar->updateGeometry();
+	m_oglDisplayPanel->update();
 	QWidget::resizeEvent(event);
 }
  
@@ -2409,18 +2398,6 @@ void MainWindow::closeEvent(
 	if (m_settings->mainPower())
 		startButtonClickedEvent();
 
-	foreach(QWidget *widget, widgetList) {
-
-		int off = widgetList.indexOf(widget);
-
-		if (widget->isVisible()) {
-				
-			widget->hide();
-			mainBtnList.at(off)->setBtnState(AeroButton::OFF);
-			mainBtnList.at(off)->update();
-		}
-	}
-	widgetList.clear();
 	mainBtnList.clear();
 
 	if (m_serverWidget) {
@@ -2573,8 +2550,8 @@ NetworkIODialog::NetworkIODialog(QWidget *parent)
     :   QDialog(parent)
 	,	m_settings(Settings::instance())
 {
-	int btn_width = 74;
-	int btn_height = 18;
+	int btnWidth = 74;
+	int btnHeight = 18;
 
 	m_deviceCards = m_settings->getMetisCardsList();
 
@@ -2621,7 +2598,7 @@ NetworkIODialog::NetworkIODialog(QWidget *parent)
 
 	AeroButton* okBtn = new AeroButton("Ok", this);
 	okBtn->setRoundness(10);
-	okBtn->setFixedSize(btn_width, btn_height);
+	okBtn->setFixedSize(btnWidth, btnHeight);
 	CHECKED_CONNECT(
 		okBtn, 
 		SIGNAL(clicked()), 
@@ -2630,7 +2607,7 @@ NetworkIODialog::NetworkIODialog(QWidget *parent)
 
 	AeroButton* cancelBtn = new AeroButton("Cancel", this);
 	cancelBtn->setRoundness(10);
-	cancelBtn->setFixedSize(btn_width, btn_height);
+	cancelBtn->setFixedSize(btnWidth, btnHeight);
 	CHECKED_CONNECT(
 		cancelBtn, 
 		SIGNAL(clicked()), 
@@ -2654,7 +2631,7 @@ void NetworkIODialog::okBtnClicked() {
 
 	if (m_deviceCards.length() > 0) {
 		
-		m_settings->setCurrentMetisCard(m_deviceCards.at(m_deviceComboBox->currentIndex()));
+		m_settings->setCurrentHPSDRDevice(m_deviceCards.at(m_deviceComboBox->currentIndex()));
 		NETWORKDIALOG_DEBUG << "Network device at: " << m_deviceCards.at(m_deviceComboBox->currentIndex()).ip_address.toString() << " selected.";
 		accept();
 	}
@@ -2671,4 +2648,115 @@ void NetworkIODialog::addDeviceComboBoxItem(QString str) {
 void NetworkIODialog::clearDeviceComboBoxItem() {
 
 	m_deviceComboBox->clear();
+}
+
+
+//***************************************************************************
+// WarningDialog class
+
+WarningDialog::WarningDialog(QWidget *parent)
+    :   QDialog(parent)
+	,	m_settings(Settings::instance())
+	,	m_btnWidth(74)
+	,	m_btnHeight(18)
+{
+	setWindowModality(Qt::NonModal);
+	setWindowTitle("Warning");
+	setWindowOpacity(0.9);
+	setStyleSheet(m_settings->getDialogStyle());
+
+	setMouseTracking(true);
+
+	m_titleFont.setStyleStrategy(QFont::PreferAntialias);
+	m_titleFont.setFixedPitch(true);
+	m_titleFont.setBold(true);
+	m_titleFont.setPixelSize(13);
+	m_titleFont.setFamily("Arial");
+	m_titleFont.setBold(true);
+	
+	//m_warningIcon.QPixmap::fromImage(QImage(QLatin1String(":/img/warning.png")), Qt::ColorOnly);
+
+	m_warningLabel = new QLabel("", this);
+		
+	okBtn = new AeroButton("Ok", this);
+	okBtn->setRoundness(10);
+	okBtn->setFixedSize(m_btnWidth, m_btnHeight);
+
+	CHECKED_CONNECT(
+		okBtn, 
+		SIGNAL(clicked()), 
+		this, 
+		SLOT(okBtnClicked()));
+}
+
+WarningDialog::~WarningDialog() {
+}
+
+void WarningDialog::paintEvent(QPaintEvent *) {
+
+	QPainter p(this);
+	p.setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing | QPainter::TextAntialiasing, true);
+
+	//QRect titlebar_rect(0, 0, width(), height());
+
+	/*QLinearGradient titlebarGrad(0, 0, 0, 1);
+	titlebarGrad.setCoordinateMode(QGradient::ObjectBoundingMode);
+	titlebarGrad.setSpread(QGradient::PadSpread);
+	titlebarGrad.setColorAt(0, QColor(110, 110, 110));
+	titlebarGrad.setColorAt(0.45, QColor(80, 80, 80));
+	titlebarGrad.setColorAt(0.55, QColor(56, 56, 65));
+	titlebarGrad.setColorAt(1, QColor(40, 40, 40));*/
+
+	// draw background rect
+	/*p.setPen(Qt::NoPen);
+	p.setBrush(QBrush(titlebarGrad));
+	p.drawRect(titlebar_rect);
+	p.setPen(QColor(255, 255, 255, 140));
+	p.drawLine(1, titlebar_rect.top(), width() - 2, titlebar_rect.top());
+	p.setPen(QColor(255, 255, 255, 30));
+	p.drawLine(1, titlebar_rect.bottom() - 2, width() - 2, titlebar_rect.bottom() - 2);
+	p.setPen(QColor(0, 0, 0, 255));
+	p.drawLine(0, titlebar_rect.bottom(), width(), titlebar_rect.bottom());*/
+
+	QPixmap warningIcon = QPixmap::fromImage(QImage(QLatin1String(":/img/warning.png")), Qt::ColorOnly);
+	if (!warningIcon.isNull()) p.drawPixmap(13, 5, 16, 16, warningIcon);
+		
+	// draw text
+	p.setFont(m_titleFont);
+	p.setPen(QColor(95, 95, 95, 255));
+
+	// warning msg
+	p.drawText(
+		40, 6, 
+		m_msgFontWidth, m_msgFontHeight, 
+		Qt::TextSingleLine | Qt::TextDontClip | Qt::AlignVCenter | Qt::AlignLeft, 
+		m_message);
+
+	p.setPen(QColor(235, 235, 235, 255));
+	p.drawText(
+		39, 5, 
+		m_msgFontWidth, m_msgFontHeight, 
+		Qt::TextSingleLine | Qt::TextDontClip | Qt::AlignVCenter | Qt::AlignLeft, 
+		m_message);
+
+	okBtn->move((width() - m_btnWidth)/2, 30);
+
+	p.end();
+}
+
+void WarningDialog::setWarningMessage(const QString &msg) {
+
+	m_message = msg;
+	
+	QFontMetrics tfm(m_titleFont);
+	m_msgFontWidth = tfm.width(m_message);
+	m_msgFontHeight = tfm.height();
+
+	this->setFixedWidth(m_msgFontWidth + 60);
+	this->setFixedHeight(60);
+}
+
+void WarningDialog::okBtnClicked() {
+
+	accept();
 }

@@ -100,6 +100,7 @@ GraphicOptionsWidget::GraphicOptionsWidget(QWidget *parent)
 	createWaterfallSpectrumOptions();
 	createSMeterOptions();
 	createColorChooserWidget();
+	createCallSignEditor();
 
 	QBoxLayout *mainLayout = new QBoxLayout(QBoxLayout::TopToBottom, this);
 	mainLayout->setSpacing(5);
@@ -131,11 +132,18 @@ GraphicOptionsWidget::GraphicOptionsWidget(QWidget *parent)
 	hbox4->addWidget(m_colorChooserWidget);
 	hbox4->addStretch();
 
+	QHBoxLayout *hbox5 = new QHBoxLayout;
+	hbox5->setSpacing(0);
+	hbox5->setMargin(0);
+	hbox5->addStretch();
+	hbox5->addWidget(m_callSignEditor);
+	hbox5->addStretch();
+
 	mainLayout->addLayout(hbox1);
 	mainLayout->addLayout(hbox2);
 	mainLayout->addLayout(hbox3);
 	mainLayout->addLayout(hbox4);
-	//mainLayout->addLayout(hbox5);
+	mainLayout->addLayout(hbox5);
 	mainLayout->addStretch();
 	setLayout(mainLayout);
 
@@ -488,7 +496,7 @@ void GraphicOptionsWidget::createPanSpectrumOptions() {
 	hbox3->addWidget(m_averagingFilterLabel);
 	hbox3->addStretch();
 	//hbox3->addWidget(m_avgBtn);
-	hbox3->addWidget(m_averagingFilterSpinBox);	
+	hbox3->addWidget(m_averagingFilterSpinBox);
 
 	QHBoxLayout *hbox4 = new QHBoxLayout;
 	hbox4->setSpacing(4);
@@ -1012,6 +1020,48 @@ void GraphicOptionsWidget::createColorChooserWidget() {
 	m_colorChooserWidget->setFont(QFont("Arial", 8));
 }
 
+void GraphicOptionsWidget::createCallSignEditor() {
+
+	callSignLineEdit = new QLineEdit(this);
+	callSignLineEdit->setStyleSheet(m_settings->getLineEditStyle());
+	callSignLineEdit->setText(m_settings->callsign());
+
+	CHECKED_CONNECT(
+		callSignLineEdit, 
+		SIGNAL(textEdited(const QString &)), 
+		this, 
+		SLOT(callSignTextChanged(const QString &)));
+
+	m_setCallSignBtn = new AeroButton("Set", this);
+	m_setCallSignBtn->setRoundness(0);
+	m_setCallSignBtn->setFixedSize(btn_width, btn_height);
+	
+	CHECKED_CONNECT(
+		m_setCallSignBtn, 
+		SIGNAL(clicked()), 
+		this, 
+		SLOT(callSignChanged()));
+
+	QHBoxLayout *hbox1 = new QHBoxLayout;
+	hbox1->setSpacing(4);
+	//hbox1->addStretch();
+	hbox1->addWidget(callSignLineEdit);
+	hbox1->addStretch();
+	hbox1->addWidget(m_setCallSignBtn);
+	//hbox1->addWidget(m_sMeterB);
+
+	QVBoxLayout *vbox = new QVBoxLayout;
+	vbox->setSpacing(6);
+	vbox->addLayout(hbox1);
+	//vbox->addLayout(hbox2);
+
+	m_callSignEditor = new QGroupBox(tr("Call Sign Editor"), this);
+	m_callSignEditor->setMinimumWidth(m_minimumGroupBoxWidth);
+	m_callSignEditor->setLayout(vbox);
+	m_callSignEditor->setStyleSheet(m_settings->getWidgetStyle());
+	m_callSignEditor->setFont(QFont("Arial", 8));
+}
+
 void GraphicOptionsWidget::panModeChanged() {
 
 	AeroButton *button = qobject_cast<AeroButton *>(sender());
@@ -1337,4 +1387,14 @@ void GraphicOptionsWidget::setCurrentReceiver(int rx) {
 
 	if (m_currentReceiver == rx) return;
 	m_currentReceiver = rx;
+}
+
+void GraphicOptionsWidget::callSignTextChanged(const QString& text) {
+
+	m_callSingText = text;
+}
+
+void GraphicOptionsWidget::callSignChanged() {
+
+	m_settings->setCallsign(m_callSingText);
 }

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_graphicOptionsWidget.h'
 **
-** Created: Sun 22. Jul 16:54:10 2012
+** Created: Tue 31. Jul 11:33:50 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_GraphicOptionsWidget[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      26,   14, // methods
+      28,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -59,6 +59,8 @@ static const uint qt_meta_data_GraphicOptionsWidget[] = {
      766,   49,   21,   21, 0x08,
      787,   49,   21,   21, 0x08,
      831,  818,   21,   21, 0x08,
+     868,  863,   21,   21, 0x08,
+     897,   21,   21,   21, 0x08,
 
        0        // eod
 };
@@ -86,6 +88,8 @@ static const char qt_meta_stringdata_GraphicOptionsWidget[] = {
     "fpsValueChanged(int)\0"
     "averagingFilterCntChanged(int)\0"
     "sender,value\0sampleRateChanged(QObject*,int)\0"
+    "text\0callSignTextChanged(QString)\0"
+    "callSignChanged()\0"
 };
 
 void GraphicOptionsWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -122,6 +126,8 @@ void GraphicOptionsWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
         case 23: _t->fpsValueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 24: _t->averagingFilterCntChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 25: _t->sampleRateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 26: _t->callSignTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 27: _t->callSignChanged(); break;
         default: ;
         }
     }
@@ -159,9 +165,9 @@ int GraphicOptionsWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 26)
+        if (_id < 28)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 26;
+        _id -= 28;
     }
     return _id;
 }

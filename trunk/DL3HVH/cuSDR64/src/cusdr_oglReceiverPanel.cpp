@@ -88,6 +88,8 @@ QGLReceiverPanel::QGLReceiverPanel(QWidget *parent, int rx)
 {
 	QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 
+	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
 	setAutoBufferSwap(true);
 	setAutoFillBackground(false);
 	
@@ -297,6 +299,15 @@ QGLReceiverPanel::~QGLReceiverPanel() {
 		specAv_queue.dequeue();
 }
 
+QSize QGLReceiverPanel::minimumSizeHint() const {
+	
+	if (m_receiver == 0)
+		return QSize(width(), 250);
+	else
+		return QSize(250, 120);
+	//return QSize(width(), height());
+}
+
 QSize QGLReceiverPanel::sizeHint() const {
 	
 	return QSize(width(), height());
@@ -470,7 +481,7 @@ void QGLReceiverPanel::paintGL() {
 
 			//if (freqChangeTimer.elapsed() > 50)  m_spectrumAveraging = m_spectrumAveragingOld;
 
-			if (m_resizeTime.elapsed() > 100 || m_dataEngineState == QSDR::DataEngineDown)
+			//if (m_resizeTime.elapsed() > 100 || m_dataEngineState == QSDR::DataEngineDown)
 				paintReceiverDisplay();
 			
 			break;

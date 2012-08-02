@@ -109,9 +109,6 @@
     <ClCompile Include="src\cusdr_oglWidebandPanel.cpp">
       <Filter>Source Dateien\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="src\cusdr_oglWidget.cpp">
-      <Filter>Source Dateien\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="src\cusdr_audio_engine.cpp">
       <Filter>Source Dateien\Audio Engine</Filter>
     </ClCompile>
@@ -254,12 +251,6 @@
       <Filter>Generierte Dateien\Debug</Filter>
     </ClCompile>
     <ClCompile Include="bld\moc\Release\moc_cusdr_pennyWidget.cpp">
-      <Filter>Generierte Dateien\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="bld\moc\Debug\moc_cusdr_oglWidget.cpp">
-      <Filter>Generierte Dateien\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="bld\moc\Release\moc_cusdr_oglWidget.cpp">
       <Filter>Generierte Dateien\Release</Filter>
     </ClCompile>
     <ClCompile Include="bld\moc\Debug\moc_cusdr_oglWidebandPanel.cpp">
@@ -436,9 +427,6 @@
     <ClCompile Include="bld\moc\Release\moc_cusdr_agc.cpp">
       <Filter>Generierte Dateien\Release</Filter>
     </ClCompile>
-    <ClCompile Include="res\qrc_cusdr.cpp">
-      <Filter>Generierte Dateien</Filter>
-    </ClCompile>
     <ClCompile Include="bld\moc\Debug\moc_cusdr_dualModeAverager.cpp">
       <Filter>Generierte Dateien\Debug</Filter>
     </ClCompile>
@@ -447,6 +435,9 @@
     </ClCompile>
     <ClCompile Include="src\cusdr_dualModeAverager.cpp">
       <Filter>Source Dateien\DSP Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="bld\rcc\qrc_cusdr.cpp">
+      <Filter>Generierte Dateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -514,9 +505,6 @@
       <Filter>Header Dateien\OpenGL</Filter>
     </CustomBuild>
     <CustomBuild Include="src\cusdr_oglWidebandPanel.h">
-      <Filter>Header Dateien\OpenGL</Filter>
-    </CustomBuild>
-    <CustomBuild Include="src\cusdr_oglWidget.h">
       <Filter>Header Dateien\OpenGL</Filter>
     </CustomBuild>
     <CustomBuild Include="src\cusdr_oglText.h">
@@ -625,181 +613,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\img\close.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\close_high.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\hide.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\hide_high.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\minimize.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\minimize_high.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\maximize.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\maximize_high.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\leftTop.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\leftMiddle.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\leftBottom.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\left.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\rightTop.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\rightMiddle.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\rightBottom.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\right.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\topBorder.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\bottomBorder.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\drawer.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\left_arrow.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\right_arrow.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\up_arrow.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\down_arrow.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\cusdrLogo.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\cuSDR_32.ico">
-      <Filter>Resource Dateien</Filter>
-    </None>
     <None Include="Resources\img\cuSDR_64.ico">
       <Filter>Resource Dateien</Filter>
     </None>
-    <None Include="Resources\img\cusdrLogo2.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\cusdr4.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\img\hpsdr4.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="Resources\cl\vectoradd.cl">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\close.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\close_high.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\hide.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\hide_high.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\minimize.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\minimize_high.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\maximize.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\maximize_high.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\leftTop.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\leftMiddle.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\leftBottom.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\left.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\rightTop.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\rightMiddle.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\rightBottom.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\right.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\topBorder.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\bottomBorder.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\drawer.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\left_arrow.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\right_arrow.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\up_arrow.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\down_arrow.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\cusdrLogo.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
     <None Include="res\img\cuSDR_32.ico">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\cuSDR_64.ico">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\cusdrLogo2.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\cusdr4.png">
-      <Filter>Resource Dateien</Filter>
-    </None>
-    <None Include="res\img\hpsdr4.png">
       <Filter>Resource Dateien</Filter>
     </None>
     <None Include="res\cl\vectoradd.cl">

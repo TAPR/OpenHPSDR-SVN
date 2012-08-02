@@ -1,27 +1,9 @@
 <RCC>
-    <qresource prefix="/">
-        <file>img/close.png</file>
-        <file>img/close_high.png</file>
-        <file>img/hide.png</file>
-        <file>img/hide_high.png</file>
-        <file>img/minimize.png</file>
-        <file>img/minimize_high.png</file>
-        <file>img/maximize.png</file>
-        <file>img/maximize_high.png</file>
-        <file>img/leftTop.png</file>
-        <file>img/leftMiddle.png</file>
-        <file>img/leftBottom.png</file>
-        <file>img/left.png</file>
-        <file>img/rightTop.png</file>
-        <file>img/rightMiddle.png</file>
-        <file>img/rightBottom.png</file>
-        <file>img/right.png</file>
-        <file>img/topBorder.png</file>
-        <file>img/bottomBorder.png</file>
-        <file>img/drawer.png</file>
+  <qresource  prefix="/">
         <file>img/left_arrow.png</file>
         <file>img/right_arrow.png</file>
         <file>img/up_arrow.png</file>
+        <file>img/warning.png</file>
         <file>img/down_arrow.png</file>
         <file>img/cusdrLogo.png</file>
         <file>img/cuSDR_32.ico</file>

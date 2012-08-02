@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cusdr_oglReceiverPanel.h'
 **
-** Created: Sun 22. Jul 16:54:08 2012
+** Created: Mon 30. Jul 19:05:42 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_QGLReceiverPanel[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      26,   14, // methods
+      27,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -38,27 +38,28 @@ static const uint qt_meta_data_QGLReceiverPanel[] = {
 
  // slots: signature, parameters, type, tag, flags
      124,   17,  118,   17, 0x0a,
-     142,  135,   17,   17, 0x0a,
-     195,  174,   17,   17, 0x0a,
-     261,  232,   17,   17, 0x08,
-     394,  367,   17,   17, 0x08,
-     485,   17,   17,   17, 0x08,
-     510,  504,   17,   17, 0x08,
-     547,  534,   17,   17, 0x08,
-     590,  574,   17,   17, 0x08,
-     637,  534,   17,   17, 0x08,
-     666,  661,   17,   17, 0x08,
-     693,  504,   17,   17, 0x08,
-     720,  504,   17,   17, 0x08,
-     749,  504,   17,   17, 0x08,
-     772,  504,   17,   17, 0x08,
-     796,   17,   17,   17, 0x08,
-     820,  818,   17,   17, 0x08,
-     845,  838,   17,   17, 0x08,
-     881,  534,   17,   17, 0x08,
-     922,  913,   17,   17, 0x08,
-     948,  913,   17,   17, 0x08,
-     979,  913,   17,   17, 0x08,
+     142,   17,  118,   17, 0x0a,
+     160,  153,   17,   17, 0x0a,
+     213,  192,   17,   17, 0x0a,
+     279,  250,   17,   17, 0x08,
+     412,  385,   17,   17, 0x08,
+     503,   17,   17,   17, 0x08,
+     528,  522,   17,   17, 0x08,
+     565,  552,   17,   17, 0x08,
+     608,  592,   17,   17, 0x08,
+     655,  552,   17,   17, 0x08,
+     684,  679,   17,   17, 0x08,
+     711,  522,   17,   17, 0x08,
+     738,  522,   17,   17, 0x08,
+     767,  522,   17,   17, 0x08,
+     790,  522,   17,   17, 0x08,
+     814,   17,   17,   17, 0x08,
+     838,  836,   17,   17, 0x08,
+     863,  856,   17,   17, 0x08,
+     899,  552,   17,   17, 0x08,
+     940,  931,   17,   17, 0x08,
+     966,  931,   17,   17, 0x08,
+     997,  931,   17,   17, 0x08,
 
        0        // eod
 };
@@ -67,7 +68,8 @@ static const char qt_meta_stringdata_QGLReceiverPanel[] = {
     "QGLReceiverPanel\0\0sender\0showEvent(QObject*)\0"
     "closeEvent(QObject*)\0msg\0messageEvent(QString)\0"
     "x,y\0coordChanged(int,int)\0QSize\0"
-    "sizeHint()\0buffer\0setSpectrumBuffer(const float*)\0"
+    "minimumSizeHint()\0sizeHint()\0buffer\0"
+    "setSpectrumBuffer(const float*)\0"
     "sender,value,rx,freq\0"
     "setFrequency(QObject*,bool,int,long)\0"
     "sender,err,hwmode,mode,state\0"
@@ -103,29 +105,31 @@ void QGLReceiverPanel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 1: _t->closeEvent((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
         case 2: _t->messageEvent((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 3: _t->coordChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 4: { QSize _r = _t->sizeHint();
+        case 4: { QSize _r = _t->minimumSizeHint();
             if (_a[0]) *reinterpret_cast< QSize*>(_a[0]) = _r; }  break;
-        case 5: _t->setSpectrumBuffer((*reinterpret_cast< const float*(*)>(_a[1]))); break;
-        case 6: _t->setFrequency((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< long(*)>(_a[4]))); break;
-        case 7: _t->systemStateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDR::_Error(*)>(_a[2])),(*reinterpret_cast< QSDR::_HWInterfaceMode(*)>(_a[3])),(*reinterpret_cast< QSDR::_ServerMode(*)>(_a[4])),(*reinterpret_cast< QSDR::_DataEngineState(*)>(_a[5]))); break;
-        case 8: _t->graphicModeChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDRGraphics::_Panadapter(*)>(_a[2])),(*reinterpret_cast< QSDRGraphics::_WaterfallColorScheme(*)>(_a[3]))); break;
-        case 9: _t->setupConnections(); break;
-        case 10: _t->setCurrentReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->setCoupledRx((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 12: _t->setFilterFrequencies((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< qreal(*)>(_a[3])),(*reinterpret_cast< qreal(*)>(_a[4]))); break;
-        case 13: _t->setPreamp((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 14: _t->setupDisplayRegions((*reinterpret_cast< QSize(*)>(_a[1]))); break;
-        case 15: _t->setSpectrumAveraging((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 16: _t->setSpectrumAveragingCnt((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 17: _t->setPanGridStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 18: _t->setPeakHoldStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 19: _t->setPanadapterColors(); break;
-        case 20: _t->getRegion((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
-        case 21: _t->freqRulerPositionChanged((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 22: _t->sampleRateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 23: _t->setWaterfallTime((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 24: _t->setWaterfallOffesetLo((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 25: _t->setWaterfallOffesetHi((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 5: { QSize _r = _t->sizeHint();
+            if (_a[0]) *reinterpret_cast< QSize*>(_a[0]) = _r; }  break;
+        case 6: _t->setSpectrumBuffer((*reinterpret_cast< const float*(*)>(_a[1]))); break;
+        case 7: _t->setFrequency((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< long(*)>(_a[4]))); break;
+        case 8: _t->systemStateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDR::_Error(*)>(_a[2])),(*reinterpret_cast< QSDR::_HWInterfaceMode(*)>(_a[3])),(*reinterpret_cast< QSDR::_ServerMode(*)>(_a[4])),(*reinterpret_cast< QSDR::_DataEngineState(*)>(_a[5]))); break;
+        case 9: _t->graphicModeChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< QSDRGraphics::_Panadapter(*)>(_a[2])),(*reinterpret_cast< QSDRGraphics::_WaterfallColorScheme(*)>(_a[3]))); break;
+        case 10: _t->setupConnections(); break;
+        case 11: _t->setCurrentReceiver((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: _t->setCoupledRx((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 13: _t->setFilterFrequencies((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< qreal(*)>(_a[3])),(*reinterpret_cast< qreal(*)>(_a[4]))); break;
+        case 14: _t->setPreamp((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 15: _t->setupDisplayRegions((*reinterpret_cast< QSize(*)>(_a[1]))); break;
+        case 16: _t->setSpectrumAveraging((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 17: _t->setSpectrumAveragingCnt((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: _t->setPanGridStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 19: _t->setPeakHoldStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 20: _t->setPanadapterColors(); break;
+        case 21: _t->getRegion((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
+        case 22: _t->freqRulerPositionChanged((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 23: _t->sampleRateChanged((*reinterpret_cast< QObject*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 24: _t->setWaterfallTime((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 25: _t->setWaterfallOffesetLo((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 26: _t->setWaterfallOffesetHi((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
     }
@@ -163,9 +167,9 @@ int QGLReceiverPanel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 26)
+        if (_id < 27)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 26;
+        _id -= 27;
     }
     return _id;
 }
