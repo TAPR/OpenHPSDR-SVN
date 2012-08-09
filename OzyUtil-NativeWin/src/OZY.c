@@ -3,6 +3,8 @@
  * Copyright (C) 2007 Bill Tracey, KD5TFD  
  * Copyright (C) 2006 Philip A. Covington, N8VB
  * Copyright (C) 2007 Bob Campbell, VK4XV 
+ * Copyright (C) 2012 George Byrkit, K9TRV: add manifest to get 'administrator' privilege on Vista, Win7 and Win8.
+ *						Update 'unsafe' functions
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +23,7 @@
 
 
 /* 
- * This is an adapatation of Phil Covingtons' C# USB support routines to C for 
+ * This is an adaptation of Phil Covington's C# USB support routines to C for 
  * use on Linux
  * 
  * Author: Bill Tracey (bill@ewjt.com) 
@@ -64,12 +66,21 @@ int HPSDR_LoadFPGA(usb_dev_handle *devh, char *rbf_fnamep) {
 	size_t total_bytes_xferd = 0;
 	size_t rc; 
 		
-	rbffile = fopen(rbf_fnamep, "rb"); 
-	if ( rbffile == NULL ) {
+#if defined (_MSC_VER) && (_MSC_VER >= 1020)
+	// microsoft 'safe' versions to preclude compile warnings (and be 'safe')
+	errno_t err = fopen_s(&rbffile, rbf_fnamep, "rb"); 
+	if ( (err != 0) || (rbffile == NULL) ) {
 		fprintf(stderr, "Failed to open: \'%s\'\n", rbf_fnamep); 
 		return 0; 
 	}
-	
+#else
+	rbffile = fopen(rbf_fnamep, "rb"); 
+	if (rbffile == NULL) {
+		fprintf(stderr, "Failed to open: \'%s\'\n", rbf_fnamep); 
+		return 0; 
+	}
+#endif
+
 	rc = usb_control_msg(devh, VENDOR_REQ_TYPE_OUT, VENDOR_REQ_FPGA_LOAD, 
 			             0, FL_BEGIN, NULL, 0, USB_TIMEOUT_MSECS); 
 	
@@ -134,7 +145,8 @@ int HPSDR_LoadFPGA(usb_dev_handle *devh, char *rbf_fnamep) {
                 if (ret > 0)
                     return ret;
                 else
-                    return 0;		}
+                    return 0;
+		}
 	}
 
 

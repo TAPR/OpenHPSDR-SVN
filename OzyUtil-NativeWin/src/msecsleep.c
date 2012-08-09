@@ -1,6 +1,7 @@
 /* HPSDR-USB - High Performance Software Defined Radio, USB support 
  *  
  * Copyright (C) 2009 Bill Tracey, KD5TFD  
+ * Copyright (C) 2012 George Byrkit, K9TRV: add manifest to get 'administrator' privilege on Vista, Win7 and Win8
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +25,7 @@
 #include <windows.h> 
 #include <stdlib.h> 
 
-unsigned char *copyright = "msecsleep - High Performance Software Defined Radio, USB support Copyright (C) 2009 Bill Tracey, KD5TFD";
+char *copyright = "msecsleep - High Performance Software Defined Radio, USB support Copyright (C) 2009 Bill Tracey, KD5TFD";
 
 void usageAndExit() { 
 	printf("usage: msecsleep N\n    N is number of millisecs to sleep.\n"); 
