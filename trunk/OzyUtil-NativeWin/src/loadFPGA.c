@@ -2,6 +2,7 @@
  *  
  * Copyright (C) 2007 Bill Tracey, KD5TFD  
  * Copyright (C) 2006 Philip A. Covington, N8VB
+ * Copyright (C) 2012 George Byrkit, K9TRV: add manifest to get 'administrator' privilege on Vista, Win7 and Win8
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +21,7 @@
 
 
 /* 
- * This is an adapatation of Phil Covingtons' C# USB support routines to C for 
+ * This is an adaptation of Phil Covington's C# USB support routines to C for 
  * use on Linux
  * 
  * Author: Bill Tracey (bill@ewjt.com) 
@@ -32,7 +33,7 @@
 #include <usb.h> 
 #include "hpsdrusb.h" 
 
-unsigned char *copyright = "HPSDR-USB - High Performance Software Defined Radio, USB support Copyright (C) 2007 Bill Tracey, KD5TFD  Copyright (C) 2006 Philip A. Covington, N8VB";
+char *copyright = "HPSDR-USB - High Performance Software Defined Radio, USB support Copyright (C) 2007 Bill Tracey, KD5TFD  Copyright (C) 2006 Philip A. Covington, N8VB";
 		
 
 void printRC(char *strp, int rc) { 
@@ -68,7 +69,6 @@ void parseArgs(int argc, char *argv[]) {
 
 
 int main(int argc, char *argv[]) { 
-  int i; 
   int rc; 
   struct usb_bus *busp; 
   struct usb_device *devp; 

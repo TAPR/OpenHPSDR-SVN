@@ -1,47 +1,37 @@
-Microsoft Visual Studio Solution File, Format Version 8.00
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadFW", "loadFW\loadFW.vcproj", "{C9882C23-D62C-4BFC-93DF-9D4D591778F0}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadFW", "loadFW\loadFW.vcxproj", "{C9882C23-D62C-4BFC-93DF-9D4D591778F0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadFPGA", "loadFPGA\loadFPGA.vcproj", "{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadFPGA", "loadFPGA\loadFPGA.vcxproj", "{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "writeI2C", "writeI2C\writeI2C.vcproj", "{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "writeI2C", "writeI2C\writeI2C.vcxproj", "{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msecsleep", "msecsleep\msecsleep.vcproj", "{0EAF5968-AD93-43BF-B3F6-5CF9E5579616}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msecsleep", "msecsleep\msecsleep.vcxproj", "{0EAF5968-AD93-43BF-B3F6-5CF9E5579616}"
 EndProject
 Global
-	GlobalSection(SolutionConfiguration) = preSolution
-		Debug = Debug
-		Release = Release
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
 	EndGlobalSection
-	GlobalSection(ProjectDependencies) = postSolution
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Debug|Win32.Build.0 = Debug|Win32
+		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Release|Win32.ActiveCfg = Release|Win32
+		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Release|Win32.Build.0 = Release|Win32
+		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Debug|Win32.Build.0 = Debug|Win32
+		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Release|Win32.ActiveCfg = Release|Win32
+		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Release|Win32.Build.0 = Release|Win32
+		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Debug|Win32.Build.0 = Debug|Win32
+		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Release|Win32.ActiveCfg = Release|Win32
+		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Release|Win32.Build.0 = Release|Win32
+		{0EAF5968-AD93-43BF-B3F6-5CF9E5579616}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0EAF5968-AD93-43BF-B3F6-5CF9E5579616}.Debug|Win32.Build.0 = Debug|Win32
+		{0EAF5968-AD93-43BF-B3F6-5CF9E5579616}.Release|Win32.ActiveCfg = Release|Win32
+		{0EAF5968-AD93-43BF-B3F6-5CF9E5579616}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
-	GlobalSection(ProjectConfiguration) = postSolution
-		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Debug.ActiveCfg = Debug|Win32
-		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Debug.Build.0 = Debug|Win32
-		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Release.ActiveCfg = Release|Win32
-		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Release.Build.0 = Release|Win32
-		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Debug.ActiveCfg = Debug|Win32
-		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Debug.Build.0 = Debug|Win32
-		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Release.ActiveCfg = Release|Win32
-		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Release.Build.0 = Release|Win32
-		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Debug.ActiveCfg = Debug|Win32
-		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Debug.Build.0 = Debug|Win32
-		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Release.ActiveCfg = Release|Win32
-		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Release.Build.0 = Release|Win32
-		{0EAF5968-AD93-43BF-B3F6-5CF9E5579616}.Debug.ActiveCfg = Debug|Win32
-		{0EAF5968-AD93-43BF-B3F6-5CF9E5579616}.Debug.Build.0 = Debug|Win32
-		{0EAF5968-AD93-43BF-B3F6-5CF9E5579616}.Release.ActiveCfg = Release|Win32
-		{0EAF5968-AD93-43BF-B3F6-5CF9E5579616}.Release.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-	EndGlobalSection
-	GlobalSection(ExtensibilityAddIns) = postSolution
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

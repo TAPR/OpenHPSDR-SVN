@@ -2,6 +2,8 @@
  *  
  * Copyright (C) 2007 Bill Tracey, KD5TFD  
  * Copyright (C) 2006 Philip A. Covington, N8VB
+ * Copyright (C) 2012 George Byrkit, K9TRV: add manifest to get 'administrator' privilege on Vista, Win7 and Win8.
+ *						Update 'unsafe' functions
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +22,7 @@
 
 
 /* 
- * This is an adapatation of Phil Covingtons' C# USB support routines to C for 
+ * This is an adaptation of Phil Covington's C# USB support routines to C for 
  * use on Linux
  * 
  * Author: Bill Tracey (bill@ewjt.com) 
@@ -150,11 +152,20 @@ int HPSDR_UploadFirmware(usb_dev_handle *devh, char *fnamep) {
 	int i; 
 	
 	
-	ifile = fopen(fnamep, "r"); 
-	if ( ifile == NULL ) { 
-		fprintf(stderr, "Could not open: \'%s\'\n", fnamep); 
+#if defined (_MSC_VER) && (_MSC_VER >= 1020)
+	// microsoft 'safe' versions to preclude compile warnings (and be 'safe')
+	errno_t err = fopen_s(&ifile, fnamep, "r"); 
+	if ( (err != 0) || (ifile == NULL) ) {
+		fprintf(stderr, "Failed to open: \'%s\'\n", fnamep); 
 		return 0; 
 	}
+#else
+	ifile = fopen(fnamep, "r"); 
+	if (ifile == NULL) {
+		fprintf(stderr, "Failed to open: \'%s\'\n", fnamep); 
+		return 0; 
+	}
+#endif
 	
 	while (  fgets(readbuf, sizeof(readbuf), ifile) != NULL ) {
 		++linecount; 
