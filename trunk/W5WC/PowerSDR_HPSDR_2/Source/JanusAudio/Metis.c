@@ -75,23 +75,26 @@ KD5TFDVK6APHAUDIO_API int getNetworkAddrs(int addrs[], int addr_count) {
 	ULONG rc;
 	CHAR ipaddrbuf[100]; 
 	DWORD ipaddrbuflen; 
-
+	ULONG family = AF_INET;
+	ULONG flags = GAA_FLAG_SKIP_MULTICAST;
 
 	printf("addrbufsize is: %d\n", addrbufsize); 
 	memset(addrbuf, 0, sizeof(addrbuf)); 
 
-	rc = GetAdaptersAddresses(AF_INET,  GAA_FLAG_SKIP_MULTICAST, NULL, 
+	rc = GetAdaptersAddresses(family, flags, NULL, 
 		                            paddrs, &addrbufsize); 
 	if ( rc == ERROR_BUFFER_OVERFLOW ) {  /* buf too small, realloc and try again */ 
 		printf("initial buf too small - regrouping\n"); 
 		printf("needed addrbufsize is: %d\n", addrbufsize); 
-		paddrs = malloc(addrbufsize); 
+		//paddrs = new IP_ADAPTER_ADDRESSES[addrbufsize / sizeof(IP_ADAPTER_ADDRESSES)]; 
+		paddrs = (PIP_ADAPTER_ADDRESSES) malloc(addrbufsize); 
 		if ( paddrs == NULL ) { 
 			printf("malloc failed!\n"); fflush(stdout); 
 			return -1;
 		}
+
 		memset(paddrs, 0, addrbufsize); 
-		rc = GetAdaptersAddresses(AF_INET,  GAA_FLAG_SKIP_MULTICAST, NULL, 
+		rc = GetAdaptersAddresses(family, flags, NULL, 
 		                            paddrs, &addrbufsize); 
 	}
 	
@@ -102,6 +105,7 @@ KD5TFDVK6APHAUDIO_API int getNetworkAddrs(int addrs[], int addr_count) {
 		}
 		return -1;
 	} 
+
 	p = paddrs; 
 	while ( p != NULL ) { 
 		printf("Name: %s\n", p->AdapterName); 
@@ -116,7 +120,7 @@ KD5TFDVK6APHAUDIO_API int getNetworkAddrs(int addrs[], int addr_count) {
 			ipaddrbuflen = sizeof(ipaddrbuf); 
 			WSAAddressToString(unip->Address.lpSockaddr, unip->Address.iSockaddrLength, NULL, ipaddrbuf,  &ipaddrbuflen); 			
 			printf("    %s\n", ipaddrbuf); 
-			Dump(stdout, (unsigned char *)(unip->Address.lpSockaddr), unip->Address.iSockaddrLength, "sockaddr"); 
+			Dump(stdout, (unsigned char *)(unip->Address.lpSockaddr), unip->Address.iSockaddrLength, (unsigned char *)"sockaddr"); 
 			saddrp = (struct sockaddr_in *)(unip->Address.lpSockaddr); 
 			printf("addr: 0x%08x\n", saddrp->sin_addr.S_un.S_addr);
 			if ( addrs_used < addr_count ) { 
@@ -353,8 +357,15 @@ SOCKET createSocket(int portnum, u_long addr) {
  u_long doDiscovery() { 
 	 // SOCKET outsock; 
 	 int rc; 
-	 unsigned char packetbuf[250];
-	 unsigned char discbuf[2048]; 
+	 //unsigned char packetbuf[250];
+	// unsigned char discbuf[2048]; 
+	 struct outdgram {
+		 unsigned char packetbuf[63];
+	 } outpacket;
+	 struct indgram {
+		 unsigned char discbuf[2048];
+	 } inpacket;
+
 	 int i; 
 	 struct sockaddr_in dest_addr; 
 	 struct sockaddr_in disc_reply_addr; 
@@ -365,15 +376,15 @@ SOCKET createSocket(int portnum, u_long addr) {
 								 0xba, 0xba, 0xba }; 
 	 
 
-	 for ( i = 0; i < 250; i++ ) { 
-		 packetbuf[i] = 0xba; 
-	 } 
-	 packetbuf[0] = 0xef; 
-	 packetbuf[1] = 0xfe; 
-	 packetbuf[2] = 0x02; 
+	// for ( i = 0; i < 250; i++ ) { 
+		// packetbuf[i] = 0xba; 
+	 //} 
+	 memset(outpacket.packetbuf, 0, sizeof(outpacket));
+	 outpacket.packetbuf[0] = 0xef; 
+	 outpacket.packetbuf[1] = 0xfe; 
+	 outpacket.packetbuf[2] = 0x02; 
 	 
-	
-	 Dump(stdout, packetbuf, 100, "packetbuf"); 
+	 Dump(stdout, outpacket.packetbuf, 100, (unsigned char *)"packetbuf"); 
 	 dest_addr.sin_family = AF_INET;
 	 dest_addr.sin_port = htons(1024); 
 	 dest_addr.sin_addr.s_addr = inet_addr("255.255.255.255"); 
@@ -384,24 +395,24 @@ SOCKET createSocket(int portnum, u_long addr) {
 	 // }
 
 	 for ( i = 0; i < 5; i++ ) { 
-		sendto(listenSock, packetbuf, 17, 0, (SOCKADDR *)&dest_addr, sizeof(dest_addr)); 
+		sendto(listenSock, (char *) &outpacket, sizeof(outpacket), 0, (SOCKADDR *)&dest_addr, sizeof(dest_addr)); 
 		printf("discovery packet sent\n");  fflush(stdout); 
 
 		for ( j = 0; j < 2; j++ ) {
-			rc = recvfrom_withtimeout(listenSock,  discbuf, sizeof(discbuf), 0, 
+			rc = recvfrom_withtimeout(listenSock,  (char *) &inpacket, sizeof(inpacket), 0, 
 		                          (SOCKADDR *)&disc_reply_addr, &disc_reply_addr_len, 3, 0); 
 			printf("recvfrom_withtimeout rc=%d\n", rc); 
 			if ( rc > 0 ) { 
-				if ( discbuf[0] == 0xef && discbuf[1] == 0xfe && discbuf[2] == 02  ) { 
-					if ( memcmp(discbuf+3, sigbuf, 6) ==0 ) {
+				if ( inpacket.discbuf[0] == 0xef && inpacket.discbuf[1] == 0xfe && inpacket.discbuf[2] == 02  ) { 
+					if ( memcmp(inpacket.discbuf+3, sigbuf, 6) ==0 ) {
 						printf("ignoring our own broadcast\n"); 
 						continue; 
 					}
 					printf("got good discovery reply\n"); 
-					Dump(stdout, discbuf, rc, "discovery reply"); 
-					memcpy(MetisMACAddr, discbuf+3, 6); /* save off MAC Addr */ 
-					memcpy(MetisCodeVersion, discbuf+9, 1); /* save off loaded Code Version */
-					memcpy(MetisBoardID, discbuf+10, 1); /* save off Board_ID 0x00 = Metis, 0x01 = Hermes, 0x02 = Griffin */
+					Dump(stdout, inpacket.discbuf, rc, (unsigned char *)"discovery reply"); 
+					memcpy(MetisMACAddr, inpacket.discbuf+3, 6); /* save off MAC Addr */ 
+					memcpy(MetisCodeVersion, inpacket.discbuf+9, 1); /* save off loaded Code Version */
+					memcpy(MetisBoardID, inpacket.discbuf+10, 1); /* save off Board_ID 0x00 = Metis, 0x01 = Hermes, 0x02 = Griffin */
 					return disc_reply_addr.sin_addr.S_un.S_addr;
 					// return *((u_long *)(&(discbuf[3])));				
 				}
@@ -439,9 +450,9 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 
 	int rc; 
 	u_long metis_addr; 
-	u_long myaddr; 
-	unsigned char macbuf[6]; 
-	int i; 
+//	u_long myaddr; 
+//	unsigned char macbuf[6]; 
+//	int i; 
 	int j; 
 	int sndbufsize; 
 	int addrs[10]; 
@@ -546,23 +557,30 @@ KD5TFDVK6APHAUDIO_API void GetMetisBoardID(char addr_bytes[]) {
 int SendStartToMetis(void) 	 {
 
 	 int starting_seq; 
-	 unsigned char packetbuf[64];
-	 unsigned char fbuf[2000]; 
+	// unsigned char packetbuf[64];
+	// unsigned char fbuf[2000]; 
+	 struct outdgram {
+		 unsigned char packetbuf[64];
+	 } outpacket;
+
+	 struct indgram {
+		 unsigned char fbuf[2000];
+	 } inpacket;
 
 	 int i; 
 
-	 memset(packetbuf, 0, sizeof(packetbuf)); 
+	 memset(outpacket.packetbuf, 0, sizeof(outpacket)); 
 
-	 packetbuf[0] = 0xef; 
-	 packetbuf[1] = 0xfe; 
-	 packetbuf[2] = 0x04; 
-	 packetbuf[3] = 0x01;
+	 outpacket.packetbuf[0] = 0xef; 
+	 outpacket.packetbuf[1] = 0xfe; 
+	 outpacket.packetbuf[2] = 0x04; 
+	 outpacket.packetbuf[3] = 0x01;
 	 
 	 starting_seq = MetisLastRecvSeq;
 	 for ( i = 0; i < 5; i++ ) {
 		/* printf("start sent\n"); */ 
-		sendto(listenSock, packetbuf, sizeof(packetbuf), 0, (SOCKADDR *)&MetisSockAddr, sizeof(MetisSockAddr)); 
-		MetisReadDirect(fbuf, sizeof(fbuf)); 
+		sendto(listenSock, (char *) &outpacket, sizeof(outpacket), 0, (SOCKADDR *)&MetisSockAddr, sizeof(MetisSockAddr)); 
+		MetisReadDirect((char *) &inpacket, sizeof(inpacket)); 
 		if ( MetisLastRecvSeq != starting_seq ) { 
 			break; 
 		} 
@@ -585,20 +603,23 @@ int SendStartToMetis(void) 	 {
 int SendStopToMetis(void) 	 {
 	 
 	 int starting_seq; 
-	 unsigned char packetbuf[64];
+	// unsigned char packetbuf[64];
+	 struct outdgram {
+		 unsigned char packetbuf[64];
+	 } outpacket;
 
 	 int i;  
 
-	 memset(packetbuf, 0, sizeof(packetbuf)); 
+	 memset(outpacket.packetbuf, 0, sizeof(outpacket)); 
 
-	 packetbuf[0] = 0xef; 
-	 packetbuf[1] = 0xfe; 
-	 packetbuf[2] = 0x04; 
-	 packetbuf[3] = 0x00;
+	 outpacket.packetbuf[0] = 0xef; 
+	 outpacket.packetbuf[1] = 0xfe; 
+	 outpacket.packetbuf[2] = 0x04; 
+	 outpacket.packetbuf[3] = 0x00;
 	 
 	 starting_seq = MetisLastRecvSeq;
 	 for ( i = 0; i < 5; i++ ) { 
-		sendto(listenSock, packetbuf, sizeof(packetbuf), 0, (SOCKADDR *)&MetisSockAddr, sizeof(MetisSockAddr)); 		
+		sendto(listenSock, (char *) &outpacket, sizeof(outpacket), 0, (SOCKADDR *)&MetisSockAddr, sizeof(MetisSockAddr)); 		
 		Sleep(10); 
 		if ( MetisLastRecvSeq == starting_seq ) { 
 			break; 
@@ -613,17 +634,21 @@ int SendStopToMetis(void) 	 {
 
 
 int MetisReadDirect(char *bufp, int buflen) { 
-	unsigned char readbuf[1600]; 
+	//unsigned char readbuf[1600]; 
+	struct indgram {
+		unsigned char readbuf[1074];
+	} inpacket;
+
 	struct sockaddr_in fromaddr; 
 	int fromlen; 
 	int rc; 
 	unsigned int endpoint; 
 	unsigned int seqnum; 
-	unsigned char *seqbytep = (char *)&seqnum; 
+	unsigned char *seqbytep = (unsigned char *)&seqnum; 
 
 	fromlen = sizeof(fromaddr); 
 	 
-	rc = recvfrom_withtimeout(listenSock, readbuf, sizeof(readbuf), 0, (struct sockaddr *)&fromaddr, &fromlen, 0, 500000); 
+	rc = recvfrom_withtimeout(listenSock, (char *) &inpacket, sizeof(inpacket), 0, (struct sockaddr *)&fromaddr, &fromlen, 0, 500000); 
 	/* rc = recvfrom(listenSock, readbuf, sizeof(readbuf), 0, (struct sockaddr *)&fromaddr, &fromlen);  */ 
 	if ( rc < 0 ) {  /* failed */ 
 		printf("MRD: recvfrom on listSock failed w/ rc=%d!\n", rc);  fflush(stdout); 
@@ -631,18 +656,27 @@ int MetisReadDirect(char *bufp, int buflen) {
 	}
 	/* check frame is from who we expect */ 
 	if ( rc == 1032 ) {   /* looks like a data frame */ 
-		if ( (readbuf[0] == 0xef) && (readbuf[1] == 0xfe) && (readbuf[2] == 0x01) ) { 
-			endpoint = (unsigned int)readbuf[3]; 
-			seqbytep[3] = readbuf[4]; 
-			seqbytep[2] = readbuf[5]; 
-			seqbytep[1] = readbuf[6]; 
-			seqbytep[0] = readbuf[7]; 
+		if ( (inpacket.readbuf[0] == 0xef) && (inpacket.readbuf[1] == 0xfe) && (inpacket.readbuf[2] == 0x01) ) { 
+			endpoint = (unsigned int)inpacket.readbuf[3]; 
+			seqbytep[3] = inpacket.readbuf[4]; 
+			seqbytep[2] = inpacket.readbuf[5]; 
+			seqbytep[1] = inpacket.readbuf[6]; 
+			seqbytep[0] = inpacket.readbuf[7]; 
 			if ( seqnum != (1 + MetisLastRecvSeq) )  { 
 				printf("MRD: seq error this: %d last: %d\n", seqnum, MetisLastRecvSeq); 
 			} 
 			MetisLastRecvSeq = seqnum;
+
 			if ( endpoint == 6 ) { 
-				memcpy(bufp, readbuf+8, 1024); 
+				if ( (inpacket.readbuf[8] == 0x7f) && (inpacket.readbuf[9] == 0x7f) && (inpacket.readbuf[10] == 0x7f) ) { 
+					HaveSync = 1;
+				}
+				else { 
+					HaveSync = 0;
+					printf("MRD: sync error on frame %d\n", seqnum); 
+					// return 0;
+				} 
+				memcpy(bufp, inpacket.readbuf+8, 1024); 
 				return 1024; 
 			}
 			else { 
@@ -661,6 +695,7 @@ int MetisReadDirect(char *bufp, int buflen) {
 
 
 void MetisReadThreadMainLoop() { 
+#if 0
 	int rc; 
 	int dumpbuf = 1; 
 	
@@ -669,8 +704,9 @@ void MetisReadThreadMainLoop() {
 	int fromlen; 
 	unsigned int endpoint; 
 	unsigned int seqnum; 
-	unsigned char *seqbytep = (char *)&seqnum; 
-	int start_sending_count = 5; 
+	unsigned char *seqbytep = (unsigned char *)&seqnum; 
+//	int start_sending_count = 5; 
+#endif
 
 	while ( MetisKeepRunning ) { 		
 #if 1
@@ -821,25 +857,29 @@ unsigned int MetisOutBoundSeqNum;
 
 int MetisWriteFrame(int endpoint, char *bufp, int buflen) { 
 	int result; 
-	unsigned char framebuf[1032]; 
+	//unsigned char framebuf[1032]; 
+	struct outdgram {
+		unsigned char framebuf[1032];
+	} outpacket;
+
 	unsigned char *p = (unsigned char *)&MetisOutBoundSeqNum; 
 
 
 	if ( buflen > 1024 ) { 
 		return -1; 
 	} 
-	framebuf[0] = 0xef;
-	framebuf[1] = 0xfe; 
-	framebuf[2] = 01; 
-	framebuf[3] = endpoint; 
-	framebuf[4] = p[3]; 
-	framebuf[5] = p[2]; 
-	framebuf[6] = p[1]; 
-	framebuf[7] = p[0]; 
+	outpacket.framebuf[0] = 0xef;
+	outpacket.framebuf[1] = 0xfe; 
+	outpacket.framebuf[2] = 01; 
+	outpacket.framebuf[3] = endpoint; 
+	outpacket.framebuf[4] = p[3]; 
+	outpacket.framebuf[5] = p[2]; 
+	outpacket.framebuf[6] = p[1]; 
+	outpacket.framebuf[7] = p[0]; 
 	++MetisOutBoundSeqNum; 
-	memcpy(framebuf+8, bufp, buflen); 
+	memcpy(outpacket.framebuf+8, bufp, buflen); 
 
-	result = sendto(listenSock, framebuf, 8+buflen, 0, (SOCKADDR *)&MetisSockAddr, sizeof(MetisSockAddr)); 	
+	result = sendto(listenSock, (char *) &outpacket, 8+buflen, 0, (SOCKADDR *)&MetisSockAddr, sizeof(MetisSockAddr)); 	
 	result -= 8; 
 	return result;
 } 

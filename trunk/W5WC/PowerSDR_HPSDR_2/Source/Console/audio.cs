@@ -169,7 +169,6 @@ namespace PowerSDR
         }
 
         private static bool record_rx_preprocessed = true;
-
         public static bool RecordRXPreProcessed
         {
             get { return record_rx_preprocessed; }
@@ -177,15 +176,27 @@ namespace PowerSDR
         }
 
         private static bool record_tx_preprocessed;
-
         public static bool RecordTXPreProcessed
         {
             get { return record_tx_preprocessed; }
             set { record_tx_preprocessed = value; }
         }
 
-        private static float peak = float.MinValue;
+        private static short bit_depth = 32;
+        public static short BitDepth
+        {
+            get { return bit_depth; }
+            set { bit_depth = value; }
+        }
 
+        private static short format_tag = 3;
+        public static short FormatTag
+        {
+            get { return format_tag; }
+            set { format_tag = value; }
+        }
+
+        private static float peak = float.MinValue;
         public static float Peak
         {
             get { return peak; }
@@ -193,15 +204,20 @@ namespace PowerSDR
         }
 
         private static bool vox_enabled;
-
         public static bool VOXEnabled
         {
             get { return vox_enabled; }
             set { vox_enabled = value; }
         }
 
-        private static float vox_threshold = 0.001f;
+        private static bool hpsdr_duplex_enabled;
+        public static bool HPSDRDuplexEnabled
+        {
+            get { return hpsdr_duplex_enabled; }
+            set { hpsdr_duplex_enabled = value; }
+        }
 
+        private static float vox_threshold = 0.001f;
         public static float VOXThreshold
         {
             get { return vox_threshold; }
@@ -354,7 +370,6 @@ namespace PowerSDR
 		}*/
 
         private static AudioState current_audio_state1 = AudioState.DTTSP;
-
         public static AudioState CurrentAudioState1
         {
             get { return current_audio_state1; }
@@ -404,7 +419,6 @@ namespace PowerSDR
         }
 
         private static int in_rx1_l;
-
         public static int IN_RX1_L
         {
             get { return in_rx1_l; }
@@ -412,7 +426,6 @@ namespace PowerSDR
         }
 
         private static int in_rx1_r = 1;
-
         public static int IN_RX1_R
         {
             get { return in_rx1_r; }
@@ -420,7 +433,6 @@ namespace PowerSDR
         }
 
         private static int in_rx2_l = 4;
-
         public static int IN_RX2_L
         {
             get { return in_rx2_l; }
@@ -428,7 +440,6 @@ namespace PowerSDR
         }
 
         private static int in_rx2_r = 5;
-
         public static int IN_RX2_R
         {
             get { return in_rx2_r; }
@@ -436,14 +447,13 @@ namespace PowerSDR
         }
 
         private static int in_tx_l = 2;
-
         public static int IN_TX_L
         {
             get { return in_tx_l; }
             set
             {
                 in_tx_l = value;
-             /*   switch (in_tx_l)
+               /* switch (in_tx_l)
                 {
                     case 4:
                     case 5:
@@ -458,7 +468,6 @@ namespace PowerSDR
         }
 
         private static int in_tx_r = 3;
-
         public static int IN_TX_R
         {
             get { return in_tx_r; }
@@ -466,7 +475,6 @@ namespace PowerSDR
         }
 
         private static bool rx2_enabled;
-
         public static bool RX2Enabled
         {
             get { return rx2_enabled; }
@@ -1382,7 +1390,6 @@ namespace PowerSDR
 #endif
             float* in_l = null, in_r = null;
             float* out_l1 = null, out_r1 = null, out_l2 = null, out_r2 = null;
-           // float* out_l3 = null, out_r3 = null, out_l4 = null, out_r4 = null;
             float* rx1_in_l = null, rx1_in_r = null, tx_in_l = null, tx_in_r = null;
             float* rx1_out_l = null, rx1_out_r = null, tx_out_l = null, tx_out_r = null;
             localmox = mox;
@@ -1390,30 +1397,26 @@ namespace PowerSDR
             void* ex_input = input;
             void* ex_output = output;
 
-            var array_ptr_input = (int*) input;
-            var in_l_ptr1 = (float*) array_ptr_input[0];
-            var in_r_ptr1 = (float*) array_ptr_input[1];
-            var in_l_ptr2 = (float*) array_ptr_input[2];
-            var in_r_ptr2 = (float*) array_ptr_input[3];
-          //  float* in_l_ptr3 = (float*)array_ptr_input[4];
-          //  float* in_r_ptr3 = (float*)array_ptr_input[5];
-          //  float* in_l_ptr4 = (float*)array_ptr_input[6];
-          //  float* in_r_ptr4 = (float*)array_ptr_input[7];
-
-            var array_ptr_output = (int*) output;
-            var out_l_ptr1 = (float*) array_ptr_output[0];
-            var out_r_ptr1 = (float*) array_ptr_output[1];
-            var out_l_ptr2 = (float*) array_ptr_output[2];
-            var out_r_ptr2 = (float*) array_ptr_output[3];
-          //  float* out_l_ptr3 = (float*)array_ptr_output[4];
-          //  float* out_r_ptr3 = (float*)array_ptr_output[5];
-          //  float* out_l_ptr4 = (float*)array_ptr_output[6];
-          //  float* out_r_ptr4 = (float*)array_ptr_output[7];
-
+            int* array_ptr_input = (int*) input;
+            float* in_l_ptr1 = (float*)array_ptr_input[0];
+            float* in_r_ptr1 = (float*)array_ptr_input[1];
+            float* in_l_ptr2 = (float*)array_ptr_input[2];
+            float* in_r_ptr2 = (float*)array_ptr_input[3];
+  
+            int* array_ptr_output = (int*) output;
+            float* out_l_ptr1 = (float*)array_ptr_output[0];
+            float* out_r_ptr1 = (float*)array_ptr_output[1];
+            float* out_l_ptr2 = (float*)array_ptr_output[2];
+            float* out_r_ptr2 = (float*)array_ptr_output[3];
+  
             // arrange input buffers in the following order:
             // RX1 Left, RX1 Right, TX Left, TX Right, RX2 Left, RX2 Right
-            //int* array_ptr = (int *)input;
-            switch (in_rx1_l)
+            array_ptr_input[0] = (int)in_l_ptr1;
+            array_ptr_input[1] = (int)in_r_ptr1;
+            array_ptr_input[2] = (int)in_l_ptr2;
+            array_ptr_input[3] = (int)in_r_ptr2;
+
+          /*  switch (in_rx1_l)
             {
                 case 0:
                     array_ptr_input[0] = (int) in_l_ptr1;
@@ -1491,7 +1494,7 @@ namespace PowerSDR
                // case 5: array_ptr_input[3] = (int)in_r_ptr3; break;
                // case 6: array_ptr_input[3] = (int)in_l_ptr4; break;
               //  case 7: array_ptr_input[3] = (int)in_r_ptr4; break;
-            }
+            } */
 
             /*switch(in_rx2_l)
             {
@@ -1520,16 +1523,12 @@ namespace PowerSDR
             rx1_in_r = (float*) array_ptr_input[1];
             tx_in_l = (float*) array_ptr_input[2];
             tx_in_r = (float*) array_ptr_input[3];
-           // rx2_in_l = (float*)array_ptr_input[4];
-           // rx2_in_r = (float*)array_ptr_input[5];
-
+ 
             rx1_out_l = (float*) array_ptr_output[0];
             rx1_out_r = (float*) array_ptr_output[1];
             tx_out_l = (float*) array_ptr_output[2];
             tx_out_r = (float*) array_ptr_output[3];
-            //rx2_out_l = (float*)array_ptr_output[4];
-            //rx2_out_r = (float*)array_ptr_output[5];
-
+ 
 
             if (!localmox)
             {
@@ -1647,11 +1646,6 @@ namespace PowerSDR
                     }
 
                     #endregion
-
-                    if (tx_dsp_mode == DSPMode.CWU || tx_dsp_mode == DSPMode.CWL)
-                    {
-                        DttSP.CWtoneExchange(out_l_ptr1, out_r_ptr1, frameCount);
-                    }
 
                     // scale input with mic preamp
                     if ((!vac_enabled &&
@@ -1841,7 +1835,6 @@ namespace PowerSDR
                         }
                     } 
                 
-                //DttSP.ExchangeSamples2(array_ptr_input, array_ptr_output, frameCount);
                     DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
  
                     if (rx1_dsp_mode == DSPMode.CWU || rx1_dsp_mode == DSPMode.CWL)
@@ -2146,22 +2139,25 @@ namespace PowerSDR
                 if (tx_vol > 1.0) tx_vol = 1.0; // above 1.0 creates spurs
 
                 /* hermes hack needed */
-                ScaleBuffer(out_l2, out_l1, frameCount, (float)monitor_volume);
+                if (hpsdr_duplex_enabled)
+                {
+                    ScaleBuffer(out_l1, out_l1, frameCount, (float)monitor_volume);
+                    ScaleBuffer(out_r1, out_r1, frameCount, (float)monitor_volume);
+                }
+                else
+                {
+                    ScaleBuffer(out_l2, out_l1, frameCount, (float)monitor_volume);
+                    ScaleBuffer(out_r2, out_r1, frameCount, (float)monitor_volume);
+                }
+
                 if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
                 {
                     ScaleBuffer(out_l2, out_l2, frameCount, (float)tx_vol);
+                    ScaleBuffer(out_r2, out_r2, frameCount, (float)tx_vol);
                 }
                 else /* do hermes/pennylane style scaling */
                 {
                     ScaleBuffer(out_l2, out_l2, frameCount, GetPennylaneIQScale());
-                }
-                ScaleBuffer(out_r2, out_r1, frameCount, (float)monitor_volume);
-                if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
-                {
-                    ScaleBuffer(out_r2, out_r2, frameCount, (float)tx_vol);
-                }
-                else
-                {
                     ScaleBuffer(out_r2, out_r2, frameCount, GetPennylaneIQScale());
                 }
 

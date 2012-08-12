@@ -31,7 +31,7 @@ p.covington@gmail.com
 
 int Reset_CPU(struct usb_dev_handle *hdev, int reset)
 {
-    unsigned char val;		 //  unsigned char	***** JJA
+    char val;		 //  unsigned char	***** JJA
     
     val = reset;
     return Write_RAM(hdev, 0xE600, &val, 1); 
@@ -43,7 +43,7 @@ int Write_RAM(struct usb_dev_handle *hdev, int start_addr, char *buffer, size_t 
     int bytes_written = 0;
     int addr;
     int nsize;
-    char *pbuffer;
+//    char *pbuffer;
     int count;
     
     for (addr = start_addr; addr < start_addr + length; addr += pkt_size)
@@ -67,7 +67,7 @@ int Load_Firmware(struct usb_dev_handle *hdev, const char *filename)
     int length;
     int addr;
     int type;
-    unsigned char data[256];			 // unsigned char ***** JJA
+    char data[256];			 // unsigned char ***** JJA
     unsigned char checksum, a;
     unsigned int b;
     int i;

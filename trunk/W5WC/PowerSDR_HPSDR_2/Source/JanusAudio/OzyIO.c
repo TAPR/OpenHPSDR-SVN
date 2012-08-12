@@ -116,13 +116,13 @@ KD5TFDVK6APHAUDIO_API int IsOzyAttached(void) {
 
 struct OzyHandle *internalOzyOpen(void)
 {
-	struct OzyHandle *ozyh = NULL; 
+	struct OzyHandle *ozyh; 
 	struct usb_bus *busp; 
 	struct usb_device *ozydevp; 
 	struct usb_dev_handle *ozyusbh; 
 	int rc; 
 	
-	ozyh = malloc(sizeof(struct OzyHandle)); 
+	ozyh = (struct OzyHandle *) malloc(sizeof(struct OzyHandle)); 
 	if ( ozyh == NULL ) { 
 		return NULL; 
 	} 
@@ -375,7 +375,9 @@ KD5TFDVK6APHAUDIO_API int LoadFPGA(int VID, int PID, char *filename) {
     
     return 0;    
 }
-getI2CByte(int i2c_value) {
+
+#if 0
+void getI2CByte(int i2c_value) {
     unsigned char *bufp = NULL;
     int count;    
     int *usb_h = NULL;
@@ -397,7 +399,7 @@ getI2CByte(int i2c_value) {
 
 }
 
-getI2CBytes(int i2c_value) {
+void getI2CBytes(int i2c_value) {
     unsigned char *bufp = NULL;
     int count;    
     int *usb_h = NULL;
@@ -418,6 +420,7 @@ getI2CBytes(int i2c_value) {
     OzyClose(OzyH);
 
 }
+#endif
 
 KD5TFDVK6APHAUDIO_API int GetOzyID(struct usb_dev_handle *hdev, 
 								   unsigned char *buffer, 
@@ -434,7 +437,7 @@ KD5TFDVK6APHAUDIO_API int GetOzyID(struct usb_dev_handle *hdev,
                             VRQ_SDR1K_CTL, 
                             SDR1KCTRL_READ_VERSION, 
                             0, // index
-                            buffer, 
+                            (char *) buffer, 
                             nsize, 
                             1000);
     if (count != nsize) 

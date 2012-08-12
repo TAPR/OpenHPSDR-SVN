@@ -76,6 +76,7 @@ extern KD5TFDVK6APHAUDIO_API int GetDiagData(int *a, int count);
 extern KD5TFDVK6APHAUDIO_API void SetVFOfreq(double f);
 //extern KD5TFDVK6APHAUDIO_API void SetAlexEnable(int bit);
 
+
 #if 0
 extern KD5TFDVK6APHAUDIO_API int StartAudio_4port(int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata));
 extern KD5TFDVK6APHAUDIO_API void StopAudio_4port(void);
@@ -184,10 +185,10 @@ extern float *CallbackInLbufp;  // left buffer for samples headed to powersdr
 extern float *CallbackInRbufp;  // right buffer for samples headed to powersdr
 extern float *CallbackMicLbufp; // left buffer of mic samples
 extern float *CallbackMicRbufp; // right buffer of mic samples
-extern float *CallbackOutLbufp; // left buffer for samples headed to the audio device  (iq)
-extern float *CallbackOutRbufp; // right buffer for samples header to the audio device  (iq)
 extern float *CallbackMonOutLbufp;  // left for monitor out
 extern float *CallbackMonOutRbufp;  // right for monitor out
+extern float *CallbackOutLbufp; // left buffer for samples headed to the audio device  (iq)
+extern float *CallbackOutRbufp; // right buffer for samples header to the audio device  (iq)
 extern float *MicResampleBufp; // buffer for mic resampling -- holds pre resample data
 // buffer for the IO Thread
 extern int *IOSampleInBufp;  // samples in iothread coming from audio device
@@ -212,8 +213,9 @@ extern unsigned int LostSyncCount;
 extern unsigned int SyncGainedCount;
 extern unsigned int NotOKtoSendCount;
 extern int HaveSync;
-extern int VFOfreq;
+extern unsigned int VFOfreq;
 extern int FPGATestMode;
+extern unsigned int VFOfreq_tx;
 
 #ifdef EP6FILEDUMP
 #define EP6FRAMEDUMPLIMIT (100*512)

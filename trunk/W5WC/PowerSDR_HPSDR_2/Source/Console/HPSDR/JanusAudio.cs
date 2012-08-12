@@ -859,7 +859,7 @@ namespace PowerSDR
         unsafe public static extern int GetDiagData(int* a, int count);  // get diag data, count is how many slots are in array 
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetVFOfreq_native(double f);  // tell aux hardware current freq -- in MHz 
+        unsafe public static extern void SetVFOfreq_native(uint f);  // tell aux hardware current freq -- in Hz 
 
 
         public static void freqCorrectionChanged()
@@ -870,6 +870,7 @@ namespace PowerSDR
                 if (!c.FreqCalibrationRunning)    // we can't be applying freq correction when cal is running 
                 {
                     SetVFOfreq(lastVFOfreq);
+                    SetVFOfreqTX(lastVFOTXfreq);
                 }
             }
         }
@@ -892,12 +893,40 @@ namespace PowerSDR
             }
             //f = f * 1000000;  // mhz -> hz 
             // f = (float)((double)(f * 1000000.0) * correction_factor);
-            double f_freq = (f * 1000000.0) * correction_factor;
+            uint f_freq = (uint)((f * 1000000.0) * correction_factor);
             // System.Console.WriteLine("corrected freq: " + f);
             SetVFOfreq_native(f_freq);
             c.SetupForm.txtDDSVFO.Text = f_freq.ToString();
         }
 
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetTXVFOfreq(uint f);  // tell aux hardware current freq -- in Hz 
+
+        private static double lastVFOTXfreq = 0.0;
+        unsafe public static void SetVFOfreqTX(double f)
+        {
+            lastVFOTXfreq = f;
+            Console c;
+            double correction_factor;
+            c = Console.getConsole();
+            if (c != null && c.SetupForm != null)
+            {
+                correction_factor = (double)c.SetupForm.HPSDRFreqCorrectFactor;
+                // System.Console.WriteLine("correct_factor: " + correction_factor); 
+            }
+            else
+            {
+                correction_factor = 1.0d;
+            }
+            //f = f * 1000000;  // mhz -> hz 
+            // f = (float)((double)(f * 1000000.0) * correction_factor);
+            uint f_freq = (uint)((f * 1000000.0) * correction_factor);
+            // System.Console.WriteLine("corrected freq: " + f);
+            SetTXVFOfreq(f_freq);
+            // c.SetupForm.txtDDSVFO.Text = f_freq.ToString();
+            // System.Console.WriteLine("JAtxvfo: " + f_freq);
+        }
+        
         [DllImport("JanusAudio.dll")]
         unsafe public static extern IntPtr OzyOpen();
 

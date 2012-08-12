@@ -94,7 +94,7 @@ NANOTIMER_API void printHLA(HLA_COUNTER *p, /* FILE *f, */ unsigned char *prefix
 		avg = p->sum/p->count; 
 	} 
 	if ( prefix == NULL ) { 
-		prefix = ""; 
+		prefix = (unsigned char *)""; 
 	} 
 	// printf("about to printf\n");  fflush(stdout); 	
 	printf( "%s count: %I64d hi: %I64d lo: %I64d avg: %I64d\n", prefix, p->count, p->hi, p->lo, avg); 
@@ -113,7 +113,7 @@ NANOTIMER_API void printHLANano(HLA_COUNTER *p, unsigned char *prefix) {
 		avg = p->sum/p->count; 
 	} 
 	if ( prefix == NULL ) { 
-		prefix = ""; 
+		prefix = (unsigned char *) ""; 
 	} 
 	// printf("about to printf\n");  fflush(stdout); 	
 	printf( "%s count: %I64d hi: %I64d lo: %I64d avg: %I64d\n", prefix, p->count, 
