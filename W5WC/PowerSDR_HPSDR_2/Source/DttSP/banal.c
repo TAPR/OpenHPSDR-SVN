@@ -131,7 +131,7 @@ struct timeval
 now_tv (void)
 {
 	struct timeval tv;
-	gettimeofday (&tv, 0);
+	gettimeofday(&tv, 0);
 	return tv;
 }
 

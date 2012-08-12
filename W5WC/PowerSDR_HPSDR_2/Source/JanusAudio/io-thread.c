@@ -589,7 +589,7 @@ unsigned char *getNewOutBufFromFIFO() {
         unsigned char *outbufp;
         int out_buf_len_needed;
 
-        outbufp = (char *)getFIFO(OutSampleFIFOp, &outbuflen, 0); // don't wait
+        outbufp = (unsigned char *)getFIFO(OutSampleFIFOp, &outbuflen, 0); // don't wait
         if ( outbufp == NULL ) {
                 return NULL;
         }
@@ -700,7 +700,7 @@ void ForceCandCFrames(int count) {
 	} 
 	for	( i	= 0; i < count;	i++	) {	
 		if ( isMetis ) { 
-			numwritten = MetisBulkWrite(2, buf, sizeof(buf)); 
+			numwritten = MetisBulkWrite(2, (char *)buf, sizeof(buf)); 
 		} 
 		else { 
 			numwritten = OzyBulkWrite(OzyH,	0x02, buf, sizeof(buf));
@@ -916,7 +916,7 @@ unsigned char HermesFilt = 0;
                                                         state = STATE_CONTROL0;
                                                         samples_this_sync = 0;
                                                         ++SyncGainedCount;
-                                                        HaveSync = 1;
+                                                       // HaveSync = 1;
                                                          printf("sync gained: bufnum: %d i: %d\n", buf_num, i);
                                                          printf("\nSG");
                                                 }
@@ -1224,7 +1224,7 @@ unsigned char HermesFilt = 0;
                                                 if ( (unsigned char)FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
                                                         ++LostSyncCount;
                                                         state = STATE_NOSYNC;
-                                                        HaveSync = 0;
+                                                        //HaveSync = 0;
                                                 }
                                                 else {
                                                         state = STATE_SYNC_MID;
@@ -1235,7 +1235,7 @@ unsigned char HermesFilt = 0;
                                                 if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
                                                         ++LostSyncCount;
                                                         state = STATE_NOSYNC;
-                                                        HaveSync = 0;
+                                                       // HaveSync = 0;
                                                 }
                                                 else {
                                                         state = STATE_SYNC_LO;
@@ -1247,7 +1247,7 @@ unsigned char HermesFilt = 0;
                                                 if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
                                                         ++LostSyncCount;
                                                         state = STATE_NOSYNC;
-                                                        HaveSync = 0;
+                                                       // HaveSync = 0;
                                                 }
                                                 else {
                                                         state = STATE_CONTROL0;
@@ -1323,11 +1323,14 @@ unsigned char HermesFilt = 0;
 												             case 0:
                                                                  FPGAWriteBufp[writebufpos] |= 0;
 																 break;
-															 case 1: //TX VFO
-                                                                 FPGAWriteBufp[writebufpos] |= 2;
+															 case 1: //RX VFO
+                                                                 FPGAWriteBufp[writebufpos] |= 4;
 																 break;
 															 case 2: 
 																 FPGAWriteBufp[writebufpos] |= 0x12; //C0 0001 001x
+																 break;
+															 case 3: //TX VFO
+                                                                 FPGAWriteBufp[writebufpos] |= 2;
 																 break;
 														  }
 
@@ -1362,6 +1365,10 @@ unsigned char HermesFilt = 0;
 															      {
                                                                     FPGAWriteBufp[writebufpos] = 0;
 															      } 
+																 break;
+															 case 3:
+                                                                 FPGAWriteBufp[writebufpos] =  (VFOfreq_tx >> 24) & 0xff; 
+                                                               //  FPGAWriteBufp[writebufpos] =  (VFOfreq >> 24) & 0xff; // RX1 
 																 break;
 														} 
 #else
@@ -1403,6 +1410,10 @@ unsigned char HermesFilt = 0;
                                                                 FPGAWriteBufp[writebufpos] = (MicBoost | LineIn | ApolloFilt | 
 																                 ApolloTune | ApolloATU | HermesFilt | AlexManEnable) & 0x7f;
 																 break;																 
+															 case 3:
+ 	                                                                FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 16) & 0xff; // TX freq
+                                                               // FPGAWriteBufp[writebufpos] = (VFOfreq >> 16) & 0xff; // rx1 freq
+																 break;
 														}
  
 #else
@@ -1437,6 +1448,10 @@ unsigned char HermesFilt = 0;
 															 case 2:
                                                                  FPGAWriteBufp[writebufpos] = ( AlexHPFMask & 0x7f );
 																 break;
+															 case 3:
+                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 8) & 0xff;
+                                                                // FPGAWriteBufp[writebufpos] = (VFOfreq >> 8) & 0xff;
+																 break;
 														}                                                         
 #else
 
@@ -1461,7 +1476,8 @@ unsigned char HermesFilt = 0;
 #if W5WC
 														switch (out_control_idx) {
 												             case 0:
-                                                                 FPGAWriteBufp[writebufpos] = (AlexTxAnt | Duplex | NRx) & 0x3F; 
+                                                                // FPGAWriteBufp[writebufpos] = (AlexTxAnt | Duplex | NRx) & 0x3F; 
+                                                                 FPGAWriteBufp[writebufpos] = AlexTxAnt | 0x04; 
 																 break;
 															 case 1:
                                                                  FPGAWriteBufp[writebufpos] = VFOfreq & 0xff;
@@ -1469,6 +1485,10 @@ unsigned char HermesFilt = 0;
 															 case 2:
  																 FPGAWriteBufp[writebufpos] = ( AlexLPFMask & 0x7f );
                                                                  break;
+															 case 3:
+                                                                 FPGAWriteBufp[writebufpos] = VFOfreq_tx & 0xff;
+                                                                // FPGAWriteBufp[writebufpos] = VFOfreq & 0xff;
+																 break;
 															}
 #else
                                                         // write_buf[writebufpos] = ControlBytesIn[4];
@@ -1488,14 +1508,17 @@ unsigned char HermesFilt = 0;
                                                         ++out_frame_idx;
 #if W5WC
 												switch(out_control_idx) {
-												    case 0:
-													   out_control_idx = 1;
+												    case 0: //0
+													   out_control_idx = 3;
 													break;
-												    case 1: 
- 														out_control_idx = (HermesPowerEnabled || isMetis || AlexEnabled) ? 2 : 0;
+												    case 1: // 0x04 RX
+ 														out_control_idx = (HermesPowerEnabled || isMetis || AlexEnabled) ? 2 : 0; //3;
 													break;
-												    case 2: 
-                                                       out_control_idx = 0;
+												    case 2: //0x12
+                                                       out_control_idx = 0;//3;
+													break;
+												    case 3: // 0x02 TX
+                                                       out_control_idx = 1;
 												    break;
 												}
 #else
@@ -1516,49 +1539,49 @@ unsigned char HermesFilt = 0;
 #endif
 														break;
 
-                                                case OUT_STATE_MON_LEFT_HI_NEEDED:
+                                                case OUT_STATE_MON_LEFT_HI_NEEDED: // L1 bits 15-8 of Left audio sample
                                                         out_state = OUT_STATE_MON_LEFT_LO_NEEDED;
                                                         FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
                                                         ++outbufpos;
                                                         break;
 
-                                                case OUT_STATE_MON_LEFT_LO_NEEDED:
+                                                case OUT_STATE_MON_LEFT_LO_NEEDED: // L0 bits 7-0 of Left audio sample
                                                         out_state = OUT_STATE_MON_RIGHT_HI_NEEDED;
                                                         FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
                                                         ++outbufpos;
                                                         break;
 
-                                               case OUT_STATE_MON_RIGHT_HI_NEEDED:
+                                               case OUT_STATE_MON_RIGHT_HI_NEEDED: // R1 bits 15-8 of Right audio sample
                                                         out_state = OUT_STATE_MON_RIGHT_LO_NEEDED;
                                                         FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
                                                         ++outbufpos;
                                                         break;
 
-												case OUT_STATE_MON_RIGHT_LO_NEEDED:
+												case OUT_STATE_MON_RIGHT_LO_NEEDED: // R0 bits 7-0 of Right audio sample
                                                         out_state = OUT_STATE_LEFT_HI_NEEDED;
                                                         FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
                                                         ++outbufpos;
                                                         break;
  
-  											   case OUT_STATE_LEFT_HI_NEEDED:
+  											   case OUT_STATE_LEFT_HI_NEEDED: // I1 bits 15-8 of I sample
                                                         out_state = OUT_STATE_LEFT_LO_NEEDED;
                                                         FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
                                                         ++outbufpos;
                                                         break;
 
-                                               case OUT_STATE_LEFT_LO_NEEDED:
+                                               case OUT_STATE_LEFT_LO_NEEDED: // I0 bits 7-0 of I sample
                                                         out_state = OUT_STATE_RIGHT_HI_NEEDED;
                                                         FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
                                                         ++outbufpos;
                                                         break;
 
-                                               case OUT_STATE_RIGHT_HI_NEEDED:
+                                               case OUT_STATE_RIGHT_HI_NEEDED: // Q1 bits 15-8 of Q sample
                                                         out_state = OUT_STATE_RIGHT_LO_NEEDED;
                                                         FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
                                                         ++outbufpos;
                                                         break;
 
-											   case OUT_STATE_RIGHT_LO_NEEDED:
+											   case OUT_STATE_RIGHT_LO_NEEDED: // Q0 bits 7-0 of Q sample
                                                         FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
                                                         ++outbufpos;
                                                         ++out_sample_pairs_this_sync;

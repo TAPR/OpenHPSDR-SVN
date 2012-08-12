@@ -1224,6 +1224,13 @@ namespace PowerSDR
             }
         }
 
+        private static bool hpsdr_duplex_enabled;
+        public static bool HPSDRDuplexEnabled
+        {
+            get { return hpsdr_duplex_enabled; }
+            set { hpsdr_duplex_enabled = value; }
+        }
+
         private static SolidBrush pana_text_brush = new SolidBrush(Color.Khaki);
         private static Font pana_font = new Font("Tahoma", 7F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
@@ -2456,12 +2463,12 @@ namespace PowerSDR
             int center_line_x = (int)(-(double)Low / (High - Low) * W);
             int[] band_edge_list;
 
-            if (local_mox) // get filter limits
+            if (local_mox && !hpsdr_duplex_enabled) // get filter limits
             {
                 filter_low = tx_filter_low;
                 filter_high = tx_filter_high;
             }
-            else if (rx == 1)
+            else if (rx == 1 || (local_mox && hpsdr_duplex_enabled))
             {
                 filter_low = rx1_filter_low;
                 filter_high = rx1_filter_high;
@@ -2536,7 +2543,7 @@ namespace PowerSDR
             //if(!(local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)))
             try
             {
-                if (!local_mox)// && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
+                if (!local_mox || hpsdr_duplex_enabled)// && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
                 {
                     // get filter screen coordinates
                     int filter_left_x = (int)((float)(filter_low - Low) / (High - Low) * W);
@@ -2903,7 +2910,7 @@ namespace PowerSDR
                     } */
             if (rx == 1)
             {
-                if (local_mox && !tx_on_vfob)
+                if (local_mox && !tx_on_vfob && !hpsdr_duplex_enabled)
                 {
                     vfo = split_enabled ? vfoa_sub_hz : vfoa_hz;
                     vfo += xit_hz;
@@ -3342,104 +3349,107 @@ namespace PowerSDR
 
             if (!mox && console.PowerOn && current_display_mode == DisplayMode.PANADAPTER)
             {
-                // get filter screen coordinates
-                int filter_left_x = (int)((float)(filter_low - Low) / (High - Low) * W);
-                int filter_right_x = (int)((float)(filter_high - Low) / (High - Low) * W);
-                int x1_gain, x2_gain, x3_gain, x1_hang, x2_hang, x3_hang;
-                if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
+               // if (console.PowerOn)
+               // {
+                    // get filter screen coordinates
+                    int filter_left_x = (int)((float)(filter_low - Low) / (High - Low) * W);
+                    int filter_right_x = (int)((float)(filter_high - Low) / (High - Low) * W);
+                    int x1_gain, x2_gain, x3_gain, x1_hang, x2_hang, x3_hang;
+                    if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
 
-                if (display_agc_gain_spectrum_line)
-                {
-                    x1_gain = 40;
-                    x2_gain = W - 40;
-                    x3_gain = 50;
-                }
-                else
-                {
-                    x1_gain = filter_left_x;
-                    x2_gain = filter_right_x;
-                    x3_gain = x1_gain;
-                }
-
-                if (display_agc_hang_spectrum_line)
-                {
-                    x1_hang = 40;
-                    x2_hang = W - 40;
-                    x3_hang = 50;
-                }
-                else
-                {
-                    x1_hang = filter_left_x;
-                    x2_hang = filter_right_x;
-                    x3_hang = x1_hang;
-                }
-
-                float cal_offset = 0.0f;
-                switch (console.RX1AGCMode)
-                {
-                    case AGCMode.FIXD:
-                        cal_offset = -18.0f;
-                        break;
-                    default:
-                        cal_offset = 60.0f + (rx1_display_cal_offset +
-                            (rx1_preamp_offset - alex_preamp_offset));
-                        break;
-                }
-                // get AGC-T level
-                double thresh = 0.0; ;
-                float agcknee_y_value = 0.0f;
-                double hang;
-                int agc_hang_y = 0;
-                int agc_fixed_gain = console.SetupForm.AGCFixedGain;
-                string agc = "";
-
-                // get Hang Threshold level
-                DttSP.GetRXAGCHangLevel(0, 0, &hang);
-
-                DttSP.GetRXAGCThresh(0, 0, &thresh);
-                //thresh = Math.Round(thresh);
-                //Debug.WriteLine("thresh:" + thresh);
-
-                switch (console.RX1AGCMode)
-                {
-                    case AGCMode.FIXD:
-                        agcknee_y_value = dBToPixel(-(float)agc_fixed_gain + cal_offset);
-                        // Debug.WriteLine("agcknee_y_D:" + agcknee_y_value);
-                        agc = "-F";
-                        break;
-                    default:
-                        agcknee_y_value = dBToPixel((float)thresh + cal_offset);
-
-                        // if (display_agc_hang_line)
-                        if (display_agc_hang_line && console.RX1AGCMode != AGCMode.MED && console.RX1AGCMode != AGCMode.FAST)
-                        {
-                            agc_hang_y = (int)dBToPixel((float)hang + cal_offset);
-                            AGCHang.Height = 8; AGCHang.Width = 8; AGCHang.X = 40;
-                            AGCHang.Y = agc_hang_y - (AGCHang.Height);
-                            g.FillRectangle(Brushes.Yellow, AGCHang);
-                            using (Pen p = new Pen(Color.Yellow))
-                            {
-                                p.DashStyle = DashStyle.Dot;
-                                g.DrawLine(p, x1_hang, agc_hang_y, x2_hang, agc_hang_y);
-                                g.DrawString("-H", pana_font, pana_text_brush, AGCHang.X + AGCHang.Width, AGCHang.Y - 4);
-                            }
-                        }
-                        agc = "-G";
-                        break;
-                }
-
-                if (display_agc_gain_line)
-                {
-                    AGCKnee.Height = 8; AGCKnee.Width = 8; AGCKnee.X = 40;
-                    AGCKnee.Y = (int)agcknee_y_value - AGCKnee.Height;
-                    g.FillRectangle(Brushes.YellowGreen, AGCKnee);
-                    using (Pen p = new Pen(Color.YellowGreen))
+                    if (display_agc_gain_spectrum_line)
                     {
-                        p.DashStyle = DashStyle.Dot;
-                        g.DrawLine(p, x1_gain, agcknee_y_value, x2_gain, agcknee_y_value);
-                        g.DrawString(agc, pana_font, pana_text_brush, AGCKnee.X + AGCKnee.Width, AGCKnee.Y - 4);
+                        x1_gain = 40;
+                        x2_gain = W - 40;
+                        x3_gain = 50;
                     }
-                }
+                    else
+                    {
+                        x1_gain = filter_left_x;
+                        x2_gain = filter_right_x;
+                        x3_gain = x1_gain;
+                    }
+
+                    if (display_agc_hang_spectrum_line)
+                    {
+                        x1_hang = 40;
+                        x2_hang = W - 40;
+                        x3_hang = 50;
+                    }
+                    else
+                    {
+                        x1_hang = filter_left_x;
+                        x2_hang = filter_right_x;
+                        x3_hang = x1_hang;
+                    }
+
+                    float cal_offset = 0.0f;
+                    switch (console.RX1AGCMode)
+                    {
+                        case AGCMode.FIXD:
+                            cal_offset = -18.0f;
+                            break;
+                        default:
+                            cal_offset = 60.0f + (rx1_display_cal_offset +
+                                (rx1_preamp_offset - alex_preamp_offset));
+                            break;
+                    }
+                    // get AGC-T level
+                    double thresh = 0.0; ;
+                    float agcknee_y_value = 0.0f;
+                    double hang;
+                    int agc_hang_y = 0;
+                    int agc_fixed_gain = console.SetupForm.AGCFixedGain;
+                    string agc = "";
+
+                    // get Hang Threshold level
+                    DttSP.GetRXAGCHangLevel(0, 0, &hang);
+
+                    DttSP.GetRXAGCThresh(0, 0, &thresh);
+                    //thresh = Math.Round(thresh);
+                    //Debug.WriteLine("thresh:" + thresh);
+
+                    switch (console.RX1AGCMode)
+                    {
+                        case AGCMode.FIXD:
+                            agcknee_y_value = dBToPixel(-(float)agc_fixed_gain + cal_offset);
+                            // Debug.WriteLine("agcknee_y_D:" + agcknee_y_value);
+                            agc = "-F";
+                            break;
+                        default:
+                            agcknee_y_value = dBToPixel((float)thresh + cal_offset);
+
+                            // if (display_agc_hang_line)
+                            if (display_agc_hang_line && console.RX1AGCMode != AGCMode.MED && console.RX1AGCMode != AGCMode.FAST)
+                            {
+                                agc_hang_y = (int)dBToPixel((float)hang + cal_offset);
+                                AGCHang.Height = 8; AGCHang.Width = 8; AGCHang.X = 40;
+                                AGCHang.Y = agc_hang_y - (AGCHang.Height);
+                                g.FillRectangle(Brushes.Yellow, AGCHang);
+                                using (Pen p = new Pen(Color.Yellow))
+                                {
+                                    p.DashStyle = DashStyle.Dot;
+                                    g.DrawLine(p, x1_hang, agc_hang_y, x2_hang, agc_hang_y);
+                                    g.DrawString("-H", pana_font, pana_text_brush, AGCHang.X + AGCHang.Width, AGCHang.Y - 4);
+                                }
+                            }
+                            agc = "-G";
+                            break;
+                    }
+
+                    if (display_agc_gain_line)
+                    {
+                        AGCKnee.Height = 8; AGCKnee.Width = 8; AGCKnee.X = 40;
+                        AGCKnee.Y = (int)agcknee_y_value - AGCKnee.Height;
+                        g.FillRectangle(Brushes.YellowGreen, AGCKnee);
+                        using (Pen p = new Pen(Color.YellowGreen))
+                        {
+                            p.DashStyle = DashStyle.Dot;
+                            g.DrawLine(p, x1_gain, agcknee_y_value, x2_gain, agcknee_y_value);
+                            g.DrawString(agc, pana_font, pana_text_brush, AGCKnee.X + AGCKnee.Width, AGCKnee.Y - 4);
+                        }
+                    }
+              //  }
             }
 
             if (high_swr && rx == 1)
@@ -5400,10 +5410,12 @@ namespace PowerSDR
                 return true;
             }
 
-            if (!mox)// && grid_control) 
+            if (!mox || hpsdr_duplex_enabled)// && grid_control) 
                 DrawPanadapterGrid(ref g, W, H, rx, bottom);
-            if (mox && tx_grid_control) DrawTXPanadapterGrid(ref g, W, H, rx, bottom);
-            if (!mox)
+
+            if (mox && tx_grid_control && !hpsdr_duplex_enabled) DrawTXPanadapterGrid(ref g, W, H, rx, bottom);
+
+            if (!mox || hpsdr_duplex_enabled)
             {
                 if (pan_fill)
                 {
@@ -5436,7 +5448,7 @@ namespace PowerSDR
             int Low = rx_display_low;
             int High = rx_display_high;
             int yRange;
-            if (!mox)
+            if (!mox || hpsdr_duplex_enabled)
             {
                 yRange = spectrum_grid_max - spectrum_grid_min;
             }
@@ -5454,7 +5466,7 @@ namespace PowerSDR
 
             if (rx == 1 && data_ready)
             {
-                if (mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
+                if (mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU) && !hpsdr_duplex_enabled)
                 {
 
                     for (int i = 0; i < current_display_data.Length; i++)
@@ -5533,7 +5545,7 @@ namespace PowerSDR
                             if (current_display_data_bottom[j % 4096] > max) max = current_display_data_bottom[j % 4096];
                     }
                 }
-                if (!mox)
+                if (!mox || hpsdr_duplex_enabled)
                 {
                     if (rx == 1) max += rx1_display_cal_offset;
                     else if (rx == 2) max += rx2_display_cal_offset;
@@ -5546,7 +5558,7 @@ namespace PowerSDR
                 //if(rx==1) max += rx1_display_cal_offset;
                 //else if(rx==2) max += rx2_display_cal_offset;
 
-                if (!mox)
+                if (!mox || hpsdr_duplex_enabled)
                 {
                     if (rx == 1) max += (rx1_preamp_offset - alex_preamp_offset);
                     else if (rx == 2) max += rx2_preamp_offset;
@@ -5558,7 +5570,7 @@ namespace PowerSDR
                     max_x = i;
                 }
 
-                if (!mox)
+                if (!mox || hpsdr_duplex_enabled)
                 {
                     points[i].X = i;
                     points[i].Y = (int)(Math.Floor((spectrum_grid_max - max) * H / yRange));
@@ -5576,7 +5588,7 @@ namespace PowerSDR
 
             max_y = local_max_y;
 
-            if (!mox)
+            if (!mox || hpsdr_duplex_enabled)
             {
                 if (pan_fill)
                 {
@@ -5894,8 +5906,8 @@ namespace PowerSDR
                 duration = (int)timer_waterfall2.DurationMsec;
             }
 
-            if ((duration > waterfall_update_period) || (duration < 0))            
-           // if (duration > waterfall_update_period)
+            if ((duration > waterfall_update_period) || (duration < 0))
+            // if (duration > waterfall_update_period)
             {
                 if (rx == 1) timer_waterfall.Start();
                 else if (rx == 2) timer_waterfall2.Start();

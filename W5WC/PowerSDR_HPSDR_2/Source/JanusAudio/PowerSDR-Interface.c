@@ -161,11 +161,11 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                 CallbackInRbufp = bufp + BlockSize;
                 CallbackMicLbufp = bufp + (2*BlockSize);
                 CallbackMicRbufp = bufp + (3*BlockSize);
-                CallbackOutLbufp = bufp + (4*BlockSize);
-                CallbackOutRbufp = bufp + (5*BlockSize);
-                CallbackMonOutLbufp = bufp + (6*BlockSize);
-                CallbackMonOutRbufp = bufp + (7*BlockSize);
-
+                CallbackMonOutLbufp = bufp + (4*BlockSize);
+                CallbackMonOutRbufp = bufp + (5*BlockSize);
+                CallbackOutLbufp = bufp + (6*BlockSize);
+                CallbackOutRbufp = bufp + (7*BlockSize);
+									
                 // allocate buffers for inbound and outbound samples from USB
                 in_sample_bufp = (int *)malloc(sizeof(int) * BlockSize * 4);  // 4 channels in and out
                 if ( in_sample_bufp == NULL ) {
@@ -221,9 +221,6 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 #endif
 				}
 				else { // is Metis 
-					
-
-
 					MetisStartReadThread(); 
 				} 
 
@@ -283,12 +280,12 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                 if ( bufp != NULL ) {
                         CallbackInLbufp = NULL;
                         CallbackInRbufp = NULL;
-                        CallbackOutLbufp = NULL;
-                        CallbackOutRbufp = NULL;
                         CallbackMicLbufp = NULL;
                         CallbackMicRbufp = NULL;
                         CallbackMonOutLbufp = NULL;
                         CallbackMonOutRbufp = NULL;
+                        CallbackOutLbufp = NULL;
+                        CallbackOutRbufp = NULL;
                         free(bufp);
                 }
 
@@ -336,13 +333,14 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 
 }
 
-
 // ff in hz 
-KD5TFDVK6APHAUDIO_API void SetVFOfreq_native(double ff) {
-        // ff = (1000000.0  * ff * 4294967296.0) / ( 125.0 * 1000000);  // 1Mhz * (f in mhz) * (2**32) / (125 mhz)
-        // ff = (1000000.0 *ff); // VK6APH - send frequecy in Hz, conversion to phase now done in FPGA 11 April 2007
+KD5TFDVK6APHAUDIO_API void SetVFOfreq_native(unsigned int ff) {
+        VFOfreq = ff;
+        return;
+}
 
-        VFOfreq = (int)ff;
+KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(unsigned int ff) {
+       VFOfreq_tx = ff;
         return;
 }
 
@@ -366,7 +364,6 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
                 InSampleFIFOp = NULL;
         }
         printf("fifo destroyted\n");   fflush(stdout);
-
 
         if ( IOSampleInBufp != NULL ) {
                 free(IOSampleInBufp);
@@ -461,7 +458,6 @@ KD5TFDVK6APHAUDIO_API void SetC1Bits(int bits) {
 KD5TFDVK6APHAUDIO_API int GetC1Bits(void) { 
 	return C1Mask; 
 }
-
 
 KD5TFDVK6APHAUDIO_API void SetPennyOCBits(int b) { 
 	PennyOCBits = b; 
@@ -640,49 +636,49 @@ KD5TFDVK6APHAUDIO_API void SetLegacyDotDashPTT(int bit) {
 
 KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() { 
 	int n; 
-	if ( !isMetis ) { 
+	//if ( !isMetis ) { 
 		//getI2CByte(I2C_MERC1_ADC_OFS);
 		//getI2CByte(I2C_MERC2_ADC_OFS);
 		//getI2CByte(I2C_MERC3_ADC_OFS);
 		//getI2CBytes(I2C_MERC4_ADC_OFS);
-	}
+	//}
 	n = ADC_Overloads; 
 	ADC_Overloads = 0; 
 	return n; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercuryFWVersion() { 
-	if ( !isMetis ) { 
+	//if ( !isMetis ) { 
 		//getI2CByte(I2C_MERC1_FW);
-	}
+	//}
 	return MercuryFWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury2FWVersion() { 
-	if ( !isMetis ) { 
+	//if ( !isMetis ) { 
 		//getI2CByte(I2C_MERC2_FW);
-	}
+	//}
 	return Mercury2FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury3FWVersion() { 
-	if ( !isMetis ) { 
+	//if ( !isMetis ) { 
 		//getI2CByte(I2C_MERC3_FW);
-	}
+	//}
 	return Mercury3FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury4FWVersion() { 
-	if ( !isMetis ) { 
+	//if ( !isMetis ) { 
 		//getI2CByte(I2C_MERC4_FW);
-	}
+	//}
 	return Mercury4FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getPenelopeFWVersion() { 
-	if ( !isMetis ) { 
+	//if ( !isMetis ) { 
 		//getI2CByte(I2C_PENNY_FW);
-	}
+	//}
 	return PenelopeFWVersion; 
 } 
 
@@ -695,23 +691,23 @@ KD5TFDVK6APHAUDIO_API int getHaveSync() {
 } 
 
 KD5TFDVK6APHAUDIO_API int getFwdPower() { 
-	if ( !isMetis ) { 
+	//if ( !isMetis ) { 
 		//getI2CBytes(I2C_PENNY_ALC);
-	}
+	//}
 	return FwdPower; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getAlexFwdPower() { 
-	if ( !isMetis ) { 
+	//if ( !isMetis ) { 
 		//getI2CBytes(I2C_PENNY_FWD);
-	}
+	//}
 	return AlexFwdPower; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getRefPower() { 
-	if ( !isMetis ) { 
+	//if ( !isMetis ) { 
 		//getI2CBytes(I2C_PENNY_REV);
-	}
+	//}
 	return RefPower; 
 } 
 
@@ -913,8 +909,6 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int samples_per_block, int (__stdcall *call
         }
         return myrc;
 }
-
-
 
 KD5TFDVK6APHAUDIO_API void StopAudio() {
         int rc;

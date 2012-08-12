@@ -29,7 +29,7 @@
 
 
 
-// #define TEST_TONE (1) 
+//#define TEST_TONE (1) 
 #ifdef TEST_TONE 
 int TestToneIdx = 0; 
 #define NUM_TEST_TONE_VALS (32) 
@@ -521,7 +521,7 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	updateHLA(&InConvertHLA, delta_t); 
 #endif 
 
-// #define LOOPBACK 1 
+//#define LOOPBACK 1 
 #ifdef LOOPBACK 
 	for ( i = 0; i < 2*BlockSize; i++ ) { 
 		CBSampleOutBufp[i] = i; /* bufp[i]; */ 
@@ -535,11 +535,12 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	callback_in[2] = CallbackMicLbufp; 
 	callback_in[3] = CallbackMicRbufp; 
 
-	callback_out[0] = CallbackOutLbufp; 
-	callback_out[1] = CallbackOutRbufp; 
-	callback_out[2] = CallbackMonOutLbufp; 
-	callback_out[3] = CallbackMonOutRbufp; 
-
+	callback_out[0] = CallbackMonOutLbufp; 
+	callback_out[1] = CallbackMonOutRbufp; 
+	callback_out[2] = CallbackOutLbufp; 
+	callback_out[3] = CallbackOutRbufp; 
+	
+		
 	// call the callback  		
 #ifdef PERF_DEBUG 
 	start_t = getPerfTicks(); 
@@ -559,8 +560,8 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 
 #ifdef TEST_TONE
 	for ( i = 0; i < BlockSize; i++ ) { 
-		CallbackOutRbufp[i] = -TestToneVals[TestToneIdx]; 
-		CallbackOutLbufp[i] = TestToneVals[TestToneIdx]; 
+		CallbackMonOutRbufp[i] = -TestToneVals[TestToneIdx]; 
+		CallbackMonOutLbufp[i] = TestToneVals[TestToneIdx]; 
 		++TestToneIdx; 
 		if ( TestToneIdx >= NUM_TEST_TONE_VALS ) { 
 			TestToneIdx = 0; 
@@ -597,14 +598,15 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	for ( i = 0, outidx = 0 ; i < BlockSize; i += out_sample_incr, outidx++ ) { 
 #endif 
 #if 1
-		LIMIT_SAMPLE(CallbackOutRbufp[i]);
-		LIMIT_SAMPLE(CallbackOutRbufp[i]); 
-		LIMIT_SAMPLE(CallbackOutLbufp[i]);
-		LIMIT_SAMPLE(CallbackOutLbufp[i]); 
-		LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
+		LIMIT_SAMPLE(CallbackMonOutLbufp[i]); // Audio out
 		LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
 		LIMIT_SAMPLE(CallbackMonOutRbufp[i]); 
 		LIMIT_SAMPLE(CallbackMonOutRbufp[i]);  
+
+		LIMIT_SAMPLE(CallbackOutLbufp[i]); // TX I/Q out
+		LIMIT_SAMPLE(CallbackOutLbufp[i]); 
+		LIMIT_SAMPLE(CallbackOutRbufp[i]);
+		LIMIT_SAMPLE(CallbackOutRbufp[i]); 
 #else 
 		// limit data to +/- 1.0 
 		if ( CallbackOutRbufp[i] > 1.0 ) { 
@@ -639,12 +641,14 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 		*sp = (short)floatToInt16(CallbackMonOutRbufp[i]); ++sp; 
 #else 
 		
-		CBSampleOutBufp[4*outidx] = (short)(CallbackOutLbufp[i] * 32767.0); 
-		CBSampleOutBufp[(4*outidx)+1] = (short)(CallbackOutRbufp[i] * 32767.0); 
+		CBSampleOutBufp[4*outidx] = (short)(CallbackMonOutLbufp[i] * 32767.0); 
+		CBSampleOutBufp[(4*outidx)+1] = (short)(CallbackMonOutRbufp[i] * 32767.0); 
 #if 1 
-		CBSampleOutBufp[(4*outidx)+2] = (short)(CallbackMonOutLbufp[i] * 32767.0); 
-		CBSampleOutBufp[(4*outidx)+3] = (short)(CallbackMonOutRbufp[i] * 32767.0); 
+		CBSampleOutBufp[(4*outidx)+2] = (short)(CallbackOutLbufp[i] * 32767.0); 
+		CBSampleOutBufp[(4*outidx)+3] = (short)(CallbackOutRbufp[i] * 32767.0); 
 #else
+		
+
 		// put same sigs on LR and IQ for diagnostic purposes 
 		CBSampleOutBufp[(4*outidx)+2] =  CBSampleOutBufp[4*outidx];
 		CBSampleOutBufp[(4*outidx)+3] =  CBSampleOutBufp[(4*outidx)+1];
