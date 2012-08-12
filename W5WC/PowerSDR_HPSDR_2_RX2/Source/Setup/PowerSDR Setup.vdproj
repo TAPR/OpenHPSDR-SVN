@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_01E9D5BAEC5C29DB2D69F4110FFCDC53"
-        "OwnerKey" = "8:_13AD2D6E1EE04F3094D7D373DBE7AE10"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_08162A10BB044F6B977FD90C338C61E8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -75,31 +69,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A6F071DFDDD2464E961AC4D94E7D8905"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B43D3B10C68F4CD4859A7B1FE1D444C1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BA19CE40736F4CB584AA79199B735120"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F29E1A04B26E46CEAAB843E34AB3162F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F52C92DC3A154862A760BC7BA1EA9485"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -113,12 +89,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_13AD2D6E1EE04F3094D7D373DBE7AE10"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_01E9D5BAEC5C29DB2D69F4110FFCDC53"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -218,7 +188,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "Version" = "8:3.5.30729"
+                "FrameworkVersion" = "8:3.5.30729"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://www.microsoft.com/downloads/details.aspx?familyid=262d25e3-f589-4842-8157-034d1e7cf3a3&displaylang=en"
                 "SupportedRuntimes" = "8:1.1.4322"
@@ -227,37 +197,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_01E9D5BAEC5C29DB2D69F4110FFCDC53"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Interop.TDxInput, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_01E9D5BAEC5C29DB2D69F4110FFCDC53"
-                    {
-                    "Name" = "8:Interop.TDxInput.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Interop.TDxInput.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_25D0B75A0D034BC793456BD6A7FF8277"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_08162A10BB044F6B977FD90C338C61E8"
             {
             "SourcePath" = "8:..\\..\\bin\\Release\\fftw_wisdom.exe"
@@ -282,7 +221,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:PowerSDR, Version=1.19.3.0, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:PowerSDR, Version=2.2.3.2, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_13AD2D6E1EE04F3094D7D373DBE7AE10"
@@ -449,50 +388,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A6F071DFDDD2464E961AC4D94E7D8905"
-            {
-            "SourcePath" = "8:..\\..\\bin\\Release\\TDxInput.dll"
-            "TargetName" = "8:TDxInput.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_25D0B75A0D034BC793456BD6A7FF8277"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B43D3B10C68F4CD4859A7B1FE1D444C1"
             {
             "SourcePath" = "8:..\\..\\GNU_GENERAL_PUBLIC_LICENSE.rtf"
             "TargetName" = "8:GNU_GENERAL_PUBLIC_LICENSE.rtf"
-            "Tag" = "8:"
-            "Folder" = "8:_25D0B75A0D034BC793456BD6A7FF8277"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BA19CE40736F4CB584AA79199B735120"
-            {
-            "SourcePath" = "8:..\\..\\bin\\Release\\pal.dll"
-            "TargetName" = "8:pal.dll"
             "Tag" = "8:"
             "Folder" = "8:_25D0B75A0D034BC793456BD6A7FF8277"
             "Condition" = "8:"
@@ -515,26 +414,6 @@
             "TargetName" = "8:PA19.dll"
             "Tag" = "8:"
             "Folder" = "8:_25D0B75A0D034BC793456BD6A7FF8277"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F52C92DC3A154862A760BC7BA1EA9485"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\lib\\PortTalk\\porttalk.sys"
-            "TargetName" = "8:porttalk.sys"
-            "Tag" = "8:"
-            "Folder" = "8:_D6D71D2A890A4E57873DD2F3EBF2CEA1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -687,6 +566,7 @@
         "ProductCode" = "8:{5B07F140-FF13-426B-BAAF-9A0A954B4B0A}"
         "PackageCode" = "8:{56F9A7C8-C9B2-427E-9AAF-AE97BF17E311}"
         "UpgradeCode" = "8:{303C929F-BB4B-47D0-A111-0D8BCE591E44}"
+        "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:FALSE"

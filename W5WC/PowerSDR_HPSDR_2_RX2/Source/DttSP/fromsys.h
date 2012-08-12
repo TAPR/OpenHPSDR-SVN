@@ -75,6 +75,8 @@ gettimeofday (struct timeval *tv, struct timezone *tz)
   LARGE_INTEGER li;
   __int64 t;
   static int tzflag;
+ long timezoneGeneralOffset;
+ int dstHours;
 
   if (tv)
     {
@@ -95,9 +97,9 @@ gettimeofday (struct timeval *tv, struct timezone *tz)
 	  _tzset ();
 	  tzflag++;
 	}
-      tz->tz_minuteswest = _timezone / 60;
-      tz->tz_dsttime = _daylight;
-    }
+      tz->tz_minuteswest = _get_timezone(&timezoneGeneralOffset) / 60;
+      tz->tz_dsttime =  _get_daylight(&dstHours);
+   }
 
   return 0;
 }
