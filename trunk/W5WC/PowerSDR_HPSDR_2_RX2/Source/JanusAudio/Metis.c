@@ -75,23 +75,26 @@ KD5TFDVK6APHAUDIO_API int getNetworkAddrs(int addrs[], int addr_count) {
 	ULONG rc;
 	CHAR ipaddrbuf[100]; 
 	DWORD ipaddrbuflen; 
-
+	ULONG family = AF_INET;
+	ULONG flags = GAA_FLAG_SKIP_MULTICAST;
 
 	printf("addrbufsize is: %d\n", addrbufsize); 
 	memset(addrbuf, 0, sizeof(addrbuf)); 
 
-	rc = GetAdaptersAddresses(AF_INET,  GAA_FLAG_SKIP_MULTICAST, NULL, 
+	rc = GetAdaptersAddresses(family, flags, NULL, 
 		                            paddrs, &addrbufsize); 
 	if ( rc == ERROR_BUFFER_OVERFLOW ) {  /* buf too small, realloc and try again */ 
 		printf("initial buf too small - regrouping\n"); 
 		printf("needed addrbufsize is: %d\n", addrbufsize); 
+		//paddrs = new IP_ADAPTER_ADDRESSES[addrbufsize / sizeof(IP_ADAPTER_ADDRESSES)]; 
 		paddrs = (PIP_ADAPTER_ADDRESSES) malloc(addrbufsize); 
 		if ( paddrs == NULL ) { 
 			printf("malloc failed!\n"); fflush(stdout); 
 			return -1;
 		}
+
 		memset(paddrs, 0, addrbufsize); 
-		rc = GetAdaptersAddresses(AF_INET,  GAA_FLAG_SKIP_MULTICAST, NULL, 
+		rc = GetAdaptersAddresses(family, flags, NULL, 
 		                            paddrs, &addrbufsize); 
 	}
 	
@@ -102,6 +105,7 @@ KD5TFDVK6APHAUDIO_API int getNetworkAddrs(int addrs[], int addr_count) {
 		}
 		return -1;
 	} 
+
 	p = paddrs; 
 	while ( p != NULL ) { 
 		printf("Name: %s\n", p->AdapterName); 
@@ -359,7 +363,7 @@ SOCKET createSocket(int portnum, u_long addr) {
 		 unsigned char packetbuf[63];
 	 } outpacket;
 	 struct indgram {
-	 unsigned char discbuf[2048]; 
+		 unsigned char discbuf[2048];
 	 } inpacket;
 
 	 int i; 
@@ -556,11 +560,11 @@ int SendStartToMetis(void) 	 {
 	// unsigned char packetbuf[64];
 	// unsigned char fbuf[2000]; 
 	 struct outdgram {
-	 unsigned char packetbuf[64];
+		 unsigned char packetbuf[64];
 	 } outpacket;
 
 	 struct indgram {
-	 unsigned char fbuf[2000]; 
+		 unsigned char fbuf[2000];
 	 } inpacket;
 
 	 int i; 
@@ -601,7 +605,7 @@ int SendStopToMetis(void) 	 {
 	 int starting_seq; 
 	// unsigned char packetbuf[64];
 	 struct outdgram {
-	 unsigned char packetbuf[64];
+		 unsigned char packetbuf[64];
 	 } outpacket;
 
 	 int i;  
@@ -846,7 +850,7 @@ int MetisWriteFrame(int endpoint, char *bufp, int buflen) {
 	int result; 
 	//unsigned char framebuf[1032]; 
 	struct outdgram {
-	unsigned char framebuf[1032]; 
+		unsigned char framebuf[1032];
 	} outpacket;
 
 	unsigned char *p = (unsigned char *)&MetisOutBoundSeqNum; 

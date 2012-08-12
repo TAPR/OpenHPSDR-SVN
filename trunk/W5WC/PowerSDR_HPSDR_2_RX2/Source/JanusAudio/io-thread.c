@@ -588,7 +588,7 @@ unsigned char *getNewOutBufFromFIFO() {
         unsigned char *outbufp;
         int out_buf_len_needed;
 
-        outbufp = (char *)getFIFO(OutSampleFIFOp, &outbuflen, 0); // don't wait
+        outbufp = (unsigned char *)getFIFO(OutSampleFIFOp, &outbuflen, 0); // don't wait
         if ( outbufp == NULL ) {
                 return NULL;
         }
@@ -700,7 +700,7 @@ void ForceCandCFrames(int count) {
 	} 
 	for	( i	= 0; i < count;	i++	) {	
 		if ( isMetis ) { 
-			numwritten = MetisBulkWrite(2, buf, sizeof(buf)); 
+			numwritten = MetisBulkWrite(2, (char *)buf, sizeof(buf)); 
 		} 
 		else { 
 			numwritten = OzyBulkWrite(OzyH,	0x02, buf, sizeof(buf));

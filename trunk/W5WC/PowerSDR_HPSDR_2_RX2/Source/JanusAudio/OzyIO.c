@@ -122,7 +122,7 @@ struct OzyHandle *internalOzyOpen(void)
 	struct usb_dev_handle *ozyusbh; 
 	int rc; 
 	
-	ozyh = malloc(sizeof(struct OzyHandle)); 
+	ozyh = (struct OzyHandle *) malloc(sizeof(struct OzyHandle)); 
 	if ( ozyh == NULL ) { 
 		return NULL; 
 	} 
@@ -391,7 +391,7 @@ KD5TFDVK6APHAUDIO_API int GetOzyID(struct usb_dev_handle *hdev,
                             VRQ_SDR1K_CTL, 
                             SDR1KCTRL_READ_VERSION, 
                             0, // index
-                            buffer, 
+                            (char *) buffer, 
                             nsize, 
                             1000);
     if (count != nsize) 
