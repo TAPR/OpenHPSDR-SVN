@@ -3,7 +3,7 @@
 This file is part of a program that implements a Software-Defined Radio.
 
 Copyright (C) 2004, 2005, 2006 by Frank Brickle, AB2KT and Bob McGwier, N4HY.
-Copyright (C) 2011, 2012 Warren Pratt, NR0V - Changes for AGC, ALC, Leveler, Compressor
+Copyright (C) 2011, 2012 Warren Pratt, NR0V - Changes for AGC, ALC, Leveler, Compressor, ANF
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -146,8 +146,12 @@ setup_rx (int k, unsigned int thread)
 	rx[thread][k].filt.ovsv =
 		newFiltOvSv (FIRcoef (rx[thread][k].filt.coef), FIRsize (rx[thread][k].filt.coef),
 		uni[thread].wisdom.bits);
+	rx[thread][k].filt.ovsv_notch =		// (NR0V)
+		newFiltOvSv (FIRcoef (rx[thread][k].filt.coef), FIRsize (rx[thread][k].filt.coef),
+		uni[thread].wisdom.bits);
 	rx[thread][k].resample.flag = FALSE;
 	normalize_vec_COMPLEX (rx[thread][k].filt.ovsv->zfvec, rx[thread][k].filt.ovsv->fftlen, rx[thread][k].filt.ovsv->scale);
+	normalize_vec_COMPLEX (rx[thread][k].filt.ovsv_notch->zfvec, rx[thread][k].filt.ovsv_notch->fftlen, rx[thread][k].filt.ovsv_notch->scale);	// (NR0V)
 
 	rx[thread][k].output_gain=1.0f;
 
@@ -167,6 +171,14 @@ setup_rx (int k, unsigned int thread)
 	rx[thread][k].buf.o = newCXB (FiltOvSv_storesize (rx[thread][k].filt.ovsv),
 		FiltOvSv_storepoint (rx[thread][k].filt.ovsv),
 		"init rx[thread][k].buf.o");
+
+	rx[thread][k].buf.i_notch = newCXB (FiltOvSv_fetchsize (rx[thread][k].filt.ovsv_notch),		// (NR0V)
+		FiltOvSv_fetchpoint (rx[thread][k].filt.ovsv_notch),
+		"init rx[thread][k].buf.i_notch");
+
+	rx[thread][k].buf.o_notch = newCXB (FiltOvSv_storesize (rx[thread][k].filt.ovsv_notch),
+		FiltOvSv_storepoint (rx[thread][k].filt.ovsv_notch),
+		"init rx[thread][k].buf.o_notch");
 
 	rx[thread][k].dcb = newDCBlocker(DCB_SINGLE_POLE, rx[thread][k].buf.i);
 	rx[thread][k].dcb->flag = FALSE;
@@ -222,6 +234,25 @@ setup_rx (int k, unsigned int thread)
 	//rx[thread][k].dttspagc.flag = TRUE;
 	rx[thread][k].wcpagc.flag = TRUE;
 
+	rx[thread][k].anf.gen = newANF	(	// (NR0V) added	
+		CXBsize (rx[thread][k].buf.o),	//buff_size
+		CXBbase (rx[thread][k].buf.o),	//buff pointer
+		DLINE_SIZE,	
+		256,
+		64,				
+		0.0001,	
+		0.1,
+
+		1.0,
+		200.0,
+		6.25e-12,
+		6.25e-10,
+		1.0,
+		3.0,
+		"ANF");
+	rx[thread][k].anf.flag = FALSE;
+	rx[thread][k].anf.position = 0;
+
 	rx[thread][k].grapheq.gen = new_EQ (rx[thread][k].buf.o, uni[thread].samplerate, uni[thread].wisdom.bits);
 	rx[thread][k].grapheq.flag = FALSE;
 
@@ -251,6 +282,7 @@ setup_rx (int k, unsigned int thread)
 		"New FM Demod structure");		// char *error message;
 
 	/* auto-notch filter */
+	/*
 	rx[thread][k].anf.gen = new_lmsr (
 		rx[thread][k].buf.o,	// CXB signal,
 		64,						// int delay,
@@ -259,6 +291,7 @@ setup_rx (int k, unsigned int thread)
 		64,						// int adaptive_filter_size,
 		LMADF_INTERFERENCE);
 	rx[thread][k].anf.flag = FALSE;
+	*/
 
 	/* block auto-notch filter */
 	rx[thread][k].banf.gen = new_blms(
@@ -591,19 +624,23 @@ destroy_workspace (unsigned int thread)
 		delWcpAGC (rx[thread][k].wcpagc.gen); // (NR0V)
 		del_nb (rx[thread][k].nb_sdrom.gen);
 		del_nb (rx[thread][k].nb.gen);
-		del_lmsr (rx[thread][k].anf.gen);
+		//del_lmsr (rx[thread][k].anf.gen);
+		del_anf (rx[thread][k].anf.gen);      // (NR0V)
 		del_lmsr (rx[thread][k].anr.gen);
 		delAMD (rx[thread][k].am.gen);
 		delFMD (rx[thread][k].fm.gen);
 		delOSC (rx[thread][k].osc.gen);
 		delvec_COMPLEX (rx[thread][k].filt.save);
 		delFiltOvSv (rx[thread][k].filt.ovsv);
+		delFiltOvSv (rx[thread][k].filt.ovsv_notch);	// (NR0V)
 		delFIR_Bandpass_COMPLEX (rx[thread][k].filt.coef);
 		for(i=0; i<MAX_NOTCHES_IN_PASSBAND; i++)
 			del_IIR_2P2Z(rx[thread][k].notch[i].gen);
 		delCorrectIQ (rx[thread][k].iqfix);
 		delCXB (rx[thread][k].buf.o);
 		delCXB (rx[thread][k].buf.i);
+		delCXB (rx[thread][k].buf.o_notch);
+		delCXB (rx[thread][k].buf.i_notch);
 	}
 
 	/* all */
@@ -997,7 +1034,7 @@ do_rx_pre (int k, unsigned int thread)
     
 	CXBhave (rx[thread][k].buf.o) = CXBhave (rx[thread][k].buf.i);
 
-	do_rx_meter (k, thread, rx[thread][k].buf.o, RXMETER_POST_FILT);
+	do_rx_meter (k, thread, rx[thread][k].buf.o, RXMETER_POST_FILT); //used for S-meter
 	do_rx_spectrum (k, thread, rx[thread][k].buf.o, SPEC_POST_FILT);
 
 	if (rx[thread][k].cpd.flag)
@@ -1041,7 +1078,9 @@ do_rx_post (int k, unsigned int thread)
 	// not binaural?
 	// position in stereo field
 
-	if (rx[thread][k].anf.flag)
+	if (rx[thread][k].tick == 0)
+		reset_OvSv (rx[thread][k].filt.ovsv_notch);
+	if (rx[thread][k].anf.flag && (rx[thread][k].anf.position == 0))
 	{
 		switch(rx[thread][k].mode)
 		{
@@ -1052,14 +1091,21 @@ do_rx_post (int k, unsigned int thread)
 			case CWU: // do nothing
 				break;
 			default:
-				lmsr_adapt (rx[thread][k].anf.gen);
-				//blms_adapt(rx[thread][k].banf.gen); //
+
+				//lmsr_adapt (rx[thread][k].anf.gen);
+				notch (rx[thread][k].anf.gen);			// (NR0V)
+				memcpy (CXBbase(rx[thread][k].buf.i_notch), CXBbase(rx[thread][k].buf.o), sizeof(COMPLEX) * CXBhave(rx[thread][k].buf.o));
+				filter_OvSv (rx[thread][k].filt.ovsv_notch);
+				memcpy (CXBbase(rx[thread][k].buf.o), CXBbase(rx[thread][k].buf.o_notch), sizeof(COMPLEX) * CXBhave(rx[thread][k].buf.o));
+				//blms_adapt(rx[thread][k].banf.gen);
 				break;
 		}
 	}
 
 	if (rx[thread][k].anr.flag)
+	{
 		lmsr_adapt (rx[thread][k].anr.gen);
+	}
 		//blms_adapt(rx[thread][k].banr.gen); //
 
 	/*if(thread == 0 && k == 0)
@@ -1088,6 +1134,30 @@ do_rx_post (int k, unsigned int thread)
 		fprintf(stdout, "after: %15f12\n", CXBpeak(rx[thread][k].buf.o));
 		fflush(stdout);
 	}*/
+
+	if (rx[thread][k].tick == 0)
+		reset_OvSv (rx[thread][k].filt.ovsv_notch);
+	if (rx[thread][k].anf.flag && (rx[thread][k].anf.position == 1))
+	{
+		switch(rx[thread][k].mode)
+		{
+			case DRM:
+			case DIGL:
+			case DIGU:
+			case CWL:
+			case CWU: // do nothing
+				break;
+			default:
+
+				//lmsr_adapt (rx[thread][k].anf.gen);
+				notch (rx[thread][k].anf.gen);			// (NR0V)
+				memcpy (CXBbase(rx[thread][k].buf.i_notch), CXBbase(rx[thread][k].buf.o), sizeof(COMPLEX) * CXBhave(rx[thread][k].buf.o));
+				filter_OvSv (rx[thread][k].filt.ovsv_notch);
+				memcpy (CXBbase(rx[thread][k].buf.o), CXBbase(rx[thread][k].buf.o_notch), sizeof(COMPLEX) * CXBhave(rx[thread][k].buf.o));
+				//blms_adapt(rx[thread][k].banf.gen);
+				break;
+		}
+	}
 
 	/*if(thread == 0 && k == 0)
 	{

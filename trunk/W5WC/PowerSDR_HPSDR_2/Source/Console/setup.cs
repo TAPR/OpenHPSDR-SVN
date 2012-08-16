@@ -1862,6 +1862,8 @@ namespace PowerSDR
         private NumericUpDownTS udTXFilterLowSave;
         private NumericUpDownTS udTXFilterHighSave;
         private CheckBoxTS chkFirmwareByp;
+        private RadioButtonTS radANFPreAGC;
+        private RadioButtonTS radANFPostAGC;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -3096,6 +3098,8 @@ namespace PowerSDR
             this.udLMSNRtaps = new System.Windows.Forms.NumericUpDownTS();
             this.lblLMSNRtaps = new System.Windows.Forms.LabelTS();
             this.grpDSPLMSANF = new System.Windows.Forms.GroupBoxTS();
+            this.radANFPostAGC = new System.Windows.Forms.RadioButtonTS();
+            this.radANFPreAGC = new System.Windows.Forms.RadioButtonTS();
             this.lblLMSANFLeak = new System.Windows.Forms.LabelTS();
             this.udLMSANFLeak = new System.Windows.Forms.NumericUpDownTS();
             this.lblLMSANFgain = new System.Windows.Forms.LabelTS();
@@ -18060,6 +18064,8 @@ namespace PowerSDR
             // 
             // grpDSPLMSANF
             // 
+            this.grpDSPLMSANF.Controls.Add(this.radANFPostAGC);
+            this.grpDSPLMSANF.Controls.Add(this.radANFPreAGC);
             this.grpDSPLMSANF.Controls.Add(this.lblLMSANFLeak);
             this.grpDSPLMSANF.Controls.Add(this.udLMSANFLeak);
             this.grpDSPLMSANF.Controls.Add(this.lblLMSANFgain);
@@ -18070,10 +18076,33 @@ namespace PowerSDR
             this.grpDSPLMSANF.Controls.Add(this.udLMSANFtaps);
             this.grpDSPLMSANF.Location = new System.Drawing.Point(128, 8);
             this.grpDSPLMSANF.Name = "grpDSPLMSANF";
-            this.grpDSPLMSANF.Size = new System.Drawing.Size(120, 128);
+            this.grpDSPLMSANF.Size = new System.Drawing.Size(120, 184);
             this.grpDSPLMSANF.TabIndex = 32;
             this.grpDSPLMSANF.TabStop = false;
             this.grpDSPLMSANF.Text = "ANF";
+            // 
+            // radANFPostAGC
+            // 
+            this.radANFPostAGC.AutoSize = true;
+            this.radANFPostAGC.Location = new System.Drawing.Point(11, 153);
+            this.radANFPostAGC.Name = "radANFPostAGC";
+            this.radANFPostAGC.Size = new System.Drawing.Size(71, 17);
+            this.radANFPostAGC.TabIndex = 11;
+            this.radANFPostAGC.Text = "Post-AGC";
+            this.radANFPostAGC.UseVisualStyleBackColor = true;
+            // 
+            // radANFPreAGC
+            // 
+            this.radANFPreAGC.AutoSize = true;
+            this.radANFPreAGC.Checked = true;
+            this.radANFPreAGC.Location = new System.Drawing.Point(11, 130);
+            this.radANFPreAGC.Name = "radANFPreAGC";
+            this.radANFPreAGC.Size = new System.Drawing.Size(66, 17);
+            this.radANFPreAGC.TabIndex = 10;
+            this.radANFPreAGC.TabStop = true;
+            this.radANFPreAGC.Text = "Pre-AGC";
+            this.radANFPreAGC.UseVisualStyleBackColor = true;
+            this.radANFPreAGC.CheckedChanged += new System.EventHandler(this.radANFPreAGC_CheckedChanged);
             // 
             // lblLMSANFLeak
             // 
@@ -18093,7 +18122,7 @@ namespace PowerSDR
             0});
             this.udLMSANFLeak.Location = new System.Drawing.Point(56, 96);
             this.udLMSANFLeak.Maximum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             0});
@@ -18107,7 +18136,7 @@ namespace PowerSDR
             this.udLMSANFLeak.TabIndex = 8;
             this.toolTip1.SetToolTip(this.udLMSANFLeak, "Determines the adaptation rate of the filter.");
             this.udLMSANFLeak.Value = new decimal(new int[] {
-            1,
+            100,
             0,
             0,
             0});
@@ -18170,7 +18199,7 @@ namespace PowerSDR
             0});
             this.udLMSANFdelay.Location = new System.Drawing.Point(56, 48);
             this.udLMSANFdelay.Maximum = new decimal(new int[] {
-            127,
+            511,
             0,
             0,
             0});
@@ -18210,12 +18239,12 @@ namespace PowerSDR
             0});
             this.udLMSANFtaps.Location = new System.Drawing.Point(56, 24);
             this.udLMSANFtaps.Maximum = new decimal(new int[] {
-            127,
+            512,
             0,
             0,
             0});
             this.udLMSANFtaps.Minimum = new decimal(new int[] {
-            31,
+            1,
             0,
             0,
             0});
@@ -18224,7 +18253,7 @@ namespace PowerSDR
             this.udLMSANFtaps.TabIndex = 1;
             this.toolTip1.SetToolTip(this.udLMSANFtaps, "Determines the length of the computed notch filter.");
             this.udLMSANFtaps.Value = new decimal(new int[] {
-            64,
+            256,
             0,
             0,
             0});
@@ -29539,6 +29568,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udLMSNRdelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSNRtaps)).EndInit();
             this.grpDSPLMSANF.ResumeLayout(false);
+            this.grpDSPLMSANF.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSANFLeak)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSANFgain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSANFdelay)).EndInit();
@@ -34947,19 +34977,31 @@ namespace PowerSDR
             udDSPImageGainTX.Value = tbDSPImageGainTX.Value;
         }
 
-        private void udLMSANF_ValueChanged(object sender, System.EventArgs e)
+        private void udLMSANF_ValueChanged(object sender, System.EventArgs e)   // (NR0V) modified
         {
             console.radio.GetDSPRX(0, 0).SetANFVals(
                 (int)udLMSANFtaps.Value,
                 (int)udLMSANFdelay.Value,
-                1e-4 * (double)udLMSANFgain.Value,
-                1e-7 * (double)udLMSANFLeak.Value);
+                1e-6 * (double)udLMSANFgain.Value,
+                1e-3 * (double)udLMSANFLeak.Value);
             console.radio.GetDSPRX(0, 1).SetANFVals(
                 (int)udLMSANFtaps.Value,
                 (int)udLMSANFdelay.Value,
-                1e-4 * (double)udLMSANFgain.Value,
-                1e-7 * (double)udLMSANFLeak.Value);
+                1e-6 * (double)udLMSANFgain.Value,
+                1e-3 * (double)udLMSANFLeak.Value);
         }
+
+        private void radANFPreAGC_CheckedChanged(object sender, EventArgs e)  // (NR0V) added
+        {
+            int position;
+            if (radANFPreAGC.Checked)
+                position = 0;
+            else
+                position = 1;
+            DttSP.SetANFposition(0, 0, position);
+            DttSP.SetANFposition(0, 1, position);
+        }
+
 
         private bool old_cpdr = false;
         private void chkTXImagCal_CheckedChanged(object sender, System.EventArgs e)

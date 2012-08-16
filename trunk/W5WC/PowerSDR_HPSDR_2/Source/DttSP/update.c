@@ -6,7 +6,7 @@ This file is part of a program that implements a Software-Defined Radio.
 
 Copyright (C) 2004, 2005, 2006, 2007 by Frank Brickle, AB2KT and Bob McGwier, N4HY
 Copyright (C) 2011 FlexRadio Systems - Manual Notch Cardinality
-Copyright (C) 2011, 2012 Warren Pratt, NR0V - Changes for AGC, ALC, Leveler, Compressor
+Copyright (C) 2011, 2012 Warren Pratt, NR0V - Changes for AGC, ALC, Leveler, Compressor, ANF
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ unsigned int threadno=2;
 unsigned int thread_com;
 
 #define RL (uni[thread].multirx.lis)
-#define asinh(value) (REAL)log(value + sqrt(value * value + 1))
+#define asinh(value) (RanEAL)log(value + sqrt(value * value + 1))
 ////////////////////////////////////////////////////////////////////////////
 
 PRIVATE REAL INLINE
@@ -383,7 +383,7 @@ SetRXFilter (unsigned int thread, unsigned int subrx, double low_frequency, doub
 {
 	int ncoef = uni[thread].buflen + 1;
 	int i, fftlen = 2 * uni[thread].buflen,rtn=0;
-	fftwf_plan ptmp;
+	fftwf_plan ptmp, ptmp_notch;	//
 	COMPLEX *zcvec;
 
 	//fprintf(stderr, "DSP: SetRXFilter(%u, %u, %f, %f)\n", thread, subrx, low_frequency, high_frequency);
@@ -413,6 +413,10 @@ SetRXFilter (unsigned int thread, unsigned int subrx, double low_frequency, doub
 			(fftwf_complex *) zcvec,
 			(fftwf_complex *) rx[thread][subrx].filt.ovsv->zfvec,
 			FFTW_FORWARD, uni[thread].wisdom.bits);
+		ptmp_notch = fftwf_plan_dft_1d (fftlen,	//
+			(fftwf_complex *) zcvec,
+			(fftwf_complex *) rx[thread][subrx].filt.ovsv_notch->zfvec,
+			FFTW_FORWARD, uni[thread].wisdom.bits);
 #ifdef LHS
 		for (i = 0; i < ncoef; i++)
 			zcvec[i] = rx[thread][subrx].filt.coef->coef[i];
@@ -421,10 +425,14 @@ SetRXFilter (unsigned int thread, unsigned int subrx, double low_frequency, doub
 			zcvec[fftlen - ncoef + i] = rx[thread][subrx].filt.coef->coef[i];
 #endif
 		fftwf_execute (ptmp);
+		fftwf_execute (ptmp_notch);	//
 		fftwf_destroy_plan (ptmp);
+		fftwf_destroy_plan (ptmp_notch);	//
 		delvec_COMPLEX (zcvec);
 		normalize_vec_COMPLEX (rx[thread][subrx].filt.ovsv->zfvec, rx[thread][subrx].filt.ovsv->fftlen,
 			rx[thread][subrx].filt.ovsv->scale);
+		normalize_vec_COMPLEX (rx[thread][subrx].filt.ovsv_notch->zfvec, rx[thread][subrx].filt.ovsv_notch->fftlen,	//
+			rx[thread][subrx].filt.ovsv_notch->scale);
 		memcpy ((char *) rx[thread][subrx].filt.save, (char *) rx[thread][subrx].filt.ovsv->zfvec,
 			rx[thread][subrx].filt.ovsv->fftlen * sizeof (COMPLEX));
 
@@ -602,28 +610,49 @@ SetTXSquelchAtt (unsigned int thread, float setit)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
+DttSP_EXP void  // (NR0V) modified
 SetANF (unsigned int thread, unsigned subrx, BOOLEAN setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	rx[thread][subrx].anf.flag = setit;
-	if (!setit) memset(rx[thread][subrx].anf.gen->adaptive_filter, 0, sizeof(COMPLEX)*128);
+	memset(rx[thread][subrx].anf.gen->w, 0, sizeof(double) * DLINE_SIZE);
+	memset(rx[thread][subrx].anf.gen->d, 0, sizeof(double) * DLINE_SIZE);
+	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
+	rx[thread][subrx].anf.flag = setit;
 	sem_post(&top[thread].sync.upd.sem);
 }
 
 
-DttSP_EXP void
+DttSP_EXP void  // (NR0V) modified
 SetANFvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 
-	rx[thread][subrx].anf.gen->adaptive_filter_size = taps;
-	rx[thread][subrx].anf.gen->delay = delay;
-	rx[thread][subrx].anf.gen->adaptation_rate = (REAL)gain;
-	rx[thread][subrx].banf.gen->adaptation_rate = (REAL)gain;
-	rx[thread][subrx].anf.gen->leakage = (REAL)leakage;
-	memset(rx[thread][subrx].anf.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
+	//rx[thread][subrx].anf.gen->adaptive_filter_size = taps;
+	//rx[thread][subrx].anf.gen->delay = delay;
+	//rx[thread][subrx].anf.gen->adaptation_rate = (REAL)gain;
+	//rx[thread][subrx].banf.gen->adaptation_rate = (REAL)gain;
+	//rx[thread][subrx].anf.gen->leakage = (REAL)leakage;
+	//memset(rx[thread][subrx].anf.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
 
+	rx[thread][subrx].anf.gen->n_taps = taps;
+	rx[thread][subrx].anf.gen->delay = delay;
+	rx[thread][subrx].anf.gen->two_mu = gain;		//try two_mu = 1e-4
+	rx[thread][subrx].anf.gen->gamma = leakage;		//try gamma = 0.10
+	memset (rx[thread][subrx].anf.gen->w, 0, sizeof(double) * DLINE_SIZE);
+	memset(rx[thread][subrx].anf.gen->d, 0, sizeof(double) * DLINE_SIZE);
+	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void	// (NR0V) added
+SetANFposition (unsigned int thread, unsigned subrx, int position)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].anf.position = position;
+	memset (rx[thread][subrx].anf.gen->w, 0, sizeof(double) * DLINE_SIZE);
+	memset(rx[thread][subrx].anf.gen->d, 0, sizeof(double) * DLINE_SIZE);
+	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
 	sem_post(&top[thread].sync.upd.sem);
 }
 
