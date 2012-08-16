@@ -4,6 +4,7 @@ This file is part of a program that implements a Software-Defined Radio.
 
 Copyright (C) 2004, 2005, 2006 by Frank Brickle, AB2KT and Bob McGwier, N4HY
 Copyright (C) 2011 Warren Pratt, NR0V - Changes for AGC, ALC, Leveler, Compressor
+Copyright (C) 2012 Warren Pratt, NR0V - Changes for ANF
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -65,6 +66,7 @@ Bridgewater, NJ 08807
 #include <common.h>
 #include <wcpagc.h>
 #include <compress.h>
+#include <anf.h.>
 
 //------------------------------------------------------------------------
 // max no. simultaneous receivers
@@ -135,7 +137,7 @@ extern struct _rx
 {
   struct
   {
-    CXB i, o;
+    CXB i, o, i_notch, o_notch;	// (NR0V)
   } buf;
   IQ iqfix;
   struct
@@ -155,7 +157,7 @@ extern struct _rx
   struct
   {
     ComplexFIR coef;
-    FiltOvSv ovsv;
+    FiltOvSv ovsv, ovsv_notch;	// (NR0V)
     COMPLEX *save;
 	double low;		// (NR0V)
 	double high;
@@ -181,13 +183,20 @@ extern struct _rx
   {
     LMSR gen;
     BOOLEAN flag;
-  } anr, anf;
+  } anr; //anf
 
   struct
   {
 	  BLMS gen;
 	  BOOLEAN flag;
   } banr, banf;
+
+  struct	// (NR0V)
+  {
+	ANF gen;
+	BOOLEAN flag;
+	int position;
+  } anf;
 
   //struct
   //{
