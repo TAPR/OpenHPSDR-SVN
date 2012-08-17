@@ -748,6 +748,7 @@
             this.labelTS39 = new System.Windows.Forms.LabelTS();
             this.tpHPSDR = new System.Windows.Forms.TabPage();
             this.grpVersion = new System.Windows.Forms.GroupBoxTS();
+            this.chkFirmwareByp = new System.Windows.Forms.CheckBoxTS();
             this.lblMercury2FWVer = new System.Windows.Forms.LabelTS();
             this.lblPenelopeFWVer = new System.Windows.Forms.LabelTS();
             this.lblMercuryFWVer = new System.Windows.Forms.LabelTS();
@@ -1042,6 +1043,26 @@
             this.tpDSP = new System.Windows.Forms.TabPage();
             this.tcDSP = new System.Windows.Forms.TabControl();
             this.tpDSPOptions = new System.Windows.Forms.TabPage();
+            this.grpDSPLMSNR2 = new System.Windows.Forms.GroupBoxTS();
+            this.lblLMSNR2Leak = new System.Windows.Forms.LabelTS();
+            this.udLMSNR2Leak = new System.Windows.Forms.NumericUpDownTS();
+            this.lblLMSNR2gain = new System.Windows.Forms.LabelTS();
+            this.udLMSNR2gain = new System.Windows.Forms.NumericUpDownTS();
+            this.udLMSNR2delay = new System.Windows.Forms.NumericUpDownTS();
+            this.lblLMSNR2delay = new System.Windows.Forms.LabelTS();
+            this.udLMSNR2taps = new System.Windows.Forms.NumericUpDownTS();
+            this.lblLMSNR2taps = new System.Windows.Forms.LabelTS();
+            this.grpDSPLMSANF2 = new System.Windows.Forms.GroupBoxTS();
+            this.radANFPostAGC2 = new System.Windows.Forms.RadioButtonTS();
+            this.radANF2PreAGC = new System.Windows.Forms.RadioButtonTS();
+            this.lblLMSANF2Leak = new System.Windows.Forms.LabelTS();
+            this.udLMSANF2Leak = new System.Windows.Forms.NumericUpDownTS();
+            this.lblLMSANF2gain = new System.Windows.Forms.LabelTS();
+            this.udLMSANF2gain = new System.Windows.Forms.NumericUpDownTS();
+            this.lblLMSANF2delay = new System.Windows.Forms.LabelTS();
+            this.udLMSANF2delay = new System.Windows.Forms.NumericUpDownTS();
+            this.lblLMSANF2Taps = new System.Windows.Forms.LabelTS();
+            this.udLMSANF2taps = new System.Windows.Forms.NumericUpDownTS();
             this.chkDSPTXMeterPeak = new System.Windows.Forms.CheckBoxTS();
             this.grpDSPBufferSize = new System.Windows.Forms.GroupBoxTS();
             this.grpDSPBufDig = new System.Windows.Forms.GroupBoxTS();
@@ -1072,6 +1093,8 @@
             this.udLMSNRtaps = new System.Windows.Forms.NumericUpDownTS();
             this.lblLMSNRtaps = new System.Windows.Forms.LabelTS();
             this.grpDSPLMSANF = new System.Windows.Forms.GroupBoxTS();
+            this.radANFPostAGC = new System.Windows.Forms.RadioButtonTS();
+            this.radANFPreAGC = new System.Windows.Forms.RadioButtonTS();
             this.lblLMSANFLeak = new System.Windows.Forms.LabelTS();
             this.udLMSANFLeak = new System.Windows.Forms.NumericUpDownTS();
             this.lblLMSANFgain = new System.Windows.Forms.LabelTS();
@@ -1875,7 +1898,6 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
-            this.chkFirmwareByp = new System.Windows.Forms.CheckBoxTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -2089,6 +2111,16 @@
             this.tpDSP.SuspendLayout();
             this.tcDSP.SuspendLayout();
             this.tpDSPOptions.SuspendLayout();
+            this.grpDSPLMSNR2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2Leak)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2gain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2delay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2taps)).BeginInit();
+            this.grpDSPLMSANF2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSANF2Leak)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSANF2gain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSANF2delay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSANF2taps)).BeginInit();
             this.grpDSPBufferSize.SuspendLayout();
             this.grpDSPBufDig.SuspendLayout();
             this.grpDSPBufCW.SuspendLayout();
@@ -5319,9 +5351,9 @@
             this.comboGeneralLPTAddr.TabIndex = 0;
             this.comboGeneralLPTAddr.Text = "378";
             this.toolTip1.SetToolTip(this.comboGeneralLPTAddr, "Parallel Port Address");
-            this.comboGeneralLPTAddr.LostFocus += new System.EventHandler(this.comboGeneralLPTAddr_LostFocus);
             this.comboGeneralLPTAddr.SelectedIndexChanged += new System.EventHandler(this.comboGeneralLPTAddr_SelectedIndexChanged);
             this.comboGeneralLPTAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboGeneralLPTAddr_KeyDown);
+            this.comboGeneralLPTAddr.LostFocus += new System.EventHandler(this.comboGeneralLPTAddr_LostFocus);
             // 
             // tpGeneralOptions
             // 
@@ -11665,6 +11697,18 @@
             this.grpVersion.TabStop = false;
             this.grpVersion.Text = "Firmware Versions";
             // 
+            // chkFirmwareByp
+            // 
+            this.chkFirmwareByp.AutoSize = true;
+            this.chkFirmwareByp.Image = null;
+            this.chkFirmwareByp.Location = new System.Drawing.Point(11, 122);
+            this.chkFirmwareByp.Name = "chkFirmwareByp";
+            this.chkFirmwareByp.Size = new System.Drawing.Size(139, 17);
+            this.chkFirmwareByp.TabIndex = 5;
+            this.chkFirmwareByp.Text = "Bypass Firmware Check";
+            this.chkFirmwareByp.UseVisualStyleBackColor = true;
+            this.chkFirmwareByp.CheckedChanged += new System.EventHandler(this.chkFirmwareByp_CheckedChanged);
+            // 
             // lblMercury2FWVer
             // 
             this.lblMercury2FWVer.BackColor = System.Drawing.SystemColors.Control;
@@ -16153,6 +16197,8 @@
             // 
             // tpDSPOptions
             // 
+            this.tpDSPOptions.Controls.Add(this.grpDSPLMSNR2);
+            this.tpDSPOptions.Controls.Add(this.grpDSPLMSANF2);
             this.tpDSPOptions.Controls.Add(this.chkDSPTXMeterPeak);
             this.tpDSPOptions.Controls.Add(this.grpDSPBufferSize);
             this.tpDSPOptions.Controls.Add(this.grpDSPNB);
@@ -16166,12 +16212,379 @@
             this.tpDSPOptions.TabIndex = 2;
             this.tpDSPOptions.Text = "Options";
             // 
+            // grpDSPLMSNR2
+            // 
+            this.grpDSPLMSNR2.Controls.Add(this.lblLMSNR2Leak);
+            this.grpDSPLMSNR2.Controls.Add(this.udLMSNR2Leak);
+            this.grpDSPLMSNR2.Controls.Add(this.lblLMSNR2gain);
+            this.grpDSPLMSNR2.Controls.Add(this.udLMSNR2gain);
+            this.grpDSPLMSNR2.Controls.Add(this.udLMSNR2delay);
+            this.grpDSPLMSNR2.Controls.Add(this.lblLMSNR2delay);
+            this.grpDSPLMSNR2.Controls.Add(this.udLMSNR2taps);
+            this.grpDSPLMSNR2.Controls.Add(this.lblLMSNR2taps);
+            this.grpDSPLMSNR2.Location = new System.Drawing.Point(8, 144);
+            this.grpDSPLMSNR2.Name = "grpDSPLMSNR2";
+            this.grpDSPLMSNR2.Size = new System.Drawing.Size(112, 128);
+            this.grpDSPLMSNR2.TabIndex = 40;
+            this.grpDSPLMSNR2.TabStop = false;
+            this.grpDSPLMSNR2.Text = "NR RX2";
+            // 
+            // lblLMSNR2Leak
+            // 
+            this.lblLMSNR2Leak.Image = null;
+            this.lblLMSNR2Leak.Location = new System.Drawing.Point(8, 96);
+            this.lblLMSNR2Leak.Name = "lblLMSNR2Leak";
+            this.lblLMSNR2Leak.Size = new System.Drawing.Size(40, 16);
+            this.lblLMSNR2Leak.TabIndex = 11;
+            this.lblLMSNR2Leak.Text = "Leak:";
+            // 
+            // udLMSNR2Leak
+            // 
+            this.udLMSNR2Leak.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSNR2Leak.Location = new System.Drawing.Point(56, 96);
+            this.udLMSNR2Leak.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.udLMSNR2Leak.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSNR2Leak.Name = "udLMSNR2Leak";
+            this.udLMSNR2Leak.Size = new System.Drawing.Size(48, 20);
+            this.udLMSNR2Leak.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.udLMSNR2Leak, "Determines the adaptation rate of the filter.");
+            this.udLMSNR2Leak.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udLMSNR2Leak.ValueChanged += new System.EventHandler(this.udLMSNR2_ValueChanged);
+            // 
+            // lblLMSNR2gain
+            // 
+            this.lblLMSNR2gain.Image = null;
+            this.lblLMSNR2gain.Location = new System.Drawing.Point(8, 72);
+            this.lblLMSNR2gain.Name = "lblLMSNR2gain";
+            this.lblLMSNR2gain.Size = new System.Drawing.Size(40, 16);
+            this.lblLMSNR2gain.TabIndex = 9;
+            this.lblLMSNR2gain.Text = "Gain:";
+            // 
+            // udLMSNR2gain
+            // 
+            this.udLMSNR2gain.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSNR2gain.Location = new System.Drawing.Point(56, 72);
+            this.udLMSNR2gain.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.udLMSNR2gain.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSNR2gain.Name = "udLMSNR2gain";
+            this.udLMSNR2gain.Size = new System.Drawing.Size(48, 20);
+            this.udLMSNR2gain.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.udLMSNR2gain, "Determines the adaptation rate of the filter.");
+            this.udLMSNR2gain.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.udLMSNR2gain.ValueChanged += new System.EventHandler(this.udLMSNR2_ValueChanged);
+            // 
+            // udLMSNR2delay
+            // 
+            this.udLMSNR2delay.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSNR2delay.Location = new System.Drawing.Point(56, 48);
+            this.udLMSNR2delay.Maximum = new decimal(new int[] {
+            127,
+            0,
+            0,
+            0});
+            this.udLMSNR2delay.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSNR2delay.Name = "udLMSNR2delay";
+            this.udLMSNR2delay.Size = new System.Drawing.Size(48, 20);
+            this.udLMSNR2delay.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.udLMSNR2delay, "Determines how far back you look in the signal before you begin to compute a cohe" +
+                    "rent signal enhancement filter.  ");
+            this.udLMSNR2delay.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.udLMSNR2delay.ValueChanged += new System.EventHandler(this.udLMSNR2_ValueChanged);
+            // 
+            // lblLMSNR2delay
+            // 
+            this.lblLMSNR2delay.Image = null;
+            this.lblLMSNR2delay.Location = new System.Drawing.Point(8, 48);
+            this.lblLMSNR2delay.Name = "lblLMSNR2delay";
+            this.lblLMSNR2delay.Size = new System.Drawing.Size(40, 16);
+            this.lblLMSNR2delay.TabIndex = 5;
+            this.lblLMSNR2delay.Text = "Delay:";
+            // 
+            // udLMSNR2taps
+            // 
+            this.udLMSNR2taps.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSNR2taps.Location = new System.Drawing.Point(56, 24);
+            this.udLMSNR2taps.Maximum = new decimal(new int[] {
+            127,
+            0,
+            0,
+            0});
+            this.udLMSNR2taps.Minimum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.udLMSNR2taps.Name = "udLMSNR2taps";
+            this.udLMSNR2taps.Size = new System.Drawing.Size(48, 20);
+            this.udLMSNR2taps.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.udLMSNR2taps, "Determines the length of the NR computed filter.  ");
+            this.udLMSNR2taps.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.udLMSNR2taps.ValueChanged += new System.EventHandler(this.udLMSNR2_ValueChanged);
+            // 
+            // lblLMSNR2taps
+            // 
+            this.lblLMSNR2taps.Image = null;
+            this.lblLMSNR2taps.Location = new System.Drawing.Point(8, 24);
+            this.lblLMSNR2taps.Name = "lblLMSNR2taps";
+            this.lblLMSNR2taps.Size = new System.Drawing.Size(40, 16);
+            this.lblLMSNR2taps.TabIndex = 3;
+            this.lblLMSNR2taps.Text = "Taps:";
+            // 
+            // grpDSPLMSANF2
+            // 
+            this.grpDSPLMSANF2.Controls.Add(this.radANFPostAGC2);
+            this.grpDSPLMSANF2.Controls.Add(this.radANF2PreAGC);
+            this.grpDSPLMSANF2.Controls.Add(this.lblLMSANF2Leak);
+            this.grpDSPLMSANF2.Controls.Add(this.udLMSANF2Leak);
+            this.grpDSPLMSANF2.Controls.Add(this.lblLMSANF2gain);
+            this.grpDSPLMSANF2.Controls.Add(this.udLMSANF2gain);
+            this.grpDSPLMSANF2.Controls.Add(this.lblLMSANF2delay);
+            this.grpDSPLMSANF2.Controls.Add(this.udLMSANF2delay);
+            this.grpDSPLMSANF2.Controls.Add(this.lblLMSANF2Taps);
+            this.grpDSPLMSANF2.Controls.Add(this.udLMSANF2taps);
+            this.grpDSPLMSANF2.Location = new System.Drawing.Point(128, 144);
+            this.grpDSPLMSANF2.Name = "grpDSPLMSANF2";
+            this.grpDSPLMSANF2.Size = new System.Drawing.Size(197, 128);
+            this.grpDSPLMSANF2.TabIndex = 39;
+            this.grpDSPLMSANF2.TabStop = false;
+            this.grpDSPLMSANF2.Text = "ANF RX2";
+            // 
+            // radANFPostAGC2
+            // 
+            this.radANFPostAGC2.AutoSize = true;
+            this.radANFPostAGC2.Image = null;
+            this.radANFPostAGC2.Location = new System.Drawing.Point(110, 50);
+            this.radANFPostAGC2.Name = "radANFPostAGC2";
+            this.radANFPostAGC2.Size = new System.Drawing.Size(71, 17);
+            this.radANFPostAGC2.TabIndex = 13;
+            this.radANFPostAGC2.Text = "Post-AGC";
+            this.radANFPostAGC2.UseVisualStyleBackColor = true;
+            // 
+            // radANF2PreAGC
+            // 
+            this.radANF2PreAGC.AutoSize = true;
+            this.radANF2PreAGC.Checked = true;
+            this.radANF2PreAGC.Image = null;
+            this.radANF2PreAGC.Location = new System.Drawing.Point(110, 27);
+            this.radANF2PreAGC.Name = "radANF2PreAGC";
+            this.radANF2PreAGC.Size = new System.Drawing.Size(66, 17);
+            this.radANF2PreAGC.TabIndex = 12;
+            this.radANF2PreAGC.TabStop = true;
+            this.radANF2PreAGC.Text = "Pre-AGC";
+            this.radANF2PreAGC.UseVisualStyleBackColor = true;
+            this.radANF2PreAGC.CheckedChanged += new System.EventHandler(this.radANF2PreAGC_CheckedChanged);
+            // 
+            // lblLMSANF2Leak
+            // 
+            this.lblLMSANF2Leak.Image = null;
+            this.lblLMSANF2Leak.Location = new System.Drawing.Point(8, 96);
+            this.lblLMSANF2Leak.Name = "lblLMSANF2Leak";
+            this.lblLMSANF2Leak.Size = new System.Drawing.Size(40, 16);
+            this.lblLMSANF2Leak.TabIndex = 9;
+            this.lblLMSANF2Leak.Text = "Leak:";
+            // 
+            // udLMSANF2Leak
+            // 
+            this.udLMSANF2Leak.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSANF2Leak.Location = new System.Drawing.Point(56, 96);
+            this.udLMSANF2Leak.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.udLMSANF2Leak.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSANF2Leak.Name = "udLMSANF2Leak";
+            this.udLMSANF2Leak.Size = new System.Drawing.Size(48, 20);
+            this.udLMSANF2Leak.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.udLMSANF2Leak, "Determines the adaptation rate of the filter.");
+            this.udLMSANF2Leak.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udLMSANF2Leak.ValueChanged += new System.EventHandler(this.udLMSANF2_ValueChanged);
+            // 
+            // lblLMSANF2gain
+            // 
+            this.lblLMSANF2gain.Image = null;
+            this.lblLMSANF2gain.Location = new System.Drawing.Point(8, 72);
+            this.lblLMSANF2gain.Name = "lblLMSANF2gain";
+            this.lblLMSANF2gain.Size = new System.Drawing.Size(40, 16);
+            this.lblLMSANF2gain.TabIndex = 6;
+            this.lblLMSANF2gain.Text = "Gain:";
+            // 
+            // udLMSANF2gain
+            // 
+            this.udLMSANF2gain.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSANF2gain.Location = new System.Drawing.Point(56, 72);
+            this.udLMSANF2gain.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.udLMSANF2gain.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSANF2gain.Name = "udLMSANF2gain";
+            this.udLMSANF2gain.Size = new System.Drawing.Size(48, 20);
+            this.udLMSANF2gain.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.udLMSANF2gain, "Determines the adaptation rate of the filter.");
+            this.udLMSANF2gain.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udLMSANF2gain.ValueChanged += new System.EventHandler(this.udLMSANF2_ValueChanged);
+            // 
+            // lblLMSANF2delay
+            // 
+            this.lblLMSANF2delay.Image = null;
+            this.lblLMSANF2delay.Location = new System.Drawing.Point(8, 48);
+            this.lblLMSANF2delay.Name = "lblLMSANF2delay";
+            this.lblLMSANF2delay.Size = new System.Drawing.Size(40, 16);
+            this.lblLMSANF2delay.TabIndex = 4;
+            this.lblLMSANF2delay.Text = "Delay:";
+            // 
+            // udLMSANF2delay
+            // 
+            this.udLMSANF2delay.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSANF2delay.Location = new System.Drawing.Point(56, 48);
+            this.udLMSANF2delay.Maximum = new decimal(new int[] {
+            511,
+            0,
+            0,
+            0});
+            this.udLMSANF2delay.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSANF2delay.Name = "udLMSANF2delay";
+            this.udLMSANF2delay.Size = new System.Drawing.Size(48, 20);
+            this.udLMSANF2delay.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.udLMSANF2delay, "Determines how far back you look in the signal before you begin to compute a canc" +
+                    "ellation filter");
+            this.udLMSANF2delay.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.udLMSANF2delay.ValueChanged += new System.EventHandler(this.udLMSANF2_ValueChanged);
+            // 
+            // lblLMSANF2Taps
+            // 
+            this.lblLMSANF2Taps.Image = null;
+            this.lblLMSANF2Taps.Location = new System.Drawing.Point(8, 24);
+            this.lblLMSANF2Taps.Name = "lblLMSANF2Taps";
+            this.lblLMSANF2Taps.Size = new System.Drawing.Size(40, 16);
+            this.lblLMSANF2Taps.TabIndex = 2;
+            this.lblLMSANF2Taps.Text = "Taps:";
+            // 
+            // udLMSANF2taps
+            // 
+            this.udLMSANF2taps.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSANF2taps.Location = new System.Drawing.Point(56, 24);
+            this.udLMSANF2taps.Maximum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.udLMSANF2taps.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLMSANF2taps.Name = "udLMSANF2taps";
+            this.udLMSANF2taps.Size = new System.Drawing.Size(48, 20);
+            this.udLMSANF2taps.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.udLMSANF2taps, "Determines the length of the computed notch filter.");
+            this.udLMSANF2taps.Value = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.udLMSANF2taps.ValueChanged += new System.EventHandler(this.udLMSANF2_ValueChanged);
+            // 
             // chkDSPTXMeterPeak
             // 
             this.chkDSPTXMeterPeak.Checked = true;
             this.chkDSPTXMeterPeak.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDSPTXMeterPeak.Image = null;
-            this.chkDSPTXMeterPeak.Location = new System.Drawing.Point(384, 216);
+            this.chkDSPTXMeterPeak.Location = new System.Drawing.Point(433, 256);
             this.chkDSPTXMeterPeak.Name = "chkDSPTXMeterPeak";
             this.chkDSPTXMeterPeak.Size = new System.Drawing.Size(144, 32);
             this.chkDSPTXMeterPeak.TabIndex = 38;
@@ -16183,7 +16596,7 @@
             this.grpDSPBufferSize.Controls.Add(this.grpDSPBufDig);
             this.grpDSPBufferSize.Controls.Add(this.grpDSPBufCW);
             this.grpDSPBufferSize.Controls.Add(this.grpDSPBufPhone);
-            this.grpDSPBufferSize.Location = new System.Drawing.Point(256, 8);
+            this.grpDSPBufferSize.Location = new System.Drawing.Point(331, 8);
             this.grpDSPBufferSize.Name = "grpDSPBufferSize";
             this.grpDSPBufferSize.Size = new System.Drawing.Size(120, 248);
             this.grpDSPBufferSize.TabIndex = 37;
@@ -16401,7 +16814,7 @@
             // 
             this.grpDSPNB.Controls.Add(this.udDSPNB);
             this.grpDSPNB.Controls.Add(this.lblDSPNBThreshold);
-            this.grpDSPNB.Location = new System.Drawing.Point(384, 8);
+            this.grpDSPNB.Location = new System.Drawing.Point(457, 8);
             this.grpDSPNB.Name = "grpDSPNB";
             this.grpDSPNB.Size = new System.Drawing.Size(120, 56);
             this.grpDSPNB.TabIndex = 35;
@@ -16622,6 +17035,8 @@
             // 
             // grpDSPLMSANF
             // 
+            this.grpDSPLMSANF.Controls.Add(this.radANFPostAGC);
+            this.grpDSPLMSANF.Controls.Add(this.radANFPreAGC);
             this.grpDSPLMSANF.Controls.Add(this.lblLMSANFLeak);
             this.grpDSPLMSANF.Controls.Add(this.udLMSANFLeak);
             this.grpDSPLMSANF.Controls.Add(this.lblLMSANFgain);
@@ -16632,10 +17047,35 @@
             this.grpDSPLMSANF.Controls.Add(this.udLMSANFtaps);
             this.grpDSPLMSANF.Location = new System.Drawing.Point(128, 8);
             this.grpDSPLMSANF.Name = "grpDSPLMSANF";
-            this.grpDSPLMSANF.Size = new System.Drawing.Size(120, 128);
+            this.grpDSPLMSANF.Size = new System.Drawing.Size(197, 128);
             this.grpDSPLMSANF.TabIndex = 32;
             this.grpDSPLMSANF.TabStop = false;
             this.grpDSPLMSANF.Text = "ANF";
+            // 
+            // radANFPostAGC
+            // 
+            this.radANFPostAGC.AutoSize = true;
+            this.radANFPostAGC.Image = null;
+            this.radANFPostAGC.Location = new System.Drawing.Point(110, 50);
+            this.radANFPostAGC.Name = "radANFPostAGC";
+            this.radANFPostAGC.Size = new System.Drawing.Size(71, 17);
+            this.radANFPostAGC.TabIndex = 11;
+            this.radANFPostAGC.Text = "Post-AGC";
+            this.radANFPostAGC.UseVisualStyleBackColor = true;
+            // 
+            // radANFPreAGC
+            // 
+            this.radANFPreAGC.AutoSize = true;
+            this.radANFPreAGC.Checked = true;
+            this.radANFPreAGC.Image = null;
+            this.radANFPreAGC.Location = new System.Drawing.Point(110, 27);
+            this.radANFPreAGC.Name = "radANFPreAGC";
+            this.radANFPreAGC.Size = new System.Drawing.Size(66, 17);
+            this.radANFPreAGC.TabIndex = 10;
+            this.radANFPreAGC.TabStop = true;
+            this.radANFPreAGC.Text = "Pre-AGC";
+            this.radANFPreAGC.UseVisualStyleBackColor = true;
+            this.radANFPreAGC.CheckedChanged += new System.EventHandler(this.radANFPreAGC_CheckedChanged);
             // 
             // lblLMSANFLeak
             // 
@@ -16669,7 +17109,7 @@
             this.udLMSANFLeak.TabIndex = 8;
             this.toolTip1.SetToolTip(this.udLMSANFLeak, "Determines the adaptation rate of the filter.");
             this.udLMSANFLeak.Value = new decimal(new int[] {
-            1,
+            100,
             0,
             0,
             0});
@@ -16732,7 +17172,7 @@
             0});
             this.udLMSANFdelay.Location = new System.Drawing.Point(56, 48);
             this.udLMSANFdelay.Maximum = new decimal(new int[] {
-            127,
+            511,
             0,
             0,
             0});
@@ -16772,12 +17212,12 @@
             0});
             this.udLMSANFtaps.Location = new System.Drawing.Point(56, 24);
             this.udLMSANFtaps.Maximum = new decimal(new int[] {
-            127,
+            512,
             0,
             0,
             0});
             this.udLMSANFtaps.Minimum = new decimal(new int[] {
-            31,
+            1,
             0,
             0,
             0});
@@ -16786,7 +17226,7 @@
             this.udLMSANFtaps.TabIndex = 1;
             this.toolTip1.SetToolTip(this.udLMSANFtaps, "Determines the length of the computed notch filter.");
             this.udLMSANFtaps.Value = new decimal(new int[] {
-            64,
+            256,
             0,
             0,
             0});
@@ -16796,7 +17236,7 @@
             // grpDSPWindow
             // 
             this.grpDSPWindow.Controls.Add(this.comboDSPWindow);
-            this.grpDSPWindow.Location = new System.Drawing.Point(384, 136);
+            this.grpDSPWindow.Location = new System.Drawing.Point(457, 136);
             this.grpDSPWindow.Name = "grpDSPWindow";
             this.grpDSPWindow.Size = new System.Drawing.Size(120, 56);
             this.grpDSPWindow.TabIndex = 36;
@@ -16819,7 +17259,7 @@
             // 
             this.grpDSPNB2.Controls.Add(this.udDSPNB2);
             this.grpDSPNB2.Controls.Add(this.lblDSPNB2Threshold);
-            this.grpDSPNB2.Location = new System.Drawing.Point(384, 72);
+            this.grpDSPNB2.Location = new System.Drawing.Point(457, 74);
             this.grpDSPNB2.Name = "grpDSPNB2";
             this.grpDSPNB2.Size = new System.Drawing.Size(120, 56);
             this.grpDSPNB2.TabIndex = 34;
@@ -28159,18 +28599,6 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
-            // chkFirmwareByp
-            // 
-            this.chkFirmwareByp.AutoSize = true;
-            this.chkFirmwareByp.Image = null;
-            this.chkFirmwareByp.Location = new System.Drawing.Point(11, 122);
-            this.chkFirmwareByp.Name = "chkFirmwareByp";
-            this.chkFirmwareByp.Size = new System.Drawing.Size(139, 17);
-            this.chkFirmwareByp.TabIndex = 5;
-            this.chkFirmwareByp.Text = "Bypass Firmware Check";
-            this.chkFirmwareByp.UseVisualStyleBackColor = true;
-            this.chkFirmwareByp.CheckedChanged += new System.EventHandler(this.chkFirmwareByp_CheckedChanged);
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -28410,6 +28838,17 @@
             this.tpDSP.ResumeLayout(false);
             this.tcDSP.ResumeLayout(false);
             this.tpDSPOptions.ResumeLayout(false);
+            this.grpDSPLMSNR2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2Leak)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2gain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2delay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2taps)).EndInit();
+            this.grpDSPLMSANF2.ResumeLayout(false);
+            this.grpDSPLMSANF2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSANF2Leak)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSANF2gain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSANF2delay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLMSANF2taps)).EndInit();
             this.grpDSPBufferSize.ResumeLayout(false);
             this.grpDSPBufDig.ResumeLayout(false);
             this.grpDSPBufCW.ResumeLayout(false);
@@ -28422,6 +28861,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.udLMSNRdelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSNRtaps)).EndInit();
             this.grpDSPLMSANF.ResumeLayout(false);
+            this.grpDSPLMSANF.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSANFLeak)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSANFgain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSANFdelay)).EndInit();
@@ -28709,5 +29149,27 @@
         private System.Windows.Forms.NumericUpDownTS udTXFilterLowSave;
         private System.Windows.Forms.NumericUpDownTS udTXFilterHighSave;
         private System.Windows.Forms.CheckBoxTS chkFirmwareByp;
+        private System.Windows.Forms.GroupBoxTS grpDSPLMSANF2;
+        private System.Windows.Forms.LabelTS lblLMSANF2Leak;
+        private System.Windows.Forms.NumericUpDownTS udLMSANF2Leak;
+        private System.Windows.Forms.LabelTS lblLMSANF2gain;
+        private System.Windows.Forms.NumericUpDownTS udLMSANF2gain;
+        private System.Windows.Forms.LabelTS lblLMSANF2delay;
+        private System.Windows.Forms.NumericUpDownTS udLMSANF2delay;
+        private System.Windows.Forms.LabelTS lblLMSANF2Taps;
+        private System.Windows.Forms.NumericUpDownTS udLMSANF2taps;
+        private System.Windows.Forms.GroupBoxTS grpDSPLMSNR2;
+        private System.Windows.Forms.LabelTS lblLMSNR2Leak;
+        private System.Windows.Forms.NumericUpDownTS udLMSNR2Leak;
+        private System.Windows.Forms.LabelTS lblLMSNR2gain;
+        private System.Windows.Forms.NumericUpDownTS udLMSNR2gain;
+        private System.Windows.Forms.NumericUpDownTS udLMSNR2delay;
+        private System.Windows.Forms.LabelTS lblLMSNR2delay;
+        private System.Windows.Forms.NumericUpDownTS udLMSNR2taps;
+        private System.Windows.Forms.LabelTS lblLMSNR2taps;
+        private System.Windows.Forms.RadioButtonTS radANFPostAGC2;
+        private System.Windows.Forms.RadioButtonTS radANF2PreAGC;
+        private System.Windows.Forms.RadioButtonTS radANFPostAGC;
+        private System.Windows.Forms.RadioButtonTS radANFPreAGC;
     }
 }

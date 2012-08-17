@@ -236,6 +236,9 @@ namespace PowerSDR
 		[DllImport("DttSP.dll", EntryPoint="SetANFvals")]///
 		public static extern void SetANFvals(uint thread, uint subrx, int taps, int delay, double gain, double leak);
 
+        [DllImport("DttSP.dll", EntryPoint = "SetANFposition")]///
+        public static extern void SetANFposition(uint thread, uint subrx, int position);
+
 		[DllImport("DttSP.dll", EntryPoint="SetRXAGC")]///
 		public static extern void SetRXAGC(uint thread, uint subrx, AGCMode setit);
 		/*public static void SetRXAGC(uint thread, uint subrx, AGCMode setit)

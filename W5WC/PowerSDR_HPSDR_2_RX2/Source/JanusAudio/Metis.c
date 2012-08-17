@@ -670,9 +670,9 @@ int MetisReadDirect(char *bufp, int buflen) {
 				memcpy(bufp, inpacket.readbuf+8, 1024); 
 				return 1024; 
 			}
-			else { 
-				printf("MRD: ignoring data for ep %d\n", endpoint); 
-			} 
+			//else { 
+				//printf("MRD: ignoring data for ep %d\n", endpoint); 
+			//} 
 		} 
 		else { 
 			printf("MRD: ignoring right sized frame bad header!\n", rc); 			

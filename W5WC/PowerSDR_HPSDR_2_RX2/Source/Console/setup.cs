@@ -7749,22 +7749,42 @@ namespace PowerSDR
                 1e-7 * (double)udLMSNRLeak.Value);
         }
 
+        private void udLMSNR2_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(1, 0).SetNRVals(
+                (int)udLMSNR2taps.Value,
+                (int)udLMSNR2delay.Value,
+                1e-4 * (double)udLMSNR2gain.Value,
+                1e-7 * (double)udLMSNR2Leak.Value);
+            console.radio.GetDSPRX(1, 1).SetNRVals(
+                (int)udLMSNR2taps.Value,
+                (int)udLMSNR2delay.Value,
+                1e-4 * (double)udLMSNR2gain.Value,
+                1e-7 * (double)udLMSNR2Leak.Value);
+        }
+
         private void udDSPNB_ValueChanged(object sender, System.EventArgs e)
         {
             console.radio.GetDSPRX(0, 0).NBThreshold = 0.165 * (double)(udDSPNB.Value);
             console.radio.GetDSPRX(0, 1).NBThreshold = 0.165 * (double)(udDSPNB.Value);
+            console.radio.GetDSPRX(1, 0).NBThreshold = 0.165 * (double)(udDSPNB.Value);
+            console.radio.GetDSPRX(1, 1).NBThreshold = 0.165 * (double)(udDSPNB.Value);
         }
 
         private void udDSPNB2_ValueChanged(object sender, System.EventArgs e)
         {
             console.radio.GetDSPRX(0, 0).SDROMThreshold = 0.165 * (double)(udDSPNB2.Value);
             console.radio.GetDSPRX(0, 1).SDROMThreshold = 0.165 * (double)(udDSPNB2.Value);
+            console.radio.GetDSPRX(1, 0).SDROMThreshold = 0.165 * (double)(udDSPNB2.Value);
+            console.radio.GetDSPRX(1, 1).SDROMThreshold = 0.165 * (double)(udDSPNB2.Value);
         }
 
         private void comboDSPWindow_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             console.radio.GetDSPRX(0, 0).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
             console.radio.GetDSPRX(0, 1).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
+            console.radio.GetDSPRX(1, 0).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
+            console.radio.GetDSPRX(1, 1).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
         }
 
         private void comboDSPPhoneRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -7841,18 +7861,54 @@ namespace PowerSDR
             udDSPImageGainTX.Value = tbDSPImageGainTX.Value;
         }
 
-        private void udLMSANF_ValueChanged(object sender, System.EventArgs e)
+        private void udLMSANF_ValueChanged(object sender, System.EventArgs e)   // (NR0V) modified
         {
             console.radio.GetDSPRX(0, 0).SetANFVals(
                 (int)udLMSANFtaps.Value,
                 (int)udLMSANFdelay.Value,
-                1e-4 * (double)udLMSANFgain.Value,
-                1e-7 * (double)udLMSANFLeak.Value);
+                1e-6 * (double)udLMSANFgain.Value,
+                1e-3 * (double)udLMSANFLeak.Value);
             console.radio.GetDSPRX(0, 1).SetANFVals(
                 (int)udLMSANFtaps.Value,
                 (int)udLMSANFdelay.Value,
-                1e-4 * (double)udLMSANFgain.Value,
-                1e-7 * (double)udLMSANFLeak.Value);
+                1e-6 * (double)udLMSANFgain.Value,
+                1e-3 * (double)udLMSANFLeak.Value);
+        }
+
+        private void udLMSANF2_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(1, 0).SetANFVals(
+                (int)udLMSANF2taps.Value,
+                (int)udLMSANF2delay.Value,
+                1e-6 * (double)udLMSANF2gain.Value,
+                1e-3 * (double)udLMSANF2Leak.Value);
+            console.radio.GetDSPRX(1, 1).SetANFVals(
+                (int)udLMSANF2taps.Value,
+                (int)udLMSANF2delay.Value,
+                1e-6 * (double)udLMSANF2gain.Value,
+                1e-3 * (double)udLMSANF2Leak.Value);
+        }
+ 
+        private void radANFPreAGC_CheckedChanged(object sender, EventArgs e)  // (NR0V) added
+        {
+            int position;
+            if (radANFPreAGC.Checked)
+                position = 0;
+            else
+                position = 1;
+            DttSP.SetANFposition(0, 0, position);
+            DttSP.SetANFposition(0, 1, position);
+        }
+
+        private void radANF2PreAGC_CheckedChanged(object sender, EventArgs e)  // (NR0V) added
+        {
+            int position;
+            if (radANF2PreAGC.Checked)
+                position = 0;
+            else
+                position = 1;
+            DttSP.SetANFposition(2, 0, position);
+            DttSP.SetANFposition(2, 1, position);
         }
 
         private bool old_cpdr = false;
