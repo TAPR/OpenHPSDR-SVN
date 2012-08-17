@@ -57,7 +57,7 @@ addDialog::addDialog(QWidget *parent) :
 
     model = new QStandardItemModel();
     CtyXmlReader reader( model );
-    QFile* filecty = new QFile( "../QtLogger/DXCCcountries.xml" );
+    QFile* filecty = new QFile( ":/xml/DXCCcountries.xml" );
     if (!filecty->open(QIODevice::ReadOnly | QIODevice::Text))
              return;
 

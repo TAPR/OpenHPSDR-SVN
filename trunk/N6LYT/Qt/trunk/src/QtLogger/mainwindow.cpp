@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->setWindowTitle( tr("QT Logger") );
 
-    version = "1.1.1";
+    version = "1.1.2";
 
 
     this->setMouseTracking(true);
@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
     add = new addDialog( this );
 
 
-    readDefinitions("../QtLogger/adif_codes_2.2.7.xml");
+    readDefinitions(":/xml/adif_codes_2.2.7.xml");
 
 
     add->loadmodeComboBox( modes );
@@ -375,7 +375,7 @@ void MainWindow::readDefinitions( QString filename )
       qDebug() << "Parsing Definition file failed." << endl;
   }
 
-  ui->statusBar->showMessage( QString("Loading Country definitions from \"%1\"").arg("/home/dlarsen/src/test-xmlreader/DXCCcountries.xml") );
+  ui->statusBar->showMessage( QString("Loading Country definitions from \"%1\"").arg("DXCCcountries.xml") );
 
   modes = new QStringList( handler->mode );
   country = new QStringList( );
