@@ -38,7 +38,7 @@ Help::Help(QWidget *parent) :
     QString path;
     path = QApplication::applicationDirPath() + "/help/";
     ui->setupUi(this);
-    ui->textBrowser->setSearchPaths(QStringList() << "../QtLogger/help/" << path );
+    ui->textBrowser->setSearchPaths(QStringList() << ":/help/" << path );
     ui->textBrowser->setSource(QUrl("QtLogger.html"));
     oldsource << QUrl("QtLogger.html");
 
