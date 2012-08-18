@@ -28,7 +28,7 @@
 #include <QtNetwork/QHostAddress>
 
 #include "UI.h"
-#include "About.h"
+#include "about.h"
 #include "Configure.h"
 #include "bands.h"
 #include "Mode.h"
@@ -51,7 +51,8 @@ UI::UI() {
     configFileName=getConfigDir()+"/"+QCoreApplication::applicationName()+".ini";
     settings=new QSettings(configFileName,QSettings::IniFormat);
 
-
+    ab = new About(this);
+    ab->setVersion("1.0.2");
 
     widget.gridLayout->setContentsMargins(2,2,2,2);
     widget.gridLayout->setVerticalSpacing(0);
@@ -273,7 +274,7 @@ void UI::resizeEvent(QResizeEvent* event) {
 }
 
 void UI::actionAbout() {
-    about.setVisible(TRUE);
+    ab->aboutMessage();
 }
 
 void UI::loadSettings() {

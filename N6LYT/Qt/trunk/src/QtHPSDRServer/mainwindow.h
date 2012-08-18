@@ -15,6 +15,8 @@
 
 #include <client/clientlistener.h>
 
+#include "about.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -30,7 +32,7 @@ public:
     void closeEvent(QCloseEvent* event);
 
 public slots:
-    void actionAbout();
+    //void actionAbout();
     void actionQuit();
 
     void actionStartStop();
@@ -78,6 +80,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
 
+    About *ab;
     QStandardItemModel model;
     QStringList labels;
 

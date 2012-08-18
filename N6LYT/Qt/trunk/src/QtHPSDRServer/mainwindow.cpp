@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "hpsdr/discovery.h"
 
+
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -12,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     running=false;
 
+    ab = new About(this);
+    ab->setVersion("1.0.2");
 
     labels<<"Rx"<<"DSP Client"<<"PID"<<"Audio"<<"GUI Client"<<"Frequency";
     model.setHorizontalHeaderLabels(labels);
@@ -20,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableViewClients->verticalHeader()->hide();
 
     // connect up menu items
-    connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(actionAbout()));
+    connect(ui->actionAbout,SIGNAL(triggered()),ab,SLOT(aboutMessage()));
     connect(ui->actionExit,SIGNAL(triggered()),this,SLOT(actionQuit()));
 
     // connect up status items
@@ -322,9 +325,9 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     saveSettings();
 }
 
-void MainWindow::actionAbout() {
+//void MainWindow::actionAbout() {
     // show a dialog with application information
-}
+//}
 
 void MainWindow::actionQuit() {
     qDebug()<<"MainWindow::actionQuit";

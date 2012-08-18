@@ -2917,6 +2917,11 @@
        <ITU>27</ITU>
        <CQ>14</CQ>
      </subdivision>
+     <subdivision prefix="GO0,GO1,GO2,GO3,GO4,GO5,GO6,GO7,GO8,GO9">
+       <name>England</name>
+       <ITU>27</ITU>
+       <CQ>14</CQ>
+     </subdivision>
    </country>
    <country code="106" >
      <name>Guernsey</name>

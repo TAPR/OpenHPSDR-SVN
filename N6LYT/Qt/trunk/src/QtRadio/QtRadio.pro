@@ -42,7 +42,6 @@ SOURCES += main.cpp\
     Frequency.cpp \
     Meter.cpp \
     Bandscope.cpp \
-    About.cpp \
     Buffer.cpp \
     Bookmark.cpp \
     BookmarkDialog.cpp \
@@ -56,7 +55,8 @@ SOURCES += main.cpp\
     g711u.cpp \
     FreqSender.cpp \
     g721.cpp \
-    bands.cpp
+    bands.cpp \
+    about.cpp
         
 
 HEADERS  += \ 
@@ -87,7 +87,6 @@ HEADERS  += \
     Frequency.h \
     Meter.h \
     Bandscope.h \
-    About.h \
     Buffer.h \
     Bookmark.h \
     BookmarkDialog.h \
@@ -101,13 +100,13 @@ HEADERS  += \
     g711u.h \
     FreqSender.h \
     g721.h \
-    bands.h
+    bands.h \
+    about.h
 
 FORMS    += \   
     UI.ui \
     Configure.ui \
     Bandscope.ui \
-    About.ui \
     Bookmark.ui \
     BookmarksDialog.ui \
     BookmarksEditDialog.ui \
