@@ -43,10 +43,6 @@ FORMS    += mainwindow.ui \
     preferences.ui \
     lastcontact.ui
 
-OTHER_FILES += \
-    help/daveStyle.css \
-    help/QtLogger.html
-
 RESOURCES += \
     resources.qrc
 
