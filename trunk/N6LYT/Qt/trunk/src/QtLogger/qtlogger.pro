@@ -8,7 +8,7 @@ QT       += core gui network xml
 
 TARGET = QtLogger
 TEMPLATE = app
-
+DESTDIR = ../../bin
 
 SOURCES += main.cpp\
         mainwindow.cpp \

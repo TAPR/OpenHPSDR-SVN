@@ -6,3492 +6,3042 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>876</width>
-    <height>574</height>
+    <width>791</width>
+    <height>667</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>QtHPSDRServer</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>821</width>
-      <height>511</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="tabStatus">
-     <attribute name="title">
-      <string>Status</string>
-     </attribute>
-     <widget class="QLabel" name="labelMetisOzy">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>30</y>
-        <width>131</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Metis Version:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelMercury">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>50</y>
-        <width>131</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Mercury Version:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelPenelope">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>70</y>
-        <width>131</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Penelope Version:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelMetisVersion">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>30</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelMercuryVersion">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>50</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelPenelopeVersion">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>70</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonStartStop">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>250</y>
-        <width>97</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Start</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>141</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Firmware Versions:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>130</y>
-        <width>67</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>HPSDR:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>150</y>
-        <width>131</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Received frames:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelReceived">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>150</y>
-        <width>67</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>170</y>
-        <width>151</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Transmitted Frames:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelTransmitted">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>170</y>
-        <width>67</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>190</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Sequence Errors:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelSequenceErrors">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>190</y>
-        <width>67</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-     <widget class="QTableView" name="tableViewClients">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>30</y>
-        <width>552</width>
-        <height>271</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_6">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>10</y>
-        <width>67</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Clients:</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tabConfigure">
-     <attribute name="title">
-      <string>Configure</string>
-     </attribute>
-     <widget class="QCheckBox" name="checkBoxMercury">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>120</y>
-        <width>97</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Mercury</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxPenelope">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>200</y>
-        <width>97</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Penelope</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxPennylane">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>220</y>
-        <width>97</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Pennylane</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxExcalibur">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>300</y>
-        <width>97</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Excalibur</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxAlex">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>320</y>
-        <width>97</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Alex</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_7">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>90</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Metis Port (UDP):</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditMetisPort">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>90</y>
-        <width>101</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>10500</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_8">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>350</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Sample Rate:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBoxSampleRate">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>340</y>
-        <width>91</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>48000</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>96000</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>192000</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QLabel" name="label_9">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>140</y>
-        <width>101</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Receivers:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="spinBoxReceivers">
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>130</y>
-        <width>41</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>4</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_10">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>380</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>10 MHz Clock Source:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox10MHzClockSource">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>370</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Mercury</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Penelope</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Excalibur</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QLabel" name="label_11">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>410</y>
-        <width>171</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>122.88 MHz Clock Source:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox122_88MHzClockSource">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>400</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Mercury</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Penelope</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxRandom">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>160</y>
-        <width>97</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Random</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxDither">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>180</y>
-        <width>97</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Dither</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_12">
-      <property name="geometry">
-       <rect>
-        <x>360</x>
-        <y>290</y>
-        <width>161</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Client Port (UDP &amp; TCP):</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditClientPort">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>280</y>
-        <width>101</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>10600</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxAutoStartServer">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>250</y>
-        <width>211</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Auto Start QtHPSDRServer</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxAutoStartDSPServer">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>340</y>
-        <width>211</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Auto Start QtDSPServer(s)</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_13">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>380</y>
-        <width>171</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>QtDSPServer Port (UDP):</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditDSPServerPort">
-      <property name="geometry">
-       <rect>
-        <x>620</x>
-        <y>370</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>10700</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_14">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>410</y>
-        <width>261</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>QtDSPServer Client Port (TCP &amp; UDP):</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditDSPServerClientPort">
-      <property name="geometry">
-       <rect>
-        <x>620</x>
-        <y>400</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>10800</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxClassE">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>240</y>
-        <width>97</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Class E</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxLineIn">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>260</y>
-        <width>97</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Line In</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBoxMicBoost">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>280</y>
-        <width>151</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Mic Boost (20dB)</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonUpdate">
-      <property name="geometry">
-       <rect>
-        <x>320</x>
-        <y>450</y>
-        <width>97</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Save</string>
-      </property>
-     </widget>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>0</y>
-        <width>181</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButtonHermes">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>116</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Hermes</string>
-       </property>
-       <property name="autoExclusive">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonHPSDR">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>30</y>
-         <width>116</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>HPSDR</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>50</y>
-        <width>161</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButtonMetis">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>20</y>
-         <width>116</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Metis</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonOzy">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>0</y>
-         <width>121</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Ozy/Magister</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QComboBox" name="comboBoxInterface">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>50</y>
-        <width>291</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_38">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>60</y>
-        <width>91</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Interface:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelMetis">
-      <property name="geometry">
-       <rect>
-        <x>370</x>
-        <y>140</y>
-        <width>67</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Metis:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBoxMetis">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>130</y>
-        <width>291</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonDiscover">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>90</y>
-        <width>97</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Discover</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tabAlex">
-     <attribute name="title">
-      <string>Alex</string>
-     </attribute>
-     <widget class="QLabel" name="label_15">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>30</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ant1</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_16">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>30</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ant2</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_17">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>30</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ant3</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_18">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>30</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>RX1</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_19">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>30</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>RX2</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_20">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>30</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>XVRX</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_21">
-      <property name="geometry">
-       <rect>
-        <x>460</x>
-        <y>30</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ant1</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_22">
-      <property name="geometry">
-       <rect>
-        <x>500</x>
-        <y>30</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ant2</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_23">
-      <property name="geometry">
-       <rect>
-        <x>540</x>
-        <y>30</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ant3</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_24">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>50</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>160</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_25">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>70</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>80</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_26">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>90</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>60</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_27">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>110</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>40</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_28">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>130</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>30</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_29">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>150</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>20</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_30">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>170</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>17</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_31">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>190</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>15</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_32">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>210</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>12</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_33">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>230</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>10</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_34">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>250</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>6</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_35">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>10</y>
-        <width>67</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>RX</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_36">
-      <property name="geometry">
-       <rect>
-        <x>510</x>
-        <y>10</y>
-        <width>67</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TX</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_37">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>270</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>GEN</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_3">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>50</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton160RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton160RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton160RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton160RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton160RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton160RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>250</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_4">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>70</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton80RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton80RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton80RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton80RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton80RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton80RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>250</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_5">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>90</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton60RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton60RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton60RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton60RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton60RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton60RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>250</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_6">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>110</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton40RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton40RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton40RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton40RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton40RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton40RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_7">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>130</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton30RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton30RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton30RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton30RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton30RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton30RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>250</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_8">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>150</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton20RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton20RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton20RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton20RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton20RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton20RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_9">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>170</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton17RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton17RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton17RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton17RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton17RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton17RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_10">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>190</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton15RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton15RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton15RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton15RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton15RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton15RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_11">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>210</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton12RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton12RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton12RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton12RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton12RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton12RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_12">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>230</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton10RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton10RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton10RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton10RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton10RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton10RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_13">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>250</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton6RxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton6RxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton6RxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton6RxRX1">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton6RxRX2">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton6RxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_14">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>270</y>
-        <width>291</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButtonGENRxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonGENRxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonGENRxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonGENRxRX1">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonGENRxRX2">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonGENRxXVRX">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_15">
-      <property name="geometry">
-       <rect>
-        <x>430</x>
-        <y>50</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton160TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton160TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton160TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_16">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>70</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton80TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton80TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton80TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>110</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_17">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>90</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton60TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton60TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton60TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_18">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>110</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton40TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton40TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton40TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_19">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>130</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton30TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton30TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton30TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_20">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>170</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton17TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton17TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>20</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton17TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_21">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>190</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton15TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton15TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton15TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_22">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>210</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton12TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton12TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton12TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_23">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>230</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton10TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton10TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton10TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_24">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>250</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton6TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton6TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton6TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_25">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>270</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButtonGENTxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonGENTxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonGENTxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_26">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>150</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QRadioButton" name="radioButton20TxAnt1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton20TxAnt2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton20TxAnt3">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>0</y>
-         <width>21</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QPushButton" name="pushButtonAlexSave">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>340</y>
-        <width>97</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Save</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tabXVTR">
-     <attribute name="title">
-      <string>XVTR</string>
-     </attribute>
-     <widget class="QLabel" name="label_40">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>20</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Label</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_41">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>20</y>
-        <width>101</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Min Frequency</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_42">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>20</y>
-        <width>111</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Max Frequency</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_43">
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>20</y>
-        <width>91</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>LO Frequency</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_44">
-      <property name="geometry">
-       <rect>
-        <x>550</x>
-        <y>20</y>
-        <width>91</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Alex Rx Ant</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_45">
-      <property name="geometry">
-       <rect>
-        <x>650</x>
-        <y>20</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Alex Tx Ant</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBoxXvtrRxAnt0">
-      <property name="geometry">
-       <rect>
-        <x>550</x>
-        <y>40</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Ant 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>XV RX</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QComboBox" name="comboBox_2">
-      <property name="geometry">
-       <rect>
-        <x>650</x>
-        <y>40</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBoxXvtrTxAnt0">
-      <property name="geometry">
-       <rect>
-        <x>650</x>
-        <y>40</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Ant 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX Only</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrLabel0">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>40</y>
-        <width>81</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrMinFrequency0">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>40</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrMaxFrequency0">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>40</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrLOFrequency0">
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>40</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrMinFrequency1">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>70</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrMaxFrequency1">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>70</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrLOFrequency1">
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>70</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBoxXvtrRxAnt1">
-      <property name="geometry">
-       <rect>
-        <x>550</x>
-        <y>70</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Ant 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>XV RX</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QComboBox" name="comboBoxXvtrTxAnt1">
-      <property name="geometry">
-       <rect>
-        <x>650</x>
-        <y>70</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Ant 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX Only</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrLabel1">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>70</y>
-        <width>81</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrLabel2">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>100</y>
-        <width>81</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrMinFrequency2">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>100</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrMaxFrequency2">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>100</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrLOFrequency2">
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>100</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBoxXvtrRxAnt2">
-      <property name="geometry">
-       <rect>
-        <x>550</x>
-        <y>100</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Ant 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>XV RX</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QComboBox" name="comboBoxXvtrTxAnt2">
-      <property name="geometry">
-       <rect>
-        <x>650</x>
-        <y>100</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Ant 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX Only</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrLabel3">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>130</y>
-        <width>81</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrMinFrequency3">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>130</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrMaxFrequency3">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>130</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditXvtrLOFrequency3">
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>130</y>
-        <width>113</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBoxXvtrRxAnt3">
-      <property name="geometry">
-       <rect>
-        <x>550</x>
-        <y>130</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Ant 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>XV RX</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QComboBox" name="comboBoxXvtrTxAnt3">
-      <property name="geometry">
-       <rect>
-        <x>650</x>
-        <y>130</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Ant 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ant 3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RX Only</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QPushButton" name="pushButtonXvtrSave">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>210</y>
-        <width>97</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Save</string>
-      </property>
-     </widget>
-    </widget>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout_17">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tabStatus">
+       <attribute name="title">
+        <string>Status</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_9">
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="groupBox_29">
+          <property name="title">
+           <string>Clients:</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QTableView" name="tableViewClients"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_8">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout_7">
+             <item row="0" column="0">
+              <widget class="QGroupBox" name="groupBox_27">
+               <property name="title">
+                <string>FirmwareVersion:</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_2">
+                <item row="0" column="0">
+                 <layout class="QFormLayout" name="formLayout">
+                  <property name="labelAlignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="labelMetisOzy">
+                    <property name="text">
+                     <string>Metis Version:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLabel" name="labelMetisVersion">
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="labelMercury">
+                    <property name="text">
+                     <string>Mercury Version:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QLabel" name="labelMercuryVersion">
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="labelPenelope">
+                    <property name="text">
+                     <string>Penelope Version:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QLabel" name="labelPenelopeVersion">
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QGroupBox" name="groupBox_28">
+               <property name="title">
+                <string>HPSDR:</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout">
+                <item row="0" column="0">
+                 <layout class="QFormLayout" name="formLayout_2">
+                  <property name="labelAlignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_3">
+                    <property name="text">
+                     <string>Received frames:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLabel" name="labelReceived">
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_4">
+                    <property name="text">
+                     <string>Transmitted Frames:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QLabel" name="labelTransmitted">
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_5">
+                    <property name="text">
+                     <string>Sequence Errors:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QLabel" name="labelSequenceErrors">
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QPushButton" name="pushButtonStartStop">
+               <property name="text">
+                <string>Start</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabConfigure">
+       <attribute name="title">
+        <string>Configure</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="1">
+         <widget class="QFrame" name="frame_3">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_14">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="groupBox_30">
+             <property name="title">
+              <string>Discovery</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_15">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_38">
+                <property name="text">
+                 <string>Interface:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="comboBoxInterface"/>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="pushButtonDiscover">
+                <property name="text">
+                 <string>Discover</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="labelMetis">
+                <property name="text">
+                 <string>Metis:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QComboBox" name="comboBoxMetis"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QGroupBox" name="groupBox_31">
+             <property name="title">
+              <string>Ports</string>
+             </property>
+             <layout class="QFormLayout" name="formLayout_4">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+              </property>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Metis Port (UDP):</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lineEditMetisPort">
+                <property name="text">
+                 <string>10500</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_12">
+                <property name="text">
+                 <string>Client Port (UDP &amp; TCP):</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="lineEditClientPort">
+                <property name="text">
+                 <string>10600</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_13">
+                <property name="text">
+                 <string>QtDSPServer Port (UDP):</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="lineEditDSPServerPort">
+                <property name="text">
+                 <string>10700</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_14">
+                <property name="text">
+                 <string>QtDSPServer Client Port (TCP &amp; UDP):</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="lineEditDSPServerClientPort">
+                <property name="text">
+                 <string>10800</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QGroupBox" name="groupBox_33">
+             <property name="title">
+              <string>Sampling and Clocks</string>
+             </property>
+             <layout class="QFormLayout" name="formLayout_5">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_46">
+                <property name="text">
+                 <string>Sample Rate:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="comboBoxSampleRate">
+                <item>
+                 <property name="text">
+                  <string>48000</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>96000</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>192000</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_39">
+                <property name="text">
+                 <string>10 MHz Clock Source:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="comboBox10MHzClockSource">
+                <item>
+                 <property name="text">
+                  <string>Mercury</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Penelope</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Excalibur</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_11">
+                <property name="text">
+                 <string>122.88 MHz Clock Source:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QComboBox" name="comboBox122_88MHzClockSource">
+                <item>
+                 <property name="text">
+                  <string>Mercury</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Penelope</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+             <zorder>comboBox122_88MHzClockSource</zorder>
+             <zorder>comboBoxSampleRate</zorder>
+             <zorder>label_46</zorder>
+             <zorder>label_39</zorder>
+             <zorder>comboBox10MHzClockSource</zorder>
+             <zorder>label_11</zorder>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="pushButtonUpdate">
+             <property name="text">
+              <string>Save</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QFrame" name="frame_2">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_13">
+           <item row="0" column="0">
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QGroupBox" name="groupBox">
+               <property name="title">
+                <string>Radio</string>
+               </property>
+               <layout class="QFormLayout" name="formLayout_6">
+                <item row="0" column="0">
+                 <widget class="QRadioButton" name="radioButtonHermes">
+                  <property name="text">
+                   <string>Hermes</string>
+                  </property>
+                  <property name="autoExclusive">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QRadioButton" name="radioButtonHPSDR">
+                  <property name="text">
+                   <string>HPSDR</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_2">
+               <property name="title">
+                <string>Communications</string>
+               </property>
+               <layout class="QFormLayout" name="formLayout_8">
+                <property name="fieldGrowthPolicy">
+                 <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QRadioButton" name="radioButtonMetis">
+                  <property name="text">
+                   <string>Metis</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QRadioButton" name="radioButtonOzy">
+                  <property name="text">
+                   <string>Ozy/Magister</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_35">
+               <property name="title">
+                <string>Boards</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_6">
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="checkBoxMercury">
+                  <property name="text">
+                   <string>Mercury</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QCheckBox" name="checkBoxPenelope">
+                  <property name="text">
+                   <string>Penelope</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QCheckBox" name="checkBoxPennylane">
+                  <property name="text">
+                   <string>Pennylane</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QCheckBox" name="checkBoxExcalibur">
+                  <property name="text">
+                   <string>Excalibur</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
+                 <widget class="QCheckBox" name="checkBoxAlex">
+                  <property name="text">
+                   <string>Alex</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="label_9">
+                  <property name="text">
+                   <string>Receivers:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QSpinBox" name="spinBoxReceivers">
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <number>4</number>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_36">
+               <property name="title">
+                <string>Options</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_12">
+                <item row="0" column="0">
+                 <layout class="QGridLayout" name="gridLayout_10">
+                  <item row="0" column="0">
+                   <widget class="QCheckBox" name="checkBoxClassE">
+                    <property name="text">
+                     <string>Class E</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QCheckBox" name="checkBoxLineIn">
+                    <property name="text">
+                     <string>Line In</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QCheckBox" name="checkBoxMicBoost">
+                    <property name="text">
+                     <string>Mic Boost (20dB)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QCheckBox" name="checkBoxRandom">
+                    <property name="text">
+                     <string>Random</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QCheckBox" name="checkBoxDither">
+                    <property name="text">
+                     <string>Dither</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_32">
+               <property name="title">
+                <string>Autostart</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                 <widget class="QCheckBox" name="checkBoxAutoStartServer">
+                  <property name="text">
+                   <string>Auto Start QtHPSDRServer</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBoxAutoStartDSPServer">
+                  <property name="text">
+                   <string>Auto Start QtDSPServer(s)</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabAlex">
+       <attribute name="title">
+        <string>Alex</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QFrame" name="frame_4">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_18">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout_11">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_35">
+               <property name="text">
+                <string>RX</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_36">
+               <property name="text">
+                <string>TX</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QGroupBox" name="groupBox_7">
+               <property name="title">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+               <widget class="QLabel" name="label_20">
+                <property name="geometry">
+                 <rect>
+                  <x>240</x>
+                  <y>0</y>
+                  <width>41</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>XVRX</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_16">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>34</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Ant2</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_15">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>0</y>
+                  <width>34</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Ant1</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_19">
+                <property name="geometry">
+                 <rect>
+                  <x>200</x>
+                  <y>0</y>
+                  <width>29</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>RX2</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_18">
+                <property name="geometry">
+                 <rect>
+                  <x>160</x>
+                  <y>0</y>
+                  <width>29</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>RX1</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_17">
+                <property name="geometry">
+                 <rect>
+                  <x>110</x>
+                  <y>0</y>
+                  <width>35</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Ant3</string>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QGroupBox" name="groupBox_37">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QLabel" name="label_23">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>35</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Ant3</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_22">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>34</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Ant2</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_21">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>34</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Ant1</string>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QGroupBox" name="groupBox_3">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton160RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton160RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton160RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton160RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton160RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton160RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_24">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>28</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>160</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QGroupBox" name="groupBox_15">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton160TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton160TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton160TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QGroupBox" name="groupBox_4">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton80RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton80RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton80RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton80RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton80RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton80RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_25">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>19</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>80</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QGroupBox" name="groupBox_16">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton80TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton80TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton80TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QGroupBox" name="groupBox_5">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton60RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton60RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton60RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton60RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton60RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton60RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_26">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>19</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>60</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QGroupBox" name="groupBox_17">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton60TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton60TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton60TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QGroupBox" name="groupBox_6">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton40RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton40RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton40RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton40RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton40RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton40RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_27">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>19</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>40</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QGroupBox" name="groupBox_18">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton40TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton40TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton40TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QGroupBox" name="groupBox_34">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton30RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton30RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton30RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton30RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton30RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton30RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_28">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>20</width>
+                  <height>20</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>30</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QGroupBox" name="groupBox_19">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton30TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton30TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton30TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QGroupBox" name="groupBox_8">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton20RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton20RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton20RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton20RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton20RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton20RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_29">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>20</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>20</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QGroupBox" name="groupBox_26">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton20TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton20TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton20TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QGroupBox" name="groupBox_9">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton17RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton17RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton17RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton17RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton17RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton17RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_30">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>19</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>17</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QGroupBox" name="groupBox_20">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton17TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton17TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>20</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton17TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QGroupBox" name="groupBox_10">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton15RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton15RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton15RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton15RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton15RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton15RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_31">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>19</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>15</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QGroupBox" name="groupBox_21">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton15TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton15TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton15TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QGroupBox" name="groupBox_11">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton12RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton12RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton12RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton12RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton12RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton12RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_32">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>18</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>12</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="10" column="1">
+              <widget class="QGroupBox" name="groupBox_22">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton12TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton12TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton12TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QGroupBox" name="groupBox_12">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton10RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton10RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton10RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton10RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton10RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton10RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_33">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>19</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>10</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QGroupBox" name="groupBox_23">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton10TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton10TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton10TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="12" column="0">
+              <widget class="QGroupBox" name="groupBox_13">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton6RxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton6RxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton6RxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton6RxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton6RxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton6RxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_34">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>16</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>6</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="12" column="1">
+              <widget class="QGroupBox" name="groupBox_24">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButton6TxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton6TxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton6TxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="13" column="0" rowspan="2">
+              <widget class="QGroupBox" name="groupBox_14">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButtonGENRxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButtonGENRxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButtonGENRxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>130</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButtonGENRxRX1">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButtonGENRxRX2">
+                <property name="geometry">
+                 <rect>
+                  <x>210</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButtonGENRxXVRX">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_37">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>31</width>
+                  <height>18</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>GEN</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="13" column="1">
+              <widget class="QGroupBox" name="groupBox_25">
+               <property name="title">
+                <string/>
+               </property>
+               <widget class="QRadioButton" name="radioButtonGENTxAnt1">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButtonGENTxAnt2">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButtonGENTxAnt3">
+                <property name="geometry">
+                 <rect>
+                  <x>100</x>
+                  <y>0</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="15" column="0">
+              <widget class="QPushButton" name="pushButtonAlexSave">
+               <property name="text">
+                <string>Save</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabXVTR">
+       <attribute name="title">
+        <string>XVTR</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="vertical">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_16">
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_41">
+              <property name="text">
+               <string>Min Frequency</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="label_42">
+              <property name="text">
+               <string>Max Frequency</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="label_43">
+              <property name="text">
+               <string>LO Frequency</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QLabel" name="label_44">
+              <property name="text">
+               <string>Alex Rx Ant</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="6">
+             <widget class="QLabel" name="label_45">
+              <property name="text">
+               <string>Alex Tx Ant</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <widget class="QLineEdit" name="lineEditXvtrLabel0"/>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLineEdit" name="lineEditXvtrMinFrequency0"/>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLineEdit" name="lineEditXvtrMaxFrequency0"/>
+            </item>
+            <item row="1" column="4">
+             <widget class="QLineEdit" name="lineEditXvtrLOFrequency0"/>
+            </item>
+            <item row="1" column="5">
+             <widget class="QComboBox" name="comboBoxXvtrRxAnt0">
+              <item>
+               <property name="text">
+                <string>Ant 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>XV RX</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="6">
+             <widget class="QComboBox" name="comboBoxXvtrTxAnt0">
+              <item>
+               <property name="text">
+                <string>Ant 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX Only</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="0" colspan="2">
+             <widget class="QLineEdit" name="lineEditXvtrLabel1"/>
+            </item>
+            <item row="2" column="2">
+             <widget class="QLineEdit" name="lineEditXvtrMinFrequency1"/>
+            </item>
+            <item row="2" column="3">
+             <widget class="QLineEdit" name="lineEditXvtrMaxFrequency1"/>
+            </item>
+            <item row="2" column="4">
+             <widget class="QLineEdit" name="lineEditXvtrLOFrequency1"/>
+            </item>
+            <item row="2" column="5">
+             <widget class="QComboBox" name="comboBoxXvtrRxAnt1">
+              <item>
+               <property name="text">
+                <string>Ant 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>XV RX</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="6">
+             <widget class="QComboBox" name="comboBoxXvtrTxAnt1">
+              <item>
+               <property name="text">
+                <string>Ant 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX Only</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QLineEdit" name="lineEditXvtrLabel2"/>
+            </item>
+            <item row="3" column="2">
+             <widget class="QLineEdit" name="lineEditXvtrMinFrequency2"/>
+            </item>
+            <item row="3" column="3">
+             <widget class="QLineEdit" name="lineEditXvtrMaxFrequency2"/>
+            </item>
+            <item row="3" column="4">
+             <widget class="QLineEdit" name="lineEditXvtrLOFrequency2"/>
+            </item>
+            <item row="3" column="5">
+             <widget class="QComboBox" name="comboBoxXvtrRxAnt2">
+              <item>
+               <property name="text">
+                <string>Ant 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>XV RX</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="3" column="6">
+             <widget class="QComboBox" name="comboBoxXvtrTxAnt2">
+              <item>
+               <property name="text">
+                <string>Ant 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX Only</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QLineEdit" name="lineEditXvtrLabel3"/>
+            </item>
+            <item row="4" column="2">
+             <widget class="QLineEdit" name="lineEditXvtrMinFrequency3"/>
+            </item>
+            <item row="4" column="3">
+             <widget class="QLineEdit" name="lineEditXvtrMaxFrequency3"/>
+            </item>
+            <item row="4" column="4">
+             <widget class="QLineEdit" name="lineEditXvtrLOFrequency3"/>
+            </item>
+            <item row="4" column="5">
+             <widget class="QComboBox" name="comboBoxXvtrRxAnt3">
+              <item>
+               <property name="text">
+                <string>Ant 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>XV RX</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="4" column="6">
+             <widget class="QComboBox" name="comboBoxXvtrTxAnt3">
+              <item>
+               <property name="text">
+                <string>Ant 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ant 3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>RX Only</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Label</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="pushButtonXvtrSave">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Save</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>876</width>
-     <height>25</height>
+     <width>791</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

@@ -44,7 +44,7 @@
 
 #include <QTime>
 
-#include "About.h"
+#include "about.h"
 #include "Configure.h"
 #include "Audio.h"
 #include "Connection.h"
@@ -286,7 +286,7 @@ private:
 
     int fps;
 
-    About about;
+    About *ab;
     Configure configure;
     int sampleRate;
 

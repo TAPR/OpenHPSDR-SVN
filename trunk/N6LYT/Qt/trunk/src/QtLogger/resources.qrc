@@ -5,20 +5,9 @@
         <file>filefolder32.svg</file>
         <file>filefoldergrey.svg</file>
         <file>filefoldergrey16.svg</file>
-        <file>filefoldergrey32.svg</file>
         <file>hpsdr5.svg</file>
         <file>minus-red.svg</file>
         <file>plus-green.svg</file>
-        <file>filefolder.png</file>
-        <file>filefolder16.png</file>
-        <file>filefolder32.png</file>
-        <file>filefoldergrey.png</file>
-        <file>filefoldergrey16.png</file>
-        <file>filefoldergrey32.png</file>
-        <file>about.cpp</file>
-        <file>hpsdr5.png</file>
-        <file>minus-red.png</file>
-        <file>plus-green.png</file>
     </qresource>
     <qresource prefix="/help">
         <file>daveStyle.css</file>
