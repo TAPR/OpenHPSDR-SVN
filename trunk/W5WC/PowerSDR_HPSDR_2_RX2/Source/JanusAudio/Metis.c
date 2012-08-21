@@ -485,7 +485,7 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 
 		if ( listenSock == INVALID_SOCKET ) { 
 			printf("createSocket on listenSock failed.\n");
-			return -2; 
+			continue; /* return -2; */ 
 		} 
 
 		sndbufsize = 0xffff;
