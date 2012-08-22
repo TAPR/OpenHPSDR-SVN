@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>blur.cl</file>
+        <file>qtlogo.png</file>
+    </qresource>
+</RCC>

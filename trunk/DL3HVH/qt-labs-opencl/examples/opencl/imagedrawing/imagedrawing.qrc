@@ -1,0 +1,9 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>imagedrawing.cl</file>
+    <file>beavis.jpg</file>
+    <file>bg1.jpg</file>
+    <file>flower.jpg</file>
+    <file>qtlogo.png</file>
+</qresource>
+</RCC>

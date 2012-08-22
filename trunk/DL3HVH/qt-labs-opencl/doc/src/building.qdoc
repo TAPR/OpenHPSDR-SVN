@@ -1,0 +1,204 @@
+/****************************************************************************
+**
+** Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+** All rights reserved.
+** Contact: Nokia Corporation (qt-info@nokia.com)
+**
+** This file is part of the documentation of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:FDL$
+** No Commercial Usage
+** This file contains pre-release code and may not be distributed.
+** You may use this file in accordance with the terms and conditions
+** contained in the Technology Preview License Agreement accompanying
+** this package.
+**
+** GNU Free Documentation License
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of this
+** file.
+**
+** If you have questions regarding the use of this file, please contact
+** Nokia at qt-info@nokia.com.
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+/*!
+    \page building.html
+    \title Building QtOpenCL
+
+    \tableofcontents
+
+    \section1 Obtaining the source code
+
+    The QtOpenCL source code can be obtained from the external
+    Qt git server: \l{http://qt.gitorious.org/qt-labs/opencl}
+
+    See the \l{Contributing to QtOpenCL} page for more information on
+    contributing to this project.
+
+    \section1 Required Qt version
+
+    It is recommended that you use Qt 4.7, but the library will build
+    with Qt 4.6.  The main missing feature is support for
+    QGLBuffer in the QCLContextGL class.  QGLBuffer implements VBO
+    support for QtOpenGL and is in Qt 4.7, but not 4.6.
+
+    It is recommended that QtOpenCL be built against a developer build
+    of Qt rather than an installed Qt SDK because the QtOpenCL
+    library #include's private headers from the Qt sources.
+    The library can be compiled against a Qt installation that does
+    not have private headers, but the QCLImage2D::drawImage() function
+    will have reduced performance when painting into a raster-based
+    QPixmap.
+
+    \section1 Building for Linux
+
+    The top-level directory of the source tree contains a configure
+    script that detects the system's OpenCL library and configures
+    the build system of QtOpenCL to use it.  The simplest way to
+    configure and build is as follows:
+
+    \code
+    ./configure -qmake path
+    make
+    \endcode
+
+    The \c{path} should be the complete path to the \c{qmake}
+    binary if it is not on the PATH.  For example:
+
+    \code
+    ./configure -qmake /usr/local/Trolltech/Qt-4.7.0/bin/qmake
+    \endcode
+
+    It is very important that the \c{-qmake} command-line option
+    be supplied if you are cross-compiling for a device because
+    the host system's \c{qmake} will not work.
+
+    By default, the build system assumes that the OpenCL headers
+    are found in the normal system location for header files
+    (usually \c{/usr/include}), and that the library to link against
+    is called \c{libOpenCL.so}.  These defaults can be overridden
+    with command-line options to configure:
+
+    \list
+    \o \c{-Idir} - Specify the directory that contains the
+    includes \c{<CL/cl.h>}, \c{<CL/cl_gl.h>}, etc.
+    \o \c{-Ldir} - Specify the directory that contains the
+    \c{libOpenCL.so} library.
+    \o \c{-lname} - Override the \c{-lOpenCL} default library name.
+    This can also be used to add additional libraries;
+    e.g. "\c{-lOpenCL -lGLESv2}".
+    \o \c{-no-openclgl} - The OpenCL library does not have any of
+    the functions that are needed to perform OpenGL interoperation.
+    This will cause the sharing functionality of QCLContextGL
+    to be disabled.  Applications can still use QCLContextGL,
+    but they will have reduced functionality.  Normally this
+    option will be detected automatically by configure.
+    \endlist
+
+    For example, if your OpenCL library is called \c{libOCL.so}
+    installed under \c{/opt/ocl/include} and \c{/opt/ocl/lib},
+    and it does not support GL interoperation, you would
+    configure as follows:
+
+    \code
+    ./configure -qmake path -I/opt/ocl/include \
+          -L/opt/ocl/lib -lOCL -no-openclgl
+    \endcode
+
+    \section1 Building for MacOSX
+
+    The instructions are similar to Linux:
+
+    \code
+    ./configure -qmake path
+    make
+    \endcode
+
+    It is assumed that the "\c{OpenCL}" framework has been installed
+    to provide the OpenCL headers and libraries.  If the OpenCL
+    headers and libraries are provided by a different framework,
+    it can be specified as follows:
+
+    \code
+    ./configure -qmake path -fw OCL
+    \endcode
+
+    \section1 Building for Windows
+
+    Currently there isn't an equivalent of configure for Windows.
+    The alternative build instructions are as follows:
+
+    \code
+    qmake opencl.pro
+    nmake
+    \endcode
+
+    \section1 Shadow building
+
+    The configure script supports building the QtOpenCL library
+    in a different directory than the source code.  The following
+    example builds the sources from \c{$HOME/sources/opencl}
+    into \c{$HOME/build/opencl}:
+
+    \code
+    mkdir $HOME/build/opencl
+    cd $HOME/build/opencl
+    $HOME/sources/opencl/configure -qmake path
+    make
+    \endcode
+
+    \section1 Checking that QtOpenCL is working
+
+    Once the library has been built, you can check if QtOpenCL
+    is basically working by running the \l{Querying OpenCL Device
+    Capabilities}{clinfo} program, which should print out
+    the capabilities of your OpenCL implementation:
+
+    \code
+    $ export LD_LIBRARY_PATH=`pwd`/lib:$LD_LIBRARY_PATH
+    $ util/clinfo/clinfo
+    Platform ID       : 12289
+    Profile           : FULL_PROFILE
+    Version           : OpenCL 1.0
+    ...
+    \endcode
+
+    The \c{LD_LIBRARY_PATH}, or its equivalent under other operating
+    systems, needs to be set to point at the \c{lib} directory.
+
+    Another way to check that QtOpenCL is working is to run the
+    \l{Vector Addition Example}:
+
+    \code
+    $ examples/opencl/vectoradd/vectoradd
+    Answer is correct: 2048
+    \endcode
+
+    If you get a \c{CL_INVALID_PLATFORM}, \c{CL_INVALID_VALUE},
+    \c{CL_DEVICE_NOT_AVAILABLE}, or similar error, then you may
+    need to modify QCLContext::create() to locate the correct
+    platform or device on your system.
+
+    You can also run the \c{tests/auto/qcl/tst_qcl} program to
+    execute the QtOpenCL unit tests, which will check that the
+    OpenCL implementation is operating in accordance with
+    QtOpenCL's expectations.
+
+    When reporting bugs, it is recommended that you include the output
+    of the \l{Querying OpenCL Device Capabilities}{clinfo} program
+    in the bug report.
+
+    \section1 Generating the Documentation
+
+    From the top-level, type \c{make docs} to generate the documentation
+    into the \c{doc/html} directory in the build tree.  This will
+    use the \c{qdoc3} binary from the Qt you used to build QtOpenCL.
+    If that \c{qdoc3} binary does not exist, it will use the \c{qdoc3}
+    binary on the PATH instead.
+
+    \l{index.html}{Return to Home}
+*/

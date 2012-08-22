@@ -1,0 +1,529 @@
+#!/bin/sh
+#############################################################################
+##
+## Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+## All rights reserved.
+## Contact: Nokia Corporation (qt-info@nokia.com)
+##
+## This file is the build configuration utility of the Qt Toolkit.
+##
+## $QT_BEGIN_LICENSE:LGPL$
+## No Commercial Usage
+## This file contains pre-release code and may not be distributed.
+## You may use this file in accordance with the terms and conditions
+## contained in the Technology Preview License Agreement accompanying
+## this package.
+##
+## GNU Lesser General Public License Usage
+## Alternatively, this file may be used under the terms of the GNU Lesser
+## General Public License version 2.1 as published by the Free Software
+## Foundation and appearing in the file LICENSE.LGPL included in the
+## packaging of this file.  Please review the following information to
+## ensure the GNU Lesser General Public License version 2.1 requirements
+## will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+##
+## In addition, as a special exception, Nokia gives you certain additional
+## rights.  These rights are described in the Nokia Qt LGPL Exception
+## version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+##
+## If you have questions regarding the use of this file, please contact
+## Nokia at qt-info@nokia.com.
+##
+##
+##
+##
+##
+##
+##
+##
+## $QT_END_LICENSE$
+##
+#############################################################################
+
+#-------------------------------------------------------------------------------
+# script initialization
+#-------------------------------------------------------------------------------
+
+# the name of this script
+relconf=`basename $0`
+# the directory of this script is the "source tree"
+relpath=`dirname $0`
+relpath=`(cd "$relpath"; /bin/pwd)`
+# the current directory is the "build tree" or "object tree"
+outpath=`/bin/pwd`
+
+#-------------------------------------------------------------------------------
+# operating system detection
+#-------------------------------------------------------------------------------
+
+# need that throughout the script
+UNAME_MACHINE=`(uname -m) 2>/dev/null` || UNAME_MACHINE=unknown
+UNAME_RELEASE=`(uname -r) 2>/dev/null` || UNAME_RELEASE=unknown
+UNAME_SYSTEM=`(uname -s) 2>/dev/null`  || UNAME_SYSTEM=unknown
+UNAME_VERSION=`(uname -v) 2>/dev/null` || UNAME_VERSION=unknown
+
+# detect the "echo without newline" style. usage: echo $ECHO_N "<string>$ECHO_C"
+if echo '\c' | grep '\c' >/dev/null; then
+    ECHO_N=-n
+else
+    ECHO_C='\c'
+fi
+
+PLATFORM_MAC=no
+if [ -d /System/Library/Frameworks/Carbon.framework ]; then
+    PLATFORM_MAC=yes
+fi
+
+#-------------------------------------------------------------------------------
+# print some introductory text
+#-------------------------------------------------------------------------------
+
+cat <<EOF
+
+This is the QtOpenCL configuration utility.
+
+EOF
+
+if [ ! -f "$relpath/opencl.pro" ] ; then
+    echo "Could not find opencl.pro ... aborting"
+    exit 1
+fi
+
+#-------------------------------------------------------------------------------
+# initalize variables
+#-------------------------------------------------------------------------------
+
+# Use CC/CXX to run config.tests
+mkdir -p "$outpath/config.tests"
+
+# QTDIR may be set and point to an old or system-wide Qt installation
+unset QTDIR
+
+# initalize internal variables
+CFG_OPENCL=yes
+CFG_OPENCL_1_1=auto
+CFG_OPENCLGL=auto
+CFG_GCOV=no
+
+OPT_SHADOW=maybe
+OPT_QMAKE=
+OPT_VERBOSE=no
+OPT_HELP=
+D_FLAGS=
+I_FLAGS=
+INCLUDEPATH=
+L_FLAGS=
+RPATH_FLAGS=
+l_FLAGS=
+
+#-------------------------------------------------------------------------------
+# parse command line arguments
+#-------------------------------------------------------------------------------
+
+# parse the arguments, setting things to "yes" or "no"
+while [ "$#" -gt 0 ]; do
+    CURRENT_OPT="$1"
+    UNKNOWN_ARG=no
+    case "$1" in
+    #Autoconf style options
+    --enable-*)
+        VAR=`echo $1 | sed "s,^--enable-\(.*\),\1,"`
+        VAL=yes
+        ;;
+    --disable-*)
+        VAR=`echo $1 | sed "s,^--disable-\(.*\),\1,"`
+        VAL=no
+        ;;
+    --*=*)
+        VAR=`echo $1 | sed "s,^--\(.*\)=.*,\1,"`
+        VAL=`echo $1 | sed "s,^--.*=\(.*\),\1,"`
+        ;;
+    --no-*)
+        VAR=`echo $1 | sed "s,^--no-\(.*\),\1,"`
+        VAL=no
+        ;;
+    --*)
+        VAR=`echo $1 | sed "s,^--\(.*\),\1,"`
+        VAL=yes
+        ;;
+    #Qt style no options
+    -no-*)
+        VAR=`echo $1 | sed "s,^-no-\(.*\),\1,"`
+        VAL=no
+        ;;
+    #Qt style yes options
+    -opencl|-verbose|-v|-help|-h|-gcov)
+        VAR=`echo $1 | sed "s,^-\(.*\),\1,"`
+        VAL=yes
+        ;;
+    -openclgl)
+        VAR=`echo $1 | sed "s,^-\(.*\),\1,"`
+        VAL=yes
+        ;;
+    #Qt style options that pass an argument
+    -qmake)
+        VAR=`echo $1 | sed "s,^-\(.*\),\1,"`
+        shift
+        VAL="$1"
+        ;;
+    #Qt style complex options in one command
+    -enable-*|-disable-*)
+        VAR=`echo $1 | sed "s,^-\([^-]*\)-.*,\1,"`
+        VAL=`echo $1 | sed "s,^-[^-]*-\(.*\),\1,"`
+        ;;
+    -D?*|-D)
+        VAR="add_define"
+        if [ "$1" = "-D" ]; then
+            shift
+            VAL="$1"
+        else
+            VAL=`echo $1 | sed 's,-D,,'`
+        fi
+        ;;
+    -I?*|-I)
+        VAR="add_ipath"
+        if [ "$1" = "-I" ]; then
+            shift
+            VAL="$1"
+        else
+            VAL=`echo $1 | sed 's,-I,,'`
+        fi
+        ;;
+    -L?*|-L)
+        VAR="add_lpath"
+        if [ "$1" = "-L" ]; then
+            shift
+            VAL="$1"
+        else
+            VAL=`echo $1 | sed 's,-L,,'`
+        fi
+        ;;
+    -R?*|-R)
+        VAR="add_rpath"
+        if [ "$1" = "-R" ]; then
+            shift
+            VAL="$1"
+        else
+            VAL=`echo $1 | sed 's,-R,,'`
+        fi
+        ;;
+    -l?*)
+        VAR="add_link"
+        VAL=`echo $1 | sed 's,-l,,'`
+        ;;
+    -F?*|-F)
+        VAR="add_fpath"
+        if [ "$1" = "-F" ]; then
+            shift
+            VAL="$1"
+        else
+            VAL=`echo $1 | sed 's,-F,,'`
+        fi
+        ;;
+    -fw?*|-fw)
+        VAR="add_framework"
+        if [ "$1" = "-fw" ]; then
+            shift
+            VAL="$1"
+        else
+            VAL=`echo $1 | sed 's,-fw,,'`
+        fi
+        ;;
+    -*)
+        VAR=`echo $1 | sed "s,^-\(.*\),\1,"`
+        VAL="unknown"
+        ;;
+    *)
+        UNKNOWN_ARG=yes
+        ;;
+    esac
+    if [ "$UNKNOWN_ARG" = "yes" ]; then
+        echo "$1: unknown argument"
+        OPT_HELP=yes
+        ERROR=yes
+        shift
+        continue
+     fi
+    shift
+
+    UNKNOWN_OPT=no
+    case "$VAR" in
+    opencl)
+        if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
+            CFG_OPENCL="$VAL"
+        else
+            UNKNOWN_OPT=yes
+        fi
+        ;;
+    openclgl)
+        if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
+            CFG_OPENCLGL="$VAL"
+        else
+            UNKNOWN_OPT=yes
+        fi
+        ;;
+    gcov)
+        if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
+            CFG_GCOV="$VAL"
+        else
+            UNKNOWN_OPT=yes
+        fi
+        ;;
+    qmake)
+        OPT_QMAKE="$VAL"
+	;;
+    h|help)
+        if [ "$VAL" = "yes" ]; then
+            OPT_HELP="$VAL"
+        else
+            UNKNOWN_OPT=yes
+        fi
+        ;;
+    v|verbose)
+        if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
+            OPT_VERBOSE="$VAL"
+        else
+            UNKNOWN_OPT=yes
+        fi
+        ;;
+    add_define)
+        D_FLAGS="$D_FLAGS -D\"$VAL\""
+        ;;
+    add_ipath)
+        I_FLAGS="$I_FLAGS -I\"${VAL}\""
+        INCLUDEPATH="$INCLUDEPATH \"${VAL}\""
+        ;;
+    add_lpath)
+        L_FLAGS="$L_FLAGS -L\"${VAL}\""
+        ;;
+    add_rpath)
+        RPATH_FLAGS="$RPATH_FLAGS \"${VAL}\""
+        ;;
+    add_link)
+        l_FLAGS="$l_FLAGS -l\"${VAL}\""
+        ;;
+    add_fpath)
+        if [ "$PLATFORM_MAC" = "yes" ]; then
+            L_FLAGS="$L_FLAGS -F\"${VAL}\""
+            I_FLAGS="$I_FLAGS -F\"${VAL}\""
+        else
+            UNKNOWN_OPT=yes
+        fi
+        ;;
+    add_framework)
+        if [ "$PLATFORM_MAC" = "yes" ]; then
+            l_FLAGS="$l_FLAGS -framework \"${VAL}\""
+        else
+            UNKNOWN_OPT=yes
+        fi
+        ;;
+    *)
+        UNKNOWN_OPT=yes
+        ;;
+    esac
+    if [ "$UNKNOWN_OPT" = "yes" ]; then
+        echo "${CURRENT_OPT}: invalid command-line switch"
+        OPT_HELP=yes
+        ERROR=yes
+    fi
+done
+
+#-------------------------------------------------------------------------------
+# build tree initialization
+#-------------------------------------------------------------------------------
+
+# where to find which..
+unixtests="$relpath/config.tests/unix"
+mactests="$relpath/config.tests/mac"
+symbiantests="$relpath/config.tests/symbian"
+WHICH="$unixtests/which.test"
+
+### skip this if the user just needs help...
+if [ "$OPT_HELP" != "yes" ]; then
+
+# is this a shadow build?
+if [ "$OPT_SHADOW" = "maybe" ]; then
+    OPT_SHADOW=no
+    if [ "$relpath" != "$outpath" ] && [ '!' -f "$outpath/configure" ]; then
+        if [ -h "$outpath" ]; then
+            [ "$relpath" -ef "$outpath" ] || OPT_SHADOW=yes
+        else
+            OPT_SHADOW=yes
+        fi
+    fi
+fi
+
+# find a make command
+if [ -z "$MAKE" ]; then
+    MAKE=
+    for mk in gmake make; do
+        if "$WHICH" $mk >/dev/null 2>&1; then
+            MAKE=`"$WHICH" $mk`
+            break
+        fi
+    done
+    if [ -z "$MAKE" ]; then
+        echo >&2 "You don't seem to have 'make' or 'gmake' in your PATH."
+        echo >&2 "Cannot proceed."
+        exit 1
+    fi
+    # export MAKE, we need it later in the config.tests
+    export MAKE
+fi
+
+fi ### help
+
+#-------------------------------------------------------------------------------
+# find qmake and check that it is at least 4.6.0
+#-------------------------------------------------------------------------------
+
+if [ -z "$OPT_QMAKE" ]; then
+    OPT_QMAKE=`$WHICH qmake 2>/dev/null`
+    if [ -z "$OPT_QMAKE" ]; then
+        echo "$0: could not find qmake; specify the -qmake option"
+        exit 1
+    fi
+fi
+QMAKE_VERSION=`$OPT_QMAKE -v 2>/dev/null | grep 'Using Qt version' | \
+               sed 's/^Using Qt version //' | \
+               sed 's/ in .*$//'`
+case "$QMAKE_VERSION" in
+    4.0.*|4.1.*|4.2.*|4.3.*|4.4.*|4.5.*) QMAKE_VERSION="" ;;
+    4.*) ;;
+    *) QMAKE_VERSION="" ;;
+esac
+if [ -z "$QMAKE_VERSION" ]; then
+    echo "$0: $OPT_QMAKE must be at least version 4.6.0"
+    echo "Specify the correct qmake binary with the -qmake option"
+    exit 1
+fi
+
+#-------------------------------------------------------------------------------
+# help - interactive parts of the script _after_ this section please
+#-------------------------------------------------------------------------------
+
+# next, emit a usage message if something failed.
+if [ "$OPT_HELP" = "yes" ]; then
+    [ "x$ERROR" = "xyes" ] && echo
+    cat <<EOF
+Usage:  $relconf [-h] [-qmake <path>] [-no-openclgl] [-verbose]
+
+Configure options:
+
+    -qmake <path> ...... Path to the qmake binary to use.
+                         (default is "qmake" on the PATH)
+
+    -no-openclgl ....... Do not use OpenCL/OpenGL interoperability.
+ *  -openclgl .......... Use OpenCL/OpenGL interoperability.
+
+    -gcov .............. Use gcov for coverage testing (g++ only).
+
+    -I <string> ........ Add an explicit include path for OpenCL.
+    -L <string> ........ Add an explicit library path for OpenCL.
+    -l <string> ........ Change the library name for OpenCL.
+    -fw <string> ....... Specify the Mac framework for OpenCL
+                         (default is "OpenCL").
+
+    -help, -h .......... Display this information.
+    -verbose, -v ....... Print verbose information about each
+                         step of the configure process.
+EOF
+
+   exit 0
+fi # Help
+
+#-------------------------------------------------------------------------------
+# tests that need qmake
+#-------------------------------------------------------------------------------
+
+XQMAKESPEC=""
+QMAKE_CONFIG=""
+
+# if we don't have any -l flags, then assume -lOpenCL.
+if [ -z "$l_FLAGS" ] ; then
+    if [ "$UNAME_SYSTEM" = "Linux" ] ; then
+        l_FLAGS=" -lOpenCL"
+    fi
+    if [ "$PLATFORM_MAC" = "yes" ] ; then
+        l_FLAGS=" -framework OpenCL"
+    fi
+fi
+
+# detect OpenCL
+if "$unixtests/compile.test" "$OPT_QMAKE" "$QMAKE_CONFIG" $OPT_VERBOSE "$relpath" "$outpath" config.tests/unix/opencl "opencl" $L_FLAGS $I_FLAGS $l_FLAGS $D_FLAGS; then
+    CFG_OPENCL=yes
+else
+    CFG_OPENCL=no
+fi
+
+# detect OpenCL/OpenGL interoperation
+if [ "${CFG_OPENCLGL}" = "auto" ]; then
+    if "$unixtests/compile.test" "$OPT_QMAKE" "$QMAKE_CONFIG" $OPT_VERBOSE "$relpath" "$outpath" config.tests/unix/openclgl "openclgl" $L_FLAGS $I_FLAGS $l_FLAGS $D_FLAGS; then
+	CFG_OPENCLGL=yes
+    else
+	CFG_OPENCLGL=no
+    fi
+fi
+
+# detect OpenCL 1.1
+if [ "${CFG_OPENCL_1_1}" = "auto" ]; then
+    if "$unixtests/compile.test" "$OPT_QMAKE" "$QMAKE_CONFIG" $OPT_VERBOSE "$relpath" "$outpath" config.tests/unix/opencl11 "opencl11" $L_FLAGS $I_FLAGS $l_FLAGS $D_FLAGS; then
+	CFG_OPENCL_1_1=yes
+    else
+	CFG_OPENCL_1_1=no
+    fi
+fi
+
+#-------------------------------------------------------------------------------
+# give feedback on configuration
+#-------------------------------------------------------------------------------
+
+echo "Qt version ............. $QMAKE_VERSION"
+echo "qmake .................. $OPT_QMAKE"
+echo "OpenCL 1.0 ............. $CFG_OPENCL"
+echo "OpenCL 1.1 ............. $CFG_OPENCL_1_1"
+echo "OpenCL/OpenGL interop .. $CFG_OPENCLGL"
+echo "Extra QMAKE_CXXFLAGS ...$D_FLAGS" | sed 's/"//g'
+echo "Extra INCLUDEPATH ......$INCLUDEPATH" | sed 's/"//g'
+echo "Extra LIBS .............$L_FLAGS$l_FLAGS" | sed 's/"//g'
+echo ""
+
+if [ "x$CFG_OPENCL" != "xyes" ] ; then
+    echo "Could not detect an OpenCL implementation ... aborting"
+    if [ "x$OPT_VERBOSE" = "xno" ] ; then
+        echo "Use the -verbose option for more information"
+    fi
+    exit 1
+fi
+
+#-------------------------------------------------------------------------------
+# build makefiles based on the configuration
+#-------------------------------------------------------------------------------
+
+QMAKE_OPTIONS=""
+if [ "x$CFG_OPENCLGL" != "xyes" ] ; then
+    QMAKE_OPTIONS="$QMAKE_OPTIONS CONFIG+=no_cl_gl"
+fi
+if [ "x$CFG_OPENCL_1_1" = "xyes" ] ; then
+    QMAKE_OPTIONS="$QMAKE_OPTIONS CONFIG+=opencl_1_1"
+fi
+if [ "x$CFG_GCOV" = "xyes" ] ; then
+    QMAKE_OPTIONS="$QMAKE_OPTIONS LIBS*=-fprofile-arcs"
+    QMAKE_OPTIONS="$QMAKE_OPTIONS LIBS*=-ftest-coverage"
+    QMAKE_OPTIONS="$QMAKE_OPTIONS QMAKE_CXXFLAGS*=-fprofile-arcs"
+    QMAKE_OPTIONS="$QMAKE_OPTIONS QMAKE_CXXFLAGS*=-ftest-coverage"
+    QMAKE_OPTIONS="$QMAKE_OPTIONS CONFIG+=gcov"
+fi
+QMAKE_OPTIONS="$QMAKE_OPTIONS CONFIG+=opencl_configure"
+
+if $OPT_QMAKE $QMAKE_OPTIONS \
+        "LIBS*=$L_FLAGS" \
+        "LIBS*=$l_FLAGS" \
+        "INCLUDEPATH*=$INCLUDEPATH" \
+        "QMAKE_CXXFLAGS*=$D_FLAGS" "$relpath/opencl.pro" ; then
+    echo "QtOpenCL has been configured.  Run '$MAKE' to build."
+    echo ""
+    exit 0
+else
+    exit 1
+fi
