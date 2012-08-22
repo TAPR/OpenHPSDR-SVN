@@ -1,0 +1,116 @@
+/****************************************************************************
+**
+** Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+** All rights reserved.
+** Contact: Nokia Corporation (qt-info@nokia.com)
+**
+** This file is part of the documentation of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:FDL$
+** No Commercial Usage
+** This file contains pre-release code and may not be distributed.
+** You may use this file in accordance with the terms and conditions
+** contained in the Technology Preview License Agreement accompanying
+** this package.
+**
+** GNU Free Documentation License
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of this
+** file.
+**
+** If you have questions regarding the use of this file, please contact
+** Nokia at qt-info@nokia.com.
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+/*!
+    \page concurrent.html
+    \title OpenCL and QtConcurrent
+
+    \l{http://doc.qt.nokia.com/4.6/threads-qtconcurrent.html}{QtConcurrent}
+    provides high-level APIs that make it possible to write
+    multi-threaded programs without using low-level threading
+    primitives such as mutexes, read-write locks, wait conditions,
+    or semaphores.  It was designed for use on multi-core systems
+    with a homogeneous CPU architecture, shared memory between
+    the cores, and pre-compiled functions to be executed in threads.
+
+    OpenCL has a very different design, using heterogeneous
+    computing resources that are scattered across multiple CPU
+    and GPU architectures, which may not be sharing the
+    same memory address space, and which usually compile the
+    functions to be executed at runtime.
+
+    OpenCL programs are structured to prepare arguments,
+    upload them explicitly, run the compiled "kernel" on the
+    arguments, and then download the results.  A large part of
+    the OpenCL API is concerned with argument upload and download.
+    See the \l{Vector Addition Example} for a simple outline
+    of the process.  QtConcurrent does not currently provide
+    upload/download facilities because it assumes that the
+    compute resource can access the arguments via the shared
+    memory address space.
+
+    The QtOpenCL library makes it easy for programmers familiar
+    with QtConcurrent to use QtOpenCL with the same coding style
+    they are used to.  In particular, it provides an override for
+    QtConcurrent::run() that can be used with QCLKernel objects:
+
+    \code
+    kernel.setGlobalWorkSize(100, 100);
+    QFuture<void> future = QtConcurrent::run(kernel, a1, b1);
+    future.waitForFinished();
+    \endcode
+
+    This will create a background thread on the main CPU to enqueue
+    the kernel for execution and to wait for the kernel to complete.
+
+    Only 5 arguments can be passed to a kernel using
+    QtConcurrent::run(), which is the same as for regular functions
+    and QtConcurrent.  Use explicit QCLKernel::setArg() calls and
+    QCLKernel::runInThread() for kernels with more than 5 arguments.
+
+    Because kernels do not have return values, QtConcurrent::run()
+    on a QCLKernel will always return a QFuture<void>.
+
+    The main advantage of QFuture<void> compared to QCLEvent is
+    that it can be used with QFutureWatcher to receive signal
+    notification of when a kernel completes execution:
+
+    \code
+    QFutureWatcher<void> *watcher = new QFutureWatcher<void>(this);
+    watcher->setFuture(QtConcurrent::run(kernel, a1, b1));
+    connect(watcher, SIGNAL(finished()), this, SLOT(eventFinished()));
+    \endcode
+
+    The kernel object must not be reused until the background
+    thread finishes execution of the kernel.  Thus, the following
+    code will have unexpected effects:
+
+    \code
+    QFuture<void> future1 = QtConcurrent::run(kernel, a1, b1);
+    QFuture<void> future2 = QtConcurrent::run(kernel, a2, b2);
+    future1.waitForFinished();
+    future2.waitForFinished();
+    \endcode
+
+    The recommended method to run the same kernel multiple times in a
+    background thread is as follows:
+
+    \code
+    void runKernelTwice(QCLKernel &kernel)
+    {
+        kernel(a1, b1);
+        kernel(a2, b2).waitForFinished();
+    }
+
+    QFuture<void> future = QtConcurrent::run(runKernelTwice, kernel);
+    \endcode
+
+    See \l{Kernels and QtConcurrent} and QCLEvent::toFuture()
+    for more information.
+
+    \l{index.html}{Return to Home}
+*/

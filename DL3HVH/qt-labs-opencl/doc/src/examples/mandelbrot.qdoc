@@ -1,0 +1,47 @@
+/****************************************************************************
+**
+** Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+** All rights reserved.
+** Contact: Nokia Corporation (qt-info@nokia.com)
+**
+** This file is part of the documentation of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:FDL$
+** No Commercial Usage
+** This file contains pre-release code and may not be distributed.
+** You may use this file in accordance with the terms and conditions
+** contained in the Technology Preview License Agreement accompanying
+** this package.
+**
+** GNU Free Documentation License
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of this
+** file.
+**
+** If you have questions regarding the use of this file, please contact
+** Nokia at qt-info@nokia.com.
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+/*!
+    \example mandelbrot
+    \title Mandelbrot Viewer
+
+    The Mandelbrot Viewer demonstrates how to use OpenCL to calculate
+    and color images from the
+    \l{http://en.wikipedia.org/wiki/Mandelbrot_set}{Mandelbrot set}.
+
+    \image mandelbrot-screenshot.png
+
+    The \c{-native} command-line option can be supplied to compare
+    the performance of OpenCL with a native CPU implementation of
+    the same Mandelbrot algorithm.
+
+    The \c{-opengl} command-line option can be supplied to make use
+    of \l{Interoperation between OpenCL and OpenGL}{OpenCL/OpenGL
+    interoperation}.
+
+    \l{index.html}{Return to Home}
+*/

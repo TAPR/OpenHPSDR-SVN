@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/images" >
+        <file>accessories-calculator.png</file>
+        <file>accessories-text-editor.png</file>
+        <file>help-browser.png</file>
+        <file>internet-group-chat.png</file>
+        <file>internet-mail.png</file>
+        <file>internet-web-browser.png</file>
+        <file>office-calendar.png</file>
+        <file>system-users.png</file>
+        <file>qt-logo.png</file>
+    </qresource>
+</RCC>
+

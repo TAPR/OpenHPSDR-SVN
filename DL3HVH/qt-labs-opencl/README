@@ -1,0 +1,9 @@
+
+QtOpenCL
+--------
+
+This directory contains a Qt-style wrapper library for OpenCL
+plus several examples, benchmarks, and unit tests that exercise
+the library in various ways.
+
+See "doc/src/building.qdoc" for build instructions.
