@@ -33900,7 +33900,8 @@ namespace PowerSDR
             saved_vfob_freq = freq;
 
 
-            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+           // if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+            if (current_model == Model.HERMES || current_model == Model.HPSDR)
             {
                 if (chkVFOBTX.Checked) goto set_tx_freq;
                 if (rx2_enabled) goto set_rx2_freq;

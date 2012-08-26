@@ -30036,9 +30036,8 @@ namespace PowerSDR
             if (!Directory.Exists(path))
             {
                 MessageBox.Show("The console presentation files (skins) were not found.\n" +
-                    "Appearance will suffer until this is rectified.\n" +
-                    "Please visit www.flex-radio.com to download the missing files.",
-                    "Skins files not found",
+                    "Appearance will suffer until this is rectified.\n",
+                     "Skins files not found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
@@ -30054,8 +30053,7 @@ namespace PowerSDR
             if (comboAppSkin.Items.Count == 0)
             {
                 MessageBox.Show("The console presentation files (skins) were not found.\n" +
-                    "Appearance will suffer until this is rectified.\n" +
-                    "Please visit www.flex-radio.com to download the missing files.",
+                    "Appearance will suffer until this is rectified.\n",
                     "Skins files not found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -30063,7 +30061,12 @@ namespace PowerSDR
             }
 
             if (skin == "")
-                comboAppSkin.Text = "Default";
+            {
+                if (comboAppSkin.Items.Contains("Default"))
+                    comboAppSkin.Text = "Default";
+                else
+                    comboAppSkin.Text = "OpenHPSDR-Gray";
+            }
             else if (comboAppSkin.Items.Contains(skin))
                 comboAppSkin.Text = skin;
             else comboAppSkin.Text = "Default";
