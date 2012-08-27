@@ -21698,7 +21698,7 @@ namespace PowerSDR
         {
             // while (chkPower.Checked)
             // {
-            // if (rx1_dds_freq_updated)
+             if (rx1_dds_freq_updated)
             {
                 rx1_dds_freq_updated = false;
                 JanusAudio.SetVFOfreq(rx1_dds_freq_mhz);
@@ -21743,7 +21743,7 @@ namespace PowerSDR
             // while (chkPower.Checked)
             // if (chkPower.Checked)
             // {
-            //   if (chkPower.Checked && tx_dds_freq_updated)
+               if (chkPower.Checked && tx_dds_freq_updated)
             {
                 JanusAudio.SetVFOfreqTX(tx_dds_freq_mhz);
                 // UpdateRX1DDSFreq();
@@ -21755,7 +21755,7 @@ namespace PowerSDR
         }
 
         private uint last_tw = 0;
-        private double fwc_dds_freq = 7.0;
+        private double fwc_dds_freq = 10.0;
         public double FWCDDSFreq
         {
             get { return fwc_dds_freq; }
@@ -21766,7 +21766,7 @@ namespace PowerSDR
                 double f = fwc_dds_freq + vfo_offset;
                 rx1_dds_freq_mhz = f;
                 rx1_dds_freq_updated = true;
-                radio.GetDSPRX(0, 0).RXOsc = 0.0;
+               // radio.GetDSPRX(0, 0).RXOsc = 0.0;
                 UpdateRX1DDSFreq();
                 // System.Console.WriteLine("rx1dds: " + rx1_dds_freq_mhz);
             }
@@ -21862,28 +21862,28 @@ namespace PowerSDR
                 if (xvtr_present && f >= 144 && f <= 146)		// If transverter enabled compute 28MHz IF frequency
                     f -= 116;									// Subtract 116MHz (144-28) from VFO display frequency
 
-                if (if_shift)
-                {
-                    f -= if_freq;								// adjust for IF shift
-                    dsp_osc_freq = -if_freq * 1000000.0;
-                }
+                //if(if_shift) 
+                //{
+                //	f -= if_freq;								// adjust for IF shift
+                //	dsp_osc_freq = -if_freq * 1000000.0;
+                //}
 
                 f += vfo_offset;								// adjust for vfo offset
                 /*if(mox && current_dsp_mode == DSPMode.DRM)
                     f -= 0.008;*/
                 //long tuning_word = (long)(f / corrected_dds_clock * Math.Pow(2, 48));
-                long tuning_word = (long)(0xFFFFFFFFFFFF * f / corrected_dds_clock);
+               // long tuning_word = (long)(0xFFFFFFFFFFFF * f / corrected_dds_clock);
 
-                if (spur_reduction)
-                {
-                    long sr_tuning_word = tuning_word &		// start with current tuning word
-                        ~(0x8000ffffffff);	// clear first bit, low 32 bits
+              //  if (spur_reduction)
+            //    {
+                  //  long sr_tuning_word = tuning_word &		// start with current tuning word
+                     //   ~(0x8000ffffffff);	// clear first bit, low 32 bits
 
-                    double software_offset = (sr_tuning_word - tuning_word) * dds_step_size;
-                    dsp_osc_freq += 1000000.0 * software_offset;
+                 //   double software_offset = (sr_tuning_word - tuning_word) * dds_step_size;
+                //    dsp_osc_freq += 1000000.0 * software_offset;
 
-                    tuning_word = sr_tuning_word;
-                }
+                 //   tuning_word = sr_tuning_word;
+              //  }
 
                 /* if (!mox && current_click_tune_mode == ClickTuneMode.VFOA)
                  {
@@ -21891,14 +21891,14 @@ namespace PowerSDR
                      dsp_osc_freq = (int)((freq_center - (vfoFreq * 1000000.0)));
                  }*/
 
-                if (!mox)
-                    radio.GetDSPRX(0, 0).RXOsc = dsp_osc_freq;
+                // if (!mox)
+                //  radio.GetDSPRX(0, 0).RXOsc = dsp_osc_freq;
 
                 // if (current_click_tune_mode != ClickTuneMode.VFOA)
                 // {
-                if (PowerOn && ModelIsHPSDRorHermes())
+              /*  if (PowerOn && ModelIsHPSDRorHermes())
                 {
-                    /*  JanusAudio.SetVFOfreq(f);
+                      JanusAudio.SetVFOfreq(f);
                       if (mox) JanusAudio.SetVFOfreqTX(f);
                       if (SetupForm.radAlexManualCntl.Checked)
                           SetHWFilters(f);
@@ -21907,13 +21907,13 @@ namespace PowerSDR
                           (SetupForm.rad6BPFled.Checked))
                           AlexPreampOffset = 23;
                       else
-                          AlexPreampOffset = 0; */
+                          AlexPreampOffset = 0; 
                 }
                 else
                 {
                     Hdw.DDSTuningWord = tuning_word;
                     SetHWFilters(dds_freq);
-                }
+                }*/
                 //  }
                 //if(PowerOn)
                 // SetupForm.textBoxTS5.Text = freq_center.ToString();
@@ -21941,7 +21941,7 @@ namespace PowerSDR
             return word * corrected_dds_clock / Math.Pow(2, 48);
         }
 
-        private double min_freq = 0.011025;
+        private double min_freq = 0.0;
         public double MinFreq
         {
             get { return min_freq; }
@@ -21981,7 +21981,7 @@ namespace PowerSDR
             set { rx2_vfo_offset = value; }
         }
 
-        private double if_freq = 0.009000;
+        private double if_freq = 0.0;
         //private double if_freq = 0.000001;
         public double IFFreq
         {
@@ -27387,7 +27387,7 @@ namespace PowerSDR
                         displaydidit = true;
                     }
                     //if(!chkSplitDisplay.Checked)
-                    if (!Display.DataReady)
+                    if (!Display.DataReady && Display.CurrentDisplayMode != DisplayMode.OFF)
                     {
                         switch (Display.CurrentDisplayMode)
                         {
@@ -27425,7 +27425,8 @@ namespace PowerSDR
                         }
                         Display.DataReady = true;
                     }
-                    if (chkSplitDisplay.Checked && !Display.DataReadyBottom)
+
+                    if (chkSplitDisplay.Checked && !Display.DataReadyBottom && Display.CurrentDisplayModeBottom != DisplayMode.OFF)
                     {
                         switch (Display.CurrentDisplayModeBottom)
                         {
@@ -31887,6 +31888,8 @@ namespace PowerSDR
                 AudioMOXChanged(tx);
                 if (rf_delay > 0) Thread.Sleep(rf_delay);
                 HdwMOXChanged(tx, freq);
+               // AudioMOXChanged(tx);
+
             }
             else
             {
