@@ -1623,6 +1623,10 @@ namespace PowerSDR
 
             switch (current_audio_state1)
             {
+                case AudioState.CW:
+                    DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
+                    DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
+                   break;
                 case AudioState.DTTSP:
 
                     #region VOX
@@ -1646,6 +1650,11 @@ namespace PowerSDR
                     }
 
                     #endregion
+
+                    if (tx_dsp_mode == DSPMode.CWU || tx_dsp_mode == DSPMode.CWL)
+                    {
+                        DttSP.CWtoneExchange(out_l_ptr1, out_r_ptr1, frameCount);
+                    }
 
                     // scale input with mic preamp
                     if ((!vac_enabled &&
@@ -1837,10 +1846,10 @@ namespace PowerSDR
                 
                     DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
  
-                    if (rx1_dsp_mode == DSPMode.CWU || rx1_dsp_mode == DSPMode.CWL)
+                  /*  if (rx1_dsp_mode == DSPMode.CWU || rx1_dsp_mode == DSPMode.CWL)
                     {
                         DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
-                    } 
+                    } */
 
 #if(MINMAX)
 					Debug.Write(MaxSample(out_l_ptr1, out_r_ptr1, frameCount).ToString("f6")+",");
@@ -1912,7 +1921,7 @@ namespace PowerSDR
                                 break;
                             case SignalSource.SINE:
                                 SineWave(tx_out_l, frameCount, phase_accumulator1, sine_freq1);
-                                phase_accumulator1 = CosineWave(out_r_ptr2, frameCount, phase_accumulator1, sine_freq1);
+                                phase_accumulator1 = CosineWave(tx_out_r, frameCount, phase_accumulator1, sine_freq1);
                                 ScaleBuffer(tx_out_l, tx_out_l, frameCount, (float) source_scale);
                                 ScaleBuffer(tx_out_r, tx_out_r, frameCount, (float) source_scale);
                                 break;
@@ -1953,13 +1962,17 @@ namespace PowerSDR
                     #endregion
 
                     break;
-                case AudioState.CW:
+            /*    case AudioState.CW:
                     DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
                     DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
-                    break;
+                               //  SineWave(tx_out_l, frameCount, phase_accumulator1, sine_freq1);
+                              //  phase_accumulator1 = CosineWave(tx_out_r, frameCount, phase_accumulator1, sine_freq1);
+                             //   ScaleBuffer(tx_out_l, tx_out_l, frameCount, (float) source_scale);
+                             //   ScaleBuffer(tx_out_r, tx_out_r, frameCount, (float) source_scale);
+                   break; */
             }
 
-            if (localmox && ramp)
+         /*   if (localmox && ramp)
             {
                 for (int i = 0; i < frameCount; i++)
                 {
@@ -1983,7 +1996,7 @@ namespace PowerSDR
                         break;
                     }
                 }
-            }
+            } */
 
             if (scope)
             {
