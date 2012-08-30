@@ -1356,7 +1356,7 @@ namespace PowerSDR
                // AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                  //   + "\\FlexRadio Systems\\PowerSDR v" + version + "\\";
                 AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                     + "\\FlexRadio Systems\\W5WC PowerSDR" + "\\";
+                     + "\\FlexRadio Systems\\PowerSDR (W5WC)" + "\\";
             }
 
 #if(DEBUG)
@@ -6748,7 +6748,7 @@ namespace PowerSDR
                // app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                  //   + "\\FlexRadio Systems\\PowerSDR v" + version + "\\";
                 app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                    + "\\FlexRadio Systems\\W5WC PowerSDR" + "\\";
+                    + "\\FlexRadio Systems\\PowerSDR (W5WC)" + "\\";
 #if(DEBUG)
                 app_data_path += "Debug\\";
 #endif
