@@ -340,9 +340,27 @@ namespace PowerSDR
                 {
                     byte metis_vernum = metis_ver[0];
                     mercury_ver = getMercuryFWVersion();
-                    penny_ver = getPenelopeFWVersion();
+                   // penny_ver = getPenelopeFWVersion();
                     int mercury2_ver = getMercury2FWVersion();
 
+                    if (c.PennyPresent || c.PennyLanePresent)
+                    {
+                        do
+                        {
+                            Thread.Sleep(500);
+                            penny_ver = getPenelopeFWVersion();
+                            if (penny_ver < 11)
+                            {
+                                Thread.Sleep(500);
+                                penny_ver = getPenelopeFWVersion();
+                                if (penny_ver > 0) break;
+                                penny_ver = getPenelopeFWVersion();
+                                if (penny_ver == 0) break;
+                            }
+                        }
+                        while (penny_ver <= 10);
+                    }
+                    
                     switch (metis_vernum)
                     {
                         case 13:
@@ -384,7 +402,7 @@ namespace PowerSDR
                             break;
                        case 18: // K5SO Diversity & non-diversity
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                                (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 73)))
+                                (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 75)))
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
@@ -491,23 +509,14 @@ namespace PowerSDR
                         break;
                     case 22: // K5SO Diversity & non-diversity
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 73)))
+                            (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 75)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
                             c.PowerOn = false;
                         }
                         break;
-                    case 80: // K5SO Diversity & non-diversity
-                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 80)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 80 && mercury_ver != 73)))
-                        {
-                            result = false;
-                            c.SetupForm.alex_fw_good = false;
-                            c.PowerOn = false;
-                        }
-                        break;
-                    default:
+                   default:
                         result = false;
                         c.SetupForm.alex_fw_good = false;
                         c.PowerOn = false;
