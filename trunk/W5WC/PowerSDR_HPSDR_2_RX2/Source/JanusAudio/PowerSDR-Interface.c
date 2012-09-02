@@ -502,6 +502,11 @@ KD5TFDVK6APHAUDIO_API void SetPennyOCBits(int b) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetSWRProtect(float g) { 
+	swr_protect = g; 
+	return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out) {  
 	
 
@@ -521,7 +526,7 @@ KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out) {
 	return;
 }
 
-    receivers = 2; // 1 rx = 2 loops, 2 rx = 4 loops for IQ
+  //  receivers = 2; // 1 rx = 2 loops, 2 rx = 4 loops for IQ
 KD5TFDVK6APHAUDIO_API void SetNRx(int nrx) {  
 	receivers = nrx * 2;
 	nrx = (nrx-1) << 3; 
@@ -537,7 +542,7 @@ KD5TFDVK6APHAUDIO_API int nativeGetDotDashPTT() {
 		
 	if ( last_DDP != (DotDashBits & 0x7) ) { 
 		last_DDP = DotDashBits & 0x7; 
-		printf("ddp: 0x%04x\n", last_DDP);  fflush(stdout); 
+	//	printf("ddp: 0x%04x\n", last_DDP);  fflush(stdout); 
 	}		
     return DotDashBits & 0x7;
 }

@@ -862,23 +862,23 @@
             this.textBoxTS12 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS11 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS10 = new System.Windows.Forms.TextBoxTS();
-            this.textBoxTS9 = new System.Windows.Forms.TextBoxTS();
+            this.txtAlexRevADC = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS8 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS7 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS6 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS5 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS4 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS3 = new System.Windows.Forms.TextBoxTS();
-            this.textBoxTS2 = new System.Windows.Forms.TextBoxTS();
-            this.textBoxTS1 = new System.Windows.Forms.TextBoxTS();
+            this.txtAlexFwdADC = new System.Windows.Forms.TextBoxTS();
+            this.txtFwdADC = new System.Windows.Forms.TextBoxTS();
             this.labelTS92 = new System.Windows.Forms.LabelTS();
             this.labelTS91 = new System.Windows.Forms.LabelTS();
             this.labelTS90 = new System.Windows.Forms.LabelTS();
             this.labelTS89 = new System.Windows.Forms.LabelTS();
-            this.txtDDSRounded = new System.Windows.Forms.TextBoxTS();
-            this.txtTuningWord = new System.Windows.Forms.TextBoxTS();
+            this.txtAlexRevPower = new System.Windows.Forms.TextBoxTS();
+            this.txtFwdPower = new System.Windows.Forms.TextBoxTS();
             this.txtDDSVFO = new System.Windows.Forms.TextBoxTS();
-            this.txt_DDStune = new System.Windows.Forms.TextBoxTS();
+            this.txtAlexFwdPower = new System.Windows.Forms.TextBoxTS();
             this.tpAudio = new System.Windows.Forms.TabPage();
             this.tcAudio = new System.Windows.Forms.TabControl();
             this.tpAudioCard1 = new System.Windows.Forms.TabPage();
@@ -13338,23 +13338,23 @@
             this.tpInfo.Controls.Add(this.textBoxTS12);
             this.tpInfo.Controls.Add(this.textBoxTS11);
             this.tpInfo.Controls.Add(this.textBoxTS10);
-            this.tpInfo.Controls.Add(this.textBoxTS9);
+            this.tpInfo.Controls.Add(this.txtAlexRevADC);
             this.tpInfo.Controls.Add(this.textBoxTS8);
             this.tpInfo.Controls.Add(this.textBoxTS7);
             this.tpInfo.Controls.Add(this.textBoxTS6);
             this.tpInfo.Controls.Add(this.textBoxTS5);
             this.tpInfo.Controls.Add(this.textBoxTS4);
             this.tpInfo.Controls.Add(this.textBoxTS3);
-            this.tpInfo.Controls.Add(this.textBoxTS2);
-            this.tpInfo.Controls.Add(this.textBoxTS1);
+            this.tpInfo.Controls.Add(this.txtAlexFwdADC);
+            this.tpInfo.Controls.Add(this.txtFwdADC);
             this.tpInfo.Controls.Add(this.labelTS92);
             this.tpInfo.Controls.Add(this.labelTS91);
             this.tpInfo.Controls.Add(this.labelTS90);
             this.tpInfo.Controls.Add(this.labelTS89);
-            this.tpInfo.Controls.Add(this.txtDDSRounded);
-            this.tpInfo.Controls.Add(this.txtTuningWord);
+            this.tpInfo.Controls.Add(this.txtAlexRevPower);
+            this.tpInfo.Controls.Add(this.txtFwdPower);
             this.tpInfo.Controls.Add(this.txtDDSVFO);
-            this.tpInfo.Controls.Add(this.txt_DDStune);
+            this.tpInfo.Controls.Add(this.txtAlexFwdPower);
             this.tpInfo.Location = new System.Drawing.Point(4, 22);
             this.tpInfo.Name = "tpInfo";
             this.tpInfo.Padding = new System.Windows.Forms.Padding(3);
@@ -13470,7 +13470,7 @@
             this.labelTS94.Name = "labelTS94";
             this.labelTS94.Size = new System.Drawing.Size(150, 16);
             this.labelTS94.TabIndex = 162;
-            this.labelTS94.Text = "DDSFreq - dsp_osc_freq";
+            this.labelTS94.Text = "Alex Rev ADC Voltage";
             this.labelTS94.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS93
@@ -13481,7 +13481,7 @@
             this.labelTS93.Name = "labelTS93";
             this.labelTS93.Size = new System.Drawing.Size(150, 16);
             this.labelTS93.TabIndex = 161;
-            this.labelTS93.Text = "DDSFreq - vfoFreq";
+            this.labelTS93.Text = "Alex Fwd ADC Voltage";
             this.labelTS93.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS19
@@ -13492,7 +13492,7 @@
             this.labelTS19.Name = "labelTS19";
             this.labelTS19.Size = new System.Drawing.Size(150, 16);
             this.labelTS19.TabIndex = 160;
-            this.labelTS19.Text = "DDSFreq - freq_center";
+            this.labelTS19.Text = "Fwd ADC Voltage";
             this.labelTS19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS18
@@ -13576,16 +13576,16 @@
             this.textBoxTS10.Size = new System.Drawing.Size(157, 20);
             this.textBoxTS10.TabIndex = 153;
             // 
-            // textBoxTS9
+            // txtAlexRevADC
             // 
-            this.textBoxTS9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.textBoxTS9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.textBoxTS9.ForeColor = System.Drawing.Color.White;
-            this.textBoxTS9.Location = new System.Drawing.Point(219, 105);
-            this.textBoxTS9.Name = "textBoxTS9";
-            this.textBoxTS9.ReadOnly = true;
-            this.textBoxTS9.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTS9.TabIndex = 152;
+            this.txtAlexRevADC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtAlexRevADC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtAlexRevADC.ForeColor = System.Drawing.Color.White;
+            this.txtAlexRevADC.Location = new System.Drawing.Point(219, 105);
+            this.txtAlexRevADC.Name = "txtAlexRevADC";
+            this.txtAlexRevADC.ReadOnly = true;
+            this.txtAlexRevADC.Size = new System.Drawing.Size(157, 20);
+            this.txtAlexRevADC.TabIndex = 152;
             // 
             // textBoxTS8
             // 
@@ -13653,27 +13653,27 @@
             this.textBoxTS3.Size = new System.Drawing.Size(157, 20);
             this.textBoxTS3.TabIndex = 146;
             // 
-            // textBoxTS2
+            // txtAlexFwdADC
             // 
-            this.textBoxTS2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.textBoxTS2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.textBoxTS2.ForeColor = System.Drawing.Color.White;
-            this.textBoxTS2.Location = new System.Drawing.Point(219, 60);
-            this.textBoxTS2.Name = "textBoxTS2";
-            this.textBoxTS2.ReadOnly = true;
-            this.textBoxTS2.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTS2.TabIndex = 145;
+            this.txtAlexFwdADC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtAlexFwdADC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtAlexFwdADC.ForeColor = System.Drawing.Color.White;
+            this.txtAlexFwdADC.Location = new System.Drawing.Point(219, 60);
+            this.txtAlexFwdADC.Name = "txtAlexFwdADC";
+            this.txtAlexFwdADC.ReadOnly = true;
+            this.txtAlexFwdADC.Size = new System.Drawing.Size(157, 20);
+            this.txtAlexFwdADC.TabIndex = 145;
             // 
-            // textBoxTS1
+            // txtFwdADC
             // 
-            this.textBoxTS1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.textBoxTS1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.textBoxTS1.ForeColor = System.Drawing.Color.White;
-            this.textBoxTS1.Location = new System.Drawing.Point(219, 20);
-            this.textBoxTS1.Name = "textBoxTS1";
-            this.textBoxTS1.ReadOnly = true;
-            this.textBoxTS1.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTS1.TabIndex = 144;
+            this.txtFwdADC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtFwdADC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtFwdADC.ForeColor = System.Drawing.Color.White;
+            this.txtFwdADC.Location = new System.Drawing.Point(219, 20);
+            this.txtFwdADC.Name = "txtFwdADC";
+            this.txtFwdADC.ReadOnly = true;
+            this.txtFwdADC.Size = new System.Drawing.Size(157, 20);
+            this.txtFwdADC.TabIndex = 144;
             // 
             // labelTS92
             // 
@@ -13694,7 +13694,7 @@
             this.labelTS91.Name = "labelTS91";
             this.labelTS91.Size = new System.Drawing.Size(111, 16);
             this.labelTS91.TabIndex = 142;
-            this.labelTS91.Text = "DDS Freq (rounded)";
+            this.labelTS91.Text = "Alex Rev Power";
             this.labelTS91.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS90
@@ -13705,7 +13705,7 @@
             this.labelTS90.Name = "labelTS90";
             this.labelTS90.Size = new System.Drawing.Size(111, 16);
             this.labelTS90.TabIndex = 141;
-            this.labelTS90.Text = "DDS Frequency";
+            this.labelTS90.Text = "Alex Fwd Power";
             this.labelTS90.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS89
@@ -13716,30 +13716,30 @@
             this.labelTS89.Name = "labelTS89";
             this.labelTS89.Size = new System.Drawing.Size(111, 16);
             this.labelTS89.TabIndex = 140;
-            this.labelTS89.Text = "Tuning Word";
+            this.labelTS89.Text = "Fwd Power";
             this.labelTS89.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtDDSRounded
+            // txtAlexRevPower
             // 
-            this.txtDDSRounded.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtDDSRounded.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtDDSRounded.ForeColor = System.Drawing.Color.White;
-            this.txtDDSRounded.Location = new System.Drawing.Point(24, 105);
-            this.txtDDSRounded.Name = "txtDDSRounded";
-            this.txtDDSRounded.ReadOnly = true;
-            this.txtDDSRounded.Size = new System.Drawing.Size(88, 20);
-            this.txtDDSRounded.TabIndex = 139;
+            this.txtAlexRevPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtAlexRevPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtAlexRevPower.ForeColor = System.Drawing.Color.White;
+            this.txtAlexRevPower.Location = new System.Drawing.Point(24, 105);
+            this.txtAlexRevPower.Name = "txtAlexRevPower";
+            this.txtAlexRevPower.ReadOnly = true;
+            this.txtAlexRevPower.Size = new System.Drawing.Size(157, 20);
+            this.txtAlexRevPower.TabIndex = 139;
             // 
-            // txtTuningWord
+            // txtFwdPower
             // 
-            this.txtTuningWord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtTuningWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtTuningWord.ForeColor = System.Drawing.Color.White;
-            this.txtTuningWord.Location = new System.Drawing.Point(24, 20);
-            this.txtTuningWord.Name = "txtTuningWord";
-            this.txtTuningWord.ReadOnly = true;
-            this.txtTuningWord.Size = new System.Drawing.Size(125, 20);
-            this.txtTuningWord.TabIndex = 138;
+            this.txtFwdPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtFwdPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtFwdPower.ForeColor = System.Drawing.Color.White;
+            this.txtFwdPower.Location = new System.Drawing.Point(24, 20);
+            this.txtFwdPower.Name = "txtFwdPower";
+            this.txtFwdPower.ReadOnly = true;
+            this.txtFwdPower.Size = new System.Drawing.Size(157, 20);
+            this.txtFwdPower.TabIndex = 138;
             // 
             // txtDDSVFO
             // 
@@ -13752,16 +13752,16 @@
             this.txtDDSVFO.Size = new System.Drawing.Size(88, 20);
             this.txtDDSVFO.TabIndex = 137;
             // 
-            // txt_DDStune
+            // txtAlexFwdPower
             // 
-            this.txt_DDStune.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txt_DDStune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txt_DDStune.ForeColor = System.Drawing.Color.White;
-            this.txt_DDStune.Location = new System.Drawing.Point(24, 60);
-            this.txt_DDStune.Name = "txt_DDStune";
-            this.txt_DDStune.ReadOnly = true;
-            this.txt_DDStune.Size = new System.Drawing.Size(157, 20);
-            this.txt_DDStune.TabIndex = 136;
+            this.txtAlexFwdPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtAlexFwdPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtAlexFwdPower.ForeColor = System.Drawing.Color.White;
+            this.txtAlexFwdPower.Location = new System.Drawing.Point(24, 60);
+            this.txtAlexFwdPower.Name = "txtAlexFwdPower";
+            this.txtAlexFwdPower.ReadOnly = true;
+            this.txtAlexFwdPower.Size = new System.Drawing.Size(157, 20);
+            this.txtAlexFwdPower.TabIndex = 136;
             // 
             // tpAudio
             // 
@@ -14339,7 +14339,7 @@
             // 
             this.chkAudioRX2toVAC.Enabled = false;
             this.chkAudioRX2toVAC.Image = null;
-            this.chkAudioRX2toVAC.Location = new System.Drawing.Point(16, 46);
+            this.chkAudioRX2toVAC.Location = new System.Drawing.Point(16, 68);
             this.chkAudioRX2toVAC.Name = "chkAudioRX2toVAC";
             this.chkAudioRX2toVAC.Size = new System.Drawing.Size(88, 16);
             this.chkAudioRX2toVAC.TabIndex = 2;
@@ -14350,7 +14350,7 @@
             // 
             this.chkAudioCorrectIQ.Enabled = false;
             this.chkAudioCorrectIQ.Image = null;
-            this.chkAudioCorrectIQ.Location = new System.Drawing.Point(16, 68);
+            this.chkAudioCorrectIQ.Location = new System.Drawing.Point(16, 46);
             this.chkAudioCorrectIQ.Name = "chkAudioCorrectIQ";
             this.chkAudioCorrectIQ.Size = new System.Drawing.Size(88, 16);
             this.chkAudioCorrectIQ.TabIndex = 1;
@@ -14765,7 +14765,7 @@
             // 
             this.chkVAC2UseRX2.Enabled = false;
             this.chkVAC2UseRX2.Image = null;
-            this.chkVAC2UseRX2.Location = new System.Drawing.Point(16, 46);
+            this.chkVAC2UseRX2.Location = new System.Drawing.Point(16, 68);
             this.chkVAC2UseRX2.Name = "chkVAC2UseRX2";
             this.chkVAC2UseRX2.Size = new System.Drawing.Size(88, 16);
             this.chkVAC2UseRX2.TabIndex = 2;
@@ -14777,7 +14777,7 @@
             // 
             this.chkVAC2DirectIQCal.Enabled = false;
             this.chkVAC2DirectIQCal.Image = null;
-            this.chkVAC2DirectIQCal.Location = new System.Drawing.Point(16, 68);
+            this.chkVAC2DirectIQCal.Location = new System.Drawing.Point(16, 46);
             this.chkVAC2DirectIQCal.Name = "chkVAC2DirectIQCal";
             this.chkVAC2DirectIQCal.Size = new System.Drawing.Size(88, 16);
             this.chkVAC2DirectIQCal.TabIndex = 1;
@@ -19996,9 +19996,8 @@
             // tpPowerAmplifier
             // 
             this.tpPowerAmplifier.Controls.Add(this.grpPAGainByBand);
-            this.tpPowerAmplifier.Controls.Add(this.grpPABandOffset);
-            this.tpPowerAmplifier.Controls.Add(this.chkPANewCal);
             this.tpPowerAmplifier.Controls.Add(this.rtxtPACalReq);
+            this.tpPowerAmplifier.Controls.Add(this.grpPABandOffset);
             this.tpPowerAmplifier.Location = new System.Drawing.Point(4, 22);
             this.tpPowerAmplifier.Name = "tpPowerAmplifier";
             this.tpPowerAmplifier.Size = new System.Drawing.Size(584, 313);
@@ -20008,6 +20007,7 @@
             // grpPAGainByBand
             // 
             this.grpPAGainByBand.Controls.Add(this.lblPAGainByBandVHF13);
+            this.grpPAGainByBand.Controls.Add(this.chkPANewCal);
             this.grpPAGainByBand.Controls.Add(this.udPAGainVHF13);
             this.grpPAGainByBand.Controls.Add(this.lblPAGainByBandVHF12);
             this.grpPAGainByBand.Controls.Add(this.udPAGainVHF12);
@@ -20077,7 +20077,7 @@
             this.grpPAGainByBand.Location = new System.Drawing.Point(8, 8);
             this.grpPAGainByBand.Name = "grpPAGainByBand";
             this.grpPAGainByBand.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.grpPAGainByBand.Size = new System.Drawing.Size(573, 272);
+            this.grpPAGainByBand.Size = new System.Drawing.Size(573, 275);
             this.grpPAGainByBand.TabIndex = 1;
             this.grpPAGainByBand.TabStop = false;
             this.grpPAGainByBand.Text = "Gain By Band (dB)";
@@ -20701,14 +20701,13 @@
             0,
             0});
             this.udPACalPower.Name = "udPACalPower";
-            this.udPACalPower.Size = new System.Drawing.Size(40, 20);
+            this.udPACalPower.Size = new System.Drawing.Size(50, 20);
             this.udPACalPower.TabIndex = 35;
             this.udPACalPower.Value = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.udPACalPower.Visible = false;
             // 
             // lblPACalTarget
             // 
@@ -20720,7 +20719,6 @@
             this.lblPACalTarget.TabIndex = 34;
             this.lblPACalTarget.Text = "Cal Target:";
             this.lblPACalTarget.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblPACalTarget.Visible = false;
             // 
             // chkPA10
             // 
@@ -20730,7 +20728,6 @@
             this.chkPA10.Size = new System.Drawing.Size(40, 16);
             this.chkPA10.TabIndex = 33;
             this.chkPA10.Text = "10";
-            this.chkPA10.Visible = false;
             // 
             // chkPA12
             // 
@@ -20740,7 +20737,6 @@
             this.chkPA12.Size = new System.Drawing.Size(40, 16);
             this.chkPA12.TabIndex = 32;
             this.chkPA12.Text = "12";
-            this.chkPA12.Visible = false;
             // 
             // chkPA15
             // 
@@ -20750,7 +20746,6 @@
             this.chkPA15.Size = new System.Drawing.Size(40, 16);
             this.chkPA15.TabIndex = 31;
             this.chkPA15.Text = "15";
-            this.chkPA15.Visible = false;
             // 
             // chkPA17
             // 
@@ -20760,7 +20755,6 @@
             this.chkPA17.Size = new System.Drawing.Size(40, 16);
             this.chkPA17.TabIndex = 30;
             this.chkPA17.Text = "17";
-            this.chkPA17.Visible = false;
             // 
             // chkPA20
             // 
@@ -20770,7 +20764,6 @@
             this.chkPA20.Size = new System.Drawing.Size(40, 16);
             this.chkPA20.TabIndex = 29;
             this.chkPA20.Text = "20";
-            this.chkPA20.Visible = false;
             // 
             // chkPA30
             // 
@@ -20780,7 +20773,6 @@
             this.chkPA30.Size = new System.Drawing.Size(40, 16);
             this.chkPA30.TabIndex = 28;
             this.chkPA30.Text = "30";
-            this.chkPA30.Visible = false;
             // 
             // chkPA40
             // 
@@ -20790,7 +20782,6 @@
             this.chkPA40.Size = new System.Drawing.Size(40, 16);
             this.chkPA40.TabIndex = 27;
             this.chkPA40.Text = "40";
-            this.chkPA40.Visible = false;
             // 
             // chkPA60
             // 
@@ -20800,7 +20791,6 @@
             this.chkPA60.Size = new System.Drawing.Size(40, 16);
             this.chkPA60.TabIndex = 26;
             this.chkPA60.Text = "60";
-            this.chkPA60.Visible = false;
             // 
             // chkPA80
             // 
@@ -20810,7 +20800,6 @@
             this.chkPA80.Size = new System.Drawing.Size(40, 16);
             this.chkPA80.TabIndex = 25;
             this.chkPA80.Text = "80";
-            this.chkPA80.Visible = false;
             // 
             // chkPA160
             // 
@@ -20820,7 +20809,6 @@
             this.chkPA160.Size = new System.Drawing.Size(48, 16);
             this.chkPA160.TabIndex = 24;
             this.chkPA160.Text = "160";
-            this.chkPA160.Visible = false;
             // 
             // radPACalSelBands
             // 
@@ -20830,7 +20818,6 @@
             this.radPACalSelBands.Size = new System.Drawing.Size(120, 32);
             this.radPACalSelBands.TabIndex = 23;
             this.radPACalSelBands.Text = "Selected Bands (checked below)";
-            this.radPACalSelBands.Visible = false;
             // 
             // radPACalAllBands
             // 
@@ -20842,7 +20829,6 @@
             this.radPACalAllBands.TabIndex = 22;
             this.radPACalAllBands.TabStop = true;
             this.radPACalAllBands.Text = "All Bands";
-            this.radPACalAllBands.Visible = false;
             this.radPACalAllBands.CheckedChanged += new System.EventHandler(this.radPACalAllBands_CheckedChanged);
             // 
             // btnPAGainReset
@@ -20864,7 +20850,6 @@
             this.btnPAGainCalibration.Size = new System.Drawing.Size(64, 23);
             this.btnPAGainCalibration.TabIndex = 20;
             this.btnPAGainCalibration.Text = "Calibrate";
-            this.btnPAGainCalibration.Visible = false;
             this.btnPAGainCalibration.Click += new System.EventHandler(this.btnPAGainCalibration_Click);
             // 
             // lblPAGainByBand10
@@ -21285,7 +21270,6 @@
             this.chkPA6.Size = new System.Drawing.Size(36, 16);
             this.chkPA6.TabIndex = 84;
             this.chkPA6.Text = "6";
-            this.chkPA6.Visible = false;
             // 
             // grpPABandOffset
             // 
@@ -21690,11 +21674,12 @@
             // chkPANewCal
             // 
             this.chkPANewCal.Image = null;
-            this.chkPANewCal.Location = new System.Drawing.Point(461, 248);
+            this.chkPANewCal.Location = new System.Drawing.Point(427, 227);
             this.chkPANewCal.Name = "chkPANewCal";
             this.chkPANewCal.Size = new System.Drawing.Size(120, 32);
             this.chkPANewCal.TabIndex = 83;
             this.chkPANewCal.Text = "Use Advanced Calibration Routine";
+            this.chkPANewCal.Visible = false;
             this.chkPANewCal.CheckedChanged += new System.EventHandler(this.chkPANewCal_CheckedChanged);
             // 
             // rtxtPACalReq

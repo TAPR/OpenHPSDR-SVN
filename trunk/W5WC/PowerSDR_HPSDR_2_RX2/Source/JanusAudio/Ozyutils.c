@@ -31,7 +31,7 @@ p.covington@gmail.com
 
 int Reset_CPU(struct usb_dev_handle *hdev, int reset)
 {
-    unsigned char val;		 //  unsigned char	***** JJA
+    char val;		 //  unsigned char	***** JJA
     
     val = reset;
     return Write_RAM(hdev, 0xE600, &val, 1); 

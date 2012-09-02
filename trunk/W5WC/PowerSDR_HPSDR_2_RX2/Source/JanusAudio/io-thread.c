@@ -923,10 +923,10 @@ unsigned char HermesFilt = 0;
                                                         // processOverloadBit(ControlBytesIn[1] & 1);
 											             break;
 										          case 0x8:
-                                                         fwd_power_stage = ((ControlBytesIn[1] << 8) & 0xff00);
+                                                         fwd_power_stage = ((ControlBytesIn[1] << 8) & 0xff00); // bits 15-8 (AIN5) Penny/Hermes
 										                 break;
 										          case 0x10:
-											             ref_power_stage = ((ControlBytesIn[1] << 8) & 0xff00);
+											             ref_power_stage = ((ControlBytesIn[1] << 8) & 0xff00); // bits 15-8 (AIN2) Alex reverse power
 											             break;
 												  case 0x18:
                                                          //ain4 = ((ControlBytesIn[1] << 8) & 0xff00);
@@ -965,11 +965,11 @@ unsigned char HermesFilt = 0;
                                                         // MercuryFWVersion =  (int)(ControlBytesIn[2]);//old
 											             break;
 										          case 0x8:
-                                                         fwd_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff);
+                                                         fwd_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff); // bits 7-0 (AIN5) Penny/Hermes
                                                          FwdPower = fwd_power_stage; 
 										                 break;
 										          case 0x10:
-											             ref_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff);
+											             ref_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff); // bits 7-0 (AIN2) Alex reverse power
 													     RefPower = ref_power_stage;
 											             break;
 												  case 0x18:
@@ -1013,7 +1013,7 @@ unsigned char HermesFilt = 0;
                                                          PenelopeFWVersion = (int)(ControlBytesIn[3]);
 											             break;
 										          case 0x8:
-                                                         alex_fwd_power = ((ControlBytesIn[3] << 8) & 0xff00);
+                                                         alex_fwd_power = ((ControlBytesIn[3] << 8) & 0xff00); //bits 15-8 (AIN1) Alex
 										                 break;
 										          case 0x10:
 											             //ain3 = ((ControlBytesIn[3] << 8) & 0xff00);
@@ -1022,7 +1022,7 @@ unsigned char HermesFilt = 0;
                                                          //ain6 = ((ControlBytesIn[3] << 8) & 0xff00); //Hermes 13.8v (22v scale)
 													     break;
 										          case 0x20:
- 											             Mercury3FWVersion =  (int)(ControlBytesIn[3] >> 1);										                 
+ 											           //  Mercury3FWVersion =  (int)(ControlBytesIn[3] >> 1);										                 
 											             break;
 												}
 
@@ -1051,19 +1051,19 @@ unsigned char HermesFilt = 0;
                                                          OzyFWVersion =  (int)(ControlBytesIn[4]);
 											             break;
 										          case 0x8:
-                                                         alex_fwd_power |=  (((int)(ControlBytesIn[4])) & 0xff);
+                                                         alex_fwd_power |=  (((int)(ControlBytesIn[4])) & 0xff); // bits 7-0 (AIN1) Alex
 													     AlexFwdPower = alex_fwd_power;
 										                 break;
 										          case 0x10:	
                                                          //ain3 |=  (((int)(ControlBytesIn[4])) & 0xff);
 													     //AIN3 = ain3;
-											             break;
+  											             break;
 												  case 0x18:
 						                                 //ain6 |=  (((int)(ControlBytesIn[4])) & 0xff);
 													     //AIN6 = ain6; //Hermes 13.8v (22v scalle)
 													  break;
 										          case 0x20:
- 											             Mercury4FWVersion = (int)(ControlBytesIn[4] >> 1);										                 
+ 											            // Mercury4FWVersion = (int)(ControlBytesIn[4] >> 1);										                 
 											             break;
 												}
 
@@ -1364,8 +1364,10 @@ unsigned char HermesFilt = 0;
 																 break;
 															 case 6:
  																 if (HermesPowerEnabled && XmitBit != 0) { 															     
-															      FPGAWriteBufp[writebufpos] = (unsigned char)(OutputPowerFactor & 0xff);
-                                                                //printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
+																	 if (swr_protect == 0.0f) swr_protect = 0.3f;
+																	 pf = (unsigned char) (OutputPowerFactor * swr_protect);
+																	 FPGAWriteBufp[writebufpos] = (unsigned char) (pf & 0xff); //(OutputPowerFactor & 0xff);
+                                                                 //printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
 															     } 
 															     else 
 															      {

@@ -445,17 +445,17 @@ namespace PowerSDR
             set
             {
                 in_tx_l = value;
-               /* switch (in_tx_l)
-                {
-                    case 4:
-                    case 5:
-                    case 6:
-                        in_tx_r = in_tx_l + 1;
-                        break;
-                    case 7:
-                        in_tx_r = 4;
-                        break;
-                }*/
+                /* switch (in_tx_l)
+                 {
+                     case 4:
+                     case 5:
+                     case 6:
+                         in_tx_r = in_tx_l + 1;
+                         break;
+                     case 7:
+                         in_tx_r = 4;
+                         break;
+                 }*/
             }
         }
 
@@ -1513,9 +1513,8 @@ namespace PowerSDR
             float* rx2_out_l = null, rx2_out_r = null;
             localmox = mox;
 
+            // inputs
             void* ex_input = input;
-            void* ex_output = output;
-
             int* array_ptr_input = (int*)input;
             float* in_l_ptr1 = (float*)array_ptr_input[0]; //CallbackInLbufp RX1 I
             float* in_r_ptr1 = (float*)array_ptr_input[1]; //CallbackInRbufp RX1 Q
@@ -1526,6 +1525,22 @@ namespace PowerSDR
             float* in_l_ptr4 = (float*)array_ptr_input[6]; //CallbackInL3bufp  RX3 I
             float* in_r_ptr4 = (float*)array_ptr_input[7]; //CallbackInR3bufp  RX3 Q
 
+            array_ptr_input[0] = (int)in_l_ptr1; // CallbackInLbufp
+            array_ptr_input[1] = (int)in_r_ptr1; // CallbackInRbufp
+            array_ptr_input[2] = (int)in_l_ptr3; // CallbackMicLbufp
+            array_ptr_input[3] = (int)in_r_ptr3; // CallbackMicRbufp
+            array_ptr_input[4] = (int)in_l_ptr2; // CallbackInL2bufp
+            array_ptr_input[5] = (int)in_r_ptr2; // CallbackInR2bufp
+
+            rx1_in_l = (float*)array_ptr_input[0]; //CallbackInLbufp
+            rx1_in_r = (float*)array_ptr_input[1]; //CallbackInRbufp
+            tx_in_l = (float*)array_ptr_input[2]; //CallbackMicLbufp
+            tx_in_r = (float*)array_ptr_input[3]; //CallbackMicRbufp
+            rx2_in_l = (float*)array_ptr_input[4]; //CallbackInL2bufp
+            rx2_in_r = (float*)array_ptr_input[5]; //CallbackInR2bufp
+
+            // outputs
+            void* ex_output = output;
             int* array_ptr_output = (int*)output;
             float* out_l_ptr1 = (float*)array_ptr_output[0]; //CallbackMonOutLbufp RX1
             float* out_r_ptr1 = (float*)array_ptr_output[1]; //CallbackMonOutRbufp RX1
@@ -1536,86 +1551,6 @@ namespace PowerSDR
             float* out_l_ptr4 = (float*)array_ptr_output[6]; //CallbackOutL3bufp 
             float* out_r_ptr4 = (float*)array_ptr_output[7]; //CallbackOutR3bufp 
 
-            // arrange input buffers in the following order:
-            // RX1 Left, RX1 Right, TX Left, TX Right, RX2 Left, RX2 Right
-            switch (in_rx1_l)
-            {
-                case 0: array_ptr_input[0] = (int)in_l_ptr1; break; // CallbackInLbufp
-                case 1: array_ptr_input[0] = (int)in_r_ptr1; break;
-                case 2: array_ptr_input[0] = (int)in_l_ptr2; break;
-                case 3: array_ptr_input[0] = (int)in_r_ptr2; break;
-                case 4: array_ptr_input[0] = (int)in_l_ptr3; break;
-                case 5: array_ptr_input[0] = (int)in_r_ptr3; break;
-                case 6: array_ptr_input[0] = (int)in_l_ptr4; break;
-                case 7: array_ptr_input[0] = (int)in_r_ptr4; break;
-            }
-
-            switch (in_rx1_r)
-            {
-                case 0: array_ptr_input[1] = (int)in_l_ptr1; break;
-                case 1: array_ptr_input[1] = (int)in_r_ptr1; break; // CallbackInRbufp
-                case 2: array_ptr_input[1] = (int)in_l_ptr2; break;
-                case 3: array_ptr_input[1] = (int)in_r_ptr2; break;
-                case 4: array_ptr_input[1] = (int)in_l_ptr3; break;
-                case 5: array_ptr_input[1] = (int)in_r_ptr3; break;
-                case 6: array_ptr_input[1] = (int)in_l_ptr4; break;
-                case 7: array_ptr_input[1] = (int)in_r_ptr4; break;
-            }
-
-            switch (in_tx_l)
-            {
-                case 0: array_ptr_input[2] = (int)in_l_ptr1; break;
-                case 1: array_ptr_input[2] = (int)in_r_ptr1; break;
-                case 2: array_ptr_input[2] = (int)in_l_ptr2; break;
-                case 3: array_ptr_input[2] = (int)in_r_ptr2; break;
-                case 4: array_ptr_input[2] = (int)in_l_ptr3; break; // CallbackMicLbufp
-                case 5: array_ptr_input[2] = (int)in_r_ptr3; break;
-                case 6: array_ptr_input[2] = (int)in_l_ptr4; break;
-                case 7: array_ptr_input[2] = (int)in_r_ptr4; break;
-            }
-
-            switch (in_tx_r)
-            {
-                case 0: array_ptr_input[3] = (int)in_l_ptr1; break;
-                case 1: array_ptr_input[3] = (int)in_r_ptr1; break;
-                case 2: array_ptr_input[3] = (int)in_l_ptr2; break;
-                case 3: array_ptr_input[3] = (int)in_r_ptr2; break;
-                case 4: array_ptr_input[3] = (int)in_l_ptr3; break;
-                case 5: array_ptr_input[3] = (int)in_r_ptr3; break; // CallbackMicRbufp
-                case 6: array_ptr_input[3] = (int)in_l_ptr4; break;
-                case 7: array_ptr_input[3] = (int)in_r_ptr4; break;
-            }
-
-            switch (in_rx2_l)
-            {
-                case 0: array_ptr_input[4] = (int)in_l_ptr1; break;
-                case 1: array_ptr_input[4] = (int)in_r_ptr1; break;
-                case 2: array_ptr_input[4] = (int)in_l_ptr2; break; // CallbackInL2bufp
-                case 3: array_ptr_input[4] = (int)in_r_ptr2; break;
-                case 4: array_ptr_input[4] = (int)in_l_ptr3; break;
-                case 5: array_ptr_input[4] = (int)in_r_ptr3; break;
-                case 6: array_ptr_input[4] = (int)in_l_ptr4; break;
-                case 7: array_ptr_input[4] = (int)in_r_ptr4; break;
-            }
-            switch (in_rx2_r)
-            {
-                case 0: array_ptr_input[5] = (int)in_l_ptr1; break;
-                case 1: array_ptr_input[5] = (int)in_r_ptr1; break;
-                case 2: array_ptr_input[5] = (int)in_l_ptr2; break;
-                case 3: array_ptr_input[5] = (int)in_r_ptr2; break; // CallbackInR2bufp
-                case 4: array_ptr_input[5] = (int)in_l_ptr3; break;
-                case 5: array_ptr_input[5] = (int)in_r_ptr3; break;
-                case 6: array_ptr_input[5] = (int)in_l_ptr4; break;
-                case 7: array_ptr_input[5] = (int)in_r_ptr4; break;
-            }
-
-            rx1_in_l = (float*)array_ptr_input[0]; //CallbackInLbufp
-            rx1_in_r = (float*)array_ptr_input[1]; //CallbackInRbufp
-            tx_in_l = (float*)array_ptr_input[2]; //CallbackMicLbufp
-            tx_in_r = (float*)array_ptr_input[3]; //CallbackMicRbufp
-            rx2_in_l = (float*)array_ptr_input[4]; //CallbackInL2bufp
-            rx2_in_r = (float*)array_ptr_input[5]; //CallbackInR2bufp
-
             rx1_out_l = (float*)array_ptr_output[0]; //CallbackMonOutLbufp
             rx1_out_r = (float*)array_ptr_output[1]; //CallbackMonOutRbufp
             tx_out_l = (float*)array_ptr_output[2]; //CallbackOutLbufp
@@ -1623,6 +1558,81 @@ namespace PowerSDR
             rx2_out_l = (float*)array_ptr_output[4]; //CallbackOutL2bufp
             rx2_out_r = (float*)array_ptr_output[5]; //CallbackOutR2bufp
 
+
+            // arrange input buffers in the following order:
+            // RX1 Left, RX1 Right, TX Left, TX Right, RX2 Left, RX2 Right
+
+
+            /*   switch (in_rx1_l)
+               {
+                   case 0: array_ptr_input[0] = (int)in_l_ptr1; break; // CallbackInLbufp
+                   case 1: array_ptr_input[0] = (int)in_r_ptr1; break;
+                   case 2: array_ptr_input[0] = (int)in_l_ptr2; break;
+                   case 3: array_ptr_input[0] = (int)in_r_ptr2; break;
+                   case 4: array_ptr_input[0] = (int)in_l_ptr3; break;
+                   case 5: array_ptr_input[0] = (int)in_r_ptr3; break;
+                   case 6: array_ptr_input[0] = (int)in_l_ptr4; break;
+                   case 7: array_ptr_input[0] = (int)in_r_ptr4; break;
+               }
+
+               switch (in_rx1_r)
+               {
+                   case 0: array_ptr_input[1] = (int)in_l_ptr1; break;
+                   case 1: array_ptr_input[1] = (int)in_r_ptr1; break; // CallbackInRbufp
+                   case 2: array_ptr_input[1] = (int)in_l_ptr2; break;
+                   case 3: array_ptr_input[1] = (int)in_r_ptr2; break;
+                   case 4: array_ptr_input[1] = (int)in_l_ptr3; break;
+                   case 5: array_ptr_input[1] = (int)in_r_ptr3; break;
+                   case 6: array_ptr_input[1] = (int)in_l_ptr4; break;
+                   case 7: array_ptr_input[1] = (int)in_r_ptr4; break;
+               }
+
+               switch (in_tx_l)
+               {
+                   case 0: array_ptr_input[2] = (int)in_l_ptr1; break;
+                   case 1: array_ptr_input[2] = (int)in_r_ptr1; break;
+                   case 2: array_ptr_input[2] = (int)in_l_ptr2; break;
+                   case 3: array_ptr_input[2] = (int)in_r_ptr2; break;
+                   case 4: array_ptr_input[2] = (int)in_l_ptr3; break; // CallbackMicLbufp
+                   case 5: array_ptr_input[2] = (int)in_r_ptr3; break;
+                   case 6: array_ptr_input[2] = (int)in_l_ptr4; break;
+                   case 7: array_ptr_input[2] = (int)in_r_ptr4; break;
+               }
+
+               switch (in_tx_r)
+               {
+                   case 0: array_ptr_input[3] = (int)in_l_ptr1; break;
+                   case 1: array_ptr_input[3] = (int)in_r_ptr1; break;
+                   case 2: array_ptr_input[3] = (int)in_l_ptr2; break;
+                   case 3: array_ptr_input[3] = (int)in_r_ptr2; break;
+                   case 4: array_ptr_input[3] = (int)in_l_ptr3; break;
+                   case 5: array_ptr_input[3] = (int)in_r_ptr3; break; // CallbackMicRbufp
+                   case 6: array_ptr_input[3] = (int)in_l_ptr4; break;
+                   case 7: array_ptr_input[3] = (int)in_r_ptr4; break;
+               }
+
+               switch (in_rx2_l)
+               {
+                   case 0: array_ptr_input[4] = (int)in_l_ptr1; break;
+                   case 1: array_ptr_input[4] = (int)in_r_ptr1; break;
+                   case 2: array_ptr_input[4] = (int)in_l_ptr2; break; // CallbackInL2bufp
+                   case 3: array_ptr_input[4] = (int)in_r_ptr2; break;
+                   case 4: array_ptr_input[4] = (int)in_l_ptr3; break;
+                   case 5: array_ptr_input[4] = (int)in_r_ptr3; break;
+                   case 6: array_ptr_input[4] = (int)in_l_ptr4; break;
+                   case 7: array_ptr_input[4] = (int)in_r_ptr4; break;
+               }
+               switch (in_rx2_r)
+               {
+                   case 0: array_ptr_input[5] = (int)in_l_ptr1; break;
+                   case 1: array_ptr_input[5] = (int)in_r_ptr1; break;
+                   case 2: array_ptr_input[5] = (int)in_l_ptr2; break;
+                   case 3: array_ptr_input[5] = (int)in_r_ptr2; break; // CallbackInR2bufp
+                   case 4: array_ptr_input[5] = (int)in_l_ptr3; break;
+                   case 5: array_ptr_input[5] = (int)in_r_ptr3; break;
+                   case 6: array_ptr_input[5] = (int)in_l_ptr4; break;
+                   case 7: array_ptr_input[5] = (int)in_r_ptr4; break;
+               } */
 
             if (!localmox)
             {
@@ -1635,11 +1645,11 @@ namespace PowerSDR
                 in_r = tx_in_r;
             }
 
-            if (localmox && rx2_enabled && rx2_auto_mute_tx)
-            {
-                ClearBuffer(rx2_in_l, frameCount);
-                ClearBuffer(rx2_in_r, frameCount);
-            }
+            /*   if (localmox && rx2_enabled && rx2_auto_mute_tx)
+               {
+                   ClearBuffer(rx2_in_l, frameCount);
+                   ClearBuffer(rx2_in_r, frameCount);
+               } */
 
             if (wave_playback)
             {
@@ -1703,7 +1713,7 @@ namespace PowerSDR
                             Win32.LeaveCriticalSection(cs_vac);
                         }
                     }
-                    else 
+                    else
                     {
                         if ((rb_vacIN_l.ReadSpace() >= frameCount) &&
                             (rb_vacIN_r.ReadSpace() >= frameCount))
@@ -1792,6 +1802,10 @@ namespace PowerSDR
 #endif
             switch (current_audio_state1)
             {
+                case AudioState.CW:
+                    DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
+                    DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
+                    break;
                 case AudioState.DTTSP:
 
                     #region VOX
@@ -2127,13 +2141,12 @@ namespace PowerSDR
                         }
                     }
 
-                    //DttSP.ExchangeSamples2(array_ptr_input, array_ptr_output, frameCount);
                     DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
-
-                    if (rx1_dsp_mode == DSPMode.CWU || rx1_dsp_mode == DSPMode.CWL)
+                    if (tx_dsp_mode == DSPMode.CWU || tx_dsp_mode == DSPMode.CWL)
                     {
                         DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
                     }
+
 
 #if(MINMAX)
 					Debug.Write(MaxSample(out_l_ptr1, out_r_ptr1, frameCount).ToString("f6")+",");
@@ -2244,10 +2257,6 @@ namespace PowerSDR
 
                     #endregion
 
-                    break;
-                case AudioState.CW:
-                    DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
-                    DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
                     break;
             }
 
@@ -2377,96 +2386,96 @@ namespace PowerSDR
             }
 
             // scale output for VAC2 -- use chan 4 as spare buffer
-         /*   if (vac2_enabled && !vac2_output_iq && 
-                rb_vac2IN_l != null && rb_vac2IN_r != null &&
-                rb_vac2OUT_l != null && rb_vac2OUT_r != null)
-            {
-                if (!localmox || localmox && !vfob_tx)
-                {
-                    if (!vac2_rx2)
-                    {
-                        ScaleBuffer(out_l1, out_l4, frameCount, (float)vac2_rx_scale);
-                        ScaleBuffer(out_r1, out_r4, frameCount, (float)vac2_rx_scale);
-                    }
-                    else
-                    {
-                        ScaleBuffer(out_l3, out_l4, frameCount, (float)vac2_rx_scale);//l3
-                        ScaleBuffer(out_r3, out_r4, frameCount, (float)vac2_rx_scale);
-                    }
-                }
-                else if (mon)
-                {
-                    ScaleBuffer(out_l2, out_l4, frameCount, (float)vac2_rx_scale);
-                    ScaleBuffer(out_r2, out_r4, frameCount, (float)vac2_rx_scale);
-                }
-                else // zero samples going back to VAC since TX monitor is off
-                {
-                    ScaleBuffer(out_l2, out_l4, frameCount, 0.0f);
-                    ScaleBuffer(out_r2, out_r4, frameCount, 0.0f);
-                }
+            /*   if (vac2_enabled && !vac2_output_iq && 
+                   rb_vac2IN_l != null && rb_vac2IN_r != null &&
+                   rb_vac2OUT_l != null && rb_vac2OUT_r != null)
+               {
+                   if (!localmox || localmox && !vfob_tx)
+                   {
+                       if (!vac2_rx2)
+                       {
+                           ScaleBuffer(out_l1, out_l4, frameCount, (float)vac2_rx_scale);
+                           ScaleBuffer(out_r1, out_r4, frameCount, (float)vac2_rx_scale);
+                       }
+                       else
+                       {
+                           ScaleBuffer(out_l3, out_l4, frameCount, (float)vac2_rx_scale);//l3
+                           ScaleBuffer(out_r3, out_r4, frameCount, (float)vac2_rx_scale);
+                       }
+                   }
+                   else if (mon)
+                   {
+                       ScaleBuffer(out_l2, out_l4, frameCount, (float)vac2_rx_scale);
+                       ScaleBuffer(out_r2, out_r4, frameCount, (float)vac2_rx_scale);
+                   }
+                   else // zero samples going back to VAC since TX monitor is off
+                   {
+                       ScaleBuffer(out_l2, out_l4, frameCount, 0.0f);
+                       ScaleBuffer(out_r2, out_r4, frameCount, 0.0f);
+                   }
 
-                if (sample_rate3 == sample_rate1)
-                {
-                    if ((rb_vac2OUT_l.WriteSpace() >= frameCount) && (rb_vac2OUT_r.WriteSpace() >= frameCount))
-                    {
-                        Win32.EnterCriticalSection(cs_vac2);
-                        rb_vac2OUT_l.WritePtr(out_l4, frameCount);
-                        rb_vac2OUT_r.WritePtr(out_r4, frameCount);
-                        Win32.LeaveCriticalSection(cs_vac2);
-                    }
-                    else
-                    {
-                        VACDebug("rb_vac2OUT_l overflow ");
-                        vac2_rb_reset = true;
-                    }
-                }
-                else
-                {
-                    if (vac2_stereo)
-                    {
-                        fixed (float* res_outl_ptr = &(res_vac2_outl[0]))
-                        fixed (float* res_outr_ptr = &(res_vac2_outr[0]))
-                        {
-                            int outsamps;
-                            DttSP.DoResamplerF(out_l4, res_outl_ptr, frameCount, &outsamps, resampVAC2PtrOut_l);
-                            DttSP.DoResamplerF(out_r4, res_outr_ptr, frameCount, &outsamps, resampVAC2PtrOut_r);
-                            if ((rb_vac2OUT_l.WriteSpace() >= outsamps) && (rb_vac2OUT_r.WriteSpace() >= outsamps))
-                            {
-                                Win32.EnterCriticalSection(cs_vac2);
-                                rb_vac2OUT_l.WritePtr(res_outl_ptr, outsamps);
-                                rb_vac2OUT_r.WritePtr(res_outr_ptr, outsamps);
-                                Win32.LeaveCriticalSection(cs_vac2);
-                            }
-                            else
-                            {
-                                vac2_rb_reset = true;
-                                VACDebug("rb_vac2OUT_l overflow");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        fixed (float* res_outl_ptr = &(res_vac2_outl[0]))
-                        {
-                            int outsamps;
-                            DttSP.DoResamplerF(out_l4, res_outl_ptr, frameCount, &outsamps, resampVAC2PtrOut_l);
-                            if ((rb_vac2OUT_l.WriteSpace() >= outsamps) && (rb_vac2OUT_r.WriteSpace() >= outsamps))
-                            {
-                                Win32.EnterCriticalSection(cs_vac2);
-                                rb_vac2OUT_l.WritePtr(res_outl_ptr, outsamps);
-                                rb_vac2OUT_r.WritePtr(res_outl_ptr, outsamps);
-                                Win32.LeaveCriticalSection(cs_vac2);
-                            }
-                            else
-                            {
-                                vac2_rb_reset = true;
-                                VACDebug("rb_vac2OUT_l overflow");
-                            }
-                        }
-                    }
-                }
-            }
-            */
+                   if (sample_rate3 == sample_rate1)
+                   {
+                       if ((rb_vac2OUT_l.WriteSpace() >= frameCount) && (rb_vac2OUT_r.WriteSpace() >= frameCount))
+                       {
+                           Win32.EnterCriticalSection(cs_vac2);
+                           rb_vac2OUT_l.WritePtr(out_l4, frameCount);
+                           rb_vac2OUT_r.WritePtr(out_r4, frameCount);
+                           Win32.LeaveCriticalSection(cs_vac2);
+                       }
+                       else
+                       {
+                           VACDebug("rb_vac2OUT_l overflow ");
+                           vac2_rb_reset = true;
+                       }
+                   }
+                   else
+                   {
+                       if (vac2_stereo)
+                       {
+                           fixed (float* res_outl_ptr = &(res_vac2_outl[0]))
+                           fixed (float* res_outr_ptr = &(res_vac2_outr[0]))
+                           {
+                               int outsamps;
+                               DttSP.DoResamplerF(out_l4, res_outl_ptr, frameCount, &outsamps, resampVAC2PtrOut_l);
+                               DttSP.DoResamplerF(out_r4, res_outr_ptr, frameCount, &outsamps, resampVAC2PtrOut_r);
+                               if ((rb_vac2OUT_l.WriteSpace() >= outsamps) && (rb_vac2OUT_r.WriteSpace() >= outsamps))
+                               {
+                                   Win32.EnterCriticalSection(cs_vac2);
+                                   rb_vac2OUT_l.WritePtr(res_outl_ptr, outsamps);
+                                   rb_vac2OUT_r.WritePtr(res_outr_ptr, outsamps);
+                                   Win32.LeaveCriticalSection(cs_vac2);
+                               }
+                               else
+                               {
+                                   vac2_rb_reset = true;
+                                   VACDebug("rb_vac2OUT_l overflow");
+                               }
+                           }
+                       }
+                       else
+                       {
+                           fixed (float* res_outl_ptr = &(res_vac2_outl[0]))
+                           {
+                               int outsamps;
+                               DttSP.DoResamplerF(out_l4, res_outl_ptr, frameCount, &outsamps, resampVAC2PtrOut_l);
+                               if ((rb_vac2OUT_l.WriteSpace() >= outsamps) && (rb_vac2OUT_r.WriteSpace() >= outsamps))
+                               {
+                                   Win32.EnterCriticalSection(cs_vac2);
+                                   rb_vac2OUT_l.WritePtr(res_outl_ptr, outsamps);
+                                   rb_vac2OUT_r.WritePtr(res_outl_ptr, outsamps);
+                                   Win32.LeaveCriticalSection(cs_vac2);
+                               }
+                               else
+                               {
+                                   vac2_rb_reset = true;
+                                   VACDebug("rb_vac2OUT_l overflow");
+                               }
+                           }
+                       }
+                   }
+               }
+               */
 
             // output from DSP is organized as follows
             //=========================================================
@@ -2507,20 +2516,11 @@ namespace PowerSDR
                 //no need to do digital scaling  for power 
                 {
                     ScaleBuffer(out_l2, out_l2, frameCount, (float)tx_vol);
+                    ScaleBuffer(out_r2, out_r2, frameCount, (float)tx_vol);
                 }
                 else /* do hermes/pennylane style scaling */
                 {
                     ScaleBuffer(out_l2, out_l2, frameCount, GetPennylaneIQScale());
-                }
-
-                if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent)
-                // Hermes power level set by command and control to programmable gain amp .. 
-                //no need to do digital scaling  for power 
-                {
-                    ScaleBuffer(out_r2, out_r2, frameCount, (float)tx_vol);
-                }
-                else
-                {
                     ScaleBuffer(out_r2, out_r2, frameCount, GetPennylaneIQScale());
                 }
             }
@@ -2531,21 +2531,16 @@ namespace PowerSDR
                 {
                     if (!rx2_enabled)
                     {
-                        // monitor is on, should hear TX audio
-                        if (!mon)
-                        // monitor is off, should hear RX audio
-                        {
-                            // Scale the output for Mercury
-                            // ScaleBuffer(out_l1, out_r1, frameCount, (float)monitor_volume);
-                            // ScaleBuffer(out_r1, out_l1, frameCount, (float)monitor_volume);
-                            ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                            ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-                        }
+                        // Scale the output for Mercury
+                        // ScaleBuffer(out_l1, out_r1, frameCount, (float)monitor_volume);
+                        // ScaleBuffer(out_r1, out_l1, frameCount, (float)monitor_volume);
+                        ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
+                        ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
                     }
                     else // RX2 is enabled
                     {
                         // Combine RX2 with RX1                   
-                        // if (rx2_enabled)
+
                         {
                             // AddBuffer(out_l1, out_l3, frameCount);
                             // AddBuffer(out_r1, out_r3, frameCount);
