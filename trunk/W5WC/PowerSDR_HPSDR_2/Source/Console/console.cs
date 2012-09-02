@@ -12033,16 +12033,35 @@ namespace PowerSDR
             return swr;
         }
 
-        public double ALEXSWR(double adc_fwd, double adc_rev)
+        public double ALEXSWR(double g_fwd, double g_rev)
         {
-            double f = adc_fwd;
-            double r = adc_rev;
-
-            if (adc_fwd == 0 && adc_rev == 0) return 1.0;
-            if (adc_rev > adc_fwd) return 50.0;
-
-            double sqrt_r_over_f = Math.Sqrt(r / f);
-            return (1.0 + sqrt_r_over_f) / (1.0 - sqrt_r_over_f);
+            double swr; 
+            if ((g_fwd == 0 && g_rev == 0) | g_fwd < 1) return 1.0;
+            if (g_rev > g_fwd)
+            {
+                HighSWR = true;
+                UpdateDisplay();
+                swr = 50.0;
+            }
+            else
+            {
+                double rho = Math.Sqrt(g_rev / g_fwd);
+                swr = (1.0 + rho) / (1.0 - rho);
+            }
+            if (swr > 2)
+            {
+                JanusAudio.SetSWRProtect(0.5f);
+                HighSWR = true;
+                UpdateDisplay();
+                if (swr > 3) JanusAudio.SetSWRProtect(0.25f);
+            }
+            else
+        {
+                JanusAudio.SetSWRProtect(1.0f);
+                HighSWR = false;
+                UpdateDisplay();
+            }
+            return swr;
         }
 
         public double FWCSWR(int adc_fwd, int adc_rev)
@@ -17932,7 +17951,7 @@ namespace PowerSDR
 
             if (!chkPower.Checked)
             {
-                MessageBox.Show("Power must be on in order to calibrate PA Gain.", "Power Is Off",
+                MessageBox.Show("START must be active in order to calibrate PA Gain.", "START is not presently active",
                     MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return false;
             }
@@ -17978,9 +17997,9 @@ namespace PowerSDR
 
             progress.SetPercent(0.0f);
 
-            float[] band_freqs = { 1.85f, 3.75f, 5.3665f, 7.15f, 10.125f, 14.175f, 18.1f, 21.300f, 24.9f, 28.4f };
+            float[] band_freqs = { 1.85f, 3.75f, 5.3665f, 7.15f, 10.125f, 14.175f, 18.1f, 21.300f, 24.9f, 28.4f, 50.4f };
 
-            int[] max_pwr = { 100, 100, 100, 100, 100, 100, 100, 100, 75, 75 };
+            int[] max_pwr = { 100, 100, 100, 100, 100, 100, 100, 100, 75, 75, 75 };
 
             if (run[0]) SetupForm.PAGain160 = 49.0f;
             if (run[1]) SetupForm.PAGain80 = 49.0f;
@@ -17992,6 +18011,7 @@ namespace PowerSDR
             if (run[7]) SetupForm.PAGain15 = 49.0f;
             if (run[8]) SetupForm.PAGain12 = 49.0f;
             if (run[9]) SetupForm.PAGain10 = 49.0f;
+            if (run[10]) SetupForm.PAGain6 = 49.0f;
 
             for (int i = 0; i < band_freqs.Length; i++)
             {
@@ -18025,7 +18045,9 @@ namespace PowerSDR
 
                         double watts = 0;
                         //pa_power_mutex.WaitOne();
-                        watts = PAPower(pa_fwd_power);
+                        //watts = PAPower(pa_fwd_power);
+                        watts = (double)JanusAudio.computeAlexFwdPower();       //HPSDR
+
                         //pa_power_mutex.ReleaseMutex();
 
                         chkMOX.Checked = false;
@@ -18041,112 +18063,122 @@ namespace PowerSDR
                         if (!progress.Visible)
                             goto end;
 
-                        if (Math.Abs(watts - target) > 4)
+                        if (Math.Abs(watts - target) > 0.5)
                         {
                             // convert to dBm
-                            float diff_dBm = (float)Math.Round((WattsTodBm(watts) - WattsTodBm((double)target)), 1);
+                            float diff_dBm = (float)Math.Round((WattsTodBm(watts) - WattsTodBm((double)target)), 3);
 
                             switch (i)										// fix gain value
                             {
                                 case 0:
-                                    if (SetupForm.PAGain160 + diff_dBm < 38.0)
+                                    if (SetupForm.PAGain160 + diff_dBm < 38.8)
                                     {
                                         if (++error_count > 6)
                                             goto error;
 
-                                        SetupForm.PAGain160 = (float)Math.Max(38.0, SetupForm.PAGain160 - 2.0);
+                                        SetupForm.PAGain160 = (float)Math.Max(38.8, SetupForm.PAGain160 - 2.0);
                                     }
                                     else SetupForm.PAGain160 += diff_dBm;
                                     break;
                                 case 1:
-                                    if (SetupForm.PAGain80 + diff_dBm < 38.0)
+                                    if (SetupForm.PAGain80 + diff_dBm < 38.8)
                                     {
                                         if (++error_count > 6)
                                             goto error;
 
-                                        SetupForm.PAGain80 = (float)Math.Max(38.0, SetupForm.PAGain80 - 2.0);
+                                        SetupForm.PAGain80 = (float)Math.Max(38.8, SetupForm.PAGain80 - 2.0);
                                     }
                                     else SetupForm.PAGain80 += diff_dBm;
                                     break;
                                 case 2:
-                                    if (SetupForm.PAGain60 + diff_dBm < 38.0)
+                                    if (SetupForm.PAGain60 + diff_dBm < 38.8)
                                     {
                                         if (++error_count > 6)
                                             goto error;
 
-                                        SetupForm.PAGain60 = (float)Math.Max(38.0, SetupForm.PAGain60 - 2.0);
+                                        SetupForm.PAGain60 = (float)Math.Max(38.8, SetupForm.PAGain60 - 2.0);
                                     }
                                     else SetupForm.PAGain60 += diff_dBm;
                                     break;
                                 case 3:
-                                    if (SetupForm.PAGain40 + diff_dBm < 38.0)
+                                    if (SetupForm.PAGain40 + diff_dBm < 38.8)
                                     {
                                         if (++error_count > 6)
                                             goto error;
 
-                                        SetupForm.PAGain40 = (float)Math.Max(38.0, SetupForm.PAGain40 - 2.0);
+                                        SetupForm.PAGain40 = (float)Math.Max(38.8, SetupForm.PAGain40 - 2.0);
                                     }
                                     else SetupForm.PAGain40 += diff_dBm;
                                     break;
                                 case 4:
-                                    if (SetupForm.PAGain30 + diff_dBm < 38.0)
+                                    if (SetupForm.PAGain30 + diff_dBm < 38.8)
                                     {
                                         if (++error_count > 6)
                                             goto error;
 
-                                        SetupForm.PAGain30 = (float)Math.Max(38.0, SetupForm.PAGain30 - 2.0);
+                                        SetupForm.PAGain30 = (float)Math.Max(38.8, SetupForm.PAGain30 - 2.0);
                                     }
                                     else SetupForm.PAGain30 += diff_dBm;
                                     break;
                                 case 5:
-                                    if (SetupForm.PAGain20 + diff_dBm < 38.0)
+                                    if (SetupForm.PAGain20 + diff_dBm < 38.8)
                                     {
                                         if (++error_count > 6)
                                             goto error;
 
-                                        SetupForm.PAGain20 = (float)Math.Max(38.0, SetupForm.PAGain20 - 2.0);
+                                        SetupForm.PAGain20 = (float)Math.Max(38.8, SetupForm.PAGain20 - 2.0);
                                     }
                                     else SetupForm.PAGain20 += diff_dBm;
                                     break;
                                 case 6:
-                                    if (SetupForm.PAGain17 + diff_dBm < 38.0)
+                                    if (SetupForm.PAGain17 + diff_dBm < 38.8)
                                     {
                                         if (++error_count > 6)
                                             goto error;
 
-                                        SetupForm.PAGain17 = (float)Math.Max(38.0, SetupForm.PAGain17 - 2.0);
+                                        SetupForm.PAGain17 = (float)Math.Max(38.8, SetupForm.PAGain17 - 2.0);
                                     }
                                     else SetupForm.PAGain17 += diff_dBm;
                                     break;
                                 case 7:
-                                    if (SetupForm.PAGain15 + diff_dBm < 38.0)
+                                    if (SetupForm.PAGain15 + diff_dBm < 38.8)
                                     {
                                         if (++error_count > 6)
                                             goto error;
 
-                                        SetupForm.PAGain15 = (float)Math.Max(38.0, SetupForm.PAGain15 - 2.0);
+                                        SetupForm.PAGain15 = (float)Math.Max(38.8, SetupForm.PAGain15 - 2.0);
                                     }
                                     else SetupForm.PAGain15 += diff_dBm;
                                     break;
                                 case 8:
-                                    if (SetupForm.PAGain12 + diff_dBm < 38.0)
+                                    if (SetupForm.PAGain12 + diff_dBm < 38.8)
                                     {
                                         if (++error_count > 6)
                                             goto error;
 
-                                        SetupForm.PAGain12 = (float)Math.Max(38.0, SetupForm.PAGain12 - 2.0);
+                                        SetupForm.PAGain12 = (float)Math.Max(38.8, SetupForm.PAGain12 - 2.0);
                                     }
                                     else SetupForm.PAGain12 += diff_dBm;
                                     break;
                                 case 9:
-                                    if (SetupForm.PAGain10 + diff_dBm < 38.0)
+                                    if (SetupForm.PAGain10 + diff_dBm < 38.8)
                                     {
                                         if (++error_count > 6)
                                             goto error;
 
-                                        SetupForm.PAGain10 = (float)Math.Max(38.0, SetupForm.PAGain10 - 2.0);
+                                        SetupForm.PAGain10 = (float)Math.Max(38.8, SetupForm.PAGain10 - 2.0);
                                     }
                                     else SetupForm.PAGain10 += diff_dBm;
+                                    break;
+                                case 10:
+                                    if (SetupForm.PAGain6 + diff_dBm < 38.8)
+                                    {
+                                        if (++error_count > 6)
+                                            goto error;
+
+                                        SetupForm.PAGain6 = (float)Math.Max(38.8, SetupForm.PAGain6 - 2.0);
+                                    }
+                                    else SetupForm.PAGain6 += diff_dBm;
                                     break;
                             }
                         }
@@ -18189,7 +18221,6 @@ namespace PowerSDR
             txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             PWR = pwr;									// restore pwr level
 
-
             calibrating = false;
 
             //t1.Stop();
@@ -18197,8 +18228,8 @@ namespace PowerSDR
             return ret_val;
 
         error:
-            MessageBox.Show("Calculated gain is invalid.  Please double check connections and try again.\n" +
-                "If this problem persists, contact support@flex-radio.com for support.",
+            MessageBox.Show("Calculated gain is invalid.  Please double check connections and try again.\n"/* +
+                "If this problem persists, contact support@flex-radio.com for support."*/,
                 "Invalid Gain Found",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
@@ -24060,8 +24091,8 @@ namespace PowerSDR
                         if (comboMeterTXMode.Items.Contains("Ref Pwr"))
                             comboMeterTXMode.Items.Remove("Ref Pwr");
 
-                        if (comboMeterTXMode.Items.Contains("SWR"))
-                            comboMeterTXMode.Items.Remove("SWR");
+//                        if (comboMeterTXMode.Items.Contains("SWR"))
+ //                           comboMeterTXMode.Items.Remove("SWR");
                     }
                     comboMeterTXMode.Text = cur_txt;
                     if (comboMeterTXMode.SelectedIndex < 0 &&
@@ -25267,8 +25298,8 @@ namespace PowerSDR
                     }
                     if (alexpresent)
                     {
-                        if (comboMeterTXMode.Items.Contains("SWR"))
-                            comboMeterTXMode.Items.Remove("SWR");
+ //                       if (comboMeterTXMode.Items.Contains("SWR"))
+ //                           comboMeterTXMode.Items.Remove("SWR");
                     }
                     if (comboMeterTXMode.SelectedIndex < 0)
                         comboMeterTXMode.SelectedIndex = 0;
@@ -25278,8 +25309,8 @@ namespace PowerSDR
                     string cur_txt = comboMeterTXMode.Text;
                     if (comboMeterTXMode.Items.Contains("Ref Pwr"))
                         comboMeterTXMode.Items.Remove("Ref Pwr");
-                    if (comboMeterTXMode.Items.Contains("SWR"))
-                        comboMeterTXMode.Items.Remove("SWR");
+ //                   if (comboMeterTXMode.Items.Contains("SWR"))
+  //                      comboMeterTXMode.Items.Remove("SWR");
 
                     comboMeterTXMode.Text = cur_txt;
                     if (comboMeterTXMode.SelectedIndex < 0 &&
@@ -27617,6 +27648,10 @@ namespace PowerSDR
                         float num = 0f;
                         double power = 0.0;
 
+                        double alex_fwd = (double)JanusAudio.computeAlexFwdPower();
+                        double alex_rev = (double)JanusAudio.computeRefPower();
+                        float alex_swr = (float)ALEXSWR(alex_fwd, alex_rev);
+
                         switch (mode)
                         {
                             case MeterTXMode.MIC:
@@ -27810,7 +27845,7 @@ namespace PowerSDR
                                 {
                                     //output = "in TUN only ";
                                 }
-                                new_meter_data = (float)swr;
+                                new_meter_data = alex_swr;
                                 break;
                             case MeterTXMode.OFF:
                                 //output = "";

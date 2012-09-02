@@ -739,6 +739,7 @@ unsigned char HermesFilt = 0;
 		int fwd_power_stage; 
 		int ref_power_stage; 
 		int alex_fwd_power; 
+		int alex_rev_power;
         short *sample_bufp = NULL;
         int sample_count = 0;
         int i;
@@ -1037,7 +1038,7 @@ unsigned char HermesFilt = 0;
                                                          PenelopeFWVersion = (int)(ControlBytesIn[3]);
 											             break;
 										          case 0x8:
-                                                         alex_fwd_power = ((ControlBytesIn[3] << 8) & 0xff00);
+                                                         alex_fwd_power = ((ControlBytesIn[3] << 8) & 0xff00); //get high byte of ain1 and place it
 										                 break;
 										          case 0x10:
 											             //ain3 = ((ControlBytesIn[3] << 8) & 0xff00);
@@ -1079,13 +1080,13 @@ unsigned char HermesFilt = 0;
                                                          OzyFWVersion =  (int)(ControlBytesIn[4]);
 											             break;
 										          case 0x8:
-                                                         alex_fwd_power |=  (((int)(ControlBytesIn[4])) & 0xff);
-													     AlexFwdPower = alex_fwd_power;
+                                                         alex_fwd_power |=  (((int)(ControlBytesIn[4])) & 0xff); //add in low byte of ain1
+													     AlexFwdPower = alex_fwd_power;							 //ain1
 										                 break;
 										          case 0x10:	
                                                          //ain3 |=  (((int)(ControlBytesIn[4])) & 0xff);
 													     //AIN3 = ain3;
-											             break;
+                                    		             break;
 												  case 0x18:
 						                                 //ain6 |=  (((int)(ControlBytesIn[4])) & 0xff);
 													     //AIN6 = ain6; //Hermes 13.8v (22v scalle)
@@ -1358,7 +1359,9 @@ unsigned char HermesFilt = 0;
 																 break;
 															 case 2:
  																 if (HermesPowerEnabled && XmitBit != 0) { 															     
-															      FPGAWriteBufp[writebufpos] = (unsigned char)(OutputPowerFactor & 0xff);
+																	 if (swr_protect == 0.0f) swr_protect = 0.3f;
+																	 pf = (unsigned char) (OutputPowerFactor * swr_protect);
+																	 FPGAWriteBufp[writebufpos] = (unsigned char) (pf & 0xff); //(OutputPowerFactor & 0xff);
                                                                 //printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
 															     } 
 															     else 
@@ -1368,8 +1371,7 @@ unsigned char HermesFilt = 0;
 																 break;
 															 case 3:
                                                                  FPGAWriteBufp[writebufpos] =  (VFOfreq_tx >> 24) & 0xff; 
-                                                               //  FPGAWriteBufp[writebufpos] =  (VFOfreq >> 24) & 0xff; // RX1 
-																 break;
+ 																 break;
 														} 
 #else
                                                         // send sample rate in C1 low 2 bits
@@ -1412,8 +1414,7 @@ unsigned char HermesFilt = 0;
 																 break;																 
 															 case 3:
  	                                                                FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 16) & 0xff; // TX freq
-                                                               // FPGAWriteBufp[writebufpos] = (VFOfreq >> 16) & 0xff; // rx1 freq
-																 break;
+                                            					 break;
 														}
  
 #else
@@ -1450,7 +1451,6 @@ unsigned char HermesFilt = 0;
 																 break;
 															 case 3:
                                                                  FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 8) & 0xff;
-                                                                // FPGAWriteBufp[writebufpos] = (VFOfreq >> 8) & 0xff;
 																 break;
 														}                                                         
 #else
@@ -1476,8 +1476,7 @@ unsigned char HermesFilt = 0;
 #if W5WC
 														switch (out_control_idx) {
 												             case 0:
-                                                                // FPGAWriteBufp[writebufpos] = (AlexTxAnt | Duplex | NRx) & 0x3F; 
-                                                                 FPGAWriteBufp[writebufpos] = AlexTxAnt | 0x04; 
+                                                                  FPGAWriteBufp[writebufpos] = AlexTxAnt | 0x04; 
 																 break;
 															 case 1:
                                                                  FPGAWriteBufp[writebufpos] = VFOfreq & 0xff;
@@ -1487,8 +1486,7 @@ unsigned char HermesFilt = 0;
                                                                  break;
 															 case 3:
                                                                  FPGAWriteBufp[writebufpos] = VFOfreq_tx & 0xff;
-                                                                // FPGAWriteBufp[writebufpos] = VFOfreq & 0xff;
-																 break;
+ 																 break;
 															}
 #else
                                                         // write_buf[writebufpos] = ControlBytesIn[4];

@@ -464,6 +464,33 @@ KD5TFDVK6APHAUDIO_API void SetPennyOCBits(int b) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetSWRProtect(float g) { 
+	swr_protect = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetMercSource(int g) { 
+	MercSource = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetrefMerc(int g) { 
+	refMerc = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetIQ_Rotate(double a, double b) { 
+	I_Rotate = a; 
+	Q_Rotate = b;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetIQ_RotateA(double a, double b) { 
+	I_RotateA = a; 
+	Q_RotateA = b;
+	return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out) {  
 	
 

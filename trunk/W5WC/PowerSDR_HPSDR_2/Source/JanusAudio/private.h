@@ -255,6 +255,14 @@ extern char *FPGAWriteBufp;
 extern int C1Mask;
 extern char PennyOCBits; /* pennny open collector bits */
 
+extern int MercSource;	//diversity mode IQ source identifier
+extern int refMerc;		//reference Mercury board for diversity phasing
+extern double theta;    //direction angle
+extern double I_Rotate;	//diversity mode phase shift parameter
+extern double Q_Rotate;  //diversity mode phase shift parameter
+extern double I_RotateA; //directional mode A phase shift I parameter
+extern double Q_RotateA; //directional mode A phase shift Q parameter
+
 extern int MercAtten;
 extern int MercDither;
 extern int MercPreamp;
@@ -279,6 +287,8 @@ extern int RefPower;
 extern int AlexFwdPower;
 
 extern int ADC_Overloads;
+extern float swr_protect;
+unsigned char pf;
 
 extern int MercuryFWVersion;
 extern int Mercury2FWVersion;

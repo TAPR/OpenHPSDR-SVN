@@ -18084,6 +18084,7 @@ namespace PowerSDR
             // radANFPostAGC
             // 
             this.radANFPostAGC.AutoSize = true;
+            this.radANFPostAGC.Image = null;
             this.radANFPostAGC.Location = new System.Drawing.Point(11, 153);
             this.radANFPostAGC.Name = "radANFPostAGC";
             this.radANFPostAGC.Size = new System.Drawing.Size(71, 17);
@@ -18095,6 +18096,7 @@ namespace PowerSDR
             // 
             this.radANFPreAGC.AutoSize = true;
             this.radANFPreAGC.Checked = true;
+            this.radANFPreAGC.Image = null;
             this.radANFPreAGC.Location = new System.Drawing.Point(11, 130);
             this.radANFPreAGC.Name = "radANFPreAGC";
             this.radANFPreAGC.Size = new System.Drawing.Size(66, 17);
@@ -21433,14 +21435,13 @@ namespace PowerSDR
             0,
             0});
             this.udPACalPower.Name = "udPACalPower";
-            this.udPACalPower.Size = new System.Drawing.Size(40, 20);
+            this.udPACalPower.Size = new System.Drawing.Size(50, 20);
             this.udPACalPower.TabIndex = 35;
             this.udPACalPower.Value = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.udPACalPower.Visible = false;
             // 
             // lblPACalTarget
             // 
@@ -21452,7 +21453,6 @@ namespace PowerSDR
             this.lblPACalTarget.TabIndex = 34;
             this.lblPACalTarget.Text = "Cal Target:";
             this.lblPACalTarget.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblPACalTarget.Visible = false;
             // 
             // chkPA10
             // 
@@ -21462,7 +21462,6 @@ namespace PowerSDR
             this.chkPA10.Size = new System.Drawing.Size(40, 16);
             this.chkPA10.TabIndex = 33;
             this.chkPA10.Text = "10";
-            this.chkPA10.Visible = false;
             // 
             // chkPA12
             // 
@@ -21472,7 +21471,6 @@ namespace PowerSDR
             this.chkPA12.Size = new System.Drawing.Size(40, 16);
             this.chkPA12.TabIndex = 32;
             this.chkPA12.Text = "12";
-            this.chkPA12.Visible = false;
             // 
             // chkPA15
             // 
@@ -21482,7 +21480,6 @@ namespace PowerSDR
             this.chkPA15.Size = new System.Drawing.Size(40, 16);
             this.chkPA15.TabIndex = 31;
             this.chkPA15.Text = "15";
-            this.chkPA15.Visible = false;
             // 
             // chkPA17
             // 
@@ -21492,7 +21489,6 @@ namespace PowerSDR
             this.chkPA17.Size = new System.Drawing.Size(40, 16);
             this.chkPA17.TabIndex = 30;
             this.chkPA17.Text = "17";
-            this.chkPA17.Visible = false;
             // 
             // chkPA20
             // 
@@ -21502,7 +21498,6 @@ namespace PowerSDR
             this.chkPA20.Size = new System.Drawing.Size(40, 16);
             this.chkPA20.TabIndex = 29;
             this.chkPA20.Text = "20";
-            this.chkPA20.Visible = false;
             // 
             // chkPA30
             // 
@@ -21512,7 +21507,6 @@ namespace PowerSDR
             this.chkPA30.Size = new System.Drawing.Size(40, 16);
             this.chkPA30.TabIndex = 28;
             this.chkPA30.Text = "30";
-            this.chkPA30.Visible = false;
             // 
             // chkPA40
             // 
@@ -21522,7 +21516,6 @@ namespace PowerSDR
             this.chkPA40.Size = new System.Drawing.Size(40, 16);
             this.chkPA40.TabIndex = 27;
             this.chkPA40.Text = "40";
-            this.chkPA40.Visible = false;
             // 
             // chkPA60
             // 
@@ -21532,7 +21525,6 @@ namespace PowerSDR
             this.chkPA60.Size = new System.Drawing.Size(40, 16);
             this.chkPA60.TabIndex = 26;
             this.chkPA60.Text = "60";
-            this.chkPA60.Visible = false;
             // 
             // chkPA80
             // 
@@ -21542,7 +21534,6 @@ namespace PowerSDR
             this.chkPA80.Size = new System.Drawing.Size(40, 16);
             this.chkPA80.TabIndex = 25;
             this.chkPA80.Text = "80";
-            this.chkPA80.Visible = false;
             // 
             // chkPA160
             // 
@@ -21552,7 +21543,6 @@ namespace PowerSDR
             this.chkPA160.Size = new System.Drawing.Size(48, 16);
             this.chkPA160.TabIndex = 24;
             this.chkPA160.Text = "160";
-            this.chkPA160.Visible = false;
             // 
             // radPACalSelBands
             // 
@@ -21562,7 +21552,6 @@ namespace PowerSDR
             this.radPACalSelBands.Size = new System.Drawing.Size(120, 32);
             this.radPACalSelBands.TabIndex = 23;
             this.radPACalSelBands.Text = "Selected Bands (checked below)";
-            this.radPACalSelBands.Visible = false;
             // 
             // radPACalAllBands
             // 
@@ -21574,7 +21563,6 @@ namespace PowerSDR
             this.radPACalAllBands.TabIndex = 22;
             this.radPACalAllBands.TabStop = true;
             this.radPACalAllBands.Text = "All Bands";
-            this.radPACalAllBands.Visible = false;
             this.radPACalAllBands.CheckedChanged += new System.EventHandler(this.radPACalAllBands_CheckedChanged);
             // 
             // btnPAGainReset
@@ -21596,7 +21584,6 @@ namespace PowerSDR
             this.btnPAGainCalibration.Size = new System.Drawing.Size(64, 23);
             this.btnPAGainCalibration.TabIndex = 20;
             this.btnPAGainCalibration.Text = "Calibrate";
-            this.btnPAGainCalibration.Visible = false;
             this.btnPAGainCalibration.Click += new System.EventHandler(this.btnPAGainCalibration_Click);
             // 
             // lblPAGainByBand10
@@ -22017,7 +22004,6 @@ namespace PowerSDR
             this.chkPA6.Size = new System.Drawing.Size(36, 16);
             this.chkPA6.TabIndex = 84;
             this.chkPA6.Text = "6";
-            this.chkPA6.Visible = false;
             // 
             // chkPANewCal
             // 
@@ -35620,7 +35606,8 @@ namespace PowerSDR
         private void btnPAGainCalibration_Click(object sender, System.EventArgs e)
         {
             string s = "Is a 50 Ohm dummy load connected to the amplifier?\n" +
-                "Failure to use a dummy load with this routine could cause damage to the amplifier.";
+               "\n This function is valid only with an external amplifier and Alex (or equivalent) present." +
+               "\n\nFailure to use a dummy load with this routine could cause damage to the amplifier.";
             if (radGenModelFLEX5000.Checked)
             {
                 s = "Is a 50 Ohm dummy load connected to the correct antenna port (";
