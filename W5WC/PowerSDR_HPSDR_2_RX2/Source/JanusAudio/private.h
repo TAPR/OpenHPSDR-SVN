@@ -303,6 +303,8 @@ extern int RefPower;
 extern int AlexFwdPower;
 
 extern int ADC_Overloads;
+extern float swr_protect;
+unsigned char pf;
 
 extern int MercuryFWVersion;
 extern int Mercury2FWVersion;

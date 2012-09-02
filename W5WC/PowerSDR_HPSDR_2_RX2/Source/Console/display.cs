@@ -108,7 +108,7 @@ namespace PowerSDR
         private static Color notch_perm_on_color = Color.DarkGreen;
         private static Color notch_perm_highlight_color = Color.Chartreuse;
         private static Color notch_off_color = Color.Gray;
-        
+
         private static double notch_zoom_start_freq;
         public static double NotchZoomStartFreq
         {
@@ -3277,15 +3277,15 @@ namespace PowerSDR
             switch (console.CurrentRegion)
             {
                 case FRSRegion.Norway:
-                band_edge_list = new int[]{ 5260000, 5410000, 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
+                    band_edge_list = new int[]{ 5260000, 5410000, 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
 				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
 				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
-                break;
+                    break;
                 default:
-                band_edge_list = new int[]{ 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
+                    band_edge_list = new int[]{ 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
 				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
 				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
-                break;
+                    break;
             }
 
             for (int i = 0; i < band_edge_list.Length; i++)
@@ -3578,8 +3578,8 @@ namespace PowerSDR
                             rx2_cal_offset = -18.0f;
                             break;
                         default:
-                            rx2_cal_offset = 60.0f + (rx2_display_cal_offset +
-                                                      rx2_preamp_offset);
+                            rx2_cal_offset = 60.0f + (rx1_display_cal_offset +
+                                  rx2_preamp_offset);
                             break;
                     }
                     // get AGC-T level
@@ -5364,8 +5364,9 @@ namespace PowerSDR
                 }
                 if (!mox)
                 {
-                    if (!bottom) max += rx1_display_cal_offset;
-                    else max += rx2_display_cal_offset;
+                  //  if (!bottom) 
+                        max += rx1_display_cal_offset;
+                  //  else max += rx2_display_cal_offset;
                 }
                 else
                 {
@@ -5374,7 +5375,8 @@ namespace PowerSDR
 
                 if (!mox)
                 {
-                    if (!bottom) max += (rx1_preamp_offset - alex_preamp_offset);
+                    if (!bottom) 
+                        max += (rx1_preamp_offset - alex_preamp_offset);
                     else max += (rx2_preamp_offset);
                 }
 
@@ -5756,8 +5758,9 @@ namespace PowerSDR
 
                 if (!local_mox)
                 {
-                    if (rx == 1) max += (rx1_preamp_offset - alex_preamp_offset);
-                    else if (rx == 2) max += (rx2_preamp_offset);
+                    if (rx == 1) 
+                        max += (rx1_preamp_offset - alex_preamp_offset);
+                    else if (rx == 2) max += rx2_preamp_offset;
                 }
 
                 if (max > local_max_y)
@@ -5992,7 +5995,8 @@ namespace PowerSDR
 
                         if (!local_mox)
                         {
-                            if (rx == 1) max += rx1_preamp_offset;
+                            if (rx == 1) 
+                                max += rx1_preamp_offset;
                             else if (rx == 2) max += rx2_preamp_offset;
                         }
 
@@ -6186,7 +6190,8 @@ namespace PowerSDR
 
                     if (!local_mox)
                     {
-                        if (rx == 1) max += (rx1_preamp_offset - alex_preamp_offset);
+                        if (rx == 1) 
+                            max += (rx1_preamp_offset - alex_preamp_offset);
                         else if (rx == 2) max += (rx2_preamp_offset);
                     }
 

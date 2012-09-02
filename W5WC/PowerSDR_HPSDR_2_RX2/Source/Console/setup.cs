@@ -1694,10 +1694,10 @@ namespace PowerSDR
         private LabelTS lblMetisCodeVersion;
         private LabelTS lblMetisVer;
         private TabPage tpInfo;
-        public TextBoxTS txt_DDStune;
+        public TextBoxTS txtAlexFwdPower;
         public TextBoxTS txtDDSVFO;
-        public TextBoxTS txtDDSRounded;
-        public TextBoxTS txtTuningWord;
+        public TextBoxTS txtAlexRevPower;
+        public TextBoxTS txtFwdPower;
         private LabelTS labelTS92;
         private LabelTS labelTS91;
         private LabelTS labelTS90;
@@ -1707,15 +1707,15 @@ namespace PowerSDR
         public TextBoxTS textBoxTS12;
         public TextBoxTS textBoxTS11;
         public TextBoxTS textBoxTS10;
-        public TextBoxTS textBoxTS9;
+        public TextBoxTS txtAlexRevADC;
         public TextBoxTS textBoxTS8;
         public TextBoxTS textBoxTS7;
         public TextBoxTS textBoxTS6;
         public TextBoxTS textBoxTS5;
         public TextBoxTS textBoxTS4;
         public TextBoxTS textBoxTS3;
-        public TextBoxTS textBoxTS2;
-        public TextBoxTS textBoxTS1;
+        public TextBoxTS txtAlexFwdADC;
+        public TextBoxTS txtFwdADC;
         private LabelTS labelTS103;
         private LabelTS labelTS102;
         private LabelTS labelTS101;
@@ -2358,7 +2358,12 @@ namespace PowerSDR
             }
 
             if (skin == "")
-                comboAppSkin.Text = "Default";
+            {
+                if (comboAppSkin.Items.Contains("Default"))
+                    comboAppSkin.Text = "Default";
+                else
+                    comboAppSkin.Text = "OpenHPSDR-Gray";
+            }
             else if (comboAppSkin.Items.Contains(skin))
                 comboAppSkin.Text = skin;
             else comboAppSkin.Text = "Default";
@@ -5343,8 +5348,6 @@ namespace PowerSDR
                 grpPennyExtCtrl.Enabled = false;
             }
             console.MaxFreq = (double)udMaxFreq.Value;
-
-            //  panelRX2LevelCal.Visible = console.rx2_preamp_present;
         }
 
         public void RemoveHPSDRPages()
@@ -8581,7 +8584,8 @@ namespace PowerSDR
         private void btnPAGainCalibration_Click(object sender, System.EventArgs e)
         {
             string s = "Is a 50 Ohm dummy load connected to the amplifier?\n" +
-                "Failure to use a dummy load with this routine could cause damage to the amplifier.";
+                "\n This function is valid only with an external amplifier and Alex (or equivalent) present." +
+                "\n\nFailure to use a dummy load with this routine could cause damage to the amplifier.";
             if (radGenModelFLEX5000.Checked)
             {
                 s = "Is a 50 Ohm dummy load connected to the correct antenna port (";
@@ -8605,11 +8609,11 @@ namespace PowerSDR
             progress = new Progress("Calibrate PA Gain");
 
             Thread t = new Thread(CalibratePAGain)
-                           {
-                               Name = "PA Gain Calibration Thread",
-                               IsBackground = true,
-                               Priority = ThreadPriority.AboveNormal
-                           };
+            {
+                Name = "PA Gain Calibration Thread",
+                IsBackground = true,
+                Priority = ThreadPriority.AboveNormal
+            };
             t.Start();
 
             if (console.PowerOn)
@@ -8651,17 +8655,31 @@ namespace PowerSDR
 
         private void btnPAGainReset_Click(object sender, System.EventArgs e)
         {
-            udPAGain160.Value = 48.0M;
-            udPAGain80.Value = 48.0M;
-            udPAGain60.Value = 48.0M;
-            udPAGain40.Value = 48.0M;
-            udPAGain30.Value = 48.0M;
-            udPAGain20.Value = 48.0M;
-            udPAGain17.Value = 48.0M;
-            udPAGain15.Value = 48.0M;
-            udPAGain12.Value = 48.0M;
-            udPAGain10.Value = 48.0M;
-            udPAGain6.Value = 48.0M;
+            udPAGain160.Value = 41.0M;
+            udPAGain80.Value = 41.2M;
+            udPAGain60.Value = 41.3M;
+            udPAGain40.Value = 41.3M;
+            udPAGain30.Value = 41.0M;
+            udPAGain20.Value = 40.5M;
+            udPAGain17.Value = 39.9M;
+            udPAGain15.Value = 38.8M;
+            udPAGain12.Value = 38.8M;
+            udPAGain10.Value = 38.8M;
+            udPAGain6.Value = 38.8M;
+            udPAGainVHF0.Value = 38.8M;
+            udPAGainVHF1.Value = 38.8M;
+            udPAGainVHF2.Value = 38.8M;
+            udPAGainVHF3.Value = 38.8M;
+            udPAGainVHF4.Value = 38.8M;
+            udPAGainVHF5.Value = 38.8M;
+            udPAGainVHF6.Value = 38.8M;
+            udPAGainVHF7.Value = 38.8M;
+            udPAGainVHF8.Value = 38.8M;
+            udPAGainVHF9.Value = 38.8M;
+            udPAGainVHF10.Value = 38.8M;
+            udPAGainVHF11.Value = 38.8M;
+            udPAGainVHF12.Value = 38.8M;
+            udPAGainVHF13.Value = 38.8M;
         }
 
         #endregion
@@ -11700,6 +11718,7 @@ namespace PowerSDR
                     grpAlexAntCtrl.Enabled = false;
                 }
                 console.chkSR.Enabled = true;
+                if (console.rx2_preamp_present) console.chkRX2Preamp.Visible = false;           
             }
             else
             {
@@ -11709,6 +11728,7 @@ namespace PowerSDR
                 radAlexAutoCntl.Checked = true;
                 radAlexManualCntl.Enabled = false;
                 console.chkSR.Enabled = false;
+                if (console.rx2_preamp_present) console.chkRX2Preamp.Visible = true;
             }
             console.AlexPresent = chkAlexPresent.Checked;
             console.SetComboPreampForHPSDR();
@@ -13982,7 +14002,7 @@ namespace PowerSDR
 
         private void tpGeneralCalibration_Paint(object sender, PaintEventArgs e)
         {
-            panelRX2LevelCal.Visible = console.rx2_preamp_present;
+            panelRX2LevelCal.Visible = false; // console.rx2_preamp_present;
         }
 
         private void chkShowAGC_CheckedChanged(object sender, EventArgs e)

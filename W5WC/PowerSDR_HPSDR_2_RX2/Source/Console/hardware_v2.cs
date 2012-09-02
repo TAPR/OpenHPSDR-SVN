@@ -788,11 +788,11 @@ namespace PowerSDR
 #endif
                     if (c != null)
                     {   
-                        c.SetupForm.txtTuningWord.Text = dds_tuning_word.ToString();
+                       // c.SetupForm.txtTuningWord.Text = dds_tuning_word.ToString();
                         //double dds_tune = c.TuningWordToFreq(dds_tuning_word);
                         double dds_tune = c.TW2Freq(dds_tuning_word);
-                        c.SetupForm.txt_DDStune.Text = dds_tune.ToString();
-                        c.SetupForm.txtDDSRounded.Text = Math.Round(dds_tune, 6).ToString();
+                       // c.SetupForm.txt_DDStune.Text = dds_tune.ToString();
+                       // c.SetupForm.txtDDSRounded.Text = Math.Round(dds_tune, 6).ToString();
                         //JanusAudio.SetVFOfreq(Math.Round(dds_tune, 6));
 
                     }
