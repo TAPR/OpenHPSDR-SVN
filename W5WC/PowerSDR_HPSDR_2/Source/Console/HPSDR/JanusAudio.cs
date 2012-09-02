@@ -1135,6 +1135,9 @@ namespace PowerSDR
         unsafe public static extern void SetPennyOCBits(int b);
 
         [DllImport("JanusAudio.dll")]
+        public static extern void SetSWRProtect(float g);
+
+        [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out);
 
         [DllImport("JanusAudio.dll")]
