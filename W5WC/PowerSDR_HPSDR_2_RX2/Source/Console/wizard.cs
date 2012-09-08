@@ -789,7 +789,7 @@ namespace PowerSDR
             "SB Audigy (PCI)",
             "SB Audigy 2 (PCI)",
             "SB Audigy 2 ZS (PCI)",
-            "HPSDR Janus/Ozy (USB2)",
+            "HPSDR",
             "Sound Blaster Extigy (USB)",
             "Sound Blaster MP3+ (USB)",
             "Turtle Beach Santa Cruz (PCI)",
@@ -1649,8 +1649,8 @@ namespace PowerSDR
 							case "Unsupported Card":
 								card = SoundCard.UNSUPPORTED_CARD;
                                 break;
-                            case "HPSDR Janus/Ozy (USB2)":
-                                card = SoundCard.JANUS_OZY;
+                            case "HPSDR":
+                                card = SoundCard.HPSDR;
                                 break;
                                 
 						}

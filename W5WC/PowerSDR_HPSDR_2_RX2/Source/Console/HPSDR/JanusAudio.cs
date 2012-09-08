@@ -335,15 +335,15 @@ namespace PowerSDR
                     byte metis_vernum = metis_ver[0];
                     mercury_ver = getMercuryFWVersion();
                     // penny_ver = getPenelopeFWVersion();
-                   // mercury2_ver = getMercury2FWVersion();
+                    // mercury2_ver = getMercury2FWVersion();
 
                     if (c.PennyPresent || c.PennyLanePresent)
                     {
                         do
                         {
-                            Thread.Sleep(500);
+                           // Thread.Sleep(500);
                             penny_ver = getPenelopeFWVersion();
-                            if (penny_ver < 11)
+                            if (penny_ver < 16 || penny_ver > 80)
                             {
                                 Thread.Sleep(500);
                                 penny_ver = getPenelopeFWVersion();
@@ -352,22 +352,14 @@ namespace PowerSDR
                                 if (penny_ver == 0) break;
                             }
                         }
-                        while (penny_ver <= 10);
+                        while (penny_ver <= 15);
                     }
 
                     switch (metis_vernum)
                     {
                         case 16:
-                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16)) ||
-                                (c != null && c.MercuryPresent && (mercury_ver != 31)))
-                            {
-                                result = false;
-                                c.SetupForm.alex_fw_good = false;
-                                //   c.PowerOn = false;
-                            }
-                            break;
                         case 17:
-                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16 && penny_ver != 17)) ||
+                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 31 && mercury_ver != 71)))
                             {
                                 result = false;
@@ -868,7 +860,7 @@ namespace PowerSDR
 
         public static float computeRefPower()
         {
-           // Console c = Console.getConsole();
+            // Console c = Console.getConsole();
             int adc = JanusAudio.getRefPower();
             float maxAdcBits = 4096.0f;
             float maxVolts = 3.3f;
@@ -876,30 +868,30 @@ namespace PowerSDR
             float Voltage = adc * voltsPerBit;
             float Watts = (Voltage * Voltage) / 0.09f;
 
-           //  c.SetupForm.txtAlexRevPower.Text = Watts.ToString();
-           //  c.SetupForm.txtAlexRevADC.Text = Voltage.ToString();
+            //  c.SetupForm.txtAlexRevPower.Text = Watts.ToString();
+            //  c.SetupForm.txtAlexRevADC.Text = Voltage.ToString();
 
             return Watts;
         }
 
         public static float computeAlexFwdPower()
         {
-           // Console c = Console.getConsole();
+            // Console c = Console.getConsole();
             int adc = JanusAudio.getAlexFwdPower();
             float maxAdcBits = 4096.0f;
             float maxVolts = 3.3f;
             float voltsPerBit = (maxVolts / maxAdcBits);
             float Voltage = adc * voltsPerBit;
             float Watts = (Voltage * Voltage) / 0.09f;
-          //  c.SetupForm.txtAlexFwdPower.Text = Watts.ToString();
-          //  c.SetupForm.txtAlexFwdADC.Text = Voltage.ToString();
+            //  c.SetupForm.txtAlexFwdPower.Text = Watts.ToString();
+            //  c.SetupForm.txtAlexFwdADC.Text = Voltage.ToString();
 
-              return Watts;
+            return Watts;
         }
 
         public static float computePower(int power_int)
         {
-           // Console c = Console.getConsole();
+            // Console c = Console.getConsole();
             double power_f = (double)power_int;
             double result;
 
@@ -948,8 +940,8 @@ namespace PowerSDR
             }
 
             result = result / 1000;  //convert to watts 
-           // c.SetupForm.txtFwdPower.Text = result.ToString();
-           // c.SetupForm.txtFwdADC.Text = power_int.ToString();
+            // c.SetupForm.txtFwdPower.Text = result.ToString();
+            // c.SetupForm.txtFwdADC.Text = power_int.ToString();
 
             return (float)result;
         }
@@ -973,6 +965,9 @@ namespace PowerSDR
             return true;
         }
 
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetDiscoveryMode(int b);
+        
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetPennyOCBits(int b);
 

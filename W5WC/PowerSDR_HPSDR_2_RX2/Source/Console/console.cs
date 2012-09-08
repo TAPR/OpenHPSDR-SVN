@@ -207,7 +207,7 @@ namespace PowerSDR
         EXTIGY,
         MP3_PLUS,
         SANTA_CRUZ,
-        JANUS_OZY,
+        HPSDR,
         LAST,
     }
 
@@ -1826,7 +1826,7 @@ namespace PowerSDR
                     case SoundCard.EDIROL_FA_66:
                         rx1_meter_cal_offset = -46.82864f;
                         break;
-                    case SoundCard.JANUS_OZY:
+                    case SoundCard.HPSDR:
                         rx1_meter_cal_offset = -44.91249f;
                         break;
                     case SoundCard.UNSUPPORTED_CARD:
@@ -1860,7 +1860,7 @@ namespace PowerSDR
                     case SoundCard.EDIROL_FA_66:
                         rx2_meter_cal_offset = -46.82864f;
                         break;
-                    case SoundCard.JANUS_OZY:
+                    case SoundCard.HPSDR:
                         rx2_meter_cal_offset = -44.91249f;
                         break;
                     case SoundCard.UNSUPPORTED_CARD:
@@ -1893,7 +1893,7 @@ namespace PowerSDR
                     case SoundCard.EDIROL_FA_66:
                         RX1DisplayCalOffset = -78.429f;
                         break;
-                    case SoundCard.JANUS_OZY:
+                    case SoundCard.HPSDR:
                         RX1DisplayCalOffset = -72.056f;
                         break;
                     case SoundCard.UNSUPPORTED_CARD:
@@ -1927,7 +1927,7 @@ namespace PowerSDR
                     case SoundCard.EDIROL_FA_66:
                         RX2DisplayCalOffset = -80.429f;
                         break;
-                    case SoundCard.JANUS_OZY:
+                    case SoundCard.HPSDR:
                         RX2DisplayCalOffset = -72.056f;
                         break;
                     case SoundCard.UNSUPPORTED_CARD:
@@ -12719,8 +12719,14 @@ namespace PowerSDR
 
         public double ALEXSWR(double g_fwd, double g_rev)
         {
-            double swr; 
-            if ((g_fwd == 0 && g_rev == 0) | g_fwd < 1) return 1.0;
+            double swr;
+
+            if ((g_fwd == 0 && g_rev == 0) | g_fwd < 1)
+            {
+                JanusAudio.SetSWRProtect(1.0f);
+                return 1.0;
+            }
+
             if (g_rev > g_fwd)
             {
                 HighSWR = true;
@@ -12733,7 +12739,7 @@ namespace PowerSDR
                 swr = (1.0 + rho) / (1.0 - rho);
             }
             if (swr > 2)
-        {
+            {
                 JanusAudio.SetSWRProtect(0.5f);
                 HighSWR = true;
                 UpdateDisplay();
@@ -19017,7 +19023,7 @@ namespace PowerSDR
 
             progress.SetPercent(0.0f);
 
-            float[] band_freqs = { 1.85f, 3.75f, 5.3665f, 7.15f, 10.125f, 14.175f, 18.1f, 21.300f, 24.9f, 28.4f, 50.4f };
+            float[] band_freqs = { 1.85f, 3.75f, 5.3715f, 7.15f, 10.125f, 14.175f, 18.1f, 21.300f, 24.9f, 28.4f, 50.4f };
 
             int[] max_pwr = { 100, 100, 100, 100, 100, 100, 100, 100, 75, 75, 75 };
 

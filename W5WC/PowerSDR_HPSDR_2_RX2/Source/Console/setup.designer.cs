@@ -195,6 +195,7 @@
             this.lblClockCorrection = new System.Windows.Forms.LabelTS();
             this.lblPLLMult = new System.Windows.Forms.LabelTS();
             this.grpOzyType = new System.Windows.Forms.GroupBoxTS();
+            this.chkFullDiscovery = new System.Windows.Forms.CheckBoxTS();
             this.radMetis = new System.Windows.Forms.RadioButtonTS();
             this.radOzyUSB = new System.Windows.Forms.RadioButtonTS();
             this.grpFRSRegion = new System.Windows.Forms.GroupBoxTS();
@@ -950,8 +951,8 @@
             this.comboAudioDriver2 = new System.Windows.Forms.ComboBoxTS();
             this.chkAudioEnableVAC = new System.Windows.Forms.CheckBoxTS();
             this.tpVAC2 = new System.Windows.Forms.TabPage();
-            this.grpVAC2DirectIQ = new System.Windows.Forms.GroupBoxTS();
             this.chkVAC2UseRX2 = new System.Windows.Forms.CheckBoxTS();
+            this.grpVAC2DirectIQ = new System.Windows.Forms.GroupBoxTS();
             this.chkVAC2DirectIQCal = new System.Windows.Forms.CheckBoxTS();
             this.chkVAC2DirectIQ = new System.Windows.Forms.CheckBoxTS();
             this.chkVAC2Combine = new System.Windows.Forms.CheckBoxTS();
@@ -1270,6 +1271,7 @@
             this.tpPowerAmplifier = new System.Windows.Forms.TabPage();
             this.grpPAGainByBand = new System.Windows.Forms.GroupBoxTS();
             this.lblPAGainByBandVHF13 = new System.Windows.Forms.LabelTS();
+            this.chkPANewCal = new System.Windows.Forms.CheckBoxTS();
             this.udPAGainVHF13 = new System.Windows.Forms.NumericUpDownTS();
             this.lblPAGainByBandVHF12 = new System.Windows.Forms.LabelTS();
             this.udPAGainVHF12 = new System.Windows.Forms.NumericUpDownTS();
@@ -1336,6 +1338,7 @@
             this.lblPAGainByBand160 = new System.Windows.Forms.LabelTS();
             this.udPAGain160 = new System.Windows.Forms.NumericUpDownTS();
             this.chkPA6 = new System.Windows.Forms.CheckBoxTS();
+            this.rtxtPACalReq = new System.Windows.Forms.RichTextBox();
             this.grpPABandOffset = new System.Windows.Forms.GroupBoxTS();
             this.lblPABandOffset10 = new System.Windows.Forms.LabelTS();
             this.lblPABandOffset12 = new System.Windows.Forms.LabelTS();
@@ -1357,8 +1360,6 @@
             this.udPAADC60 = new System.Windows.Forms.NumericUpDownTS();
             this.udPAADC40 = new System.Windows.Forms.NumericUpDownTS();
             this.udPAADC30 = new System.Windows.Forms.NumericUpDownTS();
-            this.chkPANewCal = new System.Windows.Forms.CheckBoxTS();
-            this.rtxtPACalReq = new System.Windows.Forms.RichTextBox();
             this.tpAppearance = new System.Windows.Forms.TabPage();
             this.tcAppearance = new System.Windows.Forms.TabControl();
             this.tpAppearanceGeneral = new System.Windows.Forms.TabPage();
@@ -4465,7 +4466,7 @@
             this.grpMetisAddr.Controls.Add(this.labelTS9);
             this.grpMetisAddr.Controls.Add(this.lblMetisMAC);
             this.grpMetisAddr.Controls.Add(this.lblMetisIP);
-            this.grpMetisAddr.Location = new System.Drawing.Point(326, 91);
+            this.grpMetisAddr.Location = new System.Drawing.Point(326, 100);
             this.grpMetisAddr.Name = "grpMetisAddr";
             this.grpMetisAddr.Size = new System.Drawing.Size(251, 56);
             this.grpMetisAddr.TabIndex = 35;
@@ -4665,15 +4666,28 @@
             // 
             // grpOzyType
             // 
+            this.grpOzyType.Controls.Add(this.chkFullDiscovery);
             this.grpOzyType.Controls.Add(this.radMetis);
             this.grpOzyType.Controls.Add(this.radOzyUSB);
             this.grpOzyType.Location = new System.Drawing.Point(326, 8);
             this.grpOzyType.Name = "grpOzyType";
-            this.grpOzyType.Size = new System.Drawing.Size(150, 77);
+            this.grpOzyType.Size = new System.Drawing.Size(186, 88);
             this.grpOzyType.TabIndex = 34;
             this.grpOzyType.TabStop = false;
             this.grpOzyType.Text = "Connection Type";
             this.grpOzyType.Visible = false;
+            // 
+            // chkFullDiscovery
+            // 
+            this.chkFullDiscovery.Checked = true;
+            this.chkFullDiscovery.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFullDiscovery.Image = null;
+            this.chkFullDiscovery.Location = new System.Drawing.Point(28, 60);
+            this.chkFullDiscovery.Name = "chkFullDiscovery";
+            this.chkFullDiscovery.Size = new System.Drawing.Size(152, 16);
+            this.chkFullDiscovery.TabIndex = 13;
+            this.chkFullDiscovery.Text = "Full Network Discovery";
+            this.chkFullDiscovery.CheckedChanged += new System.EventHandler(this.chkFullDiscovery_CheckedChanged);
             // 
             // radMetis
             // 
@@ -14240,7 +14254,7 @@
             "SB Audigy (PCI)",
             "SB Audigy 2 (PCI)",
             "SB Audigy 2 ZS (PCI)",
-            "HPSDR Janus/Ozy (USB2)",
+            "HPSDR",
             "Sound Blaster Extigy (USB)",
             "Sound Blaster MP3+ (USB)",
             "Turtle Beach Santa Cruz (PCI)",
@@ -14321,7 +14335,7 @@
             this.tpVAC.Name = "tpVAC";
             this.tpVAC.Size = new System.Drawing.Size(592, 318);
             this.tpVAC.TabIndex = 1;
-            this.tpVAC.Text = "VAC";
+            this.tpVAC.Text = "VAC 1";
             // 
             // grpDirectIQOutput
             // 
@@ -14535,17 +14549,17 @@
             // 
             this.grpAudioLatency2.Controls.Add(this.chkAudioLatencyManual2);
             this.grpAudioLatency2.Controls.Add(this.udAudioLatency2);
-            this.grpAudioLatency2.Location = new System.Drawing.Point(344, 112);
+            this.grpAudioLatency2.Location = new System.Drawing.Point(448, 160);
             this.grpAudioLatency2.Name = "grpAudioLatency2";
-            this.grpAudioLatency2.Size = new System.Drawing.Size(96, 80);
+            this.grpAudioLatency2.Size = new System.Drawing.Size(120, 64);
             this.grpAudioLatency2.TabIndex = 67;
             this.grpAudioLatency2.TabStop = false;
-            this.grpAudioLatency2.Text = "Latency (ms)";
+            this.grpAudioLatency2.Text = "Buffer Latency (ms)";
             // 
             // chkAudioLatencyManual2
             // 
             this.chkAudioLatencyManual2.Image = null;
-            this.chkAudioLatencyManual2.Location = new System.Drawing.Point(16, 24);
+            this.chkAudioLatencyManual2.Location = new System.Drawing.Point(19, 45);
             this.chkAudioLatencyManual2.Name = "chkAudioLatencyManual2";
             this.chkAudioLatencyManual2.Size = new System.Drawing.Size(64, 16);
             this.chkAudioLatencyManual2.TabIndex = 5;
@@ -14560,7 +14574,7 @@
             0,
             0,
             0});
-            this.udAudioLatency2.Location = new System.Drawing.Point(16, 48);
+            this.udAudioLatency2.Location = new System.Drawing.Point(35, 20);
             this.udAudioLatency2.Maximum = new decimal(new int[] {
             240,
             0,
@@ -14723,14 +14737,15 @@
             this.chkAudioEnableVAC.Image = null;
             this.chkAudioEnableVAC.Location = new System.Drawing.Point(16, 8);
             this.chkAudioEnableVAC.Name = "chkAudioEnableVAC";
-            this.chkAudioEnableVAC.Size = new System.Drawing.Size(88, 24);
+            this.chkAudioEnableVAC.Size = new System.Drawing.Size(99, 24);
             this.chkAudioEnableVAC.TabIndex = 25;
-            this.chkAudioEnableVAC.Text = "Enable VAC";
+            this.chkAudioEnableVAC.Text = "Enable VAC 1";
             this.toolTip1.SetToolTip(this.chkAudioEnableVAC, "Enable Virtual Audio Cable Support using the settings on this form.");
             this.chkAudioEnableVAC.CheckedChanged += new System.EventHandler(this.chkAudioEnableVAC_CheckedChanged);
             // 
             // tpVAC2
             // 
+            this.tpVAC2.Controls.Add(this.chkVAC2UseRX2);
             this.tpVAC2.Controls.Add(this.grpVAC2DirectIQ);
             this.tpVAC2.Controls.Add(this.chkVAC2Combine);
             this.tpVAC2.Controls.Add(this.grpVAC2AutoEnable);
@@ -14749,29 +14764,31 @@
             this.tpVAC2.Text = "VAC 2";
             this.tpVAC2.UseVisualStyleBackColor = true;
             // 
-            // grpVAC2DirectIQ
-            // 
-            this.grpVAC2DirectIQ.Controls.Add(this.chkVAC2UseRX2);
-            this.grpVAC2DirectIQ.Controls.Add(this.chkVAC2DirectIQCal);
-            this.grpVAC2DirectIQ.Controls.Add(this.chkVAC2DirectIQ);
-            this.grpVAC2DirectIQ.Location = new System.Drawing.Point(448, 56);
-            this.grpVAC2DirectIQ.Name = "grpVAC2DirectIQ";
-            this.grpVAC2DirectIQ.Size = new System.Drawing.Size(120, 104);
-            this.grpVAC2DirectIQ.TabIndex = 89;
-            this.grpVAC2DirectIQ.TabStop = false;
-            this.grpVAC2DirectIQ.Text = "Direct I/Q";
-            // 
             // chkVAC2UseRX2
             // 
+            this.chkVAC2UseRX2.Checked = true;
+            this.chkVAC2UseRX2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkVAC2UseRX2.Enabled = false;
             this.chkVAC2UseRX2.Image = null;
-            this.chkVAC2UseRX2.Location = new System.Drawing.Point(16, 68);
+            this.chkVAC2UseRX2.Location = new System.Drawing.Point(116, 12);
             this.chkVAC2UseRX2.Name = "chkVAC2UseRX2";
             this.chkVAC2UseRX2.Size = new System.Drawing.Size(88, 16);
             this.chkVAC2UseRX2.TabIndex = 2;
             this.chkVAC2UseRX2.Text = "Use RX2";
             this.toolTip1.SetToolTip(this.chkVAC2UseRX2, "Use RX2 for VAC 2");
+            this.chkVAC2UseRX2.Visible = false;
             this.chkVAC2UseRX2.CheckedChanged += new System.EventHandler(this.chkVAC2UseRX2_CheckedChanged);
+            // 
+            // grpVAC2DirectIQ
+            // 
+            this.grpVAC2DirectIQ.Controls.Add(this.chkVAC2DirectIQCal);
+            this.grpVAC2DirectIQ.Controls.Add(this.chkVAC2DirectIQ);
+            this.grpVAC2DirectIQ.Location = new System.Drawing.Point(448, 56);
+            this.grpVAC2DirectIQ.Name = "grpVAC2DirectIQ";
+            this.grpVAC2DirectIQ.Size = new System.Drawing.Size(120, 88);
+            this.grpVAC2DirectIQ.TabIndex = 89;
+            this.grpVAC2DirectIQ.TabStop = false;
+            this.grpVAC2DirectIQ.Text = "Direct I/Q";
             // 
             // chkVAC2DirectIQCal
             // 
@@ -14945,17 +14962,17 @@
             // 
             this.grpVAC2LatencyManual.Controls.Add(this.chkVAC2LatencyManual);
             this.grpVAC2LatencyManual.Controls.Add(this.udVAC2Latency);
-            this.grpVAC2LatencyManual.Location = new System.Drawing.Point(344, 112);
+            this.grpVAC2LatencyManual.Location = new System.Drawing.Point(448, 160);
             this.grpVAC2LatencyManual.Name = "grpVAC2LatencyManual";
-            this.grpVAC2LatencyManual.Size = new System.Drawing.Size(96, 80);
+            this.grpVAC2LatencyManual.Size = new System.Drawing.Size(120, 64);
             this.grpVAC2LatencyManual.TabIndex = 83;
             this.grpVAC2LatencyManual.TabStop = false;
-            this.grpVAC2LatencyManual.Text = "Latency (ms)";
+            this.grpVAC2LatencyManual.Text = "Buffer Latency (ms)";
             // 
             // chkVAC2LatencyManual
             // 
             this.chkVAC2LatencyManual.Image = null;
-            this.chkVAC2LatencyManual.Location = new System.Drawing.Point(16, 24);
+            this.chkVAC2LatencyManual.Location = new System.Drawing.Point(19, 45);
             this.chkVAC2LatencyManual.Name = "chkVAC2LatencyManual";
             this.chkVAC2LatencyManual.Size = new System.Drawing.Size(64, 16);
             this.chkVAC2LatencyManual.TabIndex = 5;
@@ -14970,7 +14987,7 @@
             0,
             0,
             0});
-            this.udVAC2Latency.Location = new System.Drawing.Point(16, 48);
+            this.udVAC2Latency.Location = new System.Drawing.Point(35, 20);
             this.udVAC2Latency.Maximum = new decimal(new int[] {
             240,
             0,
@@ -20093,6 +20110,17 @@
             this.lblPAGainByBandVHF13.Text = "VHF13:";
             this.lblPAGainByBandVHF13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // chkPANewCal
+            // 
+            this.chkPANewCal.Image = null;
+            this.chkPANewCal.Location = new System.Drawing.Point(427, 227);
+            this.chkPANewCal.Name = "chkPANewCal";
+            this.chkPANewCal.Size = new System.Drawing.Size(120, 32);
+            this.chkPANewCal.TabIndex = 83;
+            this.chkPANewCal.Text = "Use Advanced Calibration Routine";
+            this.chkPANewCal.Visible = false;
+            this.chkPANewCal.CheckedChanged += new System.EventHandler(this.chkPANewCal_CheckedChanged);
+            // 
             // udPAGainVHF13
             // 
             this.udPAGainVHF13.DecimalPlaces = 1;
@@ -21271,6 +21299,17 @@
             this.chkPA6.TabIndex = 84;
             this.chkPA6.Text = "6";
             // 
+            // rtxtPACalReq
+            // 
+            this.rtxtPACalReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtxtPACalReq.Location = new System.Drawing.Point(328, 16);
+            this.rtxtPACalReq.Name = "rtxtPACalReq";
+            this.rtxtPACalReq.ReadOnly = true;
+            this.rtxtPACalReq.Size = new System.Drawing.Size(224, 112);
+            this.rtxtPACalReq.TabIndex = 82;
+            this.rtxtPACalReq.Text = resources.GetString("rtxtPACalReq.Text");
+            this.rtxtPACalReq.Visible = false;
+            // 
             // grpPABandOffset
             // 
             this.grpPABandOffset.Controls.Add(this.lblPABandOffset10);
@@ -21670,28 +21709,6 @@
             0,
             0});
             this.udPAADC30.LostFocus += new System.EventHandler(this.udPAADC30_LostFocus);
-            // 
-            // chkPANewCal
-            // 
-            this.chkPANewCal.Image = null;
-            this.chkPANewCal.Location = new System.Drawing.Point(427, 227);
-            this.chkPANewCal.Name = "chkPANewCal";
-            this.chkPANewCal.Size = new System.Drawing.Size(120, 32);
-            this.chkPANewCal.TabIndex = 83;
-            this.chkPANewCal.Text = "Use Advanced Calibration Routine";
-            this.chkPANewCal.Visible = false;
-            this.chkPANewCal.CheckedChanged += new System.EventHandler(this.chkPANewCal_CheckedChanged);
-            // 
-            // rtxtPACalReq
-            // 
-            this.rtxtPACalReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtxtPACalReq.Location = new System.Drawing.Point(328, 16);
-            this.rtxtPACalReq.Name = "rtxtPACalReq";
-            this.rtxtPACalReq.ReadOnly = true;
-            this.rtxtPACalReq.Size = new System.Drawing.Size(224, 112);
-            this.rtxtPACalReq.TabIndex = 82;
-            this.rtxtPACalReq.Text = resources.GetString("rtxtPACalReq.Text");
-            this.rtxtPACalReq.Visible = false;
             // 
             // tpAppearance
             // 
@@ -29156,5 +29173,6 @@
         private System.Windows.Forms.RadioButtonTS radANF2PreAGC;
         private System.Windows.Forms.RadioButtonTS radANFPostAGC;
         private System.Windows.Forms.RadioButtonTS radANFPreAGC;
+        private System.Windows.Forms.CheckBoxTS chkFullDiscovery;
     }
 }
