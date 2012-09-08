@@ -54,7 +54,6 @@ char MetisMACAddr[6] = { 0, 0, 0, 0, 0, 0 };
 char MetisCodeVersion[1] = { 0 };
 char MetisBoardID[1] = {0 };
 
-
 extern void Dump(FILE *ofile,                /* file handle to dump to - assumed to be      */
                                          /* open.                                       */
     unsigned char *buf,            /* pointer to data to dump                     */
@@ -225,7 +224,7 @@ int getMACaddr(int addr_wanted, char mac[6]) {
 } 
 #endif 
 
-#if 0 
+#if 0
 void oldlistNetworkAddrs(void) { 
 	struct addrinfo hints; 
 	struct addrinfo *results = NULL; 
@@ -294,7 +293,12 @@ SOCKET createSocket(int portnum, u_long addr) {
 	memset(&bind_addr, 0, sizeof(bind_addr)); 
 	
 	bind_addr.sin_family = AF_INET; 
-	bind_addr.sin_addr.S_un.S_addr = addr; // INADDR_ANY; // inet_addr("10.1.1.15"); 
+if (full_discovery) {
+	bind_addr.sin_addr.S_un.S_addr = addr;
+}
+else {
+	bind_addr.sin_addr.S_un.S_addr = INADDR_ANY; // inet_addr("10.1.1.15"); 
+}
 	bind_addr.sin_port = htons(portnum); 
 	
 	rc = bind(sock, (struct sockaddr *)&bind_addr, (int)sizeof(bind_addr)); 
@@ -355,10 +359,7 @@ SOCKET createSocket(int portnum, u_long addr) {
 
 
  u_long doDiscovery() { 
-	 // SOCKET outsock; 
 	 int rc; 
-	 //unsigned char packetbuf[250];
-	// unsigned char discbuf[2048]; 
 	 struct outdgram {
 		 unsigned char packetbuf[63];
 	 } outpacket;
@@ -450,10 +451,10 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 
 	int rc; 
 	u_long metis_addr; 
-//	u_long myaddr; 
-//	unsigned char macbuf[6]; 
-//	int i; 
-	int j; 
+	u_long myaddr; 
+	unsigned char macbuf[6]; 
+	int i; 
+        int j;
 	int sndbufsize; 
 	int addrs[10]; 
 	int addr_count; 
@@ -476,64 +477,52 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 	for ( j = 0; j < addr_count; j++ ) { 
 
 		if ( listenSock == (SOCKET)0 ) { 
-			closesocket(listenSock); 
-			listenSock = (SOCKET)0; 
+			if (full_discovery) {
+				closesocket(listenSock); 
+				listenSock = (SOCKET)0; 
+			}
 		}
 
+				listenSock = createSocket(0, addrs[j]); 
 
-		listenSock = createSocket(0, addrs[j]); 
+			if ( listenSock == INVALID_SOCKET ) { 
+				printf("createSocket on listenSock failed.\n");
+				if (full_discovery) {
+					continue;
+				}
+				else {
+					return -2; 
+				}
+			} 
 
-		if ( listenSock == INVALID_SOCKET ) { 
-			printf("createSocket on listenSock failed.\n");
-			continue; /* return -2; */ 
-		} 
+			sndbufsize = 0xffff;
+			rc = setsockopt(listenSock, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int)); 
+			if ( rc == SOCKET_ERROR ) { 
+				printf("CreateSockets Warning: setsockopt SO_SNDBUF failed!\n"); 
+			}
 
-		sndbufsize = 0xffff;
-		rc = setsockopt(listenSock, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int)); 
-		if ( rc == SOCKET_ERROR ) { 
-			printf("CreateSockets Warning: setsockopt SO_SNDBUF failed!\n"); 
-		}
+			sndbufsize = 0xffff;
+			rc = setsockopt(listenSock, SOL_SOCKET, SO_RCVBUF, (const char *)&sndbufsize, sizeof(int)); 
+			if ( rc == SOCKET_ERROR ) { 
+				printf("CreateSockets Warning: setsockopt SO_RCVBUF failed!\n"); 
+			}
 
-		sndbufsize = 0xffff;
-		rc = setsockopt(listenSock, SOL_SOCKET, SO_RCVBUF, (const char *)&sndbufsize, sizeof(int)); 
-		if ( rc == SOCKET_ERROR ) { 
-			printf("CreateSockets Warning: setsockopt SO_RCVBUF failed!\n"); 
+			metis_addr = doDiscovery(); 
+			if ( metis_addr != 0 ) { 
+				printf("metis_addr: 0x%08x\n", metis_addr); 
+				fflush(stdout);
+				MetisAddr = metis_addr; 
+
+				MetisSockAddr.sin_family = AF_INET;
+				MetisSockAddr.sin_port = htons(1024); 
+				MetisSockAddr.sin_addr.s_addr = metis_addr;
+				return 0; 
+			}
 		}
 	
-
-
-
-
-		//myaddr = inet_addr(netaddr);
-		//printf("myaddr: 0x%08x\n", myaddr); 
-		//rc = getMACaddr(myaddr, macbuf); 
-		//if ( rc == 0 ) { 
-		//	printf("mac addr: "); 
-		//	for ( i = 0;  i < 6; i++ ) { 
-		//		printf("%02x", macbuf[i]); 
-		//	} 
-		//	printf("\n"); 
-		//} 
-		//else { 
-		//	printf("getMACaddr failed!!\n"); 		
-		//}
-
-		metis_addr = doDiscovery(); 
-		if ( metis_addr != 0 ) { 
-			printf("metis_addr: 0x%08x\n", metis_addr); 
-			fflush(stdout);
-			MetisAddr = metis_addr; 
-
-			MetisSockAddr.sin_family = AF_INET;
-			MetisSockAddr.sin_port = htons(1024); 
-			MetisSockAddr.sin_addr.s_addr = metis_addr;
-			return 0; 
-		}
-	}
-
 	/* if we get here no metis was found */ 
-	return -4; 
-}
+		return -4; 
+	}
 
 
 
@@ -557,8 +546,6 @@ KD5TFDVK6APHAUDIO_API void GetMetisBoardID(char addr_bytes[]) {
 int SendStartToMetis(void) 	 {
 
 	 int starting_seq; 
-	// unsigned char packetbuf[64];
-	// unsigned char fbuf[2000]; 
 	 struct outdgram {
 		 unsigned char packetbuf[64];
 	 } outpacket;
@@ -634,7 +621,6 @@ int SendStopToMetis(void) 	 {
 
 
 int MetisReadDirect(char *bufp, int buflen) { 
-	//unsigned char readbuf[1600]; 
 	struct indgram {
 		unsigned char readbuf[1074];
 	} inpacket;
@@ -666,13 +652,22 @@ int MetisReadDirect(char *bufp, int buflen) {
 				printf("MRD: seq error this: %d last: %d\n", seqnum, MetisLastRecvSeq); 
 			} 
 			MetisLastRecvSeq = seqnum;
+
 			if ( endpoint == 6 ) { 
+				if ( (inpacket.readbuf[8] == 0x7f) && (inpacket.readbuf[9] == 0x7f) && (inpacket.readbuf[10] == 0x7f) ) { 
+					HaveSync = 1;
+				}
+				else { 
+					HaveSync = 0;
+					printf("MRD: sync error on frame %d\n", seqnum); 
+					// return 0;
+				} 
 				memcpy(bufp, inpacket.readbuf+8, 1024); 
 				return 1024; 
 			}
-			//else { 
-				//printf("MRD: ignoring data for ep %d\n", endpoint); 
-			//} 
+			else { 
+				printf("MRD: ignoring data for ep %d\n", endpoint); 
+			} 
 		} 
 		else { 
 			printf("MRD: ignoring right sized frame bad header!\n", rc); 			
@@ -773,8 +768,6 @@ int MetisStartReadThread(void) {
 	int rc; 
 
 	do { 
-
-
 		/* allocate ring buffer */ 
 		MetisEP6RingBuf = createRingBuffer(512 * NUM_RINGBUF_FRAMES); 
 		if ( MetisEP6RingBuf == NULL ) { 

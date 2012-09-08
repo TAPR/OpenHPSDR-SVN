@@ -690,6 +690,15 @@ KD5TFDVK6APHAUDIO_API void SetLegacyDotDashPTT(int bit) {
 	} 
 }
 
+KD5TFDVK6APHAUDIO_API void SetDiscoveryMode(int bit) { 
+        if ( bit == 0 ) {
+                full_discovery = 0;
+        }
+        else {
+                full_discovery = 1;
+        }
+}
+
 KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() { 
 	int n; 
 	n = ADC_Overloads; 

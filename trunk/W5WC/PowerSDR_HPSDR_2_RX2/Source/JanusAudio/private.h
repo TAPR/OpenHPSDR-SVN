@@ -236,6 +236,8 @@ extern int VFOfreq_rx2;
 extern int VFOfreq_rx3;
 extern int VFOfreq_rx4;
 extern int VFOfreq_tx;
+extern int full_discovery;
+
 extern int FPGATestMode;
 
 #ifdef EP6FILEDUMP
