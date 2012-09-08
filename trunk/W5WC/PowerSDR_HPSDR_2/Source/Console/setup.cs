@@ -1864,6 +1864,7 @@ namespace PowerSDR
         private CheckBoxTS chkFirmwareByp;
         private RadioButtonTS radANFPreAGC;
         private RadioButtonTS radANFPostAGC;
+        private CheckBoxTS chkFullDiscovery;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -3888,6 +3889,7 @@ namespace PowerSDR
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
+            this.chkFullDiscovery = new System.Windows.Forms.CheckBoxTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -6422,7 +6424,7 @@ namespace PowerSDR
             this.grpMetisAddr.Controls.Add(this.labelTS9);
             this.grpMetisAddr.Controls.Add(this.lblMetisMAC);
             this.grpMetisAddr.Controls.Add(this.lblMetisIP);
-            this.grpMetisAddr.Location = new System.Drawing.Point(326, 91);
+            this.grpMetisAddr.Location = new System.Drawing.Point(326, 100);
             this.grpMetisAddr.Name = "grpMetisAddr";
             this.grpMetisAddr.Size = new System.Drawing.Size(251, 56);
             this.grpMetisAddr.TabIndex = 35;
@@ -6622,11 +6624,12 @@ namespace PowerSDR
             // 
             // grpOzyType
             // 
+            this.grpOzyType.Controls.Add(this.chkFullDiscovery);
             this.grpOzyType.Controls.Add(this.radMetis);
             this.grpOzyType.Controls.Add(this.radOzyUSB);
             this.grpOzyType.Location = new System.Drawing.Point(326, 8);
             this.grpOzyType.Name = "grpOzyType";
-            this.grpOzyType.Size = new System.Drawing.Size(150, 77);
+            this.grpOzyType.Size = new System.Drawing.Size(189, 88);
             this.grpOzyType.TabIndex = 34;
             this.grpOzyType.TabStop = false;
             this.grpOzyType.Text = "Connection Type";
@@ -16048,7 +16051,7 @@ namespace PowerSDR
             "SB Audigy (PCI)",
             "SB Audigy 2 (PCI)",
             "SB Audigy 2 ZS (PCI)",
-            "HPSDR Janus/Ozy (USB2)",
+            "HPSDR",
             "Sound Blaster Extigy (USB)",
             "Sound Blaster MP3+ (USB)",
             "Turtle Beach Santa Cruz (PCI)",
@@ -29319,6 +29322,18 @@ namespace PowerSDR
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
+            // chkFullDiscovery
+            // 
+            this.chkFullDiscovery.Checked = true;
+            this.chkFullDiscovery.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFullDiscovery.Image = null;
+            this.chkFullDiscovery.Location = new System.Drawing.Point(28, 60);
+            this.chkFullDiscovery.Name = "chkFullDiscovery";
+            this.chkFullDiscovery.Size = new System.Drawing.Size(152, 16);
+            this.chkFullDiscovery.TabIndex = 14;
+            this.chkFullDiscovery.Text = "Full Network Discovery";
+            this.chkFullDiscovery.CheckedChanged += new System.EventHandler(this.chkFullDiscovery_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -30625,7 +30640,8 @@ namespace PowerSDR
             comboGeneralProcessPriority_SelectedIndexChanged(this, e);
             chkGeneralUpdateRelease_CheckedChanged(this, e);
             chkGeneralUpdateBeta_CheckedChanged(this, e);
-
+            chkFullDiscovery_CheckedChanged(this, e);
+ 
             // Audio Tab
             comboAudioSoundCard_SelectedIndexChanged(this, e);
             comboAudioDriver1_SelectedIndexChanged(this, e);
@@ -31145,8 +31161,8 @@ namespace PowerSDR
                     case SoundCard.UNSUPPORTED_CARD:
                         comboAudioSoundCard.Text = "Unsupported Card";
                         break;
-                    case SoundCard.JANUS_OZY:
-                        comboAudioSoundCard.Text = "HPSDR Janus/Ozy (USB2)";
+                    case SoundCard.HPSDR:
+                        comboAudioSoundCard.Text = "HPSDR";
                         break;
                 }
             }
@@ -32477,7 +32493,7 @@ namespace PowerSDR
                 udDSPImageGainTX.Value = 0.0M;
                 grpDSPImageRejectTX.Enabled = false;
                 // force setting of audio card 
-                comboAudioSoundCard.Text = "HPSDR Janus/Ozy (USB2)";
+                comboAudioSoundCard.Text = "HPSDR";
                 comboAudioSoundCard.Enabled = false;
                 // comboAudioSampleRate1.Text = "192000"; 
                 // comboAudioSampleRate1.Enabled = false;
@@ -33776,8 +33792,8 @@ namespace PowerSDR
                 case "Turtle Beach Santa Cruz (PCI)":
                     card = SoundCard.SANTA_CRUZ;
                     break;
-                case "HPSDR Janus/Ozy (USB2)":
-                    card = SoundCard.JANUS_OZY;
+                case "HPSDR":
+                    card = SoundCard.HPSDR;
                     break;
                 case "Unsupported Card":
                     card = SoundCard.UNSUPPORTED_CARD;
@@ -34431,7 +34447,7 @@ namespace PowerSDR
                     }
                     break;
 
-                case SoundCard.JANUS_OZY:
+                case SoundCard.HPSDR:
                     grpAudioDetails1.Enabled = false;
                     grpAudioVolts1.Visible = true;
                     udAudioVoltage1.Value = 0.80M;
@@ -34444,7 +34460,7 @@ namespace PowerSDR
 
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
                     {
-                        if (p.Name == "Janus/Ozy")
+                        if (p.Name == "HPSDR (USB/UDP)")
                         {
                             comboAudioDriver1.SelectedItem = p;
                             break;
@@ -34453,9 +34469,9 @@ namespace PowerSDR
 
                     foreach (PADeviceInfo dev in comboAudioInput1.Items)
                     {
-                        if (dev.Name == "Janus/Ozy")
+                        if (dev.Name == "HPSDR (USB/UDP)")
                         {
-                            comboAudioInput1.Text = "AK5394A";
+                            comboAudioInput1.Text = "PCM";
                             comboAudioOutput1.Text = "PWM";
                         }
                     }
@@ -41024,6 +41040,14 @@ namespace PowerSDR
         {
             //  if (chkFirmwareByp.Checked) firmware_bypass = true;
             firmware_bypass = chkFirmwareByp.Checked;
+        }
+
+        private void chkFullDiscovery_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFullDiscovery.Checked)
+                JanusAudio.SetDiscoveryMode(1);
+            else
+                JanusAudio.SetDiscoveryMode(0);
         }
     }
 
