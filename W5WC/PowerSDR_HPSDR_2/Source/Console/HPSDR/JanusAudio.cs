@@ -1132,6 +1132,9 @@ namespace PowerSDR
         }
 
         [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetDiscoveryMode(int b);
+        
+        [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetPennyOCBits(int b);
 
         [DllImport("JanusAudio.dll")]

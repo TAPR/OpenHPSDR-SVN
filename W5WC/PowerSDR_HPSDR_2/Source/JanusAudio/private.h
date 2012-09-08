@@ -216,6 +216,7 @@ extern int HaveSync;
 extern unsigned int VFOfreq;
 extern int FPGATestMode;
 extern unsigned int VFOfreq_tx;
+extern int full_discovery;
 
 #ifdef EP6FILEDUMP
 #define EP6FRAMEDUMPLIMIT (100*512)
