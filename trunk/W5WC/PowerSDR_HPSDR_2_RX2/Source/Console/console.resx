@@ -14063,7 +14063,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v2.2.3 (9/8/12)  RX2</value>
+    <value>PowerSDR™/OpenHPSDR v2.2.3 (9/10/12)  RX2</value>
   </data>
   <data name="&gt;&gt;timer_cpu_meter.Name" xml:space="preserve">
     <value>timer_cpu_meter</value>
