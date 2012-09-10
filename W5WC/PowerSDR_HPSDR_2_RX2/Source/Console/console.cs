@@ -12721,7 +12721,7 @@ namespace PowerSDR
         {
             double swr;
 
-            if ((g_fwd == 0 && g_rev == 0) | g_fwd < 1)
+            if (!alexpresent || (g_fwd == 0 && g_rev == 0) || g_fwd < 1)
             {
                 JanusAudio.SetSWRProtect(1.0f);
                 return 1.0;
