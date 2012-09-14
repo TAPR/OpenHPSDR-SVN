@@ -864,11 +864,11 @@
             this.textBoxTS11 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS10 = new System.Windows.Forms.TextBoxTS();
             this.txtAlexRevADC = new System.Windows.Forms.TextBoxTS();
-            this.textBoxTS8 = new System.Windows.Forms.TextBoxTS();
-            this.textBoxTS7 = new System.Windows.Forms.TextBoxTS();
-            this.textBoxTS6 = new System.Windows.Forms.TextBoxTS();
-            this.textBoxTS5 = new System.Windows.Forms.TextBoxTS();
-            this.textBoxTS4 = new System.Windows.Forms.TextBoxTS();
+            this.txtAlexBand = new System.Windows.Forms.TextBoxTS();
+            this.txtTXAnt = new System.Windows.Forms.TextBoxTS();
+            this.txtRXOut = new System.Windows.Forms.TextBoxTS();
+            this.txtRXAnt = new System.Windows.Forms.TextBoxTS();
+            this.txtAlexEnabled = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS3 = new System.Windows.Forms.TextBoxTS();
             this.txtAlexFwdADC = new System.Windows.Forms.TextBoxTS();
             this.txtFwdADC = new System.Windows.Forms.TextBoxTS();
@@ -1899,6 +1899,7 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
+            this.chkRxOutOnTx = new System.Windows.Forms.CheckBoxTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -2367,6 +2368,7 @@
             // 
             // tpAlexAntCtrl
             // 
+            tpAlexAntCtrl.Controls.Add(this.chkRxOutOnTx);
             tpAlexAntCtrl.Controls.Add(this.chkAlexAntCtrl);
             tpAlexAntCtrl.Controls.Add(this.grpAlexAntCtrl);
             tpAlexAntCtrl.Location = new System.Drawing.Point(4, 22);
@@ -2865,7 +2867,7 @@
             this.radAlexT2_6.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_6.TabIndex = 1;
             this.radAlexT2_6.UseVisualStyleBackColor = true;
-            this.radAlexT2_6.Click += new System.EventHandler(this.radAlexT_6_Click);
+            this.radAlexT2_6.CheckedChanged += new System.EventHandler(this.radAlexT_6_CheckedChanged);
             // 
             // radAlexT1_6
             // 
@@ -2878,7 +2880,7 @@
             this.radAlexT1_6.TabStop = true;
             this.radAlexT1_6.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_6.UseVisualStyleBackColor = true;
-            this.radAlexT1_6.Click += new System.EventHandler(this.radAlexT_6_Click);
+            this.radAlexT1_6.CheckedChanged += new System.EventHandler(this.radAlexT_6_CheckedChanged);
             // 
             // radAlexT3_6
             // 
@@ -2889,7 +2891,7 @@
             this.radAlexT3_6.TabIndex = 2;
             this.radAlexT3_6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_6.UseVisualStyleBackColor = true;
-            this.radAlexT3_6.Click += new System.EventHandler(this.radAlexT_6_Click);
+            this.radAlexT3_6.CheckedChanged += new System.EventHandler(this.radAlexT_6_CheckedChanged);
             // 
             // panel22
             // 
@@ -2911,7 +2913,7 @@
             this.radAlexT2_10.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_10.TabIndex = 1;
             this.radAlexT2_10.UseVisualStyleBackColor = true;
-            this.radAlexT2_10.Click += new System.EventHandler(this.radAlexT_10_Click);
+            this.radAlexT2_10.CheckedChanged += new System.EventHandler(this.radAlexT_10_CheckedChanged);
             // 
             // radAlexT1_10
             // 
@@ -2924,7 +2926,7 @@
             this.radAlexT1_10.TabStop = true;
             this.radAlexT1_10.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_10.UseVisualStyleBackColor = true;
-            this.radAlexT1_10.Click += new System.EventHandler(this.radAlexT_10_Click);
+            this.radAlexT1_10.CheckedChanged += new System.EventHandler(this.radAlexT_10_CheckedChanged);
             // 
             // radAlexT3_10
             // 
@@ -2935,7 +2937,7 @@
             this.radAlexT3_10.TabIndex = 2;
             this.radAlexT3_10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_10.UseVisualStyleBackColor = true;
-            this.radAlexT3_10.Click += new System.EventHandler(this.radAlexT_10_Click);
+            this.radAlexT3_10.CheckedChanged += new System.EventHandler(this.radAlexT_10_CheckedChanged);
             // 
             // panel21
             // 
@@ -2957,7 +2959,7 @@
             this.radAlexT2_12.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_12.TabIndex = 1;
             this.radAlexT2_12.UseVisualStyleBackColor = true;
-            this.radAlexT2_12.Click += new System.EventHandler(this.radAlexT_12_Click);
+            this.radAlexT2_12.CheckedChanged += new System.EventHandler(this.radAlexT_12_CheckedChanged);
             // 
             // radAlexT1_12
             // 
@@ -2970,7 +2972,7 @@
             this.radAlexT1_12.TabStop = true;
             this.radAlexT1_12.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_12.UseVisualStyleBackColor = true;
-            this.radAlexT1_12.Click += new System.EventHandler(this.radAlexT_12_Click);
+            this.radAlexT1_12.CheckedChanged += new System.EventHandler(this.radAlexT_12_CheckedChanged);
             // 
             // radAlexT3_12
             // 
@@ -2981,7 +2983,7 @@
             this.radAlexT3_12.TabIndex = 2;
             this.radAlexT3_12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_12.UseVisualStyleBackColor = true;
-            this.radAlexT3_12.Click += new System.EventHandler(this.radAlexT_12_Click);
+            this.radAlexT3_12.CheckedChanged += new System.EventHandler(this.radAlexT_12_CheckedChanged);
             // 
             // panel20
             // 
@@ -3003,7 +3005,7 @@
             this.radAlexT2_15.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_15.TabIndex = 1;
             this.radAlexT2_15.UseVisualStyleBackColor = true;
-            this.radAlexT2_15.Click += new System.EventHandler(this.radAlexT_15_Click);
+            this.radAlexT2_15.CheckedChanged += new System.EventHandler(this.radAlexT_15_CheckedChanged);
             // 
             // radAlexT1_15
             // 
@@ -3016,7 +3018,7 @@
             this.radAlexT1_15.TabStop = true;
             this.radAlexT1_15.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_15.UseVisualStyleBackColor = true;
-            this.radAlexT1_15.Click += new System.EventHandler(this.radAlexT_15_Click);
+            this.radAlexT1_15.CheckedChanged += new System.EventHandler(this.radAlexT_15_CheckedChanged);
             // 
             // radAlexT3_15
             // 
@@ -3027,7 +3029,7 @@
             this.radAlexT3_15.TabIndex = 2;
             this.radAlexT3_15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_15.UseVisualStyleBackColor = true;
-            this.radAlexT3_15.Click += new System.EventHandler(this.radAlexT_15_Click);
+            this.radAlexT3_15.CheckedChanged += new System.EventHandler(this.radAlexT_15_CheckedChanged);
             // 
             // panel19
             // 
@@ -3049,7 +3051,7 @@
             this.radAlexT2_17.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_17.TabIndex = 1;
             this.radAlexT2_17.UseVisualStyleBackColor = true;
-            this.radAlexT2_17.Click += new System.EventHandler(this.radAlexT_17_Click);
+            this.radAlexT2_17.CheckedChanged += new System.EventHandler(this.radAlexT_17_CheckedChanged);
             // 
             // radAlexT1_17
             // 
@@ -3062,7 +3064,7 @@
             this.radAlexT1_17.TabStop = true;
             this.radAlexT1_17.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_17.UseVisualStyleBackColor = true;
-            this.radAlexT1_17.Click += new System.EventHandler(this.radAlexT_17_Click);
+            this.radAlexT1_17.CheckedChanged += new System.EventHandler(this.radAlexT_17_CheckedChanged);
             // 
             // radAlexT3_17
             // 
@@ -3073,7 +3075,7 @@
             this.radAlexT3_17.TabIndex = 2;
             this.radAlexT3_17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_17.UseVisualStyleBackColor = true;
-            this.radAlexT3_17.Click += new System.EventHandler(this.radAlexT_17_Click);
+            this.radAlexT3_17.CheckedChanged += new System.EventHandler(this.radAlexT_17_CheckedChanged);
             // 
             // panel18
             // 
@@ -3095,7 +3097,7 @@
             this.radAlexT2_20.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_20.TabIndex = 1;
             this.radAlexT2_20.UseVisualStyleBackColor = true;
-            this.radAlexT2_20.Click += new System.EventHandler(this.radAlexT_20_Click);
+            this.radAlexT2_20.CheckedChanged += new System.EventHandler(this.radAlexT_20_CheckedChanged);
             // 
             // radAlexT1_20
             // 
@@ -3108,7 +3110,7 @@
             this.radAlexT1_20.TabStop = true;
             this.radAlexT1_20.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_20.UseVisualStyleBackColor = true;
-            this.radAlexT1_20.Click += new System.EventHandler(this.radAlexT_20_Click);
+            this.radAlexT1_20.CheckedChanged += new System.EventHandler(this.radAlexT_20_CheckedChanged);
             // 
             // radAlexT3_20
             // 
@@ -3119,7 +3121,7 @@
             this.radAlexT3_20.TabIndex = 2;
             this.radAlexT3_20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_20.UseVisualStyleBackColor = true;
-            this.radAlexT3_20.Click += new System.EventHandler(this.radAlexT_20_Click);
+            this.radAlexT3_20.CheckedChanged += new System.EventHandler(this.radAlexT_20_CheckedChanged);
             // 
             // panel17
             // 
@@ -3141,7 +3143,7 @@
             this.radAlexT2_30.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_30.TabIndex = 1;
             this.radAlexT2_30.UseVisualStyleBackColor = true;
-            this.radAlexT2_30.Click += new System.EventHandler(this.radAlexT_30_Click);
+            this.radAlexT2_30.CheckedChanged += new System.EventHandler(this.radAlexT_30_CheckedChanged);
             // 
             // radAlexT1_30
             // 
@@ -3154,7 +3156,7 @@
             this.radAlexT1_30.TabStop = true;
             this.radAlexT1_30.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_30.UseVisualStyleBackColor = true;
-            this.radAlexT1_30.Click += new System.EventHandler(this.radAlexT_30_Click);
+            this.radAlexT1_30.CheckedChanged += new System.EventHandler(this.radAlexT_30_CheckedChanged);
             // 
             // radAlexT3_30
             // 
@@ -3165,7 +3167,7 @@
             this.radAlexT3_30.TabIndex = 2;
             this.radAlexT3_30.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_30.UseVisualStyleBackColor = true;
-            this.radAlexT3_30.Click += new System.EventHandler(this.radAlexT_30_Click);
+            this.radAlexT3_30.CheckedChanged += new System.EventHandler(this.radAlexT_30_CheckedChanged);
             // 
             // panel16
             // 
@@ -3187,7 +3189,7 @@
             this.radAlexT2_40.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_40.TabIndex = 1;
             this.radAlexT2_40.UseVisualStyleBackColor = true;
-            this.radAlexT2_40.Click += new System.EventHandler(this.radAlexT_40_Click);
+            this.radAlexT2_40.CheckedChanged += new System.EventHandler(this.radAlexT_40_CheckedChanged);
             // 
             // radAlexT1_40
             // 
@@ -3200,7 +3202,7 @@
             this.radAlexT1_40.TabStop = true;
             this.radAlexT1_40.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_40.UseVisualStyleBackColor = true;
-            this.radAlexT1_40.Click += new System.EventHandler(this.radAlexT_40_Click);
+            this.radAlexT1_40.CheckedChanged += new System.EventHandler(this.radAlexT_40_CheckedChanged);
             // 
             // radAlexT3_40
             // 
@@ -3211,7 +3213,7 @@
             this.radAlexT3_40.TabIndex = 2;
             this.radAlexT3_40.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_40.UseVisualStyleBackColor = true;
-            this.radAlexT3_40.Click += new System.EventHandler(this.radAlexT_40_Click);
+            this.radAlexT3_40.CheckedChanged += new System.EventHandler(this.radAlexT_40_CheckedChanged);
             // 
             // panel15
             // 
@@ -3233,7 +3235,7 @@
             this.radAlexT2_60.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_60.TabIndex = 1;
             this.radAlexT2_60.UseVisualStyleBackColor = true;
-            this.radAlexT2_60.Click += new System.EventHandler(this.radAlexT_60_Click);
+            this.radAlexT2_60.CheckedChanged += new System.EventHandler(this.radAlexT_60_CheckedChanged);
             // 
             // radAlexT1_60
             // 
@@ -3246,7 +3248,7 @@
             this.radAlexT1_60.TabStop = true;
             this.radAlexT1_60.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_60.UseVisualStyleBackColor = true;
-            this.radAlexT1_60.Click += new System.EventHandler(this.radAlexT_60_Click);
+            this.radAlexT1_60.CheckedChanged += new System.EventHandler(this.radAlexT_60_CheckedChanged);
             // 
             // radAlexT3_60
             // 
@@ -3257,7 +3259,7 @@
             this.radAlexT3_60.TabIndex = 2;
             this.radAlexT3_60.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_60.UseVisualStyleBackColor = true;
-            this.radAlexT3_60.Click += new System.EventHandler(this.radAlexT_60_Click);
+            this.radAlexT3_60.CheckedChanged += new System.EventHandler(this.radAlexT_60_CheckedChanged);
             // 
             // panel14
             // 
@@ -3279,7 +3281,7 @@
             this.radAlexT2_80.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_80.TabIndex = 1;
             this.radAlexT2_80.UseVisualStyleBackColor = true;
-            this.radAlexT2_80.Click += new System.EventHandler(this.radAlexT_80_Click);
+            this.radAlexT2_80.CheckedChanged += new System.EventHandler(this.radAlexT_80_CheckedChanged);
             // 
             // radAlexT1_80
             // 
@@ -3292,7 +3294,7 @@
             this.radAlexT1_80.TabStop = true;
             this.radAlexT1_80.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_80.UseVisualStyleBackColor = true;
-            this.radAlexT1_80.Click += new System.EventHandler(this.radAlexT_80_Click);
+            this.radAlexT1_80.CheckedChanged += new System.EventHandler(this.radAlexT_80_CheckedChanged);
             // 
             // radAlexT3_80
             // 
@@ -3303,7 +3305,7 @@
             this.radAlexT3_80.TabIndex = 2;
             this.radAlexT3_80.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_80.UseVisualStyleBackColor = true;
-            this.radAlexT3_80.Click += new System.EventHandler(this.radAlexT_80_Click);
+            this.radAlexT3_80.CheckedChanged += new System.EventHandler(this.radAlexT_80_CheckedChanged);
             // 
             // panel11
             // 
@@ -3325,7 +3327,7 @@
             this.radAlexR2_6.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_6.TabIndex = 1;
             this.radAlexR2_6.UseVisualStyleBackColor = true;
-            this.radAlexR2_6.Click += new System.EventHandler(this.radAlexR_6_Click);
+            this.radAlexR2_6.CheckedChanged += new System.EventHandler(this.radAlexR_6_CheckedChanged);
             // 
             // radAlexR1_6
             // 
@@ -3338,7 +3340,7 @@
             this.radAlexR1_6.TabStop = true;
             this.radAlexR1_6.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_6.UseVisualStyleBackColor = true;
-            this.radAlexR1_6.Click += new System.EventHandler(this.radAlexR_6_Click);
+            this.radAlexR1_6.CheckedChanged += new System.EventHandler(this.radAlexR_6_CheckedChanged);
             // 
             // radAlexR3_6
             // 
@@ -3349,7 +3351,7 @@
             this.radAlexR3_6.TabIndex = 2;
             this.radAlexR3_6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_6.UseVisualStyleBackColor = true;
-            this.radAlexR3_6.Click += new System.EventHandler(this.radAlexR_6_Click);
+            this.radAlexR3_6.CheckedChanged += new System.EventHandler(this.radAlexR_6_CheckedChanged);
             // 
             // panel9
             // 
@@ -3371,7 +3373,7 @@
             this.radAlexR2_12.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_12.TabIndex = 1;
             this.radAlexR2_12.UseVisualStyleBackColor = true;
-            this.radAlexR2_12.Click += new System.EventHandler(this.radAlexR_12_Click);
+            this.radAlexR2_12.CheckedChanged += new System.EventHandler(this.radAlexR_12_CheckedChanged);
             // 
             // radAlexR1_12
             // 
@@ -3384,7 +3386,7 @@
             this.radAlexR1_12.TabStop = true;
             this.radAlexR1_12.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_12.UseVisualStyleBackColor = true;
-            this.radAlexR1_12.Click += new System.EventHandler(this.radAlexR_12_Click);
+            this.radAlexR1_12.CheckedChanged += new System.EventHandler(this.radAlexR_12_CheckedChanged);
             // 
             // radAlexR3_12
             // 
@@ -3395,7 +3397,7 @@
             this.radAlexR3_12.TabIndex = 2;
             this.radAlexR3_12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_12.UseVisualStyleBackColor = true;
-            this.radAlexR3_12.Click += new System.EventHandler(this.radAlexR_12_Click);
+            this.radAlexR3_12.CheckedChanged += new System.EventHandler(this.radAlexR_12_CheckedChanged);
             // 
             // panel10
             // 
@@ -3417,7 +3419,7 @@
             this.radAlexR2_10.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_10.TabIndex = 1;
             this.radAlexR2_10.UseVisualStyleBackColor = true;
-            this.radAlexR2_10.Click += new System.EventHandler(this.radAlexR_10_Click);
+            this.radAlexR2_10.CheckedChanged += new System.EventHandler(this.radAlexR_10_CheckedChanged);
             // 
             // radAlexR1_10
             // 
@@ -3430,7 +3432,7 @@
             this.radAlexR1_10.TabStop = true;
             this.radAlexR1_10.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_10.UseVisualStyleBackColor = true;
-            this.radAlexR1_10.Click += new System.EventHandler(this.radAlexR_10_Click);
+            this.radAlexR1_10.CheckedChanged += new System.EventHandler(this.radAlexR_10_CheckedChanged);
             // 
             // radAlexR3_10
             // 
@@ -3441,7 +3443,7 @@
             this.radAlexR3_10.TabIndex = 2;
             this.radAlexR3_10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_10.UseVisualStyleBackColor = true;
-            this.radAlexR3_10.Click += new System.EventHandler(this.radAlexR_10_Click);
+            this.radAlexR3_10.CheckedChanged += new System.EventHandler(this.radAlexR_10_CheckedChanged);
             // 
             // panel8
             // 
@@ -3463,7 +3465,7 @@
             this.radAlexR2_15.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_15.TabIndex = 1;
             this.radAlexR2_15.UseVisualStyleBackColor = true;
-            this.radAlexR2_15.Click += new System.EventHandler(this.radAlexR_15_Click);
+            this.radAlexR2_15.CheckedChanged += new System.EventHandler(this.radAlexR_15_CheckedChanged);
             // 
             // radAlexR1_15
             // 
@@ -3476,7 +3478,7 @@
             this.radAlexR1_15.TabStop = true;
             this.radAlexR1_15.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_15.UseVisualStyleBackColor = true;
-            this.radAlexR1_15.Click += new System.EventHandler(this.radAlexR_15_Click);
+            this.radAlexR1_15.CheckedChanged += new System.EventHandler(this.radAlexR_15_CheckedChanged);
             // 
             // radAlexR3_15
             // 
@@ -3487,7 +3489,7 @@
             this.radAlexR3_15.TabIndex = 2;
             this.radAlexR3_15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_15.UseVisualStyleBackColor = true;
-            this.radAlexR3_15.Click += new System.EventHandler(this.radAlexR_15_Click);
+            this.radAlexR3_15.CheckedChanged += new System.EventHandler(this.radAlexR_15_CheckedChanged);
             // 
             // panel7
             // 
@@ -3509,7 +3511,7 @@
             this.radAlexR2_17.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_17.TabIndex = 1;
             this.radAlexR2_17.UseVisualStyleBackColor = true;
-            this.radAlexR2_17.Click += new System.EventHandler(this.radAlexR_17_Click);
+            this.radAlexR2_17.CheckedChanged += new System.EventHandler(this.radAlexR_17_CheckedChanged);
             // 
             // radAlexR1_17
             // 
@@ -3522,7 +3524,7 @@
             this.radAlexR1_17.TabStop = true;
             this.radAlexR1_17.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_17.UseVisualStyleBackColor = true;
-            this.radAlexR1_17.Click += new System.EventHandler(this.radAlexR_17_Click);
+            this.radAlexR1_17.CheckedChanged += new System.EventHandler(this.radAlexR_17_CheckedChanged);
             // 
             // radAlexR3_17
             // 
@@ -3533,7 +3535,7 @@
             this.radAlexR3_17.TabIndex = 2;
             this.radAlexR3_17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_17.UseVisualStyleBackColor = true;
-            this.radAlexR3_17.Click += new System.EventHandler(this.radAlexR_17_Click);
+            this.radAlexR3_17.CheckedChanged += new System.EventHandler(this.radAlexR_17_CheckedChanged);
             // 
             // panel6
             // 
@@ -3555,7 +3557,7 @@
             this.radAlexR2_20.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_20.TabIndex = 1;
             this.radAlexR2_20.UseVisualStyleBackColor = true;
-            this.radAlexR2_20.Click += new System.EventHandler(this.radAlexR_20_Click);
+            this.radAlexR2_20.CheckedChanged += new System.EventHandler(this.radAlexR_20_CheckedChanged);
             // 
             // radAlexR1_20
             // 
@@ -3568,7 +3570,7 @@
             this.radAlexR1_20.TabStop = true;
             this.radAlexR1_20.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_20.UseVisualStyleBackColor = true;
-            this.radAlexR1_20.Click += new System.EventHandler(this.radAlexR_20_Click);
+            this.radAlexR1_20.CheckedChanged += new System.EventHandler(this.radAlexR_20_CheckedChanged);
             // 
             // radAlexR3_20
             // 
@@ -3579,7 +3581,7 @@
             this.radAlexR3_20.TabIndex = 2;
             this.radAlexR3_20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_20.UseVisualStyleBackColor = true;
-            this.radAlexR3_20.Click += new System.EventHandler(this.radAlexR_20_Click);
+            this.radAlexR3_20.CheckedChanged += new System.EventHandler(this.radAlexR_20_CheckedChanged);
             // 
             // panel5
             // 
@@ -3601,7 +3603,7 @@
             this.radAlexR2_30.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_30.TabIndex = 1;
             this.radAlexR2_30.UseVisualStyleBackColor = true;
-            this.radAlexR2_30.Click += new System.EventHandler(this.radAlexR_30_Click);
+            this.radAlexR2_30.CheckedChanged += new System.EventHandler(this.radAlexR_30_CheckedChanged);
             // 
             // radAlexR1_30
             // 
@@ -3614,7 +3616,7 @@
             this.radAlexR1_30.TabStop = true;
             this.radAlexR1_30.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_30.UseVisualStyleBackColor = true;
-            this.radAlexR1_30.Click += new System.EventHandler(this.radAlexR_30_Click);
+            this.radAlexR1_30.CheckedChanged += new System.EventHandler(this.radAlexR_30_CheckedChanged);
             // 
             // radAlexR3_30
             // 
@@ -3625,7 +3627,7 @@
             this.radAlexR3_30.TabIndex = 2;
             this.radAlexR3_30.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_30.UseVisualStyleBackColor = true;
-            this.radAlexR3_30.Click += new System.EventHandler(this.radAlexR_30_Click);
+            this.radAlexR3_30.CheckedChanged += new System.EventHandler(this.radAlexR_30_CheckedChanged);
             // 
             // panel4
             // 
@@ -3647,7 +3649,7 @@
             this.radAlexR2_40.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_40.TabIndex = 1;
             this.radAlexR2_40.UseVisualStyleBackColor = true;
-            this.radAlexR2_40.Click += new System.EventHandler(this.radAlexR_40_Click);
+            this.radAlexR2_40.CheckedChanged += new System.EventHandler(this.radAlexR_40_CheckedChanged);
             // 
             // radAlexR1_40
             // 
@@ -3660,7 +3662,7 @@
             this.radAlexR1_40.TabStop = true;
             this.radAlexR1_40.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_40.UseVisualStyleBackColor = true;
-            this.radAlexR1_40.Click += new System.EventHandler(this.radAlexR_40_Click);
+            this.radAlexR1_40.CheckedChanged += new System.EventHandler(this.radAlexR_40_CheckedChanged);
             // 
             // radAlexR3_40
             // 
@@ -3671,7 +3673,7 @@
             this.radAlexR3_40.TabIndex = 2;
             this.radAlexR3_40.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_40.UseVisualStyleBackColor = true;
-            this.radAlexR3_40.Click += new System.EventHandler(this.radAlexR_40_Click);
+            this.radAlexR3_40.CheckedChanged += new System.EventHandler(this.radAlexR_40_CheckedChanged);
             // 
             // panel3
             // 
@@ -3693,7 +3695,7 @@
             this.radAlexR2_60.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_60.TabIndex = 1;
             this.radAlexR2_60.UseVisualStyleBackColor = true;
-            this.radAlexR2_60.Click += new System.EventHandler(this.radAlexR_60_Click);
+            this.radAlexR2_60.CheckedChanged += new System.EventHandler(this.radAlexR_60_CheckedChanged);
             // 
             // radAlexR1_60
             // 
@@ -3706,7 +3708,7 @@
             this.radAlexR1_60.TabStop = true;
             this.radAlexR1_60.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_60.UseVisualStyleBackColor = true;
-            this.radAlexR1_60.Click += new System.EventHandler(this.radAlexR_60_Click);
+            this.radAlexR1_60.CheckedChanged += new System.EventHandler(this.radAlexR_60_CheckedChanged);
             // 
             // radAlexR3_60
             // 
@@ -3717,7 +3719,7 @@
             this.radAlexR3_60.TabIndex = 2;
             this.radAlexR3_60.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_60.UseVisualStyleBackColor = true;
-            this.radAlexR3_60.Click += new System.EventHandler(this.radAlexR_60_Click);
+            this.radAlexR3_60.CheckedChanged += new System.EventHandler(this.radAlexR_60_CheckedChanged);
             // 
             // panel2
             // 
@@ -3739,7 +3741,7 @@
             this.radAlexR2_80.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_80.TabIndex = 1;
             this.radAlexR2_80.UseVisualStyleBackColor = true;
-            this.radAlexR2_80.Click += new System.EventHandler(this.radAlexR_80_Click);
+            this.radAlexR2_80.CheckedChanged += new System.EventHandler(this.radAlexR_80_CheckedChanged);
             // 
             // radAlexR1_80
             // 
@@ -3752,7 +3754,7 @@
             this.radAlexR1_80.TabStop = true;
             this.radAlexR1_80.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_80.UseVisualStyleBackColor = true;
-            this.radAlexR1_80.Click += new System.EventHandler(this.radAlexR_80_Click);
+            this.radAlexR1_80.CheckedChanged += new System.EventHandler(this.radAlexR_80_CheckedChanged);
             // 
             // radAlexR3_80
             // 
@@ -3763,7 +3765,7 @@
             this.radAlexR3_80.TabIndex = 2;
             this.radAlexR3_80.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_80.UseVisualStyleBackColor = true;
-            this.radAlexR3_80.Click += new System.EventHandler(this.radAlexR_80_Click);
+            this.radAlexR3_80.CheckedChanged += new System.EventHandler(this.radAlexR_80_CheckedChanged);
             // 
             // chkAlex6XV
             // 
@@ -4085,7 +4087,7 @@
             this.radAlexT2_160.Size = new System.Drawing.Size(16, 16);
             this.radAlexT2_160.TabIndex = 7;
             this.radAlexT2_160.UseVisualStyleBackColor = true;
-            this.radAlexT2_160.Click += new System.EventHandler(this.radAlexT_160_Click);
+            this.radAlexT2_160.CheckedChanged += new System.EventHandler(this.radAlexT_160_CheckedChanged);
             // 
             // radAlexT1_160
             // 
@@ -4098,7 +4100,7 @@
             this.radAlexT1_160.TabStop = true;
             this.radAlexT1_160.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexT1_160.UseVisualStyleBackColor = true;
-            this.radAlexT1_160.Click += new System.EventHandler(this.radAlexT_160_Click);
+            this.radAlexT1_160.CheckedChanged += new System.EventHandler(this.radAlexT_160_CheckedChanged);
             // 
             // radAlexT3_160
             // 
@@ -4109,7 +4111,7 @@
             this.radAlexT3_160.TabIndex = 8;
             this.radAlexT3_160.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexT3_160.UseVisualStyleBackColor = true;
-            this.radAlexT3_160.Click += new System.EventHandler(this.radAlexT_160_Click);
+            this.radAlexT3_160.CheckedChanged += new System.EventHandler(this.radAlexT_160_CheckedChanged);
             // 
             // panel1
             // 
@@ -4131,7 +4133,7 @@
             this.radAlexR2_160.Size = new System.Drawing.Size(16, 16);
             this.radAlexR2_160.TabIndex = 1;
             this.radAlexR2_160.UseVisualStyleBackColor = true;
-            this.radAlexR2_160.Click += new System.EventHandler(this.radAlexR_160_Click);
+            this.radAlexR2_160.CheckedChanged += new System.EventHandler(this.radAlexR_160_CheckedChanged);
             // 
             // radAlexR1_160
             // 
@@ -4144,7 +4146,7 @@
             this.radAlexR1_160.TabStop = true;
             this.radAlexR1_160.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.radAlexR1_160.UseVisualStyleBackColor = true;
-            this.radAlexR1_160.Click += new System.EventHandler(this.radAlexR_160_Click);
+            this.radAlexR1_160.CheckedChanged += new System.EventHandler(this.radAlexR_160_CheckedChanged);
             // 
             // radAlexR3_160
             // 
@@ -4155,7 +4157,7 @@
             this.radAlexR3_160.TabIndex = 2;
             this.radAlexR3_160.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radAlexR3_160.UseVisualStyleBackColor = true;
-            this.radAlexR3_160.Click += new System.EventHandler(this.radAlexR_160_Click);
+            this.radAlexR3_160.CheckedChanged += new System.EventHandler(this.radAlexR_160_CheckedChanged);
             // 
             // chkAlex160XV
             // 
@@ -12400,7 +12402,6 @@
             0,
             0,
             0});
-            this.udAlex6BPFStart.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // udAlex6BPFEnd
             // 
@@ -12429,7 +12430,6 @@
             0,
             0,
             0});
-            this.udAlex6BPFEnd.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // chkAlexHPFBypass
             // 
@@ -12624,7 +12624,6 @@
             0,
             0,
             65536});
-            this.udAlex10mLPFEnd.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex10mLPFStart
             // 
@@ -12653,7 +12652,6 @@
             0,
             0,
             196608});
-            this.udAlex10mLPFStart.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex6mLPFEnd
             // 
@@ -12682,7 +12680,6 @@
             0,
             0,
             0});
-            this.udAlex6mLPFEnd.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex6mLPFStart
             // 
@@ -12711,7 +12708,6 @@
             0,
             0,
             0});
-            this.udAlex6mLPFStart.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex20mLPFStart
             // 
@@ -12740,7 +12736,6 @@
             0,
             0,
             65536});
-            this.udAlex20mLPFStart.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex15mLPFStart
             // 
@@ -12769,7 +12764,6 @@
             0,
             0,
             196608});
-            this.udAlex15mLPFStart.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex20mLPFEnd
             // 
@@ -12798,7 +12792,6 @@
             0,
             0,
             131072});
-            this.udAlex20mLPFEnd.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex15mLPFEnd
             // 
@@ -12827,7 +12820,6 @@
             0,
             0,
             196608});
-            this.udAlex15mLPFEnd.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex40mLPFEnd
             // 
@@ -12856,7 +12848,6 @@
             0,
             0,
             65536});
-            this.udAlex40mLPFEnd.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex40mLPFStart
             // 
@@ -12885,7 +12876,6 @@
             0,
             0,
             196608});
-            this.udAlex40mLPFStart.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex80mLPFEnd
             // 
@@ -12914,7 +12904,6 @@
             0,
             0,
             0});
-            this.udAlex80mLPFEnd.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex80mLPFStart
             // 
@@ -12943,7 +12932,6 @@
             0,
             0,
             65536});
-            this.udAlex80mLPFStart.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex160mLPFEnd
             // 
@@ -12972,7 +12960,6 @@
             0,
             0,
             0});
-            this.udAlex160mLPFEnd.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex160mLPFStart
             // 
@@ -13001,7 +12988,6 @@
             0,
             0,
             65536});
-            this.udAlex160mLPFStart.ValueChanged += new System.EventHandler(this.udAlexLPFCntl_ValueChanged);
             // 
             // udAlex13HPFStart
             // 
@@ -13030,7 +13016,6 @@
             0,
             0,
             0});
-            this.udAlex13HPFStart.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // udAlex20HPFStart
             // 
@@ -13059,7 +13044,6 @@
             0,
             0,
             0});
-            this.udAlex20HPFStart.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // udAlex13HPFEnd
             // 
@@ -13088,7 +13072,6 @@
             0,
             0,
             196608});
-            this.udAlex13HPFEnd.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // udAlex20HPFEnd
             // 
@@ -13117,7 +13100,6 @@
             0,
             0,
             65536});
-            this.udAlex20HPFEnd.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // udAlex9_5HPFEnd
             // 
@@ -13146,7 +13128,6 @@
             0,
             0,
             131072});
-            this.udAlex9_5HPFEnd.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // udAlex9_5HPFStart
             // 
@@ -13175,7 +13156,6 @@
             0,
             0,
             65536});
-            this.udAlex9_5HPFStart.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // udAlex6_5HPFEnd
             // 
@@ -13204,7 +13184,6 @@
             0,
             0,
             65536});
-            this.udAlex6_5HPFEnd.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // udAlex6_5HPFStart
             // 
@@ -13233,7 +13212,6 @@
             0,
             0,
             0});
-            this.udAlex6_5HPFStart.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // udAlex1_5HPFEnd
             // 
@@ -13262,7 +13240,6 @@
             0,
             0,
             65536});
-            this.udAlex1_5HPFEnd.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // udAlex1_5HPFStart
             // 
@@ -13291,7 +13268,6 @@
             0,
             0,
             65536});
-            this.udAlex1_5HPFStart.ValueChanged += new System.EventHandler(this.udAlexHPFCntl_ValueChanged);
             // 
             // panelTS1
             // 
@@ -13353,11 +13329,11 @@
             this.tpInfo.Controls.Add(this.textBoxTS11);
             this.tpInfo.Controls.Add(this.textBoxTS10);
             this.tpInfo.Controls.Add(this.txtAlexRevADC);
-            this.tpInfo.Controls.Add(this.textBoxTS8);
-            this.tpInfo.Controls.Add(this.textBoxTS7);
-            this.tpInfo.Controls.Add(this.textBoxTS6);
-            this.tpInfo.Controls.Add(this.textBoxTS5);
-            this.tpInfo.Controls.Add(this.textBoxTS4);
+            this.tpInfo.Controls.Add(this.txtAlexBand);
+            this.tpInfo.Controls.Add(this.txtTXAnt);
+            this.tpInfo.Controls.Add(this.txtRXOut);
+            this.tpInfo.Controls.Add(this.txtRXAnt);
+            this.tpInfo.Controls.Add(this.txtAlexEnabled);
             this.tpInfo.Controls.Add(this.textBoxTS3);
             this.tpInfo.Controls.Add(this.txtAlexFwdADC);
             this.tpInfo.Controls.Add(this.txtFwdADC);
@@ -13385,7 +13361,6 @@
             this.labelTS103.Name = "labelTS103";
             this.labelTS103.Size = new System.Drawing.Size(111, 16);
             this.labelTS103.TabIndex = 171;
-            this.labelTS103.Text = "VFOAFreq";
             this.labelTS103.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS102
@@ -13396,7 +13371,7 @@
             this.labelTS102.Name = "labelTS102";
             this.labelTS102.Size = new System.Drawing.Size(111, 16);
             this.labelTS102.TabIndex = 170;
-            this.labelTS102.Text = "x";
+            this.labelTS102.Text = "Alex Enabled";
             this.labelTS102.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS101
@@ -13407,7 +13382,7 @@
             this.labelTS101.Name = "labelTS101";
             this.labelTS101.Size = new System.Drawing.Size(111, 16);
             this.labelTS101.TabIndex = 169;
-            this.labelTS101.Text = "txtVFOB VFOB";
+            this.labelTS101.Text = "Band";
             this.labelTS101.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS100
@@ -13418,7 +13393,7 @@
             this.labelTS100.Name = "labelTS100";
             this.labelTS100.Size = new System.Drawing.Size(111, 16);
             this.labelTS100.TabIndex = 168;
-            this.labelTS100.Text = "txtVFOB rx2_osc";
+            this.labelTS100.Text = "TX Ant";
             this.labelTS100.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS99
@@ -13429,7 +13404,7 @@
             this.labelTS99.Name = "labelTS99";
             this.labelTS99.Size = new System.Drawing.Size(111, 16);
             this.labelTS99.TabIndex = 167;
-            this.labelTS99.Text = "VFOBSub";
+            this.labelTS99.Text = "RX Out";
             this.labelTS99.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS98
@@ -13440,7 +13415,7 @@
             this.labelTS98.Name = "labelTS98";
             this.labelTS98.Size = new System.Drawing.Size(111, 16);
             this.labelTS98.TabIndex = 166;
-            this.labelTS98.Text = "txtVFOA - sub_osc";
+            this.labelTS98.Text = "RX Ant";
             this.labelTS98.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS97
@@ -13601,60 +13576,60 @@
             this.txtAlexRevADC.Size = new System.Drawing.Size(157, 20);
             this.txtAlexRevADC.TabIndex = 152;
             // 
-            // textBoxTS8
+            // txtAlexBand
             // 
-            this.textBoxTS8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.textBoxTS8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.textBoxTS8.ForeColor = System.Drawing.Color.White;
-            this.textBoxTS8.Location = new System.Drawing.Point(420, 150);
-            this.textBoxTS8.Name = "textBoxTS8";
-            this.textBoxTS8.ReadOnly = true;
-            this.textBoxTS8.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTS8.TabIndex = 151;
+            this.txtAlexBand.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtAlexBand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtAlexBand.ForeColor = System.Drawing.Color.White;
+            this.txtAlexBand.Location = new System.Drawing.Point(420, 150);
+            this.txtAlexBand.Name = "txtAlexBand";
+            this.txtAlexBand.ReadOnly = true;
+            this.txtAlexBand.Size = new System.Drawing.Size(157, 20);
+            this.txtAlexBand.TabIndex = 151;
             // 
-            // textBoxTS7
+            // txtTXAnt
             // 
-            this.textBoxTS7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.textBoxTS7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.textBoxTS7.ForeColor = System.Drawing.Color.White;
-            this.textBoxTS7.Location = new System.Drawing.Point(420, 105);
-            this.textBoxTS7.Name = "textBoxTS7";
-            this.textBoxTS7.ReadOnly = true;
-            this.textBoxTS7.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTS7.TabIndex = 150;
+            this.txtTXAnt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtTXAnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtTXAnt.ForeColor = System.Drawing.Color.White;
+            this.txtTXAnt.Location = new System.Drawing.Point(420, 105);
+            this.txtTXAnt.Name = "txtTXAnt";
+            this.txtTXAnt.ReadOnly = true;
+            this.txtTXAnt.Size = new System.Drawing.Size(157, 20);
+            this.txtTXAnt.TabIndex = 150;
             // 
-            // textBoxTS6
+            // txtRXOut
             // 
-            this.textBoxTS6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.textBoxTS6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.textBoxTS6.ForeColor = System.Drawing.Color.White;
-            this.textBoxTS6.Location = new System.Drawing.Point(420, 60);
-            this.textBoxTS6.Name = "textBoxTS6";
-            this.textBoxTS6.ReadOnly = true;
-            this.textBoxTS6.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTS6.TabIndex = 149;
+            this.txtRXOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtRXOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtRXOut.ForeColor = System.Drawing.Color.White;
+            this.txtRXOut.Location = new System.Drawing.Point(420, 60);
+            this.txtRXOut.Name = "txtRXOut";
+            this.txtRXOut.ReadOnly = true;
+            this.txtRXOut.Size = new System.Drawing.Size(157, 20);
+            this.txtRXOut.TabIndex = 149;
             // 
-            // textBoxTS5
+            // txtRXAnt
             // 
-            this.textBoxTS5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.textBoxTS5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.textBoxTS5.ForeColor = System.Drawing.Color.White;
-            this.textBoxTS5.Location = new System.Drawing.Point(420, 20);
-            this.textBoxTS5.Name = "textBoxTS5";
-            this.textBoxTS5.ReadOnly = true;
-            this.textBoxTS5.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTS5.TabIndex = 148;
+            this.txtRXAnt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtRXAnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtRXAnt.ForeColor = System.Drawing.Color.White;
+            this.txtRXAnt.Location = new System.Drawing.Point(420, 20);
+            this.txtRXAnt.Name = "txtRXAnt";
+            this.txtRXAnt.ReadOnly = true;
+            this.txtRXAnt.Size = new System.Drawing.Size(157, 20);
+            this.txtRXAnt.TabIndex = 148;
             // 
-            // textBoxTS4
+            // txtAlexEnabled
             // 
-            this.textBoxTS4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.textBoxTS4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.textBoxTS4.ForeColor = System.Drawing.Color.White;
-            this.textBoxTS4.Location = new System.Drawing.Point(420, 195);
-            this.textBoxTS4.Name = "textBoxTS4";
-            this.textBoxTS4.ReadOnly = true;
-            this.textBoxTS4.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTS4.TabIndex = 147;
+            this.txtAlexEnabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtAlexEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtAlexEnabled.ForeColor = System.Drawing.Color.White;
+            this.txtAlexEnabled.Location = new System.Drawing.Point(420, 195);
+            this.txtAlexEnabled.Name = "txtAlexEnabled";
+            this.txtAlexEnabled.ReadOnly = true;
+            this.txtAlexEnabled.Size = new System.Drawing.Size(157, 20);
+            this.txtAlexEnabled.TabIndex = 147;
             // 
             // textBoxTS3
             // 
@@ -28601,6 +28576,19 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
+            // chkRxOutOnTx
+            // 
+            this.chkRxOutOnTx.AutoSize = true;
+            this.chkRxOutOnTx.Image = null;
+            this.chkRxOutOnTx.Location = new System.Drawing.Point(471, 212);
+            this.chkRxOutOnTx.Name = "chkRxOutOnTx";
+            this.chkRxOutOnTx.Size = new System.Drawing.Size(98, 17);
+            this.chkRxOutOnTx.TabIndex = 2;
+            this.chkRxOutOnTx.Text = "Rx 1 Out on Tx";
+            this.toolTip1.SetToolTip(this.chkRxOutOnTx, "Enable Rx 1 Out on Alex during transmit.");
+            this.chkRxOutOnTx.UseVisualStyleBackColor = true;
+            this.chkRxOutOnTx.CheckedChanged += new System.EventHandler(this.chkRxOutOnTx_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -28621,6 +28609,7 @@
             this.Closing += new System.ComponentModel.CancelEventHandler(this.Setup_Closing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Setup_KeyDown);
             tpAlexAntCtrl.ResumeLayout(false);
+            tpAlexAntCtrl.PerformLayout();
             this.grpAlexAntCtrl.ResumeLayout(false);
             this.panel23.ResumeLayout(false);
             this.panel22.ResumeLayout(false);
@@ -29174,5 +29163,6 @@
         private System.Windows.Forms.RadioButtonTS radANFPostAGC;
         private System.Windows.Forms.RadioButtonTS radANFPreAGC;
         private System.Windows.Forms.CheckBoxTS chkFullDiscovery;
+        private System.Windows.Forms.CheckBoxTS chkRxOutOnTx;
     }
 }
