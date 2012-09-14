@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="PowerSDR (W5WC)" Language="1033" Version="2.2.3.6" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="928400BC-8BCE-470C-A1D6-4B7A1AB366A3">
+		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+    <PropertyRef Id="NETFRAMEWORK40FULL" />
+    <Condition Message="You must install Microsoft .NET 4.0 (FULL OR CLIENT!) first!">
+      <![CDATA[Installed OR NETFRAMEWORK40FULL OR NETFRAMEWORK40CLIENT]]>
+    </Condition>
+
+    <WixVariable Id="WixUILicenseRtf" Value="GNU_GENERAL_PUBLIC_LICENSE.rtf" />
+
+		<Feature Id="ProductFeature" Title="PowerSDR" Level="1" ConfigurableDirectory="INSTALLFOLDER">
+			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="StartMenuShortcut" />
+       <ComponentRef Id="DesktopShortcut" />
+    </Feature>
+    
+    <Feature Id="VC10Redist" Title="Visual C++ 10.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
+      <MergeRef Id="VC10Redist"/>
+    </Feature>
+
+    <Feature Id="OzyDriver" Title="LibUSB0 Driver for Ozy" AllowAdvertise="no" Display="hidden" Level="1">
+      <MergeRef Id="LibUSB0DriverForOzy"/>
+    </Feature>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_Mondo" />
+  </Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+      <Merge Id="VC10Redist" SourceFile="Microsoft_VC100_CRT_x86.msm" DiskId="1" Language="0"/>
+      
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="HPSDRFolder" Name="OpenHPSDR">
+          <Directory Id="OzyDriver" Name="LibUSB0 Driver for Ozy">
+            <Merge Id="LibUSB0DriverForOzy" SourceFile="LibUSB0DriverMergeModule.msm" DiskId="1" Language="1033"/>
+          </Directory>
+          
+				  <Directory Id="INSTALLFOLDER" Name="PowerSDR (W5WC)" />
+			  </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="OpenHPSDRShortcutsDir" Name="OpenHPSDR">
+          <Directory Id="ShortcutsDir" Name="PowerSDR (W5WC)">
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="DesktopFolder">
+      </Directory>
+
+    </Directory>
+	</Fragment>
+
+	<Fragment>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="DesktopShortcut" Guid="FE8AF3BA-DD84-4933-BA1F-9D94815B6D4D">
+        <Shortcut Id="ProgramDesktopShortcut"
+                  Name="PowerSDR (W5WC)"
+                  Description="Run PowerSDR (W5WC)"
+                  Target="[INSTALLFOLDER]PowerSDR.exe"
+                  WorkingDirectory="INSTALLFOLDER"
+                 />
+        <RegistryValue Root="HKLM" Key="Software\OpenHPSDR\W5WC PowerSDR"
+                Name="desktopShortcut" Type="integer" Value="1" KeyPath="yes"
+                 />
+
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="ShortcutsDir">
+      <Component Id="StartMenuShortcut">
+        <Shortcut Id="PowerSDRShortcut"
+                  Name="PowerSDR (W5WC)"
+                  Description="Run PowerSDR (W5WC)"
+                  Target="[INSTALLFOLDER]PowerSDR.exe"
+                  WorkingDirectory="INSTALLFOLDER"
+                  />
+
+        <RemoveFolder Id="RemoveShortcutsDir" On="uninstall" />
+
+        <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\OpenHPSDR\W5WC PowerSDR"
+                     Name="installed"
+                     Type="integer"
+                     Value="1"
+                     KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Guid="0A3402CA-E3AA-4D94-8244-2632A4B74C2E">
+        <File Id="PowerSDR.EXE"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\PowerSDR.exe"
+              KeyPath="yes"
+              />
+			</Component>
+      
+      <Component Guid="DB787A98-F8D5-4509-98D0-DED6EA7CBE67">
+        <File Id="CATStructs.xml"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\CATStructs.xml"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="69AA9BEB-0FAF-4856-9F97-27569063C4C1">
+        <File Id="libusb0.DLL"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\libusb0.dll"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="EE788DF9-647E-417D-8FF5-EB3E96779D71">
+        <File Id="InitOzy11.BAT"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\initozy11.bat"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="BDB33B94-9697-44F0-8E65-0202647FD133">
+        <File Id="InitOzy11.BAT.MANIFEST"
+              Source="initozy11.bat.manifest"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="4F9B98BB-5249-4F72-9159-0796BCC24763">
+        <File Id="DttSP.dll"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\DttSP.dll"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="68CC7BCE-A4BD-4B71-94B0-A0208FF2ABC1">
+        <File Id="LibFFTW3F3.DLL"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\libfftw3f-3.dll"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="EB5E0732-6F90-49AA-9541-4B078334FC37">
+        <File Id="JanusAudio.dll"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\JanusAudio.dll"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="2AFF9400-FCD2-4798-93EE-58D1812FD083">
+        <File Id="OJTone.exe"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\OJTone.exe"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="6CAD13AB-0D1B-45A4-9372-BC3E41DEBD3D">
+        <File Id="PA19.DLL"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\PA19.dll"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="87A55784-94E5-4412-866C-80F5049BF7AB">
+        <File Id="pthreadVC.DLL"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\pthreadVC.dll"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="56B55CD3-A06E-4CDE-8077-218C5B078F5E">
+        <File Id="loadFPGA.EXE"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\loadFPGA.exe"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="DD71DBD5-0FC3-410C-9DAA-038E17754D98">
+        <File Id="loadFW.EXE"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\loadFW.exe"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="19B1AE94-C9BB-44CD-AB46-1AD226FCF594">
+        <File Id="msecsleep.EXE"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\msecsleep.exe"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="FF0A4A03-55D3-4BC1-9722-E279DC6E2E1E">
+        <File Id="writeI2C.EXE"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\writeI2C.exe"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="BE737539-02F8-4123-8736-DA9605F30DF8">
+        <File Id="Ozy_Janus.v18.rbf"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\Ozy_Janus.v18.rbf"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="5F6AABEC-BE0C-42EB-870E-D6C107FEA566">
+        <File Id="Ozy_Janus.v19.rbf"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\Ozy_Janus.v19.rbf"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="29ADF70D-0B5A-4E69-B98C-DCC7AB234A0D">
+        <File Id="Ozy_Janus.v20.rbf"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\Ozy_Janus.v20.rbf"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="039D1DC8-8221-4175-B00E-97B80AD117B6">
+        <File Id="Ozy_Janus.v21.rbf"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\Ozy_Janus.v21.rbf"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="E2748AEE-81AA-44F9-9715-6AEF5B9AA520">
+        <File Id="Ozy_Janus.v22.rbf"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\Ozy_Janus.v22.rbf"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="035B783D-35B1-457E-A40F-7581A9F363F1">
+        <File Id="ozyfwsdr1k.hex"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\ozyfw-sdr1k.hex"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="FCD30686-C5EA-4F3F-81E2-978A8C3220C6">
+        <File Id="fftw_wisdom.exe"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\fftw_wisdom.exe"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <!--
+      <Component Guid="795964DC-2354-445B-B236-B01B742D5AE3">
+        <File Id="OpenHPSDR_Skins.exe"
+              Source="OpenHPSDR_Skins.exe"
+              KeyPath="yes"
+              />
+      </Component>
+      -->
+    </ComponentGroup>
+
+    <!-- Had a problem.  The initial version of this SFX required/asked for Admin rights, which caused
+        the install to fail (or not succeed.)  Doug W5WC provided a version that doesn't ask for Admin
+        rights.  This seems to succeed!  Doug has also modified PowerSDR so that if the Default dir doesn't
+        exist (for Skins), it looks for the OpenHPSDR-Gray directory and uses that, if no other skin has
+        already been chosen.  This means that a first-time installation is going to look 'nice' and work well
+      -->
+    <Binary Id="InstallSkins" SourceFile="OpenHPSDR_Skins.exe" />
+    <CustomAction Id="InstallSkins_CA" BinaryKey="InstallSkins"
+        Impersonate="yes" Execute="deferred" ExeCommand="" Return="check"/>
+   
+    <!--     -->
+
+   <InstallExecuteSequence>
+      <Custom Action='InstallSkins_CA' Before='InstallFinalize' />
+    </InstallExecuteSequence>
+    <!--   -->
+  </Fragment>
+</Wix>
