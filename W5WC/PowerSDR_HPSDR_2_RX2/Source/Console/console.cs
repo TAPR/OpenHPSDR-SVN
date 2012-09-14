@@ -32948,6 +32948,16 @@ namespace PowerSDR
                     /* if (rx1_dsp_mode != DSPMode.DRM &&
                          rx1_dsp_mode != DSPMode.SPEC)
                          if_shift = true;*/
+
+                    if (penny_ext_ctrl_enabled)
+                    {
+                      //  Penny.getPenny().UpdateExtCtrl(rx1_band, mox);
+                    }
+                    if (alex_ant_ctrl_enabled)
+                    {
+                        Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox);
+                    }
+
                 }
             }
             if (!fwc_init || current_model != Model.FLEX5000)

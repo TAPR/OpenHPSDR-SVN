@@ -1708,11 +1708,11 @@ namespace PowerSDR
         public TextBoxTS textBoxTS11;
         public TextBoxTS textBoxTS10;
         public TextBoxTS txtAlexRevADC;
-        public TextBoxTS textBoxTS8;
-        public TextBoxTS textBoxTS7;
-        public TextBoxTS textBoxTS6;
-        public TextBoxTS textBoxTS5;
-        public TextBoxTS textBoxTS4;
+        public TextBoxTS txtAlexBand;
+        public TextBoxTS txtTXAnt;
+        public TextBoxTS txtRXOut;
+        public TextBoxTS txtRXAnt;
+        public TextBoxTS txtAlexEnabled;
         public TextBoxTS textBoxTS3;
         public TextBoxTS txtAlexFwdADC;
         public TextBoxTS txtFwdADC;
@@ -2937,6 +2937,10 @@ namespace PowerSDR
             EventArgs e = EventArgs.Empty;
 
             // General Tab
+          //  radAlexR_160_Click(this, e);
+           // radAlexR_160_CheckedChanged(this, e);
+
+            chkAlexAntCtrl_CheckedChanged(this, e);
             comboGeneralLPTAddr_SelectedIndexChanged(this, e);
             udGeneralLPTDelay_ValueChanged(this, e);
             chkGeneralRXOnly_CheckedChanged(this, e);
@@ -5285,7 +5289,7 @@ namespace PowerSDR
                 tcGeneral.SelectedIndex = 0;
             }*/
 
-            if (tcAudio.TabPages.Contains(tpVAC2))
+           if (tcAudio.TabPages.Contains(tpVAC2))
             {
                 tcAudio.TabPages.Remove(tpVAC2);
                 tcAudio.SelectedIndex = 0;
@@ -5295,7 +5299,7 @@ namespace PowerSDR
             {
                 tcGeneral.TabPages.Remove(tpInfo);
                 tcGeneral.SelectedIndex = 0;
-            }
+            } 
 
             if (!tcGeneral.TabPages.Contains(tpHPSDR))
             {
@@ -5341,7 +5345,7 @@ namespace PowerSDR
             if (!chkAlexPresent.Checked)
             {
                 chkAlexAntCtrl.Enabled = false;
-                grpAlexAntCtrl.Enabled = false;
+                SetAlexAntEnabled(false);
             }
             if (!(chkPennyPresent.Checked || chkPennyLane.Checked))
             {
@@ -11713,11 +11717,12 @@ namespace PowerSDR
             if (chkAlexPresent.Checked)
             {
                 chkAlexAntCtrl.Enabled = true;
+                chkAlexAntCtrl.Checked = true;
                 radAlexManualCntl.Enabled = true;
-                if (!chkAlexAntCtrl.Checked)
-                {
-                    grpAlexAntCtrl.Enabled = false;
-                }
+              //  if (!chkAlexAntCtrl.Checked)
+              //  {
+                //    grpAlexAntCtrl.Enabled = false;
+               // }
                 console.chkSR.Enabled = true;
                 if (console.rx2_preamp_present) console.chkRX2Preamp.Visible = false;           
             }
@@ -12317,7 +12322,6 @@ namespace PowerSDR
 														 new[] { radAlexT1_10,  radAlexT2_10, radAlexT3_10 },
 														 new[] { radAlexT1_6,  radAlexT2_6, radAlexT3_6 }
 													 };
-
         }
 
         public bool SetAlexAntEnabled(bool state)
@@ -12378,61 +12382,6 @@ namespace PowerSDR
         }
 
         private void radAlexR_6_CheckedChanged(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B6M, false);
-        }
-
-        private void radAlexR_160_Click(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B160M, false);
-        }
-
-        private void radAlexR_80_Click(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B80M, false);
-        }
-
-        private void radAlexR_60_Click(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B60M, false);
-        }
-
-        private void radAlexR_40_Click(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B40M, false);
-        }
-
-        private void radAlexR_30_Click(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B30M, false);
-        }
-
-        private void radAlexR_20_Click(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B20M, false);
-        }
-
-        private void radAlexR_17_Click(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B17M, false);
-        }
-
-        private void radAlexR_15_Click(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B15M, false);
-        }
-
-        private void radAlexR_12_Click(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B12M, false);
-        }
-
-        private void radAlexR_10_Click(object sender, System.EventArgs e)
-        {
-            ProcessAlexAntRadioButton(sender, Band.B10M, false);
-        }
-
-        private void radAlexR_6_Click(object sender, System.EventArgs e)
         {
             ProcessAlexAntRadioButton(sender, Band.B6M, false);
         }
@@ -12613,8 +12562,6 @@ namespace PowerSDR
 
             if (sender == null) return;
             if (sender.GetType() != typeof(CheckBoxTS)) return;
-            //  CheckBoxTS chkBxTS = (CheckBoxTS)sender;
-            //  if (!chkBxTS.Checked) return;
 
             int idx = (int)band - (int)Band.B160M;
 
@@ -12661,6 +12608,11 @@ namespace PowerSDR
 
         private void ProcessAlexAntRadioButton(object sender, Band band, bool is_xmit)
         {
+            if (sender == null) return;
+            if (sender.GetType() != typeof(RadioButtonTS)) return;
+            RadioButtonTS radBtnTS = (RadioButtonTS)sender;
+            if (!radBtnTS.Checked) return;
+
             int idx = (int)band - (int)Band.B160M;
 
             RadioButtonTS[] buttons = is_xmit ? AlexTxAntButtons[idx] : AlexRxAntButtons[idx];
@@ -12675,10 +12627,23 @@ namespace PowerSDR
                 break;
             }
 
-            if (ant == 0)
+            
+            if (ant == 0) 
             {
-                System.Console.WriteLine("internal error - did not find sender");
-                return;
+                int i = 0;
+                    foreach (RadioButtonTS b in buttons)
+                {
+                        if (b.Checked)
+                        {
+                            ant = i + 1;
+                            break;
+                        }
+                        i++;                   
+                }
+
+               
+               // System.Console.WriteLine("internal error - did not find sender");
+              //  return;
             }
 
             if (is_xmit)
@@ -13961,34 +13926,16 @@ namespace PowerSDR
                 val = 0;
                 JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
                 radBPHPFled.Checked = true;
-                console.chkSR.Checked = true;
+                console.chkSR.Checked = true; //ALEX console
             }
             if (radAlexManualCntl.Checked)
             {
-                // if (alex_fw_good)
-                // {
                 val = 1;
                 console.AlexPresent = chkAlexPresent.Checked;
                 console.chkSR.Checked = false;
-                // }
-                // else
-                // {
-                //     val = 0;
-                //     radAlexManualCntl.Checked = false;
-                //    radAlexManualCntl.Enabled = false;
-                // }
-            }
+             }
+
             JanusAudio.SetAlexManEnable(val);
-        }
-
-        private void udAlexHPFCntl_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void udAlexLPFCntl_ValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void chkAlexHPFBypass_CheckedChanged(object sender, EventArgs e)
@@ -14057,6 +14004,11 @@ namespace PowerSDR
                 JanusAudio.SetDiscoveryMode(1);
             else
                 JanusAudio.SetDiscoveryMode(0);
+        }
+
+        private void chkRxOutOnTx_CheckedChanged(object sender, EventArgs e)
+        {
+            Alex.RxOutOnTx = chkRxOutOnTx.Checked;
         }
 
     }
