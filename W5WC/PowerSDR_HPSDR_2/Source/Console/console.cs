@@ -33713,8 +33713,8 @@ namespace PowerSDR
 
                 if (PowerOn)
                 {
-                    SetupForm.textBoxTS5.Text = sub_osc.ToString();
-                    SetupForm.textBoxTS6.Text = VFOASubFreq.ToString();
+                    SetupForm.txtRXAnt.Text = sub_osc.ToString();
+                    SetupForm.txtRXOut.Text = VFOASubFreq.ToString();
                 }
 
                 UpdateRX1SubNotches();
@@ -33856,8 +33856,8 @@ namespace PowerSDR
 
                 if (PowerOn)
                 {
-                    SetupForm.textBoxTS7.Text = rx2_osc.ToString();
-                    SetupForm.textBoxTS8.Text = VFOBFreq.ToString();
+                    SetupForm.txtTXAnt.Text = rx2_osc.ToString();
+                    SetupForm.txtAlexBand.Text = VFOBFreq.ToString();
                 }
 
                 UpdateRX1SubNotches();

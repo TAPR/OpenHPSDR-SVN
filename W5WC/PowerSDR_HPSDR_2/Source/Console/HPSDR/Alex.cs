@@ -57,6 +57,7 @@ namespace PowerSDR
 		private byte[] RxAnt = new byte[12]; 
 		private byte[] RxOnlyAnt = new byte[12]; // 1 = rx1, 2 = rx2, 3 = xv, 0 = none selected 
 
+        public static bool RxOutOnTx = false;
 	
 		public void setRxAnt(Band band, byte ant) 
 		{ 
@@ -191,8 +192,8 @@ namespace PowerSDR
 
 			if ( tx ) 
 			{ 
-				rx_ant = 0; 
-				rx_out = 0; 
+				rx_ant = 0;
+                rx_out = RxOutOnTx ? 1 : 0; 
 				tx_ant = TxAnt[idx]; 
 			} 
 			else 
@@ -203,7 +204,7 @@ namespace PowerSDR
 			} 
 			JanusAudio.SetAlexAntBits(rx_ant, tx_ant, rx_out); 
 
-			// don't allow changing antenna selections when nox is activated 
+			// don't allow changing antenna selections when mox is activated 
 			if ( tx )  
 			{ 
 				AlexEnableSavedState = Console.getConsole().SetupForm.SetAlexAntEnabled(false); 
@@ -214,7 +215,13 @@ namespace PowerSDR
 				Console.getConsole().SetupForm.SetAlexAntEnabled(AlexEnableSavedState); 
 				AlexEnableIsStateSaved = false; 
 			}
-			
+
+           //  Console.getConsole().SetupForm.txtRXAnt.Text = rx_ant.ToString();
+           //  Console.getConsole().SetupForm.txtRXOut.Text = rx_out.ToString();
+            // Console.getConsole().SetupForm.txtTXAnt.Text = tx_ant.ToString();
+           //  Console.getConsole().SetupForm.txtAlexBand.Text = band.ToString();
+           //  Console.getConsole().SetupForm.txtAlexEnabled.Text = alex_enabled.ToString();
+
 			return; 
 		}
 
