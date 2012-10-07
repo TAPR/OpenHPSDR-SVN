@@ -1,4 +1,4 @@
-/*  wcpAGC.c
+/*  compress.h
 
 This file is part of a program that implements a Software-Defined Radio.
 

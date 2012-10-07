@@ -527,31 +527,6 @@ SetSampleRate (double newSampleRate)
 	return rtn;
 }
 
-DttSP_EXP void
-SetNR (unsigned int thread, unsigned subrx, BOOLEAN setit)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].anr.flag = setit;
-	if (!setit) 
-	{
-	memset(rx[thread][subrx].anr.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
-	}
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void
-SetNRvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].anr.gen->adaptive_filter_size = taps;
-	rx[thread][subrx].anr.gen->delay = delay;
-	rx[thread][subrx].anr.gen->adaptation_rate = (REAL)gain;
-	rx[thread][subrx].banr.gen->adaptation_rate = (REAL)gain;
-	rx[thread][subrx].anr.gen->leakage = (REAL)leakage;
-	memset(rx[thread][subrx].anr.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
 /*
 DttSP_EXP void
 SetTXCompandSt (unsigned int thread, BOOLEAN setit)
@@ -618,7 +593,6 @@ SetANF (unsigned int thread, unsigned subrx, BOOLEAN setit)
 	memset(rx[thread][subrx].anf.gen->w, 0, sizeof(double) * DLINE_SIZE);
 	memset(rx[thread][subrx].anf.gen->d, 0, sizeof(double) * DLINE_SIZE);
 	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
-	rx[thread][subrx].anf.flag = setit;
 	sem_post(&top[thread].sync.upd.sem);
 }
 
@@ -627,14 +601,6 @@ DttSP_EXP void  // (NR0V) modified
 SetANFvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
 {
 	sem_wait(&top[thread].sync.upd.sem);
-
-	//rx[thread][subrx].anf.gen->adaptive_filter_size = taps;
-	//rx[thread][subrx].anf.gen->delay = delay;
-	//rx[thread][subrx].anf.gen->adaptation_rate = (REAL)gain;
-	//rx[thread][subrx].banf.gen->adaptation_rate = (REAL)gain;
-	//rx[thread][subrx].anf.gen->leakage = (REAL)leakage;
-	//memset(rx[thread][subrx].anf.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
-
 	rx[thread][subrx].anf.gen->n_taps = taps;
 	rx[thread][subrx].anf.gen->delay = delay;
 	rx[thread][subrx].anf.gen->two_mu = gain;		//try two_mu = 1e-4
@@ -652,6 +618,42 @@ SetANFposition (unsigned int thread, unsigned subrx, int position)
 	rx[thread][subrx].anf.position = position;
 	memset (rx[thread][subrx].anf.gen->w, 0, sizeof(double) * DLINE_SIZE);
 	memset(rx[thread][subrx].anf.gen->d, 0, sizeof(double) * DLINE_SIZE);
+	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void  // (NR0V) modified
+SetANR (unsigned int thread, unsigned subrx, BOOLEAN setit)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].anr.flag = setit;
+	memset(rx[thread][subrx].anr.gen->w, 0, sizeof(double) * DLINE_SIZE);
+	memset(rx[thread][subrx].anr.gen->d, 0, sizeof(double) * DLINE_SIZE);
+	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void  // (NR0V) modified
+SetANRvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].anr.gen->n_taps = taps;
+	rx[thread][subrx].anr.gen->delay = delay;
+	rx[thread][subrx].anr.gen->two_mu = gain;		//try two_mu = 
+	rx[thread][subrx].anr.gen->gamma = leakage;		//try gamma = 
+	memset (rx[thread][subrx].anr.gen->w, 0, sizeof(double) * DLINE_SIZE);
+	memset(rx[thread][subrx].anr.gen->d, 0, sizeof(double) * DLINE_SIZE);
+	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void	// (NR0V) added
+SetANRposition (unsigned int thread, unsigned subrx, int position)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].anr.position = position;
+	memset (rx[thread][subrx].anr.gen->w, 0, sizeof(double) * DLINE_SIZE);
+	memset(rx[thread][subrx].anr.gen->d, 0, sizeof(double) * DLINE_SIZE);
 	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
 	sem_post(&top[thread].sync.upd.sem);
 }

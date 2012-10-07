@@ -380,6 +380,48 @@ KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(int tx) {
         return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetUserOut0(int out) {
+        if ( out == 0 ) {
+                UserOut0 = 0;
+        }
+        else {
+                UserOut0 = 1;
+        }
+       return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetUserOut1(int out) {
+       UserOut1 = out;
+        if ( out == 0 ) {
+                UserOut1 = 0;
+        }
+        else {
+                UserOut1 = 0x2;
+        }
+        return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetUserOut2(int out) {
+       UserOut2 = out;
+        if ( out == 0 ) {
+                UserOut2 = 0;
+        }
+        else {
+                UserOut2 = 0x4;
+        }
+        return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetUserOut3(int out) {
+       UserOut3 = out;
+        if ( out == 0 ) {
+                UserOut3 = 0;
+        }
+        else {
+                UserOut3 = 0x8;
+        }
+        return;
+}
 //
 // StopAudio -- undo what start audio did.  Close/Free/Destroy that which StartAudio Opened/Alloc'd/Created.
 //
@@ -552,7 +594,7 @@ KD5TFDVK6APHAUDIO_API void SetAlexManEnable(int bit) {
                 AlexManEnable = 0;
         }
         else {
-                AlexManEnable = (1 << 6);
+                AlexManEnable = 0x40; //(1 << 6);
         }
 //printf("SetAlexEnable: %d\n", bit); fflush(stdout); 
 }
@@ -572,8 +614,70 @@ KD5TFDVK6APHAUDIO_API void SetAlexHPFBits(int bits) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetAlex2HPFBits(int bits) { 
+	Alex2HPFMask = bits; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetAlex3HPFBits(int bits) { 
+	Alex3HPFMask = bits; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetAlex4HPFBits(int bits) { 
+	Alex4HPFMask = bits; 
+	return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetAlexLPFBits(int bits) { 
 	AlexLPFMask = bits; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetAlex2LPFBits(int bits) { 
+	Alex2LPFMask = bits; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetAlex3LPFBits(int bits) { 
+	Alex3LPFMask = bits; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetAlex4LPFBits(int bits) { 
+	Alex4LPFMask = bits; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableApolloFilter(int bits) { 
+	if (bits == 1)
+		ApolloFilt = 0x4; 
+	else
+		ApolloFilt = 0;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableApolloTuner(int bits) { 
+	if (bits == 1)
+		ApolloTuner = 0x8; 
+	else
+		ApolloTuner = 0;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableApolloAutoTune(int bits) { 
+	if (bits == 1)
+		ApolloATU = 0x10; 
+	else
+		ApolloATU = 0;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetHermesFilter(int bits) { 
+	if (bits == 1)
+		HermesFilt = 0x20; 
+	else
+		HermesFilt = 0;
 	return;
 }
 
@@ -621,9 +725,14 @@ KD5TFDVK6APHAUDIO_API void SetLineIn(int bits) { // 0 == Mic-In, 1 == Line-In
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetLineBoost(int bits) {
+		LineBoost = bits;
+	return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetAlexAtten(int bits) { 
-	MercAtten = bits; 
-	if ( MercAtten > 3 ) MercAtten = 0; 
+	AlexAtten = bits; 
+	if ( AlexAtten > 3 ) AlexAtten = 0; 
 	return;
 }
 
@@ -701,28 +810,49 @@ KD5TFDVK6APHAUDIO_API void SetDiscoveryMode(int bit) {
 
 KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() { 
 	int n; 
+	//if ( !isMetis ) { 
+		//getI2CByte(I2C_MERC1_ADC_OFS);
+		//getI2CByte(I2C_MERC2_ADC_OFS);
+		//getI2CByte(I2C_MERC3_ADC_OFS);
+		//getI2CBytes(I2C_MERC4_ADC_OFS);
+	//}
 	n = ADC_Overloads; 
 	ADC_Overloads = 0; 
 	return n; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercuryFWVersion() { 
+	//if ( !isMetis ) { 
+		//getI2CByte(I2C_MERC1_FW);
+	//}
 	return MercuryFWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury2FWVersion() { 
+	//if ( !isMetis ) { 
+		//getI2CByte(I2C_MERC2_FW);
+	//}
 	return Mercury2FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury3FWVersion() { 
+	//if ( !isMetis ) { 
+		//getI2CByte(I2C_MERC3_FW);
+	//}
 	return Mercury3FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury4FWVersion() { 
+	//if ( !isMetis ) { 
+		//getI2CByte(I2C_MERC4_FW);
+	//}
 	return Mercury4FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getPenelopeFWVersion() { 
+	//if ( !isMetis ) { 
+		//getI2CByte(I2C_PENNY_FW);
+	//}
 	return PenelopeFWVersion; 
 } 
 

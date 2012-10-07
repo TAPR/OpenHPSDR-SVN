@@ -1,4 +1,3 @@
-#ifndef _anf_h
 /*  anf.h
 
 This file is part of a program that implements a Software-Defined Radio.
@@ -25,6 +24,8 @@ warren@wpratt.com
 
 */
 
+#ifndef _anf_h
+
 #define _anf_h
 
 #define DLINE_SIZE 1024
@@ -44,6 +45,7 @@ typedef struct _anf
 	int in_idx;
 
 	double lidx;
+	double lidx_min;
 	double lidx_max;
 	double ngamma;
 	double den_mult;
@@ -63,6 +65,7 @@ extern ANF newANF	(
 				double gamma,
 
 				double lidx,
+				double lidx_min,
 				double lidx_max,
 				double ngamma,
 				double den_mult,

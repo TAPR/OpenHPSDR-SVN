@@ -20,6 +20,7 @@
 // this module contains code to support the Alex Filter and Antenna Selection board 
 // 
 // 
+using System;
 
 namespace PowerSDR
 {
@@ -28,8 +29,8 @@ namespace PowerSDR
 	/// </summary>
 	public class Alex
 	{
-		private static Alex theSingleton = null; 
-		
+		private static Alex theSingleton = null;
+
 		public  static Alex getAlex() 
 		{ 
 			lock ( typeof(Alex) ) 
@@ -107,7 +108,12 @@ namespace PowerSDR
 				return Band.LAST; 				
 			} 
 
-			double freq = Console.getConsole().VFOAFreq;
+			double freq = 0.0;// = Console.getConsole().VFOAFreq;
+
+            if (c.RX1XVTRIndex >= 0)
+                freq = c.XVTRForm.TranslateFreq(freq);
+            else freq = Console.getConsole().VFOAFreq;
+
 			System.Console.WriteLine("Freq is: " + freq); 
 
 
@@ -160,7 +166,8 @@ namespace PowerSDR
 
 		public void UpdateAlexAntSelection(Band band, bool tx)  
 		{ 
-			UpdateAlexAntSelection(band, tx, true); 
+			UpdateAlexAntSelection(band, tx, true);
+           // Console.getConsole().SetupForm.textBoxTS11.Text = band.ToString();
 		}
 
 		public void UpdateAlexAntSelection(Band band, bool tx, bool alex_enabled) 
