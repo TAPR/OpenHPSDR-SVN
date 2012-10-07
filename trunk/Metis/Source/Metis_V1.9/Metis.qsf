@@ -144,7 +144,6 @@ set_location_assignment PIN_134 -to USEROUT0
 set_location_assignment PIN_135 -to USEROUT1
 set_location_assignment PIN_137 -to USEROUT2
 set_location_assignment PIN_173 -to USEROUT3
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name MISC_FILE Metis.dpf
 set_global_assignment -name VERILOG_FILE sp_rcv_ctrl.v
 set_global_assignment -name VERILOG_FILE ASMI_interface.v
@@ -181,3 +180,4 @@ set_global_assignment -name VERILOG_FILE Tx_fifo_ctrl.v
 set_global_assignment -name VERILOG_FILE Tx_MAC.v
 set_global_assignment -name QIP_FILE EPCS_fifo.qip
 set_global_assignment -name QIP_FILE SP_fifo.qip
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -47,7 +47,8 @@
 								USEROUT3: DB9 pin 4 = C3[3] 3.3V TTL output, FPGA pin 173
 						 - Released as version number v1.9 
 						 **** Built using Quartus II V11.1 sp2 ****
-
+						 
+						7 - Increased wideband data FIFO to 16k words
 			         				  
 			    
 	NOTES:  	  	- Under Settings > Analysis & Synthesis Settings > Verilig HDL Input, select SystemVerilog-2005 so can pass RAM to a module
@@ -993,11 +994,11 @@ FIFO #(RX_FIFO_SZ) RXF (.rst(IF_rst), .clk (IF_clk), .full(IF_Rx_fifo_full), .us
 
 
 //------------------------------------------------
-//   SP_fifo  (4096 words) dual clock FIFO
+//   SP_fifo  (16k words) dual clock FIFO
 //------------------------------------------------
 
 /*
-        The spectrum data FIFO is 16 by 4096 words long on the input.
+        The spectrum data FIFO is 16k words long on the input.
         Output is in Bytes for easy interface to the PHY code
         NB: The output flags are only valid after a read/write clock has taken place
 
@@ -1008,7 +1009,7 @@ FIFO #(RX_FIFO_SZ) RXF (.rst(IF_rst), .clk (IF_clk), .full(IF_Rx_fifo_full), .us
 						|				         |
 	sp_fifo_wrreq	|wrreq	     wrempty| sp_fifo_wrempty
 						|				         |
-			IF_clk	|>wrclk [11:0]wrusedw| sp_fifo_wrused
+			IF_clk	|>wrclk [13:0]wrusedw| sp_fifo_wrused
 						---------------------
 	sp_fifo_rdreq	|rdreq		   q[7:0]| sp_fifo_rddata
 						|                    | 
@@ -1030,7 +1031,7 @@ wire [7:0]sp_fifo_rddata;
 wire sp_fifo_wrempty;
 wire sp_fifo_wrfull;
 wire sp_fifo_wrreq;
-wire [11:0]sp_fifo_wrused;
+wire [13:0]sp_fifo_wrused;
 
 
 //--------------------------------------------------
