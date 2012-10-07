@@ -376,6 +376,15 @@ namespace PowerSDR
                                 //  c.PowerOn = false;
                             }
                             break;
+                        case 19: // K5SO Diversity & non-diversity
+                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
+                                (c != null && c.MercuryPresent && (mercury_ver != 33 && mercury_ver != 76)))
+                            {
+                                result = false;
+                                c.SetupForm.alex_fw_good = false;
+                                //  c.PowerOn = false;
+                            }
+                            break;
                         default:
                             // fwVersionMsg = "Invalid Firmware Level.\nPowerSDR requires Mercury v3.1\nYou have version: " + mercury_ver.ToString("0\\.0");
                             result = false;
@@ -611,7 +620,7 @@ namespace PowerSDR
                     fwVersionsChecked = true;
                 }
             }
-            InitOzyMic();
+          //  InitMic();
             return result;
         }
 
@@ -648,6 +657,36 @@ namespace PowerSDR
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetAlexLPFBits(int bits);
 
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetAlex2HPFBits(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetAlex2LPFBits(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void EnableApolloFilter(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void EnableApolloTuner(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void EnableApolloAutoTune(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetHermesFilter(int bits);
+ 
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetUserOut0(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetUserOut1(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetUserOut2(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetUserOut3(int bits);
+    
         [DllImport("JanusAudio.dll")] // sets number of receivers
         unsafe public static extern void SetNRx(int nrx);
 
@@ -721,18 +760,15 @@ namespace PowerSDR
             {
                 correction_factor = 1.0d;
             }
-            //f = f * 1000000;  // mhz -> hz 
-            // f = (float)((double)(f * 1000000.0) * correction_factor);
-            int f_freq = (int)((f * 1000000.0) * correction_factor);
-            // System.Console.WriteLine("corrected freq: " + f);
+
+            int f_freq = (int)((f * 1e6) * correction_factor);
             SetRX1VFOfreq(f_freq);
-            // c.SetupForm.txtDDSVFO.Text = f_freq.ToString();
-            // System.Console.WriteLine("rx1vfo: " + f_freq);
+           // c.SetupForm.txtRX1VFO.Text = f_freq.ToString();
         }
+
         private static double lastVFORX2freq = 0.0;
         unsafe public static void SetVFOfreqRX2(double f)
         {
-            // System.Console.WriteLine("rx2ddsJA: " + f);
             lastVFORX2freq = f;
             Console c;
             double correction_factor;
@@ -740,19 +776,14 @@ namespace PowerSDR
             if (c != null && c.SetupForm != null)
             {
                 correction_factor = (double)c.SetupForm.HPSDRFreqCorrectFactor;
-                // System.Console.WriteLine("correct_factor: " + correction_factor); 
             }
             else
             {
                 correction_factor = 1.0d;
             }
-            //f = f * 1000000;  // mhz -> hz 
-            // f = (float)((double)(f * 1000000.0) * correction_factor);
-            int f_freq = (int)((f * 1000000.0) * correction_factor);
-            // System.Console.WriteLine("corrected freq: " + f);
-            SetRX2VFOfreq(f_freq);
-            // c.SetupForm.txtDDSVFO.Text = f_freq.ToString();
-            //  System.Console.WriteLine("rx2vfo: " + f_freq);
+             int f_freq = (int)((f * 1e6) * correction_factor);
+             SetRX2VFOfreq(f_freq);
+           // c.SetupForm.txtRX2VFO.Text = f_freq.ToString();
         }
 
         private static double lastVFOTXfreq = 0.0;
@@ -765,19 +796,14 @@ namespace PowerSDR
             if (c != null && c.SetupForm != null)
             {
                 correction_factor = (double)c.SetupForm.HPSDRFreqCorrectFactor;
-                // System.Console.WriteLine("correct_factor: " + correction_factor); 
             }
             else
             {
                 correction_factor = 1.0d;
             }
-            //f = f * 1000000;  // mhz -> hz 
-            // f = (float)((double)(f * 1000000.0) * correction_factor);
-            int f_freq = (int)((f * 1000000.0) * correction_factor);
-            // System.Console.WriteLine("corrected freq: " + f);
+             int f_freq = (int)((f * 1e6) * correction_factor);
             SetTXVFOfreq(f_freq);
-            // c.SetupForm.txtDDSVFO.Text = f_freq.ToString();
-            // System.Console.WriteLine("JAtxvfo: " + f_freq);
+           // c.SetupForm.txtTXVFO.Text = f_freq.ToString();
         }
 
         [DllImport("JanusAudio.dll")]
@@ -798,6 +824,9 @@ namespace PowerSDR
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetLineIn(int bits);
 
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetLineBoost(int bits);
+        
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetAlexAtten(int bits);
 
@@ -980,10 +1009,9 @@ namespace PowerSDR
         [DllImport("JanusAudio.dll")]
         unsafe public static extern int GetEP4Data(char* bufp);
 
-        private static void InitOzyMic()
+        private static void InitMic()
         {
-            Console c = Console.getConsole();
-            c.SetMicGain();
+            Console.getConsole().SetMicGain();
         }
 
         // Ozyutils

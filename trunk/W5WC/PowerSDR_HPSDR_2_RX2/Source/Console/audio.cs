@@ -37,6 +37,7 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PowerSDR
@@ -520,14 +521,17 @@ namespace PowerSDR
         unsafe private static void* resampPtrOut_l;
         unsafe private static void* resampPtrOut_r;
 
-        private static bool vac_resample;
-
-        private static bool vac_combine_input;
+        private static bool vac_resample = false;
+        private static bool vac_combine_input = false;
         public static bool VACCombineInput
         {
             get { return vac_combine_input; }
             set { vac_combine_input = value; }
         }
+
+        #endregion
+
+        #region VAC2 Variables
 
         private static RingBufferFloat rb_vac2IN_l;
         private static RingBufferFloat rb_vac2IN_r;
@@ -544,9 +548,8 @@ namespace PowerSDR
         unsafe private static void* resampVAC2PtrOut_l;
         unsafe private static void* resampVAC2PtrOut_r;
 
-        private static bool vac2_resample;
-
-        private static bool vac2_combine_input;
+        private static bool vac2_resample = false;
+        private static bool vac2_combine_input = false;
         public static bool VAC2CombineInput
         {
             get { return vac2_combine_input; }
@@ -980,6 +983,26 @@ namespace PowerSDR
         }
 
         public static bool MuteOutput { get; set; }
+
+        private static int ramp_time = 5; // in ms
+        private static int ramp_samples; // total samples to complete the ramp
+        private static int ramp_count = 0;
+        private static double ramp_step;
+        private static bool ramp = false;
+        public static bool Ramp
+        {
+            get { return ramp; }
+            set
+            {
+                if (value)
+                {
+                    ramp_samples = (int)(ramp_time * 1e-3 * sample_rate1);
+                    ramp_step = Math.PI / 2.0 / ramp_samples;
+                    ramp_count = 0;
+                }
+                ramp = value;
+            }
+        }
 
         #endregion
 
@@ -1514,7 +1537,7 @@ namespace PowerSDR
             localmox = mox;
 
             // inputs
-            void* ex_input = input;
+            void* ex_input = (int*)input;
             int* array_ptr_input = (int*)input;
             float* in_l_ptr1 = (float*)array_ptr_input[0]; //CallbackInLbufp RX1 I
             float* in_r_ptr1 = (float*)array_ptr_input[1]; //CallbackInRbufp RX1 Q
@@ -1540,7 +1563,7 @@ namespace PowerSDR
             rx2_in_r = (float*)array_ptr_input[5]; //CallbackInR2bufp
 
             // outputs
-            void* ex_output = output;
+            void* ex_output = (int*)output;
             int* array_ptr_output = (int*)output;
             float* out_l_ptr1 = (float*)array_ptr_output[0]; //CallbackMonOutLbufp RX1
             float* out_r_ptr1 = (float*)array_ptr_output[1]; //CallbackMonOutRbufp RX1
@@ -2038,7 +2061,7 @@ namespace PowerSDR
 					Debug.Write(MaxSample(in_l, in_r, frameCount).ToString("f6")+",");
 #endif
 
-
+                    // handle Direct IQ for VAC
                     if (vac_enabled && vac_output_iq &&
                         rb_vacOUT_l != null && rb_vacOUT_r != null &&
                         rx1_in_l != null && rx1_in_r != null)
@@ -2296,6 +2319,32 @@ namespace PowerSDR
 
 
                     break;
+            }
+
+            if (localmox && ramp)
+            {
+                for (int i = 0; i < frameCount; i++)
+                {
+                    float scale = (float)Math.Cos(ramp_count * ramp_step);
+                    //Debug.WriteLine("ramp scale: " + scale.ToString("f6"));
+
+                    out_l_ptr2[i] *= scale;
+                    out_r_ptr2[i] *= scale;
+
+                    if (++ramp_count > ramp_samples)
+                    {
+                        // clear the rest of the this TX buffer
+                        for (int j = i + 1; j < frameCount; j++)
+                        {
+                            out_l_ptr2[i] = 0.0f;
+                            out_r_ptr2[i] = 0.0f;
+                        }
+
+                        mox = false;
+                        ramp = false;
+                        break;
+                    }
+                }
             }
 
             if (scope)
@@ -4722,12 +4771,14 @@ namespace PowerSDR
         unsafe public static int CallbackVAC(void* input, void* output, int frameCount,
             PA19.PaStreamCallbackTimeInfo* timeInfo, int statusFlags, void* userData)
         {
-            var array_ptr = (int*)input;
-            var in_l_ptr1 = (float*)array_ptr[0];
+            if (!vac_enabled) return 0;
+
+            int* array_ptr = (int*)input;
+            float* in_l_ptr1 = (float*)array_ptr[0];
             float* in_r_ptr1 = null;
             if (vac_stereo || vac_output_iq) in_r_ptr1 = (float*)array_ptr[1];
             array_ptr = (int*)output;
-            var out_l_ptr1 = (float*)array_ptr[0];
+            float* out_l_ptr1 = (float*)array_ptr[0];
             float* out_r_ptr1 = null;
             if (vac_stereo || vac_output_iq) out_r_ptr1 = (float*)array_ptr[1];
 
@@ -4748,10 +4799,10 @@ namespace PowerSDR
             {
                 if (vac_resample)
                 {
+                    int outsamps;
                     fixed (float* res_inl_ptr = &(res_inl[0]))
                     fixed (float* res_inr_ptr = &(res_inr[0]))
                     {
-                        int outsamps;
                         DttSP.DoResamplerF(in_l_ptr1, res_inl_ptr, frameCount, &outsamps, resampPtrIn_l);
                         DttSP.DoResamplerF(in_r_ptr1, res_inr_ptr, frameCount, &outsamps, resampPtrIn_r);
                         if ((rb_vacIN_l.WriteSpace() >= outsamps) && (rb_vacIN_r.WriteSpace() >= outsamps))
@@ -4802,9 +4853,9 @@ namespace PowerSDR
             {
                 if (vac_resample)
                 {
+                    int outsamps;
                     fixed (float* res_inl_ptr = &(res_inl[0]))
                     {
-                        int outsamps;
                         DttSP.DoResamplerF(in_l_ptr1, res_inl_ptr, frameCount, &outsamps, resampPtrIn_l);
                         if ((rb_vacIN_l.WriteSpace() >= outsamps) && (rb_vacIN_r.WriteSpace() >= outsamps))
                         {
@@ -4855,12 +4906,14 @@ namespace PowerSDR
         unsafe public static int CallbackVAC2(void* input, void* output, int frameCount,
             PA19.PaStreamCallbackTimeInfo* timeInfo, int statusFlags, void* userData)
         {
-            var array_ptr = (int*)input;
-            var in_l_ptr1 = (float*)array_ptr[0];
+            if (!vac2_enabled) return 0;
+
+            int* array_ptr = (int*)input;
+            float* in_l_ptr1 = (float*)array_ptr[0];
             float* in_r_ptr1 = null;
             if (vac2_stereo || vac2_output_iq) in_r_ptr1 = (float*)array_ptr[1];
             array_ptr = (int*)output;
-            var out_l_ptr1 = (float*)array_ptr[0];
+            float* out_l_ptr1 = (float*)array_ptr[0];
             float* out_r_ptr1 = null;
             if (vac2_stereo || vac2_output_iq) out_r_ptr1 = (float*)array_ptr[1];
 
@@ -4877,15 +4930,14 @@ namespace PowerSDR
                 Win32.LeaveCriticalSection(cs_vac2);
                 return 0;
             }
-
             if (vac2_stereo || vac2_output_iq)
             {
                 if (vac2_resample)
                 {
+                    int outsamps;
                     fixed (float* res_inl_ptr = &(res_vac2_inl[0]))
                     fixed (float* res_inr_ptr = &(res_vac2_inr[0]))
                     {
-                        int outsamps;
                         DttSP.DoResamplerF(in_l_ptr1, res_inl_ptr, frameCount, &outsamps, resampVAC2PtrIn_l);
                         DttSP.DoResamplerF(in_r_ptr1, res_inr_ptr, frameCount, &outsamps, resampVAC2PtrIn_r);
                         if ((rb_vac2IN_l.WriteSpace() >= outsamps) && (rb_vac2IN_r.WriteSpace() >= outsamps))
@@ -4913,7 +4965,7 @@ namespace PowerSDR
                     }
                     else
                     {
-                        //vac_rb_reset = true;
+                        //vac2_rb_reset = true;
                         VACDebug("rb_vac2IN overflow mono CBvac");
                     }
                 }
@@ -4936,9 +4988,9 @@ namespace PowerSDR
             {
                 if (vac2_resample)
                 {
+                    int outsamps;
                     fixed (float* res_inl_ptr = &(res_vac2_inl[0]))
                     {
-                        int outsamps;
                         DttSP.DoResamplerF(in_l_ptr1, res_inl_ptr, frameCount, &outsamps, resampVAC2PtrIn_l);
                         if ((rb_vac2IN_l.WriteSpace() >= outsamps) && (rb_vac2IN_r.WriteSpace() >= outsamps))
                         {
@@ -4969,7 +5021,6 @@ namespace PowerSDR
                         VACDebug("rb_vac2IN_l overflow");
                     }
                 }
-
                 if ((rb_vac2OUT_l.ReadSpace() >= frameCount) && (rb_vac2OUT_r.ReadSpace() >= frameCount))
                 {
                     Win32.EnterCriticalSection(cs_vac2);
@@ -4985,7 +5036,7 @@ namespace PowerSDR
             }
 
             return 0;
-        }
+        }		
 
         #region NewVacCallBack
 
@@ -5244,55 +5295,57 @@ namespace PowerSDR
         }
 
         // returns updated phase accumulator
-        unsafe public static double SineWave(float* buf, int samples, double sinphase, double freq)
+        unsafe public static double SineWave(float* buf, int samples, double phase, double freq)
         {
-            var phaseStep = freq / sample_rate1 * 2 * Math.PI;
-            var cosval = Math.Cos(sinphase);
-            var sinval = Math.Sin(sinphase);
-            var cosdelta = Math.Cos(phaseStep);
-            var sindelta = Math.Sin(phaseStep);
+            double phase_step = freq / sample_rate1 * 2 * Math.PI;
+            double cosval = Math.Cos(phase);
+            double sinval = Math.Sin(phase);
+            double cosdelta = Math.Cos(phase_step);
+            double sindelta = Math.Sin(phase_step);
+            double tmpval;
 
-            for (var i = 0; i < samples; i++)
+            for (int i = 0; i < samples; i++)
             {
-                var tmpval = cosval * cosdelta - sinval * sindelta;
+                tmpval = cosval * cosdelta - sinval * sindelta;
                 sinval = cosval * sindelta + sinval * cosdelta;
                 cosval = tmpval;
 
                 buf[i] = (float)(sinval);
 
-                sinphase += phaseStep;
+                phase += phase_step;
             }
 
-            return sinphase;
+            return phase;
         }
 
         // returns updated phase accumulator
-        unsafe public static double CosineWave(float* buf, int samples, double cosphase, double freq)
+        unsafe public static double CosineWave(float* buf, int samples, double phase, double freq)
         {
-            var phaseStep = freq / sample_rate1 * 2 * Math.PI;
-            var cosval = Math.Cos(cosphase);
-            var sinval = Math.Sin(cosphase);
-            var cosdelta = Math.Cos(phaseStep);
-            var sindelta = Math.Sin(phaseStep);
+            double phase_step = freq / sample_rate1 * 2 * Math.PI;
+            double cosval = Math.Cos(phase);
+            double sinval = Math.Sin(phase);
+            double cosdelta = Math.Cos(phase_step);
+            double sindelta = Math.Sin(phase_step);
+            double tmpval;
 
-            for (var i = 0; i < samples; i++)
+            for (int i = 0; i < samples; i++)
             {
-                var tmpval = cosval * cosdelta - sinval * sindelta;
+                tmpval = cosval * cosdelta - sinval * sindelta;
                 sinval = cosval * sindelta + sinval * cosdelta;
                 cosval = tmpval;
 
                 buf[i] = (float)(cosval);
 
-                cosphase += phaseStep;
+                phase += phase_step;
             }
 
-            return cosphase;
+            return phase;
         }
 
         unsafe public static void SineWave2Tone(float* buf, int samples,
-                                                double phase1, double phase2,
-                                                double freq1, double freq2,
-                                                out double updated_phase1, out double updated_phase2)
+            double phase1, double phase2,
+            double freq1, double freq2,
+            out double updated_phase1, out double updated_phase2)
         {
             double phase_step1 = freq1 / sample_rate1 * 2 * Math.PI;
             double cosval1 = Math.Cos(phase1);
@@ -5328,9 +5381,9 @@ namespace PowerSDR
         }
 
         unsafe public static void CosineWave2Tone(float* buf, int samples,
-                                                  double phase1, double phase2,
-                                                  double freq1, double freq2,
-                                                  out double updated_phase1, out double updated_phase2)
+            double phase1, double phase2,
+            double freq1, double freq2,
+            out double updated_phase1, out double updated_phase2)
         {
             double phase_step1 = freq1 / sample_rate1 * 2 * Math.PI;
             double cosval1 = Math.Cos(phase1);
@@ -5365,22 +5418,19 @@ namespace PowerSDR
             updated_phase2 = phase2;
         }
 
-
-        private static readonly Random r = new Random();
-        private static double _y2;
-        private static bool _useLast;
-
-        private static double Boxmuller(double m, double s)
+        private static Random r = new Random();
+        private static double y2 = 0.0;
+        private static bool use_last = false;
+        private static double boxmuller(double m, double s)
         {
-            double y1;
-            if (_useLast) /* use value from previous call */
+            double x1, x2, w, y1;
+            if (use_last)		        /* use value from previous call */
             {
-                y1 = _y2;
-                _useLast = false;
+                y1 = y2;
+                use_last = false;
             }
             else
             {
-                double x1, x2, w;
                 do
                 {
                     x1 = (2.0 * r.NextDouble() - 1.0);
@@ -5390,8 +5440,8 @@ namespace PowerSDR
 
                 w = Math.Sqrt((-2.0 * Math.Log(w)) / w);
                 y1 = x1 * w;
-                _y2 = x2 * w;
-                _useLast = true;
+                y2 = x2 * w;
+                use_last = true;
             }
 
             return (m + y1 * s);
@@ -5401,10 +5451,10 @@ namespace PowerSDR
         {
             for (int i = 0; i < samples; i++)
             {
-                buf[i] = (float)Boxmuller(0.0, 0.2);
+                buf[i] = (float)boxmuller(0.0, 0.2);
             }
         }
-
+        
         private static double tri_val;
         private static int tri_direction = 1;
 
@@ -6125,7 +6175,7 @@ namespace PowerSDR
             int error = 0;
 
             int i;
-            for (i = 0; i < 25; i++)
+        /*    for (i = 0; i < 25; i++)
             {
                 if (callback_num == 0)
                     error = PA19.PA_OpenStream(out stream1, &inparam, &outparam, sample_rate, block_size, 0, callback, 0);
@@ -6136,6 +6186,23 @@ namespace PowerSDR
                 if (callback_num == 2)
                     error = PA19.PA_OpenStream(out stream3, &inparam, &outparam, sample_rate, block_size, 0, callback, 2);
                 if (error == 0) break; // stop if no error
+            } */
+
+            for (i = 0; i < 25; i++)
+            {
+                switch (callback_num)
+                {
+                    case 1: // VAC1
+                        error = PA19.PA_OpenStream(out stream2, &inparam, &outparam, sample_rate, block_size, 0, callback, 1);
+                        break;
+                    case 2: //VAC2
+                        error = PA19.PA_OpenStream(out stream3, &inparam, &outparam, sample_rate, block_size, 0, callback, 2);
+                        break;
+                    default:
+                        error = PA19.PA_OpenStream(out stream1, &inparam, &outparam, sample_rate, block_size, 0, callback, 0);
+                        break;
+                }
+                if (error == 0) break; // stop if no error
             }
 
             if (error != 0)
@@ -6144,14 +6211,28 @@ namespace PowerSDR
                 return false;
             }
 
-            if (callback_num == 0)
+            switch (callback_num)
+            {
+                case 1:
+                    error = PA19.PA_StartStream(stream2);
+                    break;
+                case 2:
+                    error = PA19.PA_StartStream(stream3);
+                    break;
+                default:
+                    error = PA19.PA_StartStream(stream1);
+                    Thread.Sleep(10);  // give FW driver a little time to open.  Reduces "flatline" for FW radios.
+                    break;
+            }
+
+            /*if (callback_num == 0)
                 error = PA19.PA_StartStream(stream1);
             //else 
             if (callback_num == 1)
                 error = PA19.PA_StartStream(stream2);
             // else
             if (callback_num == 2)
-                error = PA19.PA_StartStream(stream3);
+                error = PA19.PA_StartStream(stream3); */
 
             if (error != 0)
             {
@@ -6197,8 +6278,10 @@ namespace PowerSDR
 
         unsafe public static void StopAudio1_NonJanus()
         {
+            int error = 0;
             PA19.PA_AbortStream(stream1);
-            PA19.PA_CloseStream(stream1);
+            error = PA19.PA_CloseStream(stream1);
+            if (error != 0) PortAudioErrorMessageBox(error);
         }
 
         unsafe public static void StopAudioVAC()

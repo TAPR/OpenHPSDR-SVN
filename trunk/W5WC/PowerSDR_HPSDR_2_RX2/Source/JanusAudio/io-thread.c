@@ -669,7 +669,7 @@ int IsOkToSendDataToFPGA(void) {
 unsigned int lastOutPower = 0; 
 
 
-void ForceCandCFrames(int count) { 
+void ForceCandCFrames(int count, int c0, int vfofreq) { 
 	int	numwritten;	
 	unsigned char buf[1024];
 	int	i; 
@@ -682,17 +682,17 @@ void ForceCandCFrames(int count) {
 	buf[3] = XmitBit;									  /* c0	*/ 
 	buf[4] = (SampleRateIn2Bits	& 3) | ( C1Mask	& 0xfc ); /* c1	*/
 	buf[5] = PennyOCBits <<	1;							  /* c2	*/
-	buf[6] = (MercAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; /* c3 */
-	buf[7] = AlexTxAnt & 0x3;
+	buf[6] = (AlexAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; /* c3 */
+	buf[7] = 0x0c; // duplex with 2 receivers
 
 	buf[512] = 0x7f; 
 	buf[513] = 0x7f; 
 	buf[514] = 0x7f; 
-	buf[515] = 2;									  /* c0	*/ 
-	buf[516] = (VFOfreq_rx1	>> 24) & 0xff;	/* byte	0 of freq -	c1	*/
-	buf[517] = (VFOfreq_rx1	>> 16) & 0xff;	/* byte	1 of freq -	c2	*/
-	buf[518] = (VFOfreq_rx1	>> 8) &	0xff;	/* byte	2 of freq -	c3	*/ 
-	buf[519] = VFOfreq_rx1 & 0xff;			/* byte	3 of freq -	c4	*/	
+	buf[515] = c0; 								  /* c0	*/ 
+	buf[516] = (vfofreq >> 24) & 0xff;	/* byte	0 of freq -	c1	*/
+	buf[517] = (vfofreq >> 16) & 0xff;	/* byte	1 of freq -	c2	*/
+	buf[518] = (vfofreq >> 8) &	0xff;	/* byte	2 of freq -	c3	*/ 
+	buf[519] = vfofreq & 0xff;			/* byte	3 of freq -	c4	*/	
 
 	if (  FPGATestMode ) { 
 		memcpy(buf+8, fpga_test_buf+8, 512-8); 
@@ -709,7 +709,11 @@ void ForceCandCFrames(int count) {
 } 
 
 void ForceCandCFrame(void) { 
-	ForceCandCFrames(1); 
+	ForceCandCFrames(1, 2, VFOfreq_tx); 
+	Sleep(10);
+	ForceCandCFrames(1, 4, VFOfreq_rx1);
+	Sleep(10);
+	ForceCandCFrames(1, 6, VFOfreq_rx2);
 } 
 
 
@@ -734,1023 +738,884 @@ int last_xmit_bit = 0;
 //
 void IOThreadMainLoop(void) {
 
-unsigned char ApolloFilt = 0;
-unsigned char ApolloTune = 0;
-unsigned char ApolloATU = 0;
-unsigned char HermesFilt = 0;
+	int fwd_power_stage; 
+	int ref_power_stage; 
+	int alex_fwd_power; 
+	short *sample_bufp = NULL;
+	int sample_count = 0;
+	int i;
+	int numread;
+	int numwritten;
+	int have_out_buf = 0; // do we have an output buffer to work on
+	int state = STATE_NOSYNC;
+	int out_state = OUT_STATE_SYNC_HI_NEEDED;
+	unsigned char last_byte = 12;  // init to anything other than 0x80 or 0x00
+	unsigned char second_last_byte = 12; // init to something other than 0x80 or 0x00
+	int this_num = 0;
+	int byte_num = 0;
+	// short left_sample;
+	// short right_sample;
+	// short sample;
+	// int in_stream_sync_count = 0; // count where we are in input stream to know when to look for sync
+	// int out_stream_sync_count = 0; // where are we relative to sync in output stream
+	int total_written = 0;
+	unsigned char out_frame_idx = 0;
 
-		int fwd_power_stage; 
-		int ref_power_stage; 
-		int alex_fwd_power; 
-        short *sample_bufp = NULL;
-        int sample_count = 0;
-        int i;
-        int numread;
-        int numwritten;
-        int have_out_buf = 0; // do we have an output buffer to work on
-        int state = STATE_NOSYNC;
-        int out_state = OUT_STATE_SYNC_HI_NEEDED;
-        unsigned char last_byte = 12;  // init to anything other than 0x80 or 0x00
-        unsigned char second_last_byte = 12; // init to something other than 0x80 or 0x00
-        int this_num = 0;
-        int byte_num = 0;
-        // short left_sample;
-        // short right_sample;
-        // short sample;
-        // int in_stream_sync_count = 0; // count where we are in input stream to know when to look for sync
-    // int out_stream_sync_count = 0; // where are we relative to sync in output stream
-        int total_written = 0;
-        unsigned char out_frame_idx = 0;
+	int samples_this_sync = 0; // how many samples we've read on the current sync word - l+r = 2 samples
+	int out_sample_pairs_this_sync = 0; // how many sample pairs we've written -- l+r = 1
+	int frames_written_this_read = 0; // how many frames have we written on this read
 
-        int samples_this_sync = 0; // how many samples we've read on the current sync word - l+r = 2 samples
-        int out_sample_pairs_this_sync = 0; // how many sample pairs we've written -- l+r = 1
-        int frames_written_this_read = 0; // how many frames have we written on this read
+	int wrote_frame = 0;
+	int ok_to_write = 0;
 
-        int wrote_frame = 0;
-        int ok_to_write = 0;
+	int out_control_idx = 0;
 
-        int out_control_idx = 0;
+	unsigned char *outbufp = NULL;
+	int outbufpos; // position of next sample to be processed in outbufp
+	int outbuflen; // size of *outbufp in bytes
+	int writebufpos = 0;
+	int sample_bufp_size;
+	//        int sample_is_left;
+	int rx_sample_loops = 1;
+	int buf_num = 0;
+	unsigned char RxOverrun = 0;
+	unsigned char TxOverrun = 0;
+	int zero_read_count = 0; 		
 
-        unsigned char *outbufp = NULL;
-        int outbufpos; // position of next sample to be processed in outbufp
-        int outbuflen; // size of *outbufp in bytes
-        int writebufpos = 0;
-        int sample_bufp_size;
-//        int sample_is_left;
-		int rx_sample_loops = 1;
-        int buf_num = 0;
-        unsigned char RxOverrun = 0;
-        unsigned char TxOverrun = 0;
-		int zero_read_count = 0; 		
+	sample_bufp_size =  6 * sizeof(int) * BlockSize;
 
-        sample_bufp_size =  6 * sizeof(int) * BlockSize;
+	// how big is outbuf ... account for us being fixed at 48 khz on output side
+	outbuflen = 4 * sizeof(short) * BlockSize;
+	if ( SampleRate == 96000 ) {
+		outbuflen /= 2;
+	}
+	else if ( SampleRate == 192000 ) {
+		outbuflen /= 4;
+	}
+	ForceCandCFrame(); // send 3 C&C frames to make sure ozy knows the clock settings 
+	// printf("iot: main loop starting\n"); fflush(stdout);
+	// main loop - read a buffer, processe it and then write a buffer if we have one to write
+	while ( io_keep_running != 0 ) {
+		// should we read - or just skip to writing
+		// if we wrote a frame last time (saying we may still have data waiting to be written) around
+		// and there is space in the fifo, skip the read and write another frame
+		//
 
-        // how big is outbuf ... account for us being fixed at 48 khz on output side
-        outbuflen = 4 * sizeof(short) * BlockSize;
-        if ( SampleRate == 96000 ) {
-                outbuflen /= 2;
-        }
-        else if ( SampleRate == 192000 ) {
-                outbuflen /= 4;
-        }
-		ForceCandCFrames(4); // send 4 C&C frames to make sure ozy knows the clock settings 
+		if ( !isMetis || !wrote_frame ) { /* if not metis write, or if we did not write frame last time, time to read */ 				
 
-        // printf("iot: main loop starting\n"); fflush(stdout);
-        // main loop - read a buffer, processe it and then write a buffer if we have one to write
-        while ( io_keep_running != 0 ) {
-                // should we read - or just skip to writing
-                // if we wrote a frame last time (saying we may still have data waiting to be written) around
-                // and there is space in the fifo, skip the read and write another frame
-                //
-				
-			if ( !isMetis || !wrote_frame ) { /* if not metis write, or if we did not write frame last time, time to read */ 				
-				
-                        frames_written_this_read = 0;
-                        // first read data and process it
+			frames_written_this_read = 0;
+			// first read data and process it
 #ifndef TEST_READ
-                        // numread = XyloBulkRead(XyloH, 4, read_buf, sizeof(read_buf));
+			// numread = XyloBulkRead(XyloH, 4, read_buf, sizeof(read_buf));
 #ifdef OZY
-						if ( isMetis ) { 
-							//numread = MetisBulkRead(6, FPGAReadBufp, FPGAReadBufSize);
-							numread = MetisReadDirect(FPGAReadBufp, FPGAReadBufSize); 
-							if ( numread > 0 ) { 
-								zero_read_count = 0; 
-							} 
-							else { 
-								++zero_read_count; 
-								// printf("MetisRead: nr: %d zc: %d\n", numread, zero_read_count); fflush(stdout); 
-							} 													
-						}
-						else { 
-							numread = OzyBulkRead(OzyH, 0x86, FPGAReadBufp, FPGAReadBufSize);
-						}
-                        if ( (!isMetis && numread <= 0 ) ||  (isMetis && zero_read_count >= 1000 )  ) {											
-                       // if ( numread <= 0 ) {
+			if ( isMetis ) { 
+				//numread = MetisBulkRead(6, FPGAReadBufp, FPGAReadBufSize);
+				numread = MetisReadDirect(FPGAReadBufp, FPGAReadBufSize); 
+				if ( numread > 0 ) { 
+					zero_read_count = 0; 
+				} 
+				else { 
+					++zero_read_count; 
+					// printf("MetisRead: nr: %d zc: %d\n", numread, zero_read_count); fflush(stdout); 
+				} 													
+			}
+			else { 
+				numread = OzyBulkRead(OzyH, 0x86, FPGAReadBufp, FPGAReadBufSize);
+			}
+			if ( (!isMetis && numread <= 0 ) ||  (isMetis && zero_read_count >= 1000 )  ) {											
+				// if ( numread <= 0 ) {
 #ifndef LINUX
-                                Sleep(10); /* this sleep is here to keep us from sucking all the CPU
-                                                      on the machine when the USB cable is pullled out of the
-                                                          computer while we're running -- without pausing here we get into
-                                                          a tight loop reading from a device that is gone -- the sleep makes it
-                                                          a less tight loop and leaves some cycles for the user to turn off PowerSDR
-                                                          An ugly hack, but does work more or less
+				Sleep(10); /* this sleep is here to keep us from sucking all the CPU
+						   on the machine when the USB cable is pullled out of the
+						   computer while we're running -- without pausing here we get into
+						   a tight loop reading from a device that is gone -- the sleep makes it
+						   a less tight loop and leaves some cycles for the user to turn off PowerSDR
+						   An ugly hack, but does work more or less
 
-                                                          To fix this for real we need to be able to send some sort of error indication
-                                                          thru the callback to tell the C# side that the sound card MIA
-                                                        */
+						   To fix this for real we need to be able to send some sort of error indication
+						   thru the callback to tell the C# side that the sound card MIA
+						   */
 #else
-                                usleep(10000);
+				usleep(10000);
 #endif
-	
-                                fprintf(stdout, "OzyBulkRead failed rc=%d\n", numread);  fflush(stdout);
-								ForceCandCFrame();  /* force a C and C frame in case Ozy is looking at wrong clocks */ 
-                        }
+
+				fprintf(stdout, "OzyBulkRead failed rc=%d\n", numread);  fflush(stdout);
+				ForceCandCFrame();  /* force a C and C frame in case Ozy is looking at wrong clocks */ 
+			}
 
 #ifdef EP6FILEDUMP 
-						if ( (numread >  0) && (EP6_DumpBufBytesUsed < EP6FRAMEDUMPLIMIT) )  {
-							int avail_space = EP6FRAMEDUMPLIMIT - EP6_DumpBufBytesUsed; 
-							int copy_count = min(avail_space, numread); 
-							memcpy(EP6_DumpBuf + EP6_DumpBufBytesUsed, FPGAReadBufp, copy_count); 
-							EP6_DumpBufBytesUsed += copy_count; 
-						} 
+			if ( (numread >  0) && (EP6_DumpBufBytesUsed < EP6FRAMEDUMPLIMIT) )  {
+				int avail_space = EP6FRAMEDUMPLIMIT - EP6_DumpBufBytesUsed; 
+				int copy_count = min(avail_space, numread); 
+				memcpy(EP6_DumpBuf + EP6_DumpBufBytesUsed, FPGAReadBufp, copy_count); 
+				EP6_DumpBufBytesUsed += copy_count; 
+			} 
 #endif 
 
 
 #endif
-                        // printf("iot: read %d bytes\n", numread); fflush(stdout);
-                        ++buf_num;
+			// printf("iot: read %d bytes\n", numread); fflush(stdout);
+			++buf_num;
 
 #ifdef SAVE_READS_TO_BUFFER
-                                memcpy(ReadSaveBuf[SaveReadsIdx], FPGAReadBufp, FPGAReadBufSize);
-                                ++SaveReadsIdx;
-                                if ( SaveReadsIdx >= NUM_READ_BUFS_TO_SAVE ) {
-                                        SaveReadsIdx = 0;
-                                }
+			memcpy(ReadSaveBuf[SaveReadsIdx], FPGAReadBufp, FPGAReadBufSize);
+			++SaveReadsIdx;
+			if ( SaveReadsIdx >= NUM_READ_BUFS_TO_SAVE ) {
+				SaveReadsIdx = 0;
+			}
 #endif
 
 
 #if 0
-                        if ( read_dump_count < 5 ) {
-                                ++read_dump_count;
-                                Dump(stdout, FPGAReadBufp, FPGAReadBufSize, "Input Buffer from Xylo");  fflush(stdout);
-                        }
+			if ( read_dump_count < 5 ) {
+				++read_dump_count;
+				Dump(stdout, FPGAReadBufp, FPGAReadBufSize, "Input Buffer from Xylo");  fflush(stdout);
+			}
 #endif
-                        // XyloBulkWrite(XyloH, 2, read_buf, numread);
+			// XyloBulkWrite(XyloH, 2, read_buf, numread);
 #else
-                        numread = testRead(FPGAReadBuf, FPGAReadBufSize);
+			numread = testRead(FPGAReadBuf, FPGAReadBufSize);
 #endif
 #ifdef PERF_DEBUG
-                        read_stop_t = getPerfTicks();
-                        read_t = read_stop_t - read_start_t;
-                        // printf("d1: %I64d\n", delta_t);
-                        // delta_t = perfTicksToNanos(delta_t);
-                        // printf("d2: %I64d\n", delta_t); fflush(stdout);
-                        updateHLA(&ReadHLA, read_t);
+			read_stop_t = getPerfTicks();
+			read_t = read_stop_t - read_start_t;
+			// printf("d1: %I64d\n", delta_t);
+			// delta_t = perfTicksToNanos(delta_t);
+			// printf("d2: %I64d\n", delta_t); fflush(stdout);
+			updateHLA(&ReadHLA, read_t);
 #endif
-                        for ( i = 0; i < numread; i++ ) {
-                                ++bytes_processed;
+			for ( i = 0; i < numread; i++ ) {
+				++bytes_processed;
 
-#if 0
-                                if ( state != STATE_NOSYNC && second_last_byte == 0x7f && last_byte == 0x7f && FPGAReadBufp[i] == 0x7f ) {
-                                        printf("\nsync in data bufnum: %d i: %d samples_this_sync: %d\n", buf_num, i, samples_this_sync);
-                                }
-#endif
-                                switch ( state ) {
-                                        case STATE_NOSYNC:
-                                                if ( second_last_byte == 0x7f && last_byte == 0x7f && FPGAReadBufp[i] == 0x7f ) {  // found sync
-                                                        // in_stream_sync_count = 2; // we've consumed 3 bytes already, it will bump at bottom of loop to make 3
-                                                        state = STATE_CONTROL0;
-                                                        samples_this_sync = 0;
-                                                        ++SyncGainedCount;
-                                                        HaveSync = 1;
-                                                         //printf("sync gained: bufnum: %d i: %d\n", buf_num, i);
-                                                         //printf("\nSG");
-                                                }
-                                                break;
+				switch ( state ) {
+				case STATE_NOSYNC:
+					if ( second_last_byte == 0x7f && last_byte == 0x7f && FPGAReadBufp[i] == 0x7f ) {  // found sync
+						// in_stream_sync_count = 2; // we've consumed 3 bytes already, it will bump at bottom of loop to make 3
+						state = STATE_CONTROL0;
+						samples_this_sync = 0;
+						++SyncGainedCount;
+						HaveSync = 1;
+						//printf("sync gained: bufnum: %d i: %d\n", buf_num, i);
+						//printf("\nSG");
+					}
+					break;
 
-                                        case STATE_CONTROL0:
-												// printf(" C0: 0x%08x\n", FPGAReadBufp[i]); fflush(stdout);
-                                                ControlBytesIn[0] = FPGAReadBufp[i];
-                                                DotDashBits = FPGAReadBufp[i] & DotDashMask;
-                                                state = STATE_CONTROL1; // look for 2nd control byte
-                                                break;
-												
-                                        case STATE_CONTROL1:
-                                                // printf(" C1");
-                                                ControlBytesIn[1] = FPGAReadBufp[i];
+				case STATE_CONTROL0:
+					// printf(" C0: 0x%08x\n", FPGAReadBufp[i]); fflush(stdout);
+					ControlBytesIn[0] = FPGAReadBufp[i];
+					DotDashBits = FPGAReadBufp[i] & DotDashMask;
+					state = STATE_CONTROL1; // look for 2nd control byte
+					break;
 
-									        	switch (ControlBytesIn[0] & CandCAddrMask) {
-										          case 0:
-                                                        // processOverloadBit(ControlBytesIn[1] & 1);
-											             break;
-										          case 0x8:
-                                                         fwd_power_stage = ((ControlBytesIn[1] << 8) & 0xff00); // bits 15-8 (AIN5) Penny/Hermes
-										                 break;
-										          case 0x10:
-											             ref_power_stage = ((ControlBytesIn[1] << 8) & 0xff00); // bits 15-8 (AIN2) Alex reverse power
-											             break;
-												  case 0x18:
-                                                         //ain4 = ((ControlBytesIn[1] << 8) & 0xff00);
-													     break;
-										          case 0x20:
- 											             MercuryFWVersion =  (int)(ControlBytesIn[1] >> 1);
-										                 //processOverloadBit(ControlBytesIn[1] & 1);
-											             break;
-												}
-#if 0
-												 if ( (ControlBytesIn[0] & CandCAddrMask) == 0 ) { 
-													processOverloadBit(ControlBytesIn[1] & 1); 
-												}
-												if ( (ControlBytesIn[0] & CandCAddrMask) == CandCFwdPowerBit ) {  // Penny(AIN5) fwd power, c0 == 0x08, c1 == bits 15-8, c2 == bits 7-0
-													fwd_power_stage = ((ControlBytesIn[1] << 8) & 0xff00); 													
-												}
- 												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x10 ) {  // Alex(AIN2) ref power, c0 == 0x10, c1 == bits 15-8, c2 == bits 7-0
-													ref_power_stage = ((ControlBytesIn[1] << 8) & 0xff00);
-												}
-												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x20 ) { // MercuryFWBit c0 == 0x20
-												// Assign ControlBytesIn[1] to Mercury1 version number
- 											    	MercuryFWVersion =  (int)(ControlBytesIn[1] >> 1);
-												    processOverloadBit(ControlBytesIn[1] & 1);
-												}												
-#endif												
-                                                // TxOverrun = FPGAReadBufp[i];
-                                                state = STATE_CONTROL2; // look for 3rd control byte
-                                                break;
+				case STATE_CONTROL1:
+					// printf(" C1");
+					ControlBytesIn[1] = FPGAReadBufp[i];
 
-                                        case STATE_CONTROL2:
-                                                // printf(" C2");
-                                                ControlBytesIn[2] = FPGAReadBufp[i];
+					switch (ControlBytesIn[0] & CandCAddrMask) {
+					case 0:
+						// processOverloadBit(ControlBytesIn[1] & 1);
+						break;
+					case 0x8:
+						fwd_power_stage = ((ControlBytesIn[1] << 8) & 0xff00); // bits 15-8 (AIN5) Penny/Hermes
+						break;
+					case 0x10:
+						ref_power_stage = ((ControlBytesIn[1] << 8) & 0xff00); // bits 15-8 (AIN2) Alex reverse power
+						break;
+					case 0x18:
+						//ain4 = ((ControlBytesIn[1] << 8) & 0xff00);
+						break;
+					case 0x20:
+						MercuryFWVersion =  (int)(ControlBytesIn[1] >> 1);
+						//processOverloadBit(ControlBytesIn[1] & 1);
+						break;
+					}
+					// TxOverrun = FPGAReadBufp[i];
+					state = STATE_CONTROL2; // look for 3rd control byte
+					break;
 
-									        	switch (ControlBytesIn[0] & CandCAddrMask) {
-										          case 0:
-                                                        // MercuryFWVersion =  (int)(ControlBytesIn[2]);//old
-											             break;
-										          case 0x8:
-                                                         fwd_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff); // bits 7-0 (AIN5) Penny/Hermes
-                                                         FwdPower = fwd_power_stage; 
-										                 break;
-										          case 0x10:
-											             ref_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff); // bits 7-0 (AIN2) Alex reverse power
-													     RefPower = ref_power_stage;
-											             break;
-												  case 0x18:
-											             //ain4 |=  (((int)(ControlBytesIn[2])) & 0xff);
-													     //AIN4 = ain4;
-													     break;
-										          case 0x20:
- 											             Mercury2FWVersion =  (int)(ControlBytesIn[2] >> 1);										                 
-											             processOverloadBit((ControlBytesIn[1] & 1), 
-															                (ControlBytesIn[2] & 1));
-														 break;
-												}
+				case STATE_CONTROL2:
+					// printf(" C2");
+					ControlBytesIn[2] = FPGAReadBufp[i];
 
-#if 0
-												if ( (ControlBytesIn[0] & CandCAddrMask ) == 0 ) { 
-													MercuryFWVersion =  (int)(ControlBytesIn[2]); 
-												}
-												if ( (ControlBytesIn[0] & CandCAddrMask) == CandCFwdPowerBit ) {  //  Penny(AIN5) fwd power, c0 == 0x08, c1 == bits 15-8, c2 == bits 7-0													
-													fwd_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff);
-													FwdPower = fwd_power_stage; 														
-												}
-												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x10 ) {  // Alex(AIN2) ref power, c1 == bits 15-8, c2 == bits 7-0													
-													ref_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff);
-													RefPower = ref_power_stage; 
-												}
-												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x20 ) {
-												// Assign ControlBytesIn[2] to Mercury2 version number
-												Mercury2FWVersion =  (int)(ControlBytesIn[2] >> 1);
-												//processOverloadBit(ControlBytesIn[2] & 1);
-												}	 											
-#endif
-                                                // RxOverrun = FPGAReadBufp[i];
-                                                state = STATE_CONTROL3; // look for 4th control byte
-                                                break;
-												
-                                        case STATE_CONTROL3:  //
-                                                // printf(" C3");
-                                                ControlBytesIn[3] = FPGAReadBufp[i];
-									        	switch (ControlBytesIn[0] & CandCAddrMask) {
-										          case 0:
-                                                         PenelopeFWVersion = (int)(ControlBytesIn[3]);
-											             break;
-										          case 0x8:
-                                                         alex_fwd_power = ((ControlBytesIn[3] << 8) & 0xff00); //bits 15-8 (AIN1) Alex
-										                 break;
-										          case 0x10:
-											             //ain3 = ((ControlBytesIn[3] << 8) & 0xff00);
-											             break;
-												  case 0x18:
-                                                         //ain6 = ((ControlBytesIn[3] << 8) & 0xff00); //Hermes 13.8v (22v scale)
-													     break;
-										          case 0x20:
- 											           //  Mercury3FWVersion =  (int)(ControlBytesIn[3] >> 1);										                 
-											             break;
-												}
+					switch (ControlBytesIn[0] & CandCAddrMask) {
+					case 0:
+						// MercuryFWVersion =  (int)(ControlBytesIn[2]);//old
+						break;
+					case 0x8:
+						fwd_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff); // bits 7-0 (AIN5) Penny/Hermes
+						FwdPower = fwd_power_stage; 
+						break;
+					case 0x10:
+						ref_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff); // bits 7-0 (AIN2) Alex reverse power
+						RefPower = ref_power_stage;
+						break;
+					case 0x18:
+						//ain4 |=  (((int)(ControlBytesIn[2])) & 0xff);
+						//AIN4 = ain4;
+						break;
+					case 0x20:
+						Mercury2FWVersion =  (int)(ControlBytesIn[2] >> 1);										                 
+						processOverloadBit((ControlBytesIn[1] & 1), 
+							(ControlBytesIn[2] & 1));
+						break;
+					}
 
-#if 0
-												if ( (ControlBytesIn[0] & CandCAddrMask) == 0 ) { 
-													PenelopeFWVersion = (int)(ControlBytesIn[3]);
-												}
-												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x08 ) {  // Alex/Apollo(AIN1), fwd power, c0 == 0x08, c3 == bits 15-8, c4 == bits 7-0
-													alex_fwd_power = ((ControlBytesIn[3] << 8) & 0xff00); 
-												}
-												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x20 ) {
-												// Assign ControlBytesIn[3] to Mercury3 version number
-												Mercury3FWVersion =  (int)(ControlBytesIn[3] >> 1);
-												//processOverloadBit(ControlBytesIn[3] & 1);
-												}												
-#endif
-                                                state = STATE_CONTROL4;  // look for 5th and last control byte
-                                                break;
-												
-                                        case STATE_CONTROL4:
-                                                // printf(" C4");
-                                                ControlBytesIn[4] = FPGAReadBufp[i];
+					// RxOverrun = FPGAReadBufp[i];
+					state = STATE_CONTROL3; // look for 4th control byte
+					break;
 
-									        	switch (ControlBytesIn[0] & CandCAddrMask) {
-										          case 0:
-                                                         OzyFWVersion =  (int)(ControlBytesIn[4]);
-											             break;
-										          case 0x8:
-                                                         alex_fwd_power |=  (((int)(ControlBytesIn[4])) & 0xff); // bits 7-0 (AIN1) Alex
-													     AlexFwdPower = alex_fwd_power;
-										                 break;
-										          case 0x10:	
-                                                         //ain3 |=  (((int)(ControlBytesIn[4])) & 0xff);
-													     //AIN3 = ain3;
-  											             break;
-												  case 0x18:
-						                                 //ain6 |=  (((int)(ControlBytesIn[4])) & 0xff);
-													     //AIN6 = ain6; //Hermes 13.8v (22v scalle)
-													  break;
-										          case 0x20:
- 											            // Mercury4FWVersion = (int)(ControlBytesIn[4] >> 1);										                 
-											             break;
-												}
+				case STATE_CONTROL3:  //
+					// printf(" C3");
+					ControlBytesIn[3] = FPGAReadBufp[i];
+					switch (ControlBytesIn[0] & CandCAddrMask) {
+					case 0:
+						PenelopeFWVersion = (int)(ControlBytesIn[3]);
+						break;
+					case 0x8:
+						alex_fwd_power = ((ControlBytesIn[3] << 8) & 0xff00); //bits 15-8 (AIN1) Alex
+						break;
+					case 0x10:
+						//ain3 = ((ControlBytesIn[3] << 8) & 0xff00);
+						break;
+					case 0x18:
+						//ain6 = ((ControlBytesIn[3] << 8) & 0xff00); //Hermes 13.8v (22v scale)
+						break;
+					case 0x20:
+						//  Mercury3FWVersion =  (int)(ControlBytesIn[3] >> 1);										                 
+						break;
+					}
 
-#if 0
-												if ( (ControlBytesIn[0] & CandCAddrMask) == 0 ) { 
-													OzyFWVersion =  (int)(ControlBytesIn[4]); 
-												}
- 												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x08 ) {  // Alex/Apollo(AIN1) fwd power, c0 == 0x08, c3 == bits 15-8, c4 == bits 7-0													
-													alex_fwd_power |=  (((int)(ControlBytesIn[4])) & 0xff);
-													AlexFwdPower = alex_fwd_power; 	
-												}
-												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x20 ) {
-												// Assign ControlBytesIn[4] to Mercury4 version number
-												Mercury4FWVersion = (int)(ControlBytesIn[4] >> 1);
-												//processOverloadBit(ControlBytesIn[4] & 1);
-												}												
-#endif                                                
-                                                state = STATE_SAMPLE_HI;
-                                              //  sample_is_left = 1;
-                                               // printf("fa: %d fp: %d\n", RxFifoAvail, RxFramePlaying);
-                                                break;
-												
-                                        case STATE_SAMPLE_HI:
-                                                //printf(" HI");
-                                                 this_num = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
-                                                //this_num = 0xFF << 16; // start new sample, preserve the sign bit!
-                                                state = STATE_SAMPLE_MID;
-                                                break;
-												
-                                        case STATE_SAMPLE_MID:
-                                                //printf(" MI");
-                                                this_num = (((unsigned char)FPGAReadBufp[i]) <<8) | this_num;  // add in middle part of sample -- unsigned!
-                                                state = STATE_SAMPLE_LO;
-                                                break;
-												
-                                        case STATE_SAMPLE_LO:
-                                               // printf(" LO");
-											//printf("sil: %d rx2: %d sc: %d\n", sample_is_left, rx2_samples, sample_count);
-                                                this_num = ((unsigned char)FPGAReadBufp[i]) | this_num; // add in last part of sample
-                                                IOSampleInBufp[sample_count] = this_num;
-                                                ++sample_count;
-											//printf("sil: %d rx2: %d sc: %d\n", sample_is_left, rx2_samples, sample_count);
+					state = STATE_CONTROL4;  // look for 5th and last control byte
+					break;
 
-                                                ++samples_this_sync;
+				case STATE_CONTROL4:
+					// printf(" C4");
+					ControlBytesIn[4] = FPGAReadBufp[i];
 
-												//printf(" Rx: %d loops: %d", receivers, rx_sample_loops);
-												if(rx_sample_loops < receivers)
-												{
-													state = STATE_SAMPLE_HI;
-													++rx_sample_loops;
-													
-												}
-												else 
-												{
-                                                    state = STATE_SAMPLE_MIC_HI;
-													rx_sample_loops = 1;
-                                                
-												}
-												//++rx2_samples;
-#if 0
-                                                if ( sample_is_left ) {  // we just did the left sample - get the right one
-                                                        state = STATE_SAMPLE_HI;
-                                                }
-												else if (rx2_samples) { 
-													state = STATE_SAMPLE_HI;
-													//sample_is_left = 1;
-												}
-												else {   // we just finished a 24 bit right sample - time to get the 16 bit mic sample
-                                                        state = STATE_SAMPLE_MIC_HI;
-                                                }
+					switch (ControlBytesIn[0] & CandCAddrMask) {
+					case 0:
+						OzyFWVersion =  (int)(ControlBytesIn[4]);
+						break;
+					case 0x8:
+						alex_fwd_power |=  (((int)(ControlBytesIn[4])) & 0xff); // bits 7-0 (AIN1) Alex
+						AlexFwdPower = alex_fwd_power;
+						break;
+					case 0x10:	
+						//ain3 |=  (((int)(ControlBytesIn[4])) & 0xff);
+						//AIN3 = ain3;
+						break;
+					case 0x18:
+						//ain6 |=  (((int)(ControlBytesIn[4])) & 0xff);
+						//AIN6 = ain6; //Hermes 13.8v (22v scalle)
+						break;
+					case 0x20:
+						// Mercury4FWVersion = (int)(ControlBytesIn[4] >> 1);										                 
+						break;
+					}
 
-                                                if ( sample_is_left ) {
-                                                        sample_is_left = 0;
-														//rx2_samples = 1;
-                                                }
-                                                else {
-                                                        sample_is_left = 1;
-														//rx2_samples = 1;
-                                                }
-											//printf("rx2: %d sc: %d\n", rx2_samples, samples_this_sync);
-#endif
-                                                break;
+					state = STATE_SAMPLE_HI;
+					//  sample_is_left = 1;
+					// printf("fa: %d fp: %d\n", RxFifoAvail, RxFramePlaying);
+					break;
 
-                                        case STATE_SAMPLE_MIC_HI:
-//printf(" Mic HI ");
-                                                this_num = ((int)FPGAReadBufp[i]) << 8;  // read hi word of sample - preserve sign moron!
-                                                state = STATE_SAMPLE_MIC_LO;
-                                                break;
+				case STATE_SAMPLE_HI:
+					//printf(" HI");
+					this_num = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
+					//this_num = 0xFF << 16; // start new sample, preserve the sign bit!
+					state = STATE_SAMPLE_MID;
+					break;
 
-                                        case STATE_SAMPLE_MIC_LO:
-                                               //printf(" Mic LO ");
-                                                this_num = ((unsigned char)FPGAReadBufp[i]) | this_num; // add in last part of sample
-                                                IOSampleInBufp[sample_count] = this_num;
-                                                ++sample_count;
-                                                if ( sample_count >= 5*BlockSize ) {   // only 5 channels on input (i1,q1,i2,q2,mic), although buffer is sized for 6
-                                                        sample_count = 0;
-														//printf(" IOS: %d ", IOSampleInBufp); fflush(stdout);
-                                                        // printf("iot: calling proc buf\n"); fflush(stdout);
+				case STATE_SAMPLE_MID:
+					//printf(" MI");
+					this_num = (((unsigned char)FPGAReadBufp[i]) <<8) | this_num;  // add in middle part of sample -- unsigned!
+					state = STATE_SAMPLE_LO;
+					break;
 
-                                                        Callback_ProcessBuffer(IOSampleInBufp, sample_bufp_size);
+				case STATE_SAMPLE_LO:
+					// printf(" LO");
+					//printf("sil: %d rx2: %d sc: %d\n", sample_is_left, rx2_samples, sample_count);
+					this_num = ((unsigned char)FPGAReadBufp[i]) | this_num; // add in last part of sample
+					IOSampleInBufp[sample_count] = this_num;
+					++sample_count;
+					//printf("sil: %d rx2: %d sc: %d\n", sample_is_left, rx2_samples, sample_count);
 
-                                                         //printf("iot: proc buf returned\n"); fflush(stdout);
-                                                        ++complete_blocks;
-                                                }
+					++samples_this_sync;
 
-                                                ++samples_this_sync;  //1-rx = 189, 2-rx = 180
-												state = samples_this_sync == 180 ? STATE_SYNC_HI : STATE_SAMPLE_HI;
+					//printf(" Rx: %d loops: %d", receivers, rx_sample_loops);
+					if(rx_sample_loops < receivers)
+					{
+						state = STATE_SAMPLE_HI;
+						++rx_sample_loops;
 
-                                              //printf("s_t_s: %d\n", samples_this_sync);
-                                                break;
+					}
+					else 
+					{
+						state = STATE_SAMPLE_MIC_HI;
+						rx_sample_loops = 1;
 
-                                        case STATE_SYNC_HI:
-											//printf(" SH");
-                                                samples_this_sync = 0;
-                                                if ( (unsigned char)FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
-                                                        ++LostSyncCount;
-                                                        state = STATE_NOSYNC;
-                                                        HaveSync = 0;
-                                                }
-                                                else {
-                                                        state = STATE_SYNC_MID;
-                                                }
-												//printf(" Sync: %d\n", FPGAReadBufp[i]);
-                                                break;
-												
-                                        case STATE_SYNC_MID:
-											//printf(" SM");
-                                                if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
-                                                        ++LostSyncCount;
-                                                        state = STATE_NOSYNC;
-                                                        HaveSync = 0;
-                                                }
-                                                else {
-                                                        state = STATE_SYNC_LO;
-                                                }
-                                                //printf(" Sync: %d\n", FPGAReadBufp[i]);
-                                                break;
-												
-                                        case STATE_SYNC_LO:
-                                               // printf(" SL");
-                                                if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
-                                                        ++LostSyncCount;
-                                                        state = STATE_NOSYNC;
-                                                        HaveSync = 0;
-                                                }
-                                                else {
-                                                        state = STATE_CONTROL0;
-                                              }
-                                              // printf(" Sync: %d\n", FPGAReadBufp[i]);
-                                               break;
+					}
+					//++rx2_samples;
+					break;
 
-                                        default:
-                                               // printf("io-thead: internal error, bad state in read loop\n");
-                                                state = STATE_NOSYNC;
-                                                break;
+				case STATE_SAMPLE_MIC_HI:
+					//printf(" Mic HI ");
+					this_num = ((int)FPGAReadBufp[i]) << 8;  // read hi word of sample - preserve sign moron!
+					state = STATE_SAMPLE_MIC_LO;
+					break;
 
-                                }
-                                second_last_byte = last_byte;
-                                last_byte = FPGAReadBufp[i];
+				case STATE_SAMPLE_MIC_LO:
+					//printf(" Mic LO ");
+					this_num = ((unsigned char)FPGAReadBufp[i]) | this_num; // add in last part of sample
+					IOSampleInBufp[sample_count] = this_num;
+					++sample_count;
+					if ( sample_count >= 5*BlockSize ) {   // only 5 channels on input (i1,q1,i2,q2,mic), although buffer is sized for 6
+						sample_count = 0;
+						//printf(" IOS: %d ", IOSampleInBufp); fflush(stdout);
+						// printf("iot: calling proc buf\n"); fflush(stdout);
 
-                        } /* for numread = ... */
-					}	/* metis or write frame */
+						Callback_ProcessBuffer(IOSampleInBufp, sample_bufp_size);
 
-                // ok now that we've handled the inbound block send outbound data if we have any
-                //
-                // printf("out top: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
-                wrote_frame = 0;
+						//printf("iot: proc buf returned\n"); fflush(stdout);
+						++complete_blocks;
+					}
 
-                if ( !have_out_buf ) {
-                        outbufp = getNewOutBufFromFIFO();
-                        if ( outbufp != NULL ) {
-                                have_out_buf = 1;
-                        }
-                        outbufpos = 0;
-                }
+					++samples_this_sync;  //1-rx = 189, 2-rx = 180
+					state = samples_this_sync == 180 ? STATE_SYNC_HI : STATE_SAMPLE_HI;
 
-                ++SendOpprotunity;
-                ok_to_write = IsOkToSendDataToFPGA();
-                // printf("write top: okw: %d\n", ok_to_write); fflush(stdout);
-                if ( have_out_buf && ok_to_write  ) {
-                        // printf("enter out loop /w buf: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
-                        // while we have space in the output buffer put data in it
-                        while ( writebufpos < FPGAWriteBufSize /*OUTBUF_SIZE*/ ) {
-                                switch ( out_state ) {
-                                                case OUT_STATE_SYNC_HI_NEEDED:
-                                                        out_sample_pairs_this_sync = 0;
-                                                        out_state = OUT_STATE_SYNC_MID_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = 0x7f;
-                                                        break;
+					//printf("s_t_s: %d\n", samples_this_sync);
+					break;
 
-                                                case OUT_STATE_SYNC_MID_NEEDED:
-                                                        out_state = OUT_STATE_SYNC_LO_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = 0x7f;
-                                                        break;
+				case STATE_SYNC_HI:
+					//printf(" SH");
+					samples_this_sync = 0;
+					if ( (unsigned char)FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
+						++LostSyncCount;
+						state = STATE_NOSYNC;
+						HaveSync = 0;
+					}
+					else {
+						state = STATE_SYNC_MID;
+					}
+					//printf(" Sync: %d\n", FPGAReadBufp[i]);
+					break;
 
-                                               case OUT_STATE_SYNC_LO_NEEDED:
-                                                        out_state = OUT_STATE_CONTROL0;
-                                                        FPGAWriteBufp[writebufpos] = 0x7f;
-                                                        break;
- 
-                                                case OUT_STATE_CONTROL0: //C0
-                                                        out_state = OUT_STATE_CONTROL1;
+				case STATE_SYNC_MID:
+					//printf(" SM");
+					if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
+						++LostSyncCount;
+						state = STATE_NOSYNC;
+						HaveSync = 0;
+					}
+					else {
+						state = STATE_SYNC_LO;
+					}
+					//printf(" Sync: %d\n", FPGAReadBufp[i]);
+					break;
 
-                                                          FPGAWriteBufp[writebufpos] = (unsigned char)XmitBit;                                                    
-                                                          FPGAWriteBufp[writebufpos] &= 1; // not needed ?
-#if 0
-                                                        if ( out_control_idx == 1 ) {  // send TX freq
-                                                                FPGAWriteBufp[writebufpos] |= 2;
-                                                        }
-														else if  ( out_control_idx == 2 ) { 
-															FPGAWriteBufp[writebufpos] |= 0x12; //C0 0001001x
-														} 
-                                                        else if ( out_control_idx == 3 ) {  // send RX1 freq
-                                                                FPGAWriteBufp[writebufpos] |= 4;
-                                                        }
-							                            else if ( out_control_idx == 4 ) {  // send RX2 freq
-                                                                FPGAWriteBufp[writebufpos] |= 6;
-                                                 } 
-#endif
-														switch (out_control_idx) {
-												             case 0:
-                                                                 FPGAWriteBufp[writebufpos] |= 0;
-																 break;
-															 case 1: //TX VFO
-                                                                 FPGAWriteBufp[writebufpos] |= 2;
-																 break;
-															 case 2: //RX1 VFO
-                                                                  FPGAWriteBufp[writebufpos] |= 4;
-																 break;
-															 case 3: //RX2 VFO
-                                                                 FPGAWriteBufp[writebufpos] |= 6;
-																 break;
-															 case 4: //RX3 VFO
-																 FPGAWriteBufp[writebufpos] |= 8;
-																 break;
-					                                         case 5: //RX4 VFO
-																 FPGAWriteBufp[writebufpos] |= 0x0a;
-																 break;
-															 case 6: 
-																 FPGAWriteBufp[writebufpos] |= 0x12; //C0 0001 001x
-																 break;
-															 case 7: //Preamp control
-                                                                 FPGAWriteBufp[writebufpos] |= 0x14; //C0 0001 010x
-																 break;
-														  }
+				case STATE_SYNC_LO:
+					// printf(" SL");
+					if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
+						++LostSyncCount;
+						state = STATE_NOSYNC;
+						HaveSync = 0;
+					}
+					else {
+						state = STATE_CONTROL0;
+					}
+					// printf(" Sync: %d\n", FPGAReadBufp[i]);
+					break;
 
-  							                            ControlBytesOut[0] = FPGAWriteBufp[writebufpos];
-                                                        break;
+				default:
+					// printf("io-thead: internal error, bad state in read loop\n");
+					state = STATE_NOSYNC;
+					break;
 
-                                                case OUT_STATE_CONTROL1: //C1
-                                                        out_state = OUT_STATE_CONTROL2;
-                                                        // send sample rate in C1 low 2 bits
-#if 0                                                        
+				}
+				second_last_byte = last_byte;
+				last_byte = FPGAReadBufp[i];
 
-														if ( out_control_idx == 1 ) {
-                                                            FPGAWriteBufp[writebufpos] =  (VFOfreq_tx >> 24) & 0xff; // byte 0 of freq tx
-                                                        }
-														else if ( out_control_idx == 2 ) {  // send power out level 
-															if (HermesPowerEnabled && XmitBit != 0) 
-															{
-															    FPGAWriteBufp[writebufpos] = (unsigned char)(OutputPowerFactor & 0xff);
-                                                                //printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
-															} 
-															else 
-															{
-                                                                FPGAWriteBufp[writebufpos] = 0;
-															}
-														} 
-														else if ( out_control_idx == 3 ) {
-                                                            FPGAWriteBufp[writebufpos] =  (VFOfreq_rx1 >> 24) & 0xff; // RX1
-                                                        }
- 														else if ( out_control_idx == 4 ) {
-                                                            FPGAWriteBufp[writebufpos] =  (VFOfreq_rx2 >> 24) & 0xff; // RX2
-                                                        }
-                                                       else { // out_control_idx == 0
-															FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-                                                       } 
-#endif
-														switch (out_control_idx) {
-												             case 0:
-															     FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-																// printf(" C1Mask: %d\n", C1Mask);
- 																 break;
-															 case 1:
-                                                                 FPGAWriteBufp[writebufpos] =  (VFOfreq_tx >> 24) & 0xff; // byte 0 of tx freq 
-																 break;
-															 case 2:
-                                                                 FPGAWriteBufp[writebufpos] =  (VFOfreq_rx1 >> 24) & 0xff; // RX1
-																 break;
-															 case 3:
- 																 FPGAWriteBufp[writebufpos] =  (VFOfreq_rx2 >> 24) & 0xff; // RX2
-																 break;
-															 case 4:
-																 FPGAWriteBufp[writebufpos] =  (VFOfreq_rx3 >> 24) & 0xff; // RX3
-																 break;
-															 case 5:
-																 FPGAWriteBufp[writebufpos] =  (VFOfreq_rx4 >> 24) & 0xff; // RX4
-																 break;
-															 case 6:
- 																 if (HermesPowerEnabled && XmitBit != 0) { 															     
-																	 if (swr_protect == 0.0f) swr_protect = 0.3f;
-																	 pf = (unsigned char) (OutputPowerFactor * swr_protect);
-																	 FPGAWriteBufp[writebufpos] = (unsigned char) (pf & 0xff); //(OutputPowerFactor & 0xff);
-                                                                 //printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
-															     } 
-															     else 
-															      {
-                                                                    FPGAWriteBufp[writebufpos] = 0;
-															      } 
-																 break;
-															 case 7:
-                                                                 FPGAWriteBufp[writebufpos] = ( Merc2Preamp | Merc1Preamp) & 0xf; 
-																// printf(" pamp1: %d pamp2: %d\n", Merc1Preamp, Merc2Preamp);
-																 break;
-														} 
+			} /* for numread = ... */
+		}	/* metis or write frame */
 
-                                                        ControlBytesOut[1] = FPGAWriteBufp[writebufpos];
-                                                        break;
+		// ok now that we've handled the inbound block send outbound data if we have any
+		//
+		// printf("out top: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
+		wrote_frame = 0;
 
-                                                case OUT_STATE_CONTROL2: //C2
-                                                        out_state = OUT_STATE_CONTROL3;
-#if 0 
-														if ( out_control_idx == 1 ) {
-                                                                FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 16) & 0xff; // TX freq
-                                                        }
-														else if ( out_control_idx == 2 ) { 
-															// FPGAWriteBufp[writebufpos] = (MicBoost | LineIn) & 0x3;
-                                                               FPGAWriteBufp[writebufpos] = (MicBoost | LineIn | ApolloFilt | 
-																                    ApolloTune | ApolloATU | HermesFilt | AlexManEnable) & 0x7f;
-                                                                 // printf("Alex: 0x%x\n", AlexManEnable);  fflush(stdout);
-                                                                 // printf("WriteBuf: 0x%x\n", FPGAWriteBufp[writebufpos]);  fflush(stdout);
-														} 
-                                                         else if ( out_control_idx == 3 ) {
-                                                                FPGAWriteBufp[writebufpos] = (VFOfreq_rx1 >> 16) & 0xff; // RX1 freq
-                                                        }
-                                                      
-                                                        else if ( out_control_idx == 4 ) {
-                                                                FPGAWriteBufp[writebufpos] = (VFOfreq_rx2 >> 16) & 0xff; // RX2 freq
-                                                        }
-                                                        else { // out_control_idx == 0
-															FPGAWriteBufp[writebufpos] = PennyOCBits << 1; // ControlBytesIn[2];  
-                                                        } 
-#endif
-  
-														switch (out_control_idx) {
-												             case 0:
-                                                                 FPGAWriteBufp[writebufpos] = PennyOCBits << 1; // ControlBytesIn[2];
-																 break;
-															 case 1:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 16) & 0xff; // TX freq
-																 break;
-															 case 2:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq_rx1 >> 16) & 0xff; // RX1 freq
-																 break;
-															 case 3:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq_rx2 >> 16) & 0xff; // RX2 freq
-																 break;
-															 case 4:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq_rx3 >> 16) & 0xff; // RX3 freq
-																 break;
-															 case 5:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq_rx4 >> 16) & 0xff; // RX4 freq
-																 break;
-															 case 6:
-                                                                FPGAWriteBufp[writebufpos] = (MicBoost | LineIn | ApolloFilt | 
-																                 ApolloTune | ApolloATU | HermesFilt | AlexManEnable) & 0x7f;
-																 break;																 
-															 case 7:
-																 break;
-														}
-                                                       
-                                                        ControlBytesOut[2] = FPGAWriteBufp[writebufpos];
-                                                        break;
+		if ( !have_out_buf ) {
+			outbufp = getNewOutBufFromFIFO();
+			if ( outbufp != NULL ) {
+				have_out_buf = 1;
+			}
+			outbufpos = 0;
+		}
 
-                                                case OUT_STATE_CONTROL3: //C3
-                                                       out_state = OUT_STATE_CONTROL4;
-#if 0
-                                                        if ( out_control_idx == 1 ) {
-                                                             FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 8) & 0xff;
-                                                        }
-														else if ( out_control_idx == 2 ) { 
-                                                             FPGAWriteBufp[writebufpos] = ( AlexHPFMask & 0x7f );
-                                                             //printf("AlexHPF: 0x%x\n", AlexHPFMask);  fflush(stdout);
-                                                             //printf("HPFBuf: 0x%x\n", FPGAWriteBufp[writebufpos]);  fflush(stdout);
-															
-														}
-                                                        else if ( out_control_idx == 3 ) {
-                                                             FPGAWriteBufp[writebufpos] = (VFOfreq_rx1 >> 8) & 0xff;
-                                                        }
-								                        else if ( out_control_idx == 4 ) {
-                                                             FPGAWriteBufp[writebufpos] = (VFOfreq_rx2 >> 8) & 0xff;
-                                                        }
-														else { // out_control_idx == 0
-                                                             FPGAWriteBufp[writebufpos] = ( MercAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 																
-#endif
-															 switch (out_control_idx) {
-												             case 0:
-                                                                 FPGAWriteBufp[writebufpos] = ( MercAtten | MercDither | MercPreamp |
-							                                                                   MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
-                                                                // FPGAWriteBufp[writebufpos] = ( MercAtten | MercDither | MercRandom |
-							                                                                   // AlexRxAnt | AlexRxOut) & 0xff; 
-																 break;
-															 case 1:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 8) & 0xff;
-																 break;
-															 case 2:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq_rx1 >> 8) & 0xff;
-																 break;
-															 case 3:
-                                                                  FPGAWriteBufp[writebufpos] = (VFOfreq_rx2 >> 8) & 0xff;
-																 break;
-															 case 4:
-                                                                  FPGAWriteBufp[writebufpos] = (VFOfreq_rx3 >> 8) & 0xff;
-																 break;
-															 case 5:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq_rx4 >> 8) & 0xff;
-																 break;
-															 case 6:
-                                                                 FPGAWriteBufp[writebufpos] = ( AlexHPFMask & 0x7f );
-																 break;
-															 case 7:
-																 break;
-														}                                                         
- 
-														ControlBytesOut[3] = FPGAWriteBufp[writebufpos];
-                                                        break;
+		++SendOpprotunity;
+		ok_to_write = IsOkToSendDataToFPGA();
+		// printf("write top: okw: %d\n", ok_to_write); fflush(stdout);
+		if ( have_out_buf && ok_to_write  ) {
+			// printf("enter out loop /w buf: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
+			// while we have space in the output buffer put data in it
+			while ( writebufpos < FPGAWriteBufSize /*OUTBUF_SIZE*/ ) {
+				switch ( out_state ) {
+				case OUT_STATE_SYNC_HI_NEEDED:
+					out_sample_pairs_this_sync = 0;
+					out_state = OUT_STATE_SYNC_MID_NEEDED;
+					FPGAWriteBufp[writebufpos] = 0x7f;
+					break;
 
-                                                case OUT_STATE_CONTROL4: //C4
-														out_state = OUT_STATE_MON_LEFT_HI_NEEDED;
-                                                        // write_buf[writebufpos] = ControlBytesIn[4];
-#if 0
+				case OUT_STATE_SYNC_MID_NEEDED:
+					out_state = OUT_STATE_SYNC_LO_NEEDED;
+					FPGAWriteBufp[writebufpos] = 0x7f;
+					break;
 
-														  if ( out_control_idx == 1 ) {
-                                                             FPGAWriteBufp[writebufpos] = VFOfreq_tx & 0xff;
-															// printf(" tx_freq: %d\n", VFOfreq_tx); fflush(stdout);
-                                                        }
-														else if ( out_control_idx == 2 ) { 															
-                                                             FPGAWriteBufp[writebufpos] = ( AlexLPFMask & 0x7f );
-			                                                // printf("AlexLPF: 0x%x\n", AlexLPFMask);  fflush(stdout);
-                                                            // printf("LPFBuf: 0x%x\n", FPGAWriteBufp[writebufpos]);  fflush(stdout);
-														}
-                                                      else if ( out_control_idx == 3 ) {
-                                                             FPGAWriteBufp[writebufpos] = VFOfreq_rx1 & 0xff;
-                                                            // printf(" rx1_freq: %d\n", VFOfreq_rx1); fflush(stdout);
-                                                        }
-													  else if ( out_control_idx == 4 ) {
-                                                             FPGAWriteBufp[writebufpos] = VFOfreq_rx2 & 0xff;
-                                                            // printf(" rx2_freq: %d\n", VFOfreq_rx2); fflush(stdout);
-                                                        }
-                                                       else {
-															 FPGAWriteBufp[writebufpos] = (AlexTxAnt | Duplex | NRx) & 0x3F; 
-															// printf(" duplex: %d receivers: %d\n", Duplex, NRx); fflush(stdout);
-                                                        } 
-#endif
-														switch (out_control_idx) {
-												             case 0:
-                                                                 // FPGAWriteBufp[writebufpos] = (0x80 | 0x08 | 0x04);  //set to full duplex - 2 rx 1000 1100
-                                                               FPGAWriteBufp[writebufpos] = (AlexTxAnt | 0x04 | 0x08) & 0x3F;  //set to full duplex - 2 rx
-                                                                //FPGAWriteBufp[writebufpos] = (AlexTxAnt | Duplex | NRx) & 0x3F; 
-																 break;
-															 case 1:
-                                                                 FPGAWriteBufp[writebufpos] = VFOfreq_tx & 0xff;
-																 break;
-															 case 2:
-                                                                 FPGAWriteBufp[writebufpos] = VFOfreq_rx1 & 0xff;
-																 break;
-															 case 3:
- 																 FPGAWriteBufp[writebufpos] = VFOfreq_rx2 & 0xff;
-																 break;
-															 case 4:
-																 FPGAWriteBufp[writebufpos] = VFOfreq_rx3 & 0xff;
-																 break;
-															 case 5:
-																 FPGAWriteBufp[writebufpos] = VFOfreq_rx4 & 0xff;
-																 break;
-															 case 6:
- 																 FPGAWriteBufp[writebufpos] = ( AlexLPFMask & 0x7f );
-                                                                 break;
-															 case 7:
-																 break;
-															}
-    
-													   ControlBytesOut[4] = FPGAWriteBufp[writebufpos];
-                                                        ++out_frame_idx;
+				case OUT_STATE_SYNC_LO_NEEDED:
+					out_state = OUT_STATE_CONTROL0;
+					FPGAWriteBufp[writebufpos] = 0x7f;
+					break;
 
-												switch(out_control_idx) {
-												    case 0:
-													   out_control_idx = 1;
-													break;
-												    case 1: // tx vfo
- 														out_control_idx = 2;
-													break;
-												    case 2: //rx1 vfo
-													   out_control_idx = 3;
-													break;
-												    case 3: //rx2 vfo
-													  // out_control_idx = 4;
-                                                       out_control_idx = 6;//(HermesPowerEnabled || isMetis || AlexEnabled) ? 6 : 7;
-													break;
-												    case 4: //rx3 vfo
-                                                      out_control_idx = 5;
-													break; 
-												    case 5: //rx4 vfo
-                                                       out_control_idx = 6;//(HermesPowerEnabled || isMetis || AlexEnabled) ? 6 : 7;
-													break;
-												    case 6: //Alex filters
-                                                        out_control_idx = 7;
-												    break;
-												    case 7: //Preamp controls
-                                                       out_control_idx = 0;
-												    break;
-												}
-                                                break; 
+				case OUT_STATE_CONTROL0: //C0
+					out_state = OUT_STATE_CONTROL1;
 
-                                                case OUT_STATE_MON_LEFT_HI_NEEDED:
-                                                        out_state = OUT_STATE_MON_LEFT_LO_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+					FPGAWriteBufp[writebufpos] = (unsigned char)XmitBit;                                                    
+					FPGAWriteBufp[writebufpos] &= 1; // not needed ?
+					switch (out_control_idx) {
+					case 0:
+						FPGAWriteBufp[writebufpos] |= 0;
+						break;
+					case 1: //TX VFO
+						FPGAWriteBufp[writebufpos] |= 2;
+						break;
+					case 2: //RX1 VFO
+						FPGAWriteBufp[writebufpos] |= 4;
+						break;
+					case 3: //RX2 VFO
+						FPGAWriteBufp[writebufpos] |= 6;
+						break;
+					case 4: //RX3 VFO
+						FPGAWriteBufp[writebufpos] |= 8;
+						break;
+					case 5: //RX4 VFO
+						FPGAWriteBufp[writebufpos] |= 0x0a;
+						break;
+					case 6: 
+						FPGAWriteBufp[writebufpos] |= 0x12; //C0 0001 001x
+						break;
+					case 7: //Preamp control
+						FPGAWriteBufp[writebufpos] |= 0x14; //C0 0001 010x
+						break;
+					case 8: // Alex 2 control
+						FPGAWriteBufp[writebufpos] |= 0x16; //C0 0001 011x
+						break;
+					case 9: // Alex 3 control
+						FPGAWriteBufp[writebufpos] |= 0x18; //C0 0001 100x
+						break;
+					case 10: // Alex 4 control
+						FPGAWriteBufp[writebufpos] |= 0x1a; //C0 0001 101x
+						break;
 
-                                                case OUT_STATE_MON_LEFT_LO_NEEDED:
-                                                        out_state = OUT_STATE_MON_RIGHT_HI_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+					}
 
-                                               case OUT_STATE_MON_RIGHT_HI_NEEDED:
-                                                        out_state = OUT_STATE_MON_RIGHT_LO_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+					ControlBytesOut[0] = FPGAWriteBufp[writebufpos];
+					break;
 
-												case OUT_STATE_MON_RIGHT_LO_NEEDED:
-                                                        out_state = OUT_STATE_LEFT_HI_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
- 
-  											   case OUT_STATE_LEFT_HI_NEEDED:
-                                                        out_state = OUT_STATE_LEFT_LO_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+				case OUT_STATE_CONTROL1: //C1
+					out_state = OUT_STATE_CONTROL2;
+					// send sample rate in C1 low 2 bits
+					switch (out_control_idx) {
+					case 0:
+						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
+						// printf(" C1Mask: %d\n", C1Mask);
+						break;
+					case 1:
+						FPGAWriteBufp[writebufpos] =  (VFOfreq_tx >> 24) & 0xff; // byte 0 of tx freq 
+						break;
+					case 2:
+						FPGAWriteBufp[writebufpos] =  (VFOfreq_rx1 >> 24) & 0xff; // RX1
+						break;
+					case 3:
+						FPGAWriteBufp[writebufpos] =  (VFOfreq_rx2 >> 24) & 0xff; // RX2
+						break;
+					case 4:
+						FPGAWriteBufp[writebufpos] =  (VFOfreq_rx3 >> 24) & 0xff; // RX3
+						break;
+					case 5:
+						FPGAWriteBufp[writebufpos] =  (VFOfreq_rx4 >> 24) & 0xff; // RX4
+						break;
+					case 6:
+						if (HermesPowerEnabled && XmitBit != 0) { 															     
+							if (swr_protect == 0.0f) swr_protect = 0.3f;
+							pf = (unsigned char) (OutputPowerFactor * swr_protect);
+							FPGAWriteBufp[writebufpos] = (unsigned char) (pf & 0xff); //(OutputPowerFactor & 0xff);
+							//printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
+						} 
+						else 
+						{
+							FPGAWriteBufp[writebufpos] = 0;
+						} 
+						break;
+					case 7:
+						FPGAWriteBufp[writebufpos] = ( Merc2Preamp | Merc1Preamp) & 0xf; 
+						// printf(" pamp1: %d pamp2: %d\n", Merc1Preamp, Merc2Preamp);
+						break;
+					case 8:
+						FPGAWriteBufp[writebufpos] = 0;
+						break;
+					case 9:
+						FPGAWriteBufp[writebufpos] = 0;
+						break;
+					case 10:
+						FPGAWriteBufp[writebufpos] = 0;
+						break;
+					} 
 
-                                               case OUT_STATE_LEFT_LO_NEEDED:
-                                                        out_state = OUT_STATE_RIGHT_HI_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+					ControlBytesOut[1] = FPGAWriteBufp[writebufpos];
+					break;
 
-                                               case OUT_STATE_RIGHT_HI_NEEDED:
-                                                        out_state = OUT_STATE_RIGHT_LO_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+				case OUT_STATE_CONTROL2: //C2
+					out_state = OUT_STATE_CONTROL3;
 
-											   case OUT_STATE_RIGHT_LO_NEEDED:
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        ++out_sample_pairs_this_sync;
-                                                        if ( out_sample_pairs_this_sync == 63 ) {
-                                                                out_state = OUT_STATE_SYNC_HI_NEEDED;
-                                                        }
-                                                        else {
-                                                                out_state = OUT_STATE_MON_LEFT_HI_NEEDED;
-                                                        }
-                                                        break;
+					switch (out_control_idx) {
+					case 0:
+						FPGAWriteBufp[writebufpos] = PennyOCBits << 1; // ControlBytesIn[2];
+						break;
+					case 1:
+						FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 16) & 0xff; // TX freq
+						break;
+					case 2:
+						FPGAWriteBufp[writebufpos] = (VFOfreq_rx1 >> 16) & 0xff; // RX1 freq
+						break;
+					case 3:
+						FPGAWriteBufp[writebufpos] = (VFOfreq_rx2 >> 16) & 0xff; // RX2 freq
+						break;
+					case 4:
+						FPGAWriteBufp[writebufpos] = (VFOfreq_rx3 >> 16) & 0xff; // RX3 freq
+						break;
+					case 5:
+						FPGAWriteBufp[writebufpos] = (VFOfreq_rx4 >> 16) & 0xff; // RX4 freq
+						break;
+					case 6:
+						FPGAWriteBufp[writebufpos] = (MicBoost | LineIn | ApolloFilt | 							
+							ApolloTuner | ApolloATU | HermesFilt | AlexManEnable) & 0x7f;
+						break;																 
+					case 7:
+						FPGAWriteBufp[writebufpos] = LineBoost & 0x1f; 
+						break;
+					case 8:
+						FPGAWriteBufp[writebufpos] = Alex2HPFMask & 0x7f;
+						break;
+					case 9:
+						FPGAWriteBufp[writebufpos] = Alex3HPFMask & 0x7f;
+						break;
+					case 10:
+						FPGAWriteBufp[writebufpos] = Alex4HPFMask & 0x7f;
+						break;
+					}
 
-                                                default:
-                                                        printf("internal error - bad out_state\n");
-                                                        out_state = OUT_STATE_SYNC_HI_NEEDED;
-                                                        break;
-                                }       /* switch (out_state) */
+					ControlBytesOut[2] = FPGAWriteBufp[writebufpos];
+					break;
 
-                                ++writebufpos;
-                                //++out_stream_sync_count;
-                                //if ( out_stream_sync_count >=  512  ) {
-                                //      out_stream_sync_count = 0;
-                                //}
-                                if ( outbufpos >= outbuflen ) {  // we've consumed output buf from powrsdr dsp -- get a new one if one avail
-                                        freeFIFOdata(outbufp);
-                                        outbufp = getNewOutBufFromFIFO();
-                                        if ( outbufp == NULL ) {  // no data bail out
-                                                have_out_buf = 0;
-                                                // printf("no new buffer - bail out: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written);  fflush(stdout);
-                                                break;
-                                        }
-                                        else {
-                                                have_out_buf = 1;
-                                                outbufpos = 0;
-                                                // printf("new buffer: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
-                                        }
-                                }
-                        }  /* while writebufpos < FPGAWriteBufSize */
+				case OUT_STATE_CONTROL3: //C3
+					out_state = OUT_STATE_CONTROL4;
+					switch (out_control_idx) {
+					case 0:
+						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
+							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
+						// FPGAWriteBufp[writebufpos] = ( MercAtten | MercDither | MercRandom |
+						// AlexRxAnt | AlexRxOut) & 0xff; 
+						break;
+					case 1:
+						FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 8) & 0xff;
+						break;
+					case 2:
+						FPGAWriteBufp[writebufpos] = (VFOfreq_rx1 >> 8) & 0xff;
+						break;
+					case 3:
+						FPGAWriteBufp[writebufpos] = (VFOfreq_rx2 >> 8) & 0xff;
+						break;
+					case 4:
+						FPGAWriteBufp[writebufpos] = (VFOfreq_rx3 >> 8) & 0xff;
+						break;
+					case 5:
+						FPGAWriteBufp[writebufpos] = (VFOfreq_rx4 >> 8) & 0xff;
+						break;
+					case 6:
+						FPGAWriteBufp[writebufpos] = AlexHPFMask & 0x7f;
+						break;
+					case 7: // (0, 1 = open drain pins 1,2) (2, 3 = TTL pins 3,4)
+						FPGAWriteBufp[writebufpos] = (UserOut0 | UserOut1 | UserOut2 | UserOut3) & 0x0f;
+						break;
+					case 8:
+						FPGAWriteBufp[writebufpos] = Alex2LPFMask & 0x7f;
+						break;
+					case 9:
+						FPGAWriteBufp[writebufpos] = Alex3LPFMask & 0x7f;
+						break;
+					case 10:
+						FPGAWriteBufp[writebufpos] = Alex4LPFMask & 0x7f;
+						break;
+					}                                                         
 
-                        if ( writebufpos >= FPGAWriteBufSize ) {  // write the buffer if we've filled it.
-                                wrote_frame = 1;
-                                if ( !ForceNoSend ) {
+					ControlBytesOut[3] = FPGAWriteBufp[writebufpos];
+					break;
+
+				case OUT_STATE_CONTROL4: //C4
+					out_state = OUT_STATE_MON_LEFT_HI_NEEDED;
+					// write_buf[writebufpos] = ControlBytesIn[4];
+					switch (out_control_idx) {
+					case 0:
+						// FPGAWriteBufp[writebufpos] = (0x80 | 0x08 | 0x04);  //set to full duplex - 2 rx 1000 1100
+						FPGAWriteBufp[writebufpos] = (AlexTxAnt | 0x04 | 0x08) & 0x3F;  //set to full duplex - 2 rx
+						//FPGAWriteBufp[writebufpos] = (AlexTxAnt | Duplex | NRx) & 0x3F; 
+						break;
+					case 1:
+						FPGAWriteBufp[writebufpos] = VFOfreq_tx & 0xff;
+						break;
+					case 2:
+						FPGAWriteBufp[writebufpos] = VFOfreq_rx1 & 0xff;
+						break;
+					case 3:
+						FPGAWriteBufp[writebufpos] = VFOfreq_rx2 & 0xff;
+						break;
+					case 4:
+						FPGAWriteBufp[writebufpos] = VFOfreq_rx3 & 0xff;
+						break;
+					case 5:
+						FPGAWriteBufp[writebufpos] = VFOfreq_rx4 & 0xff;
+						break;
+					case 6:
+						FPGAWriteBufp[writebufpos] = AlexLPFMask & 0x7f;
+						break;
+					case 7:
+						FPGAWriteBufp[writebufpos] = 0;
+						break;
+					case 8:
+						FPGAWriteBufp[writebufpos] = 0;
+						break;
+					case 9:
+						FPGAWriteBufp[writebufpos] = 0;
+						break;
+					case 10:
+						FPGAWriteBufp[writebufpos] = 0;
+						break;
+					}
+
+					ControlBytesOut[4] = FPGAWriteBufp[writebufpos];
+					++out_frame_idx;
+
+					switch(out_control_idx) {
+					case 0:
+						out_control_idx = 1;
+						break;
+					case 1: // tx vfo
+						out_control_idx = 2;
+						break;
+					case 2: //rx1 vfo
+						out_control_idx = 3;
+						break;
+					case 3: //rx2 vfo
+						// out_control_idx = 4;
+						out_control_idx = 6; //(HermesPowerEnabled || isMetis || AlexEnabled) ? 6 : 7;
+						break;
+					case 4: //rx3 vfo
+						out_control_idx = 5;
+						break; 
+					case 5: //rx4 vfo
+						out_control_idx = 6;
+						break;
+					case 6: //Alex filters
+						out_control_idx = 7;
+						break;
+					case 7: //Preamp controls
+						//out_control_idx = 0; // loop back to beginning
+						out_control_idx = 8; //  Goto Alex 2 Controls
+						break;
+					case 8: // Alex 2 control
+						//	out_control_idx = 9;
+						out_control_idx = 0;
+						break;
+					case 9: // Alex 3 control
+						out_control_idx = 10;
+						break;
+					case 10: // Alex 4 control
+						out_control_idx = 0;
+						break;
+					}
+					break; 
+
+				case OUT_STATE_MON_LEFT_HI_NEEDED:
+					out_state = OUT_STATE_MON_LEFT_LO_NEEDED;
+					FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+					++outbufpos;
+					break;
+
+				case OUT_STATE_MON_LEFT_LO_NEEDED:
+					out_state = OUT_STATE_MON_RIGHT_HI_NEEDED;
+					FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+					++outbufpos;
+					break;
+
+				case OUT_STATE_MON_RIGHT_HI_NEEDED:
+					out_state = OUT_STATE_MON_RIGHT_LO_NEEDED;
+					FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+					++outbufpos;
+					break;
+
+				case OUT_STATE_MON_RIGHT_LO_NEEDED:
+					out_state = OUT_STATE_LEFT_HI_NEEDED;
+					FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+					++outbufpos;
+					break;
+
+				case OUT_STATE_LEFT_HI_NEEDED:
+					out_state = OUT_STATE_LEFT_LO_NEEDED;
+					FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+					++outbufpos;
+					break;
+
+				case OUT_STATE_LEFT_LO_NEEDED:
+					out_state = OUT_STATE_RIGHT_HI_NEEDED;
+					FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+					++outbufpos;
+					break;
+
+				case OUT_STATE_RIGHT_HI_NEEDED:
+					out_state = OUT_STATE_RIGHT_LO_NEEDED;
+					FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+					++outbufpos;
+					break;
+
+				case OUT_STATE_RIGHT_LO_NEEDED:
+					FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+					++outbufpos;
+					++out_sample_pairs_this_sync;
+					if ( out_sample_pairs_this_sync == 63 ) {
+						out_state = OUT_STATE_SYNC_HI_NEEDED;
+					}
+					else {
+						out_state = OUT_STATE_MON_LEFT_HI_NEEDED;
+					}
+					break;
+
+				default:
+					printf("internal error - bad out_state\n");
+					out_state = OUT_STATE_SYNC_HI_NEEDED;
+					break;
+				}       /* switch (out_state) */
+
+				++writebufpos;
+				//++out_stream_sync_count;
+				//if ( out_stream_sync_count >=  512  ) {
+				//      out_stream_sync_count = 0;
+				//}
+				if ( outbufpos >= outbuflen ) {  // we've consumed output buf from powrsdr dsp -- get a new one if one avail
+					freeFIFOdata(outbufp);
+					outbufp = getNewOutBufFromFIFO();
+					if ( outbufp == NULL ) {  // no data bail out
+						have_out_buf = 0;
+						// printf("no new buffer - bail out: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written);  fflush(stdout);
+						break;
+					}
+					else {
+						have_out_buf = 1;
+						outbufpos = 0;
+						// printf("new buffer: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
+					}
+				}
+			}  /* while writebufpos < FPGAWriteBufSize */
+
+			if ( writebufpos >= FPGAWriteBufSize ) {  // write the buffer if we've filled it.
+				wrote_frame = 1;
+				if ( !ForceNoSend ) {
 #ifdef XYLO
-                                        numwritten = XyloBulkWrite(XyloH, 2, FPGAWriteBufp, FPGAWriteBufSize);
+					numwritten = XyloBulkWrite(XyloH, 2, FPGAWriteBufp, FPGAWriteBufSize);
 #endif
 #ifdef OZY	
-										if ( FPGATestMode ) { 
-											int loop_count = FPGAWriteBufSize / 512; 
-											int j; 
-											for ( j = 0; j < loop_count; j++ ) { 
-												memcpy(FPGAWriteBufp + 8 + (512*j), fpga_test_buf+8, 512-8); 
-											} 
-										} 
- 										if ( isMetis ) { 
-											numwritten = MetisBulkWrite(0x02, FPGAWriteBufp, FPGAWriteBufSize);
-										}
-										else { 
-											numwritten = OzyBulkWrite(OzyH, 0x02, FPGAWriteBufp, FPGAWriteBufSize);
-										}
+					if ( FPGATestMode ) { 
+						int loop_count = FPGAWriteBufSize / 512; 
+						int j; 
+						for ( j = 0; j < loop_count; j++ ) { 
+							memcpy(FPGAWriteBufp + 8 + (512*j), fpga_test_buf+8, 512-8); 
+						} 
+					} 
+					if ( isMetis ) { 
+						numwritten = MetisBulkWrite(0x02, FPGAWriteBufp, FPGAWriteBufSize);
+					}
+					else { 
+						numwritten = OzyBulkWrite(OzyH, 0x02, FPGAWriteBufp, FPGAWriteBufSize);
+					}
 #endif
-                                }
-                                else {
-                                        numwritten = FPGAWriteBufSize;
-                                }
-                                // numwritten = OUTBUF_SIZE;
+				}
+				else {
+					numwritten = FPGAWriteBufSize;
+				}
+				// numwritten = OUTBUF_SIZE;
 
 #ifdef SAVE_WRITES_TO_BUFFER
-                                memcpy(WriteSaveBuf[SaveWritesIdx], FPGAWriteBufp, FPGAWriteBufSize);
-                                ++SaveWritesIdx;
-                                if ( SaveWritesIdx >= NUM_WRITE_BUFS_TO_SAVE ) {
-                                        SaveWritesIdx = 0;
-                                }
+				memcpy(WriteSaveBuf[SaveWritesIdx], FPGAWriteBufp, FPGAWriteBufSize);
+				++SaveWritesIdx;
+				if ( SaveWritesIdx >= NUM_WRITE_BUFS_TO_SAVE ) {
+					SaveWritesIdx = 0;
+				}
 
 #endif
 
 
 #ifdef PERF_DEBUG
-                                now_t = getPerfTicks();
-                                if ( last_write_t != 0 ) {
-                                        write_interval_t = now_t - last_write_t;
-                                        updateHLA(&WriteHLA, write_interval_t);
-                                }
-                                last_write_t = now_t;
+				now_t = getPerfTicks();
+				if ( last_write_t != 0 ) {
+					write_interval_t = now_t - last_write_t;
+					updateHLA(&WriteHLA, write_interval_t);
+				}
+				last_write_t = now_t;
 #endif
 #ifdef TEST_WRITE
-                                /* numwritten = */  testWrite(write_buf, OUTBUF_SIZE);
+				/* numwritten = */  testWrite(write_buf, OUTBUF_SIZE);
 #endif
-                                total_written += numwritten;
+				total_written += numwritten;
 #ifdef WRITE_MULTI_PER_READ
-                                ++frames_written_this_read;
+				++frames_written_this_read;
 #endif
-                                ++frames_written_this_read;
-//                              printf("buffer write: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
+				++frames_written_this_read;
+				//                              printf("buffer write: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
 
-                                if ( numwritten != FPGAWriteBufSize ) {
-                                        printf("warning: iothread short write! numwritten=%d\n", numwritten);
-                                }
-                                writebufpos = 0;
-                        }
-                } /* if have_out_buf */
+				if ( numwritten != FPGAWriteBufSize ) {
+					printf("warning: iothread short write! numwritten=%d\n", numwritten);
+				}
+				writebufpos = 0;
+			}
+		} /* if have_out_buf */
 #ifdef PERF_DEBUG
-                write_bottom_t = getPerfTicks();
+		write_bottom_t = getPerfTicks();
 
 
-                if ( PerfDataIdx < PERF_DATA_COUNT ) {
-                        PERF_RECORD *pdp = &(PerfData[PerfDataIdx]);
-                        ++PerfDataIdx;
-                        // pdp->RxFifoAvail = RxFifoAvail;
-                        // pdp->RxFramePlaying = RxFramePlaying;
-                        pdp->wrote_frame = wrote_frame;
-                        pdp->ok_to_write = ok_to_write;
-                        pdp->rt = read_t;
-                        pdp->wt = write_bottom_t - write_top_t;
-                        pdp->drt = read_stop_t - last_read_t;
-                        pdp->dwt = write_bottom_t - last_write_t;
-                        pdp->ticks = now_t;
-                        pdp->cb = complete_blocks;
-                        pdp->RxOverrun = RxOverrun;
-                        pdp->TxOverrun = TxOverrun;
-                        pdp->frame_sending = out_frame_idx;
-                        pdp->sync_lost = LostSyncCount;
-                }
+		if ( PerfDataIdx < PERF_DATA_COUNT ) {
+			PERF_RECORD *pdp = &(PerfData[PerfDataIdx]);
+			++PerfDataIdx;
+			// pdp->RxFifoAvail = RxFifoAvail;
+			// pdp->RxFramePlaying = RxFramePlaying;
+			pdp->wrote_frame = wrote_frame;
+			pdp->ok_to_write = ok_to_write;
+			pdp->rt = read_t;
+			pdp->wt = write_bottom_t - write_top_t;
+			pdp->drt = read_stop_t - last_read_t;
+			pdp->dwt = write_bottom_t - last_write_t;
+			pdp->ticks = now_t;
+			pdp->cb = complete_blocks;
+			pdp->RxOverrun = RxOverrun;
+			pdp->TxOverrun = TxOverrun;
+			pdp->frame_sending = out_frame_idx;
+			pdp->sync_lost = LostSyncCount;
+		}
 
 
-                //printf("fa: %d fp: %d w: %d okw: %d rt: %I64d wt: %I64d drt: %I64d dwt: %I64d cb: %d\n",
-                //          RxFifoAvail, RxFramePlaying, wrote_frame, ok_to_write, perfTicksToNanos(read_t), perfTicksToNanos(write_bottom_t - write_top_t),
-                //              perfTicksToNanos(read_stop_t - last_read_t), perfTicksToNanos(write_bottom_t - last_write_t), complete_blocks);
-                last_read_t = read_stop_t;
-                last_write_t = read_stop_t;
+		//printf("fa: %d fp: %d w: %d okw: %d rt: %I64d wt: %I64d drt: %I64d dwt: %I64d cb: %d\n",
+		//          RxFifoAvail, RxFramePlaying, wrote_frame, ok_to_write, perfTicksToNanos(read_t), perfTicksToNanos(write_bottom_t - write_top_t),
+		//              perfTicksToNanos(read_stop_t - last_read_t), perfTicksToNanos(write_bottom_t - last_write_t), complete_blocks);
+		last_read_t = read_stop_t;
+		last_write_t = read_stop_t;
 #endif
-        }  /* while keep_running */
+	}  /* while keep_running */
 }
 
 

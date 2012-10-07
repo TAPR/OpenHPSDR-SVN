@@ -566,13 +566,14 @@ int SendStartToMetis(void) 	 {
 	 starting_seq = MetisLastRecvSeq;
 	 for ( i = 0; i < 5; i++ ) {
 		/* printf("start sent\n"); */ 
+		ForceCandCFrame();
 		sendto(listenSock, (char *) &outpacket, sizeof(outpacket), 0, (SOCKADDR *)&MetisSockAddr, sizeof(MetisSockAddr)); 
 		MetisReadDirect((char *) &inpacket, sizeof(inpacket)); 
 		if ( MetisLastRecvSeq != starting_seq ) { 
 			break; 
 		} 
 		/* printf("c&c forced\n");  */ 
-		ForceCandCFrame(); 
+		//ForceCandCFrame(); 
 		Sleep(10); 
 //		if ( MetisLastRecvSeq != starting_seq ) { 
 //			break; 

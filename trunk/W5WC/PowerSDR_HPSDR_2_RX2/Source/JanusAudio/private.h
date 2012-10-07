@@ -278,20 +278,37 @@ extern char *FPGAWriteBufp;
 extern int C1Mask;
 extern char PennyOCBits; /* pennny open collector bits */
 
-extern int MercAtten;
+extern int AlexAtten;
+extern int Alex2Atten;
+extern int Alex3Atten;
+extern int Alex4Atten;
 extern int MercDither;
 extern int MercPreamp;
 extern int Merc1Preamp;
 extern int Merc2Preamp;
+extern int Merc3Preamp;
+extern int Merc4Preamp;
 extern int MercRandom;
 
 extern int MicBoost;
 extern int LineIn;
+extern int LineBoost;
+
+extern int UserOut0;
+extern int UserOut1;
+extern int UserOut2;
+extern int UserOut3;
 
 extern unsigned char AlexManEnable;
 extern unsigned char AlexEnabled;
 extern int AlexHPFMask;
 extern int AlexLPFMask;
+extern int Alex2HPFMask;
+extern int Alex2LPFMask;
+extern int Alex3HPFMask;
+extern int Alex3LPFMask;
+extern int Alex4HPFMask;
+extern int Alex4LPFMask;
 
 extern int Duplex;
 extern int NRx;
@@ -303,6 +320,11 @@ extern int AlexRxOut;
 extern int FwdPower;
 extern int RefPower;
 extern int AlexFwdPower;
+
+extern int ApolloFilt;
+extern int ApolloTuner;
+extern int ApolloATU;
+extern int HermesFilt;
 
 extern int ADC_Overloads;
 extern float swr_protect;

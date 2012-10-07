@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="am_demod.c" />
     <ClCompile Include="anf.c" />
+    <ClCompile Include="anr.c" />
     <ClCompile Include="banal.c" />
     <ClCompile Include="bufvec.c" />
     <ClCompile Include="compress.c" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="am_demod.h" />
     <ClInclude Include="anf.h" />
+    <ClInclude Include="anr.h" />
     <ClInclude Include="banal.h" />
     <ClInclude Include="bufvec.h" />
     <ClInclude Include="common.h" />
