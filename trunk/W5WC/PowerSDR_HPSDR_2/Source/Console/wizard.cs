@@ -34,86 +34,88 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class SetupWizard : Form
-	{
-		#region Variable Declaration
+    public class SetupWizard : Form
+    {
+        #region Variable Declaration
 
-		System.Resources.ResourceManager resource;
+        System.Resources.ResourceManager resource;
 
-		private enum Page
-		{
-			WELCOME,
-			DATABASE,
-			MODEL,
- 			XVTR,
-			PA,
-			ATU,
-			EXT_CLOCK,
-			USB,
-            HPSDR_HARDWARE_SELECT, 
+        private enum Page
+        {
+            WELCOME,
+            DATABASE,
+            MODEL,
+            XVTR,
+            PA,
+            ATU,
+            EXT_CLOCK,
+            USB,
+            HPSDR_HARDWARE_SELECT,
             SOUND_CARD,
-			FINISHED
-		}
+            REGION,
+            FINISHED
+        }
 
-		bool done;
+        bool done;
 
- 		bool xvtr_present;
-		bool pa_present;
-		bool atu_present;
-		bool usb_present;
-		bool ext_clock;
-		int xvtr_index;
-		int pll_mult;
-		int sound_card_index;
-		float[] gain_by_band;
-		Model model;
+        bool xvtr_present;
+        bool pa_present;
+        bool atu_present;
+        bool usb_present;
+        bool ext_clock;
+        int xvtr_index;
+        int pll_mult;
+        int sound_card_index;
+        int region_index;
+        float[] gain_by_band;
+        Model model;
         bool alex_present = false;
         bool mercury_present = false;
         bool penelope_present = false;
         bool pennylane_present = false;
         bool excalibur_present = false;
 
-		Console console;
-		private System.Windows.Forms.ButtonTS btnPrevious;
-		private System.Windows.Forms.ButtonTS btnNext;
-		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.LabelTS lblMessage1;
-		private System.Windows.Forms.RadioButtonTS radYes;
-		private System.Windows.Forms.RadioButtonTS radNo;
-		private System.Windows.Forms.LabelTS lblMessage2;
-		private System.Windows.Forms.ComboBoxTS comboBox1;
-		private System.Windows.Forms.LabelTS lblCombo;
-		private System.Windows.Forms.ButtonTS btnFinished;
-		private System.Windows.Forms.ComboBoxTS comboBox2;
-		private System.Windows.Forms.ButtonTS button1;
-		private System.Windows.Forms.OpenFileDialog openFileDialog1;
-		private System.Windows.Forms.ComboBoxTS comboBox3;
-		private System.Windows.Forms.GroupBoxTS groupBox2;
-		private System.Windows.Forms.LabelTS lblPAGainByBand10;
-		private System.Windows.Forms.NumericUpDownTS udPAGainByBand10;
-		private System.Windows.Forms.LabelTS lblPAGainByBand12;
-		private System.Windows.Forms.NumericUpDownTS udPAGainByBand12;
-		private System.Windows.Forms.LabelTS lblPAGainByBand15;
-		private System.Windows.Forms.NumericUpDownTS udPAGainByBand15;
-		private System.Windows.Forms.LabelTS lblPAGainByBand17;
-		private System.Windows.Forms.NumericUpDownTS udPAGainByBand17;
-		private System.Windows.Forms.LabelTS lblPAGainByBand20;
-		private System.Windows.Forms.NumericUpDownTS udPAGainByBand20;
-		private System.Windows.Forms.LabelTS lblPAGainByBand30;
-		private System.Windows.Forms.NumericUpDownTS udPAGainByBand30;
-		private System.Windows.Forms.LabelTS lblPAGainByBand40;
-		private System.Windows.Forms.NumericUpDownTS udPAGainByBand40;
-		private System.Windows.Forms.LabelTS lblPAGainByBand60;
-		private System.Windows.Forms.NumericUpDownTS udPAGainByBand60;
-		private System.Windows.Forms.LabelTS lblPAGainByBand80;
-		private System.Windows.Forms.NumericUpDownTS udPAGainByBand80;
-		private System.Windows.Forms.LabelTS lblPAGainByBand160;
-		private System.Windows.Forms.NumericUpDownTS udPAGainByBand160;
-		private System.Windows.Forms.RadioButtonTS radGenModelDemoNone;
-		private System.Windows.Forms.RadioButtonTS radGenModelSoftRock40;
-		private System.Windows.Forms.RadioButtonTS radGenModelSDR1000;
-		private System.Windows.Forms.GroupBoxTS grpModel;
-		private System.Windows.Forms.RadioButtonTS radGenModelFLEX5000;
+        Console console;
+        private System.Windows.Forms.ButtonTS btnPrevious;
+        private System.Windows.Forms.ButtonTS btnNext;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.LabelTS lblMessage1;
+        private System.Windows.Forms.RadioButtonTS radYes;
+        private System.Windows.Forms.RadioButtonTS radNo;
+        private System.Windows.Forms.LabelTS lblMessage2;
+        private System.Windows.Forms.ComboBoxTS comboBox1;
+        private System.Windows.Forms.LabelTS lblCombo;
+        private System.Windows.Forms.ButtonTS btnFinished;
+        private System.Windows.Forms.ComboBoxTS comboBox2;
+        private System.Windows.Forms.ButtonTS button1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ComboBoxTS comboBox3;
+        private System.Windows.Forms.GroupBoxTS groupBox2;
+        private System.Windows.Forms.LabelTS lblPAGainByBand10;
+        private System.Windows.Forms.NumericUpDownTS udPAGainByBand10;
+        private System.Windows.Forms.LabelTS lblPAGainByBand12;
+        private System.Windows.Forms.NumericUpDownTS udPAGainByBand12;
+        private System.Windows.Forms.LabelTS lblPAGainByBand15;
+        private System.Windows.Forms.NumericUpDownTS udPAGainByBand15;
+        private System.Windows.Forms.LabelTS lblPAGainByBand17;
+        private System.Windows.Forms.NumericUpDownTS udPAGainByBand17;
+        private System.Windows.Forms.LabelTS lblPAGainByBand20;
+        private System.Windows.Forms.NumericUpDownTS udPAGainByBand20;
+        private System.Windows.Forms.LabelTS lblPAGainByBand30;
+        private System.Windows.Forms.NumericUpDownTS udPAGainByBand30;
+        private System.Windows.Forms.LabelTS lblPAGainByBand40;
+        private System.Windows.Forms.NumericUpDownTS udPAGainByBand40;
+        private System.Windows.Forms.LabelTS lblPAGainByBand60;
+        private System.Windows.Forms.NumericUpDownTS udPAGainByBand60;
+        private System.Windows.Forms.LabelTS lblPAGainByBand80;
+        private System.Windows.Forms.NumericUpDownTS udPAGainByBand80;
+        private System.Windows.Forms.LabelTS lblPAGainByBand160;
+        private System.Windows.Forms.NumericUpDownTS udPAGainByBand160;
+        private System.Windows.Forms.RadioButtonTS radGenModelDemoNone;
+        private System.Windows.Forms.RadioButtonTS radGenModelSoftRock40;
+        private System.Windows.Forms.RadioButtonTS radGenModelSDR1000;
+        private System.Windows.Forms.GroupBoxTS grpModel;
+        private System.Windows.Forms.RadioButtonTS radGenModelFLEX5000;
         private System.Windows.Forms.GroupBoxTS groupBoxHPSDR_Hardware;
         private System.Windows.Forms.CheckBoxTS chkMercury;
         private System.Windows.Forms.CheckBoxTS chkPenny;
@@ -124,57 +126,58 @@ namespace PowerSDR
         private CheckBoxTS chkExcalibur;
         private RadioButtonTS radOzy;
         private RadioButtonTS radMetis;
+        private ComboBoxTS comboBox10;
         private System.ComponentModel.Container components = null;
 
-		#endregion
+        #endregion
 
-		#region Constructor and Destructor
+        #region Constructor and Destructor
 
-		public SetupWizard(Console c, int sound_card_index)
-		{
-			InitializeComponent();
+        public SetupWizard(Console c, int sound_card_index)
+        {
+            InitializeComponent();
 
-			console = c;
-			done = false;
+            console = c;
+            done = false;
 
-			resource = new System.Resources.ResourceManager(typeof(SetupWizard));
-  //          rfe_present = console.RFEPresent;
-			xvtr_present = console.XVTRPresent;
-			pa_present = console.PAPresent;
-			atu_present = console.ATUPresent;
-			usb_present = console.USBPresent;
-			ext_clock = false;
-			xvtr_index = 0;
-			pll_mult = 0;
+            resource = new System.Resources.ResourceManager(typeof(SetupWizard));
+            //          rfe_present = console.RFEPresent;
+            xvtr_present = console.XVTRPresent;
+            pa_present = console.PAPresent;
+            atu_present = console.ATUPresent;
+            usb_present = console.USBPresent;
+            ext_clock = false;
+            xvtr_index = 0;
+            pll_mult = 0;
 
-			gain_by_band = new float[10];
-			gain_by_band[0] = console.SetupForm.PAGain160;
-			gain_by_band[1] = console.SetupForm.PAGain80;
-			gain_by_band[2] = console.SetupForm.PAGain60;
-			gain_by_band[3] = console.SetupForm.PAGain40;
-			gain_by_band[4] = console.SetupForm.PAGain30;
-			gain_by_band[5] = console.SetupForm.PAGain20;
-			gain_by_band[6] = console.SetupForm.PAGain17;
-			gain_by_band[7] = console.SetupForm.PAGain15;
-			gain_by_band[8] = console.SetupForm.PAGain12;
-			gain_by_band[9] = console.SetupForm.PAGain10;
+            gain_by_band = new float[10];
+            gain_by_band[0] = console.SetupForm.PAGain160;
+            gain_by_band[1] = console.SetupForm.PAGain80;
+            gain_by_band[2] = console.SetupForm.PAGain60;
+            gain_by_band[3] = console.SetupForm.PAGain40;
+            gain_by_band[4] = console.SetupForm.PAGain30;
+            gain_by_band[5] = console.SetupForm.PAGain20;
+            gain_by_band[6] = console.SetupForm.PAGain17;
+            gain_by_band[7] = console.SetupForm.PAGain15;
+            gain_by_band[8] = console.SetupForm.PAGain12;
+            gain_by_band[9] = console.SetupForm.PAGain10;
 
-			model = console.CurrentModel;
-			switch(model)
-			{
-				case Model.SDR1000:
-					radGenModelSDR1000.Checked = true;
-					break;
-				case Model.SOFTROCK40:
-					radGenModelSoftRock40.Checked = true;
-					break;
-				case Model.DEMO:
-					radGenModelDemoNone.Checked = true;
-					break;
-				case Model.FLEX3000:
-					radGenModelFLEX5000.Text = "FLEX-3000";
-					//radGenModelFLEX5000.Checked = true;
-					break;
+            model = console.CurrentModel;
+            switch (model)
+            {
+                case Model.SDR1000:
+                    radGenModelSDR1000.Checked = true;
+                    break;
+                case Model.SOFTROCK40:
+                    radGenModelSoftRock40.Checked = true;
+                    break;
+                case Model.DEMO:
+                    radGenModelDemoNone.Checked = true;
+                    break;
+                case Model.FLEX3000:
+                    radGenModelFLEX5000.Text = "FLEX-3000";
+                    //radGenModelFLEX5000.Checked = true;
+                    break;
                 case Model.HPSDR:
                     radGenModelHPSDR.Checked = true;
                     break;
@@ -183,35 +186,35 @@ namespace PowerSDR
                     break;
             }
 
-			CurPage = Page.WELCOME;
-			btnNext_Click(this, EventArgs.Empty);
+            CurPage = Page.WELCOME;
+            btnNext_Click(this, EventArgs.Empty);
 
-			openFileDialog1.Filter = "PowerSDR Database Files (*.mdb) | *.mdb";
+            openFileDialog1.Filter = "PowerSDR Database Files (*.mdb) | *.mdb";
 
-			comboBox3.SelectedIndex = sound_card_index;
-		}
+            comboBox3.SelectedIndex = sound_card_index;
+        }
 
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#endregion 
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetupWizard));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -222,6 +225,25 @@ namespace PowerSDR
             this.radGenModelDemoNone = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelSoftRock40 = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelSDR1000 = new System.Windows.Forms.RadioButtonTS();
+            this.groupBoxHPSDR_Hardware = new System.Windows.Forms.GroupBoxTS();
+            this.radOzy = new System.Windows.Forms.RadioButtonTS();
+            this.radMetis = new System.Windows.Forms.RadioButtonTS();
+            this.chkExcalibur = new System.Windows.Forms.CheckBoxTS();
+            this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlex = new System.Windows.Forms.CheckBoxTS();
+            this.chkPenny = new System.Windows.Forms.CheckBoxTS();
+            this.chkMercury = new System.Windows.Forms.CheckBoxTS();
+            this.comboBox3 = new System.Windows.Forms.ComboBoxTS();
+            this.button1 = new System.Windows.Forms.ButtonTS();
+            this.comboBox2 = new System.Windows.Forms.ComboBoxTS();
+            this.comboBox1 = new System.Windows.Forms.ComboBoxTS();
+            this.lblMessage2 = new System.Windows.Forms.LabelTS();
+            this.radNo = new System.Windows.Forms.RadioButtonTS();
+            this.radYes = new System.Windows.Forms.RadioButtonTS();
+            this.btnFinished = new System.Windows.Forms.ButtonTS();
+            this.btnNext = new System.Windows.Forms.ButtonTS();
+            this.btnPrevious = new System.Windows.Forms.ButtonTS();
+            this.lblCombo = new System.Windows.Forms.LabelTS();
             this.groupBox2 = new System.Windows.Forms.GroupBoxTS();
             this.lblPAGainByBand10 = new System.Windows.Forms.LabelTS();
             this.udPAGainByBand10 = new System.Windows.Forms.NumericUpDownTS();
@@ -243,28 +265,11 @@ namespace PowerSDR
             this.lblPAGainByBand160 = new System.Windows.Forms.LabelTS();
             this.udPAGainByBand160 = new System.Windows.Forms.NumericUpDownTS();
             this.lblPAGainByBand30 = new System.Windows.Forms.LabelTS();
-            this.comboBox3 = new System.Windows.Forms.ComboBoxTS();
-            this.button1 = new System.Windows.Forms.ButtonTS();
-            this.comboBox2 = new System.Windows.Forms.ComboBoxTS();
-            this.comboBox1 = new System.Windows.Forms.ComboBoxTS();
-            this.lblMessage2 = new System.Windows.Forms.LabelTS();
-            this.radNo = new System.Windows.Forms.RadioButtonTS();
-            this.radYes = new System.Windows.Forms.RadioButtonTS();
-            this.btnFinished = new System.Windows.Forms.ButtonTS();
-            this.btnNext = new System.Windows.Forms.ButtonTS();
-            this.btnPrevious = new System.Windows.Forms.ButtonTS();
-            this.groupBoxHPSDR_Hardware = new System.Windows.Forms.GroupBoxTS();
-            this.radOzy = new System.Windows.Forms.RadioButtonTS();
-            this.radMetis = new System.Windows.Forms.RadioButtonTS();
-            this.chkExcalibur = new System.Windows.Forms.CheckBoxTS();
-            this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
-            this.chkAlex = new System.Windows.Forms.CheckBoxTS();
-            this.chkPenny = new System.Windows.Forms.CheckBoxTS();
-            this.chkMercury = new System.Windows.Forms.CheckBoxTS();
+            this.comboBox10 = new System.Windows.Forms.ComboBoxTS();
             this.lblMessage1 = new System.Windows.Forms.LabelTS();
-            this.lblCombo = new System.Windows.Forms.LabelTS();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpModel.SuspendLayout();
+            this.groupBoxHPSDR_Hardware.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand12)).BeginInit();
@@ -276,12 +281,11 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand60)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand80)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand160)).BeginInit();
-            this.groupBoxHPSDR_Hardware.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(42, 56);
+            this.pictureBox1.Location = new System.Drawing.Point(20, 28);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(171, 128);
             this.pictureBox1.TabIndex = 3;
@@ -377,6 +381,226 @@ namespace PowerSDR
             this.radGenModelSDR1000.Text = "SDR-1000";
             this.radGenModelSDR1000.Visible = false;
             this.radGenModelSDR1000.CheckedChanged += new System.EventHandler(this.radGenModelSDR1000_CheckedChanged);
+            // 
+            // groupBoxHPSDR_Hardware
+            // 
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.radOzy);
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.radMetis);
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkExcalibur);
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkPennyLane);
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkAlex);
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkPenny);
+            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkMercury);
+            this.groupBoxHPSDR_Hardware.Location = new System.Drawing.Point(31, 32);
+            this.groupBoxHPSDR_Hardware.Name = "groupBoxHPSDR_Hardware";
+            this.groupBoxHPSDR_Hardware.Size = new System.Drawing.Size(171, 157);
+            this.groupBoxHPSDR_Hardware.TabIndex = 21;
+            this.groupBoxHPSDR_Hardware.TabStop = false;
+            this.groupBoxHPSDR_Hardware.Text = "HPSDR Hardware";
+            this.groupBoxHPSDR_Hardware.Visible = false;
+            // 
+            // radOzy
+            // 
+            this.radOzy.AutoSize = true;
+            this.radOzy.Checked = true;
+            this.radOzy.Image = null;
+            this.radOzy.Location = new System.Drawing.Point(114, 20);
+            this.radOzy.Name = "radOzy";
+            this.radOzy.Size = new System.Drawing.Size(43, 17);
+            this.radOzy.TabIndex = 24;
+            this.radOzy.TabStop = true;
+            this.radOzy.Text = "Ozy";
+            this.radOzy.UseVisualStyleBackColor = true;
+            // 
+            // radMetis
+            // 
+            this.radMetis.AutoSize = true;
+            this.radMetis.Image = null;
+            this.radMetis.Location = new System.Drawing.Point(114, 46);
+            this.radMetis.Name = "radMetis";
+            this.radMetis.Size = new System.Drawing.Size(50, 17);
+            this.radMetis.TabIndex = 23;
+            this.radMetis.Text = "Metis";
+            this.radMetis.UseVisualStyleBackColor = true;
+            // 
+            // chkExcalibur
+            // 
+            this.chkExcalibur.Image = null;
+            this.chkExcalibur.Location = new System.Drawing.Point(16, 123);
+            this.chkExcalibur.Name = "chkExcalibur";
+            this.chkExcalibur.Size = new System.Drawing.Size(80, 24);
+            this.chkExcalibur.TabIndex = 22;
+            this.chkExcalibur.Text = "Excalibur";
+            this.chkExcalibur.CheckedChanged += new System.EventHandler(this.chkExcalibur_CheckedChanged);
+            // 
+            // chkPennyLane
+            // 
+            this.chkPennyLane.Image = null;
+            this.chkPennyLane.Location = new System.Drawing.Point(16, 70);
+            this.chkPennyLane.Name = "chkPennyLane";
+            this.chkPennyLane.Size = new System.Drawing.Size(80, 24);
+            this.chkPennyLane.TabIndex = 3;
+            this.chkPennyLane.Text = "PennyLane";
+            this.chkPennyLane.CheckedChanged += new System.EventHandler(this.chkPennyLane_CheckedChanged);
+            // 
+            // chkAlex
+            // 
+            this.chkAlex.Image = null;
+            this.chkAlex.Location = new System.Drawing.Point(16, 97);
+            this.chkAlex.Name = "chkAlex";
+            this.chkAlex.Size = new System.Drawing.Size(80, 24);
+            this.chkAlex.TabIndex = 2;
+            this.chkAlex.Text = "Alex";
+            this.chkAlex.CheckedChanged += new System.EventHandler(this.chkAlex_CheckedChanged);
+            // 
+            // chkPenny
+            // 
+            this.chkPenny.Image = null;
+            this.chkPenny.Location = new System.Drawing.Point(16, 43);
+            this.chkPenny.Name = "chkPenny";
+            this.chkPenny.Size = new System.Drawing.Size(80, 24);
+            this.chkPenny.TabIndex = 1;
+            this.chkPenny.Text = "Penelope";
+            this.chkPenny.CheckedChanged += new System.EventHandler(this.chkPenny_CheckedChanged);
+            // 
+            // chkMercury
+            // 
+            this.chkMercury.Image = null;
+            this.chkMercury.Location = new System.Drawing.Point(16, 16);
+            this.chkMercury.Name = "chkMercury";
+            this.chkMercury.Size = new System.Drawing.Size(80, 24);
+            this.chkMercury.TabIndex = 0;
+            this.chkMercury.Text = "Mercury";
+            this.chkMercury.CheckedChanged += new System.EventHandler(this.chkMercury_CheckedChanged);
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.DropDownWidth = 184;
+            this.comboBox3.Items.AddRange(new object[] {
+            "M-Audio Delta 44 (PCI)",
+            "PreSonus FireBox (FireWire)",
+            "Edirol FA-66 (FireWire)",
+            "SB Audigy (PCI)",
+            "SB Audigy 2 (PCI)",
+            "SB Audigy 2 ZS (PCI)",
+            "HPSDR",
+            "Sound Blaster Extigy (USB)",
+            "Sound Blaster MP3+ (USB)",
+            "Turtle Beach Santa Cruz (PCI)",
+            "Unsupported Card"});
+            this.comboBox3.Location = new System.Drawing.Point(264, 104);
+            this.comboBox3.MaxDropDownItems = 10;
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(184, 21);
+            this.comboBox3.TabIndex = 12;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
+            // button1
+            // 
+            this.button1.Image = null;
+            this.button1.Location = new System.Drawing.Point(312, 128);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(88, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Select File ...";
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.DropDownWidth = 56;
+            this.comboBox2.Items.AddRange(new object[] {
+            "10",
+            "20"});
+            this.comboBox2.Location = new System.Drawing.Point(384, 112);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(56, 21);
+            this.comboBox2.TabIndex = 10;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.DropDownWidth = 136;
+            this.comboBox1.Items.AddRange(new object[] {
+            "DEMI144-28FRS",
+            "DEMI144-28 (25w)"});
+            this.comboBox1.Location = new System.Drawing.Point(336, 112);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(136, 21);
+            this.comboBox1.TabIndex = 8;
+            this.comboBox1.Visible = false;
+            // 
+            // lblMessage2
+            // 
+            this.lblMessage2.Image = null;
+            this.lblMessage2.Location = new System.Drawing.Point(8, 211);
+            this.lblMessage2.Name = "lblMessage2";
+            this.lblMessage2.Size = new System.Drawing.Size(464, 29);
+            this.lblMessage2.TabIndex = 7;
+            this.lblMessage2.Text = "lblMessage2";
+            // 
+            // radNo
+            // 
+            this.radNo.Image = null;
+            this.radNo.Location = new System.Drawing.Point(328, 32);
+            this.radNo.Name = "radNo";
+            this.radNo.Size = new System.Drawing.Size(48, 16);
+            this.radNo.TabIndex = 6;
+            this.radNo.Text = "No";
+            this.radNo.Visible = false;
+            this.radNo.CheckedChanged += new System.EventHandler(this.radNo_CheckedChanged);
+            // 
+            // radYes
+            // 
+            this.radYes.Image = null;
+            this.radYes.Location = new System.Drawing.Point(272, 32);
+            this.radYes.Name = "radYes";
+            this.radYes.Size = new System.Drawing.Size(48, 16);
+            this.radYes.TabIndex = 5;
+            this.radYes.Text = "Yes";
+            this.radYes.Visible = false;
+            this.radYes.CheckedChanged += new System.EventHandler(this.radYes_CheckedChanged);
+            // 
+            // btnFinished
+            // 
+            this.btnFinished.Enabled = false;
+            this.btnFinished.Image = null;
+            this.btnFinished.Location = new System.Drawing.Point(400, 248);
+            this.btnFinished.Name = "btnFinished";
+            this.btnFinished.Size = new System.Drawing.Size(75, 23);
+            this.btnFinished.TabIndex = 2;
+            this.btnFinished.Text = "Finish";
+            this.btnFinished.Click += new System.EventHandler(this.btnFinished_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Image = null;
+            this.btnNext.Location = new System.Drawing.Point(312, 248);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.TabIndex = 1;
+            this.btnNext.Text = "Next";
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Image = null;
+            this.btnPrevious.Location = new System.Drawing.Point(224, 248);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(75, 23);
+            this.btnPrevious.TabIndex = 0;
+            this.btnPrevious.Text = "Previous";
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // lblCombo
+            // 
+            this.lblCombo.Image = null;
+            this.lblCombo.Location = new System.Drawing.Point(272, 112);
+            this.lblCombo.Name = "lblCombo";
+            this.lblCombo.Size = new System.Drawing.Size(192, 72);
+            this.lblCombo.TabIndex = 9;
+            this.lblCombo.Text = "lblCombo";
             // 
             // groupBox2
             // 
@@ -778,216 +1002,34 @@ namespace PowerSDR
             this.lblPAGainByBand30.TabIndex = 9;
             this.lblPAGainByBand30.Text = "30m:";
             // 
-            // comboBox3
+            // comboBox10
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.DropDownWidth = 184;
-            this.comboBox3.Items.AddRange(new object[] {
-            "M-Audio Delta 44 (PCI)",
-            "PreSonus FireBox (FireWire)",
-            "Edirol FA-66 (FireWire)",
-            "SB Audigy (PCI)",
-            "SB Audigy 2 (PCI)",
-            "SB Audigy 2 ZS (PCI)",
-            "HPSDR",
-            "Sound Blaster Extigy (USB)",
-            "Sound Blaster MP3+ (USB)",
-            "Turtle Beach Santa Cruz (PCI)",
-            "Unsupported Card"});
-            this.comboBox3.Location = new System.Drawing.Point(264, 104);
-            this.comboBox3.MaxDropDownItems = 10;
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(184, 21);
-            this.comboBox3.TabIndex = 12;
-            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
-            // 
-            // button1
-            // 
-            this.button1.Image = null;
-            this.button1.Location = new System.Drawing.Point(312, 128);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Select File ...";
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.DropDownWidth = 56;
-            this.comboBox2.Items.AddRange(new object[] {
-            "10",
-            "20"});
-            this.comboBox2.Location = new System.Drawing.Point(384, 112);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(56, 21);
-            this.comboBox2.TabIndex = 10;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.DropDownWidth = 136;
-            this.comboBox1.Items.AddRange(new object[] {
-            "DEMI144-28FRS",
-            "DEMI144-28 (25w)"});
-            this.comboBox1.Location = new System.Drawing.Point(336, 112);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(136, 21);
-            this.comboBox1.TabIndex = 8;
-            this.comboBox1.Visible = false;
-            // 
-            // lblMessage2
-            // 
-            this.lblMessage2.Image = null;
-            this.lblMessage2.Location = new System.Drawing.Point(8, 192);
-            this.lblMessage2.Name = "lblMessage2";
-            this.lblMessage2.Size = new System.Drawing.Size(464, 48);
-            this.lblMessage2.TabIndex = 7;
-            this.lblMessage2.Text = "lblMessage2";
-            // 
-            // radNo
-            // 
-            this.radNo.Image = null;
-            this.radNo.Location = new System.Drawing.Point(328, 32);
-            this.radNo.Name = "radNo";
-            this.radNo.Size = new System.Drawing.Size(48, 16);
-            this.radNo.TabIndex = 6;
-            this.radNo.Text = "No";
-            this.radNo.Visible = false;
-            this.radNo.CheckedChanged += new System.EventHandler(this.radNo_CheckedChanged);
-            // 
-            // radYes
-            // 
-            this.radYes.Image = null;
-            this.radYes.Location = new System.Drawing.Point(272, 32);
-            this.radYes.Name = "radYes";
-            this.radYes.Size = new System.Drawing.Size(48, 16);
-            this.radYes.TabIndex = 5;
-            this.radYes.Text = "Yes";
-            this.radYes.Visible = false;
-            this.radYes.CheckedChanged += new System.EventHandler(this.radYes_CheckedChanged);
-            // 
-            // btnFinished
-            // 
-            this.btnFinished.Enabled = false;
-            this.btnFinished.Image = null;
-            this.btnFinished.Location = new System.Drawing.Point(400, 248);
-            this.btnFinished.Name = "btnFinished";
-            this.btnFinished.Size = new System.Drawing.Size(75, 23);
-            this.btnFinished.TabIndex = 2;
-            this.btnFinished.Text = "Finish";
-            this.btnFinished.Click += new System.EventHandler(this.btnFinished_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Image = null;
-            this.btnNext.Location = new System.Drawing.Point(312, 248);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 23);
-            this.btnNext.TabIndex = 1;
-            this.btnNext.Text = "Next";
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Image = null;
-            this.btnPrevious.Location = new System.Drawing.Point(224, 248);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(75, 23);
-            this.btnPrevious.TabIndex = 0;
-            this.btnPrevious.Text = "Previous";
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // groupBoxHPSDR_Hardware
-            // 
-            this.groupBoxHPSDR_Hardware.Controls.Add(this.radOzy);
-            this.groupBoxHPSDR_Hardware.Controls.Add(this.radMetis);
-            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkExcalibur);
-            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkPennyLane);
-            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkAlex);
-            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkPenny);
-            this.groupBoxHPSDR_Hardware.Controls.Add(this.chkMercury);
-            this.groupBoxHPSDR_Hardware.Location = new System.Drawing.Point(20, 32);
-            this.groupBoxHPSDR_Hardware.Name = "groupBoxHPSDR_Hardware";
-            this.groupBoxHPSDR_Hardware.Size = new System.Drawing.Size(171, 157);
-            this.groupBoxHPSDR_Hardware.TabIndex = 21;
-            this.groupBoxHPSDR_Hardware.TabStop = false;
-            this.groupBoxHPSDR_Hardware.Text = "HPSDR Hardware";
-            this.groupBoxHPSDR_Hardware.Visible = false;
-            // 
-            // radOzy
-            // 
-            this.radOzy.AutoSize = true;
-            this.radOzy.Checked = true;
-            this.radOzy.Image = null;
-            this.radOzy.Location = new System.Drawing.Point(114, 20);
-            this.radOzy.Name = "radOzy";
-            this.radOzy.Size = new System.Drawing.Size(43, 17);
-            this.radOzy.TabIndex = 24;
-            this.radOzy.TabStop = true;
-            this.radOzy.Text = "Ozy";
-            this.radOzy.UseVisualStyleBackColor = true;
-            // 
-            // radMetis
-            // 
-            this.radMetis.AutoSize = true;
-            this.radMetis.Image = null;
-            this.radMetis.Location = new System.Drawing.Point(114, 46);
-            this.radMetis.Name = "radMetis";
-            this.radMetis.Size = new System.Drawing.Size(50, 17);
-            this.radMetis.TabIndex = 23;
-            this.radMetis.Text = "Metis";
-            this.radMetis.UseVisualStyleBackColor = true;
-            // 
-            // chkExcalibur
-            // 
-            this.chkExcalibur.Image = null;
-            this.chkExcalibur.Location = new System.Drawing.Point(16, 123);
-            this.chkExcalibur.Name = "chkExcalibur";
-            this.chkExcalibur.Size = new System.Drawing.Size(80, 24);
-            this.chkExcalibur.TabIndex = 22;
-            this.chkExcalibur.Text = "Excalibur";
-            this.chkExcalibur.CheckedChanged += new System.EventHandler(this.chkExcalibur_CheckedChanged);
-            // 
-            // chkPennyLane
-            // 
-            this.chkPennyLane.Image = null;
-            this.chkPennyLane.Location = new System.Drawing.Point(16, 70);
-            this.chkPennyLane.Name = "chkPennyLane";
-            this.chkPennyLane.Size = new System.Drawing.Size(80, 24);
-            this.chkPennyLane.TabIndex = 3;
-            this.chkPennyLane.Text = "PennyLane";
-            this.chkPennyLane.CheckedChanged += new System.EventHandler(this.chkPennyLane_CheckedChanged);
-            // 
-            // chkAlex
-            // 
-            this.chkAlex.Image = null;
-            this.chkAlex.Location = new System.Drawing.Point(16, 97);
-            this.chkAlex.Name = "chkAlex";
-            this.chkAlex.Size = new System.Drawing.Size(80, 24);
-            this.chkAlex.TabIndex = 2;
-            this.chkAlex.Text = "Alex";
-            this.chkAlex.CheckedChanged += new System.EventHandler(this.chkAlex_CheckedChanged);
-            // 
-            // chkPenny
-            // 
-            this.chkPenny.Image = null;
-            this.chkPenny.Location = new System.Drawing.Point(16, 43);
-            this.chkPenny.Name = "chkPenny";
-            this.chkPenny.Size = new System.Drawing.Size(80, 24);
-            this.chkPenny.TabIndex = 1;
-            this.chkPenny.Text = "Penelope";
-            this.chkPenny.CheckedChanged += new System.EventHandler(this.chkPenny_CheckedChanged);
-            // 
-            // chkMercury
-            // 
-            this.chkMercury.Image = null;
-            this.chkMercury.Location = new System.Drawing.Point(16, 16);
-            this.chkMercury.Name = "chkMercury";
-            this.chkMercury.Size = new System.Drawing.Size(80, 24);
-            this.chkMercury.TabIndex = 0;
-            this.chkMercury.Text = "Mercury";
-            this.chkMercury.CheckedChanged += new System.EventHandler(this.chkMercury_CheckedChanged);
+            this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox10.DropDownWidth = 184;
+            this.comboBox10.Items.AddRange(new object[] {
+            "Australia",
+            "Europe",
+            "Italy",
+            "Japan",
+            "Spain",
+            "United Kingdom",
+            "United States",
+            "Norway",
+            "Denmark",
+            "Latvia",
+            "Slovakia",
+            "Bulgaria",
+            "Greece",
+            "Hungary",
+            "Netherlands",
+            "France",
+            "Russia",
+            "Extended"});
+            this.comboBox10.Location = new System.Drawing.Point(76, 69);
+            this.comboBox10.MaxDropDownItems = 10;
+            this.comboBox10.Name = "comboBox10";
+            this.comboBox10.Size = new System.Drawing.Size(184, 21);
+            this.comboBox10.TabIndex = 22;
             // 
             // lblMessage1
             // 
@@ -995,24 +1037,15 @@ namespace PowerSDR
             this.lblMessage1.Image = null;
             this.lblMessage1.Location = new System.Drawing.Point(16, 8);
             this.lblMessage1.Name = "lblMessage1";
-            this.lblMessage1.Size = new System.Drawing.Size(456, 136);
+            this.lblMessage1.Size = new System.Drawing.Size(456, 53);
             this.lblMessage1.TabIndex = 4;
             this.lblMessage1.Text = "lblMessage1";
-            // 
-            // lblCombo
-            // 
-            this.lblCombo.Image = null;
-            this.lblCombo.Location = new System.Drawing.Point(272, 112);
-            this.lblCombo.Name = "lblCombo";
-            this.lblCombo.Size = new System.Drawing.Size(192, 72);
-            this.lblCombo.TabIndex = 9;
-            this.lblCombo.Text = "lblCombo";
             // 
             // SetupWizard
             // 
             this.ClientSize = new System.Drawing.Size(488, 286);
             this.Controls.Add(this.grpModel);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBoxHPSDR_Hardware);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox2);
@@ -1023,10 +1056,11 @@ namespace PowerSDR
             this.Controls.Add(this.btnFinished);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrevious);
-            this.Controls.Add(this.groupBoxHPSDR_Hardware);
+            this.Controls.Add(this.lblCombo);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.comboBox10);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblMessage1);
-            this.Controls.Add(this.lblCombo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1037,6 +1071,8 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grpModel.ResumeLayout(false);
             this.grpModel.PerformLayout();
+            this.groupBoxHPSDR_Hardware.ResumeLayout(false);
+            this.groupBoxHPSDR_Hardware.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand12)).EndInit();
@@ -1048,245 +1084,245 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand60)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand80)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainByBand160)).EndInit();
-            this.groupBoxHPSDR_Hardware.ResumeLayout(false);
-            this.groupBoxHPSDR_Hardware.PerformLayout();
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Misc Routines
+        #region Misc Routines
 
-		private Stream GetResource(string name)
-		{
-			return this.GetType().Assembly.GetManifestResourceStream(name);
-		}
+        private Stream GetResource(string name)
+        {
+            return this.GetType().Assembly.GetManifestResourceStream(name);
+        }
 
-		private void SwitchPage(Page p)
-		{
-			switch(p)
-			{
-				case Page.WELCOME:
-					this.Text = "PowerSDR Setup Wizard - Welcome";
-					btnFinished.Enabled = false;
-					btnNext.Enabled = true;
-					btnPrevious.Enabled = false;		// first screen			
-					button1.Visible = false;
-					comboBox1.Visible = false;					
-					comboBox2.Visible = false;
-					comboBox3.Visible = false;	
-					groupBox2.Visible = false;
-					lblCombo.Visible = false;
-					grpModel.Visible = false;
+        private void SwitchPage(Page p)
+        {
+            switch (p)
+            {
+                case Page.WELCOME:
+                    this.Text = "PowerSDR Setup Wizard - Welcome";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = false;		// first screen			
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = false;
+                    comboBox10.Visible = false;
+                    groupBox2.Visible = false;
+                    lblCombo.Visible = false;
+                    grpModel.Visible = false;
                     lblMessage1.Text = "Welcome to the PowerSDR Setup Wizard.";
-					lblMessage2.Text = "";
-					pictureBox1.Image = null;
-					pictureBox1.Visible = false;
-					radYes.Visible = false;
-					radNo.Visible = false;
+                    lblMessage2.Text = "";
+                    pictureBox1.Image = null;
+                    pictureBox1.Visible = false;
+                    radYes.Visible = false;
+                    radNo.Visible = false;
                     groupBoxHPSDR_Hardware.Visible = false;
                     break;
-				case Page.DATABASE:
-					this.Text = "PowerSDR Setup Wizard - Database Import";
-					btnFinished.Enabled = false;
-					btnNext.Enabled = true;
-					btnPrevious.Enabled = false;
-					button1.Visible = false;
-					comboBox1.Visible = false;
-					comboBox2.Visible = false;
-					comboBox3.Visible = false;
-					groupBox2.Visible = false;
-					lblCombo.Visible = false;
-					grpModel.Visible = false;
-					lblMessage1.Text = "Would you like to import a previous database? (Database files from " +
-						"versions prior to 0.1.9 are incompatible).";
-					lblMessage2.Text = "If you are upgrading from a previous version, you may use this " +
-						"opportunity to import your old database settings (Setup, Memories, etc).";
-					pictureBox1.Image = null;
-					pictureBox1.Visible = false;
-					radNo.Select();
-					radYes.Visible = true;
-					radNo.Visible = true;
+                case Page.DATABASE:
+                    this.Text = "PowerSDR Setup Wizard - Database Import";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = false;
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = false;
+                    groupBox2.Visible = false;
+                    lblCombo.Visible = false;
+                    grpModel.Visible = false;
+                    lblMessage1.Text = "Would you like to import a previous database? (Database files from " +
+                        "versions prior to 0.1.9 are incompatible).";
+                    lblMessage2.Text = "If you are upgrading from a previous version, you may use this " +
+                        "opportunity to import your old database settings (Setup, Memories, etc).";
+                    pictureBox1.Image = null;
+                    pictureBox1.Visible = false;
+                    radNo.Select();
+                    radYes.Visible = true;
+                    radNo.Visible = true;
                     groupBoxHPSDR_Hardware.Visible = false;
                     break;
-				case Page.MODEL:
-					this.Text = "PowerSDR Setup Wizard - Radio Model";
-					btnFinished.Enabled = false;
-					btnNext.Enabled = true;
-					btnPrevious.Enabled = false;
-					button1.Visible = false;
-					comboBox1.Visible = false;
-					comboBox2.Visible = false;
-					comboBox3.Visible = false;
-					groupBox2.Visible = false;
-					lblCombo.Visible = false;
-					grpModel.Visible = true;
-					lblMessage1.Text = "Please select the model of the radio you will be using.";
-					lblMessage2.Text = " ";
-					radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
-					radGenModelSDR1000_CheckedChanged(this, EventArgs.Empty);
-					radGenModelSoftRock40_CheckedChanged(this, EventArgs.Empty);
-					radGenModelDemoNone_CheckedChanged(this, EventArgs.Empty);
-					pictureBox1.Visible = true;
-					radNo.Visible = false;
-					radYes.Visible = false;
+                case Page.MODEL:
+                    this.Text = "PowerSDR Setup Wizard - Radio Model";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = false;
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = false;
+                    groupBox2.Visible = false;
+                    comboBox10.Visible = false;
+                    lblCombo.Visible = false;
+                    grpModel.Visible = true;
+                    lblMessage1.Text = "Please select the model of the radio you will be using.";
+                    lblMessage2.Text = " ";
+                    radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
+                    radGenModelSDR1000_CheckedChanged(this, EventArgs.Empty);
+                    radGenModelSoftRock40_CheckedChanged(this, EventArgs.Empty);
+                    radGenModelDemoNone_CheckedChanged(this, EventArgs.Empty);
+                    pictureBox1.Visible = true;
+                    radNo.Visible = false;
+                    radYes.Visible = false;
                     groupBoxHPSDR_Hardware.Visible = false;
                     break;
-          
+
                 case Page.XVTR:
-					this.Text = "PowerSDR Setup Wizard - Hardware Setup";
-					btnFinished.Enabled = false;
-					btnNext.Enabled = true;
-					btnPrevious.Enabled = true;					
-					button1.Visible = false;
-					comboBox1.Visible = xvtr_present;
-					comboBox1.SelectedIndex = xvtr_index;
-					comboBox2.Visible = false;
-					comboBox3.Visible = false;
-					grpModel.Visible = false;
-					lblCombo.Text = "Model: ";
-					lblCombo.Visible = xvtr_present;
-					lblMessage1.Text = "Does your board stack include the Down East Microwave (DEMI) 2M Transverter?";
-					lblMessage2.Text = "This Down East Microwave 2M Transverter mounts on top of the " +
-						"board stack and uses a 28MHz IF to get into the 144-146MHz range.  For more " +
-						"information, see http://www.flex-radio.com.";
-					pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.demi144-28frs.jpg"));
-					pictureBox1.Visible = true;
-					if(xvtr_present)
-						radYes.Select();
-					else
-						radNo.Select();
-					radYes.Visible = true;
-					radNo.Visible = true;
+                    this.Text = "PowerSDR Setup Wizard - Hardware Setup";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = true;
+                    button1.Visible = false;
+                    comboBox1.Visible = xvtr_present;
+                    comboBox1.SelectedIndex = xvtr_index;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = false;
+                    grpModel.Visible = false;
+                    lblCombo.Text = "Model: ";
+                    lblCombo.Visible = xvtr_present;
+                    lblMessage1.Text = "Does your board stack include the Down East Microwave (DEMI) 2M Transverter?";
+                    lblMessage2.Text = "This Down East Microwave 2M Transverter mounts on top of the " +
+                        "board stack and uses a 28MHz IF to get into the 144-146MHz range.  For more " +
+                        "information, see http://www.flex-radio.com.";
+                    pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.demi144-28frs.jpg"));
+                    pictureBox1.Visible = true;
+                    if (xvtr_present)
+                        radYes.Select();
+                    else
+                        radNo.Select();
+                    radYes.Visible = true;
+                    radNo.Visible = true;
                     groupBoxHPSDR_Hardware.Visible = false;
                     break;
-				case Page.PA:
-					this.Text = "PowerSDR Setup Wizard - Hardware Setup";
-					btnFinished.Enabled = false;
-					btnNext.Enabled = true;
-					btnPrevious.Enabled = true;
-					button1.Visible = false;					
-					comboBox1.Visible = false;
-					comboBox2.Visible = false;
-					comboBox3.Visible = false;
-					groupBox2.Visible = false;
-					grpModel.Visible = false;
-					lblCombo.Visible = false;
-					lblMessage1.Text = "Is the 100W Power Amplifier (PA) included in your hardware configuration?";
-					lblMessage2.Text = "The Power Amplifier bumps the output power of the SDR-1000 from " +
-						"1W up to 100W.  For more information, see http://www.flex-radio.com.";
-					pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.sdr-pa100.jpg"));
-					pictureBox1.Visible = true;
-					if(pa_present)
-						radYes.Select();
-					else
-						radNo.Select();
-					radYes.Visible = true;
-					radNo.Visible = true;
+                case Page.PA:
+                    this.Text = "PowerSDR Setup Wizard - Hardware Setup";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = true;
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = false;
+                    groupBox2.Visible = false;
+                    grpModel.Visible = false;
+                    lblCombo.Visible = false;
+                    lblMessage1.Text = "Is the 100W Power Amplifier (PA) included in your hardware configuration?";
+                    lblMessage2.Text = "The Power Amplifier bumps the output power of the SDR-1000 from " +
+                        "1W up to 100W.  For more information, see http://www.flex-radio.com.";
+                    pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.sdr-pa100.jpg"));
+                    pictureBox1.Visible = true;
+                    if (pa_present)
+                        radYes.Select();
+                    else
+                        radNo.Select();
+                    radYes.Visible = true;
+                    radNo.Visible = true;
                     groupBoxHPSDR_Hardware.Visible = false;
                     break;
-				case Page.ATU:
-					this.Text = "PowerSDR Setup Wizard - Hardware Setup";
-					btnFinished.Enabled = false;
-					btnNext.Enabled = true;
-					btnPrevious.Enabled = true;
-					button1.Visible = false;					
-					comboBox1.Visible = false;
-					comboBox2.Visible = false;
-					comboBox3.Visible = false;
-					groupBox2.Visible = false;
-					grpModel.Visible = false;
-					lblCombo.Visible = false;
-					lblMessage1.Text = "Is the LDG Z-100 Antenna Tuning Unit (ATU) included in your hardware configuration?";
-					lblMessage2.Text = "The integrated ATU allows the user to tune coax antennas with an SWR of up to " +
-						"10:1.  For more information, see http://www.flex-radio.com.";
-					pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.sdr-atu.jpg"));
-					pictureBox1.Visible = true;
-					if(atu_present)
-						radYes.Select();
-					else
-						radNo.Select();
-					radYes.Visible = true;
-					radNo.Visible = true;
+                case Page.ATU:
+                    this.Text = "PowerSDR Setup Wizard - Hardware Setup";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = true;
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = false;
+                    groupBox2.Visible = false;
+                    grpModel.Visible = false;
+                    lblCombo.Visible = false;
+                    lblMessage1.Text = "Is the LDG Z-100 Antenna Tuning Unit (ATU) included in your hardware configuration?";
+                    lblMessage2.Text = "The integrated ATU allows the user to tune coax antennas with an SWR of up to " +
+                        "10:1.  For more information, see http://www.flex-radio.com.";
+                    pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.sdr-atu.jpg"));
+                    pictureBox1.Visible = true;
+                    if (atu_present)
+                        radYes.Select();
+                    else
+                        radNo.Select();
+                    radYes.Visible = true;
+                    radNo.Visible = true;
                     groupBoxHPSDR_Hardware.Visible = false;
                     break;
-				case Page.EXT_CLOCK:
-					this.Text = "PowerSDR Setup Wizard - Hardware Setup";
-					btnFinished.Enabled = false;
-					btnNext.Enabled = true;
-					btnPrevious.Enabled = true;					
-					button1.Visible = false;
-					comboBox1.Visible = false;
-					if(pll_mult == 10 || pll_mult == 0)
-						comboBox2.SelectedIndex = 0;
-					else
-						comboBox2.SelectedIndex = 1;	// 20
-					comboBox2.Visible = ext_clock;
-					comboBox3.Visible = false;
-					groupBox2.Visible = false;
-					grpModel.Visible = false;
-					lblCombo.Visible = ext_clock;
-					lblCombo.Text = "Clock Freq (MHz):";
-					lblMessage1.Text = "Does your hardware configuration include the External Clock Reference Option?";
-					lblMessage2.Text = "The External Clock Reference Option allows the DDS to be synchronized " +
-						"with a more stable clock source.  For more information, see http://www.flex-radio.com.";
-					pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.clock.jpg"));
-					pictureBox1.Visible = true;
-					if(ext_clock)
-						radYes.Select();
-					else
-						radNo.Select();
-					radYes.Visible = true;
-					radNo.Visible = true;
+                case Page.EXT_CLOCK:
+                    this.Text = "PowerSDR Setup Wizard - Hardware Setup";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = true;
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    if (pll_mult == 10 || pll_mult == 0)
+                        comboBox2.SelectedIndex = 0;
+                    else
+                        comboBox2.SelectedIndex = 1;	// 20
+                    comboBox2.Visible = ext_clock;
+                    comboBox3.Visible = false;
+                    groupBox2.Visible = false;
+                    grpModel.Visible = false;
+                    lblCombo.Visible = ext_clock;
+                    lblCombo.Text = "Clock Freq (MHz):";
+                    lblMessage1.Text = "Does your hardware configuration include the External Clock Reference Option?";
+                    lblMessage2.Text = "The External Clock Reference Option allows the DDS to be synchronized " +
+                        "with a more stable clock source.  For more information, see http://www.flex-radio.com.";
+                    pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.clock.jpg"));
+                    pictureBox1.Visible = true;
+                    if (ext_clock)
+                        radYes.Select();
+                    else
+                        radNo.Select();
+                    radYes.Visible = true;
+                    radNo.Visible = true;
                     groupBoxHPSDR_Hardware.Visible = false;
                     break;
-				case Page.USB:
-					this.Text = "PowerSDR Setup Wizard - Hardware Setup";
-					btnFinished.Enabled = false;
-					btnNext.Enabled = true;
-					btnPrevious.Enabled = true;
-					button1.Visible = false;					
-					comboBox1.Visible = false;
-					comboBox2.Visible = false;
-					comboBox3.Visible = false;
-					groupBox2.Visible = false;
-					grpModel.Visible = false;
-					lblCombo.Visible = false;
-					lblMessage1.Text = "Is the USB to Parallel adapter included in your hardware configuration?";
-					lblMessage2.Text = "The USB to Parallel adapter eliminates the need for a parallel port interface " +
-						"on your computer.  Unlike other off-the-shelf adapters, the FlexRadio Systems adapter implements " +
-						"all the data, status, and control lines for complete integration with existing parallel port " +
-						"hardware.  For more information, see http://www.flex-radio.com.";
-					pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.sdr-usb.jpg"));
-					pictureBox1.Visible = true;
-					if(usb_present)
-						radYes.Select();
-					else
-						radNo.Select();
-					radYes.Visible = true;
-					radNo.Visible = true;
+                case Page.USB:
+                    this.Text = "PowerSDR Setup Wizard - Hardware Setup";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = true;
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = false;
+                    groupBox2.Visible = false;
+                    grpModel.Visible = false;
+                    lblCombo.Visible = false;
+                    lblMessage1.Text = "Is the USB to Parallel adapter included in your hardware configuration?";
+                    lblMessage2.Text = "The USB to Parallel adapter eliminates the need for a parallel port interface " +
+                        "on your computer.  Unlike other off-the-shelf adapters, the FlexRadio Systems adapter implements " +
+                        "all the data, status, and control lines for complete integration with existing parallel port " +
+                        "hardware.  For more information, see http://www.flex-radio.com.";
+                    pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.sdr-usb.jpg"));
+                    pictureBox1.Visible = true;
+                    if (usb_present)
+                        radYes.Select();
+                    else
+                        radNo.Select();
+                    radYes.Visible = true;
+                    radNo.Visible = true;
                     groupBoxHPSDR_Hardware.Visible = false;
                     break;
-				case Page.SOUND_CARD:
-					this.Text = "PowerSDR Setup Wizard - Sound Card Setup";
-					btnFinished.Enabled = false;
-					btnNext.Enabled = true;
-					btnPrevious.Enabled = true;
-					button1.Visible = false;
-					comboBox1.Visible = false;
-					comboBox2.Visible = false;
-					comboBox3.Visible = true;
-					groupBox2.Visible = false;
-					grpModel.Visible = false;
-					lblCombo.Visible = false;
-					lblMessage1.Text = "Please select your sound card";
-					lblMessage2.Text = "If you don't see your card in the list, select Unsupported Card.\n" +
-						"If using an Unsupported Card, you will need to modify the settings in the Audio "+
-						"Tab of the Setup Form when finished with this wizard.";
-					pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.soundcard.jpg"));
-					pictureBox1.Visible = true;
-					radYes.Visible = false;
-					radNo.Visible = false;
+                case Page.SOUND_CARD:
+                    this.Text = "PowerSDR Setup Wizard - Sound Card Setup";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = true;
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = true;
+                    groupBox2.Visible = false;
+                    grpModel.Visible = false;
+                    lblCombo.Visible = false;
+                    lblMessage1.Text = "Please select your sound card";
+                    lblMessage2.Text = "If you don't see your card in the list, select Unsupported Card.\n" +
+                        "If using an Unsupported Card, you will need to modify the settings in the Audio " +
+                        "Tab of the Setup Form when finished with this wizard.";
+                    pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.soundcard.jpg"));
+                    pictureBox1.Visible = true;
+                    radYes.Visible = false;
+                    radNo.Visible = false;
                     groupBoxHPSDR_Hardware.Visible = false;
                     break;
 
@@ -1299,6 +1335,7 @@ namespace PowerSDR
                     comboBox1.Visible = false;
                     comboBox2.Visible = false;
                     comboBox3.Visible = false;
+                    comboBox10.Visible = false;
                     groupBox2.Visible = false;
                     groupBoxHPSDR_Hardware.Visible = true;
                     grpModel.Visible = false;
@@ -1311,286 +1348,314 @@ namespace PowerSDR
                     radNo.Visible = false;
                     break;
 
+                case Page.REGION:
+                    this.Text = "PowerSDR Setup Wizard - HPSDR Region Selection ";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = true;
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = false;
+                    comboBox10.Visible = true;
+                    groupBox2.Visible = false;
+                    groupBoxHPSDR_Hardware.Visible = false;
+                    grpModel.Visible = false;
+                    lblCombo.Visible = false;
+                    lblMessage1.Text = "Select your Region.";
+                    lblMessage2.Visible = false;
+                    pictureBox1.Image = null;
+                    pictureBox1.Visible = false;
+                    radYes.Visible = false;
+                    radNo.Visible = false;
+                    break;
+
                 case Page.FINISHED:
-					this.Text = "PowerSDR Setup Wizard - Finished";
-					btnFinished.Enabled = true;
-					btnNext.Enabled = false;
-					btnPrevious.Enabled = true;					
-					button1.Visible = false;
-					comboBox1.Visible = false;					
-					comboBox2.Visible = false;
-					comboBox3.Visible = false;
-					groupBox2.Visible = false;
-					grpModel.Visible = false;
-					lblCombo.Visible = false;
-					lblMessage1.Text = "Setup is now complete. ";
-					lblMessage2.Visible = false;
-					pictureBox1.Image = null;
-					pictureBox1.Visible = false;
-					radYes.Visible = false;
-					radNo.Visible = false;					
-					break;
-			}
-		}
+                    this.Text = "PowerSDR Setup Wizard - Finished";
+                    btnFinished.Enabled = true;
+                    btnNext.Enabled = false;
+                    btnPrevious.Enabled = true;
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = false;
+                    groupBox2.Visible = false;
+                    grpModel.Visible = false;
+                    lblCombo.Visible = false;
+                    lblMessage1.Text = "Setup is now complete. ";
+                    lblMessage2.Visible = false;
+                    pictureBox1.Image = null;
+                    pictureBox1.Visible = false;
+                    radYes.Visible = false;
+                    radNo.Visible = false;
+                    break;
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		private Page current_page = Page.WELCOME;	
-		private Page CurPage
-		{
-			get { return current_page; }
-			set
-			{
-				current_page = value;
-				SwitchPage(current_page);
-			}
-		}
+        private Page current_page = Page.WELCOME;
+        private Page CurPage
+        {
+            get { return current_page; }
+            set
+            {
+                current_page = value;
+                SwitchPage(current_page);
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
-		private void btnNext_Click(object sender, System.EventArgs e)
-		{
-			switch(current_page)
-			{
-				case Page.WELCOME:
-					CurPage = Page.MODEL;
-					btnNext.Focus();
-					break;
-				case Page.DATABASE:
-					CurPage = Page.MODEL;
-					btnNext.Focus();
-					break;
-				case Page.MODEL:
-					switch(model)
-					{
-						case Model.SDR1000:
-							CurPage = Page.XVTR;
-							btnNext.Focus();
-							break;
-						case Model.FLEX5000:
-						case Model.FLEX3000:
-							CurPage = Page.FINISHED;
-							btnFinished.Focus();
-							break;
+        private void btnNext_Click(object sender, System.EventArgs e)
+        {
+            switch (current_page)
+            {
+                case Page.WELCOME:
+                    CurPage = Page.MODEL;
+                    btnNext.Focus();
+                    break;
+                case Page.DATABASE:
+                    CurPage = Page.MODEL;
+                    btnNext.Focus();
+                    break;
+                case Page.MODEL:
+                    switch (model)
+                    {
+                        case Model.SDR1000:
+                            CurPage = Page.XVTR;
+                            btnNext.Focus();
+                            break;
+                        case Model.FLEX5000:
+                        case Model.FLEX3000:
+                            CurPage = Page.FINISHED;
+                            btnFinished.Focus();
+                            break;
                         case Model.HPSDR:
                         case Model.HERMES:
                             CurPage = Page.HPSDR_HARDWARE_SELECT;
                             btnNext.Focus();
                             break;
                         default:
-							CurPage = Page.SOUND_CARD;
-							btnNext.Focus();
-							break;
-					}					
-					break;
-                 case Page.XVTR:
-					xvtr_index = comboBox1.SelectedIndex;
-					CurPage = Page.PA;
-					btnNext.Focus();
-					break;
-				case Page.PA:
-					gain_by_band[0] = (float)udPAGainByBand160.Value;
+                            CurPage = Page.SOUND_CARD;
+                            btnNext.Focus();
+                            break;
+                    }
+                    break;
+                case Page.XVTR:
+                    xvtr_index = comboBox1.SelectedIndex;
+                    CurPage = Page.PA;
+                    btnNext.Focus();
+                    break;
+                case Page.PA:
+                    gain_by_band[0] = (float)udPAGainByBand160.Value;
                     gain_by_band[1] = (float)udPAGainByBand80.Value;
-					gain_by_band[2] = (float)udPAGainByBand60.Value;
-					gain_by_band[3] = (float)udPAGainByBand40.Value;
-					gain_by_band[4] = (float)udPAGainByBand30.Value;
-					gain_by_band[5] = (float)udPAGainByBand20.Value;
-					gain_by_band[6] = (float)udPAGainByBand17.Value;
-					gain_by_band[7] = (float)udPAGainByBand15.Value;
-					gain_by_band[8] = (float)udPAGainByBand12.Value;
-					gain_by_band[9] = (float)udPAGainByBand10.Value;
-					CurPage = Page.ATU;
-					btnNext.Focus();
-					break;
-				case Page.ATU:
-					CurPage = Page.EXT_CLOCK;
-					btnNext.Focus();
-					break;
-				case Page.EXT_CLOCK:
-					if(ext_clock)
-					{
-						switch(comboBox2.Text)
-						{
-							case "10":
-								pll_mult = 20;
-								break;
-							case "20":
-								pll_mult = 10;
-								break;
-						}
-					}
-					CurPage = Page.USB;
-					btnNext.Focus();
-					break;
-				case Page.USB:
-					CurPage = Page.SOUND_CARD;
-					btnNext.Focus();
-					break;
-				case Page.SOUND_CARD:
-					sound_card_index = comboBox3.SelectedIndex;
-					CurPage = Page.FINISHED;
-					btnFinished.Focus();
-					break;
+                    gain_by_band[2] = (float)udPAGainByBand60.Value;
+                    gain_by_band[3] = (float)udPAGainByBand40.Value;
+                    gain_by_band[4] = (float)udPAGainByBand30.Value;
+                    gain_by_band[5] = (float)udPAGainByBand20.Value;
+                    gain_by_band[6] = (float)udPAGainByBand17.Value;
+                    gain_by_band[7] = (float)udPAGainByBand15.Value;
+                    gain_by_band[8] = (float)udPAGainByBand12.Value;
+                    gain_by_band[9] = (float)udPAGainByBand10.Value;
+                    CurPage = Page.ATU;
+                    btnNext.Focus();
+                    break;
+                case Page.ATU:
+                    CurPage = Page.EXT_CLOCK;
+                    btnNext.Focus();
+                    break;
+                case Page.EXT_CLOCK:
+                    if (ext_clock)
+                    {
+                        switch (comboBox2.Text)
+                        {
+                            case "10":
+                                pll_mult = 20;
+                                break;
+                            case "20":
+                                pll_mult = 10;
+                                break;
+                        }
+                    }
+                    CurPage = Page.USB;
+                    btnNext.Focus();
+                    break;
+                case Page.USB:
+                    CurPage = Page.SOUND_CARD;
+                    btnNext.Focus();
+                    break;
+                case Page.SOUND_CARD:
+                    sound_card_index = comboBox3.SelectedIndex;
+                    CurPage = Page.FINISHED;
+                    btnFinished.Focus();
+                    break;
                 case Page.HPSDR_HARDWARE_SELECT:
+                      CurPage = Page.FINISHED;
+                  //  CurPage = Page.REGION;
+                    btnFinished.Focus();
+                    break;
+                case Page.REGION:
+                    region_index = comboBox10.SelectedIndex;
                     CurPage = Page.FINISHED;
                     btnFinished.Focus();
                     break;
                 case Page.FINISHED:
-					break;
-			}
-		}
+                    break;
+            }
+        }
 
-		private void btnPrevious_Click(object sender, System.EventArgs e)
-		{
-			switch(current_page)
-			{
-				case Page.WELCOME:
-					break;
-				case Page.DATABASE:
-					CurPage = Page.WELCOME;
-					btnPrevious.Focus();
-					break;
-				case Page.MODEL:
-					CurPage = Page.WELCOME;
-					btnPrevious.Focus();
-					break;
+        private void btnPrevious_Click(object sender, System.EventArgs e)
+        {
+            switch (current_page)
+            {
+                case Page.WELCOME:
+                    break;
+                case Page.DATABASE:
+                    CurPage = Page.WELCOME;
+                    btnPrevious.Focus();
+                    break;
+                case Page.MODEL:
+                    CurPage = Page.WELCOME;
+                    btnPrevious.Focus();
+                    break;
                 case Page.XVTR:
-					xvtr_index = comboBox1.SelectedIndex;
-					CurPage = Page.MODEL;
-					btnPrevious.Focus();
-					break;
-				case Page.PA:
-					gain_by_band[0] = (float)udPAGainByBand160.Value;
-					gain_by_band[1] = (float)udPAGainByBand80.Value;
-					gain_by_band[2] = (float)udPAGainByBand60.Value;
-					gain_by_band[3] = (float)udPAGainByBand40.Value;
-					gain_by_band[4] = (float)udPAGainByBand30.Value;
-					gain_by_band[5] = (float)udPAGainByBand20.Value;
-					gain_by_band[6] = (float)udPAGainByBand17.Value;
-					gain_by_band[7] = (float)udPAGainByBand15.Value;
-					gain_by_band[8] = (float)udPAGainByBand12.Value;
-					gain_by_band[9] = (float)udPAGainByBand10.Value;
-					CurPage = Page.XVTR;
-					btnPrevious.Focus();
-					break;
-				case Page.ATU:
-					CurPage = Page.PA;
-					btnPrevious.Focus();
-					break;
-				case Page.EXT_CLOCK:
-					if(ext_clock)
-					{
-						switch(comboBox2.Text)
-						{
-							case "10":
-								pll_mult = 20;
-								break;
-							case "20":
-								pll_mult = 10;
-								break;
-						}
-					}
-					CurPage = Page.ATU;
-					btnPrevious.Focus();
-					break;
-				case Page.USB:
-					CurPage = Page.EXT_CLOCK;
-					btnPrevious.Focus();
-					break;
-				case Page.SOUND_CARD:
-					sound_card_index = comboBox3.SelectedIndex;
-					if(model == Model.SDR1000)
-						CurPage = Page.USB;
-					else CurPage = Page.MODEL;
-					btnPrevious.Focus();
-					break;
+                    xvtr_index = comboBox1.SelectedIndex;
+                    CurPage = Page.MODEL;
+                    btnPrevious.Focus();
+                    break;
+                case Page.PA:
+                    gain_by_band[0] = (float)udPAGainByBand160.Value;
+                    gain_by_band[1] = (float)udPAGainByBand80.Value;
+                    gain_by_band[2] = (float)udPAGainByBand60.Value;
+                    gain_by_band[3] = (float)udPAGainByBand40.Value;
+                    gain_by_band[4] = (float)udPAGainByBand30.Value;
+                    gain_by_band[5] = (float)udPAGainByBand20.Value;
+                    gain_by_band[6] = (float)udPAGainByBand17.Value;
+                    gain_by_band[7] = (float)udPAGainByBand15.Value;
+                    gain_by_band[8] = (float)udPAGainByBand12.Value;
+                    gain_by_band[9] = (float)udPAGainByBand10.Value;
+                    CurPage = Page.XVTR;
+                    btnPrevious.Focus();
+                    break;
+                case Page.ATU:
+                    CurPage = Page.PA;
+                    btnPrevious.Focus();
+                    break;
+                case Page.EXT_CLOCK:
+                    if (ext_clock)
+                    {
+                        switch (comboBox2.Text)
+                        {
+                            case "10":
+                                pll_mult = 20;
+                                break;
+                            case "20":
+                                pll_mult = 10;
+                                break;
+                        }
+                    }
+                    CurPage = Page.ATU;
+                    btnPrevious.Focus();
+                    break;
+                case Page.USB:
+                    CurPage = Page.EXT_CLOCK;
+                    btnPrevious.Focus();
+                    break;
+                case Page.SOUND_CARD:
+                    sound_card_index = comboBox3.SelectedIndex;
+                    if (model == Model.SDR1000)
+                        CurPage = Page.USB;
+                    else CurPage = Page.MODEL;
+                    btnPrevious.Focus();
+                    break;
                 case Page.HPSDR_HARDWARE_SELECT:
                     CurPage = Page.MODEL;
                     btnPrevious.Focus();
                     break;
 
                 case Page.FINISHED:
-					if(model == Model.FLEX5000 || model == Model.FLEX3000)
-						CurPage = Page.MODEL;
+                    if (model == Model.FLEX5000 || model == Model.FLEX3000)
+                        CurPage = Page.MODEL;
                     else if (model == Model.HPSDR || model == Model.HERMES)
                         CurPage = Page.HPSDR_HARDWARE_SELECT;
                     else
-						CurPage = Page.SOUND_CARD;
-					btnPrevious.Focus();
-					break;
-			}
-		}
+                        CurPage = Page.SOUND_CARD;
+                    btnPrevious.Focus();
+                    break;
+            }
+        }
 
-		private void radYes_CheckedChanged(object sender, System.EventArgs e)
-		{
-			switch(current_page)
-			{
+        private void radYes_CheckedChanged(object sender, System.EventArgs e)
+        {
+            switch (current_page)
+            {
                 case Page.XVTR:
-					xvtr_present = true;
-					lblCombo.Visible = true;
-					comboBox1.Visible = true;
-					break;
-				case Page.PA:
-					pa_present = true;
-					groupBox2.Visible = true;
-					break;
-				case Page.ATU:
-					atu_present = true;
-					break;
-				case Page.EXT_CLOCK:
-					ext_clock = true;
-					lblCombo.Visible = true;
-					comboBox2.Visible = true;
-					break;
-				case Page.USB:
-					usb_present = true;
-					break;
-				case Page.DATABASE:
-					button1.Visible = true;
-					break;
-			}
-		}
+                    xvtr_present = true;
+                    lblCombo.Visible = true;
+                    comboBox1.Visible = true;
+                    break;
+                case Page.PA:
+                    pa_present = true;
+                    groupBox2.Visible = true;
+                    break;
+                case Page.ATU:
+                    atu_present = true;
+                    break;
+                case Page.EXT_CLOCK:
+                    ext_clock = true;
+                    lblCombo.Visible = true;
+                    comboBox2.Visible = true;
+                    break;
+                case Page.USB:
+                    usb_present = true;
+                    break;
+                case Page.DATABASE:
+                    button1.Visible = true;
+                    break;
+            }
+        }
 
-		private void radNo_CheckedChanged(object sender, System.EventArgs e)
-		{
-			switch(current_page)
-			{
+        private void radNo_CheckedChanged(object sender, System.EventArgs e)
+        {
+            switch (current_page)
+            {
                 case Page.XVTR:
-					xvtr_present = false;
-					lblCombo.Visible = false;
-					comboBox1.Visible = false;
-					break;
-				case Page.PA:
-					pa_present = false;
-					groupBox2.Visible = false;
-					break;
-				case Page.ATU:
-					atu_present = false;
-					break;
-				case Page.EXT_CLOCK:
-					ext_clock = false;
-					lblCombo.Visible = false;
-					comboBox2.Visible = false;
-					break;
-				case Page.USB:
-					usb_present = false;
-					break;
-				case Page.DATABASE:
-					button1.Visible = false;
-					break;
-			}
-		}
+                    xvtr_present = false;
+                    lblCombo.Visible = false;
+                    comboBox1.Visible = false;
+                    break;
+                case Page.PA:
+                    pa_present = false;
+                    groupBox2.Visible = false;
+                    break;
+                case Page.ATU:
+                    atu_present = false;
+                    break;
+                case Page.EXT_CLOCK:
+                    ext_clock = false;
+                    lblCombo.Visible = false;
+                    comboBox2.Visible = false;
+                    break;
+                case Page.USB:
+                    usb_present = false;
+                    break;
+                case Page.DATABASE:
+                    button1.Visible = false;
+                    break;
+            }
+        }
 
-		private void btnFinished_Click(object sender, System.EventArgs e)
-		{
-			switch(model)
-			{
-				case Model.FLEX5000:
-				case Model.FLEX3000:
+        private void btnFinished_Click(object sender, System.EventArgs e)
+        {
+            switch (model)
+            {
+                case Model.FLEX5000:
+                case Model.FLEX3000:
                     break;
                 case Model.HERMES:
                     console.SetupForm.PennyLanePresent = pennylane_present;
@@ -1607,214 +1672,303 @@ namespace PowerSDR
                     console.SetupForm.radOzyUSB.Checked = radOzy.Checked;
                     console.SetupForm.radMetis.Checked = radMetis.Checked;
                     console.SetupForm.forceAudioSampleRate1("192000");
-  					break;
-				default:
+                     break;
+                default:
                     console.SetupForm.XVTRPresent = xvtr_present;
-					console.SetupForm.PAPresent = pa_present;
-					console.SetupForm.USBPresent = usb_present;
-					console.SetupForm.ATUPresent = atu_present;
+                    console.SetupForm.PAPresent = pa_present;
+                    console.SetupForm.USBPresent = usb_present;
+                    console.SetupForm.ATUPresent = atu_present;
 
-					if(sound_card_index >= 0)
-					{
-						SoundCard card = SoundCard.FIRST;
-						switch(comboBox3.Text)
-						{
-							case "M-Audio Delta 44 (PCI)":
-								card = SoundCard.DELTA_44;
-								break;
-							case "PreSonus FireBox (FireWire)":
-								card = SoundCard.FIREBOX;
-								break;
-							case "Edirol FA-66 (FireWire)":
-								card = SoundCard.EDIROL_FA_66;
-								break;
-							case "SB Audigy (PCI)":
-								card = SoundCard.AUDIGY;
-								break;
-							case "SB Audigy 2 (PCI)":
-								card = SoundCard.AUDIGY_2;
-								break;
-							case "SB Audigy 2 ZS (PCI)":
-								card = SoundCard.AUDIGY_2_ZS;
-								break;
-							case "Sound Blaster Extigy (USB)":
-								card = SoundCard.EXTIGY;
-								break;
-							case "Sound Blaster MP3+ (USB)":
-								card = SoundCard.MP3_PLUS;
-								break;
-							case "Turtle Beach Santa Cruz (PCI)":
-								card = SoundCard.SANTA_CRUZ;
-								break;
-							case "Unsupported Card":
-								card = SoundCard.UNSUPPORTED_CARD;
+                    if (sound_card_index >= 0)
+                    {
+                        SoundCard card = SoundCard.FIRST;
+                        switch (comboBox3.Text)
+                        {
+                            case "M-Audio Delta 44 (PCI)":
+                                card = SoundCard.DELTA_44;
+                                break;
+                            case "PreSonus FireBox (FireWire)":
+                                card = SoundCard.FIREBOX;
+                                break;
+                            case "Edirol FA-66 (FireWire)":
+                                card = SoundCard.EDIROL_FA_66;
+                                break;
+                            case "SB Audigy (PCI)":
+                                card = SoundCard.AUDIGY;
+                                break;
+                            case "SB Audigy 2 (PCI)":
+                                card = SoundCard.AUDIGY_2;
+                                break;
+                            case "SB Audigy 2 ZS (PCI)":
+                                card = SoundCard.AUDIGY_2_ZS;
+                                break;
+                            case "Sound Blaster Extigy (USB)":
+                                card = SoundCard.EXTIGY;
+                                break;
+                            case "Sound Blaster MP3+ (USB)":
+                                card = SoundCard.MP3_PLUS;
+                                break;
+                            case "Turtle Beach Santa Cruz (PCI)":
+                                card = SoundCard.SANTA_CRUZ;
+                                break;
+                            case "Unsupported Card":
+                                card = SoundCard.UNSUPPORTED_CARD;
                                 break;
                             case "HPSDR":
                                 card = SoundCard.HPSDR;
                                 break;
-                                
-						}
-						console.CurrentSoundCard = card;
-						
-					}
-				
-					if(xvtr_present)
-						console.SetupForm.XVTRSelection = xvtr_index;
-					if(ext_clock)
-						console.SetupForm.PllMult = pll_mult;
 
-					if(pa_present)
-					{
-						console.SetupForm.PAGain160 = gain_by_band[0];
-						console.SetupForm.PAGain80 = gain_by_band[1];
-						console.SetupForm.PAGain60 = gain_by_band[2];
-						console.SetupForm.PAGain40 = gain_by_band[3];
-						console.SetupForm.PAGain30 = gain_by_band[4];
-						console.SetupForm.PAGain20 = gain_by_band[5];
-						console.SetupForm.PAGain17 = gain_by_band[6];
-						console.SetupForm.PAGain15 = gain_by_band[7];
-						console.SetupForm.PAGain12 = gain_by_band[8];
-						console.SetupForm.PAGain10 = gain_by_band[9];
-					}
-					break;
-			}
+                        }
+                        console.CurrentSoundCard = card;
+                    }
+
+                    if (xvtr_present)
+                        console.SetupForm.XVTRSelection = xvtr_index;
+                    if (ext_clock)
+                        console.SetupForm.PllMult = pll_mult;
+
+                    if (pa_present)
+                    {
+                        console.SetupForm.PAGain160 = gain_by_band[0];
+                        console.SetupForm.PAGain80 = gain_by_band[1];
+                        console.SetupForm.PAGain60 = gain_by_band[2];
+                        console.SetupForm.PAGain40 = gain_by_band[3];
+                        console.SetupForm.PAGain30 = gain_by_band[4];
+                        console.SetupForm.PAGain20 = gain_by_band[5];
+                        console.SetupForm.PAGain17 = gain_by_band[6];
+                        console.SetupForm.PAGain15 = gain_by_band[7];
+                        console.SetupForm.PAGain12 = gain_by_band[8];
+                        console.SetupForm.PAGain10 = gain_by_band[9];
+                    }
+                    break;
+            }
             console.SetupForm.CurrentModel = model;
 
-			ArrayList a = new ArrayList();
-			a.Add("SetupWizard/1");
-			DB.SaveVars("State", ref a);
+          /*  if (region_index >= 0)
+            {
+                FRSRegion CurrentRegion = FRSRegion.US;
+                if (comboBox10.Text == "")
+                {
+                    console.SetupForm.comboFRSRegion.Text = "United States";
+                    console.CurrentRegion = CurrentRegion;
+                    return;
+                }
+                switch (comboBox10.Text)
+                {
+                    case "Australia":
+                        CurrentRegion = FRSRegion.Australia;
+                        console.Extended = false;
+                        break;
+                    case "Europe":
+                        CurrentRegion = FRSRegion.Europe;
+                        console.Extended = false;
+                        break;
+                    case "Italy":
+                        CurrentRegion = FRSRegion.Italy_Plus;
+                        console.Extended = false;
+                        break;
+                    case "Spain":
+                        CurrentRegion = FRSRegion.Spain;
+                        console.Extended = false;
+                        break;
+                    case "Japan":
+                        CurrentRegion = FRSRegion.Japan;
+                        console.Extended = false;
+                        break;
+                    case "United Kingdom":
+                        CurrentRegion = FRSRegion.UK;
+                        console.Extended = false;
+                        break;
+                    case "United States":
+                        CurrentRegion = FRSRegion.US;
+                        Display.Init();
+                        break;
+                    case "Norway":
+                        CurrentRegion = FRSRegion.Norway;
+                        console.Extended = false;
+                        break;
+                    case "Denmark":
+                        CurrentRegion = FRSRegion.Denmark;
+                        console.Extended = false;
+                        break;
+                    case "Latvia":
+                        CurrentRegion = FRSRegion.Latvia;
+                        console.Extended = false;
+                        break;
+                    case "Slovakia":
+                        CurrentRegion = FRSRegion.Slovakia;
+                        console.Extended = false;
+                        break;
+                    case "Bulgaria":
+                        CurrentRegion = FRSRegion.Bulgaria;
+                        console.Extended = false;
+                        break;
+                    case "Greece":
+                        CurrentRegion = FRSRegion.Greece;
+                        console.Extended = false;
+                        break;
+                    case "Hungary":
+                        CurrentRegion = FRSRegion.Hungary;
+                        console.Extended = false;
+                        break;
+                    case "Netherlands":
+                        CurrentRegion = FRSRegion.Netherlands;
+                        console.Extended = false;
+                        break;
+                    case "France":
+                        CurrentRegion = FRSRegion.France;
+                        console.Extended = false;
+                        break;
+                    case "Russia":
+                        CurrentRegion = FRSRegion.Russia;
+                        console.Extended = false;
+                        break;
+                    case "Extended":
+                        console.Extended = true;
+                        break;
+                }
+                console.SetupForm.comboFRSRegion.Text = comboBox10.Text;
+                console.CurrentRegion = CurrentRegion;
+            } */
+            
+            console.SetupForm.comboFRSRegion.Text = "United States";
+            console.CurrentRegion = FRSRegion.US;
 
-			console.SetupForm.SaveOptions();
-			console.SaveState();
+            ArrayList a = new ArrayList();
+            a.Add("SetupWizard/1");
+            DB.SaveVars("State", ref a);
 
-			done = true;
-			this.Close();
-		}
+            console.SetupForm.SaveOptions();
+            console.SaveState();
 
-		private void SetupWizard_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			if(!done)
-			{
-				DialogResult result = MessageBox.Show("Closing the wizard without finishing will not save results.  " +
-					"Do you want to close it anyways?",
-					"Wizard Not Complete Warning",
-					MessageBoxButtons.YesNo,
-					MessageBoxIcon.Warning);
+            done = true;
+            this.Close();
+        }
 
-				if(result == DialogResult.No)
-					e.Cancel = true;
-			}
-		}
+        private void SetupWizard_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!done)
+            {
+                DialogResult result = MessageBox.Show("Closing the wizard without finishing will not save results.  " +
+                    "Do you want to close it anyways?",
+                    "Wizard Not Complete Warning",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
 
-		private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			CompleteImport();
-		}
+                if (result == DialogResult.No)
+                    e.Cancel = true;
+            }
+        }
 
-		private void CompleteImport()
-		{
-			/*if(DB.ImportDatabase(openFileDialog1.FileName))
-				MessageBox.Show("Database Imported Successfully",
-					"Database Imported",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Information);
+        private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            CompleteImport();
+        }
 
-			console.SetupForm.GetTxProfiles();
+        private void CompleteImport()
+        {
+            /*if(DB.ImportDatabase(openFileDialog1.FileName))
+                MessageBox.Show("Database Imported Successfully",
+                    "Database Imported",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-			console.SetupForm.GetOptions();			// load all database values
-			console.GetState();				
-			if(console.EQForm != null) Common.RestoreForm(console.EQForm, "EQForm", false);
-			if(console.XVTRForm != null) Common.RestoreForm(console.XVTRForm, "XVTR", false);
-			if(console.ProdTestForm != null) Common.RestoreForm(console.ProdTestForm, "ProdTest", false);
+            console.SetupForm.GetTxProfiles();
 
-			console.SetupForm.SaveOptions();		// save all database values
-			console.SaveState();
-			if(console.EQForm != null) Common.SaveForm(console.EQForm, "EQForm");
-			if(console.XVTRForm != null) Common.SaveForm(console.XVTRForm, "XVTR");
-			if(console.ProdTestForm != null) Common.SaveForm(console.ProdTestForm, "ProdTest");
-			done = true;
-			console.ResetMemForm();
-			this.Close();*/
-		}
+            console.SetupForm.GetOptions();			// load all database values
+            console.GetState();				
+            if(console.EQForm != null) Common.RestoreForm(console.EQForm, "EQForm", false);
+            if(console.XVTRForm != null) Common.RestoreForm(console.XVTRForm, "XVTR", false);
+            if(console.ProdTestForm != null) Common.RestoreForm(console.ProdTestForm, "ProdTest", false);
 
-		private void button1_Click(object sender, System.EventArgs e)
-		{
-			string path = console.AppDataPath;
-			path = path.Substring(0, path.LastIndexOf("\\"));
-			openFileDialog1.InitialDirectory = path;
-			openFileDialog1.ShowDialog();
-		}
+            console.SetupForm.SaveOptions();		// save all database values
+            console.SaveState();
+            if(console.EQForm != null) Common.SaveForm(console.EQForm, "EQForm");
+            if(console.XVTRForm != null) Common.SaveForm(console.XVTRForm, "XVTR");
+            if(console.ProdTestForm != null) Common.SaveForm(console.ProdTestForm, "ProdTest");
+            done = true;
+            console.ResetMemForm();
+            this.Close();*/
+        }
 
-		private void comboBox3_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboBox3.Text == "Unsupported Card" && comboBox3.Focused)
-				MessageBox.Show("Proper operation of the SDR-1000 depends on the use of a sound card that is\n"+
-					"officially recommended by FlexRadio Systems.  Refer to the Specifications page on\n"+
-					"www.flex-radio.com to determine which sound cards are currently recommended.  Use only\n"+
-					"the specific model numbers stated on the website because other models within the same\n"+
-					"family may not work properly with the radio.  Officially supported sound cards may be\n"+
-					"updated on the website without notice.  If you have any question about the sound card\n"+
-					"you would like to use with the radio, please email support@flex-radio.com or call us at\n"+
-					"512-250-8595.\n\n"+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            string path = console.AppDataPath;
+            path = path.Substring(0, path.LastIndexOf("\\"));
+            openFileDialog1.InitialDirectory = path;
+            openFileDialog1.ShowDialog();
+        }
 
-					"NO WARRANTY IS IMPLIED WHEN THE SDR-1000 IS USED WITH ANY SOUND CARD OTHER\n"+
-					"THAN THOSE CURRENTLY RECOMMENDED AS STATED ON THE FLEXRADIO SYSTEMS WEBSITE.\n"+
-					"UNSUPPORTED SOUND CARDS MAY OR MAY NOT WORK WITH THE SDR-1000.  USE OF\n"+
-					"UNSUPPORTED SOUND CARDS IS AT THE CUSTOMERS OWN RISK.",
-					"Warning: Unsupported Card",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Warning);
-		}
+        private void comboBox3_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboBox3.Text == "Unsupported Card" && comboBox3.Focused)
+                MessageBox.Show("Proper operation of the SDR-1000 depends on the use of a sound card that is\n" +
+                    "officially recommended by FlexRadio Systems.  Refer to the Specifications page on\n" +
+                    "www.flex-radio.com to determine which sound cards are currently recommended.  Use only\n" +
+                    "the specific model numbers stated on the website because other models within the same\n" +
+                    "family may not work properly with the radio.  Officially supported sound cards may be\n" +
+                    "updated on the website without notice.  If you have any question about the sound card\n" +
+                    "you would like to use with the radio, please email support@flex-radio.com or call us at\n" +
+                    "512-250-8595.\n\n" +
 
-		private void radGenModelFLEX5000_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radGenModelFLEX5000.Checked)
-			{
-				if(radGenModelFLEX5000.Text == "FLEX-5000")
-				{
-					model = Model.FLEX5000;
-					//if(grpModel.Visible)
+                    "NO WARRANTY IS IMPLIED WHEN THE SDR-1000 IS USED WITH ANY SOUND CARD OTHER\n" +
+                    "THAN THOSE CURRENTLY RECOMMENDED AS STATED ON THE FLEXRADIO SYSTEMS WEBSITE.\n" +
+                    "UNSUPPORTED SOUND CARDS MAY OR MAY NOT WORK WITH THE SDR-1000.  USE OF\n" +
+                    "UNSUPPORTED SOUND CARDS IS AT THE CUSTOMERS OWN RISK.",
+                    "Warning: Unsupported Card",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+        }
+
+        private void radGenModelFLEX5000_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelFLEX5000.Checked)
+            {
+                if (radGenModelFLEX5000.Text == "FLEX-5000")
+                {
+                    model = Model.FLEX5000;
+                    //if(grpModel.Visible)
                     pictureBox1.Image = null; //new Bitmap(GetResource("PowerSDR.images.flex-5000.jpg"));
-				}
-				else
-				{
-					model = Model.FLEX3000;
-					//if(grpModel.Visible)
+                }
+                else
+                {
+                    model = Model.FLEX3000;
+                    //if(grpModel.Visible)
                     pictureBox1.Image = null;// new Bitmap(GetResource("PowerSDR.images.flex-3000.jpg"));
-				}
-			}
-		}
+                }
+            }
+        }
 
-		private void radGenModelSDR1000_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radGenModelSDR1000.Checked)
-			{
-				model = Model.SDR1000;
-				//if(grpModel.Visible)
+        private void radGenModelSDR1000_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelSDR1000.Checked)
+            {
+                model = Model.SDR1000;
+                //if(grpModel.Visible)
                 pictureBox1.Image = null;// new Bitmap(GetResource("PowerSDR.images.sdr-1000.jpg"));
-			}
-		}
+            }
+        }
 
-		private void radGenModelSoftRock40_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radGenModelSoftRock40.Checked)
-			{
-				model = Model.SOFTROCK40;
-				//if(grpModel.Visible)
-					pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.softrock40.jpg"));
-			}
-		}
+        private void radGenModelSoftRock40_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelSoftRock40.Checked)
+            {
+                model = Model.SOFTROCK40;
+                //if(grpModel.Visible)
+                pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.softrock40.jpg"));
+            }
+        }
 
-		private void radGenModelDemoNone_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radGenModelDemoNone.Checked)
-			{
-				model = Model.DEMO;
-				//if(grpModel.Visible)
-					pictureBox1.Image = null;//new Bitmap(GetResource("PowerSDR.images.no_hardware.jpg"));
-                    comboBox3.Text = "Unsupported Card";
-			}
-		}
+        private void radGenModelDemoNone_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelDemoNone.Checked)
+            {
+                model = Model.DEMO;
+                //if(grpModel.Visible)
+                pictureBox1.Image = null;//new Bitmap(GetResource("PowerSDR.images.no_hardware.jpg"));
+                comboBox3.Text = "Unsupported Card";
+            }
+        }
 
         private void radGenModelHPSDR_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -1868,8 +2022,8 @@ namespace PowerSDR
         }
         private void chkPenny_CheckedChanged(object sender, System.EventArgs e)
         {
-             penelope_present = chkPenny.Checked;
-             if (chkPenny.Checked) chkPennyLane.Checked = false;
+            penelope_present = chkPenny.Checked;
+            if (chkPenny.Checked) chkPennyLane.Checked = false;
         }
 
         private void chkPennyLane_CheckedChanged(object sender, System.EventArgs e)

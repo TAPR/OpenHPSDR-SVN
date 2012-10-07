@@ -64,10 +64,17 @@ namespace PowerSDR
         public static float[] rx1_peak_buffer;						// Peak hold display data buffer
         public static float[] rx2_peak_buffer;
 
+      //  private static List<Channel> channels_60m;
+
         #endregion
 
         #region Properties
 
+      //  public static List<Channel> Channels60m
+     //   {
+         //   get { return channels_60m; }
+      //  }
+        
         private static bool tnf_zoom = false;
         public static bool TNFZoom
         {
@@ -1287,6 +1294,35 @@ namespace PowerSDR
                 current_display_data_bottom[i] = -200.0f;
             }
 
+         /*   channels_60m = new List<Channel>();
+            switch (console.CurrentRegion)
+            {
+                case FRSRegion.UK:
+                    channels_60m.Add(new Channel(5.2600, 2800));
+                    channels_60m.Add(new Channel(5.2800, 2800));
+                    channels_60m.Add(new Channel(5.2900, 2800));
+                    channels_60m.Add(new Channel(5.3680, 2800));
+                    channels_60m.Add(new Channel(5.3730, 2800));
+                    channels_60m.Add(new Channel(5.4000, 2800));
+                    channels_60m.Add(new Channel(5.4050, 2800));
+                    break;
+
+                case FRSRegion.US:
+                    channels_60m.Add(new Channel(5.3320, 2800));
+                    channels_60m.Add(new Channel(5.3480, 2800));
+                    channels_60m.Add(new Channel(5.3585, 2800));
+                    channels_60m.Add(new Channel(5.3730, 2800));
+                    channels_60m.Add(new Channel(5.4050, 2800));
+                    break;
+
+                default:
+                    channels_60m.Add(new Channel(5.3320, 2800));
+                    channels_60m.Add(new Channel(5.3480, 2800));
+                    channels_60m.Add(new Channel(5.3585, 2800));
+                    channels_60m.Add(new Channel(5.3730, 2800));
+                    channels_60m.Add(new Channel(5.4050, 2800));
+                    break;
+            } */
         }
 
         public static void DrawBackground()
@@ -2969,6 +3005,7 @@ namespace PowerSDR
 
             int f_steps = (width / freq_step_size) + 1;
             // Draw vertical lines
+
             for (int i = 0; i < f_steps + 1; i++)
             {
                 string label;
@@ -3029,23 +3066,19 @@ namespace PowerSDR
                             }
                             else goto default;
 
-                        case FRSRegion.Spain:
-                            if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
-                                actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
-                                actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
-                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
-                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
-                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
-                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
-                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
-                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
-                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
-                            {
-                                goto case FRSRegion.LAST;
-                            }
-                            else goto default;
-
                         case FRSRegion.Europe:
+                        case FRSRegion.Spain:
+                        case FRSRegion.Italy_Plus:
+                        case FRSRegion.UK:
+                        case FRSRegion.Bulgaria:
+                        case FRSRegion.Denmark:
+                        case FRSRegion.France:
+                        case FRSRegion.Greece:
+                        case FRSRegion.Hungary:
+                        case FRSRegion.Latvia:
+                        case FRSRegion.Netherlands:
+                        case FRSRegion.Russia:
+                        case FRSRegion.Slovakia:
                             if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
@@ -3055,39 +3088,7 @@ namespace PowerSDR
                                 actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
                                 actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
                                 actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
-                                actual_fgrid == 50.08 || actual_fgrid == 51.0)
-                            {
-                                goto case FRSRegion.LAST;
-                            }
-                            else goto default;
-
-                        case FRSRegion.UK:
-                            if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
-                                actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
-                                actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
-                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
-                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
-                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
-                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
-                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
-                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                                 actual_fgrid == 50.0 || actual_fgrid == 54.0)
-                            {
-                                goto case FRSRegion.LAST;
-                            }
-                            else goto default;
-
-                        case FRSRegion.Italy_Plus:
-                            if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
-                                actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
-                                actual_fgrid == 6.975 || actual_fgrid == 7.2 ||
-                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
-                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
-                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
-                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
-                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
-                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
-                                actual_fgrid == 50.08 || actual_fgrid == 51.0)
                             {
                                 goto case FRSRegion.LAST;
                             }
@@ -3117,7 +3118,8 @@ namespace PowerSDR
                             else goto default;
 
                         case FRSRegion.Australia:
-                            if (actual_fgrid == 1.8 || actual_fgrid == 1.875 ||
+                            if (actual_fgrid == .1357 || actual_fgrid == .1378 ||
+                                actual_fgrid == 1.8 || actual_fgrid == 1.875 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.7 ||
                                 actual_fgrid == 3.776 || actual_fgrid == 3.8 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.3 ||

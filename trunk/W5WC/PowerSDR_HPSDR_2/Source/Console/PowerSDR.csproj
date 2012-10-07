@@ -161,6 +161,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Channel.cs" />
     <Compile Include="HPSDR\Alex.cs" />
     <Compile Include="alphawarnform.cs">
       <SubType>Form</SubType>

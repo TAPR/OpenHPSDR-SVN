@@ -66,7 +66,8 @@ Bridgewater, NJ 08807
 #include <common.h>
 #include <wcpagc.h>
 #include <compress.h>
-#include <anf.h.>
+#include <anf.h>
+#include <anr.h>
 
 //------------------------------------------------------------------------
 // max no. simultaneous receivers
@@ -179,11 +180,11 @@ extern struct _rx
     BOOLEAN flag;
   } nb_sdrom;
 
-  struct
-  {
-    LMSR gen;
-    BOOLEAN flag;
-  } anr; //anf
+  //struct
+  //{
+  //  LMSR gen;
+  //  BOOLEAN flag;
+  //} anr; //anf
 
   struct
   {
@@ -197,6 +198,13 @@ extern struct _rx
 	BOOLEAN flag;
 	int position;
   } anf;
+
+  struct	// (NR0V)
+  {
+	ANR gen;
+	BOOLEAN flag;
+	int position;
+  } anr;
 
   //struct
   //{

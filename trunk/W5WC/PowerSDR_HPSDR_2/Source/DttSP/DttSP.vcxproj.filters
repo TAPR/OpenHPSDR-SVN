@@ -141,6 +141,9 @@
     <ClCompile Include="anf.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="anr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="am_demod.h">
@@ -291,6 +294,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="anf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="anr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

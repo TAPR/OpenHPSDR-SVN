@@ -38,6 +38,7 @@ ANF newANF	(
 				double gamma,
 
 				double lidx,
+				double lidx_min,
 				double lidx_max,
 				double ngamma,
 				double den_mult,
@@ -59,6 +60,7 @@ ANF newANF	(
 	a->gamma = gamma;
 	
 	a->lidx = lidx;
+	a->lidx_min = lidx_min;
 	a->lidx_max = lidx_max;
 	a->ngamma = ngamma;
 	a->den_mult = den_mult;
@@ -108,7 +110,7 @@ void del_anf (ANF a)
             if (nev < nel)
 				if((a->lidx += a->lincr) > a->lidx_max) a->lidx = a->lidx_max;
             else
-				if((a->lidx -= a->ldecr) < 0.0) a->lidx = 0.0;
+				if((a->lidx -= a->ldecr) < a->lidx_min) a->lidx = a->lidx_min;
 			a->ngamma = a->gamma * (a->lidx * a->lidx) * (a->lidx * a->lidx) * a->den_mult;
 
             c0 = 1.0 - a->two_mu * a->ngamma;

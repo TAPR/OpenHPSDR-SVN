@@ -670,7 +670,7 @@ int IsOkToSendDataToFPGA(void) {
 unsigned int lastOutPower = 0; 
 
 
-void ForceCandCFrames(int count) { 
+void ForceCandCFrames(int count, int c0, int vfofreq) { 
 	int	numwritten;	
 	unsigned char buf[1024];
 	int	i; 
@@ -683,17 +683,18 @@ void ForceCandCFrames(int count) {
 	buf[3] = XmitBit;									  /* c0	*/ 
 	buf[4] = (SampleRateIn2Bits	& 3) | ( C1Mask	& 0xfc ); /* c1	*/
 	buf[5] = PennyOCBits <<	1;							  /* c2	*/
-	buf[6] = (MercAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; /* c3 */
-	buf[7] = AlexTxAnt & 0x3;
+	buf[6] = (AlexAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; /* c3 */
+	buf[7] = 0x04;
 
 	buf[512] = 0x7f; 
 	buf[513] = 0x7f; 
 	buf[514] = 0x7f; 
-	buf[515] = 2;									  /* c0	*/ 
-	buf[516] = (VFOfreq	>> 24) & 0xff;	/* byte	0 of freq -	c1	*/
-	buf[517] = (VFOfreq	>> 16) & 0xff;	/* byte	1 of freq -	c2	*/
-	buf[518] = (VFOfreq	>> 8) &	0xff;	/* byte	2 of freq -	c3	*/ 
-	buf[519] = VFOfreq & 0xff;			/* byte	3 of freq -	c4	*/	
+	buf[515] = c0; 								  /* c0	*/ 
+	buf[516] = (vfofreq >> 24) & 0xff;	/* byte	0 of freq -	c1	*/
+	buf[517] = (vfofreq >> 16) & 0xff;	/* byte	1 of freq -	c2	*/
+	buf[518] = (vfofreq >> 8) &	0xff;	/* byte	2 of freq -	c3	*/ 
+	buf[519] = vfofreq & 0xff;			/* byte	3 of freq -	c4	*/	
+
 	if (  FPGATestMode ) { 
 		memcpy(buf+8, fpga_test_buf+8, 512-8); 
 		memcpy(buf+8+512, fpga_test_buf+8, 512-8); 
@@ -709,7 +710,9 @@ void ForceCandCFrames(int count) {
 } 
 
 void ForceCandCFrame(void) { 
-	ForceCandCFrames(1); 
+	ForceCandCFrames(1, 2, VFOfreq_tx); 
+	Sleep(10);
+	ForceCandCFrames(1, 4, VFOfreq);
 } 
 
 
@@ -731,15 +734,9 @@ int last_xmit_bit = 0;
 //
 void IOThreadMainLoop(void) {
 
-unsigned char ApolloFilt = 0;
-unsigned char ApolloTune = 0;
-unsigned char ApolloATU = 0;
-unsigned char HermesFilt = 0;
-
 		int fwd_power_stage; 
 		int ref_power_stage; 
 		int alex_fwd_power; 
-		int alex_rev_power;
         short *sample_bufp = NULL;
         int sample_count = 0;
         int i;
@@ -804,10 +801,7 @@ unsigned char HermesFilt = 0;
         else if ( SampleRate == 192000 ) {
                 outbuflen /= 4;
         }
-
-
-		ForceCandCFrames(4); // send 4 C&C frames to make sure ozy knows the clock settings 
-
+	ForceCandCFrame(); // send 3 C&C frames to make sure ozy knows the clock settings 
         // printf("iot: main loop starting\n"); fflush(stdout);
         // main loop - read a buffer, processe it and then write a buffer if we have one to write
         while ( io_keep_running != 0 ) {
@@ -1289,361 +1283,288 @@ unsigned char HermesFilt = 0;
                 if ( have_out_buf && ok_to_write  ) {
                         // printf("enter out loop /w buf: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
                         // while we have space in the output buffer put data in it
-                        while ( writebufpos < FPGAWriteBufSize /*OUTBUF_SIZE*/ ) {
-                                switch ( out_state ) {
-                                                case OUT_STATE_SYNC_HI_NEEDED:
-                                                        out_sample_pairs_this_sync = 0;
-                                                        out_state = OUT_STATE_SYNC_MID_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = 0x7f;
-                                                        break;
+					while ( writebufpos < FPGAWriteBufSize /*OUTBUF_SIZE*/ ) {
+						switch ( out_state ) {
+						case OUT_STATE_SYNC_HI_NEEDED:
+							out_sample_pairs_this_sync = 0;
+							out_state = OUT_STATE_SYNC_MID_NEEDED;
+							FPGAWriteBufp[writebufpos] = 0x7f;
+							break;
 
-                                                case OUT_STATE_SYNC_MID_NEEDED:
-                                                        out_state = OUT_STATE_SYNC_LO_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = 0x7f;
-                                                        break;
+						case OUT_STATE_SYNC_MID_NEEDED:
+							out_state = OUT_STATE_SYNC_LO_NEEDED;
+							FPGAWriteBufp[writebufpos] = 0x7f;
+							break;
 
-                                                case OUT_STATE_SYNC_LO_NEEDED:
-                                                        out_state = OUT_STATE_CONTROL0;
-                                                        FPGAWriteBufp[writebufpos] = 0x7f;
-                                                        break;
+						case OUT_STATE_SYNC_LO_NEEDED:
+							out_state = OUT_STATE_CONTROL0;
+							FPGAWriteBufp[writebufpos] = 0x7f;
+							break;
 
-                                                case OUT_STATE_CONTROL0: //C0
-                                                        out_state = OUT_STATE_CONTROL1;
-                                                        // write_buf[writebufpos] = ControlBytesIn[0];
-#if 0
-                                                        if ( XmitBit != last_xmit_bit ) {
-                                                                last_xmit_bit = XmitBit;
-                                                                printf("XmitBit changed to: %d\n", XmitBit); fflush(stdout);
-                                                        }
-#endif
+						case OUT_STATE_CONTROL0: //C0
+							out_state = OUT_STATE_CONTROL1;
+							// write_buf[writebufpos] = ControlBytesIn[0];
 
-                                                        FPGAWriteBufp[writebufpos] = (unsigned char)XmitBit;
-                                                        FPGAWriteBufp[writebufpos] &= 1; // not needed ?
-#if W5WC
-														switch (out_control_idx) {
-												             case 0:
-                                                                 FPGAWriteBufp[writebufpos] |= 0;
-																 break;
-															 case 1: //RX VFO
-                                                                 FPGAWriteBufp[writebufpos] |= 4;
-																 break;
-															 case 2: 
-																 FPGAWriteBufp[writebufpos] |= 0x12; //C0 0001 001x
-																 break;
-															 case 3: //TX VFO
-                                                                 FPGAWriteBufp[writebufpos] |= 2;
-																 break;
-														  }
+							FPGAWriteBufp[writebufpos] = (unsigned char)XmitBit;
+							FPGAWriteBufp[writebufpos] &= 1; // not needed ?
 
-#else
-                                                        if ( out_control_idx == 1 ) {  // send freq
-                                                                FPGAWriteBufp[writebufpos] |= 2;
-                                                        }
-														else if  ( out_control_idx == 2 ) { 
-															FPGAWriteBufp[writebufpos] |= 0x12; //C0 0001001x
-														} 
-#endif
-                                                        ControlBytesOut[0] = FPGAWriteBufp[writebufpos];
-                                                        break;
+							switch (out_control_idx) {
+							case 0:
+								FPGAWriteBufp[writebufpos] |= 0x00;
+								break;
+							case 1: //TX VFO
+								FPGAWriteBufp[writebufpos] |= 0x02;
+								break;
+							case 2: //RX VFO
+								FPGAWriteBufp[writebufpos] |= 0x04; 
+								break;
+							case 3: 
+								FPGAWriteBufp[writebufpos] |= 0x12; //C0 0001 001x
+								break;
+							case 4: //Preamp control
+								FPGAWriteBufp[writebufpos] |= 0x14; //C0 0001 010x
+								break;
+							}
 
-                                                case OUT_STATE_CONTROL1: //C1
-                                                        out_state = OUT_STATE_CONTROL2;
-#if W5WC
-														switch (out_control_idx) {
-												             case 0:
-															     FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-																// printf(" C1Mask: %d\n", C1Mask);
- 																 break;
-															 case 1:
-                                                                 FPGAWriteBufp[writebufpos] =  (VFOfreq >> 24) & 0xff; // RX1 
-																 break;
-															 case 2:
- 																 if (HermesPowerEnabled && XmitBit != 0) { 															     
-																	 if (swr_protect == 0.0f) swr_protect = 0.3f;
-																	 pf = (unsigned char) (OutputPowerFactor * swr_protect);
-																	 FPGAWriteBufp[writebufpos] = (unsigned char) (pf & 0xff); //(OutputPowerFactor & 0xff);
-                                                                //printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
-															     } 
-															     else 
-															      {
-                                                                    FPGAWriteBufp[writebufpos] = 0;
-															      } 
-																 break;
-															 case 3:
-                                                                 FPGAWriteBufp[writebufpos] =  (VFOfreq_tx >> 24) & 0xff; 
- 																 break;
-														} 
-#else
-                                                        // send sample rate in C1 low 2 bits
-                                                        // FPGAWriteBufp[writebufpos] = ((ControlBytesIn[1] & 0xfc) | (SampleRateIn2Bits & 3));
-                                                        if ( out_control_idx == 1 ) {
-                                                            FPGAWriteBufp[writebufpos] =  (VFOfreq >> 24) & 0xff; // byte 0 of freq
-                                                        }
-														else if ( out_control_idx == 2 ) {  /* send power out level */
-															if (HermesPowerEnabled && XmitBit != 0) 
-															{
-															    FPGAWriteBufp[writebufpos] = (unsigned char)(OutputPowerFactor & 0xff);
-                                                                //printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
-															} 
-															else 
-															{
-                                                                FPGAWriteBufp[writebufpos] = 0;
-															}
-														} 
-                                                        else { // out_control_idx == 0
-															FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-                                                        }
-#endif
-                                                        ControlBytesOut[1] = FPGAWriteBufp[writebufpos];
-                                                        break;
+							ControlBytesOut[0] = FPGAWriteBufp[writebufpos];
+							break;
 
-                                                case OUT_STATE_CONTROL2: //C2
-                                                        out_state = OUT_STATE_CONTROL3;
+						case OUT_STATE_CONTROL1: //C1
+							out_state = OUT_STATE_CONTROL2;
 
-#if W5WC
-														switch (out_control_idx) {
-												             case 0:
-                                                                 FPGAWriteBufp[writebufpos] = PennyOCBits << 1; // ControlBytesIn[2];
-																 break;
-															 case 1:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq >> 16) & 0xff; // rx1 freq
-																 break;
-															 case 2:
-                                                                FPGAWriteBufp[writebufpos] = (MicBoost | LineIn | ApolloFilt | 
-																                 ApolloTune | ApolloATU | HermesFilt | AlexManEnable) & 0x7f;
-																 break;																 
-															 case 3:
- 	                                                                FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 16) & 0xff; // TX freq
-                                            					 break;
-														}
- 
-#else
-                                                        if ( out_control_idx == 1 ) {
-                                                                FPGAWriteBufp[writebufpos] = (VFOfreq >> 16) & 0xff;
-                                                        }
-														else if ( out_control_idx == 2 ) { 
-															// FPGAWriteBufp[writebufpos] = (MicBoost | LineIn) & 0x3;
-                                                               FPGAWriteBufp[writebufpos] = (MicBoost | LineIn | ApolloFilt | 
-																                    ApolloTune | ApolloATU | HermesFilt | AlexManEnable) & 0x7f;
-                                                                 // printf("Alex: 0x%x\n", AlexManEnable);  fflush(stdout);
-                                                                 // printf("WriteBuf: 0x%x\n", FPGAWriteBufp[writebufpos]);  fflush(stdout);
-														} 
-                                                        else { // out_control_idx == 0
-															FPGAWriteBufp[writebufpos] = PennyOCBits << 1; /* ControlBytesIn[2];  */
-                                                        }
-#endif
-                                                        ControlBytesOut[2] = FPGAWriteBufp[writebufpos];
-                                                        break;
+							switch (out_control_idx) {
+							case 0:
+								FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
+								// printf(" C1Mask: %d\n", C1Mask);
+								break;
+							case 1:
+								FPGAWriteBufp[writebufpos] =  (VFOfreq_tx >> 24) & 0xff; // tx freq
+								break;
+							case 2:
+								FPGAWriteBufp[writebufpos] =  (VFOfreq >> 24) & 0xff; // RX1 freq
+								break;
+							case 3:
+								if (HermesPowerEnabled && XmitBit != 0) { 															     
+									if (swr_protect == 0.0f) swr_protect = 0.3f;
+									pf = (unsigned char) (OutputPowerFactor * swr_protect);
+									FPGAWriteBufp[writebufpos] = (unsigned char) (pf & 0xff); 
+									//printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
+								} 
+								else 
+								{
+									FPGAWriteBufp[writebufpos] = 0;
+								} 
+								break;
+							case 4:
+								 FPGAWriteBufp[writebufpos] = ( Merc2Preamp | Merc1Preamp) & 0xf; 
+								// printf(" pamp1: %d pamp2: %d\n", Merc1Preamp, Merc2Preamp);
+								break;
 
-                                                case OUT_STATE_CONTROL3: //C3
-                                                        out_state = OUT_STATE_CONTROL4;
-#if W5WC
-															 switch (out_control_idx) {
-												             case 0:
-                                                                 FPGAWriteBufp[writebufpos] = ( MercAtten | MercDither | MercPreamp |
-							                                                                   MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
- 																 break;
-															 case 1:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq >> 8) & 0xff;
-																 break;
-															 case 2:
-                                                                 FPGAWriteBufp[writebufpos] = ( AlexHPFMask & 0x7f );
-																 break;
-															 case 3:
-                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 8) & 0xff;
-																 break;
-														}                                                         
-#else
+							} 
+							ControlBytesOut[1] = FPGAWriteBufp[writebufpos];
+							break;
 
-                                                        if ( out_control_idx == 1 ) {
-                                                             FPGAWriteBufp[writebufpos] = (VFOfreq >> 8) & 0xff;
-                                                        }
-														else if ( out_control_idx == 2 ) { 
-                                                             FPGAWriteBufp[writebufpos] = ( AlexHPFMask & 0x7f );
-                                                             //printf("AlexHPF: 0x%x\n", AlexHPFMask);  fflush(stdout);
-                                                             //printf("HPFBuf: 0x%x\n", FPGAWriteBufp[writebufpos]);  fflush(stdout);
-															
-														}
-                                                        else { // out_control_idx == 0
-                                                             FPGAWriteBufp[writebufpos] = ( MercAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 																
-                                                        }
-#endif
-                                                        ControlBytesOut[3] = FPGAWriteBufp[writebufpos];
-                                                        break;
+						case OUT_STATE_CONTROL2: //C2
+							out_state = OUT_STATE_CONTROL3;
 
-                                                case OUT_STATE_CONTROL4: //C4
-                                                        out_state = OUT_STATE_MON_LEFT_HI_NEEDED;
-#if W5WC
-														switch (out_control_idx) {
-												             case 0:
-                                                                  FPGAWriteBufp[writebufpos] = AlexTxAnt | 0x04; 
-																 break;
-															 case 1:
-                                                                 FPGAWriteBufp[writebufpos] = VFOfreq & 0xff;
-																 break;
-															 case 2:
- 																 FPGAWriteBufp[writebufpos] = ( AlexLPFMask & 0x7f );
-                                                                 break;
-															 case 3:
-                                                                 FPGAWriteBufp[writebufpos] = VFOfreq_tx & 0xff;
- 																 break;
-															}
-#else
-                                                        // write_buf[writebufpos] = ControlBytesIn[4];
-                                                        if ( out_control_idx == 1 ) {
-                                                             FPGAWriteBufp[writebufpos] = VFOfreq & 0xff;
-                                                        }
-														else if ( out_control_idx == 2 ) { 															
-                                                             FPGAWriteBufp[writebufpos] = ( AlexLPFMask & 0x7f );
-			                                                // printf("AlexLPF: 0x%x\n", AlexLPFMask);  fflush(stdout);
-                                                            // printf("LPFBuf: 0x%x\n", FPGAWriteBufp[writebufpos]);  fflush(stdout);
-														}
-                                                        else {
-															 FPGAWriteBufp[writebufpos] = (AlexTxAnt | Duplex | NRx) & 0x3F; 
-                                                        }
-#endif
-                                                        ControlBytesOut[4] = FPGAWriteBufp[writebufpos];
-                                                        ++out_frame_idx;
-#if W5WC
-												switch(out_control_idx) {
-												    case 0: //0
-													   out_control_idx = 3;
-													break;
-												    case 1: // 0x04 RX
- 														out_control_idx = (HermesPowerEnabled || isMetis || AlexEnabled) ? 2 : 0; //3;
-													break;
-												    case 2: //0x12
-                                                       out_control_idx = 0;//3;
-													break;
-												    case 3: // 0x02 TX
-                                                       out_control_idx = 1;
-												    break;
-												}
-#else
-														if ( out_control_idx == 2 ) { 
-															out_control_idx = 0; 
-														} 
-                                                        else if ( out_control_idx == 1 ) {
-															if ( HermesPowerEnabled || isMetis || AlexEnabled) {
-                                                                out_control_idx = 2;
-															}
-															else { 
-																out_control_idx = 0;
-															}
-                                                        }
-                                                        else {
-                                                                out_control_idx = 1;
-                                                        }
-#endif
-														break;
+							switch (out_control_idx) {
+							case 0:
+								FPGAWriteBufp[writebufpos] = PennyOCBits << 1; // ControlBytesIn[2];
+								break;
+							case 1:
+								FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 16) & 0xff; // TX freq
+								break;
+							case 2:
+								FPGAWriteBufp[writebufpos] = (VFOfreq >> 16) & 0xff; // rx1 freq
+								break;																 
+							case 3:
+								FPGAWriteBufp[writebufpos] = (MicBoost | LineIn | ApolloFilt | 
+									ApolloTuner | ApolloATU | HermesFilt | AlexManEnable) & 0x7f;
+								break;
+							case 4:
+								FPGAWriteBufp[writebufpos] = LineBoost & 0x1f; 
+								break;
+							}
 
-                                                case OUT_STATE_MON_LEFT_HI_NEEDED: // L1 bits 15-8 of Left audio sample
-                                                        out_state = OUT_STATE_MON_LEFT_LO_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+							ControlBytesOut[2] = FPGAWriteBufp[writebufpos];
+							break;
 
-                                                case OUT_STATE_MON_LEFT_LO_NEEDED: // L0 bits 7-0 of Left audio sample
-                                                        out_state = OUT_STATE_MON_RIGHT_HI_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+						case OUT_STATE_CONTROL3: //C3
+							out_state = OUT_STATE_CONTROL4;
 
-                                               case OUT_STATE_MON_RIGHT_HI_NEEDED: // R1 bits 15-8 of Right audio sample
-                                                        out_state = OUT_STATE_MON_RIGHT_LO_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+							switch (out_control_idx) {
+							case 0:
+								FPGAWriteBufp[writebufpos] = ( AlexAtten | MercPreamp | MercDither |
+									MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
+								break;
+							case 1:
+								FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 8) & 0xff;
+								break;
+							case 2:
+								FPGAWriteBufp[writebufpos] = (VFOfreq >> 8) & 0xff;
+								break;
+							case 3:
+								FPGAWriteBufp[writebufpos] = ( AlexHPFMask & 0x7f );
+								break;
+							case 4:
+								FPGAWriteBufp[writebufpos] = (UserOut0 | UserOut1 | UserOut2 | UserOut3) & 0x0f;
+								break;
+							}                                                         
 
-												case OUT_STATE_MON_RIGHT_LO_NEEDED: // R0 bits 7-0 of Right audio sample
-                                                        out_state = OUT_STATE_LEFT_HI_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
- 
-  											   case OUT_STATE_LEFT_HI_NEEDED: // I1 bits 15-8 of I sample
-                                                        out_state = OUT_STATE_LEFT_LO_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+							ControlBytesOut[3] = FPGAWriteBufp[writebufpos];
+							break;
 
-                                               case OUT_STATE_LEFT_LO_NEEDED: // I0 bits 7-0 of I sample
-                                                        out_state = OUT_STATE_RIGHT_HI_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+						case OUT_STATE_CONTROL4: //C4
+							out_state = OUT_STATE_MON_LEFT_HI_NEEDED;
 
-                                               case OUT_STATE_RIGHT_HI_NEEDED: // Q1 bits 15-8 of Q sample
-                                                        out_state = OUT_STATE_RIGHT_LO_NEEDED;
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        break;
+							switch (out_control_idx) {
+							case 0:
+								FPGAWriteBufp[writebufpos] = (AlexTxAnt | 0x04) & 0x3f; // duplex, 1 rx
+								break;
+							case 1:
+								FPGAWriteBufp[writebufpos] = VFOfreq_tx & 0xff;
+								break;
+							case 2:
+								FPGAWriteBufp[writebufpos] = VFOfreq & 0xff;
+								break;
+							case 3:
+								FPGAWriteBufp[writebufpos] = ( AlexLPFMask & 0x7f );
+								break;
+							case 4:
+								FPGAWriteBufp[writebufpos] = 0;
+								break;
+							}
 
-											   case OUT_STATE_RIGHT_LO_NEEDED: // Q0 bits 7-0 of Q sample
-                                                        FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
-                                                        ++outbufpos;
-                                                        ++out_sample_pairs_this_sync;
-                                                        if ( out_sample_pairs_this_sync == 63 ) {
-                                                                out_state = OUT_STATE_SYNC_HI_NEEDED;
-                                                        }
-                                                        else {
-                                                                out_state = OUT_STATE_MON_LEFT_HI_NEEDED;
-                                                        }
-                                                        break;
+							ControlBytesOut[4] = FPGAWriteBufp[writebufpos];
+							++out_frame_idx;
 
-                                                 default:
-                                                        printf("internal error - bad out_state\n");
-                                                        out_state = OUT_STATE_SYNC_HI_NEEDED;
-                                                        break;
-                                }       /* switch (out_state) */
+							switch(out_control_idx) {
+							case 0: // 0x00
+								out_control_idx = 1;
+								break;
+							case 1: // 0x02 TX
+								out_control_idx = 2;
+								break;
+							case 2: //0x04 RX
+								out_control_idx = 3;
+								break;
+							case 3: // 0x12 
+								out_control_idx = 4;
+								break;
+							case 4: // 0x14
+								out_control_idx = 0;
+								break;
+							}
 
-                                ++writebufpos;
-                                //++out_stream_sync_count;
-                                //if ( out_stream_sync_count >=  512  ) {
-                                //      out_stream_sync_count = 0;
-                                //}
-                                if ( outbufpos >= outbuflen ) {  // we've consumed output buf from powrsdr dsp -- get a new one if one avail
-                                        freeFIFOdata(outbufp);
-                                        outbufp = getNewOutBufFromFIFO();
-                                        if ( outbufp == NULL ) {  // no data bail out
-                                                have_out_buf = 0;
-                                                // printf("no new buffer - bail out: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written);  fflush(stdout);
-                                                break;
-                                        }
-                                        else {
-                                                have_out_buf = 1;
-                                                outbufpos = 0;
-                                                // printf("new buffer: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
-                                        }
-                                }
-                        }  /* while writebufpos < FPGAWriteBufSize */
+							break;
 
-                        if ( writebufpos >= FPGAWriteBufSize ) {  // write the buffer if we've filled it.
-                                wrote_frame = 1;
-                                if ( !ForceNoSend ) {
+						case OUT_STATE_MON_LEFT_HI_NEEDED: // L1 bits 15-8 of Left audio sample
+							out_state = OUT_STATE_MON_LEFT_LO_NEEDED;
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+							++outbufpos;
+							break;
+
+						case OUT_STATE_MON_LEFT_LO_NEEDED: // L0 bits 7-0 of Left audio sample
+							out_state = OUT_STATE_MON_RIGHT_HI_NEEDED;
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+							++outbufpos;
+							break;
+
+						case OUT_STATE_MON_RIGHT_HI_NEEDED: // R1 bits 15-8 of Right audio sample
+							out_state = OUT_STATE_MON_RIGHT_LO_NEEDED;
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+							++outbufpos;
+							break;
+
+						case OUT_STATE_MON_RIGHT_LO_NEEDED: // R0 bits 7-0 of Right audio sample
+							out_state = OUT_STATE_LEFT_HI_NEEDED;
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+							++outbufpos;
+							break;
+
+						case OUT_STATE_LEFT_HI_NEEDED: // I1 bits 15-8 of I sample
+							out_state = OUT_STATE_LEFT_LO_NEEDED;
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+							++outbufpos;
+							break;
+
+						case OUT_STATE_LEFT_LO_NEEDED: // I0 bits 7-0 of I sample
+							out_state = OUT_STATE_RIGHT_HI_NEEDED;
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+							++outbufpos;
+							break;
+
+						case OUT_STATE_RIGHT_HI_NEEDED: // Q1 bits 15-8 of Q sample
+							out_state = OUT_STATE_RIGHT_LO_NEEDED;
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+							++outbufpos;
+							break;
+
+						case OUT_STATE_RIGHT_LO_NEEDED: // Q0 bits 7-0 of Q sample
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+							++outbufpos;
+							++out_sample_pairs_this_sync;
+							if ( out_sample_pairs_this_sync == 63 ) {
+								out_state = OUT_STATE_SYNC_HI_NEEDED;
+							}
+							else {
+								out_state = OUT_STATE_MON_LEFT_HI_NEEDED;
+							}
+							break;
+
+						default:
+							printf("internal error - bad out_state\n");
+							out_state = OUT_STATE_SYNC_HI_NEEDED;
+							break;
+						}       /* switch (out_state) */
+
+						++writebufpos;
+						//++out_stream_sync_count;
+						//if ( out_stream_sync_count >=  512  ) {
+						//      out_stream_sync_count = 0;
+						//}
+						if ( outbufpos >= outbuflen ) {  // we've consumed output buf from powrsdr dsp -- get a new one if one avail
+							freeFIFOdata(outbufp);
+							outbufp = getNewOutBufFromFIFO();
+							if ( outbufp == NULL ) {  // no data bail out
+								have_out_buf = 0;
+								// printf("no new buffer - bail out: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written);  fflush(stdout);
+								break;
+							}
+							else {
+								have_out_buf = 1;
+								outbufpos = 0;
+								// printf("new buffer: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
+							}
+						}
+					}  /* while writebufpos < FPGAWriteBufSize */
+
+					if ( writebufpos >= FPGAWriteBufSize ) {  // write the buffer if we've filled it.
+						wrote_frame = 1;
+						if ( !ForceNoSend ) {
 #ifdef XYLO
-                                        numwritten = XyloBulkWrite(XyloH, 2, FPGAWriteBufp, FPGAWriteBufSize);
+							numwritten = XyloBulkWrite(XyloH, 2, FPGAWriteBufp, FPGAWriteBufSize);
 #endif
 #ifdef OZY	
-										if ( FPGATestMode ) { 
-											int loop_count = FPGAWriteBufSize / 512; 
-											int j; 
-											for ( j = 0; j < loop_count; j++ ) { 
-												memcpy(FPGAWriteBufp + 8 + (512*j), fpga_test_buf+8, 512-8); 
-											} 
-										} 
- 										if ( isMetis ) { 
-											numwritten = MetisBulkWrite(0x02, FPGAWriteBufp, FPGAWriteBufSize);
-										}
-										else { 
-											numwritten = OzyBulkWrite(OzyH, 0x02, FPGAWriteBufp, FPGAWriteBufSize);
-										}
+							if ( FPGATestMode ) { 
+								int loop_count = FPGAWriteBufSize / 512; 
+								int j; 
+								for ( j = 0; j < loop_count; j++ ) { 
+									memcpy(FPGAWriteBufp + 8 + (512*j), fpga_test_buf+8, 512-8); 
+								} 
+							} 
+							if ( isMetis ) { 
+								numwritten = MetisBulkWrite(0x02, FPGAWriteBufp, FPGAWriteBufSize);
+							}
+							else { 
+								numwritten = OzyBulkWrite(OzyH, 0x02, FPGAWriteBufp, FPGAWriteBufSize);
+							}
 
 
 #endif
-                                }
-                                else {
-                                        numwritten = FPGAWriteBufSize;
+						}
+						else {
+							numwritten = FPGAWriteBufSize;
                                 }
                                 // numwritten = OUTBUF_SIZE;
 

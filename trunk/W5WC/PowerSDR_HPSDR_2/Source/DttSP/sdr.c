@@ -244,6 +244,7 @@ setup_rx (int k, unsigned int thread)
 		0.1,
 
 		1.0,
+		0.0,
 		200.0,
 		6.25e-12,
 		6.25e-10,
@@ -252,6 +253,26 @@ setup_rx (int k, unsigned int thread)
 		"ANF");
 	rx[thread][k].anf.flag = FALSE;
 	rx[thread][k].anf.position = 0;
+
+	rx[thread][k].anr.gen = newANR	(	// (NR0V) added	
+		CXBsize (rx[thread][k].buf.o),	//buff_size
+		CXBbase (rx[thread][k].buf.o),	//buff pointer
+		DLINE_SIZE,	
+		256,
+		64,				
+		0.0001,	
+		0.1,
+
+		120.0,
+		120.0,
+		200.0,
+		0.001,
+		6.25e-10,
+		1.0,
+		3.0,
+		"ANR");
+	rx[thread][k].anr.flag = FALSE;
+	rx[thread][k].anr.position = 0;
 
 	rx[thread][k].grapheq.gen = new_EQ (rx[thread][k].buf.o, uni[thread].samplerate, uni[thread].wisdom.bits);
 	rx[thread][k].grapheq.flag = FALSE;
@@ -303,6 +324,7 @@ setup_rx (int k, unsigned int thread)
 	rx[thread][k].banf.flag = FALSE;
 
 	/* auto-noise filter */
+	/*
 	rx[thread][k].anr.gen = new_lmsr (
 		rx[thread][k].buf.o,	// CXB signal,
 		64,						// int delay,
@@ -311,6 +333,7 @@ setup_rx (int k, unsigned int thread)
 		64,						// int adaptive_filter_size,
 		LMADF_NOISE);
 	rx[thread][k].anr.flag = FALSE;
+	*/
 
 	/* block auto-noise filter */
 	rx[thread][k].banr.gen = new_blms(
@@ -486,7 +509,7 @@ setup_tx (unsigned int thread)
 		CXBbase (tx[thread].buf.i),
 		CXBsize (tx[thread].buf.i),
 		3.0f,
-		"Comp");
+		"CMP");
 	tx[thread].compressor.flag = FALSE;
 
 	memset ((char *) &tx[thread].squelch, 0, sizeof (tx[thread].squelch));
@@ -626,7 +649,8 @@ destroy_workspace (unsigned int thread)
 		del_nb (rx[thread][k].nb.gen);
 		//del_lmsr (rx[thread][k].anf.gen);
 		del_anf (rx[thread][k].anf.gen);      // (NR0V)
-		del_lmsr (rx[thread][k].anr.gen);
+		//del_lmsr (rx[thread][k].anr.gen);
+		del_anr (rx[thread][k].anr.gen);      // (NR0V)
 		delAMD (rx[thread][k].am.gen);
 		delFMD (rx[thread][k].fm.gen);
 		delOSC (rx[thread][k].osc.gen);
@@ -1075,12 +1099,11 @@ do_rx_post (int k, unsigned int thread)
 	}
 
 	do_rx_spectrum(k, thread, rx[thread][k].buf.o, SPEC_POST_DET);
-	// not binaural?
-	// position in stereo field
 
-	if (rx[thread][k].tick == 0)
-		reset_OvSv (rx[thread][k].filt.ovsv_notch);
-	if (rx[thread][k].anf.flag && (rx[thread][k].anf.position == 0))
+	if((rx[thread][k].anf.position == 1) && rx[thread][k].mode != FM) // (NR0V)
+		WcpAGC (rx[thread][k].wcpagc.gen);
+	//BEGIN ANF / ANR / LATE_FILTER BLOCK
+	if (rx[thread][k].anf.flag)
 	{
 		switch(rx[thread][k].mode)
 		{
@@ -1088,28 +1111,27 @@ do_rx_post (int k, unsigned int thread)
 			case DIGL:
 			case DIGU:
 			case CWL:
-			case CWU: // do nothing
+			case CWU:
 				break;
 			default:
-
-				//lmsr_adapt (rx[thread][k].anf.gen);
+				{
 				notch (rx[thread][k].anf.gen);			// (NR0V)
-				memcpy (CXBbase(rx[thread][k].buf.i_notch), CXBbase(rx[thread][k].buf.o), sizeof(COMPLEX) * CXBhave(rx[thread][k].buf.o));
-				filter_OvSv (rx[thread][k].filt.ovsv_notch);
-				memcpy (CXBbase(rx[thread][k].buf.o), CXBbase(rx[thread][k].buf.o_notch), sizeof(COMPLEX) * CXBhave(rx[thread][k].buf.o));
-				//blms_adapt(rx[thread][k].banf.gen);
 				break;
+				}
 		}
 	}
-
-	if (rx[thread][k].anr.flag)
+	if(rx[thread][k].anr.flag)
+		noise_reduce(rx[thread][k].anr.gen);
+	if (rx[thread][k].tick == 0)
+		reset_OvSv (rx[thread][k].filt.ovsv_notch);
+	if(rx[thread][k].anf.flag || rx[thread][k].anr.flag || (rx[thread][k].mode == AM) || (rx[thread][k].mode == SAM))
 	{
-		lmsr_adapt (rx[thread][k].anr.gen);
+		for (i = 0; i < CXBhave(rx[thread][k].buf.o); i++)	
+			CXBdata(rx[thread][k].buf.i_notch, i) = Cmplx (2.0f * CXBreal(rx[thread][k].buf.o, i), 0.0f);
+		filter_OvSv (rx[thread][k].filt.ovsv_notch);
+		memcpy (CXBbase(rx[thread][k].buf.o), CXBbase(rx[thread][k].buf.o_notch), sizeof(COMPLEX) * CXBhave(rx[thread][k].buf.o));
 	}
-		//blms_adapt(rx[thread][k].banr.gen); //
-
-	/*if(thread == 0 && k == 0)
-		fprintf(stdout, "before: %15f12  ", CXBpeak(rx[thread][k].buf.i));*/
+	//END BLOCK
 #if 0
 	if (diversity.flag && (k==0) && (thread==2))
 		for (i = 0; i < n; i++) CXBdata(rx[thread][k].buf.o,i) = cxzero;
@@ -1123,41 +1145,15 @@ do_rx_post (int k, unsigned int thread)
 	}
 			
 
-	//if(rx[thread][k].mode != FM)
-		//DttSPAgc (rx[thread][k].dttspagc.gen, rx[thread][k].tick);
-	//fprintf (wcpfile, "[%.6f,%.6f]  AGC Input\n", lpeakmag(rx[thread][k].buf.o), rpeakmag(rx[thread][k].buf.o));
-	if(rx[thread][k].mode != FM) // (NR0V)
+	if((rx[thread][k].anf.position == 0) && rx[thread][k].mode != FM) // (NR0V)
 		WcpAGC (rx[thread][k].wcpagc.gen);
-	//fprintf (wcpfile, "[%.6f,%.6f]  AGC Output\n\n", lpeakmag(rx[thread][k].buf.o), rpeakmag(rx[thread][k].buf.o));
+
 	/*if(thread == 0 && k == 0 && count++%50 == 0)
 	{
 		fprintf(stdout, "after: %15f12\n", CXBpeak(rx[thread][k].buf.o));
 		fflush(stdout);
 	}*/
 
-	if (rx[thread][k].tick == 0)
-		reset_OvSv (rx[thread][k].filt.ovsv_notch);
-	if (rx[thread][k].anf.flag && (rx[thread][k].anf.position == 1))
-	{
-		switch(rx[thread][k].mode)
-		{
-			case DRM:
-			case DIGL:
-			case DIGU:
-			case CWL:
-			case CWU: // do nothing
-				break;
-			default:
-
-				//lmsr_adapt (rx[thread][k].anf.gen);
-				notch (rx[thread][k].anf.gen);			// (NR0V)
-				memcpy (CXBbase(rx[thread][k].buf.i_notch), CXBbase(rx[thread][k].buf.o), sizeof(COMPLEX) * CXBhave(rx[thread][k].buf.o));
-				filter_OvSv (rx[thread][k].filt.ovsv_notch);
-				memcpy (CXBbase(rx[thread][k].buf.o), CXBbase(rx[thread][k].buf.o_notch), sizeof(COMPLEX) * CXBhave(rx[thread][k].buf.o));
-				//blms_adapt(rx[thread][k].banf.gen);
-				break;
-		}
-	}
 
 	/*if(thread == 0 && k == 0)
 	{
