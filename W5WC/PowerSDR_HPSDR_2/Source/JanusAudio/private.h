@@ -213,9 +213,9 @@ extern unsigned int LostSyncCount;
 extern unsigned int SyncGainedCount;
 extern unsigned int NotOKtoSendCount;
 extern int HaveSync;
-extern unsigned int VFOfreq;
+extern int VFOfreq;
 extern int FPGATestMode;
-extern unsigned int VFOfreq_tx;
+extern int VFOfreq_tx;
 extern int full_discovery;
 
 #ifdef EP6FILEDUMP
@@ -264,13 +264,21 @@ extern double Q_Rotate;  //diversity mode phase shift parameter
 extern double I_RotateA; //directional mode A phase shift I parameter
 extern double Q_RotateA; //directional mode A phase shift Q parameter
 
-extern int MercAtten;
+extern int AlexAtten;
 extern int MercDither;
 extern int MercPreamp;
+extern int Merc1Preamp;
+extern int Merc2Preamp;
 extern int MercRandom;
 
 extern int MicBoost;
 extern int LineIn;
+extern int LineBoost;
+
+extern int UserOut0;
+extern int UserOut1;
+extern int UserOut2;
+extern int UserOut3;
 
 extern unsigned char AlexManEnable;
 extern unsigned char AlexEnabled;
@@ -286,6 +294,11 @@ extern int AlexRxOut;
 extern int FwdPower;
 extern int RefPower;
 extern int AlexFwdPower;
+
+extern int ApolloFilt;
+extern int ApolloTuner;
+extern int ApolloATU;
+extern int HermesFilt;
 
 extern int ADC_Overloads;
 extern float swr_protect;

@@ -334,16 +334,58 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 }
 
 // ff in hz 
-KD5TFDVK6APHAUDIO_API void SetVFOfreq_native(unsigned int ff) {
+KD5TFDVK6APHAUDIO_API void SetVFOfreq_native(int ff) {
         VFOfreq = ff;
         return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(unsigned int ff) {
+KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(int ff) {
        VFOfreq_tx = ff;
+       return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetUserOut0(int out) {
+        if ( out == 0 ) {
+                UserOut0 = 0;
+        }
+        else {
+                UserOut0 = 1;
+        }
+       return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetUserOut1(int out) {
+       UserOut1 = out;
+        if ( out == 0 ) {
+                UserOut1 = 0;
+        }
+        else {
+                UserOut1 = 0x2;
+        }
         return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetUserOut2(int out) {
+       UserOut2 = out;
+        if ( out == 0 ) {
+                UserOut2 = 0;
+        }
+        else {
+                UserOut2 = 0x4;
+        }
+        return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetUserOut3(int out) {
+       UserOut3 = out;
+        if ( out == 0 ) {
+                UserOut3 = 0;
+        }
+        else {
+                UserOut3 = 0x8;
+        }
+        return;
+}
 //
 // StopAudio -- undo what start audio did.  Close/Free/Destroy that which StartAudio Opened/Alloc'd/Created.
 //
@@ -469,28 +511,6 @@ KD5TFDVK6APHAUDIO_API void SetSWRProtect(float g) {
 	return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetMercSource(int g) { 
-	MercSource = g; 
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetrefMerc(int g) { 
-	refMerc = g; 
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetIQ_Rotate(double a, double b) { 
-	I_Rotate = a; 
-	Q_Rotate = b;
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetIQ_RotateA(double a, double b) { 
-	I_RotateA = a; 
-	Q_RotateA = b;
-	return;
-}
-
 KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out) {  
 	
 
@@ -560,6 +580,39 @@ KD5TFDVK6APHAUDIO_API void SetAlexLPFBits(int bits) {
 	return;
 }
 
+
+KD5TFDVK6APHAUDIO_API void EnableApolloFilter(int bits) { 
+	if (bits == 1)
+		ApolloFilt = 0x4; 
+	else
+		ApolloFilt = 0;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableApolloTuner(int bits) { 
+	if (bits == 1)
+		ApolloTuner = 0x8; 
+	else
+		ApolloTuner = 0;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableApolloAutoTune(int bits) { 
+	if (bits == 1)
+		ApolloATU = 0x10; 
+	else
+		ApolloATU = 0;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetHermesFilter(int bits) { 
+	if (bits == 1)
+		HermesFilt = 0x20; 
+	else
+		HermesFilt = 0;
+	return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmit) {   // bit xmitbit ==0, recv mode, != 0, xmit mode
         if ( xmit == 0 ) {
                 XmitBit = 0;
@@ -604,9 +657,14 @@ KD5TFDVK6APHAUDIO_API void SetLineIn(int bits) { // 0 == Mic-In, 1 == Line-In
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetLineBoost(int bits) {
+		LineBoost = bits;
+	return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetAlexAtten(int bits) { 
-	MercAtten = bits; 
-	if ( MercAtten > 3 ) MercAtten = 0; 
+	AlexAtten = bits; 
+	if ( AlexAtten > 3 ) AlexAtten = 0; 
 	return;
 }
 
@@ -623,13 +681,24 @@ KD5TFDVK6APHAUDIO_API void SetMercDither(int bits) {
 KD5TFDVK6APHAUDIO_API void SetMercPreamp(int bits) { 
 	if ( bits != 0 ) { 
 		MercPreamp = (1 << 2); 
+		Merc1Preamp = bits;
 	} 
 	else { 
 		MercPreamp = 0; 
+	    Merc1Preamp = 0;
 	}	
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetMerc2Preamp(int bits) { 
+	if ( bits != 0 ) { 
+		Merc2Preamp = (1 << 1); 
+	} 
+	else { 
+		Merc2Preamp = 0; 
+	}	
+	return;
+}
 KD5TFDVK6APHAUDIO_API void SetMercRandom(int bits) { 
 	if ( bits != 0 ) { 
 		MercRandom = (1 << 4); 

@@ -23,7 +23,6 @@ namespace PowerSDR
     using System.Threading;
     using System.Runtime.InteropServices;
     using System.Diagnostics;
-    // using HPSDR_USB_LIB_V1;
 
     //
     // routines to access audio from kd5tfd/vk6aph fpga based audio 
@@ -369,7 +368,7 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                                c.PowerOn = false;
+                              //  c.PowerOn = false;
                             }
                             break;
                         case 14:
@@ -378,7 +377,7 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                                c.PowerOn = false;
+                               // c.PowerOn = false;
                             }
                             break;
                         case 15:
@@ -387,7 +386,7 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                                c.PowerOn = false;
+                              //  c.PowerOn = false;
                             }
                             break;
                         case 16:
@@ -397,7 +396,7 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                                c.PowerOn = false;
+                              //  c.PowerOn = false;
                             }
                             break;
                        case 18: // K5SO Diversity & non-diversity
@@ -406,13 +405,13 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                                c.PowerOn = false;
+                              //  c.PowerOn = false;
                             }
                             break;
                         default:
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            c.PowerOn = false;
+                          //  c.PowerOn = false;
                             break;
                     }
 
@@ -477,7 +476,7 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            c.PowerOn = false;
+                          //  c.PowerOn = false;
                         }
                         break;
                     case 19:
@@ -486,7 +485,7 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            c.PowerOn = false;
+                         //   c.PowerOn = false;
                         }
                         break;
                     case 20:
@@ -495,7 +494,7 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            c.PowerOn = false;
+                         //   c.PowerOn = false;
                         }
                         break;
                     case 21:
@@ -504,7 +503,7 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            c.PowerOn = false;
+                         //   c.PowerOn = false;
                         }
                         break;
                     case 22: // K5SO Diversity & non-diversity
@@ -513,13 +512,13 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            c.PowerOn = false;
+                         //   c.PowerOn = false;
                         }
                         break;
                    default:
                         result = false;
                         c.SetupForm.alex_fw_good = false;
-                        c.PowerOn = false;
+                      //  c.PowerOn = false;
                         break;
                 }
 
@@ -797,7 +796,7 @@ namespace PowerSDR
                     fwVersionsChecked = true;
                 }
             }
-            InitOzyMic();
+           // InitOzyMic();
             return result;
         }
 
@@ -834,6 +833,30 @@ namespace PowerSDR
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetAlexLPFBits(int bits);
 
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void EnableApolloFilter(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void EnableApolloTuner(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void EnableApolloAutoTune(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetHermesFilter(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetUserOut0(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetUserOut1(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetUserOut2(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetUserOut3(int bits);
+
         [DllImport("JanusAudio.dll")] // sets number of receivers
         unsafe public static extern void SetNRx(int nrx);
 
@@ -868,7 +891,7 @@ namespace PowerSDR
         unsafe public static extern int GetDiagData(int* a, int count);  // get diag data, count is how many slots are in array 
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetVFOfreq_native(uint f);  // tell aux hardware current freq -- in Hz 
+        unsafe public static extern void SetVFOfreq_native(int f);  // tell aux hardware current freq -- in Hz 
 
 
         public static void freqCorrectionChanged()
@@ -878,6 +901,7 @@ namespace PowerSDR
             {
                 if (!c.FreqCalibrationRunning)    // we can't be applying freq correction when cal is running 
                 {
+                   // SetVFOfreq(lastVFOfreq, lastVFOTXfreq);
                     SetVFOfreq(lastVFOfreq);
                     SetVFOfreqTX(lastVFOTXfreq);
                 }
@@ -885,9 +909,12 @@ namespace PowerSDR
         }
 
         private static double lastVFOfreq = 0.0;
-        unsafe public static void SetVFOfreq(double f)
-        {
-            lastVFOfreq = f;
+        private static double lastVFOTXfreq = 0.0;
+        unsafe public static void SetVFOfreq(double rxfreq)
+      //   unsafe public static void SetVFOfreq(double rxfreq, double txfreq)
+       {
+            lastVFOfreq = rxfreq;
+           // lastVFOTXfreq = txfreq;
             Console c;
             double correction_factor;
             c = Console.getConsole();
@@ -900,18 +927,20 @@ namespace PowerSDR
             {
                 correction_factor = 1.0d;
             }
-            //f = f * 1000000;  // mhz -> hz 
-            // f = (float)((double)(f * 1000000.0) * correction_factor);
-            uint f_freq = (uint)((f * 1000000.0) * correction_factor);
-            // System.Console.WriteLine("corrected freq: " + f);
-            SetVFOfreq_native(f_freq);
-            c.SetupForm.txtDDSVFO.Text = f_freq.ToString();
+            int rx_freq = (int)((rxfreq * 1000000.0) * correction_factor);
+           // int tx_freq = (int)((txfreq * 1000000.0) * correction_factor);
+          //  int rx_freq = (int)(rxfreq * 1e6);
+          //  int tx_freq = (int)(txfreq * 1e6);
+ 
+            SetVFOfreq_native(rx_freq);
+          //  SetTXVFOfreq(tx_freq);
+           // c.SetupForm.txtDDSVFO.Text = rx_freq.ToString();
+          //  c.SetupForm.txtDDSRounded.Text = tx_freq.ToString();
         }
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetTXVFOfreq(uint f);  // tell aux hardware current freq -- in Hz 
+        unsafe public static extern void SetTXVFOfreq(int f);  // tell aux hardware current freq -- in Hz 
 
-        private static double lastVFOTXfreq = 0.0;
         unsafe public static void SetVFOfreqTX(double f)
         {
             lastVFOTXfreq = f;
@@ -929,10 +958,10 @@ namespace PowerSDR
             }
             //f = f * 1000000;  // mhz -> hz 
             // f = (float)((double)(f * 1000000.0) * correction_factor);
-            uint f_freq = (uint)((f * 1000000.0) * correction_factor);
+            int f_freq = (int)((f * 1000000.0) * correction_factor);
             // System.Console.WriteLine("corrected freq: " + f);
             SetTXVFOfreq(f_freq);
-            // c.SetupForm.txtDDSVFO.Text = f_freq.ToString();
+           // c.SetupForm.txtDDSRounded.Text = f_freq.ToString();
             // System.Console.WriteLine("JAtxvfo: " + f_freq);
         }
         
@@ -954,6 +983,9 @@ namespace PowerSDR
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetLineIn(int bits);
 
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetLineBoost(int bits);
+ 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetAlexAtten(int bits);
 
@@ -1042,24 +1074,10 @@ namespace PowerSDR
             float Voltage = adc * voltsPerBit;
             float Watts = (Voltage * Voltage) / 0.09f;
 
-            // c.SetupForm.txtAdcValue.Text = adc.ToString();
-            // c.SetupForm.txtAdcVolts1.Text = Voltage.ToString();
-            // c.SetupForm.txtAdcWatts1.Text = Watts.ToString();
-
-            //double watts = 0.0;
-            //double volts = (double)adc / 4096 * 3.3;
-            //double volts = (double)(adc * 3.3) / 4096;
-            //double pow = Math.Pow(volts, 2) / .09;
-            //pow = Math.Max(pow, 0.0);
-            //c.SetupForm.txtAdcWatts2.Text = pow.ToString();
-            // watts = (volts * volts) / 0.09;
-
-            // c.SetupForm.txtAdcVolts2.Text = volts.ToString();
-            // c.SetupForm.txtAdcWatts2.Text = watts.ToString();
-            return Watts;
+           return Watts;
         }
 
-        public static float computePower(double power_int)
+        public static float computePower(int power_int)
         {
             double power_f = (double)power_int;
             double result;

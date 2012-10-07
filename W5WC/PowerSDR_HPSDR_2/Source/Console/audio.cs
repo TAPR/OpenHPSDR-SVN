@@ -842,7 +842,12 @@ namespace PowerSDR
             get { return max_out_r; }
         }
 
-        public static bool MuteOutput { get; set; }
+        private static bool mute_output = false;
+        public static bool MuteOutput
+        {
+            get { return mute_output; }
+            set { mute_output = value; }
+        }
 
         private static int ramp_time = 5; // in ms
         private static int ramp_samples; // total samples to complete the ramp
@@ -1972,7 +1977,7 @@ namespace PowerSDR
                    break; */
             }
 
-         /*   if (localmox && ramp)
+            if (localmox && ramp)
             {
                 for (int i = 0; i < frameCount; i++)
                 {
@@ -1996,7 +2001,7 @@ namespace PowerSDR
                         break;
                     }
                 }
-            } */
+            } 
 
             if (scope)
             {

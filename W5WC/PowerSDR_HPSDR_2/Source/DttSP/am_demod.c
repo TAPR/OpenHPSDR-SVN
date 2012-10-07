@@ -126,11 +126,10 @@ AMDemod (AMD am)
 		case AMdet:
 			for (i = 0; i < am->size; i++)
 			{
-				am->lock.curr = Cmag (CXBdata (am->ibuf, i));
-				am->dc = 0.9999f * am->dc + 0.0001f * am->lock.curr;
-				am->smooth = 0.5f * am->smooth + 0.5f * (am->lock.curr /*- am->dc*/);
-				/* demout = am->smooth; */
-				CXBdata (am->obuf, i) = Cmplx (am->smooth, am->smooth);
+				demout = (float)sqrt((double)CXBreal(am->ibuf, i) * (double)CXBreal(am->ibuf, i) + (double)CXBimag(am->ibuf, i) * (double)CXBimag(am->ibuf, i));
+				am->dc = 0.9999f * am->dc + 0.0001f * demout;
+				demout -= am->dc;
+				CXBdata (am->obuf, i) = Cmplx (demout, demout);
 			}
 			break;
 	}

@@ -215,11 +215,14 @@ namespace PowerSDR
 		[DllImport("DttSP.dll", EntryPoint="SetSampleRate")]
 		public static extern int SetSampleRate(double sampleRate);
 
-		[DllImport("DttSP.dll", EntryPoint="SetNR")]///
+		[DllImport("DttSP.dll", EntryPoint="SetANR")]///
 		public static extern void SetNR(uint thread, uint subrx, bool setit);
 
-		[DllImport("DttSP.dll", EntryPoint="SetNRvals")]///
+		[DllImport("DttSP.dll", EntryPoint="SetANRvals")]///
 		public static extern void SetNRvals(uint thread, uint subrx, int taps, int delay, double gain, double leak);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetANRposition")]///
+        public static extern void SetNRposition(uint thread, uint subrx, int position);
 
         [DllImport("DttSP.dll", EntryPoint = "SetRXManualNotchEnable")]///
         public static extern void SetRXManualNotchEnable(uint thread, uint subrx, uint index, bool flag);

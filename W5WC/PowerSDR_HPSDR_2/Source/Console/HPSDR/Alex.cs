@@ -20,6 +20,7 @@
 // this module contains code to support the Alex Filter and Antenna Selection board 
 // 
 // 
+using System;
 
 namespace PowerSDR
 {
@@ -107,7 +108,12 @@ namespace PowerSDR
 				return Band.LAST; 				
 			} 
 
-			double freq = Console.getConsole().VFOAFreq;
+			double freq = 0.0;// = Console.getConsole().VFOAFreq;
+
+            if (c.RX1XVTRIndex >= 0)
+                freq = c.XVTRForm.TranslateFreq(freq);
+            else freq = Console.getConsole().VFOAFreq;
+
 			System.Console.WriteLine("Freq is: " + freq); 
 
 
@@ -201,7 +207,8 @@ namespace PowerSDR
 				rx_ant = RxOnlyAnt[idx]; 
 				rx_out = rx_ant != 0 ? 1 : 0; 
 				tx_ant = RxAnt[idx]; 
-			} 
+			}
+          //  int rc = JanusAudio.SetAlexAntBits(rx_ant, tx_ant, 1);
 			JanusAudio.SetAlexAntBits(rx_ant, tx_ant, rx_out); 
 
 			// don't allow changing antenna selections when mox is activated 
@@ -216,11 +223,12 @@ namespace PowerSDR
 				AlexEnableIsStateSaved = false; 
 			}
 
-           //  Console.getConsole().SetupForm.txtRXAnt.Text = rx_ant.ToString();
+            // Console.getConsole().SetupForm.txtRXAnt.Text = rx_ant.ToString();
            //  Console.getConsole().SetupForm.txtRXOut.Text = rx_out.ToString();
-            // Console.getConsole().SetupForm.txtTXAnt.Text = tx_ant.ToString();
-           //  Console.getConsole().SetupForm.txtAlexBand.Text = band.ToString();
+           //  Console.getConsole().SetupForm.txtTXAnt.Text = tx_ant.ToString();
+            // Console.getConsole().SetupForm.txtAlexBand.Text = band.ToString();
            //  Console.getConsole().SetupForm.txtAlexEnabled.Text = alex_enabled.ToString();
+           //  Console.getConsole().SetupForm.txtAlexBits.Text = Convert.ToString(rc, 2);
 
 			return; 
 		}
