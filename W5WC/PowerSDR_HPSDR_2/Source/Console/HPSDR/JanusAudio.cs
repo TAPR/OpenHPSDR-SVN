@@ -517,14 +517,23 @@ namespace PowerSDR
                         break;
                     case 22: // K5SO Diversity & non-diversity
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 32  && mercury_ver != 33 && mercury_ver != 75)))
+                            (c != null && c.MercuryPresent && (mercury_ver != 32  && mercury_ver != 75)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
                          //   c.PowerOn = false;
                         }
                         break;
-                   default:
+                    case 23: // K5SO Diversity & non-diversity
+                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
+                            (c != null && c.MercuryPresent && (mercury_ver != 33 && mercury_ver != 76)))
+                        {
+                            result = false;
+                            c.SetupForm.alex_fw_good = false;
+                            //   c.PowerOn = false;
+                        }
+                        break;
+                    default:
                         result = false;
                         c.SetupForm.alex_fw_good = false;
                       //  c.PowerOn = false;

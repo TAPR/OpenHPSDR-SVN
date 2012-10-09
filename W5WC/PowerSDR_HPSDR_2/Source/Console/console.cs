@@ -27899,9 +27899,6 @@ namespace PowerSDR
             //			display_running = false;
         }
 
-        private PreampMode preamp;
-        private bool update_preamp = true;
-        private bool update_preamp_mode = false;
         private HiPerfTimer meter_timer = new HiPerfTimer();
         private float multimeter_avg = Display.CLEAR_FLAG;
         private void UpdateMultimeter()
@@ -28252,34 +28249,6 @@ namespace PowerSDR
                 if (chkPower.Checked)
                     Thread.Sleep(Math.Min(meter_delay, meter_dig_delay));
 
-                if (!mox)
-                {
-                    if (attontx)
-                    {
-
-                        if (update_preamp_mode)
-                        {
-                            RX1PreampMode = preamp;
-                            update_preamp_mode = false;
-                        }
-
-                        if (update_preamp)
-                        {
-                            preamp = RX1PreampMode;				// save current preamp mode
-                            update_preamp = false;
-                        }
-                    }
-                }
-                else
-                {
-                    if (attontx)
-                    {
-                        RX1PreampMode = PreampMode.HPSDR_OFF;			// set to -20dB
-                        update_preamp = true;
-                        update_preamp_mode = true;
-                    }
-                }
-
             }
         }
 
@@ -28465,6 +28434,9 @@ namespace PowerSDR
             }
         }
 
+        private PreampMode preamp;
+        private bool update_preamp = true;
+        private bool update_preamp_mode = false;
         private bool mon_recall = false;
         private static HiPerfTimer vox_timer = new HiPerfTimer();
         private bool kptt = false;
@@ -28715,6 +28687,21 @@ namespace PowerSDR
                                     this.RX1DSPMode = DSPMode.USB;
                                     //radModeUSB.Checked = true;
                                     break;
+                            }
+                        }
+
+                        if (attontx)
+                        {
+                            if (update_preamp_mode)
+                            {
+                                RX1PreampMode = preamp;
+                                update_preamp_mode = false;
+                            }
+
+                            if (update_preamp)
+                            {
+                                preamp = RX1PreampMode;				// save current preamp mode
+                                update_preamp = false;
                             }
                         }
 
@@ -32188,7 +32175,6 @@ namespace PowerSDR
 
         private HiPerfTimer t1 = new HiPerfTimer();
         private double timer1 = 0.0;
-
         private bool mox = false;
         private void chkMOX_CheckedChanged2(object sender, System.EventArgs e)
         {
@@ -32394,6 +32380,13 @@ namespace PowerSDR
             {
                 if (tx)
                 {
+                    if (attontx)
+                    {
+                        RX1PreampMode = PreampMode.HPSDR_OFF;			// set to -20dB
+                        update_preamp = true;
+                        update_preamp_mode = true;
+                    }
+
                     if (!hpsdr_duplex_enabled)
                     {
                         if (chkVFOATX.Checked || mute_rx1_on_vfob_tx)
@@ -34209,11 +34202,11 @@ namespace PowerSDR
                     radio.GetDSPRX(0, 1).RXOsc = sub_osc;
                 }
 
-                if (PowerOn)
-                {
-                    SetupForm.txtRXAnt.Text = sub_osc.ToString();
-                    SetupForm.txtRXOut.Text = VFOASubFreq.ToString();
-                }
+               // if (PowerOn)
+               // {
+                 //   SetupForm.txtRXAnt.Text = sub_osc.ToString();
+                 //   SetupForm.txtRXOut.Text = VFOASubFreq.ToString();
+               // }
 
                 UpdateRX1SubNotches();
             }
