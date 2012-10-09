@@ -7209,10 +7209,10 @@ namespace PowerSDR
             this.Controls.Add(this.panelBandHF);
             this.Controls.Add(this.panelBandVHF);
             this.Controls.Add(this.panelRX2Power);
-            this.Controls.Add(this.panelModeSpecificDigital);
             this.Controls.Add(this.panelModeSpecificCW);
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificFM);
+            this.Controls.Add(this.panelModeSpecificDigital);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Console";
@@ -14979,13 +14979,13 @@ namespace PowerSDR
         public bool RX2IsOn60mChannel()
         {
 
-          //  List<Channel60m> channels_60m = Channels60m;
+            //  List<Channel60m> channels_60m = Channels60m;
             double freq = VFOBFreq - ModeFreqOffset(rx2_dsp_mode);
             freq = Math.Round(freq, 6);
 
             foreach (Channel60m c in Channels60m)
             {
-                if (c.Freq == freq) 
+                if (c.Freq == freq)
                     return true;
             }
 
@@ -22641,21 +22641,21 @@ namespace PowerSDR
                     lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
 
                     // if (penny_ext_ctrl_enabled)
-                      // Penny.getPenny().UpdateExtCtrl(lo_band, mox);
-                         Penny.getPenny().ExtCtrlEnable(value, lo_band, mox);
-                   // if (alex_ant_ctrl_enabled)
-                      //  Alex.getAlex().UpdateAlexAntSelection(lo_band, mox);
+                    // Penny.getPenny().UpdateExtCtrl(lo_band, mox);
+                    Penny.getPenny().ExtCtrlEnable(value, lo_band, mox);
+                    // if (alex_ant_ctrl_enabled)
+                    //  Alex.getAlex().UpdateAlexAntSelection(lo_band, mox);
                 }
                 else
                 {
-                   //  if (penny_ext_ctrl_enabled)
-                     //  Penny.getPenny().UpdateExtCtrl(RX1Band, mox);
-                     Penny.getPenny().ExtCtrlEnable(value, RX1Band, mox);
-                   // if (alex_ant_ctrl_enabled)
-                        //Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox);
+                    //  if (penny_ext_ctrl_enabled)
+                    //  Penny.getPenny().UpdateExtCtrl(RX1Band, mox);
+                    Penny.getPenny().ExtCtrlEnable(value, RX1Band, mox);
+                    // if (alex_ant_ctrl_enabled)
+                    //Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox);
                 }
 
-              //  Penny.getPenny().ExtCtrlEnable(value, RX1Band, mox);
+                //  Penny.getPenny().ExtCtrlEnable(value, RX1Band, mox);
             }
         }
 
@@ -22672,22 +22672,22 @@ namespace PowerSDR
                 {
                     lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
 
-                   // if (penny_ext_ctrl_enabled)
-                     //   Penny.getPenny().UpdateExtCtrl(lo_band, mox);
+                    // if (penny_ext_ctrl_enabled)
+                    //   Penny.getPenny().UpdateExtCtrl(lo_band, mox);
 
-                   // if (alex_ant_ctrl_enabled)
+                    // if (alex_ant_ctrl_enabled)
                     Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, alex_ant_ctrl_enabled);
                 }
                 else
                 {
-                   // if (penny_ext_ctrl_enabled)
-                     //   Penny.getPenny().UpdateExtCtrl(RX1Band, mox);
+                    // if (penny_ext_ctrl_enabled)
+                    //   Penny.getPenny().UpdateExtCtrl(RX1Band, mox);
 
-                  //  if (alex_ant_ctrl_enabled)
+                    //  if (alex_ant_ctrl_enabled)
                     Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox, alex_ant_ctrl_enabled);
                 }
 
-              //  Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox, alex_ant_ctrl_enabled);
+                //  Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox, alex_ant_ctrl_enabled);
             }
         }
 
@@ -23288,19 +23288,31 @@ namespace PowerSDR
         double rx1_dds_freq_mhz;
         private void UpdateRX1DDSFreq()
         {
-                rx1_dds_freq_updated = false;
-                JanusAudio.SetVFOfreqRX1(rx1_dds_freq_mhz);
-                if (chkPower.Checked)
-                {                  
-                    SetAlexRXFilters(fwc_dds_freq);
+            rx1_dds_freq_updated = false;
+             if (chkPower.Checked)
+            {
+                SetAlexRXFilters(fwc_dds_freq);
 
-                    if (SetupForm.radAlexAutoCntl.Checked && (rx1_dds_freq_mhz >= 50.0) ||
-                        (SetupForm.rad6BPFled.Checked))
-                        AlexPreampOffset = 23;
-                    else
-                        AlexPreampOffset = 0;
-                }
-         }
+                if (SetupForm.radAlexAutoCntl.Checked && ((rx1_dds_freq_mhz >= 50.0) ||
+                    (SetupForm.rad6BPFled.Checked)))
+                    AlexPreampOffset = 23;
+                else
+                    AlexPreampOffset = 0;
+
+                if (SetupForm.radAlexManualCntl.Checked) UpdateAlexTXFilter();
+              /*  if (!mox)
+                {
+                    if (!rx2_preamp_present && chkRX2.Checked && SetupForm.radAlexManualCntl.Checked)
+                    {
+                        if (rx1_dds_freq_mhz > rx2_dds_freq_mhz) SetAlexTXFilters(rx1_dds_freq_mhz);
+                        else SetAlexTXFilters(rx2_dds_freq_mhz);                      
+                    }
+                    else SetAlexTXFilters(rx1_dds_freq_mhz);
+                }  */         
+
+            }
+             JanusAudio.SetVFOfreqRX1(rx1_dds_freq_mhz);
+        }
 
         bool rx2_dds_freq_updated = false;
         // uint rx2_dds_freq_tw;
@@ -23311,10 +23323,11 @@ namespace PowerSDR
             {
                 rx2_dds_freq_updated = false;
 
-                if (!mox)
-                    SetAlex2TXFilters(rx2_dds_freq_mhz);                              
+                if (SetupForm.radAlexManualCntl.Checked) UpdateAlexTXFilter();
 
+                if (!mox) SetAlex2TXFilters(rx2_dds_freq_mhz);
                 SetAlex2RXFilters(rx2_dds_freq_mhz);
+
                 JanusAudio.SetVFOfreqRX2(rx2_dds_freq_mhz);
             }
         }
@@ -23326,18 +23339,45 @@ namespace PowerSDR
         {
             if (chkPower.Checked)// && tx_dds_freq_updated)
             {
-                if ((chkVFOSplit.Checked || chkVFOBTX.Checked) && !mox)
-                    SetAlexTXFilters(rx1_dds_freq_mhz);
-                else SetAlexTXFilters(tx_dds_freq_mhz);
- 
-                if (mox) SetAlex2TXFilters(tx_dds_freq_mhz);
-                else SetAlex2TXFilters(rx2_dds_freq_mhz);
+              /*  if (!rx2_preamp_present && chkRX2.Checked && SetupForm.radAlexManualCntl.Checked)
+                {
+                    if (!mox)
+                    {
+                        if (rx1_dds_freq_mhz > rx2_dds_freq_mhz) SetAlexTXFilters(rx1_dds_freq_mhz);
+                        else SetAlexTXFilters(rx2_dds_freq_mhz);                       
+                    }
+                    else SetAlexTXFilters(tx_dds_freq_mhz);
+                }  */             
+             
+                   // if ((chkVFOSplit.Checked || chkVFOBTX.Checked) && !mox)
+                    //    SetAlexTXFilters(rx1_dds_freq_mhz);
+                  //  else SetAlexTXFilters(tx_dds_freq_mhz);
 
+                if (mox)
+                {
+                    SetAlexTXFilters(tx_dds_freq_mhz);
+                    SetAlex2TXFilters(tx_dds_freq_mhz);
+                }
+              //  else SetAlex2TXFilters(rx2_dds_freq_mhz);
+ 
                 JanusAudio.SetVFOfreqTX(tx_dds_freq_mhz);
                 tx_dds_freq_updated = false;
             }
         }
 
+        private void UpdateAlexTXFilter()
+        {
+            if (!mox)
+            {
+                if (!rx2_preamp_present && chkRX2.Checked && SetupForm.radAlexManualCntl.Checked)
+                {
+                    if (rx1_dds_freq_mhz > rx2_dds_freq_mhz) SetAlexTXFilters(rx1_dds_freq_mhz);
+                    else SetAlexTXFilters(rx2_dds_freq_mhz);
+                }
+                else SetAlexTXFilters(rx1_dds_freq_mhz);
+            }
+        }
+        
         //private uint last_tw = 0;
         private double fwc_dds_freq = 7.1;
         public double FWCDDSFreq
@@ -27697,9 +27737,9 @@ namespace PowerSDR
 
         private void picDisplay_Paint(object sender, PaintEventArgs e)
         {
-             if (rx1_xvtr_index >= 0) lblRX1MuteVFOA.SendToBack();
-             else lblRX1MuteVFOA.BringToFront();
-                    
+            if (rx1_xvtr_index >= 0) lblRX1MuteVFOA.SendToBack();
+            else lblRX1MuteVFOA.BringToFront();
+
             switch (current_display_engine)
             {
                 case DisplayEngine.GDI_PLUS:
@@ -29397,9 +29437,6 @@ namespace PowerSDR
             //			display_running = false;
         }
 
-        private PreampMode preamp;
-        private bool update_preamp = true;
-        private bool update_preamp_mode = false;
         private HiPerfTimer meter_timer = new HiPerfTimer();
         private float multimeter_avg = Display.CLEAR_FLAG;
         private void UpdateMultimeter()
@@ -29749,35 +29786,6 @@ namespace PowerSDR
                 //end:
                 if (chkPower.Checked)
                     Thread.Sleep(Math.Min(meter_delay, meter_dig_delay));
-
-                if (!mox)
-                {
-                    if (attontx)
-                    {
-
-                        if (update_preamp_mode)
-                        {
-                            RX1PreampMode = preamp;
-                            update_preamp_mode = false;
-                        }
-
-                        if (update_preamp)
-                        {
-                            preamp = RX1PreampMode;				// save current preamp mode
-                            update_preamp = false;
-                        }
-                    }
-                }
-                else
-                {
-                    if (attontx)
-                    {
-                        RX1PreampMode = PreampMode.HPSDR_OFF;			// set to -20dB
-                        update_preamp = true;
-                        update_preamp_mode = true;
-                    }
-                }
-
             }
         }
 
@@ -29998,6 +30006,9 @@ namespace PowerSDR
             }
         }
 
+        private PreampMode preamp;
+        private bool update_preamp = true;
+        private bool update_preamp_mode = false;
         private bool mon_recall = false;
         private static HiPerfTimer vox_timer = new HiPerfTimer();
         private bool kptt = false;
@@ -30114,39 +30125,39 @@ namespace PowerSDR
 
                     if (!mox)
                     {
-                        if (x2_ptt)
-                        {
-                            current_ptt_mode = PTTMode.X2;
-                            switch (tx_mode)
-                            {
-                                case DSPMode.CWL:
-                                case DSPMode.CWU:
-                                    if (!cw_disable_monitor)
-                                    {
-                                        mon_recall = chkMON.Checked;
-                                        chkMON.Checked = true;
-                                    }
-                                    break;
-                                case DSPMode.LSB:
-                                case DSPMode.USB:
-                                case DSPMode.DSB:
-                                case DSPMode.AM:
-                                case DSPMode.SAM:
-                                case DSPMode.FM:
-                                case DSPMode.DIGL:
-                                case DSPMode.DIGU:
-                                    if (chkPhoneVAC.Checked && allow_vac_bypass)
-                                        Audio.VACBypass = true;
-                                    break;
-                            }
+                        /*  if (x2_ptt)
+                          {
+                              current_ptt_mode = PTTMode.X2;
+                              switch (tx_mode)
+                              {
+                                  case DSPMode.CWL:
+                                  case DSPMode.CWU:
+                                      if (!cw_disable_monitor)
+                                      {
+                                          mon_recall = chkMON.Checked;
+                                          chkMON.Checked = true;
+                                      }
+                                      break;
+                                  case DSPMode.LSB:
+                                  case DSPMode.USB:
+                                  case DSPMode.DSB:
+                                  case DSPMode.AM:
+                                  case DSPMode.SAM:
+                                  case DSPMode.FM:
+                                  case DSPMode.DIGL:
+                                  case DSPMode.DIGU:
+                                      if (chkPhoneVAC.Checked && allow_vac_bypass)
+                                          Audio.VACBypass = true;
+                                      break;
+                              }
 
-                            chkMOX.Checked = true;
-                            if (!mox)
-                            {
-                                chkPower.Checked = false;
-                                return;
-                            }
-                        }
+                              chkMOX.Checked = true;
+                              if (!mox)
+                              {
+                                  chkPower.Checked = false;
+                                  return;
+                              }
+                          } */
 
                         if (cat_ptt_local)
                         {
@@ -30248,6 +30259,21 @@ namespace PowerSDR
                                     this.RX1DSPMode = DSPMode.USB;
                                     //radModeUSB.Checked = true;
                                     break;
+                            }
+                        }
+
+                        if (attontx)
+                        {
+                            if (update_preamp_mode)
+                            {
+                                RX1PreampMode = preamp;
+                                update_preamp_mode = false;
+                            }
+
+                            if (update_preamp)
+                            {
+                                preamp = RX1PreampMode;				// save current preamp mode
+                                update_preamp = false;
                             }
                         }
 
@@ -33456,6 +33482,8 @@ namespace PowerSDR
                 // make sure TX freq has been set
                 //  if (tx_dds_freq_updated)
                 {
+                    UpdateRX1DDSFreq();
+                    UpdateRX2DDSFreq();
                     UpdateTXDDSFreq();
                     tx_dds_freq_updated = false;
                 }
@@ -33486,28 +33514,28 @@ namespace PowerSDR
                         UpdateExtCtrl();
                         Hdw.UpdateHardware = false;
                     }
-                 
+
                     Band lo_band = Band.FIRST;
 
                     if (rx1_xvtr_index >= 0)
                     {
-                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                        lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
 
-                    if (penny_ext_ctrl_enabled)
-                        Penny.getPenny().UpdateExtCtrl(lo_band, mox);
+                        if (penny_ext_ctrl_enabled)
+                            Penny.getPenny().UpdateExtCtrl(lo_band, mox);
 
-                    if (alex_ant_ctrl_enabled)
-                        Alex.getAlex().UpdateAlexAntSelection(lo_band, mox);
+                        if (alex_ant_ctrl_enabled)
+                            Alex.getAlex().UpdateAlexAntSelection(lo_band, mox);
                     }
                     else
                     {
-                    if (penny_ext_ctrl_enabled)
-                        Penny.getPenny().UpdateExtCtrl(rx1_band, mox);
+                        if (penny_ext_ctrl_enabled)
+                            Penny.getPenny().UpdateExtCtrl(rx1_band, mox);
 
-                    if (alex_ant_ctrl_enabled)
-                        Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox);
+                        if (alex_ant_ctrl_enabled)
+                            Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox);
                     }
-                 
+
                     if (x2_enabled)
                     {
                         Hdw.UpdateHardware = true;
@@ -33613,6 +33641,8 @@ namespace PowerSDR
                          rx1_dsp_mode != DSPMode.SPEC)
                          if_shift = true;*/
 
+                    UpdateRX1DDSFreq();
+                    UpdateRX2DDSFreq();
                     UpdateTXDDSFreq();
 
                     Band lo_band = Band.FIRST;
@@ -33634,7 +33664,7 @@ namespace PowerSDR
 
                         if (alex_ant_ctrl_enabled)
                             Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox);
-                    }                
+                    }
 
                 }
             }
@@ -33764,7 +33794,6 @@ namespace PowerSDR
 
         private HiPerfTimer t1 = new HiPerfTimer();
         private double timer1 = 0.0;
-
         private bool mox = false;
         private void chkMOX_CheckedChanged2(object sender, System.EventArgs e)
         {
@@ -33956,6 +33985,13 @@ namespace PowerSDR
 
             if (tx)
             {
+                if (attontx)
+                {
+                    RX1PreampMode = PreampMode.HPSDR_OFF;			// set to -20dB
+                    update_preamp = true;
+                    update_preamp_mode = true;
+                }
+
                 AudioMOXChanged(tx);
                 if (rf_delay > 0) Thread.Sleep(rf_delay);
                 HdwMOXChanged(tx, freq);
@@ -34001,6 +34037,7 @@ namespace PowerSDR
                     // DttSP.SetThreadProcessingMode(2, 2);
                     // RadioDSP.SetThreadNumber(3);
                 }
+
             }
 
             if (!tx)
@@ -34013,12 +34050,13 @@ namespace PowerSDR
             if (tx) UIMOXChangedTrue();
             else UIMOXChangedFalse();
 
+
             /*if(tx)
-            {
-                t1.Stop();
-                timer7 += t1.DurationMsec;
-                count7++;
-            }*/
+             {
+                 t1.Stop();
+                 timer7 += t1.DurationMsec;
+                 count7++;
+             }*/
 
             /*Debug.WriteLine("1:"+(timer1/count1).ToString("f3")+
                 " 2:"+(timer2/count2).ToString("f3")+
@@ -34033,6 +34071,7 @@ namespace PowerSDR
                 " 11:"+(timer11/count11).ToString("f3")+
                 " 12:"+(timer12/count12).ToString("f3"));*/
         }
+
         //private Thread mox_update_thread;
 
         private void chkMOX_Click(object sender, System.EventArgs e)
@@ -35218,8 +35257,8 @@ namespace PowerSDR
                     UpdateVFOAFreq(freq.ToString("f6"));
                 }
             }
-            
-            
+
+
             //if(rx2_enabled)
             //{
             double rx_freq = freq;
@@ -35960,17 +35999,17 @@ namespace PowerSDR
 
             saved_vfob_freq = freq;
 
-            if(current_model == Model.HPSDR || current_model == Model.HERMES)
+            if (current_model == Model.HPSDR || current_model == Model.HERMES)
             {
-            if (chkVFOBTX.Checked) goto set_tx_freq;
-            if (rx2_enabled) goto set_rx2_freq;
-            else if (chkVFOSplit.Checked || full_duplex)
+                if (chkVFOBTX.Checked) goto set_tx_freq;
+                if (rx2_enabled) goto set_rx2_freq;
+                else if (chkVFOSplit.Checked || full_duplex)
+                    goto set_tx_freq;
+                else goto end;
+            }
+            else if (mox && chkVFOSplit.Checked)
                 goto set_tx_freq;
             else goto end;
-        }
-        else if(mox && chkVFOSplit.Checked)
-        	goto set_tx_freq;
-        else goto end;
 
         set_tx_freq:
             int last_tx_xvtr_index = tx_xvtr_index;
@@ -42316,7 +42355,7 @@ namespace PowerSDR
             {
                 JanusAudio.SetVFOfreqRX2(0.0);
                 chkRX2.BackColor = SystemColors.Control;
-        }
+            }
         }
 
         private void chkRX2SR_CheckedChanged(object sender, System.EventArgs e)
@@ -42459,7 +42498,7 @@ namespace PowerSDR
                     break;
                 case DSPMode.CWL:
                     radRX2ModeCWL.BackColor = SystemColors.Control;
- 
+
                     if (chkVFOBTX.Checked && rx2_enabled)
                     {
                         DttSP.StopKeyer();
@@ -42508,15 +42547,15 @@ namespace PowerSDR
                 case DSPMode.FM:
                     radRX2ModeFMN.BackColor = SystemColors.Control;
                     if (rx2_enabled)
-                      //  if (chkVFOBTX.Checked && rx2_enabled)
-                        {
+                    //  if (chkVFOBTX.Checked && rx2_enabled)
+                    {
                         if (new_mode != DSPMode.AM &&
                             new_mode != DSPMode.SAM &&
                             new_mode != DSPMode.FM)
                         {
                             if (chkVFOBTX.Checked)
                                 chkMON.Enabled = true;
-                            
+
                             chkBIN.Enabled = true;
                         }
 
@@ -42544,7 +42583,7 @@ namespace PowerSDR
                     break;
                 case DSPMode.AM:
                     radRX2ModeAM.BackColor = SystemColors.Control;
-                   if (rx2_enabled)
+                    if (rx2_enabled)
                     {
                         if (new_mode != DSPMode.AM &&
                             new_mode != DSPMode.SAM &&
@@ -42555,11 +42594,11 @@ namespace PowerSDR
 
                             chkRX2BIN.Enabled = true;
                         }
-  
+
                         if (chkVFOBTX.Checked)
                             ptbMic_Scroll(this, EventArgs.Empty);
                     }
-  
+
                     if (new_mode != DSPMode.SPEC || new_mode != DSPMode.DRM)
                         EnableAllFilters();
                     break;
@@ -42741,7 +42780,7 @@ namespace PowerSDR
                             chkMON.Enabled = false;
 
                             SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-                           // radio.GetDSPTX(0).TXOsc = 11025.0;
+                            // radio.GetDSPTX(0).TXOsc = 11025.0;
 
                             ptbFMMic_Scroll(this, EventArgs.Empty);
                         }
@@ -42753,7 +42792,7 @@ namespace PowerSDR
                 case DSPMode.AM:
                     radRX2ModeAM.BackColor = button_selected_color;
                     //grpRX2Mode.Text = "RX2 Mode - AM";
-                  if (chkVFOBTX.Checked)
+                    if (chkVFOBTX.Checked)
                     {
                         if (!rx_only && chkPower.Checked)
                             chkMOX.Enabled = true;
@@ -42762,19 +42801,19 @@ namespace PowerSDR
                         chkMON.Enabled = false;
 
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-                       // radio.GetDSPTX(0).TXOsc = 11025.0;
+                        // radio.GetDSPTX(0).TXOsc = 11025.0;
 
                         ptbFMMic_Scroll(this, EventArgs.Empty);
                     }
 
                     chkRX2BIN.Checked = false;
-                    chkRX2BIN.Enabled = false;	
+                    chkRX2BIN.Enabled = false;
                     break;
                 case DSPMode.SAM:
                     radRX2ModeSAM.BackColor = button_selected_color;
                     //grpRX2Mode.Text = "RX2 Mode - SAM";
 
-                   if (chkVFOBTX.Checked)
+                    if (chkVFOBTX.Checked)
                     {
                         if (!rx_only && chkPower.Checked)
                             chkMOX.Enabled = true;
@@ -42783,13 +42822,13 @@ namespace PowerSDR
                         chkMON.Enabled = false;
 
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-                       // dsp.GetDSPTX(0).TXOsc = 11025.0;
+                        // dsp.GetDSPTX(0).TXOsc = 11025.0;
 
                         ptbFMMic_Scroll(this, EventArgs.Empty);
                     }
 
                     chkRX2BIN.Checked = false;
-                    chkRX2BIN.Enabled = false;	
+                    chkRX2BIN.Enabled = false;
                     break;
                 case DSPMode.DIGL:
                     radRX2ModeDIGL.BackColor = button_selected_color;
