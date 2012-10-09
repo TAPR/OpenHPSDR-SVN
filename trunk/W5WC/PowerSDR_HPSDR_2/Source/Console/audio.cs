@@ -1399,8 +1399,8 @@ namespace PowerSDR
             float* rx1_out_l = null, rx1_out_r = null, tx_out_l = null, tx_out_r = null;
             localmox = mox;
 
-            void* ex_input = input;
-            void* ex_output = output;
+            void* ex_input = (int*)input;
+            void* ex_output = (int*)output;
 
             int* array_ptr_input = (int*) input;
             float* in_l_ptr1 = (float*)array_ptr_input[0];
