@@ -1922,7 +1922,7 @@ namespace PowerSDR
             comboAudioSampleRate1.SelectedIndex = 0;
             comboAudioSampleRate2.Text = "48000";
             comboAudioSampleRate3.Text = "48000";
-            comboAudioBuffer1.Text = "2048";
+            comboAudioBuffer1.Text = "1024";
             comboAudioBuffer2.Text = "512";
             comboAudioBuffer3.Text = "512";
             comboAudioChannels1.Text = "6";
@@ -2171,7 +2171,7 @@ namespace PowerSDR
                 }
             }
 
-            comboAudioBuffer1.Text = "2048";
+            comboAudioBuffer1.Text = "1024";
             udAudioLatency1.Value = Audio.Latency1;
         }
 
