@@ -1,0 +1,2 @@
+Warning (10268): Verilog HDL information at Ozy_Janus.v(1052): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at Ozy_Janus.v(1375): always construct contains both blocking and non-blocking assignments

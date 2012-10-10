@@ -1,0 +1,9 @@
+<sld_project_info>
+  <file_info>
+    <file checksum="0x005BB130" device="EP2C8Q208C8" path="Ozy_Janus.sof" usercode="0xFFFFFFFF"/>
+    <file checksum="0x069CBC2F" device="EPCS4" path="Ozy_Janus.pof" usercode="0x00000000"/>
+    <file path="Ozy_Janus.rbf"/>
+  </file_info>
+  <hub_info ir_width="0" node_count="0"/>
+  <node_info/>
+</sld_project_info>
