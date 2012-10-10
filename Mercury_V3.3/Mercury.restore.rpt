@@ -1,5 +1,5 @@
 Restore Archived Project report for Mercury
-Sat Oct 06 16:57:26 2012
+Wed Oct 10 18:54:04 2012
 Quartus II 32-bit Version 11.1 Build 259 01/25/2012 Service Pack 2 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------+
 ; Restore Archived Project Summary                                        ;
 +---------------------------------+---------------------------------------+
-; Restore Archived Project Status ; Successful - Sat Oct 06 16:57:26 2012 ;
+; Restore Archived Project Status ; Successful - Wed Oct 10 18:54:04 2012 ;
 ; Revision Name                   ; Mercury                               ;
 ; Top-level Entity Name           ; Mercury                               ;
 ; Family                          ; Cyclone III                           ;
@@ -51,7 +51,7 @@ Info: Generated report 'Mercury.restore.rpt'
 Info (23030): Evaluation of Tcl script e:/altera/11.1sp2/quartus/common/tcl/apps/qpm/qar.tcl was successful
 Info: Quartus II 32-bit Shell was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 195 megabytes
-    Info: Processing ended: Sat Oct 06 16:57:26 2012
+    Info: Processing ended: Wed Oct 10 18:54:04 2012
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 

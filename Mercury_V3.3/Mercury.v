@@ -108,8 +108,6 @@
 						- Modified Alex Tx RED LED operation to illuminate when transmitting
 						- Modified HPF/LPF selection for automatic independent operation of multiple Alex sets when using multiple Mercury boards 
 						- Renamed version number to V3.3.  Built using Quartus II V11.1 sp2.
-						
-	 7 Oct 2012    - Increased Wideband FIFO to 16k and wideband nWire speed to 768k.
 	 
 */
 	
@@ -568,7 +566,7 @@ wire         spectrum_out;
 assign trigger = C21;
 assign A12 = (Merc_ID == 3'b000) ? spectrum_out : 1'bz; //only 1 Merc should send wideband spectrum
 
-NWire_xmit #(.SEND_FREQ(768000), .OSL(16), .OSW(1), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000))
+NWire_xmit #(.SEND_FREQ(48000), .OSL(16), .OSW(1), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000))
         SPD (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
              .xdata(spd_data), .xreq(spd_req), .xrdy(spd_rdy), .xack(spd_ack), .dout(spectrum_out));
 
@@ -753,10 +751,24 @@ begin
       C122_Rout         <= C122_rcv_data[33];     // Rx_1_out on Alex
       C122_RX_relay     <= C122_rcv_data[32:31];  // Rx relay selection on Alex
       Alex_manual 	   <= C122_rcv_data[30];	  // set if manual selection of Alex relays active
-      Alex_manual_LPF   <= C122_rcv_data[29:23];  // Alex LPF selection in manual mode
-      Alex_6m_preamp    <= C122_rcv_data[22];	  // set if manual selection and 6m preamp selected
-      Alex_manual_HPF   <= C122_rcv_data[21:16];  // Alex HPF selection in manual mode
+      if (Merc_ID == 0) 
+		begin
+			Alex_manual_LPF   <= C122_rcv_data[29:23];  // Alex LPF selection in manual mode
+			Alex_6m_preamp    <= C122_rcv_data[22];	  // set if manual selection and 6m preamp selected
+			Alex_manual_HPF   <= C122_rcv_data[21:16];  // Alex HPF selection in manual mode
+		end
     end
+	 
+    if (C122_rcv_data[87:84] == 4'b1) 
+	 begin
+	 if (Merc_ID == 1) 
+		begin 
+			Alex_manual_LPF   <= C122_rcv_data[29:23];  // Alex 2 LPF selection in manual mode
+			Alex_6m_preamp    <= C122_rcv_data[22];	  // set if manual selection and 6m preamp on Alex 2 selected
+			Alex_manual_HPF   <= C122_rcv_data[21:16];  // Alex 2 HPF selection in manual mode
+		end
+	 end
+	 
   // set on-board input-attenuator (the so-called "pre-amp")
 	if (Merc_ID == 0)
 	begin
