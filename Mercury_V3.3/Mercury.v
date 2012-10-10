@@ -108,6 +108,8 @@
 						- Modified Alex Tx RED LED operation to illuminate when transmitting
 						- Modified HPF/LPF selection for automatic independent operation of multiple Alex sets when using multiple Mercury boards 
 						- Renamed version number to V3.3.  Built using Quartus II V11.1 sp2.
+						
+	 7 Oct 2012    - Increased Wideband FIFO to 16k and wideband nWire speed to 768k.
 	 
 */
 	
@@ -566,7 +568,7 @@ wire         spectrum_out;
 assign trigger = C21;
 assign A12 = (Merc_ID == 3'b000) ? spectrum_out : 1'bz; //only 1 Merc should send wideband spectrum
 
-NWire_xmit #(.SEND_FREQ(48000), .OSL(16), .OSW(1), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000))
+NWire_xmit #(.SEND_FREQ(768000), .OSL(16), .OSW(1), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000))
         SPD (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
              .xdata(spd_data), .xreq(spd_req), .xrdy(spd_rdy), .xack(spd_ack), .dout(spectrum_out));
 
