@@ -127,8 +127,8 @@ AMDemod (AMD am)
 			for (i = 0; i < am->size; i++)
 			{
 				demout = (float)sqrt((double)CXBreal(am->ibuf, i) * (double)CXBreal(am->ibuf, i) + (double)CXBimag(am->ibuf, i) * (double)CXBimag(am->ibuf, i));
-				am->dc = 0.9999f * am->dc + 0.0001f * demout;
-				demout -= am->dc;
+				//am->dc = 0.9999f * am->dc + 0.0001f * demout;
+				//demout -= am->dc;
 				CXBdata (am->obuf, i) = Cmplx (demout, demout);
 			}
 			break;
