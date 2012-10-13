@@ -108,7 +108,7 @@ namespace PowerSDR
 				return Band.LAST; 				
 			} 
 
-			double freq = 0.0;// = Console.getConsole().VFOAFreq;
+			double freq  = Console.getConsole().VFOAFreq;   //was = 0.0 Vk4xv Txvr fix.
 
             if (c.RX1XVTRIndex >= 0)
                 freq = c.XVTRForm.TranslateFreq(freq);

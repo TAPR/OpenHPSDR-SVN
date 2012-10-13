@@ -35809,9 +35809,13 @@ namespace PowerSDR
 
         private void btnPAGainCalibration_Click(object sender, System.EventArgs e)
         {
-            string s = "Is a 50 Ohm dummy load connected to the amplifier?\n" +
-               "\n This function is valid only with an external amplifier and Alex (or equivalent) present." +
-               "\n\nFailure to use a dummy load with this routine could cause damage to the amplifier.";
+            string s = "NOTE: this routine works well with Penelope. At present this calibration\n" +
+                       "routine is NOT recommended if you are using PennyLane, Hermes or \n" +
+                       "Angelia as it produces a large overshoot during the calibraion \n" +
+                       "process when used with those boards! \n\n" +
+                "Is a 50 Ohm dummy load connected to the amplifier?\n" +
+                "\n This function is valid only with an external amplifier and Alex (or equivalent) present." +
+                "\n\nFailure to use a dummy load with this routine could cause damage to the amplifier.";
             if (radGenModelFLEX5000.Checked)
             {
                 s = "Is a 50 Ohm dummy load connected to the correct antenna port (";
