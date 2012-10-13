@@ -13706,7 +13706,7 @@ namespace PowerSDR
         }
 
 
-        public void SetAlexRXFilters(double freq)
+        public void SetAlexHPF(double freq)
         {
             if (chkPower.Checked && alexpresent && SetupForm.radAlexManualCntl.Checked)
             {
@@ -13813,11 +13813,10 @@ namespace PowerSDR
                     JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
                     SetupForm.radBPHPFled.Checked = true;
                 }
-
             }
         }
 
-        public void SetAlex2RXFilters(double freq)
+        public void SetAlex2HPF(double freq)
         {
             if (chkPower.Checked && alexpresent && SetupForm.radAlexManualCntl.Checked)
             {
@@ -13924,11 +13923,10 @@ namespace PowerSDR
                     JanusAudio.SetAlex2HPFBits(0x20); // Bypass HPF
                     SetupForm.radAlex2BPHPFled.Checked = true;
                 }
-
             }
         }
 
-        public void SetAlexTXFilters(double freq)
+        public void SetAlexLPF(double freq)
         {
             if (chkPower.Checked && alexpresent && SetupForm.radAlexManualCntl.Checked)
             {
@@ -13986,11 +13984,10 @@ namespace PowerSDR
                     JanusAudio.SetAlexLPFBits(0x10); // 6m LPF
                     SetupForm.rad6LPFled.Checked = true;
                 }
-
             }
         }
 
-        public void SetAlex2TXFilters(double freq)
+        public void SetAlex2LPF(double freq)
         {
             if (chkPower.Checked && alexpresent && SetupForm.radAlexManualCntl.Checked)
             {
@@ -14048,7 +14045,6 @@ namespace PowerSDR
                     JanusAudio.SetAlex2LPFBits(0x10); // 6m LPF
                     SetupForm.radAlex26LPFled.Checked = true;
                 }
-
             }
         }
 
@@ -22638,7 +22634,9 @@ namespace PowerSDR
 
                 if (rx1_xvtr_index >= 0)
                 {
-                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                    //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                    // Fix Penny O/C VHF control Vk4xv
+                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
 
                     // if (penny_ext_ctrl_enabled)
                     // Penny.getPenny().UpdateExtCtrl(lo_band, mox);
@@ -23291,7 +23289,7 @@ namespace PowerSDR
             rx1_dds_freq_updated = false;
              if (chkPower.Checked)
             {
-                SetAlexRXFilters(fwc_dds_freq);
+                SetAlexHPF(fwc_dds_freq);
 
                 if (SetupForm.radAlexAutoCntl.Checked && ((rx1_dds_freq_mhz >= 50.0) ||
                     (SetupForm.rad6BPFled.Checked)))
@@ -23299,7 +23297,11 @@ namespace PowerSDR
                 else
                     AlexPreampOffset = 0;
 
-                if (SetupForm.radAlexManualCntl.Checked) UpdateAlexTXFilter();
+                if (SetupForm.radAlexManualCntl.Checked)
+                {
+                    UpdateAlexTXFilter();
+                    UpdateAlexRXFilter();
+                }
               /*  if (!mox)
                 {
                     if (!rx2_preamp_present && chkRX2.Checked && SetupForm.radAlexManualCntl.Checked)
@@ -23323,10 +23325,14 @@ namespace PowerSDR
             {
                 rx2_dds_freq_updated = false;
 
-                if (SetupForm.radAlexManualCntl.Checked) UpdateAlexTXFilter();
+                if (SetupForm.radAlexManualCntl.Checked)
+                {
+                    UpdateAlexTXFilter();
+                    UpdateAlexRXFilter();
+                }
 
-                if (!mox) SetAlex2TXFilters(rx2_dds_freq_mhz);
-                SetAlex2RXFilters(rx2_dds_freq_mhz);
+                if (!mox) SetAlex2LPF(rx2_dds_freq_mhz);
+                SetAlex2HPF(rx2_dds_freq_mhz);
 
                 JanusAudio.SetVFOfreqRX2(rx2_dds_freq_mhz);
             }
@@ -23355,8 +23361,8 @@ namespace PowerSDR
 
                 if (mox)
                 {
-                    SetAlexTXFilters(tx_dds_freq_mhz);
-                    SetAlex2TXFilters(tx_dds_freq_mhz);
+                    SetAlexLPF(tx_dds_freq_mhz);
+                    SetAlex2LPF(tx_dds_freq_mhz);
                 }
               //  else SetAlex2TXFilters(rx2_dds_freq_mhz);
  
@@ -23371,13 +23377,25 @@ namespace PowerSDR
             {
                 if (!rx2_preamp_present && chkRX2.Checked && SetupForm.radAlexManualCntl.Checked)
                 {
-                    if (rx1_dds_freq_mhz > rx2_dds_freq_mhz) SetAlexTXFilters(rx1_dds_freq_mhz);
-                    else SetAlexTXFilters(rx2_dds_freq_mhz);
+                    if (rx1_dds_freq_mhz > rx2_dds_freq_mhz) SetAlexLPF(rx1_dds_freq_mhz);
+                    else SetAlexLPF(rx2_dds_freq_mhz);
                 }
-                else SetAlexTXFilters(rx1_dds_freq_mhz);
+                else SetAlexLPF(rx1_dds_freq_mhz);
             }
         }
-        
+
+        private void UpdateAlexRXFilter()
+        {
+            if (!mox)
+            {
+                if (!rx2_preamp_present && chkRX2.Checked && SetupForm.radAlexManualCntl.Checked)
+                {
+                    if (rx1_dds_freq_mhz < rx2_dds_freq_mhz) SetAlexHPF(rx1_dds_freq_mhz);
+                    else SetAlexHPF(rx2_dds_freq_mhz);
+                }
+            }
+        }
+
         //private uint last_tw = 0;
         private double fwc_dds_freq = 7.1;
         public double FWCDDSFreq
@@ -25664,7 +25682,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
-                    SetAlexRXFilters(freq);
+                    SetAlexHPF(freq);
                 }
             }
         }
@@ -25679,7 +25697,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOBFreq.Text);
-                    SetAlex2RXFilters(freq);
+                    SetAlex2HPF(freq);
                 }
             }
         }
@@ -25694,7 +25712,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
-                    SetAlexRXFilters(freq);
+                    SetAlexHPF(freq);
                 }
             }
         }
@@ -25709,7 +25727,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOBFreq.Text);
-                    SetAlex2RXFilters(freq);
+                    SetAlex2HPF(freq);
                 }
             }
         }
@@ -25724,7 +25742,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
-                    SetAlexRXFilters(freq);
+                    SetAlexHPF(freq);
                 }
             }
         }
@@ -25739,7 +25757,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOBFreq.Text);
-                    SetAlex2RXFilters(freq);
+                    SetAlex2HPF(freq);
                 }
             }
         }
@@ -25754,7 +25772,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
-                    SetAlexRXFilters(freq);
+                    SetAlexHPF(freq);
                 }
             }
         }
@@ -25769,7 +25787,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOBFreq.Text);
-                    SetAlex2RXFilters(freq);
+                    SetAlex2HPF(freq);
                 }
             }
         }
@@ -25784,7 +25802,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
-                    SetAlexRXFilters(freq);
+                    SetAlexHPF(freq);
                 }
             }
         }
@@ -25799,7 +25817,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOBFreq.Text);
-                    SetAlex2RXFilters(freq);
+                    SetAlex2HPF(freq);
                 }
             }
         }
@@ -25814,7 +25832,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
-                    SetAlexRXFilters(freq);
+                    SetAlexHPF(freq);
                 }
             }
         }
@@ -25829,7 +25847,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOBFreq.Text);
-                    SetAlex2RXFilters(freq);
+                    SetAlex2HPF(freq);
                 }
             }
         }
@@ -25844,7 +25862,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
-                    SetAlexRXFilters(freq);
+                    SetAlexHPF(freq);
                 }
             }
         }
@@ -25859,7 +25877,7 @@ namespace PowerSDR
                 if (chkPower.Checked)
                 {
                     double freq = Double.Parse(txtVFOBFreq.Text);
-                    SetAlex2RXFilters(freq);
+                    SetAlex2HPF(freq);
                 }
             }
         }
@@ -25906,11 +25924,11 @@ namespace PowerSDR
 
                         //  UpdateRX1DDSFreq();
                         //  UpdateTXDDSFreq();
-                        SetAlexRXFilters(fwc_dds_freq);
-                        SetAlexTXFilters(tx_dds_freq_mhz);
+                        SetAlexHPF(fwc_dds_freq);
+                        SetAlexLPF(tx_dds_freq_mhz);
 
-                        SetAlex2RXFilters(rx2_dds_freq_mhz);
-                        SetAlex2TXFilters(rx2_dds_freq_mhz);
+                        SetAlex2HPF(rx2_dds_freq_mhz);
+                        SetAlex2LPF(rx2_dds_freq_mhz);
                     }
 
                     alex_enabled = 1;

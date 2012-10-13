@@ -29,8 +29,8 @@ namespace PowerSDR
 	/// </summary>
 	public class Alex
 	{
-		private static Alex theSingleton = null;
-
+		private static Alex theSingleton = null; 
+		
 		public  static Alex getAlex() 
 		{ 
 			lock ( typeof(Alex) ) 
@@ -108,7 +108,7 @@ namespace PowerSDR
 				return Band.LAST; 				
 			} 
 
-			double freq = 0.0;// = Console.getConsole().VFOAFreq;
+			double freq  = Console.getConsole().VFOAFreq;   //was = 0.0 Vk4xv Txvr fix.
 
             if (c.RX1XVTRIndex >= 0)
                 freq = c.XVTRForm.TranslateFreq(freq);
@@ -166,8 +166,7 @@ namespace PowerSDR
 
 		public void UpdateAlexAntSelection(Band band, bool tx)  
 		{ 
-			UpdateAlexAntSelection(band, tx, true);
-           // Console.getConsole().SetupForm.textBoxTS11.Text = band.ToString();
+			UpdateAlexAntSelection(band, tx, true); 
 		}
 
 		public void UpdateAlexAntSelection(Band band, bool tx, bool alex_enabled) 
@@ -200,7 +199,7 @@ namespace PowerSDR
 			if ( tx ) 
 			{ 
 				rx_ant = 0;
-                rx_out = RxOutOnTx ? 1 : 0;
+                rx_out = RxOutOnTx ? 1 : 0; 
 				tx_ant = TxAnt[idx]; 
 			} 
 			else 
@@ -208,10 +207,11 @@ namespace PowerSDR
 				rx_ant = RxOnlyAnt[idx]; 
 				rx_out = rx_ant != 0 ? 1 : 0; 
 				tx_ant = RxAnt[idx]; 
-			} 
+			}
+          //  int rc = JanusAudio.SetAlexAntBits(rx_ant, tx_ant, 1);
 			JanusAudio.SetAlexAntBits(rx_ant, tx_ant, rx_out); 
 
-			// don't allow changing antenna selections when nox is activated 
+			// don't allow changing antenna selections when mox is activated 
 			if ( tx )  
 			{ 
 				AlexEnableSavedState = Console.getConsole().SetupForm.SetAlexAntEnabled(false); 
@@ -222,11 +222,13 @@ namespace PowerSDR
 				Console.getConsole().SetupForm.SetAlexAntEnabled(AlexEnableSavedState); 
 				AlexEnableIsStateSaved = false; 
 			}
-           // Console.getConsole().SetupForm.txtRXAnt.Text = rx_ant.ToString();
-           // Console.getConsole().SetupForm.txtRXOut.Text = rx_out.ToString();
-           // Console.getConsole().SetupForm.txtTXAnt.Text = tx_ant.ToString();
-           // Console.getConsole().SetupForm.txtAlexBand.Text = band.ToString();
-           // Console.getConsole().SetupForm.txtAlexEnabled.Text = alex_enabled.ToString();
+
+            // Console.getConsole().SetupForm.txtRXAnt.Text = rx_ant.ToString();
+           //  Console.getConsole().SetupForm.txtRXOut.Text = rx_out.ToString();
+           //  Console.getConsole().SetupForm.txtTXAnt.Text = tx_ant.ToString();
+            // Console.getConsole().SetupForm.txtAlexBand.Text = band.ToString();
+           //  Console.getConsole().SetupForm.txtAlexEnabled.Text = alex_enabled.ToString();
+           //  Console.getConsole().SetupForm.txtAlexBits.Text = Convert.ToString(rc, 2);
 
 			return; 
 		}
