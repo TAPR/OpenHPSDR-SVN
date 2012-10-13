@@ -519,7 +519,7 @@ KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out) {
 
 	
 	AlexTxAnt = (tx_ant - 1) & 0x3;
-	if ( AlexTxAnt >= 3 ) AlexTxAnt = 1;  
+	if ( AlexTxAnt >= 3 ) AlexTxAnt = 0;  
 	
 	if ( rx_out ) { 
 		AlexRxOut = 0x80; 
