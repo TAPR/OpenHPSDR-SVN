@@ -22056,11 +22056,11 @@ namespace PowerSDR
                         // SetHWFilters(fwc_dds_freq);
                         SetAlexRXFilters(fwc_dds_freq);
 
-                    if (SetupForm.radAlexAutoCntl.Checked && (rx1_dds_freq_mhz >= 50.0) ||
+                  /*  if (alexpresent && (rx1_dds_freq_mhz >= 50.0) ||
                         (SetupForm.rad6BPFled.Checked))
                         AlexPreampOffset = 23;
                     else
-                        AlexPreampOffset = 0;
+                        AlexPreampOffset = 0; */
                 }
                 
             }
