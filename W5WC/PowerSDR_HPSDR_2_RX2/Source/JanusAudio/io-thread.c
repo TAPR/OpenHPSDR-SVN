@@ -913,7 +913,7 @@ void IOThreadMainLoop(void) {
 
 					switch (ControlBytesIn[0] & CandCAddrMask) {
 					case 0:
-						// processOverloadBit(ControlBytesIn[1] & 1);
+						if (HermesPowerEnabled) processOverloadBit((ControlBytesIn[1] & 1), (ControlBytesIn[1] & 1));
 						break;
 					case 0x8:
 						fwd_power_stage = ((ControlBytesIn[1] << 8) & 0xff00); // bits 15-8 (AIN5) Penny/Hermes
@@ -939,7 +939,7 @@ void IOThreadMainLoop(void) {
 
 					switch (ControlBytesIn[0] & CandCAddrMask) {
 					case 0:
-						// MercuryFWVersion =  (int)(ControlBytesIn[2]);//old
+						MercuryFWVersion =  (int)(ControlBytesIn[2]);
 						break;
 					case 0x8:
 						fwd_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff); // bits 7-0 (AIN5) Penny/Hermes
@@ -955,7 +955,7 @@ void IOThreadMainLoop(void) {
 						break;
 					case 0x20:
 						Mercury2FWVersion =  (int)(ControlBytesIn[2] >> 1);										                 
-						processOverloadBit((ControlBytesIn[1] & 1), 
+						if (!HermesPowerEnabled) processOverloadBit((ControlBytesIn[1] & 1), 
 							(ControlBytesIn[2] & 1));
 						break;
 					}
