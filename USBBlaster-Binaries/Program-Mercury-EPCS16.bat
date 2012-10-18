@@ -116,7 +116,7 @@ ECHO L. Program using Mercury_v3.0
 ECHO Leu. Program using Mercury_eu_V3.0
 ECHO M. Program using Mercury_v3.1
 ECHO N. Program using Mercury_v3.2
-ECHO O. Program using Mercury_v3.2
+ECHO O. Program using Mercury_v3.3
 ECHO.
 ECHO Z. Mercury Test (carrier at 7.68MHz)
 ECHO Q. Quit
@@ -197,8 +197,7 @@ GOTO CONTINUE
 %DIRECTORY% -c USB-Blaster mercury_v3.2.cdf
 GOTO CONTINUE
 :ItemO
-%DIRECTORY% -c USB-Blaster mercury_v3.3
-.cdf
+%DIRECTORY% -c USB-Blaster mercury_v3.3.cdf
 GOTO CONTINUE
 :ItemZ
 %DIRECTORY% -c USB-Blaster mercury_test.cdf
