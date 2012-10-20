@@ -40347,7 +40347,7 @@ namespace PowerSDR
         private void comboFRSRegion_SelectedIndexChanged(object sender, EventArgs e) //w5wc
         {
             FRSRegion CurrentRegion = FRSRegion.US;
-           // FRSRegion CurrentRegion = FRSRegion.UK;
+            FRSRegion OldRegion = console.CurrentRegion;
             if (comboFRSRegion.Text == "") return;
             switch (comboFRSRegion.Text)
             {
@@ -40424,7 +40424,17 @@ namespace PowerSDR
                     break;
             }
             console.CurrentRegion = CurrentRegion;
-           // console.Init60mChannels();
+            if (CurrentRegion != OldRegion) DB.UpdateRegion(console.CurrentRegion);
+            if (console.CurrentRegion == FRSRegion.UK)
+            {
+                console.band_60m_register = 7;
+                console.Init60mChannels();
+            }
+            if (console.CurrentRegion == FRSRegion.US)
+            {
+                console.band_60m_register = 12;
+                console.Init60mChannels();
+            }
         }
 
         private void radMicIn_CheckedChanged(object sender, EventArgs e)
@@ -40445,7 +40455,7 @@ namespace PowerSDR
             console.LineIn = true;
             radMicIn.Checked = false;
             chk20dbMicBoost.Visible = false;
-            chk20dbMicBoost.Checked = false;
+           // chk20dbMicBoost.Checked = false;
             chk20dbMicBoost.Enabled = false;
             //           if (!console.HPSDRisMetis)
             //            {
