@@ -13279,7 +13279,7 @@ namespace PowerSDR
             console.LineIn = true;
             radMicIn.Checked = false;
             chk20dbMicBoost.Visible = false;
-            chk20dbMicBoost.Checked = false;
+           // chk20dbMicBoost.Checked = false;
             chk20dbMicBoost.Enabled = false;
             //           if (!console.HPSDRisMetis)
             //            {
