@@ -583,7 +583,7 @@ namespace PowerSDR
 
         private int band_160m_register;						// These integers are the number of band stack registers
         private int band_80m_register;						// found in the database for each band
-        private int band_60m_register;
+        public int band_60m_register;
         private int band_40m_register;
         private int band_30m_register;
         private int band_20m_register;
@@ -1731,7 +1731,7 @@ namespace PowerSDR
             }
 
  
-            //  if (!db_exists) // modify bandtext and bandstack for non-US regions
+        /*    //  if (!db_exists) // modify bandtext and bandstack for non-US regions
             {
                // if (current_region != FRSRegion.US || current_region != FRSRegion.Australia || current_region != FRSRegion.Japan)
                 {
@@ -1744,7 +1744,7 @@ namespace PowerSDR
 
                     DB.UpdateRegion(current_region);
                 }
-            }
+            } */
 
             if (rx1_meter_cal_offset == 0.0f)
             {
