@@ -30371,6 +30371,21 @@ namespace PowerSDR
                             }
                            } */
 
+                        if (attontx)
+                        {
+                            if (update_preamp_mode)
+                            {
+                                RX1PreampMode = preamp;
+                                update_preamp_mode = false;
+                            }
+
+                            if (update_preamp)
+                            {
+                                preamp = RX1PreampMode;				// save current preamp mode
+                                update_preamp = false;
+                            }
+                        }
+
                     }
                     else // else if(mox)
                     {
