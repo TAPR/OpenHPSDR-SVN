@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="PowerSDR RX2 (W5WC)" Language="1033" Version="2.2.3.9" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="120DD74B-2A5E-4E0B-8760-7A0CB3E33711">
+	<Product Id="*" Name="PowerSDR RX2 (W5WC)" Language="1033" Version="2.2.3.15" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="120DD74B-2A5E-4E0B-8760-7A0CB3E33711">
 		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -214,6 +214,13 @@
               />
       </Component>
 
+      <Component Guid="*">
+        <File Id="Ozy_Janus.v23.rbf"
+              Source="..\PowerSDR_HPSDR_2_RX2\Bin\Release\Ozy_Janus.v23.rbf"
+              KeyPath="yes"
+              />
+      </Component>
+
       <Component Guid="45B90513-2627-44D7-A2E6-32E18FFD1329">
         <File Id="ozyfwsdr1k.hex"
               Source="..\PowerSDR_HPSDR_2_RX2\Bin\Release\ozyfw-sdr1k.hex"
@@ -228,6 +235,13 @@
               />
       </Component>
 
+      <Component Guid="*">
+        <File Id="FlexCW.dll"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\FlexCW.dll"
+              KeyPath="yes"
+              />
+      </Component>
+  
       <!--
       <Component Guid="795964DC-2354-445B-B236-B01B742D5AE3">
         <File Id="OpenHPSDR_Skins.exe"
