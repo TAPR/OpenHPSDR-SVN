@@ -409,6 +409,7 @@ namespace PowerSDR
                             }
                             break;
                         case 19: // K5SO Diversity & non-diversity
+                        case 20:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 33)))
                             {
