@@ -28907,6 +28907,20 @@ namespace PowerSDR
                             }
                            } */
 
+                        if (attontx)
+                        {
+                            if (update_preamp_mode)
+                            {
+                                RX1PreampMode = preamp;
+                                update_preamp_mode = false;
+                            }
+
+                            if (update_preamp)
+                            {
+                                preamp = RX1PreampMode;				// save current preamp mode
+                                update_preamp = false;
+                            }
+                        }
                     }
                     else // else if(mox)
                     {
@@ -32528,12 +32542,12 @@ namespace PowerSDR
             {
                 if (tx)
                 {
-                    if (attontx)
+                  /*  if (attontx)
                     {
                         RX1PreampMode = PreampMode.HPSDR_OFF;			// set to -20dB
                         update_preamp = true;
                         update_preamp_mode = true;
-                    }
+                    } */
 
                     if (!hpsdr_duplex_enabled)
                     {
@@ -32550,6 +32564,13 @@ namespace PowerSDR
 
             if (tx)
             {
+                if (attontx)
+                {
+                    RX1PreampMode = PreampMode.HPSDR_OFF;			// set to -20dB
+                    update_preamp = true;
+                    update_preamp_mode = true;
+                }
+                
                 AudioMOXChanged(tx);
                 if (rf_delay > 0) Thread.Sleep(rf_delay);
                 HdwMOXChanged(tx, freq);
