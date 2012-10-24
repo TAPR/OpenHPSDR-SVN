@@ -1564,7 +1564,7 @@ namespace PowerSDR
 		}
 
 		// Sets or reads the CW Monitor Disable button status
-		/*public string ZZCM(string s)
+		public string ZZCM(string s)
 		{
 			if(s.Length == parser.nSet && (s == "0" || s == "1"))
 			{
@@ -1586,7 +1586,7 @@ namespace PowerSDR
 				return parser.Error1;
 			}
 
-		}*/
+		}
 
 		// Sets or reads the compander button status
 		public string ZZCP(string s)
@@ -7008,7 +7008,33 @@ namespace PowerSDR
 			}
 		}
 
-		public string ZZZB()
+        //Reads or sets the FM mic gain
+        public string ZZYC(string s)
+        {
+            int n = 0;
+
+            if (s != null && s != "")
+                n = Convert.ToInt32(s);
+            n = Math.Max(0, n);
+            n = Math.Min(70, n);
+
+            if (s.Length == parser.nSet)
+            {
+                console.FMMic = n;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                return AddLeadingZeros((int)console.FMMic);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+
+        }
+        
+        public string ZZZB()
 		{
 			if(console.CATDisplayAvg == 1)
 				console.CATZB = "1";
@@ -7017,7 +7043,7 @@ namespace PowerSDR
 
 		public string ZZZZ()
 		{
-			//console.Siolisten.SIO.Close();
+			console.Siolisten.SIO.Close();
 			return "";
 		}
 		#endregion Extended CAT Methods ZZR-ZZZ

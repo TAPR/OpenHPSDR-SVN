@@ -26,6 +26,10 @@
 //    USA
 //=================================================================
 
+using System.Collections.Generic;
+using System.Linq;
+
+using FlexCW;
 
 namespace PowerSDR
 {
@@ -37,12 +41,11 @@ namespace PowerSDR
     using System.ComponentModel;
     using System.Threading;
     using System.Windows.Forms;
-    using SDRSerialSupportII;
+   // using SDRSerialSupportII;
     using System.Text;
     using System.IO;
     using System.IO.Ports;
-    using System.Collections.Generic;
-    using System.Linq;
+    //using TDxInput;
 
     public partial class Setup : Form
     {
@@ -532,7 +535,6 @@ namespace PowerSDR
         private GroupBoxTS grpDSPCWPitch;
         private LabelTS lblDSPCWPitchFreq;
         private NumericUpDownTS udDSPCWPitch;
-        private CheckBoxTS chkDSPKeyerDisableMonitor;
         private TabControl tcDSP;
         private TabPage tpDSPImageReject;
         private GroupBoxTS grpDSPImageRejectTX;
@@ -573,8 +575,6 @@ namespace PowerSDR
         private GroupBoxTS grpDSPNB2;
         private LabelTS lblDSPNB2Threshold;
         private NumericUpDownTS udDSPNB2;
-        private LabelTS lblKeyerDeBounce;
-        private NumericUpDownTS udCWKeyerDeBounce;
         private CheckBoxTS chkCWKeyerRevPdl;
         private CheckBoxTS chkExtEnable;
         private CheckBoxTS chkExtRX26;
@@ -1881,6 +1881,9 @@ namespace PowerSDR
         private CheckBoxTS chkAGCHangSpectrumLine;
         private CheckBoxTS chkAGCDisplayHangLine;
         private System.ComponentModel.IContainer components;
+        private CheckBoxTS chkStrictCharSpacing;
+        private CheckBoxTS chkModeBStrict;
+        private CheckBoxTS chkDSPKeyerSidetone;
 
         #endregion
 
@@ -2063,6 +2066,7 @@ namespace PowerSDR
             checkHPSDRDefaults(this, e);
             chkAlexPresent_CheckedChanged(this, e);
             chkApolloPresent_CheckedChanged(this, e);
+            chkEClassModulation_CheckedChanged(this, e);
 
             for (int i = 0; i < 2; i++)
                 for (int j = 0; j < 2; j++)
@@ -2072,9 +2076,12 @@ namespace PowerSDR
 
             openFileDialog1.Filter = "PowerSDR Database Files (*.xml) | *.xml";
 
-            AllowFreqBroadcast = chkKWAI.Checked;
+            if (chkKWAI.Checked)
+                AllowFreqBroadcast = true;
+            else
+                AllowFreqBroadcast = false;
 
-            //tkbarTestGenFreq.Value = console.CWPitch;
+            tkbarTestGenFreq.Value = console.CWPitch;
         }
 #if false
         protected override void Dispose(bool disposing)
@@ -2290,10 +2297,11 @@ namespace PowerSDR
             {
                 case Model.FLEX3000:
                 case Model.FLEX5000:
+                case Model.SDR1000:
                     comboKeyerConnPrimary.Items.Add("Radio");
                     break;
-                case Model.SDR1000:
-                    comboKeyerConnPrimary.Items.Add("SDR");
+                default:
+                       comboKeyerConnPrimary.Items.Add("None");
                     break;
             }
 
@@ -2304,13 +2312,14 @@ namespace PowerSDR
             comboCATPort.Items.Clear();
             comboCATPTTPort.Items.Clear();
 
-            foreach (string s in com_ports)
-            {
-                comboKeyerConnPrimary.Items.Add(s);
-                comboKeyerConnSecondary.Items.Add(s);
-                comboCATPort.Items.Add(s);
-                comboCATPTTPort.Items.Add(s);
-            }
+            comboKeyerConnPrimary.Items.AddRange(com_ports);
+            comboKeyerConnSecondary.Items.AddRange(com_ports);
+
+            comboCATPort.Items.Add("None");
+            comboCATPort.Items.AddRange(com_ports);
+
+            comboCATPTTPort.Items.Add("None");
+            comboCATPTTPort.Items.AddRange(com_ports);
         }
 
         private void RefreshSkinList()
@@ -3120,21 +3129,38 @@ namespace PowerSDR
             return s;
         }
 
+        public string TXProfile
+        {
+            get
+            {
+                return comboTXProfileName != null ? comboTXProfileName.Text : "";
+            }
+            set { if (comboTXProfileName != null) comboTXProfileName.Text = value; }
+        }
+
         public void GetTxProfiles()
         {
             comboTXProfileName.Items.Clear();
-            foreach (DataRow dr in from DataRow dr in DB.ds.Tables["TxProfile"].Rows where dr.RowState != DataRowState.Deleted where !comboTXProfileName.Items.Contains(dr["Name"]) select dr)
+            foreach (DataRow dr in DB.ds.Tables["TxProfile"].Rows)
             {
-                comboTXProfileName.Items.Add(dr["Name"]);
+                if (dr.RowState != DataRowState.Deleted)
+                {
+                    if (!comboTXProfileName.Items.Contains(dr["Name"]))
+                        comboTXProfileName.Items.Add(dr["Name"]);
+                }
             }
         }
 
         public void GetTxProfileDefs()
         {
             lstTXProfileDef.Items.Clear();
-            foreach (DataRow dr in from DataRow dr in DB.ds.Tables["TxProfileDef"].Rows where dr.RowState != DataRowState.Deleted where !lstTXProfileDef.Items.Contains(dr["Name"]) select dr)
+            foreach (DataRow dr in DB.ds.Tables["TxProfileDef"].Rows)
             {
-                lstTXProfileDef.Items.Add(dr["name"]);
+                if (dr.RowState != DataRowState.Deleted)
+                {
+                    if (!lstTXProfileDef.Items.Contains(dr["Name"]))
+                        lstTXProfileDef.Items.Add(dr["name"]);
+                }
             }
         }
 
@@ -3168,19 +3194,154 @@ namespace PowerSDR
 
             return false;
         }
+        public void SaveTXProfileData() //W4TME
+        {
+            if (profile_deleted == true)
+            {
+                profile_deleted = false;
+                return;
+            }
+
+            string name = current_profile;
+
+            DataRow dr = null;
+
+            foreach (DataRow d in DB.ds.Tables["TxProfile"].Rows)
+            {
+                if ((string)d["Name"] == name)
+                {
+                    dr = d;
+                    break;
+                }
+            }
+
+            dr["FilterLow"] = (int)udTXFilterLow.Value;
+            dr["FilterHigh"] = (int)udTXFilterHigh.Value;
+            dr["TXEQEnabled"] = console.EQForm.TXEQEnabled;
+            dr["TXEQNumBands"] = console.EQForm.NumBands;
+            int[] eq = console.EQForm.TXEQ;
+            dr["TXEQPreamp"] = eq[0];
+            for (int i = 1; i < eq.Length; i++)
+                dr["TXEQ" + i.ToString()] = eq[i];
+            for (int i = eq.Length; i < 11; i++)
+                dr["TXEQ" + i.ToString()] = 0;
+
+            dr["DXOn"] = console.DX;
+            dr["DXLevel"] = console.DXLevel;
+            dr["CompanderOn"] = console.CPDR;
+            dr["CompanderLevel"] = console.CPDRLevel;
+
+            dr["MicGain"] = console.Mic;
+            dr["FMMicGain"] = console.FMMic;
+
+            dr["Lev_On"] = chkDSPLevelerEnabled.Checked;
+            dr["Lev_Slope"] = (int)udDSPLevelerSlope.Value;
+            dr["Lev_MaxGain"] = (int)udDSPLevelerThreshold.Value;
+            dr["Lev_Attack"] = (int)udDSPLevelerAttack.Value;
+            dr["Lev_Decay"] = (int)udDSPLevelerDecay.Value;
+            dr["Lev_Hang"] = (int)udDSPLevelerHangTime.Value;
+            dr["Lev_HangThreshold"] = tbDSPLevelerHangThreshold.Value;
+
+            dr["ALC_Slope"] = (int)udDSPALCSlope.Value;
+            dr["ALC_MaxGain"] = (int)udDSPALCThreshold.Value;
+            dr["ALC_Attack"] = (int)udDSPALCAttack.Value;
+            dr["ALC_Decay"] = (int)udDSPALCDecay.Value;
+            dr["ALC_Hang"] = (int)udDSPALCHangTime.Value;
+            dr["ALC_HangThreshold"] = tbDSPALCHangThreshold.Value;
+
+            dr["Power"] = console.PWR;
+
+            dr["Dexp_On"] = chkTXNoiseGateEnabled.Checked;
+            dr["Dexp_Threshold"] = (int)udTXNoiseGate.Value;
+            dr["Dexp_Attenuate"] = (int)udTXNoiseGateAttenuate.Value;
+
+            dr["VOX_On"] = chkTXVOXEnabled.Checked;
+            dr["VOX_Threshold"] = (int)udTXVOXThreshold.Value;
+            dr["VOX_HangTime"] = (int)udTXVOXHangTime.Value;
+            dr["Tune_Power"] = (int)udTXTunePower.Value;
+            dr["Tune_Meter_Type"] = (string)comboTXTUNMeter.Text;
+
+            dr["TX_Limit_Slew"] = (bool)chkTXLimitSlew.Checked;
+
+            dr["TX_AF_Level"] = console.TXAF;
+
+            dr["AM_Carrier_Level"] = (int)udTXAMCarrierLevel.Value;
+
+            dr["Show_TX_Filter"] = (bool)console.ShowTXFilter;
+
+            dr["VAC1_On"] = (bool)chkAudioEnableVAC.Checked;
+            dr["VAC1_Auto_On"] = (bool)chkAudioVACAutoEnable.Checked;
+            dr["VAC1_RX_GAIN"] = (int)udAudioVACGainRX.Value;
+            dr["VAC1_TX_GAIN"] = (int)udAudioVACGainTX.Value;
+            dr["VAC1_Stereo_On"] = (bool)chkAudio2Stereo.Checked;
+            dr["VAC1_Sample_Rate"] = (string)comboAudioSampleRate2.Text;
+            dr["VAC1_Buffer_Size"] = (string)comboAudioBuffer2.Text;
+            dr["VAC1_IQ_Output"] = (bool)chkAudioIQtoVAC.Checked;
+            dr["VAC1_IQ_Correct"] = (bool)chkAudioCorrectIQ.Checked;
+            dr["VAC1_PTT_OverRide"] = (bool)chkVACAllowBypass.Checked;
+            dr["VAC1_Combine_Input_Channels"] = (bool)chkVACCombine.Checked;
+            dr["VAC1_Latency_On"] = true;
+            dr["VAC1_Latency_Duration"] = (int)udAudioLatency2.Value;
+
+            dr["VAC2_On"] = (bool)chkVAC2Enable.Checked;
+            dr["VAC2_Auto_On"] = (bool)chkVAC2AutoEnable.Checked;
+            dr["VAC2_RX_GAIN"] = (int)udVAC2GainRX.Value;
+            dr["VAC2_TX_GAIN"] = (int)udVAC2GainTX.Value;
+            dr["VAC2_Stereo_On"] = (bool)chkAudioStereo3.Checked;
+            dr["VAC2_Sample_Rate"] = (string)comboAudioSampleRate3.Text;
+            dr["VAC2_Buffer_Size"] = (string)comboAudioBuffer3.Text;
+            dr["VAC2_IQ_Output"] = (bool)chkVAC2DirectIQ.Checked;
+            dr["VAC2_IQ_Correct"] = (bool)chkVAC2DirectIQCal.Checked;
+            dr["VAC2_Combine_Input_Channels"] = (bool)chkVAC2Combine.Checked;
+            dr["VAC2_Latency_On"] = true;
+            dr["VAC2_Latency_Duration"] = (int)udVAC2Latency.Value;
+
+            dr["Phone_RX_DSP_Buffer"] = (string)comboDSPPhoneRXBuf.Text;
+            dr["Phone_TX_DSP_Buffer"] = (string)comboDSPPhoneTXBuf.Text;
+            dr["Digi_RX_DSP_Buffer"] = (string)comboDSPDigRXBuf.Text;
+            dr["Digi_TX_DSP_Buffer"] = (string)comboDSPDigTXBuf.Text;
+            dr["CW_RX_DSP_Buffer"] = (string)comboDSPCWRXBuf.Text;
+
+            switch (console.CurrentModel)
+            {
+                case Model.FLEX5000:
+                    dr["Mic_Input_On"] = (string)console.fwcMixForm.MicInputSelected;
+                    dr["Mic_Input_Level"] = (int)console.fwcMixForm.MicInput;
+                    dr["Line_Input_On"] = (string)console.fwcMixForm.LineInRCASelected;
+                    dr["Line_Input_Level"] = (int)console.fwcMixForm.LineInRCA;
+                    dr["Balanced_Line_Input_On"] = (string)console.fwcMixForm.LineInPhonoSelected;
+                    dr["Balanced_Line_Input_Level"] = (int)console.fwcMixForm.LineInPhono;
+                    dr["FlexWire_Input_On"] = (string)console.fwcMixForm.LineInDB9Selected;
+                    dr["FlexWire_Input_Level"] = (int)console.fwcMixForm.LineInDB9;
+                    break;
+
+                case Model.FLEX3000:
+                    dr["Mic_Input_On"] = (string)console.flex3000MixerForm.MicInputSelected;
+                    dr["Mic_Input_Level"] = (int)console.flex3000MixerForm.MicInput;
+                    dr["Line_Input_On"] = "0";
+                    dr["Line_Input_Level"] = 0;
+                    dr["Balanced_Line_Input_On"] = "0";
+                    dr["Balanced_Line_Input_Level"] = 0;
+                    dr["FlexWire_Input_On"] = (string)console.flex3000MixerForm.LineInDB9Selected;
+                    dr["FlexWire_Input_Level"] = (int)console.flex3000MixerForm.LineInDB9;
+                    break;
+
+                default:
+                    dr["Mic_Input_On"] = "0";
+                    dr["Mic_Input_Level"] = 0;
+                    dr["Line_Input_On"] = "0";
+                    dr["Line_Input_Level"] = 0;
+                    dr["Balanced_Line_Input_On"] = "0";
+                    dr["Balanced_Line_Input_Level"] = 0;
+                    dr["FlexWire_Input_On"] = "0";
+                    dr["FlexWire_Input_Level"] = 0;
+                    break;
+            }
+        }
 
         #endregion
 
         #region Properties
-
-        public string TXProfile
-        {
-            get
-            {
-                return comboTXProfileName != null ? comboTXProfileName.Text : "";
-            }
-            set { if (comboTXProfileName != null) comboTXProfileName.Text = value; }
-        }
 
         public int VACDriver
         {
@@ -3426,12 +3587,12 @@ namespace PowerSDR
         {
             get
             {
-                if (chkDSPKeyerDisableMonitor != null) return chkDSPKeyerDisableMonitor.Checked;
+                if (chkDSPKeyerSidetone != null) return chkDSPKeyerSidetone.Checked;
                 else return false;
             }
             set
             {
-                if (chkDSPKeyerDisableMonitor != null) chkDSPKeyerDisableMonitor.Checked = value;
+                if (chkDSPKeyerSidetone != null) chkDSPKeyerSidetone.Checked = value;
             }
         }
 
@@ -3992,12 +4153,6 @@ namespace PowerSDR
         {
             get { return chkVAC2Enable.Checked; }
             set { chkVAC2Enable.Checked = value; }
-        }
-
-        public bool VACIQEnable
-        {
-            get { return chkAudioIQtoVAC.Checked; }
-            set { chkAudioIQtoVAC.Checked = value; }
         }
 
         public int SoundCardIndex
@@ -5018,6 +5173,16 @@ namespace PowerSDR
                 groupBoxRXOptions.Text = "Hermes Options";
                 radMetis.Text = "Hermes";
                 grpMetisAddr.Text = "Hermes Address";
+                string key = comboKeyerConnPrimary.Text;
+                if (comboKeyerConnPrimary.Items.Contains("5000"))
+                    comboKeyerConnPrimary.Items.Remove("5000");
+                if (comboKeyerConnPrimary.Items.Contains("SDR"))
+                    comboKeyerConnPrimary.Items.Remove("SDR");
+                if (!comboKeyerConnPrimary.Items.Contains("Ozy/Hermes"))
+                    comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
+                comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
+                comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
         }
@@ -5039,6 +5204,16 @@ namespace PowerSDR
                 groupBoxRXOptions.Text = "Mercury Options";
                 radMetis.Text = "Metis (Ethernet)";
                 grpMetisAddr.Text = "Metis Address";
+                string key = comboKeyerConnPrimary.Text;
+                if (comboKeyerConnPrimary.Items.Contains("5000"))
+                    comboKeyerConnPrimary.Items.Remove("5000");
+                if (comboKeyerConnPrimary.Items.Contains("SDR"))
+                    comboKeyerConnPrimary.Items.Remove("SDR");
+                if (!comboKeyerConnPrimary.Items.Contains("Ozy/Hermes"))
+                    comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
+                comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
+                comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, false);
 
@@ -6291,6 +6466,8 @@ namespace PowerSDR
                 }
             }
 
+            CWKeyer.AudioLatency = Math.Max(10.0, new_size / (double)console.SampleRate1 * 1e3);
+  
             if (power && old_size != new_size)
             {
                 console.PowerOn = false;
@@ -6298,7 +6475,6 @@ namespace PowerSDR
             }
 
             console.BlockSize1 = new_size;
-            RadioDSP.KeyerResetSize = console.BlockSize1 * 3 / 2;
 
             if (power && old_size != new_size) console.PowerOn = true;
         }
@@ -7968,7 +8144,8 @@ namespace PowerSDR
 
         private void chkCWKeyerIambic_CheckedChanged(object sender, System.EventArgs e)
         {
-            RadioDSP.KeyerIambic = chkCWKeyerIambic.Checked;
+           // RadioDSP.KeyerIambic = chkCWKeyerIambic.Checked;
+            CWKeyer.Iambic = chkCWKeyerIambic.Checked;
             console.CWIambic = chkCWKeyerIambic.Checked;
             switch (console.CurrentModel)
             {
@@ -7982,69 +8159,105 @@ namespace PowerSDR
 
         private void udCWKeyerWeight_ValueChanged(object sender, System.EventArgs e)
         {
-            RadioDSP.KeyerWeight = (int)udCWKeyerWeight.Value;
+          //  RadioDSP.KeyerWeight = (int)udCWKeyerWeight.Value;
+            CWKeyer.Weight = (int)udCWKeyerWeight.Value;
         }
 
         private void udCWKeyerRamp_ValueChanged(object sender, System.EventArgs e)
         {
-            RadioDSP.KeyerRamp = (int)udCWKeyerRamp.Value;
+           // RadioDSP.KeyerRamp = (int)udCWKeyerRamp.Value;
+            CWSynth.RampTime = (int)udCWKeyerRamp.Value;
         }
 
         private void udCWKeyerSemiBreakInDelay_ValueChanged(object sender, System.EventArgs e)
         {
+            CWKeyer.BreakInDelay = (double)udCWBreakInDelay.Value;
             console.BreakInDelay = (double)udCWBreakInDelay.Value;
         }
 
         private void chkDSPKeyerSemiBreakInEnabled_CheckedChanged(object sender, System.EventArgs e)
         {
+            CWKeyer.BreakIn = chkCWBreakInEnabled.Checked;
             console.CWSemiBreakInEnabled = chkCWBreakInEnabled.Checked;
             console.BreakInEnabled = chkCWBreakInEnabled.Checked;
             udCWBreakInDelay.Enabled = chkCWBreakInEnabled.Checked;
         }
 
-        private void chkDSPKeyerDisableMonitor_CheckedChanged(object sender, System.EventArgs e)
+        private void chkDSPKeyerSidetone_CheckedChanged(object sender, System.EventArgs e)
         {
-            console.CWDisableMonitor = chkDSPKeyerDisableMonitor.Checked;
-        }
-
-        private void udCWKeyerDeBounce_ValueChanged(object sender, System.EventArgs e)
-        {
-            RadioDSP.KeyerDebounce = (int)udCWKeyerDeBounce.Value;
+            console.CWSidetone = chkDSPKeyerSidetone.Checked;
         }
 
         private void chkCWKeyerRevPdl_CheckedChanged(object sender, System.EventArgs e)
         {
-            RadioDSP.KeyerReversePaddle = chkCWKeyerRevPdl.Checked;
+           // RadioDSP.KeyerReversePaddle = chkCWKeyerRevPdl.Checked;
+            SDRSerialPort.ReversePaddles = chkCWKeyerRevPdl.Checked;
+            console.ReversePaddles = chkCWKeyerRevPdl.Checked;
         }
 
         private void comboKeyerConnPrimary_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            bool running = System.Convert.ToBoolean(DttSP.KeyerRunning());
-            if (running) DttSP.StopKeyer();
-            Thread.Sleep(40);
-            console.Keyer.PrimaryConnPort = comboKeyerConnPrimary.Text;
-            if (console.Keyer.PrimaryConnPort == "SDR" && comboKeyerConnPrimary.Text != "SDR")
-                comboKeyerConnPrimary.Text = "SDR";
-            if (running) DttSP.StartKeyer();
+          //  bool running = System.Convert.ToBoolean(DttSP.KeyerRunning());
+          //  if (running) DttSP.StopKeyer();
+           // Thread.Sleep(40);
+           
+          //  console.Keyer.PrimaryConnPort = comboKeyerConnPrimary.Text;
+           // if (console.Keyer.PrimaryConnPort == "SDR" && comboKeyerConnPrimary.Text != "SDR")
+             //   comboKeyerConnPrimary.Text = "SDR";
+          //  if (running) DttSP.StartKeyer();
+ 
+            if (!CWInput.SetPrimaryInput(comboKeyerConnPrimary.Text))
+            {
+                MessageBox.Show("Error using " + comboKeyerConnPrimary.Text + " for Keyer Primary Input.\n" +
+                    "The port may already be in use by another application.",
+                    "Error using " + comboKeyerConnPrimary.Text,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                comboKeyerConnPrimary.Text = CWInput.PrimaryInput;
+            }
         }
 
         private void comboKeyerConnSecondary_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (initializing) return;
-            bool running = System.Convert.ToBoolean(DttSP.KeyerRunning());
-            if (running) DttSP.StopKeyer();
-            Thread.Sleep(10);
-            if (comboKeyerConnSecondary.Text == "CAT" && !chkCATEnable.Checked)
+
+            if (comboKeyerConnSecondary.Text == "CAT")
+            {
+                if (!chkCATEnable.Checked)
             {
                 MessageBox.Show("CAT is not Enabled.  Please enable the CAT interface before selecting this option.",
                     "CAT not enabled",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Hand);
-                comboKeyerConnSecondary.Text = "None";
+                    comboKeyerConnSecondary.Text = CWInput.SecondaryInput;
+                    return;
+                }
+                else
+                {
+                    CWInput.SetSecondaryInput("None");
+                    console.Siolisten.UseForKeyPTT = true;
+                }
+            }
+            else
+            {
+                if (console.Siolisten != null)
+                {
+                    console.Siolisten.UseForKeyPTT = false;
+                }
+            }
+
+            if (!CWInput.SetSecondaryInput(comboKeyerConnSecondary.Text))
+            {
+                MessageBox.Show("Error using " + comboKeyerConnSecondary.Text + " for Keyer Secondary Input.\n" +
+                    "The port may already be in use by another application.",
+                    "Error using " + comboKeyerConnSecondary.Text,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                comboKeyerConnSecondary.Text = CWInput.SecondaryInput;
                 return;
             }
 
-            console.Keyer.SecondaryConnPort = comboKeyerConnSecondary.Text;
             switch (comboKeyerConnSecondary.Text)
             {
                 case "None":
@@ -8058,29 +8271,70 @@ namespace PowerSDR
                     comboKeyerConnPTTLine.Visible = true;
                     lblKeyerConnKeyLine.Visible = true;
                     comboKeyerConnKeyLine.Visible = true;
+
+                    comboKeyerConnPTTLine_SelectedIndexChanged(this, EventArgs.Empty);
+                    comboKeyerConnKeyLine_SelectedIndexChanged(this, EventArgs.Empty);
                     break;
                 default: // COMx
                     lblKeyerConnPTTLine.Visible = true;
                     comboKeyerConnPTTLine.Visible = true;
                     lblKeyerConnKeyLine.Visible = true;
                     comboKeyerConnKeyLine.Visible = true;
+
+                    comboKeyerConnPTTLine_SelectedIndexChanged(this, EventArgs.Empty);
+                    comboKeyerConnKeyLine_SelectedIndexChanged(this, EventArgs.Empty);
                     break;
             }
-            if (console.Keyer.SecondaryConnPort == "None" && comboKeyerConnSecondary.Text != "None")
-                comboKeyerConnSecondary.Text = "None";
-            if (running) DttSP.StartKeyer();
         }
 
         private void comboKeyerConnKeyLine_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboKeyerConnKeyLine.SelectedIndex < 0) return;
-            console.Keyer.SecondaryKeyLine = (KeyerLine)comboKeyerConnKeyLine.SelectedIndex;
+
+            if (comboKeyerConnSecondary.Text == "CAT")
+            {
+                switch ((KeyerLine)comboKeyerConnKeyLine.SelectedIndex)
+                {
+                    case KeyerLine.None:
+                        console.Siolisten.KeyOnDTR = false;
+                        console.Siolisten.KeyOnRTS = false;
+                        break;
+                    case KeyerLine.DTR:
+                        console.Siolisten.KeyOnDTR = true;
+                        console.Siolisten.KeyOnRTS = false;
+                        break;
+                    case KeyerLine.RTS:
+                        console.Siolisten.KeyOnDTR = false;
+                        console.Siolisten.KeyOnRTS = true;
+                        break;
+                }
+            }
+            else CWInput.SecondaryKeyLine = (KeyerLine)comboKeyerConnKeyLine.SelectedIndex;
         }
 
         private void comboKeyerConnPTTLine_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboKeyerConnPTTLine.SelectedIndex < 0) return;
-            console.Keyer.SecondaryPTTLine = (KeyerLine)comboKeyerConnPTTLine.SelectedIndex;
+
+            if (comboKeyerConnSecondary.Text == "CAT")
+            {
+                switch ((KeyerLine)comboKeyerConnPTTLine.SelectedIndex)
+                {
+                    case KeyerLine.None:
+                        console.Siolisten.PTTOnDTR = false;
+                        console.Siolisten.PTTOnRTS = false;
+                        break;
+                    case KeyerLine.DTR:
+                        console.Siolisten.PTTOnDTR = true;
+                        console.Siolisten.PTTOnRTS = false;
+                        break;
+                    case KeyerLine.RTS:
+                        console.Siolisten.PTTOnDTR = false;
+                        console.Siolisten.PTTOnRTS = true;
+                        break;
+                }
+            }
+            else CWInput.SecondaryPTTLine = (KeyerLine)comboKeyerConnPTTLine.SelectedIndex;
         }
 
         #endregion
@@ -8323,21 +8577,28 @@ namespace PowerSDR
             if (comboTXProfileName.SelectedIndex < 0 || initializing)
                 return;
 
-            if (CheckTXProfileChanged() && comboTXProfileName.Focused)
+            if (chkAutoSaveTXProfile.Checked)
             {
-                DialogResult result = MessageBox.Show("The current profile has changed.  " +
-                    "Would you like to save the current profile?",
-                    "Save Current Profile?",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
+                SaveTXProfileData();
+            }
+            else
+            {
+                if (CheckTXProfileChanged() && comboTXProfileName.Focused)
                 {
-                    btnTXProfileSave_Click(this, EventArgs.Empty);
-                    //return;
+                    DialogResult result = MessageBox.Show("The current profile has changed.  " +
+                        "Would you like to save the current profile?",
+                        "Save Current Profile?",
+                        MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        btnTXProfileSave_Click(this, EventArgs.Empty);
+                        //return;
+                    }
+                    else if (result == DialogResult.Cancel)
+                        return;
                 }
-                else if (result == DialogResult.Cancel)
-                    return;
             }
 
             console.TXProfile = comboTXProfileName.Text;
@@ -8375,6 +8636,7 @@ namespace PowerSDR
             console.CPDRLevel = (int)dr["CompanderLevel"];
 
             console.Mic = (int)dr["MicGain"];
+            console.FMMic = (int)dr["FMMicGain"];
 
             chkDSPLevelerEnabled.Checked = (bool)dr["Lev_On"];
             udDSPLevelerSlope.Value = (int)dr["Lev_Slope"];
@@ -8392,6 +8654,89 @@ namespace PowerSDR
             tbDSPALCHangThreshold.Value = (int)dr["ALC_HangThreshold"];
 
             console.PWR = (int)dr["Power"];
+            // W4TME_
+            chkTXNoiseGateEnabled.Checked = (bool)dr["Dexp_On"];
+            udTXNoiseGate.Value = (int)dr["Dexp_Threshold"];
+            udTXNoiseGateAttenuate.Value = (int)dr["Dexp_Attenuate"];
+
+            chkTXVOXEnabled.Checked = (bool)dr["VOX_On"];
+            udTXVOXThreshold.Value = (int)dr["VOX_Threshold"];
+            udTXVOXHangTime.Value = (int)dr["VOX_HangTime"];
+
+            udTXTunePower.Value = (int)dr["Tune_Power"];
+            comboTXTUNMeter.Text = (string)dr["Tune_Meter_Type"];
+
+            chkTXLimitSlew.Checked = (bool)dr["TX_Limit_Slew"];
+
+            console.TXAF = (int)dr["TX_AF_Level"];
+
+            udTXAMCarrierLevel.Value = (int)dr["AM_Carrier_Level"];
+
+            console.ShowTXFilter = (bool)dr["Show_TX_Filter"];
+
+            chkAudioEnableVAC.Checked = (bool)dr["VAC1_On"];
+            chkAudioVACAutoEnable.Checked = (bool)dr["VAC1_Auto_On"];
+            udAudioVACGainRX.Value = (int)dr["VAC1_RX_GAIN"];
+            udAudioVACGainTX.Value = (int)dr["VAC1_TX_GAIN"];
+            chkAudio2Stereo.Checked = (bool)dr["VAC1_Stereo_On"];
+            comboAudioSampleRate2.Text = (string)dr["VAC1_Sample_Rate"];
+            comboAudioBuffer2.Text = (string)dr["VAC1_Buffer_Size"];
+            chkAudioIQtoVAC.Checked = (bool)dr["VAC1_IQ_Output"];
+            chkAudioCorrectIQ.Checked = (bool)dr["VAC1_IQ_Correct"];
+            chkVACAllowBypass.Checked = (bool)dr["VAC1_PTT_OverRide"];
+            chkVACCombine.Checked = (bool)dr["VAC1_Combine_Input_Channels"];
+            chkAudioLatencyManual2.Checked = true;
+            udAudioLatency2.Value = (int)dr["VAC1_Latency_Duration"];
+
+            chkVAC2Enable.Checked = (bool)dr["VAC2_On"];
+            chkVAC2AutoEnable.Checked = (bool)dr["VAC2_Auto_On"];
+            udVAC2GainRX.Value = (int)dr["VAC2_RX_GAIN"];
+            udVAC2GainTX.Value = (int)dr["VAC2_TX_GAIN"];
+            chkAudioStereo3.Checked = (bool)dr["VAC2_Stereo_On"];
+            comboAudioSampleRate3.Text = (string)dr["VAC2_Sample_Rate"];
+            comboAudioBuffer3.Text = (string)dr["VAC2_Buffer_Size"];
+            chkVAC2DirectIQ.Checked = (bool)dr["VAC2_IQ_Output"];
+            chkVAC2DirectIQCal.Checked = (bool)dr["VAC2_IQ_Correct"];
+            chkVAC2Combine.Checked = (bool)dr["VAC2_Combine_Input_Channels"];
+            chkVAC2LatencyManual.Checked = true;
+            udVAC2Latency.Value = (int)dr["VAC2_Latency_Duration"];
+
+            comboDSPPhoneRXBuf.Text = (string)dr["Phone_RX_DSP_Buffer"];
+            comboDSPPhoneTXBuf.Text = (string)dr["Phone_TX_DSP_Buffer"];
+            comboDSPDigRXBuf.Text = (string)dr["Digi_RX_DSP_Buffer"];
+            comboDSPDigTXBuf.Text = (string)dr["Digi_TX_DSP_Buffer"];
+            comboDSPCWRXBuf.Text = (string)dr["CW_RX_DSP_Buffer"];
+
+            switch (console.CurrentModel)
+            {
+                case Model.FLEX5000:
+                    if (console.fwcMixForm != null)
+                    {
+                        console.fwcMixForm.MicInputSelected = (string)dr["Mic_Input_On"];
+                        console.fwcMixForm.MicInput = (int)dr["Mic_Input_Level"];
+                        console.fwcMixForm.LineInRCASelected = (string)dr["Line_Input_On"];
+                        console.fwcMixForm.LineInRCA = (int)dr["Line_Input_Level"];
+                        console.fwcMixForm.LineInPhonoSelected = (string)dr["Balanced_Line_Input_On"];
+                        console.fwcMixForm.LineInPhono = (int)dr["Balanced_Line_Input_Level"];
+                        console.fwcMixForm.LineInDB9Selected = (string)dr["FlexWire_Input_On"];
+                        console.fwcMixForm.LineInDB9 = (int)dr["FlexWire_Input_Level"];
+                    }
+                    break;
+
+                case Model.FLEX3000:
+                    if (console.flex3000MixerForm != null)
+                    {
+                        console.flex3000MixerForm.MicInputSelected = (string)dr["Mic_Input_On"];
+                        console.flex3000MixerForm.MicInput = (int)dr["Mic_Input_Level"];
+                        console.flex3000MixerForm.LineInDB9Selected = (string)dr["FlexWire_Input_On"];
+                        console.flex3000MixerForm.LineInDB9 = (int)dr["FlexWire_Input_Level"];
+                    }
+                    break;
+
+                 default:
+                    // do nothing for other radios models
+                    break;
+            }
 
             current_profile = comboTXProfileName.Text;
         }
@@ -8450,6 +8795,7 @@ namespace PowerSDR
             dr["CompanderOn"] = console.CPDR;
             dr["CompanderLevel"] = console.CPDRLevel;
             dr["MicGain"] = console.Mic;
+            dr["FMMicGain"] = console.FMMic;
 
             dr["Lev_On"] = chkDSPLevelerEnabled.Checked;
             dr["Lev_Slope"] = (int)udDSPLevelerSlope.Value;
@@ -8468,6 +8814,95 @@ namespace PowerSDR
 
             dr["Power"] = console.PWR;
 
+            // W4TME
+            dr["Dexp_On"] = chkTXNoiseGateEnabled.Checked;
+            dr["Dexp_Threshold"] = (int)udTXNoiseGate.Value;
+            dr["Dexp_Attenuate"] = (int)udTXNoiseGateAttenuate.Value;
+
+            dr["VOX_On"] = chkTXVOXEnabled.Checked;
+            dr["VOX_Threshold"] = (int)udTXVOXThreshold.Value;
+            dr["VOX_HangTime"] = (int)udTXVOXHangTime.Value;
+
+            dr["Tune_Power"] = (int)udTXTunePower.Value;
+            dr["Tune_Meter_Type"] = (string)comboTXTUNMeter.Text;
+
+            dr["TX_Limit_Slew"] = (bool)chkTXLimitSlew.Checked;
+
+            dr["TX_AF_Level"] = console.TXAF;
+
+            dr["AM_Carrier_Level"] = (int)udTXAMCarrierLevel.Value;
+
+            dr["Show_TX_Filter"] = (bool)console.ShowTXFilter;
+
+            dr["VAC1_On"] = (bool)chkAudioEnableVAC.Checked;
+            dr["VAC1_Auto_On"] = (bool)chkAudioVACAutoEnable.Checked;
+            dr["VAC1_RX_GAIN"] = (int)udAudioVACGainRX.Value;
+            dr["VAC1_TX_GAIN"] = (int)udAudioVACGainTX.Value;
+            dr["VAC1_Stereo_On"] = (bool)chkAudio2Stereo.Checked;
+            dr["VAC1_Sample_Rate"] = (string)comboAudioSampleRate2.Text;
+            dr["VAC1_Buffer_Size"] = (string)comboAudioBuffer2.Text;
+            dr["VAC1_IQ_Output"] = (bool)chkAudioIQtoVAC.Checked;
+            dr["VAC1_IQ_Correct"] = (bool)chkAudioCorrectIQ.Checked;
+            dr["VAC1_PTT_OverRide"] = (bool)chkVACAllowBypass.Checked;
+            dr["VAC1_Combine_Input_Channels"] = (bool)chkVACCombine.Checked;
+            dr["VAC1_Latency_On"] = true;
+            dr["VAC1_Latency_Duration"] = (int)udAudioLatency2.Value;
+
+            dr["VAC2_On"] = (bool)chkVAC2Enable.Checked;
+            dr["VAC2_Auto_On"] = (bool)chkVAC2AutoEnable.Checked;
+            dr["VAC2_RX_GAIN"] = (int)udVAC2GainRX.Value;
+            dr["VAC2_TX_GAIN"] = (int)udVAC2GainTX.Value;
+            dr["VAC2_Stereo_On"] = (bool)chkAudioStereo3.Checked;
+            dr["VAC2_Sample_Rate"] = (string)comboAudioSampleRate3.Text;
+            dr["VAC2_Buffer_Size"] = (string)comboAudioBuffer3.Text;
+            dr["VAC2_IQ_Output"] = (bool)chkVAC2DirectIQ.Checked;
+            dr["VAC2_IQ_Correct"] = (bool)chkVAC2DirectIQCal.Checked;
+            dr["VAC2_Combine_Input_Channels"] = (bool)chkVAC2Combine.Checked;
+            dr["VAC2_Latency_On"] = true;
+            dr["VAC2_Latency_Duration"] = (int)udVAC2Latency.Value;
+
+            dr["Phone_RX_DSP_Buffer"] = (string)comboDSPPhoneRXBuf.Text;
+            dr["Phone_TX_DSP_Buffer"] = (string)comboDSPPhoneTXBuf.Text;
+            dr["Digi_RX_DSP_Buffer"] = (string)comboDSPDigRXBuf.Text;
+            dr["Digi_TX_DSP_Buffer"] = (string)comboDSPDigTXBuf.Text;
+            dr["CW_RX_DSP_Buffer"] = (string)comboDSPCWRXBuf.Text;
+
+            switch (console.CurrentModel)
+            {
+                case Model.FLEX5000:
+                    dr["Mic_Input_On"] = (string)console.fwcMixForm.MicInputSelected;
+                    dr["Mic_Input_Level"] = (int)console.fwcMixForm.MicInput;
+                    dr["Line_Input_On"] = (string)console.fwcMixForm.LineInRCASelected;
+                    dr["Line_Input_Level"] = (int)console.fwcMixForm.LineInRCA;
+                    dr["Balanced_Line_Input_On"] = (string)console.fwcMixForm.LineInPhonoSelected;
+                    dr["Balanced_Line_Input_Level"] = (int)console.fwcMixForm.LineInPhono;
+                    dr["FlexWire_Input_On"] = (string)console.fwcMixForm.LineInDB9Selected;
+                    dr["FlexWire_Input_Level"] = (int)console.fwcMixForm.LineInDB9;
+                    break;
+
+                case Model.FLEX3000:
+                    dr["Mic_Input_On"] = (string)console.flex3000MixerForm.MicInputSelected;
+                    dr["Mic_Input_Level"] = (int)console.flex3000MixerForm.MicInput;
+                    dr["Line_Input_On"] = "0";
+                    dr["Line_Input_Level"] = 0;
+                    dr["Balanced_Line_Input_On"] = "0";
+                    dr["Balanced_Line_Input_Level"] = 0;
+                    dr["FlexWire_Input_On"] = (string)console.flex3000MixerForm.LineInDB9Selected;
+                    dr["FlexWire_Input_Level"] = (int)console.flex3000MixerForm.LineInDB9;
+                    break;
+
+                default:
+                    dr["Mic_Input_On"] = "0";
+                    dr["Mic_Input_Level"] = 0;
+                    dr["Line_Input_On"] = "0";
+                    dr["Line_Input_Level"] = 0;
+                    dr["Balanced_Line_Input_On"] = "0";
+                    dr["Balanced_Line_Input_Level"] = 0;
+                    dr["FlexWire_Input_On"] = "0";
+                    dr["FlexWire_Input_Level"] = 0;
+                    break;
+            }
+            
             if (!comboTXProfileName.Items.Contains(name))
             {
                 DB.ds.Tables["TxProfile"].Rows.Add(dr);
@@ -8478,6 +8913,7 @@ namespace PowerSDR
             console.UpdateTXProfile(name);
         }
 
+        private bool profile_deleted = false;
         private void btnTXProfileDelete_Click(object sender, System.EventArgs e)
         {
             DialogResult dr = MessageBox.Show(
@@ -8488,6 +8924,8 @@ namespace PowerSDR
 
             if (dr == DialogResult.No)
                 return;
+
+            profile_deleted = true;
 
             DataRow[] rows = DB.ds.Tables["TxProfile"].Select(
                 "'" + comboTXProfileName.Text + "' = Name");
@@ -8553,7 +8991,12 @@ namespace PowerSDR
 
         private void udTXAMCarrierLevel_ValueChanged(object sender, System.EventArgs e)
         {
-            console.radio.GetDSPTX(0).TXAMCarrierLevel = Math.Sqrt(0.01 * (double)udTXAMCarrierLevel.Value) * 0.5;
+            console.radio.GetDSPTX(0).TXAMCarrierLevel = Math.Sqrt((0.01 * (double)udTXAMCarrierLevel.Value)/2);
+        }
+
+        private void chkSaveTXProfileOnExit_CheckedChanged(object sender, EventArgs e)
+        {
+            console.SaveTXProfileOnExit = chkSaveTXProfileOnExit.Checked;
         }
 
         private void udMicGainMin_ValueChanged(object sender, System.EventArgs e)
@@ -9337,10 +9780,10 @@ namespace PowerSDR
             //console.PTTBitBangEnabled = chkCATPTTEnabled.Checked; 
             if (comboCATPTTPort.Text.StartsWith("COM"))
                 console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3));
-            console.CATBaudRate = Convert.ToInt32((string)comboCATbaud.SelectedItem, 10);
-            console.CATParity = SDRSerialPort.stringToParity((string)comboCATparity.SelectedItem);
-            console.CATDataBits = SDRSerialPort.stringToDataBits((string)comboCATdatabits.SelectedItem);
-            console.CATStopBits = SDRSerialPort.stringToStopBits((string)comboCATstopbits.SelectedItem);
+            console.CATParity = SDRSerialPort.StringToParity((string)comboCATparity.SelectedItem);
+            console.CATDataBits = int.Parse((string)comboCATdatabits.SelectedItem);
+            console.CATStopBits = SDRSerialPort.StringToStopBits((string)comboCATstopbits.SelectedItem);
+            console.CATEnabled = chkCATEnable.Checked;
 
             // make sure the enabled state of bitbang ptt is correct 
             if (chkCATPTT_RTS.Checked || chkCATPTT_DTR.Checked)
@@ -9382,8 +9825,12 @@ namespace PowerSDR
             {
                 if (chkCATEnable.Focused)
                 {
-                    MessageBox.Show("The CAT port \"" + comboCATPort.Text + "\" is not a valid port.  Please select another port.");
+                    if (chkCATEnable.Focused && chkCATEnable.Checked)
+                    {
+                        MessageBox.Show("The CAT port \"" + comboCATPort.Text + "\" is not a valid port.\n" +
+                            "Please select another port.");
                     chkCATEnable.Checked = false;
+                }
                 }
                 return;
             }
@@ -9442,7 +9889,7 @@ namespace PowerSDR
 
         private void doEnablementOnBitBangEnable()
         {
-            if (console.CATPTTRTS || console.CATPTTDTR)  // if RTS or DTR is selectment, enable is ok 
+            if (comboCATPTTPort.Text != "None" && (chkCATPTT_RTS.Checked || chkCATPTT_DTR.Checked))  // if RTS or DTR & port is not None, enable 
             {
                 chkCATPTTEnabled.Enabled = true;
             }
@@ -9469,13 +9916,15 @@ namespace PowerSDR
         {
             if (initializing) return;
 
+            bool enable_sub_fields;
+
             if (comboCATPTTPort.Text == "" || !comboCATPTTPort.Text.StartsWith("COM"))
             {
-                if (chkCATPTTEnabled.Focused)
+                if (chkCATPTTEnabled.Focused && chkCATPTTEnabled.Checked)
                 {
                     MessageBox.Show("The PTT port \"" + comboCATPTTPort.Text + "\" is not a valid port.  Please select another port.");
-                    chkCATPTTEnabled.Checked = false;
                 }
+                    chkCATPTTEnabled.Checked = false;
                 return;
             }
 
@@ -9492,7 +9941,14 @@ namespace PowerSDR
             }
 
             console.PTTBitBangEnabled = chkCATPTTEnabled.Checked;
-            bool enable_sub_fields = !chkCATPTTEnabled.Checked;
+            if (chkCATPTTEnabled.Checked) // if it's enabled don't allow changing settings on port 
+            {
+                enable_sub_fields = false;
+            }
+            else
+            {
+                enable_sub_fields = true;
+            }
             chkCATPTT_RTS.Enabled = enable_sub_fields;
             chkCATPTT_DTR.Enabled = enable_sub_fields;
             comboCATPTTPort.Enabled = enable_sub_fields;
@@ -9502,20 +9958,52 @@ namespace PowerSDR
         {
             string selection = comboCATparity.SelectedText;
             if (selection == null) return;
-            System.IO.Ports.Parity p = SDRSerialPort.stringToParity(selection);
-            console.CATParity = p;
+
+            console.CATParity = SDRSerialPort.StringToParity(selection);
         }
 
         private void comboCATPort_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            if (comboCATPort.Text == "None")
+            {
+                if (chkCATEnable.Checked)
+                {
+                    if (comboCATPort.Focused)
+                        chkCATEnable.Checked = false;
+                }
+
+                chkCATEnable.Enabled = false;
+            }
+            else chkCATEnable.Enabled = true;
+
             if (comboCATPort.Text.StartsWith("COM"))
                 console.CATPort = Int32.Parse(comboCATPort.Text.Substring(3));
         }
 
         private void comboCATPTTPort_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            if (comboCATPTTPort.Text == "None")
+            {
+                if (chkCATPTTEnabled.Checked)
+                {
+                    if (comboCATPTTPort.Focused)
+                        chkCATPTTEnabled.Checked = false;
+                }
+
+                //chkCATEnable.Enabled = false;
+                doEnablementOnBitBangEnable();
+            }
+            else
+            {
+                if (chkCATPTT_RTS.Checked || chkCATPTT_DTR.Checked)
+                    //chkCATEnable.Enabled = true;
+                    doEnablementOnBitBangEnable();
+            }
+
             if (comboCATPTTPort.Text.StartsWith("COM"))
                 console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3));
+            if (!comboCATPTTPort.Focused)
+                chkCATPTTEnabled_CheckedChanged(sender, e);
         }
 
         private void comboCATbaud_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -9527,13 +10015,13 @@ namespace PowerSDR
         private void comboCATdatabits_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboCATdatabits.SelectedIndex >= 0)
-                console.CATDataBits = SDRSerialPort.stringToDataBits(comboCATdatabits.Text);
+                console.CATDataBits = int.Parse(comboCATdatabits.Text);
         }
 
         private void comboCATstopbits_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboCATstopbits.SelectedIndex >= 0)
-                console.CATStopBits = SDRSerialPort.stringToStopBits(comboCATstopbits.Text);
+                console.CATStopBits = SDRSerialPort.StringToStopBits(comboCATstopbits.Text);
         }
 
         private void btnCATTest_Click(object sender, System.EventArgs e)
@@ -10421,11 +10909,6 @@ namespace PowerSDR
             udDSPCWPitch.Value = udDSPCWPitch.Value;
         }
 
-        private void udCWKeyerDeBounce_LostFocus(object sender, EventArgs e)
-        {
-            udCWKeyerDeBounce.Value = udCWKeyerDeBounce.Value;
-        }
-
         private void udCWKeyerWeight_LostFocus(object sender, EventArgs e)
         {
             udCWKeyerWeight.Value = udCWKeyerWeight.Value;
@@ -10803,7 +11286,15 @@ namespace PowerSDR
 
         private void chkCWKeyerMode_CheckedChanged(object sender, System.EventArgs e)
         {
-            console.Keyer.KeyerMode = chkCWKeyerMode.Checked ? 1 : 0;
+           // console.Keyer.KeyerMode = chkCWKeyerMode.Checked ? 1 : 0;
+            if (chkCWKeyerMode.Checked)
+            {
+                if (chkModeBStrict.Checked)
+                    CWKeyer.CurrentIambicMode = CWKeyer.IambicMode.ModeBStrict;
+                else
+                    CWKeyer.CurrentIambicMode = CWKeyer.IambicMode.ModeB;
+            }
+            else CWKeyer.CurrentIambicMode = CWKeyer.IambicMode.ModeA;
         }
 
         private void chkDisableToolTips_CheckedChanged(object sender, System.EventArgs e)
@@ -11190,7 +11681,8 @@ namespace PowerSDR
 
         private void chkCWAutoSwitchMode_CheckedChanged(object sender, System.EventArgs e)
         {
-            console.Keyer.AutoSwitchMode = chkCWAutoSwitchMode.Checked;
+           // console.Keyer.AutoSwitchMode = chkCWAutoSwitchMode.Checked;
+            console.CWAutoModeSwitch = chkCWAutoSwitchMode.Checked;
         }
 
         private void clrbtnGenBackground_Changed(object sender, System.EventArgs e)//k6jca 1/13/08
@@ -11335,6 +11827,11 @@ namespace PowerSDR
             console.MuteRX1OnVFOBTX = chkRX2AutoMuteRX1OnVFOBTX.Checked;
         }
 
+        private void chkRX2BlankDisplayOnVFOATX_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.BlankRX2OnVFOATX = chkRX2BlankDisplayOnVFOATX.Checked;
+        }
+        
         private void chkTXExpert_CheckedChanged(object sender, System.EventArgs e)
         {
             grpTXProfileDef.Visible = chkTXExpert.Checked;
@@ -11547,9 +12044,13 @@ namespace PowerSDR
             if (console.fwc_init && (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000))
             {
                 FWC.ignore_dash = chkCWKeyerMonoCable.Checked;
-                if (chkCWKeyerMonoCable.Checked && console.Keyer != null)
-                    console.Keyer.FWCDash = false;
+                //  if (chkCWKeyerMonoCable.Checked && console.Keyer != null)
+                //    console.Keyer.FWCDash = false;
             }
+
+                if (chkCWKeyerMonoCable.Checked)
+                    CWKeyer.SensorEnqueue(new CWSensorItem(CWSensorItem.InputType.Dash, false));
+           
         }
 
         private void btnExportDB_Click(object sender, EventArgs e)
@@ -14012,7 +14513,23 @@ namespace PowerSDR
                 JanusAudio.SetDiscoveryMode(0);
         }
 
-        private void chkRxOutOnTx_CheckedChanged(object sender, EventArgs e)
+      private void chkStrictCharSpacing_CheckedChanged(object sender, EventArgs e)
+        {
+            CWKeyer.AutoCharSpace = chkStrictCharSpacing.Checked;
+        }
+
+        private void chkModeBStrict_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCWKeyerMode.Checked)
+            {
+                if (chkModeBStrict.Checked)
+                    CWKeyer.CurrentIambicMode = CWKeyer.IambicMode.ModeBStrict;
+                else
+                    CWKeyer.CurrentIambicMode = CWKeyer.IambicMode.ModeB;
+            }
+        }
+
+       private void chkRxOutOnTx_CheckedChanged(object sender, EventArgs e)
         {
             Alex.RxOutOnTx = chkRxOutOnTx.Checked;
         }
@@ -14142,6 +14659,11 @@ namespace PowerSDR
             else JanusAudio.EnableApolloTuner(0);
         }
 
+        private void chkEClassModulation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkEClassModulation.Checked) JanusAudio.EnableEClassModulation(1);
+            else JanusAudio.EnableEClassModulation(0);
+        }
     }
 
     #region PADeviceInfo Helper Class

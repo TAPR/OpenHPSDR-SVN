@@ -540,7 +540,7 @@ KD5TFDVK6APHAUDIO_API int GetC1Bits(void) {
 
 
 KD5TFDVK6APHAUDIO_API void SetPennyOCBits(int b) { 
-	PennyOCBits = b; 
+	PennyOCBits = b << 1; 
 	return;
 }
 
@@ -671,6 +671,15 @@ KD5TFDVK6APHAUDIO_API void EnableApolloAutoTune(int bits) {
 	else
 		ApolloATU = 0;
 	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableEClassModulation(int bit) { 
+        if ( bit == 0 ) {
+                EClass = 0;
+        }
+        else {
+                EClass = 1;
+        }
 }
 
 KD5TFDVK6APHAUDIO_API void SetHermesFilter(int bits) { 

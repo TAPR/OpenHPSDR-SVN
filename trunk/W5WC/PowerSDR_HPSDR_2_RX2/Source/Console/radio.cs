@@ -86,16 +86,6 @@ namespace PowerSDR
 	{
 		public static void SyncStatic()
 		{
-			RadioDSP.KeyerDebounce = RadioDSP.KeyerDebounce;
-			RadioDSP.KeyerFreq = RadioDSP.KeyerFreq;
-			RadioDSP.KeyerIambic = RadioDSP.KeyerIambic;
-			RadioDSP.KeyerIambicMode = RadioDSP.KeyerIambicMode;
-			RadioDSP.KeyerRamp = RadioDSP.KeyerRamp;
-			RadioDSP.KeyerResetSize = RadioDSP.KeyerResetSize;
-			RadioDSP.KeyerReversePaddle = RadioDSP.KeyerReversePaddle;
-			RadioDSP.KeyerSampleRate = RadioDSP.KeyerSampleRate;
-			RadioDSP.KeyerSpeed = RadioDSP.KeyerSpeed;
-			RadioDSP.KeyerWeight = RadioDSP.KeyerWeight;
 			RadioDSP.SampleRate = RadioDSP.SampleRate;
 		}
 
@@ -107,8 +97,10 @@ namespace PowerSDR
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
             String version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
+           // app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+              //  + "\\FlexRadio Systems\\PowerSDR v" + version + "\\wisdom";
             app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                + "\\FlexRadio Systems\\PowerSDR v" + version + "\\wisdom";
+                + "\\FlexRadio Systems\\PowerSDR RX2 (W5WC)\\wisdom";
 
 			DttSP.SetupSDR(app_data_path);
 		}
@@ -116,117 +108,6 @@ namespace PowerSDR
 		public static void DestroyDSP()
 		{
 			DttSP.Exit();
-		}
-
-		private static float keyer_sample_rate = 48000.0f;
-		public static float KeyerSampleRate
-		{
-			get { return keyer_sample_rate; }
-			set 
-			{
-				keyer_sample_rate = value;
-				DttSP.SetKeyerSampleRate(value);
-			}
-		}
-
-		private static float keyer_speed = 25;
-		public static float KeyerSpeed
-		{
-			get { return keyer_speed; }
-			set
-			{
-				keyer_speed = value;
-				DttSP.SetKeyerSpeed(value);
-			}
-		}
-
-		private static float keyer_freq = 600.0f;
-		public static float KeyerFreq
-		{
-			get { return keyer_freq; }
-			set 
-			{
-				keyer_freq = value;
-				DttSP.SetKeyerFreq(value);
-			}
-
-		}
-
-		private static float keyer_ramp = 5;
-		public static float KeyerRamp
-		{
-			get { return keyer_ramp; }
-			set
-			{
-				keyer_ramp = value;
-				DttSP.SetKeyerRamp(value);
-			}
-		}
-
-		private static bool keyer_iambic = true;
-		public static bool KeyerIambic
-		{
-			get { return keyer_iambic; }
-			set
-			{
-				keyer_iambic = value;
-				DttSP.SetKeyerIambic(value);
-			}
-		}
-
-		private static bool keyer_reverse_paddle = false;
-		public static bool KeyerReversePaddle
-		{
-			get { return keyer_reverse_paddle; }
-			set
-			{
-				keyer_reverse_paddle = value;
-				DttSP.SetKeyerRevPdl(value);
-			}
-		}
-
-		private static int keyer_debounce = 1;
-		public static int KeyerDebounce
-		{
-			get { return keyer_debounce; }
-			set
-			{
-				keyer_debounce = value;
-				DttSP.SetKeyerDeBounce(value);
-			}
-		}
-
-		private static int keyer_weight = 50;
-		public static int KeyerWeight
-		{
-			get { return keyer_weight; }
-			set
-			{
-				keyer_weight = value;
-				DttSP.SetKeyerWeight(value);
-			}
-		}
-
-		private static int keyer_reset_size = 768;
-		public static int KeyerResetSize
-		{
-			get { return keyer_reset_size; }
-			set 
-			{
-				keyer_reset_size = value;
-				DttSP.SetKeyerResetSize(value);
-			}
-		}
-
-		private static int keyer_iambic_mode = 0;
-		public static int KeyerIambicMode
-		{
-			get { return keyer_iambic_mode; }
-			set
-			{
-				keyer_iambic_mode = value;
-				DttSP.SetKeyerMode(value);
-			}
 		}
 
 		private static double sample_rate = 48000.0;
@@ -537,11 +418,11 @@ namespace PowerSDR
 		private int nr_taps = 64;
 		private int nr_delay_dsp = 8;
 		private int nr_delay = 8;
-		private double nr_gain_dsp = 0.00016;
-		private double nr_gain = 0.00016;
-		private double nr_leak_dsp = 0.0000010;
-		private double nr_leak = 0.0000010;
-		public void SetNRVals(int taps, int delay, double gain, double leak)
+        private double nr_gain_dsp = 16e-4;
+        private double nr_gain = 16e-4;
+        private double nr_leak_dsp = 10e-7;
+        private double nr_leak = 10e-7;
+        public void SetNRVals(int taps, int delay, double gain, double leak)
 		{
 			nr_taps = taps;
 			nr_delay = delay;

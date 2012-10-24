@@ -41,6 +41,7 @@ Santa Cruz, CA  95060
 typedef struct _wcpagc
 {
 	int mode;
+	int pmode;
 	COMPLEX *buff;
 	int io_buffsize;
 	REAL sample_rate;
@@ -105,6 +106,7 @@ extern void loadWcpAGC (WCPAGC a);
 extern void WcpAGC (WCPAGC a);
 
 extern WCPAGC newWcpAGC (	AGCMODE mode,
+							int pmode,
 							COMPLEX *buff,
 							int io_buffsize,
 							REAL sample_rate,

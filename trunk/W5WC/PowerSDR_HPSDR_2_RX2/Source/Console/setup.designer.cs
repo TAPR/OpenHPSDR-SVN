@@ -343,6 +343,7 @@
             this.lblOptMaxFilter = new System.Windows.Forms.LabelTS();
             this.chkOptFilterSaveChanges = new System.Windows.Forms.CheckBoxTS();
             this.tpRX2 = new System.Windows.Forms.TabPage();
+            this.chkRX2BlankDisplayOnVFOATX = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2AutoMuteRX1OnVFOBTX = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2AutoMuteTX = new System.Windows.Forms.CheckBoxTS();
             this.tpGeneralNavigation = new System.Windows.Forms.TabPage();
@@ -1216,15 +1217,15 @@
             this.lblDSPCWPitchFreq = new System.Windows.Forms.LabelTS();
             this.udDSPCWPitch = new System.Windows.Forms.NumericUpDownTS();
             this.grpDSPKeyerOptions = new System.Windows.Forms.GroupBoxTS();
+            this.chkDSPKeyerSidetone = new System.Windows.Forms.CheckBoxTS();
+            this.chkStrictCharSpacing = new System.Windows.Forms.CheckBoxTS();
+            this.chkModeBStrict = new System.Windows.Forms.CheckBoxTS();
             this.chkCWKeyerMonoCable = new System.Windows.Forms.CheckBoxTS();
             this.chkCWKeyerMode = new System.Windows.Forms.CheckBoxTS();
             this.chkCWKeyerRevPdl = new System.Windows.Forms.CheckBoxTS();
-            this.chkDSPKeyerDisableMonitor = new System.Windows.Forms.CheckBoxTS();
             this.chkCWKeyerIambic = new System.Windows.Forms.CheckBoxTS();
             this.chkCWAutoSwitchMode = new System.Windows.Forms.CheckBoxTS();
             this.grpDSPKeyerSignalShaping = new System.Windows.Forms.GroupBoxTS();
-            this.udCWKeyerDeBounce = new System.Windows.Forms.NumericUpDownTS();
-            this.lblKeyerDeBounce = new System.Windows.Forms.LabelTS();
             this.udCWKeyerWeight = new System.Windows.Forms.NumericUpDownTS();
             this.lblCWWeight = new System.Windows.Forms.LabelTS();
             this.udCWKeyerRamp = new System.Windows.Forms.NumericUpDownTS();
@@ -1297,6 +1298,9 @@
             this.udDSPAGCFixedGaindB = new System.Windows.Forms.NumericUpDownTS();
             this.lblDSPAGCFixed = new System.Windows.Forms.LabelTS();
             this.tpTransmit = new System.Windows.Forms.TabPage();
+            this.chkSaveTXProfileOnExit = new System.Windows.Forms.CheckBoxTS();
+            this.chkAutoSaveTXProfile = new System.Windows.Forms.CheckBoxTS();
+            this.chkEClassModulation = new System.Windows.Forms.CheckBoxTS();
             this.chkTXLimitSlew = new System.Windows.Forms.CheckBoxTS();
             this.udTXFilterLowSave = new System.Windows.Forms.NumericUpDownTS();
             this.udTXFilterHighSave = new System.Windows.Forms.NumericUpDownTS();
@@ -2268,7 +2272,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPCWPitch)).BeginInit();
             this.grpDSPKeyerOptions.SuspendLayout();
             this.grpDSPKeyerSignalShaping.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udCWKeyerDeBounce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCWKeyerWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCWKeyerRamp)).BeginInit();
             this.grpDSPKeyerSemiBreakIn.SuspendLayout();
@@ -6979,6 +6982,7 @@
             // tpRX2
             // 
             this.tpRX2.BackColor = System.Drawing.SystemColors.Control;
+            this.tpRX2.Controls.Add(this.chkRX2BlankDisplayOnVFOATX);
             this.tpRX2.Controls.Add(this.chkRX2AutoMuteRX1OnVFOBTX);
             this.tpRX2.Controls.Add(this.chkRX2AutoMuteTX);
             this.tpRX2.Location = new System.Drawing.Point(4, 22);
@@ -6986,6 +6990,17 @@
             this.tpRX2.Size = new System.Drawing.Size(592, 318);
             this.tpRX2.TabIndex = 4;
             this.tpRX2.Text = "RX2";
+            // 
+            // chkRX2BlankDisplayOnVFOATX
+            // 
+            this.chkRX2BlankDisplayOnVFOATX.Image = null;
+            this.chkRX2BlankDisplayOnVFOATX.Location = new System.Drawing.Point(8, 56);
+            this.chkRX2BlankDisplayOnVFOATX.Name = "chkRX2BlankDisplayOnVFOATX";
+            this.chkRX2BlankDisplayOnVFOATX.Size = new System.Drawing.Size(196, 24);
+            this.chkRX2BlankDisplayOnVFOATX.TabIndex = 3;
+            this.chkRX2BlankDisplayOnVFOATX.Text = "Blank RX2 Display on VFO A TX";
+            this.toolTip1.SetToolTip(this.chkRX2BlankDisplayOnVFOATX, "Blanks RX2 Display when transmitting on VFO B when checked. ");
+            this.chkRX2BlankDisplayOnVFOATX.CheckedChanged += new System.EventHandler(this.chkRX2BlankDisplayOnVFOATX_CheckedChanged);
             // 
             // chkRX2AutoMuteRX1OnVFOBTX
             // 
@@ -19225,33 +19240,75 @@
             // 
             // grpDSPKeyerOptions
             // 
+            this.grpDSPKeyerOptions.Controls.Add(this.chkDSPKeyerSidetone);
+            this.grpDSPKeyerOptions.Controls.Add(this.chkStrictCharSpacing);
+            this.grpDSPKeyerOptions.Controls.Add(this.chkModeBStrict);
             this.grpDSPKeyerOptions.Controls.Add(this.chkCWKeyerMonoCable);
             this.grpDSPKeyerOptions.Controls.Add(this.chkCWKeyerMode);
             this.grpDSPKeyerOptions.Controls.Add(this.chkCWKeyerRevPdl);
-            this.grpDSPKeyerOptions.Controls.Add(this.chkDSPKeyerDisableMonitor);
             this.grpDSPKeyerOptions.Controls.Add(this.chkCWKeyerIambic);
             this.grpDSPKeyerOptions.Controls.Add(this.chkCWAutoSwitchMode);
             this.grpDSPKeyerOptions.Location = new System.Drawing.Point(296, 8);
             this.grpDSPKeyerOptions.Name = "grpDSPKeyerOptions";
-            this.grpDSPKeyerOptions.Size = new System.Drawing.Size(130, 185);
+            this.grpDSPKeyerOptions.Size = new System.Drawing.Size(142, 224);
             this.grpDSPKeyerOptions.TabIndex = 37;
             this.grpDSPKeyerOptions.TabStop = false;
             this.grpDSPKeyerOptions.Text = "Options";
+            // 
+            // chkDSPKeyerSidetone
+            // 
+            this.chkDSPKeyerSidetone.Checked = true;
+            this.chkDSPKeyerSidetone.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDSPKeyerSidetone.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDSPKeyerSidetone.Image = null;
+            this.chkDSPKeyerSidetone.Location = new System.Drawing.Point(16, 48);
+            this.chkDSPKeyerSidetone.Name = "chkDSPKeyerSidetone";
+            this.chkDSPKeyerSidetone.Size = new System.Drawing.Size(113, 16);
+            this.chkDSPKeyerSidetone.TabIndex = 47;
+            this.chkDSPKeyerSidetone.Text = "Sidetone";
+            this.toolTip1.SetToolTip(this.chkDSPKeyerSidetone, "Turns the sidetone in the speakers on/off");
+            this.chkDSPKeyerSidetone.CheckedChanged += new System.EventHandler(this.chkDSPKeyerSidetone_CheckedChanged);
+            // 
+            // chkStrictCharSpacing
+            // 
+            this.chkStrictCharSpacing.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkStrictCharSpacing.Image = null;
+            this.chkStrictCharSpacing.Location = new System.Drawing.Point(16, 192);
+            this.chkStrictCharSpacing.Name = "chkStrictCharSpacing";
+            this.chkStrictCharSpacing.Size = new System.Drawing.Size(113, 16);
+            this.chkStrictCharSpacing.TabIndex = 46;
+            this.chkStrictCharSpacing.Text = "Strict Char Space";
+            this.toolTip1.SetToolTip(this.chkStrictCharSpacing, "If enabled, will automatically force a full space after each character.");
+            this.chkStrictCharSpacing.CheckedChanged += new System.EventHandler(this.chkStrictCharSpacing_CheckedChanged);
+            // 
+            // chkModeBStrict
+            // 
+            this.chkModeBStrict.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkModeBStrict.Image = null;
+            this.chkModeBStrict.Location = new System.Drawing.Point(16, 144);
+            this.chkModeBStrict.Name = "chkModeBStrict";
+            this.chkModeBStrict.Size = new System.Drawing.Size(113, 16);
+            this.chkModeBStrict.TabIndex = 45;
+            this.chkModeBStrict.Text = "Mode B Strict";
+            this.toolTip1.SetToolTip(this.chkModeBStrict, "Sets the detection threshold to halfway into the current element.");
+            this.chkModeBStrict.CheckedChanged += new System.EventHandler(this.chkModeBStrict_CheckedChanged);
             // 
             // chkCWKeyerMonoCable
             // 
             this.chkCWKeyerMonoCable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCWKeyerMonoCable.Image = null;
-            this.chkCWKeyerMonoCable.Location = new System.Drawing.Point(16, 94);
+            this.chkCWKeyerMonoCable.Location = new System.Drawing.Point(16, 96);
             this.chkCWKeyerMonoCable.Name = "chkCWKeyerMonoCable";
             this.chkCWKeyerMonoCable.Size = new System.Drawing.Size(88, 16);
             this.chkCWKeyerMonoCable.TabIndex = 42;
-            this.chkCWKeyerMonoCable.Text = "Mono Cable";
-            this.toolTip1.SetToolTip(this.chkCWKeyerMonoCable, "Allows the use of a mono 1/4\" cable on the FLEX-x000 series of radios.");
+            this.chkCWKeyerMonoCable.Text = "2-Wire Cable";
+            this.toolTip1.SetToolTip(this.chkCWKeyerMonoCable, "Allows the use of a straight key and other devices suce as paddles on the ");
             this.chkCWKeyerMonoCable.CheckedChanged += new System.EventHandler(this.chkCWKeyerMonoCable_CheckedChanged);
             // 
             // chkCWKeyerMode
             // 
+            this.chkCWKeyerMode.Checked = true;
+            this.chkCWKeyerMode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCWKeyerMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCWKeyerMode.Image = null;
             this.chkCWKeyerMode.Location = new System.Drawing.Point(16, 120);
@@ -19268,23 +19325,11 @@
             this.chkCWKeyerRevPdl.Image = null;
             this.chkCWKeyerRevPdl.Location = new System.Drawing.Point(16, 72);
             this.chkCWKeyerRevPdl.Name = "chkCWKeyerRevPdl";
-            this.chkCWKeyerRevPdl.Size = new System.Drawing.Size(88, 16);
+            this.chkCWKeyerRevPdl.Size = new System.Drawing.Size(113, 16);
             this.chkCWKeyerRevPdl.TabIndex = 38;
-            this.chkCWKeyerRevPdl.Text = "Rev. Paddle";
+            this.chkCWKeyerRevPdl.Text = "Reverse Paddles";
             this.toolTip1.SetToolTip(this.chkCWKeyerRevPdl, "Reverses the input paddle -- Dot becomes Dash and vice versa.");
             this.chkCWKeyerRevPdl.CheckedChanged += new System.EventHandler(this.chkCWKeyerRevPdl_CheckedChanged);
-            // 
-            // chkDSPKeyerDisableMonitor
-            // 
-            this.chkDSPKeyerDisableMonitor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDSPKeyerDisableMonitor.Image = null;
-            this.chkDSPKeyerDisableMonitor.Location = new System.Drawing.Point(16, 48);
-            this.chkDSPKeyerDisableMonitor.Name = "chkDSPKeyerDisableMonitor";
-            this.chkDSPKeyerDisableMonitor.Size = new System.Drawing.Size(104, 16);
-            this.chkDSPKeyerDisableMonitor.TabIndex = 37;
-            this.chkDSPKeyerDisableMonitor.Text = "Disable Monitor";
-            this.toolTip1.SetToolTip(this.chkDSPKeyerDisableMonitor, "Disable the monitor output for CW Keyer");
-            this.chkDSPKeyerDisableMonitor.CheckedChanged += new System.EventHandler(this.chkDSPKeyerDisableMonitor_CheckedChanged);
             // 
             // chkCWKeyerIambic
             // 
@@ -19304,7 +19349,7 @@
             // 
             this.chkCWAutoSwitchMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCWAutoSwitchMode.Image = null;
-            this.chkCWAutoSwitchMode.Location = new System.Drawing.Point(16, 144);
+            this.chkCWAutoSwitchMode.Location = new System.Drawing.Point(16, 168);
             this.chkCWAutoSwitchMode.Name = "chkCWAutoSwitchMode";
             this.chkCWAutoSwitchMode.Size = new System.Drawing.Size(109, 16);
             this.chkCWAutoSwitchMode.TabIndex = 41;
@@ -19315,58 +19360,16 @@
             // 
             // grpDSPKeyerSignalShaping
             // 
-            this.grpDSPKeyerSignalShaping.Controls.Add(this.udCWKeyerDeBounce);
-            this.grpDSPKeyerSignalShaping.Controls.Add(this.lblKeyerDeBounce);
             this.grpDSPKeyerSignalShaping.Controls.Add(this.udCWKeyerWeight);
             this.grpDSPKeyerSignalShaping.Controls.Add(this.lblCWWeight);
             this.grpDSPKeyerSignalShaping.Controls.Add(this.udCWKeyerRamp);
             this.grpDSPKeyerSignalShaping.Controls.Add(this.lblCWRamp);
-            this.grpDSPKeyerSignalShaping.Location = new System.Drawing.Point(432, 8);
+            this.grpDSPKeyerSignalShaping.Location = new System.Drawing.Point(448, 8);
             this.grpDSPKeyerSignalShaping.Name = "grpDSPKeyerSignalShaping";
-            this.grpDSPKeyerSignalShaping.Size = new System.Drawing.Size(136, 128);
+            this.grpDSPKeyerSignalShaping.Size = new System.Drawing.Size(124, 128);
             this.grpDSPKeyerSignalShaping.TabIndex = 34;
             this.grpDSPKeyerSignalShaping.TabStop = false;
             this.grpDSPKeyerSignalShaping.Text = "Signal Shaping";
-            // 
-            // udCWKeyerDeBounce
-            // 
-            this.udCWKeyerDeBounce.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udCWKeyerDeBounce.Location = new System.Drawing.Point(80, 72);
-            this.udCWKeyerDeBounce.Maximum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.udCWKeyerDeBounce.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udCWKeyerDeBounce.Name = "udCWKeyerDeBounce";
-            this.udCWKeyerDeBounce.Size = new System.Drawing.Size(40, 20);
-            this.udCWKeyerDeBounce.TabIndex = 42;
-            this.udCWKeyerDeBounce.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udCWKeyerDeBounce.Visible = false;
-            this.udCWKeyerDeBounce.ValueChanged += new System.EventHandler(this.udCWKeyerDeBounce_ValueChanged);
-            this.udCWKeyerDeBounce.LostFocus += new System.EventHandler(this.udCWKeyerDeBounce_LostFocus);
-            // 
-            // lblKeyerDeBounce
-            // 
-            this.lblKeyerDeBounce.Image = null;
-            this.lblKeyerDeBounce.Location = new System.Drawing.Point(16, 72);
-            this.lblKeyerDeBounce.Name = "lblKeyerDeBounce";
-            this.lblKeyerDeBounce.Size = new System.Drawing.Size(64, 16);
-            this.lblKeyerDeBounce.TabIndex = 41;
-            this.lblKeyerDeBounce.Text = "Debounce:";
-            this.lblKeyerDeBounce.Visible = false;
             // 
             // udCWKeyerWeight
             // 
@@ -20662,6 +20665,9 @@
             // 
             // tpTransmit
             // 
+            this.tpTransmit.Controls.Add(this.chkSaveTXProfileOnExit);
+            this.tpTransmit.Controls.Add(this.chkAutoSaveTXProfile);
+            this.tpTransmit.Controls.Add(this.chkEClassModulation);
             this.tpTransmit.Controls.Add(this.chkTXLimitSlew);
             this.tpTransmit.Controls.Add(this.udTXFilterLowSave);
             this.tpTransmit.Controls.Add(this.udTXFilterHighSave);
@@ -20682,10 +20688,44 @@
             this.tpTransmit.TabIndex = 5;
             this.tpTransmit.Text = "Transmit";
             // 
+            // chkSaveTXProfileOnExit
+            // 
+            this.chkSaveTXProfileOnExit.Checked = true;
+            this.chkSaveTXProfileOnExit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSaveTXProfileOnExit.Image = null;
+            this.chkSaveTXProfileOnExit.Location = new System.Drawing.Point(306, 232);
+            this.chkSaveTXProfileOnExit.Name = "chkSaveTXProfileOnExit";
+            this.chkSaveTXProfileOnExit.Size = new System.Drawing.Size(235, 26);
+            this.chkSaveTXProfileOnExit.TabIndex = 67;
+            this.chkSaveTXProfileOnExit.Text = "Auto Save TX Profile on PowerSDR close";
+            this.toolTip1.SetToolTip(this.chkSaveTXProfileOnExit, "Automatically saves the current TX Profile when PowerSDR is closed");
+            this.chkSaveTXProfileOnExit.CheckedChanged += new System.EventHandler(this.chkSaveTXProfileOnExit_CheckedChanged);
+            // 
+            // chkAutoSaveTXProfile
+            // 
+            this.chkAutoSaveTXProfile.Image = null;
+            this.chkAutoSaveTXProfile.Location = new System.Drawing.Point(306, 261);
+            this.chkAutoSaveTXProfile.Name = "chkAutoSaveTXProfile";
+            this.chkAutoSaveTXProfile.Size = new System.Drawing.Size(189, 23);
+            this.chkAutoSaveTXProfile.TabIndex = 66;
+            this.chkAutoSaveTXProfile.Text = "Auto Save TX Profile on change";
+            this.toolTip1.SetToolTip(this.chkAutoSaveTXProfile, "Automatically saves the current TX Profile if another profile is selected");
+            // 
+            // chkEClassModulation
+            // 
+            this.chkEClassModulation.Image = null;
+            this.chkEClassModulation.Location = new System.Drawing.Point(326, 92);
+            this.chkEClassModulation.Name = "chkEClassModulation";
+            this.chkEClassModulation.Size = new System.Drawing.Size(83, 16);
+            this.chkEClassModulation.TabIndex = 65;
+            this.chkEClassModulation.Text = "Class E";
+            this.toolTip1.SetToolTip(this.chkEClassModulation, "Enables Class E modulation");
+            this.chkEClassModulation.CheckedChanged += new System.EventHandler(this.chkEClassModulation_CheckedChanged);
+            // 
             // chkTXLimitSlew
             // 
             this.chkTXLimitSlew.Image = null;
-            this.chkTXLimitSlew.Location = new System.Drawing.Point(305, 70);
+            this.chkTXLimitSlew.Location = new System.Drawing.Point(326, 70);
             this.chkTXLimitSlew.Name = "chkTXLimitSlew";
             this.chkTXLimitSlew.Size = new System.Drawing.Size(83, 16);
             this.chkTXLimitSlew.TabIndex = 61;
@@ -20701,7 +20741,7 @@
             0,
             0,
             0});
-            this.udTXFilterLowSave.Location = new System.Drawing.Point(341, 128);
+            this.udTXFilterLowSave.Location = new System.Drawing.Point(224, 286);
             this.udTXFilterLowSave.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -20730,7 +20770,7 @@
             0,
             0,
             0});
-            this.udTXFilterHighSave.Location = new System.Drawing.Point(341, 101);
+            this.udTXFilterHighSave.Location = new System.Drawing.Point(152, 286);
             this.udTXFilterHighSave.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -20936,23 +20976,24 @@
             this.chkTXExpert.Checked = true;
             this.chkTXExpert.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTXExpert.Image = null;
-            this.chkTXExpert.Location = new System.Drawing.Point(480, 166);
+            this.chkTXExpert.Location = new System.Drawing.Point(477, 3);
             this.chkTXExpert.Name = "chkTXExpert";
-            this.chkTXExpert.Size = new System.Drawing.Size(56, 24);
+            this.chkTXExpert.Size = new System.Drawing.Size(96, 24);
             this.chkTXExpert.TabIndex = 55;
-            this.chkTXExpert.Text = "Expert";
+            this.chkTXExpert.Text = "More Profiles";
+            this.toolTip1.SetToolTip(this.chkTXExpert, "Check to display additional default preset TX Profiles");
             this.chkTXExpert.CheckedChanged += new System.EventHandler(this.chkTXExpert_CheckedChanged);
             // 
             // grpTXProfileDef
             // 
             this.grpTXProfileDef.Controls.Add(this.btnTXProfileDefImport);
             this.grpTXProfileDef.Controls.Add(this.lstTXProfileDef);
-            this.grpTXProfileDef.Location = new System.Drawing.Point(440, 8);
+            this.grpTXProfileDef.Location = new System.Drawing.Point(445, 28);
             this.grpTXProfileDef.Name = "grpTXProfileDef";
             this.grpTXProfileDef.Size = new System.Drawing.Size(136, 152);
             this.grpTXProfileDef.TabIndex = 54;
             this.grpTXProfileDef.TabStop = false;
-            this.grpTXProfileDef.Text = "TX Profile Defaults";
+            this.grpTXProfileDef.Text = "Additional TX Profiles";
             // 
             // btnTXProfileDefImport
             // 
@@ -20976,9 +21017,9 @@
             // 
             this.grpTXAM.Controls.Add(this.lblTXAMCarrierLevel);
             this.grpTXAM.Controls.Add(this.udTXAMCarrierLevel);
-            this.grpTXAM.Location = new System.Drawing.Point(435, 216);
+            this.grpTXAM.Location = new System.Drawing.Point(305, 123);
             this.grpTXAM.Name = "grpTXAM";
-            this.grpTXAM.Size = new System.Drawing.Size(144, 56);
+            this.grpTXAM.Size = new System.Drawing.Size(137, 56);
             this.grpTXAM.TabIndex = 52;
             this.grpTXAM.TabStop = false;
             this.grpTXAM.Text = "AM";
@@ -20986,7 +21027,7 @@
             // lblTXAMCarrierLevel
             // 
             this.lblTXAMCarrierLevel.Image = null;
-            this.lblTXAMCarrierLevel.Location = new System.Drawing.Point(8, 24);
+            this.lblTXAMCarrierLevel.Location = new System.Drawing.Point(1, 24);
             this.lblTXAMCarrierLevel.Name = "lblTXAMCarrierLevel";
             this.lblTXAMCarrierLevel.Size = new System.Drawing.Size(72, 16);
             this.lblTXAMCarrierLevel.TabIndex = 5;
@@ -21000,7 +21041,7 @@
             0,
             0,
             65536});
-            this.udTXAMCarrierLevel.Location = new System.Drawing.Point(80, 24);
+            this.udTXAMCarrierLevel.Location = new System.Drawing.Point(76, 20);
             this.udTXAMCarrierLevel.Maximum = new decimal(new int[] {
             125,
             0,
@@ -21435,7 +21476,7 @@
             // chkDCBlock
             // 
             this.chkDCBlock.Image = null;
-            this.chkDCBlock.Location = new System.Drawing.Point(480, 190);
+            this.chkDCBlock.Location = new System.Drawing.Point(501, 264);
             this.chkDCBlock.Name = "chkDCBlock";
             this.chkDCBlock.Size = new System.Drawing.Size(72, 16);
             this.chkDCBlock.TabIndex = 48;
@@ -24505,6 +24546,7 @@
             // 
             this.chkTXPanFill.Checked = true;
             this.chkTXPanFill.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTXPanFill.Enabled = false;
             this.chkTXPanFill.Image = null;
             this.chkTXPanFill.Location = new System.Drawing.Point(8, 139);
             this.chkTXPanFill.Name = "chkTXPanFill";
@@ -30462,7 +30504,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPCWPitch)).EndInit();
             this.grpDSPKeyerOptions.ResumeLayout(false);
             this.grpDSPKeyerSignalShaping.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.udCWKeyerDeBounce)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCWKeyerWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCWKeyerRamp)).EndInit();
             this.grpDSPKeyerSemiBreakIn.ResumeLayout(false);
@@ -30835,5 +30876,9 @@
         private System.Windows.Forms.GroupBoxTS grpApolloCtrl;
         private System.Windows.Forms.CheckBoxTS chkApolloFilter;
         private System.Windows.Forms.CheckBoxTS chkApolloTuner;
+        private System.Windows.Forms.CheckBoxTS chkEClassModulation;
+        private System.Windows.Forms.CheckBoxTS chkRX2BlankDisplayOnVFOATX;
+        private System.Windows.Forms.CheckBoxTS chkSaveTXProfileOnExit;
+        private System.Windows.Forms.CheckBoxTS chkAutoSaveTXProfile;
     }
 }

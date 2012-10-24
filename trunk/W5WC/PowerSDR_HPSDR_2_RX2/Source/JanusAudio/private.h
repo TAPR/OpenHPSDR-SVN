@@ -298,6 +298,7 @@ extern int UserOut0;
 extern int UserOut1;
 extern int UserOut2;
 extern int UserOut3;
+extern int EClass;
 
 extern unsigned char AlexManEnable;
 extern unsigned char AlexEnabled;

@@ -23,43 +23,43 @@
 #define DBG_PRINT
 
 using System;
-using System.IO.Ports; 
+using System.Threading;
+using System.IO.Ports;
 
-namespace SDRSerialSupportII
+using FlexCW;
+
+namespace PowerSDR
 {
 	public class SDRSerialPort
 	{
-		public static event SDRSerialSupportII.SerialRXEventHandler serial_rx_event;
+		public static event SerialRXEventHandler serial_rx_event;
 		
-		private SerialPort commPort; 		
-		private bool isOpen = false; 
+		private SerialPort commPort;
+        public SerialPort BasePort
+        {
+            get { return commPort; }
+        }
+
+        private bool isOpen = false; 
 		private bool bitBangOnly = false; 
 
 		//Added 2/14/2008 BT
-		public bool PortIsOpen
-		{
-			get{return commPort.IsOpen;}
-		}
+        public bool IsOpen
+        {
+            get { return commPort.IsOpen; }
+        }
 
-		public bool OpenPort
-		{
-			set
-			{
-				if(value)
-					commPort.Open();
-			}
-		}
+        public void Open()
+        {
+            commPort.Open();
+        }
 
-		public bool ClosePort
-		{
-			set
-			{
-				if(value)
-					commPort.Close();
-			}
-		}
-
-		public static Parity stringToParity(string s) 
+        public void Close()
+        {
+            commPort.Close();
+        }
+        
+		public static Parity StringToParity(string s) 
 		{
 			if (s == "none") return Parity.None; 
 			if (s == "odd") return Parity.Odd;
@@ -69,7 +69,7 @@ namespace SDRSerialSupportII
 			return Parity.None;  // error -- default to none
 		}
 
-		public static StopBits stringToStopBits(string s) 
+		public static StopBits StringToStopBits(string s) 
 		{
             if (s == "0") return StopBits.None;
 			if (s == "1") return StopBits.One; 
@@ -78,22 +78,12 @@ namespace SDRSerialSupportII
 			return StopBits.One; // error -- default 
 		}
 
-		public enum DataBits { FIRST=-1, EIGHT, SEVEN, SIX } 
-
-		public static DataBits stringToDataBits(string s) 
-		{
-			if ( s == "8" ) return DataBits.EIGHT; 
-			if ( s == "7" ) return DataBits.SEVEN; 
-			if ( s == "6" ) return DataBits.SIX; 
-			return DataBits.EIGHT; 
-		}
-
 		public SDRSerialPort(int portidx)
 		{
 			commPort = new SerialPort();
 			commPort.Encoding = System.Text.Encoding.ASCII;
-			commPort.RtsEnable = true; // kd5tfd hack for soft rock ptt 
-			commPort.DtrEnable = false; // set dtr off 
+			commPort.RtsEnable = true; // hack for soft rock ptt 
+			commPort.DtrEnable = true; // set dtr off 
             //commPort.ErrorReceived += new SerialErrorReceivedEventHandler(this.SerialErrorReceived);
             commPort.DataReceived += new SerialDataReceivedEventHandler(this.SerialReceivedData);
 			commPort.PinChanged += new SerialPinChangedEventHandler(this.SerialPinChanged);
@@ -110,37 +100,22 @@ namespace SDRSerialSupportII
 		}
 		// set the comm parms ... can only be done if port is not open -- silently fails if port is open (fixme -- add some error checking) 
 		// 
-		public void setCommParms(int baudrate, Parity p, DataBits data, StopBits stop)  
+		public void setCommParms(int baudrate, Parity p, int databits, StopBits stop)  
 		{ 
 			if ( commPort.IsOpen ) return; // bail out if it's already open 
 			
 			commPort.BaudRate = baudrate;
             commPort.Parity = p;
             commPort.StopBits = stop;						
-			
-			switch ( data ) 
-			{
-				case DataBits.EIGHT: 
-					commPort.DataBits = 8; 
-					break;
-				case DataBits.SEVEN:
-					commPort.DataBits = 7; 
-					break; 
-				case DataBits.SIX: 
-					commPort.DataBits = 6; 
-					break; 
-				default: 
-					commPort.DataBits = 8; 
-					break; 
-			}			
+			commPort.DataBits = databits;					
 		}
-		
-		public uint put(byte[] b, uint count) 
-		{
-			if ( bitBangOnly ) return 0;  // fixme -- throw exception?			
-			commPort.Write(b, 0, (int)count);			
-			return count; // wjt fixme -- hack -- we don't know if we actually wrote things 			
-		}
+
+        public uint put(string s)
+        {
+            if (bitBangOnly) return 0;  // fixme -- throw exception?			
+            commPort.Write(s);
+            return (uint)s.Length; // wjt fixme -- hack -- we don't know if we actually wrote things 			
+        }
 
 		public int Create()
 		{
@@ -208,18 +183,119 @@ namespace SDRSerialSupportII
 			
 		}
 
+        private bool use_for_keyptt = false;
+        public bool UseForKeyPTT
+        {
+            get { return use_for_keyptt; }
+            set { use_for_keyptt = value; }
+        }
+
+        private bool use_for_paddles = false;
+        public bool UseForPaddles
+        {
+            get { return use_for_paddles; }
+            set { use_for_paddles = value; }
+        }
+
+        private bool ptt_on_dtr = false;
+        public bool PTTOnDTR
+        {
+            get { return ptt_on_dtr; }
+            set { ptt_on_dtr = value; }
+        }
+
+        private bool ptt_on_rts = false;
+        public bool PTTOnRTS
+        {
+            get { return ptt_on_rts; }
+            set { ptt_on_rts = value; }
+        }
+
+        private bool key_on_dtr = false;
+        public bool KeyOnDTR
+        {
+            get { return key_on_dtr; }
+            set { key_on_dtr = value; }
+        }
+
+        private bool key_on_rts = false;
+        public bool KeyOnRTS
+        {
+            get { return key_on_rts; }
+            set { key_on_rts = value; }
+        }
+
+        private static bool reverse_paddles = false;
+        public static bool ReversePaddles
+        {
+            get { return reverse_paddles; }
+            set { reverse_paddles = value; }
+        }
+
         void SerialPinChanged(object source, SerialPinChangedEventArgs e)
-		{
-			
-		}	
-		
-		void SerialReceivedData(object source, SerialDataReceivedEventArgs e)
-		{
-			int num_to_read = commPort.BytesToRead;
-			byte[] inbuf = new byte[num_to_read];
-			commPort.Read(inbuf, 0, num_to_read);
-			serial_rx_event(this, new SDRSerialSupportII.SerialRXEvent(inbuf, (uint)num_to_read));
-		}
+        {
+            if (!use_for_keyptt && !use_for_paddles) return;
+
+            if (use_for_keyptt)
+            {
+                switch (e.EventType)
+                {
+                    case SerialPinChange.DsrChanged:
+                        bool b = commPort.DsrHolding;
+
+                        if (ptt_on_dtr)
+                        {
+                            CWPTTItem item = new CWPTTItem(b, CWSensorItem.GetCurrentTime());
+                            CWKeyer.PTTEnqueue(item);
+                        }
+
+                        if (key_on_dtr)
+                        {
+                            CWSensorItem item = new CWSensorItem(CWSensorItem.InputType.StraightKey, b);
+                            CWKeyer.SensorEnqueue(item);
+                        }
+                        break;
+                    case SerialPinChange.CtsChanged:
+                        b = commPort.CtsHolding;
+
+                        if (ptt_on_rts)
+                        {
+                            CWPTTItem item = new CWPTTItem(b, CWSensorItem.GetCurrentTime());
+                            CWKeyer.PTTEnqueue(item);
+                        }
+
+                        if (key_on_rts)
+                        {
+                            CWSensorItem item = new CWSensorItem(CWSensorItem.InputType.StraightKey, b);
+                            CWKeyer.SensorEnqueue(item);
+                        }
+                        break;
+                }
+            }
+            else if (use_for_paddles)
+            {
+                switch (e.EventType)
+                {
+                    case SerialPinChange.DsrChanged:
+                        CWSensorItem.InputType type = CWSensorItem.InputType.Dot;
+                        if (reverse_paddles) type = CWSensorItem.InputType.Dash;
+                        CWSensorItem item = new CWSensorItem(type, commPort.DsrHolding);
+                        CWKeyer.SensorEnqueue(item);
+                        break;
+                    case SerialPinChange.CtsChanged:
+                        type = CWSensorItem.InputType.Dash;
+                        if (reverse_paddles) type = CWSensorItem.InputType.Dot;
+                        item = new CWSensorItem(type, commPort.CtsHolding);
+                        CWKeyer.SensorEnqueue(item);
+                        break;
+                }
+            }
+        }
+
+        void SerialReceivedData(object source, SerialDataReceivedEventArgs e)
+        {
+            serial_rx_event(this, new SerialRXEvent(commPort.ReadExisting()));
+        }
 
 	}
 }

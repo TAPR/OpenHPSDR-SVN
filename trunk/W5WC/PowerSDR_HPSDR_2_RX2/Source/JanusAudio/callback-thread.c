@@ -520,10 +520,14 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	callback_in[6] = CallbackInL3bufp; // RX3 I
 	callback_in[7] = CallbackInR3bufp; // RX3 Q
 
-	callback_out[0] = CallbackMonOutLbufp; //RX & Mon audio
-	callback_out[1] = CallbackMonOutRbufp; //RX & Mon audio
-	callback_out[2] = CallbackOutLbufp; // TX I
-	callback_out[3] = CallbackOutRbufp; // TX Q
+    //callback_out[0] = CallbackMonOutLbufp; //RX & Mon audio
+	//callback_out[1] = CallbackMonOutRbufp; //RX & Mon audio
+	//callback_out[2] = CallbackOutLbufp; // TX I
+	//callback_out[3] = CallbackOutRbufp; // TX Q 
+	callback_out[0] = CallbackOutLbufp; // TX I
+	callback_out[1] = CallbackOutRbufp; // TX Q
+	callback_out[2] = CallbackMonOutLbufp; //RX & Mon audio
+	callback_out[3] = CallbackMonOutRbufp; //RX & Mon audio
 	callback_out[4] = CallbackOutL2bufp;  //RX2 Audio out from PSDR
 	callback_out[5] = CallbackOutR2bufp;  //RX2 Audio out from PSDR
 	callback_out[6] = CallbackOutL3bufp;

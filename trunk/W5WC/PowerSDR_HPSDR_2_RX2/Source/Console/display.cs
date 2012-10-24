@@ -2467,12 +2467,11 @@ namespace PowerSDR
         unsafe private static void DrawPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
         {
             // draw background
-            g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
+          //  g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
 
             bool local_mox = false;
             if (mox && rx == 1 && !tx_on_vfob) local_mox = true;
             if (mox && rx == 2 && tx_on_vfob) local_mox = true;
-            // if (rx == 2) local_mox = false;
             int Low = rx_display_low;					// initialize variables
             int High = rx_display_high;
             int mid_w = W / 2;
@@ -2483,6 +2482,7 @@ namespace PowerSDR
             int inbetweenies = 5;
             int grid_step = spectrum_grid_step;
             if (split_display) grid_step *= 2;
+
             int y_range = spectrum_grid_max - spectrum_grid_min;
             int filter_low, filter_high;
             int center_line_x = (int)(-(double)Low / (High - Low) * W);
@@ -2691,14 +2691,101 @@ namespace PowerSDR
                     g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
                 }
             }
+#if (false)
+            // draw 60m channels if in view
+            foreach (Channel c in channels_60m)
+            {
+                long rf_freq = vfoa_hz;
+                int rit = rit_hz;
+                if (local_mox) rit = 0;
 
+                if (bottom)
+                {
+                    rf_freq = vfob_hz;
+                }
+
+                if (c.InBW((rf_freq + Low) * 1e-6, (rf_freq + High) * 1e-6)) // is channel visible?
+                {
+                    bool on_channel = console.RX1IsOn60mChannel(c); // only true if you are on channel and are in an acceptable mode
+                    if (bottom) on_channel = console.RX2IsOn60mChannel(c);
+
+                    DSPMode mode = rx1_dsp_mode;
+                    if (bottom) mode = rx2_dsp_mode;
+
+                    switch (mode)
+                    {
+                        case DSPMode.USB:
+                        case DSPMode.DIGU:
+                        case DSPMode.CWL:
+                        case DSPMode.CWU:
+                            break;
+                        default:
+                            on_channel = false; // make sure other modes do not look as if they could transmit
+                            break;
+                    }
+
+                    // offset for CW Pitch to align display
+                    if (bottom)
+                    {
+                        switch (rx2_dsp_mode)
+                        {
+                            case (DSPMode.CWL):
+                                rf_freq += cw_pitch;
+                                break;
+                            case (DSPMode.CWU):
+                                rf_freq -= cw_pitch;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (rx1_dsp_mode)
+                        {
+                            case (DSPMode.CWL):
+                                rf_freq += cw_pitch;
+                                break;
+                            case (DSPMode.CWU):
+                                rf_freq -= cw_pitch;
+                                break;
+                        }
+                    }
+
+                    int chan_left_x = (int)((float)(c.Freq * 1e6 - rf_freq - c.BW / 2 - Low - rit) / (High - Low) * W);
+                    int chan_right_x = (int)((float)(c.Freq * 1e6 - rf_freq + c.BW / 2 - Low - rit) / (High - Low) * W);
+
+                    if (chan_right_x == chan_left_x)
+                        chan_right_x = chan_left_x + 1;
+
+                    // decide colors to draw notch
+                    Color c1 = channel_background_off;
+                    Color c2 = channel_foreground;
+
+                    if (on_channel)
+                    {
+                        c1 = channel_background_on;
+                    }
+
+                    if (bottom)
+                        drawChannelBar(g, c, chan_left_x, chan_right_x, H + top, H - top, c1, c2);
+                    else
+                        drawChannelBar(g, c, chan_left_x, chan_right_x, top, H - top, c1, c2);
+
+                    //if (bottom)
+                    //    drawNotchStatus(g, n, (notch_left_x + notch_right_x) / 2, H + top + 75, W, H);
+                    //else
+                    //    drawNotchStatus(g, n, (notch_left_x + notch_right_x) / 2, top + 75, W, H);
+                }
+            }
+#endif 
             // draw notches if in RX
             if (!local_mox)
             {
                 List<Notch> notches;
-                notches = !bottom ? NotchList.NotchesInBW(vfoa_hz * 1e-6, Low, High) : NotchList.NotchesInBW((double)vfob_hz * 1e-6, Low, High);
+                if (!bottom)
+                    notches = NotchList.NotchesInBW((double)vfoa_hz * 1e-6, Low, High);
+                else
+                    notches = NotchList.NotchesInBW((double)vfob_hz * 1e-6, Low, High);
 
-                //
                 //draw notch bars in this for loop
                 foreach (Notch n in notches)
                 {
@@ -2974,18 +3061,7 @@ namespace PowerSDR
                 else vfo = vfob_hz + rit_hz;
             }
 
-            /*	switch(rx1_dsp_mode)
-                {
-                    case DSPMode.CWL:
-                        vfo += cw_pitch;
-                        break;
-                    case DSPMode.CWU:
-                        vfo -= cw_pitch;
-                        break;
-                    default:
-                        break;
-                }*/
-            if (!bottom)
+               if (!bottom)
             {
                 switch (rx1_dsp_mode)
                 {
@@ -5743,7 +5819,7 @@ namespace PowerSDR
                                 max = current_display_data_bottom[j % 4096];
                     }
                 }
-                if (!mox)
+                if (!local_mox)
                 {
                     if (rx == 1) max += rx1_display_cal_offset;
                     else if (rx == 2) max += rx2_display_cal_offset;
@@ -5785,7 +5861,7 @@ namespace PowerSDR
                 }
             }
 
-            max_y = local_max_y;
+            if (!bottom) max_y = local_max_y;
 
             if (!local_mox)
             {
@@ -5802,7 +5878,6 @@ namespace PowerSDR
                         points[W + 1].Y += H;
                     }
                     g.FillPolygon(data_line_fpen.Brush, points);
-
                     points[W] = points[W - 1];
                     points[W + 1] = points[W - 1];
                     g.DrawLines(data_line_pen, points);

@@ -2708,13 +2708,13 @@ namespace PowerSDR
 		public static Console console;
 		public static void Notify(uint bmp)
 		{
-            if (console == null || console.Keyer == null) return;
+           // if (console == null || console.Keyer == null) return;
 			//Debug.WriteLine("FWCNotify: "+bmp.ToString("X"));
 			bool temp = (bmp & 0x01) != 0; // dot
-			if(temp != console.Keyer.FWCDot) console.Keyer.FWCDot = temp;
+			//if(temp != console.Keyer.FWCDot) console.Keyer.FWCDot = temp;
  
 			temp = (bmp & 0x02) != 0; // dash
-			if(!ignore_dash && temp != console.Keyer.FWCDash) console.Keyer.FWCDash = temp;
+		//	if(!ignore_dash && temp != console.Keyer.FWCDash) console.Keyer.FWCDash = temp;
 
 			temp = (bmp & 0x04) != 0; // RCA PTT
 			if(temp != console.FWCRCAPTT) console.FWCRCAPTT = temp;
