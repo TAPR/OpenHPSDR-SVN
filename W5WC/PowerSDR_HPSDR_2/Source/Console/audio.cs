@@ -39,6 +39,8 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using FlexCW;
+
 namespace PowerSDR
 {
     public class Audio
@@ -924,7 +926,7 @@ namespace PowerSDR
                 case AudioState.DTTSP:
                     if (tx_dsp_mode == DSPMode.CWU || tx_dsp_mode == DSPMode.CWL)
                     {
-                        DttSP.CWtoneExchange(out_l_ptr1, out_r_ptr1, frameCount);
+                       // DttSP.CWtoneExchange(out_l_ptr1, out_r_ptr1, frameCount);
                     }
 
                     // handle VAC Input
@@ -1247,7 +1249,7 @@ namespace PowerSDR
 
                     break;
                 case AudioState.CW:
-                    DttSP.CWtoneExchange(out_l_ptr1, out_r_ptr1, frameCount);
+                   // DttSP.CWtoneExchange(out_l_ptr1, out_r_ptr1, frameCount);
                     break;
             }
 
@@ -1626,13 +1628,13 @@ namespace PowerSDR
                 }
             }
 
-            switch (current_audio_state1)
+          /*  switch (current_audio_state1)
             {
                 case AudioState.CW:
                     DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
                     DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
                    break;
-                case AudioState.DTTSP:
+                case AudioState.DTTSP: */
 
                     #region VOX
 
@@ -1656,10 +1658,10 @@ namespace PowerSDR
 
                     #endregion
 
-                    if (tx_dsp_mode == DSPMode.CWU || tx_dsp_mode == DSPMode.CWL)
+                /*    if (tx_dsp_mode == DSPMode.CWU || tx_dsp_mode == DSPMode.CWL)
                     {
                         DttSP.CWtoneExchange(out_l_ptr1, out_r_ptr1, frameCount);
-                    }
+                    } */
 
                     // scale input with mic preamp
                     if ((!vac_enabled &&
@@ -1703,8 +1705,6 @@ namespace PowerSDR
 
                     #region Input Signal Source
 
-                    if (!mox)
-                    {
                         switch (rx1_input_signal)
                         {
                             case SignalSource.RADIO:
@@ -1757,9 +1757,7 @@ namespace PowerSDR
                                 ClearBuffer(rx1_in_r, frameCount);
                                 break;
                         }
-                    }
-                    else
-                    {
+          
                         switch (tx_input_signal)
                         {
                             case SignalSource.RADIO:
@@ -1802,7 +1800,6 @@ namespace PowerSDR
                                 ClearBuffer(tx_in_r, frameCount);
                                 break;
                         }
-                    }
 
                     #endregion
 
@@ -1815,7 +1812,7 @@ namespace PowerSDR
 					Debug.Write(MaxSample(in_l, in_r, frameCount).ToString("f6")+",");
 #endif
 
-
+                    // handle Direct IQ for VAC
                     if (vac_enabled && vac_output_iq &&
                         rb_vacOUT_l != null && rb_vacOUT_r != null &&
                         rx1_in_l != null && rx1_in_r != null)
@@ -1849,22 +1846,31 @@ namespace PowerSDR
                         }
                     } 
                 
+                    if (localmox && (tx_dsp_mode == DSPMode.CWL || tx_dsp_mode == DSPMode.CWU))
+                    {
                     DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
  
-                  /*  if (rx1_dsp_mode == DSPMode.CWU || rx1_dsp_mode == DSPMode.CWL)
+                        double time = CWSensorItem.GetCurrentTime();
+                        CWSynth.Advance(tx_out_l, tx_out_r, frameCount, time);
+                    }
+                    else if (tx_dsp_mode == DSPMode.CWL || tx_dsp_mode == DSPMode.CWU)
                     {
-                        DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
-                    } */
+                        double time = CWSensorItem.GetCurrentTime();
+                        CWSynth.Advance(tx_out_l, tx_out_r, frameCount, time);
 
+                        DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
+                    }
+                    else
+                    {
+                        DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
+                    }
 #if(MINMAX)
-					Debug.Write(MaxSample(out_l_ptr1, out_r_ptr1, frameCount).ToString("f6")+",");
+			Debug.Write(MaxSample(out_l_ptr2, frameCount).ToString("f6")+",");
+			Debug.Write(MaxSample(out_r_ptr2, frameCount).ToString("f6")+"\n");
 #endif
 
                     #region Output Signal Source
 
-                    if (!mox)
-
-                    {
                         switch (rx1_output_signal)
                         {
                             case SignalSource.RADIO:
@@ -1917,9 +1923,7 @@ namespace PowerSDR
                                 ClearBuffer(rx1_out_r, frameCount);
                                 break;
                         }
-                    }
-                    else
-                    {
+ 
                         switch (tx_output_signal)
                         {
                             case SignalSource.RADIO:
@@ -1962,20 +1966,8 @@ namespace PowerSDR
                                 ClearBuffer(tx_out_r, frameCount);
                                 break;
                         }
-                    }
 
                     #endregion
-
-                    break;
-            /*    case AudioState.CW:
-                    DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
-                    DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
-                               //  SineWave(tx_out_l, frameCount, phase_accumulator1, sine_freq1);
-                              //  phase_accumulator1 = CosineWave(tx_out_r, frameCount, phase_accumulator1, sine_freq1);
-                             //   ScaleBuffer(tx_out_l, tx_out_l, frameCount, (float) source_scale);
-                             //   ScaleBuffer(tx_out_r, tx_out_r, frameCount, (float) source_scale);
-                   break; */
-            }
 
             if (localmox && ramp)
             {
@@ -2017,15 +2009,6 @@ namespace PowerSDR
                 }
             }
 
-            out_l1 = rx1_out_l; // 0 RX1 L
-            out_r1 = rx1_out_r; // 1 RX1 R
-            out_l2 = out_l_ptr2; // 2 TX L
-            out_r2 = out_r_ptr2; // 3 TX R
-           // out_l3 = out_l_ptr3; // 4 RX2 L
-           // out_r3 = out_r_ptr3; // 5 RX2 R
-           // out_l4 = out_l_ptr4; // 6 Spare/VAC
-           // out_r4 = out_r_ptr4; // 7 Spare/VAC
-
             if (wave_record)
             {
                 if (!localmox)
@@ -2043,6 +2026,12 @@ namespace PowerSDR
                     }
                 }
             }
+
+            out_l1 = rx1_out_l; // 0 RX1 L
+            out_r1 = rx1_out_r; // 1 RX1 R
+            out_l2 = out_l_ptr2; // 2 TX L
+            out_r2 = out_r_ptr2; // 3 TX R
+ 
 
             // scale output for VAC -- use input as spare buffer
             if (vac_enabled && !vac_output_iq &&
@@ -3809,7 +3798,7 @@ namespace PowerSDR
                     {
                         //t2.Stop();
                         //period = t2.DurationMsec;
-                        DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
+                       // DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
                         //t2.Start();
                     }
 
@@ -3963,7 +3952,7 @@ namespace PowerSDR
 
                     //t2.Stop();
                     //period = t2.DurationMsec;
-                    DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
+                   // DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
                     //t2.Start();
                     break;
             }
@@ -5405,8 +5394,10 @@ namespace PowerSDR
 
         unsafe public static void StopAudioVAC()
         {
+            int error = 0;
             PA19.PA_AbortStream(stream2);
-            PA19.PA_CloseStream(stream2);
+            error = PA19.PA_CloseStream(stream2);
+            if (error != 0) PortAudioErrorMessageBox(error);
         }
 
         #endregion

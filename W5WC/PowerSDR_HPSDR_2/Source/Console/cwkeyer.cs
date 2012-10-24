@@ -60,7 +60,7 @@ namespace PowerSDR
 		private float msdel;
 		private Console console;
 
-		private KeyerLine secondary_ptt_line = KeyerLine.NONE;
+		private KeyerLine secondary_ptt_line = KeyerLine.None;
 		public KeyerLine SecondaryPTTLine
 		{ 
 			get { return secondary_ptt_line; }
@@ -84,7 +84,7 @@ namespace PowerSDR
 			set { cat_enabled = value; }
 		}
 
-		private KeyerLine secondary_key_line = KeyerLine.NONE;
+		private KeyerLine secondary_key_line = KeyerLine.None;
 		public KeyerLine SecondaryKeyLine
 		{
 			get { return secondary_key_line; }
@@ -93,7 +93,7 @@ namespace PowerSDR
 				secondary_key_line = value;
 				switch(secondary_key_line)
 				{
-					case KeyerLine.NONE:
+					case KeyerLine.None:
 						break;
 					case KeyerLine.DTR:
 						DttSP.SetWhichKey(1);
@@ -428,7 +428,7 @@ namespace PowerSDR
 							case "CAT":							
 							switch(secondary_ptt_line)
 							{
-								case KeyerLine.NONE:
+                                    case KeyerLine.None:
 									if (sp2dotkey) extkey_dash  = siolisten.SIO.isDSR();
 									else extkey_dot = siolisten.SIO.isCTS();
 									break;
@@ -444,7 +444,7 @@ namespace PowerSDR
 
 							switch(secondary_key_line)
 							{
-								case KeyerLine.NONE:
+                                    case KeyerLine.None:
 									if (sp2dotkey) extkey_dash  = siolisten.SIO.isDSR();
 									else extkey_dot = siolisten.SIO.isCTS();
 									break;
@@ -473,7 +473,7 @@ namespace PowerSDR
 							{
 								switch(secondary_ptt_line)
 								{
-									case KeyerLine.NONE:
+									case KeyerLine.None:
 										if (sp2dotkey) extkey_dash  = System.Convert.ToByte(c.serialPTT.isDSR() );
 										else extkey_dot = System.Convert.ToByte(c.serialPTT.isCTS() );
 										break;
@@ -489,7 +489,7 @@ namespace PowerSDR
 
 								switch(secondary_key_line)
 								{
-									case KeyerLine.NONE:
+									case KeyerLine.None:
 										if (sp2dotkey) extkey_dash  = System.Convert.ToByte(c.serialPTT.isDSR());
 										else extkey_dot = System.Convert.ToByte(c.serialPTT.isCTS());
 										break;
@@ -514,7 +514,7 @@ namespace PowerSDR
 							default: // comm port
 							switch(secondary_ptt_line)
 							{
-								case KeyerLine.NONE:
+                                    case KeyerLine.None:
 									if (sp2dotkey) extkey_dash  = sp2.DsrHolding;
 									else extkey_dot = sp2.CtsHolding;
 									break;
@@ -528,7 +528,7 @@ namespace PowerSDR
 
 							switch(secondary_key_line)
 							{
-								case KeyerLine.NONE:
+                                    case KeyerLine.None:
 									if (sp2dotkey) extkey_dash  = sp2.DsrHolding;
 									else extkey_dot = sp2.CtsHolding;
 									break;

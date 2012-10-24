@@ -35,6 +35,7 @@ Santa Cruz, CA  95060
 #include <wcpAGC.h>
 
 WCPAGC newWcpAGC (	AGCMODE mode,
+					int pmode,
 					COMPLEX *buff,
 					int io_buffsize,
 					REAL sample_rate,
@@ -60,6 +61,7 @@ WCPAGC newWcpAGC (	AGCMODE mode,
 	a = (WCPAGC) safealloc (1,sizeof(wcpagc), tag);
 	//initialize per call parameters
 	a->mode = mode;
+	a->pmode = pmode;
 	a->buff = buff;
 	a->io_buffsize = io_buffsize;
 	a->sample_rate = sample_rate;
@@ -169,7 +171,10 @@ void WcpAGC (WCPAGC a)
 		a->abs_out_sample = a->abs_ring[a->out_index];
 		a->ring[a->in_index][0] = a->buff[i].re;
 		a->ring[a->in_index][1] = a->buff[i].im;
-		a->abs_ring[a->in_index] = max( fabs(a->ring[a->in_index][0]), fabs(a->ring[a->in_index][1]));
+		if (a->pmode == 0)
+			a->abs_ring[a->in_index] = max(fabs(a->ring[a->in_index][0]), fabs(a->ring[a->in_index][1]));
+		else
+			a->abs_ring[a->in_index] = sqrt(a->ring[a->in_index][0] * a->ring[a->in_index][0] + a->ring[a->in_index][1] * a->ring[a->in_index][1]);
 
 		a->fast_backaverage = a->fast_backmult * a->abs_out_sample + a->onemfast_backmult * a->fast_backaverage;
 		a->hang_backaverage = a->hang_backmult * a->abs_out_sample + a->onemhang_backmult * a->hang_backaverage;

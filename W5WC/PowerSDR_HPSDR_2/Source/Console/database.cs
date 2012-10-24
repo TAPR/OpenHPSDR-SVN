@@ -1110,6 +1110,34 @@ namespace PowerSDR
             }
         }
 
+        private static void AddIsraelBandText6m()
+        {
+            // 50.0 - 50.2 MHz
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								50.000000, 50.079999, "6M Beacon Sub-Band",		true,
+								50.080000, 50.089999, "6M CW",					true,
+                                50.090000, 50.090000, "6M CW Calling",          true,
+                                50.090001, 50.099999, "6M CW",                  true,
+                                50.100000, 50.109999, "6M CW & SSB",			true,
+                                50.110000, 50.110000, "6M SSB DX Calling",      true,
+                                50.110001, 50.129999, "6M CW, SSB & Digital",	true,
+                                50.130000, 50.149999, "6M CW, SSB & Digital",	true,
+                                50.150000, 50.150000, "6M SSB Calling",         true,
+                                50.150001, 50.199999, "6M CW, SSB & Digital",	true,
+                             };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
         private static void AddRegion1BandText4m()
         {
             // 70.0 - 70.5 MHz
@@ -4822,6 +4850,24 @@ namespace PowerSDR
                     AddRegion1BandText10m();
                     AddEUBandText6m();
                     AddRegion1BandText4m();
+                    AddRegion1BandTextVHFplus();
+                    AddBandTextSWB();
+                    break;
+
+                case FRSRegion.Israel:
+                    AddRegion1BandStack();
+                    ClearBandText();
+                    AddRegion1BandText160m();
+                    AddRegion1BandText80m();
+                    AddRegion1BandText60m();
+                    AddRegion1BandText40m();
+                    AddRegion1BandText30m();
+                    AddRegion1BandText20m();
+                    AddRegion1BandText17m();
+                    AddRegion1BandText15m();
+                    AddRegion1BandText12m();
+                    AddRegion1BandText10m();
+                    AddIsraelBandText6m();
                     AddRegion1BandTextVHFplus();
                     AddBandTextSWB();
                     break;

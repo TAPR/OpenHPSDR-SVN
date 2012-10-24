@@ -22,7 +22,7 @@
 
 #define DBG_PRINT
 
-using SDRSerialSupportII; 
+using System; 
 
 namespace PowerSDR
 {
