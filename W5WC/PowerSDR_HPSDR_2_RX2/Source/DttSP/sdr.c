@@ -210,6 +210,7 @@ setup_rx (int k, unsigned int thread)
 	
 	rx[thread][k].wcpagc.gen = newWcpAGC ( // (NR0V)
 		agcMED,
+		0,								//pmode
 		CXBbase (rx[thread][k].buf.o),	//buff pointer
 		CXBsize (rx[thread][k].buf.o),	//io_buffsize
 		uni[thread].samplerate,			//sample rate
@@ -480,6 +481,7 @@ setup_tx (unsigned int thread)
 
 	tx[thread].leveler.gen = newWcpAGC (// (NR0V)
 		5,								//mode
+		0,								//0 for max(I,Q), 1 for envelope
 		CXBbase (tx[thread].buf.i),		//buff pointer
 		CXBsize (tx[thread].buf.i),		//io_buffsize
 		uni[thread].samplerate,			//sample rate
@@ -539,6 +541,7 @@ setup_tx (unsigned int thread)
 
 	tx[thread].alc.gen = newWcpAGC (  // (NR0V)
 		5,								//mode
+		1,								//0 for max(I,Q), 1 for envelope
 		CXBbase (tx[thread].buf.o),		//buff pointer
 		CXBsize (tx[thread].buf.o),		//io_buffsize
 		uni[thread].samplerate,			//sample rate
@@ -1448,6 +1451,20 @@ do_tx_meter (unsigned int thread, CXB buf, TXMETERTYPE mt)
 }
 
 PRIVATE void
+do_tx_AM (unsigned int thread)
+{
+	int i, n = min (CXBhave (tx[thread].buf.o), uni[thread].buflen);
+	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
+
+	for (i = 0; i < n; i++)
+	{
+		CXBdata (tx[thread].buf.o, i) = Cmplx ((REAL)
+			(tx[thread].am.carrier_level +
+			(1.0f - tx[thread].am.carrier_level) * CXBreal (tx[thread].buf.o, i)), 0.0);
+	}
+}
+
+PRIVATE void
 do_tx_pre (unsigned int thread)
 {
 	int i, n = CXBhave (tx[thread].buf.i);
@@ -1554,6 +1571,10 @@ do_tx_post (unsigned int thread)
 		//DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
 	if (tx[thread].alc.flag)  // (NR0V)
 		WcpAGC (tx[thread].alc.gen);
+
+	if ((tx[thread].mode == AM) || tx[thread].mode == SAM)
+		do_tx_AM(thread);
+
 	do_tx_meter (thread, tx[thread].buf.o, TX_ALC);
 
 	if (uni[thread].spec.flag)
@@ -1590,20 +1611,6 @@ do_tx_SBCW (unsigned int thread)
 	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
 	if (tx[thread].mode != DSB)
 		CXBscl (tx[thread].buf.i, 2.0f);
-}
-
-PRIVATE void
-do_tx_AM (unsigned int thread)
-{
-	int i, n = min (CXBhave (tx[thread].buf.i), uni[thread].buflen);
-	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
-
-	for (i = 0; i < n; i++)
-	{
-		CXBdata (tx[thread].buf.i, i) = Cmplx ((REAL)
-			(tx[thread].am.carrier_level +
-			(1.0f - tx[thread].am.carrier_level) * CXBreal (tx[thread].buf.i, i)), 0.0);
-	}
 }
 
 PRIVATE void
@@ -1703,7 +1710,7 @@ do_tx (unsigned int thread)
 			break;
 		case AM:
 		case SAM:
-			do_tx_AM (thread);
+			//do_tx_AM (thread);
 			break;
 		case FM:
 			do_tx_FM (thread);

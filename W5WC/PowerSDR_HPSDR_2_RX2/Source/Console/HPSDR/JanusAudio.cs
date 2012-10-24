@@ -682,6 +682,9 @@ namespace PowerSDR
         unsafe public static extern void EnableApolloAutoTune(int bits);
 
         [DllImport("JanusAudio.dll")]
+        unsafe public static extern void EnableEClassModulation(int bits);
+
+        [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetHermesFilter(int bits);
  
         [DllImport("JanusAudio.dll")]

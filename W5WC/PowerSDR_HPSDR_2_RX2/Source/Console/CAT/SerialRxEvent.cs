@@ -8,20 +8,20 @@
 //==============================================================
 
 using System;
+using System.Runtime.InteropServices;
 
-namespace SDRSerialSupportII
+namespace PowerSDR
 {
-	public delegate void SerialRXEventHandler(object source, SerialRXEvent e);
+    public delegate void SerialRXEventHandler(object source, SerialRXEvent e);
 
-	public class SerialRXEvent : EventArgs
-	{
-		internal byte[] buffer = null;
-		internal uint count = 0;
+    public class SerialRXEvent : EventArgs
+    {
+        internal string buffer = null;
 
-		public SerialRXEvent(byte[] buffer, uint count)
-		{
-			this.buffer = buffer;
-			this.count = count;
-		}
-	}
+        public SerialRXEvent(string buffer)
+        {
+            this.buffer = buffer;
+        }
+    }
+
 }
