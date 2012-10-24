@@ -2467,7 +2467,7 @@ namespace PowerSDR
         unsafe private static void DrawPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
         {
             // draw background
-          //  g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
+            g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
 
             bool local_mox = false;
             if (mox && rx == 1 && !tx_on_vfob) local_mox = true;
