@@ -1369,7 +1369,7 @@ void IOThreadMainLoop(void) {
 
 							switch (out_control_idx) {
 							case 0:
-								FPGAWriteBufp[writebufpos] = PennyOCBits << 1; // ControlBytesIn[2];
+								FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
 								break;
 							case 1:
 								FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 16) & 0xff; // TX freq

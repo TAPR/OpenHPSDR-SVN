@@ -86,16 +86,6 @@ namespace PowerSDR
 	{
 		public static void SyncStatic()
 		{
-			RadioDSP.KeyerDebounce = RadioDSP.KeyerDebounce;
-			RadioDSP.KeyerFreq = RadioDSP.KeyerFreq;
-			RadioDSP.KeyerIambic = RadioDSP.KeyerIambic;
-			RadioDSP.KeyerIambicMode = RadioDSP.KeyerIambicMode;
-			RadioDSP.KeyerRamp = RadioDSP.KeyerRamp;
-			RadioDSP.KeyerResetSize = RadioDSP.KeyerResetSize;
-			RadioDSP.KeyerReversePaddle = RadioDSP.KeyerReversePaddle;
-			RadioDSP.KeyerSampleRate = RadioDSP.KeyerSampleRate;
-			RadioDSP.KeyerSpeed = RadioDSP.KeyerSpeed;
-			RadioDSP.KeyerWeight = RadioDSP.KeyerWeight;
 			RadioDSP.SampleRate = RadioDSP.SampleRate;
 		}
 
@@ -108,7 +98,7 @@ namespace PowerSDR
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
             String version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
             app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                + "\\FlexRadio Systems\\PowerSDR v" + version + "\\wisdom";
+                + "\\FlexRadio Systems\\PowerSDR (W5WC)\\wisdom";
 
 			DttSP.SetupSDR(app_data_path);
 		}
@@ -125,7 +115,7 @@ namespace PowerSDR
 			set 
 			{
 				keyer_sample_rate = value;
-				DttSP.SetKeyerSampleRate(value);
+				//DttSP.SetKeyerSampleRate(value);
 			}
 		}
 
@@ -136,7 +126,7 @@ namespace PowerSDR
 			set
 			{
 				keyer_speed = value;
-				DttSP.SetKeyerSpeed(value);
+				//DttSP.SetKeyerSpeed(value);
 			}
 		}
 
@@ -147,7 +137,7 @@ namespace PowerSDR
 			set 
 			{
 				keyer_freq = value;
-				DttSP.SetKeyerFreq(value);
+				//DttSP.SetKeyerFreq(value);
 			}
 
 		}
@@ -159,7 +149,7 @@ namespace PowerSDR
 			set
 			{
 				keyer_ramp = value;
-				DttSP.SetKeyerRamp(value);
+				//DttSP.SetKeyerRamp(value);
 			}
 		}
 
@@ -170,7 +160,7 @@ namespace PowerSDR
 			set
 			{
 				keyer_iambic = value;
-				DttSP.SetKeyerIambic(value);
+				//DttSP.SetKeyerIambic(value);
 			}
 		}
 
@@ -181,7 +171,7 @@ namespace PowerSDR
 			set
 			{
 				keyer_reverse_paddle = value;
-				DttSP.SetKeyerRevPdl(value);
+				//DttSP.SetKeyerRevPdl(value);
 			}
 		}
 
@@ -192,7 +182,7 @@ namespace PowerSDR
 			set
 			{
 				keyer_debounce = value;
-				DttSP.SetKeyerDeBounce(value);
+				//DttSP.SetKeyerDeBounce(value);
 			}
 		}
 
@@ -203,7 +193,7 @@ namespace PowerSDR
 			set
 			{
 				keyer_weight = value;
-				DttSP.SetKeyerWeight(value);
+			//	DttSP.SetKeyerWeight(value);
 			}
 		}
 
@@ -214,7 +204,7 @@ namespace PowerSDR
 			set 
 			{
 				keyer_reset_size = value;
-				DttSP.SetKeyerResetSize(value);
+				//DttSP.SetKeyerResetSize(value);
 			}
 		}
 
@@ -225,7 +215,7 @@ namespace PowerSDR
 			set
 			{
 				keyer_iambic_mode = value;
-				DttSP.SetKeyerMode(value);
+				//DttSP.SetKeyerMode(value);
 			}
 		}
 

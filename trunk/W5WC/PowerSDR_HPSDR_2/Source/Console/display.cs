@@ -3066,6 +3066,7 @@ namespace PowerSDR
                             }
                             else goto default;
 
+                        case FRSRegion.Israel:
                         case FRSRegion.Europe:
                         case FRSRegion.Spain:
                         case FRSRegion.Italy_Plus:
@@ -3830,6 +3831,44 @@ namespace PowerSDR
                             else
                                 goto default;
 
+                        case FRSRegion.Israel:
+                            if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 50.2)
+                            {
+                                if (bottom) g.DrawLine(tx_band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(tx_band_edge_pen, vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+                        
                         case FRSRegion.UK:
                             if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
