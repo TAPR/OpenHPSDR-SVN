@@ -1695,15 +1695,15 @@ namespace PowerSDR
         private LabelTS lblMetisVer;
         private TabPage tpInfo;
         public TextBoxTS txt_DDStune;
-        public TextBoxTS txtDDSVFO;
-        public TextBoxTS txtDDSRounded;
+        public TextBoxTS txtAudioVolts;
+        public TextBoxTS txtTargetDBM;
         public TextBoxTS txtTuningWord;
         private LabelTS labelTS92;
         private LabelTS labelTS91;
         private LabelTS labelTS90;
         private LabelTS labelTS89;
-        public TextBoxTS textBoxTS14;
-        public TextBoxTS textBoxTS13;
+        public TextBoxTS txtTargetVolts;
+        public TextBoxTS txtRadioVolume;
         public TextBoxTS textBoxTS12;
         public TextBoxTS textBoxTS11;
         public TextBoxTS textBoxTS10;
@@ -2938,8 +2938,8 @@ namespace PowerSDR
             this.labelTS19 = new System.Windows.Forms.LabelTS();
             this.labelTS18 = new System.Windows.Forms.LabelTS();
             this.labelTS17 = new System.Windows.Forms.LabelTS();
-            this.textBoxTS14 = new System.Windows.Forms.TextBoxTS();
-            this.textBoxTS13 = new System.Windows.Forms.TextBoxTS();
+            this.txtTargetVolts = new System.Windows.Forms.TextBoxTS();
+            this.txtRadioVolume = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS12 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS11 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTS10 = new System.Windows.Forms.TextBoxTS();
@@ -2956,9 +2956,9 @@ namespace PowerSDR
             this.labelTS91 = new System.Windows.Forms.LabelTS();
             this.labelTS90 = new System.Windows.Forms.LabelTS();
             this.labelTS89 = new System.Windows.Forms.LabelTS();
-            this.txtDDSRounded = new System.Windows.Forms.TextBoxTS();
+            this.txtTargetDBM = new System.Windows.Forms.TextBoxTS();
             this.txtTuningWord = new System.Windows.Forms.TextBoxTS();
-            this.txtDDSVFO = new System.Windows.Forms.TextBoxTS();
+            this.txtAudioVolts = new System.Windows.Forms.TextBoxTS();
             this.txt_DDStune = new System.Windows.Forms.TextBoxTS();
             this.tpApolloControl = new System.Windows.Forms.TabPage();
             this.grpApolloCtrl = new System.Windows.Forms.GroupBoxTS();
@@ -15279,8 +15279,8 @@ namespace PowerSDR
             this.tpInfo.Controls.Add(this.labelTS19);
             this.tpInfo.Controls.Add(this.labelTS18);
             this.tpInfo.Controls.Add(this.labelTS17);
-            this.tpInfo.Controls.Add(this.textBoxTS14);
-            this.tpInfo.Controls.Add(this.textBoxTS13);
+            this.tpInfo.Controls.Add(this.txtTargetVolts);
+            this.tpInfo.Controls.Add(this.txtRadioVolume);
             this.tpInfo.Controls.Add(this.textBoxTS12);
             this.tpInfo.Controls.Add(this.textBoxTS11);
             this.tpInfo.Controls.Add(this.textBoxTS10);
@@ -15297,9 +15297,9 @@ namespace PowerSDR
             this.tpInfo.Controls.Add(this.labelTS91);
             this.tpInfo.Controls.Add(this.labelTS90);
             this.tpInfo.Controls.Add(this.labelTS89);
-            this.tpInfo.Controls.Add(this.txtDDSRounded);
+            this.tpInfo.Controls.Add(this.txtTargetDBM);
             this.tpInfo.Controls.Add(this.txtTuningWord);
-            this.tpInfo.Controls.Add(this.txtDDSVFO);
+            this.tpInfo.Controls.Add(this.txtAudioVolts);
             this.tpInfo.Controls.Add(this.txt_DDStune);
             this.tpInfo.Location = new System.Drawing.Point(4, 22);
             this.tpInfo.Name = "tpInfo";
@@ -15445,49 +15445,45 @@ namespace PowerSDR
             // 
             this.labelTS18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTS18.Image = null;
-            this.labelTS18.Location = new System.Drawing.Point(21, 220);
+            this.labelTS18.Location = new System.Drawing.Point(21, 175);
             this.labelTS18.Name = "labelTS18";
             this.labelTS18.Size = new System.Drawing.Size(111, 16);
             this.labelTS18.TabIndex = 159;
-            this.labelTS18.Text = "Tuning Word";
+            this.labelTS18.Text = "Target Volts";
             this.labelTS18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelTS18.Visible = false;
             // 
             // labelTS17
             // 
             this.labelTS17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTS17.Image = null;
-            this.labelTS17.Location = new System.Drawing.Point(21, 175);
+            this.labelTS17.Location = new System.Drawing.Point(21, 130);
             this.labelTS17.Name = "labelTS17";
             this.labelTS17.Size = new System.Drawing.Size(111, 16);
             this.labelTS17.TabIndex = 158;
-            this.labelTS17.Text = "Tuning Word";
+            this.labelTS17.Text = "Radio Volume";
             this.labelTS17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelTS17.Visible = false;
             // 
-            // textBoxTS14
+            // txtTargetVolts
             // 
-            this.textBoxTS14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.textBoxTS14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.textBoxTS14.ForeColor = System.Drawing.Color.White;
-            this.textBoxTS14.Location = new System.Drawing.Point(24, 240);
-            this.textBoxTS14.Name = "textBoxTS14";
-            this.textBoxTS14.ReadOnly = true;
-            this.textBoxTS14.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTS14.TabIndex = 157;
-            this.textBoxTS14.Visible = false;
+            this.txtTargetVolts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtTargetVolts.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtTargetVolts.ForeColor = System.Drawing.Color.White;
+            this.txtTargetVolts.Location = new System.Drawing.Point(24, 195);
+            this.txtTargetVolts.Name = "txtTargetVolts";
+            this.txtTargetVolts.ReadOnly = true;
+            this.txtTargetVolts.Size = new System.Drawing.Size(157, 20);
+            this.txtTargetVolts.TabIndex = 157;
             // 
-            // textBoxTS13
+            // txtRadioVolume
             // 
-            this.textBoxTS13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.textBoxTS13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.textBoxTS13.ForeColor = System.Drawing.Color.White;
-            this.textBoxTS13.Location = new System.Drawing.Point(24, 195);
-            this.textBoxTS13.Name = "textBoxTS13";
-            this.textBoxTS13.ReadOnly = true;
-            this.textBoxTS13.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTS13.TabIndex = 156;
-            this.textBoxTS13.Visible = false;
+            this.txtRadioVolume.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtRadioVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtRadioVolume.ForeColor = System.Drawing.Color.White;
+            this.txtRadioVolume.Location = new System.Drawing.Point(24, 150);
+            this.txtRadioVolume.Name = "txtRadioVolume";
+            this.txtRadioVolume.ReadOnly = true;
+            this.txtRadioVolume.Size = new System.Drawing.Size(157, 20);
+            this.txtRadioVolume.TabIndex = 156;
             // 
             // textBoxTS12
             // 
@@ -15625,11 +15621,11 @@ namespace PowerSDR
             // 
             this.labelTS92.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTS92.Image = null;
-            this.labelTS92.Location = new System.Drawing.Point(21, 130);
+            this.labelTS92.Location = new System.Drawing.Point(21, 220);
             this.labelTS92.Name = "labelTS92";
             this.labelTS92.Size = new System.Drawing.Size(111, 16);
             this.labelTS92.TabIndex = 143;
-            this.labelTS92.Text = "RX Freq";
+            this.labelTS92.Text = "Audio Volts";
             this.labelTS92.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS91
@@ -15640,7 +15636,7 @@ namespace PowerSDR
             this.labelTS91.Name = "labelTS91";
             this.labelTS91.Size = new System.Drawing.Size(111, 16);
             this.labelTS91.TabIndex = 142;
-            this.labelTS91.Text = "TX Freq";
+            this.labelTS91.Text = "Target dBm";
             this.labelTS91.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTS90
@@ -15665,16 +15661,16 @@ namespace PowerSDR
             this.labelTS89.Text = "Tuning Word";
             this.labelTS89.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtDDSRounded
+            // txtTargetDBM
             // 
-            this.txtDDSRounded.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtDDSRounded.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtDDSRounded.ForeColor = System.Drawing.Color.White;
-            this.txtDDSRounded.Location = new System.Drawing.Point(24, 105);
-            this.txtDDSRounded.Name = "txtDDSRounded";
-            this.txtDDSRounded.ReadOnly = true;
-            this.txtDDSRounded.Size = new System.Drawing.Size(88, 20);
-            this.txtDDSRounded.TabIndex = 139;
+            this.txtTargetDBM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtTargetDBM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtTargetDBM.ForeColor = System.Drawing.Color.White;
+            this.txtTargetDBM.Location = new System.Drawing.Point(24, 105);
+            this.txtTargetDBM.Name = "txtTargetDBM";
+            this.txtTargetDBM.ReadOnly = true;
+            this.txtTargetDBM.Size = new System.Drawing.Size(88, 20);
+            this.txtTargetDBM.TabIndex = 139;
             // 
             // txtTuningWord
             // 
@@ -15687,16 +15683,16 @@ namespace PowerSDR
             this.txtTuningWord.Size = new System.Drawing.Size(125, 20);
             this.txtTuningWord.TabIndex = 138;
             // 
-            // txtDDSVFO
+            // txtAudioVolts
             // 
-            this.txtDDSVFO.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtDDSVFO.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtDDSVFO.ForeColor = System.Drawing.Color.White;
-            this.txtDDSVFO.Location = new System.Drawing.Point(24, 150);
-            this.txtDDSVFO.Name = "txtDDSVFO";
-            this.txtDDSVFO.ReadOnly = true;
-            this.txtDDSVFO.Size = new System.Drawing.Size(88, 20);
-            this.txtDDSVFO.TabIndex = 137;
+            this.txtAudioVolts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.txtAudioVolts.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtAudioVolts.ForeColor = System.Drawing.Color.White;
+            this.txtAudioVolts.Location = new System.Drawing.Point(24, 240);
+            this.txtAudioVolts.Name = "txtAudioVolts";
+            this.txtAudioVolts.ReadOnly = true;
+            this.txtAudioVolts.Size = new System.Drawing.Size(88, 20);
+            this.txtAudioVolts.TabIndex = 137;
             // 
             // txt_DDStune
             // 

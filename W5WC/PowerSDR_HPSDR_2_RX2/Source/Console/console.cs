@@ -33198,7 +33198,9 @@ namespace PowerSDR
                         double target_volts = Math.Sqrt(Math.Pow(10, target_dbm * 0.1) * 0.05);		// E = Sqrt(P * R) 
                         /*if(current_dsp_mode == DSPMode.AM ||current_dsp_mode == DSPMode.SAM)
                             target_volts = Math.Sqrt(Math.Pow(target_volts, 2.0)*5.0);*/
-                        Audio.RadioVolume = target_volts / audio_volts1;
+                       // Audio.RadioVolume = target_volts / audio_volts1;
+                        Audio.RadioVolume = (double)Math.Min((target_volts / 0.8), 1.0);
+                        toolTip1.SetToolTip(ptbPWR, Audio.RadioVolume.ToString("f3"));
                     }
                 }
             }

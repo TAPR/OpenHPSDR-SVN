@@ -288,7 +288,7 @@ namespace PowerSDR
             }
         }
 
-        public static double PennylanePowerBreakPoint = 0.4;
+      //  public static double PennylanePowerBreakPoint = 0.4;
 
         private static double radio_volume = 0.0;
         public static double RadioVolume
@@ -297,16 +297,17 @@ namespace PowerSDR
             set
             {
                 //Debug.WriteLine("radio_volume: "+value.ToString("f3"));
-                System.Console.WriteLine("radio_volume: " + value.ToString("f3"));
+                //System.Console.WriteLine("radio_volume: " + value.ToString("f3"));
                 radio_volume = value;
+
                 if (console.CurrentModel == Model.HERMES || console.PennyLanePresent)
                 {
-                    float penny_power = 1.0f;
-                    if (radio_volume < PennylanePowerBreakPoint)
-                    {
-                        penny_power = (float)(radio_volume / PennylanePowerBreakPoint);
-                    }
-                    JanusAudio.SetOutputPower(penny_power);
+                   // float penny_power = 1.0f;
+                   // if (radio_volume < PennylanePowerBreakPoint)
+                   // {
+                     //   penny_power = (float)(radio_volume / PennylanePowerBreakPoint);
+                   // }
+                    JanusAudio.SetOutputPower((float)value);
                 }
                 else
                 {
@@ -2138,12 +2139,12 @@ namespace PowerSDR
            }
            else
            {
-                double tx_vol = TXScale;
+              //  double tx_vol = TXScale;
                 //if(tx_output_signal != SignalSource.RADIO)
                 //	tx_vol = 1.0;
-                if (tx_output_signal == SignalSource.RADIO &&
-                    tx_vol > 1.0) tx_vol = 1.0; // above 1.0 creates spurs
-                if (tx_vol > 1.0) tx_vol = 1.0; // above 1.0 creates spurs
+              //  if (tx_output_signal == SignalSource.RADIO &&
+              //      tx_vol > 1.0) tx_vol = 1.0; // above 1.0 creates spurs
+              //  if (tx_vol > 1.0) tx_vol = 1.0; // above 1.0 creates spurs
 
                 /* hermes hack needed */
                 if (hpsdr_duplex_enabled)
@@ -2159,14 +2160,14 @@ namespace PowerSDR
 
                 if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
                 {
-                    ScaleBuffer(out_l2, out_l2, frameCount, (float)tx_vol);
-                    ScaleBuffer(out_r2, out_r2, frameCount, (float)tx_vol);
+                    ScaleBuffer(out_l2, out_l2, frameCount, (float)TXScale);
+                    ScaleBuffer(out_r2, out_r2, frameCount, (float)TXScale);
                 }
-                else /* do hermes/pennylane style scaling */
-                {
-                    ScaleBuffer(out_l2, out_l2, frameCount, GetPennylaneIQScale());
-                    ScaleBuffer(out_r2, out_r2, frameCount, GetPennylaneIQScale());
-                }
+               // else /* do hermes/pennylane style scaling */
+               // {
+               //     ScaleBuffer(out_l2, out_l2, frameCount, GetPennylaneIQScale());
+               //     ScaleBuffer(out_r2, out_r2, frameCount, GetPennylaneIQScale());
+               // }
 
             }
 
@@ -2186,7 +2187,7 @@ namespace PowerSDR
             return callback_return;
         }
 
-        private static float GetPennylaneIQScale()
+      /*  private static float GetPennylaneIQScale()
         {
             float pennylane_scale;
             if (TXScale >= PennylanePowerBreakPoint)
@@ -2198,7 +2199,7 @@ namespace PowerSDR
                 pennylane_scale = (float)PennylanePowerBreakPoint;
             }
             return pennylane_scale;
-        }
+        } */
 
 #if(TIMER)
 		private static HiPerfTimer t1 = new HiPerfTimer();
