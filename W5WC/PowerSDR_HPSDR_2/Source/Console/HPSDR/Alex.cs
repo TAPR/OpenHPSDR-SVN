@@ -171,6 +171,12 @@ namespace PowerSDR
 
 		public void UpdateAlexAntSelection(Band band, bool tx, bool alex_enabled) 
 		{
+            Console c = Console.getConsole();   //Vk4xv Need c.TXXVTRIndex & RXXVTRIndex
+            if (c == null)
+            {
+                System.Console.WriteLine("no console");
+                //return Band.LAST;
+            } 
 
 			if ( !alex_enabled ) 
 			{ 
@@ -185,9 +191,12 @@ namespace PowerSDR
 
 			if ( idx < 0 || idx > 11 ) 
 			{ 
-				band = AntBandFromFreq(); 
+				band = AntBandFromFreq();   // Sort Transv IF Freq
+                if (idx == 12 || idx == -1) //WWV = 12 GEN = -1 Vk4xv
+                {
 				idx = (int)band - (int)Band.B160M; 
-				if ( idx < 0 || idx > 11 ) 
+                }
+				if ( idx < 0 || idx > 26 ) 
 				{ 
 					System.Console.WriteLine("No good ant!"); 
 					return; 
@@ -198,15 +207,35 @@ namespace PowerSDR
 
 			if ( tx ) 
 			{ 
+                if (c.TXXVTRIndex >= 0)      // VHF Bands so force Xvtr out on Tx Vk4xv
+                {
+                    rx_ant = 0;
+                    rx_out = RxOutOnTx ? 1 : 0;
+                    tx_ant = 0;
+                }
+                else
+                {
 				rx_ant = 0;
                 rx_out = RxOutOnTx ? 1 : 0; 
 				tx_ant = TxAnt[idx]; 
 			} 
+			} 
+			else 
+			{
+                if (c.RX1XVTRIndex >= 0)     // VHF Bands so force Xvtr on Rx Vk4xv
+                {
+                    rx_ant = 3;
+                    rx_out = RxOutOnTx ? 1 : 0;
+                    tx_ant = 0;
+
+                }
 			else 
 			{ 
 				rx_ant = RxOnlyAnt[idx]; 
 				rx_out = rx_ant != 0 ? 1 : 0; 
 				tx_ant = RxAnt[idx]; 
+			}
+
 			}
           //  int rc = JanusAudio.SetAlexAntBits(rx_ant, tx_ant, 1);
 			JanusAudio.SetAlexAntBits(rx_ant, tx_ant, rx_out); 

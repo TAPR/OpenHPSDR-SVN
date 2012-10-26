@@ -33693,19 +33693,8 @@ namespace PowerSDR
             int new_size = Int32.Parse(comboAudioBuffer1.Text);
             bool power = console.PowerOn;
 
-            if (console.fwc_init &&
-                (console.CurrentModel == Model.FLEX3000 || console.CurrentModel == Model.FLEX5000))
-            {
-                try
-                {
-                    Pal.SetBufferSize((uint)new_size);
-                }
-                catch (Exception)
-                {
-                    // ignore exceptions in case version of PAL dll doesn't support this function
-                }
-            }
-
+            CWKeyer.AudioLatency = Math.Max(10.0, new_size / (double)console.SampleRate1 * 1e3);
+            
             if (power && old_size != new_size)
             {
                 console.PowerOn = false;
@@ -33713,8 +33702,7 @@ namespace PowerSDR
             }
 
             console.BlockSize1 = new_size;
-            RadioDSP.KeyerResetSize = console.BlockSize1 * 3 / 2;
-
+  
             if (power && old_size != new_size) console.PowerOn = true;
         }
 
@@ -40504,10 +40492,10 @@ namespace PowerSDR
 
         private void comboFRSRegion_SelectedIndexChanged(object sender, EventArgs e) //w5wc
         {
-            FRSRegion OldRegion = console.CurrentRegion;
-            FRSRegion CurrentRegion = FRSRegion.US;
-            if (comboFRSRegion.Text == "") return;
-            switch (comboFRSRegion.Text)
+             if (comboFRSRegion.Text == "") return;
+
+             FRSRegion CurrentRegion = console.CurrentRegion;
+             switch (comboFRSRegion.Text)
             {
                 case "Australia":
                     CurrentRegion = FRSRegion.Australia;
@@ -40586,7 +40574,8 @@ namespace PowerSDR
                     break;
             }
             console.CurrentRegion = CurrentRegion;
-            if (CurrentRegion != OldRegion) DB.UpdateRegion(console.CurrentRegion);
+
+            if (!console.initializing) DB.UpdateRegion(console.CurrentRegion);
             if (console.CurrentRegion == FRSRegion.UK)
             {
                 console.band_60m_register = 7;
@@ -40596,8 +40585,7 @@ namespace PowerSDR
             {
                 console.band_60m_register = 12;
                 console.Init60mChannels();
-            }
-         
+            }         
         }
 
         private void radMicIn_CheckedChanged(object sender, EventArgs e)

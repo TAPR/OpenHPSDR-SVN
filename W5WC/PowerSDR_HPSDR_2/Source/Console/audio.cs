@@ -667,7 +667,7 @@ namespace PowerSDR
             set { block_size_vac = value; }
         }
 
-        private static double audio_volts1 = 2.23;
+        private static double audio_volts1 = 0.8;
         public static double AudioVolts1
         {
             get { return audio_volts1; }

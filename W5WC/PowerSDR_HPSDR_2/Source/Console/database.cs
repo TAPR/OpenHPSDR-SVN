@@ -37,11 +37,11 @@ using System.Threading;
 
 namespace PowerSDR
 {
-	class DB
-	{
-		#region Variable Declaration
+    class DB
+    {
+        #region Variable Declaration
 
-		public static DataSet ds;
+        public static DataSet ds;
 
         /// <summary>
         /// the complete filename of the datbase file to use including the full path
@@ -51,57 +51,57 @@ namespace PowerSDR
         {
             set { file_name = value; }
         }
-      
-		#endregion
 
-		#region Private Member Functions
-// ======================================================
-// Private Member Functions
-// ======================================================
+        #endregion
 
-		//private static void VerifyTables(Model model)
-		private static void VerifyTables()
-		{
-			if(!ds.Tables.Contains("BandText"))
-				AddBandTextTable();
+        #region Private Member Functions
+        // ======================================================
+        // Private Member Functions
+        // ======================================================
 
-			if(!ds.Tables.Contains("BandStack"))
-				AddBandStackTable();
+        //private static void VerifyTables(Model model)
+        private static void VerifyTables()
+        {
+            if (!ds.Tables.Contains("BandText"))
+                AddBandTextTable();
 
-			if(!ds.Tables.Contains("Memory"))
-				AddMemoryTable();
+            if (!ds.Tables.Contains("BandStack"))
+                AddBandStackTable();
 
-			if(!ds.Tables.Contains("GroupList"))
-				AddGroupListTable();
+            if (!ds.Tables.Contains("Memory"))
+                AddMemoryTable();
 
-			if(!ds.Tables.Contains("TXProfile"))
-				AddTXProfileTable(Model.HPSDR);
+            if (!ds.Tables.Contains("GroupList"))
+                AddGroupListTable();
 
-			if(!ds.Tables.Contains("TXProfileDef"))
-				AddTXProfileDefTable(Model.HPSDR);
+            if (!ds.Tables.Contains("TXProfile"))
+                AddTXProfileTable();
 
-			Update();
-		}
+            if (!ds.Tables.Contains("TXProfileDef"))
+                AddTXProfileDefTable();
 
-		private static void AddFormTable(string name)
-		{
-			ds.Tables.Add(name);
-			ds.Tables[name].Columns.Add("Key", typeof(string));
-			ds.Tables[name].Columns.Add("Value", typeof(string));
-		}
+            Update();
+        }
 
-		private static void AddBandTextTable()
-		{   
+        private static void AddFormTable(string name)
+        {
+            ds.Tables.Add(name);
+            ds.Tables[name].Columns.Add("Key", typeof(string));
+            ds.Tables[name].Columns.Add("Value", typeof(string));
+        }
+
+        private static void AddBandTextTable()
+        {
             // Default bandtext - US Region 2
             ds.Tables.Add("BandText");
-			DataTable t = ds.Tables["BandText"];
+            DataTable t = ds.Tables["BandText"];
 
-			t.Columns.Add("Low", typeof(double));
-			t.Columns.Add("High", typeof(double));
-			t.Columns.Add("Name", typeof(string));
-			t.Columns.Add("TX", typeof(bool));
-            
-			object[] data = {
+            t.Columns.Add("Low", typeof(double));
+            t.Columns.Add("High", typeof(double));
+            t.Columns.Add("Name", typeof(string));
+            t.Columns.Add("TX", typeof(bool));
+
+            object[] data = {
 								1.800000, 1.809999, "160M CW/Digital Modes",	true,
 								1.810000, 1.810000, "160M CW QRP",				true,
 								1.810001, 1.842999, "160M CW",					true,
@@ -402,28 +402,28 @@ namespace PowerSDR
 								47088.100001, 47088.400000, "47GHz General", true,
 			};
 
-			for(int i= 0; i<data.Length/4; i++)
-			{
-				DataRow dr = t.NewRow();
-				dr["Low"] = (double)data[i*4+0];
-				dr["High"] = (double)data[i*4+1];
-				dr["Name"] = (string)data[i*4+2];
-				dr["TX"] = (bool)data[i*4+3];
-				t.Rows.Add(dr);
-			}
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
             AddBandTextSWB();
-		}
+        }
 
         private static void AddRegion2BandText()
         {
             // Default bandtext - US Region 2
-           // ds.Tables.Add("BandText");
+            // ds.Tables.Add("BandText");
             DataTable t = ds.Tables["BandText"];
 
-          //  t.Columns.Add("Low", typeof(double));
-          //  t.Columns.Add("High", typeof(double));
-           // t.Columns.Add("Name", typeof(string));
-           // t.Columns.Add("TX", typeof(bool));
+            //  t.Columns.Add("Low", typeof(double));
+            //  t.Columns.Add("High", typeof(double));
+            // t.Columns.Add("Name", typeof(string));
+            // t.Columns.Add("TX", typeof(bool));
 
             object[] data = {
 								1.800000, 1.809999, "160M CW/Digital Modes",	true,
@@ -798,7 +798,7 @@ namespace PowerSDR
         {
             ds.Tables["BandText"].Clear();
         }
-        
+
         private static void AddRegion1BandText160m()
         {
             DataTable t = ds.Tables["BandText"];
@@ -1524,7 +1524,7 @@ namespace PowerSDR
                 t.Rows.Add(dr);
             }
         }
-        
+
         private static void AddEUBandText6m()
         {
             // 50.80 - 51.00
@@ -1682,17 +1682,17 @@ namespace PowerSDR
 
         // End of Band Text
 
-		private static void AddBandStackTable()
-		{
-			ds.Tables.Add("BandStack");
-			DataTable t = ds.Tables["BandStack"];
+        private static void AddBandStackTable()
+        {
+            ds.Tables.Add("BandStack");
+            DataTable t = ds.Tables["BandStack"];
 
-			t.Columns.Add("BandName", typeof(string));
-			t.Columns.Add("Mode", typeof(string));
-			t.Columns.Add("Filter", typeof(string));
-			t.Columns.Add("Freq", typeof(double));
+            t.Columns.Add("BandName", typeof(string));
+            t.Columns.Add("Mode", typeof(string));
+            t.Columns.Add("Filter", typeof(string));
+            t.Columns.Add("Freq", typeof(double));
 
-			object[] data = {
+            object[] data = {
 								"160M", "CWL", "F5", 1.810000,
 								"160M", "CWU", "F1", 1.835000,
 								"160M", "USB", "F6", 1.845000,
@@ -1743,16 +1743,16 @@ namespace PowerSDR
 								"GEN", "SAM", "F4", 0.590000,
 			};
 
-			for(int i= 0; i<data.Length/4; i++)
-			{
-				DataRow dr = ds.Tables["BandStack"].NewRow();
-				dr["BandName"] = (string)data[i*4+0];
-				dr["Mode"] = (string)data[i*4+1];
-				dr["Filter"] = (string)data[i*4+2];
-				dr["Freq"] = ((double)data[i*4+3]).ToString("f6");
-				ds.Tables["BandStack"].Rows.Add(dr);
-			}
-		}
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = ds.Tables["BandStack"].NewRow();
+                dr["BandName"] = (string)data[i * 4 + 0];
+                dr["Mode"] = (string)data[i * 4 + 1];
+                dr["Filter"] = (string)data[i * 4 + 2];
+                dr["Freq"] = ((double)data[i * 4 + 3]).ToString("f6");
+                ds.Tables["BandStack"].Rows.Add(dr);
+            }
+        }
 
         private static void AddRegion1BandStack()
         {
@@ -1955,422 +1955,87 @@ namespace PowerSDR
             }
         }
 
-		private static void AddMemoryTable()
-		{
-			ds.Tables.Add("Memory");
-			DataTable t = ds.Tables["Memory"];
+        private static void AddMemoryTable()
+        {
+            ds.Tables.Add("Memory");
+            DataTable t = ds.Tables["Memory"];
 
-			t.Columns.Add("GroupID", typeof(int));
-			t.Columns.Add("Freq", typeof(double));
-			t.Columns.Add("ModeID", typeof(int));
-			t.Columns.Add("FilterID", typeof(int));
-			t.Columns.Add("Callsign", typeof(string));
-			t.Columns.Add("Comments", typeof(string));
-			t.Columns.Add("Scan", typeof(bool));
-			t.Columns.Add("Squelch", typeof(int));
-			t.Columns.Add("StepSizeID", typeof(int));
-			t.Columns.Add("AGCID", typeof(int));
-			t.Columns.Add("Gain", typeof(string));
-			t.Columns.Add("FilterLow", typeof(int));
-			t.Columns.Add("FilterHigh", typeof(int));
-			t.Columns.Add("CreateDate", typeof(string));
-		}
+            t.Columns.Add("GroupID", typeof(int));
+            t.Columns.Add("Freq", typeof(double));
+            t.Columns.Add("ModeID", typeof(int));
+            t.Columns.Add("FilterID", typeof(int));
+            t.Columns.Add("Callsign", typeof(string));
+            t.Columns.Add("Comments", typeof(string));
+            t.Columns.Add("Scan", typeof(bool));
+            t.Columns.Add("Squelch", typeof(int));
+            t.Columns.Add("StepSizeID", typeof(int));
+            t.Columns.Add("AGCID", typeof(int));
+            t.Columns.Add("Gain", typeof(string));
+            t.Columns.Add("FilterLow", typeof(int));
+            t.Columns.Add("FilterHigh", typeof(int));
+            t.Columns.Add("CreateDate", typeof(string));
+        }
 
-		private static void AddGroupListTable()
-		{
-			ds.Tables.Add("GroupList");
-			DataTable t = ds.Tables["GroupList"];
+        private static void AddGroupListTable()
+        {
+            ds.Tables.Add("GroupList");
+            DataTable t = ds.Tables["GroupList"];
 
-			t.Columns.Add("GroupID", typeof(int));
-			t.Columns.Add("GroupName", typeof(string));
+            t.Columns.Add("GroupID", typeof(int));
+            t.Columns.Add("GroupName", typeof(string));
 
-			string[] vals = { "AM", "FM", "SSB", "SSTV", "CW", "PSK", "RTTY" };
-			
-			for(int i= 0; i<vals.Length; i++)
-			{
-				DataRow dr = t.NewRow();
-				dr[0] = i;
-				dr[1] = vals[i];
-				t.Rows.Add(dr);
-			}
-		}
+            string[] vals = { "AM", "FM", "SSB", "SSTV", "CW", "PSK", "RTTY" };
 
-        private static void AddTXProfileTable(Model model)
-		{
-			ds.Tables.Add("TXProfile");
-			DataTable t = ds.Tables["TXProfile"];
-
-			t.Columns.Add("Name", typeof(string));
-			t.Columns.Add("FilterLow", typeof(int));
-			t.Columns.Add("FilterHigh", typeof(int));
-			t.Columns.Add("TXEQNumBands", typeof(int));
-			t.Columns.Add("TXEQEnabled", typeof(bool));
-			t.Columns.Add("TXEQPreamp", typeof(int));
-			t.Columns.Add("TXEQ1", typeof(int));
-			t.Columns.Add("TXEQ2", typeof(int));
-			t.Columns.Add("TXEQ3", typeof(int));
-			t.Columns.Add("TXEQ4", typeof(int));
-			t.Columns.Add("TXEQ5", typeof(int));
-			t.Columns.Add("TXEQ6", typeof(int));
-			t.Columns.Add("TXEQ7", typeof(int));
-			t.Columns.Add("TXEQ8", typeof(int));
-			t.Columns.Add("TXEQ9", typeof(int));
-			t.Columns.Add("TXEQ10", typeof(int));
-			t.Columns.Add("DXOn", typeof(bool));
-			t.Columns.Add("DXLevel", typeof(int));
-			t.Columns.Add("CompanderOn", typeof(bool));
-			t.Columns.Add("CompanderLevel", typeof(int));
-			t.Columns.Add("MicGain", typeof(int));
-            t.Columns.Add("FMMicGain", typeof(int));
-			t.Columns.Add("Lev_On", typeof(bool));
-			t.Columns.Add("Lev_Slope", typeof(int));
-			t.Columns.Add("Lev_MaxGain", typeof(int));
-			t.Columns.Add("Lev_Attack", typeof(int));
-			t.Columns.Add("Lev_Decay", typeof(int));
-			t.Columns.Add("Lev_Hang", typeof(int));
-			t.Columns.Add("Lev_HangThreshold", typeof(int));
-			t.Columns.Add("ALC_Slope", typeof(int));
-			t.Columns.Add("ALC_MaxGain", typeof(int));
-			t.Columns.Add("ALC_Attack", typeof(int));
-			t.Columns.Add("ALC_Decay", typeof(int));
-			t.Columns.Add("ALC_Hang", typeof(int));
-			t.Columns.Add("ALC_HangThreshold", typeof(int));
-			t.Columns.Add("Power", typeof(int));
-            t.Columns.Add("Dexp_On", typeof(bool));
-            t.Columns.Add("Dexp_Threshold",typeof(int));
-            t.Columns.Add("Dexp_Attenuate", typeof(int));
-            t.Columns.Add("VOX_On", typeof(bool));
-            t.Columns.Add("VOX_Threshold", typeof(int));
-            t.Columns.Add("VOX_HangTime", typeof(int));
-            t.Columns.Add("Tune_Power", typeof(int));
-            t.Columns.Add("Tune_Meter_Type", typeof(string));
-            t.Columns.Add("TX_Limit_Slew", typeof(bool));
-            t.Columns.Add("TX_AF_Level", typeof(int));
-            t.Columns.Add("AM_Carrier_Level", typeof(int));
-            t.Columns.Add("Show_TX_Filter", typeof(bool));
-            t.Columns.Add("VAC1_On", typeof(bool));
-            t.Columns.Add("VAC1_Auto_On", typeof(bool));
-            t.Columns.Add("VAC1_RX_Gain", typeof(int));
-            t.Columns.Add("VAC1_TX_Gain", typeof(int));
-            t.Columns.Add("VAC1_Stereo_On", typeof(bool));
-            t.Columns.Add("VAC1_Sample_Rate", typeof(string));
-            t.Columns.Add("VAC1_Buffer_Size", typeof(string));
-            t.Columns.Add("VAC1_IQ_Output", typeof(bool));
-            t.Columns.Add("VAC1_IQ_Correct", typeof(bool));
-            t.Columns.Add("VAC1_PTT_OverRide", typeof(bool));
-            t.Columns.Add("VAC1_Combine_Input_Channels", typeof(bool));
-            t.Columns.Add("VAC1_Latency_On", typeof(bool));
-            t.Columns.Add("VAC1_Latency_Duration", typeof(int));
-            t.Columns.Add("VAC2_On", typeof(bool));
-            t.Columns.Add("VAC2_Auto_On", typeof(bool));
-            t.Columns.Add("VAC2_RX_Gain", typeof(int));
-            t.Columns.Add("VAC2_TX_Gain", typeof(int));
-            t.Columns.Add("VAC2_Stereo_On", typeof(bool));
-            t.Columns.Add("VAC2_Sample_Rate", typeof(string));
-            t.Columns.Add("VAC2_Buffer_Size", typeof(string));
-            t.Columns.Add("VAC2_IQ_Output", typeof(bool));
-            t.Columns.Add("VAC2_IQ_Correct", typeof(bool));
-            t.Columns.Add("VAC2_Combine_Input_Channels", typeof(bool));
-            t.Columns.Add("VAC2_Latency_On", typeof(bool));
-            t.Columns.Add("VAC2_Latency_Duration", typeof(int));
-            t.Columns.Add("Phone_RX_DSP_Buffer", typeof(string));
-            t.Columns.Add("Phone_TX_DSP_Buffer", typeof(string));
-            t.Columns.Add("Digi_RX_DSP_Buffer", typeof(string));
-            t.Columns.Add("Digi_TX_DSP_Buffer", typeof(string));
-            t.Columns.Add("CW_RX_DSP_Buffer", typeof(string));
-            t.Columns.Add("Mic_Input_On", typeof(string));
-            t.Columns.Add("Mic_Input_Level", typeof(int));
-            t.Columns.Add("Line_Input_On", typeof(string));
-            t.Columns.Add("Line_Input_Level", typeof(int));
-            t.Columns.Add("Balanced_Line_Input_On", typeof(string));
-            t.Columns.Add("Balanced_Line_Input_Level", typeof(int));
-            t.Columns.Add("FlexWire_Input_On", typeof(string));
-            t.Columns.Add("FlexWire_Input_Level", typeof(int));
-
-
-			#region Default
-
-			DataRow dr = t.NewRow();
-			dr["Name"] = "Default";
-			dr["FilterLow"] = 200;
-			dr["FilterHigh"] = 3100;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = true;
-			dr["CompanderLevel"] = 2;
-			dr["MicGain"] = 10;
-            dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
-            dr["Dexp_On"] = false;
-            dr["Dexp_Threshold"] = -40;
-            dr["Dexp_Attenuate"] = 80;
-            dr["VOX_On"] = false;
-            dr["VOX_Threshold"] = 100;
-            dr["VOX_HangTime"] = 250;
-            dr["Tune_Power"] = 10;
-            dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
-            dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
-            dr["Show_TX_Filter"] = false;
-            dr["VAC1_On"] = false;
-            dr["VAC1_Auto_On"] = false;
-            dr["VAC1_RX_GAIN"] = 0;
-            dr["VAC1_TX_GAIN"] = 0;
-            dr["VAC1_Stereo_On"] = false;
-            dr["VAC1_Sample_Rate"] = "48000";
-            dr["VAC1_Buffer_Size"] = "2048";
-            dr["VAC1_IQ_Output"] = false;
-            dr["VAC1_IQ_Correct"] = true;
-            dr["VAC1_PTT_OverRide"] = true;
-            dr["VAC1_Combine_Input_Channels"] = false;
-            dr["VAC1_Latency_On"] = true;
-            dr["VAC1_Latency_Duration"] = 120;
-            dr["VAC2_On"] = false;
-            dr["VAC2_Auto_On"] = false;
-            dr["VAC2_RX_GAIN"] = 0;
-            dr["VAC2_TX_GAIN"] = 0;
-            dr["VAC2_Stereo_On"] = false;
-            dr["VAC2_Sample_Rate"] = "48000";
-            dr["VAC2_Buffer_Size"] = "2048";
-            dr["VAC2_IQ_Output"] = false;
-            dr["VAC2_IQ_Correct"] = true;
-            dr["VAC2_Combine_Input_Channels"] = false;
-            dr["VAC2_Latency_On"] = true;
-            dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
+            for (int i = 0; i < vals.Length; i++)
             {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
+                DataRow dr = t.NewRow();
+                dr[0] = i;
+                dr[1] = vals[i];
+                t.Rows.Add(dr);
             }
+        }
 
-			t.Rows.Add(dr);
+        private static void AddTXProfileTable()
+        {
+            ds.Tables.Add("TXProfile");
+            DataTable t = ds.Tables["TXProfile"];
 
-			#endregion
-
-			#region Default DX
-
-			dr = t.NewRow();
-			dr["Name"] = "Default DX";
-			dr["FilterLow"] = 200;
-			dr["FilterHigh"] = 3100;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = true;
-			dr["DXLevel"] = 5;
-			dr["CompanderOn"] = false;
-			dr["CompanderLevel"] = 2;
-			dr["MicGain"] = 5;
-            dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
-            dr["Dexp_On"] = false;
-            dr["Dexp_Threshold"] = -40;
-            dr["Dexp_Attenuate"] = 80;
-            dr["VOX_On"] = false;
-            dr["VOX_Threshold"] = 100;
-            dr["VOX_HangTime"] = 250;
-            dr["Tune_Power"] = 10;
-            dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
-            dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
-            dr["Show_TX_Filter"] = false;
-            dr["VAC1_On"] = false;
-            dr["VAC1_Auto_On"] = false;
-            dr["VAC1_RX_GAIN"] = 0;
-            dr["VAC1_TX_GAIN"] = 0;
-            dr["VAC1_Stereo_On"] = false;
-            dr["VAC1_Sample_Rate"] = "48000";
-            dr["VAC1_Buffer_Size"] = "2048";
-            dr["VAC1_IQ_Output"] = false;
-            dr["VAC1_IQ_Correct"] = true;
-            dr["VAC1_PTT_OverRide"] = true;
-            dr["VAC1_Combine_Input_Channels"] = false;
-            dr["VAC1_Latency_On"] = true;
-            dr["VAC1_Latency_Duration"] = 120;
-            dr["VAC2_On"] = false;
-            dr["VAC2_Auto_On"] = false;
-            dr["VAC2_RX_GAIN"] = 0;
-            dr["VAC2_TX_GAIN"] = 0;
-            dr["VAC2_Stereo_On"] = false;
-            dr["VAC2_Sample_Rate"] = "48000";
-            dr["VAC2_Buffer_Size"] = "2048";
-            dr["VAC2_IQ_Output"] = false;
-            dr["VAC2_IQ_Correct"] = true;
-            dr["VAC2_Combine_Input_Channels"] = false;
-            dr["VAC2_Latency_On"] = true;
-            dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
-
-
-			t.Rows.Add(dr);
-
-			#endregion
-		}
-
-		private static void AddTXProfileDefTable(Model model)
-		{
-			ds.Tables.Add("TXProfileDef");
-			DataTable t = ds.Tables["TXProfileDef"];
-
-			t.Columns.Add("Name", typeof(string));
-			t.Columns.Add("FilterLow", typeof(int));
-			t.Columns.Add("FilterHigh", typeof(int));
-			t.Columns.Add("TXEQNumBands", typeof(int));
-			t.Columns.Add("TXEQEnabled", typeof(bool));
-			t.Columns.Add("TXEQPreamp", typeof(int));
-			t.Columns.Add("TXEQ1", typeof(int));
-			t.Columns.Add("TXEQ2", typeof(int));
-			t.Columns.Add("TXEQ3", typeof(int));
-			t.Columns.Add("TXEQ4", typeof(int));
-			t.Columns.Add("TXEQ5", typeof(int));
-			t.Columns.Add("TXEQ6", typeof(int));
-			t.Columns.Add("TXEQ7", typeof(int));
-			t.Columns.Add("TXEQ8", typeof(int));
-			t.Columns.Add("TXEQ9", typeof(int));
-			t.Columns.Add("TXEQ10", typeof(int));
-			t.Columns.Add("DXOn", typeof(bool));
-			t.Columns.Add("DXLevel", typeof(int));
-			t.Columns.Add("CompanderOn", typeof(bool));
-			t.Columns.Add("CompanderLevel", typeof(int));
-			t.Columns.Add("MicGain", typeof(int));
+            t.Columns.Add("Name", typeof(string));
+            t.Columns.Add("FilterLow", typeof(int));
+            t.Columns.Add("FilterHigh", typeof(int));
+            t.Columns.Add("TXEQNumBands", typeof(int));
+            t.Columns.Add("TXEQEnabled", typeof(bool));
+            t.Columns.Add("TXEQPreamp", typeof(int));
+            t.Columns.Add("TXEQ1", typeof(int));
+            t.Columns.Add("TXEQ2", typeof(int));
+            t.Columns.Add("TXEQ3", typeof(int));
+            t.Columns.Add("TXEQ4", typeof(int));
+            t.Columns.Add("TXEQ5", typeof(int));
+            t.Columns.Add("TXEQ6", typeof(int));
+            t.Columns.Add("TXEQ7", typeof(int));
+            t.Columns.Add("TXEQ8", typeof(int));
+            t.Columns.Add("TXEQ9", typeof(int));
+            t.Columns.Add("TXEQ10", typeof(int));
+            t.Columns.Add("DXOn", typeof(bool));
+            t.Columns.Add("DXLevel", typeof(int));
+            t.Columns.Add("CompanderOn", typeof(bool));
+            t.Columns.Add("CompanderLevel", typeof(int));
+            t.Columns.Add("MicGain", typeof(int));
             t.Columns.Add("FMMicGain", typeof(int));
-			t.Columns.Add("Lev_On", typeof(bool));
-			t.Columns.Add("Lev_Slope", typeof(int));
-			t.Columns.Add("Lev_MaxGain", typeof(int));
-			t.Columns.Add("Lev_Attack", typeof(int));
-			t.Columns.Add("Lev_Decay", typeof(int));
-			t.Columns.Add("Lev_Hang", typeof(int));
-			t.Columns.Add("Lev_HangThreshold", typeof(int));
-			t.Columns.Add("ALC_Slope", typeof(int));
-			t.Columns.Add("ALC_MaxGain", typeof(int));
-			t.Columns.Add("ALC_Attack", typeof(int));
-			t.Columns.Add("ALC_Decay", typeof(int));
-			t.Columns.Add("ALC_Hang", typeof(int));
-			t.Columns.Add("ALC_HangThreshold", typeof(int));
-			t.Columns.Add("Power", typeof(int));
+            t.Columns.Add("Lev_On", typeof(bool));
+            t.Columns.Add("Lev_Slope", typeof(int));
+            t.Columns.Add("Lev_MaxGain", typeof(int));
+            t.Columns.Add("Lev_Attack", typeof(int));
+            t.Columns.Add("Lev_Decay", typeof(int));
+            t.Columns.Add("Lev_Hang", typeof(int));
+            t.Columns.Add("Lev_HangThreshold", typeof(int));
+            t.Columns.Add("ALC_Slope", typeof(int));
+            t.Columns.Add("ALC_MaxGain", typeof(int));
+            t.Columns.Add("ALC_Attack", typeof(int));
+            t.Columns.Add("ALC_Decay", typeof(int));
+            t.Columns.Add("ALC_Hang", typeof(int));
+            t.Columns.Add("ALC_HangThreshold", typeof(int));
+            t.Columns.Add("Power", typeof(int));
             t.Columns.Add("Dexp_On", typeof(bool));
             t.Columns.Add("Dexp_Threshold", typeof(int));
             t.Columns.Add("Dexp_Attenuate", typeof(int));
@@ -2422,45 +2087,46 @@ namespace PowerSDR
             t.Columns.Add("FlexWire_Input_On", typeof(string));
             t.Columns.Add("FlexWire_Input_Level", typeof(int));
 
-			#region Default
 
-			DataRow dr = t.NewRow();
-			dr["Name"] = "Default";
-			dr["FilterLow"] = 200;
-			dr["FilterHigh"] = 3100;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = true;
-			dr["CompanderLevel"] = 2;
-			dr["MicGain"] = 10;
+            #region Default
+
+            DataRow dr = t.NewRow();
+            dr["Name"] = "Default";
+            dr["FilterLow"] = 200;
+            dr["FilterHigh"] = 3100;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = true;
+            dr["CompanderLevel"] = 2;
+            dr["MicGain"] = 10;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -2503,84 +2169,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
-			
-			#region Default DX
+            #endregion
 
-			dr = t.NewRow();
-			dr["Name"] = "Default DX";
-			dr["FilterLow"] = 200;
-			dr["FilterHigh"] = 3100;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = true;
-			dr["DXLevel"] = 5;
-			dr["CompanderOn"] = false;
-			dr["CompanderLevel"] = 2;
-			dr["MicGain"] = 5;
+            #region Default DX
+
+            dr = t.NewRow();
+            dr["Name"] = "Default DX";
+            dr["FilterLow"] = 200;
+            dr["FilterHigh"] = 3100;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = true;
+            dr["DXLevel"] = 5;
+            dr["CompanderOn"] = false;
+            dr["CompanderLevel"] = 2;
+            dr["MicGain"] = 5;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -2623,44 +2263,299 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
+        }
+
+        private static void AddTXProfileDefTable()
+        {
+            ds.Tables.Add("TXProfileDef");
+            DataTable t = ds.Tables["TXProfileDef"];
+
+            t.Columns.Add("Name", typeof(string));
+            t.Columns.Add("FilterLow", typeof(int));
+            t.Columns.Add("FilterHigh", typeof(int));
+            t.Columns.Add("TXEQNumBands", typeof(int));
+            t.Columns.Add("TXEQEnabled", typeof(bool));
+            t.Columns.Add("TXEQPreamp", typeof(int));
+            t.Columns.Add("TXEQ1", typeof(int));
+            t.Columns.Add("TXEQ2", typeof(int));
+            t.Columns.Add("TXEQ3", typeof(int));
+            t.Columns.Add("TXEQ4", typeof(int));
+            t.Columns.Add("TXEQ5", typeof(int));
+            t.Columns.Add("TXEQ6", typeof(int));
+            t.Columns.Add("TXEQ7", typeof(int));
+            t.Columns.Add("TXEQ8", typeof(int));
+            t.Columns.Add("TXEQ9", typeof(int));
+            t.Columns.Add("TXEQ10", typeof(int));
+            t.Columns.Add("DXOn", typeof(bool));
+            t.Columns.Add("DXLevel", typeof(int));
+            t.Columns.Add("CompanderOn", typeof(bool));
+            t.Columns.Add("CompanderLevel", typeof(int));
+            t.Columns.Add("MicGain", typeof(int));
+            t.Columns.Add("FMMicGain", typeof(int));
+            t.Columns.Add("Lev_On", typeof(bool));
+            t.Columns.Add("Lev_Slope", typeof(int));
+            t.Columns.Add("Lev_MaxGain", typeof(int));
+            t.Columns.Add("Lev_Attack", typeof(int));
+            t.Columns.Add("Lev_Decay", typeof(int));
+            t.Columns.Add("Lev_Hang", typeof(int));
+            t.Columns.Add("Lev_HangThreshold", typeof(int));
+            t.Columns.Add("ALC_Slope", typeof(int));
+            t.Columns.Add("ALC_MaxGain", typeof(int));
+            t.Columns.Add("ALC_Attack", typeof(int));
+            t.Columns.Add("ALC_Decay", typeof(int));
+            t.Columns.Add("ALC_Hang", typeof(int));
+            t.Columns.Add("ALC_HangThreshold", typeof(int));
+            t.Columns.Add("Power", typeof(int));
+            t.Columns.Add("Dexp_On", typeof(bool));
+            t.Columns.Add("Dexp_Threshold", typeof(int));
+            t.Columns.Add("Dexp_Attenuate", typeof(int));
+            t.Columns.Add("VOX_On", typeof(bool));
+            t.Columns.Add("VOX_Threshold", typeof(int));
+            t.Columns.Add("VOX_HangTime", typeof(int));
+            t.Columns.Add("Tune_Power", typeof(int));
+            t.Columns.Add("Tune_Meter_Type", typeof(string));
+            t.Columns.Add("TX_Limit_Slew", typeof(bool));
+            t.Columns.Add("TX_AF_Level", typeof(int));
+            t.Columns.Add("AM_Carrier_Level", typeof(int));
+            t.Columns.Add("Show_TX_Filter", typeof(bool));
+            t.Columns.Add("VAC1_On", typeof(bool));
+            t.Columns.Add("VAC1_Auto_On", typeof(bool));
+            t.Columns.Add("VAC1_RX_Gain", typeof(int));
+            t.Columns.Add("VAC1_TX_Gain", typeof(int));
+            t.Columns.Add("VAC1_Stereo_On", typeof(bool));
+            t.Columns.Add("VAC1_Sample_Rate", typeof(string));
+            t.Columns.Add("VAC1_Buffer_Size", typeof(string));
+            t.Columns.Add("VAC1_IQ_Output", typeof(bool));
+            t.Columns.Add("VAC1_IQ_Correct", typeof(bool));
+            t.Columns.Add("VAC1_PTT_OverRide", typeof(bool));
+            t.Columns.Add("VAC1_Combine_Input_Channels", typeof(bool));
+            t.Columns.Add("VAC1_Latency_On", typeof(bool));
+            t.Columns.Add("VAC1_Latency_Duration", typeof(int));
+            t.Columns.Add("VAC2_On", typeof(bool));
+            t.Columns.Add("VAC2_Auto_On", typeof(bool));
+            t.Columns.Add("VAC2_RX_Gain", typeof(int));
+            t.Columns.Add("VAC2_TX_Gain", typeof(int));
+            t.Columns.Add("VAC2_Stereo_On", typeof(bool));
+            t.Columns.Add("VAC2_Sample_Rate", typeof(string));
+            t.Columns.Add("VAC2_Buffer_Size", typeof(string));
+            t.Columns.Add("VAC2_IQ_Output", typeof(bool));
+            t.Columns.Add("VAC2_IQ_Correct", typeof(bool));
+            t.Columns.Add("VAC2_Combine_Input_Channels", typeof(bool));
+            t.Columns.Add("VAC2_Latency_On", typeof(bool));
+            t.Columns.Add("VAC2_Latency_Duration", typeof(int));
+            t.Columns.Add("Phone_RX_DSP_Buffer", typeof(string));
+            t.Columns.Add("Phone_TX_DSP_Buffer", typeof(string));
+            t.Columns.Add("Digi_RX_DSP_Buffer", typeof(string));
+            t.Columns.Add("Digi_TX_DSP_Buffer", typeof(string));
+            t.Columns.Add("CW_RX_DSP_Buffer", typeof(string));
+            t.Columns.Add("Mic_Input_On", typeof(string));
+            t.Columns.Add("Mic_Input_Level", typeof(int));
+            t.Columns.Add("Line_Input_On", typeof(string));
+            t.Columns.Add("Line_Input_Level", typeof(int));
+            t.Columns.Add("Balanced_Line_Input_On", typeof(string));
+            t.Columns.Add("Balanced_Line_Input_Level", typeof(int));
+            t.Columns.Add("FlexWire_Input_On", typeof(string));
+            t.Columns.Add("FlexWire_Input_Level", typeof(int));
+
+            #region Default
+
+            DataRow dr = t.NewRow();
+            dr["Name"] = "Default";
+            dr["FilterLow"] = 200;
+            dr["FilterHigh"] = 3100;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = true;
+            dr["CompanderLevel"] = 2;
+            dr["MicGain"] = 10;
+            dr["FMMicGain"] = 10;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
+            dr["Dexp_On"] = false;
+            dr["Dexp_Threshold"] = -40;
+            dr["Dexp_Attenuate"] = 80;
+            dr["VOX_On"] = false;
+            dr["VOX_Threshold"] = 100;
+            dr["VOX_HangTime"] = 250;
+            dr["Tune_Power"] = 10;
+            dr["Tune_Meter_Type"] = "Fwd Pwr";
+            dr["TX_Limit_Slew"] = false;
+            dr["TX_AF_Level"] = 50;
+            dr["AM_Carrier_Level"] = 25;
+            dr["Show_TX_Filter"] = false;
+            dr["VAC1_On"] = false;
+            dr["VAC1_Auto_On"] = false;
+            dr["VAC1_RX_GAIN"] = 0;
+            dr["VAC1_TX_GAIN"] = 0;
+            dr["VAC1_Stereo_On"] = false;
+            dr["VAC1_Sample_Rate"] = "48000";
+            dr["VAC1_Buffer_Size"] = "2048";
+            dr["VAC1_IQ_Output"] = false;
+            dr["VAC1_IQ_Correct"] = true;
+            dr["VAC1_PTT_OverRide"] = true;
+            dr["VAC1_Combine_Input_Channels"] = false;
+            dr["VAC1_Latency_On"] = true;
+            dr["VAC1_Latency_Duration"] = 120;
+            dr["VAC2_On"] = false;
+            dr["VAC2_Auto_On"] = false;
+            dr["VAC2_RX_GAIN"] = 0;
+            dr["VAC2_TX_GAIN"] = 0;
+            dr["VAC2_Stereo_On"] = false;
+            dr["VAC2_Sample_Rate"] = "48000";
+            dr["VAC2_Buffer_Size"] = "2048";
+            dr["VAC2_IQ_Output"] = false;
+            dr["VAC2_IQ_Correct"] = true;
+            dr["VAC2_Combine_Input_Channels"] = false;
+            dr["VAC2_Latency_On"] = true;
+            dr["VAC2_Latency_Duration"] = 120;
+            dr["Phone_RX_DSP_Buffer"] = "2048";
+            dr["Phone_TX_DSP_Buffer"] = "2048";
+            dr["Digi_RX_DSP_Buffer"] = "2048";
+            dr["Digi_TX_DSP_Buffer"] = "2048";
+            dr["CW_RX_DSP_Buffer"] = "2048";
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
+
+            t.Rows.Add(dr);
+
+            #endregion
+
+            #region Default DX
+
+            dr = t.NewRow();
+            dr["Name"] = "Default DX";
+            dr["FilterLow"] = 200;
+            dr["FilterHigh"] = 3100;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = true;
+            dr["DXLevel"] = 5;
+            dr["CompanderOn"] = false;
+            dr["CompanderLevel"] = 2;
+            dr["MicGain"] = 5;
+            dr["FMMicGain"] = 10;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
+            dr["Dexp_On"] = false;
+            dr["Dexp_Threshold"] = -40;
+            dr["Dexp_Attenuate"] = 80;
+            dr["VOX_On"] = false;
+            dr["VOX_Threshold"] = 100;
+            dr["VOX_HangTime"] = 250;
+            dr["Tune_Power"] = 10;
+            dr["Tune_Meter_Type"] = "Fwd Pwr";
+            dr["TX_Limit_Slew"] = false;
+            dr["TX_AF_Level"] = 50;
+            dr["AM_Carrier_Level"] = 25;
+            dr["Show_TX_Filter"] = false;
+            dr["VAC1_On"] = false;
+            dr["VAC1_Auto_On"] = false;
+            dr["VAC1_RX_GAIN"] = 0;
+            dr["VAC1_TX_GAIN"] = 0;
+            dr["VAC1_Stereo_On"] = false;
+            dr["VAC1_Sample_Rate"] = "48000";
+            dr["VAC1_Buffer_Size"] = "2048";
+            dr["VAC1_IQ_Output"] = false;
+            dr["VAC1_IQ_Correct"] = true;
+            dr["VAC1_PTT_OverRide"] = true;
+            dr["VAC1_Combine_Input_Channels"] = false;
+            dr["VAC1_Latency_On"] = true;
+            dr["VAC1_Latency_Duration"] = 120;
+            dr["VAC2_On"] = false;
+            dr["VAC2_Auto_On"] = false;
+            dr["VAC2_RX_GAIN"] = 0;
+            dr["VAC2_TX_GAIN"] = 0;
+            dr["VAC2_Stereo_On"] = false;
+            dr["VAC2_Sample_Rate"] = "48000";
+            dr["VAC2_Buffer_Size"] = "2048";
+            dr["VAC2_IQ_Output"] = false;
+            dr["VAC2_IQ_Correct"] = true;
+            dr["VAC2_Combine_Input_Channels"] = false;
+            dr["VAC2_Latency_On"] = true;
+            dr["VAC2_Latency_Duration"] = 120;
+            dr["Phone_RX_DSP_Buffer"] = "2048";
+            dr["Phone_TX_DSP_Buffer"] = "2048";
+            dr["Digi_RX_DSP_Buffer"] = "2048";
+            dr["Digi_TX_DSP_Buffer"] = "2048";
+            dr["CW_RX_DSP_Buffer"] = "2048";
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
+
+            t.Rows.Add(dr);
+
+            #endregion
 
             // W4TME
             #region DIGI 1K@1500
@@ -2744,40 +2639,14 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -2865,84 +2734,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
             #endregion
 
-			#region AM
+            #region AM
 
-			dr = t.NewRow();
-			dr["Name"] = "AM";
-			dr["FilterLow"] = 0;
-			dr["FilterHigh"] = 4000;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = false;
-			dr["CompanderLevel"] = 3;
-			dr["MicGain"] = 10;
+            dr = t.NewRow();
+            dr["Name"] = "AM";
+            dr["FilterLow"] = 0;
+            dr["FilterHigh"] = 4000;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = false;
+            dr["CompanderLevel"] = 3;
+            dr["MicGain"] = 10;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -2985,84 +2828,57 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
+            t.Rows.Add(dr);
 
-			t.Rows.Add(dr);
+            #endregion
 
-			#endregion
+            #region Conventional
 
-			#region Conventional
-
-			dr = t.NewRow();
-			dr["Name"] = "Conventional";
-			dr["FilterLow"] = 100;
-			dr["FilterHigh"] = 3100;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = false;
-			dr["CompanderLevel"] = 3;
-			dr["MicGain"] = 10;
+            dr = t.NewRow();
+            dr["Name"] = "Conventional";
+            dr["FilterLow"] = 100;
+            dr["FilterHigh"] = 3100;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = false;
+            dr["CompanderLevel"] = 3;
+            dr["MicGain"] = 10;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -3105,84 +2921,57 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
+            t.Rows.Add(dr);
 
-			t.Rows.Add(dr);
+            #endregion
 
-			#endregion
+            #region D-104
 
-			#region D-104
-
-			dr = t.NewRow();
-			dr["Name"] = "D-104";
-			dr["FilterLow"] = 100;
-			dr["FilterHigh"] = 3500;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = -6;
-			dr["TXEQ1"] = 7;
-			dr["TXEQ2"] = 3;
-			dr["TXEQ3"] = 4;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = false;
-			dr["CompanderLevel"] = 5;
-			dr["MicGain"] = 25;
+            dr = t.NewRow();
+            dr["Name"] = "D-104";
+            dr["FilterLow"] = 100;
+            dr["FilterHigh"] = 3500;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = -6;
+            dr["TXEQ1"] = 7;
+            dr["TXEQ2"] = 3;
+            dr["TXEQ3"] = 4;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = false;
+            dr["CompanderLevel"] = 5;
+            dr["MicGain"] = 25;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -3225,84 +3014,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
 
-			#region D-104+CPDR
+            #region D-104+CPDR
 
-			dr = t.NewRow();
-			dr["Name"] = "D-104+CPDR";
-			dr["FilterLow"] = 100;
-			dr["FilterHigh"] = 3500;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = -6;
-			dr["TXEQ1"] = 7;
-			dr["TXEQ2"] = 3;
-			dr["TXEQ3"] = 4;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = true;
-			dr["CompanderLevel"] = 5;
-			dr["MicGain"] = 20;
+            dr = t.NewRow();
+            dr["Name"] = "D-104+CPDR";
+            dr["FilterLow"] = 100;
+            dr["FilterHigh"] = 3500;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = -6;
+            dr["TXEQ1"] = 7;
+            dr["TXEQ2"] = 3;
+            dr["TXEQ3"] = 4;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = true;
+            dr["CompanderLevel"] = 5;
+            dr["MicGain"] = 20;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -3345,84 +3108,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
 
-			#region D-104+EQ
+            #region D-104+EQ
 
-			dr = t.NewRow();
-			dr["Name"] = "D-104+EQ";
-			dr["FilterLow"] = 100;
-			dr["FilterHigh"] = 3500;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = true;
-			dr["TXEQPreamp"] = -6;
-			dr["TXEQ1"] = 7;
-			dr["TXEQ2"] = 3;
-			dr["TXEQ3"] = 4;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = false;
-			dr["CompanderLevel"] = 5;
-			dr["MicGain"] = 20;
+            dr = t.NewRow();
+            dr["Name"] = "D-104+EQ";
+            dr["FilterLow"] = 100;
+            dr["FilterHigh"] = 3500;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = true;
+            dr["TXEQPreamp"] = -6;
+            dr["TXEQ1"] = 7;
+            dr["TXEQ2"] = 3;
+            dr["TXEQ3"] = 4;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = false;
+            dr["CompanderLevel"] = 5;
+            dr["MicGain"] = 20;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -3465,84 +3202,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
 
-			#region DX / Constest
+            #region DX / Constest
 
-			dr = t.NewRow();
-			dr["Name"] = "DX / Contest";
-			dr["FilterLow"] = 250;
-			dr["FilterHigh"] = 3250;
-			dr["TXEQNumBands"] = 10;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = true;
-			dr["DXLevel"] = 5;
-			dr["CompanderOn"] = false;
-			dr["CompanderLevel"] = 3;
-			dr["MicGain"] = 10;
+            dr = t.NewRow();
+            dr["Name"] = "DX / Contest";
+            dr["FilterLow"] = 250;
+            dr["FilterHigh"] = 3250;
+            dr["TXEQNumBands"] = 10;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = true;
+            dr["DXLevel"] = 5;
+            dr["CompanderOn"] = false;
+            dr["CompanderLevel"] = 3;
+            dr["MicGain"] = 10;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -3585,84 +3296,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
 
-			#region ESSB
+            #region ESSB
 
-			dr = t.NewRow();
-			dr["Name"] = "ESSB";
-			dr["FilterLow"] = 50;
-			dr["FilterHigh"] = 3650;
-			dr["TXEQNumBands"] = 10;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = true;
-			dr["CompanderLevel"] = 3;
-			dr["MicGain"] = 10;
+            dr = t.NewRow();
+            dr["Name"] = "ESSB";
+            dr["FilterLow"] = 50;
+            dr["FilterHigh"] = 3650;
+            dr["TXEQNumBands"] = 10;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = true;
+            dr["CompanderLevel"] = 3;
+            dr["MicGain"] = 10;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = false;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = false;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -3705,84 +3390,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
 
-			#region HC4-5
+            #region HC4-5
 
-			dr = t.NewRow();
-			dr["Name"] = "HC4-5";
-			dr["FilterLow"] = 100;
-			dr["FilterHigh"] = 3100;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = false;
-			dr["CompanderLevel"] = 5;
-			dr["MicGain"] = 10;
+            dr = t.NewRow();
+            dr["Name"] = "HC4-5";
+            dr["FilterLow"] = 100;
+            dr["FilterHigh"] = 3100;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = false;
+            dr["CompanderLevel"] = 5;
+            dr["MicGain"] = 10;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -3825,84 +3484,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
 
-			#region HC4-5+CPDR
+            #region HC4-5+CPDR
 
-			dr = t.NewRow();
-			dr["Name"] = "HC4-5+CPDR";
-			dr["FilterLow"] = 100;
-			dr["FilterHigh"] = 3100;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = true;
-			dr["CompanderLevel"] = 5;
-			dr["MicGain"] = 10;
+            dr = t.NewRow();
+            dr["Name"] = "HC4-5+CPDR";
+            dr["FilterLow"] = 100;
+            dr["FilterHigh"] = 3100;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = true;
+            dr["CompanderLevel"] = 5;
+            dr["MicGain"] = 10;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -3945,84 +3578,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
 
-			#region PR40+W2IHY
+            #region PR40+W2IHY
 
-			dr = t.NewRow();
-			dr["Name"] = "PR40+W2IHY";
-			dr["FilterLow"] = 50;
-			dr["FilterHigh"] = 3650;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = false;
-			dr["CompanderLevel"] = 3;
-			dr["MicGain"] = 10;
+            dr = t.NewRow();
+            dr["Name"] = "PR40+W2IHY";
+            dr["FilterLow"] = 50;
+            dr["FilterHigh"] = 3650;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = false;
+            dr["CompanderLevel"] = 3;
+            dr["MicGain"] = 10;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -4065,84 +3672,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
 
-			#region PR40+W2IHY+CPDR
+            #region PR40+W2IHY+CPDR
 
-			dr = t.NewRow();
-			dr["Name"] = "PR40+W2IHY+CPDR";
-			dr["FilterLow"] = 50;
-			dr["FilterHigh"] = 3650;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = false;
-			dr["TXEQPreamp"] = 0;
-			dr["TXEQ1"] = 0;
-			dr["TXEQ2"] = 0;
-			dr["TXEQ3"] = 0;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = true;
-			dr["CompanderLevel"] = 3;
-			dr["MicGain"] = 10;
+            dr = t.NewRow();
+            dr["Name"] = "PR40+W2IHY+CPDR";
+            dr["FilterLow"] = 50;
+            dr["FilterHigh"] = 3650;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = false;
+            dr["TXEQPreamp"] = 0;
+            dr["TXEQ1"] = 0;
+            dr["TXEQ2"] = 0;
+            dr["TXEQ3"] = 0;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = true;
+            dr["CompanderLevel"] = 3;
+            dr["MicGain"] = 10;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -4185,84 +3766,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
 
-			#region PR781+EQ
+            #region PR781+EQ
 
-			dr = t.NewRow();
-			dr["Name"] = "PR781+EQ";
-			dr["FilterLow"] = 100;
-			dr["FilterHigh"] = 3200;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = true;
-			dr["TXEQPreamp"] = -11;
-			dr["TXEQ1"] = -6;
-			dr["TXEQ2"] = 2;
-			dr["TXEQ3"] = 8;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = false;
-			dr["CompanderLevel"] = 3;
-			dr["MicGain"] = 12;
+            dr = t.NewRow();
+            dr["Name"] = "PR781+EQ";
+            dr["FilterLow"] = 100;
+            dr["FilterHigh"] = 3200;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = true;
+            dr["TXEQPreamp"] = -11;
+            dr["TXEQ1"] = -6;
+            dr["TXEQ2"] = 2;
+            dr["TXEQ3"] = 8;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = false;
+            dr["CompanderLevel"] = 3;
+            dr["MicGain"] = 12;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -4305,84 +3860,58 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
 
-			t.Rows.Add(dr);
+            t.Rows.Add(dr);
 
-			#endregion
+            #endregion
 
-			#region PR781+EQ+CPDR
+            #region PR781+EQ+CPDR
 
-			dr = t.NewRow();
-			dr["Name"] = "PR781+EQ+CPDR";
-			dr["FilterLow"] = 100;
-			dr["FilterHigh"] = 3200;
-			dr["TXEQNumBands"] = 3;
-			dr["TXEQEnabled"] = true;
-			dr["TXEQPreamp"] = -9;
-			dr["TXEQ1"] = -8;
-			dr["TXEQ2"] = 3;
-			dr["TXEQ3"] = 7;
-			dr["TXEQ4"] = 0;
-			dr["TXEQ5"] = 0;
-			dr["TXEQ6"] = 0;
-			dr["TXEQ7"] = 0;
-			dr["TXEQ8"] = 0;
-			dr["TXEQ9"] = 0;
-			dr["TXEQ10"] = 0;
-			dr["DXOn"] = false;
-			dr["DXLevel"] = 3;
-			dr["CompanderOn"] = true;
-			dr["CompanderLevel"] = 2;
-			dr["MicGain"] = 10;
+            dr = t.NewRow();
+            dr["Name"] = "PR781+EQ+CPDR";
+            dr["FilterLow"] = 100;
+            dr["FilterHigh"] = 3200;
+            dr["TXEQNumBands"] = 3;
+            dr["TXEQEnabled"] = true;
+            dr["TXEQPreamp"] = -9;
+            dr["TXEQ1"] = -8;
+            dr["TXEQ2"] = 3;
+            dr["TXEQ3"] = 7;
+            dr["TXEQ4"] = 0;
+            dr["TXEQ5"] = 0;
+            dr["TXEQ6"] = 0;
+            dr["TXEQ7"] = 0;
+            dr["TXEQ8"] = 0;
+            dr["TXEQ9"] = 0;
+            dr["TXEQ10"] = 0;
+            dr["DXOn"] = false;
+            dr["DXLevel"] = 3;
+            dr["CompanderOn"] = true;
+            dr["CompanderLevel"] = 2;
+            dr["MicGain"] = 10;
             dr["FMMicGain"] = 10;
-			dr["Lev_On"] = true;
-			dr["Lev_Slope"] = 0;
-			dr["Lev_MaxGain"] = 5;
-			dr["Lev_Attack"] = 2;
-			dr["Lev_Decay"] = 500;
-			dr["Lev_Hang"] = 500;
-			dr["Lev_HangThreshold"] = 0;
-			dr["ALC_Slope"] = 0;
-			dr["ALC_MaxGain"] = -20;
-			dr["ALC_Attack"] = 2;
-			dr["ALC_Decay"] = 10;
-			dr["ALC_Hang"] = 500;
-			dr["ALC_HangThreshold"] = 0;
-			dr["Power"] = 50;
+            dr["Lev_On"] = true;
+            dr["Lev_Slope"] = 0;
+            dr["Lev_MaxGain"] = 5;
+            dr["Lev_Attack"] = 2;
+            dr["Lev_Decay"] = 500;
+            dr["Lev_Hang"] = 500;
+            dr["Lev_HangThreshold"] = 0;
+            dr["ALC_Slope"] = 0;
+            dr["ALC_MaxGain"] = -20;
+            dr["ALC_Attack"] = 2;
+            dr["ALC_Decay"] = 10;
+            dr["ALC_Hang"] = 500;
+            dr["ALC_HangThreshold"] = 0;
+            dr["Power"] = 50;
             dr["Dexp_On"] = false;
             dr["Dexp_Threshold"] = -40;
             dr["Dexp_Attenuate"] = 80;
@@ -4425,292 +3954,266 @@ namespace PowerSDR
             dr["Digi_RX_DSP_Buffer"] = "2048";
             dr["Digi_TX_DSP_Buffer"] = "2048";
             dr["CW_RX_DSP_Buffer"] = "2048";
-            switch (model)
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
+
+            t.Rows.Add(dr);
+
+            #endregion
+        }
+
+        private static void CheckBandTextValid()
+        {
+            ArrayList bad_rows = new ArrayList();
+
+            if (ds == null) return;
+            foreach (DataRow dr in ds.Tables["BandText"].Rows)
             {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-                case Model.FLEX1500:
-                    dr["Mic_Input_On"] = "1";
-                    dr["Mic_Input_Level"] = 60;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 60;
-                    break;
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
+                // check low freq
+                string f = ((double)dr["Low"]).ToString("f6");
+                f = f.Replace(",", ".");
+                DataRow[] rows = ds.Tables["BandText"].Select(f + ">=Low AND " + f + "<=High");
+                if (rows.Length > 1)
+                {
+                    // handle multiple entries
+                    if (!bad_rows.Contains(dr))
+                        bad_rows.Add(dr);
+                }
+
+                // check high freq
+                f = ((double)dr["High"]).ToString("f6");
+                f = f.Replace(",", ".");
+                rows = ds.Tables["BandText"].Select(f + ">=Low AND " + f + "<=High");
+                if (rows.Length > 1)
+                {
+                    // handle multiple entries
+                    if (!bad_rows.Contains(dr))
+                        bad_rows.Add(dr);
+                }
             }
 
-			t.Rows.Add(dr);
+            foreach (DataRow dr in bad_rows)
+                ds.Tables["BandText"].Rows.Remove(dr);
+        }
 
-			#endregion
-		}
+        #endregion
 
-		private static void CheckBandTextValid()
-		{
-			ArrayList bad_rows = new ArrayList();
+        #region Public Member Functions
+        // ======================================================
+        // Public Member Functions 
+        // ======================================================
 
-			if(ds == null) return;
-			foreach(DataRow dr in ds.Tables["BandText"].Rows)
-			{
-				// check low freq
-				string f = ((double)dr["Low"]).ToString("f6");
-				f = f.Replace(",", ".");
-				DataRow[] rows = ds.Tables["BandText"].Select(f+">=Low AND "+f+"<=High");
-				if(rows.Length > 1)
-				{
-					// handle multiple entries
-					if(!bad_rows.Contains(dr))
-						bad_rows.Add(dr);
-				}
-
-				// check high freq
-				f = ((double)dr["High"]).ToString("f6");
-				f = f.Replace(",", ".");
-				rows = ds.Tables["BandText"].Select(f+">=Low AND "+f+"<=High");
-				if(rows.Length > 1)
-				{
-					// handle multiple entries
-					if(!bad_rows.Contains(dr))
-						bad_rows.Add(dr);
-				}
-			}
-
-			foreach(DataRow dr in bad_rows)
-				ds.Tables["BandText"].Rows.Remove(dr);
-		}
-
-		#endregion
-
-		#region Public Member Functions
-// ======================================================
-// Public Member Functions 
-// ======================================================
-
-		//public static bool Init(Model model)
-		public static void Init()
-		{
-         /*   string backup_filename1 = file_name.Remove(file_name.Length - 4) + "_sbu.xml";     // current session backup (sbu)
+        public static bool Init()
+        //public static void Init()
+        {
+            string backup_filename1 = file_name.Remove(file_name.Length - 4) + "_sbu.xml";     // current session backup (sbu)
             string backup_filename2 = file_name.Remove(file_name.Length - 4) + "_bak1.xml";    // 1st gen BU, copy of SBU
             string backup_filename3 = file_name.Remove(file_name.Length - 4) + "_bak2.xml";    // 2nd gen BU, copy of bak
             string backup_filename4 = file_name.Remove(file_name.Length - 4) + "_bak3.xml";    // 3rd gen BU, copy of bak2
-            bool database_exists = false; */
+            bool database_exists = false;
 
             ds = new DataSet("Data");
 
             if (File.Exists(file_name))
-            {   
-              //  try
-              //  {
-                    ds.ReadXml(file_name);
-                   // database_exists = true;
-              //  }
-             /*   catch (Exception ex)
-                {
-                    MessageBox.Show("The database schema is corrupted and unusable.  " +
-                        "The database exception error was:\n\n" + ex.Message + "\n\n" +
-                        "Auto database recovery using the most recent valid database backup will be attempted.",
-                        "ERROR: Database is Unusable",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                //  try
+                //  {
+                ds.ReadXml(file_name);
+                database_exists = true;
+                //  }
+                /*   catch (Exception ex)
+                   {
+                       MessageBox.Show("The database schema is corrupted and unusable.  " +
+                           "The database exception error was:\n\n" + ex.Message + "\n\n" +
+                           "Auto database recovery using the most recent valid database backup will be attempted.",
+                           "ERROR: Database is Unusable",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    string recovery_db = "";
+                       string recovery_db = "";
 
-                    if (File.Exists(backup_filename4)) recovery_db = backup_filename4;
-                    if (File.Exists(backup_filename3)) recovery_db = backup_filename3;
-                    if (File.Exists(backup_filename2)) recovery_db = backup_filename2;
-                    if (File.Exists(backup_filename1)) recovery_db = backup_filename1;
+                       if (File.Exists(backup_filename4)) recovery_db = backup_filename4;
+                       if (File.Exists(backup_filename3)) recovery_db = backup_filename3;
+                       if (File.Exists(backup_filename2)) recovery_db = backup_filename2;
+                       if (File.Exists(backup_filename1)) recovery_db = backup_filename1;
                     
-                    try
-                    {  
-                        ds.ReadXml(recovery_db);
-                      //  database_exists = true;
-                    }
-                    catch (Exception ex2)
-                    {
-                        MessageBox.Show("A database backup does not exist or the backup database schema is corrupted.  " +
-                            "The database exception error was:\n\n " + ex2.Message + "\n\n" + 
-                            "A new default database will be created.",
-                            "ERROR: Database Backup is Unusable",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                } */
+                       try
+                       {  
+                           ds.ReadXml(recovery_db);
+                         //  database_exists = true;
+                       }
+                       catch (Exception ex2)
+                       {
+                           MessageBox.Show("A database backup does not exist or the backup database schema is corrupted.  " +
+                               "The database exception error was:\n\n " + ex2.Message + "\n\n" + 
+                               "A new default database will be created.",
+                               "ERROR: Database Backup is Unusable",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                       }
+                   } */
             }
-           
-			//VerifyTables(model);
+
+            //VerifyTables(model);
             VerifyTables();
 
-			CheckBandTextValid();
+            CheckBandTextValid();
 
-        /*    if (database_exists == false) return database_exists;
-            else
+            /*    if (database_exists == false) return database_exists;
+                else
+                {
+                    try
+                    {
+                        // copy 2nd gen BU to create 3rd gen BU
+                        if (File.Exists(backup_filename3)) File.Copy(backup_filename3, backup_filename4, true);
+
+                        // copy 1st gen BU to create 2nd gen BU
+                        if (File.Exists(backup_filename2)) File.Copy(backup_filename2, backup_filename3, true);
+
+                        // copy SBU to create 1st gen BU
+                        if (File.Exists(backup_filename1)) File.Copy(backup_filename1, backup_filename2, true);
+
+                        // create SBU from the current validated database
+                        ds.WriteXml(backup_filename1, XmlWriteMode.WriteSchema);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("A database backup or copy operation failed.  " +
+                            "The exception error was:\n\n" + ex.Message + "\n\n" +
+                            "This will not adversly effect the operation of your radio.",
+                            "ERROR: Database Backup Creation Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } 
+                }*/
+            return database_exists;
+        }
+
+        public static void Update()
+        {
+            ds.WriteXml(file_name, XmlWriteMode.WriteSchema);
+        }
+
+        public static void Exit()
+        {
+            Update();
+            ds = null;
+        }
+
+        public static bool BandText(double freq, out string outStr)
+        {
+            try
             {
-                try
+                outStr = "";
+                string f = freq.ToString("f6");
+                f = f.Replace(",", ".");
+                DataRow[] rows = ds.Tables["BandText"].Select(f + ">=Low AND " + f + "<=High");
+                if (rows.Length == 0)		// band not found
                 {
-                    // copy 2nd gen BU to create 3rd gen BU
-                    if (File.Exists(backup_filename3)) File.Copy(backup_filename3, backup_filename4, true);
-
-                    // copy 1st gen BU to create 2nd gen BU
-                    if (File.Exists(backup_filename2)) File.Copy(backup_filename2, backup_filename3, true);
-
-                    // copy SBU to create 1st gen BU
-                    if (File.Exists(backup_filename1)) File.Copy(backup_filename1, backup_filename2, true);
-
-                    // create SBU from the current validated database
-                    ds.WriteXml(backup_filename1, XmlWriteMode.WriteSchema);
+                    outStr = "Out of Band";
+                    return false;
                 }
-                catch (Exception ex)
+                else if (rows.Length == 1)	// found band
                 {
-                    MessageBox.Show("A database backup or copy operation failed.  " +
-                        "The exception error was:\n\n" + ex.Message + "\n\n" +
-                        "This will not adversly effect the operation of your radio.",
-                        "ERROR: Database Backup Creation Error",
+                    outStr = ((string)rows[0]["Name"]);
+                    return (bool)rows[0]["TX"];
+                }
+                else //if(rows.Length > 1)	// this should never happen
+                {
+                    MessageBox.Show("Error reading BandInfo table.", "Database Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                } 
+                    outStr = "Error";
+                    return false;
+                }
             }
-            return database_exists; */
-		}
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\n\n" + e.StackTrace, "Database Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                outStr = "Error";
+                return false;
+            }
+        }
 
-		public static void Update()
-		{
-			ds.WriteXml(file_name, XmlWriteMode.WriteSchema);
-		}
-
-		public static void Exit()
-		{
-			Update();
-			ds = null;
-		}
-
-		public static bool BandText(double freq, out string outStr)
-		{
-			try
-			{
-				outStr = "";
-				string f = freq.ToString("f6");
-				f = f.Replace(",", ".");
-				DataRow[] rows = ds.Tables["BandText"].Select(f+">=Low AND "+f+"<=High");
-				if(rows.Length == 0)		// band not found
-				{
-					outStr = "Out of Band";
-					return false;
-				}
-				else if(rows.Length == 1)	// found band
-				{
-					outStr = ((string)rows[0]["Name"]);
-					return (bool)rows[0]["TX"];
-				}
-				else //if(rows.Length > 1)	// this should never happen
-				{
-					MessageBox.Show("Error reading BandInfo table.", "Database Error",
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-					outStr = "Error";
-					return false;
-				}
-			}
-			catch(Exception e)
-			{
-				MessageBox.Show(e.Message + "\n\n\n" + e.StackTrace, "Database Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				outStr = "Error";
-				return false;
-			}
-		}
-
-		public static int[] GetBandStackNum()
-		{
-			string[] band_list = {"160M", "80M", "60M", "40M", "30M", "20M", "17M",
+        public static int[] GetBandStackNum()
+        {
+            string[] band_list = {"160M", "80M", "60M", "40M", "30M", "20M", "17M",
 									 "15M", "12M", "10M", "6M", "2M", "WWV", "GEN",
 									 "VHF0", "VHF1", "VHF2", "VHF3", "VHF4", "VHF5",
 									 "VHF6", "VHF7", "VHF8", "VHF9", "VHF10", "VHF11",
 									 "VHF12", "VHF13" };
 
-			int[] retvals = new int[band_list.Length];
+            int[] retvals = new int[band_list.Length];
 
-			for(int i= 0; i<band_list.Length; i++)
-			{
-				string s = band_list[i];
-				DataRow[] rows = ds.Tables["BandStack"].Select("'"+s+"' = BandName");
-				retvals[i] = rows.Length;
-			}
+            for (int i = 0; i < band_list.Length; i++)
+            {
+                string s = band_list[i];
+                DataRow[] rows = ds.Tables["BandStack"].Select("'" + s + "' = BandName");
+                retvals[i] = rows.Length;
+            }
 
-			return retvals;
-		}
+            return retvals;
+        }
 
-		public static bool GetBandStack(string band, int index, out string mode, out string filter, out double freq)
-		{
-			DataRow[] rows = ds.Tables["BandStack"].Select("'"+band+"' = BandName");
+        public static bool GetBandStack(string band, int index, out string mode, out string filter, out double freq)
+        {
+            DataRow[] rows = ds.Tables["BandStack"].Select("'" + band + "' = BandName");
 
-			if(rows.Length == 0)
-			{
-				MessageBox.Show("No Entries found for Band: "+band, "No Entry Found",
-					MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				mode = "";
-				filter = "";
-				freq = 0.0f;
-				return false;
-			}
+            if (rows.Length == 0)
+            {
+                MessageBox.Show("No Entries found for Band: " + band, "No Entry Found",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                mode = "";
+                filter = "";
+                freq = 0.0f;
+                return false;
+            }
 
-			index = index % rows.Length;
-			
-			mode = (string)((DataRow)rows[index])["Mode"];
-			filter = (string)((DataRow)rows[index])["Filter"];
-			freq = (double)((DataRow)rows[index])["Freq"];
-			return true;
-		}
+            index = index % rows.Length;
 
-		public static void AddBandStack(string band, string mode, string filter, double freq)
-		{
-			DataRow dr = ds.Tables["BandStack"].NewRow();
-			dr["BandName"] = band;
-			dr["Mode"] = mode;
-			dr["Filter"] = filter;
-			dr["Freq"] = freq;
-			ds.Tables["BandStack"].Rows.Add(dr);
-		}
+            mode = (string)((DataRow)rows[index])["Mode"];
+            filter = (string)((DataRow)rows[index])["Filter"];
+            freq = (double)((DataRow)rows[index])["Freq"];
+            return true;
+        }
 
-		public static void SaveBandStack(string band, int index, string mode, string filter, double freq)
-		{
-			DataRow[] rows = ds.Tables["BandStack"].Select("'"+band+"' = BandName");
+        public static void AddBandStack(string band, string mode, string filter, double freq)
+        {
+            DataRow dr = ds.Tables["BandStack"].NewRow();
+            dr["BandName"] = band;
+            dr["Mode"] = mode;
+            dr["Filter"] = filter;
+            dr["Freq"] = freq;
+            ds.Tables["BandStack"].Rows.Add(dr);
+        }
 
-			if(rows.Length == 0) return;
+        public static void SaveBandStack(string band, int index, string mode, string filter, double freq)
+        {
+            DataRow[] rows = ds.Tables["BandStack"].Select("'" + band + "' = BandName");
 
-			foreach(DataRow datarow in rows)			// prevent duplicates
-			{
-				if((string)datarow["BandName"] == band &&
-					(double)datarow["Freq"] == freq)
-				{
-					datarow["Filter"] = filter;
-					datarow["Mode"] = mode;
-					return;
-				}
-			}
+            if (rows.Length == 0) return;
 
-			index = index % rows.Length;
+            foreach (DataRow datarow in rows)			// prevent duplicates
+            {
+                if ((string)datarow["BandName"] == band &&
+                    (double)datarow["Freq"] == freq)
+                {
+                    datarow["Filter"] = filter;
+                    datarow["Mode"] = mode;
+                    return;
+                }
+            }
 
-			DataRow d = (DataRow)rows[index];
-			d["Mode"] = mode;
-			d["Filter"] = filter;
-			d["Freq"] = freq;
-		}
+            index = index % rows.Length;
+
+            DataRow d = (DataRow)rows[index];
+            d["Mode"] = mode;
+            d["Filter"] = filter;
+            d["Freq"] = freq;
+        }
 
         // This removes the notches from the state database so we can rewrite all of them without
         // having one that was previously deleted staying in the database
@@ -4728,84 +4231,84 @@ namespace PowerSDR
             }
         }
 
-		public static void SaveVars(string tableName, ref ArrayList list)
-		{
-			if(!ds.Tables.Contains(tableName))
-				AddFormTable(tableName);
+        public static void SaveVars(string tableName, ref ArrayList list)
+        {
+            if (!ds.Tables.Contains(tableName))
+                AddFormTable(tableName);
 
-			foreach(string s in list)
-			{
-				string[] vals = s.Split('/');
-				if(vals.Length > 2)
-				{
-					for(int i=2; i<vals.Length; i++)
-						vals[1] += "/"+vals[i];
-				}
+            foreach (string s in list)
+            {
+                string[] vals = s.Split('/');
+                if (vals.Length > 2)
+                {
+                    for (int i = 2; i < vals.Length; i++)
+                        vals[1] += "/" + vals[i];
+                }
 
-                if(vals.Length <= 1) // skip it as no data was provided
+                if (vals.Length <= 1) // skip it as no data was provided
                     continue;
 
-				DataRow[] rows = ds.Tables[tableName].Select("Key = '"+vals[0]+"'");
-				if(rows.Length == 0)	// name is not in list
-				{
-					DataRow newRow = ds.Tables[tableName].NewRow();
-					newRow[0] = vals[0];
-					newRow[1] = vals[1];
-					ds.Tables[tableName].Rows.Add(newRow);
-				}
-				else if(rows.Length == 1)
-				{
-					rows[0][1] = vals[1];
-				}
-			}
-		}
+                DataRow[] rows = ds.Tables[tableName].Select("Key = '" + vals[0] + "'");
+                if (rows.Length == 0)	// name is not in list
+                {
+                    DataRow newRow = ds.Tables[tableName].NewRow();
+                    newRow[0] = vals[0];
+                    newRow[1] = vals[1];
+                    ds.Tables[tableName].Rows.Add(newRow);
+                }
+                else if (rows.Length == 1)
+                {
+                    rows[0][1] = vals[1];
+                }
+            }
+        }
 
-		public static ArrayList GetVars(string tableName)
-		{
-			ArrayList list = new ArrayList();
-			if(!ds.Tables.Contains(tableName))
-				return list;
+        public static ArrayList GetVars(string tableName)
+        {
+            ArrayList list = new ArrayList();
+            if (!ds.Tables.Contains(tableName))
+                return list;
 
-			DataTable t = ds.Tables[tableName];
+            DataTable t = ds.Tables[tableName];
 
-			for(int i= 0; i<t.Rows.Count; i++)
-			{
-				list.Add(t.Rows[i][0].ToString()+"/"+t.Rows[i][1].ToString());
-			}
+            for (int i = 0; i < t.Rows.Count; i++)
+            {
+                list.Add(t.Rows[i][0].ToString() + "/" + t.Rows[i][1].ToString());
+            }
 
-			return list;
-		}
+            return list;
+        }
 
-		public static bool ImportDatabase(string filename)
-		{
-			// if(!File.Exists(filename)) return false;
-            
+        public static bool ImportDatabase(string filename)
+        {
+            // if(!File.Exists(filename)) return false;
+
             DataSet file = new DataSet();
 
-			try
-			{
-				file.ReadXml(filename);
-			}
-			catch(Exception)
-			{
-				return false;
-			}
+            try
+            {
+                file.ReadXml(filename);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
 
-			ds = file;
+            ds = file;
 
             // Handle change of mode from FMN to just FM
             DataRow[] rows = ds.Tables["BandStack"].Select("Mode = 'FMN'");
-            foreach(DataRow dr in rows)
+            foreach (DataRow dr in rows)
                 dr["Mode"] = "FM";
 
-			return true;
-		}
+            return true;
+        }
 
         public static void UpdateRegion(FRSRegion current_region)
         {
             //harmonize BandText and BandStack with radio region
             switch (current_region)
-            {             
+            {
                 case FRSRegion.Australia:
                 case FRSRegion.US:
                 case FRSRegion.Japan:
@@ -5043,13 +4546,13 @@ namespace PowerSDR
                     AddRegion1BandText4m();
                     AddRegion1BandTextVHFplus();
                     AddBandTextSWB();
-                    break; 
+                    break;
             }
 
             CheckBandTextValid();
             Update();
         }
 
-		#endregion
-	}
+        #endregion
+    }
 }
