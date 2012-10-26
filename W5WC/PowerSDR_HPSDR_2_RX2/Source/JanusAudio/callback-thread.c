@@ -426,7 +426,7 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	// int *bufp; 
 	// int buflen; 
 	int i; 
-	float *callback_in[8]; 
+	float *callback_in[6]; 
 	float *callback_out[8]; 
 	int out_sample_incr;  
 	int outidx; 
@@ -493,8 +493,8 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 #endif 
 
 	memcpy(CallbackMicRbufp, CallbackMicLbufp, sizeof(float) * BlockSize); // copy left to right so it does not matter which PowerSDR is actually looking at 
-    memcpy(CallbackInL3bufp, CallbackInL2bufp, sizeof(float) * BlockSize);
-	memcpy(CallbackInR3bufp, CallbackInR2bufp, sizeof(float) * BlockSize);
+   // memcpy(CallbackInL3bufp, CallbackInL2bufp, sizeof(float) * BlockSize);
+	//memcpy(CallbackInR3bufp, CallbackInR2bufp, sizeof(float) * BlockSize);
 	
 #ifdef PERF_DEBUG 
 	stop_t = getPerfTicks(); 
@@ -517,8 +517,8 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	callback_in[3] = CallbackInR2bufp; //RX2 Q
 	callback_in[4] = CallbackMicLbufp; //Mic samples
 	callback_in[5] = CallbackMicRbufp; 
-	callback_in[6] = CallbackInL3bufp; // RX3 I
-	callback_in[7] = CallbackInR3bufp; // RX3 Q
+	//callback_in[6] = CallbackInL3bufp; // RX3 I
+	//callback_in[7] = CallbackInR3bufp; // RX3 Q
 
     //callback_out[0] = CallbackMonOutLbufp; //RX & Mon audio
 	//callback_out[1] = CallbackMonOutRbufp; //RX & Mon audio

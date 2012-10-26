@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="PowerSDR (W5WC)" Language="1033" Version="2.2.3.17" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="928400BC-8BCE-470C-A1D6-4B7A1AB366A3">
+	<Product Id="*" Name="PowerSDR (W5WC)" Language="1033" Version="2.2.3.18" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="928400BC-8BCE-470C-A1D6-4B7A1AB366A3">
 		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes" />
 
-    <PropertyRef Id="NETFRAMEWORK40FULL" />
+    <PropertyRef Id="NETFRAMEWORK40CLIENT" />
     <Condition Message="You must install Microsoft .NET 4.0 (FULL OR CLIENT!) first!">
-      <![CDATA[Installed OR NETFRAMEWORK40FULL OR NETFRAMEWORK40CLIENT]]>
+      <![CDATA[Installed OR NETFRAMEWORK40CLIENT]]>
     </Condition>
 
     <WixVariable Id="WixUILicenseRtf" Value="GNU_GENERAL_PUBLIC_LICENSE.rtf" />

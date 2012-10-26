@@ -634,13 +634,6 @@ PERF_RECORD PerfData[PERF_DATA_COUNT];
 int PerfDataIdx = 0;
 #endif
 
-
-
-
-
-
-
-
 // unsigned short RxFifoAvail = 4096;  // make it large to start
 // unsigned char RxFramePlaying = 0;
 

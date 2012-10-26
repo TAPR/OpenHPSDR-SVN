@@ -1,0 +1,9 @@
+The following DLLs are not GPL and are distributed with permission:
+
+FlexControl.dll (FlexRadio Systems)
+FlexCW.dll (FlexRadio Systems)
+wdapi_dotnet1020.dll (Jungo)
+pal.dll (TC Technologies)
+Interop.TDxInput.dll (3D Connexion)
+TDxInput.dll (3D Connexion)
+Interop.mcl_pm.dll (MiniCircuits)

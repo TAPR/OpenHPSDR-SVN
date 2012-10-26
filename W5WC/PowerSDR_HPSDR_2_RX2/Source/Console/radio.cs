@@ -304,8 +304,8 @@ namespace PowerSDR
 			}
 		}
 
-		private int audio_size_dsp = 2048;
-		private int audio_size = 2048;
+		private int audio_size_dsp = 1024;
+		private int audio_size = 1024;
 		public int AudioSize
 		{
 			get { return audio_size; }
