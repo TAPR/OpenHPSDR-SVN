@@ -22635,7 +22635,9 @@ namespace PowerSDR
 
                 if (rx1_xvtr_index >= 0)
                 {
-                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                    //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                    // Fix Penny O/C VHF control Vk4xv
+                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
 
                     // if (penny_ext_ctrl_enabled)
                     //   Penny.getPenny().UpdateExtCtrl(lo_band, mox);
@@ -24334,7 +24336,9 @@ namespace PowerSDR
 
                 Band lo_band = Band.FIRST;
                 if (rx1_xvtr_index >= 0)
-                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                    //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                    // Fix Penny O/C VHF control Vk4xv
+                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
 
                 if (rx1_band != old_band && flex_wire_ucb)
                 {
@@ -24706,7 +24710,9 @@ namespace PowerSDR
 
                 Band lo_band = Band.FIRST;
                 if (tx_xvtr_index >= 0)
-                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, true, current_region);
+                    // Fix Penny O/C VHF control Vk4xv
+                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
+                   //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, true, current_region);
 
                 if (tx_band != old_band || initializing)
                 {
@@ -33577,7 +33583,9 @@ namespace PowerSDR
 
                     if (rx1_xvtr_index >= 0)
                     {
-                        lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                        // Fix Penny O/C VHF control Vk4xv
+                        lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
+                        //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
 
                         if (penny_ext_ctrl_enabled)
                             Penny.getPenny().UpdateExtCtrl(lo_band, mox);
@@ -33707,7 +33715,9 @@ namespace PowerSDR
 
                     if (rx1_xvtr_index >= 0)
                     {
-                        lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                        // Fix Penny O/C VHF control Vk4xv
+                        lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
+                        //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
 
                         if (penny_ext_ctrl_enabled)
                             Penny.getPenny().UpdateExtCtrl(lo_band, mox);
@@ -35338,7 +35348,9 @@ namespace PowerSDR
 
                 if (rx1_xvtr_index >= 0)
                 {
-                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                    // Fix Penny O/C VHF control Vk4xv
+                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
+                    //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
 
                     if (penny_ext_ctrl_enabled)
                         Penny.getPenny().UpdateExtCtrl(lo_band, mox);

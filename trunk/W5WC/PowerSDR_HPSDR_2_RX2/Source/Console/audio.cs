@@ -739,7 +739,6 @@ namespace PowerSDR
             set { block_size1 = value; }
         }
 
-
         private static int block_size_vac = 2048;
         public static int BlockSizeVAC
         {
@@ -754,7 +753,7 @@ namespace PowerSDR
             set { block_size_vac2 = value; }
         }
 
-        private static double audio_volts1 = 2.23;
+        private static double audio_volts1 = 0.8;
         public static double AudioVolts1
         {
             get { return audio_volts1; }
@@ -1547,8 +1546,8 @@ namespace PowerSDR
             float* in_r_ptr2 = (float*)array_ptr_input[3]; //CallbackInR2bufp  RX2 Q
             float* in_l_ptr3 = (float*)array_ptr_input[4]; //CallbackMicLbufp  Mic L
             float* in_r_ptr3 = (float*)array_ptr_input[5]; //CallbackMicRbufp  Mic R
-            float* in_l_ptr4 = (float*)array_ptr_input[6]; //CallbackInL3bufp  RX3 I
-            float* in_r_ptr4 = (float*)array_ptr_input[7]; //CallbackInR3bufp  RX3 Q
+           // float* in_l_ptr4 = (float*)array_ptr_input[6]; //CallbackInL3bufp  RX3 I
+          //  float* in_r_ptr4 = (float*)array_ptr_input[7]; //CallbackInR3bufp  RX3 Q
 
             array_ptr_input[0] = (int)in_l_ptr1; // CallbackInLbufp
             array_ptr_input[1] = (int)in_r_ptr1; // CallbackInRbufp

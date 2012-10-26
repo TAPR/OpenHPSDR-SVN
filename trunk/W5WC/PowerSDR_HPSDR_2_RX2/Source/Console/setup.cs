@@ -6453,19 +6453,6 @@ namespace PowerSDR
             int new_size = Int32.Parse(comboAudioBuffer1.Text);
             bool power = console.PowerOn;
 
-            if (console.fwc_init &&
-                (console.CurrentModel == Model.FLEX3000 || console.CurrentModel == Model.FLEX5000))
-            {
-                try
-                {
-                    Pal.SetBufferSize((uint)new_size);
-                }
-                catch (Exception)
-                {
-                    // ignore exceptions in case version of PAL dll doesn't support this function
-                }
-            }
-
             CWKeyer.AudioLatency = Math.Max(10.0, new_size / (double)console.SampleRate1 * 1e3);
   
             if (power && old_size != new_size)
