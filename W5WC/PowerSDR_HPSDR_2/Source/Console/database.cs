@@ -1110,22 +1110,255 @@ namespace PowerSDR
             }
         }
 
-        private static void AddIsraelBandText6m()
+            private static void AddRegionIsraelBandText160m()
         {
-            // 50.0 - 50.2 MHz
             DataTable t = ds.Tables["BandText"];
             object[] data = {
-								50.000000, 50.079999, "6M Beacon Sub-Band",		true,
-								50.080000, 50.089999, "6M CW",					true,
+								1.810000, 1.835999, "160M CW",	                true,
+                                1.836000, 1.836000, "160M CW QRP",	            true,
+                                1.836001, 1.837999, "160M CW",	                true,
+								1.838000, 1.839999, "160M Digital/Packet/CW",	true,
+								1.840000, 1.842999, "160M Digital/Packet/CW/SSB",	true,
+                                1.843000, 1.999999, "160M SSB/CW",	true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIsraelBandText80m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								3.500000, 3.509999, "80M CW DX",	    		true,
+                                3.510000, 3.560000, "80M CW Contest",	    	true,
+                                3.560001, 3.579999, "80M CW",	    			true,
+								3.580000, 3.589999, "80M Digital/CW",	        true,
+								3.590000, 3.599999, "80M Digital/Packet/CW",	true,
+                                3.600000, 3.620000, "80M SSB/Digital/CW",		true,
+                                3.620001, 3.649999, "80M SSB/SSB Contest/CW",	true,
+                                3.650000, 3.700000, "80M SSB/CW",               true,
+                                3.700001, 3.730000, "80M SSB/SSB Contest/CW",   true,
+                                3.730001, 3.740000, "80M SSTV/FAX/SSB/CW",      true,
+                                3.740001, 3.799999, "80M SSB DX/CW",			true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIsraelBandText60m()
+        {
+            DataTable t = ds.Tables["BandText"];
+
+            object[] data = {
+                                5.100000, 5.499999, "60M General RX",            false,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIsraelBandText40m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								7.000000, 7.034999, "40M CW",			    	true,
+                                7.035000, 7.040000, "40M Digital/SSTV/FAX/CW",	true,
+                                7.040001, 7.044999, "40M Digital/SSTV/FAX/CW/SSB",	true,
+								7.045000, 7.199999, "40M CW/SSB",           	true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIsraelBandText30m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+                                10.100000, 10.139999, "30M CW",					true,
+                                10.140000, 10.149999, "30M Digital/CW",	true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIsraelBandText20m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								14.000000, 14.059999, "20M CW Contest",		   	true,
+                                14.060001, 14.069999, "20M CW",		   	        true,
+								14.070000, 14.088999, "20M Digital/CW",	        true,
+								14.089000, 14.989999, "20M Digital/Non-Auto Packet/CW",	true,
+                                14.099000, 14.100999, "20M Beacons",            true,
+                                14.101000, 14.111999, "20M Digital/SSB/CW",     true,
+                                14.112000, 14.125000, "20M SSB/CW",             true,
+                                14.125001, 14.229999, "20M SSB/SSB Contest/CW", true,
+                                14.230000, 14.230000, "20M SSTV/FAX",			true,
+                                14.230001, 14.349999, "20M SSB/CW",          true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIsraelBandText17m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								18.068000, 18.099999, "17M CW",					true,
+                                18.100000, 18.108999, "17M Digital/CW",			true,
+  								18.109000, 18.110999, "17M Beacons",		    true,
+								18.111000, 18.167999, "17M SSB/CW",			    true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIsraelBandText15m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								21.000000, 21.079999, "15M CW",			        true,
+                                21.080000, 21.100000, "15M Digital/CW",			true,
+                                21.100001, 21.119999, "15M Packet/Digital/CW",	true,
+								21.120000, 21.148999, "15M CW",	true,
+                                21.149000, 21.150999, "15M Beacons",		    true,
+								21.151000, 21.339999, "15M All Modes",			true,
+                                21.340000, 21.340000, "15M SSTV/FAX",		    true,
+                                21.340001, 21.449999, "15M SSB/CW",			    true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIsraelBandText12m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								24.890000, 24.919999, "12M CW",					true,
+                                24.920000, 24.928999, "12M Digital/CW",		    true,
+								24.929000, 24.930999, "12M Beacons",		    true,
+                                24.931000, 24.989999, "12M SSB/CW",			true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIsraelBandText10m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								28.000000, 28.049999, "10M CW",					true,
+                                28.050000, 28.120000, "10M Digital/CW",	        true,
+                                28.120001, 28.149999, "10M Digital/Packet/CW",	true,
+								28.150000, 28.189999, "10M CW",	                true,
+								28.190000, 28.198999, "10M Regional Beacons",	true,
+                                28.199000, 28.200999, "10M World Wide Beacons",	true,
+                                28.201000, 28.224999, "10M Continous-Duty Beacons",	true,
+                                28.225000, 28.679999, "10M SSB/CW",	    	    true,
+                                28.680000, 28.680000, "10M SSTV/FAX",	        true,
+                                28.680001, 29.199999, "10M SSB/CW",	    	    true,
+                                29.200000, 29.299999, "10M NBFM Digital/Packet",true,
+                                29.300000, 29.509999, "10M FM Sat. Downlinks",  true,
+                                29.510000, 29.699999, "10M SSB/CW",	true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIsraelBandText6m()
+        {
+            // 50.0 - 52.0 MHz
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+                                50.000000, 50.079999, "6M Beacon Sub-Band",		true,
+                                50.080000, 50.089999, "6M CW",					true,
                                 50.090000, 50.090000, "6M CW Calling",          true,
                                 50.090001, 50.099999, "6M CW",                  true,
-                                50.100000, 50.109999, "6M CW & SSB",			true,
+                                50.100000, 50.109999, "6M CW/SSB",			    true,
                                 50.110000, 50.110000, "6M SSB DX Calling",      true,
-                                50.110001, 50.129999, "6M CW, SSB & Digital",	true,
-                                50.130000, 50.149999, "6M CW, SSB & Digital",	true,
+                                50.110001, 50.149999, "6M SSB/Digital/CW",	    true,
                                 50.150000, 50.150000, "6M SSB Calling",         true,
-                                50.150001, 50.199999, "6M CW, SSB & Digital",	true,
-                             };
+                                50.150001, 50.199999, "6M SSB/Digital/CW",	    true,
+                            };
 
             for (int i = 0; i < data.Length / 4; i++)
             {
@@ -4360,17 +4593,17 @@ namespace PowerSDR
                 case FRSRegion.Israel:
                     AddRegion1BandStack();
                     ClearBandText();
-                    AddRegion1BandText160m();
-                    AddRegion1BandText80m();
-                    AddRegion1BandText60m();
-                    AddRegion1BandText40m();
-                    AddRegion1BandText30m();
-                    AddRegion1BandText20m();
-                    AddRegion1BandText17m();
-                    AddRegion1BandText15m();
-                    AddRegion1BandText12m();
-                    AddRegion1BandText10m();
-                    AddIsraelBandText6m();
+                    AddRegionIsraelBandText160m();
+                    AddRegionIsraelBandText80m();
+                    AddRegionIsraelBandText60m();
+                    AddRegionIsraelBandText40m();
+                    AddRegionIsraelBandText30m();
+                    AddRegionIsraelBandText20m();
+                    AddRegionIsraelBandText17m();
+                    AddRegionIsraelBandText15m();
+                    AddRegionIsraelBandText12m();
+                    AddRegionIsraelBandText10m();
+                    AddRegionIsraelBandText6m();
                     AddRegion1BandTextVHFplus();
                     AddBandTextSWB();
                     break;

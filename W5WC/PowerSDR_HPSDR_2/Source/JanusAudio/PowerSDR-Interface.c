@@ -161,6 +161,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                 CallbackInRbufp = bufp + BlockSize;
                 CallbackMicLbufp = bufp + (2*BlockSize);
                 CallbackMicRbufp = bufp + (3*BlockSize);
+
                 CallbackMonOutLbufp = bufp + (4*BlockSize);
                 CallbackMonOutRbufp = bufp + (5*BlockSize);
                 CallbackOutLbufp = bufp + (6*BlockSize);

@@ -339,7 +339,6 @@ namespace PowerSDR
                 {
                     byte metis_vernum = metis_ver[0];
                     mercury_ver = getMercuryFWVersion();
-                   // penny_ver = getPenelopeFWVersion();
                     int mercury2_ver = getMercury2FWVersion();
 
                     if (c.PennyPresent || c.PennyLanePresent)
@@ -359,7 +358,7 @@ namespace PowerSDR
                         }
                         while (penny_ver <= 10);
                     }
-                    
+
                     switch (metis_vernum)
                     {
                         case 13:
@@ -368,7 +367,6 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                              //  c.PowerOn = false;
                             }
                             break;
                         case 14:
@@ -377,7 +375,6 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                               // c.PowerOn = false;
                             }
                             break;
                         case 15:
@@ -386,7 +383,6 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                              //  c.PowerOn = false;
                             }
                             break;
                         case 16:
@@ -396,32 +392,29 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                              //  c.PowerOn = false;
                             }
                             break;
-                       case 18: // K5SO Diversity & non-diversity
+                        case 18:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                                (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 75)))
+                                (c != null && c.MercuryPresent && (mercury_ver != 32)))
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                              //  c.PowerOn = false;
                             }
                             break;
-                        case 19: // K5SO Diversity & non-diversity
+                        case 19:
                         case 20:
+                        case 21:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 33)))
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                              //  c.PowerOn = false;
                             }
                             break;
-                       default:
+                        default:
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                          //  c.PowerOn = false;
                             break;
                     }
 
@@ -486,7 +479,6 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                          //  c.PowerOn = false;
                         }
                         break;
                     case 19:
@@ -495,7 +487,6 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                         //   c.PowerOn = false;
                         }
                         break;
                     case 20:
@@ -504,7 +495,6 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                         //   c.PowerOn = false;
                         }
                         break;
                     case 21:
@@ -513,31 +503,28 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                         //   c.PowerOn = false;
                         }
                         break;
-                    case 22: // K5SO Diversity & non-diversity
+                    case 22:
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 32  && mercury_ver != 75)))
+                            (c != null && c.MercuryPresent && mercury_ver != 32))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                         //   c.PowerOn = false;
                         }
                         break;
-                    case 23: // K5SO Diversity & non-diversity
+                    case 23:
+                    case 24:
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 33 && mercury_ver != 76)))
+                            (c != null && c.MercuryPresent && mercury_ver != 33))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            //   c.PowerOn = false;
                         }
                         break;
                     default:
                         result = false;
                         c.SetupForm.alex_fw_good = false;
-                      //  c.PowerOn = false;
                         break;
                 }
 
@@ -815,7 +802,7 @@ namespace PowerSDR
                     fwVersionsChecked = true;
                 }
             }
-           // InitOzyMic();
+            // InitOzyMic();
             return result;
         }
 
@@ -923,7 +910,7 @@ namespace PowerSDR
             {
                 if (!c.FreqCalibrationRunning)    // we can't be applying freq correction when cal is running 
                 {
-                   // SetVFOfreq(lastVFOfreq, lastVFOTXfreq);
+                    // SetVFOfreq(lastVFOfreq, lastVFOTXfreq);
                     SetVFOfreq(lastVFOfreq);
                     SetVFOfreqTX(lastVFOTXfreq);
                 }
@@ -933,10 +920,10 @@ namespace PowerSDR
         private static double lastVFOfreq = 0.0;
         private static double lastVFOTXfreq = 0.0;
         unsafe public static void SetVFOfreq(double rxfreq)
-      //   unsafe public static void SetVFOfreq(double rxfreq, double txfreq)
-       {
+        //   unsafe public static void SetVFOfreq(double rxfreq, double txfreq)
+        {
             lastVFOfreq = rxfreq;
-           // lastVFOTXfreq = txfreq;
+            // lastVFOTXfreq = txfreq;
             Console c;
             double correction_factor;
             c = Console.getConsole();
@@ -950,14 +937,14 @@ namespace PowerSDR
                 correction_factor = 1.0d;
             }
             int rx_freq = (int)((rxfreq * 1000000.0) * correction_factor);
-           // int tx_freq = (int)((txfreq * 1000000.0) * correction_factor);
-          //  int rx_freq = (int)(rxfreq * 1e6);
-          //  int tx_freq = (int)(txfreq * 1e6);
- 
+            // int tx_freq = (int)((txfreq * 1000000.0) * correction_factor);
+            //  int rx_freq = (int)(rxfreq * 1e6);
+            //  int tx_freq = (int)(txfreq * 1e6);
+
             SetVFOfreq_native(rx_freq);
-          //  SetTXVFOfreq(tx_freq);
-           // c.SetupForm.txtDDSVFO.Text = rx_freq.ToString();
-          //  c.SetupForm.txtDDSRounded.Text = tx_freq.ToString();
+            //  SetTXVFOfreq(tx_freq);
+            // c.SetupForm.txtDDSVFO.Text = rx_freq.ToString();
+            //  c.SetupForm.txtDDSRounded.Text = tx_freq.ToString();
         }
 
         [DllImport("JanusAudio.dll")]
@@ -983,10 +970,10 @@ namespace PowerSDR
             int f_freq = (int)((f * 1000000.0) * correction_factor);
             // System.Console.WriteLine("corrected freq: " + f);
             SetTXVFOfreq(f_freq);
-           // c.SetupForm.txtDDSRounded.Text = f_freq.ToString();
+            // c.SetupForm.txtDDSRounded.Text = f_freq.ToString();
             // System.Console.WriteLine("JAtxvfo: " + f_freq);
         }
-        
+
         [DllImport("JanusAudio.dll")]
         unsafe public static extern IntPtr OzyOpen();
 
@@ -1007,7 +994,7 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetLineBoost(int bits);
- 
+
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetAlexAtten(int bits);
 
@@ -1096,7 +1083,7 @@ namespace PowerSDR
             float Voltage = adc * voltsPerBit;
             float Watts = (Voltage * Voltage) / 0.09f;
 
-           return Watts;
+            return Watts;
         }
 
         public static float computePower(int power_int)
@@ -1173,7 +1160,7 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetDiscoveryMode(int b);
-        
+
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetPennyOCBits(int b);
 
@@ -1204,7 +1191,7 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe extern public static bool ReadI2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
-        
+
         [DllImport("JanusAudio.dll")]
         unsafe extern public static bool Set_I2C_Speed(IntPtr hdev, int speed);
 

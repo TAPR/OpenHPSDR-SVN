@@ -92,6 +92,10 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
         if ( samples_per_block < 1024 ) {
                 FPGAWriteBufSize = 1024;
         }
+		else if ( samples_per_block >= 2048 ) {
+                FPGAWriteBufSize = 1024;
+        }
+
         else {
                 FPGAWriteBufSize = 2048;
         }
@@ -151,7 +155,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 
         do { // once
                 // allocate buffers for callback buffers
-                bufp = (float *)malloc(sizeof(float) * BlockSize * 16);  // 8 channels for in and 8 channels for out
+                bufp = (float *)malloc(sizeof(float) * BlockSize * 14);  // 6 channels for in and 8 channels for out
                 if ( bufp == NULL ) {
                         myrc = 5;
                         break;
@@ -163,20 +167,20 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 				CallbackInR2bufp = bufp + (3*BlockSize);
                 CallbackMicLbufp = bufp + (4*BlockSize);
                 CallbackMicRbufp = bufp + (5*BlockSize);
-				CallbackInL3bufp = bufp + (6*BlockSize);
-				CallbackInR3bufp = bufp + (7*BlockSize);
+				//CallbackInL3bufp = bufp + (6*BlockSize);
+				//CallbackInR3bufp = bufp + (7*BlockSize);
 
-                CallbackOutLbufp = bufp + (8*BlockSize);
-                CallbackOutRbufp = bufp + (9*BlockSize);
-                CallbackMonOutLbufp = bufp + (10*BlockSize);
-                CallbackMonOutRbufp = bufp + (11*BlockSize);
-                CallbackOutL2bufp = bufp + (12*BlockSize);
-                CallbackOutR2bufp = bufp + (13*BlockSize);
-                CallbackOutL3bufp = bufp + (14*BlockSize);
-                CallbackOutR3bufp = bufp + (15*BlockSize);
+                CallbackOutLbufp = bufp + (6*BlockSize);
+                CallbackOutRbufp = bufp + (7*BlockSize);
+                CallbackMonOutLbufp = bufp + (8*BlockSize);
+                CallbackMonOutRbufp = bufp + (9*BlockSize);
+                CallbackOutL2bufp = bufp + (10*BlockSize);
+                CallbackOutR2bufp = bufp + (11*BlockSize);
+                CallbackOutL3bufp = bufp + (12*BlockSize);
+                CallbackOutR3bufp = bufp + (13*BlockSize);
 
                 // allocate buffers for inbound and outbound samples from USB
-                in_sample_bufp = (int *)malloc(sizeof(int) * BlockSize * 8);  //(6) 6 channels in and 4 out
+                in_sample_bufp = (int *)malloc(sizeof(int) * BlockSize * 6);  //(6) 6 channels in 
                 if ( in_sample_bufp == NULL ) {
                         myrc = 6;
                         break;
@@ -184,7 +188,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                 IOSampleInBufp = in_sample_bufp;
                 // printf("IOSample buffer at: 0x%08x, len=%d\n", (unsigned long)in_sample_bufp, 4*BlockSize*sizeof(int));
 
-                CBSampleOutBufp = (short *)malloc(sizeof(short) * BlockSize * 8); //(4)
+                CBSampleOutBufp = (short *)malloc(sizeof(short) * BlockSize * 8); // 4 out
                 if ( CBSampleOutBufp == NULL ) {
                         myrc = 10;
                         break;
@@ -298,8 +302,8 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                         CallbackOutRbufp = NULL;
                         CallbackMicLbufp = NULL;
                         CallbackMicRbufp = NULL;
-                        CallbackInL3bufp = NULL;
-                        CallbackInR3bufp = NULL;
+                      //  CallbackInL3bufp = NULL;
+                      //  CallbackInR3bufp = NULL;
                         CallbackMonOutLbufp = NULL;
                         CallbackMonOutRbufp = NULL;
                         CallbackOutL2bufp = NULL;
