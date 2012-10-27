@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="PowerSDR (W5WC)" Language="1033" Version="2.2.3.18" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="928400BC-8BCE-470C-A1D6-4B7A1AB366A3">
+	<Product Id="*" Name="PowerSDR (W5WC)" Language="1033" Version="2.2.3.19" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="928400BC-8BCE-470C-A1D6-4B7A1AB366A3">
 		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -241,7 +241,14 @@
               KeyPath="yes"
               />
       </Component>
- 
+
+      <Component Guid="*">
+        <File Id="Ozy_Janus.v24.rbf"
+              Source="..\PowerSDR_HPSDR_2\Bin\Release\Ozy_Janus.v24.rbf"
+              KeyPath="yes"
+              />
+      </Component>
+
       <Component Guid="035B783D-35B1-457E-A40F-7581A9F363F1">
         <File Id="ozyfwsdr1k.hex"
               Source="..\PowerSDR_HPSDR_2\Bin\Release\ozyfw-sdr1k.hex"

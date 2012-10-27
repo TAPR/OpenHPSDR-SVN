@@ -334,9 +334,7 @@ namespace PowerSDR
                 {
                     byte metis_vernum = metis_ver[0];
                     mercury_ver = getMercuryFWVersion();
-                    // penny_ver = getPenelopeFWVersion();
-                    // mercury2_ver = getMercury2FWVersion();
-
+  
                     if (c.PennyPresent || c.PennyLanePresent)
                     {
                         do
@@ -364,34 +362,31 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                                //  c.PowerOn = false;
-                            }
+                             }
                             break;
-                        case 18: // K5SO Diversity & non-diversity
+                        case 18: 
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                                (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 75)))
+                                (c != null && c.MercuryPresent && (mercury_ver != 32)))
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                                //  c.PowerOn = false;
-                            }
+                             }
                             break;
                         case 19: 
                         case 20:
+                        case 21:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                                (c != null && c.MercuryPresent && (mercury_ver != 33 && mercury_ver != 76)))
+                                (c != null && c.MercuryPresent && (mercury_ver != 33)))
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                                //  c.PowerOn = false;
-                            }
+                              }
                             break;
                         default:
                             // fwVersionMsg = "Invalid Firmware Level.\nPowerSDR requires Mercury v3.1\nYou have version: " + mercury_ver.ToString("0\\.0");
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            // c.PowerOn = false;
-                            break;
+                             break;
                     }
 
                     mercury2_ver = getMercury2FWVersion();
@@ -467,8 +462,7 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            //  c.PowerOn = false;
-                        }
+                         }
                         break;
                     case 19:
                         // if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 14)) ||
@@ -476,8 +470,7 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            //  c.PowerOn = false;
-                        }
+                          }
                         break;
                     case 20:
                         // if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 15)) ||
@@ -485,8 +478,7 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            // c.PowerOn = false;
-                        }
+                         }
                         break;
                     case 21:
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16)) ||
@@ -494,32 +486,29 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            //  c.PowerOn = false;
-                        }
+                          }
                         break;
-                    case 22: // K5SO Diversity & non-diversity
+                    case 22: 
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 33 && mercury_ver != 75)))
+                            (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 33)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            //  c.PowerOn = false;
-                        }
+                         }
                         break;
-                    case 23: // K5SO Diversity & non-diversity
+                    case 23: 
+                    case 24:
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 33 && mercury_ver != 76)))
+                            (c != null && c.MercuryPresent && (mercury_ver != 33)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                            //   c.PowerOn = false;
-                        }
+                         }
                         break;
                     default:
                         result = false;
                         c.SetupForm.alex_fw_good = false;
-                        // c.PowerOn = false;
-                        break;
+                         break;
                 }
 
                 mercury2_ver = getMercury2FWVersion();
@@ -543,72 +532,6 @@ namespace PowerSDR
             return result;
         }
 
-
-#if false
-                if (ozy_ver <= 15)
-                {
-                    legacyDotDashPTT = true;
-                    JanusAudio.SetLegacyDotDashPTT(1);
-                }
-
-                if ((ozy_ver == 18) &&
-                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver > 13)) ||
-                   ((ozy_ver == 19) &&
-                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver < 14))))
-                {
-                    result = false;
-                    fwVersionMsg = "Invalid Firmware Level. Ozy v1.9 requires Penelope v1.4 or PennyLane v1.4\n";
-                }
-
-                if ((ozy_ver == 20) &&
-                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver < 15) ||
-                    (c != null && c.MercuryPresent && (merc_ver < 30))))
-                {
-                    result = false;
-                    fwVersionMsg = "Invalid Firmware Level. Ozy v2.0 requires Penny(Lane) v1.5 and Mercury v3.0\n";
-                    c.SetupForm.alex_fw_good = false;
-                }
-
-                if ((ozy_ver == 21) &&
-                   (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver < 16) ||
-                   (c != null && c.MercuryPresent && (merc_ver < 31))))
-                {
-                    result = false;
-                    fwVersionMsg = "Invalid Firmware Level. Ozy v2.1 requires Penny(Lane) v1.6 and Mercury v3.1\n";
-                    c.SetupForm.alex_fw_good = false;
-                }
-
-                if ((ozy_ver == 22) &&
-                   (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver < 17) ||
-                   (c != null && c.MercuryPresent && (merc_ver < 32))))
-                {
-                    result = false;
-                    fwVersionMsg = "Invalid Firmware Level. Ozy v2.2 requires Penny(Lane) v1.7 and Mercury v3.2\n";
-                    c.SetupForm.alex_fw_good = false;
-                }
-                else c.SetupForm.alex_fw_good = true;
-
-
-              /*  if ((ozy_ver < 13) ||
-                   (c != null && c.MercuryPresent && (merc_ver < 27)) ||
-                   (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver < 12))
-                   )
-                {
-                    result = false;
-                    fwVersionMsg = "Invalid Firmware Level.  Ozy >= 16, Penelope >= 12 and Mercury >= 27 required\n";
-                } 
-                 if ((ozy_ver > 12) ||
-                         (c != null && c.MercuryPresent && (merc_ver > 26)) ||
-                         (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver > 11))
-                         )
-                     {
-                         result = false;
-                         fwVersionMsg = "Invalid Firmware Level.  Ozy < 13, Penelope < 12 and Mercury < 27 required\n";
-                     }*/
-           }
-                return result;
-		} 
-#endif
         // returns -101 for firmware version error 
         unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send)
         {
