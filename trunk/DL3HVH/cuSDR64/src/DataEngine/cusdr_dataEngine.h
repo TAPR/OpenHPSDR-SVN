@@ -506,12 +506,14 @@ public slots:
 	void		deviceWriteBuffer();
 
 private:
-	DataEngine*		m_dataEngine;
-	QUdpSocket*		m_audioProcessorSocket;
+	DataEngine		*m_dataEngine;
+	QUdpSocket		*m_audioProcessorSocket;
 	QMutex			m_mutex;
 	QByteArray		m_deviceSendDataSignature;
 	QByteArray		m_outBuffer;
 	QByteArray		m_outDatagram;
+
+	TNetworkDevicecard 	netDevice;
 
 	bool			m_setNetworkDeviceHeader;
 	long			m_sendSequence;

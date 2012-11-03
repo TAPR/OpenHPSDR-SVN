@@ -3752,6 +3752,8 @@ AudioProcessor::AudioProcessor(DataEngine *de)
 	//m_stopped = false;
 	//m_setNetworkDeviceHeader = true;
 	
+	m_audioProcessorSocket = 0;
+
 	m_sendSequence = 0L;
 	m_oldSendSequence = 0L;
 	
@@ -3763,6 +3765,12 @@ AudioProcessor::AudioProcessor(DataEngine *de)
 }
 
 AudioProcessor::~AudioProcessor() {
+
+	if (m_audioProcessorSocket) {
+		m_audioProcessorSocket->close();
+		delete m_audioProcessorSocket;
+		m_audioProcessorSocket = 0;
+	}
 }
 
 void AudioProcessor::stop() {
@@ -3772,19 +3780,32 @@ void AudioProcessor::stop() {
 
 void AudioProcessor::initAudioProcessorSocket() {
 
+	netDevice = m_dataEngine->set->getCurrentMetisCard();
 	m_audioProcessorSocket = new QUdpSocket();
-	m_audioProcessorSocket->connectToHost(m_dataEngine->io.hpsdrDeviceIPAddress, METIS_PORT);
 
-	//m_audioProcessorSocket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
-	//m_audioProcessorSocket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
+	if (m_audioProcessorSocket->bind(QHostAddress(m_dataEngine->set->getHPSDRDeviceLocalAddr()),
+			 	 	 	 	 	 	 m_dataEngine->set->getMetisPort(),
+			 	 	 	 	 	 	 QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
+	{
+		CHECKED_CONNECT(
+				m_audioProcessorSocket,
+				SIGNAL(error(QAbstractSocket::SocketError)),
+				this,
+				SLOT(displayAudioProcessorSocketError(QAbstractSocket::SocketError)));
 
-	CHECKED_CONNECT(
-		m_audioProcessorSocket, 
-		SIGNAL(error(QAbstractSocket::SocketError)), 
-		this, 
-		SLOT(displayAudioProcessorSocketError(QAbstractSocket::SocketError)));
+		m_dataEngine->setAudioProcessorRunning(true);
 
-	m_dataEngine->setAudioProcessorRunning(true);
+		//m_dataEngine->io.networkIOMutex.lock();
+		AUDIO_PROCESSOR_DEBUG << "audio processor socket bound successful to local port " << m_dataEngine->set->getMetisPort();
+		//m_dataEngine->io.networkIOMutex.unlock();
+	}
+	else {
+
+		m_dataEngine->io.networkIOMutex.lock();
+		AUDIO_PROCESSOR_DEBUG << "audio processor socket socket binding failed.";
+		m_dataEngine->io.networkIOMutex.unlock();
+
+	}
 }
 
 void AudioProcessor::audioReceiverChanged(int rx) {
@@ -3801,7 +3822,7 @@ void AudioProcessor::clientConnected(int rx) {
 
 void AudioProcessor::displayAudioProcessorSocketError(QAbstractSocket::SocketError error) {
 
-	AUDIO_PROCESSOR_DEBUG << "audio processor socket error:" << error;
+	AUDIO_PROCESSOR_DEBUG << "audio processor socket error: " << error;
 }
 
 void AudioProcessor::processAudioData() {
@@ -3860,8 +3881,7 @@ void AudioProcessor::deviceWriteBuffer() {
 
 		m_outDatagram += m_dataEngine->io.audioDatagram;
 
-		//if (m_audioProcessorSocket->writeDatagram(outDatagram.data(), outDatagram.size(), m_dataEngine->metisIPAddress, m_dataEngine->metisDataPort) < 0)
-		if (m_audioProcessorSocket->write(m_outDatagram) < 0)
+		if (m_audioProcessorSocket->writeDatagram(m_outDatagram, netDevice.ip_address, METIS_PORT) < 0)
 			AUDIO_PROCESSOR_DEBUG << "error sending data to Metis:" << m_audioProcessorSocket->errorString();
 
 		if (m_sendSequence != m_oldSendSequence + 1)
