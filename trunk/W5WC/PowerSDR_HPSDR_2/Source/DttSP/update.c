@@ -167,8 +167,8 @@ SetMode (unsigned int thread, unsigned int subrx, SDRMODE m)
 	if (tx[thread].mode == LSB) tx[thread].hlb.gen->invert = TRUE;
 	else tx[thread].hlb.gen->invert = FALSE;
 	rx[thread][subrx].mode = m;
-	if (m == SAM) rx[thread][subrx].am.gen->mode = 1;
-	if (m == AM) rx[thread][subrx].am.gen->mode = 0;
+	if (m == SAM) rx[thread][subrx].amd.gen->mode = 1;		//NR0V
+	if (m == AM) rx[thread][subrx].amd.gen->mode = 0;		//NR0V
 	sem_post(&top[thread].sync.upd.sem);
 	return rtn;
 }
@@ -1161,7 +1161,7 @@ SetFixedAGC (unsigned int thread, unsigned int subrx, double fixed_agc)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
+/*DttSP_EXP void													//(NR0V)
 GetSAMPLLvals(int thread, int subrx, REAL *alpha, REAL *beta)
 {
 	sem_wait(&top[thread].sync.upd.sem);
@@ -1185,7 +1185,7 @@ GetSAMFreq(int thread, int subrx, REAL *freq)
 	sem_wait(&top[thread].sync.upd.sem);
 	*freq = rx[thread][subrx].am.gen->pll.freq.f;
 	sem_post(&top[thread].sync.upd.sem);
-}
+}*/
 
 DttSP_EXP void
 SetCorrectIQ (unsigned int thread, unsigned int subrx, double phase, double gain)
@@ -2170,4 +2170,20 @@ int EerXmit = 0;
 
 DttSP_EXP void SetEerXmit(int on_off) {
     EerXmit = on_off;
+}
+
+DttSP_EXP void
+SetSBMode(unsigned int thread, unsigned int subrx, int sbmode)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].amd.gen->sbmode = sbmode;
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetFadeLevel(unsigned int thread, unsigned int subrx, int levelfade)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].amd.gen->levelfade = levelfade;
+	sem_post(&top[thread].sync.upd.sem);
 }

@@ -113,6 +113,9 @@ namespace PowerSDR
         enhanced,
         SPECTRAN,
         BLACKWHITE,
+        LinLog,
+        LinRad,
+        LinAuto,
         off,
     }
 
@@ -469,6 +472,11 @@ namespace PowerSDR
         public Radio radio;
         private SIOListenerII siolisten = null;
 
+        private Boolean whatisVHF = false;  //w3sz true if VHF panel is being displayed
+        private Boolean whatisHF = true;   //w3sz true if HF panel is being displayed
+        private Boolean iscollapsed = false;  //w3sz true if collapsed panel is being displayed
+        private Boolean isexpanded = true;   //w3sz true if expanded panel is being displayed
+
         private Thread[] audio_process_thread;				// threads to run DttSP functions
         private Thread draw_display_thread;					// draws the main display 
         private Thread multimeter_thread;					// updates the rx1/tx meter data
@@ -483,9 +491,9 @@ namespace PowerSDR
         private Thread f3k_mic_function_thread;				// handles the FLEX-3000 mic inputs (Up, Down, Fast)
         //private Thread wbir_thread;
         // private Thread wbir_rx2_thread;
-        private Thread update_rx1_dds_thread;
-        private Thread update_rx2_dds_thread;
-        private Thread update_tx_dds_thread;
+      // private Thread update_rx1_dds_thread;
+      //  private Thread update_rx2_dds_thread;
+      //  private Thread update_tx_dds_thread;
         //private Thread audio_watchdog_thread;
         // private Thread digital_watchdog_thread;
         //private HiPerfTimer polltimer;
@@ -8020,6 +8028,11 @@ namespace PowerSDR
             a.Add("band_vhf12_index/" + band_vhf12_index.ToString());
             a.Add("band_vhf13_index/" + band_vhf13_index.ToString());
 
+            a.Add("panelBandHF.Visible/" + whatisHF);//w3sz added
+            a.Add("panelBandVHF.Visible/" + whatisVHF);//w3sz added
+            a.Add("iscollapsed/" + iscollapsed);//w3sz added
+            a.Add("isexpanded/" + isexpanded);//w3sz added
+
             for (int i = (int)PreampMode.FIRST + 1; i < (int)PreampMode.LAST; i++)
                 a.Add("rx1_preamp_offset[" + i.ToString() + "]/" + rx1_preamp_offset[i].ToString("f3"));
 
@@ -8529,6 +8542,37 @@ namespace PowerSDR
                     case "rx1_meter_cal_offset":
                         rx1_meter_cal_offset = float.Parse(val);
                         break;
+                    case "panelBandHF.Visible": //added by w3sz
+                        whatisHF = Boolean.Parse(val); //added by w3sz
+                        panelBandHF.Visible = whatisHF; //added by w3sz
+                        if (panelBandHF.Visible) //added by w3sz
+                            btnBandHF_Click(btnBandHF, EventArgs.Empty); //added by w3sz
+                        break; //added by w3sz
+                    case "panelBandVHF.Visible": //added by w3sz
+                        whatisVHF = Boolean.Parse(val); //added by w3sz
+                        panelBandVHF.Visible = whatisVHF; //added by w3sz
+                        if (panelBandVHF.Visible) //added by w3sz
+                            btnBandVHF_Click(btnBandVHF, EventArgs.Empty); //added by w3sz
+                        break;  //added by w3sz
+                    case "iscollapsed":  //added by w3sz
+                        iscollapsed = Boolean.Parse(val);    //added by w3sz
+                        if (iscollapsed)   //added by w3sz
+                        {
+                            this.CollapseDisplay();
+                            iscollapsed = true;
+                            isexpanded = false; 
+                       }
+                        break; //added by w3sz
+                    case "isexpanded":  //added by w3sz
+                        isexpanded = Boolean.Parse(val);    //added by w3sz
+                        if (isexpanded)   //added by w3sz
+                        {
+                            this.ExpandDisplay();
+                            isexpanded = true;
+                            iscollapsed = false;
+                        }
+                            break; //added by w3sz
+
                     case "quick_save_mode":
                         quick_save_mode = (DSPMode)(Int32.Parse(val));
                         break;
@@ -33163,12 +33207,26 @@ namespace PowerSDR
         {
             panelBandVHF.Visible = true;
             panelBandHF.Visible = false;
+            whatisVHF = true;
+            whatisHF = false;
+ 
+            {
+                if (this.collapsedDisplay)
+                    this.CollapseDisplay();
+            }
         }
 
         private void btnBandHF_Click(object sender, System.EventArgs e)
         {
             panelBandHF.Visible = true;
             panelBandVHF.Visible = false;
+            whatisVHF = false;
+            whatisHF = true;
+  
+            {
+                if (this.collapsedDisplay)
+                   this.CollapseDisplay();
+            }
         }
 
         private void udFilterLow_LostFocus(object sender, EventArgs e)
@@ -42908,9 +42966,17 @@ namespace PowerSDR
         private void CollapseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.collapsedDisplay)
+            {
                 this.ExpandDisplay();
+                isexpanded = true;
+                iscollapsed = false;
+            }
             else
+            {
                 this.CollapseDisplay();
+                iscollapsed = true;
+                isexpanded = false;
+            }
         }
 
         private void equalizerToolStripMenuItem_Click(object sender, EventArgs e)
