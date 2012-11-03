@@ -32,6 +32,13 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.3.1.1:
+
+- Bug-fix on the Metis/Hermes network connections.
+
+- S-Meter font mismatch corrected.
+
+
 v0.3.1.0:
 
 - Important: please use the new settings.ini with this release !

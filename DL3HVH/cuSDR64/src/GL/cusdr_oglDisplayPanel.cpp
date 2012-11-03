@@ -104,10 +104,10 @@ OGLDisplayPanel::OGLDisplayPanel(QWidget *parent)
 	m_fonts.smallFont.setItalic(true);
 	m_oglTextSmallItalic = new OGLText(m_fonts.smallFont);
 	m_oglTextNormal = new OGLText(m_fonts.normalFont);
-	m_oglTextBig = new OGLText(m_fonts.bigFont1);
+	m_oglTextBig = new OGLText(m_fonts.bigFont);
 
-	m_fonts.bigFont1.setItalic(true);
-	m_oglTextBigItalic = new OGLText(m_fonts.bigFont1);
+	m_fonts.bigFont.setItalic(true);
+	m_oglTextBigItalic = new OGLText(m_fonts.bigFont);
 	m_oglTextFreq1 = new OGLText(m_fonts.freqFont1);
 	m_oglTextFreq2 = new OGLText(m_fonts.freqFont2);
 	m_oglTextImpact = new OGLText(m_fonts.impactFont);
