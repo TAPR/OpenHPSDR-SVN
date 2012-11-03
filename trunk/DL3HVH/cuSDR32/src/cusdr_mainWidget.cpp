@@ -1611,7 +1611,7 @@ void MainWindow::alexBtnClickedEvent() {
 	else if (alexBtn->btnState() == AeroButton::ON) {
 
 		alexBtn->setBtnState(AeroButton::OFF);
-		alexBtn->setText("Alex Manual");
+		alexBtn->setText("Alex Man");
 
 		//m_alexConfiguration[0].value = true;
 		m_alexConfig |= 0x01;
@@ -1637,7 +1637,7 @@ void MainWindow::alexConfigurationChanged(quint16 conf) {
 	if (conf & 0x01) {
 
 		alexBtn->setBtnState(AeroButton::OFF);
-		alexBtn->setText("Alex Manual");
+		alexBtn->setText("Alex Man");
 	}
 	else {
 
@@ -1654,7 +1654,7 @@ void MainWindow::alexPresenceChanged(bool value) {
 
 		//if (m_alexConfiguration[0].value)
 		if (m_alexConfig & 0x01)
-			alexBtn->setText(tr("Alex Manual"));
+			alexBtn->setText(tr("Alex Man"));
 		else
 			alexBtn->setText(tr("Alex Auto"));
 	}

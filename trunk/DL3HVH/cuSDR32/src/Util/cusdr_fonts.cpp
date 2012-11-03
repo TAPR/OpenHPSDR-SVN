@@ -84,6 +84,26 @@ CFonts::CFonts(QObject *parent)
 	m_fonts.normalFontMetrics = new QFontMetrics(m_fonts.normalFont);
 	m_fonts.fontHeightNormalFont = m_fonts.normalFontMetrics->tightBoundingRect("M").height();
 
+
+	m_fonts.bigFont.setStyleStrategy(QFont::PreferAntialias);
+	m_fonts.bigFont.setStyleHint(QFont::SansSerif, QFont::PreferAntialias);
+	m_fonts.bigFont.setBold(true);
+	m_fonts.bigFont.setFixedPitch(true);
+	#if defined(Q_OS_MAC)
+		m_fonts.bigFont.setPixelSize(18);
+		m_fonts.bigFont.setFamily("Arial");
+	#elif defined(Q_OS_WIN32)
+		m_fonts.bigFont.setPixelSize(18);
+		m_fonts.bigFont.setFamily("Arial");
+	#elif defined(Q_OS_LINUX)
+		m_fonts.bigFont.setPixelSize(18);
+		m_fonts.bigFont.setFamily("Arial");
+	#endif
+
+	m_fonts.bigFontMetrics = new QFontMetrics(m_fonts.bigFont);
+	m_fonts.fontHeightBigFont = m_fonts.bigFontMetrics->tightBoundingRect("M").height();
+
+
 	m_fonts.bigFont1.setStyleStrategy(QFont::PreferAntialias);
 	m_fonts.bigFont1.setStyleHint(QFont::SansSerif, QFont::PreferAntialias);
 	m_fonts.bigFont1.setBold(true);

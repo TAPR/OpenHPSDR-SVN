@@ -37,6 +37,7 @@ typedef struct _fonts {
 	QFont	tinyFont;
 	QFont	smallFont;
 	QFont	normalFont;
+	QFont	bigFont;
 	QFont	bigFont1;
 	QFont	bigFont2;
 	QFont	freqFont1;
@@ -47,6 +48,7 @@ typedef struct _fonts {
 	QFontMetrics 	*tinyFontMetrics;
 	QFontMetrics 	*smallFontMetrics;
 	QFontMetrics 	*normalFontMetrics;
+	QFontMetrics 	*bigFontMetrics;
 	QFontMetrics 	*bigFont1Metrics;
 	QFontMetrics 	*bigFont2Metrics;
 	QFontMetrics 	*freqFont1Metrics;
@@ -57,6 +59,7 @@ typedef struct _fonts {
 	int		fontHeightTinyFont;
 	int		fontHeightSmallFont;
 	int		fontHeightNormalFont;
+	int		fontHeightBigFont;
 	int		fontHeightBigFont1;
 	int		fontHeightBigFont2;
 	int		fontHeightFreqFont1;
