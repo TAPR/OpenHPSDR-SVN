@@ -279,18 +279,22 @@ setup_rx (int k, unsigned int thread)
 	rx[thread][k].grapheq.flag = FALSE;
 
 	/* demods */
-	rx[thread][k].am.gen = newAMD (
-		uni[thread].samplerate,			// REAL samprate
-		0.0,							// REAL f_initial
-		-2000.0,						// REAL f_lobound,
-		2000.0,							// REAL f_hibound,
-		300.0,							// REAL f_bandwid,
-		CXBsize (rx[thread][k].buf.o),	// int size,
-		CXBbase (rx[thread][k].buf.o),	// COMPLEX *ivec,
-		CXBbase (rx[thread][k].buf.o),	// COMPLEX *ovec,
-		AMdet,							// AM Mode AMdet == rectifier,
-		//         SAMdet == synchronous detector
-		"AM detector blew");   // char *tag
+	rx[thread][k].amd.gen = newAMD (	// (NR0V)
+		CXBsize (rx[thread][k].buf.o),
+		CXBbase (rx[thread][k].buf.o),
+		CXBbase (rx[thread][k].buf.o),
+		0,
+		0,
+		0,
+		uni[thread].samplerate,
+		-2000.0,
+		2000.0,
+		1.0,
+		0.025,
+		0.02,
+		1.4,
+		"amd"
+		);
 
 	rx[thread][k].fm.gen = newFMD (
 		uni[thread].samplerate,			// REAL samprate
@@ -654,7 +658,7 @@ destroy_workspace (unsigned int thread)
 		del_anf (rx[thread][k].anf.gen);      // (NR0V)
 		//del_lmsr (rx[thread][k].anr.gen);
 		del_anr (rx[thread][k].anr.gen);      // (NR0V)
-		delAMD (rx[thread][k].am.gen);
+		del_amd (rx[thread][k].amd.gen);		// (NR0V)
 		delFMD (rx[thread][k].fm.gen);
 		delOSC (rx[thread][k].osc.gen);
 		delvec_COMPLEX (rx[thread][k].filt.save);
@@ -1219,7 +1223,7 @@ do_rx_SBCW (int k, unsigned int thread)
 PRIVATE void
 do_rx_AM (int k, unsigned int thread)
 {
-	AMDemod (rx[thread][k].am.gen);
+	am_demod (rx[thread][k].amd.gen);
 }
 
 PRIVATE void
@@ -1451,20 +1455,6 @@ do_tx_meter (unsigned int thread, CXB buf, TXMETERTYPE mt)
 }
 
 PRIVATE void
-do_tx_AM (unsigned int thread)
-{
-	int i, n = min (CXBhave (tx[thread].buf.o), uni[thread].buflen);
-	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
-
-	for (i = 0; i < n; i++)
-	{
-		CXBdata (tx[thread].buf.o, i) = Cmplx ((REAL)
-			(tx[thread].am.carrier_level +
-			(1.0f - tx[thread].am.carrier_level) * CXBreal (tx[thread].buf.o, i)), 0.0);
-	}
-}
-
-PRIVATE void
 do_tx_pre (unsigned int thread)
 {
 	int i, n = CXBhave (tx[thread].buf.i);
@@ -1569,11 +1559,20 @@ do_tx_post (unsigned int thread)
 
 	//if (tx[thread].alc.flag)
 		//DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
-	if (tx[thread].alc.flag)  // (NR0V)
+	if (tx[thread].alc.flag || (tx[thread].mode == AM) || (tx[thread].mode == SAM))  // (NR0V)										//AM HACK
 		WcpAGC (tx[thread].alc.gen);
 
-	if ((tx[thread].mode == AM) || tx[thread].mode == SAM)
-		do_tx_AM(thread);
+	if ((tx[thread].mode == AM) || (tx[thread].mode == SAM))																		//AM HACK
+	{
+		int i;
+		for (i = 0; i < CXBhave (tx[thread].buf.o); i++)
+		{
+			CXBreal(tx[thread].buf.o, i) = 
+				tx[thread].am.carrier_level + (1.0f - tx[thread].am.carrier_level) * CXBreal(tx[thread].buf.o, i);
+			CXBimag(tx[thread].buf.o, i) = 0.0f;
+		}
+	}
+
 
 	do_tx_meter (thread, tx[thread].buf.o, TX_ALC);
 
@@ -1611,6 +1610,20 @@ do_tx_SBCW (unsigned int thread)
 	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
 	if (tx[thread].mode != DSB)
 		CXBscl (tx[thread].buf.i, 2.0f);
+}
+
+PRIVATE void
+do_tx_AM (unsigned int thread)
+{
+	int i, n = min (CXBhave (tx[thread].buf.i), uni[thread].buflen);
+	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
+
+	for (i = 0; i < n; i++)
+	{
+		CXBdata (tx[thread].buf.i, i) = Cmplx ((REAL)
+			(tx[thread].am.carrier_level +
+			(1.0f - tx[thread].am.carrier_level) * CXBreal (tx[thread].buf.i, i)), 0.0);
+	}
 }
 
 PRIVATE void
@@ -1710,7 +1723,7 @@ do_tx (unsigned int thread)
 			break;
 		case AM:
 		case SAM:
-			//do_tx_AM (thread);
+			//do_tx_AM (thread);																	//AM HACK
 			break;
 		case FM:
 			do_tx_FM (thread);

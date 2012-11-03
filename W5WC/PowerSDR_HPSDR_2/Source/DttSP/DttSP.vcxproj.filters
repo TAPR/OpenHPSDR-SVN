@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="am_demod.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="banal.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -144,11 +141,11 @@
     <ClCompile Include="anr.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="amd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="am_demod.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="banal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -297,6 +294,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="anr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="amd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

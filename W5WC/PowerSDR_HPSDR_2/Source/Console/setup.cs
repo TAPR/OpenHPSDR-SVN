@@ -1878,6 +1878,12 @@ namespace PowerSDR
         private System.Windows.Forms.GroupBoxTS grpApolloCtrl;
         private System.Windows.Forms.CheckBoxTS chkApolloFilter;
         private CheckBoxTS chkEClassModulation;
+        private GroupBoxTS grpAMSAM;
+        private GroupBoxTS grpAMSBSEL;
+        private CheckBoxTS chkLevelFades;
+        private RadioButtonTS radUSB;
+        private RadioButtonTS radLSB;
+        private RadioButtonTS radLSBUSB;
         private System.Windows.Forms.CheckBoxTS chkApolloTuner;
  
         #endregion
@@ -3096,6 +3102,12 @@ namespace PowerSDR
             this.tpDSP = new System.Windows.Forms.TabPage();
             this.tcDSP = new System.Windows.Forms.TabControl();
             this.tpDSPOptions = new System.Windows.Forms.TabPage();
+            this.grpAMSAM = new System.Windows.Forms.GroupBoxTS();
+            this.chkLevelFades = new System.Windows.Forms.CheckBoxTS();
+            this.grpAMSBSEL = new System.Windows.Forms.GroupBoxTS();
+            this.radUSB = new System.Windows.Forms.RadioButtonTS();
+            this.radLSB = new System.Windows.Forms.RadioButtonTS();
+            this.radLSBUSB = new System.Windows.Forms.RadioButtonTS();
             this.grpNRANFPosistion = new System.Windows.Forms.GroupBoxTS();
             this.radANFPostAGC = new System.Windows.Forms.RadioButtonTS();
             this.radANFPreAGC = new System.Windows.Forms.RadioButtonTS();
@@ -4118,6 +4130,8 @@ namespace PowerSDR
             this.tpDSP.SuspendLayout();
             this.tcDSP.SuspendLayout();
             this.tpDSPOptions.SuspendLayout();
+            this.grpAMSAM.SuspendLayout();
+            this.grpAMSBSEL.SuspendLayout();
             this.grpNRANFPosistion.SuspendLayout();
             this.grpDSPBufferSize.SuspendLayout();
             this.grpDSPBufDig.SuspendLayout();
@@ -17129,7 +17143,10 @@ namespace PowerSDR
             "original",
             "enhanced",
             "Spectran",
-            "BlackWhite"});
+            "BlackWhite",
+            "LinLog",
+            "LinRad",
+            "LinAuto"});
             this.comboColorPalette.Location = new System.Drawing.Point(54, 75);
             this.comboColorPalette.Name = "comboColorPalette";
             this.comboColorPalette.Size = new System.Drawing.Size(72, 21);
@@ -17756,6 +17773,7 @@ namespace PowerSDR
             // 
             // tpDSPOptions
             // 
+            this.tpDSPOptions.Controls.Add(this.grpAMSAM);
             this.tpDSPOptions.Controls.Add(this.grpNRANFPosistion);
             this.tpDSPOptions.Controls.Add(this.chkDSPTXMeterPeak);
             this.tpDSPOptions.Controls.Add(this.grpDSPBufferSize);
@@ -17770,13 +17788,86 @@ namespace PowerSDR
             this.tpDSPOptions.TabIndex = 2;
             this.tpDSPOptions.Text = "Options";
             // 
+            // grpAMSAM
+            // 
+            this.grpAMSAM.Controls.Add(this.chkLevelFades);
+            this.grpAMSAM.Controls.Add(this.grpAMSBSEL);
+            this.grpAMSAM.Location = new System.Drawing.Point(8, 187);
+            this.grpAMSAM.Name = "grpAMSAM";
+            this.grpAMSAM.Size = new System.Drawing.Size(240, 92);
+            this.grpAMSAM.TabIndex = 40;
+            this.grpAMSAM.TabStop = false;
+            this.grpAMSAM.Text = "AM / SAM Demodulation";
+            // 
+            // chkLevelFades
+            // 
+            this.chkLevelFades.AutoSize = true;
+            this.chkLevelFades.Image = null;
+            this.chkLevelFades.Location = new System.Drawing.Point(76, 21);
+            this.chkLevelFades.Name = "chkLevelFades";
+            this.chkLevelFades.Size = new System.Drawing.Size(88, 17);
+            this.chkLevelFades.TabIndex = 1;
+            this.chkLevelFades.Text = "Fade Leveler";
+            this.chkLevelFades.UseVisualStyleBackColor = true;
+            this.chkLevelFades.CheckedChanged += new System.EventHandler(this.chkLevelFades_CheckedChanged);
+            // 
+            // grpAMSBSEL
+            // 
+            this.grpAMSBSEL.Controls.Add(this.radUSB);
+            this.grpAMSBSEL.Controls.Add(this.radLSB);
+            this.grpAMSBSEL.Controls.Add(this.radLSBUSB);
+            this.grpAMSBSEL.Location = new System.Drawing.Point(6, 46);
+            this.grpAMSBSEL.Name = "grpAMSBSEL";
+            this.grpAMSBSEL.Size = new System.Drawing.Size(228, 40);
+            this.grpAMSBSEL.TabIndex = 0;
+            this.grpAMSBSEL.TabStop = false;
+            this.grpAMSBSEL.Text = "Sideband Select (SAM ONLY)";
+            // 
+            // radUSB
+            // 
+            this.radUSB.AutoSize = true;
+            this.radUSB.Image = null;
+            this.radUSB.Location = new System.Drawing.Point(174, 17);
+            this.radUSB.Name = "radUSB";
+            this.radUSB.Size = new System.Drawing.Size(47, 17);
+            this.radUSB.TabIndex = 2;
+            this.radUSB.Text = "USB";
+            this.radUSB.UseVisualStyleBackColor = true;
+            this.radUSB.CheckedChanged += new System.EventHandler(this.radUSB_CheckedChanged);
+            // 
+            // radLSB
+            // 
+            this.radLSB.AutoSize = true;
+            this.radLSB.Image = null;
+            this.radLSB.Location = new System.Drawing.Point(95, 17);
+            this.radLSB.Name = "radLSB";
+            this.radLSB.Size = new System.Drawing.Size(45, 17);
+            this.radLSB.TabIndex = 1;
+            this.radLSB.Text = "LSB";
+            this.radLSB.UseVisualStyleBackColor = true;
+            this.radLSB.CheckedChanged += new System.EventHandler(this.radLSB_CheckedChanged);
+            // 
+            // radLSBUSB
+            // 
+            this.radLSBUSB.AutoSize = true;
+            this.radLSBUSB.Checked = true;
+            this.radLSBUSB.Image = null;
+            this.radLSBUSB.Location = new System.Drawing.Point(10, 17);
+            this.radLSBUSB.Name = "radLSBUSB";
+            this.radLSBUSB.Size = new System.Drawing.Size(73, 17);
+            this.radLSBUSB.TabIndex = 0;
+            this.radLSBUSB.TabStop = true;
+            this.radLSBUSB.Text = "LSB+USB";
+            this.radLSBUSB.UseVisualStyleBackColor = true;
+            this.radLSBUSB.CheckedChanged += new System.EventHandler(this.radLSBUSB_CheckedChanged);
+            // 
             // grpNRANFPosistion
             // 
             this.grpNRANFPosistion.Controls.Add(this.radANFPostAGC);
             this.grpNRANFPosistion.Controls.Add(this.radANFPreAGC);
             this.grpNRANFPosistion.Location = new System.Drawing.Point(8, 142);
             this.grpNRANFPosistion.Name = "grpNRANFPosistion";
-            this.grpNRANFPosistion.Size = new System.Drawing.Size(240, 50);
+            this.grpNRANFPosistion.Size = new System.Drawing.Size(240, 39);
             this.grpNRANFPosistion.TabIndex = 39;
             this.grpNRANFPosistion.TabStop = false;
             this.grpNRANFPosistion.Text = "NR/ANF Posistion";
@@ -17785,7 +17876,7 @@ namespace PowerSDR
             // 
             this.radANFPostAGC.AutoSize = true;
             this.radANFPostAGC.Image = null;
-            this.radANFPostAGC.Location = new System.Drawing.Point(125, 19);
+            this.radANFPostAGC.Location = new System.Drawing.Point(125, 16);
             this.radANFPostAGC.Name = "radANFPostAGC";
             this.radANFPostAGC.Size = new System.Drawing.Size(71, 17);
             this.radANFPostAGC.TabIndex = 11;
@@ -17797,7 +17888,7 @@ namespace PowerSDR
             this.radANFPreAGC.AutoSize = true;
             this.radANFPreAGC.Checked = true;
             this.radANFPreAGC.Image = null;
-            this.radANFPreAGC.Location = new System.Drawing.Point(6, 19);
+            this.radANFPreAGC.Location = new System.Drawing.Point(6, 16);
             this.radANFPreAGC.Name = "radANFPreAGC";
             this.radANFPreAGC.Size = new System.Drawing.Size(66, 17);
             this.radANFPreAGC.TabIndex = 10;
@@ -29730,6 +29821,10 @@ namespace PowerSDR
             this.tpDSP.ResumeLayout(false);
             this.tcDSP.ResumeLayout(false);
             this.tpDSPOptions.ResumeLayout(false);
+            this.grpAMSAM.ResumeLayout(false);
+            this.grpAMSAM.PerformLayout();
+            this.grpAMSBSEL.ResumeLayout(false);
+            this.grpAMSBSEL.PerformLayout();
             this.grpNRANFPosistion.ResumeLayout(false);
             this.grpNRANFPosistion.PerformLayout();
             this.grpDSPBufferSize.ResumeLayout(false);
@@ -30878,6 +30973,10 @@ namespace PowerSDR
             comboDSPWindow_SelectedIndexChanged(this, e);
             udDSPNB_ValueChanged(this, e);
             udDSPNB2_ValueChanged(this, e);
+            chkLevelFades_CheckedChanged(this, e);
+            radLSBUSB_CheckedChanged(this, e);
+            radLSB_CheckedChanged(this, e);
+            radUSB_CheckedChanged(this, e);
             //AGC
             udDSPAGCFixedGaindB_ValueChanged(this, e);
             udDSPAGCMaxGaindB_ValueChanged(this, e);
@@ -38197,7 +38296,37 @@ namespace PowerSDR
                 lblDisplayWaterfallLowColor.Visible = false;
                 lblDisplayWaterfallMidColor.Visible = false;
             }
-
+            if (comboColorPalette.Text == "LinLog")
+            {
+                console.color_sheme = ColorSheme.LinLog;
+                clrbtnWaterfallLow.Visible = false;
+                clrbtnWaterfallHigh.Visible = false;
+                clrbtnWaterfallMid.Visible = false;
+                lblDisplayWaterfallHighColor.Visible = false;
+                lblDisplayWaterfallLowColor.Visible = false;
+                lblDisplayWaterfallMidColor.Visible = false;
+            }
+            if (comboColorPalette.Text == "LinRad")
+            {
+                console.color_sheme = ColorSheme.LinRad;
+                clrbtnWaterfallLow.Visible = false;
+                clrbtnWaterfallHigh.Visible = false;
+                clrbtnWaterfallMid.Visible = false;
+                lblDisplayWaterfallHighColor.Visible = false;
+                lblDisplayWaterfallLowColor.Visible = false;
+                lblDisplayWaterfallMidColor.Visible = false;
+            }
+            if (comboColorPalette.Text == "LinAuto")
+            {
+                console.color_sheme = ColorSheme.LinAuto;
+                clrbtnWaterfallLow.Visible = false;
+                clrbtnWaterfallHigh.Visible = false;
+                clrbtnWaterfallMid.Visible = false;
+                lblDisplayWaterfallHighColor.Visible = false;
+                lblDisplayWaterfallLowColor.Visible = false;
+                lblDisplayWaterfallMidColor.Visible = false;
+            }
+ 
         }
 
         private void udDisplayWaterfallAvgTime_ValueChanged(object sender, System.EventArgs e)
@@ -41413,6 +41542,48 @@ namespace PowerSDR
             if (chkEClassModulation.Checked) JanusAudio.EnableEClassModulation(1);
             else JanusAudio.EnableEClassModulation(0);
         }
+
+        private void chkLevelFades_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLevelFades.Checked)
+            {
+                DttSP.SetFadeLevel(0, 0, 1);
+                DttSP.SetFadeLevel(0, 1, 1);
+            }
+            else
+            {
+                DttSP.SetFadeLevel(0, 0, 0);
+                DttSP.SetFadeLevel(0, 1, 0);
+            }
+        }
+
+        private void radLSBUSB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radLSBUSB.Checked)
+            {
+                DttSP.SetSBMode(0, 0, 0);
+                DttSP.SetSBMode(0, 1, 0);
+            }
+        }
+
+        private void radLSB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radLSB.Checked)
+            {
+                DttSP.SetSBMode(0, 0, 1);
+                DttSP.SetSBMode(0, 1, 1);
+            }
+        }
+
+        private void radUSB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radUSB.Checked)
+            {
+                DttSP.SetSBMode(0, 0, 2);
+                DttSP.SetSBMode(0, 1, 2);
+            }
+        }
+
      }
 
     #region PADeviceInfo Helper Class
