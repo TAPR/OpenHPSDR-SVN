@@ -70,10 +70,10 @@ Settings::Settings(QObject *parent)
 	m_titleString = "cuSDR32 BETA ";
 
 	#ifdef DEBUG
-		m_titleString = "cuSDR32 Debug BETA ";
+		m_titleString = "cuSDR64 Debug BETA ";
 	#endif
 
-	m_versionString = "v0.3.1.0";
+	m_versionString = "v0.3.1.1";
 	
 	qDebug() << qPrintable(m_titleString);
 

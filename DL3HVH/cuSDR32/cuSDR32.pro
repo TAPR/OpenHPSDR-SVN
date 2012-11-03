@@ -6,30 +6,62 @@ TEMPLATE = app
 CONFIG += qt warn_on
 #CONFIG += console
 
+#message(CONFIG: $$CONFIG)
+
 include(cuSDR.pri)
-	
+
 RESOURCES += res/cusdr.qrc
 
 win32:RC_FILE += res/cusdr.rc
 
-INCLUDEPATH += \
-    $(CUDA_INC_PATH) \
-    src/ \
-    src/CL
+#DEFINES += _WINDOWS
+#DEFINES += _CRT_SECURE_NO_WARNINGS
+#DEFINES += QT_LARGEFILE_SUPPORT 
+#DEFINES += QT_DLL 
+#DEFINES += QT_MULTIMEDIA_LIB 
+#DEFINES += QT_OPENGL_LIB 
+#DEFINES += QT_NETWORK_LIB 
+#DEFINES += QT_HAVE_MMX 
+#DEFINES += QT_HAVE_3DNOW 
+#DEFINES += QT_HAVE_SSE 
+#DEFINES += QT_HAVE_MMXEXT 
+#DEFINES += QT_HAVE_SSE2
+
+unix:INCLUDEPATH += \
+	./ \
+	src/ \
+	src/AudioEngine \
+	src/CL \
+	src/DataEngine \
+	src/GL \
+	src/QtDSP \
+	src/Util
+
+win32:INCLUDEPATH += \
+	./ \
+	src/ \
+	src/AudioEngine \
+	src/CL \
+	src/DataEngine \
+	src/GL \
+	src/QtDSP \
+	src/Util \
+	$(CUDA_INC_PATH)
 	
-LIBS += \
+unix:LIBS += -lfftw3f
+
+win32:LIBS += \
 	-L"$$(CUDA_LIB_PATH)/Win32" \
-    -L"./lib" \
+	-L"./lib" \
 	-lwsock32 \
 	-lVersion \
 	-lPsapi \
 	#-lQtOpenCL \
 	-lopengl32 \
-    -llibfftw3f-3 \
-    -lgdi32 \
-    -luser32 \
-    -lKernel32
-	
+	-llibfftw3f-3 \
+	-lgdi32 \
+	-luser32 \
+	-lKernel32
 
 debug {
 
@@ -48,6 +80,3 @@ release {
 	RCC_DIR = ./bld/release/rcc
 	DESTDIR = ./bin/release	
 }	
-	
-
-
