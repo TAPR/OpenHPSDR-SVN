@@ -32,6 +32,15 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.3.1.2:
+
+- Bug-fix: a font missing caused  an application crash if ADC overloads.
+
+- Thanks to Berndt Wulf, VK5ABN, a socket option was adjusted.
+
+- During HPSDR network device detection (Metis/Hermes) a message is shown
+  on the status bar.
+
 v0.3.1.1:
 
 - Bug-fix on the Metis/Hermes network connections.

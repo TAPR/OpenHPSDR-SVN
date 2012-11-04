@@ -115,8 +115,8 @@ int QHpsdrIO::findHPSDRDevices() {
 
 	if (socket.bind(
 				QHostAddress(set->getHPSDRDeviceLocalAddr()), 
-				QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
-				//QUdpSocket::ShareAddress))
+				//QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
+				QUdpSocket::DefaultForPlatform))
 				//QUdpSocket::DontShareAddress))
 	{
 		CHECKED_CONNECT(
@@ -135,6 +135,9 @@ int QHpsdrIO::findHPSDRDevices() {
 		io->networkIOMutex.lock();
 		HPSDRIO_DEBUG << "discovery_socket bind failed.";
 		io->networkIOMutex.unlock();
+
+		socket.close();
+		return 0;
 	}
 
 	if (socket.writeDatagram(m_findDatagram, QHostAddress::Broadcast, METIS_PORT) == 63) {
@@ -223,6 +226,8 @@ int QHpsdrIO::findHPSDRDevices() {
 		HPSDRIO_DEBUG << "Device selected: " << qPrintable(m_deviceCards.at(0).ip_address.toString());
 		io->networkIOMutex.unlock();
 	}
+
+	socket.close();
 	return devicesFound;
 }
 
@@ -233,112 +238,8 @@ void QHpsdrIO::displayDiscoverySocketError(QAbstractSocket::SocketError error) {
 	io->networkIOMutex.unlock();
 }
 
-//void NetworkIO::showNetworkIODialog() {
-
-	//m_metisDialog->exec();
-	//m_networkIO->exec();
-//}
-
-//void NetworkIO::metisDeviceChanged(int index) {
-//
-//    //set->setCurrentHPSDRDevice(m_metisCards.at(index));
-//}
-
-//void NetworkIO::okBtnClicked() {
-//
-//	set->setCurrentHPSDRDevice(m_metisCards.at(m_metisDeviceComboBox->currentIndex()));
-//	NETWORKDIALOG_DEBUG << "Metis selected: " << m_metisCards.at(m_metisDeviceComboBox->currentIndex()).ip_address.toString();
-//	accept();
-//}
-
 void QHpsdrIO::clear() {
 
 	//m_metisDeviceComboBox->clear();
 	m_deviceCards.clear();
 }
-
-// *********************************************************************
-// Network IO Dialog
-
-//NetworkIODialog::NetworkIODialog(QWidget *parent)
-//    :   QDialog(parent)
-//	,	set(Settings::instance())
-//{
-//	setWindowModality(Qt::NonModal);
-//	setWindowOpacity(0.9);
-//	setStyleSheet(set->getDialogStyle());
-//
-//	setMouseTracking(true);
-//
-//	m_titleFont.setStyleStrategy(QFont::PreferAntialias);
-//	m_titleFont.setFixedPitch(true);
-//	m_titleFont.setPixelSize(13);
-//	m_titleFont.setFamily("Arial");
-//	m_titleFont.setBold(true);
-//	
-//
-//	QVBoxLayout *dialogLayout = new QVBoxLayout(this);
-//
-//	m_metisDeviceComboBox = new QComboBox(this);
-//	m_metisDeviceComboBox->setStyleSheet(set->getComboBoxStyle());
-//	m_metisDeviceComboBox->setMinimumContentsLength(30);
-//	
-//	QScopedPointer<QHBoxLayout> titleLayout(new QHBoxLayout);
-//	QLabel *titleLabel = new QLabel(tr("found more than one Metis:"), this);
-//	titleLabel->setFont(m_titleFont);
-//	titleLabel->setStyleSheet(set->getLabelStyle());
-//	titleLayout->addWidget(titleLabel);
-//	dialogLayout->addLayout(titleLayout.data());
-//	titleLayout.take(); // ownership transferred to dialogLayout
-//
-//	QScopedPointer<QHBoxLayout> metisDeviceLayout(new QHBoxLayout);
-//	QLabel *ipAddressLabel = new QLabel(tr("IP address"), this);
-//	ipAddressLabel->setStyleSheet(set->getLabelStyle());
-//	metisDeviceLayout->addWidget(ipAddressLabel);
-//	metisDeviceLayout->addWidget(m_metisDeviceComboBox);
-//	dialogLayout->addLayout(metisDeviceLayout.data());
-//	metisDeviceLayout.take(); // ownership transferred to dialogLayout
-//
-//	/*CHECKED_CONNECT(
-//		m_metisDeviceComboBox, 
-//		SIGNAL(activated(int)),
-//		this, 
-//		SLOT(metisDeviceChanged(int)));*/
-//
-//	AeroButton* okBtn = new AeroButton("Ok", this);
-//	okBtn->setRoundness(10);
-//	okBtn->setFixedSize(btn_width, btn_height);
-//	CHECKED_CONNECT(
-//		okBtn, 
-//		SIGNAL(clicked()), 
-//		this, 
-//		SLOT(okBtnClicked()));
-//
-//	AeroButton* cancelBtn = new AeroButton("Cancel", this);
-//	cancelBtn->setRoundness(10);
-//	cancelBtn->setFixedSize(btn_width, btn_height);
-//	CHECKED_CONNECT(
-//		cancelBtn, 
-//		SIGNAL(clicked()), 
-//		this, 
-//		SLOT(reject()));
-//
-//	QHBoxLayout *hbox = new QHBoxLayout;
-//	hbox->setSpacing(1);
-//	hbox->addWidget(okBtn);
-//	hbox->addWidget(cancelBtn);
-//
-//	dialogLayout->addLayout(hbox);
-//    
-//    setLayout(dialogLayout);
-//}
-//
-//NetworkIODialog::~NetworkIODialog() {
-//}
-//
-//void NetworkIODialog::okBtnClicked() {
-//
-//	//set->setCurrentHPSDRDevice(m_metisCards.at(m_metisDeviceComboBox->currentIndex()));
-//	NETWORKDIALOG_DEBUG << "Metis selected: " << m_metisCards.at(m_metisDeviceComboBox->currentIndex()).ip_address.toString();
-//	accept();
-//}

@@ -197,6 +197,24 @@ CFonts::CFonts(QObject *parent)
 	m_fonts.impactFontMetrics = new QFontMetrics(m_fonts.impactFont);
 	m_fonts.fontHeightImpactFont = m_fonts.impactFontMetrics->tightBoundingRect("M").height();
 
+
+	m_fonts.hugeFont.setStyleStrategy(QFont::PreferAntialias);
+	//m_fonts.hugeFont.setStyleHint(QFont::SansSerif, QFont::PreferAntialias);
+	m_fonts.hugeFont.setBold(true);
+	m_fonts.hugeFont.setFixedPitch(true);
+	#ifdef Q_OS_MAC
+		m_fonts.hugeFont.setPixelSize(72);
+		m_fonts.hugeFont.setFamily("Impact");
+	#elif defined(Q_OS_WIN32)
+		m_fonts.hugeFont.setPixelSize(72);
+		m_fonts.hugeFont.setFamily("Impact");
+	#elif defined(Q_OS_LINUX)
+		m_fonts.hugeFont.setPixelSize(72);
+		m_fonts.hugeFont.setFamily("Impact");
+	#endif
+
+	m_fonts.hugeFontMetrics = new QFontMetrics(m_fonts.hugeFont);
+	m_fonts.fontHeightHugeFont = m_fonts.hugeFontMetrics->tightBoundingRect("M").height();
 }
 
 CFonts::~CFonts() {

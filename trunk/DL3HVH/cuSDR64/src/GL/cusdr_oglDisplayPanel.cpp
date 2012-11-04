@@ -1978,14 +1978,14 @@ void OGLDisplayPanel::setupDisplayRegions(QSize size) {
 	//DISPLAYPANEL_DEBUG << "m_smeterRectWidth:" << m_smeterRect.width();
 	//DISPLAYPANEL_DEBUG << "m_sMeterOffset:" << m_sMeterOffset;
 	
-	m_freg1 		 = QRegion(QRect(166, 35, 8, m_fonts.fontHeightBigFont2));
-	m_freg10 		 = QRegion(QRect(152, 35, 8, m_fonts.fontHeightBigFont2));
-	m_freg100 		 = QRegion(QRect(138, 35, 8, m_fonts.fontHeightBigFont2));
-	m_freg1000 		 = QRegion(QRect(112, 35, 12, m_fonts.fontHeightBigFont1));
-	m_freg10000 	 = QRegion(QRect(93, 35, 12, m_fonts.fontHeightBigFont1));
-	m_freg100000	 = QRegion(QRect(73, 35, 12, m_fonts.fontHeightBigFont1));
-	m_freg1000000	 = QRegion(QRect(41, 35, 12, m_fonts.fontHeightBigFont1));
-	m_freg10000000	 = QRegion(QRect(23, 35, 12, m_fonts.fontHeightBigFont1));
+	m_freg1 		 = QRegion(QRect(166, 35, 8, m_fonts.fontHeightFreqFont2));
+	m_freg10 		 = QRegion(QRect(152, 35, 8, m_fonts.fontHeightFreqFont2));
+	m_freg100 		 = QRegion(QRect(138, 35, 8, m_fonts.fontHeightFreqFont2));
+	m_freg1000 		 = QRegion(QRect(112, 35, 12, m_fonts.fontHeightFreqFont1));
+	m_freg10000 	 = QRegion(QRect(93, 35, 12, m_fonts.fontHeightFreqFont1));
+	m_freg100000	 = QRegion(QRect(73, 35, 12, m_fonts.fontHeightFreqFont1));
+	m_freg1000000	 = QRegion(QRect(41, 35, 12, m_fonts.fontHeightFreqFont1));
+	m_freg10000000	 = QRegion(QRect(23, 35, 12, m_fonts.fontHeightFreqFont1));
 
 	m_smeterRenew = true;
 }

@@ -40,7 +40,12 @@ unix:INCLUDEPATH += \
 win32:INCLUDEPATH += \
 	./ \
 	src/ \
+	src/AudioEngine \
 	src/CL \
+	src/DataEngine \
+	src/GL \
+	src/QtDSP \
+	src/Util \
 	$(CUDA_PATH_V5_0)/include
 	
 unix:LIBS += -lfftw3f
