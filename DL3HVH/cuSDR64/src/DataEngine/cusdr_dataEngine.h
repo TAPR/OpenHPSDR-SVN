@@ -30,7 +30,6 @@
 #ifndef _CUSDR_DATA_ENGINE_H
 #define _CUSDR_DATA_ENGINE_H
 
-
 //#include <QObject>
 //#include <QThread>
 //#include <QMetaType>
@@ -370,8 +369,8 @@ signals:
 	void	clientConnectedEvent(int rx);
 	void	audioRxEvent(int rx);
 	void	outMultiplierEvent(int value);
-	//void	closeNetworkDeviceDataSocket();
-	//void	stopMetisEvent();
+	void	systemMessageEvent(const QString &str, int time);
+	void	clearSystemMessageEvent();
 	void	DataProcessorReadyEvent();
 	void	audioSenderReadyEvent(bool value);
 

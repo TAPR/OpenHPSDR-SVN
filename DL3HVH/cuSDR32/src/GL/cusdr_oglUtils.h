@@ -35,7 +35,6 @@
 #include <QGLFramebufferObject>
 #include <QtCore/qmath.h>
 
-
 #define GL_CLAMP_TO_EDGE	0x812F
 
 

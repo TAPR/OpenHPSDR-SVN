@@ -154,6 +154,18 @@ MainWindow::~MainWindow() {
 void MainWindow::setupConnections() {
 
 	CHECKED_CONNECT(
+		m_dataEngine,
+		SIGNAL(systemMessageEvent(const QString&, int)),
+		this,
+		SLOT(showStatusBarMessage(const QString &, int)));
+
+	CHECKED_CONNECT(
+		m_dataEngine,
+		SIGNAL(clearSystemMessageEvent()),
+		this,
+		SLOT(clearStatusBarMessage()));
+
+	CHECKED_CONNECT(
 		m_chirpWidget, 
 		SIGNAL(loadFileEvent(QObject *, const QString)), 
 		this, 
@@ -614,26 +626,62 @@ void MainWindow::createStatusBar() {
 	m_dateTimeString = dateTime.toString();
 	m_dateTimeString.append(" (loc)");
 
+	m_cpuLoadString = "CPU load:     ";
+	m_cpuLoadLabel = new QLabel(m_cpuLoadString, this);
+	m_cpuLoadLabel->setStyleSheet(set->getLabelStyle());
+
+//	m_statusBarMessageString = "ready\t\t\t\t\t";
+//	m_statusBarMessage = new QLabel(m_statusBarMessageString, this);
+//	m_statusBarMessage->setStyleSheet(set->getLabelStyle());
+
 	m_dateTimeLabel = new QLabel(m_dateTimeString, this);
 	//m_dateTimeLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 	m_dateTimeLabel->setStyleSheet(set->getLabelStyle());
 
+
 	statusBar()->setStyleSheet(set->getStatusbarStyle());
 	//statusBar()->setSizeGripEnabled(true);
-	statusBar()->addPermanentWidget(m_dateTimeLabel);
+	//statusBar()->addWidget(m_statusBarMessage);
+	//statusBar()->insertWidget(0, m_cpuLoadLabel);
+	//statusBar()->addPermanentWidget(m_cpuLoadLabel);
+	//statusBar()->insertWidget(0, m_statusBarMessage);
+	//statusBar()->addPermanentWidget(m_statusBarMessage);
+	//statusBar()->addPermanentWidget(m_dateTimeLabel);
+	//statusBar()->insertPermanentWidget(1, m_statusBarMessage, 0);
+	//statusBar()->addPermanentWidget(m_statusBarMessage);
+	statusBar()->addPermanentWidget(m_cpuLoadLabel);
+	statusBar()->insertPermanentWidget(1, m_dateTimeLabel, 0);
 }
 
 void MainWindow::updateStatusBar(short load) {
 
-	QString str = "CPU load: %1 %";
-	statusBar()->showMessage(str.arg(load));
+	QString str = "CPU load: %1 % \t";
+	//statusBar()->showMessage(m_cpuLoadString.arg(load));
+	//statusBar()->showMessage(str.arg(load));
+	//statusBar()->showMessage(m_statusBarMessageString, 500);
+	m_cpuLoadLabel->setText(str.arg(load));
 
 	QDateTime dateTime = QDateTime::currentDateTime();
 	m_dateTimeString = dateTime.toString();
 	m_dateTimeString.append(" (loc)");
-
 	m_dateTimeLabel->setText(m_dateTimeString);
+
+	statusBar()->update();
 }
+
+void MainWindow::showStatusBarMessage(const QString &msg, int time) {
+
+	statusBar()->showMessage(msg, time);
+	//m_statusBarMessage->setText(msg);
+
+	//statusBar()->update();
+}
+
+void MainWindow::clearStatusBarMessage() {
+
+	statusBar()->clearMessage();
+}
+
 
 /*!
 	\brief create the main button group.

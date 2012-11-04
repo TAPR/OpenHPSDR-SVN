@@ -436,6 +436,8 @@ bool DataEngine::findHPSDRDevices() {
 	}
 
 	io.networkIOMutex.lock();
+	DATA_ENGINE_DEBUG << "HPSDR network device detection...please wait.";
+	emit systemMessageEvent("HPSDR network device detection...please wait", 0);
 	io.devicefound.wait(&io.networkIOMutex);
 
 	m_hpsdrDevices = set->getHpsdrNetworkDevices();
@@ -444,11 +446,13 @@ bool DataEngine::findHPSDRDevices() {
 		io.networkIOMutex.unlock();
 		stopHpsdrIO();
 		DATA_ENGINE_DEBUG << "no device found. HPSDR hardware powered? Network connection established?";
+		emit systemMessageEvent("no device found. HPSDR hardware powered? Network connection established?", 10000);
 
 		setSystemState(QSDR::HwIOError,	m_hwInterface, m_serverMode, QSDR::DataEngineDown);
 	}
 	else {
 
+		emit clearSystemMessageEvent();
 		if (m_hpsdrDevices > 1)
 			set->showNetworkIODialog();
 
@@ -915,12 +919,12 @@ bool DataEngine::start() {
 		return false;
 	}
 
-	// audio processing thread
-	if (!startAudioProcessor(QThread::NormalPriority, m_serverMode)) {
-
-		DATA_ENGINE_DEBUG << "audio processor thread could not be started.";
-		return false;
-	}
+//	// audio processing thread
+//	if (!startAudioProcessor(QThread::NormalPriority, m_serverMode)) {
+//
+//		DATA_ENGINE_DEBUG << "audio processor thread could not be started.";
+//		return false;
+//	}
 
 	// start Sync,ADC and S-Meter timers
 	m_SyncChangedTime.start();
@@ -936,6 +940,7 @@ bool DataEngine::start() {
 	// pre-conditioning
 	//for (int i = 0; i < io.receivers; i++)
 	//	sendInitFramesToNetworkDevice(i);
+
 	sendInitFramesToNetworkDevice(0);
 				
 	if (m_serverMode == QSDR::SDRMode && set->getWideBandData())
@@ -944,6 +949,14 @@ bool DataEngine::start() {
 		networkDeviceStartStop(0x01); // 0x01 for starting Metis without wide band data
 		
 	m_networkDeviceRunning = true;
+
+	// audio processing thread
+	if (!startAudioProcessor(QThread::NormalPriority, m_serverMode)) {
+
+		DATA_ENGINE_DEBUG << "audio processor thread could not be started.";
+		return false;
+	}
+
 
 	// start the "frames-per-second" timer for all receivers
 	for (int i = 0; i < io.receivers; i++)
@@ -1382,6 +1395,7 @@ void DataEngine::sendInitFramesToNetworkDevice(int rx) {
 	QUdpSocket socket;
 	socket.bind(QHostAddress(set->getHPSDRDeviceLocalAddr()), 
 				set->getMetisPort(),
+				//QUdpSocket::DefaultForPlatform);
 				QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress);
 				
 	for (int i = 0; i < 1; i++) {
@@ -1429,6 +1443,7 @@ bool DataEngine::startHpsdrIO(QThread::Priority prio) {
 					
 		m_netIOThreadRunning = true;
 		io.networkIOMutex.lock();
+		qDebug() << "";
 		DATA_ENGINE_DEBUG << "HPSDR network IO thread started.";
 		io.networkIOMutex.unlock();
 
@@ -1463,42 +1478,54 @@ void DataEngine::networkDeviceStartStop(char value) {
 
 	TNetworkDevicecard metis = set->getCurrentMetisCard();
 	QUdpSocket socket;
-	socket.bind(QHostAddress(set->getHPSDRDeviceLocalAddr()), 
+
+	if (socket.bind(QHostAddress(set->getHPSDRDeviceLocalAddr()),
 				set->getMetisPort(),
-				QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress);
-				
-	m_commandDatagram.resize(64);
-	m_commandDatagram[0] = (char)0xEF;
-	m_commandDatagram[1] = (char)0xFE;
-	m_commandDatagram[2] = (char)0x04;
-	m_commandDatagram[3] = (char)value;
+				//QUdpSocket::DefaultForPlatform))
+				QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
+	{
+		DATA_ENGINE_DEBUG << "device start/stop: socket bound successful to local port " << set->getMetisPort();
 
-	for (int i = 4; i < 64; i++) m_commandDatagram[i] = 0x00;
+		m_commandDatagram.resize(64);
+		m_commandDatagram[0] = (char)0xEF;
+		m_commandDatagram[1] = (char)0xFE;
+		m_commandDatagram[2] = (char)0x04;
+		m_commandDatagram[3] = (char)value;
 
-	//if (socket.writeDatagram(m_commandDatagram, m_metisCards[0].ip_address, METIS_PORT) == 64) {
-	if (socket.writeDatagram(m_commandDatagram, metis.ip_address, METIS_PORT) == 64) {
+		for (int i = 4; i < 64; i++) m_commandDatagram[i] = 0x00;
+
+		//if (socket.writeDatagram(m_commandDatagram, m_metisCards[0].ip_address, METIS_PORT) == 64) {
+		if (socket.writeDatagram(m_commandDatagram, metis.ip_address, METIS_PORT) == 64) {
 	
-		//if (value == 1) {
-		if (value != 0) {
+			//if (value == 1) {
+			if (value != 0) {
 
-			io.networkIOMutex.lock();
-			DATA_ENGINE_DEBUG << "sent start command to device at: "<< qPrintable(metis.ip_address.toString());
-			io.networkIOMutex.unlock();
-			m_networkDeviceRunning = true;
-		}
-		else {
+				io.networkIOMutex.lock();
+				DATA_ENGINE_DEBUG << "sent start command to device at: "<< qPrintable(metis.ip_address.toString());
+				io.networkIOMutex.unlock();
+				m_networkDeviceRunning = true;
+			}
+			else {
 
-			//DATA_ENGINE_DEBUG << "sent stop command to Metis at"<< m_metisCards[0].ip_address.toString();
-			io.networkIOMutex.lock();
-			DATA_ENGINE_DEBUG << "sent stop command to device at: "<< qPrintable(metis.ip_address.toString());
-			io.networkIOMutex.unlock();
-			m_networkDeviceRunning = false;
+				//DATA_ENGINE_DEBUG << "sent stop command to Metis at"<< m_metisCards[0].ip_address.toString();
+				io.networkIOMutex.lock();
+				DATA_ENGINE_DEBUG << "sent stop command to device at: "<< qPrintable(metis.ip_address.toString());
+				io.networkIOMutex.unlock();
+				m_networkDeviceRunning = false;
+			}
 		}
+		else
+			DATA_ENGINE_DEBUG << "device start/stop: sending command to device failed.";
+
+		//socket.close();
 	}
-	else
-		DATA_ENGINE_DEBUG << "sending command to device failed.";
-			
+	else {
+
+		DATA_ENGINE_DEBUG << "device start/stop: socket binding failed.";
+	}
+
 	socket.close();
+	DATA_ENGINE_DEBUG << "device start/stop: socket closed.";
 }
 
 //********************************************************
@@ -3766,11 +3793,13 @@ AudioProcessor::AudioProcessor(DataEngine *de)
 
 AudioProcessor::~AudioProcessor() {
 
-	if (m_audioProcessorSocket) {
-		m_audioProcessorSocket->close();
-		delete m_audioProcessorSocket;
-		m_audioProcessorSocket = 0;
-	}
+	m_audioProcessorSocket->close();
+
+//	if (m_audioProcessorSocket) {
+//		m_audioProcessorSocket->close();
+//		delete m_audioProcessorSocket;
+//		m_audioProcessorSocket = 0;
+//	}
 }
 
 void AudioProcessor::stop() {
@@ -3785,6 +3814,7 @@ void AudioProcessor::initAudioProcessorSocket() {
 
 	if (m_audioProcessorSocket->bind(QHostAddress(m_dataEngine->set->getHPSDRDeviceLocalAddr()),
 			 	 	 	 	 	 	 m_dataEngine->set->getMetisPort(),
+			 	 	 	 	 	 	 //QUdpSocket::DefaultForPlatform))
 			 	 	 	 	 	 	 QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
 	{
 		CHECKED_CONNECT(
@@ -3795,14 +3825,14 @@ void AudioProcessor::initAudioProcessorSocket() {
 
 		m_dataEngine->setAudioProcessorRunning(true);
 
-		//m_dataEngine->io.networkIOMutex.lock();
+		m_dataEngine->io.networkIOMutex.lock();
 		AUDIO_PROCESSOR_DEBUG << "audio processor socket bound successful to local port " << m_dataEngine->set->getMetisPort();
-		//m_dataEngine->io.networkIOMutex.unlock();
+		m_dataEngine->io.networkIOMutex.unlock();
 	}
 	else {
 
 		m_dataEngine->io.networkIOMutex.lock();
-		AUDIO_PROCESSOR_DEBUG << "audio processor socket socket binding failed.";
+		AUDIO_PROCESSOR_DEBUG << "audio processor socket binding failed.";
 		m_dataEngine->io.networkIOMutex.unlock();
 
 	}

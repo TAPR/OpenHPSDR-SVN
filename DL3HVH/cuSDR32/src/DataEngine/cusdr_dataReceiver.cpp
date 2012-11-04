@@ -246,7 +246,9 @@ void DataReceiver::readMetisData() {
 					}
 				}
 			}
+			//DATA_RECEIVER_DEBUG << "got wrong HPSDR device signature!";
 		}
+		//DATA_RECEIVER_DEBUG << "got wrong HPSDR device data size!";
 	}
 	//DATA_RECEIVER_DEBUG << "no more pending datagrams.";
 }

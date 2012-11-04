@@ -182,9 +182,13 @@ private:
 	QLabel					*m_volLevelLabel;
 	QLabel					*m_agcGainLabel;
 	QLabel					*m_agcGainLevelLabel;
+	QLabel					*m_cpuLoadLabel;
 	QLabel					*m_dateTimeLabel;
+	QLabel					*m_statusBarMessage;
 
+	QString					m_cpuLoadString;
 	QString					m_dateTimeString;
+	QString					m_statusBarMessageString;
 
 	QWidget					*m_buttonWidget;
 	QWidget					*m_secondButtonWidget;
@@ -328,6 +332,8 @@ private slots:
 	void setAttenuator();
 	void mercuryAttenuatorChanged(QObject *sender, HamBand band, int value);
 
+	void showStatusBarMessage(const QString &msg, int time);
+	void clearStatusBarMessage();
 	void showNetworkIODialog();
 	void showWarningDialog(const QString &msg);
 

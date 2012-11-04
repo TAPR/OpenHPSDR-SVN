@@ -881,7 +881,7 @@ public:
 	QString getValue1000(double value, int valuePrefix, QString unitBase);
 	QString getValue1024(double value, int valuePrefix, QString unitBase);
 
-	THPSDRDevices getHPSDRDevices();
+	THPSDRDevices 	getHPSDRDevices();
 
 	bool getSettingsLoaded();
 	bool getMainPower();

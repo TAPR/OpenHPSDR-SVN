@@ -269,7 +269,7 @@ void DisplayOptionsWidget::createFPSGroupBox() {
 	m_fpsSlider->setTickPosition(QSlider::NoTicks);
 	m_fpsSlider->setFixedSize(190, 12);
 	m_fpsSlider->setSingleStep(1);
-	m_fpsSlider->setRange(1, 200);
+	m_fpsSlider->setRange(1, 80);
 	m_fpsSlider->setValue(m_framesPerSecond);
 	m_fpsSlider->setStyleSheet(set->getVolSliderStyle());
 
