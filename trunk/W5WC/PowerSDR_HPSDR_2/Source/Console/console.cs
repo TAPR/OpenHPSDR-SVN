@@ -472,11 +472,6 @@ namespace PowerSDR
         public Radio radio;
         private SIOListenerII siolisten = null;
 
-        private Boolean whatisVHF = false;  //w3sz true if VHF panel is being displayed
-        private Boolean whatisHF = true;   //w3sz true if HF panel is being displayed
-        private Boolean iscollapsed = false;  //w3sz true if collapsed panel is being displayed
-        private Boolean isexpanded = true;   //w3sz true if expanded panel is being displayed
-
         private Thread[] audio_process_thread;				// threads to run DttSP functions
         private Thread draw_display_thread;					// draws the main display 
         private Thread multimeter_thread;					// updates the rx1/tx meter data
@@ -552,8 +547,12 @@ namespace PowerSDR
         public MemoryList MemoryList { get; private set; }
 
         //public Memory MemForm;
-        private HW hw;										// will eventually be an array of rigs to support multiple radios
+        private HW hw;     // will eventually be an array of rigs to support multiple radios
 
+        private bool whatisVHF = false;  //w3sz true if VHF panel is being displayed
+        private bool whatisHF = true;   //w3sz true if HF panel is being displayed
+        private bool iscollapsed = false;  //w3sz true if collapsed panel is being displayed
+        private bool isexpanded = true;   //w3sz true if expanded panel is being displayed
 
         public WaveControl WaveForm;
         public PAQualify PAQualForm;
@@ -37174,7 +37173,7 @@ namespace PowerSDR
                         {
                             if (!initializing)
                                 mon_recall = chkMON.Checked;
-                            // chkMON.Checked = cw_sidetone;
+                             chkMON.Checked = cw_sidetone;
                         }
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
                     }
@@ -37217,7 +37216,7 @@ namespace PowerSDR
                         {
                             if (!initializing)
                                 mon_recall = chkMON.Checked;
-                            //chkMON.Checked = cw_sidetone;
+                           chkMON.Checked = cw_sidetone;
                         }
 
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
@@ -37261,7 +37260,7 @@ namespace PowerSDR
                         if (!rx_only && chkPower.Checked)
                             chkMOX.Enabled = true;
                         chkMON.Checked = false;
-                        //chkMON.Enabled = false;
+                        chkMON.Enabled = false;
                         chkBIN.Checked = false;
                         chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
@@ -37280,7 +37279,7 @@ namespace PowerSDR
                     if (chkVFOATX.Checked || !rx2_enabled)
                     {
                         chkMON.Checked = false;
-                        //chkMON.Enabled = false;
+                        chkMON.Enabled = false;
                         chkBIN.Checked = false;
                         chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
@@ -37296,7 +37295,7 @@ namespace PowerSDR
                     if (chkVFOATX.Checked || !rx2_enabled)
                     {
                         chkMON.Checked = false;
-                        //chkMON.Enabled = false;
+                        chkMON.Enabled = false;
                         chkBIN.Checked = false;
                         chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
