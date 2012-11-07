@@ -108,7 +108,6 @@ DataEngine::DataEngine(QObject *parent)
 	m_dataProcessor = 0;
 	m_wbDataProcessor = 0;
 	m_audioReceiver = 0;
-	m_audioProcessor = 0;
 	m_chirpProcessor = 0;
 	m_wbAverager = 0;
 
@@ -538,7 +537,7 @@ bool DataEngine::getFirmwareVersions() {
 	}
 
 	setSampleRate(this, set->getSampleRate());
-	SleeperThread::msleep(10);
+	SleeperThread::msleep(100);
 
 	// pre-conditioning
 	for (int i = 0; i < io.receivers; i++)
@@ -549,12 +548,20 @@ bool DataEngine::getFirmwareVersions() {
 		
 	m_networkDeviceRunning = true;
 	setSystemState(QSDR::NoError, m_hwInterface, m_serverMode, QSDR::DataEngineUp);
+	SleeperThread::msleep(100);
 
 	m_metisFW = set->getMetisVersion();
 	m_mercuryFW = set->getMercuryVersion();
 	m_penelopeFW = set->getPenelopeVersion();
 	m_pennylaneFW = set->getPennyLaneVersion();
 	m_hermesFW = set->getHermesVersion();
+
+	DATA_ENGINE_DEBUG << "************	Metis firmware:  " << m_metisFW;
+	DATA_ENGINE_DEBUG << "************	Mercury firmware:  " << m_mercuryFW;
+	DATA_ENGINE_DEBUG << "************	Penelope firmware:  " << m_penelopeFW;
+	DATA_ENGINE_DEBUG << "************	Pennylane firmware:  " << m_pennylaneFW;
+	DATA_ENGINE_DEBUG << "************	Hermes firmware: " << m_hermesFW;
+
 
 	// if we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples, m_wbBuffers = 8
 	// we have 16384 * 16 bit = 32 * 1024 raw consecutive ADC samples, m_wbBuffers = 32
@@ -751,9 +758,6 @@ bool DataEngine::start() {
 		
 	if (m_serverMode == QSDR::SDRMode && !m_wbDataProcessor)
 		createWideBandDataProcessor();
-		
-	if (!m_audioProcessor) 
-		createAudioProcessor();
 
 	if ((m_serverMode == QSDR::ChirpWSPR) && !m_chirpProcessor)
 		createChirpDataProcessor();
@@ -890,14 +894,6 @@ bool DataEngine::start() {
 		
 	m_networkDeviceRunning = true;
 
-	// audio processing thread
-//	if (!startAudioProcessor(QThread::NormalPriority, m_serverMode)) {
-//
-//		DATA_ENGINE_DEBUG << "audio processor thread could not be started.";
-//		return false;
-//	}
-
-
 	// start the "frames-per-second" timer for all receivers
 	for (int i = 0; i < io.receivers; i++)
 		RX.at(i)->highResTimer->start();
@@ -926,7 +922,6 @@ void DataEngine::stop() {
 
 				DATA_ENGINE_DEBUG << "HPSDR device stopped";
 
-				stopAudioProcessor();
 				stopDataIO();
 				stopDataProcessor();
 				stopChirpDataProcessor();
@@ -1277,88 +1272,6 @@ void DataEngine::disconnectDSPSlots() {
 		SLOT(setFrequency(QObject *, bool, int, long)));
 }
 
-//void DataEngine::sendInitFramesToNetworkDevice(int rx) {
-//
-//	QByteArray initDatagram;
-//	initDatagram.resize(1032);
-//
-//	initDatagram[0] = (char)0xEF;
-//	initDatagram[1] = (char)0xFE;
-//	initDatagram[2] = (char)0x01;
-//	initDatagram[3] = (char)0x02;
-//	initDatagram[4] = (char)0x00;
-//	initDatagram[5] = (char)0x00;
-//	initDatagram[6] = (char)0x00;
-//	initDatagram[7] = (char)0x00;
-//
-//	initDatagram[8] = SYNC;
-//    initDatagram[9] = SYNC;
-//    initDatagram[10] = SYNC;
-//
-//	for (int i = 0; i < 5; i++) {
-//
-//		initDatagram[i + 11]  = io.control_out[i];
-//	}
-//
-//	for (int i = 16; i < 520; i++) {
-//
-//		initDatagram[i]  = 0x00;
-//	}
-//
-//	initDatagram[520] = SYNC;
-//    initDatagram[521] = SYNC;
-//    initDatagram[522] = SYNC;
-//
-//	initDatagram[523] = io.control_out[0] | ((rx + 2) << 1);
-//	initDatagram[524] = RX[rx]->getFrequency() >> 24;
-//	initDatagram[525] = RX[rx]->getFrequency() >> 16;
-//	initDatagram[526] = RX[rx]->getFrequency() >> 8;
-//	initDatagram[527] = RX[rx]->getFrequency();
-//
-//	/*io.output_buffer[3] = io.control_out[0] | ((rx + 2) << 1);
-//	io.output_buffer[4] = rxList[rx]->getFrequency() >> 24;
-//	io.output_buffer[5] = rxList[rx]->getFrequency() >> 16;
-//	io.output_buffer[6] = rxList[rx]->getFrequency() >> 8;
-//	io.output_buffer[7] = rxList[rx]->getFrequency();*/
-//
-//	/*initDatagram[523] = io.control_out[0] | (2 << 1);
-//	initDatagram[524] = io.initialFrequency[0] >> 24;
-//	initDatagram[525] = io.initialFrequency[0] >> 16;
-//	initDatagram[526] = io.initialFrequency[0] >> 8;
-//	initDatagram[527] = io.initialFrequency[0];*/
-//
-//	for (int i = 528; i < 1032; i++) {
-//
-//		initDatagram[i]  = 0x00;
-//	}
-//
-//	QUdpSocket socket;
-//	socket.bind(QHostAddress(set->getHPSDRDeviceLocalAddr()),
-//				set->getMetisPort(),
-//				//QUdpSocket::DefaultForPlatform);
-//				QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress);
-//
-//	for (int i = 0; i < 1; i++) {
-//
-//		if (socket.writeDatagram(initDatagram.data(), initDatagram.size(), io.hpsdrDeviceIPAddress, METIS_PORT) < 0) {
-//
-//			io.networkIOMutex.lock();
-//			DATA_ENGINE_DEBUG << "error sending init data to device: " << qPrintable(socket.errorString());
-//			io.networkIOMutex.unlock();
-//		}
-//		else {
-//
-//			if (i == 0) {
-//
-//				io.networkIOMutex.lock();
-//				DATA_ENGINE_DEBUG << "init frames sent to network device.";
-//				io.networkIOMutex.unlock();
-//			}
-//		}
-//	}
-//	socket.close();
-//}
- 
 //********************************************************
 // create, start/stop HPSDR device network IO
 
@@ -1413,60 +1326,6 @@ void DataEngine::stopDiscoverer() {
 	else
 		DATA_ENGINE_DEBUG << "HPSDR discovery thread wasn't started.";
 }
-
-//void DataEngine::networkDeviceStartStop(char value) {
-//
-//	TNetworkDevicecard metis = set->getCurrentMetisCard();
-//	QUdpSocket socket;
-//
-//	if (socket.bind(QHostAddress(set->getHPSDRDeviceLocalAddr()),
-//				set->getMetisPort(),
-//				//QUdpSocket::DefaultForPlatform))
-//				QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
-//	{
-//		DATA_ENGINE_DEBUG << "device start/stop: socket bound successful to local port " << set->getMetisPort();
-//
-//		m_commandDatagram.resize(64);
-//		m_commandDatagram[0] = (char)0xEF;
-//		m_commandDatagram[1] = (char)0xFE;
-//		m_commandDatagram[2] = (char)0x04;
-//		m_commandDatagram[3] = (char)value;
-//
-//		for (int i = 4; i < 64; i++) m_commandDatagram[i] = 0x00;
-//
-//		//if (socket.writeDatagram(m_commandDatagram, m_metisCards[0].ip_address, METIS_PORT) == 64) {
-//		if (socket.writeDatagram(m_commandDatagram, metis.ip_address, METIS_PORT) == 64) {
-//
-//			//if (value == 1) {
-//			if (value != 0) {
-//
-//				io.networkIOMutex.lock();
-//				DATA_ENGINE_DEBUG << "sent start command to device at: "<< qPrintable(metis.ip_address.toString());
-//				io.networkIOMutex.unlock();
-//				m_networkDeviceRunning = true;
-//			}
-//			else {
-//
-//				//DATA_ENGINE_DEBUG << "sent stop command to Metis at"<< m_metisCards[0].ip_address.toString();
-//				io.networkIOMutex.lock();
-//				DATA_ENGINE_DEBUG << "sent stop command to device at: "<< qPrintable(metis.ip_address.toString());
-//				io.networkIOMutex.unlock();
-//				m_networkDeviceRunning = false;
-//			}
-//		}
-//		else
-//			DATA_ENGINE_DEBUG << "device start/stop: sending command to device failed.";
-//
-//		//socket.close();
-//	}
-//	else {
-//
-//		DATA_ENGINE_DEBUG << "device start/stop: socket binding failed.";
-//	}
-//
-//	socket.close();
-//	DATA_ENGINE_DEBUG << "device start/stop: socket closed.";
-//}
 
 //********************************************************
 // create, start/stop data receiver
@@ -1947,125 +1806,6 @@ void DataEngine::createAudioReceiver() {
 						m_AudioRcvrThread, 
 						SIGNAL(started()), 
 						SLOT(initClient()));
-}
-
-void DataEngine::createAudioProcessor() {
-
-	m_audioProcessor = new AudioProcessor(this);
-	
-	/*CHECKED_CONNECT(
-		m_audioProcessor, 
-		SIGNAL(AudioProcessorRunningEvent(bool)), 
-		this, 
-		SLOT(setAudioProcessorRunning(bool)));*/
-
-	CHECKED_CONNECT_OPT(
-		this, 
-		SIGNAL(clientConnectedEvent(int)), 
-		m_audioProcessor, 
-		SLOT(clientConnected(int)), 
-		Qt::DirectConnection);
-
-	CHECKED_CONNECT_OPT(
-		this, 
-		SIGNAL(audioRxEvent(int)), 
-		m_audioProcessor, 
-		SLOT(audioReceiverChanged(int)), 
-		Qt::DirectConnection);
-
-	CHECKED_CONNECT_OPT(
-		this,
-		SIGNAL(audioDataReady()),
-		m_audioProcessor,
-		SLOT(deviceWriteBuffer()),
-		Qt::DirectConnection);
-
-	switch (m_serverMode) {
-
-//		case QSDR::ExternalDSP:
-//
-//			m_audioProcThread = new QThreadEx();
-//			m_audioProcessor->moveToThread(m_audioProcThread);
-//			m_audioProcessor->connect(
-//								m_audioProcThread,
-//								SIGNAL(started()),
-//								SLOT(processAudioData()));
-//			break;
-
-		case QSDR::SDRMode:
-
-			break;
-			
-		case QSDR::NoServerMode:
-		case QSDR::DemoMode:
-		case QSDR::ChirpWSPR:
-		case QSDR::ChirpWSPRFile:
-			break;
-	}
-
-	/*m_audioProcThread = new QThreadEx();
-	m_audioProcessor->moveToThread(m_udioProcThread);
-	m_audioProcessor->connect(m_audioProcThread, SIGNAL(started()), SLOT(processAudioData()));*/
-
-	//setSampleRate(this, set->getSampleRate());
-}
-
-bool DataEngine::startAudioProcessor(QThread::Priority prio, QSDR::_ServerMode mode) {
-
-  Q_UNUSED(prio)
-
-	if (!m_audioProcessorRunning) {
-
-		switch (mode) {
-
-			case QSDR::SDRMode:
-			case QSDR::ChirpWSPR:
-
-				m_audioProcessor->initAudioProcessorSocket();
-				m_audioProcessorRunning = true;
-
-				return true;
-				
-			//case QSDR::ExternalDSP:
-			case QSDR::NoServerMode:
-			case QSDR::DemoMode:
-			case QSDR::ChirpWSPRFile:
-				break;
-		}
-
-		return false;
-	}
-	else
-		return false;
-}
-
-void DataEngine::stopAudioProcessor() {
-
-	if (m_audioProcessorRunning) {
-				
-		m_audioProcessor->stop();
-		io.au_queue.enqueue(m_datagram);
-
-		if (m_audioProcThreadRunning) {
-			m_audioProcThread->quit();
-			m_audioProcThread->wait();
-		}
-		delete m_audioProcessor;
-		m_audioProcessor = 0;
-
-		m_audioProcessorRunning = false;
-
-		DATA_ENGINE_DEBUG << "audio processor thread deleted.";
-	}
-	else
-		DATA_ENGINE_DEBUG << "audio processor thread wasn't started.";
-}
- 
-void DataEngine::displayDiscoverySocketError(QAbstractSocket::SocketError error) {
-
-	io.networkIOMutex.lock();
-	DATA_ENGINE_DEBUG << "discovery socket error:" << error;
-	io.networkIOMutex.unlock();
 }
 
  
@@ -2900,9 +2640,7 @@ void DataEngine::writeControlBytes() {
 			//io.audioDatagram = QByteArray(reinterpret_cast<const char*>(&io.output_buffer), sizeof(io.output_buffer));
 			io.audioDatagram = QByteArray::fromRawData((const char *)&io.output_buffer, IO_BUFFER_SIZE);
 			
-			//m_audioProcessor->deviceWriteBuffer();
 			m_dataIO->writeData();
-			//emit audioDataReady();
 			break;
 			
 		case QSDR::NoInterfaceMode:
@@ -3704,162 +3442,3 @@ void WideBandDataProcessor::processWideBandData() {
 	}
 }
 
- 
-// *********************************************************************
-// Audio processor
-
-AudioProcessor::AudioProcessor(DataEngine *de)
-	: QObject()
-	, m_dataEngine(de)
-	, m_audioProcessorSocket(0)
-	, m_setNetworkDeviceHeader(true)
-	, m_stopped(false)
-	, m_client(0)
-	, m_audioRx(0)
-{
-	//m_stopped = false;
-	//m_setNetworkDeviceHeader = true;
-	
-	m_audioProcessorSocket = 0;
-
-	m_sendSequence = 0L;
-	m_oldSendSequence = 0L;
-	
-	m_deviceSendDataSignature.resize(4);
-	m_deviceSendDataSignature[0] = (char)0xEF;
-	m_deviceSendDataSignature[1] = (char)0xFE;
-	m_deviceSendDataSignature[2] = (char)0x01;
-	m_deviceSendDataSignature[3] = (char)0x02;
-}
-
-AudioProcessor::~AudioProcessor() {
-
-	m_audioProcessorSocket->close();
-
-//	if (m_audioProcessorSocket) {
-//		m_audioProcessorSocket->close();
-//		delete m_audioProcessorSocket;
-//		m_audioProcessorSocket = 0;
-//	}
-}
-
-void AudioProcessor::stop() {
-
-	m_stopped = true;
-}
-
-void AudioProcessor::initAudioProcessorSocket() {
-
-	netDevice = m_dataEngine->set->getCurrentMetisCard();
-	m_audioProcessorSocket = new QUdpSocket();
-
-	if (m_audioProcessorSocket->bind(QHostAddress(m_dataEngine->set->getHPSDRDeviceLocalAddr()),
-			 	 	 	 	 	 	 m_dataEngine->set->getMetisPort(),
-			 	 	 	 	 	 	 //QUdpSocket::DefaultForPlatform))
-			 	 	 	 	 	 	 QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
-	{
-		CHECKED_CONNECT(
-				m_audioProcessorSocket,
-				SIGNAL(error(QAbstractSocket::SocketError)),
-				this,
-				SLOT(displayAudioProcessorSocketError(QAbstractSocket::SocketError)));
-
-		m_dataEngine->setAudioProcessorRunning(true);
-
-		m_dataEngine->io.networkIOMutex.lock();
-		AUDIO_PROCESSOR_DEBUG << "audio processor socket bound successful to local port " << m_dataEngine->set->getMetisPort();
-		m_dataEngine->io.networkIOMutex.unlock();
-	}
-	else {
-
-		m_dataEngine->io.networkIOMutex.lock();
-		AUDIO_PROCESSOR_DEBUG << "audio processor socket binding failed.";
-		m_dataEngine->io.networkIOMutex.unlock();
-
-	}
-}
-
-void AudioProcessor::audioReceiverChanged(int rx) {
-
-	m_audioRx = rx;
-}
-
-void AudioProcessor::clientConnected(int rx) {
-
-	m_mutex.lock();
-	m_client = rx;
-	m_mutex.unlock();
-}
-
-void AudioProcessor::displayAudioProcessorSocketError(QAbstractSocket::SocketError error) {
-
-	AUDIO_PROCESSOR_DEBUG << "audio processor socket error: " << error;
-}
-
-void AudioProcessor::processAudioData() {
-
-	initAudioProcessorSocket();
-
-	forever {
-		
-		//DATA_ENGINE_DEBUG << "audioQueue length = " << m_dataEngine->io.au_queue.length();
-		m_outBuffer = m_dataEngine->io.au_queue.dequeue();
-		
-		m_mutex.lock();
-		if (m_stopped) {
-			m_stopped = false;
-			m_mutex.unlock();
-			break;
-		}
-		m_mutex.unlock();
-
-		memcpy(
-			(float *) &m_left[0], 
-			(float *) m_outBuffer.left(IO_AUDIOBUFFER_SIZE/2).data(), 
-			BUFFER_SIZE * sizeof(float));
-
-		memcpy(
-			(float *) &m_right[0], 
-			(float *) m_outBuffer.right(IO_AUDIOBUFFER_SIZE/2).data(), 
-			BUFFER_SIZE * sizeof(float));
-		
-		m_dataEngine->processOutputBuffer(m_left, m_right);
-	}
-
-
-	disconnect(this);
-	m_audioProcessorSocket->close();
-	delete m_audioProcessorSocket;
-	m_audioProcessorSocket = NULL;
-}
-
-void AudioProcessor::deviceWriteBuffer() {
-
-	if (m_setNetworkDeviceHeader) {
-
-		m_outDatagram.resize(0);
-        m_outDatagram += m_deviceSendDataSignature;
-
-		QByteArray seq(reinterpret_cast<const char*>(&m_sendSequence), sizeof(m_sendSequence));
-
-		m_outDatagram += seq;
-		m_outDatagram += m_dataEngine->io.audioDatagram;
-
-		m_sendSequence++;
-        m_setNetworkDeviceHeader = false;
-    } 
-	else {
-
-		m_outDatagram += m_dataEngine->io.audioDatagram;
-
-		if (m_audioProcessorSocket->writeDatagram(m_outDatagram, netDevice.ip_address, METIS_PORT) < 0)
-			AUDIO_PROCESSOR_DEBUG << "error sending data to Metis:" << m_audioProcessorSocket->errorString();
-
-		if (m_sendSequence != m_oldSendSequence + 1)
-			AUDIO_PROCESSOR_DEBUG << "output sequence error: old =" << m_oldSendSequence << "; new =" << m_sendSequence;
-
-		m_oldSendSequence = m_sendSequence;
-		m_setNetworkDeviceHeader = true;
-    }
-}
- 
