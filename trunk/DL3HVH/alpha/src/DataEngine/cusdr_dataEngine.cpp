@@ -548,20 +548,13 @@ bool DataEngine::getFirmwareVersions() {
 		
 	m_networkDeviceRunning = true;
 	setSystemState(QSDR::NoError, m_hwInterface, m_serverMode, QSDR::DataEngineUp);
-	SleeperThread::msleep(100);
+	SleeperThread::msleep(200);
 
 	m_metisFW = set->getMetisVersion();
 	m_mercuryFW = set->getMercuryVersion();
 	m_penelopeFW = set->getPenelopeVersion();
 	m_pennylaneFW = set->getPennyLaneVersion();
 	m_hermesFW = set->getHermesVersion();
-
-	DATA_ENGINE_DEBUG << "************	Metis firmware:  " << m_metisFW;
-	DATA_ENGINE_DEBUG << "************	Mercury firmware:  " << m_mercuryFW;
-	DATA_ENGINE_DEBUG << "************	Penelope firmware:  " << m_penelopeFW;
-	DATA_ENGINE_DEBUG << "************	Pennylane firmware:  " << m_pennylaneFW;
-	DATA_ENGINE_DEBUG << "************	Hermes firmware: " << m_hermesFW;
-
 
 	// if we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples, m_wbBuffers = 8
 	// we have 16384 * 16 bit = 32 * 1024 raw consecutive ADC samples, m_wbBuffers = 32
@@ -922,6 +915,7 @@ void DataEngine::stop() {
 
 				DATA_ENGINE_DEBUG << "HPSDR device stopped";
 
+				SleeperThread::msleep(100);
 				stopDataIO();
 				stopDataProcessor();
 				stopChirpDataProcessor();
