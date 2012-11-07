@@ -1740,7 +1740,7 @@ void QGLReceiverPanel::drawReceiverInfo() {
 	else
 		col = QColor(48, 48, 48);
 
-	str = "AGC: %1";
+	str = "%1";
 	//str = str.arg(set->getAGCModeString(m_receiver));
 	str = str.arg(m_agcModeString);
 
