@@ -6016,6 +6016,11 @@ namespace PowerSDR
         {
             console.DefaultLowCut = (int)udFilterDefaultLowCut.Value;
         }
+    
+        private void udRX2FilterDefaultLowCut_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.DefaultRX2LowCut = (int)udRX2FilterDefaultLowCut.Value;
+        }
 
         #endregion
 
@@ -11366,8 +11371,9 @@ namespace PowerSDR
 
         private void radPACalAllBands_CheckedChanged(object sender, System.EventArgs e)
         {
-            foreach (Control c in grpPAGainByBand.Controls)
-            {
+            foreach (Control c in panelAutoPACalibrate.Controls)
+               // foreach (Control c in grpPAGainByBand.Controls)
+                {
                 if (c.Name.StartsWith("chkPA"))
                 {
                     c.Visible = !radPACalAllBands.Checked;
@@ -14650,6 +14656,94 @@ namespace PowerSDR
         {
             if (chkEClassModulation.Checked) JanusAudio.EnableEClassModulation(1);
             else JanusAudio.EnableEClassModulation(0);
+        }
+
+        private void chkLevelFades_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLevelFades.Checked)
+            {
+                DttSP.SetFadeLevel(0, 0, 1);
+                DttSP.SetFadeLevel(0, 1, 1);
+            }
+            else
+            {
+                DttSP.SetFadeLevel(0, 0, 0);
+                DttSP.SetFadeLevel(0, 1, 0);
+            }
+        }
+
+        private void radLSBUSB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radLSBUSB.Checked)
+            {
+                DttSP.SetSBMode(0, 0, 0);
+                DttSP.SetSBMode(0, 1, 0);
+            }
+        }
+
+        private void radLSB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radLSB.Checked)
+            {
+                DttSP.SetSBMode(0, 0, 1);
+                DttSP.SetSBMode(0, 1, 1);
+            }
+        }
+
+        private void radUSB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radUSB.Checked)
+            {
+                DttSP.SetSBMode(0, 0, 2);
+                DttSP.SetSBMode(0, 1, 2);
+            }
+        }
+
+        private void chkRX2LevelFades_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRX2LevelFades.Checked)
+            {
+                DttSP.SetFadeLevel(2, 0, 1);
+                DttSP.SetFadeLevel(2, 1, 1);
+            }
+            else
+            {
+                DttSP.SetFadeLevel(2, 0, 0);
+                DttSP.SetFadeLevel(2, 1, 0);
+            }
+        }
+
+        private void radRX2LSBUSB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radRX2LSBUSB.Checked)
+            {
+                DttSP.SetSBMode(2, 0, 0);
+                DttSP.SetSBMode(2, 1, 0);
+            }
+        }
+
+        private void radRX2LSB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radRX2LSB.Checked)
+            {
+                DttSP.SetSBMode(2, 0, 1);
+                DttSP.SetSBMode(2, 1, 1);
+            }
+        }
+
+        private void radRX2USB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radRX2USB.Checked)
+            {
+                DttSP.SetSBMode(2, 0, 2);
+                DttSP.SetSBMode(2, 1, 2);
+            }
+        }
+
+        private void chkAutoPACalibrate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAutoPACalibrate.Checked) panelAutoPACalibrate.Visible = true;
+            else panelAutoPACalibrate.Visible = false;
         }
     }
 

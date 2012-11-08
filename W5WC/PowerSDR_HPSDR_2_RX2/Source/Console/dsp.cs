@@ -424,7 +424,13 @@ namespace PowerSDR
 		[DllImport("DttSP.dll", EntryPoint="SetTXAMCarrierLevel")]///
 		public static extern void SetTXAMCarrierLevel(uint thread, double carrier_level);
 
-		[DllImport("DttSP.dll", EntryPoint="SetTXALCBot")]///
+        [DllImport("DttSP.dll", EntryPoint = "SetSBMode")]      //for SAM receive
+        unsafe public static extern int SetSBMode(uint thread, uint subrx, int sbmode);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetFadeLevel")]   //for AM & SAM receive
+        unsafe public static extern int SetFadeLevel(uint thread, uint subrx, int fadelevel);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetTXALCBot")]///
 		public static extern void SetTXALCBot(uint thread, double max_agc);
 
 		[DllImport("DttSP.dll", EntryPoint="SetTXALCAttack")]///
