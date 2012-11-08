@@ -332,6 +332,16 @@
             this.labelTS54 = new System.Windows.Forms.LabelTS();
             this.txtDisplayOffset = new System.Windows.Forms.TextBox();
             this.tpFilters = new System.Windows.Forms.TabPage();
+            this.groupBoxTS6 = new System.Windows.Forms.GroupBoxTS();
+            this.udRX2FilterDefaultLowCut = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS39 = new System.Windows.Forms.LabelTS();
+            this.udRX2OptMaxFilterShift = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS50 = new System.Windows.Forms.LabelTS();
+            this.comboRX2OptFilterWidthMode = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS86 = new System.Windows.Forms.LabelTS();
+            this.udRX2OptMaxFilterWidth = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS87 = new System.Windows.Forms.LabelTS();
+            this.checkBoxTS2 = new System.Windows.Forms.CheckBoxTS();
             this.grpOptFilterControls = new System.Windows.Forms.GroupBoxTS();
             this.udFilterDefaultLowCut = new System.Windows.Forms.NumericUpDownTS();
             this.lblDefaultLowCut = new System.Windows.Forms.LabelTS();
@@ -1297,6 +1307,19 @@
             this.lblDSPAGCMaxGain = new System.Windows.Forms.LabelTS();
             this.udDSPAGCFixedGaindB = new System.Windows.Forms.NumericUpDownTS();
             this.lblDSPAGCFixed = new System.Windows.Forms.LabelTS();
+            this.tpDSPAMSAM = new System.Windows.Forms.TabPage();
+            this.grpAMSAM = new System.Windows.Forms.GroupBoxTS();
+            this.chkLevelFades = new System.Windows.Forms.CheckBoxTS();
+            this.grpAMSBSEL = new System.Windows.Forms.GroupBoxTS();
+            this.radUSB = new System.Windows.Forms.RadioButtonTS();
+            this.radLSB = new System.Windows.Forms.RadioButtonTS();
+            this.radLSBUSB = new System.Windows.Forms.RadioButtonTS();
+            this.grpRX2AMSAM = new System.Windows.Forms.GroupBoxTS();
+            this.chkRX2LevelFades = new System.Windows.Forms.CheckBoxTS();
+            this.grpRX2AMSBSEL = new System.Windows.Forms.GroupBoxTS();
+            this.radRX2USB = new System.Windows.Forms.RadioButtonTS();
+            this.radRX2LSB = new System.Windows.Forms.RadioButtonTS();
+            this.radRX2LSBUSB = new System.Windows.Forms.RadioButtonTS();
             this.tpTransmit = new System.Windows.Forms.TabPage();
             this.chkSaveTXProfileOnExit = new System.Windows.Forms.CheckBoxTS();
             this.chkAutoSaveTXProfile = new System.Windows.Forms.CheckBoxTS();
@@ -1355,6 +1378,24 @@
             this.lblTXNoiseGateThreshold = new System.Windows.Forms.LabelTS();
             this.tpPowerAmplifier = new System.Windows.Forms.TabPage();
             this.grpPAGainByBand = new System.Windows.Forms.GroupBoxTS();
+            this.chkAutoPACalibrate = new System.Windows.Forms.CheckBoxTS();
+            this.panelAutoPACalibrate = new System.Windows.Forms.PanelTS();
+            this.btnPAGainCalibration = new System.Windows.Forms.ButtonTS();
+            this.lblPACalTarget = new System.Windows.Forms.LabelTS();
+            this.udPACalPower = new System.Windows.Forms.NumericUpDownTS();
+            this.radPACalAllBands = new System.Windows.Forms.RadioButtonTS();
+            this.radPACalSelBands = new System.Windows.Forms.RadioButtonTS();
+            this.chkPA160 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPA80 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPA60 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPA40 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPA30 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPA20 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPA17 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPA15 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPA12 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPA10 = new System.Windows.Forms.CheckBoxTS();
+            this.chkPA6 = new System.Windows.Forms.CheckBoxTS();
             this.lblPAGainByBandVHF13 = new System.Windows.Forms.LabelTS();
             this.chkPANewCal = new System.Windows.Forms.CheckBoxTS();
             this.udPAGainVHF13 = new System.Windows.Forms.NumericUpDownTS();
@@ -1386,22 +1427,7 @@
             this.udPAGainVHF0 = new System.Windows.Forms.NumericUpDownTS();
             this.udPAGain6 = new System.Windows.Forms.NumericUpDownTS();
             this.lblPAGainByBand6 = new System.Windows.Forms.LabelTS();
-            this.udPACalPower = new System.Windows.Forms.NumericUpDownTS();
-            this.lblPACalTarget = new System.Windows.Forms.LabelTS();
-            this.chkPA10 = new System.Windows.Forms.CheckBoxTS();
-            this.chkPA12 = new System.Windows.Forms.CheckBoxTS();
-            this.chkPA15 = new System.Windows.Forms.CheckBoxTS();
-            this.chkPA17 = new System.Windows.Forms.CheckBoxTS();
-            this.chkPA20 = new System.Windows.Forms.CheckBoxTS();
-            this.chkPA30 = new System.Windows.Forms.CheckBoxTS();
-            this.chkPA40 = new System.Windows.Forms.CheckBoxTS();
-            this.chkPA60 = new System.Windows.Forms.CheckBoxTS();
-            this.chkPA80 = new System.Windows.Forms.CheckBoxTS();
-            this.chkPA160 = new System.Windows.Forms.CheckBoxTS();
-            this.radPACalSelBands = new System.Windows.Forms.RadioButtonTS();
-            this.radPACalAllBands = new System.Windows.Forms.RadioButtonTS();
             this.btnPAGainReset = new System.Windows.Forms.ButtonTS();
-            this.btnPAGainCalibration = new System.Windows.Forms.ButtonTS();
             this.lblPAGainByBand10 = new System.Windows.Forms.LabelTS();
             this.udPAGain10 = new System.Windows.Forms.NumericUpDownTS();
             this.lblPAGainByBand12 = new System.Windows.Forms.LabelTS();
@@ -1422,7 +1448,6 @@
             this.udPAGain80 = new System.Windows.Forms.NumericUpDownTS();
             this.lblPAGainByBand160 = new System.Windows.Forms.LabelTS();
             this.udPAGain160 = new System.Windows.Forms.NumericUpDownTS();
-            this.chkPA6 = new System.Windows.Forms.CheckBoxTS();
             this.rtxtPACalReq = new System.Windows.Forms.RichTextBox();
             this.grpPABandOffset = new System.Windows.Forms.GroupBoxTS();
             this.lblPABandOffset10 = new System.Windows.Forms.LabelTS();
@@ -2074,6 +2099,10 @@
             this.grpGenCalRXImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralCalFreq3)).BeginInit();
             this.tpFilters.SuspendLayout();
+            this.groupBoxTS6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udRX2FilterDefaultLowCut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udRX2OptMaxFilterShift)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udRX2OptMaxFilterWidth)).BeginInit();
             this.grpOptFilterControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udFilterDefaultLowCut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udOptMaxFilterShift)).BeginInit();
@@ -2306,6 +2335,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCDecay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCAttack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCFixedGaindB)).BeginInit();
+            this.tpDSPAMSAM.SuspendLayout();
+            this.grpAMSAM.SuspendLayout();
+            this.grpAMSBSEL.SuspendLayout();
+            this.grpRX2AMSAM.SuspendLayout();
+            this.grpRX2AMSBSEL.SuspendLayout();
             this.tpTransmit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterHighSave)).BeginInit();
@@ -2333,6 +2367,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.udTXNoiseGate)).BeginInit();
             this.tpPowerAmplifier.SuspendLayout();
             this.grpPAGainByBand.SuspendLayout();
+            this.panelAutoPACalibrate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udPACalPower)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainVHF13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainVHF12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainVHF11)).BeginInit();
@@ -2348,7 +2384,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainVHF1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainVHF0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGain6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udPACalPower)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGain10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGain12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGain15)).BeginInit();
@@ -6800,12 +6835,187 @@
             // tpFilters
             // 
             this.tpFilters.BackColor = System.Drawing.SystemColors.Control;
+            this.tpFilters.Controls.Add(this.groupBoxTS6);
             this.tpFilters.Controls.Add(this.grpOptFilterControls);
             this.tpFilters.Location = new System.Drawing.Point(4, 22);
             this.tpFilters.Name = "tpFilters";
             this.tpFilters.Size = new System.Drawing.Size(592, 318);
             this.tpFilters.TabIndex = 3;
             this.tpFilters.Text = "Filters";
+            // 
+            // groupBoxTS6
+            // 
+            this.groupBoxTS6.Controls.Add(this.udRX2FilterDefaultLowCut);
+            this.groupBoxTS6.Controls.Add(this.labelTS39);
+            this.groupBoxTS6.Controls.Add(this.udRX2OptMaxFilterShift);
+            this.groupBoxTS6.Controls.Add(this.labelTS50);
+            this.groupBoxTS6.Controls.Add(this.comboRX2OptFilterWidthMode);
+            this.groupBoxTS6.Controls.Add(this.labelTS86);
+            this.groupBoxTS6.Controls.Add(this.udRX2OptMaxFilterWidth);
+            this.groupBoxTS6.Controls.Add(this.labelTS87);
+            this.groupBoxTS6.Controls.Add(this.checkBoxTS2);
+            this.groupBoxTS6.Location = new System.Drawing.Point(255, 8);
+            this.groupBoxTS6.Name = "groupBoxTS6";
+            this.groupBoxTS6.Size = new System.Drawing.Size(200, 152);
+            this.groupBoxTS6.TabIndex = 30;
+            this.groupBoxTS6.TabStop = false;
+            this.groupBoxTS6.Text = "RX2 Filter Controls";
+            // 
+            // udRX2FilterDefaultLowCut
+            // 
+            this.udRX2FilterDefaultLowCut.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udRX2FilterDefaultLowCut.Location = new System.Drawing.Point(128, 120);
+            this.udRX2FilterDefaultLowCut.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.udRX2FilterDefaultLowCut.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udRX2FilterDefaultLowCut.Name = "udRX2FilterDefaultLowCut";
+            this.udRX2FilterDefaultLowCut.Size = new System.Drawing.Size(48, 20);
+            this.udRX2FilterDefaultLowCut.TabIndex = 17;
+            this.toolTip1.SetToolTip(this.udRX2FilterDefaultLowCut, "Sets the default low cut filter for filter changes");
+            this.udRX2FilterDefaultLowCut.Value = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            this.udRX2FilterDefaultLowCut.ValueChanged += new System.EventHandler(this.udRX2FilterDefaultLowCut_ValueChanged);
+            // 
+            // labelTS39
+            // 
+            this.labelTS39.Image = null;
+            this.labelTS39.Location = new System.Drawing.Point(16, 120);
+            this.labelTS39.Name = "labelTS39";
+            this.labelTS39.Size = new System.Drawing.Size(120, 23);
+            this.labelTS39.TabIndex = 16;
+            this.labelTS39.Text = "Default Low Cut (Hz):";
+            // 
+            // udRX2OptMaxFilterShift
+            // 
+            this.udRX2OptMaxFilterShift.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udRX2OptMaxFilterShift.Location = new System.Drawing.Point(128, 72);
+            this.udRX2OptMaxFilterShift.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.udRX2OptMaxFilterShift.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udRX2OptMaxFilterShift.Name = "udRX2OptMaxFilterShift";
+            this.udRX2OptMaxFilterShift.Size = new System.Drawing.Size(48, 20);
+            this.udRX2OptMaxFilterShift.TabIndex = 13;
+            this.toolTip1.SetToolTip(this.udRX2OptMaxFilterShift, "Sets the maximum amount for the Shift control.  Set lower for finer resolution co" +
+                    "ntrol");
+            this.udRX2OptMaxFilterShift.Value = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.udRX2OptMaxFilterShift.Visible = false;
+            // 
+            // labelTS50
+            // 
+            this.labelTS50.Image = null;
+            this.labelTS50.Location = new System.Drawing.Point(16, 72);
+            this.labelTS50.Name = "labelTS50";
+            this.labelTS50.Size = new System.Drawing.Size(120, 23);
+            this.labelTS50.TabIndex = 14;
+            this.labelTS50.Text = "Max Filter Shift (Hz):";
+            this.labelTS50.Visible = false;
+            // 
+            // comboRX2OptFilterWidthMode
+            // 
+            this.comboRX2OptFilterWidthMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboRX2OptFilterWidthMode.DropDownWidth = 112;
+            this.comboRX2OptFilterWidthMode.Items.AddRange(new object[] {
+            "Linear",
+            "Log",
+            "Log10"});
+            this.comboRX2OptFilterWidthMode.Location = new System.Drawing.Point(120, 48);
+            this.comboRX2OptFilterWidthMode.Name = "comboRX2OptFilterWidthMode";
+            this.comboRX2OptFilterWidthMode.Size = new System.Drawing.Size(56, 21);
+            this.comboRX2OptFilterWidthMode.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.comboRX2OptFilterWidthMode, "Sets the mapping for the filter width slider.");
+            this.comboRX2OptFilterWidthMode.Visible = false;
+            // 
+            // labelTS86
+            // 
+            this.labelTS86.Image = null;
+            this.labelTS86.Location = new System.Drawing.Point(16, 48);
+            this.labelTS86.Name = "labelTS86";
+            this.labelTS86.Size = new System.Drawing.Size(104, 16);
+            this.labelTS86.TabIndex = 11;
+            this.labelTS86.Text = "Width Slider Mode:";
+            this.labelTS86.Visible = false;
+            // 
+            // udRX2OptMaxFilterWidth
+            // 
+            this.udRX2OptMaxFilterWidth.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udRX2OptMaxFilterWidth.Location = new System.Drawing.Point(128, 24);
+            this.udRX2OptMaxFilterWidth.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.udRX2OptMaxFilterWidth.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udRX2OptMaxFilterWidth.Name = "udRX2OptMaxFilterWidth";
+            this.udRX2OptMaxFilterWidth.Size = new System.Drawing.Size(48, 20);
+            this.udRX2OptMaxFilterWidth.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.udRX2OptMaxFilterWidth, "Wets the maximum filter bandwidth");
+            this.udRX2OptMaxFilterWidth.Value = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.udRX2OptMaxFilterWidth.Visible = false;
+            // 
+            // labelTS87
+            // 
+            this.labelTS87.Image = null;
+            this.labelTS87.Location = new System.Drawing.Point(16, 24);
+            this.labelTS87.Name = "labelTS87";
+            this.labelTS87.Size = new System.Drawing.Size(120, 23);
+            this.labelTS87.TabIndex = 10;
+            this.labelTS87.Text = "Max Filter Width (Hz):";
+            this.labelTS87.Visible = false;
+            // 
+            // checkBoxTS2
+            // 
+            this.checkBoxTS2.Checked = true;
+            this.checkBoxTS2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxTS2.Image = null;
+            this.checkBoxTS2.Location = new System.Drawing.Point(16, 96);
+            this.checkBoxTS2.Name = "checkBoxTS2";
+            this.checkBoxTS2.Size = new System.Drawing.Size(176, 16);
+            this.checkBoxTS2.TabIndex = 15;
+            this.checkBoxTS2.Text = "Save Slider/Display Changes";
+            this.toolTip1.SetToolTip(this.checkBoxTS2, "If checked, changes made to the filters via the display or sliders will be saved " +
+                    "in the Variable filter.");
+            this.checkBoxTS2.Visible = false;
             // 
             // grpOptFilterControls
             // 
@@ -6823,7 +7033,7 @@
             this.grpOptFilterControls.Size = new System.Drawing.Size(200, 152);
             this.grpOptFilterControls.TabIndex = 29;
             this.grpOptFilterControls.TabStop = false;
-            this.grpOptFilterControls.Text = "Filter Controls";
+            this.grpOptFilterControls.Text = "RX1 Filter Controls";
             // 
             // udFilterDefaultLowCut
             // 
@@ -6969,6 +7179,8 @@
             // 
             // chkOptFilterSaveChanges
             // 
+            this.chkOptFilterSaveChanges.Checked = true;
+            this.chkOptFilterSaveChanges.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkOptFilterSaveChanges.Image = null;
             this.chkOptFilterSaveChanges.Location = new System.Drawing.Point(16, 96);
             this.chkOptFilterSaveChanges.Name = "chkOptFilterSaveChanges";
@@ -17726,6 +17938,7 @@
             this.tcDSP.Controls.Add(this.tpDSPImageReject);
             this.tcDSP.Controls.Add(this.tpDSPKeyer);
             this.tcDSP.Controls.Add(this.tpDSPAGCALC);
+            this.tcDSP.Controls.Add(this.tpDSPAMSAM);
             this.tcDSP.Location = new System.Drawing.Point(0, 0);
             this.tcDSP.Name = "tcDSP";
             this.tcDSP.SelectedIndex = 0;
@@ -20663,6 +20876,164 @@
             this.lblDSPAGCFixed.TabIndex = 5;
             this.lblDSPAGCFixed.Text = "Fixed Gain (dB):";
             // 
+            // tpDSPAMSAM
+            // 
+            this.tpDSPAMSAM.Controls.Add(this.grpAMSAM);
+            this.tpDSPAMSAM.Controls.Add(this.grpRX2AMSAM);
+            this.tpDSPAMSAM.Location = new System.Drawing.Point(4, 22);
+            this.tpDSPAMSAM.Name = "tpDSPAMSAM";
+            this.tpDSPAMSAM.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDSPAMSAM.Size = new System.Drawing.Size(592, 318);
+            this.tpDSPAMSAM.TabIndex = 4;
+            this.tpDSPAMSAM.Text = "AM/SAM";
+            this.tpDSPAMSAM.UseVisualStyleBackColor = true;
+            // 
+            // grpAMSAM
+            // 
+            this.grpAMSAM.Controls.Add(this.chkLevelFades);
+            this.grpAMSAM.Controls.Add(this.grpAMSBSEL);
+            this.grpAMSAM.Location = new System.Drawing.Point(6, 40);
+            this.grpAMSAM.Name = "grpAMSAM";
+            this.grpAMSAM.Size = new System.Drawing.Size(240, 92);
+            this.grpAMSAM.TabIndex = 42;
+            this.grpAMSAM.TabStop = false;
+            this.grpAMSAM.Text = "RX1 - AM / SAM Demodulation";
+            // 
+            // chkLevelFades
+            // 
+            this.chkLevelFades.AutoSize = true;
+            this.chkLevelFades.Image = null;
+            this.chkLevelFades.Location = new System.Drawing.Point(76, 21);
+            this.chkLevelFades.Name = "chkLevelFades";
+            this.chkLevelFades.Size = new System.Drawing.Size(88, 17);
+            this.chkLevelFades.TabIndex = 1;
+            this.chkLevelFades.Text = "Fade Leveler";
+            this.chkLevelFades.UseVisualStyleBackColor = true;
+            this.chkLevelFades.CheckedChanged += new System.EventHandler(this.chkLevelFades_CheckedChanged);
+            // 
+            // grpAMSBSEL
+            // 
+            this.grpAMSBSEL.Controls.Add(this.radUSB);
+            this.grpAMSBSEL.Controls.Add(this.radLSB);
+            this.grpAMSBSEL.Controls.Add(this.radLSBUSB);
+            this.grpAMSBSEL.Location = new System.Drawing.Point(6, 46);
+            this.grpAMSBSEL.Name = "grpAMSBSEL";
+            this.grpAMSBSEL.Size = new System.Drawing.Size(228, 40);
+            this.grpAMSBSEL.TabIndex = 0;
+            this.grpAMSBSEL.TabStop = false;
+            this.grpAMSBSEL.Text = "Sideband Select (SAM ONLY)";
+            // 
+            // radUSB
+            // 
+            this.radUSB.AutoSize = true;
+            this.radUSB.Image = null;
+            this.radUSB.Location = new System.Drawing.Point(174, 17);
+            this.radUSB.Name = "radUSB";
+            this.radUSB.Size = new System.Drawing.Size(47, 17);
+            this.radUSB.TabIndex = 2;
+            this.radUSB.Text = "USB";
+            this.radUSB.UseVisualStyleBackColor = true;
+            this.radUSB.CheckedChanged += new System.EventHandler(this.radUSB_CheckedChanged);
+            // 
+            // radLSB
+            // 
+            this.radLSB.AutoSize = true;
+            this.radLSB.Image = null;
+            this.radLSB.Location = new System.Drawing.Point(95, 17);
+            this.radLSB.Name = "radLSB";
+            this.radLSB.Size = new System.Drawing.Size(45, 17);
+            this.radLSB.TabIndex = 1;
+            this.radLSB.Text = "LSB";
+            this.radLSB.UseVisualStyleBackColor = true;
+            this.radLSB.CheckedChanged += new System.EventHandler(this.radLSB_CheckedChanged);
+            // 
+            // radLSBUSB
+            // 
+            this.radLSBUSB.AutoSize = true;
+            this.radLSBUSB.Checked = true;
+            this.radLSBUSB.Image = null;
+            this.radLSBUSB.Location = new System.Drawing.Point(10, 17);
+            this.radLSBUSB.Name = "radLSBUSB";
+            this.radLSBUSB.Size = new System.Drawing.Size(73, 17);
+            this.radLSBUSB.TabIndex = 0;
+            this.radLSBUSB.TabStop = true;
+            this.radLSBUSB.Text = "LSB+USB";
+            this.radLSBUSB.UseVisualStyleBackColor = true;
+            this.radLSBUSB.CheckedChanged += new System.EventHandler(this.radLSBUSB_CheckedChanged);
+            // 
+            // grpRX2AMSAM
+            // 
+            this.grpRX2AMSAM.Controls.Add(this.chkRX2LevelFades);
+            this.grpRX2AMSAM.Controls.Add(this.grpRX2AMSBSEL);
+            this.grpRX2AMSAM.Location = new System.Drawing.Point(6, 175);
+            this.grpRX2AMSAM.Name = "grpRX2AMSAM";
+            this.grpRX2AMSAM.Size = new System.Drawing.Size(240, 92);
+            this.grpRX2AMSAM.TabIndex = 41;
+            this.grpRX2AMSAM.TabStop = false;
+            this.grpRX2AMSAM.Text = "RX2 - AM / SAM Demodulation";
+            // 
+            // chkRX2LevelFades
+            // 
+            this.chkRX2LevelFades.AutoSize = true;
+            this.chkRX2LevelFades.Image = null;
+            this.chkRX2LevelFades.Location = new System.Drawing.Point(76, 21);
+            this.chkRX2LevelFades.Name = "chkRX2LevelFades";
+            this.chkRX2LevelFades.Size = new System.Drawing.Size(88, 17);
+            this.chkRX2LevelFades.TabIndex = 1;
+            this.chkRX2LevelFades.Text = "Fade Leveler";
+            this.chkRX2LevelFades.UseVisualStyleBackColor = true;
+            this.chkRX2LevelFades.CheckedChanged += new System.EventHandler(this.chkRX2LevelFades_CheckedChanged);
+            // 
+            // grpRX2AMSBSEL
+            // 
+            this.grpRX2AMSBSEL.Controls.Add(this.radRX2USB);
+            this.grpRX2AMSBSEL.Controls.Add(this.radRX2LSB);
+            this.grpRX2AMSBSEL.Controls.Add(this.radRX2LSBUSB);
+            this.grpRX2AMSBSEL.Location = new System.Drawing.Point(6, 46);
+            this.grpRX2AMSBSEL.Name = "grpRX2AMSBSEL";
+            this.grpRX2AMSBSEL.Size = new System.Drawing.Size(228, 40);
+            this.grpRX2AMSBSEL.TabIndex = 0;
+            this.grpRX2AMSBSEL.TabStop = false;
+            this.grpRX2AMSBSEL.Text = "Sideband Select (SAM ONLY)";
+            // 
+            // radRX2USB
+            // 
+            this.radRX2USB.AutoSize = true;
+            this.radRX2USB.Image = null;
+            this.radRX2USB.Location = new System.Drawing.Point(174, 17);
+            this.radRX2USB.Name = "radRX2USB";
+            this.radRX2USB.Size = new System.Drawing.Size(47, 17);
+            this.radRX2USB.TabIndex = 2;
+            this.radRX2USB.Text = "USB";
+            this.radRX2USB.UseVisualStyleBackColor = true;
+            this.radRX2USB.CheckedChanged += new System.EventHandler(this.radRX2USB_CheckedChanged);
+            // 
+            // radRX2LSB
+            // 
+            this.radRX2LSB.AutoSize = true;
+            this.radRX2LSB.Image = null;
+            this.radRX2LSB.Location = new System.Drawing.Point(95, 17);
+            this.radRX2LSB.Name = "radRX2LSB";
+            this.radRX2LSB.Size = new System.Drawing.Size(45, 17);
+            this.radRX2LSB.TabIndex = 1;
+            this.radRX2LSB.Text = "LSB";
+            this.radRX2LSB.UseVisualStyleBackColor = true;
+            this.radRX2LSB.CheckedChanged += new System.EventHandler(this.radRX2LSB_CheckedChanged);
+            // 
+            // radRX2LSBUSB
+            // 
+            this.radRX2LSBUSB.AutoSize = true;
+            this.radRX2LSBUSB.Checked = true;
+            this.radRX2LSBUSB.Image = null;
+            this.radRX2LSBUSB.Location = new System.Drawing.Point(10, 17);
+            this.radRX2LSBUSB.Name = "radRX2LSBUSB";
+            this.radRX2LSBUSB.Size = new System.Drawing.Size(73, 17);
+            this.radRX2LSBUSB.TabIndex = 0;
+            this.radRX2LSBUSB.TabStop = true;
+            this.radRX2LSBUSB.Text = "LSB+USB";
+            this.radRX2LSBUSB.UseVisualStyleBackColor = true;
+            this.radRX2LSBUSB.CheckedChanged += new System.EventHandler(this.radRX2LSBUSB_CheckedChanged);
+            // 
             // tpTransmit
             // 
             this.tpTransmit.Controls.Add(this.chkSaveTXProfileOnExit);
@@ -21602,6 +21973,8 @@
             // 
             // grpPAGainByBand
             // 
+            this.grpPAGainByBand.Controls.Add(this.chkAutoPACalibrate);
+            this.grpPAGainByBand.Controls.Add(this.panelAutoPACalibrate);
             this.grpPAGainByBand.Controls.Add(this.lblPAGainByBandVHF13);
             this.grpPAGainByBand.Controls.Add(this.chkPANewCal);
             this.grpPAGainByBand.Controls.Add(this.udPAGainVHF13);
@@ -21633,22 +22006,7 @@
             this.grpPAGainByBand.Controls.Add(this.udPAGainVHF0);
             this.grpPAGainByBand.Controls.Add(this.udPAGain6);
             this.grpPAGainByBand.Controls.Add(this.lblPAGainByBand6);
-            this.grpPAGainByBand.Controls.Add(this.udPACalPower);
-            this.grpPAGainByBand.Controls.Add(this.lblPACalTarget);
-            this.grpPAGainByBand.Controls.Add(this.chkPA10);
-            this.grpPAGainByBand.Controls.Add(this.chkPA12);
-            this.grpPAGainByBand.Controls.Add(this.chkPA15);
-            this.grpPAGainByBand.Controls.Add(this.chkPA17);
-            this.grpPAGainByBand.Controls.Add(this.chkPA20);
-            this.grpPAGainByBand.Controls.Add(this.chkPA30);
-            this.grpPAGainByBand.Controls.Add(this.chkPA40);
-            this.grpPAGainByBand.Controls.Add(this.chkPA60);
-            this.grpPAGainByBand.Controls.Add(this.chkPA80);
-            this.grpPAGainByBand.Controls.Add(this.chkPA160);
-            this.grpPAGainByBand.Controls.Add(this.radPACalSelBands);
-            this.grpPAGainByBand.Controls.Add(this.radPACalAllBands);
             this.grpPAGainByBand.Controls.Add(this.btnPAGainReset);
-            this.grpPAGainByBand.Controls.Add(this.btnPAGainCalibration);
             this.grpPAGainByBand.Controls.Add(this.lblPAGainByBand10);
             this.grpPAGainByBand.Controls.Add(this.udPAGain10);
             this.grpPAGainByBand.Controls.Add(this.lblPAGainByBand12);
@@ -21669,19 +22027,222 @@
             this.grpPAGainByBand.Controls.Add(this.udPAGain80);
             this.grpPAGainByBand.Controls.Add(this.lblPAGainByBand160);
             this.grpPAGainByBand.Controls.Add(this.udPAGain160);
-            this.grpPAGainByBand.Controls.Add(this.chkPA6);
             this.grpPAGainByBand.Location = new System.Drawing.Point(8, 8);
             this.grpPAGainByBand.Name = "grpPAGainByBand";
             this.grpPAGainByBand.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.grpPAGainByBand.Size = new System.Drawing.Size(573, 275);
+            this.grpPAGainByBand.Size = new System.Drawing.Size(573, 302);
             this.grpPAGainByBand.TabIndex = 1;
             this.grpPAGainByBand.TabStop = false;
             this.grpPAGainByBand.Text = "Gain By Band (dB)";
             // 
+            // chkAutoPACalibrate
+            // 
+            this.chkAutoPACalibrate.Image = null;
+            this.chkAutoPACalibrate.Location = new System.Drawing.Point(431, 266);
+            this.chkAutoPACalibrate.Name = "chkAutoPACalibrate";
+            this.chkAutoPACalibrate.Size = new System.Drawing.Size(120, 32);
+            this.chkAutoPACalibrate.TabIndex = 116;
+            this.chkAutoPACalibrate.Text = "Use Advanced Calibration Routine";
+            this.chkAutoPACalibrate.CheckedChanged += new System.EventHandler(this.chkAutoPACalibrate_CheckedChanged);
+            // 
+            // panelAutoPACalibrate
+            // 
+            this.panelAutoPACalibrate.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.panelAutoPACalibrate.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.panelAutoPACalibrate.Controls.Add(this.btnPAGainCalibration);
+            this.panelAutoPACalibrate.Controls.Add(this.lblPACalTarget);
+            this.panelAutoPACalibrate.Controls.Add(this.udPACalPower);
+            this.panelAutoPACalibrate.Controls.Add(this.radPACalAllBands);
+            this.panelAutoPACalibrate.Controls.Add(this.radPACalSelBands);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA160);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA80);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA60);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA40);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA30);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA20);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA17);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA15);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA12);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA10);
+            this.panelAutoPACalibrate.Controls.Add(this.chkPA6);
+            this.panelAutoPACalibrate.Location = new System.Drawing.Point(411, 24);
+            this.panelAutoPACalibrate.Name = "panelAutoPACalibrate";
+            this.panelAutoPACalibrate.Size = new System.Drawing.Size(156, 236);
+            this.panelAutoPACalibrate.TabIndex = 115;
+            this.panelAutoPACalibrate.Visible = false;
+            // 
+            // btnPAGainCalibration
+            // 
+            this.btnPAGainCalibration.Image = null;
+            this.btnPAGainCalibration.Location = new System.Drawing.Point(10, 17);
+            this.btnPAGainCalibration.Name = "btnPAGainCalibration";
+            this.btnPAGainCalibration.Size = new System.Drawing.Size(64, 23);
+            this.btnPAGainCalibration.TabIndex = 20;
+            this.btnPAGainCalibration.Text = "Calibrate";
+            this.btnPAGainCalibration.Click += new System.EventHandler(this.btnPAGainCalibration_Click);
+            // 
+            // lblPACalTarget
+            // 
+            this.lblPACalTarget.Image = null;
+            this.lblPACalTarget.Location = new System.Drawing.Point(82, 4);
+            this.lblPACalTarget.Name = "lblPACalTarget";
+            this.lblPACalTarget.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblPACalTarget.Size = new System.Drawing.Size(64, 16);
+            this.lblPACalTarget.TabIndex = 34;
+            this.lblPACalTarget.Text = "Cal Target:";
+            this.lblPACalTarget.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // udPACalPower
+            // 
+            this.udPACalPower.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udPACalPower.Location = new System.Drawing.Point(90, 20);
+            this.udPACalPower.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udPACalPower.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udPACalPower.Name = "udPACalPower";
+            this.udPACalPower.Size = new System.Drawing.Size(50, 20);
+            this.udPACalPower.TabIndex = 35;
+            this.udPACalPower.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // radPACalAllBands
+            // 
+            this.radPACalAllBands.Checked = true;
+            this.radPACalAllBands.Image = null;
+            this.radPACalAllBands.Location = new System.Drawing.Point(10, 48);
+            this.radPACalAllBands.Name = "radPACalAllBands";
+            this.radPACalAllBands.Size = new System.Drawing.Size(72, 16);
+            this.radPACalAllBands.TabIndex = 22;
+            this.radPACalAllBands.TabStop = true;
+            this.radPACalAllBands.Text = "All Bands";
+            this.radPACalAllBands.CheckedChanged += new System.EventHandler(this.radPACalAllBands_CheckedChanged);
+            // 
+            // radPACalSelBands
+            // 
+            this.radPACalSelBands.Image = null;
+            this.radPACalSelBands.Location = new System.Drawing.Point(10, 64);
+            this.radPACalSelBands.Name = "radPACalSelBands";
+            this.radPACalSelBands.Size = new System.Drawing.Size(120, 32);
+            this.radPACalSelBands.TabIndex = 23;
+            this.radPACalSelBands.Text = "Selected Bands (checked below)";
+            // 
+            // chkPA160
+            // 
+            this.chkPA160.Image = null;
+            this.chkPA160.Location = new System.Drawing.Point(10, 104);
+            this.chkPA160.Name = "chkPA160";
+            this.chkPA160.Size = new System.Drawing.Size(48, 16);
+            this.chkPA160.TabIndex = 24;
+            this.chkPA160.Text = "160";
+            // 
+            // chkPA80
+            // 
+            this.chkPA80.Image = null;
+            this.chkPA80.Location = new System.Drawing.Point(10, 126);
+            this.chkPA80.Name = "chkPA80";
+            this.chkPA80.Size = new System.Drawing.Size(40, 16);
+            this.chkPA80.TabIndex = 25;
+            this.chkPA80.Text = "80";
+            // 
+            // chkPA60
+            // 
+            this.chkPA60.Image = null;
+            this.chkPA60.Location = new System.Drawing.Point(10, 148);
+            this.chkPA60.Name = "chkPA60";
+            this.chkPA60.Size = new System.Drawing.Size(40, 16);
+            this.chkPA60.TabIndex = 26;
+            this.chkPA60.Text = "60";
+            // 
+            // chkPA40
+            // 
+            this.chkPA40.Image = null;
+            this.chkPA40.Location = new System.Drawing.Point(10, 170);
+            this.chkPA40.Name = "chkPA40";
+            this.chkPA40.Size = new System.Drawing.Size(40, 16);
+            this.chkPA40.TabIndex = 27;
+            this.chkPA40.Text = "40";
+            // 
+            // chkPA30
+            // 
+            this.chkPA30.Image = null;
+            this.chkPA30.Location = new System.Drawing.Point(10, 192);
+            this.chkPA30.Name = "chkPA30";
+            this.chkPA30.Size = new System.Drawing.Size(40, 16);
+            this.chkPA30.TabIndex = 28;
+            this.chkPA30.Text = "30";
+            // 
+            // chkPA20
+            // 
+            this.chkPA20.Image = null;
+            this.chkPA20.Location = new System.Drawing.Point(10, 214);
+            this.chkPA20.Name = "chkPA20";
+            this.chkPA20.Size = new System.Drawing.Size(40, 16);
+            this.chkPA20.TabIndex = 29;
+            this.chkPA20.Text = "20";
+            // 
+            // chkPA17
+            // 
+            this.chkPA17.Image = null;
+            this.chkPA17.Location = new System.Drawing.Point(85, 104);
+            this.chkPA17.Name = "chkPA17";
+            this.chkPA17.Size = new System.Drawing.Size(40, 16);
+            this.chkPA17.TabIndex = 30;
+            this.chkPA17.Text = "17";
+            // 
+            // chkPA15
+            // 
+            this.chkPA15.Image = null;
+            this.chkPA15.Location = new System.Drawing.Point(85, 126);
+            this.chkPA15.Name = "chkPA15";
+            this.chkPA15.Size = new System.Drawing.Size(40, 16);
+            this.chkPA15.TabIndex = 31;
+            this.chkPA15.Text = "15";
+            // 
+            // chkPA12
+            // 
+            this.chkPA12.Image = null;
+            this.chkPA12.Location = new System.Drawing.Point(85, 148);
+            this.chkPA12.Name = "chkPA12";
+            this.chkPA12.Size = new System.Drawing.Size(40, 16);
+            this.chkPA12.TabIndex = 32;
+            this.chkPA12.Text = "12";
+            // 
+            // chkPA10
+            // 
+            this.chkPA10.Image = null;
+            this.chkPA10.Location = new System.Drawing.Point(85, 170);
+            this.chkPA10.Name = "chkPA10";
+            this.chkPA10.Size = new System.Drawing.Size(40, 16);
+            this.chkPA10.TabIndex = 33;
+            this.chkPA10.Text = "10";
+            // 
+            // chkPA6
+            // 
+            this.chkPA6.Image = null;
+            this.chkPA6.Location = new System.Drawing.Point(85, 192);
+            this.chkPA6.Name = "chkPA6";
+            this.chkPA6.Size = new System.Drawing.Size(36, 16);
+            this.chkPA6.TabIndex = 84;
+            this.chkPA6.Text = "6";
+            // 
             // lblPAGainByBandVHF13
             // 
             this.lblPAGainByBandVHF13.Image = null;
-            this.lblPAGainByBandVHF13.Location = new System.Drawing.Point(312, 216);
+            this.lblPAGainByBandVHF13.Location = new System.Drawing.Point(254, 168);
             this.lblPAGainByBandVHF13.Name = "lblPAGainByBandVHF13";
             this.lblPAGainByBandVHF13.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF13.Size = new System.Drawing.Size(43, 16);
@@ -21692,7 +22253,7 @@
             // chkPANewCal
             // 
             this.chkPANewCal.Image = null;
-            this.chkPANewCal.Location = new System.Drawing.Point(427, 227);
+            this.chkPANewCal.Location = new System.Drawing.Point(262, 262);
             this.chkPANewCal.Name = "chkPANewCal";
             this.chkPANewCal.Size = new System.Drawing.Size(120, 32);
             this.chkPANewCal.TabIndex = 83;
@@ -21708,7 +22269,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF13.Location = new System.Drawing.Point(357, 216);
+            this.udPAGainVHF13.Location = new System.Drawing.Point(299, 168);
             this.udPAGainVHF13.Maximum = new decimal(new int[] {
             100,
             0,
@@ -21732,7 +22293,7 @@
             // lblPAGainByBandVHF12
             // 
             this.lblPAGainByBandVHF12.Image = null;
-            this.lblPAGainByBandVHF12.Location = new System.Drawing.Point(312, 192);
+            this.lblPAGainByBandVHF12.Location = new System.Drawing.Point(254, 144);
             this.lblPAGainByBandVHF12.Name = "lblPAGainByBandVHF12";
             this.lblPAGainByBandVHF12.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF12.Size = new System.Drawing.Size(43, 16);
@@ -21748,7 +22309,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF12.Location = new System.Drawing.Point(357, 192);
+            this.udPAGainVHF12.Location = new System.Drawing.Point(299, 144);
             this.udPAGainVHF12.Maximum = new decimal(new int[] {
             100,
             0,
@@ -21772,7 +22333,7 @@
             // lblPAGainByBandVHF11
             // 
             this.lblPAGainByBandVHF11.Image = null;
-            this.lblPAGainByBandVHF11.Location = new System.Drawing.Point(312, 168);
+            this.lblPAGainByBandVHF11.Location = new System.Drawing.Point(254, 120);
             this.lblPAGainByBandVHF11.Name = "lblPAGainByBandVHF11";
             this.lblPAGainByBandVHF11.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF11.Size = new System.Drawing.Size(43, 16);
@@ -21788,7 +22349,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF11.Location = new System.Drawing.Point(357, 168);
+            this.udPAGainVHF11.Location = new System.Drawing.Point(299, 120);
             this.udPAGainVHF11.Maximum = new decimal(new int[] {
             100,
             0,
@@ -21812,7 +22373,7 @@
             // lblPAGainByBandVHF10
             // 
             this.lblPAGainByBandVHF10.Image = null;
-            this.lblPAGainByBandVHF10.Location = new System.Drawing.Point(312, 144);
+            this.lblPAGainByBandVHF10.Location = new System.Drawing.Point(254, 96);
             this.lblPAGainByBandVHF10.Name = "lblPAGainByBandVHF10";
             this.lblPAGainByBandVHF10.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF10.Size = new System.Drawing.Size(43, 16);
@@ -21828,7 +22389,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF10.Location = new System.Drawing.Point(357, 144);
+            this.udPAGainVHF10.Location = new System.Drawing.Point(299, 96);
             this.udPAGainVHF10.Maximum = new decimal(new int[] {
             100,
             0,
@@ -21852,7 +22413,7 @@
             // lblPAGainByBandVHF9
             // 
             this.lblPAGainByBandVHF9.Image = null;
-            this.lblPAGainByBandVHF9.Location = new System.Drawing.Point(317, 120);
+            this.lblPAGainByBandVHF9.Location = new System.Drawing.Point(259, 72);
             this.lblPAGainByBandVHF9.Name = "lblPAGainByBandVHF9";
             this.lblPAGainByBandVHF9.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF9.Size = new System.Drawing.Size(40, 16);
@@ -21868,7 +22429,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF9.Location = new System.Drawing.Point(357, 120);
+            this.udPAGainVHF9.Location = new System.Drawing.Point(299, 72);
             this.udPAGainVHF9.Maximum = new decimal(new int[] {
             100,
             0,
@@ -21892,7 +22453,7 @@
             // lblPAGainByBandVHF8
             // 
             this.lblPAGainByBandVHF8.Image = null;
-            this.lblPAGainByBandVHF8.Location = new System.Drawing.Point(317, 96);
+            this.lblPAGainByBandVHF8.Location = new System.Drawing.Point(259, 48);
             this.lblPAGainByBandVHF8.Name = "lblPAGainByBandVHF8";
             this.lblPAGainByBandVHF8.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF8.Size = new System.Drawing.Size(40, 16);
@@ -21908,7 +22469,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF8.Location = new System.Drawing.Point(357, 96);
+            this.udPAGainVHF8.Location = new System.Drawing.Point(299, 48);
             this.udPAGainVHF8.Maximum = new decimal(new int[] {
             100,
             0,
@@ -21932,7 +22493,7 @@
             // lblPAGainByBandVHF7
             // 
             this.lblPAGainByBandVHF7.Image = null;
-            this.lblPAGainByBandVHF7.Location = new System.Drawing.Point(317, 72);
+            this.lblPAGainByBandVHF7.Location = new System.Drawing.Point(259, 24);
             this.lblPAGainByBandVHF7.Name = "lblPAGainByBandVHF7";
             this.lblPAGainByBandVHF7.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF7.Size = new System.Drawing.Size(40, 16);
@@ -21948,7 +22509,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF7.Location = new System.Drawing.Point(357, 72);
+            this.udPAGainVHF7.Location = new System.Drawing.Point(299, 24);
             this.udPAGainVHF7.Maximum = new decimal(new int[] {
             100,
             0,
@@ -21972,7 +22533,7 @@
             // lblPAGainByBandVHF6
             // 
             this.lblPAGainByBandVHF6.Image = null;
-            this.lblPAGainByBandVHF6.Location = new System.Drawing.Point(317, 48);
+            this.lblPAGainByBandVHF6.Location = new System.Drawing.Point(147, 167);
             this.lblPAGainByBandVHF6.Name = "lblPAGainByBandVHF6";
             this.lblPAGainByBandVHF6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF6.Size = new System.Drawing.Size(40, 16);
@@ -21988,7 +22549,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF6.Location = new System.Drawing.Point(357, 48);
+            this.udPAGainVHF6.Location = new System.Drawing.Point(187, 167);
             this.udPAGainVHF6.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22012,7 +22573,7 @@
             // lblPAGainByBandVHF5
             // 
             this.lblPAGainByBandVHF5.Image = null;
-            this.lblPAGainByBandVHF5.Location = new System.Drawing.Point(317, 24);
+            this.lblPAGainByBandVHF5.Location = new System.Drawing.Point(147, 143);
             this.lblPAGainByBandVHF5.Name = "lblPAGainByBandVHF5";
             this.lblPAGainByBandVHF5.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF5.Size = new System.Drawing.Size(40, 16);
@@ -22028,7 +22589,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF5.Location = new System.Drawing.Point(357, 24);
+            this.udPAGainVHF5.Location = new System.Drawing.Point(187, 143);
             this.udPAGainVHF5.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22052,7 +22613,7 @@
             // lblPAGainByBandVHF4
             // 
             this.lblPAGainByBandVHF4.Image = null;
-            this.lblPAGainByBandVHF4.Location = new System.Drawing.Point(206, 144);
+            this.lblPAGainByBandVHF4.Location = new System.Drawing.Point(147, 120);
             this.lblPAGainByBandVHF4.Name = "lblPAGainByBandVHF4";
             this.lblPAGainByBandVHF4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF4.Size = new System.Drawing.Size(40, 16);
@@ -22068,7 +22629,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF4.Location = new System.Drawing.Point(246, 144);
+            this.udPAGainVHF4.Location = new System.Drawing.Point(187, 120);
             this.udPAGainVHF4.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22092,7 +22653,7 @@
             // lblPAGainByBandVHF3
             // 
             this.lblPAGainByBandVHF3.Image = null;
-            this.lblPAGainByBandVHF3.Location = new System.Drawing.Point(206, 120);
+            this.lblPAGainByBandVHF3.Location = new System.Drawing.Point(147, 96);
             this.lblPAGainByBandVHF3.Name = "lblPAGainByBandVHF3";
             this.lblPAGainByBandVHF3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF3.Size = new System.Drawing.Size(40, 16);
@@ -22108,7 +22669,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF3.Location = new System.Drawing.Point(246, 120);
+            this.udPAGainVHF3.Location = new System.Drawing.Point(187, 96);
             this.udPAGainVHF3.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22132,7 +22693,7 @@
             // lblPAGainByBandVHF2
             // 
             this.lblPAGainByBandVHF2.Image = null;
-            this.lblPAGainByBandVHF2.Location = new System.Drawing.Point(206, 96);
+            this.lblPAGainByBandVHF2.Location = new System.Drawing.Point(147, 72);
             this.lblPAGainByBandVHF2.Name = "lblPAGainByBandVHF2";
             this.lblPAGainByBandVHF2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF2.Size = new System.Drawing.Size(40, 16);
@@ -22148,7 +22709,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF2.Location = new System.Drawing.Point(246, 96);
+            this.udPAGainVHF2.Location = new System.Drawing.Point(187, 72);
             this.udPAGainVHF2.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22172,7 +22733,7 @@
             // lblPAGainByBandVHF1
             // 
             this.lblPAGainByBandVHF1.Image = null;
-            this.lblPAGainByBandVHF1.Location = new System.Drawing.Point(206, 72);
+            this.lblPAGainByBandVHF1.Location = new System.Drawing.Point(147, 48);
             this.lblPAGainByBandVHF1.Name = "lblPAGainByBandVHF1";
             this.lblPAGainByBandVHF1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF1.Size = new System.Drawing.Size(40, 16);
@@ -22188,7 +22749,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF1.Location = new System.Drawing.Point(246, 72);
+            this.udPAGainVHF1.Location = new System.Drawing.Point(187, 48);
             this.udPAGainVHF1.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22212,7 +22773,7 @@
             // lblPAGainByBandVHF0
             // 
             this.lblPAGainByBandVHF0.Image = null;
-            this.lblPAGainByBandVHF0.Location = new System.Drawing.Point(206, 48);
+            this.lblPAGainByBandVHF0.Location = new System.Drawing.Point(147, 24);
             this.lblPAGainByBandVHF0.Name = "lblPAGainByBandVHF0";
             this.lblPAGainByBandVHF0.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBandVHF0.Size = new System.Drawing.Size(40, 16);
@@ -22228,7 +22789,7 @@
             0,
             0,
             65536});
-            this.udPAGainVHF0.Location = new System.Drawing.Point(246, 48);
+            this.udPAGainVHF0.Location = new System.Drawing.Point(187, 24);
             this.udPAGainVHF0.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22257,7 +22818,7 @@
             0,
             0,
             65536});
-            this.udPAGain6.Location = new System.Drawing.Point(246, 24);
+            this.udPAGain6.Location = new System.Drawing.Point(56, 264);
             this.udPAGain6.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22281,7 +22842,7 @@
             // lblPAGainByBand6
             // 
             this.lblPAGainByBand6.Image = null;
-            this.lblPAGainByBand6.Location = new System.Drawing.Point(216, 24);
+            this.lblPAGainByBand6.Location = new System.Drawing.Point(26, 264);
             this.lblPAGainByBand6.Name = "lblPAGainByBand6";
             this.lblPAGainByBand6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBand6.Size = new System.Drawing.Size(24, 16);
@@ -22289,159 +22850,10 @@
             this.lblPAGainByBand6.Text = "6m:";
             this.lblPAGainByBand6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // udPACalPower
-            // 
-            this.udPACalPower.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udPACalPower.Location = new System.Drawing.Point(96, 160);
-            this.udPACalPower.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.udPACalPower.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udPACalPower.Name = "udPACalPower";
-            this.udPACalPower.Size = new System.Drawing.Size(50, 20);
-            this.udPACalPower.TabIndex = 35;
-            this.udPACalPower.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // lblPACalTarget
-            // 
-            this.lblPACalTarget.Image = null;
-            this.lblPACalTarget.Location = new System.Drawing.Point(88, 144);
-            this.lblPACalTarget.Name = "lblPACalTarget";
-            this.lblPACalTarget.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblPACalTarget.Size = new System.Drawing.Size(64, 16);
-            this.lblPACalTarget.TabIndex = 34;
-            this.lblPACalTarget.Text = "Cal Target:";
-            this.lblPACalTarget.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // chkPA10
-            // 
-            this.chkPA10.Image = null;
-            this.chkPA10.Location = new System.Drawing.Point(176, 248);
-            this.chkPA10.Name = "chkPA10";
-            this.chkPA10.Size = new System.Drawing.Size(40, 16);
-            this.chkPA10.TabIndex = 33;
-            this.chkPA10.Text = "10";
-            // 
-            // chkPA12
-            // 
-            this.chkPA12.Image = null;
-            this.chkPA12.Location = new System.Drawing.Point(136, 248);
-            this.chkPA12.Name = "chkPA12";
-            this.chkPA12.Size = new System.Drawing.Size(40, 16);
-            this.chkPA12.TabIndex = 32;
-            this.chkPA12.Text = "12";
-            // 
-            // chkPA15
-            // 
-            this.chkPA15.Image = null;
-            this.chkPA15.Location = new System.Drawing.Point(96, 248);
-            this.chkPA15.Name = "chkPA15";
-            this.chkPA15.Size = new System.Drawing.Size(40, 16);
-            this.chkPA15.TabIndex = 31;
-            this.chkPA15.Text = "15";
-            // 
-            // chkPA17
-            // 
-            this.chkPA17.Image = null;
-            this.chkPA17.Location = new System.Drawing.Point(56, 248);
-            this.chkPA17.Name = "chkPA17";
-            this.chkPA17.Size = new System.Drawing.Size(40, 16);
-            this.chkPA17.TabIndex = 30;
-            this.chkPA17.Text = "17";
-            // 
-            // chkPA20
-            // 
-            this.chkPA20.Image = null;
-            this.chkPA20.Location = new System.Drawing.Point(8, 248);
-            this.chkPA20.Name = "chkPA20";
-            this.chkPA20.Size = new System.Drawing.Size(40, 16);
-            this.chkPA20.TabIndex = 29;
-            this.chkPA20.Text = "20";
-            // 
-            // chkPA30
-            // 
-            this.chkPA30.Image = null;
-            this.chkPA30.Location = new System.Drawing.Point(176, 224);
-            this.chkPA30.Name = "chkPA30";
-            this.chkPA30.Size = new System.Drawing.Size(40, 16);
-            this.chkPA30.TabIndex = 28;
-            this.chkPA30.Text = "30";
-            // 
-            // chkPA40
-            // 
-            this.chkPA40.Image = null;
-            this.chkPA40.Location = new System.Drawing.Point(136, 224);
-            this.chkPA40.Name = "chkPA40";
-            this.chkPA40.Size = new System.Drawing.Size(40, 16);
-            this.chkPA40.TabIndex = 27;
-            this.chkPA40.Text = "40";
-            // 
-            // chkPA60
-            // 
-            this.chkPA60.Image = null;
-            this.chkPA60.Location = new System.Drawing.Point(96, 224);
-            this.chkPA60.Name = "chkPA60";
-            this.chkPA60.Size = new System.Drawing.Size(40, 16);
-            this.chkPA60.TabIndex = 26;
-            this.chkPA60.Text = "60";
-            // 
-            // chkPA80
-            // 
-            this.chkPA80.Image = null;
-            this.chkPA80.Location = new System.Drawing.Point(56, 224);
-            this.chkPA80.Name = "chkPA80";
-            this.chkPA80.Size = new System.Drawing.Size(40, 16);
-            this.chkPA80.TabIndex = 25;
-            this.chkPA80.Text = "80";
-            // 
-            // chkPA160
-            // 
-            this.chkPA160.Image = null;
-            this.chkPA160.Location = new System.Drawing.Point(8, 224);
-            this.chkPA160.Name = "chkPA160";
-            this.chkPA160.Size = new System.Drawing.Size(48, 16);
-            this.chkPA160.TabIndex = 24;
-            this.chkPA160.Text = "160";
-            // 
-            // radPACalSelBands
-            // 
-            this.radPACalSelBands.Image = null;
-            this.radPACalSelBands.Location = new System.Drawing.Point(96, 184);
-            this.radPACalSelBands.Name = "radPACalSelBands";
-            this.radPACalSelBands.Size = new System.Drawing.Size(120, 32);
-            this.radPACalSelBands.TabIndex = 23;
-            this.radPACalSelBands.Text = "Selected Bands (checked below)";
-            // 
-            // radPACalAllBands
-            // 
-            this.radPACalAllBands.Checked = true;
-            this.radPACalAllBands.Image = null;
-            this.radPACalAllBands.Location = new System.Drawing.Point(16, 184);
-            this.radPACalAllBands.Name = "radPACalAllBands";
-            this.radPACalAllBands.Size = new System.Drawing.Size(72, 32);
-            this.radPACalAllBands.TabIndex = 22;
-            this.radPACalAllBands.TabStop = true;
-            this.radPACalAllBands.Text = "All Bands";
-            this.radPACalAllBands.CheckedChanged += new System.EventHandler(this.radPACalAllBands_CheckedChanged);
-            // 
             // btnPAGainReset
             // 
             this.btnPAGainReset.Image = null;
-            this.btnPAGainReset.Location = new System.Drawing.Point(152, 152);
+            this.btnPAGainReset.Location = new System.Drawing.Point(187, 264);
             this.btnPAGainReset.Name = "btnPAGainReset";
             this.btnPAGainReset.Size = new System.Drawing.Size(48, 23);
             this.btnPAGainReset.TabIndex = 21;
@@ -22449,20 +22861,10 @@
             this.toolTip1.SetToolTip(this.btnPAGainReset, "Reset all Gain values to the default 48.0dB");
             this.btnPAGainReset.Click += new System.EventHandler(this.btnPAGainReset_Click);
             // 
-            // btnPAGainCalibration
-            // 
-            this.btnPAGainCalibration.Image = null;
-            this.btnPAGainCalibration.Location = new System.Drawing.Point(16, 152);
-            this.btnPAGainCalibration.Name = "btnPAGainCalibration";
-            this.btnPAGainCalibration.Size = new System.Drawing.Size(64, 23);
-            this.btnPAGainCalibration.TabIndex = 20;
-            this.btnPAGainCalibration.Text = "Calibrate";
-            this.btnPAGainCalibration.Click += new System.EventHandler(this.btnPAGainCalibration_Click);
-            // 
             // lblPAGainByBand10
             // 
             this.lblPAGainByBand10.Image = null;
-            this.lblPAGainByBand10.Location = new System.Drawing.Point(112, 120);
+            this.lblPAGainByBand10.Location = new System.Drawing.Point(16, 240);
             this.lblPAGainByBand10.Name = "lblPAGainByBand10";
             this.lblPAGainByBand10.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBand10.Size = new System.Drawing.Size(40, 16);
@@ -22478,7 +22880,7 @@
             0,
             0,
             65536});
-            this.udPAGain10.Location = new System.Drawing.Point(152, 120);
+            this.udPAGain10.Location = new System.Drawing.Point(56, 240);
             this.udPAGain10.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22503,7 +22905,7 @@
             // lblPAGainByBand12
             // 
             this.lblPAGainByBand12.Image = null;
-            this.lblPAGainByBand12.Location = new System.Drawing.Point(112, 96);
+            this.lblPAGainByBand12.Location = new System.Drawing.Point(16, 216);
             this.lblPAGainByBand12.Name = "lblPAGainByBand12";
             this.lblPAGainByBand12.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBand12.Size = new System.Drawing.Size(40, 16);
@@ -22519,7 +22921,7 @@
             0,
             0,
             65536});
-            this.udPAGain12.Location = new System.Drawing.Point(152, 96);
+            this.udPAGain12.Location = new System.Drawing.Point(56, 216);
             this.udPAGain12.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22544,7 +22946,7 @@
             // lblPAGainByBand15
             // 
             this.lblPAGainByBand15.Image = null;
-            this.lblPAGainByBand15.Location = new System.Drawing.Point(112, 72);
+            this.lblPAGainByBand15.Location = new System.Drawing.Point(16, 192);
             this.lblPAGainByBand15.Name = "lblPAGainByBand15";
             this.lblPAGainByBand15.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBand15.Size = new System.Drawing.Size(40, 16);
@@ -22560,7 +22962,7 @@
             0,
             0,
             65536});
-            this.udPAGain15.Location = new System.Drawing.Point(152, 72);
+            this.udPAGain15.Location = new System.Drawing.Point(56, 192);
             this.udPAGain15.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22585,7 +22987,7 @@
             // lblPAGainByBand17
             // 
             this.lblPAGainByBand17.Image = null;
-            this.lblPAGainByBand17.Location = new System.Drawing.Point(112, 48);
+            this.lblPAGainByBand17.Location = new System.Drawing.Point(16, 168);
             this.lblPAGainByBand17.Name = "lblPAGainByBand17";
             this.lblPAGainByBand17.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBand17.Size = new System.Drawing.Size(40, 16);
@@ -22601,7 +23003,7 @@
             0,
             0,
             65536});
-            this.udPAGain17.Location = new System.Drawing.Point(152, 48);
+            this.udPAGain17.Location = new System.Drawing.Point(56, 168);
             this.udPAGain17.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22626,7 +23028,7 @@
             // lblPAGainByBand20
             // 
             this.lblPAGainByBand20.Image = null;
-            this.lblPAGainByBand20.Location = new System.Drawing.Point(112, 24);
+            this.lblPAGainByBand20.Location = new System.Drawing.Point(16, 144);
             this.lblPAGainByBand20.Name = "lblPAGainByBand20";
             this.lblPAGainByBand20.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblPAGainByBand20.Size = new System.Drawing.Size(40, 16);
@@ -22642,7 +23044,7 @@
             0,
             0,
             65536});
-            this.udPAGain20.Location = new System.Drawing.Point(152, 24);
+            this.udPAGain20.Location = new System.Drawing.Point(56, 144);
             this.udPAGain20.Maximum = new decimal(new int[] {
             100,
             0,
@@ -22868,15 +23270,6 @@
             65536});
             this.udPAGain160.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             this.udPAGain160.LostFocus += new System.EventHandler(this.udPAGain160_LostFocus);
-            // 
-            // chkPA6
-            // 
-            this.chkPA6.Image = null;
-            this.chkPA6.Location = new System.Drawing.Point(216, 248);
-            this.chkPA6.Name = "chkPA6";
-            this.chkPA6.Size = new System.Drawing.Size(36, 16);
-            this.chkPA6.TabIndex = 84;
-            this.chkPA6.Text = "6";
             // 
             // rtxtPACalReq
             // 
@@ -30289,6 +30682,10 @@
             this.grpGenCalRXImage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralCalFreq3)).EndInit();
             this.tpFilters.ResumeLayout(false);
+            this.groupBoxTS6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udRX2FilterDefaultLowCut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udRX2OptMaxFilterShift)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udRX2OptMaxFilterWidth)).EndInit();
             this.grpOptFilterControls.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udFilterDefaultLowCut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udOptMaxFilterShift)).EndInit();
@@ -30538,6 +30935,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCDecay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCAttack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCFixedGaindB)).EndInit();
+            this.tpDSPAMSAM.ResumeLayout(false);
+            this.grpAMSAM.ResumeLayout(false);
+            this.grpAMSAM.PerformLayout();
+            this.grpAMSBSEL.ResumeLayout(false);
+            this.grpAMSBSEL.PerformLayout();
+            this.grpRX2AMSAM.ResumeLayout(false);
+            this.grpRX2AMSAM.PerformLayout();
+            this.grpRX2AMSBSEL.ResumeLayout(false);
+            this.grpRX2AMSBSEL.PerformLayout();
             this.tpTransmit.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterHighSave)).EndInit();
@@ -30565,6 +30971,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.udTXNoiseGate)).EndInit();
             this.tpPowerAmplifier.ResumeLayout(false);
             this.grpPAGainByBand.ResumeLayout(false);
+            this.panelAutoPACalibrate.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udPACalPower)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainVHF13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainVHF12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainVHF11)).EndInit();
@@ -30580,7 +30988,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainVHF1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGainVHF0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGain6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udPACalPower)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGain10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGain12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPAGain15)).EndInit();
@@ -30880,5 +31287,30 @@
         private System.Windows.Forms.CheckBoxTS chkRX2BlankDisplayOnVFOATX;
         private System.Windows.Forms.CheckBoxTS chkSaveTXProfileOnExit;
         private System.Windows.Forms.CheckBoxTS chkAutoSaveTXProfile;
+        private System.Windows.Forms.GroupBoxTS groupBoxTS6;
+        private System.Windows.Forms.NumericUpDownTS udRX2FilterDefaultLowCut;
+        private System.Windows.Forms.LabelTS labelTS39;
+        private System.Windows.Forms.NumericUpDownTS udRX2OptMaxFilterShift;
+        private System.Windows.Forms.LabelTS labelTS50;
+        private System.Windows.Forms.ComboBoxTS comboRX2OptFilterWidthMode;
+        private System.Windows.Forms.LabelTS labelTS86;
+        private System.Windows.Forms.NumericUpDownTS udRX2OptMaxFilterWidth;
+        private System.Windows.Forms.LabelTS labelTS87;
+        private System.Windows.Forms.CheckBoxTS checkBoxTS2;
+        private System.Windows.Forms.TabPage tpDSPAMSAM;
+        private System.Windows.Forms.GroupBoxTS grpAMSAM;
+        private System.Windows.Forms.CheckBoxTS chkLevelFades;
+        private System.Windows.Forms.GroupBoxTS grpAMSBSEL;
+        private System.Windows.Forms.RadioButtonTS radUSB;
+        private System.Windows.Forms.RadioButtonTS radLSB;
+        private System.Windows.Forms.RadioButtonTS radLSBUSB;
+        private System.Windows.Forms.GroupBoxTS grpRX2AMSAM;
+        private System.Windows.Forms.CheckBoxTS chkRX2LevelFades;
+        private System.Windows.Forms.GroupBoxTS grpRX2AMSBSEL;
+        private System.Windows.Forms.RadioButtonTS radRX2USB;
+        private System.Windows.Forms.RadioButtonTS radRX2LSB;
+        private System.Windows.Forms.RadioButtonTS radRX2LSBUSB;
+        private System.Windows.Forms.PanelTS panelAutoPACalibrate;
+        private System.Windows.Forms.CheckBoxTS chkAutoPACalibrate;
     }
 }

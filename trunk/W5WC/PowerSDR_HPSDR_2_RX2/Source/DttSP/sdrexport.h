@@ -51,7 +51,7 @@ Bridgewater, NJ 08807
 #include <filter.h>
 #include <oscillator.h>
 #include <dttspagc.h>
-#include <am_demod.h>
+//#include <am_demod.h>
 #include <fm_demod.h>
 #include <noiseblanker.h>
 #include <correctIQ.h>
@@ -68,6 +68,7 @@ Bridgewater, NJ 08807
 #include <compress.h>
 #include <anf.h>
 #include <anr.h>
+#include <amd.h>
 
 //------------------------------------------------------------------------
 // max no. simultaneous receivers
@@ -218,10 +219,15 @@ extern struct _rx
     BOOLEAN flag;
   } wcpagc;
   
-  struct
+  //struct	//(NR0V)
+  //{
+  //  AMD gen;
+  //} am;
+  
+  struct	//(NR0V)
   {
     AMD gen;
-  } am;
+  } amd;
   
   struct
   {
