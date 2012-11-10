@@ -2,7 +2,7 @@
 // portaudio.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2009  FlexRadio Systems 
+// Copyright (C) 2004-2012  FlexRadio Systems 
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,18 +18,24 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //
-// You may contact us via email at: sales@flex-radio.com.
+// You may contact us via email at: gpl@flexradio.com.
 // Paper mail may be sent to: 
 //    FlexRadio Systems
-//    8900 Marybank Dr.
-//    Austin, TX 78750
+//    4616 W. Howard Lane  Suite 1-150
+//    Austin, TX 78728
 //    USA
 //=================================================================
 
-namespace PowerSDR
-{
     using System;
+//using System.Collections;
+//using System.Diagnostics;
+using System.Collections;
+using System.Text;
+using System.Security;
     using System.Runtime.InteropServices;
+//using System.Threading;
+using System.Windows.Forms;
+
     using PaError = System.Int32;
     using PaDeviceIndex = System.Int32;
     using PaHostApiIndex = System.Int32;
@@ -38,6 +44,8 @@ namespace PowerSDR
     using PaStreamFlags = System.UInt32;
     using PaStreamCallbackFlags = System.UInt32; 
 
+namespace PowerSDR
+{
 	public class PA19
 	{
 		#region Constants
@@ -175,8 +183,14 @@ namespace PowerSDR
 		// reference.  To fix this, I added a single statement in
 		// pa_front.c.  The new line 444 is below.
 		// case paNoError:                  result = "1"; result = "Success"; break;
-		[DllImport("PA19.dll")]
-		public static extern String PA_GetErrorText(PaError errorCode);
+        [DllImport("PA19.dll", EntryPoint = "PA_GetErrorText")]
+        public static extern IntPtr IntPtr_PA_GetErrorText(PaError error);
+
+        public static string PA_GetErrorText(PaError error)
+        {
+            IntPtr strptr = IntPtr_PA_GetErrorText(error);
+            return Marshal.PtrToStringAnsi(strptr);
+        }
 
 		[DllImport("PA19.dll")]
 		public static extern PaError PA_Initialize();
