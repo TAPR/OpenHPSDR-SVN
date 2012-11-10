@@ -32667,8 +32667,6 @@ namespace PowerSDR
             if (!alexpresent && rx2_preamp_present)
                 chkRX2Preamp.Visible = true;
             eSCToolStripMenuItem.Visible = rx2_preamp_present;
-
-            if (chkRX2.Checked) chkRX2.Checked = false;
         }
 
         public void comboDisplayMode_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -35027,7 +35025,7 @@ namespace PowerSDR
         private void chkVAC2_CheckedChanged(object sender, EventArgs e)
         {
             if (SetupForm != null) SetupForm.VAC2Enable = chkVAC2.Checked;
-            if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK || !chkRX2.Checked)
+           /* if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK || !chkRX2.Checked)
             {
                 if (chkVOX.Checked)
                 {
@@ -35037,7 +35035,7 @@ namespace PowerSDR
                     chkVOX.BackColor = SystemColors.Control;
                 }
                 return;
-            }
+            } */
 
             if (chkVFOBTX.Checked)
             {
@@ -42554,6 +42552,7 @@ namespace PowerSDR
                         }
 
                         txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                        if (!rx2_enabled) return;
 
                         txtVFOBFreq.ForeColor = vfo_text_light_color;
                         txtVFOBMSD.ForeColor = vfo_text_light_color;
@@ -42622,26 +42621,34 @@ namespace PowerSDR
                 chkSplitDisplay.Checked = rx2_enabled;
             }
         }
+
         private bool update_rx2_display = false;
         private void chkRX2_CheckedChanged(object sender, System.EventArgs e)
         {
             RX2Enabled = chkRX2.Checked;
-            if (chkVFOBTX.Checked || chkVAC2.Checked || chkRX2.Checked)
+
+            if (chkVFOBTX.Checked && chkVAC2.Checked && chkRX2.Checked)
             {
                 ptbVACRXGain.Value = vac2_rx_gain;
                 ptbVACRXGain_Scroll(this, EventArgs.Empty);
+
                 ptbVACTXGain.Value = vac2_tx_gain;
                 ptbVACTXGain_Scroll(this, EventArgs.Empty);
+
                 comboVACSampleRate.Text = vac2_sample_rate;
+
                 chkVACStereo.Checked = vac2_stereo;
             }
             else
             {
                 ptbVACRXGain.Value = vac_rx_gain;
                 ptbVACRXGain_Scroll(this, EventArgs.Empty);
+
                 ptbVACTXGain.Value = vac_tx_gain;
                 ptbVACTXGain_Scroll(this, EventArgs.Empty);
+
                 comboVACSampleRate.Text = vac_sample_rate;
+
                 chkVACStereo.Checked = vac_stereo;
             }
 
@@ -42651,6 +42658,7 @@ namespace PowerSDR
             {
                 JanusAudio.SetVFOfreqRX2(0.0);
                 chkRX2.BackColor = SystemColors.Control;
+                if (chkVAC2.Checked) chkVAC2.Checked = false;
             }
 
             if (update_rx2_display)
@@ -42709,8 +42717,8 @@ namespace PowerSDR
                     x += (vfo_sub_decimal_space - vfo_sub_char_space);
                 width = x + vfo_sub_char_width;
             }
-            using (Pen p = new Pen(txtVFOABand.ForeColor, 2.0f))
-                e.Graphics.DrawLine(p, x, 1, width, 1);
+
+            e.Graphics.DrawLine(new Pen(txtVFOABand.ForeColor, 2.0f), x, 1, width, 1);
         }
 
         private void panelVFOASubHover_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
