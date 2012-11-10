@@ -32618,7 +32618,8 @@ namespace PowerSDR
                 CWPTT.Stop();
 
                 Audio.callback_return = 2;
-                Audio.StopAudio1();
+                JanusAudio.StopAudio();
+                
                 if (vac_enabled)
                 {
                     Audio.StopAudioVAC();

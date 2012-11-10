@@ -476,7 +476,7 @@ namespace PowerSDR
         public static Console console;
         unsafe private static void* stream1;
         unsafe private static void* stream2;
-        unsafe private static void* stream3;
+       // unsafe private static void* stream3;
         //private static int block_size2 = 2048;
         public static float[] phase_buf_l;
         public static float[] phase_buf_r;
@@ -2329,7 +2329,7 @@ namespace PowerSDR
 
                     if (++ramp_count > ramp_samples)
                     {
-                        // clear the rest of the this TX buffer
+                        // clear the rest of the TX buffer
                         for (int j = i + 1; j < frameCount; j++)
                         {
                             out_l_ptr2[i] = 0.0f;
@@ -5373,160 +5373,11 @@ namespace PowerSDR
             return 0;
         }
 
-        #region NewVacCallBack
-
-        /*  The broken new stuff.
-				unsafe public static int CallbackVAC(void* input, void* output, int frameCount,
-					PA19.PaStreamCallbackTimeInfo* timeInfo, int statusFlags, void *userData)
-				{
-					int* array_ptr = (int *)input;
-					float* in_l_ptr1 = (float *)array_ptr[0];
-					float* in_r_ptr1 = (float *)array_ptr[1];
-					array_ptr = (int *)output;
-					float* out_l_ptr1 = (float *)array_ptr[0];
-					float* out_r_ptr1 = (float *)array_ptr[1];
-
-					if ((statusFlags & PA19.paInputOverflow) != 0) VACDebug("callback input overflow");
-					if ((statusFlags & PA19.paInputUnderflow) != 0) VACDebug("callback input underflow");
-					if ((statusFlags & PA19.paOutputOverflow) != 0) VACDebug("callback output overflow");
-					if ((statusFlags & PA19.paOutputUnderflow) != 0) VACDebug("callback output underflow");
-					//Debug.WriteLine("statusFlags = "+statusFlags.ToString());
-
-
-					if (vac_rb_reset)
-					{
-						vac_rb_reset = false;
-						ClearBuffer(out_l_ptr1, frameCount);
-						if (vac_stereo) ClearBuffer(out_r_ptr1, frameCount);
-						Win32.EnterCriticalSection(cs_vac);
-
-						rb_vacIN_l.Reset();
-						rb_vacIN_r.Reset();
-						rb_vacOUT_l.Restart(frameCount);
-						rb_vacOUT_r.Restart(frameCount);
-						Win32.LeaveCriticalSection(cs_vac);
-						return 0;
-					}
-
-					if (vac_stereo)
-					{
-						if (vac_resample) 
-						{
-							int outsamps;
-							fixed(float *res_inl_ptr = &(res_inl[0]))
-								fixed(float *res_inr_ptr = &(res_inr[0])) 
-								{
-									DttSP.DoResamplerF(in_l_ptr1, res_inl_ptr, frameCount, &outsamps, resampPtrIn_l);
-									DttSP.DoResamplerF(in_r_ptr1, res_inr_ptr, frameCount, &outsamps, resampPtrIn_r);
-									Debug.WriteLine("number samples from resampler " + outsamps.ToString());
-									if ((rb_vacIN_l.WriteSpace() >= outsamps) && (rb_vacIN_r.WriteSpace() >= outsamps))
-									{
-										Win32.EnterCriticalSection(cs_vac);
-										rb_vacIN_l.WritePtr(res_inl_ptr, outsamps);
-										rb_vacIN_r.WritePtr(res_inr_ptr, outsamps);
-										Win32.LeaveCriticalSection(cs_vac);
-									}
-									else 
-									{
-										vac_rb_reset = true;
-										VACDebug("rb_vacIN overflow stereo CBvac");
-									}
-								}
-						} 
-						else 
-						{
-							if((rb_vacIN_l.WriteSpace() >= frameCount) && (rb_vacIN_r.WriteSpace() >= frameCount))
-							{
-								Win32.EnterCriticalSection(cs_vac);
-								rb_vacIN_l.WritePtr(in_l_ptr1, frameCount);
-								rb_vacIN_r.WritePtr(in_r_ptr1, frameCount);
-								Win32.LeaveCriticalSection(cs_vac);
-							}
-							else
-							{
-								//vac_rb_reset = true;
-								VACDebug("rb_vacIN overflow mono CBvac");
-							}
-						}
-				
-						if((rb_vacOUT_l.ReadSpace() >= frameCount) && (rb_vacOUT_r.ReadSpace() >= frameCount))
-						{
-							Win32.EnterCriticalSection(cs_vac);
-							rb_vacOUT_l.ReadPtr(out_l_ptr1, frameCount);
-							rb_vacOUT_r.ReadPtr(out_r_ptr1, frameCount);
-							Win32.LeaveCriticalSection(cs_vac);
-						}
-						else
-						{
-							ClearBuffer(out_l_ptr1, frameCount);
-							ClearBuffer(out_r_ptr1, frameCount);
-							VACDebug("rb_vacOUT underflow");
-						}
-					} 
-					else 
-					{
-						if(vac_resample) 
-						{
-							int outsamps;
-							fixed(float *res_inl_ptr = &(res_inl[0]))
-							{
-								DttSP.DoResamplerF(in_l_ptr1, res_inl_ptr, frameCount, &outsamps, resampPtrIn_l);
-								//Debug.WriteLine("number samples from resampler " + outsamps.ToString());
-								if ((rb_vacIN_l.WriteSpace() >= outsamps) && (rb_vacIN_r.WriteSpace() >= outsamps))
-								{
-									Win32.EnterCriticalSection(cs_vac);
-									rb_vacIN_l.WritePtr(res_inl_ptr, outsamps);
-									rb_vacIN_r.WritePtr(res_inl_ptr, outsamps);
-									Win32.LeaveCriticalSection(cs_vac);
-								}
-								else 
-								{
-									//vac_rb_reset = true;
-									VACDebug("rb_vacIN_l overflow");
-								}
-							}
-						} 
-						else 
-						{
-							if((rb_vacIN_l.WriteSpace() >= frameCount) && (rb_vacIN_r.WriteSpace() >= frameCount))
-							{
-								Win32.EnterCriticalSection(cs_vac);
-								rb_vacIN_l.WritePtr(in_l_ptr1, frameCount);
-								rb_vacIN_r.WritePtr(in_l_ptr1, frameCount);
-								Win32.LeaveCriticalSection(cs_vac);
-							}
-							else
-							{
-								//vac_rb_reset = true;
-								VACDebug("rb_vacIN_l overflow");
-							}
-						}
-						if((rb_vacOUT_l.ReadSpace() >= frameCount) && (rb_vacOUT_r.ReadSpace() >= frameCount))
-						{
-							//Debug.WriteLine("vacOut Readspace "+rb_vacOUT_l.ReadSpace().ToString());
-							Win32.EnterCriticalSection(cs_vac);
-							rb_vacOUT_l.ReadPtr(out_l_ptr1, frameCount);
-							rb_vacOUT_r.ReadPtr(out_l_ptr1, frameCount);
-							Win32.LeaveCriticalSection(cs_vac);
-						}
-						else 
-						{
-							ClearBuffer(out_l_ptr1,frameCount);
-							VACDebug("rb_vacOUT_l underflow");
-						}
-					}
-
-					return 0;
-				}
-		*/
-
-        #endregion
-
         unsafe public static int Pipe(void* input, void* output, int frameCount,
-           PA19.PaStreamCallbackTimeInfo* timeInfo, int statusFlags, void* userData)
+            PA19.PaStreamCallbackTimeInfo* timeInfo, int statusFlags, void* userData)
         {
-            var inptr = (float*)input;
-            var outptr = (float*)output;
+            float* inptr = (float*)input;
+            float* outptr = (float*)output;
 
             for (int i = 0; i < frameCount; i++)
             {
@@ -6282,63 +6133,74 @@ namespace PowerSDR
             bool retval = false;
             phase_buf_l = new float[block_size1];
             phase_buf_r = new float[block_size1];
-            if (console.fwc_init && (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000))
-                unsafe
-                {
-                    switch (console.CurrentModel)
-                    {
-                        case Model.FLEX5000:
-                            in_rx1_l = 0;
-                            in_rx1_r = 1;
-                            break;
-                        case Model.FLEX3000:
-                            in_rx1_l = 1;
-                            in_rx1_r = 0;
-                            break;
-                    }
-                    in_rx2_l = 2;
-                    in_rx2_r = 3;
-                    //in_tx_l = 5;
-                    //in_tx_r = 6;
-                    retval = StartAudio(ref callback8, (uint)block_size1, sample_rate1, host1, input_dev1, output_dev1,
-                                        8, 0, latency1);
-                }
-            else
-                unsafe
-                {
-                    if (num_channels == 2)
-                        retval = StartAudio(ref callback1, (uint)block_size1, sample_rate1, host1, input_dev1,
-                                            output_dev1, num_channels, 0, latency1);
-                    else if (num_channels == 4 || num_channels == 8)
-                    {
-                        if (console.CurrentModel == Model.HPSDR ||
-                            console.CurrentModel == Model.HERMES)
-                        {
-                            JanusAudio.SetNRx(2); //set number of receivers to 2
-                            JanusAudio.SetDuplex(1); // set full duplex mode
 
-                            retval = StartAudio(ref callback3port,
-                                                (uint)block_size1,
-                                                sample_rate1,
-                                                host1,
-                                                input_dev1,
-                                                output_dev1,
-                                                8, //num_channels,
-                                                0,
-                                                latency1);
-                        }
-                        else
-                            retval = StartAudio(ref callback4port,
-                                                (uint)block_size1,
-                                                sample_rate1,
-                                                host1,
-                                                input_dev1,
-                                                output_dev1,
-                                                num_channels,
-                                                0,
-                                                latency1);
-                    }
-                }
+            unsafe
+            {
+                JanusAudio.SetNRx(2); //set number of receivers to 2
+                JanusAudio.SetDuplex(1); // set full duplex mode
+
+                retval = StartAudio(ref callback3port,
+                                    (uint)block_size1,
+                                    sample_rate1);
+            }
+            
+            /*   if (console.fwc_init && (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000))
+                     unsafe
+                     {
+                         switch (console.CurrentModel)
+                         {
+                             case Model.FLEX5000:
+                                 in_rx1_l = 0;
+                                 in_rx1_r = 1;
+                                 break;
+                             case Model.FLEX3000:
+                                 in_rx1_l = 1;
+                                 in_rx1_r = 0;
+                                 break;
+                         }
+                         in_rx2_l = 2;
+                         in_rx2_r = 3;
+                         //in_tx_l = 5;
+                         //in_tx_r = 6;
+                         retval = StartAudio(ref callback8, (uint)block_size1, sample_rate1, host1, input_dev1, output_dev1,
+                                             8, 0, latency1);
+                     }
+                 else
+                     unsafe
+                     {
+                         if (num_channels == 2)
+                             retval = StartAudio(ref callback1, (uint)block_size1, sample_rate1, host1, input_dev1,
+                                                 output_dev1, num_channels, 0, latency1);
+                         else if (num_channels == 4 || num_channels == 8)
+                         {
+                             if (console.CurrentModel == Model.HPSDR ||
+                                 console.CurrentModel == Model.HERMES)
+                             {
+                                 JanusAudio.SetNRx(2); //set number of receivers to 2
+                                 JanusAudio.SetDuplex(1); // set full duplex mode
+
+                                 retval = StartAudio(ref callback3port,
+                                                     (uint)block_size1,
+                                                     sample_rate1,
+                                                     host1,
+                                                     input_dev1,
+                                                     output_dev1,
+                                                     8, //num_channels,
+                                                     0,
+                                                     latency1);
+                             }
+                             else
+                                 retval = StartAudio(ref callback4port,
+                                                     (uint)block_size1,
+                                                     sample_rate1,
+                                                     host1,
+                                                     input_dev1,
+                                                     output_dev1,
+                                                     num_channels,
+                                                     0,
+                                                     latency1);
+                         }
+                     } */
 
             if (!retval) return retval;
 
@@ -6363,7 +6225,7 @@ namespace PowerSDR
                     try
                     {
                         retval = StartAudio_NonJanus(ref callbackVAC, (uint)block_size, sample_rate, host2, input_dev2,
-                                                     output_dev2, num_chan, 1, latency);
+                                                     output_dev2, num_chan, 0, latency);
                     }
                     catch (Exception)
                     {
@@ -6397,7 +6259,7 @@ namespace PowerSDR
                     try
                     {
                         retval = StartAudio_NonJanus(ref callbackVAC2, (uint)block_size, sample_rate, host3, input_dev3,
-                                                     output_dev3, num_chan, 2, latency);
+                                                     output_dev3, num_chan, 1, latency);
                     }
                     catch (Exception)
                     {
@@ -6413,7 +6275,7 @@ namespace PowerSDR
             return retval;
         }
 
-        private static bool using_janus_audio;
+   /*     private static bool using_janus_audio;
         unsafe public static bool StartAudio(ref PA19.PaStreamCallback callback,
                                              uint block_size, double sample_rate, int host_api_index,
                                              int input_dev_index,
@@ -6470,6 +6332,48 @@ namespace PowerSDR
                 }
                 return true;
             }
+        } */
+
+        public static unsafe bool StartAudio(ref PA19.PaStreamCallback callback,
+                                              uint block_size, double sample_rate)
+        {
+            // System.Console.WriteLine("using Ozy/Janus callback");
+            int rc;
+            int no_send = 0;
+            int sample_bits = 24;
+            if (console.Force16bitIQ)
+            {
+                sample_bits = 16;
+            }
+            if (console.NoJanusSend)
+            {
+                no_send = 1;
+            }
+            rc = JanusAudio.StartAudio((int)sample_rate, (int)block_size, callback, sample_bits, no_send);
+            if (rc != 0)
+            {
+                //System.Console.WriteLine("JanusAudio.StartAudio failed w/ rc: " + rc);
+                if (rc == -101) // firmware version error; 
+                {
+                    string fw_err = JanusAudio.getFWVersionErrorMsg();
+                    if (fw_err == null)
+                    {
+                        fw_err = "Bad Firmware levels";
+                    }
+                    MessageBox.Show(fw_err, "HPSDR Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    return false;
+                }
+                else
+                {
+                    MessageBox.Show("Error starting HPSDR hardware, is it connected and powered?", "HPSDR Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            return true;
         }
 
         unsafe public static bool StartAudio_NonJanus(ref PA19.PaStreamCallback callback,
@@ -6524,7 +6428,7 @@ namespace PowerSDR
                     if (error == 0) break; // stop if no error
                 } */
 
-            for (i = 0; i < 25; i++)
+         /*   for (i = 0; i < 25; i++)
             {
                 switch (callback_num)
                 {
@@ -6539,6 +6443,16 @@ namespace PowerSDR
                         break;
                 }
                 if (error == 0) break; // stop if no error
+            } */
+
+            switch (callback_num)
+            {
+                case 0: // VAC1
+                    error = PA19.PA_OpenStream(out stream1, &inparam, &outparam, sample_rate, block_size, 0, callback, 0);
+                    break;
+                case 1: // VAC2
+                    error = PA19.PA_OpenStream(out stream2, &inparam, &outparam, sample_rate, block_size, 0, callback, 1);
+                    break;
             }
 
             if (error != 0)
@@ -6547,7 +6461,7 @@ namespace PowerSDR
                 return false;
             }
 
-            switch (callback_num)
+        /*    switch (callback_num)
             {
                 case 1:
                     error = PA19.PA_StartStream(stream2);
@@ -6557,9 +6471,9 @@ namespace PowerSDR
                     break;
                 default:
                     error = PA19.PA_StartStream(stream1);
-                    Thread.Sleep(10);  // give FW driver a little time to open.  Reduces "flatline" for FW radios.
+                   // Thread.Sleep(10);  // give FW driver a little time to open.  Reduces "flatline" for FW radios.
                     break;
-            }
+            } */
 
             /*if (callback_num == 0)
                 error = PA19.PA_StartStream(stream1);
@@ -6569,6 +6483,12 @@ namespace PowerSDR
             // else
             if (callback_num == 2)
                 error = PA19.PA_StartStream(stream3); */
+
+            switch (callback_num)
+            {
+                case 0: error = PA19.PA_StartStream(stream1); break;
+                case 1: error = PA19.PA_StartStream(stream2); break;
+            }
 
             if (error != 0)
             {
@@ -6599,7 +6519,7 @@ namespace PowerSDR
             }
         }
 
-        public static void StopAudio1()
+    /*    public static void StopAudio1()
         {
             System.Console.WriteLine(@"Stop Audio called");
             if (!using_janus_audio) // using classic portaudio 
@@ -6610,9 +6530,17 @@ namespace PowerSDR
             {
                 JanusAudio.StopAudio();
             }
-        }
+        } */
 
-        unsafe public static void StopAudio1_NonJanus()
+     /*   unsafe public static void StopAudio1_NonJanus()
+        {
+            int error = 0;
+            PA19.PA_AbortStream(stream1);
+            error = PA19.PA_CloseStream(stream1);
+            if (error != 0) PortAudioErrorMessageBox(error);
+        } */
+
+        unsafe public static void StopAudioVAC()
         {
             int error = 0;
             PA19.PA_AbortStream(stream1);
@@ -6620,19 +6548,11 @@ namespace PowerSDR
             if (error != 0) PortAudioErrorMessageBox(error);
         }
 
-        unsafe public static void StopAudioVAC()
+        unsafe public static void StopAudioVAC2()
         {
             int error = 0;
             PA19.PA_AbortStream(stream2);
             error = PA19.PA_CloseStream(stream2);
-            if (error != 0) PortAudioErrorMessageBox(error);
-        }
-
-        unsafe public static void StopAudioVAC2()
-        {
-            int error = 0;
-            PA19.PA_AbortStream(stream3);
-            error = PA19.PA_CloseStream(stream3);
             if (error != 0) PortAudioErrorMessageBox(error);
         }
 
