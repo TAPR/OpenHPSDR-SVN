@@ -1,0 +1,76 @@
+Quartus II Archive log --	C:/Users/Joe Martin/Desktop/Hermes_v1.7/Hermes_v1.8.qarlog
+
+Archive:	C:/Users/Joe Martin/Desktop/Hermes_v1.7/Hermes_v1.8.qar
+Date:		Sun Sep 23 13:10:55 2012
+Quartus II 32-bit		11.1 Build 259 01/25/2012 SP 2.11 SJ Web Edition
+
+	=========== Files Selected: ===========
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/ASMI.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/ASMI_interface.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Apollo.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Attenuator.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/C10_PLL.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/C122_PLL.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/CRC32.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/DHCP.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/EEPROM.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/EPCS_fifo.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/FIFO.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/HPF_select.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Hermes.dpf
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Hermes.qpf
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Hermes.qsf
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Hermes.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Hermes_ADC.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Hermes_Tx_fifo_ctrl.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Hermes_assignment_defaults.qdf
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Hermes_clk_lrclk_gen.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/I2S_rcv.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/I2S_xmit.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/LPF_select.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Led_control.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Led_flash.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/MDIO.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/PHY_Rx_fifo.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/PLL_IF.ppf
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/PLL_IF.qip
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/PLL_IF.vhd
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/PLL_clocks.ppf
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/PLL_clocks.qip
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/PLL_clocks.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Rx_MAC.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/SPI.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/SP_fifo.qip
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/SP_fifo.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/TLV320_SPI.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Tx_MAC.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/Tx_fifo.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/assignment_defaults.qdf
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/cdc_mcp.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/cdc_sync.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/cic.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/cic_comb.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/cic_integrator.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/cicint.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/clk_div.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/cordic.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/cpl_cordic.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/debounce.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/fir.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/fir_coeffs.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/fir_coeffs_rom.hex
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/fir_coeffs_rom.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/fir_mac.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/fir_shiftreg.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/incremental_db/compiled_partitions/Hermes.db_info
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/mult_24Sx24S.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/phase_accumulator.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/pulsegen.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/receiver.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/receiver_vna.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/sp_rcv_ctrl.v
+C:/Users/Joe Martin/Desktop/Hermes_v1.7/varcic.v
+	======= Total: 65 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
