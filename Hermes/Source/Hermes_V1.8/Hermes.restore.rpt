@@ -1,0 +1,141 @@
+Restore Archived Project report for Hermes
+Wed Apr 20 19:46:15 2011
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Restore Archived Project Summary
+  3. Restore Archived Project Messages
+  4. Files Restored
+  5. Files Not Restored
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------+
+; Restore Archived Project Summary                                        ;
++---------------------------------+---------------------------------------+
+; Restore Archived Project Status ; Successful - Wed Apr 20 19:46:15 2011 ;
+; Revision Name                   ; Hermes                                ;
+; Top-level Entity Name           ; Hermes                                ;
+; Family                          ; Stratix II                            ;
++---------------------------------+---------------------------------------+
+
+
++-----------------------------------+
+; Restore Archived Project Messages ;
++-----------------------------------+
+Info: Successfully restored 'C:/HPSDR/trunk/WIP/Hermes/Verilog-Hermes-Apollo-USB/Hermes-Apollo-USB.qar' into the 'C:/HPSDR/trunk/WIP/Hermes/Verilog-Hermes-Apollo-USB/' directory
+Info: Generated report 'Hermes.restore.rpt'
+Info: Evaluation of Tcl script c:/altera/91sp2/quartus/common/tcl/apps/qpm/qar.tcl was successful
+Info: Quartus II Shell was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 93 megabytes
+    Info: Processing ended: Wed Apr 20 19:46:15 2011
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
+
+
++-------------------------+
+; Files Restored          ;
++-------------------------+
+; File Name               ;
++-------------------------+
+; Apollo.v                ;
+; C10_PLL.v               ;
+; C122_PLL.v              ;
+; DigAudioOut48k16bI2S.v  ;
+; FIFO.v                  ;
+; HPF_select.v            ;
+; Hermes-old.v            ;
+; Hermes.asm.rpt          ;
+; Hermes.done             ;
+; Hermes.dpf              ;
+; Hermes.fit.rpt          ;
+; Hermes.fit.summary      ;
+; Hermes.flow.rpt         ;
+; Hermes.map.rpt          ;
+; Hermes.map.smsg         ;
+; Hermes.map.summary      ;
+; Hermes.pin              ;
+; Hermes.pof              ;
+; Hermes.qsf              ;
+; Hermes.sof              ;
+; Hermes.tan.rpt          ;
+; Hermes.tan.summary      ;
+; Hermes.v                ;
+; Hermes_ADC.v            ;
+; Hermes_Tx_fifo_ctrl.v   ;
+; Hermes_clk_lrclk_gen.v  ;
+; I2S_rcv.v               ;
+; I2S_xmit.v              ;
+; LPF_select.v            ;
+; SPI.v                   ;
+; TLV320_SPI.v            ;
+; async_usb.v             ;
+; cdc_mcp.v               ;
+; cdc_sync.v              ;
+; cic.v                   ;
+; cic_comb.v              ;
+; cic_integrator.v        ;
+; cicint.v                ;
+; clk_div.v               ;
+; cordic.v                ;
+; cordic_16.v             ;
+; cpl_cordic.v            ;
+; Hermes.cbx.xml          ;
+; Hermes.qpf              ;
+; db/altsyncram_a0a1.tdf  ;
+; db/altsyncram_j3j1.tdf  ;
+; db/altsyncram_jia1.tdf  ;
+; db/altsyncram_v3j1.tdf  ;
+; db/cmpr_edc.tdf         ;
+; db/cntr_4pf.tdf         ;
+; db/mult_6hp.tdf         ;
+; db/mult_t311.tdf        ;
+; db/shift_taps_bjs.tdf   ;
+; debounce.v              ;
+; division.v              ;
+; fir.v                   ;
+; fir_coeffs.v            ;
+; fir_coeffs_rom.hex      ;
+; fir_coeffs_rom.v        ;
+; fir_mac.v               ;
+; fir_shiftreg.v          ;
+; mult_24Sx24S.v          ;
+; oddClockDiv.v           ;
+; phase_accumulator.v     ;
+; pulsegen.v              ;
+; receiver.v              ;
+; varcic.v                ;
+; assignment_defaults.qdf ;
++-------------------------+
+
+
++--------------------+
+; Files Not Restored ;
++--------------------+
+; File Name          ;
++--------------------+
+
+
