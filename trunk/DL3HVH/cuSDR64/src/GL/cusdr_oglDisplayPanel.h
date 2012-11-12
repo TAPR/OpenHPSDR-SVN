@@ -122,7 +122,6 @@ private:
 	QString		m_metisVersion;
 	QString		m_alexVersion;
 	QString		m_mercuryString;
-	QString		m_pennyString;
 	QString		m_penelopeString;
 	QString		m_pennylaneString;
 	QString		m_excaliburString;
@@ -225,11 +224,27 @@ private:
 	int		m_random;
 	int		m_currentReceiver;
 	
+	int		m_pointStringWidth;
+	int		m_blankWidth;
+	int		m_blankWidthf;
+	int		m_blankWidthf1;
+	int		m_blankWidthf2;
+	int		m_fUnitStringWidth;
+	int		m_blankHeight;
+	int		m_freqStringLeftPos;
+	int		m_versionStringWidth;
 	int		m_syncWidth;
 	int		m_adcWidth;
 	int		m_packetLossWidth;
 	int		m_sendIQWidth;
 	int		m_recvAudioWidth;
+	int		m_metisStringWidth;
+	int		m_mercuryStringWidth;
+	int		m_penelopeStringWidth;
+	int		m_pennylaneStringWidth;
+	int		m_hermesStringWidth;
+	int		m_alexStringWidth;
+	int		m_excaliburStringWidth;
 	int		m_AttnWidth;
 	int		m_ditherWidth;
 	int		m_randomWidth;

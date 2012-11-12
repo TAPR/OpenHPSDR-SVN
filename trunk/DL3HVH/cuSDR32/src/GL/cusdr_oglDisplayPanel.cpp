@@ -93,6 +93,7 @@ OGLDisplayPanel::OGLDisplayPanel(QWidget *parent)
 	setAutoFillBackground(false);
 	setMouseTracking(true);
 
+	m_freqStringLeftPos = 20;
 	setupDisplayRegions(size());
 
 	fonts = new CFonts(this);
@@ -350,6 +351,17 @@ void OGLDisplayPanel::setupConnections() {
 
 void OGLDisplayPanel::setupTextstrings() {
 
+	m_blankWidth = m_oglTextSmall->fontMetrics().tightBoundingRect("I").width();
+	m_blankHeight = m_oglTextSmall->fontMetrics().tightBoundingRect("I").height();
+
+	m_pointStringWidth = m_oglTextFreq1->fontMetrics().width(".");
+	m_blankWidthf = m_oglTextFreq1->fontMetrics().tightBoundingRect("59.999").width();
+	m_blankWidthf1 = m_oglTextFreq1->fontMetrics().width("0");
+	m_blankWidthf2 = m_oglTextFreq2->fontMetrics().width("0");
+	m_fUnitStringWidth = m_oglTextFreq2->fontMetrics().width("MHz");
+
+	m_versionStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect("5.52").width();
+
 	m_SYNCString = QString("SYNC");
 	m_syncWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_SYNCString).width();
 
@@ -387,13 +399,25 @@ void OGLDisplayPanel::setupTextstrings() {
 	m_12288MHzWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_12288MHzString).width();
 
 	m_mercuryString = QString("Mercury ");
-	m_pennyString = QString("Penny[Lane] ");
+	m_mercuryStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_mercuryString).width();
+
 	m_penelopeString = QString("Penelope ");
+	m_penelopeStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_penelopeString).width();
+
 	m_pennylaneString = QString("Pennylane ");
+	m_pennylaneStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_pennylaneString).width();
+
 	m_excaliburString = QString("Excalibur ");
+	m_excaliburStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_excaliburString).width();
+
 	m_metisString = QString("Metis ");
+	m_metisStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_metisString).width();
+
 	m_alexString = QString("Alex ");
+	m_alexStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_alexString).width();
+
 	m_hermesString = QString("Hermes ");
+	m_hermesStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_hermesString).width();
 
 }
 
@@ -456,143 +480,128 @@ void OGLDisplayPanel::paintUpperRegion() {
 
 	QString str;
 
-	GLint x1 = m_rxRect.left();
-	GLint y1 = m_rxRect.top();
+	GLint x1 = m_rxRect.left() + m_blankWidth;
+	GLint y1 = m_rxRect.top() + m_upperRectY;
 
-	//QFontMetrics d_fm(m_smallFont);
-	//QFontMetrics d_fm(m_fonts.smallFont);
-	//int fontHeight = d_fm.tightBoundingRect("M").height();
-	
 	// sync status
 	str = QString(m_SYNCString);
-	//QRect rect = QRect(x1+2, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 5, fontHeight + 4);
-	QRect rect = QRect(x1+2, y1 + m_upperRectY, m_fonts.smallFontMetrics->tightBoundingRect(str).width() + 5, m_fonts.fontHeightSmallFont + 4);
+	QRect rect = QRect(x1, y1, m_syncWidth + 5*m_blankWidth, m_blankHeight + 4);
 
 	switch (m_syncStatus) {
 
 		case 0:
 			drawGLRect(rect, QColor(68, 68, 68), -2.0f);
-			//qglColor(QColor(100, 100, 100));
 			break;
 
 		case 1:
 			drawGLRect(rect, QColor(56, 242, 115), -2.0f);
-			//qglColor(QColor(56, 242, 115));
 			break;
 
 		case 2:
 			drawGLRect(rect, QColor(242, 56, 109), -2.0f);
-			//qglColor(QColor(242, 56, 109));
 			break;
 	}
 	qglColor(QColor(0, 0, 0));
-	m_oglTextSmallItalic->renderText(x1 + 3, y1 + m_upperRectY, m_SYNCString);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, m_SYNCString);
 
 	// ADC status
 	str = QString(m_ADCString);
-	//rect = QRect(x1+36, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 5, fontHeight + 4);
-	rect = QRect(x1+36, y1 + m_upperRectY, m_fonts.smallFontMetrics->tightBoundingRect(str).width() + 5, m_fonts.fontHeightSmallFont + 4);
+	x1 += m_syncWidth + 7*m_blankWidth;
+	rect = QRect(x1, y1, m_adcWidth + 5*m_blankWidth, m_blankHeight + 4);
 
 	switch (m_adcStatus) {
 
 		case 0:
 			drawGLRect(rect, QColor(68, 68, 68), -2.0f);
-			//qglColor(QColor(100, 100, 100));
 			break;
 
 		case 1:
 			drawGLRect(rect, QColor(56, 242, 115), -2.0f);
-			//qglColor(QColor(56, 242, 115));
 			break;
 
 		case 2:
 			drawGLRect(rect, QColor(242, 56, 109), -2.0f);
-			//qglColor(QColor(242, 56, 109));
 			break;
 	}
 	qglColor(QColor(0, 0, 0));
-	m_oglTextSmallItalic->renderText(m_syncWidth + 11, y1 + m_upperRectY, m_ADCString);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, m_ADCString);
 
 	// Packet loss status
 	str = QString(m_PacketLossString);
-	//rect = QRect(x1+63, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 5, fontHeight + 4);
-	rect = QRect(x1+63, y1 + m_upperRectY,  m_fonts.smallFontMetrics->tightBoundingRect(str).width() + 5, m_fonts.fontHeightSmallFont + 4);
+	x1 += m_adcWidth + 7*m_blankWidth;
+	rect = QRect(x1, y1,  m_packetLossWidth + 5*m_blankWidth, m_blankHeight + 4);
 
 	switch (m_packetLossStatus) {
 
 		case 0:
 			drawGLRect(rect, QColor(68, 68, 68), -2.0f);
-			//qglColor(QColor(100, 100, 100));
 			break;
 
 		case 1:
 			drawGLRect(rect, QColor(56, 242, 115), -2.0f);
-			//qglColor(QColor(56, 242, 115));
 			break;
 
 		case 2:
 			drawGLRect(rect, QColor(242, 56, 109), -2.0f);
-			//qglColor(QColor(242, 56, 109));
 			break;
 	}
 	qglColor(QColor(0, 0, 0));
-	m_oglTextSmallItalic->renderText(m_syncWidth + m_adcWidth + 18, y1 + m_upperRectY, m_PacketLossString);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, m_PacketLossString);
 
-	// send IQ data status
-	//str = QString(m_sendIQString);
-	//rect = QRect(x1+63, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 6, fontHeight + 4);
+//	// send IQ data status
+//	str = QString(m_sendIQString);
+//	rect = QRect(x1+63, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 6, fontHeight + 4);
+//
+//	switch (m_sendIQStatus) {
+//
+//		case 0:
+//			drawGLRect(rect, QColor(68, 68, 68), -2.0f);
+//			//qglColor(QColor(100, 100, 100));
+//			break;
+//
+//		case 1:
+//			drawGLRect(rect, QColor(56, 242, 115), -2.0f);
+//			//qglColor(QColor(56, 242, 115));
+//			break;
+//
+//		case 2:
+//			drawGLRect(rect, QColor(242, 56, 109), -2.0f);
+//			//qglColor(QColor(242, 56, 109));
+//			break;
+//	}
+//	qglColor(QColor(0, 0, 0));
+//	m_oglTextSmallItalic->renderText(m_syncWidth + m_adcWidth + 19, y1 + m_upperRectY, m_sendIQString);
 
-	//switch (m_sendIQStatus) {
+//	// receiver Audio status
+//	str = QString(m_recvAudioString);
+//	rect = QRect(x1+108, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 8, fontHeight + 4);
+//
+//	switch (m_recvAudioStatus) {
+//
+//		case 0:
+//			drawGLRect(rect, QColor(68, 68, 68), -2.0f);
+//			//qglColor(QColor(100, 100, 100));
+//			break;
+//
+//		case 1:
+//			drawGLRect(rect, QColor(56, 242, 115), -2.0f);
+//			//qglColor(QColor(56, 242, 115));
+//			break;
+//
+//		case 2:
+//			drawGLRect(rect, QColor(242, 56, 109), -2.0f);
+//			//qglColor(QColor(242, 56, 109));
+//			break;
+//	}
+//	qglColor(QColor(0, 0, 0));
+//	m_oglTextSmallItalic->renderText(m_syncWidth + m_adcWidth + m_sendIQWidth + 29, y1 + m_upperRectY, m_recvAudioString);
 
-	//	case 0:
-	//		drawGLRect(rect, QColor(68, 68, 68), -2.0f);
-	//		//qglColor(QColor(100, 100, 100));
-	//		break;
-
-	//	case 1:
-	//		drawGLRect(rect, QColor(56, 242, 115), -2.0f);
-	//		//qglColor(QColor(56, 242, 115));
-	//		break;
-
-	//	case 2:
-	//		drawGLRect(rect, QColor(242, 56, 109), -2.0f);
-	//		//qglColor(QColor(242, 56, 109));
-	//		break;
-	//}
-	//qglColor(QColor(0, 0, 0));
-	//m_oglTextSmallItalic->renderText(m_syncWidth + m_adcWidth + 19, y1 + m_upperRectY, m_sendIQString);
-
-	// receiver Audio status
-	//str = QString(m_recvAudioString);
-	//rect = QRect(x1+108, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 8, fontHeight + 4);
-
-	//switch (m_recvAudioStatus) {
-
-	//	case 0:
-	//		drawGLRect(rect, QColor(68, 68, 68), -2.0f);
-	//		//qglColor(QColor(100, 100, 100));
-	//		break;
-
-	//	case 1:
-	//		drawGLRect(rect, QColor(56, 242, 115), -2.0f);
-	//		//qglColor(QColor(56, 242, 115));
-	//		break;
-
-	//	case 2:
-	//		drawGLRect(rect, QColor(242, 56, 109), -2.0f);
-	//		//qglColor(QColor(242, 56, 109));
-	//		break;
-	//}
-	//qglColor(QColor(0, 0, 0));
-	//m_oglTextSmallItalic->renderText(m_syncWidth + m_adcWidth + m_sendIQWidth + 29, y1 + m_upperRectY, m_recvAudioString);
-
-	//int d = m_syncWidth + m_adcWidth + m_sendIQWidth + m_recvAudioWidth + 40;
-	int d = m_syncWidth + m_adcWidth + m_packetLossWidth + 40;
 
 	// Metis status
 	str = m_metisString;
-	//rect = QRect(d-2, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 22, fontHeight + 4);
-	rect = QRect(d-2, y1 + m_upperRectY, m_fonts.smallFontMetrics->tightBoundingRect(str).width() + 22, m_fonts.fontHeightSmallFont + 4);
+	x1 += m_packetLossWidth + 40*m_blankWidth;
+
+	rect = QRect(x1, y1, m_metisStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
 	
 	if (m_hwInterface == QSDR::Metis) {
 
@@ -611,11 +620,14 @@ void OGLDisplayPanel::paintUpperRegion() {
 		qglColor(QColor(0, 0, 0));
 	}
 		
-	m_oglTextSmallItalic->renderText(d, y1 + m_upperRectY, 1.0f, str);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+
 
 	// Mercury status
 	str = m_mercuryString;
-	rect = QRect(d+50, y1 + m_upperRectY, m_fonts.smallFontMetrics->tightBoundingRect(str).width() + 22, m_fonts.fontHeightSmallFont + 4);
+	x1 += m_metisStringWidth + m_versionStringWidth + 7*m_blankWidth;
+
+	rect = QRect(x1, y1, m_mercuryStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
 
 	if (set->getMercuryPresence() && m_hwInterface == QSDR::Metis) {
 
@@ -634,53 +646,53 @@ void OGLDisplayPanel::paintUpperRegion() {
 		qglColor(QColor(0, 0, 0));
 	}
 
-	m_oglTextSmallItalic->renderText(d+52, y1 + m_upperRectY, 1.0f, str);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+
 
 	// Penelope status
 	str = m_penelopeString;
-	rect = QRect(d+116, y1 + m_upperRectY, m_fonts.smallFontMetrics->tightBoundingRect(str).width() + 22, m_fonts.fontHeightSmallFont + 4);
+	x1 += m_mercuryStringWidth + m_versionStringWidth + 7*m_blankWidth;
 
 	if (set->getPenelopePresence() && m_hwInterface == QSDR::Metis) {
 
 		str = m_penelopeString;
+		rect = QRect(x1, y1, m_penelopeStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
 		drawGLRect(rect, m_textBackgroundColor, -2.0f);
 		if (m_dataEngineState == QSDR::DataEngineUp) {
 
 			str.append(m_penelopeVersion);
 			qglColor(QColor(206, 236, 248));
 		}
-		else {
-
-			//str = m_pennyString;
+		else
 			qglColor(QColor(0, 0, 0));
-		}
 	}
 	else if (set->getPennyLanePresence() && m_hwInterface == QSDR::Metis) {
 
 		str = m_pennylaneString;
+		rect = QRect(x1, y1, m_pennylaneStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
 		drawGLRect(rect, m_textBackgroundColor, -2.0f);
 		if (m_dataEngineState == QSDR::DataEngineUp) {
 
 			str.append(m_pennylaneVersion);
 			qglColor(QColor(206, 236, 248));
 		}
-		else {
-
-			//str = m_pennyString;
+		else
 			qglColor(QColor(0, 0, 0));
-		}
 	}
 	else {
 
+		rect = QRect(x1, y1, m_penelopeStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
 		drawGLRect(rect, QColor(68, 68, 68), -2.0f);
 		qglColor(QColor(0, 0, 0));
 	}
-	
-	m_oglTextSmallItalic->renderText(d+118, y1 + m_upperRectY, str);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+
 
 	// Hermes status
 	str = m_hermesString;
-	rect = QRect(d+187, y1 + m_upperRectY,  m_fonts.smallFontMetrics->tightBoundingRect(str).width() + 22, m_fonts.fontHeightSmallFont + 4);
+	x1 += m_penelopeStringWidth + m_versionStringWidth + 7*m_blankWidth;
+
+	rect = QRect(x1, y1,  m_hermesStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
 
 	if (set->getHPSDRHardware() == 1) {
 
@@ -699,12 +711,14 @@ void OGLDisplayPanel::paintUpperRegion() {
 		qglColor(QColor(0, 0, 0));
 	}
 	
-	m_oglTextSmallItalic->renderText(d+189, y1 + m_upperRectY, str);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+
 
 	// Excalibur status
 	str = m_excaliburString;
-	//rect = QRect(d+250, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 22, fontHeight + 4);
-	rect = QRect(d+250, y1 + m_upperRectY,  m_fonts.smallFontMetrics->tightBoundingRect(str).width() + 2, m_fonts.fontHeightSmallFont + 4);
+	x1 += m_hermesStringWidth + m_versionStringWidth + 7*m_blankWidth;
+
+	rect = QRect(x1, y1, m_hermesStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
 
 	if (set->getExcaliburPresence() && m_hwInterface == QSDR::Metis) {
 
@@ -723,12 +737,14 @@ void OGLDisplayPanel::paintUpperRegion() {
 		qglColor(QColor(0, 0, 0));
 	}
 	
-	m_oglTextSmallItalic->renderText(d+252, y1 + m_upperRectY, str);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+
 	
 	// Alex status
 	str = m_alexString;
-	//rect = QRect(d+322, y1 + m_upperRectY, d_fm.tightBoundingRect(str).width() + 22, fontHeight + 4);
-	rect = QRect(d+302, y1 + m_upperRectY, m_fonts.smallFontMetrics->tightBoundingRect(str).width() + 2, m_fonts.fontHeightSmallFont + 4);
+	x1 += m_hermesStringWidth + m_versionStringWidth + 7*m_blankWidth;
+
+	rect = QRect(x1, y1, m_alexStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
 
 	if (set->getAlexPresence()) {
 
@@ -747,56 +763,67 @@ void OGLDisplayPanel::paintUpperRegion() {
 		qglColor(QColor(0, 0, 0));
 	}
 	
-	//m_oglTextSmallItalic->renderText(d+324, y1 + m_upperRectY, str);
-	m_oglTextSmallItalic->renderText(d+304, y1 + m_upperRectY, str);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
 }
 
 void OGLDisplayPanel::paintLowerRegion() {
 
 	QString str;
 
-	GLint x1 = m_rxRect.left();
-	//GLint y1 = m_rxRect.top();
-	GLint y2 = m_rxRect.height();
+	GLint x1 = m_rxRect.left() + m_blankWidth;
+	GLint y2 = m_rxRect.height() - m_lowerRectY;
 	
 	// Attenuator
 	qglColor(QColor(106, 136, 148));
-	m_oglTextSmallItalic->renderText(x1 + 3, y2 - m_lowerRectY, m_AttnString);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_AttnString);
 
+	x1 += m_AttnWidth + 4*m_blankWidth;
 	if (m_mercuryAttenuator == 1)
 		str = "0 dB";
 	else
 		str = "-20 dB";
 
+	int attnValueWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(str).width();
 	qglColor(m_activeTextColor);
-	m_oglTextSmallItalic->renderText(m_AttnWidth + 8, y2 - m_lowerRectY, str);
+	m_oglTextSmallItalic->renderText(x1, y2, str);
 
 	// Dither status
+	x1 += attnValueWidth + 10*m_blankWidth;
+
 	if (m_dither == 1)
 		qglColor(m_activeTextColor);
 	else
 		qglColor(QColor(68, 68, 68));
 
-	m_oglTextSmallItalic->renderText(m_AttnWidth + 50, y2 - m_lowerRectY, m_ditherString);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_ditherString);
 
 	// Random status
+	x1 += m_ditherWidth + 10*m_blankWidth;
+
 	if (m_random == 1)
 		qglColor(m_activeTextColor);
 	else
 		qglColor(QColor(68, 68, 68));
 
-	m_oglTextSmallItalic->renderText(m_AttnWidth + m_ditherWidth + 60, y2 - m_lowerRectY, m_randomString);
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_randomString);
 
 	// Sample rate status
+	x1 += m_randomWidth + 20*m_blankWidth;
 	str = "%1";
+
 	qglColor(QColor(166, 196, 208));
-	m_oglTextSmallItalic->renderText(m_AttnWidth + m_ditherWidth + m_randomWidth + 80, y2 - m_lowerRectY, str.arg(m_sample_rate, 3, 10, QLatin1Char(' ')));
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, str.arg(m_sample_rate, 3, 10, QLatin1Char(' ')));
+
 	int samplerateWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(str.arg(m_sample_rate, 3, 10, QLatin1Char(' '))).width();
+	x1 += samplerateWidth + 4*m_blankWidth;
 
 	str = "kHz";
-	m_oglTextSmallItalic->renderText(m_AttnWidth + m_ditherWidth + m_randomWidth + samplerateWidth + 85, y2 - m_lowerRectY, str);
+	int samplerateUnitWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(str).width();
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, str);
+
 
 	// server modus status
+	x1 += samplerateUnitWidth + 15*m_blankWidth;
 	switch (m_serverMode) {
 
 		case QSDR::DemoMode:
@@ -824,24 +851,32 @@ void OGLDisplayPanel::paintLowerRegion() {
 			str = "Chirp Dec File";
 			break;
 	}
-	qglColor(QColor(166, 196, 208));
-	m_oglTextSmallItalic->renderText(m_AttnWidth + m_ditherWidth + m_randomWidth + 145, y2 - m_lowerRectY, str);
+	int serverModeStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(str).width();
 
+	qglColor(QColor(166, 196, 208));
+	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, str);
+
+
+	x1 += serverModeStringWidth + 15*m_blankWidth;
 	if (m_hwInterface == QSDR::Metis) {
 
 		// 10 MHz source status
 		qglColor(QColor(106, 136, 148));
-		m_oglTextSmallItalic->renderText(m_AttnWidth + m_ditherWidth + m_randomWidth + 200, y2 - m_lowerRectY, m_10MHzString);
+		m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_10MHzString);
 
+		x1 += m_10MHzWidth + 4*m_blankWidth;
 		qglColor(QColor(166, 196, 208));
-		m_oglTextSmallItalic->renderText(m_AttnWidth + m_ditherWidth + m_randomWidth + m_10MHzWidth + 205, y2 - m_lowerRectY, m_src10mhz);
+		int src10MHStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_src10mhz).width();
+		m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_src10mhz);
 
 		// 122.88 MHz source status
+		x1 += src10MHStringWidth + 10*m_blankWidth;
 		qglColor(QColor(106, 136, 148));
-		m_oglTextSmallItalic->renderText(m_AttnWidth + m_ditherWidth + m_randomWidth + m_10MHzWidth + 260, y2 - m_lowerRectY, m_12288MHzString);
+		m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_12288MHzString);
 
+		x1 += m_12288MHzWidth + 4*m_blankWidth;
 		qglColor(QColor(166, 196, 208));
-		m_oglTextSmallItalic->renderText(m_AttnWidth + m_ditherWidth + m_randomWidth + m_10MHzWidth + m_12288MHzWidth + 265, y2 - m_lowerRectY, m_src122_88mhz);
+		m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_src122_88mhz);
 	}
 }
 
@@ -849,49 +884,55 @@ void OGLDisplayPanel::paintRxRegion() {
 
 	QString str;
 
-	GLint x1 = m_rxRect.left();
-	GLint y1 = m_rxRect.top();
+	GLint x1 = m_rxRect.left() + 20;
+	GLint y1 = m_rxRect.top() + m_freqDigitsPosY;
 	
 	// draw background
 	if (m_dataEngineState == QSDR::DataEngineUp) {
 
-		//drawGLRect(m_rxRect, Qt::black, m_bkgColor2, -3.0f, false);
 		drawGLRect(m_rect, Qt::black, m_bkgColor2, -3.0f, false);
 		qglColor(m_activeTextColor);
 	}
 	else {
 
-		//drawGLRect(m_rxRect, QColor(0, 0, 0, 255), -3.0f);
 		drawGLRect(m_rect, QColor(0, 0, 0, 255), -3.0f);
 		qglColor(QColor(68, 68, 68));
 	}
 
 	str = "%1.%2";
+
 	int f1 = m_frequencyList[m_currentReceiver].freqMHz;
 	int f2 = m_frequencyList[m_currentReceiver].freqkHz;
 
-	int offset = x1;
-	if (f1 / 1000 < 10)
-		offset += 41;
-	else
-		offset += 21;
+	QString f1str = str.arg(f1/1000).arg(f1 - 1000 * (int)(f1/1000), 3, 10, QLatin1Char('0'));
 
-	//if (f1 / 1000 < 10)
-		m_oglTextFreq1->renderText(offset, y1 + m_freqDigitsPosY, str.arg(f1/1000).arg(f1 - 1000 * (int)(f1/1000), 3, 10, QLatin1Char('0')));
-	//else
-	//	m_oglTextFreq1->renderText(x1 + 21, y1 + m_freqDigitsPosY, str.arg(f1/1000).arg(f1 - 1000 * (int)(f1/1000), 3, 10, QLatin1Char('0')));
+	if (f1 / 1000 < 10)
+		x1 += m_blankWidthf1;
+
+	m_freqStringLeftPos = x1;
+	m_oglTextFreq1->renderText(x1, y1, f1str);
 
 	str = "%1";
-	m_oglTextFreq2->renderText(x1 + 137, y1 + m_freqDigitsPosY + 1, str.arg(f2, 3, 10, QLatin1Char('0')));
-	m_oglTextFreq1->renderText(x1 + 186, y1 + m_freqDigitsPosY - 1, "MHz");
+	x1 = m_rxRect.left() + m_blankWidthf + 2*m_blankWidthf2;
+
+	QString f2str = str.arg(f2, 3, 10, QLatin1Char('0'));
+	//int f2strWidth = m_oglTextFreq2->fontMetrics().tightBoundingRect(f2str).width();
+
+	m_oglTextFreq2->renderText(x1, y1 + 1, f2str);
+
+	//x1 += f2strWidth + m_blankWidthf2;
+	x1 = m_rxRect.left() + m_blankWidthf + 6*m_blankWidthf2;
+	m_oglTextFreq1->renderText(x1, y1 - 1, "MHz");
 	
 	// current mouse wheel step size
 	str = "step: %1";
-	m_oglTextNormal->renderText(x1 + 280, y1 + m_freqDigitsPosY + 2, str.arg(set->getValue1000(m_mouseWheelFreqStep, 0, "Hz")));
+	x1 += m_fUnitStringWidth + 4*m_blankWidthf2;
+
+	m_oglTextNormal->renderText(x1, y1 + 2, str.arg(set->getValue1000(m_mouseWheelFreqStep, 0, "Hz")));
 
 	// current receiver
 	str = "Rx: %1";
-	m_oglTextBig->renderText(x1 + 280, y1 + m_freqDigitsPosY + 17, str.arg(m_currentReceiver + 1));
+	m_oglTextBig->renderText(x1, y1 + 1.5f * m_fonts.fontHeightBigFont, str.arg(m_currentReceiver + 1));
 
 	// frequency info
 	if (m_oldFreq != m_frequencyList[m_currentReceiver].frequency) {
@@ -900,7 +941,7 @@ void OGLDisplayPanel::paintRxRegion() {
 		m_oldFreq = m_frequencyList[m_currentReceiver].frequency;
 	}
 
-	m_oglTextSmall->renderText(offset, y1 + m_freqDigitsPosY + 42, m_bandText);
+	m_oglTextSmall->renderText(m_freqStringLeftPos, y1 + 1.75*m_fonts.fontHeightFreqFont1, m_bandText);
 }
 
 void OGLDisplayPanel::paintSMeter() {
@@ -1977,15 +2018,33 @@ void OGLDisplayPanel::setupDisplayRegions(QSize size) {
 	//DISPLAYPANEL_DEBUG << "            d:" << d;
 	//DISPLAYPANEL_DEBUG << "m_smeterRectWidth:" << m_smeterRect.width();
 	//DISPLAYPANEL_DEBUG << "m_sMeterOffset:" << m_sMeterOffset;
-	
-	m_freg1 		 = QRegion(QRect(166, 35, 8, m_fonts.fontHeightFreqFont2));
-	m_freg10 		 = QRegion(QRect(152, 35, 8, m_fonts.fontHeightFreqFont2));
-	m_freg100 		 = QRegion(QRect(138, 35, 8, m_fonts.fontHeightFreqFont2));
-	m_freg1000 		 = QRegion(QRect(112, 35, 12, m_fonts.fontHeightFreqFont1));
-	m_freg10000 	 = QRegion(QRect(93, 35, 12, m_fonts.fontHeightFreqFont1));
-	m_freg100000	 = QRegion(QRect(73, 35, 12, m_fonts.fontHeightFreqFont1));
-	m_freg1000000	 = QRegion(QRect(41, 35, 12, m_fonts.fontHeightFreqFont1));
-	m_freg10000000	 = QRegion(QRect(23, 35, 12, m_fonts.fontHeightFreqFont1));
+
+	int x = m_rxRect.left() + 20;
+	int y = m_rxRect.top() + m_freqDigitsPosY + 10;
+
+	m_freg10000000	 = QRegion(QRect(x, y, m_blankWidthf1, m_fonts.fontHeightFreqFont1));
+
+	x += m_blankWidthf1;
+	m_freg1000000	 = QRegion(QRect(x, y, m_blankWidthf1, m_fonts.fontHeightFreqFont1));
+
+	x += m_blankWidthf1;
+	m_freg100000	 = QRegion(QRect(x, y, m_blankWidthf1, m_fonts.fontHeightFreqFont1));
+
+	x += m_blankWidthf1 + m_pointStringWidth;
+	m_freg10000 	 = QRegion(QRect(x, y, m_blankWidthf1, m_fonts.fontHeightFreqFont1));
+
+	x += m_blankWidthf1;
+	m_freg1000 		 = QRegion(QRect(x, y, m_blankWidthf1, m_fonts.fontHeightFreqFont1));
+
+	//x += m_blankWidthf1;
+	x = m_rxRect.left() + m_blankWidthf + 2*m_blankWidthf2;
+	m_freg100 		 = QRegion(QRect(x, y, m_blankWidthf2, m_fonts.fontHeightFreqFont2));
+
+	x += m_blankWidthf2;
+	m_freg10 		 = QRegion(QRect(x, y, m_blankWidthf2, m_fonts.fontHeightFreqFont2));
+
+	x += m_blankWidthf2;
+	m_freg1 		 = QRegion(QRect(x, y, m_blankWidthf2, m_fonts.fontHeightFreqFont2));
 
 	m_smeterRenew = true;
 }
