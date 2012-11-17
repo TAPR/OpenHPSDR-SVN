@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structozy__buffer" kind="struct" prot="public">
+    <compoundname>ozy_buffer</compoundname>
+    <includes refid="ozy__buffers_8h" local="no">ozy_buffers.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structozy__buffer_1a5d689d0484bb12d2cbeb71d19e87c421" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structozy__buffer" kindref="compound">ozy_buffer</ref> *</type>
+        <definition>struct ozy_buffer* ozy_buffer::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_buffers.h" line="43" bodyfile="/home/tom/gr-hpsdr/include/ozy_buffers.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structozy__buffer_1a302fcd84741a4201d890de3ca37f4aae" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ozy_buffer::sequence</definition>
+        <argsstring></argsstring>
+        <name>sequence</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_buffers.h" line="44" bodyfile="/home/tom/gr-hpsdr/include/ozy_buffers.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structozy__buffer_1a9259c44da89717c201d1a047c38b9d78" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ozy_buffer::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_buffers.h" line="45" bodyfile="/home/tom/gr-hpsdr/include/ozy_buffers.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structozy__buffer_1a923579e8b765d4b88037f11df04ad3ca" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char ozy_buffer::buffer[512]</definition>
+        <argsstring>[512]</argsstring>
+        <name>buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_buffers.h" line="46" bodyfile="/home/tom/gr-hpsdr/include/ozy_buffers.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="structozy__buffer" kindref="compound">ozy_buffer</ref> </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="497">
+        <label>ozy_buffer</label>
+        <link refid="structozy__buffer"/>
+        <childnode refid="497" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/tom/gr-hpsdr/include/ozy_buffers.h" line="42" bodyfile="/home/tom/gr-hpsdr/include/ozy_buffers.h" bodystart="42" bodyend="47"/>
+    <listofallmembers>
+      <member refid="structozy__buffer_1a923579e8b765d4b88037f11df04ad3ca" prot="public" virt="non-virtual"><scope>ozy_buffer</scope><name>buffer</name></member>
+      <member refid="structozy__buffer_1a5d689d0484bb12d2cbeb71d19e87c421" prot="public" virt="non-virtual"><scope>ozy_buffer</scope><name>next</name></member>
+      <member refid="structozy__buffer_1a302fcd84741a4201d890de3ca37f4aae" prot="public" virt="non-virtual"><scope>ozy_buffer</scope><name>sequence</name></member>
+      <member refid="structozy__buffer_1a9259c44da89717c201d1a047c38b9d78" prot="public" virt="non-virtual"><scope>ozy_buffer</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

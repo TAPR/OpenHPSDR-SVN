@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -O3 -DNDEBUG   -shared -Wl,-soname,libgnuradio-hpsdr.so -o libgnuradio-hpsdr.so CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o /usr/local/lib/libgruel.so /usr/local/lib/libgnuradio-core.so -Wl,-rpath,/usr/local/lib: 

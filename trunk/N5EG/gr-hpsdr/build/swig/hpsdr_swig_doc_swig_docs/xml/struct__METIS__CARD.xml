@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="struct__METIS__CARD" kind="struct" prot="public">
+    <compoundname>_METIS_CARD</compoundname>
+    <includes refid="metis_8h" local="no">metis.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct__METIS__CARD_1a8596cf4b2c9fc0fe06460769bdcd6af2" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char _METIS_CARD::ip_address[16]</definition>
+        <argsstring>[16]</argsstring>
+        <name>ip_address</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/metis.h" line="16" bodyfile="/home/tom/gr-hpsdr/include/metis.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__METIS__CARD_1a9fbf59ece6dc42f085c69baa61b94c44" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char _METIS_CARD::mac_address[18]</definition>
+        <argsstring>[18]</argsstring>
+        <name>mac_address</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/metis.h" line="17" bodyfile="/home/tom/gr-hpsdr/include/metis.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tom/gr-hpsdr/include/metis.h" line="15" bodyfile="/home/tom/gr-hpsdr/include/metis.h" bodystart="15" bodyend="18"/>
+    <listofallmembers>
+      <member refid="struct__METIS__CARD_1a8596cf4b2c9fc0fe06460769bdcd6af2" prot="public" virt="non-virtual"><scope>_METIS_CARD</scope><name>ip_address</name></member>
+      <member refid="struct__METIS__CARD_1a9fbf59ece6dc42f085c69baa61b94c44" prot="public" virt="non-virtual"><scope>_METIS_CARD</scope><name>mac_address</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
