@@ -6777,7 +6777,7 @@ namespace PowerSDR
             // 
             // comboFRSRegion
             // 
-            this.comboFRSRegion.DisplayMember = "United States";
+            //this.comboFRSRegion.DisplayMember = "United States";
             this.comboFRSRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboFRSRegion.FormattingEnabled = true;
             this.comboFRSRegion.Items.AddRange(new object[] {

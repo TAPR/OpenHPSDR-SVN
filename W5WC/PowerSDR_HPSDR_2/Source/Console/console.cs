@@ -1449,6 +1449,29 @@ namespace PowerSDR
             InitCTCSS();
             Splash.SetStatus("Initializing Hardware");				// Set progress point
 
+            if (File.Exists(db_file_name))
+            {
+                ArrayList a = DB.GetVars("State");
+                a.Sort();
+                foreach (string s in a)
+                {
+                    string[] vals = s.Split('/');
+                    string name = vals[0];
+                    string val = vals[1];
+
+                    switch (name)
+                    {
+                        case "BandTextID":
+                            FRSRegion r = (FRSRegion)Enum.Parse(typeof(FRSRegion), val);
+                            CurrentRegion = r;
+                            break;
+                        //  case "chkRX2":
+                        //   RX2Enabled = bool.Parse(val);
+                        //  break;
+                    }
+                }
+            }
+
             // check model in Options table
           //  ArrayList list = DB.GetVars("Options");						// Get the saved list of controls
          //   list.Sort();
@@ -1609,6 +1632,7 @@ namespace PowerSDR
             Splash.SplashForm.Owner = this;						// So that main form will show/focus when splash disappears
             break_in_timer = new HiPerfTimer();
 
+            Init60mChannels();
             InitConsole();										// Initialize all forms and main variables
 
             Splash.SetStatus("Finished");						// Set progress point
@@ -8566,7 +8590,7 @@ namespace PowerSDR
                         isexpanded = Boolean.Parse(val);    //added by w3sz
                         if (isexpanded)   //added by w3sz
                         {
-                            this.ExpandDisplay();
+                           // this.ExpandDisplay();
                             isexpanded = true;
                             iscollapsed = false;
                         }
@@ -22070,8 +22094,7 @@ namespace PowerSDR
         }*/
 
         private FRSRegion current_region;// = FRSRegion.US; //w5wc
-        // private FRSRegion current_region = FRSRegion.UK; //w5wc
-        public FRSRegion CurrentRegion
+          public FRSRegion CurrentRegion
         {
             get { return current_region; }
             set { current_region = value; }
