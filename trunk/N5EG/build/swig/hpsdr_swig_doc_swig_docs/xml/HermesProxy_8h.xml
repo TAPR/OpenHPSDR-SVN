@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="HermesProxy_8h" kind="file">
+    <compoundname>HermesProxy.h</compoundname>
+    <innerclass refid="classHermesProxy" prot="public">HermesProxy</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="HermesProxy_8h_1a59d421cb83f087a7865031fccbb4e0a6" prot="public" static="no">
+        <name>NUMRXIQBUFS</name>
+        <initializer>128</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="34" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="HermesProxy_8h_1a4a941b75a2cf56698a1e769d8214fd50" prot="public" static="no">
+        <name>RXBUFSIZE</name>
+        <initializer>256</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="35" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="HermesProxy_8h_1ae3655a7edeac87231fb5d8438894c107" prot="public" static="no">
+        <type>float *</type>
+        <definition>typedef float* IQBuf_t</definition>
+        <argsstring></argsstring>
+        <name>IQBuf_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="37" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>-*-<sp/>c++<sp/>-*-<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*<sp/></highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>2012<sp/>Tom<sp/>McDermott,<sp/>N5EG</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>This<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or<sp/>modify</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>as<sp/>published<sp/>by</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either<sp/>version<sp/>3,<sp/>or<sp/>(at<sp/>your<sp/>option)</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>This<sp/>software<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>along<sp/>with<sp/>this<sp/>software;<sp/>see<sp/>the<sp/>file<sp/>COPYING.<sp/><sp/>If<sp/>not,<sp/>write<sp/>to</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>the<sp/>Free<sp/>Software<sp/>Foundation,<sp/>Inc.,<sp/>51<sp/>Franklin<sp/>Street,</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>Boston,<sp/>MA<sp/>02110-1301,<sp/>USA.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/>HermesProxy.h</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Proxy<sp/>for<sp/>Hermes<sp/>board.<sp/>Each<sp/>HermesNB<sp/>module<sp/>communicates<sp/>with</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/>only<sp/>one<sp/>hardware<sp/>module.<sp/>Multiple<sp/>hardware<sp/>modules<sp/>need<sp/>to<sp/>use</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//<sp/>multiple<sp/>instantiations<sp/>of<sp/>the<sp/>HermesNB<sp/>within<sp/>GNURadio.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Note:<sp/>multiple<sp/>receivers<sp/>on<sp/>one<sp/>Hermes<sp/>is<sp/>not<sp/>implemented.<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Version:<sp/><sp/>November<sp/>16,<sp/>2012</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>HermesProxy_H</highlight></codeline>
+<codeline lineno="32"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>HermesProxy_H</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="HermesProxy_8h_1a59d421cb83f087a7865031fccbb4e0a6" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NUMRXIQBUFS<sp/><sp/><sp/><sp/><sp/>128<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>number<sp/>of<sp/>receiver<sp/>IQ<sp/>buffers<sp/>in<sp/>circular<sp/>queue.</highlight></codeline>
+<codeline lineno="35" refid="HermesProxy_8h_1a4a941b75a2cf56698a1e769d8214fd50" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>RXBUFSIZE<sp/><sp/><sp/><sp/><sp/><sp/><sp/>256<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>number<sp/>of<sp/>floats<sp/>in<sp/>one<sp/>RxIQBuf,<sp/>#complexes<sp/>is<sp/>half</highlight></codeline>
+<codeline lineno="36"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="HermesProxy_8h_1ae3655a7edeac87231fb5d8438894c107" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/><ref refid="HermesProxy_8h_1ae3655a7edeac87231fb5d8438894c107" kindref="member">IQBuf_t</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>IQ<sp/>buffer<sp/>type<sp/>(IQ<sp/>samples<sp/>as<sp/>floats)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="classHermesProxy" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classHermesProxy" kindref="compound">HermesProxy</ref></highlight></codeline>
+<codeline lineno="40"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>TxControlCycler;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>cycles<sp/>through<sp/>C0<sp/>control<sp/>registers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>TxIQCount;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Accumulated<sp/>TxBuffer<sp/>byte<sp/>count<sp/>ready<sp/>to<sp/>go<sp/>to<sp/>Hermes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>ModuleIndex;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Metis<sp/>index<sp/>of<sp/>selected<sp/>Hermes<sp/>module<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="HermesProxy_8h_1ae3655a7edeac87231fb5d8438894c107" kindref="member">IQBuf_t</ref><sp/>RxIQBuf[<ref refid="HermesProxy_8h_1a59d421cb83f087a7865031fccbb4e0a6" kindref="member">NUMRXIQBUFS</ref>];<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>ReceiveIQ<sp/>buffers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>RxWriteCounter;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Which<sp/>Rx<sp/>buffer<sp/>to<sp/>write<sp/>to</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>RxReadCounter;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Which<sp/>Rx<sp/>buffer<sp/>to<sp/>read<sp/>from</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>RxWriteFill;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Fill<sp/>level<sp/>of<sp/>the<sp/>RxWrite<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>LostRxBufCount;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Lost-buffer<sp/>counter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>TotalRxBufCount;<sp/><sp/></highlight><highlight class="comment">//<sp/>Total<sp/>buffer<sp/>count<sp/>(will<sp/>roll<sp/>over<sp/>often)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>NumberReceivers;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="classHermesProxy_1ac54bd2dda6975f6f75ec6b60a9d987ef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1ac54bd2dda6975f6f75ec6b60a9d987ef" kindref="member">ReceiveFrequency</ref>;</highlight></codeline>
+<codeline lineno="58" refid="classHermesProxy_1a6dc0a7b71bebe61db8b03de2434e301c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a6dc0a7b71bebe61db8b03de2434e301c" kindref="member">TransmitFrequency</ref>;</highlight></codeline>
+<codeline lineno="59" refid="classHermesProxy_1a25d3b8e275a884cb8e0b46ff9dbbd7cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a25d3b8e275a884cb8e0b46ff9dbbd7cd" kindref="member">RxSampleRate</ref>;</highlight></codeline>
+<codeline lineno="60" refid="classHermesProxy_1a692aa0a6a87c4177a9444ca8e25a8dde" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a692aa0a6a87c4177a9444ca8e25a8dde" kindref="member">TxDrive</ref>;</highlight></codeline>
+<codeline lineno="61" refid="classHermesProxy_1a491a8643dc7aac83df5dfc9c30f6881f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a491a8643dc7aac83df5dfc9c30f6881f" kindref="member">TxPTT</ref>;</highlight></codeline>
+<codeline lineno="62" refid="classHermesProxy_1a8969a39aeb74703af0893a718b6714ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a8969a39aeb74703af0893a718b6714ee" kindref="member">RxPreamp</ref>;</highlight></codeline>
+<codeline lineno="63" refid="classHermesProxy_1a76e0f1869a8ce129ffcf728b39691bc1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a76e0f1869a8ce129ffcf728b39691bc1" kindref="member">ADCdither</ref>;</highlight></codeline>
+<codeline lineno="64" refid="classHermesProxy_1a485a32389ec78b367e6797bf1550b743" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a485a32389ec78b367e6797bf1550b743" kindref="member">ADCrandom</ref>;</highlight></codeline>
+<codeline lineno="65" refid="classHermesProxy_1a52b672f8d375556dbf420caab39f9615" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a52b672f8d375556dbf420caab39f9615" kindref="member">ADCoverload</ref>;</highlight></codeline>
+<codeline lineno="66" refid="classHermesProxy_1a3804828b3332eb76bdc8f98cbe9f55fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a3804828b3332eb76bdc8f98cbe9f55fb" kindref="member">HermesVersion</ref>;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classHermesProxy_1a4cec4d0b2e7b557534207af3293d7e13" kindref="member">HermesProxy</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>constructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classHermesProxy_1a1596d70429b64082e19190d6d4a0e4fe" kindref="member">~HermesProxy</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>destructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1af0c88b286a2b3be76587050755444be3" kindref="member">SendTxIQ</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>send<sp/>an<sp/>IQ<sp/>buffer<sp/>to<sp/>Hermes<sp/>transmit<sp/>hardware</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a53a586afc3ed94c6569d44d734186e19" kindref="member">ReceiveRxIQ</ref>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>buffer);<sp/></highlight><highlight class="comment">//<sp/>receive<sp/>an<sp/>IQ<sp/>buffer<sp/>from<sp/>Hermes<sp/>hardware<sp/>via<sp/>metis.cc<sp/>thread</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a8c73fe85b70edfb4b59f419520e96e96" kindref="member">UpdateHermes</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>update<sp/>control<sp/>registers<sp/>in<sp/>Hermes<sp/>without<sp/>any<sp/>Tx<sp/>data</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="HermesProxy_8h_1ae3655a7edeac87231fb5d8438894c107" kindref="member">IQBuf_t</ref><sp/><ref refid="classHermesProxy_1ab519bac9bbefe844e83b7b9d54030b2e" kindref="member">GetRxIQ</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Gnurario<sp/>pickup<sp/>a<sp/>received<sp/>RxIQ<sp/>buffer<sp/>if<sp/>available</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Not<sp/>yet<sp/>implemented</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a4637e5660e435974f93c00504ed9cc8c" kindref="member">PutTxIQ</ref>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>buffer);<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>post<sp/>a<sp/>transmit<sp/>TxIQ<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a213314ad4e5df4278a719414b7616a0b" kindref="member">SendAudioLR</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>send<sp/>an<sp/>LR<sp/>audio<sp/>buffer<sp/>to<sp/>Hermes<sp/>hardware</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classHermesProxy_1a1c8d93a56209a802ae04ea851635774e" kindref="member">ReceiveMicLR</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>receive<sp/>an<sp/>LR<sp/>audio<sp/>bufer<sp/>from<sp/>Hermes<sp/>hardware</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/>//<sp/>#ifndef<sp/>HermesProxy_H</highlight></codeline>
+<codeline lineno="83"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/tom/gr-hpsdr/include/HermesProxy.h"/>
+  </compounddef>
+</doxygen>
