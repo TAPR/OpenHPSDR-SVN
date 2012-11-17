@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="dir_40f87a3450b3421051d8e7840fa40ed3" kind="dir">
+    <compoundname>/home/tom/gr-hpsdr/include/</compoundname>
+    <innerfile refid="HermesProxy_8h">HermesProxy.h</innerfile>
+    <innerfile refid="hpsdr__api_8h">hpsdr_api.h</innerfile>
+    <innerfile refid="hpsdr__hermesNB_8h">hpsdr_hermesNB.h</innerfile>
+    <innerfile refid="metis_8h">metis.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tom/gr-hpsdr/include/"/>
+  </compounddef>
+</doxygen>
