@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="PowerSDR (W5WC)" Language="1033" Version="2.2.3.21" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="928400BC-8BCE-470C-A1D6-4B7A1AB366A3">
-		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
-
+	<Product Id="*" Name="PowerSDR (W5WC)" Language="1033" Version="2.2.4.0" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="928400BC-8BCE-470C-A1D6-4B7A1AB366A3">
+		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" Id="????????-????-????-????-????????????"/>
+   
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes" />
 
@@ -235,14 +235,14 @@
               />
       </Component>
 
-      <Component Guid="*">
+      <Component Guid="BE150CA0-5477-472A-A69F-5D9F0C26D11B">
         <File Id="Ozy_Janus.v23.rbf"
               Source="..\PowerSDR_HPSDR_2\Bin\Release\Ozy_Janus.v23.rbf"
               KeyPath="yes"
               />
       </Component>
 
-      <Component Guid="*">
+      <Component Guid="9DA161AE-2A91-4FEE-903E-59758D9F2394">
         <File Id="Ozy_Janus.v24.rbf"
               Source="..\PowerSDR_HPSDR_2\Bin\Release\Ozy_Janus.v24.rbf"
               KeyPath="yes"
@@ -263,7 +263,7 @@
               />
       </Component>
 
-      <Component Guid="*">
+      <Component Guid="9F4B5FE4-9F73-4D19-9689-081C53D92460">
         <File Id="FlexCW.dll"
               Source="..\PowerSDR_HPSDR_2\Bin\Release\FlexCW.dll"
               KeyPath="yes"

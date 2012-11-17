@@ -1832,7 +1832,7 @@ namespace PowerSDR
             } */
             
             console.SetupForm.comboFRSRegion.Text = "United States";
-            console.CurrentRegion = FRSRegion.US;
+           // console.CurrentRegion = FRSRegion.US;
 
             ArrayList a = new ArrayList();
             a.Add("SetupWizard/1");
