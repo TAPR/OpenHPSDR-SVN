@@ -360,7 +360,7 @@ bool DataEngine::startDataEngineWithoutConnection() {
 
 	if (io.inputBuffer.length() > 0) {
 
-		initReceivers();
+		initReceivers(1);
 		if (!m_dataIO)	createDataIO();
 		if (!m_dataProcessor)	createDataProcessor();
 		
@@ -488,8 +488,15 @@ bool DataEngine::getFirmwareVersions() {
 
 	m_fwCount = 0;
 
-	// as it says..
-	if (!initReceivers()) return false;
+	// init receivers
+	QString str;
+	int rcvrs = set->getNumberOfReceivers();
+
+	str = "Initializing %1 receiver(s)...please wait";
+	emit systemMessageEvent(str.arg(set->getNumberOfReceivers()), rcvrs * 500);
+
+	if (!initReceivers(rcvrs)) return false;
+
 
 	if (!m_dataIO) createDataIO();
 		
@@ -516,18 +523,9 @@ bool DataEngine::getFirmwareVersions() {
 
 	set->setRxList(RX);
 	connectDSPSlots();
-	for (int i = 0; i < set->getNumberOfReceivers(); i++) {
 
+	for (int i = 0; i < set->getNumberOfReceivers(); i++)
 		RX.at(i)->setAudioVolume(this, i, 0.0f);
-		setFrequency(this, true, i, set->getFrequencies().at(i));
-	}
-
-	// data IO thread
-	if (!startDataIO(QThread::HighPriority)) {//  ::NormalPriority)) {
-
-		DATA_ENGINE_DEBUG << "data receiver thread could not be started.";
-		return false;
-	}
 
 	// IQ data processing thread
 	if (!startDataProcessor(QThread::NormalPriority)) {
@@ -536,7 +534,14 @@ bool DataEngine::getFirmwareVersions() {
 		return false;
 	}
 
-	setSampleRate(this, set->getSampleRate());
+	// data IO thread
+	if (!startDataIO(QThread::NormalPriority)) {//  ::NormalPriority)) {
+
+		DATA_ENGINE_DEBUG << "data IO thread could not be started.";
+		return false;
+	}
+
+	//setSampleRate(this, set->getSampleRate());
 	SleeperThread::msleep(100);
 
 	// pre-conditioning
@@ -548,7 +553,7 @@ bool DataEngine::getFirmwareVersions() {
 		
 	m_networkDeviceRunning = true;
 	setSystemState(QSDR::NoError, m_hwInterface, m_serverMode, QSDR::DataEngineUp);
-	SleeperThread::msleep(200);
+	SleeperThread::msleep(300);
 
 	m_metisFW = set->getMetisVersion();
 	m_mercuryFW = set->getMercuryVersion();
@@ -742,8 +747,9 @@ bool DataEngine::start() {
 	m_fwCount = 0;
 	m_sendState = 0;
 
-	// as it says..
-	if (!initReceivers()) return false;
+	int rcvrs = set->getNumberOfReceivers();
+
+	if (!initReceivers(rcvrs)) return false;
 
 	if (!m_dataIO) createDataIO();
 		
@@ -818,7 +824,7 @@ bool DataEngine::start() {
 				return false;
 			}
 
-			RX.at(0)->setConnectedStatus(true);
+			//RX.at(0)->setConnectedStatus(true);
 
 			CHECKED_CONNECT(
 					set,
@@ -838,15 +844,13 @@ bool DataEngine::start() {
 
 	set->setRxList(RX);
 	connectDSPSlots();
-	for (int i = 0; i < io.receivers; i++) {
+
+	for (int i = 0; i < rcvrs; i++) {
 
 		RX.at(i)->setConnectedStatus(true);
 		RX.at(i)->setAudioVolume(this, i, RX.at(i)->getAudioVolume());
 		setFrequency(this, true, i, set->getFrequencies().at(i));
 	}
-
-	// Wide band data processing thread
-	//if (set->getWideBandData()) {
 
 	if (m_serverMode != QSDR::ChirpWSPR && !startWideBandDataProcessor(QThread::NormalPriority)) {
 
@@ -854,12 +858,12 @@ bool DataEngine::start() {
 		return false;
 	}
 
-	// data receiver thread
-	if (!startDataIO(QThread::HighPriority)) {//  ::NormalPriority)) {
-
-		DATA_ENGINE_DEBUG << "data receiver thread could not be started.";
-		return false;
-	}
+	// data IO thread
+//	if (!startDataIO(QThread::HighPriority)) {//  ::NormalPriority)) {
+//
+//		DATA_ENGINE_DEBUG << "data receiver thread could not be started.";
+//		return false;
+//	}
 
 	// IQ data processing thread
 	if (!startDataProcessor(QThread::NormalPriority)) {
@@ -868,17 +872,28 @@ bool DataEngine::start() {
 		return false;
 	}
 
+	// data IO thread
+	if (!startDataIO(QThread::NormalPriority)) {//  ::NormalPriority::HighPriority)) {
+
+		DATA_ENGINE_DEBUG << "data IO thread could not be started.";
+		return false;
+	}
+
 	// start Sync,ADC and S-Meter timers
 	m_SyncChangedTime.start();
 	m_ADCChangedTime.start();
 	m_smeterTime.start();
 
+	// start the "frames-per-second" timer for all receivers
+	for (int i = 0; i < rcvrs; i++)
+		RX.at(i)->highResTimer->start();
+
 	// just give them a little time..
 	SleeperThread::msleep(100);
 
-	setSampleRate(this, set->getSampleRate());
-
-	m_dataIO->sendInitFramesToNetworkDevice(0);
+	// pre-conditioning
+	for (int i = 0; i < io.receivers; i++)
+		m_dataIO->sendInitFramesToNetworkDevice(i);
 				
 	if (m_serverMode == QSDR::SDRMode && set->getWideBandData())
 		m_dataIO->networkDeviceStartStop(0x03); // 0x03 for starting the device with wide band data
@@ -887,11 +902,9 @@ bool DataEngine::start() {
 		
 	m_networkDeviceRunning = true;
 
-	// start the "frames-per-second" timer for all receivers
-	for (int i = 0; i < io.receivers; i++)
-		RX.at(i)->highResTimer->start();
-
 	setSystemState(QSDR::NoError, m_hwInterface, m_serverMode, QSDR::DataEngineUp);
+
+	emit systemMessageEvent("System running", 4000);
 	return true;
 	//} // if (m_hpsdrDevices == 0)
 }
@@ -907,25 +920,23 @@ void DataEngine::stop() {
 				
 				// turn time stamping off
 				setTimeStamp(this, false);
-				//Sleep(10);
-				SleeperThread::msleep(10);
 
+				// stop the device
 				m_dataIO->networkDeviceStartStop(0);
 				m_networkDeviceRunning = false;
-
 				DATA_ENGINE_DEBUG << "HPSDR device stopped";
 
+				// stop the threads
 				SleeperThread::msleep(100);
 				stopDataIO();
 				stopDataProcessor();
-				stopChirpDataProcessor();
+				//stopChirpDataProcessor();
 				if (m_wbDataProcessor)
 					stopWideBandDataProcessor();
 				
-				//Sleep(100);
+				// clear device list
+				SleeperThread::msleep(100);
 				set->clearMetisCardList();
-				//m_metisDialog->clear();
-				//m_networkIO->clear();
 				DATA_ENGINE_DEBUG << "device cards list cleared.";
 				break;
 
@@ -1025,11 +1036,11 @@ bool DataEngine::initDataEngine() {
 	return false;
 }
 
-bool DataEngine::initReceivers() {
+bool DataEngine::initReceivers(int rcvrs) {
 
-	int noOfReceivers = set->getNumberOfReceivers();
+	//int noOfReceivers = set->getNumberOfReceivers();
 
-	for (int i = 0; i < noOfReceivers; i++) {
+	for (int i = 0; i < rcvrs; i++) {
 	
 		Receiver *r = new Receiver(this, i);
 		//r->setID(i);
@@ -1055,8 +1066,8 @@ bool DataEngine::initReceivers() {
 	m_txFrame = 0;
 	
 	io.currentReceiver = 0;
+	io.receivers = rcvrs;
 
-	io.receivers = noOfReceivers;
 	//for (int i = 0; i < io.receivers; ++i) m_rx.append(i);
 
 	io.timing = 0;
@@ -2135,7 +2146,7 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 	qint64 length = buffer.length();
 	if (buffer.length() != size) {
 
-		DATA_PROCESSOR_DEBUG << "wrong wide band buffer length: " << length;
+		//DATA_PROCESSOR_DEBUG << "wrong wide band buffer length: " << length;
 		return;
 	}
 

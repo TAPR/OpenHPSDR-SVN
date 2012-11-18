@@ -597,11 +597,12 @@ void RadioPopupWidget::createAgcBtnGroup() {
 	agcModeBtnList.append(agcFAST);
 	CHECKED_CONNECT(agcFAST, SIGNAL(clicked()), this, SLOT(agcModeChangedByBtn()));
 	
-	agcEmpty = new AeroButton("", this);
-	agcEmpty->setRoundness(0);
-	agcEmpty->setFixedSize(btn_widths, btn_height);
-	agcEmpty->setStyleSheet(set->getMiniButtonStyle());
-	agcEmpty->setEnabled(false);
+	agcUSER = new AeroButton("User", this);
+	agcUSER->setRoundness(0);
+	agcUSER->setFixedSize(btn_widths, btn_height);
+	agcUSER->setStyleSheet(set->getMiniButtonStyle());
+	agcModeBtnList.append(agcUSER);
+	CHECKED_CONNECT(agcUSER, SIGNAL(clicked()), this, SLOT(agcModeChangedByBtn()));
 
 	
 	QHBoxLayout *hbox1 = new QHBoxLayout();
@@ -612,7 +613,7 @@ void RadioPopupWidget::createAgcBtnGroup() {
 	hbox1->addWidget(agcSLOW);
 	hbox1->addWidget(agcMED);
 	hbox1->addWidget(agcFAST);
-	hbox1->addWidget(agcEmpty);
+	hbox1->addWidget(agcUSER);
 
 	agcVBox = new QVBoxLayout;
 	agcVBox->setSpacing(1);

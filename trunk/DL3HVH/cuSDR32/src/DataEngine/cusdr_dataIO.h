@@ -1,6 +1,6 @@
 /**
-* @file  cusdr_dataReceiver.h
-* @brief Data receiver header file
+* @file  cusdr_dataIO.h
+* @brief Data IO header file
 * @author Hermann von Hasseln, DL3HVH
 * @version 0.1
 * @date 2011-10-01
@@ -24,8 +24,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef _CUSDR_DATARECEIVER_H
-#define _CUSDR_DATARECEIVER_H
+#ifndef _CUSDR_DATAIO_H
+#define _CUSDR_DATAIO_H
 
 //#include <QObject>
 //#include <QMutex>
@@ -38,51 +38,63 @@
 
 #include "cusdr_settings.h"
 
-#ifdef LOG_DATA_RECEIVER
-#   define DATA_RECEIVER_DEBUG qDebug().nospace() << "DataReceiver::\t"
+#ifdef LOG_DATAIO
+#   define DATAIO_DEBUG qDebug().nospace() << "DataIO::\t"
 #else
-#   define DATA_RECEIVER_DEBUG nullDebug()
+#   define DATAIO_DEBUG nullDebug()
 #endif
 
 
-class DataReceiver : public QObject {
+class DataIO : public QObject {
 
     Q_OBJECT
 
 public:
-	DataReceiver(THPSDRParameter *ioData = 0);
-	~DataReceiver();
+    DataIO(THPSDRParameter *ioData = 0);
+	~DataIO();
 
 public slots:
 	void	stop();
 	void	initDataReceiverSocket();
 	void	readData();
+	void 	writeData();
+	void	sendInitFramesToNetworkDevice(int rx);
+	void	networkDeviceStartStop(char value);
 	//void	setWidebandBuffers(int value);
 	
 private slots:
 	void displayDataReceiverSocketError(QAbstractSocket::SocketError error);
 	void setManualSocketBufferSize(QObject *sender, bool value);
-	void readMetisData();
+	void readDeviceData();
 	
 private:
-	Settings*		set;
-	QUdpSocket*		m_dataReceiverSocket;
+	Settings		*set;
+	QUdpSocket		*m_dataIOSocket;
 	QMutex			m_mutex;
+	QByteArray		m_commandDatagram;
 	QByteArray		m_datagram;
 	QByteArray		m_wbDatagram;
 	QByteArray		m_metisGetDataSignature;
+	QByteArray		m_outDatagram;
+	QByteArray		m_deviceSendDataSignature;
 	QString			m_message;
 
 	QTime			m_packetLossTime;
 
-	THPSDRParameter	*io;
+	THPSDRParameter		*io;
+	//TNetworkDevicecard 	netDevice;
 
-	bool	m_dataReceiverSocketOn;
+	bool	m_dataIOSocketOn;
+	bool	m_networkDeviceRunning;
+	bool	m_setNetworkDeviceHeader;
 
 	long	m_sequence;
 	long	m_oldSequence;
 	long	m_sequenceWideBand;
 	long	m_oldSequenceWideBand;
+	long	m_sendSequence;
+	long	m_oldSendSequence;
+
 
 	int		m_wbBuffers;
 	int		m_wbCount;
@@ -98,4 +110,4 @@ signals:
 	void	messageEvent(QString message);
 };
 
-#endif // _CUSDR_DATARECEIVER_H
+#endif // _CUSDR_DATAIO_H

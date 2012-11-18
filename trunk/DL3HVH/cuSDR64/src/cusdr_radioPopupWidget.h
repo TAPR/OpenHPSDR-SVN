@@ -127,7 +127,7 @@ private:
 	AeroButton	*agcSLOW;
 	AeroButton	*agcMED;
 	AeroButton	*agcFAST;
-	AeroButton	*agcEmpty;
+	AeroButton	*agcUSER;
 
 	QList<AeroButton *>	agcModeBtnList;
 	

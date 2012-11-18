@@ -155,7 +155,7 @@
 //#define DISCOVER_IDLE 0
 //#define DISCOVER_SENT 1
 #define METIS_PORT 1024
-//#define DATA_PORT 8886
+#define DATA_PORT 8886
 
 // **************************************
 // Audio definitions

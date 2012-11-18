@@ -1,6 +1,6 @@
 /**
-* @file  cusdr_hpsdrIO.cpp
-* @brief HPSDR device network IO class
+* @file  cusdr_discoverer.cpp
+* @brief HPSDR device discoverer class
 * @author Hermann von Hasseln, DL3HVH
 * @version 0.1
 * @date 2012-05-19
@@ -25,9 +25,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#define LOG_HPSDRIO
+#define LOG_DISCOVERER
 
-#include "cusdr_hpsdrIO.h"
+#include "cusdr_discoverer.h"
 #include "Util/cusdr_buttons.h"
 
 
@@ -45,18 +45,18 @@ Q_DECLARE_METATYPE (QAbstractSocket::SocketError)
 //#define	btn_height		18
 //#define	btn_width		74
 
-QHpsdrIO::QHpsdrIO(THPSDRParameter *ioData)
-    :   QObject()
+Discoverer::Discoverer(THPSDRParameter *ioData)
+    : QObject()
 	, set(Settings::instance())
 	, io(ioData)
 {
 	m_deviceCards = set->getMetisCardsList();
 }
 
-QHpsdrIO::~QHpsdrIO() {
+Discoverer::~Discoverer() {
 }
 
-void QHpsdrIO::initHPSDRDevice() {
+void Discoverer::initHPSDRDevice() {
 
 	m_searchTime.start();
 
@@ -77,15 +77,14 @@ void QHpsdrIO::initHPSDRDevice() {
 			break;
 		}
 
-		if (m_searchTime.elapsed() > 5000) {
+		if (m_searchTime.elapsed() > 1000) {
 
 			set->setHPSDRDeviceNumber(0);
 			break;
 		}
 
-		//sendMessage("no Metis found - trying again...");
 		io->networkIOMutex.lock();
-		HPSDRIO_DEBUG << "no Metis found - trying again...";
+		DISCOVERER_DEBUG << "no Metis found - trying again...";
 		io->networkIOMutex.unlock();
 	}
 
@@ -94,7 +93,7 @@ void QHpsdrIO::initHPSDRDevice() {
 	io->networkIOMutex.unlock();
 }
 
-int QHpsdrIO::findHPSDRDevices() {
+int Discoverer::findHPSDRDevices() {
 
 	int devicesFound = 0;
 
@@ -106,18 +105,46 @@ int QHpsdrIO::findHPSDRDevices() {
 		m_findDatagram[i] = (char)0x00;
 
 	QUdpSocket socket;
+
+	CHECKED_CONNECT(
+		&socket,
+		SIGNAL(error(QAbstractSocket::SocketError)),
+		this,
+		SLOT(displayDiscoverySocketError(QAbstractSocket::SocketError)));
+
 	io->networkIOMutex.lock();
-	HPSDRIO_DEBUG << "using " << qPrintable(QHostAddress(set->getHPSDRDeviceLocalAddr()).toString()) << " for discovery.";
+	DISCOVERER_DEBUG << "using " << qPrintable(QHostAddress(set->getHPSDRDeviceLocalAddr()).toString()) << " for discovery.";
 	io->networkIOMutex.unlock();
 
 	// clear comboBox entries in the network dialogue
 	set->clearNetworkIOComboBoxEntry();
 
+#if defined(Q_OS_WIN32)
+
 	if (socket.bind(
-				QHostAddress(set->getHPSDRDeviceLocalAddr()), 
-				//QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
+				QHostAddress(set->getHPSDRDeviceLocalAddr()), 0,
+				QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
+				//QUdpSocket::ReuseAddressHint))
+	{
+		set->setMetisPort(this, socket.localPort());
+		io->networkIOMutex.lock();
+		DISCOVERER_DEBUG << "discovery_socket bound successfully to port " << socket.localPort();
+		io->networkIOMutex.unlock();
+	}
+	else {
+
+		io->networkIOMutex.lock();
+		DISCOVERER_DEBUG << "discovery_socket bind failed.";
+		io->networkIOMutex.unlock();
+
+		socket.close();
+		return 0;
+	}
+#elif defined(Q_OS_LINUX)
+
+	if (socket.bind(
+				QHostAddress(set->getHPSDRDeviceLocalAddr()),
 				QUdpSocket::DefaultForPlatform))
-				//QUdpSocket::DontShareAddress))
 	{
 		CHECKED_CONNECT(
 			&socket, 
@@ -139,25 +166,26 @@ int QHpsdrIO::findHPSDRDevices() {
 		socket.close();
 		return 0;
 	}
+#endif
 
 	if (socket.writeDatagram(m_findDatagram, QHostAddress::Broadcast, METIS_PORT) == 63) {
 
 		io->networkIOMutex.lock();
-		HPSDRIO_DEBUG << "discovery data sent.";
+		DISCOVERER_DEBUG << "discovery data sent.";
 		io->networkIOMutex.unlock();
 	}
 	else {
 
 		io->networkIOMutex.lock();
-		HPSDRIO_DEBUG << "discovery data not sent.";
+		DISCOVERER_DEBUG << "discovery data not sent.";
 		io->networkIOMutex.unlock();
 	}
 
 
 	// wait a little
-	SleeperThread::msleep(30);
+	//SleeperThread::msleep(30);
+	SleeperThread::msleep(500);
 
-	//if (socket.waitForReadyRead(500)) {
 	while (socket.hasPendingDatagrams()) {
 
 		TNetworkDevicecard mc;
@@ -175,8 +203,8 @@ int QHpsdrIO::findHPSDRDevices() {
 					m_deviceDatagram[6] & 0xFF, m_deviceDatagram[7] & 0xFF, m_deviceDatagram[8] & 0xFF);
 				
 				io->networkIOMutex.lock();
-				HPSDRIO_DEBUG << "Device found at " << qPrintable(mc.ip_address.toString()) << ":" << port << "; Mac addr: [" << mc.mac_address << "]";
-				HPSDRIO_DEBUG << "Device code version: " << qPrintable(QString::number(m_deviceDatagram.at(9), 16));
+				DISCOVERER_DEBUG << "Device found at " << qPrintable(mc.ip_address.toString()) << ":" << port << "; Mac addr: [" << mc.mac_address << "]";
+				DISCOVERER_DEBUG << "Device code version: " << qPrintable(QString::number(m_deviceDatagram.at(9), 16));
 				io->networkIOMutex.unlock();
 
 				int no = m_deviceDatagram.at(10);
@@ -191,27 +219,23 @@ int QHpsdrIO::findHPSDRDevices() {
 				mc.boardID = no;
 				mc.boardName = str;
 				io->networkIOMutex.lock();
-				HPSDRIO_DEBUG << "Device board ID: " <<  no; 
-				HPSDRIO_DEBUG << "Device is: " << qPrintable(str);
+				DISCOVERER_DEBUG << "Device board ID: " <<  no;
+				DISCOVERER_DEBUG << "Device is: " << qPrintable(str);
 				io->networkIOMutex.unlock();
 
 				m_deviceCards.append(mc);
 
-				/*str = mc.ip_address.toString();
-				str.prepend(": ");
-				str.prepend(mc.boardName);*/
 				str += " (";
 				str += mc.ip_address.toString();
 				str += ")";
 				
-				//set->addNetworkIOComboBoxEntry(mc.ip_address.toString());
 				set->addNetworkIOComboBoxEntry(str);
 				devicesFound++;
 			}
 			else if (m_deviceDatagram[2] == (char)0x03) {
 
 				io->networkIOMutex.lock();
-				HPSDRIO_DEBUG << "Device already sending data!";
+				DISCOVERER_DEBUG << "Device already sending data!";
 				io->networkIOMutex.unlock();
 			}
 		}
@@ -223,7 +247,7 @@ int QHpsdrIO::findHPSDRDevices() {
 
 		set->setCurrentHPSDRDevice(m_deviceCards.at(0));
 		io->networkIOMutex.lock();
-		HPSDRIO_DEBUG << "Device selected: " << qPrintable(m_deviceCards.at(0).ip_address.toString());
+		DISCOVERER_DEBUG << "Device selected: " << qPrintable(m_deviceCards.at(0).ip_address.toString());
 		io->networkIOMutex.unlock();
 	}
 
@@ -231,14 +255,14 @@ int QHpsdrIO::findHPSDRDevices() {
 	return devicesFound;
 }
 
-void QHpsdrIO::displayDiscoverySocketError(QAbstractSocket::SocketError error) {
+void Discoverer::displayDiscoverySocketError(QAbstractSocket::SocketError error) {
 
 	io->networkIOMutex.lock();
-	HPSDRIO_DEBUG << "discovery socket error: " << error;
+	DISCOVERER_DEBUG << "discovery socket error: " << error;
 	io->networkIOMutex.unlock();
 }
 
-void QHpsdrIO::clear() {
+void Discoverer::clear() {
 
 	//m_metisDeviceComboBox->clear();
 	m_deviceCards.clear();

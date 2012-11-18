@@ -67,13 +67,13 @@ Settings::Settings(QObject *parent)
 	settingsFilename = "settings.ini";
 	settings = new QSettings(QCoreApplication::applicationDirPath() +  "/" + settingsFilename, QSettings::IniFormat);
 
-	m_titleString = "cuSDR64 BETA ";
+	m_titleString = "cuSDR32 BETA ";
 
 	#ifdef DEBUG
-		m_titleString = "cuSDR64 Debug BETA ";
+		m_titleString = "cuSDR32 Debug BETA ";
 	#endif
 
-	m_versionString = "v0.3.1.2";
+	m_versionString = "v0.3.2.2";
 	
 	qDebug() << qPrintable(m_titleString);
 

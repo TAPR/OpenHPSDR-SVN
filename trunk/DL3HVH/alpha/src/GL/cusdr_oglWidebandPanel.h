@@ -216,8 +216,6 @@ private:
 	
 	float		m_freqScalePosition;
 	float		m_freqScaleZoomFactor;
-	
-	double		m_displayDelta;
 
 	qreal		m_dBmPanDelta;
 	qreal		m_dBmScaleOffset;
@@ -226,6 +224,8 @@ private:
 	qreal		m_panFrequencyScale;
 	qreal		m_frequencySpan;
 	qreal		m_frequencyUnit;
+	qreal		m_lowerFrequency;
+	qreal		m_upperFrequency;
 	
 	//******************************************************************
 	void saveGLState();

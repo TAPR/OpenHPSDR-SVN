@@ -21,8 +21,8 @@ HEADERS += \
 	./src/DataEngine/cusdr_audioReceiver.h \
 	./src/DataEngine/cusdr_chirpProcessor.h \
 	./src/DataEngine/cusdr_dataEngine.h \
-	./src/DataEngine/cusdr_dataReceiver.h \
-	./src/DataEngine/cusdr_hpsdrIO.h \
+	./src/DataEngine/cusdr_dataIO.h \
+	./src/DataEngine/cusdr_discoverer.h \
 	./src/DataEngine/cusdr_receiver.h \
 	./src/QtDSP/fftw3.h \
 	./src/QtDSP/qtdsp_agc.h \
@@ -90,8 +90,8 @@ SOURCES += \
 	./src/DataEngine/cusdr_audioReceiver.cpp \
 	./src/DataEngine/cusdr_chirpProcessor.cpp \
 	./src/DataEngine/cusdr_dataEngine.cpp \
-	./src/DataEngine/cusdr_dataReceiver.cpp \
-	./src/DataEngine/cusdr_hpsdrIO.cpp \
+	./src/DataEngine/cusdr_dataIO.cpp \
+	./src/DataEngine/cusdr_discoverer.cpp \
 	./src/DataEngine/cusdr_receiver.cpp \
 	./src/QtDSP/qtdsp_agc.cpp \
 	./src/QtDSP/qtdsp_demodulation.cpp \

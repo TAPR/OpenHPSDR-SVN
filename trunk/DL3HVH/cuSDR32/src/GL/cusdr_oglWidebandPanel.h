@@ -164,6 +164,9 @@ private:
 
 	qreal		m_dBmPanMin;
 	qreal		m_dBmPanMax;
+	qreal		m_dBmPanMinOld;
+	qreal		m_dBmPanMaxOld;
+
 
 	qVectorFloat m_wbSpectrumBuffer;
 
@@ -181,6 +184,7 @@ private:
 	bool		m_spectrumVertexColorUpdate;
 	bool		m_crossHairCursor;
 	bool		m_panGrid;
+	bool		m_calibrate;
 
 	int			m_receiver;
 	int			m_oldWidth;
@@ -212,15 +216,16 @@ private:
 	
 	float		m_freqScalePosition;
 	float		m_freqScaleZoomFactor;
-	
-	double		m_displayDelta;
 
 	qreal		m_dBmPanDelta;
+	qreal		m_dBmScaleOffset;
 	qreal		m_panScale;
 	qreal		m_scaleMultOld;
 	qreal		m_panFrequencyScale;
 	qreal		m_frequencySpan;
 	qreal		m_frequencyUnit;
+	qreal		m_lowerFrequency;
+	qreal		m_upperFrequency;
 	
 	//******************************************************************
 	void saveGLState();

@@ -153,11 +153,12 @@ MainWindow::~MainWindow() {
 */
 void MainWindow::setupConnections() {
 
-	CHECKED_CONNECT(
+	CHECKED_CONNECT_OPT(
 		m_dataEngine,
 		SIGNAL(systemMessageEvent(const QString&, int)),
 		this,
-		SLOT(showStatusBarMessage(const QString &, int)));
+		SLOT(showStatusBarMessage(const QString &, int)),
+		Qt::DirectConnection);
 
 	CHECKED_CONNECT(
 		m_dataEngine,
