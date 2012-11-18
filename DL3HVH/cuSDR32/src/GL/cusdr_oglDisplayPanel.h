@@ -91,7 +91,8 @@ private:
 
 	QList<TFrequency>			m_frequencyList;
 
-	TScale		m_dBmScale;
+	TPanadapterColors			m_colors;
+	TScale						m_dBmScale;
 
 	CFonts		*fonts;
 	TFonts		m_fonts;

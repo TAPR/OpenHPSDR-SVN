@@ -550,6 +550,19 @@ void AGCOptionsWidget::agcModeChanged(QObject *sender, int rx, AGCMode mode, boo
 
 	agcModeBtnList.at(mode)->setBtnState(AeroButton::ON);
 	agcModeBtnList.at(mode)->update();
+
+	if (mode == (AGCMode) agcUser) {
+
+		m_attackTimeSpinBox->setEnabled(true);
+		m_decayTimeSpinBox->setEnabled(true);
+		m_hangTimeSpinBox->setEnabled(true);
+	}
+	else {
+
+		m_attackTimeSpinBox->setEnabled(false);
+		m_decayTimeSpinBox->setEnabled(false);
+		m_hangTimeSpinBox->setEnabled(false);
+	}
 }
 
 void AGCOptionsWidget::slopeChanged(int value) {

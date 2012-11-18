@@ -44,7 +44,7 @@
 //#include <qtconcurrentrun.h>
 
 #include "cusdr_settings.h"
-#include "cusdr_dataReceiver.h"
+#include "cusdr_dataIO.h"
 #include "QtDSP/qtdsp_fft.h"
 #include "QtDSP/qtdsp_filter.h"
 #include "QtDSP/qtdsp_dualModeAverager.h"
@@ -52,7 +52,7 @@
 #include "AudioEngine/cusdr_audio_engine.h"
 #include "cusdr_chirpProcessor.h"
 #include "cusdr_audioReceiver.h"
-#include "cusdr_hpsdrIO.h"
+#include "cusdr_discoverer.h"
 
 
 #ifdef LOG_DATA_ENGINE
@@ -67,16 +67,9 @@
 #   define DATA_PROCESSOR_DEBUG nullDebug()
 #endif
 
-#ifdef LOG_AUDIO_PROCESSOR
-#   define AUDIO_PROCESSOR_DEBUG qDebug().nospace() << "AudioProcessor::\t"
-#else
-#   define AUDIO_PROCESSOR_DEBUG nullDebug()
-#endif
-
 
 class DataProcessor;
 class WideBandDataProcessor;
-class AudioProcessor;
 
 
 Q_DECLARE_METATYPE (QAbstractSocket::SocketError)
@@ -154,8 +147,6 @@ public slots:
 	void	startPlayback();
 	void	showSettingsDialog();
 
-	void	displayDiscoverySocketError(QAbstractSocket::SocketError error);
-
 private:
 	void	setSystemState(
 				QSDR::_Error err,
@@ -166,36 +157,31 @@ private:
 	void	setupConnections();
 	void	connectDSPSlots();
 	void	disconnectDSPSlots();
-	void	networkDeviceStartStop(char value);
-	void	sendInitFramesToNetworkDevice(int rx);
-	void	createHpsdrIO();
-	void	createDataReceiver();
+	//void	networkDeviceStartStop(char value);
+	//void	sendInitFramesToNetworkDevice(int rx);
+	void	createDiscoverer();
+	void	createDataIO();
 	void	createDataProcessor();
 	void	createWideBandDataProcessor();
 	//void	createChirpDataProcessor();
 	//void	createAudioReceiver(int rx);
-	//void	createAudioProcessor(int rx);
 	void	createAudioReceiver();
-	void	createAudioProcessor();
-	
 
-	bool	initReceivers();
+	bool	initReceivers(int rx);
 	bool	start();
 	bool	startDataEngineWithoutConnection();
 	bool	findHPSDRDevices();
 	bool	getFirmwareVersions();
 	bool	checkFirmwareVersions();
-	bool	startHpsdrIO(QThread::Priority prio);
-	bool	startDataReceiver(QThread::Priority prio);
+	bool	startDiscoverer(QThread::Priority prio);
+	bool	startDataIO(QThread::Priority prio);
 	bool	startDataProcessor(QThread::Priority prio);
 	bool	startWideBandDataProcessor(QThread::Priority prio);
 	bool	startChirpDataProcessor(QThread::Priority prio);
-	bool	startAudioProcessor(QThread::Priority prio, QSDR::_ServerMode mode);
 
-	void	stopHpsdrIO();
-	void	stopDataReceiver();
+	void	stopDiscoverer();
+	void	stopDataIO();
 	void	stopDataProcessor();
-	void	stopAudioProcessor();
 	void	stopWideBandDataProcessor();
 	void	stopChirpDataProcessor();
 	void	setHPSDRConfig();
@@ -203,22 +189,21 @@ private:
 	void	qtdspProcessing(int rx);
 
 private:
-	DataReceiver			*m_dataReceiver;
+	DataIO					*m_dataIO;
 	DataProcessor			*m_dataProcessor;
 	WideBandDataProcessor	*m_wbDataProcessor;
 	//QDSPEngine			*m_wbDspEngine;
 	QDSPEngine				*m_chirpDspEngine;
 	AudioReceiver			*m_audioReceiver;
-	AudioProcessor			*m_audioProcessor;
 	AudioEngine				*m_audioEngine;
 	ChirpProcessor			*m_chirpProcessor;
-	QHpsdrIO				*m_hpsdrIO;
+	Discoverer				*m_discoverer;
 
 	QFFT					*m_wbFFT;
 	DualModeAverager		*m_wbAverager;
 	
-	QThreadEx				*m_netIOThread;
-	QThreadEx				*m_dataRcvrThread;
+	QThreadEx				*m_discoveryThread;
+	QThreadEx				*m_dataIOThread;
 	QThreadEx				*m_dataProcThread;
 	QThreadEx				*m_wbDataProcThread;
 	QThreadEx				*m_chirpDataProcThread;
@@ -256,8 +241,8 @@ private:
 	bool	m_clientConnect;
 	bool	m_audioProcessorRunning;
 	bool	m_chirpInititalized;
-	bool	m_netIOThreadRunning;
-	bool	m_dataRcvrThreadRunning;
+	bool	m_discoveryThreadRunning;
+	bool	m_dataIOThreadRunning;
 	bool	m_wbDataRcvrThreadRunning;
 	bool	m_chirpDataProcThreadRunning;
 	bool	m_dataProcThreadRunning;
@@ -481,60 +466,6 @@ signals:
 	//void	newIQData(int rx);
 	//void	newAudioDataEvent(float *lBuf, float *rBuf);
 };
-
  
-// *********************************************************************
-// Audio processor class
- 
-class AudioProcessor : public QObject {
-
-    Q_OBJECT
-
-public:
-	AudioProcessor(DataEngine *de = 0);
-	~AudioProcessor();
-
-	//int			id;
-
-public slots:
-	void		stop();
-	void		clientConnected(int rx);
-	void		audioReceiverChanged(int rx);
-	void		initAudioProcessorSocket();
-	void		processAudioData();
-	void		deviceWriteBuffer();
-
-private:
-	DataEngine		*m_dataEngine;
-	QUdpSocket		*m_audioProcessorSocket;
-	QMutex			m_mutex;
-	QByteArray		m_deviceSendDataSignature;
-	QByteArray		m_outBuffer;
-	QByteArray		m_outDatagram;
-
-	TNetworkDevicecard 	netDevice;
-
-	bool			m_setNetworkDeviceHeader;
-	long			m_sendSequence;
-	long			m_oldSendSequence;
-
-	volatile bool	m_stopped;
-
-	float			m_left[BUFFER_SIZE];
-	float			m_right[BUFFER_SIZE];
-
-	int				m_client;
-	int				m_audioRx;
-
-private slots:
-	void		displayAudioProcessorSocketError(QAbstractSocket::SocketError error);
-	
-signals:
-	void 		messageEvent(QString message);
-	void		rcveIQEvent(QObject *sender, int value);
-	void		outputBufferEvent(unsigned char* outbuffer);
-	void		newData();
-	void		newAudioData();
-};
 
 #endif  // _CUSDR_DATA_ENGINE_H

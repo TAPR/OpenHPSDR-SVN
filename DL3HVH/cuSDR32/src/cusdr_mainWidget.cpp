@@ -44,13 +44,13 @@
 	#include <private/qt_x11_p.h>
 #endif
 //#else 
-#ifdef Q_OS_WIN
-	#include "qt_windows.h"
-#endif
+//#ifdef Q_OS_WIN
+//	#include "qt_windows.h"
+//#endif
 //#else 
-#ifdef Q_OS_MAC
-	#include <private/qt_mac_p.h>
-#endif
+//#ifdef Q_OS_MAC
+//	#include <private/qt_mac_p.h>
+//#endif
 
 #define window_height1		600
 #define window_height2		750
@@ -153,11 +153,12 @@ MainWindow::~MainWindow() {
 */
 void MainWindow::setupConnections() {
 
-	CHECKED_CONNECT(
+	CHECKED_CONNECT_OPT(
 		m_dataEngine,
 		SIGNAL(systemMessageEvent(const QString&, int)),
 		this,
-		SLOT(showStatusBarMessage(const QString &, int)));
+		SLOT(showStatusBarMessage(const QString &, int)),
+		Qt::DirectConnection);
 
 	CHECKED_CONNECT(
 		m_dataEngine,

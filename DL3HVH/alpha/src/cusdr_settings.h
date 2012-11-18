@@ -27,7 +27,7 @@
 #ifndef CUSDR_SETTINGS_H
 #define CUSDR_SETTINGS_H
 
-#define DEBUG
+//#define DEBUG
 
 
 #include <QObject>

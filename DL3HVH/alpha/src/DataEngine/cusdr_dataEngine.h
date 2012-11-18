@@ -167,7 +167,7 @@ private:
 	//void	createAudioReceiver(int rx);
 	void	createAudioReceiver();
 
-	bool	initReceivers();
+	bool	initReceivers(int rx);
 	bool	start();
 	bool	startDataEngineWithoutConnection();
 	bool	findHPSDRDevices();

@@ -1,6 +1,6 @@
 /**
-* @file  cusdr_hpsdrIO.h
-* @brief HPSDR device network IO header file
+* @file  cusdr_discoverer.h
+* @brief HPSDR device discoverer header file
 * @author Hermann von Hasseln, DL3HVH
 * @version 0.1
 * @date 2012-05-19
@@ -25,8 +25,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef _CUSDR_HPSDRIO_H
-#define _CUSDR_HPSDRIO_H
+#ifndef _CUSDR_DISCOVERER_H
+#define _CUSDR_DISCOVERER_H
 
 //#include <QObject>
 //#include <QComboBox>
@@ -41,20 +41,20 @@
 
 #include "cusdr_settings.h"
 
-#ifdef LOG_HPSDRIO
-#   define HPSDRIO_DEBUG qDebug().nospace() << "HPSDR IO::\t"
+#ifdef LOG_DISCOVERER
+#   define DISCOVERER_DEBUG qDebug().nospace() << "Discoverer::\t"
 #else
-#   define HPSDRIO_DEBUG nullDebug()
+#   define DISCOVERER_DEBUG nullDebug()
 #endif
 
 
-class QHpsdrIO : public QObject {
+class Discoverer : public QObject {
 
     Q_OBJECT
 
 public:
-    QHpsdrIO(THPSDRParameter *ioData = 0);
-    ~QHpsdrIO();
+    Discoverer(THPSDRParameter *ioData = 0);
+    ~Discoverer();
 
 	int		findHPSDRDevices();
 	void	clear();
@@ -65,9 +65,7 @@ public slots:
 	
 private slots:
 	void	displayDiscoverySocketError(QAbstractSocket::SocketError error);
-	//void	metisDeviceChanged(int index);
-	//void	okBtnClicked();
-    
+
 private:
 	Settings*			set;
 	THPSDRParameter*	io;
@@ -85,4 +83,4 @@ signals:
 
 };
 
-#endif // _CUSDR_METISDIALOG_H
+#endif // _CUSDR_DISCOVERER_H

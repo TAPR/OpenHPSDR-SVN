@@ -138,6 +138,8 @@ OGLDisplayPanel::OGLDisplayPanel(QWidget *parent)
 
 	m_smeterFBO = 0;
 
+	m_colors = set->getPanadapterColors();
+
 	m_digitColor = QColor(68, 68, 68);
 	m_bkgColor1 = QColor(30, 30, 30);
 	m_bkgColor2 = QColor(50, 50, 50);
@@ -744,7 +746,8 @@ void OGLDisplayPanel::paintUpperRegion() {
 	str = m_alexString;
 	x1 += m_hermesStringWidth + m_versionStringWidth + 7*m_blankWidth;
 
-	rect = QRect(x1, y1, m_alexStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
+	//rect = QRect(x1, y1, m_alexStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
+	rect = QRect(x1, y1, m_alexStringWidth + 3*m_blankWidth, m_blankHeight + 4);
 
 	if (set->getAlexPresence()) {
 
@@ -985,7 +988,8 @@ void OGLDisplayPanel::paintSMeter() {
 	}
 
 	QRect rect = QRect(m_rxRect.right() + m_sMeterOffset, 0, m_sMeterWidth, height);
-	renderTexture(rect, m_smeterFBO->texture(), -1.0f);
+	//renderTexture(rect, m_smeterFBO->texture(), -1.0f);
+	renderTexture(rect, m_smeterFBO->texture(), -2.0f);
 	
 	// set a scissor box
 	glScissor(x1, size().height() - y2, x2, height);

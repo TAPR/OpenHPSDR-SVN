@@ -23,6 +23,8 @@
         <file>img/right_arrow.png</file>
         <file>img/up_arrow.png</file>
         <file>img/down_arrow.png</file>
+        <file>img/up_arrow_off.png</file>
+        <file>img/down_arrow_off.png</file>        
         <file>img/cusdrLogo.png</file>
         <file>img/cuSDR_32.ico</file>
         <file>img/cuSDR_64.ico</file>

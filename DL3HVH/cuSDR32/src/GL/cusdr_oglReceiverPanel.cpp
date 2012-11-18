@@ -1740,7 +1740,7 @@ void QGLReceiverPanel::drawReceiverInfo() {
 	else
 		col = QColor(48, 48, 48);
 
-	str = "AGC: %1";
+	str = "%1";
 	//str = str.arg(set->getAGCModeString(m_receiver));
 	str = str.arg(m_agcModeString);
 
@@ -3232,7 +3232,7 @@ void QGLReceiverPanel::setCoupledRx(QObject* sender, int value) {
 	Q_UNUSED(sender)
 
 	m_frequencyRxOnRx = value;
-	GRAPHICS_DEBUG << "showing frequency of Rx " << m_frequencyRxOnRx/10 << " on Rx " << m_frequencyRxOnRx%10;
+	//GRAPHICS_DEBUG << "showing frequency of Rx " << m_frequencyRxOnRx/10 << " on Rx " << m_frequencyRxOnRx%10;
 }
 
 void QGLReceiverPanel::freqRulerPositionChanged(float pos, int rx) {

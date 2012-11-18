@@ -68,8 +68,8 @@ DataEngine::DataEngine(QObject *parent)
 	, m_soundFileLoaded(false)
 	, m_audioProcessorRunning(false)
 	, m_chirpInititalized(false)
-	, m_netIOThreadRunning(false)
-	, m_dataRcvrThreadRunning(false)
+	, m_discoveryThreadRunning(false)
+	, m_dataIOThreadRunning(false)
 	, m_chirpDataProcThreadRunning(false)
 	, m_dataProcThreadRunning(false)
 	, m_audioRcvrThreadRunning(false)
@@ -103,12 +103,11 @@ DataEngine::DataEngine(QObject *parent)
 	clientConnected = false;
 
 	//currentRx = 0;
-	m_hpsdrIO = 0;
-	m_dataReceiver = 0;
+	m_discoverer = 0;
+	m_dataIO = 0;
 	m_dataProcessor = 0;
 	m_wbDataProcessor = 0;
 	m_audioReceiver = 0;
-	m_audioProcessor = 0;
 	m_chirpProcessor = 0;
 	m_wbAverager = 0;
 
@@ -361,12 +360,12 @@ bool DataEngine::startDataEngineWithoutConnection() {
 
 	if (io.inputBuffer.length() > 0) {
 
-		initReceivers();
-		if (!m_dataReceiver)	createDataReceiver();
+		initReceivers(1);
+		if (!m_dataIO)	createDataIO();
 		if (!m_dataProcessor)	createDataProcessor();
 		
 		// data receiver thread
-		if (!startDataReceiver(QThread::NormalPriority)) {
+		if (!startDataIO(QThread::NormalPriority)) {
 
 			setSystemState(QSDR::DataReceiverThreadError, m_hwInterface, m_serverMode, QSDR::DataEngineDown);
 			return false;
@@ -424,13 +423,13 @@ bool DataEngine::startDataEngineWithoutConnection() {
 
 bool DataEngine::findHPSDRDevices() {
 
-	if (!m_hpsdrIO) createHpsdrIO();
+	if (!m_discoverer) createDiscoverer();
 
 	// HPSDR network IO thread
-	if (!startHpsdrIO(QThread::NormalPriority)) {
+	if (!startDiscoverer(QThread::NormalPriority)) {
 
 		io.networkIOMutex.lock();
-		DATA_ENGINE_DEBUG << "HPSDR network IO thread could not be started.";
+		DATA_ENGINE_DEBUG << "HPSDR device discovery thread could not be started.";
 		io.networkIOMutex.unlock();
 		return false;
 	}
@@ -444,7 +443,7 @@ bool DataEngine::findHPSDRDevices() {
 	if (m_hpsdrDevices == 0) {
 
 		io.networkIOMutex.unlock();
-		stopHpsdrIO();
+		stopDiscoverer();
 		DATA_ENGINE_DEBUG << "no device found. HPSDR hardware powered? Network connection established?";
 		emit systemMessageEvent("no device found. HPSDR hardware powered? Network connection established?", 10000);
 
@@ -476,9 +475,10 @@ bool DataEngine::findHPSDRDevices() {
 
 		// stop the discovery thread
 		io.networkIOMutex.unlock();
-		stopHpsdrIO();
+		stopDiscoverer();
 
 		if (getFirmwareVersions()) return true;
+		return false;
 	}
 
 	return false;
@@ -488,10 +488,17 @@ bool DataEngine::getFirmwareVersions() {
 
 	m_fwCount = 0;
 
-	// as it says..
-	if (!initReceivers()) return false;
+	// init receivers
+	QString str;
+	int rcvrs = set->getNumberOfReceivers();
 
-	if (!m_dataReceiver) createDataReceiver();
+	str = "Initializing %1 receiver(s)...please wait";
+	emit systemMessageEvent(str.arg(set->getNumberOfReceivers()), rcvrs * 500);
+
+	if (!initReceivers(rcvrs)) return false;
+
+
+	if (!m_dataIO) createDataIO();
 		
 	if (!m_dataProcessor) createDataProcessor();
 
@@ -516,18 +523,9 @@ bool DataEngine::getFirmwareVersions() {
 
 	set->setRxList(RX);
 	connectDSPSlots();
-	for (int i = 0; i < set->getNumberOfReceivers(); i++) {
 
+	for (int i = 0; i < set->getNumberOfReceivers(); i++)
 		RX.at(i)->setAudioVolume(this, i, 0.0f);
-		setFrequency(this, true, i, set->getFrequencies().at(i));
-	}
-
-	// data receiver thread
-	if (!startDataReceiver(QThread::HighPriority)) {//  ::NormalPriority)) {
-
-		DATA_ENGINE_DEBUG << "data receiver thread could not be started.";
-		return false;
-	}
 
 	// IQ data processing thread
 	if (!startDataProcessor(QThread::NormalPriority)) {
@@ -536,22 +534,26 @@ bool DataEngine::getFirmwareVersions() {
 		return false;
 	}
 
-	setSampleRate(this, set->getSampleRate());
+	// data IO thread
+	if (!startDataIO(QThread::NormalPriority)) {//  ::NormalPriority)) {
+
+		DATA_ENGINE_DEBUG << "data IO thread could not be started.";
+		return false;
+	}
+
+	//setSampleRate(this, set->getSampleRate());
+	SleeperThread::msleep(100);
 
 	// pre-conditioning
 	for (int i = 0; i < io.receivers; i++)
-		sendInitFramesToNetworkDevice(i);
+		m_dataIO->sendInitFramesToNetworkDevice(i);
 				
 	if (m_serverMode == QSDR::SDRMode)
-		networkDeviceStartStop(0x01); // 0x01 for starting Metis without wide band data
+		m_dataIO->networkDeviceStartStop(0x01); // 0x01 for starting Metis without wide band data
 		
 	m_networkDeviceRunning = true;
-
 	setSystemState(QSDR::NoError, m_hwInterface, m_serverMode, QSDR::DataEngineUp);
-
-	// just give it a little time to get the firmware versions
-	//Sleep(100);
-	SleeperThread::msleep(100);
+	SleeperThread::msleep(300);
 
 	m_metisFW = set->getMetisVersion();
 	m_mercuryFW = set->getMercuryVersion();
@@ -568,51 +570,6 @@ bool DataEngine::getFirmwareVersions() {
 		wbBuffers = SMALLWIDEBANDSIZE / 512;
 
 	set->setWidebandBuffers(this, wbBuffers);
-
-//	if (m_metisFW != 0 &&  io.hpsdrDeviceName == "Hermes") {
-//
-//		stop();
-//
-//		QString msg = "Metis selected, but Hermes found!";
-//		set->showWarningDialog(msg);
-//		return false;
-//	}
-//
-//	if (m_hermesFW != 0 && io.hpsdrDeviceName == "Metis") {
-//
-//		stop();
-//
-//		QString msg = "Hermes selected, but Metis found!";
-//		set->showWarningDialog(msg);
-//		return false;
-//	}
-//
-//	if (m_penelopeFW == 0 && (set->getPenelopePresence() || set->getPennyLanePresence())) {
-//
-//		stop();
-//
-//		QString msg = "Penelope or Pennylane selected, but firmware version = 0 !";
-//		set->showWarningDialog(msg);
-//		return false;
-//	}
-//
-//	if (m_mercuryFW < 33 && set->getNumberOfReceivers() > 4 && io.hpsdrDeviceName == "Metis") {
-//
-//		stop();
-//
-//		QString msg = "Mercury FW < V3.3 has only 4 receivers!";
-//		set->showWarningDialog(msg);
-//		return false;
-//	}
-//
-//	if (m_hermesFW < 18 && set->getNumberOfReceivers() > 2 && io.hpsdrDeviceName == "Hermes") {
-//
-//		stop();
-//
-//		QString msg = "Hermes FW < V1.8 has only 2 receivers!";
-//		set->showWarningDialog(msg);
-//		return false;
-//	}
 
 	return checkFirmwareVersions();
 }
@@ -790,18 +747,16 @@ bool DataEngine::start() {
 	m_fwCount = 0;
 	m_sendState = 0;
 
-	// as it says..
-	if (!initReceivers()) return false;
+	int rcvrs = set->getNumberOfReceivers();
 
-	if (!m_dataReceiver) createDataReceiver();
+	if (!initReceivers(rcvrs)) return false;
+
+	if (!m_dataIO) createDataIO();
 		
 	if (!m_dataProcessor) createDataProcessor();
 		
 	if (m_serverMode == QSDR::SDRMode && !m_wbDataProcessor)
 		createWideBandDataProcessor();
-		
-	if (!m_audioProcessor) 
-		createAudioProcessor();
 
 	if ((m_serverMode == QSDR::ChirpWSPR) && !m_chirpProcessor)
 		createChirpDataProcessor();
@@ -869,7 +824,7 @@ bool DataEngine::start() {
 				return false;
 			}
 
-			RX.at(0)->setConnectedStatus(true);
+			//RX.at(0)->setConnectedStatus(true);
 
 			CHECKED_CONNECT(
 					set,
@@ -889,15 +844,13 @@ bool DataEngine::start() {
 
 	set->setRxList(RX);
 	connectDSPSlots();
-	for (int i = 0; i < io.receivers; i++) {
+
+	for (int i = 0; i < rcvrs; i++) {
 
 		RX.at(i)->setConnectedStatus(true);
 		RX.at(i)->setAudioVolume(this, i, RX.at(i)->getAudioVolume());
 		setFrequency(this, true, i, set->getFrequencies().at(i));
 	}
-
-	// Wide band data processing thread
-	//if (set->getWideBandData()) {
 
 	if (m_serverMode != QSDR::ChirpWSPR && !startWideBandDataProcessor(QThread::NormalPriority)) {
 
@@ -905,12 +858,12 @@ bool DataEngine::start() {
 		return false;
 	}
 
-	// data receiver thread
-	if (!startDataReceiver(QThread::HighPriority)) {//  ::NormalPriority)) {
-
-		DATA_ENGINE_DEBUG << "data receiver thread could not be started.";
-		return false;
-	}
+	// data IO thread
+//	if (!startDataIO(QThread::HighPriority)) {//  ::NormalPriority)) {
+//
+//		DATA_ENGINE_DEBUG << "data receiver thread could not be started.";
+//		return false;
+//	}
 
 	// IQ data processing thread
 	if (!startDataProcessor(QThread::NormalPriority)) {
@@ -919,50 +872,39 @@ bool DataEngine::start() {
 		return false;
 	}
 
-//	// audio processing thread
-//	if (!startAudioProcessor(QThread::NormalPriority, m_serverMode)) {
-//
-//		DATA_ENGINE_DEBUG << "audio processor thread could not be started.";
-//		return false;
-//	}
+	// data IO thread
+	if (!startDataIO(QThread::NormalPriority)) {//  ::NormalPriority::HighPriority)) {
+
+		DATA_ENGINE_DEBUG << "data IO thread could not be started.";
+		return false;
+	}
 
 	// start Sync,ADC and S-Meter timers
 	m_SyncChangedTime.start();
 	m_ADCChangedTime.start();
 	m_smeterTime.start();
 
+	// start the "frames-per-second" timer for all receivers
+	for (int i = 0; i < rcvrs; i++)
+		RX.at(i)->highResTimer->start();
+
 	// just give them a little time..
-	//Sleep(100);
 	SleeperThread::msleep(100);
 
-	setSampleRate(this, set->getSampleRate());
-
 	// pre-conditioning
-	//for (int i = 0; i < io.receivers; i++)
-	//	sendInitFramesToNetworkDevice(i);
-
-	sendInitFramesToNetworkDevice(0);
+	for (int i = 0; i < io.receivers; i++)
+		m_dataIO->sendInitFramesToNetworkDevice(i);
 				
 	if (m_serverMode == QSDR::SDRMode && set->getWideBandData())
-		networkDeviceStartStop(0x03); // 0x03 for starting Metis with wide band data
+		m_dataIO->networkDeviceStartStop(0x03); // 0x03 for starting the device with wide band data
 	else
-		networkDeviceStartStop(0x01); // 0x01 for starting Metis without wide band data
+		m_dataIO->networkDeviceStartStop(0x01); // 0x01 for starting the device without wide band data
 		
 	m_networkDeviceRunning = true;
 
-	// audio processing thread
-	if (!startAudioProcessor(QThread::NormalPriority, m_serverMode)) {
-
-		DATA_ENGINE_DEBUG << "audio processor thread could not be started.";
-		return false;
-	}
-
-
-	// start the "frames-per-second" timer for all receivers
-	for (int i = 0; i < io.receivers; i++)
-		RX.at(i)->highResTimer->start();
-
 	setSystemState(QSDR::NoError, m_hwInterface, m_serverMode, QSDR::DataEngineUp);
+
+	emit systemMessageEvent("System running", 4000);
 	return true;
 	//} // if (m_hpsdrDevices == 0)
 }
@@ -978,31 +920,29 @@ void DataEngine::stop() {
 				
 				// turn time stamping off
 				setTimeStamp(this, false);
-				//Sleep(10);
-				SleeperThread::msleep(10);
 
-				networkDeviceStartStop(0);
+				// stop the device
+				m_dataIO->networkDeviceStartStop(0);
 				m_networkDeviceRunning = false;
-
 				DATA_ENGINE_DEBUG << "HPSDR device stopped";
 
-				stopAudioProcessor();
-				stopDataReceiver();
+				// stop the threads
+				SleeperThread::msleep(100);
+				stopDataIO();
 				stopDataProcessor();
-				stopChirpDataProcessor();
+				//stopChirpDataProcessor();
 				if (m_wbDataProcessor)
 					stopWideBandDataProcessor();
 				
-				//Sleep(100);
+				// clear device list
+				SleeperThread::msleep(100);
 				set->clearMetisCardList();
-				//m_metisDialog->clear();
-				//m_networkIO->clear();
 				DATA_ENGINE_DEBUG << "device cards list cleared.";
 				break;
 
 			case QSDR::NoInterfaceMode:
 
-				stopDataReceiver();
+				stopDataIO();
 				
 				DATA_ENGINE_DEBUG << "data queue count: " << io.data_queue.count();
 				DATA_ENGINE_DEBUG << "chirp queue count: " << io.chirp_queue.count();
@@ -1096,11 +1036,11 @@ bool DataEngine::initDataEngine() {
 	return false;
 }
 
-bool DataEngine::initReceivers() {
+bool DataEngine::initReceivers(int rcvrs) {
 
-	int noOfReceivers = set->getNumberOfReceivers();
+	//int noOfReceivers = set->getNumberOfReceivers();
 
-	for (int i = 0; i < noOfReceivers; i++) {
+	for (int i = 0; i < rcvrs; i++) {
 	
 		Receiver *r = new Receiver(this, i);
 		//r->setID(i);
@@ -1126,8 +1066,8 @@ bool DataEngine::initReceivers() {
 	m_txFrame = 0;
 	
 	io.currentReceiver = 0;
+	io.receivers = rcvrs;
 
-	io.receivers = noOfReceivers;
 	//for (int i = 0; i < io.receivers; ++i) m_rx.append(i);
 
 	io.timing = 0;
@@ -1337,203 +1277,67 @@ void DataEngine::disconnectDSPSlots() {
 		SLOT(setFrequency(QObject *, bool, int, long)));
 }
 
-void DataEngine::sendInitFramesToNetworkDevice(int rx) {
-
-	QByteArray initDatagram;
-	initDatagram.resize(1032);
-	
-	initDatagram[0] = (char)0xEF;
-	initDatagram[1] = (char)0xFE;
-	initDatagram[2] = (char)0x01;
-	initDatagram[3] = (char)0x02;
-	initDatagram[4] = (char)0x00;
-	initDatagram[5] = (char)0x00;
-	initDatagram[6] = (char)0x00;
-	initDatagram[7] = (char)0x00;
-
-	initDatagram[8] = SYNC;
-    initDatagram[9] = SYNC;
-    initDatagram[10] = SYNC;
-
-	for (int i = 0; i < 5; i++) {
-		
-		initDatagram[i + 11]  = io.control_out[i];
-	}
-
-	for (int i = 16; i < 520; i++) {
-		
-		initDatagram[i]  = 0x00;
-	}
-
-	initDatagram[520] = SYNC;
-    initDatagram[521] = SYNC;
-    initDatagram[522] = SYNC;
-	
-	initDatagram[523] = io.control_out[0] | ((rx + 2) << 1);
-	initDatagram[524] = RX[rx]->getFrequency() >> 24;
-	initDatagram[525] = RX[rx]->getFrequency() >> 16;
-	initDatagram[526] = RX[rx]->getFrequency() >> 8;
-	initDatagram[527] = RX[rx]->getFrequency();
-
-	/*io.output_buffer[3] = io.control_out[0] | ((rx + 2) << 1);
-	io.output_buffer[4] = rxList[rx]->getFrequency() >> 24;
-	io.output_buffer[5] = rxList[rx]->getFrequency() >> 16;
-	io.output_buffer[6] = rxList[rx]->getFrequency() >> 8;
-	io.output_buffer[7] = rxList[rx]->getFrequency();*/
-	
-	/*initDatagram[523] = io.control_out[0] | (2 << 1);
-	initDatagram[524] = io.initialFrequency[0] >> 24;
-	initDatagram[525] = io.initialFrequency[0] >> 16;
-	initDatagram[526] = io.initialFrequency[0] >> 8;
-	initDatagram[527] = io.initialFrequency[0];*/
-
-	for (int i = 528; i < 1032; i++) {
-		
-		initDatagram[i]  = 0x00;
-	}
-
-	QUdpSocket socket;
-	socket.bind(QHostAddress(set->getHPSDRDeviceLocalAddr()), 
-				set->getMetisPort(),
-				//QUdpSocket::DefaultForPlatform);
-				QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress);
-				
-	for (int i = 0; i < 1; i++) {
-		
-		if (socket.writeDatagram(initDatagram.data(), initDatagram.size(), io.hpsdrDeviceIPAddress, METIS_PORT) < 0) {
-
-			io.networkIOMutex.lock();
-			DATA_ENGINE_DEBUG << "error sending init data to device: " << qPrintable(socket.errorString());
-			io.networkIOMutex.unlock();
-		}
-		else {
-
-			if (i == 0) {
-
-				io.networkIOMutex.lock();
-				DATA_ENGINE_DEBUG << "init frames sent to network device.";
-				io.networkIOMutex.unlock();
-			}
-		}
-	}
-	socket.close();
-}
- 
 //********************************************************
 // create, start/stop HPSDR device network IO
 
-void DataEngine::createHpsdrIO() {
+void DataEngine::createDiscoverer() {
 
-	m_hpsdrIO = new QHpsdrIO(&io);
+	m_discoverer = new Discoverer(&io);
 
-	m_netIOThread = new QThreadEx();
-	m_hpsdrIO->moveToThread(m_netIOThread);
+	m_discoveryThread = new QThreadEx();
+	m_discoverer->moveToThread(m_discoveryThread);
 
-	m_hpsdrIO->connect(
-					m_netIOThread, 
+	m_discoverer->connect(
+					m_discoveryThread,
 					SIGNAL(started()), 
 					SLOT(initHPSDRDevice()));
 }
 
-bool DataEngine::startHpsdrIO(QThread::Priority prio) {
+bool DataEngine::startDiscoverer(QThread::Priority prio) {
 
-	m_netIOThread->start(prio);
+	m_discoveryThread->start(prio);
 
-	if (m_netIOThread->isRunning()) {
+	if (m_discoveryThread->isRunning()) {
 					
-		m_netIOThreadRunning = true;
+		m_discoveryThreadRunning = true;
 		io.networkIOMutex.lock();
 		qDebug() << "";
-		DATA_ENGINE_DEBUG << "HPSDR network IO thread started.";
+		DATA_ENGINE_DEBUG << "HPSDR device discovery thread started.";
 		io.networkIOMutex.unlock();
 
 		return true;
 	}
 	else {
 
-		m_netIOThreadRunning = false;
+		m_discoveryThreadRunning = false;
 		return false;
 	}
 }
 
-void DataEngine::stopHpsdrIO() {
+void DataEngine::stopDiscoverer() {
 
-	if (m_netIOThread->isRunning()) {
+	if (m_discoveryThread->isRunning()) {
 		
-		m_netIOThread->quit();
-		m_netIOThread->wait(1000);
-		delete m_netIOThread;
-		delete m_hpsdrIO;
-		m_hpsdrIO = 0;
+		m_discoveryThread->quit();
+		m_discoveryThread->wait(1000);
+		delete m_discoveryThread;
+		delete m_discoverer;
+		m_discoverer = 0;
 
-		m_netIOThreadRunning = false;
+		m_discoveryThreadRunning = false;
 
 		DATA_ENGINE_DEBUG << "HPSDR discovery thread stopped and deleted.";
 	}
 	else
-		DATA_ENGINE_DEBUG << "network IO thread wasn't started.";
-}
-
-void DataEngine::networkDeviceStartStop(char value) {
-
-	TNetworkDevicecard metis = set->getCurrentMetisCard();
-	QUdpSocket socket;
-
-	if (socket.bind(QHostAddress(set->getHPSDRDeviceLocalAddr()),
-				set->getMetisPort(),
-				//QUdpSocket::DefaultForPlatform))
-				QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
-	{
-		DATA_ENGINE_DEBUG << "device start/stop: socket bound successful to local port " << set->getMetisPort();
-
-		m_commandDatagram.resize(64);
-		m_commandDatagram[0] = (char)0xEF;
-		m_commandDatagram[1] = (char)0xFE;
-		m_commandDatagram[2] = (char)0x04;
-		m_commandDatagram[3] = (char)value;
-
-		for (int i = 4; i < 64; i++) m_commandDatagram[i] = 0x00;
-
-		//if (socket.writeDatagram(m_commandDatagram, m_metisCards[0].ip_address, METIS_PORT) == 64) {
-		if (socket.writeDatagram(m_commandDatagram, metis.ip_address, METIS_PORT) == 64) {
-	
-			//if (value == 1) {
-			if (value != 0) {
-
-				io.networkIOMutex.lock();
-				DATA_ENGINE_DEBUG << "sent start command to device at: "<< qPrintable(metis.ip_address.toString());
-				io.networkIOMutex.unlock();
-				m_networkDeviceRunning = true;
-			}
-			else {
-
-				//DATA_ENGINE_DEBUG << "sent stop command to Metis at"<< m_metisCards[0].ip_address.toString();
-				io.networkIOMutex.lock();
-				DATA_ENGINE_DEBUG << "sent stop command to device at: "<< qPrintable(metis.ip_address.toString());
-				io.networkIOMutex.unlock();
-				m_networkDeviceRunning = false;
-			}
-		}
-		else
-			DATA_ENGINE_DEBUG << "device start/stop: sending command to device failed.";
-
-		//socket.close();
-	}
-	else {
-
-		DATA_ENGINE_DEBUG << "device start/stop: socket binding failed.";
-	}
-
-	socket.close();
-	DATA_ENGINE_DEBUG << "device start/stop: socket closed.";
+		DATA_ENGINE_DEBUG << "HPSDR discovery thread wasn't started.";
 }
 
 //********************************************************
 // create, start/stop data receiver
 
-void DataEngine::createDataReceiver() {
+void DataEngine::createDataIO() {
 
-	m_dataReceiver = new DataReceiver(&io);
+	m_dataIO = new DataIO(&io);
 
 	switch (m_serverMode) {
 		
@@ -1565,15 +1369,15 @@ void DataEngine::createDataReceiver() {
 			break;
 	}
 
-	m_dataRcvrThread = new QThreadEx();
-	m_dataReceiver->moveToThread(m_dataRcvrThread);
+	m_dataIOThread = new QThreadEx();
+	m_dataIO->moveToThread(m_dataIOThread);
 
 	switch (m_hwInterface) {
 
 		case QSDR::NoInterfaceMode:
 
-			m_dataReceiver->connect(
-						m_dataRcvrThread, 
+			m_dataIO->connect(
+						m_dataIOThread,
 						SIGNAL(started()), 
 						SLOT(readData()));
 			break;
@@ -1581,40 +1385,40 @@ void DataEngine::createDataReceiver() {
 		case QSDR::Metis:
 		case QSDR::Hermes:
 
-			m_dataReceiver->connect(
-						m_dataRcvrThread, 
+			m_dataIO->connect(
+						m_dataIOThread,
 						SIGNAL(started()), 
 						SLOT(initDataReceiverSocket()));
 			break;
 	}
 }
 
-bool DataEngine::startDataReceiver(QThread::Priority prio) {
+bool DataEngine::startDataIO(QThread::Priority prio) {
 
-	m_dataRcvrThread->start(prio);
+	m_dataIOThread->start(prio);
 
-	if (m_dataRcvrThread->isRunning()) {
+	if (m_dataIOThread->isRunning()) {
 					
-		m_dataRcvrThreadRunning = true;
+		m_dataIOThreadRunning = true;
 		io.networkIOMutex.lock();
-		DATA_ENGINE_DEBUG << "data receiver thread started.";
+		DATA_ENGINE_DEBUG << "data IO thread started.";
 		io.networkIOMutex.unlock();
 
 		return true;
 	}
 	else {
 
-		m_dataRcvrThreadRunning = false;
+		m_dataIOThreadRunning = false;
 		setSystemState(QSDR::DataProcessThreadError, m_hwInterface, m_serverMode, QSDR::DataEngineDown);
 		return false;
 	}
 }
 
-void DataEngine::stopDataReceiver() {
+void DataEngine::stopDataIO() {
 
-	if (m_dataRcvrThread->isRunning()) {
+	if (m_dataIOThread->isRunning()) {
 					
-		m_dataReceiver->stop();
+		m_dataIO->stop();
 
 		/*if (m_serverMode == QSDR::InternalDSP || m_serverMode == QSDR::ChirpWSPR) {
 
@@ -1622,11 +1426,11 @@ void DataEngine::stopDataReceiver() {
 				io.iq_queue.enqueue(m_datagram);
 		}*/
 
-		m_dataRcvrThread->quit();
-		m_dataRcvrThread->wait(1000);
-		delete m_dataRcvrThread;
-		delete m_dataReceiver;
-		m_dataReceiver = 0;
+		m_dataIOThread->quit();
+		m_dataIOThread->wait(1000);
+		delete m_dataIOThread;
+		delete m_dataIO;
+		m_dataIO = 0;
 
 		if (m_serverMode == QSDR::ChirpWSPRFile) {
 
@@ -1634,12 +1438,12 @@ void DataEngine::stopDataReceiver() {
 				io.chirp_queue.dequeue();
 		}
 
-		m_dataRcvrThreadRunning = false;
+		m_dataIOThreadRunning = false;
 
-		DATA_ENGINE_DEBUG << "data receiver thread deleted.";
+		DATA_ENGINE_DEBUG << "data IO thread deleted.";
 	}
 	else
-		DATA_ENGINE_DEBUG << "data receiver thread wasn't started.";
+		DATA_ENGINE_DEBUG << "data IO thread wasn't started.";
 }
  
 //********************************************************
@@ -2009,125 +1813,6 @@ void DataEngine::createAudioReceiver() {
 						SLOT(initClient()));
 }
 
-void DataEngine::createAudioProcessor() {
-
-	m_audioProcessor = new AudioProcessor(this);
-	
-	/*CHECKED_CONNECT(
-		m_audioProcessor, 
-		SIGNAL(AudioProcessorRunningEvent(bool)), 
-		this, 
-		SLOT(setAudioProcessorRunning(bool)));*/
-
-	CHECKED_CONNECT_OPT(
-		this, 
-		SIGNAL(clientConnectedEvent(int)), 
-		m_audioProcessor, 
-		SLOT(clientConnected(int)), 
-		Qt::DirectConnection);
-
-	CHECKED_CONNECT_OPT(
-		this, 
-		SIGNAL(audioRxEvent(int)), 
-		m_audioProcessor, 
-		SLOT(audioReceiverChanged(int)), 
-		Qt::DirectConnection);
-
-	CHECKED_CONNECT_OPT(
-		this,
-		SIGNAL(audioDataReady()),
-		m_audioProcessor,
-		SLOT(deviceWriteBuffer()),
-		Qt::DirectConnection);
-
-	switch (m_serverMode) {
-
-//		case QSDR::ExternalDSP:
-//
-//			m_audioProcThread = new QThreadEx();
-//			m_audioProcessor->moveToThread(m_audioProcThread);
-//			m_audioProcessor->connect(
-//								m_audioProcThread,
-//								SIGNAL(started()),
-//								SLOT(processAudioData()));
-//			break;
-
-		case QSDR::SDRMode:
-
-			break;
-			
-		case QSDR::NoServerMode:
-		case QSDR::DemoMode:
-		case QSDR::ChirpWSPR:
-		case QSDR::ChirpWSPRFile:
-			break;
-	}
-
-	/*m_audioProcThread = new QThreadEx();
-	m_audioProcessor->moveToThread(m_udioProcThread);
-	m_audioProcessor->connect(m_audioProcThread, SIGNAL(started()), SLOT(processAudioData()));*/
-
-	//setSampleRate(this, set->getSampleRate());
-}
-
-bool DataEngine::startAudioProcessor(QThread::Priority prio, QSDR::_ServerMode mode) {
-
-  Q_UNUSED(prio)
-
-	if (!m_audioProcessorRunning) {
-
-		switch (mode) {
-
-			case QSDR::SDRMode:
-			case QSDR::ChirpWSPR:
-
-				m_audioProcessor->initAudioProcessorSocket();
-				m_audioProcessorRunning = true;
-
-				return true;
-				
-			//case QSDR::ExternalDSP:
-			case QSDR::NoServerMode:
-			case QSDR::DemoMode:
-			case QSDR::ChirpWSPRFile:
-				break;
-		}
-
-		return false;
-	}
-	else
-		return false;
-}
-
-void DataEngine::stopAudioProcessor() {
-
-	if (m_audioProcessorRunning) {
-				
-		m_audioProcessor->stop();
-		io.au_queue.enqueue(m_datagram);
-
-		if (m_audioProcThreadRunning) {
-			m_audioProcThread->quit();
-			m_audioProcThread->wait();
-		}
-		delete m_audioProcessor;
-		m_audioProcessor = 0;
-
-		m_audioProcessorRunning = false;
-
-		DATA_ENGINE_DEBUG << "audio processor thread deleted.";
-	}
-	else
-		DATA_ENGINE_DEBUG << "audio processor thread wasn't started.";
-}
- 
-void DataEngine::displayDiscoverySocketError(QAbstractSocket::SocketError error) {
-
-	io.networkIOMutex.lock();
-	DATA_ENGINE_DEBUG << "discovery socket error:" << error;
-	io.networkIOMutex.unlock();
-}
-
  
 //*****************************************************************************
 // HPSDR data processing functions
@@ -2461,7 +2146,7 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 	qint64 length = buffer.length();
 	if (buffer.length() != size) {
 
-		DATA_PROCESSOR_DEBUG << "wrong wide band buffer length: " << length;
+		//DATA_PROCESSOR_DEBUG << "wrong wide band buffer length: " << length;
 		return;
 	}
 
@@ -2960,8 +2645,7 @@ void DataEngine::writeControlBytes() {
 			//io.audioDatagram = QByteArray(reinterpret_cast<const char*>(&io.output_buffer), sizeof(io.output_buffer));
 			io.audioDatagram = QByteArray::fromRawData((const char *)&io.output_buffer, IO_BUFFER_SIZE);
 			
-			//m_audioProcessor->deviceWriteBuffer();
-			emit audioDataReady();
+			m_dataIO->writeData();
 			break;
 			
 		case QSDR::NoInterfaceMode:
@@ -3048,10 +2732,10 @@ float DataEngine::getFilterSizeCalibrationOffset() {
 
 void DataEngine::searchHpsdrNetworkDevices() {
 
-	if (!m_hpsdrIO) createHpsdrIO();
+	if (!m_discoverer) createDiscoverer();
 
 	// HPSDR network IO thread
-	if (!startHpsdrIO(QThread::NormalPriority)) {
+	if (!startDiscoverer(QThread::NormalPriority)) {
 
 		DATA_ENGINE_DEBUG << "HPSDR network discovery thread could not be started.";
 		return;
@@ -3060,11 +2744,11 @@ void DataEngine::searchHpsdrNetworkDevices() {
 	io.networkIOMutex.lock();
 	io.devicefound.wait(&io.networkIOMutex);
 
-	//m_hpsdrIO->findHPSDRDevices();
+	//m_discoverer->findHPSDRDevices();
 
 	// stop the discovery thread
 	io.networkIOMutex.unlock();
-	stopHpsdrIO();
+	stopDiscoverer();
 }
 
 void DataEngine::setHPSDRDeviceNumber(int value) {
@@ -3763,162 +3447,3 @@ void WideBandDataProcessor::processWideBandData() {
 	}
 }
 
- 
-// *********************************************************************
-// Audio processor
-
-AudioProcessor::AudioProcessor(DataEngine *de)
-	: QObject()
-	, m_dataEngine(de)
-	, m_audioProcessorSocket(0)
-	, m_setNetworkDeviceHeader(true)
-	, m_stopped(false)
-	, m_client(0)
-	, m_audioRx(0)
-{
-	//m_stopped = false;
-	//m_setNetworkDeviceHeader = true;
-	
-	m_audioProcessorSocket = 0;
-
-	m_sendSequence = 0L;
-	m_oldSendSequence = 0L;
-	
-	m_deviceSendDataSignature.resize(4);
-	m_deviceSendDataSignature[0] = (char)0xEF;
-	m_deviceSendDataSignature[1] = (char)0xFE;
-	m_deviceSendDataSignature[2] = (char)0x01;
-	m_deviceSendDataSignature[3] = (char)0x02;
-}
-
-AudioProcessor::~AudioProcessor() {
-
-	m_audioProcessorSocket->close();
-
-//	if (m_audioProcessorSocket) {
-//		m_audioProcessorSocket->close();
-//		delete m_audioProcessorSocket;
-//		m_audioProcessorSocket = 0;
-//	}
-}
-
-void AudioProcessor::stop() {
-
-	m_stopped = true;
-}
-
-void AudioProcessor::initAudioProcessorSocket() {
-
-	netDevice = m_dataEngine->set->getCurrentMetisCard();
-	m_audioProcessorSocket = new QUdpSocket();
-
-	if (m_audioProcessorSocket->bind(QHostAddress(m_dataEngine->set->getHPSDRDeviceLocalAddr()),
-			 	 	 	 	 	 	 m_dataEngine->set->getMetisPort(),
-			 	 	 	 	 	 	 //QUdpSocket::DefaultForPlatform))
-			 	 	 	 	 	 	 QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
-	{
-		CHECKED_CONNECT(
-				m_audioProcessorSocket,
-				SIGNAL(error(QAbstractSocket::SocketError)),
-				this,
-				SLOT(displayAudioProcessorSocketError(QAbstractSocket::SocketError)));
-
-		m_dataEngine->setAudioProcessorRunning(true);
-
-		m_dataEngine->io.networkIOMutex.lock();
-		AUDIO_PROCESSOR_DEBUG << "audio processor socket bound successful to local port " << m_dataEngine->set->getMetisPort();
-		m_dataEngine->io.networkIOMutex.unlock();
-	}
-	else {
-
-		m_dataEngine->io.networkIOMutex.lock();
-		AUDIO_PROCESSOR_DEBUG << "audio processor socket binding failed.";
-		m_dataEngine->io.networkIOMutex.unlock();
-
-	}
-}
-
-void AudioProcessor::audioReceiverChanged(int rx) {
-
-	m_audioRx = rx;
-}
-
-void AudioProcessor::clientConnected(int rx) {
-
-	m_mutex.lock();
-	m_client = rx;
-	m_mutex.unlock();
-}
-
-void AudioProcessor::displayAudioProcessorSocketError(QAbstractSocket::SocketError error) {
-
-	AUDIO_PROCESSOR_DEBUG << "audio processor socket error: " << error;
-}
-
-void AudioProcessor::processAudioData() {
-
-	initAudioProcessorSocket();
-
-	forever {
-		
-		//DATA_ENGINE_DEBUG << "audioQueue length = " << m_dataEngine->io.au_queue.length();
-		m_outBuffer = m_dataEngine->io.au_queue.dequeue();
-		
-		m_mutex.lock();
-		if (m_stopped) {
-			m_stopped = false;
-			m_mutex.unlock();
-			break;
-		}
-		m_mutex.unlock();
-
-		memcpy(
-			(float *) &m_left[0], 
-			(float *) m_outBuffer.left(IO_AUDIOBUFFER_SIZE/2).data(), 
-			BUFFER_SIZE * sizeof(float));
-
-		memcpy(
-			(float *) &m_right[0], 
-			(float *) m_outBuffer.right(IO_AUDIOBUFFER_SIZE/2).data(), 
-			BUFFER_SIZE * sizeof(float));
-		
-		m_dataEngine->processOutputBuffer(m_left, m_right);
-	}
-
-
-	disconnect(this);
-	m_audioProcessorSocket->close();
-	delete m_audioProcessorSocket;
-	m_audioProcessorSocket = NULL;
-}
-
-void AudioProcessor::deviceWriteBuffer() {
-
-	if (m_setNetworkDeviceHeader) {
-
-		m_outDatagram.resize(0);
-        m_outDatagram += m_deviceSendDataSignature;
-
-		QByteArray seq(reinterpret_cast<const char*>(&m_sendSequence), sizeof(m_sendSequence));
-
-		m_outDatagram += seq;
-		m_outDatagram += m_dataEngine->io.audioDatagram;
-
-		m_sendSequence++;
-        m_setNetworkDeviceHeader = false;
-    } 
-	else {
-
-		m_outDatagram += m_dataEngine->io.audioDatagram;
-
-		if (m_audioProcessorSocket->writeDatagram(m_outDatagram, netDevice.ip_address, METIS_PORT) < 0)
-			AUDIO_PROCESSOR_DEBUG << "error sending data to Metis:" << m_audioProcessorSocket->errorString();
-
-		if (m_sendSequence != m_oldSendSequence + 1)
-			AUDIO_PROCESSOR_DEBUG << "output sequence error: old =" << m_oldSendSequence << "; new =" << m_sendSequence;
-
-		m_oldSendSequence = m_sendSequence;
-		m_setNetworkDeviceHeader = true;
-    }
-}
- 

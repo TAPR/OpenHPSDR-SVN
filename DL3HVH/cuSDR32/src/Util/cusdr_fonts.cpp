@@ -33,8 +33,8 @@ CFonts::CFonts(QObject *parent)
 	m_fonts.tinyFont.setStyleStrategy(QFont::PreferAntialias);
 	m_fonts.tinyFont.setFixedPitch(true);
 	#if defined(Q_OS_MAC)
-		m_tinyFont.setPixelSize(8);
-		m_tinyFont.setFamily("Arial");
+		m_fonts.tinyFont.setPixelSize(8);
+		m_fonts.tinyFont.setFamily("Arial");
 		//#endif
 	#elif defined(Q_OS_WIN32)
 		m_fonts.tinyFont.setPixelSize(8);
