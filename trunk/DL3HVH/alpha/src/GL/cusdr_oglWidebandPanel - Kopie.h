@@ -194,8 +194,6 @@ private:
 	int			m_specAveragingCnt;
 	int			m_mercuryAttenuator;
 	int			m_dBmScaleTextPos;
-	int			m_wbSpectrumBufferLength;
-	int			m_scaledBufferSize;
 	
 	float		m_cameraDistance;
 
