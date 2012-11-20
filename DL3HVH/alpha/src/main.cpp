@@ -86,10 +86,6 @@ void cuSDRMessageHandler(QtMsgType type, const char *msg) {
 
 int main(int argc, char *argv[]) {
 
-	#if (QT_VERSION < 0x040800)
-		#error("You need Qt v4.8.0 or later to compile this");
-	#endif
-
 	#ifndef DEBUG
 		qInstallMsgHandler(cuSDRMessageHandler);
 	#endif

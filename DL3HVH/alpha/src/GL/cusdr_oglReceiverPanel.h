@@ -86,8 +86,8 @@ private:
 	QSDRGraphics::_Panadapter	m_panadapterMode;
 	QSDRGraphics::_WfScheme 	m_waterColorScheme;
 
-	CFonts		*fonts;
-	TFonts		m_fonts;
+	CFonts			*fonts;
+	TFonts			m_fonts;
 
 	AGCMode			m_agcMode;
 
@@ -99,9 +99,7 @@ private:
 	QString			m_bandText;
 	QString			m_agcModeString;
 
-	//QGLWidget		*m_shareWidget;
-
-	DualModeAverager*	averager;
+	DualModeAverager	*averager;
 
 	TScale			m_frequencyScale;
 	TScale			m_dBmScale;

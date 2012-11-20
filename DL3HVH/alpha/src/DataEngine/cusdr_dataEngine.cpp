@@ -463,7 +463,8 @@ bool DataEngine::findHPSDRDevices() {
 			DATA_ENGINE_DEBUG 	<< "Device "
 								<< i << " @ "
 								<< qPrintable(metisList.at(i).ip_address.toString())
-								<< " [" << qPrintable((char *) &metisList.at(i).mac_address) << "]";
+								//<< " [" << qPrintable((char *) &metisList.at(i).mac_address) << "]";
+								<< " [" << metisList.at(i).mac_address << "]";
 		}
 
 		io.hpsdrDeviceIPAddress = set->getCurrentMetisCard().ip_address;
