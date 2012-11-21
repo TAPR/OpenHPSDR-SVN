@@ -43,43 +43,43 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
-      <memberdef kind="function" id="hpsdr__hermesNB_8h_1aa405e7b7e4faebf450cbe70abc6ef4d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="hpsdr__hermesNB_8h_1acb796edf3630b9351d4e5506706090b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>__GR_ATTR_IMPORT <ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref></type>
         <definition>__GR_ATTR_IMPORT hpsdr_hermesNB_sptr hpsdr_make_hermesNB</definition>
-        <argsstring>(int param1, int param2, int param3)</argsstring>
+        <argsstring>(int RxF, int RxSmp, int RxPre)</argsstring>
         <name>hpsdr_make_hermesNB</name>
         <param>
           <type>int</type>
-          <declname>param1</declname>
+          <declname>RxF</declname>
         </param>
         <param>
           <type>int</type>
-          <declname>param2</declname>
+          <declname>RxSmp</declname>
         </param>
         <param>
           <type>int</type>
-          <declname>param3</declname>
+          <declname>RxPre</declname>
         </param>
         <briefdescription>
 <para>Make a HermesNB module. </para>        </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>param1</parametername>
+<parametername>RxF</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>Receive frequency, Hz. </para></parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>param2</parametername>
+<parametername>RxSmp</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>Receive Sample Rate, 192000, 96000, or 48000 </para></parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>param3</parametername>
+<parametername>RxPre</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>Rx Preamp on (1) / off (0) </para></parameterdescription>
@@ -131,13 +131,13 @@
 <codeline lineno="33" refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhpsdr__hermesNB" kindref="compound" tooltip="Prototype for Hermes module.">hpsdr_hermesNB</ref>;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;hpsdr_hermesNB&gt;<sp/><ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref>;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><ref refid="hpsdr__api_8h_1a80229b92a018bb12b0f2995f2657bdac" kindref="member">HPSDR_API</ref><sp/><ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref><sp/><ref refid="hpsdr__hermesNB_8h_1aa405e7b7e4faebf450cbe70abc6ef4d4" kindref="member" tooltip="Make a HermesNB module.">hpsdr_make_hermesNB</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>param1,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>param2,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>param3);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><ref refid="hpsdr__api_8h_1a80229b92a018bb12b0f2995f2657bdac" kindref="member">HPSDR_API</ref><sp/><ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref><sp/><ref refid="hpsdr__hermesNB_8h_1acb796edf3630b9351d4e5506706090b1" kindref="member" tooltip="Make a HermesNB module.">hpsdr_make_hermesNB</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxF,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxSmp,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxPre);</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56" refid="classhpsdr__hermesNB" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="hpsdr__api_8h_1a80229b92a018bb12b0f2995f2657bdac" kindref="member">HPSDR_API</ref><sp/><ref refid="classhpsdr__hermesNB" kindref="compound" tooltip="Prototype for Hermes module.">hpsdr_hermesNB</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr_block</highlight></codeline>
 <codeline lineno="57"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="hpsdr__api_8h_1a80229b92a018bb12b0f2995f2657bdac" kindref="member">HPSDR_API</ref><sp/><ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref><sp/><ref refid="hpsdr__hermesNB_8h_1aa405e7b7e4faebf450cbe70abc6ef4d4" kindref="member" tooltip="Make a HermesNB module.">hpsdr_make_hermesNB</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>param1,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>param2,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>param3);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="hpsdr__api_8h_1a80229b92a018bb12b0f2995f2657bdac" kindref="member">HPSDR_API</ref><sp/><ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref><sp/><ref refid="hpsdr__hermesNB_8h_1acb796edf3630b9351d4e5506706090b1" kindref="member" tooltip="Make a HermesNB module.">hpsdr_make_hermesNB</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxF,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxSmp,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxPre);</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhpsdr__hermesNB" kindref="compound" tooltip="Prototype for Hermes module.">hpsdr_hermesNB</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>param1,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>param2,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>param3);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhpsdr__hermesNB" kindref="compound" tooltip="Prototype for Hermes module.">hpsdr_hermesNB</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxF,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxSmp,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxPre);</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~<ref refid="classhpsdr__hermesNB" kindref="compound" tooltip="Prototype for Hermes module.">hpsdr_hermesNB</ref>();</highlight></codeline>

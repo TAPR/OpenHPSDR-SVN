@@ -32,7 +32,10 @@
 #define HermesProxy_H
 
 #define NUMRXIQBUFS	128		// number of receiver IQ buffers in circular queue.
+					// Must be integral power of 2 (2,4,8,16,32,64, etc.)
+
 #define RXBUFSIZE	256		// number of floats in one RxIQBuf, #complexes is half
+					// Must be integral power of 2 (2,4,8,16,32,64, etc.)
 
 typedef float* IQBuf_t;			// IQ buffer type (IQ samples as floats)
 
@@ -40,9 +43,6 @@ class HermesProxy
 {
 
 private:
-//	int TxControlCycler;		// cycles through C0 control registers
-//	int TxIQCount;			// Accumulated TxBuffer byte count ready to go to Hermes
-//	int ModuleIndex;		// Metis index of selected Hermes module 
 
 	IQBuf_t RxIQBuf[NUMRXIQBUFS];	// ReceiveIQ buffers
 	unsigned RxWriteCounter;	// Which Rx buffer to write to
@@ -53,7 +53,7 @@ private:
 	unsigned long TotalRxBufCount;	// Total buffer count (will roll over often)
 
 public:
-//	int NumberReceivers;
+
 	unsigned ReceiveFrequency;
 	unsigned TransmitFrequency;
 	int RxSampleRate;

@@ -4,10 +4,10 @@
   <key>hpsdr_hermesNB</key>
   <category>hpsdr</category>
   <import>import hpsdr</import>
-  <make>hpsdr.hermesNB($param1, $param2, $param3)</make>
-  <callback>set_ReceiveFrequency($param1)</callback>
-  <callback>set_RxSampRate($param2)</callback>
-  <callback>set_RxPreamp($param3)</callback>
+  <make>hpsdr.hermesNB($RxF, $RxSmp, $RxPre)</make>
+  <callback>set_ReceiveFrequency($RxF)</callback>
+  <callback>set_RxSampRate($RxSmp)</callback>
+  <callback>set_RxPreamp($RxPre)</callback>
  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
@@ -15,19 +15,19 @@
        * type -->
   <param>
     <name>Receive Frequency, Hz.</name>
-    <key>param1</key>
+    <key>RxF</key>
     <value>7200000</value>
     <type>real</type>
   </param>
   <param>
     <name>Rx Sample Rate</name>
-    <key>param2</key>
+    <key>RxSmp</key>
     <value>192000</value>
     <type>int</type>
   </param>
   <param>
     <name>Rx Preamp On/Off</name>
-    <key>param3</key>
+    <key>RxPre</key>
     <value>0</value>
     <type>int</type>
   </param>
@@ -39,19 +39,22 @@
        * optional (set to 1 for optional inputs) -->
   <sink>
     <name>in</name>
-
-<!-- e.g. int, real, complex, byte, short, xxx_vector, ...-->
-    <type>float</type>
+    <type>complex</type>
   </sink>
 
   <!-- Make one 'source' node per output. Sub-nodes:
        * name (an identifier for the GUI)
-       * type
+       * type e.g.   int, real, complex, byte, short, xxx_vector, ...
        * vlen
        * optional (set to 1 for optional inputs) -->
   <source>
     <name>out</name>
-<!-- e.g. int, real, complex, byte, short, xxx_vector, ...-->
     <type>complex</type>
   </source>
+  <doc>
+  This block is the HPSDR Hermes/Metis module.
+  It supports one receiver in the Narrow Band (digital downconversion) mode.
+  Receive Frequency, Receive Sample Rate, and Receive Preamp can be set.
+  Currently does not support transmit operation, nor more than one receiver.
+  </doc>
 </block>

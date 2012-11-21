@@ -349,7 +349,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="40" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="39" bodyend="80"/>
+    <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="43" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="42" bodyend="80"/>
     <listofallmembers>
       <member refid="classHermesProxy_1a76e0f1869a8ce129ffcf728b39691bc1" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ADCdither</name></member>
       <member refid="classHermesProxy_1a52b672f8d375556dbf420caab39f9615" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ADCoverload</name></member>
