@@ -34,12 +34,12 @@ class hpsdr_hermesNB;
 typedef boost::shared_ptr<hpsdr_hermesNB> hpsdr_hermesNB_sptr;
 
 /*! \brief Make a HermesNB module
- * \param param1  Receive frequency, Hz.
- * \param param2  Receive Sample Rate, 192000, 96000, or 48000
- * \param param3  Rx Preamp on (1) / off (0)
+ * \param RxF    Receive frequency, Hz.
+ * \param RxSmp  Receive Sample Rate, 192000, 96000, or 48000
+ * \param RxPre  Rx Preamp on (1) / off (0)
  */
 
-HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int param1, int param2, int param3);
+HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre);
 
 /*!
  * \brief Prototype for Hermes module
@@ -48,16 +48,16 @@ HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int param1, int param2, int p
  * Initial prototype to allow recieving IQ data from Hermes
  * Supports callbacks which allow sliders to change values at runtime.
  *
- * \param param1  Receive frequency, Hz.
- * \param param2  Receive Sample Rate, 192000, 96000, or 48000
- * \param param3  Rx Preamp on (1) / off (0)
+ * \param RxF    Receive frequency, Hz.
+ * \param RxSmp  Receive Sample Rate, 192000, 96000, or 48000
+ * \param RxPre  Rx Preamp on (1) / off (0)
  * 
  */
 class HPSDR_API hpsdr_hermesNB : public gr_block
 {
-	friend HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int param1, int param2, int param3);
+	friend HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre);
 
-	hpsdr_hermesNB (int param1, int param2, int param3);
+	hpsdr_hermesNB (int RxF, int RxSmp, int RxPre);
 
  public:
 	~hpsdr_hermesNB();

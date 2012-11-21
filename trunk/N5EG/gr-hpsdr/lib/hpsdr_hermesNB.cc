@@ -32,14 +32,15 @@ HermesProxy* Hermes;	// make it visible to metis.cc
 
 
 /*! \brief Make a hermesNB module
- * \param param1  the amplitude scaling factor
- * \param param2  the offset value (is added to input * scale)
+ * \param param1  Receive Frequency
+ * \param param2  Receive Sample Rate
+ * \param param3  Receive Preamp
  */
 
 hpsdr_hermesNB_sptr
-hpsdr_make_hermesNB (int param1, int param2, int param3)
+hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre)
 {
-    return gnuradio::get_initial_sptr(new hpsdr_hermesNB (param1, param2, param3));
+    return gnuradio::get_initial_sptr(new hpsdr_hermesNB (RxF, RxSmp, RxPre));
 }
 
 
@@ -49,37 +50,38 @@ hpsdr_make_hermesNB (int param1, int param2, int param3)
  * \details
  * Supports callbacks which allow sliders to change values at runtime.
  *
- * \param param1  the amplitude scaling factor (multiply each input by this value).
- * \param param2  the offset value (is added to input * scale)
+ * \param RxF    Receive Frequency
+ * \param RxSmp  Receive Sample Rate
+ * \param RxPre  Receive Preamp
  * 
  */
 
-hpsdr_hermesNB::hpsdr_hermesNB (int param1, int param2, int param3)
+hpsdr_hermesNB::hpsdr_hermesNB (int RxF, int RxSmp, int RxPre)
 	: gr_block ("hermesNB",
-		gr_make_io_signature (1,1, sizeof (float)),	 // input stream signature
-		gr_make_io_signature (1,1, sizeof (gr_complex))) // output stream signature
+		gr_make_io_signature (1,1, sizeof (gr_complex)),  // input stream signature (min one, max one input)
+		gr_make_io_signature (1,1, sizeof (gr_complex)))  // output stream signature (min one, max one output)
 {
-	Hermes = new HermesProxy(param1);	// Create proxy, do Hermes ethernet discovery
-	Hermes->RxSampleRate = param2;
-	Hermes->RxPreamp = param3;
+	Hermes = new HermesProxy(RxF);	// Create proxy, do Hermes ethernet discovery
+	Hermes->RxSampleRate = RxSmp;
+	Hermes->RxPreamp = RxPre;
 }
 
 
-void hpsdr_hermesNB::set_ReceiveFrequency (float param1) // callback to allow slider to set frequency
+void hpsdr_hermesNB::set_ReceiveFrequency (float RxF) // callback to allow slider to set frequency
 {
-	Hermes->ReceiveFrequency = (unsigned)param1;	// slider must be of type real, convert to unsigned
+	Hermes->ReceiveFrequency = (unsigned)RxF;	// slider must be of type real, convert to unsigned
 	Hermes->UpdateHermes();			// FIXME: temporary until have TxData-> Hermes coded
 }
 
-void hpsdr_hermesNB::set_RxSampRate(int param2)	// callback to set RxSampleRate
+void hpsdr_hermesNB::set_RxSampRate(int RxSmp)	// callback to set RxSampleRate
 {
-	Hermes->RxSampleRate = param2;
+	Hermes->RxSampleRate = RxSmp;
 	Hermes->UpdateHermes();
 }
 
-void hpsdr_hermesNB::set_RxPreamp(int param3)	// callback to set RxPreamp on or off
+void hpsdr_hermesNB::set_RxPreamp(int RxPre)	// callback to set RxPreamp on or off
 {
-	Hermes->RxPreamp = (bool)param3;
+	Hermes->RxPreamp = (bool)RxPre;
 	Hermes->UpdateHermes();
 }
 
@@ -96,12 +98,12 @@ hpsdr_hermesNB::general_work (int noutput_items,
 			       gr_vector_const_void_star &input_items,
 			       gr_vector_void_star &output_items)
 {
-  const float *in = (const float *) input_items[0];
+  const gr_complex *in = (const gr_complex *) input_items[0];
   gr_complex *out = (gr_complex *) output_items[0];
 
   // NOTE:  noutput_items is always less_than_or_equal_to ninput_items.
-  // NOTE:  ninput_items[0] is the first stream.
-  // NOTE:  ninput_items[1..n] are additional input stream item counts if they exist.
+  // NOTE:  input_items[0..n] are the input streams.
+  // NOTE:  ninput_items[0..n] is the input item count for each input stream.
   // NOTE:  Do not consume more than ninput_items from the input.
   // NOTE:  Do not put more than noutput_items to the output.
 
@@ -133,9 +135,14 @@ hpsdr_hermesNB::general_work (int noutput_items,
 
   // Tell runtime system how many input items we consumed on
   // each input stream.
-  consume_each (BufCount*128);  // just throw them away
 
-  return(BufCount*128/*noutput_items*/);  	// Tell runtime system how many output items we produced
+
+  //fprintf(stderr, "input_items.size(): %d    ninput_items.size(): %d", input_items.size(), ninput_items.size());
+ 
+  //if (input_items.size() > 0)	// if we have any input ports...
+  //consume_each (BufCount*128);  // just throw the samples away (not even needed here...)
+
+  return(BufCount*128);  	// Tell runtime system how many output items we produced
 
 }
 

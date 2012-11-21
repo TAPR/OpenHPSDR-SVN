@@ -7,9 +7,10 @@
 #define METIS_H
 
 
-enum { RxStream_Off,		// Hermes Receiver Stream Controls
-       RxStream_NB_On,		// Narrow Band (down converted)
-       RxStream_WB_On		// Wide Band (raw ADC samples)
+enum {	RxStream_Off,		// Hermes Receiver Stream Controls
+	RxStream_NB_On,		// Narrow Band (down converted)
+	RxStream_WB_On,		// Wide Band (raw ADC samples)
+	RxStream_NBWB_On	// Narrow Band and Wide Band both On
 };	
 
 typedef struct _METIS_CARD {

@@ -72,7 +72,6 @@ swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o.provides.build: swig
 swig/hpsdr_swigPYTHON_wrap.cxx: ../swig/hpsdr_swig.i
 swig/hpsdr_swigPYTHON_wrap.cxx: /usr/local/include/gruel/swig/gruel_common.i
 swig/hpsdr_swigPYTHON_wrap.cxx: /usr/local/include/gnuradio/swig/gnuradio.i
-swig/hpsdr_swigPYTHON_wrap.cxx: swig/hpsdr_swig_doc.i
 swig/hpsdr_swigPYTHON_wrap.cxx: /usr/local/include/gnuradio/swig/gr_shared_ptr.i
 swig/hpsdr_swigPYTHON_wrap.cxx: swig/hpsdr_swig.tag
 swig/hpsdr_swigPYTHON_wrap.cxx: ../swig/hpsdr_swig.i
@@ -83,21 +82,21 @@ swig/hpsdr_swigPYTHON_wrap.cxx: ../swig/hpsdr_swig.i
 
 swig/hpsdr_swig.py: swig/hpsdr_swigPYTHON_wrap.cxx
 
+swig/hpsdr_swig.tag: swig/hpsdr_swig_doc.i
+swig/hpsdr_swig.tag: swig/_hpsdr_swig_swig_tag
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/tom/gr-hpsdr/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating hpsdr_swig.tag"
+	cd /home/tom/gr-hpsdr/build/swig && ./_hpsdr_swig_swig_tag
+	cd /home/tom/gr-hpsdr/build/swig && /usr/bin/cmake -E touch /home/tom/gr-hpsdr/build/swig/hpsdr_swig.tag
+
 swig/hpsdr_swig_doc.i: ../swig/../include/metis.h
 swig/hpsdr_swig_doc.i: ../swig/../include/HermesProxy.h
 swig/hpsdr_swig_doc.i: ../swig/../include/hpsdr_hermesNB.h
 swig/hpsdr_swig_doc.i: ../swig/../include/hpsdr_api.h
 swig/hpsdr_swig_doc.i: swig/hpsdr_swig_doc_swig_docs/xml/index.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/tom/gr-hpsdr/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/tom/gr-hpsdr/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating hpsdr_swig_doc.i"
 	cd /home/tom/gr-hpsdr/docs/doxygen && /usr/bin/python -B /home/tom/gr-hpsdr/docs/doxygen/swig_doc.py /home/tom/gr-hpsdr/build/swig/hpsdr_swig_doc_swig_docs/xml /home/tom/gr-hpsdr/build/swig/hpsdr_swig_doc.i
-
-swig/hpsdr_swig.tag: swig/hpsdr_swig_doc.i
-swig/hpsdr_swig.tag: swig/_hpsdr_swig_swig_tag
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/tom/gr-hpsdr/build/CMakeFiles $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating hpsdr_swig.tag"
-	cd /home/tom/gr-hpsdr/build/swig && ./_hpsdr_swig_swig_tag
-	cd /home/tom/gr-hpsdr/build/swig && /usr/bin/cmake -E touch /home/tom/gr-hpsdr/build/swig/hpsdr_swig.tag
 
 swig/hpsdr_swig_doc_swig_docs/xml/index.xml: ../swig/../include/metis.h
 swig/hpsdr_swig_doc_swig_docs/xml/index.xml: ../swig/../include/HermesProxy.h
@@ -139,8 +138,8 @@ swig/CMakeFiles/_hpsdr_swig.dir/clean:
 
 swig/CMakeFiles/_hpsdr_swig.dir/depend: swig/hpsdr_swigPYTHON_wrap.cxx
 swig/CMakeFiles/_hpsdr_swig.dir/depend: swig/hpsdr_swig.py
-swig/CMakeFiles/_hpsdr_swig.dir/depend: swig/hpsdr_swig_doc.i
 swig/CMakeFiles/_hpsdr_swig.dir/depend: swig/hpsdr_swig.tag
+swig/CMakeFiles/_hpsdr_swig.dir/depend: swig/hpsdr_swig_doc.i
 swig/CMakeFiles/_hpsdr_swig.dir/depend: swig/hpsdr_swig_doc_swig_docs/xml/index.xml
 	cd /home/tom/gr-hpsdr/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/tom/gr-hpsdr /home/tom/gr-hpsdr/swig /home/tom/gr-hpsdr/build /home/tom/gr-hpsdr/build/swig /home/tom/gr-hpsdr/build/swig/CMakeFiles/_hpsdr_swig.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : swig/CMakeFiles/_hpsdr_swig.dir/depend

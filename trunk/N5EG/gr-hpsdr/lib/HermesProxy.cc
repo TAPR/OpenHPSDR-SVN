@@ -299,7 +299,7 @@ void HermesProxy::UpdateHermes()	// send a set of control registers to hardware 
 		RxCtrl += 0x04;
 	if(ADCdither)
 		RxCtrl += 0x08;
-	if(ADCrandom);
+	if(ADCrandom)
 		RxCtrl += 0x10;
 
 	// metis_write requires two 512 byte USB buffers to make one ethernet write to the hardware
