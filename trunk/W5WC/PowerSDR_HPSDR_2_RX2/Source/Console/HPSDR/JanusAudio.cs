@@ -779,6 +779,12 @@ namespace PowerSDR
         unsafe public static extern void SetMerc2Preamp(int bits);
 
         [DllImport("JanusAudio.dll")]
+        unsafe public static extern void EnableHermesAtten(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetHermesAttenData(int bits);
+
+        [DllImport("JanusAudio.dll")]
         unsafe public static extern int getAndResetADC_Overload();
 
         [DllImport("JanusAudio.dll")]
@@ -810,7 +816,25 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern int getAlexFwdPower();
+ 
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern int getHermesDCVoltage();
 
+        public static float computeHermesDCVoltage()
+        {
+            Console c = Console.getConsole();
+
+            int adcValue = getHermesDCVoltage();
+            float volts = (float)adcValue * (3.3f / 4095);
+            volts = volts / 0.143f;
+           // adc >>= 4;
+           // float volts = (float)adc * (3.3f / 2047);
+
+            c.SetupForm.txtFwdADC.Text = adcValue.ToString();
+            c.SetupForm.txtAlexFwdADC.Text = volts.ToString();
+
+            return volts;
+        }
         // 
         // compute fwd power from Penny based on count returned 
         // this conversion is a linear interpolation of values measured on an 
@@ -818,7 +842,7 @@ namespace PowerSDR
         // 
         public static float computeFwdPower()
         {
-            int power_int = JanusAudio.getFwdPower();
+            int power_int = getFwdPower();
             double computed_result = computePower(power_int);
             return (float)computed_result;
         }
@@ -827,31 +851,25 @@ namespace PowerSDR
         {
             // Console c = Console.getConsole();
             int adc = JanusAudio.getRefPower();
-            float maxAdcBits = 4096.0f;
-            float maxVolts = 3.3f;
-            float voltsPerBit = (maxVolts / maxAdcBits);
-            float Voltage = adc * voltsPerBit;
-            float Watts = (Voltage * Voltage) / 0.09f;
+            float volts = (float)adc * (3.3f / 4095);
+            float watts = (float)(Math.Pow(volts, 2) / 0.09f);
 
             //  c.SetupForm.txtAlexRevPower.Text = Watts.ToString();
             //  c.SetupForm.txtAlexRevADC.Text = Voltage.ToString();
 
-            return Watts;
+            return watts;
         }
 
         public static float computeAlexFwdPower()
         {
             // Console c = Console.getConsole();
             int adc = JanusAudio.getAlexFwdPower();
-            float maxAdcBits = 4096.0f;
-            float maxVolts = 3.3f;
-            float voltsPerBit = (maxVolts / maxAdcBits);
-            float Voltage = adc * voltsPerBit;
-            float Watts = (Voltage * Voltage) / 0.09f;
+            float volts = (float)adc * (3.3f / 4095);
+            float watts = (float)(Math.Pow(volts, 2) / 0.09f);
             //  c.SetupForm.txtAlexFwdPower.Text = Watts.ToString();
             //  c.SetupForm.txtAlexFwdADC.Text = Voltage.ToString();
 
-            return Watts;
+            return watts;
         }
 
         public static float computePower(int power_int)

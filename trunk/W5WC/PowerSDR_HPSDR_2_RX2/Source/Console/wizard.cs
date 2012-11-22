@@ -52,6 +52,7 @@ namespace PowerSDR
 			USB,
             HPSDR_HARDWARE_SELECT, 
             SOUND_CARD,
+            REGION,
 			FINISHED
 		}
 
@@ -65,6 +66,7 @@ namespace PowerSDR
 		int xvtr_index;
 		int pll_mult;
 		int sound_card_index;
+        int region_index;
 		float[] gain_by_band;
 		Model model;
         bool alex_present = false;
@@ -124,6 +126,10 @@ namespace PowerSDR
         private CheckBoxTS chkExcalibur;
         private RadioButtonTS radOzy;
         private RadioButtonTS radMetis;
+        private ComboBoxTS comboBox10;
+        private RadioButtonTS radGenModelANAN100D;
+        private RadioButtonTS radGenModelANAN100;
+        private RadioButtonTS radGenModelANAN10;
         private System.ComponentModel.Container components = null;
 
 		#endregion
@@ -181,6 +187,15 @@ namespace PowerSDR
                 case Model.HERMES:
                     radGenModelHermes.Checked = true;
                     break;
+                case Model.ANAN10:
+                    radGenModelANAN10.Checked = true;
+                    break;
+                case Model.ANAN100:
+                    radGenModelANAN100.Checked = true;
+                    break;
+                case Model.ANAN100D:
+                    radGenModelANAN100D.Checked = true;
+                    break;
             }
 
 			CurPage = Page.WELCOME;
@@ -216,6 +231,9 @@ namespace PowerSDR
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.grpModel = new System.Windows.Forms.GroupBoxTS();
+            this.radGenModelANAN100D = new System.Windows.Forms.RadioButtonTS();
+            this.radGenModelANAN100 = new System.Windows.Forms.RadioButtonTS();
+            this.radGenModelANAN10 = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelHermes = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelHPSDR = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelFLEX5000 = new System.Windows.Forms.RadioButtonTS();
@@ -261,6 +279,7 @@ namespace PowerSDR
             this.chkAlex = new System.Windows.Forms.CheckBoxTS();
             this.chkPenny = new System.Windows.Forms.CheckBoxTS();
             this.chkMercury = new System.Windows.Forms.CheckBoxTS();
+            this.comboBox10 = new System.Windows.Forms.ComboBoxTS();
             this.lblMessage1 = new System.Windows.Forms.LabelTS();
             this.lblCombo = new System.Windows.Forms.LabelTS();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -294,6 +313,9 @@ namespace PowerSDR
             // 
             // grpModel
             // 
+            this.grpModel.Controls.Add(this.radGenModelANAN100D);
+            this.grpModel.Controls.Add(this.radGenModelANAN100);
+            this.grpModel.Controls.Add(this.radGenModelANAN10);
             this.grpModel.Controls.Add(this.radGenModelHermes);
             this.grpModel.Controls.Add(this.radGenModelHPSDR);
             this.grpModel.Controls.Add(this.radGenModelFLEX5000);
@@ -302,11 +324,47 @@ namespace PowerSDR
             this.grpModel.Controls.Add(this.radGenModelSDR1000);
             this.grpModel.Location = new System.Drawing.Point(256, 24);
             this.grpModel.Name = "grpModel";
-            this.grpModel.Size = new System.Drawing.Size(120, 152);
+            this.grpModel.Size = new System.Drawing.Size(120, 182);
             this.grpModel.TabIndex = 20;
             this.grpModel.TabStop = false;
             this.grpModel.Text = "Model";
             this.grpModel.Visible = false;
+            // 
+            // radGenModelANAN100D
+            // 
+            this.radGenModelANAN100D.AutoSize = true;
+            this.radGenModelANAN100D.Image = null;
+            this.radGenModelANAN100D.Location = new System.Drawing.Point(19, 117);
+            this.radGenModelANAN100D.Name = "radGenModelANAN100D";
+            this.radGenModelANAN100D.Size = new System.Drawing.Size(84, 17);
+            this.radGenModelANAN100D.TabIndex = 11;
+            this.radGenModelANAN100D.Text = "ANAN-100D";
+            this.radGenModelANAN100D.UseVisualStyleBackColor = true;
+            this.radGenModelANAN100D.CheckedChanged += new System.EventHandler(this.radGenModelANAN100D_CheckedChanged);
+            // 
+            // radGenModelANAN100
+            // 
+            this.radGenModelANAN100.AutoSize = true;
+            this.radGenModelANAN100.Image = null;
+            this.radGenModelANAN100.Location = new System.Drawing.Point(19, 93);
+            this.radGenModelANAN100.Name = "radGenModelANAN100";
+            this.radGenModelANAN100.Size = new System.Drawing.Size(76, 17);
+            this.radGenModelANAN100.TabIndex = 10;
+            this.radGenModelANAN100.Text = "ANAN-100";
+            this.radGenModelANAN100.UseVisualStyleBackColor = true;
+            this.radGenModelANAN100.CheckedChanged += new System.EventHandler(this.radGenModelANAN100_CheckedChanged);
+            // 
+            // radGenModelANAN10
+            // 
+            this.radGenModelANAN10.AutoSize = true;
+            this.radGenModelANAN10.Image = null;
+            this.radGenModelANAN10.Location = new System.Drawing.Point(19, 69);
+            this.radGenModelANAN10.Name = "radGenModelANAN10";
+            this.radGenModelANAN10.Size = new System.Drawing.Size(70, 17);
+            this.radGenModelANAN10.TabIndex = 9;
+            this.radGenModelANAN10.Text = "ANAN-10";
+            this.radGenModelANAN10.UseVisualStyleBackColor = true;
+            this.radGenModelANAN10.CheckedChanged += new System.EventHandler(this.radGenModelANAN10_CheckedChanged);
             // 
             // radGenModelHermes
             // 
@@ -336,7 +394,7 @@ namespace PowerSDR
             // 
             this.radGenModelFLEX5000.Checked = true;
             this.radGenModelFLEX5000.Image = null;
-            this.radGenModelFLEX5000.Location = new System.Drawing.Point(16, 126);
+            this.radGenModelFLEX5000.Location = new System.Drawing.Point(18, 141);
             this.radGenModelFLEX5000.Name = "radGenModelFLEX5000";
             this.radGenModelFLEX5000.Size = new System.Drawing.Size(88, 24);
             this.radGenModelFLEX5000.TabIndex = 6;
@@ -348,7 +406,7 @@ namespace PowerSDR
             // radGenModelDemoNone
             // 
             this.radGenModelDemoNone.Image = null;
-            this.radGenModelDemoNone.Location = new System.Drawing.Point(16, 106);
+            this.radGenModelDemoNone.Location = new System.Drawing.Point(18, 141);
             this.radGenModelDemoNone.Name = "radGenModelDemoNone";
             this.radGenModelDemoNone.Size = new System.Drawing.Size(88, 24);
             this.radGenModelDemoNone.TabIndex = 5;
@@ -359,7 +417,7 @@ namespace PowerSDR
             // radGenModelSoftRock40
             // 
             this.radGenModelSoftRock40.Image = null;
-            this.radGenModelSoftRock40.Location = new System.Drawing.Point(19, 100);
+            this.radGenModelSoftRock40.Location = new System.Drawing.Point(18, 141);
             this.radGenModelSoftRock40.Name = "radGenModelSoftRock40";
             this.radGenModelSoftRock40.Size = new System.Drawing.Size(88, 24);
             this.radGenModelSoftRock40.TabIndex = 4;
@@ -370,7 +428,7 @@ namespace PowerSDR
             // radGenModelSDR1000
             // 
             this.radGenModelSDR1000.Image = null;
-            this.radGenModelSDR1000.Location = new System.Drawing.Point(16, 80);
+            this.radGenModelSDR1000.Location = new System.Drawing.Point(18, 141);
             this.radGenModelSDR1000.Name = "radGenModelSDR1000";
             this.radGenModelSDR1000.Size = new System.Drawing.Size(88, 24);
             this.radGenModelSDR1000.TabIndex = 3;
@@ -909,7 +967,7 @@ namespace PowerSDR
             this.groupBoxHPSDR_Hardware.Controls.Add(this.chkMercury);
             this.groupBoxHPSDR_Hardware.Location = new System.Drawing.Point(20, 32);
             this.groupBoxHPSDR_Hardware.Name = "groupBoxHPSDR_Hardware";
-            this.groupBoxHPSDR_Hardware.Size = new System.Drawing.Size(171, 157);
+            this.groupBoxHPSDR_Hardware.Size = new System.Drawing.Size(183, 157);
             this.groupBoxHPSDR_Hardware.TabIndex = 21;
             this.groupBoxHPSDR_Hardware.TabStop = false;
             this.groupBoxHPSDR_Hardware.Text = "HPSDR Hardware";
@@ -918,24 +976,24 @@ namespace PowerSDR
             // radOzy
             // 
             this.radOzy.AutoSize = true;
-            this.radOzy.Checked = true;
             this.radOzy.Image = null;
             this.radOzy.Location = new System.Drawing.Point(114, 20);
             this.radOzy.Name = "radOzy";
             this.radOzy.Size = new System.Drawing.Size(43, 17);
             this.radOzy.TabIndex = 24;
-            this.radOzy.TabStop = true;
             this.radOzy.Text = "Ozy";
             this.radOzy.UseVisualStyleBackColor = true;
             // 
             // radMetis
             // 
             this.radMetis.AutoSize = true;
+            this.radMetis.Checked = true;
             this.radMetis.Image = null;
             this.radMetis.Location = new System.Drawing.Point(114, 46);
             this.radMetis.Name = "radMetis";
             this.radMetis.Size = new System.Drawing.Size(50, 17);
             this.radMetis.TabIndex = 23;
+            this.radMetis.TabStop = true;
             this.radMetis.Text = "Metis";
             this.radMetis.UseVisualStyleBackColor = true;
             // 
@@ -988,7 +1046,36 @@ namespace PowerSDR
             this.chkMercury.TabIndex = 0;
             this.chkMercury.Text = "Mercury";
             this.chkMercury.CheckedChanged += new System.EventHandler(this.chkMercury_CheckedChanged);
+            //
+            // comboBox10
             // 
+            this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox10.DropDownWidth = 184;
+            this.comboBox10.Items.AddRange(new object[] {
+            "Australia",
+            "Europe",
+            "Italy",
+            "Japan",
+            "Spain",
+            "United Kingdom",
+            "United States",
+            "Norway",
+            "Denmark",
+            "Latvia",
+            "Slovakia",
+            "Bulgaria",
+            "Greece",
+            "Hungary",
+            "Netherlands",
+            "France",
+            "Russia",
+            "Extended"});
+            this.comboBox10.Location = new System.Drawing.Point(76, 69);
+            this.comboBox10.MaxDropDownItems = 10;
+            this.comboBox10.Name = "comboBox10";
+            this.comboBox10.Size = new System.Drawing.Size(184, 21);
+            this.comboBox10.TabIndex = 22;
+           // 
             // lblMessage1
             // 
             this.lblMessage1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1024,6 +1111,7 @@ namespace PowerSDR
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.groupBoxHPSDR_Hardware);
+            this.Controls.Add(this.comboBox10);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblMessage1);
             this.Controls.Add(this.lblCombo);
@@ -1075,6 +1163,7 @@ namespace PowerSDR
 					comboBox1.Visible = false;					
 					comboBox2.Visible = false;
 					comboBox3.Visible = false;	
+                    comboBox10.Visible = false;
 					groupBox2.Visible = false;
 					lblCombo.Visible = false;
 					grpModel.Visible = false;
@@ -1119,6 +1208,7 @@ namespace PowerSDR
 					comboBox2.Visible = false;
 					comboBox3.Visible = false;
 					groupBox2.Visible = false;
+                    comboBox10.Visible = false;
 					lblCombo.Visible = false;
 					grpModel.Visible = true;
 					lblMessage1.Text = "Please select the model of the radio you will be using.";
@@ -1299,11 +1389,34 @@ namespace PowerSDR
                     comboBox1.Visible = false;
                     comboBox2.Visible = false;
                     comboBox3.Visible = false;
+                    comboBox10.Visible = false;
                     groupBox2.Visible = false;
                     groupBoxHPSDR_Hardware.Visible = true;
                     grpModel.Visible = false;
                     lblCombo.Visible = false;
                     lblMessage1.Text = "Select the HPSDR hardware in your installation.";
+                    lblMessage2.Visible = false;
+                    pictureBox1.Image = null;
+                    pictureBox1.Visible = false;
+                    radYes.Visible = false;
+                    radNo.Visible = false;
+                    break;
+
+                case Page.REGION:
+                    this.Text = "PowerSDR Setup Wizard - HPSDR Region Selection ";
+                    btnFinished.Enabled = false;
+                    btnNext.Enabled = true;
+                    btnPrevious.Enabled = true;
+                    button1.Visible = false;
+                    comboBox1.Visible = false;
+                    comboBox2.Visible = false;
+                    comboBox3.Visible = false;
+                    comboBox10.Visible = true;
+                    groupBox2.Visible = false;
+                    groupBoxHPSDR_Hardware.Visible = false;
+                    grpModel.Visible = false;
+                    lblCombo.Visible = false;
+                    lblMessage1.Text = "Select your Region.";
                     lblMessage2.Visible = false;
                     pictureBox1.Image = null;
                     pictureBox1.Visible = false;
@@ -1378,6 +1491,9 @@ namespace PowerSDR
 							break;
                         case Model.HPSDR:
                         case Model.HERMES:
+                        case Model.ANAN10:
+                        case Model.ANAN100:
+                        case Model.ANAN100D:
                             CurPage = Page.HPSDR_HARDWARE_SELECT;
                             btnNext.Focus();
                             break;
@@ -1436,6 +1552,12 @@ namespace PowerSDR
 					btnFinished.Focus();
 					break;
                 case Page.HPSDR_HARDWARE_SELECT:
+                    CurPage = Page.FINISHED;
+                  //  CurPage = Page.REGION;
+                    btnFinished.Focus();
+                    break;
+                case Page.REGION:
+                    region_index = comboBox10.SelectedIndex;
                     CurPage = Page.FINISHED;
                     btnFinished.Focus();
                     break;
@@ -1514,12 +1636,10 @@ namespace PowerSDR
                     break;
 
                 case Page.FINISHED:
-					if(model == Model.FLEX5000 || model == Model.FLEX3000)
-						CurPage = Page.MODEL;
-                    else if (model == Model.HPSDR || model == Model.HERMES)
+	                //if (model == Model.HPSDR || model == Model.HERMES ||
+                      //  model == Model.ANAN10 || model == Model.ANAN100 || model == Model.ANAN100D)
                         CurPage = Page.HPSDR_HARDWARE_SELECT;
-                    else
-						CurPage = Page.SOUND_CARD;
+                 
 					btnPrevious.Focus();
 					break;
 			}
@@ -1608,7 +1728,25 @@ namespace PowerSDR
                     console.SetupForm.radMetis.Checked = radMetis.Checked;
                     console.SetupForm.forceAudioSampleRate1("192000");
   					break;
-				default:
+                case Model.ANAN10:
+                    console.SetupForm.PennyLanePresent = pennylane_present;
+                    console.SetupForm.MercuryPresent = mercury_present;
+                    console.SetupForm.AlexPresent = alex_present;
+                    console.SetupForm.forceAudioSampleRate1("192000");
+                    break;
+                case Model.ANAN100:
+                    console.SetupForm.PennyLanePresent = pennylane_present;
+                    console.SetupForm.MercuryPresent = mercury_present;
+                    console.SetupForm.AlexPresent = alex_present;
+                    console.SetupForm.forceAudioSampleRate1("192000");
+                    break;
+                case Model.ANAN100D:
+                    console.SetupForm.PennyLanePresent = pennylane_present;
+                    console.SetupForm.MercuryPresent = mercury_present;
+                    console.SetupForm.AlexPresent = alex_present;
+                    console.SetupForm.forceAudioSampleRate1("192000");
+                    break;
+                default:
                     console.SetupForm.XVTRPresent = xvtr_present;
 					console.SetupForm.PAPresent = pa_present;
 					console.SetupForm.USBPresent = usb_present;
@@ -1679,6 +1817,96 @@ namespace PowerSDR
 					break;
 			}
             console.SetupForm.CurrentModel = model;
+
+          /*  if (region_index >= 0)
+            {
+                FRSRegion CurrentRegion = FRSRegion.US;
+                if (comboBox10.Text == "")
+                {
+                    console.SetupForm.comboFRSRegion.Text = "United States";
+                    console.CurrentRegion = CurrentRegion;
+                    return;
+                }
+                switch (comboBox10.Text)
+                {
+                    case "Australia":
+                        CurrentRegion = FRSRegion.Australia;
+                        console.Extended = false;
+                        break;
+                    case "Europe":
+                        CurrentRegion = FRSRegion.Europe;
+                        console.Extended = false;
+                        break;
+                    case "Italy":
+                        CurrentRegion = FRSRegion.Italy_Plus;
+                        console.Extended = false;
+                        break;
+                    case "Spain":
+                        CurrentRegion = FRSRegion.Spain;
+                        console.Extended = false;
+                        break;
+                    case "Japan":
+                        CurrentRegion = FRSRegion.Japan;
+                        console.Extended = false;
+                        break;
+                    case "United Kingdom":
+                        CurrentRegion = FRSRegion.UK;
+                        console.Extended = false;
+                        break;
+                    case "United States":
+                        CurrentRegion = FRSRegion.US;
+                        Display.Init();
+                        break;
+                    case "Norway":
+                        CurrentRegion = FRSRegion.Norway;
+                        console.Extended = false;
+                        break;
+                    case "Denmark":
+                        CurrentRegion = FRSRegion.Denmark;
+                        console.Extended = false;
+                        break;
+                    case "Latvia":
+                        CurrentRegion = FRSRegion.Latvia;
+                        console.Extended = false;
+                        break;
+                    case "Slovakia":
+                        CurrentRegion = FRSRegion.Slovakia;
+                        console.Extended = false;
+                        break;
+                    case "Bulgaria":
+                        CurrentRegion = FRSRegion.Bulgaria;
+                        console.Extended = false;
+                        break;
+                    case "Greece":
+                        CurrentRegion = FRSRegion.Greece;
+                        console.Extended = false;
+                        break;
+                    case "Hungary":
+                        CurrentRegion = FRSRegion.Hungary;
+                        console.Extended = false;
+                        break;
+                    case "Netherlands":
+                        CurrentRegion = FRSRegion.Netherlands;
+                        console.Extended = false;
+                        break;
+                    case "France":
+                        CurrentRegion = FRSRegion.France;
+                        console.Extended = false;
+                        break;
+                    case "Russia":
+                        CurrentRegion = FRSRegion.Russia;
+                        console.Extended = false;
+                        break;
+                    case "Extended":
+                        console.Extended = true;
+                        break;
+                }
+                console.SetupForm.comboFRSRegion.Text = comboBox10.Text;
+                console.CurrentRegion = CurrentRegion;
+            } */
+            
+            console.SetupForm.comboFRSRegion.Text = "United States";
+            //console.CurrentRegion = FRSRegion.US;
 
 			ArrayList a = new ArrayList();
 			a.Add("SetupWizard/1");
@@ -1833,9 +2061,13 @@ namespace PowerSDR
                 chkMercury.Checked = false;
                 chkPennyLane.Checked = false;
                 chkMercury.Checked = false;
-                chkAlex.Checked = false;
+                chkAlex.Enabled = true;
                 chkExcalibur.Checked = false;
                 radOzy.Enabled = true;
+               // radMetis.Checked = false;
+                radMetis.Enabled = true;
+                radMetis.Enabled = true;
+                radMetis.Text = "Metis";
             }
         }
 
@@ -1858,6 +2090,87 @@ namespace PowerSDR
                 chkExcalibur.Checked = false;
                 chkAlex.Checked = false;
                 radMetis.Checked = true;
+                radMetis.Enabled = false;
+                radMetis.Enabled = false;
+                radMetis.Text = "Hermes";
+                radOzy.Enabled = false;
+            }
+        }
+
+        private void radGenModelANAN10_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelANAN10.Checked)
+            {
+                model = Model.ANAN10;
+                //if (grpModel.Visible)
+                pictureBox1.Image = null;
+                pictureBox1.Visible = false;
+                //pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.hpsdr.jpg"));
+                chkMercury.Checked = radGenModelANAN10.Checked;
+                chkPennyLane.Checked = radGenModelANAN10.Checked;
+                chkMercury.Enabled = false;
+                chkPennyLane.Enabled = false;
+                chkPenny.Enabled = false;
+                chkPenny.Checked = false;
+                chkExcalibur.Enabled = false;
+                chkExcalibur.Checked = false;              
+                chkAlex.Checked = true;
+                chkAlex.Enabled = false;
+                radMetis.Checked = true;
+                radMetis.Enabled = false;
+                radMetis.Text = "ANAN";
+                radOzy.Enabled = false;
+            }
+        }
+
+        private void radGenModelANAN100_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelANAN100.Checked)
+            {
+                model = Model.ANAN100;
+                //if (grpModel.Visible)
+                pictureBox1.Image = null;
+                pictureBox1.Visible = false;
+                //pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.hpsdr.jpg"));
+                chkMercury.Checked = radGenModelANAN100.Checked;
+                chkPennyLane.Checked = radGenModelANAN100.Checked;
+                chkMercury.Enabled = false;
+                chkPennyLane.Enabled = false;
+                chkPenny.Enabled = false;
+                chkPenny.Checked = false;
+                chkExcalibur.Enabled = false;
+                chkExcalibur.Checked = false;
+                chkAlex.Checked = true;
+                chkAlex.Enabled = false;
+                radMetis.Checked = true;
+                radMetis.Enabled = false;
+                radMetis.Text = "ANAN";
+                radOzy.Enabled = false;
+            }
+        }
+
+        private void radGenModelANAN100D_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelANAN100D.Checked)
+            {
+                model = Model.ANAN100D;
+                //if (grpModel.Visible)
+                pictureBox1.Image = null;
+                pictureBox1.Visible = false;
+                //pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.hpsdr.jpg"));
+                chkMercury.Checked = radGenModelANAN100D.Checked;
+                chkPennyLane.Checked = radGenModelANAN100D.Checked;
+                chkMercury.Enabled = false;
+                chkPennyLane.Enabled = false;
+                chkPenny.Enabled = false;
+                chkPenny.Checked = false;
+                chkExcalibur.Enabled = false;
+                chkExcalibur.Checked = false;
+                chkAlex.Checked = true;
+                chkAlex.Enabled = false;
+                radMetis.Checked = true;
+                radMetis.Enabled = false;
+                radMetis.Text = "ANAN";
                 radOzy.Enabled = false;
             }
         }
@@ -1866,6 +2179,7 @@ namespace PowerSDR
         {
             mercury_present = chkMercury.Checked;
         }
+
         private void chkPenny_CheckedChanged(object sender, System.EventArgs e)
         {
              penelope_present = chkPenny.Checked;

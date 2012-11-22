@@ -146,6 +146,20 @@ namespace PowerSDR
         FLEX3000,
         HPSDR,
         HERMES,
+        ANAN10,
+        ANAN100,
+        ANAN100D
+    }
+
+    public enum HPSDRModel
+    {
+        FIRST = -1,
+        HPSDR,
+        HERMES,
+        ANAN10,
+        ANAN100,
+        ANAN100D,
+        LAST
     }
 
     public enum BPFBand
@@ -257,6 +271,7 @@ namespace PowerSDR
         FIRST = -1,
         FORWARD_POWER,
         REVERSE_POWER,
+        SWR_POWER,
         MIC,
         EQ,
         LEVELER,
@@ -304,7 +319,9 @@ namespace PowerSDR
         Hungary = 13,
         Netherlands = 14,
         France = 15,
-        Extended = 16,
+        Russia = 16,
+        Israel = 17,
+        Extended = 18,
         LAST,
     }
 
@@ -322,6 +339,7 @@ namespace PowerSDR
         HPSDR_MINUS30,
         HPSDR_MINUS40,
         HPSDR_MINUS50,
+        STEP_ATTEN,
         LAST,
     }
 
@@ -480,9 +498,9 @@ namespace PowerSDR
         private Thread f3k_mic_function_thread;				// handles the FLEX-3000 mic inputs (Up, Down, Fast)
         // private Thread wbir_thread;
         // private Thread wbir_rx2_thread;
-      //  private Thread update_rx1_dds_thread;
-      //  private Thread update_rx2_dds_thread;
-      //  private Thread update_tx_dds_thread;
+        //  private Thread update_rx1_dds_thread;
+        //  private Thread update_rx2_dds_thread;
+        //  private Thread update_tx_dds_thread;
         // private Thread audio_watchdog_thread;
         // private Thread digital_watchdog_thread;
         // private HiPerfTimer polltimer;
@@ -587,7 +605,7 @@ namespace PowerSDR
 
         private int band_160m_register;						// These integers are the number of band stack registers
         private int band_80m_register;						// found in the database for each band
-        private int band_60m_register;
+        public int band_60m_register;
         private int band_40m_register;
         private int band_30m_register;
         private int band_20m_register;
@@ -639,6 +657,8 @@ namespace PowerSDR
         private int meter_peak_value;						// Value for peak hold on multimeter
         private float[] meter_text_history;					// Array used to output the peak power over a period of time
         private int meter_text_history_index;				// index used with above variable to do peak power
+        private float new_swrmeter_data;						// new data for the multimeter from the DSP
+        private float current_swrmeter_data;					// current data for the multimeter
 
         private bool rx2_meter_data_ready;					// used to synchronize the new DSP data with the multimeter
         private float rx2_meter_new_data;					// new data for the multimeter from the DSP
@@ -654,6 +674,7 @@ namespace PowerSDR
         private bool tuning;								// true when the TUN button is active
         public bool atu_tuning;		    					// true while the atu is tuning
         private Band tuned_band;							// last band that the atu was tuned on
+        public float[][][] pa_gain_by_radio;
 
         public float[] rx1_image_gain_table;				// table used to store image cal info
         public float[] rx1_image_phase_table;				// table used to store image cal info
@@ -739,16 +760,13 @@ namespace PowerSDR
         private double rx2_avg_last_dttsp_osc = 0;
         private double rx2_last_bin_shift_leftover = 0;
 
-        //    public CWKeyer2 Keyer;
         private HiPerfTimer break_in_timer;
         public double avg_vox_pwr = 0.0;
-        public string pwr_mode;
+
         private bool gridmaxadjust = false;
         private bool gridminadjust = false;
         private bool wfmaxadjust = false;
         private bool wfminadjust = false;
-
-        public bool default_directory = true;
 
         // BT 11/05/2007
         public PowerSDR.RemoteProfiles ProfileForm;
@@ -758,7 +776,7 @@ namespace PowerSDR
         // private TDxInput.Device TDxDevice;
         // private TDxInput.Sensor TDxSensor;
 
-        private bool initializing = true;
+        public bool initializing = true;
 
         private int h_delta = 0;		//k6jca 1/15/08
         private int v_delta = 0;		//k6jca 1/15/08
@@ -877,6 +895,7 @@ namespace PowerSDR
         private Point combo_meter_rxmode_basis = new Point(100, 100);
         private Point combo_rx2meter_mode_basis = new Point(100, 100);
         private Point combo_meter_txmode_basis = new Point(100, 100);
+        private Point ud_hermes_step_attenuator_data_basis = new Point(100, 100);
         private Size tb_display_zoom_size_basis = new Size(100, 100);
         private Size gr_BandHF_basis_size = new Size(100, 100);
         private Size gr_BandVHF_basis_size = new Size(100, 100);
@@ -923,7 +942,7 @@ namespace PowerSDR
         private Point rad_mode_digl_basis = new Point(100, 100);
         private Point rad_mode_digu_basis = new Point(100, 100);
         private Point rad_mode_drm_basis = new Point(100, 100);
-        private bool dax_audio_enum = false;
+        // private bool dax_audio_enum = false;
 
         #endregion
 
@@ -1397,6 +1416,7 @@ namespace PowerSDR
         private LabelTS lblVACTXIndicator;
         private LabelTS lblVACRXIndicator;
         private CheckBoxTS chkVAC2;
+        private NumericUpDownTS udHermesStepAttenuatorData;
         private CheckBoxTS chkFullDuplex;
 
         #endregion
@@ -1440,11 +1460,34 @@ namespace PowerSDR
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
                 string version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
-                // AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                //  + "\\FlexRadio Systems\\PowerSDR v" + version + "\\";
                 AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                     + "\\FlexRadio Systems\\PowerSDR RX2 (W5WC)\\";
             }
+
+            foreach (string s in args)
+            {
+                if (s.StartsWith("-dbfilename:"))
+                {
+                    string path = s.Trim().Substring(s.Trim().IndexOf(":") + 1);
+                    if (File.Exists(path))
+                    {
+                        DBFileName = path;
+                    }
+                    else
+                    {
+                        DialogResult dr = MessageBox.Show("-dbfilename: command line option found, but the file specified was not found.\n" +
+                            "Would you like to create this file?  If not, the default database will be used.\n\n" +
+                            "(" + s + ")",
+                            "Command Line Option: Create File?",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question);
+
+                        if (dr == DialogResult.Yes)
+                            DBFileName = path;
+                    }
+                }
+            }
+
 
 #if(DEBUG)
             AppDataPath += "Debug\\";
@@ -1452,34 +1495,8 @@ namespace PowerSDR
             if (!Directory.Exists(app_data_path))
                 Directory.CreateDirectory(app_data_path);
 
-            /* if (Keyboard.IsKeyDown(Keys.R) && Keyboard.IsKeyDown(Keys.S))
-              {
-                  MessageBox.Show("The database reset function has been activated.  A copy of the current\n"+
-                      "database will be placed on the desktop with a date and time stamp in the file name\n"+
-                      "before creating a fresh new database for active use",
-                      "Database Reset Activated",
-                      MessageBoxButtons.OK, MessageBoxIcon.Information);
-                  if (File.Exists(app_data_path + "database.xml"))
-                  {
-                      string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                      string datetime = DateTime.Now.ToShortDateString().Replace("/", "-") + "_" +
-                          DateTime.Now.ToShortTimeString().Replace(":", ".");
-
-                      File.Copy(app_data_path + "\\database.xml", desktop + "\\PowerSDR_database_" + datetime + ".xml");
-                      File.Delete(app_data_path + "\\database.xml");
-                      Thread.Sleep(100);
-                  }
-              } */
-
             if (db_file_name == "")
-                if (default_directory)
-                {
-                    DBFileName = AppDataPath + "database.xml";
-                }
-                else
-                {
-                    DBFileName = "database.xml";
-                }
+                DBFileName = AppDataPath + "database.xml";
 
             if (File.Exists(db_file_name))
             {
@@ -1531,158 +1548,47 @@ namespace PowerSDR
             InitCTCSS();
             Splash.SetStatus("Initializing Hardware");			// Set progress point
 
-            // check model in Options table
-            /*   ArrayList list = DB.GetVars("Options");				// Get the saved list of controls
-               list.Sort();
-
-               foreach (string s in list)
-               {
-                   if (s.StartsWith("radGenModelFLEX5000") && s.IndexOf("True") >= 0)
-                   {
-                       fwc_init = true;
-                       break;
-                   }
-               
-               }*/
-
-            /*    ArrayList list = DB.GetVars("State");				// Get the saved list of controls
-                list.Sort();
-
-                foreach (string s in list)
-                {
-                    if (s.StartsWith("chkRX2"))
-                    {
-                        string[] vals = s.Split('/');
-                        string val = vals[1];
-                        chkRX2.Checked = bool.Parse(val);
-                        break;
-                    }
-                } */
-
-            Application.DoEvents();
-            /*   if (fwc_init)
-               {
-                   int count = 0;
-                   while(!(fwc_init = FWCMidi.Open()))
-                   {
-                       if(count++ > 15)
-                       {	
-                           Splash.HideForm();
-                           DialogResult dr = MessageBox.Show("Error communicating with the radio.  Would you like to switch\n"+
-                               "to Demo (no hardware) mode?  If not, check that the unit has\n"+
-                               "power and FireWire connections and try again.",
-                               "Radio Not Found: Switch to Demo mode?",
-                               MessageBoxButtons.YesNo,
-                               MessageBoxIcon.Error);
-                           if(dr == DialogResult.Yes)
-                           {
-                               ArrayList a = new ArrayList();
-                               a.Add("radGenModelFLEX5000/False");
-                               a.Add("radGenModelDemoNone/True");
-                               DB.SaveVars("Options", ref a);
-                               DB.Exit();
-                               DB.Init();
-                               fwc_init = false;
-                           }
-                           else
-                           {
-                               foreach(Control c in this.Controls)
-                                   c.Enabled = false;
-                               Splash.CloseForm();
-                               //Thread.CurrentThread.Abort();
-                               Process.GetCurrentProcess().Kill();
-                               return;
-                           }
-                           break;
-                       }
-                       Thread.Sleep(1000);
-                   }
-
-                   int count = 0;
-                   while (!(fwc_init = Pal.Init()))
-                   {
-                       if (count++ > 15)
-                       {
-                           Splash.HideForm();
-                           DialogResult dr = MessageBox.Show("Error communicating with the radio.  Would you like to switch\n" +
-                               "to Demo (no hardware) mode?  If not, check that the unit has\n" +
-                               "power and FireWire connections and try again.",
-                               "Radio Not Found: Switch to Demo mode?",
-                               MessageBoxButtons.YesNo,
-                               MessageBoxIcon.Error);
-                           if (dr == DialogResult.Yes)
-                           {
-                               ArrayList a = new ArrayList();
-                               a.Add("radGenModelFLEX5000/False");
-                               a.Add("radGenModelDemoNone/True");
-                               DB.SaveVars("Options", ref a);
-                               DB.Exit();
-                               DB.Init();
-                               fwc_init = false;
-                           }
-                           else
-                           {
-                               foreach (Control c in this.Controls)
-                                   c.Enabled = false;
-                               Splash.CloseForm();
-                               //Thread.CurrentThread.Abort();
-                               Process.GetCurrentProcess().Kill();
-                               return;
-                           }
-                           break;
-                       }
-                       Thread.Sleep(1000);
-                       Application.DoEvents();
-                   }
-                   FWC.SetPalCallback();
-               }
-               else if (list.Count == 0)
-               {
-                   //fwc_init = FWCMidi.Open();
-                   //fwc_init = Pal.Init();
-                   FWC.SetPalCallback();
-               } 
-
-               if (fwc_init)
-               {
-                   FWCEEPROM.Init();
-                   current_region = FWCEEPROM.Region;
-
-                   if (FWCEEPROM.NeedDump())
-                   {
-                       Splash.HideForm();
-                       FWCEEPROM.StartDump();
-                       Splash.UnHideForm();
-                   }
-
-                   switch (FWCEEPROM.Model)
-                   {
-                       case 0:
-                       case 1:
-                       case 2:
-                           current_model = Model.FLEX5000;
-                           break;
-                       case 3:
-                           current_model = Model.FLEX3000;
-                           break;
-                   }
-
-                   InitRadio();
-               } */
             bool RX2Enabled = false;
-            ArrayList list = DB.GetVars("State");				// Get the saved list of controls
-            list.Sort();
-
-            foreach (string s in list)
+            if (File.Exists(db_file_name))
             {
-                if (s.StartsWith("chkRX2"))
+                ArrayList a = DB.GetVars("State");
+                a.Sort();
+                foreach (string s in a)
                 {
                     string[] vals = s.Split('/');
+                    string name = vals[0];
                     string val = vals[1];
-                    RX2Enabled = bool.Parse(val);
-                    break;
+
+                    switch (name)
+                    {
+                        case "BandTextID":
+                            FRSRegion r = (FRSRegion)Enum.Parse(typeof(FRSRegion), val);
+                            CurrentRegion = r;
+                            break;
+                        case "chkRX2":
+                            RX2Enabled = bool.Parse(val);
+                            break;
+                    }
                 }
+
+                /*   ArrayList b = DB.GetVars("Options");
+                   b.Sort();
+                   foreach (string o in b)
+                   {
+                       string[] valsb = o.Split('/');
+                       string nameb = valsb[0];
+                       string valb = valsb[1];
+                       switch (nameb)
+                       {
+                           case "comboFRSRegion":
+                               SetupForm.comboFRSRegion.Text = valb;
+                               break;
+                       }
+                   } */
+
             }
+
+            Application.DoEvents();
 
             if (RX2Enabled)
             {
@@ -1710,8 +1616,8 @@ namespace PowerSDR
             Splash.SplashForm.Owner = this;						// So that main form will show/focus when splash disappears
             break_in_timer = new HiPerfTimer();
 
+            Init60mChannels();
             InitConsole();										// Initialize all forms and main variables
-
 
             Splash.SetStatus("Finished");						// Set progress point
             // Activates double buffering
@@ -1724,77 +1630,6 @@ namespace PowerSDR
 
             Splash.CloseForm();									// End splash screen
 
-            if (fwc_init && (current_model == Model.FLEX3000 || current_model == Model.FLEX5000))
-                extended = FWC.GetStatus();
-            else if (File.Exists("extended.edf"))						// Check for extended capabilities file
-            {
-                ArrayList a = DB.GetVars("State");
-                a.Sort();
-                ArrayList names = new ArrayList();
-                ArrayList vals = new ArrayList();
-
-                foreach (string s in a)
-                {
-                    string[] str = s.Split('/');
-                    if (str.Length > 2)
-                    {
-                        for (int j = 2; j < str.Length; j++)
-                            str[1] += "/" + str[j];
-                    }
-                    names.Add(str[0]);
-                    vals.Add(str[1]);
-                }
-
-                int i = names.BinarySearch("extended");
-                if (i < 0) // If not found, prompt for logon info
-                {
-                    LogOn LogOnForm = new LogOn(this);
-                    LogOnForm.ShowDialog();
-                }
-                else  // If found, check for existing logon info
-                {
-                    string text = (string)vals[i];
-
-                    StreamReader sr = File.OpenText("extended.edf");
-                    string data = sr.ReadLine();
-                    sr.Close();
-
-                    if (text == data)
-                        extended = true;
-                    else	// Logon information found, but doesn't match
-                    {
-                        MessageBox.Show("Error reading logon information.", "Logon Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        LogOn LogOnForm = new LogOn(this);
-                        LogOnForm.ShowDialog();
-                    }
-                }
-            }
-
-            /*if(this.Text.IndexOf("SVN") >= 0) //w5wc
-            {
-                if(File.Exists(Application.StartupPath+"\\.svn\\entries"))
-                {
-                    try
-                    {
-                        string temp = this.Text;
-                        StreamReader reader = new StreamReader(Application.StartupPath+"\\.svn\\entries");
-                        for(int i=0; i<3; i++)
-                            reader.ReadLine();
-
-                        string current_rev = reader.ReadLine();
-                        reader.Close();
-					
-                        int svn_rev = int.Parse(current_rev);
-                        int title_rev = int.Parse(temp.Substring(temp.IndexOf(":")+2, 4));
-                        if(title_rev < svn_rev)
-                            this.Text = temp.Replace(title_rev.ToString(), svn_rev.ToString());
-                    }
-                    catch(Exception)
-                    {
-                        // do nothing
-                    }
-                }*/
 
             if (show_alpha_warning)
             {
@@ -1802,43 +1637,10 @@ namespace PowerSDR
                 form.ShowDialog();
             }
 
-            /* if (show_mobile_warning)
-             {
-                 MobileWarnForm form = new MobileWarnForm(this);
-                 form.ShowDialog();
-             }*/
-            //w5wc
-
-            //mnuReportBug.Visible = false; 
-            //}
-
             if (run_setup_wizard)
             {
                 var w = new SetupWizard(this, 0);
                 w.ShowDialog();
-                if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                {
-                    SetupForm.ResetFLEX5000();
-                    CheckCalData();
-                    for (int i = 0; i < 8; i++)
-                        flex5000DebugForm.SetPAPot(i, (byte)pa_bias_table[0][i]);
-                    if (!FWCEEPROM.TRXChecksumPresent)
-                    {
-                        WriteTRXChecksums();
-                        VerifyTRXChecksums();
-                    }
-                    RX1Band = RX2Band = TXBand = rx1_band;
-                    if (current_model == Model.FLEX5000)
-                    {
-                        fwcAntForm.SetBand(rx1_band);
-                        fwcAntForm.CurrentAntMode = current_ant_mode;
-                        fwcAntForm.RX1Ant = rx1_ant;
-                        fwcAntForm.RX1Loop = rx1_loop;
-                        fwcAntForm.RX2Ant = rx2_ant;
-                        fwcAntForm.TXAnt = tx_ant;
-                        CheckRX2CalData();
-                    }
-                }
             }
 
             if (rx1_meter_cal_offset == 0.0f)
@@ -1867,7 +1669,7 @@ namespace PowerSDR
                         rx1_meter_cal_offset = -46.82864f;
                         break;
                     case SoundCard.HPSDR:
-                        rx1_meter_cal_offset = -44.91249f;
+                        rx1_meter_cal_offset = -41.96943f;
                         break;
                     case SoundCard.UNSUPPORTED_CARD:
                         rx1_meter_cal_offset = -22.43533f;
@@ -1901,7 +1703,7 @@ namespace PowerSDR
                         rx2_meter_cal_offset = -46.82864f;
                         break;
                     case SoundCard.HPSDR:
-                        rx2_meter_cal_offset = -44.91249f;
+                        rx2_meter_cal_offset = -41.96943f;
                         break;
                     case SoundCard.UNSUPPORTED_CARD:
                         rx2_meter_cal_offset = -22.43533f;
@@ -1934,7 +1736,7 @@ namespace PowerSDR
                         RX1DisplayCalOffset = -78.429f;
                         break;
                     case SoundCard.HPSDR:
-                        RX1DisplayCalOffset = -72.056f;
+                        RX1DisplayCalOffset = -69.1305f;
                         break;
                     case SoundCard.UNSUPPORTED_CARD:
                         RX1DisplayCalOffset = -48.62103f;
@@ -1968,7 +1770,7 @@ namespace PowerSDR
                         RX2DisplayCalOffset = -80.429f;
                         break;
                     case SoundCard.HPSDR:
-                        RX2DisplayCalOffset = -72.056f;
+                        RX2DisplayCalOffset = -69.1305f;
                         break;
                     case SoundCard.UNSUPPORTED_CARD:
                         RX2DisplayCalOffset = -48.62103f;
@@ -2017,7 +1819,6 @@ namespace PowerSDR
         public bool reset_db = false;
         protected override void Dispose(bool disposing)
         {
-            //dispose_count++;
             USB.Exit();
             if (disposing)
             {
@@ -2037,8 +1838,10 @@ namespace PowerSDR
                 string file = db_file_name.Substring(db_file_name.LastIndexOf("\\") + 1);
                 file = file.Substring(0, file.Length - 4);
 
-                File.Copy(app_data_path + "\\database.xml", desktop + "\\PowerSDR_database_" + datetime + ".xml");
-                File.Delete(app_data_path + "\\database.xml");
+                //  File.Copy(app_data_path + "\\database.xml", desktop + "\\PowerSDR_database_" + datetime + ".xml");
+                //  File.Delete(app_data_path + "\\database.xml");
+                File.Copy(db_file_name, desktop + "\\PowerSDR_" + file + "_" + datetime + ".xml");
+                File.Delete(db_file_name);
             }
         }
 
@@ -2235,6 +2038,7 @@ namespace PowerSDR
             this.ptbRX1AF = new PowerSDR.PrettyTrackBar();
             this.chkVAC2 = new System.Windows.Forms.CheckBoxTS();
             this.chkCWSidetone = new System.Windows.Forms.CheckBoxTS();
+            this.udHermesStepAttenuatorData = new System.Windows.Forms.NumericUpDownTS();
             this.picSquelch = new System.Windows.Forms.PictureBox();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -2422,8 +2226,8 @@ namespace PowerSDR
             this.lblRX2AF = new System.Windows.Forms.LabelTS();
             this.lblRX1AF = new System.Windows.Forms.LabelTS();
             this.lblAF = new System.Windows.Forms.LabelTS();
-            this.lblPreamp = new System.Windows.Forms.LabelTS();
             this.lblPWR = new System.Windows.Forms.LabelTS();
+            this.lblPreamp = new System.Windows.Forms.LabelTS();
             this.lblAF2 = new System.Windows.Forms.LabelTS();
             this.panelModeSpecificPhone = new System.Windows.Forms.PanelTS();
             this.picNoiseGate = new System.Windows.Forms.PictureBox();
@@ -2484,9 +2288,9 @@ namespace PowerSDR
             this.txtVFOBFreq = new System.Windows.Forms.TextBoxTS();
             this.btnBandHF = new System.Windows.Forms.ButtonTS();
             this.grpMultimeter = new System.Windows.Forms.GroupBoxTS();
-            this.txtMultiText = new System.Windows.Forms.TextBoxTS();
             this.picMultiMeterDigital = new System.Windows.Forms.PictureBox();
             this.lblMultiSMeter = new System.Windows.Forms.LabelTS();
+            this.txtMultiText = new System.Windows.Forms.TextBoxTS();
             this.lblTuneStep = new System.Windows.Forms.LabelTS();
             this.grpVFOBetween = new System.Windows.Forms.GroupBoxTS();
             this.lblDisplayModeTop = new System.Windows.Forms.LabelTS();
@@ -2548,6 +2352,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udFMOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX2AF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX1AF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udHermesStepAttenuatorData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSquelch)).BeginInit();
             this.contextMenuStripFilterRX1.SuspendLayout();
             this.contextMenuStripFilterRX2.SuspendLayout();
@@ -4691,6 +4496,35 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkCWSidetone, resources.GetString("chkCWSidetone.ToolTip"));
             this.chkCWSidetone.CheckedChanged += new System.EventHandler(this.chkCWSidetone_CheckedChanged);
             // 
+            // udHermesStepAttenuatorData
+            // 
+            this.udHermesStepAttenuatorData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.udHermesStepAttenuatorData.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.udHermesStepAttenuatorData.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            resources.ApplyResources(this.udHermesStepAttenuatorData, "udHermesStepAttenuatorData");
+            this.udHermesStepAttenuatorData.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.udHermesStepAttenuatorData.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udHermesStepAttenuatorData.Name = "udHermesStepAttenuatorData";
+            this.toolTip1.SetToolTip(this.udHermesStepAttenuatorData, resources.GetString("udHermesStepAttenuatorData.ToolTip"));
+            this.udHermesStepAttenuatorData.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udHermesStepAttenuatorData.ValueChanged += new System.EventHandler(this.udHermesStepAttenuatorData_ValueChanged);
+            // 
             // picSquelch
             // 
             this.picSquelch.BackColor = System.Drawing.SystemColors.ControlText;
@@ -5566,6 +5400,7 @@ namespace PowerSDR
             this.panelOptions.Controls.Add(this.chkSR);
             this.panelOptions.Controls.Add(this.chkFWCATU);
             this.panelOptions.Controls.Add(this.comboTuneMode);
+            this.panelOptions.Controls.Add(this.chkRX1Preamp);
             this.panelOptions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelOptions.Name = "panelOptions";
             // 
@@ -6139,11 +5974,11 @@ namespace PowerSDR
             this.panelSoundControls.Controls.Add(this.ptbAF);
             this.panelSoundControls.Controls.Add(this.lblAF);
             this.panelSoundControls.Controls.Add(this.lblAGC);
-            this.panelSoundControls.Controls.Add(this.lblPreamp);
-            this.panelSoundControls.Controls.Add(this.comboPreamp);
             this.panelSoundControls.Controls.Add(this.lblRF);
             this.panelSoundControls.Controls.Add(this.lblPWR);
-            this.panelSoundControls.Controls.Add(this.chkRX1Preamp);
+            this.panelSoundControls.Controls.Add(this.lblPreamp);
+            this.panelSoundControls.Controls.Add(this.comboPreamp);
+            this.panelSoundControls.Controls.Add(this.udHermesStepAttenuatorData);
             this.panelSoundControls.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelSoundControls.Name = "panelSoundControls";
             // 
@@ -6165,17 +6000,18 @@ namespace PowerSDR
             resources.ApplyResources(this.lblAF, "lblAF");
             this.lblAF.Name = "lblAF";
             // 
-            // lblPreamp
-            // 
-            this.lblPreamp.ForeColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.lblPreamp, "lblPreamp");
-            this.lblPreamp.Name = "lblPreamp";
-            // 
             // lblPWR
             // 
             this.lblPWR.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.lblPWR, "lblPWR");
             this.lblPWR.Name = "lblPWR";
+            // 
+            // lblPreamp
+            // 
+            this.lblPreamp.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.lblPreamp, "lblPreamp");
+            this.lblPreamp.Name = "lblPreamp";
+            this.lblPreamp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblPreamp_MouseDoubleClick);
             // 
             // lblAF2
             // 
@@ -6789,25 +6625,15 @@ namespace PowerSDR
             // grpMultimeter
             // 
             this.grpMultimeter.BackColor = System.Drawing.Color.Transparent;
+            this.grpMultimeter.Controls.Add(this.picMultiMeterDigital);
             this.grpMultimeter.Controls.Add(this.comboMeterTXMode);
             this.grpMultimeter.Controls.Add(this.comboMeterRXMode);
-            this.grpMultimeter.Controls.Add(this.txtMultiText);
-            this.grpMultimeter.Controls.Add(this.picMultiMeterDigital);
             this.grpMultimeter.Controls.Add(this.lblMultiSMeter);
+            this.grpMultimeter.Controls.Add(this.txtMultiText);
             this.grpMultimeter.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.grpMultimeter, "grpMultimeter");
             this.grpMultimeter.Name = "grpMultimeter";
             this.grpMultimeter.TabStop = false;
-            // 
-            // txtMultiText
-            // 
-            this.txtMultiText.BackColor = System.Drawing.Color.Black;
-            this.txtMultiText.Cursor = System.Windows.Forms.Cursors.Default;
-            resources.ApplyResources(this.txtMultiText, "txtMultiText");
-            this.txtMultiText.ForeColor = System.Drawing.Color.Yellow;
-            this.txtMultiText.Name = "txtMultiText";
-            this.txtMultiText.ReadOnly = true;
-            this.txtMultiText.GotFocus += new System.EventHandler(this.HideFocus);
             // 
             // picMultiMeterDigital
             // 
@@ -6824,6 +6650,16 @@ namespace PowerSDR
             this.lblMultiSMeter.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.lblMultiSMeter, "lblMultiSMeter");
             this.lblMultiSMeter.Name = "lblMultiSMeter";
+            // 
+            // txtMultiText
+            // 
+            this.txtMultiText.BackColor = System.Drawing.Color.Black;
+            this.txtMultiText.Cursor = System.Windows.Forms.Cursors.Default;
+            resources.ApplyResources(this.txtMultiText, "txtMultiText");
+            this.txtMultiText.ForeColor = System.Drawing.Color.Yellow;
+            this.txtMultiText.Name = "txtMultiText";
+            this.txtMultiText.ReadOnly = true;
+            this.txtMultiText.GotFocus += new System.EventHandler(this.HideFocus);
             // 
             // lblTuneStep
             // 
@@ -7201,11 +7037,11 @@ namespace PowerSDR
             this.Controls.Add(this.panelBandHF);
             this.Controls.Add(this.panelBandVHF);
             this.Controls.Add(this.panelRX2Power);
+            this.Controls.Add(this.lblRF2);
+            this.Controls.Add(this.panelModeSpecificCW);
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificFM);
             this.Controls.Add(this.panelModeSpecificDigital);
-            this.Controls.Add(this.panelModeSpecificCW);
-            this.Controls.Add(this.lblRF2);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Console";
@@ -7243,6 +7079,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udFMOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX2AF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX1AF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udHermesStepAttenuatorData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSquelch)).EndInit();
             this.contextMenuStripFilterRX1.ResumeLayout(false);
             this.contextMenuStripFilterRX2.ResumeLayout(false);
@@ -7355,15 +7192,13 @@ namespace PowerSDR
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
                 string version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
-
-                // if (default_directory)
-                // {
                 app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                     + "\\FlexRadio Systems\\PowerSDR RX2 (W5WC)\\";
 #if(DEBUG)
                 app_data_path += "Debug\\";
 #endif
             }
+
             try
             {
                 if (!File.Exists(app_data_path + "wisdom"))
@@ -7379,40 +7214,7 @@ namespace PowerSDR
                         MessageBoxIcon.Information);
                     p.WaitForExit();
                 }
-                /*	if(!File.Exists(app_data_path+"wisdom"))
-                            {
-                                Process p = Process.Start(Application.StartupPath + "\\fftw_wisdom.exe", "\""+app_data_path);
-                                MessageBox.Show("Running one time optimization.  Please wait patiently for "+
-                                    "this process to finish.\nTypically the optimization takes no more than 3-5 minutes.",
-                                    "Optimizing...",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
-                                p.WaitForExit();
-                            } */
 
-                /*				else 
-                                {
-                                    string path = "wisdom";
-                                    using (StreamReader sr = new StreamReader(path)) 
-                                    {
-                                        char [] block = new char[12];
-                                        sr.ReadBlock(block,0,11);
-                                        Debug.WriteLine("the block is "+block + "so let's check it");
-                                        if (block.ToString() != "(fftw-3.2al")
-                                        {
-                                            sr.Close();
-                                            File.Delete(Application.StartupPath+"\\wisdom");
-                                            Process p = Process.Start(Application.StartupPath+"\\fftw_wisdom.exe");
-                                            MessageBox.Show("Running one time optimization.  Wisdom is from wrong version. Please wait patiently for "+
-                                                "this process to finish.\nTypically the optimization takes no more than 3-5 minutes.",
-                                                "Optimizing...",
-                                                MessageBoxButtons.OK,
-                                                MessageBoxIcon.Information);
-                                            p.WaitForExit();
-                                        }
-                                    }
-
-                                } */
                 try
                 {
                     if (!CheckForOpenProcesses())
@@ -7592,8 +7394,8 @@ namespace PowerSDR
                 {
                     case Band.B6M: fm_tx_offset_by_band_mhz[i] = 1; break; // 1MHz
                     case Band.B10M: fm_tx_offset_by_band_mhz[i] = 0.1; break; // 100kHz
-                    case Band.VHF0: fm_tx_offset_by_band_mhz[i] = 0.6; break; // 600kHz
-                    case Band.VHF1: fm_tx_offset_by_band_mhz[i] = 5; break; // 5MHz
+                    // case Band.VHF0: fm_tx_offset_by_band_mhz[i] = 0.6; break; // 600kHz
+                    // case Band.VHF1: fm_tx_offset_by_band_mhz[i] = 5; break; // 5MHz
                     default: fm_tx_offset_by_band_mhz[i] = 0.1; break; // 100kHz
                 }
             }
@@ -7648,6 +7450,18 @@ namespace PowerSDR
             power_table = new float[(int)Band.LAST][];
             for (int i = 0; i < (int)Band.LAST; i++)
                 power_table[i] = new float[13];
+
+            // Radio / Band / PA Gain
+          /*  pa_gain_by_radio = new float[(int)HPSDRModel.LAST][][];
+            for (int i = 0; i < (int)HPSDRModel.LAST; i++)
+            {
+                pa_gain_by_radio[i] = new float[(int)Band.LAST][];
+                for (int j = 0; j < (int)Band.LAST; j++)
+                    pa_gain_by_radio[i][j] = new float[13];
+            } */
+
+            //float [,,] pa_gain_by_rad = new float[(int)HPSDRModel.LAST, (int)Band.LAST, 13];
+
 
             rx1_image_gain_table = new float[(int)Band.LAST];
             rx1_image_phase_table = new float[(int)Band.LAST];
@@ -7761,7 +7575,7 @@ namespace PowerSDR
 
             current_meter_data = -200.0f;
 
-            rx1_preamp_offset = new float[11];
+            rx1_preamp_offset = new float[12];
             rx1_preamp_offset[(int)PreampMode.OFF] = 20.0f;
             rx1_preamp_offset[(int)PreampMode.LOW] = 0.0f;
             rx1_preamp_offset[(int)PreampMode.MED] = 0.0f;
@@ -7774,6 +7588,7 @@ namespace PowerSDR
             rx1_preamp_offset[(int)PreampMode.HPSDR_MINUS30] = 30.0f;
             rx1_preamp_offset[(int)PreampMode.HPSDR_MINUS40] = 40.0f;
             rx1_preamp_offset[(int)PreampMode.HPSDR_MINUS50] = 50.0f;
+            rx1_preamp_offset[(int)PreampMode.STEP_ATTEN] = (float)HermesAttenuatorData;
 
             rx2_preamp_offset = new float[4];
             rx2_preamp_offset[(int)PreampMode.OFF] = 20.0f;
@@ -8039,7 +7854,6 @@ namespace PowerSDR
                             this.Text = this.Text + "*** NoJanusSend ***";
                             break;
 
-
                         case "--allowOOBxmit":
                             Extended = true;
                             this.Text = this.Text + " OOBok";
@@ -8081,31 +7895,39 @@ namespace PowerSDR
             }
 
             //siolisten = new SIOListenerII(this);
-            Init60mChannels();						// Load 60m Channel Freqs
-
+            //Init60mChannels();						// Load 60m Channel Freqs
             update_rx2_display = true;
         }
 
         public void Init60mChannels()
         {
-            channels_60m = new List<Channel60m>();
+            channels_60m = new List<Channel>();
             switch (CurrentRegion)
             {
-                case FRSRegion.US: //center frequencies
-                    channels_60m.Add(new Channel60m(5.332));
-                    channels_60m.Add(new Channel60m(5.348));
-                    channels_60m.Add(new Channel60m(5.3585));
-                    channels_60m.Add(new Channel60m(5.373));
-                    channels_60m.Add(new Channel60m(5.405));
-                    break;
                 case FRSRegion.UK:
-                    channels_60m.Add(new Channel60m(5.260));
-                    channels_60m.Add(new Channel60m(5.280));
-                    channels_60m.Add(new Channel60m(5.290));
-                    channels_60m.Add(new Channel60m(5.368));
-                    channels_60m.Add(new Channel60m(5.373));
-                    channels_60m.Add(new Channel60m(5.400));
-                    channels_60m.Add(new Channel60m(5.405));
+                    channels_60m.Add(new Channel(5.2600, 2800));
+                    channels_60m.Add(new Channel(5.2800, 2800));
+                    channels_60m.Add(new Channel(5.2900, 2800));
+                    channels_60m.Add(new Channel(5.3680, 2800));
+                    channels_60m.Add(new Channel(5.3730, 2800));
+                    channels_60m.Add(new Channel(5.4000, 2800));
+                    channels_60m.Add(new Channel(5.4050, 2800));
+                    break;
+
+                case FRSRegion.US:
+                    channels_60m.Add(new Channel(5.3320, 2800));
+                    channels_60m.Add(new Channel(5.3480, 2800));
+                    channels_60m.Add(new Channel(5.3585, 2800));
+                    channels_60m.Add(new Channel(5.3730, 2800));
+                    channels_60m.Add(new Channel(5.4050, 2800));
+                    break;
+
+                default:
+                    channels_60m.Add(new Channel(5.3320, 2800));
+                    channels_60m.Add(new Channel(5.3480, 2800));
+                    channels_60m.Add(new Channel(5.3585, 2800));
+                    channels_60m.Add(new Channel(5.3730, 2800));
+                    channels_60m.Add(new Channel(5.4050, 2800));
                     break;
             }
         }
@@ -8281,6 +8103,8 @@ namespace PowerSDR
                     }
                 }
             }
+
+            //  string ver_num = TitleBar.GetVerNum();
 
             a.Add("current_datetime_mode/" + (int)current_datetime_mode);
             a.Add("rx1_display_cal_offset/" + rx1_display_cal_offset.ToString("f3"));
@@ -8546,35 +8370,26 @@ namespace PowerSDR
             a.Add("rx2_image_gain_checksum/" + rx2_image_gain_checksum.ToString());
             a.Add("rx2_image_phase_checksum/" + rx2_image_phase_checksum.ToString());
 
-            try
-            {
-                StreamWriter writer;
-                if (default_directory)
-                {
-                    writer = new StreamWriter(app_data_path + "\\power.csv");
-                }
-                else
-                {
-                    writer = new StreamWriter("power.csv");
-                }
-                writer.WriteLine("Band, 1, 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100");
-
-                for (int i = 1; i <= (int)Band.B6M; i++)
-                {
-                    writer.Write(((Band)i).ToString() + ",");
-                    for (int j = 0; j < 13; j++)
-                        writer.Write(power_table[i][j].ToString("f4") + ",");
-                    writer.WriteLine("");
-                }
-                writer.Close();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error writing power.csv file.  Please make sure this file is not open and try again.",
-                    "Error writing power.csv",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            /*   try
+               {
+                   StreamWriter writer = new StreamWriter(app_data_path + "\\power.csv");
+                   writer.WriteLine("Band, 1, 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100");
+                   for (int i = 1; i <= (int)Band.B6M; i++)
+                   {
+                       writer.Write(((Band)i).ToString() + ",");
+                       for (int j = 0; j < 13; j++)
+                           writer.Write(power_table[i][j].ToString("f4") + ",");
+                       writer.WriteLine("");
+                   }
+                   writer.Close();
+               }
+               catch (Exception)
+               {
+                   MessageBox.Show("Error writing power.csv file.  Please make sure this file is not open and try again.",
+                       "Error writing power.csv",
+                       MessageBoxButtons.OK,
+                       MessageBoxIcon.Error);
+               } */
 
             /*try
             {
@@ -8656,6 +8471,9 @@ namespace PowerSDR
             a.Add("mon_recall/" + mon_recall.ToString());
 
             a.Add("Version/" + this.Text);		// save the current version
+            //  a.Add("VersionNumber/" + ver_num);      // PowerSDR version number in a.b.c format
+            // a.Add("RadioType/" + CurrentModel);     // radio model string (ex. FLEX1500)
+            a.Add("BandTextID/" + current_region);  // TURF Region
 
             DB.PurgeNotches();                  // remove old notches from DB
             DB.SaveVars("State", ref a);		// save the values to the DB
@@ -9177,7 +8995,7 @@ namespace PowerSDR
                         isexpanded = bool.Parse(val);    //added by w3sz
                         if (isexpanded)   //added by w3sz
                         {
-                            this.ExpandDisplay();
+                            //  this.ExpandDisplay();
                             isexpanded = true;
                             iscollapsed = false;
                         }
@@ -10886,8 +10704,9 @@ namespace PowerSDR
             comboRX2MeterMode.Items.Add("Off");
 
             comboMeterTXMode.Items.Add("Fwd Pwr");
-            comboMeterTXMode.Items.Add("Ref Pwr");
-            comboMeterTXMode.Items.Add("SWR");
+           // comboMeterTXMode.Items.Add("Ref Pwr");
+           // comboMeterTXMode.Items.Add("Fwd/SWR");
+           // comboMeterTXMode.Items.Add("SWR");
             comboMeterTXMode.Items.Add("Mic");
             comboMeterTXMode.Items.Add("EQ");
             comboMeterTXMode.Items.Add("Leveler");
@@ -11148,15 +10967,15 @@ namespace PowerSDR
                         DB.SaveBandStack("80M", band_80m_index, mode, filter, freq);
                     break;
                 case Band.B60M:
-                    if (extended)
+                    if (extended || (current_region != FRSRegion.US || current_region != FRSRegion.UK))
                     {
                         if (freq >= 5.0 && freq < 6.0)
-                            DB.SaveBandStack("60M", band_60m_index, "USB", filter, freq);
+                            DB.SaveBandStack("60M", band_60m_index, mode, filter, freq);
                     }
                     else
                     {
-                        if (freq == 5.3305 || freq == 5.3465 || freq == 5.2585 || freq == 5.2785 || freq == 5.2885 || freq == 5.3665 || freq == 5.3715 || freq == 5.3985 || freq == 5.4035)
-                            DB.SaveBandStack("60M", band_60m_index, "USB", filter, freq);
+                        if (RX1IsOn60mChannel())
+                            DB.SaveBandStack("60M", band_60m_index, mode, filter, freq);
                     }
                     break;
                 case Band.B40M:
@@ -12051,14 +11870,12 @@ namespace PowerSDR
                     else
                         return Band.GEN;
 
-                case FRSRegion.UK:
-                    if (freq >= 1.8 && freq <= 2.0)
+                case FRSRegion.Israel:
+                    if (freq >= 1.81 && freq <= 2.0)
                         return Band.B160M;
-                    else if (freq >= 3.5 && freq <= 4.0)
+                    else if (freq >= 3.5 && freq <= 3.8)
                         return Band.B80M;
-                    else if (freq >= 5.25 && freq <= 5.41)
-                        return Band.B60M;
-                    else if (freq >= 7.0 && freq <= 7.3)
+                    else if (freq >= 7.0 && freq <= 7.2)
                         return Band.B40M;
                     else if (freq >= 10.1 && freq <= 10.15)
                         return Band.B30M;
@@ -12072,7 +11889,39 @@ namespace PowerSDR
                         return Band.B12M;
                     else if (freq >= 28.0 && freq <= 29.7)
                         return Band.B10M;
-                    else if (freq >= 50.0 && freq <= 54.0)
+                    else if (freq >= 50.0 && freq <= 50.2)
+                        return Band.B6M;
+                    else if (freq >= 144.0 && freq <= 146.0)
+                        return Band.B2M;
+                    else if (freq == 2.5 || freq == 5.0 ||
+                        freq == 10.0 || freq == 15.0 ||
+                        freq == 20.0)
+                        return Band.WWV;
+                    else
+                        return Band.GEN;
+
+                case FRSRegion.UK:
+                    if (freq >= 1.8 && freq <= 2.0)
+                        return Band.B160M;
+                    else if (freq >= 3.5 && freq <= 3.8)
+                        return Band.B80M;
+                    else if (freq >= 5.25 && freq <= 5.41)
+                        return Band.B60M;
+                    else if (freq >= 7.0 && freq <= 7.2)
+                        return Band.B40M;
+                    else if (freq >= 10.1 && freq <= 10.15)
+                        return Band.B30M;
+                    else if (freq >= 14.0 && freq <= 14.35)
+                        return Band.B20M;
+                    else if (freq >= 18.068 && freq <= 18.168)
+                        return Band.B17M;
+                    else if (freq >= 21.0 && freq <= 21.45)
+                        return Band.B15M;
+                    else if (freq >= 24.89 && freq <= 24.99)
+                        return Band.B12M;
+                    else if (freq >= 28.0 && freq <= 29.7)
+                        return Band.B10M;
+                    else if (freq >= 50.0 && freq <= 52.0)
                         return Band.B6M;
                     else if (freq >= 144.0 && freq <= 148.0)
                         return Band.B2M;
@@ -12448,8 +12297,36 @@ namespace PowerSDR
                         return Band.WWV;
                     else
                         return Band.GEN;
-            }
 
+                case FRSRegion.Russia:
+                    if (freq >= 1.81 && freq <= 2.0)
+                        return Band.B160M;
+                    else if (freq >= 3.5 && freq <= 3.8)
+                        return Band.B80M;
+                    else if (freq >= 7.0 && freq <= 7.2)
+                        return Band.B40M;
+                    else if (freq >= 10.1 && freq <= 10.15)
+                        return Band.B30M;
+                    else if (freq >= 14.0 && freq <= 14.35)
+                        return Band.B20M;
+                    else if (freq >= 18.068 && freq <= 18.168)
+                        return Band.B17M;
+                    else if (freq >= 21.0 && freq <= 21.45)
+                        return Band.B15M;
+                    else if (freq >= 24.89 && freq <= 25.14)
+                        return Band.B12M;
+                    else if (freq >= 26.97 && freq <= 29.7)
+                        return Band.B10M;
+                    else if (freq >= 144.0 && freq <= 148.0)
+                        return Band.B2M;
+                    else if (freq == 2.5 || freq == 5.0 ||
+                        freq == 10.0 || freq == 15.0 ||
+                        freq == 20.0)
+                        return Band.WWV;
+                    else
+                        return Band.GEN;
+            }
+            // if nothing matched to this point, just put it in the GEN band
             return Band.GEN;
         }
 
@@ -12759,7 +12636,7 @@ namespace PowerSDR
         {
             double swr;
 
-            if (!swrprotection || !alexpresent || (g_fwd == 0 && g_rev == 0) || g_fwd < 1)
+            if (!swrprotection || !alexpresent || (disable_swr_on_tune && chkTUN.Checked) || (g_fwd == 0 && g_rev == 0) || g_fwd < 1)
             {
                 JanusAudio.SetSWRProtect(1.0f);
                 return 1.0;
@@ -13215,7 +13092,7 @@ namespace PowerSDR
                 case FRSRegion.US:
                     if (f >= 1.8 && f <= 2.0) ret_val = true;
                     else if (f >= 3.5 && f <= 4.0) ret_val = true;
-                    else if (f >= 5.3305 && f <= 5.3334) ret_val = true;
+                    else if (f >= 5.3305 && f <= 5.3334) ret_val = true; // allow for default 3100Hz TX Filter High Cut
                     else if (f >= 5.3465 && f <= 5.3494) ret_val = true;
                     else if (f >= 5.357 && f <= 5.3599) ret_val = true;
                     else if (f >= 5.3715 && f <= 5.3744) ret_val = true;
@@ -13263,24 +13140,37 @@ namespace PowerSDR
                     else if (f >= 50.08 && f <= 51.0) ret_val = true;
                     else ret_val = false;
                     break;
-                case FRSRegion.UK:
-                    if (f >= 1.8 && f <= 2.0) ret_val = true;
-                    else if (f >= 3.5 && f <= 4.0) ret_val = true;
-                    else if (f >= 5.2585 && f <= 5.2614) ret_val = true;
-                    else if (f >= 5.2785 && f <= 5.2814) ret_val = true;
-                    else if (f >= 5.2885 && f <= 5.2914) ret_val = true;
-                    else if (f >= 5.3665 && f <= 5.3694) ret_val = true;
-                    else if (f >= 5.3715 && f <= 5.3744) ret_val = true;
-                    else if (f >= 5.3985 && f <= 5.4014) ret_val = true;
-                    else if (f >= 5.4035 && f <= 5.4064) ret_val = true;
-                    else if (f >= 7.0 && f <= 7.3) ret_val = true;
+                case FRSRegion.Israel:
+                    if (f >= 1.81 && f <= 2.0) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
                     else if (f >= 10.1 && f <= 10.15) ret_val = true;
                     else if (f >= 14.0 && f <= 14.35) ret_val = true;
                     else if (f >= 18.068 && f <= 18.168) ret_val = true;
                     else if (f >= 21.0 && f <= 21.45) ret_val = true;
                     else if (f >= 24.89 && f <= 24.99) ret_val = true;
                     else if (f >= 28.0 && f <= 29.7) ret_val = true;
-                    else if (f >= 50.0 && f <= 54.0) ret_val = true;
+                    else if (f >= 50.0 && f <= 50.2) ret_val = true;
+                    else ret_val = false;
+                    break;
+                case FRSRegion.UK:
+                    if (f >= 1.81 && f <= 2.0) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 5.2585 && f <= 5.2615) ret_val = true;
+                    else if (f >= 5.2785 && f <= 5.2815) ret_val = true;
+                    else if (f >= 5.2885 && f <= 5.2915) ret_val = true;
+                    else if (f >= 5.3665 && f <= 5.3695) ret_val = true;
+                    else if (f >= 5.3715 && f <= 5.3745) ret_val = true;
+                    else if (f >= 5.3985 && f <= 5.4015) ret_val = true;
+                    else if (f >= 5.4035 && f <= 5.4065) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else if (f >= 50.0 && f <= 52.0) ret_val = true;
                     else ret_val = false;
                     break;
                 case FRSRegion.Italy_Plus:
@@ -13446,6 +13336,18 @@ namespace PowerSDR
                     else if (f >= 24.89 && f <= 24.99) ret_val = true;
                     else if (f >= 28.0 && f <= 29.7) ret_val = true;
                     else if (f >= 50.08 && f <= 51.2) ret_val = true;
+                    else ret_val = false;
+                    break;
+                case FRSRegion.Russia: // 14
+                    if (f >= 1.81 && f <= 2.0) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.8) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 25.14) ret_val = true;
+                    else if (f >= 26.97 && f <= 29.7) ret_val = true;
                     else ret_val = false;
                     break;
                 default:
@@ -14972,41 +14874,38 @@ namespace PowerSDR
         public bool RX1IsIn60m()
         {
             double freq = VFOAFreq;
-            if (freq > 5.1)
-                return !(freq > 5.5);
-
-            return false;
+            return (freq >= 5.1 && freq <= 5.5);
         }
 
-        public bool RX1IsOn60mChannel(Channel60m chan)
+        public bool RX1IsOn60mChannel(Channel c)
         {
-            double freq = Math.Round(VFOAFreq - ModeFreqOffset(rx1_dsp_mode), 6);
-            return chan.Freq == freq;
+            double freq = VFOAFreq - ModeFreqOffset(rx1_dsp_mode);
+            freq = Math.Round(freq, 6);
+
+            return (c.Freq == freq);
         }
 
         public bool RX1IsOn60mChannel()
         {
-            bool onchan = false;
-            List<Channel60m> channels_60m = Channels60m;
-            double freq = Math.Round(VFOAFreq - ModeFreqOffset(rx1_dsp_mode), 6);
-            foreach (Channel60m chan in Channels60m)
+            double freq = VFOAFreq - ModeFreqOffset(rx1_dsp_mode);
+            freq = Math.Round(freq, 6);
+
+            foreach (Channel c in Channels60m)
             {
-                if (chan.Freq == freq) onchan = true;
+                if (c.Freq == freq)
+                    return true;
             }
 
-            return onchan;
+            return false; // nothing matched, return false
         }
 
         public bool RX2IsIn60m()
         {
             double freq = VFOBFreq;
-            if (freq > 5.1)
-                return !(freq > 5.5);
-
-            return false;
+            return (freq >= 5.1 && freq <= 5.5);
         }
 
-        public bool RX2IsOn60mChannel(Channel60m c)
+        public bool RX2IsOn60mChannel(Channel c)
         {
             double freq = VFOBFreq - ModeFreqOffset(rx2_dsp_mode);
             freq = Math.Round(freq, 6);
@@ -15016,18 +14915,16 @@ namespace PowerSDR
 
         public bool RX2IsOn60mChannel()
         {
-
-            //  List<Channel60m> channels_60m = Channels60m;
             double freq = VFOBFreq - ModeFreqOffset(rx2_dsp_mode);
             freq = Math.Round(freq, 6);
 
-            foreach (Channel60m c in Channels60m)
+            foreach (Channel c in Channels60m)
             {
                 if (c.Freq == freq)
                     return true;
             }
 
-            return false;
+            return false; // nothing matched, return false
         }
 
         private double ModeFreqOffset(DSPMode mode)
@@ -17476,7 +17373,7 @@ namespace PowerSDR
                     rx2_preamp_offset[(int)PreampMode.OFF] = -off_offset;
                     rx2_preamp_offset[(int)PreampMode.HIGH] = 0.0f;
 
-                    if (alexpresent)
+                    if (alexpresent && !ANAN10Present)
                     {
                         RX1PreampMode = PreampMode.HPSDR_MINUS10; //-10dB
                         Thread.Sleep(100);
@@ -20095,13 +19992,80 @@ namespace PowerSDR
         // Properties
         // ======================================================
 
+        private bool hermes_step_attenuator = false;
+        public bool HermesStepAttenuator
+        {
+            get { return hermes_step_attenuator; }
+            set
+            {
+                hermes_step_attenuator = value;
+                if (hermes_step_attenuator)
+                {
+                    lblPreamp.Text = "S-ATT";
+                    udHermesStepAttenuatorData.BringToFront();
+                    JanusAudio.EnableHermesAtten(1);
+                }
+                else
+                {
+                    lblPreamp.Text = "ATT";
+                    comboPreamp.BringToFront();
+                    JanusAudio.EnableHermesAtten(0);
+
+                    if (AlexPresent)
+                        JanusAudio.SetAlexAtten(alex_atten); // normal up alex attenuator setting
+                }
+
+                if (CollapsedDisplay)
+                    CollapseDisplay();
+
+                UpdateDisplayOffsets();
+
+            }
+        }
+
+        private int hermes_attenuator_data = 0;
+        public int HermesAttenuatorData
+        {
+            get { return hermes_attenuator_data; }
+            set
+            {
+                hermes_attenuator_data = value;
+
+                if (AlexPresent && !ANAN10Present)
+                    udHermesStepAttenuatorData.Maximum = (decimal)61;
+                else udHermesStepAttenuatorData.Maximum = (decimal)31;
+
+                if (hermes_step_attenuator)
+                {
+                    if (AlexPresent && !ANAN10Present)
+                    {
+                        if (hermes_attenuator_data <= 31)
+                        {
+                            JanusAudio.SetAlexAtten(0); // 0dB Alex Attenuator
+                            JanusAudio.SetHermesAttenData(hermes_attenuator_data);
+                        }
+                        else
+                        {
+                            JanusAudio.SetAlexAtten(3); // -30dB Alex Attenuator
+                            JanusAudio.SetHermesAttenData(hermes_attenuator_data + 2);
+                        }
+                    }
+                    else
+                        JanusAudio.SetHermesAttenData(hermes_attenuator_data);
+                }
+
+                udHermesStepAttenuatorData.Value = hermes_attenuator_data;
+
+                UpdateDisplayOffsets();
+            }
+        }
+
         private bool limit_slew = false;
         public bool LimitSlew
         {
             get { return limit_slew; }
             set { limit_slew = value; }
         }
-
 
         private List<TuneStep> tune_step_list;				// A list of available tuning steps
         public List<TuneStep> TuneStepList
@@ -20204,7 +20168,6 @@ namespace PowerSDR
             }
         }
 
-
         public int RX0Gain
         {
             get
@@ -20232,7 +20195,6 @@ namespace PowerSDR
                 ptbPanMainRX_Scroll(this, EventArgs.Empty);
             }
         }
-
 
         public int RX1Gain
         {
@@ -20289,7 +20251,6 @@ namespace PowerSDR
                 ptbRX2Pan_Scroll(this, EventArgs.Empty);
             }
         }
-
 
         public bool CATDiversityEnable
         {
@@ -21275,11 +21236,21 @@ namespace PowerSDR
         private float meter_offset = 0.0f;
         private void UpdateDisplayOffsets()
         {
-            Display.RX1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
-            if (!alexpresent && rx2_preamp_present)
-                Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
+            if (hermes_step_attenuator)
+            {
+                Display.RX1PreampOffset = hermes_attenuator_data;
+                Display.RX2PreampOffset = hermes_attenuator_data;
+            }
             else
-                Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+            {
+                Display.RX1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+
+                if (!alexpresent && rx2_preamp_present)
+                    Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
+                else
+                    Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+            }
+
             Display.RX1DisplayCalOffset = rx1_display_cal_offset + rx1_path_offset + rx1_xvtr_gain_offset + rx1_loop_offset;
             Display.RX2DisplayCalOffset = rx2_display_cal_offset + rx2_path_offset + rx2_xvtr_gain_offset + rx2_loop_offset;
             //Display.RX1DisplayCalOffset = rx1_level_table[(int)rx1_band][0]+rx1_path_offset+rx1_xvtr_gain_offset+rx1_loop_offset;
@@ -22202,7 +22173,7 @@ namespace PowerSDR
             {
                 rx1_display_cal_offset = value;
                 //Display.RX1DisplayCalOffset = value;
-                UpdateDisplayOffsets();
+                // UpdateDisplayOffsets();
             }
         }
 
@@ -22214,7 +22185,7 @@ namespace PowerSDR
             {
                 rx2_display_cal_offset = value;
                 //Display.RX2DisplayCalOffset = value;
-                UpdateDisplayOffsets();
+                //  UpdateDisplayOffsets();
             }
         }
 
@@ -22388,6 +22359,48 @@ namespace PowerSDR
                 Audio.CurSoundCard = value;
                 if (SetupForm != null && SetupForm.CurrentSoundCard != current_soundcard)
                     SetupForm.CurrentSoundCard = current_soundcard;
+            }
+        }
+
+        private HPSDRModel current_hpsdr_model = HPSDRModel.HPSDR;
+        public HPSDRModel CurrentHPSDRModel
+        {
+            get { return current_hpsdr_model; }
+            set
+            {
+                current_hpsdr_model = value;
+
+                switch (current_hpsdr_model)
+                {
+                    case HPSDRModel.HPSDR:
+                        break;
+                    case HPSDRModel.HERMES:
+                        break;
+                    case HPSDRModel.ANAN10:
+                        if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
+                            comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                        if (!comboMeterTXMode.Items.Contains("SWR"))
+                            comboMeterTXMode.Items.Insert(2, "SWR");
+                        if (!comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                            comboMeterTXMode.Items.Insert(3, "Fwd/SWR");
+                        break;
+                    case HPSDRModel.ANAN100:
+                        if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
+                            comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                        if (!comboMeterTXMode.Items.Contains("SWR"))
+                            comboMeterTXMode.Items.Insert(2, "SWR");
+                        if (!comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                            comboMeterTXMode.Items.Insert(3, "Fwd/SWR");
+                        break;
+                    case HPSDRModel.ANAN100D:
+                        if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
+                            comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                        if (!comboMeterTXMode.Items.Contains("SWR"))
+                            comboMeterTXMode.Items.Insert(2, "SWR");
+                        if (!comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                            comboMeterTXMode.Items.Insert(3, "Fwd/SWR");
+                        break;
+                }
             }
         }
 
@@ -22593,6 +22606,15 @@ namespace PowerSDR
                             hermes_power_enable = 0;
                         }
                         JanusAudio.EnableHermesPower(hermes_power_enable);
+                        if (alexpresent || apollopresent)
+                        {
+                            if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
+                                comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                            if (!comboMeterTXMode.Items.Contains("SWR"))
+                                comboMeterTXMode.Items.Insert(2, "SWR");
+                            if (!comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                                comboMeterTXMode.Items.Insert(3, "Fwd/SWR");
+                        }
                         break;
 
                     case Model.SOFTROCK40:
@@ -22622,6 +22644,7 @@ namespace PowerSDR
                         chkFWCATUBypass.Visible = false;
                         break;
                 }
+
                 if (SetupForm != null && saved_model != current_model)
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             }
@@ -23300,7 +23323,7 @@ namespace PowerSDR
             }
         }*/
 
-        private FRSRegion current_region = FRSRegion.US; //w5wc
+        private FRSRegion current_region; // = FRSRegion.US; 
         public FRSRegion CurrentRegion
         {
             get { return current_region; }
@@ -25417,6 +25440,9 @@ namespace PowerSDR
                     case MeterTXMode.REVERSE_POWER:
                         text = "Ref Pwr";
                         break;
+                    case MeterTXMode.SWR_POWER:
+                        text = "Fwd/SWR";
+                        break;
                     case MeterTXMode.MIC:
                         text = "Mic";
                         break;
@@ -25913,8 +25939,8 @@ namespace PowerSDR
             set { ptbFilterShift.Value = value; }
         }
 
-        private static List<Channel60m> channels_60m;
-        public static List<Channel60m> Channels60m
+        private static List<Channel> channels_60m;
+        public static List<Channel> Channels60m
         {
             get
             {
@@ -26156,6 +26182,16 @@ namespace PowerSDR
             }
         }
 
+        private bool disable_swr_on_tune = true;
+        public bool DisableSWRonTune
+        {
+            get { return disable_swr_on_tune; }
+            set
+            {
+                disable_swr_on_tune = value;
+            }
+        }
+
         private bool attontx = false;
         public bool ATTOnTX
         {
@@ -26163,6 +26199,57 @@ namespace PowerSDR
             set
             {
                 attontx = value;
+            }
+        }
+
+        private bool anan10present = false;
+        public bool ANAN10Present
+        {
+            get { return anan10present; }
+            set
+            {
+                anan10present = value;
+                if (anan10present)
+                {
+                    if (!comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                        comboMeterTXMode.Items.Insert(3, "Fwd/SWR");
+                }
+                else
+                {
+                    if (!initializing)
+                    {
+                        if (comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                            comboMeterTXMode.Items.Remove("Fwd/SWR");
+                    }
+                }
+            }
+        }
+
+        private bool apollopresent = false;
+        public bool ApolloPresent
+        {
+            get { return apollopresent; }
+            set
+            {
+                apollopresent = value;
+                if (apollopresent)
+                {
+                    if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
+                        comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                    if (!comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                        comboMeterTXMode.Items.Insert(3, "Fwd/SWR");
+                }
+                else
+                {
+                    if (!initializing)
+                    {
+                        if (comboMeterTXMode.Items.Contains("Ref Pwr"))
+                            comboMeterTXMode.Items.Remove("Ref Pwr");
+                        if (comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                            comboMeterTXMode.Items.Remove("Fwd/SWR");
+                    }
+                }
+
             }
         }
 
@@ -26178,8 +26265,11 @@ namespace PowerSDR
                 {
                     if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
                         comboMeterTXMode.Items.Insert(1, "Ref Pwr");
-                    // if (!comboMeterTXMode.Items.Contains("SWR"))
-                    //    comboMeterTXMode.Items.Insert(2, "SWR");
+                    if (!comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                        comboMeterTXMode.Items.Insert(3, "Fwd/SWR");
+
+                    if (!comboMeterTXMode.Items.Contains("SWR"))
+                        comboMeterTXMode.Items.Insert(2, "SWR");
 
                     if (comboMeterTXMode.SelectedIndex < 0)
                         comboMeterTXMode.SelectedIndex = 0;
@@ -26200,13 +26290,17 @@ namespace PowerSDR
                 else
                 {
                     string cur_txt = comboMeterTXMode.Text;
+
+                    if (!initializing)
                     {
                         if (comboMeterTXMode.Items.Contains("Ref Pwr"))
                             comboMeterTXMode.Items.Remove("Ref Pwr");
-
-                        //                        if (comboMeterTXMode.Items.Contains("SWR"))
-                        //                            comboMeterTXMode.Items.Remove("SWR");
+                        if (comboMeterTXMode.Items.Contains("SWR"))
+                            comboMeterTXMode.Items.Remove("SWR");
+                        if (comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                            comboMeterTXMode.Items.Remove("Fwd/SWR");
                     }
+
                     comboMeterTXMode.Text = cur_txt;
                     if (comboMeterTXMode.SelectedIndex < 0 &&
                         comboMeterTXMode.Items.Count > 0)
@@ -26259,6 +26353,7 @@ namespace PowerSDR
             }
         }
 
+        private int alex_atten;
         private PreampMode rx1_preamp_mode = PreampMode.HIGH;
         public PreampMode RX1PreampMode
         {
@@ -26315,7 +26410,7 @@ namespace PowerSDR
                 }
                 else if (ModelIsHPSDRorHermes())
                 {
-                    int alex_atten = 0;
+                    alex_atten = 0;
                     int merc_preamp = 0;
                     switch (rx1_preamp_mode)
                     {
@@ -26431,7 +26526,9 @@ namespace PowerSDR
                         comboPreamp.Text = "-50dB";
                         break;
                 }
-                Display.RX1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+                //  if (!hermes_step_attenuator)
+                //  Display.RX1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+                UpdateDisplayOffsets();
 
                 if (chkSquelch.Checked)
                     ptbSquelch_Scroll(this, EventArgs.Empty);
@@ -26459,9 +26556,13 @@ namespace PowerSDR
                         chkRX2Preamp.Checked = true;
                         break;
                 }
+
                 if (!alexpresent)
                     JanusAudio.SetMerc2Preamp(merc2_preamp);
-                Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
+
+                UpdateDisplayOffsets();
+                // Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
+
                 if (chkRX2Squelch.Checked)
                     ptbRX2Squelch_Scroll(this, EventArgs.Empty);
             }
@@ -26565,6 +26666,7 @@ namespace PowerSDR
             get { return mox_delay; }
             set { mox_delay = value; }
         }
+
         private int rf_delay = 30;
         public int RFDelay
         {
@@ -27430,12 +27532,14 @@ namespace PowerSDR
                     Hdw.PAPresent = value;
                 if (pa_present || alexpresent)
                 {
-                    if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
-                        comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                    //  if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
+                    //   comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                    //  if (!comboMeterTXMode.Items.Contains("Fwd/SWR"))
+                    //  comboMeterTXMode.Items.Insert(2, "Fwd/SWR");
                     if (pa_present) //remove for alex swr
                     {
-                        if (!comboMeterTXMode.Items.Contains("SWR"))
-                            comboMeterTXMode.Items.Insert(2, "SWR");
+                        // if (!comboMeterTXMode.Items.Contains("SWR"))
+                        //  comboMeterTXMode.Items.Insert(3, "SWR");
                     }
                     if (alexpresent)
                     {
@@ -27448,8 +27552,8 @@ namespace PowerSDR
                 else
                 {
                     string cur_txt = comboMeterTXMode.Text;
-                    if (comboMeterTXMode.Items.Contains("Ref Pwr"))
-                        comboMeterTXMode.Items.Remove("Ref Pwr");
+                    // if (comboMeterTXMode.Items.Contains("Ref Pwr"))
+                    //  comboMeterTXMode.Items.Remove("Ref Pwr");
                     //                    if (comboMeterTXMode.Items.Contains("SWR"))
                     //                        comboMeterTXMode.Items.Remove("SWR");
 
@@ -28015,6 +28119,7 @@ namespace PowerSDR
             Graphics g = e.Graphics;
             double num;
             int pixel_x = 0;
+            int pixel_x_swr = 0;
             string output = "";
 
             switch (current_meter_display_mode)
@@ -28155,26 +28260,46 @@ namespace PowerSDR
                                 break;
                             case MeterTXMode.FORWARD_POWER:
                             case MeterTXMode.REVERSE_POWER:
-                                if (!alexpresent)
+                                if (!alexpresent && !apollopresent)
                                     num = (num * 100);
 
                                 switch ((int)g.DpiX)
                                 {
                                     case 96:
-                                        if (num <= 1.0f)
-                                            pixel_x = (int)(0 + num * 2);
-                                        else if (num <= 5.0f)
-                                            pixel_x = (int)(2 + (num - 1) / 4 * 24);
-                                        else if (num <= 10.0f)
-                                            pixel_x = (int)(26 + (num - 5) / 5 * 24);
-                                        else if (num <= 50.0f)
-                                            pixel_x = (int)(50 + (num - 10) / 40 * 24);
-                                        else if (num <= 100.0f)
-                                            pixel_x = (int)(74 + (num - 50) / 50 * 24);
-                                        else if (num <= 120.0f)
-                                            pixel_x = (int)(98 + (num - 100) / 20 * 24);
+                                        if (anan10present || apollopresent)
+                                        {
+                                            if (num <= 1.0f)
+                                                pixel_x = (int)(0 + num * 2);
+                                            else if (num <= 5.0f)
+                                                pixel_x = (int)(2 + (num - 1) / 4 * 24);
+                                            else if (num <= 10.0f)
+                                                pixel_x = (int)(26 + (num - 5) / 5 * 24);
+                                            else if (num <= 15.0f)
+                                                pixel_x = (int)(50 + (num - 10) / 5 * 24);
+                                            else if (num <= 20.0f)
+                                                pixel_x = (int)(74 + (num - 15) / 5 * 24);
+                                            else if (num <= 25.0f)
+                                                pixel_x = (int)(98 + (num - 20) / 5 * 24);
+                                            else
+                                                pixel_x = (int)(122 + (num - 25) / 5 * 16);
+                                        }
                                         else
-                                            pixel_x = (int)(122 + (num - 120) / 20 * 16);
+                                        {
+                                            if (num <= 1.0f)
+                                                pixel_x = (int)(0 + num * 2);
+                                            else if (num <= 5.0f)
+                                                pixel_x = (int)(2 + (num - 1) / 4 * 24);
+                                            else if (num <= 10.0f)
+                                                pixel_x = (int)(26 + (num - 5) / 5 * 24);
+                                            else if (num <= 50.0f)
+                                                pixel_x = (int)(50 + (num - 10) / 40 * 24);
+                                            else if (num <= 100.0f)
+                                                pixel_x = (int)(74 + (num - 50) / 50 * 24);
+                                            else if (num <= 120.0f)
+                                                pixel_x = (int)(98 + (num - 100) / 20 * 24);
+                                            else
+                                                pixel_x = (int)(122 + (num - 120) / 20 * 16);
+                                        }
                                         break;
                                     case 120:
                                         if (num <= 1.0f)
@@ -28382,11 +28507,10 @@ namespace PowerSDR
                                     break;
                                 case MeterTXMode.FORWARD_POWER:
                                 case MeterTXMode.REVERSE_POWER:
-                                    if ((alexpresent || fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
-                                        (pa_present && VFOAFreq < 30.0))
-                                        output = num.ToString("f0") + " W";
+                                    if (alexpresent || pa_present || apollopresent)
+                                        output = num.ToString(format) + " W";
                                     else
-                                        output = (num * 10).ToString("f0") + " mW";
+                                        output = (num * 10).ToString(format) + " mW";
                                     break;
                                 case MeterTXMode.SWR:
                                     output = num.ToString("f1") + " : 1";
@@ -28406,11 +28530,13 @@ namespace PowerSDR
                     }
                     break;
                     #endregion
+
                 case MultiMeterDisplayMode.Edge:
                     #region Edge
                     if (meter_data_ready)
                     {
                         current_meter_data = new_meter_data;
+                        current_swrmeter_data = new_swrmeter_data;
                         meter_data_ready = false;
                     }
 
@@ -28436,14 +28562,14 @@ namespace PowerSDR
                         {
                             case MeterRXMode.SIGNAL_STRENGTH:
                             case MeterRXMode.SIGNAL_AVERAGE:
-                                g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.5), 2);
-                                g.FillRectangle(high_brush, (int)(W * 0.5), H - 4, (int)(W * 0.5) - 4, 2);
+                                g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.5), 2); // white horizontal line
+                                g.FillRectangle(high_brush, (int)(W * 0.5), H - 4, (int)(W * 0.5) - 4, 2); // red horizontal line
                                 double spacing = (W * 0.5 - 2.0) / 5.0;
                                 double string_height = 0;
                                 for (int i = 1; i < 6; i++)
                                 {
-                                    g.FillRectangle(low_brush, (int)(i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
-                                    g.FillRectangle(low_brush, (int)(i * spacing), H - 4 - 6, 2, 6);
+                                    g.FillRectangle(low_brush, (int)(i * spacing - spacing * 0.5), H - 4 - 3, 1, 3); // short tic marks
+                                    g.FillRectangle(low_brush, (int)(i * spacing), H - 4 - 6, 2, 6); // long tic marks
 
                                     //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
                                     SizeF size = g.MeasureString((-1 + i * 2).ToString(), font7, 1, StringFormat.GenericTypographic);
@@ -28452,14 +28578,15 @@ namespace PowerSDR
 
                                     //g.TextRenderingHint = TextRenderingHint.AntiAlias;
                                     //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                    // 1 3 5 7 9
                                     g.DrawString((-1 + i * 2).ToString(), font7, low_brush, (int)(i * spacing - string_width + (int)(i / 5)), (int)(H - 4 - 8 - string_height));
                                     //g.SmoothingMode = SmoothingMode.None;
                                 }
                                 spacing = ((double)W * 0.5 - 2.0 - 4.0) / 3.0;
                                 for (int i = 1; i < 4; i++)
                                 {
-                                    g.FillRectangle(high_brush, (int)((double)W * 0.5 + i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
-                                    g.FillRectangle(high_brush, (int)((double)W * 0.5 + i * spacing), H - 4 - 6, 2, 6);
+                                    g.FillRectangle(high_brush, (int)((double)W * 0.5 + i * spacing - spacing * 0.5), H - 4 - 3, 1, 3); // long tic marks
+                                    g.FillRectangle(high_brush, (int)((double)W * 0.5 + i * spacing), H - 4 - 6, 2, 6); // short tic marks
 
                                     //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
                                     SizeF size = g.MeasureString("+" + (i * 20).ToString(), font7, 3, StringFormat.GenericTypographic);
@@ -28564,7 +28691,7 @@ namespace PowerSDR
                                 break;
                             case MeterTXMode.FORWARD_POWER:
                             case MeterTXMode.REVERSE_POWER:
-                                if (alexpresent || pa_present || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
+                                if ((alexpresent || pa_present) && (!anan10present && !apollopresent))
                                 {
                                     g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
                                     g.FillRectangle(high_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 10, 2);
@@ -28598,7 +28725,7 @@ namespace PowerSDR
                                         double string_width = size.Width - 2.0;
 
                                         g.TextRenderingHint = TextRenderingHint.SystemDefault;
-                                        g.DrawString("120+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 4 - 8 - string_height));
+                                        g.DrawString("140+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 4 - 8 - string_height));
                                     }
 
                                     if (num <= 100.0) // low area
@@ -28616,16 +28743,75 @@ namespace PowerSDR
                                     else
                                     {
                                         spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
-                                        if (num <= 120.0)
-                                            pixel_x = (int)(W * 0.75 + (num - 100.0) / 20.0 * spacing);
+                                        if (num <= 140.0)
+                                            pixel_x = (int)(W * 0.75 + (num - 100.0) / 40.0 * spacing);
                                         else
-                                            pixel_x = (int)(W * 0.75 + spacing + (num - 120.0) / 60.0 * spacing);
+                                            pixel_x = (int)(W * 0.75 + spacing + (num - 140.0) / 60.0 * spacing);
                                     }
+                                }
+                                else if (anan10present || apollopresent)
+                                {
+                                    g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
+                                    g.FillRectangle(high_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 10, 2);
+                                    spacing = (W * 0.75 - 2.0) / 4.0;
+                                    string_height = 0;
+                                    string[] list = { "1", "5", "10", "15" };
+                                    for (int i = 1; i < 5; i++)
+                                    {
+                                        g.FillRectangle(low_brush, (int)(i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
+                                        g.FillRectangle(low_brush, (int)(i * spacing), H - 4 - 6, 2, 6);
+
+                                        string s = list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        g.DrawString(s, font7, low_brush, (int)(i * spacing - string_width * s.Length + (int)(i / 3) + (int)(i / 4)), (int)(H - 4 - 8 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+                                    spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                                    for (int i = 1; i < 2; i++)
+                                    {
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing), H - 4 - 6, 2, 6);
+
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 2, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+
+                                        g.TextRenderingHint = TextRenderingHint.SystemDefault;
+                                        g.DrawString("25+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 4 - 8 - string_height));
+                                    }
+
+                                    if (num <= 15.0) // low area
+                                    {
+                                        spacing = (W * 0.75 - 2.0) / 4.0;
+                                        if (num <= 1.0)
+                                            pixel_x = (int)(num / 1.0 * (int)spacing);
+                                        else if (num <= 5.0)
+                                            pixel_x = (int)(spacing + (num - 1.0) / 4.0 * spacing);
+                                        else if (num <= 10.0)
+                                            pixel_x = (int)(2 * spacing + (num - 5.0) / 5.0 * spacing);
+                                        else
+                                            pixel_x = (int)(3 * spacing + (num - 10.0) / 5.0 * spacing);
+                                    }
+                                    else
+                                    {
+                                        spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                                        if (num <= 25.0)
+                                            pixel_x = (int)(W * 0.75 + (num - 15.0) / 10.0 * spacing);
+                                        else
+                                            pixel_x = (int)(W * 0.75 + spacing + (num - 25.0) / 5.0 * spacing);
+                                    }
+
                                 }
                                 else // 1W version
                                 {
                                     g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
-                                    g.FillRectangle(high_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 9, 2);
+                                    g.FillRectangle(low_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 9, 2);
                                     spacing = (W * 0.75 - 2.0) / 4.0;
                                     string_height = 0;
                                     string[] list = { "100", "250", "500", "800", "1000" };
@@ -28648,15 +28834,15 @@ namespace PowerSDR
                                     spacing = (W * 0.25 - 2.0 - 9.0) / 1.0;
                                     for (int i = 1; i < 2; i++)
                                     {
-                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
-                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing), H - 4 - 6, 2, 6);
+                                        g.FillRectangle(low_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
+                                        g.FillRectangle(low_brush, (int)((double)W * 0.75 + i * spacing), H - 4 - 6, 2, 6);
 
                                         //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
                                         SizeF size = g.MeasureString("0", font7, 3, StringFormat.GenericTypographic);
                                         double string_width = size.Width - 2.0;
 
                                         //g.TextRenderingHint = TextRenderingHint.SystemDefault;
-                                        g.DrawString("1000", font7, high_brush, (int)(W * 0.75 + 2 + i * spacing - (int)4.0 * string_width), (int)(H - 4 - 8 - string_height));
+                                        g.DrawString("1000", font7, low_brush, (int)(W * 0.75 + 2 + i * spacing - (int)4.0 * string_width), (int)(H - 4 - 8 - string_height));
                                     }
 
                                     num *= 1000;
@@ -28679,7 +28865,401 @@ namespace PowerSDR
                                     }
                                 }
                                 break;
+                            case MeterTXMode.SWR_POWER:
+
+                                if ((alexpresent || pa_present) && (!anan10present && !apollopresent))
+                                {
+                                    g.FillRectangle(high_brush, (int)(W * 0.75), (H / 2) - 1, (int)(W * 0.25) - 4, 2);
+                                    g.FillRectangle(low_brush, 0, (H / 2) - 1, (int)(W * 0.75), 4); // horizontal white line
+                                    g.FillRectangle(high_brush, (int)(W * 0.75), (H / 2) + 1, (int)(W * 0.25) - 9, 2); //horizontal red line
+                                    // SWR stuff first
+                                    spacing = (W * 0.5) / 10.0;
+                                    string_height = 0;
+                                    string[] swrx_list = { "1.5", "2" };
+                                    for (int i = 1; i < 10; i++)
+                                    {
+                                        g.FillRectangle(low_brush, (int)(i * spacing), (H / 2) - 4, 1, 3);
+                                    }
+                                    for (int i = 1; i < 3; i++)
+                                    {
+                                        spacing = (W * 0.5) / 2.0;
+                                        g.FillRectangle(low_brush, (int)(i * spacing), (H / 2) - 7, 2, 6);
+
+                                        string s = swrx_list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        g.DrawString(s, font7, low_brush, (int)(i * spacing - string_width * s.Length + 2.0 - 1 * (int)(i / 2) + 3 * (int)(i / 4)), (int)((H / 2) - 9 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+                                    g.FillRectangle(low_brush, (int)(W * 0.625), (H / 2) - 4, 1, 3); // small tic 2.5:1
+
+                                    string[] swrx_hi_list = { "3", "4", "5" };
+
+                                    spacing = (W * 0.75 - 2.0 - 9.0) / 2.0;
+                                    for (int i = 1; i < 2; i++)
+                                    {
+                                        // g.FillRectangle(high_brush, (int)(i * spacing - spacing * 0.75), H - 4 - 3, 1, 3);
+                                    }
+
+                                    for (int i = 1; i < 4; i++)
+                                    {
+                                        // spacing = (W * 0.55 - 2.0) / 2.0;
+                                        // spacing = (W * 0.33 - 2.0) / 3.0;
+                                        spacing = (W * 0.25 - 6.0) / 2.0;
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), (H / 2) - 4, 1, 3);
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing), (H / 2) - 7, 2, 6);
+                                        // g.FillRectangle(high_brush, (int)((double)W * 0.55 + i * spacing - spacing * 0.5), H - 4 - 6, 2, 6);
+                                        string s = swrx_hi_list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        //g.DrawString(s, font7, high_brush, (int)(i * spacing - string_width * s.Length + 2.0 - 2 * (int)(i / 2) + 3 * (int)(i / 4)), (int)(H - 4 - 8 - string_height));
+                                        // g.DrawString(s, font7, high_brush, (int)(W * 0.75 + i * spacing - spacing - (int)2.5 * string_width), (int)(H - 4 - 8 - string_height));
+                                        g.DrawString(s, font7, high_brush, (int)(W * 0.75 + i * spacing - spacing - (int)1.0 * string_width), (int)((H / 2) - 9 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+
+
+                                    if (current_swrmeter_data <= 3.0) // low area
+                                    {
+                                        spacing = (W * 0.75) / 3.0;
+
+                                        if (current_swrmeter_data <= 1.5)
+                                            pixel_x_swr = (int)((current_swrmeter_data - 1.0) / 0.5 * spacing);
+                                        else if (current_swrmeter_data <= 2.0)
+                                            pixel_x_swr = (int)(spacing + (current_swrmeter_data - 1.5) / 0.5 * spacing);
+                                        else //if (current_swrmeter_data <= 3.0)
+                                            pixel_x_swr = (int)(2 * spacing + (current_swrmeter_data - 2.0) / 1.0 * spacing);
+                                        // else //  current_swrmeter_data <= 4.0
+                                        //  pixel_x_swr = (int)(3 * spacing + (current_swrmeter_data - 3.0) / 1.0 * spacing);
+                                    }
+                                    else
+                                    {
+                                        spacing = (W * 0.25 - 6.0) / 2.0;
+                                        if (current_swrmeter_data <= 4.0)
+                                            pixel_x_swr = (int)(W * 0.75 + (current_swrmeter_data - 3.0) / 1.0 * spacing);
+                                        else if (current_swrmeter_data <= 5.0)
+                                            pixel_x_swr = (int)(W * 0.75 + spacing + (current_swrmeter_data - 4.0) / 1.0 * spacing);
+                                        else
+                                            pixel_x_swr = (int)(W * 0.75 + 2 * spacing + (current_swrmeter_data - 5.0) / 4.0 * spacing);
+                                    }
+                                    if (double.IsInfinity(current_swrmeter_data)) pixel_x_swr = W - 2;
+
+                                    //PWR
+                                    spacing = (W * 0.75 - 2.0) / 4.0;
+                                    string_height = 0;
+                                    string[] list = { "5", "10", "50", "100" };
+                                    for (int i = 1; i < 5; i++)
+                                    {
+                                        g.FillRectangle(low_brush, (int)(i * spacing - spacing * 0.5), (H / 2) + 3, 1, 3);
+                                        g.FillRectangle(low_brush, (int)(i * spacing), (H / 2) + 3, 2, 6);
+
+                                        string s = list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        g.DrawString(s, font7, low_brush, (int)(i * spacing - string_width * s.Length + (int)(i / 3) + (int)(i / 4)), (int)(H - 1 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+                                    spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                                    for (int i = 1; i < 2; i++)
+                                    {
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), (H / 2) + 3, 1, 3);
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing), (H / 2) + 3, 2, 6);
+
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 2, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+
+                                        g.TextRenderingHint = TextRenderingHint.SystemDefault;
+                                        g.DrawString("140+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 1 - string_height));
+                                    }
+
+                                    if (num <= 100.0) // low area
+                                    {
+                                        spacing = (W * 0.75 - 2.0) / 4.0;
+                                        if (num <= 5.0)
+                                            pixel_x = (int)(num / 5.0 * (int)spacing);
+                                        else if (num <= 10.0)
+                                            pixel_x = (int)(spacing + (num - 5.0) / 5.0 * spacing);
+                                        else if (num <= 50.0)
+                                            pixel_x = (int)(2 * spacing + (num - 10.0) / 40.0 * spacing);
+                                        else
+                                            pixel_x = (int)(3 * spacing + (num - 50.0) / 50.0 * spacing);
+                                    }
+                                    else
+                                    {
+                                        spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                                        if (num <= 140.0)
+                                            pixel_x = (int)(W * 0.75 + (num - 100.0) / 40.0 * spacing);
+                                        else
+                                            pixel_x = (int)(W * 0.75 + spacing + (num - 140.0) / 60.0 * spacing);
+                                    }
+                                }
+
+                                if (anan10present || apollopresent)
+                                {
+                                    g.FillRectangle(high_brush, (int)(W * 0.75), (H / 2) - 1, (int)(W * 0.25) - 4, 2);
+                                    g.FillRectangle(low_brush, 0, (H / 2) - 1, (int)(W * 0.75), 4); // horizontal white line
+                                    g.FillRectangle(high_brush, (int)(W * 0.75), (H / 2) + 1, (int)(W * 0.25) - 9, 2); //horizontal red line
+                                    // SWR stuff first
+                                    spacing = (W * 0.5) / 10.0;
+                                    string_height = 0;
+                                    string[] swrx_list = { "1.5", "2" };
+                                    for (int i = 1; i < 10; i++)
+                                    {
+                                        g.FillRectangle(low_brush, (int)(i * spacing), (H / 2) - 4, 1, 3);
+                                    }
+                                    for (int i = 1; i < 3; i++)
+                                    {
+                                        spacing = (W * 0.5) / 2.0;
+                                        g.FillRectangle(low_brush, (int)(i * spacing), (H / 2) - 7, 2, 6);
+
+                                        string s = swrx_list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        g.DrawString(s, font7, low_brush, (int)(i * spacing - string_width * s.Length + 2.0 - 1 * (int)(i / 2) + 3 * (int)(i / 4)), (int)((H / 2) - 9 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+                                    g.FillRectangle(low_brush, (int)(W * 0.625), (H / 2) - 4, 1, 3); // small tic 2.5:1
+
+                                    string[] swrx_hi_list = { "3", "4", "5" };
+
+                                    spacing = (W * 0.75 - 2.0 - 9.0) / 2.0;
+                                    for (int i = 1; i < 2; i++)
+                                    {
+                                        // g.FillRectangle(high_brush, (int)(i * spacing - spacing * 0.75), H - 4 - 3, 1, 3);
+                                    }
+
+                                    for (int i = 1; i < 4; i++)
+                                    {
+                                        // spacing = (W * 0.55 - 2.0) / 2.0;
+                                        // spacing = (W * 0.33 - 2.0) / 3.0;
+                                        spacing = (W * 0.25 - 6.0) / 2.0;
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), (H / 2) - 4, 1, 3);
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing), (H / 2) - 7, 2, 6);
+                                        // g.FillRectangle(high_brush, (int)((double)W * 0.55 + i * spacing - spacing * 0.5), H - 4 - 6, 2, 6);
+                                        string s = swrx_hi_list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        //g.DrawString(s, font7, high_brush, (int)(i * spacing - string_width * s.Length + 2.0 - 2 * (int)(i / 2) + 3 * (int)(i / 4)), (int)(H - 4 - 8 - string_height));
+                                        // g.DrawString(s, font7, high_brush, (int)(W * 0.75 + i * spacing - spacing - (int)2.5 * string_width), (int)(H - 4 - 8 - string_height));
+                                        g.DrawString(s, font7, high_brush, (int)(W * 0.75 + i * spacing - spacing - (int)1.0 * string_width), (int)((H / 2) - 9 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+
+
+                                    if (current_swrmeter_data <= 3.0) // low area
+                                    {
+                                        spacing = (W * 0.75) / 3.0;
+
+                                        if (current_swrmeter_data <= 1.5)
+                                            pixel_x_swr = (int)((current_swrmeter_data - 1.0) / 0.5 * spacing);
+                                        else if (current_swrmeter_data <= 2.0)
+                                            pixel_x_swr = (int)(spacing + (current_swrmeter_data - 1.5) / 0.5 * spacing);
+                                        else //if (current_swrmeter_data <= 3.0)
+                                            pixel_x_swr = (int)(2 * spacing + (current_swrmeter_data - 2.0) / 1.0 * spacing);
+                                        // else //  current_swrmeter_data <= 4.0
+                                        //  pixel_x_swr = (int)(3 * spacing + (current_swrmeter_data - 3.0) / 1.0 * spacing);
+                                    }
+                                    else
+                                    {
+                                        spacing = (W * 0.25 - 6.0) / 2.0;
+                                        if (current_swrmeter_data <= 4.0)
+                                            pixel_x_swr = (int)(W * 0.75 + (current_swrmeter_data - 3.0) / 1.0 * spacing);
+                                        else if (current_swrmeter_data <= 5.0)
+                                            pixel_x_swr = (int)(W * 0.75 + spacing + (current_swrmeter_data - 4.0) / 1.0 * spacing);
+                                        else
+                                            pixel_x_swr = (int)(W * 0.75 + 2 * spacing + (current_swrmeter_data - 5.0) / 4.0 * spacing);
+                                    }
+                                    if (double.IsInfinity(current_swrmeter_data)) pixel_x_swr = W - 2;
+
+
+                                    // PWR
+                                    spacing = (W * 0.75 - 2.0) / 4.0;
+                                    string[] list = { "1", "5", "10", "15" };
+                                    for (int i = 1; i < 5; i++)
+                                    {
+                                        g.FillRectangle(low_brush, (int)(i * spacing - spacing * 0.5), (H / 2) + 3, 1, 3);
+                                        g.FillRectangle(low_brush, (int)(i * spacing), (H / 2) + 3, 2, 6);
+
+                                        string s = list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        g.DrawString(s, font7, low_brush, (int)(i * spacing - string_width * s.Length + (int)(i / 3) + (int)(i / 4)), (int)(H - 1 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+                                    spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                                    for (int i = 1; i < 2; i++)
+                                    {
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), (H / 2) + 3, 1, 3);
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing), (H / 2) + 3, 2, 6);
+
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 2, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+
+                                        g.TextRenderingHint = TextRenderingHint.SystemDefault;
+                                        g.DrawString("25+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 1 - string_height));
+                                    }
+
+                                    if (num <= 15.0) // low area
+                                    {
+                                        spacing = (W * 0.75 - 2.0) / 4.0;
+                                        if (num <= 1.0)
+                                            pixel_x = (int)(num / 1.0 * (int)spacing);
+                                        else if (num <= 5.0)
+                                            pixel_x = (int)(spacing + (num - 1.0) / 4.0 * spacing);
+                                        else if (num <= 10.0)
+                                            pixel_x = (int)(2 * spacing + (num - 5.0) / 5.0 * spacing);
+                                        else
+                                            pixel_x = (int)(3 * spacing + (num - 10.0) / 5.0 * spacing);
+                                    }
+                                    else
+                                    {
+                                        spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                                        if (num <= 25.0)
+                                            pixel_x = (int)(W * 0.75 + (num - 15.0) / 10.0 * spacing);
+                                        else
+                                            pixel_x = (int)(W * 0.75 + spacing + (num - 25.0) / 5.0 * spacing);
+                                    }
+                                }
+                                break;
                             case MeterTXMode.SWR:
+                                g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
+                                g.FillRectangle(high_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 4, 2);
+                                // spacing = (W * 0.75 - 2.0) / 4.0;
+                                spacing = (W * 0.5) / 10.0;
+                                string_height = 0;
+                                // string[] swr_list = { "1.5", "2", "3", "4", "5" };
+                                string[] swr_list = { "1.5", "2" };
+                                for (int i = 1; i < 10; i++)
+                                {
+                                    g.FillRectangle(low_brush, (int)(i * spacing), H - 4 - 3, 1, 3);
+                                }
+                                for (int i = 1; i < 3; i++)
+                                {
+                                    spacing = (W * 0.5) / 2.0;
+                                    g.FillRectangle(low_brush, (int)(i * spacing), H - 4 - 6, 2, 6);
+
+                                    string s = swr_list[i - 1];
+                                    //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                    SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                    double string_width = size.Width - 2.0;
+                                    string_height = size.Height - 2.0;
+
+                                    //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                    //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                    g.DrawString(s, font7, low_brush, (int)(i * spacing - string_width * s.Length + 2.0 - 1 * (int)(i / 2) + 3 * (int)(i / 4)), (int)(H - 4 - 8 - string_height));
+                                    //g.SmoothingMode = SmoothingMode.None;
+                                }
+                                g.FillRectangle(low_brush, (int)(W * 0.625), H - 4 - 3, 1, 3); // small tic 2.5:1
+
+                                string[] swr_hi_list = { "3", "4", "5" };
+
+                                spacing = (W * 0.75 - 2.0 - 9.0) / 2.0;
+                                for (int i = 1; i < 2; i++)
+                                {
+                                    // g.FillRectangle(high_brush, (int)(i * spacing - spacing * 0.75), H - 4 - 3, 1, 3);
+                                }
+
+                                for (int i = 1; i < 4; i++)
+                                {
+                                    // spacing = (W * 0.55 - 2.0) / 2.0;
+                                    // spacing = (W * 0.33 - 2.0) / 3.0;
+                                    spacing = (W * 0.25 - 6.0) / 2.0;
+                                    g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
+                                    g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing), H - 4 - 6, 2, 6);
+                                    // g.FillRectangle(high_brush, (int)((double)W * 0.55 + i * spacing - spacing * 0.5), H - 4 - 6, 2, 6);
+                                    string s = swr_hi_list[i - 1];
+                                    //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                    SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                    double string_width = size.Width - 2.0;
+                                    string_height = size.Height - 2.0;
+
+                                    //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                    //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                    //g.DrawString(s, font7, high_brush, (int)(i * spacing - string_width * s.Length + 2.0 - 2 * (int)(i / 2) + 3 * (int)(i / 4)), (int)(H - 4 - 8 - string_height));
+                                    // g.DrawString(s, font7, high_brush, (int)(W * 0.75 + i * spacing - spacing - (int)2.5 * string_width), (int)(H - 4 - 8 - string_height));
+                                    g.DrawString(s, font7, high_brush, (int)(W * 0.75 + i * spacing - spacing - (int)1.0 * string_width), (int)(H - 4 - 8 - string_height));
+                                    //g.SmoothingMode = SmoothingMode.None;
+                                }
+
+
+                                /*  spacing = (W * 0.25 - 2.0 - 9.0) / 1.0;
+                                  for (int i = 1; i < 2; i++)
+                                  {
+                                    //  g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
+                                    //  g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing), H - 4 - 6, 2, 6);
+
+                                      //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                      SizeF size = g.MeasureString("0", font7, 3, StringFormat.GenericTypographic);
+                                      double string_width = size.Width - 2.0;
+
+                                      //g.TextRenderingHint = TextRenderingHint.SystemDefault;
+                                    //  g.DrawString("5+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)2.5 * string_width), (int)(H - 4 - 8 - string_height));
+                                  } */
+
+                                if (num <= 3.0) // low area
+                                {
+                                    spacing = (W * 0.75) / 3.0;
+
+                                    if (num <= 1.5)
+                                        pixel_x = (int)((num - 1.0) / 0.5 * spacing);
+                                    else if (num <= 2.0)
+                                        pixel_x = (int)(spacing + (num - 1.5) / 0.5 * spacing);
+                                    else //if (num <= 3.0)
+                                        pixel_x = (int)(2 * spacing + (num - 2.0) / 1.0 * spacing);
+                                    // else //  num <= 4.0
+                                    //  pixel_x = (int)(3 * spacing + (num - 3.0) / 1.0 * spacing);
+                                }
+                                else
+                                {
+                                    spacing = (W * 0.25 - 6.0) / 2.0;
+                                    if (num <= 4.0)
+                                        pixel_x = (int)(W * 0.75 + (num - 3.0) / 1.0 * spacing);
+                                    else if (num <= 5.0)
+                                        pixel_x = (int)(W * 0.75 + spacing + (num - 4.0) / 1.0 * spacing);
+                                    else
+                                        pixel_x = (int)(W * 0.75 + 2 * spacing + (num - 5.0) / 4.0 * spacing);
+                                }
+                                if (double.IsInfinity(num)) pixel_x = W - 2;
+                                break;
+                            // spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                            // if (num <= 25.0)
+                            //    pixel_x = (int)(W * 0.75 + (num - 15.0) / 10.0 * spacing);
+                            // else
+                            //   pixel_x = (int)(W * 0.75 + spacing + (num - 25.0) / 5.0 * spacing);
+
+                            /*
                                 g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
                                 g.FillRectangle(high_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 9, 2);
                                 spacing = (W * 0.75 - 2.0) / 4.0;
@@ -28734,6 +29314,8 @@ namespace PowerSDR
                                 }
                                 if (double.IsInfinity(num)) pixel_x = W - 2;
                                 break;
+
+                             */
                             case MeterTXMode.ALC_G:
                             case MeterTXMode.LVL_G:
                                 g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
@@ -28780,12 +29362,12 @@ namespace PowerSDR
                         }
                     }
 
-                    if ((!mox && current_meter_rx_mode != MeterRXMode.OFF) ||
-                        (mox && current_meter_tx_mode != MeterTXMode.OFF))
+                    // draw meter movement
+                    if (((!mox && current_meter_rx_mode != MeterRXMode.OFF) ||
+                        (mox && current_meter_tx_mode != MeterTXMode.OFF)) && current_meter_tx_mode != MeterTXMode.SWR_POWER)
                     {
                         pixel_x = Math.Max(0, pixel_x);
                         pixel_x = Math.Min(W - 3, pixel_x);
-
 
                         line_dark_pen.Color =
                             Color.FromArgb((edge_avg_color.R + edge_meter_background_color.R) / 2,
@@ -28794,12 +29376,49 @@ namespace PowerSDR
 
                         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                         g.SmoothingMode = SmoothingMode.HighQuality;
-                        g.DrawLine(line_dark_pen, pixel_x - 1, 0, pixel_x - 1, H);
-                        g.DrawLine(line_pen, pixel_x, 0, pixel_x, H);
-                        g.DrawLine(line_dark_pen, pixel_x + 1, 0, pixel_x + 1, H);
+
+                        g.DrawLine(line_dark_pen, pixel_x - 1, 0, pixel_x - 1, H); // left side
+                        g.DrawLine(line_pen, pixel_x, 0, pixel_x, H); // center line
+                        g.DrawLine(line_dark_pen, pixel_x + 1, 0, pixel_x + 1, H);// right side
+
                         g.InterpolationMode = InterpolationMode.Default;
                         g.SmoothingMode = SmoothingMode.Default;
+                    }
 
+                    if (((!mox && current_meter_rx_mode != MeterRXMode.OFF) ||
+                       (mox && current_meter_tx_mode != MeterTXMode.OFF)) && current_meter_tx_mode == MeterTXMode.SWR_POWER)
+                    {
+                        pixel_x = Math.Max(0, pixel_x);
+                        pixel_x = Math.Min(W - 3, pixel_x);
+                        pixel_x_swr = Math.Max(0, pixel_x_swr);
+                        pixel_x_swr = Math.Min(W - 3, pixel_x_swr);
+
+                        line_dark_pen.Color =
+                            Color.FromArgb((edge_avg_color.R + edge_meter_background_color.R) / 2,
+                            (edge_avg_color.G + edge_meter_background_color.G) / 2,
+                            (edge_avg_color.B + edge_meter_background_color.B) / 2);
+
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.SmoothingMode = SmoothingMode.HighQuality;
+                        if (!mox)
+                        {
+                            g.DrawLine(line_dark_pen, pixel_x - 1, 0, pixel_x - 1, H); // left side
+                            g.DrawLine(line_pen, pixel_x, 0, pixel_x, H); // center line
+                            g.DrawLine(line_dark_pen, pixel_x + 1, 0, pixel_x + 1, H);// right side
+                        }
+                        else
+                        {
+                            g.DrawLine(line_dark_pen, pixel_x - 1, H / 2 + 3, pixel_x - 1, H); // left side
+                            g.DrawLine(line_pen, pixel_x, H / 2 + 3, pixel_x, H); // center line
+                            g.DrawLine(line_dark_pen, pixel_x + 1, H / 2 + 3, pixel_x + 1, H);// right side
+
+                            g.DrawLine(line_dark_pen, pixel_x_swr - 1, 0, pixel_x_swr - 1, H / 2 - 3); // left side
+                            g.DrawLine(line_pen, pixel_x_swr, 0, pixel_x_swr, H / 2 - 3); // center line
+                            g.DrawLine(line_dark_pen, pixel_x_swr + 1, 0, pixel_x_swr + 1, H / 2 - 3);// right side
+                        }
+
+                        g.InterpolationMode = InterpolationMode.Default;
+                        g.SmoothingMode = SmoothingMode.Default;
                     }
 
                     meter_timer.Stop();
@@ -28866,10 +29485,10 @@ namespace PowerSDR
                                     break;
                                 case MeterTXMode.FORWARD_POWER:
                                 case MeterTXMode.REVERSE_POWER:
-                                    if ((alexpresent || fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
-                                        (pa_present && VFOAFreq < 30.0))
-                                        output = num.ToString("f0") + " W";
-                                    else output = num.ToString("f0") + " mW";
+                                case MeterTXMode.SWR_POWER:
+                                    if (anan10present || apollopresent) output = num.ToString("f1") + " W";
+                                    if (alexpresent || pa_present) output = num.ToString(format) + " W";
+                                    else output = num.ToString(format) + " mW";
                                     break;
                                 case MeterTXMode.SWR:
                                     output = num.ToString("f1") + " : 1";
@@ -29005,14 +29624,12 @@ namespace PowerSDR
                         using (LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, pixel_x, H),
                             meter_left_color, meter_right_color, LinearGradientMode.Horizontal))
                             g.FillRectangle(brush, 0, 0, pixel_x, H);
-                        //using (Pen meter_background_pen = new Pen(new SolidBrush(meter_background_color))) 
-                        //{
+
                         for (int i = 0; i < 21; i++)
                             g.DrawLine(meter_background_pen, 6 + i * 8, 0, 6 + i * 8, H);
 
                         g.DrawLine(Pens.Red, pixel_x, 0, pixel_x, H);
                         g.FillRectangle(meter_background_pen.Brush, pixel_x + 1, 0, W - pixel_x, H);
-                        //}
 
                         if (pixel_x >= rx2_meter_peak_value)
                         {
@@ -29693,6 +30310,9 @@ namespace PowerSDR
             meter_timer.Start();
             while (chkPower.Checked)
             {
+
+                // JanusAudio.computeHermesDCVoltage();
+
                 if (!meter_data_ready)
                 {
                     if (!mox)
@@ -29702,49 +30322,31 @@ namespace PowerSDR
 
                         MeterRXMode mode = CurrentMeterRXMode;
                         float num = 0f;
+                        float rx1PreampOffset = 0.0f;
+
+                        if (hermes_step_attenuator) rx1PreampOffset = (float)hermes_attenuator_data;
+                        else rx1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+
                         switch (mode)
                         {
                             case MeterRXMode.SIGNAL_STRENGTH:
                                 num = DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
+                                SetupForm.txtRX1RawMeterData.Text = num.ToString();
 
-                                switch (current_model)
-                                {
-                                    case Model.HPSDR:
-                                    case Model.HERMES:
-                                        num = num +
-                                            rx1_meter_cal_offset +
-                                            rx1_preamp_offset[(int)rx1_preamp_mode] +
-                                            rx1_filter_size_cal_offset +
-                                            (-alex_preamp_offset) +
-                                            rx1_xvtr_gain_offset;
-                                        break;
-                                    case Model.SDRX:
-                                        num = num +
-                                            rx1_meter_cal_offset +
-                                            meter_offset +
-                                            rx1_filter_size_cal_offset +
-                                            rx1_xvtr_gain_offset;
-                                        break;
-                                    case Model.FLEX5000:
-                                    case Model.FLEX3000:
-                                        num = num +
-                                            rx1_meter_cal_offset +
-                                            rx1_preamp_offset[(int)rx1_preamp_mode] +
-                                            rx1_filter_size_cal_offset +
-                                            rx1_path_offset +
-                                            rx1_xvtr_gain_offset +
-                                            rx1_loop_offset;
-                                        break;
-                                    default:
-                                        num = num +
-                                            rx1_meter_cal_offset +
-                                            rx1_preamp_offset[(int)rx1_preamp_mode] +
-                                            rx1_filter_size_cal_offset +
-                                            rx1_xvtr_gain_offset;
-                                        break;
-                                }
-                                //output = num.ToString("f1")+" dBm";
+                                num = num +
+                                 rx1_meter_cal_offset +
+                                    // rx1_preamp_offset[(int)rx1_preamp_mode] +
+                                 rx1PreampOffset +
+                                 rx1_filter_size_cal_offset +
+                                    // (-alex_preamp_offset) +
+                                 rx1_xvtr_gain_offset;
+
                                 new_meter_data = num;
+
+                                SetupForm.txtRX1CalcMeterData.Text = num.ToString();
+                                SetupForm.txtRX1MeterOffset.Text = rx1_meter_cal_offset.ToString();
+                                SetupForm.txtRX1DisplayOffset.Text = rx1_display_cal_offset.ToString();
+                                SetupForm.txtRX1PreampOffset.Text = Display.RX1PreampOffset.ToString();
                                 break;
                             case MeterRXMode.SIGNAL_AVERAGE:
                                 num = DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
@@ -29752,43 +30354,12 @@ namespace PowerSDR
                                 num = multimeter_avg_mult_old * multimeter_avg + multimeter_avg_mult_new * num;
                                 multimeter_avg = num;
 
-                                switch (current_model)
-                                {
-                                    case Model.HPSDR:
-                                    case Model.HERMES:
-                                        num = num +
-                                            rx1_meter_cal_offset +
-                                            rx1_preamp_offset[(int)rx1_preamp_mode] +
-                                            rx1_filter_size_cal_offset +
-                                            (-alex_preamp_offset) +
-                                            rx1_xvtr_gain_offset;
-                                        break;
-                                    case Model.SDRX:
-                                        num = num +
-                                            rx1_meter_cal_offset +
-                                            meter_offset +
-                                            rx1_filter_size_cal_offset +
-                                            rx1_xvtr_gain_offset;
-                                        break;
-                                    case Model.FLEX5000:
-                                    case Model.FLEX3000:
-                                        num = num +
-                                            rx1_meter_cal_offset +
-                                            rx1_preamp_offset[(int)rx1_preamp_mode] +
-                                            rx1_filter_size_cal_offset +
-                                            rx1_path_offset +
-                                            rx1_xvtr_gain_offset +
-                                            rx1_loop_offset;
-                                        break;
-                                    default:
-                                        num = num +
-                                            rx1_meter_cal_offset +
-                                            rx1_preamp_offset[(int)rx1_preamp_mode] +
-                                            rx1_filter_size_cal_offset +
-                                            rx1_xvtr_gain_offset;
-                                        break;
-                                }
-                                //output = num.ToString("f1")+" dBm";
+                                num = num +
+                                  rx1_meter_cal_offset +
+                                   rx1PreampOffset +
+                                   rx1_filter_size_cal_offset +
+                                   rx1_xvtr_gain_offset;
+
                                 new_meter_data = num;
                                 break;
                             case MeterRXMode.ADC_L:
@@ -29830,116 +30401,50 @@ namespace PowerSDR
                         switch (mode)
                         {
                             case MeterTXMode.MIC:
-                                if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
-                                {
-                                    if (peak_tx_meter)
-                                    {
-                                        num = (float)Math.Max(-195.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.MIC_PK));
-                                    }
-                                    else
-                                    {
-                                        num = (float)Math.Max(-195.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.MIC) + 3.0f);
-                                    }
-                                    //output = num.ToString("f1")+" dB";
-                                    new_meter_data = num;
-                                }
-                                else
-                                {
-                                    //output = "-30"+separator+"0 dB";
-                                    new_meter_data = -195.0f;
-                                }
+                                if (peak_tx_meter) num = (float)Math.Max(-195.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.MIC_PK));
+                                else num = (float)Math.Max(-195.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.MIC) + 3.0f);
+                                new_meter_data = num;
                                 break;
                             case MeterTXMode.EQ:
-                                if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
-                                {
-                                    if (peak_tx_meter) num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.EQ_PK));
-                                    else num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.EQ) + 3.0f);
-                                    //output = num.ToString("f1")+" dB";
-                                    new_meter_data = num;
-                                }
-                                else
-                                {
-                                    //output = "-30"+separator+"0 dB";
-                                    new_meter_data = -30.0f;
-                                }
+                                if (peak_tx_meter) num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.EQ_PK));
+                                else num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.EQ) + 3.0f);
+                                new_meter_data = num;
                                 break;
                             case MeterTXMode.LEVELER:
-                                if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
-                                {
-                                    if (peak_tx_meter) num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.LEVELER_PK));
-                                    else num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.LEVELER) + 3.0f);
-                                    //output = num.ToString("f1")+" dB";
-                                    new_meter_data = num;
-                                }
-                                else
-                                {
-                                    //output = "-30"+separator+"0 dB";
-                                    new_meter_data = -30.0f;
-                                }
+                                if (peak_tx_meter) num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.LEVELER_PK));
+                                else num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.LEVELER) + 3.0f);
+                                new_meter_data = num;
                                 break;
                             case MeterTXMode.LVL_G:
-                                if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
-                                {
-                                    num = (float)Math.Max(0, DttSP.CalculateTXMeter(1, DttSP.MeterType.LVL_G));
-                                    //output = num.ToString("f1")+" dB";
-                                    new_meter_data = num;
-                                }
-                                else
-                                {
-                                    //output = "0"+separator+"0 dB";
-                                    new_meter_data = 0.0f;
-                                }
+                                num = (float)Math.Max(0, DttSP.CalculateTXMeter(1, DttSP.MeterType.LVL_G));
+                                new_meter_data = num;
                                 break;
                             case MeterTXMode.CPDR:
-                                if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
-                                {
-                                    if (peak_tx_meter) num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.CPDR_PK));
-                                    else num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.CPDR) + 3.0f);
-                                    //output = num.ToString("f1")+" dB";
-                                    new_meter_data = num;
-                                }
-                                else
-                                {
-                                    //output = "-30"+separator+"0 dB";
-                                    new_meter_data = -30.0f;
-                                }
+                                if (peak_tx_meter) num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.CPDR_PK));
+                                else num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.CPDR) + 3.0f);
+                                new_meter_data = num;
                                 break;
                             case MeterTXMode.ALC:
-                                if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
-                                {
-                                    if (peak_tx_meter) num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.ALC_PK));
-                                    else num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.ALC) + 3.0f);
-                                    //output = num.ToString("f1")+" dB";
-                                    new_meter_data = num;
-                                }
-                                else
-                                {
-                                    //output = "-30"+separator+"0 dB";
-                                    new_meter_data = -30.0f;
-                                }
+                                if (peak_tx_meter) num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.ALC_PK));
+                                else num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.ALC) + 3.0f);
+                                new_meter_data = num;
                                 break;
                             case MeterTXMode.ALC_G:
-                                if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
-                                {
-                                    num = (float)Math.Max(0, -DttSP.CalculateTXMeter(1, DttSP.MeterType.ALC_G));
-                                    //output = num.ToString("f1")+" dB";
-                                    new_meter_data = num;
-                                }
-                                else
-                                {
-                                    //output = "0"+separator+"0 dB";
-                                    new_meter_data = 0.0f;
-                                }
+                                num = (float)Math.Max(0, -DttSP.CalculateTXMeter(1, DttSP.MeterType.ALC_G));
+                                new_meter_data = num;
                                 break;
                             case MeterTXMode.FORWARD_POWER:
+                            case MeterTXMode.SWR_POWER:
                                 switch (current_model)
                                 {
                                     case Model.HPSDR:
                                     case Model.HERMES:
-                                        if (alexpresent)
+                                        if (alexpresent || apollopresent)
                                             new_meter_data = JanusAudio.computeAlexFwdPower();
                                         else
                                             new_meter_data = JanusAudio.computeFwdPower();
+
+                                        if (current_meter_tx_mode == MeterTXMode.SWR_POWER) new_swrmeter_data = alex_swr;
                                         break;
                                     case Model.FLEX5000:
                                     case Model.FLEX3000:
@@ -29980,7 +30485,7 @@ namespace PowerSDR
                                 {
                                     case Model.HPSDR:
                                     case Model.HERMES:
-                                        if (alexpresent)
+                                        if (alexpresent || apollopresent)
                                         {
                                             new_meter_data = JanusAudio.computeRefPower();
                                         }
@@ -30000,26 +30505,26 @@ namespace PowerSDR
                                 }
                                 break;
                             case MeterTXMode.SWR:
-                                double swr = 0.0;
-                                if (chkTUN.Checked)
-                                {
-                                    switch (current_model)
-                                    {
-                                        case Model.FLEX5000:
-                                        case Model.FLEX3000:
-                                            swr = FWCSWR(pa_fwd_power, pa_rev_power);
-                                            //output = swr.ToString("f1")+" : 1";	
-                                            break;
-                                        case Model.SDR1000:
-                                            swr = SWR(pa_fwd_power, pa_rev_power);
-                                            //output = swr.ToString("f1")+" : 1";
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    //output = "in TUN only ";
-                                }
+                                //  double swr = 0.0;
+                                /*  if (chkTUN.Checked)
+                                  {
+                                      switch (current_model)
+                                      {
+                                          case Model.FLEX5000:
+                                          case Model.FLEX3000:
+                                              swr = FWCSWR(pa_fwd_power, pa_rev_power);
+                                              //output = swr.ToString("f1")+" : 1";	
+                                              break;
+                                          case Model.SDR1000:
+                                              swr = SWR(pa_fwd_power, pa_rev_power);
+                                              //output = swr.ToString("f1")+" : 1";
+                                              break;
+                                      }
+                                  }
+                                  else
+                                  {
+                                      //output = "in TUN only ";
+                                  } */
                                 new_meter_data = alex_swr;
                                 break;
                             case MeterTXMode.OFF:
@@ -30052,6 +30557,11 @@ namespace PowerSDR
 
                     MeterRXMode mode = RX2MeterMode;
                     float num = 0f;
+                    float rx2PreampOffset = 0.0f;
+
+                    if (hermes_step_attenuator) rx2PreampOffset = (float)hermes_attenuator_data;
+                    else rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+
                     switch (mode)
                     {
                         case MeterRXMode.SIGNAL_STRENGTH:
@@ -30063,18 +30573,16 @@ namespace PowerSDR
                                 {
                                     num = num +
                                        rx1_meter_cal_offset +
-                                       rx1_preamp_offset[(int)rx1_preamp_mode] +
+                                       rx2PreampOffset +
                                        rx2_filter_size_cal_offset +
-                                       (-alex_preamp_offset) +
                                        rx2_xvtr_gain_offset;
                                 }
                                 else
                                 {
                                     num = num +
                                        rx1_meter_cal_offset +
-                                       rx2_preamp_offset[(int)rx2_preamp_mode] +
+                                       rx2PreampOffset +
                                        rx2_filter_size_cal_offset +
-                                        // (-alex_preamp_offset) +
                                        rx2_xvtr_gain_offset;
                                 }
                             }
@@ -30082,20 +30590,11 @@ namespace PowerSDR
                             {
                                 num = num +
                                   rx1_meter_cal_offset +
-                                  rx1_preamp_offset[(int)rx1_preamp_mode] +
+                                  rx2PreampOffset +
                                   rx2_filter_size_cal_offset +
-                                    // (-alex_preamp_offset) +
                                   rx2_xvtr_gain_offset;
                             }
 
-                            // num = num +
-                            //  rx2_meter_cal_offset +
-                            //  rx2_preamp_offset[(int)rx2_preamp_mode] +
-                            //  rx2_filter_size_cal_offset +
-                            // (-alex_preamp_offset) +
-                            // rx2_xvtr_gain_offset;
-
-                            //output = num.ToString("f1")+" dBm";
                             rx2_meter_new_data = num;
                             break;
                         case MeterRXMode.SIGNAL_AVERAGE:
@@ -30103,19 +30602,11 @@ namespace PowerSDR
                             if (rx2_meter_avg == Display.CLEAR_FLAG) rx2_meter_avg = num;
                             num = multimeter_avg_mult_old * rx2_meter_avg + multimeter_avg_mult_new * num;
                             rx2_meter_avg = num;
-                            /* num = num +
-                                rx2_meter_cal_offset +
-                                rx2_preamp_offset[(int)rx2_preamp_mode] +
-                                rx2_filter_size_cal_offset +
-                                rx2_path_offset +
-                                rx2_xvtr_gain_offset +
-                                rx2_loop_offset;*/
                             num = num +
-                            rx1_meter_cal_offset +
-                             rx1_preamp_offset[(int)rx1_preamp_mode] +
+                             rx1_meter_cal_offset +
+                             rx2PreampOffset +
                              rx2_filter_size_cal_offset +
                              rx2_xvtr_gain_offset;
-                            //output = num.ToString("f1")+" dBm";
                             rx2_meter_new_data = num;
                             break;
                         case MeterRXMode.ADC_L:
@@ -30158,36 +30649,19 @@ namespace PowerSDR
         {
             while (chkPower.Checked)
             {
+                float rx1PreampOffset = 0.0f;
+
+                if (hermes_step_attenuator) rx1PreampOffset = (float)hermes_attenuator_data;
+                else rx1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+
                 if (!mox)
                 {
                     float num = DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-                    if (fwc_init)
-                    {
-                        switch (current_model)
-                        {
-                            /*case Model.SDRX:					
-                                num = num +
-                                    rx1_meter_cal_offset +
-                                    meter_offset +
-                                    filter_size_cal_offset;
-                                break;*/
-                            case Model.FLEX5000:
-                            case Model.FLEX3000:
-                                num = num +
-                                    rx1_meter_cal_offset +
-                                    rx1_preamp_offset[(int)rx1_preamp_mode] +
-                                    rx1_filter_size_cal_offset +
-                                    rx1_path_offset;
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        num = num +
-                            rx1_meter_cal_offset +
-                            rx1_preamp_offset[(int)rx1_preamp_mode] +
-                            rx1_filter_size_cal_offset;
-                    }
+                    num = num +
+                    rx1_meter_cal_offset +
+                        // rx1_preamp_offset[(int)rx1_preamp_mode] +
+                    rx1PreampOffset +
+                    rx1_filter_size_cal_offset;
 
                     sql_data = num;
                     picSquelch.Invalidate();
@@ -30203,11 +30677,16 @@ namespace PowerSDR
             while (chkPower.Checked && rx2_enabled)
             {
                 float num = DttSP.CalculateRXMeter(2, 0, DttSP.MeterType.SIGNAL_STRENGTH);
+                float rx2PreampOffset = 0.0f;
+
+                if (hermes_step_attenuator) rx2PreampOffset = (float)hermes_attenuator_data;
+                else rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
                 //Debug.WriteLine("SQL Read: "+num.ToString("f1"));
 
                 num = num +
                     rx1_meter_cal_offset +
-                    rx1_preamp_offset[(int)rx1_preamp_mode] +
+                    // rx1_preamp_offset[(int)rx1_preamp_mode] +
+                    rx2PreampOffset +
                     rx2_filter_size_cal_offset;// +
                 //rx2_path_offset;
 
@@ -31474,10 +31953,38 @@ namespace PowerSDR
                         break;
                 }
             }
-            else if (e.Alt && !e.Control)
+            else if (e.Alt && !e.Control) // Alt key is pressed
             {
                 switch (e.KeyCode)
                 {
+                    case Keys.Up:
+                        if (ptbMic.Value != ptbMic.Maximum)
+                        {
+                            ptbMic.Value++;
+                            ptbMic_Scroll(this, EventArgs.Empty);
+                        }
+                        break;
+                    case Keys.Down:
+                        if (ptbMic.Value != ptbMic.Minimum)
+                        {
+                            ptbMic.Value--;
+                            ptbMic_Scroll(this, EventArgs.Empty);
+                        }
+                        break;
+                    case Keys.Right:
+                        if (ptbVOX.Value != ptbVOX.Maximum)
+                        {
+                            ptbVOX.Value++;
+                            ptbVOX_Scroll(this, EventArgs.Empty);
+                        }
+                        break;
+                    case Keys.Left:
+                        if (ptbVOX.Value != ptbVOX.Minimum)
+                        {
+                            ptbVOX.Value--;
+                            ptbVOX_Scroll(this, EventArgs.Empty);
+                        }
+                        break;
                     case Keys.B:
                         chkNB.Checked = !chkNB.Checked;
                         break;
@@ -31553,7 +32060,7 @@ namespace PowerSDR
                 {
                     case Keys.Space:
                         {
-                            if (PowerOn)
+                            if (chkPower.Checked)
                             {
                                 if (spacebar_ptt)
                                 {
@@ -31577,7 +32084,7 @@ namespace PowerSDR
                             }
                             else
                             {
-                                if (!PowerOn)
+                                if (!chkPower.Checked)
                                 {
                                     if (spacebar_last_btn)
                                     {
@@ -32619,7 +33126,7 @@ namespace PowerSDR
 
                 Audio.callback_return = 2;
                 JanusAudio.StopAudio();
-                
+
                 if (vac_enabled)
                 {
                     Audio.StopAudioVAC();
@@ -32996,6 +33503,7 @@ namespace PowerSDR
         {
             Audio.callback_return = 2;
             CATEnabled = false;
+
             if (SetupForm != null) SetupForm.Hide();
             if (CWXForm != null) CWXForm.Hide();
             if (EQForm != null) EQForm.Hide();
@@ -33008,34 +33516,16 @@ namespace PowerSDR
             if (flex5000DebugForm != null) flex5000DebugForm.Hide();
             if (fwcAntForm != null) fwcAntForm.Hide();
             if (fwcAtuForm != null) fwcAtuForm.Hide();
+            if (memoryForm != null) memoryForm.Hide();
+            if (preSelForm != null) preSelForm.Hide();
             if (predistForm != null) predistForm.Hide();
+
+            MemoryList.Save();
 
             chkPower.Checked = false;
             Thread.Sleep(100);
             this.Hide();
             SaveState();
-
-            if (fwc_init)
-            {
-                try
-                {
-                    switch (current_model)
-                    {
-                        case Model.FLEX5000:
-                            FWC.SetPABias(false);
-                            break;
-                        case Model.FLEX3000:
-                            FWC.SetPABias(false);
-                            FWC.SetFanSpeed(0.0f);
-                            break;
-                    }
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-
 
             if (CWXForm != null) CWXForm.Close();
             if (SetupForm != null) SetupForm.SaveOptions();
@@ -33049,6 +33539,8 @@ namespace PowerSDR
             if (flex5000DebugForm != null) flex5000DebugForm.Close();
             if (fwcAntForm != null) fwcAntForm.Close();
             if (fwcAtuForm != null) fwcAtuForm.Close();
+            if (memoryForm != null) memoryForm.Close();
+            if (preSelForm != null) preSelForm.Close();
             if (predistForm != null) predistForm.Close();
         }
 
@@ -34348,6 +34840,9 @@ namespace PowerSDR
                     case "Ref Pwr":
                         mode = MeterTXMode.REVERSE_POWER;
                         break;
+                    case "Fwd/SWR":
+                        mode = MeterTXMode.SWR_POWER;
+                        break;
                     case "Mic":
                         mode = MeterTXMode.MIC;
                         break;
@@ -34401,7 +34896,10 @@ namespace PowerSDR
                         break;
                     case MeterTXMode.FORWARD_POWER:
                     case MeterTXMode.REVERSE_POWER:
-                        if (alexpresent || pa_present || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
+                    case MeterTXMode.SWR_POWER:
+                        if (anan10present || apollopresent)
+                            lblMultiSMeter.Text = "1      5     10    15   20    25+";
+                        else if (alexpresent || pa_present)
                             lblMultiSMeter.Text = "1      5     10    50   100  120+";
                         else
                             lblMultiSMeter.Text = "0      0.1     0.2     0.5        1.0";
@@ -35001,7 +35499,7 @@ namespace PowerSDR
             // enable VAC on console
             chkVAC1.Enabled = true;
             chkVAC2.Enabled = false;  // set to true later if RX2 installed 
-            dax_audio_enum = true;
+            // dax_audio_enum = true;
         }
 
         private void chkVAC1_CheckedChanged(object sender, System.EventArgs e)
@@ -35026,17 +35524,17 @@ namespace PowerSDR
         private void chkVAC2_CheckedChanged(object sender, EventArgs e)
         {
             if (SetupForm != null) SetupForm.VAC2Enable = chkVAC2.Checked;
-           /* if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK || !chkRX2.Checked)
-            {
-                if (chkVOX.Checked)
-                {
-                    chkVOX.Checked = false;
-                    if (SetupForm != null) SetupForm.VOXEnable = chkVOX.Checked;
-                    Audio.VOXActive = false;
-                    chkVOX.BackColor = SystemColors.Control;
-                }
-                return;
-            } */
+            /* if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK || !chkRX2.Checked)
+             {
+                 if (chkVOX.Checked)
+                 {
+                     chkVOX.Checked = false;
+                     if (SetupForm != null) SetupForm.VOXEnable = chkVOX.Checked;
+                     Audio.VOXActive = false;
+                     chkVOX.BackColor = SystemColors.Control;
+                 }
+                 return;
+             } */
 
             if (chkVFOBTX.Checked)
             {
@@ -36862,7 +37360,7 @@ namespace PowerSDR
                                     else
                                     {
                                         //  Display.GridTextColor = SetupForm.clrbtnText.Color;
-                                        Cursor = Cursors.Cross;
+                                        // Cursor = Cursors.Cross;
                                         gridmaxadjust = false;
                                         gridminadjust = false;
                                     }
@@ -36905,7 +37403,7 @@ namespace PowerSDR
                                     else
                                     {
                                         //  Display.GridTextColor = SetupForm.clrbtnText.Color;
-                                        Cursor = Cursors.Cross;
+                                        // Cursor = Cursors.Cross;
                                         gridmaxadjust = false;
                                         gridminadjust = false;
                                     }
@@ -37065,7 +37563,7 @@ namespace PowerSDR
                                     else
                                     {
                                         //  Display.GridTextColor = SetupForm.clrbtnText.Color;
-                                        Cursor = Cursors.Cross;
+                                        // Cursor = Cursors.Cross;
                                         wfmaxadjust = false;
                                         wfminadjust = false;
                                     }
@@ -37416,33 +37914,24 @@ namespace PowerSDR
                                 {
                                     near_notch = true;
 
-                                    int index = -1;
-                                    for (int i = 0; i < list.Count; i++)
+                                    int index = 0;
+                                    if (list[index].Permanent)
                                     {
-                                        index = i;
-                                        break;
+                                        list[index].Details = true;
+                                        notch_drag_active = list[index];
                                     }
-
-                                    if (index >= 0)
+                                    else
                                     {
-                                        if (list[index].Permanent)
-                                        {
-                                            list[index].Details = true;
-                                            notch_drag_active = list[index];
-                                        }
-                                        else
-                                        {
-                                            notch_drag = true;
-                                            timerNotchZoom.Enabled = true;
-                                            notch_drag_active = list[index];
-                                            notch_drag_start = list[index].Copy();
-                                            notch_drag_start_point = new Point(e.X, e.Y);
-                                            list[index].Details = true;
-                                            // mark which receiver the click occurred on so that we can show the callout only there
-                                            list[index].RX = 1;
-                                            if (rx2_enabled && e.Y > picDisplay.Height / 2)
-                                                list[index].RX = 2;
-                                        }
+                                        notch_drag = true;
+                                        timerNotchZoom.Enabled = true;
+                                        notch_drag_active = list[index];
+                                        notch_drag_start = list[index].Copy();
+                                        notch_drag_start_point = new Point(e.X, e.Y);
+                                        list[index].Details = true;
+                                        // mark which receiver the click occurred on so that we can show the callout only there
+                                        list[index].RX = 1;
+                                        if (rx2_enabled && e.Y > picDisplay.Height / 2)
+                                            list[index].RX = 2;
                                     }
                                 }
                                 break;
@@ -37559,7 +38048,7 @@ namespace PowerSDR
                                         {
                                             agc_knee_drag = false;
                                             agc_hang_drag = false;
-                                            Cursor = Cursors.Cross;
+                                            // Cursor = Cursors.Cross;
                                         }
                                 }
                                 else
@@ -37583,7 +38072,7 @@ namespace PowerSDR
                                         {
                                             agc_knee_drag = false;
                                             agc_hang_drag = false;
-                                            Cursor = Cursors.Cross;
+                                            // Cursor = Cursors.Cross;
                                         }
                                 }
                                 break;
@@ -38358,56 +38847,49 @@ namespace PowerSDR
 
         private void radBand60_Click(object sender, EventArgs e)
         {
-            List<Channel60m> channels_60m = Channels60m;
             if (RX1IsIn60m() && !RX1IsOn60mChannel())
             {
-                double freqvfo = 0.0;
-                double maxfreq = Double.MaxValue;
-                double modedelta = ModeFreqOffset(rx1_dsp_mode);
-                int i = 0;
+                // jump to nearest 60m band
+                double jump_freq = 0;
+                double min_delta = double.MaxValue;
+                double offset = ModeFreqOffset(rx1_dsp_mode);
                 int index = 0;
-
-                foreach (Channel60m chan in Channels60m)
+                int min_index = 0;
+                foreach (Channel c in Channels60m)
                 {
-                    double freqtot = chan.Freq + modedelta;
-                    double freqabs = Math.Abs(freqtot - VFOAFreq);
-                    if (freqabs < maxfreq)
+                    double freq = c.Freq + offset;
+                    double delta = Math.Abs(freq - VFOAFreq);
+                    if (delta < min_delta)
                     {
-                        maxfreq = freqabs;
-                        freqvfo = freqtot;
-                        index = i;
+                        min_delta = delta;
+                        jump_freq = freq;
+                        min_index = index;
                     }
-                    i++;
+                    index++;
                 }
-                VFOAFreq = freqvfo;
-                band_60m_index = index;
+
+                VFOAFreq = jump_freq;
+                band_60m_index = min_index; // sets the band stack index
                 last_band = "60M";
-                return;
             }
+            else
+            {
+                SaveBand();
+                if (last_band.Equals("60M"))
+                {
+                    if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+                        band_60m_index = (band_60m_index - 1 + band_60m_register) % band_60m_register;
+                    else
+                        band_60m_index = (band_60m_index + 1) % band_60m_register;
+                }
+                last_band = "60M";
 
-            SaveBand();
-            if (last_band.Equals("60M"))
-            {
-                if (current_region == FRSRegion.UK)
-                    band_60m_register = 7;
-                else
-                    band_60m_register = 12;
-                // if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-                //   band_60m_index = (band_60m_index - 1 + band_60m_register) % band_60m_register;
-                // else
-                band_60m_index = (band_60m_index + 1) % band_60m_register;
-            }
-            last_band = "60M";
-
-            string filter, mode;
-            double freq;
-            if (current_region == FRSRegion.US)
-            {
-                if (band_60m_index < 7) band_60m_index = 7;
-            }
-            if (DB.GetBandStack(last_band, band_60m_index, out mode, out filter, out freq))
-            {
-                SetBand(mode, filter, freq);
+                string filter, mode;
+                double freq;
+                if (DB.GetBandStack(last_band, band_60m_index, out mode, out filter, out freq))
+                {
+                    SetBand(mode, filter, freq);
+                }
             }
         }
 
@@ -42475,6 +42957,7 @@ namespace PowerSDR
             combo_rx2meter_mode_basis = this.comboRX2MeterMode.Location;
             combo_meter_txmode_basis = this.comboMeterTXMode.Location;
             tb_display_zoom_size_basis = this.ptbDisplayZoom.Size;
+            ud_hermes_step_attenuator_data_basis = this.udHermesStepAttenuatorData.Location;
             gr_BandHF_basis_size = panelBandHF.Size;
             gr_BandVHF_basis_size = panelBandVHF.Size;
             gr_Mode_basis_size = panelMode.Size;
@@ -45598,15 +46081,18 @@ namespace PowerSDR
                 System.Console.WriteLine("preamp is null!!");
                 return;
             }
-            comboPreamp.Items.Clear();
-            //if (!alexpresent)
-            // {
-            comboPreamp.Items.AddRange(on_off_preamp_settings);
-            // }
-            if (alexpresent)
+            if (alexpresent && !anan10present)
             {
+                comboPreamp.Items.Clear();
+                comboPreamp.Items.AddRange(on_off_preamp_settings);
                 comboPreamp.Items.AddRange(alex_preamp_settings);
             }
+            else
+            {
+                comboPreamp.Items.Clear();
+                comboPreamp.Items.AddRange(on_off_preamp_settings);
+            }
+            comboPreamp.Text = "0dB";
         }
 
         public void si570_resolve(double fo, ref double rfreq, ref ulong hs_div, ref ulong n1) // modif F8CHK
@@ -45953,7 +46439,7 @@ namespace PowerSDR
                 btnBandHF_Click(btnBandHF, EventArgs.Empty);
             }
             //w3sz section ends here
-           // panelBandVHF.Show();
+            // panelBandVHF.Show();
 
             chkBCI.Hide();
             lblAF2.Hide();
@@ -46057,9 +46543,19 @@ namespace PowerSDR
             comboAGC.Parent = panelSoundControls;
             comboAGC.Location = combo_agc_basis;
             comboPreamp.Parent = panelSoundControls;
-            comboPreamp.Location = combo_preamp_basis;
             comboRX2AGC.Parent = panelRX2DSP;
             comboRX2AGC.Location = combo_rx2agc_basis;
+            udHermesStepAttenuatorData.Parent = panelSoundControls;
+            if (hermes_step_attenuator)
+            {
+                udHermesStepAttenuatorData.Location = ud_hermes_step_attenuator_data_basis;
+                udHermesStepAttenuatorData.BringToFront();
+            }
+            else
+            {
+                comboPreamp.Location = combo_preamp_basis;
+                comboPreamp.BringToFront();
+            }
 
             comboDisplayMode.Parent = panelDisplay2;
             comboDisplayMode.Location = combo_display_mode_basis;
@@ -46305,6 +46801,8 @@ namespace PowerSDR
                     comboRX2AGC.Hide();
                     comboPreamp.Parent = this;
                     comboPreamp.Show();
+                    udHermesStepAttenuatorData.Parent = this;
+                    udHermesStepAttenuatorData.Show();
                     chkRX2Preamp.Hide();
 
                     // lblMultiSMeter.Parent = this;
@@ -46529,7 +47027,11 @@ namespace PowerSDR
                     ptbRF.Location = new Point(lblRF2.Location.X + lblRF2.Width, ptbRX1AF.Location.Y + ptbRX1AF.Height + 2);
                     comboAGC.Location = new Point(ptbRF.Location.X + ptbRF.Width + 2, ptbRF.Location.Y + 3);
                     //chkMUT.Location = new Point(ptbAF.Location.X + ptbAF.Width + 2, ptbAF.Location.Y);
-                    comboPreamp.Location = new Point(comboAGC.Location.X + comboPreamp.Width + 2, comboAGC.Location.Y);
+                    if (hermes_step_attenuator)
+                        udHermesStepAttenuatorData.Location = new Point(comboAGC.Location.X + udHermesStepAttenuatorData.Width + 2, comboAGC.Location.Y);
+                    else
+                        comboPreamp.Location = new Point(comboAGC.Location.X + comboPreamp.Width + 2, comboAGC.Location.Y);
+
                 }
                 else
                     if (show_rx2)
@@ -46543,7 +47045,7 @@ namespace PowerSDR
                             (txtRX2Meter.Width / 12)) * 2, grpVFOB.Location.Y + 5);
                         // picMultiMeterDigital.Location = txtMultiText.Location;
                         // picMultiMeterDigital.Location = new Point(txtMultiText.Location.X, txtMultiText.Location.Y + txtMultiText.Height + 8);
-                        picRX2Meter.Size = new Size(pic_rx2meter_size_basis.Width * 2, pic_rx2meter_size_basis.Height + 10);
+                        picRX2Meter.Size = new Size(pic_rx2meter_size_basis.Width * 2, pic_rx2meter_size_basis.Height);
                         picRX2Meter.Location = new Point(((this.ClientSize.Width - (grpVFOB.Location.X + grpVFOB.Width)) -
                             (picRX2Meter.Width / 6)) * 2, txtRX2Meter.Location.Y + txtRX2Meter.Height + 9);
                         // picMultiMeterDigital.Size = new Size(pic_multi_meter_size_basis.Width * 2, pic_multi_meter_size_basis.Height);
@@ -46583,7 +47085,11 @@ namespace PowerSDR
                         //chkMUT.Location = new Point(ptbAF.Location.X + ptbAF.Width + 2, ptbAF.Location.Y);
                         //comboPreamp.Location = new Point(comboRX2AGC.Location.X + comboPreamp.Width + 2, comboRX2AGC.Location.Y);
                         if (rx2_preamp_present) chkRX2Preamp.Location = new Point(comboRX2AGC.Location.X + chkRX2Preamp.Width + 2, comboRX2AGC.Location.Y);
-                        else comboPreamp.Location = new Point(comboRX2AGC.Location.X + comboPreamp.Width + 2, comboRX2AGC.Location.Y);
+                        if (hermes_step_attenuator)
+                            udHermesStepAttenuatorData.Location = new Point(comboRX2AGC.Location.X + udHermesStepAttenuatorData.Width + 2, comboRX2AGC.Location.Y);
+                        else
+                            comboPreamp.Location = new Point(comboRX2AGC.Location.X + comboPreamp.Width + 2, comboRX2AGC.Location.Y);
+                        //comboPreamp.Location = new Point(comboRX2AGC.Location.X + comboPreamp.Width + 2, comboRX2AGC.Location.Y);
                     }
             }
 
@@ -46642,7 +47148,6 @@ namespace PowerSDR
             radDisplayZoom2x.Location = new Point(radDisplayZoom1x.Location.X + radDisplayZoom1x.Width, top);
             radDisplayZoom4x.Location = new Point(radDisplayZoom2x.Location.X + radDisplayZoom2x.Width, top);
 
-
             top = panelDisplay.Location.Y + panelDisplay.Height;
 
             if (this.showBandControls)
@@ -46685,10 +47190,10 @@ namespace PowerSDR
                     radBand12.Location = new Point(radBand15.Location.X + radBand15.Width, 0);
                     radBand10.Location = new Point(radBand12.Location.X + radBand12.Width, 0);
                     radBand6.Location = new Point(radBand10.Location.X + radBand10.Width, 0);
-                   // radBand2.Location = new Point(radBand6.Location.X + radBand6.Width, 0);
-                   // radBandWWV.Location = new Point(radBand2.Location.X + radBand2.Width, 0);
-                   // radBandGEN.Location = new Point(radBandWWV.Location.X + radBandWWV.Width, 0);
-                   // btnBandVHF.Location = new Point(radBandGEN.Location.X + radBandGEN.Width, 0);//w3sz added
+                    // radBand2.Location = new Point(radBand6.Location.X + radBand6.Width, 0);
+                    // radBandWWV.Location = new Point(radBand2.Location.X + radBand2.Width, 0);
+                    // radBandGEN.Location = new Point(radBandWWV.Location.X + radBandWWV.Width, 0);
+                    // btnBandVHF.Location = new Point(radBandGEN.Location.X + radBandGEN.Width, 0);//w3sz added
                     radBandWWV.Location = new Point(radBand6.Location.X + radBand2.Width, 0);
                     radBandGEN.Location = new Point(radBandWWV.Location.X + radBandWWV.Width, 0);
                     btnBandVHF.Location = new Point(radBandGEN.Location.X + radBandGEN.Width, 0);//w3sz added
@@ -47243,6 +47748,18 @@ namespace PowerSDR
         {
             if (CollapsedDisplay)
                 chkRX2Mute.Checked = !chkRX2Mute.Checked;
+        }
+
+        private void udHermesStepAttenuatorData_ValueChanged(object sender, EventArgs e)
+        {
+            if (SetupForm != null) SetupForm.HermesAttenuatorData = (int)udHermesStepAttenuatorData.Value;
+            if (udHermesStepAttenuatorData.Focused) btnHidden.Focus();
+        }
+
+        private void lblPreamp_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (current_model != Model.HPSDR)
+                SetupForm.HermesEnableAttenuator = !SetupForm.HermesEnableAttenuator;
         }
     }
 }

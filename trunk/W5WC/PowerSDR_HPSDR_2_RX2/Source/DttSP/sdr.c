@@ -484,7 +484,7 @@ setup_tx (unsigned int thread)
 	*/
 
 	tx[thread].leveler.gen = newWcpAGC (// (NR0V)
-		5,								//mode
+		(AGCMODE)5,						//mode
 		0,								//0 for max(I,Q), 1 for envelope
 		CXBbase (tx[thread].buf.i),		//buff pointer
 		CXBsize (tx[thread].buf.i),		//io_buffsize
@@ -544,7 +544,7 @@ setup_tx (unsigned int thread)
 */
 
 	tx[thread].alc.gen = newWcpAGC (  // (NR0V)
-		5,								//mode
+		(AGCMODE)5,						//mode
 		1,								//0 for max(I,Q), 1 for envelope
 		CXBbase (tx[thread].buf.o),		//buff pointer
 		CXBsize (tx[thread].buf.o),		//io_buffsize
@@ -1696,7 +1696,7 @@ do_tx_FM (unsigned int thread)
 }
 
 PRIVATE void
-do_tx_NIL (thread)
+do_tx_NIL (unsigned int thread)
 {
 	int i, n = min (CXBhave (tx[thread].buf.i), uni[thread].buflen);
 	for (i = 0; i < n; i++)

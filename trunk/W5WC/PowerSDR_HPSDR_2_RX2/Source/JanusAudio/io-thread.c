@@ -753,6 +753,7 @@ void IOThreadMainLoop(void) {
 	// int out_stream_sync_count = 0; // where are we relative to sync in output stream
 	int total_written = 0;
 	unsigned char out_frame_idx = 0;
+	int hermes_dcv;
 
 	int samples_this_sync = 0; // how many samples we've read on the current sync word - l+r = 2 samples
 	int out_sample_pairs_this_sync = 0; // how many sample pairs we've written -- l+r = 1
@@ -943,7 +944,7 @@ void IOThreadMainLoop(void) {
 						RefPower = ref_power_stage;
 						break;
 					case 0x18:
-						//ain4 |=  (((int)(ControlBytesIn[2])) & 0xff);
+						//ain4 |=  (((int)(ControlBytesIn[2])) & 0xff); // AIN4
 						//AIN4 = ain4;
 						break;
 					case 0x20:
@@ -968,10 +969,11 @@ void IOThreadMainLoop(void) {
 						alex_fwd_power = ((ControlBytesIn[3] << 8) & 0xff00); //bits 15-8 (AIN1) Alex
 						break;
 					case 0x10:
-						//ain3 = ((ControlBytesIn[3] << 8) & 0xff00);
+						//ain3 = ((ControlBytesIn[3] << 8) & 0xff00); // AIN3
 						break;
-					case 0x18:
-						//ain6 = ((ControlBytesIn[3] << 8) & 0xff00); //Hermes 13.8v (22v scale)
+					case 0x18://bits 15-8 (AIN6) Hermes
+						if (HermesPowerEnabled)
+						hermes_dcv = ((ControlBytesIn[3] << 8) & 0xff00); //Hermes 13.8v (22v scale)
 						break;
 					case 0x20:
 						//  Mercury3FWVersion =  (int)(ControlBytesIn[3] >> 1);										                 
@@ -998,8 +1000,10 @@ void IOThreadMainLoop(void) {
 						//AIN3 = ain3;
 						break;
 					case 0x18:
-						//ain6 |=  (((int)(ControlBytesIn[4])) & 0xff);
-						//AIN6 = ain6; //Hermes 13.8v (22v scalle)
+						if (HermesPowerEnabled) {
+						hermes_dcv |=  (((int)(ControlBytesIn[4])) & 0xff);// bits 7-0 (AIN6) Hermes
+						HermesDCV = hermes_dcv; //Hermes 13.8v (22v scale)
+						}
 						break;
 					case 0x20:
 						// Mercury4FWVersion = (int)(ControlBytesIn[4] >> 1);										                 
@@ -1380,7 +1384,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = AlexLPFMask & 0x7f;
 						break;
 					case 7:
-						FPGAWriteBufp[writebufpos] = 0;
+						FPGAWriteBufp[writebufpos] = (Hermes_att_enable | Hermes_att_data) & 0x3f;
 						break;
 					case 8:
 						FPGAWriteBufp[writebufpos] = 0;

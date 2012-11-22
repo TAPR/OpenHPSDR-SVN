@@ -41,7 +41,7 @@ namespace PowerSDR
     using System.ComponentModel;
     using System.Threading;
     using System.Windows.Forms;
-   // using SDRSerialSupportII;
+    // using SDRSerialSupportII;
     using System.Text;
     using System.IO;
     using System.IO.Ports;
@@ -1179,9 +1179,6 @@ namespace PowerSDR
         private LabelTS lblOzyFWVer;
         private LabelTS lblOzyFX2;
         private GroupBoxTS grpAlexAntCtrl;
-        private RadioButtonTS radAlexT3_160;
-        private RadioButtonTS radAlexT2_160;
-        private RadioButtonTS radAlexT1_160;
         private CheckBoxTS chkAlex160XV;
         private CheckBoxTS chkAlex160R2;
         private CheckBoxTS chkAlex160R1;
@@ -1189,7 +1186,6 @@ namespace PowerSDR
         private RadioButtonTS radAlexR2_160;
         private RadioButtonTS radAlexR1_160;
         private PanelTS panel1;
-        private PanelTS panel13;
         private CheckBoxTS chkAlex12XV;
         private CheckBoxTS chkAlex12R2;
         private CheckBoxTS chkAlex12R1;
@@ -1256,52 +1252,11 @@ namespace PowerSDR
         private RadioButtonTS radAlexR2_80;
         private RadioButtonTS radAlexR1_80;
         private RadioButtonTS radAlexR3_80;
-        private PanelTS panel22;
-        private RadioButtonTS radAlexT2_10;
-        private RadioButtonTS radAlexT1_10;
-        private RadioButtonTS radAlexT3_10;
-        private PanelTS panel21;
-        private RadioButtonTS radAlexT2_12;
-        private RadioButtonTS radAlexT1_12;
-        private RadioButtonTS radAlexT3_12;
-        private PanelTS panel20;
-        private RadioButtonTS radAlexT2_15;
-        private RadioButtonTS radAlexT1_15;
-        private RadioButtonTS radAlexT3_15;
-        private PanelTS panel19;
-        private RadioButtonTS radAlexT2_17;
-        private RadioButtonTS radAlexT1_17;
-        private RadioButtonTS radAlexT3_17;
-        private PanelTS panel18;
-        private RadioButtonTS radAlexT2_20;
-        private RadioButtonTS radAlexT1_20;
-        private RadioButtonTS radAlexT3_20;
-        private PanelTS panel17;
-        private RadioButtonTS radAlexT2_30;
-        private RadioButtonTS radAlexT1_30;
-        private RadioButtonTS radAlexT3_30;
-        private PanelTS panel16;
-        private RadioButtonTS radAlexT2_40;
-        private RadioButtonTS radAlexT1_40;
-        private RadioButtonTS radAlexT3_40;
-        private PanelTS panel15;
-        private RadioButtonTS radAlexT2_60;
-        private RadioButtonTS radAlexT1_60;
-        private RadioButtonTS radAlexT3_60;
-        private PanelTS panel14;
-        private RadioButtonTS radAlexT2_80;
-        private RadioButtonTS radAlexT1_80;
-        private RadioButtonTS radAlexT3_80;
         private PanelTS panel11;
         private RadioButtonTS radAlexR2_6;
         private RadioButtonTS radAlexR1_6;
         private RadioButtonTS radAlexR3_6;
-        private PanelTS panel23;
-        private RadioButtonTS radAlexT2_6;
-        private RadioButtonTS radAlexT1_6;
-        private RadioButtonTS radAlexT3_6;
         private LabelTS label12;
-        private LabelTS labelTS15;
         private LabelTS labelTS5;
         private LabelTS labelTS6;
         private LabelTS labelTS7;
@@ -1320,9 +1275,6 @@ namespace PowerSDR
         private LabelTS label7;
         private LabelTS label6;
         private LabelTS label5;
-        private LabelTS label10;
-        private LabelTS label9;
-        private LabelTS label8;
         private CheckBoxTS chkAlexAntCtrl;
         private GroupBoxTS groupBoxHPSDRHW;
         private LabelTS lblPAGainByBand6;
@@ -1334,7 +1286,7 @@ namespace PowerSDR
         private CheckBoxTS chkHERCULES;
         private ButtonTS btnPennyCtrlReset;
         private GroupBoxTS grpFRSRegion;
-        private ComboBoxTS comboFRSRegion;
+        public ComboBoxTS comboFRSRegion;
         private ComboBoxTS comboGeneralXVTR;
         private CheckBoxTS chkGeneralXVTRPresent;
         private LabelTS lblPAGainByBandVHF9;
@@ -1702,16 +1654,16 @@ namespace PowerSDR
         private LabelTS labelTS89;
         public TextBoxTS txtTXVFO;
         public TextBoxTS txtRX2VFO;
-        public TextBoxTS txtLineInGain;
-        public TextBoxTS textBoxTS11;
-        public TextBoxTS textBoxTS10;
+        public TextBoxTS txtRX1DisplayOffset;
+        public TextBoxTS txtRX2MeterOffset;
+        public TextBoxTS txtRX1MeterOffset;
         public TextBoxTS txtAlexRevADC;
-        public TextBoxTS txtAlexBand;
-        public TextBoxTS txtTXAnt;
-        public TextBoxTS txtRXOut;
-        public TextBoxTS txtRXAnt;
-        public TextBoxTS txtAlexEnabled;
-        public TextBoxTS textBoxTS3;
+        public TextBoxTS txtCalcMeterData;
+        public TextBoxTS txtRX2RawMeterData;
+        public TextBoxTS txtRX1CalcMeterData;
+        public TextBoxTS txtRX1RawMeterData;
+        public TextBoxTS txtRX1PreampOffset;
+        public TextBoxTS txtRX2DisplayOffset;
         public TextBoxTS txtAlexFwdADC;
         public TextBoxTS txtFwdADC;
         private LabelTS labelTS103;
@@ -1730,18 +1682,6 @@ namespace PowerSDR
         private LabelTS labelTS17;
         private TabControl tcAlexControl;
         private TabPage tpAlexFilterControl;
-        private LabelTS labelTS104;
-        private LabelTS labelTS105;
-        private LabelTS labelTS106;
-        private LabelTS labelTS107;
-        private LabelTS labelTS108;
-        private LabelTS labelTS109;
-        private LabelTS labelTS110;
-        private LabelTS labelTS111;
-        private LabelTS labelTS112;
-        private LabelTS labelTS113;
-        private LabelTS labelTS114;
-        private LabelTS labelTS115;
         private PanelTS panelTS1;
         public RadioButtonTS radAlexAutoCntl;
         public RadioButtonTS radAlexManualCntl;
@@ -1845,7 +1785,7 @@ namespace PowerSDR
         public RadioButtonTS rad10LPFled;
         public RadioButtonTS rad160LPFled;
         private LabelTS labelTS134;
-        private LabelTS labelTS133;
+        private LabelTS labelAlexFilterActive;
         public CheckBoxTS chkAlex20BPHPF;
         public CheckBoxTS chkAlex6_5BPHPF;
         public CheckBoxTS chkAlex9_5BPHPF;
@@ -1959,7 +1899,7 @@ namespace PowerSDR
             comboCATdatabits.Text = "8";
             comboCATstopbits.Text = "1";
             comboCATRigType.Text = "TS-2000";
-            comboFRSRegion.Text = "United States";
+            // comboFRSRegion.Text = "United States";
 
             //fillMetisIPAddrCombo();  /* must happen before GetOptions is called */ 
 
@@ -2301,7 +2241,7 @@ namespace PowerSDR
                     comboKeyerConnPrimary.Items.Add("Radio");
                     break;
                 default:
-                       comboKeyerConnPrimary.Items.Add("None");
+                    comboKeyerConnPrimary.Items.Add("None");
                     break;
             }
 
@@ -2326,21 +2266,13 @@ namespace PowerSDR
         {
             string skin = comboAppSkin.Text;
             comboAppSkin.Items.Clear();
-            string path;
-            if (console.default_directory)
-            {
-                path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                     "\\FlexRadio Systems\\PowerSDR\\Skins";
-            }
-            else
-            {
-                path = Application.StartupPath + "\\Skins";
-            }
+
             if (!Directory.Exists(path))
             {
                 MessageBox.Show("The console presentation files (skins) were not found.\n" +
-                    "Appearance will suffer until this is rectified.\n" +
-                    "Please visit www.flex-radio.com to download the missing files.",
+                    "Appearance will suffer until this is rectified.\n",
                     "Skins files not found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -3194,6 +3126,7 @@ namespace PowerSDR
 
             return false;
         }
+
         public void SaveTXProfileData() //W4TME
         {
             if (profile_deleted == true)
@@ -3302,46 +3235,45 @@ namespace PowerSDR
             dr["Digi_TX_DSP_Buffer"] = (string)comboDSPDigTXBuf.Text;
             dr["CW_RX_DSP_Buffer"] = (string)comboDSPCWRXBuf.Text;
 
-            switch (console.CurrentModel)
-            {
-                case Model.FLEX5000:
-                    dr["Mic_Input_On"] = (string)console.fwcMixForm.MicInputSelected;
-                    dr["Mic_Input_Level"] = (int)console.fwcMixForm.MicInput;
-                    dr["Line_Input_On"] = (string)console.fwcMixForm.LineInRCASelected;
-                    dr["Line_Input_Level"] = (int)console.fwcMixForm.LineInRCA;
-                    dr["Balanced_Line_Input_On"] = (string)console.fwcMixForm.LineInPhonoSelected;
-                    dr["Balanced_Line_Input_Level"] = (int)console.fwcMixForm.LineInPhono;
-                    dr["FlexWire_Input_On"] = (string)console.fwcMixForm.LineInDB9Selected;
-                    dr["FlexWire_Input_Level"] = (int)console.fwcMixForm.LineInDB9;
-                    break;
-
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = (string)console.flex3000MixerForm.MicInputSelected;
-                    dr["Mic_Input_Level"] = (int)console.flex3000MixerForm.MicInput;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = (string)console.flex3000MixerForm.LineInDB9Selected;
-                    dr["FlexWire_Input_Level"] = (int)console.flex3000MixerForm.LineInDB9;
-                    break;
-
-                default:
-                    dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
         }
 
         #endregion
 
         #region Properties
+
+        public bool HermesEnableAttenuator
+        {
+            get
+            {
+                if (chkHermesStepAttenuator != null) return chkHermesStepAttenuator.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkHermesStepAttenuator != null) chkHermesStepAttenuator.Checked = value;
+            }
+        }
+
+        public int HermesAttenuatorData
+        {
+            get
+            {
+                if (udHermesStepAttenuatorData != null) return (int)udHermesStepAttenuatorData.Value;
+                else return -1;
+            }
+            set
+            {
+                if (udHermesStepAttenuatorData != null) udHermesStepAttenuatorData.Value = value;
+            }
+        }
 
         public int VACDriver
         {
@@ -4188,6 +4120,18 @@ namespace PowerSDR
                         force_model = true;
                         radGenModelHermes.Checked = true;
                         break;
+                    case Model.ANAN10:
+                        force_model = true;
+                        radGenModelANAN10.Checked = true;
+                        break;
+                    case Model.ANAN100:
+                        force_model = true;
+                        radGenModelANAN100.Checked = true;
+                        break;
+                    case Model.ANAN100D:
+                        force_model = true;
+                        radGenModelANAN100D.Checked = true;
+                        break;
 
                 }
             }
@@ -4870,7 +4814,7 @@ namespace PowerSDR
                     if (console.fwc_init)
                     {
                         FWCEEPROM.Init();
-                        console.CurrentRegion = FWCEEPROM.Region;
+                        // console.CurrentRegion = FWCEEPROM.Region;
                         FWC.SetPalCallback();
                     }
                 }
@@ -5148,11 +5092,12 @@ namespace PowerSDR
             else console.XVTRPresent = false;
         }
 
-        private void radGenModelHermes_CheckedChanged(object sender, System.EventArgs e)
+        private void radGenModelANAN10_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (radGenModelHermes.Checked)
+            if (radGenModelANAN10.Checked)
             {
                 console.CurrentModel = Model.HERMES;
+                console.CurrentHPSDRModel = HPSDRModel.ANAN10;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
                 chkMercuryPresent.Checked = true;
@@ -5165,14 +5110,21 @@ namespace PowerSDR
                 chkPennyLane.Enabled = false;
                 radPenny10MHz.Checked = true;
                 rad12288MHzPenny.Checked = true;
+                chkAlexPresent.Checked = true;
+                chkAlexPresent.Enabled = false;
+                chkApolloPresent.Checked = false;
+                chkApolloPresent.Enabled = false;
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
                 chkGeneralRXOnly.Visible = false;
                 chkGeneralRXOnly.Checked = false;
-                groupBoxRXOptions.Text = "Hermes Options";
-                radMetis.Text = "Hermes";
-                grpMetisAddr.Text = "Hermes Address";
+                chkHermesStepAttenuator.Enabled = true;
+                groupBoxRXOptions.Text = "ANAN Options";
+                radMetis.Text = "ANAN";
+                grpMetisAddr.Text = "ANAN Address";
+                grpHermesStepAttenuator.Text = "ANAN Step Attenuator";
+                tpAlexControl.Text = "Ant/Filters";
                 string key = comboKeyerConnPrimary.Text;
                 if (comboKeyerConnPrimary.Items.Contains("5000"))
                     comboKeyerConnPrimary.Items.Remove("5000");
@@ -5182,7 +5134,148 @@ namespace PowerSDR
                     comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
                 comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+            }
+            console.ANAN10Present = radGenModelANAN10.Checked;
+            radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
+            chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
+            chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+        }
 
+        private void radGenModelANAN100_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelANAN100.Checked)
+            {
+                console.CurrentModel = Model.HERMES;
+                console.CurrentHPSDRModel = HPSDRModel.ANAN100;
+                chkPennyPresent.Checked = false;
+                chkPennyPresent.Enabled = false;
+                chkMercuryPresent.Checked = true;
+                chkMercuryPresent.Enabled = false;
+                chkJanusPresent.Checked = false;
+                chkJanusPresent.Enabled = false;
+                chkExcaliburPresent.Checked = false;
+                chkExcaliburPresent.Enabled = false;
+                chkPennyLane.Checked = true;
+                chkPennyLane.Enabled = false;
+                radPenny10MHz.Checked = true;
+                rad12288MHzPenny.Checked = true;
+                chkAlexPresent.Checked = true;
+                chkAlexPresent.Enabled = false;
+                chkApolloPresent.Checked = false;
+                chkApolloPresent.Enabled = false;
+                groupBox10MhzClock.Visible = false;
+                groupBox122MHz.Visible = false;
+                groupBoxMicSource.Visible = false;
+                chkGeneralRXOnly.Visible = false;
+                chkGeneralRXOnly.Checked = false;
+                chkHermesStepAttenuator.Enabled = true;
+                groupBoxRXOptions.Text = "ANAN Options";
+                radMetis.Text = "ANAN";
+                grpMetisAddr.Text = "ANAN Address";
+                grpHermesStepAttenuator.Text = "ANAN Step Attenuator";
+                string key = comboKeyerConnPrimary.Text;
+                if (comboKeyerConnPrimary.Items.Contains("5000"))
+                    comboKeyerConnPrimary.Items.Remove("5000");
+                if (comboKeyerConnPrimary.Items.Contains("SDR"))
+                    comboKeyerConnPrimary.Items.Remove("SDR");
+                if (!comboKeyerConnPrimary.Items.Contains("Ozy/Hermes"))
+                    comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
+                comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
+                comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+                chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
+                chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+            }
+            radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
+        }
+
+        private void radGenModelANAN100D_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelANAN100D.Checked)
+            {
+                console.CurrentModel = Model.HERMES;
+                console.CurrentHPSDRModel = HPSDRModel.ANAN100D;
+                chkPennyPresent.Checked = false;
+                chkPennyPresent.Enabled = false;
+                chkMercuryPresent.Checked = true;
+                chkMercuryPresent.Enabled = false;
+                chkJanusPresent.Checked = false;
+                chkJanusPresent.Enabled = false;
+                chkExcaliburPresent.Checked = false;
+                chkExcaliburPresent.Enabled = false;
+                chkPennyLane.Checked = true;
+                chkPennyLane.Enabled = false;
+                radPenny10MHz.Checked = true;
+                rad12288MHzPenny.Checked = true;
+                chkAlexPresent.Checked = true;
+                chkAlexPresent.Enabled = false;
+                chkApolloPresent.Checked = false;
+                chkApolloPresent.Enabled = false;
+                groupBox10MhzClock.Visible = false;
+                groupBox122MHz.Visible = false;
+                groupBoxMicSource.Visible = false;
+                chkGeneralRXOnly.Visible = false;
+                chkGeneralRXOnly.Checked = false;
+                chkHermesStepAttenuator.Enabled = true;
+                groupBoxRXOptions.Text = "ANAN Options";
+                radMetis.Text = "ANAN";
+                grpMetisAddr.Text = "ANAN Address";
+                grpHermesStepAttenuator.Text = "ANAN Step Attenuator";
+                string key = comboKeyerConnPrimary.Text;
+                if (comboKeyerConnPrimary.Items.Contains("5000"))
+                    comboKeyerConnPrimary.Items.Remove("5000");
+                if (comboKeyerConnPrimary.Items.Contains("SDR"))
+                    comboKeyerConnPrimary.Items.Remove("SDR");
+                if (!comboKeyerConnPrimary.Items.Contains("Ozy/Hermes"))
+                    comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
+                comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
+                comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+                chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
+                chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+            }
+            radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
+        }
+
+        private void radGenModelHermes_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelHermes.Checked)
+            {
+                console.CurrentModel = Model.HERMES;
+                console.CurrentHPSDRModel = HPSDRModel.HERMES;
+                chkPennyPresent.Checked = false;
+                chkPennyPresent.Enabled = false;
+                chkMercuryPresent.Checked = true;
+                chkMercuryPresent.Enabled = false;
+                chkJanusPresent.Checked = false;
+                chkJanusPresent.Enabled = false;
+                chkExcaliburPresent.Checked = false;
+                chkExcaliburPresent.Enabled = false;
+                chkPennyLane.Checked = true;
+                chkPennyLane.Enabled = false;
+                radPenny10MHz.Checked = true;
+                rad12288MHzPenny.Checked = true;
+                chkAlexPresent.Enabled = true;
+                chkApolloPresent.Enabled = true;
+                groupBox10MhzClock.Visible = false;
+                groupBox122MHz.Visible = false;
+                groupBoxMicSource.Visible = false;
+                chkGeneralRXOnly.Visible = false;
+                chkGeneralRXOnly.Checked = false;
+                chkHermesStepAttenuator.Enabled = true;
+                groupBoxRXOptions.Text = "Hermes Options";
+                radMetis.Text = "Hermes";
+                grpMetisAddr.Text = "Hermes Address";
+                grpHermesStepAttenuator.Text = "Hermes Step Attenuator";
+                string key = comboKeyerConnPrimary.Text;
+                if (comboKeyerConnPrimary.Items.Contains("5000"))
+                    comboKeyerConnPrimary.Items.Remove("5000");
+                if (comboKeyerConnPrimary.Items.Contains("SDR"))
+                    comboKeyerConnPrimary.Items.Remove("SDR");
+                if (!comboKeyerConnPrimary.Items.Contains("Ozy/Hermes"))
+                    comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
+                comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
+                comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+                chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
+                chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
         }
@@ -5192,6 +5285,7 @@ namespace PowerSDR
             if (radGenModelHPSDR.Checked)
             {
                 console.CurrentModel = Model.HPSDR;
+                console.CurrentHPSDRModel = HPSDRModel.HPSDR;
                 chkPennyPresent.Enabled = true;
                 chkPennyLane.Enabled = true;
                 chkMercuryPresent.Enabled = true;
@@ -5201,6 +5295,11 @@ namespace PowerSDR
                 groupBox122MHz.Visible = true;
                 groupBoxMicSource.Visible = true;
                 chkGeneralRXOnly.Visible = true;
+                chkHermesStepAttenuator.Checked = false;
+                chkHermesStepAttenuator.Enabled = false;
+                chkAlexPresent.Enabled = true;
+                chkApolloPresent.Checked = false;
+                chkApolloPresent.Enabled = false;
                 groupBoxRXOptions.Text = "Mercury Options";
                 radMetis.Text = "Metis (Ethernet)";
                 grpMetisAddr.Text = "Metis Address";
@@ -5213,16 +5312,17 @@ namespace PowerSDR
                     comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
                 comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
-
+                chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
+                chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, false);
-
+            if (chkHermesStepAttenuator.Checked) chkHermesStepAttenuator.Checked = false;
+            chkHermesStepAttenuator.Enabled = !radGenModelHPSDR.Checked;
             if (radMetis.Checked)
             {
                 console.HPSDRisMetis = true;
                 grpMetisAddr.Visible = true;
             }
-
         }
 
         private void radGenModelSoftRock40_CheckedChanged(object sender, System.EventArgs e)
@@ -5287,7 +5387,8 @@ namespace PowerSDR
         {
             // add or remove setup pages for HPSDR stuff 
             //
-            bool b = is_hermes ? radGenModelHermes.Checked : radGenModelHPSDR.Checked;
+            bool b = is_hermes ? radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN100.Checked ||
+                                 radGenModelANAN100D.Checked : radGenModelHPSDR.Checked;
 
             if (b)
             {
@@ -5397,6 +5498,66 @@ namespace PowerSDR
                 comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
 
+                if (radGenModelANAN10.Checked)
+                {
+                    chkRxOutOnTx.Checked = false;
+                    chkRxOutOnTx.Enabled = false;
+                    panelAlex1HPFControl.Visible = false;
+                    tpAlexFilterControl.Text = "LPF";
+                    panelAlexRXXVRTControl.Visible = false;
+                    labelAlexFilterActive.Location = new Point(298, 0);
+
+                }
+                else
+                {
+                    chkRxOutOnTx.Enabled = true;
+                    panelAlex1HPFControl.Visible = true;
+                    tpAlexFilterControl.Text = "HPF/LPF";
+                    panelAlexRXXVRTControl.Visible = true;
+                    labelAlexFilterActive.Location = new Point(275, 0);
+                }
+
+                if (radGenModelANAN10.Checked || radGenModelANAN100.Checked || radGenModelANAN100D.Checked)
+                {
+                    tpAlexControl.Text = "Ant/Filters";
+                }
+                else
+                {
+                    tpAlexControl.Text = "Alex";
+                }
+
+                if (console.rx2_preamp_present)
+                {
+                    tpAlexFilterControl.Text = "Alex-1 Filters";
+
+                    if (!tcGeneral.TabPages.Contains(tpAlex2FilterControl))
+                    {
+                        Common.TabControlInsert(tcGeneral, tpAlex2FilterControl, 6);
+                    }
+                    else
+                    {
+                        if (tcGeneral.TabPages.IndexOf(tpAlex2FilterControl) != 6)
+                        {
+                            tcGeneral.TabPages.Remove(tpAlexControl);
+                            Common.TabControlInsert(tcGeneral, tpAlex2FilterControl, 6);
+                        }
+                    }
+                }
+                else
+                {
+                    if (console.rx2_preamp_present)
+                    {
+                        if (tcGeneral.TabPages.Contains(tpAlex2FilterControl))
+                        {
+                            tcGeneral.TabPages.Remove(tpAlex2FilterControl);
+                            tcGeneral.SelectedIndex = 0;
+                        }
+                    }
+                }
+
+                if (radGenModelHPSDR.Checked) tpPennyCtrl.Text = "Penny Ctrl";
+                else if (radGenModelHermes.Checked) tpPennyCtrl.Text = "Hermes Ctrl";
+                else tpPennyCtrl.Text = "ANAN Ctrl";
             }
             else
             {
@@ -5472,11 +5633,12 @@ namespace PowerSDR
                    tcAudio.SelectedIndex = 0;
                } */
 
-              if (tcGeneral.TabPages.Contains(tpInfo))
-              {
-                  tcGeneral.TabPages.Remove(tpInfo);
-                  tcGeneral.SelectedIndex = 0;
-              } 
+
+            if (tcGeneral.TabPages.Contains(tpInfo))
+            {
+                tcGeneral.TabPages.Remove(tpInfo);
+                tcGeneral.SelectedIndex = 0;
+            }
 
             if (!tcGeneral.TabPages.Contains(tpHPSDR))
             {
@@ -5504,7 +5666,6 @@ namespace PowerSDR
                 }
             }
 
-
             if (!tcGeneral.TabPages.Contains(tpAlexControl))
             {
                 Common.TabControlInsert(tcGeneral, tpAlexControl, 6);
@@ -5518,16 +5679,52 @@ namespace PowerSDR
                 }
             }
 
-            if (!tcGeneral.TabPages.Contains(tpApolloControl))
+            if (radGenModelHPSDR.Checked || radGenModelHermes.Checked)
             {
-                Common.TabControlInsert(tcGeneral, tpApolloControl, 7);
+                if (!tcGeneral.TabPages.Contains(tpApolloControl))
+                {
+                    Common.TabControlInsert(tcGeneral, tpApolloControl, 7);
+                }
+
+                else
+                {
+                    if (tcGeneral.TabPages.IndexOf(tpApolloControl) != 7)
+                    {
+                        tcGeneral.TabPages.Remove(tpApolloControl);
+                        Common.TabControlInsert(tcGeneral, tpApolloControl, 7);
+                    }
+                }
             }
-            else
+            else // if (!console.rx2_preamp_present)
             {
-                if (tcGeneral.TabPages.IndexOf(tpApolloControl) != 7)
+                if (tcGeneral.TabPages.Contains(tpApolloControl))
                 {
                     tcGeneral.TabPages.Remove(tpApolloControl);
-                    Common.TabControlInsert(tcGeneral, tpApolloControl, 7);
+                    tcGeneral.SelectedIndex = 0;
+                }
+            }
+
+            if (console.rx2_preamp_present)
+            {
+                if (!tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
+                {
+                    Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
+                }
+                else
+                {
+                    if (tcAlexControl.TabPages.IndexOf(tpAlex2FilterControl) != 8)
+                    {
+                        tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
+                        Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
+                    }
+                }
+            }
+            else // if (!console.rx2_preamp_present)
+            {
+                if (tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
+                {
+                    tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
+                    tcAlexControl.SelectedIndex = 0;
                 }
             }
 
@@ -5574,6 +5771,7 @@ namespace PowerSDR
                       Common.TabControlInsert(tcGeneral, tpRX2, 4);
                   }
               }*/
+
             console.MaxFreq = 65.0;
         }
 
@@ -6016,7 +6214,7 @@ namespace PowerSDR
         {
             console.DefaultLowCut = (int)udFilterDefaultLowCut.Value;
         }
-    
+
         private void udRX2FilterDefaultLowCut_ValueChanged(object sender, System.EventArgs e)
         {
             console.DefaultRX2LowCut = (int)udRX2FilterDefaultLowCut.Value;
@@ -6459,7 +6657,7 @@ namespace PowerSDR
             bool power = console.PowerOn;
 
             CWKeyer.AudioLatency = Math.Max(10.0, new_size / (double)console.SampleRate1 * 1e3);
-  
+
             if (power && old_size != new_size)
             {
                 console.PowerOn = false;
@@ -8136,7 +8334,7 @@ namespace PowerSDR
 
         private void chkCWKeyerIambic_CheckedChanged(object sender, System.EventArgs e)
         {
-           // RadioDSP.KeyerIambic = chkCWKeyerIambic.Checked;
+            // RadioDSP.KeyerIambic = chkCWKeyerIambic.Checked;
             CWKeyer.Iambic = chkCWKeyerIambic.Checked;
             console.CWIambic = chkCWKeyerIambic.Checked;
             switch (console.CurrentModel)
@@ -8151,13 +8349,13 @@ namespace PowerSDR
 
         private void udCWKeyerWeight_ValueChanged(object sender, System.EventArgs e)
         {
-          //  RadioDSP.KeyerWeight = (int)udCWKeyerWeight.Value;
+            //  RadioDSP.KeyerWeight = (int)udCWKeyerWeight.Value;
             CWKeyer.Weight = (int)udCWKeyerWeight.Value;
         }
 
         private void udCWKeyerRamp_ValueChanged(object sender, System.EventArgs e)
         {
-           // RadioDSP.KeyerRamp = (int)udCWKeyerRamp.Value;
+            // RadioDSP.KeyerRamp = (int)udCWKeyerRamp.Value;
             CWSynth.RampTime = (int)udCWKeyerRamp.Value;
         }
 
@@ -8182,22 +8380,22 @@ namespace PowerSDR
 
         private void chkCWKeyerRevPdl_CheckedChanged(object sender, System.EventArgs e)
         {
-           // RadioDSP.KeyerReversePaddle = chkCWKeyerRevPdl.Checked;
+            // RadioDSP.KeyerReversePaddle = chkCWKeyerRevPdl.Checked;
             SDRSerialPort.ReversePaddles = chkCWKeyerRevPdl.Checked;
             console.ReversePaddles = chkCWKeyerRevPdl.Checked;
         }
 
         private void comboKeyerConnPrimary_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-          //  bool running = System.Convert.ToBoolean(DttSP.KeyerRunning());
-          //  if (running) DttSP.StopKeyer();
-           // Thread.Sleep(40);
-           
-          //  console.Keyer.PrimaryConnPort = comboKeyerConnPrimary.Text;
-           // if (console.Keyer.PrimaryConnPort == "SDR" && comboKeyerConnPrimary.Text != "SDR")
-             //   comboKeyerConnPrimary.Text = "SDR";
-          //  if (running) DttSP.StartKeyer();
- 
+            //  bool running = System.Convert.ToBoolean(DttSP.KeyerRunning());
+            //  if (running) DttSP.StopKeyer();
+            // Thread.Sleep(40);
+
+            //  console.Keyer.PrimaryConnPort = comboKeyerConnPrimary.Text;
+            // if (console.Keyer.PrimaryConnPort == "SDR" && comboKeyerConnPrimary.Text != "SDR")
+            //   comboKeyerConnPrimary.Text = "SDR";
+            //  if (running) DttSP.StartKeyer();
+
             if (!CWInput.SetPrimaryInput(comboKeyerConnPrimary.Text))
             {
                 MessageBox.Show("Error using " + comboKeyerConnPrimary.Text + " for Keyer Primary Input.\n" +
@@ -8216,11 +8414,11 @@ namespace PowerSDR
             if (comboKeyerConnSecondary.Text == "CAT")
             {
                 if (!chkCATEnable.Checked)
-            {
-                MessageBox.Show("CAT is not Enabled.  Please enable the CAT interface before selecting this option.",
-                    "CAT not enabled",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Hand);
+                {
+                    MessageBox.Show("CAT is not Enabled.  Please enable the CAT interface before selecting this option.",
+                        "CAT not enabled",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Hand);
                     comboKeyerConnSecondary.Text = CWInput.SecondaryInput;
                     return;
                 }
@@ -8725,7 +8923,7 @@ namespace PowerSDR
                     }
                     break;
 
-                 default:
+                default:
                     // do nothing for other radios models
                     break;
             }
@@ -8894,7 +9092,7 @@ namespace PowerSDR
                     dr["FlexWire_Input_Level"] = 0;
                     break;
             }
-            
+
             if (!comboTXProfileName.Items.Contains(name))
             {
                 DB.ds.Tables["TxProfile"].Rows.Add(dr);
@@ -8983,7 +9181,7 @@ namespace PowerSDR
 
         private void udTXAMCarrierLevel_ValueChanged(object sender, System.EventArgs e)
         {
-            console.radio.GetDSPTX(0).TXAMCarrierLevel = Math.Sqrt((0.01 * (double)udTXAMCarrierLevel.Value)/2);
+            console.radio.GetDSPTX(0).TXAMCarrierLevel = Math.Sqrt((0.01 * (double)udTXAMCarrierLevel.Value) / 2);
         }
 
         private void chkSaveTXProfileOnExit_CheckedChanged(object sender, EventArgs e)
@@ -9111,6 +9309,85 @@ namespace PowerSDR
             btnPAGainCalibration.Enabled = true;
         }
 
+        private void SetANAN100PAGain()
+        {
+            udPAGain160.Maximum = 57.0M;
+            udPAGain80.Maximum = 57.0M;
+            udPAGain60.Maximum = 57.0M;
+            udPAGain40.Maximum = 57.0M;
+            udPAGain30.Maximum = 57.0M;
+            udPAGain20.Maximum = 57.0M;
+            udPAGain17.Maximum = 57.0M;
+            udPAGain15.Maximum = 57.0M;
+            udPAGain12.Maximum = 54.0M;
+            udPAGain10.Maximum = 54.0M;
+            udPAGain6.Maximum = 54.0M;
+
+            udPAGain160.Minimum = 55.0M;
+            udPAGain80.Minimum = 55.0M;
+            udPAGain60.Minimum = 55.0M;
+            udPAGain40.Minimum = 55.0M;
+            udPAGain30.Minimum = 55.0M;
+            udPAGain20.Minimum = 55.0M;
+            udPAGain17.Minimum = 54.0M;
+            udPAGain15.Minimum = 54.0M;
+            udPAGain12.Minimum = 52.0M;
+            udPAGain10.Minimum = 52.0M;
+            udPAGain6.Minimum = 49.0M;
+
+            PAGain160 = 55.0f;
+            PAGain80 = 55.0f;
+            PAGain60 = 55.0f;
+            PAGain40 = 55.0f;
+            PAGain30 = 55.0f;
+            PAGain20 = 55.0f;
+            PAGain17 = 54.0f;
+            PAGain15 = 54.0f;
+            PAGain12 = 52.0f;
+            PAGain10 = 52.0f;
+            PAGain6 = 49.0f;
+        }
+
+        private void SetDefaultPAGain()
+        {
+            udPAGain160.Maximum = 100.0M;
+            udPAGain80.Maximum = 100.0M;
+            udPAGain60.Maximum = 100.0M;
+            udPAGain40.Maximum = 100.0M;
+            udPAGain30.Maximum = 100.0M;
+            udPAGain20.Maximum = 100.0M;
+            udPAGain17.Maximum = 100.0M;
+            udPAGain15.Maximum = 100.0M;
+            udPAGain12.Maximum = 100.0M;
+            udPAGain10.Maximum = 100.0M;
+            udPAGain6.Maximum = 100.0M;
+
+            udPAGain160.Minimum = 38.8M;
+            udPAGain80.Minimum = 38.8M;
+            udPAGain60.Minimum = 38.8M;
+            udPAGain40.Minimum = 38.8M;
+            udPAGain30.Minimum = 38.8M;
+            udPAGain20.Minimum = 38.8M;
+            udPAGain17.Minimum = 38.8M;
+            udPAGain15.Minimum = 38.8M;
+            udPAGain12.Minimum = 38.8M;
+            udPAGain10.Minimum = 38.8M;
+            udPAGain6.Minimum = 38.8M;
+
+            PAGain160 = 41.0f;
+            PAGain80 = 41.2f;
+            PAGain60 = 41.3f;
+            PAGain40 = 41.3f;
+            PAGain30 = 41.0f;
+            PAGain20 = 41.5f;
+            PAGain17 = 39.9f;
+            PAGain15 = 38.8f;
+            PAGain12 = 38.8f;
+            PAGain10 = 38.8f;
+            PAGain6 = 38.8f;
+        }
+
+
         private void udPAGain_ValueChanged(object sender, System.EventArgs e)
         {
             console.PWR = console.PWR;
@@ -9118,31 +9395,63 @@ namespace PowerSDR
 
         private void btnPAGainReset_Click(object sender, System.EventArgs e)
         {
-            udPAGain160.Value = 41.0M;
-            udPAGain80.Value = 41.2M;
-            udPAGain60.Value = 41.3M;
-            udPAGain40.Value = 41.3M;
-            udPAGain30.Value = 41.0M;
-            udPAGain20.Value = 40.5M;
-            udPAGain17.Value = 39.9M;
-            udPAGain15.Value = 38.8M;
-            udPAGain12.Value = 38.8M;
-            udPAGain10.Value = 38.8M;
-            udPAGain6.Value = 38.8M;
-            udPAGainVHF0.Value = 38.8M;
-            udPAGainVHF1.Value = 38.8M;
-            udPAGainVHF2.Value = 38.8M;
-            udPAGainVHF3.Value = 38.8M;
-            udPAGainVHF4.Value = 38.8M;
-            udPAGainVHF5.Value = 38.8M;
-            udPAGainVHF6.Value = 38.8M;
-            udPAGainVHF7.Value = 38.8M;
-            udPAGainVHF8.Value = 38.8M;
-            udPAGainVHF9.Value = 38.8M;
-            udPAGainVHF10.Value = 38.8M;
-            udPAGainVHF11.Value = 38.8M;
-            udPAGainVHF12.Value = 38.8M;
-            udPAGainVHF13.Value = 38.8M;
+            if (radGenModelHPSDR.Checked || radGenModelHermes.Checked || radGenModelANAN10.Checked)
+            {
+                udPAGain160.Value = 41.0M;
+                udPAGain80.Value = 41.2M;
+                udPAGain60.Value = 41.3M;
+                udPAGain40.Value = 41.3M;
+                udPAGain30.Value = 41.0M;
+                udPAGain20.Value = 40.5M;
+                udPAGain17.Value = 39.9M;
+                udPAGain15.Value = 38.8M;
+                udPAGain12.Value = 38.8M;
+                udPAGain10.Value = 38.8M;
+                udPAGain6.Value = 38.8M;
+                udPAGainVHF0.Value = 38.8M;
+                udPAGainVHF1.Value = 38.8M;
+                udPAGainVHF2.Value = 38.8M;
+                udPAGainVHF3.Value = 38.8M;
+                udPAGainVHF4.Value = 38.8M;
+                udPAGainVHF5.Value = 38.8M;
+                udPAGainVHF6.Value = 38.8M;
+                udPAGainVHF7.Value = 38.8M;
+                udPAGainVHF8.Value = 38.8M;
+                udPAGainVHF9.Value = 38.8M;
+                udPAGainVHF10.Value = 38.8M;
+                udPAGainVHF11.Value = 38.8M;
+                udPAGainVHF12.Value = 38.8M;
+                udPAGainVHF13.Value = 38.8M;
+            }
+
+            if (radGenModelANAN100.Checked || radGenModelANAN100D.Checked)
+            {
+                PAGain160 = 55.0f;
+                PAGain80 = 55.0f;
+                PAGain60 = 55.0f;
+                PAGain40 = 55.0f;
+                PAGain30 = 55.0f;
+                PAGain20 = 55.0f;
+                PAGain17 = 54.0f;
+                PAGain15 = 54.0f;
+                PAGain12 = 52.0f;
+                PAGain10 = 52.0f;
+                PAGain6 = 49.0f;
+                PAGainVHF0 = 38.8f;
+                PAGainVHF1 = 38.8f;
+                PAGainVHF2 = 38.8f;
+                PAGainVHF3 = 38.8f;
+                PAGainVHF4 = 38.8f;
+                PAGainVHF5 = 38.8f;
+                PAGainVHF6 = 38.8f;
+                PAGainVHF7 = 38.8f;
+                PAGainVHF8 = 38.8f;
+                PAGainVHF9 = 38.8f;
+                PAGainVHF10 = 38.8f;
+                PAGainVHF11 = 38.8f;
+                PAGainVHF12 = 38.8f;
+                PAGainVHF13 = 38.8f;
+            }
         }
 
         #endregion
@@ -9821,8 +10130,8 @@ namespace PowerSDR
                     {
                         MessageBox.Show("The CAT port \"" + comboCATPort.Text + "\" is not a valid port.\n" +
                             "Please select another port.");
-                    chkCATEnable.Checked = false;
-                }
+                        chkCATEnable.Checked = false;
+                    }
                 }
                 return;
             }
@@ -9916,7 +10225,7 @@ namespace PowerSDR
                 {
                     MessageBox.Show("The PTT port \"" + comboCATPTTPort.Text + "\" is not a valid port.  Please select another port.");
                 }
-                    chkCATPTTEnabled.Checked = false;
+                chkCATPTTEnabled.Checked = false;
                 return;
             }
 
@@ -11278,7 +11587,7 @@ namespace PowerSDR
 
         private void chkCWKeyerMode_CheckedChanged(object sender, System.EventArgs e)
         {
-           // console.Keyer.KeyerMode = chkCWKeyerMode.Checked ? 1 : 0;
+            // console.Keyer.KeyerMode = chkCWKeyerMode.Checked ? 1 : 0;
             if (chkCWKeyerMode.Checked)
             {
                 if (chkModeBStrict.Checked)
@@ -11372,8 +11681,8 @@ namespace PowerSDR
         private void radPACalAllBands_CheckedChanged(object sender, System.EventArgs e)
         {
             foreach (Control c in panelAutoPACalibrate.Controls)
-               // foreach (Control c in grpPAGainByBand.Controls)
-                {
+            // foreach (Control c in grpPAGainByBand.Controls)
+            {
                 if (c.Name.StartsWith("chkPA"))
                 {
                     c.Visible = !radPACalAllBands.Checked;
@@ -11674,7 +11983,7 @@ namespace PowerSDR
 
         private void chkCWAutoSwitchMode_CheckedChanged(object sender, System.EventArgs e)
         {
-           // console.Keyer.AutoSwitchMode = chkCWAutoSwitchMode.Checked;
+            // console.Keyer.AutoSwitchMode = chkCWAutoSwitchMode.Checked;
             console.CWAutoModeSwitch = chkCWAutoSwitchMode.Checked;
         }
 
@@ -11824,7 +12133,7 @@ namespace PowerSDR
         {
             console.BlankRX2OnVFOATX = chkRX2BlankDisplayOnVFOATX.Checked;
         }
-        
+
         private void chkTXExpert_CheckedChanged(object sender, System.EventArgs e)
         {
             grpTXProfileDef.Visible = chkTXExpert.Checked;
@@ -11942,33 +12251,20 @@ namespace PowerSDR
 
         private void comboAppSkin_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string path;
-            if (console.default_directory)
-            {
-                path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                     "\\FlexRadio Systems\\PowerSDR\\Skins\\";
-            }
-            else
-            {
-                path = Application.StartupPath + "\\Skins\\";
-            }
 
             if (Directory.Exists(path + comboAppSkin.Text))
                 Skin.Restore(comboAppSkin.Text, path, console);
+            console.CurrentSkin = comboAppSkin.Text;
+            console.RadarColorUpdate = true;
         }
 
         private void btnSkinExport_Click(object sender, EventArgs e)
         {
-            string path;
-            if (console.default_directory)
-            {
-                path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                     "\\FlexRadio Systems\\PowerSDR\\Skins\\";
-            }
-            else
-            {
-                path = Application.StartupPath + "\\Skins\\";
-            }
+
             if (Directory.Exists(path + comboAppSkin.Text))
                 Skin.Save(comboAppSkin.Text, path, console);
         }
@@ -12041,9 +12337,9 @@ namespace PowerSDR
                 //    console.Keyer.FWCDash = false;
             }
 
-                if (chkCWKeyerMonoCable.Checked)
-                    CWKeyer.SensorEnqueue(new CWSensorItem(CWSensorItem.InputType.Dash, false));
-           
+            if (chkCWKeyerMonoCable.Checked)
+                CWKeyer.SensorEnqueue(new CWSensorItem(CWSensorItem.InputType.Dash, false));
+
         }
 
         private void btnExportDB_Click(object sender, EventArgs e)
@@ -12243,13 +12539,14 @@ namespace PowerSDR
                 console.chkSR.Enabled = true;
                 if (console.rx2_preamp_present) console.chkRX2Preamp.Visible = false;
                 if (chkApolloPresent.Checked) chkApolloPresent.Checked = false;
-                if (radGenModelHermes.Checked) JanusAudio.SetHermesFilter(0);
+                if (radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN100.Checked ||
+                     radGenModelANAN100D.Checked) JanusAudio.SetHermesFilter(0);
             }
             else
             {
                 chkAlexAntCtrl.Checked = false;
                 chkAlexAntCtrl.Enabled = false;
-                // grpAlexAntCtrl.Enabled = false;
+                grpAlexAntCtrl.Enabled = false;
                 radAlexAutoCntl.Checked = true;
                 radAlexManualCntl.Enabled = false;
                 console.chkSR.Enabled = false;
@@ -12257,6 +12554,8 @@ namespace PowerSDR
             }
             console.AlexPresent = chkAlexPresent.Checked;
             console.SetComboPreampForHPSDR();
+            // if (chkHermesStepAttenuator.Checked) chkHermesStepAttenuator.Checked = true;
+            udHermesStepAttenuatorData_ValueChanged(this, EventArgs.Empty);
         }
 
 
@@ -12271,7 +12570,6 @@ namespace PowerSDR
             {
                 groupBox10MhzClock.Enabled = true;
             }
-
         }
 
         private void radAtlas10MHz_CheckedChanged(object sender, System.EventArgs e)
@@ -12422,7 +12720,6 @@ namespace PowerSDR
 
         private void chkPenOCxmit80_CheckedChanged(object sender, System.EventArgs e)
         {
-
             int val = 0;
             if (chkPenOCxmit801.Checked) val += 1 << 0;
             if (chkPenOCxmit802.Checked) val += 1 << 1;
@@ -12438,7 +12735,6 @@ namespace PowerSDR
 
         private void chkPenOCrcv60_CheckedChanged(object sender, System.EventArgs e)
         {
-
             int val = 0;
             if (chkPenOCrcv601.Checked) val += 1 << 0;
             if (chkPenOCrcv602.Checked) val += 1 << 1;
@@ -12454,7 +12750,6 @@ namespace PowerSDR
 
         private void chkPenOCxmit60_CheckedChanged(object sender, System.EventArgs e)
         {
-
             int val = 0;
             if (chkPenOCxmit601.Checked) val += 1 << 0;
             if (chkPenOCxmit602.Checked) val += 1 << 1;
@@ -12778,6 +13073,8 @@ namespace PowerSDR
         {
             grpAlexAntCtrl.Enabled = chkAlexAntCtrl.Checked;
             console.AlexAntCtrlEnabled = chkAlexAntCtrl.Checked;
+            // if (radGenModelANAN10.Checked) panelAlexRXAntControl.Enabled = false;
+            // else panelAlexRXAntControl.Enabled = true;
         }
 
         private void chkMercDither_CheckedChanged(object sender, System.EventArgs e)
@@ -12791,7 +13088,6 @@ namespace PowerSDR
             int v = chkMercRandom.Checked ? 1 : 0;
             JanusAudio.SetMercRandom(v);
         }
-
 
         private RadioButtonTS[][] AlexRxAntButtons = null;
         private RadioButtonTS[][] AlexTxAntButtons = null;
@@ -13139,7 +13435,7 @@ namespace PowerSDR
 
         private void tpHPSDR_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            if (console.PowerOn && !radGenModelHermes.Checked)
+            if (console.PowerOn && radGenModelHPSDR.Checked)
             {
                 lblMercury2FWVer.Visible = console.rx2_preamp_present;
 
@@ -13173,11 +13469,23 @@ namespace PowerSDR
                                    lblSyncData.Text = "FrameSync: No"; 
                */
             }
-            else
+
+            if (console.PowerOn && radGenModelHermes.Checked)
             {
                 byte[] ver_bytes = new byte[1];
                 JanusAudio.GetMetisCodeVersion(ver_bytes);
                 lblOzyFX2.Text = ver_bytes[0].ToString("Hermes: 0\\.0");
+                lblOzyFWVer.Text = "";
+                lblMercuryFWVer.Text = "";
+                lblMercury2FWVer.Text = "";
+                lblPenelopeFWVer.Text = "";
+            }
+
+            if (console.PowerOn && (radGenModelANAN10.Checked || radGenModelANAN100.Checked || radGenModelANAN100D.Checked))
+            {
+                byte[] ver_bytes = new byte[1];
+                JanusAudio.GetMetisCodeVersion(ver_bytes);
+                lblOzyFX2.Text = ver_bytes[0].ToString("ANAN: 0\\.0");
                 lblOzyFWVer.Text = "";
                 lblMercuryFWVer.Text = "";
                 lblMercury2FWVer.Text = "";
@@ -13679,80 +13987,101 @@ namespace PowerSDR
 
         private void comboFRSRegion_SelectedIndexChanged(object sender, EventArgs e) //w5wc
         {
-            FRSRegion CurrentRegion = FRSRegion.US;
             if (comboFRSRegion.Text == "") return;
+
+            FRSRegion region = console.CurrentRegion;
             switch (comboFRSRegion.Text)
             {
                 case "Australia":
-                    CurrentRegion = FRSRegion.Australia;
+                    region = FRSRegion.Australia;
                     console.Extended = false;
                     break;
                 case "Europe":
-                    CurrentRegion = FRSRegion.Europe;
+                    region = FRSRegion.Europe;
                     console.Extended = false;
                     break;
                 case "Italy":
-                    CurrentRegion = FRSRegion.Italy_Plus;
+                    region = FRSRegion.Italy_Plus;
                     console.Extended = false;
                     break;
                 case "Spain":
-                    CurrentRegion = FRSRegion.Spain;
+                    region = FRSRegion.Spain;
                     console.Extended = false;
                     break;
                 case "Japan":
-                    CurrentRegion = FRSRegion.Japan;
+                    region = FRSRegion.Japan;
                     console.Extended = false;
                     break;
                 case "United Kingdom":
-                    CurrentRegion = FRSRegion.UK;
+                    region = FRSRegion.UK;
                     console.Extended = false;
                     break;
                 case "United States":
-                    CurrentRegion = FRSRegion.US;
-                    console.Extended = false;
+                    region = FRSRegion.US;
+                    Display.Init();
                     break;
                 case "Norway":
-                    CurrentRegion = FRSRegion.Norway;
+                    region = FRSRegion.Norway;
                     console.Extended = false;
                     break;
                 case "Denmark":
-                    CurrentRegion = FRSRegion.Denmark;
+                    region = FRSRegion.Denmark;
                     console.Extended = false;
                     break;
                 case "Latvia":
-                    CurrentRegion = FRSRegion.Latvia;
+                    region = FRSRegion.Latvia;
                     console.Extended = false;
                     break;
                 case "Slovakia":
-                    CurrentRegion = FRSRegion.Slovakia;
+                    region = FRSRegion.Slovakia;
                     console.Extended = false;
                     break;
                 case "Bulgaria":
-                    CurrentRegion = FRSRegion.Bulgaria;
+                    region = FRSRegion.Bulgaria;
                     console.Extended = false;
                     break;
                 case "Greece":
-                    CurrentRegion = FRSRegion.Greece;
+                    region = FRSRegion.Greece;
                     console.Extended = false;
                     break;
                 case "Hungary":
-                    CurrentRegion = FRSRegion.Hungary;
+                    region = FRSRegion.Hungary;
                     console.Extended = false;
                     break;
                 case "Netherlands":
-                    CurrentRegion = FRSRegion.Netherlands;
+                    region = FRSRegion.Netherlands;
                     console.Extended = false;
                     break;
                 case "France":
-                    CurrentRegion = FRSRegion.France;
+                    region = FRSRegion.France;
+                    console.Extended = false;
+                    break;
+                case "Israel":
+                    region = FRSRegion.Israel;
+                    console.Extended = false;
+                    break;
+                case "Russia":
+                    region = FRSRegion.Russia;
                     console.Extended = false;
                     break;
                 case "Extended":
                     console.Extended = true;
                     break;
             }
-            console.CurrentRegion = CurrentRegion;
-            console.Init60mChannels();
+            if (console.CurrentRegion != region)
+                console.CurrentRegion = region;
+
+            if (!console.initializing) DB.UpdateRegion(console.CurrentRegion);
+            if (console.CurrentRegion == FRSRegion.UK)
+            {
+                console.band_60m_register = 7;
+                console.Init60mChannels();
+            }
+            if (console.CurrentRegion == FRSRegion.US)
+            {
+                console.band_60m_register = 12;
+                console.Init60mChannels();
+            }
         }
 
         private void radMicIn_CheckedChanged(object sender, EventArgs e)
@@ -13773,7 +14102,7 @@ namespace PowerSDR
             console.LineIn = true;
             radMicIn.Checked = false;
             chk20dbMicBoost.Visible = false;
-           // chk20dbMicBoost.Checked = false;
+            // chk20dbMicBoost.Checked = false;
             chk20dbMicBoost.Enabled = false;
             //           if (!console.HPSDRisMetis)
             //            {
@@ -14506,7 +14835,7 @@ namespace PowerSDR
                 JanusAudio.SetDiscoveryMode(0);
         }
 
-      private void chkStrictCharSpacing_CheckedChanged(object sender, EventArgs e)
+        private void chkStrictCharSpacing_CheckedChanged(object sender, EventArgs e)
         {
             CWKeyer.AutoCharSpace = chkStrictCharSpacing.Checked;
         }
@@ -14522,7 +14851,7 @@ namespace PowerSDR
             }
         }
 
-       private void chkRxOutOnTx_CheckedChanged(object sender, EventArgs e)
+        private void chkRxOutOnTx_CheckedChanged(object sender, EventArgs e)
         {
             Alex.RxOutOnTx = chkRxOutOnTx.Checked;
         }
@@ -14632,12 +14961,14 @@ namespace PowerSDR
             if (chkApolloPresent.Checked)
             {
                 if (chkAlexPresent.Checked) chkAlexPresent.Checked = false;
- 
+
                 JanusAudio.SetHermesFilter(1);
                 chkApolloFilter_CheckedChanged(this, EventArgs.Empty);
                 chkApolloTuner_CheckedChanged(this, EventArgs.Empty);
             }
             else JanusAudio.SetHermesFilter(0);
+
+            console.ApolloPresent = chkApolloPresent.Checked;
         }
 
         private void chkApolloFilter_CheckedChanged(object sender, EventArgs e)
@@ -14744,6 +15075,266 @@ namespace PowerSDR
         {
             if (chkAutoPACalibrate.Checked) panelAutoPACalibrate.Visible = true;
             else panelAutoPACalibrate.Visible = false;
+        }
+
+        private void chkHermesStepAttenuator_CheckedChanged(object sender, EventArgs e)
+        {
+            console.HermesStepAttenuator = chkHermesStepAttenuator.Checked;
+            if (chkHermesStepAttenuator.Checked)
+            {
+                udHermesStepAttenuatorData_ValueChanged(this, EventArgs.Empty);
+            }
+        }
+
+        private void udHermesStepAttenuatorData_ValueChanged(object sender, EventArgs e)
+        {
+            console.HermesAttenuatorData = (int)udHermesStepAttenuatorData.Value;
+
+            if (AlexPresent && !console.ANAN10Present)
+                udHermesStepAttenuatorData.Maximum = (decimal)61;
+            else udHermesStepAttenuatorData.Maximum = (decimal)31;
+        }
+
+        private void udAlex160mLPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex160mLPFStart.Value >= udAlex160mLPFEnd.Value + (decimal)0.000001)
+            {
+                udAlex160mLPFEnd.Value = udAlex160mLPFStart.Value + (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex160mLPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex160mLPFEnd.Value <= udAlex160mLPFStart.Value)
+            {
+                udAlex160mLPFStart.Value = udAlex160mLPFEnd.Value - (decimal)0.000001;
+                // return;
+            }
+            else if (udAlex160mLPFEnd.Value >= udAlex80mLPFStart.Value)
+            {
+                udAlex80mLPFStart.Value = udAlex160mLPFEnd.Value + (decimal)0.000001;
+                // return;
+            }
+        }
+
+        private void udAlex80mLPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex80mLPFStart.Value <= udAlex160mLPFEnd.Value)
+            {
+                udAlex160mLPFEnd.Value = udAlex80mLPFStart.Value - (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex80mLPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex80mLPFEnd.Value >= udAlex40mLPFStart.Value)
+            {
+                udAlex40mLPFStart.Value = udAlex80mLPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex40mLPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex40mLPFStart.Value <= udAlex80mLPFEnd.Value)
+            {
+                udAlex80mLPFEnd.Value = udAlex40mLPFStart.Value - (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex40mLPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex40mLPFEnd.Value >= udAlex20mLPFStart.Value)
+            {
+                udAlex20mLPFStart.Value = udAlex40mLPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex20mLPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex20mLPFStart.Value <= udAlex40mLPFEnd.Value)
+            {
+                udAlex40mLPFEnd.Value = udAlex20mLPFStart.Value - (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex20mLPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex20mLPFEnd.Value >= udAlex15mLPFStart.Value)
+            {
+                udAlex15mLPFStart.Value = udAlex20mLPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex15mLPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex15mLPFStart.Value <= udAlex20mLPFEnd.Value)
+            {
+                udAlex20mLPFEnd.Value = udAlex15mLPFStart.Value - (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex15mLPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex15mLPFEnd.Value >= udAlex10mLPFStart.Value)
+            {
+                udAlex10mLPFStart.Value = udAlex15mLPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex10mLPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex10mLPFStart.Value <= udAlex15mLPFEnd.Value)
+            {
+                udAlex15mLPFEnd.Value = udAlex10mLPFStart.Value - (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex10mLPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex10mLPFEnd.Value >= udAlex6mLPFStart.Value)
+            {
+                udAlex6mLPFStart.Value = udAlex10mLPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex6mLPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex6mLPFStart.Value <= udAlex10mLPFEnd.Value)
+            {
+                udAlex10mLPFEnd.Value = udAlex6mLPFStart.Value - (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex1_5HPFStart_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void udAlex1_5HPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex1_5HPFEnd.Value >= udAlex6_5HPFStart.Value)
+            {
+                udAlex6_5HPFStart.Value = udAlex1_5HPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex6_5HPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex6_5HPFStart.Value <= udAlex1_5HPFEnd.Value)
+            {
+                udAlex1_5HPFEnd.Value = udAlex6_5HPFStart.Value - (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex6_5HPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex6_5HPFEnd.Value >= udAlex9_5HPFStart.Value)
+            {
+                udAlex9_5HPFStart.Value = udAlex6_5HPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex9_5HPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex9_5HPFStart.Value <= udAlex6_5HPFEnd.Value)
+            {
+                udAlex6_5HPFEnd.Value = udAlex9_5HPFStart.Value - (decimal)0.000001;
+                return;
+            }
+ 
+        }
+
+        private void udAlex9_5HPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex9_5HPFEnd.Value >= udAlex13HPFStart.Value)
+            {
+                udAlex13HPFStart.Value = udAlex9_5HPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex13HPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex13HPFStart.Value <= udAlex9_5HPFEnd.Value)
+            {
+                udAlex9_5HPFEnd.Value = udAlex13HPFStart.Value - (decimal)0.000001;
+                return;
+            }
+ 
+        }
+
+        private void udAlex13HPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex13HPFEnd.Value >= udAlex20HPFStart.Value)
+            {
+                udAlex20HPFStart.Value = udAlex13HPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex20HPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex20HPFStart.Value <= udAlex13HPFEnd.Value)
+            {
+                udAlex13HPFEnd.Value = udAlex20HPFStart.Value - (decimal)0.000001;
+                return;
+            }
+ 
+        }
+
+        private void udAlex20HPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex20HPFEnd.Value >= udAlex6BPFStart.Value)
+            {
+                udAlex6BPFStart.Value = udAlex20HPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex6BPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex6BPFStart.Value <= udAlex20HPFEnd.Value)
+            {
+                udAlex20HPFEnd.Value = udAlex6BPFStart.Value - (decimal)0.000001;
+                return;
+            } 
+        }
+
+        private void udAlex6BPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+  
+        }
+
+        private void chkSWRTuneProtection_CheckedChanged(object sender, EventArgs e)
+        {
+            console.DisableSWRonTune = chkSWRTuneProtection.Checked;
         }
     }
 

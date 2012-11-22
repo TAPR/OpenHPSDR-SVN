@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="PowerSDR RX2 (W5WC)" Language="1033" Version="2.2.3.23" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="120DD74B-2A5E-4E0B-8760-7A0CB3E33711">
+	<Product Id="*" Name="PowerSDR RX2 (W5WC)" Language="1033" Version="2.2.4.0" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="120DD74B-2A5E-4E0B-8760-7A0CB3E33711">
 		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />

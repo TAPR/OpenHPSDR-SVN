@@ -158,6 +158,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Channel.cs" />
     <Compile Include="CW\CWInput.cs" />
     <Compile Include="HPSDR\Alex.cs" />
     <Compile Include="alphawarnform.cs">

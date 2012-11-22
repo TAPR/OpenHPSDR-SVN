@@ -2,7 +2,7 @@
 // DiversityForm.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2011  FlexRadio Systems
+// Copyright (C) 2004-2012  FlexRadio Systems
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,9 +27,12 @@
 //=================================================================
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Collections;
+using System.ComponentModel;
 using System.Windows.Forms;
 using System.Threading;
 
@@ -59,6 +62,7 @@ namespace PowerSDR
 		private System.Windows.Forms.CheckBox chkEnable;
         private ButtonTS btnBump45;
         private ButtonTS btnBump180;
+        private Button btnReset;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -106,6 +110,7 @@ namespace PowerSDR
             this.chkLockR = new System.Windows.Forms.CheckBox();
             this.btnSync = new System.Windows.Forms.Button();
             this.chkEnable = new System.Windows.Forms.CheckBox();
+            this.btnReset = new System.Windows.Forms.Button();
             this.btnBump180 = new System.Windows.Forms.ButtonTS();
             this.btnBump45 = new System.Windows.Forms.ButtonTS();
             this.udAngle = new System.Windows.Forms.NumericUpDownTS();
@@ -192,7 +197,7 @@ namespace PowerSDR
             this.chkEnable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkEnable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEnable.ForeColor = System.Drawing.Color.White;
-            this.chkEnable.Location = new System.Drawing.Point(167, 413);
+            this.chkEnable.Location = new System.Drawing.Point(169, 413);
             this.chkEnable.Name = "chkEnable";
             this.chkEnable.Size = new System.Drawing.Size(56, 26);
             this.chkEnable.TabIndex = 48;
@@ -200,6 +205,23 @@ namespace PowerSDR
             this.chkEnable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.chkEnable.UseVisualStyleBackColor = false;
             this.chkEnable.CheckedChanged += new System.EventHandler(this.chkEnable_CheckedChanged);
+            // 
+            // btnReset
+            // 
+            this.btnReset.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnReset.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnReset.FlatAppearance.BorderSize = 0;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.Location = new System.Drawing.Point(332, 412);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(56, 26);
+            this.btnReset.TabIndex = 51;
+            this.btnReset.Text = "Reset";
+            this.btnReset.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnBump180
             // 
@@ -300,10 +322,11 @@ namespace PowerSDR
             // 
             // DiversityForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(400, 451);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnBump180);
             this.Controls.Add(this.btnBump45);
             this.Controls.Add(this.chkEnable);
@@ -343,48 +366,30 @@ namespace PowerSDR
 			int size = Math.Min(picRadar.Width, picRadar.Height);
             if (console.RadarColorUpdate)
             {
-                string panadapterBackgroundPath;
-                string consoleBackgroundPath;
-                string buttonOffPath;
-                string buttonOnPath;
-                if (console.default_directory)
-                {
-                    panadapterBackgroundPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                string panadapterBackgroundPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
                     "\\FlexRadio Systems\\PowerSDR\\Skins\\" + console.CurrentSkin + "\\Console\\picDisplay.png";
 
-                    consoleBackgroundPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                string consoleBackgroundPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
                     "\\FlexRadio Systems\\PowerSDR\\Skins\\" + console.CurrentSkin + "\\Console\\Console.png";
 
-                    buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                string buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
                     "\\FlexRadio Systems\\PowerSDR\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-0.png";
 
-                    buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                string buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
                         "\\FlexRadio Systems\\PowerSDR\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-1.png";
-                }
-                else
-                {
-                    panadapterBackgroundPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                             "\\Skins\\" + console.CurrentSkin + "\\Console\\picDisplay.png";
 
-                    consoleBackgroundPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                    "\\Skins\\" + console.CurrentSkin + "\\Console\\Console.png";
-
-                    buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                    "\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-0.png";
-
-                    buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                        "\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-1.png";
-                }
                 Bitmap buttonOffImage = new Bitmap(buttonOffPath);
                 Bitmap buttonOnImage = new Bitmap(buttonOnPath);
                 chkEnable.BackgroundImage = buttonOffImage;
                 btnSync.BackgroundImage = buttonOffImage;
                 btnBump45.BackgroundImage = buttonOffImage;
                 btnBump180.BackgroundImage = buttonOffImage;
+                btnReset.BackgroundImage = buttonOffImage;  //w4tme
 
                 btnSync.FlatAppearance.BorderColor = imageColorBottom;
                 btnBump45.FlatAppearance.BorderColor = imageColorBottom;
                 btnBump180.FlatAppearance.BorderColor = imageColorBottom;
+                btnReset.FlatAppearance.BorderColor = imageColorBottom; //w4tme
 
                 Bitmap panadapterBackground = new Bitmap(panadapterBackgroundPath);
                 imageColorTop = panadapterBackground.GetPixel((int)(panadapterBackground.Width -5), (int)(panadapterBackground.Height -5));
@@ -545,25 +550,15 @@ namespace PowerSDR
             console.RX2Filter = console.RX1Filter;
             console.RX2PreampMode = console.RX1PreampMode;
             console.VFOSync = true;
+            // console.RX2AGCMode = console.RX1AGCMode;    // no custom AGC mode for RX2 causes UHE
+            console.RX2RF = console.RF;                 //W4TME
 			console.radio.GetDSPRX(1, 0).Copy(console.radio.GetDSPRX(0, 0));
-            string buttonOnPath;
-            string buttonOffPath;
-            if (console.default_directory)
-            {
-                buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+
+            string buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
                     "\\FlexRadio Systems\\PowerSDR\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-1.png";
 
-                buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+            string buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
                     "\\FlexRadio Systems\\PowerSDR\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-0.png";
-            }
-            else
-            {
-                buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                    "\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-1.png";
-
-                buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                    "\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-0.png";
-            }
 
             Bitmap buttonOffImage = new Bitmap(buttonOffPath);
             Bitmap buttonOnImage = new Bitmap(buttonOnPath);
@@ -579,24 +574,12 @@ namespace PowerSDR
 		{
             //if(chkEnable.Checked) chkEnable.BackColor = console.ButtonSelectedColor;
             //else chkEnable.BackColor = SystemColors.Control;
-            string buttonOffPath;
-            string buttonOnPath;
-            if (console.default_directory)
-            {
-                buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+
+            string buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
                     "\\FlexRadio Systems\\PowerSDR\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-0.png";
 
-                buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+            string buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
                     "\\FlexRadio Systems\\PowerSDR\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-1.png";
-            }
-            else
-            {
-                buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                    "\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-0.png";
-
-                buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                    "\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-1.png";
-            }
 
             Bitmap buttonOffImage = new Bitmap(buttonOffPath);
             Bitmap buttonOnImage = new Bitmap(buttonOnPath);
@@ -615,6 +598,7 @@ namespace PowerSDR
 		private void DiversityForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			Common.SaveForm(this, "DiversityForm");
+            console.VFOSync = false;    //W4TME
 		}
 
         private void picRadar_Resize(object sender, EventArgs e)
@@ -652,6 +636,13 @@ namespace PowerSDR
         {
             if (chkLockR.Checked)
                 locked_r = r;
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            angle = 0;
+            r = 0;
+            UpdateDiversity();
         }
 	}
 }

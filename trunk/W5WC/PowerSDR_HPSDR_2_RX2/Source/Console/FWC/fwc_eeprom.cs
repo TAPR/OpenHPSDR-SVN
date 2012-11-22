@@ -99,7 +99,7 @@ namespace PowerSDR
 				rx2_image_ver = temp;
 			}
 		
-			FWC.GetRegion(out region);
+			//FWC.GetRegion(out region);
 		}
 
 		public static bool NeedDump()
@@ -258,11 +258,11 @@ namespace PowerSDR
 			get { return model; }
 		}
 
-		private static FRSRegion region = FRSRegion.US;
+	/*	private static FRSRegion region;// = FRSRegion.US;
 		public static FRSRegion Region
 		{ 
 			get { return region; }
-		}
+		} */
 
 		private static long last_cal_date_time = 0;
 		public static long LastCalDateTime

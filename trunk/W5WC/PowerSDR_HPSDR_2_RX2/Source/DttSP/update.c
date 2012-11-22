@@ -1670,7 +1670,7 @@ SetSquelchVal (unsigned int thread, unsigned int subrx, float setit)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP
+DttSP_EXP void
 SetSquelchState (unsigned int thread, unsigned int subrx,BOOLEAN setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
@@ -1780,6 +1780,7 @@ SetTXAGCLimit (unsigned int thread, double limit)
 	tx[thread].alc.gen->gain.top = (REAL)limit;
     sem_post(&top[thread].sync.upd.sem);
 }*/
+
 DttSP_EXP void
 SetTXAGCCompression (unsigned int thread, double txcompression)
 {
@@ -1896,7 +1897,7 @@ CalculateRXMeter (unsigned int thread, unsigned int subrx, METERTYPE mt)
 {
 	float returnval = 0;
 	//sem_wait (&top[thread].sync.upd.sem);
-	uni[thread].meter.rx.mode[subrx] = mt;
+	uni[thread].meter.rx.mode[subrx] = (RXMETERTYPE)mt;
 	switch (mt)
 	{
 		case SIGNAL_STRENGTH:
@@ -1928,7 +1929,7 @@ CalculateTXMeter (unsigned int thread, METERTYPE mt)
 {
 	float returnval = 0;
 	//sem_wait (&top[thread].sync.upd.sem);
-	uni[thread].meter.tx.mode = mt;
+	uni[thread].meter.tx.mode = (TXMETERTYPE)mt;
 	switch(mt)
 	{
 		case MIC:
