@@ -65,6 +65,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAs>CompileAsC</CompileAs>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <AdditionalDependencies>winMM.lib;libfftw3f-3.lib;pthreadVC.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -99,6 +100,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <CompileAs>CompileAsC</CompileAs>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <AdditionalDependencies>winMM.lib;libfftw3f-3.lib;pthreadVC.lib;%(AdditionalDependencies)</AdditionalDependencies>

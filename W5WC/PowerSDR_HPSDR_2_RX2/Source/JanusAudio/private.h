@@ -289,6 +289,8 @@ extern int Merc2Preamp;
 extern int Merc3Preamp;
 extern int Merc4Preamp;
 extern int MercRandom;
+extern int Hermes_att_enable;
+extern int Hermes_att_data;
 
 extern int MicBoost;
 extern int LineIn;
@@ -339,6 +341,7 @@ extern int PenelopeFWVersion;
 extern int OzyFWVersion;
 extern unsigned int OutputPowerFactor;
 extern int HermesPowerEnabled;
+extern int HermesDCV;
 
 #ifndef GLOBAL_DECL
 extern int CandCAddrMask;

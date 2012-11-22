@@ -233,10 +233,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 				
 #endif
 				}
-				else { // is Metis 
-					
-
-
+				else { // is Metis 					
 					MetisStartReadThread(); 
 				} 
 
@@ -781,6 +778,21 @@ KD5TFDVK6APHAUDIO_API void SetMerc2Preamp(int bits) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void EnableHermesAtten(int bits) { 
+	if ( bits != 0 ) { 
+		Hermes_att_enable = 0x20; 
+	} 
+	else { 
+		Hermes_att_enable = 0; 
+	}	
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetHermesAttenData(int bits) { 
+		Hermes_att_data = bits & 0x1f; 
+    	return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetMercRandom(int bits) { 
 	if ( bits != 0 ) { 
 		MercRandom = (1 << 4); 
@@ -813,21 +825,25 @@ KD5TFDVK6APHAUDIO_API void SetLegacyDotDashPTT(int bit) {
 }
 
 KD5TFDVK6APHAUDIO_API void SetDiscoveryMode(int bit) { 
-        if ( bit == 0 ) {
-                full_discovery = 0;
-        }
-        else {
-                full_discovery = 1;
-        }
+	if ( bit == 0 ) {
+		full_discovery = 0;
+	}
+	else {
+		full_discovery = 1;
+	}
 }
+
+KD5TFDVK6APHAUDIO_API int getHermesDCVoltage() { 
+	return HermesDCV;
+} 
 
 KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() { 
 	int n; 
 	//if ( !isMetis ) { 
-		//getI2CByte(I2C_MERC1_ADC_OFS);
-		//getI2CByte(I2C_MERC2_ADC_OFS);
-		//getI2CByte(I2C_MERC3_ADC_OFS);
-		//getI2CBytes(I2C_MERC4_ADC_OFS);
+	//getI2CByte(I2C_MERC1_ADC_OFS);
+	//getI2CByte(I2C_MERC2_ADC_OFS);
+	//getI2CByte(I2C_MERC3_ADC_OFS);
+	//getI2CBytes(I2C_MERC4_ADC_OFS);
 	//}
 	n = ADC_Overloads; 
 	ADC_Overloads = 0; 

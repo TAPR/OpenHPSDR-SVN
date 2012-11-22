@@ -354,7 +354,6 @@ namespace PowerSDR
 		}*/
 
         private static AudioState current_audio_state1 = AudioState.DTTSP;
-
         public static AudioState CurrentAudioState1
         {
             get { return current_audio_state1; }
