@@ -91,6 +91,26 @@ void hpsdr_hermesNB::set_PTTMode(int PTTmode)	// callback to set PTTMode (Off, V
 	Hermes->UpdateHermes();
 }
 
+void hpsdr_hermesNB::set_PTTOffMutesTx(int PTTTx)	// callback to set PTTOffMmutesTx (Off, On)
+{
+	Hermes->PTTOffMutesTx = PTTTx;
+	Hermes->UpdateHermes();
+}
+
+void hpsdr_hermesNB::set_PTTOnMutesRx(int PTTRx)	// callback to set PTTOnMutesRx (Off, On)
+{
+	Hermes->PTTOnMutesRx = PTTRx;
+	Hermes->UpdateHermes();
+}
+ 
+void hpsdr_hermesNB::set_TxDrive(int TxD)	// callback to set Transmit Drive Level (0..255)
+{
+	Hermes->TxDrive = TxD;
+	Hermes->UpdateHermes();
+}
+
+
+
 hpsdr_hermesNB::~hpsdr_hermesNB()
 {
 	delete Hermes;

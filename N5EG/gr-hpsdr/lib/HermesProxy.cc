@@ -57,8 +57,8 @@ HermesProxy::HermesProxy(int RxFreq)	// constructor
 	ADCdither = false;
 	ADCrandom = false;
 	Duplex = true;
-	PTTControlsTx = true;   // PTT not asserted mutes the transmitter
-	PTTMutesRx = true;	// PTT asserted mutes receiver
+	PTTOffMutesTx = true;   // PTT Off mutes the transmitter
+	PTTOnMutesRx = true;	// PTT On mutes receiver
 
 
 	RxWriteCounter = 0;	//
@@ -248,7 +248,7 @@ void HermesProxy::UnpackIQ(unsigned char* inptr, IQBuf_t outbuf)
 	I += (int)((unsigned char)*inptr);
 	inptr++;
 	if(I<0) I = -(~I + 1);
-	if ((PTTMutesRx) & (PTTMode == PTTOn))
+	if ((PTTOnMutesRx) & (PTTMode == PTTOn))
 	  outbuf[RxWriteFill++] = 0.0;
 	else
 	  outbuf[RxWriteFill++] = (float)I/8388607.0;
@@ -260,7 +260,7 @@ void HermesProxy::UnpackIQ(unsigned char* inptr, IQBuf_t outbuf)
 	Q += (int)((unsigned char)*inptr);
 	inptr++;
 	if(Q<0) Q = -(~Q + 1);
-	if ((PTTMutesRx) & (PTTMode == PTTOn))
+	if ((PTTOnMutesRx) & (PTTMode == PTTOn))
 	  outbuf[RxWriteFill++] = 0.0;
 	else
 	  outbuf[RxWriteFill++] = (float)Q/8388607.0;
@@ -421,7 +421,7 @@ int HermesProxy::PutTxIQ(const gr_complex * in, int nsamples) // called by Herme
 	  case 9:					// drive level & filt select (if Alex)
 
 	    unsigned char TxLevel;
-	    if (PTTControlsTx & (PTTMode == PTTOff))
+	    if (PTTOffMutesTx & (PTTMode == PTTOff))
 		TxLevel = 0;				// kill Tx when PTTOff and PTTControlsTx
 	    else
 		TxLevel = TxDrive;
@@ -434,9 +434,9 @@ int HermesProxy::PutTxIQ(const gr_complex * in, int nsamples) // called by Herme
 
 	  case 10:					// Hermes input attenuator setting
 	    outbuf[4] = RxAtten;			// 0..31 dB attenuator setting (not used yet)
-	    outbuf[5] = 0;				// 
-	    outbuf[6] = 0;				// 
-	    outbuf[7] = 0;				// 
+	    outbuf[5] = 0;				// Not implemented yet, should not be called by
+	    outbuf[6] = 0;				// TxControlCycler yet.
+	    outbuf[7] = 0;				// If it is called, then
 	    // break;					// fall through to error message for now...
 
 	  default:
@@ -458,7 +458,7 @@ int HermesProxy::PutTxIQ(const gr_complex * in, int nsamples) // called by Herme
           I = (unsigned int)A;
 	  Q = (unsigned int)B;
 
-	  if(PTTControlsTx & (PTTMode == PTTOff))	// Kill Tx if in Rx and PTTControls the Tx
+	  if(PTTOffMutesTx & (PTTMode == PTTOff))	// Kill Tx if in Rx and PTTControls the Tx
 	  {
 	    I = 0;
 	    Q = 0;

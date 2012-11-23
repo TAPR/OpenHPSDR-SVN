@@ -86,8 +86,8 @@ public:
 	bool ADCoverload;
 	bool Duplex;
 	unsigned char HermesVersion;
-	bool PTTControlsTx;		// PTT not asserted mutes the transmitter
-	bool PTTMutesRx;		// PTT asserted mutes receiver
+	bool PTTOffMutesTx;		// PTT Off mutes the transmitter
+	bool PTTOnMutesRx;		// PTT On receiver
 
 	HermesProxy(int);		// constructor
 	~HermesProxy();			// destructor

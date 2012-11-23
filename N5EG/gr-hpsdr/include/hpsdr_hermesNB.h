@@ -65,6 +65,10 @@ class HPSDR_API hpsdr_hermesNB : public gr_block
 	void set_RxSampRate(int);		// callback
 	void set_RxPreamp(int);			// callback
 	void set_PTTMode(int);			// callback
+	void set_PTTOffMutesTx(int);		// callback
+	void set_PTTOnMutesRx(int);		// callback
+	void set_TxDrive(int);			// callback
+
 
   int general_work (int noutput_items,
 		    gr_vector_int &ninput_items,
