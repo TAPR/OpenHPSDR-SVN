@@ -305,11 +305,11 @@
         </inbodydescription>
         <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="88" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="88" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classHermesProxy_1a95f584b61d10916d2515abb31df38751" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="classHermesProxy_1af8ffd30a39b309941a5f157ef3baff36" prot="public" static="no" mutable="no">
         <type>bool</type>
-        <definition>bool HermesProxy::PTTControlsTx</definition>
+        <definition>bool HermesProxy::PTTOffMutesTx</definition>
         <argsstring></argsstring>
-        <name>PTTControlsTx</name>
+        <name>PTTOffMutesTx</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -318,11 +318,11 @@
         </inbodydescription>
         <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="89" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="89" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classHermesProxy_1af980af477b27c126b6f8e743b804d0a7" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="classHermesProxy_1a4deeae2480653670618f221fad0feed7" prot="public" static="no" mutable="no">
         <type>bool</type>
-        <definition>bool HermesProxy::PTTMutesRx</definition>
+        <definition>bool HermesProxy::PTTOnMutesRx</definition>
         <argsstring></argsstring>
-        <name>PTTMutesRx</name>
+        <name>PTTOnMutesRx</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -544,9 +544,9 @@
       <member refid="classHermesProxy_1a4cec4d0b2e7b557534207af3293d7e13" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>HermesProxy</name></member>
       <member refid="classHermesProxy_1a3804828b3332eb76bdc8f98cbe9f55fb" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>HermesVersion</name></member>
       <member refid="classHermesProxy_1a01749d5f3db40e525587bf82eda143ea" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>LostRxBufCount</name></member>
-      <member refid="classHermesProxy_1a95f584b61d10916d2515abb31df38751" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PTTControlsTx</name></member>
       <member refid="classHermesProxy_1a0ab5d9dad1fe1e30d827f54886ee4561" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PTTMode</name></member>
-      <member refid="classHermesProxy_1af980af477b27c126b6f8e743b804d0a7" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PTTMutesRx</name></member>
+      <member refid="classHermesProxy_1af8ffd30a39b309941a5f157ef3baff36" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PTTOffMutesTx</name></member>
+      <member refid="classHermesProxy_1a4deeae2480653670618f221fad0feed7" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PTTOnMutesRx</name></member>
       <member refid="classHermesProxy_1a4854bf0a55f6bab0b6770a78d44ad97b" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PutTxIQ</name></member>
       <member refid="classHermesProxy_1ac54bd2dda6975f6f75ec6b60a9d987ef" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ReceiveFrequency</name></member>
       <member refid="classHermesProxy_1a1c8d93a56209a802ae04ea851635774e" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ReceiveMicLR</name></member>
