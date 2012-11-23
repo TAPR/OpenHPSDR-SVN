@@ -63,7 +63,8 @@ class HPSDR_API hpsdr_hermesNB : public gr_block
 	~hpsdr_hermesNB();
 	void set_ReceiveFrequency(float);	// callback
 	void set_RxSampRate(int);		// callback
-	void set_RxPreamp(int);		// callback
+	void set_RxPreamp(int);			// callback
+	void set_PTTMode(int);			// callback
 
   int general_work (int noutput_items,
 		    gr_vector_int &ninput_items,

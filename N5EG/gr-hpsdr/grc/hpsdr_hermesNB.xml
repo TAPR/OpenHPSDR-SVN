@@ -8,6 +8,7 @@
   <callback>set_ReceiveFrequency($RxF)</callback>
   <callback>set_RxSampRate($RxSmp)</callback>
   <callback>set_RxPreamp($RxPre)</callback>
+ <callback>set_PTTMode($PTTmode)</callback>
  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
@@ -26,8 +27,14 @@
     <type>int</type>
   </param>
   <param>
-    <name>Rx Preamp On/Off</name>
+    <name>Rx Preamp Off/On</name>
     <key>RxPre</key>
+    <value>0</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Tx PTT mode Off/Vox/On</name>
+    <key>PTTmode</key>
     <value>0</value>
     <type>int</type>
   </param>
@@ -56,5 +63,8 @@
   It supports one receiver in the Narrow Band (digital downconversion) mode.
   Receive Frequency, Receive Sample Rate, and Receive Preamp can be set.
   Currently does not support transmit operation, nor more than one receiver.
+  RxSamp = 48000, 96000,  or 192000
+  RxPreamp = 0 (Off), or  1 (On)
+  PTTMode = 0 (TxOff),  1 (Vox on Txframe contents), or  2 (TxOn)
   </doc>
 </block>

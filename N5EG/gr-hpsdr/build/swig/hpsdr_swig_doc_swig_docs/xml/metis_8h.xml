@@ -4,30 +4,30 @@
     <compoundname>metis.h</compoundname>
     <innerclass refid="struct__METIS__CARD" prot="public">_METIS_CARD</innerclass>
       <sectiondef kind="enum">
-      <memberdef kind="enum" id="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55b" prot="public" static="no">
-        <name>@0</name>
-        <enumvalue id="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55ba9c7a8a8eae2284cce656fb0fdc7c6099" prot="public">
+      <memberdef kind="enum" id="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7" prot="public" static="no">
+        <name>@1</name>
+        <enumvalue id="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7a9c7a8a8eae2284cce656fb0fdc7c6099" prot="public">
           <name>RxStream_Off</name>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55baa72f2f340a8bdb8a24723ecd2daeb1b3" prot="public">
+        <enumvalue id="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7aa72f2f340a8bdb8a24723ecd2daeb1b3" prot="public">
           <name>RxStream_NB_On</name>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55ba1867ce0f2fc623bca9d78d17a49bf0ff" prot="public">
+        <enumvalue id="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7a1867ce0f2fc623bca9d78d17a49bf0ff" prot="public">
           <name>RxStream_WB_On</name>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55baa2c5b7d84c1e081d75d55b783539aed9" prot="public">
+        <enumvalue id="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7aa2c5b7d84c1e081d75d55b783539aed9" prot="public">
           <name>RxStream_NBWB_On</name>
           <briefdescription>
           </briefdescription>
@@ -231,10 +231,10 @@
 <codeline lineno="7"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>METIS_H</highlight></codeline>
 <codeline lineno="8"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10" refid="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55ba9c7a8a8eae2284cce656fb0fdc7c6099" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{<sp/><sp/><ref refid="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55ba9c7a8a8eae2284cce656fb0fdc7c6099" kindref="member">RxStream_Off</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Hermes<sp/>Receiver<sp/>Stream<sp/>Controls</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11" refid="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55baa72f2f340a8bdb8a24723ecd2daeb1b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55baa72f2f340a8bdb8a24723ecd2daeb1b3" kindref="member">RxStream_NB_On</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Narrow<sp/>Band<sp/>(down<sp/>converted)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="12" refid="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55ba1867ce0f2fc623bca9d78d17a49bf0ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55ba1867ce0f2fc623bca9d78d17a49bf0ff" kindref="member">RxStream_WB_On</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Wide<sp/>Band<sp/>(raw<sp/>ADC<sp/>samples)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13" refid="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55baa2c5b7d84c1e081d75d55b783539aed9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="metis_8h_1a06fc87d81c62e9abb8790b6e5713c55baa2c5b7d84c1e081d75d55b783539aed9" kindref="member">RxStream_NBWB_On</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Narrow<sp/>Band<sp/>and<sp/>Wide<sp/>Band<sp/>both<sp/>On</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7a9c7a8a8eae2284cce656fb0fdc7c6099" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{<sp/><sp/><ref refid="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7a9c7a8a8eae2284cce656fb0fdc7c6099" kindref="member">RxStream_Off</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Hermes<sp/>Receiver<sp/>Stream<sp/>Controls</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7aa72f2f340a8bdb8a24723ecd2daeb1b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7aa72f2f340a8bdb8a24723ecd2daeb1b3" kindref="member">RxStream_NB_On</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Narrow<sp/>Band<sp/>(down<sp/>converted)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7a1867ce0f2fc623bca9d78d17a49bf0ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7a1867ce0f2fc623bca9d78d17a49bf0ff" kindref="member">RxStream_WB_On</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Wide<sp/>Band<sp/>(raw<sp/>ADC<sp/>samples)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7aa2c5b7d84c1e081d75d55b783539aed9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="metis_8h_1adf764cbdea00d65edcd07bb9953ad2b7aa2c5b7d84c1e081d75d55b783539aed9" kindref="member">RxStream_NBWB_On</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Narrow<sp/>Band<sp/>and<sp/>Wide<sp/>Band<sp/>both<sp/>On</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="16" refid="struct__METIS__CARD" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct__METIS__CARD" kindref="compound">_METIS_CARD</ref><sp/>{</highlight></codeline>

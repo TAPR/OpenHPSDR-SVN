@@ -5,24 +5,24 @@
     <includes local="no">gruel/attributes.h</includes>
     <includedby refid="hpsdr__hermesNB_8h" local="no">/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h</includedby>
     <incdepgraph>
-      <node id="3">
+      <node id="4">
         <label>gruel/attributes.h</label>
       </node>
-      <node id="2">
+      <node id="3">
         <label>/home/tom/gr-hpsdr/include/hpsdr_api.h</label>
         <link refid="hpsdr_api.h"/>
-        <childnode refid="3" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="4">
+      <node id="5">
         <label>/home/tom/gr-hpsdr/include/hpsdr_api.h</label>
         <link refid="hpsdr_api.h"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="5">
+      <node id="6">
         <label>/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h</label>
         <link refid="hpsdr__hermesNB_8h"/>
       </node>

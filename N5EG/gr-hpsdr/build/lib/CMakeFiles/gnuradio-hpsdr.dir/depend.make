@@ -4,6 +4,20 @@
 lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: ../include/HermesProxy.h
 lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: ../include/metis.h
 lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: ../lib/HermesProxy.cc
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gnuradio/gr_basic_block.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gnuradio/gr_block.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gnuradio/gr_complex.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gnuradio/gr_core_api.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gnuradio/gr_msg_accepter.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gnuradio/gr_runtime_types.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gnuradio/gr_sptr_magic.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gnuradio/gr_tags.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gnuradio/gr_types.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gruel/api.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gruel/attributes.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gruel/msg_accepter.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gruel/pmt.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o: /usr/local/include/gruel/pmt_sugar.h
 
 lib/CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o: ../include/HermesProxy.h
 lib/CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o: ../include/hpsdr_api.h
@@ -28,4 +42,18 @@ lib/CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o: /usr/local/include/gruel/
 lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: ../include/HermesProxy.h
 lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: ../include/metis.h
 lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: ../lib/metis.cc
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gnuradio/gr_basic_block.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gnuradio/gr_block.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gnuradio/gr_complex.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gnuradio/gr_core_api.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gnuradio/gr_msg_accepter.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gnuradio/gr_runtime_types.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gnuradio/gr_sptr_magic.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gnuradio/gr_tags.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gnuradio/gr_types.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gruel/api.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gruel/attributes.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gruel/msg_accepter.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gruel/pmt.h
+lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o: /usr/local/include/gruel/pmt_sugar.h
 

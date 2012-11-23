@@ -32,9 +32,9 @@ HermesProxy* Hermes;	// make it visible to metis.cc
 
 
 /*! \brief Make a hermesNB module
- * \param param1  Receive Frequency
- * \param param2  Receive Sample Rate
- * \param param3  Receive Preamp
+ * \param RxF    Receive Frequency
+ * \param RxSmp  Receive Sample Rate
+ * \param RxPre  Receive Preamp
  */
 
 hpsdr_hermesNB_sptr
@@ -85,6 +85,11 @@ void hpsdr_hermesNB::set_RxPreamp(int RxPre)	// callback to set RxPreamp on or o
 	Hermes->UpdateHermes();
 }
 
+void hpsdr_hermesNB::set_PTTMode(int PTTmode)	// callback to set PTTMode (Off, Vox, On)
+{
+	Hermes->PTTMode = PTTmode;
+	Hermes->UpdateHermes();
+}
 
 hpsdr_hermesNB::~hpsdr_hermesNB()
 {
@@ -104,14 +109,17 @@ hpsdr_hermesNB::general_work (int noutput_items,
   // NOTE:  noutput_items is always less_than_or_equal_to ninput_items.
   // NOTE:  input_items[0..n] are the input streams.
   // NOTE:  ninput_items[0..n] is the input item count for each input stream.
-  // NOTE:  Do not consume more than ninput_items from the input.
+  // NOTE:  All output streams must have the same number of items (noutput_items).
+  // NOTE:  Each input stream can have a different number of items (ninput_items[stream#]).
+  // NOTE:  input_items.size() is the number of input streams.
+  // NOTE:  Do not consume more than ninput_items[stream#] from input stream#.
   // NOTE:  Do not put more than noutput_items to the output.
 
   //for (int i=0; i< noutput_items; i++)
   //  out[i] = in[i] * d_p1 + d_p2;
 
   
-  // we always get 128 I and 128 Q samples per request from HermesProxy, interleaved
+  // We always get 128 I and 128 Q samples per request from HermesProxy, interleaved
   // See how many 128 sample buffers we can send to Gnuradio
 
   IQBuf_t Rx;
@@ -126,23 +134,23 @@ hpsdr_hermesNB::general_work (int noutput_items,
     if( (Rx = Hermes->GetRxIQ()) == NULL)	//no more available from the radio
       break; 					
     
-    for(int j=0; j<128; j++)			// produce 128 complex samples
+    for(int j=0; j<128; j++)			// get 128 complex samples from Hermes
       out[j] = gr_complex(*Rx++, *Rx++);
 
   }
 
+  // Send I and Q samples received on input port to HermesProxy, it may or may not
+  // consume them. Hermes needs 63 complex samples in each HPSDR-USB frame.
+
+  if (ninput_items[0] >= 63)
+  {
+    int consumed = Hermes->PutTxIQ(in, 63);
+    consume_each(consumed);  	// Tell runtime system how many input items we consumed on
+  				// each input stream.
+  };
+
   //fprintf(stderr, "BufCount = %d\n", BufCount);
 
-  // Tell runtime system how many input items we consumed on
-  // each input stream.
-
-
-  //fprintf(stderr, "input_items.size(): %d    ninput_items.size(): %d", input_items.size(), ninput_items.size());
- 
-  //if (input_items.size() > 0)	// if we have any input ports...
-  //consume_each (BufCount*128);  // just throw the samples away (not even needed here...)
-
   return(BufCount*128);  	// Tell runtime system how many output items we produced
-
 }
 

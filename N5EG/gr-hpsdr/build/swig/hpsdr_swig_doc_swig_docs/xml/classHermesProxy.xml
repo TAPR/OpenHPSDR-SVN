@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="47" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="47" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="61" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1a11c5a24da1ce51479bfff92eac2dd644" prot="private" static="no" mutable="no">
         <type>unsigned</type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="48" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="48" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="62" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1abf881a3845d157adcb4c0ecd3c6d4a7c" prot="private" static="no" mutable="no">
         <type>unsigned</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="49" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="49" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="63" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1ac3fb33b284cba3c227da900ebecbb4a3" prot="private" static="no" mutable="no">
         <type>unsigned</type>
@@ -54,7 +54,72 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="50" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="50" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="64" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHermesProxy_1a92ae631c80c1c094d2b6774a35584f24" prot="private" static="no" mutable="no">
+        <type><ref refid="HermesProxy_8h_1a999e79de1b1af1d74c47aa4a6555f966" kindref="member">RawBuf_t</ref></type>
+        <definition>RawBuf_t HermesProxy::TxBuf[16]</definition>
+        <argsstring>[16]</argsstring>
+        <name>TxBuf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="66" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHermesProxy_1a026a004581268e4d08ff354b83ff0099" prot="private" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned HermesProxy::TxWriteCounter</definition>
+        <argsstring></argsstring>
+        <name>TxWriteCounter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="67" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHermesProxy_1acaaa01c0c84f3753021c58d5ce62ca15" prot="private" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned HermesProxy::TxReadCounter</definition>
+        <argsstring></argsstring>
+        <name>TxReadCounter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="68" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHermesProxy_1a3fe45f15bfc638f6a4d052777e261c52" prot="private" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned HermesProxy::TxControlCycler</definition>
+        <argsstring></argsstring>
+        <name>TxControlCycler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="69" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHermesProxy_1af26e6e46ff2483b82fc50e67301a3954" prot="private" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned HermesProxy::TxFrameIdleCount</definition>
+        <argsstring></argsstring>
+        <name>TxFrameIdleCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="70" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1a01749d5f3db40e525587bf82eda143ea" prot="private" static="no" mutable="no">
         <type>unsigned long</type>
@@ -67,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="52" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="52" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="72" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1ae1b10236904889d95e30a15c33a199e8" prot="private" static="no" mutable="no">
         <type>unsigned long</type>
@@ -80,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="53" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="53" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="73" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -95,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="57" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="57" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="77" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1a6dc0a7b71bebe61db8b03de2434e301c" prot="public" static="no" mutable="no">
         <type>unsigned</type>
@@ -108,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="58" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="58" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="78" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1a25d3b8e275a884cb8e0b46ff9dbbd7cd" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -121,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="59" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="59" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="79" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1a692aa0a6a87c4177a9444ca8e25a8dde" prot="public" static="no" mutable="no">
         <type>unsigned char</type>
@@ -134,20 +199,33 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="60" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="60" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="80" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="80" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classHermesProxy_1a491a8643dc7aac83df5dfc9c30f6881f" prot="public" static="no" mutable="no">
-        <type>bool</type>
-        <definition>bool HermesProxy::TxPTT</definition>
+      <memberdef kind="variable" id="classHermesProxy_1abfe9ed960700c0dd94be538020a2a97b" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char HermesProxy::RxAtten</definition>
         <argsstring></argsstring>
-        <name>TxPTT</name>
+        <name>RxAtten</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="61" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="61" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="81" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHermesProxy_1a0ab5d9dad1fe1e30d827f54886ee4561" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int HermesProxy::PTTMode</definition>
+        <argsstring></argsstring>
+        <name>PTTMode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="82" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1a8969a39aeb74703af0893a718b6714ee" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -160,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="62" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="62" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="83" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1a76e0f1869a8ce129ffcf728b39691bc1" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -173,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="63" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="63" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="84" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1a485a32389ec78b367e6797bf1550b743" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -186,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="64" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="64" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="85" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1a52b672f8d375556dbf420caab39f9615" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -199,7 +277,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="65" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="65" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="86" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHermesProxy_1a68e45aebcbfe07ca3ca64390142fcc5c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool HermesProxy::Duplex</definition>
+        <argsstring></argsstring>
+        <name>Duplex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="87" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHermesProxy_1a3804828b3332eb76bdc8f98cbe9f55fb" prot="public" static="no" mutable="no">
         <type>unsigned char</type>
@@ -212,7 +303,33 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="66" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="66" bodyend="-1"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="88" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHermesProxy_1a95f584b61d10916d2515abb31df38751" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool HermesProxy::PTTControlsTx</definition>
+        <argsstring></argsstring>
+        <name>PTTControlsTx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="89" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHermesProxy_1af980af477b27c126b6f8e743b804d0a7" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool HermesProxy::PTTMutesRx</definition>
+        <argsstring></argsstring>
+        <name>PTTMutesRx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="90" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -230,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="68"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="92"/>
       </memberdef>
       <memberdef kind="function" id="classHermesProxy_1a1596d70429b64082e19190d6d4a0e4fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -243,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="69"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="93"/>
       </memberdef>
       <memberdef kind="function" id="classHermesProxy_1af0c88b286a2b3be76587050755444be3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -256,16 +373,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="70"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="95"/>
       </memberdef>
-      <memberdef kind="function" id="classHermesProxy_1a53a586afc3ed94c6569d44d734186e19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void HermesProxy::ReceiveRxIQ</definition>
-        <argsstring>(unsigned char *buffer)</argsstring>
-        <name>ReceiveRxIQ</name>
+      <memberdef kind="function" id="classHermesProxy_1a4854bf0a55f6bab0b6770a78d44ad97b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int HermesProxy::PutTxIQ</definition>
+        <argsstring>(const gr_complex *, int)</argsstring>
+        <name>PutTxIQ</name>
         <param>
-          <type>unsigned char *</type>
-          <declname>buffer</declname>
+          <type>const gr_complex *</type>
+        </param>
+        <param>
+          <type>int</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -273,7 +392,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="71"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classHermesProxy_1aab08a2976e1a229f9b6faf4c6b42e6e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HermesProxy::ScheduleTxFrame</definition>
+        <argsstring>(unsigned long)</argsstring>
+        <name>ScheduleTxFrame</name>
+        <param>
+          <type>unsigned</type>
+          <declname>long</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classHermesProxy_1ab1677fe4c06ffdecdd0f85c0c4ecd7ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="HermesProxy_8h_1a999e79de1b1af1d74c47aa4a6555f966" kindref="member">RawBuf_t</ref></type>
+        <definition>RawBuf_t HermesProxy::GetNextTxBuf</definition>
+        <argsstring>()</argsstring>
+        <name>GetNextTxBuf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="98"/>
       </memberdef>
       <memberdef kind="function" id="classHermesProxy_1a8c73fe85b70edfb4b59f419520e96e96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -286,7 +435,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="72"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classHermesProxy_1aafa2a2d034ec4385c6187bc072283c39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HermesProxy::ReceiveRxIQ</definition>
+        <argsstring>(unsigned char *)</argsstring>
+        <name>ReceiveRxIQ</name>
+        <param>
+          <type>unsigned char *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="102"/>
       </memberdef>
       <memberdef kind="function" id="classHermesProxy_1ab519bac9bbefe844e83b7b9d54030b2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="HermesProxy_8h_1ae3655a7edeac87231fb5d8438894c107" kindref="member">IQBuf_t</ref></type>
@@ -299,16 +464,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="73"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="103"/>
       </memberdef>
-      <memberdef kind="function" id="classHermesProxy_1a4637e5660e435974f93c00504ed9cc8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void HermesProxy::PutTxIQ</definition>
-        <argsstring>(unsigned char *buffer)</argsstring>
-        <name>PutTxIQ</name>
+      <memberdef kind="function" id="classHermesProxy_1a21eab92e165983535e8ff0f83d323232" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="HermesProxy_8h_1ae3655a7edeac87231fb5d8438894c107" kindref="member">IQBuf_t</ref></type>
+        <definition>IQBuf_t HermesProxy::GetNextRxBuf</definition>
+        <argsstring>(IQBuf_t)</argsstring>
+        <name>GetNextRxBuf</name>
         <param>
-          <type>unsigned char *</type>
-          <declname>buffer</declname>
+          <type><ref refid="HermesProxy_8h_1ae3655a7edeac87231fb5d8438894c107" kindref="member">IQBuf_t</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -316,7 +480,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="76"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classHermesProxy_1a55ab729bdd1373e4675615caf2f4cb4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HermesProxy::UnpackIQ</definition>
+        <argsstring>(unsigned char *, IQBuf_t)</argsstring>
+        <name>UnpackIQ</name>
+        <param>
+          <type>unsigned char *</type>
+        </param>
+        <param>
+          <type><ref refid="HermesProxy_8h_1ae3655a7edeac87231fb5d8438894c107" kindref="member">IQBuf_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="106"/>
       </memberdef>
       <memberdef kind="function" id="classHermesProxy_1a213314ad4e5df4278a719414b7616a0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -329,7 +512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="77"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="110"/>
       </memberdef>
       <memberdef kind="function" id="classHermesProxy_1a1c8d93a56209a802ae04ea851635774e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -342,38 +525,51 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="78"/>
+        <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="111"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="43" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="42" bodyend="80"/>
+    <location file="/home/tom/gr-hpsdr/include/HermesProxy.h" line="57" bodyfile="/home/tom/gr-hpsdr/include/HermesProxy.h" bodystart="56" bodyend="113"/>
     <listofallmembers>
       <member refid="classHermesProxy_1a76e0f1869a8ce129ffcf728b39691bc1" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ADCdither</name></member>
       <member refid="classHermesProxy_1a52b672f8d375556dbf420caab39f9615" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ADCoverload</name></member>
       <member refid="classHermesProxy_1a485a32389ec78b367e6797bf1550b743" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ADCrandom</name></member>
+      <member refid="classHermesProxy_1a68e45aebcbfe07ca3ca64390142fcc5c" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>Duplex</name></member>
+      <member refid="classHermesProxy_1a21eab92e165983535e8ff0f83d323232" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>GetNextRxBuf</name></member>
+      <member refid="classHermesProxy_1ab1677fe4c06ffdecdd0f85c0c4ecd7ea" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>GetNextTxBuf</name></member>
       <member refid="classHermesProxy_1ab519bac9bbefe844e83b7b9d54030b2e" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>GetRxIQ</name></member>
       <member refid="classHermesProxy_1a4cec4d0b2e7b557534207af3293d7e13" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>HermesProxy</name></member>
       <member refid="classHermesProxy_1a3804828b3332eb76bdc8f98cbe9f55fb" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>HermesVersion</name></member>
       <member refid="classHermesProxy_1a01749d5f3db40e525587bf82eda143ea" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>LostRxBufCount</name></member>
-      <member refid="classHermesProxy_1a4637e5660e435974f93c00504ed9cc8c" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PutTxIQ</name></member>
+      <member refid="classHermesProxy_1a95f584b61d10916d2515abb31df38751" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PTTControlsTx</name></member>
+      <member refid="classHermesProxy_1a0ab5d9dad1fe1e30d827f54886ee4561" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PTTMode</name></member>
+      <member refid="classHermesProxy_1af980af477b27c126b6f8e743b804d0a7" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PTTMutesRx</name></member>
+      <member refid="classHermesProxy_1a4854bf0a55f6bab0b6770a78d44ad97b" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>PutTxIQ</name></member>
       <member refid="classHermesProxy_1ac54bd2dda6975f6f75ec6b60a9d987ef" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ReceiveFrequency</name></member>
       <member refid="classHermesProxy_1a1c8d93a56209a802ae04ea851635774e" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ReceiveMicLR</name></member>
-      <member refid="classHermesProxy_1a53a586afc3ed94c6569d44d734186e19" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ReceiveRxIQ</name></member>
+      <member refid="classHermesProxy_1aafa2a2d034ec4385c6187bc072283c39" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ReceiveRxIQ</name></member>
+      <member refid="classHermesProxy_1abfe9ed960700c0dd94be538020a2a97b" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>RxAtten</name></member>
       <member refid="classHermesProxy_1a22a2f6f0465004b6fb4ab9ccd8ca957f" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>RxIQBuf</name></member>
       <member refid="classHermesProxy_1a8969a39aeb74703af0893a718b6714ee" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>RxPreamp</name></member>
       <member refid="classHermesProxy_1abf881a3845d157adcb4c0ecd3c6d4a7c" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>RxReadCounter</name></member>
       <member refid="classHermesProxy_1a25d3b8e275a884cb8e0b46ff9dbbd7cd" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>RxSampleRate</name></member>
       <member refid="classHermesProxy_1a11c5a24da1ce51479bfff92eac2dd644" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>RxWriteCounter</name></member>
       <member refid="classHermesProxy_1ac3fb33b284cba3c227da900ebecbb4a3" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>RxWriteFill</name></member>
+      <member refid="classHermesProxy_1aab08a2976e1a229f9b6faf4c6b42e6e0" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>ScheduleTxFrame</name></member>
       <member refid="classHermesProxy_1a213314ad4e5df4278a719414b7616a0b" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>SendAudioLR</name></member>
       <member refid="classHermesProxy_1af0c88b286a2b3be76587050755444be3" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>SendTxIQ</name></member>
       <member refid="classHermesProxy_1ae1b10236904889d95e30a15c33a199e8" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>TotalRxBufCount</name></member>
       <member refid="classHermesProxy_1a6dc0a7b71bebe61db8b03de2434e301c" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>TransmitFrequency</name></member>
+      <member refid="classHermesProxy_1a92ae631c80c1c094d2b6774a35584f24" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>TxBuf</name></member>
+      <member refid="classHermesProxy_1a3fe45f15bfc638f6a4d052777e261c52" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>TxControlCycler</name></member>
       <member refid="classHermesProxy_1a692aa0a6a87c4177a9444ca8e25a8dde" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>TxDrive</name></member>
-      <member refid="classHermesProxy_1a491a8643dc7aac83df5dfc9c30f6881f" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>TxPTT</name></member>
+      <member refid="classHermesProxy_1af26e6e46ff2483b82fc50e67301a3954" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>TxFrameIdleCount</name></member>
+      <member refid="classHermesProxy_1acaaa01c0c84f3753021c58d5ce62ca15" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>TxReadCounter</name></member>
+      <member refid="classHermesProxy_1a026a004581268e4d08ff354b83ff0099" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>TxWriteCounter</name></member>
+      <member refid="classHermesProxy_1a55ab729bdd1373e4675615caf2f4cb4e" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>UnpackIQ</name></member>
       <member refid="classHermesProxy_1a8c73fe85b70edfb4b59f419520e96e96" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>UpdateHermes</name></member>
       <member refid="classHermesProxy_1a1596d70429b64082e19190d6d4a0e4fe" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>~HermesProxy</name></member>
     </listofallmembers>

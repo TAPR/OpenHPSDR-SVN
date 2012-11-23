@@ -400,13 +400,13 @@ fprintf(stderr,"metis_send_buffer. length= %d\nBuffer: ", length);
 
 
 for(int i=0; i<8; i++)
-  fprintf(stderr, "%0X.",(unsigned char)buffer[i]);
+  fprintf(stderr, "%02X.",(unsigned char)buffer[i]);
 fprintf(stderr, "  ");
 for(int i=8; i<16; i++)
-  fprintf(stderr, "%0X.",(unsigned char)buffer[i]);
+  fprintf(stderr, "%02X.",(unsigned char)buffer[i]);
 fprintf(stderr, "  ");
 for(int i=520; i<528; i++)
-  fprintf(stderr, "%0X.",(unsigned char)buffer[i]);
+  fprintf(stderr, "%02X.",(unsigned char)buffer[i]);
 fprintf(stderr,"\n");
 */
 

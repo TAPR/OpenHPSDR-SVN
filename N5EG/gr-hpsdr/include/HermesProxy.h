@@ -25,11 +25,14 @@
 // multiple instantiations of the HermesNB within GNURadio.
 // Note: multiple receivers on one Hermes is not implemented. 
 //
-// Version:  November 16, 2012
+// Version:  November 21, 2012
 
 
 #ifndef HermesProxy_H
 #define HermesProxy_H
+
+#include <gr_block.h>
+
 
 #define NUMRXIQBUFS	128		// number of receiver IQ buffers in circular queue.
 					// Must be integral power of 2 (2,4,8,16,32,64, etc.)
@@ -37,7 +40,18 @@
 #define RXBUFSIZE	256		// number of floats in one RxIQBuf, #complexes is half
 					// Must be integral power of 2 (2,4,8,16,32,64, etc.)
 
+#define NUMTXBUFS	16		// number of transmit buffers in circular queue
+					// Must be integral power of 2
+
+#define TXBUFSIZE	512		// number of bytes in one TxBuf
+					
+
 typedef float* IQBuf_t;			// IQ buffer type (IQ samples as floats)
+typedef unsigned char * RawBuf_t;	// Raw transmit buffer type
+
+enum {  PTTOff,				// PTT disabled
+	PTTVox,				// PTT vox mode (examines TxFrame to decide whether to Tx)
+	PTTOn };			// PTT force Tx on
 
 class HermesProxy
 {
@@ -49,8 +63,14 @@ private:
 	unsigned RxReadCounter;		// Which Rx buffer to read from
 	unsigned RxWriteFill;		// Fill level of the RxWrite buffer
 
+	RawBuf_t TxBuf[NUMTXBUFS]; 	// Transmit buffers
+	unsigned TxWriteCounter;	// Which Tx buffer to write to
+	unsigned TxReadCounter;		// Which Tx buffer to read from
+	unsigned TxControlCycler;	// Which Tx control register set to send
+	unsigned TxFrameIdleCount;	// How long we've gone since sending a TxFrame
+
 	unsigned long LostRxBufCount;	// Lost-buffer counter
-	unsigned long TotalRxBufCount;	// Total buffer count (will roll over often)
+	unsigned long TotalRxBufCount;	// Total buffer count (may roll over)
 
 public:
 
@@ -58,22 +78,35 @@ public:
 	unsigned TransmitFrequency;
 	int RxSampleRate;
 	unsigned char TxDrive;
-	bool TxPTT;
+	unsigned char RxAtten;		// not yet used (requires Hermes firmware V1.9)
+	int PTTMode;
 	bool RxPreamp;
 	bool ADCdither;
 	bool ADCrandom;
 	bool ADCoverload;
+	bool Duplex;
 	unsigned char HermesVersion;
+	bool PTTControlsTx;		// PTT not asserted mutes the transmitter
+	bool PTTMutesRx;		// PTT asserted mutes receiver
 
 	HermesProxy(int);		// constructor
 	~HermesProxy();			// destructor
+
 	void SendTxIQ();		// send an IQ buffer to Hermes transmit hardware
-	void ReceiveRxIQ(unsigned char * buffer); // receive an IQ buffer from Hermes hardware via metis.cc thread
+	int PutTxIQ(const gr_complex *, int);	// post a transmit TxIQ buffer
+	void ScheduleTxFrame(unsigned long);    // Schedule a Tx frame
+	RawBuf_t GetNextTxBuf(); // get an empty Tx Buffer
+
 	void UpdateHermes();		// update control registers in Hermes without any Tx data
-	IQBuf_t GetRxIQ();		// Gnurario pickup a received RxIQ buffer if available
+
+	void ReceiveRxIQ(unsigned char *); // receive an IQ buffer from Hermes hardware via metis.cc thread
+	IQBuf_t GetRxIQ();		// Gnuradio pickup a received RxIQ buffer if available
+	IQBuf_t GetNextRxBuf(IQBuf_t);  // return existing out buffer, next output buffer (if needed),
+					// or NULL if no new one available
+	void UnpackIQ(unsigned char*, IQBuf_t);	// unpack a received IQ sample
 
 	// Not yet implemented
-	void PutTxIQ(unsigned char * buffer);	// post a transmit TxIQ buffer
+
 	void SendAudioLR();		// send an LR audio buffer to Hermes hardware
 	void ReceiveMicLR();		// receive an LR audio bufer from Hermes hardware
 

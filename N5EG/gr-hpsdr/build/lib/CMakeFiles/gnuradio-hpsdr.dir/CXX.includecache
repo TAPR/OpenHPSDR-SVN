@@ -7,26 +7,16 @@
 #IncludeRegexTransform: 
 
 ../include/HermesProxy.h
-
-../include/hpsdr_api.h
-gruel/attributes.h
--
-
-../include/hpsdr_hermesNB.h
-hpsdr_api.h
--
 gr_block.h
 -
 
-/home/tom/gr-hpsdr/lib/hpsdr_hermesNB.cc
-config.h
-/home/tom/gr-hpsdr/lib/config.h
-gr_io_signature.h
--
-hpsdr_hermesNB.h
--
+../include/metis.h
+
+/home/tom/gr-hpsdr/lib/HermesProxy.cc
 HermesProxy.h
 /home/tom/gr-hpsdr/lib/HermesProxy.h
+metis.h
+/home/tom/gr-hpsdr/lib/metis.h
 stdio.h
 -
 
@@ -60,12 +50,6 @@ complex
 
 /usr/local/include/gnuradio/gr_core_api.h
 gruel/attributes.h
--
-
-/usr/local/include/gnuradio/gr_io_signature.h
-gr_core_api.h
--
-gr_runtime_types.h
 -
 
 /usr/local/include/gnuradio/gr_msg_accepter.h
