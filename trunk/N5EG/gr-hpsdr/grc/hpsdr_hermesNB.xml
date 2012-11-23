@@ -8,7 +8,11 @@
   <callback>set_ReceiveFrequency($RxF)</callback>
   <callback>set_RxSampRate($RxSmp)</callback>
   <callback>set_RxPreamp($RxPre)</callback>
- <callback>set_PTTMode($PTTmode)</callback>
+  <callback>set_PTTMode($PTTmode)</callback>
+  <callback>set_PTTOffMutesTx($PTTTx)</callback>
+  <callback>set_PTTOnMutesRx($PTTRx)</callback>
+  <callback>set_TxDrive($TxDrive)</callback>
+
  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
@@ -33,12 +37,29 @@
     <type>int</type>
   </param>
   <param>
+    <name>PTT On Mutes Rx</name>
+    <key>PTTRx</key>
+    <value>1</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>PTT Off Mutes Tx</name>
+    <key>PTTTx</key>
+    <value>1</value>
+    <type>int</type>
+  </param>
+  <param>
     <name>Tx PTT mode Off/Vox/On</name>
     <key>PTTmode</key>
     <value>0</value>
     <type>int</type>
   </param>
-
+  <param>
+    <name>Tx Drive Level (0..255)</name>
+    <key>TxDrive</key>
+    <value>255</value>
+    <type>int</type>
+  </param>
   <!-- Make one 'sink' node per input. Sub-nodes:
        * name (an identifier for the GUI)
        * type
@@ -60,11 +81,14 @@
   </source>
   <doc>
   This block is the HPSDR Hermes/Metis module.
-  It supports one receiver in the Narrow Band (digital downconversion) mode.
+  It supports only one receiver in the Narrow Band (digital downconversion) mode.
   Receive Frequency, Receive Sample Rate, and Receive Preamp can be set.
-  Currently does not support transmit operation, nor more than one receiver.
+  Supports transmit operation.
   RxSamp = 48000, 96000,  or 192000
   RxPreamp = 0 (Off), or  1 (On)
   PTTMode = 0 (TxOff),  1 (Vox on Txframe contents), or  2 (TxOn)
+  PTTOffMutesTx = 0 (Tx always emits), 1 (Tx IQ is zeroed when PTT is Off)
+  PTTOnMutesRx = 0 (Rx always receives), 1 (Rx IQ is zeroed when PTT is On)
+  TxDrive = 0..255 (0 is minimum (but not zero) drive.  255 is maximum drive)
   </doc>
 </block>
