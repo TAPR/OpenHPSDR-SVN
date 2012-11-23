@@ -157,6 +157,54 @@
         </inbodydescription>
         <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="67"/>
       </memberdef>
+      <memberdef kind="function" id="classhpsdr__hermesNB_1a7165e8334cb0bf146376f98ca58fb7c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hpsdr_hermesNB::set_PTTOffMutesTx</definition>
+        <argsstring>(int)</argsstring>
+        <name>set_PTTOffMutesTx</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpsdr__hermesNB_1aec7e983b2980b6039f2ac6479327317f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hpsdr_hermesNB::set_PTTOnMutesRx</definition>
+        <argsstring>(int)</argsstring>
+        <name>set_PTTOnMutesRx</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpsdr__hermesNB_1a91b6281016404b02904306fe237cbf1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hpsdr_hermesNB::set_TxDrive</definition>
+        <argsstring>(int)</argsstring>
+        <name>set_TxDrive</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="70"/>
+      </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1add1083f9e1eade21df7c228f0bb4c041" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
         <definition>int hpsdr_hermesNB::general_work</definition>
@@ -184,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="72"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="76"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -213,15 +261,18 @@
 </parameteritem>
 </parameterlist>
 </para>    </detaileddescription>
-    <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="57" bodyfile="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" bodystart="56" bodyend="73"/>
+    <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="57" bodyfile="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" bodystart="56" bodyend="77"/>
     <listofallmembers>
       <member refid="classhpsdr__hermesNB_1add1083f9e1eade21df7c228f0bb4c041" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>general_work</name></member>
       <member refid="classhpsdr__hermesNB_1a6fa8f08b8e5b8dc8810ee0f0efc2cda4" prot="private" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>hpsdr_hermesNB</name></member>
       <member refid="classhpsdr__hermesNB_1acb796edf3630b9351d4e5506706090b1" prot="private" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>hpsdr_make_hermesNB</name></member>
       <member refid="classhpsdr__hermesNB_1a1b334a44b65b4f0ba6b418ce27456952" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_PTTMode</name></member>
+      <member refid="classhpsdr__hermesNB_1a7165e8334cb0bf146376f98ca58fb7c2" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_PTTOffMutesTx</name></member>
+      <member refid="classhpsdr__hermesNB_1aec7e983b2980b6039f2ac6479327317f" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_PTTOnMutesRx</name></member>
       <member refid="classhpsdr__hermesNB_1a1b3aab6b66058577900d59ca2b54305c" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_ReceiveFrequency</name></member>
       <member refid="classhpsdr__hermesNB_1a192ae2f5222bb7bfc6b8862ed9592d2c" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_RxPreamp</name></member>
       <member refid="classhpsdr__hermesNB_1a61f313a8a3450250aa2270b2bda930c1" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_RxSampRate</name></member>
+      <member refid="classhpsdr__hermesNB_1a91b6281016404b02904306fe237cbf1b" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_TxDrive</name></member>
       <member refid="classhpsdr__hermesNB_1abe2ca9f06018189fdd1fc199941da199" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>~hpsdr_hermesNB</name></member>
     </listofallmembers>
   </compounddef>
