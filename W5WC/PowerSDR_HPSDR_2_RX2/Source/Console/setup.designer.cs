@@ -2556,24 +2556,23 @@
             // 
             this.grpSWRProtectionControl.Controls.Add(this.chkSWRTuneProtection);
             this.grpSWRProtectionControl.Controls.Add(this.chkSWRProtection);
-            this.grpSWRProtectionControl.Location = new System.Drawing.Point(432, 49);
+            this.grpSWRProtectionControl.Location = new System.Drawing.Point(429, 49);
             this.grpSWRProtectionControl.Name = "grpSWRProtectionControl";
-            this.grpSWRProtectionControl.Size = new System.Drawing.Size(137, 84);
+            this.grpSWRProtectionControl.Size = new System.Drawing.Size(143, 84);
             this.grpSWRProtectionControl.TabIndex = 5;
             this.grpSWRProtectionControl.TabStop = false;
             this.grpSWRProtectionControl.Text = "SWR Protection";
             // 
             // chkSWRTuneProtection
             // 
-            this.chkSWRTuneProtection.AutoSize = true;
             this.chkSWRTuneProtection.Checked = true;
             this.chkSWRTuneProtection.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSWRTuneProtection.Image = null;
-            this.chkSWRTuneProtection.Location = new System.Drawing.Point(13, 44);
+            this.chkSWRTuneProtection.Location = new System.Drawing.Point(24, 44);
             this.chkSWRTuneProtection.Name = "chkSWRTuneProtection";
-            this.chkSWRTuneProtection.Size = new System.Drawing.Size(104, 17);
+            this.chkSWRTuneProtection.Size = new System.Drawing.Size(116, 30);
             this.chkSWRTuneProtection.TabIndex = 4;
-            this.chkSWRTuneProtection.Text = "Disable on Tune";
+            this.chkSWRTuneProtection.Text = "Disable on Tune Pwr <10W";
             this.toolTip1.SetToolTip(this.chkSWRTuneProtection, "Disables SWR Protection during Tune.");
             this.chkSWRTuneProtection.UseVisualStyleBackColor = true;
             this.chkSWRTuneProtection.CheckedChanged += new System.EventHandler(this.chkSWRTuneProtection_CheckedChanged);
@@ -2584,7 +2583,7 @@
             this.chkSWRProtection.Checked = true;
             this.chkSWRProtection.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSWRProtection.Image = null;
-            this.chkSWRProtection.Location = new System.Drawing.Point(13, 21);
+            this.chkSWRProtection.Location = new System.Drawing.Point(24, 21);
             this.chkSWRProtection.Name = "chkSWRProtection";
             this.chkSWRProtection.Size = new System.Drawing.Size(110, 17);
             this.chkSWRProtection.TabIndex = 3;
