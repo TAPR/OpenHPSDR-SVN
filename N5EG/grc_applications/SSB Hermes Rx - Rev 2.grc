@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Fri Nov 23 11:34:08 2012</timestamp>
+  <timestamp>Sat Nov 24 15:19:24 2012</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -54,84 +54,6 @@
     <param>
       <key>_coordinate</key>
       <value>(10, 10)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>48000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(171, 11)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable_qtgui_range</key>
-    <param>
-      <key>id</key>
-      <value>RxFreq</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value></value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>7200000</value>
-    </param>
-    <param>
-      <key>start</key>
-      <value>7000000</value>
-    </param>
-    <param>
-      <key>stop</key>
-      <value>7300000</value>
-    </param>
-    <param>
-      <key>step</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>counter_slider</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.Horizontal</value>
-    </param>
-    <param>
-      <key>min_len</key>
-      <value>700</value>
-    </param>
-    <param>
-      <key>gui_hint</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(264, 12)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -329,6 +251,124 @@
     </param>
   </block>
   <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>48000</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(171, 11)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_qtgui_chooser</key>
+    <param>
+      <key>id</key>
+      <value>PTT</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>raw</value>
+    </param>
+    <param>
+      <key>num_opts</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>options</key>
+      <value>[0, 1, 2]</value>
+    </param>
+    <param>
+      <key>labels</key>
+      <value>[]</value>
+    </param>
+    <param>
+      <key>option0</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>label0</key>
+      <value>PTT Off</value>
+    </param>
+    <param>
+      <key>option1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label1</key>
+      <value>PTT Vox</value>
+    </param>
+    <param>
+      <key>option2</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>label2</key>
+      <value>PTT On</value>
+    </param>
+    <param>
+      <key>option3</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>label3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>option4</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>label4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>radio_buttons</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.QVBoxLayout</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value>1,3,1,1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(655, 2)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>variable_qtgui_chooser</key>
     <param>
       <key>id</key>
@@ -416,7 +456,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(773, 12)</value>
+      <value>(768, 2)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -511,7 +551,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(914, 12)</value>
+      <value>(909, 5)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -519,22 +559,54 @@
     </param>
   </block>
   <block>
-    <key>note</key>
+    <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
-      <value>note_0</value>
+      <value>RxFreq</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>note</key>
-      <value>AGC needs improvement.</value>
+      <key>label</key>
+      <value>Rx Frequency</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>7200000</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>7000000</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>7300000</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1000</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>700</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(513, 594)</value>
+      <value>(171, 76)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -542,10 +614,329 @@
     </param>
   </block>
   <block>
-    <key>gr_multiply_const_vxx</key>
+    <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
-      <value>gr_multiply_const_vxx_0_0</value>
+      <value>TxFreq</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Tx Frequency</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>7200000</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>7000000</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>7300000</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1000</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>700</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(11, 76)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_qtgui_entry</key>
+    <param>
+      <key>id</key>
+      <value>TxD</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Transmit Drive Level (0..255)</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>int</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value>1,6,1,1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(275, 10)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>hpsdr_hermesNB</key>
+    <param>
+      <key>id</key>
+      <value>hpsdr_hermesNB_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>RxF</key>
+      <value>RxFreq</value>
+    </param>
+    <param>
+      <key>TxF</key>
+      <value>TxFreq</value>
+    </param>
+    <param>
+      <key>RxSmp</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>RxPre</key>
+      <value>Preamp</value>
+    </param>
+    <param>
+      <key>PTTRx</key>
+      <value>PTTRx</value>
+    </param>
+    <param>
+      <key>PTTTx</key>
+      <value>PTTTx</value>
+    </param>
+    <param>
+      <key>PTTmode</key>
+      <value>PTT</value>
+    </param>
+    <param>
+      <key>TxDrive</key>
+      <value>TxD</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(221, 279)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_agc2_xx</key>
+    <param>
+      <key>id</key>
+      <value>gr_agc2_xx_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>attack_rate</key>
+      <value>0.25</value>
+    </param>
+    <param>
+      <key>decay_rate</key>
+      <value>40e-6</value>
+    </param>
+    <param>
+      <key>reference</key>
+      <value>1.0</value>
+    </param>
+    <param>
+      <key>gain</key>
+      <value>0.0</value>
+    </param>
+    <param>
+      <key>max_gain</key>
+      <value>1000000.0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(597, 568)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_complex_to_float</key>
+    <param>
+      <key>id</key>
+      <value>gr_complex_to_float_0_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(781, 686)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_sig_source_x</key>
+    <param>
+      <key>id</key>
+      <value>gr_sig_source_x_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>48000</value>
+    </param>
+    <param>
+      <key>waveform</key>
+      <value>gr.GR_COS_WAVE</value>
+    </param>
+    <param>
+      <key>freq</key>
+      <value>400</value>
+    </param>
+    <param>
+      <key>amp</key>
+      <value>.5</value>
+    </param>
+    <param>
+      <key>offset</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(21, 323)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_complex_to_float</key>
+    <param>
+      <key>id</key>
+      <value>gr_complex_to_float_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(702, 337)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_hilbert_fc</key>
+    <param>
+      <key>id</key>
+      <value>gr_hilbert_fc_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>num_taps</key>
+      <value>128</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(918, 327)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_hilbert_fc</key>
+    <param>
+      <key>id</key>
+      <value>gr_hilbert_fc_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>num_taps</key>
+      <value>128</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(911, 384)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_add_xx</key>
+    <param>
+      <key>id</key>
+      <value>gr_add_xx_0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -556,8 +947,8 @@
       <value>float</value>
     </param>
     <param>
-      <key>const</key>
-      <value>-Sideband</value>
+      <key>num_inputs</key>
+      <value>2</value>
     </param>
     <param>
       <key>vlen</key>
@@ -565,7 +956,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(160, 526)</value>
+      <value>(370, 457)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -573,10 +964,33 @@
     </param>
   </block>
   <block>
-    <key>gr_multiply_const_vxx</key>
+    <key>gr_complex_to_float</key>
     <param>
       <key>id</key>
-      <value>gr_multiply_const_vxx_0</value>
+      <value>gr_complex_to_float_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(78, 457)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_add_xx</key>
+    <param>
+      <key>id</key>
+      <value>gr_add_xx_1</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -587,8 +1001,8 @@
       <value>float</value>
     </param>
     <param>
-      <key>const</key>
-      <value>Sideband</value>
+      <key>num_inputs</key>
+      <value>2</value>
     </param>
     <param>
       <key>vlen</key>
@@ -596,7 +1010,53 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(164, 485)</value>
+      <value>(380, 704)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_complex_to_float</key>
+    <param>
+      <key>id</key>
+      <value>gr_complex_to_float_0_1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(79, 706)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_float_to_complex</key>
+    <param>
+      <key>id</key>
+      <value>gr_float_to_complex_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(388, 584)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -631,7 +1091,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(934, 492)</value>
+      <value>(917, 588)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -639,56 +1099,10 @@
     </param>
   </block>
   <block>
-    <key>gr_float_to_complex</key>
+    <key>gr_multiply_const_vxx</key>
     <param>
       <key>id</key>
-      <value>gr_float_to_complex_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(405, 488)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_complex_to_float</key>
-    <param>
-      <key>id</key>
-      <value>gr_complex_to_float_0_1</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(96, 610)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_add_xx</key>
-    <param>
-      <key>id</key>
-      <value>gr_add_xx_1</value>
+      <value>gr_multiply_const_vxx_0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -699,8 +1113,8 @@
       <value>float</value>
     </param>
     <param>
-      <key>num_inputs</key>
-      <value>2</value>
+      <key>const</key>
+      <value>Sideband</value>
     </param>
     <param>
       <key>vlen</key>
@@ -708,7 +1122,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(397, 608)</value>
+      <value>(147, 581)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -716,109 +1130,22 @@
     </param>
   </block>
   <block>
-    <key>variable_qtgui_chooser</key>
+    <key>gr_multiply_const_vxx</key>
     <param>
       <key>id</key>
-      <value>PTT</value>
+      <value>gr_multiply_const_vxx_0_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value></value>
     </param>
     <param>
       <key>type</key>
-      <value>int</value>
+      <value>float</value>
     </param>
     <param>
-      <key>num_opts</key>
-      <value>3</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>options</key>
-      <value>[0, 1, 2]</value>
-    </param>
-    <param>
-      <key>labels</key>
-      <value>[]</value>
-    </param>
-    <param>
-      <key>option0</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>label0</key>
-      <value>PTT Off</value>
-    </param>
-    <param>
-      <key>option1</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>label1</key>
-      <value>PTT Vox</value>
-    </param>
-    <param>
-      <key>option2</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>label2</key>
-      <value>PTT On</value>
-    </param>
-    <param>
-      <key>option3</key>
-      <value>3</value>
-    </param>
-    <param>
-      <key>label3</key>
-      <value></value>
-    </param>
-    <param>
-      <key>option4</key>
-      <value>4</value>
-    </param>
-    <param>
-      <key>label4</key>
-      <value></value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>radio_buttons</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.QVBoxLayout</value>
-    </param>
-    <param>
-      <key>gui_hint</key>
-      <value>1,3,1,1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(655, 13)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_complex_to_float</key>
-    <param>
-      <key>id</key>
-      <value>gr_complex_to_float_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
+      <key>const</key>
+      <value>-Sideband</value>
     </param>
     <param>
       <key>vlen</key>
@@ -826,7 +1153,30 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(95, 361)</value>
+      <value>(143, 622)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>note</key>
+    <param>
+      <key>id</key>
+      <value>note_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>note</key>
+      <value>AGC needs improvement.</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(496, 690)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -885,263 +1235,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(499, 193)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_add_xx</key>
-    <param>
-      <key>id</key>
-      <value>gr_add_xx_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(387, 361)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_hilbert_fc</key>
-    <param>
-      <key>id</key>
-      <value>gr_hilbert_fc_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>num_taps</key>
-      <value>128</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(928, 288)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_hilbert_fc</key>
-    <param>
-      <key>id</key>
-      <value>gr_hilbert_fc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>num_taps</key>
-      <value>128</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(935, 231)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_complex_to_float</key>
-    <param>
-      <key>id</key>
-      <value>gr_complex_to_float_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(719, 241)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_sig_source_x</key>
-    <param>
-      <key>id</key>
-      <value>gr_sig_source_x_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>48000</value>
-    </param>
-    <param>
-      <key>waveform</key>
-      <value>gr.GR_COS_WAVE</value>
-    </param>
-    <param>
-      <key>freq</key>
-      <value>400</value>
-    </param>
-    <param>
-      <key>amp</key>
-      <value>.5</value>
-    </param>
-    <param>
-      <key>offset</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(38, 227)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>hpsdr_hermesNB</key>
-    <param>
-      <key>id</key>
-      <value>hpsdr_hermesNB_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>RxF</key>
-      <value>RxFreq</value>
-    </param>
-    <param>
-      <key>RxSmp</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>RxPre</key>
-      <value>Preamp</value>
-    </param>
-    <param>
-      <key>PTTRx</key>
-      <value>PTTRx</value>
-    </param>
-    <param>
-      <key>PTTTx</key>
-      <value>PTTTx</value>
-    </param>
-    <param>
-      <key>PTTmode</key>
-      <value>PTT</value>
-    </param>
-    <param>
-      <key>TxDrive</key>
-      <value>255</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(238, 209)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_complex_to_float</key>
-    <param>
-      <key>id</key>
-      <value>gr_complex_to_float_0_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(798, 590)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_agc2_xx</key>
-    <param>
-      <key>id</key>
-      <value>gr_agc2_xx_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>attack_rate</key>
-      <value>0.25</value>
-    </param>
-    <param>
-      <key>decay_rate</key>
-      <value>40e-6</value>
-    </param>
-    <param>
-      <key>reference</key>
-      <value>1.0</value>
-    </param>
-    <param>
-      <key>gain</key>
-      <value>0.0</value>
-    </param>
-    <param>
-      <key>max_gain</key>
-      <value>1000000.0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(614, 472)</value>
+      <value>(482, 289)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1149,98 +1243,8 @@
     </param>
   </block>
   <connection>
-    <source_block_id>gr_complex_to_float_0_0_0</source_block_id>
-    <sink_block_id>audio_sink_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_float_to_complex_0</source_block_id>
-    <sink_block_id>gr_agc2_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_agc2_xx_0</source_block_id>
-    <sink_block_id>gr_complex_to_float_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_complex_to_float_0_1</source_block_id>
-    <sink_block_id>gr_multiply_const_vxx_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_complex_to_float_0_1</source_block_id>
-    <sink_block_id>gr_add_xx_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_multiply_const_vxx_0_0</source_block_id>
-    <sink_block_id>gr_add_xx_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_add_xx_1</source_block_id>
-    <sink_block_id>gr_float_to_complex_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_hilbert_fc_0</source_block_id>
-    <sink_block_id>gr_complex_to_float_0_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>hpsdr_hermesNB_0</source_block_id>
-    <sink_block_id>band_pass_filter_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_hilbert_fc_0_0</source_block_id>
-    <sink_block_id>gr_complex_to_float_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_complex_to_float_0_0</source_block_id>
-    <sink_block_id>gr_add_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_multiply_const_vxx_0</source_block_id>
-    <sink_block_id>gr_add_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_complex_to_float_0_0</source_block_id>
-    <sink_block_id>gr_multiply_const_vxx_0_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_add_xx_0</source_block_id>
-    <sink_block_id>gr_float_to_complex_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_complex_to_float_0</source_block_id>
-    <sink_block_id>gr_hilbert_fc_0_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>gr_complex_to_float_0</source_block_id>
-    <sink_block_id>gr_hilbert_fc_0</sink_block_id>
+    <source_block_id>gr_sig_source_x_0</source_block_id>
+    <sink_block_id>hpsdr_hermesNB_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1251,8 +1255,98 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>gr_sig_source_x_0</source_block_id>
-    <sink_block_id>hpsdr_hermesNB_0</sink_block_id>
+    <source_block_id>gr_complex_to_float_0</source_block_id>
+    <sink_block_id>gr_hilbert_fc_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_complex_to_float_0</source_block_id>
+    <sink_block_id>gr_hilbert_fc_0_0</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_add_xx_0</source_block_id>
+    <sink_block_id>gr_float_to_complex_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_complex_to_float_0_0</source_block_id>
+    <sink_block_id>gr_multiply_const_vxx_0_0</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_multiply_const_vxx_0</source_block_id>
+    <sink_block_id>gr_add_xx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_complex_to_float_0_0</source_block_id>
+    <sink_block_id>gr_add_xx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_hilbert_fc_0_0</source_block_id>
+    <sink_block_id>gr_complex_to_float_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>hpsdr_hermesNB_0</source_block_id>
+    <sink_block_id>band_pass_filter_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_hilbert_fc_0</source_block_id>
+    <sink_block_id>gr_complex_to_float_0_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_add_xx_1</source_block_id>
+    <sink_block_id>gr_float_to_complex_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_multiply_const_vxx_0_0</source_block_id>
+    <sink_block_id>gr_add_xx_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_complex_to_float_0_1</source_block_id>
+    <sink_block_id>gr_add_xx_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_complex_to_float_0_1</source_block_id>
+    <sink_block_id>gr_multiply_const_vxx_0</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_agc2_xx_0</source_block_id>
+    <sink_block_id>gr_complex_to_float_0_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_float_to_complex_0</source_block_id>
+    <sink_block_id>gr_agc2_xx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_complex_to_float_0_0_0</source_block_id>
+    <sink_block_id>audio_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
