@@ -154,7 +154,7 @@
 <codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//<sp/>multiple<sp/>instantiations<sp/>of<sp/>the<sp/>HermesNB<sp/>within<sp/>GNURadio.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Note:<sp/>multiple<sp/>receivers<sp/>on<sp/>one<sp/>Hermes<sp/>is<sp/>not<sp/>implemented.<sp/></highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Version:<sp/><sp/>November<sp/>21,<sp/>2012</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Version:<sp/><sp/>November<sp/>24,<sp/>2012</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>HermesProxy_H</highlight></codeline>

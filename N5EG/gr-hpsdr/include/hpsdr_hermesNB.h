@@ -19,7 +19,7 @@
  */
 
 //
-// Version: November 16, 2012
+// Version: November 24, 2012
 
 
 #ifndef INCLUDED_HPSDR_HERMESNB_H
@@ -62,6 +62,7 @@ class HPSDR_API hpsdr_hermesNB : public gr_block
  public:
 	~hpsdr_hermesNB();
 	void set_ReceiveFrequency(float);	// callback
+	void set_TransmitFrequency(float);	// callback
 	void set_RxSampRate(int);		// callback
 	void set_RxPreamp(int);			// callback
 	void set_PTTMode(int);			// callback
