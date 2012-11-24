@@ -70,43 +70,49 @@ hpsdr_hermesNB::hpsdr_hermesNB (int RxF, int RxSmp, int RxPre)
 void hpsdr_hermesNB::set_ReceiveFrequency (float RxF) // callback to allow slider to set frequency
 {
 	Hermes->ReceiveFrequency = (unsigned)RxF;	// slider must be of type real, convert to unsigned
-	Hermes->UpdateHermes();			// FIXME: temporary until have TxData-> Hermes coded
+	//Hermes->UpdateHermes();			// assume that we always have somthing to be Tx'd.	
+}
+
+void hpsdr_hermesNB::set_TransmitFrequency (float TxF) // callback to allow slider to set frequency
+{
+	Hermes->TransmitFrequency = (unsigned)TxF;	// slider must be of type real, convert to unsigned
+	//Hermes->UpdateHermes();			
 }
 
 void hpsdr_hermesNB::set_RxSampRate(int RxSmp)	// callback to set RxSampleRate
 {
 	Hermes->RxSampleRate = RxSmp;
-	Hermes->UpdateHermes();
+	//Hermes->UpdateHermes();
 }
 
 void hpsdr_hermesNB::set_RxPreamp(int RxPre)	// callback to set RxPreamp on or off
 {
 	Hermes->RxPreamp = (bool)RxPre;
-	Hermes->UpdateHermes();
+	//Hermes->UpdateHermes();
 }
 
 void hpsdr_hermesNB::set_PTTMode(int PTTmode)	// callback to set PTTMode (Off, Vox, On)
 {
 	Hermes->PTTMode = PTTmode;
-	Hermes->UpdateHermes();
+	//Hermes->UpdateHermes();
 }
 
 void hpsdr_hermesNB::set_PTTOffMutesTx(int PTTTx)	// callback to set PTTOffMmutesTx (Off, On)
 {
 	Hermes->PTTOffMutesTx = PTTTx;
-	Hermes->UpdateHermes();
+	//Hermes->UpdateHermes();
 }
 
 void hpsdr_hermesNB::set_PTTOnMutesRx(int PTTRx)	// callback to set PTTOnMutesRx (Off, On)
 {
 	Hermes->PTTOnMutesRx = PTTRx;
-	Hermes->UpdateHermes();
+	//Hermes->UpdateHermes();
 }
  
 void hpsdr_hermesNB::set_TxDrive(int TxD)	// callback to set Transmit Drive Level (0..255)
 {
-	Hermes->TxDrive = TxD;
-	Hermes->UpdateHermes();
+	Hermes->TxDrive = (unsigned char)TxD;
+	//Hermes->UpdateHermes();
 }
 
 

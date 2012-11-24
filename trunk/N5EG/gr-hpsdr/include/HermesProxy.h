@@ -25,7 +25,7 @@
 // multiple instantiations of the HermesNB within GNURadio.
 // Note: multiple receivers on one Hermes is not implemented. 
 //
-// Version:  November 21, 2012
+// Version:  November 24, 2012
 
 
 #ifndef HermesProxy_H

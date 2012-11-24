@@ -12,6 +12,7 @@
   <callback>set_PTTOffMutesTx($PTTTx)</callback>
   <callback>set_PTTOnMutesRx($PTTRx)</callback>
   <callback>set_TxDrive($TxDrive)</callback>
+  <callback>set_TransmitFrequency($TxF)</callback>
 
  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
@@ -21,6 +22,12 @@
   <param>
     <name>Receive Frequency, Hz.</name>
     <key>RxF</key>
+    <value>7200000</value>
+    <type>real</type>
+  </param>
+  <param>
+    <name>Transmit Frequency, Hz.</name>
+    <key>TxF</key>
     <value>7200000</value>
     <type>real</type>
   </param>
@@ -90,5 +97,6 @@
   PTTOffMutesTx = 0 (Tx always emits), 1 (Tx IQ is zeroed when PTT is Off)
   PTTOnMutesRx = 0 (Rx always receives), 1 (Rx IQ is zeroed when PTT is On)
   TxDrive = 0..255 (0 is minimum (but not zero) drive.  255 is maximum drive)
+
   </doc>
 </block>

@@ -37,7 +37,7 @@
 // HermesNB uses this proxy to convert raw data and control flags
 // and send/receive them to Hermes.
 //
-// Version:  November 16, 2012
+// Version:  November 24, 2012
 
 #include "HermesProxy.h"
 #include "metis.h"
@@ -51,12 +51,12 @@ HermesProxy::HermesProxy(int RxFreq)	// constructor
 
 
 	RxSampleRate = 192000;
-	TxDrive = 0xf0;
+	TxDrive = 0x00;		// default to (almost) off
 	PTTMode = PTTOff;
 	RxPreamp = false;
 	ADCdither = false;
 	ADCrandom = false;
-	Duplex = true;
+	Duplex = true;		// Allows TxF to program separately from RxF
 	PTTOffMutesTx = true;   // PTT Off mutes the transmitter
 	PTTOnMutesRx = true;	// PTT On mutes receiver
 
@@ -75,15 +75,14 @@ HermesProxy::HermesProxy(int RxFreq)	// constructor
 	
 	// allocate the receiver buffers
 	for(int i=0; i<NUMRXIQBUFS; i++)
-		RxIQBuf[i] = new float[RXBUFSIZE];	// 128 real + 128 imag floats
+		RxIQBuf[i] = new float[RXBUFSIZE];
 
 	// allocate the transmit buffers
 	for(int i=0; i<NUMTXBUFS; i++)
-		TxBuf[i] = new unsigned char[TXBUFSIZE];	// 1032 bytes each
-
+		TxBuf[i] = new unsigned char[TXBUFSIZE];
 
 	ReceiveFrequency = (unsigned)RxFreq; 
-	TransmitFrequency = 3500000;
+	TransmitFrequency = ReceiveFrequency;		// initialize transceive
 
 	const char* interface = "eth0";	// Discover Hermes connected to eth0
 	metis_discover(interface);
@@ -285,6 +284,10 @@ IQBuf_t HermesProxy::GetRxIQ()		// called by HermesNB to pickup any RxIQ
 
 void HermesProxy::UpdateHermes()	// send a set of control registers to hardware with naught Tx data
 {
+
+	// DEBUG
+	//fprintf(stderr, "UpdateHermes called\n");
+
 	unsigned char buffer[512];	// dummy up a USB HPSDR buffer;
 	for(int i=0; i<512; i++)
 		buffer[i] = 0;
@@ -293,6 +296,7 @@ void HermesProxy::UpdateHermes()	// send a set of control registers to hardware 
 	unsigned char ep = 0x02;	// all Hermes data is sent to end point 2
 	unsigned char Speed = 0;	// Rx sample rate
 	unsigned char RxCtrl = 0;	// Rx controls
+	unsigned char Ctrl4 = 0;	// Rx number and duplex
 
 	if(RxSampleRate == 192000)
 		Speed = 0x02;
@@ -300,6 +304,7 @@ void HermesProxy::UpdateHermes()	// send a set of control registers to hardware 
 		Speed = 0x01;
 	if(RxSampleRate == 48000)
 		Speed = 0x00;
+	
 
 	if(RxPreamp)
 		RxCtrl += 0x04;
@@ -308,27 +313,47 @@ void HermesProxy::UpdateHermes()	// send a set of control registers to hardware 
 	if(ADCrandom)
 		RxCtrl += 0x10;
 
+	if(Duplex)
+		Ctrl4 |= 0x04;
+
 	// metis_write requires two 512 byte USB buffers to make one ethernet write to the hardware
 
 	buffer[0] = buffer[1] = buffer[2] = 0x7f;	// HPSDR sync
-	buffer[3] = 0;					// c0=0 --> RxControls, no PTT
+	buffer[3] = 0x00;					// c0=0 --> RxControls, no PTT
 	buffer[4] = Speed;				// c1
 	buffer[5] = 0;					// c2
 	buffer[6] = RxCtrl;				// c3
-	buffer[7] = 0;					// c4 (0x0 = one Rx, 0x7 = eight Rx)
+	buffer[7] = Ctrl4;				// c4 (0x0 = one Rx, 0x7 = eight Rx)
 
 	metis_write(ep, buffer, length);
 
 
 	buffer[0] = buffer[1] = buffer[2] = 0x7f;	// HPSDR sync
-	buffer[3] = 0x02;				// c0=2 --> Tx and Rx[0] Frequency, no PTT
-							// this is only Rx[0] if one Rx selected and not in duplex.
+	buffer[3] = 0x02;				// c0=2 --> Tx Frequency, no PTT
+							
+	buffer[4] = (unsigned char)(TransmitFrequency >> 24) & 0xff;	// c1 RxFreq MSB
+	buffer[5] = (unsigned char)(TransmitFrequency >> 16) & 0xff;	// c2
+	buffer[6] = (unsigned char)(TransmitFrequency >> 8) & 0xff;	// c3
+	buffer[7] = (unsigned char)(TransmitFrequency) & 0xff;		// c4 RxFreq LSB
+
+	metis_write(ep, buffer, length);
+
+
+	buffer[0] = buffer[1] = buffer[2] = 0x7f;	// HPSDR sync
+	buffer[3] = 0x04;				// c0=4 --> Rx1 Frequency, no PTT
 	buffer[4] = (unsigned char)(ReceiveFrequency >> 24) & 0xff;	// c1 RxFreq MSB
 	buffer[5] = (unsigned char)(ReceiveFrequency >> 16) & 0xff;	// c2
 	buffer[6] = (unsigned char)(ReceiveFrequency >> 8) & 0xff;	// c3
 	buffer[7] = (unsigned char)(ReceiveFrequency) & 0xff;		// c4 RxFreq LSB
 
 	metis_write(ep, buffer, length);
+
+	buffer[0] = buffer[1] = buffer[2] = 0x7f;	// HPSDR sync
+	buffer[3] = 0x12;				// c0=12 --> TxDrive
+	buffer[4] = TxDrive;
+	buffer[5] = 0x00;				// c2
+	buffer[6] = 0x00;				// c3
+	buffer[7] = 0x00;				// c4 RxFreq LSB
 
 	return;
 }
@@ -351,8 +376,8 @@ int HermesProxy::PutTxIQ(const gr_complex * in, int nsamples) // called by Herme
 	if (outbuf == NULL)		// Could not get a Tx buffer
 	  return 0;		 	// Tell hermeNB we didn't consume any input
 
-	TxControlCycler++;		// advance to next register bank, modulo
-	if (TxControlCycler >= 10)	// 10 register banks (0..9). Note: not yet using bank 10
+	TxControlCycler += 2;		// advance to next register bank, modulo
+	if (TxControlCycler >= 20)	// 10 register banks (0..9). Note: not yet using bank 10
 	  TxControlCycler = 0;		//    (Hermes attenuator) which requires firmware V1.9
 
 	// format a HPSDR USB frame to send to Hermes.
@@ -362,7 +387,7 @@ int HermesProxy::PutTxIQ(const gr_complex * in, int nsamples) // called by Herme
 
 	outbuf[0] = outbuf[1] = outbuf[2] = 0x7f;	// HPSDR USB sync
 
-	outbuf[3] = TxControlCycler * 2;		// C0 Control Register (Bank Sel + PTT)
+	outbuf[3] = TxControlCycler;		// C0 Control Register (Bank Sel + PTT)
 	if (PTTMode == PTTOn)
 	  outbuf[3] |= 0x01;				// set MOX bit
 
@@ -377,7 +402,7 @@ int HermesProxy::PutTxIQ(const gr_complex * in, int nsamples) // called by Herme
 		Speed = 0x00;
 
 	    if(Duplex)
-		Ctrl4 |= 0x02;
+		Ctrl4 |= 0x04;
 
 	    if(RxPreamp)
 		RxCtrl += 0x04;
@@ -390,49 +415,48 @@ int HermesProxy::PutTxIQ(const gr_complex * in, int nsamples) // called by Herme
 	    outbuf[5] = 0;				// C2
 	    outbuf[6] = RxCtrl;				// C3
 	    outbuf[7] = Ctrl4;				// C4 - #Rx, Duplex
+
             break;
 
-	  case 1:					// Tx NCO freq (and Rx NCO for special case)
-	    outbuf[4] = (unsigned char)(ReceiveFrequency >> 24) & 0xff;	// c1 RxFreq MSB
-	    outbuf[5] = (unsigned char)(ReceiveFrequency >> 16) & 0xff;	// c2
-	    outbuf[6] = (unsigned char)(ReceiveFrequency >> 8) & 0xff;	// c3
-	    outbuf[7] = (unsigned char)(ReceiveFrequency) & 0xff;		// c4 RxFreq LSB
+	  case 2:					// Tx NCO freq (and Rx NCO for special case)
+	    outbuf[4] = (unsigned char)(TransmitFrequency >> 24) & 0xff;	// c1 RxFreq MSB
+	    outbuf[5] = (unsigned char)(TransmitFrequency >> 16) & 0xff;	// c2
+	    outbuf[6] = (unsigned char)(TransmitFrequency >> 8) & 0xff;	// c3
+	    outbuf[7] = (unsigned char)(TransmitFrequency) & 0xff;		// c4 RxFreq LSB
            break;
 
-	  case 2:					// Rx1 NCO freq (normal case)
+	  case 4:					// Rx1 NCO freq (normal case)
 	    outbuf[4] = (unsigned char)(ReceiveFrequency >> 24) & 0xff;	// c1 RxFreq MSB
 	    outbuf[5] = (unsigned char)(ReceiveFrequency >> 16) & 0xff;	// c2
 	    outbuf[6] = (unsigned char)(ReceiveFrequency >> 8) & 0xff;	// c3
 	    outbuf[7] = (unsigned char)(ReceiveFrequency) & 0xff;		// c4 RxFreq LSB
 	  break;
 
-	  case 3:					// Rx2 NCO freq
-	  case 4:					// Rx3 NCO freq
-	  case 5:					// Rx4 NCO freq
-	  case 6:					// Rx5 NCO freq
-	  case 7:					// Rx6 NCO freq
-	  case 8:					// Rx7 NCO freq
+	  case 6:					// Rx2 NCO freq
+	  case 8:					// Rx3 NCO freq
+	  case 10:					// Rx4 NCO freq
+	  case 12:					// Rx5 NCO freq
+	  case 14:					// Rx6 NCO freq
+	  case 16:					// Rx7 NCO freq
 	    outbuf[4] = 0;				// c1 RxFreq MSB
 	    outbuf[5] = 0;				// c2
 	    outbuf[6] = 0;				// c3
 	    outbuf[7] = 0;				// c4 RxFreq LSB
 	  break;
 
-	  case 9:					// drive level & filt select (if Alex)
+	  case 18:					// drive level & filt select (if Alex)
 
-	    unsigned char TxLevel;
 	    if (PTTOffMutesTx & (PTTMode == PTTOff))
-		TxLevel = 0;				// kill Tx when PTTOff and PTTControlsTx
+		outbuf[4] = 0;				// (almost) kill Tx when PTTOff and PTTControlsTx
 	    else
-		TxLevel = TxDrive;
+		outbuf[4] = TxDrive;
 
-	    outbuf[4] = TxLevel;			// drive level
 	    outbuf[5] = 0;				// Apollo selections
 	    outbuf[6] = 0;				// Alex filter selections 1
 	    outbuf[7] = 0;				// Alex filter selections 2
 	  break;
 
-	  case 10:					// Hermes input attenuator setting
+	  case 20:					// Hermes input attenuator setting
 	    outbuf[4] = RxAtten;			// 0..31 dB attenuator setting (not used yet)
 	    outbuf[5] = 0;				// Not implemented yet, should not be called by
 	    outbuf[6] = 0;				// TxControlCycler yet.
