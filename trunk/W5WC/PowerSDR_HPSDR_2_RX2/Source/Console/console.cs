@@ -768,6 +768,8 @@ namespace PowerSDR
         private bool wfmaxadjust = false;
         private bool wfminadjust = false;
 
+        public double alex_fwd = 0;
+        public double alex_rev = 0;
         // BT 11/05/2007
         public PowerSDR.RemoteProfiles ProfileForm;
         private string machineName = System.Environment.MachineName;
@@ -7452,13 +7454,13 @@ namespace PowerSDR
                 power_table[i] = new float[13];
 
             // Radio / Band / PA Gain
-          /*  pa_gain_by_radio = new float[(int)HPSDRModel.LAST][][];
-            for (int i = 0; i < (int)HPSDRModel.LAST; i++)
-            {
-                pa_gain_by_radio[i] = new float[(int)Band.LAST][];
-                for (int j = 0; j < (int)Band.LAST; j++)
-                    pa_gain_by_radio[i][j] = new float[13];
-            } */
+            /*  pa_gain_by_radio = new float[(int)HPSDRModel.LAST][][];
+              for (int i = 0; i < (int)HPSDRModel.LAST; i++)
+              {
+                  pa_gain_by_radio[i] = new float[(int)Band.LAST][];
+                  for (int j = 0; j < (int)Band.LAST; j++)
+                      pa_gain_by_radio[i][j] = new float[13];
+              } */
 
             //float [,,] pa_gain_by_rad = new float[(int)HPSDRModel.LAST, (int)Band.LAST, 13];
 
@@ -10704,9 +10706,9 @@ namespace PowerSDR
             comboRX2MeterMode.Items.Add("Off");
 
             comboMeterTXMode.Items.Add("Fwd Pwr");
-           // comboMeterTXMode.Items.Add("Ref Pwr");
-           // comboMeterTXMode.Items.Add("Fwd/SWR");
-           // comboMeterTXMode.Items.Add("SWR");
+            // comboMeterTXMode.Items.Add("Ref Pwr");
+            // comboMeterTXMode.Items.Add("Fwd/SWR");
+            // comboMeterTXMode.Items.Add("SWR");
             comboMeterTXMode.Items.Add("Mic");
             comboMeterTXMode.Items.Add("EQ");
             comboMeterTXMode.Items.Add("Leveler");
@@ -12636,7 +12638,14 @@ namespace PowerSDR
         {
             double swr;
 
-            if (!swrprotection || !alexpresent || (disable_swr_on_tune && chkTUN.Checked) || (g_fwd == 0 && g_rev == 0) || g_fwd < 1)
+            if (chkTUN.Checked && disable_swr_on_tune)
+            {
+                if ((alexpresent || apollopresent) && (alex_fwd <= 10.0))
+                    JanusAudio.SetSWRProtect(1.0f);
+                return 1.0;
+            }
+
+            if (!swrprotection || !alexpresent || (g_fwd == 0 && g_rev == 0) || g_fwd < 1)
             {
                 JanusAudio.SetSWRProtect(1.0f);
                 return 1.0;
@@ -29928,7 +29937,6 @@ namespace PowerSDR
 
         public void UpdateRX1DisplayAverage(float[] buffer, float[] new_data)
         {
-            double dttsp_osc = radio.GetDSPRX(0, 0).RXOsc;
             // Debug.WriteLine("last vfo: " + avg_last_ddsfreq + " vfo: " + DDSFreq); 
             if (buffer[0] == Display.CLEAR_FLAG)
             {
@@ -29939,23 +29947,14 @@ namespace PowerSDR
             else
             {
                 // wjt added -- stop hosing the avg display when scrolling the vfo 
-                if ((rx1_avg_last_ddsfreq != 0 && rx1_avg_last_ddsfreq != DDSFreq) ||
-                    (current_model == Model.SOFTROCK40 &&
-                    rx1_avg_last_dttsp_osc != dttsp_osc))   // vfo has changed, need to shift things around 
+                if (rx1_avg_last_ddsfreq != 0 && rx1_avg_last_ddsfreq != FWCDDSFreq) // vfo has changed, need to shift things around 
                 {
                     //Debug.WriteLine("dttsp_osc: " + dttsp_osc); 
                     double delta_vfo;
-                    if (current_model != Model.SOFTROCK40)
-                    {
-                        delta_vfo = DDSFreq - rx1_avg_last_ddsfreq;
+                    
+                        delta_vfo = FWCDDSFreq - rx1_avg_last_ddsfreq;
                         delta_vfo *= 1000000.0; // vfo in mhz moron!
-                    }
-                    else
-                    {
-                        delta_vfo = dttsp_osc - rx1_avg_last_dttsp_osc;
-                        delta_vfo = -delta_vfo;
-                        //Debug.WriteLine("update from dttsp delta_vfo: " + delta_vfo); 
-                    }
+                    
                     double hz_per_bin = sample_rate1 / Display.BUFFER_SIZE;
 
                     int bucket_shift = (int)(delta_vfo / hz_per_bin);
@@ -30050,14 +30049,13 @@ namespace PowerSDR
             }
             else
             {
-                rx1_avg_last_ddsfreq = DDSFreq;
-                rx1_avg_last_dttsp_osc = dttsp_osc;
-            }
+                rx1_avg_last_ddsfreq = FWCDDSFreq;
+             }
         }
 
         public void UpdateRX2DisplayAverage(float[] buffer, float[] new_data)
         {
-            double dttsp_osc = radio.GetDSPRX(1, 0).RXOsc;
+          //  double dttsp_osc = radio.GetDSPRX(1, 0).RXOsc;
             // Debug.WriteLine("last vfo: " + avg_last_ddsfreq + " vfo: " + DDSFreq); 
             if (buffer[0] == Display.CLEAR_FLAG)
             {
@@ -30068,23 +30066,14 @@ namespace PowerSDR
             else
             {
                 // wjt added -- stop hosing the avg display when scrolling the vfo 
-                if ((rx2_avg_last_ddsfreq != 0 && rx2_avg_last_ddsfreq != DDSFreq) ||
-                    (current_model == Model.SOFTROCK40 &&
-                    rx2_avg_last_dttsp_osc != dttsp_osc))   // vfo has changed, need to shift things around 
+                if (rx2_avg_last_ddsfreq != 0 && rx2_avg_last_ddsfreq != RX2DDSFreq) // vfo has changed, need to shift things around 
                 {
                     //Debug.WriteLine("dttsp_osc: " + dttsp_osc); 
                     double delta_vfo;
-                    if (current_model != Model.SOFTROCK40)
-                    {
-                        delta_vfo = DDSFreq - rx2_avg_last_ddsfreq;
+                    
+                        delta_vfo = RX2DDSFreq - rx2_avg_last_ddsfreq;
                         delta_vfo *= 1000000.0; // vfo in mhz moron!
-                    }
-                    else
-                    {
-                        delta_vfo = dttsp_osc - rx2_avg_last_dttsp_osc;
-                        delta_vfo = -delta_vfo;
-                        //Debug.WriteLine("update from dttsp delta_vfo: " + delta_vfo); 
-                    }
+                   
                     double hz_per_bin = sample_rate1 / Display.BUFFER_SIZE;
 
                     int bucket_shift = (int)(delta_vfo / hz_per_bin);
@@ -30175,13 +30164,11 @@ namespace PowerSDR
             if (buffer[0] == Display.CLEAR_FLAG)
             {
                 rx2_avg_last_ddsfreq = 0;
-                rx2_avg_last_dttsp_osc = 0;
-            }
+             }
             else
             {
-                rx2_avg_last_ddsfreq = DDSFreq;
-                rx2_avg_last_dttsp_osc = dttsp_osc;
-            }
+                rx2_avg_last_ddsfreq = RX2DDSFreq;
+             }
         }
 
         #endregion
@@ -30331,7 +30318,7 @@ namespace PowerSDR
                         {
                             case MeterRXMode.SIGNAL_STRENGTH:
                                 num = DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-                                SetupForm.txtRX1RawMeterData.Text = num.ToString();
+                                // SetupForm.txtRX1RawMeterData.Text = num.ToString();
 
                                 num = num +
                                  rx1_meter_cal_offset +
@@ -30343,10 +30330,10 @@ namespace PowerSDR
 
                                 new_meter_data = num;
 
-                                SetupForm.txtRX1CalcMeterData.Text = num.ToString();
-                                SetupForm.txtRX1MeterOffset.Text = rx1_meter_cal_offset.ToString();
-                                SetupForm.txtRX1DisplayOffset.Text = rx1_display_cal_offset.ToString();
-                                SetupForm.txtRX1PreampOffset.Text = Display.RX1PreampOffset.ToString();
+                                //  SetupForm.txtRX1CalcMeterData.Text = num.ToString();
+                                // SetupForm.txtRX1MeterOffset.Text = rx1_meter_cal_offset.ToString();
+                                // SetupForm.txtRX1DisplayOffset.Text = rx1_display_cal_offset.ToString();
+                                // SetupForm.txtRX1PreampOffset.Text = Display.RX1PreampOffset.ToString();
                                 break;
                             case MeterRXMode.SIGNAL_AVERAGE:
                                 num = DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
@@ -30394,8 +30381,8 @@ namespace PowerSDR
                         float num = 0f;
                         double power = 0.0;
 
-                        double alex_fwd = (double)JanusAudio.computeAlexFwdPower();
-                        double alex_rev = (double)JanusAudio.computeRefPower();
+                        alex_fwd = (double)JanusAudio.computeAlexFwdPower();
+                        alex_rev = (double)JanusAudio.computeRefPower();
                         float alex_swr = (float)ALEXSWR(alex_fwd, alex_rev);
 
                         switch (mode)
