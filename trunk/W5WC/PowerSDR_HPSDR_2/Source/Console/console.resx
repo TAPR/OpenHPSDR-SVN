@@ -13271,7 +13271,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v2.2 (11/17/12) </value>
+    <value>PowerSDR™/OpenHPSDR v2.2 (11/24/12) </value>
   </data>
   <data name="&gt;&gt;timer_cpu_meter.Name" xml:space="preserve">
     <value>timer_cpu_meter</value>

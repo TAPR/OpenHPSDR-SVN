@@ -62,7 +62,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>../FFTW/libfftw3f-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\..\bin\Debug\fftw_wisdom.exe</OutputFile>
+      <OutputFile>./bin/Debug/fftw_wisdom.exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>./bin/Debug/fftw_wisdom.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
@@ -86,7 +86,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>../FFTW/libfftw3f-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\..\bin\Release\fftw_wisdom.exe</OutputFile>
+      <OutputFile>./bin/Release/fftw_wisdom.exe</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <ProgramDatabaseFile>./bin/$(ProjectName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>

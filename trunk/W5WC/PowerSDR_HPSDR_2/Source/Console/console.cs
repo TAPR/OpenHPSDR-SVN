@@ -741,7 +741,7 @@ namespace PowerSDR
         private double rx1_last_bin_shift_leftover = 0;
 
         private double rx2_avg_last_ddsfreq = 0;				// Used to move the display average when tuning
-        private double rx2_avg_last_dttsp_osc = 0;
+       // private double rx2_avg_last_dttsp_osc = 0;
         private double rx2_last_bin_shift_leftover = 0;
 
         //    public CWKeyer2 Keyer;
@@ -27822,23 +27822,14 @@ namespace PowerSDR
             else
             {
                 // wjt added -- stop hosing the avg display when scrolling the vfo 
-                if ((rx1_avg_last_ddsfreq != 0 && rx1_avg_last_ddsfreq != DDSFreq) ||
-                    (current_model == Model.SOFTROCK40 &&
-                    rx1_avg_last_dttsp_osc != dttsp_osc))   // vfo has changed, need to shift things around 
+                if (rx1_avg_last_ddsfreq != 0 && rx1_avg_last_ddsfreq != FWCDDSFreq)  // vfo has changed, need to shift things around 
                 {
                     //Debug.WriteLine("dttsp_osc: " + dttsp_osc); 
                     double delta_vfo;
-                    if (current_model != Model.SOFTROCK40)
-                    {
-                        delta_vfo = DDSFreq - rx1_avg_last_ddsfreq;
+                   
+                        delta_vfo = FWCDDSFreq - rx1_avg_last_ddsfreq;
                         delta_vfo *= 1000000.0; // vfo in mhz moron!
-                    }
-                    else
-                    {
-                        delta_vfo = dttsp_osc - rx1_avg_last_dttsp_osc;
-                        delta_vfo = -delta_vfo;
-                        //Debug.WriteLine("update from dttsp delta_vfo: " + delta_vfo); 
-                    }
+                   
                     double hz_per_bin = sample_rate1 / Display.BUFFER_SIZE;
 
                     int bucket_shift = (int)(delta_vfo / hz_per_bin);
@@ -27933,14 +27924,14 @@ namespace PowerSDR
             }
             else
             {
-                rx1_avg_last_ddsfreq = DDSFreq;
+                rx1_avg_last_ddsfreq = FWCDDSFreq;
                 rx1_avg_last_dttsp_osc = dttsp_osc;
             }
         }
 
         public void UpdateRX2DisplayAverage(float[] buffer, float[] new_data)
         {
-            double dttsp_osc = radio.GetDSPRX(1, 0).RXOsc;
+           // double dttsp_osc = radio.GetDSPRX(1, 0).RXOsc;
             // Debug.WriteLine("last vfo: " + avg_last_ddsfreq + " vfo: " + DDSFreq); 
             if (buffer[0] == Display.CLEAR_FLAG)
             {
@@ -27951,23 +27942,15 @@ namespace PowerSDR
             else
             {
                 // wjt added -- stop hosing the avg display when scrolling the vfo 
-                if ((rx2_avg_last_ddsfreq != 0 && rx2_avg_last_ddsfreq != DDSFreq) ||
-                    (current_model == Model.SOFTROCK40 &&
-                    rx2_avg_last_dttsp_osc != dttsp_osc))   // vfo has changed, need to shift things around 
+                if (rx2_avg_last_ddsfreq != 0 && rx2_avg_last_ddsfreq != RX2DDSFreq) // vfo has changed, need to shift things around 
                 {
                     //Debug.WriteLine("dttsp_osc: " + dttsp_osc); 
                     double delta_vfo;
-                    if (current_model != Model.SOFTROCK40)
-                    {
-                        delta_vfo = DDSFreq - rx2_avg_last_ddsfreq;
+                   
+                        delta_vfo = RX2DDSFreq - rx2_avg_last_ddsfreq;
                         delta_vfo *= 1000000.0; // vfo in mhz moron!
-                    }
-                    else
-                    {
-                        delta_vfo = dttsp_osc - rx2_avg_last_dttsp_osc;
-                        delta_vfo = -delta_vfo;
-                        //Debug.WriteLine("update from dttsp delta_vfo: " + delta_vfo); 
-                    }
+                    
+                   
                     double hz_per_bin = sample_rate1 / Display.BUFFER_SIZE;
 
                     int bucket_shift = (int)(delta_vfo / hz_per_bin);
@@ -28058,12 +28041,10 @@ namespace PowerSDR
             if (buffer[0] == Display.CLEAR_FLAG)
             {
                 rx2_avg_last_ddsfreq = 0;
-                rx2_avg_last_dttsp_osc = 0;
             }
             else
             {
-                rx2_avg_last_ddsfreq = DDSFreq;
-                rx2_avg_last_dttsp_osc = dttsp_osc;
+                rx2_avg_last_ddsfreq = RX2DDSFreq;
             }
         }
 
