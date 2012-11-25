@@ -41,6 +41,7 @@
 
 #include <sys/types.h>
 #include <sys/socket.h>
+
 #include <sys/ioctl.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -56,8 +57,6 @@
 
 #include "metis.h"
 #include "HermesProxy.h"
-
-//#include "../include/ozy.h"
 
 #define MAX_METIS_CARDS 10
 METIS_CARD metis_cards[MAX_METIS_CARDS];
@@ -103,8 +102,40 @@ static int get_addr(int sock, const char * ifname) {
   struct ifreq *ifr;
   struct ifreq ifrr;
   struct sockaddr_in sa;
+
   unsigned char      *u;
   int i;
+
+
+// new code to get all interface names on this host
+
+  struct ifconf ifc;
+  char buf[8192];
+  struct ifreq *ifquery;
+  int nInterfaces;
+  struct ifreq *item;
+
+  /* Query available interfaces. */
+  ifc.ifc_len = sizeof(buf);
+  ifc.ifc_buf = buf;
+  if(ioctl(sock, SIOCGIFCONF, &ifc) < 0)
+  {
+    printf("ioctl(SIOCGIFCONF) error");
+    return -1;
+  }
+
+  /* Iterate through the list of interfaces. */
+  ifquery = ifc.ifc_req;
+  nInterfaces = ifc.ifc_len / sizeof(struct ifreq);
+
+  for(int i=0; i<nInterfaces; i++)
+    fprintf(stderr, "Interface[%d]:%s  ", i, (char *)&ifquery[i].ifr_name);
+
+  fprintf(stderr,"\n");
+
+// end new code
+
+
 
   ifr = &ifrr;
   ifrr.ifr_addr.sa_family = AF_INET;
@@ -147,6 +178,7 @@ void metis_discover(const char* interface) {
         perror("create socket failed for discovery_socket\n");
         exit(1);
     }
+
 
     // get my MAC address and IP address
     if(get_addr(discovery_socket,interface)<0) {

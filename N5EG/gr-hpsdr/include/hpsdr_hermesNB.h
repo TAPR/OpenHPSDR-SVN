@@ -19,7 +19,7 @@
  */
 
 //
-// Version: November 24, 2012
+// Version: November 25, 2012
 
 
 #ifndef INCLUDED_HPSDR_HERMESNB_H
@@ -37,9 +37,10 @@ typedef boost::shared_ptr<hpsdr_hermesNB> hpsdr_hermesNB_sptr;
  * \param RxF    Receive frequency, Hz.
  * \param RxSmp  Receive Sample Rate, 192000, 96000, or 48000
  * \param RxPre  Rx Preamp on (1) / off (0)
+ * \param Intfc  Ethernet interface to use
  */
 
-HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre);
+HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc);
 
 /*!
  * \brief Prototype for Hermes module
@@ -51,13 +52,15 @@ HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre
  * \param RxF    Receive frequency, Hz.
  * \param RxSmp  Receive Sample Rate, 192000, 96000, or 48000
  * \param RxPre  Rx Preamp on (1) / off (0)
+ * \param Intfc  Ethernet interface to use
  * 
  */
 class HPSDR_API hpsdr_hermesNB : public gr_block
 {
-	friend HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre);
+	friend HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp,
+		 int RxPre, const char* Intfc);
 
-	hpsdr_hermesNB (int RxF, int RxSmp, int RxPre);
+	hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc);
 
  public:
 	~hpsdr_hermesNB();

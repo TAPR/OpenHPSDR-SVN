@@ -38,9 +38,9 @@ HermesProxy* Hermes;	// make it visible to metis.cc
  */
 
 hpsdr_hermesNB_sptr
-hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre)
+hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc)
 {
-    return gnuradio::get_initial_sptr(new hpsdr_hermesNB (RxF, RxSmp, RxPre));
+    return gnuradio::get_initial_sptr(new hpsdr_hermesNB (RxF, RxSmp, RxPre, Intfc));
 }
 
 
@@ -56,12 +56,12 @@ hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre)
  * 
  */
 
-hpsdr_hermesNB::hpsdr_hermesNB (int RxF, int RxSmp, int RxPre)
+hpsdr_hermesNB::hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc)
 	: gr_block ("hermesNB",
 		gr_make_io_signature (1,1, sizeof (gr_complex)),  // input stream signature (min one, max one input)
 		gr_make_io_signature (1,1, sizeof (gr_complex)))  // output stream signature (min one, max one output)
 {
-	Hermes = new HermesProxy(RxF);	// Create proxy, do Hermes ethernet discovery
+	Hermes = new HermesProxy(RxF, Intfc);	// Create proxy, do Hermes ethernet discovery
 	Hermes->RxSampleRate = RxSmp;
 	Hermes->RxPreamp = RxPre;
 }
