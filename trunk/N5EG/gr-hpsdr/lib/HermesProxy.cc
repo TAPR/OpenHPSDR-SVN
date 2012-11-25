@@ -44,7 +44,7 @@
 #include <stdio.h>	// for DEBUG PRINTF's
 
 
-HermesProxy::HermesProxy(int RxFreq)	// constructor
+HermesProxy::HermesProxy(int RxFreq, const char* Intfc)	// constructor
 {
 
 	//fprintf(stderr, "HermesProxy constructor called\n");
@@ -59,6 +59,7 @@ HermesProxy::HermesProxy(int RxFreq)	// constructor
 	Duplex = true;		// Allows TxF to program separately from RxF
 	PTTOffMutesTx = true;   // PTT Off mutes the transmitter
 	PTTOnMutesRx = true;	// PTT On mutes receiver
+	strcpy(interface, Intfc);	// Ethernet interface to use (defaults to eth0)
 
 
 	RxWriteCounter = 0;	//
@@ -84,8 +85,8 @@ HermesProxy::HermesProxy(int RxFreq)	// constructor
 	ReceiveFrequency = (unsigned)RxFreq; 
 	TransmitFrequency = ReceiveFrequency;		// initialize transceive
 
-	const char* interface = "eth0";	// Discover Hermes connected to eth0
-	metis_discover(interface);
+//	const char* interface = "eth0";	// Discover Hermes connected to eth0
+	metis_discover((const char *)(interface));
 
 	while (!metis_found())
 		;			// wait until Hermes responds

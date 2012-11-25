@@ -4,7 +4,7 @@
   <key>hpsdr_hermesNB</key>
   <category>hpsdr</category>
   <import>import hpsdr</import>
-  <make>hpsdr.hermesNB($RxF, $RxSmp, $RxPre)</make>
+  <make>hpsdr.hermesNB($RxF, $RxSmp, $RxPre, $Intfc)</make>
   <callback>set_ReceiveFrequency($RxF)</callback>
   <callback>set_RxSampRate($RxSmp)</callback>
   <callback>set_RxPreamp($RxPre)</callback>
@@ -67,6 +67,12 @@
     <value>255</value>
     <type>int</type>
   </param>
+  <param>
+    <name>Ethernet Interface</name>
+    <key>Intfc</key>
+    <value>"eth0"</value>
+    <type>raw</type>
+  </param>
   <!-- Make one 'sink' node per input. Sub-nodes:
        * name (an identifier for the GUI)
        * type
@@ -86,17 +92,18 @@
     <name>out</name>
     <type>complex</type>
   </source>
+
   <doc>
   This block is the HPSDR Hermes/Metis module.
-  It supports only one receiver in the Narrow Band (digital downconversion) mode.
-  Receive Frequency, Receive Sample Rate, and Receive Preamp can be set.
-  Supports transmit operation.
+  It supports one receiver and one transmitter in the Narrow Band
+  (digital downconversion) mode.
   RxSamp = 48000, 96000,  or 192000
   RxPreamp = 0 (Off), or  1 (On)
   PTTMode = 0 (TxOff),  1 (Vox on Txframe contents), or  2 (TxOn)
   PTTOffMutesTx = 0 (Tx always emits), 1 (Tx IQ is zeroed when PTT is Off)
   PTTOnMutesRx = 0 (Rx always receives), 1 (Rx IQ is zeroed when PTT is On)
-  TxDrive = 0..255 (0 is minimum (but not zero) drive.  255 is maximum drive)
-
+  TxDrive = 0..255 (0 is minimum (but not zero) drive, 255 is maximum drive)
+  Interface = the ethernet interface to use.
+    Example: "eth0" {including quote marks}.
   </doc>
 </block>

@@ -88,8 +88,9 @@ public:
 	unsigned char HermesVersion;
 	bool PTTOffMutesTx;		// PTT Off mutes the transmitter
 	bool PTTOnMutesRx;		// PTT On receiver
+	char interface[16];
 
-	HermesProxy(int);		// constructor
+	HermesProxy(int, const char* Intfc);	// constructor
 	~HermesProxy();			// destructor
 
 	void SendTxIQ();		// send an IQ buffer to Hermes transmit hardware

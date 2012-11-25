@@ -20,16 +20,6 @@ hpsdr_api.h
 gr_block.h
 -
 
-../include/metis.h
-
-/home/tom/gr-hpsdr/lib/HermesProxy.cc
-HermesProxy.h
-/home/tom/gr-hpsdr/lib/HermesProxy.h
-metis.h
-/home/tom/gr-hpsdr/lib/metis.h
-stdio.h
--
-
 /home/tom/gr-hpsdr/lib/hpsdr_hermesNB.cc
 config.h
 /home/tom/gr-hpsdr/lib/config.h
