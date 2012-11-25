@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Fri Nov 23 11:19:30 2012</timestamp>
+  <timestamp>Sun Nov 25 15:15:26 2012</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -243,6 +243,10 @@
       <value>RxFreq</value>
     </param>
     <param>
+      <key>TxF</key>
+      <value>7200000</value>
+    </param>
+    <param>
       <key>RxSmp</key>
       <value>samp_rate</value>
     </param>
@@ -261,6 +265,14 @@
     <param>
       <key>PTTmode</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>TxDrive</key>
+      <value>255</value>
+    </param>
+    <param>
+      <key>Intfc</key>
+      <value>"eth0"</value>
     </param>
     <param>
       <key>_coordinate</key>
