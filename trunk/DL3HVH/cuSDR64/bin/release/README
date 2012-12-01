@@ -32,6 +32,12 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.3.2.3:
+
+- Bug-fix: inital settings of demod mode corrected
+
+- Bug-fix: sample-rate changing did not care about the filter settings.
+
 v0.3.2.2:
 
 - Bug-fix: wide band scope zooming now works correctly.
