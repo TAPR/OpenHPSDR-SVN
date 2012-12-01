@@ -108,6 +108,8 @@ QWPAGC::~QWPAGC() {
 
 void  QWPAGC::ProcessAGC(CPX &in, CPX &out, int size) {
 
+	Q_UNUSED(size)
+
 	if (m_agcMode == agcOFF) {
 		
 		for (int i = 0; i < m_size; i++)

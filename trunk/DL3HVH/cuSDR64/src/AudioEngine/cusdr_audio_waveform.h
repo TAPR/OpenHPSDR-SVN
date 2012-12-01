@@ -50,7 +50,6 @@
 #define _CUSDR_WAVEFORM_H
 
 #include <QObject>
-#include <QtMultimedia/QAudioFormat>
 #include <QPixmap>
 #include <QScopedPointer>
 

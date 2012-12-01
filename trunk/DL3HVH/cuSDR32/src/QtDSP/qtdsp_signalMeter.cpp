@@ -46,6 +46,8 @@ SignalMeter::~SignalMeter() {
 
 void SignalMeter::ProcessBlock(CPX &in, int bsize) {
 
+	Q_UNUSED(bsize)
+
     float tmp = 0.0f;
 
     for (int i = 0; i < m_size; i++)

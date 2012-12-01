@@ -207,7 +207,7 @@ void Receiver::setReceiverData(TReceiver data) {
 	m_dspCore = m_receiverData.dspCore;
 	m_sampleRate = m_receiverData.sampleRate;
 	m_hamBand = m_receiverData.hamBand;
-	//m_dspMode = m_receiverData.dspMode;
+	m_dspMode = m_receiverData.dspMode;
 	m_dspModeList = m_receiverData.dspModeList;
 	m_agcMode = m_receiverData.agcMode;
 	m_agcGain = m_receiverData.acgGain;
@@ -248,6 +248,14 @@ bool Receiver::initQtDSPInterface() {
 	}
 
 	qtdsp->setVolume(m_audioVolume);
+
+	DSPMode mode = m_dspModeList.at(m_hamBand);
+	RECEIVER_DEBUG << "set DSP mode to: " << set->getDSPModeString(mode);
+
+	qtdsp->setDSPMode(mode);
+	qtdsp->filter->setFilter(
+						getFilterFromDSPMode(set->getDefaultFilterList(), mode).filterLo,
+						getFilterFromDSPMode(set->getDefaultFilterList(), mode).filterHi);
 	qtdsp->wpagc->setMode(m_agcMode);
 	qtdsp->wpagc->setAGCFixedGainDb(m_agcFixedGain_dB);
 	qtdsp->wpagc->setMaximumGainDb(m_agcMaximumGain_dB);
@@ -301,10 +309,10 @@ void Receiver::setSampleRate(QObject *sender, int value) {
 			break;
 	}
 
-//	if (qtdsp)
-//		qtdsp->setSampleRate(this, m_samplerate);
-//	else
-//		RECEIVER_DEBUG << "qtdsp down: cannot set sample rate!\n";
+	if (qtdsp)
+		qtdsp->setSampleRate(this, m_samplerate);
+	else
+		RECEIVER_DEBUG << "qtdsp down: cannot set sample rate!\n";
 }
 
 void Receiver::setServerMode(QSDR::_ServerMode mode) {

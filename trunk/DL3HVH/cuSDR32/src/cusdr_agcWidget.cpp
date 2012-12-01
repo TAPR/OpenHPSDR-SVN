@@ -371,7 +371,7 @@ void AGCOptionsWidget::createAgcOptionsGroup() {
 	m_hangThresholdValueLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
 	m_hangThresholdValueLabel->setStyleSheet(set->getSliderLabelStyle());
 
-	m_hangThresholdLabel = new QLabel("Hang Theshold:", this);
+	m_hangThresholdLabel = new QLabel("Hang Threshold:", this);
 	m_hangThresholdLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
 	m_hangThresholdLabel->setStyleSheet(set->getLabelStyle());
 

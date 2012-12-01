@@ -27,20 +27,26 @@
 #ifndef CUSDR_SETTINGS_H
 #define CUSDR_SETTINGS_H
 
-//#define DEBUG
+#define DEBUG
 
 
 #include <QObject>
 #include <QErrorMessage>
 #include <QMutex>
 #include <QtNetwork>
-#include <QtMultimedia/qaudio.h>
-#include <QtMultimedia/QAudioFormat>
+
+#if defined(Q_OS_WIN32)
+	#include <QtMultimedia/qaudio.h>
+	#include <QtMultimedia/QAudioFormat>
+#elif defined(Q_OS_LINUX)
+	#include <QtMultimediaKit/QAudioInput>
+	#include <QtMultimediaKit/QAudioOutput>
+#endif
 
 #include "cusdr_hamDatabase.h"
 
 // test for OpenCL
-#include "CL/qclcontext.h"
+//#include "CL/qclcontext.h"
 
 
 // **************************************
@@ -1210,7 +1216,7 @@ public slots:
 	void setAGCHangTime(QObject *sender, int rx, qreal value);
 	void setRXFilter(QObject *sender, int rx, qreal low, qreal high);
 	
-	void setOpenCLDevices(QList<QCLDevice>	dev);
+	//void setOpenCLDevices(QList<QCLDevice>	dev);
 
 	/*void setCudaPresence(bool value);
 	void setCudaDevices(int value);
@@ -1301,7 +1307,7 @@ private:
 	QList<THamBandFrequencies>	m_bandList;
 	QList<THamBandText>			m_bandTextList;
 	QList<TDefaultFilter>		m_defaultFilterList;
-	QList<QCLDevice>			m_clDevices;
+	//QList<QCLDevice>			m_clDevices;
 	QList<QString>				m_rxStringList;
 	QList<int>					m_alexStates;
 	QList<long>					m_HPFLoFrequencyList;

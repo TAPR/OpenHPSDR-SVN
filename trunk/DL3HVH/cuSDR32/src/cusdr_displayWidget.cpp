@@ -758,6 +758,7 @@ void DisplayOptionsWidget::fpsValueChanged(int value) {
 void DisplayOptionsWidget::setFramesPerSecond(QObject *sender, int rx, int value) {
 
 	Q_UNUSED(sender)
+	Q_UNUSED(rx)
 
 	disconnect(m_fpsSlider, SIGNAL(valueChanged(int)), this, SLOT(fpsValueChanged(int)));
 	m_fpsSlider->setValue(value);

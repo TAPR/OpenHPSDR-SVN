@@ -154,13 +154,13 @@ int Discoverer::findHPSDRDevices() {
 
 		set->setMetisPort(this, socket.localPort());
 		io->networkIOMutex.lock();
-		HPSDRIO_DEBUG << "discovery_socket bound successfully to port " << socket.localPort();
+		DISCOVERER_DEBUG << "discovery_socket bound successfully to port " << socket.localPort();
 		io->networkIOMutex.unlock();
 	}
 	else {
 		
 		io->networkIOMutex.lock();
-		HPSDRIO_DEBUG << "discovery_socket bind failed.";
+		DISCOVERER_DEBUG << "discovery_socket bind failed.";
 		io->networkIOMutex.unlock();
 
 		socket.close();

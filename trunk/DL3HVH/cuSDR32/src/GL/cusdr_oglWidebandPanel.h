@@ -30,7 +30,7 @@
 #include "cusdr_oglUtils.h"
 #include "cusdr_oglInfo.h"
 #include "cusdr_settings.h"
-#include "Util/cusdr_fonts.h"
+#include "cusdr_fonts.h"
 #include "cusdr_oglText.h"
 
 //#include <QPixmap>
@@ -119,7 +119,7 @@ private:
 	QPoint		m_oldMousePos;
 	QPoint		m_mouseLastPos;
 	QPoint		m_mouseDownPos;
-	QPoint		m_rulerMouseDownPos;
+	QPoint		m_yScaleMouseDownPos;
 	QPoint		m_cameraAngle;
 
 	TScale		m_frequencyScale;
@@ -194,6 +194,8 @@ private:
 	int			m_specAveragingCnt;
 	int			m_mercuryAttenuator;
 	int			m_dBmScaleTextPos;
+	int			m_wbSpectrumBufferLength;
+	int			m_scaledBufferSize;
 	
 	float		m_cameraDistance;
 

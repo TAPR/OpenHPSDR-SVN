@@ -463,7 +463,8 @@ bool DataEngine::findHPSDRDevices() {
 			DATA_ENGINE_DEBUG 	<< "Device "
 								<< i << " @ "
 								<< qPrintable(metisList.at(i).ip_address.toString())
-								<< " [" << qPrintable((char *) &metisList.at(i).mac_address) << "]";
+								//<< " [" << qPrintable((char *) &metisList.at(i).mac_address) << "]";
+								<< " [" << metisList.at(i).mac_address << "]";
 		}
 
 		io.hpsdrDeviceIPAddress = set->getCurrentMetisCard().ip_address;
@@ -560,6 +561,8 @@ bool DataEngine::getFirmwareVersions() {
 	m_penelopeFW = set->getPenelopeVersion();
 	m_pennylaneFW = set->getPennyLaneVersion();
 	m_hermesFW = set->getHermesVersion();
+
+	//m_metisFW = 50;
 
 	// if we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples, m_wbBuffers = 8
 	// we have 16384 * 16 bit = 32 * 1024 raw consecutive ADC samples, m_wbBuffers = 32
@@ -713,11 +716,12 @@ bool DataEngine::checkFirmwareVersions() {
 
 			default:
 
-				stop();
+				//stop();
 
-				msg = "Not a valid Metis FW version. Please upgrade Metis to the latest FW version !";
+				msg = "Not a standard Metis FW version !";
 				set->showWarningDialog(msg);
-				return false;
+				//return false;
+				return true;
 		}
 	}
 

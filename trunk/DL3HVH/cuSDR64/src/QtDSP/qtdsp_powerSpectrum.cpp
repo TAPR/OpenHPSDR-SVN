@@ -86,6 +86,8 @@ PowerSpectrum::~PowerSpectrum() {
 
 void PowerSpectrum::ProcessSpectrum(CPX &in, int size) {
 
+	Q_UNUSED(size)
+
 	if (first && dataCPX.size() == 0) {
 
     	dataCPX << in;

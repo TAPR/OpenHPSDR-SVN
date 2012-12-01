@@ -52,8 +52,15 @@
 #include <QtCore/qglobal.h>
 #include <QDebug>
 
+#if defined(Q_OS_WIN32)
+	#include <QtMultimedia/QAudioFormat>
+#elif defined(Q_OS_LINUX)
+	#include <QtMultimediaKit/QAudioFormat>
+#endif
 
-QT_FORWARD_DECLARE_CLASS(QAudioFormat)
+#if defined(Q_OS_WIN32)
+	QT_FORWARD_DECLARE_CLASS(QAudioFormat)
+#endif
 
 //-----------------------------------------------------------------------------
 // Miscellaneous utility functions

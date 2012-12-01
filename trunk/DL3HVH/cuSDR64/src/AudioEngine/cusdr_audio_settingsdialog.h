@@ -51,7 +51,11 @@
 
 //#include "spectrum.h"
 #include <QDialog>
-#include <QtMultimedia/QAudioDeviceInfo>
+#if defined(Q_OS_WIN32)
+	#include <QtMultimedia/QAudioDeviceInfo>
+#elif defined(Q_OS_LINUX)
+	#include <QtMultimediaKit/QAudioDeviceInfo>
+#endif
 
 #include "cusdr_settings.h"
 
