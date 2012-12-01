@@ -50,14 +50,11 @@ Settings::Settings(QObject *parent)
 	, m_mercuryReceivers(1)
 	, m_currentReceiver(0)
 {
-	// temporarily
-	//m_pennyLanePresence = false;
 	m_devices.mercuryFWVersion = 0;
 
 	qRegisterMetaType<TNetworkDevicecard>();
 	qRegisterMetaType<QList<TNetworkDevicecard> >();
 	qRegisterMetaType<qVectorFloat>("qVectorFloat");
-	//qRegisterMetaType<CPX>("CPX");
 
 	startTime = QDateTime::currentDateTime();
 
@@ -73,7 +70,7 @@ Settings::Settings(QObject *parent)
 		m_titleString = "cuSDR64 Debug BETA ";
 	#endif
 
-	m_versionString = "v0.3.2.2";
+	m_versionString = "v0.3.2.3";
 	
 	qDebug() << qPrintable(m_titleString);
 
@@ -950,6 +947,8 @@ int Settings::loadSettings() {
 					m_receiverDataList[i].dspModeList[j] = DRM;
 				else
 					m_receiverDataList[i].dspModeList[j] = LSB;
+
+				//SETTINGS_DEBUG << cstr << ": " << getDSPModeString(m_receiverDataList[i].dspModeList[j]);
 			}
 		}
 
@@ -3661,10 +3660,10 @@ void Settings::setPennyOCEnabled(QObject *sender, bool value) {
 //**************************************
 // OpenCL stuff
 
-void Settings::setOpenCLDevices(QList<QCLDevice> devices) {
-
-	m_clDevices = devices;
-}
+//void Settings::setOpenCLDevices(QList<QCLDevice> devices) {
+//
+//	m_clDevices = devices;
+//}
 
 //void Settings::setCudaPresence(bool value) {
 //

@@ -52,7 +52,6 @@
 
 #include <QtCore/qobject.h>
 #include <QtCore/qfile.h>
-#include <QtMultimedia/qaudioformat.h>
 #include "cusdr_settings.h"
 
 #ifdef LOG_AUDIO_WAVFILE

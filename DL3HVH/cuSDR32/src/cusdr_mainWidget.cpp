@@ -696,12 +696,15 @@ void MainWindow::createMainBtnGroup() {
 	
 	m_buttonWidget = new QWidget(this);
 
+    QColor btnCol = QColor(230, 230, 230);
 //	QHBoxLayout *firstBtnLayout = new QHBoxLayout;
 //	firstBtnLayout->setSpacing(0);
 //	firstBtnLayout->setMargin(0);
 	
 	startBtn = new AeroButton("Start", this);
 	startBtn->setRoundness(10);
+    startBtn->setFont(m_fonts.normalFont);
+    startBtn->setTextColor(btnCol);
 	startBtn->setFixedSize(btn_width1, btn_height1);
 
 	CHECKED_CONNECT(
@@ -723,6 +726,8 @@ void MainWindow::createMainBtnGroup() {
 
 	rxCtrlBtn = new AeroButton("Radio Ctrl", this);
 	rxCtrlBtn->setRoundness(10);
+    rxCtrlBtn->setFont(m_fonts.normalFont);
+    rxCtrlBtn->setTextColor(btnCol);
 	rxCtrlBtn->setFixedSize(btn_width1, btn_height1);
 	mainBtnList.append(rxCtrlBtn);
 
@@ -737,6 +742,8 @@ void MainWindow::createMainBtnGroup() {
 
 	serverBtn = new AeroButton("Server", this);
 	serverBtn->setRoundness(10);
+    serverBtn->setFont(m_fonts.normalFont);
+    serverBtn->setTextColor(btnCol);
 	serverBtn->setFixedSize(btn_width1, btn_height1);
 	mainBtnList.append(serverBtn);
 
@@ -748,6 +755,8 @@ void MainWindow::createMainBtnGroup() {
 
 	hpsdrBtn = new AeroButton("HPSDR", this);
 	hpsdrBtn->setRoundness(10);
+    hpsdrBtn->setFont(m_fonts.normalFont);
+    hpsdrBtn->setTextColor(btnCol);
 	hpsdrBtn->setFixedSize(btn_width1, btn_height1);
 	mainBtnList.append(hpsdrBtn);
 
@@ -759,6 +768,8 @@ void MainWindow::createMainBtnGroup() {
 
 	chirpBtn = new AeroButton("Chirp", this);
 	chirpBtn->setRoundness(10);
+    chirpBtn->setFont(m_fonts.normalFont);
+    chirpBtn->setTextColor(btnCol);
 	chirpBtn->setFixedSize(btn_width1, btn_height1);
 	mainBtnList.append(chirpBtn);
 
@@ -773,6 +784,8 @@ void MainWindow::createMainBtnGroup() {
 
 	wideBandBtn = new AeroButton("Wideband", this);
 	wideBandBtn->setRoundness(10);
+    wideBandBtn->setFont(m_fonts.normalFont);
+    wideBandBtn->setTextColor(btnCol);
 	wideBandBtn->setFixedSize(btn_width1, btn_height1);
 	wideBandBtn->setEnabled(false);
 	//mainBtnList.append(wideBandBtn);
@@ -825,6 +838,8 @@ void MainWindow::createMainBtnGroup() {
 	
 	displayBtn = new AeroButton("Display", this);
 	displayBtn->setRoundness(10);
+    displayBtn->setFont(m_fonts.normalFont);
+    displayBtn->setTextColor(btnCol);
 	displayBtn->setFixedSize(btn_width1, btn_height1);
 	mainBtnList.append(displayBtn);
 
@@ -844,14 +859,20 @@ void MainWindow::createMainBtnGroup() {
 
 	viewBtn = new AeroButton("View Rx", this);
 	viewBtn->setRoundness(10);
+    viewBtn->setFont(m_fonts.normalFont);
+    viewBtn->setTextColor(btnCol);
 	viewBtn->setFixedSize(btn_width1, btn_height1);
 
 	modeBtn = new AeroButton("Mode", this);
 	modeBtn->setRoundness(10);
+    modeBtn->setFont(m_fonts.normalFont);
+    modeBtn->setTextColor(btnCol);
 	modeBtn->setFixedSize(btn_width1, btn_height1);
 
 	quitBtn = new AeroButton("Quit", this);
 	quitBtn->setRoundness(10);
+    quitBtn->setFont(m_fonts.normalFont);
+    quitBtn->setTextColor(btnCol);
 	quitBtn->setFixedSize(btn_width3, btn_height1);
 
 	CHECKED_CONNECT(
@@ -961,6 +982,8 @@ void MainWindow::createMainBtnGroup() {
 	
 	avgBtn = new AeroButton("Pan Avg", this);
 	avgBtn->setRoundness(10);
+    avgBtn->setFont(m_fonts.normalFont);
+    avgBtn->setTextColor(btnCol);
 	avgBtn->setFixedSize(btn_width1, btn_height3);
 
 	if (set->getSpectrumAveraging())
@@ -976,6 +999,8 @@ void MainWindow::createMainBtnGroup() {
 
 	gridBtn = new AeroButton("Pan Grid", this);
 	gridBtn->setRoundness(10);
+    gridBtn->setFont(m_fonts.normalFont);
+    gridBtn->setTextColor(btnCol);
 	gridBtn->setFixedSize(btn_width1, btn_height3);
 
 	if (set->getPanGridStatus())
@@ -991,6 +1016,8 @@ void MainWindow::createMainBtnGroup() {
 
 	peakHoldBtn = new AeroButton("Peak Hold", this);
 	peakHoldBtn->setRoundness(10);
+    peakHoldBtn->setFont(m_fonts.normalFont);
+    peakHoldBtn->setTextColor(btnCol);
 	peakHoldBtn->setFixedSize(btn_width1, btn_height3);
 	peakHoldBtn->setBtnState(AeroButton::OFF);
 
@@ -1002,6 +1029,8 @@ void MainWindow::createMainBtnGroup() {
 
 	moxBtn = new AeroButton("MOX", this);
 	moxBtn->setRoundness(10);
+    moxBtn->setFont(m_fonts.normalFont);
+    moxBtn->setTextColor(btnCol);
 	moxBtn->setFixedSize(btn_width1, btn_height3);
 	col = QColor(200, 100, 100);
 	moxBtn->setColor(col);
@@ -1013,6 +1042,8 @@ void MainWindow::createMainBtnGroup() {
 
 	tunBtn = new AeroButton("Tune", this);
 	tunBtn->setRoundness(10);
+    tunBtn->setFont(m_fonts.normalFont);
+    tunBtn->setTextColor(btnCol);
 	tunBtn->setFixedSize(btn_width1, btn_height3);
 	col = QColor(200, 100, 100);
 	tunBtn->setColor(col);
@@ -1035,6 +1066,8 @@ void MainWindow::createMainBtnGroup() {
 
 	alexBtn = new AeroButton("Alex Auto", this);
 	alexBtn->setRoundness(10);
+    alexBtn->setFont(m_fonts.normalFont);
+    alexBtn->setTextColor(btnCol);
 	alexBtn->setFixedSize(btn_width1, btn_height3);
 	alexBtn->setBtnState(AeroButton::ON);
 	if (set->getAlexPresence())
@@ -1050,10 +1083,14 @@ void MainWindow::createMainBtnGroup() {
 
 	attenuatorBtn = new AeroButton("Attenuator", this);
 	attenuatorBtn->setRoundness(10);
+    attenuatorBtn->setFont(m_fonts.normalFont);
+    attenuatorBtn->setTextColor(btnCol);
 	attenuatorBtn->setFixedSize(btn_width1, btn_height1);
 
 	muteBtn = new AeroButton("Mute", this);
 	muteBtn->setRoundness(10);
+    muteBtn->setFont(m_fonts.normalFont);
+    muteBtn->setTextColor(btnCol);
 	muteBtn->setFixedSize(btn_width3, btn_height1);
 
 	CHECKED_CONNECT(
@@ -2101,7 +2138,8 @@ void MainWindow::setAttenuatorButton() {
 void MainWindow::mercuryAttenuatorChanged(QObject *sender, HamBand band, int value) {
 
 	Q_UNUSED(sender)
-        Q_UNUSED(value)
+    Q_UNUSED(value)
+    Q_UNUSED(band)
 
 	m_currentHamBand = set->getCurrentHamBand(0);
 	m_mercuryAttn[m_currentHamBand] = value;

@@ -86,10 +86,6 @@ void cuSDRMessageHandler(QtMsgType type, const char *msg) {
 
 int main(int argc, char *argv[]) {
 
-	#if (QT_VERSION < 0x040800)
-		#error("You need Qt v4.8.0 or later to compile this");
-	#endif
-
 	#ifndef DEBUG
 		qInstallMsgHandler(cuSDRMessageHandler);
 	#endif
@@ -106,6 +102,8 @@ int main(int argc, char *argv[]) {
 	public:
 		static void msleep(unsigned long msecs) {QThread::msleep(msecs);}
 	};
+
+#if defined(Q_OS_WIN32)
 
     QPixmap splash_pixmap(":/img/cusdrLogo2.png");
 	
@@ -137,6 +135,17 @@ int main(int argc, char *argv[]) {
 
     Settings::instance()->setSettingsLoaded(Settings::instance()->loadSettings() >= 0);
 
+#elif defined(Q_OS_LINUX)
+
+    Settings::instance()->setSettingsFilename(QCoreApplication::applicationDirPath() +
+        "/" + Settings::instance()->getSettingsFilename());
+
+    Settings::instance()->setSettingsLoaded(Settings::instance()->loadSettings() >= 0);
+
+#endif
+
+#if defined(Q_OS_WIN32)
+
     if (Settings::instance()->getSettingsLoaded()) {
 
         splash->showMessage(
@@ -145,6 +154,8 @@ int main(int argc, char *argv[]) {
 			Settings::instance()->getVersionStr() +
 			QObject::tr(":   Settings loaded."),
 			Qt::AlignTop | Qt::AlignLeft, Qt::yellow);
+
+        SleeperThread::msleep(100);
     }
     else {
 
@@ -155,10 +166,24 @@ int main(int argc, char *argv[]) {
 			QObject::tr(":   Settings not loaded."),
 			Qt::AlignTop | Qt::AlignLeft, Qt::red);
     }
-	SleeperThread::msleep(100);
+
+#elif defined(Q_OS_LINUX)
+
+    if (Settings::instance()->getSettingsLoaded()) {
+
+        qDebug() << "Init::\t settings loaded.";
+    }
+    else {
+
+        qDebug() << "Init::\t settings not loaded.";
+    }
+
+#endif
     
 	// ****************************
 	// check for OpenGL
+
+#if defined(Q_OS_WIN32)
 
 	splash->showMessage(
 			"\n      " + 
@@ -247,7 +272,48 @@ int main(int argc, char *argv[]) {
 	}
 	SleeperThread::msleep(100);
 
+#elif defined(Q_OS_LINUX)
 
+    if (!QGLFormat::hasOpenGL() && QGLFormat::OpenGL_Version_2_0) {
+
+        qDebug() << "Init::\t OpenGL not found!";
+
+        QMessageBox::critical(0,
+            QApplication::applicationName(),
+            QApplication::applicationName() + "   requires OpenGL v2.0 or later to run.",
+            QMessageBox::Abort);
+
+        return -1;
+    }
+
+    if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_0)) {
+
+        qDebug() << "Init::\t OpenGL found, but appears to be less than OGL v2.0.";
+
+        QMessageBox::critical(0,
+            QApplication::applicationName(),
+            QApplication::applicationName() + "   requires OpenGL v2.0 or later to run.",
+            QMessageBox::Ok);
+
+        return -1;
+    }
+
+    qDebug() << "Init::\t OpenGL found.";
+
+    if (!QGLFramebufferObject::hasOpenGLFramebufferObjects()) {
+
+        qDebug() << "Init:: Framebuffer Objects not found!\n";
+
+        Settings::instance()->setFBOPresence(false);
+        return -1;
+    }
+    else {
+
+        qDebug() << "Init::\t Framebuffer Objects found.";
+        Settings::instance()->setFBOPresence(true);
+    }
+
+#endif
 	// ****************************
 	// check for OpenCL devices
 	/*QList<QCLDevice> clDevices = QCLDevice::allDevices();
@@ -340,18 +406,22 @@ int main(int argc, char *argv[]) {
 	// ****************************
 	// setup main window
 
+#if defined(Q_OS_WIN32)
+
 	splash->showMessage(
 			"\n      " + 
 			Settings::instance()->getTitleStr() + " " +
 			Settings::instance()->getVersionStr() +
 			QObject::tr(":   setting up main window .."),
 			Qt::AlignTop | Qt::AlignLeft, Qt::yellow);
+#endif
 
 	qDebug() << "Init::\t main window setup ...";
 	MainWindow mainWindow;
 	mainWindow.setup();
 	qDebug() << "Init::\t main window setup done.";
 
+#if defined(Q_OS_WIN32)
 	splash->showMessage(
 			"\n      " + 
 			Settings::instance()->getTitleStr() + " " +
@@ -360,11 +430,12 @@ int main(int argc, char *argv[]) {
 			Qt::AlignTop | Qt::AlignLeft, Qt::yellow);
 
 	SleeperThread::msleep(300);
+#endif
 	
 	//app.processEvents();
 
 	mainWindow.show();
-	app.processEvents();
+    app.processEvents();
 
 	/*splash_fade_timer.restart();
 	while (splash_transparency > 0)
@@ -376,7 +447,10 @@ int main(int argc, char *argv[]) {
 		splash->repaint();
 	}*/
 	//splash->hide();
+
+#if defined(Q_OS_WIN32)
 	delete splash;
+#endif
 
 	mainWindow.update();
 	mainWindow.setFocus();

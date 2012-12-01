@@ -36,8 +36,8 @@
 //#include <QtMultimedia/qaudio.h>
 
 #include "Util/cusdr_buttons.h"
-#include "Util/cusdr_fonts.h"
 #include "cusdr_settings.h"
+#include "cusdr_fonts.h"
 
 
 #ifdef LOG_CHIRP_WIDGET

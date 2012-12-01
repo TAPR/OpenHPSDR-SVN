@@ -49,6 +49,7 @@ Q_DECLARE_TYPEINFO(cpx, Q_MOVABLE_TYPE );
 typedef QVector<cpx> CPX;
 
 
+
 inline void InitCPX(CPX &vec, int size, float value) {
 
 	cpx zero;

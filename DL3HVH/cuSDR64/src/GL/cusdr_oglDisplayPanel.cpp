@@ -23,7 +23,8 @@
  *   Free Software Foundation, Inc.,
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-//#define LOG_DISPLAYPANEL
+
+#define LOG_DISPLAYPANEL
 
 #include "cusdr_oglDisplayPanel.h"
 
@@ -99,10 +100,12 @@ OGLDisplayPanel::OGLDisplayPanel(QWidget *parent)
 	fonts = new CFonts(this);
 	m_fonts = fonts->getFonts();
 
+	m_fonts.smallFont.setBold(true);
 	m_oglTextTiny = new OGLText(m_fonts.tinyFont);
 	m_oglTextSmall = new OGLText(m_fonts.smallFont);
 
 	m_fonts.smallFont.setItalic(true);
+	//m_fonts.smallFont.setBold(true);
 	m_oglTextSmallItalic = new OGLText(m_fonts.smallFont);
 	m_oglTextNormal = new OGLText(m_fonts.normalFont);
 	m_oglTextBig = new OGLText(m_fonts.bigFont);
@@ -353,73 +356,82 @@ void OGLDisplayPanel::setupConnections() {
 
 void OGLDisplayPanel::setupTextstrings() {
 
-	m_blankWidth = m_oglTextSmall->fontMetrics().tightBoundingRect("I").width();
-	m_blankHeight = m_oglTextSmall->fontMetrics().tightBoundingRect("I").height();
+    //m_blankWidth = m_oglTextSmall->fontMetrics().tightBoundingRect("I").width();
+    m_blankWidth = m_oglTextSmall->fontMetrics().width(".");
+    //m_blankHeight = m_oglTextSmall->fontMetrics().tightBoundingRect("I").height();
+    m_blankHeight = m_oglTextSmall->fontMetrics().height()-1;
 
 	m_pointStringWidth = m_oglTextFreq1->fontMetrics().width(".");
-	m_blankWidthf = m_oglTextFreq1->fontMetrics().tightBoundingRect("59.999").width();
+    //m_blankWidthf = m_oglTextFreq1->fontMetrics().tightBoundingRect("59.999").width();
+    m_blankWidthf = m_oglTextFreq1->fontMetrics().width("59.999");
 	m_blankWidthf1 = m_oglTextFreq1->fontMetrics().width("0");
 	m_blankWidthf2 = m_oglTextFreq2->fontMetrics().width("0");
 	m_fUnitStringWidth = m_oglTextFreq2->fontMetrics().width("MHz");
 
-	m_versionStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect("5.52").width();
+    //m_versionStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect("5.52").width();
+    m_versionStringWidth = m_oglTextSmall->fontMetrics().width("2.22");
 
 	m_SYNCString = QString("SYNC");
-	m_syncWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_SYNCString).width();
+    //m_syncWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_SYNCString).width();
+    m_syncWidth = m_oglTextSmall->fontMetrics().width(m_SYNCString);
 
 	m_ADCString = QString("ADC");
-	m_adcWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_ADCString).width();
+    //m_adcWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_ADCString).width();
+    m_adcWidth = m_oglTextSmall->fontMetrics().width(m_ADCString);
 
 	m_PacketLossString = QString("IP Packets");
-	m_packetLossWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_PacketLossString).width();
+    //m_packetLossWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_PacketLossString).width();
+    m_packetLossWidth = m_oglTextSmall->fontMetrics().width(m_PacketLossString);
 
 	m_sendIQString = QString("send IQ");
-	m_sendIQWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_sendIQString).width();
+    //m_sendIQWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_sendIQString).width();
+    m_sendIQWidth = m_oglTextSmall->fontMetrics().width(m_sendIQString);
 
 	m_recvAudioString = QString("recv Audio");
-	m_recvAudioWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_recvAudioString).width();
+    //m_recvAudioWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_recvAudioString).width();
+    m_recvAudioWidth = m_oglTextSmall->fontMetrics().width(m_recvAudioString);
 
 	m_AttnString = QString("Attn:");
-	m_AttnWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_AttnString).width();
+    m_AttnWidth = m_oglTextSmall->fontMetrics().width(m_AttnString);
 
 	m_ditherString = QString("Dither");
-	m_ditherWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_ditherString).width();
+    m_ditherWidth = m_oglTextSmall->fontMetrics().width(m_ditherString);
 
 	m_randomString = QString("Random");
-	m_randomWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_randomString).width();
+    m_randomWidth = m_oglTextSmall->fontMetrics().width(m_randomString);
 
 	m_sampleRateString = QString("SampleRate:");
-	m_sampleRateWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_sampleRateString).width();
+    m_sampleRateWidth = m_oglTextSmall->fontMetrics().width(m_sampleRateString);
 
 	m_modusString = QString("Modus:");
-	m_modusWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_modusString).width();
+    m_modusWidth = m_oglTextSmall->fontMetrics().width(m_modusString);
 
 	m_10MHzString = QString("10 MHz:");
-	m_10MHzWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_10MHzString).width();
+    m_10MHzWidth = m_oglTextSmall->fontMetrics().width(m_10MHzString);
 
 	m_12288MHzString = QString("122.88 MHz:");
-	m_12288MHzWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_12288MHzString).width();
+    m_12288MHzWidth = m_oglTextSmall->fontMetrics().width(m_12288MHzString);
 
 	m_mercuryString = QString("Mercury ");
-	m_mercuryStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_mercuryString).width();
+    m_mercuryStringWidth = m_oglTextSmall->fontMetrics().width(m_mercuryString);
 
 	m_penelopeString = QString("Penelope ");
-	m_penelopeStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_penelopeString).width();
+    m_penelopeStringWidth = m_oglTextSmall->fontMetrics().width(m_penelopeString);
 
 	m_pennylaneString = QString("Pennylane ");
-	m_pennylaneStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_pennylaneString).width();
+    m_pennylaneStringWidth = m_oglTextSmall->fontMetrics().width(m_pennylaneString);
 
 	m_excaliburString = QString("Excalibur ");
-	m_excaliburStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_excaliburString).width();
+    m_excaliburStringWidth = m_oglTextSmall->fontMetrics().width(m_excaliburString);
 
 	m_metisString = QString("Metis ");
-	m_metisStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_metisString).width();
+    m_metisStringWidth = m_oglTextSmall->fontMetrics().width(m_metisString);
 
 	m_alexString = QString("Alex ");
-	m_alexStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_alexString).width();
+    m_alexStringWidth = m_oglTextSmall->fontMetrics().width(m_alexString);
 
 	m_hermesString = QString("Hermes ");
-	m_hermesStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_hermesString).width();
+    m_hermesStringWidth = m_oglTextSmall->fontMetrics().width(m_hermesString);
 
 }
 
@@ -487,7 +499,9 @@ void OGLDisplayPanel::paintUpperRegion() {
 
 	// sync status
 	str = QString(m_SYNCString);
-	QRect rect = QRect(x1, y1, m_syncWidth + 5*m_blankWidth, m_blankHeight + 4);
+    QRect rect = QRect(x1, y1, m_syncWidth + 2*m_blankWidth, m_blankHeight);
+	//QRect rect = QRect(x1, y1, m_syncWidth + m_blankWidth, m_blankHeight);
+	//QRect rect = QRect(x1, y1, m_syncWidth + 2, m_blankHeight);
 
 	switch (m_syncStatus) {
 
@@ -505,11 +519,15 @@ void OGLDisplayPanel::paintUpperRegion() {
 	}
 	qglColor(QColor(0, 0, 0));
 	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, m_SYNCString);
+	//m_oglTextSmallItalic->renderText(x1+1, y1, m_SYNCString);
 
 	// ADC status
 	str = QString(m_ADCString);
-	x1 += m_syncWidth + 7*m_blankWidth;
-	rect = QRect(x1, y1, m_adcWidth + 5*m_blankWidth, m_blankHeight + 4);
+    x1 += m_syncWidth + 3*m_blankWidth;
+	//x1 += m_syncWidth + m_blankWidth;
+    rect = QRect(x1, y1, m_adcWidth + 2*m_blankWidth, m_blankHeight);
+    //rect = QRect(x1, y1, m_adcWidth + m_blankWidth, m_blankHeight);
+	//rect = QRect(x1, y1, m_adcWidth + 3, m_blankHeight);
 
 	switch (m_adcStatus) {
 
@@ -527,11 +545,14 @@ void OGLDisplayPanel::paintUpperRegion() {
 	}
 	qglColor(QColor(0, 0, 0));
 	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, m_ADCString);
+	//m_oglTextSmallItalic->renderText(x1+1, y1, m_ADCString);
 
 	// Packet loss status
 	str = QString(m_PacketLossString);
-	x1 += m_adcWidth + 7*m_blankWidth;
-	rect = QRect(x1, y1,  m_packetLossWidth + 5*m_blankWidth, m_blankHeight + 4);
+    x1 += m_adcWidth + 3*m_blankWidth;
+    rect = QRect(x1, y1,  m_packetLossWidth + 2*m_blankWidth, m_blankHeight);
+    //rect = QRect(x1, y1,  m_packetLossWidth + 2*m_blankWidth, m_blankHeight);
+    //rect = QRect(x1, y1,  m_packetLossWidth + 5, m_blankHeight);
 
 	switch (m_packetLossStatus) {
 
@@ -549,6 +570,7 @@ void OGLDisplayPanel::paintUpperRegion() {
 	}
 	qglColor(QColor(0, 0, 0));
 	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, m_PacketLossString);
+	//m_oglTextSmallItalic->renderText(x1+1, y1, m_PacketLossString);
 
 //	// send IQ data status
 //	str = QString(m_sendIQString);
@@ -601,9 +623,9 @@ void OGLDisplayPanel::paintUpperRegion() {
 
 	// Metis status
 	str = m_metisString;
-	x1 += m_packetLossWidth + 40*m_blankWidth;
+    x1 += m_packetLossWidth + 15*m_blankWidth;
 
-	rect = QRect(x1, y1, m_metisStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
+    rect = QRect(x1, y1, m_metisStringWidth + m_versionStringWidth, m_blankHeight);
 	
 	if (m_hwInterface == QSDR::Metis) {
 
@@ -622,14 +644,15 @@ void OGLDisplayPanel::paintUpperRegion() {
 		qglColor(QColor(0, 0, 0));
 	}
 		
-	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	//m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	m_oglTextSmallItalic->renderText(x1, y1, 1.0f, str);
 
 
 	// Mercury status
 	str = m_mercuryString;
-	x1 += m_metisStringWidth + m_versionStringWidth + 7*m_blankWidth;
+    x1 += m_metisStringWidth + m_versionStringWidth + m_blankWidth;
 
-	rect = QRect(x1, y1, m_mercuryStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
+    rect = QRect(x1, y1, m_mercuryStringWidth + m_versionStringWidth, m_blankHeight);
 
 	if (set->getMercuryPresence() && m_hwInterface == QSDR::Metis) {
 
@@ -648,17 +671,18 @@ void OGLDisplayPanel::paintUpperRegion() {
 		qglColor(QColor(0, 0, 0));
 	}
 
-	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	//m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	m_oglTextSmallItalic->renderText(x1, y1, 1.0f, str);
 
 
 	// Penelope status
 	str = m_penelopeString;
-	x1 += m_mercuryStringWidth + m_versionStringWidth + 7*m_blankWidth;
+    x1 += m_mercuryStringWidth + m_versionStringWidth + m_blankWidth;
 
 	if (set->getPenelopePresence() && m_hwInterface == QSDR::Metis) {
 
 		str = m_penelopeString;
-		rect = QRect(x1, y1, m_penelopeStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
+        rect = QRect(x1, y1, m_penelopeStringWidth + m_versionStringWidth, m_blankHeight);
 		drawGLRect(rect, m_textBackgroundColor, -2.0f);
 		if (m_dataEngineState == QSDR::DataEngineUp) {
 
@@ -671,7 +695,7 @@ void OGLDisplayPanel::paintUpperRegion() {
 	else if (set->getPennyLanePresence() && m_hwInterface == QSDR::Metis) {
 
 		str = m_pennylaneString;
-		rect = QRect(x1, y1, m_pennylaneStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
+        rect = QRect(x1, y1, m_pennylaneStringWidth + m_versionStringWidth, m_blankHeight);
 		drawGLRect(rect, m_textBackgroundColor, -2.0f);
 		if (m_dataEngineState == QSDR::DataEngineUp) {
 
@@ -683,18 +707,19 @@ void OGLDisplayPanel::paintUpperRegion() {
 	}
 	else {
 
-		rect = QRect(x1, y1, m_penelopeStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
+        rect = QRect(x1, y1, m_penelopeStringWidth + m_versionStringWidth, m_blankHeight);
 		drawGLRect(rect, QColor(68, 68, 68), -2.0f);
 		qglColor(QColor(0, 0, 0));
 	}
-	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	//m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	m_oglTextSmallItalic->renderText(x1, y1, 1.0f, str);
 
 
 	// Hermes status
 	str = m_hermesString;
-	x1 += m_penelopeStringWidth + m_versionStringWidth + 7*m_blankWidth;
+    x1 += m_penelopeStringWidth + m_versionStringWidth + m_blankWidth;
 
-	rect = QRect(x1, y1,  m_hermesStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
+    rect = QRect(x1, y1,  m_hermesStringWidth + m_versionStringWidth, m_blankHeight);
 
 	if (set->getHPSDRHardware() == 1) {
 
@@ -712,15 +737,15 @@ void OGLDisplayPanel::paintUpperRegion() {
 		drawGLRect(rect, QColor(68, 68, 68), -2.0f);
 		qglColor(QColor(0, 0, 0));
 	}
-	
-	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	//m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	m_oglTextSmallItalic->renderText(x1, y1, 1.0f, str);
 
 
 	// Excalibur status
 	str = m_excaliburString;
-	x1 += m_hermesStringWidth + m_versionStringWidth + 7*m_blankWidth;
+    x1 += m_hermesStringWidth + m_versionStringWidth + m_blankWidth;
 
-	rect = QRect(x1, y1, m_hermesStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
+    rect = QRect(x1, y1, m_hermesStringWidth + m_versionStringWidth, m_blankHeight);
 
 	if (set->getExcaliburPresence() && m_hwInterface == QSDR::Metis) {
 
@@ -738,16 +763,15 @@ void OGLDisplayPanel::paintUpperRegion() {
 		drawGLRect(rect, QColor(68, 68, 68), -2.0f);
 		qglColor(QColor(0, 0, 0));
 	}
-	
-	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	//m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	m_oglTextSmallItalic->renderText(x1, y1, 1.0f, str);
 
 	
 	// Alex status
 	str = m_alexString;
-	x1 += m_hermesStringWidth + m_versionStringWidth + 7*m_blankWidth;
+    x1 += m_hermesStringWidth + m_versionStringWidth + m_blankWidth;
 
-	//rect = QRect(x1, y1, m_alexStringWidth + m_versionStringWidth + 5*m_blankWidth, m_blankHeight + 4);
-	rect = QRect(x1, y1, m_alexStringWidth + 3*m_blankWidth, m_blankHeight + 4);
+    rect = QRect(x1, y1, m_alexStringWidth + m_blankWidth, m_blankHeight);
 
 	if (set->getAlexPresence()) {
 
@@ -765,8 +789,8 @@ void OGLDisplayPanel::paintUpperRegion() {
 		drawGLRect(rect, QColor(68, 68, 68), -2.0f);
 		qglColor(QColor(0, 0, 0));
 	}
-	
-	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	//m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
+	m_oglTextSmallItalic->renderText(x1, y1, 1.0f, str);
 }
 
 void OGLDisplayPanel::paintLowerRegion() {
@@ -780,7 +804,7 @@ void OGLDisplayPanel::paintLowerRegion() {
 	qglColor(QColor(106, 136, 148));
 	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_AttnString);
 
-	x1 += m_AttnWidth + 4*m_blankWidth;
+    x1 += m_AttnWidth + 2*m_blankWidth;
 	if (m_mercuryAttenuator == 1)
 		str = "0 dB";
 	else
@@ -791,7 +815,7 @@ void OGLDisplayPanel::paintLowerRegion() {
 	m_oglTextSmallItalic->renderText(x1, y2, str);
 
 	// Dither status
-	x1 += attnValueWidth + 10*m_blankWidth;
+    x1 += attnValueWidth + 5*m_blankWidth;
 
 	if (m_dither == 1)
 		qglColor(m_activeTextColor);
@@ -801,7 +825,7 @@ void OGLDisplayPanel::paintLowerRegion() {
 	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_ditherString);
 
 	// Random status
-	x1 += m_ditherWidth + 10*m_blankWidth;
+    x1 += m_ditherWidth + 5*m_blankWidth;
 
 	if (m_random == 1)
 		qglColor(m_activeTextColor);
@@ -811,7 +835,7 @@ void OGLDisplayPanel::paintLowerRegion() {
 	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_randomString);
 
 	// Sample rate status
-	x1 += m_randomWidth + 20*m_blankWidth;
+    x1 += m_randomWidth + 10*m_blankWidth;
 	str = "%1";
 
 	qglColor(QColor(166, 196, 208));
@@ -826,7 +850,7 @@ void OGLDisplayPanel::paintLowerRegion() {
 
 
 	// server modus status
-	x1 += samplerateUnitWidth + 15*m_blankWidth;
+    x1 += samplerateUnitWidth + 10*m_blankWidth;
 	switch (m_serverMode) {
 
 		case QSDR::DemoMode:

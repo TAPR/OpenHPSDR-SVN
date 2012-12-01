@@ -30,7 +30,7 @@
 #include "cusdr_oglUtils.h"
 #include "cusdr_oglInfo.h"
 #include "cusdr_settings.h"
-#include "Util/cusdr_fonts.h"
+#include "cusdr_fonts.h"
 #include "cusdr_oglText.h"
 
 //#include <QtOpenGL/QGLWidget>

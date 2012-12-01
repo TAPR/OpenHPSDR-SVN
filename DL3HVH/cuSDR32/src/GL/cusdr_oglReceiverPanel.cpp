@@ -159,6 +159,7 @@ QGLReceiverPanel::QGLReceiverPanel(QWidget *parent, int rx)
 	fonts = new CFonts(this);
 	m_fonts = fonts->getFonts();
 
+	m_fonts.smallFont.setBold(true);
 	m_oglTextTiny = new OGLText(m_fonts.tinyFont);
 	m_oglTextSmall = new OGLText(m_fonts.smallFont);
 	m_oglTextNormal = new OGLText(m_fonts.normalFont);
@@ -628,11 +629,17 @@ void QGLReceiverPanel::drawPanadapter() {
 
 		if (m_receiver == m_currentReceiver) {
 
+//			glBegin(GL_TRIANGLE_STRIP);
+//				glColor3f(0.2f * m_bkgRed, 0.2f * m_bkgGreen, 0.2f * m_bkgBlue); glVertex3f(x1, y1, -4.0); // top left corner
+//				glColor3f(0.2f * m_bkgRed, 0.2f * m_bkgGreen, 0.2f * m_bkgBlue); glVertex3f(x2, y1, -4.0); // top right corner
+//				glColor3f(0.8f * m_bkgRed, 0.8f * m_bkgGreen, 0.8f * m_bkgBlue); glVertex3f(x1, y2, -4.0); // bottom left corner
+//				glColor3f(       m_bkgRed,        m_bkgGreen,        m_bkgBlue); glVertex3f(x2, y2, -4.0); // bottom right corner
+//			glEnd();
 			glBegin(GL_TRIANGLE_STRIP);
-				glColor3f(0.2f * m_bkgRed, 0.2f * m_bkgGreen, 0.2f * m_bkgBlue); glVertex3f(x1, y1, -4.0); // top left corner
-				glColor3f(0.2f * m_bkgRed, 0.2f * m_bkgGreen, 0.2f * m_bkgBlue); glVertex3f(x2, y1, -4.0); // top right corner
-				glColor3f(0.8f * m_bkgRed, 0.8f * m_bkgGreen, 0.8f * m_bkgBlue); glVertex3f(x1, y2, -4.0); // bottom left corner
-				glColor3f(       m_bkgRed,        m_bkgGreen,        m_bkgBlue); glVertex3f(x2, y2, -4.0); // bottom right corner
+				glColor3f(0.8f * m_bkgRed, 0.8f * m_bkgGreen, 0.8f * m_bkgBlue); glVertex3f(x1, y1, -4.0); // top left corner
+				glColor3f(0.6f * m_bkgRed, 0.6f * m_bkgGreen, 0.6f * m_bkgBlue); glVertex3f(x2, y1, -4.0); // top right corner
+				glColor3f(0.4f * m_bkgRed, 0.4f * m_bkgGreen, 0.4f * m_bkgBlue); glVertex3f(x1, y2, -4.0); // bottom left corner
+				glColor3f(0.2f * m_bkgRed, 0.2f * m_bkgGreen, 0.2f * m_bkgBlue); glVertex3f(x2, y2, -4.0); // bottom right corner
 			glEnd();
 		}
 		else {

@@ -49,16 +49,16 @@ CFonts::CFonts(QObject *parent)
 
 	m_fonts.smallFont.setStyleStrategy(QFont::PreferAntialias);
 	m_fonts.smallFont.setStyleHint(QFont::SansSerif, QFont::PreferAntialias);
-	m_fonts.smallFont.setBold(true);
+	//m_fonts.smallFont.setBold(true);
 	m_fonts.smallFont.setFixedPitch(true);
 	#if defined(Q_OS_MAC)
-		m_fonts.smallFont.setPixelSize(10);
+		m_fonts.smallFont.setPixelSize(9);
 		m_fonts.smallFont.setFamily("Arial");
 	#elif defined(Q_OS_WIN32)
 		m_fonts.smallFont.setPixelSize(10);
 		m_fonts.smallFont.setFamily("Arial");
 	#elif defined(Q_OS_LINUX)
-		m_fonts.smallFont.setPixelSize(9);
+		m_fonts.smallFont.setPixelSize(10);
 		m_fonts.smallFont.setFamily("Arial");
 	#endif
 
@@ -66,19 +66,20 @@ CFonts::CFonts(QObject *parent)
 	m_fonts.fontHeightSmallFont = m_fonts.smallFontMetrics->tightBoundingRect("M").height();
 
 
-	m_fonts.normalFont.setStyleStrategy(QFont::PreferAntialias);
-	m_fonts.normalFont.setStyleHint(QFont::SansSerif, QFont::PreferAntialias);
-	m_fonts.normalFont.setBold(true);
+    //m_fonts.normalFont.setStyleStrategy(QFont::PreferAntialias);
+    //m_fonts.normalFont.setStyleHint(QFont::SansSerif, QFont::PreferAntialias);
+    m_fonts.normalFont.setStyleStrategy(QFont::OpenGLCompatible);
+    m_fonts.normalFont.setBold(true);
 	m_fonts.normalFont.setFixedPitch(true);
 	#if defined(Q_OS_MAC)
-		m_fonts.normalFont.setPixelSize(11);
-		m_fonts.normalFont.setFamily("Arial");
-	#elif defined(Q_OS_WIN32)
-		m_fonts.normalFont.setPixelSize(11);
-		m_fonts.normalFont.setFamily("Arial");
-	#elif defined(Q_OS_LINUX)
 		m_fonts.normalFont.setPixelSize(10);
 		m_fonts.normalFont.setFamily("Arial");
+	#elif defined(Q_OS_WIN32)
+		m_fonts.normalFont.setPixelSize(10);
+		m_fonts.normalFont.setFamily("Arial");
+	#elif defined(Q_OS_LINUX)
+        m_fonts.normalFont.setPixelSize(10);
+        m_fonts.normalFont.setFamily("Arial");
 	#endif
 
 	m_fonts.normalFontMetrics = new QFontMetrics(m_fonts.normalFont);

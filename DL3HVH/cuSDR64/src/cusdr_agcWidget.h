@@ -35,8 +35,8 @@
 //#include <QLineEdit>
 
 #include "Util/cusdr_buttons.h"
-#include "Util/cusdr_fonts.h"
 #include "cusdr_settings.h"
+#include "cusdr_fonts.h"
 
 
 class AGCOptionsWidget : public QWidget {

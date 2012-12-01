@@ -237,6 +237,7 @@ void QFilter::setSampleRate(QObject *sender, int value) {
 	Q_UNUSED(sender)
 
 	m_samplerate = (float)value;
+	//FILTER_DEBUG << "set sample rate to " << m_samplerate;
 	MakeFilter(m_filter_lo, m_filter_hi, m_ftype, m_wtype);
 }
 

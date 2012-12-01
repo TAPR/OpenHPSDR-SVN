@@ -46,7 +46,13 @@
 **
 ****************************************************************************/
 
-#include <QtMultimedia/QAudioFormat>
+//#include <QtMultimedia/QAudioFormat>
+//#if defined(Q_OS_WIN32)
+//	#include <QtMultimedia/QAudioFormat>
+//#elif defined(Q_OS_LINUX)
+//	#include <QtMultimediaKit/QAudioFormat>
+//#endif
+
 #include "cusdr_audio_utils.h"
 
 qint64 audioDuration(const QAudioFormat &format, qint64 bytes) {

@@ -243,6 +243,8 @@ void QDSPEngine::setSampleRate(QObject *sender, int value) {
 			DSP_ENGINE_DEBUG << "invalid sample rate (48000, 96000, 192000)!\n";
 			break;
 	}
+
+	//DSP_ENGINE_DEBUG << "set sample rate to " << m_samplerate;
 	filter->setSampleRate(this, m_samplerate);
 	demod->setSampleRate(this, m_samplerate);
 	wpagc->setSampleRate(this, m_samplerate);
