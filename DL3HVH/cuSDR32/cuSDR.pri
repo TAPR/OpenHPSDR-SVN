@@ -1,7 +1,6 @@
 HEADERS += \
 	./src/Util/cusdr_buttons.h \
 	./src/Util/cusdr_colorTriangle.h \
-	./src/Util/cusdr_fonts.h \
 	./src/Util/cusdr_highResTimer.h \
 	./src/Util/cusdr_image.h \
 	./src/Util/cusdr_imageblur.h \
@@ -64,6 +63,7 @@ HEADERS += \
 	#./src/cusdr_server.h \
 	./src/cusdr_serverWidget.h \
 	./src/cusdr_settings.h \
+	./src/cusdr_fonts.h \
 	./src/cusdr_transmitTabWidget.h \
 	./src/cusdr_transmitOptionsWidget.h \
 	./src/cusdr_transmitPAWidget.h
@@ -73,7 +73,6 @@ win32:HEADERS += ./src/Util/cusdr_cpuUsage.h \
 SOURCES += \
 	./src/Util/cusdr_buttons.cpp \
 	./src/Util/cusdr_colorTriangle.cpp \
-	./src/Util/cusdr_fonts.cpp \
 	./src/Util/cusdr_highResTimer.cpp \
 	./src/Util/cusdr_image.cpp \
 	./src/Util/cusdr_imageblur.cpp \
@@ -129,6 +128,7 @@ SOURCES += \
 	#./src/cusdr_server.cpp \
 	./src/cusdr_serverWidget.cpp \
 	./src/cusdr_settings.cpp \
+	./src/cusdr_fonts.cpp \
 	./src/cusdr_transmitTabWidget.cpp \
 	./src/cusdr_transmitOptionsWidget.cpp \
 	./src/cusdr_transmitPAWidget.cpp \
