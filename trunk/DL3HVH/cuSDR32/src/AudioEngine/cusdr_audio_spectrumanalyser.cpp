@@ -54,7 +54,6 @@
 
 #include <QtCore/qmath.h>
 #include <QtCore/qmetatype.h>
-//#include <QtMultimedia/QAudioFormat>
 #include <QThread>
 
 

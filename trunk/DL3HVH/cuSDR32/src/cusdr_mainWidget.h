@@ -124,9 +124,9 @@ private:
 	void	createViewMenu();
 	void	createAttenuatorMenu();
 	void	createMainBtnGroup();
-	void	createDisplayPanel();
+	//void	createDisplayPanel();
 	void	createStatusBar();
-	void	initWidebandDisplay();
+	//void	initWidebandDisplay();
 	void	initReceiverPanels(int rx);
 	void	updateFromSettings();
 	void	runFFTWWisdom();

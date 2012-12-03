@@ -32,6 +32,10 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.3.2.4:
+
+- added Metis FW V2.2
+
 v0.3.2.3:
 
 - Bug-fix: inital settings of demod mode corrected

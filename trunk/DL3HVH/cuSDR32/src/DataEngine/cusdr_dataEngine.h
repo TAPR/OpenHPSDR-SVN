@@ -121,9 +121,11 @@ public slots:
 	void	processInputBuffer(const QByteArray &buffer);
 	void	processWideBandInputBuffer(const QByteArray &buffer);
 	void	processFileBuffer(const QList<qreal> data);
-	void	processOutputBuffer(float *left, float *right);
+	//void	processOutputBuffer(float *left, float *right);
 	void	processOutputBuffer(const CPX &buffer);
-	void	writeControlBytes();
+	//void	writeControlBytes();
+	void	encodeCCBytes();
+	void	decodeCCBytes(const QByteArray &buffer);
 
 	// change HPSDR hardware settings
 	void	setPenelopeVersion(QObject *sender, int version);
