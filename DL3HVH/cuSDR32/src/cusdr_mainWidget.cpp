@@ -38,19 +38,6 @@
 
 #include "cusdr_mainWidget.h"
 
-//#pragma comment(lib, "User32.lib")
-
-#ifdef Q_OS_X11
-	#include <private/qt_x11_p.h>
-#endif
-//#else 
-//#ifdef Q_OS_WIN
-//	#include "qt_windows.h"
-//#endif
-//#else 
-//#ifdef Q_OS_MAC
-//	#include <private/qt_mac_p.h>
-//#endif
 
 #define window_height1		600
 #define window_height2		750
@@ -349,8 +336,17 @@ void MainWindow::setupConnections() {
 void MainWindow::setup() {
 	
 	//runFFTWWisdom();
-	createDisplayPanel();
 
+	displayPanelToolBar = new QToolBar(tr("Display Panel"), this);
+	displayPanelToolBar->setAllowedAreas(Qt::TopToolBarArea);
+	displayPanelToolBar->setMovable(false);
+	displayPanelToolBar->setStyleSheet(set->getDisplayToolbarStyle());
+
+	m_oglDisplayPanel = new OGLDisplayPanel(displayPanelToolBar);
+
+	displayPanelToolBar->addWidget(m_oglDisplayPanel);
+
+	addToolBar(displayPanelToolBar);
 	addToolBarBreak(Qt::TopToolBarArea);
 	
 	createMainBtnGroup();
@@ -359,7 +355,7 @@ void MainWindow::setup() {
 	createViewMenu();
 	createAttenuatorMenu();
 	
-	initWidebandDisplay();
+	m_wbDisplay = new QGLWidebandPanel(this);
 	initReceiverPanels(MAX_RECEIVERS);
 	
 	setupLayout();
@@ -437,22 +433,6 @@ void MainWindow::runFFTWWisdom() {
 		process.start("fftwf-wisdom.exe");
 		process.waitForFinished();
 	}
-}
-
-/*!
-	\brief creates the display panel and puts it on a QToolBar.
-*/
-void MainWindow::createDisplayPanel() {
-
-	m_oglDisplayPanel = new OGLDisplayPanel(this);
-	
-	displayPanelToolBar = new QToolBar(tr("Display Panel"), this);
-	displayPanelToolBar->setAllowedAreas(Qt::TopToolBarArea);
-	displayPanelToolBar->setMovable(false);
-	displayPanelToolBar->setStyleSheet(set->getDisplayToolbarStyle());
-	displayPanelToolBar->addWidget(m_oglDisplayPanel);
-
-	addToolBar(displayPanelToolBar);
 }
  
 /*!
@@ -594,17 +574,6 @@ void MainWindow::setupLayout() {
 	}
 
 	//viewMenu->addAction(dock->toggleViewAction());
-}
-
-void MainWindow::initWidebandDisplay() {
-
-	if (m_wbDisplay) {
-
-		delete m_wbDisplay;
-		m_wbDisplay = 0;
-	}
-	
-	m_wbDisplay = new QGLWidebandPanel(this);
 }
 
 /*!
