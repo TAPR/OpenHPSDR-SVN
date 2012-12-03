@@ -57,8 +57,8 @@
 #include <QCoreApplication>
 #include <QMetaObject>
 #include <QSet>
-#include <QtMultimedia/QAudioInput>
-#include <QtMultimedia/QAudioOutput>
+#include <QAudioInput>
+#include <QAudioOutput>
 #include <QDebug>
 #include <QThread>
 #include <QFile>

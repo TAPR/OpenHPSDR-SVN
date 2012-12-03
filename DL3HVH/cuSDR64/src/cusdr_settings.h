@@ -27,7 +27,7 @@
 #ifndef CUSDR_SETTINGS_H
 #define CUSDR_SETTINGS_H
 
-#define DEBUG
+//#define DEBUG
 
 
 #include <QObject>
@@ -35,13 +35,8 @@
 #include <QMutex>
 #include <QtNetwork>
 
-#if defined(Q_OS_WIN32)
-	#include <QtMultimedia/qaudio.h>
-	#include <QtMultimedia/QAudioFormat>
-#elif defined(Q_OS_LINUX)
-	#include <QtMultimediaKit/QAudioInput>
-	#include <QtMultimediaKit/QAudioOutput>
-#endif
+#include <QAudioInput>
+#include <QAudioOutput>
 
 #include "cusdr_hamDatabase.h"
 
@@ -406,6 +401,9 @@ typedef struct _hpsdrParameter {
 
 	uchar	control_in[5];
 	uchar	control_out[5];
+
+	QByteArray	ccIn;
+	QByteArray	ccOut;
 
 	uchar	output_buffer[IO_BUFFER_SIZE];
 	//float	in_buffer[2*BUFFER_SIZE];
