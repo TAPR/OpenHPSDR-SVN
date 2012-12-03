@@ -69,7 +69,7 @@ OGLDisplayPanel::OGLDisplayPanel(QWidget *parent)
 	, m_currentReceiver(set->getCurrentReceiver())
 	, m_sMeterDeform(15)
 	, m_freqDigitsPosY(30)
-	, m_sMeterPosY(45)
+	, m_sMeterPosY(50)//(45)
 	, m_sMeterHoldTime(set->getSMeterHoldTime())
 	, m_sMeterPrevHoldTimeMax(0)
 	, m_sMeterPrevHoldTimeMin(0)
@@ -1065,8 +1065,10 @@ void OGLDisplayPanel::paintSMeter() {
 
 		QString str = "%1";
 		m_sMeterNumValueString = QString(str.arg(m_sMeterOrgValue, 0, 'f', 1));
-		m_oglTextBig->renderText(x1 + m_sMeterWidth - 85, 80, 3.0, m_sMeterNumValueString);
-		m_oglTextNormal->renderText(x1 + m_sMeterWidth - 28, 86, 3.0, "dBm");
+		//m_oglTextBig->renderText(x1 + m_sMeterWidth - 85, 80, 3.0, m_sMeterNumValueString);
+		//m_oglTextNormal->renderText(x1 + m_sMeterWidth - 28, 86, 3.0, "dBm");
+		m_oglTextBig->renderText(x1 + m_sMeterWidth - 85, 2, 3.0, m_sMeterNumValueString);
+		m_oglTextNormal->renderText(x1 + m_sMeterWidth - 28, 9, 3.0, "dBm");
 
 		glEnable(GL_MULTISAMPLE);
 	}
@@ -2029,6 +2031,7 @@ void OGLDisplayPanel::setupDisplayRegions(QSize size) {
 	int height = size.height();
 
 	m_sMeterWidth = (int)(0.8f*(width - m_rxRectWidth));
+
 	if (m_sMeterWidth < 300) m_sMeterWidth = 300;
 	if (m_sMeterWidth > 600) m_sMeterWidth = 600;
 
@@ -2037,6 +2040,8 @@ void OGLDisplayPanel::setupDisplayRegions(QSize size) {
 		m_sMeterOffset = (int)(width - m_rxRectWidth - m_sMeterWidth)/2.0f;
 	else
 		m_sMeterOffset = width - m_rxRectWidth - m_sMeterWidth - 40;
+
+	//m_sMeterOffset = 0;
 		
 	m_rect = QRect(0, 0, width, height);
 	m_rxRect = QRect(0, 0, m_rxRectWidth, height);

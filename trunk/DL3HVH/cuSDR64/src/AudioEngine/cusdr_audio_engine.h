@@ -58,8 +58,6 @@
 //#include <QByteArray>
 //#include <QBuffer>
 //#include <QVector>
-//#include <QtMultimedia/QAudioDeviceInfo>
-//#include <QtMultimedia/QAudioFormat>
 //#include <QFile>
 
 #ifdef LOG_AUDIO_ENGINE

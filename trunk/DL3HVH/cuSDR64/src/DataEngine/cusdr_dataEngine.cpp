@@ -562,8 +562,6 @@ bool DataEngine::getFirmwareVersions() {
 	m_pennylaneFW = set->getPennyLaneVersion();
 	m_hermesFW = set->getHermesVersion();
 
-	//m_metisFW = 50;
-
 	// if we have 4096 * 16 bit = 8 * 1024 raw consecutive ADC samples, m_wbBuffers = 8
 	// we have 16384 * 16 bit = 32 * 1024 raw consecutive ADC samples, m_wbBuffers = 32
 	int wbBuffers = 0;
@@ -709,6 +707,20 @@ bool DataEngine::checkFirmwareVersions() {
 					stop();
 
 					msg = "Penny[Lane] FW Version V1.7 and Mercury FW V3.3 required for Metis FW V2.1!";
+					set->showWarningDialog(msg);
+					return false;
+				}
+				break;
+
+			case 22:
+
+				if ((set->getPenelopePresence() && m_penelopeFW != 17)	||
+					(set->getPennyLanePresence() && m_pennylaneFW != 17)||
+					m_mercuryFW != 33)
+				{
+					stop();
+
+					msg = "Penny[Lane] FW Version V1.7 and Mercury FW V3.3 required for Metis FW >= V2.1!";
 					set->showWarningDialog(msg);
 					return false;
 				}
@@ -1827,184 +1839,9 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 
 	if (buffer.at(s++) == SYNC && buffer.at(s++) == SYNC && buffer.at(s++) == SYNC) {
 
-		// extract control bytes
-        io.control_in[0] = buffer.at(s++);
-        io.control_in[1] = buffer.at(s++);
-        io.control_in[2] = buffer.at(s++);
-        io.control_in[3] = buffer.at(s++);
-        io.control_in[4] = buffer.at(s++);
-
-        io.ccRx.ptt    = (bool)((io.control_in[0] & 0x01) == 0x01);
-		io.ccRx.dash   = (bool)((io.control_in[0] & 0x02) == 0x02);
-		io.ccRx.dot    = (bool)((io.control_in[0] & 0x04) == 0x04);
-		io.ccRx.lt2208 = (bool)((io.control_in[1] & 0x01) == 0x01);
-
-
-		io.ccRx.roundRobin = (uchar)(io.control_in[0] >> 3);
-        switch (io.ccRx.roundRobin) { // cycle through C0
-
-			case 0:
-
-				if (io.ccRx.lt2208) { // check ADC signal
-					
-					if (m_ADCChangedTime.elapsed() > 50) {
-
-						set->setADCOverflow(2);
-						m_ADCChangedTime.restart();
-					}
-				}
-
-				//qDebug() << "CC: " << io.ccRx.roundRobin;
-				if (m_hwInterface == QSDR::Hermes) {
-
-					io.ccRx.hermesI01 = (bool)((io.control_in[1] & 0x02) == 0x02);
-					io.ccRx.hermesI02 = (bool)((io.control_in[1] & 0x04) == 0x04);
-					io.ccRx.hermesI03 = (bool)((io.control_in[1] & 0x08) == 0x08);
-					io.ccRx.hermesI04 = (bool)((io.control_in[1] & 0x10) == 0x10);
-					//qDebug() << "Hermes IO 1: " << io.ccRx.hermesI01 << "2: " << io.ccRx.hermesI02 << "3: " << io.ccRx.hermesI03 << "4: " << io.ccRx.hermesI04;
-				}
-
-				if (m_fwCount < 100) {
-
-					if (m_hwInterface == QSDR::Metis) {
-				
-						if (io.ccRx.devices.mercuryFWVersion != io.control_in[2]) {
-							io.ccRx.devices.mercuryFWVersion = io.control_in[2];
-							set->setMercuryVersion(io.ccRx.devices.mercuryFWVersion);
-							io.networkIOMutex.lock();
-							DATA_ENGINE_DEBUG << "Mercury firmware version: " << qPrintable(QString::number(io.control_in[2]));
-							io.networkIOMutex.unlock();
-						}
-			
-						if (io.ccRx.devices.penelopeFWVersion != io.control_in[3]) {
-							io.ccRx.devices.penelopeFWVersion = io.control_in[3];
-							io.ccRx.devices.pennylaneFWVersion = io.control_in[3];
-							set->setPenelopeVersion(io.ccRx.devices.penelopeFWVersion);
-							set->setPennyLaneVersion(io.ccRx.devices.penelopeFWVersion);
-							io.networkIOMutex.lock();
-							DATA_ENGINE_DEBUG << "Penelope/Pennylane firmware version: " << qPrintable(QString::number(io.control_in[3]));
-							io.networkIOMutex.unlock();
-						}
-
-						if (io.ccRx.devices.metisFWVersion != io.control_in[4]) {
-							io.ccRx.devices.metisFWVersion = io.control_in[4];
-							set->setMetisVersion(io.ccRx.devices.metisFWVersion);
-							io.networkIOMutex.lock();
-							DATA_ENGINE_DEBUG << "Metis firmware version: " << qPrintable(QString::number(io.control_in[4]));
-							io.networkIOMutex.unlock();
-						}
-					}
-					else if (m_hwInterface == QSDR::Hermes) {
-
-						if (io.ccRx.devices.hermesFWVersion != io.control_in[4]) {
-							io.ccRx.devices.hermesFWVersion = io.control_in[4];
-							set->setHermesVersion(io.ccRx.devices.hermesFWVersion);
-							io.networkIOMutex.lock();
-							DATA_ENGINE_DEBUG << "Hermes firmware version: " << qPrintable(QString::number(io.control_in[4]));
-							io.networkIOMutex.unlock();
-						}
-					}
-					m_fwCount++;
-				}
-				break;
-
-			case 1:
-
-				//qDebug() << "CC: " << io.ccRx.roundRobin;
-				// forward power
-				if (set->getPenelopePresence() || (m_hwInterface == QSDR::Hermes)) { // || set->getPennyLanePresence()
-					
-					io.ccRx.ain5 = (quint16)((quint16)(io.control_in[1] << 8) + (quint16)io.control_in[2]);
-					
-					io.penelopeForwardVolts = (qreal)(3.3 * (qreal)io.ccRx.ain5 / 4095.0);
-					io.penelopeForwardPower = (qreal)(io.penelopeForwardVolts * io.penelopeForwardVolts / 0.09);
-				}
-				//qDebug() << "penelopeForwardVolts: " << io.penelopeForwardVolts << "penelopeForwardPower" << io.penelopeForwardPower;
-				
-				if (set->getAlexPresence()) { //|| set->getApolloPresence()) {
-					
-					io.ccRx.ain1 = (quint16)((quint16)(io.control_in[3] << 8) + (quint16)io.control_in[4]);
-					
-					io.alexForwardVolts = (qreal)(3.3 * (qreal)io.ccRx.ain1 / 4095.0);
-					io.alexForwardPower = (qreal)(io.alexForwardVolts * io.alexForwardVolts / 0.09);
-				}
-				//qDebug() << "alexForwardVolts: " << io.alexForwardVolts << "alexForwardPower" << io.alexForwardPower;
-                break;
-
-			case 2:
-
-				//qDebug() << "CC: " << io.ccRx.roundRobin;
-				// reverse power
-				if (set->getAlexPresence()) { //|| set->getApolloPresence()) {
-					
-					io.ccRx.ain2 = (quint16)((quint16)(io.control_in[1] << 8) + (quint16)io.control_in[2]);
-					
-					io.alexReverseVolts = (qreal)(3.3 * (qreal)io.ccRx.ain2 / 4095.0);
-					io.alexReversePower = (qreal)(io.alexReverseVolts * io.alexReverseVolts / 0.09);
-				}
-				//qDebug() << "alexReverseVolts: " << io.alexReverseVolts << "alexReversePower" << io.alexReversePower;
-				
-				if (set->getPenelopePresence() || (m_hwInterface == QSDR::Hermes)) { // || set->getPennyLanePresence() {
-					
-					io.ccRx.ain3 = (quint16)((quint16)(io.control_in[3] << 8) + (quint16)io.control_in[4]);
-					io.ain3Volts = (qreal)(3.3 * (double)io.ccRx.ain3 / 4095.0);
-				}
-				//qDebug() << "ain3Volts: " << io.ain3Volts;
-				break;
-
-			case 3:
-
-				//qDebug() << "CC: " << io.ccRx.roundRobin;
-				
-				if (set->getPenelopePresence() || (m_hwInterface == QSDR::Hermes)) { // || set->getPennyLanePresence() {
-					
-					io.ccRx.ain4 = (quint16)((quint16)(io.control_in[1] << 8) + (quint16)io.control_in[2]);
-					io.ccRx.ain6 = (quint16)((quint16)(io.control_in[3] << 8) + (quint16)io.control_in[4]);
-					
-					io.ain4Volts = (qreal)(3.3 * (qreal)io.ccRx.ain4 / 4095.0);
-					
-					if (m_hwInterface == QSDR::Hermes) // read supply volts applied to board
-						io.supplyVolts = (qreal)((qreal)io.ccRx.ain6 / 186.0f);
-				}
-				//qDebug() << "ain4Volts: " << io.ain4Volts << "supplyVolts" << io.supplyVolts;
-				break;
-
-			//case 4:
-
-				// more than 1 Mercury module (currently not usable)
-				//qDebug() << "CC: " << io.ccRx.roundRobin;
-				//switch (io.receivers) {
-
-				//	case 1:
-				//		io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
-				//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208;
-				//		break;
-
-				//	case 2:
-				//		io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
-				//		io.ccRx.mercury2_LT2208 = (bool)((io.control_in[2] & 0x02) == 0x02);
-				//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
-				//		break;
-
-				//	case 3:
-				//		io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
-				//		io.ccRx.mercury2_LT2208 = (bool)((io.control_in[2] & 0x02) == 0x02);
-				//		io.ccRx.mercury3_LT2208 = (bool)((io.control_in[3] & 0x02) == 0x02);
-				//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
-				//		//qDebug() << "mercury3_LT2208: " << io.ccRx.mercury3_LT2208;
-				//		break;
-
-				//	case 4:
-				//		io.ccRx.mercury1_LT2208 = (bool)((io.control_in[1] & 0x02) == 0x02);
-				//		io.ccRx.mercury2_LT2208 = (bool)((io.control_in[2] & 0x02) == 0x02);
-				//		io.ccRx.mercury3_LT2208 = (bool)((io.control_in[3] & 0x02) == 0x02);
-				//		io.ccRx.mercury4_LT2208 = (bool)((io.control_in[4] & 0x02) == 0x02);
-				//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
-				//		//qDebug() << "mercury3_LT2208: " << io.ccRx.mercury3_LT2208 << "mercury4_LT2208" << io.ccRx.mercury4_LT2208;
-				//		break;
-				//}
-				//break;
-		} // end switch cycle through C0
+		// extract C&C bytes
+        decodeCCBytes(buffer.mid(3, 5));
+        s += 5;
 
         switch (io.receivers) {
 
@@ -2030,12 +1867,12 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
                 m_rightSample  = (int)((  signed char) buffer.at(s++)) << 16;
                 m_rightSample += (int)((unsigned char) buffer.at(s++)) << 8;
                 m_rightSample += (int)((unsigned char) buffer.at(s++));
-				
-				m_lsample = (float)(m_leftSample / 8388607.0);
-				m_rsample = (float)(m_rightSample / 8388607.0);
 
-				if (m_serverMode == QSDR::ChirpWSPR && 
-					m_chirpInititalized && 
+				m_lsample = (float)(m_leftSample / 8388607.0f);
+				m_rsample = (float)(m_rightSample / 8388607.0f);
+
+				if (m_serverMode == QSDR::ChirpWSPR &&
+					m_chirpInititalized &&
 					m_chirpSamples < io.samplerate
 				) {
 					chirpData << m_lsample;
@@ -2043,7 +1880,7 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 				}
 
 				if (RX.at(r)->qtdsp) {
-					
+
 					RX[r]->inBuf[m_rxSamples].re = m_lsample; // 24 bit sample
 					RX[r]->inBuf[m_rxSamples].im = m_rsample; // 24 bit sample
 				}
@@ -2053,9 +1890,9 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 
 			// extract chirp signal time stamp
 			m_chirpBit = (buffer.at(s) & 0x01);// == 0x01;
-			
+
 			m_micSample += (int)((unsigned char) buffer.at(s++));
-    		m_micSample_float = (float) m_micSample / 32767.0 * io.mic_gain; // 16 bit sample
+    		m_micSample_float = (float) m_micSample / 32767.0f * io.mic_gain; // 16 bit sample
 
             // add to buffer
             io.mic_left_buffer[m_rxSamples]  = m_micSample_float;
@@ -2064,11 +1901,13 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 			//m_chirpSamples++;
 
 			if (m_serverMode == QSDR::ChirpWSPR && m_chirpInititalized) {
+
 				if (m_chirpBit) {
+
 					if (m_chirpGateBit) {
-					
-						// we've found the rising edge of the GPS 1PPS signal, so we set the samples 
-						// counter back to zero in order to have a simple and precise synchronisation 
+
+						// we've found the rising edge of the GPS 1PPS signal, so we set the samples
+						// counter back to zero in order to have a simple and precise synchronisation
 						// with the local chirp.
 						io.networkIOMutex.lock();
 						DATA_ENGINE_DEBUG << "GPS 1 PPS";
@@ -2099,35 +1938,16 @@ void DataEngine::processInputBuffer(const QByteArray &buffer) {
 
 			// when we have enough rx samples we start the DSP processing.
             if (m_rxSamples == BUFFER_SIZE) {
-				
-				// version 1
-				/*for (int r = 0; r < io.receivers; r++) {
 
-					QFuture<void> dspResult = run(spin, r);
-					dttspReadyAt(r);
-				}*/
-
-				// version 2
-				//dttspProcessing->setFuture(QtConcurrent::mapped(m_rx, spin));
-				
-
-				// classic version 1
 				for (int r = 0; r < io.receivers; r++) {
 
 	            	if (RX.at(r)->qtdsp)
 						qtdspProcessing(r);
 				}
-
-				// classic version 2
-//				if (m_serverMode == QSDR::DttSP)
-//					dttspProcessing();
-//				else if (m_serverMode == QSDR::QtDSP)
-//					qtdspProcessing();
-
 				m_rxSamples = 0;
             }
         }
-    } 
+    }
 	else {
 
 		if (m_SyncChangedTime.elapsed() > 50) {
@@ -2146,7 +1966,7 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 		size = 2 * BIGWIDEBANDSIZE;
 	else
 		size = 2 * SMALLWIDEBANDSIZE;
-	
+
 	qint64 length = buffer.length();
 	if (buffer.length() != size) {
 
@@ -2157,7 +1977,7 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 	int s;
 	float sample;
 	float norm = 1.0f / (4 * size);
-	
+
 	for (int i = 0; i < length; i += 2) {
 
 		s =  (int)((qint8 ) buffer.at(i+1)) << 8;
@@ -2169,13 +1989,13 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 	}
 
 	m_wbFFT->DoFFTWForward(cpxWBIn, cpxWBOut, size/2);
-	
+
 	// averaging
 	QVector<float> specBuf(size/4);
 
 	m_wbMutex.lock();
 	if (m_wbSpectrumAveraging) {
-		
+
 		for (int i = 0; i < size/4; i++)
 			specBuf[i] = (float)(10.0 * log10(MagCPX(cpxWBOut.at(i)) + 1.5E-45));
 
@@ -2195,7 +2015,7 @@ void DataEngine::processWideBandInputBuffer(const QByteArray &buffer) {
 
 void DataEngine::processFileBuffer(const QList<qreal> buffer) {
 
-	
+
 	int topsize = 2*BUFFER_SIZE - 1;
 	//float specMax = -100.0f;
 	//float specMin = 0.0f;
@@ -2203,7 +2023,7 @@ void DataEngine::processFileBuffer(const QList<qreal> buffer) {
 	Q_ASSERT(buffer.length() == 128);
 
 	for (int i = 0; i < 64; i++) {
-		
+
 		cpxIn[i + m_rxSamples].re = buffer.at(2*i);
 		cpxIn[i + m_rxSamples].im = buffer.at(2*i+1);
 
@@ -2219,14 +2039,14 @@ void DataEngine::processFileBuffer(const QList<qreal> buffer) {
 		}
 	}
 	m_rxSamples += 64;
-		
+
 	if (m_rxSamples == 2*BUFFER_SIZE) {
-			
+
 		m_chirpDspEngine->fft->DoFFTWForward(cpxIn, cpxOut, 2*BUFFER_SIZE);
-			
+
 		// reorder the spectrum buffer
 		for (int i = 0; i < BUFFER_SIZE; i++) {
-			
+
 			m_spectrumBuffer[topsize - i] =
 				(float)(10.0 * log10(MagCPX(cpxOut[i+BUFFER_SIZE]) + 1.5E-45));
 			m_spectrumBuffer[BUFFER_SIZE - i] =
@@ -2244,52 +2064,13 @@ void DataEngine::processFileBuffer(const QList<qreal> buffer) {
 		//DATA_PROCESSOR_DEBUG << "pan min" << specMin << "max" << specMax << "mean" << specMean;
 
 		SleeperThread::usleep(42667);
-	
+
 		//emit spectrumBufferChanged(m_spectrumBuffer);
 		//set->setSpectrumBuffer(m_spectrumBuffer);
 		set->setSpectrumBuffer(0, m_spectrumBuffer);
-		
+
 		m_rxSamples = 0;
 	}
-}
-
-void DataEngine::processOutputBuffer(float *left, float *right) {
-
-	qint16 leftRXSample;
-    qint16 rightRXSample;
-    qint16 leftTXSample;
-    qint16 rightTXSample;
-
-	// process the output
-	for (int j = 0; j < BUFFER_SIZE; j += io.outputMultiplier) {
-
-		leftRXSample  = (qint16)(left[j] * 32767.0f);
-        rightRXSample = (qint16)(right[j] * 32767.0f);
-
-//        if (j == 0 || j == 255 || j == 511 || j == 1023) {
-//
-//        	DATA_ENGINE_DEBUG << "leftRXSample = " << leftRXSample;
-//        	DATA_ENGINE_DEBUG << "rightRXSample = " << rightRXSample;
-//        }
-
-		leftTXSample = 0;
-        rightTXSample = 0;
-
-		io.output_buffer[m_idx++] = leftRXSample  >> 8;
-        io.output_buffer[m_idx++] = leftRXSample;
-        io.output_buffer[m_idx++] = rightRXSample >> 8;
-        io.output_buffer[m_idx++] = rightRXSample;
-        io.output_buffer[m_idx++] = leftTXSample  >> 8;
-        io.output_buffer[m_idx++] = leftTXSample;
-        io.output_buffer[m_idx++] = rightTXSample >> 8;
-        io.output_buffer[m_idx++] = rightTXSample;
-		
-		if (m_idx == IO_BUFFER_SIZE) {
-
-			writeControlBytes();
-			m_idx = IO_HEADER_SIZE;
-		}
-    }
 }
 
 void DataEngine::processOutputBuffer(const CPX &buffer) {
@@ -2325,13 +2106,192 @@ void DataEngine::processOutputBuffer(const CPX &buffer) {
 		
 		if (m_idx == IO_BUFFER_SIZE) {
 
-			writeControlBytes();
+			encodeCCBytes();
 			m_idx = IO_HEADER_SIZE;
 		}
 	}
 }
 
-void DataEngine::writeControlBytes() {
+void DataEngine::decodeCCBytes(const QByteArray &buffer) {
+
+	io.ccRx.ptt    = (bool)((buffer.at(0) & 0x01) == 0x01);
+	io.ccRx.dash   = (bool)((buffer.at(0) & 0x02) == 0x02);
+	io.ccRx.dot    = (bool)((buffer.at(0) & 0x04) == 0x04);
+	io.ccRx.lt2208 = (bool)((buffer.at(1) & 0x01) == 0x01);
+
+	io.ccRx.roundRobin = (uchar)(buffer.at(0) >> 3);
+	
+    switch (io.ccRx.roundRobin) { // cycle through C0
+
+		case 0:
+
+			if (io.ccRx.lt2208) { // check ADC signal
+
+				if (m_ADCChangedTime.elapsed() > 50) {
+
+					set->setADCOverflow(2);
+					m_ADCChangedTime.restart();
+				}
+			}
+
+			//qDebug() << "CC: " << io.ccRx.roundRobin;
+			if (m_hwInterface == QSDR::Hermes) {
+
+				io.ccRx.hermesI01 = (bool)((buffer.at(1) & 0x02) == 0x02);
+				io.ccRx.hermesI02 = (bool)((buffer.at(1) & 0x04) == 0x04);
+				io.ccRx.hermesI03 = (bool)((buffer.at(1) & 0x08) == 0x08);
+				io.ccRx.hermesI04 = (bool)((buffer.at(1) & 0x10) == 0x10);
+				//qDebug() << "Hermes IO 1: " << io.ccRx.hermesI01 << "2: " << io.ccRx.hermesI02 << "3: " << io.ccRx.hermesI03 << "4: " << io.ccRx.hermesI04;
+			}
+
+			if (m_fwCount < 100) {
+
+				if (m_hwInterface == QSDR::Metis) {
+
+					if (io.ccRx.devices.mercuryFWVersion != buffer.at(2)) {
+
+						io.ccRx.devices.mercuryFWVersion = buffer.at(2);
+						set->setMercuryVersion(io.ccRx.devices.mercuryFWVersion);
+						io.networkIOMutex.lock();
+						DATA_ENGINE_DEBUG << "Mercury firmware version: " << qPrintable(QString::number(buffer.at(2)));
+						io.networkIOMutex.unlock();
+					}
+
+					if (io.ccRx.devices.penelopeFWVersion != buffer.at(3)) {
+
+						io.ccRx.devices.penelopeFWVersion = buffer.at(3);
+						io.ccRx.devices.pennylaneFWVersion = buffer.at(3);
+						set->setPenelopeVersion(io.ccRx.devices.penelopeFWVersion);
+						set->setPennyLaneVersion(io.ccRx.devices.penelopeFWVersion);
+						io.networkIOMutex.lock();
+						DATA_ENGINE_DEBUG << "Penelope/Pennylane firmware version: " << qPrintable(QString::number(buffer.at(3)));
+						io.networkIOMutex.unlock();
+					}
+
+					if (io.ccRx.devices.metisFWVersion != buffer.at(4)) {
+
+						io.ccRx.devices.metisFWVersion = buffer.at(4);
+						set->setMetisVersion(io.ccRx.devices.metisFWVersion);
+						io.networkIOMutex.lock();
+						DATA_ENGINE_DEBUG << "Metis firmware version: " << qPrintable(QString::number(buffer.at(4)));
+						io.networkIOMutex.unlock();
+					}
+				}
+				else if (m_hwInterface == QSDR::Hermes) {
+
+					if (io.ccRx.devices.hermesFWVersion != buffer.at(4)) {
+
+						io.ccRx.devices.hermesFWVersion = buffer.at(4);
+						set->setHermesVersion(io.ccRx.devices.hermesFWVersion);
+						io.networkIOMutex.lock();
+						DATA_ENGINE_DEBUG << "Hermes firmware version: " << qPrintable(QString::number(buffer.at(4)));
+						io.networkIOMutex.unlock();
+					}
+				}
+				m_fwCount++;
+			}
+			break;
+
+		case 1:
+
+			//qDebug() << "CC: " << io.ccRx.roundRobin;
+			// forward power
+			if (set->getPenelopePresence() || (m_hwInterface == QSDR::Hermes)) { // || set->getPennyLanePresence()
+
+				io.ccRx.ain5 = (quint16)((quint16)(buffer.at(1) << 8) + (quint16)buffer.at(2));
+
+				io.penelopeForwardVolts = (qreal)(3.3 * (qreal)io.ccRx.ain5 / 4095.0);
+				io.penelopeForwardPower = (qreal)(io.penelopeForwardVolts * io.penelopeForwardVolts / 0.09);
+			}
+			//qDebug() << "penelopeForwardVolts: " << io.penelopeForwardVolts << "penelopeForwardPower" << io.penelopeForwardPower;
+
+			if (set->getAlexPresence()) { //|| set->getApolloPresence()) {
+
+				io.ccRx.ain1 = (quint16)((quint16)(buffer.at(3) << 8) + (quint16)buffer.at(4));
+
+				io.alexForwardVolts = (qreal)(3.3 * (qreal)io.ccRx.ain1 / 4095.0);
+				io.alexForwardPower = (qreal)(io.alexForwardVolts * io.alexForwardVolts / 0.09);
+			}
+			//qDebug() << "alexForwardVolts: " << io.alexForwardVolts << "alexForwardPower" << io.alexForwardPower;
+            break;
+
+		case 2:
+
+			//qDebug() << "CC: " << io.ccRx.roundRobin;
+			// reverse power
+			if (set->getAlexPresence()) { //|| set->getApolloPresence()) {
+
+				io.ccRx.ain2 = (quint16)((quint16)(buffer.at(1) << 8) + (quint16)buffer.at(2));
+
+				io.alexReverseVolts = (qreal)(3.3 * (qreal)io.ccRx.ain2 / 4095.0);
+				io.alexReversePower = (qreal)(io.alexReverseVolts * io.alexReverseVolts / 0.09);
+			}
+			//qDebug() << "alexReverseVolts: " << io.alexReverseVolts << "alexReversePower" << io.alexReversePower;
+
+			if (set->getPenelopePresence() || (m_hwInterface == QSDR::Hermes)) { // || set->getPennyLanePresence() {
+
+				io.ccRx.ain3 = (quint16)((quint16)(buffer.at(3) << 8) + (quint16)buffer.at(4));
+				io.ain3Volts = (qreal)(3.3 * (double)io.ccRx.ain3 / 4095.0);
+			}
+			//qDebug() << "ain3Volts: " << io.ain3Volts;
+			break;
+
+		case 3:
+
+			//qDebug() << "CC: " << io.ccRx.roundRobin;
+
+			if (set->getPenelopePresence() || (m_hwInterface == QSDR::Hermes)) { // || set->getPennyLanePresence() {
+
+				io.ccRx.ain4 = (quint16)((quint16)(buffer.at(1) << 8) + (quint16)buffer.at(2));
+				io.ccRx.ain6 = (quint16)((quint16)(buffer.at(3) << 8) + (quint16)buffer.at(4));
+
+				io.ain4Volts = (qreal)(3.3 * (qreal)io.ccRx.ain4 / 4095.0);
+
+				if (m_hwInterface == QSDR::Hermes) // read supply volts applied to board
+					io.supplyVolts = (qreal)((qreal)io.ccRx.ain6 / 186.0f);
+			}
+			//qDebug() << "ain4Volts: " << io.ain4Volts << "supplyVolts" << io.supplyVolts;
+			break;
+
+		//case 4:
+
+			// more than 1 Mercury module (currently not usable)
+			//qDebug() << "CC: " << io.ccRx.roundRobin;
+			//switch (io.receivers) {
+
+			//	case 1:
+			//		io.ccRx.mercury1_LT2208 = (bool)((buffer.at(1) & 0x02) == 0x02);
+			//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208;
+			//		break;
+
+			//	case 2:
+			//		io.ccRx.mercury1_LT2208 = (bool)((buffer.at(1) & 0x02) == 0x02);
+			//		io.ccRx.mercury2_LT2208 = (bool)((buffer.at(2) & 0x02) == 0x02);
+			//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
+			//		break;
+
+			//	case 3:
+			//		io.ccRx.mercury1_LT2208 = (bool)((buffer.at(1) & 0x02) == 0x02);
+			//		io.ccRx.mercury2_LT2208 = (bool)((buffer.at(2) & 0x02) == 0x02);
+			//		io.ccRx.mercury3_LT2208 = (bool)((buffer.at(3) & 0x02) == 0x02);
+			//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
+			//		//qDebug() << "mercury3_LT2208: " << io.ccRx.mercury3_LT2208;
+			//		break;
+
+			//	case 4:
+			//		io.ccRx.mercury1_LT2208 = (bool)((buffer.at(1) & 0x02) == 0x02);
+			//		io.ccRx.mercury2_LT2208 = (bool)((buffer.at(2) & 0x02) == 0x02);
+			//		io.ccRx.mercury3_LT2208 = (bool)((buffer.at(3) & 0x02) == 0x02);
+			//		io.ccRx.mercury4_LT2208 = (bool)((buffer.at(4) & 0x02) == 0x02);
+			//		//qDebug() << "mercury1_LT2208: " << io.ccRx.mercury1_LT2208 << "mercury2_LT2208" << io.ccRx.mercury2_LT2208;
+			//		//qDebug() << "mercury3_LT2208: " << io.ccRx.mercury3_LT2208 << "mercury4_LT2208" << io.ccRx.mercury4_LT2208;
+			//		break;
+			//}
+			//break;
+	} // end switch cycle through C0
+}
+
+void DataEngine::encodeCCBytes() {
 
 	io.output_buffer[0] = SYNC;
     io.output_buffer[1] = SYNC;
