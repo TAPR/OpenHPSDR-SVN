@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Sun Nov 25 15:15:26 2012</timestamp>
+  <timestamp>Sat Dec  8 13:08:23 2012</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -61,10 +61,37 @@
     </param>
   </block>
   <block>
+    <key>const_source_x</key>
+    <param>
+      <key>id</key>
+      <value>const_source_x_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>const</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(21, 336)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
-      <value>RxFreq</value>
+      <value>RxFreq1</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -76,7 +103,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>7200000</value>
+      <value>1000000</value>
     </param>
     <param>
       <key>start</key>
@@ -84,7 +111,62 @@
     </param>
     <param>
       <key>stop</key>
-      <value>60000000</value>
+      <value>1600000</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>10000</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(419, 12)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>id</key>
+      <value>RxFreq0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>1000000</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>500000</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>1600000</value>
     </param>
     <param>
       <key>step</key>
@@ -127,11 +209,74 @@
     </param>
     <param>
       <key>value</key>
-      <value>48000</value>
+      <value>192000</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(182, 9)</value>
+      <value>(183, 9)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>hpsdr_hermesNB</key>
+    <param>
+      <key>id</key>
+      <value>hpsdr_hermesNB_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>Rx0F</key>
+      <value>RxFreq0</value>
+    </param>
+    <param>
+      <key>Rx1F</key>
+      <value>RxFreq1</value>
+    </param>
+    <param>
+      <key>TxF</key>
+      <value>7200000</value>
+    </param>
+    <param>
+      <key>RxSmp</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>RxPre</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>PTTRx</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>PTTTx</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>PTTmode</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>TxDrive</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>num_outputs</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>Intfc</key>
+      <value>"eth0"</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(274, 274)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -166,7 +311,7 @@
     </param>
     <param>
       <key>fc</key>
-      <value>RxFreq</value>
+      <value>RxFreq0</value>
     </param>
     <param>
       <key>bw</key>
@@ -194,7 +339,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(782, 318)</value>
+      <value>(760, 277)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -202,10 +347,10 @@
     </param>
   </block>
   <block>
-    <key>const_source_x</key>
+    <key>qtgui_sink_x</key>
     <param>
       <key>id</key>
-      <value>const_source_x_0</value>
+      <value>qtgui_sink_x_0_0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -216,67 +361,48 @@
       <value>complex</value>
     </param>
     <param>
-      <key>const</key>
-      <value>0</value>
+      <key>name</key>
+      <value>QT GUI Plot</value>
     </param>
     <param>
-      <key>_coordinate</key>
-      <value>(21, 336)</value>
+      <key>fftsize</key>
+      <value>1024</value>
     </param>
     <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>hpsdr_hermesNB</key>
-    <param>
-      <key>id</key>
-      <value>hpsdr_hermesNB_0</value>
+      <key>wintype</key>
+      <value>firdes.WIN_BLACKMAN_hARRIS</value>
     </param>
     <param>
-      <key>_enabled</key>
-      <value>True</value>
+      <key>fc</key>
+      <value>RxFreq1</value>
     </param>
     <param>
-      <key>RxF</key>
-      <value>RxFreq</value>
-    </param>
-    <param>
-      <key>TxF</key>
-      <value>7200000</value>
-    </param>
-    <param>
-      <key>RxSmp</key>
+      <key>bw</key>
       <value>samp_rate</value>
     </param>
     <param>
-      <key>RxPre</key>
-      <value>1</value>
+      <key>plotfreq</key>
+      <value>True</value>
     </param>
     <param>
-      <key>PTTRx</key>
-      <value>1</value>
+      <key>plotwaterfall</key>
+      <value>True</value>
     </param>
     <param>
-      <key>PTTTx</key>
-      <value>1</value>
+      <key>plottime</key>
+      <value>True</value>
     </param>
     <param>
-      <key>PTTmode</key>
-      <value>0</value>
+      <key>plotconst</key>
+      <value>True</value>
     </param>
     <param>
-      <key>TxDrive</key>
-      <value>255</value>
-    </param>
-    <param>
-      <key>Intfc</key>
-      <value>"eth0"</value>
+      <key>gui_hint</key>
+      <value></value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(214, 328)</value>
+      <value>(756, 385)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -293,6 +419,12 @@
     <source_block_id>hpsdr_hermesNB_0</source_block_id>
     <sink_block_id>qtgui_sink_x_0</sink_block_id>
     <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>hpsdr_hermesNB_0</source_block_id>
+    <sink_block_id>qtgui_sink_x_0_0</sink_block_id>
+    <source_key>1</source_key>
     <sink_key>0</sink_key>
   </connection>
 </flow_graph>
