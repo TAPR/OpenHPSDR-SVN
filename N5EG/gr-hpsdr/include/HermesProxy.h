@@ -40,7 +40,7 @@
 #define RXBUFSIZE	256		// number of floats in one RxIQBuf, #complexes is half
 					// Must be integral power of 2 (2,4,8,16,32,64, etc.)
 
-#define NUMTXBUFS	16		// number of transmit buffers in circular queue
+#define NUMTXBUFS	128		// number of transmit buffers in circular queue
 					// Must be integral power of 2
 
 #define TXBUFSIZE	512		// number of bytes in one TxBuf
@@ -69,14 +69,26 @@ private:
 	unsigned TxControlCycler;	// Which Tx control register set to send
 	unsigned TxFrameIdleCount;	// How long we've gone since sending a TxFrame
 
-	unsigned long LostRxBufCount;	// Lost-buffer counter
+	unsigned long LostRxBufCount;	// Lost-buffer counter for packets we actually got
 	unsigned long TotalRxBufCount;	// Total buffer count (may roll over)
+	unsigned long LostTxBufCount;	//
+	unsigned long TotalTxBufCount;	//
+	unsigned long CorruptRxCount;	//
+	unsigned long LostEthernetRx;	//
+	unsigned long CurrentEthSeqNum;	// Diagnostic
+
+	//pthread_mutex_t mutexRPG;	// Rx to Proxy to Gnuradio buffer
+	//pthread_mutex_t mutexGPT;	// Gnuradio to Proxy to Tx buffer
+
 
 public:
 
-	unsigned ReceiveFrequency;
+	unsigned Receive0Frequency;	// 1st rcvr. Corresponds to out0 in gnuradio
+	unsigned Receive1Frequency;	// 2nd rcvr. Corresponds to out1 in gnuradio
 	unsigned TransmitFrequency;
+	int NumReceivers;
 	int RxSampleRate;
+
 	unsigned char TxDrive;
 	unsigned char RxAtten;		// not yet used (requires Hermes firmware V1.9)
 	int PTTMode;
@@ -85,15 +97,21 @@ public:
 	bool ADCrandom;
 	bool ADCoverload;
 	bool Duplex;
+
 	unsigned char HermesVersion;
+	bool TxStop;
 	bool PTTOffMutesTx;		// PTT Off mutes the transmitter
 	bool PTTOnMutesRx;		// PTT On receiver
 	char interface[16];
 
-	HermesProxy(int, const char* Intfc);	// constructor
+	HermesProxy(int, const char* Intfc, int); // constructor
 	~HermesProxy();			// destructor
 
+	void Stop();			// stop ethernet I/O
+	void Start();			// start rx stream
+
 	void SendTxIQ();		// send an IQ buffer to Hermes transmit hardware
+	void BuildControlRegs(unsigned, RawBuf_t);	// fill in the 8 byte sync+control registers from RegNum
 	int PutTxIQ(const gr_complex *, int);	// post a transmit TxIQ buffer
 	void ScheduleTxFrame(unsigned long);    // Schedule a Tx frame
 	RawBuf_t GetNextTxBuf(); // get an empty Tx Buffer
@@ -104,7 +122,10 @@ public:
 	IQBuf_t GetRxIQ();		// Gnuradio pickup a received RxIQ buffer if available
 	IQBuf_t GetNextRxBuf(IQBuf_t);  // return existing out buffer, next output buffer (if needed),
 					// or NULL if no new one available
-	void UnpackIQ(unsigned char*, IQBuf_t);	// unpack a received IQ sample
+	void Unpack1RxIQ(const unsigned char*, const IQBuf_t);	// unpack a received IQ sample 1 receiver case
+	void Unpack2RxIQ(const unsigned char*, const IQBuf_t);	// unpack a received IQ sample 2 receiver case
+
+	void PrintRawBuf(RawBuf_t);	// for debugging
 
 	// Not yet implemented
 

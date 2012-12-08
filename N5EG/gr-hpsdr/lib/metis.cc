@@ -83,6 +83,7 @@ static long ip_address;
 static struct sockaddr_in data_addr;
 static int data_addr_length;
 
+static long send_sequence = -1;
 static unsigned char buffer[70];
 
 static pthread_t receive_thread_id;
@@ -242,7 +243,7 @@ int metis_found() {
     return found;
 }
 
-// close socket, stop receive thread, wait for it to terminate
+// close socket, stop receive thread, wait for thread to terminate
 void metis_stop_receive_thread() {
 
     void* result;
@@ -290,22 +291,22 @@ void metis_receive_stream_control(unsigned char streamControl) {
     data_addr.sin_port=htons(DATA_PORT);
     memcpy((char *)&data_addr.sin_addr.s_addr,h->h_addr_list[0],h->h_length);
 
-   
-    // send a packet to start the stream
+    // send a packet to start or stop the stream
     buffer[0]=0xEF;
     buffer[1]=0xFE;
     buffer[2]=0x04;    // data send state
     buffer[3]= streamControl;	// 0x0 = off, 0x01 = EP6 (NB data), 0x02 = (EP4) WB data, 0x03 = both on
 
-    for(i=0;i<60;i++) {
+    for(i=0;i<60;i++)
         buffer[i+4]=0x00;
-    }
 
     if(sendto(discovery_socket,buffer,64,0,(struct sockaddr*)&data_addr,data_addr_length)<0) {
         perror("sendto socket failed for start\n");
         exit(1);
     }
 
+    if(streamControl == 0)
+      send_sequence = -1;	// reset HPSDR Tx Ethernet sequence number on stream stop
 }
 
 void* metis_receive_thread(void* arg) {
@@ -322,6 +323,12 @@ void* metis_receive_thread(void* arg) {
             exit(1);
         }
 
+	if(bytes_read == 0)
+	    continue;
+
+	if(bytes_read > 1048)
+	    fprintf(stderr, "Metis Receive Thread: bytes_read = %d  (>1048)\n", bytes_read);
+
         if(buffer[0]==0xEF && buffer[1]==0xFE) {
             switch(buffer[2]) {
                 case 1:
@@ -336,14 +343,16 @@ void* metis_receive_thread(void* arg) {
                         switch(ep) {
                             case 6: // EP6
                                 // process the data
-                                //process_ozy_input_buffer(&buffer[8]);
-                                //process_ozy_input_buffer(&buffer[520]);
-				Hermes->ReceiveRxIQ(&buffer[8]);		// send Ethernet frame to Proxy
+				if(bytes_read != 1032)
+				  fprintf(stderr,"Metis: bytes_read = %d (!= 1032)\n", bytes_read);
+				Hermes->ReceiveRxIQ(&buffer[0]); // send Ethernet frame to Proxy
                                 break;
-                            case 4: // EP4
-                                // process_bandscope_buffer(&buffer[8]);	// HermesNb does not handle wideband data
+
+                            case 4: // EP4		// HermesNb does not handle wideband data
+                                // process_bandscope_buffer(&buffer[8]); 
                                 // process_bandscope_buffer(&buffer[520]);
                                 break;
+
                             default:
                                 fprintf(stderr,"unexpected EP %d length=%d\n",ep,bytes_read);
                                 break;
@@ -357,7 +366,8 @@ void* metis_receive_thread(void* arg) {
                         if(found<MAX_METIS_CARDS) {
                             // get MAC address from reply
                             sprintf(metis_cards[found].mac_address,"%02X:%02X:%02X:%02X:%02X:%02X",
-                                       buffer[3]&0xFF,buffer[4]&0xFF,buffer[5]&0xFF,buffer[6]&0xFF,buffer[7]&0xFF,buffer[8]&0xFF);
+                                buffer[3]&0xFF,buffer[4]&0xFF,buffer[5]&0xFF,
+				buffer[6]&0xFF,buffer[7]&0xFF,buffer[8]&0xFF);
                             fprintf(stderr,"Metis MAC address %s\n",metis_cards[found].mac_address);
     
                             // get ip address from packet header
@@ -382,13 +392,11 @@ void* metis_receive_thread(void* arg) {
         } else {
             fprintf(stderr,"received bad header bytes on data port %02X,%02X\n",buffer[0],buffer[1]);
         }
-
     }
     
 }
 
 static unsigned char output_buffer[1032];
-static long send_sequence=-1;
 static int offset=8;
 
 int metis_write(unsigned char ep, unsigned char* buffer, int length) {
@@ -405,6 +413,7 @@ int metis_write(unsigned char ep, unsigned char* buffer, int length) {
         output_buffer[5]=(send_sequence>>16)&0xFF;
         output_buffer[6]=(send_sequence>>8)&0xFF;
         output_buffer[7]=(send_sequence)&0xFF;
+
 
         // copy the buffer over
         for(i=0;i<512;i++) {
