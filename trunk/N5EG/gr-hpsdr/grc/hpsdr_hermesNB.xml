@@ -4,8 +4,9 @@
   <key>hpsdr_hermesNB</key>
   <category>hpsdr</category>
   <import>import hpsdr</import>
-  <make>hpsdr.hermesNB($RxF, $RxSmp, $RxPre, $Intfc)</make>
-  <callback>set_ReceiveFrequency($RxF)</callback>
+  <make>hpsdr.hermesNB($Rx0F, $RxSmp, $RxPre, $Intfc, $num_outputs)</make>
+  <callback>set_Receive0Frequency($Rx0F)</callback>
+  <callback>set_Receive1Frequency($Rx1F)</callback>
   <callback>set_RxSampRate($RxSmp)</callback>
   <callback>set_RxPreamp($RxPre)</callback>
   <callback>set_PTTMode($PTTmode)</callback>
@@ -20,8 +21,14 @@
        * key (makes the value accessible as $keyname, e.g. in the make node)
        * type -->
   <param>
-    <name>Receive Frequency, Hz.</name>
-    <key>RxF</key>
+    <name>Rcvr 0 Frequency, Hz.</name>
+    <key>Rx0F</key>
+    <value>7200000</value>
+    <type>real</type>
+  </param>
+  <param>
+    <name>Rcvr 1 Frequency, Hz.</name>
+    <key>Rx1F</key>
     <value>7200000</value>
     <type>real</type>
   </param>
@@ -68,11 +75,21 @@
     <type>int</type>
   </param>
   <param>
+    <name>Num Rcvrs (1 or 2)</name>
+    <key>num_outputs</key>
+    <value>1</value>
+    <type>int</type>
+  </param>
+  <param>
     <name>Ethernet Interface</name>
     <key>Intfc</key>
     <value>"eth0"</value>
     <type>raw</type>
   </param>
+
+<check>$num_outputs >= 1</check> 
+<check>2 >= $num_outputs</check>   
+
   <!-- Make one 'sink' node per input. Sub-nodes:
        * name (an identifier for the GUI)
        * type
@@ -91,11 +108,12 @@
   <source>
     <name>out</name>
     <type>complex</type>
+    <nports>$num_outputs</nports>
   </source>
 
   <doc>
   This block is the HPSDR Hermes/Metis module.
-  It supports one receiver and one transmitter in the Narrow Band
+  It supports one or two receivers and one transmitter in the Narrow Band
   (digital downconversion) mode.
   RxSamp = 48000, 96000,  or 192000
   RxPreamp = 0 (Off), or  1 (On)
@@ -103,6 +121,7 @@
   PTTOffMutesTx = 0 (Tx always emits), 1 (Tx IQ is zeroed when PTT is Off)
   PTTOnMutesRx = 0 (Rx always receives), 1 (Rx IQ is zeroed when PTT is On)
   TxDrive = 0..255 (0 is minimum (but not zero) drive, 255 is maximum drive)
+  Rcvr0 corresponds to out0, Rcvr1 corresponds to out1.
   Interface = the ethernet interface to use.
     Example: "eth0" {including quote marks}.
   </doc>

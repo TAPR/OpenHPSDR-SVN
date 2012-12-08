@@ -38,9 +38,12 @@ typedef boost::shared_ptr<hpsdr_hermesNB> hpsdr_hermesNB_sptr;
  * \param RxSmp  Receive Sample Rate, 192000, 96000, or 48000
  * \param RxPre  Rx Preamp on (1) / off (0)
  * \param Intfc  Ethernet interface to use
+ * \param NumRx  Number of Receivers (1 or 2)
+ *
  */
 
-HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc);
+HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre,
+	 const char* Intfc, int NumRx);
 
 /*!
  * \brief Prototype for Hermes module
@@ -53,18 +56,20 @@ HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre
  * \param RxSmp  Receive Sample Rate, 192000, 96000, or 48000
  * \param RxPre  Rx Preamp on (1) / off (0)
  * \param Intfc  Ethernet interface to use
+ * \param NumRx  Number of Receivers (1 or 2)
  * 
  */
 class HPSDR_API hpsdr_hermesNB : public gr_block
 {
 	friend HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp,
-		 int RxPre, const char* Intfc);
+		 int RxPre, const char* Intfc, int NumRx);
 
-	hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc);
+	hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc, int NumRx);
 
  public:
 	~hpsdr_hermesNB();
-	void set_ReceiveFrequency(float);	// callback
+	void set_Receive0Frequency(float);	// callback
+	void set_Receive1Frequency(float);	// callback
 	void set_TransmitFrequency(float);	// callback
 	void set_RxSampRate(int);		// callback
 	void set_RxPreamp(int);			// callback
@@ -72,6 +77,9 @@ class HPSDR_API hpsdr_hermesNB : public gr_block
 	void set_PTTOffMutesTx(int);		// callback
 	void set_PTTOnMutesRx(int);		// callback
 	void set_TxDrive(int);			// callback
+
+	bool stop();				// override
+	bool start();				// override
 
 
   int general_work (int noutput_items,

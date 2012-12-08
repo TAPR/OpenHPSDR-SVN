@@ -35,12 +35,26 @@ HermesProxy* Hermes;	// make it visible to metis.cc
  * \param RxF    Receive Frequency
  * \param RxSmp  Receive Sample Rate
  * \param RxPre  Receive Preamp
+ * \param Intfc  Name of ethernet interface to use
+ * \param NumRx  Number of Receivers
  */
 
 hpsdr_hermesNB_sptr
-hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc)
+hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc, int NumRx)
 {
-    return gnuradio::get_initial_sptr(new hpsdr_hermesNB (RxF, RxSmp, RxPre, Intfc));
+    return gnuradio::get_initial_sptr(new hpsdr_hermesNB (RxF, RxSmp, RxPre, Intfc, NumRx));
+}
+
+bool hpsdr_hermesNB::stop()		// override base class
+{
+	Hermes->Stop();			// stop ethernet activity on Hermes
+	return gr_block::stop();	// call base class stop()
+}
+
+bool hpsdr_hermesNB::start()		// override base class
+{
+	Hermes->Start();		// start rx stream on Hermes
+	return gr_block::start();	// call base class start()
 }
 
 
@@ -53,66 +67,68 @@ hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc)
  * \param RxF    Receive Frequency
  * \param RxSmp  Receive Sample Rate
  * \param RxPre  Receive Preamp
+ * \param Intfc	 Name of Ethernet interface to use
+ * \param NumRx  Number of Receivers (1 or 2)
  * 
  */
 
-hpsdr_hermesNB::hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc)
+hpsdr_hermesNB::hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc, int NumRx)
 	: gr_block ("hermesNB",
 		gr_make_io_signature (1,1, sizeof (gr_complex)),  // input stream signature (min one, max one input)
-		gr_make_io_signature (1,1, sizeof (gr_complex)))  // output stream signature (min one, max one output)
+		gr_make_io_signature (1,2, sizeof (gr_complex)))  // output stream signature (min one, max two output)
 {
-	Hermes = new HermesProxy(RxF, Intfc);	// Create proxy, do Hermes ethernet discovery
+	Hermes = new HermesProxy(RxF, Intfc, NumRx);	// Create proxy, do Hermes ethernet discovery
 	Hermes->RxSampleRate = RxSmp;
 	Hermes->RxPreamp = RxPre;
+
+	gr_block::set_output_multiple(256);		// process outputs in groups of at least 256 samples
+	//gr_block::set_relative_rate((double) NumRx);	// FIXME - need to also account for Rx sample rate
 }
 
 
-void hpsdr_hermesNB::set_ReceiveFrequency (float RxF) // callback to allow slider to set frequency
+void hpsdr_hermesNB::set_Receive0Frequency (float Rx0F) // callback to allow slider to set frequency
 {
-	Hermes->ReceiveFrequency = (unsigned)RxF;	// slider must be of type real, convert to unsigned
-	//Hermes->UpdateHermes();			// assume that we always have somthing to be Tx'd.	
+	Hermes->Receive0Frequency = (unsigned)Rx0F;	// slider must be of type real, convert to unsigned
+}
+
+void hpsdr_hermesNB::set_Receive1Frequency (float Rx1F) // callback to allow slider to set frequency
+{
+	Hermes->Receive1Frequency = (unsigned)Rx1F;	// slider must be of type real, convert to unsigned
 }
 
 void hpsdr_hermesNB::set_TransmitFrequency (float TxF) // callback to allow slider to set frequency
 {
 	Hermes->TransmitFrequency = (unsigned)TxF;	// slider must be of type real, convert to unsigned
-	//Hermes->UpdateHermes();			
 }
 
 void hpsdr_hermesNB::set_RxSampRate(int RxSmp)	// callback to set RxSampleRate
 {
 	Hermes->RxSampleRate = RxSmp;
-	//Hermes->UpdateHermes();
 }
 
 void hpsdr_hermesNB::set_RxPreamp(int RxPre)	// callback to set RxPreamp on or off
 {
 	Hermes->RxPreamp = (bool)RxPre;
-	//Hermes->UpdateHermes();
 }
 
 void hpsdr_hermesNB::set_PTTMode(int PTTmode)	// callback to set PTTMode (Off, Vox, On)
 {
 	Hermes->PTTMode = PTTmode;
-	//Hermes->UpdateHermes();
 }
 
 void hpsdr_hermesNB::set_PTTOffMutesTx(int PTTTx)	// callback to set PTTOffMmutesTx (Off, On)
 {
 	Hermes->PTTOffMutesTx = PTTTx;
-	//Hermes->UpdateHermes();
 }
 
 void hpsdr_hermesNB::set_PTTOnMutesRx(int PTTRx)	// callback to set PTTOnMutesRx (Off, On)
 {
 	Hermes->PTTOnMutesRx = PTTRx;
-	//Hermes->UpdateHermes();
 }
  
 void hpsdr_hermesNB::set_TxDrive(int TxD)	// callback to set Transmit Drive Level (0..255)
 {
 	Hermes->TxDrive = (unsigned char)TxD;
-	//Hermes->UpdateHermes();
 }
 
 
@@ -130,7 +146,11 @@ hpsdr_hermesNB::general_work (int noutput_items,
 			       gr_vector_void_star &output_items)
 {
   const gr_complex *in = (const gr_complex *) input_items[0];
-  gr_complex *out = (gr_complex *) output_items[0];
+  gr_complex *out0 = (gr_complex *) output_items[0];
+  
+  gr_complex *out1;
+  if (output_items.size() == 2)
+	out1 = (gr_complex *) output_items[1];
 
   // NOTE:  noutput_items is always less_than_or_equal_to ninput_items.
   // NOTE:  input_items[0..n] are the input streams.
@@ -140,29 +160,39 @@ hpsdr_hermesNB::general_work (int noutput_items,
   // NOTE:  input_items.size() is the number of input streams.
   // NOTE:  Do not consume more than ninput_items[stream#] from input stream#.
   // NOTE:  Do not put more than noutput_items to the output.
-
-  //for (int i=0; i< noutput_items; i++)
-  //  out[i] = in[i] * d_p1 + d_p2;
-
   
   // We always get 128 I and 128 Q samples per request from HermesProxy, interleaved
   // See how many 128 sample buffers we can send to Gnuradio
 
   IQBuf_t Rx;
-  int CanSendBuffers = noutput_items / 128;
+  int CanSendBuffers;
 
-  //fprintf(stderr, "noutput_items = %d   CanSendBuffers = %d  ninput_items = %d  ", noutput_items, CanSendBuffers, ninput_items[0]);
 
-  int BufCount;
+  if(output_items.size() == 1)
+	CanSendBuffers = noutput_items / 128;	// 128 samples per buffer - 1 Rcvr
+  else
+	CanSendBuffers = noutput_items / 64;	//  64 samples per buffer - 2 Rcvrs
+
+
+//  fprintf(stderr, "noutput_items = %d   CanSendBuffers = %d  ninput_items = %d  output_items.size = %d\n", noutput_items, CanSendBuffers, ninput_items[0], output_items.size());
+
+  int BufCount;					// # of 256-byte buffers (regardless of format)
+
 
   for( BufCount=0; BufCount<CanSendBuffers; BufCount++)
   {
     if( (Rx = Hermes->GetRxIQ()) == NULL)	//no more available from the radio
       break; 					
-    
-    for(int j=0; j<128; j++)			// get 128 complex samples from Hermes
-      out[j] = gr_complex(*Rx++, *Rx++);
 
+    if (output_items.size() == 1)		// one receiver
+      for(int j=0; j<128; j++)
+        out0[(BufCount * 128) + j] = gr_complex(*Rx++, *Rx++);	// get 128 complex samples as 2 sets of 64 samples
+    else
+      for(int j=0; j<64; j++)			// two receivers
+      {
+        out0[(BufCount * 64) + j] = gr_complex(*Rx++, *Rx++);	// get 128 complex samples as 2 sets of 64 samples
+        out1[(BufCount * 64) + j] = gr_complex(*Rx++, *Rx++);
+      }
   }
 
   // Send I and Q samples received on input port to HermesProxy, it may or may not
@@ -177,6 +207,10 @@ hpsdr_hermesNB::general_work (int noutput_items,
 
   //fprintf(stderr, "BufCount = %d\n", BufCount);
 
-  return(BufCount*128);  	// Tell runtime system how many output items we produced
+
+  if(output_items.size() == 1)
+    return(BufCount*128);  	// Tell gnuradio how many output items we produced per stream
+  else
+    return(BufCount*64);  	// Tell gnuradio how many output items we produced per stream
 }
 
