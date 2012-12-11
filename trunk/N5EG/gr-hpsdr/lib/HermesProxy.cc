@@ -37,14 +37,16 @@
 // HermesNB uses this proxy to convert raw data and control flags
 // and send/receive them to Hermes.
 //
-// Version:  December 1, 2012
+// Version:  December 10, 2012
+// Update:   change clocks to Mercury (C0:C1 was 0xE4+speed  now 0xF8+speed)
+//		should be ignored by Hermes.
 
 #include "HermesProxy.h"
 #include "metis.h"
 #include <stdio.h>	// for DEBUG PRINTF's
 
 
-HermesProxy::HermesProxy(int RxFreq, const char* Intfc, int NumRx)	// constructor
+HermesProxy::HermesProxy(int RxFreq, int RxSmp, const char* Intfc, int NumRx)	// constructor
 {
 
 	//pthread_mutex_init (&mutexRPG, NULL);
@@ -68,7 +70,10 @@ HermesProxy::HermesProxy(int RxFreq, const char* Intfc, int NumRx)	// constructo
 	//	EFAULT   mutex is an invalid pointer.
 
 
-	RxSampleRate = 48000;	// default
+	RxSampleRate = RxSmp;
+	strcpy(interface, Intfc);	// Ethernet interface to use (defaults to eth0)
+	NumReceivers = NumRx;
+
 	TxDrive = 0x00;		// default to (almost) off
 
 	PTTMode = PTTOff;
@@ -81,8 +86,6 @@ HermesProxy::HermesProxy(int RxFreq, const char* Intfc, int NumRx)	// constructo
 	PTTOffMutesTx = true;   // PTT Off mutes the transmitter
 	PTTOnMutesRx = true;	// PTT On mutes receiver
 	TxStop = false;
-	strcpy(interface, Intfc);	// Ethernet interface to use (defaults to eth0)
-	NumReceivers = NumRx;
 
 	RxWriteCounter = 0;	//
 	RxReadCounter = 0;	// These control the Rx buffers to Gnuradio
@@ -623,7 +626,8 @@ void HermesProxy::BuildControlRegs(unsigned RegNum, RawBuf_t outbuf)
 	switch(RegNum)
 	{
 	  case 0:
-		Speed = 0xE4;					// general config registers
+		//Speed = 0xE4;			// general config registers (old)
+		Speed = 0xF8;			// Use Mercury for freq source.
 	    if(RxSampleRate == 192000)
 		Speed |= 0x02;
 	    if(RxSampleRate == 96000)
