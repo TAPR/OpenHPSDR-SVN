@@ -104,7 +104,7 @@ public:
 	bool PTTOnMutesRx;		// PTT On receiver
 	char interface[16];
 
-	HermesProxy(int, const char* Intfc, int); // constructor
+	HermesProxy(int, int, const char* Intfc, int); // constructor
 	~HermesProxy();			// destructor
 
 	void Stop();			// stop ethernet I/O

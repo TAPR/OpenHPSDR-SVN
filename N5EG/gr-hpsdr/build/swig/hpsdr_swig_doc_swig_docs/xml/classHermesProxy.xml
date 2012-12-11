@@ -450,11 +450,14 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classHermesProxy_1af360f44041ead1fccb73519e6dd3fc72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classHermesProxy_1a000283580ee6d747a99fa988ae64ed80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>HermesProxy::HermesProxy</definition>
-        <argsstring>(int, const char *Intfc, int)</argsstring>
+        <argsstring>(int, int, const char *Intfc, int)</argsstring>
         <name>HermesProxy</name>
+        <param>
+          <type>int</type>
+        </param>
         <param>
           <type>int</type>
         </param>
@@ -748,7 +751,7 @@
       <member refid="classHermesProxy_1a21eab92e165983535e8ff0f83d323232" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>GetNextRxBuf</name></member>
       <member refid="classHermesProxy_1ab1677fe4c06ffdecdd0f85c0c4ecd7ea" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>GetNextTxBuf</name></member>
       <member refid="classHermesProxy_1ab519bac9bbefe844e83b7b9d54030b2e" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>GetRxIQ</name></member>
-      <member refid="classHermesProxy_1af360f44041ead1fccb73519e6dd3fc72" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>HermesProxy</name></member>
+      <member refid="classHermesProxy_1a000283580ee6d747a99fa988ae64ed80" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>HermesProxy</name></member>
       <member refid="classHermesProxy_1a3804828b3332eb76bdc8f98cbe9f55fb" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>HermesVersion</name></member>
       <member refid="classHermesProxy_1aaafce436446e43dc143295d4c998633b" prot="public" virt="non-virtual"><scope>HermesProxy</scope><name>interface</name></member>
       <member refid="classHermesProxy_1ae6fe9df24b2f0199fa76af6f1934dd52" prot="private" virt="non-virtual"><scope>HermesProxy</scope><name>LostEthernetRx</name></member>

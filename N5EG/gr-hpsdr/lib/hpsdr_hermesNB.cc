@@ -77,7 +77,7 @@ hpsdr_hermesNB::hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc
 		gr_make_io_signature (1,1, sizeof (gr_complex)),  // input stream signature (min one, max one input)
 		gr_make_io_signature (1,2, sizeof (gr_complex)))  // output stream signature (min one, max two output)
 {
-	Hermes = new HermesProxy(RxF, Intfc, NumRx);	// Create proxy, do Hermes ethernet discovery
+	Hermes = new HermesProxy(RxF, RxSmp, Intfc, NumRx);	// Create proxy, do Hermes ethernet discovery
 	Hermes->RxSampleRate = RxSmp;
 	Hermes->RxPreamp = RxPre;
 
