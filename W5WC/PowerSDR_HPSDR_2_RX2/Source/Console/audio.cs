@@ -95,6 +95,7 @@ namespace PowerSDR
         unsafe private static PA19.PaStreamCallback callbackVAC = CallbackVAC;
         unsafe private static PA19.PaStreamCallback callbackVAC2 = CallbackVAC2;
         unsafe private static PA19.PaStreamCallback callback3port = Callback3Port;
+        unsafe private static PA19.PaStreamCallback callbackdiversityport = CallbackDiversityPort;
         unsafe private static PA19.PaStreamCallback callback4port = Callback4Port;
         unsafe private static PA19.PaStreamCallback callback8 = Callback2;
 #endif
@@ -1519,6 +1520,679 @@ namespace PowerSDR
 #if(TIMER)
 		private static HiPerfTimer t1 = new HiPerfTimer();
 #endif
+        unsafe public static int CallbackDiversityPort(void* input, void* output, int frameCount,
+                                               PA19.PaStreamCallbackTimeInfo* timeInfo, int statusFlags, void* userData)
+        {
+#if(TIMER)
+			t1.Start();
+#endif
+            float* in_l = null, in_r = null;
+            float* out_l1 = null, out_r1 = null, out_l2 = null, out_r2 = null;
+            float* rx1_in_l = null, rx1_in_r = null, tx_in_l = null, tx_in_r = null;
+            float* rx1_out_l = null, rx1_out_r = null, tx_out_l = null, tx_out_r = null;
+            localmox = mox;
+
+            void* ex_input = (int*)input;
+            void* ex_output = (int*)output;
+
+            int* array_ptr_input = (int*)input;
+            float* in_l_ptr1 = (float*)array_ptr_input[0];
+            float* in_r_ptr1 = (float*)array_ptr_input[1];
+            float* in_l_ptr2 = (float*)array_ptr_input[2];
+            float* in_r_ptr2 = (float*)array_ptr_input[3];
+
+            int* array_ptr_output = (int*)output;
+            float* out_l_ptr1 = (float*)array_ptr_output[0];
+            float* out_r_ptr1 = (float*)array_ptr_output[1];
+            float* out_l_ptr2 = (float*)array_ptr_output[2];
+            float* out_r_ptr2 = (float*)array_ptr_output[3];
+
+            // arrange input buffers in the following order:
+            // RX1 Left, RX1 Right, TX Left, TX Right, RX2 Left, RX2 Right
+            array_ptr_input[0] = (int)in_l_ptr1;
+            array_ptr_input[1] = (int)in_r_ptr1;
+            array_ptr_input[2] = (int)in_l_ptr2;
+            array_ptr_input[3] = (int)in_r_ptr2;
+
+            rx1_in_l = (float*)array_ptr_input[0];
+            rx1_in_r = (float*)array_ptr_input[1];
+            tx_in_l = (float*)array_ptr_input[2];
+            tx_in_r = (float*)array_ptr_input[3];
+
+            rx1_out_l = (float*)array_ptr_output[0];
+            rx1_out_r = (float*)array_ptr_output[1];
+            tx_out_l = (float*)array_ptr_output[2];
+            tx_out_r = (float*)array_ptr_output[3];
+
+
+            if (!localmox)
+            {
+                in_l = rx1_in_l; // (float*)array_ptr_input[0];
+                in_r = rx1_in_r; // (float*)array_ptr_input[1];
+            }
+            else
+            {
+                in_l = tx_in_l; // (float*)array_ptr_input[2];
+                in_r = tx_in_r; // (float*)array_ptr_input[3];
+            }
+
+            if (wave_playback)
+                wave_file_reader.GetPlayBuffer(in_l, in_r);
+            if (wave_record)
+            {
+                if (!localmox)
+                {
+                    if (record_rx_preprocessed)
+                    {
+                        wave_file_writer.AddWriteBuffer(in_l, in_r);
+                    }
+                }
+                else
+                {
+                    if (record_tx_preprocessed)
+                    {
+                        wave_file_writer.AddWriteBuffer(in_l, in_r);
+                    }
+                }
+            }
+
+            if (phase)
+            {
+                //phase_mutex.WaitOne();
+                Marshal.Copy(new IntPtr(in_l), phase_buf_l, 0, frameCount);
+                Marshal.Copy(new IntPtr(in_r), phase_buf_r, 0, frameCount);
+                //phase_mutex.ReleaseMutex();
+            }
+
+            // handle VAC Input
+            if (vac_enabled &&
+                rb_vacOUT_l != null && rb_vacOUT_r != null)
+            {
+                if (vac_bypass || !localmox) // drain VAC Input ring buffer
+                {
+                    if (vox_enabled)
+                    {
+                        if ((rb_vacIN_l.ReadSpace() >= frameCount) &&
+                            (rb_vacIN_r.ReadSpace() >= frameCount))
+                        {
+                            Win32.EnterCriticalSection(cs_vac);
+                            rb_vacIN_l.ReadPtr(in_l_ptr2, frameCount);
+                            rb_vacIN_r.ReadPtr(in_r_ptr2, frameCount);
+                            Win32.LeaveCriticalSection(cs_vac);
+                        }
+                    }
+                    else
+                    {
+                        if ((rb_vacIN_l.ReadSpace() >= frameCount) &&
+                            (rb_vacIN_r.ReadSpace() >= frameCount))
+                        {
+                            Win32.EnterCriticalSection(cs_vac);
+                            rb_vacIN_l.ReadPtr(out_l_ptr2, frameCount);
+                            rb_vacIN_r.ReadPtr(out_r_ptr2, frameCount);
+                            Win32.LeaveCriticalSection(cs_vac);
+                        }
+                    }
+                }
+                else
+                {
+                    if (rb_vacIN_l.ReadSpace() >= frameCount)
+                    {
+                        Win32.EnterCriticalSection(cs_vac);
+                        rb_vacIN_l.ReadPtr(tx_in_l, frameCount);
+                        rb_vacIN_r.ReadPtr(tx_in_r, frameCount);
+                        Win32.LeaveCriticalSection(cs_vac);
+                        if (vac_combine_input)
+                            AddBuffer(tx_in_l, tx_in_r, frameCount);
+                    }
+                    else
+                    {
+                        ClearBuffer(tx_in_l, frameCount);
+                        ClearBuffer(tx_in_r, frameCount);
+                        VACDebug("rb_vacIN underflow 4inTX");
+                    }
+
+                    ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)vac_preamp);
+                    ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)vac_preamp);
+                }
+            }
+
+            /*  switch (current_audio_state1)
+              {
+                  case AudioState.CW:
+                      DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
+                      DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
+                     break;
+                  case AudioState.DTTSP: */
+
+            #region VOX
+
+            if (vox_enabled)
+            {
+                if (tx_dsp_mode == DSPMode.LSB ||
+                    tx_dsp_mode == DSPMode.USB ||
+                    tx_dsp_mode == DSPMode.DSB ||
+                    tx_dsp_mode == DSPMode.AM ||
+                    tx_dsp_mode == DSPMode.SAM ||
+                    tx_dsp_mode == DSPMode.FM ||
+                    tx_dsp_mode == DSPMode.DIGL ||
+                    tx_dsp_mode == DSPMode.DIGU)
+                {
+                    peak = MaxSample(tx_in_l, tx_in_r, frameCount);
+
+                    // compare power to threshold
+                    vox_active = peak > vox_threshold;
+                }
+            }
+
+            #endregion
+
+            /*    if (tx_dsp_mode == DSPMode.CWU || tx_dsp_mode == DSPMode.CWL)
+                    {
+                        DttSP.CWtoneExchange(out_l_ptr1, out_r_ptr1, frameCount);
+                    } */
+
+            // scale input with mic preamp
+            if ((!vac_enabled &&
+                 (tx_dsp_mode == DSPMode.LSB ||
+                  tx_dsp_mode == DSPMode.USB ||
+                  tx_dsp_mode == DSPMode.DSB ||
+                  tx_dsp_mode == DSPMode.AM ||
+                  tx_dsp_mode == DSPMode.SAM ||
+                  tx_dsp_mode == DSPMode.FM ||
+                  tx_dsp_mode == DSPMode.DIGL ||
+                  tx_dsp_mode == DSPMode.DIGU)) ||
+                (vac_enabled && vac_bypass &&
+                 (tx_dsp_mode == DSPMode.DIGL ||
+                  tx_dsp_mode == DSPMode.DIGU ||
+                  tx_dsp_mode == DSPMode.LSB ||
+                  tx_dsp_mode == DSPMode.USB ||
+                  tx_dsp_mode == DSPMode.DSB ||
+                  tx_dsp_mode == DSPMode.AM ||
+                  tx_dsp_mode == DSPMode.SAM ||
+                  tx_dsp_mode == DSPMode.FM)))
+            {
+                if (wave_playback)
+                {
+                    ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)wave_preamp);
+                    ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)wave_preamp);
+                }
+                else
+                {
+                    if (!vac_enabled && (tx_dsp_mode == DSPMode.DIGL || tx_dsp_mode == DSPMode.DIGU))
+                    {
+                        ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)vac_preamp);
+                        ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)vac_preamp);
+                    }
+                    else
+                    {
+                        ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)mic_preamp);
+                        ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)mic_preamp);
+                    }
+                }
+            }
+
+            #region Input Signal Source
+
+            switch (rx1_input_signal)
+            {
+                case SignalSource.RADIO:
+                    break;
+                case SignalSource.SINE:
+                    SineWave(rx1_in_l, frameCount, phase_accumulator1, sine_freq1);
+                    phase_accumulator1 = CosineWave(rx1_in_r, frameCount, phase_accumulator1, sine_freq1);
+                    ScaleBuffer(rx1_in_l, rx1_in_l, frameCount, (float)source_scale);
+                    ScaleBuffer(rx1_in_r, rx1_in_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.SINE_TWO_TONE:
+                    double dump;
+                    SineWave2Tone(rx1_in_l, frameCount, phase_accumulator1, phase_accumulator2,
+                                  sine_freq1, sine_freq2, out dump, out dump);
+                    CosineWave2Tone(rx1_in_r, frameCount, phase_accumulator1, phase_accumulator2,
+                                    sine_freq1, sine_freq2, out phase_accumulator1, out phase_accumulator2);
+                    ScaleBuffer(rx1_in_l, rx1_in_l, frameCount, (float)source_scale);
+                    ScaleBuffer(rx1_in_r, rx1_in_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.SINE_LEFT_ONLY:
+                    phase_accumulator1 = SineWave(rx1_in_l, frameCount, phase_accumulator1, sine_freq1);
+                    ScaleBuffer(rx1_in_l, rx1_in_l, frameCount, (float)source_scale);
+                    ClearBuffer(rx1_in_r, frameCount);
+                    break;
+                case SignalSource.SINE_RIGHT_ONLY:
+                    phase_accumulator1 = SineWave(rx1_in_r, frameCount, phase_accumulator1, sine_freq1);
+                    ScaleBuffer(rx1_in_r, rx1_in_r, frameCount, (float)source_scale);
+                    ClearBuffer(rx1_in_l, frameCount);
+                    break;
+                case SignalSource.NOISE:
+                    Noise(rx1_in_l, frameCount);
+                    Noise(rx1_in_r, frameCount);
+                    break;
+                case SignalSource.TRIANGLE:
+                    Triangle(rx1_in_l, frameCount, sine_freq1);
+                    CopyBuffer(rx1_in_l, rx1_in_r, frameCount);
+                    break;
+                case SignalSource.SAWTOOTH:
+                    Sawtooth(rx1_in_l, frameCount, sine_freq1);
+                    CopyBuffer(rx1_in_l, rx1_in_r, frameCount);
+                    break;
+                case SignalSource.PULSE:
+                    Pulse(rx1_in_l, frameCount);
+                    CopyBuffer(rx1_in_l, rx1_in_r, frameCount);
+                    ScaleBuffer(rx1_in_l, rx1_in_l, frameCount, (float)source_scale);
+                    ScaleBuffer(rx1_in_r, rx1_in_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.SILENCE:
+                    ClearBuffer(rx1_in_l, frameCount);
+                    ClearBuffer(rx1_in_r, frameCount);
+                    break;
+            }
+
+            switch (tx_input_signal)
+            {
+                case SignalSource.RADIO:
+                    break;
+                case SignalSource.SINE:
+                    SineWave(tx_in_l, frameCount, phase_accumulator1, sine_freq1);
+                    phase_accumulator1 = CosineWave(in_r, frameCount, phase_accumulator1, sine_freq1);
+                    ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)source_scale);
+                    ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.SINE_TWO_TONE:
+                    double dump;
+                    SineWave2Tone(tx_in_l, frameCount, phase_accumulator1, phase_accumulator2,
+                                  sine_freq1, sine_freq2, out dump, out dump);
+                    CosineWave2Tone(tx_in_r, frameCount, phase_accumulator1, phase_accumulator2,
+                                    sine_freq1, sine_freq2, out phase_accumulator1, out phase_accumulator2);
+                    ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)source_scale);
+                    ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.NOISE:
+                    Noise(tx_in_l, frameCount);
+                    Noise(tx_in_r, frameCount);
+                    break;
+                case SignalSource.TRIANGLE:
+                    Triangle(tx_in_l, frameCount, sine_freq1);
+                    CopyBuffer(tx_in_l, tx_in_r, frameCount);
+                    break;
+                case SignalSource.SAWTOOTH:
+                    Sawtooth(tx_in_l, frameCount, sine_freq1);
+                    CopyBuffer(tx_in_l, tx_in_r, frameCount);
+                    break;
+                case SignalSource.PULSE:
+                    Pulse(tx_in_l, frameCount);
+                    CopyBuffer(tx_in_l, tx_in_r, frameCount);
+                    ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)source_scale);
+                    ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.SILENCE:
+                    ClearBuffer(tx_in_l, frameCount);
+                    ClearBuffer(tx_in_r, frameCount);
+                    break;
+            }
+
+            #endregion
+
+            /*  if (!localmox)
+                        DoScope2(rx1_in_l, frameCount);                    
+                    else DoScope2(tx_in_l, frameCount); */
+
+
+#if(MINMAX)
+					Debug.Write(MaxSample(in_l, in_r, frameCount).ToString("f6")+",");
+#endif
+
+            // handle Direct IQ for VAC
+            if (vac_enabled && vac_output_iq &&
+                rb_vacOUT_l != null && rb_vacOUT_r != null &&
+                rx1_in_l != null && rx1_in_r != null)
+            {
+                if ((rb_vacOUT_l.WriteSpace() >= frameCount) && (rb_vacOUT_r.WriteSpace() >= frameCount))
+                {
+                    if (vac_correct_iq)
+                        fixed (float* res_outl_ptr = &(res_outl[0]))
+                        fixed (float* res_outr_ptr = &(res_outr[0]))
+                        {
+                            CorrectIQBuffer(rx1_in_l, rx1_in_r,
+                                res_outl_ptr, res_outr_ptr, frameCount);
+                            Win32.EnterCriticalSection(cs_vac);
+                            rb_vacOUT_l.WritePtr(res_outr_ptr, frameCount); // why are these reversed??
+                            rb_vacOUT_r.WritePtr(res_outl_ptr, frameCount);
+                            Win32.LeaveCriticalSection(cs_vac);
+
+                        }
+                    else
+                    {
+                        Win32.EnterCriticalSection(cs_vac);
+                        rb_vacOUT_l.WritePtr(rx1_in_r, frameCount);
+                        rb_vacOUT_r.WritePtr(rx1_in_l, frameCount);
+                        Win32.LeaveCriticalSection(cs_vac);
+                    }
+                }
+                else
+                {
+                    VACDebug("rb_vacOUT_l I/Q overflow ");
+                    vac_rb_reset = true;
+                }
+            }
+
+            if (localmox && (tx_dsp_mode == DSPMode.CWL || tx_dsp_mode == DSPMode.CWU))
+            {
+                DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
+
+                double time = CWSensorItem.GetCurrentTime();
+                CWSynth.Advance(tx_out_l, tx_out_r, frameCount, time);
+            }
+            else if (tx_dsp_mode == DSPMode.CWL || tx_dsp_mode == DSPMode.CWU)
+            {
+                double time = CWSensorItem.GetCurrentTime();
+                CWSynth.Advance(tx_out_l, tx_out_r, frameCount, time);
+
+                DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
+            }
+            else
+            {
+                DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
+            }
+#if(MINMAX)
+			Debug.Write(MaxSample(out_l_ptr2, frameCount).ToString("f6")+",");
+			Debug.Write(MaxSample(out_r_ptr2, frameCount).ToString("f6")+"\n");
+#endif
+
+            #region Output Signal Source
+
+            switch (rx1_output_signal)
+            {
+                case SignalSource.RADIO:
+                    break;
+                case SignalSource.SINE:
+                    SineWave(rx1_out_l, frameCount, phase_accumulator1, sine_freq1);
+                    phase_accumulator1 = CosineWave(rx1_out_r, frameCount, phase_accumulator1, sine_freq1);
+                    ScaleBuffer(rx1_out_l, rx1_out_l, frameCount, (float)source_scale);
+                    ScaleBuffer(rx1_out_r, rx1_out_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.SINE_TWO_TONE:
+                    double dump;
+                    SineWave2Tone(rx1_out_l, frameCount, phase_accumulator1, phase_accumulator2,
+                                  sine_freq1, sine_freq2, out dump, out dump);
+                    CosineWave2Tone(rx1_out_r, frameCount, phase_accumulator1, phase_accumulator2,
+                                    sine_freq1, sine_freq2, out phase_accumulator1, out phase_accumulator2);
+                    ScaleBuffer(rx1_out_l, rx1_out_l, frameCount, (float)source_scale);
+                    ScaleBuffer(rx1_out_r, rx1_out_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.SINE_LEFT_ONLY:
+                    phase_accumulator1 = SineWave(rx1_out_l, frameCount, phase_accumulator1, sine_freq1);
+                    ScaleBuffer(rx1_out_l, rx1_out_l, frameCount, (float)source_scale);
+                    ClearBuffer(rx1_out_r, frameCount);
+                    break;
+                case SignalSource.SINE_RIGHT_ONLY:
+                    phase_accumulator1 = SineWave(rx1_out_r, frameCount, phase_accumulator1, sine_freq1);
+                    ScaleBuffer(rx1_out_r, rx1_out_r, frameCount, (float)source_scale);
+                    ClearBuffer(rx1_out_l, frameCount);
+                    break;
+                case SignalSource.NOISE:
+                    Noise(rx1_out_l, frameCount);
+                    Noise(rx1_out_r, frameCount);
+                    break;
+                case SignalSource.TRIANGLE:
+                    Triangle(rx1_out_l, frameCount, sine_freq1);
+                    CopyBuffer(rx1_out_l, rx1_out_r, frameCount);
+                    break;
+                case SignalSource.SAWTOOTH:
+                    Sawtooth(rx1_out_l, frameCount, sine_freq1);
+                    CopyBuffer(rx1_out_l, rx1_out_r, frameCount);
+                    break;
+                case SignalSource.PULSE:
+                    Pulse(rx1_out_l, frameCount);
+                    CopyBuffer(rx1_out_l, rx1_out_r, frameCount);
+                    ScaleBuffer(rx1_out_l, rx1_out_l, frameCount, (float)source_scale);
+                    ScaleBuffer(rx1_out_r, rx1_out_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.SILENCE:
+                    ClearBuffer(rx1_out_l, frameCount);
+                    ClearBuffer(rx1_out_r, frameCount);
+                    break;
+            }
+
+            switch (tx_output_signal)
+            {
+                case SignalSource.RADIO:
+                    break;
+                case SignalSource.SINE:
+                    SineWave(tx_out_l, frameCount, phase_accumulator1, sine_freq1);
+                    phase_accumulator1 = CosineWave(tx_out_r, frameCount, phase_accumulator1, sine_freq1);
+                    ScaleBuffer(tx_out_l, tx_out_l, frameCount, (float)source_scale);
+                    ScaleBuffer(tx_out_r, tx_out_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.SINE_TWO_TONE:
+                    double dump;
+                    SineWave2Tone(tx_out_l, frameCount, phase_accumulator1, phase_accumulator2,
+                                  sine_freq1, sine_freq2, out dump, out dump);
+                    CosineWave2Tone(tx_out_r, frameCount, phase_accumulator1, phase_accumulator2,
+                                    sine_freq1, sine_freq2, out phase_accumulator1, out phase_accumulator2);
+                    ScaleBuffer(tx_out_l, tx_out_l, frameCount, (float)source_scale);
+                    ScaleBuffer(tx_out_r, tx_out_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.NOISE:
+                    Noise(tx_out_l, frameCount);
+                    Noise(tx_out_r, frameCount);
+                    break;
+                case SignalSource.TRIANGLE:
+                    Triangle(tx_out_l, frameCount, sine_freq1);
+                    CopyBuffer(tx_out_l, tx_out_r, frameCount);
+                    break;
+                case SignalSource.SAWTOOTH:
+                    Sawtooth(tx_out_l, frameCount, sine_freq1);
+                    CopyBuffer(tx_out_l, tx_out_r, frameCount);
+                    break;
+                case SignalSource.PULSE:
+                    Pulse(tx_out_l, frameCount);
+                    CopyBuffer(tx_out_l, tx_out_r, frameCount);
+                    ScaleBuffer(tx_out_l, tx_out_l, frameCount, (float)source_scale);
+                    ScaleBuffer(tx_out_r, tx_out_r, frameCount, (float)source_scale);
+                    break;
+                case SignalSource.SILENCE:
+                    ClearBuffer(tx_out_l, frameCount);
+                    ClearBuffer(tx_out_r, frameCount);
+                    break;
+            }
+
+            #endregion
+
+            if (localmox && ramp)
+            {
+                for (int i = 0; i < frameCount; i++)
+                {
+                    float scale = (float)Math.Cos(ramp_count * ramp_step);
+                    //Debug.WriteLine("ramp scale: " + scale.ToString("f6"));
+
+                    out_l_ptr2[i] *= scale;
+                    out_r_ptr2[i] *= scale;
+
+                    if (++ramp_count > ramp_samples)
+                    {
+                        // clear the rest of the TX buffer
+                        for (int j = i + 1; j < frameCount; j++)
+                        {
+                            out_l_ptr2[i] = 0.0f;
+                            out_r_ptr2[i] = 0.0f;
+                        }
+
+                        mox = false;
+                        ramp = false;
+                        break;
+                    }
+                }
+            }
+
+            if (scope)
+            {
+                if (!localmox)
+                {
+                    DoScope(rx1_out_l, frameCount);
+                    DoScope2(rx1_out_r, frameCount);
+                }
+                else
+                {
+                    DoScope(tx_out_l, frameCount);
+                    DoScope2(tx_out_r, frameCount);
+                }
+            }
+
+            if (wave_record)
+            {
+                if (!localmox)
+                {
+                    if (!record_rx_preprocessed)
+                    {
+                        wave_file_writer.AddWriteBuffer(out_l_ptr1, out_r_ptr1);
+                    }
+                }
+                else
+                {
+                    if (!record_tx_preprocessed)
+                    {
+                        wave_file_writer.AddWriteBuffer(out_l_ptr2, out_r_ptr2);
+                    }
+                }
+            }
+
+            out_l1 = rx1_out_l; // 0 RX1 L
+            out_r1 = rx1_out_r; // 1 RX1 R
+            out_l2 = out_l_ptr2; // 2 TX L
+            out_r2 = out_r_ptr2; // 3 TX R
+
+
+            // scale output for VAC -- use input as spare buffer
+            if (vac_enabled && !vac_output_iq &&
+                rb_vacIN_l != null && rb_vacIN_r != null &&
+                rb_vacOUT_l != null && rb_vacOUT_r != null)
+            {
+                if (!localmox)
+                {
+                    ScaleBuffer(out_l1, out_l2, frameCount, (float)vac_rx_scale);
+                    ScaleBuffer(out_r1, out_r2, frameCount, (float)vac_rx_scale);
+                }
+                else if (mon)
+                {
+                    ScaleBuffer(out_l2, out_l1, frameCount, (float)vac_rx_scale);
+                    ScaleBuffer(out_r2, out_r1, frameCount, (float)vac_rx_scale);
+                }
+                else // zero samples going back to VAC since TX monitor is off
+                {
+                    ScaleBuffer(out_l2, out_l1, frameCount, 0.0f);
+                    ScaleBuffer(out_r2, out_r1, frameCount, 0.0f);
+                }
+
+                float* vac_l, vac_r;
+                if (!localmox)
+                {
+                    vac_l = out_l2;
+                    vac_r = out_r2;
+                }
+                else
+                {
+                    vac_l = out_l1;
+                    vac_r = out_r1;
+                }
+
+                if (sample_rate2 == sample_rate1)
+                {
+                    if ((rb_vacOUT_l.WriteSpace() >= frameCount) && (rb_vacOUT_r.WriteSpace() >= frameCount))
+                    {
+                        Win32.EnterCriticalSection(cs_vac);
+                        rb_vacOUT_l.WritePtr(vac_l, frameCount);
+                        rb_vacOUT_r.WritePtr(vac_r, frameCount);
+                        Win32.LeaveCriticalSection(cs_vac);
+                    }
+                    else
+                    {
+                        VACDebug("rb_vacOUT_l overflow ");
+                        vac_rb_reset = true;
+                    }
+                }
+                else
+                {
+                    if (vac_stereo)
+                    {
+                        fixed (float* res_outl_ptr = &(res_outl[0]))
+                        fixed (float* res_outr_ptr = &(res_outr[0]))
+                        {
+                            int outsamps;
+                            DttSP.DoResamplerF(vac_l, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
+                            DttSP.DoResamplerF(vac_r, res_outr_ptr, frameCount, &outsamps, resampPtrOut_r);
+                            if ((rb_vacOUT_l.WriteSpace() >= outsamps) && (rb_vacOUT_r.WriteSpace() >= outsamps))
+                            {
+                                Win32.EnterCriticalSection(cs_vac);
+                                rb_vacOUT_l.WritePtr(res_outl_ptr, outsamps);
+                                rb_vacOUT_r.WritePtr(res_outr_ptr, outsamps);
+                                Win32.LeaveCriticalSection(cs_vac);
+                            }
+                            else
+                            {
+                                vac_rb_reset = true;
+                                VACDebug("rb_vacOUT_l overflow");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        fixed (float* res_outl_ptr = &(res_outl[0]))
+                        {
+                            int outsamps;
+                            DttSP.DoResamplerF(vac_l, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
+                            if ((rb_vacOUT_l.WriteSpace() >= outsamps) && (rb_vacOUT_r.WriteSpace() >= outsamps))
+                            {
+                                Win32.EnterCriticalSection(cs_vac);
+                                rb_vacOUT_l.WritePtr(res_outl_ptr, outsamps);
+                                rb_vacOUT_r.WritePtr(res_outl_ptr, outsamps);
+                                Win32.LeaveCriticalSection(cs_vac);
+                            }
+                            else
+                            {
+                                vac_rb_reset = true;
+                                VACDebug("rb_vacOUT_l overflow");
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!localmox)
+            {
+                ScaleBuffer(out_l1, out_l1, frameCount, (float)monitor_volume);
+                ScaleBuffer(out_r1, out_r1, frameCount, (float)monitor_volume);
+                ClearBuffer(out_l2, frameCount);
+                ClearBuffer(out_r2, frameCount);
+            }
+            else
+            {
+                /* hermes hack needed */
+                    ScaleBuffer(out_l2, out_l1, frameCount, (float)monitor_volume);
+                    ScaleBuffer(out_r2, out_r1, frameCount, (float)monitor_volume);
+                
+
+                if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
+                {
+                    ScaleBuffer(out_l2, out_l2, frameCount, (float)TXScale);
+                    ScaleBuffer(out_r2, out_r2, frameCount, (float)TXScale);
+                }
+            }
+
+#if(MINMAX)
+			Debug.Write(MaxSample(out_l2, out_r2, frameCount).ToString("f6")+",");
+
+			float current_max = MaxSample(out_l2, out_r2, frameCount);
+			if(current_max > max) max = current_max;
+			Debug.WriteLine(" max: "+max.ToString("f6"));
+#endif
+
+#if(TIMER)
+			t1.Stop();
+			Debug.WriteLine(t1.Duration);
+#endif
+
+            return callback_return;
+        }
+
         //Callback for HPSDR
         //private static int count = 0;
         unsafe public static int Callback3Port(void* input, void* output, int frameCount,
@@ -1545,9 +2219,7 @@ namespace PowerSDR
             float* in_r_ptr2 = (float*)array_ptr_input[3]; //CallbackInR2bufp  RX2 Q
             float* in_l_ptr3 = (float*)array_ptr_input[4]; //CallbackMicLbufp  Mic L
             float* in_r_ptr3 = (float*)array_ptr_input[5]; //CallbackMicRbufp  Mic R
-           // float* in_l_ptr4 = (float*)array_ptr_input[6]; //CallbackInL3bufp  RX3 I
-          //  float* in_r_ptr4 = (float*)array_ptr_input[7]; //CallbackInR3bufp  RX3 Q
-
+ 
             array_ptr_input[0] = (int)in_l_ptr1; // CallbackInLbufp
             array_ptr_input[1] = (int)in_r_ptr1; // CallbackInRbufp
             array_ptr_input[2] = (int)in_l_ptr3; // CallbackMicLbufp
@@ -1580,82 +2252,6 @@ namespace PowerSDR
             tx_out_r = (float*)array_ptr_output[3]; //CallbackOutRbufp
             rx2_out_l = (float*)array_ptr_output[4]; //CallbackOutL2bufp
             rx2_out_r = (float*)array_ptr_output[5]; //CallbackOutR2bufp
-
-
-            // arrange input buffers in the following order:
-            // RX1 Left, RX1 Right, TX Left, TX Right, RX2 Left, RX2 Right
-
-
-            /*   switch (in_rx1_l)
-               {
-                   case 0: array_ptr_input[0] = (int)in_l_ptr1; break; // CallbackInLbufp
-                   case 1: array_ptr_input[0] = (int)in_r_ptr1; break;
-                   case 2: array_ptr_input[0] = (int)in_l_ptr2; break;
-                   case 3: array_ptr_input[0] = (int)in_r_ptr2; break;
-                   case 4: array_ptr_input[0] = (int)in_l_ptr3; break;
-                   case 5: array_ptr_input[0] = (int)in_r_ptr3; break;
-                   case 6: array_ptr_input[0] = (int)in_l_ptr4; break;
-                   case 7: array_ptr_input[0] = (int)in_r_ptr4; break;
-               }
-
-               switch (in_rx1_r)
-               {
-                   case 0: array_ptr_input[1] = (int)in_l_ptr1; break;
-                   case 1: array_ptr_input[1] = (int)in_r_ptr1; break; // CallbackInRbufp
-                   case 2: array_ptr_input[1] = (int)in_l_ptr2; break;
-                   case 3: array_ptr_input[1] = (int)in_r_ptr2; break;
-                   case 4: array_ptr_input[1] = (int)in_l_ptr3; break;
-                   case 5: array_ptr_input[1] = (int)in_r_ptr3; break;
-                   case 6: array_ptr_input[1] = (int)in_l_ptr4; break;
-                   case 7: array_ptr_input[1] = (int)in_r_ptr4; break;
-               }
-
-               switch (in_tx_l)
-               {
-                   case 0: array_ptr_input[2] = (int)in_l_ptr1; break;
-                   case 1: array_ptr_input[2] = (int)in_r_ptr1; break;
-                   case 2: array_ptr_input[2] = (int)in_l_ptr2; break;
-                   case 3: array_ptr_input[2] = (int)in_r_ptr2; break;
-                   case 4: array_ptr_input[2] = (int)in_l_ptr3; break; // CallbackMicLbufp
-                   case 5: array_ptr_input[2] = (int)in_r_ptr3; break;
-                   case 6: array_ptr_input[2] = (int)in_l_ptr4; break;
-                   case 7: array_ptr_input[2] = (int)in_r_ptr4; break;
-               }
-
-               switch (in_tx_r)
-               {
-                   case 0: array_ptr_input[3] = (int)in_l_ptr1; break;
-                   case 1: array_ptr_input[3] = (int)in_r_ptr1; break;
-                   case 2: array_ptr_input[3] = (int)in_l_ptr2; break;
-                   case 3: array_ptr_input[3] = (int)in_r_ptr2; break;
-                   case 4: array_ptr_input[3] = (int)in_l_ptr3; break;
-                   case 5: array_ptr_input[3] = (int)in_r_ptr3; break; // CallbackMicRbufp
-                   case 6: array_ptr_input[3] = (int)in_l_ptr4; break;
-                   case 7: array_ptr_input[3] = (int)in_r_ptr4; break;
-               }
-
-               switch (in_rx2_l)
-               {
-                   case 0: array_ptr_input[4] = (int)in_l_ptr1; break;
-                   case 1: array_ptr_input[4] = (int)in_r_ptr1; break;
-                   case 2: array_ptr_input[4] = (int)in_l_ptr2; break; // CallbackInL2bufp
-                   case 3: array_ptr_input[4] = (int)in_r_ptr2; break;
-                   case 4: array_ptr_input[4] = (int)in_l_ptr3; break;
-                   case 5: array_ptr_input[4] = (int)in_r_ptr3; break;
-                   case 6: array_ptr_input[4] = (int)in_l_ptr4; break;
-                   case 7: array_ptr_input[4] = (int)in_r_ptr4; break;
-               }
-               switch (in_rx2_r)
-               {
-                   case 0: array_ptr_input[5] = (int)in_l_ptr1; break;
-                   case 1: array_ptr_input[5] = (int)in_r_ptr1; break;
-                   case 2: array_ptr_input[5] = (int)in_l_ptr2; break;
-                   case 3: array_ptr_input[5] = (int)in_r_ptr2; break; // CallbackInR2bufp
-                   case 4: array_ptr_input[5] = (int)in_l_ptr3; break;
-                   case 5: array_ptr_input[5] = (int)in_r_ptr3; break;
-                   case 6: array_ptr_input[5] = (int)in_l_ptr4; break;
-                   case 7: array_ptr_input[5] = (int)in_r_ptr4; break;
-               } */
 
             if (!localmox)
             {
@@ -6135,72 +6731,20 @@ namespace PowerSDR
 
             unsafe
             {
-                JanusAudio.SetNRx(2); //set number of receivers to 2
-                JanusAudio.SetDuplex(1); // set full duplex mode
+               JanusAudio.SetNRx(2); //set number of receivers to 2
+               JanusAudio.SetDuplex(1); // set full duplex mode
 
+#if (HPSDR_2RX)
                 retval = StartAudio(ref callback3port,
                                     (uint)block_size1,
                                     sample_rate1);
+#else
+              retval = StartAudio(ref callbackdiversityport,
+                                    (uint)block_size1,
+                                    sample_rate1);
+#endif
             }
             
-            /*   if (console.fwc_init && (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000))
-                     unsafe
-                     {
-                         switch (console.CurrentModel)
-                         {
-                             case Model.FLEX5000:
-                                 in_rx1_l = 0;
-                                 in_rx1_r = 1;
-                                 break;
-                             case Model.FLEX3000:
-                                 in_rx1_l = 1;
-                                 in_rx1_r = 0;
-                                 break;
-                         }
-                         in_rx2_l = 2;
-                         in_rx2_r = 3;
-                         //in_tx_l = 5;
-                         //in_tx_r = 6;
-                         retval = StartAudio(ref callback8, (uint)block_size1, sample_rate1, host1, input_dev1, output_dev1,
-                                             8, 0, latency1);
-                     }
-                 else
-                     unsafe
-                     {
-                         if (num_channels == 2)
-                             retval = StartAudio(ref callback1, (uint)block_size1, sample_rate1, host1, input_dev1,
-                                                 output_dev1, num_channels, 0, latency1);
-                         else if (num_channels == 4 || num_channels == 8)
-                         {
-                             if (console.CurrentModel == Model.HPSDR ||
-                                 console.CurrentModel == Model.HERMES)
-                             {
-                                 JanusAudio.SetNRx(2); //set number of receivers to 2
-                                 JanusAudio.SetDuplex(1); // set full duplex mode
-
-                                 retval = StartAudio(ref callback3port,
-                                                     (uint)block_size1,
-                                                     sample_rate1,
-                                                     host1,
-                                                     input_dev1,
-                                                     output_dev1,
-                                                     8, //num_channels,
-                                                     0,
-                                                     latency1);
-                             }
-                             else
-                                 retval = StartAudio(ref callback4port,
-                                                     (uint)block_size1,
-                                                     sample_rate1,
-                                                     host1,
-                                                     input_dev1,
-                                                     output_dev1,
-                                                     num_channels,
-                                                     0,
-                                                     latency1);
-                         }
-                     } */
-
             if (!retval) return retval;
 
             if (vac_enabled)
