@@ -2680,17 +2680,27 @@ namespace PowerSDR
                 else
                     cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
 
-                if (bottom)
-                {
-                    g.DrawLine(tx_filter_pen, cw_line_x, H + top, cw_line_x, H + H);
-                    g.DrawLine(tx_filter_pen, cw_line_x + 1, H + top, cw_line_x + 1, H + H);
-                }
-                else
-                {
-                    g.DrawLine(tx_filter_pen, cw_line_x, top, cw_line_x, H);
+                     g.DrawLine(tx_filter_pen, cw_line_x, top, cw_line_x, H);
                     g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
-                }
             }
+
+            if (!local_mox && draw_tx_cw_freq &&
+                (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU))
+            {
+                int pitch = cw_pitch;
+                if (rx2_dsp_mode == DSPMode.CWL)
+                    pitch = -cw_pitch;
+
+                int cw_line_x;
+                if (!split_enabled)
+                    cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz) / (High - Low) * W);
+                else
+                    cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
+
+                     g.DrawLine(tx_filter_pen, cw_line_x, H + top, cw_line_x, H + H);
+                    g.DrawLine(tx_filter_pen, cw_line_x + 1, H + top, cw_line_x + 1, H + H);
+                
+             }
 #if (false)
             // draw 60m channels if in view
             foreach (Channel c in channels_60m)
@@ -2987,17 +2997,27 @@ namespace PowerSDR
                 else
                     cw_line_x1 = (int)((float)(pitch - Low + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
 
-                if (bottom)
-                {
-                    g.DrawLine(tx_filter_pen, cw_line_x1, H + top, cw_line_x1, H + H);
-                    g.DrawLine(tx_filter_pen, cw_line_x1 + 1, H + top, cw_line_x1 + 1, H + H);
-                }
-                else
-                {
                     g.DrawLine(cw_zero_pen, cw_line_x1, top, cw_line_x1, H);
                     g.DrawLine(tx_filter_pen, cw_line_x1 + 1, top, cw_line_x1 + 1, H);
-                }
+                
             }
+
+            if (!local_mox && show_cwzero_line &&
+                 (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU))
+            {
+                int pitch = cw_pitch;
+                if (rx2_dsp_mode == DSPMode.CWL)
+                    pitch = -cw_pitch;
+
+                int cw_line_x1;
+                if (!split_enabled)
+                    cw_line_x1 = (int)((float)(pitch - Low) / (High - Low) * W);
+                else
+                    cw_line_x1 = (int)((float)(pitch - Low + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
+
+                    g.DrawLine(tx_filter_pen, cw_line_x1, H + top, cw_line_x1, H + H);
+                    g.DrawLine(tx_filter_pen, cw_line_x1 + 1, H + top, cw_line_x1 + 1, H + H);
+              }
 
             // Draw 0Hz vertical line if visible
             if (center_line_x >= 0 && center_line_x <= W)
@@ -3171,6 +3191,22 @@ namespace PowerSDR
                             }
                             else goto default;
 
+                        case FRSRegion.India:
+                            if (actual_fgrid == 1.81 || actual_fgrid == 1.86 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.9 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                goto case FRSRegion.LAST;
+                            }
+                            else goto default;
+                        
                         case FRSRegion.Europe:
                             if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
@@ -3190,6 +3226,7 @@ namespace PowerSDR
                         case FRSRegion.UK:
                             if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                                actual_fgrid == 5.2585 || actual_fgrid == 5.4065 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
                                 actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
                                 actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
@@ -3449,7 +3486,7 @@ namespace PowerSDR
                             int x2 = (int)((freq_high - Low) / (High - Low) * W);
                             //g.FillRectangle(display_filter_brush, x1, top, x2 - x1, H - top);
 
-                            if (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)
+                            if (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU)
                             {
                                 g.FillRectangle(display_filter_brush, display_cursor_x -
                                     ((x2 - x1) / 2), H + top, x2 - x1, H + H - top);
@@ -3499,7 +3536,7 @@ namespace PowerSDR
                 }
             }
 
-            if (console.PowerOn)
+            if (console.PowerOn && !local_mox)
             {
                 // get filter screen coordinates
                 int filter_left_x = (int)((float)(filter_low - Low) / (High - Low) * W);
@@ -4049,6 +4086,44 @@ namespace PowerSDR
                             else
                                 goto default;
 
+                        case FRSRegion.India:
+                            if (actual_fgrid == 1.81 || actual_fgrid == 1.86 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.9 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(tx_band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(tx_band_edge_pen, vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
                         case FRSRegion.Europe:
                             if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
@@ -4090,6 +4165,7 @@ namespace PowerSDR
                         case FRSRegion.UK:
                             if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                                actual_fgrid == 5.2585 || actual_fgrid == 5.4065 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
                                 actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
                                 actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
@@ -4621,6 +4697,34 @@ namespace PowerSDR
                             else
                                 goto default;
 
+                        case FRSRegion.India:
+                            if (actual_fgrid == 1.81 || actual_fgrid == 1.86 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                break;
+                            }
+                            else
+                                goto default;
+                        
                         case FRSRegion.Spain:
                             if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
@@ -4680,6 +4784,7 @@ namespace PowerSDR
                         case FRSRegion.UK:
                             if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                                actual_fgrid == 5.2585 || actual_fgrid == 5.4065 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
                                 actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
                                 actual_fgrid == 14.0 || actual_fgrid == 14.35 ||

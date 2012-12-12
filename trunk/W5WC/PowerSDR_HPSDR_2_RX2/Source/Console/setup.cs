@@ -11924,6 +11924,11 @@ namespace PowerSDR
             }
         }
 
+        public void UpdateCustomTitle()
+        {
+            txtGenCustomTitle_TextChanged(this, EventArgs.Empty);
+        }
+        
         private void txtGenCustomTitle_TextChanged(object sender, System.EventArgs e)
         {
             string title = console.Text;
@@ -13998,6 +14003,10 @@ namespace PowerSDR
                     break;
                 case "Europe":
                     region = FRSRegion.Europe;
+                    console.Extended = false;
+                    break;
+                case "India":
+                    region = FRSRegion.India;
                     console.Extended = false;
                     break;
                 case "Italy":

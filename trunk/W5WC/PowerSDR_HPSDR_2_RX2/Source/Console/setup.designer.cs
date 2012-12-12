@@ -5006,6 +5006,7 @@
             this.comboFRSRegion.Items.AddRange(new object[] {
             "Australia",
             "Europe",
+            "India",
             "Italy",
             "Israel",
             "Japan",

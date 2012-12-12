@@ -100,8 +100,11 @@ namespace PowerSDR
            // app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
               //  + "\\FlexRadio Systems\\PowerSDR v" + version + "\\wisdom";
             app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+#if (HPSDR_2RX)
                 + "\\FlexRadio Systems\\PowerSDR RX2 (W5WC)\\wisdom";
-
+#else
+                +"\\FlexRadio Systems\\PowerSDR (K5SO)\\wisdom";
+#endif
 			DttSP.SetupSDR(app_data_path);
 		}
 

@@ -83,20 +83,6 @@ extern KD5TFDVK6APHAUDIO_API int GetDiagData(int *a, int count);
 //extern KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(double f);
 //extern KD5TFDVK6APHAUDIO_API void SetAlexEnable(int bit);
 
-#if 0
-extern KD5TFDVK6APHAUDIO_API int StartAudio_4port(int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata));
-extern KD5TFDVK6APHAUDIO_API void StopAudio_4port(void);
-#endif
-
-#ifdef XYLO
-// Xylo IO routines  - now obsolete
-extern HANDLE *XyloOpen(void);
-extern void XyloClose(HANDLE *h);
-extern int XyloBulkWrite(HANDLE *h, ULONG pipe, void* buffer, ULONG buffersize);
-extern WORD XyloBulkRead(HANDLE *h, ULONG pipe, void* buffer, ULONG buffersize);
-#endif
-
-#ifdef OZY
 // Ozy IO Routines
 struct OzyHandle {
         struct usb_device *devp;
@@ -114,7 +100,6 @@ extern KD5TFDVK6APHAUDIO_API int ReadI2C(struct usb_dev_handle *hdev, int i2c_ad
 extern KD5TFDVK6APHAUDIO_API int Set_I2C_Speed(struct usb_dev_handle *hdev, int speed);
 extern KD5TFDVK6APHAUDIO_API int WriteControlMsg(struct usb_dev_handle *hdev, int requesttype, int request, int value, 
                                               int index, unsigned char *bytes, int length, int timeout);
-#endif
 
 // IOThread rountines
 extern void *IOThreadMain(void *argp);
@@ -277,6 +262,16 @@ extern char *FPGAWriteBufp;
 
 extern int C1Mask;
 extern char PennyOCBits; /* pennny open collector bits */
+
+extern int MercSource;	//diversity mode IQ source identifier
+extern int refMerc;		//reference Mercury board for diversity phasing
+extern double theta;    //direction angle
+extern double I_Rotate;	//diversity mode phase shift parameter
+extern double Q_Rotate;  //diversity mode phase shift parameter
+extern double I_RotateA; //directional mode A phase shift I parameter
+extern double Q_RotateA; //directional mode A phase shift Q parameter
+extern double I_RotateB; //directional mode A phase shift I parameter
+extern double Q_RotateB; //directional mode A phase shift Q parameter
 
 extern int AlexAtten;
 extern int Alex2Atten;

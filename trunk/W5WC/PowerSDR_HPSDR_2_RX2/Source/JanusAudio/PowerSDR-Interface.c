@@ -51,7 +51,7 @@
 //
 // this is the 8 in 8 out (actually 5 in 4 out) version of start audio
 //
-
+#ifdef HPSDR_2RX
 KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_block,
                       int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata),
                                            int sample_bits, int no_send)
@@ -112,7 +112,6 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                         FPGAReadBufSize = FPGAWriteBufSize; // was 512;
                         MicResamplerP = NULL;
                         break;
-#ifndef LINUX
                 case 96000:
                         SampleRateIn2Bits = 1;
                         FPGAReadBufSize = 2 * FPGAWriteBufSize;  // was 1024;
@@ -129,10 +128,6 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                                 fprintf(stderr, "Warning NewResamplerF failed in PowerSDR-Interface.c\n");
                         }
                         break;
-#else
-#warning message("info - LINUX code missing ... NewResamplerF");
-#endif
-
                 default:
                         SampleRateIn2Bits = 3;
                         break;
@@ -144,14 +139,10 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 
         // make sure we're not already opened
         //
-#ifdef XYLO
-        if ( XyloH != NULL || IOThreadRunning ) {
-#endif
-#ifdef OZY
         if ( OzyH != NULL || IOThreadRunning  ) {
-#endif
                 return 3;
         }
+
 
         do { // once
                 // allocate buffers for callback buffers
@@ -213,25 +204,15 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                 FPGAWriteBufp = FPGAReadBufp + FPGAReadBufSize;
 
 				if ( !isMetis ) { 
-#ifdef XYLO
-					// go open the xylo usb device
-					XyloH = XyloOpen();
-					if ( XyloH == NULL ) {
-							myrc =  2;
-							break;
-					}
-#endif
-#ifdef OZY
+
 					// go open the ozy
 					OzyH = OzyOpen();
 					if ( OzyH == NULL ) {
 						    myrc =  2;
 							break;
 					}
-					// printf("Ozy openend!\n");				
+					// printf("Ozy openend!\n");								
 				
-				
-#endif
 				}
 				else { // is Metis 					
 					MetisStartReadThread(); 
@@ -249,18 +230,6 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                         myrc = 8;
                         break;
                 }
-
-#if 0
-                // ok, lets get the threads going, callback first
-                //
-                sem_init(&CallbackThreadInitSem, 0, 0);
-                rc = pthread_create(&CallbackThreadID, NULL, CallbackThreadMain, NULL);
-                if ( rc != 0 ) {
-                        fprintf(stderr, "pthread_created failed on CallbackThread w/ rc=%d\n", rc);
-                        myrc =  9;
-                        break;
-                }
-#endif
 
                 // ok the xylo is open - start the io_thread
                 //
@@ -332,6 +301,272 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                         destroyFIFO(OutSampleFIFOp);
                         OutSampleFIFOp = NULL;
                 }
+
+                if ( OzyH != NULL ) {
+                        OzyClose(OzyH);
+                        OzyH = NULL;
+                }
+
+				if ( isMetis ) { 
+					MetisStopReadThread(); /* is a no op if not running */ 
+				}
+        }
+        DotDashBits = 0;
+        // printf("StartAudioNative - myrc: %d\n", myrc);
+        return myrc;
+
+}
+#else
+KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_block,
+                      int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata),
+                                           int sample_bits, int no_send)
+{
+        int rc;
+        int myrc = 0;
+        int *in_sample_bufp = NULL;
+        float *bufp = NULL;
+
+
+        //
+        // DttSP runs at a single sampling rate - the IQ in sampling rate.  The Janus hardware supports selection of (192,96,48)
+        // khz on IQ in, 48 khz on mic in and IQ and LR output.
+        //
+        // what's our sampling rate?  The code is setup to read IQ and 192, 96 or 48 khz.  Samples on the mic input match
+        // the IQ sample rate, but only the 1st of (4/2/1) sample is valid others are duplicated because the mic is always sampled
+        // at 48 khz.  If the IQ rate does not equal 48 khz the mic data is resampled to match the IQ rate.
+        //
+        // Output (xmit IQ, and LR audio) is always at 48 khz - downsampled by dropping samples
+        //
+        HaveSync = 0;
+        SampleRate = sample_rate;
+        FPGAWriteBufSize = 512; // 512;
+        FPGAReadBufp = NULL;
+        FPGAWriteBufp = NULL;
+        SampleBits = sample_bits;
+        ForceNoSend = no_send;
+        IQConversionDivisor = (float)8388607.0;  // (2**23)-1
+        if ( SampleBits == 16 ) {
+                IQConversionDivisor = (float)32767.0;
+        }
+
+
+        /* right size our buffers -- if the dsp is running small bufs, we need to
+         * do the same.
+         */
+
+        if ( samples_per_block < 1024 ) {
+                FPGAWriteBufSize = 1024;
+        }
+        else {
+                FPGAWriteBufSize = 2048;
+        }
+
+		if ( isMetis ) {  // force write buf size on Metis -- we can only send 2x512 usb frames in an enet frame for Metis so lock this down 
+						  // 
+			FPGAWriteBufSize = 1024; 
+		} 
+
+        // setup sampling rate, buffer sizes  create resampler if needed
+        switch ( SampleRate ) {
+                case 48000:
+                        SampleRateIn2Bits = 0;
+                        FPGAReadBufSize = FPGAWriteBufSize; // was 512;
+                        MicResamplerP = NULL;
+                        break;
+#ifndef LINUX
+                case 96000:
+                        SampleRateIn2Bits = 1;
+                        FPGAReadBufSize = 2 * FPGAWriteBufSize;  // was 1024;
+                        MicResamplerP = NewResamplerF(48000, 96000);
+                        if ( MicResamplerP == NULL ) {
+                                fprintf(stderr, "Warning NewResamplerF failed in PowerSDR-Interface.c\n");
+                        }
+                        break;
+                case 192000:
+                        SampleRateIn2Bits = 2;
+                        FPGAReadBufSize = 4 * FPGAWriteBufSize;  // was 2048;
+                        MicResamplerP = NewResamplerF(48000, 192000);
+                        if ( MicResamplerP == NULL ) {
+                                fprintf(stderr, "Warning NewResamplerF failed in PowerSDR-Interface.c\n");
+                        }
+                        break;
+#else
+#warning message("info - LINUX code missing ... NewResamplerF");
+#endif
+
+                default:
+                        SampleRateIn2Bits = 3;
+                        break;
+        }
+        BlockSize = samples_per_block;
+        Callback = callbackp;
+
+        printf("sa: samples_per_block: %d\n", samples_per_block); fflush(stdout);
+
+        // make sure we're not already opened
+        //
+#ifdef XYLO
+        if ( XyloH != NULL || IOThreadRunning ) {
+#endif
+#ifdef OZY
+        if ( OzyH != NULL || IOThreadRunning  ) {
+#endif
+                return 3;
+        }
+
+        do { // once
+                // allocate buffers for callback buffers
+                bufp = (float *)malloc(sizeof(float) * BlockSize * 8);  // 4 channels for in and 4 channels for out
+                if ( bufp == NULL ) {
+                        myrc = 5;
+                        break;
+                }
+                // printf("callback buffers at: 0x%08x, len=%d\n", (unsigned long)bufp, 8*BlockSize*sizeof(float));
+                CallbackInLbufp = bufp;
+                CallbackInRbufp = bufp + BlockSize;
+                CallbackMicLbufp = bufp + (2*BlockSize);
+                CallbackMicRbufp = bufp + (3*BlockSize);
+                CallbackOutLbufp = bufp + (4*BlockSize);
+                CallbackOutRbufp = bufp + (5*BlockSize);
+                CallbackMonOutLbufp = bufp + (6*BlockSize);
+                CallbackMonOutRbufp = bufp + (7*BlockSize);
+
+                // allocate buffers for inbound and outbound samples from USB
+                in_sample_bufp = (int *)malloc(sizeof(int) * BlockSize * 4);  // 4 channels in and out
+                if ( in_sample_bufp == NULL ) {
+                        myrc = 6;
+                        break;
+                }
+                IOSampleInBufp = in_sample_bufp;
+                // printf("IOSample buffer at: 0x%08x, len=%d\n", (unsigned long)in_sample_bufp, 4*BlockSize*sizeof(int));
+
+                CBSampleOutBufp = (short *)malloc(sizeof(short) * BlockSize * 4);
+                if ( CBSampleOutBufp == NULL ) {
+                        myrc = 10;
+                        break;
+                }
+                // printf("CBSampleOut buffer at: 0x%08x, len=%d\n", (unsigned long)CBSampleOutBufp, 4*BlockSize*sizeof(short));  fflush(stdout);
+
+                if ( MicResamplerP != NULL ) {  // we're going to resample mic data - need a buffer for it
+                        MicResampleBufp = (float *)malloc(samples_per_block * sizeof(float));
+                        if ( MicResampleBufp == NULL ) {
+                                myrc = 13;
+                                break;
+                        }
+                }
+
+                // allocate buffer for low level USB I/O
+                FPGAReadBufp = (char *)malloc( sizeof(char) * (FPGAReadBufSize + FPGAWriteBufSize));
+                if ( FPGAReadBufp == NULL ) {
+                        myrc = 14;
+                        break;
+                }
+                /*else*/
+                FPGAWriteBufp = FPGAReadBufp + FPGAReadBufSize;
+
+				if ( !isMetis ) { 
+#ifdef XYLO
+					// go open the xylo usb device
+					XyloH = XyloOpen();
+					if ( XyloH == NULL ) {
+							myrc =  2;
+							break;
+					}
+#endif
+#ifdef OZY
+					// go open the ozy
+					OzyH = OzyOpen();
+					if ( OzyH == NULL ) {
+						    myrc =  2;
+							break;
+					}
+					// printf("Ozy openend!\n");				
+				
+				
+#endif
+				}
+				else { // is Metis 
+					
+
+
+					MetisStartReadThread(); 
+				} 
+
+                // create FIFO for inbound samples
+                InSampleFIFOp = createFIFO();
+                if ( InSampleFIFOp == NULL ) {
+                        myrc = 7;
+                        break;
+                }
+
+                OutSampleFIFOp = createFIFO();
+                if ( OutSampleFIFOp == NULL ) {
+                        myrc = 8;
+                        break;
+                }
+
+                // ok the xylo is open - start the io_thread
+                //
+                sem_init(&IOThreadInitSem, 0, 0);
+                rc = pthread_create(&IOThreadID, NULL,  IOThreadMain, NULL);
+                if ( rc != 0 ) {  // failed
+                        fprintf(stderr, "pthread_created failed on IOThread w/ rc=%d\n", rc);
+                        myrc =  4;
+                        break;
+                }
+                sem_wait(&IOThreadInitSem);  // wait for the thread to get going
+
+#ifdef EP4DRAIN_ENABLED 
+				// 
+				// start the ep4 drain thread 
+				// 
+				sem_init(&EP4DrainThreadInitSem, 0, 0);
+                rc = pthread_create(&EP4DrainThreadID, NULL,  EP4DrainThreadMain, NULL);
+                if ( rc != 0 ) {  // failed
+                        fprintf(stderr, "pthread_created failed on EP4DrainThread w/ rc=%d\n", rc);
+                        /* myrc =  4; */ 
+                        break;
+                }
+                sem_wait(&EP4DrainThreadInitSem);  // wait for the thread to get going
+#endif 
+
+        } while ( 0 );
+
+        if ( myrc != 0 ) {  // we failed -- clean up
+                if ( bufp != NULL ) {
+                        CallbackInLbufp = NULL;
+                        CallbackInRbufp = NULL;
+                        CallbackOutLbufp = NULL;
+                        CallbackOutRbufp = NULL;
+                        CallbackMicLbufp = NULL;
+                        CallbackMicRbufp = NULL;
+                        CallbackMonOutLbufp = NULL;
+                        CallbackMonOutRbufp = NULL;
+                        free(bufp);
+                }
+
+                if ( FPGAReadBufp != NULL ) {
+                        free(FPGAReadBufp);
+                }
+
+                if ( in_sample_bufp != NULL ) {
+                        IOSampleInBufp = NULL;
+                        CBSampleOutBufp = NULL;
+                        free(in_sample_bufp);
+                }
+                if ( CBSampleOutBufp != NULL ) {
+                        short *tmp = CBSampleOutBufp;
+                        CBSampleOutBufp = NULL;
+                        free(tmp);
+                }
+                if ( InSampleFIFOp != NULL ) {
+                        destroyFIFO(InSampleFIFOp);
+                        InSampleFIFOp = NULL;
+                }
+                if ( OutSampleFIFOp != NULL ) {
+                        destroyFIFO(OutSampleFIFOp);
+                        OutSampleFIFOp = NULL;
+                }
 #ifdef XYLO
                 if ( XyloH != NULL ) {
                         XyloClose(XyloH);
@@ -354,6 +589,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 
 }
 
+#endif
 
 // ff in hz 
 KD5TFDVK6APHAUDIO_API void SetRX1VFOfreq(int rx1) {
@@ -547,6 +783,39 @@ KD5TFDVK6APHAUDIO_API void SetPennyOCBits(int b) {
 
 KD5TFDVK6APHAUDIO_API void SetSWRProtect(float g) { 
 	swr_protect = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetMercSource(int g) { 
+	MercSource = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetrefMerc(int g) { 
+	refMerc = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetIQ_Rotate(double a, double b) { 
+	I_Rotate = a; 
+	Q_Rotate = b;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetTheta(double a) { 
+	theta = a; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetIQ_RotateA(double a, double b) { 
+	I_RotateA = a; 
+	Q_RotateA = b;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetIQ_RotateB(double a, double b) { 
+	I_RotateB = a; 
+	Q_RotateB = b;
 	return;
 }
 

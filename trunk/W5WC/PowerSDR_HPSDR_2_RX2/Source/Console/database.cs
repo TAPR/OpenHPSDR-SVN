@@ -26,13 +26,13 @@
 //    USA
 //=================================================================
 
-    using System;
-    using System.Data;
-    using System.Windows.Forms;
-    using System.Collections;
+using System;
+using System.Data;
+using System.Windows.Forms;
+using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
-    using System.IO;
+using System.IO;
 using System.Threading;
 
 namespace PowerSDR
@@ -1108,7 +1108,277 @@ namespace PowerSDR
             }
         }
 
-            private static void AddRegionIsraelBandText160m()
+        private static void AddRegionIndiaBandText160m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								1.810000, 1.835999, "160M CW",	                true,
+                                1.836000, 1.836000, "160M CW QRP",	            true,
+                                1.836001, 1.837999, "160M CW",	                true,
+								1.838000, 1.839999, "160M Narrow Band Modes",	true,
+								1.840000, 1.842999, "160M All Modes & Digital",	true,
+                                1.843000, 1.860000, "160M All Modes & Digital",	true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIndiaBandText80m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								3.500000, 3.559999, "80M CW",	    			true,
+                                3.560000, 3.560000, "80M CW QRP",	    		true,
+                                3.560001, 3.579999, "80M CW",	    			true,
+								3.580000, 3.599999, "80M Narrow Band Modes",	true,
+								3.600000, 3.689999, "80M All Modes",			true,
+                                3.690000, 3.690000, "80M SSB QRP",			    true,
+                                3.690001, 3.700000, "80M All Modes",			true,
+                                3.890000, 3.900000, "80M All Modes",			true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIndiaBandText40m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								7.000000, 7.029999, "40M CW",			    	true,
+                                7.030000, 7.030000, "40M CW QRP",			    true,
+                                7.030001, 7.034999, "40M CW",			    	true,
+								7.035000, 7.039999, "40M Narrow Band Modes",	true,
+								7.040000, 7.059999, "40M All Modes",			true,
+                                7.060000, 7.060000, "40M SSB Emergency",        true,
+                                7.060001, 7.089999, "40M All Modes",			true,
+                                7.090000, 7.090000, "40M SSB QRP",              true,
+                                7.090001, 7.199999, "40M All Modes",            true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIndiaBandText20m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								14.000000, 14.059999, "20M CW",		        	true,
+                                14.060000, 14.060000, "20M CW QRP",		        true,
+                                14.060001, 14.069999, "20M CW",		        	true,
+								14.070000, 14.098999, "20M Narrow Band Modes",	true,
+								14.099000, 14.100999, "20M Beacons",			true,
+                                14.101000, 14.111999, "20M All Mode Digital",   true,
+                                14.112000, 14.129999, "20M All Mode Digital",   true,
+                                14.130000, 14.130000, "20M Digital Voice",      true,
+                                14.130001, 14.229999, "20M All Modes",          true,
+                                14.230000, 14.230000, "20M SSTV",				true,
+                                14.230001, 14.284999, "20M All Modes",          true,
+                                14.285000, 14.285000, "20M SSB QRP",			true,
+                                14.285001, 14.299999, "20M All Modes",          true,
+                                14.300000, 14.300000, "20M SSB Emergency",      true,
+                                14.300001, 14.349999, "20M All Modes",          true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIndiaBandText17m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								18.068000, 18.085999, "17M CW",					true,
+                                18.086000, 18.086000, "17M CW QRP",				true,
+                                18.086001, 18.094999, "17M CW",					true,
+								18.095000, 18.108999, "17M Narrow Band Modes",	true,
+								18.109000, 18.109999, "17M Beacons",		    true,
+								18.110000, 18.159999, "17M All Modes",			true,
+                                18.160000, 18.160000, "17M SSB Emergency",		true,
+                                18.160001, 18.167999, "17M All Modes",			true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIndiaBandText15m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								21.000000, 21.059999, "15M CW",			        true,
+                                21.060000, 21.060000, "15M CW QRP",			    true,
+                                21.060001, 21.069999, "15M CW",			        true,
+								21.070000, 21.109999, "15M Narrow Band Modes",	true,
+								21.110000, 21.119999, "15M Wide Band Digital",	true,
+                                21.120000, 21.148999, "15M Narrow Band Modes",	true,
+                                21.149000, 21.150999, "15M Beacons",		    true,
+								21.151000, 21.179999, "15M All Modes",			true,
+                                21.180000, 21.180000, "15M Digital Voice",		true,
+                                21.180001, 21.284999, "15M All Modes",			true,
+                                21.285000, 21.285000, "15M SSB QRP",	    	true,
+                                21.285001, 21.359999, "15M All Modes",			true,
+                                21.360000, 21.360000, "15M SSB Emergency",      true,
+                                21.360001, 21.449999, "15M All Modes",			true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIndiaBandText12m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								24.890000, 24.905999, "12M CW",					true,
+                                24.906000, 24.906000, "12M CW QRP",		        true,
+                                24.906001, 24.914999, "12M CW",					true,
+                                24.915000, 24.928999, "12M Narrow Band Modes",	true,
+								24.929000, 24.930999, "12M Beacons",		    true,
+                                24.931000, 24.939999, "12M All Modes Digital",	true,
+                                24.940000, 24.989999, "12M All Modes",			true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIndiaBandText10m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								28.000000, 28.059999, "10M CW",					true,
+                                28.060000, 28.060000, "10M CW QRP",	        	true,
+                                28.060001, 28.069999, "10M CW",					true,
+								28.070000, 28.189999, "10M Narrow Band Modes",	true,
+								28.190000, 28.224999, "10M Beacons",			true,
+                                28.225000, 28.299999, "10M All Mode Beacons",	true,
+                                28.300000, 28.319999, "10M All Mode Digital",	true,
+                                28.320001, 28.329999, "10M All Modes",	    	true,
+                                28.330000, 28.330000, "10M Digital Voice",	    true,
+                                28.330001, 28.359999, "10M All Modes",	    	true,
+                                28.360000, 28.360000, "10M SSB QRP",	        true,
+                                28.360001, 28.679999, "10M All Modes",	    	true,
+                                28.680000, 28.680000, "10M SSTV",	            true,
+                                28.680001, 29.199999, "10M All Modes",	    	true,
+                                29.200000, 29.299999, "10M FM Digital",         true,
+                                29.300000, 29.509999, "10M FM Sat. Downlinks",  true,
+                                29.510000, 29.519999, "10M Guard Channel",		true,
+                                29.520000, 29.549999, "10M FM Simplex",         true,
+                                29.550000, 29.559999, "10M Deadband",		    true,
+                                29.560000, 29.589999, "10M Repeater Inputs",	true,
+                                29.590000, 29.599999, "10M Deadband",			true,
+                                29.600000, 29.600000, "10M FM Calling",         true,
+                                29.600001, 29.609999, "10M Deadband",			true,
+                                29.610000, 29.649999, "10M FM Simplex",         true,
+                                29.650000, 29.659999, "10M Deadband",			true,
+                                29.660000, 29.699999, "10M Repeater Outputs",	true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRegionIndiaBandText6m()
+        {
+            // 50.0 - 52.0 MHz
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								50.000000, 50.079999, "6M Beacon Sub-Band",		true,
+								50.080000, 50.089999, "6M CW",					true,
+                                50.090000, 50.090000, "6M CW Calling",          true,
+                                50.090001, 50.099999, "6M CW",                  true,
+                                50.100000, 50.109999, "6M CW & SSB",			true,
+                                50.110000, 50.110000, "6M SSB DX Calling",      true,
+                                50.110001, 50.129999, "6M CW, SSB & Digital",	true,
+                                50.130000, 50.149999, "6M CW, SSB & Digital",	true,
+                                50.150000, 50.150000, "6M SSB Calling",         true,
+                                50.150001, 50.249999, "6M CW, SSB & Digital",	true,
+                                50.250000, 50.250000, "6M PSK Calling",         true,
+                                50.250001, 50.499999, "6M CW, SSB & Digital",	true,
+                                50.500000, 50.619999, "6M All Modes",           true,
+                                50.620000, 50.749999, "6M Digital Comms.",      true,
+                                50.750000, 51.209999, "6M All Modes",           true,
+                                51.210000, 51.389999, "6M FM Repeater Inputs",	true,
+                                51.390000, 51.409999, "6M All Modes",           true,
+                                51.410000, 51.509999, "6M FM Simplex",          true,
+                                51.510000, 51.510000, "6M FM Calling",          true,
+                                51.510001, 51.589999, "6M FM Simplex",          true,
+                                51.590000, 51.809999, "6M All Modes",           true,
+                                51.810000, 51.989999, "6M FM Repeater Ouputs",	true,
+                                51.990000, 53.999999, "6M All Modes",          true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+        
+        private static void AddRegionIsraelBandText160m()
         {
             DataTable t = ds.Tables["BandText"];
             object[] data = {
@@ -1661,21 +1931,41 @@ namespace PowerSDR
             DataTable t = ds.Tables["BandText"];
 
             object[] data = {
-                                5.100000, 5.259999, "60M General",              false,
+                                5.100000, 5.258499, "60M General",              false,
+                                5.258500, 5.259999, "60M UK",                   true,
 								5.260000, 5.260000, "60M Channel FA",			true,
-                                5.260001, 5.279999, "60M General",              false,
+                                5.260001, 5.263999, "60M UK",                   true,
+                                5.264000, 5.275999, "60M General",              false,
+                                5.276000, 5.279999, "60M UK",              true,
 								5.280000, 5.280000, "60M Channel FB",			true,
-                                5.280001, 5.289999, "60M General",              false,
+                                5.280001, 5.283999, "60M UK",              true,
+                                5.284000, 5.288499, "60M General",              false,
+                                5.288500, 5.289999, "60M UK",              true,
 								5.290000, 5.290000, "60M Channel FC",			true,
-                                5.290001, 5.367999, "60M General",              false,
-								5.368000, 5.368000, "60M Channel FK",			true,
-                                5.368001, 5.372999, "60M General",              false,
-								5.373000, 5.373000, "60M Channel FL",			true,
-                                5.373001, 5.399999, "60M General",              false,
-								5.400000, 5.400000, "60M Channel FE",			true,
-                                5.400001, 5.404999, "60M General",              false,
-								5.405000, 5.405000, "60M Channel FM",			true,
-                                5.405001, 5.499999, "60M General",              false,
+                                5.290001, 5.291999, "60M UK",              true,
+                                5.292000, 5.297999, "60M General",              false,
+                                5.298000, 5.306999, "60M UK",              true,
+                                5.307000, 5.312999, "60M General",              false,
+                                5.313000, 5.322999, "60M UK",              true,
+                                5.323000, 5.332999, "60M General",              false,
+                                5.333000, 5.337999, "60M UK",              true,
+                                5.338000, 5.353999, "60M General",              false,
+                                5.354000, 5.357999, "60M UK",              true,
+                                5.358000, 5.361999, "60M General",              false,
+                                5.362000, 5.367999, "60M UK",              true,
+                                5.368000, 5.368000, "60M Channel FK",			true,
+                                5.368001, 5.372999, "60M UK",              true,
+                                5.373000, 5.373000, "60M Channel FL",			true,
+                                5.373001, 5.381999, "60M UK",              true,
+                                5.382000, 5.394999, "60M General",              false,
+                                5.395000, 5.399999, "60M UK",              true,
+                                5.400000, 5.400000, "60M Channel FE",			true,
+                                5.400001, 5.401499, "60M UK",              true,
+                                5.401500, 5.403499, "60M General",              false,
+                                5.403500, 5.404999, "60M UK",              true,
+                                5.405000, 5.405000, "60M Channel FM",			true,
+                                5.405001, 5.406499, "60M UK",              true,
+                                5.406500, 5.499999, "60M General",              false,
 			};
 
             for (int i = 0; i < data.Length / 4; i++)
@@ -4475,6 +4765,23 @@ namespace PowerSDR
                     AddRegion2BandStack();
                     ClearBandText();
                     AddRegion2BandText();
+                    break;
+
+                case FRSRegion.India:
+                    AddRegion1BandStack();
+                    ClearBandText();
+                    AddRegionIndiaBandText160m();
+                    AddRegionIndiaBandText80m();
+                    AddRegionIndiaBandText40m();
+                    AddRegion1BandText30m();
+                    AddRegionIndiaBandText20m();
+                    AddRegionIndiaBandText17m();
+                    AddRegionIndiaBandText15m();
+                    AddRegionIndiaBandText12m();
+                    AddRegionIndiaBandText10m();
+                    AddRegionIndiaBandText6m();
+                    AddRegion1BandTextVHFplus();
+                    AddBandTextSWB();
                     break;
 
                 case FRSRegion.Spain:

@@ -375,6 +375,7 @@ namespace PowerSDR
                         case 19: 
                         case 20:
                         case 21:
+                        case 22:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 33)))
                             {
@@ -827,11 +828,9 @@ namespace PowerSDR
             int adcValue = getHermesDCVoltage();
             float volts = (float)adcValue * (3.3f / 4095);
             volts = volts / 0.143f;
-           // adc >>= 4;
-           // float volts = (float)adc * (3.3f / 2047);
-
-            c.SetupForm.txtFwdADC.Text = adcValue.ToString();
-            c.SetupForm.txtAlexFwdADC.Text = volts.ToString();
+ 
+          //  c.SetupForm.txtFwdADC.Text = adcValue.ToString();
+          //  c.SetupForm.txtAlexFwdADC.Text = volts.ToString();
 
             return volts;
         }
@@ -850,8 +849,8 @@ namespace PowerSDR
         public static float computeRefPower()
         {
             // Console c = Console.getConsole();
-            int adc = JanusAudio.getRefPower();
-            float volts = (float)adc * (3.3f / 4095);
+            int adc = getRefPower();
+            float volts = (float)adc * 0.0008058608f; //(3.3f / 4095);
             float watts = (float)(Math.Pow(volts, 2) / 0.09f);
 
             //  c.SetupForm.txtAlexRevPower.Text = Watts.ToString();
@@ -863,8 +862,8 @@ namespace PowerSDR
         public static float computeAlexFwdPower()
         {
             // Console c = Console.getConsole();
-            int adc = JanusAudio.getAlexFwdPower();
-            float volts = (float)adc * (3.3f / 4095);
+            int adc = getAlexFwdPower();
+            float volts = (float)adc * 0.0008058608f; // (3.3f / 4095);
             float watts = (float)(Math.Pow(volts, 2) / 0.09f);
             //  c.SetupForm.txtAlexFwdPower.Text = Watts.ToString();
             //  c.SetupForm.txtAlexFwdADC.Text = Voltage.ToString();
@@ -959,7 +958,25 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out);
+#if (!HPSDR_2RX)
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetMercSource(int g);
 
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetrefMerc(int g);
+
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetIQ_Rotate(double a, double b);
+
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetIQ_RotateA(double a, double b);
+
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetIQ_RotateB(double a, double b);
+        
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetTheta(double a); 
+#endif   
         [DllImport("JanusAudio.dll")]
         unsafe public static extern int GetEP4Data(char* bufp);
 
