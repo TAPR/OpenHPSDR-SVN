@@ -4,10 +4,10 @@
     <compoundname>hpsdr_hermesNB</compoundname>
     <includes refid="hpsdr__hermesNB_8h" local="no">hpsdr_hermesNB.h</includes>
       <sectiondef kind="friend">
-      <memberdef kind="friend" id="classhpsdr__hermesNB_1a8ee5efb75877c2b66eb54fa27fa5378f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="friend" id="classhpsdr__hermesNB_1a81ce2f55445b0654e4ad1d4e65044ecb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend __GR_ATTR_IMPORT <ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref></type>
         <definition>__GR_ATTR_IMPORT hpsdr_hermesNB_sptr hpsdr_make_hermesNB</definition>
-        <argsstring>(int RxF, int RxSmp, int RxPre, const char *Intfc, int NumRx)</argsstring>
+        <argsstring>(int RxF, int RxSmp, int RxPre, const char *Intfc, const char *ClkS, const char *AlexC, int NumRx)</argsstring>
         <name>hpsdr_make_hermesNB</name>
         <param>
           <type>int</type>
@@ -24,6 +24,14 @@
         <param>
           <type>const char *</type>
           <declname>Intfc</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>ClkS</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>AlexC</declname>
         </param>
         <param>
           <type>int</type>
@@ -67,18 +75,32 @@
 <parameterdescription>
 <para>Number of Receivers (1 or 2) </para></parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ClkS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HPSDR Clock Source (register C1 when C0 = 0x00) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AlexC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HPSDR Alex Control (register (MSB)C3, C4 for C0=0 and C3, C4(LSB) for C0 = 0x12) </para></parameterdescription>
+</parameteritem>
 </parameterlist>
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="65"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="69"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
-      <memberdef kind="function" id="classhpsdr__hermesNB_1a6122c6a7f71c2ed8e4fb217ab3956cd4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhpsdr__hermesNB_1a95bf82964af42fbe31b036eb7e057c70" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>hpsdr_hermesNB::hpsdr_hermesNB</definition>
-        <argsstring>(int RxF, int RxSmp, int RxPre, const char *Intfc, int NumRx)</argsstring>
+        <argsstring>(int RxF, int RxSmp, int RxPre, const char *Intfc, const char *ClkS, const char *AlexC, int NumRx)</argsstring>
         <name>hpsdr_hermesNB</name>
         <param>
           <type>int</type>
@@ -97,6 +119,14 @@
           <declname>Intfc</declname>
         </param>
         <param>
+          <type>const char *</type>
+          <declname>ClkS</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>AlexC</declname>
+        </param>
+        <param>
           <type>int</type>
           <declname>NumRx</declname>
         </param>
@@ -106,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="67"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="72"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -121,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="70"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="75"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1a22967867d673748f94e9de8130ea0a00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -137,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="71"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="76"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1ada9a86ce81ea605b22edf27e11214fcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -153,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="72"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="77"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1ac48a8724c168e28613520db633e003e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -169,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="73"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="78"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1a61f313a8a3450250aa2270b2bda930c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -185,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="74"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="79"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1a192ae2f5222bb7bfc6b8862ed9592d2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -201,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="75"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="80"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1a1b334a44b65b4f0ba6b418ce27456952" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -217,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="76"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="81"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1a7165e8334cb0bf146376f98ca58fb7c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -233,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="77"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="82"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1aec7e983b2980b6039f2ac6479327317f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -249,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="78"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="83"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1a91b6281016404b02904306fe237cbf1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -265,7 +295,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="79"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpsdr__hermesNB_1ac847fafbf64101dabc86531ee94f1298" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hpsdr_hermesNB::set_ClockSource</definition>
+        <argsstring>(const char *)</argsstring>
+        <name>set_ClockSource</name>
+        <param>
+          <type>const char *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpsdr__hermesNB_1a03eaaab049b8c84545a4c1f479128679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hpsdr_hermesNB::set_AlexControl</definition>
+        <argsstring>(const char *)</argsstring>
+        <name>set_AlexControl</name>
+        <param>
+          <type>const char *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="86"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1a69969d0f51c5cfdf4f208efadaef873e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -278,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="81"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="88"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1a9653c3348071f64830d85544fde4c9d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -291,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="82"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="89"/>
       </memberdef>
       <memberdef kind="function" id="classhpsdr__hermesNB_1add1083f9e1eade21df7c228f0bb4c041" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -320,7 +382,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="88"/>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="95"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -361,13 +423,29 @@
 <parameterdescription>
 <para>Number of Receivers (1 or 2) </para></parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ClkS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HPSDR Clock Source (register C1 when C0 = 0x00) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AlexC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HPSDR Alex Control (register (MSB)C3, C4 for C0=0 and C3, C4(LSB) for C0 = 0x12) </para></parameterdescription>
+</parameteritem>
 </parameterlist>
 </para>    </detaileddescription>
-    <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="63" bodyfile="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" bodystart="62" bodyend="89"/>
+    <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="67" bodyfile="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" bodystart="66" bodyend="96"/>
     <listofallmembers>
       <member refid="classhpsdr__hermesNB_1add1083f9e1eade21df7c228f0bb4c041" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>general_work</name></member>
-      <member refid="classhpsdr__hermesNB_1a6122c6a7f71c2ed8e4fb217ab3956cd4" prot="private" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>hpsdr_hermesNB</name></member>
-      <member refid="classhpsdr__hermesNB_1a8ee5efb75877c2b66eb54fa27fa5378f" prot="private" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>hpsdr_make_hermesNB</name></member>
+      <member refid="classhpsdr__hermesNB_1a95bf82964af42fbe31b036eb7e057c70" prot="private" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>hpsdr_hermesNB</name></member>
+      <member refid="classhpsdr__hermesNB_1a81ce2f55445b0654e4ad1d4e65044ecb" prot="private" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>hpsdr_make_hermesNB</name></member>
+      <member refid="classhpsdr__hermesNB_1a03eaaab049b8c84545a4c1f479128679" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_AlexControl</name></member>
+      <member refid="classhpsdr__hermesNB_1ac847fafbf64101dabc86531ee94f1298" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_ClockSource</name></member>
       <member refid="classhpsdr__hermesNB_1a1b334a44b65b4f0ba6b418ce27456952" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_PTTMode</name></member>
       <member refid="classhpsdr__hermesNB_1a7165e8334cb0bf146376f98ca58fb7c2" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_PTTOffMutesTx</name></member>
       <member refid="classhpsdr__hermesNB_1aec7e983b2980b6039f2ac6479327317f" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>set_PTTOnMutesRx</name></member>

@@ -37,16 +37,17 @@
 // HermesNB uses this proxy to convert raw data and control flags
 // and send/receive them to Hermes.
 //
-// Version:  December 10, 2012
-// Update:   change clocks to Mercury (C0:C1 was 0xE4+speed  now 0xF8+speed)
-//		should be ignored by Hermes.
+// Version:  December 15, 2012
+// Update:   Make Clock Source and AlexControl programmable from GUI
+//		
 
 #include "HermesProxy.h"
 #include "metis.h"
 #include <stdio.h>	// for DEBUG PRINTF's
 
 
-HermesProxy::HermesProxy(int RxFreq, int RxSmp, const char* Intfc, int NumRx)	// constructor
+HermesProxy::HermesProxy(int RxFreq, int RxSmp, const char* Intfc, 
+			 const char * ClkS, const char * AlexC, int NumRx)	// constructor
 {
 
 	//pthread_mutex_init (&mutexRPG, NULL);
@@ -73,6 +74,14 @@ HermesProxy::HermesProxy(int RxFreq, int RxSmp, const char* Intfc, int NumRx)	//
 	RxSampleRate = RxSmp;
 	strcpy(interface, Intfc);	// Ethernet interface to use (defaults to eth0)
 	NumReceivers = NumRx;
+
+	unsigned int cs;		// Convert ClockSource strings to unsigned, then intitalize
+	sscanf(ClkS, "%x", &cs);
+	ClockSource = (cs & 0xFC);
+
+	unsigned int ac;		// Convert AlecControl string to unsigned, then initialize
+	sscanf(AlexC, "%x", &ac);
+	AlexControl = ac;
 
 	TxDrive = 0x00;		// default to (almost) off
 
@@ -626,8 +635,7 @@ void HermesProxy::BuildControlRegs(unsigned RegNum, RawBuf_t outbuf)
 	switch(RegNum)
 	{
 	  case 0:
-		//Speed = 0xE4;			// general config registers (old)
-		Speed = 0xF8;			// Use Mercury for freq source.
+	    Speed = ClockSource;	// Set clock Source from user input
 	    if(RxSampleRate == 192000)
 		Speed |= 0x02;
 	    if(RxSampleRate == 96000)
@@ -635,12 +643,13 @@ void HermesProxy::BuildControlRegs(unsigned RegNum, RawBuf_t outbuf)
 	    if(RxSampleRate == 48000)
 		Speed |= 0x00;
 
+	    RxCtrl = ((AlexControl & 0x00010000) >> 16);
 	    if(RxPreamp)
-		RxCtrl += 0x04;
+		RxCtrl |= 0x04;
 	    if(ADCdither)
-		RxCtrl += 0x08;
+		RxCtrl |= 0x08;
 	    if(ADCrandom)
-		RxCtrl += 0x10;
+		RxCtrl |= 0x10;
 
 	    if(NumReceivers == 2)
 		Ctrl4 |= 0x08;
@@ -648,7 +657,7 @@ void HermesProxy::BuildControlRegs(unsigned RegNum, RawBuf_t outbuf)
 		Ctrl4 |= 0x04;
 
 	    outbuf[4] = Speed;				// C1
-	    outbuf[5] = 0;				// C2
+	    outbuf[5] = ((AlexControl & 0xc0000000) >> 24); // C2
 	    outbuf[6] = RxCtrl;				// C3
 	    outbuf[7] = Ctrl4;				// C4 - #Rx, Duplex
 
@@ -693,8 +702,8 @@ void HermesProxy::BuildControlRegs(unsigned RegNum, RawBuf_t outbuf)
 		outbuf[4] = TxDrive;
 
 	    outbuf[5] = 0;				// Apollo selections
-	    outbuf[6] = 0;				// Alex filter selections 1
-	    outbuf[7] = 0;				// Alex filter selections 2
+	    outbuf[6] = ((AlexControl & 0xff00) >> 8);	// Alex filter selections 1
+	    outbuf[7] = (AlexControl & 0xff);		// Alex filter selections 2
 	  break;
 
 	  case 20:					// Hermes input attenuator setting

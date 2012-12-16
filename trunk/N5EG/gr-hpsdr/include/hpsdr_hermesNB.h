@@ -19,7 +19,7 @@
  */
 
 //
-// Version: November 25, 2012
+// Version: December 15, 2012
 
 
 #ifndef INCLUDED_HPSDR_HERMESNB_H
@@ -39,11 +39,13 @@ typedef boost::shared_ptr<hpsdr_hermesNB> hpsdr_hermesNB_sptr;
  * \param RxPre  Rx Preamp on (1) / off (0)
  * \param Intfc  Ethernet interface to use
  * \param NumRx  Number of Receivers (1 or 2)
+ * \param ClkS   HPSDR Clock Source (register C1 when C0 = 0x00)
+ * \param AlexC  HPSDR Alex Control (register (MSB)C3, C4 for C0=0 and C3, C4(LSB) for C0 = 0x12)
  *
  */
 
 HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre,
-	 const char* Intfc, int NumRx);
+	 const char* Intfc, const char * ClkS, const char * AlexC, int NumRx);
 
 /*!
  * \brief Prototype for Hermes module
@@ -57,14 +59,17 @@ HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre
  * \param RxPre  Rx Preamp on (1) / off (0)
  * \param Intfc  Ethernet interface to use
  * \param NumRx  Number of Receivers (1 or 2)
- * 
+ * \param ClkS   HPSDR Clock Source (register C1 when C0 = 0x00)
+ * \param AlexC  HPSDR Alex Control (register (MSB)C3, C4 for C0=0 and C3, C4(LSB) for C0 = 0x12)
+ *
  */
 class HPSDR_API hpsdr_hermesNB : public gr_block
 {
 	friend HPSDR_API hpsdr_hermesNB_sptr hpsdr_make_hermesNB (int RxF, int RxSmp,
-		 int RxPre, const char* Intfc, int NumRx);
+		 int RxPre, const char* Intfc, const char* ClkS, const char* AlexC, int NumRx);
 
-	hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc, int NumRx);
+	hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc,
+		const char* ClkS, const char* AlexC, int NumRx);
 
  public:
 	~hpsdr_hermesNB();
@@ -77,6 +82,8 @@ class HPSDR_API hpsdr_hermesNB : public gr_block
 	void set_PTTOffMutesTx(int);		// callback
 	void set_PTTOnMutesRx(int);		// callback
 	void set_TxDrive(int);			// callback
+	void set_ClockSource(const char *);	// callback
+	void set_AlexControl(const char *);	// callback
 
 	bool stop();				// override
 	bool start();				// override

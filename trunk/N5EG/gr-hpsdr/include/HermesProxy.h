@@ -25,7 +25,7 @@
 // multiple instantiations of the HermesNB within GNURadio.
 // Note: multiple receivers on one Hermes is not implemented. 
 //
-// Version:  November 24, 2012
+// Version:  December 15, 2012
 
 
 #ifndef HermesProxy_H
@@ -90,7 +90,11 @@ public:
 	int RxSampleRate;
 
 	unsigned char TxDrive;
-	unsigned char RxAtten;		// not yet used (requires Hermes firmware V1.9)
+	unsigned char RxAtten;		// not yet used (requires Hermes firmware V2.0)
+
+	unsigned int ClockSource;	// upper 6-bits of clock control register
+	unsigned int AlexControl;	// 32 bits of Alex control word
+
 	int PTTMode;
 	bool RxPreamp;
 	bool ADCdither;
@@ -104,7 +108,7 @@ public:
 	bool PTTOnMutesRx;		// PTT On receiver
 	char interface[16];
 
-	HermesProxy(int, int, const char* Intfc, int); // constructor
+	HermesProxy(int, int, const char*, const char*, const char*, int); // constructor
 	~HermesProxy();			// destructor
 
 	void Stop();			// stop ethernet I/O
