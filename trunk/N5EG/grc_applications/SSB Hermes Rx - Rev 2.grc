@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Sat Dec  8 13:00:42 2012</timestamp>
+  <timestamp>Sat Dec 15 21:55:04 2012</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -692,92 +692,6 @@
     </param>
   </block>
   <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>48000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(166, 10)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>hpsdr_hermesNB</key>
-    <param>
-      <key>id</key>
-      <value>hpsdr_hermesNB_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>Rx0F</key>
-      <value>RxFreq0</value>
-    </param>
-    <param>
-      <key>Rx1F</key>
-      <value>RxFreq1</value>
-    </param>
-    <param>
-      <key>TxF</key>
-      <value>TxFreq</value>
-    </param>
-    <param>
-      <key>RxSmp</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>RxPre</key>
-      <value>Preamp</value>
-    </param>
-    <param>
-      <key>PTTRx</key>
-      <value>PTTRx</value>
-    </param>
-    <param>
-      <key>PTTTx</key>
-      <value>PTTTx</value>
-    </param>
-    <param>
-      <key>PTTmode</key>
-      <value>PTT</value>
-    </param>
-    <param>
-      <key>TxDrive</key>
-      <value>TxD</value>
-    </param>
-    <param>
-      <key>num_outputs</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>Intfc</key>
-      <value>"eth0"</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(209, 255)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
@@ -888,65 +802,6 @@
     </param>
   </block>
   <block>
-    <key>band_pass_filter</key>
-    <param>
-      <key>id</key>
-      <value>band_pass_filter_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>fir_filter_ccf</value>
-    </param>
-    <param>
-      <key>decim</key>
-      <value>samp_rate/16000</value>
-    </param>
-    <param>
-      <key>interp</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>gain</key>
-      <value>samp_rate/16000</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>low_cutoff_freq</key>
-      <value>200</value>
-    </param>
-    <param>
-      <key>high_cutoff_freq</key>
-      <value>3000</value>
-    </param>
-    <param>
-      <key>width</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>win</key>
-      <value>firdes.WIN_HAMMING</value>
-    </param>
-    <param>
-      <key>beta</key>
-      <value>6.76</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(509, 232)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>gr_null_sink</key>
     <param>
       <key>id</key>
@@ -1043,29 +898,6 @@
     </param>
   </block>
   <block>
-    <key>gr_complex_to_float</key>
-    <param>
-      <key>id</key>
-      <value>gr_complex_to_float_0_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(781, 718)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>gr_agc2_xx</key>
     <param>
       <key>id</key>
@@ -1102,41 +934,6 @@
     <param>
       <key>_coordinate</key>
       <value>(597, 600)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>audio_sink</key>
-    <param>
-      <key>id</key>
-      <value>audio_sink_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>16000</value>
-    </param>
-    <param>
-      <key>device_name</key>
-      <value></value>
-    </param>
-    <param>
-      <key>ok_to_block</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(932, 638)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1359,6 +1156,217 @@
       <value>0</value>
     </param>
   </block>
+  <block>
+    <key>band_pass_filter</key>
+    <param>
+      <key>id</key>
+      <value>band_pass_filter_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>fir_filter_ccf</value>
+    </param>
+    <param>
+      <key>decim</key>
+      <value>samp_rate/8000</value>
+    </param>
+    <param>
+      <key>interp</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>gain</key>
+      <value>samp_rate/8000</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>low_cutoff_freq</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>high_cutoff_freq</key>
+      <value>3000</value>
+    </param>
+    <param>
+      <key>width</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>win</key>
+      <value>firdes.WIN_HAMMING</value>
+    </param>
+    <param>
+      <key>beta</key>
+      <value>6.76</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(509, 232)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_complex_to_float</key>
+    <param>
+      <key>id</key>
+      <value>gr_complex_to_float_0_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(773, 565)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>audio_sink</key>
+    <param>
+      <key>id</key>
+      <value>audio_sink_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>8000</value>
+    </param>
+    <param>
+      <key>device_name</key>
+      <value></value>
+    </param>
+    <param>
+      <key>ok_to_block</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>num_inputs</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(970, 566)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>192000</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(166, 10)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>hpsdr_hermesNB</key>
+    <param>
+      <key>id</key>
+      <value>hpsdr_hermesNB_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>Rx0F</key>
+      <value>RxFreq0</value>
+    </param>
+    <param>
+      <key>Rx1F</key>
+      <value>RxFreq1</value>
+    </param>
+    <param>
+      <key>TxF</key>
+      <value>TxFreq</value>
+    </param>
+    <param>
+      <key>RxSmp</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>RxPre</key>
+      <value>Preamp</value>
+    </param>
+    <param>
+      <key>PTTRx</key>
+      <value>PTTRx</value>
+    </param>
+    <param>
+      <key>PTTTx</key>
+      <value>PTTTx</value>
+    </param>
+    <param>
+      <key>PTTmode</key>
+      <value>PTT</value>
+    </param>
+    <param>
+      <key>TxDrive</key>
+      <value>TxD</value>
+    </param>
+    <param>
+      <key>num_outputs</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>Intfc</key>
+      <value>"eth0"</value>
+    </param>
+    <param>
+      <key>CkS</key>
+      <value>"0xF8"</value>
+    </param>
+    <param>
+      <key>AlexC</key>
+      <value>"0x00000000"</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(207, 238)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
   <connection>
     <source_block_id>gr_sig_source_x_0</source_block_id>
     <sink_block_id>hpsdr_hermesNB_0</sink_block_id>
@@ -1471,6 +1479,12 @@
     <source_block_id>gr_add_xx_0</source_block_id>
     <sink_block_id>gr_float_to_complex_0</sink_block_id>
     <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>gr_complex_to_float_0_0_0</source_block_id>
+    <sink_block_id>audio_sink_0</sink_block_id>
+    <source_key>1</source_key>
     <sink_key>1</sink_key>
   </connection>
 </flow_graph>

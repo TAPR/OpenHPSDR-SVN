@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Sat Dec  8 13:08:23 2012</timestamp>
+  <timestamp>Sat Dec 15 21:59:03 2012</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -143,61 +143,6 @@
     </param>
   </block>
   <block>
-    <key>variable_qtgui_range</key>
-    <param>
-      <key>id</key>
-      <value>RxFreq0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value></value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1000000</value>
-    </param>
-    <param>
-      <key>start</key>
-      <value>500000</value>
-    </param>
-    <param>
-      <key>stop</key>
-      <value>1600000</value>
-    </param>
-    <param>
-      <key>step</key>
-      <value>10000</value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>counter_slider</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.Horizontal</value>
-    </param>
-    <param>
-      <key>min_len</key>
-      <value>200</value>
-    </param>
-    <param>
-      <key>gui_hint</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(292, 11)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>variable</key>
     <param>
       <key>id</key>
@@ -275,6 +220,14 @@
       <value>"eth0"</value>
     </param>
     <param>
+      <key>CkS</key>
+      <value>"0xF8"</value>
+    </param>
+    <param>
+      <key>AlexC</key>
+      <value>"0x00000000"</value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(274, 274)</value>
     </param>
@@ -347,6 +300,61 @@
     </param>
   </block>
   <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>id</key>
+      <value>RxFreq0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>7200000</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>7000000</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>7300000</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1000</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>700</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(292, 11)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>qtgui_sink_x</key>
     <param>
       <key>id</key>
@@ -402,7 +410,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(756, 385)</value>
+      <value>(757, 389)</value>
     </param>
     <param>
       <key>_rotation</key>
