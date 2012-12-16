@@ -40,9 +40,10 @@ HermesProxy* Hermes;	// make it visible to metis.cc
  */
 
 hpsdr_hermesNB_sptr
-hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc, int NumRx)
+hpsdr_make_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc, 
+		     const char * ClkS, const char * AlexC, int NumRx)
 {
-    return gnuradio::get_initial_sptr(new hpsdr_hermesNB (RxF, RxSmp, RxPre, Intfc, NumRx));
+    return gnuradio::get_initial_sptr(new hpsdr_hermesNB (RxF, RxSmp, RxPre, Intfc, ClkS, AlexC, NumRx));
 }
 
 bool hpsdr_hermesNB::stop()		// override base class
@@ -72,12 +73,13 @@ bool hpsdr_hermesNB::start()		// override base class
  * 
  */
 
-hpsdr_hermesNB::hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc, int NumRx)
+hpsdr_hermesNB::hpsdr_hermesNB (int RxF, int RxSmp, int RxPre, const char* Intfc,
+			const char * ClkS, const char * AlexC, int NumRx)
 	: gr_block ("hermesNB",
 		gr_make_io_signature (1,1, sizeof (gr_complex)),  // input stream signature (min one, max one input)
 		gr_make_io_signature (1,2, sizeof (gr_complex)))  // output stream signature (min one, max two output)
 {
-	Hermes = new HermesProxy(RxF, RxSmp, Intfc, NumRx);	// Create proxy, do Hermes ethernet discovery
+	Hermes = new HermesProxy(RxF, RxSmp, Intfc, ClkS, AlexC, NumRx);	// Create proxy, do Hermes ethernet discovery
 	Hermes->RxSampleRate = RxSmp;
 	Hermes->RxPreamp = RxPre;
 
@@ -131,6 +133,20 @@ void hpsdr_hermesNB::set_TxDrive(int TxD)	// callback to set Transmit Drive Leve
 	Hermes->TxDrive = (unsigned char)TxD;
 }
 
+void hpsdr_hermesNB::set_ClockSource(const char * ClkS)	// callback to set Clock source
+{
+	unsigned int ck;
+	sscanf(ClkS, "%x", &ck);   	// convert char string to 8 bits
+	ck &= 0xFC;			// mask lower bits
+	Hermes->ClockSource = ck;
+}
+
+void hpsdr_hermesNB::set_AlexControl(const char * AlexC)  // callback to set Alex Control Word
+{
+	unsigned int ac;
+	sscanf(AlexC, "%x", &ac);   	// convert char string to 32 bits
+	Hermes->AlexControl = ac;
+}
 
 
 hpsdr_hermesNB::~hpsdr_hermesNB()

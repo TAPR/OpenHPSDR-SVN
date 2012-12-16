@@ -4,7 +4,7 @@
   <key>hpsdr_hermesNB</key>
   <category>hpsdr</category>
   <import>import hpsdr</import>
-  <make>hpsdr.hermesNB($Rx0F, $RxSmp, $RxPre, $Intfc, $num_outputs)</make>
+  <make>hpsdr.hermesNB($Rx0F, $RxSmp, $RxPre, $Intfc, $CkS, $AlexC, $num_outputs)</make>
   <callback>set_Receive0Frequency($Rx0F)</callback>
   <callback>set_Receive1Frequency($Rx1F)</callback>
   <callback>set_RxSampRate($RxSmp)</callback>
@@ -14,6 +14,8 @@
   <callback>set_PTTOnMutesRx($PTTRx)</callback>
   <callback>set_TxDrive($TxDrive)</callback>
   <callback>set_TransmitFrequency($TxF)</callback>
+  <callback>set_ClockSource($CkS)</callback>
+  <callback>set_AlexControl($AlexC)</callback>
 
  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
@@ -86,6 +88,18 @@
     <value>"eth0"</value>
     <type>raw</type>
   </param>
+  <param>
+    <name>HPSDR Clock Source</name>
+    <key>CkS</key>
+    <value>"0xF8"</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>Alex Control</name>
+    <key>AlexC</key>
+    <value>"0x00000000"</value>
+    <type>raw</type>
+  </param>
 
 <check>$num_outputs >= 1</check> 
 <check>2 >= $num_outputs</check>   
@@ -115,14 +129,23 @@
   This block is the HPSDR Hermes/Metis module.
   It supports one or two receivers and one transmitter in the Narrow Band
   (digital downconversion) mode.
-  RxSamp = 48000, 96000,  or 192000
-  RxPreamp = 0 (Off), or  1 (On)
-  PTTMode = 0 (TxOff),  1 (Vox on Txframe contents), or  2 (TxOn)
-  PTTOffMutesTx = 0 (Tx always emits), 1 (Tx IQ is zeroed when PTT is Off)
-  PTTOnMutesRx = 0 (Rx always receives), 1 (Rx IQ is zeroed when PTT is On)
-  TxDrive = 0..255 (0 is minimum (but not zero) drive, 255 is maximum drive)
+  *RxSamp = 48000, 96000,  or 192000
+  *RxPreamp = 0 (Off), or  1 (On)
+  *PTTMode = 0 (TxOff),  1 (Vox on Txframe contents), or  2 (TxOn)
+  *PTTOffMutesTx = 0 (Tx always emits), 1 (Tx IQ is zeroed when PTT is Off)
+  *PTTOnMutesRx = 0 (Rx always receives), 1 (Rx IQ is zeroed when PTT is On)
+  *TxDrive = 0..255 (0 is minimum (but not zero) drive, 255 is maximum drive)
   Rcvr0 corresponds to out0, Rcvr1 corresponds to out1.
-  Interface = the ethernet interface to use.
+  *Interface = the ethernet interface to use.
     Example: "eth0" {including quote marks}.
+  *Clock Source = HPSDR Clock Selector - 1 byte-> assigned to one register.
+  byte->C1 when C0 = 0. Allows selection of clock and mic sources. Only upper
+  6 bits are used (lower 2 bits are overwritten by receive sample speed
+  selection. Hermes ignores this register. Default value selects Mercury.
+    Example: "0xfc" {including quote marks}
+  *Alex Control = HPSDR Alex Controls - 4 bytes, each assigned to one register.
+  MSB->C3, 3rd byte->C4 for C0=0,  2nd byte->C3, LSB->C4 for C0 = 0x12.
+    Example: "0x00000000" {including quote marks}
+  See "HPSDR - USB Data Protocol" document.
   </doc>
 </block>
