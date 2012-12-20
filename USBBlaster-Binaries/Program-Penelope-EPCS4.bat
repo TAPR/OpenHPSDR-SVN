@@ -26,6 +26,7 @@ ECHO  8. Quartus V10.0
 ECHO  9. Quartus V10.1sp1
 ECHO  A. Quartus V11.0sp1
 ECHO  B. Quartus V11.1sp2
+ECHO  C. Quartus v12.1
 ECHO  Q. Quit
 ECHO.
 SET Choice=
@@ -44,6 +45,7 @@ IF /I '%Choice%'=='8' GOTO Q100
 IF /I '%Choice%'=='9' GOTO Q101sp1
 IF /I '%Choice%'=='A' GOTO Q110sp1
 IF /I '%Choice%'=='B' GOTO Q111sp2
+IF /I '%Choice%'=='C' GOTO Q121
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
 ECHO.
@@ -93,6 +95,9 @@ GOTO LOOP
 SET DIRECTORY=c:\altera\11.1sp2\qprogrammer\bin\quartus_pgm
 GOTO LOOP
 
+:Q121
+SET DIRECTORY=c:\altera\12.1\qprogrammer\bin\quartus_pgm
+GOTO LOOP
 
 :: prompt the user for the file to use
 :LOOP
