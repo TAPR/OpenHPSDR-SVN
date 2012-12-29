@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>green16.png</file>
+        <file>grey16.png</file>
+        <file>red16.png</file>
+        <file>yellow16.png</file>
+        <file>hpsdr4sm.png</file>
+    </qresource>
+</RCC>
