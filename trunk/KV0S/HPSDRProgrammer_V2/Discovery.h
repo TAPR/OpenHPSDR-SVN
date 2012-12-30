@@ -4,7 +4,7 @@
 #include <QThread>
 #include <QUdpSocket>
 
-#include "Metis.h"
+#include "board.h"
 
 class Discovery : public QObject {
     Q_OBJECT
@@ -13,7 +13,7 @@ public:
     void discover();
     void stop();
 signals:
-    void metis_found(Metis*);
+    void board_found(Board*);
     void reply(unsigned char);
 public slots:
     void readyRead();

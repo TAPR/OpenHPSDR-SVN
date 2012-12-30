@@ -73,9 +73,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(quit()));
     connect(ui->interfaceComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(interfaceSelected(int)));
     connect(ui->HermesButton,SIGNAL(clicked()),this,SLOT(hermesSelected()));
-    connect(ui->AngeliaButton,SIGNAL(clicked()),this,SLOT(hermesSelected()));
+    connect(ui->AngeliaButton,SIGNAL(clicked()),this,SLOT(angeliaSelected()));
     connect(ui->MetisButton,SIGNAL(clicked()),this,SLOT(metisSelected()));
-    //connect(ui->browseButton,SIGNAL(clicked()),this,SLOT(browse()));
+
+    connect(ui->discoverButton,SIGNAL(clicked()),this,SLOT(discover()));
+
+    connect(ui->programButton,SIGNAL(clicked()),this,SLOT(program()));
+    connect(ui->browseButton,SIGNAL(clicked()),this,SLOT(browse()));
 
     if(ui->interfaceComboBox->count()>0) {
        ui->interfaceComboBox->setCurrentIndex(0);
@@ -140,16 +144,204 @@ void MainWindow::interfaceSelected(int index) {
 
 void MainWindow::metisSelected() {
     isMetis=true;
+    board = metis;
+    qDebug() << "Metis selected";
 }
+
+void MainWindow::metisSelected(int index) {
+    if(index>=0) {
+        metisIP=bd.at(index)->getIpAddress();
+        metisHostAddress=bd.at(index)->getHostAddress();
+
+        if(isMetis) {
+            if(bd.at(index)->getBoard()==1) {
+                status("Warning: you have Metis selected but board selected is Hermes!");
+            }
+        } else {
+            if(bd.at(index)->getBoard()==0) {
+                status("Warning: you have Hermes selected but board selected is Metis!");
+            }
+
+        }
+    }
+}
+
 
 void MainWindow::hermesSelected() {
     isMetis=false;
+    board = hermes;
+    qDebug() << "Hermes selected";
+}
+
+void MainWindow::angeliaSelected()
+{
+    board = angelia;
+    qDebug() << "Angelia selected";
 }
 
 
+
 // SLOT - browse - called when the "Browse ..." button on the Program tab is pressed.
-//void MainWindow::browse() {
+void MainWindow::browse()
+{
     //QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("pof Files (*.pof)"));
-//    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("rbf Files (*.rbf)"));
-//    ui->fileLineEdit->setText(fileName);
-//}
+    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("rbf Files (*.rbf)"));
+    ui->fileLineEdit->setText(fileName);
+}
+
+
+void MainWindow::discover() {
+    ui->statusListWidget->clear();
+    status("");
+    if( board == metis )
+    {
+        text = QString("%0 Discovery").arg("Metis");
+    }else if( board == hermes){
+        text = QString("%0 Discovery").arg("Hermes");
+    }else{
+        text = QString("%0 Discovery").arg("Angelia");
+    }
+    status(text);
+
+    ui->discoverComboBox->clear();
+    bd.clear();
+
+
+
+    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
+
+    QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
+
+    socket.close();
+    if(!socket.bind(QHostAddress(ip),0,QUdpSocket::ReuseAddressHint)) {
+        qDebug()<<"Error: Discovery: bind failed "<<socket.errorString();
+        return;
+    }
+
+    discovery=new Discovery(&socket,myip);
+    connect(discovery,SIGNAL(board_found(Board*)),this,SLOT(board_found(Board*)));
+    discovery->discover();
+    // disable the Discovery button
+    ui->discoverButton->setDisabled(true);
+
+    // wait 9 seconds to allow replys
+    QTimer::singleShot(9000,this,SLOT(discovery_timeout()));
+}
+
+void MainWindow::discovery_timeout() {
+
+    discovery->stop();
+    if(ui->discoverComboBox->count()>0) {
+        ui->discoverComboBox->setCurrentIndex(0);
+        metisSelected(0);
+    }
+
+    // enable the Discovery button
+    ui->discoverButton->setDisabled(false);
+
+    text.sprintf("Discovery found %d card(s)",ui->discoverComboBox->count());
+    status(text);
+    if(ui->discoverComboBox->count()==0) {
+        status("Make sure the correct interface is selected.");
+        text.sprintf("Make sure that there is no jumper on %s.",isMetis?"JP1":"J12");
+        deviceIndicator->setPixmap (QPixmap(":/icons/red16.png"));
+        deviceIndicator->setToolTip (QString ("Device port not open"));
+    }else{
+        deviceIndicator->setPixmap (QPixmap(":/icons/green16.png"));
+        deviceIndicator->setToolTip (QString ("Device port open"));
+    }
+    QApplication::restoreOverrideCursor();
+}
+
+void MainWindow::board_found(Board* m) {
+
+    if(htonl(m->getIpAddress())!=ip) {
+        bd.append(m);
+        ui->discoverComboBox->addItem(m->toString());
+        status(m->toString());
+        if(isMetis) {
+            if(m->getBoard()!=0) {
+                status("Warning: you have Metis selected but board is Hermes!");
+            }
+        } else if(m->getBoard()!=1) {
+            status("Warning: you have Hermes selected but board is Metis!");
+        }
+
+    }
+}
+
+
+// SLOT - program - called when the "Program" button on the Program tab is pressed.
+void MainWindow::program() {
+
+    ui->statusListWidget->clear();
+    ui->statusListWidget->addItem("");
+    percent=0;
+
+    // check that an interface has been selected
+    if(ui->interfaceComboBox->currentIndex()!=-1) {
+        // check that a file has been selected
+        if(ui->fileLineEdit->text().endsWith(".rbf")) {
+        //if(ui->fileLineEdit->text().endsWith(".pof")) {
+
+
+            QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
+
+            // load thefile
+            //loadPOF(ui->fileLineEdit->text());
+            if(loadRBF(ui->fileLineEdit->text())==0) {
+                if(bootloader) {
+                    bootloaderProgram();
+                } else {
+                    flashProgram();
+                }
+            }
+        } else {
+            status("Error: no file selected");
+        }
+    } else {
+        status("Error: no interface selected");
+    }
+}
+
+// private load an rbf file
+int MainWindow::loadRBF(QString filename) {
+    int length;
+    int i;
+    int rc;
+
+    QFile rbfFile(filename);
+    rbfFile.open(QIODevice::ReadOnly);
+    QDataStream in(&rbfFile);
+    length=((rbfFile.size()+255)/256)*256;
+    data=(char*)malloc(length);
+
+
+    qDebug() << "file size=" << rbfFile.size() << "length=" << length;
+    status(filename);
+    status("reading file...");
+    if(in.readRawData(data,rbfFile.size())!=rbfFile.size()) {
+        status("Error: could not read rbf file");
+        rbfFile.close();
+        QApplication::restoreOverrideCursor();
+        blocks=0;
+        rc=1;
+    } else {
+        status("file read successfully");
+
+        // pad out to mod 256 with 0xFF
+        for(i=rbfFile.size();i<length;i++) {
+            data[i]=0xFF;
+        }
+        rbfFile.close();
+
+        start=0;
+        end=length;
+        blocks=length/256;
+
+        qDebug() <<"start="<<start<<" end="<<end<<" blocks="<<blocks;
+        rc=0;
+    }
+    return rc;
+}
+

@@ -32,7 +32,7 @@ SOURCES += main.cpp\
     Discovery.cpp \
     ReceiveThread.cpp \
     RawReceiveThread.cpp \
-    Metis.cpp
+    board.cpp
 
 HEADERS  += mainwindow.h \
     aboutdialog.h \
@@ -40,8 +40,8 @@ HEADERS  += mainwindow.h \
     Discovery.h \
     ReceiveThread.h \
     RawReceiveThread.h \
-    Metis.h \
-    Version.h
+    Version.h \
+    board.h
 
 FORMS    += mainwindow.ui \
     aboutdialog.ui

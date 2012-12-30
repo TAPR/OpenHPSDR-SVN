@@ -1,5 +1,5 @@
-#ifndef METIS_H
-#define METIS_H
+#ifndef BOARD_H
+#define BOARD_H
 
 #include "QString"
 
@@ -24,10 +24,10 @@
 #define FPGA_ID          0x05
 
 
-class Metis
+class Board
 {
 public:
-    Metis(long ipaddr,unsigned char* macaddr,unsigned char software_version,unsigned char board_type);
+    Board(long ipaddr,unsigned char* macaddr,unsigned char software_version,unsigned char board_type);
     long getIpAddress();
     unsigned char* getMACAddress();
     QString getHostAddress();
@@ -42,4 +42,4 @@ private:
     unsigned char board;
 };
 
-#endif // METIS_H
+#endif // BOARD_H

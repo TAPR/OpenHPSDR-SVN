@@ -1,6 +1,6 @@
-#include "Metis.h"
+#include "board.h"
 
-Metis::Metis(long ipaddr,unsigned char* macaddr,unsigned char software_version,unsigned char board_type) {
+Board::Board(long ipaddr,unsigned char* macaddr,unsigned char software_version,unsigned char board_type) {
     ipaddress=ipaddr;
     for(int i=0;i<6;i++) {
         macaddress[i]=macaddr[i];
@@ -10,22 +10,22 @@ Metis::Metis(long ipaddr,unsigned char* macaddr,unsigned char software_version,u
 }
 
 
-long Metis::getIpAddress() {
+long Board::getIpAddress() {
     return ipaddress;
 }
 
-unsigned char* Metis::getMACAddress() {
+unsigned char* Board::getMACAddress() {
     return macaddress;
 }
 
-QString Metis::getHostAddress() {
+QString Board::getHostAddress() {
     QString address;
     address.sprintf("%ld.%ld.%ld.%ld",
                  (ipaddress>>24)&0xFF,(ipaddress>>16)&0xFF,(ipaddress>>8)&0xFF,ipaddress&0xFF);
     return address;
 }
 
-QString Metis::toString() {
+QString Board::toString() {
     QString text;
     text.sprintf("%02X:%02X:%02X:%02X:%02x:%02X (%ld.%ld.%ld.%ld) Software version: %d.%d (%s)",
                  macaddress[0],macaddress[1],macaddress[2],macaddress[3],macaddress[4],macaddress[5],
@@ -34,10 +34,10 @@ QString Metis::toString() {
     return text;
 }
 
-unsigned char Metis::getVersion() {
+unsigned char Board::getVersion() {
     return version;
 }
 
-unsigned char Metis::getBoard() {
+unsigned char Board::getBoard() {
     return board;
 }

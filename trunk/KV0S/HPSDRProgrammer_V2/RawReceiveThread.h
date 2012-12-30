@@ -1,7 +1,7 @@
 #ifndef RAWRECEIVETHREAD_H
 #define RAWRECEIVETHREAD_H
 
-#include <Metis.h>
+#include <board.h>
 #include <pcap.h>
 
 #include <QThread>
