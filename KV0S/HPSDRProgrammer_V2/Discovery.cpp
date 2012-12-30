@@ -1,7 +1,7 @@
 #include "QDebug"
 
 #include "Discovery.h"
-#include "Metis.h"
+#include "board.h"
 
 
 Discovery::Discovery(QUdpSocket* s,QString myip) {
@@ -53,8 +53,8 @@ void Discovery::readyRead() {
             case 2:  // response to a discovery packet
                 qDebug()<<"Discovery::readyRead: discovery response: "<<metisAddress.toString();
                 if(metisAddress.toString()!=ip) {
-                    Metis* metis=new Metis(metisAddress.toIPv4Address(),&buffer[3],buffer[9],buffer[10]);
-                    emit metis_found(metis);
+                    Board* bd=new Board(metisAddress.toIPv4Address(),&buffer[3],buffer[9],buffer[10]);
+                    emit board_found(bd);
                 } else {
                     qDebug()<<"Discovery::readyRead: from: "<<metisAddress.toString();
                 }

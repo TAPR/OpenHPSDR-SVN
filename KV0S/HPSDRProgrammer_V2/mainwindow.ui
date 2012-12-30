@@ -140,7 +140,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QComboBox" name="comboBox">
+             <widget class="QComboBox" name="discoverComboBox">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -159,9 +159,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="discoverButton">
               <property name="text">
-               <string>Discovery</string>
+               <string>Discover</string>
               </property>
              </widget>
             </item>
@@ -188,18 +188,8 @@
           <string>Programmer</string>
          </property>
          <layout class="QFormLayout" name="formLayout">
-          <item row="3" column="0">
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase the Board Memory&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="text">
-             <string>Erase memory</string>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="1">
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="programButton">
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Program the RBF firmware into your selected board &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -219,7 +209,7 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLineEdit" name="lineEdit">
+           <widget class="QLineEdit" name="fileLineEdit">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -340,10 +330,9 @@
   <tabstop>MetisButton</tabstop>
   <tabstop>HermesButton</tabstop>
   <tabstop>AngeliaButton</tabstop>
-  <tabstop>lineEdit</tabstop>
+  <tabstop>fileLineEdit</tabstop>
   <tabstop>browseButton</tabstop>
-  <tabstop>pushButton_3</tabstop>
-  <tabstop>pushButton_2</tabstop>
+  <tabstop>programButton</tabstop>
  </tabstops>
  <resources>
   <include location="HPSDRProgrammer_Res.qrc"/>

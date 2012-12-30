@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QDebug>
+#include <QTimer>
+#include <QFileDialog>
 
 #include <pcap.h>
 
@@ -11,7 +13,7 @@
 #include "ReceiveThread.h"
 #include "RawReceiveThread.h"
 #include "Discovery.h"
-#include "Metis.h"
+#include "board.h"
 #include "aboutdialog.h"
 #include "Version.h"
 
@@ -47,22 +49,25 @@ public:
 #ifdef Q_WS_MAC
     void setPath(char* path);
 #endif
+    enum{metis, hermes, angelia} board;
 
 public slots:
     void quit();
     //void about();
     void interfaceSelected(int);
     void metisSelected();
+    void metisSelected(int index);
     void hermesSelected();
-    //void browse();
+    void angeliaSelected();
+    void browse();
     //void program();
     //void erase();
     //void getMAC();
     //void getIP();
     //void setIP();
 
-    //void discover();
-    //void discovery_timeout();
+    void discover();
+    void discovery_timeout();
 
     // SLOTS for RawReceiveThread
     //void erase_timeout();
@@ -73,10 +78,10 @@ public slots:
     //void ipAddress(unsigned char*);
     //void fpgaId(unsigned char*);
 
-    /*
-    void metis_found(Metis*);
-    void metisSelected(int);
 
+    void board_found(Board*);
+
+    /*
     void tabChanged(int);
 
     void jtagInterrogate();
@@ -137,10 +142,10 @@ private:
     QString interfaceName;
     QString hwAddress;
     unsigned char hw[6];
-    /*
+
     long metisIP;
     QString metisHostAddress;
-
+    /*
     int s;
 
     char* data;
@@ -154,16 +159,17 @@ private:
               // blocks if programming flash on metis in command mode
               // bytes (blocks*256) if programming flash on JTAG (Mercury or Penelope)
     unsigned char data_command;
+    */
 
     pcap_t *handle;
 
-    QList<Metis*> metis;
+    QList<Board*> bd;
 
     int state;
 
     int percent;
     int eraseTimeouts;
-    */
+
 
     QUdpSocket socket;
     Discovery* discovery;
