@@ -1,9 +1,5 @@
 /*
- * File:  main.cpp
- *
- * Author: John Melton, G0ORX/N6LYT
- *
- * Created on 23 November 2010
+ * File:  statusdialog.cpp
  *
  * Revised on December 30, 2012
  * Author: Dave Larsen, KV0S
@@ -28,15 +24,31 @@
 *
 */
 
+#include "statusdialog.h"
+#include "ui_statusdialog.h"
 
-#include "mainwindow.h"
-#include <QApplication>
-
-int main(int argc, char *argv[])
+StatusDialog::StatusDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::StatusDialog)
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    
-    return a.exec();
+    ui->setupUi(this);
+
+    connect(ui->closeButton,SIGNAL(clicked()),this,SLOT(close()));
+}
+
+StatusDialog::~StatusDialog()
+{
+    delete ui;
+}
+
+void StatusDialog::status( QString text )
+{
+    qDebug()<<"status:"<<text;
+    ui->statusListWidget->insertItem(ui->statusListWidget->count()-1,text);
+    ui->statusListWidget->setCurrentRow(ui->statusListWidget->count()-1);
+}
+
+void StatusDialog::clear()
+{
+    ui->statusListWidget->clear();
 }

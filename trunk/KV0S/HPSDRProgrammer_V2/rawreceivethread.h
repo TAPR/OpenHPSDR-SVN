@@ -1,5 +1,5 @@
 /*
- * File:  main.cpp
+ * File:  rawreceivethread.cpp
  *
  * Author: John Melton, G0ORX/N6LYT
  *
@@ -29,14 +29,32 @@
 */
 
 
-#include "mainwindow.h"
-#include <QApplication>
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    
-    return a.exec();
-}
+#ifndef RAWRECEIVETHREAD_H
+#define RAWRECEIVETHREAD_H
+
+#include <board.h>
+#include <pcap.h>
+
+#include <QThread>
+
+class RawReceiveThread : public QThread {
+    Q_OBJECT
+public:
+    RawReceiveThread(unsigned char*,pcap_t*);
+    void run();
+    void stop();
+signals:
+    void eraseCompleted();
+    void nextBuffer();
+    void macAddress(unsigned char*);
+    void ipAddress(unsigned char*);
+    void fpgaId(unsigned char*);
+    void timeout();
+private:
+    bool stopped;
+    unsigned char* hw;
+    pcap_t* handle;
+};
+
+#endif // RAWRECEIVETHREAD_H

@@ -46,14 +46,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ab = new AboutDialog();
     ab->setVersion( QString(VERSION), QString(RELEASE) );
 
+    stat = new StatusDialog();
+
+
     receiveThread=NULL;
     rawReceiveThread=NULL;
     discovery=NULL;
 
+    deviceIndicator->setIndent(0);
     deviceIndicator->setPixmap (QPixmap(":/icons/red16.png"));
     deviceIndicator->setToolTip (QString ("Device port not open"));
 
-    statusBar ()->addPermanentWidget (deviceIndicator);
+    statusBar()->addPermanentWidget (deviceIndicator);
 
 #ifdef __WIN32
     //ui->privilegesLabel->setText("You must be running with Administrator privileges to be able to read/write raw ethernet frames.");
@@ -80,6 +84,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->programButton,SIGNAL(clicked()),this,SLOT(program()));
     connect(ui->browseButton,SIGNAL(clicked()),this,SLOT(browse()));
+
+    connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
+
 
     if(ui->interfaceComboBox->count()>0) {
        ui->interfaceComboBox->setCurrentIndex(0);
@@ -108,8 +115,8 @@ void MainWindow::quit() {
 // private function to display message in the status window
 void MainWindow::status(QString text) {
     qDebug()<<"status:"<<text;
-    ui->statusListWidget->insertItem(ui->statusListWidget->count()-1,text);
-    ui->statusListWidget->setCurrentRow(ui->statusListWidget->count()-1);
+    ui->statusBar->showMessage( text );
+    stat->status( text.trimmed() );
 }
 
 // SLOT - interfaceSelected - called when the interface selection is changed
@@ -191,7 +198,7 @@ void MainWindow::browse()
 
 
 void MainWindow::discover() {
-    ui->statusListWidget->clear();
+    stat->clear();
     status("");
     if( board == metis )
     {
@@ -274,8 +281,8 @@ void MainWindow::board_found(Board* m) {
 // SLOT - program - called when the "Program" button on the Program tab is pressed.
 void MainWindow::program() {
 
-    ui->statusListWidget->clear();
-    ui->statusListWidget->addItem("");
+    stat->clear();
+    status("");
     percent=0;
 
     // check that an interface has been selected

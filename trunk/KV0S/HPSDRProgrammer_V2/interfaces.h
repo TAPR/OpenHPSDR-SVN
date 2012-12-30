@@ -1,5 +1,5 @@
 /*
- * File:   Interfaces.h
+ * File:   interfaces.h
  * Author: John Melton, G0ORX/N6LYT
  *
  * Created on 23 November 2010
