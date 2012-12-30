@@ -1,5 +1,5 @@
 /*
- * File:   Interfaces.cpp
+ * File:   interfaces.cpp
  * Author: John Melton, G0ORX/N6LYT
  *
  * Created on 23 November 2010
@@ -26,7 +26,7 @@
 #include <QDebug>
 #include <QString>
 
-#include "Interfaces.h"
+#include "interfaces.h"
 
 #include <pcap.h>
 
@@ -51,11 +51,12 @@ Interfaces::Interfaces() {
         }
     }
 
-    qDebug() << "Interfaces found " << nInterfaces;
+
 
     char errbuf[PCAP_ERRBUF_SIZE];
 
     int devices=pcap_findalldevs(&devs,errbuf);
+    qDebug() << "Interfaces found " << nInterfaces << devices;
     pcap_if_t* dev;
     for(dev=devs;dev!=NULL;dev=dev->next) {
         qDebug()<<dev->description<<":"<<dev->name;
@@ -100,6 +101,7 @@ char* Interfaces::getPcapName(QString name) {
             }
         }
     }
+    return NULL;
 }
 
 QString Interfaces::getInterfaceHardwareAddress(int index) {

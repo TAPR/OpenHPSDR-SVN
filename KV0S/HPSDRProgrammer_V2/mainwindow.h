@@ -9,13 +9,14 @@
 
 #include <pcap.h>
 
-#include "Interfaces.h"
-#include "ReceiveThread.h"
-#include "RawReceiveThread.h"
-#include "Discovery.h"
+#include "interfaces.h"
+#include "receivethread.h"
+#include "rawreceivethread.h"
+#include "discovery.h"
 #include "board.h"
 #include "aboutdialog.h"
-#include "Version.h"
+#include "statusdialog.h"
+#include "version.h"
 
 // states
 #define IDLE 0
@@ -188,6 +189,7 @@ private:
     long fpga_id;
     */
     AboutDialog *ab;
+    StatusDialog *stat;
 };
 
 #endif // MAINWINDOW_H

@@ -28,23 +28,26 @@ unix {
 SOURCES += main.cpp\
         mainwindow.cpp \
     aboutdialog.cpp \
-    Interfaces.cpp \
-    Discovery.cpp \
-    ReceiveThread.cpp \
-    RawReceiveThread.cpp \
-    board.cpp
+    board.cpp \
+    discovery.cpp \
+    interfaces.cpp \
+    rawreceivethread.cpp \
+    receivethread.cpp \
+    statusdialog.cpp
 
 HEADERS  += mainwindow.h \
     aboutdialog.h \
-    Interfaces.h \
-    Discovery.h \
-    ReceiveThread.h \
-    RawReceiveThread.h \
-    Version.h \
-    board.h
+    board.h \
+    discovery.h \
+    interfaces.h \
+    rawreceivethread.h \
+    version.h \
+    receivethread.h \
+    statusdialog.h
 
 FORMS    += mainwindow.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    statusdialog.ui
 
 RESOURCES += \
     HPSDRProgrammer_Res.qrc

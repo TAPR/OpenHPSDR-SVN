@@ -25,7 +25,7 @@
 
 #include <QDebug>
 
-#include "RawReceiveThread.h"
+#include "rawreceivethread.h"
 
 RawReceiveThread::RawReceiveThread(unsigned char* hwAddress,pcap_t* hdl) {
     qDebug()<<"RawReceiveThread";
