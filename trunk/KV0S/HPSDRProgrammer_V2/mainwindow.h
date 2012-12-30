@@ -60,7 +60,7 @@ public slots:
     void hermesSelected();
     void angeliaSelected();
     void browse();
-    //void program();
+    void program();
     //void erase();
     //void getMAC();
     //void getIP();
@@ -70,10 +70,10 @@ public slots:
     void discovery_timeout();
 
     // SLOTS for RawReceiveThread
-    //void erase_timeout();
+    void erase_timeout();
     //void eraseCompleted();
-    //void nextBuffer();
-    //void timeout();
+    void nextBuffer();
+    void timeout();
     //void macAddress(unsigned char*);
     //void ipAddress(unsigned char*);
     //void fpgaId(unsigned char*);
@@ -96,42 +96,48 @@ private:
     Ui::MainWindow *ui;
     QLabel *deviceIndicator;
 
-    /*
+
     //void loadPOF(QString filename);
     int loadRBF(QString filename);
+
     void eraseData();
+    void sendCommand(unsigned char command);
+    void sendData();
+
+    /*
     void readMAC();
     void readIP();
     void writeIP();
 
     void sendRawCommand(unsigned char command);
-    void sendCommand(unsigned char command);
+
 
     void sendRawData();
-    void sendData();
+
     void sendJTAGData();
     void sendJTAGFlashData();
-
-    void idle();
     */
+    void idle();
+
     void status(QString text);
-    /*
+
     void bootloaderProgram();
     void flashProgram();
     void bootloaderErase();
     void flashErase();
 
+    /*
     int loadMercuryRBF(QString filename);
     int loadPenelopeRBF(QString filename);
     void jtagBootloaderProgram();
     void jtagEraseData();
     //void jtagFlashProgram();
     void loadFlash();
-
+*/
 #ifdef Q_WS_MAC
     char* myPath;
 #endif
-    */
+
     QString text;
 
     bool isMetis;
@@ -145,7 +151,7 @@ private:
 
     long metisIP;
     QString metisHostAddress;
-    /*
+
     int s;
 
     char* data;
@@ -159,7 +165,7 @@ private:
               // blocks if programming flash on metis in command mode
               // bytes (blocks*256) if programming flash on JTAG (Mercury or Penelope)
     unsigned char data_command;
-    */
+
 
     pcap_t *handle;
 
