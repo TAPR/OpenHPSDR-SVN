@@ -290,11 +290,11 @@ void MainWindow::program() {
             // load thefile
             //loadPOF(ui->fileLineEdit->text());
             if(loadRBF(ui->fileLineEdit->text())==0) {
-                if(bootloader) {
-                    bootloaderProgram();
-                } else {
+                //if(bootloader) {
+                //    bootloaderProgram();
+                //} else {
                     flashProgram();
-                }
+                //}
             }
         } else {
             status("Error: no file selected");
@@ -345,3 +345,213 @@ int MainWindow::loadRBF(QString filename) {
     return rc;
 }
 
+void MainWindow::flashProgram() {
+
+    size=blocks;
+    data_command=PROGRAM_METIS_FLASH;
+
+    // start a thread to listen for replies
+    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
+    receiveThread=new ReceiveThread(&socket,myip,metisHostAddress);
+
+    QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
+    QObject::connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
+    QObject::connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
+
+    state=ERASING;
+    eraseData();
+
+}
+
+// private function to send the command to erase
+void MainWindow::eraseData() {
+    eraseTimeouts=0;
+    status("Erasing device ... (takes several seconds)");
+    //if(bootloader) {
+    //    sendRawCommand(ERASE_METIS_FLASH);
+    //} else {
+        sendCommand(ERASE_METIS_FLASH);
+        // wait 20 seconds to allow replys
+        QTimer::singleShot(90000,this,SLOT(erase_timeout()));
+    //}
+}
+
+// slot for erase timout
+void MainWindow::erase_timeout() {
+    qDebug()<<"MainWindow::erase_timeout";
+    if(state==ERASING || state==ERASING_ONLY) {
+        status("Error: erase timeout.");
+        status("Power cycle and try again.");
+        idle();
+        QApplication::restoreOverrideCursor();
+    }
+}
+
+// private function to send a command.
+void MainWindow::sendCommand(unsigned char command) {
+    unsigned char buffer[64];
+    int i;
+
+    qDebug()<<"sendCommand "<<command;
+
+    buffer[0]=0xEF; // protocol
+    buffer[1]=0xFE;
+
+    buffer[2]=0x03;
+    buffer[3]=command;
+
+    /*fill the frame with 0x00*/
+    for(i=0;i<60;i++) {
+        buffer[i+4]=(unsigned char)0x00;
+    }
+
+    receiveThread->send((const char*)buffer,sizeof(buffer));
+
+}
+
+
+// private function to send 256 byte block of the pof file.
+void MainWindow::sendData() {
+    unsigned char buffer[264];
+
+    qDebug()<<"sendData offset="<<offset;
+
+    buffer[0]=0xEF;
+    buffer[1]=0xFE;
+    buffer[2]=0x03;
+    buffer[3]=PROGRAM_METIS_FLASH;
+    buffer[4]=(blocks>>24)&0xFF;
+    buffer[5]=(blocks>>16)&0xFF;
+    buffer[6]=(blocks>>8)&0xFF;
+    buffer[7]=blocks&0xFF;
+
+    /*fill the frame with some data*/
+    for(int i=0;i<256;i++) {
+        buffer[i+8]=(unsigned char)data[i+offset];
+    }
+
+    receiveThread->send((const char*)buffer,sizeof(buffer));
+
+    int p=(offset+256)*100/(end-start);
+    if(p!=percent) {
+        if((p%20)==0) {
+            percent=p;
+            text.sprintf("Programming device %d%% written ...",percent);
+            status(text);
+        }
+    }
+
+}
+
+
+// SLOT - called when a ready for next buffer reply packet is received.
+void MainWindow::nextBuffer() {
+    offset+=256;
+    if(offset<end) {
+        //if(bootloader) {
+        //    sendRawData();
+        //} else {
+            sendData();
+        //}
+    } else {
+        status("Programming device completed successfully.");
+        //if(bootloader) {
+        //    text.sprintf("Remember to remove %s when you power cycle.",isMetis?"JP1":"J12");
+        //    status(text);
+        //} else {
+            ui->discoverComboBox->clear();
+            bd.clear();
+            text.sprintf("Please wait for %s to restart.",isMetis?"Metis":"Hermes");
+            status(text);
+            status("If using DHCP this can take up to 5 seconds.");
+            status("To use other functions you will need to run Discovery again.");
+        //}
+        idle();
+        QApplication::restoreOverrideCursor();
+    }
+}
+
+// SLOT - called when a raw packet read times out (especially when erasing)
+void MainWindow::timeout() {
+    //qDebug()<<"MainWindow::timeout state="<<state;
+    switch(state) {
+    case IDLE:
+        // ignore
+        break;
+    case ERASING:
+    case ERASING_ONLY:
+        //if(bootloader) {
+        //    eraseTimeouts++;
+           //qDebug()<<"eraseTimeouts="<<eraseTimeouts;
+       //     if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
+       //         status("Error: erase timeout.");
+       //         text.sprintf("Have you set the jumper at %s on %s and power cycled?",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+       //         status(text);
+       //         idle();
+       //         QApplication::restoreOverrideCursor();
+       //     }
+       // } else {
+            status("Error: erase timeout.");
+            status("Power cycle and try again.");
+            idle();
+            QApplication::restoreOverrideCursor();
+        //}
+        break;
+    case PROGRAMMING:
+        //qDebug()<<"timeout";
+        break;
+    case READ_MAC:
+        status("Error: timeout reading MAC address!");
+        status("Check that the correct interface is selected.");
+        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+        status(text);
+        idle();
+        break;
+    case READ_IP:
+        status("Error: timeout reading IP address!");
+        status("Check that the correct interface is selected.");
+        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+        status(text);
+        idle();
+        break;
+    case WRITE_IP:
+        // should not happen as there is no repsonse
+        break;
+    case JTAG_INTERROGATE:
+        status("Error: timeout reading interrogating JTAG chain!");
+        status("Check that the correct interface is selected.");
+        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+        status(text);
+        idle();
+        break;
+    case JTAG_PROGRAM:
+        //qDebug() << "timeout while state is JTAG_PROGRAM";
+        break;
+    case FLASH_ERASING:
+        eraseTimeouts++;
+        if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
+            status("Error: erase timeout - power cycle and try again?");
+            idle();
+            QApplication::restoreOverrideCursor();
+        }
+        break;
+    case FLASH_PROGRAM:
+        //qDebug() << "timeout while state is FLASH_PROGRAM";
+        break;
+    }
+}
+
+// private function to set state to idle
+void MainWindow::idle() {
+    qDebug()<<"idle";
+    state=IDLE;
+    if(rawReceiveThread!=NULL) {
+        rawReceiveThread->stop();
+        rawReceiveThread=NULL;
+    }
+    if(receiveThread!=NULL) {
+        receiveThread->stop();
+        receiveThread=NULL;
+    }
+
+}
