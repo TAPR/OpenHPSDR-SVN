@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>622</width>
+    <width>659</width>
     <height>450</height>
    </rect>
   </property>
@@ -44,14 +44,14 @@
           <item row="0" column="1">
            <widget class="QComboBox" name="interfaceComboBox">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>300</width>
+              <width>400</width>
               <height>22</height>
              </size>
             </property>
@@ -149,7 +149,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>400</width>
+                <width>500</width>
                 <height>0</height>
                </size>
               </property>
@@ -218,7 +218,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>400</width>
+              <width>500</width>
               <height>22</height>
              </size>
             </property>
@@ -250,7 +250,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>622</width>
+     <width>659</width>
      <height>25</height>
     </rect>
    </property>
@@ -258,7 +258,6 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionConnect"/>
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -272,7 +271,6 @@
      <string>Tools</string>
     </property>
     <addaction name="actionStatus"/>
-    <addaction name="actionErase_Flash"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTools"/>
@@ -285,6 +283,8 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionStatus"/>
+   <addaction name="actionAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionHelp">
@@ -298,23 +298,27 @@
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="HPSDRProgrammer_Res.qrc">
+     <normaloff>:/icons/help16.png</normaloff>:/icons/help16.png</iconset>
+   </property>
    <property name="text">
     <string>About</string>
    </property>
-  </action>
-  <action name="actionConnect">
-   <property name="text">
-    <string>Connect</string>
+   <property name="toolTip">
+    <string>Open About Window</string>
    </property>
   </action>
   <action name="actionStatus">
+   <property name="icon">
+    <iconset resource="HPSDRProgrammer_Res.qrc">
+     <normaloff>:/icons/status16.png</normaloff>:/icons/status16.png</iconset>
+   </property>
    <property name="text">
     <string>Status</string>
    </property>
-  </action>
-  <action name="actionErase_Flash">
-   <property name="text">
-    <string>Erase Flash</string>
+   <property name="toolTip">
+    <string>Open Status History Window</string>
    </property>
   </action>
  </widget>
