@@ -72,7 +72,7 @@ public slots:
 
     // SLOTS for RawReceiveThread
     void erase_timeout();
-    //void eraseCompleted();
+    void eraseCompleted();
     void nextBuffer();
     void timeout();
     //void macAddress(unsigned char*);
@@ -105,26 +105,28 @@ private:
     void sendCommand(unsigned char command);
     void sendData();
 
-    /*
+
     void readMAC();
     void readIP();
     void writeIP();
-
+    /*
     void sendRawCommand(unsigned char command);
 
 
     void sendRawData();
 
     void sendJTAGData();
-    void sendJTAGFlashData();
     */
+
+    void sendJTAGFlashData();
+
     void idle();
 
     void status(QString text);
 
-    void bootloaderProgram();
+    //void bootloaderProgram();
     void flashProgram();
-    void bootloaderErase();
+    //void bootloaderErase();
     void flashErase();
 
     /*
@@ -133,8 +135,10 @@ private:
     void jtagBootloaderProgram();
     void jtagEraseData();
     //void jtagFlashProgram();
+  */
+
     void loadFlash();
-*/
+
 #ifdef Q_WS_MAC
     char* myPath;
 #endif
