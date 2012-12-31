@@ -379,7 +379,7 @@ void MainWindow::eraseData() {
     //} else {
         sendCommand(ERASE_METIS_FLASH);
         // wait 20 seconds to allow replys
-        QTimer::singleShot(90000,this,SLOT(erase_timeout()));
+        QTimer::singleShot(20000,this,SLOT(erase_timeout()));
     //}
 }
 
@@ -480,7 +480,7 @@ void MainWindow::nextBuffer() {
 
 // SLOT - called when a raw packet read times out (especially when erasing)
 void MainWindow::timeout() {
-    //qDebug()<<"MainWindow::timeout state="<<state;
+    qDebug()<<"MainWindow::timeout state="<<state;
     switch(state) {
     case IDLE:
         // ignore
@@ -505,7 +505,7 @@ void MainWindow::timeout() {
         //}
         break;
     case PROGRAMMING:
-        //qDebug()<<"timeout";
+        qDebug()<<"timeout";
         break;
     case READ_MAC:
         status("Error: timeout reading MAC address!");
@@ -543,7 +543,7 @@ void MainWindow::timeout() {
         }
         break;
     case FLASH_PROGRAM:
-        //qDebug() << "timeout while state is FLASH_PROGRAM";
+        qDebug() << "timeout while state is FLASH_PROGRAM";
         break;
     }
 }
@@ -552,13 +552,131 @@ void MainWindow::timeout() {
 void MainWindow::idle() {
     qDebug()<<"idle";
     state=IDLE;
-    if(rawReceiveThread!=NULL) {
-        rawReceiveThread->stop();
-        rawReceiveThread=NULL;
-    }
+    //if(rawReceiveThread!=NULL) {
+    //    rawReceiveThread->stop();
+    //    rawReceiveThread=NULL;
+    //}
     if(receiveThread!=NULL) {
         receiveThread->stop();
         receiveThread=NULL;
     }
 
+}
+
+// SLOT - eraseCompleted
+void MainWindow::eraseCompleted() {
+    switch(state) {
+    case IDLE:
+        qDebug()<<"received eraseCompleted when state is IDLE";
+        break;
+    case ERASING:
+        status("Device erased successfully");
+        state=PROGRAMMING;
+        offset=start;
+        status("Programming device ...");
+        //if(bootloader) {
+        //    sendRawData();
+        //} else {
+            sendData();
+        //}
+        break;
+    case ERASING_ONLY:
+        status("Device erased successfully");
+        idle();
+        QApplication::restoreOverrideCursor();
+        break;
+    case READ_MAC:
+        qDebug()<<"received eraseCompleted when state is READ_MAC";
+        break;
+    case READ_IP:
+        qDebug()<<"received eraseCompleted when state is READ_IP";
+        break;
+    case WRITE_IP:
+        text.sprintf("%s IP address written successfully",isMetis?"Metis":"Hermes");
+        status(text);
+        idle();
+        break;
+    case JTAG_INTERROGATE:
+        qDebug()<<"received eraseCompleted when state is JTAG_INTERROGATE";
+        break;
+    case JTAG_PROGRAM:
+        qDebug()<<"received eraseCompleted when state is JTAG_PROGRAM";
+        break;
+    case FLASH_ERASING:
+        status("Flash erased successfully");
+        // now load the flash
+        loadFlash();
+        break;
+    case FLASH_PROGRAM:
+        qDebug()<<"received eraseCompleted when state is FLASH_PROGRAM";
+        break;
+    }
+}
+
+void MainWindow::loadFlash() {
+    qDebug()<<"MainWindow::loadFlash";
+    if(loadRBF(ui->fileLineEdit->text())!=0) {
+        status("Error: Failed to load Flash Program file.");
+        return;
+    }
+    data_command=PROGRAM_MERCURY;
+    state=FLASH_PROGRAM;
+    offset=start;
+    sendJTAGFlashData();
+}
+
+
+// private function to send 256 byte block of the pof file.
+void MainWindow::sendJTAGFlashData() {
+    unsigned char buffer[276];
+
+    qDebug()<<"sendJTAGFlashData offset="<<offset;
+
+    if(handle!=NULL) {
+        /*set the frame header*/
+        buffer[0]=0x11; // dest address
+        buffer[1]=0x22;
+        buffer[2]=0x33;
+        buffer[3]=0x44;
+        buffer[4]=0x55;
+        buffer[5]=0x66;
+
+        buffer[6]=hw[0]; // src address
+        buffer[7]=hw[1];
+        buffer[8]=hw[2];
+        buffer[9]=hw[3];
+        buffer[10]=hw[4];
+        buffer[11]=hw[5];
+
+        buffer[12]=0xEF; // protocol
+        buffer[13]=0xFE;
+
+        buffer[14]=0x03;
+        buffer[15]=PROGRAM_FLASH;
+
+        buffer[16]=(blocks>>24)&0xFF;
+        buffer[17]=(blocks>>16)&0xFF;
+        buffer[18]=(blocks>>8)&0xFF;
+        buffer[19]=blocks&0xFF;
+
+        /*fill the frame with some data*/
+        for(int i=0;i<256;i++) {
+                buffer[i+20]=(unsigned char)data[i+offset];
+        }
+
+        if(pcap_sendpacket(handle,buffer,276)!=0) {
+            qDebug()<<"pcap_sendpacket failed";
+            status("send data command failed");
+            idle();
+        } else {
+            int p=offset*100/(end-start);
+            if(p!=percent) {
+                if((p%20)==0) {
+                    percent=p;
+                    text.sprintf("Programming device %d%% written ...",percent);
+                    status(text);
+                }
+            }
+        }
+    }
 }
