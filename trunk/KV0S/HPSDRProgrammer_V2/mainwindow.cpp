@@ -153,6 +153,7 @@ void MainWindow::metisSelected() {
     isMetis=true;
     board = metis;
     qDebug() << "Metis selected";
+    status( "Metis selected");
 }
 
 void MainWindow::metisSelected(int index) {
@@ -178,12 +179,15 @@ void MainWindow::hermesSelected() {
     isMetis=false;
     board = hermes;
     qDebug() << "Hermes selected";
+    status( "Hermes selected");
 }
 
 void MainWindow::angeliaSelected()
 {
+    isMetis=false;
     board = angelia;
     qDebug() << "Angelia selected";
+    status( "Angelia selected");
 }
 
 
@@ -194,6 +198,7 @@ void MainWindow::browse()
     //QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("pof Files (*.pof)"));
     QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("rbf Files (*.rbf)"));
     ui->fileLineEdit->setText(fileName);
+    status( QString("Reading rbf file: %0").arg(fileName) );
 }
 
 
@@ -361,9 +366,9 @@ void MainWindow::flashProgram() {
     QString myip=interfaces.getInterfaceIPAddress(interfaceName);
     receiveThread=new ReceiveThread(&socket,myip,metisHostAddress);
 
-    QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
-    QObject::connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
-    QObject::connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
+    connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
+    connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
+    connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
 
     state=ERASING;
     eraseData();
@@ -468,7 +473,7 @@ void MainWindow::nextBuffer() {
         //} else {
             ui->discoverComboBox->clear();
             bd.clear();
-            text.sprintf("Please wait for %s to restart.",isMetis?"Metis":"Hermes");
+            text.sprintf("Please wait for %s to restart.",isMetis?"Metis":"Hermes or Angelia");
             status(text);
             status("If using DHCP this can take up to 5 seconds.");
             status("To use other functions you will need to run Discovery again.");
@@ -492,7 +497,7 @@ void MainWindow::timeout() {
            //qDebug()<<"eraseTimeouts="<<eraseTimeouts;
        //     if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
        //         status("Error: erase timeout.");
-       //         text.sprintf("Have you set the jumper at %s on %s and power cycled?",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+       //         text.sprintf("Have you set the jumper at %s on %s and power cycled?",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes or Angelia");
        //         status(text);
        //         idle();
        //         QApplication::restoreOverrideCursor();
@@ -510,14 +515,14 @@ void MainWindow::timeout() {
     case READ_MAC:
         status("Error: timeout reading MAC address!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes or Angelia");
         status(text);
         idle();
         break;
     case READ_IP:
         status("Error: timeout reading IP address!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes or Angelia");
         status(text);
         idle();
         break;
@@ -527,7 +532,7 @@ void MainWindow::timeout() {
     case JTAG_INTERROGATE:
         status("Error: timeout reading interrogating JTAG chain!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes or Angelia");
         status(text);
         idle();
         break;
@@ -592,7 +597,7 @@ void MainWindow::eraseCompleted() {
         qDebug()<<"received eraseCompleted when state is READ_IP";
         break;
     case WRITE_IP:
-        text.sprintf("%s IP address written successfully",isMetis?"Metis":"Hermes");
+        text.sprintf("%s IP address written successfully",isMetis?"Metis":"Hermes or Angelia");
         status(text);
         idle();
         break;

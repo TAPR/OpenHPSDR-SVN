@@ -5,5 +5,7 @@
         <file>red16.png</file>
         <file>yellow16.png</file>
         <file>hpsdr4sm.png</file>
+        <file>status16.png</file>
+        <file>help16.png</file>
     </qresource>
 </RCC>
