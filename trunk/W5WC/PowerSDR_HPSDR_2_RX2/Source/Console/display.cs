@@ -109,6 +109,10 @@ namespace PowerSDR
         private static Color notch_perm_highlight_color = Color.Chartreuse;
         private static Color notch_off_color = Color.Gray;
 
+        private static Color channel_background_on = Color.FromArgb(128, Color.DodgerBlue);
+        private static Color channel_background_off = Color.FromArgb(32, Color.RoyalBlue);
+        private static Color channel_foreground = Color.Cyan;
+
         private static double notch_zoom_start_freq;
         public static double NotchZoomStartFreq
         {
@@ -785,6 +789,39 @@ namespace PowerSDR
             }
         }
 
+        private static int rx2_spectrum_grid_max = 0;
+        public static int RX2SpectrumGridMax
+        {
+            get { return rx2_spectrum_grid_max; }
+            set
+            {
+                rx2_spectrum_grid_max = value;
+                DrawBackground();
+            }
+        }
+
+        private static int rx2_spectrum_grid_min = -160;
+        public static int RX2SpectrumGridMin
+        {
+            get { return rx2_spectrum_grid_min; }
+            set
+            {
+                rx2_spectrum_grid_min = value;
+                DrawBackground();
+            }
+        }
+
+        private static int rx2_spectrum_grid_step = 10;
+        public static int RX2SpectrumGridStep
+        {
+            get { return rx2_spectrum_grid_step; }
+            set
+            {
+                rx2_spectrum_grid_step = value;
+                DrawBackground();
+            }
+        }
+
         private static int tx_spectrum_grid_max = 30;
         public static int TXSpectrumGridMax
         {
@@ -1258,6 +1295,32 @@ namespace PowerSDR
             }
         }
 
+        private static int _lin_corr = 2;
+        public static int LinCor
+        {
+            get
+            {
+                return _lin_corr;
+            }
+            set
+            {
+                _lin_corr = value;
+            }
+        }
+
+        private static int _linlog_corr = -14;
+        public static int LinLogCor
+        {
+            get
+            {
+                return _linlog_corr;
+            }
+            set
+            {
+                _linlog_corr = value;
+            }
+        }
+
         private static SolidBrush pana_text_brush = new SolidBrush(Color.Khaki);
         private static Font pana_font = new Font("Tahoma", 7F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
@@ -1511,6 +1574,40 @@ namespace PowerSDR
                 }
             }
         }
+
+        /// <summary>
+        /// draws the vertical bar to highlight where a channel is on the panadapter
+        /// </summary>
+        /// <param name="g">Graphics object reference</param>
+        /// <param name="n">Channel object reference</param>
+        /// <param name="left">left side of notch in pixel location</param>
+        /// <param name="right">right side of notch, pixel location</param>
+        /// <param name="top">top of bar</param>
+        /// <param name="H">height of bar</param>
+        /// <param name="on">color for notch on</param>
+        /// <param name="off">color for notch off</param>
+        /// <param name="highlight">highlight color to draw highlights on bar</param>
+        /// <param name="active">true if notches are turned on</param>
+        static void drawChannelBar(Graphics g, Channel chan, int left, int right, int top, int height, Color c, Color h)
+        {
+            int width = right - left;
+
+            // get a purty pen to draw with 
+            Pen p = new Pen(h, 1);
+
+            // shade in the notch
+            g.FillRectangle(new SolidBrush(c), left, top, width, height);
+
+            // draw a left and right line on the side of the rectancle if wide enough
+            if (width > 2)
+            {
+                //g.DrawLine(p, left - 1, top, left - 1, top + height - 1);
+                g.DrawLine(p, left, top, left, top + height - 1);
+                g.DrawLine(p, right, top, right, top + height - 1);
+                //g.DrawLine(p, right+1, top, right+1, top + height - 1);
+            }
+        }
+
         #endregion
 
         #region GDI+
@@ -2467,7 +2564,7 @@ namespace PowerSDR
         unsafe private static void DrawPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
         {
             // draw background
-            g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
+            // g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
 
             bool local_mox = false;
             if (mox && rx == 1 && !tx_on_vfob) local_mox = true;
@@ -2480,10 +2577,35 @@ namespace PowerSDR
             int step_index = 0;
             int freq_step_size = 50;
             int inbetweenies = 5;
-            int grid_step = spectrum_grid_step;
+            int grid_max = 0;
+            int grid_min = 0;
+            int grid_step = 0; // spectrum_grid_step;
+
+            if (local_mox)
+            {
+                grid_max = tx_spectrum_grid_max;
+                grid_min = tx_spectrum_grid_min;
+                grid_step = tx_spectrum_grid_step;
+                g.FillRectangle(tx_display_background_brush, 0, bottom ? H : 0, W, H);
+            }
+            else if (rx == 2)
+            {
+                grid_max = rx2_spectrum_grid_max;
+                grid_min = rx2_spectrum_grid_min;
+                grid_step = rx2_spectrum_grid_step;
+                g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
+            }
+            else
+            {
+                grid_max = spectrum_grid_max;
+                grid_min = spectrum_grid_min;
+                grid_step = spectrum_grid_step;
+                g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
+            }
+
+            int y_range = grid_max - grid_min;
             if (split_display) grid_step *= 2;
 
-            int y_range = spectrum_grid_max - spectrum_grid_min;
             int filter_low, filter_high;
             int center_line_x = (int)(-(double)Low / (High - Low) * W);
             int[] band_edge_list;
@@ -2493,20 +2615,20 @@ namespace PowerSDR
             int[] r_x2 = new int[2];
             double f_center = vfoa_hz;
 
-            if (local_mox) // get filter limits
+            if (local_mox)
             {
                 filter_low = tx_filter_low;
                 filter_high = tx_filter_high;
             }
-            else if (rx == 1)
-            {
-                filter_low = rx1_filter_low;
-                filter_high = rx1_filter_high;
-            }
-            else //if(rx == 2)
+            else if (rx == 2)
             {
                 filter_low = rx2_filter_low;
                 filter_high = rx2_filter_high;
+            }
+            else// if (rx == 1)
+            {
+                filter_low = rx1_filter_low;
+                filter_high = rx1_filter_high;
             }
 
             if ((rx1_dsp_mode == DSPMode.DRM && rx == 1) ||
@@ -2530,7 +2652,7 @@ namespace PowerSDR
             int w_steps = width / freq_step_size;
 
             // calculate vertical step size
-            int h_steps = (spectrum_grid_max - spectrum_grid_min) / grid_step;
+            int h_steps = (grid_max - grid_min) / grid_step;
             double h_pixel_step = (double)H / h_steps;
             int top = (int)((double)grid_step * H / y_range);
 
@@ -2553,7 +2675,7 @@ namespace PowerSDR
                 else
                 {
                     g.FillRectangle(sub_rx_filter_brush,	// draw filter overlay
-                        filter_left_x, top, filter_right_x - filter_left_x, H - top);
+                       filter_left_x, top, filter_right_x - filter_left_x, H - top);
                 }
 
                 // draw Sub RX 0Hz line
@@ -2573,13 +2695,14 @@ namespace PowerSDR
             //if(!(local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)))
             if (!local_mox)// && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
             {
+               // freq -= f_center;
                 double f_vfo = vfoa_hz;
-                double f_low = f_vfo + filter_low;
-                double f_high = f_vfo + filter_high;
+                double f_low = vfoa_hz + filter_low;
+                double f_high = vfoa_hz + filter_high;
 
-                f_vfo -= f_center;
-                f_low -= f_center;
-                f_high -= f_center;
+                f_vfo -= vfoa_hz;
+                f_low -= vfoa_hz;
+                f_high -= vfoa_hz;
                 r_x0[0] = (int)Math.Round((f_vfo - Low) / width * W);
                 r_x1[0] = (int)Math.Round((f_low - Low) / width * W);
                 r_x2[0] = (int)Math.Round((f_high - Low) / width * W);
@@ -2612,12 +2735,34 @@ namespace PowerSDR
                 {
                     g.FillRectangle(display_filter_brush, r_x1[0], top, r_x2[0] - r_x1[0], H - top);
 
-                    //g.FillRectangle(display_filter_brush,	// draw filter overlay
-                    //	filter_left_x, top, filter_right_x - filter_left_x, H - top);
+                  //  g.FillRectangle(display_filter_brush,	// draw filter overlay
+                   // 	filter_left_x, top, filter_right_x - filter_left_x, H - top);
                 }
             }
 
-            if (!local_mox && draw_tx_filter &&
+            if (local_mox && (rx1_dsp_mode != DSPMode.CWL && rx1_dsp_mode != DSPMode.CWU))
+            {
+                // get filter screen coordinates
+                int filter_left_x = (int)((float)(filter_low - Low) / (High - Low) * W);
+                int filter_right_x = (int)((float)(filter_high - Low) / (High - Low) * W);
+
+                // make the filter display at least one pixel wide.
+                if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
+
+                // draw tx filter
+                if (bottom)
+                {
+                    g.FillRectangle(tx_filter_brush,	// draw filter overlay
+                        filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top);
+                }
+                else
+                {
+                      g.FillRectangle(tx_filter_brush,	// draw filter overlay
+                        filter_left_x, top, filter_right_x - filter_left_x, H - top);
+                }
+            }
+
+            if (!mox && draw_tx_filter &&
                 (rx1_dsp_mode != DSPMode.CWL && rx1_dsp_mode != DSPMode.CWU))
             {
                 // get tx filter limits
@@ -2667,7 +2812,7 @@ namespace PowerSDR
                 }
             }
 
-            if (!local_mox && draw_tx_cw_freq &&
+            if (!local_mox && !tx_on_vfob && draw_tx_cw_freq &&
                 (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
             {
                 int pitch = cw_pitch;
@@ -2680,11 +2825,11 @@ namespace PowerSDR
                 else
                     cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
 
-                     g.DrawLine(tx_filter_pen, cw_line_x, top, cw_line_x, H);
-                    g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
+                g.DrawLine(tx_filter_pen, cw_line_x, top, cw_line_x, H);
+                g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
             }
 
-            if (!local_mox && draw_tx_cw_freq &&
+            if (!local_mox && tx_on_vfob && draw_tx_cw_freq &&
                 (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU))
             {
                 int pitch = cw_pitch;
@@ -2697,96 +2842,99 @@ namespace PowerSDR
                 else
                     cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
 
-                     g.DrawLine(tx_filter_pen, cw_line_x, H + top, cw_line_x, H + H);
-                    g.DrawLine(tx_filter_pen, cw_line_x + 1, H + top, cw_line_x + 1, H + H);
-                
-             }
-#if (false)
+                g.DrawLine(tx_filter_pen, cw_line_x, H + top, cw_line_x, H + H);
+                g.DrawLine(tx_filter_pen, cw_line_x + 1, H + top, cw_line_x + 1, H + H);
+
+            }
+
             // draw 60m channels if in view
-            foreach (Channel c in channels_60m)
+            if (console.CurrentRegion == FRSRegion.US)
             {
-                long rf_freq = vfoa_hz;
-                int rit = rit_hz;
-                if (local_mox) rit = 0;
-
-                if (bottom)
+                foreach (Channel c in Console.Channels60m)
                 {
-                    rf_freq = vfob_hz;
-                }
+                    long rf_freq = vfoa_hz;
+                    int rit = rit_hz;
+                    if (local_mox) rit = 0;
 
-                if (c.InBW((rf_freq + Low) * 1e-6, (rf_freq + High) * 1e-6)) // is channel visible?
-                {
-                    bool on_channel = console.RX1IsOn60mChannel(c); // only true if you are on channel and are in an acceptable mode
-                    if (bottom) on_channel = console.RX2IsOn60mChannel(c);
-
-                    DSPMode mode = rx1_dsp_mode;
-                    if (bottom) mode = rx2_dsp_mode;
-
-                    switch (mode)
-                    {
-                        case DSPMode.USB:
-                        case DSPMode.DIGU:
-                        case DSPMode.CWL:
-                        case DSPMode.CWU:
-                            break;
-                        default:
-                            on_channel = false; // make sure other modes do not look as if they could transmit
-                            break;
-                    }
-
-                    // offset for CW Pitch to align display
                     if (bottom)
                     {
-                        switch (rx2_dsp_mode)
+                        rf_freq = vfob_hz;
+                    }
+
+                    if (c.InBW((rf_freq + Low) * 1e-6, (rf_freq + High) * 1e-6)) // is channel visible?
+                    {
+                        bool on_channel = console.RX1IsOn60mChannel(c); // only true if you are on channel and are in an acceptable mode
+                        if (bottom) on_channel = console.RX2IsOn60mChannel(c);
+
+                        DSPMode mode = rx1_dsp_mode;
+                        if (bottom) mode = rx2_dsp_mode;
+
+                        switch (mode)
                         {
-                            case (DSPMode.CWL):
-                                rf_freq += cw_pitch;
+                            case DSPMode.USB:
+                            case DSPMode.DIGU:
+                            case DSPMode.CWL:
+                            case DSPMode.CWU:
                                 break;
-                            case (DSPMode.CWU):
-                                rf_freq -= cw_pitch;
+                            default:
+                                on_channel = false; // make sure other modes do not look as if they could transmit
                                 break;
                         }
-                    }
-                    else
-                    {
-                        switch (rx1_dsp_mode)
+
+                        // offset for CW Pitch to align display
+                        if (bottom)
                         {
-                            case (DSPMode.CWL):
-                                rf_freq += cw_pitch;
-                                break;
-                            case (DSPMode.CWU):
-                                rf_freq -= cw_pitch;
-                                break;
+                            switch (rx2_dsp_mode)
+                            {
+                                case (DSPMode.CWL):
+                                    rf_freq += cw_pitch;
+                                    break;
+                                case (DSPMode.CWU):
+                                    rf_freq -= cw_pitch;
+                                    break;
+                            }
                         }
+                        else
+                        {
+                            switch (rx1_dsp_mode)
+                            {
+                                case (DSPMode.CWL):
+                                    rf_freq += cw_pitch;
+                                    break;
+                                case (DSPMode.CWU):
+                                    rf_freq -= cw_pitch;
+                                    break;
+                            }
+                        }
+
+                        int chan_left_x = (int)((float)(c.Freq * 1e6 - rf_freq - c.BW / 2 - Low - rit) / (High - Low) * W);
+                        int chan_right_x = (int)((float)(c.Freq * 1e6 - rf_freq + c.BW / 2 - Low - rit) / (High - Low) * W);
+
+                        if (chan_right_x == chan_left_x)
+                            chan_right_x = chan_left_x + 1;
+
+                        // decide colors to draw notch
+                        Color c1 = channel_background_off;
+                        Color c2 = channel_foreground;
+
+                        if (on_channel)
+                        {
+                            c1 = channel_background_on;
+                        }
+
+                        if (bottom)
+                            drawChannelBar(g, c, chan_left_x, chan_right_x, H + top, H - top, c1, c2);
+                        else
+                            drawChannelBar(g, c, chan_left_x, chan_right_x, top, H - top, c1, c2);
+
+                        //if (bottom)
+                        //    drawNotchStatus(g, n, (notch_left_x + notch_right_x) / 2, H + top + 75, W, H);
+                        //else
+                        //    drawNotchStatus(g, n, (notch_left_x + notch_right_x) / 2, top + 75, W, H);
                     }
-
-                    int chan_left_x = (int)((float)(c.Freq * 1e6 - rf_freq - c.BW / 2 - Low - rit) / (High - Low) * W);
-                    int chan_right_x = (int)((float)(c.Freq * 1e6 - rf_freq + c.BW / 2 - Low - rit) / (High - Low) * W);
-
-                    if (chan_right_x == chan_left_x)
-                        chan_right_x = chan_left_x + 1;
-
-                    // decide colors to draw notch
-                    Color c1 = channel_background_off;
-                    Color c2 = channel_foreground;
-
-                    if (on_channel)
-                    {
-                        c1 = channel_background_on;
-                    }
-
-                    if (bottom)
-                        drawChannelBar(g, c, chan_left_x, chan_right_x, H + top, H - top, c1, c2);
-                    else
-                        drawChannelBar(g, c, chan_left_x, chan_right_x, top, H - top, c1, c2);
-
-                    //if (bottom)
-                    //    drawNotchStatus(g, n, (notch_left_x + notch_right_x) / 2, H + top + 75, W, H);
-                    //else
-                    //    drawNotchStatus(g, n, (notch_left_x + notch_right_x) / 2, top + 75, W, H);
                 }
             }
-#endif 
+
             // draw notches if in RX
             if (!local_mox)
             {
@@ -2997,9 +3145,9 @@ namespace PowerSDR
                 else
                     cw_line_x1 = (int)((float)(pitch - Low + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
 
-                    g.DrawLine(cw_zero_pen, cw_line_x1, top, cw_line_x1, H);
-                    g.DrawLine(tx_filter_pen, cw_line_x1 + 1, top, cw_line_x1 + 1, H);
-                
+                g.DrawLine(cw_zero_pen, cw_line_x1, top, cw_line_x1, H);
+                g.DrawLine(tx_filter_pen, cw_line_x1 + 1, top, cw_line_x1 + 1, H);
+
             }
 
             if (!local_mox && show_cwzero_line &&
@@ -3015,33 +3163,68 @@ namespace PowerSDR
                 else
                     cw_line_x1 = (int)((float)(pitch - Low + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
 
-                    g.DrawLine(tx_filter_pen, cw_line_x1, H + top, cw_line_x1, H + H);
-                    g.DrawLine(tx_filter_pen, cw_line_x1 + 1, H + top, cw_line_x1 + 1, H + H);
-              }
+                g.DrawLine(tx_filter_pen, cw_line_x1, H + top, cw_line_x1, H + H);
+                g.DrawLine(tx_filter_pen, cw_line_x1 + 1, H + top, cw_line_x1 + 1, H + H);
+            }
 
             // Draw 0Hz vertical line if visible
             if (center_line_x >= 0 && center_line_x <= W)
             {
                 if (bottom)
                 {
-                    //g.DrawLine(grid_zero_pen, center_line_x, H + top, center_line_x, H + H);
-                    // g.DrawLine(grid_zero_pen, center_line_x + 1, H + top, center_line_x + 1, H + H);
-                    g.DrawLine(grid_zero_pen, r_x0[1], H + top, r_x0[1], H + H);
-                    g.DrawLine(grid_zero_pen, r_x0[1] + 1, H + top, r_x0[1] + 1, H + H);
+                    if (local_mox)
+                    {
+                        g.DrawLine(tx_grid_zero_pen, center_line_x, H + top, center_line_x, H + H);
+                        g.DrawLine(tx_grid_zero_pen, center_line_x + 1, H + top, center_line_x + 1, H + H);
+                    }
+                    else
+                    {
+                        //g.DrawLine(grid_zero_pen, center_line_x, H + top, center_line_x, H + H);
+                        // g.DrawLine(grid_zero_pen, center_line_x + 1, H + top, center_line_x + 1, H + H);
+                        g.DrawLine(grid_zero_pen, r_x0[1], H + top, r_x0[1], H + H);
+                        g.DrawLine(grid_zero_pen, r_x0[1] + 1, H + top, r_x0[1] + 1, H + H);
+                    }
                 }
                 else
                 {
-                    // g.DrawLine(grid_zero_pen, center_line_x, top, center_line_x, H);
-                    // g.DrawLine(grid_zero_pen, center_line_x + 1, top, center_line_x + 1, H);
-                    g.DrawLine(grid_zero_pen, r_x0[0], top, r_x0[0], H);
-                    g.DrawLine(grid_zero_pen, r_x0[0] + 1, top, r_x0[0] + 1, H);
+                    if (local_mox)
+                    {
+                        g.DrawLine(tx_grid_zero_pen, center_line_x, top, center_line_x, H);
+                        g.DrawLine(tx_grid_zero_pen, center_line_x + 1, top, center_line_x + 1, H);
+                    }
+                    else
+                    {
+                        // g.DrawLine(grid_zero_pen, center_line_x, top, center_line_x, H);
+                        // g.DrawLine(grid_zero_pen, center_line_x + 1, top, center_line_x + 1, H);
+                        g.DrawLine(grid_zero_pen, r_x0[0], top, r_x0[0], H);
+                        g.DrawLine(grid_zero_pen, r_x0[0] + 1, top, r_x0[0] + 1, H);
+                    }
                 }
             }
 
             if (show_freq_offset)
             {
-                if (bottom) g.DrawString("0", font9, grid_zero_pen.Brush, center_line_x - 5, H + (float)Math.Floor(H * .01));
-                else g.DrawString("0", font9, grid_zero_pen.Brush, center_line_x - 5, (float)Math.Floor(H * .01));
+                if (bottom)
+                {
+                    if (local_mox)
+                    {
+                        g.DrawString("0", font9, tx_grid_zero_pen.Brush, center_line_x - 5, H + (float)Math.Floor(H * .01));
+                    }
+                    else
+                    {
+                        g.DrawString("0", font9, grid_zero_pen.Brush, center_line_x - 5, H + (float)Math.Floor(H * .01));
+                    }
+                }
+                else
+                {
+                    if (local_mox)
+                    {
+                        g.DrawString("0", font9, tx_grid_zero_pen.Brush, center_line_x - 5, (float)Math.Floor(H * .01));
+                    }
+                    {
+                        g.DrawString("0", font9, grid_zero_pen.Brush, center_line_x - 5, (float)Math.Floor(H * .01));
+                    }
+                }
             }
 
             double vfo;
@@ -3067,7 +3250,7 @@ namespace PowerSDR
                     } */
             if (rx == 1)
             {
-                if (local_mox && !tx_on_vfob)
+                if (local_mox)
                 {
                     vfo = split_enabled ? vfoa_sub_hz : vfoa_hz;
                     vfo += xit_hz;
@@ -3076,12 +3259,11 @@ namespace PowerSDR
             }
             else //if(rx==2)
             {
-                if (local_mox && tx_on_vfob)
-                    vfo = vfob_hz + xit_hz;
+                if (local_mox) vfo = vfob_hz + xit_hz;
                 else vfo = vfob_hz + rit_hz;
             }
 
-               if (!bottom)
+            if (!bottom)
             {
                 switch (rx1_dsp_mode)
                 {
@@ -3133,17 +3315,26 @@ namespace PowerSDR
                         case FRSRegion.LAST:
                             if (!show_freq_offset)
                             {
-                                if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
-                                else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
+                                if (bottom) 
+                                    g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else 
+                                    g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                                 label = actual_fgrid.ToString("f3");
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                 else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                                if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
-
+                                if (bottom)
+                                {
+                                    if (local_mox) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                    else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                }
+                                else
+                                {
+                                    if (local_mox) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                                    else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                                }
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((Low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - Low) / width * W));
                                 float scale = (float)(x_2 - vgrid) / inbetweenies;
@@ -3151,8 +3342,16 @@ namespace PowerSDR
                                 for (int j = 1; j < inbetweenies; j++)
                                 {
                                     float x3 = (float)vgrid + (j * scale);
-                                    if (bottom) g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
-                                    else g.DrawLine(grid_pen_inb, x3, top, x3, H);
+                                    if (bottom)
+                                    {
+                                        if (local_mox) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H); 
+                                        else g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
+                                    }
+                                    else
+                                    {
+                                        if (local_mox) g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                        else g.DrawLine(grid_pen_inb, x3, top, x3, H);
+                                    }
                                 }
                                 break;
                             }
@@ -3167,8 +3366,8 @@ namespace PowerSDR
                                          actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
                                          actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
                                          actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
-                                         actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
-                                         actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                                         actual_fgrid == 50.0 || actual_fgrid == 54.0 ||
+                                         actual_fgrid == 144.0 || actual_fgrid == 148.0)
                             {
 
                                 goto case FRSRegion.LAST;
@@ -3206,7 +3405,7 @@ namespace PowerSDR
                                 goto case FRSRegion.LAST;
                             }
                             else goto default;
-                        
+
                         case FRSRegion.Europe:
                             if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
@@ -3234,7 +3433,7 @@ namespace PowerSDR
                                 actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
                                 actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
                                 actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
-                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                                actual_fgrid == 50.0 || actual_fgrid == 52.0)
                             {
                                 goto case FRSRegion.LAST;
                             }
@@ -3317,9 +3516,16 @@ namespace PowerSDR
                             //draw vertical in between lines
                             if (grid_control)
                             {
-                                if (bottom) g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
-                                else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
-
+                                if (bottom) 
+                                {
+                                    if (local_mox) g.DrawLine(tx_vgrid_pen, vgrid, H + top, vgrid, H + H);
+                                    else g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
+                            } 
+                                else 
+                                {
+                                    if (local_mox) g.DrawLine(tx_vgrid_pen, vgrid, top, vgrid, H);
+                                    else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
+                            }
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((Low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - Low) / width * W));
                                 float scale = (float)(x_2 - vgrid) / inbetweenies;
@@ -3327,8 +3533,16 @@ namespace PowerSDR
                                 for (int j = 1; j < inbetweenies; j++)
                                 {
                                     float x3 = (float)vgrid + (j * scale);
-                                    if (bottom) g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
-                                    else g.DrawLine(grid_pen_inb, x3, top, x3, H);
+                                    if (bottom)
+                                    {
+                                        if (local_mox) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                        else g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
+                                    }
+                                    else
+                                    {
+                                        if (local_mox) g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                        else g.DrawLine(grid_pen_inb, x3, top, x3, H);
+                                    }
                                 }
                             }
 
@@ -3360,19 +3574,34 @@ namespace PowerSDR
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length) * 4.1) - 14;
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length) * 4.1) - 11;
                                 else offsetL = (int)((label.Length) * 4.1) - 8;
+                            }                                
+                               
+                       if (bottom)
+                            {
+                                if (local_mox) g.DrawString(label, font9, grid_tx_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
                             }
-
-                            if (bottom) g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                            else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                            else
+                            {
+                                if (local_mox) g.DrawString(label, font9, grid_tx_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                            } 
                             break;
                     }
                 }
                 else
                 {
                     vgrid = Convert.ToInt32((double)-(fgrid - Low) / (Low - High) * W);	//wa6ahl
-                    if (bottom) g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
-                    else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
-
+                    if (bottom)
+                    {
+                        if (local_mox) g.DrawLine(tx_vgrid_pen, vgrid, H + top, vgrid, H + H);
+                        else g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
+                    }
+                    else
+                    {
+                        if (local_mox) g.DrawLine(tx_vgrid_pen, vgrid, top, vgrid, H);
+                        else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
+                    }
                     //double new_fgrid = (vfoa_hz + fgrid) / 1000000;
 
                     label = fgrid.ToString();
@@ -3380,8 +3609,16 @@ namespace PowerSDR
                     offsetR = (int)(label.Length * 4.1);
                     if ((vgrid - offsetL >= 0) && (vgrid + offsetR < W) && (fgrid != 0))
                     {
-                        if (bottom) g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                        else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                        if (bottom)
+                        {
+                            if (local_mox) g.DrawString(label, font9, grid_tx_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                        }
+                        else
+                        {
+                            if (local_mox) g.DrawString(label, font9, grid_tx_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                        }
                     }
                 }
 
@@ -3389,6 +3626,16 @@ namespace PowerSDR
 
             switch (console.CurrentRegion)
             {
+                case FRSRegion.UK:
+                    band_edge_list = new int[]{ 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
+				5258500, 5406500, 7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
+				24890000, 24990000, 28000000, 29700000, 50000000, 52000000, 144000000, 148000000 };
+                    break;
+                case FRSRegion.India:
+                    band_edge_list = new int[]{ 18068000, 18168000, 1810000, 1860000, 3500000, 3900000,
+				7000000, 7200000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
+				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
+                    break;
                 case FRSRegion.Norway:
                     band_edge_list = new int[]{ 5260000, 5410000, 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
 				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
@@ -3400,15 +3647,23 @@ namespace PowerSDR
 				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
                     break;
             }
-
+                     
             for (int i = 0; i < band_edge_list.Length; i++)
             {
                 double band_edge_offset = band_edge_list[i] - vfo;
                 if (band_edge_offset >= Low && band_edge_offset <= High)
                 {
                     int temp_vline = (int)((double)(band_edge_offset - Low) / (High - Low) * W);//wa6ahl
-                    if (bottom) g.DrawLine(band_edge_pen, temp_vline, H + top, temp_vline, H + H);//wa6ahl
-                    else g.DrawLine(band_edge_pen, temp_vline, top, temp_vline, H);//wa6ahl
+                    if (bottom)
+                    {
+                        if (local_mox) g.DrawLine(tx_band_edge_pen, temp_vline, H + top, temp_vline, H + H);
+                        else g.DrawLine(band_edge_pen, temp_vline, H + top, temp_vline, H + H);//wa6ahl                        
+                    }
+                    else
+                    {
+                        if (local_mox) g.DrawLine(tx_band_edge_pen, temp_vline, top, temp_vline, H);                        
+                        else g.DrawLine(band_edge_pen, temp_vline, top, temp_vline, H);//wa6ahl                                               
+                    }
                 }
                 //if(i == 1 && !show_freq_offset) break;
             }
@@ -3419,15 +3674,23 @@ namespace PowerSDR
                 for (int i = 1; i < h_steps; i++)
                 {
                     int xOffset = 0;
-                    int num = spectrum_grid_max - i * grid_step;
-                    int y = (int)((double)(spectrum_grid_max - num) * H / y_range);
-                    if (bottom) g.DrawLine(hgrid_pen, 0, H + y, W, H + y);
-                    else g.DrawLine(hgrid_pen, 0, y, W, y);
+                    int num = grid_max - i * grid_step;
+                    int y = (int)((double)(grid_max - num) * H / y_range);
 
+                    if (bottom)
+                    {
+                        if (local_mox) g.DrawLine(tx_hgrid_pen, 0, H + y, W, H + y);                        
+                        else g.DrawLine(hgrid_pen, 0, H + y, W, H + y);                        
+                    }
+                    else
+                    {
+                        if (local_mox) g.DrawLine(tx_hgrid_pen, 0, y, W, y);                        
+                        else g.DrawLine(hgrid_pen, 0, y, W, y);                        
+                    }
                     // Draw horizontal line labels
                     if (i != 1) // avoid intersecting vertical and horizontal labels
                     {
-                        num = spectrum_grid_max - i * grid_step;
+                        num = grid_max - i * grid_step;
                         string label = num.ToString();
                         if (label.Length == 3)
                             xOffset = (int)g.MeasureString("-", font9).Width - 2;
@@ -3459,8 +3722,21 @@ namespace PowerSDR
                         y -= 8;
                         if (y + 9 < H)
                         {
-                            if (bottom) g.DrawString(label, font9, grid_text_brush, x, H + y);
-                            else g.DrawString(label, font9, grid_text_brush, x, y);
+                            if (bottom)
+                            {
+                                if (local_mox) 
+                                    g.DrawString(label, font9, grid_tx_text_brush, x, H + y);
+                                 else 
+                                    g.DrawString(label, font9, grid_text_brush, x, H + y);
+                            }
+
+                            else
+                            {
+                                if (local_mox) 
+                                    g.DrawString(label, font9, grid_tx_text_brush, x, y); 
+                                else 
+                                    g.DrawString(label, font9, grid_text_brush, x, y);
+                            }
                         }
                     }
                 }
@@ -3536,7 +3812,7 @@ namespace PowerSDR
                 }
             }
 
-            if (console.PowerOn && !local_mox)
+            if (console.PowerOn)
             {
                 // get filter screen coordinates
                 int filter_left_x = (int)((float)(filter_low - Low) / (High - Low) * W);
@@ -3603,7 +3879,7 @@ namespace PowerSDR
                     }
                 }
 
-                if (rx == 1)
+                if (rx == 1 && !local_mox)
                 {
                     float rx1_cal_offset = 0.0f;
                     switch (console.RX1AGCMode)
@@ -3639,7 +3915,7 @@ namespace PowerSDR
                         default:
                             rx1_agcknee_y_value = dBToPixel((float)rx1_thresh + rx1_cal_offset);
                             rx1_agc_hang_y = dBToPixel((float)rx1_hang + rx1_cal_offset);
-                            if (console.RX2Enabled)
+                            if (console.RX2Enabled || split_display)
                                 rx1_agc_hang_y = rx1_agc_hang_y / 2;
                             //show hang line
                             if (display_agc_hang_line && console.RX1AGCMode != AGCMode.MED && console.RX1AGCMode != AGCMode.FAST)
@@ -3658,7 +3934,7 @@ namespace PowerSDR
                             break;
                     }
 
-                    if (console.RX2Enabled)
+                    if (console.RX2Enabled || split_display)
                         rx1_agcknee_y_value = rx1_agcknee_y_value / 2;
                     // show agc line
                     if (show_agc)
@@ -3674,8 +3950,7 @@ namespace PowerSDR
                         }
                     }
                 }
-                else
-                //if (rx == 2)
+                else if (rx == 2 && !local_mox)
                 {
                     float rx2_cal_offset = 0.0f;
                     double rx2_thresh;
@@ -3710,14 +3985,14 @@ namespace PowerSDR
                     switch (console.RX2AGCMode)
                     {
                         case AGCMode.FIXD:
-                            rx2_agcknee_y_value = dBToPixel(-(float)rx2_agc_fixed_gain + rx2_cal_offset);
+                            rx2_agcknee_y_value = dBToRX2Pixel(-(float)rx2_agc_fixed_gain + rx2_cal_offset);
                             // Debug.WriteLine("agcknee_y_D:" + agcknee_y_value);
                             rx2_agc = "-F";
                             break;
                         default:
-                            rx2_agcknee_y_value = dBToPixel((float)rx2_thresh + rx2_cal_offset);
-                            rx2_agc_hang_y = dBToPixel((float)rx2_hang + rx2_cal_offset);
-                            rx2_agc_hang_y = rx2_agc_hang_y / 2;
+                            rx2_agcknee_y_value = dBToRX2Pixel((float)rx2_thresh + rx2_cal_offset);
+                            rx2_agc_hang_y = dBToRX2Pixel((float)rx2_hang + rx2_cal_offset);
+                            rx2_agc_hang_y *= 0.5f;
                             if (display_rx2_hang_line && console.RX2AGCMode != AGCMode.MED && console.RX2AGCMode != AGCMode.FAST)
                             {
                                 AGCRX2Hang.Height = 8; AGCRX2Hang.Width = 8; AGCRX2Hang.X = 40;
@@ -3734,7 +4009,7 @@ namespace PowerSDR
                             break;
                     }
 
-                    rx2_agcknee_y_value = rx2_agcknee_y_value / 2;
+                    rx2_agcknee_y_value *= 0.5f;
                     if (display_rx2_gain_line)
                     {
                         AGCRX2Knee.Height = 8; AGCRX2Knee.Width = 8; AGCRX2Knee.X = 40;
@@ -3755,6 +4030,11 @@ namespace PowerSDR
         private static float dBToPixel(float dB)
         {
             return (float)(spectrum_grid_max - dB) * Target.Height / (spectrum_grid_max - spectrum_grid_min);
+        }
+
+        private static float dBToRX2Pixel(float dB)
+        {
+            return (float)(rx2_spectrum_grid_max - dB) * Target.Height / (rx2_spectrum_grid_max - rx2_spectrum_grid_min);
         }
 
         private static float PixelToDb(float y)
@@ -4724,7 +5004,7 @@ namespace PowerSDR
                             }
                             else
                                 goto default;
-                        
+
                         case FRSRegion.Spain:
                             if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
@@ -4999,9 +5279,15 @@ namespace PowerSDR
                                     else if (actual_fgrid < 100.0) offsetL = (int)((label.Length) * 4.1) - 11;
                                     else offsetL = (int)((label.Length) * 4.1) - 8;
                                 }
-
-                                if (bottom) g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                                switch (current_display_mode)  //w3sz added switch for waterfall frequency labels
+                                {
+                                    case DisplayMode.PANAFALL:
+                                        break;
+                                    default:
+                                        if (bottom) g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                        else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                                        break;
+                                }
                                 break;
                             }
                     }
@@ -5545,9 +5831,9 @@ namespace PowerSDR
                 }
                 if (!mox)
                 {
-                  //  if (!bottom) 
-                        max += rx1_display_cal_offset;
-                  //  else max += rx2_display_cal_offset;
+                    //  if (!bottom) 
+                    max += rx1_display_cal_offset;
+                    //  else max += rx2_display_cal_offset;
                 }
                 else
                 {
@@ -5556,7 +5842,7 @@ namespace PowerSDR
 
                 if (!mox)
                 {
-                    if (!bottom) 
+                    if (!bottom)
                         max += (rx1_preamp_offset - alex_preamp_offset);
                     else max += (rx2_preamp_offset);
                 }
@@ -5768,9 +6054,11 @@ namespace PowerSDR
 
                     return true;
                 } */
+
         unsafe static private bool DrawPanadapter(Graphics g, int W, int H, int rx, bool bottom)
         {
             DrawPanadapterGrid(ref g, W, H, rx, bottom);
+
             if (pan_fill)
             {
                 if (points == null || points.Length < W + 2)
@@ -5786,11 +6074,46 @@ namespace PowerSDR
             int start_sample_index = 0;				// index to begin looking at samples
             int Low = rx_display_low;
             int High = rx_display_high;
-            int yRange = spectrum_grid_max - spectrum_grid_min;
+            // int yRange = 0; // spectrum_grid_max - spectrum_grid_min;
             float local_max_y = float.MinValue;
             bool local_mox = false;
+            int grid_max = 0;
+            int grid_min = 0;
+
             if (rx == 1 && !tx_on_vfob && mox) local_mox = true;
             if (rx == 2 && tx_on_vfob && mox) local_mox = true;
+
+            if (rx == 2)
+            {
+                if (local_mox)// && tx_on_vfob)
+                {
+                    grid_max = tx_spectrum_grid_max;
+                    grid_min = tx_spectrum_grid_min;
+                }
+                else
+                {
+                    grid_max = rx2_spectrum_grid_max;
+                    grid_min = rx2_spectrum_grid_min;
+                }
+            }
+            else
+            {
+                if (local_mox) // && !tx_on_vfob)
+                {
+                    grid_max = tx_spectrum_grid_max;
+                    grid_min = tx_spectrum_grid_min;
+                }
+                else
+                {
+                    grid_max = spectrum_grid_max;
+                    grid_min = spectrum_grid_min;
+                }
+            }
+
+            int yRange = grid_max - grid_min;
+            //  if (rx == 2)
+            //   yRange = rx2_spectrum_grid_max - rx2_spectrum_grid_min;
+            //  else yRange = spectrum_grid_max - spectrum_grid_min;
 
             if (rx1_dsp_mode == DSPMode.DRM)
             {
@@ -5803,7 +6126,7 @@ namespace PowerSDR
                 if (local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
                 {
                     for (int i = 0; i < current_display_data.Length; i++)
-                        current_display_data[i] = spectrum_grid_min - rx1_display_cal_offset;
+                        current_display_data[i] = grid_min - rx1_display_cal_offset;
                 }
                 else
                 {
@@ -5821,7 +6144,7 @@ namespace PowerSDR
                 if (local_mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU))
                 {
                     for (int i = 0; i < current_display_data_bottom.Length; i++)
-                        current_display_data_bottom[i] = spectrum_grid_min - rx2_display_cal_offset;
+                        current_display_data_bottom[i] = grid_min - rx2_display_cal_offset;
                 }
                 else
                 {
@@ -5886,8 +6209,16 @@ namespace PowerSDR
                     }
                 }
 
-                if (rx == 1) max += rx1_display_cal_offset;
-                else if (rx == 2) max += rx2_display_cal_offset;
+                if (rx == 1)
+                {
+                    if (local_mox) max += tx_display_cal_offset;
+                    else max += rx1_display_cal_offset;
+                }
+                else if (rx == 2)
+                {
+                    if (local_mox) max += tx_display_cal_offset;
+                    else max += rx2_display_cal_offset;
+                }
 
                 if (!local_mox)
                 {
@@ -5902,7 +6233,7 @@ namespace PowerSDR
                 }
 
                 points[i].X = i;
-                points[i].Y = (int)(Math.Floor((spectrum_grid_max - max) * H / yRange));
+                points[i].Y = (int)(Math.Floor((grid_max - max) * H / yRange));
                 points[i].Y = Math.Min(points[i].Y, H);
                 if (bottom) points[i].Y += H;
             }
@@ -5918,14 +6249,20 @@ namespace PowerSDR
                     points[W].Y += H;
                     points[W + 1].Y += H;
                 }
-                data_line_pen.Color = Color.FromArgb(100, 255, 255, 255);
-                g.FillPolygon(data_line_pen.Brush, points);
+                // data_line_pen.Color = Color.FromArgb(100, 255, 255, 255);
+                if (local_mox) g.FillPolygon(tx_data_line_fpen.Brush, points);
+                else g.FillPolygon(data_line_fpen.Brush, points);
                 points[W] = points[W - 1];
                 points[W + 1] = points[W - 1];
                 data_line_pen.Color = data_line_color;
-                g.DrawLines(data_line_pen, points);
+                if (local_mox) g.DrawLines(tx_data_line_pen, points);
+                else g.DrawLines(data_line_pen, points);
             }
-            else g.DrawLines(data_line_pen, points);
+            else
+            {
+                if (local_mox) g.DrawLines(tx_data_line_pen, points);
+                else g.DrawLines(data_line_pen, points);
+            }
 
 
             // draw notch zoom if enabled
@@ -6095,7 +6432,7 @@ namespace PowerSDR
                         }
 
                         points[i].X = i;
-                        points[i].Y = (int)(Math.Floor((spectrum_grid_max - max) * H / zoom_height / yRange));    //used to be 6
+                        points[i].Y = (int)(Math.Floor((grid_max - max) * H / zoom_height / yRange));    //used to be 6
                         points[i].Y = Math.Min(points[i].Y, H);
                         if (bottom) points[i].Y += H;
                     }
@@ -6620,448 +6957,1106 @@ namespace PowerSDR
             int start_sample_index = 0;				// index to begin looking at samples
             int Low = rx_display_low;
             int High = rx_display_high;
-            int yRange = spectrum_grid_max - spectrum_grid_min;
+            int yRange = 0; // spectrum_grid_max - spectrum_grid_min;
             float local_max_y = float.MinValue;
             bool local_mox = false;
+            if (rx == 2) yRange = rx2_spectrum_grid_max - rx2_spectrum_grid_min;
+            else yRange = spectrum_grid_max - spectrum_grid_min;
             if (rx == 1 && !tx_on_vfob && mox) local_mox = true;
             if (rx == 2 && tx_on_vfob && mox) local_mox = true;
+            float local_min_y_w3sz = float.MaxValue;  //added by w3sz
+            float display_min_w3sz = float.MaxValue; //added by w3sz
+            float display_max_w3sz = float.MinValue; //added by w3sz
+            float min_y_w3sz = float.MaxValue;  //w3sz
             int R = 0, G = 0, B = 0;
 
-            if ((rx1_dsp_mode == DSPMode.DRM && rx == 1) ||
+            if (console.PowerOn)
+            {
+                if ((rx1_dsp_mode == DSPMode.DRM && rx == 1) ||
                 (rx2_dsp_mode == DSPMode.DRM && rx == 2))
-            {
-                Low += 12000;
-                High += 12000;
-            }
-
-            if (rx == 1 && data_ready)
-            {
-                if (local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
                 {
-                    for (int i = 0; i < current_display_data.Length; i++)
-                        current_display_data[i] = spectrum_grid_min - rx1_display_cal_offset;
-                }
-                else
-                {
-                    fixed (void* rptr = &new_display_data[0])
-                    fixed (void* wptr = &current_display_data[0])
-                        Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
-
-                    if (current_model == Model.SOFTROCK40)
-                        console.AdjustDisplayDataForBandEdge(ref current_display_data);
-                }
-                data_ready = false;
-            }
-            else if (rx == 2 && data_ready_bottom)
-            {
-                if (local_mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU))
-                {
-                    for (int i = 0; i < current_display_data_bottom.Length; i++)
-                        current_display_data_bottom[i] = spectrum_grid_min - rx2_display_cal_offset;
-                }
-                else
-                {
-                    fixed (void* rptr = &new_display_data_bottom[0])
-                    fixed (void* wptr = &current_display_data_bottom[0])
-                        Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
-
-                    if (current_model == Model.SOFTROCK40)
-                        console.AdjustDisplayDataForBandEdge(ref current_display_data_bottom);
+                    Low += 12000;
+                    High += 12000;
                 }
 
-                data_ready_bottom = false;
-            }
-
-            if (rx == 1)
-                console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data);
-            else if (rx == 2)
-                console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
-
-            if (rx == 1 && peak_on)
-                UpdateDisplayPeak(rx1_peak_buffer, current_display_data);
-            else if (rx == 2 && rx2_peak_on)
-                UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom);
-
-            int duration = 0;
-            if (rx == 1)
-            {
-                timer_waterfall.Stop();
-                duration = (int)timer_waterfall.DurationMsec;
-            }
-            else if (rx == 2)
-            {
-                timer_waterfall2.Stop();
-                duration = (int)timer_waterfall2.DurationMsec;
-            }
-
-            if ((duration > waterfall_update_period) || (duration < 0))
-            //if (duration > waterfall_update_period)
-            {
-                if (rx == 1) timer_waterfall.Start();
-                else if (rx == 2) timer_waterfall2.Start();
-                num_samples = (High - Low);
-
-                start_sample_index = (BUFFER_SIZE >> 1) + (int)((Low * BUFFER_SIZE) / sample_rate);
-                num_samples = (int)((High - Low) * BUFFER_SIZE / sample_rate);
-                if (start_sample_index < 0) start_sample_index += 4096;
-                if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
-                    num_samples = BUFFER_SIZE - start_sample_index;
-
-                slope = (float)num_samples / (float)W;
-                for (int i = 0; i < W; i++)
+                if (rx == 1 && data_ready)
                 {
-                    float max = float.MinValue;
-                    float dval = i * slope + start_sample_index;
-                    int lindex = (int)Math.Floor(dval);
-                    int rindex = (int)Math.Floor(dval + slope);
-
-                    if (rx == 1)
+                    if (local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
                     {
-                        if (slope <= 1.0 || lindex == rindex)
-                        {
-                            max = current_display_data[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % 4096] * (dval - (float)lindex);
-                        }
-                        else
-                        {
-                            for (int j = lindex; j < rindex; j++)
-                                if (current_display_data[j % 4096] > max) max = current_display_data[j % 4096];
-                        }
-                    }
-                    else if (rx == 2)
-                    {
-                        if (slope <= 1.0 || lindex == rindex)
-                        {
-                            max = current_display_data_bottom[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data_bottom[(lindex + 1) % 4096] * (dval - (float)lindex);
-                        }
-                        else
-                        {
-                            for (int j = lindex; j < rindex; j++)
-                                if (current_display_data_bottom[j % 4096] > max) max = current_display_data_bottom[j % 4096];
-                        }
-                    }
-
-                    if (!local_mox)
-                    {
-                        if (rx == 1) max += rx1_display_cal_offset;
-                        else if (rx == 2) max += rx2_display_cal_offset;
+                        for (int i = 0; i < current_display_data.Length; i++)
+                            current_display_data[i] = -200.0f;
                     }
                     else
                     {
-                        max += tx_display_cal_offset;
-                    }
+                        fixed (void* rptr = &new_display_data[0])
+                        fixed (void* wptr = &current_display_data[0])
+                            Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
 
-                    if (!local_mox)
+                        if (current_model == Model.SOFTROCK40)
+                            console.AdjustDisplayDataForBandEdge(ref current_display_data);
+                    }
+                    data_ready = false;
+                }
+                else if (rx == 2 && data_ready_bottom)
+                {
+                    if (local_mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU))
                     {
-                        if (rx == 1) 
-                            max += (rx1_preamp_offset - alex_preamp_offset);
-                        else if (rx == 2) max += (rx2_preamp_offset);
+                        for (int i = 0; i < current_display_data_bottom.Length; i++)
+                            current_display_data_bottom[i] = -200.0f;
                     }
-
-                    if (max > local_max_y)
+                    else
                     {
-                        local_max_y = max;
-                        max_x = i;
+                        fixed (void* rptr = &new_display_data_bottom[0])
+                        fixed (void* wptr = &current_display_data_bottom[0])
+                            Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
+
+                        if (current_model == Model.SOFTROCK40)
+                            console.AdjustDisplayDataForBandEdge(ref current_display_data_bottom);
                     }
 
-                    waterfall_data[i] = max;
+                    data_ready_bottom = false;
                 }
 
-                max_y = local_max_y;
+                if (rx == 1)
+                    console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data);
+                else if (rx == 2)
+                    console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
 
-                BitmapData bitmapData;
+                if (rx == 1 && peak_on)
+                    UpdateDisplayPeak(rx1_peak_buffer, current_display_data);
+                else if (rx == 2 && rx2_peak_on)
+                    UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom);
+
+                int duration = 0;
                 if (rx == 1)
                 {
-                    bitmapData = waterfall_bmp.LockBits(
-                        new Rectangle(0, 0, waterfall_bmp.Width, waterfall_bmp.Height),
-                        ImageLockMode.ReadWrite,
-                        waterfall_bmp.PixelFormat);
+                    timer_waterfall.Stop();
+                    duration = (int)timer_waterfall.DurationMsec;
                 }
-                else
+                else if (rx == 2)
                 {
-                    bitmapData = waterfall_bmp2.LockBits(
-                        new Rectangle(0, 0, waterfall_bmp2.Width, waterfall_bmp2.Height),
-                        ImageLockMode.ReadWrite,
-                        waterfall_bmp2.PixelFormat);
+                    timer_waterfall2.Stop();
+                    duration = (int)timer_waterfall2.DurationMsec;
                 }
 
-                int pixel_size = 3;
-                byte* row = null;
-
-                // first scroll image
-                int total_size = bitmapData.Stride * bitmapData.Height;		// find buffer size
-                Win32.memcpy(new IntPtr((int)bitmapData.Scan0 + bitmapData.Stride).ToPointer(),
-                    bitmapData.Scan0.ToPointer(),
-                    total_size - bitmapData.Stride);
-
-                row = (byte*)bitmapData.Scan0;
-
-                //int i = 0;
-                switch (color_sheme)
+                if ((duration > waterfall_update_period) || (duration < 0))
+                //if (duration > waterfall_update_period)
                 {
-                    case (ColorSheme.original):
+                    if (rx == 1) timer_waterfall.Start();
+                    else if (rx == 2) timer_waterfall2.Start();
+                    num_samples = (High - Low);
+
+                    start_sample_index = (BUFFER_SIZE >> 1) + (int)((Low * BUFFER_SIZE) / sample_rate);
+                    num_samples = (int)((High - Low) * BUFFER_SIZE / sample_rate);
+                    if (start_sample_index < 0) start_sample_index += 4096;
+                    if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
+                        num_samples = BUFFER_SIZE - start_sample_index;
+
+                    slope = (float)num_samples / (float)W;
+                    for (int i = 0; i < W; i++)
+                    {
+                        float max = float.MinValue;
+                        float dval = i * slope + start_sample_index;
+                        int lindex = (int)Math.Floor(dval);
+                        int rindex = (int)Math.Floor(dval + slope);
+
+                        if (rx == 1)
                         {
-                            // draw new data
-                            for (int i = 0; i < W; i++)	// for each pixel in the new line
+                            if (slope <= 1.0 || lindex == rindex)
                             {
-                                //int R, G, B;		// variables to save Red, Green and Blue component values
-
-                                if (waterfall_data[i] <= waterfall_low_threshold)		// if less than low threshold, just use low color
-                                {
-                                    R = waterfall_low_color.R;
-                                    G = waterfall_low_color.G;
-                                    B = waterfall_low_color.B;
-                                }
-                                else if (waterfall_data[i] >= waterfall_high_threshold)// if more than high threshold, just use high color
-                                {
-                                    R = waterfall_high_color.R;
-                                    G = waterfall_high_color.G;
-                                    B = waterfall_high_color.B;
-                                }
-                                else // use a color between high and low
-                                {
-                                    float percent = (waterfall_data[i] - waterfall_low_threshold) / (waterfall_high_threshold - waterfall_low_threshold);
-                                    if (percent <= 0.5)	// use a gradient between low and mid colors
-                                    {
-                                        percent *= 2;
-
-                                        R = (int)((1 - percent) * waterfall_low_color.R + percent * waterfall_mid_color.R);
-                                        G = (int)((1 - percent) * waterfall_low_color.G + percent * waterfall_mid_color.G);
-                                        B = (int)((1 - percent) * waterfall_low_color.B + percent * waterfall_mid_color.B);
-                                    }
-                                    else				// use a gradient between mid and high colors
-                                    {
-                                        percent = (float)(percent - 0.5) * 2;
-
-                                        R = (int)((1 - percent) * waterfall_mid_color.R + percent * waterfall_high_color.R);
-                                        G = (int)((1 - percent) * waterfall_mid_color.G + percent * waterfall_high_color.G);
-                                        B = (int)((1 - percent) * waterfall_mid_color.B + percent * waterfall_high_color.B);
-                                    }
-                                }
-                                // set pixel color
-                                row[i * pixel_size + 0] = (byte)B;	// set color in memory
-                                row[i * pixel_size + 1] = (byte)G;
-                                row[i * pixel_size + 2] = (byte)R;
+                                max = current_display_data[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % 4096] * (dval - (float)lindex);
+                            }
+                            else
+                            {
+                                for (int j = lindex; j < rindex; j++)
+                                    if (current_display_data[j % 4096] > max) max = current_display_data[j % 4096];
                             }
                         }
-                        //waterfall_data[i] = (float)i/W*(waterfall_high_threshold - waterfall_low_threshold) + waterfall_low_threshold;
-                        break;
-
-                    case (ColorSheme.enhanced):
+                        else if (rx == 2)
                         {
-                            // draw new data
-                            for (int i = 0; i < W; i++)	// for each pixel in the new line
+                            if (slope <= 1.0 || lindex == rindex)
                             {
-                                if (waterfall_data[i] <= waterfall_low_threshold)
-                                {
-                                    R = waterfall_low_color.R;
-                                    G = waterfall_low_color.G;
-                                    B = waterfall_low_color.B;
-                                }
-                                else if (waterfall_data[i] >= waterfall_high_threshold)
-                                {
-                                    R = 192;
-                                    G = 124;
-                                    B = 255;
-                                }
-                                else // value is between low and high
-                                {
-                                    float range = waterfall_high_threshold - waterfall_low_threshold;
-                                    float offset = waterfall_data[i] - waterfall_low_threshold;
-                                    float overall_percent = offset / range; // value from 0.0 to 1.0 where 1.0 is high and 0.0 is low.
+                                max = current_display_data_bottom[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data_bottom[(lindex + 1) % 4096] * (dval - (float)lindex);
+                            }
+                            else
+                            {
+                                for (int j = lindex; j < rindex; j++)
+                                    if (current_display_data_bottom[j % 4096] > max) max = current_display_data_bottom[j % 4096];
+                            }
+                        }
 
-                                    if (overall_percent < (float)2 / 9) // background to blue
+                        if (!local_mox)
+                        {
+                            if (rx == 1) max += rx1_display_cal_offset;
+                            else if (rx == 2) max += rx2_display_cal_offset;
+                        }
+                        else
+                        {
+                            max += tx_display_cal_offset;
+                        }
+
+                        if (!local_mox)
+                        {
+                            if (rx == 1)
+                                max += (rx1_preamp_offset - alex_preamp_offset);
+                            else if (rx == 2) max += (rx2_preamp_offset);
+                        }
+
+                        if (max > local_max_y)
+                        {
+                            local_max_y = max;
+                            max_x = i;
+                        }
+
+                        //below added by w3sz
+                        if (max < local_min_y_w3sz)
+                        {
+                            local_min_y_w3sz = max;
+                        }
+                        //end of addition by w3sz
+
+                        waterfall_data[i] = max;
+                    }
+
+                    max_y = local_max_y;
+                    min_y_w3sz = local_min_y_w3sz;
+
+                    BitmapData bitmapData;
+                    if (rx == 1)
+                    {
+                        switch (current_display_mode)   //w3sz added switch for panafall waterfall height
+                        {
+
+                            case DisplayMode.PANAFALL:
+                                bitmapData = waterfall_bmp.LockBits(
+                                    new Rectangle(0, 0, waterfall_bmp.Width, waterfall_bmp.Height / 2),
+                                    ImageLockMode.ReadWrite,
+                                    waterfall_bmp.PixelFormat);// /2 added by w3sz for panafall
+                                break;
+                            default:
+                                bitmapData = waterfall_bmp.LockBits(
+                                    new Rectangle(0, 0, waterfall_bmp.Width, waterfall_bmp.Height),
+                                    ImageLockMode.ReadWrite,
+                                                waterfall_bmp.PixelFormat);// /2 added by w3sz for panafall
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (current_display_mode)  //w3sz added switch for panafall waterfall height
+                        {
+
+                            case DisplayMode.PANAFALL:
+                                bitmapData = waterfall_bmp2.LockBits(
+                                                new Rectangle(0, 0, waterfall_bmp2.Width, waterfall_bmp2.Height / 2),
+                                    ImageLockMode.ReadWrite,
+                                                waterfall_bmp2.PixelFormat); // /2 added by w3sz for panafall
+                                break;
+                            default:
+                                bitmapData = waterfall_bmp2.LockBits(
+                                    new Rectangle(0, 0, waterfall_bmp2.Width, waterfall_bmp2.Height / 2),
+                                    ImageLockMode.ReadWrite,
+                                    waterfall_bmp2.PixelFormat); // /2 added by w3sz for panafall
+                                break;
+                        }
+                    }
+
+                    int pixel_size = 3;
+                    byte* row = null;
+
+                    // first scroll image
+                    int total_size = bitmapData.Stride * bitmapData.Height;		// find buffer size
+                    Win32.memcpy(new IntPtr((int)bitmapData.Scan0 + bitmapData.Stride).ToPointer(),
+                        bitmapData.Scan0.ToPointer(),
+                        total_size - bitmapData.Stride);
+
+                    row = (byte*)bitmapData.Scan0;
+
+                    //int i = 0;
+                    switch (color_sheme)
+                    {
+                        case (ColorSheme.original):
+                            {
+                                // draw new data
+                                for (int i = 0; i < W; i++)	// for each pixel in the new line
+                                {
+                                    //int R, G, B;		// variables to save Red, Green and Blue component values
+
+                                    if (waterfall_data[i] <= waterfall_low_threshold)		// if less than low threshold, just use low color
                                     {
-                                        float local_percent = overall_percent / ((float)2 / 9);
-                                        R = (int)((1.0 - local_percent) * waterfall_low_color.R);
-                                        G = (int)((1.0 - local_percent) * waterfall_low_color.G);
-                                        B = (int)(waterfall_low_color.B + local_percent * (255 - waterfall_low_color.B));
+                                        R = waterfall_low_color.R;
+                                        G = waterfall_low_color.G;
+                                        B = waterfall_low_color.B;
                                     }
-                                    else if (overall_percent < (float)3 / 9) // blue to blue-green
+                                    else if (waterfall_data[i] >= waterfall_high_threshold)// if more than high threshold, just use high color
                                     {
-                                        float local_percent = (overall_percent - (float)2 / 9) / ((float)1 / 9);
-                                        R = 0;
-                                        G = (int)(local_percent * 255);
+                                        R = waterfall_high_color.R;
+                                        G = waterfall_high_color.G;
+                                        B = waterfall_high_color.B;
+                                    }
+                                    else // use a color between high and low
+                                    {
+                                        float percent = (waterfall_data[i] - waterfall_low_threshold) / (waterfall_high_threshold - waterfall_low_threshold);
+                                        if (percent <= 0.5)	// use a gradient between low and mid colors
+                                        {
+                                            percent *= 2;
+
+                                            R = (int)((1 - percent) * waterfall_low_color.R + percent * waterfall_mid_color.R);
+                                            G = (int)((1 - percent) * waterfall_low_color.G + percent * waterfall_mid_color.G);
+                                            B = (int)((1 - percent) * waterfall_low_color.B + percent * waterfall_mid_color.B);
+                                        }
+                                        else				// use a gradient between mid and high colors
+                                        {
+                                            percent = (float)(percent - 0.5) * 2;
+
+                                            R = (int)((1 - percent) * waterfall_mid_color.R + percent * waterfall_high_color.R);
+                                            G = (int)((1 - percent) * waterfall_mid_color.G + percent * waterfall_high_color.G);
+                                            B = (int)((1 - percent) * waterfall_mid_color.B + percent * waterfall_high_color.B);
+                                        }
+                                    }
+                                    // set pixel color
+                                    row[i * pixel_size + 0] = (byte)B;	// set color in memory
+                                    row[i * pixel_size + 1] = (byte)G;
+                                    row[i * pixel_size + 2] = (byte)R;
+                                }
+                            }
+                            //waterfall_data[i] = (float)i/W*(waterfall_high_threshold - waterfall_low_threshold) + waterfall_low_threshold;
+                            break;
+
+                        case (ColorSheme.enhanced):
+                            {
+                                // draw new data
+                                for (int i = 0; i < W; i++)	// for each pixel in the new line
+                                {
+                                    if (waterfall_data[i] <= waterfall_low_threshold)
+                                    {
+                                        R = waterfall_low_color.R;
+                                        G = waterfall_low_color.G;
+                                        B = waterfall_low_color.B;
+                                    }
+                                    else if (waterfall_data[i] >= waterfall_high_threshold)
+                                    {
+                                        R = 192;
+                                        G = 124;
                                         B = 255;
                                     }
-                                    else if (overall_percent < (float)4 / 9) // blue-green to green
+                                    else // value is between low and high
                                     {
-                                        float local_percent = (overall_percent - (float)3 / 9) / ((float)1 / 9);
+                                        float range = waterfall_high_threshold - waterfall_low_threshold;
+                                        float offset = waterfall_data[i] - waterfall_low_threshold;
+                                        float overall_percent = offset / range; // value from 0.0 to 1.0 where 1.0 is high and 0.0 is low.
+
+                                        if (overall_percent < (float)2 / 9) // background to blue
+                                        {
+                                            float local_percent = overall_percent / ((float)2 / 9);
+                                            R = (int)((1.0 - local_percent) * waterfall_low_color.R);
+                                            G = (int)((1.0 - local_percent) * waterfall_low_color.G);
+                                            B = (int)(waterfall_low_color.B + local_percent * (255 - waterfall_low_color.B));
+                                        }
+                                        else if (overall_percent < (float)3 / 9) // blue to blue-green
+                                        {
+                                            float local_percent = (overall_percent - (float)2 / 9) / ((float)1 / 9);
+                                            R = 0;
+                                            G = (int)(local_percent * 255);
+                                            B = 255;
+                                        }
+                                        else if (overall_percent < (float)4 / 9) // blue-green to green
+                                        {
+                                            float local_percent = (overall_percent - (float)3 / 9) / ((float)1 / 9);
+                                            R = 0;
+                                            G = 255;
+                                            B = (int)((1.0 - local_percent) * 255);
+                                        }
+                                        else if (overall_percent < (float)5 / 9) // green to red-green
+                                        {
+                                            float local_percent = (overall_percent - (float)4 / 9) / ((float)1 / 9);
+                                            R = (int)(local_percent * 255);
+                                            G = 255;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)7 / 9) // red-green to red
+                                        {
+                                            float local_percent = (overall_percent - (float)5 / 9) / ((float)2 / 9);
+                                            R = 255;
+                                            G = (int)((1.0 - local_percent) * 255);
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)8 / 9) // red to red-blue
+                                        {
+                                            float local_percent = (overall_percent - (float)7 / 9) / ((float)1 / 9);
+                                            R = 255;
+                                            G = 0;
+                                            B = (int)(local_percent * 255);
+                                        }
+                                        else // red-blue to purple end
+                                        {
+                                            float local_percent = (overall_percent - (float)8 / 9) / ((float)1 / 9);
+                                            R = (int)((0.75 + 0.25 * (1.0 - local_percent)) * 255);
+                                            G = (int)(local_percent * 255 * 0.5);
+                                            B = 255;
+                                        }
+                                    }
+
+                                    // set pixel color
+                                    row[i * pixel_size + 0] = (byte)B;	// set color in memory
+                                    row[i * pixel_size + 1] = (byte)G;
+                                    row[i * pixel_size + 2] = (byte)R;
+                                }
+                            }
+                            break;
+
+                        case (ColorSheme.SPECTRAN):
+                            {
+                                // draw new data
+                                for (int i = 0; i < W; i++)	// for each pixel in the new line
+                                {
+                                    if (waterfall_data[i] <= waterfall_low_threshold)
+                                    {
                                         R = 0;
-                                        G = 255;
-                                        B = (int)((1.0 - local_percent) * 255);
-                                    }
-                                    else if (overall_percent < (float)5 / 9) // green to red-green
-                                    {
-                                        float local_percent = (overall_percent - (float)4 / 9) / ((float)1 / 9);
-                                        R = (int)(local_percent * 255);
-                                        G = 255;
-                                        B = 0;
-                                    }
-                                    else if (overall_percent < (float)7 / 9) // red-green to red
-                                    {
-                                        float local_percent = (overall_percent - (float)5 / 9) / ((float)2 / 9);
-                                        R = 255;
-                                        G = (int)((1.0 - local_percent) * 255);
-                                        B = 0;
-                                    }
-                                    else if (overall_percent < (float)8 / 9) // red to red-blue
-                                    {
-                                        float local_percent = (overall_percent - (float)7 / 9) / ((float)1 / 9);
-                                        R = 255;
                                         G = 0;
-                                        B = (int)(local_percent * 255);
+                                        B = 0;
                                     }
-                                    else // red-blue to purple end
+                                    else if (waterfall_data[i] >= WaterfallHighThreshold) // white
                                     {
-                                        float local_percent = (overall_percent - (float)8 / 9) / ((float)1 / 9);
-                                        R = (int)((0.75 + 0.25 * (1.0 - local_percent)) * 255);
-                                        G = (int)(local_percent * 255 * 0.5);
-                                        B = 255;
+                                        R = 240;
+                                        G = 240;
+                                        B = 240;
                                     }
+                                    else // value is between low and high
+                                    {
+                                        float range = WaterfallHighThreshold - waterfall_low_threshold;
+                                        float offset = waterfall_data[i] - waterfall_low_threshold;
+                                        float local_percent = ((100.0f * offset) / range);
+
+                                        if (local_percent < 5.0f)
+                                        {
+                                            R = G = 0;
+                                            B = (int)local_percent * 5;
+                                        }
+                                        else if (local_percent < 11.0f)
+                                        {
+                                            R = G = 0;
+                                            B = (int)local_percent * 5;
+                                        }
+                                        else if (local_percent < 22.0f)
+                                        {
+                                            R = G = 0;
+                                            B = (int)local_percent * 5;
+                                        }
+                                        else if (local_percent < 44.0f)
+                                        {
+                                            R = G = 0;
+                                            B = (int)local_percent * 5;
+                                        }
+                                        else if (local_percent < 51.0f)
+                                        {
+                                            R = G = 0;
+                                            B = (int)local_percent * 5;
+                                        }
+                                        else if (local_percent < 66.0f)
+                                        {
+                                            R = G = (int)(local_percent - 50) * 2;
+                                            B = 255;
+                                        }
+                                        else if (local_percent < 77.0f)
+                                        {
+                                            R = G = (int)(local_percent - 50) * 3;
+                                            B = 255;
+                                        }
+                                        else if (local_percent < 88.0f)
+                                        {
+                                            R = G = (int)(local_percent - 50) * 4;
+                                            B = 255;
+                                        }
+                                        else if (local_percent < 99.0f)
+                                        {
+                                            R = G = (int)(local_percent - 50) * 5;
+                                            B = 255;
+                                        }
+                                    }
+
+                                    // set pixel color
+                                    row[i * pixel_size + 0] = (byte)B;	// set color in memory
+                                    row[i * pixel_size + 1] = (byte)G;
+                                    row[i * pixel_size + 2] = (byte)R;
                                 }
-
-                                // set pixel color
-                                row[i * pixel_size + 0] = (byte)B;	// set color in memory
-                                row[i * pixel_size + 1] = (byte)G;
-                                row[i * pixel_size + 2] = (byte)R;
                             }
-                        }
-                        break;
+                            break;
 
-                    case (ColorSheme.SPECTRAN):
-                        {
-                            // draw new data
-                            for (int i = 0; i < W; i++)	// for each pixel in the new line
+                        case (ColorSheme.BLACKWHITE):
                             {
-                                if (waterfall_data[i] <= waterfall_low_threshold)
+                                // draw new data
+                                for (int i = 0; i < W; i++)	// for each pixel in the new line
                                 {
-                                    R = 0;
-                                    G = 0;
-                                    B = 0;
-                                }
-                                else if (waterfall_data[i] >= WaterfallHighThreshold) // white
-                                {
-                                    R = 240;
-                                    G = 240;
-                                    B = 240;
-                                }
-                                else // value is between low and high
-                                {
-                                    float range = WaterfallHighThreshold - waterfall_low_threshold;
-                                    float offset = waterfall_data[i] - waterfall_low_threshold;
-                                    float local_percent = ((100.0f * offset) / range);
+                                    if (waterfall_data[i] <= waterfall_low_threshold)
+                                    {
+                                        R = 0;
+                                        G = 0;
+                                        B = 0;
+                                    }
+                                    else if (waterfall_data[i] >= WaterfallHighThreshold) // white
+                                    {
+                                        R = 255;
+                                        G = 255;
+                                        B = 255;
+                                    }
+                                    else // value is between low and high
+                                    {
+                                        float range = WaterfallHighThreshold - waterfall_low_threshold;
+                                        float offset = waterfall_data[i] - waterfall_low_threshold;
+                                        float overall_percent = offset / range; // value from 0.0 to 1.0 where 1.0 is high and 0.0 is low.
+                                        float local_percent = ((100.0f * offset) / range);
+                                        float contrast = (console.SetupForm.DisplayContrast / 100);
+                                        R = (int)((local_percent / 100) * 255);
+                                        G = R;
+                                        B = R;
+                                    }
 
-                                    if (local_percent < 5.0f)
-                                    {
-                                        R = G = 0;
-                                        B = (int)local_percent * 5;
-                                    }
-                                    else if (local_percent < 11.0f)
-                                    {
-                                        R = G = 0;
-                                        B = (int)local_percent * 5;
-                                    }
-                                    else if (local_percent < 22.0f)
-                                    {
-                                        R = G = 0;
-                                        B = (int)local_percent * 5;
-                                    }
-                                    else if (local_percent < 44.0f)
-                                    {
-                                        R = G = 0;
-                                        B = (int)local_percent * 5;
-                                    }
-                                    else if (local_percent < 51.0f)
-                                    {
-                                        R = G = 0;
-                                        B = (int)local_percent * 5;
-                                    }
-                                    else if (local_percent < 66.0f)
-                                    {
-                                        R = G = (int)(local_percent - 50) * 2;
-                                        B = 255;
-                                    }
-                                    else if (local_percent < 77.0f)
-                                    {
-                                        R = G = (int)(local_percent - 50) * 3;
-                                        B = 255;
-                                    }
-                                    else if (local_percent < 88.0f)
-                                    {
-                                        R = G = (int)(local_percent - 50) * 4;
-                                        B = 255;
-                                    }
-                                    else if (local_percent < 99.0f)
-                                    {
-                                        R = G = (int)(local_percent - 50) * 5;
-                                        B = 255;
-                                    }
+                                    // set pixel color
+                                    row[i * pixel_size + 0] = (byte)B;	// set color in memory
+                                    row[i * pixel_size + 1] = (byte)G;
+                                    row[i * pixel_size + 2] = (byte)R;
                                 }
-
-                                // set pixel color
-                                row[i * pixel_size + 0] = (byte)B;	// set color in memory
-                                row[i * pixel_size + 1] = (byte)G;
-                                row[i * pixel_size + 2] = (byte)R;
                             }
-                        }
-                        break;
+                            break;
 
-                    case (ColorSheme.BLACKWHITE):
-                        {
-                            // draw new data
-                            for (int i = 0; i < W; i++)	// for each pixel in the new line
+                        case (ColorSheme.LinLog):
                             {
-                                if (waterfall_data[i] <= waterfall_low_threshold)
+                                for (int i = 0; i < W; i++)	// for each pixel in the new line
                                 {
-                                    R = 0;
-                                    G = 0;
-                                    B = 0;
-                                }
-                                else if (waterfall_data[i] >= WaterfallHighThreshold) // white
-                                {
-                                    R = 255;
-                                    G = 255;
-                                    B = 255;
-                                }
-                                else // value is between low and high
-                                {
-                                    float range = WaterfallHighThreshold - waterfall_low_threshold;
-                                    float offset = waterfall_data[i] - waterfall_low_threshold;
-                                    float overall_percent = offset / range; // value from 0.0 to 1.0 where 1.0 is high and 0.0 is low.
-                                    float local_percent = ((100.0f * offset) / range);
-                                    float contrast = (console.SetupForm.DisplayContrast / 100);
-                                    R = (int)((local_percent / 100) * 255);
-                                    G = R;
-                                    B = R;
-                                }
+                                    if (waterfall_data[i] <= waterfall_low_threshold)
+                                    {
+                                        R = 0;
+                                        G = 0;
+                                        B = 0;
+                                    }
+                                    else if (waterfall_data[i] >= waterfall_high_threshold)
+                                    {
+                                        R = 252;
+                                        G = 252;
+                                        B = 252;
+                                    }
+                                    else // value is between low and high
+                                    {
+                                        float range = waterfall_high_threshold - waterfall_low_threshold;
+                                        float offset = waterfall_data[i] - waterfall_low_threshold + LinLogCor;
+                                        float spec_bits = 1024;
+                                        float overall_percent = (float)(spec_bits * offset) / (float)range; // value from 0.0 to 1.0 where 1.0 is high and 0.0 is low.
+                                        float log_fract = (float)(Math.Log10(spec_bits));
+                                        if (overall_percent == 0)
+                                        {
+                                            overall_percent = (float)0.001;
+                                        }
+                                        overall_percent = (float)(Math.Log10(overall_percent));
 
-                                // set pixel color
-                                row[i * pixel_size + 0] = (byte)B;	// set color in memory
-                                row[i * pixel_size + 1] = (byte)G;
-                                row[i * pixel_size + 2] = (byte)R;
+                                        if (overall_percent < (float)log_fract / 23)
+                                        {
+                                            //			float local_percent = overall_percent / ((float)1/23);
+                                            R = 0;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)2 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)1/23) / ((float)1/23);
+                                            R = 32;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)3 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)2/23) / ((float)1/23);
+                                            R = 64;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)4 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)3/23) / ((float)1/23);
+                                            R = 96;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)5 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)4/23) / ((float)1/23);
+                                            R = 104;
+                                            G = 40;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)6 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)5/23) / ((float)1/23);
+                                            R = 112;
+                                            G = 60;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)7 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)6/23) / ((float)1/23);
+                                            R = 116;
+                                            G = 88;
+                                            B = 0;
+                                        }
+
+
+                                        else if (overall_percent < (float)8 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)7/23) / ((float)1/23);
+                                            R = 92;
+                                            G = 112;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)9 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)8/23) / ((float)1/23);
+                                            R = 80;
+                                            G = 132;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)10 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)9/23) / ((float)1/23);
+                                            R = 20;
+                                            G = 140;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)11 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)10/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 160;
+                                            B = 40;
+                                        }
+                                        else if (overall_percent < (float)12 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)11/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 160;
+                                            B = 120;
+                                        }
+
+                                        else if (overall_percent < (float)13 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)12/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 140;
+                                            B = 148;
+                                        }
+                                        else if (overall_percent < (float)14 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)13/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 132;
+                                            B = 192;
+                                        }
+                                        else if (overall_percent < (float)15 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)14/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 112;
+                                            B = 200;
+                                        }
+                                        else if (overall_percent < (float)16 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)15/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 88;
+                                            B = 208;
+                                        }
+                                        else if (overall_percent < (float)17 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)16/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 60;
+                                            B = 232;
+                                        }
+                                        else if (overall_percent < (float)18 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)17/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 40;
+                                            B = 252;
+                                        }
+                                        else if (overall_percent < (float)19 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)18/23) / ((float)1/23);
+                                            R = 80;
+                                            G = 80;
+                                            B = 252;
+                                        }
+
+                                        else if (overall_percent < (float)20 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)19/23) / ((float)1/23);
+                                            R = 124;
+                                            G = 124;
+                                            B = 252;
+                                        }
+
+                                        else if (overall_percent < (float)21 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)20/23) / ((float)1/23);
+                                            R = 172;
+                                            G = 172;
+                                            B = 252;
+                                        }
+
+                                        else if (overall_percent >= (float)21 * log_fract / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)22/23) / ((float)1/23);
+                                            R = 252;
+                                            G = 252;
+                                            B = 252;
+                                        }
+                                        else
+                                        {
+                                            R = 0;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                    }
+                                    // set pixel color changed by w3sz
+
+                                    row[i * pixel_size + 0] = (byte)R;	// set color in memory
+                                    row[i * pixel_size + 1] = (byte)G;
+                                    row[i * pixel_size + 2] = (byte)B;
+                                }
                             }
-                        }
-                        break;
+                            break;
+
+                        //  now Linrad palette without log
+
+                        case (ColorSheme.LinRad):
+                            {
+                                for (int i = 0; i < W; i++)	// for each pixel in the new line
+                                {
+                                    if (waterfall_data[i] <= waterfall_low_threshold)
+                                    {
+                                        R = 0;
+                                        G = 0;
+                                        B = 0;
+                                    }
+                                    else if (waterfall_data[i] >= waterfall_high_threshold)
+                                    {
+                                        R = 252;
+                                        G = 252;
+                                        B = 252;
+                                    }
+                                    else // value is between low and high
+                                    {
+                                        float range = waterfall_high_threshold - waterfall_low_threshold;
+                                        float offset = waterfall_data[i] - waterfall_low_threshold + LinCor;
+                                        float overall_percent = (float)(offset) / (float)range; // value from 0.0 to 1.0 where 1.0 is high and 0.0 is low.
+
+
+                                        if (overall_percent < (float)1 / 23)
+                                        {
+                                            //			float local_percent = overall_percent / ((float)1/23);
+                                            R = 0;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)2 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)1/23) / ((float)1/23);
+                                            R = 32;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)3 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)2/23) / ((float)1/23);
+                                            R = 64;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)4 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)3/23) / ((float)1/23);
+                                            R = 96;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)5 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)4/23) / ((float)1/23);
+                                            R = 104;
+                                            G = 40;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)6 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)5/23) / ((float)1/23);
+                                            R = 112;
+                                            G = 60;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)7 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)6/23) / ((float)1/23);
+                                            R = 116;
+                                            G = 88;
+                                            B = 0;
+                                        }
+
+
+                                        else if (overall_percent < (float)8 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)7/23) / ((float)1/23);
+                                            R = 92;
+                                            G = 112;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)9 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)8/23) / ((float)1/23);
+                                            R = 80;
+                                            G = 132;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)10 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)9/23) / ((float)1/23);
+                                            R = 20;
+                                            G = 140;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)11 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)10/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 160;
+                                            B = 40;
+                                        }
+                                        else if (overall_percent < (float)12 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)11/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 160;
+                                            B = 120;
+                                        }
+
+                                        else if (overall_percent < (float)13 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)12/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 140;
+                                            B = 148;
+                                        }
+                                        else if (overall_percent < (float)14 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)13/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 132;
+                                            B = 192;
+                                        }
+                                        else if (overall_percent < (float)15 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)14/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 112;
+                                            B = 200;
+                                        }
+                                        else if (overall_percent < (float)16 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)15/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 88;
+                                            B = 208;
+                                        }
+                                        else if (overall_percent < (float)17 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)16/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 60;
+                                            B = 232;
+                                        }
+                                        else if (overall_percent < (float)18 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)17/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 40;
+                                            B = 252;
+                                        }
+                                        else if (overall_percent < (float)19 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)18/23) / ((float)1/23);
+                                            R = 80;
+                                            G = 80;
+                                            B = 252;
+                                        }
+
+                                        else if (overall_percent < (float)20 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)19/23) / ((float)1/23);
+                                            R = 124;
+                                            G = 124;
+                                            B = 252;
+                                        }
+
+                                        else if (overall_percent < (float)21 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)20/23) / ((float)1/23);
+                                            R = 172;
+                                            G = 172;
+                                            B = 252;
+                                        }
+
+                                        else if (overall_percent >= (float)21 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)22/23) / ((float)1/23);
+                                            R = 252;
+                                            G = 252;
+                                            B = 252;
+                                        }
+                                        else
+                                        {
+                                            R = 0;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                    }
+                                    // set pixel color changed by w3sz
+
+
+                                    row[i * pixel_size + 0] = (byte)R;	// set color in memory
+                                    row[i * pixel_size + 1] = (byte)G;
+                                    row[i * pixel_size + 2] = (byte)B;
+                                }
+                            }
+                            break;
+
+                        //  now Linrad palette without log
+
+                        case (ColorSheme.LinAuto):
+                            {
+                                for (int i = 0; i < W; i++)	// for each pixel in the new line
+                                {
+                                    display_min_w3sz = min_y_w3sz - 5; //w3sz for histogram equilization
+                                    display_max_w3sz = max_y; //w3sz for histogram equalization
+                                    //	if (i == (W - 1))
+                                    //	{
+                                    //		System.Console.WriteLine("Low is" + waterfall_low_threshold + "   " + display_min_w3sz);
+                                    //	
+                                    //		System.Console.WriteLine("High is" + waterfall_high_threshold + "   " + max_y);
+                                    //}	
+
+                                    if (waterfall_data[i] <= display_min_w3sz)
+                                    {
+                                        R = 0;
+                                        G = 0;
+                                        B = 0;
+                                    }
+                                    else if (waterfall_data[i] >= display_max_w3sz)
+                                    {
+                                        R = 252;
+                                        G = 252;
+                                        B = 252;
+                                    }
+                                    else // value is between low and high
+                                    {
+                                        float range = display_max_w3sz - display_min_w3sz;
+                                        float offset = waterfall_data[i] - display_min_w3sz; // + GlobalClass.LinCor;
+                                        float overall_percent = (float)(offset) / (float)range; // value from 0.0 to 1.0 where 1.0 is high and 0.0 is low.
+
+
+                                        if (overall_percent < (float)1 / 23)
+                                        {
+                                            //			float local_percent = overall_percent / ((float)1/23);
+                                            R = 0;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)2 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)1/23) / ((float)1/23);
+                                            R = 32;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)3 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)2/23) / ((float)1/23);
+                                            R = 64;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)4 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)3/23) / ((float)1/23);
+                                            R = 96;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)5 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)4/23) / ((float)1/23);
+                                            R = 104;
+                                            G = 40;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)6 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)5/23) / ((float)1/23);
+                                            R = 112;
+                                            G = 60;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)7 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)6/23) / ((float)1/23);
+                                            R = 116;
+                                            G = 88;
+                                            B = 0;
+                                        }
+
+
+                                        else if (overall_percent < (float)8 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)7/23) / ((float)1/23);
+                                            R = 92;
+                                            G = 112;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)9 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)8/23) / ((float)1/23);
+                                            R = 80;
+                                            G = 132;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)10 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)9/23) / ((float)1/23);
+                                            R = 20;
+                                            G = 140;
+                                            B = 0;
+                                        }
+                                        else if (overall_percent < (float)11 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)10/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 160;
+                                            B = 40;
+                                        }
+                                        else if (overall_percent < (float)12 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)11/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 160;
+                                            B = 120;
+                                        }
+
+                                        else if (overall_percent < (float)13 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)12/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 140;
+                                            B = 148;
+                                        }
+                                        else if (overall_percent < (float)14 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)13/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 132;
+                                            B = 192;
+                                        }
+                                        else if (overall_percent < (float)15 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)14/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 112;
+                                            B = 200;
+                                        }
+                                        else if (overall_percent < (float)16 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)15/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 88;
+                                            B = 208;
+                                        }
+                                        else if (overall_percent < (float)17 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)16/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 60;
+                                            B = 232;
+                                        }
+                                        else if (overall_percent < (float)18 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)17/23) / ((float)1/23);
+                                            R = 0;
+                                            G = 40;
+                                            B = 252;
+                                        }
+                                        else if (overall_percent < (float)19 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)18/23) / ((float)1/23);
+                                            R = 80;
+                                            G = 80;
+                                            B = 252;
+                                        }
+
+                                        else if (overall_percent < (float)20 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)19/23) / ((float)1/23);
+                                            R = 124;
+                                            G = 124;
+                                            B = 252;
+                                        }
+
+                                        else if (overall_percent < (float)21 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)20/23) / ((float)1/23);
+                                            R = 172;
+                                            G = 172;
+                                            B = 252;
+                                        }
+
+                                        else if (overall_percent >= (float)21 / 23)
+                                        {
+                                            //			float local_percent = (overall_percent - (float)22/23) / ((float)1/23);
+                                            R = 252;
+                                            G = 252;
+                                            B = 252;
+                                        }
+                                        else
+                                        {
+                                            R = 0;
+                                            G = 0;
+                                            B = 0;
+                                        }
+                                    }
+                                    // set pixel color changed by w3sz
+
+
+                                    row[i * pixel_size + 0] = (byte)R;	// set color in memory
+                                    row[i * pixel_size + 1] = (byte)G;
+                                    row[i * pixel_size + 2] = (byte)B;
+                                }
+                            }
+                            break;
+                    }
+
+
+                    if (rx == 1)
+                        waterfall_bmp.UnlockBits(bitmapData);
+                    else
+                        waterfall_bmp2.UnlockBits(bitmapData);
                 }
-                //}	
 
-                if (rx == 1)
-                    waterfall_bmp.UnlockBits(bitmapData);
+                if (bottom)
+                {
+                    if (rx == 1) g.DrawImageUnscaled(waterfall_bmp, 0, H + 16);
+                    else if (rx == 2) g.DrawImageUnscaled(waterfall_bmp2, 0, H + 16);
+                }
                 else
-                    waterfall_bmp2.UnlockBits(bitmapData);
+                {
+                    if (rx == 1) g.DrawImageUnscaled(waterfall_bmp, 0, 16);	// draw the image on the background	
+                    else if (rx == 2) g.DrawImageUnscaled(waterfall_bmp2, 0, 16);	// draw the image on the background	
+                }
             }
-
-            if (bottom)
-            {
-                if (rx == 1) g.DrawImageUnscaled(waterfall_bmp, 0, H + 16);
-                else if (rx == 2) g.DrawImageUnscaled(waterfall_bmp2, 0, H + 16);
-            }
-            else
-            {
-                if (rx == 1) g.DrawImageUnscaled(waterfall_bmp, 0, 16);	// draw the image on the background	
-                else if (rx == 2) g.DrawImageUnscaled(waterfall_bmp2, 0, 16);	// draw the image on the background	
-            }
-
             waterfall_counter++;
 
             // draw long cursor

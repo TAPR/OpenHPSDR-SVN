@@ -376,6 +376,7 @@ namespace PowerSDR
                         case 20:
                         case 21:
                         case 22:
+                        case 23:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 33)))
                             {
@@ -590,6 +591,9 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetAlexLPFBits(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetAlexTRRelayBit(int bit);
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetAlex2HPFBits(int bits);

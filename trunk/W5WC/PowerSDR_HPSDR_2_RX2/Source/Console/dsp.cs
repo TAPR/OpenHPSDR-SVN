@@ -319,14 +319,14 @@ namespace PowerSDR
 		[DllImport("DttSP.dll", EntryPoint="SetNBvals")]///
 		public static extern void SetNBvals(uint thread, uint subrx, double threshold);
 
-		[DllImport("DttSP.dll", EntryPoint="GetSAMFreq")]///
-		public static extern void GetSAMFreq(uint thread, uint subrx, float *freq);
+		//[DllImport("DttSP.dll", EntryPoint="GetSAMFreq")]///
+		//public static extern void GetSAMFreq(uint thread, uint subrx, float *freq);
 
-		[DllImport("DttSP.dll", EntryPoint="GetSAMPLLvals")]///
-		public static extern void GetSAMPLLvals(uint thread, uint subrx, float *alpha, float *beta);
+		//[DllImport("DttSP.dll", EntryPoint="GetSAMPLLvals")]///
+		//public static extern void GetSAMPLLvals(uint thread, uint subrx, float *alpha, float *beta);
 
-		[DllImport("DttSP.dll", EntryPoint="SetSAMPLLvals")]///
-		public static extern void SetSAMPLLvals(uint thread, uint subrx, float alpha, float beta);
+		//[DllImport("DttSP.dll", EntryPoint="SetSAMPLLvals")]///
+		//public static extern void SetSAMPLLvals(uint thread, uint subrx, float alpha, float beta);
 
 		[DllImport("DttSP.dll", EntryPoint="SetCorrectIQEnable")]
 		public static extern void SetCorrectIQEnable(uint setit);

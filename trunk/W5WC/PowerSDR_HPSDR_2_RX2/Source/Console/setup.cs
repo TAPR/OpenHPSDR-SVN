@@ -2127,6 +2127,9 @@ namespace PowerSDR
             udDisplayGridMax.Value = Display.SpectrumGridMax;
             udDisplayGridMin.Value = Display.SpectrumGridMin;
             udDisplayGridStep.Value = Display.SpectrumGridStep;
+            udRX2DisplayGridMax.Value = Display.RX2SpectrumGridMax;
+            udRX2DisplayGridMin.Value = Display.RX2SpectrumGridMin;
+            udRX2DisplayGridStep.Value = Display.RX2SpectrumGridStep;
             udDisplayFPS.Value = console.DisplayFPS;
             clrbtnWaterfallLow.Color = Display.WaterfallLowColor;
             udDisplayWaterfallLowLevel.Value = (decimal)Display.WaterfallLowThreshold;
@@ -3248,6 +3251,21 @@ namespace PowerSDR
         #endregion
 
         #region Properties
+
+      //  private static bool alex_tr_relay = false;
+        public bool AlexTRRelay
+        {
+            get 
+            { 
+                if (chkAlexTRRelay != null) return chkAlexTRRelay.Checked;
+                else return false;
+            }
+            set 
+            { 
+            if (chkAlexTRRelay != null) 
+                 chkAlexTRRelay.Checked = value;
+            }
+        }
 
         public bool HermesEnableAttenuator
         {
@@ -5520,10 +5538,19 @@ namespace PowerSDR
                 if (radGenModelANAN10.Checked || radGenModelANAN100.Checked || radGenModelANAN100D.Checked)
                 {
                     tpAlexControl.Text = "Ant/Filters";
+                    chkAlexTRRelay.Visible = true;
+                    chkAlexTRRelay.Enabled = true;
+                  //  console.XVTRForm.chkAlexTRRelay.Visible = true;
+                  //  console.XVTRForm.chkAlexTRRelay.Enabled = true;
                 }
                 else
                 {
                     tpAlexControl.Text = "Alex";
+                    chkAlexTRRelay.Checked = false;
+                    chkAlexTRRelay.Enabled = false;
+                    chkAlexTRRelay.Visible = false;
+                   // console.XVTRForm.chkAlexTRRelay.Visible = false;
+                   // console.XVTRForm.chkAlexTRRelay.Enabled = false;
                 }
 
                 if (console.rx2_preamp_present)
@@ -5633,12 +5660,18 @@ namespace PowerSDR
                    tcAudio.SelectedIndex = 0;
                } */
 
+            if (tcDSP.TabPages.Contains(tpDSPImageReject))
+            {
+                tcDSP.TabPages.Remove(tpDSPImageReject);
+                tcDSP.SelectedIndex = 0;
+            } 
 
-            if (tcGeneral.TabPages.Contains(tpInfo))
+
+           if (tcGeneral.TabPages.Contains(tpInfo))
             {
                 tcGeneral.TabPages.Remove(tpInfo);
                 tcGeneral.SelectedIndex = 0;
-            }
+            } 
 
             if (!tcGeneral.TabPages.Contains(tpHPSDR))
             {
@@ -7916,16 +7949,6 @@ namespace PowerSDR
             Display.TXSpectrumGridMax = (int)udTXGridMax.Value;
         }
 
-        private void udDisplayGridMax_Click(object sender, System.EventArgs e)
-        {
-            udDisplayGridMax_LostFocus(sender, e);
-        }
-
-        private void udDisplayGridMax_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            udDisplayGridMax_LostFocus(sender, new System.EventArgs());
-        }
-
         private void udDisplayFPS_ValueChanged(object sender, System.EventArgs e)
         {
             console.DisplayFPS = (int)udDisplayFPS.Value;
@@ -7951,6 +7974,25 @@ namespace PowerSDR
             Display.SpectrumGridStep = (int)udDisplayGridStep.Value;
         }
 
+        private void udRX2DisplayGridMax_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udRX2DisplayGridMax.Value <= udRX2DisplayGridMin.Value)
+                udRX2DisplayGridMax.Value = udRX2DisplayGridMin.Value + 10;
+            Display.RX2SpectrumGridMax = (int)udRX2DisplayGridMax.Value;
+        }
+
+        private void udRX2DisplayGridMin_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udRX2DisplayGridMin.Value >= udRX2DisplayGridMax.Value)
+                udRX2DisplayGridMin.Value = udRX2DisplayGridMax.Value - 10;
+            Display.RX2SpectrumGridMin = (int)udRX2DisplayGridMin.Value;
+        }
+
+        private void udRX2DisplayGridStep_ValueChanged(object sender, System.EventArgs e)
+        {
+            Display.RX2SpectrumGridStep = (int)udRX2DisplayGridStep.Value;
+        }
+        
         private void comboDisplayLabelAlign_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             switch (comboDisplayLabelAlign.Text)
@@ -11646,7 +11688,37 @@ namespace PowerSDR
                 lblDisplayWaterfallLowColor.Visible = false;
                 lblDisplayWaterfallMidColor.Visible = false;
             }
-
+            if (comboColorPalette.Text == "LinLog")
+            {
+                console.color_sheme = ColorSheme.LinLog;
+                clrbtnWaterfallLow.Visible = false;
+                clrbtnWaterfallHigh.Visible = false;
+                clrbtnWaterfallMid.Visible = false;
+                lblDisplayWaterfallHighColor.Visible = false;
+                lblDisplayWaterfallLowColor.Visible = false;
+                lblDisplayWaterfallMidColor.Visible = false;
+            }
+            if (comboColorPalette.Text == "LinRad")
+            {
+                console.color_sheme = ColorSheme.LinRad;
+                clrbtnWaterfallLow.Visible = false;
+                clrbtnWaterfallHigh.Visible = false;
+                clrbtnWaterfallMid.Visible = false;
+                lblDisplayWaterfallHighColor.Visible = false;
+                lblDisplayWaterfallLowColor.Visible = false;
+                lblDisplayWaterfallMidColor.Visible = false;
+            }
+            if (comboColorPalette.Text == "LinAuto")
+            {
+                console.color_sheme = ColorSheme.LinAuto;
+                clrbtnWaterfallLow.Visible = false;
+                clrbtnWaterfallHigh.Visible = false;
+                clrbtnWaterfallMid.Visible = false;
+                lblDisplayWaterfallHighColor.Visible = false;
+                lblDisplayWaterfallLowColor.Visible = false;
+                lblDisplayWaterfallMidColor.Visible = false;
+            }
+ 
         }
 
         private void udDisplayWaterfallAvgTime_ValueChanged(object sender, System.EventArgs e)
@@ -14083,7 +14155,7 @@ namespace PowerSDR
             if (!console.initializing) DB.UpdateRegion(console.CurrentRegion);
             if (console.CurrentRegion == FRSRegion.UK)
             {
-                console.band_60m_register = 7;
+                console.band_60m_register = 11;
                 console.Init60mChannels();
             }
             if (console.CurrentRegion == FRSRegion.US)
@@ -15087,7 +15159,7 @@ namespace PowerSDR
         }
 
         private void chkHermesStepAttenuator_CheckedChanged(object sender, EventArgs e)
-        {
+         {
             console.HermesStepAttenuator = chkHermesStepAttenuator.Checked;
             if (chkHermesStepAttenuator.Checked)
             {
@@ -15345,6 +15417,13 @@ namespace PowerSDR
         {
             console.DisableSWRonTune = chkSWRTuneProtection.Checked;
         }
+
+        private void chkAlexTRRelay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (console.XVTRForm != null)
+            console.XVTRForm.AlexTRRelay = chkAlexTRRelay.Checked;
+        }
+
     }
 
     #region PADeviceInfo Helper Class

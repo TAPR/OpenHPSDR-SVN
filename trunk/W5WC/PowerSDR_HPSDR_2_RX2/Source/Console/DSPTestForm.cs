@@ -650,9 +650,9 @@ namespace PowerSDR
 		private void btnSAMPLL_Click(object sender, System.EventArgs e)
 		{
 			float freq;
-			DttSP.GetSAMFreq(0, 0, &freq);
-			freq = (float)(freq*console.SampleRate1/(2*Math.PI));
-			txtSAMPLL.Text = freq.ToString("f0");
+			//DttSP.GetSAMFreq(0, 0, &freq);
+			//freq = (float)(freq*console.SampleRate1/(2*Math.PI));
+			//txtSAMPLL.Text = freq.ToString("f0");
 		}
 
 		private void btnIQW_Click(object sender, System.EventArgs e)

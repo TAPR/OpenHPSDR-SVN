@@ -59,5 +59,19 @@ namespace PowerSDR.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static byte[] grab {
+            get {
+                object obj = ResourceManager.GetObject("grab", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] grabbing {
+            get {
+                object obj = ResourceManager.GetObject("grabbing", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

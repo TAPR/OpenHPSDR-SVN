@@ -1857,7 +1857,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = (VFOfreq_rx4 >> 8) & 0xff;
 						break;
 					case 6:
-						FPGAWriteBufp[writebufpos] = AlexHPFMask & 0x7f;
+						FPGAWriteBufp[writebufpos] = AlexTRRelay | AlexHPFMask & 0x7f;
 						break;
 					case 7: // (0, 1 = open drain pins 1,2) (2, 3 = TTL pins 3,4)
 						FPGAWriteBufp[writebufpos] = (UserOut0 | UserOut1 | UserOut2 | UserOut3) & 0x0f;

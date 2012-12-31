@@ -145,7 +145,6 @@ namespace PowerSDR
         }
 
         private static SignalSource rx2_input_signal = SignalSource.RADIO;
-
         public static SignalSource RX2InputSignal
         {
             get { return rx2_input_signal; }
@@ -153,7 +152,6 @@ namespace PowerSDR
         }
 
         private static SignalSource rx2_output_signal = SignalSource.RADIO;
-
         public static SignalSource RX2OutputSignal
         {
             get { return rx2_output_signal; }
@@ -161,7 +159,6 @@ namespace PowerSDR
         }
 
         private static SignalSource tx_input_signal = SignalSource.RADIO;
-
         public static SignalSource TXInputSignal
         {
             get { return tx_input_signal; }
@@ -169,7 +166,6 @@ namespace PowerSDR
         }
 
         private static SignalSource tx_output_signal = SignalSource.RADIO;
-
         public static SignalSource TXOutputSignal
         {
             get { return tx_output_signal; }
@@ -177,7 +173,6 @@ namespace PowerSDR
         }
 
         private static bool record_rx_preprocessed = true;
-
         public static bool RecordRXPreProcessed
         {
             get { return record_rx_preprocessed; }
@@ -185,15 +180,27 @@ namespace PowerSDR
         }
 
         private static bool record_tx_preprocessed;
-
         public static bool RecordTXPreProcessed
         {
             get { return record_tx_preprocessed; }
             set { record_tx_preprocessed = value; }
         }
 
-        private static float peak = float.MinValue;
+        private static short bit_depth = 32;
+        public static short BitDepth
+        {
+            get { return bit_depth; }
+            set { bit_depth = value; }
+        }
 
+        private static short format_tag = 3;
+        public static short FormatTag
+        {
+            get { return format_tag; }
+            set { format_tag = value; }
+        }
+
+        private static float peak = float.MinValue;
         public static float Peak
         {
             get { return peak; }
@@ -201,7 +208,6 @@ namespace PowerSDR
         }
 
         private static bool vox_enabled;
-
         public static bool VOXEnabled
         {
             get { return vox_enabled; }
@@ -209,7 +215,6 @@ namespace PowerSDR
         }
 
         private static float vox_threshold = 0.001f;
-
         public static float VOXThreshold
         {
             get { return vox_threshold; }
@@ -217,7 +222,6 @@ namespace PowerSDR
         }
 
         private static float vox_gain = 0.001f;
-
         public static float VOXGain
         {
             get { return vox_gain; }
@@ -983,6 +987,20 @@ namespace PowerSDR
         {
             get { return mute_output; }
             set { mute_output = value; }
+        }
+ 
+        private static bool mute_rx1 = false;
+        public static bool MuteRX1
+        {
+            get { return mute_rx1; }
+            set { mute_rx1 = value; }
+        }
+ 
+        private static bool mute_rx2 = false;
+        public static bool MuteRX2
+        {
+            get { return mute_rx2; }
+            set { mute_rx2 = value; }
         }
 
         private static int ramp_time = 5; // in ms
@@ -3171,6 +3189,17 @@ namespace PowerSDR
 
            // double tx_vol = TXScale;
            // if (tx_vol > 1.0) tx_vol = 1.0; // above 1.0 creates spurs
+            if (mute_rx1)
+            {
+                ClearBuffer(out_l1, frameCount);
+                ClearBuffer(out_r1, frameCount);
+            }
+
+            if (mute_rx2)
+            {
+                ClearBuffer(out_l3, frameCount);
+                ClearBuffer(out_r3, frameCount);
+            }
 
             //redirect main audio to spare buffer
             CopyBuffer(out_l1, out_l4, frameCount);
