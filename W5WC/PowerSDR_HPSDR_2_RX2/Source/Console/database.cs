@@ -100,7 +100,7 @@ namespace PowerSDR
             t.Columns.Add("TX", typeof(bool));
 
             object[] data = {
-								1.800000, 1.809999, "160M CW/Digital Modes",	true,
+ 								1.800000, 1.809999, "160M CW/Digital Modes",	true,
 								1.810000, 1.810000, "160M CW QRP",				true,
 								1.810001, 1.842999, "160M CW",					true,
 								1.843000, 1.909999, "160M SSB/SSTV/Wide Band",	true,
@@ -759,7 +759,7 @@ namespace PowerSDR
 								0.135700, 0.137799, "2200M Band",               false,
                                 0.153000, 0.279000, "AM - Long Wave",			false,
                                 0.415000, 0.471999, "Maritime Band",            false,
-                                0.472000, 0.478999, "600M Band",                false,
+                                0.472000, 0.478999, "630M Band",                false,
                                 0.479000, 0.526400, "Maritime Band",            false,
 								0.530000, 1.710000, "Broadcast AM Med Wave",	false,				
 								2.300000, 2.495000, "120M Short Wave",			false,
@@ -1339,7 +1339,7 @@ namespace PowerSDR
 
         private static void AddRegionIndiaBandText6m()
         {
-            // 50.0 - 52.0 MHz
+            // 50.0 - 54.0 MHz
             DataTable t = ds.Tables["BandText"];
             object[] data = {
 								50.000000, 50.079999, "6M Beacon Sub-Band",		true,
@@ -1932,17 +1932,17 @@ namespace PowerSDR
 
             object[] data = {
                                 5.100000, 5.258499, "60M General",              false,
-                                5.258500, 5.259999, "60M UK",                   true,
-								5.260000, 5.260000, "60M Channel FA",			true,
-                                5.260001, 5.263999, "60M UK",                   true,
+                                5.258500, 5.263999, "60M UK",                   true,
+								//5.260000, 5.260000, "60M Channel FA",			true,
+                               // 5.260001, 5.263999, "60M UK",                   true,
                                 5.264000, 5.275999, "60M General",              false,
-                                5.276000, 5.279999, "60M UK",              true,
-								5.280000, 5.280000, "60M Channel FB",			true,
-                                5.280001, 5.283999, "60M UK",              true,
+                                5.276000, 5.283999, "60M UK",              true,
+								//5.280000, 5.280000, "60M Channel FB",			true,
+                               // 5.280001, 5.283999, "60M UK",              true,
                                 5.284000, 5.288499, "60M General",              false,
-                                5.288500, 5.289999, "60M UK",              true,
-								5.290000, 5.290000, "60M Channel FC",			true,
-                                5.290001, 5.291999, "60M UK",              true,
+                                5.288500, 5.291999, "60M UK",              true,
+								//5.290000, 5.290000, "60M Channel FC",			true,
+                               // 5.290001, 5.291999, "60M UK",              true,
                                 5.292000, 5.297999, "60M General",              false,
                                 5.298000, 5.306999, "60M UK",              true,
                                 5.307000, 5.312999, "60M General",              false,
@@ -1952,19 +1952,19 @@ namespace PowerSDR
                                 5.338000, 5.353999, "60M General",              false,
                                 5.354000, 5.357999, "60M UK",              true,
                                 5.358000, 5.361999, "60M General",              false,
-                                5.362000, 5.367999, "60M UK",              true,
-                                5.368000, 5.368000, "60M Channel FK",			true,
-                                5.368001, 5.372999, "60M UK",              true,
-                                5.373000, 5.373000, "60M Channel FL",			true,
-                                5.373001, 5.381999, "60M UK",              true,
+                                5.362000, 5.381999, "60M UK",              true,
+                              //  5.368000, 5.368000, "60M Channel FK",			true,
+                              //  5.368001, 5.372999, "60M UK",              true,
+                              //  5.373000, 5.373000, "60M Channel FL",			true,
+                               // 5.373001, 5.381999, "60M UK",              true,
                                 5.382000, 5.394999, "60M General",              false,
-                                5.395000, 5.399999, "60M UK",              true,
-                                5.400000, 5.400000, "60M Channel FE",			true,
-                                5.400001, 5.401499, "60M UK",              true,
+                                5.395000, 5.401499, "60M UK",              true,
+                               // 5.400000, 5.400000, "60M Channel FE",			true,
+                               // 5.400001, 5.401499, "60M UK",              true,
                                 5.401500, 5.403499, "60M General",              false,
-                                5.403500, 5.404999, "60M UK",              true,
-                                5.405000, 5.405000, "60M Channel FM",			true,
-                                5.405001, 5.406499, "60M UK",              true,
+                                5.403500, 5.406499, "60M UK",              true,
+                              //  5.405000, 5.405000, "60M Channel FM",			true,
+                               // 5.405001, 5.406499, "60M UK",              true,
                                 5.406500, 5.499999, "60M General",              false,
 			};
 
@@ -2418,13 +2418,19 @@ namespace PowerSDR
 								"80M", "CWL", "F1", 3.510000,
 								"80M", "DIGU", "F1", 3.590000,
 								"80M", "LSB", "F6", 3.750000,
+
                                 "60M", "USB", "F6", 5.258500,
-								"60M", "USB", "F6", 5.278500,
+								"60M", "USB", "F6", 5.276000,
 								"60M", "USB", "F6", 5.288500,
-								"60M", "USB", "F6", 5.366500,
-								"60M", "USB", "F6", 5.371500,
-								"60M", "USB", "F6", 5.398500,
+								"60M", "USB", "F6", 5.298000,
+								"60M", "USB", "F6", 5.313000,
+								"60M", "USB", "F6", 5.333000,
+								"60M", "USB", "F6", 5.354000,
+								"60M", "USB", "F6", 5.362000,
+								"60M", "USB", "F6", 5.378000,
+								"60M", "USB", "F6", 5.395000,
 								"60M", "USB", "F6", 5.403500,
+
                                 "40M", "CWL", "F1", 7.010000,
 								"40M", "DIGU", "F1", 7.045000,
 								"40M", "LSB", "F6", 7.10000,

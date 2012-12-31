@@ -301,6 +301,7 @@ extern unsigned char AlexManEnable;
 extern unsigned char AlexEnabled;
 extern int AlexHPFMask;
 extern int AlexLPFMask;
+extern int AlexTRRelay;
 extern int Alex2HPFMask;
 extern int Alex2LPFMask;
 extern int Alex3HPFMask;

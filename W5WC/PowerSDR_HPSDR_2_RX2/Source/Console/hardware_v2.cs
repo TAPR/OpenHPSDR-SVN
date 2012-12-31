@@ -289,7 +289,7 @@ namespace PowerSDR
             get { return tun_control; }
             set { tun_control = value; }
         } */
-
+        
 		#endregion
 
 		#region Control

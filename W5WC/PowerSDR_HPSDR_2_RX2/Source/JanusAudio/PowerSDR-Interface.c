@@ -884,6 +884,14 @@ KD5TFDVK6APHAUDIO_API void SetAlexHPFBits(int bits) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetAlexTRRelayBit(int bit) { 
+	if (bit == 1)
+		AlexTRRelay = 0x80; 
+	else
+		AlexTRRelay = 0;
+	return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetAlex2HPFBits(int bits) { 
 	Alex2HPFMask = bits; 
 	return;

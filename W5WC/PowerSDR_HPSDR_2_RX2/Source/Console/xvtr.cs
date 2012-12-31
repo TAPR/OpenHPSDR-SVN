@@ -251,7 +251,8 @@ namespace PowerSDR
 		private System.Windows.Forms.NumericUpDownTS udRXGain1;
 		private System.Windows.Forms.NumericUpDownTS udRXGain0;
 		private System.Windows.Forms.LabelTS lblRXGain;
-		private System.Windows.Forms.CheckBoxTS chkUseXVTRTUNPWR;
+        private System.Windows.Forms.CheckBoxTS chkUseXVTRTUNPWR;
+        public CheckBoxTS chkAlexTRRelay;
 		private System.ComponentModel.Container components = null;
 
 		#endregion
@@ -521,6 +522,7 @@ namespace PowerSDR
             this.udRXGain0 = new System.Windows.Forms.NumericUpDownTS();
             this.lblRXGain = new System.Windows.Forms.LabelTS();
             this.chkUseXVTRTUNPWR = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlexTRRelay = new System.Windows.Forms.CheckBoxTS();
             ((System.ComponentModel.ISupportInitialize)(this.udUCBAddr0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udUCBAddr1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udUCBAddr2)).BeginInit();
@@ -4786,10 +4788,22 @@ namespace PowerSDR
             this.chkUseXVTRTUNPWR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkUseXVTRTUNPWR.CheckedChanged += new System.EventHandler(this.chkUseXVTRTUNPWR_CheckedChanged);
             // 
+            // chkAlexTRRelay
+            // 
+            this.chkAlexTRRelay.AutoSize = true;
+            this.chkAlexTRRelay.Image = null;
+            this.chkAlexTRRelay.Location = new System.Drawing.Point(285, 436);
+            this.chkAlexTRRelay.Name = "chkAlexTRRelay";
+            this.chkAlexTRRelay.Size = new System.Drawing.Size(114, 17);
+            this.chkAlexTRRelay.TabIndex = 205;
+            this.chkAlexTRRelay.Text = "Disable ANAN PA ";
+            this.chkAlexTRRelay.UseVisualStyleBackColor = true;
+            this.chkAlexTRRelay.CheckedChanged += new System.EventHandler(this.chkAlexTRRelay_CheckedChanged);
+            // 
             // XVTRForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
             this.ClientSize = new System.Drawing.Size(896, 454);
+            this.Controls.Add(this.chkAlexTRRelay);
             this.Controls.Add(this.chkUseXVTRTUNPWR);
             this.Controls.Add(this.udRXGain15);
             this.Controls.Add(this.udRXGain14);
@@ -4999,6 +5013,7 @@ namespace PowerSDR
             this.Name = "XVTRForm";
             this.Text = "XVTR Setup";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.XVTRForm_Closing);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.XVTRForm_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.udUCBAddr0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udUCBAddr1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udUCBAddr2)).EndInit();
@@ -5877,5 +5892,41 @@ namespace PowerSDR
 				console.VFOBFreq = console.VFOBFreq;
 			}
 		}
-	}
+
+        private void chkAlexTRRelay_CheckedChanged(object sender, EventArgs e)
+        {
+            console.AlexTRRelay = chkAlexTRRelay.Checked;
+        }
+
+        public bool AlexTRRelay
+        {
+            get
+            {
+                if (chkAlexTRRelay != null) return chkAlexTRRelay.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkAlexTRRelay != null) chkAlexTRRelay.Checked = value;
+            }
+        }
+
+        private void XVTRForm_Paint(object sender, PaintEventArgs e)
+        {
+            if (console.CurrentHPSDRModel == HPSDRModel.ANAN10 ||
+                console.CurrentHPSDRModel == HPSDRModel.ANAN100 ||
+                console.CurrentHPSDRModel == HPSDRModel.ANAN100D)
+            {
+                chkAlexTRRelay.Visible = true;
+                chkAlexTRRelay.Enabled = true;
+            }
+            else
+            {
+                chkAlexTRRelay.Visible = false;
+                chkAlexTRRelay.Enabled = false;
+                chkAlexTRRelay.Checked = false;
+            }
+        }
+
+    }
 }

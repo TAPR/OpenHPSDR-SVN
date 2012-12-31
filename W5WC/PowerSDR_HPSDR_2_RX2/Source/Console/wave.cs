@@ -30,6 +30,7 @@ using System;
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -556,7 +557,7 @@ namespace PowerSDR
 				return false;
 			}
 
-			if(!CheckSampleRate(fmt.sample_rate) || 
+          /*  if (!CheckSampleRate(fmt.sample_rate) ||
 				(fmt.format == 1 && fmt.sample_rate != Audio.SampleRate1))
 			{
 				reader.Close();	
@@ -566,7 +567,7 @@ namespace PowerSDR
 					MessageBoxIcon.Error);
 				file_list.RemoveAt(currently_playing);
 				return false;
-			}
+            } */
 
 			if(fmt.channels != 2)
 			{
@@ -587,6 +588,7 @@ namespace PowerSDR
                     (int)fmt.format,	// use floating point
                     (int)fmt.sample_rate,
                     (int)fmt.channels,
+                    (int)fmt.bits_per_sample,
                     ref reader);
             }
             else
@@ -597,6 +599,7 @@ namespace PowerSDR
                     (int)fmt.format,	// use floating point
                     (int)fmt.sample_rate,
                     (int)fmt.channels,
+                    (int)fmt.bits_per_sample,
                     ref reader);
             }
 
@@ -704,7 +707,7 @@ namespace PowerSDR
 					return;
 				}
 
-                if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK && console.RX2Enabled)
+                if (console.RX2Enabled)
                 {
                     string filename2 = filename+"-rx2";
                     if(File.Exists(filename2))
@@ -741,25 +744,41 @@ namespace PowerSDR
 			{
 				checkBoxRecord.BackColor = console.ButtonSelectedColor;
 				string temp = console.RX1DSPMode.ToString()+" ";
-				temp += console.VFOAFreq.ToString("f6")+"MHz ";
+				temp += console.VFOAFreq.ToString("f6")+"MHz [";
+                int short_sample_rate = waveOptionsForm.SampleRate / 1000;
+                temp += Audio.BitDepth.ToString() + "bit ";
+                temp += short_sample_rate.ToString() + "k] ";
                 temp += DateTime.Now.ToString();
                 temp = temp.Replace("/", "-");
                 temp = temp.Replace(":", " ");
                 temp = console.AppDataPath + temp;
                 
                 string file_name = temp+".wav";
-                string file_name2 = file_name+"-rx2";
-				
+               // string file_name2 = file_name+"-rx2";				
 				Audio.wave_file_writer = new WaveFileWriter(console.BlockSize1, 2, waveOptionsForm.SampleRate, file_name);
-                if(console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK && console.RX2Enabled)
+ 
+                if (console.RX2Enabled)
+                {
+                    string temp_rx2 = console.RX2DSPMode.ToString() + " ";
+                    temp_rx2 += console.VFOBFreq.ToString("f6") + "MHz [";
+                    int short_rx2_sample_rate = waveOptionsForm.SampleRate / 1000;
+                    temp_rx2 += Audio.BitDepth.ToString() + "bit ";
+                    temp_rx2 += short_sample_rate.ToString() + "k] ";
+                    temp_rx2 += DateTime.Now.ToString();
+                    temp_rx2 = temp_rx2.Replace("/", "-");
+                    temp_rx2 = temp_rx2.Replace(":", " ");
+                    temp_rx2 = console.AppDataPath + temp_rx2;
+                    string file_name2 = temp_rx2 + "-rx2.wav";
+
                     Audio.wave_file_writer2 = new WaveFileWriter(console.BlockSize1, 2, waveOptionsForm.SampleRate, file_name2);
+                }
 			}
 			
 			Audio.wave_record = checkBoxRecord.Checked;
 
             if (!checkBoxRecord.Checked)
             {
-                if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK && console.RX2Enabled && Audio.wave_file_writer != null)
+                if (console.RX2Enabled && Audio.wave_file_writer != null)
                 {
                     Thread.Sleep(100);
                     Audio.wave_file_writer2.Stop();
@@ -989,11 +1008,11 @@ namespace PowerSDR
 					return;
 				}
 
-                if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK && console.RX2Enabled)
-                {
-                    string file_name2 = file_name+"-rx2";
-                    OpenWaveFile(file_name2, true);
-                }
+             //   if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK && console.RX2Enabled)
+               // {
+               //     string file_name2 = file_name+"-rx2";
+                //    OpenWaveFile(file_name2, true);
+              //  }
 							
 				chkQuickPlay.BackColor = console.ButtonSelectedColor;
 			}
@@ -1002,8 +1021,8 @@ namespace PowerSDR
 				if(Audio.wave_file_reader != null)
 					Audio.wave_file_reader.Stop();
 
-                if (Audio.wave_file_reader2 != null)
-                    Audio.wave_file_reader2.Stop();
+             //   if (Audio.wave_file_reader2 != null)
+               //     Audio.wave_file_reader2.Stop();
 
 				chkQuickPlay.BackColor = SystemColors.Control;
 				console.QuickPlay = false;
@@ -1027,22 +1046,22 @@ namespace PowerSDR
 				chkQuickPlay.Enabled = true;
                 string file_name = console.AppDataPath + "\\SDRQuickAudio.wav";
 				Audio.wave_file_writer = new WaveFileWriter(console.BlockSize1, 2, waveOptionsForm.SampleRate, file_name);
-                if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK && console.RX2Enabled)
-                {
-                    string file_name2 = file_name + "-rx2";
-                    Audio.wave_file_writer2 = new WaveFileWriter(console.BlockSize1, 2, waveOptionsForm.SampleRate, file_name2);
-                }
+               // if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK && console.RX2Enabled)
+               // {
+                //    string file_name2 = file_name + "-rx2";
+               //     Audio.wave_file_writer2 = new WaveFileWriter(console.BlockSize1, 2, waveOptionsForm.SampleRate, file_name2);
+              //  }
 			}
 			
 			Audio.wave_record = chkQuickRec.Checked;
 
             if (!chkQuickRec.Checked)
 			{
-                if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK && console.RX2Enabled && Audio.wave_file_writer2 != null)
-                {
-                    Thread.Sleep(100);
-                    Audio.wave_file_writer2.Stop();
-                }
+               // if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK && console.RX2Enabled && Audio.wave_file_writer2 != null)
+               // {
+                //    Thread.Sleep(100);
+               //     Audio.wave_file_writer2.Stop();
+               // }
 				string file_name = Audio.wave_file_writer.Stop();
 				chkQuickRec.BackColor = SystemColors.Control;
 				MessageBox.Show("The file has been written to the following location:\n"+file_name);
@@ -1150,6 +1169,7 @@ namespace PowerSDR
 		private int format;
 		private int sample_rate;
 		private int channels;
+        private int bitdepth;
 		private TimeSpan length;
 		private bool valid = false;
 
@@ -1200,6 +1220,7 @@ namespace PowerSDR
 			format = fmt.format;
 			sample_rate = fmt.sample_rate;
 			channels = fmt.channels;
+            bitdepth = fmt.bits_per_sample;
 
 			if(fmt.bytes_per_sec == 0)
 			{
@@ -1225,6 +1246,11 @@ namespace PowerSDR
 		{
 			get { return sample_rate; }
 		}
+
+        public int BitDepth
+        {
+            get { return bitdepth; }
+        }
 
 		public int Channels
 		{
@@ -1287,6 +1313,8 @@ namespace PowerSDR
 		private int frames_per_buffer;
 		private short channels;
 		private int sample_rate;
+        private short format_tag;
+        private short bit_depth;
 		private int length_counter;
 		private RingBufferFloat rb_l;
 		private RingBufferFloat rb_r;
@@ -1306,6 +1334,8 @@ namespace PowerSDR
 			frames_per_buffer = frames;
 			channels = chan;
 			sample_rate = samp_rate;
+            format_tag = Audio.FormatTag;
+            bit_depth = Audio.BitDepth;
 
 			int OUT_BLOCK = (int)Math.Ceiling(IN_BLOCK*(double)sample_rate/Audio.SampleRate1);
 			rb_l = new RingBufferFloat(IN_BLOCK*16);
@@ -1346,7 +1376,8 @@ namespace PowerSDR
 
 		private void ProcessRecordBuffers()
 		{
-			WriteWaveHeader(ref writer, channels, sample_rate, 32, 0);
+            WriteWaveHeader(ref writer, channels, sample_rate, format_tag, bit_depth, 0);
+            Debug.WriteLine("Format, bit_depth " + format_tag + " " + bit_depth);
  
 			while(record == true || rb_l.ReadSpace() > 0)
 			{
@@ -1359,7 +1390,7 @@ namespace PowerSDR
 			}
 
 			writer.Seek(0, SeekOrigin.Begin);
-			WriteWaveHeader(ref writer, channels, sample_rate, 32, length_counter);
+            WriteWaveHeader(ref writer, channels, sample_rate, format_tag, bit_depth, length_counter);
 			writer.Flush();
 			writer.Close();
 		}
@@ -1377,6 +1408,7 @@ namespace PowerSDR
 			return filename;
 		}
 
+        public static bool dither = false;
 		private void WriteBuffer(ref BinaryWriter writer, ref int count)
 		{
 			int cnt = rb_l.Read(in_buf_l, IN_BLOCK);
@@ -1404,11 +1436,16 @@ namespace PowerSDR
 
 			if(channels > 1)
 			{
-				// interleave samples
+                // interleave samples and clip
 				for(int i=0; i<out_cnt; i++)
 				{
 					out_buf[i*2] = out_buf_l[i];
+                    if (out_buf[i * 2] > 1.0f) out_buf[i * 2] = 1.0f;
+                    else if (out_buf[i * 2] < -1.0f) out_buf[i * 2] = -1.0f;
+
 					out_buf[i*2+1] = out_buf_r[i];
+                    if (out_buf[i * 2 + 1] > 1.0f) out_buf[i * 2 + 1] = 1.0f;
+                    else if (out_buf[i * 2 + 1] < -1.0f) out_buf[i * 2 + 1] = -1.0f;
 				}
 			}
 			else
@@ -1416,28 +1453,248 @@ namespace PowerSDR
 				out_buf_l.CopyTo(out_buf, 0);
 			}
 
-            byte[] temp = new byte[4];
 			int length = out_cnt;
 			if(channels > 1) length *= 2;
+
+            switch (bit_depth)
+            {
+                case 32:
+                    Write_32(length, ref count, out_cnt);
+                    break;
+                case 24:
+                    Write_24(length, ref count, out_cnt);
+                    break;
+                case 16:
+                    Write_16(length, ref count, out_cnt);
+                    break;
+                case 8:
+                    Write_8(length, ref count, out_cnt);
+                    break;
+            }
+        }
+
+        private static Random rnd = new Random(); // generates values between 0.0 and 1.0
+        private void Write_32(int length, ref int count, int out_cnt)
+        {
+
+            byte[] temp = new byte[4];
+            int result;
+            int intSample;
+
 			for(int i=0; i<length; i++)
 			{
+                switch (format_tag)
+                {
+                    case 3:
+                        dither = false;
 				temp = BitConverter.GetBytes(out_buf[i]);
+                        break;
+                    case 1:
+                        if (dither)
+                        {
+                            intSample = dither32(out_buf[i] * 0x80000000);
+                            byte_buf[i * 4 + 3] = (byte)(intSample >> 24);
+                            byte_buf[i * 4 + 2] = (byte)(((uint)intSample >> 16) & 0xFF);
+                            byte_buf[i * 4 + 1] = (byte)(((uint)intSample >> 8) & 0xFF);
+                            byte_buf[i * 4] = (byte)(intSample & 0xFF);
+                        }
+                        else
+                        {
+                            Convert(out_buf[i], out result);
+                            temp = BitConverter.GetBytes(result);
+                        }
+                        break;
+                }
+
+                if (!dither)
+                {
+
 				for(int j=0; j<4; j++)
 					byte_buf[i*4+j] = temp[j];
 			}
+            }
 
 			writer.Write(byte_buf, 0, out_cnt*2*4);
 			count += out_cnt*2*4;
 		}
 
-		private void WriteWaveHeader(ref BinaryWriter writer, short channels, int sample_rate, short bit_depth, int data_length)
+
+        private void Write_24(int length, ref int count, int out_cnt)
+        {
+           // byte[] temp = new byte[4];
+           // int result;
+            int intSample;
+
+            for (int i = 0; i < length; i++)
+            {
+                intSample = dither24(out_buf[i] * 0x800000); //8388608.0f);
+                byte_buf[i * 3 + 2] = (byte)(intSample >> 16);
+                byte_buf[i * 3 + 1] = (byte)(((uint)intSample >> 8) & 0xFF);
+                byte_buf[i * 3] = (byte)(intSample & 0xFF);
+
+               /* Convert24(out_buf[i], out result[i]);
+                temp = BitConverter.GetBytes(result[i]);
+
+                for (int j = 0; j < 3; j++)
+                    byte_buf[i * 3 + j] = temp[j]; */
+            }
+
+            writer.Write(byte_buf, 0, out_cnt * 2 * 3);
+            count += out_cnt * 2 * 3;
+        }
+
+        private void Write_16(int length, ref int count, int out_cnt)
+        {
+           // byte[] temp = new byte[2];
+           // short[] result = new short[length];
+           // short result;
+            int intSample;
+
+            for (int i = 0; i < length; i++)
+            {
+                intSample = dither16(out_buf[i] * 0x8000); //32768.0f);
+                byte_buf[i * 2 + 1] = (byte)(intSample >> 8);
+                byte_buf[i * 2] = (byte)(intSample & 0xFF);
+
+              /*  Convert(out_buf[i], out result);
+                temp = BitConverter.GetBytes(result);
+
+                for (int j = 0; j < 2; j++)
+                    byte_buf[i * 2 + j] = temp[j]; */
+            }
+
+            writer.Write(byte_buf, 0, out_cnt * 2 * 2);
+            count += out_cnt * 2 * 2;
+        }
+
+        private void Write_8(int length, ref int count, int out_cnt)
+        {
+           // byte[] temp = new byte[1];
+            //byte[] result = new byte[length]; // 8-bit 
+           // byte result;
+
+            for (int i = 0; i < length; i++)
+            {
+                byte_buf[i] = (byte)(dither8(out_buf[i] * 0x80) + 128); //128.0f) + 128);
+
+              /*  Convert(out_buf[i], out result);
+                temp = BitConverter.GetBytes(result);
+
+                for (int j = 0; j < 1; j++)
+                    byte_buf[i * 1 + j] = temp[j];*/
+            }
+
+            writer.Write(byte_buf, 0, out_cnt * 2);
+            count += out_cnt * 2;
+        }
+
+        private static int dither32(float sample)
+        {
+            {
+                sample += (float)rnd.NextDouble() * 0.8f;// ditherBits;
+            }
+            if (sample >= 2147483647.0f)
+            {
+                return 2147483647;
+            }
+            else if (sample <= -2147483648.0f)
+            {
+                return -2147483648;
+            }
+            else
+            {
+                return (int)(sample < 0 ? (sample - 0.5f) : (sample + 0.5f));
+            }
+        }
+
+        private static int dither24(float sample)
+        {
+            if (dither)
+            {
+                sample += (float)rnd.NextDouble() * 0.8f;
+            }
+            if (sample >= 8388607.0f)
+            {
+                return 8388607;
+            }
+            else if (sample <= -8388608.0f)
+            {
+                return -8388608;
+            }
+            else
+            {
+                return (int)(sample < 0 ? (sample - 0.5f) : (sample + 0.5f));
+            }
+        }
+
+        private static int dither16(float sample)
+        {
+            if (dither)
+            {
+                sample += (float)rnd.NextDouble() * 0.8f;
+            }
+            if (sample >= 32767.0f)
+            {
+                return 32767;
+            }
+            else if (sample <= -32768.0f)
+            {
+                return -32768;
+            }
+            else
+            {
+                return (int)(sample < 0 ? (sample - 0.5f) : (sample + 0.5f));
+            }
+        }
+
+        private static sbyte dither8(float sample)
+        {
+            if (dither)
+            {
+                sample += (float)rnd.NextDouble() * 0.8f;
+            }
+            if (sample >= 127.0f)
+            {
+                return (sbyte)127;
+            }
+            else if (sample <= -128.0f)
+            {
+                return (sbyte) -128;
+            }
+            else
+            {
+                return (sbyte)(sample < 0 ? (sample - 0.5f) : (sample + 0.5f));
+            }
+        }
+
+        public static void Convert(float from, out byte to) //8-bit
+        {
+            to = (byte)(128 + ((byte)(from * (127.0f))));
+        }
+
+        public static void Convert(float from, out short to) //16-bit
+        {
+            to = (short)(from * 0x7FFF);
+        }
+
+        private void Convert(float from, out Int32 to)
+        {
+            to = (int)((double)from * 0x7FFFFFFF); // 32 bit
+        }
+
+        private void Convert24(float from, out Int32 to)
+        {
+            to = (int)((double)from * 0x7FFFFF); // 24 bit
+        }
+
+        private void WriteWaveHeader(ref BinaryWriter writer, short channels, int sample_rate, short format_tag, short bit_depth, int data_length)
 		{
 			writer.Write(0x46464952);								// "RIFF"		-- descriptor chunk ID
 			writer.Write(data_length + 36);							// size of whole file -- 1 for now
 			writer.Write(0x45564157);								// "WAVE"		-- descriptor type
 			writer.Write(0x20746d66);								// "fmt "		-- format chunk ID
 			writer.Write((int)16);									// size of fmt chunk
-			writer.Write((short)3);									// FormatTag	-- 3 for floats
+            writer.Write(format_tag); //(short)1);					// FormatTag	-- 1-PCM 3-IEEE Floats
 			writer.Write(channels);									// wChannels
 			writer.Write(sample_rate);								// dwSamplesPerSec
 			writer.Write((int)(channels*sample_rate*bit_depth/8));	// dwAvgBytesPerSec
@@ -1460,6 +1717,7 @@ namespace PowerSDR
 		private int format;
 		private int sample_rate;
 		private int channels;
+        private int bitdepth;
 		private bool playback;
 		private int frames_per_buffer;
 		private RingBufferFloat rb_l;
@@ -1482,6 +1740,7 @@ namespace PowerSDR
 			int fmt,
 			int samp_rate,
 			int chan,
+            int bit_depth,
 			ref BinaryReader binread)
 		{
 			wave_form = form;
@@ -1489,6 +1748,7 @@ namespace PowerSDR
 			format = fmt;
 			sample_rate = samp_rate;
 			channels = chan;
+            bitdepth = bit_depth;
 			
 			//OUT_BLOCK = 2048;
 			//IN_BLOCK = (int)Math.Floor(OUT_BLOCK*(double)sample_rate/Audio.SampleRate1);
@@ -1501,19 +1761,42 @@ namespace PowerSDR
 			buf_r_in = new float[IN_BLOCK];
 			buf_l_out = new float[OUT_BLOCK];
 			buf_r_out = new float[OUT_BLOCK];
-			if(format == 1)
+
+            switch (format)
+            {
+                case 1:
+                    switch (bitdepth)
 			{
+                        case 32:
+                            io_buf_size = IN_BLOCK * 4 * 2;
+                            break;
+                        case 24:
+                            io_buf_size = IN_BLOCK * 3 * 2;
+                            break;
+                        case 16:
 				io_buf_size = IN_BLOCK*2*2;
+                            break;
+                        case 8:
+                            io_buf_size = IN_BLOCK * 2;
+                            break;
 			}
-			else if(format == 3)
+                    break;
+                case 3:
+                    io_buf_size = IN_BLOCK * 4 * 2;
+                   /* if (sample_rate != Audio.SampleRate1)
 			{
-				io_buf_size = IN_BLOCK*4*2;
+                        resamp_l = DttSP.NewResamplerF(sample_rate, Audio.SampleRate1);
+                        if (channels > 1) resamp_r = DttSP.NewResamplerF(sample_rate, Audio.SampleRate1);
+                    } */
+                    break;
+            }
+
 				if(sample_rate != Audio.SampleRate1)
 				{
 					resamp_l = DttSP.NewResamplerF(sample_rate, Audio.SampleRate1);
 					if(channels > 1) resamp_r = DttSP.NewResamplerF(sample_rate, Audio.SampleRate1);
 				}
-			}
+
 			io_buf = new byte[io_buf_size];
 
 			playback = true;
@@ -1569,8 +1852,22 @@ namespace PowerSDR
 				switch(format)
 				{
 					case 1:		// ints
+                        switch (bitdepth)
+                        {
+                            case 32:
+                                num_reads = val / 8;
+                                break;
+                            case 24:
+                                num_reads = val / 6;
+                                break;
+                            case 16:
 						num_reads = val / 4;
 						break;
+                            case 8:
+                                num_reads = val / 2;
+                                break;
+                        }
+                        break;
 					case 3:		// floats
 						num_reads = val / 8;
 						break;
@@ -1582,9 +1879,45 @@ namespace PowerSDR
 				switch(format)
 				{
 					case 1:		// ints
+                        switch (bitdepth)
+                        {
+                            case 32: // 32-bit signed integer
+                                //  buf_l_in[i] = (float)((double)BitConverter.ToInt32(io_buf, i * 8) / 2147483648.0);
+                                //  buf_r_in[i] = (float)((double)BitConverter.ToInt32(io_buf, i * 8 + 4) / 2147483648.0);
+
+                                buf_l_in[i] = ((io_buf[i * 8 + 3] << 24)
+                                               | ((io_buf[i * 8 + 2] & 0xFF) << 16)
+                                               | ((io_buf[i * 8 + 1] & 0xFF) << 8)
+                                               | (io_buf[i * 8] & 0xFF))
+                                               / 2147483648.0f;
+
+                                buf_r_in[i] = ((io_buf[i * 8 + 7] << 24)
+                                               | ((io_buf[i * 8 + 6] & 0xFF) << 16)
+                                               | ((io_buf[i * 8 + 5] & 0xFF) << 8)
+                                               | (io_buf[i * 8 + 4] & 0xFF))
+                                               / 2147483648.0f;
+                                break;
+                            case 24: // 24-bit signed integer
+                                buf_l_in[i] = (((io_buf[i * 6 + 2] << 24)
+                                              | ((io_buf[i * 6 + 1] & 0xFF) << 16)
+                                              | ((io_buf[i * 6] & 0xFF) << 8)) >> 8)
+                                              / 8388608.0f;
+
+                                buf_r_in[i] = (((io_buf[i * 6 + 5] << 24)
+                                               | ((io_buf[i * 6 + 4] & 0xFF) << 16)
+                                               | ((io_buf[i * 6 + 3] & 0xFF) << 8)) >> 8)
+                                               / 8388608.0f;
+                                break;
+                            case 16: // 16-bit signed integer
 						buf_l_in[i] = (float)((double)BitConverter.ToInt16(io_buf, i*4) / 32767.0);
 						buf_r_in[i] = (float)((double)BitConverter.ToInt16(io_buf, i*4+2) / 32767.0);
 						break;
+                            case 8: // 8-bit unsigned integer 
+                                buf_l_in[i] = ((io_buf[i * 2] & 0xFF) - 128) / 128.0f;
+                                buf_r_in[i] = ((io_buf[i * 2 + 1] & 0xFF) - 128) / 128.0f;
+                                break;
+                        }
+                        break;
 					case 3:		// floats
 						buf_l_in[i] = BitConverter.ToSingle(io_buf, i*8);
 						buf_r_in[i] = BitConverter.ToSingle(io_buf, i*8+4);
