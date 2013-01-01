@@ -32,6 +32,64 @@ Current limitations:
 ***********************************************************************
 list of changes:
 
+v0.3.2.7:
+
+- The Radio control Popup window opens now by clicking the right mouse
+  button. These Popups can be opened for each receiver seperately, and
+  can be made sticky. On the Popups you now find the controls for
+  averaging, grid display, Peak-Hold function, 'VFO=Mid', and 'Mid=VFO',
+  each of which is controlled seperately for each receiver window.
+  
+- The 'Locked Pan' feature has been extended by another mode called
+  'Click VFO'. If only the 'Locked Pan' mode has been choosen, the VFO
+  frequency is controlled by the mouse wheel or by dragging the mouse
+  in the Pan/Waterfall. If in addition 'Click VFO' is choosen, the VFO
+  frequency is controlled by clicking with the left mouse button, or by
+  clicking and dragging.
+  
+- The status of 'Locked Pan', 'Click VFO' and all center and VFO 
+  frequencies are stored in the settings.ini, and are retrieved after a
+  restart of the application.
+  
+v0.3.2.6:
+
+- added possibility to fix the Panadapter/Waterfall spectra to the 
+  center frequency, and tune the VFO independently from this center 
+  frequency. So now we have differentiate between the 'center frequency'
+  and the 'VFO frequency', which is the frequency at which audio is 
+  demodulated.
+  
+  You can turn on this feature by clicking on the small button 'Lock Pan'
+  in the Panadapter window top left. Then you can drag the VFO with the
+  mouse (left click), or by dragging the mouse wheel (tuning in fixed 
+  mouse wheel steps). If you click in the Panadapter with right mouse
+  button the hair cross shows up (as before), but then left clicking
+  moves only the VFO frequency while the Panadapter is locked.
+  
+  Two additional buttons gives the possibility to set either the VFO
+  frequency to the center frequency ('vfo = mid'), or the center 
+  frequency to the current VFO frequency ('mid = vfo').
+  
+  A note on the implementation: this is a feature which was already present 
+  in Cathy Moss' SDRMAX3 (but not the DSP related function), where the
+  idea of the control of this feature is taken from. Another wonderful 
+  feature of Cathy's work which I very much appreciate. 
+  
+  The DSP implementation is adapted from cuteSDR by Moe Wheatley, AE4JY. 
+  It is actually an implementation for translating a frequency band using 
+  a quadrature oscillator, as described in Richard Lyons book 'Understanding 
+  Digital Signal Processing'. In fact, the implementation is fairly easy, 
+  and it was especially easy for me because of the very nice example code  
+  from Moe Wheatley's cuteSDR. I very much appreciate also his work on 
+  cuteSDR!
+  
+  I am still experimenting with the features to control this behavior, and
+  I welcome any clever ideas for doing this!
+
+v0.3.2.5:
+
+- added possibility to switch off firmware checks.
+
 v0.3.2.4:
 
 - added Metis FW V2.2
