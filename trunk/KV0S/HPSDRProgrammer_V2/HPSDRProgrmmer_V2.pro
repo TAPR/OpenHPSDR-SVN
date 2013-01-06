@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     interfaces.cpp \
     rawreceivethread.cpp \
     receivethread.cpp \
-    statusdialog.cpp
+    statusdialog.cpp \
+    addressdialog.cpp
 
 HEADERS  += mainwindow.h \
     aboutdialog.h \
@@ -43,11 +44,13 @@ HEADERS  += mainwindow.h \
     rawreceivethread.h \
     version.h \
     receivethread.h \
-    statusdialog.h
+    statusdialog.h \
+    addressdialog.h
 
 FORMS    += mainwindow.ui \
     aboutdialog.ui \
-    statusdialog.ui
+    statusdialog.ui \
+    addressdialog.ui
 
 RESOURCES += \
     HPSDRProgrammer_Res.qrc

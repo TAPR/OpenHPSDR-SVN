@@ -136,7 +136,7 @@
    <item row="2" column="1" rowspan="2">
     <widget class="QFrame" name="frame">
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
@@ -185,14 +185,14 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="HPSDRProgrammer_Res.qrc">:/icons/hpsdr4sm.png</pixmap>
+      <pixmap resource="HPSDRBootloader.qrc">:/icons/hpsdr4sm.png</pixmap>
      </property>
     </widget>
    </item>
    <item row="4" column="0" colspan="2">
     <widget class="QFrame" name="frame_2">
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
@@ -274,7 +274,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="HPSDRProgrammer_Res.qrc"/>
+  <include location="HPSDRBootloader.qrc"/>
  </resources>
  <connections/>
 </ui>

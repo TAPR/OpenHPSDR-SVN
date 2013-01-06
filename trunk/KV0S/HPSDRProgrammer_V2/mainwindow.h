@@ -16,6 +16,7 @@
 #include "board.h"
 #include "aboutdialog.h"
 #include "statusdialog.h"
+#include "addressdialog.h"
 #include "version.h"
 
 // states
@@ -194,6 +195,7 @@ private:
     */
     AboutDialog *ab;
     StatusDialog *stat;
+    AddressDialog *add;
 };
 
 #endif // MAINWINDOW_H
