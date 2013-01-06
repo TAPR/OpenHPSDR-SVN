@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>659</width>
-    <height>450</height>
+    <height>474</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -271,6 +271,7 @@
      <string>Tools</string>
     </property>
     <addaction name="actionStatus"/>
+    <addaction name="actionAddress"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTools"/>
@@ -285,6 +286,7 @@
    </attribute>
    <addaction name="actionStatus"/>
    <addaction name="actionAbout"/>
+   <addaction name="actionAddress"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionHelp">
@@ -319,6 +321,15 @@
    </property>
    <property name="toolTip">
     <string>Open Status History Window</string>
+   </property>
+  </action>
+  <action name="actionAddress">
+   <property name="icon">
+    <iconset resource="HPSDRProgrammer_Res.qrc">
+     <normaloff>:/icons/IPaddress.png</normaloff>:/icons/IPaddress.png</iconset>
+   </property>
+   <property name="text">
+    <string>Address</string>
    </property>
   </action>
  </widget>

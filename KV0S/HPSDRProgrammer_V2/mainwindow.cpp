@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ab->setVersion( QString(VERSION), QString(RELEASE) );
 
     stat = new StatusDialog();
+    add = new AddressDialog();
 
 
     receiveThread=NULL;
@@ -59,14 +60,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     statusBar()->addPermanentWidget (deviceIndicator);
 
-#ifdef __WIN32
-    //ui->privilegesLabel->setText("You must be running with Administrator privileges to be able to read/write raw ethernet frames.");
-    QRect rect=ui->interfaceComboBox->geometry();
-    rect.setWidth(ui->interfaceLabel->width());
-    ui->interfaceComboBox->setGeometry(rect);
-#else
-    //ui->privilegesLabel->setText("You must be running as root to be able to read/write raw ethernet frames.");
-#endif
 
     for (int i = 0; i < interfaces.getInterfaces(); ++i)
     {   ui->   interfaceComboBox->addItem(interfaces.getInterfaceNameAt(i));
@@ -86,6 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->browseButton,SIGNAL(clicked()),this,SLOT(browse()));
 
     connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
+    connect(ui->actionAddress,SIGNAL(triggered()),add,SLOT(show()));
 
 
     if(ui->interfaceComboBox->count()>0) {
