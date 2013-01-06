@@ -6,6 +6,8 @@ AddressDialog::AddressDialog(QWidget *parent) :
     ui(new Ui::AddressDialog)
 {
     ui->setupUi(this);
+
+    connect(ui->closeButton,SIGNAL(clicked()),this,SLOT(close()));
 }
 
 AddressDialog::~AddressDialog()
