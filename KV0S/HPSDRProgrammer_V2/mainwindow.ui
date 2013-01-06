@@ -251,7 +251,7 @@
      <x>0</x>
      <y>0</y>
      <width>659</width>
-     <height>25</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -285,8 +285,8 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionStatus"/>
-   <addaction name="actionAbout"/>
    <addaction name="actionAddress"/>
+   <addaction name="actionAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionHelp">

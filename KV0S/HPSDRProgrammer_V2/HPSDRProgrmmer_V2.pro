@@ -12,8 +12,8 @@ TARGET = HPSDRProgrmmer_V2
 TEMPLATE = app
 
 win32 {
-    INCLUDEPATH += "c:\WpdPack\Include"
-    LIBS += "c:\WpdPack\Lib\wpcap.lib" /Qt/2010.05/mingw/lib/libws2_32.a
+    INCLUDEPATH += "c:/WpdPack/Include"
+    LIBS += "c:/WpdPack/Lib/wpcap.lib" C:/MinGW/lib/libws2_32.a
  }
 
 macx {
