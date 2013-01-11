@@ -1,0 +1,10 @@
+<sld_project_info>
+  <project>
+    <hash md5_digest_80b="00000000000000000000"/>
+  </project>
+  <file_info>
+    <file checksum="0x015EB9F7" device="EP3C40Q240C8" path="Hermes.sof" usercode="0xFFFFFFFF"/>
+    <file checksum="0x1963E89B" device="EPCS16" path="Hermes.pof" usercode="0x00000000"/>
+    <file path="Hermes.rbf"/>
+  </file_info>
+</sld_project_info>
