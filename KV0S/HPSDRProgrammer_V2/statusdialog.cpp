@@ -27,6 +27,11 @@
 #include "statusdialog.h"
 #include "ui_statusdialog.h"
 
+/*! \brief status( QString text )
+ *
+ *  This function send a text string to the status bar abd the status window.
+ */
+
 StatusDialog::StatusDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StatusDialog)
@@ -36,10 +41,20 @@ StatusDialog::StatusDialog(QWidget *parent) :
     connect(ui->closeButton,SIGNAL(clicked()),this,SLOT(close()));
 }
 
+/*! \brief status( QString text )
+ *
+ *  This function send a text string to the status bar abd the status window.
+ */
+
 StatusDialog::~StatusDialog()
 {
     delete ui;
 }
+
+/*! \brief status( QString text )
+ *
+ *  This function send a text string to the status bar abd the status window.
+ */
 
 void StatusDialog::status( QString text )
 {
@@ -47,6 +62,11 @@ void StatusDialog::status( QString text )
     ui->statusListWidget->insertItem(ui->statusListWidget->count()-1,text);
     ui->statusListWidget->setCurrentRow(ui->statusListWidget->count()-1);
 }
+/*! \brief status( QString text )
+ *
+ *  This function send a text string to the status bar abd the status window.
+ */
+
 
 void StatusDialog::clear()
 {

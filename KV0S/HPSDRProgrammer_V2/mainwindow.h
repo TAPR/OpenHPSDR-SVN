@@ -51,22 +51,22 @@ public:
 #ifdef Q_WS_MAC
     void setPath(char* path);
 #endif
-    enum{metis, hermes, angelia} board;
+
 
 public slots:
     void quit();
     //void about();
     void interfaceSelected(int);
-    void metisSelected();
+    //void metisSelected();
     void metisSelected(int index);
-    void hermesSelected();
-    void angeliaSelected();
+    //void hermesSelected();
+    //void angeliaSelected();
     void browse();
     void program();
     //void erase();
     //void getMAC();
     //void getIP();
-    //void setIP();
+    void setIP();
 
     void discover();
     void discovery_timeout();
