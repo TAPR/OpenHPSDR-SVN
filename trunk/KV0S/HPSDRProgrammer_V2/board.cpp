@@ -29,6 +29,17 @@
 
 #include "board.h"
 
+/*! \brief Board(long ipaddr, unsigned char* macaddr, unsigned char software_version, unsigned char board_type)
+ *
+ *  \param long ipaddr
+ *  \param unsigned char* macaddr
+ *  \param unsigned char software_version
+ *  \param unsigned char board_type
+ *
+ *  This constructor function for Board class.  These are the network information for
+ *  the discovered HPSDR interface boards.
+ */
+
 Board::Board(long ipaddr,unsigned char* macaddr,unsigned char software_version,unsigned char board_type) {
     ipaddress=ipaddr;
     for(int i=0;i<6;i++) {
@@ -38,14 +49,29 @@ Board::Board(long ipaddr,unsigned char* macaddr,unsigned char software_version,u
     board=board_type;
 }
 
+/*! \brief getIpAddress()
+ *
+ *
+ *  This function returns the IP address of the found HPSDR board.
+ */
 
 long Board::getIpAddress() {
     return ipaddress;
 }
 
+/*! \brief getMACAddress()
+ *
+ *  This function returns the MAC address of the found HPSDR board.
+ */
+
 unsigned char* Board::getMACAddress() {
     return macaddress;
 }
+
+/*! \brief getHostAddress()
+ *
+ *  This function returns the Host address.
+ */
 
 QString Board::getHostAddress() {
     QString address;
@@ -54,7 +80,13 @@ QString Board::getHostAddress() {
     return address;
 }
 
-QString Board::toString() {
+/*! \brief toAllString()
+ *
+ *  This function formats the stored data into a QString.
+ */
+
+
+QString Board::toAllString() {
     QString text;
     text.sprintf("%02X:%02X:%02X:%02X:%02x:%02X (%ld.%ld.%ld.%ld) Software version: %d.%d (%s)",
                  macaddress[0],macaddress[1],macaddress[2],macaddress[3],macaddress[4],macaddress[5],
@@ -63,9 +95,66 @@ QString Board::toString() {
     return text;
 }
 
+/*! \brief toIPString()
+ *
+ *  This function formats the stored data into a QString.
+ */
+
+
+QString Board::toIPString() {
+    QString text;
+    text.sprintf("%ld.%ld.%ld.%ld",
+                 (ipaddress>>24)&0xFF,(ipaddress>>16)&0xFF,(ipaddress>>8)&0xFF,ipaddress&0xFF);
+    return text;
+}
+
+/*! \brief toIPString()
+ *
+ *  This function formats the stored data into a QString part of each of the 4 numbers.
+ */
+
+
+QString Board::toIPPartString(int id) {
+    QString text;
+    if( id == 1){
+        text.sprintf("%ld",(ipaddress>>24)&0xFF);
+    }else if ( id == 2){
+        text.sprintf("%ld",(ipaddress>>16)&0xFF);
+    }else if ( id == 3){
+        text.sprintf("%ld",(ipaddress>>8)&0xFF);
+    }else if ( id == 4){
+        text.sprintf("%ld",ipaddress&0xFF);
+    }
+    return text;
+}
+
+/*! \brief toMACString()
+ *
+ *  This function formats the stored data into a QString.
+ */
+
+
+QString Board::toMACString() {
+    QString text;
+    text.sprintf("%02X:%02X:%02X:%02X:%02x:%02X",
+                 macaddress[0],macaddress[1],macaddress[2],macaddress[3],macaddress[4],macaddress[5]);
+    return text;
+}
+
+/*! \brief getVersion()
+ *
+ *  This function returns the board version number.
+ */
+
 unsigned char Board::getVersion() {
     return version;
 }
+
+/*! \brief getBoard()
+ *
+ *  This function returns the type of board.
+ */
+
 
 unsigned char Board::getBoard() {
     return board;

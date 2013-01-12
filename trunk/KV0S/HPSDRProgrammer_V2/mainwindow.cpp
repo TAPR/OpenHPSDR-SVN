@@ -69,9 +69,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionAbout,SIGNAL(triggered()),ab,SLOT(show()));
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(quit()));
     connect(ui->interfaceComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(interfaceSelected(int)));
-    connect(ui->HermesButton,SIGNAL(clicked()),this,SLOT(hermesSelected()));
-    connect(ui->AngeliaButton,SIGNAL(clicked()),this,SLOT(angeliaSelected()));
-    connect(ui->MetisButton,SIGNAL(clicked()),this,SLOT(metisSelected()));
 
     connect(ui->discoverButton,SIGNAL(clicked()),this,SLOT(discover()));
 
@@ -143,18 +140,21 @@ void MainWindow::interfaceSelected(int index) {
     }
 }
 
+/*
 void MainWindow::metisSelected() {
     isMetis=true;
     board = metis;
     qDebug() << "Metis selected";
     status( "Metis selected");
 }
+*/
 
 void MainWindow::metisSelected(int index) {
     if(index>=0) {
         metisIP=bd.at(index)->getIpAddress();
         metisHostAddress=bd.at(index)->getHostAddress();
 
+        /*
         if(isMetis) {
             if(bd.at(index)->getBoard()==1) {
                 status("Warning: you have Metis selected but board selected is Hermes!");
@@ -165,10 +165,11 @@ void MainWindow::metisSelected(int index) {
             }
 
         }
+        */
     }
 }
 
-
+/*
 void MainWindow::hermesSelected() {
     isMetis=false;
     board = hermes;
@@ -184,7 +185,7 @@ void MainWindow::angeliaSelected()
     status( "Angelia selected");
 }
 
-
+*/
 
 // SLOT - browse - called when the "Browse ..." button on the Program tab is pressed.
 void MainWindow::browse()
@@ -199,20 +200,10 @@ void MainWindow::browse()
 void MainWindow::discover() {
     stat->clear();
     status("");
-    if( board == metis )
-    {
-        text = QString("%0 Discovery").arg("Metis");
-    }else if( board == hermes){
-        text = QString("%0 Discovery").arg("Hermes");
-    }else{
-        text = QString("%0 Discovery").arg("Angelia");
-    }
-    status(text);
+
 
     ui->discoverComboBox->clear();
     bd.clear();
-
-
 
     QString myip=interfaces.getInterfaceIPAddress(interfaceName);
 
@@ -263,15 +254,15 @@ void MainWindow::board_found(Board* m) {
 
     if(htonl(m->getIpAddress())!=ip) {
         bd.append(m);
-        ui->discoverComboBox->addItem(m->toString());
-        status(m->toString());
-        if(isMetis) {
-            if(m->getBoard()!=0) {
-                status("Warning: you have Metis selected but board is Hermes!");
-            }
-        } else if(m->getBoard()!=1) {
-            status("Warning: you have Hermes selected but board is Metis!");
-        }
+        ui->discoverComboBox->addItem(m->toAllString());
+        add->setIPaddress(m);
+        add->setMACaddress(m);
+        qDebug() << "Board" << m->getBoard();
+        qDebug() << "Software" << m->getVersion();
+        qDebug() << "IP" << m->getIpAddress();
+
+        status(m->toAllString());
+
 
     }
 }
@@ -624,6 +615,83 @@ void MainWindow::loadFlash() {
     sendJTAGFlashData();
 }
 
+// SLOT - setIP - called when the "Write" button on the IP Address tab is pressed.
+void MainWindow::setIP() {
+    char errbuf[PCAP_ERRBUF_SIZE];
+    unsigned char buffer[66];
+    int addr[4];
+    int i;
+
+    qDebug()<<"setIP";
+
+    stat->clear();
+    status("");
+
+    // will need to run Discovery again
+    ui->discoverComboBox->clear();
+    //board.clear();
+
+    //addr[0]=ui->ipALineEdit->text().toInt();
+    //addr[1]=ui->ipBLineEdit->text().toInt();
+    //addr[2]=ui->ipCLineEdit->text().toInt();
+    //addr[3]=ui->ipDLineEdit->text().toInt();
+
+    if((addr[0]<0 || addr[0]>255) || (addr[1]<0 || addr[1]>255) || (addr[2]<0 || addr[2]>255) || (addr[3]<0 || addr[3]>255)) {
+        status("Error: invalid IP address");
+    } else {
+
+        handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
+        if (handle == NULL) {
+            qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+            status("Error: cannot open interface (are you running as root)");
+        } else {
+
+            state=WRITE_IP;
+
+            /*set the frame header*/
+            buffer[0]=0x11; // dest address
+            buffer[1]=0x22;
+            buffer[2]=0x33;
+            buffer[3]=0x44;
+            buffer[4]=0x55;
+            buffer[5]=0x66;
+
+            buffer[6]=hw[0]; // src address
+            buffer[7]=hw[1];
+            buffer[8]=hw[2];
+            buffer[9]=hw[3];
+            buffer[10]=hw[4];
+            buffer[11]=hw[5];
+
+            buffer[12]=0xEF; // protocol
+            buffer[13]=0xFE;
+
+            buffer[14]=0x03; //
+            buffer[15]=WRITE_METIS_IP;
+
+            /*fill the frame with 0x00*/
+            buffer[16]=(unsigned char)addr[0];
+            buffer[17]=(unsigned char)addr[1];
+            buffer[18]=(unsigned char)addr[2];
+            buffer[19]=(unsigned char)addr[3];
+
+            for(i=0;i<46;i++) {
+                buffer[i+20]=(unsigned char)0x00;
+            }
+
+           if(pcap_sendpacket(handle,buffer,62)!=0) {
+                qDebug()<<"pcap_sendpacket failed";
+                status("send write ip command failed");
+                idle();
+            } else {
+                text.sprintf("Written %s IP address",isMetis?"Metis":"Hermes");
+                status(text);
+            }
+        }
+
+        idle();
+    }
+}
 
 // private function to send 256 byte block of the pof file.
 void MainWindow::sendJTAGFlashData() {

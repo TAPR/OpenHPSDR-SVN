@@ -33,6 +33,13 @@
 #include "discovery.h"
 #include "board.h"
 
+/*! \brief Discovery(QUdpSocket* s, QString myip)
+ *
+ *  \param QUdpSocket* s
+ *  \param QString myip
+ *
+ *  This constructor function for Discovery class.
+ */
 
 Discovery::Discovery(QUdpSocket* s,QString myip) {
     qDebug()<<"Discovery: "<<myip;
@@ -41,6 +48,11 @@ Discovery::Discovery(QUdpSocket* s,QString myip) {
 
     connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
 }
+
+/*! \brief discover()
+ *
+ *  This function send the discovery packet.
+ */
 
 void Discovery::discover() {
     // send the discovery packet
@@ -60,9 +72,19 @@ void Discovery::discover() {
     }
 }
 
+/*! \brief stop()
+ *
+ *  This function disconnect the socket.
+ */
+
 void Discovery::stop() {
     disconnect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
 }
+
+/*! \brief readyRead()
+ *
+ *  This function SLOT to process the socket data.
+ */
 
 void Discovery::readyRead() {
 
