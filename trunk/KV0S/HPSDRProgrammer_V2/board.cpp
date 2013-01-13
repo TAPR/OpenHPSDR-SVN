@@ -52,6 +52,11 @@ Board::Board(long ipaddr,unsigned char* macaddr,unsigned char software_version,u
     boardtype[1] = "hermes";
     boardtype[2] = "griffin";
     boardtype[4] = "angelia";
+
+    jumper[0] = "J1";
+    jumper[1] = "J12";
+    jumper[2] = "J";
+    jumper[4] = "J12";
 }
 
 /*! \brief getIpAddress()
@@ -96,7 +101,9 @@ QString Board::toAllString() {
     text.sprintf("%02X:%02X:%02X:%02X:%02x:%02X (%ld.%ld.%ld.%ld) Software version: %d.%d (%s)",
                  macaddress[0],macaddress[1],macaddress[2],macaddress[3],macaddress[4],macaddress[5],
                  (ipaddress>>24)&0xFF,(ipaddress>>16)&0xFF,(ipaddress>>8)&0xFF,ipaddress&0xFF,
-                 version/10,version%10,board==0?"Metis":"Hermes");
+                 version/10,version%10,boardtype[board].toStdString().c_str());
+    qDebug() << board << boardtype[0];
+
     return text;
 }
 

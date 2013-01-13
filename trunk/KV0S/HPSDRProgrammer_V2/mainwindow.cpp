@@ -49,10 +49,17 @@ MainWindow::MainWindow(QWidget *parent) :
     stat = new StatusDialog(this);
     add = new AddressDialog(this);
 
+    QCoreApplication::setOrganizationName("HPSDR");
+    QCoreApplication::setOrganizationDomain("openhpsdr.org");
+    QCoreApplication::setApplicationName("HPSDRProgrammer_V2");
+
+    //settings.setValue("dir", "");
+
 
     receiveThread=NULL;
     rawReceiveThread=NULL;
     discovery=NULL;
+    currentboard="";
 
     deviceIndicator->setIndent(0);
     deviceIndicator->setPixmap (QPixmap(":/icons/red16.png"));
@@ -77,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
     connect(ui->actionAddress,SIGNAL(triggered()),add,SLOT(show()));
+
 
     connect(add,SIGNAL(writeIP()),this,SLOT(setIP()));
 
@@ -113,6 +121,8 @@ void MainWindow::status(QString text) {
     stat->status( text.trimmed() );
 }
 
+
+
 // SLOT - interfaceSelected - called when the interface selection is changed
 void MainWindow::interfaceSelected(int index) {
     bool ok;
@@ -143,58 +153,26 @@ void MainWindow::interfaceSelected(int index) {
     }
 }
 
-/*
-void MainWindow::metisSelected() {
-    isMetis=true;
-    board = metis;
-    qDebug() << "Metis selected";
-    status( "Metis selected");
-}
-*/
+
 
 void MainWindow::metisSelected(int index) {
     if(index>=0) {
         metisIP=bd.at(index)->getIpAddress();
         metisHostAddress=bd.at(index)->getHostAddress();
 
-        /*
-        if(isMetis) {
-            if(bd.at(index)->getBoard()==1) {
-                status("Warning: you have Metis selected but board selected is Hermes!");
-            }
-        } else {
-            if(bd.at(index)->getBoard()==0) {
-                status("Warning: you have Hermes selected but board selected is Metis!");
-            }
-
-        }
-        */
     }
 }
 
-/*
-void MainWindow::hermesSelected() {
-    isMetis=false;
-    board = hermes;
-    qDebug() << "Hermes selected";
-    status( "Hermes selected");
-}
 
-void MainWindow::angeliaSelected()
-{
-    isMetis=false;
-    board = angelia;
-    qDebug() << "Angelia selected";
-    status( "Angelia selected");
-}
-
-*/
 
 // SLOT - browse - called when the "Browse ..." button on the Program tab is pressed.
 void MainWindow::browse()
 {
-    //QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("pof Files (*.pof)"));
-    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("rbf Files (*.rbf)"));
+    QString dd = settings.value("dir").toString();
+    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),dd,tr("rbf Files (*.rbf)"));
+    QFileInfo *fileif = new QFileInfo(fileName);
+    qDebug() << fileif->filePath();
+    settings.setValue("dir", fileif->filePath());
     ui->fileLineEdit->setText(fileName);
     status( QString("Reading rbf file: %0").arg(fileName) );
 }
@@ -243,7 +221,7 @@ void MainWindow::discovery_timeout() {
     status(text);
     if(ui->discoverComboBox->count()==0) {
         status("Make sure the correct interface is selected.");
-        text.sprintf("Make sure that there is no jumper on %s.",isMetis?"JP1":"J12");
+        text.sprintf("Make sure that there is no jumper on.");
         deviceIndicator->setPixmap (QPixmap(":/icons/red16.png"));
         deviceIndicator->setToolTip (QString ("Device port not open"));
     }else{
@@ -258,8 +236,9 @@ void MainWindow::board_found(Board* m) {
     if(htonl(m->getIpAddress())!=ip) {
         bd.append(m);
         ui->discoverComboBox->addItem(m->toAllString());
-        add->setIPaddress(m);
-        add->setMACaddress(m);
+        add->getIPaddress(m);
+        add->getMACaddress(m);
+        currentboard = m->getBoardString();
         qDebug() << "Board" << m->getBoard() << m->getBoardString();
         qDebug() << "Software" << m->getVersion();
         qDebug() << "IP" << m->getIpAddress();
@@ -466,17 +445,14 @@ void MainWindow::nextBuffer() {
         //}
     } else {
         status("Programming device completed successfully.");
-        //if(bootloader) {
-        //    text.sprintf("Remember to remove %s when you power cycle.",isMetis?"JP1":"J12");
-        //    status(text);
-        //} else {
-            ui->discoverComboBox->clear();
-            bd.clear();
-            text.sprintf("Please wait for %s to restart.",isMetis?"Metis":"Hermes or Angelia");
-            status(text);
-            status("If using DHCP this can take up to 5 seconds.");
-            status("To use other functions you will need to run Discovery again.");
-        //}
+
+        ui->discoverComboBox->clear();
+        bd.clear();
+        text=QString("Please wait for %0 to restart.").arg(currentboard);
+        status(text);
+        status("If using DHCP this can take up to 5 seconds.");
+        status("To use other functions you will need to run Discovery again.");
+
         idle();
         QApplication::restoreOverrideCursor();
     }
@@ -514,14 +490,14 @@ void MainWindow::timeout() {
     case READ_MAC:
         status("Error: timeout reading MAC address!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes or Angelia");
+        text=QString("Check that there is a jumper at %0 on %1.").arg(isMetis?"JP1":"J12").arg(currentboard);
         status(text);
         idle();
         break;
     case READ_IP:
         status("Error: timeout reading IP address!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes or Angelia");
+        text=QString("Check that there is a jumper at %0 on %1.").arg(isMetis?"JP1":"J12").arg(currentboard);
         status(text);
         idle();
         break;
@@ -531,7 +507,7 @@ void MainWindow::timeout() {
     case JTAG_INTERROGATE:
         status("Error: timeout reading interrogating JTAG chain!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes or Angelia");
+        text=QString("Check that there is a jumper at %s on %s.").arg(isMetis?"JP1":"J12").arg(currentboard);
         status(text);
         idle();
         break;
@@ -556,10 +532,7 @@ void MainWindow::timeout() {
 void MainWindow::idle() {
     qDebug()<<"idle";
     state=IDLE;
-    //if(rawReceiveThread!=NULL) {
-    //    rawReceiveThread->stop();
-    //    rawReceiveThread=NULL;
-    //}
+
     if(receiveThread!=NULL) {
         receiveThread->stop();
         receiveThread=NULL;
@@ -596,7 +569,7 @@ void MainWindow::eraseCompleted() {
         qDebug()<<"received eraseCompleted when state is READ_IP";
         break;
     case WRITE_IP:
-        text.sprintf("%s IP address written successfully",isMetis?"Metis":"Hermes or Angelia");
+        text=QString("%0 IP address written successfully").arg(currentboard);
         status(text);
         idle();
         break;
@@ -633,7 +606,7 @@ void MainWindow::loadFlash() {
 void MainWindow::setIP() {
     char errbuf[PCAP_ERRBUF_SIZE];
     unsigned char buffer[66];
-    int *addr;
+    int addr[4];
     int i;
 
     qDebug()<<"setIP";
@@ -644,14 +617,23 @@ void MainWindow::setIP() {
     // will need to run Discovery again
     ui->discoverComboBox->clear();
 
-    addr = add->getIPAddress();
+    QStringList *saddr = new QStringList();
+
+    add->getNewIPAddress( saddr );
+
+    qDebug() << "back in setIP";
+
+    qDebug() << saddr->at(0) << saddr->at(1) << saddr->at(2) << saddr->at(3);
+
+    addr[0] = saddr->at(0).toInt();
+    addr[1] = saddr->at(1).toInt();
+    addr[2] = saddr->at(2).toInt();
+    addr[3] = saddr->at(3).toInt();
 
     bd.clear();
 
-    //addr[0]=ui->ipALineEdit->text().toInt();
-    //addr[1]=ui->ipBLineEdit->text().toInt();
-    //addr[2]=ui->ipCLineEdit->text().toInt();
-    //addr[3]=ui->ipDLineEdit->text().toInt();
+    qDebug() << addr[0] << addr[1] << addr[2] << addr[3];
+
 
     if((addr[0]<0 || addr[0]>255) || (addr[1]<0 || addr[1]>255) || (addr[2]<0 || addr[2]>255) || (addr[3]<0 || addr[3]>255)) {
         status("Error: invalid IP address");
@@ -661,10 +643,8 @@ void MainWindow::setIP() {
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
-            int ret = QMessageBox::warning(this, tr("HPSDRProgramer_V2"),
-                                           tr("This action requires Administrator Privileges\n"
-                                              "Change to Administrator and rerun the program."),
-                                           QMessageBox::Close);
+            QMessageBox::warning(this, tr("HPSDRProgramer_V2"),tr("This action requires Administrator Privileges\n"
+                                "Change to Administrator and rerun the program."),QMessageBox::Close);
         } else {
 
             state=WRITE_IP;
@@ -701,17 +681,23 @@ void MainWindow::setIP() {
             }
 
            if(pcap_sendpacket(handle,buffer,62)!=0) {
-                qDebug()<<"pcap_sendpacket failed";
-                status("send write ip command failed");
-                idle();
+               qDebug()<<"pcap_sendpacket failed";
+               status("send write ip command failed");
+               text = QString("IP address %0.%1.%2.%3 written to %4").arg(addr[0]).arg(addr[1]).arg(addr[2]).arg(addr[3]).arg(currentboard);
+               QMessageBox::warning(this, tr("HPSDRProgramer_V2"),QString("This action %0 failed.").arg(text),QMessageBox::Close);
+               idle();
             } else {
-                text.sprintf("Written %s IP address",isMetis?"Metis":"Hermes");
-                status(text);
+               text = QString("IP address %0.%1.%2.%3 written to %4").arg(addr[0]).arg(addr[1]).arg(addr[2]).arg(addr[3]).arg(currentboard);
+               status(text);
+               QMessageBox::information(this, tr("HPSDRProgramer_V2"),
+                              QString("%0 \nPlease recycle the power to the %1 board for the action to take effect.").arg(text).arg(currentboard),QMessageBox::Close);
             }
         }
 
         idle();
+
     }
+
 }
 
 // private function to send 256 byte block of the pof file.

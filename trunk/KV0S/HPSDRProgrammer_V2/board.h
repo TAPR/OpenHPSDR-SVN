@@ -33,6 +33,7 @@
 
 #include <QString>
 #include <QHash>
+#include <QDebug>
 
 // command codes
 #define PROGRAM_METIS_FLASH 0x01
@@ -59,7 +60,8 @@ class Board
 {
 public:
     Board(long ipaddr,unsigned char* macaddr,unsigned char software_version,unsigned char board_type);
-    QHash<unsigned char, QString> boardtype;
+    QHash<int, QString> boardtype;
+    QHash<int, QString> jumper;
     long getIpAddress();
     unsigned char* getMACAddress();
     QString getHostAddress();
