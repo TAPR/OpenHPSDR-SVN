@@ -47,6 +47,11 @@ Board::Board(long ipaddr,unsigned char* macaddr,unsigned char software_version,u
     }
     version=software_version;
     board=board_type;
+
+    boardtype[0] = "metis";
+    boardtype[1] = "hermes";
+    boardtype[2] = "griffin";
+    boardtype[4] = "angelia";
 }
 
 /*! \brief getIpAddress()
@@ -158,4 +163,14 @@ unsigned char Board::getVersion() {
 
 unsigned char Board::getBoard() {
     return board;
+}
+
+/*! \brief getBoardString()
+ *
+ *  This function returns the type of board.
+ */
+
+
+QString Board::getBoardString() {
+    return boardtype[board];
 }

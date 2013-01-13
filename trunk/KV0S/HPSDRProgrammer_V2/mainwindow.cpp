@@ -43,11 +43,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->setWindowTitle(QString("HPSDRProgrammer V2 %1").arg(QString("%0 %1").arg(VERSION).arg(RELEASE)));
 
-    ab = new AboutDialog();
+    ab = new AboutDialog(this);
     ab->setVersion( QString(VERSION), QString(RELEASE) );
 
-    stat = new StatusDialog();
-    add = new AddressDialog();
+    stat = new StatusDialog(this);
+    add = new AddressDialog(this);
 
 
     receiveThread=NULL;
@@ -77,6 +77,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
     connect(ui->actionAddress,SIGNAL(triggered()),add,SLOT(show()));
+
+    connect(add,SIGNAL(writeIP()),this,SLOT(setIP()));
+
 
 
     if(ui->interfaceComboBox->count()>0) {
@@ -257,7 +260,7 @@ void MainWindow::board_found(Board* m) {
         ui->discoverComboBox->addItem(m->toAllString());
         add->setIPaddress(m);
         add->setMACaddress(m);
-        qDebug() << "Board" << m->getBoard();
+        qDebug() << "Board" << m->getBoard() << m->getBoardString();
         qDebug() << "Software" << m->getVersion();
         qDebug() << "IP" << m->getIpAddress();
 
@@ -373,6 +376,16 @@ void MainWindow::eraseData() {
     //}
 }
 
+// private function to send the command to erase
+
+void MainWindow::readIPaddress() {
+    status("Reading board's IP address ... (takes several seconds)");
+    sendCommand(READ_METIS_IP);
+    QTimer::singleShot(20000,this,SLOT(erase_timeout()));
+}
+
+
+
 // slot for erase timout
 void MainWindow::erase_timeout() {
     qDebug()<<"MainWindow::erase_timeout";
@@ -402,6 +415,7 @@ void MainWindow::sendCommand(unsigned char command) {
         buffer[i+4]=(unsigned char)0x00;
     }
 
+    qDebug()<<"before send";
     receiveThread->send((const char*)buffer,sizeof(buffer));
 
 }
@@ -619,7 +633,7 @@ void MainWindow::loadFlash() {
 void MainWindow::setIP() {
     char errbuf[PCAP_ERRBUF_SIZE];
     unsigned char buffer[66];
-    int addr[4];
+    int *addr;
     int i;
 
     qDebug()<<"setIP";
@@ -629,7 +643,10 @@ void MainWindow::setIP() {
 
     // will need to run Discovery again
     ui->discoverComboBox->clear();
-    //board.clear();
+
+    addr = add->getIPAddress();
+
+    bd.clear();
 
     //addr[0]=ui->ipALineEdit->text().toInt();
     //addr[1]=ui->ipBLineEdit->text().toInt();
@@ -644,6 +661,10 @@ void MainWindow::setIP() {
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
+            int ret = QMessageBox::warning(this, tr("HPSDRProgramer_V2"),
+                                           tr("This action requires Administrator Privileges\n"
+                                              "Change to Administrator and rerun the program."),
+                                           QMessageBox::Close);
         } else {
 
             state=WRITE_IP;
