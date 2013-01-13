@@ -6,7 +6,11 @@
 #include <QDebug>
 #include <QTimer>
 #include <QFileDialog>
+#include <QFileInfo>
+#include <QDir>
 #include <QMessageBox>
+#include <QStringList>
+#include <QSettings>
 
 #include <pcap.h>
 
@@ -56,17 +60,14 @@ public:
 
 public slots:
     void quit();
-    //void about();
+
     void interfaceSelected(int);
-    //void metisSelected();
+
     void metisSelected(int index);
-    //void hermesSelected();
-    //void angeliaSelected();
+
     void browse();
     void program();
-    //void erase();
-    //void getMAC();
-    //void getIP();
+
     void setIP();
 
     void discover();
@@ -79,30 +80,17 @@ public slots:
     void timeout();
 
     void readIPaddress();
-    //void macAddress(unsigned char*);
-    //void ipAddress(unsigned char*);
-    //void fpgaId(unsigned char*);
 
 
     void board_found(Board*);
 
-    /*
-    void tabChanged(int);
 
-    void jtagInterrogate();
-    void jtagBrowse();
-    void jtagProgram();
-    void jtagFlashBrowse();
-    void jtagFlashProgram();
-    void nextJTAGBuffer();
-    void startJTAGFlashErase();
-    */
 private:
     Ui::MainWindow *ui;
     QLabel *deviceIndicator;
+    QString currentboard;
+    QSettings settings;
 
-
-    //void loadPOF(QString filename);
     int loadRBF(QString filename);
 
     void eraseData();
@@ -113,33 +101,16 @@ private:
     void readMAC();
     void readIP();
     void writeIP();
-    /*
-    void sendRawCommand(unsigned char command);
-
-
-    void sendRawData();
-
-    void sendJTAGData();
-    */
-
     void sendJTAGFlashData();
 
     void idle();
 
     void status(QString text);
 
-    //void bootloaderProgram();
-    void flashProgram();
-    //void bootloaderErase();
-    void flashErase();
 
-    /*
-    int loadMercuryRBF(QString filename);
-    int loadPenelopeRBF(QString filename);
-    void jtagBootloaderProgram();
-    void jtagEraseData();
-    //void jtagFlashProgram();
-  */
+    void flashProgram();
+
+    void flashErase();
 
     void loadFlash();
 
@@ -191,11 +162,7 @@ private:
     ReceiveThread* receiveThread;
     RawReceiveThread* rawReceiveThread;
 
-    /*
-    bool bootloader;
 
-    long fpga_id;
-    */
     AboutDialog *ab;
     StatusDialog *stat;
     AddressDialog *add;

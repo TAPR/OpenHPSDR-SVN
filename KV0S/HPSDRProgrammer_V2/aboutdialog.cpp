@@ -27,6 +27,11 @@
 #include "aboutdialog.h"
 #include "ui_aboutdialog.h"
 
+/*! \brief AboutDialog(QWidget *parent)
+ *
+ *  This constructor function for AboutDialog class.
+ */
+
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AboutDialog)
@@ -36,10 +41,23 @@ AboutDialog::AboutDialog(QWidget *parent) :
     connect(ui->OKButton,SIGNAL(clicked()),this,SLOT(close()));
 }
 
+/*! \brief ~AboutDialog()
+ *
+ *  This Deconstructor function AboutDialog class.
+ */
+
 AboutDialog::~AboutDialog()
 {
     delete ui;
 }
+
+/*! \brief setVersion(QString version, QString release)
+ *
+ *  \param version is the current program version number.
+ *  \param release is the relase date.
+ *
+ *  This function to set the version and release date in the about screen.
+ */
 
 void AboutDialog::setVersion(QString version, QString release)
 {

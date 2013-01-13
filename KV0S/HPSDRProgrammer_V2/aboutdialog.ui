@@ -254,7 +254,7 @@
       <item row="5" column="0">
        <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>For more information: openhpsdr.org/HPSDRProgrammer.php</string>
+         <string>For more information: http://openhpsdr.org/wiki/index.php?title=FIRMWARE</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

@@ -10,7 +10,7 @@ AddressDialog::AddressDialog(QWidget *parent) :
     ui->writeButton->setDisabled(true);
 
     connect(ui->closeButton,SIGNAL(clicked()),this,SLOT(close()));
-    connect(ui->writeButton,SIGNAL(clicked()),this, SLOT(writeIPaddress()));
+    connect(ui->writeButton,SIGNAL(clicked()),this, SLOT(setupIPwrite()));
 }
 
 AddressDialog::~AddressDialog()
@@ -18,7 +18,9 @@ AddressDialog::~AddressDialog()
     delete ui;
 }
 
-void AddressDialog::setIPaddress(Board *m)
+
+
+void AddressDialog::getIPaddress(Board *m)
 {
     QString ip1, ip2, ip3, ip4;
     qDebug() << "in setIPAddress" << m->toIPString();
@@ -33,19 +35,25 @@ void AddressDialog::setIPaddress(Board *m)
     ui->writeButton->setDisabled(false);
 }
 
-void AddressDialog::setMACaddress(Board *m)
+void AddressDialog::getMACaddress(Board *m)
 {
     qDebug() << "in setMACAddress" << m->toMACString();
     ui->MACLabel->setText( m->toMACString() );
 }
 
-void AddressDialog::setIPWrite( int *addr )
+void AddressDialog::setupIPwrite()
 {
-    addr[0]=ui->IPLineEdit1->text().toInt();
-    addr[1]=ui->IPLineEdit2->text().toInt();
-    addr[2]=ui->IPLineEdit3->text().toInt();
-    addr[3]=ui->IPLineEdit4->text().toInt();
-
+    qDebug() << "in writeIPsetup";
     emit writeIP();
+}
+
+
+void AddressDialog::getNewIPAddress( QStringList *addr )
+{
+    qDebug() << "in writeIPsetup";
+    addr->append(ui->IPLineEdit1->text());
+    addr->append(ui->IPLineEdit2->text());
+    addr->append(ui->IPLineEdit3->text());
+    addr->append(ui->IPLineEdit4->text());
 
 }

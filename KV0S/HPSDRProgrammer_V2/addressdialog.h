@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDebug>
+#include <QStringList>
 #include "board.h"
 
 namespace Ui {
@@ -16,10 +17,10 @@ class AddressDialog : public QDialog
 public:
     explicit AddressDialog(QWidget *parent = 0);
     ~AddressDialog();
-    void setIPaddress(Board *m );
-    void setIPWrite( int *addr );
-    void setMACaddress(Board *m );
-    void writeIPAddress(int *addr);
+
+    void getIPaddress(Board *m );
+    void getMACaddress(Board *m );
+    void getNewIPAddress(QStringList *addr );
 
 signals:
     void writeIP();
@@ -27,6 +28,8 @@ signals:
 private:
     Ui::AddressDialog *ui;
 
+private slots:
+    void setupIPwrite();
 };
 
 #endif // ADDRESSDIALOG_H
