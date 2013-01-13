@@ -31,7 +31,8 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "QString"
+#include <QString>
+#include <QHash>
 
 // command codes
 #define PROGRAM_METIS_FLASH 0x01
@@ -58,7 +59,7 @@ class Board
 {
 public:
     Board(long ipaddr,unsigned char* macaddr,unsigned char software_version,unsigned char board_type);
-    enum{metis, hermes, angelia} boardtype;
+    QHash<unsigned char, QString> boardtype;
     long getIpAddress();
     unsigned char* getMACAddress();
     QString getHostAddress();
@@ -66,6 +67,7 @@ public:
     QString toIPString();
     QString toIPPartString(int id);
     QString toMACString();
+    QString getBoardString();
     unsigned char getVersion();
     unsigned char getBoard();
 

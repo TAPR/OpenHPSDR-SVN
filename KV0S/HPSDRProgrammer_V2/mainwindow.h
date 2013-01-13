@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QTimer>
 #include <QFileDialog>
+#include <QMessageBox>
 
 #include <pcap.h>
 
@@ -76,6 +77,8 @@ public slots:
     void eraseCompleted();
     void nextBuffer();
     void timeout();
+
+    void readIPaddress();
     //void macAddress(unsigned char*);
     //void ipAddress(unsigned char*);
     //void fpgaId(unsigned char*);

@@ -45,6 +45,7 @@ ReceiveThread::ReceiveThread(QUdpSocket* s,QString myip,QString metis) {
 }
 
 void ReceiveThread::send(const char* buffer,int length) {
+    qDebug() << "in send";
     if(socket->writeDatagram(buffer,length,QHostAddress(metisip),1024)<0) {
         qDebug()<<"Error: Discovery: writeDatagram failed "<<socket->errorString();
         return;
