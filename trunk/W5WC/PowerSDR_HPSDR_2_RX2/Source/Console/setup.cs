@@ -2,7 +2,7 @@
 // setup.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2009  FlexRadio Systems
+// Copyright (C) 2004-2009  FlexRadio Systems Copyright (C) 2010-2013  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14095,7 +14095,8 @@ namespace PowerSDR
                     break;
                 case "United Kingdom":
                     region = FRSRegion.UK;
-                    console.Extended = false;
+                    //console.Extended = false;
+                   // Display.Init();
                     break;
                 case "United States":
                     region = FRSRegion.US;

@@ -2,7 +2,7 @@
 // display.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2009  FlexRadio Systems
+// Copyright (C) 2004-2009  FlexRadio Systems Copyright (C) 2010-2012  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -3423,7 +3423,8 @@ namespace PowerSDR
                             else goto default;
 
                         case FRSRegion.UK:
-                            if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
+                            if (actual_fgrid == 0.472 || actual_fgrid == 0.479 ||
+                                actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
                                 actual_fgrid == 5.2585 || actual_fgrid == 5.4065 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
@@ -3629,7 +3630,7 @@ namespace PowerSDR
                 case FRSRegion.UK:
                     band_edge_list = new int[]{ 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
 				5258500, 5406500, 7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
-				24890000, 24990000, 28000000, 29700000, 50000000, 52000000, 144000000, 148000000 };
+				24890000, 24990000, 28000000, 29700000, 50000000, 52000000, 144000000, 148000000, 472000, 479000 };
                     break;
                 case FRSRegion.India:
                     band_edge_list = new int[]{ 18068000, 18168000, 1810000, 1860000, 3500000, 3900000,
@@ -4443,7 +4444,8 @@ namespace PowerSDR
                                 goto default;
 
                         case FRSRegion.UK:
-                            if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
+                            if (actual_fgrid == 0.472 || actual_fgrid == 0.479 ||
+                                actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
                                 actual_fgrid == 5.2585 || actual_fgrid == 5.4065 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.3 ||

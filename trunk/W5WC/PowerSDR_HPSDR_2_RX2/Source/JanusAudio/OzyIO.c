@@ -1,6 +1,6 @@
 /*
  * JanusAudio.dll - Support library for HPSDR.org's Janus/Ozy Audio card
- * Copyright (C) 2006,2007  Bill Tracey (bill@ejwt.com) (KD5TFD)
+ * Copyright (C) 2006,2007  Bill Tracey (bill@ejwt.com) (KD5TFD) Copyright (C) 2012  Doug Wigley
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public

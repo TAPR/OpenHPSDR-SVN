@@ -1,7 +1,7 @@
 /*
 This file is part of a program that implements a Software-Defined Radio.
 
-Copyright (C) 2007, 2008 Philip A Covington
+Copyright (C) 2007, 2008 Philip A Covington Copyright (C) 2012  Doug Wigley
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

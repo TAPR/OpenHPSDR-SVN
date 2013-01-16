@@ -1,6 +1,6 @@
 /*
 *
-* Copyright (C) 2006 Bill Tracey, KD5TFD, bill@ewjt.com 
+* Copyright (C) 2006 Bill Tracey, KD5TFD, bill@ewjt.com Copyright (C) 2010-2012  Doug Wigley
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -377,6 +377,7 @@ namespace PowerSDR
                         case 21:
                         case 22:
                         case 23:
+                        case 24:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 33)))
                             {
@@ -744,7 +745,7 @@ namespace PowerSDR
             }
              int f_freq = (int)((f * 1e6) * correction_factor);
             SetTXVFOfreq(f_freq);
-           // c.SetupForm.txtTXVFO.Text = f_freq.ToString();
+          //  c.SetupForm.txtTXVFO.Text = f_freq.ToString();
         }
 
         [DllImport("JanusAudio.dll")]

@@ -1,5 +1,5 @@
 /* JanusAudio.dll - Support library for HPSDR.org's Janus/Ozy Audio card
- * Copyright (C) 2006,2007  Bill Tracey (bill@ejwt.com) (KD5TFD)
+ * Copyright (C) 2006,2007  Bill Tracey (bill@ejwt.com) (KD5TFD) Copyright (C) 2010-2012  Doug Wigley
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -702,9 +702,9 @@ void ForceCandCFrames(int count, int c0, int vfofreq) {
 	buf[5] = PennyOCBits <<	1;							  /* c2	*/
 	buf[6] = (AlexAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; /* c3 */
 #ifdef K5SO_2RX
-	buf[7] =  0x08 | 0x80; //0x08 dual Mercs, 0x80 common Merc freq
+	buf[7] =  0x0c | 0x80; //0x08 dual Mercs, 0x80 common Merc freq
 #elif K5SO_3RX
-	buf[7] =  0x08 | 0x80; //0x08 dual Mercs, 0x80 common Merc freq
+	buf[7] =  0x94 | 0x80; //0x08 tripple Mercs, 0x80 common Merc freq
 #else	
 	buf[7] = 0x0c; // duplex with 2 receivers
 #endif
@@ -1344,7 +1344,7 @@ void IOThreadMainLoop(void) {
 					state = STATE_SAMPLE_MIC_HI;
 					break;
 
-				case STATE_SAMPLE_MIC_HI:
+				case STATE_SAMPLE_MIC_HI:		
 					this_num = ((int)FPGAReadBufp[i]) << 8;  // read hi word of sample - preserve sign moron!
 					state = STATE_SAMPLE_MIC_LO;
 					break;
@@ -1882,7 +1882,7 @@ void IOThreadMainLoop(void) {
 					switch (out_control_idx) {
 					case 0:
 #ifdef K5SO_2RX
-						FPGAWriteBufp[writebufpos] = AlexTxAnt | 0x04 | 0x08 | 0x80; 
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | 0x8c; //0x04 | 0x08 | 0x80; 
 #elif K5SO_3RX
 						FPGAWriteBufp[writebufpos] = AlexTxAnt | 0x94;  //set to full duplex - 3 rx
 #else

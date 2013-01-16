@@ -2,7 +2,7 @@
 // titlebar.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2012  FlexRadio Systems
+// Copyright (C) 2004-2012  FlexRadio Systems Copyright (C) 2012-2013  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -36,20 +36,18 @@ namespace PowerSDR
     {
 #if (HPSDR_2RX)
         public const string BUILD_NAME = "2Rx";
-        public const string BUILD_DATE = "(12/31/12)";
+        public const string BUILD_DATE = "(1/16/13)";
 #elif (K5SO_2RX)
         public const string BUILD_NAME = "_diversity_dual_Rx";
-        public const string BUILD_DATE = "(31DEC2012)";
+        public const string BUILD_DATE = "(16JAN2013)";
 #elif (K5SO_3RX)
         public const string BUILD_NAME = "_diversity_triple_Rx";
-        public const string BUILD_DATE = "(31DEC2012)";
+        public const string BUILD_DATE = "(16JAN2013)";
 #endif
 
         public static string GetString()
         {
             string version = GetVerNum();
-            
-           // string s = "FlexRadio Systems™  PowerSDR™";
             string s = "PowerSDR™ OpenHPSDR";
             if (BUILD_NAME != "") s += " " + BUILD_NAME;
             s += " v" + version;
