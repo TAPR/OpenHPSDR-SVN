@@ -1,6 +1,6 @@
 /*
  * Metis.c - Support code for OpenHPSDR.org's Metis board 
- * Copyright (C) 2010, 2011 Bill Tracey, KD5TFD (bill@ewjt.com) 
+ * Copyright (C) 2010, 2011 Bill Tracey, KD5TFD (bill@ewjt.com) Copyright (C) 2012  Doug Wigley
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public

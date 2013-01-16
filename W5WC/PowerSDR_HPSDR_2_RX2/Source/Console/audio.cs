@@ -2,7 +2,7 @@
 // audio.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2009  FlexRadio Systems
+// Copyright (C) 2004-2009  FlexRadio Systems Copyright (C) 2010-2012  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -2352,7 +2352,7 @@ namespace PowerSDR
                     }
                     else
                     {
-                        if ((rb_vacIN_l.ReadSpace() >= frameCount) &&
+                         if ((rb_vacIN_l.ReadSpace() >= frameCount) &&
                             (rb_vacIN_r.ReadSpace() >= frameCount))
                         {
                             Win32.EnterCriticalSection(cs_vac);

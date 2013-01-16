@@ -2,7 +2,7 @@
 // console.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2009  FlexRadio Systems
+// Copyright (C) 2004-2009  FlexRadio Systems Copyright (C) 2010-2013  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -7979,15 +7979,15 @@ namespace PowerSDR
             channels_60m = new List<Channel>();
             switch (CurrentRegion)
             {
-               /* case FRSRegion.UK:
-                    channels_60m.Add(new Channel(5.2600, 2800));
-                    channels_60m.Add(new Channel(5.2800, 2800));
-                    channels_60m.Add(new Channel(5.2900, 2800));
-                    channels_60m.Add(new Channel(5.3680, 2800));
-                    channels_60m.Add(new Channel(5.3730, 2800));
-                    channels_60m.Add(new Channel(5.4000, 2800));
-                    channels_60m.Add(new Channel(5.4050, 2800));
-                    break; */
+                /* case FRSRegion.UK:
+                     channels_60m.Add(new Channel(5.2600, 2800));
+                     channels_60m.Add(new Channel(5.2800, 2800));
+                     channels_60m.Add(new Channel(5.2900, 2800));
+                     channels_60m.Add(new Channel(5.3680, 2800));
+                     channels_60m.Add(new Channel(5.3730, 2800));
+                     channels_60m.Add(new Channel(5.4000, 2800));
+                     channels_60m.Add(new Channel(5.4050, 2800));
+                     break; */
 
                 case FRSRegion.US:
                     channels_60m.Add(new Channel(5.3320, 2800));
@@ -12006,7 +12006,8 @@ namespace PowerSDR
                         return Band.GEN;
 
                 case FRSRegion.UK:
-                    if (freq >= 1.8 && freq <= 2.0)
+                    if ((freq >= 0.472 && freq <= 0.479) ||
+                        (freq >= 1.8 && freq <= 2.0))
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 3.8)
                         return Band.B80M;
@@ -12753,12 +12754,14 @@ namespace PowerSDR
                 swr = (1.0 + rho) / (1.0 - rho);
             }
 
-            if (chkTUN.Checked && disable_swr_on_tune)
+            if (chkTUN.Checked && disable_swr_on_tune && (alexpresent || apollopresent))
             {
-                if ((alexpresent || apollopresent) && (g_fwd <= 10.0))
+                if (g_fwd <= 10.0)
+                {
                     JanusAudio.SetSWRProtect(1.0f);
-                HighSWR = false;
-                return swr;
+                    HighSWR = false;
+                    return swr;
+                }
             }
 
             if (!swrprotection || !alexpresent || (g_fwd == 0 && g_rev == 0) || g_fwd < 1)
@@ -13282,7 +13285,8 @@ namespace PowerSDR
                     else ret_val = false;
                     break;
                 case FRSRegion.UK:
-                    if (f >= 1.81 && f <= 2.0) ret_val = true;
+                    if (f >= 0.472 && f <= 0.479) ret_val = true;
+                    else if (f >= 1.81 && f <= 2.0) ret_val = true;
                     else if (f >= 3.5 && f <= 3.8) ret_val = true;
                     else if (f >= 5.2585 && f <= 5.264) ret_val = true;
                     else if (f >= 5.276 && f <= 5.284) ret_val = true;
@@ -16716,14 +16720,14 @@ namespace PowerSDR
 
             // Calculate the difference between the known signal and the measured signal
             float diff = (float)((double)sample_rate1 / Display.BUFFER_SIZE * (Display.BUFFER_SIZE / 2 - max_index));
-            SetupForm.txtDiff.Text = max_index.ToString();
+            // SetupForm.txtDiff.Text = max_index.ToString();
             //System.Console.WriteLine("diff is: " + diff);
 
             //  if (ModelIsHPSDRorHermes())
             //  {
             double correct_factor = 1.0d - ((double)diff / (double)(freq * 1e6));
             SetupForm.HPSDRFreqCorrectFactor = correct_factor;
-  
+
             FreqCalibrationRunning = false;
             SetupForm.RXOnly = rx_only;				    	// restore RX Only setting
             RX1Filter = am_filter;							// restore AM filter
@@ -19653,8 +19657,8 @@ namespace PowerSDR
             set
             {
                 alex_tr_relay = value;
-                 if (SetupForm != null)
-                  SetupForm.AlexTRRelay = alex_tr_relay;
+                if (SetupForm != null)
+                    SetupForm.AlexTRRelay = alex_tr_relay;
             }
         }
 
@@ -19669,7 +19673,7 @@ namespace PowerSDR
                 {
                     lblPreamp.Text = "S-ATT";
                     udHermesStepAttenuatorData.BringToFront();
-                    JanusAudio.EnableHermesAtten(1);            
+                    JanusAudio.EnableHermesAtten(1);
                 }
                 else
                 {
@@ -23187,7 +23191,7 @@ namespace PowerSDR
                 double f = fwc_dds_freq + vfo_offset;
                 rx1_dds_freq_mhz = f;
                 rx1_dds_freq_updated = true;
-               // radio.GetDSPRX(0, 0).RXOsc = -11000.0;
+                // radio.GetDSPRX(0, 0).RXOsc = -11000.0;
                 UpdateRX1DDSFreq();
                 // System.Console.WriteLine("rx1dds: " + rx1_dds_freq_mhz);
             }
@@ -27938,12 +27942,12 @@ namespace PowerSDR
                             case MeterTXMode.FORWARD_POWER:
                             case MeterTXMode.REVERSE_POWER:
                                 if (!alexpresent && !apollopresent)
-                                    num = (num * 100);
+                                    num *= 1000;
 
                                 switch ((int)g.DpiX)
                                 {
                                     case 96:
-                                        if (anan10present || apollopresent)
+                                        if (anan10present)
                                         {
                                             if (num <= 1.0f)
                                                 pixel_x = (int)(0 + num * 2);
@@ -27960,7 +27964,24 @@ namespace PowerSDR
                                             else
                                                 pixel_x = (int)(122 + (num - 25) / 5 * 16);
                                         }
-                                        else
+                                        else if (apollopresent)
+                                        {
+                                            if (num <= 1.0f)
+                                                pixel_x = (int)(0 + num * 2);
+                                            else if (num <= 5.0f)
+                                                pixel_x = (int)(2 + (num - 1) / 4 * 24);
+                                            else if (num <= 10.0f)
+                                                pixel_x = (int)(26 + (num - 5) / 5 * 24);
+                                            else if (num <= 15.0f)
+                                                pixel_x = (int)(50 + (num - 10) / 5 * 24);
+                                            else if (num <= 30.0f)
+                                                pixel_x = (int)(74 + (num - 15) / 15 * 24);
+                                            else if (num <= 50.0f)
+                                                pixel_x = (int)(98 + (num - 30) / 20 * 24);
+                                            else
+                                                pixel_x = (int)(122 + (num - 50) / 50 * 16);
+                                        }
+                                        else if (alexpresent)
                                         {
                                             if (num <= 1.0f)
                                                 pixel_x = (int)(0 + num * 2);
@@ -27977,7 +27998,25 @@ namespace PowerSDR
                                             else
                                                 pixel_x = (int)(122 + (num - 120) / 20 * 16);
                                         }
+                                        else
+                                        {
+                                            if (num <= 100.0f)
+                                                pixel_x = (int)(0 + (num - 0.0) / 100.0 * 31);
+                                            else if (num <= 200.0f)
+                                                pixel_x = (int)(31 + (num - 100.0) / 100.0 * 32);
+                                            else if (num <= 500.0f)
+                                                pixel_x = (int)(63 + (num - 200.0) / 300.0 * 24);
+                                            else if (num <= 600.0f)
+                                                pixel_x = (int)(87 + (num - 500.0) / 100.0 * 15);
+                                            else if (num <= 700.0f)
+                                                pixel_x = (int)(102 + (num - 600.0) / 100.0 * 15);
+                                            else if (num <= 800.0f)
+                                                pixel_x = (int)(117 + (num - 700.0) / 100.0 * 15);
+                                            else
+                                                pixel_x = (int)(132 + (num - 800.0) / 100.0 * 8);
+                                        }
                                         break;
+
                                     case 120:
                                         if (num <= 1.0f)
                                             pixel_x = (int)(0 + num * 3);
@@ -28187,7 +28226,7 @@ namespace PowerSDR
                                     if (alexpresent || pa_present || apollopresent)
                                         output = num.ToString(format) + " W";
                                     else
-                                        output = (num * 10).ToString(format) + " mW";
+                                        output = num.ToString(format) + " mW";
                                     break;
                                 case MeterTXMode.SWR:
                                     output = num.ToString("f1") + " : 1";
@@ -28402,7 +28441,7 @@ namespace PowerSDR
                                         double string_width = size.Width - 2.0;
 
                                         g.TextRenderingHint = TextRenderingHint.SystemDefault;
-                                        g.DrawString("140+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 4 - 8 - string_height));
+                                        g.DrawString("120+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 4 - 8 - string_height));
                                     }
 
                                     if (num <= 100.0) // low area
@@ -28414,19 +28453,19 @@ namespace PowerSDR
                                             pixel_x = (int)(spacing + (num - 5.0) / 5.0 * spacing);
                                         else if (num <= 50.0)
                                             pixel_x = (int)(2 * spacing + (num - 10.0) / 40.0 * spacing);
-                                        else
+                                        else // <= 100
                                             pixel_x = (int)(3 * spacing + (num - 50.0) / 50.0 * spacing);
                                     }
                                     else
                                     {
                                         spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
-                                        if (num <= 140.0)
-                                            pixel_x = (int)(W * 0.75 + (num - 100.0) / 40.0 * spacing);
+                                        if (num <= 120.0)
+                                            pixel_x = (int)(W * 0.75 + (num - 100.0) / 20.0 * spacing);
                                         else
-                                            pixel_x = (int)(W * 0.75 + spacing + (num - 140.0) / 60.0 * spacing);
+                                            pixel_x = (int)(W * 0.75 + spacing + (num - 120.0) / 60.0 * spacing);
                                     }
                                 }
-                                else if (anan10present || apollopresent)
+                                else if (anan10present)// || apollopresent)
                                 {
                                     g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
                                     g.FillRectangle(high_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 10, 2);
@@ -28483,6 +28522,64 @@ namespace PowerSDR
                                         else
                                             pixel_x = (int)(W * 0.75 + spacing + (num - 25.0) / 5.0 * spacing);
                                     }
+                                }
+                                else if (apollopresent) //(anan10present || apollopresent) // 30W
+                                {
+                                    g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
+                                    g.FillRectangle(high_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 10, 2);
+                                    spacing = (W * 0.75 - 2.0) / 4.0;
+                                    string_height = 0;
+                                    string[] list = { "5", "10", "20", "30" };
+                                    for (int i = 1; i < 5; i++)
+                                    {
+                                        g.FillRectangle(low_brush, (int)(i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
+                                        g.FillRectangle(low_brush, (int)(i * spacing), H - 4 - 6, 2, 6);
+
+                                        string s = list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        g.DrawString(s, font7, low_brush, (int)(i * spacing - string_width * s.Length + (int)(i / 3) + (int)(i / 4)), (int)(H - 4 - 8 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+                                    spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                                    for (int i = 1; i < 2; i++)
+                                    {
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing), H - 4 - 6, 2, 6);
+
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 2, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+
+                                        g.TextRenderingHint = TextRenderingHint.SystemDefault;
+                                        g.DrawString("50+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 4 - 8 - string_height));
+                                    }
+
+                                    if (num <= 30.0) // low area
+                                    {
+                                        spacing = (W * 0.75 - 2.0) / 4.0;
+                                        if (num <= 5.0)
+                                            pixel_x = (int)(num / 5.0 * (int)spacing);
+                                        else if (num <= 10.0)
+                                            pixel_x = (int)(spacing + (num - 5.0) / 5.0 * spacing);
+                                        else if (num <= 20.0)
+                                            pixel_x = (int)(2 * spacing + (num - 10.0) / 10.0 * spacing);
+                                        else // <= 30
+                                            pixel_x = (int)(3 * spacing + (num - 20.0) / 10.0 * spacing);
+                                    }
+                                    else
+                                    {
+                                        spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                                        if (num <= 50.0)
+                                            pixel_x = (int)(W * 0.75 + (num - 30.0) / 20.0 * spacing);
+                                        else
+                                            pixel_x = (int)(W * 0.75 + spacing + (num - 50.0) / 25.0 * spacing);
+                                    }
 
                                 }
                                 else // 1W version
@@ -28532,10 +28629,10 @@ namespace PowerSDR
                                             pixel_x = (int)(spacing + (num - 100.0) / 150.0 * spacing);
                                         else if (num <= 500.0)
                                             pixel_x = (int)(2 * spacing + (num - 250.0) / 250.0 * spacing);
-                                        else
+                                        else // <801.0
                                             pixel_x = (int)(3 * spacing + (num - 500.0) / 300.0 * spacing);
                                     }
-                                    else
+                                    else // >801
                                     {
                                         spacing = (W * 0.25 - 2.0 - 9.0) / 1.0;
                                         pixel_x = (int)(W * 0.75 + (num - 800.0) / 200.0 * spacing);
@@ -28605,7 +28702,6 @@ namespace PowerSDR
                                         //g.SmoothingMode = SmoothingMode.None;
                                     }
 
-
                                     if (current_swrmeter_data <= 3.0) // low area
                                     {
                                         spacing = (W * 0.75) / 3.0;
@@ -28662,7 +28758,7 @@ namespace PowerSDR
                                         double string_width = size.Width - 2.0;
 
                                         g.TextRenderingHint = TextRenderingHint.SystemDefault;
-                                        g.DrawString("140+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 1 - string_height));
+                                        g.DrawString("120+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 1 - string_height));
                                     }
 
                                     if (num <= 100.0) // low area
@@ -28680,14 +28776,14 @@ namespace PowerSDR
                                     else
                                     {
                                         spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
-                                        if (num <= 140.0)
-                                            pixel_x = (int)(W * 0.75 + (num - 100.0) / 40.0 * spacing);
+                                        if (num <= 120.0)
+                                            pixel_x = (int)(W * 0.75 + (num - 100.0) / 20.0 * spacing);
                                         else
-                                            pixel_x = (int)(W * 0.75 + spacing + (num - 140.0) / 60.0 * spacing);
+                                            pixel_x = (int)(W * 0.75 + spacing + (num - 120.0) / 60.0 * spacing);
                                     }
                                 }
 
-                                if (anan10present || apollopresent)
+                                else if (anan10present)
                                 {
                                     g.FillRectangle(high_brush, (int)(W * 0.75), (H / 2) - 1, (int)(W * 0.25) - 4, 2);
                                     g.FillRectangle(low_brush, 0, (H / 2) - 1, (int)(W * 0.75), 4); // horizontal white line
@@ -28827,6 +28923,148 @@ namespace PowerSDR
                                             pixel_x = (int)(W * 0.75 + (num - 15.0) / 10.0 * spacing);
                                         else
                                             pixel_x = (int)(W * 0.75 + spacing + (num - 25.0) / 5.0 * spacing);
+                                    }
+                                }
+
+                                else if (apollopresent)
+                                {
+                                    g.FillRectangle(high_brush, (int)(W * 0.75), (H / 2) - 1, (int)(W * 0.25) - 4, 2);
+                                    g.FillRectangle(low_brush, 0, (H / 2) - 1, (int)(W * 0.75), 4); // horizontal white line
+                                    g.FillRectangle(high_brush, (int)(W * 0.75), (H / 2) + 1, (int)(W * 0.25) - 9, 2); //horizontal red line
+                                    // SWR stuff first
+                                    spacing = (W * 0.5) / 10.0;
+                                    string_height = 0;
+                                    string[] swrx_list = { "1.5", "2" };
+                                    for (int i = 1; i < 10; i++)
+                                    {
+                                        g.FillRectangle(low_brush, (int)(i * spacing), (H / 2) - 4, 1, 3);
+                                    }
+                                    for (int i = 1; i < 3; i++)
+                                    {
+                                        spacing = (W * 0.5) / 2.0;
+                                        g.FillRectangle(low_brush, (int)(i * spacing), (H / 2) - 7, 2, 6);
+
+                                        string s = swrx_list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        g.DrawString(s, font7, low_brush, (int)(i * spacing - string_width * s.Length + 2.0 - 1 * (int)(i / 2) + 3 * (int)(i / 4)), (int)((H / 2) - 9 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+                                    g.FillRectangle(low_brush, (int)(W * 0.625), (H / 2) - 4, 1, 3); // small tic 2.5:1
+
+                                    string[] swrx_hi_list = { "3", "4", "5" };
+
+                                    spacing = (W * 0.75 - 2.0 - 9.0) / 2.0;
+                                    for (int i = 1; i < 2; i++)
+                                    {
+                                        // g.FillRectangle(high_brush, (int)(i * spacing - spacing * 0.75), H - 4 - 3, 1, 3);
+                                    }
+
+                                    for (int i = 1; i < 4; i++)
+                                    {
+                                        // spacing = (W * 0.55 - 2.0) / 2.0;
+                                        // spacing = (W * 0.33 - 2.0) / 3.0;
+                                        spacing = (W * 0.25 - 6.0) / 2.0;
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), (H / 2) - 4, 1, 3);
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing), (H / 2) - 7, 2, 6);
+                                        // g.FillRectangle(high_brush, (int)((double)W * 0.55 + i * spacing - spacing * 0.5), H - 4 - 6, 2, 6);
+                                        string s = swrx_hi_list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        //g.DrawString(s, font7, high_brush, (int)(i * spacing - string_width * s.Length + 2.0 - 2 * (int)(i / 2) + 3 * (int)(i / 4)), (int)(H - 4 - 8 - string_height));
+                                        // g.DrawString(s, font7, high_brush, (int)(W * 0.75 + i * spacing - spacing - (int)2.5 * string_width), (int)(H - 4 - 8 - string_height));
+                                        g.DrawString(s, font7, high_brush, (int)(W * 0.75 + i * spacing - spacing - (int)1.0 * string_width), (int)((H / 2) - 9 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+
+
+                                    if (current_swrmeter_data <= 3.0) // low area
+                                    {
+                                        spacing = (W * 0.75) / 3.0;
+
+                                        if (current_swrmeter_data <= 1.5)
+                                            pixel_x_swr = (int)((current_swrmeter_data - 1.0) / 0.5 * spacing);
+                                        else if (current_swrmeter_data <= 2.0)
+                                            pixel_x_swr = (int)(spacing + (current_swrmeter_data - 1.5) / 0.5 * spacing);
+                                        else //if (current_swrmeter_data <= 3.0)
+                                            pixel_x_swr = (int)(2 * spacing + (current_swrmeter_data - 2.0) / 1.0 * spacing);
+                                        // else //  current_swrmeter_data <= 4.0
+                                        //  pixel_x_swr = (int)(3 * spacing + (current_swrmeter_data - 3.0) / 1.0 * spacing);
+                                    }
+                                    else
+                                    {
+                                        spacing = (W * 0.25 - 6.0) / 2.0;
+                                        if (current_swrmeter_data <= 4.0)
+                                            pixel_x_swr = (int)(W * 0.75 + (current_swrmeter_data - 3.0) / 1.0 * spacing);
+                                        else if (current_swrmeter_data <= 5.0)
+                                            pixel_x_swr = (int)(W * 0.75 + spacing + (current_swrmeter_data - 4.0) / 1.0 * spacing);
+                                        else
+                                            pixel_x_swr = (int)(W * 0.75 + 2 * spacing + (current_swrmeter_data - 5.0) / 4.0 * spacing);
+                                    }
+                                    if (double.IsInfinity(current_swrmeter_data)) pixel_x_swr = W - 2;
+
+                                    // PWR
+                                    spacing = (W * 0.75 - 2.0) / 4.0;
+                                    string[] list = { "5", "10", "20", "30" };
+                                    for (int i = 1; i < 5; i++)
+                                    {
+                                        g.FillRectangle(low_brush, (int)(i * spacing - spacing * 0.5), (H / 2) + 3, 1, 3);
+                                        g.FillRectangle(low_brush, (int)(i * spacing), (H / 2) + 3, 2, 6);
+
+                                        string s = list[i - 1];
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+                                        string_height = size.Height - 2.0;
+
+                                        //g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                        //g.SmoothingMode = SmoothingMode.AntiAlias;
+                                        g.DrawString(s, font7, low_brush, (int)(i * spacing - string_width * s.Length + (int)(i / 3) + (int)(i / 4)), (int)(H - 1 - string_height));
+                                        //g.SmoothingMode = SmoothingMode.None;
+                                    }
+                                    spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                                    for (int i = 1; i < 2; i++)
+                                    {
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing - spacing * 0.5), (H / 2) + 3, 1, 3);
+                                        g.FillRectangle(high_brush, (int)((double)W * 0.75 + i * spacing), (H / 2) + 3, 2, 6);
+
+                                        //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+                                        SizeF size = g.MeasureString("0", font7, 2, StringFormat.GenericTypographic);
+                                        double string_width = size.Width - 2.0;
+
+                                        g.TextRenderingHint = TextRenderingHint.SystemDefault;
+                                        g.DrawString("50+", font7, high_brush, (int)(W * 0.75 + i * spacing - (int)3.5 * string_width), (int)(H - 1 - string_height));
+                                    }
+
+                                    if (num <= 30.0) // low area
+                                    {
+                                        spacing = (W * 0.75 - 2.0) / 4.0;
+                                        if (num <= 5.0)
+                                            pixel_x = (int)(num / 5.0 * (int)spacing);
+                                        else if (num <= 10.0)
+                                            pixel_x = (int)(spacing + (num - 5.0) / 5.0 * spacing);
+                                        else if (num <= 20.0)
+                                            pixel_x = (int)(2 * spacing + (num - 10.0) / 10.0 * spacing);
+                                        else // <= 30
+                                            pixel_x = (int)(3 * spacing + (num - 20.0) / 10.0 * spacing);
+                                    }
+                                    else
+                                    {
+                                        spacing = (W * 0.25 - 2.0 - 10.0) / 1.0;
+                                        if (num <= 50.0)
+                                            pixel_x = (int)(W * 0.75 + (num - 30.0) / 20.0 * spacing);
+                                        else
+                                            pixel_x = (int)(W * 0.75 + spacing + (num - 50.0) / 25.0 * spacing);
                                     }
                                 }
                                 break;
@@ -29163,8 +29401,8 @@ namespace PowerSDR
                                 case MeterTXMode.FORWARD_POWER:
                                 case MeterTXMode.REVERSE_POWER:
                                 case MeterTXMode.SWR_POWER:
-                                    if (anan10present || apollopresent) output = num.ToString("f1") + " W";
-                                    if (alexpresent || pa_present) output = num.ToString(format) + " W";
+                                    if (anan10present || apollopresent) output = num.ToString(format) + " W";
+                                    else if (alexpresent || pa_present) output = num.ToString(format) + " W";
                                     else output = num.ToString(format) + " mW";
                                     break;
                                 case MeterTXMode.SWR:
@@ -30395,126 +30633,61 @@ namespace PowerSDR
         private bool update_preamp_mode = false;
         private bool mon_recall = false;
         private static HiPerfTimer vox_timer = new HiPerfTimer();
-        //  private bool kptt = false;
-        //  private bool kmptt = false;
-        //  private bool kpptt = false;
 
         private void PollPTT()
         {
-            //  HiPerfTimer cwpolltimer = new HiPerfTimer();
-            // cwpolltimer.Start();
-
-
             while (chkPower.Checked)
             {
                 DSPMode tx_mode = rx1_dsp_mode;
                 if (chkVFOBTX.Checked && chkRX2.Checked) tx_mode = rx2_dsp_mode;
-                // reset the CW ring buffers every 5000ms when not in use
-                /*   if (current_ptt_mode != PTTMode.NONE)
-                {
-                    switch (tx_mode)
-                    {
-                        case DSPMode.CWL:
-                        case DSPMode.CWU:
-                            cwpolltimer.Start(); // start over since key is in use
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (tx_mode)
-                    {
-                        case DSPMode.CWL:
-                        case DSPMode.CWU:
-                            cwpolltimer.Stop(); // check how long since last reset
-                            if (cwpolltimer.DurationMsec > 5000 + break_in_delay && !mox)
-                            {
-                                // if more than 5 sec + break in delay, reset timer and ring buffer
-                                cwpolltimer.Start();
-                                DttSP.CWRingRestart();
-                            }
-                            break;
-                    }
-                   } */
 
                 if (!manual_mox && !disable_ptt && !rx_only)
                 {
-                    bool mic_ptt = false, x2_ptt = false, cat_ptt_local = false, vox_ptt = false;
-                    if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+                    bool mic_ptt = false, cat_ptt_local = false, vox_ptt = false;
+
+                    if ((JanusAudio.GetDotDashPTT() & 0x1) == 1)
                     {
-                        mic_ptt = fwc_mic_ptt;
-                        x2_ptt = fwc_rca_ptt;
-                        vox_ptt = Audio.VOXActive;
-                        cat_ptt_local = (ptt_bit_bang_enabled && serialPTT != null && serialPTT.isPTT()) | cat_ptt;
+                        mic_ptt = true;
+                    }
+
+                    int tmp = JanusAudio.GetDotDashPTT();
+                    if ((tmp & 0x04) != 0) // dot
+                    {
+                        CWSensorItem.InputType type = CWSensorItem.InputType.Dot;
+                        if (reverse_paddles) type = CWSensorItem.InputType.Dash;
+
+                        CWSensorItem item = new CWSensorItem(type, true);
+                        CWKeyer.SensorEnqueue(item);
                     }
                     else
                     {
-                        byte b = 0;
-                        //if(current_model == Model.SDR1000)
-                        // b = Hdw.StatusPort();
-                        // kptt = Keyer.KeyerPTT;
-                        // kmptt = Keyer.MemoryPTT;
-                        // kpptt = (cw_semi_break_in_enabled && keyer_playing);
-                        // cw_ptt = kpptt || kptt || kmptt;
+                        CWSensorItem.InputType type = CWSensorItem.InputType.Dot;
+                        if (reverse_paddles) type = CWSensorItem.InputType.Dash;
 
-                        //cw_ptt = (cw_semi_break_in_enabled && keyer_playing) || Keyer.KeyerPTT || Keyer.MemoryPTT; //w5wc
-
-                        //  mic_ptt = (b & (byte)StatusPin.Dot) != 0;
-                        //  if (!mic_ptt)  // check aux sources for ptt if not already set 
-                        //  {
-                        if ((JanusAudio.GetDotDashPTT() & 0x1) == 1)
-                        {
-                            mic_ptt = true;
-                        }
-                        //  }
-
-                        int tmp = JanusAudio.GetDotDashPTT();
-                        if ((tmp & 0x04) != 0) // dot
-                        {
-                            CWSensorItem.InputType type = CWSensorItem.InputType.Dot;
-                            if (reverse_paddles) type = CWSensorItem.InputType.Dash;
-
-                            CWSensorItem item = new CWSensorItem(type, true);
-                            CWKeyer.SensorEnqueue(item);
-                        }
-                        else
-                        {
-                            CWSensorItem.InputType type = CWSensorItem.InputType.Dot;
-                            if (reverse_paddles) type = CWSensorItem.InputType.Dash;
-
-                            CWSensorItem item = new CWSensorItem(type, false);
-                            CWKeyer.SensorEnqueue(item);
-                        }
-
-                        tmp = JanusAudio.GetDotDashPTT();
-                        if ((tmp & 0x02) != 0) // dash
-                        {
-                            CWSensorItem.InputType type = CWSensorItem.InputType.Dash;
-                            if (reverse_paddles) type = CWSensorItem.InputType.Dot;
-
-                            CWSensorItem item = new CWSensorItem(type, true);
-                            CWKeyer.SensorEnqueue(item);
-                        }
-                        else
-                        {
-                            CWSensorItem.InputType type = CWSensorItem.InputType.Dash;
-                            if (reverse_paddles) type = CWSensorItem.InputType.Dot;
-
-                            CWSensorItem item = new CWSensorItem(type, false);
-                            CWKeyer.SensorEnqueue(item);
-                        }
-
-                        x2_ptt = (b & (byte)StatusPin.PIN_11) != 0;
-                        if (usb_present) x2_ptt = !x2_ptt;
-                        vox_ptt = Audio.VOXActive;
-                        cat_ptt_local = (ptt_bit_bang_enabled && serialPTT != null && serialPTT.isPTT()) | cat_ptt;
-
-                        if (auto_mute)
-                        {
-                            bool mute = !((b & (byte)StatusPin.PIN_12) != 0);
-                            if (chkMUT.Checked != mute) chkMUT.Checked = mute;
-                        }
+                        CWSensorItem item = new CWSensorItem(type, false);
+                        CWKeyer.SensorEnqueue(item);
                     }
+
+                    tmp = JanusAudio.GetDotDashPTT();
+                    if ((tmp & 0x02) != 0) // dash
+                    {
+                        CWSensorItem.InputType type = CWSensorItem.InputType.Dash;
+                        if (reverse_paddles) type = CWSensorItem.InputType.Dot;
+
+                        CWSensorItem item = new CWSensorItem(type, true);
+                        CWKeyer.SensorEnqueue(item);
+                    }
+                    else
+                    {
+                        CWSensorItem.InputType type = CWSensorItem.InputType.Dash;
+                        if (reverse_paddles) type = CWSensorItem.InputType.Dot;
+
+                        CWSensorItem item = new CWSensorItem(type, false);
+                        CWKeyer.SensorEnqueue(item);
+                    }
+
+                    vox_ptt = Audio.VOXActive;
+                    cat_ptt_local = (ptt_bit_bang_enabled && serialPTT != null && serialPTT.isPTT()) | cat_ptt;
 
                     if (!mox)
                     {
@@ -30549,7 +30722,7 @@ namespace PowerSDR
                             chkMOX.Checked = true;
                             if (!mox)
                             {
-                                chkPower.Checked = false;
+                              //  chkPower.Checked = false;
                                 return;
                             }
                         }
@@ -31264,91 +31437,24 @@ namespace PowerSDR
                 switch (e.KeyCode)
                 {
                     case Keys.A:
-                        if (fwc_init && (current_model == Model.FLEX3000))
-                        {
-                            if (flex3000ATUForm == null || flex3000ATUForm.IsDisposed)
-                                flex3000ATUForm = new FLEX3000ATUForm(this);
-                            flex3000ATUForm.Show();
-                            flex3000ATUForm.Focus();
-                        }
                         break;
                     case Keys.C:
-                        if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                        {
-                            fwcCalForm = new FWCCalForm(this);
-                            fwcCalForm.Show();
-                            fwcCalForm.Focus();
-                        }
                         break;
                     case Keys.D:
-                        if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                        {
-                            if (flex5000DebugForm == null || flex5000DebugForm.IsDisposed)
-                                flex5000DebugForm = new FLEX5000DebugForm(this);
-                            flex5000DebugForm.Show();
-                            flex5000DebugForm.Focus();
-                        }
                         break;
                     case Keys.F:
-                        if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                        {
-                            flex5000FinalTestForm = new FLEX5000FinalTestForm(this);
-                            flex5000FinalTestForm.Show();
-                            flex5000FinalTestForm.Focus();
-                        }
                         break;
                     case Keys.I:
-                        if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                        {
-                            if (fwcTestForm == null || fwcTestForm.IsDisposed)
-                                fwcTestForm = new FWCTestForm(this);
-                            fwcTestForm.Show();
-                            fwcTestForm.Focus();
-                        }
                         break;
                     case Keys.O:
-                        //mnuRelays.Visible = true;
                         break;
                     case Keys.P:
-                        switch (current_model)
-                        {
-                            case Model.FLEX5000:
-                            case Model.FLEX3000:
-                                if (fwc_init)
-                                {
-                                    flex5000ProdTestForm = new FLEX5000ProdTestForm(this);
-                                    flex5000ProdTestForm.Show();
-                                    flex5000ProdTestForm.Focus();
-                                }
-                                break;
-                        }
                         break;
                     case Keys.R:
-                        if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK)
-                        {
-                            if (flex5000RX2CalForm == null || flex5000RX2CalForm.IsDisposed)
-                                flex5000RX2CalForm = new FLEX5000RX2CalForm(this);
-                            flex5000RX2CalForm.Show();
-                            flex5000RX2CalForm.Focus();
-                        }
                         break;
                     case Keys.S:
-                        if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                        {
-                            if (preSelForm == null || preSelForm.IsDisposed)
-                                preSelForm = new PreSelForm(this);
-                            preSelForm.Show();
-                            preSelForm.Focus();
-                        }
                         break;
                     case Keys.T:
-                        if (pa_present && current_model == Model.SDR1000)
-                        {
-                            if (PAQualForm == null || PAQualForm.IsDisposed)
-                                PAQualForm = new PAQualify(this);
-                            PAQualForm.Show();
-                            PAQualForm.Focus();
-                        }
                         break;
                     /*  case Keys.V:
                           if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.VUOK)
@@ -31367,36 +31473,21 @@ namespace PowerSDR
                 switch (e.KeyCode)
                 {
                     case Keys.D4:
-                        if (fwc_init && current_model == Model.FLEX5000)
-                        {
-                            if (flex5000LPFForm == null || flex5000LPFForm.IsDisposed)
-                                flex5000LPFForm = new FLEX5000LPFForm();
-                            flex5000LPFForm.Show();
-                            flex5000LPFForm.Focus();
-                        }
                         break;
                     case Keys.D:
-                        if (dspTestForm == null || dspTestForm.IsDisposed)
-                            dspTestForm = new DSPTestForm(this);
-                        dspTestForm.Show();
-                        dspTestForm.Focus();
                         break;
                     /*  case Keys.G:
                           CallCal1500TXImageComb();
                           break;*/
                     case Keys.R:
-                        if (FWCEEPROM.RX2OK)
-                        {
-                            DiversityForm diversityForm = new DiversityForm(this);
-                            diversityForm.Focus();
-                            diversityForm.Show();
-                        }
+                        DiversityForm diversityForm = new DiversityForm(this);
+                        diversityForm.Focus();
+                        diversityForm.Show();
                         break;
                     case Keys.U:
                         mnuUCB_Click(this, EventArgs.Empty);
                         break;
                     case Keys.F:
-                        chkFullDuplex.Visible = true;
                         break;
                 }
             }
@@ -31645,6 +31736,17 @@ namespace PowerSDR
                                 if (spacebar_ptt)
                                 {
                                     chkMOX.Checked = !chkMOX.Checked;
+                                    if (chkMOX.Checked)
+                                    {
+                                        if (chkVAC1.Checked && allow_vac_bypass)
+                                            Audio.VACBypass = true;
+                                    }
+                                    else
+                                    {
+                                        if (chkVAC1.Checked && Audio.VACBypass)
+                                            Audio.VACBypass = false;
+                                    }
+
                                     e.Handled = true;
                                 }
                                 else if (spacebar_vox)
@@ -33268,7 +33370,7 @@ namespace PowerSDR
             if (chkMUT.Checked)
             {
                 Audio.MuteRX1 = true;
-              //  radio.GetDSPRX(0, 0).RXOutputGain = 0.0;
+                //  radio.GetDSPRX(0, 0).RXOutputGain = 0.0;
                 chkMUT.BackColor = button_selected_color;
                 lblRX1MuteVFOA.Text = "MUTE";
             }
@@ -34205,7 +34307,7 @@ namespace PowerSDR
                         }
                         chkMOX.Checked = false;
                         return;
-                    }
+                    } 
                 }
 
                 /*t1.Stop();
@@ -34269,7 +34371,7 @@ namespace PowerSDR
             {
                 if (attontx)
                 {
-                   // hermes_step_attenuator = false;
+                    // hermes_step_attenuator = false;
                     SetupForm.HermesEnableAttenuator = false;
                     RX1PreampMode = PreampMode.HPSDR_OFF;			// set to -20dB
                     update_preamp = true;
@@ -34500,16 +34602,18 @@ namespace PowerSDR
                     case MeterTXMode.FORWARD_POWER:
                     case MeterTXMode.REVERSE_POWER:
                     case MeterTXMode.SWR_POWER:
-                        if (anan10present || apollopresent)
+                        if (anan10present)
                             lblMultiSMeter.Text = "1      5     10    15   20    25+";
+                        else if (apollopresent)
+                            lblMultiSMeter.Text = "1      5     10    15   30    50+";
                         else if (alexpresent || pa_present)
                             lblMultiSMeter.Text = "1      5     10    50   100  120+";
                         else
-                            lblMultiSMeter.Text = "0      0.1     0.2     0.5        1.0";
+                            lblMultiSMeter.Text = "0      0.1     0.2     0.5        0.8";
                         break;
                     case MeterTXMode.SWR:
                         lblMultiSMeter.Text = "1      1.5   2     3     5    10";
-                        lblMultiSMeter.Text = "0             10              20";
+                        //  lblMultiSMeter.Text = "0             10              20";
                         break;
                     case MeterTXMode.OFF:
                         lblMultiSMeter.Text = "";
@@ -35675,7 +35779,7 @@ namespace PowerSDR
                     chkMOX.Checked = false;
                     return;
                 }
-            }
+            } 
 
             if (rx1_dsp_mode == DSPMode.CWL)
             {
@@ -36926,7 +37030,7 @@ namespace PowerSDR
                                 update = false;
                             }
 
-                            SetupForm.txtFwdPower.Text = val.ToString();
+                            // SetupForm.txtFwdPower.Text = val.ToString();
                             if (update)
                             {
                                 SetupForm.udDisplayGridMax.Value = val;
@@ -37028,7 +37132,7 @@ namespace PowerSDR
                                 update = false;
                             }
 
-                            SetupForm.txtFwdPower.Text = val.ToString();
+                            // SetupForm.txtFwdPower.Text = val.ToString();
                             if (update)
                             {
                                 SetupForm.udRX2DisplayGridMax.Value = val;
@@ -37068,7 +37172,7 @@ namespace PowerSDR
                                 update = false;
                             }
 
-                            SetupForm.txtFwdPower.Text = val.ToString();
+                            // SetupForm.txtFwdPower.Text = val.ToString();
                             if (update)
                             {
                                 SetupForm.udTXGridMax.Value = val;
@@ -37160,7 +37264,7 @@ namespace PowerSDR
                                 update = false;
                             }
 
-                            SetupForm.txtFwdPower.Text = val.ToString();
+                            // SetupForm.txtFwdPower.Text = val.ToString();
                             if (update)
                             {
                                 SetupForm.udTXGridMax.Value = val;
@@ -37870,29 +37974,29 @@ namespace PowerSDR
                             }
                             break;
                         case DisplayMode.WATERFALL:
-                          /*  if (!mox)
-                            {
-                                if (wfmaxadjust)
-                                {
-                                    decimal val = SetupForm.udDisplayWaterfallHighLevel.Value;
-                                    val += 5;
+                            /*  if (!mox)
+                              {
+                                  if (wfmaxadjust)
+                                  {
+                                      decimal val = SetupForm.udDisplayWaterfallHighLevel.Value;
+                                      val += 5;
 
-                                    if (val > SetupForm.udDisplayWaterfallHighLevel.Maximum)
-                                        val = SetupForm.udDisplayWaterfallHighLevel.Maximum;
+                                      if (val > SetupForm.udDisplayWaterfallHighLevel.Maximum)
+                                          val = SetupForm.udDisplayWaterfallHighLevel.Maximum;
 
-                                    SetupForm.udDisplayWaterfallHighLevel.Value = val;
-                                }
-                                if (wfminadjust)
-                                {
-                                    decimal val = SetupForm.udDisplayWaterfallLowLevel.Value;
-                                    val += 5;
+                                      SetupForm.udDisplayWaterfallHighLevel.Value = val;
+                                  }
+                                  if (wfminadjust)
+                                  {
+                                      decimal val = SetupForm.udDisplayWaterfallLowLevel.Value;
+                                      val += 5;
 
-                                    if (val > SetupForm.udDisplayWaterfallLowLevel.Maximum)
-                                        val = SetupForm.udDisplayWaterfallLowLevel.Maximum;
+                                      if (val > SetupForm.udDisplayWaterfallLowLevel.Maximum)
+                                          val = SetupForm.udDisplayWaterfallLowLevel.Maximum;
 
-                                    SetupForm.udDisplayWaterfallLowLevel.Value = val;
-                                }
-                            } */
+                                      SetupForm.udDisplayWaterfallLowLevel.Value = val;
+                                  }
+                              } */
                             break;
                     }
                     // }
@@ -38835,7 +38939,7 @@ namespace PowerSDR
 
         }
 
-       private void radBand12_Click(object sender, EventArgs e)
+        private void radBand12_Click(object sender, EventArgs e)
         {
             SaveBand();
             if (last_band.Equals("12M"))
@@ -38895,7 +38999,7 @@ namespace PowerSDR
             }
         }
 
-       private void radBand2_Click(object sender, EventArgs e)
+        private void radBand2_Click(object sender, EventArgs e)
         {
             SaveBand();
             if (last_band.Equals("2M"))
@@ -38955,7 +39059,7 @@ namespace PowerSDR
             }
         }
 
-         private void radBandVHF_Click(object sender, EventArgs e)
+        private void radBandVHF_Click(object sender, EventArgs e)
         {
             SaveBand();
 
@@ -43830,7 +43934,7 @@ namespace PowerSDR
             if (chkRX2Mute.Checked)
             {
                 Audio.MuteRX2 = true;
-              //  radio.GetDSPRX(1, 0).RXOutputGain = 0.0;
+                //  radio.GetDSPRX(1, 0).RXOutputGain = 0.0;
                 lblRX2MuteVFOB.Text = "MUTE";
             }
             else
@@ -44555,58 +44659,58 @@ namespace PowerSDR
 
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);
 
-              //  if (chkRX2.Checked)
-               // {
-                    Audio.RX2AutoMuteTX = true;
-                    Audio.FullDuplex = !mute_rx1_on_vfob_tx;
-                    Audio.TXDSPMode = rx2_dsp_mode;
-                    radio.GetDSPTX(0).CurrentDSPMode = rx2_dsp_mode;
+                //  if (chkRX2.Checked)
+                // {
+                Audio.RX2AutoMuteTX = true;
+                Audio.FullDuplex = !mute_rx1_on_vfob_tx;
+                Audio.TXDSPMode = rx2_dsp_mode;
+                radio.GetDSPTX(0).CurrentDSPMode = rx2_dsp_mode;
 
-                    SetRX2Mode(rx2_dsp_mode);
-                    Display.TXOnVFOB = true;
-                    if (chkVFOSplit.Checked)
-                        chkVFOSplit.Checked = false;
+                SetRX2Mode(rx2_dsp_mode);
+                Display.TXOnVFOB = true;
+                if (chkVFOSplit.Checked)
+                    chkVFOSplit.Checked = false;
 
 
-                    if (chkRX2.Checked && chkVAC2.Checked)
-                    {
-                        ptbVACRXGain.Value = vac2_rx_gain;
-                        ptbVACRXGain_Scroll(this, EventArgs.Empty);
+                if (chkRX2.Checked && chkVAC2.Checked)
+                {
+                    ptbVACRXGain.Value = vac2_rx_gain;
+                    ptbVACRXGain_Scroll(this, EventArgs.Empty);
 
-                        ptbVACTXGain.Value = vac2_tx_gain;
-                        ptbVACTXGain_Scroll(this, EventArgs.Empty);
+                    ptbVACTXGain.Value = vac2_tx_gain;
+                    ptbVACTXGain_Scroll(this, EventArgs.Empty);
 
-                        comboVACSampleRate.Text = vac2_sample_rate;
+                    comboVACSampleRate.Text = vac2_sample_rate;
 
-                        chkVACStereo.Checked = vac2_stereo;
-                    }
-              //  }
+                    chkVACStereo.Checked = vac2_stereo;
+                }
+                //  }
 
                 if (chkRX2.Checked == false && chkVFOBTX.Checked)    //in case of VU/XVTR-split error
                     chkVFOSplit.Checked = true;
             }
             else // button is unchecked
             {
-               // if (!chkRX2.Checked)
-               // {
-                    Audio.RX2AutoMuteTX = mute_rx2_on_vfoa_tx;
-                    Audio.FullDuplex = false;
+                // if (!chkRX2.Checked)
+                // {
+                Audio.RX2AutoMuteTX = mute_rx2_on_vfoa_tx;
+                Audio.FullDuplex = false;
 
-                    Display.TXOnVFOB = false;
+                Display.TXOnVFOB = false;
 
-                    if (chkRX2.Checked && chkVAC2.Checked)
-                    {
-                        ptbVACRXGain.Value = vac_rx_gain;
-                        ptbVACRXGain_Scroll(this, EventArgs.Empty);
+                if (chkRX2.Checked && chkVAC2.Checked)
+                {
+                    ptbVACRXGain.Value = vac_rx_gain;
+                    ptbVACRXGain_Scroll(this, EventArgs.Empty);
 
-                        ptbVACTXGain.Value = vac_tx_gain;
-                        ptbVACTXGain_Scroll(this, EventArgs.Empty);
+                    ptbVACTXGain.Value = vac_tx_gain;
+                    ptbVACTXGain_Scroll(this, EventArgs.Empty);
 
-                        comboVACSampleRate.Text = vac_sample_rate;
+                    comboVACSampleRate.Text = vac_sample_rate;
 
-                        chkVACStereo.Checked = vac_stereo;
-                    }
-              //  }
+                    chkVACStereo.Checked = vac_stereo;
+                }
+                //  }
 
                 if (chkRX2.Checked == false)
                     chkVFOSplit.Checked = false;

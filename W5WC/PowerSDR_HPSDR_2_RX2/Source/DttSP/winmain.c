@@ -812,7 +812,6 @@ setup (char *app_data_path)
 		top[thread].swch.env.stdy.size = (int)(loc[thread].def.rate * 0.050);
 		top[thread].swch.env.rise.size = (int)(loc[thread].def.rate * 0.005);
 
-
 		top[thread].swch.env.curr.val = 0.0;
 		top[thread].swch.env.curr.cnt = 0;
 		top[thread].swch.env.rise.incr = 1.0f/(float)top[thread].swch.env.rise.size;

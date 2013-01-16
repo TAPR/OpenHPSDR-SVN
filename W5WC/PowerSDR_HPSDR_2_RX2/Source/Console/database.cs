@@ -2,7 +2,7 @@
 // database.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2012  FlexRadio Systems
+// Copyright (C) 2004-2012  FlexRadio Systems Copyright (C) 2010-2012  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -759,7 +759,7 @@ namespace PowerSDR
 								0.135700, 0.137799, "2200M Band",               false,
                                 0.153000, 0.279000, "AM - Long Wave",			false,
                                 0.415000, 0.471999, "Maritime Band",            false,
-                                0.472000, 0.478999, "630M Band",                false,
+                                0.472000, 0.478999, "630M Band",                true,
                                 0.479000, 0.526400, "Maritime Band",            false,
 								0.530000, 1.710000, "Broadcast AM Med Wave",	false,				
 								2.300000, 2.495000, "120M Short Wave",			false,
@@ -1933,38 +1933,26 @@ namespace PowerSDR
             object[] data = {
                                 5.100000, 5.258499, "60M General",              false,
                                 5.258500, 5.263999, "60M UK",                   true,
-								//5.260000, 5.260000, "60M Channel FA",			true,
-                               // 5.260001, 5.263999, "60M UK",                   true,
                                 5.264000, 5.275999, "60M General",              false,
-                                5.276000, 5.283999, "60M UK",              true,
-								//5.280000, 5.280000, "60M Channel FB",			true,
-                               // 5.280001, 5.283999, "60M UK",              true,
+                                5.276000, 5.283999, "60M UK",                   true,
                                 5.284000, 5.288499, "60M General",              false,
-                                5.288500, 5.291999, "60M UK",              true,
-								//5.290000, 5.290000, "60M Channel FC",			true,
-                               // 5.290001, 5.291999, "60M UK",              true,
+                                5.288500, 5.291999, "60M UK",                   true,
                                 5.292000, 5.297999, "60M General",              false,
-                                5.298000, 5.306999, "60M UK",              true,
+                                5.298000, 5.306999, "60M UK",                   true,
                                 5.307000, 5.312999, "60M General",              false,
-                                5.313000, 5.322999, "60M UK",              true,
+                                5.313000, 5.322999, "60M UK",                   true,
                                 5.323000, 5.332999, "60M General",              false,
-                                5.333000, 5.337999, "60M UK",              true,
+                                5.333000, 5.337999, "60M UK",                   true,
                                 5.338000, 5.353999, "60M General",              false,
-                                5.354000, 5.357999, "60M UK",              true,
+                                5.354000, 5.357999, "60M UK",                   true,
                                 5.358000, 5.361999, "60M General",              false,
-                                5.362000, 5.381999, "60M UK",              true,
-                              //  5.368000, 5.368000, "60M Channel FK",			true,
-                              //  5.368001, 5.372999, "60M UK",              true,
-                              //  5.373000, 5.373000, "60M Channel FL",			true,
-                               // 5.373001, 5.381999, "60M UK",              true,
+                                5.362000, 5.374499, "60M UK",                   true,
+                                5.374500, 5.377999, "60M General",              false,
+                                5.378000, 5.381999, "60M UK",                   true,
                                 5.382000, 5.394999, "60M General",              false,
-                                5.395000, 5.401499, "60M UK",              true,
-                               // 5.400000, 5.400000, "60M Channel FE",			true,
-                               // 5.400001, 5.401499, "60M UK",              true,
+                                5.395000, 5.401499, "60M UK",                   true,
                                 5.401500, 5.403499, "60M General",              false,
-                                5.403500, 5.406499, "60M UK",              true,
-                              //  5.405000, 5.405000, "60M Channel FM",			true,
-                               // 5.405001, 5.406499, "60M UK",              true,
+                                5.403500, 5.406499, "60M UK",                   true,
                                 5.406500, 5.499999, "60M General",              false,
 			};
 
