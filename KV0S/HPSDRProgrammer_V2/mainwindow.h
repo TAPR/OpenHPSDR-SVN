@@ -19,6 +19,7 @@
 #include "rawreceivethread.h"
 #include "discovery.h"
 #include "board.h"
+#include "changeipaddress.h"
 #include "aboutdialog.h"
 #include "statusdialog.h"
 #include "addressdialog.h"
@@ -89,6 +90,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
     QLabel *deviceIndicator;
+    int currentBoardIndex;
     QString currentboard;
     QSettings settings;
 
@@ -130,8 +132,10 @@ private:
     QString hwAddress;
     unsigned char hw[6];
 
-    long metisIP;
-    QString metisHostAddress;
+    long selectedBoardIP;
+    QString selectedBoardHostAddress;
+    unsigned char* selectedBoardMAC;
+
 
     int s;
 

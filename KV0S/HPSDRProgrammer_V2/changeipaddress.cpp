@@ -25,30 +25,60 @@ in order for the new address to be read using a Discovery."
 
 
 
-changeIPAddress::changeIPAddress(QUdpSocket *s)
+ChangeIPAddress::ChangeIPAddress(QUdpSocket *s, unsigned char* MACaddress)
 {
     QString myip;
     myip = QString("255.255.255.255");
+    macaddr = MACaddress;
 
-    qDebug()<<"Change IP Address: "<< myip;
+    qDebug()<<"Broadcast IP Address: "<< myip;
     ip=myip;
     socket=s;
+
 
     connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
 
 }
 
-void changeIPAddress::changeIP() {
+ChangeIPAddress::~ChangeIPAddress()
+{
+
+}
+
+void ChangeIPAddress::changeIP( QStringList *saddr )
+{
     // send the changeIP packet
     unsigned char buffer[63];
     int i;
+    int addr[4];
+
+    addr[0] = saddr->at(0).toInt();
+    addr[1] = saddr->at(1).toInt();
+    addr[2] = saddr->at(2).toInt();
+    addr[3] = saddr->at(3).toInt();
+
+    qDebug() << "new address" << saddr->at(0) <<saddr->at(1) << saddr->at(2) << saddr->at(3);
+    QString text;
+    text.sprintf("%02X:%02X:%02X:%02X:%02x:%02X",
+                 macaddr[0],macaddr[1],macaddr[2],macaddr[3],macaddr[4],macaddr[5]);
+    qDebug() << " MAC "  << text;
 
     buffer[0]=(char)0xEF; //header
     buffer[1]=(char)0XFE;
     buffer[2]=(char)0x03;
-    //buffer[3]=
-    //buffer[4]=
-    //buffer[5]=
+    buffer[3]=macaddr[0];
+    buffer[4]=macaddr[1];
+    buffer[5]=macaddr[2];
+    buffer[6]=macaddr[3];
+    buffer[7]=macaddr[4];
+    buffer[8]=macaddr[5];
+
+    // the IP address from the interface
+    buffer[9]=(unsigned char)addr[0];
+    buffer[10]=(unsigned char)addr[1];
+    buffer[11]=(unsigned char)addr[2];
+    buffer[12]=(unsigned char)addr[3];
+
 
     for(i=13;i<63;i++) {
         buffer[i]=(char)0x00;
@@ -60,8 +90,42 @@ void changeIPAddress::changeIP() {
     }
 }
 
-void changeIPAddress::readyread()
+void ChangeIPAddress::readyRead()
 {
+    QHostAddress boardAddress = QHostAddress(ip);
+    quint16 boardPort = 1024;
+    unsigned char buffer[1024];
 
+    qDebug()<<"ChangeIPAddress::readyRead";
 
+    if(socket->readDatagram((char*)&buffer,(qint64)sizeof(buffer),&boardAddress,&boardPort)>0) {
+
+        if(buffer[0]==0xEF && buffer[1]==0xFE) {
+            switch(buffer[2]) {
+            case 3:  // reply
+                // should not happen on this port
+                qDebug()<<"ChangeIPAddress::readyRead: reply!!!";
+                break;
+            case 2:  // response to a discovery packet
+                qDebug()<<"ChangeIPAddress::readyRead: discovery response: "<<boardAddress.toString();
+                if(boardAddress.toString()!=ip) {
+
+                    qDebug() << boardAddress.toString();
+
+                    //emit board_found(bd);
+                } else {
+                    qDebug()<<"ChangeIPAddress::readyRead: from: "<<boardAddress.toString();
+                }
+                break;
+            case 1:  // a data packet
+                // should not happen on this port
+                qDebug()<<"ChangeIPAddress::readyRead: data!!!";
+                break;
+            }
+        } else {
+            qDebug() << "received invalid response to discovery";
+        }
+    } else {
+        qDebug()<<"ChangeIPAddress::readyRead: readDatagram failed";
+    }
 }
