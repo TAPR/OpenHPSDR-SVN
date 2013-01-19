@@ -11854,7 +11854,9 @@ namespace PowerSDR
             switch (region)
             {
                 case FRSRegion.US:
-                    if (freq >= 1.8 && freq <= 2.0)
+                    if ((freq >= 0.1357 && freq <= 0.1378) ||
+                        (freq >= 0.472 && freq <= 0.479) || 
+                        freq >= 1.8 && freq <= 2.0)
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 4.0)
                         return Band.B80M;
@@ -12069,7 +12071,8 @@ namespace PowerSDR
                         return Band.GEN;
 
                 case FRSRegion.Japan:
-                    if (freq >= 1.81 && freq <= 1.9125)
+                    if ((freq >= 0.1357 && freq <= 0.1378) ||
+                        (freq >= 1.81 && freq <= 1.9125))
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 3.805)
                         return Band.B80M;
@@ -12101,7 +12104,9 @@ namespace PowerSDR
                         return Band.GEN;
 
                 case FRSRegion.Australia:
-                    if (freq >= 1.8 && freq <= 1.875)
+                    if ((freq >= 0.1357 && freq <= 0.1378) ||
+                        (freq >= 0.472 && freq <= 0.479) || 
+                        freq >= 1.8 && freq <= 1.875)
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 3.8)
                         return Band.B80M;
@@ -13208,7 +13213,9 @@ namespace PowerSDR
             switch (r)
             {
                 case FRSRegion.US:
-                    if (f >= 1.8 && f <= 2.0) ret_val = true;
+                    if (f >= .1357 && f <= .1378) ret_val = true;
+                    else if (f >= 0.472 && f <= 0.479) ret_val = true;
+                    else if (f >= 1.8 && f <= 2.0) ret_val = true;
                     else if (f >= 3.5 && f <= 4.0) ret_val = true;
                     else if (f >= 5.3305 && f <= 5.3334) ret_val = true; // allow for default 3100Hz TX Filter High Cut
                     else if (f >= 5.3465 && f <= 5.3494) ret_val = true;
@@ -13343,7 +13350,9 @@ namespace PowerSDR
                     else ret_val = false;
                     break;
                 case FRSRegion.Australia:
-                    if (f >= 1.8 && f <= 1.875) ret_val = true;
+                    if (f >= .1357 && f <= .1378) ret_val = true;
+                    else if (f >= 0.472 && f <= 0.479) ret_val = true;
+                    else if (f >= 1.8 && f <= 1.875) ret_val = true;
                     else if (f >= 3.5 && f <= 3.7) ret_val = true;
                     else if (f >= 3.776 && f <= 3.8) ret_val = true;
                     else if (f >= 7.0 && f <= 7.3) ret_val = true;
@@ -34053,21 +34062,22 @@ namespace PowerSDR
             if (!fwc_init || current_model != Model.FLEX5000)
                 Hdw.UpdateHardware = true;
 
-            /*	if(!fwc_init || current_model != Model.FLEX5000)
-                {
-                    if(tx && !tuning) 
-                    {				
-                        DDSFreq = freq;
-                    }
-                    else if(tx && chkVFOSplit.Checked)
-                    {
-                        txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-                    }
-                    else
-                    {
-                        txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-                    }
-                }*/
+            	//if(!fwc_init || current_model != Model.FLEX5000)
+               // {
+                  //  if(tx && !tuning) 
+                   // {				
+                   //     DDSFreq = freq;
+                   // }
+                  //  else
+               // if(tx && chkVFOSplit.Checked)
+                  //  {
+                   //     txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                  //  }
+                   // else
+                 //   {
+                    //    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+                  //  }
+               // }
         }
 
         private void UIMOXChangedTrue()
@@ -35797,7 +35807,6 @@ namespace PowerSDR
                 case DSPMode.AM:
                 case DSPMode.SAM:
                 case DSPMode.FM:
-                    //tx_freq -= 0.011025; //w5wc-1
                     if (chkTUN.Checked) tx_freq -= cw_pitch * 1e-6;
                     break;
                 case DSPMode.USB:
@@ -36195,7 +36204,7 @@ namespace PowerSDR
             double vfoa = VFOAFreq;
 
             txtVFOABand.Text = freq.ToString("f6");
-            Display.VFOASub = (long)(freq * 1000000.0);
+            Display.VFOASub = (long)(freq * 1e6);
             if (chkTUN.Checked && chkVFOATX.Checked && chkVFOSplit.Checked)
             {
                 switch (radio.GetDSPTX(0).CurrentDSPMode)
@@ -36232,7 +36241,7 @@ namespace PowerSDR
 
             if (chkEnableMultiRX.Checked)
             {
-                int diff = (int)((freq - vfoa) * 1000000.0);
+                int diff = (int)((freq - vfoa) * 1e6);
                 double sub_osc = radio.GetDSPRX(0, 0).RXOsc - diff;
 
                 if (sub_osc < -sample_rate1 / 2)
@@ -36263,6 +36272,7 @@ namespace PowerSDR
             if (chkVFOSplit.Checked)
             {
                 tx_xvtr_index = XVTRForm.XVTRFreq(freq);
+
                 Band old_tx_band = tx_band;
                 Band b = BandByFreq(freq, tx_xvtr_index, true, current_region);
                 if (chkVFOSplit.Checked && old_tx_band != b)
@@ -36293,9 +36303,6 @@ namespace PowerSDR
                     case DSPMode.AM:
                     case DSPMode.SAM:
                     case DSPMode.FM:
-                        //freq -= 0.011025; //w5wc-1
-                        if (chkTUN.Checked) freq -= (double)cw_pitch * 1e-6;
-                        break;
                     case DSPMode.USB:
                     case DSPMode.DIGU:
                         if (chkTUN.Checked) freq -= (double)cw_pitch * 1e-6;
@@ -36456,6 +36463,7 @@ namespace PowerSDR
                 }
             }
 
+            // update Band Info
             double freq60m = freq;
             if (current_region == FRSRegion.US)
             {
@@ -36465,31 +36473,30 @@ namespace PowerSDR
                     freq60m -= ModeFreqOffset(rx1_dsp_mode);
             }
 
-            // update Band Info
             string bandInfo;
             bool transmit = DB.BandText(freq60m, out bandInfo);
             if (transmit == false)
             {
                 txtVFOBBand.BackColor = Color.DimGray;
-                if (chkVFOSplit.Checked && mox)
-                    chkMOX.Checked = false;
+               // if (chkVFOSplit.Checked && mox)
+                 //   chkMOX.Checked = false;
             }
             else txtVFOBBand.BackColor = band_background_color;
             txtVFOBBand.Text = bandInfo;
 
             saved_vfob_freq = freq;
 
-            if (current_model == Model.HPSDR || current_model == Model.HERMES)
-            {
+           // if (current_model == Model.HPSDR || current_model == Model.HERMES)
+          //  {
                 if (chkVFOBTX.Checked) goto set_tx_freq;
                 if (rx2_enabled) goto set_rx2_freq;
                 else if (chkVFOSplit.Checked || full_duplex)
                     goto set_tx_freq;
                 else goto end;
-            }
-            else if (mox && chkVFOSplit.Checked)
-                goto set_tx_freq;
-            else goto end;
+           // }
+          //  else if (mox && chkVFOSplit.Checked)
+           //     goto set_tx_freq;
+           // else goto end;
 
         set_tx_freq:
             int last_tx_xvtr_index = tx_xvtr_index;
@@ -36556,18 +36563,42 @@ namespace PowerSDR
                 }*/
 
             DSPMode tx_mode = radio.GetDSPTX(0).CurrentDSPMode;
-            if (chkVFOBTX.Checked && chkRX2.Checked) tx_mode = rx2_dsp_mode;
+           // if (chkVFOBTX.Checked && chkRX2.Checked) tx_mode = rx2_dsp_mode;
 
             if (mox)
             {
+                if (!CheckValidTXFreq(current_region, tx_freq, tx_mode))
+                {
+                    switch (radio.GetDSPTX(0).CurrentDSPMode)
+                    {
+                        case DSPMode.CWL:
+                        case DSPMode.CWU:
+                            MessageBox.Show("The frequency " + tx_freq.ToString("f6") + "MHz is not within the\n" +
+                                "Band specifications for your region (" + ((int)current_region).ToString() + ").",
+                                "Transmit Error: Out Of Band",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                            break;
+                        default:
+                            MessageBox.Show("The frequency " + tx_freq.ToString("f6") + "MHz in combination with your TX filter\n" +
+                                "settings [" + Display.TXFilterLow.ToString() + ", " + Display.TXFilterHigh.ToString() + "] are not within the " +
+                                "Band specifications for your region (" + ((int)current_region).ToString() + ").",
+                                "Transmit Error: Out Of Band",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                            break;
+                    }
+                    chkMOX.Checked = false;
+                    return;
+                }
+            }
+           // if (mox)
+           // {
                 switch (tx_mode)
                 {
                     case DSPMode.AM:
                     case DSPMode.SAM:
                     case DSPMode.FM:
-                        //tx_freq -= 0.011025; //w5wc-1
-                        if (chkTUN.Checked) tx_freq -= (double)cw_pitch * 1e-6;
-                        break;
                     case DSPMode.USB:
                     case DSPMode.DIGU:
                     case DSPMode.DSB:
@@ -36577,13 +36608,19 @@ namespace PowerSDR
                     case DSPMode.DIGL:
                         if (chkTUN.Checked) tx_freq += (double)cw_pitch * 1e-6;
                         break;
+                    case DSPMode.CWL:
+                        tx_freq += (double)cw_pitch * 0.0000010;
+                       break;
+                    case DSPMode.CWU:
+                        tx_freq -= (double)cw_pitch * 0.0000010;
+                     break;
                 }
-            }
+           // }
 
-            if (tx_mode == DSPMode.CWL)
-                tx_freq += (double)cw_pitch * 0.0000010;
-            else if (tx_mode == DSPMode.CWU)
-                tx_freq -= (double)cw_pitch * 0.0000010;
+          //  if (tx_mode == DSPMode.CWL)
+            //    tx_freq += (double)cw_pitch * 0.0000010;
+          //  else if (tx_mode == DSPMode.CWU)
+             //   tx_freq -= (double)cw_pitch * 0.0000010;
 
             //Debug.WriteLine("freq: "+freq.ToString("f6"));
             if (!rx1_sub_drag)
@@ -44668,9 +44705,8 @@ namespace PowerSDR
 
                 SetRX2Mode(rx2_dsp_mode);
                 Display.TXOnVFOB = true;
-                if (chkVFOSplit.Checked)
+                if (chkVFOSplit.Checked && chkRX2.Checked)
                     chkVFOSplit.Checked = false;
-
 
                 if (chkRX2.Checked && chkVAC2.Checked)
                 {
@@ -44692,7 +44728,7 @@ namespace PowerSDR
             else // button is unchecked
             {
                 // if (!chkRX2.Checked)
-                // {
+               //  {
                 Audio.RX2AutoMuteTX = mute_rx2_on_vfoa_tx;
                 Audio.FullDuplex = false;
 

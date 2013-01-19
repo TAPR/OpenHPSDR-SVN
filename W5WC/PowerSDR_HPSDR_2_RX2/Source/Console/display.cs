@@ -2,7 +2,7 @@
 // display.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2009  FlexRadio Systems Copyright (C) 2010-2012  Doug Wigley
+// Copyright (C) 2004-2009  FlexRadio Systems Copyright (C) 2010-2013  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -2581,7 +2581,7 @@ namespace PowerSDR
             int grid_min = 0;
             int grid_step = 0; // spectrum_grid_step;
 
-            if (local_mox)
+            if (local_mox || (mox && tx_on_vfob))
             {
                 grid_max = tx_spectrum_grid_max;
                 grid_min = tx_spectrum_grid_min;
@@ -2615,7 +2615,7 @@ namespace PowerSDR
             int[] r_x2 = new int[2];
             double f_center = vfoa_hz;
 
-            if (local_mox)
+            if (local_mox || (mox && tx_on_vfob))
             {
                 filter_low = tx_filter_low;
                 filter_high = tx_filter_high;
@@ -2695,7 +2695,7 @@ namespace PowerSDR
             //if(!(local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)))
             if (!local_mox)// && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
             {
-               // freq -= f_center;
+                // freq -= f_center;
                 double f_vfo = vfoa_hz;
                 double f_low = vfoa_hz + filter_low;
                 double f_high = vfoa_hz + filter_high;
@@ -2735,8 +2735,8 @@ namespace PowerSDR
                 {
                     g.FillRectangle(display_filter_brush, r_x1[0], top, r_x2[0] - r_x1[0], H - top);
 
-                  //  g.FillRectangle(display_filter_brush,	// draw filter overlay
-                   // 	filter_left_x, top, filter_right_x - filter_left_x, H - top);
+                    //  g.FillRectangle(display_filter_brush,	// draw filter overlay
+                    // 	filter_left_x, top, filter_right_x - filter_left_x, H - top);
                 }
             }
 
@@ -2757,8 +2757,8 @@ namespace PowerSDR
                 }
                 else
                 {
-                      g.FillRectangle(tx_filter_brush,	// draw filter overlay
-                        filter_left_x, top, filter_right_x - filter_left_x, H - top);
+                    g.FillRectangle(tx_filter_brush,	// draw filter overlay
+                      filter_left_x, top, filter_right_x - filter_left_x, H - top);
                 }
             }
 
@@ -3229,37 +3229,40 @@ namespace PowerSDR
 
             double vfo;
 
-            /*	if(local_mox)
-                    {
-                        if(split_enabled)
-                            vfo = vfoa_sub_hz;
-                        else
-                            vfo = vfoa_hz;
-                        vfo += xit_hz;
-                    }
-                    else if(rx==1)
-                    {
-                       // if (current_click_tune_mode == ClickTuneMode.VFOA)
-                        //    vfo = f_center;
-                       // else
-                            vfo = vfoa_hz + rit_hz;
-                    }
-                    else //if(rx==2)
-                    {
-                        vfo = vfob_hz + rit_hz;
-                    } */
+            /*    if (mox)
+                {
+                    if (split_enabled)
+                        vfo = vfoa_sub_hz;
+                    else
+                        vfo = vfoa_hz;
+                    vfo += xit_hz;
+                }
+                else if (rx == 1)
+                {
+                    vfo = vfoa_hz + rit_hz;
+                }
+                else //if(rx==2)
+                {
+                    vfo = vfob_hz + rit_hz;
+                } */
+
             if (rx == 1)
             {
                 if (local_mox)
                 {
-                    vfo = split_enabled ? vfoa_sub_hz : vfoa_hz;
+                    if (split_enabled)
+                        vfo = vfoa_sub_hz;
+                    else
+                        vfo = vfoa_hz;
                     vfo += xit_hz;
                 }
+                else if (mox && tx_on_vfob) vfo = vfoa_sub_hz;
                 else vfo = vfoa_hz + rit_hz;
             }
             else //if(rx==2)
             {
-                if (local_mox) vfo = vfob_hz + xit_hz;
+                if (local_mox)
+                    vfo = vfob_hz + xit_hz;
                 else vfo = vfob_hz + rit_hz;
             }
 
@@ -3315,9 +3318,9 @@ namespace PowerSDR
                         case FRSRegion.LAST:
                             if (!show_freq_offset)
                             {
-                                if (bottom) 
+                                if (bottom)
                                     g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
-                                else 
+                                else
                                     g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                                 label = actual_fgrid.ToString("f3");
@@ -3344,7 +3347,7 @@ namespace PowerSDR
                                     float x3 = (float)vgrid + (j * scale);
                                     if (bottom)
                                     {
-                                        if (local_mox) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H); 
+                                        if (local_mox) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
                                         else g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
                                     }
                                     else
@@ -3358,16 +3361,18 @@ namespace PowerSDR
                             break;
                         case FRSRegion.US:
                         case FRSRegion.Extended:
-                            if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
-                                         actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
-                                         actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
-                                         actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
-                                         actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
-                                         actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
-                                         actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
-                                         actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
-                                         actual_fgrid == 50.0 || actual_fgrid == 54.0 ||
-                                         actual_fgrid == 144.0 || actual_fgrid == 148.0)
+                            if (actual_fgrid == 0.1357 || actual_fgrid == 0.1378 ||
+                                actual_fgrid == 0.472 || actual_fgrid == 0.479 ||
+                                actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0 ||
+                                actual_fgrid == 144.0 || actual_fgrid == 148.0)
                             {
 
                                 goto case FRSRegion.LAST;
@@ -3457,9 +3462,9 @@ namespace PowerSDR
                             else goto default;
 
                         case FRSRegion.Japan:
-                            if (actual_fgrid == .137 || actual_fgrid == .138 ||
+                            if (actual_fgrid == .1357 || actual_fgrid == .1378 ||
                             actual_fgrid == 1.81 || actual_fgrid == 1.825 ||
-                            actual_fgrid == 1.907 || actual_fgrid == 1.913 ||
+                            actual_fgrid == 1.9075 || actual_fgrid == 1.9125 ||
                             actual_fgrid == 3.5 || actual_fgrid == 3.575 ||
                             actual_fgrid == 3.599 || actual_fgrid == 3.612 ||
                             actual_fgrid == 3.68 || actual_fgrid == 3.687 ||
@@ -3480,7 +3485,9 @@ namespace PowerSDR
                             else goto default;
 
                         case FRSRegion.Australia:
-                            if (actual_fgrid == 1.8 || actual_fgrid == 1.875 ||
+                            if (actual_fgrid == .1357 || actual_fgrid == .1378 ||
+                                actual_fgrid == 0.472 || actual_fgrid == 0.479 ||
+                                actual_fgrid == 1.8 || actual_fgrid == 1.875 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.7 ||
                                 actual_fgrid == 3.776 || actual_fgrid == 3.8 ||
                                 actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
@@ -3517,16 +3524,16 @@ namespace PowerSDR
                             //draw vertical in between lines
                             if (grid_control)
                             {
-                                if (bottom) 
+                                if (bottom)
                                 {
                                     if (local_mox) g.DrawLine(tx_vgrid_pen, vgrid, H + top, vgrid, H + H);
                                     else g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
-                            } 
-                                else 
+                                }
+                                else
                                 {
                                     if (local_mox) g.DrawLine(tx_vgrid_pen, vgrid, top, vgrid, H);
                                     else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
-                            }
+                                }
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((Low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - Low) / width * W));
                                 float scale = (float)(x_2 - vgrid) / inbetweenies;
@@ -3575,9 +3582,9 @@ namespace PowerSDR
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length) * 4.1) - 14;
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length) * 4.1) - 11;
                                 else offsetL = (int)((label.Length) * 4.1) - 8;
-                            }                                
-                               
-                       if (bottom)
+                            }
+
+                            if (bottom)
                             {
                                 if (local_mox) g.DrawString(label, font9, grid_tx_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
                                 else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
@@ -3586,7 +3593,7 @@ namespace PowerSDR
                             {
                                 if (local_mox) g.DrawString(label, font9, grid_tx_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
                                 else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
-                            } 
+                            }
                             break;
                     }
                 }
@@ -3627,28 +3634,44 @@ namespace PowerSDR
 
             switch (console.CurrentRegion)
             {
+                case FRSRegion.Australia:
+                    band_edge_list = new int[]{ 135700, 137800, 472000, 479000, 1800000, 1875000, 
+				 3500000, 3800000, 7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 18068000, 
+				 18168000, 21000000, 21450000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
+                    break;
                 case FRSRegion.UK:
-                    band_edge_list = new int[]{ 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
-				5258500, 5406500, 7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
-				24890000, 24990000, 28000000, 29700000, 50000000, 52000000, 144000000, 148000000, 472000, 479000 };
+                    band_edge_list = new int[] { 472000, 479000, 1800000, 2000000, 3500000, 4000000,
+				5258500, 5406500, 7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 18068000, 18168000,
+				21000000, 21450000, 24890000, 24990000, 28000000, 29700000, 50000000, 52000000, 144000000, 148000000 };
                     break;
                 case FRSRegion.India:
-                    band_edge_list = new int[]{ 18068000, 18168000, 1810000, 1860000, 3500000, 3900000,
-				7000000, 7200000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
+                    band_edge_list = new int[]{ 1810000, 1860000, 3500000, 3900000, 7000000, 7200000, 
+				10100000, 10150000, 14000000, 14350000, 18068000, 18168000, 21000000, 21450000,
 				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
                     break;
                 case FRSRegion.Norway:
-                    band_edge_list = new int[]{ 5260000, 5410000, 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
-				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
+                    band_edge_list = new int[]{ 1800000, 2000000, 3500000, 4000000, 5260000, 5410000,
+				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 18068000, 18168000, 21000000, 21450000,
+				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
+                    break;
+                case FRSRegion.US:
+                    band_edge_list = new int[]{ 135700, 137800, 472000, 479000, 1800000, 2000000, 3500000, 4000000,
+				7000000, 7300000, 10100000, 10150000, 14000000, 14350000,  18068000, 18168000, 21000000, 21450000,
+				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
+                    break;
+                case FRSRegion.Japan:
+                    band_edge_list = new int[]{ 135700, 137800, 472000, 479000, 1810000, 1810000, 1907500, 1912500, 
+                3500000, 3575000, 3599000, 3612000, 3687000, 3702000, 3716000, 3745000, 3770000, 3791000, 3805000,
+				7000000, 7200000, 10100000, 10150000, 14000000, 14350000, 18068000, 18168000, 21000000, 21450000,
 				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
                     break;
                 default:
-                    band_edge_list = new int[]{ 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
-				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
+                    band_edge_list = new int[]{1800000, 2000000, 3500000, 4000000, 7000000, 7300000, 
+				10100000, 10150000, 14000000, 14350000, 18068000, 18168000, 21000000, 21450000,
 				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
                     break;
             }
-                     
+
             for (int i = 0; i < band_edge_list.Length; i++)
             {
                 double band_edge_offset = band_edge_list[i] - vfo;
@@ -3662,7 +3685,7 @@ namespace PowerSDR
                     }
                     else
                     {
-                        if (local_mox) g.DrawLine(tx_band_edge_pen, temp_vline, top, temp_vline, H);                        
+                        if (local_mox) g.DrawLine(tx_band_edge_pen, temp_vline, top, temp_vline, H);
                         else g.DrawLine(band_edge_pen, temp_vline, top, temp_vline, H);//wa6ahl                                               
                     }
                 }
@@ -3680,13 +3703,13 @@ namespace PowerSDR
 
                     if (bottom)
                     {
-                        if (local_mox) g.DrawLine(tx_hgrid_pen, 0, H + y, W, H + y);                        
-                        else g.DrawLine(hgrid_pen, 0, H + y, W, H + y);                        
+                        if (local_mox) g.DrawLine(tx_hgrid_pen, 0, H + y, W, H + y);
+                        else g.DrawLine(hgrid_pen, 0, H + y, W, H + y);
                     }
                     else
                     {
-                        if (local_mox) g.DrawLine(tx_hgrid_pen, 0, y, W, y);                        
-                        else g.DrawLine(hgrid_pen, 0, y, W, y);                        
+                        if (local_mox) g.DrawLine(tx_hgrid_pen, 0, y, W, y);
+                        else g.DrawLine(hgrid_pen, 0, y, W, y);
                     }
                     // Draw horizontal line labels
                     if (i != 1) // avoid intersecting vertical and horizontal labels
@@ -3725,17 +3748,17 @@ namespace PowerSDR
                         {
                             if (bottom)
                             {
-                                if (local_mox) 
+                                if (local_mox)
                                     g.DrawString(label, font9, grid_tx_text_brush, x, H + y);
-                                 else 
+                                else
                                     g.DrawString(label, font9, grid_text_brush, x, H + y);
                             }
 
                             else
                             {
-                                if (local_mox) 
-                                    g.DrawString(label, font9, grid_tx_text_brush, x, y); 
-                                else 
+                                if (local_mox)
+                                    g.DrawString(label, font9, grid_tx_text_brush, x, y);
+                                else
                                     g.DrawString(label, font9, grid_text_brush, x, y);
                             }
                         }
@@ -6125,7 +6148,7 @@ namespace PowerSDR
 
             if (rx == 1 && data_ready)
             {
-                if (local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
+                if ((local_mox || (mox && tx_on_vfob)) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
                 {
                     for (int i = 0; i < current_display_data.Length; i++)
                         current_display_data[i] = grid_min - rx1_display_cal_offset;
@@ -6135,9 +6158,6 @@ namespace PowerSDR
                     fixed (void* rptr = &new_display_data[0])
                     fixed (void* wptr = &current_display_data[0])
                         Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
-
-                    if (current_model == Model.SOFTROCK40)
-                        console.AdjustDisplayDataForBandEdge(ref current_display_data);
                 }
                 data_ready = false;
             }
@@ -6153,9 +6173,6 @@ namespace PowerSDR
                     fixed (void* rptr = &new_display_data_bottom[0])
                     fixed (void* wptr = &current_display_data_bottom[0])
                         Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
-
-                    if (current_model == Model.SOFTROCK40)
-                        console.AdjustDisplayDataForBandEdge(ref current_display_data_bottom);
                 }
 
                 data_ready_bottom = false;
@@ -6213,7 +6230,7 @@ namespace PowerSDR
 
                 if (rx == 1)
                 {
-                    if (local_mox) max += tx_display_cal_offset;
+                    if (local_mox || (mox && tx_on_vfob)) max += tx_display_cal_offset;
                     else max += rx1_display_cal_offset;
                 }
                 else if (rx == 2)
