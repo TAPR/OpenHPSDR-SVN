@@ -7,5 +7,6 @@
         <file>red16.png</file>
         <file>yellow16.png</file>
         <file>status16.png</file>
+        <file>IPaddress.png</file>
     </qresource>
 </RCC>

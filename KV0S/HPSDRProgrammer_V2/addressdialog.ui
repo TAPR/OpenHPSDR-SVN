@@ -28,10 +28,13 @@
         <item row="0" column="1" colspan="2">
          <widget class="QFrame" name="frame_2">
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::Panel</enum>
           </property>
           <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
            <item row="0" column="0">
@@ -55,8 +58,11 @@
         </item>
         <item row="0" column="3">
          <widget class="QPushButton" name="writeButton">
+          <property name="toolTip">
+           <string extracomment="Write this IP address to the connected HPSDR board">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Write this IP address to the connected HPSDR board. this action requires Administrator privileges.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
-           <string>Write</string>
+           <string>Write IP</string>
           </property>
          </widget>
         </item>

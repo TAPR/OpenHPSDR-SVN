@@ -700,6 +700,11 @@ void MainWindow::setIP() {
 
 }
 
+void MainWindow::setIP_UDP()
+{
+
+}
+
 // private function to send 256 byte block of the pof file.
 void MainWindow::sendJTAGFlashData() {
     unsigned char buffer[276];

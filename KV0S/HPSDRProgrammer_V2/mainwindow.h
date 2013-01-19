@@ -69,6 +69,7 @@ public slots:
     void program();
 
     void setIP();
+    void setIP_UDP();
 
     void discover();
     void discovery_timeout();
