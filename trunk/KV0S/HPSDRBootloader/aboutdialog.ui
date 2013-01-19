@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>About HPSDRProgrammer V2</string>
+   <string>About HPSDR_JTAG_Programmer</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" colspan="2">
@@ -116,7 +116,7 @@
       </font>
      </property>
      <property name="text">
-      <string>HPSDRProgrammer Version2</string>
+      <string>HPSDR_JTAG_Programmer</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

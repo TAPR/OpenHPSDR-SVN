@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     rawreceivethread.cpp \
     receivethread.cpp \
     statusdialog.cpp \
-    addressdialog.cpp
+    addressdialog.cpp \
+    changeipaddress.cpp
 
 HEADERS  += mainwindow.h \
     aboutdialog.h \
@@ -45,7 +46,8 @@ HEADERS  += mainwindow.h \
     version.h \
     receivethread.h \
     statusdialog.h \
-    addressdialog.h
+    addressdialog.h \
+    changeipaddress.h
 
 FORMS    += mainwindow.ui \
     aboutdialog.ui \
