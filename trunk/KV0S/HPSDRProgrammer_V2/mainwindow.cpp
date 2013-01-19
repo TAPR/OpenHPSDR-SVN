@@ -76,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionAbout,SIGNAL(triggered()),ab,SLOT(show()));
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(quit()));
     connect(ui->interfaceComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(interfaceSelected(int)));
+    connect(ui->discoverComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(metisSelected(int)));
 
     connect(ui->discoverButton,SIGNAL(clicked()),this,SLOT(discover()));
 
@@ -86,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionAddress,SIGNAL(triggered()),add,SLOT(show()));
 
 
-    connect(add,SIGNAL(writeIP()),this,SLOT(setIP()));
+    connect(add,SIGNAL(writeIP()),this,SLOT(setIP_UDP()));
 
 
 
@@ -156,10 +157,12 @@ void MainWindow::interfaceSelected(int index) {
 
 
 void MainWindow::metisSelected(int index) {
-    if(index>=0) {
-        metisIP=bd.at(index)->getIpAddress();
-        metisHostAddress=bd.at(index)->getHostAddress();
 
+    currentBoardIndex = index;
+    if(index>=0) {
+        selectedBoardIP=bd.at(index)->getIpAddress();
+        selectedBoardHostAddress=bd.at(index)->getHostAddress();
+        selectedBoardMAC=bd[currentBoardIndex]->getMACAddress();
     }
 }
 
@@ -331,7 +334,7 @@ void MainWindow::flashProgram() {
 
     // start a thread to listen for replies
     QString myip=interfaces.getInterfaceIPAddress(interfaceName);
-    receiveThread=new ReceiveThread(&socket,myip,metisHostAddress);
+    receiveThread=new ReceiveThread(&socket,myip,selectedBoardHostAddress);
 
     connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
     connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
@@ -670,12 +673,13 @@ void MainWindow::setIP() {
             buffer[14]=0x03; //
             buffer[15]=WRITE_METIS_IP;
 
-            /*fill the frame with 0x00*/
+            // the IP address from the interface
             buffer[16]=(unsigned char)addr[0];
             buffer[17]=(unsigned char)addr[1];
             buffer[18]=(unsigned char)addr[2];
             buffer[19]=(unsigned char)addr[3];
 
+            /*fill the frame with 0x00*/
             for(i=0;i<46;i++) {
                 buffer[i+20]=(unsigned char)0x00;
             }
@@ -702,6 +706,18 @@ void MainWindow::setIP() {
 
 void MainWindow::setIP_UDP()
 {
+    int addr[4];
+    qDebug() << "in setIP_UDP";
+    qDebug() << bd[currentBoardIndex]->toMACString();
+    ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
+
+    // get new IP address from the Interface
+    QStringList *saddr = new QStringList();
+    add->getNewIPAddress( saddr );
+    qDebug() << "back in setIP";
+
+    cipa->changeIP( saddr );
+
 
 }
 

@@ -30,6 +30,11 @@
 
 #include <pcap.h>
 
+/*! \brief Interfaces()
+ *
+ *  This constructor function Interfaces class.  Used to get a list of the interfaces on the system.
+ */
+
 // get a list of the interfaces on the system
 Interfaces::Interfaces() {
 
@@ -63,10 +68,25 @@ Interfaces::Interfaces() {
     }
 }
 
+/*! \brief getInterfaces()
+ *
+ *  This function returns the number of interfaces.
+ *
+ *  \return int
+ */
 
 int Interfaces::getInterfaces() {
     return nInterfaces;
 }
+
+/*! \brief getInterfaceNameAt(int index)
+ *
+ *  \param index is the index number of the interface.
+ *
+ *  This function to return interface names.
+ *
+ *  \return QString
+ */
 
 QString Interfaces::getInterfaceNameAt(int index) {
     QString name;
@@ -80,6 +100,15 @@ QString Interfaces::getInterfaceNameAt(int index) {
     }
     return name;
 }
+
+/*! \brief getPcapName(QString name)
+ *
+ *  \param name
+ *
+ *  This function return the pcap name.
+ *
+ *  \return char*
+ */
 
 char* Interfaces::getPcapName(QString name) {
     qDebug()<<"getPcapName:"<<name;
@@ -104,6 +133,16 @@ char* Interfaces::getPcapName(QString name) {
     return NULL;
 }
 
+/*! \brief getInterfaceHardwareAddress(int index)
+ *
+ *  \param index  index number
+ *
+ *  This function returns a QString of the Interface Hardware Address.
+ *
+ *  \return QString
+ */
+
+
 QString Interfaces::getInterfaceHardwareAddress(int index) {
     QString addr=0L;
     int i=0;
@@ -116,6 +155,15 @@ QString Interfaces::getInterfaceHardwareAddress(int index) {
     }
     return addr;
 }
+
+/*! \brief getInterfaceIPAddress(int index)
+ *
+ *  \param int index
+ *
+ *  This function return the Interface IP Address.
+ *
+ *  \return long
+ */
 
 long Interfaces::getInterfaceIPAddress(int index) {
     long a=0L;
@@ -135,6 +183,15 @@ long Interfaces::getInterfaceIPAddress(int index) {
     }
     return a;
 }
+
+/*! \brief getInterfaceIPAddress(QString name)
+ *
+ *  \param QString name
+ *
+ *  This function returns the Interface IP Address
+ *
+ *  \return QString
+ */
 
 QString Interfaces::getInterfaceIPAddress(QString name) {
     int i=0;

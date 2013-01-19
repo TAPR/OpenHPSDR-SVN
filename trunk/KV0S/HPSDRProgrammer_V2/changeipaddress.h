@@ -3,23 +3,27 @@
 
 #include <QThread>
 #include <QUdpSocket>
+#include <QStringList>
 
 #include "board.h"
 
-class changeIPAddress : public QObject
+class ChangeIPAddress : public QObject
 {
     Q_OBJECT
 public:
-    changeIPAddress(QUdpSocket* s);
+    ChangeIPAddress(QUdpSocket *s, unsigned char *MACaddress);
+    ~ChangeIPAddress();
 
 
 public slots:
-    void readyread();
-    void changeIP();
+    void readyRead();
+    void changeIP(QStringList *saddr);
 
 private:
     QUdpSocket* socket;
     QString ip;
+    unsigned char* macaddr;
+    unsigned char buffer[1024];
     qint16 port;
 };
 

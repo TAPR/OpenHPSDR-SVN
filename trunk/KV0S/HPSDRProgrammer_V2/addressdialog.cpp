@@ -23,7 +23,7 @@ AddressDialog::~AddressDialog()
 void AddressDialog::getIPaddress(Board *m)
 {
     QString ip1, ip2, ip3, ip4;
-    qDebug() << "in setIPAddress" << m->toIPString();
+    qDebug() << "in getIPAddress" << m->toIPString();
     ip1 = m->toIPPartString( 1 );
     ui->IPLineEdit1->setText( ip1 );
     ip2 = m->toIPPartString( 2 );
@@ -37,7 +37,7 @@ void AddressDialog::getIPaddress(Board *m)
 
 void AddressDialog::getMACaddress(Board *m)
 {
-    qDebug() << "in setMACAddress" << m->toMACString();
+    qDebug() << "in getMACAddress" << m->toMACString();
     ui->MACLabel->setText( m->toMACString() );
 }
 
