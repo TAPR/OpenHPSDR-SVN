@@ -180,20 +180,27 @@ void MainWindow::browse()
     status( QString("Reading rbf file: %0").arg(fileName) );
 }
 
-
-void MainWindow::discover() {
+void MainWindow::clearDiscovery() {
     stat->clear();
     status("");
-
 
     ui->discoverComboBox->clear();
     bd.clear();
 
-    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
-
     QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
+    deviceIndicator->setPixmap (QPixmap(":/icons/red16.png"));
+    deviceIndicator->setToolTip (QString ("Device port not open"));
 
     socket.close();
+}
+
+
+void MainWindow::discover() {
+
+    clearDiscovery();
+
+    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
+
     if(!socket.bind(QHostAddress(ip),0,QUdpSocket::ReuseAddressHint)) {
         qDebug()<<"Error: Discovery: bind failed "<<socket.errorString();
         return;
@@ -205,8 +212,9 @@ void MainWindow::discover() {
     // disable the Discovery button
     ui->discoverButton->setDisabled(true);
 
-    // wait 9 seconds to allow replys
-    QTimer::singleShot(9000,this,SLOT(discovery_timeout()));
+
+    // wait 2 seconds to allow replys
+    QTimer::singleShot(2000,this,SLOT(discovery_timeout()));
 }
 
 void MainWindow::discovery_timeout() {
@@ -602,133 +610,50 @@ void MainWindow::loadFlash() {
     data_command=PROGRAM_MERCURY;
     state=FLASH_PROGRAM;
     offset=start;
-    sendJTAGFlashData();
+    sendFlashData();
 }
 
-// SLOT - setIP - called when the "Write" button on the IP Address tab is pressed.
-void MainWindow::setIP() {
-    char errbuf[PCAP_ERRBUF_SIZE];
-    unsigned char buffer[66];
-    int addr[4];
-    int i;
 
-    qDebug()<<"setIP";
-
-    stat->clear();
-    status("");
-
-    // will need to run Discovery again
-    ui->discoverComboBox->clear();
-
-    QStringList *saddr = new QStringList();
-
-    add->getNewIPAddress( saddr );
-
-    qDebug() << "back in setIP";
-
-    qDebug() << saddr->at(0) << saddr->at(1) << saddr->at(2) << saddr->at(3);
-
-    addr[0] = saddr->at(0).toInt();
-    addr[1] = saddr->at(1).toInt();
-    addr[2] = saddr->at(2).toInt();
-    addr[3] = saddr->at(3).toInt();
-
-    bd.clear();
-
-    qDebug() << addr[0] << addr[1] << addr[2] << addr[3];
-
-
-    if((addr[0]<0 || addr[0]>255) || (addr[1]<0 || addr[1]>255) || (addr[2]<0 || addr[2]>255) || (addr[3]<0 || addr[3]>255)) {
-        status("Error: invalid IP address");
-    } else {
-
-        handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
-        if (handle == NULL) {
-            qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
-            status("Error: cannot open interface (are you running as root)");
-            QMessageBox::warning(this, tr("HPSDRProgramer_V2"),tr("This action requires Administrator Privileges\n"
-                                "Change to Administrator and rerun the program."),QMessageBox::Close);
-        } else {
-
-            state=WRITE_IP;
-
-            /*set the frame header*/
-            buffer[0]=0x11; // dest address
-            buffer[1]=0x22;
-            buffer[2]=0x33;
-            buffer[3]=0x44;
-            buffer[4]=0x55;
-            buffer[5]=0x66;
-
-            buffer[6]=hw[0]; // src address
-            buffer[7]=hw[1];
-            buffer[8]=hw[2];
-            buffer[9]=hw[3];
-            buffer[10]=hw[4];
-            buffer[11]=hw[5];
-
-            buffer[12]=0xEF; // protocol
-            buffer[13]=0xFE;
-
-            buffer[14]=0x03; //
-            buffer[15]=WRITE_METIS_IP;
-
-            // the IP address from the interface
-            buffer[16]=(unsigned char)addr[0];
-            buffer[17]=(unsigned char)addr[1];
-            buffer[18]=(unsigned char)addr[2];
-            buffer[19]=(unsigned char)addr[3];
-
-            /*fill the frame with 0x00*/
-            for(i=0;i<46;i++) {
-                buffer[i+20]=(unsigned char)0x00;
-            }
-
-           if(pcap_sendpacket(handle,buffer,62)!=0) {
-               qDebug()<<"pcap_sendpacket failed";
-               status("send write ip command failed");
-               text = QString("IP address %0.%1.%2.%3 written to %4").arg(addr[0]).arg(addr[1]).arg(addr[2]).arg(addr[3]).arg(currentboard);
-               QMessageBox::warning(this, tr("HPSDRProgramer_V2"),QString("This action %0 failed.").arg(text),QMessageBox::Close);
-               idle();
-            } else {
-               text = QString("IP address %0.%1.%2.%3 written to %4").arg(addr[0]).arg(addr[1]).arg(addr[2]).arg(addr[3]).arg(currentboard);
-               status(text);
-               QMessageBox::information(this, tr("HPSDRProgramer_V2"),
-                              QString("%0 \nPlease recycle the power to the %1 board for the action to take effect.").arg(text).arg(currentboard),QMessageBox::Close);
-            }
-        }
-
-        idle();
-
-    }
-
-}
 
 void MainWindow::setIP_UDP()
 {
-    int addr[4];
     qDebug() << "in setIP_UDP";
     qDebug() << bd[currentBoardIndex]->toMACString();
-    ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
+
+    unsigned char ver = bd[currentBoardIndex]->getVersion();
+    QString text;
+    QString bdtype = bd[currentBoardIndex]->getBoardString();
+
+    qDebug() << text.sprintf("%d.%d %d",ver/10,ver%10, int(ver));
 
     // get new IP address from the Interface
     QStringList *saddr = new QStringList();
     add->getNewIPAddress( saddr );
+    QString ipstr = QString("%0.%1.%2.%3").arg(saddr->at(0)).arg(saddr->at(1)).arg(saddr->at(2)).arg(saddr->at(3));
     qDebug() << "back in setIP";
 
-    cipa->changeIP( saddr );
 
-
+    if( bdtype.contains("metis") && int(ver) >= 25 ){
+      ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
+      cipa->changeIP( saddr );
+      QMessageBox::information(this, tr("HPSDRProgramer_V2"),
+                   QString("The HPSDR board listed as:\n%0 \n\nHas been changed to IP address: %1.\n").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr),QMessageBox::Close);
+      discover();
+    }else{
+        QMessageBox::information(this, tr("HPSDRProgramer_V2"),
+                     QString("The HPSDR board listed as:\n%0 \n\nThis Firmware does not support IP Address change\nUpgrade Firmware to use this feature.").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr), QMessageBox::Close);
+    }
 }
 
+
 // private function to send 256 byte block of the pof file.
-void MainWindow::sendJTAGFlashData() {
+void MainWindow::sendFlashData() {
     unsigned char buffer[276];
 
-    qDebug()<<"sendJTAGFlashData offset="<<offset;
+    qDebug()<<"sendFlashData offset="<<offset;
 
     if(handle!=NULL) {
-        /*set the frame header*/
+        //set the frame header
         buffer[0]=0x11; // dest address
         buffer[1]=0x22;
         buffer[2]=0x33;
@@ -754,7 +679,7 @@ void MainWindow::sendJTAGFlashData() {
         buffer[18]=(blocks>>8)&0xFF;
         buffer[19]=blocks&0xFF;
 
-        /*fill the frame with some data*/
+        //fill the frame with some data
         for(int i=0;i<256;i++) {
                 buffer[i+20]=(unsigned char)data[i+offset];
         }
@@ -775,3 +700,4 @@ void MainWindow::sendJTAGFlashData() {
         }
     }
 }
+

@@ -36,7 +36,7 @@ ChangeIPAddress::ChangeIPAddress(QUdpSocket *s, unsigned char* MACaddress)
     socket=s;
 
 
-    connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
+    //connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
 
 }
 
@@ -45,7 +45,7 @@ ChangeIPAddress::~ChangeIPAddress()
 
 }
 
-void ChangeIPAddress::changeIP( QStringList *saddr )
+void ChangeIPAddress::changeIP(QStringList *saddr )
 {
     // send the changeIP packet
     unsigned char buffer[63];
@@ -58,6 +58,7 @@ void ChangeIPAddress::changeIP( QStringList *saddr )
     addr[3] = saddr->at(3).toInt();
 
     qDebug() << "new address" << saddr->at(0) <<saddr->at(1) << saddr->at(2) << saddr->at(3);
+
     QString text;
     text.sprintf("%02X:%02X:%02X:%02X:%02x:%02X",
                  macaddr[0],macaddr[1],macaddr[2],macaddr[3],macaddr[4],macaddr[5]);
@@ -88,8 +89,10 @@ void ChangeIPAddress::changeIP( QStringList *saddr )
         qDebug()<<"Error: changeIP: writeDatagram failed "<<socket->errorString();
         return;
     }
+
 }
 
+/*
 void ChangeIPAddress::readyRead()
 {
     QHostAddress boardAddress = QHostAddress(ip);
@@ -129,3 +132,4 @@ void ChangeIPAddress::readyRead()
         qDebug()<<"ChangeIPAddress::readyRead: readDatagram failed";
     }
 }
+*/

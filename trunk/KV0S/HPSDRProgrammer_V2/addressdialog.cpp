@@ -45,6 +45,7 @@ void AddressDialog::setupIPwrite()
 {
     qDebug() << "in writeIPsetup";
     emit writeIP();
+    this->close();
 }
 
 

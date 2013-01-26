@@ -162,6 +162,15 @@ unsigned char Board::getVersion() {
     return version;
 }
 
+/*! \brief getVersion()
+ *
+ *  This function returns the board version number.
+ */
+
+//unsigned char Board::getVersionString() {
+//    return version;
+//}
+
 /*! \brief getBoard()
  *
  *  This function returns the type of board.

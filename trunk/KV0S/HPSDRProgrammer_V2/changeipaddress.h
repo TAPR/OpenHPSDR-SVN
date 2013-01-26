@@ -4,6 +4,7 @@
 #include <QThread>
 #include <QUdpSocket>
 #include <QStringList>
+#include <QMessageBox>
 
 #include "board.h"
 
@@ -16,8 +17,8 @@ public:
 
 
 public slots:
-    void readyRead();
-    void changeIP(QStringList *saddr);
+    //void readyRead();
+    void changeIP(QStringList *saddr );
 
 private:
     QUdpSocket* socket;

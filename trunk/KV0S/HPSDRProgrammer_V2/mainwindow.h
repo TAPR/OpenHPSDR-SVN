@@ -69,9 +69,11 @@ public slots:
     void browse();
     void program();
 
-    void setIP();
+    //void setIP();
     void setIP_UDP();
 
+
+    void clearDiscovery();
     void discover();
     void discovery_timeout();
 
@@ -93,6 +95,7 @@ private:
     int currentBoardIndex;
     QString currentboard;
     QSettings settings;
+    QMessageBox msg;
 
     int loadRBF(QString filename);
 
@@ -104,7 +107,9 @@ private:
     void readMAC();
     void readIP();
     void writeIP();
-    void sendJTAGFlashData();
+
+
+    void sendFlashData();
 
     void idle();
 
