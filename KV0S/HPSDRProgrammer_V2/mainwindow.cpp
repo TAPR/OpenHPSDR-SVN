@@ -632,16 +632,35 @@ void MainWindow::setIP_UDP()
     QString ipstr = QString("%0.%1.%2.%3").arg(saddr->at(0)).arg(saddr->at(1)).arg(saddr->at(2)).arg(saddr->at(3));
     qDebug() << "back in setIP";
 
+    int result = testSubnet(saddr);
+    if (result == 0)
+    {
+        // this should not happen
+        qDebug() << "testSubnet returned 0,  This should not happen!";
+        QMessageBox::information(this, tr("HPSDRProgramer_V2"),
+                     QString("The HPSDR board listed as:\n%0 \n\n can not be changes to %1").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr), QMessageBox::Close);
+        return;
+    } else if ( result == 1 ){
+        // good address in the same subnet
+        qDebug() << "testSubnet returned 1, good address in same subnet";
+    } else if ( result == 2 ){
+        // good address in another interface
+        qDebug() << "testSubnet returned 2,  Good address in another interface";
+    } else if ( result == 3 ){
+        // this should not happen
+        qDebug() << "testSubnet returned 3,  Address in unknow interface, risky but OK";
+    }
 
-    if( bdtype.contains("metis") && int(ver) >= 25 ){
+
+    if( bdtype.contains("metis") && (int(ver) >= 25) && (result > 0) ){
       ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
       cipa->changeIP( saddr );
       QMessageBox::information(this, tr("HPSDRProgramer_V2"),
                    QString("The HPSDR board listed as:\n%0 \n\nHas been changed to IP address: %1.\n").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr),QMessageBox::Close);
       discover();
-    }else{
+    }else if ( result > 0 ){
         QMessageBox::information(this, tr("HPSDRProgramer_V2"),
-                     QString("The HPSDR board listed as:\n%0 \n\nThis Firmware does not support IP Address change\nUpgrade Firmware to use this feature.").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr), QMessageBox::Close);
+                     QString("The HPSDR board listed as:\n%0 \n\nThis Firmware does not support IP Address change\nUpgrade Firmware to use this feature.").arg(bd[currentBoardIndex]->toAllString()), QMessageBox::Close);
     }
 }
 
@@ -700,4 +719,53 @@ void MainWindow::sendFlashData() {
         }
     }
 }
+
+
+int MainWindow::testSubnet( QStringList *saddr )
+{
+    int addr[4];
+    int ipaddr[4];
+    int iipaddr[4];
+    long iip;
+    int result = 0;
+    QString ifName;
+
+    addr[0] = saddr->at(0).toInt();
+    addr[1] = saddr->at(1).toInt();
+    addr[2] = saddr->at(2).toInt();
+    addr[3] = saddr->at(3).toInt();
+
+    ipaddr[0] = (ip>>24)&0xFF;
+    ipaddr[1] = (ip>>16)&0xFF;
+    ipaddr[2] = (ip>>8)&0xFF;
+    ipaddr[3] = ip&0xFF;
+
+    if( (addr[0] == ipaddr[0]) && (addr[1] == ipaddr[1]) && (addr[2] == ipaddr[2]) && (addr[3] != ipaddr[3]) )
+    {
+       // new address is the same subnet as the PC but a different fourth number, OK change with no comment
+       result = 1;
+    }else{
+        // new address in in another subnet
+
+        for (int i = 0; i < ui->interfaceComboBox->count(); ++i) {
+            ifName=interfaces.getInterfaceNameAt(i);
+            iip=interfaces.getInterfaceIPAddress(i);
+
+            iipaddr[0] = (iip>>24)&0xFF;
+            iipaddr[1] = (iip>>16)&0xFF;
+            iipaddr[2] = (iip>>8)&0xFF;
+            iipaddr[3] = iip&0xFF;
+            if((addr[0] == iipaddr[0]) && (addr[1] == iipaddr[1]) && (addr[2] == iipaddr[2]) && (addr[3] != iipaddr[3]))
+            {
+                // same subnet as another interface but not the interface
+                result = 2;
+            }else{
+                //unknown interface
+                result = 3;
+            }
+        }
+    }
+    return result;
+}
+
 
