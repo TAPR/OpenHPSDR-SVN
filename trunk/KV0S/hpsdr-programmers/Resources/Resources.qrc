@@ -1,5 +1,10 @@
 <RCC>
     <qresource prefix="/icons">
         <file>hpsdr4sm.png</file>
+        <file>green16.png</file>
+        <file>help16.png</file>
+        <file>IPaddress.png</file>
+        <file>red16.png</file>
+        <file>status16.png</file>
     </qresource>
 </RCC>
