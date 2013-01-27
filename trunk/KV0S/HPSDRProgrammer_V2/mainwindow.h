@@ -7,6 +7,8 @@
 #include <QTimer>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QUdpSocket>
+#include <QStringList>
 #include <QDir>
 #include <QMessageBox>
 #include <QStringList>

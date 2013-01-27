@@ -8,5 +8,6 @@
         <file>status16.png</file>
         <file>help16.png</file>
         <file>IPaddress.png</file>
+        <file>hpsdr4sm.ico</file>
     </qresource>
 </RCC>
