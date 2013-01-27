@@ -110,6 +110,8 @@ private:
 
 
     void sendFlashData();
+    int testSubnet( QStringList *saddr );
+
 
     void idle();
 
