@@ -7,8 +7,6 @@
 #include <QTimer>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QUdpSocket>
-#include <QStringList>
 #include <QDir>
 #include <QMessageBox>
 #include <QStringList>
@@ -16,15 +14,15 @@
 
 #include <pcap.h>
 
-#include "interfaces.h"
-#include "receivethread.h"
-#include "rawreceivethread.h"
-#include "discovery.h"
-#include "board.h"
-#include "changeipaddress.h"
-#include "aboutdialog.h"
-#include "statusdialog.h"
-#include "addressdialog.h"
+#include "../Programmer/interfaces.h"
+#include "../Programmer/receivethread.h"
+#include "../Programmer/rawreceivethread.h"
+#include "../Programmer/discovery.h"
+#include "../Programmer/board.h"
+#include "../IPaddress/changeipaddress.h"
+#include "../Help/aboutdialog.h"
+#include "../Status/statusdialog.h"
+#include "../IPaddress/addressdialog.h"
 #include "version.h"
 
 // states

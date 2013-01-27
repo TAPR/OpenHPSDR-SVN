@@ -11,6 +11,14 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = HPSDRProgrmmer_V2
 TEMPLATE = app
 
+# Included PRI files
+include( ../Help/Help.pri )
+include( ../Status/Status.pri )
+include( ../Programmer/Programmer.pri )
+include( ../IPaddress/IPaddress.pri )
+include( ../Resources/Resources.pri )
+
+
 win32 {
     INCLUDEPATH += "c:/WpdPack/Include"
     LIBS += "c:/WpdPack/Lib/wpcap.lib" C:/MinGW/lib/libws2_32.a
@@ -25,34 +33,20 @@ unix {
     LIBS += -lpcap
 }
 
+
+
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    aboutdialog.cpp \
-    board.cpp \
-    discovery.cpp \
-    interfaces.cpp \
-    rawreceivethread.cpp \
-    receivethread.cpp \
-    statusdialog.cpp \
-    addressdialog.cpp \
-    changeipaddress.cpp
+        mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    aboutdialog.h \
-    board.h \
-    discovery.h \
-    interfaces.h \
-    rawreceivethread.h \
-    version.h \
-    receivethread.h \
-    statusdialog.h \
-    addressdialog.h \
-    changeipaddress.h
 
-FORMS    += mainwindow.ui \
-    aboutdialog.ui \
-    statusdialog.ui \
-    addressdialog.ui
+HEADERS  += mainwindow.h
+
+
+FORMS    += mainwindow.ui
 
 RESOURCES += \
-    HPSDRProgrammer_Res.qrc
+    HPSDRProgrammer_V2.qrc
+
+
+
+
