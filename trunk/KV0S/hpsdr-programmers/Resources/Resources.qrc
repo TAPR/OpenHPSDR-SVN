@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>hpsdr4sm.png</file>
+    </qresource>
+</RCC>
