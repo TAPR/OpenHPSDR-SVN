@@ -13,5 +13,3 @@ FORMS    +=  $$PWD/aboutdialog.ui
 
     
 
-RESOURCES += \
-    ../Resources/Resources.qrc
