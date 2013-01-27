@@ -8,7 +8,7 @@ QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = HPSDRProgrammer_V2
+TARGET = HPSDRBootloader
 TEMPLATE = app
 
 # Included PRI files
