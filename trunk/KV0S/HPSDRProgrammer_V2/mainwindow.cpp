@@ -633,7 +633,7 @@ void MainWindow::setIP_UDP()
     qDebug() << "back in setIP";
 
     int result = testSubnet(saddr);
-    if (result == 0)
+    if (result <= 0)
     {
         // this should not happen
         qDebug() << "testSubnet returned 0,  This should not happen!";
@@ -644,11 +644,10 @@ void MainWindow::setIP_UDP()
         // good address in the same subnet
         qDebug() << "testSubnet returned 1, good address in same subnet";
     } else if ( result == 2 ){
-        // good address in another interface
-        qDebug() << "testSubnet returned 2,  Good address in another interface";
-    } else if ( result == 3 ){
         // this should not happen
         qDebug() << "testSubnet returned 3,  Address in unknow interface, risky but OK";
+        QMessageBox::information(this, tr("HPSDRProgramer_V2"),
+                     QString("You are changeing to an unknown address.\n It is unknown if the address is in use."), QMessageBox::Ok);
     }
 
 
@@ -658,7 +657,25 @@ void MainWindow::setIP_UDP()
       QMessageBox::information(this, tr("HPSDRProgramer_V2"),
                    QString("The HPSDR board listed as:\n%0 \n\nHas been changed to IP address: %1.\n").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr),QMessageBox::Close);
       discover();
-    }else if ( result > 0 ){
+    }else if( bdtype.contains("hermes") && (int(ver) >= 23) && (result > 0) ){
+            ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
+            cipa->changeIP( saddr );
+            QMessageBox::information(this, tr("HPSDRProgramer_V2"),
+                         QString("The HPSDR board listed as:\n%0 \n\nHas been changed to IP address: %1.\n").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr),QMessageBox::Close);
+            discover();
+    }else if( bdtype.contains("griffin") && (int(ver) >= 25) && (result > 0) ){
+            ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
+            cipa->changeIP( saddr );
+            QMessageBox::information(this, tr("HPSDRProgramer_V2"),
+                         QString("The HPSDR board listed as:\n%0 \n\nHas been changed to IP address: %1.\n").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr),QMessageBox::Close);
+            discover();
+    }else if( bdtype.contains("angelia") && (int(ver) >= 23) && (result > 0) ){
+            ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
+            cipa->changeIP( saddr );
+            QMessageBox::information(this, tr("HPSDRProgramer_V2"),
+                         QString("The HPSDR board listed as:\n%0 \n\nHas been changed to IP address: %1.\n").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr),QMessageBox::Close);
+            discover();
+    }else{
         QMessageBox::information(this, tr("HPSDRProgramer_V2"),
                      QString("The HPSDR board listed as:\n%0 \n\nThis Firmware does not support IP Address change\nUpgrade Firmware to use this feature.").arg(bd[currentBoardIndex]->toAllString()), QMessageBox::Close);
     }
@@ -740,30 +757,16 @@ int MainWindow::testSubnet( QStringList *saddr )
     ipaddr[2] = (ip>>8)&0xFF;
     ipaddr[3] = ip&0xFF;
 
-    if( (addr[0] == ipaddr[0]) && (addr[1] == ipaddr[1]) && (addr[2] == ipaddr[2]) && (addr[3] != ipaddr[3]) )
+    if( (addr[0] == ipaddr[0]) && (addr[1] == ipaddr[1]) && (addr[2] == ipaddr[2]) && (addr[3] == ipaddr[3]) )
     {
+       // new address is the same ca the PC
+       result = -1;
+    }else if( (addr[0] == ipaddr[0]) && (addr[1] == ipaddr[1]) && (addr[2] == ipaddr[2]) && (addr[3] != ipaddr[3]) ) {
        // new address is the same subnet as the PC but a different fourth number, OK change with no comment
        result = 1;
     }else{
-        // new address in in another subnet
-
-        for (int i = 0; i < ui->interfaceComboBox->count(); ++i) {
-            ifName=interfaces.getInterfaceNameAt(i);
-            iip=interfaces.getInterfaceIPAddress(i);
-
-            iipaddr[0] = (iip>>24)&0xFF;
-            iipaddr[1] = (iip>>16)&0xFF;
-            iipaddr[2] = (iip>>8)&0xFF;
-            iipaddr[3] = iip&0xFF;
-            if((addr[0] == iipaddr[0]) && (addr[1] == iipaddr[1]) && (addr[2] == iipaddr[2]) && (addr[3] != iipaddr[3]))
-            {
-                // same subnet as another interface but not the interface
-                result = 2;
-            }else{
-                //unknown interface
-                result = 3;
-            }
-        }
+       // new address in in another subnet, warn about issue
+       result = 2;
     }
     return result;
 }
