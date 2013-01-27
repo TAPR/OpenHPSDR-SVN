@@ -6,7 +6,7 @@
 #include <QStringList>
 #include <QMessageBox>
 
-#include "board.h"
+#include "../Programmer/board.h"
 
 class ChangeIPAddress : public QObject
 {

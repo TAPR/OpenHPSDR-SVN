@@ -44,8 +44,7 @@ HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
-RESOURCES += \
-    HPSDRProgrammer_V2.qrc
+
 
 
 

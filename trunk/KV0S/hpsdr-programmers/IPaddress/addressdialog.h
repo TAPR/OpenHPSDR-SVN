@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QDebug>
 #include <QStringList>
-#include "board.h"
+#include "../Programmer/board.h"
 
 namespace Ui {
 class AddressDialog;

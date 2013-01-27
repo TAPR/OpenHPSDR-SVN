@@ -33,7 +33,7 @@
 #ifndef RAWRECEIVETHREAD_H
 #define RAWRECEIVETHREAD_H
 
-#include <board.h>
+#include "board.h"
 #include <pcap.h>
 
 #include <QThread>
