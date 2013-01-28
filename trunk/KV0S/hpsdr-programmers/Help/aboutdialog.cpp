@@ -38,6 +38,8 @@ AboutDialog::AboutDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->TitleLabel->setText("HPSDRBootloader");
+
     connect(ui->OKButton,SIGNAL(clicked()),this,SLOT(close()));
 }
 
