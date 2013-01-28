@@ -96,7 +96,7 @@ MainWindow::MainWindow(QWidget *parent) :
        interfaceSelected(0);
     } else {
        // dont allow discovery if no interface found
-       //ui->discoverPushButton->setEnabled(false);
+       ui->discoverButton->setEnabled(false);
     }
 }
 
@@ -121,6 +121,7 @@ void MainWindow::status(QString text) {
     ui->statusBar->showMessage( text );
     stat->status( text.trimmed() );
 }
+
 
 
 

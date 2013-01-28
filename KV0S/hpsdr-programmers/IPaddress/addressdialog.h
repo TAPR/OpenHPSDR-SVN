@@ -21,12 +21,12 @@ public:
     void getIPaddress(Board *m );
     void getMACaddress(Board *m );
     void getNewIPAddress(QStringList *addr );
+    Ui::AddressDialog *ui;
 
 signals:
     void writeIP();
 
 private:
-    Ui::AddressDialog *ui;
 
 private slots:
     void setupIPwrite();
