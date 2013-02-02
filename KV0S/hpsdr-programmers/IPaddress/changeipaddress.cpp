@@ -35,9 +35,6 @@ ChangeIPAddress::ChangeIPAddress(QUdpSocket *s, unsigned char* MACaddress)
     ip=myip;
     socket=s;
 
-
-    //connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
-
 }
 
 ChangeIPAddress::~ChangeIPAddress()
@@ -91,4 +88,7 @@ void ChangeIPAddress::changeIP(QStringList *saddr )
     }
 
 }
+
+
+
 

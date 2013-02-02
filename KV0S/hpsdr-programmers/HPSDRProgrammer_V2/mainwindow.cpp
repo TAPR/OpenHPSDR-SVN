@@ -653,13 +653,14 @@ void MainWindow::setIP_UDP()
 
 
     if( bdtype.contains("metis") && (int(ver) >= 25) && (result > 0) ){
-      ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
-      cipa->changeIP( saddr );
-      QMessageBox::information(this, tr("HPSDRProgramer_V2"),
+            ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
+            cipa->changeIP( saddr );
+            QMessageBox::information(this, tr("HPSDRProgramer_V2"),
                    QString("The HPSDR board listed as:\n%0 \n\nHas been changed to IP address: %1.\n").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr),QMessageBox::Close);
-      discover();
+            discover();
     }else if( bdtype.contains("hermes") && (int(ver) >= 23) && (result > 0) ){
             ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
+
             cipa->changeIP( saddr );
             QMessageBox::information(this, tr("HPSDRProgramer_V2"),
                          QString("The HPSDR board listed as:\n%0 \n\nHas been changed to IP address: %1.\n").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr),QMessageBox::Close);

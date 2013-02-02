@@ -3,6 +3,7 @@
 
 #include <QThread>
 #include <QUdpSocket>
+#include <QHostInfo>
 #include <QStringList>
 #include <QMessageBox>
 
