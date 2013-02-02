@@ -7,11 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>739</width>
-    <height>450</height>
+    <height>452</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="toolTip">
+   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;This program requires Admin privileges and the bootloader jumper must be set on the HPSDR board!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_7">
@@ -41,6 +44,9 @@
              <height>0</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The interface used to connect to the HPSDR board.  It be on the same subnet as the board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
           </widget>
          </item>
          <item row="1" column="0">
@@ -63,6 +69,9 @@
            </property>
            <property name="frameShadow">
             <enum>QFrame::Plain</enum>
+           </property>
+           <property name="lineWidth">
+            <number>0</number>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
@@ -109,6 +118,9 @@
     </item>
     <item row="1" column="0">
      <widget class="QGroupBox" name="groupBox_2">
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This programmer can only program primary HPSDR boards with an ethernet connection. The bootloader jumpers (J1 or J12) must be set on the connected board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="title">
        <string>Programmer</string>
       </property>
@@ -123,10 +135,16 @@
              <height>0</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The RBF file that will be programmed on the primary HPSDR board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
           </widget>
          </item>
          <item row="0" column="1">
           <widget class="QPushButton" name="fileBrowseButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search for the RBF file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
             <string>Browse</string>
            </property>
@@ -147,6 +165,9 @@
          </item>
          <item row="1" column="1">
           <widget class="QPushButton" name="fileProgramButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Program the RBF file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
             <string>Program</string>
            </property>
@@ -159,6 +180,9 @@
     </item>
     <item row="2" column="0">
      <widget class="QGroupBox" name="groupBox_3">
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use the primary HPSDR board as a JTAG programmer for another secondary HPSDR board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="title">
        <string>JTAG Programmer</string>
       </property>
@@ -167,6 +191,9 @@
         <layout class="QGridLayout" name="gridLayout_5">
          <item row="0" column="0">
           <widget class="QPushButton" name="interogateButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search for a secondary HPSDR board on the JTAG chain.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
             <string>Interogate</string>
            </property>
@@ -179,6 +206,9 @@
              <width>400</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The name of secondary HPSDR board on the JTAG chain found.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -223,10 +253,16 @@
              <height>0</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The JTAG helper file to be used to program the secondary HPSDR board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QPushButton" name="jtagButton">
+          <widget class="QPushButton" name="jtagHelperButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse for a JTAG helper file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
             <string>Browse</string>
            </property>
@@ -260,10 +296,16 @@
              <height>0</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The firmware to be programmed with the JTAG programmer to the secondary HPSDR board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
           </widget>
          </item>
          <item row="2" column="2">
           <widget class="QPushButton" name="firmwareButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse for Secondary board firmware RBF file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
             <string>Browse</string>
            </property>
@@ -271,6 +313,9 @@
          </item>
          <item row="2" column="3">
           <widget class="QPushButton" name="jtagProgramButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Program the selected firmware to the selected secondary HPSDR board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
             <string>Program</string>
            </property>

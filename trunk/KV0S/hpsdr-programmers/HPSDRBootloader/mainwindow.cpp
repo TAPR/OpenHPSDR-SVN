@@ -29,6 +29,7 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
+    deviceIndicator( new QLabel ),
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
@@ -68,8 +69,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionAbout,SIGNAL(triggered()),ab,SLOT(show()));
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(quit()));
-    connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
     connect(ui->actionIP_Address,SIGNAL(triggered()),add,SLOT(show()));
+    // Programmer Buttons
+    connect(ui->fileBrowseButton,SIGNAL(clicked()),this,SLOT(browse()));
+    connect(ui->fileProgramButton,SIGNAL(clicked()),this,SLOT(program()));
+    //JTAG programmer buttons
+    connect(ui->interogateButton,SIGNAL(clicked()),this,SLOT(jtagInterrogate()));
+    connect(ui->jtagHelperButton,SIGNAL(clicked()),this,SLOT(jtagBrowse()));
+    connect(ui->firmwareButton,SIGNAL(clicked()),this,SLOT(jtagFlashBrowse()));
+    connect(ui->jtagProgramButton,SIGNAL(clicked()),this,SLOT(jtagFlashProgram()));
 
     if(ui->interfaceComboBox->count()>0) {
        ui->interfaceComboBox->setCurrentIndex(0);
@@ -873,7 +881,7 @@ void MainWindow::fpgaId(unsigned char* data) {
             status("Make sure that Metis is in the slot farthest away from the power connector.");
             status("The target board should be in the next slot adjacent to Metis.");
             status("The target board has the 'Last JTAG' jumper installed.");
-            status("The are no other boards on the Atlas Bus.");
+            status("There are no other boards on the Atlas Bus.");
         } else if(fpga_id==0x020F30) {
             status("found Mercury");
             ui->jtagLineEdit->setText("Mercury - 0x020F30");
