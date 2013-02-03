@@ -72,6 +72,7 @@ public:
     QString getBoardString();
     unsigned char getVersion();
     unsigned char getBoard();
+    QString getJumper();
 
 private:
     long ipaddress;

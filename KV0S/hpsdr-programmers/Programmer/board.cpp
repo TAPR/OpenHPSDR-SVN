@@ -181,6 +181,15 @@ unsigned char Board::getBoard() {
     return board;
 }
 
+/*! \brief getBoard()
+ *
+ *  This function returns the type of board.
+ */
+
+
+QString Board::getJumper() {
+    return jumper[board];
+}
 /*! \brief getBoardString()
  *
  *  This function returns the type of board.
