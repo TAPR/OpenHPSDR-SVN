@@ -9,6 +9,7 @@
 #include <QFileInfo>
 #include <QFileDialog>
 #include <QTimer>
+#include <QStringList>
 
 #include <pcap.h>
 

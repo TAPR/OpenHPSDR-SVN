@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     stat = new StatusDialog(this);
     stat->setWindowTitle(QString("HPSDRBootloader %1").arg(VERSION));
     add = new AddressDialog(this);
+    add->writeEnabled();
 
     QCoreApplication::setOrganizationName("HPSDR");
     QCoreApplication::setOrganizationDomain("openhpsdr.org");
@@ -74,11 +75,15 @@ MainWindow::MainWindow(QWidget *parent) :
     // Programmer Buttons
     connect(ui->fileBrowseButton,SIGNAL(clicked()),this,SLOT(browse()));
     connect(ui->fileProgramButton,SIGNAL(clicked()),this,SLOT(program()));
+    connect(ui->readMACButton,SIGNAL(clicked()),this,SLOT(getMAC()));
+
     //JTAG programmer buttons
     connect(ui->interogateButton,SIGNAL(clicked()),this,SLOT(jtagInterrogate()));
     connect(ui->jtagHelperButton,SIGNAL(clicked()),this,SLOT(jtagBrowse()));
     connect(ui->firmwareButton,SIGNAL(clicked()),this,SLOT(jtagFlashBrowse()));
     connect(ui->jtagProgramButton,SIGNAL(clicked()),this,SLOT(jtagFlashProgram()));
+
+    connect(add,SIGNAL(writeIP()),this,SLOT(setIP()));
 
     if(ui->interfaceComboBox->count()>0) {
        ui->interfaceComboBox->setCurrentIndex(0);
@@ -158,11 +163,15 @@ void MainWindow::metisSelected(int index) {
 // SLOT - browse - called when the "Browse ..." button on the Program tab is pressed.
 void MainWindow::browse()
 {
+    // Clear other lineedits
+    ui->firmwareLineEdit->clear();
+    ui->interogateLineEdit->clear();
+    ui->jtagLineEdit->clear();
     QString dd = settings.value("dir").toString();
     QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),dd,tr("rbf Files (*.rbf)"));
     QFileInfo *fileif = new QFileInfo(fileName);
     qDebug() << fileif->filePath();
-    settings.setValue("dir", fileif->filePath());
+    settings.setValue("firmwaredir", fileif->filePath());
     ui->fileLineEdit->setText(fileName);
     status( QString("Reading rbf file: %0").arg(fileName) );
 }
@@ -380,10 +389,11 @@ void MainWindow::getMAC() {
 
 // SLOT - macAddress - called when the reply packet is received containg the Metis MAC address.
 void MainWindow::macAddress(unsigned char* mac) {
-    //text.sprintf("%02X:%02X:%02X:%02X:%02X:%02X",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
-    //ui->macLineEdit->setText(text);
-    //text.sprintf("%s MAC address read successfully",isMetis?"Metis":"Hermes");
-    //idle();
+    text.sprintf("%02X:%02X:%02X:%02X:%02X:%02X",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
+    ui->programMACLabel->setText(text);
+    add->setMACaddress(text);
+    text.sprintf("MAC address read successfully");
+    idle();
 }
 
 // SLOT - getIP - called when the "Read" button on the IP Address tab is pressed.
@@ -450,24 +460,22 @@ void MainWindow::setIP() {
     stat->clear();
     status("");
 
-    // will need to run Discovery again
-    //ui->metisComboBox->clear();
-    //metis.clear();
 
-    //addr[0]=add->IPLineEdit1->text().toInt();
-    //addr[1]=add->IPLineEdit2->text().toInt();
-    //addr[2]=add->IPLineEdit3->text().toInt();
-    //addr[3]=add->IPLineEdit4->text().toInt();
-    //if((addr[0]<0 || addr[0]>255) || (addr[1]<0 || addr[1]>255) || (addr[2]<0 || addr[2]>255) || (addr[3]<0 || addr[3]>255)) {
-     //   status("Error: invalid IP address");
-    //} else {
+    QStringList *saddr = new QStringList();
+    add->getNewIPAddress( saddr );
 
-        handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
-        if (handle == NULL) {
+    addr[0] = saddr->at(0).toInt();
+    addr[1] = saddr->at(1).toInt();
+    addr[2] = saddr->at(2).toInt();
+    addr[3] = saddr->at(3).toInt();
+
+    qDebug() << "new address" << saddr->at(0) <<saddr->at(1) << saddr->at(2) << saddr->at(3);
+
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
+    if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
         } else {
-
             state=WRITE_IP;
 
             /*set the frame header*/
@@ -501,18 +509,20 @@ void MainWindow::setIP() {
                 buffer[i+20]=(unsigned char)0x00;
             }
 
-           if(pcap_sendpacket(handle,buffer,62)!=0) {
+            if(pcap_sendpacket(handle,buffer,62)!=0) {
                 qDebug()<<"pcap_sendpacket failed";
                 status("send write ip command failed");
                 idle();
             } else {
-                text.sprintf("Written %s IP address",isMetis?"Metis":"Hermes");
+                text.sprintf("Written IP address");
                 status(text);
             }
-        //}
 
-        idle();
     }
+
+
+    idle();
+
 }
 
 // private function to send the command to erase
@@ -542,7 +552,7 @@ void MainWindow::erase_timeout() {
 // private function to send command to read MAC address from Metis
 void MainWindow::readMAC() {
     eraseTimeouts=0;
-    text.sprintf("Reading %s MAC address ...",isMetis?"Metis":"Hermes");
+    text.sprintf("Reading MAC address ...");
     status(text);
     sendRawCommand(READ_METIS_MAC);
 }
@@ -851,7 +861,7 @@ void MainWindow::eraseCompleted() {
         qDebug()<<"received eraseCompleted when state is READ_IP";
         break;
     case WRITE_IP:
-        text.sprintf("%s IP address written successfully",currentboard.toStdString().c_str());
+        text.sprintf("HPSDR Board IP address written successfully");
         status(text);
         idle();
         break;
@@ -936,7 +946,7 @@ void MainWindow::nextBuffer() {
     } else {
         status("Programming device completed successfully.");
         if(bootloader) {
-            text.sprintf("Remember to remove %s when you power cycle.",currentboard.toStdString().c_str());
+            text.sprintf("Remember to remove jumper on (J1 or J12). Then power cycle.");
             status(text);
 
         }
@@ -959,7 +969,7 @@ void MainWindow::timeout() {
             //qDebug()<<"eraseTimeouts="<<eraseTimeouts;
             if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
                 status("Error: erase timeout.");
-                text.sprintf("Have you set the jumper at %s on %s and power cycled?",bd[currentBoardIndex]->getJumper().toStdString().c_str(),currentboard.toStdString().c_str());
+                text.sprintf("Remember to remove jumper on (J1 or J12). Then power cycle.");
                 status(text);
                 idle();
                 QApplication::restoreOverrideCursor();
@@ -977,7 +987,7 @@ void MainWindow::timeout() {
     case READ_MAC:
         status("Error: timeout reading MAC address!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",bd[currentBoardIndex]->getJumper().toStdString().c_str(),currentboard.toStdString().c_str());
+        text.sprintf("Check that there is a jumper on J1 for Metis or J12 for Hermes, Angelia");
         status(text);
         status(text);
         idle();
@@ -985,7 +995,8 @@ void MainWindow::timeout() {
     case READ_IP:
         status("Error: timeout reading IP address!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",bd[currentBoardIndex]->getJumper().toStdString().c_str(),currentboard.toStdString().c_str());
+        text.sprintf("Check that there is a jumper on J1 for Metis or J12 for Hermes, Angelia");
+
         status(text);
         status(text);
         idle();
@@ -996,7 +1007,7 @@ void MainWindow::timeout() {
     case JTAG_INTERROGATE:
         status("Error: timeout reading interrogating JTAG chain!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",bd[currentBoardIndex]->getJumper().toStdString().c_str(),currentboard.toStdString().c_str());
+        text.sprintf("Check that there is a jumper on J1 for Metis or J12 for Hermes, Angelia");
         status(text);
         status(text);
         idle();
@@ -1033,89 +1044,13 @@ void MainWindow::idle() {
 
 }
 
-/*
-void MainWindow::discover() {
-    stat->clear();
-    status("");
-    text.sprintf("%s Discovery",isMetis?"Metis":"Hermes");
-    status(text);
-
-    ui->metisComboBox->clear();
-    metis.clear();
-
-
-
-    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
-
-    QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
-
-    socket.close();
-    if(!socket.bind(QHostAddress(ip),0,QUdpSocket::ReuseAddressHint)) {
-        qDebug()<<"Error: Discovery: bind failed "<<socket.errorString();
-        return;
-    }
-
-    discovery=new Discovery(&socket,myip);
-    connect(discovery,SIGNAL(metis_found(Metis*)),this,SLOT(metis_found(Metis*)));
-    discovery->discover();
-    // disable the Discovery button
-    ui->discoverPushButton->setDisabled(true);
-
-    // wait 2 seconds to allow replys
-    QTimer::singleShot(2000,this,SLOT(discovery_timeout()));
-}
-
-void MainWindow::discovery_timeout() {
-
-    discovery->stop();
-    if(ui->metisComboBox->count()>0) {
-        ui->metisComboBox->setCurrentIndex(0);
-        metisSelected(0);
-    }
-
-    // enable the Discovery button
-    ui->discoverPushButton->setDisabled(false);
-
-    text.sprintf("Discovery found %d card(s)",ui->metisComboBox->count());
-    status(text);
-    if(ui->metisComboBox->count()==0) {
-        status("Make sure the correct interface is selected.");
-        text.sprintf("Make sure that there is no jumper on %s.",isMetis?"JP1":"J12");
-    }
-    QApplication::restoreOverrideCursor();
-}
-*/
-/*
-void MainWindow::metis_found(Metis* m) {
-
-    if(htonl(m->getIpAddress())!=ip) {
-        metis.append(m);
-        ui->metisComboBox->addItem(m->toString());
-        status(m->toString());
-        if(isMetis) {
-            if(m->getBoard()!=0) {
-                status("Warning: you have Metis selected but board is Hermes!");
-            }
-        } else if(m->getBoard()!=1) {
-            status("Warning: you have Hermes selected but board is Metis!");
-        }
-
-    }
-}
-
-*/
-/*
-void MainWindow::tabChanged(int index) {
-    bootloader=(index==1);
-    ui->tabWidget_2->setTabEnabled(2,bootloader);
-    ui->tabWidget_2->setTabEnabled(3,bootloader);
-    ui->tabWidget_2->setTabEnabled(4,bootloader&ui->metisRadioButton->isChecked());
-}
-*/
 
 
 void MainWindow::jtagInterrogate() {
     char errbuf[PCAP_ERRBUF_SIZE];
+
+    //Clear Program lineedit
+    ui->fileLineEdit->clear();
 
     stat->clear();
     status("");
@@ -1141,8 +1076,11 @@ void MainWindow::jtagInterrogate() {
 }
 
 void MainWindow::jtagBrowse() {
-    //QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("pof Files (*.pof)"));
-    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("rbf Files (*.rbf)"));
+    QString dd = settings.value("dir").toString();
+    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),dd,tr("rbf Files (*.rbf)"));
+    QFileInfo *fileif = new QFileInfo(fileName);
+    qDebug() << fileif->filePath();
+    settings.setValue("firmwaredir", fileif->filePath());
     ui->jtagLineEdit->setText(fileName);
 }
 
@@ -1294,8 +1232,11 @@ void MainWindow::jtagEraseData() {
 }
 
 void MainWindow::jtagFlashBrowse() {
-    //QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("pof Files (*.pof)"));
-    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("rbf Files (*.rbf)"));
+    QString dd = settings.value("dir").toString();
+    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),dd,tr("rbf Files (*.rbf)"));
+    QFileInfo *fileif = new QFileInfo(fileName);
+    qDebug() << fileif->filePath();
+    settings.setValue("firmwaredir", fileif->filePath());
     ui->firmwareLineEdit->setText(fileName);
 }
 
@@ -1374,7 +1315,7 @@ void MainWindow::nextJTAGBuffer() {
             sendJTAGFlashData();
         } else {
             status("Loaded Flash successfully.");
-            text.sprintf("Remember to remove %s when you power cycle",isMetis?"JP1":"J12");
+            text.sprintf("Remember to remove jumper on J1 on Metis. Then power cycle.");
             status(text);
             idle();
         }
