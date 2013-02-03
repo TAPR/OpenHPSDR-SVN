@@ -127,7 +127,7 @@
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="0">
+         <item row="0" column="0" colspan="3">
           <widget class="QLineEdit" name="fileLineEdit">
            <property name="minimumSize">
             <size>
@@ -140,7 +140,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
+         <item row="0" column="3">
           <widget class="QPushButton" name="fileBrowseButton">
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search for the RBF file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -151,6 +151,29 @@
           </widget>
          </item>
          <item row="1" column="0">
+          <widget class="QPushButton" name="readMACButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Read the MAC address of the HPSDR Board&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>ReadMac</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="programMACLabel">
+           <property name="minimumSize">
+            <size>
+             <width>160</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
           <spacer name="horizontalSpacer_2">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -163,7 +186,7 @@
            </property>
           </spacer>
          </item>
-         <item row="1" column="1">
+         <item row="1" column="3">
           <widget class="QPushButton" name="fileProgramButton">
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Program the RBF file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

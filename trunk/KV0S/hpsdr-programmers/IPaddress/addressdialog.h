@@ -22,6 +22,8 @@ public:
     void getMACaddress(Board *m );
     void getNewIPAddress(QStringList *addr );
     Ui::AddressDialog *ui;
+    void writeEnabled();
+    void setMACaddress(QString mac);
 
 signals:
     void writeIP();

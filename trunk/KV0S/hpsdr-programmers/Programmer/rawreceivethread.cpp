@@ -66,7 +66,7 @@ void RawReceiveThread::run() {
                 // check destination is us
                 if(packet[0]==hw[0] && packet[1]==hw[1] && packet[2]==hw[2] &&
                    packet[3]==hw[3] && packet[4]==hw[4] && packet[5]==hw[5]) {
-                    // check source is Metis
+                    // check source is HPSDR Board
                     if(packet[6]==0x11 && packet[7]==0x22 && packet[8]==0x33 &&
                        packet[9]==0x44 && packet[10]==0x55 && packet[11]==0x66) {
 

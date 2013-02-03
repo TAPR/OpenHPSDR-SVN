@@ -58,3 +58,15 @@ void AddressDialog::getNewIPAddress( QStringList *addr )
     addr->append(ui->IPLineEdit4->text());
 
 }
+
+void AddressDialog::writeEnabled()
+{
+    ui->writeButton->setDisabled(false);
+}
+
+
+void AddressDialog::setMACaddress(QString mac)
+{
+    qDebug() << "in setMACAddress" << mac;
+    ui->MACLabel->setText( mac );
+}
