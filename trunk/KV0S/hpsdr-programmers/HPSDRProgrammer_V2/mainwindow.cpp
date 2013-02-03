@@ -233,7 +233,7 @@ void MainWindow::discovery_timeout() {
     status(text);
     if(ui->discoverComboBox->count()==0) {
         status("Make sure the correct interface is selected.");
-        text.sprintf("Make sure that there is no jumper on.");
+        //text.sprintf("Make sure that there is no jumper on.");
         deviceIndicator->setPixmap (QPixmap(":/icons/red16.png"));
         deviceIndicator->setToolTip (QString ("Device port not open"));
     }else{

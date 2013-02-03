@@ -70,6 +70,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionAbout,SIGNAL(triggered()),ab,SLOT(show()));
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(quit()));
     connect(ui->actionIP_Address,SIGNAL(triggered()),add,SLOT(show()));
+    connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
     // Programmer Buttons
     connect(ui->fileBrowseButton,SIGNAL(clicked()),this,SLOT(browse()));
     connect(ui->fileProgramButton,SIGNAL(clicked()),this,SLOT(program()));
@@ -549,7 +550,7 @@ void MainWindow::readMAC() {
 // private function to read the IP address from Metis.
 void MainWindow::readIP() {
     eraseTimeouts=0;
-    text.sprintf("Reading %s IP address ...",isMetis?"Metis":"Hermes");
+    text.sprintf("Reading %s IP address ...",currentboard.toStdString().c_str());
     status(text);
     sendRawCommand(READ_METIS_IP);
 }
@@ -850,7 +851,7 @@ void MainWindow::eraseCompleted() {
         qDebug()<<"received eraseCompleted when state is READ_IP";
         break;
     case WRITE_IP:
-        text.sprintf("%s IP address written successfully",isMetis?"Metis":"Hermes");
+        text.sprintf("%s IP address written successfully",currentboard.toStdString().c_str());
         status(text);
         idle();
         break;
@@ -884,7 +885,7 @@ void MainWindow::fpgaId(unsigned char* data) {
             status("There are no other boards on the Atlas Bus.");
         } else if(fpga_id==0x020F30) {
             status("found Mercury");
-            ui->jtagLineEdit->setText("Mercury - 0x020F30");
+            ui->interogateLineEdit->setText("Mercury - 0x020F30");
 #ifdef Q_WS_WIN
             ui->jtag->setText("Mercury_JTAG.rbf");
 #endif
@@ -898,7 +899,7 @@ void MainWindow::fpgaId(unsigned char* data) {
 #endif
         } else if(fpga_id==0x020B20) {
             status("found Penelope");
-            ui->jtagLineEdit->setText("Penelope - 0x020B20");
+            ui->interogateLineEdit->setText("Penelope - 0x020B20");
 #ifdef Q_WS_WIN
             ui->jtagLineEdit->setText("Penelope_JTAG.rbf");
 #endif
@@ -935,7 +936,7 @@ void MainWindow::nextBuffer() {
     } else {
         status("Programming device completed successfully.");
         if(bootloader) {
-            text.sprintf("Remember to remove %s when you power cycle.",isMetis?"JP1":"J12");
+            text.sprintf("Remember to remove %s when you power cycle.",currentboard.toStdString().c_str());
             status(text);
 
         }
@@ -958,7 +959,7 @@ void MainWindow::timeout() {
             //qDebug()<<"eraseTimeouts="<<eraseTimeouts;
             if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
                 status("Error: erase timeout.");
-                text.sprintf("Have you set the jumper at %s on %s and power cycled?",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+                text.sprintf("Have you set the jumper at %s on %s and power cycled?",bd[currentBoardIndex]->getJumper().toStdString().c_str(),currentboard.toStdString().c_str());
                 status(text);
                 idle();
                 QApplication::restoreOverrideCursor();
@@ -976,14 +977,16 @@ void MainWindow::timeout() {
     case READ_MAC:
         status("Error: timeout reading MAC address!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+        text.sprintf("Check that there is a jumper at %s on %s.",bd[currentBoardIndex]->getJumper().toStdString().c_str(),currentboard.toStdString().c_str());
+        status(text);
         status(text);
         idle();
         break;
     case READ_IP:
         status("Error: timeout reading IP address!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+        text.sprintf("Check that there is a jumper at %s on %s.",bd[currentBoardIndex]->getJumper().toStdString().c_str(),currentboard.toStdString().c_str());
+        status(text);
         status(text);
         idle();
         break;
@@ -993,7 +996,8 @@ void MainWindow::timeout() {
     case JTAG_INTERROGATE:
         status("Error: timeout reading interrogating JTAG chain!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper at %s on %s.",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes");
+        text.sprintf("Check that there is a jumper at %s on %s.",bd[currentBoardIndex]->getJumper().toStdString().c_str(),currentboard.toStdString().c_str());
+        status(text);
         status(text);
         idle();
         break;
