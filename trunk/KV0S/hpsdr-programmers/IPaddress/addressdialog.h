@@ -27,11 +27,15 @@ public:
 
 signals:
     void writeIP();
+    void readIPAddress();
+    void readMACAddress();
 
 private:
 
 private slots:
     void setupIPwrite();
+    void readIP();
+    void readMAC();
 };
 
 #endif // ADDRESSDIALOG_H
