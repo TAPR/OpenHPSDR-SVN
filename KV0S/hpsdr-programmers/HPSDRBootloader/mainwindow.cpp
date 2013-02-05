@@ -72,10 +72,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(quit()));
     connect(ui->actionIP_Address,SIGNAL(triggered()),add,SLOT(show()));
     connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
+    connect(ui->interfaceComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(interfaceSelected(int)));
+
     // Programmer Buttons
     connect(ui->fileBrowseButton,SIGNAL(clicked()),this,SLOT(browse()));
     connect(ui->fileProgramButton,SIGNAL(clicked()),this,SLOT(program()));
-    connect(ui->readMACButton,SIGNAL(clicked()),this,SLOT(getMAC()));
 
     //JTAG programmer buttons
     connect(ui->interogateButton,SIGNAL(clicked()),this,SLOT(jtagInterrogate()));
@@ -84,6 +85,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->jtagProgramButton,SIGNAL(clicked()),this,SLOT(jtagFlashProgram()));
 
     connect(add,SIGNAL(writeIP()),this,SLOT(setIP()));
+    connect(add,SIGNAL(readMACAddress()),this,SLOT(readMAC()));
+    connect(add,SIGNAL(readIPAddress()),this,SLOT(readIP()));
 
     if(ui->interfaceComboBox->count()>0) {
        ui->interfaceComboBox->setCurrentIndex(0);
@@ -390,7 +393,7 @@ void MainWindow::getMAC() {
 // SLOT - macAddress - called when the reply packet is received containg the Metis MAC address.
 void MainWindow::macAddress(unsigned char* mac) {
     text.sprintf("%02X:%02X:%02X:%02X:%02X:%02X",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
-    ui->programMACLabel->setText(text);
+    //ui->programMACLabel->setText(text);
     add->setMACaddress(text);
     text.sprintf("MAC address read successfully");
     idle();
@@ -560,7 +563,7 @@ void MainWindow::readMAC() {
 // private function to read the IP address from Metis.
 void MainWindow::readIP() {
     eraseTimeouts=0;
-    text.sprintf("Reading %s IP address ...",currentboard.toStdString().c_str());
+    text.sprintf("Reading IP address ...");
     status(text);
     sendRawCommand(READ_METIS_IP);
 }
@@ -987,7 +990,7 @@ void MainWindow::timeout() {
     case READ_MAC:
         status("Error: timeout reading MAC address!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper on J1 for Metis or J12 for Hermes, Angelia");
+        text.sprintf("Check that there is a jumper on J1 for Metis");
         status(text);
         status(text);
         idle();
@@ -995,7 +998,7 @@ void MainWindow::timeout() {
     case READ_IP:
         status("Error: timeout reading IP address!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper on J1 for Metis or J12 for Hermes, Angelia");
+        text.sprintf("Check that there is a jumper on J1 for Metis");
 
         status(text);
         status(text);
@@ -1007,7 +1010,7 @@ void MainWindow::timeout() {
     case JTAG_INTERROGATE:
         status("Error: timeout reading interrogating JTAG chain!");
         status("Check that the correct interface is selected.");
-        text.sprintf("Check that there is a jumper on J1 for Metis or J12 for Hermes, Angelia");
+        text.sprintf("Check that there is a jumper on J1 for Metis");
         status(text);
         status(text);
         idle();

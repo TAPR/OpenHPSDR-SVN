@@ -87,7 +87,8 @@ public slots:
     void jtagFlashProgram();
     void nextJTAGBuffer();
     void startJTAGFlashErase();
-
+    void readIP();
+    void readMAC();
     
 private:
     Ui::MainWindow *ui;
@@ -102,8 +103,7 @@ private:
 
     int loadRBF(QString filename);
     void eraseData();
-    void readMAC();
-    void readIP();
+
     void writeIP();
 
     void sendRawCommand(unsigned char command);

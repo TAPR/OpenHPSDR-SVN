@@ -11,6 +11,8 @@ AddressDialog::AddressDialog(QWidget *parent) :
 
     connect(ui->closeButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->writeButton,SIGNAL(clicked()),this, SLOT(setupIPwrite()));
+    connect(ui->readMACButton,SIGNAL(clicked()),this,SLOT(readMAC()));
+    connect(ui->readIPButton,SIGNAL(clicked()),this,SLOT(readIP()));
 }
 
 AddressDialog::~AddressDialog()
@@ -70,3 +72,19 @@ void AddressDialog::setMACaddress(QString mac)
     qDebug() << "in setMACAddress" << mac;
     ui->MACLabel->setText( mac );
 }
+
+void AddressDialog::readMAC()
+{
+    qDebug() << "in readMAC";
+    emit readMACAddress();
+}
+
+void AddressDialog::readIP()
+{
+    qDebug() << "in readIP";
+    emit readIPAddress();
+}
+
+
+
+
