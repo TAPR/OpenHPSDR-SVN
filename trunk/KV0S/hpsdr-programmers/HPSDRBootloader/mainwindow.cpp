@@ -438,14 +438,21 @@ void MainWindow::getIP() {
 
 // SLOT - ipAddress - called when the reply packet is received containing Metis IP address.
 void MainWindow::ipAddress(unsigned char* ip) {
+    QStringList saddr = QStringList();
     text.sprintf("%d",ip[0]);
-    //add->ui->IPLineEdit1->setText(text);
+    saddr.append(QString("").sprintf("%d",ip[0]));
     text.sprintf("%d",ip[1]);
-    //add->ui->IPLineEdit2->setText(text);
+    saddr.append(QString("").sprintf("%d",ip[1]));
     text.sprintf("%d",ip[2]);
-    //add->ui->IPLineEdit3->setText(text);
+    saddr.append(QString("").sprintf("%d",ip[2]));
     text.sprintf("%d",ip[3]);
-    //add->ui->IPLineEdit4->setText(text);
+    saddr.append(QString("").sprintf("%d",ip[3]));
+
+    add->setIPaddress( saddr );
+
+    QString ipstr;
+
+
     text.sprintf("HPSDR Board IP address read successfully");
     status(text);
     idle();
@@ -472,7 +479,9 @@ void MainWindow::setIP() {
     addr[2] = saddr->at(2).toInt();
     addr[3] = saddr->at(3).toInt();
 
-    qDebug() << "new address" << saddr->at(0) <<saddr->at(1) << saddr->at(2) << saddr->at(3);
+    QString ipstr;
+    ipstr = QString("%0.%1.%2.%3").arg(saddr->at(0)).arg(saddr->at(1)).arg(saddr->at(2)).arg(saddr->at(3));
+    qDebug() << "new address" << ipstr;
 
     handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
@@ -523,6 +532,8 @@ void MainWindow::setIP() {
 
     }
 
+
+    QMessageBox::information(this, tr("HPSDRBootloader"),QString("The HPSDR board has been changed to IP address: %1.\n").arg(ipstr),QMessageBox::Close);
 
     idle();
 
@@ -1054,6 +1065,8 @@ void MainWindow::jtagInterrogate() {
 
     //Clear Program lineedit
     ui->fileLineEdit->clear();
+    ui->firmwareLineEdit->clear();
+    ui->jtagLineEdit->clear();
 
     stat->clear();
     status("");
