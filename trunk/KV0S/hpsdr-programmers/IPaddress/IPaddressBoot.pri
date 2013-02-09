@@ -6,12 +6,11 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 
 SOURCES += $$PWD/changeipaddress.cpp \
-           $$PWD/addressdialog.cpp
+           $$PWD/addressdialogboot.cpp
 
 HEADERS  += $$PWD/changeipaddress.h \
-            $$PWD/addressdialog.h
+            $$PWD/addressdialogboot.h
 
-FORMS    += $$PWD/addressdialog.ui
-
+FORMS    += $$PWD/addressdialogboot.ui
 
     

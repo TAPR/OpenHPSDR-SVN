@@ -1,5 +1,5 @@
-#include "addressdialog.h"
-#include "ui_addressdialog.h"
+#include "addressdialogboot.h"
+#include "ui_addressdialogboot.h"
 
 AddressDialog::AddressDialog(QWidget *parent) :
     QDialog(parent),
@@ -71,6 +71,15 @@ void AddressDialog::setMACaddress(QString mac)
 {
     qDebug() << "in setMACAddress" << mac;
     ui->MACLabel->setText( mac );
+}
+
+void AddressDialog::setIPaddress(QStringList ipaddress)
+{
+    qDebug() << "in setIPAddress" << ipaddress;
+    ui->IPLineEdit1->setText( ipaddress[0] );
+    ui->IPLineEdit2->setText( ipaddress[1] );
+    ui->IPLineEdit3->setText( ipaddress[2] );
+    ui->IPLineEdit4->setText( ipaddress[3] );
 }
 
 void AddressDialog::readMAC()
