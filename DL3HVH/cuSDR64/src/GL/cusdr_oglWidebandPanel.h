@@ -87,12 +87,13 @@ private:
 	QSDR::_HWInterfaceMode		m_hwInterface;
 	QSDR::_DataEngineState		m_dataEngineState;
 
-	QSDRGraphics::_Panadapter	m_panadapterMode;
-	QSDRGraphics::_WfScheme 	m_waterColorScheme;
-
+	PanGraphicsMode				m_panMode;
+	WaterfallColorMode			m_waterfallMode;
+	
 	QVector<qreal>				m_widebandPanSpectrumBins;
 	QQueue<QVector<float> >		specAv_queue;
 	QList<TReceiver>			m_rxDataList;
+	TWideband					m_widebandOptions;
 
 	QGLFramebufferObject*		m_frequencyScaleFBO;
 	QGLFramebufferObject*		m_dBmScaleFBO;
@@ -254,19 +255,20 @@ private slots:
 					QSDR::_DataEngineState state);
 
 	void	graphicModeChanged(
-					QObject* sender, 
-					QSDRGraphics::_Panadapter panMode,
-					QSDRGraphics::_WfScheme colorScheme);
+					QObject* sender,
+					int rx,
+					PanGraphicsMode panMode,
+					WaterfallColorMode waterfallColorMode);
 
 	void	setupConnections();
 	void	setCurrentReceiver(QObject *sender, int value);
-	void	setFrequency(QObject *sender, bool value, int rx, long freq);
+	void	setFrequency(QObject *sender, int mode, int rx, long freq);
 	void	setupDisplayRegions(QSize size);
 	void	setWidebandSpectrumBuffer(const qVectorFloat &buffer);
 	void	resetWidebandSpectrumBuffer();
 	//void	setSpectrumAveragingCnt(int value);
 	void	setPanadapterColors();
-	void	setPanGridStatus(bool value);
+	void	setPanGridStatus(bool value, int rx);
 	void	setMercuryAttenuator(QObject* sender, HamBand band, int value);
 
 	void	getRegion(QPoint p);

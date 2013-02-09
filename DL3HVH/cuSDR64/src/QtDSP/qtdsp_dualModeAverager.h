@@ -37,7 +37,7 @@ class DualModeAverager : public QObject {
 	Q_OBJECT
 
 public:
-	DualModeAverager(QObject *parent = 0, int size = 0);
+	DualModeAverager(int rx = 0, int size = 0);
 	~DualModeAverager();
 
 	void ProcessDBAverager(qVectorFloat &in, qVectorFloat &out);
@@ -49,6 +49,7 @@ private:
 	QMutex			mutex;
 	qVectorFloat	m_tmp;
 
+	int		m_receiver;
 	int		m_size;
 	int		m_length;
 	int		cnt;
@@ -56,7 +57,8 @@ private:
 	float	k;
 
 private slots:
-	void setAveragingLength(int value);
+	void setAveragingLength(QObject* sender, int rx, int value);
+	//void setWidebandAveragingLength(QObject* sender, int value);
 };
 
 #endif // _QTDSP_DUAL_MODE_AVERAGER_H

@@ -202,6 +202,12 @@ public slots:
     void setAudioInputDevice(const QAudioDeviceInfo &device);
     void setAudioOutputDevice(const QAudioDeviceInfo &device);
 
+	void setSystemState(
+			QSDR::_Error err,
+			QSDR::_HWInterfaceMode hwmode,
+			QSDR::_ServerMode mode,
+			QSDR::_DataEngineState state);
+
 	/**
      * set Chirp tone parameters
      */
@@ -300,8 +306,8 @@ private:
     bool selectFormat();
     void stopRecording();
     void stopPlayback();
-    void setState(QAudio::State state);
-    void setState(QAudio::Mode mode, QAudio::State state);
+    void setAudioState(QAudio::State state);
+    void setAudioState(QAudio::Mode mode, QAudio::State state);
     void setFormat(const QAudioFormat &format);
     void setRecordPosition(qint64 position, bool forceEmit = false);
     void setPlayPosition(qint64 position, bool forceEmit = false);
@@ -320,10 +326,15 @@ private:
 #endif
 
 private:
-	Settings*			set;
+	Settings				*set;
 
-    QAudio::Mode        m_mode;
-    QAudio::State       m_state;
+    QAudio::Mode			m_mode;
+    QAudio::State			m_state;
+
+	QSDR::_Error			m_error;
+	QSDR::_ServerMode		m_serverMode;
+	QSDR::_HWInterfaceMode	m_hwInterface;
+	QSDR::_DataEngineState	m_dataEngineState;
 
 	QString				m_message;
 	
@@ -339,10 +350,10 @@ private:
 	int					m_chirpChannels;
 	int					m_chirpRepetition;
 
-    WavFile*            m_file;
+    WavFile				*m_file;
     // We need a second file handle via which to read data into m_buffer
     // for analysis
-    WavFile*            m_analysisFile;
+    WavFile				*m_analysisFile;
 
     QAudioFormat        m_format;
 

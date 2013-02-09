@@ -48,7 +48,7 @@ QGLWidebandPanel::QGLWidebandPanel(QWidget *parent)
 		, m_serverMode(set->getCurrentServerMode())
 		, m_hwInterface(set->getHWInterface())
 		, m_dataEngineState(set->getDataEngineState())
-		, m_panadapterMode(set->getPanadapterMode())
+		, m_panMode(set->getPanadapterMode(0))
 		//, m_specAveragingCnt(set->getSpectrumAveragingCnt())
 		, m_mousePos(QPoint(-1, -1))
 		, m_mouseDownPos(QPoint(-1, -1))
@@ -60,7 +60,8 @@ QGLWidebandPanel::QGLWidebandPanel(QWidget *parent)
 		, m_panGridRenew(true)
 		, m_spectrumColorsChanged(true)
 		, m_crossHairCursor(false)
-		, m_panGrid(set->getPanGridStatus())
+		//, m_panGrid(set->getPanGridStatus(0))
+		, m_panGrid(true)
 		, m_calibrate(false)
 		, m_panSpectrumBinsLength(0)
 		, m_snapMouse(3)
@@ -84,15 +85,16 @@ QGLWidebandPanel::QGLWidebandPanel(QWidget *parent)
 	m_oldHeight = size().height();
 	
 	m_rxDataList = set->getReceiverDataList();
+	m_widebandOptions = set->getWidebandOptions();
+	m_panMode = m_widebandOptions.panMode;
 
-	m_rxDataList = set->getReceiverDataList();
-	m_frequency = m_rxDataList.at(0).frequency;
+	m_frequency = m_rxDataList.at(0).vfoFrequency;
 
 	m_lowerFrequency = 0.0;
 	m_upperFrequency = (qreal) MAXFREQUENCY;
 
-	m_dBmPanMin = set->getdBmWBScaleMin();
-	m_dBmPanMax = set->getdBmWBScaleMax();
+	m_dBmPanMin = set->getWidebanddBmScaleMin();
+	m_dBmPanMax = set->getWidebanddBmScaleMax();
 
 	fonts = new CFonts(this);
 	m_fonts = fonts->getFonts();
@@ -216,16 +218,18 @@ void QGLWidebandPanel::setupConnections() {
 	);
 
 	CHECKED_CONNECT(
-		set,
+		set, 
 		SIGNAL(graphicModeChanged(
 					QObject *,
-					QSDRGraphics::_Panadapter,
-					QSDRGraphics::_WfScheme)),
+					int,
+					PanGraphicsMode,
+					WaterfallColorMode)),
 		this, 
 		SLOT(graphicModeChanged(
 					QObject *,
-					QSDRGraphics::_Panadapter,
-					QSDRGraphics::_WfScheme)));
+					int,
+					PanGraphicsMode,
+					WaterfallColorMode)));
 
 	CHECKED_CONNECT(
 		set,
@@ -241,9 +245,9 @@ void QGLWidebandPanel::setupConnections() {
 
 	CHECKED_CONNECT(
 		set,
-		SIGNAL(frequencyChanged(QObject *, bool, int, long)),
+		SIGNAL(vfoFrequencyChanged(QObject *, int, int, long)),
 		this,
-		SLOT(setFrequency(QObject *, bool, int, long)));
+		SLOT(setFrequency(QObject *, int, int, long)));
 
 	CHECKED_CONNECT(
 		set, 
@@ -263,11 +267,11 @@ void QGLWidebandPanel::setupConnections() {
 		this, 
 		SLOT(setPanadapterColors()));
 
-	CHECKED_CONNECT(
+	/*CHECKED_CONNECT(
 		set, 
-		SIGNAL(panGridStatusChanged(bool)),
+		SIGNAL(panGridStatusChanged(bool, int)),
 		this,
-		SLOT(setPanGridStatus(bool)));
+		SLOT(setPanGridStatus(bool, int)));*/
 
 	CHECKED_CONNECT(
 		set, 
@@ -315,31 +319,34 @@ void QGLWidebandPanel::paintGL() {
 
 		case QSDR::SDRMode:
 			
-			drawSpectrum();
-			drawHorizontalScale();
-			drawVerticalScale();
+			if (m_resizeTime.elapsed() > 200 || m_dataEngineState == QSDR::DataEngineDown) {
+			
+				drawSpectrum();
+				drawHorizontalScale();
+				drawVerticalScale();
 
-			if (m_panGrid)
-				drawGrid();
+				if (m_panGrid)
+					drawGrid();
 
-			// Ham band information
-			drawHamBand(1810000, 2000000, "160m");
-			drawHamBand(3500000, 3800000, "80m");
-			drawHamBand(5258500, 5403500, "60m");
-			drawHamBand(7000000, 7300000, "40m");
-			drawHamBand(10100000, 10150000, "30m");
-			drawHamBand(14000000, 14350000, "20m");
-			drawHamBand(18068000, 18168000, "17m");
-			drawHamBand(21000000, 21450000, "15m");
-			drawHamBand(24890000, 24990000, "12m");
-			drawHamBand(28000000, 29700000, "10m");
-			drawHamBand(50000000, 51990000, "6m");
+				// Ham band information
+				drawHamBand(1810000, 2000000, "160m");
+				drawHamBand(3500000, 3800000, "80m");
+				drawHamBand(5258500, 5403500, "60m");
+				drawHamBand(7000000, 7300000, "40m");
+				drawHamBand(10100000, 10150000, "30m");
+				drawHamBand(14000000, 14350000, "20m");
+				drawHamBand(18068000, 18168000, "17m");
+				drawHamBand(21000000, 21450000, "15m");
+				drawHamBand(24890000, 24990000, "12m");
+				drawHamBand(28000000, 29700000, "10m");
+				drawHamBand(50000000, 51990000, "6m");
 
-			//qglColor(QColor(255, 255, 255, 130));
-			//m_oglTextSmall->renderText(m_panRect.right() - 100, m_panRect.top(), 5.0f, "Region 1");
+				//qglColor(QColor(255, 255, 255, 130));
+				//m_oglTextSmall->renderText(m_panRect.right() - 100, m_panRect.top(), 5.0f, "Region 1");
 
-			if (m_mouseRegion == panRegion && m_crossHairCursor)
-				drawCrossHair();
+				if (m_mouseRegion == panRegion && m_crossHairCursor)
+					drawCrossHair();
+			}
 
 			break;
 	}
@@ -447,9 +454,9 @@ void QGLWidebandPanel::drawSpectrum() {
 	TGL3float *vertexArrayBg = new TGL3float[2*vertexArrayLength];
 	TGL3float *vertexColorArrayBg = new TGL3float[2*vertexArrayLength];
 
-	switch (m_panadapterMode) {
+	switch (m_panMode) {
 
-		case QSDRGraphics::FilledLine:
+		case (PanGraphicsMode) FilledLine:
 			
 			for (int i = 0; i < vertexArrayLength; i++) {
 
@@ -528,7 +535,7 @@ void QGLWidebandPanel::drawSpectrum() {
 
 			break;
 
-		case QSDRGraphics::Line:
+		case (PanGraphicsMode) Line:
 
 			for (int i = 0; i < vertexArrayLength; i++) {
 
@@ -591,7 +598,7 @@ void QGLWidebandPanel::drawSpectrum() {
 			break;
 
 
-		case QSDRGraphics::Solid:
+		case (PanGraphicsMode) Solid:
 
 			glDisable(GL_MULTISAMPLE);
 			glDisable(GL_LINE_SMOOTH);
@@ -1377,34 +1384,34 @@ void QGLWidebandPanel::wheelEvent(QWheelEvent* event) {
 	//GRAPHICS_DEBUG << "wheelEvent";
 	QPoint pos = event->pos();
 
-	if (event->buttons() == Qt::NoButton) getRegion(pos);
+	//if (event->buttons() == Qt::NoButton) getRegion(pos);
 
-	double freqStep = set->getMouseWheelFreqStep(m_currentReceiver);
+	//double freqStep = set->getMouseWheelFreqStep(m_currentReceiver);
 
-	switch (m_mouseRegion) {
+	//switch (m_mouseRegion) {
 
-		case panRegion:
+	//	case panRegion:
 
-			double delta = 0;
-			if (event->delta() < 0) delta = -freqStep;
-			else
-			if (event->delta() > 0) delta =  freqStep;
+	//		double delta = 0;
+	//		if (event->delta() < 0) delta = -freqStep;
+	//		else
+	//		if (event->delta() > 0) delta =  freqStep;
 
-			if (m_frequency + delta > MAXFREQUENCY)
-				m_frequency = MAXFREQUENCY;
-			else
-			if (m_frequency + delta < 0)
-				m_frequency = 0;
-			else
-				// snap to the frequency step
-				m_frequency = (long)(qRound((m_frequency + delta) / qAbs(freqStep)) * qAbs(freqStep));
+	//		if (m_frequency + delta > MAXFREQUENCY)
+	//			m_frequency = MAXFREQUENCY;
+	//		else
+	//		if (m_frequency + delta < 0)
+	//			m_frequency = 0;
+	//		else
+	//			// snap to the frequency step
+	//			m_frequency = (long)(qRound((m_frequency + delta) / qAbs(freqStep)) * qAbs(freqStep));
 
-			//set->setFrequency(this, true, m_currentReceiver, m_frequency);
-			break;
-	}
+	//		set->setFrequency(this, true, m_currentReceiver, m_frequency);
+	//		break;
+	//}
 
- 	//updateGL();
-	update();
+ //	//updateGL();
+	//update();
 }
 
 void QGLWidebandPanel::mousePressEvent(QMouseEvent* event) {
@@ -1470,7 +1477,7 @@ void QGLWidebandPanel::mousePressEvent(QMouseEvent* event) {
 			float unit = (float)(m_panRect.width() / (MAXFREQUENCY * m_freqScaleZoomFactor));
 			
 			m_frequency = (long)(1000 * (int)(qRound(m_mousePos.x()/unit + m_lowerFrequency)/1000));
-			set->setFrequency(this, true, m_currentReceiver, m_frequency);
+			set->setVFOFrequency(this, 1, m_currentReceiver, m_frequency);
 		}
 		update();
 
@@ -1541,8 +1548,8 @@ void QGLWidebandPanel::mouseMoveEvent(QMouseEvent* event) {
 					m_dBmPanMin = newMin;
 					m_dBmPanMax = newMax;
 
-					//set->setdBmWBScaleMin(m_dBmPanMin);
-					//set->setdBmWBScaleMax(m_dBmPanMax);
+					//set->setWidebanddBmScaleMin(this, m_dBmPanMin);
+					//set->setWidebanddBmScaleMax(this, m_dBmPanMax);
 				}
 
 				m_mouseDownPos = pos;
@@ -1562,8 +1569,8 @@ void QGLWidebandPanel::mouseMoveEvent(QMouseEvent* event) {
 					m_dBmPanMin = newMin;
 					m_dBmPanMax = newMax;
 
-					set->setdBmWBScaleMin(m_dBmPanMin);
-					set->setdBmWBScaleMax(m_dBmPanMax);
+					set->setWidebanddBmScaleMin(this, m_dBmPanMin);
+					set->setWidebanddBmScaleMax(this, m_dBmPanMax);
 				}
 				
 				m_mouseDownPos = pos;
@@ -1590,8 +1597,8 @@ void QGLWidebandPanel::mouseMoveEvent(QMouseEvent* event) {
 				if (m_dBmPanMin < MINDBM) m_dBmPanMin = MINDBM;
 				if (m_dBmPanMax > MAXDBM) m_dBmPanMax = MAXDBM;
 
-				set->setdBmWBScaleMin(m_dBmPanMin);
-				set->setdBmWBScaleMax(m_dBmPanMax);
+				set->setWidebanddBmScaleMin(this, m_dBmPanMin);
+				set->setWidebanddBmScaleMax(this, m_dBmPanMax);
 
 				m_mouseDownPos = pos;
 				m_dBmScaleUpdate = true;
@@ -1740,11 +1747,11 @@ void QGLWidebandPanel::timerEvent(QTimerEvent *) {
  
 //********************************************************************
  
-void QGLWidebandPanel::setFrequency(QObject *sender, bool value, int rx, long freq) {
+void QGLWidebandPanel::setFrequency(QObject *sender, int mode, int rx, long freq) {
 
-	Q_UNUSED(sender)
-	Q_UNUSED(value)
-	Q_UNUSED(rx)
+	Q_UNUSED (sender)
+	Q_UNUSED (mode)
+	Q_UNUSED (rx)
 	
 	m_frequency = freq;
 	m_freqScaleUpdate = true;
@@ -1903,22 +1910,26 @@ void QGLWidebandPanel::systemStateChanged(
 
 void QGLWidebandPanel::graphicModeChanged(
 	QObject *sender,
-	QSDRGraphics::_Panadapter panMode,
-	QSDRGraphics::_WfScheme colorScheme)
+	int rx,
+	PanGraphicsMode panMode,
+	WaterfallColorMode colorScheme)
 {
 	Q_UNUSED (sender)
+	//Q_UNUSED (rx)
+
+	if (rx != -1) return;
 
 	bool change = false;
 
-	if (m_panadapterMode != panMode) {
+	if (m_panMode != panMode) {
 		
-		m_panadapterMode = panMode;
+		m_panMode = panMode;
 		change = true;
 	}
 
-	if (m_waterColorScheme != colorScheme) {
+	if (m_waterfallMode != colorScheme) {
 
-		m_waterColorScheme = colorScheme;
+		m_waterfallMode = colorScheme;
 		change = true;
 	}
 
@@ -1997,7 +2008,9 @@ void QGLWidebandPanel::setPanadapterColors() {
 	update();
 }
 
-void QGLWidebandPanel::setPanGridStatus(bool value) {
+void QGLWidebandPanel::setPanGridStatus(bool value, int rx) {
+
+	Q_UNUSED (rx)
 
 	mutex.lock();
 

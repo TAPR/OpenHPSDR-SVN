@@ -63,17 +63,20 @@ public slots:
 	//void	setWidebandBuffers(int value);
 	
 private slots:
+	void setSampleRate(QObject *sender, int value);
 	void displayDataReceiverSocketError(QAbstractSocket::SocketError error);
 	void setManualSocketBufferSize(QObject *sender, bool value);
+	void setSocketBufferSize(QObject *sender, int value);
 	void readDeviceData();
 	
 private:
-	Settings		*set;
-	QUdpSocket		*m_dataIOSocket;
-	QMutex			m_mutex;
+	Settings*		set;
+	QUdpSocket*		m_dataIOSocket;
+	//QMutex			m_mutex;
 	QByteArray		m_commandDatagram;
 	QByteArray		m_datagram;
 	QByteArray		m_wbDatagram;
+	QByteArray		m_twoFramesDatagram;
 	QByteArray		m_metisGetDataSignature;
 	QByteArray		m_outDatagram;
 	QByteArray		m_deviceSendDataSignature;
@@ -81,7 +84,7 @@ private:
 
 	QTime			m_packetLossTime;
 
-	THPSDRParameter		*io;
+	THPSDRParameter*	io;
 	//TNetworkDevicecard 	netDevice;
 
 	bool	m_dataIOSocketOn;
@@ -103,6 +106,7 @@ private:
 	bool	m_sendEP4;
 	bool	m_manualBufferSize;
 	bool	m_packetsToggle;
+	bool	m_firstFrame;
 	
 	volatile bool	m_stopped;
 

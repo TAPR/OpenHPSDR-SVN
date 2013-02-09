@@ -122,60 +122,6 @@ struct s_glRGBA_uByte {
 	s_glRGBA_uByte(GLubyte red, GLubyte grn, GLubyte blu, GLubyte alpha) : r(red), g(grn), b(blu), a(alpha) {}
 };
 
- 
-//enum Region {
-//
-//	wideBandPanRegion,
-//	wideBandRulerRegion,
-//	freqScalePanadapterRegion,
-//	freqScaleDistancePanRegion,
-//	panadapterRegion,
-//	dBmScalePanadapterRegion,
-//	dBmScaleDistancePanRegion,
-//	dBmScaleWidebandPanRegion,
-//	waterfallRegion,
-//	distancePanRegion,
-//	filterRegion,
-//	filterRegionLow,
-//	filterRegionHigh,
-//	elsewhere
-//};
-
-//typedef struct _displayData {
-//
-//	QSize		size;
-//
-//	QRect		panRect;
-//	QRect		dBmScalePanRect;
-//	QRect		freqScalePanRect;
-//	QRect		distancePanRect;
-//	QRect		freqScaleDistancePanRect;
-//	QRect		dBmScaleDistancePanRect;
-//	QRect		waterfallRect;
-//	QRect		filterRect;
-//
-//	QVector<qreal>					panadapterBins;
-//	QVarLengthArray<TGL_ubyteRGBA>	waterfallPixel;
-//
-//	qreal		dBmPanMin;
-//	qreal		dBmPanMax;
-//	qreal		scaleMult;
-//	qreal		freqScaleZoomFactor;
-//	qreal		filterLowerFrequency;
-//	qreal		filterUpperFrequency;
-//
-//	long		frequency;
-//	int			receiver;
-//	bool		freqScalePanadapterUpdate;
-//	bool		freqScalePanadapterRenew;
-//	bool		dBmScalePanadapterUpdate;
-//	bool		dBmScalePanadapterRenew;
-//	bool		panGridUpdate;
-//	bool		panGridRenew;
-//	bool		waterfallUpdate;
-//
-//} TDisplayData;
-
 typedef struct _widebandDisplayData {
 
 	QSize		size;
@@ -812,6 +758,56 @@ inline void drawGLRect(const QRect &rect, const QColor &color1, const QColor &co
 	glColorPointer(4, GL_UNSIGNED_BYTE, 0, vertexColors);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+inline void drawGLTriangleLeft(const QRect &rect, const QColor &color, float z) {
+
+	if (rect.isEmpty()) return;
+
+	GLint x1 = rect.left();
+	GLint x2 = rect.left() + rect.width();
+	GLint y1 = rect.top() + rect.height()/2;
+	GLint y2 = rect.top();
+	GLint y3 = rect.top() + rect.height();
+
+	TGL3float vertexArray[3] =
+		{
+			{(GLfloat)x1, (GLfloat)y1, z},
+			{(GLfloat)x2, (GLfloat)y2, z},
+			{(GLfloat)x2, (GLfloat)y3, z}
+		};
+
+	glColor4ub(color.red(), color.green(), color.blue(), color.alpha());
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, vertexArray);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+inline void drawGLTriangleRight(const QRect &rect, const QColor &color, float z) {
+
+	if (rect.isEmpty()) return;
+
+	GLint x1 = rect.left();
+	GLint x2 = rect.left() + rect.width();
+	GLint y1 = rect.top();
+	GLint y2 = y1 + rect.height();
+	GLint y3 = y1 + rect.height()/2;
+
+	TGL3float vertexArray[3] =
+		{
+			{(GLfloat)x1, (GLfloat)y1, z},
+			{(GLfloat)x2, (GLfloat)y3, z},
+			{(GLfloat)x1, (GLfloat)y2, z}
+		};
+
+	glColor4ub(color.red(), color.green(), color.blue(), color.alpha());
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, vertexArray);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 

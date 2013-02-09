@@ -52,6 +52,14 @@ Settings::Settings(QObject *parent)
 {
 	m_devices.mercuryFWVersion = 0;
 
+	qRegisterMetaType<QSDR::_Error>();
+	qRegisterMetaType<QSDR::_DataEngineState>();
+	qRegisterMetaType<QSDR::_ServerMode>();
+	qRegisterMetaType<QSDR::_HWInterfaceMode>();
+	qRegisterMetaType<HamBand>();
+	qRegisterMetaType<DSPMode>();
+	qRegisterMetaType<AGCMode>();
+	qRegisterMetaType<TDefaultFilterMode>();
 	qRegisterMetaType<TNetworkDevicecard>();
 	qRegisterMetaType<QList<TNetworkDevicecard> >();
 	qRegisterMetaType<qVectorFloat>("qVectorFloat");
@@ -70,10 +78,11 @@ Settings::Settings(QObject *parent)
 		m_titleString = "cuSDR64 Debug BETA ";
 	#endif
 
-	m_versionString = "v0.3.2.4";
+	m_versionString = "v0.3.2.13";
 	
 	qDebug() << qPrintable(m_titleString);
 
+	// receiver data
 	for (int i = 0; i < MAX_RECEIVERS; i++) {
 
 		TReceiver receiverData;
@@ -87,6 +96,7 @@ Settings::Settings(QObject *parent)
 		m_rxStringList << str;
 
 		m_receiverDataList[i].agcHangThreshold = 0.0;
+		m_receiverDataList[i].peakHold = false;
 
 		for (int j = 0; j < MAX_BANDS; j++) {
 
@@ -145,51 +155,7 @@ Settings::Settings(QObject *parent)
 	m_defaultFilterList = getDefaultFilterFrequencies();
 
 	m_transmitter.txAllowed = false;
-
-	//m_packetLossTimer = new QTimer(this);
-	//m_packetLossTimer->setSingleShot(true);
-	//m_packetLossTime.start();
-
-	//// ****************************
-	//// check for OpenCL devices
-	//m_clDevices = QCLDevice::allDevices();
-	//if (m_clDevices.length() == 0) {
-	//
-	//	SETTINGS_DEBUG << "Init:: no OpenCL devices found!\n";
-	//}
-	//else {
-
-	//	SETTINGS_DEBUG << "found" << m_clDevices.length() << "OpenCL device(s).";
-	//	QString clNo = QString::number(m_clDevices.length());
-	//}
-
-	/*
-	CPX x, y, z;
-
-	x.resize(2);
-	y.resize(2);
-	z.resize(2);
-
-	x[0].re = 1.0f; x[0].im = 2.0f;
-	x[1].re = 0.0f; x[1].im = 1.0f;
-	y[0].re = 2.0f; y[0].im = 2.0f;
-	y[1].re = 2.0f; y[1].im = 3.0f;
-
-	qDebug() << "x1 = (" << x.at(0).re << "," << x.at(0).im << ")";
-	qDebug() << "x2 = (" << x.at(1).re << "," << x.at(1).im << ")";
-	qDebug() << "y1 = (" << y.at(0).re << "," << y.at(0).im << ")";
-	qDebug() << "y2 = (" << y.at(1).re << "," << y.at(1).im << ")";
-
-	PlusCPX(x, y, z);
-
-	qDebug() << "z1 = (" << z.at(0).re << "," << z.at(0).im << ")";
-	qDebug() << "z2 = (" << z.at(1).re << "," << z.at(1).im << ")";
-
-	PlusCPX(z, x, y);
-
-	qDebug() << "y1 = (" << y.at(0).re << "," << y.at(0).im << ")";
-	qDebug() << "y2 = (" << y.at(1).re << "," << y.at(1).im << ")";
-	*/
+	m_fft = 1;
 }
 
 Settings::~Settings() {
@@ -292,6 +258,7 @@ int Settings::loadSettings() {
 	else
 		m_devices.alexPresence = false;
 
+
 //	str = settings->value("hpsdr/hermes", "false").toString();
 //	if (str == "true")
 //		m_devices.hermesPresence = true;
@@ -311,10 +278,16 @@ int Settings::loadSettings() {
 		m_hwInterface = QSDR::Hermes;
 	}
 
+	str = settings->value("hpsdr/checkfw", "true").toString();
+	if (str == "true")
+		m_checkFirmwareVersions = true;
+	else
+		m_checkFirmwareVersions = false;
+
 	//checkHPSDRDevices();
 
 	value = settings->value("server/sample_rate", 48000).toInt();
-	if ((value != 48000) & (value != 96000) & (value != 192000)) value = 48000;
+	if ((value != 48000) & (value != 96000) & (value != 192000) & (value != 384000)) value = 48000;
 	setSampleRate(this, value);
 
 	str = settings->value("server/dither", "off").toString();
@@ -328,22 +301,6 @@ int Settings::loadSettings() {
 		m_mercuryRandom = 1;
 	else
 		m_mercuryRandom = 0;
-
-	str = settings->value("server/widebandData", "on").toString();
-	if (str.toLower() == "on")
-		m_wideBandData = true;
-	else if (str.toLower() == "off")
-		m_wideBandData = false;
-	else
-		m_wideBandData = true;
-
-	str = settings->value("server/widebandDisplay", "off").toString();
-	if (str.toLower() == "on")
-		m_wideBandDisplayStatus = true;
-	else
-		m_wideBandDisplayStatus = false;
-
-	if (!m_wideBandData) m_wideBandDisplayStatus = false;
 
 	str = settings->value("server/10mhzsource", "mercury").toString();
 	if (str == "atlas")
@@ -681,6 +638,55 @@ int Settings::loadSettings() {
 	}
 
 	//******************************************************************
+	// wideband settings
+
+	str = settings->value("wideband/widebandData", "on").toString();
+	if (str.toLower() == "on")
+		m_widebandOptions.wideBandData = true;
+	else if (str.toLower() == "off")
+		m_widebandOptions.wideBandData = false;
+	else
+		m_widebandOptions.wideBandData = true;
+
+	str = settings->value("wideband/widebandDisplay", "off").toString();
+	if (str.toLower() == "on")
+		m_widebandOptions.wideBandDisplayStatus = true;
+	else if (str.toLower() == "off")
+		m_widebandOptions.wideBandDisplayStatus = false;
+	else
+		m_widebandOptions.wideBandDisplayStatus = false;
+
+	if (!m_widebandOptions.wideBandData) m_widebandOptions.wideBandDisplayStatus = false;
+
+	str = settings->value("wideband/averaging", "on").toString();
+	if (str.toLower() == "on")
+		m_widebandOptions.averaging = true;
+	else if (str.toLower() == "off")
+		m_widebandOptions.averaging = false;
+	else
+		m_widebandOptions.averaging = true;
+
+	value = settings->value("wideband/averagingCnt", 5).toInt();
+	if ((value < 1) || (value > 100)) value = 5;
+	m_widebandOptions.averagingCnt = value;
+
+	value = settings->value("wideband/dBmWideBandScaleMin", -140).toInt();
+	if ((value < -200) || (value > 0)) value = -140;
+	m_widebandOptions.dBmWBScaleMin = (qreal)(1.0 * value);
+
+	value = settings->value("wideband/dBmWideBandScaleMax", -10).toInt();
+	if ((value < -100) || (value > 0)) value = -10;
+	m_widebandOptions.dBmWBScaleMax = (qreal)(1.0 * value);
+		
+	str = settings->value("wideband/panMode", "LINE").toString();
+	if (str == "LINE")
+		m_widebandOptions.panMode = Line;
+	else if (str == "FILLEDLINE")
+		m_widebandOptions.panMode = FilledLine;
+	else if (str == "SOLID")
+		m_widebandOptions.panMode = Solid;
+
+	//******************************************************************
 	// receiver data settings
 
 	for (int i = 0; i < MAX_RECEIVERS; i++) {
@@ -695,6 +701,14 @@ int Settings::loadSettings() {
 			setSpectrumSize(this, 4096);
 			//SETTINGS_DEBUG << "DSP core for rx " << i << " is QtDSP.";
 		}
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/freqRulerPosition");
+
+		value = settings->value(cstr, 5).toInt();
+		if (value < 0) value = 0;
+		if (value > 10) value = 10;
+		m_receiverDataList[i].freqRulerPosition = value/10.0f;
 
 		cstr = m_rxStringList.at(i);
 		cstr.append("/audioVolume");
@@ -798,11 +812,25 @@ int Settings::loadSettings() {
 		else
 			m_receiverDataList[i].hangEnabled = true;
 
-//		cstr = m_rxStringList.at(i);
-//		cstr.append("/waterfallTime");
-//		value = settings->value(cstr, 50).toInt();
-//		if ((value < 20) || (value > 250)) value = 50;
-//		m_receiverDataList[i].waterfallTime = value;
+		cstr = m_rxStringList.at(i);
+		cstr.append("/panMode");
+
+		str = settings->value(cstr, "LINE").toString();
+		if (str == "LINE")
+			m_receiverDataList[i].panMode = Line;
+		else if (str == "FILLEDLINE")
+			m_receiverDataList[i].panMode = FilledLine;
+		else if (str == "SOLID")
+			m_receiverDataList[i].panMode = Solid;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/waterfallMode");
+
+		str = settings->value(cstr, "ENHANCED").toString();
+		if (str == "SIMPLE")
+			m_receiverDataList[i].waterfallMode = Simple;
+		else if (str == "ENHANCED")
+			m_receiverDataList[i].waterfallMode = Enhanced;
 
 		cstr = m_rxStringList.at(i);
 		cstr.append("/framesPerSecond");
@@ -835,84 +863,211 @@ int Settings::loadSettings() {
 		m_receiverDataList[i].filterLo = (qreal)(1.0f * value);
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency160m");
-		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 1800000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		cstr.append("/averaging");
+		str = settings->value(cstr, "on").toString();
+		if (str.toLower() == "on")
+			m_receiverDataList[i].spectrumAveraging = true;
+		else
+			m_receiverDataList[i].spectrumAveraging = false;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency80m");
-		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 3779000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		cstr.append("/averagingCnt");
+		value = settings->value(cstr, 5).toInt();
+		if ((value < 1) || (value > 100)) value = 5;
+		m_receiverDataList[i].averagingCnt = value;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency60m");
-		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 5260000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		cstr.append("/grid");
+		str = settings->value(cstr, "on").toString();
+		if (str.toLower() == "on")
+			m_receiverDataList[i].panGrid = true;
+		else
+			m_receiverDataList[i].panGrid = false;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency40m");
-		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 7000000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		cstr.append("/hairCross");
+		str = settings->value(cstr, "off").toString();
+		if (str.toLower() == "on")
+			m_receiverDataList[i].hairCross = true;
+		else
+			m_receiverDataList[i].hairCross = false;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency30m");
-		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 10100000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		cstr.append("/panLocked");
+		str = settings->value(cstr, "off").toString();
+		if (str.toLower() == "on")
+			m_receiverDataList[i].panLocked = true;
+		else
+			m_receiverDataList[i].panLocked = false;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency20m");
-		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 14000000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		cstr.append("/clickVFO");
+		str = settings->value(cstr, "off").toString();
+		if (str.toLower() == "on")
+			m_receiverDataList[i].clickVFO = true;
+		else
+			m_receiverDataList[i].clickVFO = false;
+		
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastCenterFrequency160m");
+		value = settings->value(cstr, 1810000).toDouble();
+		if ((value < 1810000) || (value > 2000000)) value = 1810000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency17m");
+		cstr.append("/lastVfoFrequency160m");
 		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 18068000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		if ((value < 1810000) || (value > 2000000)) value = 1810000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency15m");
-		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 21000000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		cstr.append("/lastCenterFrequency80m");
+		value = settings->value(cstr, 3500000).toDouble();
+		if ((value < 3500000) || (value > 3800000)) value = 3500000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency12m");
-		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 24890000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		cstr.append("/lastVfoFrequency80m");
+		value = settings->value(cstr, 3500000).toDouble();
+		if ((value < 3500000) || (value > 3800000)) value = 3500000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency10m");
-		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 28000000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		cstr.append("/lastCenterFrequency60m");
+		value = settings->value(cstr, 5260000).toDouble();
+		if ((value < 5260000) || (value > 5410000)) value = 5260000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequency6m");
-		value = settings->value(cstr, 1800000).toDouble();
-		if ((value < 1800000) || (value > 50000000)) value = 50000000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		cstr.append("/lastVfoFrequency60m");
+		value = settings->value(cstr, 5260000).toDouble();
+		if ((value < 5260000) || (value > 5410000)) value = 5260000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/lastFrequencyGen");
+		cstr.append("/lastCenterFrequency40m");
+		value = settings->value(cstr, 7000000).toDouble();
+		if ((value < 7000000) || (value > 7200000)) value = 7000000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastVfoFrequency40m");
+		value = settings->value(cstr, 7000000).toDouble();
+		if ((value < 7000000) || (value > 7200000)) value = 7000000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastCenterFrequency30m");
+		value = settings->value(cstr, 10100000).toDouble();
+		if ((value < 10100000) || (value > 10150000)) value = 10100000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastVfoFrequency30m");
+		value = settings->value(cstr, 10100000).toDouble();
+		if ((value < 10100000) || (value > 10150000)) value = 10100000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastCenterFrequency20m");
+		value = settings->value(cstr, 14000000).toDouble();
+		if ((value < 14000000) || (value > 14350000)) value = 14000000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastVfoFrequency20m");
+		value = settings->value(cstr, 14000000).toDouble();
+		if ((value < 14000000) || (value > 14350000)) value = 14000000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastCenterFrequency17m");
+		value = settings->value(cstr, 18068000).toDouble();
+		if ((value < 18068000) || (value > 18168000)) value = 18068000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastVfoFrequency17m");
+		value = settings->value(cstr, 18068000).toDouble();
+		if ((value < 18068000) || (value > 18168000)) value = 18068000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastCenterFrequency15m");
+		value = settings->value(cstr, 21000000).toDouble();
+		if ((value < 21000000) || (value > 21450000)) value = 21000000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastVfoFrequency15m");
+		value = settings->value(cstr, 21000000).toDouble();
+		if ((value < 21000000) || (value > 21450000)) value = 21000000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastCenterFrequency12m");
+		value = settings->value(cstr, 24890000).toDouble();
+		if ((value < 24890000) || (value > 24990000)) value = 24890000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastVfoFrequency12m");
+		value = settings->value(cstr, 24890000).toDouble();
+		if ((value < 24890000) || (value > 24990000)) value = 24890000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastCenterFrequency10m");
+		value = settings->value(cstr, 28000000).toDouble();
+		if ((value < 28000000) || (value > 29700000)) value = 28000000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastVfoFrequency10m");
+		value = settings->value(cstr, 28000000).toDouble();
+		if ((value < 28000000) || (value > 29700000)) value = 28000000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastCenterFrequency6m");
+		value = settings->value(cstr, 50000000).toDouble();
+		if ((value < 50000000) || (value > 54000000)) value = 50000000;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastVfoFrequency6m");
+		value = settings->value(cstr, 50000000).toDouble();
+		if ((value < 50000000) || (value > 54000000)) value = 50000000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/lastCenterFrequencyGen");
 		value = settings->value(cstr, 1800000).toDouble();
 		if ((value < 0) || (value > 50000000)) value = 3500000;
-		m_receiverDataList[i].lastFrequencyList << value;
+		m_receiverDataList[i].lastCenterFrequencyList << value;
 
 		cstr = m_rxStringList.at(i);
-		cstr.append("/frequency");
+		cstr.append("/lastVfoFrequencyGen");
+		value = settings->value(cstr, 1800000).toDouble();
+		if ((value < 0) || (value > 61440000)) value = 1800000;
+		m_receiverDataList[i].lastVfoFrequencyList << value;
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/centerFrequency");
+		value = settings->value(cstr, 3672000).toDouble();
+		if ((value < 0) || (value > 61440000)) value = 1800000;
+		m_receiverDataList[i].ctrFrequency = value;
+
+		setCtrFrequency(i, value);
+
+		cstr = m_rxStringList.at(i);
+		cstr.append("/vfoFrequency");
 		value = settings->value(cstr, 3672000).toDouble();
 		if ((value < 0) || (value > 50000000)) value = 3600000;
-		m_receiverDataList[i].frequency = value;
+		m_receiverDataList[i].vfoFrequency = value;
 
-		setFrequency(i, value);
+		setVfoFrequency(i, value);
+		
 
 		if (m_receiverDataList[i].dspModeList.length() == MAX_BANDS && m_bandList.length() == MAX_BANDS) {
 
@@ -1039,51 +1194,9 @@ int Settings::loadSettings() {
 	if (value < 10000 || value > 10000) value = 2500;
 	m_chirpFilterUpperFrequency = value;
 
-	/*value = settings->value("ChirpWSPR/chirpDownSampleRate", 4).toInt();
-	if ((value != 4) & (value != 8)) return -1;
-	m_chirpDownSampleRate = value;*/
-
-
 	//******************************************************************
 	// graphics settings
-	str = settings->value("graphics/panadapter", "filledline").toString();
-	if (str == "filledline")
-		m_panadapterMode = QSDRGraphics::FilledLine;
-	else
-	if (str == "line")
-		m_panadapterMode = QSDRGraphics::Line;
-	else
-	if (str == "solid")
-		m_panadapterMode = QSDRGraphics::Solid;
-
-	str = settings->value("graphics/averaging", "on").toString();
-	if (str.toLower() == "on")
-		m_specAveraging = true;
-	else
-		m_specAveraging = false;
-
-	value = settings->value("graphics/averagingCnt", 5).toInt();
-	if ((value < 1) || (value > 100)) value = 5;
-	m_specAveragingCnt = value;
-
-	str = settings->value("graphics/grid", "on").toString();
-	if (str.toLower() == "on")
-		m_panGrid = true;
-	else
-		m_panGrid = false;
-
-	value = settings->value("graphics/resolution", 2).toInt();
-	if ((value != 1) & (value != 2) & (value != 4)) value = 2;
-	m_graphicResolution = value;
-
-	value = settings->value("graphics/dBmWideBandScaleMin", -140).toInt();
-	if ((value < -200) || (value > 0)) value = -140;
-	m_dBmWBScaleMin = (qreal)(1.0 * value);
-
-	value = settings->value("graphics/dBmWideBandScaleMax", -10).toInt();
-	if ((value < -100) || (value > 0)) value = -10;
-	m_dBmWBScaleMax = (qreal)(1.0 * value);
-
+		
 	value = settings->value("graphics/dBmDistScaleMin", -20).toInt();
 	if ((value < -200) || (value > 0)) value = -20;
 	m_dBmDistScaleMin = (qreal)(1.0 * value);
@@ -1091,15 +1204,6 @@ int Settings::loadSettings() {
 	value = settings->value("graphics/dBmDistScaleMax", 100).toInt();
 	if ((value < -100) || (value > 200)) value = 100;
 	m_dBmDistScaleMax = (qreal)(1.0 * value);
-
-	str = settings->value("graphics/waterfall", "enhanced").toString();
-	if (str == "simple")
-		m_waterfallColorScheme = QSDRGraphics::simple;
-	else
-	if (str == "enhanced")
-		m_waterfallColorScheme = QSDRGraphics::enhanced;
-	else
-		m_waterfallColorScheme = QSDRGraphics::spectran;
 
 	value = settings->value("graphics/sMeterHoldTime", 2000).toInt();
 	if ((value < 0) || (value > 10000)) value = 2000;
@@ -1258,6 +1362,7 @@ int Settings::saveSettings() {
 	else
 		settings->setValue("hpsdr/alex", "false");
 
+
 //	if (m_devices.hermesPresence)
 //		settings->setValue("hpsdr/hermes", "true");
 //	else
@@ -1286,6 +1391,12 @@ int Settings::saveSettings() {
 			break;
 	}
 
+	if (m_checkFirmwareVersions)
+		settings->setValue("hpsdr/checkfw", "true");
+	else
+		settings->setValue("hpsdr/checkfw", "false");
+
+
 	// server settings
 	settings->setValue("server/sample_rate", getSampleRate());
 
@@ -1298,18 +1409,6 @@ int Settings::saveSettings() {
 		settings->setValue("server/random", "on");
 	else
 		settings->setValue("server/random", "off");
-
-	if (m_wideBandData)
-		settings->setValue("server/widebandData", "on");
-	else
-		settings->setValue("server/widebandData", "off");
-
-	if (!m_wideBandData) m_wideBandDisplayStatus = false;
-
-	if (m_wideBandDisplayStatus)
-		settings->setValue("server/widebandDisplay", "on");
-	else
-		settings->setValue("server/widebandDisplay", "off");
 
 	if (m_10MHzSource == 0)
 		settings->setValue("server/10mhzsource", "atlas");
@@ -1527,6 +1626,37 @@ int Settings::saveSettings() {
 		}
 	}
 
+	//******************************************************************
+	// wideband settings
+
+	if (m_widebandOptions.wideBandData)
+		settings->setValue("wideband/widebandData", "on");
+	else
+		settings->setValue("wideband/widebandData", "off");
+
+	if (!m_widebandOptions.wideBandData) m_widebandOptions.wideBandDisplayStatus = false;
+
+	if (m_widebandOptions.wideBandDisplayStatus)
+		settings->setValue("wideband/widebandDisplay", "on");
+	else
+		settings->setValue("wideband/widebandDisplay", "off");
+
+	if (m_widebandOptions.averaging)
+		settings->setValue("wideband/averaging", "on");
+	else
+		settings->setValue("wideband/averaging", "off");
+
+	settings->setValue("wideband/averagingCnt", m_widebandOptions.averagingCnt);
+	settings->setValue("wideband/dBmWideBandScaleMin", (int)m_widebandOptions.dBmWBScaleMin);
+	settings->setValue("wideband/dBmWideBandScaleMax", (int)m_widebandOptions.dBmWBScaleMax);
+
+	if (m_widebandOptions.panMode == Line)
+		settings->setValue("wideband/panMode", "LINE");
+	else if (m_widebandOptions.panMode == FilledLine)
+		settings->setValue("wideband/panMode", "FILLEDLINE");
+	else if (m_widebandOptions.panMode == Solid)
+		settings->setValue("wideband/panMode", "SOLID");
+
 
 	//******************************************************************
 	// receiver data settings
@@ -1540,6 +1670,10 @@ int Settings::saveSettings() {
 			settings->setValue(str, "qtdsp");
 		//else
 		//	settings->setValue(str, "dttsp");
+
+		str = m_rxStringList.at(i);
+		str.append("/freqRulerPosition");
+		settings->setValue(str, (int)(m_receiverDataList[i].freqRulerPosition * 10));
 
 		str = m_rxStringList.at(i);
 		str.append("/audioVolume");
@@ -1607,11 +1741,24 @@ int Settings::saveSettings() {
 			settings->setValue(str, "MED");
 		else if (m_receiverDataList[i].agcMode == agcFAST)
 			settings->setValue(str, "FAST");
+				
+		str = m_rxStringList.at(i);
+		str.append("/panMode");
 
+		if (m_receiverDataList[i].panMode == Line)
+			settings->setValue(str, "LINE");
+		else if (m_receiverDataList[i].panMode == FilledLine)
+			settings->setValue(str, "FILLEDLINE");
+		else if (m_receiverDataList[i].panMode == Solid)
+			settings->setValue(str, "SOLID");
 
-		//str = m_rxStringList.at(i);
-		//str.append("/waterfallTime");
-		//settings->setValue(str, m_receiverDataList[i].waterfallTime);
+		str = m_rxStringList.at(i);
+		str.append("/waterfallMode");
+
+		if (m_receiverDataList[i].waterfallMode == Simple)
+			settings->setValue(str, "SIMPLE");
+		else if (m_receiverDataList[i].waterfallMode == Enhanced)
+			settings->setValue(str, "ENHANCED");
 
 		str = m_rxStringList.at(i);
 		str.append("/framesPerSecond");
@@ -1633,19 +1780,72 @@ int Settings::saveSettings() {
 		str.append("/filterLo");
 		settings->setValue(str, m_receiverDataList[i].filterLo);
 
-		// frequencies
+		str = m_rxStringList.at(i);
+		str.append("/averaging");
+		if (m_receiverDataList[i].spectrumAveraging)
+			settings->setValue(str, "on");
+		else
+			settings->setValue(str, "off");
+
+		str = m_rxStringList.at(i);
+		str.append("/averagingCnt");
+		settings->setValue(str, m_receiverDataList[i].averagingCnt);
+
+		str = m_rxStringList.at(i);
+		str.append("/grid");
+		if (m_receiverDataList[i].panGrid)
+			settings->setValue(str, "on");
+		else
+			settings->setValue(str, "off");
+
+		str = m_rxStringList.at(i);
+		str.append("/hairCross");
+		if (m_receiverDataList[i].hairCross)
+			settings->setValue(str, "on");
+		else
+			settings->setValue(str, "off");
+
+		str = m_rxStringList.at(i);
+		str.append("/panLocked");
+		if (m_receiverDataList[i].panLocked)
+			settings->setValue(str, "on");
+		else
+			settings->setValue(str, "off");
+
+		str = m_rxStringList.at(i);
+		str.append("/clickVFO");
+		if (m_receiverDataList[i].clickVFO)
+			settings->setValue(str, "on");
+		else
+			settings->setValue(str, "off");
+
+		// center frequencies
 		for (int j = 0; j < MAX_BANDS; j++) {
 
 			str = m_rxStringList.at(i);
-			str.append("/lastFrequency");
+			str.append("/lastCenterFrequency");
 			str.append(m_bandList.at(j).bandString);
 
-			settings->setValue(str, (int)m_receiverDataList[i].lastFrequencyList.at(j));
+			settings->setValue(str, (int)m_receiverDataList[i].lastCenterFrequencyList.at(j));
+		}
+
+		// vfo frequencies
+		for (int j = 0; j < MAX_BANDS; j++) {
+
+			str = m_rxStringList.at(i);
+			str.append("/lastVfoFrequency");
+			str.append(m_bandList.at(j).bandString);
+
+			settings->setValue(str, (int)m_receiverDataList[i].lastVfoFrequencyList.at(j));
 		}
 
 		str = m_rxStringList.at(i);
-		str.append("/frequency");
-		settings->setValue(str, (int)m_receiverDataList[i].frequency);
+		str.append("/centerFrequency");
+		settings->setValue(str, (int)m_receiverDataList[i].ctrFrequency);
+
+		str = m_rxStringList.at(i);
+		str.append("/vfoFrequency");
+		settings->setValue(str, (int)m_receiverDataList[i].vfoFrequency);
 
 		for (int j = 0; j < MAX_BANDS; j++) {
 
@@ -1732,41 +1932,28 @@ int Settings::saveSettings() {
 
 	//******************************************************************
 	// Graphics settings
-	if (m_panadapterMode == QSDRGraphics::FilledLine)
-		settings->setValue("graphics/panadapter", "filledline");
-	else if (m_panadapterMode == QSDRGraphics::Line)
-		settings->setValue("graphics/panadapter", "line");
-	else if (m_panadapterMode == QSDRGraphics::Solid)
-		settings->setValue("graphics/panadapter", "solid");
 
-	if (m_specAveraging)
+	/*if (m_specAveraging)
 		settings->setValue("graphics/averaging", "on");
 	else
-		settings->setValue("graphics/averaging", "off");
+		settings->setValue("graphics/averaging", "off");*/
 
-	settings->setValue("graphics/averagingCnt", m_specAveragingCnt);
-
-	if (m_panGrid)
+	/*if (m_panGrid)
 		settings->setValue("graphics/grid", "on");
 	else
-		settings->setValue("graphics/grid", "off");
+		settings->setValue("graphics/grid", "off");*/
 
-	//settings->setValue("graphics/framesPerSecond", m_framesPerSecond);
-	settings->setValue("graphics/resolution", m_graphicResolution);
-
-	settings->setValue("graphics/dBmWideBandScaleMin", (int)m_dBmWBScaleMin);
-	settings->setValue("graphics/dBmWideBandScaleMax", (int)m_dBmWBScaleMax);
 	settings->setValue("graphics/dBmDistScaleMin", (int)m_dBmDistScaleMin);
 	settings->setValue("graphics/dBmDistScaleMax", (int)m_dBmDistScaleMax);
 
-	if (m_waterfallColorScheme == QSDRGraphics::simple)
+	/*if (m_waterfallColorScheme == QSDRGraphics::simple)
 		settings->setValue("graphics/waterfall", "simple");
 	else
 	if (m_waterfallColorScheme == QSDRGraphics::enhanced)
 		settings->setValue("graphics/waterfall", "enhanced");
 	else
 	if (m_waterfallColorScheme == QSDRGraphics::spectran)
-		settings->setValue("graphics/waterfall", "spectran");
+		settings->setValue("graphics/waterfall", "spectran");*/
 
 	settings->setValue("graphics/sMeterHoldTime", m_sMeterHoldTime);
 
@@ -1791,14 +1978,30 @@ int Settings::saveSettings() {
 	return 0;
 }
 
+//void Settings::setMainWindowsState(QObject* sender) {
+//
+//	settings->setValue("geometry", sender.saveGeometry());
+//	settings->setValue("windowState", saveState());
+//}
+
 //*******************************************************
 
-QList<long> Settings::getFrequencies() {
+QList<long> Settings::getCtrFrequencies() {
 
 	QList<long> frequencies;
 
 	for (int i = 0; i < MAX_RECEIVERS; i++)
-		frequencies << m_receiverDataList[i].frequency;
+		frequencies << m_receiverDataList[i].ctrFrequency;
+
+	return frequencies;
+}
+
+QList<long> Settings::getVfoFrequencies() {
+
+	QList<long> frequencies;
+
+	for (int i = 0; i < MAX_RECEIVERS; i++)
+		frequencies << m_receiverDataList[i].vfoFrequency;
 
 	return frequencies;
 }
@@ -2099,6 +2302,11 @@ bool Settings::getMainPower() {
 	return m_mainPower;
 }
 
+void Settings::setSystemMessage(const QString &msg, int time) {
+
+	emit systemMessageEvent(msg, time);
+}
+
 void Settings::setSystemState(
 
 	QObject *sender,
@@ -2107,7 +2315,7 @@ void Settings::setSystemState(
 	QSDR::_ServerMode mode,
 	QSDR::_DataEngineState state)
 {
-	//Q_UNUSED (sender)
+	Q_UNUSED (sender)
 
 	//QMutexLocker locker(&settingsMutex);
 
@@ -2122,7 +2330,7 @@ void Settings::setSystemState(
 		m_serverMode = mode;
 
 		if (m_serverMode == QSDR::ChirpWSPR)
-			setWideBandStatus(false);
+			setWidebandStatus(this, false);
 	}
 
 	if (m_dataEngineState != state)
@@ -2294,43 +2502,39 @@ bool Settings::getTxAllowed() {
 
 void Settings::setGraphicsState(
 
-	QObject *sender, 
-	QSDRGraphics::_Panadapter panMode,
-	QSDRGraphics::_WfScheme waterColorScheme)
+	QObject *sender,
+	int rx,
+	PanGraphicsMode panMode,
+	WaterfallColorMode waterfallColorMode)
 {
 	Q_UNUSED (sender)
 
-	bool change = false;
 	//QMutexLocker locker(&settingsMutex);
 
-	if (m_panadapterMode != panMode) {
+	if (rx == -1) {
 
-		m_panadapterMode = panMode;
-		change = true;
+		m_widebandOptions.panMode = panMode;
 	}
-
-	if (m_waterfallColorScheme != waterColorScheme) {
-
-		m_waterfallColorScheme = waterColorScheme;
-		change = true;
+	else {
+		
+		m_receiverDataList[rx].panMode = panMode;
+		m_receiverDataList[rx].waterfallMode = waterfallColorMode;
 	}
-
-	if (!change) return;
-
+	
 	//locker.unlock();
 
-	SETTINGS_DEBUG << "graphics mode:" << m_panadapterMode << m_waterfallColorScheme;
-	emit graphicModeChanged(this, m_panadapterMode, m_waterfallColorScheme);
+	//SETTINGS_DEBUG << "graphics mode:" << panMode << waterfallColorMode;
+	emit graphicModeChanged(this, rx, panMode, waterfallColorMode);
 }
 
-QSDRGraphics::_Panadapter Settings::getPanadapterMode()	{
+PanGraphicsMode Settings::getPanadapterMode(int rx)	{
 
-	return m_panadapterMode;
+	return m_receiverDataList[rx].panMode;
 }
 
-QSDRGraphics::_WfScheme	Settings::getWaterfallColorScheme()	{
+WaterfallColorMode	Settings::getWaterfallColorMode(int rx)	{
 
-	return m_waterfallColorScheme;
+	return m_receiverDataList.at(rx).waterfallMode;
 }
 
 //QSDRGraphics::_Colors Settings::getColorItem() {
@@ -2519,10 +2723,10 @@ void Settings::setServerNetworkInterface(int index) {
 	//qDebug() << "m_ipAddressesList.at(index).toString():" << m_ipAddressesList.at(index).toString();
 	
 	QString message = "[settings]: network interface set to: %1 (%2)."; 
-	emit messageEvent(
+	/*emit messageEvent(
 		message.arg(
 			m_networkInterfaces.at(index).humanReadableName(),
-			m_ipAddressesList.at(index).toString() ));
+			m_ipAddressesList.at(index).toString() ));*/
 	
 }
 
@@ -2531,10 +2735,10 @@ void Settings::setHPSDRDeviceNIC(int index) {
 	setHPSDRDeviceLocalAddr(this, this->m_ipAddressesList.at(index).toString());
 
 	QString message = "[settings]: HPSDR device network interface set to: %1 (%2)."; 
-	emit messageEvent(
+	/*emit messageEvent(
 		message.arg(
 			m_networkInterfaces.at(index).humanReadableName(),
-			m_ipAddressesList.at(index).toString() ));
+			m_ipAddressesList.at(index).toString() ));*/
 	
 }
 
@@ -2703,12 +2907,14 @@ void Settings::setRxConnectedStatus(QObject* sender, int rx, bool value) {
 void Settings::setSocketBufferSize(QObject *sender, int value) {
 
 	m_socketBufferSize = value;
+	//SETTINGS_DEBUG << "m_socketBufferSize = " << value;
 	emit socketBufferSizeChanged(sender, value);
 }
 
 void Settings::setManualSocketBufferSize(QObject *sender, bool value) {
 
 	m_manualSocketBufferSize = value;
+	//SETTINGS_DEBUG << "m_manualSocketBufferSize = " << value;
 	emit manualSocketBufferChanged(sender, m_manualSocketBufferSize);
 }
  
@@ -2723,6 +2929,8 @@ THPSDRDevices Settings::getHPSDRDevices() {
 
 void Settings::setHPSDRDevices(QObject *sender, THPSDRDevices devices) {
 
+	Q_UNUSED(sender)
+	Q_UNUSED(devices)
 }
 
 void Settings::checkHPSDRDevices() {
@@ -2846,7 +3054,6 @@ void Settings::setExcaliburPresence(bool value) {
 	emit excaliburPresenceChanged(m_devices.excaliburPresence);
 }
 
-
 void Settings::setMetisVersion(int value) {
 
 	QMutexLocker locker(&settingsMutex);
@@ -2854,6 +3061,13 @@ void Settings::setMetisVersion(int value) {
 	locker.unlock();
 
 	emit metisVersionChanged(m_devices.metisFWVersion);
+}
+
+void Settings::setCheckFirmwareVersion(QObject *sender, bool value) {
+
+	m_checkFirmwareVersions = value;
+
+	emit checkFirmwareVersionChanged(sender, value);
 }
 
 void Settings::setProtocolSync(int value) {
@@ -2901,17 +3115,6 @@ void Settings::setReceivers(QObject *sender, int value) {
 	emit numberOfRXChanged(sender, value);
 }
 
-void Settings::setCoupledReceivers(QObject *sender, int value) {
-
-	if (value == 0)
-		m_frequencyRx1onRx2 = false;
-	else
-	if (value == 12)
-		m_frequencyRx1onRx2 = true;
-
-	emit coupledRxChanged(sender, value);
-}
-
 //void Settings::setReceiver(QObject *sender, int value) {
 //
 //	QMutexLocker locker(&settingsMutex);
@@ -2949,7 +3152,13 @@ void Settings::setCurrentReceiver(QObject *sender, int value) {
 
 	SETTINGS_DEBUG << "switch to receiver: " << m_currentReceiver;
 	emit currentReceiverChanged(sender, value);
-	emit frequencyChanged(sender, true, value, m_receiverDataList.at(m_currentReceiver).frequency);
+	//emit frequencyChanged(sender, true, value, m_receiverDataList.at(m_currentReceiver).frequency);
+	long vfoF = m_receiverDataList.at(m_currentReceiver).vfoFrequency;
+	long ctrF = m_receiverDataList.at(m_currentReceiver).ctrFrequency;
+
+	emit ctrFrequencyChanged(sender, true, value, ctrF);
+	emit vfoFrequencyChanged(sender, true, value, vfoF);
+	emit ncoFrequencyChanged(m_currentReceiver, vfoF - ctrF);
 	emit hamBandChanged(sender, m_currentReceiver, false, band);
 	emit dspModeChanged(sender, m_currentReceiver, mode);
 	emit mouseWheelFreqStepChanged(sender, m_currentReceiver, m_receiverDataList.at(m_currentReceiver).mouseWheelFreqStep);
@@ -2981,9 +3190,16 @@ void Settings::setSampleRate(QObject *sender, int value) {
 			m_outputSampleIncrement = 4;
 			m_chirpDownSampleRate = 16;
 			break;
+
+		case 384000:
+			m_sampleRate = value;
+			m_mercurySpeed = 3;
+			m_outputSampleIncrement = 8;
+			m_chirpDownSampleRate = 32;
+			break;
 			
 		default:
-			SETTINGS_DEBUG << "Invalid sample rate (48000,96000,192000)!\n";
+			SETTINGS_DEBUG << "Invalid sample rate (must be 48, 96,192, or 384 kHz)!\n";
 			break;
 	}
 
@@ -3099,39 +3315,131 @@ void Settings::setMainVolume(QObject *sender, int rx, float volume) {
 	emit mainVolumeChanged(sender, rx, volume);
 }
 
-void Settings::setMainVolumeMute(QObject *sender, bool value) {
+void Settings::setMainVolumeMute(QObject *sender, int rx, bool value) {
 
+	Q_UNUSED(sender)
+	Q_UNUSED(value)
+
+	qreal vol = getMainVolume(rx);
+	if (value)
+		setMainVolume(this, rx, 0.0f);
+	else
+		setMainVolume(this, rx, vol);
 }
 
-void Settings::setFrequency(int rx, long frequency) {
+void Settings::setCtrFrequency(int rx, long frequency) {
 
 	QMutexLocker locker(&settingsMutex);
 
 	HamBand band = getBandFromFrequency(m_bandList, frequency);
 
-	m_receiverDataList[rx].frequency = frequency;
+	m_receiverDataList[rx].ctrFrequency = frequency;
+	//m_receiverDataList[rx].hamBand = band;
+	//m_receiverDataList[rx].lastHamBand = band;
+	m_receiverDataList[rx].lastCenterFrequencyList[(int) band] = frequency;
+}
+
+void Settings::setVfoFrequency(int rx, long frequency) {
+
+	QMutexLocker locker(&settingsMutex);
+
+	HamBand band = getBandFromFrequency(m_bandList, frequency);
+
+	m_receiverDataList[rx].vfoFrequency = frequency;
 	m_receiverDataList[rx].hamBand = band;
-	m_receiverDataList[rx].lastFrequencyList[(int) band] = frequency;
+	m_receiverDataList[rx].lastHamBand = band;
+	m_receiverDataList[rx].lastVfoFrequencyList[(int) band] = frequency;
+
+	m_receiverDataList[rx].ncoFrequency = frequency - m_receiverDataList.at(rx).ctrFrequency;
 }
 
-void Settings::setFrequency(QObject *sender, bool value, int rx, long frequency) {
+void Settings::setCtrFrequency(QObject *sender, int mode, int rx, long frequency) {
 
-	//SETTINGS_DEBUG << "sender: " << sender;
 	QMutexLocker locker(&settingsMutex);
-
-	if (m_receiverDataList.at(rx).frequency == frequency) return;
-	m_receiverDataList[rx].frequency = frequency;
+	m_receiverDataList[rx].ctrFrequency = frequency;
 
 	HamBand band = getBandFromFrequency(m_bandList, frequency);
-	m_receiverDataList[rx].lastFrequencyList[(int) band] = frequency;
+	m_receiverDataList[rx].lastCenterFrequencyList[(int) band] = frequency;
+	locker.unlock();
+
+	switch (mode) {
+
+		case 0:
+			break;
+
+		case 1:
+
+			setVFOFrequency(this, 0, rx, frequency);
+			break;
+	}
+
+	//SETTINGS_DEBUG << "ctr freq (Rx " << rx << ") " << m_receiverDataList[rx].ctrFrequency;
+	emit ctrFrequencyChanged(sender, mode, rx, frequency);
+}
+
+long Settings::getCtrFrequency(int rx) {
+
+	return m_receiverDataList.at(rx).ctrFrequency;
+}
+
+void Settings::setVFOFrequency(QObject *sender, int mode, int rx, long frequency) {
+
+	QMutexLocker locker(&settingsMutex);
+
+	if (m_receiverDataList.at(rx).vfoFrequency == frequency) return;
+	m_receiverDataList[rx].vfoFrequency = frequency;
+	//SETTINGS_DEBUG << "vfo freq (Rx " << rx << ") " << m_receiverDataList[rx].vfoFrequency;
+
+	HamBand band = getBandFromFrequency(m_bandList, frequency);
+	m_receiverDataList[rx].lastVfoFrequencyList[(int) band] = frequency;
 
 	locker.unlock();
-	if (m_receiverDataList.at(rx).hamBand != band)
+	if (m_receiverDataList.at(rx).hamBand != band) {
+
+		//m_receiverDataList[rx].ctrFrequency = m_receiverDataList[rx].vfoFrequency;
 		setHamBand(this, rx, false, band);
+	}
 
-	//m_receiverDataList[rx].lastFrequencyList[(int) band] = frequency;
+	switch (mode) {
 
-	emit frequencyChanged(sender, value, rx, frequency);
+		case 0: // change only VFO
+
+			m_receiverDataList[rx].ncoFrequency = frequency - m_receiverDataList.at(rx).ctrFrequency;
+			//SETTINGS_DEBUG << "nco freq = " << m_receiverDataList[rx].ncoFrequency;
+			break;
+
+		case 1: // change VFO and center freq; keep NCO frequency
+
+			setCtrFrequency(this, 0, rx, frequency - m_receiverDataList.at(rx).ncoFrequency);
+			break;
+
+		case 2: // change VFO, set center frequency from lastCenterFrequencyList
+
+			setCtrFrequency(this, 0, rx, m_receiverDataList.at(rx).lastCenterFrequencyList.at((int) band));
+			m_receiverDataList[rx].ncoFrequency = frequency - m_receiverDataList.at(rx).ctrFrequency;
+			break;
+	}
+	
+	emit vfoFrequencyChanged(sender, mode, rx, frequency);
+
+	//SETTINGS_DEBUG << "nco freq (Rx " << rx << ") " << m_receiverDataList[rx].ncoFrequency;
+	emit ncoFrequencyChanged(rx, m_receiverDataList[rx].ncoFrequency);
+}
+
+long Settings::getVfoFrequency(int rx) {
+
+	return m_receiverDataList.at(rx).vfoFrequency;
+}
+
+void Settings::setNCOFrequency(QObject *sender, bool value, int rx, long frequency) {
+
+	Q_UNUSED(sender)
+	Q_UNUSED(value)
+
+	//SETTINGS_DEBUG << "nco freq (Rx " << rx << ") " << m_receiverDataList[rx].ncoFrequency << "(direct)";
+	m_receiverDataList[rx].ncoFrequency = frequency;
+
+	emit ncoFrequencyChanged(rx, frequency);
 }
 
 void Settings::setHamBand(QObject *sender, int rx, bool byButton, HamBand band) {
@@ -3141,7 +3449,11 @@ void Settings::setHamBand(QObject *sender, int rx, bool byButton, HamBand band) 
 	if (m_receiverDataList[rx].hamBand == band && sender != this)
 		return;
 
+	m_receiverDataList[rx].lastHamBand = m_receiverDataList[rx].hamBand;
 	m_receiverDataList[rx].hamBand = band;
+
+	//SETTINGS_DEBUG << "last Ham band:  " << m_receiverDataList[rx].lastHamBand;
+	//SETTINGS_DEBUG << "Ham band:  " << m_receiverDataList[rx].hamBand;
 
 	if (m_receiverDataList[rx].hamBand == (HamBand) gen)
 		setTxAllowed(this, false);
@@ -3237,9 +3549,10 @@ void Settings::setAGCMode(QObject *sender, int rx, AGCMode mode) {
 
 void Settings::setAGCShowLines(QObject *sender, int rx, bool value) {
 
-	Q_UNUSED(sender)
+	if (m_receiverDataList[rx].agcLines == value) return;
+	m_receiverDataList[rx].agcLines = value;
 
-		m_receiverDataList[rx].agcLines = value;
+	emit showAGCLinesStatusChanged(sender, m_receiverDataList[rx].agcLines, rx);
 }
 
 int Settings::getAGCGain(int rx) {
@@ -3409,32 +3722,8 @@ void Settings::setIQPort(QObject *sender, int rx, int port) {
 
 	emit iqPortChanged(sender, rx, port);
 }
-
-void Settings::setWideBandStatus(bool value) {
-
-	QMutexLocker locker(&settingsMutex);
-
-	m_wideBandDisplayStatus = value;
-	emit wideBandStausChanged(m_wideBandDisplayStatus);
-}
-
-void Settings::setWideBandData(bool value) {
-
-	QMutexLocker locker(&settingsMutex);
-
-	m_wideBandData = value;
-	emit wideBandDataChanged(value);
-}
-
-void Settings::setWidebandBuffers(QObject *sender, int value) {
-
-	Q_UNUSED(sender)
-
-	QMutexLocker locker(&settingsMutex);
-	m_wbBuffers = value;
-}
  
-void Settings::setSpectrumBuffer(int rx, const float* buffer) {
+void Settings::setSpectrumBuffer(int rx, const qVectorFloat& buffer) {
 
 	emit spectrumBufferChanged(rx, buffer);
 }
@@ -3449,14 +3738,39 @@ void Settings::setSMeterValue(int rx, float value) {
 	emit sMeterValueChanged(rx, value);
 }
 
-void Settings::setWidebandSpectrumBuffer(const qVectorFloat &buffer) {
+void Settings::setReceiverDataReady() {
 
-	emit widebandSpectrumBufferChanged(buffer);
+	emit receiverDataReady();
 }
 
-void Settings::resetWidebandSpectrumBuffer() {
+void Settings::setSampleSize(QObject* sender, int rx, int size) {
 
-	emit widebandSpectrumBufferReset();
+	Q_UNUSED (sender)
+
+	if (rx == 0) {
+
+		SETTINGS_DEBUG << "set sample size to: " << size;
+		switch (size) {
+
+			case 4096:
+				m_fft = 1;
+				break;
+
+			case 8192:
+				m_fft = 2;
+				break;
+
+			case 16384:
+				m_fft = 4;
+				break;
+
+			case 32768:
+				m_fft = 8;
+				break;
+		}
+
+		emit sampleSizeChanged(0, size);
+	}
 }
 
 // Alex configuration:
@@ -3558,6 +3872,8 @@ void Settings::setAlexState(QObject *sender, int pos, int value) {
 }
 
 void Settings::setAlexState(QObject *sender, int value) {
+
+	Q_UNUSED(sender)
 
 	HamBand band = m_receiverDataList[m_currentReceiver].hamBand;
 
@@ -3720,20 +4036,15 @@ void Settings::setPennyOCEnabled(QObject *sender, bool value) {
 //	emit cudaLastDeviceChanged(sender, value);
 //}
 
-void Settings::setFreqRulerPosition(float position, int rx) {
+void Settings::setFreqRulerPosition(QObject *sender, int rx, float position) {
+
+	Q_UNUSED (sender)
 
 	if (position < 0) position = 0;
 	if (position > 1) position = 1;
 
-	emit freqRulerPositionChanged(position, rx);
-}
-
-void Settings::setWideBandRulerPosition(float position) {
-
-	if (position < 0) position = 0;
-	if (position > 1) position = 1;
-
-	emit wideBandRulerPositionChanged(position);
+	m_receiverDataList[rx].freqRulerPosition = position;
+	emit freqRulerPositionChanged(this, rx, position);
 }
 
 //**********************************************************************************
@@ -3760,6 +4071,90 @@ void Settings::setAudioBuffer(QObject *sender, qint64 position, qint64 length, c
 
 	emit audioBufferChanged(sender, position, length, buffer);
 }
+
+
+//**********************************************************************************
+// wideband data & options
+
+void Settings::setWidebandSpectrumBuffer(const qVectorFloat &buffer) {
+
+	emit widebandSpectrumBufferChanged(buffer);
+}
+
+void Settings::resetWidebandSpectrumBuffer() {
+
+	emit widebandSpectrumBufferReset();
+}
+
+void Settings::setWidebandOptions(QObject* sender, TWideband options) {
+
+	QMutexLocker locker(&settingsMutex);
+
+	m_widebandOptions = options;
+
+	emit widebandOptionsChanged(sender, m_widebandOptions);
+}
+
+void Settings::setWidebandStatus(QObject* sender, bool value) {
+
+	QMutexLocker locker(&settingsMutex);
+
+	if (m_widebandOptions.wideBandDisplayStatus == value) return;
+	m_widebandOptions.wideBandDisplayStatus = value;
+
+	emit widebandStatusChanged(sender, m_widebandOptions.wideBandDisplayStatus);
+}
+
+void Settings::setWidebandData(QObject* sender, bool value) {
+
+	QMutexLocker locker(&settingsMutex);
+
+	if (m_widebandOptions.wideBandData == value) return;
+	m_widebandOptions.wideBandData = value;
+
+	emit widebandDataChanged(sender, m_widebandOptions.wideBandData);
+}
+
+void Settings::setWidebandBuffers(QObject *sender, int value) {
+
+	Q_UNUSED(sender)
+
+	QMutexLocker locker(&settingsMutex);
+	m_widebandOptions.numberOfBuffers = value;
+}
+
+void Settings::setWidebanddBmScaleMin(QObject *sender, qreal value) {
+
+	QMutexLocker locker(&settingsMutex);
+
+	if (m_widebandOptions.dBmWBScaleMin == value) return;
+	m_widebandOptions.dBmWBScaleMin = value;
+
+	locker.unlock();
+	emit widebanddBmScaleMinChanged(sender, m_widebandOptions.dBmWBScaleMin);
+}
+
+void Settings::setWidebanddBmScaleMax(QObject *sender, qreal value) {
+
+	QMutexLocker locker(&settingsMutex);
+
+	if (m_widebandOptions.dBmWBScaleMax == value) return;
+	m_widebandOptions.dBmWBScaleMax = value;
+
+	locker.unlock();
+	emit widebanddBmScaleMaxChanged(sender, m_widebandOptions.dBmWBScaleMax);
+}
+
+void Settings::setWideBandRulerPosition(QObject *sender, float position) {
+
+	if (m_widebandOptions.scalePosition = position) return;
+	if (position < 0) position = 0;
+	if (position > 1) position = 1;
+	m_widebandOptions.scalePosition = position;
+
+	emit wideBandScalePositionChanged(sender, m_widebandOptions.scalePosition);
+}
+
 
 //**********************************************************************************
 // chirp signal settings
@@ -3983,7 +4378,9 @@ void Settings::setPanadapterColors(TPanadapterColors type) {
 	emit panadapterColorChanged();
 }
 
-void Settings::setFramesPerSecond(QObject *sender, int rx, int value) {
+void Settings::setFramesPerSecond(QObject* sender, int rx, int value) {
+
+	Q_UNUSED(sender)
 
 	QMutexLocker locker(&settingsMutex);
 
@@ -3998,62 +4395,131 @@ int	Settings::getFramesPerSecond(int rx) {
 	return m_receiverDataList.at(rx).framesPerSecond;
 }
 
-void Settings::setGraphicResolution(int value) {
+void Settings::setSpectrumAveraging(QObject* sender, int rx, bool value) {
+	
+	if (rx == -1)
+	{
+		m_widebandOptions.averagingCnt = value;
+	}
+	else
+	{
+		m_receiverDataList[rx].spectrumAveraging = value;
+	}
+
+	//SETTINGS_DEBUG << "Averaging for Rx " << rx << " : " << value;
+	emit spectrumAveragingChanged(sender, rx, value);
+}
+
+bool Settings::getSpectrumAveraging(int rx) { 
+
+	if (rx == -1)
+		return m_widebandOptions.averaging;
+	else
+		return m_receiverDataList[rx].spectrumAveraging;
+}
+
+int Settings::getSpectrumAveragingCnt(int rx) {
+
+	if (rx == -1)
+		return m_widebandOptions.averagingCnt;
+	else
+		return m_receiverDataList[rx].averagingCnt;
+}
+
+void Settings::setSpectrumAveragingCnt(QObject *sender, int rx, int value) {
 
 	QMutexLocker locker(&settingsMutex);
 
-	if (m_graphicResolution == value) return;
-	m_graphicResolution = value;
+	//if (m_specAveragingCnt == value) return
+	if (rx == -1)
+		m_widebandOptions.averagingCnt = value;
+	else
+		m_receiverDataList[rx].averagingCnt = value;
 
-	emit graphicResolutionChanged(this, m_graphicResolution);
+	emit spectrumAveragingCntChanged(sender, rx, value);
 }
 
-int Settings::getGraphicResolution() {
 
-	return m_graphicResolution;
-}
 
-void Settings::setSpectrumAveraging(bool value) {
+void Settings::setPanGrid(bool value, int rx) {
 
 	QMutexLocker locker(&settingsMutex);
 
-	if (m_specAveraging == value) return;
-	m_specAveraging = value;
+	if (m_receiverDataList.at(rx).panGrid == value) return;
+	m_receiverDataList[rx].panGrid = value;
 
-	emit spectrumAveragingChanged(m_specAveraging);
+	emit panGridStatusChanged(m_receiverDataList.at(rx).panGrid, rx);
 }
 
-void Settings::setSpectrumAveragingCnt(int value) {
+bool Settings::getPanGridStatus(int rx) { 
+	
+	return m_receiverDataList[rx].panGrid;
+}
+
+void Settings::setPeakHold(bool value, int rx) {
 
 	QMutexLocker locker(&settingsMutex);
 
-	if (m_specAveragingCnt == value) return;
-	m_specAveragingCnt = value;
+	if (m_receiverDataList.at(rx).peakHold == value) return;
+	m_receiverDataList[rx].peakHold = value;
 
-	emit spectrumAveragingCntChanged(m_specAveragingCnt);
+	emit peakHoldStatusChanged(m_receiverDataList.at(rx).peakHold, rx);
 }
 
-void Settings::setPanGrid(bool value) {
+bool Settings::getPeakHoldStatus(int rx) { 
+	
+	return m_receiverDataList.at(rx).peakHold;
+}
+
+void Settings::setPanLocked(bool value, int rx) {
 
 	QMutexLocker locker(&settingsMutex);
 
-	if (m_panGrid == value) return;
-	m_panGrid = value;
+	if (m_receiverDataList.at(rx).panLocked == value) return;
+	m_receiverDataList[rx].panLocked = value;
 
-	emit panGridStatusChanged(m_panGrid);
+	emit panLockedStatusChanged(m_receiverDataList.at(rx).panLocked, rx);
 }
 
-void Settings::setPeakHold(bool value) {
+bool Settings::getPanLockedStatus(int rx) { 
+	
+	return m_receiverDataList[rx].panLocked;
+}
+
+void Settings::setClickVFO(bool value, int rx) {
 
 	QMutexLocker locker(&settingsMutex);
 
-	if (m_peakHold == value) return;
-	m_peakHold = value;
+	if (m_receiverDataList.at(rx).clickVFO == value) return;
+	m_receiverDataList[rx].clickVFO = value;
 
-	emit peakHoldStatusChanged(m_peakHold);
+	emit clickVFOStatusChanged(m_receiverDataList.at(rx).clickVFO, rx);
+}
+
+bool Settings::getClickVFOStatus(int rx) { 
+	
+	return m_receiverDataList[rx].clickVFO;
+}
+
+void Settings::setHairCross(bool value, int rx) {
+
+	QMutexLocker locker(&settingsMutex);
+
+	if (m_receiverDataList.at(rx).hairCross == value) return;
+	m_receiverDataList[rx].hairCross = value;
+
+	emit hairCrossStatusChanged(m_receiverDataList.at(rx).hairCross, rx);
+}
+
+bool Settings::getHairCrossStatus(int rx) { 
+	
+	return m_receiverDataList[rx].hairCross;
 }
 
 void Settings::setWaterfallTime(int rx, int value) {
+
+	Q_UNUSED(rx)
+	Q_UNUSED(value)
 
 	QMutexLocker locker(&settingsMutex);
 
@@ -4111,28 +4577,6 @@ void Settings::setdBmPanScaleMax(int rx, qreal value) {
 	m_receiverDataList[rx].dBmPanScaleMaxList[band] = value;
 
 	emit dBmScaleMaxChanged(rx, value);
-}
-
-void Settings::setdBmWBScaleMin(qreal value) {
-
-	QMutexLocker locker(&settingsMutex);
-
-	if (m_dBmWBScaleMin == value) return;
-	m_dBmWBScaleMin = value;
-
-	locker.unlock();
-	emit dBmScaleWBMinChanged(value);
-}
-
-void Settings::setdBmWBScaleMax(qreal value) {
-
-	QMutexLocker locker(&settingsMutex);
-
-	if (m_dBmWBScaleMax == value) return;
-	m_dBmWBScaleMax = value;
-
-	locker.unlock();
-	emit dBmScaleWBMaxChanged(value);
 }
 
 void Settings::setdBmDistScaleMin(qreal value) {

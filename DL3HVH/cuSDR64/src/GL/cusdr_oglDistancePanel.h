@@ -81,7 +81,7 @@ private:
 	QSDR::_HWInterfaceMode		m_hwInterface;
 	QSDR::_DataEngineState		m_dataEngineState;
 
-	QSDRGraphics::_Panadapter	m_panadapterMode;
+	PanGraphicsMode				m_panMode;
 	
 	QTime			m_displayTime;
 	QTime			m_resizeTime;
@@ -289,9 +289,10 @@ private slots:
 					QSDR::_DataEngineState state);
 
 	void	graphicModeChanged(
-					QObject* sender, 
-					QSDRGraphics::_Panadapter panMode,
-					QSDRGraphics::_WfScheme colorScheme);
+					QObject* sender,
+					int rx,
+					PanGraphicsMode panMode,
+					WaterfallColorMode waterfallColorMode);
 
 	void	setupConnections();
 	void	setFilterFrequencies(QObject *sender, int rx, qreal lo, qreal hi);

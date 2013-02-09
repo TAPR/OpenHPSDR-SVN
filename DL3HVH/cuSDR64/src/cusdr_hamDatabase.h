@@ -103,10 +103,10 @@ typedef enum _defaultFilterMode {
 	
 } TDefaultFilterMode;
 
-Q_DECLARE_METATYPE (_hamBand)
-Q_DECLARE_METATYPE (_dspMode)
-Q_DECLARE_METATYPE (_agcMode)
-Q_DECLARE_METATYPE (_defaultFilterMode)
+Q_DECLARE_METATYPE (HamBand)
+Q_DECLARE_METATYPE (DSPMode)
+Q_DECLARE_METATYPE (AGCMode)
+Q_DECLARE_METATYPE (TDefaultFilterMode)
 
 typedef struct _filter {
 

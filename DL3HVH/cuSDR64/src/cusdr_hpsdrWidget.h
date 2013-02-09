@@ -73,6 +73,7 @@ private:
 	
 	QComboBox	*m_receiverComboBox;
 
+	QLabel		*m_fwCheckLabel;
 	QLabel		*m_receiversLabel;
 	
 	QString		m_message;
@@ -84,27 +85,29 @@ private:
 	AeroButton	*mercuryPresenceBtn;
 	AeroButton	*alexPresenceBtn;
 	AeroButton	*excaliburPresenceBtn;
+	AeroButton	*firmwareCheckBtn;
 	AeroButton	*atlasBtn;
 	AeroButton	*penelopeBtn;
 	AeroButton	*mercuryBtn;
 	AeroButton	*penelope2Btn;
 	AeroButton	*mercury2Btn;
-	AeroButton	*rx1to2Btn;
 	AeroButton	*samplerate48Btn;
 	AeroButton	*samplerate96Btn;
 	AeroButton	*samplerate192Btn;
-
+	AeroButton	*samplerate384Btn;
 
 	QList<AeroButton *>	hardwareBtnList;
 	QList<AeroButton *>	source10MhzBtnList;
 	QList<AeroButton *>	viewBtnList;
 	QList<QString> sources10Mhz;
-	QList<AeroButton *>	rxBtnList;
+	QList<AeroButton *>	samplerateBtnList;
 
 	QSDR::_ServerMode		m_serverMode;
 	QSDR::_HWInterfaceMode	m_hwInterface;
 	QSDR::_HWInterfaceMode	m_hwInterfaceTemp;
 	QSDR::_DataEngineState	m_dataEngineState;
+
+	bool	m_firmwareCheck;
 
 	int		m_minimumWidgetWidth;
 	int		m_minimumGroupBoxWidth;
@@ -127,13 +130,10 @@ private slots:
 	void	setHPSDRHardware();
 	void	source10MhzChanged();
 	void	setNumberOfReceivers(int value);
-	void	setShow1on2();
 	void	disableButtons();
 	void	enableButtons();
-	void 	sampleRateChangedTo48();
-	void 	sampleRateChangedTo96();
-	void 	sampleRateChangedTo192();
-
+	void	firmwareCheckChanged();
+	void 	sampleRateChanged();
 	
 signals:
 	void	messageEvent(QString message);

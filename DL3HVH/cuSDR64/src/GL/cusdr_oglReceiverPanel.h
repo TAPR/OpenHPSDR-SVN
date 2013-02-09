@@ -34,13 +34,14 @@
 #include "Util/cusdr_buttons.h"
 #include "cusdr_oglText.h"
 #include "QtDSP/qtdsp_dualModeAverager.h"
+#include "cusdr_radioPopupWidget.h"
 
 #include <QWheelEvent>
 #include <QtOpenGL/QGLWidget>
 
 
 #ifdef LOG_GRAPHICS
-#   define GRAPHICS_DEBUG qDebug().nospace() << "Graphics::\t"
+#   define GRAPHICS_DEBUG qDebug().nospace() << "ReceiverPanel::\t"
 #else
 #   define GRAPHICS_DEBUG nullDebug()
 #endif
@@ -58,9 +59,11 @@ public slots:
 	QSize minimumSizeHint() const;
 	QSize sizeHint() const;
 
-	void setSpectrumBuffer(const float *buffer);
-	//void setFrequency(QObject *sender, bool value, long freq);
-	void	setFrequency(QObject *sender, bool value, int rx, long freq);
+	//void setSpectrumBuffer(const float* buffer, int size);
+	//void setSpectrumBuffer(const qVectorFloat& buffer);
+	void setSpectrumBuffer(int rx, const qVectorFloat& buffer);
+	void setCtrFrequency(QObject* sender, int mode, int rx, long freq);
+	void setVFOFrequency(QObject* sender, int mode, int rx, long freq);
 
 protected:
     void initializeGL();
@@ -77,35 +80,37 @@ protected:
 	void keyPressEvent(QKeyEvent* event);
 
 private:
-	Settings	*set;
+	Settings*					set;
 
 	QSDR::_ServerMode			m_serverMode;
 	QSDR::_HWInterfaceMode		m_hwInterface;
 	QSDR::_DataEngineState		m_dataEngineState;
 
-	QSDRGraphics::_Panadapter	m_panadapterMode;
-	QSDRGraphics::_WfScheme 	m_waterColorScheme;
+	CFonts*						fonts;
+	TFonts						m_fonts;
 
-	CFonts			*fonts;
-	TFonts			m_fonts;
+	DualModeAverager*			averager;
+	RadioPopupWidget*			radioPopup;
+	AGCMode						m_agcMode;
+	DSPMode						m_dspMode;
+	PanGraphicsMode				m_panMode;
+	WaterfallColorMode			m_waterfallMode;
 
-	AGCMode			m_agcMode;
-
-	QTime			m_displayTime;
-	QTime			m_resizeTime;
-	QTime			freqChangeTimer;
-	QTime			peakHoldTimer;
+	QTime						m_displayTime;
+	QTime						m_resizeTime;
+	QTime						freqChangeTimer;
+	QTime						peakHoldTimer;
 	
-	QString			m_bandText;
-	QString			m_agcModeString;
+	QString						m_bandText;
+	QString						m_agcModeString;
+	QString						m_dspModeString;
+	QString						m_filterWidthString;	
 
-	DualModeAverager	*averager;
-
-	TScale			m_frequencyScale;
-	TScale			m_dBmScale;
-	TScale			m_secScale;
+	TScale						m_frequencyScale;
+	TScale						m_dBmScale;
+	TScale						m_secScale;
 	
-	QList<TReceiver>	m_rxDataList;
+	QList<TReceiver>			m_rxDataList;
 	
 	QVector<qreal>					m_panadapterBins;
 	QVector<qreal>					m_panPeakHoldBins;
@@ -113,45 +118,50 @@ private:
 
 	QQueue<QVector<float> >			specAv_queue;
 
-	QGLFramebufferObject			*m_frequencyScaleFBO;
-	QGLFramebufferObject			*m_dBmScaleFBO;
-	QGLFramebufferObject			*m_panadapterGridFBO;
-	QGLFramebufferObject			*m_textureFBO;
-	QGLFramebufferObject			*m_waterfallLineFBO;
-	QGLFramebufferObject			*m_waterfallFBO;
-	QGLFramebufferObject			*m_secScaleWaterfallFBO;
+	QGLFramebufferObject*		m_frequencyScaleFBO;
+	QGLFramebufferObject*		m_dBmScaleFBO;
+	QGLFramebufferObject*		m_panadapterGridFBO;
+	QGLFramebufferObject*		m_textureFBO;
+	QGLFramebufferObject*		m_waterfallLineFBO;
+	QGLFramebufferObject*		m_waterfallFBO;
+	QGLFramebufferObject*		m_secScaleWaterfallFBO;
 
-	QRect		m_panRect;
-	QRect		m_dBmScalePanRect;
-	QRect		m_freqScalePanRect;
-	QRect		m_waterfallRect;
-	QRect		m_secScaleWaterfallRect;
-	QRect		m_filterRect;
-	QRect		m_agcButtonRect;
+	QRect						m_panRect;
+	QRect						m_dBmScalePanRect;
+	QRect						m_freqScalePanRect;
+	QRect						m_waterfallRect;
+	QRect						m_secScaleWaterfallRect;
+	QRect						m_filterRect;
+	QRect						m_agcButtonRect;
+	QRect						m_lockedPanButtonRect;
+	QRect						m_vfoToMidButtonRect;
+	QRect						m_midToVfoButtonRect;
+	QRect						m_clickVFOButtonRect;
 	
-	OGLText		*m_oglTextTiny;
-	OGLText		*m_oglTextSmall;
-	OGLText		*m_oglTextNormal;
-	OGLText		*m_oglTextFreq1;
-	OGLText		*m_oglTextFreq2;
-	OGLText		*m_oglTextBig1;
-	OGLText		*m_oglTextBig2;
-	OGLText		*m_oglTextHuge;
+	OGLText*					m_oglTextTiny;
+	OGLText*					m_oglTextSmall;
+	OGLText*					m_oglTextNormal;
+	OGLText*					m_oglTextFreq1;
+	OGLText*					m_oglTextFreq2;
+	OGLText*					m_oglTextBig1;
+	OGLText*					m_oglTextBig2;
+	OGLText*					m_oglTextHuge;
 
-	QPoint		m_mousePos;
-	QPoint		m_oldMousePos;
-	QPoint		m_mouseLastPos;
-	QPoint		m_mouseDownPos;
-	QPoint		m_rulerMouseDownPos;
-	QPoint		m_cameraAngle;
+	QPoint						m_mousePos;
+	QPoint						m_oldMousePos;
+	QPoint						m_mouseLastPos;
+	QPoint						m_mouseDownPos;
+	QPoint						m_rulerMouseDownPos;
+	QPoint						m_cameraAngle;
 
-	QColor		m_waterfallLoColor;
-	QColor		m_waterfallHiColor;
-	QColor		m_waterfallMidColor;
-	QColor		m_gridColor;
+	QColor						m_waterfallLoColor;
+	QColor						m_waterfallHiColor;
+	QColor						m_waterfallMidColor;
+	QColor						m_gridColor;
+	QColor						m_darkColor;
 	
-	QMutex		mutex;
-	QMutex		spectrumBufferMutex;
+	QMutex						mutex;
+	QMutex						spectrumBufferMutex;
 
 	enum Region {
 
@@ -166,6 +176,10 @@ private:
 		agcThresholdLine,
 		agcHangLine,
 		agcFixedGainLine,
+		//lockedPanButtonRegion,
+		//vfoToMidButtonRegion,
+		//midToVfoButtonRegion,
+		//clickVfoButtonRegion,
 		elsewhere,
 		out
 	};
@@ -212,8 +226,10 @@ private:
 	int			m_bigHeight;
 	int			m_bigWidth;
 	int			m_receiver;
-	int			m_frequencyRxOnRx;
+	//int			m_frequencyRxOnRx;
 	int			m_spectrumSize;
+	int			m_sampleSize;
+	int			m_oldSampleSize;
 	int			m_oldWidth;
 	int			m_oldPanRectHeight;
 	int			m_cnt;
@@ -244,8 +260,12 @@ private:
 	int			m_waterfallLineCnt;
 	int			m_adcStatus;
 	int			m_fps;
+	int			m_filterWidth;
+	int			m_fftMult;
 
-	long		m_frequency;
+	long		m_centerFrequency;
+	long		m_vfoFrequency;
+	long		m_deltaFrequency;
 	long		m_otherFrequency;
 	//long		m_oldFreq;
 
@@ -265,7 +285,8 @@ private:
 	bool		m_newWidebandPanFreqRuler;
 	bool		m_spectrumColorsChanged;
 	bool		m_spectrumAveraging;
-	bool		m_spectrumAveragingOld;
+	//bool		m_spectrumAveragingOld;
+	bool		m_crossHair;
 	bool		m_crossHairCursor;
 	bool		m_panGrid;
 	bool		m_peakHold;
@@ -276,6 +297,9 @@ private:
 	bool		m_peakHoldBufferResize;
 	bool		m_showAGCLines;
 	bool		m_agcHangEnabled;
+	bool		m_dragMouse;
+	bool		m_panLocked;
+	bool		m_clickVFO;
 	
 	qreal		m_yScaleFactor;
 	qreal		m_panFrequencyScale;
@@ -295,6 +319,7 @@ private:
 	qreal		m_mouseDownFilterFrequencyHi;
 	qreal		m_filterLo;
 	qreal		m_filterHi;
+	qreal		m_deltaF;
 	qreal		m_agcThresholdNew;
 	qreal		m_agcThresholdOld;
 	qreal		m_mouseDownAGCThreshold;
@@ -328,20 +353,24 @@ private:
 	void 	drawPanHorizontalScale();
 	void 	drawPanadapterGrid();
 	void 	drawPanFilter();
+	void 	drawCenterLine();
 	void 	drawWaterfall();
 	void 	drawWaterfallVerticalScale();
 	void	drawCrossHair();
 	void 	drawReceiverInfo();
 	void	drawAGCControl();
+	void	drawVFOControl();
 
 	void 	renderPanVerticalScale();
 	void 	renderPanHorizontalScale();
 	void 	renderPanadapterGrid();
 	void 	renderWaterfallVerticalScale();
 
-	//void	computeDisplayBins(const float *panBuffer, const float *waterfallBuffer);
-	void	computeDisplayBins(const QVector<float> &panBuffer, const float *waterfallBuffer);
+	//void	computeDisplayBins(const QVector<float>& panBuffer, const float* waterfallBuffer);
+	//void	computeDisplayBins(QVector<float> &buffer);
+	void	computeDisplayBins(QVector<float>& panBuffer, QVector<float>& waterfallBuffer);
 	void 	showText(float x, float y, float z, const QString &text, bool smallText);
+	void	showRadioPopup(bool value);
 
 private slots:
 	void	systemStateChanged(
@@ -352,25 +381,30 @@ private slots:
 					QSDR::_DataEngineState state);
 
 	void	graphicModeChanged(
-					QObject *sender, 
-					QSDRGraphics::_Panadapter panMode,
-					QSDRGraphics::_WfScheme colorScheme);
+					QObject *sender,
+					int rx,
+					PanGraphicsMode panMode,
+					WaterfallColorMode waterfallColorMode);
 
 	void	setSpectrumSize(QObject *sender, int value);
 	void	setCurrentReceiver(QObject *sender, int value);
 	void 	setHamBand(QObject *sender, int rx, bool byButton, HamBand band);
-	void	setCoupledRx(QObject* sender, int value);
 	void	setFilterFrequencies(QObject *sender, int rx, qreal lo, qreal hi);
 	void	setMercuryAttenuator(QObject* sender, HamBand band, int value);
 	void	setupDisplayRegions(QSize size);
 	
-	void	setSpectrumAveraging(bool value);
+	void	setSpectrumAveraging(QObject* sender, int rx, bool value);
 	void	setSpectrumAveragingCnt(int value);
-	void	setPanGridStatus(bool value);
-	void	setPeakHoldStatus(bool value);
+	void	setVfoToMidFrequency();
+	void	setMidToVfoFrequency();
+	void	setPanGridStatus(bool value, int rx);
+	void	setPeakHoldStatus(bool value, int rx);
+	void	setPanLockedStatus(bool value, int rx);
+	void	setClickVFOStatus(bool value, int rx);
+	void	setHairCrossStatus(bool value, int rx);
 	void	setPanadapterColors();
 	void	getRegion(QPoint p);
-	void	freqRulerPositionChanged(float pos, int rx);
+	void	freqRulerPositionChanged(QObject *sender, int rx, float pos);
 	void	sampleRateChanged(QObject *sender, int value);
 	void	setWaterfallOffesetLo(int rx, int value);
 	void	setWaterfallOffesetHi(int rx, int value);
@@ -380,10 +414,12 @@ private slots:
 
 	void 	setADCStatus(int value);
 	void 	updateADCStatus();
-	void	setFramesPerSecond(QObject *sender, int rx, int value);
-	void	setAGCMode(QObject *sender, int rx, AGCMode mode, bool hangEnabled);
-	void 	setAGCLineLevels(QObject *sender, int rx, qreal thresh, qreal hang);
-	void	setAGCLineFixedLevel(QObject *sender, int rx, qreal value);
+	void	setFramesPerSecond(QObject* sender, int rx, int value);
+	void	setDSPMode(QObject* sender, int rx, DSPMode mode);
+	void	setAGCMode(QObject* sender, int rx, AGCMode mode, bool hangEnabled);
+	void 	setAGCLineLevels(QObject* sender, int rx, qreal thresh, qreal hang);
+	void	setAGCLineFixedLevel(QObject* sender, int rx, qreal value);
+	void	setAGCLinesStatus(QObject* sender, bool value, int rx);
 	//void	setAGCHangEnabled(QObject *sender, int rx, bool hangEnabled);
 
 signals:

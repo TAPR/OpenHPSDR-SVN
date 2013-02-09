@@ -46,8 +46,8 @@ AGCOptionsWidget::AGCOptionsWidget(QWidget *parent)
 	, m_serverMode(set->getCurrentServerMode())
 	, m_hwInterface(set->getHWInterface())
 	, m_dataEngineState(set->getDataEngineState())
-	, m_panadapterMode(set->getPanadapterMode())
-	, m_waterColorScheme(set->getWaterfallColorScheme())
+	//, m_panadapterMode(set->getPanadapterMode())
+	//, m_waterColorScheme(set->getWaterfallColorScheme())
 	, m_minimumWidgetWidth(set->getMinimumWidgetWidth())
 	, m_minimumGroupBoxWidth(set->getMinimumGroupBoxWidth())
 	, m_btnSpacing(5)
@@ -490,32 +490,6 @@ void AGCOptionsWidget::systemStateChanged(
 	update();
 }
 
-//void AGCOptionsWidget::graphicModeChanged(
-//	QObject *sender,
-//	QSDRGraphics::_Panadapter panMode,
-//	QSDRGraphics::_WaterfallColorScheme waterColorScheme)
-//{
-//	Q_UNUSED (sender)
-//
-//	bool change = false;
-//
-//	if (m_panadapterMode != panMode) {
-//
-//		m_panadapterMode = panMode;
-//		change = true;
-//	}
-//
-//	if (m_waterColorScheme != waterColorScheme) {
-//
-//		m_waterColorScheme = waterColorScheme;
-//		change = true;
-//	}
-//
-//	if (!change) return;
-//
-//	update();
-//}
-
 void AGCOptionsWidget::agcModeChangedByBtn() {
 
 	AeroButton *button = qobject_cast<AeroButton *>(sender());
@@ -628,6 +602,7 @@ void AGCOptionsWidget::hangThresholdValueChanged(int value) {
 void AGCOptionsWidget::setAGCHangThresholdSlider(QObject *sender, int rx, qreal value) {
 
 	Q_UNUSED(sender)
+	Q_UNUSED(rx)
 
 	m_hangThresholdSlider->blockSignals(true);
 	m_hangThresholdSlider->setValue((int) value);

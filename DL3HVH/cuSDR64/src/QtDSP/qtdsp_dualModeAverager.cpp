@@ -28,11 +28,12 @@
 
 #include "qtdsp_dualModeAverager.h"
 
-DualModeAverager::DualModeAverager(QObject *parent, int size)
-	: QObject(parent)
+DualModeAverager::DualModeAverager(int rx, int size)
+	: QObject()
 	, set(Settings::instance())
+	, m_receiver(rx)
 	, m_size(size)
-	, m_length(set->getSpectrumAveragingCnt())
+	, m_length(set->getSpectrumAveragingCnt(m_receiver))
 {
 	m_tmp.resize(m_size);
 	m_tmp.fill(-20.0);
@@ -42,9 +43,15 @@ DualModeAverager::DualModeAverager(QObject *parent, int size)
 
 	CHECKED_CONNECT(
 		set, 
-		SIGNAL(spectrumAveragingCntChanged(int)), 
+		SIGNAL(spectrumAveragingCntChanged(QObject*, int, int)), 
 		this, 
-		SLOT(setAveragingLength(int)));
+		SLOT(setAveragingLength(QObject*, int, int)));
+
+	/*CHECKED_CONNECT(
+		set, 
+		SIGNAL(widebandAveragingCntChanged(QObject*, int)), 
+		this, 
+		SLOT(setWidebandAveragingLength(QObject*, int)));*/
 }
 
 DualModeAverager::~DualModeAverager() {
@@ -72,8 +79,12 @@ void DualModeAverager::ProcessDBAverager(qVectorFloat &in, qVectorFloat &out) {
 	m_tmp = out;
 }
 
-void DualModeAverager::setAveragingLength(int value) {
+void DualModeAverager::setAveragingLength(QObject* sender, int rx, int value) {
 
+	Q_UNUSED (sender)
+
+	if (m_receiver != rx) return;
+	
 	mutex.lock();
 	m_length = value;
 	k = 1.0f/m_length;
@@ -82,6 +93,19 @@ void DualModeAverager::setAveragingLength(int value) {
 	m_tmp.fill(0.0f);
 	mutex.unlock();
 }
+
+//void DualModeAverager::setWidebandAveragingLength(QObject* sender, int value) {
+//
+//	Q_UNUSED (sender)
+//	
+//	mutex.lock();
+//	m_length = value;
+//	k = 1.0f/m_length;
+//	cnt = 0;
+//
+//	m_tmp.fill(0.0f);
+//	mutex.unlock();
+//}
 
 void DualModeAverager::clearBuffer() {
 

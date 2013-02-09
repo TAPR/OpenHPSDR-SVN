@@ -55,7 +55,8 @@ RadioWidget::RadioWidget(QWidget *parent)
 	m_filterLo = m_receiverDataList.at(0).filterLo;
 	m_filterHi = m_receiverDataList.at(0).filterHi;
 
-	m_lastFrequencyList = m_receiverDataList.at(0).lastFrequencyList;
+	m_lastCtrFrequencyList = m_receiverDataList.at(0).lastCenterFrequencyList;
+	m_lastVfoFrequencyList = m_receiverDataList.at(0).lastVfoFrequencyList;
 
 	createBandBtnGroup();
 	createModeBtnGroup();
@@ -186,10 +187,10 @@ void RadioWidget::setupConnections() {
 
 	CHECKED_CONNECT(
 		set,
-		SIGNAL(frequencyChanged(QObject *, bool, int, long)),
+		SIGNAL(vfoFrequencyChanged(QObject *, int, int, long)),
 		this,
-		SLOT(frequencyChanged(QObject *, bool, int, long)));
-
+		SLOT(vfoFrequencyChanged(QObject *, int, int, long)));
+	
 	CHECKED_CONNECT(
 		set, 
 		SIGNAL(hamBandChanged(QObject *, int, bool, HamBand)),
@@ -1073,16 +1074,28 @@ QLabel *RadioWidget::createLabel(const QString &text) {
 
  
 //******************************************
-void RadioWidget::frequencyChanged(QObject* sender, bool value, int rx, long frequency) {
+void RadioWidget::ctrFrequencyChanged(QObject* sender, int mode, int rx, long frequency) {
 
 	Q_UNUSED(sender)
-	Q_UNUSED(value)
+	Q_UNUSED(mode)
 
 	if (m_currentRx != rx) return;
-	m_frequency = frequency;
+	m_ctrFrequency = frequency;
 
 	HamBand band = getBandFromFrequency(set->getBandFrequencyList(), frequency);
-	m_lastFrequencyList[(int) band] = m_frequency;
+	m_lastCtrFrequencyList[(int) band] = m_ctrFrequency;
+}
+
+void RadioWidget::vfoFrequencyChanged(QObject* sender, int mode, int rx, long frequency) {
+
+	Q_UNUSED(sender)
+	Q_UNUSED(mode)
+
+	if (m_currentRx != rx) return;
+	m_vfoFrequency = frequency;
+
+	HamBand band = getBandFromFrequency(set->getBandFrequencyList(), frequency);
+	m_lastVfoFrequencyList[(int) band] = m_vfoFrequency;
 }
 
 void RadioWidget::bandChangedByBtn() {
@@ -1103,40 +1116,40 @@ void RadioWidget::bandChangedByBtn() {
 
 	QString str = button->text();
 	if (str == "160 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(0));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(0));
 	else
 	if (str == "80 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(1));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(1));
 	else
 	if (str == "60 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(2));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(2));
 	else
 	if (str == "40 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(3));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(3));
 	else
 	if (str == "30 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(4));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(4));
 	else
 	if (str == "20 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(5));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(5));
 	else
 	if (str == "17 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(6));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(6));
 	else
 	if (str == "15 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(7));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(7));
 	else
 	if (str == "12 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(8));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(8));
 	else
 	if (str == "10 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(9));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(9));
 	else
 	if (str == "6 m")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(10));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(10));
 	else
 	if (str == "Gen")
-		set->setFrequency(this, true, m_currentRx, m_lastFrequencyList.at(11));
+		set->setVFOFrequency(this, 2, m_currentRx, m_lastVfoFrequencyList.at(11));
 
 }
 
@@ -2238,6 +2251,7 @@ void RadioWidget::systemStateChanged(
 	Q_UNUSED(sender)
 	Q_UNUSED(err)
 	Q_UNUSED(hwmode)
+	Q_UNUSED(mode)
 	Q_UNUSED(state)
 
 
