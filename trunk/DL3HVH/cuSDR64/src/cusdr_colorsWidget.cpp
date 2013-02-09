@@ -49,8 +49,8 @@ ColorOptionsWidget::ColorOptionsWidget(QWidget *parent)
 	, m_serverMode(set->getCurrentServerMode())
 	, m_hwInterface(set->getHWInterface())
 	, m_dataEngineState(set->getDataEngineState())
-	, m_panadapterMode(set->getPanadapterMode())
-	, m_waterColorScheme(set->getWaterfallColorScheme())
+	//, m_panadapterMode(set->getPanadapterMode())
+	//, m_waterColorScheme(set->getWaterfallColorScheme())
 	, m_colorTriangle(new QtColorTriangle(this))
 	, m_antialiased(true)
 	, m_mouseOver(false)
@@ -130,13 +130,15 @@ void ColorOptionsWidget::setupConnections() {
 		set, 
 		SIGNAL(graphicModeChanged(
 					QObject *,
-					QSDRGraphics::_Panadapter,
-					QSDRGraphics::_WfScheme)),
+					int,
+					PanGraphicsMode,
+					WaterfallColorMode)),
 		this, 
 		SLOT(graphicModeChanged(
 					QObject *,
-					QSDRGraphics::_Panadapter,
-					QSDRGraphics::_WfScheme)));
+					int,
+					PanGraphicsMode,
+					WaterfallColorMode)));
 
 	CHECKED_CONNECT(
 		set, 
@@ -202,15 +204,19 @@ void ColorOptionsWidget::systemStateChanged(
 }
 
 void ColorOptionsWidget::graphicModeChanged(
-	QObject *sender,
-	QSDRGraphics::_Panadapter panMode,
-	QSDRGraphics::_WfScheme waterColorScheme)
+		QObject *sender,
+		int rx,
+		PanGraphicsMode panMode,
+		WaterfallColorMode waterfallColorMode)
 {
 	Q_UNUSED (sender)
+	Q_UNUSED (rx)
+	Q_UNUSED (panMode)
+	Q_UNUSED (waterfallColorMode)
 
 	bool change = false;
 
-	if (m_panadapterMode != panMode) {
+	/*if (m_panadapterMode != panMode) {
 		
 		m_panadapterMode = panMode;
 		change = true;
@@ -220,7 +226,7 @@ void ColorOptionsWidget::graphicModeChanged(
 		
 		m_waterColorScheme = waterColorScheme;
 		change = true;
-	}
+	}*/
 
 	if (!change) return;
 

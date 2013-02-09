@@ -122,7 +122,7 @@ OGLDisplayPanel::OGLDisplayPanel(QWidget *parent)
 	set10mhzSource(this, set->get10MHzSource());
 	set122_88mhzSource(this, set->get122_8MHzSource());
 
-	QList<long> fList = set->getFrequencies();
+	QList<long> fList = set->getVfoFrequencies();
 	
 	for (int i = 0; i < MAX_RECEIVERS; i++) {
 
@@ -190,12 +190,12 @@ void OGLDisplayPanel::setupConnections() {
 					QSDR::_HWInterfaceMode,
 					QSDR::_ServerMode,
 					QSDR::_DataEngineState)));
-
+		
 	CHECKED_CONNECT(
 		set,
-		SIGNAL(frequencyChanged(QObject *, bool, int, long)),
+		SIGNAL(vfoFrequencyChanged(QObject *, int, int, long)),
 		this,
-		SLOT(setFrequency(QObject *, bool, int, long)));
+		SLOT(setFrequency(QObject *, int, int, long)));
 
 	CHECKED_CONNECT(
 		set, 
@@ -356,39 +356,30 @@ void OGLDisplayPanel::setupConnections() {
 
 void OGLDisplayPanel::setupTextstrings() {
 
-    //m_blankWidth = m_oglTextSmall->fontMetrics().tightBoundingRect("I").width();
     m_blankWidth = m_oglTextSmall->fontMetrics().width(".");
-    //m_blankHeight = m_oglTextSmall->fontMetrics().tightBoundingRect("I").height();
     m_blankHeight = m_oglTextSmall->fontMetrics().height()-1;
 
 	m_pointStringWidth = m_oglTextFreq1->fontMetrics().width(".");
-    //m_blankWidthf = m_oglTextFreq1->fontMetrics().tightBoundingRect("59.999").width();
     m_blankWidthf = m_oglTextFreq1->fontMetrics().width("59.999");
 	m_blankWidthf1 = m_oglTextFreq1->fontMetrics().width("0");
 	m_blankWidthf2 = m_oglTextFreq2->fontMetrics().width("0");
 	m_fUnitStringWidth = m_oglTextFreq2->fontMetrics().width("MHz");
 
-    //m_versionStringWidth = m_oglTextSmall->fontMetrics().tightBoundingRect("5.52").width();
     m_versionStringWidth = m_oglTextSmall->fontMetrics().width("2.22");
 
 	m_SYNCString = QString("SYNC");
-    //m_syncWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_SYNCString).width();
     m_syncWidth = m_oglTextSmall->fontMetrics().width(m_SYNCString);
 
 	m_ADCString = QString("ADC");
-    //m_adcWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_ADCString).width();
     m_adcWidth = m_oglTextSmall->fontMetrics().width(m_ADCString);
 
 	m_PacketLossString = QString("IP Packets");
-    //m_packetLossWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_PacketLossString).width();
     m_packetLossWidth = m_oglTextSmall->fontMetrics().width(m_PacketLossString);
 
 	m_sendIQString = QString("send IQ");
-    //m_sendIQWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_sendIQString).width();
     m_sendIQWidth = m_oglTextSmall->fontMetrics().width(m_sendIQString);
 
 	m_recvAudioString = QString("recv Audio");
-    //m_recvAudioWidth = m_oglTextSmall->fontMetrics().tightBoundingRect(m_recvAudioString).width();
     m_recvAudioWidth = m_oglTextSmall->fontMetrics().width(m_recvAudioString);
 
 	m_AttnString = QString("Attn:");
@@ -432,6 +423,9 @@ void OGLDisplayPanel::setupTextstrings() {
 
 	m_hermesString = QString("Hermes ");
     m_hermesStringWidth = m_oglTextSmall->fontMetrics().width(m_hermesString);
+
+    m_hermesStepAttnString = QString("Hermes Step-Attn:");
+    m_hermesStepAttnStringWidth = m_oglTextSmall->fontMetrics().width(m_hermesStepAttnString);
 
 }
 
@@ -500,9 +494,7 @@ void OGLDisplayPanel::paintUpperRegion() {
 	// sync status
 	str = QString(m_SYNCString);
     QRect rect = QRect(x1, y1, m_syncWidth + 2*m_blankWidth, m_blankHeight);
-	//QRect rect = QRect(x1, y1, m_syncWidth + m_blankWidth, m_blankHeight);
-	//QRect rect = QRect(x1, y1, m_syncWidth + 2, m_blankHeight);
-
+	
 	switch (m_syncStatus) {
 
 		case 0:
@@ -519,16 +511,12 @@ void OGLDisplayPanel::paintUpperRegion() {
 	}
 	qglColor(QColor(0, 0, 0));
 	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, m_SYNCString);
-	//m_oglTextSmallItalic->renderText(x1+1, y1, m_SYNCString);
-
+	
 	// ADC status
 	str = QString(m_ADCString);
-    x1 += m_syncWidth + 3*m_blankWidth;
-	//x1 += m_syncWidth + m_blankWidth;
-    rect = QRect(x1, y1, m_adcWidth + 2*m_blankWidth, m_blankHeight);
-    //rect = QRect(x1, y1, m_adcWidth + m_blankWidth, m_blankHeight);
-	//rect = QRect(x1, y1, m_adcWidth + 3, m_blankHeight);
-
+    x1 += m_syncWidth + 2*m_blankWidth + 2;
+	rect = QRect(x1, y1, m_adcWidth + 2*m_blankWidth, m_blankHeight);
+    
 	switch (m_adcStatus) {
 
 		case 0:
@@ -545,15 +533,12 @@ void OGLDisplayPanel::paintUpperRegion() {
 	}
 	qglColor(QColor(0, 0, 0));
 	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, m_ADCString);
-	//m_oglTextSmallItalic->renderText(x1+1, y1, m_ADCString);
-
+	
 	// Packet loss status
 	str = QString(m_PacketLossString);
-    x1 += m_adcWidth + 3*m_blankWidth;
+    x1 += m_adcWidth + 2*m_blankWidth + 2;
     rect = QRect(x1, y1,  m_packetLossWidth + 2*m_blankWidth, m_blankHeight);
-    //rect = QRect(x1, y1,  m_packetLossWidth + 2*m_blankWidth, m_blankHeight);
-    //rect = QRect(x1, y1,  m_packetLossWidth + 5, m_blankHeight);
-
+    
 	switch (m_packetLossStatus) {
 
 		case 0:
@@ -570,7 +555,6 @@ void OGLDisplayPanel::paintUpperRegion() {
 	}
 	qglColor(QColor(0, 0, 0));
 	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, m_PacketLossString);
-	//m_oglTextSmallItalic->renderText(x1+1, y1, m_PacketLossString);
 
 //	// send IQ data status
 //	str = QString(m_sendIQString);
@@ -625,7 +609,10 @@ void OGLDisplayPanel::paintUpperRegion() {
 	str = m_metisString;
     x1 += m_packetLossWidth + 15*m_blankWidth;
 
-    rect = QRect(x1, y1, m_metisStringWidth + m_versionStringWidth, m_blankHeight);
+	if (m_hwInterface == QSDR::Metis && m_dataEngineState == QSDR::DataEngineUp)
+		rect = QRect(x1, y1, m_metisStringWidth + m_versionStringWidth, m_blankHeight);
+	else
+		rect = QRect(x1, y1, m_metisStringWidth, m_blankHeight);
 	
 	if (m_hwInterface == QSDR::Metis) {
 
@@ -643,16 +630,23 @@ void OGLDisplayPanel::paintUpperRegion() {
 		drawGLRect(rect, QColor(68, 68, 68), -2.0f);
 		qglColor(QColor(0, 0, 0));
 	}
-		
-	//m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
 	m_oglTextSmallItalic->renderText(x1, y1, 1.0f, str);
 
 
 	// Mercury status
 	str = m_mercuryString;
-    x1 += m_metisStringWidth + m_versionStringWidth + m_blankWidth;
+	if (m_hwInterface == QSDR::Metis && m_dataEngineState == QSDR::DataEngineUp) {
 
-    rect = QRect(x1, y1, m_mercuryStringWidth + m_versionStringWidth, m_blankHeight);
+		x1 += m_metisStringWidth + m_versionStringWidth + m_blankWidth;
+		rect = QRect(x1, y1, m_mercuryStringWidth + m_versionStringWidth, m_blankHeight);
+	}
+	else {
+
+		x1 += m_metisStringWidth + m_blankWidth;
+		rect = QRect(x1, y1, m_mercuryStringWidth, m_blankHeight);
+	}
+
+    //rect = QRect(x1, y1, m_mercuryStringWidth + m_versionStringWidth, m_blankHeight);
 
 	if (set->getMercuryPresence() && m_hwInterface == QSDR::Metis) {
 
@@ -677,12 +671,19 @@ void OGLDisplayPanel::paintUpperRegion() {
 
 	// Penelope status
 	str = m_penelopeString;
-    x1 += m_mercuryStringWidth + m_versionStringWidth + m_blankWidth;
+	if (m_hwInterface == QSDR::Metis && m_dataEngineState == QSDR::DataEngineUp)
+		x1 += m_mercuryStringWidth + m_versionStringWidth + m_blankWidth;
+	else
+		x1 += m_mercuryStringWidth + m_blankWidth;
 
 	if (set->getPenelopePresence() && m_hwInterface == QSDR::Metis) {
 
 		str = m_penelopeString;
-        rect = QRect(x1, y1, m_penelopeStringWidth + m_versionStringWidth, m_blankHeight);
+		if (m_dataEngineState == QSDR::DataEngineUp)
+			rect = QRect(x1, y1, m_penelopeStringWidth + m_versionStringWidth, m_blankHeight);
+		else
+			rect = QRect(x1, y1, m_penelopeStringWidth, m_blankHeight);
+
 		drawGLRect(rect, m_textBackgroundColor, -2.0f);
 		if (m_dataEngineState == QSDR::DataEngineUp) {
 
@@ -695,7 +696,11 @@ void OGLDisplayPanel::paintUpperRegion() {
 	else if (set->getPennyLanePresence() && m_hwInterface == QSDR::Metis) {
 
 		str = m_pennylaneString;
-        rect = QRect(x1, y1, m_pennylaneStringWidth + m_versionStringWidth, m_blankHeight);
+		if (m_dataEngineState == QSDR::DataEngineUp)
+			rect = QRect(x1, y1, m_pennylaneStringWidth + m_versionStringWidth, m_blankHeight);
+		else
+			rect = QRect(x1, y1, m_pennylaneStringWidth, m_blankHeight);
+
 		drawGLRect(rect, m_textBackgroundColor, -2.0f);
 		if (m_dataEngineState == QSDR::DataEngineUp) {
 
@@ -707,19 +712,34 @@ void OGLDisplayPanel::paintUpperRegion() {
 	}
 	else {
 
-        rect = QRect(x1, y1, m_penelopeStringWidth + m_versionStringWidth, m_blankHeight);
+		if (m_dataEngineState == QSDR::DataEngineUp && m_hwInterface == QSDR::Metis)
+			rect = QRect(x1, y1, m_penelopeStringWidth + m_versionStringWidth, m_blankHeight);
+		else
+			rect = QRect(x1, y1, m_penelopeStringWidth, m_blankHeight);
+
 		drawGLRect(rect, QColor(68, 68, 68), -2.0f);
 		qglColor(QColor(0, 0, 0));
 	}
-	//m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y1, 1.0f, str);
 	m_oglTextSmallItalic->renderText(x1, y1, 1.0f, str);
 
 
 	// Hermes status
 	str = m_hermesString;
-    x1 += m_penelopeStringWidth + m_versionStringWidth + m_blankWidth;
+	x1 += m_penelopeStringWidth + m_blankWidth;
 
-    rect = QRect(x1, y1,  m_hermesStringWidth + m_versionStringWidth, m_blankHeight);
+	if (set->getHPSDRHardware() == 1 && m_dataEngineState == QSDR::DataEngineUp) {
+	//if (m_dataEngineState == QSDR::DataEngineUp && m_hwInterface == QSDR::Metis) {
+		
+		//x1 += m_versionStringWidth;
+		rect = QRect(x1, y1,  m_hermesStringWidth + m_versionStringWidth, m_blankHeight);
+	}
+	else {
+
+		//x1 += m_penelopeStringWidth + m_blankWidth;
+		rect = QRect(x1, y1,  m_hermesStringWidth, m_blankHeight);
+	}
+
+    //rect = QRect(x1, y1,  m_hermesStringWidth + m_versionStringWidth, m_blankHeight);
 
 	if (set->getHPSDRHardware() == 1) {
 
@@ -743,9 +763,13 @@ void OGLDisplayPanel::paintUpperRegion() {
 
 	// Excalibur status
 	str = m_excaliburString;
-    x1 += m_hermesStringWidth + m_versionStringWidth + m_blankWidth;
+	if (m_dataEngineState == QSDR::DataEngineUp)
+		x1 += m_hermesStringWidth + m_versionStringWidth + m_blankWidth;
+	else
+		x1 += m_hermesStringWidth + m_blankWidth;
 
-    rect = QRect(x1, y1, m_hermesStringWidth + m_versionStringWidth, m_blankHeight);
+    //rect = QRect(x1, y1, m_hermesStringWidth + m_versionStringWidth, m_blankHeight);
+	rect = QRect(x1, y1, m_excaliburStringWidth, m_blankHeight);
 
 	if (set->getExcaliburPresence() && m_hwInterface == QSDR::Metis) {
 
@@ -769,7 +793,8 @@ void OGLDisplayPanel::paintUpperRegion() {
 	
 	// Alex status
 	str = m_alexString;
-    x1 += m_hermesStringWidth + m_versionStringWidth + m_blankWidth;
+    //x1 += m_hermesStringWidth + m_versionStringWidth + m_blankWidth;
+	x1 += m_excaliburStringWidth + m_blankWidth;
 
     rect = QRect(x1, y1, m_alexStringWidth + m_blankWidth, m_blankHeight);
 
@@ -883,9 +908,9 @@ void OGLDisplayPanel::paintLowerRegion() {
 	qglColor(QColor(166, 196, 208));
 	m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, str);
 
-
-	x1 += serverModeStringWidth + 15*m_blankWidth;
 	if (m_hwInterface == QSDR::Metis) {
+
+		x1 += serverModeStringWidth + 15*m_blankWidth;
 
 		// 10 MHz source status
 		qglColor(QColor(106, 136, 148));
@@ -904,6 +929,56 @@ void OGLDisplayPanel::paintLowerRegion() {
 		x1 += m_12288MHzWidth + 4*m_blankWidth;
 		qglColor(QColor(166, 196, 208));
 		m_oglTextSmallItalic->renderText(x1 + m_blankWidth, y2, m_src122_88mhz);
+	}
+	else if (m_hwInterface == QSDR::Hermes) {
+
+		//x1 += serverModeStringWidth + 10*m_blankWidth;
+
+		//qglColor(QColor(166, 196, 208));
+		//m_oglTextSmallItalic->renderText(x1, y2, m_hermesStepAttnString);
+
+		//x1 += m_hermesStepAttnStringWidth + 2*m_blankWidth;
+		//y2 += 1;
+
+		//QColor triCol;
+		//QColor onLCol = QColor(0x11, 0x6b, 0x7f);//QColor(26, 56, 168);
+		//QColor onHCol = QColor(0x51, 0xab, 0xbf);//QColor(66, 96, 208);
+		//QColor offCol = QColor(68, 68, 68);
+
+		//if (m_dataEngineState == QSDR::DataEngineUp)
+		//	triCol = QColor(156, 186, 198);
+		//else
+		//	triCol = QColor(68, 68, 68);
+
+		//QRect rect = QRect(x1, y2, 9, 10);
+		//drawGLTriangleLeft(rect, triCol, -2.0f);
+		//x1 += 10;
+
+		//for (int i = 0; i < 31; i++) {
+
+		//	rect = QRect(x1 + i*4, y2, 3, 10);
+		//	if (m_dataEngineState == QSDR::DataEngineUp) {
+
+		//		if (i < 19)
+		//			drawGLRect(rect, onHCol, -2.0f);
+		//		else
+		//			drawGLRect(rect, onLCol, -2.0f);
+		//	}
+		//	else
+		//		drawGLRect(rect, offCol, -2.0f);
+		//}
+
+		//x1 += 124;
+		//rect = QRect(x1, y2, 9, 10);
+		//drawGLTriangleRight(rect, triCol, -2.0f);
+
+		//if (m_dataEngineState == QSDR::DataEngineUp)
+		//	qglColor(QColor(166, 196, 208));
+		//else
+		//	qglColor(QColor(0, 0, 0));
+
+		//x1 += 12;
+		//m_oglTextSmallItalic->renderText(x1, y2, "-19 dB");
 	}
 }
 
@@ -2354,8 +2429,22 @@ void OGLDisplayPanel::wheelEvent(QWheelEvent * event) {
 			//newFreq = frequency1 * 1000 + frequency2 + numSteps * deltaF;
 			newFreq = f1 * 1000 + f2 + numSteps * deltaF;
 
-		if (newFreq < MAXFREQUENCY && newFreq >= 0)
-			set->setFrequency(this, true, m_currentReceiver, newFreq);
+		if (newFreq < MAXFREQUENCY && newFreq >= 0) {
+
+			if (set->getPanLockedStatus(m_currentReceiver)) {
+
+				long ctrf = set->getCtrFrequency(m_currentReceiver);
+				int s = set->getSampleRate()/2;
+				if (newFreq > ctrf + s)
+					newFreq = ctrf + s;
+				else if (newFreq < ctrf - s)
+					newFreq = ctrf - s;
+
+				set->setVFOFrequency(this, 0, m_currentReceiver, newFreq);
+			}
+			else
+				set->setVFOFrequency(this, 1, m_currentReceiver, newFreq);
+		}
 
 		//qDebug() << "set frequency for rx" << m_currentReceiver;
 			
@@ -2504,10 +2593,10 @@ void OGLDisplayPanel::setCurrentReceiver(QObject *sender, int value) {
 	update();
 }
 
-void OGLDisplayPanel::setFrequency(QObject *sender, bool value, int rx, long freq) {
+void OGLDisplayPanel::setFrequency(QObject *sender, int mode, int rx, long freq) {
 
 	Q_UNUSED (sender)
-	Q_UNUSED (value)
+	Q_UNUSED (mode)
 	//Q_UNUSED (rx)
 
 	//m_oldFreq = freq;

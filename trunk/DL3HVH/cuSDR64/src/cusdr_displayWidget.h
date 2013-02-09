@@ -52,7 +52,7 @@ class DisplayOptionsWidget : public QWidget {
 	Q_OBJECT
 
 public:
-	DisplayOptionsWidget(QWidget *parent = 0);
+	DisplayOptionsWidget(QWidget* parent = 0);
 	~DisplayOptionsWidget();
 
 public slots:
@@ -60,58 +60,69 @@ public slots:
 	QSize	minimumSizeHint() const;
 
 private:
-	Settings	*set;
+	Settings*					set;
 
 	QSDR::_ServerMode			m_serverMode;
 	QSDR::_HWInterfaceMode		m_hwInterface;
 	QSDR::_DataEngineState		m_dataEngineState;
-	QSDRGraphics::_Panadapter	m_panadapterMode;
-	QSDRGraphics::_WfScheme		m_waterColorScheme;
+
+	PanGraphicsMode				m_panadapterMode;
+	PanGraphicsMode				m_wbPanadapterMode;
+	WaterfallColorMode			m_waterColorMode;
 
 	QList<TReceiver>		m_rxDataList;
+	TWideband				m_widebandOptions;
 	
 	QString					m_menu_style;
 	QString					m_callSingText;
 
-	CFonts		*fonts;
-	TFonts		m_fonts;
+	CFonts*					fonts;
+	TFonts					m_fonts;
 
-	QGroupBox				*m_fpsGroupBox;
-	QGroupBox				*m_panSpectrumOptions;
-	QGroupBox				*m_waterfallSpectrumOptions;
-	QGroupBox				*m_wideBandSpectrumOptions;
-	QGroupBox				*m_sMeterOptions;
-	QGroupBox				*m_callSignEditor;
+	QGroupBox*				m_fpsGroupBox;
+	QGroupBox*				m_panSpectrumOptions;
+	QGroupBox*				m_widebandPanOptions;
+	QGroupBox*				m_waterfallSpectrumOptions;
+	QGroupBox*				m_wideBandSpectrumOptions;
+	QGroupBox*				m_sMeterOptions;
+	QGroupBox*				m_callSignEditor;
 
-	QLineEdit				*callSignLineEdit;
+	QLineEdit*				callSignLineEdit;
 
-	QSlider					*m_fpsSlider;
-	QSlider					*m_avgSlider;
+	QSlider*				m_fpsSlider;
+	QSlider*				m_avgSlider;
+	QSlider*				m_wbAvgSlider;
 
-	QSpinBox				*m_waterfallLoOffsetSpinBox;
-	QSpinBox				*m_waterfallHiOffsetSpinBox;
-	QSpinBox				*m_sMeterHoldTimeSpinBox;
+	QSpinBox*				m_waterfallLoOffsetSpinBox;
+	QSpinBox*				m_waterfallHiOffsetSpinBox;
+	QSpinBox*				m_sMeterHoldTimeSpinBox;
 
-	QLabel					*m_fpsLabel;
-	QLabel					*m_fpsLevelLabel;
-	QLabel					*m_avgLabel;
-	QLabel					*m_avgLevelLabel;
-	QLabel					*m_resolutionLabel;
-	QLabel					*m_waterfallTimeLabel;
-	QLabel					*m_waterfallLoOffsetLabel;
-	QLabel					*m_waterfallHiOffsetLabel;
-	QLabel					*m_sMeterHoldTimeLabel;
+	QLabel*					m_fpsLabel;
+	QLabel*					m_fpsLevelLabel;
+	QLabel*					m_avgLabel;
+	QLabel*					m_wbAvgLabel;
+	QLabel*					m_avgLevelLabel;
+	QLabel*					m_wbAvgLevelLabel;
+	QLabel*					m_resolutionLabel;
+	QLabel*					m_waterfallTimeLabel;
+	QLabel*					m_waterfallLoOffsetLabel;
+	QLabel*					m_waterfallHiOffsetLabel;
+	QLabel*					m_sMeterHoldTimeLabel;
 
-	AeroButton				*m_PanLineBtn;
-	AeroButton				*m_PanFilledLineBtn;
-	AeroButton				*m_PanSolidBtn;
-	AeroButton				*m_setCallSignBtn;
-	AeroButton				*m_waterfallSimpleBtn;
-	AeroButton				*m_waterfallEnhancedBtn;
-	AeroButton				*m_waterfallSpectranBtn;
+	AeroButton*				m_PanLineBtn;
+	AeroButton*				m_PanFilledLineBtn;
+	AeroButton*				m_PanSolidBtn;
+	AeroButton*				m_wbPanLineBtn;
+	AeroButton*				m_wbPanFilledLineBtn;
+	AeroButton*				m_wbPanSolidBtn;
+	AeroButton*				m_setCallSignBtn;
+	AeroButton*				m_waterfallSimpleBtn;
+	AeroButton*				m_waterfallEnhancedBtn;
+	AeroButton*				m_waterfallSpectranBtn;
 
-	QList<AeroButton *>		m_panadapterBtnList;
-	QList<AeroButton *>		m_waterfallSchemeBtnList;
+	QList<AeroButton* >		m_panadapterBtnList;
+	QList<AeroButton* >		m_wbpanadapterBtnList;
+	QList<AeroButton* >		m_waterfallColorBtnList;
 	
 	int		m_fontHeight;
 	int		m_maxFontWidth;
@@ -127,7 +138,7 @@ private:
 	int		m_panStyle;
 	int		m_framesPerSecond;
 	int		m_avgValue;
-	int		m_graphicResolution;
+	int		m_wbAvgValue;
 	int		m_sampleRate;
 	int		m_waterfallTime;
 	int		m_sMeterHoldTime;
@@ -135,9 +146,13 @@ private:
 	void	setupConnections();
 	void	createFPSGroupBox();
 	void	createPanSpectrumOptions();
+	void	createWidebandPanOptions();
 	void	createWaterfallSpectrumOptions();
 	void	createSMeterOptions();
 	void	createCallSignEditor();
+
+	void	setPanadapterMode(int rx);
+	void	setWaterfallColorMode(int rx);
 
 private slots:
 	void	systemStateChanged(
@@ -148,14 +163,16 @@ private slots:
 					QSDR::_DataEngineState state);
 
 	void	graphicModeChanged(
-					QObject *sender, 
-					QSDRGraphics::_Panadapter panMode,
-					QSDRGraphics::_WfScheme waterColorScheme);
+					QObject *sender,
+					int rx,
+					PanGraphicsMode panMode,
+					WaterfallColorMode waterfallColorMode);
 
 	void	setCurrentReceiver(QObject *sender, int rx);
 	void	setFramesPerSecond(QObject *sender, int rx, int value);
 	void	panModeChanged();
-	void	waterfallSchemeChanged();
+	void	wbPanModeChanged();
+	void	waterfallColorChanged();
 	void	sMeterChanged();
 	void	waterfallTimeChanged(int value);
 	void	waterfallLoOffsetChanged(int value);
@@ -163,6 +180,7 @@ private slots:
 	void	sMeterHoldTimeChanged(int value);
 	void 	fpsValueChanged(int value);
 	void	averagingFilterCntChanged(int value);
+	void	setWidebandAveragingCnt(int value);
 	void	sampleRateChanged(QObject *sender, int value);
 	void	callSignTextChanged(const QString &text);
 	void	callSignChanged();

@@ -44,7 +44,6 @@
 #include "qtdsp_qComplex.h"
 #include "qtdsp_filter.h"
 #include "qtdsp_fft.h"
-#include "qtdsp_agc.h"
 #include "qtdsp_wpagc.h"
 #include "qtdsp_powerSpectrum.h"
 #include "qtdsp_signalMeter.h"
@@ -63,38 +62,43 @@ class QDSPEngine : public QObject {
 	Q_OBJECT
 
 public:
-	QDSPEngine(QObject *parent = 0, int rx = 0, int size = 0);
+	QDSPEngine(QObject* parent = 0, int rx = 0, int size = 0);
 	~QDSPEngine();
 
-	QFFT				*fft;
-	QFilter				*filter;
-	//QAGC				*agc;
-	QWPAGC				*wpagc;
-	PowerSpectrum		*spectrum;
-	SignalMeter			*signalmeter;
-	Demodulation		*demod;
+	QFFT*				fft;
+	QFilter*			filter;
+	QWPAGC*				wpagc;
+	PowerSpectrum*		spectrum;
+	PowerSpectrum*		spectrum2;
+	PowerSpectrum*		spectrum4;
+	PowerSpectrum*		spectrum8;
+	SignalMeter*		signalmeter;
+	Demodulation*		demod;
 
-	void processDSP(CPX &in, CPX &out,  int size);
+	void	processDSP(CPX &in, CPX &out,  int size);
 
-	int 	getSpectrum(float *buffer);
+	int		getSpectrum(qVectorFloat &buffer, int mult);
 	float	getSMeterInstValue();
 
 public slots:
 	bool getQtDSPStatus() { return m_qtdspOn; }
 	
+	void setNCOFrequency(int rx, long value);
 	void setSampleRate(QObject *sender, int value);
+	void setSampleSize(int rx, int size);
 	void setQtDSPStatus(bool value);
 	void setVolume(float value);
 	void setDSPMode(DSPMode mode);
 	void setAGCMode(AGCMode mode);
 
 private:
-	Settings	*set;
+	Settings*	set;
 	TReceiver	m_rxData;
 	AGCMode		m_agcMode;
 
 	CPX		tmp1CPX;
 	CPX		tmp2CPX;
+	cpx		osc1cpx;
 
 	QMutex	m_mutex;
 
@@ -102,11 +106,20 @@ private:
 
 	int		m_rx;
 	int		m_size;
+	int		m_spectrumSize;
 	int		m_samplerate;
+	int		m_fftMultiplcator;
 
 	float	m_volume;
+	qreal	m_NcoFreq;
+	qreal	m_NcoInc;
+	qreal	m_NcoTime;
+	qreal	m_CWoffset;
+	qreal	m_OscCos;
+	qreal	m_OscSin;
 	//qreal	m_calOffset;
 
+	void	ProcessFrequencyShift(CPX &in, CPX &out, int size);
 	void	setupConnections();
 
 private slots:

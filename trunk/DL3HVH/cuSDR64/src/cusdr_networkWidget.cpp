@@ -233,12 +233,14 @@ void NetworkWidget::createDeviceNetworkInterfaceGroup() {
 
 	socketBufferSizes = new QComboBox();
 	socketBufferSizes->setStyleSheet(set->getComboBoxStyle());
+	socketBufferSizes->addItem("1 kB");
 	socketBufferSizes->addItem("8 kB");
 	socketBufferSizes->addItem("16 kB");
 	socketBufferSizes->addItem("32 kB");
 	socketBufferSizes->addItem("64 kB");
 	socketBufferSizes->addItem("128 kB");
 	socketBufferSizes->addItem("256 kB");
+	socketBufferSizes->addItem("512 kB");
 	socketBufferSizes->setEnabled(false);
 
 	CHECKED_CONNECT(
@@ -396,7 +398,8 @@ void NetworkWidget::interfaceBtnClicked() {
 
 	AeroButton *button = qobject_cast<AeroButton *>(sender());
 
-	if (button == networkPresenceBtn && m_hpsdrHardware == 0) { // HPSDR modules
+	//if (button == networkPresenceBtn && m_hpsdrHardware == 0) { // HPSDR modules
+	if (button == networkPresenceBtn) { // HPSDR modules
 
 		noHWBtn->setBtnState(AeroButton::OFF);
 		noHWBtn->update();
@@ -415,9 +418,9 @@ void NetworkWidget::interfaceBtnClicked() {
 
 		deviceNIGroupBox->show();
 		searchNetworkDeviceGroupBox->show();
-		source10MhzExclusiveGroup->show();
-		source122_88MhzExclusiveGroup->show();
-		socketBufferSizeGroupBox->show();
+		//source10MhzExclusiveGroup->show();
+		//source122_88MhzExclusiveGroup->show();
+		//socketBufferSizeGroupBox->show();
 	}
 	else
 	if (button == noHWBtn) {
@@ -430,9 +433,9 @@ void NetworkWidget::interfaceBtnClicked() {
 		emit messageEvent("[hpsdr]: changed to no-interface mode.");
 		deviceNIGroupBox->hide();
 		searchNetworkDeviceGroupBox->hide();
-		source10MhzExclusiveGroup->hide();
-		source122_88MhzExclusiveGroup->hide();
-		socketBufferSizeGroupBox->hide();
+		//source10MhzExclusiveGroup->hide();
+		//source122_88MhzExclusiveGroup->hide();
+		//socketBufferSizeGroupBox->hide();
 	}
 
 	qDebug() << "HPSDRWidget::  setSystemState.";
@@ -522,28 +525,36 @@ void NetworkWidget::setSocketBufSize(QObject *sender, int size) {
 
 	switch (m_socketBufferSize) {
 
-		case 8:
+		case 1:
 			socketBufferSizes->setCurrentIndex(0);
 			break;
 
-		case 16:
+		case 8:
 			socketBufferSizes->setCurrentIndex(1);
 			break;
 
-		case 32:
+		case 16:
 			socketBufferSizes->setCurrentIndex(2);
 			break;
 
-		case 64:
+		case 32:
 			socketBufferSizes->setCurrentIndex(3);
 			break;
 
-		case 128:
+		case 64:
 			socketBufferSizes->setCurrentIndex(4);
 			break;
 
-		case 256:
+		case 128:
 			socketBufferSizes->setCurrentIndex(5);
+			break;
+
+		case 256:
+			socketBufferSizes->setCurrentIndex(6);
+			break;
+
+		case 512:
+			socketBufferSizes->setCurrentIndex(7);
 			break;
 	}
 	
@@ -554,27 +565,35 @@ void NetworkWidget::setSocketBufferSize(int value) {
 	switch (value) {
 
 		case 0:
-			set->setSocketBufferSize(this, 8);
+			set->setSocketBufferSize(this, 1);
 			break;
 
 		case 1:
-			set->setSocketBufferSize(this, 16);
+			set->setSocketBufferSize(this, 8);
 			break;
 
 		case 2:
-			set->setSocketBufferSize(this, 32);
+			set->setSocketBufferSize(this, 16);
 			break;
 
 		case 3:
-			set->setSocketBufferSize(this, 64);
+			set->setSocketBufferSize(this, 32);
 			break;
 
 		case 4:
-			set->setSocketBufferSize(this, 128);
+			set->setSocketBufferSize(this, 64);
 			break;
 
 		case 5:
+			set->setSocketBufferSize(this, 128);
+			break;
+
+		case 6:
 			set->setSocketBufferSize(this, 256);
+			break;
+
+		case 7:
+			set->setSocketBufferSize(this, 512);
 			break;
 	}
 }

@@ -49,6 +49,7 @@ DataIO::DataIO(THPSDRParameter *ioData)
 	, m_sendEP4(false)
 	, m_manualBufferSize(set->getManualSocketBufferSize())
 	, m_packetsToggle(true)
+	, m_firstFrame(true)
 	, m_stopped(false)
 {
 	m_dataIOSocket = 0;
@@ -61,6 +62,7 @@ DataIO::DataIO(THPSDRParameter *ioData)
 
 	m_datagram.resize(1032);
 	m_wbDatagram.resize(0);
+	m_twoFramesDatagram.resize(0);
 
 	m_sendSequence = 0L;
 	m_oldSendSequence = 0L;
@@ -74,10 +76,24 @@ DataIO::DataIO(THPSDRParameter *ioData)
 	m_packetLossTime.start();
 
 	CHECKED_CONNECT(
+		set,
+		SIGNAL(sampleRateChanged(QObject *, int)), 
+		this, 
+		SLOT(setSampleRate(QObject *, int)));
+
+	CHECKED_CONNECT(
 		set, 
 		SIGNAL(manualSocketBufferChanged(QObject*, bool)), 
 		this, 
 		SLOT(setManualSocketBufferSize(QObject*, bool)));
+
+	CHECKED_CONNECT(
+		set, 
+		SIGNAL(socketBufferSizeChanged(QObject*, int)), 
+		this, 
+		SLOT(setSocketBufferSize(QObject*, int)));
+
+	m_message = "m_sendSequence = %1, bytes sent: %2";
 }
 
 DataIO::~DataIO() {
@@ -91,9 +107,9 @@ DataIO::~DataIO() {
 
 void DataIO::stop() {
 
-	m_mutex.lock();
+	io->networkIOMutex.lock();
 		m_stopped = true;
-	m_mutex.unlock();
+	io->networkIOMutex.unlock();
 }
 
 void DataIO::initDataReceiverSocket() {
@@ -104,39 +120,47 @@ void DataIO::initDataReceiverSocket() {
 
 	if (m_manualBufferSize) {
 
-		newBufferSize = m_socketBufferSize * 1032;
+		newBufferSize = m_socketBufferSize * 1024;//m_socketBufferSize * 1032;
 		io->networkIOMutex.lock();
 		DATAIO_DEBUG << "initDataReceiverSocket socket buffer size set to " << m_socketBufferSize << " kB.";
 		io->networkIOMutex.unlock();
 	}
 	else {
 
-		if (io->samplerate == 192000) {
+		if (io->samplerate == 384000) {
 
-			newBufferSize = 64 * 1032;
+			newBufferSize = 128*1024;//128 * 1032;
 			io->networkIOMutex.lock();
-			DATAIO_DEBUG << "initDataReceiverSocket socket buffer size set to 64 kB.";
+			DATAIO_DEBUG << "socket buffer size set to 128 kB.";
+			io->networkIOMutex.unlock();
+		}
+		else if (io->samplerate == 192000) {
+
+			newBufferSize = 64*1024;//64 * 1032;
+			io->networkIOMutex.lock();
+			DATAIO_DEBUG << "socket buffer size set to 64 kB.";
 			io->networkIOMutex.unlock();
 		}
 		else if (io->samplerate == 96000) {
 
-			newBufferSize = 32 * 1032;
+			newBufferSize = 32*1024;//32 * 1032;
 			io->networkIOMutex.lock();
-			DATAIO_DEBUG << "initDataReceiverSocket socket buffer size set to 32 kB.";
+			DATAIO_DEBUG << "socket buffer size set to 32 kB.";
 			io->networkIOMutex.unlock();
 		}
 		else if (io->samplerate == 48000) {
 
-			newBufferSize = 16 * 1032;
+			newBufferSize = 16*1024;//16 * 1032;
 			io->networkIOMutex.lock();
-			DATAIO_DEBUG << "initDataReceiverSocket socket buffer size set to 16 kB.";
+			DATAIO_DEBUG << "socket buffer size set to 16 kB.";
 			io->networkIOMutex.unlock();
 		}
 	}
 
 	if (m_dataIOSocket->bind(QHostAddress(set->getHPSDRDeviceLocalAddr()),
 							 set->getMetisPort(),
-							 QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
+							 QUdpSocket::DontShareAddress))
+							 //QUdpSocket::ReuseAddressHint | QUdpSocket::ShareAddress))
 	{
 
 #if defined(Q_OS_WIN32)
@@ -144,10 +168,14 @@ void DataIO::initDataReceiverSocket() {
                      SO_RCVBUF, (char *)&newBufferSize, sizeof(newBufferSize)) == -1) {
 
 			io->networkIOMutex.lock();
-			DATAIO_DEBUG << "initDataIOSocket error!";
+			DATAIO_DEBUG << "dataIOSocket error!";
 			io->networkIOMutex.unlock();
 		}
 #endif
+
+		
+		//m_dataIOSocket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
+		//m_dataIOSocket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
 
 		CHECKED_CONNECT(
 			m_dataIOSocket,
@@ -155,15 +183,19 @@ void DataIO::initDataReceiverSocket() {
 			this, 
 			SLOT(displayDataReceiverSocketError(QAbstractSocket::SocketError)));
 
-		CHECKED_CONNECT_OPT(
+		/*CHECKED_CONNECT_OPT(
 			m_dataIOSocket,
 			SIGNAL(readyRead()), 
 			this, 
 			SLOT(readDeviceData()),
-			Qt::DirectConnection);
+			Qt::DirectConnection);*/
 
-		//m_IQRcvrSocket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
-		//m_IQRcvrSocket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
+		CHECKED_CONNECT(
+			m_dataIOSocket,
+			SIGNAL(readyRead()), 
+			this, 
+			SLOT(readDeviceData()));
+
 
 		io->networkIOMutex.lock();
 		DATAIO_DEBUG << "data receiver socket bound successful to local port " << m_dataIOSocket->localPort();
@@ -186,6 +218,7 @@ void DataIO::readDeviceData() {
 
 	while (m_dataIOSocket->hasPendingDatagrams()) {
 
+		QMutexLocker locker(&io->networkIOMutex);
 		if (m_dataIOSocket->readDatagram(m_datagram.data(), m_datagram.size()) == METIS_DATA_SIZE) {
 			
 			if (m_datagram.left(3) == m_metisGetDataSignature) {
@@ -199,7 +232,7 @@ void DataIO::readDeviceData() {
 
 					if (m_sequence != m_oldSequence + 1) {
 
-						DATAIO_DEBUG << "readData missed " << m_sequence - m_oldSequence << " packages.";
+						//DATAIO_DEBUG << "readData missed " << m_sequence - m_oldSequence << " packages.";
 
 						if (m_packetLossTime.elapsed() > 100) {
 							
@@ -210,10 +243,32 @@ void DataIO::readDeviceData() {
 
 					m_oldSequence = m_sequence;
 
-					// enqueue first half of the HPSDR frame from the HPSDR device
-					io->iq_queue.enqueue(m_datagram.mid(METIS_HEADER_SIZE, BUFFER_SIZE/2));
-					// enqueue second half of the HPSDR frame from the HPSDR device
-					io->iq_queue.enqueue(m_datagram.right(BUFFER_SIZE/2));
+					//// enqueue first half of the HPSDR frame from the HPSDR device
+					//io->iq_queue.enqueue(m_datagram.mid(METIS_HEADER_SIZE, BUFFER_SIZE/2));
+					//// enqueue second half of the HPSDR frame from the HPSDR device
+					//io->iq_queue.enqueue(m_datagram.right(BUFFER_SIZE/2));
+
+					// enqueue one frame from the HPSDR device
+					if (!io->iq_queue.isFull()) {
+						io->iq_queue.enqueue(m_datagram.mid(METIS_HEADER_SIZE, BUFFER_SIZE));
+					}
+
+					// collect two HPSDR frames
+					//if (m_firstFrame) {
+
+					//	m_twoFramesDatagram += m_datagram.mid(METIS_HEADER_SIZE, BUFFER_SIZE);
+					//	m_firstFrame = false;
+					//}
+					//else {
+
+					//	m_twoFramesDatagram += m_datagram.mid(METIS_HEADER_SIZE, BUFFER_SIZE);
+
+					//	//enqueue the two frames
+					//	io->iq_queue.enqueue(m_twoFramesDatagram);
+					//	m_firstFrame = true;
+
+					//	m_twoFramesDatagram.resize(0);
+					//}
 				}
 				else if (m_datagram[3] == (char)0x04) { // wide band data
 
@@ -237,17 +292,19 @@ void DataIO::readDeviceData() {
 					m_oldSequenceWideBand = m_sequenceWideBand;
 
 					// three 'if's from KISS Konsole
-					if ((m_wbBuffers & m_datagram[7]) == 0) {
-						
+					if ((m_wbBuffers & m_datagram[7]) == 0)
+					{						
 						m_sendEP4 = true;
 						m_wbCount = 0;
 					}
 
 					if (m_sendEP4)
+					{
 						m_wbDatagram.append(m_datagram.mid(METIS_HEADER_SIZE, BUFFER_SIZE));
+					}
 						
-					if (m_wbCount++ == m_wbBuffers) {
-
+					if (m_wbCount++ == m_wbBuffers)
+					{
 						// enqueue
 						m_sendEP4 = false;
 						io->wb_queue.enqueue(m_wbDatagram);
@@ -316,17 +373,17 @@ void DataIO::sendInitFramesToNetworkDevice(int rx) {
     initDatagram[522] = SYNC;
 
 	initDatagram[523] = io->control_out[0] | ((rx + 2) << 1);
-	initDatagram[524] = set->getFrequencies().at(rx) >> 24;
-	initDatagram[525] = set->getFrequencies().at(rx) >> 16;
-	initDatagram[526] = set->getFrequencies().at(rx) >> 8;
-	initDatagram[527] = set->getFrequencies().at(rx) ;
+	initDatagram[524] = set->getCtrFrequencies().at(rx) >> 24;
+	initDatagram[525] = set->getCtrFrequencies().at(rx) >> 16;
+	initDatagram[526] = set->getCtrFrequencies().at(rx) >> 8;
+	initDatagram[527] = set->getCtrFrequencies().at(rx) ;
 
 
 	for (int i = 528; i < 1032; i++) initDatagram[i]  = 0x00;
 
 //	for (int i = 0; i < 5; i++) {
 //
-//		if (m_dataIOSocket->writeDatagram(initDatagram.data(), initDatagram.size(), io->hpsdrDeviceIPAddress, METIS_PORT) < 0) {
+//		if (m_dataIOSocket->writeDatagram(initDatagram.data(), initDatagram.size(), io->hpsdrDeviceIPAddress, DEVICE_PORT) < 0) {
 //
 //			io->networkIOMutex.lock();
 //			DATAIO_DEBUG << "error sending init data to device: " << qPrintable(m_dataIOSocket->errorString());
@@ -343,7 +400,7 @@ void DataIO::sendInitFramesToNetworkDevice(int rx) {
 //		}
 //	}
 
-	if (m_dataIOSocket->writeDatagram(initDatagram.data(), initDatagram.size(), io->hpsdrDeviceIPAddress, METIS_PORT) < 0) {
+	if (m_dataIOSocket->writeDatagram(initDatagram.data(), initDatagram.size(), io->hpsdrDeviceIPAddress, DEVICE_PORT) < 0) {
 
 		io->networkIOMutex.lock();
 		DATAIO_DEBUG << "error sending init data to device: " << qPrintable(m_dataIOSocket->errorString());
@@ -358,7 +415,7 @@ void DataIO::sendInitFramesToNetworkDevice(int rx) {
 
 	SleeperThread::msleep(20);
 
-	if (m_dataIOSocket->writeDatagram(initDatagram.data(), initDatagram.size(), io->hpsdrDeviceIPAddress, METIS_PORT) < 0) {
+	if (m_dataIOSocket->writeDatagram(initDatagram.data(), initDatagram.size(), io->hpsdrDeviceIPAddress, DEVICE_PORT) < 0) {
 
 		io->networkIOMutex.lock();
 		DATAIO_DEBUG << "error sending init data to device: " << qPrintable(m_dataIOSocket->errorString());
@@ -392,7 +449,7 @@ void DataIO::networkDeviceStartStop(char value) {
 
 		for (int i = 4; i < 64; i++) m_commandDatagram[i] = 0x00;
 
-		if (m_dataIOSocket->writeDatagram(m_commandDatagram, metis.ip_address, METIS_PORT) == 64) {
+		if (m_dataIOSocket->writeDatagram(m_commandDatagram, metis.ip_address, DEVICE_PORT) == 64) {
 
 			//if (value == 1) {
 			if (value != 0) {
@@ -443,12 +500,17 @@ void DataIO::writeData() {
 	else {
 
 		m_outDatagram += io->audioDatagram;
+		
+		if (m_dataIOSocket->writeDatagram(m_outDatagram, set->getCurrentMetisCard().ip_address, DEVICE_PORT) < 0) {
+			DATAIO_DEBUG << "error sending data to device: " << m_dataIOSocket->errorString();
+		}
 
-		if (m_dataIOSocket->writeDatagram(m_outDatagram, set->getCurrentMetisCard().ip_address, METIS_PORT) < 0)
-			DATAIO_DEBUG << "error sending data to Metis:" << m_dataIOSocket->errorString();
+		//if (m_sendSequence%100 == 0)
+		//	DATAIO_DEBUG << m_sendSequence;
 
-		if (m_sendSequence != m_oldSendSequence + 1)
-			DATAIO_DEBUG << "output sequence error: old =" << m_oldSendSequence << "; new =" << m_sendSequence;
+		if (m_sendSequence != m_oldSendSequence + 1) {
+			DATAIO_DEBUG << "output sequence error: old = " << m_oldSendSequence << "; new =" << m_sendSequence;
+		}
 
 		m_oldSendSequence = m_sendSequence;
 		m_setNetworkDeviceHeader = true;
@@ -458,7 +520,7 @@ void DataIO::writeData() {
 void DataIO::displayDataReceiverSocketError(QAbstractSocket::SocketError error) {
 
 	io->networkIOMutex.lock();
-	DATAIO_DEBUG << "displayDataReceiverSocketError data receiver socket error: " << error;
+	DATAIO_DEBUG << "data IO socket error: " << error;
 	io->networkIOMutex.unlock();
 }
 
@@ -467,5 +529,101 @@ void DataIO::setManualSocketBufferSize(QObject *sender, bool value) {
 	Q_UNUSED (sender)
 
 	m_manualBufferSize = value;
-	m_socketBufferSize = set->getSocketBufferSize();
+	DATAIO_DEBUG << "m_manualBufferSize to change = " << m_manualBufferSize;
+	int socketBufferSize = 1032 * set->getSocketBufferSize();
+
+	io->networkIOMutex.lock();
+
+		if (m_manualBufferSize) {
+
+			DATAIO_DEBUG << "set data IO socket BufferSize to " << m_socketBufferSize;
+#if defined(Q_OS_WIN32)
+			if (::setsockopt(m_dataIOSocket->socketDescriptor(), SOL_SOCKET,
+                     SO_RCVBUF, (char *)&socketBufferSize, sizeof(socketBufferSize)) == -1) {
+
+				io->networkIOMutex.lock();
+				DATAIO_DEBUG << "dataIOSocket error!";
+				io->networkIOMutex.unlock();
+			}
+#endif
+		}
+		else {
+
+			DATAIO_DEBUG << "set data IO socket BufferSize to 32 kB.";
+			socketBufferSize = 1032 * 32;
+#if defined(Q_OS_WIN32)
+			if (::setsockopt(m_dataIOSocket->socketDescriptor(), SOL_SOCKET,
+                     SO_RCVBUF, (char *)&socketBufferSize, sizeof(socketBufferSize)) == -1) {
+
+				io->networkIOMutex.lock();
+				DATAIO_DEBUG << "dataIOSocket error!";
+				io->networkIOMutex.unlock();
+			}
+#endif
+		}
+	io->networkIOMutex.unlock();
+}
+
+void DataIO::setSocketBufferSize(QObject *sender, int value) {
+
+	Q_UNUSED (sender)
+
+	int socketBufferSize = value * 1024;
+	DATAIO_DEBUG << "m_socketBufferSize = " << value;
+
+	io->networkIOMutex.lock();
+#if defined(Q_OS_WIN32)
+		if (::setsockopt(m_dataIOSocket->socketDescriptor(), SOL_SOCKET,
+                     SO_RCVBUF, (char *)&socketBufferSize, sizeof(socketBufferSize)) == -1) {
+
+			io->networkIOMutex.lock();
+			DATAIO_DEBUG << "dataIOSocket error!";
+			io->networkIOMutex.unlock();
+		}
+#endif
+	io->networkIOMutex.unlock();
+}
+
+void DataIO::setSampleRate(QObject *sender, int value) {
+
+	Q_UNUSED(sender)
+
+	int bufferSize;
+	io->networkIOMutex.lock();
+	switch (value) {
+	
+		case 48000:
+			bufferSize = 16*1024;//128 * 1032
+			DATAIO_DEBUG << "socket buffer size set to 16 kB.";
+			break;
+			
+		case 96000:
+			bufferSize = 32*1024;//128 * 1032
+			DATAIO_DEBUG << "socket buffer size set to 32 kB.";
+			break;
+			
+		case 192000:
+			bufferSize = 64*1024;//128 * 1032
+			DATAIO_DEBUG << "socket buffer size set to 64 kB.";
+			break;
+			
+		case 384000:
+			bufferSize = 128*1024;//128 * 1032
+			DATAIO_DEBUG << "socket buffer size set to 128 kB.";
+			break;
+
+		default:
+			DATAIO_DEBUG << "invalid sample rate !\n";
+			break;
+	}
+
+#if defined(Q_OS_WIN32)
+		if (::setsockopt(m_dataIOSocket->socketDescriptor(), SOL_SOCKET,
+                     SO_RCVBUF, (char *)&bufferSize, sizeof(bufferSize)) == -1) {
+
+			DATAIO_DEBUG << "dataIOSocket error!";
+		}
+#endif
+
+	io->networkIOMutex.unlock();
 }

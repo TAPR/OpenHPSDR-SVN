@@ -84,7 +84,7 @@ void Discoverer::initHPSDRDevice() {
 		}
 
 		io->networkIOMutex.lock();
-		DISCOVERER_DEBUG << "no Metis found - trying again...";
+		DISCOVERER_DEBUG << "no device found - trying again...";
 		io->networkIOMutex.unlock();
 	}
 
@@ -168,7 +168,7 @@ int Discoverer::findHPSDRDevices() {
 	}
 #endif
 
-	if (socket.writeDatagram(m_findDatagram, QHostAddress::Broadcast, METIS_PORT) == 63) {
+	if (socket.writeDatagram(m_findDatagram, QHostAddress::Broadcast, DEVICE_PORT) == 63) {
 
 		io->networkIOMutex.lock();
 		DISCOVERER_DEBUG << "discovery data sent.";
@@ -215,6 +215,8 @@ int Discoverer::findHPSDRDevices() {
 					str = "Hermes";
 				else if (no == 2)
 					str = "Griffin";
+				else if (no == 4)
+					str = "Angelia";
 
 				mc.boardID = no;
 				mc.boardName = str;

@@ -9,6 +9,7 @@ HEADERS += \
 	./src/Util/cusdr_queue.h \
 	./src/Util/cusdr_splash.h \
 	./src/Util/cusdr_styles.h \
+	./src/Util/qcircularbuffer.h \
 	./src/AudioEngine/cusdr_audio_engine.h \
 	./src/AudioEngine/cusdr_audio_settingsdialog.h \
 	./src/AudioEngine/cusdr_audio_spectrum.h \

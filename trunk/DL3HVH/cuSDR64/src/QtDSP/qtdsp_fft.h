@@ -41,7 +41,7 @@ class QFFT : public QObject {
 	Q_OBJECT
 
 public:
-    QFFT(QObject *parent = 0, int size = 0);
+    QFFT(int size = 0);
     ~QFFT();
 
 public slots:

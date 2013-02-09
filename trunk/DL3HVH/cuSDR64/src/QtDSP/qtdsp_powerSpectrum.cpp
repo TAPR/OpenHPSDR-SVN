@@ -25,6 +25,7 @@
  *   Free Software Foundation, Inc.,
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+#define LOG_POWERSPECTRUM
 
 #include "qtdsp_powerSpectrum.h"
 
@@ -33,6 +34,7 @@ PowerSpectrum::PowerSpectrum(QObject *parent, int size)
 	, set(Settings::instance())
 	, first(true)
 	, m_size(size)
+	, m_spectrumSize(size*2)
 	, m_psswitch(0)
 	, m_averages(4)
 	, m_samplerate(set->getSampleRate())
@@ -50,7 +52,7 @@ PowerSpectrum::PowerSpectrum(QObject *parent, int size)
     zero.re = 0.0f;
     zero.im = 0.0f;
 
-    m_fft = new QFFT(this, m_size * 2);
+    m_fft = new QFFT(m_size * 2);
 
     memset(m_fPsdBm, 0, m_size * 2 * sizeof(float));
 	memset(m_fAvePsdBm, 0, m_size * 2 * sizeof(float));
@@ -63,6 +65,8 @@ PowerSpectrum::PowerSpectrum(QObject *parent, int size)
         windowCPX[i].re = m_window[i];
         windowCPX[i].im = m_window[i];
     }
+
+	cnt = 0;
 }
 
 PowerSpectrum::~PowerSpectrum() {
@@ -84,14 +88,48 @@ PowerSpectrum::~PowerSpectrum() {
     	delete m_fAvePsdBm;
 }
 
-void PowerSpectrum::ProcessSpectrum(CPX &in, int size) {
+void PowerSpectrum::setupConnections() {
+}
+
+//void PowerSpectrum::ProcessSpectrum(CPX &in, int size) {
+//
+//	Q_UNUSED(size)
+//
+//	if (first && dataCPX.size() == 0) {
+//
+//    	dataCPX << in;
+//    	first = false;
+//		return;
+//	}
+//	else {
+//
+//		dataCPX << in;
+//		tmpCPX.fill(zero, m_size*2);
+//
+//		if (dataCPX.size() == m_size) {
+//
+//			for (int i = 0; i < m_size; i++)
+//				tmpCPX[i] = MultCPX(dataCPX.at(i), windowCPX.at(i));
+//
+//			m_mutex.lock();
+//			m_fft->DoFFTWMagnForward(tmpCPX, m_size * 2, m_baseline, m_correction, m_fPsdBm);
+//			m_mutex.unlock();
+//		}
+//
+//		first = true;
+//		dataCPX.resize(0);
+//	}
+//}
+
+void PowerSpectrum::ProcessSpectrum(CPX &in, int size, int maxCnt) {
 
 	Q_UNUSED(size)
 
-	if (first && dataCPX.size() == 0) {
+	if (cnt < maxCnt) { // maxCnt = 1: 4096, maxCnt = 3: 8192, maxCnt = 7: 16384
 
     	dataCPX << in;
-    	first = false;
+    	//first = false;
+		cnt++;
 		return;
 	}
 	else {
@@ -104,12 +142,13 @@ void PowerSpectrum::ProcessSpectrum(CPX &in, int size) {
 			for (int i = 0; i < m_size; i++)
 				tmpCPX[i] = MultCPX(dataCPX.at(i), windowCPX.at(i));
 
-			mutex.lock();
+			m_mutex.lock();
 			m_fft->DoFFTWMagnForward(tmpCPX, m_size * 2, m_baseline, m_correction, m_fPsdBm);
-			mutex.unlock();
+			m_mutex.unlock();
 		}
 
-		first = true;
+		//first = true;
+		cnt = 0;
 		dataCPX.resize(0);
 	}
 }
@@ -129,15 +168,31 @@ void PowerSpectrum::setPsOn(int value) {
     m_psswitch = value;
 }
 
-int PowerSpectrum::psdBmResults(float* buffer) {
+//int PowerSpectrum::psdBmResults(float* buffer) {
+//
+//    if (buffer == NULL) return 0;
+//    
+//	m_mutex.lock();
+//    memcpy(buffer, m_fPsdBm,  dBmSize() * sizeof(float));
+//    m_mutex.unlock();
+//
+//    return dBmSize();
+//}
 
-    if (buffer == NULL) return 0;
-    
-	mutex.lock();
-    memcpy(buffer, m_fPsdBm,  dBmSize() * sizeof(float));
-    mutex.unlock();
+int	PowerSpectrum::spectrumResult(qVectorFloat &buffer, int shift) {
 
-    return dBmSize();
+	if (buffer.size() == 0) return 0;
+	
+	m_mutex.lock();
+
+	memcpy(
+		(float *) buffer.data(),
+		(float *) &m_fPsdBm[shift],
+		4096 * sizeof(float));
+
+    m_mutex.unlock();
+
+	return buffer.size();
 }
 
 void PowerSpectrum::setAverages(int value) {
@@ -149,3 +204,9 @@ float PowerSpectrum::grabPsPoint(int index) {
 	
 	return m_fPsdBm[index]; 
 }
+
+int	PowerSpectrum::dBmSize() const {
+
+	return m_spectrumSize;
+}
+

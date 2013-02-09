@@ -60,8 +60,8 @@ QFilter::QFilter(QObject *parent, int size, const int ftype, const int wtype)
 	InitCPX(tmpfilt0, 	m_size * 2, 0.0f);
 	InitCPX(tmpfilt1, 	m_size * 2, 0.0f);
 
-    ovlpfft = new QFFT(this, m_size * 2);
-    filtfft = new QFFT(this, m_size * 2);
+    ovlpfft = new QFFT(m_size * 2);
+    filtfft = new QFFT(m_size * 2);
 
     MakeFilter(m_filter_lo, m_filter_hi, m_ftype, m_wtype);
 }

@@ -1,11 +1,22 @@
-QT += core gui multimedia network opengl
+QT += core gui network multimedia opengl
 
 TARGET = cuSDR64
 TEMPLATE = app
 
-CONFIG += qt warn_on
-#CONFIG += console
+QT_VERSION = $$[QT_VERSION]
+QT_VERSION = $$split(QT_VERSION, ".")
+QT_VER_MAJ = $$member(QT_VERSION, 0)
+QT_VER_MIN = $$member(QT_VERSION, 1)
+lessThan(QT_VER_MAJ, 4) | lessThan(QT_VER_MIN, 7) {
+   error(cuSDR requires Qt 4.7 or newer but Qt $$[QT_VERSION] was detected.)
+}
 
+CONFIG += debug
+CONFIG += qt warn_on
+CONFIG += console
+#CONFIG += mobility
+	
+#MOBILITY += multimedia
 #message(CONFIG: $$CONFIG)
 
 include(cuSDR.pri)
@@ -63,20 +74,8 @@ win32:LIBS += \
 	-luser32 \
 	-lKernel32
 
-debug {
-
-	OBJECTS_DIR = ./bld/debug/o
-	MOC_DIR = ./bld/debug/moc
-	#UI_DIR = ./bld/debug/ui
-	RCC_DIR = ./bld/debug/rcc
-	DESTDIR = ./bin/debug
-}
-
-release {
-
-	OBJECTS_DIR = ./bld/release/o
-	MOC_DIR = ./bld/release/moc
-	#UI_DIR = ./bld/release/ui
-	RCC_DIR = ./bld/release/rcc
-	DESTDIR = ./bin/release	
-}	
+OBJECTS_DIR = ./bld/o
+MOC_DIR = ./bld/moc
+#UI_DIR = ./bld/ui
+RCC_DIR = ./bld/rcc
+DESTDIR = ./bin
