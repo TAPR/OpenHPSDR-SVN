@@ -1,11 +1,22 @@
 /*
- *	(c) 2009 Ben Watson
+ *	Windows part for CPU usage by (c) 2009 Ben Watson
  *
- *	taken from:
- *	http://www.philosophicalgeek.com/2009/01/03/determine-cpu-usage-of-current-process-c-and-c/
+ *	taken from http://www.philosophicalgeek.com/2009/01/03/determine-cpu-usage-of-current-process-c-and-c/
+ *
+ *  adapted for cuSDR by (c) 2012  Hermann von Hasseln, DL3HVH
+ *
+ *
+ *  Linux part for CPU usage by (c) by Fabian Holler
+ *
+ *  taken from https://github.com/fho/code_snippets/blob/master/c/getusage.c
+ *
+ *  adapted for cuSDR by (c) 2012 Andrea Montefusco, IW0HDV
  *
  */
 
+#include <QtGlobal>   // needed in order to get Q_OS_LINUX macro defined
+
+#if defined(Q_OS_WIN32)
 
 #pragma once
 
@@ -41,3 +52,36 @@ private:
 	
 	volatile LONG m_lRunCount;
 };
+
+#elif Q_OS_LINUX
+
+#include <sys/types.h>
+#include <unistd.h>
+
+struct pstat {
+
+    long unsigned int utime_ticks;
+    long int cutime_ticks;
+    long unsigned int stime_ticks;
+    long int cstime_ticks;
+    long unsigned int vsize; // virtual memory size in bytes
+    long unsigned int rss; //Resident  Set  Size in bytes
+
+    long unsigned int cpu_total_time;
+};
+
+
+class CpuUsage {
+
+public:
+	CpuUsage(void);
+	
+	short  GetUsage(void);
+
+private:
+	pid_t pid;
+	struct pstat cpst;
+	struct pstat lpst;
+};
+
+#endif

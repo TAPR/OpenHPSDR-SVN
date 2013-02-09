@@ -48,9 +48,15 @@ void CSplashScreen::paintEvent(QPaintEvent* pe) {
 	QRect aTextRect(rect());
 	//aTextRect.setRect(aTextRect.x() + 5, aTextRect.y() + 5, aTextRect.width() - 10, aTextRect.height() - 10);
 	aTextRect.setRect(aTextRect.x() - 5, aTextRect.y() - 5, aTextRect.width() - 10, aTextRect.height() - 10);
+
+	QRect aCopyrightRect(rect());
+	//aCopyrightRect.setRect(aCopyrightRect.x() + 5, aCopyrightRect.y() - 5, aCopyrightRect.width() - 10, aCopyrightRect.height() - 5);
+	aCopyrightRect.setRect(aCopyrightRect.right() - 125, aCopyrightRect.y() - 5, aCopyrightRect.width() - 10, aCopyrightRect.height() - 5);
 	
 	QPainter aPainter(this);
 	aPainter.drawPixmap(rect(), itsPixmap);
 	aPainter.setPen(itsColor);
 	aPainter.drawText(aTextRect, itsAlignment, itsMessage);
+	aPainter.setPen(Qt::black);
+	aPainter.drawText(aCopyrightRect, Qt::AlignBottom, "(C) 2011-2013  DL3HVH");
 }
