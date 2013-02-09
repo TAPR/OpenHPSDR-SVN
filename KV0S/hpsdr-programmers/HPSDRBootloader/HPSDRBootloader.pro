@@ -33,6 +33,7 @@ unix {
     LIBS += -lpcap
 }
 
+#define BOOT 1
 
 
 SOURCES += main.cpp\

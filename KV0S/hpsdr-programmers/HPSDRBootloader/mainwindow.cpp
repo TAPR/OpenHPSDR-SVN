@@ -85,8 +85,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->jtagProgramButton,SIGNAL(clicked()),this,SLOT(jtagFlashProgram()));
 
     connect(add,SIGNAL(writeIP()),this,SLOT(setIP()));
-    connect(add,SIGNAL(readMACAddress()),this,SLOT(readMAC()));
-    connect(add,SIGNAL(readIPAddress()),this,SLOT(readIP()));
+    connect(add,SIGNAL(readMACAddress()),this,SLOT(getMAC()));
+    connect(add,SIGNAL(readIPAddress()),this,SLOT(getIP()));
 
     if(ui->interfaceComboBox->count()>0) {
        ui->interfaceComboBox->setCurrentIndex(0);
@@ -446,7 +446,7 @@ void MainWindow::ipAddress(unsigned char* ip) {
     //add->ui->IPLineEdit3->setText(text);
     text.sprintf("%d",ip[3]);
     //add->ui->IPLineEdit4->setText(text);
-    text.sprintf("%s IP address read successfully",isMetis?"Metis":"Hermes");
+    text.sprintf("HPSDR Board IP address read successfully");
     status(text);
     idle();
 }
