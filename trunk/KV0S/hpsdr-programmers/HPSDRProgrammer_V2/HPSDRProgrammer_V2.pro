@@ -15,7 +15,7 @@ TEMPLATE = app
 include( ../Help/Help.pri )
 include( ../Status/Status.pri )
 include( ../Programmer/Programmer.pri )
-include( ../IPaddress/IPaddress.pri )
+include( ../IPaddress/IPaddressProg.pri )
 include( ../Resources/Resources.pri )
 
 
@@ -34,15 +34,19 @@ unix {
 }
 
 
-
 SOURCES += main.cpp\
         mainwindow.cpp
 
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+            version.h
 
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    ../Help/aboutdialogprog.ui
+
+RESOURCES += \
+    ../Help/HPSDRProgrammer_Res.qrc
 
 
 
