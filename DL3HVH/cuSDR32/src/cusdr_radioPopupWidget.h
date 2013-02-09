@@ -27,24 +27,34 @@
 #ifndef _CUSDR_RADIO_POPUP_WIDGET_H
 #define _CUSDR_RADIO_POPUP_WIDGET_H
 
+#ifdef LOG_RADIOPOPUP
+#define RADIOPOPUP_DEBUG qDebug().nospace() << "RadioPopup::\t"
+#else
+#define RADIOPOPUP_DEBUG nullDebug()
+#endif
+
 //#include <QWidget>
 //#include <QGroupBox>
 //#include <QLineEdit>
 
 #include "Util/cusdr_buttons.h"
 #include "cusdr_settings.h"
-
+#include "cusdr_fonts.h"
 
 class RadioPopupWidget : public QWidget {
 
 	Q_OBJECT
 
 public:
-	RadioPopupWidget(QWidget *parent = 0);
+	RadioPopupWidget(QWidget *parent = 0, int rx = 0);
 	~RadioPopupWidget();
 
+	bool getSpectrumAveraging() { return m_spectrumAveraging; }
+	bool getPanGridStatus()		{ return m_panGrid; }
+	bool getPeakHoldStatus()	{ return m_peakHold; }
+
 public slots:
-	QSize	sizeHint() const;
+	//QSize	sizeHint() const;
 	QSize	minimumSizeHint() const;
 
 	void systemStateChanged(
@@ -71,105 +81,135 @@ protected:
 	bool event(QEvent *event);
 
 private:
-	Settings	*set;
+	Settings*				set;
 
-	QTime		m_closingTimer;
+	QTime					m_closingTimer;
 
-	QVBoxLayout	*bandVBox;
-	QVBoxLayout	*modeVBox;
-	QVBoxLayout	*agcVBox;
-	//QVBoxLayout	*mercuryBtnVBox();
+	CFonts*					fonts;
+	TFonts					m_fonts;
 
-	QWidget	*filterAWidget;
-	QWidget	*filterBWidget;
-	QWidget	*filterCWidget;
+	PanGraphicsMode			m_panadapterMode;
+	WaterfallColorMode		m_waterfallColorMode;
 
-	QStackedLayout *m_filterStackedLayout;
-	QStackedWidget *m_filterStackedWidget;
+	QVBoxLayout*	optionsVBox;
+	QVBoxLayout*	bandVBox;
+	QVBoxLayout*	modeVBox;
+	QVBoxLayout*	agcVBox;
+	//QVBoxLayout*	mercuryBtnVBox();
+
+	QWidget*		filterAWidget;
+	QWidget*		filterBWidget;
+	QWidget*		filterCWidget;
+
+	QStackedLayout*	m_filterStackedLayout;
+	QStackedWidget*	m_filterStackedWidget;
 
 	QList<AeroButton *>	filterBtnListA;
 	QList<AeroButton *>	filterBtnListB;
 	QList<AeroButton *>	filterBtnListC;
+	QList<AeroButton *>	panadapterBtnList;
+	QList<AeroButton *>	waterfallBtnList;
 	
-	AeroButton	*band160mBtn;
-	AeroButton	*band80mBtn;
-	AeroButton	*band60mBtn;
-	AeroButton	*band40mBtn;
-	AeroButton	*band30mBtn;
-	AeroButton	*band20mBtn;
-	AeroButton	*band17mBtn;
-	AeroButton	*band15mBtn;
-	AeroButton	*band12mBtn;
-	AeroButton	*band10mBtn;
-	AeroButton	*band6mBtn;
-	AeroButton	*bandGenBtn;
-	//AeroButton	*bandxxBtn;
+	QLabel*			m_optionsLabel;
+
+	AeroButton*		stickyBtn;
+
+	AeroButton*		lockPanBtn;
+	AeroButton*		clickVfoBtn;
+	AeroButton*		showCrossBtn;
+	AeroButton*		midToVfoBtn;
+	AeroButton*		vfoToMidBtn;
+	AeroButton*		avgBtn;
+	AeroButton*		peakHoldBtn;
+	AeroButton*		gridBtn;
+
+	AeroButton*		m_PanLineBtn;
+	AeroButton*		m_PanFilledLineBtn;
+	AeroButton*		m_PanSolidBtn;
+	AeroButton*		m_WaterfallSimpleBtn;
+	AeroButton*		m_WaterfallEnhancedBtn;
+
+	AeroButton*		band160mBtn;
+	AeroButton*		band80mBtn;
+	AeroButton*		band60mBtn;
+	AeroButton*		band40mBtn;
+	AeroButton*		band30mBtn;
+	AeroButton*		band20mBtn;
+	AeroButton*		band17mBtn;
+	AeroButton*		band15mBtn;
+	AeroButton*		band12mBtn;
+	AeroButton*		band10mBtn;
+	AeroButton*		band6mBtn;
+	AeroButton*		bandGenBtn;
+	//AeroButton*	bandxxBtn;
 
 	QList<AeroButton *>	bandBtnList;
 
-	AeroButton	*lsbBtn;
-	AeroButton	*usbBtn;
-	AeroButton	*dsbBtn;
-	AeroButton	*cwlBtn;
-	AeroButton	*cwuBtn;
-	AeroButton	*fmnBtn;
-	AeroButton	*amBtn;
-	AeroButton	*diguBtn;
-	AeroButton	*specBtn;
-	AeroButton	*diglBtn;
-	AeroButton	*samBtn;
-	AeroButton	*drmBtn;
+	AeroButton*		lsbBtn;
+	AeroButton*		usbBtn;
+	AeroButton*		dsbBtn;
+	AeroButton*		cwlBtn;
+	AeroButton*		cwuBtn;
+	AeroButton*		fmnBtn;
+	AeroButton*		amBtn;
+	AeroButton*		diguBtn;
+	AeroButton*		specBtn;
+	AeroButton*		diglBtn;
+	AeroButton*		samBtn;
+	AeroButton*		drmBtn;
 
 	QList<AeroButton *>	dspModeBtnList;
 
-	AeroButton	*agcOFF;
-	AeroButton	*agcLONG;
-	AeroButton	*agcSLOW;
-	AeroButton	*agcMED;
-	AeroButton	*agcFAST;
-	AeroButton	*agcUSER;
+	AeroButton*		showAGCLines;
+	AeroButton*		agcOFF;
+	AeroButton*		agcLONG;
+	AeroButton*		agcSLOW;
+	AeroButton*		agcMED;
+	AeroButton*		agcFAST;
+	AeroButton*		agcUSER;
 
 	QList<AeroButton *>	agcModeBtnList;
 	
-	AeroButton	*filter1kBtnA;
-	AeroButton	*filter1k8BtnA;
-	AeroButton	*filter2k1BtnA;
-	AeroButton	*filter2k4BtnA;
-	AeroButton	*filter2k7BtnA;
-	AeroButton	*filter2k9BtnA;
-	AeroButton	*filter3k3BtnA;
-	AeroButton	*filter3k8BtnA;
-	AeroButton	*filter4k4BtnA;
-	AeroButton	*filter5kBtnA;
-	AeroButton	*filterVar1BtnA;
-	AeroButton	*filterVar2BtnA;
+	AeroButton*		filter1kBtnA;
+	AeroButton*		filter1k8BtnA;
+	AeroButton*		filter2k1BtnA;
+	AeroButton*		filter2k4BtnA;
+	AeroButton*		filter2k7BtnA;
+	AeroButton*		filter2k9BtnA;
+	AeroButton*		filter3k3BtnA;
+	AeroButton*		filter3k8BtnA;
+	AeroButton*		filter4k4BtnA;
+	AeroButton*		filter5kBtnA;
+	AeroButton*		filterVar1BtnA;
+	AeroButton*		filterVar2BtnA;
 
-	AeroButton	*filter2k4BtnB;
-	AeroButton	*filter2k9BtnB;
-	AeroButton	*filter3k1BtnB;
-	AeroButton	*filter4kBtnB;
-	AeroButton	*filter5k2BtnB;
-	AeroButton	*filter6k6BtnB;
-	AeroButton	*filter8kBtnB;
-	AeroButton	*filter10kBtnB;
-	AeroButton	*filter12kBtnB;
-	AeroButton	*filter16kBtnB;
-	AeroButton	*filterVar1BtnB;
-	AeroButton	*filterVar2BtnB;
+	AeroButton*		filter2k4BtnB;
+	AeroButton*		filter2k9BtnB;
+	AeroButton*		filter3k1BtnB;
+	AeroButton*		filter4kBtnB;
+	AeroButton*		filter5k2BtnB;
+	AeroButton*		filter6k6BtnB;
+	AeroButton*		filter8kBtnB;
+	AeroButton*		filter10kBtnB;
+	AeroButton*		filter12kBtnB;
+	AeroButton*		filter16kBtnB;
+	AeroButton*		filterVar1BtnB;
+	AeroButton*		filterVar2BtnB;
 
-	AeroButton	*filter25BtnC;
-	AeroButton	*filter50BtnC;
-	AeroButton	*filter100BtnC;
-	AeroButton	*filter250BtnC;
-	AeroButton	*filter400BtnC;
-	AeroButton	*filter500BtnC;
-	AeroButton	*filter600BtnC;
-	AeroButton	*filter750BtnC;
-	AeroButton	*filter800BtnC;
-	AeroButton	*filter1kBtnC;
-	AeroButton	*filterVar1BtnC;
-	AeroButton	*filterVar2BtnC;
+	AeroButton*		filter25BtnC;
+	AeroButton*		filter50BtnC;
+	AeroButton*		filter100BtnC;
+	AeroButton*		filter250BtnC;
+	AeroButton*		filter400BtnC;
+	AeroButton*		filter500BtnC;
+	AeroButton*		filter600BtnC;
+	AeroButton*		filter750BtnC;
+	AeroButton*		filter800BtnC;
+	AeroButton*		filter1kBtnC;
+	AeroButton*		filterVar1BtnC;
+	AeroButton*		filterVar2BtnC;
 	
+	QLabel*			m_rxLabel;
 
 	//QIcon	agc_left;
 	//QIcon	agc_right;
@@ -187,13 +227,26 @@ private:
 
 	bool				m_mouseOver;
 
-	QList<long>			m_lastFrequencyList;
-	long	m_frequency;
+	//QList<long>			m_lastFrequencyList;
+	QList<long>			m_lastCtrFrequencyList;
+	QList<long>			m_lastVfoFrequencyList;
+
+	long	m_ctrFrequency;
+	long	m_vfoFrequency;
+
+	bool	m_sticky;
+	bool	m_spectrumAveraging;
+	bool	m_panGrid;
+	bool	m_peakHold;
+	bool	m_panLocked;
+	bool	m_clickVFO;
+	bool	m_showCross;
 
 	qreal	m_filterLo;
 	qreal	m_filterHi;
 
 	int		m_timerID;
+	int		m_receiver;
 	int		m_currentRx;
 	int		current_band;
 	int		current_dsp_mode;
@@ -201,8 +254,17 @@ private:
 	int		m_minimumGroupBoxWidth;
 
 	void setupConnections();
+	void createBackground(QSize size);
 
 private slots:
+	void	graphicModeChanged(
+					QObject* sender,
+					int rx,
+					PanGraphicsMode panMode,
+					WaterfallColorMode waterfallColorMode);
+
+	void setSticky();
+	void createOptionsBtnGroup();
 	void createBandBtnGroup();
 	void createModeBtnGroup();
 	void createAgcBtnGroup();
@@ -212,14 +274,27 @@ private slots:
 
 	//QLabel *createLabel(const QString &text);
 
+	void avgBtnClicked();
+	void gridBtnClicked();
+	void peakHoldBtnClicked();
+	void panLockedBtnClicked();
+	void clickVfoBtnClicked();
+	void hairCrossBtnClicked();
+	void midToVfoBtnClicked();
+	void vfoToMidBtnClicked();
+	void panModeChanged();
+	void waterfallModeChanged();
+
 	void setCurrentReceiver(QObject *sender, int value);
-	void frequencyChanged(QObject* sender, bool value, int rx, long frequency);
+	void ctrFrequencyChanged(QObject* sender, int mode, int rx, long frequency);
+	void vfoFrequencyChanged(QObject* sender, int mode, int rx, long frequency);
 	void bandChangedByBtn();
 	void bandChanged(QObject *sender, int rx, bool byButton, HamBand band);
 	void dspModeChangedByBtn();
 	void dspModeChanged(QObject *sender, int rx, DSPMode mode);
 	void agcModeChangedByBtn();
 	void agcModeChanged(QObject *sender, int rx, AGCMode mode, bool hang);
+	void agcShowLinesChanged();
 	void filterChangedByBtn();
 	void filterChanged(QObject *sender, int rx, qreal low, qreal high);
 	void filterGroupChanged(DSPMode mode);
@@ -229,6 +304,8 @@ signals:
 	void hideEvent(QObject *sender);
 	void closeEvent(QObject *sender);
 	void newMessage(QString msg);
+	void midToVfoBtnEvent();
+	void vfoToMidBtnEvent();
 };
 
 #endif // _CUSDR_RADIO_POPUP_WIDGET_H

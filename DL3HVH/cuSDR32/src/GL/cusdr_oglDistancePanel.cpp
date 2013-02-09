@@ -48,10 +48,10 @@ QGLDistancePanel::QGLDistancePanel(QWidget *parent)
 	, m_serverMode(set->getCurrentServerMode())
 	, m_hwInterface(set->getHWInterface())
 	, m_dataEngineState(QSDR::DataEngineDown)
-	, m_panadapterMode(set->getPanadapterMode())
+	, m_panMode(set->getPanadapterMode(0))
 	, m_mousePos(QPoint(-1, -1))
 	, m_mouseDownPos(QPoint(-1, -1))
-	, m_specAveragingCnt(set->getSpectrumAveragingCnt())
+	, m_specAveragingCnt(set->getSpectrumAveragingCnt(0))
 	, m_freqRulerDisplayWidth(0)
 	, m_panSpectrumMinimumHeight(70)
 	, m_spectrumUpdate(false)
@@ -59,10 +59,10 @@ QGLDistancePanel::QGLDistancePanel(QWidget *parent)
 	, m_spectrumVertexColorUpdate(false)
 	, m_spectrumColorsChanged(true)
 	, m_showChirpFFT(false)
-	, m_spectrumAveraging(set->getSpectrumAveraging())
+	, m_spectrumAveraging(set->getSpectrumAveraging(0))
 	, m_spectrumAveragingOld(m_spectrumAveraging)
 	, m_crossHairCursor(false)
-	, m_panGrid(set->getPanGridStatus())
+	, m_panGrid(set->getPanGridStatus(0))
 	, m_freqRulerPosition(0.5)
 	, m_distRulerDisplayDelta(0.0)
 	, m_distRulerDisplayDeltaStep(500.0)
@@ -89,7 +89,8 @@ QGLDistancePanel::QGLDistancePanel(QWidget *parent)
 	m_oldWidth = size().width();
 	
 	m_rxDataList = set->getReceiverDataList();
-	m_frequency = m_rxDataList.at(0).frequency;
+	//m_frequency = m_rxDataList.at(0).frequency;
+	m_frequency = m_rxDataList.at(0).vfoFrequency;
 
 	m_dBmScalePanadapterRenew = true;
 	m_dBmScalePanadapterUpdate = true;
@@ -235,16 +236,18 @@ void QGLDistancePanel::setupConnections() {
 					QSDR::_DataEngineState)));
 
 	CHECKED_CONNECT(
-		set,
+		set, 
 		SIGNAL(graphicModeChanged(
 					QObject *,
-					QSDRGraphics::_Panadapter,
-					QSDRGraphics::_WfScheme)),
+					int,
+					PanGraphicsMode,
+					WaterfallColorMode)),
 		this, 
 		SLOT(graphicModeChanged(
 					QObject *,
-					QSDRGraphics::_Panadapter,
-					QSDRGraphics::_WfScheme)));
+					int,
+					PanGraphicsMode,
+					WaterfallColorMode)));
 
 	CHECKED_CONNECT(
 		set, 
@@ -507,9 +510,9 @@ void QGLDistancePanel::drawPanadapter() {
 	TGL3float *vertexArrayBg = new TGL3float[2*vertexArrayLength];
 	TGL3float *vertexColorArrayBg = new TGL3float[2*vertexArrayLength];
 	
-	switch (m_panadapterMode) {
+	switch (m_panMode) {
 
-		case QSDRGraphics::FilledLine:
+		case (PanGraphicsMode) FilledLine:
 
 			for (int i = 0; i < vertexArrayLength; i++) {
 			
@@ -561,7 +564,7 @@ void QGLDistancePanel::drawPanadapter() {
 
 			break;
 
-		case QSDRGraphics::Line:
+		case (PanGraphicsMode) Line:
 
 			for (int i = 0; i < vertexArrayLength; i++) {
 	
@@ -593,7 +596,7 @@ void QGLDistancePanel::drawPanadapter() {
 			
 			break;
 
-		case QSDRGraphics::Solid:
+		case (PanGraphicsMode) Solid:
 
 			glDisable(GL_MULTISAMPLE);
 			glDisable(GL_LINE_SMOOTH);
@@ -1790,7 +1793,8 @@ void QGLDistancePanel::wheelEvent(QWheelEvent* event) {
 				// snap to the frequency step
 				m_frequency = (long)(qRound((m_frequency + delta) / qAbs(freqStep)) * qAbs(freqStep));
 
-			set->setFrequency(this, true, 0, m_frequency);
+			//set->setFrequency(this, true, 0, m_frequency);
+			set->setVFOFrequency(this, 0, 0, m_frequency);
 
 			/*if (m_spectrumAveragingOld) {
 
@@ -1838,7 +1842,8 @@ void QGLDistancePanel::mousePressEvent(QMouseEvent* event) {
 
 			m_frequency = (long)(qRound(m_frequency / qAbs(freqStep)) * qAbs(freqStep));
 				
-			set->setFrequency(this, true, 0, m_frequency);
+			//set->setFrequency(this, true, 0, m_frequency);
+			set->setVFOFrequency(this, 0, 0, m_frequency);
 			update();
 		}
 	}
@@ -1951,7 +1956,8 @@ void QGLDistancePanel::mouseMoveEvent(QMouseEvent* event) {
 				else
 					m_frequency += deltaFreq;
 
-				set->setFrequency(this, true, 0, m_frequency);
+				//set->setFrequency(this, true, 0, m_frequency);
+				set->setVFOFrequency(this, 0, 0, m_frequency);
 				m_mouseDownPos = pos;
 			}
 			//update();
@@ -2097,7 +2103,7 @@ void QGLDistancePanel::mouseMoveEvent(QMouseEvent* event) {
 					new_y = bottom_y;
 				
 				m_freqRulerPosition = (float)(new_y - m_panRect.top()) / (bottom_y - m_panRect.top());
-				set->setFreqRulerPosition(m_freqRulerPosition, 0);
+				set->setFreqRulerPosition(this, 0, m_freqRulerPosition);
 			}
 			else
 			if (event->buttons() == Qt::RightButton) {
@@ -2409,6 +2415,10 @@ void QGLDistancePanel::computeDisplayBins(const float *panBuffer) {
 }
 
 void QGLDistancePanel::setDistanceSpectrumBuffer(int sampleRate, qint64 length, const float *buffer) {
+
+	Q_UNUSED(sampleRate)
+	Q_UNUSED(length)
+	Q_UNUSED(buffer)
 }
 
 void QGLDistancePanel::distanceSpectrumBufferChanged(int sampleRate, qint64 length, const float *buffer) {
@@ -2602,18 +2612,16 @@ void QGLDistancePanel::systemStateChanged(
  
 void QGLDistancePanel::graphicModeChanged(
 	QObject *sender,
-	QSDRGraphics::_Panadapter panMode,
-	QSDRGraphics::_WfScheme colorScheme)
+	int rx,
+	PanGraphicsMode panMode,
+	WaterfallColorMode colorScheme)
 {
 	Q_UNUSED (sender)
+	Q_UNUSED (colorScheme)
+	Q_UNUSED (rx)
 
-	//bool change = false;
-
-	if (m_panadapterMode != panMode) {
-		
-		m_panadapterMode = panMode;
-		//change = true;
-	}
+	if (m_panMode != panMode)
+		m_panMode = panMode;
 
 	/*if (m_waterColorScheme != colorScheme) {
 

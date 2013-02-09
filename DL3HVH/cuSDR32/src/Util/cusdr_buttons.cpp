@@ -31,18 +31,19 @@
 
 AeroButton::AeroButton(QWidget *parent) 
 	: QPushButton(parent)
-	,m_state(OFF)
-	,m_hovered(false)
-	,m_pressed(false)
-	,m_color(QColor(150, 150, 150))
-	,m_color_on(QColor(85, 210, 250))
-	//,m_color_on(QColor(105, 105, 250))
-	,m_highlight(QColor(0x91, 0xeb, 0xff))
-	,m_shadow(Qt::black)
-	,m_textcolor(QColor(255, 255, 255))
-	,m_opacity(1.0)
-	,m_glass(true)
-	,m_roundness(0){}
+	, m_state(OFF)
+	, m_hovered(false)
+	, m_pressed(false)
+	, m_color(QColor(150, 150, 150))
+	, m_color_on(QColor(85, 210, 250))
+	, m_highlight(QColor(0x91, 0xeb, 0xff))
+	, m_shadow(Qt::black)
+	, m_textcolor(QColor(255, 255, 255))
+	, m_opacity(1.0)
+	, m_glass(true)
+	, m_roundness(0)
+{
+}
 
 AeroButton::AeroButton(const QString &text, QWidget *parent) 
 	: QPushButton(text, parent)
@@ -78,8 +79,8 @@ AeroButton::AeroButton(const QIcon &icon, const QString &text, QWidget *parent)
 
 AeroButton::~AeroButton(){}
 
-void AeroButton::paintEvent(QPaintEvent * pe)
-{
+void AeroButton::paintEvent(QPaintEvent * pe) {
+
 	Q_UNUSED(pe);
 
 	QPainter painter(this);  
@@ -87,8 +88,8 @@ void AeroButton::paintEvent(QPaintEvent * pe)
 
 	//test for state changes
 	QColor button_color;
-	if(this->isEnabled())
-	{
+	if(this->isEnabled()) {
+
 		if (m_state == ON) {
 			
 			m_hovered ? button_color = m_highlight : button_color = m_color_on;
@@ -98,13 +99,13 @@ void AeroButton::paintEvent(QPaintEvent * pe)
 			m_hovered ? button_color = m_highlight : button_color = m_color;
 		}
 
-		if(m_pressed)
-		{
+		if (m_pressed) {
+
 			button_color = m_highlight.darker(250);
 		}
 	}
-	else
-	{
+	else {
+
 		button_color = QColor(50, 50, 50);
 	}
 
@@ -146,11 +147,10 @@ void AeroButton::paintEvent(QPaintEvent * pe)
 
 	//text
 	QString text = this->text();
-	if(!text.isNull())
-	{
+	if (!text.isNull()) {
+
 		QFont font = this->font();
 		painter.setFont(font);
-		//painter.setPen(Qt::white);
 		painter.setPen(m_textcolor);
 		painter.setOpacity(1.0);
 		painter.drawText(0, 0, button_rect.width(), button_rect.height(), Qt::AlignCenter, text);
@@ -159,8 +159,8 @@ void AeroButton::paintEvent(QPaintEvent * pe)
 	//icon
 	//QIcon icon = this->icon();
 	QIcon icon = m_icon;
-	if(!icon.isNull())
-	{
+	if (!icon.isNull()) {
+
 		QSize icon_size = this->iconSize();
 		QRect icon_position = this->calculateIconPosition(button_rect, icon_size);
 		//painter.setOpacity(1.0);
@@ -174,40 +174,40 @@ void AeroButton::paintEvent(QPaintEvent * pe)
 
 AeroButton::BtnState AeroButton::btnState() const { return m_state; }
 
-void AeroButton::enterEvent(QEvent * e)
-{
+void AeroButton::enterEvent(QEvent * e) {
+
 	m_hovered = true;
 	this->repaint();
 
 	QPushButton::enterEvent(e);
 }
 
-void AeroButton::leaveEvent(QEvent * e)
-{
+void AeroButton::leaveEvent(QEvent * e) {
+
 	m_hovered = false;
 	this->repaint();
 
 	QPushButton::leaveEvent(e);
 }
 
-void AeroButton::mousePressEvent(QMouseEvent * e)
-{
+void AeroButton::mousePressEvent(QMouseEvent * e) {
+
 	m_pressed = true;
 	this->repaint();
 
 	QPushButton::mousePressEvent(e);
 }
 
-void AeroButton::mouseReleaseEvent(QMouseEvent * e)
-{
+void AeroButton::mouseReleaseEvent(QMouseEvent * e) {
+
 	m_pressed = false;
 	this->repaint();
 
 	QPushButton::mouseReleaseEvent(e);
 }
 
-QRect AeroButton::calculateIconPosition(QRect button_rect, QSize icon_size)
-{
+QRect AeroButton::calculateIconPosition(QRect button_rect, QSize icon_size) {
+
 	int x = (button_rect.width() / 2) - (icon_size.width() / 2);
 	int y = (button_rect.height() / 2) - (icon_size.height() / 2);
 	int width = icon_size.width(); 

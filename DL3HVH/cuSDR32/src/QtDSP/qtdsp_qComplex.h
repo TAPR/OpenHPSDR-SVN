@@ -36,6 +36,8 @@
 
 using namespace std;
 
+#undef max
+
 typedef struct _QCOMPLEX {
 
 	float re;
@@ -44,11 +46,11 @@ typedef struct _QCOMPLEX {
 } cpx;
 
 Q_DECLARE_METATYPE (cpx)
-Q_DECLARE_TYPEINFO(cpx, Q_MOVABLE_TYPE );
+Q_DECLARE_TYPEINFO(cpx, Q_MOVABLE_TYPE);
 
 typedef QVector<cpx> CPX;
 
-
+Q_DECLARE_METATYPE (CPX)
 
 inline void InitCPX(CPX &vec, int size, float value) {
 
@@ -130,10 +132,10 @@ inline QString ValidQReal(qreal value) {
     if (value != value) {
         return "NaN";
     }
-    else if (value > std::numeric_limits<qreal>::max()){
+    else if (value > numeric_limits<double>::max()){
         return "+Inf";
     }
-    else if (value < -std::numeric_limits<qreal>::max()){
+    else if (value < -numeric_limits<double>::max()){
         return "-Inf";
     }
     else

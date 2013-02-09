@@ -83,7 +83,7 @@ SpectrumAnalyserThread::SpectrumAnalyserThread(QObject *parent)
 	//m_cpxOutput = mallocCPX(SpectrumLengthSamples);
     m_cpxOutput.resize(SpectrumLengthSamples);
 
-	m_fft = new QFFT(this, SpectrumLengthSamples);
+	m_fft = new QFFT(SpectrumLengthSamples);
 
 	//memset(m_cpxInput, 0, SpectrumLengthSamples * sizeof(CPX));
 	//memset(m_cpxOutput, 0, SpectrumLengthSamples * sizeof(CPX));

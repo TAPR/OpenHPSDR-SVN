@@ -85,10 +85,6 @@ struct SWavHeader {
 };
 
 
-//-----------------------------------------------------------------------------
-// Constants
-//-----------------------------------------------------------------------------
-
 //const qint64 BufferDurationUs       = 10 * 1000000;
 const int    NotifyIntervalMs       = 1;
 
@@ -98,10 +94,6 @@ const int    LevelWindowUs          = 0.1 * 1000000;
 // Waveform window size in microseconds
 //const qint64 WaveformWindowDuration = 500 * 1000;
 
-//-----------------------------------------------------------------------------
-// Helper functions
-//-----------------------------------------------------------------------------
-
 QDebug& operator<<(QDebug &debug, const QAudioFormat &format) {
 
     debug << format.frequency() << "Hz"
@@ -109,15 +101,12 @@ QDebug& operator<<(QDebug &debug, const QAudioFormat &format) {
     return debug;
 }
 
-//-----------------------------------------------------------------------------
-// Constructor and destructor
-//-----------------------------------------------------------------------------
-
 AudioEngine::AudioEngine(QWidget *parent)
 	: QWidget(parent)
 	, set(Settings::instance())
     , m_mode(QAudio::AudioInput)
     , m_state(QAudio::StoppedState)
+	, m_serverMode(set->getCurrentServerMode())
     , m_generateTone(false)
 	, m_generateLocalChirp(false)
 	, m_lowerChirpFreq(set->getLowerChirpFreq())
@@ -163,16 +152,16 @@ AudioEngine::AudioEngine(QWidget *parent)
     initializePCMS16LE();
 
 	AUDIO_ENGINE_DEBUG	<< "defaultOutputDevice options:";
-	AUDIO_ENGINE_DEBUG	<< "	defaultOutputDevice" << m_audioOutputDevice.defaultOutputDevice;
-	AUDIO_ENGINE_DEBUG	<< "	preferredFormat" << m_audioOutputDevice.preferredFormat();
-	AUDIO_ENGINE_DEBUG	<< "	supportedByteOrders" << m_audioOutputDevice.supportedByteOrders();
-	AUDIO_ENGINE_DEBUG	<< "	supportedChannelCounts" << m_audioOutputDevice.supportedChannelCounts();
-	AUDIO_ENGINE_DEBUG	<< "	supportedChannels" << m_audioOutputDevice.supportedChannels();
-	AUDIO_ENGINE_DEBUG	<< "	supportedCodecs" << m_audioOutputDevice.supportedCodecs();
-	AUDIO_ENGINE_DEBUG	<< "	supportedFrequencies" << m_audioOutputDevice.supportedFrequencies();
-	AUDIO_ENGINE_DEBUG	<< "	supportedSampleRates" << m_audioOutputDevice.supportedSampleRates();
-	AUDIO_ENGINE_DEBUG	<< "	supportedSampleSizes" << m_audioOutputDevice.supportedSampleSizes();
-	AUDIO_ENGINE_DEBUG	<< "	supportedSampleTypes" << m_audioOutputDevice.supportedSampleTypes();
+	AUDIO_ENGINE_DEBUG	<< "	defaultOutputDevice: " << m_audioOutputDevice.defaultOutputDevice;
+	AUDIO_ENGINE_DEBUG	<< "	preferredFormat: " << m_audioOutputDevice.preferredFormat();
+	AUDIO_ENGINE_DEBUG	<< "	supportedByteOrders: " << m_audioOutputDevice.supportedByteOrders();
+	AUDIO_ENGINE_DEBUG	<< "	supportedChannelCounts: " << m_audioOutputDevice.supportedChannelCounts();
+	AUDIO_ENGINE_DEBUG	<< "	supportedChannels :" << m_audioOutputDevice.supportedChannels();
+	AUDIO_ENGINE_DEBUG	<< "	supportedCodecs: " << m_audioOutputDevice.supportedCodecs();
+	AUDIO_ENGINE_DEBUG	<< "	supportedFrequencies: " << m_audioOutputDevice.supportedFrequencies();
+	AUDIO_ENGINE_DEBUG	<< "	supportedSampleRates: " << m_audioOutputDevice.supportedSampleRates();
+	AUDIO_ENGINE_DEBUG	<< "	supportedSampleSizes: " << m_audioOutputDevice.supportedSampleSizes();
+	AUDIO_ENGINE_DEBUG	<< "	supportedSampleTypes: " << m_audioOutputDevice.supportedSampleTypes();
 
 
 #ifdef DUMP_DATA
@@ -229,6 +218,7 @@ bool AudioEngine::loadFile(const QString &fileName) {
 			QList<qreal> audioBuffer;
 			
 			for (int i = 0; i < numSamples; i++) {
+
 				for (int j = 0; j < m_audioFileBuffer->getNofChannels(); j++) {
 					
 					//realSample = pcmToReal(*ptr);
@@ -250,8 +240,7 @@ bool AudioEngine::loadFile(const QString &fileName) {
 
 			emit audiofileBufferChanged(audioBuffer);
         }
-		else
-		if (isPCMS32LE(m_file->fileFormat())) {
+		else if (isPCMS32LE(m_file->fileFormat())) {
 
 			result = initializePCMS32LE();
 		}
@@ -443,8 +432,7 @@ void AudioEngine::startPlayback() {
 
     if (m_audioOutput) {
 		
-		if (QAudio::AudioOutput == m_mode &&
-			QAudio::SuspendedState == m_state) {
+		if (QAudio::AudioOutput == m_mode && QAudio::SuspendedState == m_state) {
 
 #ifdef Q_OS_WIN
             // The Windows backend seems to internally go back into ActiveState
@@ -497,13 +485,17 @@ void AudioEngine::startPlayback() {
 
 void AudioEngine::suspend() {
 
-    if (QAudio::ActiveState == m_state ||
-        QAudio::IdleState == m_state) {
+    if (QAudio::ActiveState == m_state || QAudio::IdleState == m_state) {
+
         switch (m_mode) {
+
         case QAudio::AudioInput:
+
             m_audioInput->suspend();
             break;
+
         case QAudio::AudioOutput:
+
             m_audioOutput->suspend();
             break;
         }
@@ -513,6 +505,7 @@ void AudioEngine::suspend() {
 void AudioEngine::setAudioInputDevice(const QAudioDeviceInfo &device) {
 
     if (device.deviceName() != m_audioInputDevice.deviceName()) {
+
         m_audioInputDevice = device;
         initializePCMS16LE();
     }
@@ -521,6 +514,7 @@ void AudioEngine::setAudioInputDevice(const QAudioDeviceInfo &device) {
 void AudioEngine::setAudioOutputDevice(const QAudioDeviceInfo &device) {
 
     if (device.deviceName() != m_audioOutputDevice.deviceName()) {
+
         m_audioOutputDevice = device;
 		AUDIO_ENGINE_DEBUG	<< "setAudioOutputDevice to:" 
 							<< m_audioOutputDevice.deviceName();
@@ -545,6 +539,7 @@ void AudioEngine::showSettingsDialog() {
 
     setDialog->exec();
     if (setDialog->result() == QDialog::Accepted) {
+
         setAudioInputDevice(setDialog->inputDevice());
         setAudioOutputDevice(setDialog->outputDevice());
         //setWindowFunction(setDialog->windowFunction());
@@ -684,44 +679,53 @@ void AudioEngine::audioNotify() {
 
 void AudioEngine::audioStateChanged(QAudio::State state) {
 
-    AUDIO_ENGINE_DEBUG	<< "audioStateChanged from" << m_state
+    AUDIO_ENGINE_DEBUG	<< "audio state changed from" << m_state
 						<< "to" << state;
 
     if (QAudio::IdleState == state && m_file && m_file->pos() == m_file->size()) {
+
         stopPlayback();
-    } else {
+    } 
+	else {
+
         if (QAudio::StoppedState == state) {
             // Check error
             QAudio::Error error = QAudio::NoError;
+
             switch (m_mode) {
-            case QAudio::AudioInput:
-                error = m_audioInput->error();
-                break;
-            case QAudio::AudioOutput:
-                error = m_audioOutput->error();
-                break;
-            }
+            
+				case QAudio::AudioInput:
+					
+					error = m_audioInput->error();
+					break;
+				
+				case QAudio::AudioOutput:
+					error = m_audioOutput->error();
+					break;
+			}
+
             if (QAudio::NoError != error) {
-                reset();
+            
+				reset();
                 return;
             }
         }
-        setState(state);
+        setAudioState(state);
     }
 }
 
 void AudioEngine::audioDataReady() {
 
     Q_ASSERT(0 == m_bufferPosition);
+
     const qint64 bytesReady = m_audioInput->bytesReady();
     const qint64 bytesSpace = m_buffer.size() - m_dataLength;
     const qint64 bytesToRead = qMin(bytesReady, bytesSpace);
 
-    const qint64 bytesRead = m_audioInputIODevice->read(
-                                       m_buffer.data() + m_dataLength,
-                                       bytesToRead);
+    const qint64 bytesRead = m_audioInputIODevice->read(m_buffer.data() + m_dataLength, bytesToRead);
 
     if (bytesRead) {
+
         m_dataLength += bytesRead;
         emit dataLengthChanged(dataLength());
     }
@@ -822,7 +826,7 @@ void AudioEngine::reset() {
 
     stopRecording();
     stopPlayback();
-    setState(QAudio::AudioInput, QAudio::StoppedState);
+    setAudioState(QAudio::AudioInput, QAudio::StoppedState);
     setFormat(QAudioFormat());
     m_generateTone = false;
     delete m_file;
@@ -846,14 +850,14 @@ bool AudioEngine::initializePCMS16LE() {
     QAudioFormat format = m_format;
 
     if (selectFormat()) {
+
         if (m_format != format) {
 			
 			resetAudioDevices();
-
             if (m_file) {
 
-				AUDIO_ENGINE_DEBUG << "m_file bufferLength" << bufferLength();
-				AUDIO_ENGINE_DEBUG << "m_file dataLength" << dataLength();
+				AUDIO_ENGINE_DEBUG << "m_file bufferLength: " << bufferLength();
+				AUDIO_ENGINE_DEBUG << "m_file dataLength: " << dataLength();
                 emit bufferLengthChanged(bufferLength());
                 emit dataLengthChanged(dataLength());
                 emit bufferChanged(this, 0, 0, m_buffer);
@@ -861,7 +865,7 @@ bool AudioEngine::initializePCMS16LE() {
 
 				result = true;
             } 
-			else {
+			else if (m_serverMode == QSDR::ChirpWSPR) {
 
 				m_bufferLength = audioLength(m_format, m_chirpRepetition * m_chirpBufferDurationUs);
                 m_buffer.resize(m_bufferLength);
@@ -875,8 +879,7 @@ bool AudioEngine::initializePCMS16LE() {
                         const qreal nyquist = nyquistFrequency(m_format);
                         m_tone.endFreq = qMin(qreal(SpectrumHighFreq), nyquist);
                     }
-                    // Call function defined in utils.h, at global scope
-                    //::generateTone(m_tone, m_format, m_buffer);
+                    
 					generateAudioChirpSignal(m_tone, m_format, m_buffer);
 					
                     m_dataLength = m_bufferLength;
@@ -896,12 +899,17 @@ bool AudioEngine::initializePCMS16LE() {
                     result = true;
                 }
             }
+			else if (m_serverMode == QSDR::SDRMode) {
+			}
+
             m_audioOutput = new QAudioOutput(m_audioOutputDevice, m_format, this);
             m_audioOutput->setNotifyInterval(NotifyIntervalMs);
 		}
 	} 
 	else {
+
 		if (m_file) {
+
             m_message = "[audio engine]: audio format not supported, %1 .";
 			emit messageEvent(m_message.arg(formatToString(m_format)));
 		}
@@ -911,11 +919,12 @@ bool AudioEngine::initializePCMS16LE() {
             emit messageEvent("[audio engine]: no common input / output format found.");
     }
 
-    AUDIO_ENGINE_DEBUG << "initialize" << "m_bufferLength" << m_bufferLength;
-    AUDIO_ENGINE_DEBUG << "initialize" << "m_dataLength" << m_dataLength;
-	AUDIO_ENGINE_DEBUG << "initialize" << "format" << m_format;
-	m_message = "[audio engine]: file format = %1.";
-	emit messageEvent(m_message.arg(formatToString(m_format)));
+    AUDIO_ENGINE_DEBUG << "initialize" << "m_bufferLength: " << m_bufferLength;
+    AUDIO_ENGINE_DEBUG << "initialize" << "m_dataLength: " << m_dataLength;
+	AUDIO_ENGINE_DEBUG << "initialize" << "format: " << m_format;
+	
+	//m_message = "[audio engine]: file format = %1.";
+	//emit messageEvent(m_message.arg(formatToString(m_format)));
 
     return result;
 }
@@ -983,16 +992,9 @@ bool AudioEngine::selectFormat() {
 			AUDIO_ENGINE_DEBUG << "nearest file audio format" << formatStr;
 		}
     } 
-	else {
+	else if ((m_serverMode == QSDR::ChirpWSPR)|| QAudioFormat() != m_format) {
 
         QList<int> frequenciesList;
-    #ifdef Q_OS_WIN
-        // The Windows audio backend does not correctly report format support
-        // (see QTBUG-9100).  Furthermore, although the audio subsystem captures
-        // at 11025Hz, the resulting audio is corrupted.
-        frequenciesList += 8000;
-		//frequenciesList += 48000;
-    #endif
 
         if (!m_generateTone)
             frequenciesList += m_audioInputDevice.supportedFrequencies();
@@ -1000,14 +1002,14 @@ bool AudioEngine::selectFormat() {
         frequenciesList += m_audioOutputDevice.supportedFrequencies();
         frequenciesList = frequenciesList.toSet().toList(); // remove duplicates
         qSort(frequenciesList);
-        AUDIO_ENGINE_DEBUG << "initialize frequenciesList" << frequenciesList;
+        AUDIO_ENGINE_DEBUG << "initialize frequenciesList: " << frequenciesList;
 
         QList<int> channelsList;
         channelsList += m_audioInputDevice.supportedChannels();
         channelsList += m_audioOutputDevice.supportedChannels();
         channelsList = channelsList.toSet().toList();
         qSort(channelsList);
-        AUDIO_ENGINE_DEBUG << "initialize channelsList" << channelsList;
+        AUDIO_ENGINE_DEBUG << "initialize channelsList: " << channelsList;
 
         QAudioFormat format;
         format.setByteOrder(QAudioFormat::LittleEndian);
@@ -1020,20 +1022,22 @@ bool AudioEngine::selectFormat() {
 		const bool inputSupport = m_generateTone || m_audioInputDevice.isFormatSupported(format);
 		const bool outputSupport = m_audioOutputDevice.isFormatSupported(format);
 		
-		AUDIO_ENGINE_DEBUG	<< "initialize checking " << format
-							<< "input:" << inputSupport << ";"
-							<< "output:" << outputSupport;
+		AUDIO_ENGINE_DEBUG	<< "initialize checking: " 
+							<< " input: " << inputSupport << "; "
+							<< " output: " << outputSupport;
 			
 		AUDIO_ENGINE_DEBUG	<< "checking audio length:";
-		AUDIO_ENGINE_DEBUG	<< "   format.frequency() =" << format.frequency();
-		AUDIO_ENGINE_DEBUG	<< "   format.channels() =" << format.channels();
-		AUDIO_ENGINE_DEBUG	<< "   format.sampleSize() =" << format.sampleSize();
+		AUDIO_ENGINE_DEBUG	<< "   format.frequency() = " << format.frequency();
+		AUDIO_ENGINE_DEBUG	<< "   format.channels() = " << format.channels();
+		AUDIO_ENGINE_DEBUG	<< "   format.sampleSize() = " << format.sampleSize();
 
 		if (inputSupport && outputSupport) {
 
 			setFormat(format);
 			foundSupportedFormat = true;
 		}
+
+		return foundSupportedFormat;
 
 		/*int frequency, channels;
         foreach (frequency, frequenciesList) {
@@ -1060,8 +1064,53 @@ bool AudioEngine::selectFormat() {
 
         setFormat(format);*/
     }
+	else if ((m_serverMode == QSDR::SDRMode)|| QAudioFormat() != m_format) {
 
-    return foundSupportedFormat;
+        QList<int> frequenciesList;
+
+        if (!m_generateTone)
+            frequenciesList += m_audioInputDevice.supportedFrequencies();
+
+        frequenciesList += m_audioOutputDevice.supportedFrequencies();
+        frequenciesList = frequenciesList.toSet().toList(); // remove duplicates
+        qSort(frequenciesList);
+        AUDIO_ENGINE_DEBUG << "initialize frequenciesList: " << frequenciesList;
+
+        QList<int> channelsList;
+        channelsList += m_audioInputDevice.supportedChannels();
+        channelsList += m_audioOutputDevice.supportedChannels();
+        channelsList = channelsList.toSet().toList();
+        qSort(channelsList);
+        AUDIO_ENGINE_DEBUG << "initialize channelsList: " << channelsList;
+
+        QAudioFormat format;
+        format.setByteOrder(QAudioFormat::LittleEndian);
+        format.setCodec("audio/pcm");
+        format.setSampleSize(16);
+        format.setSampleType(QAudioFormat::SignedInt);
+
+		format.setFrequency(48000);
+		format.setChannels(2);
+		const bool inputSupport = m_generateTone || m_audioInputDevice.isFormatSupported(format);
+		const bool outputSupport = m_audioOutputDevice.isFormatSupported(format);
+		
+		AUDIO_ENGINE_DEBUG	<< "initialize checking: " 
+							<< " input: " << inputSupport << "; "
+							<< " output: " << outputSupport;
+			
+		AUDIO_ENGINE_DEBUG	<< "checking audio length:";
+		AUDIO_ENGINE_DEBUG	<< "   format.frequency() = " << format.frequency();
+		AUDIO_ENGINE_DEBUG	<< "   format.channels() = " << format.channels();
+		AUDIO_ENGINE_DEBUG	<< "   format.sampleSize() = " << format.sampleSize();
+
+		if (inputSupport && outputSupport) {
+
+			setFormat(format);
+			foundSupportedFormat = true;
+		}
+
+		return foundSupportedFormat;
+	}
 }
 
 void AudioEngine::stopRecording() {
@@ -1088,7 +1137,7 @@ void AudioEngine::stopPlayback() {
     }
 }
 
-void AudioEngine::setState(QAudio::State state) {
+void AudioEngine::setAudioState(QAudio::State state) {
 
     const bool changed = (m_state != state);
     m_state = state;
@@ -1096,13 +1145,31 @@ void AudioEngine::setState(QAudio::State state) {
         emit stateChanged(m_mode, m_state);
 }
 
-void AudioEngine::setState(QAudio::Mode mode, QAudio::State state) {
+void AudioEngine::setAudioState(QAudio::Mode mode, QAudio::State state) {
 
     const bool changed = (m_mode != mode || m_state != state);
     m_mode = mode;
     m_state = state;
     if (changed)
         emit stateChanged(m_mode, m_state);
+}
+
+void AudioEngine::setSystemState(
+	QSDR::_Error err, 
+	QSDR::_HWInterfaceMode hwmode, 
+	QSDR::_ServerMode mode, 
+	QSDR::_DataEngineState state)
+{
+	Q_UNUSED (err)
+
+	if (m_hwInterface != hwmode)
+		m_hwInterface = hwmode;
+		
+	if (m_serverMode != mode)
+		m_serverMode = mode;
+		
+	if (m_dataEngineState != state)
+		m_dataEngineState = state;
 }
 
 void AudioEngine::setRecordPosition(qint64 position, bool forceEmit) {

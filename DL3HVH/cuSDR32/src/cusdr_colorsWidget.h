@@ -64,8 +64,6 @@ private:
 	QSDR::_ServerMode			m_serverMode;
 	QSDR::_HWInterfaceMode		m_hwInterface;
 	QSDR::_DataEngineState		m_dataEngineState;
-	QSDRGraphics::_Panadapter	m_panadapterMode;
-	QSDRGraphics::_WfScheme		m_waterColorScheme;
 
 	QtColorTriangle				*m_colorTriangle;
 	QList<TReceiver>			m_rxDataList;
@@ -124,9 +122,10 @@ private slots:
 					QSDR::_DataEngineState state);
 
 	void	graphicModeChanged(
-					QObject *sender, 
-					QSDRGraphics::_Panadapter panMode,
-					QSDRGraphics::_WfScheme waterColorScheme);
+					QObject *sender,
+					int rx,
+					PanGraphicsMode panMode,
+					WaterfallColorMode waterfallColorMode);
 
 	void	setCurrentReceiver(QObject *sender, int rx);
 	void	colorChooserChanged();

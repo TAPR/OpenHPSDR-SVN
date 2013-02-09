@@ -57,8 +57,8 @@ private:
 	QSDR::_ServerMode			m_serverMode;
 	QSDR::_HWInterfaceMode		m_hwInterface;
 	QSDR::_DataEngineState		m_dataEngineState;
-	QSDRGraphics::_Panadapter	m_panadapterMode;
-	QSDRGraphics::_WfScheme		m_waterColorScheme;
+	//QSDRGraphics::_Panadapter	m_panadapterMode;
+	//QSDRGraphics::_WfScheme		m_waterColorScheme;
 
 	AGCMode				m_agcMode;
 

@@ -135,7 +135,8 @@ private slots:
 	void lpfLoSpinBoxValueChanged(double value);
 	void lpfHiSpinBoxValueChanged(double value);
 
-	void setFrequency(QObject * sender, bool value, int rx, long frequency);
+	//void setFrequency(QObject * sender, bool value, int rx, long frequency);
+	void setFrequency(QObject * sender, int mode, int rx, long frequency);
 	void setCurrentReceiver(QObject *sender, int rx);
 	void setAlexConfiguration(double frequency);
 	void manualFilterBtnClicked();
