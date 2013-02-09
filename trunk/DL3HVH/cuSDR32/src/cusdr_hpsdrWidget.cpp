@@ -58,6 +58,8 @@ HPSDRWidget::HPSDRWidget(QWidget *parent)
 	setContentsMargins(4, 8, 4, 0);
 	setMouseTracking(true);
 	
+	m_firmwareCheck = set->getFirmwareVersionCheck();
+
 	createSource10MhzExclusiveGroup();
 	createSource122_88MhzExclusiveGroup();
 
@@ -211,6 +213,37 @@ QGroupBox* HPSDRWidget::hpsdrHardwareBtnGroup() {
 		this, 
 		SLOT(excaliburPresenceChanged()));
 	
+	firmwareCheckBtn = new AeroButton("On", this);
+	firmwareCheckBtn->setRoundness(0);
+	firmwareCheckBtn->setFixedSize(btn_widths, btn_height);
+
+	if (m_firmwareCheck) {
+
+		firmwareCheckBtn->setBtnState(AeroButton::ON);
+		firmwareCheckBtn->setText("On");
+	}
+	else {
+
+		firmwareCheckBtn->setBtnState(AeroButton::OFF);
+		firmwareCheckBtn->setText("Off");
+	}
+
+	CHECKED_CONNECT(
+		firmwareCheckBtn,
+		SIGNAL(released()),
+		this,
+		SLOT(firmwareCheckChanged()));
+
+	m_fwCheckLabel = new QLabel("Firmware Check:", this);
+	m_fwCheckLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
+	m_fwCheckLabel->setStyleSheet(set->getLabelStyle());
+
+	QHBoxLayout *hbox0 = new QHBoxLayout();
+	hbox0->setSpacing(4);
+	hbox0->addStretch();
+	hbox0->addWidget(m_fwCheckLabel);
+	hbox0->addWidget(firmwareCheckBtn);
+
 	QHBoxLayout *hbox1 = new QHBoxLayout();
 	hbox1->setSpacing(4);
 	hbox1->addStretch();
@@ -236,6 +269,8 @@ QGroupBox* HPSDRWidget::hpsdrHardwareBtnGroup() {
 	
 	QVBoxLayout *vbox = new QVBoxLayout();
 	vbox->setSpacing(4);
+	vbox->addSpacing(6);
+	vbox->addLayout(hbox0);
 	vbox->addSpacing(6);
 	vbox->addLayout(hbox1);
 	vbox->addLayout(hbox2);
@@ -399,19 +434,30 @@ QGroupBox *HPSDRWidget::sampleRateExclusiveGroup() {
 	samplerate48Btn->setRoundness(0);
 	samplerate48Btn->setFixedSize (50, btn_height);
 	samplerate48Btn->setStyleSheet(set->getMiniButtonStyle());
-	CHECKED_CONNECT(samplerate48Btn, SIGNAL(released()), this, SLOT(sampleRateChangedTo48()));
+	samplerateBtnList.append(samplerate48Btn);
+	CHECKED_CONNECT(samplerate48Btn, SIGNAL(released()), this, SLOT(sampleRateChanged()));
 
 	samplerate96Btn = new AeroButton("96 kHz", this);
 	samplerate96Btn->setRoundness(0);
 	samplerate96Btn->setFixedSize (50, btn_height);
 	samplerate96Btn->setStyleSheet(set->getMiniButtonStyle());
-	CHECKED_CONNECT(samplerate96Btn, SIGNAL(released()), this, SLOT(sampleRateChangedTo96()));
+	samplerateBtnList.append(samplerate96Btn);
+	CHECKED_CONNECT(samplerate96Btn, SIGNAL(released()), this, SLOT(sampleRateChanged()));
 
 	samplerate192Btn = new AeroButton("192 kHz", this);
 	samplerate192Btn->setRoundness(0);
 	samplerate192Btn->setFixedSize (50, btn_height);
 	samplerate192Btn->setStyleSheet(set->getMiniButtonStyle());
-	CHECKED_CONNECT(samplerate192Btn, SIGNAL(released()), this, SLOT(sampleRateChangedTo192()));
+	samplerateBtnList.append(samplerate192Btn);
+	CHECKED_CONNECT(samplerate192Btn, SIGNAL(released()), this, SLOT(sampleRateChanged()));
+
+	samplerate384Btn = new AeroButton("384 kHz", this);
+	samplerate384Btn->setRoundness(0);
+	samplerate384Btn->setFixedSize (50, btn_height);
+	samplerate384Btn->setStyleSheet(set->getMiniButtonStyle());
+	samplerate384Btn->setEnabled(false);
+	samplerateBtnList.append(samplerate384Btn);
+	CHECKED_CONNECT(samplerate384Btn, SIGNAL(released()), this, SLOT(sampleRateChanged()));
 
 	switch(set->getSampleRate()) {
 
@@ -419,18 +465,28 @@ QGroupBox *HPSDRWidget::sampleRateExclusiveGroup() {
 			samplerate48Btn->setBtnState(AeroButton::ON);
 			samplerate96Btn->setBtnState(AeroButton::OFF);
 			samplerate192Btn->setBtnState(AeroButton::OFF);
+			samplerate384Btn->setBtnState(AeroButton::OFF);
 			break;
 
 		case 96000:
 			samplerate48Btn->setBtnState(AeroButton::OFF);
 			samplerate96Btn->setBtnState(AeroButton::ON);
 			samplerate192Btn->setBtnState(AeroButton::OFF);
+			samplerate384Btn->setBtnState(AeroButton::OFF);
 			break;
 
 		case 192000:
 			samplerate48Btn->setBtnState(AeroButton::OFF);
 			samplerate96Btn->setBtnState(AeroButton::OFF);
 			samplerate192Btn->setBtnState(AeroButton::ON);
+			samplerate384Btn->setBtnState(AeroButton::OFF);
+			break;
+
+		case 384000:
+			samplerate48Btn->setBtnState(AeroButton::OFF);
+			samplerate96Btn->setBtnState(AeroButton::OFF);
+			samplerate192Btn->setBtnState(AeroButton::OFF);
+			samplerate384Btn->setBtnState(AeroButton::ON);
 			break;
 	}
 
@@ -440,6 +496,7 @@ QGroupBox *HPSDRWidget::sampleRateExclusiveGroup() {
 	hbox->addWidget(samplerate48Btn);
 	hbox->addWidget(samplerate96Btn);
 	hbox->addWidget(samplerate192Btn);
+	hbox->addWidget(samplerate384Btn);
 
 	QVBoxLayout *vbox = new QVBoxLayout();
 	vbox->setSpacing(4);
@@ -475,19 +532,6 @@ QGroupBox *HPSDRWidget::numberOfReceiversGroup() {
     m_receiversLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
 	m_receiversLabel->setStyleSheet(set->getLabelStyle());
 	
-	rx1to2Btn = new AeroButton("Link 1+2", this);
-	rx1to2Btn->setRoundness(10);
-	rx1to2Btn->setFixedSize(btn_width2, btn_height);
-	rx1to2Btn->setBtnState(AeroButton::OFF);
-	rx1to2Btn->setEnabled(false);
-	//rxBtnList.append(rx1Btn);
-	
-	CHECKED_CONNECT(
-		rx1to2Btn, 
-		SIGNAL(released()), 
-		this, 
-		SLOT(setShow1on2()));
-
 
 	QHBoxLayout *hbox1 = new QHBoxLayout();
 	hbox1->setSpacing(5);
@@ -495,8 +539,6 @@ QGroupBox *HPSDRWidget::numberOfReceiversGroup() {
 	hbox1->addWidget(m_receiversLabel);
 	hbox1->addStretch();
 	hbox1->addWidget(m_receiverComboBox);
-	hbox1->addSpacing(6);
-	hbox1->addWidget(rx1to2Btn);
 	
 	QVBoxLayout *vbox = new QVBoxLayout();
 	vbox->setSpacing(4);
@@ -837,6 +879,22 @@ void HPSDRWidget::excaliburPresenceChanged() {
 	}
 }
 
+void HPSDRWidget::firmwareCheckChanged() {
+
+	if (firmwareCheckBtn->btnState() == AeroButton::OFF) {
+
+		set->setCheckFirmwareVersion(this, true);
+		firmwareCheckBtn->setBtnState(AeroButton::ON);
+		firmwareCheckBtn->setText("On");
+
+	} else {
+
+		set->setCheckFirmwareVersion(this, false);
+		firmwareCheckBtn->setBtnState(AeroButton::OFF);
+		firmwareCheckBtn->setText("Off");
+	}
+}
+
 void HPSDRWidget::source10MhzChanged() {
 
 	AeroButton *button = qobject_cast<AeroButton *>(sender());
@@ -881,111 +939,48 @@ void HPSDRWidget::source122_88MhzChanged() {
 	}
 }
 
-void HPSDRWidget::sampleRateChangedTo48() {
+void HPSDRWidget::sampleRateChanged() {
 
-	if (samplerate48Btn->btnState() == AeroButton::OFF) {
+	AeroButton *button = qobject_cast<AeroButton *>(sender());
+	int btnHit = samplerateBtnList.indexOf(button);
 
-		set->setSampleRate(this, 48000);
-		samplerate48Btn->setBtnState(AeroButton::ON);
-		//emit newMessage("[hpsdr]: sample rate changed to 48 kHz.");
+	foreach(AeroButton *btn, samplerateBtnList) {
+
+		btn->setBtnState(AeroButton::OFF);
+		btn->update();
 	}
 
-	if (samplerate96Btn->btnState() == AeroButton::ON) {
+	button->setBtnState(AeroButton::ON);
+	button->update();
 
-		samplerate96Btn->setBtnState(AeroButton::OFF);
-		samplerate96Btn->update();
-	}
+	switch (btnHit) {
 
-	if (samplerate192Btn->btnState() == AeroButton::ON) {
+		case 0:
+			set->setSampleRate(this, 48000);
+			HPSDR_WIDGET_DEBUG << "set sample rate to 48 kHz.";
+			break;
+			
+		case 1:
+			set->setSampleRate(this, 96000);
+			HPSDR_WIDGET_DEBUG << "set sample rate to 96 kHz.";
+			break;
 
-		samplerate192Btn->setBtnState(AeroButton::OFF);
-		samplerate192Btn->update();
-	}
-}
+		case 2:
+			set->setSampleRate(this, 192000);
+			HPSDR_WIDGET_DEBUG << "set sample rate to 192 kHz.";
+			break;
 
-void HPSDRWidget::sampleRateChangedTo96() {
-
-	if (samplerate96Btn->btnState() == AeroButton::OFF) {
-
-		set->setSampleRate(this, 96000);
-		samplerate96Btn->setBtnState(AeroButton::ON);
-		//emit newMessage("[hpsdr]: sample rate changed to 96 kHz.");
-	}
-
-	if (samplerate48Btn->btnState() == AeroButton::ON) {
-
-		samplerate48Btn->setBtnState(AeroButton::OFF);
-		samplerate48Btn->update();
-	}
-
-	if (samplerate192Btn->btnState() == AeroButton::ON) {
-
-		samplerate192Btn->setBtnState(AeroButton::OFF);
-		samplerate192Btn->update();
-	}
-}
-
-void HPSDRWidget::sampleRateChangedTo192() {
-
-	if (samplerate192Btn->btnState() == AeroButton::OFF) {
-
-		set->setSampleRate(this, 192000);
-		samplerate192Btn->setBtnState(AeroButton::ON);
-		//emit newMessage("[hpsdr]: sample rate changed to 192 kHz.");
-	}
-
-	if (samplerate48Btn->btnState() == AeroButton::ON) {
-
-		samplerate48Btn->setBtnState(AeroButton::OFF);
-		samplerate48Btn->update();
-	}
-
-	if (samplerate96Btn->btnState() == AeroButton::ON) {
-
-		samplerate96Btn->setBtnState(AeroButton::OFF);
-		samplerate96Btn->update();
+		case 3:
+			set->setSampleRate(this, 384000);
+			HPSDR_WIDGET_DEBUG << "set sample rate to 384 kHz.";
+			break;
 	}
 }
 
 void HPSDRWidget::setNumberOfReceivers(int receivers) {
 
 	m_numberOfReceivers = receivers+1;
-
-	if (m_numberOfReceivers == 1) {
-
-		rx1to2Btn->setEnabled(false);
-	}
-	else {
-		
-		set->setMultiRxView(0);
-
-		if (m_numberOfReceivers == 2)
-			rx1to2Btn->setEnabled(true);
-		else {
-
-			set->setCoupledReceivers(this, 0);
-			rx1to2Btn->setBtnState(AeroButton::OFF);
-			rx1to2Btn->setEnabled(true);
-		}
-	}
-
 	set->setReceivers(this, m_numberOfReceivers);
-}
-
-void HPSDRWidget::setShow1on2() {
-
-	if (rx1to2Btn->btnState() == AeroButton::OFF) {
-
-		set->setCoupledReceivers(this, 12);
-		rx1to2Btn->setBtnState(AeroButton::ON);
-	}
-	else {
-
-		set->setCoupledReceivers(this, 0);
-		rx1to2Btn->setBtnState(AeroButton::OFF);
-	}
-
-	rx1to2Btn->update();
 }
 
 void HPSDRWidget::disableButtons() {

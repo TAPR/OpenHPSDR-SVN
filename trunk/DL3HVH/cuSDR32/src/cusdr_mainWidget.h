@@ -51,7 +51,7 @@
 //#include "cusdr_alexTabWidget.h"
 //#include "cusdr_extCtrlWidget.h"
 //#include "cusdr_radioWidget.h"
-#include "cusdr_radioPopupWidget.h"
+//#include "cusdr_radioPopupWidget.h"
 #include "GL/cusdr_oglWidebandPanel.h"
 #include "GL/cusdr_oglReceiverPanel.h"
 #include "GL/cusdr_oglDisplayPanel.h"
@@ -60,15 +60,15 @@
 
 
 #ifdef LOG_MAIN
-#   define MAIN_DEBUG qDebug().nospace() << "Main::\t"
+#define MAIN_DEBUG qDebug().nospace() << "MainWindow::\t"
 #else
-#   define MAIN_DEBUG nullDebug()
+#define MAIN_DEBUG nullDebug()
 #endif
 
 #ifdef LOG_NETWORKDIALOG
-#   define NETWORKDIALOG_DEBUG qDebug().nospace() << "NetworkDialog::\t"
+#define NETWORKDIALOG_DEBUG qDebug().nospace() << "NetworkDialog::\t"
 #else
-#   define NETWORKDIALOG_DEBUG nullDebug()
+#define NETWORKDIALOG_DEBUG nullDebug()
 #endif
 
 
@@ -92,12 +92,12 @@ public slots:
 	void	startButtonClickedEvent();
 	void	widgetBtnClickedEvent();
 	void	wideBandBtnClickedEvent();
-	void	avgBtnClickedEvent();
-	void	gridBtnClickedEvent();
-	void	peakHoldBtnClickedEvent();
+	//void	avgBtnClickedEvent();
+	//void	gridBtnClickedEvent();
+	//void	peakHoldBtnClickedEvent();
 	void	alexBtnClickedEvent();
 	void	muteBtnClickedEvent();
-	void	resizeWidget();
+	//void	resizeWidget();
 	
 	void	showWidgetEvent(QObject *sender);
 	void	closeWidgetEvent(QObject *sender);
@@ -123,17 +123,18 @@ private:
 	void	createModeMenu();
 	void	createViewMenu();
 	void	createAttenuatorMenu();
-	void	createMainBtnGroup();
+	void	createDisplayPanelToolBar();
+	void	createMainBtnToolBar();
 	//void	createDisplayPanel();
-	void	createStatusBar();
+	void	createStatusToolBar();
 	//void	initWidebandDisplay();
-	void	initReceiverPanels(int rx);
+	void	createReceiverPanels(int rx);
 	void	updateFromSettings();
-	void	runFFTWWisdom();
+	//void	runFFTWWisdom();
 	void	setAttenuatorButton();
 
 private:
-	Settings					*set;
+	Settings*					set;
 
 	QSDR::_Error				m_error;
 	QSDR::_ServerMode			m_serverMode;
@@ -143,108 +144,106 @@ private:
 	QMutex						m_mutex;
 
 	QDir 						m_currentDir;
-	QToolBar					*mainBtnToolBar;
-	QToolBar					*displayPanelToolBar;
+	QToolBar*					mainBtnToolBar;
+	QToolBar*					displayPanelToolBar;
 	
-	QMainWindow					*centralwidget;
+	QMainWindow*				centralwidget;
 
-	QList<QGLReceiverPanel *>	rxWidgetList;
+	QList<QGLReceiverPanel* >	rxWidgetList;
 	QVector<float>				rxVolumeList;
 
-	QDockWidget					*widebandDock;
-	QDockWidget					*rx1Dock;
-	QList<QDockWidget*>			dockWidgetList;
-	QList<QDockWidget*>			rxDockWidgetList;
+	QDockWidget*				widebandDock;
+	QDockWidget*				rx1Dock;
+	QList<QDockWidget* >		dockWidgetList;
+	QList<QDockWidget* >		rxDockWidgetList;
 	
 	QList<QHostAddress>			m_ipList;
 	QList<QNetworkInterface>	m_niList;
 
-	//QThreadEx					*cpuLoadThread;
-	CFonts		*fonts;
-	TFonts		m_fonts;
+	//QThreadEx*				cpuLoadThread;
 
-	QSize		m_oldSize;
-	QPoint		m_oldPosition;
+	CFonts*						fonts;
+	TFonts						m_fonts;
 
-	QPixmap		m_originalPixmap;
-	QPixmap		m_widgetMask;
+	QSize			m_oldSize;
+	QPoint			m_oldPosition;
 
-	QTimer		*m_resizeTimer;
+	QPixmap			m_originalPixmap;
+	QPixmap			m_widgetMask;
 
-	QPoint		m_dragPosition;
-	QPoint		m_pos;
-    QRect		m_rect;
-	QString		m_message;
+	QTimer*			m_resizeTimer;
+
+	QPoint			m_dragPosition;
+	QPoint			m_pos;
+    QRect			m_rect;
+	QString			m_message;
 	
-	QGridLayout				*m_contentLayout;
+	QGridLayout*	m_contentLayout;
 
-	QLabel					*m_volumeLabel;
-	QLabel					*m_volLevelLabel;
-	QLabel					*m_agcGainLabel;
-	QLabel					*m_agcGainLevelLabel;
-	QLabel					*m_cpuLoadLabel;
-	QLabel					*m_dateTimeLabel;
-	QLabel					*m_statusBarMessage;
+	QLabel*			m_volumeLabel;
+	QLabel*			m_volLevelLabel;
+	QLabel*			m_agcGainLabel;
+	QLabel*			m_agcGainLevelLabel;
+	QLabel*			m_cpuLoadLabel;
+	QLabel*			m_dateTimeLabel;
+	QLabel*			m_statusBarMessage;
 
-	QString					m_cpuLoadString;
-	QString					m_dateTimeString;
-	QString					m_statusBarMessageString;
+	QString			m_windowsSettingsFilename;
+	QString			m_cpuLoadString;
+	QString			m_dateTimeString;
+	QString			m_statusBarMessageString;
 
-	QWidget					*m_buttonWidget;
-	QWidget					*m_secondButtonWidget;
+	QWidget*		m_buttonWidget;
+	QWidget*		m_secondButtonWidget;
 	
-	QSlider					*m_volumeSlider;
-	QSlider					*m_agcGainSlider;
-	AGCMode					m_agcMode;
+	QSlider*		m_volumeSlider;
+	QSlider*		m_agcGainSlider;
+	AGCMode			m_agcMode;
 
-	DataEngine				*m_dataEngine;
-	//RadioWidget				*m_radioWidget;
-	RadioPopupWidget		*m_radioPopupWidget;
-	ServerWidget			*m_serverWidget;
-	ChirpWidget				*m_chirpWidget;
-	HPSDRTabWidget			*m_hpsdrTabWidget;
-	RadioTabWidget			*m_radioTabWidget;
-	DisplayTabWidget		*m_displayTabWidget;
-	OGLDisplayPanel			*m_oglDisplayPanel;
-	//CudaInfoWidget		*m_cudaInfoWidget;
+	DataEngine*			m_dataEngine;
+	RadioPopupWidget*	m_radioPopupWidget;
+	ServerWidget*		m_serverWidget;
+	ChirpWidget*		m_chirpWidget;
+	HPSDRTabWidget*		m_hpsdrTabWidget;
+	RadioTabWidget*		m_radioTabWidget;
+	DisplayTabWidget*	m_displayTabWidget;
+	OGLDisplayPanel*	m_oglDisplayPanel;
+	//CudaInfoWidget*	m_cudaInfoWidget;
+	QGLWidebandPanel*	m_wbDisplay;
 
-	QGLWidebandPanel		*m_wbDisplay;
+	NetworkIODialog*	m_netIODialog;
+	WarningDialog*		m_warningDialog;
 
-	NetworkIODialog			*m_netIODialog;
-	WarningDialog			*m_warningDialog;
+	HamBand				m_currentHamBand;
 
-	HamBand					m_currentHamBand;
-
-	quint16					m_alexConfig;
-	QList<int>				m_alexStates;
-	QList<int>				m_mercuryAttn;
-	//QList<QCLDevice>		m_clDevices;
+	quint16				m_alexConfig;
+	QList<int>			m_alexStates;
+	QList<int>			m_mercuryAttn;
+	//QList<QCLDevice>	m_clDevices;
 	
-	AeroButton		*startBtn;
-	AeroButton		*serverBtn;
-	AeroButton		*hpsdrBtn;
-	AeroButton		*modeBtn;
-	AeroButton		*viewBtn;
-	AeroButton		*chirpBtn;
-	AeroButton		*openclBtn;
-	AeroButton		*rxCtrlBtn;
-	AeroButton		*wideBandBtn;
-	AeroButton		*ctrlDisplayBtn;
-	AeroButton		*displayBtn;
-	AeroButton		*quitBtn;
-	AeroButton		*nullBtn;
+	AeroButton*			startBtn;
+	AeroButton*			serverBtn;
+	AeroButton*			hpsdrBtn;
+	AeroButton*			modeBtn;
+	AeroButton*			viewBtn;
+	AeroButton*			chirpBtn;
+	AeroButton*			openclBtn;
+	AeroButton*			rxCtrlBtn;
+	AeroButton*			wideBandBtn;
+	AeroButton*			ctrlDisplayBtn;
+	AeroButton*			displayBtn;
+	AeroButton*			plusRxBtn;
+	AeroButton*			quitBtn;
+	AeroButton*			nullBtn;
 	
-	AeroButton		*avgBtn;
-	AeroButton		*peakHoldBtn;
-	AeroButton		*gridBtn;
-	AeroButton		*moxBtn;
-	AeroButton		*tunBtn;
-	AeroButton		*alexBtn;
-	AeroButton		*lastFreqBtn;
-	AeroButton		*attenuatorBtn;
-	AeroButton		*muteBtn;
-		
-	QList<AeroButton *>	mainBtnList;
+	AeroButton*			moxBtn;
+	AeroButton*			tunBtn;
+	AeroButton*			alexBtn;
+	AeroButton*			lastFreqBtn;
+	AeroButton*			attenuatorBtn;
+	AeroButton*			muteBtn;
+
+	QList<AeroButton* >	mainBtnList;
 
 	QMenu			*modeMenu;
 	QMenu			*viewMenu;
@@ -314,9 +313,6 @@ private slots:
 	//void setInternalDSPMode(bool value);
 	void setSDRMode(bool);
     void setChirpWSPRMode(bool value);
-	void setPeakHoldStatus(bool);
-	//void setAlexPresence(bool value);
-	//void setPennyPresence(bool value);
 	void getNetworkInterfaces();
 	void setMainVolume(int value);
 	//void setHamBand(QObject *sender, int rx, bool byButton, HamBand band);
@@ -325,6 +321,7 @@ private slots:
 	//void setAGCGain(QObject *sender, int rx, int value);
 	void setAGCGain(QObject *sender, int rx, qreal value);
 	void getLastFrequency();
+	void addReceiver();
 
 	void alexPresenceChanged(bool value);
 	void alexConfigurationChanged(quint16 conf);
@@ -337,8 +334,6 @@ private slots:
 	void showNetworkIODialog();
 	void showWarningDialog(const QString &msg);
 
-	void setSpectrumBuffer(int rx, const float* buffer);
-
 	void addNetworkIOComboBoxEntry(QString str);
 	void clearNetworkIOComboBoxEntry();
 
@@ -346,7 +341,7 @@ private slots:
 	void showRadioPopup(bool value);
 
 protected:
-	void getSelectedFrame(QPoint p);
+	//void getSelectedFrame(QPoint p);
 	//void paintEvent(QPaintEvent *event);
 	void closeEvent(QCloseEvent *event);
 	void keyPressEvent(QKeyEvent *event);
@@ -356,7 +351,7 @@ protected:
 	//void moveEvent(QMoveEvent *event); 
 	void resizeEvent(QResizeEvent *event);
 	//void changeEvent(QEvent *event); 
-	void mousePressEvent(QMouseEvent *event);
+	//void mousePressEvent(QMouseEvent *event);
 	//void mouseMoveEvent(QMouseEvent *event);
 	//void mouseReleaseEvent(QMouseEvent *event);
 	void wheelEvent(QWheelEvent *event);

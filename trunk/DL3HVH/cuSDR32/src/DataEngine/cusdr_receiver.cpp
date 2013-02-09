@@ -31,10 +31,11 @@
 
 #include "cusdr_receiver.h"
 
-Receiver::Receiver(QObject *parent, int rx)
-	: QObject(parent)
+Receiver::Receiver(int rx)
+	: QObject()
 	, set(Settings::instance())
 	, m_filterMode(set->getCurrentFilterMode())
+	, m_stopped(false)
 	, m_receiver(rx)
 	, m_samplerate(set->getSampleRate())
 	, m_audioMode(1)
@@ -46,12 +47,16 @@ Receiver::Receiver(QObject *parent, int rx)
 	InitCPX(inBuf, BUFFER_SIZE, 0.0f);
 	InitCPX(outBuf, BUFFER_SIZE, 0.0f);
 
+	newSpectrum.resize(BUFFER_SIZE*4);
+
 	qtdsp = 0;
 
 	setupConnections();
 
 	highResTimer = new HResTimer();
 	m_displayTime = (int)(1000000.0/set->getFramesPerSecond(m_receiver));
+
+	m_smeterTime.start();
 }
 
 Receiver::~Receiver() {
@@ -66,9 +71,10 @@ Receiver::~Receiver() {
 	}
 
 	if (highResTimer) {
-
 		delete highResTimer;
 	}
+
+	m_stopped = false;
 }
 
 void Receiver::setupConnections() {
@@ -197,6 +203,11 @@ void Receiver::setupConnections() {
 		this,
 		SLOT(setFramesPerSecond(QObject*, int, int)));
 
+	/*CHECKED_CONNECT(
+		set,
+		SIGNAL(receiverDataReady()),
+		this,
+		SLOT(dspProcessing()));*/
 }
 
 void Receiver::setReceiverData(TReceiver data) {
@@ -221,7 +232,8 @@ void Receiver::setReceiverData(TReceiver data) {
 	m_filterLo = m_receiverData.filterLo;
 	m_filterHi = m_receiverData.filterHi;
 
-	m_lastFrequencyList = m_receiverData.lastFrequencyList;
+	m_lastCtrFrequencyList = m_receiverData.lastCenterFrequencyList;
+	m_lastVfoFrequencyList = m_receiverData.lastVfoFrequencyList;
 	m_mercuryAttenuators = m_receiverData.mercuryAttenuators;
 }
 
@@ -284,6 +296,53 @@ void Receiver::deleteQtDSP() {
 	}
 }
 
+void Receiver::enqueueData() {
+
+	inQueue.enqueue(inBuf);
+	
+	if (inQueue.isFull()) {
+		RECEIVER_DEBUG << "inQueue full!";
+	}
+
+}
+
+void Receiver::stop() {
+
+	m_mutex.lock();
+	m_stopped = true;
+	m_mutex.unlock();
+}
+
+void Receiver::dspProcessing() {
+
+	//RECEIVER_DEBUG << "dspProcessing: " << this->thread();
+
+	//io.mutex.lock();
+	qtdsp->processDSP(inBuf, outBuf, BUFFER_SIZE);
+	//io.mutex.unlock();
+
+	// spectrum
+	qtdsp->getSpectrum(newSpectrum, set->getFFTMultiplicator());
+	if (highResTimer->getElapsedTimeInMicroSec() >= getDisplayDelay()) {
+
+		emit spectrumBufferChanged(m_receiver, newSpectrum);
+		highResTimer->start();
+	}
+
+	if (m_receiver == set->getCurrentReceiver()) {
+		// S-Meter
+		if (m_smeterTime.elapsed() > 20) {
+
+			m_sMeterValue = qtdsp->getSMeterInstValue();
+			emit sMeterValueChanged(m_receiver, m_sMeterValue);
+			m_smeterTime.restart();
+		}
+
+		// process output data
+		emit outputBufferSignal(m_receiver, outBuf);
+	}
+}
+
 void Receiver::setSampleRate(QObject *sender, int value) {
 
 	Q_UNUSED(sender)
@@ -304,8 +363,12 @@ void Receiver::setSampleRate(QObject *sender, int value) {
 			m_samplerate = value;
 			break;
 
+		case 384000:
+			m_samplerate = value;
+			break;
+
 		default:
-			RECEIVER_DEBUG << "invalid sample rate (48000, 96000, 192000)!\n";
+			RECEIVER_DEBUG << "invalid sample rate (possible values are: 48, 96, 192, or 384 kHz)!\n";
 			break;
 	}
 
@@ -626,18 +689,32 @@ void Receiver::setFilterFrequencies(QObject *sender, int rx, double low, double 
 	}
 }
 
-void Receiver::setFrequency(long frequency) {
+void Receiver::setCtrFrequency(long frequency) {
 
-	if (m_frequency == frequency) return;
-	m_frequency = frequency;
+	if (m_ctrFrequency == frequency) return;
+	m_ctrFrequency = frequency;
 
 	HamBand band = getBandFromFrequency(set->getBandFrequencyList(), frequency);
-	m_lastFrequencyList[(int) band] = m_frequency;
+	m_lastCtrFrequencyList[(int) band] = m_ctrFrequency;
 }
 
-void Receiver::setLastFrequencyList(const QList<long> &fList) {
+void Receiver::setVfoFrequency(long frequency) {
 
-	m_lastFrequencyList = fList;
+	if (m_vfoFrequency == frequency) return;
+	m_vfoFrequency = frequency;
+
+	HamBand band = getBandFromFrequency(set->getBandFrequencyList(), frequency);
+	m_lastVfoFrequencyList[(int) band] = m_vfoFrequency;
+}
+
+void Receiver::setLastCtrFrequencyList(const QList<long> &fList) {
+
+	m_lastCtrFrequencyList = fList;
+}
+
+void Receiver::setLastVfoFrequencyList(const QList<long> &fList) {
+
+	m_lastVfoFrequencyList = fList;
 }
 
 void Receiver::setdBmPanScaleMin(qreal value) {

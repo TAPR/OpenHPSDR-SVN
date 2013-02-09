@@ -31,8 +31,8 @@
 
 #include <QDebug>
 
-QFFT::QFFT(QObject *parent, int size)
-	: QObject(parent)
+QFFT::QFFT(int size)
+	: QObject()
 	, m_size(size)
 	, half_sz(size/2)
 {
@@ -58,7 +58,7 @@ QFFT::~QFFT() {
 
 void QFFT::DoFFTWForward(CPX &in, CPX &out, int size) {
 
-    memcpy(cpxbuf, in.data(), sizeof(cpx) * size);
+	memcpy(cpxbuf, in.data(), sizeof(cpx) * size);
     fftwf_execute(plan_fwd);
     memcpy(out.data(), cpxbuf, sizeof(cpx) * size);
 }

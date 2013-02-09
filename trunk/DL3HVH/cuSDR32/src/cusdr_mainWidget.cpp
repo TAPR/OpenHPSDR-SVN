@@ -83,13 +83,19 @@ MainWindow::MainWindow(QWidget *parent)
 	setMouseTracking(true);
 	setContentsMargins(0, 0, 0, 0);
 	
+	m_fullScreen = false;
+
+	// save and reload the windows size and state
+	m_windowsSettingsFilename = "windowsSettings.ini";
+	QSettings settings(QCoreApplication::applicationDirPath() +  "/" + m_windowsSettingsFilename, QSettings::IniFormat);
+	restoreGeometry(settings.value("geometry").toByteArray());
+	restoreState(settings.value("windowState").toByteArray());
+
+	// Dock windows options
 	setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowNestedDocks);
 	setMinimumSize(QSize(window_width1, window_height1));
 	setStyleSheet(set->getSDRStyle());
-	//menuBar()->setStyleSheet(set->getMenuStyle());
 
-	m_fullScreen = false;
-	
 	m_oldSampleRate = set->getSampleRate();
 	m_numberOfReceivers = set->getNumberOfReceivers();
 	m_alexConfig = set->getAlexConfig();
@@ -103,9 +109,10 @@ MainWindow::MainWindow(QWidget *parent)
 	fonts = new CFonts(this);
 	m_fonts = fonts->getFonts();
 
-
+	// the SDR data engine
 	m_dataEngine = new DataEngine(this);
-	m_radioPopupWidget = new RadioPopupWidget(this);
+
+	// control widgets
 	m_serverWidget = new ServerWidget(this);
 	m_chirpWidget = new ChirpWidget(this);
 	m_hpsdrTabWidget = new HPSDRTabWidget(this);
@@ -114,17 +121,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 	m_wbDisplay = 0;
 
-	m_radioPopupWidget->hide();
 	m_serverWidget->hide();
 	m_chirpWidget->hide();
 	m_hpsdrTabWidget->hide();
 	m_radioTabWidget->hide();
 	m_displayTabWidget->hide();
-
-
-	//m_resizeTimer = new QTimer(this);
-	//cpuLoadThread = new QThreadEx();
-	//updateTitle();
 
 	MAIN_DEBUG << "main window init done";
 }
@@ -141,7 +142,7 @@ MainWindow::~MainWindow() {
 void MainWindow::setupConnections() {
 
 	CHECKED_CONNECT_OPT(
-		m_dataEngine,
+		set,
 		SIGNAL(systemMessageEvent(const QString&, int)),
 		this,
 		SLOT(showStatusBarMessage(const QString &, int)),
@@ -261,13 +262,7 @@ void MainWindow::setupConnections() {
 		SIGNAL(clearNetworkIOComboBoxEntrySignal()),
 		this,
 		SLOT(clearNetworkIOComboBoxEntry()));
-
-	CHECKED_CONNECT(
-		set,
-		SIGNAL(spectrumBufferChanged(int, const float*)),
-		this,
-		SLOT(setSpectrumBuffer(int, const float*)));
-
+		
 	CHECKED_CONNECT(
 		set,
 		SIGNAL(showRadioPopupChanged(bool)),
@@ -324,7 +319,7 @@ void MainWindow::setupConnections() {
 }
 
 /*!
-	\brief setup the main window:
+	\brief setup the main window (called in main.cpp):
 	- create main button group
 	- create dock widgets
 	- create mode menus
@@ -337,40 +332,47 @@ void MainWindow::setup() {
 	
 	//runFFTWWisdom();
 
-	displayPanelToolBar = new QToolBar(tr("Display Panel"), this);
-	displayPanelToolBar->setAllowedAreas(Qt::TopToolBarArea);
-	displayPanelToolBar->setMovable(false);
-	displayPanelToolBar->setStyleSheet(set->getDisplayToolbarStyle());
+	// create the big display panel at the top of the application.	
+	createDisplayPanelToolBar();
 
-	m_oglDisplayPanel = new OGLDisplayPanel(displayPanelToolBar);
+	// create the main buttons tool bar
+	createMainBtnToolBar();
 
-	displayPanelToolBar->addWidget(m_oglDisplayPanel);
+	// create the status tool bar
+	createStatusToolBar();
 
-	addToolBar(displayPanelToolBar);
-	addToolBarBreak(Qt::TopToolBarArea);
-	
-	createMainBtnGroup();
-	createStatusBar();
+	// create the mode menu
 	createModeMenu();
+
+	// create the view menu
 	createViewMenu();
+
+	// create the attenuator menu
 	createAttenuatorMenu();
 	
+	// the wideband display
 	m_wbDisplay = new QGLWidebandPanel(this);
-	initReceiverPanels(MAX_RECEIVERS);
+
+	// create the receiver panels
+	createReceiverPanels(MAX_RECEIVERS);
 	
+	// setup the layout for the control widgets, the wideband panel and the receiver panels
 	setupLayout();
+
+	// set the main window title
 	updateTitle();
 
-	if (set->getWideBandData()) {
+	// show the wideband data panel as specified in the settings.ini
+	if (set->getWidebandData()) {
 
 		wideBandBtn->setEnabled(true);
 
-		if (set->getWideBandStatus())
+		if (set->getWidebandStatus()) {
 			wideBandBtnClickedEvent();
+		}
 	}
-
-
-	// get network interfaces
+	
+	// get the network interfaces
 	getNetworkInterfaces();
 
 	// init network IO dialog to HPSDR components
@@ -384,6 +386,7 @@ void MainWindow::setup() {
 	m_serverWidget->addNICChangedConnection();
 	m_hpsdrTabWidget->addNICChangedConnection();
 	
+	// experimental:
 	// check for OpenCL devices
 	//QList<QCLDevice> clDevices = QCLDevice::allDevices();
 	//if (clDevices.length() == 0)
@@ -392,48 +395,52 @@ void MainWindow::setup() {
 	//else {
 
 	//	m_message = "[main]: found %1 OpenCL device(s).";
-	//	showMessage(m_message.arg(clDevices.length()));
+	//	showStatusBarMessage(m_message.arg(clDevices.length()), 5000);
 	//	//QString clNo = QString::number(m_clDevices.length());
 	//}
 	//set->setOpenCLDevices(clDevices);
 
-	//m_tlw = this;
-	//setNumberOfReceivers(this, 1);
-
-	//m_oglDisplayPanel->updateGL();
-
+	// set the centralwidget as the central widget of the main window,
+	// i.e., we have a second QMainWindow as the central widget.
 	setCentralWidget(centralwidget);
 
+	// update the display panel
 	m_oglDisplayPanel->updateGL();
+
+	// set the Alex configuration
 	alexConfigurationChanged(m_alexConfig);
+
+	// set the value of the attenuator(s)
 	setAttenuatorButton();
 
 	m_agcMode = set->getAGCMode(0);
 
+	// initialize all Signal/Slot connections
 	setupConnections();
+
 	updateFromSettings();
 }
 
-void MainWindow::runFFTWWisdom() {
-
-	QString directory = QDir::currentPath();
-	
-	m_currentDir = QDir(directory);
-	qDebug() << m_currentDir;
-	
-	if (m_currentDir.exists("wisdom")) {
-	
-		qDebug() << "wisdom exists !";
-		return;
-	}
-	else {
-	
-		qDebug() << "wisdom does not exist - running fftw-wisdom.exe ...";
-		QProcess process;
-		process.start("fftwf-wisdom.exe");
-		process.waitForFinished();
-	}
-}
+//void MainWindow::runFFTWWisdom() {
+//
+//	QString directory = QDir::currentPath();
+//	
+//	m_currentDir = QDir(directory);
+//	qDebug() << m_currentDir;
+//	
+//	if (m_currentDir.exists("wisdom")) {
+//	
+//		qDebug() << "wisdom exists !";
+//		return;
+//	}
+//	else {
+//	
+//		qDebug() << "wisdom does not exist - running fftw-wisdom.exe ...";
+//		QProcess process;
+//		process.start("fftwf-wisdom.exe");
+//		process.waitForFinished();
+//	}
+//}
  
 /*!
 	\brief updates the OpenGL widget.
@@ -455,10 +462,12 @@ void MainWindow::setupLayout() {
 	centralwidget->setStyleSheet(set->getMainWindowStyle());
 	centralwidget->setContextMenuPolicy(Qt::NoContextMenu);  //setStyleSheet(set->getMenuStyle());
 
-
+	// radio control widget
 	QDockWidget *dock = new QDockWidget(tr("Radio Ctrl"), this);
+	dock->setObjectName("RadioCtrl");
     dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	//dock->setFeatures(QDockWidget::DockWidgetFloatable);
 	dock->setStyleSheet(set->getDockStyle());
 	dock->setMaximumWidth(245);
 	dock->setMinimumWidth(245);
@@ -468,10 +477,12 @@ void MainWindow::setupLayout() {
     addDockWidget(Qt::RightDockWidgetArea, dock);
 	dock->hide();
 
-
+	// server control widget
 	dock = new QDockWidget(tr("Server Ctrl"), this);
+	dock->setObjectName("ServerCtrl");
     dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	//dock->setFeatures(QDockWidget::DockWidgetFloatable);
 	dock->setStyleSheet(set->getDockStyle());
 	dock->setMaximumWidth(245);
 	dock->setMinimumWidth(245);
@@ -481,10 +492,12 @@ void MainWindow::setupLayout() {
     addDockWidget(Qt::RightDockWidgetArea, dock);
 	dock->hide();
 
-
+	// HPSDR hardware control widget
 	dock = new QDockWidget(tr("HPSDR Ctrl"), this);
+	dock->setObjectName("HPSDRCtrl");
     dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	//dock->setFeatures(QDockWidget::DockWidgetFloatable);
 	dock->setStyleSheet(set->getDockStyle());
 	dock->setMaximumWidth(245);
 	dock->setMinimumWidth(245);
@@ -494,8 +507,9 @@ void MainWindow::setupLayout() {
     addDockWidget(Qt::RightDockWidgetArea, dock);
 	dock->hide();
 
-
+	// chirp mode control widget
 	dock = new QDockWidget(tr("Chirp Ctrl"), this);
+	dock->setObjectName("ChirpCtrl");
     dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
 	dock->setStyleSheet(set->getDockStyle());
@@ -507,8 +521,9 @@ void MainWindow::setupLayout() {
     addDockWidget(Qt::RightDockWidgetArea, dock);
 	dock->hide();
 
-
+	// display control widget
 	dock = new QDockWidget(tr("Display Ctrl"), this);
+	dock->setObjectName("DisplayCtrl");
     dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
 	dock->setStyleSheet(set->getDockStyle());
@@ -520,24 +535,19 @@ void MainWindow::setupLayout() {
     addDockWidget(Qt::RightDockWidgetArea, dock);
 	dock->hide();
 
-	// receiver and wideband panel docks
+	// receiver and wideband panel docks;
+	// set receiver 0 as the main receiver
 	centralwidget->setCentralWidget(rxWidgetList.at(0));
 
-	/*rx1Dock = new QDockWidget(tr("Receiver 1"), this);
-	rx1Dock->setFeatures(QDockWidget::DockWidgetFloatable | QDockWidget::DockWidgetMovable);
-	rx1Dock->setStyleSheet(set->getDockStyle());
-	rx1Dock->setWidget(rxWidgetList.at(0));
-
-	centralwidget->addDockWidget(Qt::BottomDockWidgetArea, rx1Dock);*/
-	
+	// wideband panel dock window
 	widebandDock = new QDockWidget(tr("Wideband"), this);
+	widebandDock->setObjectName("Wideband");
 	widebandDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
     widebandDock->setFeatures(QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetFloatable | QDockWidget::DockWidgetMovable);
 	widebandDock->setStyleSheet(set->getDockStyle());
     widebandDock->setWidget(m_wbDisplay);
 	
 	centralwidget->addDockWidget(Qt::TopDockWidgetArea, widebandDock);
-	//addDockWidget(Qt::TopDockWidgetArea, widebandDock);
 	widebandDock->hide();
 
 	CHECKED_CONNECT(
@@ -546,18 +556,15 @@ void MainWindow::setupLayout() {
 		this,
 		SLOT(widebandVisibilityChanged(bool)));
 
+	// receiver dock windows
 	for (int i = 1; i < MAX_RECEIVERS; i++) {
 
 		QString str = "Receiver ";
 		QString num = QString::number(i+1);
 		str.append(num);
 		dock = new QDockWidget(str, this);
-		//dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-		//dock->setFeatures(QDockWidget::DockWidgetFloatable | QDockWidget::DockWidgetMovable);
-		//dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+		widebandDock->setObjectName(str);
 		dock->setStyleSheet(set->getDockStyle());
-		//dock->setMaximumWidth(245);
-		//dock->setMinimumWidth(245);
 		dock->setWidget(rxWidgetList.at(i));
 		rxDockWidgetList.append(dock);
 
@@ -568,6 +575,7 @@ void MainWindow::setupLayout() {
 		//viewMenu->addAction(dock->toggleViewAction());
 	}
 
+	// the outline of the receiver panels
 	for (int i = 0; i < (int)(MAX_RECEIVERS-1)/2; i++) {
 
 		centralwidget->splitDockWidget(rxDockWidgetList.at(i), rxDockWidgetList.at(i+3), Qt::Vertical);
@@ -579,18 +587,21 @@ void MainWindow::setupLayout() {
 /*!
 	\brief create the receiver panels.
 */
-void MainWindow::initReceiverPanels(int rx) {
+void MainWindow::createReceiverPanels(int rx) {
 
 	rxWidgetList.clear();
 	
 	for (int i = 0; i < rx; i++) {
 	
-		QGLReceiverPanel *rxPanel = new QGLReceiverPanel(this, i);
+		QGLReceiverPanel* rxPanel = new QGLReceiverPanel(this, i);
 		rxWidgetList.append(rxPanel);
     }
 }
 
-void MainWindow::createStatusBar() {
+/*!
+	\brief create the status tool bar.
+*/
+void MainWindow::createStatusToolBar() {
 
 	QDateTime dateTime = QDateTime::currentDateTime();
 	m_dateTimeString = dateTime.toString();
@@ -600,35 +611,21 @@ void MainWindow::createStatusBar() {
 	m_cpuLoadLabel = new QLabel(m_cpuLoadString, this);
 	m_cpuLoadLabel->setStyleSheet(set->getLabelStyle());
 
-//	m_statusBarMessageString = "ready\t\t\t\t\t";
-//	m_statusBarMessage = new QLabel(m_statusBarMessageString, this);
-//	m_statusBarMessage->setStyleSheet(set->getLabelStyle());
-
 	m_dateTimeLabel = new QLabel(m_dateTimeString, this);
-	//m_dateTimeLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 	m_dateTimeLabel->setStyleSheet(set->getLabelStyle());
 
-
 	statusBar()->setStyleSheet(set->getStatusbarStyle());
-	//statusBar()->setSizeGripEnabled(true);
-	//statusBar()->addWidget(m_statusBarMessage);
-	//statusBar()->insertWidget(0, m_cpuLoadLabel);
-	//statusBar()->addPermanentWidget(m_cpuLoadLabel);
-	//statusBar()->insertWidget(0, m_statusBarMessage);
-	//statusBar()->addPermanentWidget(m_statusBarMessage);
-	//statusBar()->addPermanentWidget(m_dateTimeLabel);
-	//statusBar()->insertPermanentWidget(1, m_statusBarMessage, 0);
-	//statusBar()->addPermanentWidget(m_statusBarMessage);
 	statusBar()->addPermanentWidget(m_cpuLoadLabel);
 	statusBar()->insertPermanentWidget(1, m_dateTimeLabel, 0);
 }
 
+/*!
+	\brief update the staus tool bar content with
+	the CPU load and the local date & time.
+*/
 void MainWindow::updateStatusBar(short load) {
 
 	QString str = "CPU load: %1 % \t";
-	//statusBar()->showMessage(m_cpuLoadString.arg(load));
-	//statusBar()->showMessage(str.arg(load));
-	//statusBar()->showMessage(m_statusBarMessageString, 500);
 	m_cpuLoadLabel->setText(str.arg(load));
 
 	QDateTime dateTime = QDateTime::currentDateTime();
@@ -639,26 +636,34 @@ void MainWindow::updateStatusBar(short load) {
 	statusBar()->update();
 }
 
-void MainWindow::showStatusBarMessage(const QString &msg, int time) {
+/*!
+	\brief create the display panel tool bar.
+*/
+void MainWindow::createDisplayPanelToolBar() {
 
-	statusBar()->showMessage(msg, time);
-	//m_statusBarMessage->setText(msg);
+	displayPanelToolBar = new QToolBar(tr("Display Panel"), this);
+	displayPanelToolBar->setObjectName("DisplayPanel");
+	displayPanelToolBar->setAllowedAreas(Qt::TopToolBarArea);
+	displayPanelToolBar->setMovable(false);
+	displayPanelToolBar->setStyleSheet(set->getDisplayToolbarStyle());
 
-	//statusBar()->update();
+	// The display panel has the displayPanelToolBar as parent.
+	m_oglDisplayPanel = new OGLDisplayPanel(displayPanelToolBar);
+
+	displayPanelToolBar->addWidget(m_oglDisplayPanel);
+
+	// add displayPanelToolBar to the main window.
+	addToolBar(displayPanelToolBar);
+	addToolBarBreak(Qt::TopToolBarArea);
 }
-
-void MainWindow::clearStatusBarMessage() {
-
-	statusBar()->clearMessage();
-}
-
 
 /*!
-	\brief create the main button group.
+	\brief create the main button tool bar.
 */
-void MainWindow::createMainBtnGroup() {
+void MainWindow::createMainBtnToolBar() {
 
 	mainBtnToolBar = new QToolBar(tr("Main Buttons"), this);
+	mainBtnToolBar->setObjectName("MainButtons");
 	//mainBtnToolBar->setAllowedAreas(Qt::TopToolBarArea);
 	mainBtnToolBar->setMovable(false);
 	mainBtnToolBar->setStyleSheet(set->getMainBtnToolbarStyle());
@@ -826,6 +831,18 @@ void MainWindow::createMainBtnGroup() {
 	nullBtn->setHighlight(col);
 	nullBtn->setEnabled(false);
 
+	/*plusRxBtn = new AeroButton("+Rx", this);
+	plusRxBtn->setRoundness(10);
+    plusRxBtn->setFont(m_fonts.normalFont);
+    plusRxBtn->setTextColor(btnCol);
+	plusRxBtn->setFixedSize(btn_width1, btn_height1);
+
+	CHECKED_CONNECT(
+		plusRxBtn, 
+		SIGNAL(clicked()), 
+		this, 
+		SLOT(addReceiver()));*/
+
 	viewBtn = new AeroButton("View Rx", this);
 	viewBtn->setRoundness(10);
     viewBtn->setFont(m_fonts.normalFont);
@@ -918,7 +935,7 @@ void MainWindow::createMainBtnGroup() {
 
 	
 	int agcMaxGain = (int) set->getAGCMaximumGain_dB(0);
-	MAIN_DEBUG << "agcMaximumGain = " << agcMaxGain;
+	//MAIN_DEBUG << "agcMaximumGain = " << agcMaxGain;
 	m_agcGainSlider = new QSlider(Qt::Horizontal, this);
 	m_agcGainSlider->setTickPosition(QSlider::NoTicks);
 	m_agcGainSlider->setFixedSize(100, 14);
@@ -949,58 +966,13 @@ void MainWindow::createMainBtnGroup() {
     m_agcGainLevelLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
 	m_agcGainLevelLabel->setStyleSheet(set->getSliderLabelStyle());
 	
-	avgBtn = new AeroButton("Pan Avg", this);
-	avgBtn->setRoundness(10);
-    avgBtn->setFont(m_fonts.normalFont);
-    avgBtn->setTextColor(btnCol);
-	avgBtn->setFixedSize(btn_width1, btn_height3);
-
-	if (set->getSpectrumAveraging())
-		avgBtn->setBtnState(AeroButton::ON);
-	else
-		avgBtn->setBtnState(AeroButton::OFF);
-
-	CHECKED_CONNECT(
-		avgBtn, 
-		SIGNAL(clicked()), 
-		this, 
-		SLOT(avgBtnClickedEvent()));
-
-	gridBtn = new AeroButton("Pan Grid", this);
-	gridBtn->setRoundness(10);
-    gridBtn->setFont(m_fonts.normalFont);
-    gridBtn->setTextColor(btnCol);
-	gridBtn->setFixedSize(btn_width1, btn_height3);
-
-	if (set->getPanGridStatus())
-		gridBtn->setBtnState(AeroButton::ON);
-	else
-		gridBtn->setBtnState(AeroButton::OFF);
-
-	CHECKED_CONNECT(
-		gridBtn, 
-		SIGNAL(clicked()), 
-		this, 
-		SLOT(gridBtnClickedEvent()));
-
-	peakHoldBtn = new AeroButton("Peak Hold", this);
-	peakHoldBtn->setRoundness(10);
-    peakHoldBtn->setFont(m_fonts.normalFont);
-    peakHoldBtn->setTextColor(btnCol);
-	peakHoldBtn->setFixedSize(btn_width1, btn_height3);
-	peakHoldBtn->setBtnState(AeroButton::OFF);
-
-	CHECKED_CONNECT(
-		peakHoldBtn, 
-		SIGNAL(clicked()), 
-		this, 
-		SLOT(peakHoldBtnClickedEvent()));
 
 	moxBtn = new AeroButton("MOX", this);
 	moxBtn->setRoundness(10);
     moxBtn->setFont(m_fonts.normalFont);
     moxBtn->setTextColor(btnCol);
 	moxBtn->setFixedSize(btn_width1, btn_height3);
+	moxBtn->setEnabled(false);
 	col = QColor(200, 100, 100);
 	moxBtn->setColor(col);
 	col = QColor(200, 200, 100);
@@ -1014,6 +986,7 @@ void MainWindow::createMainBtnGroup() {
     tunBtn->setFont(m_fonts.normalFont);
     tunBtn->setTextColor(btnCol);
 	tunBtn->setFixedSize(btn_width1, btn_height3);
+	tunBtn->setEnabled(false);
 	col = QColor(200, 100, 100);
 	tunBtn->setColor(col);
 	col = QColor(200, 200, 100);
@@ -1068,7 +1041,6 @@ void MainWindow::createMainBtnGroup() {
 		this,
 		SLOT(muteBtnClickedEvent()));
 
-
 //	lastFreqBtn = new AeroButton(" ", this);
 //	lastFreqBtn->setRoundness(10);
 //	lastFreqBtn->setFixedSize(btn_width1, btn_height3);
@@ -1094,23 +1066,16 @@ void MainWindow::createMainBtnGroup() {
 	//firstBtnLayout->addWidget(openclBtn);
 	firstBtnLayout->addWidget(displayBtn);
 	firstBtnLayout->addWidget(nullBtn);
-	//firstBtnLayout->addStretch();
-	firstBtnLayout->addWidget(avgBtn);
-	firstBtnLayout->addWidget(peakHoldBtn);
-	firstBtnLayout->addWidget(gridBtn);
+	//firstBtnLayout->addWidget(plusRxBtn);
 	firstBtnLayout->addWidget(viewBtn);
 	firstBtnLayout->addWidget(modeBtn);
 	firstBtnLayout->addWidget(quitBtn);
 
 
-	QHBoxLayout *secondBtnLayout = new QHBoxLayout;
+	QHBoxLayout* secondBtnLayout = new QHBoxLayout;
 	secondBtnLayout->setSpacing(0);
 	secondBtnLayout->setMargin(0);
 
-//	secondBtnLayout->addWidget(avgBtn);
-//	secondBtnLayout->addWidget(peakHoldBtn);
-//	secondBtnLayout->addWidget(gridBtn);
-//	secondBtnLayout->addStretch();
 	secondBtnLayout->addWidget(moxBtn);
 	secondBtnLayout->addWidget(tunBtn);
 	secondBtnLayout->addStretch();
@@ -1128,11 +1093,19 @@ void MainWindow::createMainBtnGroup() {
 	secondBtnLayout->addWidget(muteBtn);
 	//secondBtnLayout->addWidget(lastFreqBtn);
 	
-	QVBoxLayout *btnLayout = new QVBoxLayout;
-	btnLayout->setSpacing(2);
+	/*QHBoxLayout *thirdBtnLayout = new QHBoxLayout;
+	thirdBtnLayout->setSpacing(0);
+	thirdBtnLayout->setMargin(0);
+
+	thirdBtnLayout->addWidget(lockPanBtn);
+	thirdBtnLayout->addStretch();*/
+
+	QVBoxLayout* btnLayout = new QVBoxLayout;
+	btnLayout->setSpacing(0);
 	btnLayout->setMargin(0);
 	btnLayout->addLayout(firstBtnLayout);
 	btnLayout->addLayout(secondBtnLayout);
+	//btnLayout->addLayout(thirdBtnLayout);
 
 	m_buttonWidget->setLayout(btnLayout);
 
@@ -1197,6 +1170,9 @@ void MainWindow::createViewMenu() {
     viewBtn->setMenu(viewMenu);
 }
 
+/*!
+	\brief create the attenuator menu.
+*/
 void MainWindow::createAttenuatorMenu() {
 
 	attenuatorMenu = new QMenu(this);
@@ -1282,6 +1258,7 @@ void MainWindow::createAttenuatorMenu() {
 			SLOT(setAttenuator()));
 	}
 }
+
 //*******************************************************************************
  
 /*!
@@ -1380,17 +1357,24 @@ void MainWindow::setSystemState(
 	m_dataEngine->io.networkIOMutex.unlock();
 }
 
+/*!
+	\brief show a temporary message on the status bar.
+*/
+void MainWindow::showStatusBarMessage(const QString &msg, int time) {
 
-void MainWindow::setSpectrumBuffer(int rx, const float *buffer) {
-
-	if (m_serverMode == QSDR::SDRMode && !rxWidgetList.empty())
-		rxWidgetList.at(rx)->setSpectrumBuffer(buffer);
-	//else if ((m_serverMode == QSDR::ChirpWSPR || m_serverMode == QSDR::ChirpWSPRFile) && m_distDisplay != 0)
-	//	m_distDisplay->setSpectrumBuffer(buffer);
+	statusBar()->showMessage(msg, time);
 }
 
 /*!
-	\brief closes the application and shuts down all engines.
+	\brief clear the temporary status message
+*/
+void MainWindow::clearStatusBarMessage() {
+
+	statusBar()->clearMessage();
+}
+
+/*!
+	\brief closes the application and shut down all engines.
 */
 void MainWindow::closeMainWindow() {
 
@@ -1464,7 +1448,7 @@ void MainWindow::showRadioPopup(bool value) {
 
 	Q_UNUSED (value)
 
-	m_radioPopupWidget->showPopupWidget(this, QCursor::pos());
+	//m_radioPopupWidget->showPopupWidget(this, QCursor::pos());
 }
 
 /*!
@@ -1567,14 +1551,14 @@ void MainWindow::wideBandBtnClickedEvent() {
 	if (wideBandBtn->btnState() == AeroButton::OFF) {
 
 		wideBandBtn->setBtnState(AeroButton::ON);
-		set->setWideBandStatus(true);
+		set->setWidebandStatus(this, true);
 		widebandDock->show();
 		//showMessage("[server]: wide band data on.");
 	}
 	else if (wideBandBtn->btnState() == AeroButton::ON) {
 
 		wideBandBtn->setBtnState(AeroButton::OFF);
-		set->setWideBandStatus(false);
+		set->setWidebandStatus(this, false);
 		widebandDock->hide();
 		//showMessage("[server]: wide band data off.");
 	}
@@ -1588,67 +1572,6 @@ void MainWindow::widebandVisibilityChanged(bool value) {
 		wideBandBtn->setBtnState(AeroButton::OFF);
 
 	wideBandBtn->update();
-}
- 
-/*!
-	\brief switch Panadapter Spectrum Averaging Filter on/off.
-*/
-void MainWindow::avgBtnClickedEvent() {
-
-	if (avgBtn->btnState() == AeroButton::OFF) {
-
-		avgBtn->setBtnState(AeroButton::ON);
-		set->setSpectrumAveraging(true);
-		//showMessage("[server]: wide band data on.");
-	}
-	else if (avgBtn->btnState() == AeroButton::ON) {
-
-		avgBtn->setBtnState(AeroButton::OFF);
-		set->setSpectrumAveraging(false);
-		//showMessage("[server]: wide band data off.");
-	}
-}
-
-/*!
-	\brief switch Panadapter Grid on/off.
-*/
-void MainWindow::gridBtnClickedEvent() {
-
-	if (gridBtn->btnState() == AeroButton::OFF) {
-
-		gridBtn->setBtnState(AeroButton::ON);
-		set->setPanGrid(true);
-	}
-	else if (gridBtn->btnState() == AeroButton::ON) {
-
-		gridBtn->setBtnState(AeroButton::OFF);
-		set->setPanGrid(false);
-	}
-}
-
-/*!
-	\brief switch Peak Hold function on/off.
-*/
-void MainWindow::peakHoldBtnClickedEvent() {
-
-	if (peakHoldBtn->btnState() == AeroButton::OFF) {
-
-		peakHoldBtn->setBtnState(AeroButton::ON);
-		set->setPeakHold(true);
-	}
-	else if (peakHoldBtn->btnState() == AeroButton::ON) {
-
-		peakHoldBtn->setBtnState(AeroButton::OFF);
-		set->setPeakHold(false);
-	}
-}
-
-/*!
-	\brief switch peak hold Button
-*/
-void MainWindow::setPeakHoldStatus(bool) {
-
-	peakHoldBtn->setBtnState(AeroButton::OFF);
 }
 
 void MainWindow::alexBtnClickedEvent() {
@@ -1724,6 +1647,9 @@ void MainWindow::alexPresenceChanged(bool value) {
 	alexAttn_30dBAction->setCheckable(value);
 
 	alexBtn->update();
+}
+
+void MainWindow::addReceiver() {
 }
 
 /*!
@@ -2401,65 +2327,6 @@ void MainWindow::getRegion() {
 	m_topRightFrame 	= QRegion(QRect(width() - 8, 0, 8, 8));
 	m_bottomRightFrame	= QRegion(QRect(width() - 8, height() - 8, 8, 8));*/
 }
-
- 
-/*!
-	\brief selects part of the frame for resizing the main window.
-*/
-void MainWindow::getSelectedFrame(
-		QPoint p					/*!<[in] QPoint p selected */
-) {
-        Q_UNUSED(p)
-	/*if (m_leftFrame.contains(p))		m_resizePosition = Left;
-	else 
-	if (m_topFrame.contains(p))			m_resizePosition = Top;
-	else 
-	if (m_rightFrame.contains(p))		m_resizePosition = Right;
-	else 
-	if (m_bottomFrame.contains(p))		m_resizePosition = Bottom;
-	else 
-	if (m_topLeftFrame.contains(p))		m_resizePosition = TopLeft;
-	else 
-	if (m_bottomLeftFrame.contains(p))	m_resizePosition = BottomLeft;
-	else
-	if (m_topRightFrame.contains(p))	m_resizePosition = TopRight;
-	else 
-	if (m_bottomRightFrame.contains(p))	m_resizePosition = BottomRight;
-	else
-										m_resizePosition = None;*/
-		
-}
-
-/*!
-	\brief resize the main window (not used currently).
-*/
-void MainWindow::resizeWidget() {
-
-	//if(m_resizePosition != 0) m_tlw->setGeometry(m_newRect);
-}
- 
-/*!
-	\brief mouse release event implementation.
-*/
-//void MainWindow::mouseReleaseEvent(
-//		QMouseEvent *event			/*!<[in] event */
-//) {
-//
-//	if (event->button() == Qt::LeftButton) {
-//        
-//        m_mousePressed = false;
-//		m_pos = QPoint();
-//		m_resizePosition = 0;
-//		
-//		m_dummyLabel->hide();
-//		m_innerWidget->show();
-//    } 
-//	else {
-//
-//        QWidget::mouseReleaseEvent(event);
-//    }
-//}
-
  
 /*!
 	\brief mouse wheel event implementation.
@@ -2470,297 +2337,6 @@ void MainWindow::wheelEvent(
 	event->accept();
 	QWidget::wheelEvent(event);
 }
-
- 
-/*!
-	\brief mouse press event implementation.
-*/
-//void MainWindow::mousePressEvent(
-//		QMouseEvent *event			/*!<[in] event */
-//) {
-//	QPoint pos = event->pos();
-//	QRect rect = this->rect();
-//
-//    if (event->button() == Qt::LeftButton) {
-//		
-//        m_dragPosition = event->globalPos() - frameGeometry().topLeft();
-//		
-//        event->accept();
-//    }
-//
-//	//if (pos.x() < width() - 5)
-//	if (pos.x() < width())
-//
-//		// Resizing
-//		getSelectedFrame(pos);
-//		
-//		if (event->button() != Qt::LeftButton) {
-//			
-//			QWidget::mousePressEvent(event);
-//			return;
-//		}
-//
-//		QWidget *tlw = this;
-//		m_pos = event->globalPos();
-//		m_mousePressed = true;
-//		m_rect = tlw->geometry();
-//
-//	    // Find available desktop/workspace geometry.
-//		bool hasVerticalSizeConstraint = true;
-//		bool hasHorizontalSizeConstraint = true;
-//		
-//		if (tlw->isWindow())
-//			m_availableGeometry = QApplication::desktop()->availableGeometry(tlw);
-//		else {
-//
-//			const QWidget *tlwParent = tlw->parentWidget();
-//			// Check if tlw is inside QAbstractScrollArea/QScrollArea.
-//			// If that's the case tlw->parentWidget() will return the viewport
-//			// and tlw->parentWidget()->parentWidget() will return the scroll area.
-//			m_availableGeometry = tlwParent->contentsRect();
-//		}
-//		
-//		// Find frame geometries, title bar height, and decoration sizes.
-//		const QRect frameGeometry = tlw->frameGeometry();
-//		const int titleBarHeight = qMax(tlw->geometry().y() - frameGeometry.y(), 0);
-//		const int bottomDecoration = qMax(frameGeometry.height() - tlw->height() - titleBarHeight, 0);
-//		const int leftRightDecoration = qMax((frameGeometry.width() - tlw->width()) / 2, 0);
-//
-//		// Create a pixmap from a desktop screenshot. This screenshot
-//		// is shown during resizing. We need to take a desktop screenshot
-//		// and compute our application's position from this, because we try
-//		// to grab a layered window, which doesn't work on Win7, see here:
-//		// http://doc.qt.nokia.com/latest/qpixmap.html#grabWidget
-//		if (m_resizePosition != None) {
-//
-//			/*m_originalPixmap = QPixmap::grabWindow(
-//										QApplication::desktop()->winId(),
-//										QApplication::activeWindow()->pos().x() + 8,
-//										QApplication::activeWindow()->pos().y() + m_titlebar->height() + 8, 
-//										m_innerWidget->width(), m_innerWidget->height());*/
-//
-//			m_innerWidget->hide();
-//			m_dummyLabel->show();
-//		}
-//		// Determine m_deltaY_max depending on whether the sizegrip is at the bottom
-//		// of the widget or not.
-//		switch (m_resizePosition) {
-//
-//			case Top:
-//				if (hasVerticalSizeConstraint)
-//					m_deltaY_max = m_availableGeometry.y() - m_rect.y() - bottomDecoration;
-//				else
-//					m_deltaY_max = -INT_MAX;
-//			
-//			case Bottom:
-//				if (hasVerticalSizeConstraint)
-//					m_deltaY_max = m_availableGeometry.bottom() - m_rect.bottom() - bottomDecoration;
-//				else
-//					m_deltaY_max = INT_MAX;
-//				break;
-//			
-//			case Left:
-//				if (hasHorizontalSizeConstraint)
-//					m_deltaX_max = m_availableGeometry.x() - m_rect.x() + leftRightDecoration;
-//				else
-//					m_deltaX_max = -INT_MAX;
-//				break;
-//			
-//			case Right:
-//				if (hasHorizontalSizeConstraint)
-//					m_deltaX_max = m_availableGeometry.right() - m_rect.right() - leftRightDecoration;
-//				else
-//					m_deltaX_max = INT_MAX;
-//				break;
-//			
-//			case TopLeft:
-//				if (hasVerticalSizeConstraint)
-//					m_deltaY_max = m_availableGeometry.y() - m_rect.y() - bottomDecoration;
-//				else
-//					m_deltaY_max = -INT_MAX;
-//				
-//				if (hasHorizontalSizeConstraint)
-//					m_deltaX_max = m_availableGeometry.x() - m_rect.x() + leftRightDecoration;
-//				else
-//					m_deltaX_max = -INT_MAX;
-//				break;
-//			
-//			case BottomLeft:
-//				if (hasVerticalSizeConstraint)
-//					m_deltaY_max = m_availableGeometry.bottom() - m_rect.bottom() - bottomDecoration;
-//				else
-//					m_deltaY_max = INT_MAX;
-//				
-//				if (hasHorizontalSizeConstraint)
-//					m_deltaX_max = m_availableGeometry.x() - m_rect.x() + leftRightDecoration;
-//				else
-//					m_deltaX_max = -INT_MAX;
-//				break;
-//			
-//			case TopRight:
-//				if (hasVerticalSizeConstraint)
-//					m_deltaY_max = m_availableGeometry.y() - m_rect.y() - bottomDecoration;
-//				else
-//					m_deltaY_max = -INT_MAX;
-//				
-//				if (hasHorizontalSizeConstraint)
-//					m_deltaX_max = m_availableGeometry.right() - m_rect.right() - leftRightDecoration;
-//				else
-//					m_deltaX_max = INT_MAX;
-//				break;
-//			
-//			case BottomRight:
-//				if (hasVerticalSizeConstraint)
-//					m_deltaY_max = m_availableGeometry.bottom() - m_rect.bottom() - bottomDecoration;
-//				else
-//					m_deltaY_max = INT_MAX;
-//				
-//				if (hasHorizontalSizeConstraint)
-//					m_deltaX_max = m_availableGeometry.right() - m_rect.right() - leftRightDecoration;
-//				else
-//					m_deltaX_max = INT_MAX;
-//				break;
-//		}
-//}
-
- 
-/*!
-	\brief mouse move event implementation.
-*/
-//void MainWindow::mouseMoveEvent(
-//		QMouseEvent *event			/*!<[in] event */
-//) {
-//	m_mover = false;
-//
-//    if (event->buttons() & Qt::LeftButton) {
-//
-//		// find new position on screen when moving
-//		if (//m_dragPosition.y() < m_titlebar->height() &&
-//			m_dragPosition.y() > 5 && m_dragPosition.x() > 5 &&
-//			m_dragPosition.x() < width() - 5)
-//		{
-//			QPoint newPos = event->globalPos() - m_dragPosition;
-//
-//			// snap application's window to screen borders
-//			if (qAbs(newPos.x()) < 15)
-//				newPos = QPoint(0, newPos.y());
-//			if (qAbs(newPos.y()) < 15)
-//				newPos = QPoint(newPos.x(), 0);
-//
-//			/*if (qAbs(m_availableGeometry.width() - newPos.x() - m_tlw->frameGeometry().width()) < 15)
-//				newPos = QPoint(qAbs(m_availableGeometry.width() - m_tlw->frameGeometry().width()), newPos.y());
-//			if (qAbs(m_availableGeometry.height() - newPos.y() - m_tlw->frameGeometry().height()) < 15)
-//				newPos = QPoint(newPos.x(), qAbs(m_availableGeometry.height() - m_tlw->frameGeometry().height()));*/
-//
-//			if (qAbs(m_availableGeometry.width() - newPos.x() - this->frameGeometry().width()) < 15)
-//				newPos = QPoint(qAbs(m_availableGeometry.width() - this->frameGeometry().width()), newPos.y());
-//			if (qAbs(m_availableGeometry.height() - newPos.y() - this->frameGeometry().height()) < 15)
-//				newPos = QPoint(newPos.x(), qAbs(m_availableGeometry.height() - this->frameGeometry().height()));
-//
-//			move(newPos);
-//			m_mover = true;
-//		}
-//		
-//        event->accept();
-//    }
-//	
-//	if (!m_mover) {
-//
-//		//if (!m_mousePressed || m_tlw->testAttribute(Qt::WA_WState_ConfigPending))
-//	    if (!m_mousePressed || this->testAttribute(Qt::WA_WState_ConfigPending))
-//	        return;
-//
-//		/*if (m_tlw->isWindow() && ::GetSystemMenu(m_tlw->winId(), FALSE) != 0) {
-//	        MSG msg;
-//	        while(PeekMessage(&msg, winId(), WM_MOUSEMOVE, WM_MOUSEMOVE, PM_REMOVE));
-//	        return;
-//	    }*/
-//		if (this->isWindow() && ::GetSystemMenu(this->winId(), FALSE) != 0) {
-//	        MSG msg;
-//	        while(PeekMessage(&msg, winId(), WM_MOUSEMOVE, WM_MOUSEMOVE, PM_REMOVE));
-//	        return;
-//	    }
-//
-//		QPoint np(event->globalPos());
-//
-//	    // Don't extend beyond the available geometry; bound to m_deltaY_max and m_deltaX_max.
-//		
-//	    QSize ns;
-//	    switch(m_resizePosition) {
-//			case Top:
-//				ns.rheight() = m_rect.height() - qMin(np.y() - m_pos.y(), m_deltaY_max);
-//				ns.rwidth() = m_rect.width();
-//			break;
-//			case Bottom:
-//				ns.rheight() = m_rect.height() + qMin(np.y() - m_pos.y(), m_deltaY_max);
-//				ns.rwidth() = m_rect.width();
-//			break;
-//			case Left:
-//				ns.rwidth() = m_rect.width() - qMax(np.x() - m_pos.x(), m_deltaX_max);
-//				ns.rheight() = m_rect.height();
-//			break;
-//			case Right:
-//				ns.rwidth() = m_rect.width() + qMin(np.x() - m_pos.x(), m_deltaX_max);
-//				ns.rheight() = m_rect.height();
-//			break;
-//			case TopLeft:
-//				ns.rwidth() = m_rect.width() - qMax(np.x() - m_pos.x(), m_deltaX_max);
-//				ns.rheight() = m_rect.height() - qMax(np.y() - m_pos.y(), m_deltaY_max);
-//			break;
-//			case BottomLeft:
-//				ns.rwidth() = m_rect.width() - qMax(np.x() - m_pos.x(), m_deltaX_max);
-//				ns.rheight() = m_rect.height() + qMin(np.y() - m_pos.y(), m_deltaY_max);
-//			break;
-//			case TopRight:
-//				ns.rheight() = m_rect.height() - qMax(np.y() - m_pos.y(), m_deltaY_max);
-//				ns.rwidth() = m_rect.width() + qMin(np.x() - m_pos.x(), m_deltaX_max);
-//			break;
-//			case BottomRight:
-//				ns.rwidth() = m_rect.width() + qMin(np.x() - m_pos.x(), m_deltaX_max);
-//				ns.rheight() = m_rect.height() + qMin(np.y() - m_pos.y(), m_deltaY_max);
-//			break;
-//			default:
-//				ns.rheight() = m_rect.height();
-//				ns.rwidth() = m_rect.width();
-//			break;
-//		} 
-//		ns = ns.expandedTo(QSize(100,32));
-//		QPoint p;
-//		
-//		m_newRect = QRect(p, ns);
-//		switch(m_resizePosition) {
-//
-//			case Bottom:
-//				m_newRect.moveTopLeft(m_rect.topLeft());
-//				break;
-//			case Right:
-//				m_newRect.moveTopLeft(m_rect.topLeft());
-//				break;
-//			case Left:
-//				m_newRect.moveTopRight(m_rect.topRight());
-//				break;
-//			case Top:
-//				m_newRect.moveBottomLeft(m_rect.bottomLeft());
-//				break;
-//			case TopLeft:
-//				m_newRect.moveBottomRight(m_rect.bottomRight());
-//				break;
-//			case BottomLeft:
-//				m_newRect.moveTopRight(m_rect.topRight());
-//				break;
-//			case TopRight:
-//				m_newRect.moveBottomLeft(m_rect.bottomLeft());
-//				break;
-//			case BottomRight:
-//				m_newRect.moveTopLeft(m_rect.topLeft());
-//				break;
-//			
-//		} 
-//		//if(m_resizePosition != 0) m_tlw->setGeometry(m_newRect);
-//		if(m_resizePosition != 0) this->setGeometry(m_newRect);
-//	}
-//}
-
  
 /*!
 	\brief enter event implementation.
@@ -2768,10 +2344,8 @@ void MainWindow::wheelEvent(
 void MainWindow::enterEvent(
 		QEvent *event				/*!<[in] event */
 ) {
-
 	Q_UNUSED(event);
 }
-
  
 /*!
 	\brief leave event implementation.
@@ -2803,10 +2377,12 @@ void MainWindow::resizeEvent(
 void MainWindow::closeEvent(
 		QCloseEvent *event			/*!<[in] event */
 ) {
-	Q_UNUSED(event);
-
 	if (set->getMainPower())
 		startButtonClickedEvent();
+
+	QSettings settings(QCoreApplication::applicationDirPath() +  "/" + m_windowsSettingsFilename, QSettings::IniFormat);
+    settings.setValue("geometry", saveGeometry());
+    settings.setValue("windowState", saveState());
 
 	mainBtnList.clear();
 
@@ -2879,6 +2455,7 @@ void MainWindow::closeEvent(
 		delete m_hpsdrServer;
 		m_hpsdrServer = NULL;
 	}*/
+	QMainWindow::closeEvent(event);
 }
  
 /*!
@@ -2889,34 +2466,6 @@ void MainWindow::showEvent(
 ) {
 	QWidget::showEvent(event);
 }
-
- 
-/*!
-	\brief paint event implementation.
-*/
-//void MainWindow::paintEvent(
-//		QPaintEvent *event			/*!<[in] event */
-//) {
-//	/*QPainter p(this);
-//
-//	p.setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing | QPainter::TextAntialiasing, true);
-//	if (m_drawShadowFrame) {
-//
-//		m_dummyLabel->setPixmap(m_originalPixmap);
-//	}
-//	else {
-//		
-//		QRect rect = this->geometry();
-//
-//		QPixmap pixmap = QPixmap(rect.width(), rect.height());
-//		pixmap.fill(Qt::black);
-//
-//		m_dummyLabel->setPixmap(pixmap);
-//	}
-//	p.end();*/
-//
-//	QWidget::paintEvent(event);
-//}
  
 /*!
 	\brief key pressed event implementation.
@@ -2937,11 +2486,6 @@ void MainWindow::keyPressEvent(
     }
     
     QWidget::keyPressEvent(event);
-}
-
-void MainWindow::mousePressEvent(QMouseEvent *event) {
-
-	QWidget::mousePressEvent(event);
 }
 
 

@@ -33,8 +33,8 @@
 //#include <QtCore>
 #include <QtGui>
 
-class AeroButton : public QPushButton
-{
+class AeroButton : public QPushButton {
+
 	Q_OBJECT
 
 public:

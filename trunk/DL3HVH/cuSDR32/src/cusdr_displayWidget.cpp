@@ -49,8 +49,6 @@ DisplayOptionsWidget::DisplayOptionsWidget(QWidget *parent)
 	, m_serverMode(set->getCurrentServerMode())
 	, m_hwInterface(set->getHWInterface())
 	, m_dataEngineState(set->getDataEngineState())
-	, m_panadapterMode(set->getPanadapterMode())
-	, m_waterColorScheme(set->getWaterfallColorScheme())
 	, m_antialiased(true)
 	, m_mouseOver(false)
 	, m_minimumWidgetWidth(set->getMinimumWidgetWidth())
@@ -59,7 +57,6 @@ DisplayOptionsWidget::DisplayOptionsWidget(QWidget *parent)
 	, m_currentReceiver(set->getCurrentReceiver())
 	, m_btnChooserHit(0)
 	, m_framesPerSecond(set->getFramesPerSecond(m_currentReceiver))
-	, m_graphicResolution(set->getGraphicResolution())
 	, m_sampleRate(set->getSampleRate())
 	, m_sMeterHoldTime(set->getSMeterHoldTime())
 {
@@ -68,12 +65,16 @@ DisplayOptionsWidget::DisplayOptionsWidget(QWidget *parent)
 	setMouseTracking(true);
 
 	m_rxDataList = set->getReceiverDataList();
+	m_widebandOptions = set->getWidebandOptions();
+	m_panadapterMode = set->getPanadapterMode(m_currentReceiver);
+	m_waterColorMode = set->getWaterfallColorMode(m_currentReceiver);
 	
 	fonts = new CFonts(this);
 	m_fonts = fonts->getFonts();
 
 	createFPSGroupBox();
 	createPanSpectrumOptions();
+	createWidebandPanOptions();
 	createWaterfallSpectrumOptions();
 	createSMeterOptions();
 	createCallSignEditor();
@@ -99,26 +100,33 @@ DisplayOptionsWidget::DisplayOptionsWidget(QWidget *parent)
 	hbox3->setSpacing(0);
 	hbox3->setMargin(0);
 	hbox3->addStretch();
-	hbox3->addWidget(m_waterfallSpectrumOptions);
-
+	hbox3->addWidget(m_widebandPanOptions);
+	
 	QHBoxLayout *hbox4 = new QHBoxLayout;
 	hbox4->setSpacing(0);
 	hbox4->setMargin(0);
 	hbox4->addStretch();
-	hbox4->addWidget(m_sMeterOptions);
+	hbox4->addWidget(m_waterfallSpectrumOptions);
 
 	QHBoxLayout *hbox5 = new QHBoxLayout;
 	hbox5->setSpacing(0);
 	hbox5->setMargin(0);
 	hbox5->addStretch();
-	hbox5->addWidget(m_callSignEditor);
-	hbox5->addStretch();
+	hbox5->addWidget(m_sMeterOptions);
+
+	QHBoxLayout *hbox6 = new QHBoxLayout;
+	hbox6->setSpacing(0);
+	hbox6->setMargin(0);
+	hbox6->addStretch();
+	hbox6->addWidget(m_callSignEditor);
+	hbox6->addStretch();
 
 	mainLayout->addLayout(hbox1);
 	mainLayout->addLayout(hbox2);
 	mainLayout->addLayout(hbox3);
 	mainLayout->addLayout(hbox4);
 	mainLayout->addLayout(hbox5);
+	mainLayout->addLayout(hbox6);
 	mainLayout->addStretch();
 	setLayout(mainLayout);
 
@@ -164,13 +172,15 @@ void DisplayOptionsWidget::setupConnections() {
 		set, 
 		SIGNAL(graphicModeChanged(
 					QObject *,
-					QSDRGraphics::_Panadapter,
-					QSDRGraphics::_WfScheme)),
+					int,
+					PanGraphicsMode,
+					WaterfallColorMode)),
 		this, 
 		SLOT(graphicModeChanged(
 					QObject *,
-					QSDRGraphics::_Panadapter,
-					QSDRGraphics::_WfScheme)));
+					int,
+					PanGraphicsMode,
+					WaterfallColorMode)));
 
 	CHECKED_CONNECT(
 		set, 
@@ -237,22 +247,28 @@ void DisplayOptionsWidget::systemStateChanged(
 
 void DisplayOptionsWidget::graphicModeChanged(
 	QObject *sender,
-	QSDRGraphics::_Panadapter panMode,
-	QSDRGraphics::_WfScheme waterColorScheme)
+	int rx,
+	PanGraphicsMode panMode,
+	WaterfallColorMode waterMode)
 {
 	Q_UNUSED (sender)
-
+	
 	bool change = false;
 
 	if (m_panadapterMode != panMode) {
 		
-		m_panadapterMode = panMode;
+		//m_panadapterMode = panMode;
+		if (m_currentReceiver == rx)
+			setPanadapterMode(m_currentReceiver);
+
 		change = true;
 	}
 
-	if (m_waterColorScheme != waterColorScheme) {
+	if (m_waterColorMode != waterMode) {
 		
-		m_waterColorScheme = waterColorScheme;
+		//m_waterColorMode = waterMode;
+		if (m_currentReceiver == rx)
+			setWaterfallColorMode(m_currentReceiver);
 		change = true;
 	}
 
@@ -338,21 +354,21 @@ void DisplayOptionsWidget::createPanSpectrumOptions() {
 
 	switch (m_panadapterMode) {
 
-		case QSDRGraphics::Line:
+		case (PanGraphicsMode) Line:
 
 			m_PanLineBtn->setBtnState(AeroButton::ON);
 			m_PanFilledLineBtn->setBtnState(AeroButton::OFF);
 			m_PanSolidBtn->setBtnState(AeroButton::OFF);
 			break;
 
-		case QSDRGraphics::FilledLine:
+		case (PanGraphicsMode) FilledLine:
 
 			m_PanFilledLineBtn->setBtnState(AeroButton::ON);
 			m_PanLineBtn->setBtnState(AeroButton::OFF);
 			m_PanSolidBtn->setBtnState(AeroButton::OFF);
 			break;
 
-		case QSDRGraphics::Solid:
+		case (PanGraphicsMode) Solid:
 
 			m_PanSolidBtn->setBtnState(AeroButton::ON);
 			m_PanLineBtn->setBtnState(AeroButton::OFF);
@@ -362,7 +378,7 @@ void DisplayOptionsWidget::createPanSpectrumOptions() {
 
 	int fontMaxWidth = m_fonts.smallFontMetrics->boundingRect(" 200 ").width();
 
-	m_avgValue = set->getSpectrumAveragingCnt();
+	m_avgValue = set->getSpectrumAveragingCnt(m_currentReceiver);
 
 	m_avgSlider = new QSlider(Qt::Horizontal, this);
 	m_avgSlider->setTickPosition(QSlider::NoTicks);
@@ -413,63 +429,175 @@ void DisplayOptionsWidget::createPanSpectrumOptions() {
 	m_panSpectrumOptions->setFont(QFont("Arial", 8));
 }
 
+void DisplayOptionsWidget::createWidebandPanOptions() {
+
+	m_wbPanLineBtn = new AeroButton("Line", this);
+	m_wbPanLineBtn->setRoundness(0);
+	m_wbPanLineBtn->setFixedSize(btn_width, btn_height);
+	m_wbpanadapterBtnList.append(m_wbPanLineBtn);
+
+	CHECKED_CONNECT(
+		m_wbPanLineBtn,
+		SIGNAL(clicked()),
+		this,
+		SLOT(wbPanModeChanged()));
+
+	m_wbPanFilledLineBtn = new AeroButton("Filled Line", this);
+	m_wbPanFilledLineBtn->setRoundness(0);
+	m_wbPanFilledLineBtn->setFixedSize(btn_width, btn_height);
+	m_wbpanadapterBtnList.append(m_wbPanFilledLineBtn);
+
+	CHECKED_CONNECT(
+		m_wbPanFilledLineBtn,
+		SIGNAL(clicked()),
+		this,
+		SLOT(wbPanModeChanged()));
+
+	m_wbPanSolidBtn = new AeroButton("Solid", this);
+	m_wbPanSolidBtn->setRoundness(0);
+	m_wbPanSolidBtn->setFixedSize (btn_width, btn_height);
+	m_wbpanadapterBtnList.append(m_wbPanSolidBtn);
+
+	CHECKED_CONNECT(
+		m_wbPanSolidBtn,
+		SIGNAL(clicked()),
+		this,
+		SLOT(wbPanModeChanged()));
+
+	switch (m_widebandOptions.panMode) {
+
+		case (PanGraphicsMode) Line:
+
+			m_wbPanLineBtn->setBtnState(AeroButton::ON);
+			m_wbPanFilledLineBtn->setBtnState(AeroButton::OFF);
+			m_wbPanSolidBtn->setBtnState(AeroButton::OFF);
+			break;
+
+		case (PanGraphicsMode) FilledLine:
+
+			m_wbPanFilledLineBtn->setBtnState(AeroButton::ON);
+			m_wbPanLineBtn->setBtnState(AeroButton::OFF);
+			m_wbPanSolidBtn->setBtnState(AeroButton::OFF);
+			break;
+
+		case (PanGraphicsMode) Solid:
+
+			m_wbPanSolidBtn->setBtnState(AeroButton::ON);
+			m_wbPanLineBtn->setBtnState(AeroButton::OFF);
+			m_wbPanFilledLineBtn->setBtnState(AeroButton::OFF);
+			break;
+	}
+
+	int fontMaxWidth = m_fonts.smallFontMetrics->boundingRect(" 200 ").width();
+
+	m_wbAvgValue = m_widebandOptions.averagingCnt;
+
+	m_wbAvgSlider = new QSlider(Qt::Horizontal, this);
+	m_wbAvgSlider->setTickPosition(QSlider::NoTicks);
+	m_wbAvgSlider->setFixedSize(130, 12);
+	m_wbAvgSlider->setSingleStep(1);
+	m_wbAvgSlider->setRange(1, 100);
+	m_wbAvgSlider->setValue(m_wbAvgValue);
+	m_wbAvgSlider->setStyleSheet(set->getVolSliderStyle());
+
+	CHECKED_CONNECT(m_wbAvgSlider, SIGNAL(valueChanged(int)), this, SLOT(setWidebandAveragingCnt(int)));
+
+	QString str = "%1 ";
+	m_wbAvgLevelLabel = new QLabel(str.arg(m_wbAvgValue, 2, 10, QLatin1Char(' ')), this);
+	m_wbAvgLevelLabel->setFont(m_fonts.smallFont);
+	m_wbAvgLevelLabel->setFixedSize(fontMaxWidth, 12);
+	m_wbAvgLevelLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
+	m_wbAvgLevelLabel->setStyleSheet(set->getSliderLabelStyle());
+
+	m_wbAvgLabel = new QLabel("Avg Filter:", this);
+	m_wbAvgLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
+	m_wbAvgLabel->setStyleSheet(set->getLabelStyle());
+
+	QHBoxLayout* hbox1 = new QHBoxLayout;
+	hbox1->setSpacing(4);
+	hbox1->addStretch();
+	hbox1->addWidget(m_wbPanLineBtn);
+	hbox1->addWidget(m_wbPanFilledLineBtn);
+	hbox1->addWidget(m_wbPanSolidBtn);
+
+	QHBoxLayout* hbox2 = new QHBoxLayout;
+	hbox2->setSpacing(0);
+	hbox2->setMargin(0);
+	hbox2->addWidget(m_wbAvgLabel);
+	hbox2->addStretch();
+	hbox2->addWidget(m_wbAvgSlider);
+	hbox2->addWidget(m_wbAvgLevelLabel);
+
+	QVBoxLayout* vbox = new QVBoxLayout;
+	vbox->setSpacing(6);
+	vbox->addSpacing(6);
+	vbox->addLayout(hbox1);
+	vbox->addLayout(hbox2);
+
+	m_widebandPanOptions = new QGroupBox(tr("Wideband Panadapter Spectrum"), this);
+	m_widebandPanOptions->setMinimumWidth(m_minimumGroupBoxWidth);
+	m_widebandPanOptions->setLayout(vbox);
+	m_widebandPanOptions->setStyleSheet(set->getWidgetStyle());
+	m_widebandPanOptions->setFont(QFont("Arial", 8));
+}
+
 void DisplayOptionsWidget::createWaterfallSpectrumOptions() {
 
 	m_waterfallSimpleBtn = new AeroButton("Simple", this);
 	m_waterfallSimpleBtn->setRoundness(0);
 	m_waterfallSimpleBtn->setFixedSize(btn_width, btn_height);
-	m_waterfallSchemeBtnList.append(m_waterfallSimpleBtn);
+	m_waterfallColorBtnList.append(m_waterfallSimpleBtn);
 
 	CHECKED_CONNECT(
 		m_waterfallSimpleBtn, 
 		SIGNAL(clicked()), 
 		this, 
-		SLOT(waterfallSchemeChanged()));
+		SLOT(waterfallColorChanged()));
 
 	m_waterfallEnhancedBtn = new AeroButton("Enhanced", this);
 	m_waterfallEnhancedBtn->setRoundness(0);
 	m_waterfallEnhancedBtn->setFixedSize(btn_width, btn_height);
-	m_waterfallSchemeBtnList.append(m_waterfallEnhancedBtn);
+	m_waterfallColorBtnList.append(m_waterfallEnhancedBtn);
 
 	CHECKED_CONNECT(
 		m_waterfallEnhancedBtn, 
 		SIGNAL(clicked()), 
 		this, 
-		SLOT(waterfallSchemeChanged()));
+		SLOT(waterfallColorChanged()));
 
-	m_waterfallSpectranBtn = new AeroButton("Spectran", this);
+	/*m_waterfallSpectranBtn = new AeroButton("Spectran", this);
 	m_waterfallSpectranBtn->setRoundness(0);
 	m_waterfallSpectranBtn->setFixedSize(btn_width, btn_height);
-	m_waterfallSchemeBtnList.append(m_waterfallSpectranBtn);
+	m_waterfallColorBtnList.append(m_waterfallSpectranBtn);
 
 	CHECKED_CONNECT(
 		m_waterfallSpectranBtn, 
 		SIGNAL(clicked()), 
 		this, 
-		SLOT(waterfallSchemeChanged()));
+		SLOT(waterfallColorChanged()));*/
 
-	switch (m_waterColorScheme) {
+	switch (m_waterColorMode) {
 
-		case QSDRGraphics::simple:
+		case (WaterfallColorMode) Simple:
 			
 			m_waterfallSimpleBtn->setBtnState(AeroButton::ON);
 			m_waterfallEnhancedBtn->setBtnState(AeroButton::OFF);
-			m_waterfallSpectranBtn->setBtnState(AeroButton::OFF);
+			//m_waterfallSpectranBtn->setBtnState(AeroButton::OFF);
 			break;
 
-		case QSDRGraphics::enhanced:
+		case (WaterfallColorMode) Enhanced:
 			
 			m_waterfallEnhancedBtn->setBtnState(AeroButton::ON);
 			m_waterfallSimpleBtn->setBtnState(AeroButton::OFF);
-			m_waterfallSpectranBtn->setBtnState(AeroButton::OFF);
+			//m_waterfallSpectranBtn->setBtnState(AeroButton::OFF);
 			break;
 
-		case QSDRGraphics::spectran:
-			
-			m_waterfallSpectranBtn->setBtnState(AeroButton::ON);
-			m_waterfallSimpleBtn->setBtnState(AeroButton::OFF);
-			m_waterfallEnhancedBtn->setBtnState(AeroButton::OFF);
-			break;
+		//case QSDRGraphics::spectran:
+		//	
+		//	m_waterfallSpectranBtn->setBtnState(AeroButton::ON);
+		//	m_waterfallSimpleBtn->setBtnState(AeroButton::OFF);
+		//	m_waterfallEnhancedBtn->setBtnState(AeroButton::OFF);
+		//	break;
 	}
 
 	QHBoxLayout *hbox1 = new QHBoxLayout;
@@ -478,7 +606,7 @@ void DisplayOptionsWidget::createWaterfallSpectrumOptions() {
 	//hbox1->addSpacing(77);
 	hbox1->addWidget(m_waterfallSimpleBtn);
 	hbox1->addWidget(m_waterfallEnhancedBtn);
-	hbox1->addWidget(m_waterfallSpectranBtn);
+	//hbox1->addWidget(m_waterfallSpectranBtn);
 
 	/*m_waterfallTimeSpinBox = new QSpinBox(this);
 	m_waterfallTimeSpinBox->setMinimum(5);
@@ -690,33 +818,30 @@ void DisplayOptionsWidget::panModeChanged() {
 	switch (btnHit) {
 
 		case 0:
-			m_panadapterMode = QSDRGraphics::Line;
+			m_panadapterMode = (PanGraphicsMode) Line;
 			DISPLAYOPTIONS_DEBUG << "set panadapter to line.";
 			break;
 			
 		case 1:
-			m_panadapterMode = QSDRGraphics::FilledLine;
+			m_panadapterMode = (PanGraphicsMode) FilledLine;
 			DISPLAYOPTIONS_DEBUG << "set panadapter to filled line.";
 			break;
 
 		case 2:
-			m_panadapterMode = QSDRGraphics::Solid;
+			m_panadapterMode = (PanGraphicsMode) Solid;
 			DISPLAYOPTIONS_DEBUG << "set panadapter to solid.";
 			break;
 	}
 
-	set->setGraphicsState(this, m_panadapterMode, m_waterColorScheme);
+	set->setGraphicsState(this, m_currentReceiver, m_panadapterMode, m_waterColorMode);
 }
 
-void DisplayOptionsWidget::sMeterChanged() {
-}
-
-void DisplayOptionsWidget::waterfallSchemeChanged() {
+void DisplayOptionsWidget::wbPanModeChanged() {
 
 	AeroButton *button = qobject_cast<AeroButton *>(sender());
-	int btnHit = m_waterfallSchemeBtnList.indexOf(button);
+	int btnHit = m_wbpanadapterBtnList.indexOf(button);
 
-	foreach(AeroButton *btn, m_waterfallSchemeBtnList) {
+	foreach(AeroButton *btn, m_wbpanadapterBtnList) {
 
 		btn->setBtnState(AeroButton::OFF);
 		btn->update();
@@ -728,22 +853,60 @@ void DisplayOptionsWidget::waterfallSchemeChanged() {
 	switch (btnHit) {
 
 		case 0:
-			m_waterColorScheme = QSDRGraphics::simple;
+			m_wbPanadapterMode = (PanGraphicsMode) Line;
+			DISPLAYOPTIONS_DEBUG << "set wideband panadapter to line.";
+			break;
+			
+		case 1:
+			m_wbPanadapterMode = (PanGraphicsMode) FilledLine;
+			DISPLAYOPTIONS_DEBUG << "set wideband panadapter to filled line.";
+			break;
+
+		case 2:
+			m_wbPanadapterMode = (PanGraphicsMode) Solid;
+			DISPLAYOPTIONS_DEBUG << "set wideband panadapter to solid.";
+			break;
+	}
+
+	set->setGraphicsState(this, -1, m_wbPanadapterMode, m_waterColorMode);
+}
+
+void DisplayOptionsWidget::sMeterChanged() {
+}
+
+void DisplayOptionsWidget::waterfallColorChanged() {
+
+	AeroButton *button = qobject_cast<AeroButton *>(sender());
+	int btnHit = m_waterfallColorBtnList.indexOf(button);
+
+	foreach(AeroButton *btn, m_waterfallColorBtnList) {
+
+		btn->setBtnState(AeroButton::OFF);
+		btn->update();
+	}
+
+	button->setBtnState(AeroButton::ON);
+	button->update();
+
+	switch (btnHit) {
+
+		case 0:
+			m_waterColorMode = (WaterfallColorMode) Simple;
 			DISPLAYOPTIONS_DEBUG << "set waterfall scheme to simple.";
 			break;
 			
 		case 1:
-			m_waterColorScheme = QSDRGraphics::enhanced;
+			m_waterColorMode = (WaterfallColorMode) Enhanced;
 			DISPLAYOPTIONS_DEBUG << "set waterfall scheme to enhanced.";
 			break;
 
-		case 2:
-			m_waterColorScheme = QSDRGraphics::spectran;
-			DISPLAYOPTIONS_DEBUG << "set waterfall scheme to spectran.";
-			break;
+		//case 2:
+		//	m_waterColorMode = QSDRGraphics::spectran;
+		//	DISPLAYOPTIONS_DEBUG << "set waterfall scheme to spectran.";
+		//	break;
 	}
 
-	set->setGraphicsState(this, m_panadapterMode, m_waterColorScheme);
+	set->setGraphicsState(this, m_currentReceiver, m_panadapterMode, m_waterColorMode);
 }
 
 void DisplayOptionsWidget::fpsValueChanged(int value) {
@@ -776,7 +939,17 @@ void DisplayOptionsWidget::averagingFilterCntChanged(int value) {
 	QString str = "%1 ";
 	m_avgLevelLabel->setText(str.arg(m_avgValue, 2, 10, QLatin1Char(' ')));
 
-	set->setSpectrumAveragingCnt(value);
+	set->setSpectrumAveragingCnt(this, m_currentReceiver, value);
+}
+
+void DisplayOptionsWidget::setWidebandAveragingCnt(int value) {
+
+	m_wbAvgValue = value;
+
+	QString str = "%1 ";
+	m_wbAvgLevelLabel->setText(str.arg(m_wbAvgValue, 2, 10, QLatin1Char(' ')));
+
+	set->setSpectrumAveragingCnt(this, -1, value);
 }
 
 void DisplayOptionsWidget::sampleRateChanged(QObject *sender, int value) {
@@ -817,10 +990,59 @@ void DisplayOptionsWidget::sMeterHoldTimeChanged(int value) {
 
 void DisplayOptionsWidget::setCurrentReceiver(QObject *sender, int rx) {
 
-	Q_UNUSED(sender)
+	Q_UNUSED (sender)
 
 	if (m_currentReceiver == rx) return;
 	m_currentReceiver = rx;
+
+	setPanadapterMode(m_currentReceiver);
+	setWaterfallColorMode(m_currentReceiver);
+
+	int sliderValue = set->getSpectrumAveragingCnt(m_currentReceiver);
+	m_avgSlider->blockSignals(true);
+	m_avgSlider->setValue(sliderValue);
+
+	QString str = "%1 ";
+	m_avgLevelLabel->setText(str.arg(sliderValue, 2, 10, QLatin1Char(' ')));
+	m_avgSlider->blockSignals(false);
+}
+
+void DisplayOptionsWidget::setPanadapterMode(int rx) {
+
+	PanGraphicsMode panadapterMode = set->getPanadapterMode(rx);
+
+	if (panadapterMode != m_panadapterMode) {
+
+		foreach(AeroButton *btn, m_panadapterBtnList) {
+
+			btn->setBtnState(AeroButton::OFF);
+			btn->update();
+		}
+
+		m_panadapterBtnList.at(panadapterMode)->setBtnState(AeroButton::ON);
+		m_panadapterBtnList.at(panadapterMode)->update();
+
+		m_panadapterMode = panadapterMode;
+	}
+}
+
+void DisplayOptionsWidget::setWaterfallColorMode(int rx) {
+
+	WaterfallColorMode waterColorMode = set->getWaterfallColorMode(rx);
+
+	if (waterColorMode != m_waterColorMode) {
+
+		foreach(AeroButton *btn, m_waterfallColorBtnList) {
+
+			btn->setBtnState(AeroButton::OFF);
+			btn->update();
+		}
+
+		m_waterfallColorBtnList.at(waterColorMode)->setBtnState(AeroButton::ON);
+		m_waterfallColorBtnList.at(waterColorMode)->update();
+		
+		m_waterColorMode = waterColorMode;
+	}
 }
 
 void DisplayOptionsWidget::callSignTextChanged(const QString& text) {

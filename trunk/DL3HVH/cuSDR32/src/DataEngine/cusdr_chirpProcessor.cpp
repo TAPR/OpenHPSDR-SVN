@@ -96,8 +96,8 @@ ChirpProcessor::ChirpProcessor(THPSDRParameter *ioData)
 	*/
 
 	// FFTs by fftw
-	m_chirpFFT = new QFFT(this, FULL_BUFFERSIZE);
-	m_matchedFFT = new QFFT(this, FULL_BUFFERSIZE);
+	m_chirpFFT = new QFFT(FULL_BUFFERSIZE);
+	m_matchedFFT = new QFFT(FULL_BUFFERSIZE);
 
 	// FIR band pass filter
 	//m_filter = new QFilter(this, FULL_BUFFERSIZE, 2);

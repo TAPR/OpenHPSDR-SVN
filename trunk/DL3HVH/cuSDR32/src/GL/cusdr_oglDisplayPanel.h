@@ -62,7 +62,7 @@ public slots:
 	QSize sizeHint() const;
 
 	void setSampleRate(QObject *sender, int value);
-	void setFrequency(QObject *sender, bool value, int rx, long freq);
+	void setFrequency(QObject *sender, int mode, int rx, long freq);
 
 protected:
     void initializeGL();
@@ -129,6 +129,7 @@ private:
 	QString		m_metisString;
 	QString		m_alexString;
 	QString		m_hermesString;
+	QString		m_hermesStepAttnString;
 
 	QString		m_SYNCString;
 	QString		m_ADCString;
@@ -244,6 +245,7 @@ private:
 	int		m_penelopeStringWidth;
 	int		m_pennylaneStringWidth;
 	int		m_hermesStringWidth;
+	int		m_hermesStepAttnStringWidth;
 	int		m_alexStringWidth;
 	int		m_excaliburStringWidth;
 	int		m_AttnWidth;

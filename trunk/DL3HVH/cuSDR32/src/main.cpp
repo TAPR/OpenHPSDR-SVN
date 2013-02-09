@@ -27,11 +27,13 @@
 #include "Util/cusdr_splash.h"
 #include "cusdr_settings.h"
 
-#if defined(Q_OS_WIN32)
+
+#if defined(Q_OS_WIN32) || defined(Q_OS_LINUX)
 	#include "Util/cusdr_cpuUsage.h"
 #endif
 
 #include "cusdr_mainWidget.h"
+#include "fftw3.h"
 
 //#include <QtGui>
 //#include <QApplication>
@@ -46,13 +48,14 @@
 //#define _WIN32_WINNT 0x0600     // Change this to the appropriate value to target other versions of Windows.
 //#endif
 
-
-
+// CPU usage
 #if defined(Q_OS_WIN32)
 	DWORD WINAPI WatchItThreadProc(LPVOID lpParam);
 	CpuUsage usage;
 
 	DWORD WINAPI WatchItThreadProc(LPVOID lpParam) {
+
+		Q_UNUSED(lpParam)
 
 		DWORD dummy;
 		while (true) {
@@ -64,6 +67,22 @@
 		}
 		return dummy;
 	}
+#elif defined(Q_OS_LINUX)
+#include <unistd.h>
+
+void *cpu_usage_thread_proc (void *) {
+	
+	CpuUsage usage;
+
+	while (true) {
+
+		short cpuUsage = usage.GetUsage();
+		Settings::instance()->setCPULoad(cpuUsage);
+
+		sleep(1);
+	}
+	return 0;
+}
 #endif
 
 void cuSDRMessageHandler(QtMsgType type, const char *msg) {
@@ -83,6 +102,65 @@ void cuSDRMessageHandler(QtMsgType type, const char *msg) {
     ts << txt << endl << flush;
 }
 
+static void my_fftw_write_char(char c, void *f) { fputc(c, (FILE *) f); }
+#define fftw_export_wisdom_to_file(f) fftw_export_wisdom(my_fftw_write_char, (void*) (f))
+#define fftwf_export_wisdom_to_file(f) fftwf_export_wisdom(my_fftw_write_char, (void*) (f))
+#define fftwl_export_wisdom_to_file(f) fftwl_export_wisdom(my_fftw_write_char, (void*) (f))
+
+static int my_fftw_read_char(void *f) { return fgetc((FILE *) f); }
+#define fftw_import_wisdom_from_file(f) fftw_import_wisdom(my_fftw_read_char, (void*) (f))
+#define fftwf_import_wisdom_from_file(f) fftwf_import_wisdom(my_fftw_read_char, (void*) (f))
+#define fftwl_import_wisdom_from_file(f) fftwl_import_wisdom(my_fftw_read_char, (void*) (f))
+
+void runFFTWWisdom() {
+
+	QString directory = QDir::currentPath();
+	
+	QDir currentDir = QDir(directory);
+	qDebug() << currentDir;
+	
+	if (currentDir.exists("wisdom")) {
+	
+		qDebug() << "wisdom exists !";
+		return;
+	}
+	else {
+	
+		qDebug() << "wisdom does not exist - planning FFT...";
+
+		/*const char* wisdom_file = "wisdom";
+		if (!fftw_import_wisdom_from_file(wisdom_file)) {
+
+			int size = 64;
+		
+			QString str = "Planning FFT size %1";
+
+			fftwf_complex* cpxbuf;
+			fftwf_plan plan_fwd;
+			fftwf_plan plan_rev;
+
+			while (size <= MAX_FFTSIZE) {
+
+				qDebug() << str.arg(size);
+				cpxbuf = (fftwf_complex *) fftwf_malloc(sizeof(fftwf_complex) * size);
+			
+				plan_fwd = fftwf_plan_dft_1d(size , cpxbuf, cpxbuf, FFTW_FORWARD, FFTW_PATIENT);
+				fftwf_execute(plan_fwd);
+				fftwf_destroy_plan(plan_fwd);
+
+				plan_rev = fftwf_plan_dft_1d(size, cpxbuf, cpxbuf, FFTW_BACKWARD, FFTW_PATIENT);
+				fftwf_execute(plan_rev);
+				fftwf_destroy_plan(plan_rev);
+
+				size *= 2;
+			}
+			fftw_export_wisdom_to_file(wisdom_file);
+		}*/
+		//QProcess process;
+		//process.start("fftwf-wisdom.exe");
+		//process.waitForFinished();
+	}
+}
 
 int main(int argc, char *argv[]) {
 
@@ -103,11 +181,17 @@ int main(int argc, char *argv[]) {
 		static void msleep(unsigned long msecs) {QThread::msleep(msecs);}
 	};
 
-#if defined(Q_OS_WIN32)
-
     QPixmap splash_pixmap(":/img/cusdrLogo2.png");
 	
 	CSplashScreen* splash = new CSplashScreen(splash_pixmap);
+
+	splash->setGeometry(
+				QStyle::alignedRect(
+				Qt::LeftToRight,
+				Qt::AlignCenter,
+				splash->size(),
+				app.desktop()->availableGeometry()));
+
 	splash->show();
 
     float splash_transparency = 0;
@@ -128,23 +212,13 @@ int main(int argc, char *argv[]) {
 		Settings::instance()->getVersionStr() +
 		QObject::tr(":   Loading settings .."),
         Qt::AlignTop | Qt::AlignLeft, Qt::yellow);
-	SleeperThread::msleep(1000);
+
+	SleeperThread::msleep(500);
     
     Settings::instance()->setSettingsFilename(QCoreApplication::applicationDirPath() +
         "/" + Settings::instance()->getSettingsFilename());
 
     Settings::instance()->setSettingsLoaded(Settings::instance()->loadSettings() >= 0);
-
-#elif defined(Q_OS_LINUX)
-
-    Settings::instance()->setSettingsFilename(QCoreApplication::applicationDirPath() +
-        "/" + Settings::instance()->getSettingsFilename());
-
-    Settings::instance()->setSettingsLoaded(Settings::instance()->loadSettings() >= 0);
-
-#endif
-
-#if defined(Q_OS_WIN32)
 
     if (Settings::instance()->getSettingsLoaded()) {
 
@@ -155,7 +229,7 @@ int main(int argc, char *argv[]) {
 			QObject::tr(":   Settings loaded."),
 			Qt::AlignTop | Qt::AlignLeft, Qt::yellow);
 
-        SleeperThread::msleep(100);
+		SleeperThread::msleep(100);
     }
     else {
 
@@ -165,25 +239,12 @@ int main(int argc, char *argv[]) {
 			Settings::instance()->getVersionStr() +
 			QObject::tr(":   Settings not loaded."),
 			Qt::AlignTop | Qt::AlignLeft, Qt::red);
+
+		//splash->showMessage("\n      " + QObject::tr(copyright), Qt::AlignBottom | Qt::AlignLeft, Qt::black);
     }
 
-#elif defined(Q_OS_LINUX)
-
-    if (Settings::instance()->getSettingsLoaded()) {
-
-        qDebug() << "Init::\t settings loaded.";
-    }
-    else {
-
-        qDebug() << "Init::\t settings not loaded.";
-    }
-
-#endif
-    
 	// ****************************
 	// check for OpenGL
-
-#if defined(Q_OS_WIN32)
 
 	splash->showMessage(
 			"\n      " + 
@@ -191,17 +252,19 @@ int main(int argc, char *argv[]) {
 			Settings::instance()->getVersionStr() +
 			QObject::tr(":   Checking for OpenGL V 2.0 ..."),
 			Qt::AlignTop | Qt::AlignLeft, Qt::yellow);
+
 	SleeperThread::msleep(100);
 
 	if (!QGLFormat::hasOpenGL() && QGLFormat::OpenGL_Version_2_0) {
 
-		qDebug() << "Init::\t OpenGL not found!";
+		qDebug() << "Init::\tOpenGL not found!";
 		splash->showMessage(
 			"\n      " + 
 			Settings::instance()->getTitleStr() + " " +
 			Settings::instance()->getVersionStr() +
 			QObject::tr(":   not found!"),
 			Qt::AlignTop | Qt::AlignLeft, Qt::red);
+
 		splash->hide();
 
 		QMessageBox::critical(0, 
@@ -214,13 +277,14 @@ int main(int argc, char *argv[]) {
 
 	if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_0)) {
 
-		qDebug() << "Init::\t OpenGL found, but appears to be less than OGL v2.0.";
+		qDebug() << "Init::\tOpenGL found, but appears to be less than OGL v2.0.";
 		splash->showMessage(
 			"\n      " + 
 			Settings::instance()->getTitleStr() + " " +
 			Settings::instance()->getVersionStr() +
 			QObject::tr(":   found but appears to be less than OGL v2.0"),
 			Qt::AlignTop | Qt::AlignLeft, Qt::yellow);
+
 		splash->hide();
 
 		QMessageBox::critical(0, 
@@ -233,7 +297,7 @@ int main(int argc, char *argv[]) {
 	//if (QGLFormat::OpenGL_Version_2_0)
 	//	qDebug() << "OpenGL version > 2.0";
 
-	qDebug() << "Init::\t OpenGL found.";
+	qDebug() << "Init::\tOpenGL found.";
 	splash->showMessage(
 			"\n      " + 
 			Settings::instance()->getTitleStr() + " " +
@@ -245,7 +309,7 @@ int main(int argc, char *argv[]) {
 
 	if (!QGLFramebufferObject::hasOpenGLFramebufferObjects()) {
 
-		qDebug() << "Init:: Framebuffer Objects not found!\n";
+		qDebug() << "Init::Framebuffer Objects not found!\n";
 		splash->showMessage(
 			"\n      " + 
 			Settings::instance()->getTitleStr() + " " +
@@ -260,7 +324,7 @@ int main(int argc, char *argv[]) {
 	}
 	else {
 
-		qDebug() << "Init::\t Framebuffer Objects found.";
+		qDebug() << "Init::\tFramebuffer Objects found.";
 		splash->showMessage(
 			"\n      " + 
 			Settings::instance()->getTitleStr() + " " +
@@ -272,141 +336,22 @@ int main(int argc, char *argv[]) {
 	}
 	SleeperThread::msleep(100);
 
-#elif defined(Q_OS_LINUX)
-
-    if (!QGLFormat::hasOpenGL() && QGLFormat::OpenGL_Version_2_0) {
-
-        qDebug() << "Init::\t OpenGL not found!";
-
-        QMessageBox::critical(0,
-            QApplication::applicationName(),
-            QApplication::applicationName() + "   requires OpenGL v2.0 or later to run.",
-            QMessageBox::Abort);
-
-        return -1;
-    }
-
-    if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_0)) {
-
-        qDebug() << "Init::\t OpenGL found, but appears to be less than OGL v2.0.";
-
-        QMessageBox::critical(0,
-            QApplication::applicationName(),
-            QApplication::applicationName() + "   requires OpenGL v2.0 or later to run.",
-            QMessageBox::Ok);
-
-        return -1;
-    }
-
-    qDebug() << "Init::\t OpenGL found.";
-
-    if (!QGLFramebufferObject::hasOpenGLFramebufferObjects()) {
-
-        qDebug() << "Init:: Framebuffer Objects not found!\n";
-
-        Settings::instance()->setFBOPresence(false);
-        return -1;
-    }
-    else {
-
-        qDebug() << "Init::\t Framebuffer Objects found.";
-        Settings::instance()->setFBOPresence(true);
-    }
-
-#endif
 	// ****************************
-	// check for OpenCL devices
-	/*QList<QCLDevice> clDevices = QCLDevice::allDevices();
 	
-	splash->showMessage(
-			"\n      " + 
-			Settings::instance()->titleStr() + " " +
-			Settings::instance()->versionStr() + 
-			QObject::tr(":   Checking for OpenCL devices..."),
-			Qt::AlignTop | Qt::AlignLeft, Qt::yellow);
-	SleeperThread::msleep(100);
-
-	if (clDevices.length() == 0) {
-	
-		qDebug() << "Init:: no OpenCL devices found!\n";
-		splash->showMessage(
-			"\n      " + 
-			Settings::instance()->titleStr() + " " +
-			Settings::instance()->versionStr() + 
-			QObject::tr(":   no OpenCL devices found!"),
-			Qt::AlignTop | Qt::AlignLeft, Qt::red);
-
-		SleeperThread::msleep(1000);
-	}
-	else {
-
-		qDebug() << "Init:: found" << clDevices.length() << "OpenCL device(s).";
-		QString clNo = QString::number(clDevices.length());
-		splash->showMessage(
-			"\n      " + 
-			Settings::instance()->titleStr() + " " +
-			Settings::instance()->versionStr() + 
-			QObject::tr(":   found ") +	clNo +
-			QObject::tr(" OpenCL device(s)."),
-			Qt::AlignTop | Qt::AlignLeft, Qt::green);
-
-		SleeperThread::msleep(200);
-	}*/
-
-	//for (int i = 0; i < clDevices.length(); i++)
-	//	qDebug() << clDevices.at(i);
-
-
-	//QCLContext context;
-	////if (!context.create(QCLDevice::CPU)) {
-	////if (!context.create()) {
-	//if (!context.create(QCLDevice::GPU)) {
-
-	//	qDebug() << "Could not create OpenCL context.";
-	//  return 1;
-	//}
-	//else
-	//	qDebug() << "OpenCL context for the GPU created.";
-
-	//QCLVector<int> input1 = context.createVector<int>(2048);
-	//QCLVector<int> input2 = context.createVector<int>(2048);
-	//   
-	//for (int index = 0; index < 2048; ++index) {
-
-	//    input1[index] = index;
-	//    input2[index] = 2048 - index;
-	//}
-
-	//QCLVector<int> output = context.createVector<int>(2048);
-
-	//qDebug() << "build OpenCL program from source...";
-	//QCLProgram program = context.buildProgramFromSourceFile(":/cl/vectoradd.cl");
-	//qDebug() << "done.";
-	//QCLKernel kernel = program.createKernel("vectorAdd");
-
-	//kernel.setGlobalWorkSize(2048);
-	//kernel(input1, input2, output);
-
-	//for (int index = 0; index < 2048; ++index) {
-
-	//   if (output[index] != 2048) {
-
-	//        qDebug() << "Answer at index %1 is %2, should be %3." <<  index << output[index] << 2048;
-	//        return 1;
-	//   }
-	//}
-
-	//qDebug() << "Answer is correct:" << 2048;
-
 	// cpu usage
 #if defined(Q_OS_WIN32)
 	CreateThread(NULL, 0, WatchItThreadProc, NULL, 0, NULL);
 #endif
 
+#if defined(Q_OS_LINUX)
+#include <pthread.h>
+
+	pthread_t cpu_usage_thread;
+	pthread_create(&cpu_usage_thread, 0, cpu_usage_thread_proc, 0);
+#endif
+
 	// ****************************
 	// setup main window
-
-#if defined(Q_OS_WIN32)
 
 	splash->showMessage(
 			"\n      " + 
@@ -414,14 +359,12 @@ int main(int argc, char *argv[]) {
 			Settings::instance()->getVersionStr() +
 			QObject::tr(":   setting up main window .."),
 			Qt::AlignTop | Qt::AlignLeft, Qt::yellow);
-#endif
 
-	qDebug() << "Init::\t main window setup ...";
+	qDebug() << "Init::\tmain window setup ...";
 	MainWindow mainWindow;
 	mainWindow.setup();
-	qDebug() << "Init::\t main window setup done.";
+	qDebug() << "Init::\tmain window setup done.";
 
-#if defined(Q_OS_WIN32)
 	splash->showMessage(
 			"\n      " + 
 			Settings::instance()->getTitleStr() + " " +
@@ -430,7 +373,6 @@ int main(int argc, char *argv[]) {
 			Qt::AlignTop | Qt::AlignLeft, Qt::yellow);
 
 	SleeperThread::msleep(300);
-#endif
 	
 	//app.processEvents();
 
@@ -448,14 +390,12 @@ int main(int argc, char *argv[]) {
 	}*/
 	//splash->hide();
 
-#if defined(Q_OS_WIN32)
 	delete splash;
-#endif
 
 	mainWindow.update();
 	mainWindow.setFocus();
 
-	qDebug() << "Init::\t running application ...\n";
+	qDebug() << "Init::\trunning application ...\n";
 	
     return app.exec();
 }

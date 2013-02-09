@@ -37,6 +37,14 @@
 #include <QObject>
 #include <QMutex>
 
+
+#ifdef LOG_POWERSPECTRUM
+#   define POWERSPECTRUM_DEBUG qDebug().nospace() << "PowerSpectrum::\t"
+#else
+#   define POWERSPECTRUM_DEBUG nullDebug()
+#endif
+
+
 class PowerSpectrum : public QObject {
 
 	Q_OBJECT 
@@ -45,9 +53,10 @@ public:
 	PowerSpectrum(QObject *parent = 0, int size = 0);
 	~PowerSpectrum();
 
-	void	ProcessSpectrum(CPX &in, int size);
+	void	ProcessSpectrum(CPX &in, int size, int maxCnt);
 	
-	int		psdBmResults(float *buffer);
+	//int		psdBmResults(float *buffer);
+	int		spectrumResult(qVectorFloat &buffer, int shift);
 	
 	float	grabPsPoint(int index);
 
@@ -56,37 +65,44 @@ public:
     void	setPsOn(int value);
 	void	setAverages(int value);
 
-	int		dBmSize() const { return m_size * 2; }
+	int		dBmSize() const;// { return m_size * 2; }
 	int		psIsOn() const  { return m_psswitch;  }
 	int		averages() const { return m_averages; }
 	float	baseLine() const { return m_baseline; }
 	float	correction() const { return m_correction; }
 
-private:
-	Settings	*set;
+public slots:
+	//void setSampleSize(int rx, int size);
 
-	QMutex	mutex;
+private:
+	Settings*	set;
+
+	QMutex	m_mutex;
 
 	cpx		zero;
 	CPX		windowCPX;
     CPX		tmpCPX;
     CPX		dataCPX;
 
-	QFFT	*m_fft;
+	QFFT*	m_fft;
 
 	bool	first;
 
 	int		m_size;
+	int		m_spectrumSize;
 	int		m_psswitch;
 	int		m_averages;
+	int		cnt;
 
 	float	m_samplerate;
 	float	m_baseline;
     float	m_correction;
     
-    float	*m_window;
-	float	*m_fPsdBm;
-	float	*m_fAvePsdBm;
+    float*	m_window;
+	float*	m_fPsdBm;
+	float*	m_fAvePsdBm;
+
+	void	setupConnections();
 };
 
 #endif // _QTDSP_POWERSPECTRUM_H
