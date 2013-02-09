@@ -15,7 +15,7 @@ TEMPLATE = app
 include( ../Help/Help.pri )
 include( ../Status/Status.pri )
 include( ../Programmer/Programmer.pri )
-include( ../IPaddress/IPaddress.pri )
+include( ../IPaddress/IPaddressBoot.pri )
 include( ../Resources/Resources.pri )
 
 
@@ -33,7 +33,7 @@ unix {
     LIBS += -lpcap
 }
 
-#define BOOT 1
+
 
 
 SOURCES += main.cpp\

@@ -42,11 +42,9 @@ HEADERS  += mainwindow.h \
             version.h
 
 
-FORMS    += mainwindow.ui \
-    ../Help/aboutdialogprog.ui
+FORMS    += mainwindow.ui
 
-RESOURCES += \
-    ../Help/HPSDRProgrammer_Res.qrc
+
 
 
 

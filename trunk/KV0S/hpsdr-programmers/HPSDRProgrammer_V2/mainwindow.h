@@ -22,7 +22,7 @@
 #include "../IPaddress/changeipaddress.h"
 #include "../Help/aboutdialog.h"
 #include "../Status/statusdialog.h"
-#include "../IPaddress/addressdialog.h"
+#include "../IPaddress/addressdialogprog.h"
 #include "version.h"
 
 // states

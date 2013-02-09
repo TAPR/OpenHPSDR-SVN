@@ -16,7 +16,7 @@
 #include "version.h"
 #include "../Help/aboutdialog.h"
 #include "../Status/statusdialog.h"
-#include "../IPaddress/addressdialog.h"
+#include "../IPaddress/addressdialogboot.h"
 #include "../Programmer/board.h"
 #include "../Programmer/discovery.h"
 #include "../Programmer/interfaces.h"

@@ -744,8 +744,8 @@ int MainWindow::testSubnet( QStringList *saddr )
 {
     int addr[4];
     int ipaddr[4];
-    int iipaddr[4];
-    long iip;
+
+
     int result = 0;
     QString ifName;
 
