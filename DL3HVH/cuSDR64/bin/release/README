@@ -16,7 +16,7 @@ OS, needed software and recommended hardware:
 - At least a DualCore processor, better: QuadCore.
 
 ***********************************************************************
-Current limitations:
+Current limitations / Known issues:
 
 - This version is still Beta !
 
@@ -29,9 +29,83 @@ Current limitations:
 
 - This version does not yet contain Cuda or OpenCL kernels.
 
+- Sampling rate 384 kHz requires quite a lot of computational resources 
+  when using 4 receivers!
+
+ ***********************************************************************
+
+Some short explanations:
+
+If you right click with the mouse in the Pan a little window for 
+controlling opens. You can 'fix' this window by clicking on the button on 
+the top-right; otherwise it closes again if you leave with the mouse. 
+These control popups can be opened for every receiver separately.
+
+Let's go through the buttons (from top to down, left to right):
+
+Pan Avg:    turns averaging on/off.
+Pan Grid:   turns grid on/off.
+Peak Hold:  as it says.
+Lock Pan:   tuning the 'VFO' with the mouse wheel or the big frequency 
+            display on the top of the app but keeping the center frequency 
+			fixed.
+Click VFO:  left mouse click moves the 'VFO' to the location of the mouse.
+Mid=VFO:    moves the center frequency to the position of the VFO frequency 
+            and centers the complete display again.
+VFO=Mid:    moves the VFO frequency to the center frequency.
+
+Line, Filled Line, Solid: different ways of displaying the power spectrum.
+Simple, Enhanced: different color schemes for the waterfall display.
+
+All other buttons should be self-explanatory, and all these buttons are valid 
+for the receiver where you opened the popup.
+
+A further remark: if 'Pan Lock' and 'Click VFO' are turned off, left clicking 
+and dragging moves the center frequency as normal. This is also true if you 
+left-click and drag with the mouse over the frequency scale. But, if 'Pan Lock' 
+is on, left-clicking and dragging in the Pan moves the VFO frequency, and 
+left-clicking and dragging with mouse over the frequency scale moves the center 
+frequency by keeping the VFO frequency fixed. This is very practical if you 
+want to stay on the station you are listeing to, but want to look what's on the 
+edges or outside the visible spectrum.
+
+ESC to switch to/from full screen mode.
+
 ***********************************************************************
 list of changes:
 
+v0.3.2.13:
+
+- Improved threading model (nothing to see on the GUI).
+
+v0.3.2.12:
+
+- Added 384 ksps sample rate. Currently this only works OK for maximal 4
+  receivers!
+  
+- Bug fix: averaging per receiver corrected.
+
+v0.3.2.11:
+
+- Rx 0 (the main receiver) increases spectrum resolution by zooming the 
+  frequency scale now automatically up to 32768 bins FFT-size.
+  
+- For every receiver the Panadapter spectrum graphics can be selected
+  seperately now; as well as the avering rate.
+  
+- Windows size is saved in windowsSettings.ini
+
+
+v0.3.2.10:
+
+- additional control: up to now, the frequency scale could be moved up 
+  and down by clicking left-mouse on this scale. Now, to move this scale
+  you have to hold the shift key AND left-click the mouse button.
+  
+  If you don't hit the shift key and use the left-mouse button on the 
+  frequency scale the center frequency is moved accordingly (by keeping
+  any difference to the VFO frequency constant).
+  
 v0.3.2.9:
 
 - several bug fixes: 
