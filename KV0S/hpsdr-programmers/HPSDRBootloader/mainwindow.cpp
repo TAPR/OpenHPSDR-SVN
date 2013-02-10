@@ -260,9 +260,9 @@ void MainWindow::bootloaderProgram() {
     size=0;
     data_command=PROGRAM_FLASH;
     qDebug()<<"MainWindow::bootloaderProgram";
-    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
-        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
         status("Error: cannot open interface (are you running as root)");
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
@@ -323,9 +323,9 @@ void MainWindow::erase() {
 void MainWindow::bootloaderErase() {
     char errbuf[PCAP_ERRBUF_SIZE];
 
-    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
-        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
         status("Error: cannot open interface (are you running as root)");
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
@@ -369,9 +369,9 @@ void MainWindow::getMAC() {
         //hw=interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentText());
         //ip=interfaces.getInterfaceIPAddress(ui->interfaceComboBox->currentText());
 
-        handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
+        handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
-            qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+            qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
         } else {
 
@@ -417,9 +417,9 @@ void MainWindow::getIP() {
     // check that an interface has been selected
     if(ui->interfaceComboBox->currentIndex()!=-1) {
 
-        handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
+        handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
-            qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+            qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
         } else {
 
@@ -483,9 +483,9 @@ void MainWindow::setIP() {
     ipstr = QString("%0.%1.%2.%3").arg(saddr->at(0)).arg(saddr->at(1)).arg(saddr->at(2)).arg(saddr->at(3));
     qDebug() << "new address" << ipstr;
 
-    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
-            qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+            qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
         } else {
             state=WRITE_IP;
@@ -911,7 +911,7 @@ void MainWindow::fpgaId(unsigned char* data) {
             status("found Mercury");
             ui->interogateLineEdit->setText("Mercury - 0x020F30");
 #ifdef Q_WS_WIN
-            ui->jtag->setText("Mercury_JTAG.rbf");
+            ui->jtagLineEdit->setText("Mercury_JTAG.rbf");
 #endif
 #ifdef Q_WS_MAC
             QString rbfPath;
@@ -1071,9 +1071,9 @@ void MainWindow::jtagInterrogate() {
     stat->clear();
     status("");
 
-    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
-        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
         status("Error: cannot open interface (are you running as root)");
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
@@ -1225,9 +1225,9 @@ void MainWindow::jtagBootloaderProgram() {
     stat->clear();
     status("");
 
-    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
-        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
         status("Error: cannot open interface (are you running as root)");
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
@@ -1293,9 +1293,9 @@ void MainWindow::jtagFlashProgram() {
         return;
     }
 
-    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
-        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
         status("Error: cannot open interface (are you running as root)");
     }
 
