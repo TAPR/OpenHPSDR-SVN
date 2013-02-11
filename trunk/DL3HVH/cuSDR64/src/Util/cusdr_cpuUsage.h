@@ -53,7 +53,7 @@ private:
 	volatile LONG m_lRunCount;
 };
 
-#elif Q_OS_LINUX
+#elif defined(Q_OS_LINUX)
 
 #include <sys/types.h>
 #include <unistd.h>
