@@ -1,11 +1,3 @@
-/**
-* @file  cusdr_cpuUsage.h
-* @brief CPU usage thread header file for cuSDR
-* @author Hermann von Hasseln, DL3HVH
-* @version 0.1
-* @date 2011-01-06
-*/
-
 /*
  *	Windows part for CPU usage by (c) 2009 Ben Watson
  *
@@ -61,7 +53,7 @@ private:
 	volatile LONG m_lRunCount;
 };
 
-#elif Q_OS_LINUX
+#elif defined(Q_OS_LINUX)
 
 #include <sys/types.h>
 #include <unistd.h>

@@ -9,6 +9,7 @@ HEADERS += \
 	./src/Util/cusdr_queue.h \
 	./src/Util/cusdr_splash.h \
 	./src/Util/cusdr_styles.h \
+	./src/Util/cusdr_cpuUsage.h \
 	./src/Util/qcircularbuffer.h \
 	./src/AudioEngine/cusdr_audio_engine.h \
 	./src/AudioEngine/cusdr_audio_settingsdialog.h \
@@ -25,7 +26,6 @@ HEADERS += \
 	./src/DataEngine/cusdr_discoverer.h \
 	./src/DataEngine/cusdr_receiver.h \
 	./src/QtDSP/fftw3.h \
-	./src/QtDSP/qtdsp_agc.h \
 	./src/QtDSP/qtdsp_demodulation.h \
 	./src/QtDSP/qtdsp_dspEngine.h \
 	./src/QtDSP/qtdsp_dualModeAverager.h \
@@ -69,7 +69,7 @@ HEADERS += \
 	./src/cusdr_transmitOptionsWidget.h \
 	./src/cusdr_transmitPAWidget.h
 	
-win32:HEADERS += ./src/Util/cusdr_cpuUsage.h \
+#win32:HEADERS += ./src/Util/cusdr_cpuUsage.h \
 
 SOURCES += \
 	./src/Util/cusdr_buttons.cpp \
@@ -80,6 +80,7 @@ SOURCES += \
 	./src/Util/cusdr_led.cpp \
 	./src/Util/cusdr_painter.cpp \
 	./src/Util/cusdr_splash.cpp \
+	./src/Util/cusdr_cpuUsage.cpp \
 	./src/AudioEngine/cusdr_audio_engine.cpp \
 	./src/AudioEngine/cusdr_audio_settingsdialog.cpp \
 	./src/AudioEngine/cusdr_audio_spectrumanalyser.cpp \
@@ -93,7 +94,6 @@ SOURCES += \
 	./src/DataEngine/cusdr_dataIO.cpp \
 	./src/DataEngine/cusdr_discoverer.cpp \
 	./src/DataEngine/cusdr_receiver.cpp \
-	./src/QtDSP/qtdsp_agc.cpp \
 	./src/QtDSP/qtdsp_demodulation.cpp \
 	./src/QtDSP/qtdsp_dspEngine.cpp \
 	./src/QtDSP/qtdsp_dualModeAverager.cpp \
@@ -135,4 +135,4 @@ SOURCES += \
 	./src/cusdr_transmitPAWidget.cpp \
 	./src/main.cpp
 
-win32:SOURCES += ./src/Util/cusdr_cpuUsage.cpp \
+#win32:SOURCES += ./src/Util/cusdr_cpuUsage.cpp \
