@@ -33747,7 +33747,7 @@ namespace PowerSDR
             //txtVFOAFreq.Text = freq.ToString("f6");
             UpdateVFOAFreq(freq.ToString("f6"));
             Display.VFOA = (long)(freq * 1e6);
-            if (chkTUN.Checked && chkVFOATX.Checked && !chkVFOSplit.Checked)
+            if (chkTUN.Checked &&  !hpsdr_duplex_enabled && chkVFOATX.Checked && !chkVFOSplit.Checked)
             {
                 switch (radio.GetDSPTX(0).CurrentDSPMode)
                 {
@@ -33990,9 +33990,6 @@ namespace PowerSDR
                 case DSPMode.AM:
                 case DSPMode.SAM:
                 case DSPMode.FM:
-                    //tx_freq -= 0.011025; //w5wc-1
-                    if (chkTUN.Checked) tx_freq -= cw_pitch * 1e-6;
-                    break;
                 case DSPMode.USB:
                 case DSPMode.DIGU:
                 case DSPMode.DSB:
@@ -34389,7 +34386,7 @@ namespace PowerSDR
 
             txtVFOABand.Text = freq.ToString("f6");
             Display.VFOASub = (long)(freq * 1000000.0);
-            if (chkTUN.Checked && chkVFOATX.Checked && chkVFOSplit.Checked)
+            if (chkTUN.Checked && !hpsdr_duplex_enabled && chkVFOATX.Checked && chkVFOSplit.Checked)
             {
                 switch (radio.GetDSPTX(0).CurrentDSPMode)
                 {
@@ -34486,9 +34483,6 @@ namespace PowerSDR
                     case DSPMode.AM:
                     case DSPMode.SAM:
                     case DSPMode.FM:
-                        //freq -= 0.011025; //w5wc-1
-                        if (chkTUN.Checked) freq -= (double)cw_pitch * 0.0000010;
-                        break;
                     case DSPMode.USB:
                     case DSPMode.DIGU:
                         if (chkTUN.Checked) freq -= (double)cw_pitch * 0.0000010;
@@ -34597,7 +34591,7 @@ namespace PowerSDR
             UpdateVFOBFreq(freq.ToString("f6"));
             if (rx2_enabled)
             {
-                Display.VFOB = (long)(freq * 1000000.0);
+                Display.VFOB = (long)(freq * 1e6);
                 if (chkTUN.Checked && chkVFOBTX.Checked)
                 {
                     switch (radio.GetDSPTX(0).CurrentDSPMode)
@@ -34756,18 +34750,16 @@ namespace PowerSDR
             DSPMode tx_mode = radio.GetDSPTX(0).CurrentDSPMode;
             if (chkVFOBTX.Checked && chkRX2.Checked) tx_mode = rx2_dsp_mode;
 
-            if (mox || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
-            {
+          //  if (mox || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
+          //  {
                 switch (tx_mode)
                 {
                     case DSPMode.AM:
                     case DSPMode.SAM:
                     case DSPMode.FM:
-                        //tx_freq -= 0.011025; //w5wc-1
-                        //if (chkTUN.Checked) tx_freq -= (double)cw_pitch * 1e-6;
-                        break;
                     case DSPMode.USB:
                     case DSPMode.DIGU:
+                    case DSPMode.DSB:
                         if (chkTUN.Checked) tx_freq -= (double)cw_pitch * 1e-6;
                         break;
                     case DSPMode.LSB:
@@ -34775,7 +34767,7 @@ namespace PowerSDR
                         if (chkTUN.Checked) tx_freq += (double)cw_pitch * 1e-6;
                         break;
                 }
-            }
+           // }
 
             if (tx_mode == DSPMode.CWL)
                 tx_freq += (double)cw_pitch * 0.0000010;
@@ -38825,7 +38817,7 @@ namespace PowerSDR
             }
             else
             {
-                if (mox)
+              //  if (mox)
                 {
                     if (chkVFOSplit.Checked)
                         txtVFOBFreq_LostFocus(this, EventArgs.Empty);
@@ -38866,7 +38858,7 @@ namespace PowerSDR
 
         private void udXIT_ValueChanged(object sender, System.EventArgs e)
         {
-            if (chkXIT.Checked && mox)
+            if (chkXIT.Checked)
             {
                 if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
                 {
