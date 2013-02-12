@@ -12048,6 +12048,16 @@ namespace PowerSDR
             console.AllowVACBypass = chkVACAllowBypass.Checked;
         }
 
+        private void chkSPACEAllowBypass_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.AllowSPACEBypass = chkSPACEAllowBypass.Checked;
+        }
+
+        private void chkMOXAllowBypass_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.AllowMOXBypass = chkMOXAllowBypass.Checked;
+        }
+
         private void chkDSPTXMeterPeak_CheckedChanged(object sender, System.EventArgs e)
         {
             console.PeakTXMeter = chkDSPTXMeterPeak.Checked;

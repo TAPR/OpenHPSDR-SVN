@@ -1032,6 +1032,8 @@
             this.grpAudioSampleRate1 = new System.Windows.Forms.GroupBoxTS();
             this.comboAudioSampleRate1 = new System.Windows.Forms.ComboBoxTS();
             this.tpVAC = new System.Windows.Forms.TabPage();
+            this.chkMOXAllowBypass = new System.Windows.Forms.CheckBoxTS();
+            this.chkSPACEAllowBypass = new System.Windows.Forms.CheckBoxTS();
             this.grpDirectIQOutput = new System.Windows.Forms.GroupBoxTS();
             this.chkAudioRX2toVAC = new System.Windows.Forms.CheckBoxTS();
             this.chkAudioCorrectIQ = new System.Windows.Forms.CheckBoxTS();
@@ -16453,6 +16455,8 @@
             // 
             // tpVAC
             // 
+            this.tpVAC.Controls.Add(this.chkMOXAllowBypass);
+            this.tpVAC.Controls.Add(this.chkSPACEAllowBypass);
             this.tpVAC.Controls.Add(this.grpDirectIQOutput);
             this.tpVAC.Controls.Add(this.chkVACCombine);
             this.tpVAC.Controls.Add(this.chkVACAllowBypass);
@@ -16469,6 +16473,30 @@
             this.tpVAC.Size = new System.Drawing.Size(592, 318);
             this.tpVAC.TabIndex = 1;
             this.tpVAC.Text = "VAC 1";
+            // 
+            // chkMOXAllowBypass
+            // 
+            this.chkMOXAllowBypass.Image = null;
+            this.chkMOXAllowBypass.Location = new System.Drawing.Point(250, 232);
+            this.chkMOXAllowBypass.Name = "chkMOXAllowBypass";
+            this.chkMOXAllowBypass.Size = new System.Drawing.Size(184, 37);
+            this.chkMOXAllowBypass.TabIndex = 80;
+            this.chkMOXAllowBypass.Text = "Allow MOX to override/bypass VAC for Phone";
+            this.toolTip1.SetToolTip(this.chkMOXAllowBypass, "Using the MOX control will override the PTT input to allow for easy phone operati" +
+                    "on while VAC is enabled.");
+            this.chkMOXAllowBypass.CheckedChanged += new System.EventHandler(this.chkMOXAllowBypass_CheckedChanged);
+            // 
+            // chkSPACEAllowBypass
+            // 
+            this.chkSPACEAllowBypass.Image = null;
+            this.chkSPACEAllowBypass.Location = new System.Drawing.Point(250, 195);
+            this.chkSPACEAllowBypass.Name = "chkSPACEAllowBypass";
+            this.chkSPACEAllowBypass.Size = new System.Drawing.Size(192, 37);
+            this.chkSPACEAllowBypass.TabIndex = 79;
+            this.chkSPACEAllowBypass.Text = "Allow SPACE to override/bypass VAC for Phone";
+            this.toolTip1.SetToolTip(this.chkSPACEAllowBypass, "Using theSPACE BAR will override the PTT input to allow for easy phone operation " +
+                    "while VAC is enabled.");
+            this.chkSPACEAllowBypass.CheckedChanged += new System.EventHandler(this.chkSPACEAllowBypass_CheckedChanged);
             // 
             // grpDirectIQOutput
             // 
@@ -16533,9 +16561,9 @@
             this.chkVACAllowBypass.Checked = true;
             this.chkVACAllowBypass.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkVACAllowBypass.Image = null;
-            this.chkVACAllowBypass.Location = new System.Drawing.Point(240, 200);
+            this.chkVACAllowBypass.Location = new System.Drawing.Point(250, 158);
             this.chkVACAllowBypass.Name = "chkVACAllowBypass";
-            this.chkVACAllowBypass.Size = new System.Drawing.Size(184, 32);
+            this.chkVACAllowBypass.Size = new System.Drawing.Size(184, 37);
             this.chkVACAllowBypass.TabIndex = 75;
             this.chkVACAllowBypass.Text = "Allow PTT to override/bypass VAC for Phone";
             this.toolTip1.SetToolTip(this.chkVACAllowBypass, "Using the hardware PTT inputs will override the PTT input to allow for easy phone" +
@@ -16659,7 +16687,7 @@
             // grpAudio2Stereo
             // 
             this.grpAudio2Stereo.Controls.Add(this.chkAudio2Stereo);
-            this.grpAudio2Stereo.Location = new System.Drawing.Point(240, 136);
+            this.grpAudio2Stereo.Location = new System.Drawing.Point(344, 96);
             this.grpAudio2Stereo.Name = "grpAudio2Stereo";
             this.grpAudio2Stereo.Size = new System.Drawing.Size(96, 56);
             this.grpAudio2Stereo.TabIndex = 71;
@@ -31816,5 +31844,7 @@
         private System.Windows.Forms.LabelTS lblRX2DisplayGridMax;
         public System.Windows.Forms.TextBox txtDiff;
         private System.Windows.Forms.CheckBoxTS chkAlexTRRelay;
+        private System.Windows.Forms.CheckBoxTS chkMOXAllowBypass;
+        private System.Windows.Forms.CheckBoxTS chkSPACEAllowBypass;
     }
 }

@@ -446,6 +446,7 @@ namespace PowerSDR
         X2,
         CAT,
         VOX,
+        SPACE,
         LAST,
     }
 
@@ -20378,6 +20379,20 @@ namespace PowerSDR
             set { allow_vac_bypass = value; }
         }
 
+        private bool allow_space_bypass = false;
+        public bool AllowSPACEBypass
+        {
+            get { return allow_space_bypass; }
+            set { allow_space_bypass = value; }
+        }
+
+        private bool allow_mox_bypass = false;
+        public bool AllowMOXBypass
+        {
+            get { return allow_mox_bypass; }
+            set { allow_mox_bypass = value; }
+        }
+
         public float NewMeterData
         {
             get { return new_meter_data; }
@@ -30197,8 +30212,8 @@ namespace PowerSDR
                     }
                 }
 
-                UpdateDisplay();
-
+               // UpdateDisplay();
+                picDisplay.Invalidate();
                 if (chkPower.Checked)
                     Thread.Sleep(display_delay);
             }
@@ -31744,11 +31759,12 @@ namespace PowerSDR
                             {
                                 if (spacebar_ptt)
                                 {
+                                    current_ptt_mode = PTTMode.SPACE;
                                     chkMOX.Checked = !chkMOX.Checked;
                                     if (chkMOX.Checked)
                                     {
-                                        if (chkVAC1.Checked && allow_vac_bypass)
-                                            Audio.VACBypass = true;
+                                        if (chkVAC1.Checked && allow_space_bypass)
+                                            Audio.VACBypass = true;                                        
                                     }
                                     else
                                     {
@@ -33633,8 +33649,8 @@ namespace PowerSDR
 
         private void chkVOX_CheckedChanged(object sender, System.EventArgs e)
         {
-            if ((vac_enabled || vac2_enabled) == false)
-            {
+          //  if ((vac_enabled || vac2_enabled) == false)
+           // {
                 if (SetupForm != null) SetupForm.VOXEnable = chkVOX.Checked;
 
                 if (chkVOX.Checked)
@@ -33646,7 +33662,7 @@ namespace PowerSDR
                     Audio.VOXActive = false;
                     chkVOX.BackColor = SystemColors.Control;
                 }
-            }
+          //  }
             LineInBoost = line_in_boost;
         }
 
@@ -34199,14 +34215,18 @@ namespace PowerSDR
                 return;
             }
 
-            // only allow softrock style xmit  for cw and ssb for now
-            if (rx1_dsp_mode != DSPMode.CWL && rx1_dsp_mode != DSPMode.CWU &&
-                rx1_dsp_mode != DSPMode.USB && rx1_dsp_mode != DSPMode.LSB &&
-                ( /* current_model == Model.SDR1000_DDSLOCKED || */ current_model == Model.SOFTROCK40)
-                )
+            if (allow_mox_bypass && current_ptt_mode != PTTMode.MIC && current_ptt_mode != PTTMode.SPACE)
             {
-                chkMOX.Checked = false;
-                return;
+                if (chkMOX.Checked)
+                {
+                    if (chkVAC1.Checked)
+                        Audio.VACBypass = true;
+                }
+                else
+                {
+                    if (chkVAC1.Checked && Audio.VACBypass)
+                        Audio.VACBypass = false;
+                }
             }
 
             //  bool tx = mox = chkMOX.Checked;
@@ -34458,7 +34478,8 @@ namespace PowerSDR
                 " 10:"+(timer10/count10).ToString("f3")+
                 " 11:"+(timer11/count11).ToString("f3")+
                 " 12:"+(timer12/count12).ToString("f3"));*/
-        }
+
+         }
 
         //private Thread mox_update_thread;
 
@@ -41202,7 +41223,7 @@ namespace PowerSDR
 
         private void udXIT_ValueChanged(object sender, System.EventArgs e)
         {
-            if (chkXIT.Checked && mox)
+            if (chkXIT.Checked)
             {
                 if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
                 {

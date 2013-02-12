@@ -28,6 +28,7 @@
 
 namespace PowerSDR
 {
+    using System;
     using System.Runtime.InteropServices;
 
     unsafe class DttSP
@@ -505,8 +506,8 @@ namespace PowerSDR
 
 		[DllImport("DttSP.dll", EntryPoint="Process_Spectrum")]
 		unsafe public static extern void GetSpectrum(uint thread, float* results);
-
-		[DllImport("DttSP.dll", EntryPoint="Process_ComplexSpectrum")]
+        
+        [DllImport("DttSP.dll", EntryPoint = "Process_ComplexSpectrum")]
 		unsafe public static extern void GetComplexSpectrum(uint thread, float* results);
 
 		[DllImport("DttSP.dll", EntryPoint="Process_Panadapter")]
