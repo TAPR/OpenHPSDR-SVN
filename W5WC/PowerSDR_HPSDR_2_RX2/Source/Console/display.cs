@@ -3836,7 +3836,7 @@ namespace PowerSDR
                 }
             }
 
-            if (console.PowerOn)
+            if (console.PowerOn && current_display_mode == DisplayMode.PANADAPTER)
             {
                 // get filter screen coordinates
                 int filter_left_x = (int)((float)(filter_low - Low) / (High - Low) * W);

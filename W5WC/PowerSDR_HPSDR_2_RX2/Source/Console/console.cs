@@ -477,6 +477,13 @@ namespace PowerSDR
         Low,        // -     
     }
 
+    public enum HPSDRHW
+    {
+        Metis = 0,
+        Hermes = 1,
+        Griffin = 2,
+        Angelia = 4, 
+    }
     #endregion
 
     unsafe public class Console : System.Windows.Forms.Form
@@ -11856,7 +11863,7 @@ namespace PowerSDR
             {
                 case FRSRegion.US:
                     if ((freq >= 0.1357 && freq <= 0.1378) ||
-                        (freq >= 0.472 && freq <= 0.479) || 
+                        (freq >= 0.472 && freq <= 0.479) ||
                         freq >= 1.8 && freq <= 2.0)
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 4.0)
@@ -12106,7 +12113,7 @@ namespace PowerSDR
 
                 case FRSRegion.Australia:
                     if ((freq >= 0.1357 && freq <= 0.1378) ||
-                        (freq >= 0.472 && freq <= 0.479) || 
+                        (freq >= 0.472 && freq <= 0.479) ||
                         freq >= 1.8 && freq <= 1.875)
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 3.8)
@@ -12528,92 +12535,174 @@ namespace PowerSDR
         private float GainByBand(Band b)
         {
             float retval = 0;
-            switch (b)
+            if (current_hpsdr_model == HPSDRModel.ANAN100 || current_hpsdr_model == HPSDRModel.ANAN100D)
             {
-                case Band.B160M:
-                    retval = SetupForm.PAGain160;
-                    break;
-                case Band.B80M:
-                    retval = SetupForm.PAGain80;
-                    break;
-                case Band.B60M:
-                    retval = SetupForm.PAGain60;
-                    break;
-                case Band.B40M:
-                    retval = SetupForm.PAGain40;
-                    break;
-                case Band.B30M:
-                    retval = SetupForm.PAGain30;
-                    break;
-                case Band.B20M:
-                    retval = SetupForm.PAGain20;
-                    break;
-                case Band.B17M:
-                    retval = SetupForm.PAGain17;
-                    break;
-                case Band.B15M:
-                    retval = SetupForm.PAGain15;
-                    break;
-                case Band.B12M:
-                    retval = SetupForm.PAGain12;
-                    break;
-                case Band.B10M:
-                    retval = SetupForm.PAGain10;
-                    break;
-                case Band.B6M:
-                    if (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)
-                        retval = SetupForm.PAGain10;
-                    else if (ModelIsHPSDRorHermes())
-                        retval = SetupForm.PAGain6;
-                    else retval = 1000;
-                    break;
-                case Band.VHF0:
-                    retval = SetupForm.PAGainVHF0;
-                    break;
-                case Band.VHF1:
-                    retval = SetupForm.PAGainVHF1;
-                    break;
-                case Band.VHF2:
-                    retval = SetupForm.PAGainVHF2;
-                    break;
-                case Band.VHF3:
-                    retval = SetupForm.PAGainVHF3;
-                    break;
-                case Band.VHF4:
-                    retval = SetupForm.PAGainVHF4;
-                    break;
-                case Band.VHF5:
-                    retval = SetupForm.PAGainVHF5;
-                    break;
-                case Band.VHF6:
-                    retval = SetupForm.PAGainVHF6;
-                    break;
-                case Band.VHF7:
-                    retval = SetupForm.PAGainVHF7;
-                    break;
-                case Band.VHF8:
-                    retval = SetupForm.PAGainVHF8;
-                    break;
-                case Band.VHF9:
-                    retval = SetupForm.PAGainVHF9;
-                    break;
-                case Band.VHF10:
-                    retval = SetupForm.PAGainVHF10;
-                    break;
-                case Band.VHF11:
-                    retval = SetupForm.PAGainVHF11;
-                    break;
-                case Band.VHF12:
-                    retval = SetupForm.PAGainVHF12;
-                    break;
-                case Band.VHF13:
-                    retval = SetupForm.PAGainVHF13;
-                    break;
-                default:
-                    retval = 1000;
-                    break;
+                switch (b)
+                {
+                    case Band.B160M:
+                        retval = SetupForm.ANANPAGain160;
+                        break;
+                    case Band.B80M:
+                        retval = SetupForm.ANANPAGain80;
+                        break;
+                    case Band.B60M:
+                        retval = SetupForm.ANANPAGain60;
+                        break;
+                    case Band.B40M:
+                        retval = SetupForm.ANANPAGain40;
+                        break;
+                    case Band.B30M:
+                        retval = SetupForm.ANANPAGain30;
+                        break;
+                    case Band.B20M:
+                        retval = SetupForm.ANANPAGain20;
+                        break;
+                    case Band.B17M:
+                        retval = SetupForm.ANANPAGain17;
+                        break;
+                    case Band.B15M:
+                        retval = SetupForm.ANANPAGain15;
+                        break;
+                    case Band.B12M:
+                        retval = SetupForm.ANANPAGain12;
+                        break;
+                    case Band.B10M:
+                        retval = SetupForm.ANANPAGain10;
+                        break;
+                    case Band.B6M:
+                        retval = SetupForm.ANANPAGain6;
+                        break;
+                    case Band.VHF0:
+                        retval = SetupForm.ANANPAGainVHF0;
+                        break;
+                    case Band.VHF1:
+                        retval = SetupForm.ANANPAGainVHF1;
+                        break;
+                    case Band.VHF2:
+                        retval = SetupForm.ANANPAGainVHF2;
+                        break;
+                    case Band.VHF3:
+                        retval = SetupForm.ANANPAGainVHF3;
+                        break;
+                    case Band.VHF4:
+                        retval = SetupForm.ANANPAGainVHF4;
+                        break;
+                    case Band.VHF5:
+                        retval = SetupForm.ANANPAGainVHF5;
+                        break;
+                    case Band.VHF6:
+                        retval = SetupForm.ANANPAGainVHF6;
+                        break;
+                    case Band.VHF7:
+                        retval = SetupForm.ANANPAGainVHF7;
+                        break;
+                    case Band.VHF8:
+                        retval = SetupForm.ANANPAGainVHF8;
+                        break;
+                    case Band.VHF9:
+                        retval = SetupForm.ANANPAGainVHF9;
+                        break;
+                    case Band.VHF10:
+                        retval = SetupForm.ANANPAGainVHF10;
+                        break;
+                    case Band.VHF11:
+                        retval = SetupForm.ANANPAGainVHF11;
+                        break;
+                    case Band.VHF12:
+                        retval = SetupForm.ANANPAGainVHF12;
+                        break;
+                    case Band.VHF13:
+                        retval = SetupForm.ANANPAGainVHF13;
+                        break;
+                    default:
+                        retval = 1000;
+                        break;
+                }
             }
-
+            else
+            {
+                switch (b)
+                {
+                    case Band.B160M:
+                        retval = SetupForm.PAGain160;
+                        break;
+                    case Band.B80M:
+                        retval = SetupForm.PAGain80;
+                        break;
+                    case Band.B60M:
+                        retval = SetupForm.PAGain60;
+                        break;
+                    case Band.B40M:
+                        retval = SetupForm.PAGain40;
+                        break;
+                    case Band.B30M:
+                        retval = SetupForm.PAGain30;
+                        break;
+                    case Band.B20M:
+                        retval = SetupForm.PAGain20;
+                        break;
+                    case Band.B17M:
+                        retval = SetupForm.PAGain17;
+                        break;
+                    case Band.B15M:
+                        retval = SetupForm.PAGain15;
+                        break;
+                    case Band.B12M:
+                        retval = SetupForm.PAGain12;
+                        break;
+                    case Band.B10M:
+                        retval = SetupForm.PAGain10;
+                        break;
+                    case Band.B6M:
+                        retval = SetupForm.PAGain6;
+                        break;
+                    case Band.VHF0:
+                        retval = SetupForm.PAGainVHF0;
+                        break;
+                    case Band.VHF1:
+                        retval = SetupForm.PAGainVHF1;
+                        break;
+                    case Band.VHF2:
+                        retval = SetupForm.PAGainVHF2;
+                        break;
+                    case Band.VHF3:
+                        retval = SetupForm.PAGainVHF3;
+                        break;
+                    case Band.VHF4:
+                        retval = SetupForm.PAGainVHF4;
+                        break;
+                    case Band.VHF5:
+                        retval = SetupForm.PAGainVHF5;
+                        break;
+                    case Band.VHF6:
+                        retval = SetupForm.PAGainVHF6;
+                        break;
+                    case Band.VHF7:
+                        retval = SetupForm.PAGainVHF7;
+                        break;
+                    case Band.VHF8:
+                        retval = SetupForm.PAGainVHF8;
+                        break;
+                    case Band.VHF9:
+                        retval = SetupForm.PAGainVHF9;
+                        break;
+                    case Band.VHF10:
+                        retval = SetupForm.PAGainVHF10;
+                        break;
+                    case Band.VHF11:
+                        retval = SetupForm.PAGainVHF11;
+                        break;
+                    case Band.VHF12:
+                        retval = SetupForm.PAGainVHF12;
+                        break;
+                    case Band.VHF13:
+                        retval = SetupForm.PAGainVHF13;
+                        break;
+                    default:
+                        retval = 1000;
+                        break;
+                }
+            }
             return retval;
         }
 
@@ -12690,7 +12779,7 @@ namespace PowerSDR
         private double PABandOffset(Band b)
         {
             double num = 0;
-            switch (b)
+          /*  switch (b)
             {
                 case Band.B160M:
                     num = SetupForm.PAADC160;
@@ -12722,7 +12811,7 @@ namespace PowerSDR
                 case Band.B10M:
                     num = SetupForm.PAADC10;
                     break;
-            }
+            } */
 
             if (num == 0) return 0;
             //return 100000 / Math.Pow(num, 2);
@@ -12748,35 +12837,46 @@ namespace PowerSDR
         {
             double swr;
 
+           if (!alexpresent || g_fwd < 0.5)
+            {
+                JanusAudio.SetSWRProtect(1.0f);
+                HighSWR = false;
+                return 1.0;// swr;
+            } 
+
+           if (!swrprotection)
+           {
+               double rho = Math.Sqrt(g_rev / g_fwd);
+               swr = (1.0 + rho) / (1.0 - rho);
+               JanusAudio.SetSWRProtect(1.0f);
+               HighSWR = false;
+               return swr;
+           }
+           
+           if (chkTUN.Checked && disable_swr_on_tune && (alexpresent || apollopresent))
+             {
+                 if (g_fwd <= 10.0)
+                 {
+                     double rho = Math.Sqrt(g_rev / g_fwd);
+                     swr = (1.0 + rho) / (1.0 - rho);
+                     JanusAudio.SetSWRProtect(1.0f);
+                     HighSWR = false;
+                     return swr;
+                 }
+             }
+
             if (g_rev > g_fwd)
             {
                 HighSWR = true;
                 UpdateDisplay();
-                swr = 50.0;
+                swr = 5.0;
             }
             else
             {
                 double rho = Math.Sqrt(g_rev / g_fwd);
                 swr = (1.0 + rho) / (1.0 - rho);
             }
-
-            if (chkTUN.Checked && disable_swr_on_tune && (alexpresent || apollopresent))
-            {
-                if (g_fwd <= 10.0)
-                {
-                    JanusAudio.SetSWRProtect(1.0f);
-                    HighSWR = false;
-                    return swr;
-                }
-            }
-
-            if (!swrprotection || !alexpresent || (g_fwd == 0 && g_rev == 0) || g_fwd < 1)
-            {
-                JanusAudio.SetSWRProtect(1.0f);
-                HighSWR = false;
-                return swr;
-            }
-
+            
             if (swr > 2)
             {
                 JanusAudio.SetSWRProtect(0.5f);
@@ -22098,6 +22198,16 @@ namespace PowerSDR
             }
         }
 
+        private HPSDRHW current_hpsdr_hardware = HPSDRHW.Metis;
+        public HPSDRHW CurrentHPSDRHardware
+        {
+            get { return current_hpsdr_hardware; }
+            set
+            {
+                current_hpsdr_hardware = value;
+            }
+        }
+
         private Model current_model = Model.FLEX5000;
         public Model CurrentModel
         {
@@ -30212,7 +30322,7 @@ namespace PowerSDR
                     }
                 }
 
-               // UpdateDisplay();
+                // UpdateDisplay();
                 picDisplay.Invalidate();
                 if (chkPower.Checked)
                     Thread.Sleep(display_delay);
@@ -30746,7 +30856,7 @@ namespace PowerSDR
                             chkMOX.Checked = true;
                             if (!mox)
                             {
-                              //  chkPower.Checked = false;
+                                //  chkPower.Checked = false;
                                 return;
                             }
                         }
@@ -31764,7 +31874,7 @@ namespace PowerSDR
                                     if (chkMOX.Checked)
                                     {
                                         if (chkVAC1.Checked && allow_space_bypass)
-                                            Audio.VACBypass = true;                                        
+                                            Audio.VACBypass = true;
                                     }
                                     else
                                     {
@@ -32480,6 +32590,7 @@ namespace PowerSDR
             }
         }
 
+        private byte[] id_bytes = new byte[1];
         private void chkPower_CheckedChanged(object sender, System.EventArgs e)
         {
             if (chkPower.Checked)
@@ -32776,6 +32887,23 @@ namespace PowerSDR
                     SetupForm.radMicIn.Checked = true;
                 }
                 //  SetMicGain();
+                JanusAudio.GetMetisBoardID(id_bytes);
+                int board_id_bytes = id_bytes[0];
+                switch (board_id_bytes)
+                {
+                    case 0:
+                        current_hpsdr_hardware = HPSDRHW.Metis;
+                        break;
+                    case 1:
+                        current_hpsdr_hardware = HPSDRHW.Hermes;
+                        break;
+                    case 2:
+                        current_hpsdr_hardware = HPSDRHW.Griffin;
+                        break;
+                    case 4:
+                        current_hpsdr_hardware = HPSDRHW.Angelia;
+                        break;
+                }
             }
             else
             {
@@ -33649,20 +33777,20 @@ namespace PowerSDR
 
         private void chkVOX_CheckedChanged(object sender, System.EventArgs e)
         {
-          //  if ((vac_enabled || vac2_enabled) == false)
-           // {
-                if (SetupForm != null) SetupForm.VOXEnable = chkVOX.Checked;
+            //  if ((vac_enabled || vac2_enabled) == false)
+            // {
+            if (SetupForm != null) SetupForm.VOXEnable = chkVOX.Checked;
 
-                if (chkVOX.Checked)
-                {
-                    chkVOX.BackColor = button_selected_color;
-                }
-                else
-                {
-                    Audio.VOXActive = false;
-                    chkVOX.BackColor = SystemColors.Control;
-                }
-          //  }
+            if (chkVOX.Checked)
+            {
+                chkVOX.BackColor = button_selected_color;
+            }
+            else
+            {
+                Audio.VOXActive = false;
+                chkVOX.BackColor = SystemColors.Control;
+            }
+            //  }
             LineInBoost = line_in_boost;
         }
 
@@ -34078,22 +34206,22 @@ namespace PowerSDR
             if (!fwc_init || current_model != Model.FLEX5000)
                 Hdw.UpdateHardware = true;
 
-            	//if(!fwc_init || current_model != Model.FLEX5000)
-               // {
-                  //  if(tx && !tuning) 
-                   // {				
-                   //     DDSFreq = freq;
-                   // }
-                  //  else
-               // if(tx && chkVFOSplit.Checked)
-                  //  {
-                   //     txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-                  //  }
-                   // else
-                 //   {
-                    //    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-                  //  }
-               // }
+            //if(!fwc_init || current_model != Model.FLEX5000)
+            // {
+            //  if(tx && !tuning) 
+            // {				
+            //     DDSFreq = freq;
+            // }
+            //  else
+            // if(tx && chkVFOSplit.Checked)
+            //  {
+            //     txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+            //  }
+            // else
+            //   {
+            //    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+            //  }
+            // }
         }
 
         private void UIMOXChangedTrue()
@@ -34214,6 +34342,12 @@ namespace PowerSDR
                 chkMOX.Checked = false;
                 return;
             }
+
+            if ( current_hpsdr_hardware == HPSDRHW.Angelia && current_hpsdr_model != HPSDRModel.ANAN100D)
+            {
+                chkMOX.Checked = false;
+                return;
+            } 
 
             if (allow_mox_bypass && current_ptt_mode != PTTMode.MIC && current_ptt_mode != PTTMode.SPACE)
             {
@@ -34337,7 +34471,7 @@ namespace PowerSDR
                         }
                         chkMOX.Checked = false;
                         return;
-                    } 
+                    }
                 }
 
                 /*t1.Stop();
@@ -34479,7 +34613,7 @@ namespace PowerSDR
                 " 11:"+(timer11/count11).ToString("f3")+
                 " 12:"+(timer12/count12).ToString("f3"));*/
 
-         }
+        }
 
         //private Thread mox_update_thread;
 
@@ -35810,7 +35944,7 @@ namespace PowerSDR
                     chkMOX.Checked = false;
                     return;
                 }
-            } 
+            }
 
             if (rx1_dsp_mode == DSPMode.CWL)
             {
@@ -36499,25 +36633,25 @@ namespace PowerSDR
             if (transmit == false)
             {
                 txtVFOBBand.BackColor = Color.DimGray;
-               // if (chkVFOSplit.Checked && mox)
-                 //   chkMOX.Checked = false;
+                // if (chkVFOSplit.Checked && mox)
+                //   chkMOX.Checked = false;
             }
             else txtVFOBBand.BackColor = band_background_color;
             txtVFOBBand.Text = bandInfo;
 
             saved_vfob_freq = freq;
 
-           // if (current_model == Model.HPSDR || current_model == Model.HERMES)
-          //  {
-                if (chkVFOBTX.Checked) goto set_tx_freq;
-                if (rx2_enabled) goto set_rx2_freq;
-                else if (chkVFOSplit.Checked || full_duplex)
-                    goto set_tx_freq;
-                else goto end;
-           // }
-          //  else if (mox && chkVFOSplit.Checked)
-           //     goto set_tx_freq;
-           // else goto end;
+            // if (current_model == Model.HPSDR || current_model == Model.HERMES)
+            //  {
+            if (chkVFOBTX.Checked) goto set_tx_freq;
+            if (rx2_enabled) goto set_rx2_freq;
+            else if (chkVFOSplit.Checked || full_duplex)
+                goto set_tx_freq;
+            else goto end;
+        // }
+        //  else if (mox && chkVFOSplit.Checked)
+        //     goto set_tx_freq;
+        // else goto end;
 
         set_tx_freq:
             int last_tx_xvtr_index = tx_xvtr_index;
@@ -36584,7 +36718,7 @@ namespace PowerSDR
                 }*/
 
             DSPMode tx_mode = radio.GetDSPTX(0).CurrentDSPMode;
-           // if (chkVFOBTX.Checked && chkRX2.Checked) tx_mode = rx2_dsp_mode;
+            // if (chkVFOBTX.Checked && chkRX2.Checked) tx_mode = rx2_dsp_mode;
 
             if (mox)
             {
@@ -36613,35 +36747,35 @@ namespace PowerSDR
                     return;
                 }
             }
-           // if (mox)
-           // {
-                switch (tx_mode)
-                {
-                    case DSPMode.AM:
-                    case DSPMode.SAM:
-                    case DSPMode.FM:
-                    case DSPMode.USB:
-                    case DSPMode.DIGU:
-                    case DSPMode.DSB:
-                        if (chkTUN.Checked) tx_freq -= (double)cw_pitch * 1e-6;
-                        break;
-                    case DSPMode.LSB:
-                    case DSPMode.DIGL:
-                        if (chkTUN.Checked) tx_freq += (double)cw_pitch * 1e-6;
-                        break;
-                    case DSPMode.CWL:
-                        tx_freq += (double)cw_pitch * 0.0000010;
-                       break;
-                    case DSPMode.CWU:
-                        tx_freq -= (double)cw_pitch * 0.0000010;
-                     break;
-                }
-           // }
+            // if (mox)
+            // {
+            switch (tx_mode)
+            {
+                case DSPMode.AM:
+                case DSPMode.SAM:
+                case DSPMode.FM:
+                case DSPMode.USB:
+                case DSPMode.DIGU:
+                case DSPMode.DSB:
+                    if (chkTUN.Checked) tx_freq -= (double)cw_pitch * 1e-6;
+                    break;
+                case DSPMode.LSB:
+                case DSPMode.DIGL:
+                    if (chkTUN.Checked) tx_freq += (double)cw_pitch * 1e-6;
+                    break;
+                case DSPMode.CWL:
+                    tx_freq += (double)cw_pitch * 0.0000010;
+                    break;
+                case DSPMode.CWU:
+                    tx_freq -= (double)cw_pitch * 0.0000010;
+                    break;
+            }
+            // }
 
-          //  if (tx_mode == DSPMode.CWL)
+            //  if (tx_mode == DSPMode.CWL)
             //    tx_freq += (double)cw_pitch * 0.0000010;
-          //  else if (tx_mode == DSPMode.CWU)
-             //   tx_freq -= (double)cw_pitch * 0.0000010;
+            //  else if (tx_mode == DSPMode.CWU)
+            //   tx_freq -= (double)cw_pitch * 0.0000010;
 
             //Debug.WriteLine("freq: "+freq.ToString("f6"));
             if (!rx1_sub_drag)
@@ -37334,6 +37468,308 @@ namespace PowerSDR
 
                 switch (Display.CurrentDisplayMode)
                 {
+                    case DisplayMode.PANAFALL:
+                        /*   if ((e.Y > (picDisplay.Height / 2) && e.Y > 10) &&
+                              (e.X > display_grid_x && e.X < display_grid_w))
+                           {
+                               if (gridminmaxadjust || gridmaxadjust) Cursor = grabbing;
+                               else Cursor = grab;
+                               rx2_grid_adjust = true;
+                               rx1_grid_adjust = false;
+                           }
+                           else */
+                        if ((e.X > display_grid_x && e.X < display_grid_w) &&
+                            (e.Y < picDisplay.Height / 2 && e.Y > 10))
+                        {
+                            if (gridminmaxadjust || gridmaxadjust) Cursor = grabbing;
+                            else Cursor = grab;
+                            rx1_grid_adjust = true;
+                            rx2_grid_adjust = false;
+                        }
+                        else
+                        {
+                            rx1_grid_adjust = false;
+                            rx2_grid_adjust = false;
+                        }
+
+                        if (rx1_grid_adjust && gridminmaxadjust)// && !tx1_grid_adjust)
+                        {
+                            bool update = true;
+                            //  double db_per_pixel = PixelToDb(1) - PixelToDb(0);
+                            int delta_y = e.Y - grid_minmax_drag_start_point.Y;
+                            double delta_db = (delta_y / 10) * 5;
+                            decimal val = grid_minmax_max_y;
+                            val += (decimal)delta_db;
+                            decimal min_val = grid_minmax_min_y;
+                            min_val += (decimal)delta_db;
+
+                            if (val > SetupForm.udDisplayGridMax.Maximum)
+                            {
+                                val = SetupForm.udDisplayGridMax.Maximum;
+                                update = false;
+                            }
+                            if (min_val > SetupForm.udDisplayGridMin.Maximum)
+                            {
+                                min_val = SetupForm.udDisplayGridMin.Maximum;
+                                update = false;
+                            }
+                            if (val < SetupForm.udDisplayGridMax.Minimum)
+                            {
+                                val = SetupForm.udDisplayGridMax.Minimum;
+                                update = false;
+                            }
+                            if (min_val < SetupForm.udDisplayGridMin.Minimum)
+                            {
+                                min_val = SetupForm.udDisplayGridMin.Minimum;
+                                update = false;
+                            }
+
+                            // SetupForm.txtFwdPower.Text = val.ToString();
+                            if (update)
+                            {
+                                SetupForm.udDisplayGridMax.Value = val;
+                                SetupForm.udDisplayGridMin.Value = min_val;
+                            }
+                        }
+
+                        if (rx1_grid_adjust && gridmaxadjust)// && !tx1_grid_adjust)
+                        {
+                            bool update = true;
+                            //  double db_per_pixel = PixelToDb(1) - PixelToDb(0);
+                            int delta_y = e.Y - grid_minmax_drag_start_point.Y;
+                            double delta_db = (delta_y / 10) * 5;
+                            decimal val = grid_minmax_max_y;
+                            val += (decimal)delta_db;
+                            //  decimal min_val = grid_minmax_min_y;
+                            //  min_val += (decimal)delta_db;
+
+                            if (val > SetupForm.udDisplayGridMax.Maximum)
+                            {
+                                val = SetupForm.udDisplayGridMax.Maximum;
+                                update = false;
+                            }
+                            if (val < SetupForm.udDisplayGridMax.Minimum)
+                            {
+                                val = SetupForm.udDisplayGridMax.Minimum;
+                                update = false;
+                            }
+
+                            //  SetupForm.txtFwdPower.Text = val.ToString();
+                            if (update)
+                            {
+                                SetupForm.udDisplayGridMax.Value = val;
+                                //  SetupForm.udDisplayGridMin.Value = min_val;
+                            }
+                        }
+
+                        /*    if (rx2_grid_adjust && gridminmaxadjust && !tx2_grid_adjust)
+                            {
+                                bool update = true;
+                                //  double db_per_pixel = PixelToDb(1) - PixelToDb(0);
+                                int delta_y = e.Y - grid_minmax_drag_start_point.Y;
+
+                                double delta_db = (delta_y / 10) * 5;
+                                decimal val = grid_minmax_max_y;
+                                val += (decimal)delta_db;
+                                decimal min_val = grid_minmax_min_y;
+                                min_val += (decimal)delta_db;
+
+                                if (val > SetupForm.udRX2DisplayGridMax.Maximum)
+                                {
+                                    val = SetupForm.udRX2DisplayGridMax.Maximum;
+                                    update = false;
+                                }
+                                if (min_val > SetupForm.udRX2DisplayGridMin.Maximum)
+                                {
+                                    min_val = SetupForm.udRX2DisplayGridMin.Maximum;
+                                    update = false;
+                                }
+                                if (val < SetupForm.udRX2DisplayGridMax.Minimum)
+                                {
+                                    val = SetupForm.udRX2DisplayGridMax.Minimum;
+                                    update = false;
+                                }
+                                if (min_val < SetupForm.udRX2DisplayGridMin.Minimum)
+                                {
+                                    min_val = SetupForm.udRX2DisplayGridMin.Minimum;
+                                    update = false;
+                                }
+
+                                // SetupForm.txtFwdPower.Text = val.ToString();
+                                if (update)
+                                {
+                                    SetupForm.udRX2DisplayGridMax.Value = val;
+                                    SetupForm.udRX2DisplayGridMin.Value = min_val;
+                                }
+                            }
+
+                            if (rx2_grid_adjust && gridmaxadjust && !tx2_grid_adjust)
+                            {
+                                bool update = true;
+                                //  double db_per_pixel = PixelToDb(1) - PixelToDb(0);
+                                int delta_y = e.Y - grid_minmax_drag_start_point.Y;
+
+                                double delta_db = (delta_y / 10) * 5;
+                                decimal val = grid_minmax_max_y;
+                                val += (decimal)delta_db;
+                                //  decimal min_val = grid_minmax_min_y;
+                                //  min_val += (decimal)delta_db;
+
+                                if (val > SetupForm.udRX2DisplayGridMax.Maximum)
+                                {
+                                    val = SetupForm.udRX2DisplayGridMax.Maximum;
+                                    update = false;
+                                }
+                                if (val < SetupForm.udRX2DisplayGridMax.Minimum)
+                                {
+                                    val = SetupForm.udRX2DisplayGridMax.Minimum;
+                                    update = false;
+                                }
+
+                                // SetupForm.txtFwdPower.Text = val.ToString();
+                                if (update)
+                                {
+                                    SetupForm.udRX2DisplayGridMax.Value = val;
+                                    // SetupForm.udRX2DisplayGridMin.Value = min_val;
+                                }
+                            }
+
+                            if (rx1_grid_adjust && gridminmaxadjust && tx1_grid_adjust)
+                            {
+                                bool update = true;
+                                //  double db_per_pixel = PixelToDb(1) - PixelToDb(0);
+                                int delta_y = e.Y - grid_minmax_drag_start_point.Y;
+                                double delta_db = (delta_y / 10) * 5;
+                                decimal val = grid_minmax_max_y;
+                                val += (decimal)delta_db;
+                                decimal min_val = grid_minmax_min_y;
+                                min_val += (decimal)delta_db;
+
+                                if (val > SetupForm.udTXGridMax.Maximum)
+                                {
+                                    val = SetupForm.udTXGridMax.Maximum;
+                                    update = false;
+                                }
+                                if (min_val > SetupForm.udTXGridMin.Maximum)
+                                {
+                                    min_val = SetupForm.udTXGridMin.Maximum;
+                                    update = false;
+                                }
+                                if (val < SetupForm.udTXGridMax.Minimum)
+                                {
+                                    val = SetupForm.udTXGridMax.Minimum;
+                                    update = false;
+                                }
+                                if (min_val < SetupForm.udTXGridMin.Minimum)
+                                {
+                                    min_val = SetupForm.udTXGridMin.Minimum;
+                                    update = false;
+                                }
+
+                                // SetupForm.txtFwdPower.Text = val.ToString();
+                                if (update)
+                                {
+                                    SetupForm.udTXGridMax.Value = val;
+                                    SetupForm.udTXGridMin.Value = min_val;
+                                }
+                            }
+
+                            if (rx2_grid_adjust && gridminmaxadjust && tx2_grid_adjust)
+                            {
+                                bool update = true;
+                                //  double db_per_pixel = PixelToDb(1) - PixelToDb(0);
+                                int delta_y = e.Y - grid_minmax_drag_start_point.Y;
+
+                                double delta_db = (delta_y / 10) * 5;
+                                decimal val = grid_minmax_max_y;
+                                val += (decimal)delta_db;
+                                decimal min_val = grid_minmax_min_y;
+                                min_val += (decimal)delta_db;
+
+                                if (val > SetupForm.udTXGridMax.Maximum)
+                                {
+                                    val = SetupForm.udTXGridMax.Maximum;
+                                    update = false;
+                                }
+                                if (min_val > SetupForm.udTXGridMin.Maximum)
+                                {
+                                    min_val = SetupForm.udTXGridMin.Maximum;
+                                    update = false;
+                                }
+                                if (val < SetupForm.udTXGridMax.Minimum)
+                                {
+                                    val = SetupForm.udTXGridMax.Minimum;
+                                    update = false;
+                                }
+                                if (min_val < SetupForm.udTXGridMin.Minimum)
+                                {
+                                    min_val = SetupForm.udTXGridMin.Minimum;
+                                    update = false;
+                                }
+
+                                if (update)
+                                {
+                                    SetupForm.udTXGridMax.Value = val;
+                                    SetupForm.udTXGridMin.Value = min_val;
+                                }
+                            }
+
+                            if (rx1_grid_adjust && gridmaxadjust && tx1_grid_adjust)
+                            {
+                                bool update = true;
+                                int delta_y = e.Y - grid_minmax_drag_start_point.Y;
+                                double delta_db = (delta_y / 10) * 5;
+                                decimal val = grid_minmax_max_y;
+                                val += (decimal)delta_db;
+
+                                if (val > SetupForm.udTXGridMax.Maximum)
+                                {
+                                    val = SetupForm.udTXGridMax.Maximum;
+                                    update = false;
+                                }
+                                if (val < SetupForm.udTXGridMax.Minimum)
+                                {
+                                    val = SetupForm.udTXGridMax.Minimum;
+                                    update = false;
+                                }
+
+                                if (update)
+                                {
+                                    SetupForm.udTXGridMax.Value = val;
+                                }
+                            }
+
+                            if (rx2_grid_adjust && gridmaxadjust && tx2_grid_adjust)
+                            {
+                                bool update = true;
+                                int delta_y = e.Y - grid_minmax_drag_start_point.Y;
+                                double delta_db = (delta_y / 10) * 5;
+                                decimal val = grid_minmax_max_y;
+                                val += (decimal)delta_db;
+
+                                if (val > SetupForm.udTXGridMax.Maximum)
+                                {
+                                    val = SetupForm.udTXGridMax.Maximum;
+                                    update = false;
+                                }
+                                if (val < SetupForm.udTXGridMax.Minimum)
+                                {
+                                    val = SetupForm.udTXGridMax.Minimum;
+                                    update = false;
+                                }
+
+                                // SetupForm.txtFwdPower.Text = val.ToString();
+                                if (update)
+                                {
+                                    SetupForm.udTXGridMax.Value = val;
+                                }
+                            } */
+
+                        break;
+                }
+
+                switch (Display.CurrentDisplayMode)
+                {
                     case DisplayMode.HISTOGRAM:
                     case DisplayMode.SPECTRUM:
                         DisplayCursorX = e.X;
@@ -37964,6 +38400,7 @@ namespace PowerSDR
                     switch (Display.CurrentDisplayMode)
                     {
                         case DisplayMode.PANADAPTER:
+                        case DisplayMode.PANAFALL:
                         case DisplayMode.HISTOGRAM:
                         case DisplayMode.SPECTRUM:
 
@@ -37991,7 +38428,9 @@ namespace PowerSDR
                             }
                             else
                             {
-                                if (rx1_grid_adjust && !Display.TXOnVFOB)
+                                if (((rx1_grid_adjust && !Display.TXOnVFOB) ||
+                                    (rx1_grid_adjust && Display.TXOnVFOB && !RX2Enabled)) &&
+                                    Display.CurrentDisplayMode != DisplayMode.PANAFALL)
                                 {
                                     grid_minmax_drag_start_point = new Point(e.X, e.Y);
                                     gridminmaxadjust = true;
@@ -38001,6 +38440,15 @@ namespace PowerSDR
                                     Cursor = grabbing;
                                 }
                                 else if (rx1_grid_adjust && Display.TXOnVFOB)
+                                {
+                                    grid_minmax_drag_start_point = new Point(e.X, e.Y);
+                                    gridminmaxadjust = true;
+                                    tx1_grid_adjust = false;
+                                    grid_minmax_max_y = (decimal)Display.SpectrumGridMax;
+                                    grid_minmax_min_y = (decimal)Display.SpectrumGridMin;
+                                    Cursor = grabbing;
+                                }
+                                else// if (rx1_grid_adjust && Display.TXOnVFOB)
                                 {
                                     grid_minmax_drag_start_point = new Point(e.X, e.Y);
                                     gridminmaxadjust = true;
@@ -38498,7 +38946,8 @@ namespace PowerSDR
                     }
                     else if (mox && (rx1_grid_adjust || rx2_grid_adjust))
                     {
-                        if (rx1_grid_adjust && !Display.TXOnVFOB)
+                        if ((rx1_grid_adjust && !Display.TXOnVFOB)|| 
+                            (rx1_grid_adjust && Display.TXOnVFOB && !RX2Enabled))
                         {
                             grid_minmax_drag_start_point = new Point(e.X, e.Y);
                             gridmaxadjust = true;
@@ -38532,27 +38981,6 @@ namespace PowerSDR
                             Cursor = grabbing;
                         }
                     }
-
-                  /*  else if (wfmaxadjust)
-                    {
-                        decimal val = SetupForm.udDisplayWaterfallHighLevel.Value;
-                        val -= 5;
-
-                        if (val < SetupForm.udDisplayWaterfallHighLevel.Minimum)
-                            val = SetupForm.udDisplayWaterfallHighLevel.Minimum;
-
-                        SetupForm.udDisplayWaterfallHighLevel.Value = val;
-                    }
-                    else if (wfminadjust)
-                    {
-                        decimal val = SetupForm.udDisplayWaterfallLowLevel.Value;
-                        val -= 5;
-
-                        if (val < SetupForm.udDisplayWaterfallLowLevel.Minimum)
-                            val = SetupForm.udDisplayWaterfallLowLevel.Minimum;
-
-                        SetupForm.udDisplayWaterfallLowLevel.Value = val;
-                    }*/
                     else
                     {
                         switch (current_click_tune_mode)
@@ -38655,6 +39083,7 @@ namespace PowerSDR
                 switch (Display.CurrentDisplayMode)
                 {
                     case DisplayMode.PANADAPTER:
+                    case DisplayMode.PANAFALL:
                     case DisplayMode.HISTOGRAM:
                     case DisplayMode.SPECTRUM:
                         gridminmaxadjust = false;
@@ -42714,6 +43143,11 @@ namespace PowerSDR
                         comboDisplayMode.Items.Remove("Panascope");
                     if (comboDisplayMode.SelectedIndex < 0)
                         comboDisplayMode.Text = "Panadapter";
+
+                    if (comboDisplayMode.Items.Contains("Spectrascope"))
+                        comboDisplayMode.Items.Remove("Spectrascope");
+                    if (comboDisplayMode.SelectedIndex < 0)
+                        comboDisplayMode.Text = "Pandapter";
                 }
                 else
                 {
@@ -44749,7 +45183,7 @@ namespace PowerSDR
             else // button is unchecked
             {
                 // if (!chkRX2.Checked)
-               //  {
+                //  {
                 Audio.RX2AutoMuteTX = mute_rx2_on_vfoa_tx;
                 Audio.FullDuplex = false;
 
