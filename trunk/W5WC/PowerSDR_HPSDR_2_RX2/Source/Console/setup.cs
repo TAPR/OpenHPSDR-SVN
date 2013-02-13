@@ -208,17 +208,6 @@ namespace PowerSDR
         private CheckBoxTS chkGeneralEnableX2;
         private LabelTS lblGeneralX2Delay;
         private NumericUpDownTS udGeneralX2Delay;
-        private GroupBoxTS grpPABandOffset;
-        private LabelTS lblPABandOffset30;
-        private LabelTS lblPABandOffset40;
-        private LabelTS lblPABandOffset60;
-        private LabelTS lblPABandOffset80;
-        private LabelTS lblPABandOffset160;
-        private LabelTS lblPABandOffset10;
-        private LabelTS lblPABandOffset12;
-        private LabelTS lblPABandOffset15;
-        private LabelTS lblPABandOffset17;
-        private LabelTS lblPABandOffset20;
         private CheckBoxTS chkGeneralATUPresent;
         private ButtonTS btnPAGainReset;
         private ComboBoxTS comboGeneralProcessPriority;
@@ -255,16 +244,6 @@ namespace PowerSDR
         private LabelTS lblDisplayAVGTime;
         private GroupBoxTS grpTestX2;
         private GroupBoxTS grpTestAudioBalance;
-        private NumericUpDownTS udPAADC17;
-        private NumericUpDownTS udPAADC15;
-        private NumericUpDownTS udPAADC20;
-        private NumericUpDownTS udPAADC12;
-        private NumericUpDownTS udPAADC10;
-        private NumericUpDownTS udPAADC160;
-        private NumericUpDownTS udPAADC80;
-        private NumericUpDownTS udPAADC60;
-        private NumericUpDownTS udPAADC40;
-        private NumericUpDownTS udPAADC30;
         private CheckBoxTS chkGeneralUSBPresent;
         private GroupBoxTS grpPATune;
         private LabelTS lblTransmitTunePower;
@@ -809,7 +788,6 @@ namespace PowerSDR
         private NumericUpDownTS udCWBreakInDelay;
         private GroupBoxTS grpOptMisc;
         private CheckBoxTS chkDisableToolTips;
-        private RichTextBox rtxtPACalReq;
         private NumericUpDownTS udDisplayWaterfallAvgTime;
         private LabelTS lblDisplayWaterfallAverageTime;
         private NumericUpDownTS udDisplayWaterfallUpdatePeriod;
@@ -4415,6 +4393,72 @@ namespace PowerSDR
             set { udPAGain6.Value = (decimal)value; }
         }
 
+        public float ANANPAGain160
+        {
+            get { return (float)udANANPAGain160.Value; }
+            set { udANANPAGain160.Value = (decimal)value; }
+        }
+
+        public float ANANPAGain80
+        {
+            get { return (float)udANANPAGain80.Value; }
+            set { udANANPAGain80.Value = (decimal)value; }
+        }
+
+        public float ANANPAGain60
+        {
+            get { return (float)udANANPAGain60.Value; }
+            set { udANANPAGain60.Value = (decimal)value; }
+        }
+
+        public float ANANPAGain40
+        {
+            get { return (float)udANANPAGain40.Value; }
+            set { udANANPAGain40.Value = (decimal)value; }
+        }
+
+        public float ANANPAGain30
+        {
+            get { return (float)udANANPAGain30.Value; }
+            set { udANANPAGain30.Value = (decimal)value; }
+        }
+
+        public float ANANPAGain20
+        {
+            get { return (float)udANANPAGain20.Value; }
+            set { udANANPAGain20.Value = (decimal)value; }
+        }
+
+        public float ANANPAGain17
+        {
+            get { return (float)udANANPAGain17.Value; }
+            set { udANANPAGain17.Value = (decimal)value; }
+        }
+
+        public float ANANPAGain15
+        {
+            get { return (float)udANANPAGain15.Value; }
+            set { udANANPAGain15.Value = (decimal)value; }
+        }
+
+        public float ANANPAGain12
+        {
+            get { return (float)udANANPAGain12.Value; }
+            set { udANANPAGain12.Value = (decimal)value; }
+        }
+
+        public float ANANPAGain10
+        {
+            get { return (float)udANANPAGain10.Value; }
+            set { udANANPAGain10.Value = (decimal)value; }
+        }
+
+        public float ANANPAGain6
+        {
+            get { return (float)udANANPAGain6.Value; }
+            set { udANANPAGain6.Value = (decimal)value; }
+        }
+
         public float PAGainVHF0
         {
             get { return (float)udPAGainVHF0.Value; }
@@ -4498,64 +4542,87 @@ namespace PowerSDR
             set { udPAGainVHF13.Value = (decimal)value; }
         }
 
-        public float PAADC160
+        public float ANANPAGainVHF0
         {
-            get { return (float)udPAADC160.Value; }
-            set { udPAADC160.Value = (decimal)value; }
+            get { return (float)udANANPAGainVHF0.Value; }
+            set { udANANPAGainVHF0.Value = (decimal)value; }
         }
 
-        public float PAADC80
+        public float ANANPAGainVHF1
         {
-            get { return (float)udPAADC80.Value; }
-            set { udPAADC80.Value = (decimal)value; }
+            get { return (float)udANANPAGainVHF1.Value; }
+            set { udANANPAGainVHF1.Value = (decimal)value; }
         }
 
-        public float PAADC60
+        public float ANANPAGainVHF2
         {
-            get { return (float)udPAADC60.Value; }
-            set { udPAADC60.Value = (decimal)value; }
+            get { return (float)udANANPAGainVHF2.Value; }
+            set { udANANPAGainVHF2.Value = (decimal)value; }
         }
 
-        public float PAADC40
+        public float ANANPAGainVHF3
         {
-            get { return (float)udPAADC40.Value; }
-            set { udPAADC40.Value = (decimal)value; }
+            get { return (float)udANANPAGainVHF3.Value; }
+            set { udANANPAGainVHF3.Value = (decimal)value; }
         }
 
-        public float PAADC30
+        public float ANANPAGainVHF4
         {
-            get { return (float)udPAADC30.Value; }
-            set { udPAADC30.Value = (decimal)value; }
+            get { return (float)udANANPAGainVHF4.Value; }
+            set { udANANPAGainVHF4.Value = (decimal)value; }
         }
 
-        public float PAADC20
+        public float ANANPAGainVHF5
         {
-            get { return (float)udPAADC20.Value; }
-            set { udPAADC20.Value = (decimal)value; }
+            get { return (float)udANANPAGainVHF5.Value; }
+            set { udANANPAGainVHF5.Value = (decimal)value; }
         }
 
-        public float PAADC17
+        public float ANANPAGainVHF6
         {
-            get { return (float)udPAADC17.Value; }
-            set { udPAADC17.Value = (decimal)value; }
+            get { return (float)udANANPAGainVHF6.Value; }
+            set { udANANPAGainVHF6.Value = (decimal)value; }
         }
 
-        public float PAADC15
+        public float ANANPAGainVHF7
         {
-            get { return (float)udPAADC15.Value; }
-            set { udPAADC15.Value = (decimal)value; }
+            get { return (float)udANANPAGainVHF7.Value; }
+            set { udANANPAGainVHF7.Value = (decimal)value; }
         }
 
-        public float PAADC12
+        public float ANANPAGainVHF8
         {
-            get { return (float)udPAADC12.Value; }
-            set { udPAADC12.Value = (decimal)value; }
+            get { return (float)udANANPAGainVHF8.Value; }
+            set { udANANPAGainVHF8.Value = (decimal)value; }
         }
 
-        public float PAADC10
+        public float ANANPAGainVHF9
         {
-            get { return (float)udPAADC10.Value; }
-            set { udPAADC10.Value = (decimal)value; }
+            get { return (float)udANANPAGainVHF9.Value; }
+            set { udANANPAGainVHF9.Value = (decimal)value; }
+        }
+
+        public float ANANPAGainVHF10
+        {
+            get { return (float)udANANPAGainVHF10.Value; }
+            set { udANANPAGainVHF10.Value = (decimal)value; }
+        }
+        public float ANANPAGainVHF11
+        {
+            get { return (float)udANANPAGainVHF11.Value; }
+            set { udANANPAGainVHF11.Value = (decimal)value; }
+        }
+
+        public float ANANPAGainVHF12
+        {
+            get { return (float)udANANPAGainVHF12.Value; }
+            set { udANANPAGainVHF12.Value = (decimal)value; }
+        }
+
+        public float ANANPAGainVHF13
+        {
+            get { return (float)udANANPAGainVHF13.Value; }
+            set { udANANPAGainVHF13.Value = (decimal)value; }
         }
 
         public int TunePower
@@ -5052,7 +5119,7 @@ namespace PowerSDR
             grpPAGainByBand.Visible = true;
             chkPANewCal.Visible = false;
 
-            rtxtPACalReq.Visible = !b;
+            //rtxtPACalReq.Visible = !b;
 
             if (b)
             {
@@ -5152,6 +5219,7 @@ namespace PowerSDR
                     comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
                 comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+                grpPAGainByBand.BringToFront();
             }
             console.ANAN10Present = radGenModelANAN10.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5202,6 +5270,7 @@ namespace PowerSDR
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+                grpANANPAGainByBand.BringToFront();
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
         }
@@ -5249,6 +5318,7 @@ namespace PowerSDR
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+                grpANANPAGainByBand.BringToFront();
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
         }
@@ -5294,6 +5364,7 @@ namespace PowerSDR
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+                grpPAGainByBand.BringToFront();
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
         }
@@ -5332,6 +5403,7 @@ namespace PowerSDR
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+                grpPAGainByBand.BringToFront();
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, false);
             if (chkHermesStepAttenuator.Checked) chkHermesStepAttenuator.Checked = false;
@@ -5446,7 +5518,7 @@ namespace PowerSDR
                 chkGeneralEnableX2.Visible = false;
                 lblGeneralX2Delay.Visible = false;
                 udGeneralX2Delay.Visible = false;
-                rtxtPACalReq.Visible = false;
+                //rtxtPACalReq.Visible = false;
                 lblPTTOutDelay.Visible = true;
                 udGenPTTOutDelay.Visible = true;
                 lblMoxDelay.Visible = true;
@@ -5913,7 +5985,7 @@ namespace PowerSDR
             console.PAPresent = false;
             chkGeneralATUPresent.Visible = chkGeneralPAPresent.Checked;
             grpPAGainByBand.Visible = true;
-            rtxtPACalReq.Visible = chkGeneralPAPresent.Checked;
+            //rtxtPACalReq.Visible = chkGeneralPAPresent.Checked;
 
             if (!chkGeneralPAPresent.Checked)
                 chkGeneralATUPresent.Checked = false;
@@ -9351,43 +9423,43 @@ namespace PowerSDR
             btnPAGainCalibration.Enabled = true;
         }
 
-        private void SetANAN100PAGain()
+        private void SetANAN100DefaultPAGain()
         {
-            udPAGain160.Maximum = 57.0M;
-            udPAGain80.Maximum = 57.0M;
-            udPAGain60.Maximum = 57.0M;
-            udPAGain40.Maximum = 57.0M;
+            udPAGain160.Maximum = 57.5M;
+            udPAGain80.Maximum = 57.5M;
+            udPAGain60.Maximum = 58.0M;
+            udPAGain40.Maximum = 58.0M;
             udPAGain30.Maximum = 57.0M;
-            udPAGain20.Maximum = 57.0M;
-            udPAGain17.Maximum = 57.0M;
-            udPAGain15.Maximum = 57.0M;
-            udPAGain12.Maximum = 54.0M;
-            udPAGain10.Maximum = 54.0M;
-            udPAGain6.Maximum = 54.0M;
+            udPAGain20.Maximum = 56.5M;
+            udPAGain17.Maximum = 56.5M;
+            udPAGain15.Maximum = 56.5M;
+            udPAGain12.Maximum = 53.5M;
+            udPAGain10.Maximum = 55.5M;
+            udPAGain6.Maximum = 52.0M;
 
-            udPAGain160.Minimum = 55.0M;
-            udPAGain80.Minimum = 55.0M;
-            udPAGain60.Minimum = 55.0M;
-            udPAGain40.Minimum = 55.0M;
-            udPAGain30.Minimum = 55.0M;
-            udPAGain20.Minimum = 55.0M;
-            udPAGain17.Minimum = 54.0M;
-            udPAGain15.Minimum = 54.0M;
-            udPAGain12.Minimum = 52.0M;
-            udPAGain10.Minimum = 52.0M;
-            udPAGain6.Minimum = 49.0M;
+            udPAGain160.Minimum = 56.5M;
+            udPAGain80.Minimum = 56.5M;
+            udPAGain60.Minimum = 57.0M;
+            udPAGain40.Minimum = 57.0M;
+            udPAGain30.Minimum = 56.0M;
+            udPAGain20.Minimum = 55.5M;
+            udPAGain17.Minimum = 55.5M;
+            udPAGain15.Minimum = 55.5M;
+            udPAGain12.Minimum = 52.5M;
+            udPAGain10.Minimum = 54.5M;
+            udPAGain6.Minimum = 51.0M;
 
-            PAGain160 = 55.0f;
-            PAGain80 = 55.0f;
-            PAGain60 = 55.0f;
-            PAGain40 = 55.0f;
-            PAGain30 = 55.0f;
-            PAGain20 = 55.0f;
-            PAGain17 = 54.0f;
-            PAGain15 = 54.0f;
-            PAGain12 = 52.0f;
-            PAGain10 = 52.0f;
-            PAGain6 = 49.0f;
+            PAGain160 = 57.0f;
+            PAGain80 = 57.0f;
+            PAGain60 = 57.5f;
+            PAGain40 = 57.5f;
+            PAGain30 = 56.5f;
+            PAGain20 = 56.0f;
+            PAGain17 = 56.0f;
+            PAGain15 = 56.0f;
+            PAGain12 = 53.0f;
+            PAGain10 = 55.0f;
+            PAGain6 = 51.5f;
         }
 
         private void SetDefaultPAGain()
@@ -9429,7 +9501,6 @@ namespace PowerSDR
             PAGain6 = 38.8f;
         }
 
-
         private void udPAGain_ValueChanged(object sender, System.EventArgs e)
         {
             console.PWR = console.PWR;
@@ -9437,7 +9508,37 @@ namespace PowerSDR
 
         private void btnPAGainReset_Click(object sender, System.EventArgs e)
         {
-            if (radGenModelHPSDR.Checked || radGenModelHermes.Checked || radGenModelANAN10.Checked)
+            if (radGenModelANAN100.Checked || radGenModelANAN100D.Checked)
+            {
+                ANANPAGain160 = 57.0f;
+                ANANPAGain80 = 57.0f;
+                ANANPAGain60 = 57.5f;
+                ANANPAGain40 = 57.5f;
+                ANANPAGain30 = 56.5f;
+                ANANPAGain20 = 56.0f;
+                ANANPAGain17 = 56.0f;
+                ANANPAGain15 = 56.0f;
+                ANANPAGain12 = 53.0f;
+                ANANPAGain10 = 55.0f;
+                ANANPAGain6 = 51.5f;
+
+                udANANPAGainVHF0.Value = 56.2M;
+                udANANPAGainVHF1.Value = 56.2M;
+                udANANPAGainVHF2.Value = 56.2M;
+                udANANPAGainVHF3.Value = 56.2M;
+                udANANPAGainVHF4.Value = 56.2M;
+                udANANPAGainVHF5.Value = 56.2M;
+                udANANPAGainVHF6.Value = 56.2M;
+                udANANPAGainVHF7.Value = 56.2M;
+                udANANPAGainVHF8.Value = 56.2M;
+                udANANPAGainVHF9.Value = 56.2M;
+                udANANPAGainVHF10.Value = 56.2M;
+                udANANPAGainVHF11.Value = 56.2M;
+                udANANPAGainVHF12.Value = 56.2M;
+                udANANPAGainVHF13.Value = 56.2M;
+
+            }
+            else // if (radGenModelHPSDR.Checked || radGenModelHermes.Checked || radGenModelANAN10.Checked)
             {
                 udPAGain160.Value = 41.0M;
                 udPAGain80.Value = 41.2M;
@@ -9450,49 +9551,21 @@ namespace PowerSDR
                 udPAGain12.Value = 38.8M;
                 udPAGain10.Value = 38.8M;
                 udPAGain6.Value = 38.8M;
-                udPAGainVHF0.Value = 38.8M;
-                udPAGainVHF1.Value = 38.8M;
-                udPAGainVHF2.Value = 38.8M;
-                udPAGainVHF3.Value = 38.8M;
-                udPAGainVHF4.Value = 38.8M;
-                udPAGainVHF5.Value = 38.8M;
-                udPAGainVHF6.Value = 38.8M;
-                udPAGainVHF7.Value = 38.8M;
-                udPAGainVHF8.Value = 38.8M;
-                udPAGainVHF9.Value = 38.8M;
-                udPAGainVHF10.Value = 38.8M;
-                udPAGainVHF11.Value = 38.8M;
-                udPAGainVHF12.Value = 38.8M;
-                udPAGainVHF13.Value = 38.8M;
-            }
 
-            if (radGenModelANAN100.Checked || radGenModelANAN100D.Checked)
-            {
-                PAGain160 = 55.0f;
-                PAGain80 = 55.0f;
-                PAGain60 = 55.0f;
-                PAGain40 = 55.0f;
-                PAGain30 = 55.0f;
-                PAGain20 = 55.0f;
-                PAGain17 = 54.0f;
-                PAGain15 = 54.0f;
-                PAGain12 = 52.0f;
-                PAGain10 = 52.0f;
-                PAGain6 = 49.0f;
-                PAGainVHF0 = 38.8f;
-                PAGainVHF1 = 38.8f;
-                PAGainVHF2 = 38.8f;
-                PAGainVHF3 = 38.8f;
-                PAGainVHF4 = 38.8f;
-                PAGainVHF5 = 38.8f;
-                PAGainVHF6 = 38.8f;
-                PAGainVHF7 = 38.8f;
-                PAGainVHF8 = 38.8f;
-                PAGainVHF9 = 38.8f;
-                PAGainVHF10 = 38.8f;
-                PAGainVHF11 = 38.8f;
-                PAGainVHF12 = 38.8f;
-                PAGainVHF13 = 38.8f;
+                udPAGainVHF0.Value = 56.2M;
+                udPAGainVHF1.Value = 56.2M;
+                udPAGainVHF2.Value = 56.2M;
+                udPAGainVHF3.Value = 56.2M;
+                udPAGainVHF4.Value = 56.2M;
+                udPAGainVHF5.Value = 56.2M;
+                udPAGainVHF6.Value = 56.2M;
+                udPAGainVHF7.Value = 56.2M;
+                udPAGainVHF8.Value = 56.2M;
+                udPAGainVHF9.Value = 56.2M;
+                udPAGainVHF10.Value = 56.2M;
+                udPAGainVHF11.Value = 56.2M;
+                udPAGainVHF12.Value = 56.2M;
+                udPAGainVHF13.Value = 56.2M;
             }
         }
 
@@ -11395,56 +11468,6 @@ namespace PowerSDR
         private void udMicGainMin_LostFocus(object sender, EventArgs e)
         {
             udMicGainMin.Value = udMicGainMin.Value;
-        }
-
-        private void udPAADC17_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC17.Value = udPAADC17.Value;
-        }
-
-        private void udPAADC15_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC15.Value = udPAADC15.Value;
-        }
-
-        private void udPAADC20_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC20.Value = udPAADC20.Value;
-        }
-
-        private void udPAADC12_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC12.Value = udPAADC12.Value;
-        }
-
-        private void udPAADC10_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC10.Value = udPAADC10.Value;
-        }
-
-        private void udPAADC160_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC160.Value = udPAADC160.Value;
-        }
-
-        private void udPAADC80_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC80.Value = udPAADC80.Value;
-        }
-
-        private void udPAADC60_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC60.Value = udPAADC60.Value;
-        }
-
-        private void udPAADC40_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC40.Value = udPAADC40.Value;
-        }
-
-        private void udPAADC30_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC30.Value = udPAADC30.Value;
         }
 
         private void udPAGain10_LostFocus(object sender, EventArgs e)

@@ -870,6 +870,7 @@ namespace PowerSDR
             int adc = getAlexFwdPower();
             float volts = (float)adc * 0.0008058608f; // (3.3f / 4095);
             float watts = (float)(Math.Pow(volts, 2) / 0.09f);
+
             //  c.SetupForm.txtAlexFwdPower.Text = Watts.ToString();
             //  c.SetupForm.txtAlexFwdADC.Text = Voltage.ToString();
 
