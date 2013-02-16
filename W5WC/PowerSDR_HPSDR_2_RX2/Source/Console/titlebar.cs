@@ -36,13 +36,13 @@ namespace PowerSDR
     {
 #if (HPSDR_2RX)
         public const string BUILD_NAME = "2Rx";
-        public const string BUILD_DATE = "(2/13/13)";
+        public const string BUILD_DATE = "(2/15/13)";
 #elif (K5SO_2RX)
         public const string BUILD_NAME = "_diversity_dual_Rx";
-        public const string BUILD_DATE = "(2/12/2013)";
+        public const string BUILD_DATE = "(2/15/2013)";
 #elif (K5SO_3RX)
         public const string BUILD_NAME = "_diversity_triple_Rx";
-        public const string BUILD_DATE = "(2/12/2013)";
+        public const string BUILD_DATE = "(2/15/2013)";
 #endif
 
         public static string GetString()
