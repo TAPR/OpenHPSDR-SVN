@@ -212,7 +212,7 @@ namespace PowerSDR
 			JanusAudio.SetAlexAntBits(rx_ant, tx_ant, rx_out); 
 
 			// don't allow changing antenna selections when mox is activated 
-			if ( tx )  
+		/*	if ( tx )  
 			{ 
 				AlexEnableSavedState = Console.getConsole().SetupForm.SetAlexAntEnabled(false); 
 				AlexEnableIsStateSaved = true; 
@@ -221,7 +221,7 @@ namespace PowerSDR
 			{ 
 				Console.getConsole().SetupForm.SetAlexAntEnabled(AlexEnableSavedState); 
 				AlexEnableIsStateSaved = false; 
-			}
+			} */
 
             // Console.getConsole().SetupForm.txtRXAnt.Text = rx_ant.ToString();
            //  Console.getConsole().SetupForm.txtRXOut.Text = rx_out.ToString();

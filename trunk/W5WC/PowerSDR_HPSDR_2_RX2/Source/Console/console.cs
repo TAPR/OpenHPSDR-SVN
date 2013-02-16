@@ -12841,7 +12841,7 @@ namespace PowerSDR
             {
                 JanusAudio.SetSWRProtect(1.0f);
                 HighSWR = false;
-                return 1.0;// swr;
+                return 1.0;
             } 
 
            if (!swrprotection)
@@ -33996,19 +33996,20 @@ namespace PowerSDR
 
             if (tx)
             {
-                switch (rx1_dsp_mode)
+              /*  switch (rx1_dsp_mode)
                 {
                     case DSPMode.AM:
                     case DSPMode.SAM:
                     case DSPMode.FM:
-                        //freq -= 0.011025; //w5wc-1
-                        break;
-                    /*case DSPMode.DRM:
-                        freq -= 0.012;
-                        break;*/
+                        break;                   
                 }
                 spur_reduction = false;
-                if_shift = false; //
+                if_shift = false; */
+
+                if (chkVFOSplit.Checked)
+                    txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                else
+                    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
 
                 // make sure TX freq has been set
                 //  if (tx_dds_freq_updated)
@@ -34949,7 +34950,6 @@ namespace PowerSDR
                 {
                     case DSPMode.CWL:
                     case DSPMode.CWU:
-                        Audio.CurrentAudioState1 = Audio.AudioState.DTTSP;
                         Audio.TXDSPMode = DSPMode.DIGU;
                         break;
                 }
@@ -34960,28 +34960,13 @@ namespace PowerSDR
                     JanusAudio.SetUserOut2(1);
                 }
 
-                /*if(atu_present && tx_band != Band.B2M &&
-                    (ATUTuneMode)comboTuneMode.SelectedIndex != ATUTuneMode.BYPASS)
-                {
-                    chkTUN.Enabled = false;
-                    comboTuneMode.Enabled = false;
-
-                    Thread t = new Thread(new ThreadStart(Tune));
-                    t.IsBackground = true;
-                    t.Priority = ThreadPriority.Normal;
-                    t.Name = "TUN Thread";
-                    t.Start();
-                }*/
-                return;
+               return;
             }
             else
             {
-                //Audio.SourceScale = 0.0000001;
-                //Audio.TXInputSignal = Audio.SignalSource.SILENCE;
-                //Thread.Sleep(200);
                 Audio.TXInputSignal = Audio.SignalSource.RADIO;
                 Thread.Sleep(50);
-                // Hdw.TUNControl = true;
+
                 chkMOX.Checked = false;
                 chkTUN.BackColor = SystemColors.Control;
                 tuning = false;
@@ -35003,34 +34988,10 @@ namespace PowerSDR
                     }
                 }
 
-                /*if(!(atu_present && tx_band != Band.B2M &&
-                    (ATUTuneMode)comboTuneMode.SelectedIndex != ATUTuneMode.BYPASS))
-                {
-                    if(tx_xvtr_index >= 0 && xvtr_tune_power)
-                    {
-                        // do not do anything
-                    }
-                    else
-                    {
-                        if(rx1_dsp_mode == DSPMode.FM)
-                            TunePower = (int)(ptbPWR.Value*2.5);
-                        else TunePower = ptbPWR.Value;
-                    }
-                }*/
-
-                if (!(atu_present && tx_band != Band.B2M &&
-                     (ATUTuneMode)comboTuneMode.SelectedIndex != ATUTuneMode.BYPASS))
-                {
-                    if (tx_xvtr_index < 0 || xvtr_tune_power)
-                        TunePower = ptbPWR.Value;
-                }
-
                 PWR = PreviousPWR;
-                //DttSP.SetMode(1, 0, rx1_dsp_mode);
-                //DSPMode mode = rx1_dsp_mode;
                 DSPMode mode = radio.GetDSPTX(0).CurrentDSPMode;
+
                 DttSP.SetMode(1, 0, mode);
-                //if (chkVFOBTX.Checked) mode = rx2_dsp_mode;
                 switch (mode)
                 {
                     case DSPMode.AM:
@@ -35043,6 +35004,7 @@ namespace PowerSDR
                         Audio.TXDSPMode = mode;
                         break;
                 }
+
                 DttSP.SetTXFilter(1, radio.GetDSPTX(0).TXFilterLow, radio.GetDSPTX(0).TXFilterHigh);
 
                 if (tune_meter_tx_mode != old_tune_meter_tx_mode)
@@ -41532,7 +41494,7 @@ namespace PowerSDR
                         txtVFOBLSD.ForeColor = small_vfo_color;
                         txtVFOBBand.ForeColor = band_text_light_color;
 
-                        if (current_model == Model.FLEX5000 && fwc_init)
+                       // if (current_model == Model.FLEX5000 && fwc_init)
                             txtVFOBFreq_LostFocus(this, EventArgs.Empty);
                     }
                 }

@@ -3256,7 +3256,11 @@ namespace PowerSDR
                         vfo = vfoa_hz;
                     vfo += xit_hz;
                 }
-                else if (mox && tx_on_vfob) vfo = vfoa_sub_hz;
+                else if (mox && tx_on_vfob)
+                {
+                    if (console.RX2Enabled) vfo = vfoa_hz + rit_hz;
+                    else vfo = vfoa_sub_hz;
+                }
                 else vfo = vfoa_hz + rit_hz;
             }
             else //if(rx==2)

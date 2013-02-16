@@ -5219,6 +5219,8 @@ namespace PowerSDR
                     comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
                 comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+                chkAutoPACalibrate.Checked = false;
+                chkAutoPACalibrate.Visible = false;
                 grpPAGainByBand.BringToFront();
             }
             console.ANAN10Present = radGenModelANAN10.Checked;
@@ -5270,6 +5272,8 @@ namespace PowerSDR
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+                chkAutoPACalibrate.Checked = false;
+                chkAutoPACalibrate.Visible = false;
                 grpANANPAGainByBand.BringToFront();
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5318,6 +5322,8 @@ namespace PowerSDR
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+                chkAutoPACalibrate.Checked = false;
+                chkAutoPACalibrate.Visible = false;
                 grpANANPAGainByBand.BringToFront();
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5364,6 +5370,8 @@ namespace PowerSDR
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+                chkAutoPACalibrate.Checked = false;
+                chkAutoPACalibrate.Visible = false;
                 grpPAGainByBand.BringToFront();
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5403,6 +5411,8 @@ namespace PowerSDR
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+              //  chkAutoPACalibrate.Checked = false;
+                chkAutoPACalibrate.Visible = true;
                 grpPAGainByBand.BringToFront();
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, false);
