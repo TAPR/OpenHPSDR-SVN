@@ -97,6 +97,7 @@ private:
     AddressDialog *add;
     int currentBoardIndex;
     QString currentboard;
+    QString rbfstr;
     QSettings settings;
     QMessageBox msg;
     QLabel *deviceIndicator;
