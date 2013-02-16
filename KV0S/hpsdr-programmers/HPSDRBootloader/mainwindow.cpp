@@ -57,8 +57,8 @@ MainWindow::MainWindow(QWidget *parent) :
     currentboard="";
 
     deviceIndicator->setIndent(0);
-    deviceIndicator->setPixmap (QPixmap(":/icons/red16.png"));
-    deviceIndicator->setToolTip (QString ("Device port not open"));
+    deviceIndicator->setPixmap (QPixmap(":/icons/green16.png"));
+    deviceIndicator->setToolTip (QString ("Device port open"));
 
     statusBar()->addPermanentWidget (deviceIndicator);
 
@@ -80,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //JTAG programmer buttons
     connect(ui->interogateButton,SIGNAL(clicked()),this,SLOT(jtagInterrogate()));
-    connect(ui->jtagHelperButton,SIGNAL(clicked()),this,SLOT(jtagBrowse()));
+    //connect(ui->jtagHelperButton,SIGNAL(clicked()),this,SLOT(jtagBrowse()));
     connect(ui->firmwareButton,SIGNAL(clicked()),this,SLOT(jtagFlashBrowse()));
     connect(ui->jtagProgramButton,SIGNAL(clicked()),this,SLOT(jtagFlashProgram()));
 
@@ -169,7 +169,7 @@ void MainWindow::browse()
     // Clear other lineedits
     ui->firmwareLineEdit->clear();
     ui->interogateLineEdit->clear();
-    ui->jtagLineEdit->clear();
+    //ui->jtagLineEdit->clear();
     QString dd = settings.value("dir").toString();
     QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),dd,tr("rbf Files (*.rbf)"));
     QFileInfo *fileif = new QFileInfo(fileName);
@@ -910,32 +910,13 @@ void MainWindow::fpgaId(unsigned char* data) {
         } else if(fpga_id==0x020F30) {
             status("found Mercury");
             ui->interogateLineEdit->setText("Mercury - 0x020F30");
-#ifdef Q_WS_WIN
-            ui->jtagLineEdit->setText("Mercury_JTAG.rbf");
-#endif
-#ifdef Q_WS_MAC
-            QString rbfPath;
-            rbfPath.sprintf("%s/../Resources/Mercury_JTAG.rbf",myPath);
-            ui->jtagLineEdit->setText(rbfPath);
-#endif
-#ifdef Q_WS_X11
-            ui->jtagLineEdit->setText("/usr/local/hpsdr/Mercury_JTAG.rbf");
-#endif
+            rbfstr = QString(":/rbf/Mercury_JTAG.rbf");
+            //ui->jtagLineEdit->setText(rbfstr);
         } else if(fpga_id==0x020B20) {
             status("found Penelope");
             ui->interogateLineEdit->setText("Penelope - 0x020B20");
-#ifdef Q_WS_WIN
-            ui->jtagLineEdit->setText("Penelope_JTAG.rbf");
-#endif
-#ifdef Q_WS_MAC
-            QString rbfPath;
-            rbfPath.sprintf("%s/../Resources/Penelope_JTAG.rbf",myPath);
-            ui->jtagLineEdit->setText(rbfPath);
-#endif
-#ifdef Q_WS_X11
-            ui->jtagLineEdit->setText("/usr/local/hpsdr/Penelope_JTAG.rbf");
-#endif
-
+            rbfstr = QString(":/rbf/Penelope_JTAG.rbf");
+            //ui->jtagLineEdit->setText(rbfstr);
         } else {
             status("unknown FPGA id");
             fpga_id=0;
@@ -1066,7 +1047,7 @@ void MainWindow::jtagInterrogate() {
     //Clear Program lineedit
     ui->fileLineEdit->clear();
     ui->firmwareLineEdit->clear();
-    ui->jtagLineEdit->clear();
+    //ui->jtagLineEdit->clear();
 
     stat->clear();
     status("");
@@ -1097,7 +1078,7 @@ void MainWindow::jtagBrowse() {
     QFileInfo *fileif = new QFileInfo(fileName);
     qDebug() << fileif->filePath();
     settings.setValue("firmwaredir", fileif->filePath());
-    ui->jtagLineEdit->setText(fileName);
+    //ui->jtagLineEdit->setText(fileName);
 }
 
 void MainWindow::jtagProgram() {
@@ -1108,7 +1089,7 @@ void MainWindow::jtagProgram() {
     status("");
 
     if(fpga_id==0x020F30 || fpga_id==0x020B20) {
-        if(ui->jtagLineEdit->text().endsWith(".rbf")) {
+        if(rbfstr.endsWith(".rbf")) {
             if(fpga_id==0x020F30) {
                 // Mercury
                 data_command=PROGRAM_MERCURY;
@@ -1116,7 +1097,7 @@ void MainWindow::jtagProgram() {
                 // Penelope
                 data_command=PROGRAM_PENELOPE;
             }
-            loadRBF(ui->jtagLineEdit->text());
+            loadRBF(rbfstr);
             if(blocks>0) {
                 if(bootloader) {
                     jtagBootloaderProgram();
@@ -1264,7 +1245,7 @@ void MainWindow::jtagFlashProgram() {
     status("");
 
     // validate file selection
-    if(!ui->jtagLineEdit->text().endsWith(".rbf")) {
+    if(!rbfstr.endsWith(".rbf")) {
         status("Error: No JTAG Program file selected.");
         return;
     }
@@ -1276,14 +1257,14 @@ void MainWindow::jtagFlashProgram() {
     // try to load the JTAG.rbf file
     if(fpga_id==0x020F30) {
         // Mercury
-        if(loadMercuryRBF(ui->jtagLineEdit->text())!=0) {
+        if(loadMercuryRBF(rbfstr)!=0) {
             status("Error: Failed to load Mercury_JTAG Program file.");
             return;
         }
         data_command=PROGRAM_MERCURY;
     } else if(fpga_id==0x020B20) {
         // Penelope
-        if(loadPenelopeRBF(ui->jtagLineEdit->text())!=0) {
+        if(loadPenelopeRBF(rbfstr)!=0) {
             status("Error: Failed to load Penelope_JTAG Program file.");
             return;
         }

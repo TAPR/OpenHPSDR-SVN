@@ -46,6 +46,7 @@ public:
     void stop();
 signals:
     void eraseCompleted();
+    void commandCompleted();
     void nextBuffer();
     void macAddress(unsigned char*);
     void ipAddress(unsigned char*);
