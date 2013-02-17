@@ -71,9 +71,19 @@ edges or outside the visible spectrum.
 
 ESC to switch to/from full screen mode.
 
+
 ***********************************************************************
 list of changes:
 
+v0.3.2.14:
+
+- some bug fixes.
+
+- On the main button widget (the one with the 'Start'-Button) there's a new
+  button called '+Rx'. You add receivers and receiver displays with this button.
+  By closing a receiver window you remove this receiver. This can also be done
+  while running the application.
+  
 v0.3.2.13:
 
 - Improved threading model (nothing to see on the GUI).
