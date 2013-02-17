@@ -1,0 +1,144 @@
+Restore Archived Project report for Hermes
+Wed Jan 09 19:29:10 2013
+Quartus II 64-Bit Version 12.1 Build 177 11/07/2012 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Restore Archived Project Summary
+  3. Restore Archived Project Messages
+  4. Files Restored
+  5. Files Not Restored
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2012 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------+
+; Restore Archived Project Summary                                        ;
++---------------------------------+---------------------------------------+
+; Restore Archived Project Status ; Successful - Wed Jan 09 19:29:10 2013 ;
+; Revision Name                   ; Hermes                                ;
+; Top-level Entity Name           ; Hermes                                ;
+; Family                          ; Cyclone III                           ;
++---------------------------------+---------------------------------------+
+
+
++-----------------------------------+
+; Restore Archived Project Messages ;
++-----------------------------------+
+Info: Successfully restored 'E:/HPSDR/trunk/Hermes/Source/Hermes_V2.2/Hermes_v2.2.qar' into the 'E:/HPSDR/trunk/Hermes/Source/Hermes_V2.2/' directory
+Info: Generated report 'Hermes.restore.rpt'
+Info (23030): Evaluation of Tcl script e:/altera/12.1/quartus/common/tcl/apps/qpm/qar.tcl was successful
+Info: Quartus II 64-Bit Shell was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 289 megabytes
+    Info: Processing ended: Wed Jan 09 19:29:10 2013
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
+
+
++---------------------------------------------------+
+; Files Restored                                    ;
++---------------------------------------------------+
+; File Name                                         ;
++---------------------------------------------------+
+; ASMI.v                                            ;
+; ASMI_interface.v                                  ;
+; Apollo.v                                          ;
+; Attenuator.v                                      ;
+; C10_PLL.v                                         ;
+; C122_PLL.v                                        ;
+; CRC32.v                                           ;
+; DHCP.v                                            ;
+; EEPROM.v                                          ;
+; EPCS_fifo.v                                       ;
+; FIFO.v                                            ;
+; HPF_select.v                                      ;
+; Hermes - Copy.sdc                                 ;
+; Hermes.dpf                                        ;
+; Hermes.qpf                                        ;
+; Hermes.qsf                                        ;
+; Hermes.sdc                                        ;
+; Hermes.v                                          ;
+; Hermes_ADC.v                                      ;
+; Hermes_Tx_fifo_ctrl.v                             ;
+; Hermes_assignment_defaults.qdf                    ;
+; Hermes_clk_lrclk_gen.v                            ;
+; I2S_rcv.v                                         ;
+; I2S_xmit.v                                        ;
+; LPF_select.v                                      ;
+; Led_control.v                                     ;
+; Led_flash.v                                       ;
+; MDIO.v                                            ;
+; PHY_Rx_fifo.v                                     ;
+; PHY_fifo.qip                                      ;
+; PHY_fifo.v                                        ;
+; PLL_IF.ppf                                        ;
+; PLL_IF.qip                                        ;
+; PLL_IF.vhd                                        ;
+; PLL_clocks.ppf                                    ;
+; PLL_clocks.qip                                    ;
+; PLL_clocks.v                                      ;
+; Rx_MAC.v                                          ;
+; SPI.v                                             ;
+; SP_fifo.qip                                       ;
+; SP_fifo.v                                         ;
+; TLV320_SPI.v                                      ;
+; Tx_MAC.v                                          ;
+; Tx_fifo.v                                         ;
+; assignment_defaults.qdf                           ;
+; cdc_mcp.v                                         ;
+; cdc_sync.v                                        ;
+; cic.v                                             ;
+; cic_comb.v                                        ;
+; cic_integrator.v                                  ;
+; cicint.v                                          ;
+; clk_div.v                                         ;
+; cordic.v                                          ;
+; cpl_cordic.v                                      ;
+; debounce.v                                        ;
+; fir.v                                             ;
+; fir_coeffs.v                                      ;
+; fir_coeffs_rom.hex                                ;
+; fir_coeffs_rom.v                                  ;
+; fir_mac.v                                         ;
+; fir_shiftreg.v                                    ;
+; incremental_db/compiled_partitions/Hermes.db_info ;
+; memcic.v                                          ;
+; memcic_ram.v                                      ;
+; mult_24Sx24S.v                                    ;
+; phase_accumulator.v                               ;
+; pulsegen.v                                        ;
+; receiver.v                                        ;
+; receiver_vna.v                                    ;
+; sp_rcv_ctrl.v                                     ;
+; varcic.v                                          ;
++---------------------------------------------------+
+
+
++--------------------+
+; Files Not Restored ;
++--------------------+
+; File Name          ;
++--------------------+
+
+
