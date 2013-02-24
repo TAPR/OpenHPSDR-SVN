@@ -1,5 +1,5 @@
 Assembler report for Metis
-Sat Feb 16 11:20:59 2013
+Sun Feb 24 19:16:18 2013
 Quartus II 64-Bit Version 12.1 Build 177 11/07/2012 SJ Web Edition
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sat Feb 16 11:20:59 2013 ;
+; Assembler Status      ; Successful - Sun Feb 24 19:16:18 2013 ;
 ; Revision Name         ; Metis                                 ;
 ; Top-level Entity Name ; Metis                                 ;
 ; Family                ; Cyclone III                           ;
@@ -97,7 +97,7 @@ applicable agreement for further details.
 +----------------+-----------------------------------------------------------+
 ; Device         ; EP3C40Q240C8                                              ;
 ; JTAG usercode  ; 0xFFFFFFFF                                                ;
-; Checksum       ; 0x0098AB09                                                ;
+; Checksum       ; 0x0098E1D7                                                ;
 +----------------+-----------------------------------------------------------+
 
 
@@ -108,7 +108,7 @@ applicable agreement for further details.
 +--------------------+-------------------------------------------------------+
 ; Device             ; EPCS16                                                ;
 ; JTAG usercode      ; 0x00000000                                            ;
-; Checksum           ; 0x1A4E3390                                            ;
+; Checksum           ; 0x1A508775                                            ;
 ; Compression Ratio  ; 2                                                     ;
 +--------------------+-------------------------------------------------------+
 
@@ -129,13 +129,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 12.1 Build 177 11/07/2012 SJ Web Edition
-    Info: Processing started: Sat Feb 16 11:20:54 2013
+    Info: Processing started: Sun Feb 24 19:16:13 2013
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Metis -c Metis
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 462 megabytes
-    Info: Processing ended: Sat Feb 16 11:20:59 2013
+    Info: Peak virtual memory: 466 megabytes
+    Info: Processing ended: Sun Feb 24 19:16:18 2013
     Info: Elapsed time: 00:00:05
     Info: Total CPU time (on all processors): 00:00:05
 

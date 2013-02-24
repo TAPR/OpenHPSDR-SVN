@@ -1,5 +1,5 @@
 Flow report for Metis
-Sat Feb 16 11:21:24 2013
+Sun Feb 24 19:16:45 2013
 Quartus II 64-Bit Version 12.1 Build 177 11/07/2012 SJ Web Edition
 
 
@@ -38,17 +38,17 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +------------------------------------+------------------------------------------+
-; Flow Status                        ; Successful - Sat Feb 16 11:20:59 2013    ;
+; Flow Status                        ; Successful - Sun Feb 24 19:16:18 2013    ;
 ; Quartus II 64-Bit Version          ; 12.1 Build 177 11/07/2012 SJ Web Edition ;
 ; Revision Name                      ; Metis                                    ;
 ; Top-level Entity Name              ; Metis                                    ;
 ; Family                             ; Cyclone III                              ;
 ; Device                             ; EP3C40Q240C8                             ;
 ; Timing Models                      ; Final                                    ;
-; Total logic elements               ; 13,544 / 39,600 ( 34 % )                 ;
-;     Total combinational functions  ; 11,792 / 39,600 ( 30 % )                 ;
-;     Dedicated logic registers      ; 6,884 / 39,600 ( 17 % )                  ;
-; Total registers                    ; 6884                                     ;
+; Total logic elements               ; 13,537 / 39,600 ( 34 % )                 ;
+;     Total combinational functions  ; 11,789 / 39,600 ( 30 % )                 ;
+;     Dedicated logic registers      ; 6,883 / 39,600 ( 17 % )                  ;
+; Total registers                    ; 6883                                     ;
 ; Total pins                         ; 72 / 129 ( 56 % )                        ;
 ; Total virtual pins                 ; 0                                        ;
 ; Total memory bits                  ; 291,072 / 1,161,216 ( 25 % )             ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 02/16/2013 11:16:50 ;
+; Start date & time ; 02/24/2013 19:12:16 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Metis               ;
 +-------------------+---------------------+
@@ -74,7 +74,7 @@ applicable agreement for further details.
 ; Assignment Name                     ; Value                                    ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+------------------------------------------+---------------+-------------+----------------+
 ; ALLOW_POWER_UP_DONT_CARE            ; Off                                      ; On            ; --          ; --             ;
-; COMPILER_SIGNATURE_ID               ; 694449418451.136098460906924             ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 694449418451.136170433607036             ; --            ; --          ; --             ;
 ; FMAX_REQUIREMENT                    ; 25 MHz                                   ; --            ; --          ; --             ;
 ; IP_TOOL_NAME                        ; FIFO                                     ; --            ; --          ; --             ;
 ; IP_TOOL_NAME                        ; FIFO                                     ; --            ; --          ; --             ;
@@ -108,11 +108,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:01:41     ; 1.0                     ; 577 MB              ; 00:01:40                           ;
-; Fitter                    ; 00:02:12     ; 1.0                     ; 772 MB              ; 00:02:09                           ;
-; Assembler                 ; 00:00:05     ; 1.0                     ; 462 MB              ; 00:00:05                           ;
-; TimeQuest Timing Analyzer ; 00:00:24     ; 1.0                     ; 604 MB              ; 00:00:23                           ;
-; Total                     ; 00:04:22     ; --                      ; --                  ; 00:04:17                           ;
+; Analysis & Synthesis      ; 00:01:42     ; 1.0                     ; 581 MB              ; 00:01:40                           ;
+; Fitter                    ; 00:02:00     ; 1.0                     ; 768 MB              ; 00:01:59                           ;
+; Assembler                 ; 00:00:05     ; 1.0                     ; 466 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:23     ; 1.0                     ; 613 MB              ; 00:00:23                           ;
+; Total                     ; 00:04:10     ; --                      ; --                  ; 00:04:07                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
