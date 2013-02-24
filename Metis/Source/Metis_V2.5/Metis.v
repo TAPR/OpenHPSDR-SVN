@@ -68,6 +68,8 @@
 					26 - changed IP set to use UDP rather than raw Ethernet frames. Once IP is set board will reset to load new address.
 			  Feb 15 - Increased ARP and ping time outs read for faster sampling rates.
 					   - Released as v2.5
+					24 - Changed ARP sequencer to prevent hang with some PCs
+					   - Released as v2.5a
 		
 						
 						**** Built using Quartus II V12.1  ****
@@ -801,19 +803,23 @@ begin
 				times_up   <= 0;
 				Send_ARP   <= 0;
 				ping_reply <= 0;
-				if (ARP_request) state <= ARP;
-				else if (ping_request) state <= PING;
+				if (ARP_request) begin
+					Send_ARP <= 1'b1;
+					state <= ARP;
+				end 
+				else if (ping_request) begin
+					ping_reply <= 1'b1;
+					state <= PING;
+				end
 			end
 	
 	ARP:	begin	
-				Send_ARP <= 1'b1;
-				if (ARP_sent || times_up == 100000) state <= IDLE;
+				if (ARP_sent || times_up > 100000) state <= IDLE;
 				times_up <= times_up + 17'd1;
 			end
 			
 	PING:	begin
-				ping_reply <= 1'b1;	
-				if (ping_sent || times_up == 100000) state <= IDLE;
+				if (ping_sent || times_up > 100000) state <= IDLE;
 				times_up <= times_up + 17'd1;
 			end 
 

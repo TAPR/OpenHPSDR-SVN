@@ -1,9 +1,9 @@
-Warning (10268): Verilog HDL information at Metis.v(352): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at Metis.v(537): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at Metis.v(842): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at Metis.v(1494): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at Metis.v(1787): always construct contains both blocking and non-blocking assignments
-Info (10281): Verilog HDL Declaration information at Metis.v(337): object "This_MAC" differs only in case from object "this_MAC" in the same scope
+Warning (10268): Verilog HDL information at Metis.v(354): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at Metis.v(539): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at Metis.v(799): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at Metis.v(1455): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at Metis.v(1748): always construct contains both blocking and non-blocking assignments
+Info (10281): Verilog HDL Declaration information at Metis.v(339): object "This_MAC" differs only in case from object "this_MAC" in the same scope
 Warning (10268): Verilog HDL information at Rx_MAC.v(328): always construct contains both blocking and non-blocking assignments
 Info (10281): Verilog HDL Declaration information at Rx_MAC.v(166): object "This_MAC" differs only in case from object "this_MAC" in the same scope
 Info (10281): Verilog HDL Declaration information at Rx_MAC.v(185): object "METIS_discovery" differs only in case from object "METIS_DISCOVERY" in the same scope
