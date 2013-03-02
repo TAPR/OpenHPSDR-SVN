@@ -1,5 +1,5 @@
 Flow report for Hermes
-Sat Feb 16 13:48:42 2013
+Sat Mar 02 13:23:06 2013
 Quartus II 64-Bit Version 12.1 Build 177 11/07/2012 SJ Web Edition
 
 
@@ -38,17 +38,17 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +------------------------------------+------------------------------------------+
-; Flow Status                        ; Successful - Sat Feb 16 13:47:32 2013    ;
+; Flow Status                        ; Successful - Sat Mar 02 13:21:55 2013    ;
 ; Quartus II 64-Bit Version          ; 12.1 Build 177 11/07/2012 SJ Web Edition ;
 ; Revision Name                      ; Hermes                                   ;
 ; Top-level Entity Name              ; Hermes                                   ;
 ; Family                             ; Cyclone III                              ;
 ; Device                             ; EP3C40Q240C8                             ;
 ; Timing Models                      ; Final                                    ;
-; Total logic elements               ; 37,832 / 39,600 ( 96 % )                 ;
-;     Total combinational functions  ; 32,077 / 39,600 ( 81 % )                 ;
-;     Dedicated logic registers      ; 27,012 / 39,600 ( 68 % )                 ;
-; Total registers                    ; 27012                                    ;
+; Total logic elements               ; 38,120 / 39,600 ( 96 % )                 ;
+;     Total combinational functions  ; 31,595 / 39,600 ( 80 % )                 ;
+;     Dedicated logic registers      ; 27,001 / 39,600 ( 68 % )                 ;
+; Total registers                    ; 27001                                    ;
 ; Total pins                         ; 119 / 129 ( 92 % )                       ;
 ; Total virtual pins                 ; 0                                        ;
 ; Total memory bits                  ; 893,184 / 1,161,216 ( 77 % )             ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 02/16/2013 12:57:46 ;
+; Start date & time ; 03/02/2013 12:33:29 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Hermes              ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-----------------------------------------+---------------------------------------+---------------+-------------+------------+
 ; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP     ; On                                    ; Off           ; --          ; --         ;
 ; ALLOW_POWER_UP_DONT_CARE                ; Off                                   ; On            ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                   ; 694449418451.136099066506292          ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                   ; 694449418451.136219880903948          ; --            ; --          ; --         ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE        ; Speed                                 ; Balanced      ; --          ; --         ;
 ; ENABLE_BENEFICIAL_SKEW_OPTIMIZATION     ; On                                    ; Off           ; --          ; --         ;
 ; FITTER_EFFORT                           ; Standard Fit                          ; Auto Fit      ; --          ; --         ;
@@ -122,11 +122,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:05:19     ; 1.0                     ; 1086 MB             ; 00:05:17                           ;
-; Fitter                    ; 00:43:30     ; 1.0                     ; 1414 MB             ; 00:43:06                           ;
-; Assembler                 ; 00:00:10     ; 1.0                     ; 552 MB              ; 00:00:08                           ;
-; TimeQuest Timing Analyzer ; 00:01:07     ; 1.0                     ; 956 MB              ; 00:01:05                           ;
-; Total                     ; 00:50:06     ; --                      ; --                  ; 00:49:36                           ;
+; Analysis & Synthesis      ; 00:05:17     ; 1.0                     ; 1083 MB             ; 00:05:12                           ;
+; Fitter                    ; 00:42:23     ; 1.0                     ; 1378 MB             ; 00:41:36                           ;
+; Assembler                 ; 00:00:08     ; 1.0                     ; 556 MB              ; 00:00:08                           ;
+; TimeQuest Timing Analyzer ; 00:01:07     ; 1.0                     ; 961 MB              ; 00:01:06                           ;
+; Total                     ; 00:48:55     ; --                      ; --                  ; 00:48:02                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

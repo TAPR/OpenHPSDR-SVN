@@ -120,6 +120,8 @@
 						- 4 receivers with 48/96/192/384ksps.
 	12             - 5 receivers - 96% full
 	16					- released as version 2.3
+	2 Mar          - Added ARP/Ping time out mod from Metis.
+						- replace pin defs ready for 1000T code - released as same version
 
 
 	
@@ -168,18 +170,137 @@ NOTES:
 */
 	
 
-module Hermes(INA,  
-				CBCLK, CLRCIN, CDOUT, CDIN, PTT, Status_LED,KEY_DOT, KEY_DASH, FPGA_PTT,
-				CMCLK, LTC2208_122MHz, CLRCOUT, ATTN_CLK, ATTN_DATA, ATTN_LE, RAND, PGA, DITH, SHDN, OVERFLOW,
-				USEROUT0, USEROUT1, USEROUT2, USEROUT3, USEROUT4, USEROUT5, USEROUT6,
-				OSC_10MHZ, FPGA_PLL, CMODE, nCS, MOSI, SSCK, DAC_ALC, DACD,_122MHz,
-				SPI_SDO, SPI_SDI, SPI_SCK, ADCMOSI, ADCCLK, ADCMISO, nADCCS,
-				IO1, IO2,IO4, IO5, IO6, IO8, DEBUG_LED1, DEBUG_LED2, DEBUG_LED3, DEBUG_LED4, DEBUG_LED5, DEBUG_LED6,
-				DEBUG_LED7, DEBUG_LED8, DEBUG_LED9, DEBUG_LED10,				
-				PHY_TX,PHY_RX,RX_DV,PHY_TX_CLOCK,PHY_TX_EN, J15_5, J15_6, 
-				PHY_RX_CLOCK,PHY_CLK125,PHY_MDIO,PHY_MDC,PHY_INT_N,PHY_RESET_N,CLK_25MHZ,
-				MODE2,SCK, SI, SO, CS, NCONFIG,	ANT_TUNE );
-				
+module Hermes(
+	//clock afc
+  input _122MHz,                 //122.88MHz from VCXO
+  input  OSC_10MHZ,              //10MHz reference in 
+  output FPGA_PLL,               //122.88MHz VCXO contol voltage
+
+  //attenuator (DAT-31-SP+)
+  output ATTN_DATA,              //data for input attenuator
+  output ATTN_CLK,               //clock for input attenuator 
+  output ATTN_LE,                //Latch enable for input attenuator
+
+  //rx adc (LTC2208)
+  input  [15:0]INA,              //samples from LTC2208
+  input  LTC2208_122MHz,         //122.88MHz from LTC2208_122MHz pin 
+  input  OVERFLOW,               //high indicates LTC2208 have overflow
+  output RAND,            //high turns ramdom on
+  output PGA,            //high turns LTC2208 internal preamp on
+  output DITH,            //high turns LTC2208 dither on 
+  output SHDN,            //x shuts LTC2208 off
+
+  //tx adc (AD9744ARU)
+   output reg  DAC_ALC,           //sets Tx DAC output level
+  output reg signed [13:0]DACD,  //Tx DAC data bus
+  
+  //audio codec (TLV320AIC23B)
+  output CBCLK,               
+  output CLRCIN, 
+  output CLRCOUT,
+  output CDIN,                   
+  output CMCLK,                  //Master Clock to TLV320 
+  output CMODE,                  //sets TLV320 mode - I2C or SPI
+  output nCS,                    //chip select on TLV320
+  output MOSI,                   //SPI data for TLV320
+  output SSCK,                   //SPI clock for TLV320
+  input  CDOUT,                  //Mic data from TLV320  
+  
+  //phy rgmii (KSZ9021RL)
+  output [3:0]PHY_TX,
+  output PHY_TX_EN,              //PHY Tx enable
+  output PHY_TX_CLOCK,           //PHY Tx data clock
+  input  [3:0]PHY_RX,     
+  input  RX_DV,                  //PHY has data flag
+  input  PHY_RX_CLOCK,           //PHY Rx data clock
+  input  PHY_CLK125,             //125MHz clock from PHY PLL
+  input  PHY_INT_N,              //interrupt (n.c.)
+  output PHY_RESET_N,
+  input  CLK_25MHZ,              //25MHz clock (n.c.)  
+  
+	//phy mdio (KSZ9021RL)
+	inout  PHY_MDIO,               //data line to PHY MDIO
+	output PHY_MDC,                //2.5MHz clock to PHY MDIO
+  
+	//eeprom (25AA02E48T-I/OT)
+	output 	SCK, 							// clock on MAC EEPROM
+	output 	SI,							// serial in on MAC EEPROM
+	input   	SO, 							// SO on MAC EEPROM
+	output  	CS,							// CS on MAC EEPROM
+	
+  //eeprom (M25P16VMW6G)  
+  output NCONFIG,                //when high causes FPGA to reload from eeprom EPCS16	
+  
+  //12 bit adc's (ADC78H90CIMT)
+  output ADCMOSI,                
+  output ADCCLK,
+  input  ADCMISO,
+  output nADCCS, 
+ 
+  //alex/apollo spi
+  output SPI_SDO,                //SPI data to Alex or Apollo 
+  input  SPI_SDI,                //SPI data from Apollo 
+  output SPI_SCK,                //SPI clock to Alex or Apollo 
+  output J15_5,                  //SPI Rx data load strobe to Alex / Apollo enable
+  output J15_6,                  //SPI Tx data load strobe to Alex / Apollo ~reset 
+  
+  //misc. i/o
+  input  PTT,                    //PTT active low
+  input  KEY_DOT,                //dot input from J11
+  input  KEY_DASH,               //dash input from J11
+  output FPGA_PTT,               //high turns Q4 on for PTTOUT
+  input  MODE2,                  //jumper J13 on Hermes, 1 if removed
+  input  ANT_TUNE,               //atu
+  output IO1,                    //high to mute AF amp    
+  input  IO2,                    //PTT, used by Apollo 
+  
+  //user digital inputs
+  input  IO4,                    
+  input  IO5,
+  input  IO6,
+  input  IO8,
+  
+  //user outputs
+  output USEROUT0,               
+  output USEROUT1,
+  output USEROUT2,
+  output USEROUT3,
+  output USEROUT4,
+  output USEROUT5,
+  output USEROUT6,
+  
+    //debug led's
+  output Status_LED,      
+  output DEBUG_LED1,             
+  output DEBUG_LED2,
+  output DEBUG_LED3,
+  output DEBUG_LED4,
+  output DEBUG_LED5,
+  output DEBUG_LED6,
+  output DEBUG_LED7,
+  output DEBUG_LED8,
+  output DEBUG_LED9,
+  output DEBUG_LED10
+);
+
+assign USEROUT0 = IF_OC[0];					
+assign USEROUT1 = IF_OC[1];  				
+assign USEROUT2 = IF_OC[2]; 					
+assign USEROUT3 = IF_OC[3]; 		
+assign USEROUT4 = IF_OC[4];
+assign USEROUT5 = IF_OC[5];
+assign USEROUT6 = IF_OC[6];
+
+assign RAND = IF_RAND;
+assign PGA = 0;								// 1 = gain of 3dB, 0 = gain of 0dB
+assign DITH = IF_DITHER;
+assign SHDN = 1'b0;				   		// normal LTC2208 operation
+
+assign NCONFIG = IP_write_done || reset_FPGA;
+
+// enable AF Amp
+assign  IO1 = 1'b0;  						// low to enable, high to mute
+
 parameter M_TPD   = 4;
 parameter IF_TPD  = 2;
 
@@ -191,116 +312,8 @@ localparam RX_FIFO_SZ  = 4096; 			// 16 by 4096 deep RX FIFO
 localparam TX_FIFO_SZ  = 1024; 			// 16 by 1024 deep TX FIFO  
 localparam SP_FIFO_SZ  = 16384; 			// 16 by 16,384 deep SP FIFO
 
-localparam read_reg_address = 5'd31; 	// PHY register to read from - gives connect speed and fully duplex		
+localparam read_reg_address = 5'd31; 	// PHY register to read from - gives connect speed and fully duplex	
 
-input wire [15:0]INA;						// samples from LTC2208
-input wire LTC2208_122MHz;					// 122.88MHz from LTC2208_122MHz pin 
-input wire _122MHz;				   		// 122.88MHz from VCXO
-output wire CMCLK; 			   			// Master Clock to TLV320 
-output wire Status_LED;             	// FPGA Status LED
-output wire CBCLK;  							// Clocks to TLV320AIC23B
-output wire CLRCIN, CLRCOUT;
-output wire CDIN;                   	// Rx data to TLV320AIC23B
-output wire CMODE;							// sets TLV320 mode - I2C or SPI
-output wire nCS;								// chip select on TLV320
-output wire MOSI;								// SPI data for TLV320
-output wire SSCK;								// SPI clock for TLV320
-input  wire PTT;           		    	// PTT active low
-input  wire CDOUT;							// Mic data from TLV320
-input  wire KEY_DOT;							// dot input from J11
-input  wire KEY_DASH;						// dash input from J11
-output SPI_SDO;								// SPI data to Alex or MOSI to Apollo 
-input  SPI_SDI;								// SPI data from Apollo ****** PIN NOT DEFINED ******
-output SPI_SCK;								// SPI clock to Alex or SCLK to Apollo 
-output J15_5;									// SPI Rx data load strobe to Alex or Apollo /RESET   ***** was enable 
-output J15_6;									// SPI Tx data load strobe to Alex or Apollo ENABLE   ***** was reset
-output ATTN_CLK;								// clock for input attenuator 
-output ATTN_DATA;								// data for input attenuator
-output ATTN_LE;								// Latch enable for input attenuator
-output wire RAND;								// high turns ramdom on
-output wire PGA;								// high turns LTC2208 internal preamp on
-output wire DITH;								// high turns LTC2208 dither on 
-output wire SHDN;								// x shuts LTC2208 off
-input  wire OVERFLOW;						// high indicates LTC2208 have overflow
-output wire FPGA_PTT;						// high turns Q4 on for PTTOUT
-output wire USEROUT0;						// user outputs
-output wire USEROUT1;
-output wire USEROUT2;
-output wire USEROUT3;
-output wire USEROUT4;
-output wire USEROUT5;
-output wire USEROUT6;
-output wire DEBUG_LED1;						// debug LEDs
-output wire DEBUG_LED2;
-output wire DEBUG_LED3;
-output wire DEBUG_LED4;
-output wire DEBUG_LED5;
-output wire DEBUG_LED6;
-output wire DEBUG_LED7;
-output wire DEBUG_LED8;
-output wire DEBUG_LED9;
-output wire DEBUG_LED10;
-input  wire OSC_10MHZ;						// 10MHz reference in	
-output wire FPGA_PLL;						// 122.88MHz VCXO contol voltage
-output reg  DAC_ALC;							// sets Tx DAC output level
-output reg signed [13:0]DACD;				// Tx DAC data bus
-output wire ADCMOSI;							// 12 bit ADC contols 
-output wire ADCCLK;
-input  wire ADCMISO;
-output wire nADCCS;
-output  wire IO1;								// high to mute AF amp				
-input  wire IO2;								// PTT, used by Apollo			
-input  wire IO4;								// user digital inputs
-input  wire IO5;
-input  wire IO6;
-input  wire IO8;
-
-// PHY
-output  wire [3:0]PHY_TX;
-input   wire [3:0]PHY_RX;		   
-input	wire     RX_DV;						// PHY has data flag
-output	wire     PHY_TX_CLOCK;			// PHY Tx data clock
-output	wire	 PHY_TX_EN;					// PHY Tx enable
-input	wire	 PHY_RX_CLOCK;      			// PHY Rx data clock
-input	wire     PHY_CLK125;					// 125MHz clock from PHY PLL
-inout	wire     PHY_MDIO;					// data line to PHY MDIO
-output	wire 	 PHY_MDC;					// 2.5MHz clock to PHY MDIO
-input	wire 	 PHY_INT_N;	
-output	wire     PHY_RESET_N;
-input	wire 	 CLK_25MHZ;						// 25MHz clock 
-
-
-input wire MODE2;								// Not currently used
-
-
-assign RAND = IF_RAND;
-assign PGA = 0;								// 1 = gain of 3dB, 0 = gain of 0dB
-assign DITH = IF_DITHER;
-assign SHDN = 1'b0;							// normal LTC2208 operation
-
-// MAC EEPROM
-output wire		SCK; 							// clock on MAC EEPROM
-output wire		SI;							// serial in on MAC EEPROM
-input  wire 	SO; 							// SO on MAC EEPROM
-output wire 	CS;							// CS on MAC EEPROM
-
-// Reload FPGA 
-output wire 	NCONFIG;						// when high causes FPGA to reload from EPCS16 
-assign NCONFIG = IP_write_done || reset_FPGA; 
-
-// ATU
-input wire 	ANT_TUNE;
-
-assign USEROUT0 = IF_OC[0];					
-assign USEROUT1 = IF_OC[1];  				
-assign USEROUT2 = IF_OC[2]; 					
-assign USEROUT3 = IF_OC[3]; 		
-assign USEROUT4 = IF_OC[4];
-assign USEROUT5 = IF_OC[5];
-assign USEROUT6 = IF_OC[6];
-
-// enable AF Amp
-assign  IO1 = 1'b0;  						// low to enable, high to mute
 
 //--------------------------------------------------------------
 // Reset Lines - C122_rst, IF_rst
@@ -827,13 +840,13 @@ begin
 	
 	ARP:	begin	
 				Send_ARP <= 1'b1;
-				if (ARP_sent || times_up == 100000) state <= IDLE;
+				if (ARP_sent || times_up > 100000) state <= IDLE;
 				times_up <= times_up + 17'd1;
 			end
 			
 	PING:	begin
 				ping_reply <= 1'b1;	
-				if (ping_sent || times_up == 100000) state <= IDLE;
+				if (ping_sent || times_up > 100000) state <= IDLE;
 				times_up <= times_up + 17'd1;
 			end 
 
@@ -2000,7 +2013,7 @@ always @ (posedge C122_clk) begin
 
 // ---------------------------- use the following for 5 receives ----------------------------------------------
 
-//		// find max freq of the five receiver frequencies 
+		// find max freq of the five receiver frequencies 
 		if (C122_frequency_HZ[1] > C122_frequency_HZ[0] && C122_frequency_HZ[1] >= C122_frequency_HZ[2] &&
 			 C122_frequency_HZ[1] >= C122_frequency_HZ[3]  && C122_frequency_HZ[1] >= C122_frequency_HZ[4] ) 
 			 C122_freq_max <= C122_frequency_HZ[1];
