@@ -1,0 +1,2 @@
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_mRX\bin\Release\PowerSDR_mRX_v3.0.x.0_Setup.msi
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_mRX\bin\Release\PowerSDR_mRX_v3.0.x.0_Setup.wixpdb
