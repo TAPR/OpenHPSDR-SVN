@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}</ProjectGuid>
+    <RootNamespace>DttSP</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../temp/Debug/DttSP\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../temp/Debug/DttSP\</IntDir>
+    <PreLinkEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreLinkEventUseInBuild>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../temp/Release/DttSP\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../temp/Release/DttSP\</IntDir>
+    <PreBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</PreBuildEventUseInBuild>
+    <PreLinkEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</PreLinkEventUseInBuild>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</PostBuildEventUseInBuild>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/D_WIN32_WINNT=0x0500 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\win;..\FFTW;..\specHPSDR;..\pthread;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;DttSP_EXPORTS;__CLEANUP_C;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winMM.lib;libfftw3f-3.lib;specHPSDR.lib;pthreadVC.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../../bin/Debug/DttSP.dll</OutputFile>
+      <ModuleDefinitionFile>./DttSP.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)DttSP.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(OutDir)DttSP.lib</ImportLibrary>
+      <TargetMachine>NotSet</TargetMachine>
+      <AdditionalLibraryDirectories>../specHPSDR;../Release</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/D_WIN32_WINNT=0x0500 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>.\win;..\specHPSDR;..\Release;..\FFTW;..\pthread;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;NDEBUG;_WINDOWS;_USRDLL;DttSP_EXPORTS;__CLEANUP_C;_WIN32_WINNT=0x0500;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winMM.lib;libfftw3f-3.lib;specHPSDR.lib;pthreadVC.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../../bin/Release/DttSP.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>./DttSP.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(ProjectName).map</MapFileName>
+      <MapExports>false</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>
+      </OptimizeReferences>
+      <EnableCOMDATFolding>
+      </EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(IntDir)DttSP.lib</ImportLibrary>
+      <TargetMachine>NotSet</TargetMachine>
+      <AdditionalLibraryDirectories>../specHPSDR;../Release</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="amd.c" />
+    <ClCompile Include="anf.c" />
+    <ClCompile Include="anr.c" />
+    <ClCompile Include="banal.c" />
+    <ClCompile Include="bufvec.c" />
+    <ClCompile Include="compress.c" />
+    <ClCompile Include="correctIQ.c" />
+    <ClCompile Include="cwtones.c" />
+    <ClCompile Include="cxops.c" />
+    <ClCompile Include="dcblock.c" />
+    <ClCompile Include="diversity.c" />
+    <ClCompile Include="dttspagc.c" />
+    <ClCompile Include="fastrig.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="filt2p2z.c" />
+    <ClCompile Include="filter.c" />
+    <ClCompile Include="filterbank.c" />
+    <ClCompile Include="fm_demod.c" />
+    <ClCompile Include="graphiceq.c" />
+    <ClCompile Include="hilbert.c" />
+    <ClCompile Include="isoband.c" />
+    <ClCompile Include="keyd.c" />
+    <ClCompile Include="keyer.c" />
+    <ClCompile Include="keyerio.c" />
+    <ClCompile Include="lmadf.c" />
+    <ClCompile Include="malloc16.c" />
+    <ClCompile Include="meter.c" />
+    <ClCompile Include="noiseblanker.c" />
+    <ClCompile Include="oscillator.c" />
+    <ClCompile Include="ovsv.c" />
+    <ClCompile Include="resample.c" />
+    <ClCompile Include="resampleF.c" />
+    <ClCompile Include="ringb.c" />
+    <ClCompile Include="sdr.c" />
+    <ClCompile Include="sdrexport.c" />
+    <ClCompile Include="spectrum.c" />
+    <ClCompile Include="speechproc.c" />
+    <ClCompile Include="splitfields.c" />
+    <ClCompile Include="spottone.c" />
+    <ClCompile Include="update.c" />
+    <ClCompile Include="wcpAGC.c" />
+    <ClCompile Include="window.c" />
+    <ClCompile Include="winmain.c" />
+    <ClCompile Include="wscompand.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="amd.h" />
+    <ClInclude Include="anf.h" />
+    <ClInclude Include="anr.h" />
+    <ClInclude Include="banal.h" />
+    <ClInclude Include="bufvec.h" />
+    <ClInclude Include="common.h" />
+    <ClInclude Include="complex.h" />
+    <ClInclude Include="compress.h" />
+    <ClInclude Include="correctIQ.h" />
+    <ClInclude Include="cwtones.h" />
+    <ClInclude Include="cxops.h" />
+    <ClInclude Include="datatypes.h" />
+    <ClInclude Include="dcblock.h" />
+    <ClInclude Include="defs.h" />
+    <ClInclude Include="diversity.h" />
+    <ClInclude Include="dttspagc.h" />
+    <ClInclude Include="fastrig.h" />
+    <ClInclude Include="..\Fftw\fftw3.h" />
+    <ClInclude Include="fftw3_fix.h" />
+    <ClInclude Include="filt2p2z.h" />
+    <ClInclude Include="filter.h" />
+    <ClInclude Include="filterbank.h" />
+    <ClInclude Include="fm_demod.h" />
+    <ClInclude Include="fromsys.h" />
+    <ClInclude Include="graphiceq.h" />
+    <ClInclude Include="hilbert.h" />
+    <ClInclude Include="iosdr.h" />
+    <ClInclude Include="isoband.h" />
+    <ClInclude Include="keyer.h" />
+    <ClInclude Include="lmadf.h" />
+    <ClInclude Include="local.h" />
+    <ClInclude Include="malloc16.h" />
+    <ClInclude Include="meter.h" />
+    <ClInclude Include="noiseblanker.h" />
+    <ClInclude Include="oscillator.h" />
+    <ClInclude Include="ovsv.h" />
+    <ClInclude Include="..\pthread\pthread.h" />
+    <ClInclude Include="resample.h" />
+    <ClInclude Include="resampleF.h" />
+    <ClInclude Include="ringb.h" />
+    <ClInclude Include="..\pthread\sched.h" />
+    <ClInclude Include="sdrexport.h" />
+    <ClInclude Include="..\pthread\semaphore.h" />
+    <ClInclude Include="spectrum.h" />
+    <ClInclude Include="speechproc.h" />
+    <ClInclude Include="splitfields.h" />
+    <ClInclude Include="spottone.h" />
+    <ClInclude Include="update.h" />
+    <ClInclude Include="wcpAGC.h" />
+    <ClInclude Include="window.h" />
+    <ClInclude Include="wscompand.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\pthread\pthread.vcxproj">
+      <Project>{7889761c-c21d-4ddd-95d7-86e11efa9005}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="banal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bufvec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="compress.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="correctIQ.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cwtones.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cxops.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dcblock.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diversity.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dttspagc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fastrig.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filt2p2z.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filterbank.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fm_demod.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="graphiceq.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hilbert.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="isoband.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="keyd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="keyer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="keyerio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lmadf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="malloc16.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="meter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="noiseblanker.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="oscillator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ovsv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="resample.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="resampleF.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ringb.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdrexport.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spectrum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="speechproc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="splitfields.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spottone.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="update.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wcpAGC.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="window.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="winmain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wscompand.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="anf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="anr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="amd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="banal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bufvec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="complex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compress.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="correctIQ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cwtones.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cxops.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="datatypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcblock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diversity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dttspagc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fastrig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Fftw\fftw3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fftw3_fix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="filt2p2z.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="filter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="filterbank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fm_demod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fromsys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="graphiceq.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hilbert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iosdr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="isoband.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="keyer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lmadf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="local.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="malloc16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="meter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="noiseblanker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="oscillator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ovsv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pthread\pthread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resampleF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ringb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pthread\sched.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdrexport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pthread\semaphore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spectrum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="speechproc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="splitfields.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spottone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="update.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wcpAGC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wscompand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="anf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="anr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="amd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+</Project>
