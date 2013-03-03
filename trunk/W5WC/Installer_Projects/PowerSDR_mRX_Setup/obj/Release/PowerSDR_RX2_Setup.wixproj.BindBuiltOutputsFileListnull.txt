@@ -1,0 +1,2 @@
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_RX2Setup\bin\Release\PowerSDR_RX2_v2.2.x.0_(W5WC)_Setup.msi
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_RX2Setup\bin\Release\PowerSDR_RX2_v2.2.x.0_(W5WC)_Setup.wixpdb

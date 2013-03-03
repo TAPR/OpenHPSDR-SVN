@@ -1,0 +1,6 @@
+obj\Release\Product.wixobj
+obj\Release\PowerSDR_RX2_Setup.wixproj.BindContentsFileListnull.txt
+obj\Release\PowerSDR_RX2_Setup.wixproj.BindOutputsFileListnull.txt
+obj\Release\PowerSDR_RX2_Setup.wixproj.BindBuiltOutputsFileListnull.txt
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_RX2Setup\bin\Release\PowerSDR_RX2_v2.2.x.0_(W5WC)_Setup.msi
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_RX2Setup\bin\Release\PowerSDR_RX2_v2.2.x.0_(W5WC)_Setup.wixpdb
