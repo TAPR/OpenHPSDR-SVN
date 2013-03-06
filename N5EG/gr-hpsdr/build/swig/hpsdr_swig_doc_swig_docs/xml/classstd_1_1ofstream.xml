@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1ofstream" kind="class" prot="public">
     <compoundname>std::ofstream</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::basic_ofstream&lt; char &gt;</basecompoundref>
@@ -8,52 +8,52 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="457">
+      <node id="499">
         <label>std::basic_ofstream&lt; char &gt;</label>
-        <childnode refid="458" relation="public-inheritance">
+        <childnode refid="500" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="456">
+      <node id="498">
         <label>std::ofstream</label>
-        <childnode refid="457" relation="public-inheritance">
+        <childnode refid="499" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="458">
+      <node id="500">
         <label>std::basic_ostream&lt; Char &gt;</label>
-        <childnode refid="459" relation="public-inheritance">
+        <childnode refid="501" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="459">
+      <node id="501">
         <label>std::basic_ios&lt; Char &gt;</label>
-        <childnode refid="460" relation="public-inheritance">
+        <childnode refid="502" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="460">
+      <node id="502">
         <label>std::ios_base</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="462">
+      <node id="504">
         <label>std::basic_ofstream&lt; char &gt;</label>
-        <childnode refid="463" relation="public-inheritance">
+        <childnode refid="505" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="461">
+      <node id="503">
         <label>std::ofstream</label>
-        <childnode refid="462" relation="public-inheritance">
+        <childnode refid="504" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="463">
+      <node id="505">
         <label>std::basic_ostream&lt; Char &gt;</label>
-        <childnode refid="464" relation="public-inheritance">
+        <childnode refid="506" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="464">
+      <node id="506">
         <label>std::basic_ios&lt; Char &gt;</label>
-        <childnode refid="465" relation="public-inheritance">
+        <childnode refid="507" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="465">
+      <node id="507">
         <label>std::ios_base</label>
       </node>
     </collaborationgraph>

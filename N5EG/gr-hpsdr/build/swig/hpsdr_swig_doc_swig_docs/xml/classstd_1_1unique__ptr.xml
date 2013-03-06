@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1unique__ptr" kind="class" prot="public">
     <compoundname>std::unique_ptr</compoundname>
     <templateparamlist>
@@ -44,12 +44,12 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="570">
+      <node id="626">
         <label>T</label>
       </node>
-      <node id="569">
+      <node id="625">
         <label>std::unique_ptr&lt; T &gt;</label>
-        <childnode refid="570" relation="usage">
+        <childnode refid="626" relation="usage">
           <edgelabel>ptr</edgelabel>
         </childnode>
       </node>

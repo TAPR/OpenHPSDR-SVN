@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1stack" kind="class" prot="public">
     <compoundname>std::stack</compoundname>
     <templateparamlist>
@@ -29,12 +29,12 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="543">
+      <node id="595">
         <label>T</label>
       </node>
-      <node id="542">
+      <node id="594">
         <label>std::stack&lt; T &gt;</label>
-        <childnode refid="543" relation="usage">
+        <childnode refid="595" relation="usage">
           <edgelabel>elements</edgelabel>
         </childnode>
       </node>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1ios__base_1_1failure" kind="class" prot="public">
     <compoundname>std::ios_base::failure</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::exception</basecompoundref>
@@ -8,22 +8,22 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="296">
+      <node id="325">
         <label>std::ios_base::failure</label>
-        <childnode refid="297" relation="public-inheritance">
+        <childnode refid="326" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="297">
+      <node id="326">
         <label>std::exception</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="298">
+      <node id="327">
         <label>std::ios_base::failure</label>
-        <childnode refid="299" relation="public-inheritance">
+        <childnode refid="328" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="299">
+      <node id="328">
         <label>std::exception</label>
       </node>
     </collaborationgraph>

@@ -515,10 +515,12 @@ IQBuf_t HermesProxy::GetRxIQ()		// called by HermesNB to pickup any RxIQ
 //    96000			2				3.5
 //   192000			1				4
 //   192000			2				7
+//   384000			1				8
+//   384000			2				14
 //
 //
 // If no data to transmit, periodically send a frame so that basic control registers
-// get updated.
+// get updated.   [Hooks left commented for future use].
 
 
 void HermesProxy::ScheduleTxFrame(unsigned long RxBufCount) // Transmit one ethernet frame to Hermes if ready.
@@ -545,6 +547,13 @@ void HermesProxy::ScheduleTxFrame(unsigned long RxBufCount) // Transmit one ethe
 		SendTxIQ();
 		return;
 	    }
+
+	  if(RxSampleRate == 384000)	// one Tx frame for each eight Tx frames
+	    if((RxBufCount & 0x7) == 0)
+	    {
+		SendTxIQ();
+		return;
+	    }
 	}
 	else				// two receivers
 	{
@@ -564,6 +573,13 @@ void HermesProxy::ScheduleTxFrame(unsigned long RxBufCount) // Transmit one ethe
 	
 	  if(RxSampleRate == 192000)			// one Tx frame for each seven Tx frames
 	    if((RxBufCount % 0x7) == 0)
+	    {
+		SendTxIQ();
+		return;
+	    }
+	
+	  if(RxSampleRate == 384000)			// one Tx frame for each fourteen Tx frames
+	    if((RxBufCount % 14) == 0)
 	    {
 		SendTxIQ();
 		return;
@@ -636,6 +652,8 @@ void HermesProxy::BuildControlRegs(unsigned RegNum, RawBuf_t outbuf)
 	{
 	  case 0:
 	    Speed = ClockSource;	// Set clock Source from user input
+	    if(RxSampleRate == 384000)
+		Speed |= 0x03;
 	    if(RxSampleRate == 192000)
 		Speed |= 0x02;
 	    if(RxSampleRate == 96000)

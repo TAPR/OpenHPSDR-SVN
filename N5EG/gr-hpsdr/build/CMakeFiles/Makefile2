@@ -43,6 +43,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/tom/gr-hpsdr
 
@@ -170,8 +173,8 @@ swig/preinstall:
 # Target rules for target swig/CMakeFiles/_hpsdr_swig.dir
 
 # All Build rule for target.
-swig/CMakeFiles/_hpsdr_swig.dir/all: swig/CMakeFiles/_hpsdr_swig_swig_tag.dir/all
 swig/CMakeFiles/_hpsdr_swig.dir/all: lib/CMakeFiles/gnuradio-hpsdr.dir/all
+swig/CMakeFiles/_hpsdr_swig.dir/all: swig/CMakeFiles/_hpsdr_swig_swig_tag.dir/all
 swig/CMakeFiles/_hpsdr_swig.dir/all: swig/CMakeFiles/_hpsdr_swig_doc_tag.dir/all
 	$(MAKE) -f swig/CMakeFiles/_hpsdr_swig.dir/build.make swig/CMakeFiles/_hpsdr_swig.dir/depend
 	$(MAKE) -f swig/CMakeFiles/_hpsdr_swig.dir/build.make swig/CMakeFiles/_hpsdr_swig.dir/build

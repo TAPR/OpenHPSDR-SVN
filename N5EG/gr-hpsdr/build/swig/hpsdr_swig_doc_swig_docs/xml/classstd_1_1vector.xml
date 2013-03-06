@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1vector" kind="class" prot="public">
     <compoundname>std::vector</compoundname>
     <innerclass refid="classstd_1_1vector_1_1const__iterator" prot="public">std::vector::const_iterator</innerclass>
@@ -33,12 +33,12 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="576">
+      <node id="646">
         <label>T</label>
       </node>
-      <node id="575">
+      <node id="645">
         <label>std::vector&lt; T &gt;</label>
-        <childnode refid="576" relation="usage">
+        <childnode refid="646" relation="usage">
           <edgelabel>elements</edgelabel>
         </childnode>
       </node>

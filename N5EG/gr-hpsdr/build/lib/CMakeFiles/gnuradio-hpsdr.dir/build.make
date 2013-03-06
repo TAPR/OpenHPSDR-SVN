@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/tom/gr-hpsdr
 
@@ -127,9 +130,9 @@ gnuradio__hpsdr_EXTERNAL_OBJECTS =
 lib/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o
 lib/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o
 lib/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o
+lib/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/build.make
 lib/libgnuradio-hpsdr.so: /usr/local/lib/libgruel.so
 lib/libgnuradio-hpsdr.so: /usr/local/lib/libgnuradio-core.so
-lib/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/build.make
 lib/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX shared library libgnuradio-hpsdr.so"
 	cd /home/tom/gr-hpsdr/build/lib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gnuradio-hpsdr.dir/link.txt --verbose=$(VERBOSE)

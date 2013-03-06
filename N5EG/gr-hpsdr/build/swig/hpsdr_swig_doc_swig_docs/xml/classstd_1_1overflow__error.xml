@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1overflow__error" kind="class" prot="public">
     <compoundname>std::overflow_error</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::runtime_error</basecompoundref>
@@ -8,32 +8,32 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="491">
+      <node id="533">
         <label>std::runtime_error</label>
-        <childnode refid="492" relation="public-inheritance">
+        <childnode refid="534" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="492">
+      <node id="534">
         <label>std::exception</label>
       </node>
-      <node id="490">
+      <node id="532">
         <label>std::overflow_error</label>
-        <childnode refid="491" relation="public-inheritance">
+        <childnode refid="533" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="494">
+      <node id="536">
         <label>std::runtime_error</label>
-        <childnode refid="495" relation="public-inheritance">
+        <childnode refid="537" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="495">
+      <node id="537">
         <label>std::exception</label>
       </node>
-      <node id="493">
+      <node id="535">
         <label>std::overflow_error</label>
-        <childnode refid="494" relation="public-inheritance">
+        <childnode refid="536" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

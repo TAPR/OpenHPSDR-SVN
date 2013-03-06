@@ -154,6 +154,10 @@ CMAKE_SHARED_LINKER_FLAGS_RELEASE:STRING=
 //Flags used by the linker during Release with Debug Info builds.
 CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
+//If set, runtime paths are not added when installing shared libraries,
+// but are added when building.
+CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
+
 //If set, runtime paths are not added when using shared libraries.
 CMAKE_SKIP_RPATH:BOOL=NO
 
@@ -200,7 +204,7 @@ PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python
 PYTHON_INCLUDE_DIR:PATH=/usr/include/python2.7
 
 //Path to a library.
-PYTHON_LIBRARY:FILEPATH=/usr/lib/libpython2.7.so
+PYTHON_LIBRARY:FILEPATH=/usr/lib/python3.2/config/libpython3.2.so
 
 //Path to a file.
 SWIG_DIR:PATH=/usr/share/swig2.0
@@ -209,10 +213,10 @@ SWIG_DIR:PATH=/usr/share/swig2.0
 SWIG_EXECUTABLE:FILEPATH=/usr/bin/swig2.0
 
 //Swig version
-SWIG_VERSION:STRING=2.0.4
+SWIG_VERSION:STRING=2.0.7
 
 //Dependencies for the target
-_hpsdr_swig_LIB_DEPENDS:STATIC=general;/usr/lib/libpython2.7.so;general;gnuradio-hpsdr;
+_hpsdr_swig_LIB_DEPENDS:STATIC=general;/usr/lib/python3.2/config/libpython3.2.so;general;gnuradio-hpsdr;
 
 //Dependencies for the target
 gnuradio-hpsdr_LIB_DEPENDS:STATIC=general;/usr/local/lib/libgruel.so;general;/usr/local/lib/libgnuradio-core.so;
@@ -233,7 +237,7 @@ Boost_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_LIBRARY_DIRS
 Boost_LIBRARY_DIRS-ADVANCED:INTERNAL=1
 //The library version string for boost libraries
-Boost_LIB_VERSION:INTERNAL=1_46_1
+Boost_LIB_VERSION:INTERNAL=1_49
 //Whether the Boost UNIT_TEST_FRAMEWORK library found
 Boost_UNIT_TEST_FRAMEWORK_FOUND:INTERNAL=ON
 //ADVANCED property for variable: Boost_UNIT_TEST_FRAMEWORK_LIBRARY
@@ -243,7 +247,7 @@ Boost_UNIT_TEST_FRAMEWORK_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_UNIT_TEST_FRAMEWORK_LIBRARY_RELEASE
 Boost_UNIT_TEST_FRAMEWORK_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //The version number for boost libraries
-Boost_VERSION:INTERNAL=104601
+Boost_VERSION:INTERNAL=104900
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_BUILD_TOOL
@@ -257,7 +261,7 @@ CMAKE_CACHE_MAJOR_VERSION:INTERNAL=2
 //Minor version of cmake used to create the current loaded cache
 CMAKE_CACHE_MINOR_VERSION:INTERNAL=8
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=7
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=9
 //ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
 CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
@@ -353,6 +357,8 @@ CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_SHARED_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_SKIP_INSTALL_RPATH
+CMAKE_SKIP_INSTALL_RPATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SKIP_RPATH
 CMAKE_SKIP_RPATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STRIP
@@ -368,17 +374,19 @@ DOXYGEN_DOT_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DOXYGEN_EXECUTABLE
 DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
 //Details about finding Doxygen
-FIND_PACKAGE_MESSAGE_DETAILS_Doxygen:INTERNAL=[/usr/bin/doxygen][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_Doxygen:INTERNAL=[/usr/bin/doxygen][v1.8.1.2()]
 //Details about finding GNURADIO_CORE
 FIND_PACKAGE_MESSAGE_DETAILS_GNURADIO_CORE:INTERNAL=[/usr/local/lib/libgnuradio-core.so][/usr/local/include/gnuradio][v()]
 //Details about finding GRUEL
 FIND_PACKAGE_MESSAGE_DETAILS_GRUEL:INTERNAL=[/usr/local/lib/libgruel.so][/usr/local/include][v()]
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.26()]
 //Details about finding PythonInterp
 FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python][v2.7.3()]
 //Details about finding PythonLibs
-FIND_PACKAGE_MESSAGE_DETAILS_PythonLibs:INTERNAL=[/usr/lib/libpython2.7.so][/usr/include/python2.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PythonLibs:INTERNAL=[/usr/lib/python3.2/config/libpython3.2.so][/usr/include/python2.7][v2.7.3()]
 //Details about finding SWIG
-FIND_PACKAGE_MESSAGE_DETAILS_SWIG:INTERNAL=[/usr/bin/swig2.0][/usr/share/swig2.0][v2.0.4()]
+FIND_PACKAGE_MESSAGE_DETAILS_SWIG:INTERNAL=[/usr/bin/swig2.0][/usr/share/swig2.0][v2.0.7()]
 //ADVANCED property for variable: GNURADIO_CORE_INCLUDE_DIRS
 GNURADIO_CORE_INCLUDE_DIRS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GNURADIO_CORE_LIBRARIES
@@ -418,7 +426,7 @@ PC_GNURADIO_CORE_STATIC_LIBS:INTERNAL=
 PC_GNURADIO_CORE_STATIC_LIBS_L:INTERNAL=
 PC_GNURADIO_CORE_STATIC_LIBS_OTHER:INTERNAL=
 PC_GNURADIO_CORE_STATIC_LIBS_PATHS:INTERNAL=
-PC_GNURADIO_CORE_VERSION:INTERNAL=3.6.3git
+PC_GNURADIO_CORE_VERSION:INTERNAL=3.6.3rc0
 PC_GNURADIO_CORE_gnuradio-core_INCLUDEDIR:INTERNAL=
 PC_GNURADIO_CORE_gnuradio-core_LIBDIR:INTERNAL=
 PC_GNURADIO_CORE_gnuradio-core_PREFIX:INTERNAL=
@@ -452,7 +460,7 @@ PC_GRUEL_STATIC_LIBS:INTERNAL=
 PC_GRUEL_STATIC_LIBS_L:INTERNAL=
 PC_GRUEL_STATIC_LIBS_OTHER:INTERNAL=
 PC_GRUEL_STATIC_LIBS_PATHS:INTERNAL=
-PC_GRUEL_VERSION:INTERNAL=3.6.3git
+PC_GRUEL_VERSION:INTERNAL=3.6.3rc0
 PC_GRUEL_gruel_INCLUDEDIR:INTERNAL=
 PC_GRUEL_gruel_LIBDIR:INTERNAL=
 PC_GRUEL_gruel_PREFIX:INTERNAL=
@@ -463,8 +471,6 @@ PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PYTHON_INCLUDE_DIR
 PYTHON_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//Path to where Python.h is found (deprecated)
-PYTHON_INCLUDE_PATH:INTERNAL=/usr/include/python2.7
 //ADVANCED property for variable: PYTHON_LIBRARY
 PYTHON_LIBRARY-ADVANCED:INTERNAL=1
 __pkg_config_checked_PC_GNURADIO_CORE:INTERNAL=1

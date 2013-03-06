@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1set" kind="class" prot="public">
     <compoundname>std::set</compoundname>
     <innerclass refid="classstd_1_1set_1_1const__iterator" prot="public">std::set::const_iterator</innerclass>
@@ -33,12 +33,12 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="537">
+      <node id="589">
         <label>K</label>
       </node>
-      <node id="536">
+      <node id="588">
         <label>std::set&lt; K &gt;</label>
-        <childnode refid="537" relation="usage">
+        <childnode refid="589" relation="usage">
           <edgelabel>keys</edgelabel>
         </childnode>
       </node>
