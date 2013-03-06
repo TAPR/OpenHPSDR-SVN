@@ -35,6 +35,7 @@ void initBlanker(ANB a)
 	a->trans_count = (int)(a->tau * a->samplerate);
     a->hang_count = (int)(a->hangtime * a->samplerate);
     a->adv_count = (int)(a->advtime * a->samplerate);
+    a->count = 0;
     a->in_idx = a->trans_count + a->adv_count;
     a->out_idx = 0;
     a->coef = PI / a->trans_count;

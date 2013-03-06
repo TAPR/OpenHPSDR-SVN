@@ -32,8 +32,9 @@ int main(int argc, char **argv) {
 	//	fprintf(stderr,"fullpath=%s\n",fullpath);
 	//	exit(0);
 	if ((wisdom_file = fopen(fullpath,"w")) != NULL) {
+		fprintf(stderr,"Please wait patiently for this process to finish.\n");
 		fprintf(stderr,"Wisdom file successfully opened\n");
-		fprintf(stderr,"Checking forward fft's up to 8192\n");
+		fprintf(stderr,"Checking forward fft's up to 32768\n");
 		fprintf(stderr,"64 Forward\n");
 		ptmp = fftwf_plan_dft_1d(64,in,out,FFTW_FORWARD,
 			FFTW_PATIENT);
@@ -97,7 +98,7 @@ int main(int argc, char **argv) {
 		fftwf_destroy_plan(ptmp); 
 
 
-		fprintf(stderr,"Checking inverse fft's up to 8192\n");
+		fprintf(stderr,"Checking inverse fft's up to 32768\n");
 
 		fprintf(stderr,"64 Backward\n");
 		ptmp = fftwf_plan_dft_1d(64,in,out,FFTW_BACKWARD,

@@ -1262,6 +1262,7 @@ namespace PowerSDR
         private LabelTS label7;
         private LabelTS label6;
         private LabelTS label5;
+        private LabelTS labelRXAntControl;
         private CheckBoxTS chkAlexAntCtrl;
         private GroupBoxTS groupBoxHPSDRHW;
         private LabelTS lblPAGainByBand6;
@@ -3000,6 +3001,8 @@ namespace PowerSDR
             radRX2LSBUSB_CheckedChanged(this, e);
             radRX2LSB_CheckedChanged(this, e);
             radRX2USB_CheckedChanged(this, e);
+            chkCBlock_CheckedChanged(this, e);
+            chkRX2CBlock_CheckedChanged(this, e);
             // Transmit Tab
             udTXFilterHigh_ValueChanged(this, e);
             udTXFilterLow_ValueChanged(this, e);
@@ -5337,6 +5340,7 @@ namespace PowerSDR
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 grpPAGainByBand.BringToFront();
+                labelRXAntControl.Text = "  RX1   RX2    XVTR";
             }
             console.ANAN10Present = radGenModelANAN10.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5411,6 +5415,7 @@ namespace PowerSDR
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 grpANANPAGainByBand.BringToFront();
+                labelRXAntControl.Text = " EXT1  EXT2  XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
@@ -5482,6 +5487,7 @@ namespace PowerSDR
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 grpANANPAGainByBand.BringToFront();
+                labelRXAntControl.Text = " EXT1  EXT2  XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
@@ -5551,6 +5557,7 @@ namespace PowerSDR
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 grpPAGainByBand.BringToFront();
+                labelRXAntControl.Text = "  RX1   RX2    XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
@@ -5613,6 +5620,7 @@ namespace PowerSDR
               //  chkAutoPACalibrate.Checked = true;
                 chkAutoPACalibrate.Visible = true;
                 grpPAGainByBand.BringToFront();
+                labelRXAntControl.Text = "  RX1   RX2    XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, false);
             if (chkHermesStepAttenuator.Checked) chkHermesStepAttenuator.Checked = false;
@@ -5983,6 +5991,12 @@ namespace PowerSDR
                    tcAudio.TabPages.Remove(tpVAC2);
                    tcAudio.SelectedIndex = 0;
                } */
+
+            if (tcDSP.TabPages.Contains(tpDSPImageReject))
+            {
+                tcDSP.TabPages.Remove(tpDSPImageReject);
+                tcDSP.SelectedIndex = 0;
+            } 
 
 
             if (tcGeneral.TabPages.Contains(tpInfo))
@@ -6764,6 +6778,21 @@ namespace PowerSDR
                 Thread.Sleep(100);
             }
 
+            string new_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
+
+            if (new_driver_name != "Windows WDM-KS" && udAudioLatency2.Value < 120)
+            {
+                MessageBox.Show("The VAC1 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
+                    "Buffer Latency values less than 120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                    "The VAC1 Buffer Latency has been reset to the default of 120ms.  " +
+                    "Make sure to save your Transmit profile to make the change persistent.",
+                    "Invalid VAC1 Buffer Latency Value",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                udAudioLatency2.Value = 120;
+            }
+
             console.AudioDriverIndex2 = new_driver;
             Audio.Host2 = new_driver;
             GetDevices2();
@@ -6790,6 +6819,21 @@ namespace PowerSDR
                 Thread.Sleep(100);
             }
 
+            string new_driver_name = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Name;
+
+            if (new_driver_name != "Windows WDM-KS" && udVAC2Latency.Value < 120)
+            {
+                MessageBox.Show("The VAC2 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
+                    "Buffer Latency values less than 120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                    "The VAC2 Buffer Latency has been reset to the default of 120ms.  " +
+                    "Make sure to save your Transmit profile to make the change persistent.",
+                    "Invalid VAC2 Buffer Latency Value",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                udVAC2Latency.Value = 120;
+            }
+            
             console.AudioDriverIndex3 = new_driver;
             Audio.Host3 = new_driver;
             GetDevices3();
@@ -7075,6 +7119,22 @@ namespace PowerSDR
 
         private void udAudioLatency2_ValueChanged(object sender, System.EventArgs e)
         {
+            string vac_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
+
+            if (vac_driver_name != "Windows WDM-KS" && udAudioLatency2.Value < 120)
+            {
+                MessageBox.Show("The VAC1 Buffer Latency value selected is less than 120ms which is too " +
+                    "low for the MME and DirectSound VAC audio drivers.  Buffer Latency values less than " +
+                    "120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                    "The VAC1 Buffer Latency has been reset to the default of 120ms.  " +
+                    "Make sure to save your Transmit profile to make the change persistent.",
+                    "Invalid VAC1 Buffer Latency Value",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                udAudioLatency2.Value = 120;
+            }
+
             bool power = console.PowerOn;
             if (power && chkAudioEnableVAC.Checked)
             {
@@ -7090,6 +7150,25 @@ namespace PowerSDR
 
         private void udVAC2Latency_ValueChanged(object sender, System.EventArgs e)
         {
+            string vac_driver_name = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Name;
+
+            if (chkVAC2Enable.Checked)
+            {
+                if (vac_driver_name != "Windows WDM-KS" && udVAC2Latency.Value < 120)
+                {
+                    MessageBox.Show("The VAC2 Buffer Latency value selected is less than 120ms which is too " +
+                        "low for the MME and DirectSound VAC audio drivers.  Buffer Latency values less than " +
+                        "120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                        "The VAC2 Buffer Latency has been reset to the default of 120ms.  " +
+                        "Make sure to save your Transmit profile to make the change persistent.",
+                        "Invalid VAC2 Buffer Latency Value",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                    udVAC2Latency.Value = 120;
+                }
+            }
+
             bool power = console.PowerOn;
             if (power && chkVAC2Enable.Checked)
             {
@@ -14384,6 +14463,10 @@ namespace PowerSDR
                     region = FRSRegion.Europe;
                     console.Extended = false;
                     break;
+                case "India":
+                    region = FRSRegion.India;
+                    console.Extended = false;
+                    break;
                 case "Italy":
                     region = FRSRegion.Italy_Plus;
                     console.Extended = false;
@@ -14398,7 +14481,8 @@ namespace PowerSDR
                     break;
                 case "United Kingdom":
                     region = FRSRegion.UK;
-                    console.Extended = false;
+                    //console.Extended = false;
+                   // Display.Init();
                     break;
                 case "United States":
                     region = FRSRegion.US;
@@ -14458,7 +14542,7 @@ namespace PowerSDR
             if (!console.initializing) DB.UpdateRegion(console.CurrentRegion);
             if (console.CurrentRegion == FRSRegion.UK)
             {
-                console.band_60m_register = 7;
+                console.band_60m_register = 11;
                 console.Init60mChannels();
             }
             if (console.CurrentRegion == FRSRegion.US)
@@ -15891,6 +15975,34 @@ namespace PowerSDR
             else if (radGenModelANAN100.Checked) radGenModelANAN100_CheckedChanged(this, EventArgs.Empty);
             else if (radGenModelANAN100D.Checked) radGenModelANAN100D_CheckedChanged(this, EventArgs.Empty);
             else if (radGenModelHermes.Checked) radGenModelHermes_CheckedChanged(this, EventArgs.Empty);
+        }
+        
+        private void chkCBlock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCBlock.Checked)
+            {
+                DttSP.SetCBL(0, 0, 1);
+                DttSP.SetCBL(0, 1, 1);
+            }
+            else
+            {
+                DttSP.SetCBL(0, 0, 0);
+                DttSP.SetCBL(0, 1, 0);
+            }
+        }
+
+        private void chkRX2CBlock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRX2CBlock.Checked)
+            {
+                DttSP.SetCBL(2, 0, 1);
+                DttSP.SetCBL(2, 1, 1);
+            }
+            else
+            {
+                DttSP.SetCBL(2, 0, 0);
+                DttSP.SetCBL(2, 1, 0);
+            }
         }
         
 

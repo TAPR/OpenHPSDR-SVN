@@ -2648,7 +2648,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -2742,7 +2742,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -2929,7 +2929,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3023,7 +3023,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3118,7 +3118,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = true;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3213,7 +3213,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = true;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3307,7 +3307,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3401,7 +3401,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3495,7 +3495,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3589,7 +3589,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3683,7 +3683,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3777,7 +3777,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3871,7 +3871,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -3965,7 +3965,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -4059,7 +4059,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -4153,7 +4153,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -4247,7 +4247,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -4341,7 +4341,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;
@@ -4435,7 +4435,7 @@ namespace PowerSDR
             dr["Tune_Meter_Type"] = "Fwd Pwr";
             dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
-            dr["AM_Carrier_Level"] = 25;
+            dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
             dr["VAC1_On"] = false;
             dr["VAC1_Auto_On"] = false;

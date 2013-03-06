@@ -404,6 +404,8 @@ namespace PowerSDR
             set { cw_pitch = value; }
         }
 
+        public static bool specready = false;
+
         private static int H = 0;	// target height
         private static int W = 0;	// target width
         private static Control target = null;
@@ -416,8 +418,11 @@ namespace PowerSDR
                 H = target.Height;
                 W = target.Width;
                 Audio.ScopeDisplayWidth = W;
-                console.specRX.GetSpecRX(0).Pixels = W;
-                console.specRX.GetSpecRX(1).Pixels = W;
+                if (specready)
+                {
+                    console.specRX.GetSpecRX(0).Pixels = W;
+                    console.specRX.GetSpecRX(1).Pixels = W;
+                }
             }
         }
 

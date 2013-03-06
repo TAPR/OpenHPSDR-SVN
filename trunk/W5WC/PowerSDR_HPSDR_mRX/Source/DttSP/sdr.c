@@ -359,6 +359,13 @@ setup_rx (int k, unsigned int thread)
 	}
 	rx[thread][k].hpsdr.specflag = 0;
 	rx[thread][k].tick = 0;
+	rx[thread][k].cbl.gen = newCBL(	CXBsize (rx[thread][k].buf.o),
+									CXBbase (rx[thread][k].buf.o),
+									CXBbase (rx[thread][k].buf.o),
+									0,
+									uni[thread].samplerate,
+									0.02,
+									"cbl");
 }
 
 /* purely tx */
@@ -566,6 +573,7 @@ destroy_workspace (unsigned int thread)
 	/* RX */
 	for (k = 0; k < uni[thread].multirx.nrx; k++)
 	{
+		del_cbl(rx[thread][k].cbl.gen);
 		delWSCompander (rx[thread][k].cpd.gen);
 		delSpotToneGen (rx[thread][k].spot.gen);
 		delWcpAGC (rx[thread][k].wcpagc.gen); // (NR0V)
@@ -1129,7 +1137,10 @@ do_rx_post (int k, unsigned int thread)
 		PolyPhaseFIRF(rx[thread][k].resample.gen2r);
 		PolyPhaseFIRF(rx[thread][k].resample.gen2i);
 	}
-
+	if (rx[thread][k].cbl.flag)
+		c_block (rx[thread][k].cbl.gen);
+	//if (rx[thread][k].hpsdr.specflag)
+	//	Spectrum2(rx[thread][k].hpsdr.disp, rx[thread][k].hpsdr.ss, rx[thread][k].hpsdr.LO, (REAL *)CXBbase(rx[thread][k].buf.o));
 }
 
 /* demod processing */

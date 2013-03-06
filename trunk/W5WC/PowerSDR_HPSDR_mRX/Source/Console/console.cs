@@ -523,7 +523,7 @@ namespace PowerSDR
         //private bool calibrationdidit = false;
         public Mutex calibration_mutex = new Mutex();
 
-       // private static Progress progress;
+        // private static Progress progress;
         public Setup SetupForm;
         public CWX CWXForm;
         public UCBForm UCBForm;
@@ -1442,6 +1442,8 @@ namespace PowerSDR
 
         public Console(string[] args)
         {
+            Display.specready = false;
+
             foreach (string s in args)
             {
                 if (s.StartsWith("-datapath:"))
@@ -1622,6 +1624,7 @@ namespace PowerSDR
             Splash.SetStatus("Initializing Radio");				// Set progress point
             radio = new Radio();								// Initialize the Radio processor
             specRX = new SpecRX();
+            Display.specready = true;
 
             Splash.SetStatus("Initializing PortAudio");			// Set progress point
             PA19.PA_Initialize();								// Initialize the audio interface
@@ -7226,11 +7229,11 @@ namespace PowerSDR
                     if (!Directory.Exists(app_data_path))
                         Directory.CreateDirectory(app_data_path);
                     Process p = Process.Start(Application.StartupPath + "\\fftw_wisdom.exe", "\"" + app_data_path);
-                    MessageBox.Show("Running DttSP optimization.  Please wait patiently for " +
-                        "this process to finish.\nTypically the optimization takes no more than 3-5 minutes.",
-                        "Optimizing...",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    /*  MessageBox.Show("Running DttSP optimization.  Please wait patiently for " +
+                          "this process to finish.\nTypically the optimization takes no more than 3-5 minutes.",
+                          "Optimizing...",
+                          MessageBoxButtons.OK,
+                          MessageBoxIcon.Information); */
                     p.WaitForExit();
                 }
 
@@ -7267,8 +7270,6 @@ namespace PowerSDR
                 SpecHPSDRDLL.CreateANB(0, 1, 1024, 192000, 0.0001, 0.0001, 0.0001, 0.05, 20);
                 SpecHPSDRDLL.CreateANB(0, 2, 1024, 192000, 0.0001, 0.0001, 0.0001, 0.05, 20);
                 SpecHPSDRDLL.CreateANB(1, 0, 1024, 192000, 0.0001, 0.0001, 0.0001, 0.05, 20);
-                // SpecHPSDRDLL.XCreateAnalyzer(0, ref rc, 262144, 1, 3);
-                //  SpecHPSDRDLL.XCreateAnalyzer(1, ref rc, 262144, 1, 1);
 
                 Application.EnableVisualStyles();
                 Application.DoEvents();
@@ -16897,7 +16898,7 @@ namespace PowerSDR
             calibration_running = false;
 
             return true;
-       }
+        }
 
         public bool CalibrateLevel(float level, float freq, Progress progress, bool suppress_errors)
         {
@@ -16999,7 +17000,7 @@ namespace PowerSDR
                     fixed (float* ptr = &a[0])
                         // DttSP.GetSpectrum(0, ptr);		// get the spectrum values
                         SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
- 
+
                     calibration_mutex.ReleaseMutex();
                     float max = float.MinValue;
                     float avg = 0;
@@ -17180,8 +17181,8 @@ namespace PowerSDR
                     {
                         calibration_mutex.WaitOne();
                         fixed (float* ptr = &a[0])
-                           // DttSP.GetSpectrum(0, ptr);		// read again to clear out changed DSP
-                        SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
+                            // DttSP.GetSpectrum(0, ptr);		// read again to clear out changed DSP
+                            SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
                         calibration_mutex.ReleaseMutex();
                         max = float.MinValue;						// find the max spectrum value
                         for (int j = 0; j < buff_size; j++)
@@ -23219,7 +23220,7 @@ namespace PowerSDR
                 SetAlex2HPF(rx2_dds_freq_mhz);
 
                 JanusAudio.SetVFOfreqRX2(rx2_dds_freq_mhz);
-              //  JanusAudio.SetRX2VFOfreq((int)((rx2_dds_freq_mhz * 1e6) * SetupForm.HPSDRFreqCorrectFactor));
+                //  JanusAudio.SetRX2VFOfreq((int)((rx2_dds_freq_mhz * 1e6) * SetupForm.HPSDRFreqCorrectFactor));
             }
         }
 
@@ -23252,7 +23253,7 @@ namespace PowerSDR
                 //  else SetAlex2TXFilters(rx2_dds_freq_mhz);
 
                 JanusAudio.SetVFOfreqTX(tx_dds_freq_mhz);
-              //  JanusAudio.SetTXVFOfreq((int)((tx_dds_freq_mhz * 1e6) * SetupForm.HPSDRFreqCorrectFactor));
+                //  JanusAudio.SetTXVFOfreq((int)((tx_dds_freq_mhz * 1e6) * SetupForm.HPSDRFreqCorrectFactor));
                 tx_dds_freq_updated = false;
             }
         }
@@ -30427,7 +30428,11 @@ namespace PowerSDR
                     }
                 }
 
-                picDisplay.Invalidate();
+                //  picDisplay.Invalidate();
+                //  picDisplay.Update();
+                if ((Display.CurrentDisplayMode != DisplayMode.OFF) ||
+                    (RX2Enabled && Display.CurrentDisplayModeBottom != DisplayMode.OFF))
+                    picDisplay.Refresh();
 
                 if (chkPower.Checked)
                     Thread.Sleep(display_delay);
@@ -31721,7 +31726,7 @@ namespace PowerSDR
                         diversityForm.Show();
                         break;
                     case Keys.U:
-                        mnuUCB_Click(this, EventArgs.Empty);
+                       // mnuUCB_Click(this, EventArgs.Empty);
                         break;
                     case Keys.F:
                         break;
@@ -33232,7 +33237,7 @@ namespace PowerSDR
                     chkDisplayPeak.Enabled = true;
                     if (chkDisplayPeak.Checked)
                         chkDisplayPeak.BackColor = button_selected_color;
-                  //  btnZeroBeat.Enabled = true;
+                    //  btnZeroBeat.Enabled = true;
                     radio.GetDSPRX(0, 0).SpectrumPreFilter = true;
                     radio.GetDSPRX(1, 0).SpectrumPreFilter = true;
                     break;
@@ -33243,7 +33248,7 @@ namespace PowerSDR
                     chkDisplayPeak.Enabled = true;
                     if (chkDisplayPeak.Checked)
                         chkDisplayPeak.BackColor = button_selected_color;
-                   // btnZeroBeat.Enabled = chkDisplayAVG.Checked;
+                    // btnZeroBeat.Enabled = chkDisplayAVG.Checked;
                     radio.GetDSPRX(0, 0).SpectrumPreFilter = true;
                     radio.GetDSPRX(1, 0).SpectrumPreFilter = true;
                     break;
@@ -33256,7 +33261,7 @@ namespace PowerSDR
                     chkDisplayPeak.Enabled = true;
                     if (chkDisplayPeak.Checked)
                         chkDisplayPeak.BackColor = button_selected_color;
-                  //  btnZeroBeat.Enabled = chkDisplayAVG.Checked;
+                    //  btnZeroBeat.Enabled = chkDisplayAVG.Checked;
                     if (rx1_dsp_mode != DSPMode.SPEC)
                     {
                         radio.GetDSPRX(0, 0).SpectrumPreFilter = false;
@@ -33276,7 +33281,7 @@ namespace PowerSDR
                     chkDisplayPeak.Enabled = true;
                     if (chkDisplayPeak.Checked)
                         chkDisplayPeak.BackColor = button_selected_color;
-                  //  btnZeroBeat.Enabled = chkDisplayAVG.Checked;
+                    //  btnZeroBeat.Enabled = chkDisplayAVG.Checked;
                     radio.GetDSPRX(0, 0).SpectrumPreFilter = true;
                     radio.GetDSPRX(1, 0).SpectrumPreFilter = true;
                     break;
@@ -33298,7 +33303,7 @@ namespace PowerSDR
                     chkDisplayPeak.Enabled = true;
                     if (chkDisplayPeak.Checked)
                         chkDisplayPeak.BackColor = button_selected_color;
-                  //  btnZeroBeat.Enabled = chkDisplayAVG.Checked;
+                    //  btnZeroBeat.Enabled = chkDisplayAVG.Checked;
                     if (rx1_dsp_mode != DSPMode.SPEC)
                     {
                         radio.GetDSPRX(0, 0).SpectrumPreFilter = false;
@@ -33312,24 +33317,24 @@ namespace PowerSDR
                     break;
             }
 
-         /*   if (chkDisplayAVG.Checked)
-            {
-                switch (Display.CurrentDisplayMode)
-                {
-                    case DisplayMode.PANADAPTER:
-                    case DisplayMode.HISTOGRAM:
-                    case DisplayMode.SPECTRUM:
-                    case DisplayMode.WATERFALL:
-                    case DisplayMode.PANAFALL:
-                    case DisplayMode.PANASCOPE:
-                    case DisplayMode.SPECTRASCOPE:
-                        btnZeroBeat.Enabled = true;
-                        break;
-                    default:
-                        btnZeroBeat.Enabled = false;
-                        break;
-                }
-            } */
+            /*   if (chkDisplayAVG.Checked)
+               {
+                   switch (Display.CurrentDisplayMode)
+                   {
+                       case DisplayMode.PANADAPTER:
+                       case DisplayMode.HISTOGRAM:
+                       case DisplayMode.SPECTRUM:
+                       case DisplayMode.WATERFALL:
+                       case DisplayMode.PANAFALL:
+                       case DisplayMode.PANASCOPE:
+                       case DisplayMode.SPECTRASCOPE:
+                           btnZeroBeat.Enabled = true;
+                           break;
+                       default:
+                           btnZeroBeat.Enabled = false;
+                           break;
+                   }
+               } */
 
             was_panadapter = false;
             was_waterfall = false;
@@ -34930,25 +34935,25 @@ namespace PowerSDR
                 chkDisplayAVG.BackColor = SystemColors.Control;
             }
 
-          /*  if (chkDisplayAVG.Checked)
-            {
-                switch (Display.CurrentDisplayMode)
-                {
-                    case DisplayMode.PANADAPTER:
-                    case DisplayMode.HISTOGRAM:
-                    case DisplayMode.SPECTRUM:
-                    case DisplayMode.WATERFALL:
-                    case DisplayMode.PANAFALL:
-                    case DisplayMode.PANASCOPE:
-                    case DisplayMode.SPECTRASCOPE:
-                        btnZeroBeat.Enabled = true; // only allow zerobeat when avg is on 
-                        break;
-                    default:
-                        btnZeroBeat.Enabled = false;
-                        break;
-                }
-            }
-            else btnZeroBeat.Enabled = false; */
+            /*  if (chkDisplayAVG.Checked)
+              {
+                  switch (Display.CurrentDisplayMode)
+                  {
+                      case DisplayMode.PANADAPTER:
+                      case DisplayMode.HISTOGRAM:
+                      case DisplayMode.SPECTRUM:
+                      case DisplayMode.WATERFALL:
+                      case DisplayMode.PANAFALL:
+                      case DisplayMode.PANASCOPE:
+                      case DisplayMode.SPECTRASCOPE:
+                          btnZeroBeat.Enabled = true; // only allow zerobeat when avg is on 
+                          break;
+                      default:
+                          btnZeroBeat.Enabled = false;
+                          break;
+                  }
+              }
+              else btnZeroBeat.Enabled = false; */
         }
 
         private void chkDisplayPeak_CheckedChanged(object sender, System.EventArgs e)
@@ -39227,12 +39232,12 @@ namespace PowerSDR
             Display.Target = picDisplay;
             Display.Init();
             if (!initializing)
-            UpdateRXSpectrumDisplayVars();
+                UpdateRXSpectrumDisplayVars();
             //Display.DrawBackground();
-           // specRX.GetSpecRX(0).Pixels = picDisplay.Width;
+            // specRX.GetSpecRX(0).Pixels = picDisplay.Width;
             // specRX.GetSpecRX(1).Pixels = picDisplay.Width;
             picDisplay.Invalidate();
-   
+
         }
 
         private void ptbDisplayPan_Scroll(object sender, System.EventArgs e)
@@ -41805,8 +41810,8 @@ namespace PowerSDR
 
         public void ZeroBeat()
         {
-           // if (btnZeroBeat.Enabled)
-                btnZeroBeat_Click(this, EventArgs.Empty);
+            // if (btnZeroBeat.Enabled)
+            btnZeroBeat_Click(this, EventArgs.Empty);
         }
 
         private void btnZeroBeat_Click(object sender, System.EventArgs e)
@@ -41933,7 +41938,7 @@ namespace PowerSDR
             }
             fixed (double* ptr = &(spectrum_data[0, 0]))
                 SpecHPSDRDLL.SnapSpectrum(0, ss, 0, ptr);        //depends upon receiver configuration, want center sub-span from disp 0, I think
-            
+
             double mag_sqr;
             for (int i = lo_bucket; i <= hi_bucket; i++)
             {
@@ -44666,11 +44671,11 @@ namespace PowerSDR
                 case 512: offset = 15; break;
                 case 256: offset = 18; break;
 
-              /*  case 4096: offset = 0; break;
-                case 2048: offset = 3; break;
-                case 1024: offset = 6; break;
-                case 512: offset = 9; break;
-                case 256: offset = 12; break; */
+                /*  case 4096: offset = 0; break;
+                  case 2048: offset = 3; break;
+                  case 1024: offset = 6; break;
+                  case 512: offset = 9; break;
+                  case 256: offset = 12; break; */
             }
 
             if (radio.GetDSPRX(0, 0).BufferSize != size ||

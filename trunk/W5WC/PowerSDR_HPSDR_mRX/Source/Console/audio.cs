@@ -5854,48 +5854,6 @@ namespace PowerSDR
 #endif
         }
 
-#if (NewVAC)
-        #region NewInitVac
-		unsafe private static void InitVAC()
-		{
-			
-			if(rb_vacOUT_l == null) rb_vacOUT_l = new RingBufferFloat(4*block_size2);
-			rb_vacOUT_l.Restart(block_size2);
-			
-			if(rb_vacOUT_r == null) rb_vacOUT_r = new RingBufferFloat(4*block_size2);
-			rb_vacOUT_r.Restart(block_size2);
-			int buf_size = rb_vacOUT_r.nblock2(4*(block_size2>block_size1 ? block_size2:block_size1)*sample_rate1/sample_rate2);
-			Debug.WriteLine("Vac Bufsize = "+buf_size.ToString());
-			if(rb_vacIN_l == null) rb_vacIN_l = new RingBufferFloat(buf_size);
-			rb_vacIN_l.Reset();
-
-			if(rb_vacIN_r == null) rb_vacIN_r = new RingBufferFloat(buf_size);
-			rb_vacIN_r.Reset();
-
-			if (sample_rate2 != sample_rate1) 
-			{
-				vac_resample = true;
-				if(res_outl == null) res_outl = new float [buf_size];
-				if(res_outr == null) res_outr = new float [buf_size];
-				if(res_inl == null) res_inl  = new float [buf_size];
-				if(res_inr == null) res_inr  = new float [buf_size];
-
-				resampPtrIn_l  = DttSP.NewResamplerF(sample_rate2, sample_rate1);
-				resampPtrIn_r  = DttSP.NewResamplerF(sample_rate2, sample_rate1);
-				resampPtrOut_l = DttSP.NewResamplerF(sample_rate1, sample_rate2);
-				resampPtrOut_r = DttSP.NewResamplerF(sample_rate1, sample_rate2);
-			}
-			else vac_resample = false;
-			cs_vac = (void *)0x0;
-			cs_vac = Win32.NewCriticalSection();
-			if (Win32.InitializeCriticalSectionAndSpinCount(cs_vac, 0x00000080) == 0)
-			{
-				vac_enabled = false;
-				Debug.WriteLine("CriticalSection Failed");
-			}
-		}
-        #endregion
-#else
         unsafe private static void InitVAC()
         {
             if (rb_vacOUT_l == null) rb_vacOUT_l = new RingBufferFloat(2 * 65536);
@@ -6011,7 +5969,6 @@ namespace PowerSDR
             }
         }
 
-#endif
         unsafe private static void CleanUpVAC()
         {
             Win32.DeleteCriticalSection(cs_vac);
@@ -6221,64 +6178,6 @@ namespace PowerSDR
                                     sample_rate1);
             }
 
-            /*   if (console.fwc_init && (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000))
-                     unsafe
-                     {
-                         switch (console.CurrentModel)
-                         {
-                             case Model.FLEX5000:
-                                 in_rx1_l = 0;
-                                 in_rx1_r = 1;
-                                 break;
-                             case Model.FLEX3000:
-                                 in_rx1_l = 1;
-                                 in_rx1_r = 0;
-                                 break;
-                         }
-                         in_rx2_l = 2;
-                         in_rx2_r = 3;
-                         //in_tx_l = 5;
-                         //in_tx_r = 6;
-                         retval = StartAudio(ref callback8, (uint)block_size1, sample_rate1, host1, input_dev1, output_dev1,
-                                             8, 0, latency1);
-                     }
-                 else
-                     unsafe
-                     {
-                         if (num_channels == 2)
-                             retval = StartAudio(ref callback1, (uint)block_size1, sample_rate1, host1, input_dev1,
-                                                 output_dev1, num_channels, 0, latency1);
-                         else if (num_channels == 4 || num_channels == 8)
-                         {
-                             if (console.CurrentModel == Model.HPSDR ||
-                                 console.CurrentModel == Model.HERMES)
-                             {
-                                 JanusAudio.SetNRx(2); //set number of receivers to 2
-                                 JanusAudio.SetDuplex(1); // set full duplex mode
-
-                                 retval = StartAudio(ref callback3port,
-                                                     (uint)block_size1,
-                                                     sample_rate1,
-                                                     host1,
-                                                     input_dev1,
-                                                     output_dev1,
-                                                     8, //num_channels,
-                                                     0,
-                                                     latency1);
-                             }
-                             else
-                                 retval = StartAudio(ref callback4port,
-                                                     (uint)block_size1,
-                                                     sample_rate1,
-                                                     host1,
-                                                     input_dev1,
-                                                     output_dev1,
-                                                     num_channels,
-                                                     0,
-                                                     latency1);
-                         }
-                     } */
-
             if (!retval) return retval;
 
             if (vac_enabled)
@@ -6352,66 +6251,7 @@ namespace PowerSDR
             return retval;
         }
 
-        /*     private static bool using_janus_audio;
-             unsafe public static bool StartAudio(ref PA19.PaStreamCallback callback,
-                                                  uint block_size, double sample_rate, int host_api_index,
-                                                  int input_dev_index,
-                                                  int output_dev_index, int num_channels, int callback_num, int latency_ms)
-             {
-                 // !!KD5TFD FIXME TODO bug: this check is not right when the channel being started is VAC 
-                 // if VAC and FPGA audio is being used it ends up in the else branch -- bad! 
-                 //
-                 if (host_api_index < PA19.PA_GetHostApiCount()) // using classic NonJanus audio 
-                 {
-                     using_janus_audio = false;
-                     System.Console.WriteLine("using classic audio");
-                     return StartAudio_NonJanus(ref callback, block_size, sample_rate, host_api_index, input_dev_index,
-                                                output_dev_index, num_channels, callback_num, latency_ms);
-                 }
-                 else // using janus audio device 
-                 {
-                     using_janus_audio = true;
-                     // System.Console.WriteLine("using Ozy/Janus callback");
-                     int rc;
-                     int no_send = 0;
-                     int sample_bits = 24;
-                     if (console.Force16bitIQ)
-                     {
-                         sample_bits = 16;
-                     }
-                     if (console.NoJanusSend)
-                     {
-                         no_send = 1;
-                     }
-                     rc = JanusAudio.StartAudio((int)sample_rate, (int)block_size, callback, sample_bits, no_send);
-                     if (rc != 0)
-                     {
-                         //System.Console.WriteLine("JanusAudio.StartAudio failed w/ rc: " + rc);
-                         if (rc == -101) // firmware version error; 
-                         {
-                             string fw_err = JanusAudio.getFWVersionErrorMsg();
-                             if (fw_err == null)
-                             {
-                                 fw_err = "Bad Firmware levels";
-                             }
-                             MessageBox.Show(fw_err, "HPSDR Error",
-                                             MessageBoxButtons.OK,
-                                             MessageBoxIcon.Error);
-                             return false;
-                         }
-                         else
-                         {
-                             MessageBox.Show("Error starting HPSDR hardware, is it connected and powered?", "HPSDR Error",
-                                             MessageBoxButtons.OK,
-                                             MessageBoxIcon.Error);
-                             return false;
-                         }
-                     }
-                     return true;
-                 }
-             } */
-
-        public static unsafe bool StartAudio(ref PA19.PaStreamCallback callback,
+       public static unsafe bool StartAudio(ref PA19.PaStreamCallback callback,
                                               uint block_size, double sample_rate)
         {
             // System.Console.WriteLine("using Ozy/Janus callback");
@@ -6491,37 +6331,6 @@ namespace PowerSDR
 
             int error = 0;
 
-            int i;
-            /*    for (i = 0; i < 25; i++)
-                {
-                    if (callback_num == 0)
-                        error = PA19.PA_OpenStream(out stream1, &inparam, &outparam, sample_rate, block_size, 0, callback, 0);
-                    // else
-                    if (callback_num == 1)
-                        error = PA19.PA_OpenStream(out stream2, &inparam, &outparam, sample_rate, block_size, 0, callback, 1);
-                    //else
-                    if (callback_num == 2)
-                        error = PA19.PA_OpenStream(out stream3, &inparam, &outparam, sample_rate, block_size, 0, callback, 2);
-                    if (error == 0) break; // stop if no error
-                } */
-
-            /*   for (i = 0; i < 25; i++)
-               {
-                   switch (callback_num)
-                   {
-                       case 1: // VAC1
-                           error = PA19.PA_OpenStream(out stream2, &inparam, &outparam, sample_rate, block_size, 0, callback, 1);
-                           break;
-                       case 2: //VAC2
-                           error = PA19.PA_OpenStream(out stream3, &inparam, &outparam, sample_rate, block_size, 0, callback, 2);
-                           break;
-                       default:
-                           error = PA19.PA_OpenStream(out stream1, &inparam, &outparam, sample_rate, block_size, 0, callback, 0);
-                           break;
-                   }
-                   if (error == 0) break; // stop if no error
-               } */
-
             switch (callback_num)
             {
                 case 0: // VAC1
@@ -6537,29 +6346,6 @@ namespace PowerSDR
                 PortAudioErrorMessageBox(error);
                 return false;
             }
-
-            /*    switch (callback_num)
-                {
-                    case 1:
-                        error = PA19.PA_StartStream(stream2);
-                        break;
-                    case 2:
-                        error = PA19.PA_StartStream(stream3);
-                        break;
-                    default:
-                        error = PA19.PA_StartStream(stream1);
-                       // Thread.Sleep(10);  // give FW driver a little time to open.  Reduces "flatline" for FW radios.
-                        break;
-                } */
-
-            /*if (callback_num == 0)
-                error = PA19.PA_StartStream(stream1);
-            //else 
-            if (callback_num == 1)
-                error = PA19.PA_StartStream(stream2);
-            // else
-            if (callback_num == 2)
-                error = PA19.PA_StartStream(stream3); */
 
             switch (callback_num)
             {
@@ -6595,27 +6381,6 @@ namespace PowerSDR
                     break;
             }
         }
-
-        /*    public static void StopAudio1()
-            {
-                System.Console.WriteLine(@"Stop Audio called");
-                if (!using_janus_audio) // using classic portaudio 
-                {
-                    StopAudio1_NonJanus();
-                }
-                else // using tfdaph audio 
-                {
-                    JanusAudio.StopAudio();
-                }
-            } */
-
-        /*   unsafe public static void StopAudio1_NonJanus()
-           {
-               int error = 0;
-               PA19.PA_AbortStream(stream1);
-               error = PA19.PA_CloseStream(stream1);
-               if (error != 0) PortAudioErrorMessageBox(error);
-           } */
 
         unsafe public static void StopAudioVAC()
         {
