@@ -129,7 +129,7 @@
   This block is the HPSDR Hermes/Metis module.
   It supports one or two receivers and one transmitter in the Narrow Band
   (digital downconversion) mode.
-  *RxSamp = 48000, 96000,  or 192000
+  *RxSamp = 48000, 96000, 192000, or 384000
   *RxPreamp = 0 (Off), or  1 (On)
   *PTTMode = 0 (TxOff),  1 (Vox on Txframe contents), or  2 (TxOn)
   *PTTOffMutesTx = 0 (Tx always emits), 1 (Tx IQ is zeroed when PTT is Off)
