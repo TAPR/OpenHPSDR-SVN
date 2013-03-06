@@ -43,6 +43,7 @@ void create_wisdom(int disp, char *app_data_path)
 	{
 		AllocConsole(); // create console
 	    freopen_s(&stream, "conout$", "w", stdout); // redirect output to console
+		fprintf(stdout, "Optimizing FFT sizes through 262144.\n");
 		fprintf(stdout, "Please do not close this window until wisdom plans are completed.\n\n\n");
 
 		while (psize <= MAX_SIZE)

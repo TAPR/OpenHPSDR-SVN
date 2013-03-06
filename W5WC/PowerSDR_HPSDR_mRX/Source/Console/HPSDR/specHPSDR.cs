@@ -556,7 +556,7 @@ namespace PowerSDR
         // public static extern void CreateAnalyzer(int disp, ref int success);
 
         [DllImport("specHPSDR.dll")]
-        public static extern void XCreateAnalyzer(int disp, ref int success, int m_size, int m_LO, int m_stitch, String app_data_path);
+        public static extern void XCreateAnalyzer(int disp, ref int success, int m_size, int m_LO, int m_stitch, string app_data_path);
         // public static extern void XCreateAnalyzer(int disp, ref int success, int m_size, int m_LO, int m_stitch);
 
         [DllImport("specHPSDR.dll")]

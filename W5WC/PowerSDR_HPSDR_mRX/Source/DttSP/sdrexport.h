@@ -69,6 +69,7 @@ Bridgewater, NJ 08807
 #include <anf.h>
 #include <anr.h>
 #include <amd.h>
+#include <cblock.h>
 
 //------------------------------------------------------------------------
 // max no. simultaneous receivers
@@ -279,6 +280,12 @@ extern struct _rx
 	  int ss;
 	  int LO;
   }hpsdr;
+
+  struct
+  {
+	  CBL gen;
+	  int flag;
+  } cbl;
 
   REAL norm;
   COMPLEX azim;

@@ -497,6 +497,9 @@ namespace PowerSDR
         [DllImport("DttSP.dll", EntryPoint = "SetHPSDRSpectrum")]
         public static extern void SetHPSDRSpectrum(uint thread, uint subrx, int flag, int disp, int ss, int LO);
         
+        [DllImport("DttSP.dll", EntryPoint = "SetCBL")]
+        public static extern void SetCBL(uint thread, uint subrx, int flag);
+        
         #region Diversity
 
         [DllImport("DttSP.dll", EntryPoint = "SetDiversity")]

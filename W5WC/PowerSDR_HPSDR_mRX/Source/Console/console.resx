@@ -6579,6 +6579,9 @@
   <data name="chkCWDisableTXDisplay.ToolTip" xml:space="preserve">
     <value>Disable the Display during TX.</value>
   </data>
+  <data name="chkCWDisableTXDisplay.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;chkCWDisableTXDisplay.Name" xml:space="preserve">
     <value>chkCWDisableTXDisplay</value>
   </data>
@@ -13877,7 +13880,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v2.2 (1/30/13)  MuliRX-FFT</value>
+    <value>PowerSDR™/OpenHPSDR v3.0.0 (1/30/13)  mRX</value>
   </data>
   <data name="&gt;&gt;timer_cpu_meter.Name" xml:space="preserve">
     <value>timer_cpu_meter</value>

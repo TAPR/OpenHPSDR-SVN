@@ -144,6 +144,9 @@
     <ClCompile Include="amd.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cblock.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="banal.h">
@@ -297,6 +300,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="amd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cblock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
