@@ -1433,7 +1433,7 @@ DttSP_EXP void *
 NewResamplerF (int samplerate_in, int samplerate_out)
 {
 	ResStF tmp;
-	//int lcm = 28224000, interpFactor, deciFactor;
+	 //int lcm = 28224000, interpFactor, deciFactor;
 	int lcm = 56448000, interpFactor, deciFactor;
 	interpFactor = lcm / samplerate_in;
 	deciFactor = lcm / samplerate_out;
