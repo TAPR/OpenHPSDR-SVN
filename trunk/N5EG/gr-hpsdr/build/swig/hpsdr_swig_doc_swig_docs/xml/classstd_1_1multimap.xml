@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1multimap" kind="class" prot="public">
     <compoundname>std::multimap</compoundname>
     <innerclass refid="classstd_1_1multimap_1_1const__iterator" prot="public">std::multimap::const_iterator</innerclass>
@@ -51,18 +51,18 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="451">
+      <node id="493">
         <label>K</label>
       </node>
-      <node id="452">
+      <node id="494">
         <label>T</label>
       </node>
-      <node id="450">
+      <node id="492">
         <label>std::multimap&lt; K, T &gt;</label>
-        <childnode refid="451" relation="usage">
+        <childnode refid="493" relation="usage">
           <edgelabel>keys</edgelabel>
         </childnode>
-        <childnode refid="452" relation="usage">
+        <childnode refid="494" relation="usage">
           <edgelabel>elements</edgelabel>
         </childnode>
       </node>

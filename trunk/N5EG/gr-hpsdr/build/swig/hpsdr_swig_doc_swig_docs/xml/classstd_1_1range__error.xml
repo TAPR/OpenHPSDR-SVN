@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1range__error" kind="class" prot="public">
     <compoundname>std::range_error</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::runtime_error</basecompoundref>
@@ -8,32 +8,32 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="503">
+      <node id="545">
         <label>std::runtime_error</label>
-        <childnode refid="504" relation="public-inheritance">
+        <childnode refid="546" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="504">
+      <node id="546">
         <label>std::exception</label>
       </node>
-      <node id="502">
+      <node id="544">
         <label>std::range_error</label>
-        <childnode refid="503" relation="public-inheritance">
+        <childnode refid="545" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="506">
+      <node id="548">
         <label>std::runtime_error</label>
-        <childnode refid="507" relation="public-inheritance">
+        <childnode refid="549" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="507">
+      <node id="549">
         <label>std::exception</label>
       </node>
-      <node id="505">
+      <node id="547">
         <label>std::range_error</label>
-        <childnode refid="506" relation="public-inheritance">
+        <childnode refid="548" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

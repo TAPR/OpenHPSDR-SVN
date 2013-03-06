@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1basic__istringstream" kind="class" prot="public">
     <compoundname>std::basic_istringstream</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::basic_istream&lt; Char &gt;</basecompoundref>
@@ -17,52 +17,52 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="149">
-        <label>std::basic_istream&lt; Char &gt;</label>
-        <childnode refid="150" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="153">
-        <label>std::wistringstream&lt; wchar_t &gt;</label>
-        <childnode refid="148" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="152">
-        <label>std::istringstream&lt; char &gt;</label>
-        <childnode refid="148" relation="public-inheritance">
+        <label>std::basic_istream&lt; Char &gt;</label>
+        <childnode refid="153" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="150">
-        <label>std::basic_ios&lt; Char &gt;</label>
+      <node id="156">
+        <label>std::wistringstream&lt; wchar_t &gt;</label>
         <childnode refid="151" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="151">
+      <node id="155">
+        <label>std::istringstream&lt; char &gt;</label>
+        <childnode refid="151" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="153">
+        <label>std::basic_ios&lt; Char &gt;</label>
+        <childnode refid="154" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="154">
         <label>std::ios_base</label>
       </node>
-      <node id="148">
+      <node id="151">
         <label>std::basic_istringstream&lt; Char &gt;</label>
-        <childnode refid="149" relation="public-inheritance">
+        <childnode refid="152" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="155">
+      <node id="158">
         <label>std::basic_istream&lt; Char &gt;</label>
-        <childnode refid="156" relation="public-inheritance">
+        <childnode refid="159" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="156">
+      <node id="159">
         <label>std::basic_ios&lt; Char &gt;</label>
-        <childnode refid="157" relation="public-inheritance">
+        <childnode refid="160" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="157">
+      <node id="160">
         <label>std::ios_base</label>
       </node>
-      <node id="154">
+      <node id="157">
         <label>std::basic_istringstream&lt; Char &gt;</label>
-        <childnode refid="155" relation="public-inheritance">
+        <childnode refid="158" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

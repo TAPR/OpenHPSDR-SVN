@@ -12,3 +12,18 @@ SET(CMAKE_MULTIPLE_OUTPUT_PAIRS
 # Targets to which this target links.
 SET(CMAKE_TARGET_LINKED_INFO_FILES
   )
+
+# The include file search paths:
+SET(CMAKE_C_TARGET_INCLUDE_PATH
+  "../include"
+  "/usr/local/include"
+  "/usr/local/include/gnuradio"
+  "/usr/local/include/gnuradio/swig"
+  "/usr/local/include/gruel/swig"
+  "/usr/include/python2.7"
+  "../swig"
+  "swig"
+  )
+SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
+SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
+SET(CMAKE_ASM_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

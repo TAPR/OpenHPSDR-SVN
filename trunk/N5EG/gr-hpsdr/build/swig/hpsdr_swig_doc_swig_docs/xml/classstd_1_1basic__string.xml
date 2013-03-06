@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
   <compounddef id="classstd_1_1basic__string" kind="class" prot="public">
     <compoundname>std::basic_string</compoundname>
     <derivedcompoundref refid="classstd_1_1string" prot="public" virt="non-virtual">std::string</derivedcompoundref>
@@ -20,17 +20,17 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="210">
+      <node id="213">
         <label>std::string&lt; char &gt;</label>
-        <childnode refid="209" relation="public-inheritance">
+        <childnode refid="212" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="209">
+      <node id="212">
         <label>std::basic_string&lt; Char &gt;</label>
       </node>
-      <node id="211">
+      <node id="214">
         <label>std::wstring&lt; wchar_t &gt;</label>
-        <childnode refid="209" relation="public-inheritance">
+        <childnode refid="212" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
