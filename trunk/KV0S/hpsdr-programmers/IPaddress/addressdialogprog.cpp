@@ -24,21 +24,21 @@ AddressDialog::~AddressDialog()
 void AddressDialog::getIPaddress(Board *m)
 {
     QString ip1, ip2, ip3, ip4;
-    qDebug() << "in getIPAddress" << m->toIPString();
-    ip1 = m->toIPPartString( 1 );
-    ui->IPLineEdit1->setText( ip1 );
-    ip2 = m->toIPPartString( 2 );
-    ui->IPLineEdit2->setText( ip2 );
-    ip3 = m->toIPPartString( 3 );
-    ui->IPLineEdit3->setText( ip3 );
-    ip4 = m->toIPPartString( 4 );
-    ui->IPLineEdit4->setText( ip4 );
-    ui->writeButton->setDisabled(false);
+    qDebug() << "in getIPAddress"; //<< m->toIPString();
+    //ip1 = m->toIPPartString( 1 );
+    //ui->IPLineEdit1->setText( ip1 );
+    //ip2 = m->toIPPartString( 2 );
+    //ui->IPLineEdit2->setText( ip2 );
+    //ip3 = m->toIPPartString( 3 );
+    //ui->IPLineEdit3->setText( ip3 );
+    //ip4 = m->toIPPartString( 4 );
+    //ui->IPLineEdit4->setText( ip4 );
+    //ui->writeButton->setDisabled(false);
 }
 
 void AddressDialog::getMACaddress(Board *m)
 {
-    qDebug() << "in getMACAddress" << m->toMACString();
+    qDebug() << "in getMACAddress"; // << m->toMACString();
 
 }
 
