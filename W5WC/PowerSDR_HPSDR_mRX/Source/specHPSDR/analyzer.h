@@ -3,7 +3,7 @@
 This file is part of a program that implements a Spectrum Analyzer
 used in conjunction with software-defined-radio hardware.
 
-Copyright (C) 2012 Warren Pratt, NR0V
+Copyright (C) 2012, 2013 Warren Pratt, NR0V
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@ warren@wpratt.com
 
 #define PI					3.1415926535897932
 #define MAX_SIZE			262144			//maximum number or real or complex input samples
-#define SAMP_BUFF_MULT		3				//ratio of input sample buffer size to fft size (for overlap)
+#define SAMP_BUFF_MULT		2				//ratio of input sample buffer size to fft size (for overlap)
 #define MAX_NUM_FFT			4				//maximum number of ffts for an elimination
 #define MAX_PIXELS			2560			//maximum number of pixels that can be requested
 #define NUM_PIXEL_BUFFS		3				//number of pixel output buffers
@@ -148,6 +148,8 @@ typedef struct _dp
 	CRITICAL_SECTION BufferControlSection[MAX_STITCH][MAX_NUM_FFT];
 	CRITICAL_SECTION StitchSection;
 	CRITICAL_SECTION EliminateSection[MAX_STITCH];
+	CRITICAL_SECTION ResampleSection;
+	CRITICAL_SECTION AverageSection;
 }  dp, *DP;
 
 DP pdisp[MAX_DISPLAYS];									//array of pointers to instance data
@@ -178,7 +180,8 @@ void SetAnalyzer (	int disp,
 					double av_b,		//back multiplier for weighted averaging
 					int calset,			//identifier of which set of calibration data to use 
 					double fmin,		//frequency at first pixel value 
-					double fmax			//frequency at last pixel value
+					double fmax,		//frequency at last pixel value
+					int max_w			//max samples to hold in input ring buffers
 				 );
 
 extern specHPSDR_PORT
@@ -222,6 +225,7 @@ void Spectrum(int disp, int ss, int LO, INREAL* pI, INREAL* pQ);
 
 extern specHPSDR_PORT
 void Spectrum2(int disp, int ss, int LO, INREAL* pbuff);
+
 extern specHPSDR_PORT
 void SnapSpectrum(	int disp,
 					int ss,
