@@ -3,7 +3,7 @@
 This file is part of a program that implements a Spectrum Analyzer
 used in conjunction with software-defined-radio hardware.
 
-Copyright (C) 2012 Warren Pratt, NR0V
+Copyright (C) 2012, 2013 Warren Pratt, NR0V
 Copyright (C) 2012 David McQuate, WA8YWQ - Kaiser window & Bessel function added.
 
 This program is free software; you can redistribute it and/or
@@ -296,8 +296,8 @@ void stitch(int disp)
 	double pix_pos = 0;
 	double save_result;
 	
+	EnterCriticalSection(&a->ResampleSection);
 	memset ((void *)a->t_pixels, 0, sizeof(double) * a->num_pixels);
-
 	for (n = a->begin_ss; n <= a->end_ss; n++)
 	{
 		if (a->pix_per_bin <= 1.0)
@@ -331,7 +331,9 @@ void stitch(int disp)
 			k += a->ss_bins[n];
 		}
 	}
+	LeaveCriticalSection(&a->ResampleSection);
 
+	EnterCriticalSection(&a->AverageSection);
 	switch (a->av_mode)
 	{
 	case -1:	//peak detection
@@ -427,6 +429,7 @@ void stitch(int disp)
 			break;
 		}
 	}
+	LeaveCriticalSection(&a->AverageSection);
 
 	EnterCriticalSection(&a->PB_ControlsSection);
 		a->last_pix_buff = a->w_pix_buff;	
@@ -437,7 +440,7 @@ void stitch(int disp)
 
 DWORD WINAPI spectra (void *pargs)
 {
-	int i;
+	int i, j;
 	int disp = ((int)pargs) >> 12;
 	int ss = (((int)pargs) >> 4) & 255;
 	int LO = ((int)pargs) & 15;
@@ -488,6 +491,9 @@ DWORD WINAPI spectra (void *pargs)
 		{
 			a->stitch_flag = 0;
 			LeaveCriticalSection(&a->StitchSection);
+			for (j = 0; j < MAX_STITCH; j++)
+				for (i = 0; i < MAX_NUM_FFT; i++)
+					InterlockedBitTestAndReset(&(a->input_busy[j][i]), 0);
 			stitch(disp);
 		}
 		else
@@ -502,7 +508,7 @@ DWORD WINAPI spectra (void *pargs)
 
 DWORD WINAPI Cspectra (void *pargs)
 {
-	int i;
+	int i, j;
 	int disp = ((int)pargs) >> 12;
 	int ss = (((int)pargs) >> 4) & 255;
 	int LO = ((int)pargs) & 15;
@@ -562,6 +568,9 @@ DWORD WINAPI Cspectra (void *pargs)
 		{
 			a->stitch_flag = 0;
 			LeaveCriticalSection(&a->StitchSection);
+			for (j = 0; j < MAX_STITCH; j++)
+				for (i = 0; i < MAX_NUM_FFT; i++)
+					InterlockedBitTestAndReset(&(a->input_busy[j][i]), 0);
 			stitch(disp);
 		}
 		else
@@ -766,7 +775,8 @@ void SetAnalyzer (	int disp,
 					double av_b,		//back multiplier for weighted averaging
 					int calset,			//identifier of which set of calibration data to use 
 					double fmin,		//frequency at first pixel value 
-					double fmax			//frequency at last pixel value
+					double fmax,		//frequency at last pixel value
+					int max_w
 				 )
 {
 	DP a = pdisp[disp];
@@ -819,12 +829,7 @@ void SetAnalyzer (	int disp,
 	a->size = sz;
 	a->window_type = win_type;
 	a->PiAlpha = pi;
-
-	if(1.5 * a->size > 32768)
-		a->max_writeahead = (int)(1.5 * a->size);
-	else
-		a->max_writeahead = 32768;
-
+	a->max_writeahead = max_w;
 
 	if (((fmin != a->f_min) || (fmax != a->f_max)) && ((fmin == 0.0) && (fmax == 0.0)))
 		for (i = 0; i < MAX_PIXELS; i++)
@@ -881,7 +886,6 @@ void SetAnalyzer (	int disp,
 	a->stitch_flag = 0;
 	a->av_in_idx = 0;
 	a->av_out_idx = 0;
-	//memset ((void *)a->av_sum, 0, sizeof(double) * MAX_PIXELS);
 	a->w_pix_buff = 0;
 	a->r_pix_buff = 0;
 	a->last_pix_buff = 0;
@@ -933,7 +937,8 @@ void ICreateAnalyzer(	int disp,
 			a->hSnapEvent[i][j] = CreateEvent(NULL, FALSE, FALSE, TEXT("snap"));
 			a->snap[i][j] = 0;
 		}
-
+	InitializeCriticalSectionAndSpinCount(&a->AverageSection, 0);
+	InitializeCriticalSectionAndSpinCount(&a->ResampleSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->PB_ControlsSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->SetAnalyzerSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->StitchSection, 0);
@@ -1107,6 +1112,8 @@ void DestroyAnalyzer(int disp)
 
 	DeleteCriticalSection(&a->PB_ControlsSection);
 	DeleteCriticalSection(&a->SetAnalyzerSection);
+	DeleteCriticalSection(&a->AverageSection);
+	DeleteCriticalSection(&a->ResampleSection);
 
 	for (i = 0; i < a->max_stitch; i++)
 		for (j = 0; j < a->max_num_fft; j++)
@@ -1123,8 +1130,6 @@ void GetPixels	(	int disp,
 					int *flag			//else, returns 0 (try again later)
 				)
 {
-	int i, j;
-
 	DP a = pdisp[disp];
 	EnterCriticalSection(&a->PB_ControlsSection);
 		a->r_pix_buff = a->last_pix_buff;
@@ -1132,9 +1137,6 @@ void GetPixels	(	int disp,
 
 	if (_InterlockedAnd(&(a->pb_ready[a->r_pix_buff]), 1))
 	{
-		for (j = 0; j < MAX_STITCH; j++)
-			for (i = 0; i < MAX_NUM_FFT; i++)
-				InterlockedBitTestAndReset(&(a->input_busy[j][i]), 0);
 		memcpy (pix, a->pixels[a->r_pix_buff], a->num_pixels * sizeof(OUTREAL));
 		*flag = 1;
 		InterlockedBitTestAndReset(&(a->pb_ready[a->r_pix_buff]), 0);

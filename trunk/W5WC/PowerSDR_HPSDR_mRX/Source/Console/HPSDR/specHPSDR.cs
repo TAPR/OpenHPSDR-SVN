@@ -342,6 +342,9 @@ namespace PowerSDR
             set { nb_on = value; }
         }
 
+        const double KEEP_TIME = 0.1;
+        private int max_w;
+
         public void initAnalyzer()
         {
             //maximum number of frames of pixels to average
@@ -409,7 +412,7 @@ namespace PowerSDR
                         high = +(int)((double)stitches / 2.0 * bw_per_subspan - (double)span_clip_h * bin_width - bin_width / 2.0);
                         //Note that the bin_width/2.0 factors are included because the complex FFT has one more negative output bin
                         //  than positive output bin.
-
+                        max_w = fft_size + (int)Math.Min(KEEP_TIME * sample_rate, KEEP_TIME * fft_size * frame_rate);
                         break;
                     }
             }
@@ -469,7 +472,8 @@ namespace PowerSDR
                         avb,
                         calibration_data_set,
                         span_min_freq,
-                        span_max_freq);
+                        span_max_freq,
+                        max_w);
         }
 
         public void CalcSpectrum(int filter_low, int filter_high, int spec_blocksize)
@@ -517,7 +521,7 @@ namespace PowerSDR
             //no need for any symmetrical clipping
             int sclip = 0;
             int stitch = 1;
-
+            max_w = fft_size + (int)Math.Min(KEEP_TIME * sample_rate, KEEP_TIME * fft_size * frame_rate);
             Display.RXSpectrumDisplayLow = lower_freq;
             Display.RXSpectrumDisplayHigh = upper_freq;
   
@@ -540,7 +544,8 @@ namespace PowerSDR
           avb,
           calibration_data_set,
           span_min_freq,
-          span_max_freq);
+          span_max_freq,
+          max_w);
         }
     }
 
@@ -549,7 +554,7 @@ namespace PowerSDR
         #region DLL Method Declarations
         [DllImport("specHPSDR.dll")]
         public static extern void SetAnalyzer(int disp, int n_fft, int type, IntPtr flp, int sz, int buff_size, int win_type, double pi, int ovrlp, int clp,
-            int fsclipL, int fsclipH, int n_pix, int n_stch, int av_mode, int n_av, double avb, int cal_set, double fmin, double fmax);
+            int fsclipL, int fsclipH, int n_pix, int n_stch, int av_mode, int n_av, double avb, int cal_set, double fmin, double fmax, int max_w);
 
         [DllImport("specHPSDR.dll")]
         public static extern void CreateAnalyzer(int disp, ref int success, String app_data_path);

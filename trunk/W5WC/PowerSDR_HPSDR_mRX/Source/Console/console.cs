@@ -7056,14 +7056,14 @@ namespace PowerSDR
             this.Controls.Add(this.panelPower);
             this.Controls.Add(this.panelMode);
             this.Controls.Add(this.ptbSquelch);
-            this.Controls.Add(this.panelBandHF);
-            this.Controls.Add(this.panelBandVHF);
             this.Controls.Add(this.panelRX2Power);
             this.Controls.Add(this.lblRF2);
-            this.Controls.Add(this.panelModeSpecificCW);
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificFM);
             this.Controls.Add(this.panelModeSpecificDigital);
+            this.Controls.Add(this.panelBandHF);
+            this.Controls.Add(this.panelBandVHF);
+            this.Controls.Add(this.panelModeSpecificCW);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Console";
@@ -20059,8 +20059,6 @@ namespace PowerSDR
             {
                 app_data_path = value;
                 //DB.AppDataPath = value;
-                FWCEEPROM.AppDataPath = value;
-                //HIDEEPROM.AppDataPath = value; 
                 Skin.AppDataPath = value;
             }
         }
@@ -30309,6 +30307,7 @@ namespace PowerSDR
 
                 if (!Display.DataReady || (chkSplitDisplay.Checked && !Display.DataReadyBottom))
                 {
+                   
                     if (calibration_running)
                     {
                         calibration_mutex.WaitOne();
@@ -30435,9 +30434,9 @@ namespace PowerSDR
                     picDisplay.Refresh();
 
                 if (chkPower.Checked)
-                    Thread.Sleep(display_delay);
-            }
+                     Thread.Sleep(display_delay);
             //			display_running = false;
+                }
         }
 
         private HiPerfTimer meter_timer = new HiPerfTimer();
@@ -31721,9 +31720,9 @@ namespace PowerSDR
                           CallCal1500TXImageComb();
                           break;*/
                     case Keys.R:
-                        DiversityForm diversityForm = new DiversityForm(this);
-                        diversityForm.Focus();
-                        diversityForm.Show();
+                       // DiversityForm diversityForm = new DiversityForm(this);
+                       // diversityForm.Focus();
+                      //  diversityForm.Show();
                         break;
                     case Keys.U:
                        // mnuUCB_Click(this, EventArgs.Empty);
@@ -34288,8 +34287,8 @@ namespace PowerSDR
                         Thread.Sleep(x2_delay);
                     }
 
-                    if (!chkMUT.Checked && num_channels == 2)
-                        Hdw.MuteRelay = false;
+                  //  if (!chkMUT.Checked && num_channels == 2)
+                   //     Hdw.MuteRelay = false;
 
                     RX1PreampMode = rx1_preamp_mode;
 
@@ -34467,11 +34466,11 @@ namespace PowerSDR
                 return;
             }
 
-            if (current_hpsdr_hardware == HPSDRHW.Angelia && current_hpsdr_model != HPSDRModel.ANAN100D)
+          /*  if (current_hpsdr_hardware == HPSDRHW.Angelia && current_hpsdr_model != HPSDRModel.ANAN100D)
             {
                 chkMOX.Checked = false;
                 return;
-            }
+            } */
 
             if (allow_mox_bypass && current_ptt_mode != PTTMode.MIC && current_ptt_mode != PTTMode.SPACE)
             {
@@ -39233,9 +39232,6 @@ namespace PowerSDR
             Display.Init();
             if (!initializing)
                 UpdateRXSpectrumDisplayVars();
-            //Display.DrawBackground();
-            // specRX.GetSpecRX(0).Pixels = picDisplay.Width;
-            // specRX.GetSpecRX(1).Pixels = picDisplay.Width;
             picDisplay.Invalidate();
 
         }
@@ -39813,8 +39809,6 @@ namespace PowerSDR
                     if ((chkVFOATX.Checked || !rx2_enabled) && new_mode != DSPMode.CWL && new_mode != DSPMode.CWU)
                     {
                         chkMON.Checked = mon_recall;
-                        // DttSP.StopKeyer();
-                        // cw_key_mode = false;
                     }
 
                     if (!RX1IsOn60mChannel())
@@ -39839,10 +39833,9 @@ namespace PowerSDR
                     if (chkVFOATX.Checked || !rx2_enabled)
                     {
                         if (new_mode != DSPMode.AM &&
-                            new_mode != DSPMode.SAM &&
-                            new_mode != DSPMode.FM)
+                            new_mode != DSPMode.SAM)
                         {
-                            chkMON.Enabled = true;
+                           // chkMON.Enabled = true;
                             chkBIN.Enabled = true;
                         }
 
@@ -39866,10 +39859,9 @@ namespace PowerSDR
                     if (chkVFOATX.Checked || !rx2_enabled)
                     {
                         if (new_mode != DSPMode.AM &&
-                            new_mode != DSPMode.SAM &&
-                            new_mode != DSPMode.FM)
+                            new_mode != DSPMode.SAM)
                         {
-                            chkMON.Enabled = true;
+                           // chkMON.Enabled = true;
                             chkBIN.Enabled = true;
                         }
                     }
@@ -39879,10 +39871,9 @@ namespace PowerSDR
                     if (chkVFOATX.Checked || !rx2_enabled)
                     {
                         if (new_mode != DSPMode.AM &&
-                            new_mode != DSPMode.SAM &&
-                            new_mode != DSPMode.FM)
+                            new_mode != DSPMode.SAM)
                         {
-                            chkMON.Enabled = true;
+                           // chkMON.Enabled = true;
                             chkBIN.Enabled = true;
                         }
                     }
@@ -39996,13 +39987,9 @@ namespace PowerSDR
                     {
                         CWPitch = cw_pitch;
                         radio.GetDSPTX(0).TXOsc = 0.0;
-                        // RadioDSP.KeyerFreq = cw_pitch;
                         if (!rx_only && chkPower.Checked)
                         {
                             chkMOX.Enabled = true;
-                            //  DttSP.StopKeyer();
-                            //  DttSP.CWRingRestart();
-                            // DttSP.StartKeyer();
                         }
 
                         if (old_mode != DSPMode.CWL && old_mode != DSPMode.CWU)
@@ -40043,9 +40030,6 @@ namespace PowerSDR
                         if (!rx_only && chkPower.Checked)
                         {
                             chkMOX.Enabled = true;
-                            //  DttSP.StopKeyer();
-                            // DttSP.CWRingRestart();
-                            // DttSP.StartKeyer();
                         }
 
 
@@ -40098,10 +40082,10 @@ namespace PowerSDR
                     {
                         if (!rx_only && chkPower.Checked)
                             chkMOX.Enabled = true;
-                        chkMON.Checked = false;
-                        chkMON.Enabled = false;
-                        chkBIN.Checked = false;
-                        chkBIN.Enabled = false;
+                       // chkMON.Checked = false;
+                       // chkMON.Enabled = false;
+                      //  chkBIN.Checked = false;
+                       // chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
                         //radio.GetDSPTX(0).TXOsc = 11025.0; //w5wc-1
 
@@ -40117,8 +40101,8 @@ namespace PowerSDR
                         chkMOX.Enabled = true;
                     if (chkVFOATX.Checked || !rx2_enabled)
                     {
-                        chkMON.Checked = false;
-                        chkMON.Enabled = false;
+                       // chkMON.Checked = false;
+                       // chkMON.Enabled = false;
                         chkBIN.Checked = false;
                         chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
@@ -40133,8 +40117,8 @@ namespace PowerSDR
                         chkMOX.Enabled = true;
                     if (chkVFOATX.Checked || !rx2_enabled)
                     {
-                        chkMON.Checked = false;
-                        chkMON.Enabled = false;
+                      //  chkMON.Checked = false;
+                      //  chkMON.Enabled = false;
                         chkBIN.Checked = false;
                         chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
@@ -41816,6 +41800,8 @@ namespace PowerSDR
 
         private void btnZeroBeat_Click(object sender, System.EventArgs e)
         {
+            if (!PowerOn) return;
+
             int peak_hz = FindPeakFreqInPassband();
             if (peak_hz == -1)
             {
@@ -42101,8 +42087,8 @@ namespace PowerSDR
         {
             if (chkDSPNB2.Checked) chkDSPNB2.BackColor = button_selected_color;
             else chkDSPNB2.BackColor = SystemColors.Control;
-            //  radio.GetDSPRX(0, 0).NBOn = chkDSPNB2.Checked;
-            //  radio.GetDSPRX(0, 1).NBOn = chkDSPNB2.Checked;
+            radio.GetDSPRX(0, 0).NBOn = chkDSPNB2.Checked;
+            radio.GetDSPRX(0, 1).NBOn = chkDSPNB2.Checked;
             radio.GetDSPRX(0, 0).SDROM = chkDSPNB2.Checked;
             radio.GetDSPRX(0, 1).SDROM = chkDSPNB2.Checked;
             cat_nb2_status = Convert.ToInt32(chkDSPNB2.Checked);
@@ -42482,11 +42468,11 @@ namespace PowerSDR
             //if(chkEnableMultiRX.Checked)
             lblRX1Vol.Text = "Vol";
 
-            if (chkMUT.Checked)
+          /*  if (chkMUT.Checked)
             {
                 radio.GetDSPRX(0, 0).RXOutputGain = 0.0;
             }
-            else
+            else*/
             {
                 radio.GetDSPRX(0, 0).RXOutputGain = (double)ptbRX0Gain.Value / ptbRX0Gain.Maximum;
                 ptbRX1AF.Value = ptbRX0Gain.Value;
@@ -44330,6 +44316,8 @@ namespace PowerSDR
             else chkRX2NB2.BackColor = SystemColors.Control;
             radio.GetDSPRX(1, 0).SDROM = chkRX2NB2.Checked;
             radio.GetDSPRX(1, 1).SDROM = chkRX2NB2.Checked;
+            radio.GetDSPRX(1, 0).NBOn = chkRX2NB.Checked;
+            radio.GetDSPRX(1, 1).NBOn = chkRX2NB.Checked;
             //cat_nb2_status = Convert.ToInt32(chkRX2NB2.Checked);
             nBRX2ToolStripMenuItem.Checked = chkRX2NB2.Checked;
         }
@@ -44524,7 +44512,7 @@ namespace PowerSDR
 
         private void ptbRX2Gain_Scroll(object sender, System.EventArgs e)
         {
-            if (chkRX2Mute.Checked) chkRX2Mute.Checked = false; ;
+           // if (chkRX2Mute.Checked) chkRX2Mute.Checked = false; ;
             radio.GetDSPRX(1, 0).RXOutputGain = (double)ptbRX2Gain.Value / ptbRX2Gain.Maximum;
             ptbRX2AF.Value = ptbRX2Gain.Value;
             lblRX2AF.Text = "RX2 AF:  " + ptbRX2Gain.Value.ToString();

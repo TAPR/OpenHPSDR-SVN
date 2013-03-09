@@ -152,7 +152,7 @@ namespace PowerSDR
 			// 
 			// Splash
 			// 
-			this.AutoScaleMode = AutoScaleMode.None;
+			//this.AutoScaleMode = AutoScaleMode.None;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(5, 13);
 			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.ClientSize = new System.Drawing.Size(400, 250);

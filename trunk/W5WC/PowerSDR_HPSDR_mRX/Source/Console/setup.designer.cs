@@ -3608,7 +3608,7 @@
             this.panelAlexRXXVRTControl.Controls.Add(this.chkAlex40R2);
             this.panelAlexRXXVRTControl.Location = new System.Drawing.Point(140, 13);
             this.panelAlexRXXVRTControl.Name = "panelAlexRXXVRTControl";
-            this.panelAlexRXXVRTControl.Size = new System.Drawing.Size(101, 207);
+            this.panelAlexRXXVRTControl.Size = new System.Drawing.Size(113, 207);
             this.panelAlexRXXVRTControl.TabIndex = 235;
             // 
             // labelRXAntControl
@@ -3644,7 +3644,7 @@
             // chkAlex6R1
             // 
             this.chkAlex6R1.Image = null;
-            this.chkAlex6R1.Location = new System.Drawing.Point(10, 187);
+            this.chkAlex6R1.Location = new System.Drawing.Point(15, 187);
             this.chkAlex6R1.Name = "chkAlex6R1";
             this.chkAlex6R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex6R1.TabIndex = 38;
@@ -3654,7 +3654,7 @@
             // chkAlex160R1
             // 
             this.chkAlex160R1.Image = null;
-            this.chkAlex160R1.Location = new System.Drawing.Point(10, 27);
+            this.chkAlex160R1.Location = new System.Drawing.Point(15, 27);
             this.chkAlex160R1.Name = "chkAlex160R1";
             this.chkAlex160R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex160R1.TabIndex = 3;
@@ -3664,7 +3664,7 @@
             // chkAlex10XV
             // 
             this.chkAlex10XV.Image = null;
-            this.chkAlex10XV.Location = new System.Drawing.Point(68, 171);
+            this.chkAlex10XV.Location = new System.Drawing.Point(82, 171);
             this.chkAlex10XV.Name = "chkAlex10XV";
             this.chkAlex10XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex10XV.TabIndex = 37;
@@ -3684,7 +3684,7 @@
             // chkAlex6R2
             // 
             this.chkAlex6R2.Image = null;
-            this.chkAlex6R2.Location = new System.Drawing.Point(34, 187);
+            this.chkAlex6R2.Location = new System.Drawing.Point(47, 187);
             this.chkAlex6R2.Name = "chkAlex6R2";
             this.chkAlex6R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex6R2.TabIndex = 39;
@@ -3694,7 +3694,7 @@
             // chkAlex160R2
             // 
             this.chkAlex160R2.Image = null;
-            this.chkAlex160R2.Location = new System.Drawing.Point(34, 27);
+            this.chkAlex160R2.Location = new System.Drawing.Point(47, 27);
             this.chkAlex160R2.Name = "chkAlex160R2";
             this.chkAlex160R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex160R2.TabIndex = 4;
@@ -3704,7 +3704,7 @@
             // chkAlex10R2
             // 
             this.chkAlex10R2.Image = null;
-            this.chkAlex10R2.Location = new System.Drawing.Point(34, 171);
+            this.chkAlex10R2.Location = new System.Drawing.Point(47, 171);
             this.chkAlex10R2.Name = "chkAlex10R2";
             this.chkAlex10R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex10R2.TabIndex = 36;
@@ -3714,7 +3714,7 @@
             // chkAlex6XV
             // 
             this.chkAlex6XV.Image = null;
-            this.chkAlex6XV.Location = new System.Drawing.Point(68, 187);
+            this.chkAlex6XV.Location = new System.Drawing.Point(82, 187);
             this.chkAlex6XV.Name = "chkAlex6XV";
             this.chkAlex6XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex6XV.TabIndex = 40;
@@ -3724,7 +3724,7 @@
             // chkAlex160XV
             // 
             this.chkAlex160XV.Image = null;
-            this.chkAlex160XV.Location = new System.Drawing.Point(68, 27);
+            this.chkAlex160XV.Location = new System.Drawing.Point(82, 27);
             this.chkAlex160XV.Name = "chkAlex160XV";
             this.chkAlex160XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex160XV.TabIndex = 5;
@@ -3734,7 +3734,7 @@
             // chkAlex10R1
             // 
             this.chkAlex10R1.Image = null;
-            this.chkAlex10R1.Location = new System.Drawing.Point(10, 171);
+            this.chkAlex10R1.Location = new System.Drawing.Point(15, 171);
             this.chkAlex10R1.Name = "chkAlex10R1";
             this.chkAlex10R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex10R1.TabIndex = 35;
@@ -3744,7 +3744,7 @@
             // chkAlex12XV
             // 
             this.chkAlex12XV.Image = null;
-            this.chkAlex12XV.Location = new System.Drawing.Point(68, 155);
+            this.chkAlex12XV.Location = new System.Drawing.Point(82, 155);
             this.chkAlex12XV.Name = "chkAlex12XV";
             this.chkAlex12XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex12XV.TabIndex = 34;
@@ -3754,7 +3754,7 @@
             // chkAlex12R2
             // 
             this.chkAlex12R2.Image = null;
-            this.chkAlex12R2.Location = new System.Drawing.Point(34, 155);
+            this.chkAlex12R2.Location = new System.Drawing.Point(47, 155);
             this.chkAlex12R2.Name = "chkAlex12R2";
             this.chkAlex12R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex12R2.TabIndex = 33;
@@ -3764,7 +3764,7 @@
             // chkAlex12R1
             // 
             this.chkAlex12R1.Image = null;
-            this.chkAlex12R1.Location = new System.Drawing.Point(10, 155);
+            this.chkAlex12R1.Location = new System.Drawing.Point(15, 155);
             this.chkAlex12R1.Name = "chkAlex12R1";
             this.chkAlex12R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex12R1.TabIndex = 32;
@@ -3774,7 +3774,7 @@
             // chkAlex80R1
             // 
             this.chkAlex80R1.Image = null;
-            this.chkAlex80R1.Location = new System.Drawing.Point(10, 43);
+            this.chkAlex80R1.Location = new System.Drawing.Point(15, 43);
             this.chkAlex80R1.Name = "chkAlex80R1";
             this.chkAlex80R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex80R1.TabIndex = 11;
@@ -3784,7 +3784,7 @@
             // chkAlex15XV
             // 
             this.chkAlex15XV.Image = null;
-            this.chkAlex15XV.Location = new System.Drawing.Point(68, 139);
+            this.chkAlex15XV.Location = new System.Drawing.Point(82, 139);
             this.chkAlex15XV.Name = "chkAlex15XV";
             this.chkAlex15XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex15XV.TabIndex = 31;
@@ -3794,7 +3794,7 @@
             // chkAlex15R2
             // 
             this.chkAlex15R2.Image = null;
-            this.chkAlex15R2.Location = new System.Drawing.Point(34, 139);
+            this.chkAlex15R2.Location = new System.Drawing.Point(47, 139);
             this.chkAlex15R2.Name = "chkAlex15R2";
             this.chkAlex15R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex15R2.TabIndex = 30;
@@ -3804,7 +3804,7 @@
             // chkAlex80R2
             // 
             this.chkAlex80R2.Image = null;
-            this.chkAlex80R2.Location = new System.Drawing.Point(34, 43);
+            this.chkAlex80R2.Location = new System.Drawing.Point(47, 43);
             this.chkAlex80R2.Name = "chkAlex80R2";
             this.chkAlex80R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex80R2.TabIndex = 12;
@@ -3814,7 +3814,7 @@
             // chkAlex15R1
             // 
             this.chkAlex15R1.Image = null;
-            this.chkAlex15R1.Location = new System.Drawing.Point(10, 139);
+            this.chkAlex15R1.Location = new System.Drawing.Point(15, 139);
             this.chkAlex15R1.Name = "chkAlex15R1";
             this.chkAlex15R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex15R1.TabIndex = 29;
@@ -3824,7 +3824,7 @@
             // chkAlex17XV
             // 
             this.chkAlex17XV.Image = null;
-            this.chkAlex17XV.Location = new System.Drawing.Point(68, 123);
+            this.chkAlex17XV.Location = new System.Drawing.Point(82, 123);
             this.chkAlex17XV.Name = "chkAlex17XV";
             this.chkAlex17XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex17XV.TabIndex = 28;
@@ -3834,7 +3834,7 @@
             // chkAlex80XV
             // 
             this.chkAlex80XV.Image = null;
-            this.chkAlex80XV.Location = new System.Drawing.Point(68, 43);
+            this.chkAlex80XV.Location = new System.Drawing.Point(82, 43);
             this.chkAlex80XV.Name = "chkAlex80XV";
             this.chkAlex80XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex80XV.TabIndex = 13;
@@ -3844,7 +3844,7 @@
             // chkAlex17R2
             // 
             this.chkAlex17R2.Image = null;
-            this.chkAlex17R2.Location = new System.Drawing.Point(34, 123);
+            this.chkAlex17R2.Location = new System.Drawing.Point(47, 123);
             this.chkAlex17R2.Name = "chkAlex17R2";
             this.chkAlex17R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex17R2.TabIndex = 27;
@@ -3854,7 +3854,7 @@
             // chkAlex17R1
             // 
             this.chkAlex17R1.Image = null;
-            this.chkAlex17R1.Location = new System.Drawing.Point(10, 123);
+            this.chkAlex17R1.Location = new System.Drawing.Point(15, 123);
             this.chkAlex17R1.Name = "chkAlex17R1";
             this.chkAlex17R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex17R1.TabIndex = 26;
@@ -3864,7 +3864,7 @@
             // chkAlex60R1
             // 
             this.chkAlex60R1.Image = null;
-            this.chkAlex60R1.Location = new System.Drawing.Point(10, 59);
+            this.chkAlex60R1.Location = new System.Drawing.Point(15, 59);
             this.chkAlex60R1.Name = "chkAlex60R1";
             this.chkAlex60R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex60R1.TabIndex = 14;
@@ -3874,7 +3874,7 @@
             // chkAlex20XV
             // 
             this.chkAlex20XV.Image = null;
-            this.chkAlex20XV.Location = new System.Drawing.Point(68, 107);
+            this.chkAlex20XV.Location = new System.Drawing.Point(82, 107);
             this.chkAlex20XV.Name = "chkAlex20XV";
             this.chkAlex20XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex20XV.TabIndex = 25;
@@ -3884,7 +3884,7 @@
             // chkAlex20R2
             // 
             this.chkAlex20R2.Image = null;
-            this.chkAlex20R2.Location = new System.Drawing.Point(34, 107);
+            this.chkAlex20R2.Location = new System.Drawing.Point(47, 107);
             this.chkAlex20R2.Name = "chkAlex20R2";
             this.chkAlex20R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex20R2.TabIndex = 24;
@@ -3894,7 +3894,7 @@
             // chkAlex60R2
             // 
             this.chkAlex60R2.Image = null;
-            this.chkAlex60R2.Location = new System.Drawing.Point(34, 59);
+            this.chkAlex60R2.Location = new System.Drawing.Point(47, 59);
             this.chkAlex60R2.Name = "chkAlex60R2";
             this.chkAlex60R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex60R2.TabIndex = 15;
@@ -3904,7 +3904,7 @@
             // chkAlex20R1
             // 
             this.chkAlex20R1.Image = null;
-            this.chkAlex20R1.Location = new System.Drawing.Point(10, 107);
+            this.chkAlex20R1.Location = new System.Drawing.Point(15, 107);
             this.chkAlex20R1.Name = "chkAlex20R1";
             this.chkAlex20R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex20R1.TabIndex = 23;
@@ -3914,7 +3914,7 @@
             // chkAlex30XV
             // 
             this.chkAlex30XV.Image = null;
-            this.chkAlex30XV.Location = new System.Drawing.Point(68, 91);
+            this.chkAlex30XV.Location = new System.Drawing.Point(82, 91);
             this.chkAlex30XV.Name = "chkAlex30XV";
             this.chkAlex30XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex30XV.TabIndex = 22;
@@ -3924,7 +3924,7 @@
             // chkAlex60XV
             // 
             this.chkAlex60XV.Image = null;
-            this.chkAlex60XV.Location = new System.Drawing.Point(68, 59);
+            this.chkAlex60XV.Location = new System.Drawing.Point(82, 59);
             this.chkAlex60XV.Name = "chkAlex60XV";
             this.chkAlex60XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex60XV.TabIndex = 16;
@@ -3934,7 +3934,7 @@
             // chkAlex30R2
             // 
             this.chkAlex30R2.Image = null;
-            this.chkAlex30R2.Location = new System.Drawing.Point(34, 91);
+            this.chkAlex30R2.Location = new System.Drawing.Point(47, 91);
             this.chkAlex30R2.Name = "chkAlex30R2";
             this.chkAlex30R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex30R2.TabIndex = 21;
@@ -3944,7 +3944,7 @@
             // chkAlex30R1
             // 
             this.chkAlex30R1.Image = null;
-            this.chkAlex30R1.Location = new System.Drawing.Point(10, 91);
+            this.chkAlex30R1.Location = new System.Drawing.Point(15, 91);
             this.chkAlex30R1.Name = "chkAlex30R1";
             this.chkAlex30R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex30R1.TabIndex = 20;
@@ -3954,7 +3954,7 @@
             // chkAlex40R1
             // 
             this.chkAlex40R1.Image = null;
-            this.chkAlex40R1.Location = new System.Drawing.Point(10, 75);
+            this.chkAlex40R1.Location = new System.Drawing.Point(15, 75);
             this.chkAlex40R1.Name = "chkAlex40R1";
             this.chkAlex40R1.Size = new System.Drawing.Size(16, 16);
             this.chkAlex40R1.TabIndex = 17;
@@ -3964,7 +3964,7 @@
             // chkAlex40XV
             // 
             this.chkAlex40XV.Image = null;
-            this.chkAlex40XV.Location = new System.Drawing.Point(68, 75);
+            this.chkAlex40XV.Location = new System.Drawing.Point(82, 75);
             this.chkAlex40XV.Name = "chkAlex40XV";
             this.chkAlex40XV.Size = new System.Drawing.Size(16, 16);
             this.chkAlex40XV.TabIndex = 19;
@@ -3974,7 +3974,7 @@
             // chkAlex40R2
             // 
             this.chkAlex40R2.Image = null;
-            this.chkAlex40R2.Location = new System.Drawing.Point(34, 75);
+            this.chkAlex40R2.Location = new System.Drawing.Point(47, 75);
             this.chkAlex40R2.Name = "chkAlex40R2";
             this.chkAlex40R2.Size = new System.Drawing.Size(16, 16);
             this.chkAlex40R2.TabIndex = 18;
