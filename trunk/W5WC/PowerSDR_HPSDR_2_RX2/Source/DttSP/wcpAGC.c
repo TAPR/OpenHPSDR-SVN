@@ -2,7 +2,7 @@
 
 This file is part of a program that implements a Software-Defined Radio.
 
-Copyright (C) 2011, 2012 Warren Pratt, NR0V
+Copyright (C) 2011, 2012, 2013 Warren Pratt, NR0V
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -82,7 +82,7 @@ WCPAGC newWcpAGC (	AGCMODE mode,
 	a->tau_hang_decay = tau_hang_decay;
 	strcpy (a->tag, tag);
 	//assign constants
-	a->ring_buffsize = 19200;
+	a->ring_buffsize = RB_SIZE;
 	//do one-time initialization
 	a->out_index = -1;
 	a->ring_max = 0.0;
@@ -139,9 +139,9 @@ void delWcpAGC (WCPAGC a)
 
 void WcpAGC_flushbuf (WCPAGC a)
 {
-	memset ((void *)a->ring, 0, sizeof(double)*19200*2);
+	memset ((void *)a->ring, 0, sizeof(double) * RB_SIZE * 2);
 	a->ring_max = 0.0;
-	memset ((void *)a->abs_ring, 0, sizeof(double)*19200);
+	memset ((void *)a->abs_ring, 0, sizeof(double)* RB_SIZE);
 }
 
 void WcpAGC (WCPAGC a)
@@ -322,4 +322,277 @@ void WcpAGC (WCPAGC a)
 		a->buff[i].im = (float)(a->out_sample[1] * mult);
 	}
 	return;
+}
+
+DttSP_EXP void
+SetRXAGC (unsigned int thread, unsigned subrx, AGCMODE setit)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+
+	switch (setit)
+	{
+		case agcOFF:
+			rx[thread][subrx].wcpagc.gen->mode = agcOFF;
+			rx[thread][subrx].wcpagc.flag = TRUE;
+			loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+			break;
+		case agcLONG:
+			rx[thread][subrx].wcpagc.gen->mode = agcLONG;
+			rx[thread][subrx].wcpagc.flag = TRUE;
+			rx[thread][subrx].wcpagc.gen->hangtime = 2.000;
+			rx[thread][subrx].wcpagc.gen->tau_decay = 2.000;
+			loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+			break;
+		case agcSLOW:
+			rx[thread][subrx].wcpagc.gen->mode = agcSLOW;
+			rx[thread][subrx].wcpagc.flag = TRUE;
+			rx[thread][subrx].wcpagc.gen->hangtime = 1.000;
+			rx[thread][subrx].wcpagc.gen->tau_decay = 0.500;
+			loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+			break;
+		case agcMED:
+			rx[thread][subrx].wcpagc.gen->mode = agcMED;
+			rx[thread][subrx].wcpagc.flag = TRUE;
+			rx[thread][subrx].wcpagc.gen->hang_thresh = 1.0;
+			rx[thread][subrx].wcpagc.gen->hangtime = 0.000;
+			rx[thread][subrx].wcpagc.gen->tau_decay = 0.250;
+			loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+			break;
+		case agcFAST:
+			rx[thread][subrx].wcpagc.gen->mode = agcSLOW;
+			rx[thread][subrx].wcpagc.flag = TRUE;
+			rx[thread][subrx].wcpagc.gen->hang_thresh = 1.0;
+			rx[thread][subrx].wcpagc.gen->hangtime = 0.000;
+			rx[thread][subrx].wcpagc.gen->tau_decay = 0.050;
+			loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+			break;
+		default:
+			rx[thread][subrx].wcpagc.gen->mode = 5;
+			rx[thread][subrx].wcpagc.flag = TRUE;
+			break;
+	}
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetRXAGCAttack (unsigned int thread, unsigned subrx, int attack)
+{
+	REAL tmp = (REAL)attack;
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].wcpagc.gen->tau_attack = (double)attack / 1000.0;
+	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetRXAGCDecay (unsigned int thread, unsigned subrx, int decay)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].wcpagc.gen->tau_decay = (double)decay / 1000.0;
+	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetRXAGCHang (unsigned int thread, unsigned subrx, int hang)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].wcpagc.gen->hangtime = (double)hang / 1000.0;
+	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void				
+GetRXAGCHangLevel(unsigned int thread, unsigned int subrx, double *hangLevel)
+//for line on bandscope
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	*hangLevel = 20.0 * log10( rx[thread][subrx].wcpagc.gen->hang_level / 0.637 );
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void			
+SetRXAGCHangLevel(unsigned int thread, unsigned int subrx, double hangLevel)
+//for line on bandscope
+{
+	double convert, tmp;
+	sem_wait(&top[thread].sync.upd.sem);
+	if (rx[thread][subrx].wcpagc.gen->max_input > rx[thread][subrx].wcpagc.gen->min_volts)
+	{
+		convert = pow (10.0, hangLevel / 20.0);
+		tmp = max(1e-8, (convert - rx[thread][subrx].wcpagc.gen->min_volts) / 
+			(rx[thread][subrx].wcpagc.gen->max_input - rx[thread][subrx].wcpagc.gen->min_volts));
+		rx[thread][subrx].wcpagc.gen->hang_thresh = 1.0 + 0.125 * log10 (tmp);
+	}
+	else
+		rx[thread][subrx].wcpagc.gen->hang_thresh = 1.0;
+	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void				
+GetRXAGCHangThreshold(unsigned int thread, unsigned int subrx, int *hangthreshold)
+//for slider in setup
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	*hangthreshold = (int)(100.0 * rx[thread][subrx].wcpagc.gen->hang_thresh);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetRXAGCHangThreshold (unsigned int thread, unsigned int subrx, int hangthreshold)
+//For slider in setup
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].wcpagc.gen->hang_thresh = (double)hangthreshold / 100.0;
+	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void				
+GetRXAGCThresh(unsigned int thread, unsigned int subrx, double *thresh)
+//for line on bandscope.
+{
+	double noise_offset = 10.0 * log10((rx[thread][subrx].filt.high - rx[thread][subrx].filt.low) 
+		* uni[thread].spec.size / uni[thread].samplerate);
+	sem_wait(&top[thread].sync.upd.sem);
+	*thresh = 20.0 * log10( rx[thread][subrx].wcpagc.gen->min_volts ) - noise_offset;
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void				
+SetRXAGCThresh(unsigned int thread, unsigned int subrx, double thresh)
+//for line on bandscope
+{
+	double noise_offset = 10.0 * log10((rx[thread][subrx].filt.high - rx[thread][subrx].filt.low) 
+		* uni[thread].spec.size / uni[thread].samplerate);
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].wcpagc.gen->max_gain = rx[thread][subrx].wcpagc.gen->out_target / 
+		(rx[thread][subrx].wcpagc.gen->var_gain * pow (10.0, (thresh + noise_offset) / 20.0));
+	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void			
+GetRXAGCTop(unsigned int thread, unsigned int subrx, double *max_agc)
+//for AGC Max Gain in setup
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	*max_agc = 20 * log10 (rx[thread][subrx].wcpagc.gen->max_gain);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetRXAGCTop (unsigned int thread, unsigned int subrx, double max_agc)
+//for AGC Max Gain in setup
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].wcpagc.gen->max_gain = pow (10.0, (double)max_agc / 20.0);
+	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetRXAGCSlope (unsigned int thread, unsigned subrx, int slope)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].wcpagc.gen->var_gain = pow (10.0, (double)slope / 20.0 / 10.0);
+	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+
+DttSP_EXP void
+SetTXALCAttack (unsigned int thread, int attack)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	tx[thread].alc.gen->tau_attack = (double)attack / 1000.0;
+	loadWcpAGC(tx[thread].alc.gen);
+	sem_post(&top[thread].sync.upd.sem);
+}
+DttSP_EXP void
+SetTXALCDecay (unsigned int thread, int decay)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	tx[thread].alc.gen->tau_decay = (double)decay / 1000.0;
+	loadWcpAGC(tx[thread].alc.gen);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetTXALCBot (unsigned int thread, double max_agc)
+{
+	
+}
+
+DttSP_EXP void
+SetTXALCHang (unsigned int thread, int decay)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	tx[thread].alc.gen->hangtime = (double)decay / 1000.0;
+	loadWcpAGC(tx[thread].alc.gen);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetTXLevelerSt (unsigned int thread, BOOLEAN state)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+
+	tx[thread].leveler.flag = state;
+
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void // (W5WC) ALC On/Off Control
+SetTXALCSt (unsigned int thread, BOOLEAN state)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	tx[thread].alc.flag = state;
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetTXLevelerAttack (unsigned int thread, int attack)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	tx[thread].leveler.gen->tau_attack = (double)attack / 1000.0;
+	loadWcpAGC(tx[thread].leveler.gen);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetTXLevelerDecay (unsigned int thread, int decay)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	tx[thread].leveler.gen->tau_decay = (double)decay / 1000.0;
+	loadWcpAGC(tx[thread].leveler.gen);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetTXLevelerHang (unsigned int thread, int decay)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	tx[thread].leveler.gen->hangtime = (double)decay / 1000.0;
+	loadWcpAGC(tx[thread].leveler.gen);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetTXLevelerTop (unsigned int thread, double maxgain)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	tx[thread].leveler.gen->max_gain = pow (10.0,(double)maxgain / 20.0);
+	loadWcpAGC(tx[thread].leveler.gen);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetFixedAGC (unsigned int thread, unsigned int subrx, double fixed_agc)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].wcpagc.gen->fixed_gain = pow (10.0, (double)fixed_agc / 20.0);
+	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
+	sem_post(&top[thread].sync.upd.sem);
 }

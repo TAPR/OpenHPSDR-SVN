@@ -28,7 +28,7 @@ warren@wpratt.com
 
 #define _anf_h
 
-#define DLINE_SIZE 1024
+#define DLINE_SIZE 2048
 
 typedef struct _anf
 {

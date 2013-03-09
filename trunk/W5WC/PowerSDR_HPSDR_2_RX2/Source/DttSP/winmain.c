@@ -734,7 +734,7 @@ setup_system_audio (unsigned int thread)
 {
 
 	sprintf (top[thread].jack.name, "sdr-%d-%0u", top[thread].pid,thread);
-	top[thread].jack.size = 2048;
+	top[thread].jack.size = JACKSIZE;
 
 	memset ((char *) &top[thread].jack.blow, 0, sizeof (top[thread].jack.blow));
 	top[thread].jack.ring.i.l = ringb_float_create (top[thread].jack.size * loc[thread].mult.ring);
@@ -811,6 +811,7 @@ setup (char *app_data_path)
 		top[thread].swch.env.fall.size = (int)(loc[thread].def.rate * 0.005);
 		top[thread].swch.env.stdy.size = (int)(loc[thread].def.rate * 0.050);
 		top[thread].swch.env.rise.size = (int)(loc[thread].def.rate * 0.005);
+
 
 		top[thread].swch.env.curr.val = 0.0;
 		top[thread].swch.env.curr.cnt = 0;

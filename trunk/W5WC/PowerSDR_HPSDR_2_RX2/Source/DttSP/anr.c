@@ -124,3 +124,39 @@ void del_anr (ANR a)
             a->in_idx = (a->in_idx + a->mask) & a->mask;
         }
     }
+
+DttSP_EXP void
+SetANR (unsigned int thread, unsigned subrx, BOOLEAN setit)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].anr.flag = setit;
+	memset(rx[thread][subrx].anr.gen->w, 0, sizeof(double) * DLINE_SIZE);
+	memset(rx[thread][subrx].anr.gen->d, 0, sizeof(double) * DLINE_SIZE);
+	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetANRvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].anr.gen->n_taps = taps;
+	rx[thread][subrx].anr.gen->delay = delay;
+	rx[thread][subrx].anr.gen->two_mu = gain;
+	rx[thread][subrx].anr.gen->gamma = leakage;
+	memset (rx[thread][subrx].anr.gen->w, 0, sizeof(double) * DLINE_SIZE);
+	memset(rx[thread][subrx].anr.gen->d, 0, sizeof(double) * DLINE_SIZE);
+	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetANRposition (unsigned int thread, unsigned subrx, int position)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].anr.position = position;
+	memset (rx[thread][subrx].anr.gen->w, 0, sizeof(double) * DLINE_SIZE);
+	memset(rx[thread][subrx].anr.gen->d, 0, sizeof(double) * DLINE_SIZE);
+	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
+	sem_post(&top[thread].sync.upd.sem);
+}

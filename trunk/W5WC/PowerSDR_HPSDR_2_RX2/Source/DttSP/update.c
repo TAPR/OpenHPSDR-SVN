@@ -527,40 +527,6 @@ SetSampleRate (double newSampleRate)
 	return rtn;
 }
 
-/*
-DttSP_EXP void
-SetTXCompandSt (unsigned int thread, BOOLEAN setit)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	tx[thread].cpd.flag = setit;
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void
-SetTXCompand (unsigned int thread, double setit)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	WSCReset (tx[thread].cpd.gen, -(REAL)setit);
-	sem_post(&top[thread].sync.upd.sem);
-}
-*/
-
-DttSP_EXP void  // (NR0V) added
-SetTXCompressorSt (unsigned int thread, BOOLEAN setit)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	tx[thread].compressor.flag = setit;
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void  // (NR0V) added
-SetTXCompressor (unsigned int thread, double setit)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	tx[thread].compressor.gen->gain = (float)pow (10.0, setit / 20.0);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
 DttSP_EXP void
 SetTXSquelchSt (unsigned int thread, BOOLEAN setit)
 {
@@ -582,79 +548,6 @@ SetTXSquelchAtt (unsigned int thread, float setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	tx[thread].squelch.atten = setit;
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void  // (NR0V) modified
-SetANF (unsigned int thread, unsigned subrx, BOOLEAN setit)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].anf.flag = setit;
-	memset(rx[thread][subrx].anf.gen->w, 0, sizeof(double) * DLINE_SIZE);
-	memset(rx[thread][subrx].anf.gen->d, 0, sizeof(double) * DLINE_SIZE);
-	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-
-DttSP_EXP void  // (NR0V) modified
-SetANFvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].anf.gen->n_taps = taps;
-	rx[thread][subrx].anf.gen->delay = delay;
-	rx[thread][subrx].anf.gen->two_mu = gain;		//try two_mu = 1e-4
-	rx[thread][subrx].anf.gen->gamma = leakage;		//try gamma = 0.10
-	memset (rx[thread][subrx].anf.gen->w, 0, sizeof(double) * DLINE_SIZE);
-	memset(rx[thread][subrx].anf.gen->d, 0, sizeof(double) * DLINE_SIZE);
-	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void	// (NR0V) added
-SetANFposition (unsigned int thread, unsigned subrx, int position)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].anf.position = position;
-	memset (rx[thread][subrx].anf.gen->w, 0, sizeof(double) * DLINE_SIZE);
-	memset(rx[thread][subrx].anf.gen->d, 0, sizeof(double) * DLINE_SIZE);
-	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void  // (NR0V) modified
-SetANR (unsigned int thread, unsigned subrx, BOOLEAN setit)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].anr.flag = setit;
-	memset(rx[thread][subrx].anr.gen->w, 0, sizeof(double) * DLINE_SIZE);
-	memset(rx[thread][subrx].anr.gen->d, 0, sizeof(double) * DLINE_SIZE);
-	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void  // (NR0V) modified
-SetANRvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].anr.gen->n_taps = taps;
-	rx[thread][subrx].anr.gen->delay = delay;
-	rx[thread][subrx].anr.gen->two_mu = gain;		//try two_mu = 
-	rx[thread][subrx].anr.gen->gamma = leakage;		//try gamma = 
-	memset (rx[thread][subrx].anr.gen->w, 0, sizeof(double) * DLINE_SIZE);
-	memset(rx[thread][subrx].anr.gen->d, 0, sizeof(double) * DLINE_SIZE);
-	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void	// (NR0V) added
-SetANRposition (unsigned int thread, unsigned subrx, int position)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].anr.position = position;
-	memset (rx[thread][subrx].anr.gen->w, 0, sizeof(double) * DLINE_SIZE);
-	memset(rx[thread][subrx].anr.gen->d, 0, sizeof(double) * DLINE_SIZE);
-	reset_OvSv (rx[thread][subrx].filt.ovsv_notch);
 	sem_post(&top[thread].sync.upd.sem);
 }
 
@@ -708,309 +601,6 @@ SetBIN (unsigned int thread, unsigned subrx, BOOLEAN setit)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void // (NR0V) modified
-SetRXAGC (unsigned int thread, unsigned subrx, AGCMODE setit)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-/*
-	rx[thread][subrx].dttspagc.gen->mode = 1;
-	rx[thread][subrx].dttspagc.gen->attack =
-		(REAL) (1.0 - exp (-1000.0 / (2.0 * uni[thread].samplerate)));
-	rx[thread][subrx].dttspagc.gen->one_m_attack =
-		(REAL) (1.0 - rx[thread][subrx].dttspagc.gen->attack);
-	rx[thread][subrx].dttspagc.gen->hangindex = rx[thread][subrx].dttspagc.gen->slowindx = 0;
-	rx[thread][subrx].dttspagc.gen->fastindx = (int)(0.0027f*uni[thread].samplerate);
-	rx[thread][subrx].dttspagc.gen->out_indx = (int)(0.003f*uni[thread].samplerate);
-*/
-
-	switch (setit)
-	{
-		case agcOFF:
-			//rx[thread][subrx].dttspagc.gen->mode = agcOFF;
-			//rx[thread][subrx].dttspagc.flag = TRUE;
-
-			rx[thread][subrx].wcpagc.gen->mode = agcOFF;
-			rx[thread][subrx].wcpagc.flag = TRUE;
-			loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-			break;
-		case agcLONG:
-			//rx[thread][subrx].dttspagc.gen->mode = agcLONG;
-			//rx[thread][subrx].dttspagc.flag = TRUE;
-			//rx[thread][subrx].dttspagc.gen->hangtime = 0.75;
-			//rx[thread][subrx].dttspagc.gen->fasthangtime = (REAL) 0.075;
-			//rx[thread][subrx].dttspagc.gen->decay = (REAL) (1.0 - exp (-0.5 / uni[thread].samplerate));
-			//rx[thread][subrx].dttspagc.gen->one_m_decay =
-				//(REAL) (1.0 - rx[thread][subrx].dttspagc.gen->decay);
-
-			rx[thread][subrx].wcpagc.gen->mode = agcLONG;
-			rx[thread][subrx].wcpagc.flag = TRUE;
-			rx[thread][subrx].wcpagc.gen->hangtime = 2.000;
-			rx[thread][subrx].wcpagc.gen->tau_decay = 2.000;
-			loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-			break;
-		case agcSLOW:
-			//rx[thread][subrx].dttspagc.gen->mode = agcSLOW;
-			//rx[thread][subrx].dttspagc.gen->hangtime = (REAL) 0.5;
-			//rx[thread][subrx].dttspagc.gen->fasthangtime = (REAL) 0.05;
-			//rx[thread][subrx].dttspagc.gen->decay =
-				//(REAL) (1.0 - exp (-1000.0 / (500.0 * uni[thread].samplerate)));
-			//rx[thread][subrx].dttspagc.gen->one_m_decay =
-				//(REAL) (1.0 - rx[thread][subrx].dttspagc.gen->decay);
-			//rx[thread][subrx].dttspagc.flag = TRUE;
-
-			rx[thread][subrx].wcpagc.gen->mode = agcSLOW;
-			rx[thread][subrx].wcpagc.flag = TRUE;
-			rx[thread][subrx].wcpagc.gen->hangtime = 1.000;
-			rx[thread][subrx].wcpagc.gen->tau_decay = 0.500;
-			loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-			break;
-		case agcMED:
-			//rx[thread][subrx].dttspagc.gen->mode = agcMED;
-			//rx[thread][subrx].dttspagc.gen->hangtime = (REAL) 0.25;
-			//rx[thread][subrx].dttspagc.gen->fasthangtime = (REAL) 0.025;
-			//rx[thread][subrx].dttspagc.gen->decay =
-				//(REAL) (1.0 - exp (-1000.0 / (250.0 * uni[thread].samplerate)));
-			//rx[thread][subrx].dttspagc.gen->one_m_decay =
-				//(REAL) (1.0 - rx[thread][subrx].dttspagc.gen->decay);
-			//rx[thread][subrx].dttspagc.flag = TRUE;
-
-			rx[thread][subrx].wcpagc.gen->mode = agcMED;
-			rx[thread][subrx].wcpagc.flag = TRUE;
-			rx[thread][subrx].wcpagc.gen->hang_thresh = 1.0;
-			rx[thread][subrx].wcpagc.gen->hangtime = 0.000;
-			rx[thread][subrx].wcpagc.gen->tau_decay = 0.250;
-			loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-			break;
-		case agcFAST:
-			//rx[thread][subrx].dttspagc.gen->mode = agcFAST;
-			//rx[thread][subrx].dttspagc.gen->fasthangtime = (REAL) 0.01;
-			//rx[thread][subrx].dttspagc.gen->hangtime = (REAL) 0.02;
-			//rx[thread][subrx].dttspagc.gen->decay =
-				//(REAL) (1.0 - exp (-1000.0 / (100.0 * uni[thread].samplerate)));
-			//rx[thread][subrx].dttspagc.gen->one_m_decay =
-				//(REAL) (1.0 - rx[thread][subrx].dttspagc.gen->decay);
-			//rx[thread][subrx].dttspagc.flag = TRUE;
-
-			rx[thread][subrx].wcpagc.gen->mode = agcSLOW;
-			rx[thread][subrx].wcpagc.flag = TRUE;
-			rx[thread][subrx].wcpagc.gen->hang_thresh = 1.0;
-			rx[thread][subrx].wcpagc.gen->hangtime = 0.000;
-			rx[thread][subrx].wcpagc.gen->tau_decay = 0.050;
-			loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-			break;
-
-		default:
-			rx[thread][subrx].wcpagc.gen->mode = 5;
-			rx[thread][subrx].wcpagc.flag = TRUE;
-			break;
-	}
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void  // (NR0V) modified
-SetRXAGCAttack (unsigned int thread, unsigned subrx, int attack)
-{
-	REAL tmp = (REAL)attack;
-	sem_wait(&top[thread].sync.upd.sem);
-	//rx[thread][subrx].dttspagc.gen->mode = 1; this shouldn't be here -- causes change of mode on init
-/*  rx[thread][subrx].dttspagc.gen->hangindex =	
-		rx[thread][subrx].dttspagc.gen->slowindx = 0;
-	rx[thread][subrx].dttspagc.gen->fastindx = (int)(0.0027*uni[thread].samplerate);
-	rx[thread][subrx].dttspagc.gen->attack =
-		(REAL) (1.0 - exp (-1000.0 / (tmp * uni[thread].samplerate)));
-	rx[thread][subrx].dttspagc.gen->one_m_attack =
-		(REAL) exp (-1000.0 / (tmp * uni[thread].samplerate));
-	rx[thread][subrx].dttspagc.gen->out_indx = (int) (uni[thread].samplerate * tmp * 0.003f);
-*/
-	rx[thread][subrx].wcpagc.gen->tau_attack = (double)attack / 1000.0;
-	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (NR0V) modified
-SetRXAGCDecay (unsigned int thread, unsigned subrx, int decay)
-{
-	//REAL tmp = (REAL)decay;
-	sem_wait(&top[thread].sync.upd.sem);
-/*
-	rx[thread][subrx].dttspagc.gen->decay =
-		(REAL) (1.0 - exp (-1000.0 / (tmp * uni[thread].samplerate)));
-	rx[thread][subrx].dttspagc.gen->one_m_decay =
-		(REAL) exp (-1000.0 / (tmp * uni[thread].samplerate));
-*/
-	rx[thread][subrx].wcpagc.gen->tau_decay = (double)decay / 1000.0;
-	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void //(NR0V) modified
-SetRXAGCHang (unsigned int thread, unsigned subrx, int hang)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-/*
-	rx[thread][subrx].dttspagc.gen->hangtime =
-		(REAL) 0.001 * (REAL)hang;
-	rx[thread][subrx].dttspagc.gen->hangindex = 0;
-*/
-	rx[thread][subrx].wcpagc.gen->hangtime = (double)hang / 1000.0;
-	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-//********
-DttSP_EXP void //(NR0V) added.					
-GetRXAGCHangLevel(unsigned int thread, unsigned int subrx, double *hangLevel)
-//for line on bandscope
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	*hangLevel = 20.0 * log10( rx[thread][subrx].wcpagc.gen->hang_level / 0.637 );
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void //(NR0V) added.					
-SetRXAGCHangLevel(unsigned int thread, unsigned int subrx, double hangLevel)
-//for line on bandscope
-{
-	double convert, tmp;
-	sem_wait(&top[thread].sync.upd.sem);
-	if (rx[thread][subrx].wcpagc.gen->max_input > rx[thread][subrx].wcpagc.gen->min_volts)
-	{
-		convert = pow (10.0, hangLevel / 20.0);
-		tmp = max(1e-8, (convert - rx[thread][subrx].wcpagc.gen->min_volts) / 
-			(rx[thread][subrx].wcpagc.gen->max_input - rx[thread][subrx].wcpagc.gen->min_volts));
-		rx[thread][subrx].wcpagc.gen->hang_thresh = 1.0 + 0.125 * log10 (tmp);
-	}
-	else
-		rx[thread][subrx].wcpagc.gen->hang_thresh = 1.0;
-	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void //(NR0V) added.					
-GetRXAGCHangThreshold(unsigned int thread, unsigned int subrx, int *hangthreshold)
-//for slider in setup
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	*hangthreshold = (int)(100.0 * rx[thread][subrx].wcpagc.gen->hang_thresh);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (NR0V) modified.
-SetRXAGCHangThreshold (unsigned int thread, unsigned int subrx, int hangthreshold)
-//For slider in setup
-{
-	sem_wait(&top[thread].sync.upd.sem);
-/*
-	rx[thread][subrx].dttspagc.gen->hangthresh =
-		(REAL) 0.01 * (REAL)hangthreshold;
-	rx[thread][subrx].dttspagc.gen->hangindex = 0;
-*/
-	rx[thread][subrx].wcpagc.gen->hang_thresh = (double)hangthreshold / 100.0;
-	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void //(NR0V) added.					
-GetRXAGCThresh(unsigned int thread, unsigned int subrx, double *thresh)
-//for line on bandscope.
-{
-	double noise_offset = 10.0 * log10((rx[thread][subrx].filt.high - rx[thread][subrx].filt.low) 
-		* uni[thread].spec.size / uni[thread].samplerate);
-	sem_wait(&top[thread].sync.upd.sem);
-	*thresh = 20.0 * log10( rx[thread][subrx].wcpagc.gen->min_volts ) - noise_offset;
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void //(NR0V) added.					
-SetRXAGCThresh(unsigned int thread, unsigned int subrx, double thresh)
-//for line on bandscope
-{
-	double noise_offset = 10.0 * log10((rx[thread][subrx].filt.high - rx[thread][subrx].filt.low) 
-		* uni[thread].spec.size / uni[thread].samplerate);
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].wcpagc.gen->max_gain = rx[thread][subrx].wcpagc.gen->out_target / 
-		(rx[thread][subrx].wcpagc.gen->var_gain * pow (10.0, (thresh + noise_offset) / 20.0));
-	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void //(NR0V) added.					
-GetRXAGCTop(unsigned int thread, unsigned int subrx, double *max_agc)
-//for AGC Max Gain in setup
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	*max_agc = 20 * log10 (rx[thread][subrx].wcpagc.gen->max_gain);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (NR0V) modified.
-SetRXAGCTop (unsigned int thread, unsigned int subrx, double max_agc)
-//for AGC Max Gain in setup
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	//rx[thread][subrx].dttspagc.gen->gain.top =
-		//max(rx[thread][subrx].dttspagc.gen->gain.bottom,dB2lin((REAL)max_agc));
-	//rx[thread][subrx].dttspagc.gen->hangindex = 0;
-
-	rx[thread][subrx].wcpagc.gen->max_gain = pow (10.0, (double)max_agc / 20.0);
-	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-//********
-
-DttSP_EXP void // (NR0V) modified
-SetRXAGCSlope (unsigned int thread, unsigned subrx, int slope)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-
-	//rx[thread][subrx].dttspagc.gen->slope =
-		//(REAL) dB2lin (0.1f * (REAL)slope);
-
-	rx[thread][subrx].wcpagc.gen->var_gain = pow (10.0, (double)slope / 20.0 / 10.0);
-	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-
-DttSP_EXP void // (NR0V) modified
-SetTXALCAttack (unsigned int thread, int attack)
-{
-	//REAL tmp = (REAL)attack;
-	sem_wait(&top[thread].sync.upd.sem);
-/*
-	tx[thread].alc.gen->attack = (REAL) (1.0 - exp (-1000.0 / (tmp * uni[thread].samplerate)));
-	tx[thread].alc.gen->one_m_attack = (REAL) exp (-1000.0 / (tmp * uni[thread].samplerate));
-	tx[thread].alc.gen->slowindx = 0;
-	tx[thread].alc.gen->out_indx = (int) (0.003 * uni[thread].samplerate * tmp);
-	tx[thread].alc.gen->fastindx = (int) (0.0027 * uni[thread].samplerate * tmp);
-*/
-	tx[thread].alc.gen->tau_attack = (double)attack / 1000.0;
-	loadWcpAGC(tx[thread].alc.gen);
-/*
-	tx[thread].alc.gen->attack = (REAL) (1.0 - exp (-1000.0 / (tmp * uni[thread].samplerate)));
-	tx[thread].alc.gen->one_m_attack = (REAL) exp (-1000.0 / (tmp * uni[thread].samplerate));
-	tx[thread].alc.gen->sndx =
-		(tx[thread].alc.gen->indx +
-		(int) (0.003 * uni[thread].samplerate * tmp)) & tx[thread].alc.gen->mask;
-	tx[thread].alc.gen->fastindx =
-		(tx[thread].alc.gen->sndx + FASTLEAD * tx[thread].alc.gen->mask) & tx[thread].alc.gen->mask;
-		*/
-	//tx[thread].alc.gen->fasthangtime = (REAL) 0.1;
-
-	sem_post(&top[thread].sync.upd.sem);
-}
 
 DttSP_EXP void
 SetTXAMCarrierLevel (unsigned int thread, double setit)
@@ -1021,171 +611,6 @@ SetTXAMCarrierLevel (unsigned int thread, double setit)
 
 	sem_post(&top[thread].sync.upd.sem);
 }
-
-DttSP_EXP void // (NR0V) modified
-SetTXALCDecay (unsigned int thread, int decay)
-{
-	//REAL tmp = (REAL)decay;
-	sem_wait(&top[thread].sync.upd.sem);
-/*
-	tx[thread].alc.gen->decay =
-		(REAL) (1.0 - exp (-1000.0 / (tmp * uni[thread].samplerate)));
-	tx[thread].alc.gen->one_m_decay =
-		(REAL) exp (-1000.0 / (tmp * uni[thread].samplerate));
-*/
-	tx[thread].alc.gen->tau_decay = (double)decay / 1000.0;
-	loadWcpAGC(tx[thread].alc.gen);
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (NR0V) modified
-SetTXALCBot (unsigned int thread, double max_agc)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-
-	//tx[thread].alc.gen->gain.bottom = dB2lin((REAL)max_agc);
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (NR0V) modified
-SetTXALCHang (unsigned int thread, int decay)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-
-	//tx[thread].alc.gen->hangtime = 0.001f*(REAL)decay;
-	//tx[thread].alc.gen->hangindex = 0;
-	tx[thread].alc.gen->hangtime = (double)decay / 1000.0;
-	loadWcpAGC(tx[thread].alc.gen);
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void
-SetTXLevelerSt (unsigned int thread, BOOLEAN state)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-
-	tx[thread].leveler.flag = state;
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (W5WC) ALC On/Off Control
-SetTXALCSt (unsigned int thread, BOOLEAN state)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-
-	tx[thread].alc.flag = state;
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (NR0V) modified
-SetTXLevelerAttack (unsigned int thread, int attack)
-{
-	REAL tmp = (REAL) attack;
-	sem_wait(&top[thread].sync.upd.sem);
-/*
-	tx[thread].leveler.gen->attack = (REAL) (1.0 - exp (-1000.0 / (tmp * uni[thread].samplerate)));
-	tx[thread].leveler.gen->one_m_attack = (REAL) exp (-1000.0 / (tmp * uni[thread].samplerate));
-	tx[thread].leveler.gen->slowindx = 0;
-	tx[thread].leveler.gen->out_indx = (int) (0.003 * uni[thread].samplerate * tmp);
-	tx[thread].leveler.gen->fastindx = (int) (0.0027 * uni[thread].samplerate * tmp);
-*/
-	tx[thread].leveler.gen->tau_attack = (double)attack / 1000.0;
-	loadWcpAGC(tx[thread].leveler.gen);
-
-/*	tx[thread].leveler.gen->attack =
-		(REAL) (1.0 - exp (-1000.0 / (tmp * uni[thread].samplerate)));
-	tx[thread].leveler.gen->one_m_attack =
-		(REAL) exp (-1000.0 / (tmp * uni[thread].samplerate));
-	tx[thread].leveler.gen->sndx =
-		(tx[thread].leveler.gen->indx +
-		(int) (0.003 * uni[thread].samplerate * tmp)) & tx[thread].leveler.gen->mask;
-	tx[thread].leveler.gen->fastindx =
-		(tx[thread].leveler.gen->sndx +
-		FASTLEAD * tx[thread].leveler.gen->mask) & tx[thread].leveler.gen->mask; */
-	//tx[thread].leveler.gen->fasthangtime = (REAL) 0.01;      //n4hy 10 ms	
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (NR0V) modified
-SetTXLevelerDecay (unsigned int thread, int decay)
-{
-	REAL tmp = (REAL) decay;
-	sem_wait(&top[thread].sync.upd.sem);
-/*
-	tx[thread].leveler.gen->decay =
-		(REAL) (1.0 - exp (-1000.0 / (tmp * uni[thread].samplerate)));
-	tx[thread].leveler.gen->one_m_decay =
-		(REAL) exp (-1000.0 / (tmp * uni[thread].samplerate));
-*/
-	tx[thread].leveler.gen->tau_decay = (double)decay / 1000.0;
-	loadWcpAGC(tx[thread].leveler.gen);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (NR0V) modified
-SetTXLevelerHang (unsigned int thread, int decay)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	//tx[thread].leveler.gen->hangtime = (REAL)(0.001*(REAL)decay);
-	tx[thread].leveler.gen->hangtime = (double)decay / 1000.0;
-	loadWcpAGC(tx[thread].leveler.gen);
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (NR0V) modified
-SetTXLevelerTop (unsigned int thread, double maxgain)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	//tx[thread].leveler.gen->gain.top = (REAL)dB2lin((REAL) maxgain);
-	//tx[thread].leveler.gen->hangindex = 0;
-	tx[thread].leveler.gen->max_gain = pow (10.0,(double)maxgain / 20.0);
-	loadWcpAGC(tx[thread].leveler.gen);
-
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void // (NR0V) modified
-SetFixedAGC (unsigned int thread, unsigned int subrx, double fixed_agc)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	//rx[thread][subrx].dttspagc.gen->gain.fix = dB2lin((REAL)fixed_agc);
-
-	rx[thread][subrx].wcpagc.gen->fixed_gain = pow (10.0, (double)fixed_agc / 20.0);
-	loadWcpAGC ( rx[thread][subrx].wcpagc.gen );
-	
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-/*DttSP_EXP void													//(NR0V)
-GetSAMPLLvals(int thread, int subrx, REAL *alpha, REAL *beta)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	*alpha = rx[thread][subrx].am.gen->pll.alpha;
-	*beta  = rx[thread][subrx].am.gen->pll.beta;
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void
-SetSAMPLLvals(int thread, int subrx, REAL alpha, REAL beta)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].am.gen->pll.alpha = alpha;
-	rx[thread][subrx].am.gen->pll.beta = beta;
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void
-GetSAMFreq(int thread, int subrx, REAL *freq)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	*freq = rx[thread][subrx].am.gen->pll.freq.f;
-	sem_post(&top[thread].sync.upd.sem);
-}*/
 
 DttSP_EXP void
 SetCorrectIQ (unsigned int thread, unsigned int subrx, double phase, double gain)
@@ -1401,8 +826,10 @@ SetGrphTXEQ (unsigned int thread, int *txeq)
 	ComplexFIR tmpfilt;
 	REAL preamp, gain[3];
 
-	filtcoef = newvec_COMPLEX (512, "filter for EQ");
-	tmpcoef = newvec_COMPLEX (257, "tmp filter for EQ");
+	EQ a = tx[thread].grapheq.gen;
+
+	filtcoef = newvec_COMPLEX (a->eqsize, "filter for EQ");
+	tmpcoef = newvec_COMPLEX (a->eqsize/2 + 1, "tmp filter for EQ");
 	preamp  = (REAL) dB2lin ((REAL) txeq[0]) * 0.5f;
 	gain[0] = (REAL) dB2lin ((REAL) txeq[1]) * preamp;
 	gain[1] = (REAL) dB2lin ((REAL) txeq[2]) * preamp;
@@ -1410,34 +837,34 @@ SetGrphTXEQ (unsigned int thread, int *txeq)
 
 	sem_wait(&top[thread].sync.upd.sem);
 
-	tmpfilt = newFIR_Bandpass_COMPLEX (-400, 400, uni[thread].samplerate, 257);
-	for (i = 0; i < 257; i++)
+	tmpfilt = newFIR_Bandpass_COMPLEX (-400, 400, uni[thread].samplerate, a->eqsize/2 + 1);
+	for (i = 0; i < a->eqsize/2 + 1; i++)
 		tmpcoef[i] = Cscl (tmpfilt->coef[i], (REAL)gain[0]);
 	delFIR_Bandpass_COMPLEX (tmpfilt);
 
-	tmpfilt = newFIR_Bandpass_COMPLEX (400, 1500, uni[thread].samplerate, 257);
-	for (i = 0; i < 257; i++)
+	tmpfilt = newFIR_Bandpass_COMPLEX (400, 1500, uni[thread].samplerate, a->eqsize/2 + 1);
+	for (i = 0; i < a->eqsize/2 + 1; i++)
 		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[1]));
 	delFIR_Bandpass_COMPLEX (tmpfilt);
 
-	tmpfilt = newFIR_Bandpass_COMPLEX (-1500, -400, uni[thread].samplerate, 257);
-	for (i = 0; i < 257; i++)
+	tmpfilt = newFIR_Bandpass_COMPLEX (-1500, -400, uni[thread].samplerate, a->eqsize/2 + 1);
+	for (i = 0; i < a->eqsize/2 + 1; i++)
 		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[1]));
 	delFIR_Bandpass_COMPLEX (tmpfilt);
 
-	tmpfilt = newFIR_Bandpass_COMPLEX (1500, 6000, uni[thread].samplerate, 257);
-	for (i = 0; i < 257; i++)
+	tmpfilt = newFIR_Bandpass_COMPLEX (1500, 6000, uni[thread].samplerate, a->eqsize/2 + 1);
+	for (i = 0; i < a->eqsize/2 + 1; i++)
 		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[2]));
 	delFIR_Bandpass_COMPLEX (tmpfilt);
 
-	tmpfilt = newFIR_Bandpass_COMPLEX (-6000, -1500, uni[thread].samplerate, 257);
-	for (i = 0; i < 257; i++)
+	tmpfilt = newFIR_Bandpass_COMPLEX (-6000, -1500, uni[thread].samplerate, a->eqsize/2 + 1);
+	for (i = 0; i < a->eqsize/2 + 1; i++)
 		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[2]));
 	delFIR_Bandpass_COMPLEX (tmpfilt);
-	for (i = 0; i < 257; i++)
-		filtcoef[255 + i] = Cscl(tmpcoef[i],(REAL)(1.0/512.0));
+	for (i = 0; i < a->eqsize/2 + 1; i++)
+		filtcoef[a->eqsize/2 - 1 + i] = Cscl(tmpcoef[i],(REAL)(1.0/(double)a->eqsize));
 	ptmp =
-		fftwf_plan_dft_1d (512, (fftwf_complex *) filtcoef,
+		fftwf_plan_dft_1d (a->eqsize, (fftwf_complex *) filtcoef,
 		(fftwf_complex *) tx[thread].grapheq.gen->p->zfvec,
 		FFTW_FORWARD, uni[thread].wisdom.bits);
 
@@ -1464,11 +891,11 @@ SetGrphTXEQ10(unsigned int thread, int *txeq)
 
     int i,j,band;
 	fftwf_plan ptmp;
-	COMPLEX *filtcoef = newvec_COMPLEX(512, "filter for EQ"),
-		*tmpcoef  = newvec_COMPLEX(257, "tmp filter for EQ");
+	EQ a = tx[thread].grapheq.gen;
+	COMPLEX *filtcoef = newvec_COMPLEX(a->eqsize, "filter for EQ"),
+		*tmpcoef  = newvec_COMPLEX(a->eqsize/2 + 1, "tmp filter for EQ");
 	ComplexFIR tmpfilt;
 	REAL preamp;
-
 
 	preamp = dB2lin((REAL) txeq[0]) * 0.5f;
 
@@ -1479,21 +906,21 @@ SetGrphTXEQ10(unsigned int thread, int *txeq)
 			f_above = gmean(f_here, f_here * 2.0f),
 			g_here  = dB2lin((REAL) txeq[j]) * preamp;
 
-		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, 257);
-		for (i = 0; i < 257; i++)
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, a->eqsize/2 + 1);
+		for (i = 0; i < a->eqsize/2 + 1; i++)
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
 		delFIR_Bandpass_COMPLEX(tmpfilt);
 
-		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, 257);
-		for (i = 0; i < 257; i++)
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, a->eqsize/2 + 1);
+		for (i = 0; i < a->eqsize/2 + 1; i++)
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
 		delFIR_Bandpass_COMPLEX(tmpfilt);
 	}
 
-	for (i = 0; i < 257; i++)
-		filtcoef[254 + i] = Cscl(tmpcoef[i],(REAL)(1.0/512.0));
+	for (i = 0; i < a->eqsize/2 + 1; i++)
+		filtcoef[a->eqsize/2 - 2 + i] = Cscl(tmpcoef[i],(REAL)(1.0/(double)a->eqsize));
 
-    ptmp = fftwf_plan_dft_1d(512,
+    ptmp = fftwf_plan_dft_1d(a->eqsize,
 		(fftwf_complex *) filtcoef,
 		(fftwf_complex *) tx[thread].grapheq.gen->p->zfvec,
 		FFTW_FORWARD,
@@ -1524,14 +951,16 @@ SetNotch160 (unsigned int thread, BOOLEAN state)
 DttSP_EXP void
 SetGrphRXEQ (unsigned int thread, unsigned int subrx, int *rxeq)
 {
-    int i;
+	int i;
     fftwf_plan ptmp;
     COMPLEX *filtcoef, *tmpcoef;
     ComplexFIR tmpfilt;
     REAL preamp, gain[3];
 
-	filtcoef = newvec_COMPLEX (512, "filter for EQ");
-	tmpcoef = newvec_COMPLEX (257, "tmp filter for EQ");
+	EQ a = rx[thread][subrx].grapheq.gen;
+
+	filtcoef = newvec_COMPLEX (a->eqsize, "filter for EQ");
+	tmpcoef = newvec_COMPLEX (a->eqsize/2 + 1, "tmp filter for EQ");
     preamp  = (REAL) dB2lin ((REAL) rxeq[0]) * 0.5f;
     gain[0] = (REAL) dB2lin ((REAL) rxeq[1]) * preamp;
     gain[1] = (REAL) dB2lin ((REAL) rxeq[2]) * preamp;
@@ -1540,34 +969,34 @@ SetGrphRXEQ (unsigned int thread, unsigned int subrx, int *rxeq)
 
     sem_wait(&top[thread].sync.upd.sem);
 
-    tmpfilt = newFIR_Bandpass_COMPLEX (-400, 400, uni[thread].samplerate, 257);
-    for (i = 0; i < 257; i++)
+    tmpfilt = newFIR_Bandpass_COMPLEX (-400, 400, uni[thread].samplerate, a->eqsize/2 + 1);
+    for (i = 0; i < a->eqsize/2 + 1; i++)
 		tmpcoef[i] = Cscl (tmpfilt->coef[i], (REAL)gain[0]);
     delFIR_Bandpass_COMPLEX (tmpfilt);
 
-    tmpfilt = newFIR_Bandpass_COMPLEX (400, 1500, uni[thread].samplerate, 257);
-    for (i = 0; i < 257; i++)
+    tmpfilt = newFIR_Bandpass_COMPLEX (400, 1500, uni[thread].samplerate, a->eqsize/2 + 1);
+    for (i = 0; i < a->eqsize/2 + 1; i++)
 		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[1]));
     delFIR_Bandpass_COMPLEX (tmpfilt);
 
-    tmpfilt = newFIR_Bandpass_COMPLEX (-1500, -400, uni[thread].samplerate, 257);
-    for (i = 0; i < 257; i++)
+    tmpfilt = newFIR_Bandpass_COMPLEX (-1500, -400, uni[thread].samplerate, a->eqsize/2 + 1);
+    for (i = 0; i < a->eqsize/2 + 1; i++)
 		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[1]));
     delFIR_Bandpass_COMPLEX (tmpfilt);
 
-    tmpfilt = newFIR_Bandpass_COMPLEX (1500, 6000, uni[thread].samplerate, 257);
-    for (i = 0; i < 257; i++)
+    tmpfilt = newFIR_Bandpass_COMPLEX (1500, 6000, uni[thread].samplerate, a->eqsize/2 + 1);
+    for (i = 0; i < a->eqsize/2 + 1; i++)
 		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[2]));
     delFIR_Bandpass_COMPLEX (tmpfilt);
 
-    tmpfilt = newFIR_Bandpass_COMPLEX (-6000, -1500, uni[thread].samplerate, 257);
-    for (i = 0; i < 257; i++)
+    tmpfilt = newFIR_Bandpass_COMPLEX (-6000, -1500, uni[thread].samplerate, a->eqsize/2 + 1);
+    for (i = 0; i < a->eqsize/2 + 1; i++)
 		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[2]));
     delFIR_Bandpass_COMPLEX (tmpfilt);
-    for (i = 0; i < 257; i++)
-		filtcoef[255 + i] = Cscl(tmpcoef[i],(REAL)(1.0/512.0));
+    for (i = 0; i < a->eqsize/2 + 1; i++)
+		filtcoef[a->eqsize/2 - 1 + i] = Cscl(tmpcoef[i],(REAL)(1.0/(double)a->eqsize));
 	ptmp =
-		fftwf_plan_dft_1d (512, (fftwf_complex *) filtcoef,
+		fftwf_plan_dft_1d (a->eqsize, (fftwf_complex *) filtcoef,
 		(fftwf_complex *) rx[thread][subrx].grapheq.gen->p->zfvec,
 		FFTW_FORWARD, uni[thread].wisdom.bits);
 
@@ -1595,8 +1024,9 @@ SetGrphRXEQ10(unsigned int thread, unsigned int subrx, int *rxeq)
 
 	int i,j,band;
 	fftwf_plan ptmp;
-	COMPLEX *filtcoef = newvec_COMPLEX(512, "filter for EQ"),
-            *tmpcoef  = newvec_COMPLEX(257, "tmp filter for EQ");
+	EQ a = rx[thread][subrx].grapheq.gen;
+	COMPLEX *filtcoef = newvec_COMPLEX(a->eqsize, "filter for EQ"),
+            *tmpcoef  = newvec_COMPLEX(a->eqsize/2 + 1, "tmp filter for EQ");
     ComplexFIR tmpfilt;
     REAL preamp;
 
@@ -1609,21 +1039,21 @@ SetGrphRXEQ10(unsigned int thread, unsigned int subrx, int *rxeq)
 			f_above = gmean(f_here, f_here * 2.0f),
 			g_here  = dB2lin((REAL) rxeq[j]) * preamp;
 
-		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, 257);
-		for (i = 0; i < 257; i++)
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, a->eqsize/2 + 1);
+		for (i = 0; i < a->eqsize/2 + 1; i++)
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
 		delFIR_Bandpass_COMPLEX(tmpfilt);
 
-		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, 257);
-		for (i = 0; i < 257; i++)
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, a->eqsize/2 + 1);
+		for (i = 0; i < a->eqsize/2 + 1; i++)
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
 		delFIR_Bandpass_COMPLEX(tmpfilt);
 	}
 
-    for (i = 0; i < 257; i++)
-		filtcoef[254 + i] = Cscl(tmpcoef[i],(REAL)(1.0/512.0));;
+    for (i = 0; i < a->eqsize/2 + 1; i++)
+		filtcoef[a->eqsize/2 - 2 + i] = Cscl(tmpcoef[i],(REAL)(1.0/(double)a->eqsize));;
 
-    ptmp = fftwf_plan_dft_1d(512,
+    ptmp = fftwf_plan_dft_1d(a->eqsize,
 		(fftwf_complex *) filtcoef,
 		(fftwf_complex *) rx[thread][subrx].grapheq.gen->p->zfvec,
 		FFTW_FORWARD,
@@ -1710,28 +1140,22 @@ FlushAllBufs (unsigned int thread, BOOLEAN trx)
 		reset_OvSv(tx[thread].filt.ovsv_pre);
 		memset(top[thread].hold.buf.l,0,top[thread].hold.size.frames*sizeof(REAL));
 		memset(top[thread].hold.buf.r,0,top[thread].hold.size.frames*sizeof(REAL));
-		//DttSPAgc_flushbuf(tx[thread].leveler.gen);
-		//DttSPAgc_flushbuf(tx[thread].alc.gen);
 		WcpAGC_flushbuf(tx[thread].leveler.gen);
 		WcpAGC_flushbuf(tx[thread].alc.gen);
 	}
 	else
 	{
-		//fprintf(stdout, "FlushAllBufs(%u, %u)\n", thread, trx), fflush(stdout);
 		memset(top[thread].hold.buf.l,0,top[thread].hold.size.frames*sizeof(REAL));
 		memset(top[thread].hold.buf.r,0,top[thread].hold.size.frames*sizeof(REAL));
 		for(i=0; i<uni[thread].multirx.nrx; i++)
 		{
 			reset_OvSv(rx[thread][i].filt.ovsv);
-			//DttSPAgc_flushbuf(rx[thread][i].dttspagc.gen);
 			WcpAGC_flushbuf(rx[thread][i].wcpagc.gen);
 			resetDCBlocker(rx[thread][i].dcb, DCB_SINGLE_POLE);
 		}
 	}
 
 	sem_post (&top[thread].sync.upd.sem);
-
-	//fprintf(stdout, "DttSP: FlushAllBufs\n"), fflush(stdout);
 }
 
 DttSP_EXP void
@@ -1772,14 +1196,6 @@ SetAudioSize (unsigned int size)
 		sem_post (&top[thread].sync.upd.sem);
 	}
 }
-
-/*DttSP_EXP
-SetTXAGCLimit (unsigned int thread, double limit)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	tx[thread].alc.gen->gain.top = (REAL)limit;
-    sem_post(&top[thread].sync.upd.sem);
-}*/
 
 DttSP_EXP void
 SetTXAGCCompression (unsigned int thread, double txcompression)
@@ -2174,17 +1590,10 @@ DttSP_EXP void SetEerXmit(int on_off) {
 }
 
 DttSP_EXP void
-SetSBMode(unsigned int thread, unsigned int subrx, int sbmode)
+SetHPSDRSpectrum(unsigned int thread, unsigned int subrx, int flag, int disp, int ss, int LO)
 {
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].amd.gen->sbmode = sbmode;
-	sem_post(&top[thread].sync.upd.sem);
-}
-
-DttSP_EXP void
-SetFadeLevel(unsigned int thread, unsigned int subrx, int levelfade)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].amd.gen->levelfade = levelfade;
-	sem_post(&top[thread].sync.upd.sem);
+	rx[thread][subrx].hpsdr.specflag = flag;
+	rx[thread][subrx].hpsdr.disp = disp;
+	rx[thread][subrx].hpsdr.ss = ss;
+	rx[thread][subrx].hpsdr.LO = LO;
 }

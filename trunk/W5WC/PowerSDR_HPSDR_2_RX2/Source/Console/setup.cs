@@ -1250,9 +1250,7 @@ namespace PowerSDR
         private LabelTS label4;
         private LabelTS label3;
         private LabelTS label2;
-        private LabelTS label7;
-        private LabelTS label6;
-        private LabelTS label5;
+        private LabelTS labelRXAntControl;
         private CheckBoxTS chkAlexAntCtrl;
         private GroupBoxTS groupBoxHPSDRHW;
         private LabelTS lblPAGainByBand6;
@@ -2974,6 +2972,17 @@ namespace PowerSDR
             udDSPALCAttack_ValueChanged(this, e);
             udDSPALCDecay_ValueChanged(this, e);
             udDSPALCHangTime_ValueChanged(this, e);
+            // AM/SAM Tab
+            chkLevelFades_CheckedChanged(this, e);
+            chkRX2LevelFades_CheckedChanged(this, e);
+            radLSBUSB_CheckedChanged(this,e);
+            radLSB_CheckedChanged(this, e);
+            radUSB_CheckedChanged(this, e);
+            radRX2LSBUSB_CheckedChanged(this, e);
+            radRX2LSB_CheckedChanged(this, e);
+            radRX2USB_CheckedChanged(this, e);
+            chkCBlock_CheckedChanged(this, e);
+            chkRX2CBlock_CheckedChanged(this, e);
             // Transmit Tab
             udTXFilterHigh_ValueChanged(this, e);
             udTXFilterLow_ValueChanged(this, e);
@@ -2984,6 +2993,7 @@ namespace PowerSDR
             udMicGainMax_ValueChanged(this, e);
             udMicGainMin_ValueChanged(this, e);
             udLineInBoost_ValueChanged(this, e);
+            udTXAMCarrierLevel_ValueChanged(this, e);
             // Keyboard Tab
             comboKBTuneUp1_SelectedIndexChanged(this, e);
             comboKBTuneUp2_SelectedIndexChanged(this, e);
@@ -5222,6 +5232,7 @@ namespace PowerSDR
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 grpPAGainByBand.BringToFront();
+                labelRXAntControl.Text = "  RX1   RX2    XVTR";
             }
             console.ANAN10Present = radGenModelANAN10.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5275,6 +5286,7 @@ namespace PowerSDR
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 grpANANPAGainByBand.BringToFront();
+                labelRXAntControl.Text = " EXT1  EXT2  XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
         }
@@ -5325,6 +5337,7 @@ namespace PowerSDR
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 grpANANPAGainByBand.BringToFront();
+                labelRXAntControl.Text = " EXT1  EXT2  XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
         }
@@ -5373,6 +5386,7 @@ namespace PowerSDR
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 grpPAGainByBand.BringToFront();
+                labelRXAntControl.Text = "  RX1   RX2    XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
         }
@@ -5414,6 +5428,7 @@ namespace PowerSDR
               //  chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = true;
                 grpPAGainByBand.BringToFront();
+                labelRXAntControl.Text = "  RX1   RX2    XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, false);
             if (chkHermesStepAttenuator.Checked) chkHermesStepAttenuator.Checked = false;
@@ -5606,7 +5621,6 @@ namespace PowerSDR
                     tpAlexFilterControl.Text = "LPF";
                     panelAlexRXXVRTControl.Visible = false;
                     labelAlexFilterActive.Location = new Point(298, 0);
-
                 }
                 else
                 {
@@ -6528,6 +6542,21 @@ namespace PowerSDR
                 Thread.Sleep(100);
             }
 
+            string new_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
+
+            if (new_driver_name != "Windows WDM-KS" && udAudioLatency2.Value < 120)
+            {
+                MessageBox.Show("The VAC1 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
+                    "Buffer Latency values less than 120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                    "The VAC1 Buffer Latency has been reset to the default of 120ms.  " +
+                    "Make sure to save your Transmit profile to make the change persistent.",
+                    "Invalid VAC1 Buffer Latency Value",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                udAudioLatency2.Value = 120;
+            }
+
             console.AudioDriverIndex2 = new_driver;
             Audio.Host2 = new_driver;
             GetDevices2();
@@ -6554,6 +6583,21 @@ namespace PowerSDR
                 Thread.Sleep(100);
             }
 
+            string new_driver_name = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Name;
+
+            if (new_driver_name != "Windows WDM-KS" && udVAC2Latency.Value < 120)
+            {
+                MessageBox.Show("The VAC2 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
+                    "Buffer Latency values less than 120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                    "The VAC2 Buffer Latency has been reset to the default of 120ms.  " +
+                    "Make sure to save your Transmit profile to make the change persistent.",
+                    "Invalid VAC2 Buffer Latency Value",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                udVAC2Latency.Value = 120;
+            }
+            
             console.AudioDriverIndex3 = new_driver;
             Audio.Host3 = new_driver;
             GetDevices3();
@@ -6840,6 +6884,22 @@ namespace PowerSDR
 
         private void udAudioLatency2_ValueChanged(object sender, System.EventArgs e)
         {
+            string vac_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
+
+            if (vac_driver_name != "Windows WDM-KS" && udAudioLatency2.Value < 120)
+            {
+                MessageBox.Show("The VAC1 Buffer Latency value selected is less than 120ms which is too " +
+                    "low for the MME and DirectSound VAC audio drivers.  Buffer Latency values less than " +
+                    "120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                    "The VAC1 Buffer Latency has been reset to the default of 120ms.  " +
+                    "Make sure to save your Transmit profile to make the change persistent.",
+                    "Invalid VAC1 Buffer Latency Value",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                udAudioLatency2.Value = 120;
+            }
+
             bool power = console.PowerOn;
             if (power && chkAudioEnableVAC.Checked)
             {
@@ -6855,6 +6915,25 @@ namespace PowerSDR
 
         private void udVAC2Latency_ValueChanged(object sender, System.EventArgs e)
         {
+            string vac_driver_name = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Name;
+
+            if (chkVAC2Enable.Checked)
+            {
+                if (vac_driver_name != "Windows WDM-KS" && udVAC2Latency.Value < 120)
+                {
+                    MessageBox.Show("The VAC2 Buffer Latency value selected is less than 120ms which is too " +
+                        "low for the MME and DirectSound VAC audio drivers.  Buffer Latency values less than " +
+                        "120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                        "The VAC2 Buffer Latency has been reset to the default of 120ms.  " +
+                        "Make sure to save your Transmit profile to make the change persistent.",
+                        "Invalid VAC2 Buffer Latency Value",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                    udVAC2Latency.Value = 120;
+                }
+            }
+
             bool power = console.PowerOn;
             if (power && chkVAC2Enable.Checked)
             {
@@ -7176,7 +7255,9 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Remove(96000);
                     if (comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Remove(192000);
-                    comboAudioSampleRate1.Text = "48000";
+                     if (!comboAudioSampleRate1.Items.Contains(384000))
+                        comboAudioSampleRate1.Items.Add(384000);
+                   comboAudioSampleRate1.Text = "48000";
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
                     {
                         if (p.Name == "ASIO")
@@ -7278,6 +7359,8 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Remove(96000);
                     if (comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Remove(192000);
+                    if (!comboAudioSampleRate1.Items.Contains(384000))
+                        comboAudioSampleRate1.Items.Add(384000);
                     comboAudioSampleRate1.Text = "48000";
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
                     {
@@ -7407,7 +7490,9 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Remove(96000);
                     if (comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Remove(192000);
-                    comboAudioSampleRate1.Text = "48000";
+                     if (!comboAudioSampleRate1.Items.Contains(384000))
+                        comboAudioSampleRate1.Items.Add(384000);
+                   comboAudioSampleRate1.Text = "48000";
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
                     {
                         if (p.Name == "ASIO")
@@ -7536,6 +7621,8 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(96000);
                     if (comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Remove(192000);
+                    if (!comboAudioSampleRate1.Items.Contains(384000))
+                        comboAudioSampleRate1.Items.Add(384000);
                     comboAudioSampleRate1.Text = "48000";
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
                     {
@@ -7637,6 +7724,8 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Remove(96000);
                     if (comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Remove(192000);
+                    if (!comboAudioSampleRate1.Items.Contains(384000))
+                        comboAudioSampleRate1.Items.Add(384000);
                     comboAudioSampleRate1.Text = "48000";
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
                     {
@@ -7760,6 +7849,8 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(96000);
                     if (comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Remove(192000);
+                    if (!comboAudioSampleRate1.Items.Contains(384000))
+                        comboAudioSampleRate1.Items.Add(384000);
                     if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
                         comboAudioSampleRate1.Text = "48000";
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
@@ -7816,7 +7907,10 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(96000);
                     if (!comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Add(192000);
-                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                     if (comboAudioSampleRate1.Items.Contains(384000))
+                    //    comboAudioSampleRate1.Items.Add(384000);
+                         comboAudioSampleRate1.Items.Remove(384000);
+                   if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
                         comboAudioSampleRate1.Text = "48000";
 
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
@@ -7862,6 +7956,8 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(96000);
                     if (comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Remove(192000);
+                    if (!comboAudioSampleRate1.Items.Contains(384000))
+                        comboAudioSampleRate1.Items.Add(384000);
                     if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
                         comboAudioSampleRate1.Text = "48000";
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
@@ -7923,6 +8019,8 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(192000);
                     if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
                         comboAudioSampleRate1.Text = "192000";
+                    if (!comboAudioSampleRate1.Items.Contains(384000))
+                        comboAudioSampleRate1.Items.Add(384000);
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
                     {
                         if (p.Name == "ASIO")
@@ -7996,7 +8094,9 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(192000);
                     if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
                         comboAudioSampleRate1.Text = "48000";
-                    grpAudioDetails1.Enabled = true;
+                     if (!comboAudioSampleRate1.Items.Contains(384000))
+                        comboAudioSampleRate1.Items.Add(384000);
+                   grpAudioDetails1.Enabled = true;
                     grpAudioMicInGain1.Enabled = true;
                     grpAudioLineInGain1.Enabled = true;
                     console.PowerEnabled = true;
@@ -8029,6 +8129,16 @@ namespace PowerSDR
         private void udTXGridMax_LostFocus(object sender, System.EventArgs e)
         {
             Display.TXSpectrumGridMax = (int)udTXGridMax.Value;
+        }
+
+        private void udDisplayGridMax_Click(object sender, System.EventArgs e)
+        {
+            udDisplayGridMax_LostFocus(sender, e);
+        }
+
+        private void udDisplayGridMax_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            udDisplayGridMax_LostFocus(sender, new System.EventArgs());
         }
 
         private void udDisplayFPS_ValueChanged(object sender, System.EventArgs e)
@@ -9305,7 +9415,7 @@ namespace PowerSDR
 
         private void udTXAMCarrierLevel_ValueChanged(object sender, System.EventArgs e)
         {
-            console.radio.GetDSPTX(0).TXAMCarrierLevel = Math.Sqrt((0.01 * (double)udTXAMCarrierLevel.Value) / 2);
+            console.radio.GetDSPTX(0).TXAMCarrierLevel = Math.Sqrt(0.01 * (double)udTXAMCarrierLevel.Value) * 0.5;
         }
 
         private void chkSaveTXProfileOnExit_CheckedChanged(object sender, EventArgs e)
@@ -9433,84 +9543,6 @@ namespace PowerSDR
             btnPAGainCalibration.Enabled = true;
         }
 
-        private void SetANAN100DefaultPAGain()
-        {
-            udPAGain160.Maximum = 57.5M;
-            udPAGain80.Maximum = 57.5M;
-            udPAGain60.Maximum = 58.0M;
-            udPAGain40.Maximum = 58.0M;
-            udPAGain30.Maximum = 57.0M;
-            udPAGain20.Maximum = 56.5M;
-            udPAGain17.Maximum = 56.5M;
-            udPAGain15.Maximum = 56.5M;
-            udPAGain12.Maximum = 53.5M;
-            udPAGain10.Maximum = 55.5M;
-            udPAGain6.Maximum = 52.0M;
-
-            udPAGain160.Minimum = 56.5M;
-            udPAGain80.Minimum = 56.5M;
-            udPAGain60.Minimum = 57.0M;
-            udPAGain40.Minimum = 57.0M;
-            udPAGain30.Minimum = 56.0M;
-            udPAGain20.Minimum = 55.5M;
-            udPAGain17.Minimum = 55.5M;
-            udPAGain15.Minimum = 55.5M;
-            udPAGain12.Minimum = 52.5M;
-            udPAGain10.Minimum = 54.5M;
-            udPAGain6.Minimum = 51.0M;
-
-            PAGain160 = 57.0f;
-            PAGain80 = 57.0f;
-            PAGain60 = 57.5f;
-            PAGain40 = 57.5f;
-            PAGain30 = 56.5f;
-            PAGain20 = 56.0f;
-            PAGain17 = 56.0f;
-            PAGain15 = 56.0f;
-            PAGain12 = 53.0f;
-            PAGain10 = 55.0f;
-            PAGain6 = 51.5f;
-        }
-
-        private void SetDefaultPAGain()
-        {
-            udPAGain160.Maximum = 100.0M;
-            udPAGain80.Maximum = 100.0M;
-            udPAGain60.Maximum = 100.0M;
-            udPAGain40.Maximum = 100.0M;
-            udPAGain30.Maximum = 100.0M;
-            udPAGain20.Maximum = 100.0M;
-            udPAGain17.Maximum = 100.0M;
-            udPAGain15.Maximum = 100.0M;
-            udPAGain12.Maximum = 100.0M;
-            udPAGain10.Maximum = 100.0M;
-            udPAGain6.Maximum = 100.0M;
-
-            udPAGain160.Minimum = 38.8M;
-            udPAGain80.Minimum = 38.8M;
-            udPAGain60.Minimum = 38.8M;
-            udPAGain40.Minimum = 38.8M;
-            udPAGain30.Minimum = 38.8M;
-            udPAGain20.Minimum = 38.8M;
-            udPAGain17.Minimum = 38.8M;
-            udPAGain15.Minimum = 38.8M;
-            udPAGain12.Minimum = 38.8M;
-            udPAGain10.Minimum = 38.8M;
-            udPAGain6.Minimum = 38.8M;
-
-            PAGain160 = 41.0f;
-            PAGain80 = 41.2f;
-            PAGain60 = 41.3f;
-            PAGain40 = 41.3f;
-            PAGain30 = 41.0f;
-            PAGain20 = 41.5f;
-            PAGain17 = 39.9f;
-            PAGain15 = 38.8f;
-            PAGain12 = 38.8f;
-            PAGain10 = 38.8f;
-            PAGain6 = 38.8f;
-        }
-
         private void udPAGain_ValueChanged(object sender, System.EventArgs e)
         {
             console.PWR = console.PWR;
@@ -9546,7 +9578,6 @@ namespace PowerSDR
                 udANANPAGainVHF11.Value = 56.2M;
                 udANANPAGainVHF12.Value = 56.2M;
                 udANANPAGainVHF13.Value = 56.2M;
-
             }
             else // if (radGenModelHPSDR.Checked || radGenModelHermes.Checked || radGenModelANAN10.Checked)
             {
@@ -15467,6 +15498,35 @@ namespace PowerSDR
             if (console.XVTRForm != null)
             console.XVTRForm.AlexTRRelay = chkAlexTRRelay.Checked;
         }
+
+       private void chkCBlock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCBlock.Checked)
+            {
+                DttSP.SetCBL(0, 0, 1);
+                DttSP.SetCBL(0, 1, 1);
+            }
+            else
+            {
+                DttSP.SetCBL(0, 0, 0);
+                DttSP.SetCBL(0, 1, 0);
+            }
+        }
+
+        private void chkRX2CBlock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRX2CBlock.Checked)
+            {
+                DttSP.SetCBL(2, 0, 1);
+                DttSP.SetCBL(2, 1, 1);
+            }
+            else
+            {
+                DttSP.SetCBL(2, 0, 0);
+                DttSP.SetCBL(2, 1, 0);
+            }
+        }
+        
 
     }
 
