@@ -44316,8 +44316,8 @@ namespace PowerSDR
             else chkRX2NB2.BackColor = SystemColors.Control;
             radio.GetDSPRX(1, 0).SDROM = chkRX2NB2.Checked;
             radio.GetDSPRX(1, 1).SDROM = chkRX2NB2.Checked;
-            radio.GetDSPRX(1, 0).NBOn = chkRX2NB.Checked;
-            radio.GetDSPRX(1, 1).NBOn = chkRX2NB.Checked;
+            radio.GetDSPRX(1, 0).NBOn = chkRX2NB2.Checked;
+            radio.GetDSPRX(1, 1).NBOn = chkRX2NB2.Checked;
             //cat_nb2_status = Convert.ToInt32(chkRX2NB2.Checked);
             nBRX2ToolStripMenuItem.Checked = chkRX2NB2.Checked;
         }
