@@ -129,6 +129,7 @@
     <ClCompile Include="anr.c" />
     <ClCompile Include="banal.c" />
     <ClCompile Include="bufvec.c" />
+    <ClCompile Include="cblock.c" />
     <ClCompile Include="compress.c" />
     <ClCompile Include="correctIQ.c" />
     <ClCompile Include="cwtones.c" />
@@ -177,6 +178,7 @@
     <ClInclude Include="anr.h" />
     <ClInclude Include="banal.h" />
     <ClInclude Include="bufvec.h" />
+    <ClInclude Include="cblock.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="complex.h" />
     <ClInclude Include="compress.h" />

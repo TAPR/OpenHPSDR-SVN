@@ -82,3 +82,19 @@ for (i = 0; i < a->buffsize; i++)
 }
 
 }
+
+DttSP_EXP void
+SetTXCompressorSt (unsigned int thread, BOOLEAN setit)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	tx[thread].compressor.flag = setit;
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetTXCompressor (unsigned int thread, double setit)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	tx[thread].compressor.gen->gain = (float)pow (10.0, setit / 20.0);
+	sem_post(&top[thread].sync.upd.sem);
+}

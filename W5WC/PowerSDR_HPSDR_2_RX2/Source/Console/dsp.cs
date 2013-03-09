@@ -71,7 +71,7 @@ namespace PowerSDR
 			/// This function sets up the SDR functions and data structures
 			/// </summary>
 			/// <returns></returns>
-        public static extern void SetupSDR(System.String app_data_path);
+        public static extern void SetupSDR(String app_data_path);
 
 		[DllImport("DttSP.dll", EntryPoint="SetDSPBuflen")]
 		public static extern void ResizeSDR(uint thread, int DSPsize);
@@ -82,109 +82,9 @@ namespace PowerSDR
 		[DllImport("DttSP.dll", EntryPoint="process_samples_thread")]
 		public static extern void ProcessSamplesThread(uint thread);
 
-//		DllImport("DttSP.dll", EntryPoint="AudioReset")]
-//		public static extern void AudioReset();
-
-	//	[DllImport("DttSP.dll", EntryPoint="cwtimerfired")]
-	//	public static extern void CWTimerFired();
- 
-	//	[DllImport("DttSP.dll", EntryPoint="StartKeyer")]
-	//	public static extern void StartKeyer();
-
-	//	[DllImport("DttSP.dll", EntryPoint="StopKeyer")]
-	//	public static extern void StopKeyer();
-
-	//	[DllImport("DttSP.dll", EntryPoint="CWRingRestart")]
-	//	public static extern void CWRingRestart();
-		///<summary>
-		/// The KeyValue function sends timing data and key depressions and keying selection
-		/// </summary>
-		/// <param name="del">This is the time since the last call to this function</param>
-		/// <param name="dash">This is a DttSP style boolean (a byte) which asserts dash or not-dash </param>
-		/// <param name="dot">This is a DttSP style boolean (a byte) which asserts dot or not-dot</param>
-		/// <param name="keyprog">This is a DttSP style boolean (a byte) which asserts iambic keyer or not-iambic</param>
-		///
-	//	[DllImport("DttSP.dll", EntryPoint="key_thread_process")]
-	//	public static extern void KeyValue(float del, bool dash, bool dot, bool keyprog);
-
-    //	[DllImport("DttSP.dll", EntryPoint="NewKeyer")]
-	//	public static extern void NewKeyer(float freq, bool iambic, float gain, float ramp,
-	//		float wpm, float SampleRate);
-
-     //   [DllImport("DttSP.dll", EntryPoint = "SetSwchRiseThresh")]
-     //   public static extern void SetSwchRiseThresh(uint thread, float val);
-
 		[DllImport("DttSP.dll",EntryPoint="SetThreadProcessingMode")]
 		public static extern void SetThreadProcessingMode(uint thread, int runmode);
 
-	/*	[DllImport("DttSP.dll", EntryPoint="SetKeyerSpeed")]///
-		public static extern void SetKeyerSpeed(float speed);
-
-		[DllImport("DttSP.dll", EntryPoint="SetKeyerFreq")]///
-		public static extern void SetKeyerFreq(float freq);
-
-		[DllImport("DttSP.dll", EntryPoint="SetKeyerSampleRate")]///
-		public static extern void SetKeyerSampleRate(float freq);
-
-		[DllImport("DttSP.dll", EntryPoint="SetKeyerRamp")]///
-		public static extern void SetKeyerRamp(float ramp);
-
-		[DllImport("DttSP.dll", EntryPoint="SetKeyerIambic")]///
-		public static extern void SetKeyerIambic(bool iambic);
-
-		[DllImport("DttSP.dll", EntryPoint="SetKeyerRevPdl")]///
-		public static extern void SetKeyerRevPdl(bool revpdl);
-
-		[DllImport("DttSP.dll", EntryPoint="SetKeyerDeBounce")]///
-		public static extern void SetKeyerDeBounce(int debounce);
-
-		[DllImport("DttSP.dll", EntryPoint="SetKeyerWeight")]///
-		public static extern void SetKeyerWeight(int weight);
-
-		[DllImport("DttSP.dll", EntryPoint="SetKeyerResetSize")]///
-		public static extern void SetKeyerResetSize(int size);
-
-		[DllImport("DttSP.dll", EntryPoint="SetKeyerMode")]///
-		public static extern void SetKeyerMode(int mode);
-
-		[DllImport("DttSP.dll", EntryPoint="KeyerClockFireRelease")]
-		public static extern void KeyerClockFireRelease();
-
-		[DllImport("DttSP.dll", EntryPoint="KeyerPlaying")]
-		[return:MarshalAs(UnmanagedType.I1)]
-		public static extern bool KeyerPlaying();
-
-		[DllImport("DttSP.dll", EntryPoint="KeyerRunning")]
-		[return:MarshalAs(UnmanagedType.I1)]
-		public static extern bool KeyerRunning();
-
-		[DllImport("DttSP.dll", EntryPoint="KeyerClockFireWait")]
-		public static extern void KeyerClockFireWait();
-
-		[DllImport("DttSP.dll", EntryPoint="KeyerStartedRelease")]
-		public static extern void KeyerStartedRelease();
-
-		[DllImport("DttSP.dll", EntryPoint="KeyerStartedWait")]
-		public static extern void KeyerStartedWait();
-
-		[DllImport("DttSP.dll", EntryPoint="SetWhichKey")]
-		public static extern void SetWhichKey(byte keyselect);
-
-		[DllImport("DttSP.dll", EntryPoint="PollTimerRelease")]
-		public static extern void PollTimerRelease();
-
-		[DllImport("DttSP.dll", EntryPoint="PollTimerWait")]
-		public static extern void PollTimerWait();
-
-		[DllImport("DttSP.dll", EntryPoint="DeleteKeyer")]
-		public static extern void DeleteKeyer();
-
-		[DllImport("DttSP.dll", EntryPoint="sound_thread_keyd")]
-		public static extern void KeyerSoundThread();
-
-		[DllImport("DttSP.dll", EntryPoint="CWtoneExchange")]
-		public static extern void CWtoneExchange(float *bufl, float *bufr, int nframes);
-        */
 		[DllImport("DttSP.dll", EntryPoint="Audio_Callback")]
 		public static extern void ExchangeSamples(void *input_l, void *input_r, void *output_l, void *output_r, int numsamples);
 
@@ -204,11 +104,6 @@ namespace PowerSDR
 
 		[DllImport("DttSP.dll", EntryPoint="SetRXFilter")]///
 		public static extern int SetRXFilter(uint thread, uint subrx, double low, double high);
-		/*public static int SetRXFilter(uint thread, uint subrx, double low, double high)
-		{
-			Debug.WriteLine("SetRXFilter("+thread+", "+subrx+", "+low+", "+high+")");
-			return SetRXFilterdll(thread, subrx, low, high);
-		}*/
 	
 		[DllImport("DttSP.dll", EntryPoint="SetTXFilter")]///
 		public static extern int SetTXFilter(uint thread, double low, double high);
@@ -248,11 +143,6 @@ namespace PowerSDR
 
 		[DllImport("DttSP.dll", EntryPoint="SetRXAGC")]///
 		public static extern void SetRXAGC(uint thread, uint subrx, AGCMode setit);
-		/*public static void SetRXAGC(uint thread, uint subrx, AGCMode setit)
-		{
-			Debug.WriteLine("SetRXAGC("+thread+", "+subrx+", "+setit.ToString()+")");
-			SetRXAGCdll(thread, subrx, setit);
-		}*/
 
 		[DllImport("DttSP.dll", EntryPoint="SetTXAGCFF")]///
 		public static extern void SetTXAGCFF(uint thread, bool setit);
@@ -604,6 +494,11 @@ namespace PowerSDR
             return;
         }
         
+       // [DllImport("DttSP.dll", EntryPoint = "SetHPSDRSpectrum")]
+       // public static extern void SetHPSDRSpectrum(uint thread, uint subrx, int flag, int disp, int ss, int LO);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetCBL")]
+        public static extern void SetCBL(uint thread, uint subrx, int flag);
 
         #region Diversity
 

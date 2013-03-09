@@ -2,8 +2,8 @@
 // display.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2009  FlexRadio Systems Copyright (C) 2010-2013  Doug Wigley
-//
+// Copyright (C) 2004-2009  FlexRadio Systems
+// Copyright (C) 2010-2013  Doug Wigley
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -391,6 +391,20 @@ namespace PowerSDR
             set { rx_display_high = value; }
         }
 
+        private static int rx2_display_low = -4000;
+        public static int RX2DisplayLow
+        {
+            get { return rx2_display_low; }
+            set { rx2_display_low = value; }
+        }
+
+        private static int rx2_display_high = 4000;
+        public static int RX2DisplayHigh
+        {
+            get { return rx2_display_high; }
+            set { rx2_display_high = value; }
+        }
+
         private static int tx_display_low = -4000;
         public static int TXDisplayLow
         {
@@ -403,6 +417,48 @@ namespace PowerSDR
         {
             get { return tx_display_high; }
             set { tx_display_high = value; }
+        }
+
+        private static int rx_spectrum_display_low = -4000;
+        public static int RXSpectrumDisplayLow
+        {
+            get { return rx_spectrum_display_low; }
+            set { rx_spectrum_display_low = value; }
+        }
+
+        private static int rx_spectrum_display_high = 4000;
+        public static int RXSpectrumDisplayHigh
+        {
+            get { return rx_spectrum_display_high; }
+            set { rx_spectrum_display_high = value; }
+        }
+
+        private static int rx2_spectrum_display_low = -4000;
+        public static int RX2SpectrumDisplayLow
+        {
+            get { return rx2_spectrum_display_low; }
+            set { rx2_spectrum_display_low = value; }
+        }
+
+        private static int rx2_spectrum_display_high = 4000;
+        public static int RX2SpectrumDisplayHigh
+        {
+            get { return rx2_spectrum_display_high; }
+            set { rx2_spectrum_display_high = value; }
+        }
+
+        private static int tx_spectrum_display_low = -4000;
+        public static int TXSpectrumDisplayLow
+        {
+            get { return tx_spectrum_display_low; }
+            set { tx_spectrum_display_low = value; }
+        }
+
+        private static int tx_spectrum_display_high = 4000;
+        public static int TXSpectrumDisplayHigh
+        {
+            get { return tx_spectrum_display_high; }
+            set { tx_spectrum_display_high = value; }
         }
 
         private static float rx1_preamp_offset = 0.0f;
@@ -1841,22 +1897,22 @@ namespace PowerSDR
 
             int center_line_x = (int)(-(double)low / (high - low) * W);
 
-            if (!mox)
+            if (!mox || (mox && tx_on_vfob && console.RX2Enabled))
             {
-                low = rx_display_low;				// get RX display limits
-                high = rx_display_high;
+                low = rx_spectrum_display_low;				// get RX display limits
+                high = rx_spectrum_display_high;
             }
             else
             {
                 if (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)
                 {
-                    low = rx_display_low;
-                    high = rx_display_high;
+                    low = rx_spectrum_display_low;
+                    high = rx_spectrum_display_high;
                 }
                 else
                 {
-                    low = tx_display_low;			// get RX display limits
-                    high = tx_display_high;
+                    low = tx_spectrum_display_low;			// get RX display limits
+                    high = tx_spectrum_display_high;
                 }
             }
 
@@ -1865,8 +1921,26 @@ namespace PowerSDR
             int step_power = 1;
             int step_index = 0;
             int freq_step_size = 50;
-            int y_range = spectrum_grid_max - spectrum_grid_min;
-            int grid_step = spectrum_grid_step;
+
+            //  int grid_step = spectrum_grid_step;
+            int grid_max = 0;
+            int grid_min = 0;
+            int grid_step = 0; // spectrum_grid_step;
+
+            if (!mox || (mox && tx_on_vfob && console.RX2Enabled))// || (mox && tx_on_vfob))
+            {
+                grid_max = spectrum_grid_max;
+                grid_min = spectrum_grid_min;
+                grid_step = spectrum_grid_step;
+            }
+            else if (mox)
+            {
+                grid_max = tx_spectrum_grid_max;
+                grid_min = tx_spectrum_grid_min;
+                grid_step = tx_spectrum_grid_step;
+            }
+
+            int y_range = grid_max - grid_min;
             if (split_display) grid_step *= 2;
 
             if (high == 0)
@@ -1903,15 +1977,15 @@ namespace PowerSDR
                 }
 
                 // Draw horizontal lines
-                int V = (int)(spectrum_grid_max - spectrum_grid_min);
+                int V = (int)(grid_max - grid_min);
                 num_steps = V / grid_step;
                 pixel_step_size = H / num_steps;
 
                 for (int i = 1; i < num_steps; i++)
                 {
                     int xOffset = 0;
-                    int num = spectrum_grid_max - i * grid_step;
-                    int y = (int)Math.Floor((double)(spectrum_grid_max - num) * H / y_range);
+                    int num = grid_max - i * grid_step;
+                    int y = (int)Math.Floor((double)(grid_max - num) * H / y_range);
 
                     if (bottom) g.DrawLine(hgrid_pen, 0, H + y, W, H + y);
                     else g.DrawLine(hgrid_pen, 0, y, W, y);
@@ -2005,14 +2079,14 @@ namespace PowerSDR
                 }
 
                 // Draw horizontal lines
-                int V = (int)(spectrum_grid_max - spectrum_grid_min);
+                int V = (int)(grid_max - grid_min);
                 int numSteps = V / grid_step;
                 pixel_step_size = H / numSteps;
                 for (int i = 1; i < numSteps; i++)
                 {
                     int xOffset = 0;
-                    int num = spectrum_grid_max - i * grid_step;
-                    int y = (int)Math.Floor((double)(spectrum_grid_max - num) * H / y_range);
+                    int num = grid_max - i * grid_step;
+                    int y = (int)Math.Floor((double)(grid_max - num) * H / y_range);
 
                     if (bottom) g.DrawLine(hgrid_pen, 0, H + y, W, H + y);
                     else g.DrawLine(hgrid_pen, 0, y, W, y);
@@ -2124,14 +2198,14 @@ namespace PowerSDR
                 }
 
                 // Draw horizontal lines
-                int V = (int)(spectrum_grid_max - spectrum_grid_min);
+                int V = (int)(grid_max - grid_min);
                 int numSteps = V / grid_step;
                 pixel_step_size = H / numSteps;
                 for (int i = 1; i < numSteps; i++)
                 {
                     int xOffset = 0;
-                    int num = spectrum_grid_max - i * grid_step;
-                    int y = (int)Math.Floor((double)(spectrum_grid_max - num) * H / y_range);
+                    int num = grid_max - i * grid_step;
+                    int y = (int)Math.Floor((double)(grid_max - num) * H / y_range);
                     if (bottom) g.DrawLine(grid_pen, 0, H + y, W, H + y);
                     else g.DrawLine(grid_pen, 0, y, W, y);
 
@@ -2217,13 +2291,13 @@ namespace PowerSDR
             // {
             if (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)
             {
-                low = rx_display_low;
-                high = rx_display_high;
+                low = rx_spectrum_display_low;
+                high = rx_spectrum_display_high;
             }
             else
             {
-                low = tx_display_low;			// get RX display limits
-                high = tx_display_high;
+                low = tx_spectrum_display_low;			// get RX display limits
+                high = tx_spectrum_display_high;
             }
             // }
 
@@ -2567,10 +2641,13 @@ namespace PowerSDR
             // g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
 
             bool local_mox = false;
+            bool waterfall = false;
             if (mox && rx == 1 && !tx_on_vfob) local_mox = true;
             if (mox && rx == 2 && tx_on_vfob) local_mox = true;
-            int Low = rx_display_low;					// initialize variables
-            int High = rx_display_high;
+            if (rx == 1 && tx_on_vfob && mox && !console.RX2Enabled) local_mox = true;
+            if (CurrentDisplayMode == DisplayMode.PANAFALL) waterfall = true;
+            int Low = 0;// rx_display_low;					// initialize variables
+            int High = 0;// rx_display_high;
             int mid_w = W / 2;
             int[] step_list = { 10, 20, 25, 50 };
             int step_power = 1;
@@ -2581,7 +2658,7 @@ namespace PowerSDR
             int grid_min = 0;
             int grid_step = 0; // spectrum_grid_step;
 
-            if (local_mox || (mox && tx_on_vfob))
+            if (local_mox && !waterfall)// || (mox && tx_on_vfob))
             {
                 grid_max = tx_spectrum_grid_max;
                 grid_min = tx_spectrum_grid_min;
@@ -2607,7 +2684,7 @@ namespace PowerSDR
             if (split_display) grid_step *= 2;
 
             int filter_low, filter_high;
-            int center_line_x = (int)(-(double)Low / (High - Low) * W);
+            int center_line_x;// = (int)(-(double)Low / (High - Low) * W);
             int[] band_edge_list;
 
             int[] r_x0 = new int[2];
@@ -2615,18 +2692,24 @@ namespace PowerSDR
             int[] r_x2 = new int[2];
             double f_center = vfoa_hz;
 
-            if (local_mox || (mox && tx_on_vfob))
+            if (local_mox) // get filter limits
             {
+                Low = tx_display_low;
+                High = tx_display_high;
                 filter_low = tx_filter_low;
                 filter_high = tx_filter_high;
             }
             else if (rx == 2)
             {
+                Low = rx2_display_low;
+                High = rx2_display_high;
                 filter_low = rx2_filter_low;
                 filter_high = rx2_filter_high;
             }
             else// if (rx == 1)
             {
+                Low = rx_display_low;
+                High = rx_display_high;
                 filter_low = rx1_filter_low;
                 filter_high = rx1_filter_high;
             }
@@ -2637,6 +2720,8 @@ namespace PowerSDR
                 filter_low = -5000;
                 filter_high = 5000;
             }
+
+            center_line_x = (int)(-(double)Low / (High - Low) * W);
 
             // Calculate horizontal step size
             int width = High - Low;
@@ -3250,10 +3335,8 @@ namespace PowerSDR
             {
                 if (local_mox)
                 {
-                    if (split_enabled)
-                        vfo = vfoa_sub_hz;
-                    else
-                        vfo = vfoa_hz;
+                    if (split_enabled) vfo = vfoa_sub_hz;
+                    else vfo = vfoa_hz;
                     vfo += xit_hz;
                 }
                 else if (mox && tx_on_vfob)
@@ -4803,17 +4886,60 @@ namespace PowerSDR
             // draw background
             g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
 
-            int low = rx_display_low;					// initialize variables
-            int high = rx_display_high;
+            int low = 0;					// initialize variables
+            int high = 0;
             int mid_w = W / 2;
             int[] step_list = { 10, 20, 25, 50 };
             int step_power = 1;
             int step_index = 0;
             int freq_step_size = 50;
-            int y_range = spectrum_grid_max - spectrum_grid_min;
             int filter_low, filter_high;
+            bool local_mox = false;
+            int grid_max = 0;
+            int grid_min = 0;
+
+            if (rx == 1 && !tx_on_vfob && mox) local_mox = true;
+            if (rx == 2 && tx_on_vfob && mox) local_mox = true;
+
+            if (rx == 2)
+            {
+                if (local_mox)// && tx_on_vfob)
+                {
+                    // low = tx_display_low;
+                    // high = tx_display_high;
+                    low = rx2_display_low;
+                    high = rx2_display_high;
+                    grid_max = tx_spectrum_grid_max;
+                    grid_min = tx_spectrum_grid_min;
+                }
+                else
+                {
+                    low = rx2_display_low;
+                    high = rx2_display_high;
+                    grid_max = rx2_spectrum_grid_max;
+                    grid_min = rx2_spectrum_grid_min;
+                }
+            }
+            else
+            {
+                if (local_mox) // && !tx_on_vfob)
+                {
+                    low = tx_display_low;
+                    high = tx_display_high;
+                    grid_max = tx_spectrum_grid_max;
+                    grid_min = tx_spectrum_grid_min;
+                }
+                else
+                {
+                    low = rx_display_low;
+                    high = rx_display_high;
+                    grid_max = spectrum_grid_max;
+                    grid_min = spectrum_grid_min;
+                }
+            }
 
             int center_line_x = (int)(-(double)low / (high - low) * W);
+            int y_range = grid_max - grid_min;
 
             if (mox) // get filter limits
             {
@@ -4935,7 +5061,7 @@ namespace PowerSDR
 
             double vfo;
 
-            if (mox)
+            /*     if (mox)
             {
                 vfo = split_enabled ? vfoa_sub_hz : vfoa_hz;
                 vfo += xit_hz;
@@ -4959,6 +5085,57 @@ namespace PowerSDR
                     break;
                 default:
                     break;
+            }
+                 */
+            if (rx == 1)
+            {
+                if (local_mox)
+                {
+                    if (split_enabled) vfo = vfoa_sub_hz;
+                    else vfo = vfoa_hz;
+                    vfo += xit_hz;
+                }
+                else if (mox && tx_on_vfob)
+                {
+                    if (console.RX2Enabled) vfo = vfoa_hz + rit_hz;
+                    else vfo = vfoa_sub_hz;
+                }
+                else vfo = vfoa_hz + rit_hz;
+            }
+            else //if(rx==2)
+            {
+                if (local_mox)
+                    vfo = vfob_hz + xit_hz;
+                else vfo = vfob_hz + rit_hz;
+            }
+
+            if (!bottom)
+            {
+                switch (rx1_dsp_mode)
+                {
+                    case DSPMode.CWL:
+                        vfo += cw_pitch;
+                        break;
+                    case DSPMode.CWU:
+                        vfo -= cw_pitch;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (rx2_dsp_mode)
+                {
+                    case DSPMode.CWL:
+                        vfo += cw_pitch;
+                        break;
+                    case DSPMode.CWU:
+                        vfo -= cw_pitch;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             long vfo_round = ((long)(vfo / freq_step_size)) * freq_step_size;
@@ -5743,9 +5920,7 @@ namespace PowerSDR
         private static Point[] points;
         unsafe static private bool DrawSpectrum(Graphics g, int W, int H, bool bottom)
         {
-            if (!mox && grid_control) DrawSpectrumGrid(ref g, W, H, bottom);
-            if (mox && tx_grid_control) DrawTXSpectrumGrid(ref g, W, H, bottom);
-            //DrawSpectrumGrid(ref g, W, H, bottom);
+            DrawSpectrumGrid(ref g, W, H, bottom);
             if (points == null || points.Length < W)
                 points = new Point[W];			// array of points to display
             float slope = 0.0f;						// samples to process per pixel
@@ -5754,16 +5929,22 @@ namespace PowerSDR
             int low = 0;
             int high = 0;
             float local_max_y = float.MinValue;
+            int grid_max = 0;
+            int grid_min = 0;
 
-            if (!mox)
+            if (!mox || (mox && tx_on_vfob && console.RX2Enabled))
             {
-                low = rx_display_low;
-                high = rx_display_high;
+                low = rx_spectrum_display_low;
+                high = rx_spectrum_display_high;
+                grid_max = spectrum_grid_max;
+                grid_min = spectrum_grid_min;
             }
             else
             {
-                low = tx_display_low;
-                high = tx_display_high;
+                low = tx_spectrum_display_low;
+                high = tx_spectrum_display_high;
+                grid_max = tx_spectrum_grid_max;
+                grid_min = tx_spectrum_grid_min;
             }
 
             if (rx1_dsp_mode == DSPMode.DRM)
@@ -5772,24 +5953,20 @@ namespace PowerSDR
                 high = 21500;
             }
 
-            int yRange = spectrum_grid_max - spectrum_grid_min;
+            int yRange = grid_max - grid_min;
 
             if (!bottom && data_ready)
             {
                 if (mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
                 {
                     for (int i = 0; i < current_display_data.Length; i++)
-                        current_display_data[i] = spectrum_grid_min - rx1_display_cal_offset;
-                    //current_display_data[i] = -200.0f;
+                        current_display_data[i] = grid_min - rx1_display_cal_offset;
                 }
                 else
                 {
                     fixed (void* rptr = &new_display_data[0])
                     fixed (void* wptr = &current_display_data[0])
                         Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
-
-                    if (current_model == Model.SOFTROCK40)
-                        console.AdjustDisplayDataForBandEdge(ref current_display_data);
                 }
                 data_ready = false;
             }
@@ -5805,10 +5982,6 @@ namespace PowerSDR
                     fixed (void* rptr = &new_display_data_bottom[0])
                     fixed (void* wptr = &current_display_data_bottom[0])
                         Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
-
-
-                    if (current_model == Model.SOFTROCK40)
-                        console.AdjustDisplayDataForBandEdge(ref current_display_data_bottom);
                 }
                 data_ready_bottom = false;
             }
@@ -5886,7 +6059,7 @@ namespace PowerSDR
                 }
 
                 points[i].X = i;
-                points[i].Y = (int)Math.Min((Math.Floor((spectrum_grid_max - max) * H / yRange)), H);
+                points[i].Y = (int)Math.Min((Math.Floor((grid_max - max) * H / yRange)), H);
                 if (bottom) points[i].Y += H;
             }
 
@@ -5930,48 +6103,56 @@ namespace PowerSDR
             float slope = 0.0F;						// samples to process per pixel
             int num_samples = 0;					// number of samples to process
             int start_sample_index = 0;				// index to begin looking at samples
-            int Low = rx_display_low;
-            int High = rx_display_high;
-            // int yRange = 0; // spectrum_grid_max - spectrum_grid_min;
+            int Low = 0;// rx_display_low;
+            int High = 0;// rx_display_high;
+            // int yRange = spectrum_grid_max - spectrum_grid_min;
             float local_max_y = float.MinValue;
             bool local_mox = false;
+            bool waterfall = false;
             int grid_max = 0;
             int grid_min = 0;
 
             if (rx == 1 && !tx_on_vfob && mox) local_mox = true;
             if (rx == 2 && tx_on_vfob && mox) local_mox = true;
+            if (rx == 1 && tx_on_vfob && mox && !console.RX2Enabled) local_mox = true;
+            if (CurrentDisplayMode == DisplayMode.PANAFALL) waterfall = true;
 
             if (rx == 2)
             {
                 if (local_mox)// && tx_on_vfob)
                 {
+                    Low = tx_display_low;
+                    High = tx_display_high;
                     grid_max = tx_spectrum_grid_max;
                     grid_min = tx_spectrum_grid_min;
                 }
                 else
                 {
+                    Low = rx2_display_low;
+                    High = rx2_display_high;
                     grid_max = rx2_spectrum_grid_max;
                     grid_min = rx2_spectrum_grid_min;
                 }
             }
             else
             {
-                if (local_mox) // && !tx_on_vfob)
+                if (local_mox && !waterfall) // && !tx_on_vfob)
                 {
+                    Low = tx_display_low;
+                    High = tx_display_high;
                     grid_max = tx_spectrum_grid_max;
                     grid_min = tx_spectrum_grid_min;
                 }
                 else
                 {
+                    Low = rx_display_low;
+                    High = rx_display_high;
                     grid_max = spectrum_grid_max;
                     grid_min = spectrum_grid_min;
                 }
             }
 
             int yRange = grid_max - grid_min;
-            //  if (rx == 2)
-            //   yRange = rx2_spectrum_grid_max - rx2_spectrum_grid_min;
-            //  else yRange = spectrum_grid_max - spectrum_grid_min;
 
             if (rx1_dsp_mode == DSPMode.DRM)
             {
@@ -6358,13 +6539,13 @@ namespace PowerSDR
             float slope = 0.0F;						// samples to process per pixel
             int num_samples = 0;					// number of samples to process
             int start_sample_index = 0;				// index to begin looking at samples
-            int Low = rx_display_low;
-            int High = rx_display_high;
-            int yRange = 0; // spectrum_grid_max - spectrum_grid_min;
+            int Low = 0;
+            int High = 0;
+            //  int yRange = 0; // spectrum_grid_max - spectrum_grid_min;
             float local_max_y = float.MinValue;
             bool local_mox = false;
-            if (rx == 2) yRange = rx2_spectrum_grid_max - rx2_spectrum_grid_min;
-            else yRange = spectrum_grid_max - spectrum_grid_min;
+            //  if (rx == 2) yRange = rx2_spectrum_grid_max - rx2_spectrum_grid_min;
+            // else yRange = spectrum_grid_max - spectrum_grid_min;
             if (rx == 1 && !tx_on_vfob && mox) local_mox = true;
             if (rx == 2 && tx_on_vfob && mox) local_mox = true;
             float local_min_y_w3sz = float.MaxValue;  //added by w3sz
@@ -6372,6 +6553,46 @@ namespace PowerSDR
             float display_max_w3sz = float.MinValue; //added by w3sz
             float min_y_w3sz = float.MaxValue;  //w3sz
             int R = 0, G = 0, B = 0;
+            int grid_max = 0;
+            int grid_min = 0;
+
+            if (rx == 2)
+            {
+                if (local_mox)// && tx_on_vfob)
+                {
+                    // Low = tx_display_low;
+                    // High = tx_display_high;
+                    Low = rx2_display_low;
+                    High = rx2_display_high;
+                    grid_max = tx_spectrum_grid_max;
+                    grid_min = tx_spectrum_grid_min;
+                }
+                else
+                {
+                    Low = rx2_display_low;
+                    High = rx2_display_high;
+                    grid_max = rx2_spectrum_grid_max;
+                    grid_min = rx2_spectrum_grid_min;
+                }
+            }
+            else
+            {
+                /*  if (local_mox) // && !tx_on_vfob)
+                  {
+                      Low = tx_display_low;
+                      High = tx_display_high;
+                      grid_max = tx_spectrum_grid_max;
+                      grid_min = tx_spectrum_grid_min;
+                  }
+                  else */
+                {
+                    Low = rx_display_low;
+                    High = rx_display_high;
+                    grid_max = spectrum_grid_max;
+                    grid_min = spectrum_grid_min;
+                }
+            }
+            int yRange = grid_max - grid_min;
 
             if (console.PowerOn)
             {
@@ -6395,8 +6616,6 @@ namespace PowerSDR
                         fixed (void* wptr = &current_display_data[0])
                             Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
 
-                        if (current_model == Model.SOFTROCK40)
-                            console.AdjustDisplayDataForBandEdge(ref current_display_data);
                     }
                     data_ready = false;
                 }
@@ -6412,9 +6631,6 @@ namespace PowerSDR
                         fixed (void* rptr = &new_display_data_bottom[0])
                         fixed (void* wptr = &current_display_data_bottom[0])
                             Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
-
-                        if (current_model == Model.SOFTROCK40)
-                            console.AdjustDisplayDataForBandEdge(ref current_display_data_bottom);
                     }
 
                     data_ready_bottom = false;
@@ -6494,14 +6710,18 @@ namespace PowerSDR
                         }
                         else
                         {
-                            max += tx_display_cal_offset;
+                            if (rx == 1) max += rx1_display_cal_offset;
+                            else if (rx == 2) max += tx_display_cal_offset;
                         }
 
                         if (!local_mox)
                         {
-                            if (rx == 1)
-                                max += (rx1_preamp_offset - alex_preamp_offset);
+                            if (rx == 1) max += (rx1_preamp_offset - alex_preamp_offset);
                             else if (rx == 2) max += (rx2_preamp_offset);
+                        }
+                        else
+                        {
+                            if (rx == 1) max += (rx1_preamp_offset - alex_preamp_offset);
                         }
 
                         if (max > local_max_y)
@@ -7499,13 +7719,13 @@ namespace PowerSDR
 
             if (!mox)								// Receive Mode
             {
-                low = rx_display_low;
-                high = rx_display_high;
+                low = rx_spectrum_display_low;
+                high = rx_spectrum_display_high;
             }
             else									// Transmit Mode
             {
-                low = tx_display_low;
-                high = tx_display_high;
+                low = tx_spectrum_display_low;
+                high = tx_spectrum_display_high;
             }
 
             if (rx1_dsp_mode == DSPMode.DRM)

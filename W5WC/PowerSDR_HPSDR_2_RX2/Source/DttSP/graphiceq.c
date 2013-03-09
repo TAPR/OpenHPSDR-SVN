@@ -48,16 +48,16 @@ static REAL EQ_Num_192000[] = {0.99804034984f, -1.99604991764f, 0.99804034984f};
 static REAL EQ_Den_192000[] = {1.99604991764f, -0.99608069967f};
 
 EQ
-new_EQ (CXB d, REAL samplerate, int pbits) 
+new_EQ (int buflen, CXB d, REAL samplerate, int pbits) 
 {
 	ComplexFIR BP;
 	EQ a = (EQ) safealloc(1, sizeof (eq), "new eq state");
-
-	BP = newFIR_Bandpass_COMPLEX(-6000.0, 6000.0, samplerate, 257);
-	a->p = newFiltOvSv(BP->coef, 257, pbits);
+	a->eqsize = min(EQSIZE, 2 * buflen);
+	BP = newFIR_Bandpass_COMPLEX(-6000.0, 6000.0, samplerate, a->eqsize/2 + 1);
+	a->p = newFiltOvSv(BP->coef, a->eqsize/2 + 1, pbits);
 	normalize_vec_COMPLEX(a->p->zfvec,a->p->fftlen,a->p->scale);
-	a->in = newCXB(256, FiltOvSv_fetchpoint(a->p), "EQ input CXB");
-	a->out = newCXB(256, FiltOvSv_storepoint(a->p), "EQ output CXB");
+	a->in = newCXB(a->eqsize/2, FiltOvSv_fetchpoint(a->p), "EQ input CXB");
+	a->out = newCXB(a->eqsize/2, FiltOvSv_storepoint(a->p), "EQ output CXB");
 	a->data = d;
 	delFIR_Bandpass_COMPLEX(BP);
 	memset(a->num, 0, 9 * sizeof (COMPLEX));
@@ -114,12 +114,12 @@ graphiceq (EQ a)
 	{
 		memcpy(CXBbase(a->in),
 			&CXBdata(a->data, sigidx),
-			256 * sizeof (COMPLEX));
+			a->eqsize/2 * sizeof (COMPLEX));
 		filter_OvSv(a->p);
 		memcpy(&CXBdata (a->data, sigidx),
 			CXBbase (a->out),
-			256 * sizeof (COMPLEX));
-		sigidx += 256;
+			a->eqsize/2 * sizeof (COMPLEX));
+		sigidx += a->eqsize/2;
 	} while (sigidx < sigsize);
 
 	if (a->notchflag)

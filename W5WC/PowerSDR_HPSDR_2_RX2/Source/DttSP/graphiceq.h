@@ -62,8 +62,11 @@ This is derived from equ.xmms:
 #include <fftw3.h>
 #include <fftw3_fix.h>
 
+#define EQSIZE	(2048)	//originally 512, Maximum FFT size to use
+
 typedef struct _eq 
 {
+	int eqsize;
 	CXB data;
 	FiltOvSv p;
 	CXB in, out;
@@ -71,7 +74,8 @@ typedef struct _eq
 	BOOLEAN notchflag;
 } eq, *EQ;
 
-extern EQ new_EQ (CXB d, REAL samplerate, int pbits);
+extern EQ new_EQ (int buflen, CXB d, REAL samplerate, int pbits);
 extern void graphiceq (EQ a);
+extern void delEQ(EQ a);
 
 #endif /* #define GRPHEQ_H */

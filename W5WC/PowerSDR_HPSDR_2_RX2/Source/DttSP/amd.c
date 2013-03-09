@@ -231,3 +231,19 @@ void am_demod(AMD a)
 			}
 	}
 }
+
+DttSP_EXP void
+SetSBMode(unsigned int thread, unsigned int subrx, int sbmode)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].amd.gen->sbmode = sbmode;
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetFadeLevel(unsigned int thread, unsigned int subrx, int levelfade)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+	rx[thread][subrx].amd.gen->levelfade = levelfade;
+	sem_post(&top[thread].sync.upd.sem);
+}

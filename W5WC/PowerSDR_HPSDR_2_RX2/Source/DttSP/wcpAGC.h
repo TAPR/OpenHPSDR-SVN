@@ -2,7 +2,7 @@
 
 This file is part of a program that implements a Software-Defined Radio.
 
-Copyright (C) 2011, 2012 Warren Pratt, NR0V
+Copyright (C) 2011, 2012, 2013 Warren Pratt, NR0V
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -37,6 +37,10 @@ Santa Cruz, CA  95060
 //typedef enum _agcmode
 //{ agcOFF, agcLONG, agcSLOW, agcMED, agcFAST} AGCMODE;
 
+#define MAX_SAMPLE_RATE		(384000.0)
+#define MAX_N_TAU			(4)
+#define MAX_TAU_ATTACK		(0.01)
+#define RB_SIZE				(int)(MAX_SAMPLE_RATE * MAX_N_TAU * MAX_TAU_ATTACK + 1)
 
 typedef struct _wcpagc
 {
@@ -63,8 +67,8 @@ typedef struct _wcpagc
 	int in_index;
 	int attack_buffsize;
 
-	double ring[19200][2];
-	double abs_ring[19200];
+	double ring[RB_SIZE][2];
+	double abs_ring[RB_SIZE];
 	int ring_buffsize;
 	double ring_max;
 
