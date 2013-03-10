@@ -59,7 +59,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
         int rc;
         int myrc = 0;
         int *in_sample_bufp = NULL;
-        float *bufp = NULL;
+       // float *bufp = NULL;
 
 
         //
@@ -72,7 +72,10 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
         //
         // Output (xmit IQ, and LR audio) is always at 48 khz - downsampled by dropping samples
         //
-        HaveSync = 0;
+ 		int nchannels = 2 * nreceivers + 2;
+		int i;
+
+		HaveSync = 0;
         SampleRate = sample_rate;
         FPGAWriteBufSize = 512; // 512;
         FPGAReadBufp = NULL;
@@ -128,10 +131,18 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                                 fprintf(stderr, "Warning NewResamplerF failed in PowerSDR-Interface.c\n");
                         }
                         break;
-                default:
-                        SampleRateIn2Bits = 3;
-                        break;
-        }
+				case 384000:
+					SampleRateIn2Bits = 3;
+					FPGAReadBufSize = 8 * FPGAWriteBufSize;  // was 2048;
+					MicResamplerP = NewResamplerF(48000, 384000);
+					if ( MicResamplerP == NULL ) {
+						fprintf(stderr, "Warning NewResamplerF failed in PowerSDR-Interface.c\n");
+					}
+					break;
+				default:
+					SampleRateIn2Bits = 2;
+					break;
+		}
         BlockSize = samples_per_block;
         Callback = callbackp;
 
@@ -146,7 +157,15 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 
         do { // once
                 // allocate buffers for callback buffers
-                bufp = (float *)malloc(sizeof(float) * BlockSize * 14);  // 6 channels for in and 8 channels for out
+ 			INbufp = (float *)malloc(sizeof(float) * BlockSize * nchannels);
+			for (i = 0; i < nchannels; i++)
+				INpointer[i] = INbufp + (i * BlockSize);
+
+			OUTbufp = (float *)malloc(sizeof(float) * BlockSize * 8);
+			for (i = 0; i < 8; i++)
+				OUTpointer[i] = OUTbufp + (i * BlockSize);
+
+			/*   bufp = (float *)malloc(sizeof(float) * BlockSize * 14);  // 6 channels for in and 8 channels for out
                 if ( bufp == NULL ) {
                         myrc = 5;
                         break;
@@ -169,7 +188,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                 CallbackOutR2bufp = bufp + (11*BlockSize);
                 CallbackOutL3bufp = bufp + (12*BlockSize);
                 CallbackOutR3bufp = bufp + (13*BlockSize);
-
+				*/
                 // allocate buffers for inbound and outbound samples from USB
                 in_sample_bufp = (int *)malloc(sizeof(int) * BlockSize * 6);  //(6) 6 channels in 
                 if ( in_sample_bufp == NULL ) {
@@ -259,7 +278,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
         } while ( 0 );
 
         if ( myrc != 0 ) {  // we failed -- clean up
-                if ( bufp != NULL ) {
+               /* if ( bufp != NULL ) {
                         CallbackInLbufp = NULL;
                         CallbackInRbufp = NULL;
                         CallbackInL2bufp = NULL;
@@ -277,7 +296,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                         CallbackOutL3bufp = NULL;
                         CallbackOutR3bufp = NULL;
                        free(bufp);
-                }
+                } */
 
                 if ( FPGAReadBufp != NULL ) {
                         free(FPGAReadBufp);
@@ -302,7 +321,10 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                         OutSampleFIFOp = NULL;
                 }
 
-                if ( OzyH != NULL ) {
+  				if (INbufp)   free(INbufp);
+				if (OUTbufp)  free(OUTbufp);
+
+				if ( OzyH != NULL ) {
                         OzyClose(OzyH);
                         OzyH = NULL;
                 }
@@ -686,7 +708,10 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
                 IOSampleInBufp = NULL;
         }
 
-        printf("sample buf freed\n");   fflush(stdout);
+  		if (INbufp)   free(INbufp);
+		if (OUTbufp)  free(OUTbufp);
+
+		/*printf("sample buf freed\n");   fflush(stdout);
         if ( CallbackInLbufp != NULL ) {
                         CallbackInRbufp = NULL;
                         CallbackOutLbufp = NULL;
@@ -694,30 +719,18 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
                         free(CallbackInLbufp);
                         CallbackInLbufp = NULL;
         }
-        printf("call back buf freed\n");   fflush(stdout);
-#ifdef XYLO
-        if ( XyloH != NULL ) {
-                XyloClose(XyloH);
-                XyloH = NULL;
-        }
-        printf("xylo closed\n");   fflush(stdout);
-#endif
-#ifdef OZY
+        printf("call back buf freed\n");   fflush(stdout); */
+
         if ( OzyH != NULL ) {
                 OzyClose(OzyH);
                 OzyH = NULL;
         }
         printf("Ozy closed\n");   fflush(stdout);
-#endif
 
-#ifndef LINUX
         if ( MicResamplerP != NULL ) {
                 DelPolyPhaseFIRF(MicResamplerP);
                 MicResamplerP = NULL;
         }
-#else
-#warning message("info - LINUX code missing ... DelPolyPhaseFIRF");
-#endif
 
         if ( FPGAReadBufp != NULL ) {
                 free(FPGAReadBufp);
@@ -841,9 +854,9 @@ KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out) {
   //  receivers = 2; // 1 rx = 2 loops, 2 rx = 4 loops for IQ
 KD5TFDVK6APHAUDIO_API void SetNRx(int nrx) {  
 	receivers = nrx * 2;
+	nreceivers = nrx;
 	nrx = (nrx-1) << 3; 
 	NRx = nrx & 0x38; 
-
 	return;
 }
 

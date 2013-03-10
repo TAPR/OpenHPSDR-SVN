@@ -278,27 +278,26 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	// int *bufp; 
 	// int buflen; 
 	int i; 
+	int j;
+	int k;
+	int index;
+
 	float *callback_in[6]; 
 	float *callback_out[8]; 
 	int out_sample_incr;  
 	int outidx; 
-#ifdef USE_NEW_FLOAT_CONVERT 
-	int *ip; 
-	short *sp; 
-#endif
-	
+	int nc = 2 * nreceivers + 1;
+			
 #ifdef PERF_DEBUG 
 	__int64 start_t, stop_t, delta_t; 
 #endif 
 	
 	// printf("cb: bufp=0x%08x, len=%d\n", (unsigned long)bufp, buflen); fflush(stdout); 
 
-	if ( buflen != 6*sizeof(int)*BlockSize ) { 
+	if ( buflen != nc*sizeof(int)*BlockSize ) { 
 		fprintf(stderr, "Warning: short block in Callback_ProcessBuffer - frame dropped\n"); 
 		return; 
 	}
-
-
 	
 	// ok if we get here we've got a good buffer of samples, need to de interleave them 
 	// and convert to floats 
@@ -308,16 +307,22 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	// TODO:  is there a cool SIMD way to do this? 
 	// 
 	for ( i = 0; i < BlockSize; i++ ) { 
-		CallbackInLbufp[i] = ((float)(bufp[5*i]))/IQConversionDivisor;  //# of Channels * i
+			for (j = 0; j < nc - 1; j++)
+		{
+			(INpointer[j])[i] = ((float)(bufp[nc*i + j]))/IQConversionDivisor;
+		}
+		(INpointer[nc - 1])[i] = ((float)(bufp[(nc*i)+ nc - 1]))/(float)32767.0;
+	
+		/*	CallbackInLbufp[i] = ((float)(bufp[5*i]))/IQConversionDivisor;  //# of Channels * i
 		CallbackInRbufp[i] = ((float)(bufp[(5*i)+1]))/IQConversionDivisor;
 
 		CallbackInL2bufp[i] = ((float)(bufp[(5*i)+2]))/IQConversionDivisor;  
 		CallbackInR2bufp[i] = ((float)(bufp[(5*i)+3]))/IQConversionDivisor;
 		
 		CallbackMicLbufp[i] = ((float)(bufp[(5*i)+4]))/(float)32767.0;  // (2**15) - 1  (mic samples are 16 bits)  
+*/
 	} 
 
-#ifndef LINUX 
 	if ( MicResamplerP != NULL && MicResampleBufp != NULL ) {  // we need to resample mic data 
 		int out_sample_count; 
 		int sample_incr; 
@@ -330,24 +335,25 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 			case 192000:
 				sample_incr = 4; 
 				break; 
+			case 384000:
+				sample_incr = 8; 
+				break; 
 			default: 
 				fprintf(stderr, "Warning: callback_thread.c: unsupported sampled rate: %d\n", SampleRate); 
 				break; 
 		} 
 		// copy every sample_incr sample over to sample rate input buf and resample 
 		for ( j = 0, outidx = 0; j < BlockSize; j += sample_incr, outidx++ ) { 
-			MicResampleBufp[outidx] = CallbackMicLbufp[j]; 
+			//MicResampleBufp[outidx] = CallbackMicLbufp[j]; 
+			MicResampleBufp[outidx] = (INpointer[2 * nreceivers])[j];
 		} 
-		DoResamplerF(MicResampleBufp, CallbackMicLbufp, BlockSize/sample_incr, &out_sample_count, MicResamplerP); 		
+		//DoResamplerF(MicResampleBufp, CallbackMicLbufp, BlockSize/sample_incr, &out_sample_count, MicResamplerP); 		
+		DoResamplerF(MicResampleBufp, INpointer[2 * nreceivers], BlockSize/sample_incr, &out_sample_count, MicResamplerP); 		
 	}
-#else 
-#warning message("info - LINUX code missing ... DoResamplerF") 
-#endif 
 
-	memcpy(CallbackMicRbufp, CallbackMicLbufp, sizeof(float) * BlockSize); // copy left to right so it does not matter which PowerSDR is actually looking at 
-   // memcpy(CallbackInL3bufp, CallbackInL2bufp, sizeof(float) * BlockSize);
-	//memcpy(CallbackInR3bufp, CallbackInR2bufp, sizeof(float) * BlockSize);
-	
+	//memcpy(CallbackMicRbufp, CallbackMicLbufp, sizeof(float) * BlockSize); // copy left to right so it does not matter which PowerSDR is actually looking at 
+ 	memcpy((INpointer[2 * nreceivers + 1]), INpointer[2 * nreceivers], sizeof(float) * BlockSize); // copy left to right so it does not matter which PowerSDR is actually looking at 
+ 	
 #ifdef PERF_DEBUG 
 	stop_t = getPerfTicks(); 
 	delta_t = stop_t - start_t; 
@@ -363,12 +369,23 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 
 	// printf("cb: buf build\n"); fflush(stdout); 
 	// build bufs to pass to callback -- wants an array of pointers to buffers of floats for in and out 
-	callback_in[0] = CallbackInLbufp; //RX1 I
-	callback_in[1] = CallbackInRbufp; //RX1 Q
-	callback_in[2] = CallbackInL2bufp; //RX2 I
-	callback_in[3] = CallbackInR2bufp; //RX2 Q
-	callback_in[4] = CallbackMicLbufp; //Mic samples
-	callback_in[5] = CallbackMicRbufp; 
+		for (i = 0; i < 4; i++)
+			callback_in[i] = INpointer[i];
+		for (i = 4; i < 6; i++)
+			callback_in[i] = INpointer[2 * nreceivers + i - 4];
+		//for (i = 6; i < 2 * nreceivers + 2; i++)
+			//callback_in[i] = INpointer[i - 2];
+
+		for (i = 0; i < 8; i++)
+			callback_out[i] = OUTpointer[i];
+
+	//callback_in[0] = CallbackInLbufp; //RX1 I
+	//callback_in[1] = CallbackInRbufp; //RX1 Q
+	//callback_in[2] = CallbackInL2bufp; //RX2 I
+	//callback_in[3] = CallbackInR2bufp; //RX2 Q
+	//callback_in[4] = CallbackMicLbufp; //Mic samples
+	//callback_in[5] = CallbackMicRbufp; 
+
 	//callback_in[6] = CallbackInL3bufp; // RX3 I
 	//callback_in[7] = CallbackInR3bufp; // RX3 Q
 
@@ -376,14 +393,14 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	//callback_out[1] = CallbackMonOutRbufp; //RX & Mon audio
 	//callback_out[2] = CallbackOutLbufp; // TX I
 	//callback_out[3] = CallbackOutRbufp; // TX Q 
-	callback_out[0] = CallbackOutLbufp; // TX I
-	callback_out[1] = CallbackOutRbufp; // TX Q
-	callback_out[2] = CallbackMonOutLbufp; //RX & Mon audio
-	callback_out[3] = CallbackMonOutRbufp; //RX & Mon audio
-	callback_out[4] = CallbackOutL2bufp;  //RX2 Audio out from PSDR
-	callback_out[5] = CallbackOutR2bufp;  //RX2 Audio out from PSDR
-	callback_out[6] = CallbackOutL3bufp;
-	callback_out[7] = CallbackOutR3bufp;
+	//callback_out[0] = CallbackOutLbufp; // TX I
+	//callback_out[1] = CallbackOutRbufp; // TX Q
+	//callback_out[2] = CallbackMonOutLbufp; //RX & Mon audio
+	//callback_out[3] = CallbackMonOutRbufp; //RX & Mon audio
+	//callback_out[4] = CallbackOutL2bufp;  //RX2 Audio out from PSDR
+	//callback_out[5] = CallbackOutR2bufp;  //RX2 Audio out from PSDR
+	//callback_out[6] = CallbackOutL3bufp;
+	//callback_out[7] = CallbackOutR3bufp;
 
 
 	// call the callback  		
@@ -414,7 +431,7 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	} 
 #endif 
 
-#define LIMIT_SAMPLE(x)(x) = (float)(( (x) > 1.0 ? 1.0 : ( (x) < -1.0 ? -1.0 : (x) ) ))
+//#define LIMIT_SAMPLE(x)(x) = (float)(( (x) > 1.0 ? 1.0 : ( (x) < -1.0 ? -1.0 : (x) ) ))
 	// ok now take the output buffer 
 	// convert to 48khz sampling by skipping samples as needed 
 	// limt it to +/- 1.0, convert to ints 
@@ -433,70 +450,24 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 			out_sample_incr = 4; 	
 			break;
 
+	    case 384000:
+		    out_sample_incr = 8; 
+	    	break; 
 		default:
 			fprintf(stderr, "Mayday Mayday - bad sample rate in callback-thread.c"); 
 	} 
 
-#ifdef USE_NEW_FLOAT_CONVERT 
-	for ( i = 0, sp = CBSampleOutBufp ; i < BlockSize; i += out_sample_incr ) { 
-#else 
 	for ( i = 0, outidx = 0 ; i < BlockSize; i += out_sample_incr, outidx++ ) { 
-#endif 
-#if 1
-		LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
-		LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
-		LIMIT_SAMPLE(CallbackMonOutRbufp[i]); 
-		LIMIT_SAMPLE(CallbackMonOutRbufp[i]);  
-		LIMIT_SAMPLE(CallbackOutLbufp[i]);
-		LIMIT_SAMPLE(CallbackOutLbufp[i]); 
-		LIMIT_SAMPLE(CallbackOutRbufp[i]);
-		LIMIT_SAMPLE(CallbackOutRbufp[i]); 
-#else 
-		// limit data to +/- 1.0 
-		if ( CallbackOutRbufp[i] > 1.0 ) { 
-			CallbackOutRbufp[i] = 1.0; 
-		}
-		else if ( CallbackOutRbufp[i] < -1.0 ) { 
-			CallbackOutRbufp[i] = -1.0; 
-		}
-		if ( CallbackOutLbufp[i] > 1.0 ) { 
-			CallbackOutLbufp[i] = 1.0; 
-		}
-		else if ( CallbackOutLbufp[i] < -1.0 ) { 
-			CallbackOutLbufp[i] = -1.0; 
-		}
-		if ( CallbackMonOutLbufp[i] > 1.0 ) { 
-			CallbackMonOutLbufp[i] = 1.0; 
-		}
-		else if ( CallbackMonOutLbufp[i] < -1.0 ) { 
-			CallbackMonOutLbufp[i] = -1.0; 
-		}
-		if ( CallbackMonOutRbufp[i] > 1.0 ) { 
-			CallbackMonOutRbufp[i] = 1.0; 
-		}
-		else if ( CallbackMonOutRbufp[i] < -1.0 ) { 
-			CallbackMonOutRbufp[i] = -1.0; 
-		}
-#endif 
-#ifdef USE_NEW_FLOAT_CONVERT 
-	    *sp = (short)floatToInt16(CallbackOutLbufp[i]);  ++sp; 		
-		*sp = (short)floatToInt16(CallbackOutRbufp[i]);  ++sp; 
-		*sp = (short)floatToInt16(CallbackMonOutLbufp[i]); ++sp; 		
-		*sp = (short)floatToInt16(CallbackMonOutRbufp[i]); ++sp; 
-#else 
-		
-		CBSampleOutBufp[4*outidx] = (short)(CallbackMonOutLbufp[i] * 32767.0); 
-		CBSampleOutBufp[(4*outidx)+1] = (short)(CallbackMonOutRbufp[i] * 32767.0); 
-#if 1 
-		CBSampleOutBufp[(4*outidx)+2] = (short)(CallbackOutLbufp[i] * 32767.0); 
-		CBSampleOutBufp[(4*outidx)+3] = (short)(CallbackOutRbufp[i] * 32767.0); 
-#else
-		// put same sigs on LR and IQ for diagnostic purposes 
-		CBSampleOutBufp[(4*outidx)+2] =  CBSampleOutBufp[4*outidx];
-		CBSampleOutBufp[(4*outidx)+3] =  CBSampleOutBufp[(4*outidx)+1];
-#endif
-#endif
+		for (j = 0; j < 4; j++)
+			CBSampleOutBufp[(4*outidx)+j] = (short)((OUTpointer[j])[i] * 32767.0);
+
+		//CBSampleOutBufp[4*outidx] = (short)(CallbackMonOutLbufp[i] * 32767.0); 
+		//CBSampleOutBufp[(4*outidx)+1] = (short)(CallbackMonOutRbufp[i] * 32767.0); 
+
+		//CBSampleOutBufp[(4*outidx)+2] = (short)(CallbackOutLbufp[i] * 32767.0); 
+		//CBSampleOutBufp[(4*outidx)+3] = (short)(CallbackOutRbufp[i] * 32767.0); 
 	}
+
 #ifdef PERF_DEBUG 
 	stop_t = getPerfTicks(); 
 	delta_t = stop_t - start_t; 

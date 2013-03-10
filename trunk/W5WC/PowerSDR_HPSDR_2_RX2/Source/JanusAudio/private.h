@@ -172,24 +172,29 @@ extern void *InSampleFIFOp;  // FIFO for samples coming in from device
 extern void *OutSampleFIFOp;  // FIFO for outbound samples
 extern int (__stdcall *Callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata); // pointer to callback function
 // buffers for the callback thread
-extern float *CallbackInLbufp;  // left buffer for samples headed to powersdr
-extern float *CallbackInRbufp;  // right buffer for samples headed to powersdr
-extern float *CallbackInL2bufp;  // left buffer for samples headed to powersdr
-extern float *CallbackInR2bufp;  // right buffer for samples headed to powersdr
-extern float *CallbackMicLbufp; // left buffer of mic samples
-extern float *CallbackMicRbufp; // right buffer of mic samples
-extern float *CallbackInL3bufp;  // left buffer for samples headed to powersdr
-extern float *CallbackInR3bufp;  // right buffer for samples headed to powersdr
+extern float *INpointer[12];
+extern float *OUTpointer[8];
+extern float *INbufp;
+extern float *OUTbufp;
 
-extern float *CallbackOutLbufp; // left buffer for samples headed to the audio device  (iq)
-extern float *CallbackOutRbufp; // right buffer for samples header to the audio device  (iq)
-extern float *CallbackMonOutLbufp;  // left for monitor out
-extern float *CallbackMonOutRbufp;  // right for monitor out
+//extern float *CallbackInLbufp;  // left buffer for samples headed to powersdr
+//extern float *CallbackInRbufp;  // right buffer for samples headed to powersdr
+//extern float *CallbackInL2bufp;  // left buffer for samples headed to powersdr
+//extern float *CallbackInR2bufp;  // right buffer for samples headed to powersdr
+//extern float *CallbackMicLbufp; // left buffer of mic samples
+//extern float *CallbackMicRbufp; // right buffer of mic samples
+//extern float *CallbackInL3bufp;  // left buffer for samples headed to powersdr
+//extern float *CallbackInR3bufp;  // right buffer for samples headed to powersdr
+
+//extern float *CallbackOutLbufp; // left buffer for samples headed to the audio device  (iq)
+//extern float *CallbackOutRbufp; // right buffer for samples header to the audio device  (iq)
+//extern float *CallbackMonOutLbufp;  // left for monitor out
+//extern float *CallbackMonOutRbufp;  // right for monitor out
 extern float *MicResampleBufp; // buffer for mic resampling -- holds pre resample data
-extern float *CallbackOutL2bufp; // left buffer for samples headed to the audio device  (iq)
-extern float *CallbackOutR2bufp; // right buffer for samples header to the audio device  (iq)
-extern float *CallbackOutL3bufp; // left buffer for samples headed to the audio device  (iq)
-extern float *CallbackOutR3bufp; // right buffer for samples header to the audio device  (iq)
+//extern float *CallbackOutL2bufp; // left buffer for samples headed to the audio device  (iq)
+//extern float *CallbackOutR2bufp; // right buffer for samples header to the audio device  (iq)
+//extern float *CallbackOutL3bufp; // left buffer for samples headed to the audio device  (iq)
+//extern float *CallbackOutR3bufp; // right buffer for samples header to the audio device  (iq)
 
 
 // buffer for the IO Thread
@@ -312,6 +317,7 @@ extern int Alex4LPFMask;
 extern int Duplex;
 extern int NRx;
 extern int receivers;
+extern int nreceivers;
 
 extern int AlexRxAnt;
 extern int AlexTxAnt;
