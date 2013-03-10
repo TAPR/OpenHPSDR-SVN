@@ -23,13 +23,6 @@
 
 // this is updated for 8 channels
 #include <stdio.h>
-
-
-#ifdef LINUX
-#include <unistd.h>
-#endif
-
-
 #include "KD5TFD-VK6APH-Audio.h"
 // #define PERF_DEBUG 1
 #include "private.h"
@@ -382,6 +375,7 @@ unsigned char fpga_test_buf[512] = {
 #define STATE_SAMPLE_LO (12)
 #define STATE_SAMPLE_MIC_HI (13)
 #define STATE_SAMPLE_MIC_LO (14)
+#define STATE_PADDING_LOOP (15)
 #endif
 
 #define OUT_STATE_SYNC_HI_NEEDED (1)
@@ -626,6 +620,9 @@ unsigned char *getNewOutBufFromFIFO() {
         else if ( SampleRate == 192000 )  {
                 out_buf_len_needed /= 4;
         }
+        else if ( SampleRate == 384000 )  {
+                out_buf_len_needed /= 8;
+        }
         if ( outbuflen != out_buf_len_needed  ) {
                 printf("Warning: IOThread short block from getFIFO on output, frame dropped obl=%d obln=%d\n", outbuflen, out_buf_len_needed);
                 freeFIFOdata(outbufp);
@@ -706,7 +703,7 @@ void ForceCandCFrames(int count, int c0, int vfofreq) {
 #elif K5SO_3RX
 	buf[7] =  0x94 | 0x80; //0x08 tripple Mercs, 0x80 common Merc freq
 #else	
-	buf[7] = 0x0c; // duplex with 2 receivers
+	buf[7] = NRx | Duplex; //0x0c; // duplex with 2 receivers
 #endif
 
 	buf[512] = 0x7f; 
@@ -839,6 +836,9 @@ void IOThreadMainLoop(void) {
 	int writebufpos = 0;
 	int sample_bufp_size;
 	//        int sample_is_left;
+	int loop = 0;
+	int sync_samples = 0;
+	int padding_loops = 0;
 	int rx_sample_loops = 1;
 	int buf_num = 0;
 	unsigned char RxOverrun = 0;
@@ -846,7 +846,8 @@ void IOThreadMainLoop(void) {
 	int zero_read_count = 0; 		
 
 #ifdef HPSDR_2RX
-	sample_bufp_size =  6 * sizeof(int) * BlockSize;
+	int nc = 2 * nreceivers + 1;
+	sample_bufp_size =  nc * sizeof(int) * BlockSize;
 
 	// how big is outbuf ... account for us being fixed at 48 khz on output side
 	outbuflen = 4 * sizeof(short) * BlockSize;
@@ -856,6 +857,43 @@ void IOThreadMainLoop(void) {
 	else if ( SampleRate == 192000 ) {
 		outbuflen /= 4;
 	}
+		else if ( SampleRate == 384000 ) {
+		outbuflen /= 8;
+	}
+
+	switch (nreceivers) {
+	case 1:
+		sync_samples = 189;
+		padding_loops = 0;
+		break;
+	case 2:
+		sync_samples = 180;
+		padding_loops = 0;
+		break;
+	case 3:
+		sync_samples = 175;
+		padding_loops = 3;
+		break;
+	case 4:
+		sync_samples = 171;
+		padding_loops = 9;
+		break;
+	case 5:
+		sync_samples = 165;
+		padding_loops = 23;
+	case 6:
+		sync_samples = 165;
+		padding_loops = 9;
+	case 7:
+		sync_samples = 165;
+		padding_loops = 19;
+		break;
+	case 8:
+		sync_samples = 165;
+		padding_loops = 3;
+		break;
+	}
+
 	ForceCandCFrame(); // send 3 C&C frames to make sure ozy knows the clock settings 
 	// printf("iot: main loop starting\n"); fflush(stdout);
 	// main loop - read a buffer, processe it and then write a buffer if we have one to write
@@ -1185,7 +1223,7 @@ void IOThreadMainLoop(void) {
 					++samples_this_sync;
 
 					//printf(" Rx: %d loops: %d", receivers, rx_sample_loops);
-					if(rx_sample_loops < 4)//receivers)
+					if(rx_sample_loops < (nc - 1))//receivers)
 					{
 						state = STATE_SAMPLE_HI;
 						++rx_sample_loops;
@@ -1211,7 +1249,7 @@ void IOThreadMainLoop(void) {
 					this_num = ((unsigned char)FPGAReadBufp[i]) | this_num; // add in last part of sample
 					IOSampleInBufp[sample_count] = this_num;
 					++sample_count;
-					if ( sample_count >= 5*BlockSize ) {   // only 5 channels on input (i1,q1,i2,q2,mic), although buffer is sized for 6
+					if ( sample_count >= nc*BlockSize ) {   // only 5 channels on input (i1,q1,i2,q2,mic), although buffer is sized for 6
 						sample_count = 0;
 						//printf(" IOS: %d ", IOSampleInBufp); fflush(stdout);
 						// printf("iot: calling proc buf\n"); fflush(stdout);
@@ -1223,9 +1261,28 @@ void IOThreadMainLoop(void) {
 					}
 
 					++samples_this_sync;  //1-rx = 189, 2-rx = 180
-					state = samples_this_sync == 180 ? STATE_SYNC_HI : STATE_SAMPLE_HI;
+					//state = samples_this_sync == 180 ? STATE_SYNC_HI : STATE_SAMPLE_HI;
+				    state = samples_this_sync == sync_samples ? STATE_PADDING_LOOP : STATE_SAMPLE_HI; 
+					if (state == STATE_PADDING_LOOP && padding_loops == 0) state = STATE_SYNC_HI;
 
 					//printf("s_t_s: %d\n", samples_this_sync);
+					break;
+
+								case STATE_PADDING_LOOP:
+					if(loop < padding_loops){
+						if ( (unsigned char)FPGAReadBufp[i] != 0) {
+							state = STATE_SYNC_HI;
+							loop = 0;
+						}
+						else {
+							loop++;
+							state = STATE_PADDING_LOOP;
+						}
+					}
+					else {
+						state = STATE_SYNC_HI;
+						loop = 0;
+					} 
 					break;
 
 #elif K5SO_2RX
@@ -1886,7 +1943,7 @@ void IOThreadMainLoop(void) {
 #elif K5SO_3RX
 						FPGAWriteBufp[writebufpos] = AlexTxAnt | 0x94;  //set to full duplex - 3 rx
 #else
-						FPGAWriteBufp[writebufpos] = AlexTxAnt | 0x04 | 0x08;  //set to full duplex - 2 rx
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;//| 0x04 | 0x08;  //set to full duplex - 2 rx
 
 #endif
 						break;
