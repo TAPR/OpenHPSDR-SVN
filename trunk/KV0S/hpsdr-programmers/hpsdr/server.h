@@ -42,6 +42,8 @@ public:
     void clearError();
     void setError(QString e);
 
+    QList<Board> boards;
+
 protected:
     Server();
 
@@ -75,7 +77,7 @@ private:
 
     Interfaces interfaces;
 
-    QList<Board> boards;
+
 
     QHostAddress* metisAddress;
     QUdpSocket metisSocket;

@@ -15,10 +15,9 @@
 
 
 #include "../hpsdr/interfaces.h"
-//#include "../hpsdr/receivethread.h"
-// #include "../Programmer/rawreceivethread.h"
 #include "../hpsdr/discovery.h"
 #include "../hpsdr/board.h"
+#include "../hpsdr/server.h"
 #include "../IPaddress/changeipaddress.h"
 #include "../Help/aboutdialog.h"
 #include "../Status/statusdialog.h"
@@ -170,6 +169,7 @@ private:
     int eraseTimeouts;
 
 
+    Server *server;
     QUdpSocket socket;
     Discovery* discovery;
     //ReceiveThread* receiveThread;

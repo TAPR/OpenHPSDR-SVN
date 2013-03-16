@@ -195,24 +195,11 @@ void MainWindow::clearDiscovery() {
 
 void MainWindow::discover() {
 
-    clearDiscovery();
-
-    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
-
-    if(!socket.bind(QHostAddress(ip),0,QUdpSocket::ReuseAddressHint)) {
-        qDebug()<<"Error: Discovery: bind failed "<<socket.errorString();
-        return;
+    Discovery* discovery=new Discovery();
+    ui->discoverComboBox->clear();
+    for(int i=0;i<server->getMetisCount();i++) {
+        ui->discoverComboBox->addItem(server->getMetisText(i));
     }
-
-    discovery=new Discovery();
-    connect(discovery,SIGNAL(board_found(Board*)),this,SLOT(board_found(Board*)));
-    //discovery->discover();
-    // disable the Discovery button
-    ui->discoverButton->setDisabled(true);
-
-
-    // wait 2 seconds to allow replys
-    QTimer::singleShot(2000,this,SLOT(discovery_timeout()));
 }
 
 void MainWindow::discovery_timeout() {
