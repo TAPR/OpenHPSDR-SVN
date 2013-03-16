@@ -74,10 +74,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->interfaceComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(interfaceSelected(int)));
     //connect(ui->discoverComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(metisSelected(int)));
 
-    //connect(ui->discoverButton,SIGNAL(clicked()),this,SLOT(discover()));
+    connect(ui->discoverButton,SIGNAL(clicked()),this,SLOT(discover()));
 
     //connect(ui->programButton,SIGNAL(clicked()),this,SLOT(program()));
-    //connect(ui->browseButton,SIGNAL(clicked()),this,SLOT(browse()));
+    connect(ui->browseButton,SIGNAL(clicked()),this,SLOT(browse()));
 
     connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
     connect(ui->actionAddress,SIGNAL(triggered()),add,SLOT(show()));
@@ -118,3 +118,13 @@ void MainWindow::status(QString text) {
     stat->status( text.trimmed() );
 }
 
+void MainWindow::discover()
+{
+    qDebug() << "in MainWindow::discover";
+}
+
+
+void MainWindow::browse()
+{
+    qDebug() << "in MainWindow::browse";
+}
