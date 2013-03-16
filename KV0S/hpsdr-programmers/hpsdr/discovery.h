@@ -14,6 +14,7 @@ public:
 
 public slots:
     void readyRead();
+    void discon();
 
 private:
     Server *server;

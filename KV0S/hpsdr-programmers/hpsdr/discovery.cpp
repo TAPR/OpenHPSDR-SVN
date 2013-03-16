@@ -41,6 +41,11 @@ Discovery::Discovery() {
     disconnect(server->getMetisSocket(),SIGNAL(readyRead()),this,SLOT(readyRead()));
 }
 
+void Discovery::discon()
+{
+   return;
+}
+
 void Discovery::readyRead() {
 
     QHostAddress metisAddress;
