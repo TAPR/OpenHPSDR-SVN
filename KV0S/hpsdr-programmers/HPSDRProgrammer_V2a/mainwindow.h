@@ -46,6 +46,8 @@ private:
 
 private slots:
     void interfaceSelected(int id);
+    void discover();
+    void browse();
 
 };
 
