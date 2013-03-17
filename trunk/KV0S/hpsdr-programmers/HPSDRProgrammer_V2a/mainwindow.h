@@ -11,12 +11,14 @@
 #include <QMessageBox>
 #include <QStringList>
 #include <QSettings>
+#include <QUdpSocket>
 
 
 #include "../Help/aboutdialog.h"
 #include "../Status/statusdialog.h"
 #include "./hpsdr/addressdialogprog.h"
 #include "./hpsdr/interfaces.h"
+#include "./hpsdr/writeboard.h"
 #include "version.h"
 
 
@@ -43,12 +45,16 @@ private:
     StatusDialog *stat;
     AddressDialog *add;
     Interfaces interfaces;
+    QUdpSocket *socket;
+    WriteBoard *wb;
+    QString fileName;
 
 private slots:
     void interfaceSelected(int id);
     void discover();
+    void discoveryUpdate();
     void browse();
-
+    void program();
 };
 
 #endif // MAINWINDOW_H

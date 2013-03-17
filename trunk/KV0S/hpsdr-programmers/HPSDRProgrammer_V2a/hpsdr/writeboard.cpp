@@ -25,7 +25,7 @@ in order for the new address to be read using a Discovery."
 
 
 
-writeBoard::writeBoard(QUdpSocket *s, unsigned char* MACaddress)
+WriteBoard::WriteBoard(QUdpSocket *s, unsigned char* MACaddress)
 {
     QString myip;
     myip = QString("255.255.255.255");
@@ -35,14 +35,16 @@ writeBoard::writeBoard(QUdpSocket *s, unsigned char* MACaddress)
     ip=myip;
     socket=s;
 
+    connect(socket, SIGNAL(readyRead()),this, SLOT(readyRead()));
+
 }
 
-writeBoard::~writeBoard()
+WriteBoard::~WriteBoard()
 {
 
 }
 
-void writeBoard::discovery()
+void WriteBoard::discovery()
 {
     // send the discovery packet
     unsigned char buffer[63];
@@ -61,11 +63,24 @@ void writeBoard::discovery()
         return;
     }
 
+    QTimer *timer = new QTimer(this);
+    timer->setSingleShot(true);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    timer->start(500);
+
+
+
+    qDebug()<< "dicovery packet sent";
 
 }
 
+void WriteBoard::update()
+{
+    emit discoveryBoxUpdate();
+}
+
 // private load an rbf file
-int writeBoard::loadRBF(QString filename) {
+int WriteBoard::loadRBF(QString filename) {
     int length;
     int i;
     int rc;
@@ -105,7 +120,7 @@ int writeBoard::loadRBF(QString filename) {
     return rc;
 }
 
-void writeBoard::sendData() {
+void WriteBoard::sendData() {
     unsigned char buffer[264];
 
     //qDebug()<<"sendData offset="<<offset;
@@ -137,7 +152,7 @@ void writeBoard::sendData() {
 
 }
 
-void writeBoard::flashProgram() {
+void WriteBoard::flashProgram() {
 
     //size=blocks;
     //data_command=PROGRAM_METIS_FLASH;
@@ -156,7 +171,7 @@ void writeBoard::flashProgram() {
 }
 
 // private function to send the command to erase
-void writeBoard::eraseData() {
+void WriteBoard::eraseData() {
     //eraseTimeouts=0;
     //status("Erasing device ... (takes several seconds)");
     //sendCommand(ERASE_METIS_FLASH);
@@ -164,7 +179,7 @@ void writeBoard::eraseData() {
     //QTimer::singleShot(20000,this,SLOT(erase_timeout()));
 }
 
-void writeBoard::writeRBF()
+void WriteBoard::writeRBF()
 {
     // send the RBF write packet
     unsigned char buffer[63];
@@ -185,7 +200,7 @@ void writeBoard::writeRBF()
 
 }
 
-void writeBoard::changeIP(QStringList *saddr )
+void WriteBoard::changeIP(QStringList *saddr )
 {
     // send the changeIP packet
     unsigned char buffer[63];
@@ -233,18 +248,21 @@ void writeBoard::changeIP(QStringList *saddr )
 }
 
 
-void writeBoard::readyRead() {
+void WriteBoard::readyRead() {
 
     QHostAddress boardAddress;
     quint16 boardPort;
     unsigned char buffer[1024];
+    QList<unsigned char*> MACaddr;
 
     qDebug()<<"Discovery::readyRead";
 
-    //if(   ->readDatagram((char*)&buffer,(qint64)sizeof(buffer),&boardAddress,&boardPort)<0) {
-        //qDebug()<<"Error: Discovery: readDatagram failed "<<   ->errorString();
-    //    return;
-    //}
+    if( socket->readDatagram((char*)&buffer,(qint64)sizeof(buffer),&boardAddress,&boardPort)<0) {
+        qDebug()<<"Error: Discovery: readDatagram failed "<< socket->errorString();
+        return;
+    }
+    qDebug()<< "Discovery: readDatagram read ";
+
 
     if(buffer[0]==0xEF && buffer[1]==0xFE) {
         switch(buffer[2]) {
@@ -252,9 +270,14 @@ void writeBoard::readyRead() {
                 // should not happen on this port
                 break;
             case 2:  // response to a discovery packet
-                //if(boardAddress.toString()!=  ->getInterfaceIPAddress( ->getInterface())) {
-                //    Board* bd=new Board(boardAddress.toIPv4Address(),&buffer[3]);
-                //}
+                if( 1  ) {
+                  Board* bd=new Board(boardAddress.toIPv4Address(), &buffer[3], buffer[9], buffer[10]);
+                  if( !(MACaddr.contains( bd->getMACAddress())) ){
+                     boards[bd->toString()] = bd;
+                     MACaddr.append( bd->getMACAddress() );
+                     qDebug() << "board address" << bd->toString();
+                  }
+                }
                 break;
             case 1:  // a data packet
                // should not happen on this port
