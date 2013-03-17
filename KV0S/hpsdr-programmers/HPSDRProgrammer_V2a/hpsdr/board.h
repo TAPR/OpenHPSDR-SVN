@@ -28,15 +28,17 @@
 class Board {
 
 public:
-    Board(long ipaddr,unsigned char* macaddr);
+    Board(quint32 ipaddr, unsigned char* macaddr, unsigned char software_version,unsigned char board_type);
     QHostAddress* getHostAddress();
-    long getIpAddress();
+    quint32 getIpAddress();
     unsigned char* getMACAddress();
     QString toString();
 
 private:
     long ipaddress;
     unsigned char macaddress[6];
+    unsigned char version;
+    unsigned char bdtype;
 };
 
 #endif // METIS_H

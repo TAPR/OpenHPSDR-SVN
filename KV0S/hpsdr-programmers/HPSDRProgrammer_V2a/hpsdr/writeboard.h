@@ -7,8 +7,9 @@
 #include <QStringList>
 #include <QMessageBox>
 #include <QFile>
+#include <QTimer>
 
-#include "../Programmer/board.h"
+#include "./hpsdr/board.h"
 
 // command codes
 #define PROGRAM_METIS_FLASH 0x01
@@ -32,18 +33,23 @@
 
 
 
-class writeBoard : public QObject
+class WriteBoard : public QObject
 {
     Q_OBJECT
 public:
-    writeBoard(QUdpSocket *s, unsigned char *MACaddress);
-    ~writeBoard();
+    WriteBoard(QUdpSocket *s, unsigned char *MACaddress);
+    ~WriteBoard();
+    QHash<QString, Board*> boards;
 
+
+signals:
+    void discoveryBoxUpdate();
 
 public slots:
     //void readyRead();
     void changeIP(QStringList *saddr );
     void discovery();
+    void update();
     void writeRBF();
     void readyRead();
     void sendData();

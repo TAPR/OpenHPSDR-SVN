@@ -48,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
     stat = new StatusDialog(this);
     add = new AddressDialog(this);
 
+    socket = new QUdpSocket(this);
+
     QCoreApplication::setOrganizationName("HPSDR");
     QCoreApplication::setOrganizationDomain("openhpsdr.org");
     QCoreApplication::setApplicationName("HPSDRProgrammer_V2");
@@ -76,11 +78,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->discoverButton,SIGNAL(clicked()),this,SLOT(discover()));
 
-    //connect(ui->programButton,SIGNAL(clicked()),this,SLOT(program()));
+    connect(ui->programButton,SIGNAL(clicked()),this,SLOT(program()));
     connect(ui->browseButton,SIGNAL(clicked()),this,SLOT(browse()));
 
     connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
     connect(ui->actionAddress,SIGNAL(triggered()),add,SLOT(show()));
+
 
 
     //connect(add,SIGNAL(writeIP()),this,SLOT(setIP_UDP()));
@@ -95,7 +98,10 @@ MainWindow::MainWindow(QWidget *parent) :
        ui->discoverButton->setEnabled(false);
     }
 
+    wb = new WriteBoard( socket, (unsigned char*)interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentIndex()).toStdString().c_str());
 
+
+    connect(wb,SIGNAL(discoveryBoxUpdate()),this,SLOT(discoveryUpdate()));
 }
 
 MainWindow::~MainWindow()
@@ -121,10 +127,27 @@ void MainWindow::status(QString text) {
 void MainWindow::discover()
 {
     qDebug() << "in MainWindow::discover";
+    wb->discovery();
+    qDebug() << "in MainWindow::discover after broadcast";
 }
 
+void MainWindow::discoveryUpdate()
+{
+    ui->discoverComboBox->addItems( QStringList(wb->boards.keys()) );
+}
 
 void MainWindow::browse()
 {
     qDebug() << "in MainWindow::browse";
+    fileName = QFileDialog::getOpenFileName(this, tr("Open RBF"), "", tr("RBF Files (*.rbf)"));
+    ui->fileLineEdit->setText( fileName );
+}
+
+void MainWindow::program()
+{
+    qDebug() << "in MainWindow::program";
+    // read RBF
+    wb->loadRBF( fileName );
+    // erase device
+    // program device
 }
