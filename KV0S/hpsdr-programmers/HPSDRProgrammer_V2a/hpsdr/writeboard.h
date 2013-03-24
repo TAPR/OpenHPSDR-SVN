@@ -40,22 +40,29 @@ public:
     WriteBoard(QUdpSocket *s, unsigned char *MACaddress);
     ~WriteBoard();
     QHash<QString, Board*> boards;
+    QString currentboard;
 
 
 signals:
     void discoveryBoxUpdate();
+    void eraseCompleted();
+    void nextBuffer();
+    void timeout();
 
 public slots:
     //void readyRead();
     void changeIP(QStringList *saddr );
     void discovery();
-    void update();
+    void update_discovery();
+    void update_command();
     void writeRBF();
     void readyRead();
     void sendData();
     void flashProgram();
-    void eraseData();
+    void eraseData(Board *bd);
+    void erase_timeout();
     int loadRBF(QString filename );
+    void sendCommand(unsigned char command, Board *bd);
 
 private:
     QUdpSocket* socket;
@@ -63,6 +70,7 @@ private:
     unsigned char* macaddr;
     unsigned char buffer[1024];
     qint16 port;
+
 };
 
 #endif // CHANGEIPADDRESS_H

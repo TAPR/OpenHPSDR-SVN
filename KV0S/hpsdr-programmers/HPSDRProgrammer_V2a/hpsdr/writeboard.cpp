@@ -65,18 +65,23 @@ void WriteBoard::discovery()
 
     QTimer *timer = new QTimer(this);
     timer->setSingleShot(true);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(update_discovery()));
     timer->start(500);
 
 
 
-    qDebug()<< "dicovery packet sent";
+    qDebug()<< "discovery packet sent";
 
 }
 
-void WriteBoard::update()
+void WriteBoard::update_discovery()
 {
     emit discoveryBoxUpdate();
+}
+
+void WriteBoard::update_command()
+{
+    qDebug() << "update erase";
 }
 
 // private load an rbf file
@@ -119,6 +124,38 @@ int WriteBoard::loadRBF(QString filename) {
     //}
     return rc;
 }
+
+void WriteBoard::sendCommand(unsigned char command, Board *bd) {
+    unsigned char buffer[64];
+    int i;
+
+    qDebug()<<"sendCommand "<<command;
+
+    buffer[0]=0xEF; // protocol
+    buffer[1]=0xFE;
+
+    buffer[2]=0x03;
+    buffer[3]=command;
+
+    /*fill the frame with 0x00*/
+    for(i=0;i<60;i++) {
+        buffer[i+4]=(unsigned char)0x00;
+    }
+
+    qDebug()<<"before send";
+    if(socket->writeDatagram((const char*)buffer,sizeof(buffer),*(bd->getHostAddress()),1024)<0) {
+        qDebug()<<"Error: changeIP: writeDatagram failed "<<socket->errorString();
+        return;
+    }
+
+    QTimer *timer = new QTimer(this);
+    timer->setSingleShot(true);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update_command()));
+    timer->start(20000);
+
+}
+
+
 
 void WriteBoard::sendData() {
     unsigned char buffer[264];
@@ -171,13 +208,26 @@ void WriteBoard::flashProgram() {
 }
 
 // private function to send the command to erase
-void WriteBoard::eraseData() {
+void WriteBoard::eraseData(Board *bd) {
     //eraseTimeouts=0;
+    qDebug("Erasing device ... (takes several seconds)");
     //status("Erasing device ... (takes several seconds)");
-    //sendCommand(ERASE_METIS_FLASH);
+    sendCommand(ERASE_METIS_FLASH, bd);
     // wait 20 seconds to allow replys
     //QTimer::singleShot(20000,this,SLOT(erase_timeout()));
 }
+
+void WriteBoard::erase_timeout() {
+    qDebug()<<"WriteBoard::erase_timeout";
+    /*if(state==ERASING || state==ERASING_ONLY) {
+        status("Error: erase timeout.");
+        status("Power cycle and try again.");
+        idle();
+        QApplication::restoreOverrideCursor();
+    } */
+}
+
+
 
 void WriteBoard::writeRBF()
 {
@@ -193,7 +243,7 @@ void WriteBoard::writeRBF()
         buffer[i]=(char)0x00;
     }
 
-    if(socket->writeDatagram((const char*)buffer,sizeof(buffer),QHostAddress::Broadcast,1024)<0) {
+    if(socket->writeDatagram((const char*)buffer,(qint64)sizeof(buffer),QHostAddress::Broadcast,1024)<0) {
         qDebug()<<"Error: changeIP: writeDatagram failed "<<socket->errorString();
         return;
     }
@@ -240,7 +290,7 @@ void WriteBoard::changeIP(QStringList *saddr )
         buffer[i]=(char)0x00;
     }
 
-    if(socket->writeDatagram((const char*)buffer,sizeof(buffer),QHostAddress::Broadcast,1024)<0) {
+    if(socket->writeDatagram((const char*)buffer,(qint64)sizeof(buffer),QHostAddress::Broadcast,1024)<0) {
         qDebug()<<"Error: changeIP: writeDatagram failed "<<socket->errorString();
         return;
     }
@@ -255,21 +305,28 @@ void WriteBoard::readyRead() {
     unsigned char buffer[1024];
     QList<unsigned char*> MACaddr;
 
-    qDebug()<<"Discovery::readyRead";
+    qDebug()<<"WriteBoard::readyRead";
 
     if( socket->readDatagram((char*)&buffer,(qint64)sizeof(buffer),&boardAddress,&boardPort)<0) {
-        qDebug()<<"Error: Discovery: readDatagram failed "<< socket->errorString();
+        qDebug()<<"Error: WriteBoard: readDatagram failed "<< socket->errorString();
         return;
     }
-    qDebug()<< "Discovery: readDatagram read ";
+    qDebug()<< "WriteBoard: readDatagram read ";
 
 
     if(buffer[0]==0xEF && buffer[1]==0xFE) {
         switch(buffer[2]) {
+            case 4:  // ready for next buffer
+                 qDebug()<<"ready for next buffer";
+                 emit nextBuffer();
+                 break;
             case 3:  // reply
                 // should not happen on this port
+                qDebug() << "Case 3";
+                emit eraseCompleted();
                 break;
             case 2:  // response to a discovery packet
+                qDebug() << "Case 2";
                 if( 1  ) {
                   Board* bd=new Board(boardAddress.toIPv4Address(), &buffer[3], buffer[9], buffer[10]);
                   if( !(MACaddr.contains( bd->getMACAddress())) ){
@@ -280,6 +337,7 @@ void WriteBoard::readyRead() {
                 }
                 break;
             case 1:  // a data packet
+               qDebug() << "Case 1";
                // should not happen on this port
                break;
         }
