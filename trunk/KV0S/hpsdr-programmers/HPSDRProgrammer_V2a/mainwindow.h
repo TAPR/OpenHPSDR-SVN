@@ -21,6 +21,20 @@
 #include "./hpsdr/writeboard.h"
 #include "version.h"
 
+// states
+#define IDLE 0
+#define ERASING 1
+#define PROGRAMMING 2
+#define ERASING_ONLY 3
+#define READ_MAC 4
+#define READ_IP 5
+#define WRITE_IP 6
+#define JTAG_INTERROGATE 7
+#define JTAG_PROGRAM 8
+#define FLASH_ERASING 9
+#define FLASH_PROGRAM 10
+
+#define MAX_ERASE_TIMEOUTS (9000) // 90 seconds
 
 namespace Ui {
 class MainWindow;
@@ -40,7 +54,7 @@ public:
 private:
     Ui::MainWindow *ui;
     QLabel *deviceIndicator;
-
+    QSettings settings;
     AboutDialog *ab;
     StatusDialog *stat;
     AddressDialog *add;
@@ -48,6 +62,11 @@ private:
     QUdpSocket *socket;
     WriteBoard *wb;
     QString fileName;
+    int state;
+    int eraseTimeouts;
+    int offset;
+    int start;
+    int end;
 
 private slots:
     void interfaceSelected(int id);
@@ -55,6 +74,10 @@ private slots:
     void discoveryUpdate();
     void browse();
     void program();
+    void setIP_UDP();
+    void timeout();
+    void eraseCompleted();
+    void idle();
 };
 
 #endif // MAINWINDOW_H
