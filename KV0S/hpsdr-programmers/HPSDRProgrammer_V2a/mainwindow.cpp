@@ -83,9 +83,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionAddress,SIGNAL(triggered()),add,SLOT(show()));
 
 
-    connect(wb,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
-    connect(wb,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
-    connect(wb,SIGNAL(timeout()),this,SLOT(timeout()));
+    //connect(wb,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
+    //connect(wb,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
+    //connect(wb,SIGNAL(timeout()),this,SLOT(timeout()));
 
     //connect(add,SIGNAL(writeIP()),this,SLOT(setIP_UDP()));
 

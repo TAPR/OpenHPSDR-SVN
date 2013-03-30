@@ -28,11 +28,11 @@ in order for the new address to be read using a Discovery."
 WriteBoard::WriteBoard(QUdpSocket *s, unsigned char* MACaddress)
 {
     QString myip;
-    myip = QString("255.255.255.255");
+    //myip = QString("255.255.255.255");
     macaddr = MACaddress;
 
-    qDebug()<<"Broadcast IP Address: "<< myip;
-    ip=myip;
+    //qDebug()<<"Broadcast IP Address: "<< QHostAddress::Broadcast;
+    //ip=myip;
     socket=s;
 
     connect(socket, SIGNAL(readyRead()),this, SLOT(readyRead()));
@@ -311,7 +311,7 @@ void WriteBoard::readyRead() {
         qDebug()<<"Error: WriteBoard: readDatagram failed "<< socket->errorString();
         return;
     }
-    qDebug()<< "WriteBoard: readDatagram read ";
+    qDebug()<< "WriteBoard: readDatagram read " << boardAddress.toString() << boardPort;
 
 
     if(buffer[0]==0xEF && buffer[1]==0xFE) {
@@ -321,7 +321,7 @@ void WriteBoard::readyRead() {
                  emit nextBuffer();
                  break;
             case 3:  // reply
-                // should not happen on this port
+                // request eraseflash done
                 qDebug() << "Case 3";
                 emit eraseCompleted();
                 break;
