@@ -1,39 +1,12 @@
 #include "writeboard.h"
 
 
-
-/*
- * "Metis Set IP  Packet format.
-
-A Metis Set IP  packet is sent from a PC in order to set the IP Address of
-a specific Metis card
-
-The Set IP  packet is a UDP/IP frame sent to Ethernet address
-255.255.255.255 (i.e. a Broadcast) and port 1024 with the following
-payload:
-
-<0xEFFE><0x03><MAC_Address><IP_Address>
-
-where MAC_Address is the MAC address of the Metis card that the IP address
-is to the set  - (6 bytes) and IP_Address is the IP address to write to
-that card - (4 bytes).
-
-Once the new IP address has been written then the power needs to be cycled
-in order for the new address to be read using a Discovery."
-
- */
-
-
-
-WriteBoard::WriteBoard(QUdpSocket *s, unsigned char* MACaddress)
+WriteBoard::WriteBoard(QUdpSocket *s, StatusDialog *st)
 {
     QString myip;
-    //myip = QString("255.255.255.255");
-    macaddr = MACaddress;
-
-    //qDebug()<<"Broadcast IP Address: "<< QHostAddress::Broadcast;
-    //ip=myip;
     socket=s;
+
+    stat = st;
 
     connect(socket, SIGNAL(readyRead()),this, SLOT(readyRead()));
 
@@ -87,41 +60,40 @@ void WriteBoard::update_command()
 // private load an rbf file
 int WriteBoard::loadRBF(QString filename) {
     int length;
-    int i;
     int rc;
 
     QFile rbfFile(filename);
     rbfFile.open(QIODevice::ReadOnly);
     QDataStream in(&rbfFile);
     length=((rbfFile.size()+255)/256)*256;
-    //data=(char*)malloc(length);
+    data=(char*)malloc(length);
 
 
     qDebug() << "file size=" << rbfFile.size() << "length=" << length;
-    //status(filename);
-    //status("reading file...");
-    //if(in.readRawData(data,rbfFile.size())!=rbfFile.size()) {
-    //    status("Error: could not read rbf file");
-    //    rbfFile.close();
+    qDebug() << filename;
+    stat->status("reading file...");
+    if(in.readRawData(data,rbfFile.size())!=rbfFile.size()) {
+        qDebug("Error: could not read rbf file");
+        rbfFile.close();
     //    QApplication::restoreOverrideCursor();
-    //    blocks=0;
-    //    rc=1;
-    //} else {
-        //status("file read successfully");
+        blocks=0;
+        rc=1;
+    } else {
+        stat->status("file read successfully");
 
         // pad out to mod 256 with 0xFF
-      //  for(i=rbfFile.size();i<length;i++) {
-        //    data[i]=0xFF;
-        //}
-        //rbfFile.close();
+        for(int i=rbfFile.size();i<length;i++) {
+            data[i]=0xFF;
+        }
+        rbfFile.close();
 
-        //start=0;
-        //end=length;
-        //blocks=length/256;
+        start=0;
+        end=length;
+        blocks=length/256;
 
-        //qDebug() <<"start="<<start<<" end="<<end<<" blocks="<<blocks;
+        qDebug() <<"start="<<start<<" end="<<end<<" blocks="<<blocks;
         rc=0;
-    //}
+    }
     return rc;
 }
 
@@ -143,8 +115,8 @@ void WriteBoard::sendCommand(unsigned char command, Board *bd) {
     }
 
     qDebug()<<"before send";
-    if(socket->writeDatagram((const char*)buffer,sizeof(buffer),*(bd->getHostAddress()),1024)<0) {
-        qDebug()<<"Error: changeIP: writeDatagram failed "<<socket->errorString();
+    if(socket->writeDatagram((const char*)buffer,sizeof(buffer),bd->getIpAddress(),1024)<0) {
+        qDebug()<<"Error: sendCommand: writeDatagram failed "<<socket->errorString();
         return;
     }
 
@@ -157,64 +129,54 @@ void WriteBoard::sendCommand(unsigned char command, Board *bd) {
 
 
 
-void WriteBoard::sendData() {
+void WriteBoard::sendData(Board *bd)
+{
+    QString text;
     unsigned char buffer[264];
 
-    //qDebug()<<"sendData offset="<<offset;
+    qDebug()<<"sendData offset="<<offset;
 
-    //buffer[0]=0xEF;
-    //buffer[1]=0xFE;
-    //buffer[2]=0x03;
-    //buffer[3]=PROGRAM_METIS_FLASH;
-    //buffer[4]=(blocks>>24)&0xFF;
-    //buffer[5]=(blocks>>16)&0xFF;
-    //buffer[6]=(blocks>>8)&0xFF;
-    //buffer[7]=blocks&0xFF;
+    buffer[0]=0xEF;
+    buffer[1]=0xFE;
+    buffer[2]=0x03;
+    buffer[3]=PROGRAM_METIS_FLASH;
+    buffer[4]=(blocks>>24)&0xFF;
+    buffer[5]=(blocks>>16)&0xFF;
+    buffer[6]=(blocks>>8)&0xFF;
+    buffer[7]=blocks&0xFF;
 
     /*fill the frame with some data*/
     for(int i=0;i<256;i++) {
-    //    buffer[i+8]=(unsigned char)data[i+offset];
+        buffer[i+8]=(unsigned char)data[i+offset];
     }
 
-    //receiveThread->send((const char*)buffer,sizeof(buffer));
+    if(socket->writeDatagram((const char*)buffer,sizeof(buffer),bd->getIpAddress(),1024)<0) {
+        qDebug()<<"Error: sendData: writeDatagram failed "<<socket->errorString();
+        return;
+    }
 
-    //int p=(offset+256)*100/(end-start);
-    //if(p!=percent) {
-    //    if((p%20)==0) {
-    //        percent=p;
-    //        text.sprintf("Programming device %d%% written ...",percent);
-    //        status(text);
-    //    }
-    //}
+    int p=(offset+256)*100/(end-start);
+    if(p!=percent) {
+        if((p%20)==0) {
+            percent=p;
+            text = QString("Programming device %0 \% written ...").arg(percent);
+            stat->status(text);
+        }
+    }
 
-}
-
-void WriteBoard::flashProgram() {
-
-    //size=blocks;
-    //data_command=PROGRAM_METIS_FLASH;
-
-    // start a thread to listen for replies
-   // QString myip=interfaces.getInterfaceIPAddress(interfaceName);
-    //receiveThread=new ReceiveThread(&socket,myip,selectedBoardHostAddress);
-
-    //connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
-    //connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
-    //connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
-
-    //state=ERASING;
-    //eraseData();
 
 }
+
+
 
 // private function to send the command to erase
 void WriteBoard::eraseData(Board *bd) {
     //eraseTimeouts=0;
-    qDebug("Erasing device ... (takes several seconds)");
-    //status("Erasing device ... (takes several seconds)");
+    //qDebug("Erasing device ... (takes several seconds)");
+    stat->status("Erasing device ... (takes several seconds)");
     sendCommand(ERASE_METIS_FLASH, bd);
-    // wait 20 seconds to allow replys
-    //QTimer::singleShot(20000,this,SLOT(erase_timeout()));
+    // wait to allow replys
+    QTimer::singleShot(MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
 }
 
 void WriteBoard::erase_timeout() {
@@ -250,7 +212,28 @@ void WriteBoard::writeRBF()
 
 }
 
-void WriteBoard::changeIP(QStringList *saddr )
+/*
+ * "Metis Set IP  Packet format.
+
+A Metis Set IP  packet is sent from a PC in order to set the IP Address of
+a specific Metis card
+
+The Set IP  packet is a UDP/IP frame sent to Ethernet address
+255.255.255.255 (i.e. a Broadcast) and port 1024 with the following
+payload:
+
+<0xEFFE><0x03><MAC_Address><IP_Address>
+
+where MAC_Address is the MAC address of the Metis card that the IP address
+is to the set  - (6 bytes) and IP_Address is the IP address to write to
+that card - (4 bytes).
+
+Once the new IP address has been written then the power needs to be cycled
+in order for the new address to be read using a Discovery."
+
+ */
+
+void WriteBoard::changeIP(QStringList *saddr,  unsigned char* macaddr)
 {
     // send the changeIP packet
     unsigned char buffer[63];
@@ -324,15 +307,16 @@ void WriteBoard::readyRead() {
                 // request eraseflash done
                 qDebug() << "Case 3";
                 emit eraseCompleted();
+                state = ERASE_DONE;
                 break;
             case 2:  // response to a discovery packet
                 qDebug() << "Case 2";
                 if( 1  ) {
                   Board* bd=new Board(boardAddress.toIPv4Address(), &buffer[3], buffer[9], buffer[10]);
                   if( !(MACaddr.contains( bd->getMACAddress())) ){
-                     boards[bd->toString()] = bd;
+                     boards[bd->toAllString()] = bd;
                      MACaddr.append( bd->getMACAddress() );
-                     qDebug() << "board address" << bd->toString();
+                     qDebug() << "board address" << bd->toAllString();
                   }
                 }
                 break;
@@ -347,4 +331,14 @@ void WriteBoard::readyRead() {
 
 }
 
+void WriteBoard::incOffset()
+{
+    offset+=256;
+    if(offset<end) {
+        sendData(boards[currentboard]);
+    }else{
+        stat->status("Programming device completed successfully.");
+        emit discover();
+    }
 
+}

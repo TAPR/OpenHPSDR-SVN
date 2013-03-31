@@ -82,12 +82,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
     connect(ui->actionAddress,SIGNAL(triggered()),add,SLOT(show()));
 
+    connect(stat,SIGNAL(stbar(QString)),this,SLOT(stbar(QString)));
 
-    //connect(wb,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
-    //connect(wb,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
-    //connect(wb,SIGNAL(timeout()),this,SLOT(timeout()));
 
-    //connect(add,SIGNAL(writeIP()),this,SLOT(setIP_UDP()));
+    connect(add,SIGNAL(writeIP()),this,SLOT(setIP_UDP()));
 
 
 
@@ -99,10 +97,13 @@ MainWindow::MainWindow(QWidget *parent) :
        ui->discoverButton->setEnabled(false);
     }
 
-    wb = new WriteBoard( socket, (unsigned char*)interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentIndex()).toStdString().c_str());
+    wb = new WriteBoard( socket, stat);
 
-
+    connect(wb,SIGNAL(discover()),this,SLOT(discover()));
     connect(wb,SIGNAL(discoveryBoxUpdate()),this,SLOT(discoveryUpdate()));
+    connect(wb,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
+    connect(wb,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
+    connect(wb,SIGNAL(timeout()),this,SLOT(timeout()));
 }
 
 MainWindow::~MainWindow()
@@ -120,31 +121,56 @@ void MainWindow::interfaceSelected(int id)
 
 // private function to display message in the status window
 void MainWindow::status(QString text) {
-    qDebug()<<"status:"<<text;
+    //qDebug()<<"status:"<<text;
     ui->statusBar->showMessage( text );
     stat->status( text.trimmed() );
 }
 
+void MainWindow::stbar(QString text)
+{
+   ui->statusBar->showMessage( text );
+}
+
+
 void MainWindow::discover()
 {
     qDebug() << "in MainWindow::discover";
+    status("Attempting to discover HPSDR boards.");
+    ui->discoverComboBox->clear();
+    ui->fileLineEdit->clear();
+    wb->boards.clear();
     wb->discovery();
     qDebug() << "in MainWindow::discover after broadcast";
 }
 
 void MainWindow::discoveryUpdate()
 {
+    QString text;
     qDebug() << "in MainWindow::discoverUpdate";
-    qDebug() << wb->boards.keys();
-    ui->discoverComboBox->addItems( QStringList(wb->boards.keys()) );
+    qDebug() << wb->boards.uniqueKeys();
+
+    ui->discoverComboBox->addItems( QStringList(wb->boards.uniqueKeys()) );
     wb->currentboard = ui->discoverComboBox->currentText();
-    //add->getIPaddress(wb->boards[wb->currentboard]);
+    add->getIPaddress(wb->boards[wb->currentboard]);
+    if( ui->discoverComboBox->count() < 2 )
+    {
+       text = QString("%0 board found.").arg(ui->discoverComboBox->count());
+    }else{
+       text = QString("%0 boards found.").arg(ui->discoverComboBox->count());
+    }
+    deviceIndicator->setIndent(0);
+    deviceIndicator->setPixmap (QPixmap(":/icons/green16.png"));
+    deviceIndicator->setToolTip (QString ("Device open %0").arg(wb->boards[wb->currentboard]->toIPString()));
+    status( wb->currentboard );
+    status( text );
+
 }
 
 void MainWindow::browse()
 {
     qDebug() << "in MainWindow::browse";
     QString dir = "";
+    QString text;
     dir = settings.value("dir").toString();
     //qDebug() << "dir1" << dir;
     fileName = QFileDialog::getOpenFileName(this, tr("Open RBF"), dir, tr("RBF Files (*.rbf)"));
@@ -155,6 +181,9 @@ void MainWindow::browse()
     //qDebug() << "dir2" << dir;
     settings.setValue("dir", QVariant(dir) );
 
+    text = QString("Opening file: %0").arg(fileName);
+    status( text );
+
 }
 
 void MainWindow::program()
@@ -163,6 +192,7 @@ void MainWindow::program()
     // read RBF
     wb->loadRBF( fileName );
     // erase device
+    state=ERASING;
     wb->eraseData(wb->boards[wb->currentboard]);
     // program device
 }
@@ -170,31 +200,23 @@ void MainWindow::program()
 void MainWindow::setIP_UDP()
 {
     qDebug() << "in MainWindow::setIP_UDP";
+    QString text;
+    QStringList *saddr = new QStringList();
+    add->getNewIPAddress(saddr);
+    wb->changeIP(saddr, wb->boards[wb->currentboard]->getMACAddress());
+    ui->discoverComboBox->clear();
 }
+
 
 void MainWindow::timeout() {
     QString text;
     qDebug()<<"MainWindow::timeout state="<<state;
     switch(state) {
-    case IDLE:
-        // ignore
-        break;
     case ERASING:
     case ERASING_ONLY:
-        //if(bootloader) {
-        //    eraseTimeouts++;
-           //qDebug()<<"eraseTimeouts="<<eraseTimeouts;
-       //     if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
-       //         status("Error: erase timeout.");
-       //         text.sprintf("Have you set the jumper at %s on %s and power cycled?",isMetis?"JP1":"J12",isMetis?"Metis":"Hermes or Angelia");
-       //         status(text);
-       //         idle();
-       //         QApplication::restoreOverrideCursor();
-       //     }
-       // } else {
-            status("Error: erase timeout.");
-            status("Power cycle and try again.");
-            idle();
+            stat->status("Error: erase timeout.");
+            stat->status("Power cycle and try again.");
+            //idle();
             QApplication::restoreOverrideCursor();
         //}
         break;
@@ -202,69 +224,42 @@ void MainWindow::timeout() {
         qDebug()<<"timeout";
         break;
     case READ_MAC:
-        status("Error: timeout reading MAC address!");
-        status("Check that the correct interface is selected.");
+        stat->status("Error: timeout reading MAC address!");
+        stat->status("Check that the correct interface is selected.");
         text=QString("Check that there is a jumper");
-        status(text);
-        idle();
+        stat->status(text);
+        //idle();
         break;
     case READ_IP:
-        status("Error: timeout reading IP address!");
-        status("Check that the correct interface is selected.");
+        stat->status("Error: timeout reading IP address!");
+        stat->status("Check that the correct interface is selected.");
         text=QString("Check that there is a jumper");
-        status(text);
-        idle();
+        stat->status(text);
+        //idle();
         break;
     case WRITE_IP:
         // should not happen as there is no repsonse
         break;
-    case JTAG_INTERROGATE:
-        status("Error: timeout reading interrogating JTAG chain!");
-        status("Check that the correct interface is selected.");
-        text=QString("Check that there is a jumper" );
-        status(text);
-        idle();
-        break;
-    case JTAG_PROGRAM:
-        //qDebug() << "timeout while state is JTAG_PROGRAM";
-        break;
-    case FLASH_ERASING:
-        eraseTimeouts++;
-        if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
-            status("Error: erase timeout - power cycle and try again?");
-            idle();
-            QApplication::restoreOverrideCursor();
-        }
-        break;
-    case FLASH_PROGRAM:
-        qDebug() << "timeout while state is FLASH_PROGRAM";
-        break;
-    }
+   }
 }
 
-// private function to set state to idle
-void MainWindow::idle() {
-    qDebug()<<"idle";
-    state=IDLE;
-}
+
+
 
 // SLOT - eraseCompleted
 void MainWindow::eraseCompleted() {
     QString text;
     switch(state) {
-    case IDLE:
-        qDebug()<<"received eraseCompleted when state is IDLE";
-        break;
     case ERASING:
-        status("Device erased successfully");
-        state=PROGRAMMING;
-        offset=start;
-        status("Programming device ...");
-        wb->sendData();
+        stat->status("Device erased successfully");
+        //wb->offset=start;
+        qDebug("Programming device ...");
+        wb->sendData(wb->boards[wb->currentboard]);
         break;
     case ERASING_ONLY:
-        status("Device erased successfully");
-        idle();
+        stat->status("Device erased successfully");
+        //status("Device erased successfully");
+        //idle();
         QApplication::restoreOverrideCursor();
         break;
     case READ_MAC:
@@ -274,26 +269,17 @@ void MainWindow::eraseCompleted() {
         qDebug()<<"received eraseCompleted when state is READ_IP";
         break;
     case WRITE_IP:
-        text=QString("IP address written successfully");
-        status(text);
-        idle();
-        break;
-    case JTAG_INTERROGATE:
-        qDebug()<<"received eraseCompleted when state is JTAG_INTERROGATE";
-        break;
-    case JTAG_PROGRAM:
-        qDebug()<<"received eraseCompleted when state is JTAG_PROGRAM";
-        break;
-    case FLASH_ERASING:
-        status("Flash erased successfully");
-        // now load the flash
-        //loadFlash();
-        break;
-    case FLASH_PROGRAM:
-        qDebug()<<"received eraseCompleted when state is FLASH_PROGRAM";
+        stat->status("IP address written successfully");
+        //text=QString("IP address written successfully");
+        //status(text);
+        //idle();
         break;
     }
 }
 
 
-
+void MainWindow::nextBuffer() {
+    qDebug("in Mainwindow::nextbuffer");
+    wb->incOffset();
+    //wb->sendData(wb->boards[wb->currentboard]);
+}

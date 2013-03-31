@@ -6,6 +6,7 @@
 #include <QHostInfo>
 #include <QStringList>
 #include <QMessageBox>
+#include <../Status/statusdialog.h>
 #include <QFile>
 #include <QTimer>
 
@@ -31,19 +32,21 @@
 #define HAVE_IP_ADDRESS  0x04
 #define FPGA_ID          0x05
 
-
+#define MAX_ERASE_TIMEOUTS (9000) // 90 seconds
 
 class WriteBoard : public QObject
 {
     Q_OBJECT
 public:
-    WriteBoard(QUdpSocket *s, unsigned char *MACaddress);
+    WriteBoard(QUdpSocket *s, StatusDialog *st);
     ~WriteBoard();
     QHash<QString, Board*> boards;
     QString currentboard;
-
+    StatusDialog *stat;
+    int state;
 
 signals:
+    void discover();
     void discoveryBoxUpdate();
     void eraseCompleted();
     void nextBuffer();
@@ -51,18 +54,18 @@ signals:
 
 public slots:
     //void readyRead();
-    void changeIP(QStringList *saddr );
+    void changeIP(QStringList *saddr , unsigned char *macaddr);
     void discovery();
     void update_discovery();
     void update_command();
     void writeRBF();
     void readyRead();
-    void sendData();
-    void flashProgram();
+    void sendData(Board *bd);
     void eraseData(Board *bd);
     void erase_timeout();
     int loadRBF(QString filename );
     void sendCommand(unsigned char command, Board *bd);
+    void incOffset();
 
 private:
     QUdpSocket* socket;
@@ -70,6 +73,13 @@ private:
     unsigned char* macaddr;
     unsigned char buffer[1024];
     qint16 port;
+    int offset;
+    int start;
+    int end;
+    int blocks;
+    char* data;
+    int percent;
+
 
 };
 

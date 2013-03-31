@@ -18,6 +18,9 @@ public:
     void status( QString text );
     void clear();
 
+signals:
+    void stbar(QString);
+
 private:
     Ui::StatusDialog *ui;
 };

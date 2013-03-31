@@ -1,8 +1,40 @@
+/*
+ * File:   board.h
+ * Author: John Melton, G0ORX/N6LYT
+ *
+ * Created on 23 November 2010
+ *
+ * Created on December 30, 2012
+ * Author: Dave Larsen, KV0S
+ */
+
+/* Copyright (C)
+* 2009 - John Melton, G0ORX/N6LYT
+* 2012 - Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*/
+
+
 #ifndef BOARD_H
 #define BOARD_H
 
 #include <QString>
-#include <QtNetwork/QHostAddress>
+#include <QHash>
+#include <QDebug>
+#include <QHostAddress>
 
 // command codes
 #define PROGRAM_METIS_FLASH 0x01
@@ -25,20 +57,29 @@
 #define FPGA_ID          0x05
 
 
-class Board {
-
+class Board
+{
 public:
-    Board(quint32 ipaddr, unsigned char* macaddr, unsigned char software_version,unsigned char board_type);
-    QHostAddress* getHostAddress();
-    quint32 getIpAddress();
+    Board(quint32 ipaddr,unsigned char* macaddr,unsigned char software_version,unsigned char board_type);
+    QHash<int, QString> boardtype;
+    QHash<int, QString> jumper;
+    QHostAddress getIpAddress();
     unsigned char* getMACAddress();
-    QString toString();
+    QString getHostAddress();
+    QString toAllString();
+    QString toIPString();
+    QString toIPPartString(int id);
+    QString toMACString();
+    QString getBoardString();
+    unsigned char getVersion();
+    unsigned char getBoard();
+    QString getJumper();
 
 private:
-    long ipaddress;
+    quint32 ipaddress;
     unsigned char macaddress[6];
     unsigned char version;
-    unsigned char bdtype;
+    unsigned char board;
 };
 
-#endif // METIS_H
+#endif // BOARD_H
