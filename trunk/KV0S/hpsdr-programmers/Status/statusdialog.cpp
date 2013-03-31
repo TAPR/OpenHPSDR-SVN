@@ -58,10 +58,13 @@ StatusDialog::~StatusDialog()
 
 void StatusDialog::status( QString text )
 {
-    qDebug()<<"status:"<<text;
-    ui->statusListWidget->insertItem(ui->statusListWidget->count()-1,text);
-    ui->statusListWidget->setCurrentRow(ui->statusListWidget->count()-1);
+    //qDebug()<<"status:"<<text;
+    ui->statusListWidget->insertItem(ui->statusListWidget->count(),text);
+    ui->statusListWidget->setCurrentRow(ui->statusListWidget->count());
+    emit stbar(text);
 }
+
+
 /*! \brief status( QString text )
  *
  *  This function send a text string to the status bar abd the status window.

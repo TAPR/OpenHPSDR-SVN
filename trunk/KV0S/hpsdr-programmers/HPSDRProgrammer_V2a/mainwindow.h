@@ -77,7 +77,8 @@ private slots:
     void setIP_UDP();
     void timeout();
     void eraseCompleted();
-    void idle();
+    void nextBuffer();
+    void stbar(QString text);
 };
 
 #endif // MAINWINDOW_H
