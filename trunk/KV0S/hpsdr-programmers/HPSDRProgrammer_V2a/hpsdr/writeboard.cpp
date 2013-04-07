@@ -54,7 +54,8 @@ void WriteBoard::update_discovery()
 
 void WriteBoard::update_command()
 {
-    qDebug() << "update erase";
+    qDebug() << "No return from the erase command";
+    qDebug() << "Power cycle";
 }
 
 // private load an rbf file
@@ -171,8 +172,7 @@ void WriteBoard::sendData(Board *bd)
 
 // private function to send the command to erase
 void WriteBoard::eraseData(Board *bd) {
-    //eraseTimeouts=0;
-    //qDebug("Erasing device ... (takes several seconds)");
+     //qDebug("Erasing device ... (takes several seconds)");
     stat->status("Erasing device ... (takes several seconds)");
     sendCommand(ERASE_METIS_FLASH, bd);
     // wait to allow replys
