@@ -32,6 +32,16 @@
 #define HAVE_IP_ADDRESS  0x04
 #define FPGA_ID          0x05
 
+// states
+#define IDLE 0
+#define ERASING 1
+#define PROGRAMMING 2
+#define ERASING_ONLY 3
+#define READ_MAC 4
+#define READ_IP 5
+#define WRITE_IP 6
+
+
 #define MAX_ERASE_TIMEOUTS (9000) // 90 seconds
 
 class WriteBoard : public QObject

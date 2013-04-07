@@ -19,21 +19,6 @@ include( ../IPaddress/IPaddressProg.pri )
 include( ../Resources/Resources.pri )
 
 
-win32 {
-    INCLUDEPATH += "c:/WpdPack/Include"
-    LIBS += "c:/WpdPack/Lib/wpcap.lib" C:/MinGW/lib/libws2_32.a
- }
-
-macx {
-    LIBS += -framework Security -lpcap
-    INCLUDEPATH += "/System/Library/Frameworks/Security.framework/Headers"
-}
-
-unix {
-    LIBS += -lpcap
-}
-
-
 SOURCES += main.cpp\
         mainwindow.cpp
 
