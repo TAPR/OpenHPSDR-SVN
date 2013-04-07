@@ -22,6 +22,6 @@ SOURCES += main.cpp\
         mainwindow.cpp
 
 HEADERS  += mainwindow.h \
-    version.h
+        version.h
 
 FORMS    += mainwindow.ui

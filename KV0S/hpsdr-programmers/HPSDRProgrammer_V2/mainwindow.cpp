@@ -56,9 +56,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //settings.setValue("dir", "");
 
 
-    receiveThread=NULL;
-    rawReceiveThread=NULL;
-    discovery=NULL;
+    //receiveThread=NULL;
+    //rawReceiveThread=NULL;
+    //discovery=NULL;
     currentboard="";
 
     deviceIndicator->setIndent(0);
@@ -68,10 +68,10 @@ MainWindow::MainWindow(QWidget *parent) :
     statusBar()->addPermanentWidget (deviceIndicator);
 
 
-    for (int i = 0; i < interfaces.getInterfaces(); ++i)
-    {   ui->   interfaceComboBox->addItem(interfaces.getInterfaceNameAt(i));
-        ++nInterfaces;
-    }
+    //for (int i = 0; i < interfaces.getInterfaces(); ++i)
+    //{   ui->   interfaceComboBox->addItem(interfaces.getInterfaceNameAt(i));
+    //    ++nInterfaces;
+    //}
 
     connect(ui->actionAbout,SIGNAL(triggered()),ab,SLOT(show()));
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(quit()));
@@ -128,9 +128,9 @@ void MainWindow::status(QString text) {
 // SLOT - interfaceSelected - called when the interface selection is changed
 void MainWindow::interfaceSelected(int index) {
     bool ok;
-    interfaceName=interfaces.getInterfaceNameAt(index);
-    ip=interfaces.getInterfaceIPAddress(index);
-    hwAddress=interfaces.getInterfaceHardwareAddress(index);
+    //interfaceName=interfaces.getInterfaceNameAt(index);
+    //ip=interfaces.getInterfaceIPAddress(index);
+    //hwAddress=interfaces.getInterfaceHardwareAddress(index);
     if(hwAddress==NULL) {
         ui->IPInterfaceLabel->setText("0.0.0.0");
         ui->MACInterfaceLabel->setText("00:00:00:00:00:00");
@@ -200,16 +200,16 @@ void MainWindow::discover() {
 
     clearDiscovery();
 
-    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
+    //QString myip=interfaces.getInterfaceIPAddress(interfaceName);
 
     if(!socket.bind(QHostAddress(ip),0,QUdpSocket::ReuseAddressHint)) {
         qDebug()<<"Error: Discovery: bind failed "<<socket.errorString();
         return;
     }
 
-    discovery=new Discovery(&socket,myip);
-    connect(discovery,SIGNAL(board_found(Board*)),this,SLOT(board_found(Board*)));
-    discovery->discover();
+    //discovery=new Discovery(&socket,myip);
+    //connect(discovery,SIGNAL(board_found(Board*)),this,SLOT(board_found(Board*)));
+    //discovery->discover();
     // disable the Discovery button
     ui->discoverButton->setDisabled(true);
 
@@ -220,7 +220,7 @@ void MainWindow::discover() {
 
 void MainWindow::discovery_timeout() {
 
-    discovery->stop();
+    //discovery->stop();
     if(ui->discoverComboBox->count()>0) {
         ui->discoverComboBox->setCurrentIndex(0);
         metisSelected(0);
@@ -245,7 +245,7 @@ void MainWindow::discovery_timeout() {
 
 void MainWindow::board_found(Board* m) {
 
-    if(htonl(m->getIpAddress())!=ip) {
+    /*if(htonl(m->getIpAddress())!=ip) {
         bd.append(m);
         ui->discoverComboBox->addItem(m->toAllString());
         add->getIPaddress(m);
@@ -258,7 +258,7 @@ void MainWindow::board_found(Board* m) {
         status(m->toAllString());
 
 
-    }
+    }*/
 }
 
 
@@ -342,12 +342,12 @@ void MainWindow::flashProgram() {
     data_command=PROGRAM_METIS_FLASH;
 
     // start a thread to listen for replies
-    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
-    receiveThread=new ReceiveThread(&socket,myip,selectedBoardHostAddress);
+    //QString myip=interfaces.getInterfaceIPAddress(interfaceName);
+    //receiveThread=new ReceiveThread(&socket,myip,selectedBoardHostAddress);
 
-    connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
-    connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
-    connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
+    //connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
+    //connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
+    //connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
 
     state=ERASING;
     eraseData();
@@ -407,7 +407,7 @@ void MainWindow::sendCommand(unsigned char command) {
     }
 
     qDebug()<<"before send";
-    receiveThread->send((const char*)buffer,sizeof(buffer));
+    //receiveThread->send((const char*)buffer,sizeof(buffer));
 
 }
 
@@ -432,7 +432,7 @@ void MainWindow::sendData() {
         buffer[i+8]=(unsigned char)data[i+offset];
     }
 
-    receiveThread->send((const char*)buffer,sizeof(buffer));
+    //receiveThread->send((const char*)buffer,sizeof(buffer));
 
     int p=(offset+256)*100/(end-start);
     if(p!=percent) {
@@ -545,10 +545,10 @@ void MainWindow::idle() {
     qDebug()<<"idle";
     state=IDLE;
 
-    if(receiveThread!=NULL) {
-        receiveThread->stop();
-        receiveThread=NULL;
-    }
+    //if(receiveThread!=NULL) {
+    //    receiveThread->stop();
+   //     receiveThread=NULL;
+    //}
 
 }
 

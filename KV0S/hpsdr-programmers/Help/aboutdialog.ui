@@ -116,7 +116,7 @@
       </font>
      </property>
      <property name="text">
-      <string>HPSDRProgrammer Version2</string>
+      <string>HPSDRProgrammer Version2a</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

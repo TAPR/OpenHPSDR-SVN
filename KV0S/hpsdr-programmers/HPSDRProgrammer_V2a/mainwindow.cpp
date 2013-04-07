@@ -114,8 +114,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::interfaceSelected(int id)
 {
-    qDebug() << "in InterfaceSelected";
-    ui->IPInterfaceLabel->setText( interfaces.getInterfaceIPAddress(interfaces.getInterfaceNameAt(id)) );
+    qDebug( "in InterfaceSelected" );
+    ui->IPInterfaceLabel->setText( interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id) ) );
     ui->MACInterfaceLabel->setText( interfaces.getInterfaceHardwareAddress(id) );
 }
 
@@ -149,20 +149,31 @@ void MainWindow::discoveryUpdate()
     qDebug() << "in MainWindow::discoverUpdate";
     qDebug() << wb->boards.uniqueKeys();
 
-    ui->discoverComboBox->addItems( QStringList(wb->boards.uniqueKeys()) );
-    wb->currentboard = ui->discoverComboBox->currentText();
-    add->getIPaddress(wb->boards[wb->currentboard]);
-    if( ui->discoverComboBox->count() < 2 )
+    if( wb->boards.uniqueKeys().count() > 0 )
     {
-       text = QString("%0 board found.").arg(ui->discoverComboBox->count());
-    }else{
-       text = QString("%0 boards found.").arg(ui->discoverComboBox->count());
+
+       ui->discoverComboBox->addItems( QStringList(wb->boards.uniqueKeys()) );
+       wb->currentboard = ui->discoverComboBox->currentText();
+       add->getIPaddress(wb->boards[wb->currentboard]);
+       if( ui->discoverComboBox->count() < 2 )
+       {
+          text = QString("%0 board found.").arg(ui->discoverComboBox->count());
+       }else{
+          text = QString("%0 boards found.").arg(ui->discoverComboBox->count());
+       }
+       deviceIndicator->setIndent(0);
+       deviceIndicator->setPixmap (QPixmap(":/icons/green16.png"));
+       deviceIndicator->setToolTip (QString ("Device open %0").arg(wb->boards[wb->currentboard]->toIPString()));
+       status( wb->currentboard );
+       status( text );
+     }else{
+        status(" No boards found you may bneed to use HPSDRBootloader.");
+        int ret = QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+                                       tr("Discovery has failed\n" "Check that board is on and no jumper on J1 or J12.\n"
+                                          "You may need to use HPSDRBootloader."),
+                                       QMessageBox::Ok);
+        return;
     }
-    deviceIndicator->setIndent(0);
-    deviceIndicator->setPixmap (QPixmap(":/icons/green16.png"));
-    deviceIndicator->setToolTip (QString ("Device open %0").arg(wb->boards[wb->currentboard]->toIPString()));
-    status( wb->currentboard );
-    status( text );
 
 }
 
@@ -252,7 +263,7 @@ void MainWindow::eraseCompleted() {
     switch(state) {
     case ERASING:
         stat->status("Device erased successfully");
-        //wb->offset=start;
+        state=PROGRAMMING;
         qDebug("Programming device ...");
         wb->sendData(wb->boards[wb->currentboard]);
         break;

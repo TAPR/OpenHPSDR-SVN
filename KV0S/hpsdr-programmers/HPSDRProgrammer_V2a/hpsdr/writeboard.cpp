@@ -49,6 +49,7 @@ void WriteBoard::discovery()
 
 void WriteBoard::update_discovery()
 {
+    qDebug() <<" discovery failed";
     emit discoveryBoxUpdate();
 }
 
@@ -89,6 +90,7 @@ int WriteBoard::loadRBF(QString filename) {
         rbfFile.close();
 
         start=0;
+        offset=start;
         end=length;
         blocks=length/256;
 
@@ -124,7 +126,7 @@ void WriteBoard::sendCommand(unsigned char command, Board *bd) {
     QTimer *timer = new QTimer(this);
     timer->setSingleShot(true);
     connect(timer, SIGNAL(timeout()), this, SLOT(update_command()));
-    timer->start(20000);
+    timer->start(9000);
 
 }
 
@@ -181,12 +183,11 @@ void WriteBoard::eraseData(Board *bd) {
 
 void WriteBoard::erase_timeout() {
     qDebug()<<"WriteBoard::erase_timeout";
-    /*if(state==ERASING || state==ERASING_ONLY) {
-        status("Error: erase timeout.");
-        status("Power cycle and try again.");
-        idle();
-        QApplication::restoreOverrideCursor();
-    } */
+    if(state==ERASING || state==ERASING_ONLY) {
+        qDebug("Error: erase timeout.");
+        qDebug("Power cycle and try again.");
+
+    }
 }
 
 

@@ -12,12 +12,11 @@
 #include <QStringList>
 #include <QSettings>
 
-#include <pcap.h>
 
-#include "../Programmer/interfaces.h"
-#include "../Programmer/receivethread.h"
-#include "../Programmer/rawreceivethread.h"
-#include "../Programmer/discovery.h"
+//#include "../Programmer/interfaces.h"
+//#include "../Programmer/receivethread.h"
+//#include "../Programmer/rawreceivethread.h"
+//#include "../Programmer/discovery.h"
 #include "../Programmer/board.h"
 #include "../IPaddress/changeipaddress.h"
 #include "../Help/aboutdialog.h"
@@ -133,7 +132,7 @@ private:
     bool isMetis;
 
 
-    Interfaces interfaces;
+    //Interfaces interfaces;
     long ip;
     QString interfaceName;
     QString hwAddress;
@@ -159,7 +158,7 @@ private:
     unsigned char data_command;
 
 
-    pcap_t *handle;
+    //pcap_t *handle;
 
     QList<Board*> bd;
 
@@ -170,9 +169,9 @@ private:
 
 
     QUdpSocket socket;
-    Discovery* discovery;
-    ReceiveThread* receiveThread;
-    RawReceiveThread* rawReceiveThread;
+    //Discovery* discovery;
+    //ReceiveThread* receiveThread;
+    //RawReceiveThread* rawReceiveThread;
 
 
     AboutDialog *ab;
