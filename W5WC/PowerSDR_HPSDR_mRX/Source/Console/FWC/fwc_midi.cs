@@ -658,11 +658,11 @@ namespace PowerSDR
 								switch((Note)byte1)
 								{
 									case Note.Dot:
-										console.Keyer.FWCDot = true;
+										//console.Keyer.FWCDot = true;
 										//FWC.SetMOX(true);
 										break;
 									case Note.Dash:
-										console.Keyer.FWCDash = true;
+										//console.Keyer.FWCDash = true;
 										//FWC.SetMOX(true);
 										break;
 									case Note.MicDown:
@@ -680,11 +680,11 @@ namespace PowerSDR
 								switch((Note)byte1)
 								{
 									case Note.Dot:
-										console.Keyer.FWCDot = false;							
+										//console.Keyer.FWCDot = false;							
 										//FWC.SetMOX(false);
 										break;
 									case Note.Dash:
-										console.Keyer.FWCDash = false;
+										//console.Keyer.FWCDash = false;
 										//FWC.SetMOX(false);
 										break;
 									case Note.MicDown:

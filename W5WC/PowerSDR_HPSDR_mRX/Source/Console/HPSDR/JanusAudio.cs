@@ -2,6 +2,7 @@
 *
 * Copyright (C) 2006 Bill Tracey, KD5TFD, bill@ewjt.com 
 * Copyright (C) 2010-2013  Doug Wigley
+* 
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
 * the Free Software Foundation; either version 2 of the License, or
@@ -190,10 +191,11 @@ namespace PowerSDR
         public static extern void DeInitMetisSockets();
 
         [DllImport("JanusAudio.dll", CharSet = CharSet.Ansi)]
-        unsafe public static extern int nativeInitMetis(String netaddr);
+        unsafe public static extern int nativeInitMetis(String netaddr, bool dostatic);
 
         //		private static bool MetisInitialized = false;
         // returns 0 on success, !0 on failure 
+        public static bool enableStaticIP = false;
         public static int initMetis()
         {
             //			if( MetisInitialized ) 
@@ -202,7 +204,7 @@ namespace PowerSDR
             //			} 
             int rc;
             System.Console.WriteLine("MetisNetIPAddr: " + Console.getConsole().MetisNetworkIPAddr);
-            rc = nativeInitMetis(Console.getConsole().MetisNetworkIPAddr);
+            rc = nativeInitMetis(Console.getConsole().MetisNetworkIPAddr, enableStaticIP);
             //			if  ( rc == 0 ) 
             //			{
             //				MetisInitialized = true;
@@ -313,6 +315,7 @@ namespace PowerSDR
         // and set fwVersionmsg to point to an appropriate message
         private static bool fwVersionsGood()
         {
+           // return true;
             bool result = true;
             Console c = Console.getConsole();
             int penny_ver = 0;
@@ -379,13 +382,20 @@ namespace PowerSDR
                         case 23:
                         case 24:
                         case 25:
-                        case 26:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 33)))
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
                               }
+                            break;
+                        case 26:
+                            if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 18)) ||
+                                (c != null && c.MercuryPresent && (mercury_ver != 34)))
+                            {
+                                result = false;
+                                c.SetupForm.alex_fw_good = false;
+                            }
                             break;
                         default:
                             // fwVersionMsg = "Invalid Firmware Level.\nPowerSDR requires Mercury v3.1\nYou have version: " + mercury_ver.ToString("0\\.0");
@@ -423,22 +433,30 @@ namespace PowerSDR
             //System.Console.WriteLine("ozy: " + ozy_ver); 
             //System.Console.WriteLine("merc: " + merc_ver); 
             //System.Console.WriteLine("penny: " + penny_ver); 
+          //  c.SetI2CSpeed();
+           // Thread.Sleep(100);
 
             if (fx2_version_string.CompareTo("20090524") >= 0)
             {
-                do
-                {
+             //   do
+                for (int i = 0; i < 5; i++)
+                {                   
                     ozy_ver = getOzyFWVersion();
+                    if (ozy_ver > 17) break;
+                    Thread.Sleep(100);
                 }
-                while (ozy_ver < 12);
-
+              //  while (ozy_ver < 12);
+               // Thread.Sleep(2000);
                 if (c.MercuryPresent)
                 {
-                    do
+                  //  do
+                  //  for (int i = 0; i < 2; i++)
                     {
                         mercury_ver = getMercuryFWVersion();
+                       // if (mercury_ver > 0) break;
+                        Thread.Sleep(100);
                     }
-                    while (mercury_ver < 26);
+                    mercury_ver = getMercuryFWVersion();
                     mercury2_ver = getMercury2FWVersion();
                 }
 
@@ -446,7 +464,7 @@ namespace PowerSDR
                 {
                     do
                     {
-                        Thread.Sleep(500);
+                       // Thread.Sleep(500);
                         penny_ver = getPenelopeFWVersion();
                         if (penny_ver < 11)
                         {
@@ -510,6 +528,14 @@ namespace PowerSDR
                             c.SetupForm.alex_fw_good = false;
                          }
                         break;
+                    case 25:
+                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 18)) ||
+                            (c != null && c.MercuryPresent && (mercury_ver != 34)))
+                        {
+                            result = false;
+                            c.SetupForm.alex_fw_good = false;
+                         }
+                       break;
                     default:
                         result = false;
                         c.SetupForm.alex_fw_good = false;

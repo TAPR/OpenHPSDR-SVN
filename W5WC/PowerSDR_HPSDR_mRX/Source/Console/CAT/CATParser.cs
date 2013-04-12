@@ -1,7 +1,7 @@
 //=================================================================
 // CATParser.cs
 //=================================================================
-// Copyright (C) 2005  Bob Tracy
+// Copyright (C) 2012  Bob Tracy
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@ using System.Xml;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace PowerSDR
 {
@@ -215,11 +216,11 @@ namespace PowerSDR
 					case "IS":
 						break;
 					case "KS":
-						//rtncmd = cmdlist.KS(suffix);
+						rtncmd = cmdlist.KS(suffix);
 						break;
-					//case "KY":
-					//	rtncmd = cmdlist.KY(suffix);
-					//	break;
+					case "KY":
+						rtncmd = cmdlist.KY(suffix);
+						break;
 					case "LK":
 						break;
 					case "LM":
@@ -280,9 +281,9 @@ namespace PowerSDR
 						break;
 					case "PM":
 						break;
-//					case "PR":
-//						rtncmd = cmdlist.PR(suffix);
-//						break;
+                    case "PR":
+                        rtncmd = cmdlist.PR(suffix);
+                        break;
 					case "PS":
 						rtncmd = cmdlist.PS(suffix);
 						break;
@@ -542,7 +543,7 @@ namespace PowerSDR
 			if(current_cat.Length > len)
 			{
 				sfx = current_cat.Substring(start,current_cat.IndexOf(";")-end);
-				if(prefix != "KY" && prefix+extension != "ZZKY" &&
+				if(prefix != "KY" && prefix+extension != "ZZKY" && prefix+extension != "ZZMY" &&
 					(prefix+extension != "ZZEA" && prefix+extension != "ZZEB") &&
 					(prefix+extension != "ZZFX" && prefix+extension != "ZZFY") &&
 					(prefix+extension != "ZZFV" && prefix+extension != "ZZFW"))
@@ -659,7 +660,7 @@ namespace PowerSDR
 					rtncmd = cmdlist.ZZCL(suffix);
 					break;
 				case "ZZCM":
-					//rtncmd = cmdlist.ZZCM(suffix);
+					rtncmd = cmdlist.ZZCM(suffix);
 					break;
 				case "ZZCP":
 					rtncmd = cmdlist.ZZCP(suffix);
@@ -684,6 +685,21 @@ namespace PowerSDR
                     break;
 				case "ZZDM":
 					rtncmd = cmdlist.ZZDM(suffix);
+                    break;
+                case "ZZDN":
+                    rtncmd = cmdlist.ZZDN(suffix);
+                    break;
+                case "ZZDO":
+                    rtncmd = cmdlist.ZZDO(suffix);
+                    break;
+                case "ZZDP":
+                    rtncmd = cmdlist.ZZDP(suffix);
+                    break;
+                case "ZZDQ":
+                    rtncmd = cmdlist.ZZDQ(suffix);
+                    break;
+                case "ZZDR":
+                    rtncmd = cmdlist.ZZDR(suffix);
                     break;
                 case "ZZDU":
                     rtncmd = cmdlist.ZZDU();
@@ -734,10 +750,10 @@ namespace PowerSDR
 					rtncmd = cmdlist.ZZFM();
 					break;
 				case "ZZFV":
-					//rtncmd = cmdlist.ZZFV(suffix);
+					rtncmd = cmdlist.ZZFV(suffix);
 					break;
 				case "ZZFW":
-					//rtncmd = cmdlist.ZZFW(suffix);
+					rtncmd = cmdlist.ZZFW(suffix);
 					break;
 				case "ZZFX":
 					rtncmd = cmdlist.ZZFX(suffix);
@@ -782,7 +798,7 @@ namespace PowerSDR
 					rtncmd = cmdlist.ZZIF(suffix);
 					break;
                 case "ZZIO":
-                   // rtncmd = cmdlist.ZZIO();
+                    rtncmd = cmdlist.ZZIO();
                     break;
 				case "ZZIS":
 					rtncmd = cmdlist.ZZIS(suffix);
@@ -794,10 +810,10 @@ namespace PowerSDR
 					rtncmd = cmdlist.ZZIU();
 					break;
                 case "ZZKO":
-                   // rtncmd = cmdlist.ZZKO(suffix);
+                    rtncmd = cmdlist.ZZKO(suffix);
                     break;
                 case "ZZKM":
-                    //rtncmd = cmdlist.ZZKM(suffix);
+                    rtncmd = cmdlist.ZZKM(suffix);
                     break;
 				case "ZZKS":
 					rtncmd = cmdlist.ZZKS(suffix);
@@ -809,7 +825,7 @@ namespace PowerSDR
                     rtncmd = cmdlist.ZZLA(suffix);
                     break;
                 case "ZZLB":
-                  rtncmd = cmdlist.ZZLB(suffix);
+                    rtncmd = cmdlist.ZZLB(suffix);
                     break;
                 case "ZZLC":
                     rtncmd = cmdlist.ZZLC(suffix);
@@ -823,9 +839,18 @@ namespace PowerSDR
                 case "ZZLF":
                     rtncmd = cmdlist.ZZLF(suffix);
                     break;
+                case "ZZLG":
+                    rtncmd = cmdlist.ZZLG(suffix);
+                    break;
+                case "ZZLH":
+                    rtncmd = cmdlist.ZZLH(suffix);
+                    break;
 				case "ZZMA":
 					rtncmd = cmdlist.ZZMA(suffix);
 					break;
+                case "ZZMB":
+                    rtncmd = cmdlist.ZZMB(suffix);
+                    break;
 				case "ZZMD":
 					rtncmd = cmdlist.ZZMD(suffix);
 					break;
@@ -835,6 +860,9 @@ namespace PowerSDR
 				case "ZZMG":
 					rtncmd = cmdlist.ZZMG(suffix);
 					break;
+                case "ZZML":
+                    rtncmd = cmdlist.ZZML();
+                    break;
 				case "ZZMN":
 					rtncmd = cmdlist.ZZMN(suffix);
 					break;
@@ -853,6 +881,21 @@ namespace PowerSDR
 				case "ZZMU":
 					rtncmd = cmdlist.ZZMU(suffix);
 					break;
+                case "ZZMV":
+                    rtncmd = cmdlist.ZZMV();
+                    break;
+                case "ZZMW":
+                    rtncmd = cmdlist.ZZMW(suffix);
+                    break;
+                case"ZZMX":
+                    rtncmd = cmdlist.ZZMX(suffix);
+                    break;
+                case "ZZMY":
+                    rtncmd = cmdlist.ZZMY();
+                    break;
+                case "ZZMZ":
+                    rtncmd = cmdlist.ZZMZ(suffix);
+                    break;
 				case "ZZNA":
 					rtncmd = cmdlist.ZZNA(suffix);
 					break;
@@ -878,34 +921,34 @@ namespace PowerSDR
 					rtncmd = cmdlist.ZZNT(suffix);
 					break;
 				case "ZZOA":
-					//rtncmd = cmdlist.ZZOA(suffix);
+					rtncmd = cmdlist.ZZOA(suffix);
 					break;
 				case "ZZOB":
-					//rtncmd = cmdlist.ZZOB(suffix);
+					rtncmd = cmdlist.ZZOB(suffix);
 					break;
 				case "ZZOC":
-					//rtncmd = cmdlist.ZZOC(suffix);
+					rtncmd = cmdlist.ZZOC(suffix);
 					break;
 				case "ZZOD":
-					//rtncmd = cmdlist.ZZOD(suffix);
+					rtncmd = cmdlist.ZZOD(suffix);
 					break;
 				case "ZZOE":
-					//rtncmd = cmdlist.ZZOE(suffix);
+					rtncmd = cmdlist.ZZOE(suffix);
 					break;
 				case "ZZOF":
-				//	rtncmd = cmdlist.ZZOF(suffix);
+					rtncmd = cmdlist.ZZOF(suffix);
 					break;
 				case "ZZOG":
-				//	rtncmd = cmdlist.ZZOG(suffix);
+					rtncmd = cmdlist.ZZOG(suffix);
 					break;
 				case "ZZOH":
-					//rtncmd = cmdlist.ZZOH(suffix);
+					rtncmd = cmdlist.ZZOH(suffix);
 					break;
 				case "ZZOJ":
-					//rtncmd = cmdlist.ZZOJ(suffix);
+					rtncmd = cmdlist.ZZOJ(suffix);
 					break;
                 case "ZZOL":
-                   // rtncmd = cmdlist.ZZOL(suffix);
+                    rtncmd = cmdlist.ZZOL(suffix);
                     break;
                 case "ZZOS":
                     rtncmd = cmdlist.ZZOS(suffix);
@@ -916,8 +959,14 @@ namespace PowerSDR
                 case "ZZOU":
                     rtncmd = cmdlist.ZZOU(suffix);
                     break;
+                case "ZZOV":
+                    rtncmd = cmdlist.ZZOV(suffix);
+                    break;
+                case "ZZOW":
+                    rtncmd = cmdlist.ZZOW(suffix);
+                    break;
 				case "ZZPA":
-					//rtncmd = cmdlist.ZZPA(suffix);
+					rtncmd = cmdlist.ZZPA(suffix);
 					break;
                 case "ZZPB":
                     rtncmd = cmdlist.ZZPB(suffix);
@@ -1016,7 +1065,7 @@ namespace PowerSDR
 					rtncmd = cmdlist.ZZSM(suffix);
 					break;
                 case "ZZSN":
-                  //  rtncmd = cmdlist.ZZSN();
+                    rtncmd = cmdlist.ZZSN();
                     break;
 				case "ZZSO":
 					rtncmd = cmdlist.ZZSO(suffix);
@@ -1031,7 +1080,7 @@ namespace PowerSDR
 					rtncmd = cmdlist.ZZSR(suffix);
 					break;
                 case "ZZSS":
-                   // rtncmd = cmdlist.ZZSS();
+                    rtncmd = cmdlist.ZZSS();
                     break;
 				case "ZZST":
 					rtncmd = cmdlist.ZZST();
@@ -1039,11 +1088,20 @@ namespace PowerSDR
 				case "ZZSU":
 					rtncmd = cmdlist.ZZSU();
 					break;
+                case "ZZSV":
+                    rtncmd = cmdlist.ZZSV(suffix);
+                    break;
                 case "ZZSW":
                     rtncmd = cmdlist.ZZSW(suffix);
                     break;
+                case "ZZSX":
+                    rtncmd = cmdlist.ZZSX(suffix);
+                    break;
                 case "ZZSY":
                     rtncmd = cmdlist.ZZSY(suffix);
+                    break;
+                case "ZZSZ":
+                    rtncmd = cmdlist.ZZSZ(suffix);
                     break;
                 case "ZZTA":
                     rtncmd = cmdlist.ZZTA(suffix);
@@ -1112,91 +1170,124 @@ namespace PowerSDR
 					rtncmd = cmdlist.ZZVH(suffix);
 					break;
                 case "ZZVI":
-                   //rtncmd = cmdlist.ZZVI(suffix);
+                    rtncmd = cmdlist.ZZVI(suffix);
                     break;
                 case "ZZVJ":
-                   // rtncmd = cmdlist.ZZVJ(suffix);
+                    rtncmd = cmdlist.ZZVJ(suffix);
+                    break;
+                case "ZZVK":
+                    rtncmd = cmdlist.ZZVK(suffix);
                     break;
 				case "ZZVL":
 					rtncmd = cmdlist.ZZVL(suffix);
 					break;
                 case "ZZVM":
-                    //rtncmd = cmdlist.ZZVM(suffix);
+                    rtncmd = cmdlist.ZZVM(suffix);
                     break;
 				case "ZZVN":
 					rtncmd = cmdlist.ZZVN();
 					break;
                 case "ZZVO":
-                   // rtncmd = cmdlist.ZZVO(suffix);
+                    rtncmd = cmdlist.ZZVO(suffix);
+                    break;
+                case "ZZVP":
+                    rtncmd = cmdlist.ZZVP(suffix);
+                    break;
+                case "ZZVQ":
+                    rtncmd = cmdlist.ZZVQ(suffix);
+                    break;
+                case "ZZVR":
+                    rtncmd = cmdlist.ZZVR(suffix);
                     break;
 				case "ZZVS":
 					rtncmd = cmdlist.ZZVS(suffix);
 					break;
+                case "ZZVT":
+                    rtncmd = cmdlist.ZZVT(suffix);
+                    break;
+                case "ZZVU":
+                    rtncmd = cmdlist.ZZVU(suffix);
+                    break;
+                case "ZZVV":
+                    rtncmd = cmdlist.ZZVV(suffix);
+                    break;
+                case "ZZVW":
+                    rtncmd = cmdlist.ZZVW(suffix);
+                    break;
+                case "ZZVX":
+                    rtncmd = cmdlist.ZZVX(suffix);
+                    break;
+                case "ZZVY":
+                    rtncmd = cmdlist.ZZVY(suffix);
+                    break;
+                case "ZZVZ":
+                    rtncmd = cmdlist.ZZVZ(suffix);
+                    break;
 				case "ZZWA":
-					//rtncmd = cmdlist.ZZWA(suffix);
+					rtncmd = cmdlist.ZZWA(suffix);
 					break;
 				case "ZZWB":
-					//rtncmd = cmdlist.ZZWB(suffix);
+					rtncmd = cmdlist.ZZWB(suffix);
 					break;
 				case "ZZWC":
-					//rtncmd = cmdlist.ZZWC(suffix);
+					rtncmd = cmdlist.ZZWC(suffix);
 					break;
 				case "ZZWD":
-					//rtncmd = cmdlist.ZZWD(suffix);
+					rtncmd = cmdlist.ZZWD(suffix);
 					break;
 				case "ZZWE":
-				//	rtncmd = cmdlist.ZZWE(suffix);
+					rtncmd = cmdlist.ZZWE(suffix);
 					break;
 				case "ZZWF":
-					//rtncmd = cmdlist.ZZWF(suffix);
+					rtncmd = cmdlist.ZZWF(suffix);
 					break;
 				case "ZZWG":
-					//rtncmd = cmdlist.ZZWG(suffix);
+					rtncmd = cmdlist.ZZWG(suffix);
 					break;
 				case "ZZWH":
-					//rtncmd = cmdlist.ZZWH(suffix);
+					rtncmd = cmdlist.ZZWH(suffix);
 					break;
 				case "ZZWJ":
-					//rtncmd = cmdlist.ZZWJ(suffix);
+					rtncmd = cmdlist.ZZWJ(suffix);
 					break;
 				case "ZZWK":
-					//rtncmd = cmdlist.ZZWK(suffix);
+					rtncmd = cmdlist.ZZWK(suffix);
 					break;
 				case "ZZWL":
-					//rtncmd = cmdlist.ZZWL(suffix);
+					rtncmd = cmdlist.ZZWL(suffix);
 					break;
 				case "ZZWM":
-					//rtncmd = cmdlist.ZZWM(suffix);
+					rtncmd = cmdlist.ZZWM(suffix);
 					break;
 				case "ZZWN":
-					//rtncmd = cmdlist.ZZWN(suffix);
+					rtncmd = cmdlist.ZZWN(suffix);
 					break;
 				case "ZZWO":
-					//rtncmd = cmdlist.ZZWO(suffix);
+					rtncmd = cmdlist.ZZWO(suffix);
 					break;
 				case "ZZWP":
-					//rtncmd = cmdlist.ZZWP(suffix);
+					rtncmd = cmdlist.ZZWP(suffix);
 					break;
 				case "ZZWQ":
-					//rtncmd = cmdlist.ZZWQ(suffix);
+					rtncmd = cmdlist.ZZWQ(suffix);
 					break;
 				case "ZZWR":
-				//	rtncmd = cmdlist.ZZWR(suffix);
+					rtncmd = cmdlist.ZZWR(suffix);
 					break;
 				case "ZZWS":
-				//	rtncmd = cmdlist.ZZWS(suffix);
+					rtncmd = cmdlist.ZZWS(suffix);
 					break;
                 case "ZZWT":
-                  //  rtncmd = cmdlist.ZZWT(suffix);
+                    rtncmd = cmdlist.ZZWT(suffix);
                     break;
                 case "ZZWU":
-                  //  rtncmd = cmdlist.ZZWU(suffix);
+                    rtncmd = cmdlist.ZZWU(suffix);
                     break;
                 case "ZZWV":
-                   // rtncmd = cmdlist.ZZWV(suffix);
+                    rtncmd = cmdlist.ZZWV(suffix);
                     break;
                 case "ZZWW":
-                  //  rtncmd = cmdlist.ZZWW(suffix);
+                    rtncmd = cmdlist.ZZWW(suffix);
                     break;
 				case "ZZXC":
 					rtncmd = cmdlist.ZZXC();
@@ -1210,6 +1301,15 @@ namespace PowerSDR
 				case "ZZXT":
 					rtncmd = cmdlist.ZZXT(suffix);
 					break;
+                case "ZZYA":
+                    rtncmd = cmdlist.ZZYA(suffix);
+                    break;
+                case "ZZYB":
+                    rtncmd = cmdlist.ZZYB(suffix);
+                    break;
+                case "ZZYC":
+                    rtncmd = cmdlist.ZZYC(suffix);
+                    break;
 				case "ZZZB":
 					rtncmd = cmdlist.ZZZB();
 					break;
@@ -1222,8 +1322,8 @@ namespace PowerSDR
             {
                 if (rtncmd.Length == nAns && nAns > 0)
                 {
-                    if (rtncmd.StartsWith(" ") && extension != "MN")  //Don't trim filter name string
-                    {												// Fix in next generation.
+                    if (rtncmd.StartsWith(" ") && (extension != "ML" && extension != "MN"))  //Don't trim filter name string
+                    {												                        // Fix in next generation.
                         rtncmd = rtncmd.Trim();
                     }
                     rtncmd = prefix + extension + suffix + rtncmd + ";";
@@ -1274,6 +1374,9 @@ namespace PowerSDR
                         break;
                     case 9:
                         ecmd += "Value out of bounds;";
+                        break;
+                    case 10:
+                        ecmd += "Power must be on;";
                         break;
                     default:
                         ecmd += "Undefined Error;"; ;

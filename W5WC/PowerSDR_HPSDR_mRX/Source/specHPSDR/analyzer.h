@@ -104,6 +104,8 @@ typedef struct _dp
 	int av_out_idx;										//output index in averaging pixel buffer ring
 	double *av_sum;										//pointer to sum buffer for averaging
 	double *av_buff[MAX_AVERAGE];						//pointers to ring of buffers to hold pixel frames for averaging
+	double *pre_av_sum;
+	double *pre_av_out;
 	int av_mode;
 	double av_backmult;									//back multiplier for weighted averaging
 	double *cd;											//pointer to amplitude calibration buffer
@@ -149,7 +151,8 @@ typedef struct _dp
 	CRITICAL_SECTION StitchSection;
 	CRITICAL_SECTION EliminateSection[MAX_STITCH];
 	CRITICAL_SECTION ResampleSection;
-	CRITICAL_SECTION AverageSection;
+	CRITICAL_SECTION PostAverageSection;
+	CRITICAL_SECTION PreAverageSection;
 }  dp, *DP;
 
 DP pdisp[MAX_DISPLAYS];									//array of pointers to instance data

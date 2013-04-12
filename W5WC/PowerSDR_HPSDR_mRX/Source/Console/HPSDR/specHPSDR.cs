@@ -422,8 +422,8 @@ namespace PowerSDR
                 case 0:
                     Display.RXDisplayLow = low;
                     Display.RXDisplayHigh = high;
-                    if (Display.CurrentDisplayMode == DisplayMode.WATERFALL ||
-                        Display.CurrentDisplayMode == DisplayMode.PANAFALL)
+                   if (Display.CurrentDisplayMode == DisplayMode.WATERFALL ||
+                       Display.CurrentDisplayMode == DisplayMode.PANAFALL)
                     {
                         Display.TXDisplayLow = low;
                         Display.TXDisplayHigh = high;

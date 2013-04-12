@@ -287,53 +287,80 @@ void Celiminate(int disp, int ss, int LO)
 void stitch(int disp)
 {
 	DP a = pdisp[disp];
-	int i, j, n;
-	int k = 0;
+	int i, n, m;
 	int pix_count = 0;
-	int total_bin_count = 0;
 	double factor;
-	double frac;
-	double pix_pos = 0;
-	double save_result;
+
+	EnterCriticalSection(&a->PreAverageSection);
+	m = 0;
+	switch (a->av_mode)
+	{
+	case 5:		//weighted averaging of linear data (low noise floor)
+		{
+			double onem_avb = 1.0 - a->av_backmult;
+			for (n = a->begin_ss; n <= a->end_ss; n++)
+				for (i = 0; i < a->ss_bins[n]; i++, m++)
+				{
+					a->pre_av_sum[m] = a->av_backmult * a->pre_av_sum[m] + onem_avb * a->scale * (a->result[n])[i];
+					a->pre_av_out[m] = 10.0 * log10(a->pre_av_sum[m] + 1e-60);
+				}
+			break;
+		}
+	case 6:		//weighted averaging of log data (low noise floor)
+		{
+			double onem_avb = 1.0 - a->av_backmult;
+			for (n = a->begin_ss; n <= a->end_ss; n++)
+				for (i = 0; i < a->ss_bins[n]; i++, m++)
+				{
+					a->pre_av_sum[m] = a->av_backmult * a->pre_av_sum[m] + onem_avb * 10.0 * log10(a->scale * (a->result[n])[i] + 1e-60);
+					a->pre_av_out[m] = a->pre_av_sum[m];
+				}
+			break;
+		}
+	default:
+		{
+			double *ptr = a->pre_av_out;
+			for (n = a->begin_ss; n <= a->end_ss; n++)
+			{
+				memcpy(ptr, a->result[n], a->ss_bins[n] * sizeof(double));
+				ptr += a->ss_bins[n];
+				m += a->ss_bins[n];
+			}
+			break;
+		}
+	}
+	LeaveCriticalSection(&a->PreAverageSection);
 	
 	EnterCriticalSection(&a->ResampleSection);
-	memset ((void *)a->t_pixels, 0, sizeof(double) * a->num_pixels);
-	for (n = a->begin_ss; n <= a->end_ss; n++)
+	for (i = 0; i < a->num_pixels; i++)
+		a->t_pixels[i] = -1000.0;
+
+	if (a->pix_per_bin <= 1.0)
 	{
-		if (a->pix_per_bin <= 1.0)
+		for (i = 0; i < m; i++)
 		{
-			for (i = 0; i < a->ss_bins[n]; i++)
-			{
-				pix_count = (int)((double)total_bin_count++ * a->pix_per_bin);
-				if ((a->result[n])[i] > a->t_pixels[pix_count])
-					a->t_pixels[pix_count] = (a->result[n])[i];
-			}
+			pix_count = (int)((double)i * a->pix_per_bin);
+			if (a->pre_av_out[i] > a->t_pixels[pix_count])
+				a->t_pixels[pix_count] = a->pre_av_out[i];
 		}
-		else
+	}
+	else
+	{
+		double frac;
+		double pix_pos = 0;
+		for (i = 1; i < m; i++)
 		{
-			if (n == a->begin_ss)
-				j = 1;
-			else
-				j = 0;
-			for (i = j; i < a->ss_bins[n]; i++)
+			while (pix_pos < (double)i)
 			{
-				while (pix_pos < (double)(i + k))
-				{
-					frac = pix_pos - (double)(i + k - 1);
-					if (i == 0)
-						a->t_pixels[pix_count++] = save_result * (1.0 - frac) + (a->result[n])[i] * frac;
-					else
-						a->t_pixels[pix_count++] = (a->result[n])[i - 1] * (1.0 - frac) + (a->result[n])[i] * frac;
-					pix_pos += a->bin_per_pix;
-				}
+				frac = pix_pos - (double)(i - 1);
+				a->t_pixels[pix_count++] = a->pre_av_out[i - 1] * (1.0 - frac) + a->pre_av_out[i] * frac;
+				pix_pos += a->bin_per_pix;
 			}
-			save_result = (a->result[n])[a->ss_bins[n] - 1];
-			k += a->ss_bins[n];
 		}
 	}
 	LeaveCriticalSection(&a->ResampleSection);
 
-	EnterCriticalSection(&a->AverageSection);
+	EnterCriticalSection(&a->PostAverageSection);
 	switch (a->av_mode)
 	{
 	case -1:	//peak detection
@@ -428,8 +455,20 @@ void stitch(int disp)
 				a->av_in_idx = 0;
 			break;
 		}
+	case 5:
+		{
+			for (i = 0; i < a->num_pixels; i++)
+				(a->pixels[a->w_pix_buff])[i] = (OUTREAL)(a->t_pixels[i] + 10.0 * log10(a->cd[i]));
+			break;
+		}
+	case 6:
+		{
+			for (i = 0; i < a->num_pixels; i++)
+				(a->pixels[a->w_pix_buff])[i] = (OUTREAL)(a->t_pixels[i] + 10.0 * log10(a->cd[i]));
+			break;
+		}
 	}
-	LeaveCriticalSection(&a->AverageSection);
+	LeaveCriticalSection(&a->PostAverageSection);
 
 	EnterCriticalSection(&a->PB_ControlsSection);
 		a->last_pix_buff = a->w_pix_buff;	
@@ -787,7 +826,7 @@ void SetAnalyzer (	int disp,
 	while (a->dispatcher)
 		Sleep(1);
 	a->stop = 1;
-	while (_InterlockedAnd(a->pnum_threads, 1))
+	while (_InterlockedAnd(a->pnum_threads, 1023))
 		Sleep(1);
 
 	a->num_fft = n_fft;
@@ -805,11 +844,71 @@ void SetAnalyzer (	int disp,
 
 	if (av_m != a->av_mode)
 	{
-		memset ((void *)a->av_sum, 0, sizeof(double) * MAX_PIXELS);
 		a->av_mode = av_m;
+		switch (av_m)
+		{
+		case 1:
+			{
+				for (i = 0; i < MAX_PIXELS; i++)
+					a->av_sum[i] = 1.0e-12;
+				break;
+			}
+		case 2:
+			{
+				for (i = 0; i < MAX_PIXELS; i++)
+					a->av_sum[i] = -120;
+				break;
+			}
+		case 5:
+			{
+				for (i = 0; i < a->max_size * a->max_stitch; i++)
+					a->pre_av_sum[i] = 1.0e-12;
+				break;
+			}
+		case 6:
+			{
+				for (i = 0; i < a->max_size * a->max_stitch; i++)
+					a->pre_av_sum[i] = -120.0;
+				break;
+			}
+		default:
+			{
+				memset ((void *)a->av_sum, 0, sizeof(double) * MAX_PIXELS);
+				break;
+			}
+		}
 	}
-	else if ((av_m != 1) && (av_m != 2))
-		memset ((void *)a->av_sum, 0, sizeof(double) * MAX_PIXELS);
+	else
+	{
+		switch (av_m)
+		{
+		case 0:
+			{
+				break;
+			}
+		case 1:
+			{
+				break;
+			}
+		case 2:
+			{
+				break;
+			}
+		case 5:
+			{
+				break;
+			}
+		case 6:
+			{
+				break;
+			}
+		default:
+			{
+				memset ((void *)a->av_sum, 0, sizeof(double) * MAX_PIXELS);
+				break;
+			}
+		}
+	}
 
 	if (sz != a->size)
 	{
@@ -937,8 +1036,9 @@ void ICreateAnalyzer(	int disp,
 			a->hSnapEvent[i][j] = CreateEvent(NULL, FALSE, FALSE, TEXT("snap"));
 			a->snap[i][j] = 0;
 		}
-	InitializeCriticalSectionAndSpinCount(&a->AverageSection, 0);
+	InitializeCriticalSectionAndSpinCount(&a->PostAverageSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->ResampleSection, 0);
+	InitializeCriticalSectionAndSpinCount(&a->PreAverageSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->PB_ControlsSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->SetAnalyzerSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->StitchSection, 0);
@@ -969,12 +1069,17 @@ void ICreateAnalyzer(	int disp,
 			if ((a->fft_in[i][j] == 0) || (a->fft_out[i][j] == 0) || (a->Cfft_in[i][j] == 0))
 				*success = -2;
 		}
-
+	
+	a->pre_av_sum = (double*) calloc(1, sizeof(double) * a->max_size * a->max_stitch);
+	a->pre_av_out = (double*) calloc(1, sizeof(double) * a->max_size * a->max_stitch);
 	a->av_sum = (double*) calloc(1, sizeof(double) * MAX_PIXELS);
-	if (a->av_sum == 0)
+	if ((a->av_sum == 0) || (a->pre_av_sum == 0))
 		*success = -3;
 	else
+	{
 		memset ((void *)a->av_sum, 0, sizeof(double) * MAX_PIXELS);
+		memset ((void *)a->pre_av_sum, 0, sizeof(double) * a->max_size * a->max_stitch);
+	}
 
 	for (i = 0; i < MAX_AVERAGE; i++)
 	{
@@ -1089,6 +1194,8 @@ void DestroyAnalyzer(int disp)
 	for (i = 0; i < MAX_AVERAGE; i++)
 		if (a->av_buff[i])		free (a->av_buff[i]);
 	if (a->av_sum)				free (a->av_sum);
+	if (a->pre_av_sum)			free (a->pre_av_sum);
+	if (a->pre_av_out)			free (a->pre_av_out);
 	for (i = 0; i < a->max_stitch; i++)
 		for (j = 0; j < a->max_num_fft; j++)
 		{
@@ -1112,8 +1219,9 @@ void DestroyAnalyzer(int disp)
 
 	DeleteCriticalSection(&a->PB_ControlsSection);
 	DeleteCriticalSection(&a->SetAnalyzerSection);
-	DeleteCriticalSection(&a->AverageSection);
+	DeleteCriticalSection(&a->PreAverageSection);
 	DeleteCriticalSection(&a->ResampleSection);
+	DeleteCriticalSection(&a->PostAverageSection);
 
 	for (i = 0; i < a->max_stitch; i++)
 		for (j = 0; j < a->max_num_fft; j++)

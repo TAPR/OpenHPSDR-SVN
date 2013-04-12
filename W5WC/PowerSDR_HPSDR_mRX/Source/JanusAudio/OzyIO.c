@@ -1,6 +1,7 @@
 /*
  * JanusAudio.dll - Support library for HPSDR.org's Janus/Ozy Audio card
  * Copyright (C) 2006,2007  Bill Tracey (bill@ejwt.com) (KD5TFD)
+ * Copyright (C) 20010-2013 Doug Wigley (W5WC)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -376,6 +377,50 @@ KD5TFDVK6APHAUDIO_API int LoadFPGA(int VID, int PID, char *filename) {
     return 0;    
 }
 
+void getI2CByte(int i2c_value) {
+    unsigned char *bufp = NULL;
+    int count;    
+    usb_dev_handle *usb_h = NULL;
+
+    bufp = (unsigned char *)malloc(sizeof(char));
+
+    OzyH = OzyOpen();
+    usb_h = (usb_dev_handle *)OzyHandleToRealHandle(OzyH);
+
+    count = usb_control_msg(usb_h, 
+                            VRT_VENDOR_IN, 
+                            VRQ_I2C_READ, 
+                            i2c_value, 
+                            0, // index
+                            (char *)bufp, 
+                            sizeof(bufp), 
+                            1000);
+    OzyClose(OzyH);
+
+}
+
+void getI2CBytes(int i2c_value) {
+    unsigned char *bufp = NULL;
+    int count;    
+    usb_dev_handle *usb_h = NULL;
+
+    bufp = (unsigned char *)malloc(sizeof(char)*2);
+
+    OzyH = OzyOpen();
+    usb_h = (usb_dev_handle *)OzyHandleToRealHandle(OzyH);
+
+    count = usb_control_msg(usb_h, 
+                            VRT_VENDOR_IN, 
+                            VRQ_I2C_READ, 
+                            i2c_value, 
+                            0, // index
+                            (char *)bufp, 
+                            sizeof(bufp),
+                            1000);
+    OzyClose(OzyH);
+
+}
+
 KD5TFDVK6APHAUDIO_API int GetOzyID(struct usb_dev_handle *hdev, 
 								   unsigned char *buffer, 
 								   int length)
@@ -391,7 +436,7 @@ KD5TFDVK6APHAUDIO_API int GetOzyID(struct usb_dev_handle *hdev,
                             VRQ_SDR1K_CTL, 
                             SDR1KCTRL_READ_VERSION, 
                             0, // index
-                            (char *) buffer, 
+                            (char *)buffer, 
                             nsize, 
                             1000);
     if (count != nsize) 

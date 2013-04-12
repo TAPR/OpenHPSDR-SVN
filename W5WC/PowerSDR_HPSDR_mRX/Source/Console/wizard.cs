@@ -1797,9 +1797,7 @@ namespace PowerSDR
 					}
 				
 					if(xvtr_present)
-						console.SetupForm.XVTRSelection = xvtr_index;
-					if(ext_clock)
-						console.SetupForm.PllMult = pll_mult;
+						console.SetupForm.XVTRSelection = xvtr_index;					
 
 					if(pa_present)
 					{

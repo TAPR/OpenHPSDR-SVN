@@ -29,16 +29,16 @@
 namespace PowerSDR
 {
     using System;
-    using System.Drawing;
+    //using System.Drawing;
     using System.Collections;
-    using System.ComponentModel;
+   // using System.ComponentModel;
     using System.IO;
-    using System.Resources;
-    using System.Windows.Forms;
+    //using System.Resources;
+    //using System.Windows.Forms;
 
 	public class AlphaWarnForm : System.Windows.Forms.Form
 	{
-		private Console console;
+		private readonly Console console;
 		private System.Windows.Forms.RichTextBox rtxtWarning;
 		private System.Windows.Forms.CheckBox chkShowThisOnStartup;
 		private System.Windows.Forms.Button btnContinue;		
