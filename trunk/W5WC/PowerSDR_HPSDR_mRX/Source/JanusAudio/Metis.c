@@ -332,7 +332,6 @@ else {
 	return sock;
  } 
 
-
  int recvfrom_withtimeout(SOCKET s, char *buf, int buflen, int flags, struct sockaddr *fromsockp, int *fromlenp, long secs, long usecs ) { 
 	struct timeval timeout; 
 	struct fd_set rdsocks; 
@@ -357,8 +356,7 @@ else {
 	return rc; 
  } 
 
-
- u_long doDiscovery() { 
+ u_long doDiscovery(char *netaddr, int dostatic) { 
 	 int rc; 
 	 struct outdgram {
 		 unsigned char packetbuf[63];
@@ -374,17 +372,17 @@ else {
 	 int j;	
 	 int btrue = 1; 
 	 unsigned char sigbuf[6] = { 0xba, 0xba, 0xba, 
-								 0xba, 0xba, 0xba }; 
-	 
+		 0xba, 0xba, 0xba }; 
 
-	// for ( i = 0; i < 250; i++ ) { 
-		// packetbuf[i] = 0xba; 
+
+	 // for ( i = 0; i < 250; i++ ) { 
+	 // packetbuf[i] = 0xba; 
 	 //} 
 	 memset(outpacket.packetbuf, 0, sizeof(outpacket));
 	 outpacket.packetbuf[0] = 0xef; 
 	 outpacket.packetbuf[1] = 0xfe; 
 	 outpacket.packetbuf[2] = 0x02; 
-	 
+
 	 Dump(stdout, outpacket.packetbuf, 100, (unsigned char *)"packetbuf"); 
 	 dest_addr.sin_family = AF_INET;
 	 dest_addr.sin_port = htons(1024); 
@@ -392,36 +390,43 @@ else {
 	 // outsock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP); 
 	 // rc = setsockopt(outsock, SOL_SOCKET, SO_BROADCAST, (const char *)&btrue, sizeof(int)); 
 	 // if ( rc == SOCKET_ERROR ) { 
-     // 	printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
+	 // 	printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
 	 // }
 
 	 for ( i = 0; i < 5; i++ ) { 
-		sendto(listenSock, (char *) &outpacket, sizeof(outpacket), 0, (SOCKADDR *)&dest_addr, sizeof(dest_addr)); 
-		printf("discovery packet sent\n");  fflush(stdout); 
+		 sendto(listenSock, (char *) &outpacket, sizeof(outpacket), 0, (SOCKADDR *)&dest_addr, sizeof(dest_addr)); 
+		 printf("discovery packet sent\n");  fflush(stdout); 
 
-		for ( j = 0; j < 2; j++ ) {
-			rc = recvfrom_withtimeout(listenSock,  (char *) &inpacket, sizeof(inpacket), 0, 
-		                          (SOCKADDR *)&disc_reply_addr, &disc_reply_addr_len, 3, 0); 
-			printf("recvfrom_withtimeout rc=%d\n", rc); 
-			if ( rc > 0 ) { 
-				if ( inpacket.discbuf[0] == 0xef && inpacket.discbuf[1] == 0xfe && inpacket.discbuf[2] == 02  ) { 
-					if ( memcmp(inpacket.discbuf+3, sigbuf, 6) ==0 ) {
-						printf("ignoring our own broadcast\n"); 
-						continue; 
-					}
-					printf("got good discovery reply\n"); 
-					Dump(stdout, inpacket.discbuf, rc, (unsigned char *)"discovery reply"); 
-					memcpy(MetisMACAddr, inpacket.discbuf+3, 6); /* save off MAC Addr */ 
-					memcpy(MetisCodeVersion, inpacket.discbuf+9, 1); /* save off loaded Code Version */
-					memcpy(MetisBoardID, inpacket.discbuf+10, 1); /* save off Board_ID 0x00 = Metis, 0x01 = Hermes, 0x02 = Griffin */
-					return disc_reply_addr.sin_addr.S_un.S_addr;
-					// return *((u_long *)(&(discbuf[3])));				
-				}
-			} 
-			else { 
-				printf("disc reply rc=%d\n", rc); 
-			} 
-		}
+		 for ( j = 0; j < 5; j++ ) {
+			 rc = recvfrom_withtimeout(listenSock,  (char *) &inpacket, sizeof(inpacket), 0, 
+				 (SOCKADDR *)&disc_reply_addr, &disc_reply_addr_len, 3, 0); 
+			 printf("recvfrom_withtimeout rc=%d\n", rc); 
+			 if ( rc > 0 ) { 
+				 if ( inpacket.discbuf[0] == 0xef && inpacket.discbuf[1] == 0xfe && inpacket.discbuf[2] == 02  ) { 
+					 if ( memcmp(inpacket.discbuf+3, sigbuf, 6) == 0 ) {
+						 printf("ignoring our own broadcast\n"); 
+						 continue; 
+					 }
+					 printf("got good discovery reply\n"); 
+					 Dump(stdout, inpacket.discbuf, rc, (unsigned char *)"discovery reply"); 
+					 memcpy(MetisMACAddr, inpacket.discbuf+3, 6); /* save off MAC Addr */ 
+					 memcpy(MetisCodeVersion, inpacket.discbuf+9, 1); /* save off loaded Code Version */
+					 memcpy(MetisBoardID, inpacket.discbuf+10, 1); /* save off Board_ID 0x00 = Metis, 0x01 = Hermes, 0x02 = Griffin */
+
+					 if (dostatic) {
+						 if (disc_reply_addr.sin_addr.S_un.S_addr == inet_addr(netaddr)) {
+							 return disc_reply_addr.sin_addr.S_un.S_addr;
+						 }
+					 }
+					 else {
+						 return disc_reply_addr.sin_addr.S_un.S_addr;
+					 }
+				 }
+			 } 
+			 else { 
+				 printf("disc reply rc=%d\n", rc); 
+			 } 
+		 }
 	 }					
 	 fflush(stdout); 
 	 return 0; 
@@ -447,18 +452,18 @@ KD5TFDVK6APHAUDIO_API void DeInitMetisSockets(void) {
 
 
 /* returns 0 on success, != 0 otherwise */ 
-KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
+KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr, int dostatic) {
 
 	int rc; 
 	u_long metis_addr; 
 	u_long myaddr; 
 	unsigned char macbuf[6]; 
 	int i; 
-        int j;
+	int j;
 	int sndbufsize; 
 	int addrs[10]; 
 	int addr_count; 
-	
+
 	isMetis = 1; 
 
 	if ( !WSA_inited ) { 
@@ -468,22 +473,24 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 		} 
 		WSA_inited = 1; 
 		printf("initWSA ok!"); 
-
 	}
 
- 
-	addr_count =  getNetworkAddrs(addrs, 10);   
-	printf("addr_count: %d\n", addr_count); 
-	for ( j = 0; j < addr_count; j++ ) { 
-
-		if ( listenSock == (SOCKET)0 ) { 
-			if (full_discovery) {
-				closesocket(listenSock); 
-				listenSock = (SOCKET)0; 
-			}
+	  /*  if (dostatic) {
+			addr_count = 1;
+			addrs[0] = inet_addr(netaddr);
 		}
+		else */
+		addr_count = getNetworkAddrs(addrs, 10);   
+		printf("addr_count: %d\n", addr_count); 
+		for ( j = 0; j < addr_count; j++ ) { 
 
-				listenSock = createSocket(0, addrs[j]); 
+			if ( listenSock == (SOCKET)0 ) { 
+				if (full_discovery) {
+					closesocket(listenSock); 
+					listenSock = (SOCKET)0; 
+				}
+			}
+			listenSock = createSocket(0, addrs[j]); 
 
 			if ( listenSock == INVALID_SOCKET ) { 
 				printf("createSocket on listenSock failed.\n");
@@ -495,21 +502,20 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 				}
 			} 
 
-			sndbufsize = 16*1024; //16k
-			//sndbufsize = 0x3fffc;
+			sndbufsize = 0xffff;
 			rc = setsockopt(listenSock, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int)); 
 			if ( rc == SOCKET_ERROR ) { 
 				printf("CreateSockets Warning: setsockopt SO_SNDBUF failed!\n"); 
 			}
 
-			//sndbufsize = 0xffff;
-			sndbufsize = 256*1024; //256k
+			sndbufsize = 0xffff;
 			rc = setsockopt(listenSock, SOL_SOCKET, SO_RCVBUF, (const char *)&sndbufsize, sizeof(int)); 
 			if ( rc == SOCKET_ERROR ) { 
 				printf("CreateSockets Warning: setsockopt SO_RCVBUF failed!\n"); 
 			}
 
-			metis_addr = doDiscovery(); 
+			metis_addr = doDiscovery(netaddr, dostatic); 						
+
 			if ( metis_addr != 0 ) { 
 				printf("metis_addr: 0x%08x\n", metis_addr); 
 				fflush(stdout);
@@ -521,10 +527,11 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 				return 0; 
 			}
 		}
-	
+	//}
+
 	/* if we get here no metis was found */ 
-		return -4; 
-	}
+	return -4; 
+}
 
 
 
@@ -620,8 +627,6 @@ int SendStopToMetis(void) 	 {
 	 } 
 	 return 0; 
 } 
-
-
 
 int MetisReadDirect(char *bufp, int buflen) { 
 	struct indgram {

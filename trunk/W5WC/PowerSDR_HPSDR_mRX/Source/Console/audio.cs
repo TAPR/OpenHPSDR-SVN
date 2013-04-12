@@ -4,6 +4,7 @@
 // PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2004-2009  FlexRadio Systems
 // Copyright (C) 2010-2013  Doug Wigley
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -1452,7 +1453,7 @@ namespace PowerSDR
                         fixed (float* res_outl_ptr = &(res_outl[0]))
                         fixed (float* res_outr_ptr = &(res_outr[0]))
                         {
-                            int outsamps;
+                            int outsamps = 0;
                             DttSP.DoResamplerF(in_l, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
                             DttSP.DoResamplerF(in_r, res_outr_ptr, frameCount, &outsamps, resampPtrOut_r);
                             if ((rb_vacOUT_l.WriteSpace() >= outsamps) && (rb_vacOUT_r.WriteSpace() >= outsamps))
@@ -1473,7 +1474,7 @@ namespace PowerSDR
                     {
                         fixed (float* res_outl_ptr = &(res_outl[0]))
                         {
-                            int outsamps;
+                            int outsamps = 0;
                             DttSP.DoResamplerF(in_l, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
                             if ((rb_vacOUT_l.WriteSpace() >= outsamps) && (rb_vacOUT_r.WriteSpace() >= outsamps))
                             {
@@ -2459,7 +2460,7 @@ namespace PowerSDR
                         fixed (float* res_outl_ptr = &(res_outl[0]))
                         fixed (float* res_outr_ptr = &(res_outr[0]))
                         {
-                            int outsamps;
+                            int outsamps = 0;
                             DttSP.DoResamplerF(out_l4, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
                             DttSP.DoResamplerF(out_r4, res_outr_ptr, frameCount, &outsamps, resampPtrOut_r);
                             if ((rb_vacOUT_l.WriteSpace() >= outsamps) && (rb_vacOUT_r.WriteSpace() >= outsamps))
@@ -2480,7 +2481,7 @@ namespace PowerSDR
                     {
                         fixed (float* res_outl_ptr = &(res_outl[0]))
                         {
-                            int outsamps;
+                            int outsamps = 0;
                             DttSP.DoResamplerF(out_l4, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
                             if ((rb_vacOUT_l.WriteSpace() >= outsamps) && (rb_vacOUT_r.WriteSpace() >= outsamps))
                             {
@@ -2550,7 +2551,7 @@ namespace PowerSDR
                         fixed (float* res_outl_ptr = &(res_vac2_outl[0]))
                         fixed (float* res_outr_ptr = &(res_vac2_outr[0]))
                         {
-                            int outsamps;
+                            int outsamps = 0;
                             DttSP.DoResamplerF(out_l4, res_outl_ptr, frameCount, &outsamps, resampVAC2PtrOut_l);
                             DttSP.DoResamplerF(out_r4, res_outr_ptr, frameCount, &outsamps, resampVAC2PtrOut_r);
                             if ((rb_vac2OUT_l.WriteSpace() >= outsamps) && (rb_vac2OUT_r.WriteSpace() >= outsamps))
@@ -2571,7 +2572,7 @@ namespace PowerSDR
                     {
                         fixed (float* res_outl_ptr = &(res_vac2_outl[0]))
                         {
-                            int outsamps;
+                            int outsamps = 0;
                             DttSP.DoResamplerF(out_l4, res_outl_ptr, frameCount, &outsamps, resampVAC2PtrOut_l);
                             if ((rb_vac2OUT_l.WriteSpace() >= outsamps) && (rb_vac2OUT_r.WriteSpace() >= outsamps))
                             {
@@ -4050,7 +4051,7 @@ namespace PowerSDR
                         fixed (float* res_outl_ptr = &(res_outl[0]))
                         fixed (float* res_outr_ptr = &(res_outr[0]))
                         {
-                            int outsamps;
+                            int outsamps = 0;
                             DttSP.DoResamplerF(vac_l, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
                             DttSP.DoResamplerF(vac_r, res_outr_ptr, frameCount, &outsamps, resampPtrOut_r);
                             //Debug.WriteLine("Outsamps: "+outsamps.ToString());
@@ -4072,7 +4073,7 @@ namespace PowerSDR
                     {
                         fixed (float* res_outl_ptr = &(res_outl[0]))
                         {
-                            int outsamps;
+                            int outsamps = 0;
                             DttSP.DoResamplerF(vac_l, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
                             //Debug.WriteLine("Framecount: "+frameCount.ToString() + " Outsamps: "+outsamps.ToString());
                             if ((rb_vacOUT_l.WriteSpace() >= outsamps) && (rb_vacOUT_r.WriteSpace() >= outsamps))
@@ -5013,7 +5014,7 @@ namespace PowerSDR
                         fixed (float* res_outl_ptr = &(res_outl[0]))
                         fixed (float* res_outr_ptr = &(res_outr[0]))
                         {
-                            int outsamps;
+                            int outsamps = 0;
                             DttSP.DoResamplerF(out_l4, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
                             DttSP.DoResamplerF(out_r4, res_outr_ptr, frameCount, &outsamps, resampPtrOut_r);
                             if ((rb_vacOUT_l.WriteSpace() >= outsamps) && (rb_vacOUT_r.WriteSpace() >= outsamps))
@@ -5034,7 +5035,7 @@ namespace PowerSDR
                     {
                         fixed (float* res_outl_ptr = &(res_outl[0]))
                         {
-                            int outsamps;
+                            int outsamps = 0;
                             DttSP.DoResamplerF(out_l4, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
                             if ((rb_vacOUT_l.WriteSpace() >= outsamps) && (rb_vacOUT_r.WriteSpace() >= outsamps))
                             {
@@ -5211,7 +5212,7 @@ namespace PowerSDR
             {
                 if (vac_resample)
                 {
-                    int outsamps;
+                    int outsamps = 0;
                     fixed (float* res_inl_ptr = &(res_inl[0]))
                     fixed (float* res_inr_ptr = &(res_inr[0]))
                     {
@@ -5265,7 +5266,7 @@ namespace PowerSDR
             {
                 if (vac_resample)
                 {
-                    int outsamps;
+                    int outsamps = 0;
                     fixed (float* res_inl_ptr = &(res_inl[0]))
                     {
                         DttSP.DoResamplerF(in_l_ptr1, res_inl_ptr, frameCount, &outsamps, resampPtrIn_l);
@@ -5346,7 +5347,7 @@ namespace PowerSDR
             {
                 if (vac2_resample)
                 {
-                    int outsamps;
+                    int outsamps = 0;
                     fixed (float* res_inl_ptr = &(res_vac2_inl[0]))
                     fixed (float* res_inr_ptr = &(res_vac2_inr[0]))
                     {
@@ -5400,7 +5401,7 @@ namespace PowerSDR
             {
                 if (vac2_resample)
                 {
-                    int outsamps;
+                    int outsamps = 0;
                     fixed (float* res_inl_ptr = &(res_vac2_inl[0]))
                     {
                         DttSP.DoResamplerF(in_l_ptr1, res_inl_ptr, frameCount, &outsamps, resampVAC2PtrIn_l);
@@ -5862,7 +5863,7 @@ namespace PowerSDR
             if (rb_vacOUT_r == null) rb_vacOUT_r = new RingBufferFloat(2 * 65536);
             rb_vacOUT_r.Restart(vac_output_iq ? block_size1 : block_size_vac);
 
-            if (rb_vacIN_l == null) rb_vacIN_l = new RingBufferFloat(4 * 65536);
+            if (rb_vacIN_l == null) rb_vacIN_l = new RingBufferFloat(4 * 65536); 
             rb_vacIN_l.Restart(block_size_vac);
 
             if (rb_vacIN_r == null) rb_vacIN_r = new RingBufferFloat(4 * 65536);

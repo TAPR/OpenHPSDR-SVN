@@ -28,7 +28,7 @@
 #include <stdio.h>
 #include "KD5TFD-VK6APH-Audio.h"
 #include "private.h"
-
+#include "Ozyutils.h"
 
 //
 // StartAudio -- called when we need to start reading audio and passing it to PowerSDR via the callback.
@@ -68,7 +68,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
         // DttSP runs at a single sampling rate - the IQ in sampling rate.  The Janus hardware supports selection of (192,96,48)
         // khz on IQ in, 48 khz on mic in and IQ and LR output.
         //
-        // what's our sampling rate?  The code is setup to read IQ and 192, 96 or 48 khz.  Samples on the mic input match
+        // what's our sampling rate?  The code is setup to read IQ and 384, 192, 96 or 48 khz.  Samples on the mic input match
         // the IQ sample rate, but only the 1st of (4/2/1) sample is valid others are duplicated because the mic is always sampled
         // at 48 khz.  If the IQ rate does not equal 48 khz the mic data is resampled to match the IQ rate.
         //
@@ -162,21 +162,6 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 			for (i = 0; i < nchannels; i++)
 				INpointer[i] = INbufp + (i * BlockSize);
 
-		/*	bufp = (float *)malloc(sizeof(float) * BlockSize * 8);  // 12 channels for in and 8 channels for out
-			if ( bufp == NULL ) {
-				myrc = 5;
-				break;
-			}
-                CallbackOutLbufp = bufp;
-                CallbackOutRbufp = bufp + BlockSize;
-                CallbackMonOutLbufp = bufp + (2*BlockSize);
-                CallbackMonOutRbufp = bufp + (3*BlockSize);
-                CallbackOutL2bufp = bufp + (4*BlockSize);
-                CallbackOutR2bufp = bufp + (5*BlockSize);
-                CallbackOutL3bufp = bufp + (6*BlockSize);
-                CallbackOutR3bufp = bufp + (7*BlockSize);
-				*/
-
   		    OUTbufp = (float *)malloc(sizeof(float) * BlockSize * 8);
 			for (i = 0; i < 8; i++)
 				OUTpointer[i] = OUTbufp + (i * BlockSize);
@@ -268,18 +253,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
         } while ( 0 );
 
         if ( myrc != 0 ) {  // we failed -- clean up
-               /* if ( bufp != NULL ) {
-                        CallbackOutLbufp = NULL;
-                        CallbackOutRbufp = NULL;
-                        CallbackMonOutLbufp = NULL;
-                        CallbackMonOutRbufp = NULL;
-                        CallbackOutL2bufp = NULL;
-                        CallbackOutR2bufp = NULL;
-                        CallbackOutL3bufp = NULL;
-                        CallbackOutR3bufp = NULL;
-                       free(bufp);
-                } */
-
+    
                 if ( FPGAReadBufp != NULL ) {
                         free(FPGAReadBufp);
                 }
@@ -441,22 +415,6 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
 		if (INbufp)   free(INbufp);
 		if (OUTbufp)  free(OUTbufp);
 
-      /*  printf("sample buf freed\n");   fflush(stdout);
-        if ( INpointer != NULL ) {
-                        CallbackOutLbufp = NULL;
-                        CallbackOutRbufp = NULL;
-                        CallbackMonOutLbufp = NULL;
-                        CallbackMonOutRbufp = NULL;
-                        CallbackOutL2bufp = NULL;
-                        CallbackOutR2bufp = NULL;
-                        CallbackOutL3bufp = NULL;
-                        CallbackOutR3bufp = NULL;
-    
-        }
-        printf("call back buf freed\n");   fflush(stdout); */
-
-
-
         if ( OzyH != NULL ) {
                 OzyClose(OzyH);
                 OzyH = NULL;
@@ -502,7 +460,6 @@ KD5TFDVK6APHAUDIO_API void SetSWRProtect(float g) {
 
 KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out) {  
 	
-
 	rx_ant = ( rx_ant << 5); 
 	AlexRxAnt = rx_ant & 0x60; 
 
@@ -795,49 +752,49 @@ KD5TFDVK6APHAUDIO_API int getHermesDCVoltage() {
 
 KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() { 
 	int n; 
-	//if ( !isMetis ) { 
-	//getI2CByte(I2C_MERC1_ADC_OFS);
-	//getI2CByte(I2C_MERC2_ADC_OFS);
-	//getI2CByte(I2C_MERC3_ADC_OFS);
+	if ( !isMetis ) { 
+	getI2CBytes(I2C_MERC1_ADC_OFS);
+	getI2CBytes(I2C_MERC2_ADC_OFS);
+	//getI2CBytes(I2C_MERC3_ADC_OFS);
 	//getI2CBytes(I2C_MERC4_ADC_OFS);
-	//}
+	}
 	n = ADC_Overloads; 
 	ADC_Overloads = 0; 
 	return n; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercuryFWVersion() { 
-	//if ( !isMetis ) { 
-		//getI2CByte(I2C_MERC1_FW);
-	//}
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_MERC1_FW);
+	}
 	return MercuryFWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury2FWVersion() { 
-	//if ( !isMetis ) { 
-		//getI2CByte(I2C_MERC2_FW);
-	//}
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_MERC2_FW);
+	}
 	return Mercury2FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury3FWVersion() { 
-	//if ( !isMetis ) { 
-		//getI2CByte(I2C_MERC3_FW);
-	//}
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_MERC3_FW);
+	}
 	return Mercury3FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getMercury4FWVersion() { 
-	//if ( !isMetis ) { 
-		//getI2CByte(I2C_MERC4_FW);
-	//}
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_MERC4_FW);
+	}
 	return Mercury4FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getPenelopeFWVersion() { 
-	//if ( !isMetis ) { 
-		//getI2CByte(I2C_PENNY_FW);
-	//}
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_PENNY_FW);
+	}
 	return PenelopeFWVersion; 
 } 
 
@@ -850,14 +807,23 @@ KD5TFDVK6APHAUDIO_API int getHaveSync() {
 } 
 
 KD5TFDVK6APHAUDIO_API int getFwdPower() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_PENNY_ALC);
+	}
 	return FwdPower; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getRefPower() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_PENNY_REV);
+	}
 	return RefPower; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getAlexFwdPower() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_PENNY_FWD);
+	}
 	return AlexFwdPower; 
 } 
 

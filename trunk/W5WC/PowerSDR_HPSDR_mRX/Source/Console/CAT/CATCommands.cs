@@ -22,10 +22,13 @@
 
 
 using System;
+using System.Reflection;
 using System.Diagnostics;
+using System.Threading;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace PowerSDR
 {
@@ -458,8 +461,8 @@ namespace PowerSDR
 		}
 
 		//Sets or reads the CWX CW speed
-	//	public string KS(string s)
-	//	{
+		public string KS(string s)
+		{
 			//			int cws = 0;
 			//			// Make sure we have an instance of the form
 			//			if(console.CWXForm == null || console.CWXForm.IsDisposed)
@@ -488,11 +491,11 @@ namespace PowerSDR
 			//			}
 			//			else
 			//				return parser.Error1;
-		//	return ZZKS(s);
-		//}
+			return ZZKS(s);
+		}
 
 		//Sends text data to CWX for conversion to Morse
-	/*	public string KY(string s)
+		public string KY(string s)
 		{
 			// Make sure we have an instance of the form
 			if(console.CWXForm == null || console.CWXForm.IsDisposed)
@@ -565,7 +568,7 @@ namespace PowerSDR
 			}
 			else
 				return parser.Error1;
-		} */
+		}
 
 
 		// Sets or reads the transceiver mode
@@ -718,30 +721,18 @@ namespace PowerSDR
 		}
 
 		// Sets or reads the Speech Compressor status
-		/*public string PR(string s)
+        //Reactivated 10/21/2012 for HRD compatibility BT
+		public string PR(string s)
 		{
-//			if(s.Length == parser.nSet)
-//			{
-//				if(s == "0")
-//					console.COMP = false;
-//				else if(s == "1")
-//					console.COMP = true;
-//				return "";
-//			}
-//			else if(s.Length == parser.nGet)
-//			{
-//				bool comp = console.COMP;
-//				if(comp)
-//					return "1";
-//				else
-//					return "0";
-//			}
-//			else
-//			{
-//				return "";
-//			}
-			return ZZPK(s);
-		}*/
+            if (s.Length == parser.nGet)
+			{
+    			return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+		}
 
 		// Sets or reads the console power on/off status
 		public string PS(string s)
@@ -1175,8 +1166,6 @@ namespace PowerSDR
         //Sets or reads the RX2 AGC-T
         public string ZZAS(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000)
-            {
                 int n = 0;
                 int x = 0;
                 string sign;
@@ -1205,12 +1194,6 @@ namespace PowerSDR
                 }
                 else
                     return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
         }
 
         //Sets VFO A up nn Tune Steps
@@ -1235,46 +1218,16 @@ namespace PowerSDR
         //Moves the RX2 bandswitch down one band
         public string ZZBA()
         {
-            if (console.CurrentModel == Model.FLEX5000)
-            {
-                Band nextband;
-                Band current = console.RX2Band;
-                int currndx = Array.IndexOf(BandList, current);
-                if (currndx > 0)
-                    nextband = BandList[currndx - 1];
-                else
-                    nextband = BandList[LastBandIndex];
-                console.RX2Band = nextband;
+                console.CATRX2BandUpDown(-1);
                 return "";
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
-        }
+       }
 
         //Moves the RX2 bandswitch up one band
         public string ZZBB()
         {
-            if (console.CurrentModel == Model.FLEX5000)
-            {
-                Band nextband;
-                Band current = console.RX2Band;
-                int currndx = Array.IndexOf(BandList, current);
-                if (currndx == LastBandIndex)
-                    nextband = BandList[0];
-                else
-                    nextband = BandList[currndx + 1];
-                console.RX2Band = nextband;
+               console.CATRX2BandUpDown(1);
                 return "";
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
-        }
+         }
 
 
 		//Moves the RX1 bandswitch down one band
@@ -1397,8 +1350,6 @@ namespace PowerSDR
         //Sets or gets the current RX2 band setting
         public string ZZBT(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000)
-            {
                 if (s.Length == parser.nGet)
                 {
                     return Band2String(console.RX2Band);
@@ -1410,13 +1361,7 @@ namespace PowerSDR
                 }
                 else
                     return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
-        }
+         }
 
   
 		//Moves the bandswitch up one band
@@ -1687,8 +1632,6 @@ namespace PowerSDR
         //Sets or reads the Diversity Form Enable Button
         public string ZZDE(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000  && console.CATDiversityForm)
-            {
                 if (s.Length == parser.nSet)
                 {
                     if (s == "1")
@@ -1712,26 +1655,14 @@ namespace PowerSDR
                         return "0";
                 }
                 else
-                    return parser.Error1;
-            }
-            else
-            {
-                if (console.CurrentModel == Model.FLEX5000 )
-                    parser.Verbose_Error_Code = 8;
-                else
-                    parser.Verbose_Error_Code = 7;
-
-                return parser.Error1;
-            }
+                    return parser.Error1;            
         } 
 
 
         //Opens or closes the Diversity Form
         public string ZZDF(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000 )
-            {
-                if (s.Length == parser.nSet)
+                 if (s.Length == parser.nSet)
                 {
                     if (s == "1")
                     {
@@ -1755,12 +1686,6 @@ namespace PowerSDR
                 }
                 else
                     return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
         }
 
 		// Sets or reads the current display mode
@@ -1823,6 +1748,151 @@ namespace PowerSDR
 			}
 
 		}
+
+        //Reads or sets the setup form Waterfall Low value
+        public string ZZDN(string s)
+        {
+            int n = 0;
+            int x = 0;
+            string sign;
+
+            if (s != "")
+                n = Convert.ToInt32(s);
+
+            if (s.Length == parser.nSet)
+            {
+                console.SetupForm.CATWFLo = n;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                x = console.SetupForm.CATWFLo;
+                if (x >= 0)
+                    sign = "+";
+                else
+                    sign = "-";
+                // we have to remove the leading zero and replace it with the sign.
+                return sign + AddLeadingZeros(Math.Abs(x)).Substring(1);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        //Reads or sets the setup form Waterfall High value
+        public string ZZDO(string s)
+        {
+            int n = 0;
+            int x = 0;
+            string sign;
+
+            if (s != "")
+                n = Convert.ToInt32(s);
+
+            if (s.Length == parser.nSet)
+            {
+                console.SetupForm.CATWFHi = n;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                x = console.SetupForm.CATWFHi;
+                if (x >= 0)
+                    sign = "+";
+                else
+                    sign = "-";
+                // we have to remove the leading zero and replace it with the sign.
+                return sign + AddLeadingZeros(Math.Abs(x)).Substring(1);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+
+        //Reads or sets the setup form Spectrum Grid Max Value
+        public string ZZDP(string s)
+        {
+            int n = 0;
+            int x = 0;
+            string sign;
+
+            if (s != "")
+                n = Convert.ToInt32(s);
+
+            if (s.Length == parser.nSet)
+            {
+                console.SetupForm.CATSGMax = n;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                x = console.SetupForm.CATSGMax;
+                if (x >= 0)
+                    sign = "+";
+                else
+                    sign = "-";
+                // we have to remove the leading zero and replace it with the sign.
+                return sign + AddLeadingZeros(Math.Abs(x)).Substring(1);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        //Reads or sets the setup form Spectrum Grid Min Value
+        public string ZZDQ(string s)
+        {
+            int n = 0;
+            int x = 0;
+            string sign;
+
+            if (s != "")
+                n = Convert.ToInt32(s);
+
+            if (s.Length == parser.nSet)
+            {
+                console.SetupForm.CATSGMin = n;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                x = console.SetupForm.CATSGMin;
+                if (x >= 0)
+                    sign = "+";
+                else
+                    sign = "-";
+                // we have to remove the leading zero and replace it with the sign.
+                return sign + AddLeadingZeros(Math.Abs(x)).Substring(1);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        // Sets or reads the Spectrum Grid Step
+        public string ZZDR(string s)
+        {
+            if (s.Length == parser.nSet)
+            {
+                console.SetupForm.CATSGStep = Convert.ToInt32(s);
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                return AddLeadingZeros(console.SetupForm.CATSGStep);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+
+        }
+
         //Constructs the state word for DDUtil
         //read only
         public string ZZDU()
@@ -1836,97 +1906,24 @@ namespace PowerSDR
             status += ZZSP("") + sep;
             status += ZZTU("") + sep;
             status += ZZTX("") + sep;
-           // if (console.CurrentModel == Model.FLEX5000)
-           // {
-               // status += ZZOA("") + sep;
-               // if (FWCEEPROM.RX2OK)
-                //    status += ZZOB("") + sep;
-               // else
-                 //   status += "0:";
-               // status += ZZOC("") + sep;
-               // if (FWCEEPROM.RX2OK)
-               //     status += ZZRS("") + sep;
-               // else
+            if (console.CurrentModel == Model.FLEX5000)
+            {
+                status += ZZOA("") + sep;
+                if (FWCEEPROM.RX2OK)
+                    status += ZZOB("") + sep;
+                else
                     status += "0:";
-          //  }
-          //  else
-            status += "0:0:0:0:";
-           // if (FWCEEPROM.RX2OK)
-              //  status += ZZRT("") + sep;
-           // else
-            //status += "0:";
-            status += ZZDM("") + sep;
-            status += ZZGT("") + sep;
-            status += ZZMU("") + sep;
-            status += ZZXS("") + sep;
-
-            parser.nAns = 2;
-            status += ZZAC("") + sep;
-            status += ZZMD("") + sep;
-           // if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK)
-           // {
-            //    status += ZZME("") + sep;
-             //   status += ZZFJ("") + sep;
-           // }
-          //  else
-            status += "00:00:";
-            status += ZZFI("") + sep;
-
-            parser.nAns = 3;
-           // if (console.CurrentModel == Model.FLEX5000)
-           // {
-            //    status += ZZOF("") + sep;
-             //   if (FWCEEPROM.RX2OK)
-             //       status += ZZBT("") + sep;
-             //   else
-             //       status += "000:";
-           // }
-           // else
-            status += "000:000:";
-            status += ZZPC("") + sep;
-            status += ZZBS("") + sep;
-            status += ZZAG("") + sep;
-            status += ZZKS("") + sep;
-            status += ZZTO("") + sep;
-
-            parser.nAns = 4;
-           // if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000)
-            //    status += ZZRV() + sep;
-           // else
-            status += "0000:";
-            status += ZZSM("0") + sep;
-
-            parser.nAns = 5;
-            status += ZZRF("") + sep;
-            //if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000)
-             //   status += ZZTS() + sep;
-           // else
-            status += "00000:";
-            status += ZZXF("") + sep;
-
-            parser.nAns = 6;
-            status += ZZCU() + sep;
-
-            parser.nAns = 11;
-            status += ZZFA("") + sep;
-            status += ZZFB("");
-            parser.nAns = old;
-            return status;
-        }
-
-        //Constructs the state word for DDUtil
-        //read only
-   /*     public string ZZDU()
-        {
-            int old = parser.nAns;
-            string sep = ":";
-            string status = "";
-
-            parser.nAns = 1;
-            status += ZZSW("") + sep;
-            status += ZZSP("") + sep;
-            status += ZZTU("") + sep;
-            status += ZZTX("") + sep;
+                status += ZZOC("") + sep;
+                if (FWCEEPROM.RX2OK)
+                    status += ZZRS("") + sep;
+                else
+                    status += "0:";
+            }
+            else
+                status += "0:0:0:0:";
+            if (FWCEEPROM.RX2OK)
+                status += ZZRT("") + sep;
+            else
             status += "0:";
             status += ZZDM("") + sep;
             status += ZZGT("") + sep;
@@ -1936,10 +1933,25 @@ namespace PowerSDR
             parser.nAns = 2;
             status += ZZAC("") + sep;
             status += ZZMD("") + sep;
+            if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK)
+            {
+                status += ZZME("") + sep;
+                status += ZZFJ("") + sep;
+            }
+            else
             status += "00:00:";
             status += ZZFI("")+ sep;
 
             parser.nAns = 3;
+            if (console.CurrentModel == Model.FLEX5000)
+            {
+                status += ZZOF("") + sep;
+                if (FWCEEPROM.RX2OK)
+                    status += ZZBT("") + sep;
+                else
+                    status += "000:";
+            }
+            else
             status += "000:000:";
             status += ZZPC("") + sep;
             status += ZZBS("") + sep;
@@ -1948,11 +1960,17 @@ namespace PowerSDR
             status += ZZTO("") + sep;
 
             parser.nAns = 4;
+            if (console.CurrentModel == Model.FLEX5000)
+                status += ZZRV() + sep;
+            else
             status += "0000:";
             status += ZZSM("0") + sep;
 
             parser.nAns = 5;
             status += ZZRF("") + sep;
+            if (console.CurrentModel == Model.FLEX5000)
+                status += ZZTS() + sep;
+            else
             status += "00000:";
             status += ZZXF("") + sep;
 
@@ -1964,7 +1982,7 @@ namespace PowerSDR
             status += ZZFB("");
             parser.nAns = old;
             return status;
-        } */
+        } 
 
 
 		/// <summary>
@@ -2306,8 +2324,6 @@ namespace PowerSDR
         //Sets or reads the current RX2 DSP filter
         public string ZZFJ(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000 )
-            {
                 int n = 0;
                 if (s != "")
                     n = Convert.ToInt32(s);
@@ -2326,14 +2342,7 @@ namespace PowerSDR
                 }
                 else
                     return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
-        }
-
+         }
 
 		/// <summary>
 		/// Reads or sets the DSP Filter Low value
@@ -2414,7 +2423,7 @@ namespace PowerSDR
 
 		}
 		//Reads FlexWire single byte value commands
-		/*public string ZZFV(string s)
+		public string ZZFV(string s)
 		{
 			if(s.Length == parser.nGet)
 			{
@@ -2424,17 +2433,17 @@ namespace PowerSDR
 					return parser.Error1;
 
 				byte addr = byte.Parse(s, NumberStyles.HexNumber);
-				//uint val;
+				uint val = 0;
 				//FWC.FlexWire_ReadValue(addr, out val);
-				//string ans = String.Format("{0:X2}", (byte)val);
-				//return ans;
+				string ans = String.Format("{0:X2}", (byte)val);
+				return ans;
 			}
 			else
 				return parser.Error1;
-		}*/
+		}
 
 		//Reds FlexWire double byte value commands
-		/*public string ZZFW(String s)
+		public string ZZFW(String s)
 		{
 			if(s.Length == parser.nGet)
 			{
@@ -2444,7 +2453,7 @@ namespace PowerSDR
 					return parser.Error1;
 
 				byte addr = byte.Parse(s, NumberStyles.HexNumber);
-				uint val;
+				uint val = 0;
 				//FWC.FlexWire_Read2Value(addr, out val);
 				string ans1 = String.Format("{0:X2}", val>>8);
 				string ans2 = String.Format("{0:X2}", (byte) val);
@@ -2454,7 +2463,7 @@ namespace PowerSDR
 			}
 			else
 				return parser.Error1;
-		}*/
+		}
 
 		//Sends FlexWire single byte value commands
 		public string ZZFX(string s)
@@ -2786,7 +2795,7 @@ namespace PowerSDR
 		}
 
         //Reads the installed options
-   /*     public string ZZIO()
+        public string ZZIO()
         {
             if (console.CurrentModel == Model.SDR1000)
             {
@@ -2805,7 +2814,7 @@ namespace PowerSDR
                     vu = "1";
                 return atu + rx2 + vu;
             }
-        }*/
+        }
 
 
 		// Sets or reads the IF width
@@ -2868,7 +2877,7 @@ namespace PowerSDR
 			return "";
 		}
 
-      /*  public string ZZKO(string s)
+        public string ZZKO(string s)
         {
                  if (s.Length == parser.nSet)
                 {
@@ -2926,7 +2935,7 @@ namespace PowerSDR
             }
             else
                 return parser.Error1;
-        }*/
+        }
 
 		//Sets or reads the CWX CW speed
 		public string ZZKS(string s)
@@ -2978,6 +2987,10 @@ namespace PowerSDR
 				}
 			}
 
+
+			if(s.Length == parser.nSet)
+			{
+
 			// Make sure we are in a cw mode.
 			switch(console.RX1DSPMode)
 			{
@@ -3002,8 +3015,6 @@ namespace PowerSDR
 					break;
 			}
 
-			if(s.Length == parser.nSet)
-			{
 
 				string trms = "";
 				byte[] msg;
@@ -3144,9 +3155,7 @@ namespace PowerSDR
         //Sets or reads the RX2 Gain level
         public string ZZLE(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000 )
-            {
-                int n = 0;
+                 int n = 0;
 
                 if (s != null && s != "")
                     n = Convert.ToInt32(s);
@@ -3166,20 +3175,12 @@ namespace PowerSDR
                 {
                     return parser.Error1;
                 }
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
-        }
+         }
 
         //Sets or reads the RX2 stereo balance
         public string ZZLF(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000 )
-            {
-                int n = 0;
+                 int n = 0;
 
                 if (s != null && s != "")
                     n = Convert.ToInt32(s);
@@ -3199,16 +3200,55 @@ namespace PowerSDR
                 {
                     return parser.Error1;
                 }
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
         }
 
+        //Sets or reads the AutoMute RX1 on VFOB TX checkbox
+        public string ZZLG(string s)
+        {
+                if (s.Length == parser.nSet)
+                {
+                    if (s == "0")
+                        console.SetupForm.AutoMuteRX1onVFOBTX = false;
+                    else
+                        console.SetupForm.AutoMuteRX1onVFOBTX = true;
+                    return "";
+                }
+                else if (s.Length == parser.nGet)
+                {
+                    bool ans = console.SetupForm.AutoMuteRX1onVFOBTX;
+                    if (ans)
+                        return "1";
+                    else
+                        return "0";
+                }
+                else
+                    return parser.Error1;          
+       }
 
-		// Sets or reads the MUT button on/off status
+        //Sets or reads the AutoMute RX2 on VFOA TX checkbox
+        public string ZZLH(string s)
+        {
+                if (s.Length == parser.nSet)
+                {
+                    if (s == "0")
+                        console.SetupForm.AutoMuteRX2onVFOATX = false;
+                    else
+                        console.SetupForm.AutoMuteRX2onVFOATX = true;
+                    return "";
+                }
+                else if (s.Length == parser.nGet)
+                {
+                    bool ans = console.SetupForm.AutoMuteRX2onVFOATX;
+                    if (ans)
+                        return "1";
+                    else
+                        return "0";
+                }
+                else
+                    return parser.Error1;
+        }
+        
+        // Sets or reads the MUT button on/off status
 		public string ZZMA(string s)
 		{
 			if(s.Length == parser.nSet && (s == "0" || s == "1"))
@@ -3234,6 +3274,34 @@ namespace PowerSDR
 			}
 
 		}
+
+        // Sets or reads the RX2 MUT button on/off status
+        public string ZZMB(string s)
+        {
+                if (s.Length == parser.nSet && (s == "0" || s == "1"))
+                {
+                    if (s == "0")
+                        console.MUT2 = false;
+                    else if (s == "1")
+                        console.MUT2 = true;
+
+                    return "";
+                }
+                else if (s.Length == parser.nGet)
+                {
+                    bool retval = console.MUT2;
+                    if (retval)
+                        return "1";
+                    else
+                        return "0";
+                }
+                else
+                {
+                    return parser.Error1;
+                }
+  
+        }
+
 
 
 
@@ -3262,8 +3330,6 @@ namespace PowerSDR
 
         public string ZZME(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000 )
-            {
                 if (s.Length == parser.nGet)
                 {
                     return Mode2String(console.RX2DSPMode);
@@ -3310,13 +3376,7 @@ namespace PowerSDR
                 }
                 else
                     return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
-        }
+       }
 
 		//Sets or reads the Mic gain control
 		public string ZZMG(string s)
@@ -3342,6 +3402,37 @@ namespace PowerSDR
 			else
 				return parser.Error1;
 		}
+
+        //Returns a list of modes with index
+        public string ZZML()
+        {
+            string modeList = "";
+            string thisMode = "";
+
+            try
+            {
+                var values = (DSPMode[])Enum.GetValues(typeof(DSPMode));
+                int n = 0;
+                for (n = 0; values[n] != DSPMode.LAST; n++)
+                {
+                    if (values[n] != DSPMode.FIRST && values[n] != DSPMode.LAST)
+                    {
+                        if ((int)values[n] <= 9)
+                            thisMode = values[n].ToString() + "0" + (int)values[n] + ":";
+                        else
+                            thisMode = values[n].ToString() + (int)values[n] + ":";
+                    }
+                    modeList += thisMode.PadLeft(7, ' ');
+                }
+
+                return modeList.Remove(modeList.Length - 1);
+            }
+            catch
+            {
+                parser.Verbose_Error_Code = 4;
+                return parser.Error1;
+            }
+        }
 
 		//Reads the DSP filter presets for filter index (s)
 		//Returns 180 character length word for 12 filters x 15 characters each.
@@ -3464,6 +3555,133 @@ namespace PowerSDR
 				return parser.Error1;
 		}
 
+        //Returns the count of memory records
+        //read only
+        public string ZZMV()
+        {
+            try
+            {
+                return AddLeadingZeros(console.MemoryList.List.Count);
+            }
+            catch
+            {
+                parser.Verbose_Error_Code = 4;
+                return parser.Error1;
+            }
+        }
+
+        //Deletes a memory channel
+        public string ZZMW(string s)
+        {
+            try
+            {
+                MemoryRecord rec = GetChannelRecord(s);
+                if (rec.Comments.StartsWith(s)) 
+                    console.MemoryList.List.Remove(rec);
+                return "";
+            }
+            catch
+            {
+                parser.Verbose_Error_Code = 4;
+                return parser.Error1;
+            }
+
+        }
+
+        //Restores memory channel n
+        public string ZZMX(string s)
+        {
+            try
+            {
+                int ndx = GetIndex(s);
+                if (ndx >= 0)
+                {
+                    console.changeComboFMMemory(ndx);
+                    return "";
+                }
+                else
+                {
+                    parser.Verbose_Error_Code = 9;
+                    return parser.Error1;
+                }
+            }
+            catch
+            {
+                parser.Verbose_Error_Code = 4;
+                return parser.Error1;
+            }
+        }
+
+        //Saves the current radio configuration to a new memory channel
+        public string ZZMY()
+        {
+            try
+            {
+                int nextN = GetNextChannelNumber();
+                int oldAns = parser.nAns;
+                parser.nAns = 3;
+                string newCh = AddLeadingZeros(nextN);
+
+                console.MemoryList.List.Add(new MemoryRecord("", console.VFOAFreq, "", console.RX1DSPMode, true, console.TuneStepList[console.TuneStepIndex].Name,
+                console.CurrentFMTXMode, console.FMTXOffsetMHz, console.radio.GetDSPTX(0).CTCSSFlag, console.radio.GetDSPTX(0).CTCSSFreqHz, console.PWR,
+                (int)console.radio.GetDSPTX(0).TXFMDeviation, console.VFOSplit, console.TXFreq, console.RX1Filter, console.RX1FilterLow,
+                console.RX1FilterHigh, newCh + ":", console.radio.GetDSPRX(0, 0).RXAGCMode, console.RF));
+
+                parser.nAns = oldAns;
+                return "";
+            }
+            catch
+            {
+                parser.Verbose_Error_Code = 4;
+                return parser.Error1;
+            }
+        }
+
+        //Saves the radio configuration to a specific channel number (edit)
+        public string ZZMZ(string s)
+        {
+            if (GetIndex(s) >= 0)
+            {
+                try
+                {
+                    MemoryRecord oldrec = GetChannelRecord(s);
+                    MemoryRecord newrec = new MemoryRecord();
+                    newrec.Group = oldrec.Group;
+                    newrec.RXFreq = console.VFOAFreq;
+                    newrec.Name = oldrec.Name;
+                    newrec.DSPMode = console.RX1DSPMode;
+                    newrec.Scan = oldrec.Scan;
+                    newrec.TuneStep = console.TuneStepList[console.TuneStepIndex].Name;
+                    newrec.RPTR = console.CurrentFMTXMode;
+                    newrec.RPTROffset = console.FMTXOffsetMHz;
+                    newrec.CTCSSOn = console.radio.GetDSPTX(0).CTCSSFlag;
+                    newrec.CTCSSFreq = console.radio.GetDSPTX(0).CTCSSFreqHz;
+                    newrec.Power = console.PWR;
+                    newrec.Deviation = (int)console.radio.GetDSPTX(0).TXFMDeviation;
+                    newrec.Split = console.VFOSplit;
+                    newrec.TXFreq = console.TXFreq;
+                    newrec.RXFilter = console.RX1Filter;
+                    newrec.RXFilterLow = console.RX1FilterLow;
+                    newrec.RXFilterHigh = console.RX1FilterHigh;
+                    newrec.Comments = oldrec.Comments;
+                    newrec.AGCMode = console.radio.GetDSPRX(0, 0).RXAGCMode;
+                    newrec.AGCT = console.RF;
+                    console.MemoryList.List.Remove(oldrec);
+                    console.MemoryList.List.Add(newrec);
+                    return "";
+                }
+                catch
+                {
+                    parser.Verbose_Error_Code = 4;
+                    return parser.Error1;
+                }
+            }
+            else
+            {
+                parser.Verbose_Error_Code = 9;
+                return parser.Error1;
+            }
+        }
 
 		#endregion Extended CAT Methods ZZG-ZZM
 
@@ -3509,36 +3727,24 @@ namespace PowerSDR
         //Sets or reads the RX2 NB status
         public string ZZNC(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000 )
-            {
                 if (s.Length == parser.nSet && (s == "0" || s == "1"))
                 {
-                    //console.CATRX2NB1 = Convert.ToInt32(s);
-                    //return "";
-                    return parser.Error1;
+                    console.CATRX2NB1 = Convert.ToInt32(s);
+                    return "";
                 }
                 else if (s.Length == parser.nGet)
                 {
-                    return parser.Error1; 
-                    //return console.CATRX2NB1.ToString();
+                    return console.CATRX2NB1.ToString();
                 }
                 else
                 {
                     return parser.Error1;
                 }
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
-		} 
+  	} 
 
         //Sets or reads the RX2 NB2 status
         public string ZZND(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000 )
-            {
                 if (s.Length == parser.nSet && (s == "0" || s == "1"))
                 {
                     //console.CATRX2NB2 = Convert.ToInt32(s);
@@ -3554,13 +3760,7 @@ namespace PowerSDR
                 {
                     return parser.Error1;
                 }
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
-
+ 
         } 
 
 
@@ -3652,55 +3852,14 @@ namespace PowerSDR
 		}
 
 		//Sets or reads the RX1 antenna
-	/*	public string ZZOA(string s)
+		public string ZZOA(string s)
 		{
-			int n = 0;
-			if(s.Length > 0)
-				n = Int32.Parse(s);
-
-			if(console.CurrentModel == Model.FLEX5000)
-			{
-				if(console.fwcAntForm != null)
-				{
-					if(s.Length == parser.nSet && (n >= 0 && n <= 4))
-					{
-						console.fwcAntForm.RX1Ant = String2FWCAntenna(s);
-						return "";
-					}
-					else if(s.Length == parser.nGet)
-						return FWCAntenna2String(console.fwcAntForm.RX1Ant);
-					else
-						return parser.Error1;
-				}
-				else
-					return parser.Error1;
-			}
-            else if (console.CurrentModel == Model.FLEX1500)
-            {
-                if (console.hidAntForm != null)
-                {
-                    if (s.Length == parser.nSet && (n >= 0 && n <= 3))
-                    {
-                        console.hidAntForm.RXAnt = String2HIDAntenna(s);
-                        return "";
-                    }
-                    else if (s.Length == parser.nGet)
-                        return HIDAntenna2String(console.hidAntForm.RXAnt);
-                    else
-                        return parser.Error1;
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
-		}*/
+		}
 
 		//Sets or reads the RX2 antenna (if RX2 installed)
-	/*	public string ZZOB(string s)
+		public string ZZOB(string s)
 		{
             if (console.CurrentModel == Model.FLEX5000 )
             {
@@ -3731,415 +3890,57 @@ namespace PowerSDR
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
             }
-		}*/
+		}
 
 		//Sets or reads the TX antenna
-	/*	public string ZZOC(string s)
+		public string ZZOC(string s)
 		{
-			int n = 0;
-			if(s.Length > 0)
-				n = Int32.Parse(s);
-			if(console.CurrentModel == Model.FLEX5000)
-			{
-
-                if (console.fwcAntForm != null)
-                {
-                    if (s.Length == parser.nSet && (n >= 1 && n <= 3))
-                    {
-                        console.fwcAntForm.TXAnt = String2FWCAntenna(s);
-                        return "";
-                    }
-                    else if (s.Length == parser.nGet)
-                        return FWCAntenna2String(console.fwcAntForm.TXAnt);
-                    else
-                        return parser.Error1;
-                }
-                else
-                {
-                    parser.Verbose_Error_Code = 8;
-                    return parser.Error1;
-                }
-			}
-            else if (console.CurrentModel == Model.FLEX1500)
-            {
-                if (console.hidAntForm != null)
-                {
-                    if (s.Length == parser.nSet && (n >= 0 && n <= 1))
-                    {
-                        console.hidAntForm.TXAnt = String2HIDAntenna(s);
-                        return "";
-                    }
-                    else if (s.Length == parser.nGet)
-                        return HIDAntenna2String(console.hidAntForm.TXAnt);
-                    else
-                        return parser.Error1;
-                }
-                else
-                {
-                    parser.Verbose_Error_Code = 8;
-                    return parser.Error1;
-                }
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
-		}*/
+		}
 
 		//Sets or reads the current Antenna Mode
-	/*	public string ZZOD(string s)
+		public string ZZOD(string s)
 		{
-			int n = 0;
-			if(s.Length > 0)
-				n = Int32.Parse(s);
-
-			if(console.CurrentModel == Model.FLEX5000)
-			{
-
-				if(s.Length == parser.nSet && (n == 0 || n == 1))
-				{
-					console.fwcAntForm.CurrentAntMode = String2AntMode(s);
-					return "";
-				}
-				else if(s.Length == parser.nGet)
-					return AntMode2String(console.fwcAntForm.CurrentAntMode);
-				else
-					return parser.Error1;
-			}
-            else if (console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet && (n == 0 || n == 1))
-                {
-                    console.hidAntForm.CurrentAntMode = String2AntMode(s);
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                    return AntMode2String(console.hidAntForm.CurrentAntMode);
-                else
-                    return parser.Error1;
-
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
+              parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
-
-		}*/
+ 		}
 
 		//Sets or reads the RX1 External Antenna checkbox
-		/*public string ZZOE(string s)
+		public string ZZOE(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000)
-            {
-                if (s.Length == parser.nSet)
-                {
-                    if (s == "0")
-                        console.fwcAntForm.RX1Loop = false;
-                    else
-                        console.fwcAntForm.RX1Loop = true;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    bool ans = console.fwcAntForm.RX1Loop;
-                    if (ans)
-                        return "1";
-                    else
-                        return "0";
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
-		}*/
+		}
 
 		//Sets or reads the TX relay RCA jack
-	/*	public string ZZOF(string s)
+		public string ZZOF(string s)
 		{
-			if(console.CurrentModel == Model.FLEX5000)
-			{
-				string ans = "";
-				bool rly1 = false;
-				bool rly2 = false;
-				bool rly3 = false;
-
-				if(s.Length == parser.nSet)
-				{
-					if(s.Substring(0,1) == "1")
-						console.fwcAntForm.RCATX1 = true;
-					else
-						console.fwcAntForm.RCATX1 = false;
-
-					if(s.Substring(1,1) == "1")
-						console.fwcAntForm.RCATX2 = true;
-					else
-						console.fwcAntForm.RCATX2 = false;
-
-					if(s.Substring(2,1) == "1")
-						console.fwcAntForm.RCATX3 = true;
-					else
-						console.fwcAntForm.RCATX3 = false;
-
-					return "";
-				}
-				else if(s.Length == parser.nGet)
-				{
-					rly1 = console.fwcAntForm.RCATX1;
-					rly2 = console.fwcAntForm.RCATX2;
-					rly3 = console.fwcAntForm.RCATX3;
-
-					if(rly1)
-						ans += "1";
-					else
-						ans += "0";
-					if(rly2)
-						ans += "1";
-					else
-						ans += "0";
-					if(rly3)
-						ans += "1";
-					else
-						ans += "0";
-
-					return ans;
-				}
-				else
-					return parser.Error1;
-			}
-            else if (console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet)
-                {
-                    if (s.Substring(0, 1) == "1")
-                        console.hidAntForm.PTTOut = true;
-                    else
-                        console.hidAntForm.PTTOut = false;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    bool rly1 = console.hidAntForm.PTTOut;
-                    if (rly1)
-                        return "100";
-                    else
-                        return "000";
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
-		}*/
+		}
 
 
 		//Sets or reads the TX Relay Delay enables
-	/*	public string ZZOG(string s)
+		public string ZZOG(string s)
 		{
-			if(console.CurrentModel == Model.FLEX5000)
-			{
-				string ans = "";
-				bool rly1 = false;
-				bool rly2 = false;
-				bool rly3 = false;
-
-				if(s.Length == parser.nSet)
-				{
-					if(s.Substring(0,1) == "1")
-						console.fwcAntForm.TX1DelayEnable = true;
-					else
-						console.fwcAntForm.TX1DelayEnable = false;
-
-					if(s.Substring(1,1) == "1")
-						console.fwcAntForm.TX2DelayEnable = true;
-					else
-						console.fwcAntForm.TX2DelayEnable = false;
-
-					if(s.Substring(2,1) == "1")
-						console.fwcAntForm.TX3DelayEnable = true;
-					else
-						console.fwcAntForm.TX3DelayEnable = false;
-
-					return "";
-				}
-				else if(s.Length == parser.nGet)
-				{
-					rly1 = console.fwcAntForm.TX1DelayEnable;
-					rly2 = console.fwcAntForm.TX2DelayEnable;
-					rly3 = console.fwcAntForm.TX3DelayEnable;
-
-					if(rly1)
-						ans += "1";
-					else
-						ans += "0";
-					if(rly2)
-						ans += "1";
-					else
-						ans += "0";
-					if(rly3)
-						ans += "1";
-					else
-						ans += "0";
-
-					return ans;
-				}
-				else
-					return parser.Error1;	
-			}
-            else if (console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet)
-                {
-                    if (s.Substring(0, 1) == "1")
-                        console.hidAntForm.TX1DelayEnable = true;
-                    else
-                        console.hidAntForm.TX1DelayEnable = false;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    bool rly1 = console.hidAntForm.TX1DelayEnable;
-                    if (rly1)
-                        return "100";
-                    else
-                        return "000";
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
-
-		}*/
+		}
 
 		//Sets or reads the TX Relay Delays
-	/*	public string ZZOH(string s)
+		public string ZZOH(string s)
 		{
-			string ans = "";
-			uint delay = 0;
-			string relay = s.Substring(0,1);
-
-			if(console.CurrentModel == Model.FLEX5000)
-			{
-
-				if(s.Length == parser.nSet)
-				{
-					delay = uint.Parse(s.Substring(1,4));
-
-					if(relay == "1")
-						console.fwcAntForm.TX1Delay = delay;
-					else
-					if(relay == "2")
-						console.fwcAntForm.TX2Delay = delay;
-					else
-					if(relay == "3")
-						console.fwcAntForm.TX3Delay = delay;
-
-					return "";
-				}
-				else if(s.Length == parser.nGet)
-				{
-					if(relay == "1")
-						delay = console.fwcAntForm.TX1Delay;
-					else
-					if(relay == "2")
-						delay = console.fwcAntForm.TX2Delay;
-					else
-					if(relay == "3")
-						delay = console.fwcAntForm.TX3Delay;
-
-					ans = AddLeadingZeros((int)delay);
-					return " "+ans.Substring(1,4);
-				}
-				else 
-					return parser.Error1;
-			}
-            if (console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet)
-                {
-                    delay = uint.Parse(s.Substring(1, 4));
-                    console.hidAntForm.TX1Delay = delay;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    delay = console.hidAntForm.TX1Delay;
-                    ans = AddLeadingZeros((int)delay);
-                    return " " + ans.Substring(1, 4);
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
-		} */
+		} 
 
-		/*public string ZZOJ(string s)
+		public string ZZOJ(string s)
 		{
-			if(console.CurrentModel == Model.FLEX5000)
-			{
-				if(s.Length == parser.nSet)
-				{
-					if(s == "0")
-						console.fwcAntForm.AntLock = false;
-					else
-						console.fwcAntForm.AntLock = true;
-					return "";
-				}
-				else if(s.Length == parser.nGet)
-				{
-					bool Lock = console.fwcAntForm.AntLock;
-					if(Lock)
-						return "1";
-					else
-						return "0";
-				}
-				else
-					return parser.Error1;
-			}
-            if (console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet)
-                {
-                    if (s == "0")
-                        console.hidAntForm.AntLock = false;
-                    else
-                        console.hidAntForm.AntLock = true;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    bool Lock = console.hidAntForm.AntLock;
-                    if (Lock)
-                        return "1";
-                    else
-                        return "0";
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
-*/
+
         // Sets or reads the DigL Click Tune Offset
         public string ZZOL(string s)
         {
@@ -4200,6 +4001,20 @@ namespace PowerSDR
                 return parser.Error1;
         }
 
+        //Sets or reads the console ATU button
+        public string ZZOV(string s)
+        {
+                parser.Verbose_Error_Code = 7;
+                return parser.Error1;
+        }
+
+        //Sets or reads the console ATU Bypass button
+        public string ZZOW(string s)
+        {
+                 parser.Verbose_Error_Code = 7;
+                return parser.Error1;
+        }
+
         // Sets or reads the DigU Click Tune Offset
         public string ZZOU(string s)
         {
@@ -4228,7 +4043,7 @@ namespace PowerSDR
 
 
 		// Sets or reads the Preamp thumbwheel
-		/*public string ZZPA(string s)
+		public string ZZPA(string s)
 		{
 			int n = 0;
 			if(s != "")
@@ -4284,6 +4099,9 @@ namespace PowerSDR
                 {
                     if (n <= 3 && n >= 0)
                     {
+                        double freq = console.VFOAFreq;
+                        if (FWCEEPROM.TRXRev >> 8 < 6)    //before Rev G.
+                        {
                         switch (s)
                         {
                             case "0":
@@ -4292,41 +4110,54 @@ namespace PowerSDR
                             case "1":
                                 console.CATPreamp = PreampMode.LOW;
                                 break;
+                                default:
+                                    break;
+                            }
+                            if (freq > 2.0)
+                            {
+                                switch (s)
+                                {
                             case "2":
                                 console.CATPreamp = PreampMode.MED;
                                 break;
-                            //  case "3":
-                            //       console.CATPreamp = PreampMode.HIGH;
-                            //       break;
+                                    case "3":
+                                        console.CATPreamp = PreampMode.HIGH;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                        else  //Rev G+
+                        {
+                            switch (s)
+                            {
+                                case "0":
+                                    console.CATPreamp = PreampMode.OFF;
+                                    break;
+                                case "1":
+                                    console.CATPreamp = PreampMode.LOW;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            if ((freq > 7.000 && freq < 13.000) && s == "2")
+                            {
+                                console.CATPreamp = PreampMode.MED;
+                            }
+                            else if(freq >= 13.000 && (s == "2" || s == "3"))
+                                switch (s)
+                                {
+                                    case "2":
+                                        console.CATPreamp = PreampMode.MED;
+                                        break;
+                                    case "3":
+                                        console.CATPreamp = PreampMode.HIGH;
+                                        break;
+                                }
+
                         }
                         return "";
-                    }
-                    else
-                        return parser.Error1;
-                }
-                else if (console.CurrentModel == Model.FLEX1500)
-                {
-                    if (n <= 4 && n >= 0)
-                    {
-                        switch (s)
-                        {
-                            case "0":
-                                console.RX1PreampMode = PreampMode.OFF;
-                                break;
-                            case "1":
-                                console.RX1PreampMode = PreampMode.LOW;
-                                break;
-                            case "2":
-                                console.RX1PreampMode = PreampMode.MED;
-                                break;
-                            case "3":
-                                console.RX1PreampMode = PreampMode.HIGH;
-                                break;
-                            case "4":
-                                console.RX1PreampMode = PreampMode.LAST;
-                                break;
-                        }
-                       return "";
                     }
                     else
                         return parser.Error1;
@@ -4359,40 +4190,18 @@ namespace PowerSDR
                         else
                             cat_mode = "0";
                         break;
-                    case Model.FLEX1500:
-                        switch ((FLEX1500PreampMode)e_mode)
-                        {
-                            case FLEX1500PreampMode.MINUS_10:
-                                cat_mode = "0";
-                                break;
-                            case FLEX1500PreampMode.ZERO:
-                                cat_mode = "1";
-                                break;
-                            case FLEX1500PreampMode.PLUS_10:
-                                cat_mode = "2";
-                                break;
-                            case FLEX1500PreampMode.PLUS_20:
-                                cat_mode = "3";
-                                break;
-                            case FLEX1500PreampMode.PLUS_30:
-                                cat_mode = "4";
-                                break;
-                        }
-                        break;
-                }
+               }
                 return cat_mode;
             }
             else
             {
                 return parser.Error1;
             }
-		}*/
+		}
 
         //Sets or reads the RX2 Preamp button
         public string ZZPB(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000 )
-            {
                 if (s.Length == parser.nGet)
                 {
                     if (console.RX2PreampMode == PreampMode.OFF)
@@ -4410,13 +4219,7 @@ namespace PowerSDR
                 }
                 else
                     return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
-
+ 
         }
 
 		//Sets or reads the Drive level
@@ -4882,8 +4685,6 @@ namespace PowerSDR
 		//Sets or reads the RX2 button status
         public string ZZRS(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000 )
-            {
                 if (s.Length == parser.nSet)
                 {
                     if (s == "0")
@@ -4903,13 +4704,7 @@ namespace PowerSDR
                 {
                     return parser.Error1;
                 }
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-            }
-        }
+          }
 
 
 		//Sets or reads the RIT button status
@@ -4984,53 +4779,34 @@ namespace PowerSDR
 		//Moves VFO A down one Tune Step
 		public string ZZSA()
 		{
+            try
+            {
             int step = console.TuneStepIndex;
-			double[] wheel_tune_list;
-			wheel_tune_list = new double[15];		// initialize wheel tuning list array
-			wheel_tune_list[0]  =  0.000001;
-			wheel_tune_list[1]  =  0.000010;
-			wheel_tune_list[2]  =  0.000050;
-			wheel_tune_list[3]  =  0.000100;
-			wheel_tune_list[4]  =  0.000250;
-			wheel_tune_list[5]  =  0.000500;
-			wheel_tune_list[6]  =  0.001000;
-			wheel_tune_list[7]  =  0.005000;
-			wheel_tune_list[8]  =  0.009000;
-			wheel_tune_list[9]  =  0.010000;
-			wheel_tune_list[10] =  0.100000;
-            wheel_tune_list[11] =  0.250000;
-            wheel_tune_list[12] =  0.500000;
-			wheel_tune_list[13] =  1.000000;
-			wheel_tune_list[14] = 10.000000;
-
-			console.VFOAFreq = console.CATVFOA - wheel_tune_list[step];
+                List<TuneStep> tune_list = console.TuneStepList;
+                console.VFOAFreq = console.CATVFOA - tune_list[step].StepHz * 10e-7;
 			return "";
+		}
+            catch (Exception)
+            {
+                return parser.Error1;
+            }
 		}
 
 		//Moves VFO A up one Tune Step
 		public string ZZSB()
 		{
+            try
+            {
             int step = console.TuneStepIndex;
-			double[] wheel_tune_list;
-            wheel_tune_list = new double[15];		// initialize wheel tuning list array
-            wheel_tune_list[0] = 0.000001;
-            wheel_tune_list[1] = 0.000010;
-            wheel_tune_list[2] = 0.000050;
-            wheel_tune_list[3] = 0.000100;
-            wheel_tune_list[4] = 0.000250;
-            wheel_tune_list[5] = 0.000500;
-            wheel_tune_list[6] = 0.001000;
-            wheel_tune_list[7] = 0.005000;
-            wheel_tune_list[8] = 0.009000;
-            wheel_tune_list[9] = 0.010000;
-            wheel_tune_list[10] = 0.100000;
-            wheel_tune_list[11] = 0.250000;
-            wheel_tune_list[12] = 0.500000;
-            wheel_tune_list[13] = 1.000000;
-            wheel_tune_list[14] = 10.000000;
+                List<TuneStep> tune_list = console.TuneStepList;
+                console.VFOAFreq = console.CATVFOA + tune_list[step].StepHz * 10e-7;
+                return "";
+            }
+            catch (Exception)
+            {
+                return parser.Error1;
+            }
 
-			console.VFOAFreq = console.CATVFOA + wheel_tune_list[step];
-			return "";
 		}
 
 		//Moves the mouse wheel tuning step down
@@ -5053,54 +4829,35 @@ namespace PowerSDR
         //Moves VFO B down one Tune Step
         public string ZZSG()
         {
+            try
+            {
             int step = console.TuneStepIndex;
-            double[] wheel_tune_list;
-            wheel_tune_list = new double[15];		// initialize wheel tuning list array
-            wheel_tune_list[0] = 0.000001;
-            wheel_tune_list[1] = 0.000010;
-            wheel_tune_list[2] = 0.000050;
-            wheel_tune_list[3] = 0.000100;
-            wheel_tune_list[4] = 0.000250;
-            wheel_tune_list[5] = 0.000500;
-            wheel_tune_list[6] = 0.001000;
-            wheel_tune_list[7] = 0.005000;
-            wheel_tune_list[8] = 0.009000;
-            wheel_tune_list[9] = 0.010000;
-            wheel_tune_list[10] = 0.100000;
-            wheel_tune_list[11] = 0.250000;
-            wheel_tune_list[12] = 0.500000;
-            wheel_tune_list[13] = 1.000000;
-            wheel_tune_list[14] = 10.000000;
-
-            console.VFOBFreq = console.CATVFOB - wheel_tune_list[step];
+                List<TuneStep> tune_list = console.TuneStepList;
+                console.VFOBFreq = console.CATVFOB - tune_list[step].StepHz * 10e-7;
             return "";
         }
+            catch (Exception)
+            {
+                return parser.Error1;
+            }
+		}
+
 
         //Moves VFO B up one Tune Step
         public string ZZSH()
         {
+           try
+            {
             int step = console.TuneStepIndex;
-            double[] wheel_tune_list;
-            wheel_tune_list = new double[15];		// initialize wheel tuning list array
-            wheel_tune_list[0] = 0.000001;
-            wheel_tune_list[1] = 0.000010;
-            wheel_tune_list[2] = 0.000050;
-            wheel_tune_list[3] = 0.000100;
-            wheel_tune_list[4] = 0.000250;
-            wheel_tune_list[5] = 0.000500;
-            wheel_tune_list[6] = 0.001000;
-            wheel_tune_list[7] = 0.005000;
-            wheel_tune_list[8] = 0.009000;
-            wheel_tune_list[9] = 0.010000;
-            wheel_tune_list[10] = 0.100000;
-            wheel_tune_list[11] = 0.250000;
-            wheel_tune_list[12] = 0.500000;
-            wheel_tune_list[13] = 1.000000;
-            wheel_tune_list[14] = 10.000000;
-
-            console.VFOBFreq = console.CATVFOB + wheel_tune_list[step];
+                List<TuneStep> tune_list = console.TuneStepList;
+                console.VFOBFreq = console.CATVFOB + tune_list[step].StepHz * 10e-7;
             return "";
         }
+            catch (Exception)
+            {
+                return parser.Error1;
+            }
+		}
 
 		// Reads the S Meter value
 		public string ZZSM(string s)
@@ -5167,38 +4924,15 @@ namespace PowerSDR
 		}
 
         //Reads the radio serial number
-      /*  public string ZZSN()
+        public string ZZSN()
         {
             uint sn;
             string ret_val = "";
-            switch (console.CurrentModel)
-            {
-                case Model.DEMO:
-                    ret_val = "0000-0000";
-                    break;
-                case Model.FLEX1500:
-                    sn = HIDEEPROM.SerialNumber;
-                    if (sn > 0)
-                        ret_val = HIDEEPROM.SerialToString(sn);
-                    else
-                        ret_val = parser.Error1;
-                    break;
-                case Model.FLEX3000:
-                case Model.FLEX5000:
-                    sn = FWCEEPROM.SerialNumber;
-                    if (sn > 0)
-                        ret_val = FWCEEPROM.SerialToString(sn);
-                    else
-                        ret_val = parser.Error1;
-                    break;
-                default:
-                    parser.Verbose_Error_Code = 7;
+                     parser.Verbose_Error_Code = 7;
                     ret_val = parser.Error1;
-                    break;
-            }
 
             return ret_val;
-        } */
+        }
 
 		// Sets or reads the VFO Split status
 		public string ZZSP(string s)
@@ -5254,8 +4988,17 @@ namespace PowerSDR
 			if(s.Length == parser.nSet)
 			{
 				level = Convert.ToInt32(s);
+                if (console.RX1DSPMode == DSPMode.FM)
+                {
 				level = Math.Max(0, level);			// lower bound
-				level = Math.Min(160, level);		// upper bound
+                    level = Math.Min(100, level);		// upper bound
+                    level = level * -1;
+                }
+                else
+                {
+                    level = Math.Max(0, level);
+                    level = Math.Min(160, level);
+                }
                 OldSq = ZZSO("");
                 if (OldSq == "0")
                 {
@@ -5270,13 +5013,9 @@ namespace PowerSDR
 				return "";
 			}
 			else if(s.Length == parser.nGet)
-			{
 				return AddLeadingZeros(Math.Abs(console.Squelch));
-			}
 			else
-			{
 				return parser.Error1;
-			}
 
 		}
 		
@@ -5304,11 +5043,11 @@ namespace PowerSDR
 
 		}
 
-    /*    public string ZZSS()
+        public string ZZSS()
         {
             console.CWXForm.CWXStop();
             return "";
-        } */
+        } 
 
 		// Reads the current console step size (read-only property)
 		public string ZZST()
@@ -5323,6 +5062,23 @@ namespace PowerSDR
 			console.CATTuneStepUp();
 			return "";
 		}
+
+        // Sets or reads the RX2 Squelch button
+        public string ZZSV(string s)
+        {
+                if (s.Length == parser.nSet && (s == "0" || s == "1"))
+                {
+                    console.CATSquelch2 = s;
+                    return "";
+                }
+                else if (s.Length == parser.nGet)
+                {
+                    return console.CATSquelch2;
+                }
+                else
+                    return parser.Error1;
+        
+        }
 
         //Swaps VFO A/B TX buttons
         public string ZZSW(string s)
@@ -5351,6 +5107,49 @@ namespace PowerSDR
 
         }
 
+        //Sets or reads the RX2 Squelch threshold
+        public string ZZSX(string s)
+        {
+                int level = 0;
+                string OldSq;
+                int ThisNset = 3;
+                int TempNset = 1;
+
+                if (s.Length == parser.nSet)
+                {
+                    level = Convert.ToInt32(s);
+                    if (console.RX2DSPMode == DSPMode.FM)
+                    {
+                        level = Math.Max(0, level);			// lower bound
+                        level = Math.Min(100, level);		// upper bound
+                        level = level * -1;
+                    }
+                    else
+                    {
+                        level = Math.Max(0, level);
+                        level = Math.Min(160, level);
+                    }
+                    OldSq = ZZSV("");
+                    if (OldSq == "0")
+                    {
+                        parser.nSet = TempNset;
+                        ZZSV("1");
+                        parser.nSet = ThisNset;
+                    }
+                    console.Squelch2 = level * -1;
+                    parser.nSet = TempNset;
+                    ZZSV(OldSq);
+                    parser.nSet = ThisNset;
+                    return "";
+                }
+                else if (s.Length == parser.nGet)
+                    return AddLeadingZeros(Math.Abs(console.Squelch2));
+                else
+                    return parser.Error1;
+
+         }
+                    
+
 
         //Reads or sets the VFO Sync button status
         public string ZZSY(string s)
@@ -5372,6 +5171,25 @@ namespace PowerSDR
             }
             else
                 return parser.Error1;
+        }
+
+        //Syncs the chosen vfo to the selected tune step
+        //write only
+        public string ZZSZ(string s)
+        {
+            double oldfreq;
+            double newfreq;
+            int size = console.CurrentTuneStepHz;
+            if (s == "0")
+                oldfreq = console.VFOAFreq;
+            else
+                oldfreq = console.VFOBFreq;
+            newfreq = console.SnapTune(oldfreq, size, 1);
+            if (s == "0")
+                console.VFOAFreq = newfreq;
+            else
+                console.VFOBFreq = newfreq;
+            return "";
         }
 
         //Sets or reads the CTCSS enable button
@@ -5435,8 +5253,6 @@ namespace PowerSDR
 			{
 				case DSPMode.CWL:
 				case DSPMode.CWU:
-				case DSPMode.DIGL:
-				case DSPMode.DIGU:
 					return parser.Error1;
 				default:
 					if(s.Length == parser.nSet && (s == "0" || s == "1"))
@@ -5657,8 +5473,7 @@ namespace PowerSDR
         //Sets or reads the transmit VFO frequency when in split with RX2 enabled
         public string ZZTV(string s)
         {
-            if (console.CurrentModel == Model.FLEX5000  &&
-                ZZRS("") == "1" && (ZZSP("") == "1" || ZZMU("") == "1"))
+            if (ZZRS("") == "1" && (ZZSP("") == "1" || ZZMU("") == "1"))
             {
                 if (s.Length == parser.nSet)
                 {
@@ -5670,15 +5485,15 @@ namespace PowerSDR
                     int f = Convert.ToInt32(Math.Round(console.VFOASubFreq, 6) * 1e6);
                     return AddLeadingZeros(f);
                 }
-                else
-                    return parser.Error1;
+            else
+                return parser.Error1;
             }
             else
             {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
             }
-
+          
         }
 
 		//Sets or reads the MOX button status
@@ -5881,12 +5696,18 @@ namespace PowerSDR
 					case "22050":
 						ans = "5";
 						break;
-					case "41000":
+					case "44100":
 						ans = "6";
 						break;
 					case "48000":
 						ans = "7";
 						break;
+                    case "96000":
+                        ans = "8";
+                        break;
+                    case "192000":
+                        ans = "9";
+                        break;
 					default:
 						ans = parser.Error1;
 						break;
@@ -6005,7 +5826,7 @@ namespace PowerSDR
 		}
 
         // Reads or sets the VAC Input cable
-     /*   public string ZZVI(string s)
+        public string ZZVI(string s)
         {
             if (s.Length == parser.nSet)
             {
@@ -6019,10 +5840,10 @@ namespace PowerSDR
             }
             else
                 return parser.Error1;
-        } */
+        } 
 
         //Reads or sets the Direct I/Q Use RX2 checkbox
-     /*   public string ZZVJ(string s)
+        public string ZZVJ(string s)
         {
             if (s.Length == parser.nSet && (s == "0" || s == "1") && console.SetupForm.IQOutToVAC)
             {
@@ -6043,7 +5864,32 @@ namespace PowerSDR
             else
                 return parser.Error1;
 
-        } */
+        } 
+
+        // Reads or sets the VAC2 Enable checkbox (Setup Form)
+        public string ZZVK(string s)
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                if (s == "1")
+                    console.SetupForm.VAC2Enable = true;
+                else
+                    console.SetupForm.VAC2Enable = false;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                if (console.SetupForm.VAC2Enable)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+
+        }
 
 
 		// Reads or sets the VFO Lock button status
@@ -6072,7 +5918,7 @@ namespace PowerSDR
 		}
 
         // Reads or sets the VAC Driver
-     /*   public string ZZVM(string s)
+        public string ZZVM(string s)
         {
             if (s.Length == parser.nSet)
             {
@@ -6086,7 +5932,7 @@ namespace PowerSDR
             }
             else
                 return parser.Error1;
-        } */
+        } 
 
 
 		// Returns the version number of the PowerSDR program
@@ -6096,7 +5942,7 @@ namespace PowerSDR
 		}
 
         // Reads or sets the VAC Output cable
-     /*   public string ZZVO(string s)
+        public string ZZVO(string s)
         {
             if (s.Length == parser.nSet)
             {
@@ -6110,11 +5956,68 @@ namespace PowerSDR
             }
             else
                 return parser.Error1;
-        } */
+        }
 
+        // Reads or sets the VAC1 IQ Calibrate checkbox on the setup form
+        public string ZZVP(string s)
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                if (s == "0")
+                    console.SetupForm.VAC1Calibrate = false;
+                else if (s == "1")
+                    console.SetupForm.VAC1Calibrate = true;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                bool retval = console.SetupForm.VAC1Calibrate;
+                if (retval)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
 
+        // Reads or sets the VAC2 Driver
+        public string ZZVQ(string s)
+        {
+            if (s.Length == parser.nSet)
+            {
+                console.SetupForm.VAC2Driver = Convert.ToInt32(s);
+                return "";
+            }
 
-		// Sets the VFO swap status
+            if (s.Length == parser.nGet)
+            {
+                return AddLeadingZeros(console.SetupForm.VAC2Driver);
+            }
+            else
+                return parser.Error1;
+        }
+
+        // Reads or sets the VAC2 Input cable
+        public string ZZVR(string s)
+        {
+            if (s.Length == parser.nSet)
+            {
+                console.SetupForm.VAC2InputCable = Convert.ToInt32(s);
+                return "";
+            }
+
+            if (s.Length == parser.nGet)
+            {
+                return AddLeadingZeros(console.SetupForm.VAC2InputCable);
+            }
+            else
+                return parser.Error1;
+        }
+
+        // Sets the VFO swap status
 		// write only
 		public string ZZVS(string s)
 		{
@@ -6130,8 +6033,330 @@ namespace PowerSDR
 
 		}
 
-		//Sets or reads the F5K Mixer Mic Gain
-	/*	public string ZZWA(string s)
+        // Reads or sets the VAC2 Output cable
+        public string ZZVT(string s)
+        {
+            if (s.Length == parser.nSet)
+            {
+                console.SetupForm.VAC2OutputCable = Convert.ToInt32(s);
+                return "";
+            }
+
+            if (s.Length == parser.nGet)
+            {
+                return AddLeadingZeros(console.SetupForm.VAC2OutputCable);
+            }
+            else
+                return parser.Error1;
+        }
+
+        /// <summary>
+        /// Sets or reads the VAC2 Sample Rate
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public string ZZVU(string s)
+        {
+            int n = -1;
+
+            if (s.Length == parser.nSet)
+            {
+                n = Convert.ToInt32(s);
+                switch (n)
+                {
+                    case 0:
+                        console.SetupForm.VAC2SampleRate = "6000";
+                        break;
+                    case 1:
+                        console.SetupForm.VAC2SampleRate = "8000";
+                        break;
+                    case 2:
+                        console.SetupForm.VAC2SampleRate = "11025";
+                        break;
+                    case 3:
+                        console.SetupForm.VAC2SampleRate = "12000";
+                        break;
+                    case 4:
+                        console.SetupForm.VAC2SampleRate = "24000";
+                        break;
+                    case 5:
+                        console.SetupForm.VAC2SampleRate = "22050";
+                        break;
+                    case 6:
+                        console.SetupForm.VAC2SampleRate = "44100";
+                        break;
+                    case 7:
+                        console.SetupForm.VAC2SampleRate = "48000";
+                        break;
+                    case 8:
+                        console.SetupForm.VAC2SampleRate = "96000";
+                        break;
+                    case 9:
+                        console.SetupForm.VAC2SampleRate = "192000";
+                        break;
+                }
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                string rate = console.SetupForm.VAC2SampleRate;
+                string ans = "";
+
+                switch (rate)
+                {
+                    case "6000":
+                        ans = "0";
+                        break;
+                    case "8000":
+                        ans = "1";
+                        break;
+                    case "11025":
+                        ans = "2";
+                        break;
+                    case "12000":
+                        ans = "3";
+                        break;
+                    case "24000":
+                        ans = "4";
+                        break;
+                    case "22050":
+                        ans = "5";
+                        break;
+                    case "44100":
+                        ans = "6";
+                        break;
+                    case "48000":
+                        ans = "7";
+                        break;
+                    case "96000":
+                        ans = "8";
+                        break;
+                    case "192000":
+                        ans = "9";
+                        break;
+                    default:
+                        ans = parser.Error1;
+                        break;
+                }
+                return ans;
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        /// Sets or reads the VAC2 Stereo checkbox
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public string ZZVV(string s)
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                if (s == "1")
+                    console.SetupForm.VAC2Stereo = true;
+                else
+                    console.SetupForm.VAC2Stereo = false;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                if (console.SetupForm.VAC2Stereo)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+
+        }
+
+        public string ZZVW(string s)
+        {
+            int n = 0;
+            int x = 0;
+            string sign;
+
+            if (s != "")
+            {
+                n = Convert.ToInt32(s);
+                n = Math.Max(-40, n);
+                n = Math.Min(40, n);
+            }
+
+            if (s.Length == parser.nSet)
+            {
+                console.SetupForm.VAC2RXGain = n;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                x = console.SetupForm.VAC2RXGain;
+                if (x >= 0)
+                    sign = "+";
+                else
+                    sign = "-";
+                // we have to remove the leading zero and replace it with the sign.
+                return sign + AddLeadingZeros(Math.Abs(x)).Substring(1);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        /// <summary>
+        /// Sets or reads the VAC2 TX Gain
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public string ZZVX(string s)
+        {
+            int n = 0;
+            int x = 0;
+            string sign;
+
+            if (s != "")
+            {
+                n = Convert.ToInt32(s);
+                n = Math.Max(-40, n);
+                n = Math.Min(40, n);
+            }
+
+            if (s.Length == parser.nSet)
+            {
+                console.SetupForm.VAC2TXGain = n;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                x = console.SetupForm.VAC2TXGain;
+                if (x >= 0)
+                    sign = "+";
+                else
+                    sign = "-";
+                // we have to remove the leading zero and replace it with the sign.
+                return sign + AddLeadingZeros(Math.Abs(x)).Substring(1);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        /// <summary>
+        /// Sets or reads the VAC1 Buffer Size
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public string ZZVY(string s)
+        {
+            int n = -1;
+
+            if (s.Length == parser.nSet)
+            {
+                n = Convert.ToInt32(s);
+                switch (n)
+                {
+                    case 0:
+                        console.SetupForm.VAC1BufferSize = "512";
+                        break;
+                    case 1:
+                        console.SetupForm.VAC1BufferSize = "1024";
+                        break;
+                    case 2:
+                        console.SetupForm.VAC1BufferSize = "2048";
+                        break;
+                }
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                string rate = console.SetupForm.VAC1BufferSize;
+                string ans = "";
+
+                switch (rate)
+                {
+                    case "512":
+                        ans = "0";
+                        break;
+                    case "1024":
+                        ans = "1";
+                        break;
+                    case "2048":
+                        ans = "2";
+                        break;
+                    default:
+                        ans = parser.Error1;
+                        break;
+                }
+                return ans;
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        /// <summary>
+        /// Sets or reads the VAC1 Buffer Size
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public string ZZVZ(string s)
+        {
+            int n = -1;
+
+            if (s.Length == parser.nSet)
+            {
+                n = Convert.ToInt32(s);
+                switch (n)
+                {
+                    case 0:
+                        console.SetupForm.VAC2BufferSize = "512";
+                        break;
+                    case 1:
+                        console.SetupForm.VAC2BufferSize = "1024";
+                        break;
+                    case 2:
+                        console.SetupForm.VAC2BufferSize = "2048";
+                        break;
+                }
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                string rate = console.SetupForm.VAC2BufferSize;
+                string ans = "";
+
+                switch (rate)
+                {
+                    case "512":
+                        ans = "0";
+                        break;
+                    case "1024":
+                        ans = "1";
+                        break;
+                    case "2048":
+                        ans = "2";
+                        break;
+                    default:
+                        ans = parser.Error1;
+                        break;
+                }
+                return ans;
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        //Sets or reads the F5K Mixer Mic Gain
+		public string ZZWA(string s)
 		{
             if (console.CurrentModel == Model.FLEX5000)
             {
@@ -6318,601 +6543,130 @@ namespace PowerSDR
 		// Sets or reads the F1500F5K Mixer Mic Selected Checkbox
 		public string ZZWE(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet && (s == "0" || s == "1"))
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        console.fwcMixForm.MicInputSelected = s;
-                    else
-                        console.flex1500MixerForm.MicInputSelectedStr = s;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        return console.fwcMixForm.MicInputSelected;
-                    else
-                        return console.flex1500MixerForm.MicInputSelectedStr;
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		// Sets or reads the F5K Mixer Line In RCA Checkbox
 		public string ZZWF(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000)
-            {
-                if (s.Length == parser.nSet && (s == "0" || s == "1"))
-                {
-                    console.fwcMixForm.LineInRCASelected = s;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    return console.fwcMixForm.LineInRCASelected;
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		// Sets or reads the F5K Mixer Line In Phono Checkbox
 		public string ZZWG(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000)
-            {
-                if (s.Length == parser.nSet && (s == "0" || s == "1"))
-                {
-                    console.fwcMixForm.LineInPhonoSelected = s;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    return console.fwcMixForm.LineInPhonoSelected;
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		// Sets or reads the F1500/F5K Mixer Line In FlexWire/DB9 Checkbox
 		public string ZZWH(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet && (s == "0" || s == "1"))
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        console.fwcMixForm.LineInDB9Selected = s;
-                    else
-                        console.flex1500MixerForm.LineInDB9Selected = s;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        return console.fwcMixForm.LineInDB9Selected;
-                    else
-                        return console.flex1500MixerForm.LineInDB9Selected;
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		} 
 
 
 		// Sets or reads the F5K Mixer Mute All Checkbox
 		public string ZZWJ(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet && (s == "0" || s == "1"))
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        console.fwcMixForm.InputMuteAll = s;
-                    else
-                        console.flex1500MixerForm.InputMuteAll = s;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        return console.fwcMixForm.InputMuteAll;
-                    else
-                        return console.flex1500MixerForm.InputMuteAll;
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		//Sets or reads the F5K Mixer Internal Speaker level
 		public string ZZWK(string s)
 		{
-//			if(console.CurrentModel == Model.FLEX5000)
-            if (FWCEEPROM.Model == 1) // FLEX-5000C
-            {
-                int n = 0;
-                int x = 0;
-
-                if (s != "")
-                {
-                    n = Int32.Parse(s);
-                    n = Math.Max(128, n);
-                    n = Math.Min(255, n);
-                }
-
-                if (s.Length == parser.nSet)
-                {
-                    if (console.fwcMixForm.InternalSpkrSelected == "1")
-                    {
-                        console.fwcMixForm.InternalSpkr = n;
-                        return "";
-                    }
-                    else
-                        return parser.Error1;
-
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    x = console.fwcMixForm.InternalSpkr;
-                    return AddLeadingZeros(x);
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		//Sets or reads the F5K Mixer External Speaker level
 		public string ZZWL(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000)
-            {
-                int n = 0;
-                int x = 0;
-
-                if (s != "")
-                {
-                    n = Int32.Parse(s);
-                    n = Math.Max(128, n);
-                    n = Math.Min(255, n);
-                }
-
-                if (s.Length == parser.nSet)
-                {
-                    if (console.fwcMixForm.ExternalSpkrSelected == "1")
-                    {
-                        console.fwcMixForm.ExternalSpkr = n;
-                        return "";
-                    }
-                    else
-                        return parser.Error1;
-
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    x = console.fwcMixForm.ExternalSpkr;
-                    return AddLeadingZeros(x);
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
+                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		//Sets or reads the F5K Mixer Headphone level
 		public string ZZWM(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000)
-            {
-                int n = 0;
-                int x = 0;
-
-                if (s != "")
-                {
-                    n = Int32.Parse(s);
-                    n = Math.Max(128, n);
-                    n = Math.Min(255, n);
-                }
-
-                if (s.Length == parser.nSet)
-                {
-                    if (console.fwcMixForm.HeadphoneSelected == "1")
-                    {
-                        console.fwcMixForm.Headphone = n;
-                        return "";
-                    }
-                    else
-                        return parser.Error1;
-
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    x = console.fwcMixForm.Headphone;
-                    return AddLeadingZeros(x);
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
+               parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		//Sets or reads the F5K Mixer Line Out RCA level
 		public string ZZWN(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000)
-            {
-                int n = 0;
-                int x = 0;
-
-                if (s != "")
-                {
-                    n = Int32.Parse(s);
-                    n = Math.Max(128, n);
-                    n = Math.Min(255, n);
-                }
-
-                if (s.Length == parser.nSet)
-                {
-                    if (console.fwcMixForm.LineOutRCASelected == "1")
-                    {
-                        console.fwcMixForm.LineOutRCA = n;
-                        return "";
-                    }
-                    else
-                        return parser.Error1;
-
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    x = console.fwcMixForm.LineOutRCA;
-                    return AddLeadingZeros(x);
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
+               parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		// Sets or reads the F5KC Mixer Internal Speaker Selected Checkbox
 		public string ZZWO(string s)
 		{
-            if (FWCEEPROM.Model == 1)
-            {
-                    if (s.Length == parser.nSet && (s == "0" || s == "1"))
-                    {
-                        console.fwcMixForm.InternalSpkrSelected = s;
-                        return "";
-                    }
-                    else if (s.Length == parser.nGet)
-                    {
-                        return console.fwcMixForm.InternalSpkrSelected;
-                    }
-                    else
-                        return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
+               parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		// Sets or reads the F5K Mixer External Speaker Selected Checkbox
 		public string ZZWP(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000)
-            {
-                if (s.Length == parser.nSet && (s == "0" || s == "1"))
-                {
-                    console.fwcMixForm.ExternalSpkrSelected = s;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    return console.fwcMixForm.ExternalSpkrSelected;
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
+                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		// Sets or reads the F1500F5K Mixer Headphone Selected Checkbox
 		public string ZZWQ(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet && (s == "0" || s == "1"))
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        console.fwcMixForm.HeadphoneSelected = s;
-                    else
-                        console.flex1500MixerForm.PhonesSelectedStr = s;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        return console.fwcMixForm.HeadphoneSelected;
-                    else
-                        return console.flex1500MixerForm.PhonesSelectedStr;
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		// Sets or reads the F1500 FlexWire Out/F5K Mixer Line Out RCA Selected Checkbox
 		public string ZZWR(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet && (s == "0" || s == "1"))
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        console.fwcMixForm.LineOutRCASelected = s;
-                    else
-                        console.flex1500MixerForm.FlexWireOutSelectedStr = s;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        return console.fwcMixForm.LineOutRCASelected;
-                    else
-                        return console.flex1500MixerForm.FlexWireOutSelectedStr;
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
+                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 		// Sets or reads the F1500/F5K Mixer Output Mute All Checkbox
 		public string ZZWS(string s)
 		{
-            if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX1500)
-            {
-                if (s.Length == parser.nSet && (s == "0" || s == "1"))
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        console.fwcMixForm.OutputMuteAll = s;
-                    else
-                        console.flex1500MixerForm.OutputMuteAll = s;
-                    return "";
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    if (console.CurrentModel == Model.FLEX5000)
-                        return console.fwcMixForm.OutputMuteAll;
-                    else
-                        return console.flex1500MixerForm.OutputMuteAll;
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
 
         //Reads or sets the F1500 mixer form mic level
         public string ZZWT(string s)
         {
-            if (console.CurrentModel == Model.FLEX1500)
-            {
-                int n = 0;
-
-                if (s != "")
-                {
-                    n = Int32.Parse(s);
-                    n = Math.Max(0, n);
-                    n = Math.Min(119, n);
-                }
-
-                if (s.Length == parser.nSet)
-                {
-                    if (console.flex1500MixerForm.MicInputSelectedStr == "1")
-                    {
-                        console.flex1500MixerForm.MicInput = n;
-                        return "";
-                    }
-                    else
-                        return parser.Error1;
-
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    return AddLeadingZeros(console.flex1500MixerForm.MicInput);
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
 		}
 
         //Reads or sets the F1500 Mixer Form FireWire Input Level
         public string ZZWU(string s)
         {
-            if (console.CurrentModel == Model.FLEX1500)
-            {
-                int n = 0;
-
-                if (s != "")
-                {
-                    n = Int32.Parse(s);
-                    n = Math.Max(0, n);
-                    n = Math.Min(119, n);
-                }
-
-                if (s.Length == parser.nSet)
-                {
-                    if (console.flex1500MixerForm.LineInDB9Selected == "1")
-                    {
-                        console.flex1500MixerForm.FlexWireIn = n;
-                        return "";
-                    }
-                    else
-                        return parser.Error1;
-
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    return AddLeadingZeros(console.flex1500MixerForm.FlexWireIn);
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
         }
 
         //Sets ir reads the F1500 Mixer Form Phones level
         public string ZZWV(string s)
         {
-            if (console.CurrentModel == Model.FLEX1500)
-            {
-                int n = 0;
-
-                if (s != "")
-                {
-                    n = Int32.Parse(s);
-                    n = Math.Max(0, n);
-                    n = Math.Min(127, n);
-                }
-
-                if (s.Length == parser.nSet)
-                {
-                    if (console.flex1500MixerForm.PhonesSelectedStr == "1")
-                    {
-                        console.flex1500MixerForm.Phones = n;
-                        return "";
-                    }
-                    else
-                        return parser.Error1;
-
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    return AddLeadingZeros(console.flex1500MixerForm.Phones);
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
-                parser.Verbose_Error_Code = 7;
+               parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
         }
 
         //Sets or reads the F1500 Mixer Form FlexWire Out level
         public string ZZWW(string s)
         {
-            if (console.CurrentModel == Model.FLEX1500)
-            {
-                int n = 0;
-
-                if (s != "")
-                {
-                    n = Int32.Parse(s);
-                    n = Math.Max(0, n);
-                    n = Math.Min(127, n);
-                }
-
-                if (s.Length == parser.nSet)
-                {
-                    if (console.flex1500MixerForm.FlexWireOutSelectedStr == "1")
-                    {
-                        console.flex1500MixerForm.FlexWireOut = n;
-                        return "";
-                    }
-                    else
-                        return parser.Error1;
-
-                }
-                else if (s.Length == parser.nGet)
-                {
-                    return AddLeadingZeros(console.flex1500MixerForm.FlexWireOut);
-                }
-                else
-                    return parser.Error1;
-            }
-            else
-            {
                 parser.Verbose_Error_Code = 7;
                 return parser.Error1;
-            }
-        }*/
+        }
 
 		// Clears the XIT frequency
 		// write only
@@ -7007,6 +6761,56 @@ namespace PowerSDR
 				return parser.Error1;
 			}
 		}
+
+        // Reads or sets the VAC2 Direct I/Q checkbox on the setup form
+        public string ZZYA(string s)
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                if (s == "0")
+                    console.SetupForm.VAC2DirectIQ = false;
+                else if (s == "1")
+                    console.SetupForm.VAC2DirectIQ = true;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                bool retval = console.SetupForm.VAC2DirectIQ;
+                if (retval)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        // Reads or sets the VAC2 IQ Calibrate checkbox on the setup form
+        public string ZZYB(string s)
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                if (s == "0")
+                    console.SetupForm.VAC2Calibrate = false;
+                else if (s == "1")
+                    console.SetupForm.VAC2Calibrate = true;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                bool retval = console.SetupForm.VAC2Calibrate;
+                if (retval)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
 
         //Reads or sets the FM mic gain
         public string ZZYC(string s)
@@ -7433,6 +7237,78 @@ namespace PowerSDR
             }
             return ans;
         }
+
+        private SortableBindingList<MemoryRecord> GetMemoryList()
+        {
+            try
+            {
+                return console.MemoryList.List;
+            }
+            catch
+            {
+                SortableBindingList<MemoryRecord> list = new SortableBindingList<MemoryRecord>();
+                parser.Verbose_Error_Code = 4;
+                return list;
+            }
+        }
+
+        private MemoryRecord GetChannelRecord(string channel)
+        {
+            MemoryRecord rec = new MemoryRecord();
+            try
+            {
+                SortableBindingList<MemoryRecord> list = GetMemoryList();
+                int n = 0;
+                for (n = 0; n < list.Count; n++)
+                {
+                    if (list[n].Comments.Substring(0, 4) == channel + ":")
+                        rec = list[n];
+                }
+            }
+            catch
+            {
+            }
+            return rec;
+        }
+
+        private int GetIndex(string channel)
+        {
+            int ndx = -1;
+            try
+            {
+                SortableBindingList<MemoryRecord> list = GetMemoryList();
+                int n = 0;
+                for (n = 0; n < list.Count; n++)
+                {
+                    if (list[n].Comments.Substring(0, 4) == channel + ":")
+                        ndx = n;
+                }
+            }
+            catch
+            {
+            }
+            return ndx;
+        }
+
+        private int GetNextChannelNumber()
+        {
+            SortableBindingList<MemoryRecord> list = new SortableBindingList<MemoryRecord>();
+            list = console.MemoryList.List;
+            int n = 0;
+            int last = 0;
+            for (n = 0; n < list.Count; n++)
+            {
+                if (list[n].Comments.Contains(":"))
+                {
+                    int thisN = int.Parse(list[n].Comments.Substring(0, list[n].Comments.IndexOf(":")));
+                    if (thisN > last)
+                        last = thisN;
+                }
+
+            }
+            return last+1;
+        }
+
         #endregion Repeater Methods
 
         #region Antenna Methods

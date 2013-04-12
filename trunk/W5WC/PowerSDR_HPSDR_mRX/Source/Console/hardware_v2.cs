@@ -942,7 +942,7 @@ namespace PowerSDR
             }
             else
 			{
-				LatchRegister(lpt_addr, PIO_IC8, DDSRESET | DDSWRB);	// Reset the DDS chip
+				LatchRegister(lpt_addr, PIO_IC8, (byte)(DDSRESET | DDSWRB));	// Reset the DDS chip
 				LatchRegister(lpt_addr, PIO_IC8, DDSWRB);					// Leave WRB high
 			}
 

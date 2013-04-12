@@ -4,6 +4,7 @@
 // PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2004-2009  FlexRadio Systems
 // Copyright (C) 2010-2013  Doug Wigley
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -112,13 +113,7 @@ namespace PowerSDR
         private ComboBoxTS comboKBModeDown;
         private LabelTS lblDisplayFPS;
         private NumericUpDownTS udDisplayFPS;
-        private GroupBoxTS grpGeneralDDS;
-        private LabelTS lblPLLMult;
-        private NumericUpDownTS udDDSPLLMult;
-        private LabelTS lblIFFrequency;
         private NumericUpDownTS udDDSIFFreq;
-        private LabelTS lblClockCorrection;
-        private NumericUpDownTS udDDSCorrection;
         public TabPage tpAudio;
         private TabPage tpTransmit;
         private NumericUpDownTS udTXFilterHigh;
@@ -201,17 +196,6 @@ namespace PowerSDR
         private CheckBoxTS chkGeneralEnableX2;
         private LabelTS lblGeneralX2Delay;
         private NumericUpDownTS udGeneralX2Delay;
-        private GroupBoxTS grpPABandOffset;
-        private LabelTS lblPABandOffset30;
-        private LabelTS lblPABandOffset40;
-        private LabelTS lblPABandOffset60;
-        private LabelTS lblPABandOffset80;
-        private LabelTS lblPABandOffset160;
-        private LabelTS lblPABandOffset10;
-        private LabelTS lblPABandOffset12;
-        private LabelTS lblPABandOffset15;
-        private LabelTS lblPABandOffset17;
-        private LabelTS lblPABandOffset20;
         private CheckBoxTS chkGeneralATUPresent;
         private ButtonTS btnPAGainReset;
         private ComboBoxTS comboGeneralProcessPriority;
@@ -248,16 +232,6 @@ namespace PowerSDR
         private LabelTS lblDisplayAVGTime;
         private GroupBoxTS grpTestX2;
         private GroupBoxTS grpTestAudioBalance;
-        private NumericUpDownTS udPAADC17;
-        private NumericUpDownTS udPAADC15;
-        private NumericUpDownTS udPAADC20;
-        private NumericUpDownTS udPAADC12;
-        private NumericUpDownTS udPAADC10;
-        private NumericUpDownTS udPAADC160;
-        private NumericUpDownTS udPAADC80;
-        private NumericUpDownTS udPAADC60;
-        private NumericUpDownTS udPAADC40;
-        private NumericUpDownTS udPAADC30;
         private CheckBoxTS chkGeneralUSBPresent;
         private GroupBoxTS grpPATune;
         private LabelTS lblTransmitTunePower;
@@ -274,7 +248,7 @@ namespace PowerSDR
         private LabelTS lblTestX2;
         private LabelTS lblTestToneFreq2;
         private LabelTS lblTestToneFreq1;
-        private TabPage tpCAT;
+        private TabPage tpCATControl;
         private GroupBoxTS grpPTTBitBang;
         private LabelTS lblCATPTTPort;
         private CheckBoxTS chkCATPTT_RTS;
@@ -305,167 +279,6 @@ namespace PowerSDR
         private ComboBoxTS comboKBXITUp;
         private ComboBoxTS comboKBXITDown;
         private CheckBoxTS chkDCBlock;
-        private TabPage tpExtCtrl;
-        private GroupBoxTS grpExtTX;
-        private LabelTS lblExtTXX25;
-        private LabelTS lblExtTXX24;
-        private LabelTS lblExtTXX23;
-        private LabelTS lblExtTXX22;
-        private LabelTS lblExtTX2;
-        private LabelTS lblExtTX6;
-        private LabelTS lblExtTX10;
-        private LabelTS lblExtTX12;
-        private LabelTS lblExtTX15;
-        private LabelTS lblExtTX17;
-        private LabelTS lblExtTX20;
-        private LabelTS lblExtTX30;
-        private LabelTS lblExtTX40;
-        private LabelTS lblExtTX60;
-        private LabelTS lblExtTX80;
-        private LabelTS lblExtTXX2Pins;
-        private LabelTS lblExtTXBand;
-        private LabelTS lblExtTX160;
-        private CheckBoxTS chkExtTX1603;
-        private CheckBoxTS chkExtTX1602;
-        private CheckBoxTS chkExtTX1601;
-        private LabelTS lblExtTXX21;
-        private CheckBoxTS chkExtTX1605;
-        private CheckBoxTS chkExtTX1604;
-        private GroupBoxTS grpExtRX;
-        private LabelTS lblExtRXX25;
-        private LabelTS lblExtRXX24;
-        private LabelTS lblExtRXX23;
-        private LabelTS lblExtRXX22;
-        private LabelTS lblExtRX2;
-        private LabelTS lblExtRX6;
-        private LabelTS lblExtRX10;
-        private LabelTS lblExtRX12;
-        private LabelTS lblExtRX15;
-        private LabelTS lblExtRX17;
-        private LabelTS lblExtRX20;
-        private LabelTS lblExtRX30;
-        private LabelTS lblExtRX40;
-        private LabelTS lblExtRX60;
-        private LabelTS lblExtRX80;
-        private LabelTS lblExtRXX2Pins;
-        private LabelTS lblExtRXBand;
-        private LabelTS lblExtRX160;
-        private CheckBoxTS chkExtRX1603;
-        private CheckBoxTS chkExtRX1602;
-        private CheckBoxTS chkExtRX1601;
-        private LabelTS lblExtRXX21;
-        private CheckBoxTS chkExtRX1605;
-        private CheckBoxTS chkExtRX1604;
-        private CheckBoxTS chkExtTX23;
-        private CheckBoxTS chkExtTX22;
-        private CheckBoxTS chkExtTX21;
-        private CheckBoxTS chkExtTX25;
-        private CheckBoxTS chkExtTX24;
-        private CheckBoxTS chkExtTX63;
-        private CheckBoxTS chkExtTX62;
-        private CheckBoxTS chkExtTX61;
-        private CheckBoxTS chkExtTX65;
-        private CheckBoxTS chkExtTX64;
-        private CheckBoxTS chkExtTX103;
-        private CheckBoxTS chkExtTX102;
-        private CheckBoxTS chkExtTX101;
-        private CheckBoxTS chkExtTX105;
-        private CheckBoxTS chkExtTX104;
-        private CheckBoxTS chkExtTX123;
-        private CheckBoxTS chkExtTX122;
-        private CheckBoxTS chkExtTX121;
-        private CheckBoxTS chkExtTX125;
-        private CheckBoxTS chkExtTX124;
-        private CheckBoxTS chkExtTX153;
-        private CheckBoxTS chkExtTX152;
-        private CheckBoxTS chkExtTX151;
-        private CheckBoxTS chkExtTX155;
-        private CheckBoxTS chkExtTX154;
-        private CheckBoxTS chkExtTX173;
-        private CheckBoxTS chkExtTX172;
-        private CheckBoxTS chkExtTX171;
-        private CheckBoxTS chkExtTX175;
-        private CheckBoxTS chkExtTX174;
-        private CheckBoxTS chkExtTX203;
-        private CheckBoxTS chkExtTX202;
-        private CheckBoxTS chkExtTX201;
-        private CheckBoxTS chkExtTX205;
-        private CheckBoxTS chkExtTX204;
-        private CheckBoxTS chkExtTX303;
-        private CheckBoxTS chkExtTX302;
-        private CheckBoxTS chkExtTX301;
-        private CheckBoxTS chkExtTX305;
-        private CheckBoxTS chkExtTX304;
-        private CheckBoxTS chkExtTX403;
-        private CheckBoxTS chkExtTX402;
-        private CheckBoxTS chkExtTX401;
-        private CheckBoxTS chkExtTX405;
-        private CheckBoxTS chkExtTX404;
-        private CheckBoxTS chkExtTX603;
-        private CheckBoxTS chkExtTX602;
-        private CheckBoxTS chkExtTX601;
-        private CheckBoxTS chkExtTX605;
-        private CheckBoxTS chkExtTX604;
-        private CheckBoxTS chkExtTX803;
-        private CheckBoxTS chkExtTX802;
-        private CheckBoxTS chkExtTX801;
-        private CheckBoxTS chkExtTX805;
-        private CheckBoxTS chkExtTX804;
-        private CheckBoxTS chkExtRX23;
-        private CheckBoxTS chkExtRX22;
-        private CheckBoxTS chkExtRX21;
-        private CheckBoxTS chkExtRX25;
-        private CheckBoxTS chkExtRX24;
-        private CheckBoxTS chkExtRX63;
-        private CheckBoxTS chkExtRX62;
-        private CheckBoxTS chkExtRX61;
-        private CheckBoxTS chkExtRX65;
-        private CheckBoxTS chkExtRX64;
-        private CheckBoxTS chkExtRX103;
-        private CheckBoxTS chkExtRX102;
-        private CheckBoxTS chkExtRX101;
-        private CheckBoxTS chkExtRX105;
-        private CheckBoxTS chkExtRX104;
-        private CheckBoxTS chkExtRX123;
-        private CheckBoxTS chkExtRX122;
-        private CheckBoxTS chkExtRX121;
-        private CheckBoxTS chkExtRX125;
-        private CheckBoxTS chkExtRX124;
-        private CheckBoxTS chkExtRX153;
-        private CheckBoxTS chkExtRX152;
-        private CheckBoxTS chkExtRX151;
-        private CheckBoxTS chkExtRX155;
-        private CheckBoxTS chkExtRX154;
-        private CheckBoxTS chkExtRX173;
-        private CheckBoxTS chkExtRX172;
-        private CheckBoxTS chkExtRX171;
-        private CheckBoxTS chkExtRX175;
-        private CheckBoxTS chkExtRX174;
-        private CheckBoxTS chkExtRX203;
-        private CheckBoxTS chkExtRX202;
-        private CheckBoxTS chkExtRX201;
-        private CheckBoxTS chkExtRX205;
-        private CheckBoxTS chkExtRX204;
-        private CheckBoxTS chkExtRX303;
-        private CheckBoxTS chkExtRX302;
-        private CheckBoxTS chkExtRX301;
-        private CheckBoxTS chkExtRX305;
-        private CheckBoxTS chkExtRX304;
-        private CheckBoxTS chkExtRX403;
-        private CheckBoxTS chkExtRX402;
-        private CheckBoxTS chkExtRX401;
-        private CheckBoxTS chkExtRX405;
-        private CheckBoxTS chkExtRX404;
-        private CheckBoxTS chkExtRX603;
-        private CheckBoxTS chkExtRX602;
-        private CheckBoxTS chkExtRX601;
-        private CheckBoxTS chkExtRX605;
-        private CheckBoxTS chkExtRX604;
-        private CheckBoxTS chkExtRX803;
-        private CheckBoxTS chkExtRX802;
-        private CheckBoxTS chkExtRX801;
-        private CheckBoxTS chkExtRX805;
-        private CheckBoxTS chkExtRX804;
         private ButtonTS btnCATTest;
         private TabControl tcAudio;
         private NumericUpDownTS udAudioLineIn1;
@@ -565,33 +378,6 @@ namespace PowerSDR
         private LabelTS lblDSPNB2Threshold;
         private NumericUpDownTS udDSPNB2;
         private CheckBoxTS chkCWKeyerRevPdl;
-        private CheckBoxTS chkExtEnable;
-        private CheckBoxTS chkExtRX26;
-        private CheckBoxTS chkExtRX66;
-        private CheckBoxTS chkExtRX106;
-        private CheckBoxTS chkExtRX126;
-        private CheckBoxTS chkExtRX156;
-        private CheckBoxTS chkExtRX176;
-        private CheckBoxTS chkExtRX206;
-        private CheckBoxTS chkExtRX306;
-        private CheckBoxTS chkExtRX406;
-        private CheckBoxTS chkExtRX606;
-        private CheckBoxTS chkExtRX806;
-        private CheckBoxTS chkExtRX1606;
-        private LabelTS lblExtRXX26;
-        private LabelTS lblExtTXX26;
-        private CheckBoxTS chkExtTX26;
-        private CheckBoxTS chkExtTX66;
-        private CheckBoxTS chkExtTX106;
-        private CheckBoxTS chkExtTX126;
-        private CheckBoxTS chkExtTX156;
-        private CheckBoxTS chkExtTX176;
-        private CheckBoxTS chkExtTX206;
-        private CheckBoxTS chkExtTX306;
-        private CheckBoxTS chkExtTX406;
-        private CheckBoxTS chkExtTX606;
-        private CheckBoxTS chkExtTX806;
-        private CheckBoxTS chkExtTX1606;
         private GroupBoxTS grpTXProfile;
         private ButtonTS btnTXProfileSave;
         private ComboBoxTS comboTXProfileName;
@@ -664,8 +450,6 @@ namespace PowerSDR
         private NumericUpDownTS udGeneralCalFreq1;
         private NumericUpDownTS udGeneralCalFreq3;
         private NumericUpDownTS udGeneralCalFreq2;
-        private NumericUpDownTS udSoftRockCenterFreq;
-        private GroupBoxTS grpHWSoftRock;
         private TabPage tpVAC;
         public CheckBoxTS chkAudioEnableVAC;
         private GroupBoxTS grpAudio2Stereo;
@@ -707,7 +491,6 @@ namespace PowerSDR
         private CheckBoxTS chkGenAutoMute;
         private PowerSDR.ColorButton clrbtnOutOfBand;
         private LabelTS lblOutOfBand;
-        private LabelTS lblGenSoftRockCenterFreq;
         private LabelTS lblTestSigGenFreqCallout;
         private NumericUpDownTS udTestGenHzSec;
         private NumericUpDownTS udTestGenHigh;
@@ -796,7 +579,6 @@ namespace PowerSDR
         private NumericUpDownTS udCWBreakInDelay;
         private GroupBoxTS grpOptMisc;
         private CheckBoxTS chkDisableToolTips;
-        private RichTextBox rtxtPACalReq;
         private NumericUpDownTS udDisplayWaterfallAvgTime;
         private LabelTS lblDisplayWaterfallAverageTime;
         private NumericUpDownTS udDisplayWaterfallUpdatePeriod;
@@ -845,7 +627,6 @@ namespace PowerSDR
         private LabelTS lblRX2Rev;
         private LabelTS lblFirmwareRev;
         private CheckBoxTS ckEnableSigGen;
-        private CheckBoxTS chkGenDDSExpert;
         private CheckBoxTS chkBoxJanusOzyControl;
         private CheckBoxTS chkCalExpert;
         private CheckBoxTS chkDSPImageExpert;
@@ -853,7 +634,6 @@ namespace PowerSDR
         private CheckBoxTS chkDigUIsUSB;
         private GroupBoxTS grpGenCustomTitleText;
         private TextBoxTS txtGenCustomTitle;
-        private CheckBoxTS chkGenFLEX5000ExtRef;
         private NumericUpDownTS udLMSNRLeak;
         private NumericUpDownTS udLMSANFLeak;
         private LabelTS lblLMSNRLeak;
@@ -905,8 +685,6 @@ namespace PowerSDR
         private GroupBoxTS grpTXProfileDef;
         private CheckBoxTS chkTXExpert;
         private ButtonTS btnTXProfileDefImport;
-        private NumericUpDownTS udF3KFanTempThresh;
-        private LabelTS lblF3KFanTempThresh;
         private LabelTS lblGenTX1Delay;
         private CheckBoxTS chkGenTX1Delay;
         private NumericUpDownTS udGenTX1Delay;
@@ -1267,9 +1045,6 @@ namespace PowerSDR
         private GroupBoxTS groupBoxHPSDRHW;
         private LabelTS lblPAGainByBand6;
         private NumericUpDownTS udPAGain6;
-        private GroupBoxTS grpSI570;
-        private LabelTS labelTS8;
-        private NumericUpDownTS udFXtal;
         private CheckBoxTS chkGeneralUseSi570;
         private CheckBoxTS chkHERCULES;
         private ButtonTS btnPennyCtrlReset;
@@ -1865,13 +1640,14 @@ namespace PowerSDR
             Audio.IN_TX_R = 5;
             comboDisplayLabelAlign.Text = "Auto";
             comboColorPalette.Text = "enhanced";
+            comboRX2ColorPalette.Text = "enhanced";
             comboTXLabelAlign.Text = "Auto";
             comboDisplayDriver.Text = "GDI+";
-            comboDSPPhoneRXBuf.Text = "2048";
+            comboDSPPhoneRXBuf.Text = "4096";
             comboDSPPhoneTXBuf.Text = "2048";
-            comboDSPCWRXBuf.Text = "2048";
+            comboDSPCWRXBuf.Text = "4096";
             comboDSPCWTXBuf.Text = "2048";
-            comboDSPDigRXBuf.Text = "2048";
+            comboDSPDigRXBuf.Text = "4096";
             comboDSPDigTXBuf.Text = "2048";
             comboDSPWindow.SelectedIndex = (int)Window.BLKHARRIS;
             comboDispWinType.Text = "Kaiser";
@@ -2015,6 +1791,12 @@ namespace PowerSDR
                 AllowFreqBroadcast = false;
 
             tkbarTestGenFreq.Value = console.CWPitch;
+
+            // Mod DH1TW
+
+            InitDJConsoles();
+
+            // End MOD
         }
 #if false
         protected override void Dispose(bool disposing)
@@ -2873,9 +2655,6 @@ namespace PowerSDR
             EventArgs e = EventArgs.Empty;
 
             // General Tab
-            //  radAlexR_160_Click(this, e);
-            // radAlexR_160_CheckedChanged(this, e);
-
             chkAlexAntCtrl_CheckedChanged(this, e);
             comboGeneralLPTAddr_SelectedIndexChanged(this, e);
             udGeneralLPTDelay_ValueChanged(this, e);
@@ -2898,6 +2677,9 @@ namespace PowerSDR
             chkGeneralUpdateRelease_CheckedChanged(this, e);
             chkGeneralUpdateBeta_CheckedChanged(this, e);
             chkFullDiscovery_CheckedChanged(this, e);
+            btnSetIPAddr_Click(this, e);
+            radOzyUSB_CheckedChanged(this, e);
+            radMetis_CheckedChanged(this, e);
 
             // Audio Tab
             comboAudioSoundCard_SelectedIndexChanged(this, e);
@@ -2951,6 +2733,14 @@ namespace PowerSDR
             clrbtnWaterfallLow_Changed(this, e);
             udDisplayMultiPeakHoldTime_ValueChanged(this, e);
             udDisplayMultiTextHoldTime_ValueChanged(this, e);
+            udRX2DisplayGridMax_ValueChanged(this, e);
+            udRX2DisplayGridMin_ValueChanged(this, e);
+            udRX2DisplayGridStep_ValueChanged(this, e);
+            udRX2DisplayWaterfallLowLevel_ValueChanged(this, e);
+            udRX2DisplayWaterfallHighLevel_ValueChanged(this, e);
+            clrbtnRX2WaterfallLow_Changed(this, e);
+            chkRX1WaterfallAGC_CheckedChanged(this, e);
+            chkRX2WaterfallAGC_CheckedChanged(this, e);
 
             // DSP Tab
             udLMSANF_ValueChanged(this, e);
@@ -3033,7 +2823,6 @@ namespace PowerSDR
             comboKBFilterDown_SelectedIndexChanged(this, e);
             comboKBModeUp_SelectedIndexChanged(this, e);
             comboKBModeDown_SelectedIndexChanged(this, e);
-
             // Appearance Tab
             clrbtnBtnSel_Changed(this, e);
             clrbtnVFODark_Changed(this, e);
@@ -3062,7 +2851,6 @@ namespace PowerSDR
             chkGridControl_CheckedChanged(this, e);
             clrbtnBandEdge_Changed(this, e);
             clrbtnTXBandEdge_Changed(this, e);
-
             tbDisplayFFTSize_Scroll(this, e);
             tbRX2DisplayFFTSize_Scroll(this, e);
             //radDisplayWindow_CheckedChanged(this, e);
@@ -3070,10 +2858,12 @@ namespace PowerSDR
             radDispWeightedLinear_CheckedChanged(this, e);
             radDispWindowLog_CheckedChanged(this, e);
             radDispWindowLinear_CheckedChanged(this, e);
+            radDispLowNoiseFloor_CheckedChanged(this, e);
             radRX2DispWeightedLog_CheckedChanged(this, e);
             radRX2DispWeightedLinear_CheckedChanged(this, e);
             radRX2DispWindowLog_CheckedChanged(this, e);
             radRX2DispWindowLinear_CheckedChanged(this, e);
+            radRX2DispLowNoiseFloor_CheckedChanged(this, e);
             comboDispWinType_SelectedIndexChanged(this, e);
             comboRX2DispWinType_SelectedIndexChanged(this, e);
             udDSPNBTransition_ValueChanged(this, e);
@@ -3273,6 +3063,87 @@ namespace PowerSDR
             dr["FlexWire_Input_Level"] = 0;
         }
 
+        public void UpdateWaterfallBandInfo()
+        {
+            if (!initializing)
+            {
+                switch (console.RX1Band)
+                {
+                    case Band.B160M: txtWaterFallBandLevel.Text = "160 meters"; break;
+                    case Band.B80M: txtWaterFallBandLevel.Text = "80 meters"; break;
+                    case Band.B60M: txtWaterFallBandLevel.Text = "60 meters"; break;
+                    case Band.B40M: txtWaterFallBandLevel.Text = "40 meters"; break;
+                    case Band.B30M: txtWaterFallBandLevel.Text = "30 meters"; break;
+                    case Band.B20M: txtWaterFallBandLevel.Text = "20 meters"; break;
+                    case Band.B17M: txtWaterFallBandLevel.Text = "17 meters"; break;
+                    case Band.B15M: txtWaterFallBandLevel.Text = "15 meters"; break;
+                    case Band.B12M: txtWaterFallBandLevel.Text = "12 meters"; break;
+                    case Band.B10M: txtWaterFallBandLevel.Text = "10 meters"; break;
+                    case Band.B6M: txtWaterFallBandLevel.Text = "6 meters"; break;
+                    case Band.WWV: txtWaterFallBandLevel.Text = "WWV"; break;
+                    case Band.GEN: txtWaterFallBandLevel.Text = "General"; break;
+                    default: txtWaterFallBandLevel.Text = "2M & VHF+"; break;
+                }
+                switch (console.RX2Band)
+                {
+                    case Band.B160M: txtRX2WaterFallBandLevel.Text = "160 meters"; break;
+                    case Band.B80M: txtRX2WaterFallBandLevel.Text = "80 meters"; break;
+                    case Band.B60M: txtRX2WaterFallBandLevel.Text = "60 meters"; break;
+                    case Band.B40M: txtRX2WaterFallBandLevel.Text = "40 meters"; break;
+                    case Band.B30M: txtRX2WaterFallBandLevel.Text = "30 meters"; break;
+                    case Band.B20M: txtRX2WaterFallBandLevel.Text = "20 meters"; break;
+                    case Band.B17M: txtRX2WaterFallBandLevel.Text = "17 meters"; break;
+                    case Band.B15M: txtRX2WaterFallBandLevel.Text = "15 meters"; break;
+                    case Band.B12M: txtRX2WaterFallBandLevel.Text = "12 meters"; break;
+                    case Band.B10M: txtRX2WaterFallBandLevel.Text = "10 meters"; break;
+                    case Band.B6M: txtRX2WaterFallBandLevel.Text = "6 meters"; break;
+                    case Band.WWV: txtRX2WaterFallBandLevel.Text = "WWV"; break;
+                    case Band.GEN: txtRX2WaterFallBandLevel.Text = "General"; break;
+                    default: txtRX2WaterFallBandLevel.Text = "2M & VHF+"; break;
+                }
+            }
+        }
+ 
+        public void UpdateDisplayGridBandInfo()
+        {
+            if (!initializing)
+            {
+                switch (console.RX1Band)
+                {
+                    case Band.B160M: txtDisplayGridBandLevel.Text = "160 meters"; break;
+                    case Band.B80M: txtDisplayGridBandLevel.Text = "80 meters"; break;
+                    case Band.B60M: txtDisplayGridBandLevel.Text = "60 meters"; break;
+                    case Band.B40M: txtDisplayGridBandLevel.Text = "40 meters"; break;
+                    case Band.B30M: txtDisplayGridBandLevel.Text = "30 meters"; break;
+                    case Band.B20M: txtDisplayGridBandLevel.Text = "20 meters"; break;
+                    case Band.B17M: txtDisplayGridBandLevel.Text = "17 meters"; break;
+                    case Band.B15M: txtDisplayGridBandLevel.Text = "15 meters"; break;
+                    case Band.B12M: txtDisplayGridBandLevel.Text = "12 meters"; break;
+                    case Band.B10M: txtDisplayGridBandLevel.Text = "10 meters"; break;
+                    case Band.B6M: txtDisplayGridBandLevel.Text = "6 meters"; break;
+                    case Band.WWV: txtDisplayGridBandLevel.Text = "WWV"; break;
+                    case Band.GEN: txtDisplayGridBandLevel.Text = "General"; break;
+                    default: txtDisplayGridBandLevel.Text = "2M & VHF+"; break;
+                }
+                switch (console.RX2Band)
+                {
+                    case Band.B160M: txtRX2DisplayGridBandLevel.Text = "160 meters"; break;
+                    case Band.B80M: txtRX2DisplayGridBandLevel.Text = "80 meters"; break;
+                    case Band.B60M: txtRX2DisplayGridBandLevel.Text = "60 meters"; break;
+                    case Band.B40M: txtRX2DisplayGridBandLevel.Text = "40 meters"; break;
+                    case Band.B30M: txtRX2DisplayGridBandLevel.Text = "30 meters"; break;
+                    case Band.B20M: txtRX2DisplayGridBandLevel.Text = "20 meters"; break;
+                    case Band.B17M: txtRX2DisplayGridBandLevel.Text = "17 meters"; break;
+                    case Band.B15M: txtRX2DisplayGridBandLevel.Text = "15 meters"; break;
+                    case Band.B12M: txtRX2DisplayGridBandLevel.Text = "12 meters"; break;
+                    case Band.B10M: txtRX2DisplayGridBandLevel.Text = "10 meters"; break;
+                    case Band.B6M: txtRX2DisplayGridBandLevel.Text = "6 meters"; break;
+                    case Band.WWV: txtRX2DisplayGridBandLevel.Text = "WWV"; break;
+                    case Band.GEN: txtRX2DisplayGridBandLevel.Text = "General"; break;
+                    default: txtRX2DisplayGridBandLevel.Text = "2M & VHF+"; break;
+                }
+            }
+        }
         #endregion
 
         #region Properties
@@ -4298,18 +4169,6 @@ namespace PowerSDR
             set { chkGeneralSpurRed.Enabled = value; }
         }
 
-        public int PllMult
-        {
-            get { return (int)udDDSPLLMult.Value; }
-            set { udDDSPLLMult.Value = value; }
-        }
-
-        public int ClockOffset
-        {
-            get { return (int)udDDSCorrection.Value; }
-            set { udDDSCorrection.Value = value; }
-        }
-
         public double HPSDRFreqCorrectFactor
         {
             get { return (double)udHPSDRFreqCorrectFactor.Value; }
@@ -4385,6 +4244,7 @@ namespace PowerSDR
             }
         }
 
+        // PAGain for HPSDR
         public float PAGain160
         {
             get { return (float)udPAGain160.Value; }
@@ -4534,6 +4394,457 @@ namespace PowerSDR
             set { udPAGainVHF13.Value = (decimal)value; }
         }
 
+        // PAGain for Hermes
+        public float HermesPAGain160
+        {
+            get { return (float)udHermesPAGain160.Value; }
+            set { udHermesPAGain160.Value = (decimal)value; }
+        }
+
+        public float HermesPAGain80
+        {
+            get { return (float)udHermesPAGain80.Value; }
+            set { udHermesPAGain80.Value = (decimal)value; }
+        }
+
+        public float HermesPAGain60
+        {
+            get { return (float)udHermesPAGain60.Value; }
+            set { udHermesPAGain60.Value = (decimal)value; }
+        }
+
+        public float HermesPAGain40
+        {
+            get { return (float)udHermesPAGain40.Value; }
+            set { udHermesPAGain40.Value = (decimal)value; }
+        }
+
+        public float HermesPAGain30
+        {
+            get { return (float)udHermesPAGain30.Value; }
+            set { udHermesPAGain30.Value = (decimal)value; }
+        }
+
+        public float HermesPAGain20
+        {
+            get { return (float)udHermesPAGain20.Value; }
+            set { udHermesPAGain20.Value = (decimal)value; }
+        }
+
+        public float HermesPAGain17
+        {
+            get { return (float)udHermesPAGain17.Value; }
+            set { udHermesPAGain17.Value = (decimal)value; }
+        }
+
+        public float HermesPAGain15
+        {
+            get { return (float)udHermesPAGain15.Value; }
+            set { udHermesPAGain15.Value = (decimal)value; }
+        }
+
+        public float HermesPAGain12
+        {
+            get { return (float)udHermesPAGain12.Value; }
+            set { udHermesPAGain12.Value = (decimal)value; }
+        }
+
+        public float HermesPAGain10
+        {
+            get { return (float)udHermesPAGain10.Value; }
+            set { udHermesPAGain10.Value = (decimal)value; }
+        }
+
+        public float HermesPAGain6
+        {
+            get { return (float)udHermesPAGain6.Value; }
+            set { udHermesPAGain6.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF0
+        {
+            get { return (float)udHermesPAGainVHF0.Value; }
+            set { udHermesPAGainVHF0.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF1
+        {
+            get { return (float)udHermesPAGainVHF1.Value; }
+            set { udHermesPAGainVHF1.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF2
+        {
+            get { return (float)udHermesPAGainVHF2.Value; }
+            set { udHermesPAGainVHF2.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF3
+        {
+            get { return (float)udHermesPAGainVHF3.Value; }
+            set { udHermesPAGainVHF3.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF4
+        {
+            get { return (float)udHermesPAGainVHF4.Value; }
+            set { udHermesPAGainVHF4.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF5
+        {
+            get { return (float)udHermesPAGainVHF5.Value; }
+            set { udHermesPAGainVHF5.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF6
+        {
+            get { return (float)udHermesPAGainVHF6.Value; }
+            set { udHermesPAGainVHF6.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF7
+        {
+            get { return (float)udHermesPAGainVHF7.Value; }
+            set { udHermesPAGainVHF7.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF8
+        {
+            get { return (float)udHermesPAGainVHF8.Value; }
+            set { udHermesPAGainVHF8.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF9
+        {
+            get { return (float)udHermesPAGainVHF9.Value; }
+            set { udHermesPAGainVHF9.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF10
+        {
+            get { return (float)udHermesPAGainVHF10.Value; }
+            set { udHermesPAGainVHF10.Value = (decimal)value; }
+        }
+        public float HermesPAGainVHF11
+        {
+            get { return (float)udHermesPAGainVHF11.Value; }
+            set { udHermesPAGainVHF11.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF12
+        {
+            get { return (float)udHermesPAGainVHF12.Value; }
+            set { udHermesPAGainVHF12.Value = (decimal)value; }
+        }
+
+        public float HermesPAGainVHF13
+        {
+            get { return (float)udHermesPAGainVHF13.Value; }
+            set { udHermesPAGainVHF13.Value = (decimal)value; }
+        }
+
+        // PAGain ANAN-10
+        public float ANAN10PAGain160
+        {
+            get { return (float)udANAN10PAGain160.Value; }
+            set { udANAN10PAGain160.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGain80
+        {
+            get { return (float)udANAN10PAGain80.Value; }
+            set { udANAN10PAGain80.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGain60
+        {
+            get { return (float)udANAN10PAGain60.Value; }
+            set { udANAN10PAGain60.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGain40
+        {
+            get { return (float)udANAN10PAGain40.Value; }
+            set { udANAN10PAGain40.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGain30
+        {
+            get { return (float)udANAN10PAGain30.Value; }
+            set { udANAN10PAGain30.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGain20
+        {
+            get { return (float)udANAN10PAGain20.Value; }
+            set { udANAN10PAGain20.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGain17
+        {
+            get { return (float)udANAN10PAGain17.Value; }
+            set { udANAN10PAGain17.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGain15
+        {
+            get { return (float)udANAN10PAGain15.Value; }
+            set { udANAN10PAGain15.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGain12
+        {
+            get { return (float)udANAN10PAGain12.Value; }
+            set { udANAN10PAGain12.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGain10
+        {
+            get { return (float)udANAN10PAGain10.Value; }
+            set { udANAN10PAGain10.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGain6
+        {
+            get { return (float)udANAN10PAGain6.Value; }
+            set { udANAN10PAGain6.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF0
+        {
+            get { return (float)udANAN10PAGainVHF0.Value; }
+            set { udANAN10PAGainVHF0.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF1
+        {
+            get { return (float)udANAN10PAGainVHF1.Value; }
+            set { udANAN10PAGainVHF1.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF2
+        {
+            get { return (float)udANAN10PAGainVHF2.Value; }
+            set { udANAN10PAGainVHF2.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF3
+        {
+            get { return (float)udANAN10PAGainVHF3.Value; }
+            set { udANAN10PAGainVHF3.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF4
+        {
+            get { return (float)udANAN10PAGainVHF4.Value; }
+            set { udANAN10PAGainVHF4.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF5
+        {
+            get { return (float)udANAN10PAGainVHF5.Value; }
+            set { udANAN10PAGainVHF5.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF6
+        {
+            get { return (float)udANAN10PAGainVHF6.Value; }
+            set { udANAN10PAGainVHF6.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF7
+        {
+            get { return (float)udANAN10PAGainVHF7.Value; }
+            set { udANAN10PAGainVHF7.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF8
+        {
+            get { return (float)udANAN10PAGainVHF8.Value; }
+            set { udANAN10PAGainVHF8.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF9
+        {
+            get { return (float)udANAN10PAGainVHF9.Value; }
+            set { udANAN10PAGainVHF9.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF10
+        {
+            get { return (float)udANAN10PAGainVHF10.Value; }
+            set { udANAN10PAGainVHF10.Value = (decimal)value; }
+        }
+        public float ANAN10PAGainVHF11
+        {
+            get { return (float)udANAN10PAGainVHF11.Value; }
+            set { udANAN10PAGainVHF11.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF12
+        {
+            get { return (float)udANAN10PAGainVHF12.Value; }
+            set { udANAN10PAGainVHF12.Value = (decimal)value; }
+        }
+
+        public float ANAN10PAGainVHF13
+        {
+            get { return (float)udANAN10PAGainVHF13.Value; }
+            set { udANAN10PAGainVHF13.Value = (decimal)value; }
+        }
+
+        //PAGain ANAN-100
+        public float ANAN100PAGain160
+        {
+            get { return (float)udANAN100PAGain160.Value; }
+            set { udANAN100PAGain160.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGain80
+        {
+            get { return (float)udANAN100PAGain80.Value; }
+            set { udANAN100PAGain80.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGain60
+        {
+            get { return (float)udANAN100PAGain60.Value; }
+            set { udANAN100PAGain60.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGain40
+        {
+            get { return (float)udANAN100PAGain40.Value; }
+            set { udANAN100PAGain40.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGain30
+        {
+            get { return (float)udANAN100PAGain30.Value; }
+            set { udANAN100PAGain30.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGain20
+        {
+            get { return (float)udANAN100PAGain20.Value; }
+            set { udANAN100PAGain20.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGain17
+        {
+            get { return (float)udANAN100PAGain17.Value; }
+            set { udANAN100PAGain17.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGain15
+        {
+            get { return (float)udANAN100PAGain15.Value; }
+            set { udANAN100PAGain15.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGain12
+        {
+            get { return (float)udANAN100PAGain12.Value; }
+            set { udANAN100PAGain12.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGain10
+        {
+            get { return (float)udANAN100PAGain10.Value; }
+            set { udANAN100PAGain10.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGain6
+        {
+            get { return (float)udANAN100PAGain6.Value; }
+            set { udANAN100PAGain6.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF0
+        {
+            get { return (float)udANAN100PAGainVHF0.Value; }
+            set { udANAN100PAGainVHF0.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF1
+        {
+            get { return (float)udANAN100PAGainVHF1.Value; }
+            set { udANAN100PAGainVHF1.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF2
+        {
+            get { return (float)udANAN100PAGainVHF2.Value; }
+            set { udANAN100PAGainVHF2.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF3
+        {
+            get { return (float)udANAN100PAGainVHF3.Value; }
+            set { udANAN100PAGainVHF3.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF4
+        {
+            get { return (float)udANAN100PAGainVHF4.Value; }
+            set { udANAN100PAGainVHF4.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF5
+        {
+            get { return (float)udANAN100PAGainVHF5.Value; }
+            set { udANAN100PAGainVHF5.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF6
+        {
+            get { return (float)udANAN100PAGainVHF6.Value; }
+            set { udANAN100PAGainVHF6.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF7
+        {
+            get { return (float)udANAN100PAGainVHF7.Value; }
+            set { udANAN100PAGainVHF7.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF8
+        {
+            get { return (float)udANAN100PAGainVHF8.Value; }
+            set { udANAN100PAGainVHF8.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF9
+        {
+            get { return (float)udANAN100PAGainVHF9.Value; }
+            set { udANAN100PAGainVHF9.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF10
+        {
+            get { return (float)udANAN100PAGainVHF10.Value; }
+            set { udANAN100PAGainVHF10.Value = (decimal)value; }
+        }
+        public float ANAN100PAGainVHF11
+        {
+            get { return (float)udANAN100PAGainVHF11.Value; }
+            set { udANAN100PAGainVHF11.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF12
+        {
+            get { return (float)udANAN100PAGainVHF12.Value; }
+            set { udANAN100PAGainVHF12.Value = (decimal)value; }
+        }
+
+        public float ANAN100PAGainVHF13
+        {
+            get { return (float)udANAN100PAGainVHF13.Value; }
+            set { udANAN100PAGainVHF13.Value = (decimal)value; }
+        }
+
+        //PAGain ANAN-100D
         public float ANANPAGain160
         {
             get { return (float)udANANPAGain160.Value; }
@@ -4683,66 +4994,6 @@ namespace PowerSDR
             set { udANANPAGainVHF13.Value = (decimal)value; }
         }
 
-        public float PAADC160
-        {
-            get { return (float)udPAADC160.Value; }
-            set { udPAADC160.Value = (decimal)value; }
-        }
-
-        public float PAADC80
-        {
-            get { return (float)udPAADC80.Value; }
-            set { udPAADC80.Value = (decimal)value; }
-        }
-
-        public float PAADC60
-        {
-            get { return (float)udPAADC60.Value; }
-            set { udPAADC60.Value = (decimal)value; }
-        }
-
-        public float PAADC40
-        {
-            get { return (float)udPAADC40.Value; }
-            set { udPAADC40.Value = (decimal)value; }
-        }
-
-        public float PAADC30
-        {
-            get { return (float)udPAADC30.Value; }
-            set { udPAADC30.Value = (decimal)value; }
-        }
-
-        public float PAADC20
-        {
-            get { return (float)udPAADC20.Value; }
-            set { udPAADC20.Value = (decimal)value; }
-        }
-
-        public float PAADC17
-        {
-            get { return (float)udPAADC17.Value; }
-            set { udPAADC17.Value = (decimal)value; }
-        }
-
-        public float PAADC15
-        {
-            get { return (float)udPAADC15.Value; }
-            set { udPAADC15.Value = (decimal)value; }
-        }
-
-        public float PAADC12
-        {
-            get { return (float)udPAADC12.Value; }
-            set { udPAADC12.Value = (decimal)value; }
-        }
-
-        public float PAADC10
-        {
-            get { return (float)udPAADC10.Value; }
-            set { udPAADC10.Value = (decimal)value; }
-        }
-
         public int TunePower
         {
             get { return (int)udTXTunePower.Value; }
@@ -4766,6 +5017,53 @@ namespace PowerSDR
             set { udOptClickTuneOffsetDIGL.Value = value; }
         }
 
+        public float WaterfallLowThreshold
+        {
+            get { return (float)udDisplayWaterfallLowLevel.Value; }
+            set { udDisplayWaterfallLowLevel.Value = (decimal)value; }
+        }
+
+        public float WaterfallHighThreshold
+        {
+            get { return (float)udDisplayWaterfallHighLevel.Value; }
+            set { udDisplayWaterfallHighLevel.Value = (decimal)value; }
+        }
+
+        public float RX2WaterfallLowThreshold
+        {
+            get { return (float)udRX2DisplayWaterfallLowLevel.Value; }
+            set { udRX2DisplayWaterfallLowLevel.Value = (decimal)value; }
+        }
+
+        public float RX2WaterfallHighThreshold
+        {
+            get { return (float)udRX2DisplayWaterfallHighLevel.Value; }
+            set { udRX2DisplayWaterfallHighLevel.Value = (decimal)value; }
+        }
+
+        public float DisplayGridMin
+        {
+            get { return (float)udDisplayGridMin.Value; }
+            set { udDisplayGridMin.Value = (decimal)value; }
+        }
+
+        public float DisplayGridMax
+        {
+            get { return (float)udDisplayGridMax.Value; }
+            set { udDisplayGridMax.Value = (decimal)value; }
+        }
+
+        public float RX2DisplayGridMin
+        {
+            get { return (float)udRX2DisplayGridMin.Value; }
+            set { udRX2DisplayGridMin.Value = (decimal)value; }
+        }
+
+        public float RX2DisplayGridMax
+        {
+            get { return (float)udRX2DisplayGridMax.Value; }
+            set { udRX2DisplayGridMax.Value = (decimal)value; }
+        }
         // Added 06/21/05 BT for CAT commands
 
         public int CATNB1Threshold
@@ -4833,6 +5131,66 @@ namespace PowerSDR
         //				udTXPreGain.Value = value;
         //			}
         //		}
+
+        //Reads or sets the setup form Spectrum Grid Display Maximum value.
+        public int CATSGMax
+        {
+            get { return (int)udDisplayGridMax.Value; }
+            set
+            {
+                value = (int)Math.Max(udDisplayGridMax.Minimum, value);
+                value = (int)Math.Min(udDisplayGridMin.Maximum, value);
+                udDisplayGridMax.Value = value;
+            }
+        }
+
+        //Reads or sets the setup form Spectrum Grid Display Minimum value.
+        public int CATSGMin
+        {
+            get { return (int)udDisplayGridMin.Value; }
+            set
+            {
+                value = (int)Math.Max(udDisplayGridMax.Minimum, value);
+                value = (int)Math.Min(udDisplayGridMin.Maximum, value);
+                udDisplayGridMin.Value = value;
+            }
+        }
+
+        //Reads or sets the setup form Spectrum Grid Display Step value.
+        public int CATSGStep
+        {
+            get { return (int)udDisplayGridStep.Value; }
+            set
+            {
+                value = (int)Math.Max(udDisplayGridStep.Minimum, value);
+                value = (int)Math.Min(udDisplayGridStep.Maximum, value);
+                udDisplayGridStep.Value = value;
+            }
+        }
+
+        //Reads or sets the setup form Waterfall low level value.
+        public int CATWFLo
+        {
+            get { return (int)udDisplayWaterfallLowLevel.Value; }
+            set
+            {
+                value = (int)Math.Max(udDisplayWaterfallLowLevel.Minimum, value);
+                value = (int)Math.Min(udDisplayWaterfallLowLevel.Maximum, value);
+                udDisplayWaterfallLowLevel.Value = value;
+            }
+        }
+
+        //Reads or sets the setup form Waterfall high level value.
+        public int CATWFHi
+        {
+            get { return (int)udDisplayWaterfallHighLevel.Value; }
+            set
+            {
+                value = (int)Math.Max(udDisplayWaterfallHighLevel.Minimum, value);
+                value = (int)Math.Min(udDisplayWaterfallHighLevel.Maximum, value);
+                udDisplayWaterfallHighLevel.Value = value;
+            }
+        }
 
         public int DSPPhoneRXBuffer
         {
@@ -4911,7 +5269,12 @@ namespace PowerSDR
             }
         }
 
-        public bool FlexProfilerInstalled { get; set; }
+        private bool flex_profiler_installed = false;
+        public bool FlexProfilerInstalled
+        {
+            get { return flex_profiler_installed; }
+            set { flex_profiler_installed = value; }
+        }
 
         private bool allow_freq_broadcast = false;
         public bool AllowFreqBroadcast
@@ -4924,6 +5287,18 @@ namespace PowerSDR
             }
         }
 
+        public bool AutoMuteRX2onVFOATX
+        {
+                get { return chkRX2AutoMuteTX.Checked; }
+                set { chkRX2AutoMuteTX.Checked = value; }
+        }
+
+        public bool AutoMuteRX1onVFOBTX
+        {
+            get { return chkRX2AutoMuteRX1OnVFOBTX.Checked; }
+            set { chkRX2AutoMuteRX1OnVFOBTX.Checked = value; }
+        }
+        
         private bool rtty_offset_enabled_a;
         public bool RttyOffsetEnabledA
         {
@@ -5038,14 +5413,14 @@ namespace PowerSDR
                             radGenModelFLEX5000.Text = "FLEX-3000";
                             grpGeneralHardwareFLEX5000.Text = "FLEX-3000 Config";
                             lblRFIORev.Visible = false;
-                            chkGenFLEX5000ExtRef.Visible = false;
+                           // chkGenFLEX5000ExtRef.Visible = false;
                             udTXFilterHigh.Maximum = 3650;
                             if (comboAudioSampleRate1.Items.Contains(192000))
                                 comboAudioSampleRate1.Items.Remove(192000);
                             if (comboAudioSampleRate1.SelectedIndex == -1)
                                 comboAudioSampleRate1.SelectedIndex = 1;
-                            lblF3KFanTempThresh.Visible = true;
-                            udF3KFanTempThresh.Visible = true;
+                           // lblF3KFanTempThresh.Visible = true;
+                           // udF3KFanTempThresh.Visible = true;
                             chkGenTX1Delay.Visible = true;
                             lblGenTX1Delay.Visible = true;
                             udGenTX1Delay.Visible = true;
@@ -5202,7 +5577,7 @@ namespace PowerSDR
             radPACalAllBands_CheckedChanged(this, EventArgs.Empty);
             grpGeneralHardwareSDR1000.Visible = !b;
             grpGeneralHardwareFLEX5000.Visible = b;
-            btnWizard.Visible = !b;
+           // btnWizard.Visible = !b;
             grpGenAutoMute.Visible = !b;
 
             grpAudioDetails1.Visible = !b;
@@ -5237,21 +5612,7 @@ namespace PowerSDR
             grpPAGainByBand.Visible = true;
             chkPANewCal.Visible = false;
 
-            rtxtPACalReq.Visible = !b;
-
-            if (b)
-            {
-                if (tcSetup.TabPages.Contains(tpExtCtrl))
-                {
-                    tcSetup.TabPages.Remove(tpExtCtrl);
-                    tcSetup.SelectedIndex = 0;
-                }
-            }
-            else
-            {
-                if (!tcSetup.TabPages.Contains(tpExtCtrl))
-                    Common.TabControlInsert(tcSetup, tpExtCtrl, 6);
-            }
+           // rtxtPACalReq.Visible = !b;
 
             grpImpulseTest.Visible = !b;
             ckEnableSigGen.Visible = b;
@@ -5285,12 +5646,12 @@ namespace PowerSDR
                     comboKeyerConnPrimary.Items.Insert(0, "SDR");
                 comboKeyerConnPrimary.Text = key == "Radio" ? "SDR" : key;
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
-                lblF3KFanTempThresh.Visible = false;
-                udF3KFanTempThresh.Visible = false;
+                //lblF3KFanTempThresh.Visible = false;
+               // udF3KFanTempThresh.Visible = false;
                 chkGenTX1Delay.Visible = false;
                 lblGenTX1Delay.Visible = false;
                 udGenTX1Delay.Visible = false;
-                grpHWSoftRock.Visible = false;
+               // grpHWSoftRock.Visible = false;
             }
             else console.XVTRPresent = false;
         }
@@ -5320,8 +5681,8 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = false;
-                chkGeneralRXOnly.Checked = false;
+                chkGeneralRXOnly.Visible = true;
+               // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
                 radMetis.Text = "ANAN";
@@ -5339,7 +5700,7 @@ namespace PowerSDR
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
-                grpPAGainByBand.BringToFront();
+                grpANAN10PAGainByBand.BringToFront();
                 labelRXAntControl.Text = "  RX1   RX2    XVTR";
             }
             console.ANAN10Present = radGenModelANAN10.Checked;
@@ -5394,8 +5755,8 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = false;
-                chkGeneralRXOnly.Checked = false;
+                chkGeneralRXOnly.Visible = true;
+               // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
                 radMetis.Text = "ANAN";
@@ -5414,7 +5775,7 @@ namespace PowerSDR
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
-                grpANANPAGainByBand.BringToFront();
+                grpANAN100PAGainByBand.BringToFront();
                 labelRXAntControl.Text = " EXT1  EXT2  XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5466,8 +5827,8 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = false;
-                chkGeneralRXOnly.Checked = false;
+                chkGeneralRXOnly.Visible = true;
+               // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
                 radMetis.Text = "ANAN";
@@ -5486,7 +5847,11 @@ namespace PowerSDR
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
+                chkBypassANANPASettings.Visible = true;
+                if (!chkBypassANANPASettings.Checked)
                 grpANANPAGainByBand.BringToFront();
+                else grpPAGainByBand.BringToFront();
+                
                 labelRXAntControl.Text = " EXT1  EXT2  XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5536,8 +5901,8 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = false;
-                chkGeneralRXOnly.Checked = false;
+                chkGeneralRXOnly.Visible = true;
+              //  chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "Hermes Options";
                 radMetis.Text = "Hermes";
@@ -5556,7 +5921,7 @@ namespace PowerSDR
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
-                grpPAGainByBand.BringToFront();
+                grpHermesPAGainByBand.BringToFront();
                 labelRXAntControl.Text = "  RX1   RX2    XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5618,6 +5983,7 @@ namespace PowerSDR
                 chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
               //  chkAutoPACalibrate.Checked = true;
+                chkBypassANANPASettings.Visible = false;
                 chkAutoPACalibrate.Visible = true;
                 grpPAGainByBand.BringToFront();
                 labelRXAntControl.Text = "  RX1   RX2    XVTR";
@@ -5663,19 +6029,19 @@ namespace PowerSDR
                     force_model = false;
                 }
                 chkGeneralRXOnly.Enabled = true; // modif F8CHK
-                lblF3KFanTempThresh.Visible = false;
-                udF3KFanTempThresh.Visible = false;
+                //lblF3KFanTempThresh.Visible = false;
+               // udF3KFanTempThresh.Visible = false;
                 chkGenTX1Delay.Visible = false;
                 lblGenTX1Delay.Visible = false;
                 udGenTX1Delay.Visible = false;
 
-                grpHWSoftRock.Visible = !console.si570_used;  // modif F8CHK
-                grpSI570.Visible = console.si570_used;
+               // grpHWSoftRock.Visible = !console.si570_used;  // modif F8CHK
+               // grpSI570.Visible = console.si570_used;
             }
             else
             {
                 chkGeneralUseSi570.Visible = false; // modif F8CHK    
-                grpSI570.Visible = false;
+               // grpSI570.Visible = false;
             }
         }
 
@@ -5696,8 +6062,8 @@ namespace PowerSDR
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                     force_model = false;
-                    lblF3KFanTempThresh.Visible = false;
-                    udF3KFanTempThresh.Visible = false;
+                  //  lblF3KFanTempThresh.Visible = false;
+                   // udF3KFanTempThresh.Visible = false;
                     chkGenTX1Delay.Visible = false;
                     lblGenTX1Delay.Visible = false;
                     udGenTX1Delay.Visible = false;
@@ -5737,11 +6103,11 @@ namespace PowerSDR
                 grpFRSRegion.Visible = true;
                 grpPAGainByBand.Visible = true;
                 grpGeneralHardwareSDR1000.Visible = false;
-                grpGeneralDDS.Visible = false;
-                btnWizard.Visible = true;
+               // grpGeneralDDS.Visible = false;
+               // btnWizard.Visible = true;
                 //chkGeneralRXOnly.Checked = false;
                 //chkGeneralRXOnly.Enabled = true;
-                grpHWSoftRock.Visible = false;
+               // grpHWSoftRock.Visible = false;
                 chkGeneralCustomFilter.Visible = false;
                 grpGenAutoMute.Visible = false;
                 grpGenCalRXImage.Visible = false;
@@ -5752,7 +6118,7 @@ namespace PowerSDR
                 chkGeneralEnableX2.Visible = false;
                 lblGeneralX2Delay.Visible = false;
                 udGeneralX2Delay.Visible = false;
-                rtxtPACalReq.Visible = false;
+              //  rtxtPACalReq.Visible = false;
                 lblPTTOutDelay.Visible = true;
                 udGenPTTOutDelay.Visible = true;
                 lblMoxDelay.Visible = true;
@@ -5835,12 +6201,6 @@ namespace PowerSDR
                 grpGenCalRXImage.Enabled = false;
                 chkCalExpert.Enabled = false;
                 grpHPSDRFreqCalDbg.Visible = true;
-
-                if (tcSetup.TabPages.Contains(tpExtCtrl))
-                {
-                    tcSetup.TabPages.Remove(tpExtCtrl);
-                    tcSetup.SelectedIndex = 0;
-                }
 
                 string key = comboKeyerConnPrimary.Text;
                 if (comboKeyerConnPrimary.Items.Contains("5000"))
@@ -5934,7 +6294,7 @@ namespace PowerSDR
 
                 grpPAGainByBand.Visible = true;
                 grpGeneralHardwareSDR1000.Visible = true;
-                grpGeneralDDS.Visible = true;
+               // grpGeneralDDS.Visible = true;
                 grpGenCalRXImage.Visible = true;
 
                 groupBoxHPSDRHW.Visible = false;
@@ -5961,11 +6321,6 @@ namespace PowerSDR
 
                 grpHPSDRFreqCalDbg.Visible = false;
                 chkCWKeyerMonoCable.Visible = true;
-
-                if (!tcSetup.TabPages.Contains(tpExtCtrl))
-                {
-                    Common.TabControlInsert(tcSetup, tpExtCtrl, 5);
-                }
             }
         }
 
@@ -6003,7 +6358,7 @@ namespace PowerSDR
             {
                 tcGeneral.TabPages.Remove(tpInfo);
                 tcGeneral.SelectedIndex = 0;
-            }
+            } 
 
             if (!tcGeneral.TabPages.Contains(tpHPSDR))
             {
@@ -6143,7 +6498,7 @@ namespace PowerSDR
 
         private void udSoftRockCenterFreq_ValueChanged(object sender, System.EventArgs e)
         {
-            console.SoftRockCenterFreq = (double)udSoftRockCenterFreq.Value;
+           // console.SoftRockCenterFreq = (double)udSoftRockCenterFreq.Value;
         }
 
         private void comboGeneralLPTAddr_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -6245,7 +6600,7 @@ namespace PowerSDR
             console.PAPresent = false;
             chkGeneralATUPresent.Visible = chkGeneralPAPresent.Checked;
             grpPAGainByBand.Visible = true;
-            rtxtPACalReq.Visible = chkGeneralPAPresent.Checked;
+            //rtxtPACalReq.Visible = chkGeneralPAPresent.Checked;
 
             if (!chkGeneralPAPresent.Checked)
                 chkGeneralATUPresent.Checked = false;
@@ -6288,12 +6643,12 @@ namespace PowerSDR
 
         private void udDDSCorrection_ValueChanged(object sender, System.EventArgs e)
         {
-            console.DDSClockCorrection = (double)(udDDSCorrection.Value / 1000000);
+           // console.DDSClockCorrection = (double)(udDDSCorrection.Value / 1000000);
         }
 
         private void udDDSPLLMult_ValueChanged(object sender, System.EventArgs e)
         {
-            console.Hdw.PLLMult = (int)udDDSPLLMult.Value;
+           // console.Hdw.PLLMult = (int)udDDSPLLMult.Value;
         }
 
         private void udDDSIFFreq_ValueChanged(object sender, System.EventArgs e)
@@ -6957,7 +7312,7 @@ namespace PowerSDR
 
             console.SampleRate1 = new_rate;
 
-            Display.DrawBackground();
+            //Display.DrawBackground();
 
             if (!initializing)
             {
@@ -8142,8 +8497,11 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(96000);
                     if (!comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Add(192000);
-                    if (!comboAudioSampleRate1.Items.Contains(384000))
-                        comboAudioSampleRate1.Items.Add(384000);
+                    if (radMetis.Checked)
+                    {
+                        if (!comboAudioSampleRate1.Items.Contains(384000))
+                            comboAudioSampleRate1.Items.Add(384000);
+                    }
                     if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
                         comboAudioSampleRate1.Text = "48000";
 
@@ -8385,17 +8743,139 @@ namespace PowerSDR
 
         private void udDisplayGridMax_ValueChanged(object sender, System.EventArgs e)
         {
-            if (udDisplayGridMax.Value <= udDisplayGridMin.Value)
-                udDisplayGridMax.Value = udDisplayGridMin.Value + 10;
-            Display.SpectrumGridMax = (int)udDisplayGridMax.Value;
-        }
+           // if (udDisplayGridMax.Value <= udDisplayGridMin.Value)
+             //   udDisplayGridMax.Value = udDisplayGridMin.Value + 10;
+           // Display.SpectrumGridMax = (int)udDisplayGridMax.Value;
+            UpdateDisplayGridBandInfo();
+            switch (console.RX1Band)
+            {
+                case Band.B160M:
+                    console.DisplayGridMax160m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax160m;
+                    break;
+                case Band.B80M:
+                    console.DisplayGridMax80m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax80m;
+                    break;
+                case Band.B60M:
+                    console.DisplayGridMax60m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax60m;
+                    break;
+                case Band.B40M:
+                    console.DisplayGridMax40m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax40m;
+                    break;
+                case Band.B30M:
+                    console.DisplayGridMax30m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax30m;
+                    break;
+                case Band.B20M:
+                    console.DisplayGridMax20m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax20m;
+                    break;
+                case Band.B17M:
+                    console.DisplayGridMax17m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax17m;
+                    break;
+                case Band.B15M:
+                    console.DisplayGridMax15m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax15m;
+                    break;
+                case Band.B12M:
+                    console.DisplayGridMax12m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax12m;
+                    break;
+                case Band.B10M:
+                    console.DisplayGridMax10m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax10m;
+                    break;
+                case Band.B6M:
+                    console.DisplayGridMax6m = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMax6m;
+                    break;
+                case Band.WWV:
+                    console.DisplayGridMaxWWV = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMaxWWV;
+                    break;
+                case Band.GEN:
+                    console.DisplayGridMaxGEN = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMaxGEN;
+                    break;
+                default:
+                    console.DisplayGridMaxXVTR = (float)udDisplayGridMax.Value;
+                    Display.SpectrumGridMax = (int)console.DisplayGridMaxXVTR;
+                    break;
+            }
+
+         }
 
         private void udDisplayGridMin_ValueChanged(object sender, System.EventArgs e)
         {
-            if (udDisplayGridMin.Value >= udDisplayGridMax.Value)
-                udDisplayGridMin.Value = udDisplayGridMax.Value - 10;
-            Display.SpectrumGridMin = (int)udDisplayGridMin.Value;
-        }
+           // if (udDisplayGridMin.Value >= udDisplayGridMax.Value)
+             //   udDisplayGridMin.Value = udDisplayGridMax.Value - 10;
+           // Display.SpectrumGridMin = (int)udDisplayGridMin.Value;
+            UpdateDisplayGridBandInfo();
+            switch (console.RX1Band)
+            {
+                case Band.B160M:
+                    console.DisplayGridMin160m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin160m;
+                    break;
+                case Band.B80M:
+                    console.DisplayGridMin80m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin80m;
+                    break;
+                case Band.B60M:
+                    console.DisplayGridMin60m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin60m;
+                    break;
+                case Band.B40M:
+                    console.DisplayGridMin40m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin40m;
+                    break;
+                case Band.B30M:
+                    console.DisplayGridMin30m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin30m;
+                    break;
+                case Band.B20M:
+                    console.DisplayGridMin20m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin20m;
+                    break;
+                case Band.B17M:
+                    console.DisplayGridMin17m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin17m;
+                    break;
+                case Band.B15M:
+                    console.DisplayGridMin15m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin15m;
+                    break;
+                case Band.B12M:
+                    console.DisplayGridMin12m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin12m;
+                    break;
+                case Band.B10M:
+                    console.DisplayGridMin10m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin10m;
+                    break;
+                case Band.B6M:
+                    console.DisplayGridMin6m = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMin6m;
+                    break;
+                case Band.WWV:
+                    console.DisplayGridMinWWV = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMinWWV;
+                    break;
+                case Band.GEN:
+                    console.DisplayGridMinGEN = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMinGEN;
+                    break;
+                default:
+                    console.DisplayGridMinXVTR = (float)udDisplayGridMin.Value;
+                    Display.SpectrumGridMin = (int)console.DisplayGridMinXVTR;
+                    break;
+            }
+
+         }
 
         private void udDisplayGridStep_ValueChanged(object sender, System.EventArgs e)
         {
@@ -8404,16 +8884,136 @@ namespace PowerSDR
 
         private void udRX2DisplayGridMax_ValueChanged(object sender, System.EventArgs e)
         {
-            if (udRX2DisplayGridMax.Value <= udRX2DisplayGridMin.Value)
-                udRX2DisplayGridMax.Value = udRX2DisplayGridMin.Value + 10;
-            Display.RX2SpectrumGridMax = (int)udRX2DisplayGridMax.Value;
+           // if (udRX2DisplayGridMax.Value <= udRX2DisplayGridMin.Value)
+            //    udRX2DisplayGridMax.Value = udRX2DisplayGridMin.Value + 10;
+           // Display.RX2SpectrumGridMax = (int)udRX2DisplayGridMax.Value;
+            UpdateDisplayGridBandInfo(); 
+            switch (console.RX2Band)
+            {
+                case Band.B160M:
+                    console.RX2DisplayGridMax160m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax160m;
+                    break;
+                case Band.B80M:
+                    console.RX2DisplayGridMax80m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax80m;
+                    break;
+                case Band.B60M:
+                    console.RX2DisplayGridMax60m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax60m;
+                    break;
+                case Band.B40M:
+                    console.RX2DisplayGridMax40m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax40m;
+                    break;
+                case Band.B30M:
+                    console.RX2DisplayGridMax30m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax30m;
+                    break;
+                case Band.B20M:
+                    console.RX2DisplayGridMax20m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax20m;
+                    break;
+                case Band.B17M:
+                    console.RX2DisplayGridMax17m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax17m;
+                    break;
+                case Band.B15M:
+                    console.RX2DisplayGridMax15m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax15m;
+                    break;
+                case Band.B12M:
+                    console.RX2DisplayGridMax12m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax12m;
+                    break;
+                case Band.B10M:
+                    console.RX2DisplayGridMax10m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax10m;
+                    break;
+                case Band.B6M:
+                    console.RX2DisplayGridMax6m = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMax6m;
+                    break;
+                case Band.WWV:
+                    console.RX2DisplayGridMaxWWV = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMaxWWV;
+                    break;
+                case Band.GEN:
+                    console.RX2DisplayGridMaxGEN = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMaxGEN;
+                    break;
+                default:
+                    console.RX2DisplayGridMaxXVTR = (float)udRX2DisplayGridMax.Value;
+                    Display.RX2SpectrumGridMax = (int)console.RX2DisplayGridMaxXVTR;
+                    break;
+            }
         }
 
         private void udRX2DisplayGridMin_ValueChanged(object sender, System.EventArgs e)
         {
-            if (udRX2DisplayGridMin.Value >= udRX2DisplayGridMax.Value)
-                udRX2DisplayGridMin.Value = udRX2DisplayGridMax.Value - 10;
-            Display.RX2SpectrumGridMin = (int)udRX2DisplayGridMin.Value;
+           // if (udRX2DisplayGridMin.Value >= udRX2DisplayGridMax.Value)
+            //    udRX2DisplayGridMin.Value = udRX2DisplayGridMax.Value - 10;
+          //  Display.RX2SpectrumGridMin = (int)udRX2DisplayGridMin.Value;
+            UpdateDisplayGridBandInfo(); 
+            switch (console.RX2Band)
+            {
+                case Band.B160M:
+                    console.RX2DisplayGridMin160m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin160m;
+                    break;
+                case Band.B80M:
+                    console.RX2DisplayGridMin80m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin80m;
+                    break;
+                case Band.B60M:
+                    console.RX2DisplayGridMin60m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin60m;
+                    break;
+                case Band.B40M:
+                    console.RX2DisplayGridMin40m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin40m;
+                    break;
+                case Band.B30M:
+                    console.RX2DisplayGridMin30m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin30m;
+                    break;
+                case Band.B20M:
+                    console.RX2DisplayGridMin20m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin20m;
+                    break;
+                case Band.B17M:
+                    console.RX2DisplayGridMin17m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin17m;
+                    break;
+                case Band.B15M:
+                    console.RX2DisplayGridMin15m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin15m;
+                    break;
+                case Band.B12M:
+                    console.RX2DisplayGridMin12m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin12m;
+                    break;
+                case Band.B10M:
+                    console.RX2DisplayGridMin10m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin10m;
+                    break;
+                case Band.B6M:
+                    console.RX2DisplayGridMin6m = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMin6m;
+                    break;
+                case Band.WWV:
+                    console.RX2DisplayGridMinWWV = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMinWWV;
+                    break;
+                case Band.GEN:
+                    console.RX2DisplayGridMinGEN = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMinGEN;
+                    break;
+                default:
+                    console.RX2DisplayGridMinXVTR = (float)udRX2DisplayGridMin.Value;
+                    Display.RX2SpectrumGridMin = (int)console.RX2DisplayGridMinXVTR;
+                    break;
+            }
         }
 
         private void udRX2DisplayGridStep_ValueChanged(object sender, System.EventArgs e)
@@ -8497,12 +9097,130 @@ namespace PowerSDR
 
         private void udDisplayWaterfallLowLevel_ValueChanged(object sender, System.EventArgs e)
         {
-            Display.WaterfallLowThreshold = (float)udDisplayWaterfallLowLevel.Value;
+            UpdateWaterfallBandInfo();
+            switch (console.RX1Band)
+            {
+                case Band.B160M:
+                    console.WaterfallLowThreshold160m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold160m;
+                    break;
+                case Band.B80M:
+                    console.WaterfallLowThreshold80m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold80m;
+                    break;
+                case Band.B60M:
+                    console.WaterfallLowThreshold60m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold60m;
+                    break;
+                case Band.B40M:
+                    console.WaterfallLowThreshold40m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold40m;
+                    break;
+                case Band.B30M:
+                    console.WaterfallLowThreshold30m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold30m;
+                    break;
+                case Band.B20M:
+                    console.WaterfallLowThreshold20m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold20m;
+                    break;
+                case Band.B17M:
+                    console.WaterfallLowThreshold17m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold17m;
+                    break;
+                case Band.B15M:
+                    console.WaterfallLowThreshold15m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold15m;
+                    break;
+                case Band.B12M:
+                    console.WaterfallLowThreshold12m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold12m;
+                    break;
+                case Band.B10M:
+                    console.WaterfallLowThreshold10m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold10m;
+                    break;
+                case Band.B6M:
+                    console.WaterfallLowThreshold6m = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThreshold6m;
+                    break;
+                case Band.WWV:
+                    console.WaterfallLowThresholdWWV = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThresholdWWV;
+                    break;
+                case Band.GEN:
+                    console.WaterfallLowThresholdGEN = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThresholdGEN;
+                    break;
+                default:
+                    console.WaterfallLowThresholdXVTR = (float)udDisplayWaterfallLowLevel.Value;
+                    Display.WaterfallLowThreshold = console.WaterfallLowThresholdXVTR;
+                    break;
+            }
         }
 
         private void udDisplayWaterfallHighLevel_ValueChanged(object sender, System.EventArgs e)
         {
-            Display.WaterfallHighThreshold = (float)udDisplayWaterfallHighLevel.Value;
+            UpdateWaterfallBandInfo();
+            switch (console.RX1Band)
+            {
+                case Band.B160M:
+                    console.WaterfallHighThreshold160m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold160m;
+                    break;
+                case Band.B80M:
+                    console.WaterfallHighThreshold80m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold80m;
+                    break;
+                case Band.B60M:
+                    console.WaterfallHighThreshold60m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold60m;
+                    break;
+                case Band.B40M:
+                    console.WaterfallHighThreshold40m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold40m;
+                    break;
+                case Band.B30M:
+                    console.WaterfallHighThreshold30m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold30m;
+                    break;
+                case Band.B20M:
+                    console.WaterfallHighThreshold20m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold20m;
+                    break;
+                case Band.B17M:
+                    console.WaterfallHighThreshold17m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold17m;
+                    break;
+                case Band.B15M:
+                    console.WaterfallHighThreshold15m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold15m;
+                    break;
+                case Band.B12M:
+                    console.WaterfallHighThreshold12m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold12m;
+                    break;
+                case Band.B10M:
+                    console.WaterfallHighThreshold10m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold10m;
+                    break;
+                case Band.B6M:
+                    console.WaterfallHighThreshold6m = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThreshold6m;
+                    break;
+                case Band.WWV:
+                    console.WaterfallHighThresholdWWV = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThresholdWWV;
+                    break;
+                case Band.GEN:
+                    console.WaterfallHighThresholdGEN = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThresholdGEN;
+                    break;
+                default:
+                    console.WaterfallHighThresholdXVTR = (float)udDisplayWaterfallHighLevel.Value;
+                    Display.WaterfallHighThreshold = console.WaterfallHighThresholdXVTR;
+                    break;
+            }
         }
 
         private void udDisplayMultiPeakHoldTime_ValueChanged(object sender, System.EventArgs e)
@@ -8513,6 +9231,151 @@ namespace PowerSDR
         private void udDisplayMultiTextHoldTime_ValueChanged(object sender, System.EventArgs e)
         {
             console.MultimeterTextPeakTime = (int)udDisplayMultiTextHoldTime.Value;
+        }
+
+// RX2 WaterFall
+        private void clrbtnRX2WaterfallLow_Changed(object sender, System.EventArgs e)
+        {
+            Display.RX2WaterfallLowColor = clrbtnRX2WaterfallLow.Color;
+        }
+
+        private void clrbtnRX2WaterfallHigh_Changed(object sender, System.EventArgs e)
+        {
+            Display.RX2WaterfallHighColor = clrbtnRX2WaterfallHigh.Color;
+        }
+
+        private void clrbtnRX2WaterfallMid_Changed(object sender, System.EventArgs e)
+        {
+            Display.RX2WaterfallMidColor = clrbtnRX2WaterfallMid.Color;
+        }
+
+        private void udRX2DisplayWaterfallLowLevel_ValueChanged(object sender, System.EventArgs e)
+        {
+            UpdateWaterfallBandInfo();
+            switch (console.RX2Band)
+            {
+                case Band.B160M:
+                    console.RX2WaterfallLowThreshold160m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold160m;
+                    break;
+                case Band.B80M:
+                    console.RX2WaterfallLowThreshold80m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold80m;
+                    break;
+                case Band.B60M:
+                    console.RX2WaterfallLowThreshold60m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold60m;
+                    break;
+                case Band.B40M:
+                    console.RX2WaterfallLowThreshold40m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold40m;
+                    break;
+                case Band.B30M:
+                    console.RX2WaterfallLowThreshold30m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold30m;
+                    break;
+                case Band.B20M:
+                    console.RX2WaterfallLowThreshold20m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold20m;
+                    break;
+                case Band.B17M:
+                    console.RX2WaterfallLowThreshold17m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold17m;
+                    break;
+                case Band.B15M:
+                    console.RX2WaterfallLowThreshold15m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold15m;
+                    break;
+                case Band.B12M:
+                    console.RX2WaterfallLowThreshold12m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold12m;
+                    break;
+                case Band.B10M:
+                    console.RX2WaterfallLowThreshold10m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold10m;
+                    break;
+                case Band.B6M:
+                    console.RX2WaterfallLowThreshold6m = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThreshold6m;
+                    break;
+                case Band.WWV:
+                    console.RX2WaterfallLowThresholdWWV = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThresholdWWV;
+                    break;
+                case Band.GEN:
+                    console.RX2WaterfallLowThresholdGEN = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThresholdGEN;
+                    break;
+                default:
+                    console.RX2WaterfallLowThresholdXVTR = (float)udRX2DisplayWaterfallLowLevel.Value;
+                    Display.RX2WaterfallLowThreshold = console.RX2WaterfallLowThresholdXVTR;
+                    break;
+            }
+        }
+
+        private void udRX2DisplayWaterfallHighLevel_ValueChanged(object sender, System.EventArgs e)
+        {
+            UpdateWaterfallBandInfo();
+            switch (console.RX2Band)
+            {
+                case Band.B160M:
+                    console.RX2WaterfallHighThreshold160m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold160m;
+                    break;
+                case Band.B80M:
+                    console.RX2WaterfallHighThreshold80m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold80m;
+                    break;
+                case Band.B60M:
+                    console.RX2WaterfallHighThreshold60m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold60m;
+                    break;
+                case Band.B40M:
+                    console.RX2WaterfallHighThreshold40m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold40m;
+                    break;
+                case Band.B30M:
+                    console.RX2WaterfallHighThreshold30m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold30m;
+                    break;
+                case Band.B20M:
+                    console.RX2WaterfallHighThreshold20m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold20m;
+                    break;
+                case Band.B17M:
+                    console.RX2WaterfallHighThreshold17m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold17m;
+                    break;
+                case Band.B15M:
+                    console.RX2WaterfallHighThreshold15m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold15m;
+                    break;
+                case Band.B12M:
+                    console.RX2WaterfallHighThreshold12m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold12m;
+                    break;
+                case Band.B10M:
+                    console.RX2WaterfallHighThreshold10m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold10m;
+                    break;
+                case Band.B6M:
+                    console.RX2WaterfallHighThreshold6m = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThreshold6m;
+                    break;
+                case Band.WWV:
+                    console.RX2WaterfallHighThresholdWWV = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThresholdWWV;
+                    break;
+                case Band.GEN:
+                    console.RX2WaterfallHighThresholdGEN = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThresholdGEN;
+                    break;
+                default:
+                    console.RX2WaterfallHighThresholdXVTR = (float)udRX2DisplayWaterfallHighLevel.Value;
+                    Display.RX2WaterfallHighThreshold = console.RX2WaterfallHighThresholdXVTR;
+                    break;
+            }
+            // Display.WaterfallHighThreshold = (float)udDisplayWaterfallHighLevel.Value;
         }
 
         private void chkSpectrumPolyphase_CheckedChanged(object sender, System.EventArgs e)
@@ -8551,9 +9414,9 @@ namespace PowerSDR
                 case "GDI+":
                     console.CurrentDisplayEngine = DisplayEngine.GDI_PLUS;
                     break;
-                /*case "DirectX":
+                case "DirectX":
                     console.CurrentDisplayEngine = DisplayEngine.DIRECT_X;
-                    break;*/
+                    break;
             }
         }
 
@@ -9813,19 +10676,79 @@ namespace PowerSDR
 
         private void btnPAGainReset_Click(object sender, System.EventArgs e)
         {
-            if (radGenModelANAN100.Checked || radGenModelANAN100D.Checked)
+            if (radGenModelANAN10.Checked)
             {
-                ANANPAGain160 = 57.0f;
-                ANANPAGain80 = 57.0f;
-                ANANPAGain60 = 57.5f;
-                ANANPAGain40 = 57.5f;
-                ANANPAGain30 = 56.5f;
-                ANANPAGain20 = 56.0f;
-                ANANPAGain17 = 56.0f;
-                ANANPAGain15 = 56.0f;
-                ANANPAGain12 = 53.0f;
-                ANANPAGain10 = 55.0f;
-                ANANPAGain6 = 51.5f;
+                ANAN10PAGain160 = 41.0f;
+                ANAN10PAGain80 = 41.2f;
+                ANAN10PAGain60 = 41.3f;
+                ANAN10PAGain40 = 41.3f;
+                ANAN10PAGain30 = 41.0f;
+                ANAN10PAGain20 = 40.5f;
+                ANAN10PAGain17 = 39.9f;
+                ANAN10PAGain15 = 38.8f;
+                ANAN10PAGain12 = 38.8f;
+                ANAN10PAGain10 = 38.8f;
+                ANAN10PAGain6 = 38.8f;
+                
+                udANAN10PAGainVHF0.Value = 56.2M;
+                udANAN10PAGainVHF1.Value = 56.2M;
+                udANAN10PAGainVHF2.Value = 56.2M;
+                udANAN10PAGainVHF3.Value = 56.2M;
+                udANAN10PAGainVHF4.Value = 56.2M;
+                udANAN10PAGainVHF5.Value = 56.2M;
+                udANAN10PAGainVHF6.Value = 56.2M;
+                udANAN10PAGainVHF7.Value = 56.2M;
+                udANAN10PAGainVHF8.Value = 56.2M;
+                udANAN10PAGainVHF9.Value = 56.2M;
+                udANAN10PAGainVHF10.Value = 56.2M;
+                udANAN10PAGainVHF11.Value = 56.2M;
+                udANAN10PAGainVHF12.Value = 56.2M;
+                udANAN10PAGainVHF13.Value = 56.2M;
+            }
+            
+            if (radGenModelANAN100.Checked)
+            {
+                ANAN100PAGain160 = 53.2f;
+                ANAN100PAGain80 = 53.7f;
+                ANAN100PAGain60 = 53.5f;
+                ANAN100PAGain40 = 53.2f;
+                ANAN100PAGain30 = 52.3f;
+                ANAN100PAGain20 = 51.0f;
+                ANAN100PAGain17 = 51.0f;
+                ANAN100PAGain15 = 50.5f;
+                ANAN100PAGain12 = 48.2f;
+                ANAN100PAGain10 = 49.0f;
+                ANAN100PAGain6 = 47.0f;
+
+                udANAN100PAGainVHF0.Value = 56.2M;
+                udANAN100PAGainVHF1.Value = 56.2M;
+                udANAN100PAGainVHF2.Value = 56.2M;
+                udANAN100PAGainVHF3.Value = 56.2M;
+                udANAN100PAGainVHF4.Value = 56.2M;
+                udANAN100PAGainVHF5.Value = 56.2M;
+                udANAN100PAGainVHF6.Value = 56.2M;
+                udANAN100PAGainVHF7.Value = 56.2M;
+                udANAN100PAGainVHF8.Value = 56.2M;
+                udANAN100PAGainVHF9.Value = 56.2M;
+                udANAN100PAGainVHF10.Value = 56.2M;
+                udANAN100PAGainVHF11.Value = 56.2M;
+                udANAN100PAGainVHF12.Value = 56.2M;
+                udANAN100PAGainVHF13.Value = 56.2M;
+            }
+
+            if (radGenModelANAN100D.Checked && !chkBypassANANPASettings.Checked)
+            {
+                ANANPAGain160 = 52.0f;
+                ANANPAGain80 = 52.5f;
+                ANANPAGain60 = 52.5f;
+                ANANPAGain40 = 52.1f;
+                ANANPAGain30 = 51.2f;
+                ANANPAGain20 = 50.5f;
+                ANANPAGain17 = 50.1f;
+                ANANPAGain15 = 50.0f;
+                ANANPAGain12 = 47.0f;
+                ANANPAGain10 = 47.7f;
+                ANANPAGain6 = 46.5f;
 
                 udANANPAGainVHF0.Value = 56.2M;
                 udANANPAGainVHF1.Value = 56.2M;
@@ -9842,7 +10765,8 @@ namespace PowerSDR
                 udANANPAGainVHF12.Value = 56.2M;
                 udANANPAGainVHF13.Value = 56.2M;
             }
-            else // if (radGenModelHPSDR.Checked || radGenModelHermes.Checked || radGenModelANAN10.Checked)
+
+            if (radGenModelHPSDR.Checked || (radGenModelANAN100D.Checked && chkBypassANANPASettings.Checked))
             {
                 udPAGain160.Value = 41.0M;
                 udPAGain80.Value = 41.2M;
@@ -9870,6 +10794,36 @@ namespace PowerSDR
                 udPAGainVHF11.Value = 56.2M;
                 udPAGainVHF12.Value = 56.2M;
                 udPAGainVHF13.Value = 56.2M;
+            }
+
+            if (radGenModelHermes.Checked)
+            {
+                HermesPAGain160 = 41.0f;
+                HermesPAGain80 = 41.2f;
+                HermesPAGain60 = 41.3f;
+                HermesPAGain40 = 41.3f;
+                HermesPAGain30 = 41.0f;
+                HermesPAGain20 = 40.5f;
+                HermesPAGain17 = 39.9f;
+                HermesPAGain15 = 38.8f;
+                HermesPAGain12 = 38.8f;
+                HermesPAGain10 = 38.8f;
+                HermesPAGain6 = 38.8f;
+
+                udHermesPAGainVHF0.Value = 56.2M;
+                udHermesPAGainVHF1.Value = 56.2M;
+                udHermesPAGainVHF2.Value = 56.2M;
+                udHermesPAGainVHF3.Value = 56.2M;
+                udHermesPAGainVHF4.Value = 56.2M;
+                udHermesPAGainVHF5.Value = 56.2M;
+                udHermesPAGainVHF6.Value = 56.2M;
+                udHermesPAGainVHF7.Value = 56.2M;
+                udHermesPAGainVHF8.Value = 56.2M;
+                udHermesPAGainVHF9.Value = 56.2M;
+                udHermesPAGainVHF10.Value = 56.2M;
+                udHermesPAGainVHF11.Value = 56.2M;
+                udHermesPAGainVHF12.Value = 56.2M;
+                udHermesPAGainVHF13.Value = 56.2M;
             }
         }
 
@@ -10161,329 +11115,6 @@ namespace PowerSDR
         private void comboKBXITDown_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             console.KeyXITDown = (Keys)KeyList[comboKBXITDown.SelectedIndex];
-        }
-
-        #endregion
-
-        #region Ext Ctrl Tab Event Handlers
-
-        private void chkExtRX160_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX1601.Checked) val += 1 << 0;
-            if (chkExtRX1602.Checked) val += 1 << 1;
-            if (chkExtRX1603.Checked) val += 1 << 2;
-            if (chkExtRX1604.Checked) val += 1 << 3;
-            if (chkExtRX1605.Checked) val += 1 << 4;
-            if (chkExtRX1606.Checked) val += 1 << 5;
-
-            console.X2160RX = (byte)val;
-        }
-
-        private void chkExtTX160_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX1601.Checked) val += 1 << 0;
-            if (chkExtTX1602.Checked) val += 1 << 1;
-            if (chkExtTX1603.Checked) val += 1 << 2;
-            if (chkExtTX1604.Checked) val += 1 << 3;
-            if (chkExtTX1605.Checked) val += 1 << 4;
-            if (chkExtTX1606.Checked) val += 1 << 5;
-
-            console.X2160TX = (byte)val;
-        }
-
-        private void chkExtRX80_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX801.Checked) val += 1 << 0;
-            if (chkExtRX802.Checked) val += 1 << 1;
-            if (chkExtRX803.Checked) val += 1 << 2;
-            if (chkExtRX804.Checked) val += 1 << 3;
-            if (chkExtRX805.Checked) val += 1 << 4;
-            if (chkExtRX806.Checked) val += 1 << 5;
-
-            console.X280RX = (byte)val;
-        }
-
-        private void chkExtTX80_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX801.Checked) val += 1 << 0;
-            if (chkExtTX802.Checked) val += 1 << 1;
-            if (chkExtTX803.Checked) val += 1 << 2;
-            if (chkExtTX804.Checked) val += 1 << 3;
-            if (chkExtTX805.Checked) val += 1 << 4;
-            if (chkExtTX806.Checked) val += 1 << 5;
-
-            console.X280TX = (byte)val;
-        }
-
-        private void chkExtRX60_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX601.Checked) val += 1 << 0;
-            if (chkExtRX602.Checked) val += 1 << 1;
-            if (chkExtRX603.Checked) val += 1 << 2;
-            if (chkExtRX604.Checked) val += 1 << 3;
-            if (chkExtRX605.Checked) val += 1 << 4;
-            if (chkExtRX606.Checked) val += 1 << 5;
-
-            console.X260RX = (byte)val;
-        }
-
-        private void chkExtTX60_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX601.Checked) val += 1 << 0;
-            if (chkExtTX602.Checked) val += 1 << 1;
-            if (chkExtTX603.Checked) val += 1 << 2;
-            if (chkExtTX604.Checked) val += 1 << 3;
-            if (chkExtTX605.Checked) val += 1 << 4;
-            if (chkExtTX606.Checked) val += 1 << 5;
-
-            console.X260TX = (byte)val;
-        }
-
-        private void chkExtRX40_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX401.Checked) val += 1 << 0;
-            if (chkExtRX402.Checked) val += 1 << 1;
-            if (chkExtRX403.Checked) val += 1 << 2;
-            if (chkExtRX404.Checked) val += 1 << 3;
-            if (chkExtRX405.Checked) val += 1 << 4;
-            if (chkExtRX406.Checked) val += 1 << 5;
-
-            console.X240RX = (byte)val;
-        }
-
-        private void chkExtTX40_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX401.Checked) val += 1 << 0;
-            if (chkExtTX402.Checked) val += 1 << 1;
-            if (chkExtTX403.Checked) val += 1 << 2;
-            if (chkExtTX404.Checked) val += 1 << 3;
-            if (chkExtTX405.Checked) val += 1 << 4;
-            if (chkExtTX406.Checked) val += 1 << 5;
-
-            console.X240TX = (byte)val;
-        }
-
-        private void chkExtRX30_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX301.Checked) val += 1 << 0;
-            if (chkExtRX302.Checked) val += 1 << 1;
-            if (chkExtRX303.Checked) val += 1 << 2;
-            if (chkExtRX304.Checked) val += 1 << 3;
-            if (chkExtRX305.Checked) val += 1 << 4;
-            if (chkExtRX306.Checked) val += 1 << 5;
-
-            console.X230RX = (byte)val;
-        }
-
-        private void chkExtTX30_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX301.Checked) val += 1 << 0;
-            if (chkExtTX302.Checked) val += 1 << 1;
-            if (chkExtTX303.Checked) val += 1 << 2;
-            if (chkExtTX304.Checked) val += 1 << 3;
-            if (chkExtTX305.Checked) val += 1 << 4;
-            if (chkExtTX306.Checked) val += 1 << 5;
-
-            console.X230TX = (byte)val;
-        }
-
-        private void chkExtRX20_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX201.Checked) val += 1 << 0;
-            if (chkExtRX202.Checked) val += 1 << 1;
-            if (chkExtRX203.Checked) val += 1 << 2;
-            if (chkExtRX204.Checked) val += 1 << 3;
-            if (chkExtRX205.Checked) val += 1 << 4;
-            if (chkExtRX306.Checked) val += 1 << 5;
-
-            console.X220RX = (byte)val;
-        }
-
-        private void chkExtTX20_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX201.Checked) val += 1 << 0;
-            if (chkExtTX202.Checked) val += 1 << 1;
-            if (chkExtTX203.Checked) val += 1 << 2;
-            if (chkExtTX204.Checked) val += 1 << 3;
-            if (chkExtTX205.Checked) val += 1 << 4;
-            if (chkExtTX306.Checked) val += 1 << 5;
-
-            console.X220TX = (byte)val;
-        }
-
-        private void chkExtRX17_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX171.Checked) val += 1 << 0;
-            if (chkExtRX172.Checked) val += 1 << 1;
-            if (chkExtRX173.Checked) val += 1 << 2;
-            if (chkExtRX174.Checked) val += 1 << 3;
-            if (chkExtRX175.Checked) val += 1 << 4;
-            if (chkExtRX176.Checked) val += 1 << 5;
-
-            console.X217RX = (byte)val;
-        }
-
-        private void chkExtTX17_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX171.Checked) val += 1 << 0;
-            if (chkExtTX172.Checked) val += 1 << 1;
-            if (chkExtTX173.Checked) val += 1 << 2;
-            if (chkExtTX174.Checked) val += 1 << 3;
-            if (chkExtTX175.Checked) val += 1 << 4;
-            if (chkExtTX176.Checked) val += 1 << 5;
-
-            console.X217TX = (byte)val;
-        }
-
-        private void chkExtRX15_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX151.Checked) val += 1 << 0;
-            if (chkExtRX152.Checked) val += 1 << 1;
-            if (chkExtRX153.Checked) val += 1 << 2;
-            if (chkExtRX154.Checked) val += 1 << 3;
-            if (chkExtRX155.Checked) val += 1 << 4;
-            if (chkExtRX156.Checked) val += 1 << 5;
-
-            console.X215RX = (byte)val;
-        }
-
-        private void chkExtTX15_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX151.Checked) val += 1 << 0;
-            if (chkExtTX152.Checked) val += 1 << 1;
-            if (chkExtTX153.Checked) val += 1 << 2;
-            if (chkExtTX154.Checked) val += 1 << 3;
-            if (chkExtTX155.Checked) val += 1 << 4;
-            if (chkExtTX156.Checked) val += 1 << 5;
-
-            console.X215TX = (byte)val;
-        }
-
-        private void chkExtRX12_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX121.Checked) val += 1 << 0;
-            if (chkExtRX122.Checked) val += 1 << 1;
-            if (chkExtRX123.Checked) val += 1 << 2;
-            if (chkExtRX124.Checked) val += 1 << 3;
-            if (chkExtRX125.Checked) val += 1 << 4;
-            if (chkExtRX126.Checked) val += 1 << 5;
-
-            console.X212RX = (byte)val;
-        }
-
-        private void chkExtTX12_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX121.Checked) val += 1 << 0;
-            if (chkExtTX122.Checked) val += 1 << 1;
-            if (chkExtTX123.Checked) val += 1 << 2;
-            if (chkExtTX124.Checked) val += 1 << 3;
-            if (chkExtTX125.Checked) val += 1 << 4;
-            if (chkExtTX126.Checked) val += 1 << 5;
-
-            console.X212TX = (byte)val;
-        }
-
-        private void chkExtRX10_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX101.Checked) val += 1 << 0;
-            if (chkExtRX102.Checked) val += 1 << 1;
-            if (chkExtRX103.Checked) val += 1 << 2;
-            if (chkExtRX104.Checked) val += 1 << 3;
-            if (chkExtRX105.Checked) val += 1 << 4;
-            if (chkExtRX106.Checked) val += 1 << 5;
-
-            console.X210RX = (byte)val;
-        }
-
-        private void chkExtTX10_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX101.Checked) val += 1 << 0;
-            if (chkExtTX102.Checked) val += 1 << 1;
-            if (chkExtTX103.Checked) val += 1 << 2;
-            if (chkExtTX104.Checked) val += 1 << 3;
-            if (chkExtTX105.Checked) val += 1 << 4;
-            if (chkExtTX106.Checked) val += 1 << 5;
-
-            console.X210TX = (byte)val;
-        }
-
-        private void chkExtRX6_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX61.Checked) val += 1 << 0;
-            if (chkExtRX62.Checked) val += 1 << 1;
-            if (chkExtRX63.Checked) val += 1 << 2;
-            if (chkExtRX64.Checked) val += 1 << 3;
-            if (chkExtRX65.Checked) val += 1 << 4;
-            if (chkExtRX66.Checked) val += 1 << 5;
-
-            console.X26RX = (byte)val;
-        }
-
-        private void chkExtTX6_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX61.Checked) val += 1 << 0;
-            if (chkExtTX62.Checked) val += 1 << 1;
-            if (chkExtTX63.Checked) val += 1 << 2;
-            if (chkExtTX64.Checked) val += 1 << 3;
-            if (chkExtTX65.Checked) val += 1 << 4;
-            if (chkExtTX66.Checked) val += 1 << 5;
-
-            console.X26TX = (byte)val;
-        }
-
-        private void chkExtRX2_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtRX21.Checked) val += 1 << 0;
-            if (chkExtRX22.Checked) val += 1 << 1;
-            if (chkExtRX23.Checked) val += 1 << 2;
-            if (chkExtRX24.Checked) val += 1 << 3;
-            if (chkExtRX25.Checked) val += 1 << 4;
-            if (chkExtRX26.Checked) val += 1 << 5;
-
-            console.X22RX = (byte)val;
-        }
-
-        private void chkExtTX2_CheckedChanged(object sender, System.EventArgs e)
-        {
-            int val = 0;
-            if (chkExtTX21.Checked) val += 1 << 0;
-            if (chkExtTX22.Checked) val += 1 << 1;
-            if (chkExtTX23.Checked) val += 1 << 2;
-            if (chkExtTX24.Checked) val += 1 << 3;
-            if (chkExtTX25.Checked) val += 1 << 4;
-            if (chkExtTX26.Checked) val += 1 << 5;
-
-            console.X22TX = (byte)val;
-        }
-
-        private void chkExtEnable_CheckedChanged(object sender, System.EventArgs e)
-        {
-            grpExtRX.Enabled = chkExtEnable.Checked;
-            grpExtTX.Enabled = chkExtEnable.Checked;
-            console.ExtCtrlEnabled = chkExtEnable.Checked;
         }
 
         #endregion
@@ -11391,22 +12022,22 @@ namespace PowerSDR
 
         private void udSoftRockCenterFreq_LostFocus(object sender, EventArgs e)
         {
-            udSoftRockCenterFreq.Value = udSoftRockCenterFreq.Value;
+           // udSoftRockCenterFreq.Value = udSoftRockCenterFreq.Value;
         }
 
         private void udDDSCorrection_LostFocus(object sender, EventArgs e)
         {
-            udDDSCorrection.Value = udDDSCorrection.Value;
+           // udDDSCorrection.Value = udDDSCorrection.Value;
         }
 
         private void udDDSIFFreq_LostFocus(object sender, EventArgs e)
         {
-            udDDSIFFreq.Value = udDDSIFFreq.Value;
+           // udDDSIFFreq.Value = udDDSIFFreq.Value;
         }
 
         private void udDDSPLLMult_LostFocus(object sender, EventArgs e)
         {
-            udDDSPLLMult.Value = udDDSPLLMult.Value;
+          //  udDDSPLLMult.Value = udDDSPLLMult.Value;
         }
 
         private void udGeneralLPTDelay_LostFocus(object sender, EventArgs e)
@@ -11774,57 +12405,7 @@ namespace PowerSDR
             udMicGainMin.Value = udMicGainMin.Value;
         }
 
-        private void udPAADC17_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC17.Value = udPAADC17.Value;
-        }
-
-        private void udPAADC15_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC15.Value = udPAADC15.Value;
-        }
-
-        private void udPAADC20_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC20.Value = udPAADC20.Value;
-        }
-
-        private void udPAADC12_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC12.Value = udPAADC12.Value;
-        }
-
-        private void udPAADC10_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC10.Value = udPAADC10.Value;
-        }
-
-        private void udPAADC160_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC160.Value = udPAADC160.Value;
-        }
-
-        private void udPAADC80_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC80.Value = udPAADC80.Value;
-        }
-
-        private void udPAADC60_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC60.Value = udPAADC60.Value;
-        }
-
-        private void udPAADC40_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC40.Value = udPAADC40.Value;
-        }
-
-        private void udPAADC30_LostFocus(object sender, EventArgs e)
-        {
-            udPAADC30.Value = udPAADC30.Value;
-        }
-
-        private void udPAGain10_LostFocus(object sender, EventArgs e)
+          private void udPAGain10_LostFocus(object sender, EventArgs e)
         {
             udPAGain10.Value = udPAGain10.Value;
         }
@@ -12097,6 +12678,80 @@ namespace PowerSDR
             }
         }
 
+        private void comboRX2ColorPalette_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboRX2ColorPalette.Text == "original")
+            {
+                console.rx2_color_sheme = ColorSheme.original;
+                clrbtnRX2WaterfallLow.Visible = true;
+                clrbtnRX2WaterfallHigh.Visible = true;
+                clrbtnRX2WaterfallMid.Visible = true;
+                lblRX2DisplayWaterfallHighColor.Visible = true;
+                lblRX2DisplayWaterfallLowColor.Visible = true;
+                lblRX2DisplayWaterfallMidColor.Visible = true;
+            }
+            if (comboRX2ColorPalette.Text == "enhanced")
+            {
+                console.rx2_color_sheme = ColorSheme.enhanced;
+                clrbtnRX2WaterfallLow.Visible = true;
+                clrbtnRX2WaterfallHigh.Visible = false;
+                clrbtnRX2WaterfallMid.Visible = false;
+                lblRX2DisplayWaterfallHighColor.Visible = false;
+                lblRX2DisplayWaterfallLowColor.Visible = true;
+                lblRX2DisplayWaterfallMidColor.Visible = false;
+            }
+            if (comboRX2ColorPalette.Text == "Spectran")
+            {
+                console.rx2_color_sheme = ColorSheme.SPECTRAN;
+                clrbtnRX2WaterfallLow.Visible = false;
+                clrbtnRX2WaterfallHigh.Visible = false;
+                clrbtnRX2WaterfallMid.Visible = false;
+                lblRX2DisplayWaterfallHighColor.Visible = false;
+                lblRX2DisplayWaterfallLowColor.Visible = false;
+                lblRX2DisplayWaterfallMidColor.Visible = false;
+            }
+            if (comboRX2ColorPalette.Text == "BlackWhite")
+            {
+                console.rx2_color_sheme = ColorSheme.BLACKWHITE;
+                clrbtnRX2WaterfallLow.Visible = false;
+                clrbtnRX2WaterfallHigh.Visible = false;
+                clrbtnRX2WaterfallMid.Visible = false;
+                lblRX2DisplayWaterfallHighColor.Visible = false;
+                lblRX2DisplayWaterfallLowColor.Visible = false;
+                lblRX2DisplayWaterfallMidColor.Visible = false;
+            }
+            if (comboRX2ColorPalette.Text == "LinLog")
+            {
+                console.rx2_color_sheme = ColorSheme.LinLog;
+                clrbtnRX2WaterfallLow.Visible = false;
+                clrbtnRX2WaterfallHigh.Visible = false;
+                clrbtnRX2WaterfallMid.Visible = false;
+                lblRX2DisplayWaterfallHighColor.Visible = false;
+                lblRX2DisplayWaterfallLowColor.Visible = false;
+                lblRX2DisplayWaterfallMidColor.Visible = false;
+            }
+            if (comboRX2ColorPalette.Text == "LinRad")
+            {
+                console.rx2_color_sheme = ColorSheme.LinRad;
+                clrbtnRX2WaterfallLow.Visible = false;
+                clrbtnRX2WaterfallHigh.Visible = false;
+                clrbtnRX2WaterfallMid.Visible = false;
+                lblRX2DisplayWaterfallHighColor.Visible = false;
+                lblRX2DisplayWaterfallLowColor.Visible = false;
+                lblRX2DisplayWaterfallMidColor.Visible = false;
+            }
+            if (comboRX2ColorPalette.Text == "LinAuto")
+            {
+                console.rx2_color_sheme = ColorSheme.LinAuto;
+                clrbtnRX2WaterfallLow.Visible = false;
+                clrbtnRX2WaterfallHigh.Visible = false;
+                clrbtnRX2WaterfallMid.Visible = false;
+                lblRX2DisplayWaterfallHighColor.Visible = false;
+                lblRX2DisplayWaterfallLowColor.Visible = false;
+                lblRX2DisplayWaterfallMidColor.Visible = false;
+            }
+        }
+
         private void udDisplayWaterfallAvgTime_ValueChanged(object sender, System.EventArgs e)
         {
             double buffer_time = double.Parse(comboAudioBuffer1.Text) / (double)console.SampleRate1;
@@ -12110,6 +12765,19 @@ namespace PowerSDR
             Display.WaterfallUpdatePeriod = (int)udDisplayWaterfallUpdatePeriod.Value;
         }
 
+        private void udRX2DisplayWaterfallAvgTime_ValueChanged(object sender, System.EventArgs e)
+        {
+            double buffer_time = double.Parse(comboAudioBuffer1.Text) / (double)console.SampleRate1;
+            int buffersToAvg = (int)((float)udRX2DisplayWaterfallAvgTime.Value * 0.001 / buffer_time);
+            buffersToAvg = Math.Max(2, buffersToAvg);
+            Display.RX2WaterfallAvgBlocks = buffersToAvg;
+        }
+
+        private void udRX2DisplayWaterfallUpdatePeriod_ValueChanged(object sender, System.EventArgs e)
+        {
+            Display.RX2WaterfallUpdatePeriod = (int)udRX2DisplayWaterfallUpdatePeriod.Value;
+        }
+ 
         private void chkSnapClickTune_CheckedChanged(object sender, System.EventArgs e)
         {
             console.SnapToClickTuning = chkSnapClickTune.Checked;
@@ -12131,7 +12799,7 @@ namespace PowerSDR
             foreach (Control c in panelAutoPACalibrate.Controls)
             // foreach (Control c in grpPAGainByBand.Controls)
             {
-                if (c.Name.StartsWith("chkPA"))
+                if (c.Name.StartsWith("chkPA") || c.Name.StartsWith("chkBy"))
                 {
                     c.Visible = !radPACalAllBands.Checked;
                 }
@@ -12272,7 +12940,7 @@ namespace PowerSDR
 
         private void chkGenDDSExpert_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (chkGenDDSExpert.Checked && chkGenDDSExpert.Focused)
+          /*  if (chkGenDDSExpert.Checked && chkGenDDSExpert.Focused)
             {
                 DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n" +
                     "experienced PowerSDR users should use.  These controls may allow the user\n" +
@@ -12306,7 +12974,7 @@ namespace PowerSDR
                     lblIFFrequency.Visible = b;
                     udDDSIFFreq.Visible = b;
                     break;
-            }
+            } */
         }
 
         private void chkCalExpert_CheckedChanged(object sender, System.EventArgs e)
@@ -12389,8 +13057,8 @@ namespace PowerSDR
 
         private void chkGenFLEX5000ExtRef_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (radGenModelFLEX5000.Checked)
-                FWC.SetXREF(chkGenFLEX5000ExtRef.Checked);
+          //  if (radGenModelFLEX5000.Checked)
+              //  FWC.SetXREF(chkGenFLEX5000ExtRef.Checked);
         }
 
         private void chkGenAllModeMicPTT_CheckedChanged(object sender, System.EventArgs e)
@@ -12680,6 +13348,12 @@ namespace PowerSDR
                     case Keys.O:
                         radSigGenTXOutput.Visible = true;
                         break;
+                    case Keys.P:
+                        chkAutoPACalibrate.Visible = true;
+                        break;
+                    case Keys.V:
+                        grpDisplayDriverEngine.Visible = true;
+                        break;
                 }
             }
         }
@@ -12696,7 +13370,7 @@ namespace PowerSDR
 
         private void udF3KFanTempThresh_ValueChanged(object sender, System.EventArgs e)
         {
-            console.F3KTempThresh = (float)udF3KFanTempThresh.Value;
+           // console.F3KTempThresh = (float)udF3KFanTempThresh.Value;
         }
 
         private void chkGenTX1Delay_CheckedChanged(object sender, System.EventArgs e)
@@ -12749,8 +13423,8 @@ namespace PowerSDR
 
         private void chkGenOptionsShowATUPopup_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (console.flex3000ATUForm != null && !console.flex3000ATUForm.IsDisposed)
-                console.flex3000ATUForm.ShowFeedbackPopup = chkGenOptionsShowATUPopup.Checked;
+          //  if (console.flex3000ATUForm != null && !console.flex3000ATUForm.IsDisposed)
+            //    console.flex3000ATUForm.ShowFeedbackPopup = chkGenOptionsShowATUPopup.Checked;
         }
 
         private void chkSpaceNavControlVFOs_CheckChanged(object sender, System.EventArgs e)
@@ -13985,14 +14659,14 @@ namespace PowerSDR
 
         private void udFXtal_ValueChanged_1(object sender, System.EventArgs e) // modif F8CHK
         {
-            console.SI570FXtal = (double)udFXtal.Value;
+           // console.SI570FXtal = (double)udFXtal.Value;
         }
 
         private void chkGeneralUseSi570_CheckedChanged(object sender, EventArgs e) // modif F8CHK
         {
-            console.si570_used = chkGeneralUseSi570.Checked;
-            grpHWSoftRock.Visible = !chkGeneralUseSi570.Checked;
-            grpSI570.Visible = chkGeneralUseSi570.Checked;
+           // console.si570_used = chkGeneralUseSi570.Checked;
+          //  grpHWSoftRock.Visible = !chkGeneralUseSi570.Checked;
+          //  grpSI570.Visible = chkGeneralUseSi570.Checked;
         }
 
         private void chkHERCULES_CheckedChanged(object sender, EventArgs e)
@@ -14000,6 +14674,14 @@ namespace PowerSDR
             switch (chkHERCULES.Checked)
             {
                 case true:
+                    foreach (Control c in grpPennyExtCtrl.Controls)
+                    {
+                        if (c.Name.StartsWith("chkPenOC"))
+                        {
+                            ((CheckBoxTS)c).Checked = false;
+                        }
+                    }
+   
                     chkPenOCrcv1601.Checked = true;
                     chkPenOCxmit1601.Checked = true;
                     chkPenOCrcv802.Checked = true;
@@ -14043,48 +14725,14 @@ namespace PowerSDR
                     chkPenOCrcv66.Checked = true;
                     break;
                 case false:
-                    chkPenOCrcv1601.Checked = false;
-                    chkPenOCxmit1601.Checked = false;
-                    chkPenOCrcv802.Checked = false;
-                    chkPenOCxmit802.Checked = false;
-                    chkPenOCrcv601.Checked = false;
-                    chkPenOCxmit601.Checked = false;
-                    chkPenOCrcv602.Checked = false;
-                    chkPenOCxmit602.Checked = false;
-                    chkPenOCrcv403.Checked = false;
-                    chkPenOCxmit403.Checked = false;
-                    chkPenOCrcv301.Checked = false;
-                    chkPenOCxmit301.Checked = false;
-                    chkPenOCrcv303.Checked = false;
-                    chkPenOCxmit303.Checked = false;
-                    chkPenOCrcv202.Checked = false;
-                    chkPenOCxmit202.Checked = false;
-                    chkPenOCrcv203.Checked = false;
-                    chkPenOCxmit203.Checked = false;
-                    chkPenOCrcv171.Checked = false;
-                    chkPenOCxmit171.Checked = false;
-                    chkPenOCrcv172.Checked = false;
-                    chkPenOCxmit172.Checked = false;
-                    chkPenOCrcv173.Checked = false;
-                    chkPenOCxmit173.Checked = false;
-                    chkPenOCrcv154.Checked = false;
-                    chkPenOCxmit154.Checked = false;
-                    chkPenOCrcv121.Checked = false;
-                    chkPenOCxmit121.Checked = false;
-                    chkPenOCrcv124.Checked = false;
-                    chkPenOCxmit124.Checked = false;
-                    chkPenOCrcv102.Checked = false;
-                    chkPenOCxmit102.Checked = false;
-                    chkPenOCrcv104.Checked = false;
-                    chkPenOCxmit104.Checked = false;
-                    chkPenOCrcv61.Checked = false;
-                    chkPenOCxmit61.Checked = false;
-                    chkPenOCrcv62.Checked = false;
-                    chkPenOCxmit62.Checked = false;
-                    chkPenOCrcv64.Checked = false;
-                    chkPenOCxmit64.Checked = false;
-                    chkPenOCrcv66.Checked = false;
-                    break;
+                   foreach (Control c in grpPennyExtCtrl.Controls)
+                    {
+                        if (c.Name.StartsWith("chkPenOC"))
+                        {
+                            ((CheckBoxTS)c).Checked = false;
+                        }
+                    }
+                     break;
             }
         }
 
@@ -14093,359 +14741,26 @@ namespace PowerSDR
             switch (chkHERCULES.Checked)
             {
                 case false:
-                    chkPenOCrcv1601.Checked = false;
-                    chkPenOCxmit1601.Checked = false;
-                    chkPenOCrcv1602.Checked = false;
-                    chkPenOCxmit1602.Checked = false;
-                    chkPenOCrcv1603.Checked = false;
-                    chkPenOCxmit1603.Checked = false;
-                    chkPenOCrcv1604.Checked = false;
-                    chkPenOCxmit1604.Checked = false;
-                    chkPenOCrcv1605.Checked = false;
-                    chkPenOCxmit1605.Checked = false;
-                    chkPenOCrcv1606.Checked = false;
-                    chkPenOCxmit1606.Checked = false;
-                    chkPenOCrcv1607.Checked = false;
-                    chkPenOCxmit1607.Checked = false;
-                    chkPenOCrcv801.Checked = false;
-                    chkPenOCxmit801.Checked = false;
-                    chkPenOCrcv802.Checked = false;
-                    chkPenOCxmit802.Checked = false;
-                    chkPenOCrcv803.Checked = false;
-                    chkPenOCxmit803.Checked = false;
-                    chkPenOCrcv804.Checked = false;
-                    chkPenOCxmit804.Checked = false;
-                    chkPenOCrcv805.Checked = false;
-                    chkPenOCxmit805.Checked = false;
-                    chkPenOCrcv806.Checked = false;
-                    chkPenOCxmit806.Checked = false;
-                    chkPenOCrcv807.Checked = false;
-                    chkPenOCxmit807.Checked = false;
-                    chkPenOCrcv601.Checked = false;
-                    chkPenOCxmit601.Checked = false;
-                    chkPenOCrcv602.Checked = false;
-                    chkPenOCxmit602.Checked = false;
-                    chkPenOCrcv603.Checked = false;
-                    chkPenOCxmit603.Checked = false;
-                    chkPenOCrcv604.Checked = false;
-                    chkPenOCxmit604.Checked = false;
-                    chkPenOCrcv605.Checked = false;
-                    chkPenOCxmit605.Checked = false;
-                    chkPenOCrcv606.Checked = false;
-                    chkPenOCxmit606.Checked = false;
-                    chkPenOCrcv607.Checked = false;
-                    chkPenOCxmit607.Checked = false;
-                    chkPenOCrcv401.Checked = false;
-                    chkPenOCxmit401.Checked = false;
-                    chkPenOCrcv402.Checked = false;
-                    chkPenOCxmit402.Checked = false;
-                    chkPenOCrcv403.Checked = false;
-                    chkPenOCxmit403.Checked = false;
-                    chkPenOCrcv404.Checked = false;
-                    chkPenOCxmit404.Checked = false;
-                    chkPenOCrcv405.Checked = false;
-                    chkPenOCxmit405.Checked = false;
-                    chkPenOCrcv406.Checked = false;
-                    chkPenOCxmit406.Checked = false;
-                    chkPenOCrcv407.Checked = false;
-                    chkPenOCxmit407.Checked = false;
-                    chkPenOCrcv301.Checked = false;
-                    chkPenOCxmit301.Checked = false;
-                    chkPenOCrcv302.Checked = false;
-                    chkPenOCxmit302.Checked = false;
-                    chkPenOCrcv303.Checked = false;
-                    chkPenOCxmit303.Checked = false;
-                    chkPenOCrcv304.Checked = false;
-                    chkPenOCxmit304.Checked = false;
-                    chkPenOCrcv305.Checked = false;
-                    chkPenOCxmit305.Checked = false;
-                    chkPenOCrcv306.Checked = false;
-                    chkPenOCxmit306.Checked = false;
-                    chkPenOCrcv307.Checked = false;
-                    chkPenOCxmit307.Checked = false;
-                    chkPenOCrcv201.Checked = false;
-                    chkPenOCxmit201.Checked = false;
-                    chkPenOCrcv202.Checked = false;
-                    chkPenOCxmit202.Checked = false;
-                    chkPenOCrcv203.Checked = false;
-                    chkPenOCxmit203.Checked = false;
-                    chkPenOCrcv204.Checked = false;
-                    chkPenOCxmit204.Checked = false;
-                    chkPenOCrcv205.Checked = false;
-                    chkPenOCxmit205.Checked = false;
-                    chkPenOCrcv206.Checked = false;
-                    chkPenOCxmit206.Checked = false;
-                    chkPenOCrcv207.Checked = false;
-                    chkPenOCxmit207.Checked = false;
-                    chkPenOCrcv171.Checked = false;
-                    chkPenOCxmit171.Checked = false;
-                    chkPenOCrcv172.Checked = false;
-                    chkPenOCxmit172.Checked = false;
-                    chkPenOCrcv173.Checked = false;
-                    chkPenOCxmit173.Checked = false;
-                    chkPenOCrcv174.Checked = false;
-                    chkPenOCxmit174.Checked = false;
-                    chkPenOCrcv175.Checked = false;
-                    chkPenOCxmit175.Checked = false;
-                    chkPenOCrcv176.Checked = false;
-                    chkPenOCxmit176.Checked = false;
-                    chkPenOCrcv177.Checked = false;
-                    chkPenOCxmit177.Checked = false;
-                    chkPenOCrcv151.Checked = false;
-                    chkPenOCxmit151.Checked = false;
-                    chkPenOCrcv152.Checked = false;
-                    chkPenOCxmit152.Checked = false;
-                    chkPenOCrcv153.Checked = false;
-                    chkPenOCxmit153.Checked = false;
-                    chkPenOCrcv154.Checked = false;
-                    chkPenOCxmit154.Checked = false;
-                    chkPenOCrcv155.Checked = false;
-                    chkPenOCxmit155.Checked = false;
-                    chkPenOCrcv156.Checked = false;
-                    chkPenOCxmit156.Checked = false;
-                    chkPenOCrcv157.Checked = false;
-                    chkPenOCxmit157.Checked = false;
-                    chkPenOCrcv121.Checked = false;
-                    chkPenOCxmit121.Checked = false;
-                    chkPenOCrcv122.Checked = false;
-                    chkPenOCxmit122.Checked = false;
-                    chkPenOCrcv123.Checked = false;
-                    chkPenOCxmit123.Checked = false;
-                    chkPenOCrcv124.Checked = false;
-                    chkPenOCxmit124.Checked = false;
-                    chkPenOCrcv125.Checked = false;
-                    chkPenOCxmit125.Checked = false;
-                    chkPenOCrcv126.Checked = false;
-                    chkPenOCxmit126.Checked = false;
-                    chkPenOCrcv127.Checked = false;
-                    chkPenOCxmit127.Checked = false;
-                    chkPenOCrcv101.Checked = false;
-                    chkPenOCxmit101.Checked = false;
-                    chkPenOCrcv102.Checked = false;
-                    chkPenOCxmit102.Checked = false;
-                    chkPenOCrcv103.Checked = false;
-                    chkPenOCxmit103.Checked = false;
-                    chkPenOCrcv104.Checked = false;
-                    chkPenOCxmit104.Checked = false;
-                    chkPenOCrcv105.Checked = false;
-                    chkPenOCxmit105.Checked = false;
-                    chkPenOCrcv106.Checked = false;
-                    chkPenOCxmit106.Checked = false;
-                    chkPenOCrcv107.Checked = false;
-                    chkPenOCxmit107.Checked = false;
-                    chkPenOCrcv61.Checked = false;
-                    chkPenOCxmit61.Checked = false;
-                    chkPenOCrcv62.Checked = false;
-                    chkPenOCxmit62.Checked = false;
-                    chkPenOCrcv63.Checked = false;
-                    chkPenOCxmit63.Checked = false;
-                    chkPenOCrcv64.Checked = false;
-                    chkPenOCxmit64.Checked = false;
-                    chkPenOCrcv65.Checked = false;
-                    chkPenOCxmit65.Checked = false;
-                    chkPenOCrcv66.Checked = false;
-                    chkPenOCxmit66.Checked = false;
-                    chkPenOCrcv67.Checked = false;
-                    chkPenOCxmit67.Checked = false;
-                    chkPenOCrcv21.Checked = false;
-                    chkPenOCxmit21.Checked = false;
-                    chkPenOCrcv22.Checked = false;
-                    chkPenOCxmit22.Checked = false;
-                    chkPenOCrcv23.Checked = false;
-                    chkPenOCxmit23.Checked = false;
-                    chkPenOCrcv24.Checked = false;
-                    chkPenOCxmit24.Checked = false;
-                    chkPenOCrcv25.Checked = false;
-                    chkPenOCxmit25.Checked = false;
-                    chkPenOCrcv26.Checked = false;
-                    chkPenOCxmit26.Checked = false;
-                    chkPenOCrcv27.Checked = false;
-                    chkPenOCxmit27.Checked = false;
+                    foreach (Control c in grpPennyExtCtrl.Controls)
+                    {
+                        if (c.Name.StartsWith("chkPenOC"))
+                        {
+                            ((CheckBoxTS)c).Checked = false;
+                        }
+                    }
                     break;
             }
         }
 
         private void btnPennyCtrlVHFReset_Click(object sender, EventArgs e)
         {
-            chkPenOCrcvVHF01.Checked = false;
-            chkPenOCxmitVHF01.Checked = false;
-            chkPenOCrcvVHF02.Checked = false;
-            chkPenOCxmitVHF02.Checked = false;
-            chkPenOCrcvVHF03.Checked = false;
-            chkPenOCxmitVHF03.Checked = false;
-            chkPenOCrcvVHF04.Checked = false;
-            chkPenOCxmitVHF04.Checked = false;
-            chkPenOCrcvVHF05.Checked = false;
-            chkPenOCxmitVHF05.Checked = false;
-            chkPenOCrcvVHF06.Checked = false;
-            chkPenOCxmitVHF06.Checked = false;
-            chkPenOCrcvVHF07.Checked = false;
-            chkPenOCxmitVHF07.Checked = false;
-
-            chkPenOCrcvVHF11.Checked = false;
-            chkPenOCxmitVHF11.Checked = false;
-            chkPenOCrcvVHF12.Checked = false;
-            chkPenOCxmitVHF12.Checked = false;
-            chkPenOCrcvVHF13.Checked = false;
-            chkPenOCxmitVHF13.Checked = false;
-            chkPenOCrcvVHF14.Checked = false;
-            chkPenOCxmitVHF14.Checked = false;
-            chkPenOCrcvVHF15.Checked = false;
-            chkPenOCxmitVHF15.Checked = false;
-            chkPenOCrcvVHF16.Checked = false;
-            chkPenOCxmitVHF16.Checked = false;
-            chkPenOCrcvVHF17.Checked = false;
-            chkPenOCxmitVHF17.Checked = false;
-
-            chkPenOCrcvVHF21.Checked = false;
-            chkPenOCxmitVHF21.Checked = false;
-            chkPenOCrcvVHF22.Checked = false;
-            chkPenOCxmitVHF22.Checked = false;
-            chkPenOCrcvVHF23.Checked = false;
-            chkPenOCxmitVHF23.Checked = false;
-            chkPenOCrcvVHF24.Checked = false;
-            chkPenOCxmitVHF24.Checked = false;
-            chkPenOCrcvVHF25.Checked = false;
-            chkPenOCxmitVHF25.Checked = false;
-            chkPenOCrcvVHF26.Checked = false;
-            chkPenOCxmitVHF26.Checked = false;
-            chkPenOCrcvVHF27.Checked = false;
-            chkPenOCxmitVHF27.Checked = false;
-
-            chkPenOCrcvVHF31.Checked = false;
-            chkPenOCxmitVHF31.Checked = false;
-            chkPenOCrcvVHF32.Checked = false;
-            chkPenOCxmitVHF32.Checked = false;
-            chkPenOCrcvVHF33.Checked = false;
-            chkPenOCxmitVHF33.Checked = false;
-            chkPenOCrcvVHF34.Checked = false;
-            chkPenOCxmitVHF34.Checked = false;
-            chkPenOCrcvVHF35.Checked = false;
-            chkPenOCxmitVHF35.Checked = false;
-            chkPenOCrcvVHF36.Checked = false;
-            chkPenOCxmitVHF36.Checked = false;
-            chkPenOCrcvVHF37.Checked = false;
-            chkPenOCxmitVHF37.Checked = false;
-
-            chkPenOCrcvVHF41.Checked = false;
-            chkPenOCxmitVHF41.Checked = false;
-            chkPenOCrcvVHF42.Checked = false;
-            chkPenOCxmitVHF42.Checked = false;
-            chkPenOCrcvVHF43.Checked = false;
-            chkPenOCxmitVHF43.Checked = false;
-            chkPenOCrcvVHF44.Checked = false;
-            chkPenOCxmitVHF44.Checked = false;
-            chkPenOCrcvVHF45.Checked = false;
-            chkPenOCxmitVHF45.Checked = false;
-            chkPenOCrcvVHF46.Checked = false;
-            chkPenOCxmitVHF46.Checked = false;
-            chkPenOCrcvVHF47.Checked = false;
-            chkPenOCxmitVHF47.Checked = false;
-
-            chkPenOCrcvVHF51.Checked = false;
-            chkPenOCxmitVHF51.Checked = false;
-            chkPenOCrcvVHF52.Checked = false;
-            chkPenOCxmitVHF52.Checked = false;
-            chkPenOCrcvVHF53.Checked = false;
-            chkPenOCxmitVHF53.Checked = false;
-            chkPenOCrcvVHF54.Checked = false;
-            chkPenOCxmitVHF54.Checked = false;
-            chkPenOCrcvVHF55.Checked = false;
-            chkPenOCxmitVHF55.Checked = false;
-            chkPenOCrcvVHF56.Checked = false;
-            chkPenOCxmitVHF56.Checked = false;
-            chkPenOCrcvVHF57.Checked = false;
-            chkPenOCxmitVHF57.Checked = false;
-
-            chkPenOCrcvVHF61.Checked = false;
-            chkPenOCxmitVHF61.Checked = false;
-            chkPenOCrcvVHF62.Checked = false;
-            chkPenOCxmitVHF62.Checked = false;
-            chkPenOCrcvVHF63.Checked = false;
-            chkPenOCxmitVHF63.Checked = false;
-            chkPenOCrcvVHF64.Checked = false;
-            chkPenOCxmitVHF64.Checked = false;
-            chkPenOCrcvVHF65.Checked = false;
-            chkPenOCxmitVHF65.Checked = false;
-            chkPenOCrcvVHF66.Checked = false;
-            chkPenOCxmitVHF66.Checked = false;
-            chkPenOCrcvVHF67.Checked = false;
-            chkPenOCxmitVHF67.Checked = false;
-
-            chkPenOCrcvVHF71.Checked = false;
-            chkPenOCxmitVHF71.Checked = false;
-            chkPenOCrcvVHF72.Checked = false;
-            chkPenOCxmitVHF72.Checked = false;
-            chkPenOCrcvVHF73.Checked = false;
-            chkPenOCxmitVHF73.Checked = false;
-            chkPenOCrcvVHF74.Checked = false;
-            chkPenOCxmitVHF74.Checked = false;
-            chkPenOCrcvVHF75.Checked = false;
-            chkPenOCxmitVHF75.Checked = false;
-            chkPenOCrcvVHF76.Checked = false;
-            chkPenOCxmitVHF76.Checked = false;
-            chkPenOCrcvVHF77.Checked = false;
-            chkPenOCxmitVHF77.Checked = false;
-
-            chkPenOCrcvVHF81.Checked = false;
-            chkPenOCxmitVHF81.Checked = false;
-            chkPenOCrcvVHF82.Checked = false;
-            chkPenOCxmitVHF82.Checked = false;
-            chkPenOCrcvVHF83.Checked = false;
-            chkPenOCxmitVHF83.Checked = false;
-            chkPenOCrcvVHF84.Checked = false;
-            chkPenOCxmitVHF84.Checked = false;
-            chkPenOCrcvVHF85.Checked = false;
-            chkPenOCxmitVHF85.Checked = false;
-            chkPenOCrcvVHF86.Checked = false;
-            chkPenOCxmitVHF86.Checked = false;
-            chkPenOCrcvVHF87.Checked = false;
-            chkPenOCxmitVHF87.Checked = false;
-
-            chkPenOCrcvVHF91.Checked = false;
-            chkPenOCxmitVHF91.Checked = false;
-            chkPenOCrcvVHF92.Checked = false;
-            chkPenOCxmitVHF92.Checked = false;
-            chkPenOCrcvVHF93.Checked = false;
-            chkPenOCxmitVHF93.Checked = false;
-            chkPenOCrcvVHF94.Checked = false;
-            chkPenOCxmitVHF94.Checked = false;
-            chkPenOCrcvVHF95.Checked = false;
-            chkPenOCxmitVHF95.Checked = false;
-            chkPenOCrcvVHF96.Checked = false;
-            chkPenOCxmitVHF96.Checked = false;
-            chkPenOCrcvVHF97.Checked = false;
-            chkPenOCxmitVHF97.Checked = false;
-
-            chkPenOCrcvVHF101.Checked = false;
-            chkPenOCxmitVHF101.Checked = false;
-            chkPenOCrcvVHF102.Checked = false;
-            chkPenOCxmitVHF102.Checked = false;
-            chkPenOCrcvVHF103.Checked = false;
-            chkPenOCxmitVHF103.Checked = false;
-            chkPenOCrcvVHF104.Checked = false;
-            chkPenOCxmitVHF104.Checked = false;
-            chkPenOCrcvVHF105.Checked = false;
-            chkPenOCxmitVHF105.Checked = false;
-            chkPenOCrcvVHF106.Checked = false;
-            chkPenOCxmitVHF106.Checked = false;
-            chkPenOCrcvVHF107.Checked = false;
-            chkPenOCxmitVHF107.Checked = false;
-
-            chkPenOCrcvVHF111.Checked = false;
-            chkPenOCxmitVHF111.Checked = false;
-            chkPenOCrcvVHF112.Checked = false;
-            chkPenOCxmitVHF112.Checked = false;
-            chkPenOCrcvVHF113.Checked = false;
-            chkPenOCxmitVHF113.Checked = false;
-            chkPenOCrcvVHF114.Checked = false;
-            chkPenOCxmitVHF114.Checked = false;
-            chkPenOCrcvVHF115.Checked = false;
-            chkPenOCxmitVHF115.Checked = false;
-            chkPenOCrcvVHF116.Checked = false;
-            chkPenOCxmitVHF116.Checked = false;
-            chkPenOCrcvVHF117.Checked = false;
-            chkPenOCxmitVHF117.Checked = false;
+            foreach (Control c in grpPennyExtCtrlVHF.Controls)
+            {
+                if (c.Name.StartsWith("chkPenOC"))
+                {
+                    ((CheckBoxTS)c).Checked = false;
+                }
+            }
         }
 
         private void comboFRSRegion_SelectedIndexChanged(object sender, EventArgs e) //w5wc
@@ -14486,7 +14801,7 @@ namespace PowerSDR
                     break;
                 case "United States":
                     region = FRSRegion.US;
-                    Display.Init();
+                   // Display.Init();
                     break;
                 case "Norway":
                     region = FRSRegion.Norway;
@@ -14594,7 +14909,8 @@ namespace PowerSDR
                 grpMetisAddr.Visible = false;
                 radMicIn_CheckedChanged(this, EventArgs.Empty);
                 radLineIn_CheckedChanged(this, EventArgs.Empty);
-
+                if (comboAudioSampleRate1.Items.Contains(384000))
+                    comboAudioSampleRate1.Items.Remove(384000);
             }
             else
             {
@@ -14616,7 +14932,8 @@ namespace PowerSDR
                 //  lblLineInBoost.Visible = false;
                 //  udLineInBoost.Visible = false;
                 //  chk20dbMicBoost.Visible = true;
-
+                if (!comboAudioSampleRate1.Items.Contains(384000))
+                    comboAudioSampleRate1.Items.Add(384000);
             }
             else
             {
@@ -15832,11 +16149,6 @@ namespace PowerSDR
                 console.XVTRForm.AlexTRRelay = chkAlexTRRelay.Checked;
         }
 
-        private void udDisplayGridMin_ValueChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void radDispWeightedLog_CheckedChanged(object sender, EventArgs e)
         {
             if (radDispWeightedLog.Checked)
@@ -15847,6 +16159,8 @@ namespace PowerSDR
                 console.specRX.GetSpecRX(0).AverageMode = 1;
             else if (radDispWindowLinear.Checked)
                 console.specRX.GetSpecRX(0).AverageMode = 3;
+            else if (radDispLowNoiseFloor.Checked)
+                console.specRX.GetSpecRX(0).AverageMode = 6;
             console.UpdateRXSpectrumDisplayVars();
         }
 
@@ -15860,6 +16174,8 @@ namespace PowerSDR
                 console.specRX.GetSpecRX(0).AverageMode = 1;
             else if (radDispWindowLinear.Checked)
                 console.specRX.GetSpecRX(0).AverageMode = 3;
+            else if (radDispLowNoiseFloor.Checked)
+                console.specRX.GetSpecRX(0).AverageMode = 6;
             console.UpdateRXSpectrumDisplayVars();
         }
 
@@ -15873,6 +16189,8 @@ namespace PowerSDR
                 console.specRX.GetSpecRX(0).AverageMode = 1;
             else if (radDispWindowLinear.Checked)
                 console.specRX.GetSpecRX(0).AverageMode = 3;
+            else if (radDispLowNoiseFloor.Checked)
+                console.specRX.GetSpecRX(0).AverageMode = 6;
             console.UpdateRXSpectrumDisplayVars();
         }
 
@@ -15886,6 +16204,23 @@ namespace PowerSDR
                 console.specRX.GetSpecRX(0).AverageMode = 1;
             else if (radDispWindowLinear.Checked)
                 console.specRX.GetSpecRX(0).AverageMode = 3;
+            else if (radDispLowNoiseFloor.Checked)
+                console.specRX.GetSpecRX(0).AverageMode = 6;
+            console.UpdateRXSpectrumDisplayVars();
+        }
+
+        private void radDispLowNoiseFloor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radDispWeightedLog.Checked)
+                console.specRX.GetSpecRX(0).AverageMode = 2;
+            else if (radDispWindowLog.Checked)
+                console.specRX.GetSpecRX(0).AverageMode = 4;
+            else if (radDispWeightedLinear.Checked)
+                console.specRX.GetSpecRX(0).AverageMode = 1;
+            else if (radDispWindowLinear.Checked)
+                console.specRX.GetSpecRX(0).AverageMode = 3;
+            else if (radDispLowNoiseFloor.Checked)
+                console.specRX.GetSpecRX(0).AverageMode = 6;
             console.UpdateRXSpectrumDisplayVars();
         }
 
@@ -15899,6 +16234,8 @@ namespace PowerSDR
                 console.specRX.GetSpecRX(1).AverageMode = 1;
             else if (radRX2DispWindowLinear.Checked)
                 console.specRX.GetSpecRX(1).AverageMode = 3;
+            else if (radRX2DispLowNoiseFloor.Checked)
+                console.specRX.GetSpecRX(1).AverageMode = 6;
         }
 
         private void radRX2DispWindowLog_CheckedChanged(object sender, EventArgs e)
@@ -15911,6 +16248,8 @@ namespace PowerSDR
                 console.specRX.GetSpecRX(1).AverageMode = 1;
             else if (radRX2DispWindowLinear.Checked)
                 console.specRX.GetSpecRX(1).AverageMode = 3;
+            else if (radRX2DispLowNoiseFloor.Checked)
+                console.specRX.GetSpecRX(1).AverageMode = 6;
         }
 
         private void radRX2DispWeightedLinear_CheckedChanged(object sender, EventArgs e)
@@ -15923,6 +16262,8 @@ namespace PowerSDR
                 console.specRX.GetSpecRX(1).AverageMode = 1;
             else if (radRX2DispWindowLinear.Checked)
                 console.specRX.GetSpecRX(1).AverageMode = 3;
+            else if (radRX2DispLowNoiseFloor.Checked)
+                console.specRX.GetSpecRX(1).AverageMode = 6;
         }
 
         private void radRX2DispWindowLinear_CheckedChanged(object sender, EventArgs e)
@@ -15935,6 +16276,22 @@ namespace PowerSDR
                 console.specRX.GetSpecRX(1).AverageMode = 1;
             else if (radRX2DispWindowLinear.Checked)
                 console.specRX.GetSpecRX(1).AverageMode = 3;
+            else if (radRX2DispLowNoiseFloor.Checked)
+                console.specRX.GetSpecRX(1).AverageMode = 6;
+        }
+
+        private void radRX2DispLowNoiseFloor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radRX2DispWeightedLog.Checked)
+                console.specRX.GetSpecRX(1).AverageMode = 2;
+            else if (radRX2DispWindowLog.Checked)
+                console.specRX.GetSpecRX(1).AverageMode = 4;
+            else if (radRX2DispWeightedLinear.Checked)
+                console.specRX.GetSpecRX(1).AverageMode = 1;
+            else if (radRX2DispWindowLinear.Checked)
+                console.specRX.GetSpecRX(1).AverageMode = 3;
+            else if (radRX2DispLowNoiseFloor.Checked)
+                console.specRX.GetSpecRX(1).AverageMode = 6;
         }
 
         private void comboDispWinType_SelectedIndexChanged(object sender, EventArgs e)
@@ -16004,8 +16361,205 @@ namespace PowerSDR
                 DttSP.SetCBL(2, 1, 0);
             }
         }
-        
 
+        //mod DH1TW
+
+        private DJConsoleMK2Config ConfigWindowMK2;
+        private DJConsoleMP3e2Config ConfigWindowMP3e2;
+        private DJConsoleMP3LEConfig ConfigWindowMP3LE;
+
+        private void btnSelectUserInterface_Click(object sender, EventArgs e)
+        {
+            if (console.DJConsoleObj.DeviceInCount > 0)
+            {
+                if (console.DJConsoleConfigurator == null)
+                {
+                    console.DJConsoleConfigurator = new DJConsoleUI.DJConsoleSelect(console);
+                    console.DJConsoleConfigurator.FormClosed += new FormClosedEventHandler(DJConfiguratorClosed);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Sorry, no compatible device detected", "Error");
+            }
+        }
+
+        private void DJConfiguratorClosed(object sender, FormClosedEventArgs e)
+        {
+            console.DJConsoleConfigurator = null;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InitDJConsoles()
+        {
+            if (console.DJConsoleObj == null) return;
+            if (console.DJConsoleObj.connectedConsoles.Count > 0)
+            {
+                cbConsoleSelect.DataSource = new BindingSource(console.DJConsoleObj.connectedConsoles, null);
+                cbConsoleSelect.DisplayMember = "Value";
+                cbConsoleSelect.ValueMember = "Key";
+                console.DJConsoleObj.SelectedConsole = (int)cbConsoleSelect.SelectedValue;
+                this.cbConsoleSelect.SelectedIndexChanged += new System.EventHandler(this.cbConsoleSelect_SelectedIndexChanged);
+            }
+            else
+            {
+                //MessageBox.Show("Sorry, no compatible device detected", "Error");
+                //this.Dispose();
+            }
+
+        }
+
+        private void btnConfigure_Click(object sender, EventArgs e)
+        {
+            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.NotSupported)
+            {
+                // MessageBox.Show("not supported");
+                return;
+            }
+
+
+            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.HerculesMP3e2)
+            {
+                if (ConfigWindowMP3e2 == null)
+                {
+                    ConfigWindowMP3e2 = new DJConsoleMP3e2Config(console);
+                    ConfigWindowMP3e2.Show();
+                    ConfigWindowMP3e2.Focus();
+                    ConfigWindowMP3e2.FormClosed += new FormClosedEventHandler(ConfigWindowMP3e2Closed);
+                }
+                return;
+            }
+
+
+            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.HerculesMK2)
+            {
+                if (ConfigWindowMK2 == null)
+                {
+                    ConfigWindowMK2 = new DJConsoleMK2Config(console);
+                    ConfigWindowMK2.Show();
+                    ConfigWindowMK2.Focus();
+                    ConfigWindowMK2.FormClosed += new FormClosedEventHandler(ConfigWindowMK2Closed);
+                }
+                return;
+            }
+
+            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.HerculesMP3LE)
+            {
+                if (ConfigWindowMP3LE == null)
+                {
+                    ConfigWindowMP3LE = new DJConsoleMP3LEConfig(console);
+                    ConfigWindowMP3LE.Show();
+                    ConfigWindowMP3LE.Focus();
+                    ConfigWindowMP3LE.FormClosed += new FormClosedEventHandler(ConfigWindowMP3LEClosed);
+                }
+                return;
+
+            }
+
+            else
+            {
+                MessageBox.Show("Please select a Console", "Error");
+            }
+        }
+
+        private void ConfigWindowMK2Closed(object sender, FormClosedEventArgs e)
+        {
+            if (ConfigWindowMK2 != null)
+            {
+                ConfigWindowMK2 = null;
+            }
+        }
+
+        private void ConfigWindowMP3e2Closed(object sender, FormClosedEventArgs e)
+        {
+            if (ConfigWindowMP3e2 != null)
+            {
+                ConfigWindowMP3e2 = null;
+            }
+        }
+
+        private void ConfigWindowMP3LEClosed(object sender, FormClosedEventArgs e)
+        {
+            if (ConfigWindowMP3LE != null)
+            {
+                ConfigWindowMP3LE = null;
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (cbConsoleSelect.SelectedItem != null)
+            {
+                console.DJConsoleObj.SelectedConsole = (int)cbConsoleSelect.SelectedValue;
+                console.DJConsoleObj.Reload();
+            }
+        }
+
+        private void cbConsoleSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbConsoleSelect.SelectedItem != null)
+            {
+                console.DJConsoleObj.SelectedConsole = (int)cbConsoleSelect.SelectedValue;
+                console.DJConsoleObj.Reload();
+            }
+        }
+        // end mod DH1TW\
+
+        private void btnSetIPAddr_Click(object sender, EventArgs e)
+        {
+            if (radStaticIP1.Checked)
+            {
+                console.MetisNetworkIPAddr = udStaticIP1.Text + "." + udStaticIP2.Text + "." +
+                                             udStaticIP3.Text + "." + udStaticIP4.Text;
+            }
+            if (radStaticIP2.Checked)
+            {
+                console.MetisNetworkIPAddr = udStaticIP5.Text + "." + udStaticIP6.Text + "." +
+                                             udStaticIP7.Text + "." + udStaticIP8.Text;
+            }
+            if (radStaticIP3.Checked)
+            {
+                console.MetisNetworkIPAddr = udStaticIP9.Text + "." + udStaticIP10.Text + "." +
+                                             udStaticIP11.Text + "." + udStaticIP12.Text;
+            }
+            if (radStaticIP4.Checked)
+            {
+                console.MetisNetworkIPAddr = udStaticIP13.Text + "." + udStaticIP14.Text + "." +
+                                             udStaticIP15.Text + "." + udStaticIP16.Text;
+            }
+        }
+
+        private void chkEnableStaticIP_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkEnableStaticIP.Checked)
+            {
+                chkFullDiscovery.Checked = false;
+                chkFullDiscovery.Enabled = false;
+            }
+            else chkFullDiscovery.Enabled = true;
+            JanusAudio.enableStaticIP = chkEnableStaticIP.Checked;
+        }
+
+        private void chkRX1WaterfallAGC_CheckedChanged(object sender, EventArgs e)
+        {
+            Display.RX1WaterfallAGC = chkRX1WaterfallAGC.Checked;
+            udDisplayWaterfallLowLevel.Enabled = !chkRX1WaterfallAGC.Checked;
+        }
+
+        private void chkRX2WaterfallAGC_CheckedChanged(object sender, EventArgs e)
+        {
+            Display.RX2WaterfallAGC = chkRX2WaterfallAGC.Checked;
+            udRX2DisplayWaterfallLowLevel.Enabled = !chkRX2WaterfallAGC.Checked;
+        } 
     }
 
     #region PADeviceInfo Helper Class
