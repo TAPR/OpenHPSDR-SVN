@@ -896,6 +896,8 @@ namespace PowerSDR
         private Point chk_mox_basis = new Point(100, 100);
         private Point chk_tun_basis = new Point(100, 100);
         private Point chk_vox_basis = new Point(100, 100);
+        private Point chk_dup_basis = new Point(100, 100);
+        private Point chk_ctun_basis = new Point(100, 100);
         // private Point lbl_af_basis = new Point(100, 100);
         private Point tb_af_basis = new Point(100, 100);
         private Point tb_rf_basis = new Point(100, 100);
@@ -1440,6 +1442,10 @@ namespace PowerSDR
         private CheckBoxTS chkVAC2;
         private NumericUpDownTS udHermesStepAttenuatorData;
         private CheckBoxTS chkFullDuplex;
+        private ToolStripMenuItem RX1AVGToolStripMenuItem;
+        private ToolStripMenuItem RX1PeakToolStripMenuItem;
+        private ToolStripMenuItem RX2AVGToolStripMenuItem;
+        private ToolStripMenuItem RX2PeakToolStripMenuItem;
         public PictureBox picWaterfall;
 
         #endregion
@@ -1561,7 +1567,9 @@ namespace PowerSDR
             Splash.ShowSplashScreen();							// Start splash screen
 
             Splash.SetStatus("Initializing Components");		// Set progress point
+            booting = true;
             InitializeComponent();								// Windows Forms Generated Code
+            booting = false;
 
             // for resizing
             GrabConsoleSizeBasis();
@@ -2155,6 +2163,8 @@ namespace PowerSDR
             this.NB2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BINToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MultiRXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RX1AVGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RX1PeakToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bandtoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bandtoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -2234,6 +2244,8 @@ namespace PowerSDR
             this.nB2ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nBRX2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bIN2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RX2AVGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RX2PeakToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerNotchZoom = new System.Windows.Forms.Timer(this.components);
             this.picRX2Squelch = new System.Windows.Forms.PictureBox();
             this.panelRX2RF = new System.Windows.Forms.PanelTS();
@@ -2688,7 +2700,7 @@ namespace PowerSDR
             this.chkFWCATU.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkFWCATU.Name = "chkFWCATU";
             this.toolTip1.SetToolTip(this.chkFWCATU, resources.GetString("chkFWCATU.ToolTip"));
-            this.chkFWCATU.Click += new System.EventHandler(this.chkFWCATU_Click);
+            this.chkFWCATU.CheckedChanged += new System.EventHandler(this.chkFWCATU_CheckedChanged);
             // 
             // comboTuneMode
             // 
@@ -4827,7 +4839,9 @@ namespace PowerSDR
             this.NBToolStripMenuItem,
             this.NB2ToolStripMenuItem,
             this.BINToolStripMenuItem,
-            this.MultiRXToolStripMenuItem});
+            this.MultiRXToolStripMenuItem,
+            this.RX1AVGToolStripMenuItem,
+            this.RX1PeakToolStripMenuItem});
             this.dSPToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.dSPToolStripMenuItem.Name = "dSPToolStripMenuItem";
             resources.ApplyResources(this.dSPToolStripMenuItem, "dSPToolStripMenuItem");
@@ -4867,6 +4881,18 @@ namespace PowerSDR
             this.MultiRXToolStripMenuItem.Name = "MultiRXToolStripMenuItem";
             resources.ApplyResources(this.MultiRXToolStripMenuItem, "MultiRXToolStripMenuItem");
             this.MultiRXToolStripMenuItem.Click += new System.EventHandler(this.mnuDSP_Click);
+            // 
+            // RX1AVGToolStripMenuItem
+            // 
+            this.RX1AVGToolStripMenuItem.Name = "RX1AVGToolStripMenuItem";
+            resources.ApplyResources(this.RX1AVGToolStripMenuItem, "RX1AVGToolStripMenuItem");
+            this.RX1AVGToolStripMenuItem.Click += new System.EventHandler(this.mnuDSP_Click);
+            // 
+            // RX1PeakToolStripMenuItem
+            // 
+            this.RX1PeakToolStripMenuItem.Name = "RX1PeakToolStripMenuItem";
+            resources.ApplyResources(this.RX1PeakToolStripMenuItem, "RX1PeakToolStripMenuItem");
+            this.RX1PeakToolStripMenuItem.Click += new System.EventHandler(this.mnuDSP_Click);
             // 
             // bandToolStripMenuItem
             // 
@@ -5387,7 +5413,9 @@ namespace PowerSDR
             this.aNF2ToolStripMenuItem,
             this.nB2ToolStripMenuItem1,
             this.nBRX2ToolStripMenuItem,
-            this.bIN2ToolStripMenuItem});
+            this.bIN2ToolStripMenuItem,
+            this.RX2AVGToolStripMenuItem,
+            this.RX2PeakToolStripMenuItem});
             this.dSPToolStripMenuItem1.Name = "dSPToolStripMenuItem1";
             resources.ApplyResources(this.dSPToolStripMenuItem1, "dSPToolStripMenuItem1");
             // 
@@ -5420,6 +5448,18 @@ namespace PowerSDR
             this.bIN2ToolStripMenuItem.Name = "bIN2ToolStripMenuItem";
             resources.ApplyResources(this.bIN2ToolStripMenuItem, "bIN2ToolStripMenuItem");
             this.bIN2ToolStripMenuItem.Click += new System.EventHandler(this.mnuDSPRX2_Click);
+            // 
+            // RX2AVGToolStripMenuItem
+            // 
+            this.RX2AVGToolStripMenuItem.Name = "RX2AVGToolStripMenuItem";
+            resources.ApplyResources(this.RX2AVGToolStripMenuItem, "RX2AVGToolStripMenuItem");
+            this.RX2AVGToolStripMenuItem.Click += new System.EventHandler(this.mnuDSPRX2_Click);
+            // 
+            // RX2PeakToolStripMenuItem
+            // 
+            this.RX2PeakToolStripMenuItem.Name = "RX2PeakToolStripMenuItem";
+            resources.ApplyResources(this.RX2PeakToolStripMenuItem, "RX2PeakToolStripMenuItem");
+            this.RX2PeakToolStripMenuItem.Click += new System.EventHandler(this.mnuDSPRX2_Click);
             // 
             // timerNotchZoom
             // 
@@ -5480,11 +5520,9 @@ namespace PowerSDR
             this.panelOptions.Controls.Add(this.chkRX2SR);
             this.panelOptions.Controls.Add(this.chkMOX);
             this.panelOptions.Controls.Add(this.chkTUN);
-            this.panelOptions.Controls.Add(this.chkX2TR);
-            this.panelOptions.Controls.Add(this.chkFWCATUBypass);
             this.panelOptions.Controls.Add(this.chkSR);
-            this.panelOptions.Controls.Add(this.chkFWCATU);
             this.panelOptions.Controls.Add(this.comboTuneMode);
+            this.panelOptions.Controls.Add(this.chkFWCATU);
             this.panelOptions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelOptions.Name = "panelOptions";
             // 
@@ -5978,7 +6016,9 @@ namespace PowerSDR
             this.panelDSP.Controls.Add(this.chkDSPNB2);
             this.panelDSP.Controls.Add(this.chkBIN);
             this.panelDSP.Controls.Add(this.chkNB);
+            this.panelDSP.Controls.Add(this.chkX2TR);
             this.panelDSP.Controls.Add(this.chkANF);
+            this.panelDSP.Controls.Add(this.chkFWCATUBypass);
             this.panelDSP.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelDSP.Name = "panelDSP";
             // 
@@ -24321,15 +24361,15 @@ namespace PowerSDR
                             {
                                 // mnuATU.Visible = true;
                                 if (fwcAtuForm == null) fwcAtuForm = new FWCATUForm(this);
-                                chkFWCATU.Enabled = true;
-                                chkFWCATU.Text = "ATU";
-                                chkFWCATUBypass.Enabled = true;
-                                chkFWCATUBypass.Text = "BYP";
+                               // chkFWCATU.Enabled = true;
+                               // chkFWCATU.Text = "ATU";
+                               // chkFWCATUBypass.Enabled = true;
+                              //  chkFWCATUBypass.Text = "BYP";
                             }
                             else
                             {
-                                chkX2TR.Text = "";
-                                chkX2TR.Enabled = false;
+                              //  chkX2TR.Text = "";
+                              //  chkX2TR.Enabled = false;
                             }
                             //  if (flex5000DebugForm == null) flex5000DebugForm = new FLEX5000DebugForm(this);
 
@@ -24382,8 +24422,8 @@ namespace PowerSDR
                             chkBCI.Visible = false;
                             chkBCI.Checked = false;
 
-                            chkX2TR.Text = "";
-                            chkX2TR.Enabled = false;
+                          //  chkX2TR.Text = "";
+                           // chkX2TR.Enabled = false;
 
                              //chkFullDuplex.Visible = true;
                             panelAntenna.Visible = false;
@@ -24411,8 +24451,8 @@ namespace PowerSDR
                         chkBCI.Visible = false;
                         //mnuFWC.Visible = false;
                         panelAntenna.Visible = false;
-                        chkFWCATU.Visible = false;
-                        chkFWCATUBypass.Visible = false;
+                        //chkFWCATU.Visible = false;
+                       // chkFWCATUBypass.Visible = false;
                         break;
 
                     case Model.HPSDR:
@@ -24422,10 +24462,10 @@ namespace PowerSDR
                         SetComboPreampForHPSDR();
                         comboPreamp.Text = "0dB";
                         chkBCI.Visible = false;
-                        chkFWCATU.Visible = false;
+                        chkFWCATU.Visible = true;
                         chkFWCATUBypass.Visible = false;
                         panelAntenna.Visible = false;
-                       // chkX2TR.Visible = false;
+                        chkX2TR.Visible = false;
 
                         int hermes_power_enable;
                         if (current_model == Model.HERMES || PennyLanePresent)
@@ -24461,7 +24501,7 @@ namespace PowerSDR
                         }
                         //mnuFWC.Visible = false;
                         panelAntenna.Visible = false;
-                        chkFWCATU.Visible = false;
+                        chkFWCATU.Visible = true;
                         chkFWCATUBypass.Visible = false;
                         break;
                     case Model.DEMO:
@@ -37226,6 +37266,7 @@ namespace PowerSDR
                   }
               }
               else btnZeroBeat.Enabled = false; */
+            RX1AVGToolStripMenuItem.Checked = chkDisplayAVG.Checked;
         }
 
         private void chkDisplayPeak_CheckedChanged(object sender, System.EventArgs e)
@@ -37242,6 +37283,7 @@ namespace PowerSDR
             {
                 chkDisplayPeak.BackColor = SystemColors.Control;
             }
+            RX1PeakToolStripMenuItem.Checked = chkDisplayPeak.Checked;
         }
 
         private void chkSquelch_CheckedChanged(object sender, System.EventArgs e)
@@ -37726,8 +37768,8 @@ namespace PowerSDR
            // if (SetupForm != null) SetupForm.X2TR = chkX2TR.Checked;
             ClickTuneDisplay = chkX2TR.Checked;
 
-            if (chkX2TR.Checked) chkX2TR.BackColor = button_selected_color;
-            else chkX2TR.BackColor = SystemColors.Control;
+           // if (chkX2TR.Checked) chkX2TR.BackColor = button_selected_color;
+           // else chkX2TR.BackColor = SystemColors.Control;
             txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             txtVFOBFreq_LostFocus(this, EventArgs.Empty);
         }
@@ -41716,10 +41758,14 @@ namespace PowerSDR
             {
                 case (DisplayEngine.GDI_PLUS):
                     {
-                        Thread.Sleep(100);
-                        Display.Init();
-                        UpdateDisplay();
-                        picDisplay.Invalidate();
+                        if (!booting)
+                        {
+
+                            Thread.Sleep(100);
+                            Display.Init();
+                            UpdateDisplay();
+                            picDisplay.Invalidate();
+                        }
                     }
                     break;
                 case (DisplayEngine.DIRECT_X):
@@ -44112,7 +44158,8 @@ namespace PowerSDR
                 udFMOffset.Enabled = false;
                 current_fm_tx_mode = FMTXMode.Simplex;
                 //fm_tx_offset_mhz = 0;		
-                chkX2TR.Checked = false;
+              //  chkX2TR.Checked = false;
+                chkFWCATU.Checked = false;
             }
             else
             {
@@ -45197,29 +45244,36 @@ namespace PowerSDR
 
         public void FWCATUBypass()
         {
-            chkFWCATU.Checked = false;
-            chkFWCATUBypass.Checked = true;
+           // chkFWCATU.Checked = false;
+          //  chkFWCATUBypass.Checked = true;
         }
 
         public void FWCATUTuned()
         {
-            chkFWCATU.Checked = true;
-            chkFWCATUBypass.Checked = false;
+           // chkFWCATU.Checked = true;
+           // chkFWCATUBypass.Checked = false;
         }
 
         public void FWCATUFailed()
         {
-            chkFWCATU.Checked = false;
-            chkFWCATUBypass.Checked = true;
+           // chkFWCATU.Checked = false;
+           // chkFWCATUBypass.Checked = true;
         }
 
         public void SetATUFeedback(string s)
         {
-            toolTip1.SetToolTip(chkFWCATU, s);
+           // toolTip1.SetToolTip(chkFWCATU, s);
         }
 
         private void chkFWCATU_Click(object sender, System.EventArgs e)
         {
+            // if (SetupForm != null) SetupForm.X2TR = chkX2TR.Checked;
+            ClickTuneDisplay = chkFWCATU.Checked;
+
+            // if (chkX2TR.Checked) chkX2TR.BackColor = button_selected_color;
+            // else chkX2TR.BackColor = SystemColors.Control;
+            txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+            txtVFOBFreq_LostFocus(this, EventArgs.Empty);
         }
 
         private void chkFWCATUBypass_Click(object sender, System.EventArgs e)
@@ -45584,6 +45638,8 @@ namespace PowerSDR
             chk_mox_basis = this.chkMOX.Location;
             chk_tun_basis = this.chkTUN.Location;
             chk_vox_basis = this.chkVOX.Location;
+            chk_dup_basis = this.chkRX2SR.Location;
+            chk_ctun_basis = this.chkFWCATU.Location;
             //lbl_af_basis = this.lblAF.Location;
             tb_af_basis = this.ptbAF.Location;
             tb_rf_basis = this.ptbRF.Location;
@@ -47073,6 +47129,7 @@ namespace PowerSDR
                 }
             }
             else btnZeroBeat.Enabled = false;*/
+            RX2AVGToolStripMenuItem.Checked = chkRX2DisplayAVG.Checked;
         }
 
         private void chkRX2DisplayPeak_CheckedChanged(object sender, System.EventArgs e)
@@ -47088,6 +47145,7 @@ namespace PowerSDR
             {
                 chkRX2DisplayPeak.BackColor = SystemColors.Control;
             }
+            RX2PeakToolStripMenuItem.Checked = chkRX2DisplayPeak.Checked;
         }
 
         private void UpdateDSPBufRX1()
@@ -47632,7 +47690,7 @@ namespace PowerSDR
             {
                 chkVFOSync.BackColor = button_selected_color;
                 if (click_tune_display)
-                    chkX2TR.Checked = false;
+                    chkFWCATU.Checked = false;
                    
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             }
@@ -49230,6 +49288,11 @@ namespace PowerSDR
             chkTUN.Parent = panelOptions;
             chkTUN.Location = chk_tun_basis;
 
+            chkRX2SR.Parent = panelOptions;
+            chkRX2SR.Location = chk_dup_basis;
+            chkFWCATU.Parent = panelOptions;
+            chkFWCATU.Location = chk_ctun_basis;
+
             chkVOX.Parent = panelModeSpecificPhone;
             chkVOX.Location = chk_vox_basis;
 
@@ -49491,6 +49554,11 @@ namespace PowerSDR
                     chkVOX.Parent = this;
                     chkVOX.Show();
 
+                    chkRX2SR.Parent = this;
+                    chkRX2SR.Show();
+                    chkFWCATU.Parent = this;
+                    chkFWCATU.Show();
+ 
                     //lblAF2.Parent = this;
                     lblAF2.Show();
                     lblRF2.Show();
@@ -49576,6 +49644,11 @@ namespace PowerSDR
                     chkTUN.Parent = this;
                     chkTUN.Show();
 
+                    chkRX2SR.Parent = this;
+                    chkRX2SR.Show();
+                    chkFWCATU.Parent = this;
+                    chkFWCATU.Show();
+                    
                     chkVOX.Parent = this;
                     chkVOX.Show();
 
@@ -49727,6 +49800,10 @@ namespace PowerSDR
                     chkTUN.Location = new Point(chkMON.Location.X, chkMON.Location.Y + chkMON.Height + 4);
                     chkMOX.Location = new Point(chkTUN.Location.X, chkTUN.Location.Y + chkTUN.Height + 4);
                     chkVOX.Location = new Point(chkMON.Location.X - chkVOX.Width - 10, chkMON.Location.Y);
+
+                    chkRX2SR.Location = new Point(chkTUN.Location.X - chkRX2SR.Width - 10, chkTUN.Location.Y); //DUP
+                    chkFWCATU.Location = new Point(chkMOX.Location.X - chkFWCATU.Width - 10, chkMOX.Location.Y); //CTUN
+
                     lblAF2.Location = new Point(5, chkPower.Location.Y + chkPower.Height + 5);
                     // ptbAF.Location = new Point(lblAF2.Location.X + lblAF2.Width, lblAF2.Location.Y);
                     ptbRX1AF.Location = new Point(lblAF2.Location.X + lblAF2.Width, lblAF2.Location.Y);
@@ -49783,6 +49860,8 @@ namespace PowerSDR
                         chkTUN.Location = new Point(chkMON.Location.X, chkMON.Location.Y + chkMON.Height + 4);
                         chkMOX.Location = new Point(chkTUN.Location.X, chkTUN.Location.Y + chkTUN.Height + 4);
                         chkVOX.Location = new Point(chkMON.Location.X - chkVOX.Width - 10, chkMON.Location.Y);
+                        chkRX2SR.Location = new Point(chkTUN.Location.X - chkRX2SR.Width - 10, chkTUN.Location.Y); //DUP
+                        chkFWCATU.Location = new Point(chkMOX.Location.X - chkFWCATU.Width - 10, chkMOX.Location.Y); //CTUN
                         lblAF2.Location = new Point(5, chkPower.Location.Y + chkPower.Height + 5);
                         //ptbAF.Location = new Point(lblAF2.Location.X + lblAF2.Width, lblAF2.Location.Y);
                         ptbRX2AF.Location = new Point(lblAF2.Location.X + lblAF2.Width, lblAF2.Location.Y);
@@ -50043,7 +50122,13 @@ namespace PowerSDR
                 case "Multi-RX":
                     chkEnableMultiRX.Checked = !chkEnableMultiRX.Checked;
                     break;
-            }
+                case "AVG":
+                    chkDisplayAVG.Checked = !chkDisplayAVG.Checked;
+                    break;
+                case "Peak":
+                    chkDisplayPeak.Checked = !chkDisplayPeak.Checked;
+                    break;
+           }
         }
 
         private void mnuDSPRX2_Click(object sender, EventArgs e)
@@ -50068,6 +50153,12 @@ namespace PowerSDR
                     break;
                 case "BIN":
                     chkRX2BIN.Checked = !chkRX2BIN.Checked;
+                    break;
+                case "AVG":
+                    chkRX2DisplayAVG.Checked = !chkRX2DisplayAVG.Checked;
+                    break;
+                case "Peak":
+                    chkRX2DisplayPeak.Checked = !chkRX2DisplayPeak.Checked;
                     break;
             }
         }
@@ -50360,7 +50451,8 @@ namespace PowerSDR
             bandtoolStripMenuItem12.Checked = radBandWWV.Checked;
             bandtoolStripMenuItem13.Checked = radBandGEN.Checked;
 
-            chkX2TR.Checked = false;
+            if (!rx1_click_tune_drag && !rx2_click_tune_drag)
+                chkFWCATU.Checked = false;
         }
 
         private void ptbRX0Gain_MouseEnter(object sender, EventArgs e)
@@ -50503,6 +50595,17 @@ namespace PowerSDR
         private void picWaterfall_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void chkFWCATU_CheckedChanged(object sender, EventArgs e)
+        {
+            // if (SetupForm != null) SetupForm.X2TR = chkX2TR.Checked;
+            ClickTuneDisplay = chkFWCATU.Checked;
+
+            // if (chkX2TR.Checked) chkX2TR.BackColor = button_selected_color;
+            // else chkX2TR.BackColor = SystemColors.Control;
+            txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+            txtVFOBFreq_LostFocus(this, EventArgs.Empty);
         }
     }
 }
