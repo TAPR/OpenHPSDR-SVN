@@ -24036,11 +24036,11 @@
             // 
             this.tpPowerAmplifier.Controls.Add(this.chkAutoPACalibrate);
             this.tpPowerAmplifier.Controls.Add(this.panelAutoPACalibrate);
-            this.tpPowerAmplifier.Controls.Add(this.grpANANPAGainByBand);
-            this.tpPowerAmplifier.Controls.Add(this.grpHermesPAGainByBand);
             this.tpPowerAmplifier.Controls.Add(this.grpPAGainByBand);
             this.tpPowerAmplifier.Controls.Add(this.grpANAN10PAGainByBand);
             this.tpPowerAmplifier.Controls.Add(this.grpANAN100PAGainByBand);
+            this.tpPowerAmplifier.Controls.Add(this.grpANANPAGainByBand);
+            this.tpPowerAmplifier.Controls.Add(this.grpHermesPAGainByBand);
             this.tpPowerAmplifier.Location = new System.Drawing.Point(4, 22);
             this.tpPowerAmplifier.Name = "tpPowerAmplifier";
             this.tpPowerAmplifier.Size = new System.Drawing.Size(584, 313);
@@ -25455,6 +25455,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF13.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS230
             // 
@@ -25494,6 +25495,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF12.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS231
             // 
@@ -25533,6 +25535,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF11.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS232
             // 
@@ -25572,6 +25575,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF10.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS233
             // 
@@ -25611,6 +25615,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF9.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS234
             // 
@@ -25650,6 +25655,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF8.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS235
             // 
@@ -25689,6 +25695,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF7.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS236
             // 
@@ -25728,6 +25735,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF6.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS237
             // 
@@ -25767,6 +25775,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF5.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS238
             // 
@@ -25806,6 +25815,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF4.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS239
             // 
@@ -25845,6 +25855,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF3.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS240
             // 
@@ -25884,6 +25895,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF2.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS241
             // 
@@ -25923,6 +25935,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF1.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS242
             // 
@@ -25962,6 +25975,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGainVHF0.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // udHermesPAGain6
             // 
@@ -25990,6 +26004,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain6.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS243
             // 
@@ -26051,6 +26066,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain10.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS245
             // 
@@ -26090,6 +26106,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain12.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS246
             // 
@@ -26129,6 +26146,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain15.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS247
             // 
@@ -26168,6 +26186,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain17.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS248
             // 
@@ -26207,6 +26226,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain20.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS249
             // 
@@ -26246,6 +26266,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain30.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS250
             // 
@@ -26285,6 +26306,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain40.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS251
             // 
@@ -26324,6 +26346,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain60.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS252
             // 
@@ -26363,6 +26386,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain80.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS253
             // 
@@ -26402,6 +26426,7 @@
             0,
             0,
             65536});
+            this.udHermesPAGain160.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // grpPAGainByBand
             // 
@@ -27607,6 +27632,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF13.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS205
             // 
@@ -27646,6 +27672,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF12.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS206
             // 
@@ -27685,6 +27712,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF11.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS207
             // 
@@ -27724,6 +27752,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF10.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS208
             // 
@@ -27763,6 +27792,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF9.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS209
             // 
@@ -27802,6 +27832,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF8.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS210
             // 
@@ -27841,6 +27872,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF7.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS211
             // 
@@ -27880,6 +27912,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF6.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS212
             // 
@@ -27919,6 +27952,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF5.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS213
             // 
@@ -27958,6 +27992,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF4.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS214
             // 
@@ -27997,6 +28032,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF3.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS215
             // 
@@ -28036,6 +28072,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF2.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS216
             // 
@@ -28075,6 +28112,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF1.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS217
             // 
@@ -28114,6 +28152,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGainVHF0.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // udANAN10PAGain6
             // 
@@ -28142,6 +28181,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain6.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS218
             // 
@@ -28202,6 +28242,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain10.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS220
             // 
@@ -28241,6 +28282,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain12.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS221
             // 
@@ -28280,6 +28322,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain15.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS222
             // 
@@ -28319,6 +28362,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain17.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS223
             // 
@@ -28358,6 +28402,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain20.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS224
             // 
@@ -28397,6 +28442,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain30.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS225
             // 
@@ -28436,6 +28482,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain40.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS226
             // 
@@ -28475,6 +28522,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain60.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS227
             // 
@@ -28514,6 +28562,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain80.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS228
             // 
@@ -28553,6 +28602,7 @@
             0,
             0,
             65536});
+            this.udANAN10PAGain160.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // grpANAN100PAGainByBand
             // 
@@ -28664,6 +28714,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF13.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS180
             // 
@@ -28703,6 +28754,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF12.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS181
             // 
@@ -28742,6 +28794,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF11.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS182
             // 
@@ -28781,6 +28834,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF10.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS183
             // 
@@ -28820,6 +28874,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF9.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS184
             // 
@@ -28859,6 +28914,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF8.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS185
             // 
@@ -28898,6 +28954,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF7.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS186
             // 
@@ -28937,6 +28994,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF6.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS187
             // 
@@ -28976,6 +29034,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF5.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS188
             // 
@@ -29015,6 +29074,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF4.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS189
             // 
@@ -29054,6 +29114,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF3.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS190
             // 
@@ -29093,6 +29154,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF2.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS191
             // 
@@ -29132,6 +29194,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF1.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS192
             // 
@@ -29171,6 +29234,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGainVHF0.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // udANAN100PAGain6
             // 
@@ -29199,6 +29263,7 @@
             0,
             0,
             0});
+            this.udANAN100PAGain6.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS193
             // 
@@ -29260,6 +29325,7 @@
             0,
             0,
             0});
+            this.udANAN100PAGain10.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS195
             // 
@@ -29299,6 +29365,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGain12.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS196
             // 
@@ -29338,6 +29405,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGain15.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS197
             // 
@@ -29377,6 +29445,7 @@
             0,
             0,
             0});
+            this.udANAN100PAGain17.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS198
             // 
@@ -29416,6 +29485,7 @@
             0,
             0,
             0});
+            this.udANAN100PAGain20.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS199
             // 
@@ -29455,6 +29525,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGain30.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS200
             // 
@@ -29494,6 +29565,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGain40.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS201
             // 
@@ -29533,6 +29605,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGain60.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS202
             // 
@@ -29572,6 +29645,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGain80.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // labelTS203
             // 
@@ -29611,6 +29685,7 @@
             0,
             0,
             65536});
+            this.udANAN100PAGain160.ValueChanged += new System.EventHandler(this.udPAGain_ValueChanged);
             // 
             // tpAppearance
             // 

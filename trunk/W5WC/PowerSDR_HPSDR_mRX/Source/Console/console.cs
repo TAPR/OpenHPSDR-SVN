@@ -1482,9 +1482,9 @@ namespace PowerSDR
 
             if (app_data_path == "")
             {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
+               // Assembly assembly = Assembly.GetExecutingAssembly();
+              //  FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+               // string version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
                 AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                     + "\\FlexRadio Systems\\PowerSDR mRX\\";
             }
@@ -1637,7 +1637,7 @@ namespace PowerSDR
 
             Splash.SetStatus("Initializing PortAudio");			// Set progress point
             PA19.PA_Initialize();								// Initialize the audio interface
-            if (fwc_init) Thread.Sleep(500);
+          //  if (fwc_init) Thread.Sleep(500);
 
             Splash.SetStatus("Loading Main Form");				// Set progress point
             Splash.SplashForm.Owner = this;						// So that main form will show/focus when splash disappears
@@ -1870,8 +1870,8 @@ namespace PowerSDR
                 }
             }
 
-            if ((current_model == Model.FLEX5000 || current_model == Model.FLEX3000) && !fwc_init)
-                MessageBox.Show("Error opening radio driver.", "Driver Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          //  if ((current_model == Model.FLEX5000 || current_model == Model.FLEX3000) && !fwc_init)
+            //    MessageBox.Show("Error opening radio driver.", "Driver Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             //if(!fwc_init || !FWCEEPROM.RX2OK)
             //{
@@ -25272,9 +25272,6 @@ namespace PowerSDR
 
             }
 
-            if (click_tune_display)
-            rx1_dds_freq_mhz = center_frequency;
-
             JanusAudio.SetVFOfreqRX1(rx1_dds_freq_mhz);
             // JanusAudio.SetVFOfreqRX2(rx1_dds_freq_mhz);
             JanusAudio.SetVFOfreqRX3(rx1_dds_freq_mhz);
@@ -25302,8 +25299,8 @@ namespace PowerSDR
                 if (!mox) SetAlex2LPF(rx2_dds_freq_mhz);
                 SetAlex2HPF(rx2_dds_freq_mhz);
 
-                if (click_tune_display)
-                    rx2_dds_freq_mhz = center_rx2_frequency;
+              //  if (click_tune_display)
+                  //  rx2_dds_freq_mhz = center_rx2_frequency;
 
                 JanusAudio.SetVFOfreqRX2(rx2_dds_freq_mhz);
                 //  JanusAudio.SetRX2VFOfreq((int)((rx2_dds_freq_mhz * 1e6) * SetupForm.HPSDRFreqCorrectFactor));
@@ -38495,9 +38492,10 @@ namespace PowerSDR
                     {
                         tx_dds_freq_mhz = tx_freq;
                         tx_dds_freq_updated = true;
-                        UpdateTXDDSFreq();
+                        UpdateTXDDSFreq(); // update tx freq
                     }
-                    FWCDDSFreq = rx_freq;
+                    if (!click_tune_display)
+                    FWCDDSFreq = rx_freq; // update rx freq
 
                     if (chkEnableMultiRX.Checked)
                     {
@@ -39382,6 +39380,7 @@ namespace PowerSDR
                 freq -= (double)cw_pitch * 0.0000010;
 
             //Debug.WriteLine("freq: "+freq.ToString("f6"));
+            if (!click_tune_display)
             RX2DDSFreq = freq;
             UpdateRX2Notches();
             goto end;

@@ -13467,24 +13467,21 @@ namespace PowerSDR
 
         private void chkCWKeyerMonoCable_CheckedChanged(object sender, EventArgs e)
         {
-            if (console.fwc_init && (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000))
-            {
-                FWC.ignore_dash = chkCWKeyerMonoCable.Checked;
-                //  if (chkCWKeyerMonoCable.Checked && console.Keyer != null)
-                //    console.Keyer.FWCDash = false;
-            }
-
             if (chkCWKeyerMonoCable.Checked)
                 CWKeyer.SensorEnqueue(new CWSensorItem(CWSensorItem.InputType.Dash, false));
-
         }
 
         private void btnExportDB_Click(object sender, EventArgs e)
         {
-            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string path = console.AppDataPath;
+            path = path.Substring(0, path.LastIndexOf("\\"));
+           // string appdatapath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                //  + "\\FlexRadio Systems\\PowerSDR mRX\\";
+           // string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string datetime = DateTime.Now.ToShortDateString().Replace("/", "-") + "_" +
                     DateTime.Now.ToShortTimeString().Replace(":", ".");
-            saveFileDialog1.FileName = desktop + "\\PowerSDR_database_export_" + datetime + ".xml";
+          //  saveFileDialog1.FileName = desktop + "\\PowerSDR_database_export_" + datetime + ".xml";
+            saveFileDialog1.FileName = path + "\\PowerSDR_database_export_" + datetime + ".xml";
             saveFileDialog1.ShowDialog();
         }
 
