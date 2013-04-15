@@ -607,6 +607,8 @@
     <Content Include="hpsdr5-64.ico" />
     <Content Include="images\hpsdr.jpg" />
     <Content Include="images\hpsdr5.png" />
+    <Content Include="images\openhpsdr4_splash.png" />
+    <Content Include="images\openhpsdr_splash.png" />
     <Content Include="images\PowerSDR.ico" />
   </ItemGroup>
   <ItemGroup>
