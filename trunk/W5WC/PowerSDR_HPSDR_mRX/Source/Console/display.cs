@@ -249,8 +249,8 @@ namespace PowerSDR
         private static Color notch_off_color = Color.Gray;
 
 
-        private static Color channel_background_on = Color.FromArgb(128, Color.DodgerBlue);
-        private static Color channel_background_off = Color.FromArgb(32, Color.RoyalBlue);
+        private static Color channel_background_on = Color.FromArgb(150, Color.DodgerBlue);
+        private static Color channel_background_off = Color.FromArgb(100, Color.RoyalBlue);
         private static Color channel_foreground = Color.Cyan;
 
         private static double notch_zoom_start_freq;
@@ -7847,10 +7847,10 @@ namespace PowerSDR
 
                         case FRSRegion.UK:
                             if (actual_fgrid == 0.472 || actual_fgrid == 0.479 ||
-                                actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
                                 actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
                                 actual_fgrid == 5.2585 || actual_fgrid == 5.4065 ||
-                                actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
                                 actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
                                 actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
                                 actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
@@ -8057,8 +8057,8 @@ namespace PowerSDR
 				 18168000, 21000000, 21450000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
                     break;
                 case FRSRegion.UK:
-                    band_edge_list = new int[] { 472000, 479000, 1800000, 2000000, 3500000, 3800000,
-				5258500, 5406500, 7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 18068000, 18168000,
+                    band_edge_list = new int[] { 472000, 479000, 1810000, 2000000, 3500000, 3800000,
+				5258500, 5406500, 7000000, 7200000, 10100000, 10150000, 14000000, 14350000, 18068000, 18168000,
 				21000000, 21450000, 24890000, 24990000, 28000000, 29700000, 50000000, 52000000, 144000000, 148000000 };
                     break;
                 case FRSRegion.India:

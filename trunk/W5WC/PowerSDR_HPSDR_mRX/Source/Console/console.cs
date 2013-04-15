@@ -41758,14 +41758,13 @@ namespace PowerSDR
             {
                 case (DisplayEngine.GDI_PLUS):
                     {
-                        if (!booting)
-                        {
-
                             Thread.Sleep(100);
                             Display.Init();
-                            UpdateDisplay();
-                            picDisplay.Invalidate();
-                        }
+                            if (!booting)
+                            {
+                                UpdateDisplay();
+                            }
+                            picDisplay.Invalidate();                       
                     }
                     break;
                 case (DisplayEngine.DIRECT_X):
