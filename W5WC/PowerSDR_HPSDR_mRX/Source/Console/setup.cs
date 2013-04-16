@@ -5860,7 +5860,7 @@ namespace PowerSDR
             {
                 int nr;
                 if (chkLimitRX.Checked) nr = 2;
-                else nr = 5;
+                else nr = 4; //nr = 5;
                 
                 int old_rate = console.NReceivers;
                 int new_rate = nr;

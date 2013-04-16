@@ -1765,6 +1765,8 @@ namespace PowerSDR
                 {
                     peak = MaxSample(tx_in_l, tx_in_r, frameCount);
 
+                    if (console.MicBoost)    // G3OQD !!!!
+                        peak = peak / 10;
                     // compare power to threshold
                     vox_active = peak > vox_threshold;
                 }

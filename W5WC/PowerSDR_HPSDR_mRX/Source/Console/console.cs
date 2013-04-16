@@ -7174,9 +7174,9 @@ namespace PowerSDR
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificFM);
             this.Controls.Add(this.panelModeSpecificDigital);
-            this.Controls.Add(this.panelBandHF);
             this.Controls.Add(this.panelBandVHF);
             this.Controls.Add(this.panelModeSpecificCW);
+            this.Controls.Add(this.panelBandHF);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Console";
@@ -37545,6 +37545,9 @@ namespace PowerSDR
                 if (this.collapsedDisplay)
                     this.CollapseDisplay();
             }
+
+            if (!rx1_click_tune_drag && !rx2_click_tune_drag)
+                chkFWCATU.Checked = false;
         }
 
         private void btnBandHF_Click(object sender, System.EventArgs e)
@@ -37558,6 +37561,9 @@ namespace PowerSDR
                 if (this.collapsedDisplay)
                     this.CollapseDisplay();
             }
+
+            if (!rx1_click_tune_drag && !rx2_click_tune_drag)
+                chkFWCATU.Checked = false;
         }
 
         private void udFilterLow_LostFocus(object sender, EventArgs e)
@@ -39422,8 +39428,9 @@ namespace PowerSDR
                 freq -= (double)cw_pitch * 0.0000010;
 
             //Debug.WriteLine("freq: "+freq.ToString("f6"));
-            if (!click_tune_display)
+            if (!click_tune_display || set_rx2_freq)
             RX2DDSFreq = freq;
+            set_rx2_freq = false;
             UpdateRX2Notches();
             goto end;
 
@@ -42232,6 +42239,9 @@ namespace PowerSDR
 
         private void radBandVHF_Click(object sender, EventArgs e)
         {
+            if (!rx1_click_tune_drag && !rx2_click_tune_drag)
+                chkFWCATU.Checked = false;
+
             SaveBand();
 
             string new_band = ((Control)sender).Name.Substring(7);
@@ -45705,6 +45715,7 @@ namespace PowerSDR
             rad_mode_drm_basis = radModeDRM.Location;
         }
 
+        private bool set_rx2_freq = false;
         private bool rx2_enabled = false;
         public bool RX2Enabled
         {
@@ -45735,6 +45746,7 @@ namespace PowerSDR
                             rx2_sql_update_thread.Start();
                         }
 
+                        set_rx2_freq = true;
                         txtVFOBFreq_LostFocus(this, EventArgs.Empty);
                         if (!rx2_enabled) return;
 
