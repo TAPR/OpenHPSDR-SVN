@@ -1095,9 +1095,7 @@ do_rx_post (int k, unsigned int thread)
 
 	do_rx_meter(k, thread, rx[thread][k].buf.o, RXMETER_POST_AGC);
 
-#ifndef NEW_DISPLAYS
-	do_rx_spectrum (k, thread, rx[thread][k].buf.o, SPEC_POST_AGC);
-#endif
+	do_rx_spectrum (k, thread, rx[thread][k].buf.o, SPEC_POST_AGC);	//still used for phase display
 
 	if (!rx[thread][k].bin.flag)
 	{

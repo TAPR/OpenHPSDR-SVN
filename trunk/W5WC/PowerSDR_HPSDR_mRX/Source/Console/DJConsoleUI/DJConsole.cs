@@ -733,7 +733,6 @@ namespace PowerSDR
 
         private void LoadDictionaries()
         {
-
             //Buttons - 0...99
             DictButtons.Add(0, " ");
             DictButtons.Add(1, "A > B");
@@ -756,7 +755,7 @@ namespace PowerSDR
             DictButtons.Add(17, "NB2");
             DictButtons.Add(18, "ANF");
             DictButtons.Add(19, "NR");
-            DictButtons.Add(20, "SR");
+           // DictButtons.Add(20, "SR");
             DictButtons.Add(21, "BIN");
             DictButtons.Add(22, "Wider Filter");
             DictButtons.Add(23, "Narrower Filter");
@@ -767,10 +766,10 @@ namespace PowerSDR
             DictButtons.Add(28, "Band Up");
             DictButtons.Add(29, "Band Down");
             DictButtons.Add(30, "Start");
-            DictButtons.Add(31, "Tuner On/Off");
+           // DictButtons.Add(31, "Tuner On/Off");
             //Phone 
-            DictButtons.Add(32, "CPDR");
-            DictButtons.Add(33, "DX");
+            DictButtons.Add(32, "COMP");
+          //  DictButtons.Add(33, "DX");
             DictButtons.Add(34, "DEXP");
             //2. RX
             DictButtons.Add(35, "RX2 On/Off");
@@ -783,10 +782,10 @@ namespace PowerSDR
             DictButtons.Add(41, "Enable Rx EQ");
             DictButtons.Add(42, "Enable Tx EQ");
             DictButtons.Add(43, "Squelch");
-            DictButtons.Add(44, "BCI Rejection");
+          // DictButtons.Add(44, "BCI Rejection");
             DictButtons.Add(45, "AGC Mode Up");
             DictButtons.Add(46, "AGC Mode Down");
-            DictButtons.Add(47, "Preamp (Flex5000)");
+          // DictButtons.Add(47, "Preamp (Flex5000)");
             //display
             DictButtons.Add(48, "AVG");
             DictButtons.Add(49, "Peak");
@@ -817,11 +816,11 @@ namespace PowerSDR
             DictButtons.Add(71, "I/Q to VAC1 use RX2"); //ZZVJ
             DictButtons.Add(72, "VAC2 On/Off"); //ZZVK
 
-            DictButtons.Add(73, "ESC On/Off"); //ZZDE
-            DictButtons.Add(74, "ESC Form Open/Close"); //ZZDF
+           // DictButtons.Add(73, "ESC On/Off"); //ZZDE
+           // DictButtons.Add(74, "ESC Form Open/Close"); //ZZDF
             DictButtons.Add(75, "Mute RX2");
             DictButtons.Add(76, "TUN");
-            DictButtons.Add(77, "Tuner Bypass");
+           // DictButtons.Add(77, "Tuner Bypass");
 
             //Bands
             DictButtons.Add(78, "160m");
@@ -835,7 +834,7 @@ namespace PowerSDR
             DictButtons.Add(86, "12m");
             DictButtons.Add(87, "10m");
             DictButtons.Add(88, "6m");
-            DictButtons.Add(89, "2m");
+          //  DictButtons.Add(89, "2m");
             DictButtons.Add(90, "160m RX2");
             DictButtons.Add(91, "80m RX2");
             DictButtons.Add(92, "60m RX2");
@@ -847,7 +846,7 @@ namespace PowerSDR
             DictButtons.Add(98, "12m RX2");
             DictButtons.Add(99, "10m RX2");
             DictButtons.Add(500, "6m RX2");
-            DictButtons.Add(501, "2m RX2");
+           // DictButtons.Add(501, "2m RX2");
             DictButtons.Add(502, "Mode SSB");
             DictButtons.Add(503, "Mode LSB");
             DictButtons.Add(504, "Mode USB");
@@ -874,7 +873,7 @@ namespace PowerSDR
             DictIncKnobs.Add(106, "Zoom Slider");
             DictIncKnobs.Add(107, "Filter Upper Edge");
             DictIncKnobs.Add(108, "Filter Lower Edge");
-            DictIncKnobs.Add(109, "Pan Slider");
+           // DictIncKnobs.Add(109, "Pan Slider");
 
 
             //Fixed Value Range Knobs 200...299
@@ -891,8 +890,8 @@ namespace PowerSDR
             DictFixKnobs.Add(210, "AGC Threshold");
             DictFixKnobs.Add(211, "Drive Level");
             DictFixKnobs.Add(212, "Mic Gain");
-            DictFixKnobs.Add(213, "DX");
-            DictFixKnobs.Add(214, "CPDR Threshold");
+           // DictFixKnobs.Add(213, "DX");
+            DictFixKnobs.Add(214, "COMP Threshold");
             DictFixKnobs.Add(215, "Vox Gain");
             DictFixKnobs.Add(216, "DEXP Threshold");
             DictFixKnobs.Add(217, "Squelch Threshold");
@@ -2768,6 +2767,11 @@ namespace PowerSDR
                         FilterLow(msg);
                         break;
                     }
+                case 109:
+                    {
+                        PanSlider(msg);
+                        break;
+                    }
 
 
                 //Fixed Value Range Knobs 200...299
@@ -4357,45 +4361,60 @@ namespace PowerSDR
             {
                 switch (Convert.ToInt16(commands.ZZFM()))
                 {
-                    case 0: //SDR1000
+                    case 0: // HPSDR HERMES ANAN10
                         {
-                            if ((msg >= 0) && (msg < 32))
-                            {
-                                commands.ZZPA("0");
-                                return;
-                            }
-                            if ((msg >= 32) && (msg < 64))
+                            if ((msg >= 0) && (msg < 64))
                             {
                                 commands.ZZPA("1");
                                 return;
                             }
-                            if ((msg >= 64) && (msg < 96))
+                            if ((msg >= 64) && (msg < 128))
+                            {
+                                commands.ZZPA("0");
+                                return;
+                            }
+                            break;                         
+                        }
+                    case 1: // w/ALEX ANAN100/D
+                        {
+                            if ((msg >= 0) && (msg < 16))
+                            {
+                                commands.ZZPA("1");
+                                return;
+                            }
+                            if ((msg >= 16) && (msg < 32))
+                            {
+                                commands.ZZPA("0");
+                                return;
+                            }
+                            if ((msg >= 32) && (msg < 48))
                             {
                                 commands.ZZPA("2");
                                 return;
                             }
-                            if ((msg >= 96) && (msg < 128))
+                            if ((msg >= 48) && (msg < 64))
                             {
                                 commands.ZZPA("3");
                                 return;
                             }
-                            break;
-                        }
-                    case 1: //Flex5000
-                        {
-                            if ((msg >= 0) && (msg < 64))
+                            if ((msg >= 64) && (msg < 80))
                             {
-                                commands.ZZPA("0");
+                                commands.ZZPA("4");
                                 return;
                             }
-                            if ((msg >= 64) && (msg < 127))
+                            if ((msg >= 80) && (msg < 96))
                             {
-                                commands.ZZPA("1");
+                                commands.ZZPA("5");
+                                return;
+                            }
+                            if ((msg >= 112) && (msg < 128))
+                            {
+                                commands.ZZPA("6");
                                 return;
                             }
                             break;
                         }
-                    case 2: //Flex3000
+                    case 2: //ANAN10
                         {
                             if ((msg >= 0) && (msg < 32))
                             {
@@ -4420,7 +4439,7 @@ namespace PowerSDR
                             
                             break;
                         }
-                    case 3: //Flex1500
+                    case 3: //ANAN100/D
                         {
                             if ((msg >= 0) && (msg < 25))
                             {

@@ -534,20 +534,20 @@ namespace PowerSDR
         public FilterForm filterRX2Form;
         public DiversityForm diversityForm;
         //public FWCForm fwcForm;
-        public FLEX5000LLHWForm flex5000LLHWForm;
+      //  public FLEX5000LLHWForm flex5000LLHWForm;
         //  public FLEX5000DebugForm flex5000DebugForm;
-        public FWCMixForm fwcMixForm;
-        public FLEX3000MixerForm flex3000MixerForm;
-        public FWCAntForm fwcAntForm;
-        public FLEX5000RelayForm flex5000RelayForm;
-        public FWCATUForm fwcAtuForm;
+       // public FWCMixForm fwcMixForm;
+      //  public FLEX3000MixerForm flex3000MixerForm;
+       // public FWCAntForm fwcAntForm;
+      //  public FLEX5000RelayForm flex5000RelayForm;
+       // public FWCATUForm fwcAtuForm;
        // public FLEX3000ATUForm flex3000ATUForm;
         // public FWCTestForm fwcTestForm;
-        public FLEX5000LPFForm flex5000LPFForm;
-        public FWCCalForm fwcCalForm;
+      //  public FLEX5000LPFForm flex5000LPFForm;
+      //  public FWCCalForm fwcCalForm;
         // public FLEX5000ProdTestForm flex5000ProdTestForm;
         // public FLEX5000FinalTestForm flex5000FinalTestForm;
-        public FLEX5000RX2CalForm flex5000RX2CalForm;
+       // public FLEX5000RX2CalForm flex5000RX2CalForm;
         // public FLEX3000TestForm flex3000TestForm;
        // public DSPTestForm dspTestForm;
         // public PreSelForm preSelForm;
@@ -557,7 +557,7 @@ namespace PowerSDR
         private long fwc_last_cal_date_time = 0;
         private uint fwc_serial_num = 0;
         private uint fwc_trx_serial_num = 0;
-        private uint rx2_trx_match_serial = 0;
+       // private uint rx2_trx_match_serial = 0;
 
         private int rx1_squelch_threshold_scroll = -160;
         private int rx2_squelch_threshold_scroll = -160;
@@ -7171,12 +7171,12 @@ namespace PowerSDR
             this.Controls.Add(this.ptbSquelch);
             this.Controls.Add(this.panelRX2Power);
             this.Controls.Add(this.lblRF2);
+            this.Controls.Add(this.panelBandVHF);
+            this.Controls.Add(this.panelBandHF);
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificFM);
             this.Controls.Add(this.panelModeSpecificDigital);
-            this.Controls.Add(this.panelBandVHF);
             this.Controls.Add(this.panelModeSpecificCW);
-            this.Controls.Add(this.panelBandHF);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Console";
@@ -7478,7 +7478,7 @@ namespace PowerSDR
 
             Audio.console = this;
             //FWCMidi.console = this;
-            FWC.console = this;
+           // FWC.console = this;
             Display.console = this;
 
             chkDSPNB2.Enabled = true;
@@ -7888,33 +7888,7 @@ namespace PowerSDR
 
             txtVFOAFreq_LostFocus(this, EventArgs.Empty);
 
-            if (fwc_init && !run_setup_wizard &&
-                (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-            {
-                CheckCalData();
-                if (!FWCEEPROM.TRXChecksumPresent)
-                    WriteTRXChecksums();
-                VerifyTRXChecksums();
-                if (fwcAntForm != null && !fwcAntForm.IsDisposed)
-                {
-                    fwcAntForm.SetBand(rx1_band);
-                    fwcAntForm.CurrentAntMode = current_ant_mode;
-                    fwcAntForm.RX1Ant = rx1_ant;
-                    fwcAntForm.RX1Loop = rx1_loop;
-                    fwcAntForm.RX2Ant = rx2_ant;
-                    fwcAntForm.TXAnt = tx_ant;
-                }
-                RX1Ant = rx1_ant;
-                if (FWCEEPROM.RX2OK)
-                {
-                    CheckRX2CalData();
-                    if (!FWCEEPROM.RX2ChecksumPresent)
-                        WriteRX2Checksums();
-                    VerifyRX2Checksums();
-                    RX2Ant = rx2_ant;
-                }
-            }
-            else PAPresent = pa_present;
+            PAPresent = pa_present;
 
             if (comboAGC.SelectedIndex < 0)
                 RX1AGCMode = AGCMode.MED;
@@ -9946,854 +9920,6 @@ namespace PowerSDR
             Common.ForceFormOnScreen(this);
             Common.ForceFormOnScreen(SetupForm);
             //Common.ForceFormOnScreen(MemForm);
-        }
-
-        private void InitRadio()
-        {
-            uint val;
-            FWC.GetFirmwareRev(out val);
-            if (val == 0)
-            {
-                Splash.HideForm();
-                MessageBox.Show("Error communicating with the radio.  Please reload PowerSDR to try again.\n" +
-                    "Note that starting PowerSDR too quickly after powering on the radio can cause this problem.",
-                    "Error: Radio Communication Problem",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                fwc_init = false;
-                return;
-            }
-
-            switch (current_model)
-            {
-                case Model.FLEX3000:
-                    if (val < 0x02000001 || val > 0x0200FFFF) // revs outside of v2.0.*.*
-                    {
-                        string s = ((byte)(val >> 24)).ToString() + "." + ((byte)(val >> 16)).ToString() + "." +
-                            ((byte)(val >> 8)).ToString() + "." + ((byte)val).ToString();
-                        Splash.HideForm();
-                        MessageBox.Show("FLEX-3000 Firmware Change Required.\n" +
-                            "Please visit our website at www.flex-radio.com\n" +
-                            "and click the Download Firmware link.\n" +
-                            "(Looked for v2.0.0.1+ and found v" + s + ")",
-                            "Error: Radio Firmware Version",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        fwc_init = false;
-                        return;
-                    }
-                    break;
-                case Model.FLEX5000:
-                    if (val < 0x02000001 || val > 0x0200FFFF) // revs outside of v2.0.*.*
-                    {
-                        string s = ((byte)(val >> 24)).ToString() + "." + ((byte)(val >> 16)).ToString() + "." +
-                            ((byte)(val >> 8)).ToString() + "." + ((byte)val).ToString();
-                        Splash.HideForm();
-                        MessageBox.Show("FLEX-5000 Firmware Change Required.\n" +
-                            "Please visit our website at www.flex-radio.com\n" +
-                            "and click the Download FLEX-5000 Firmware link.\n" +
-                            "(Looked for v2.0.0.1+ and found v" + s + ")",
-                            "Error: FLEX-5000 Firmware Version",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        fwc_init = false;
-                        return;
-                    }
-                    break;
-            }
-
-            FWC.Initialize();
-            FWC.SetTRXPreamp(false);
-            if (current_model == Model.FLEX3000)
-                FWC.SetRXAttn(false);
-        }
-
-        private void CheckCalData()
-        {
-            if (!fwc_init || (current_model != Model.FLEX5000 && current_model != Model.FLEX3000)) return;
-            if (FWCEEPROM.LastCalDateTime == unchecked((long)0xffffffffffffffff))
-            {
-                //MessageBox.Show("No Calibration Date/Time Found.");
-                return;
-            }
-
-            if (fwc_serial_num != FWCEEPROM.SerialNumber)
-            {
-                if (fwc_serial_num != 0)
-                {
-                    /*string old_s = FWCEEPROM.SerialToString(fwc_serial_num);
-                    string new_s = FWCEEPROM.SerialToString(FWCEEPROM.SerialNumber);
-
-                    Splash.HideForm();
-                    DialogResult dr = MessageBox.Show("New Radio Detected: Old Serial: "+old_s+"  New Serial: "+new_s+"\n"+
-                        "Do you want to update the PowerSDR calibration data from the EEPROM?\n"+
-                        "(Note that this may take as long as 90 seconds)",
-                        "New Radio: Update Cal?",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question);
-
-                    if(dr == DialogResult.No) return;*/
-                }
-                else
-                {
-                    /*MessageBox.Show("Please wait patiently while a one-time transfer of the\n"+
-                        "calibration data from the EEPROM is performed.  This\n"+
-                        "can take as long as 90 seconds.  Click OK to continue.",
-                        "Please wait for Cal Data Transfer",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);*/
-                }
-            }
-            else if (fwc_trx_serial_num != FWCEEPROM.TRXSerial)
-            {
-                /*string old_s = FWCEEPROM.SerialToString(fwc_trx_serial_num);
-                string new_s = FWCEEPROM.SerialToString(FWCEEPROM.TRXSerial);
-
-                Splash.HideForm();
-                DialogResult dr = MessageBox.Show("New Radio Detected: Old TRX Serial: "+old_s+"  New Serial: "+new_s+"\n"+
-                    "Do you want to update the PowerSDR calibration data from the EEPROM?\n"+
-                    "(Note that this may take as long as 90 seconds)",
-                    "New Radio: Update Cal?",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if(dr == DialogResult.No) return;*/
-            }
-            else if (fwc_last_cal_date_time < FWCEEPROM.LastCalDateTime)
-            {
-                /*try
-                {
-                    DateTime old_date = DateTime.FromFileTimeUtc(fwc_last_cal_date_time);
-                    string old_d = old_date.ToShortDateString()+" "+old_date.ToShortTimeString();
-                    DateTime new_date = DateTime.FromFileTimeUtc(FWCEEPROM.LastCalDateTime);
-                    string new_d = new_date.ToShortDateString()+" "+new_date.ToShortTimeString();
-				
-                    Splash.HideForm();
-                    DialogResult dr = MessageBox.Show("Updated Calibration Data Detected:  Old: "+old_d+"  New: "+new_d+"\n"+
-                        "Do you want to update the PowerSDR calibration data from the EEPROM?\n"+
-                        "(Note that this may take as long as 90 seconds)",
-                        "New Data: Update Cal?",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question);
-
-                    if(dr == DialogResult.No) return;
-                }
-                catch(Exception) { }*/
-            }
-            else return;
-
-            // download cal data from EEPROM
-            RestoreCalData();
-        }
-
-        private void CheckRX2CalData()
-        {
-            if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK) return;
-            if (FWCEEPROM.LastRX2CalDateTime == unchecked((long)0xffffffffffffffff))
-            {
-                //MessageBox.Show("No Calibration Date/Time Found.");
-                return;
-            }
-
-            if (rx2_serial_num != FWCEEPROM.RX2Serial)
-            {
-                if (rx2_serial_num != 0)
-                {
-                    /*string old_s = FWCEEPROM.SerialToString(rx2_serial_num);
-                    string new_s = FWCEEPROM.SerialToString(FWCEEPROM.RX2Serial);
-
-                    Splash.HideForm();
-                    DialogResult dr = MessageBox.Show("New RX2 Detected: Old Serial: "+old_s+"  New Serial: "+new_s+"\n"+
-                        "Do you want to update the PowerSDR calibration data from the EEPROM?\n"+
-                        "(Note that this may take as long as 30 seconds)",
-                        "New RX2: Update Cal?",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question);
-
-                    if(dr == DialogResult.No) return;*/
-                }
-                else
-                {
-                    /*MessageBox.Show("Please wait patiently while a one-time transfer of the\n"+
-                         "RX2 calibration data from the EEPROM is performed.  This\n"+
-                         "can take as long as 30 seconds.  Click OK to continue.",
-                         "Please wait for Cal Data Transfer",
-                         MessageBoxButtons.OK,
-                         MessageBoxIcon.Information);*/
-                }
-            }
-            else if (rx2_last_cal_date_time < FWCEEPROM.LastRX2CalDateTime)
-            {
-                /*try
-                {
-                    DateTime old_date = DateTime.FromFileTimeUtc(rx2_last_cal_date_time);
-                    string old_d = old_date.ToShortDateString()+" "+old_date.ToShortTimeString();
-                    DateTime new_date = DateTime.FromFileTimeUtc(FWCEEPROM.LastRX2CalDateTime);
-                    string new_d = new_date.ToShortDateString()+" "+new_date.ToShortTimeString();
-				
-                    Splash.HideForm();
-                    DialogResult dr = MessageBox.Show("Updated RX2 Calibration Data Detected:  Old: "+old_d+"  New: "+new_d+"\n"+
-                        "Do you want to update the PowerSDR calibration data from the EEPROM?\n"+
-                        "(Note that this may take as long as 30 seconds)",
-                        "New Data: Update Cal?",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question);
-
-                    if(dr == DialogResult.No) return;
-                }
-                catch(Exception) { }*/
-            }
-            else return;
-
-            // download cal data from EEPROM
-            RX2RestoreCalData();
-        }
-
-        public void SyncCalDateTime()
-        {
-            fwc_serial_num = FWCEEPROM.SerialNumber;
-            fwc_trx_serial_num = FWCEEPROM.TRXSerial;
-            fwc_last_cal_date_time = FWCEEPROM.LastCalDateTime;
-        }
-
-        public void RX2SyncCalDateTime()
-        {
-            rx2_serial_num = FWCEEPROM.RX2Serial;
-            rx2_last_cal_date_time = FWCEEPROM.LastRX2CalDateTime;
-        }
-
-        public void WriteTRXChecksums()
-        {
-            rx1_level_checksum = Checksum.Calc(rx1_level_table);
-            FWCEEPROM.WriteRXLevelChecksum(rx1_level_checksum);
-
-            rx1_image_gain_checksum = Checksum.Calc(rx1_image_gain_table);
-            FWCEEPROM.WriteRXImageGainChecksum(rx1_image_gain_checksum);
-
-            rx1_image_phase_checksum = Checksum.Calc(rx1_image_phase_table);
-            FWCEEPROM.WriteRXImagePhaseChecksum(rx1_image_phase_checksum);
-
-            tx_image_gain_checksum = Checksum.Calc(tx_image_gain_table);
-            FWCEEPROM.WriteTXImageGainChecksum(tx_image_gain_checksum);
-
-            tx_image_phase_checksum = Checksum.Calc(tx_image_phase_table);
-            FWCEEPROM.WriteTXImagePhaseChecksum(tx_image_phase_checksum);
-
-            tx_carrier_checksum = Checksum.Calc(tx_carrier_table, true);
-            FWCEEPROM.WriteTXCarrierChecksum(tx_carrier_checksum);
-
-            if (FWCEEPROM.PAOK)
-            {
-                pa_bias_checksum = Checksum.Calc(pa_bias_table, false);
-                FWCEEPROM.WritePABiasChecksum(pa_bias_checksum);
-
-                pa_bridge_checksum = Checksum.Calc(pa_bridge_table);
-                FWCEEPROM.WritePABridgeChecksum(pa_bridge_checksum);
-
-                pa_power_checksum = Checksum.Calc(power_table);
-                FWCEEPROM.WritePAPowerChecksum(pa_power_checksum);
-
-                pa_swr_checksum = Checksum.Calc(swr_table);
-                FWCEEPROM.WritePASWRChecksum(pa_swr_checksum);
-
-                if (current_model == Model.FLEX3000)
-                {
-                    atu_swr_checksum = Checksum.Calc(atu_swr_table);
-                    FWCEEPROM.WriteATUSWRChecksum(atu_swr_checksum);
-                }
-            }
-            FWCEEPROM.TRXChecksumPresent = true;
-        }
-
-        public void VerifyTRXChecksums()
-        {
-            byte calc = 0, eeprom = 0;
-            bool error_flag = false;
-            string error = "";
-
-            eeprom = FWCEEPROM.ReadRXLevelChecksum();
-            calc = Checksum.Calc(rx1_level_table);
-            if (rx1_level_checksum != eeprom ||
-                rx1_level_checksum != calc)
-            {
-                error_flag = true;
-                error += "RX1 Level Checksum Error " +
-                    "DB: " + rx1_level_checksum.ToString("X") +
-                    " EEPROM: " + eeprom.ToString("X") +
-                    " Calculated: " + calc.ToString("X") + "\n";
-            }
-
-            eeprom = FWCEEPROM.ReadRXImageGainChecksum();
-            calc = Checksum.Calc(rx1_image_gain_table);
-            if (rx1_image_gain_checksum != eeprom ||
-                rx1_image_gain_checksum != calc)
-            {
-                error_flag = true;
-                error += "RX1 Image Gain Checksum Error " +
-                    "DB: " + rx1_image_gain_checksum.ToString("X") +
-                    " EEPROM: " + eeprom.ToString("X") +
-                    " Calculated: " + calc.ToString("X") + "\n"; ;
-            }
-
-            eeprom = FWCEEPROM.ReadRXImagePhaseChecksum();
-            calc = Checksum.Calc(rx1_image_phase_table);
-            if (rx1_image_phase_checksum != eeprom ||
-                rx1_image_phase_checksum != calc)
-            {
-                error_flag = true;
-                error += "RX1 Image Phase Checksum Error " +
-                    "DB: " + rx1_image_phase_checksum.ToString("X") +
-                    " EEPROM: " + eeprom.ToString("X") +
-                    " Calculated: " + calc.ToString("X") + "\n";
-            }
-
-            eeprom = FWCEEPROM.ReadTXImageGainChecksum();
-            calc = Checksum.Calc(tx_image_gain_table);
-            if (tx_image_gain_checksum != eeprom ||
-                tx_image_gain_checksum != calc)
-            {
-                error_flag = true;
-                error += "TX Image Gain Checksum Error " +
-                    "DB: " + tx_image_gain_checksum.ToString("X") +
-                    " EEPROM: " + eeprom.ToString("X") +
-                    " Calculated: " + calc.ToString("X") + "\n";
-            }
-
-            eeprom = FWCEEPROM.ReadTXImagePhaseChecksum();
-            calc = Checksum.Calc(tx_image_phase_table);
-            if (tx_image_phase_checksum != eeprom ||
-                tx_image_phase_checksum != calc)
-            {
-                error_flag = true;
-                error += "TX Image Phase Checksum Error " +
-                    "DB: " + tx_image_phase_checksum.ToString("X") +
-                    " EEPROM: " + eeprom.ToString("X") +
-                    " Calculated: " + calc.ToString("X") + "\n";
-            }
-
-            eeprom = FWCEEPROM.ReadTXCarrierChecksum();
-            calc = Checksum.Calc(tx_carrier_table, true);
-            if (tx_carrier_checksum != eeprom ||
-                tx_carrier_checksum != calc)
-            {
-                error_flag = true;
-                error += "TX Carrier Checksum Error " +
-                    "DB: " + tx_carrier_checksum.ToString("X") +
-                    " EEPROM: " + eeprom.ToString("X") +
-                    " Calculated: " + calc.ToString("X") + "\n";
-            }
-
-            if (FWCEEPROM.PAOK)
-            {
-                eeprom = FWCEEPROM.ReadPABiasChecksum();
-                calc = Checksum.Calc(pa_bias_table, false);
-                if (pa_bias_checksum != eeprom ||
-                    pa_bias_checksum != calc)
-                {
-                    error_flag = true;
-                    error += "PA Bias Checksum Error " +
-                        "DB: " + pa_bias_checksum.ToString("X") +
-                        " EEPROM: " + eeprom.ToString("X") +
-                        " Calculated: " + calc.ToString("X") + "\n";
-                }
-
-                eeprom = FWCEEPROM.ReadPABridgeChecksum();
-                calc = Checksum.Calc(pa_bridge_table);
-                if (pa_bridge_checksum != eeprom ||
-                    pa_bridge_checksum != calc)
-                {
-                    error_flag = true;
-                    error += "PA Bridge Checksum Error " +
-                        "DB: " + pa_bridge_checksum.ToString("X") +
-                        " EEPROM: " + eeprom.ToString("X") +
-                        " Calculated: " + calc.ToString("X") + "\n";
-                }
-
-                eeprom = FWCEEPROM.ReadPAPowerChecksum();
-                calc = Checksum.Calc(power_table);
-                if (pa_power_checksum != eeprom ||
-                    pa_power_checksum != calc)
-                {
-                    error_flag = true;
-                    error += "PA Power Checksum Error " +
-                        "DB: " + pa_power_checksum.ToString("X") +
-                        " EEPROM: " + eeprom.ToString("X") +
-                        " Calculated: " + calc.ToString("X") + "\n";
-                }
-
-                eeprom = FWCEEPROM.ReadPASWRChecksum();
-                calc = Checksum.Calc(swr_table);
-                if (pa_swr_checksum != eeprom ||
-                    pa_swr_checksum != calc)
-                {
-                    error_flag = true;
-                    error += "PA SWR Checksum Error " +
-                        "DB: " + pa_swr_checksum.ToString("X") +
-                        " EEPROM: " + eeprom.ToString("X") +
-                        " Calculated: " + calc.ToString("X") + "\n";
-                }
-
-                if (current_model == Model.FLEX3000)
-                {
-                    eeprom = FWCEEPROM.ReadATUSWRChecksum();
-                    calc = Checksum.Calc(atu_swr_table);
-                    if (atu_swr_checksum != eeprom ||
-                        atu_swr_checksum != calc)
-                    {
-                        error_flag = true;
-                        error += "ATU SWR Checksum Error " +
-                            "DB: " + atu_swr_checksum.ToString("X") +
-                            " EEPROM: " + eeprom.ToString("X") +
-                            " CAlculated: " + calc.ToString("X") + "\n";
-                    }
-                }
-            }
-
-            if (error_flag)
-            {
-                TextWriter writer = new StreamWriter(app_data_path + "\\checksum_error.log", true);
-                string s = DateTime.Now.ToShortDateString() + "  " + DateTime.Now.ToShortTimeString();
-                writer.WriteLine(s + "  " + error);
-                writer.Close();
-                FWCEEPROM.TRXChecksumPresent = false;
-            }
-        }
-
-        public void WriteRX2Checksums()
-        {
-            rx2_level_checksum = Checksum.Calc(rx2_level_table);
-            FWCEEPROM.WriteRX2LevelChecksum(rx2_level_checksum);
-
-            rx2_image_gain_checksum = Checksum.Calc(rx2_image_gain_table);
-            FWCEEPROM.WriteRX2ImageGainChecksum(rx2_image_gain_checksum);
-
-            rx2_image_phase_checksum = Checksum.Calc(rx2_image_phase_table);
-            FWCEEPROM.WriteRX2ImagePhaseChecksum(rx2_image_phase_checksum);
-
-            FWCEEPROM.RX2ChecksumPresent = true;
-        }
-
-        public void VerifyRX2Checksums()
-        {
-            byte calc = 0, eeprom = 0;
-            bool error_flag = false;
-            string error = "";
-
-            eeprom = FWCEEPROM.ReadRX2LevelChecksum();
-            calc = Checksum.Calc(rx2_level_table);
-            if (rx2_level_checksum != eeprom ||
-                rx2_level_checksum != calc)
-            {
-                error_flag = true;
-                error += "RX2 Level Checksum Error " +
-                    "DB: " + rx2_level_checksum.ToString("X") +
-                    " EEPROM: " + eeprom.ToString("X") +
-                    " Calculated: " + calc.ToString("X");
-            }
-
-            eeprom = FWCEEPROM.ReadRX2ImageGainChecksum();
-            calc = Checksum.Calc(rx2_image_gain_table);
-            if (rx2_image_gain_checksum != eeprom ||
-                rx2_image_gain_checksum != calc)
-            {
-                error_flag = true;
-                error += "RX2 Image Gain Checksum Error " +
-                    "DB: " + rx2_image_gain_checksum.ToString("X") +
-                    " EEPROM: " + eeprom.ToString("X") +
-                    " Calculated: " + calc.ToString("X");
-            }
-
-            eeprom = FWCEEPROM.ReadRX2ImagePhaseChecksum();
-            calc = Checksum.Calc(rx2_image_phase_table);
-            if (rx2_image_phase_checksum != eeprom ||
-                rx2_image_phase_checksum != calc)
-            {
-                error_flag = true;
-                error += "RX2 Image Phase Checksum Error.\n" +
-                    "DB: " + rx2_image_phase_checksum.ToString("X") +
-                    " EEPROM: " + eeprom.ToString("X") +
-                    " Calculated: " + calc.ToString("X");
-            }
-
-            if (error_flag)
-            {
-                TextWriter writer = new StreamWriter(app_data_path + "\\checksum_error.log", true);
-                string s = DateTime.Now.ToShortDateString() + "  " + DateTime.Now.ToShortTimeString();
-                writer.WriteLine(s + "  " + error);
-                writer.Close();
-                FWCEEPROM.RX2ChecksumPresent = false;
-            }
-        }
-
-        public void RestoreCalData()
-        {
-            bool trx_checksum_present = FWCEEPROM.TRXChecksumPresent;
-            int checksum_error = 0;
-            bool error_flag = false;
-            string error = "";
-            Progress p = new Progress("Retrieving Calibration Data from TRX EEPROM");
-            p.SetPercent(0.0f);
-            this.Invoke(new MethodInvoker(p.Show));
-            Application.DoEvents();
-            float total_reads = 324.0f;
-            if (current_model == Model.FLEX3000)
-                total_reads += 11.0f;  // for ATU SWR table
-            int count = 0;
-
-            checksum_error = 0;
-            while (true)
-            {
-                FWCEEPROM.ReadRXLevel(rx1_level_table); // 33 reads
-                rx1_level_checksum = Checksum.Calc(rx1_level_table);
-                if (!trx_checksum_present) FWCEEPROM.WriteRXLevelChecksum(rx1_level_checksum);
-                if (Checksum.Match(rx1_level_table, FWCEEPROM.ReadRXLevelChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "RX1 Level Checksum verification error.\n" +
-                        "DB: " + rx1_level_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadRXLevelChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(rx1_level_table).ToString("X") + "\n";
-                    break;
-                }
-            }
-            p.SetPercent((count += 33) / total_reads);
-            Application.DoEvents();
-
-            checksum_error = 0;
-            while (true)
-            {
-                FWCEEPROM.ReadRXImage(rx1_image_gain_table, rx1_image_phase_table); // 22 reads
-                rx1_image_gain_checksum = Checksum.Calc(rx1_image_gain_table);
-                if (!trx_checksum_present) FWCEEPROM.WriteRXImageGainChecksum(rx1_image_gain_checksum);
-                if (Checksum.Match(rx1_image_gain_table, FWCEEPROM.ReadRXImageGainChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "RX1 Image Gain Checksum verification error.\n" +
-                        "DB: " + rx1_image_gain_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadRXImageGainChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(rx1_image_gain_table).ToString("X") + "\n";
-                    break;
-                }
-            }
-
-            checksum_error = 0;
-            do
-            {
-                rx1_image_phase_checksum = Checksum.Calc(rx1_image_phase_table);
-                if (!trx_checksum_present) FWCEEPROM.WriteRXImagePhaseChecksum(rx1_image_phase_checksum);
-                if (Checksum.Match(rx1_image_phase_table, FWCEEPROM.ReadRXImagePhaseChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "RX1 Image Phase Checksum verification error.\n" +
-                        "DB: " + rx1_image_phase_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadRXImagePhaseChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(rx1_image_phase_table).ToString("X") + "\n";
-                    break;
-                }
-                FWCEEPROM.ReadRXImage(rx1_image_gain_table, rx1_image_phase_table); // 22 reads
-            } while (true);
-            p.SetPercent((count += 22) / total_reads);
-            Application.DoEvents();
-
-            checksum_error = 0;
-            while (true)
-            {
-                FWCEEPROM.ReadTXImage(tx_image_gain_table, tx_image_phase_table); // 22 reads
-                tx_image_gain_checksum = Checksum.Calc(tx_image_gain_table);
-                if (!trx_checksum_present) FWCEEPROM.WriteTXImageGainChecksum(tx_image_gain_checksum);
-                if (Checksum.Match(tx_image_gain_table, FWCEEPROM.ReadTXImageGainChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "TX Image Gain Checksum verification error.\n" +
-                        "DB: " + tx_image_gain_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadTXImageGainChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(tx_image_gain_table).ToString("X") + "\n";
-                    break;
-                }
-            }
-
-            checksum_error = 0;
-            do
-            {
-                tx_image_phase_checksum = Checksum.Calc(tx_image_phase_table);
-                if (!trx_checksum_present) FWCEEPROM.WriteTXImagePhaseChecksum(tx_image_phase_checksum);
-                if (Checksum.Match(tx_image_phase_table, FWCEEPROM.ReadTXImagePhaseChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "TX Image Phase Checksum verification error.\n" +
-                        "DB: " + tx_image_phase_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadTXImagePhaseChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(tx_image_phase_table).ToString("X") + "\n";
-                    break;
-                }
-                FWCEEPROM.ReadTXImage(tx_image_gain_table, tx_image_phase_table); // 22 reads
-            } while (true);
-            p.SetPercent((count += 22) / total_reads);
-            Application.DoEvents();
-
-            checksum_error = 0;
-            while (true)
-            {
-                FWCEEPROM.ReadTXCarrier(tx_carrier_table); // 11 reads
-                tx_carrier_checksum = Checksum.Calc(tx_carrier_table, true);
-                if (!trx_checksum_present) FWCEEPROM.WriteTXCarrierChecksum(tx_carrier_checksum);
-                if (Checksum.Match(tx_carrier_table, FWCEEPROM.ReadTXCarrierChecksum(), true)) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "TX Carrier Checksum verification error.\n" +
-                        "DB: " + tx_carrier_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadTXCarrierChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(tx_carrier_table, true).ToString("X") + "\n";
-                    break;
-                }
-            }
-            p.SetPercent((count += 11) / total_reads);
-            Application.DoEvents();
-
-            checksum_error = 0;
-            while (true)
-            {
-                FWCEEPROM.ReadPABias(pa_bias_table); // 8 reads
-                pa_bias_checksum = Checksum.Calc(pa_bias_table, false);
-                if (!trx_checksum_present) FWCEEPROM.WritePABiasChecksum(pa_bias_checksum);
-                if (Checksum.Match(pa_bias_table, FWCEEPROM.ReadPABiasChecksum(), false)) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "PA Bias Checksum verification error.\n" +
-                        "DB: " + pa_bias_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadPABiasChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(pa_bias_table, false).ToString("X") + "\n";
-                    break;
-                }
-            }
-            p.SetPercent((count += 8) / total_reads);
-            Application.DoEvents();
-
-            checksum_error = 0;
-            while (true)
-            {
-                FWCEEPROM.ReadPAPower(power_table); // 143 reads
-                pa_power_checksum = Checksum.Calc(power_table);
-                if (!trx_checksum_present) FWCEEPROM.WritePAPowerChecksum(pa_power_checksum);
-                if (Checksum.Match(power_table, FWCEEPROM.ReadPAPowerChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "PA Power Checksum verification error.\n" +
-                        "DB: " + pa_power_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadPAPowerChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(power_table).ToString("X") + "\n";
-                    break;
-                }
-            }
-            p.SetPercent((count += 143) / total_reads);
-            Application.DoEvents();
-
-            checksum_error = 0;
-            while (true)
-            {
-                FWCEEPROM.ReadPABridge(pa_bridge_table); // 66 reads
-                pa_bridge_checksum = Checksum.Calc(pa_bridge_table);
-                if (!trx_checksum_present) FWCEEPROM.WritePABridgeChecksum(pa_bridge_checksum);
-                if (Checksum.Match(pa_bridge_table, FWCEEPROM.ReadPABridgeChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "PA Bridge Checksum verification error.\n" +
-                        "DB: " + pa_bridge_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadPABridgeChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(pa_bridge_table).ToString("X") + "\n";
-                    break;
-                }
-            }
-            p.SetPercent((count += 66) / total_reads);
-            Application.DoEvents();
-
-            checksum_error = 0;
-            while (true)
-            {
-                FWCEEPROM.ReadPASWR(swr_table); // 11 reads
-                pa_swr_checksum = Checksum.Calc(swr_table);
-                if (!trx_checksum_present) FWCEEPROM.WritePASWRChecksum(pa_swr_checksum);
-                if (Checksum.Match(swr_table, FWCEEPROM.ReadPASWRChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "PA SWR Checksum verification error.\n" +
-                        "DB: " + pa_swr_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadPASWRChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(swr_table).ToString("X") + "\n";
-                    break;
-                }
-            }
-            p.SetPercent((count += 11) / total_reads);
-            Application.DoEvents();
-
-
-            if (error_flag)
-            {
-                TextWriter writer = new StreamWriter(app_data_path + "\\checksum_error.log", true);
-                string s = DateTime.Now.ToShortDateString() + "  " + DateTime.Now.ToShortTimeString();
-                writer.WriteLine(s + "  " + error);
-                writer.Close();
-                FWCEEPROM.TRXChecksumPresent = false;
-            }
-            p.SetPercent((count += 8) / total_reads);
-            Application.DoEvents();
-
-            SyncCalDateTime();
-            p.Hide();
-            p.Close();
-            Application.DoEvents();
-
-            for (int i = (int)Band.B2M; i < (int)Band.LAST; i++)
-                for (int j = 0; j < 13; j++)
-                    power_table[i][j] = power_table[10][j];
-
-            bool save_init = initializing;
-            initializing = true;
-            RX1Band = rx1_band;
-            TXBand = tx_band;
-            initializing = save_init;
-        }
-
-        public void RX2RestoreCalData()
-        {
-            bool rx2_checksum_present = FWCEEPROM.RX2ChecksumPresent;
-            int checksum_error = 0;
-            bool error_flag = false;
-            string error = "";
-            Progress p = new Progress("Retrieving Calibration Data from RX2 EEPROM");
-            p.SetPercent(0.0f);
-            this.Invoke(new MethodInvoker(p.Show));
-            Application.DoEvents();
-            float total_reads = 55.0f;
-            int count = 0;
-
-            checksum_error = 0;
-            while (true)
-            {
-                FWCEEPROM.ReadRX2Level(rx2_level_table); // 33 reads
-                rx2_level_checksum = Checksum.Calc(rx2_level_table);
-                if (!rx2_checksum_present) FWCEEPROM.WriteRX2LevelChecksum(rx2_level_checksum);
-                if (Checksum.Match(rx2_level_table, FWCEEPROM.ReadRX2LevelChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "RX2 Level Checksum verification error.\n" +
-                        "DB: " + rx2_level_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadRX2LevelChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(rx2_level_table).ToString("X") + "\n";
-                    break;
-                }
-            }
-            p.SetPercent((count += 33) / total_reads);
-            Application.DoEvents();
-
-            checksum_error = 0;
-            while (true)
-            {
-                FWCEEPROM.ReadRX2Image(rx2_image_gain_table, rx2_image_phase_table); // 22 reads
-                rx2_image_gain_checksum = Checksum.Calc(rx2_image_gain_table);
-                if (!rx2_checksum_present) FWCEEPROM.WriteRX2ImageGainChecksum(rx2_image_gain_checksum);
-                if (Checksum.Match(rx2_image_gain_table, FWCEEPROM.ReadRX2ImageGainChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "RX2 Image Gain Checksum verification error.\n" +
-                        "DB: " + rx2_image_gain_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadRX2ImageGainChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(rx2_image_gain_table).ToString("X") + "\n";
-                    break;
-                }
-            }
-
-            checksum_error = 0;
-            do
-            {
-                rx2_image_phase_checksum = Checksum.Calc(rx2_image_phase_table);
-                if (!rx2_checksum_present) FWCEEPROM.WriteRX2ImagePhaseChecksum(rx2_image_phase_checksum);
-                if (Checksum.Match(rx2_image_phase_table, FWCEEPROM.ReadRX2ImagePhaseChecksum())) break;
-
-                checksum_error++;
-                if (checksum_error > 2)
-                {
-                    error_flag = true;
-                    error += "RX2 Image Phase Checksum verification error.\n" +
-                        "DB: " + rx2_image_phase_checksum.ToString("X") +
-                        " EEPROM: " + FWCEEPROM.ReadRX2ImagePhaseChecksum().ToString("X") +
-                        " Calculated: " + Checksum.Calc(rx2_image_phase_table).ToString("X") + "\n";
-                    break;
-                }
-                FWCEEPROM.ReadRX2Image(rx2_image_gain_table, rx2_image_phase_table); // 22 reads
-            } while (true);
-            p.SetPercent((count += 22) / total_reads);
-            Application.DoEvents();
-
-            if (error_flag)
-            {
-                TextWriter writer = new StreamWriter(app_data_path + "\\checksum_error.log", true);
-                string s = DateTime.Now.ToShortDateString() + "  " + DateTime.Now.ToShortTimeString();
-                writer.WriteLine(s + "  " + error);
-                writer.Close();
-                FWCEEPROM.RX2ChecksumPresent = false;
-            }
-
-            RX2SyncCalDateTime();
-            p.Hide();
-            p.Close();
-
-            bool save_init = initializing;
-            initializing = true;
-            RX2Band = rx2_band;
-            initializing = save_init;
-        }
-
-        public void WriteCalData()
-        {
-            if (!fwc_init || (current_model != Model.FLEX5000 && current_model != Model.FLEX3000)) return;
-
-            FWCEEPROM.WriteRXLevel(rx1_level_table, out rx1_level_checksum);
-            FWCEEPROM.WriteRXImage(rx1_image_gain_table, rx1_image_phase_table, out rx1_image_gain_checksum, out rx1_image_phase_checksum);
-            FWCEEPROM.WriteTXImage(tx_image_gain_table, tx_image_phase_table, out tx_image_gain_checksum, out tx_image_phase_checksum);
-            FWCEEPROM.WriteTXCarrier(tx_carrier_table, out tx_carrier_checksum);
-            FWCEEPROM.WritePABias(pa_bias_table, out pa_bias_checksum);
-            FWCEEPROM.WritePABridge(pa_bridge_table, out pa_bridge_checksum);
-            FWCEEPROM.WritePAPower(power_table, out pa_power_checksum);
-            FWCEEPROM.WritePASWR(swr_table, out pa_swr_checksum);
-
-            SyncCalDateTime();
         }
 
         public float GetRX1Level(Band b, int index)
@@ -14124,8 +13250,8 @@ namespace PowerSDR
                     retval = CheckValidTXFreq_Private(r, f);
                     break;
                 case DSPMode.DRM:
-                    retval = (CheckValidTXFreq_Private(r, f - 0.012 + Display.TXFilterLow * 0.0000010) &&
-                        CheckValidTXFreq_Private(r, f - 0.012 + Display.TXFilterHigh * 0.0000010));
+                    retval = (CheckValidTXFreq_Private(r, f + Display.TXFilterLow * 1e-6) &&
+                        CheckValidTXFreq_Private(r, f + Display.TXFilterHigh * 1e-6));
                     break;
             }
 
@@ -14432,298 +13558,6 @@ namespace PowerSDR
 
             return ret_val;
         }
-
-        public void SetHWFilters(double freq)
-        {
-            /*   if (PowerOn && ModelIsHPSDRorHermes() && SetupForm.radAlexManualCntl.Checked)
-               {
-                   if (alex_hpf_bypass)
-                   {
-                       JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
-                       SetupForm.radBPHPFled.Checked = true;
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex1_5HPFStart.Value && // 1.5 MHz HPF
-                        (decimal)freq <= SetupForm.udAlex1_5HPFEnd.Value)
-                   {
-                       if (SetupForm.chkAlex1_5BPHPF.Checked)
-                       {
-                           JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
-                           SetupForm.radBPHPFled.Checked = true;
-                       }
-                       else
-                       {
-                           JanusAudio.SetAlexHPFBits(0x10);
-                           SetupForm.rad1_5HPFled.Checked = true;
-                       }
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex6_5HPFStart.Value && // 6.5 MHz HPF
-                            (decimal)freq <= SetupForm.udAlex6_5HPFEnd.Value)
-                   {
-                       if (SetupForm.chkAlex6_5BPHPF.Checked)
-                       {
-                           JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
-                           SetupForm.radBPHPFled.Checked = true;
-                       }
-                       else
-                       {
-                           JanusAudio.SetAlexHPFBits(0x08);
-                           SetupForm.rad6_5HPFled.Checked = true;
-                       }
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex9_5HPFStart.Value && // 9.5 MHz HPF
-                            (decimal)freq <= SetupForm.udAlex9_5HPFEnd.Value)
-                   {
-                       if (SetupForm.chkAlex9_5BPHPF.Checked)
-                       {
-                           JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
-                           SetupForm.radBPHPFled.Checked = true;
-                       }
-                       else
-                       {
-                           JanusAudio.SetAlexHPFBits(0x04);
-                           SetupForm.rad9_5HPFled.Checked = true;
-                       }
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex13HPFStart.Value && // 13 MHz HPF
-                            (decimal)freq <= SetupForm.udAlex13HPFEnd.Value)
-                   {
-                       if (SetupForm.chkAlex13BPHPF.Checked)
-                       {
-                           JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
-                           SetupForm.radBPHPFled.Checked = true;
-                       }
-                       else
-                       {
-                           JanusAudio.SetAlexHPFBits(0x01);
-                           SetupForm.rad13HPFled.Checked = true;
-                       }
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex20HPFStart.Value && // 20 MHz HPF
-                            (decimal)freq <= SetupForm.udAlex20HPFEnd.Value)
-                   {
-                       if (SetupForm.chkAlex20BPHPF.Checked)
-                       {
-                           JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
-                           SetupForm.radBPHPFled.Checked = true;
-                       }
-                       else
-                       {
-                           JanusAudio.SetAlexHPFBits(0x02);
-                           SetupForm.rad20HPFled.Checked = true;
-                       }
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex6BPFStart.Value && // 6m BPF/LNA
-                            (decimal)freq <= SetupForm.udAlex6BPFEnd.Value)
-                   {
-                       if (SetupForm.chkAlex6BPHPF.Checked)
-                       {
-                           JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
-                           SetupForm.radBPHPFled.Checked = true;
-                       }
-                       else
-                       {
-                           JanusAudio.SetAlexHPFBits(0x40);
-                           SetupForm.rad6BPFled.Checked = true;
-                       }
-                   }
-                   else
-                   {
-                       JanusAudio.SetAlexHPFBits(0x20); // Bypass HPF
-                       SetupForm.radBPHPFled.Checked = true;
-                   }
-
-                    if (SetupForm.rad6BPFled.Checked) // Alex 6m preamp offset 23dB
-                        AlexPreampOffset = 23;
-                    else
-                        AlexPreampOffset = 0; 
-
-                   if ((decimal)freq >= SetupForm.udAlex160mLPFStart.Value && // 160m LPF
-                       (decimal)freq <= SetupForm.udAlex160mLPFEnd.Value)
-                   {
-                       JanusAudio.SetAlexLPFBits(0x08);
-                       SetupForm.rad160LPFled.Checked = true;
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex80mLPFStart.Value && // 80m LPF
-                            (decimal)freq <= SetupForm.udAlex80mLPFEnd.Value)
-                   {
-                       JanusAudio.SetAlexLPFBits(0x04);
-                       SetupForm.rad80LPFled.Checked = true;
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex40mLPFStart.Value && // 60/40m LPF
-                            (decimal)freq <= SetupForm.udAlex40mLPFEnd.Value)
-                   {
-                       JanusAudio.SetAlexLPFBits(0x02);
-                       SetupForm.rad40LPFled.Checked = true;
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex20mLPFStart.Value && // 30/20m LPF
-                            (decimal)freq <= SetupForm.udAlex20mLPFEnd.Value)
-                   {
-                       JanusAudio.SetAlexLPFBits(0x01);
-                       SetupForm.rad20LPFled.Checked = true;
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex15mLPFStart.Value && // 17/15 LPF
-                            (decimal)freq <= SetupForm.udAlex15mLPFEnd.Value)
-                   {
-                       JanusAudio.SetAlexLPFBits(0x40);
-                       SetupForm.rad15LPFled.Checked = true;
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex10mLPFStart.Value && // 12/10m LPF
-                            (decimal)freq <= SetupForm.udAlex10mLPFEnd.Value)
-                   {
-                       JanusAudio.SetAlexLPFBits(0x20);
-                       SetupForm.rad10LPFled.Checked = true;
-                   }
-
-                   else if ((decimal)freq >= SetupForm.udAlex6mLPFStart.Value && // 6m LPF
-                            (decimal)freq <= SetupForm.udAlex6mLPFEnd.Value)
-                   {
-                       JanusAudio.SetAlexLPFBits(0x10);
-                       SetupForm.rad6LPFled.Checked = true;
-                   }
-                   else
-                   {
-                       JanusAudio.SetAlexLPFBits(0x10); // 6m LPF
-                       SetupForm.rad6LPFled.Checked = true;
-                   }
-
-               }
-               else */
-            {
-                //Use shift registers on RFE to control BPF and LPF banks
-                if (freq <= 2.5)					// DC to 2.5MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.B160;
-
-                    if (!mox && chkBCI.Checked) //rx & BCI
-                        Hdw.BPFRelay = BPFBand.B60;		//sets next higher BPF for improved 160M operation
-                    else
-                        Hdw.BPFRelay = BPFBand.B160;
-
-                    if (freq <= 0.3 && enable_LPF0)
-                        Hdw.RFE_LPF = RFELPFBand.AUX;
-                    else
-                        Hdw.RFE_LPF = RFELPFBand.B160;
-                }
-                else if (freq <= 4)				// 2.5MHz to 4MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.B80;
-
-                    Hdw.BPFRelay = BPFBand.B60;
-                    Hdw.RFE_LPF = RFELPFBand.B80;
-                }
-                else if (freq <= 6)				// 4MHz to 6MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.B6040;
-
-                    Hdw.BPFRelay = BPFBand.B60;
-                    Hdw.RFE_LPF = RFELPFBand.B60;
-                }
-                else if (freq <= 7.3)			// 6MHz to 7.3MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.B6040;
-
-                    Hdw.BPFRelay = BPFBand.B40;
-                    Hdw.RFE_LPF = RFELPFBand.B40;
-                }
-                else if (freq <= 10.2)			// 7.3MHz to 10.2MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.B3020;
-
-                    Hdw.BPFRelay = BPFBand.B40;
-                    Hdw.RFE_LPF = RFELPFBand.B30;
-                }
-                else if (freq <= 12)				// 10.2MHz to 12MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.NONE;
-
-                    Hdw.BPFRelay = BPFBand.B40;
-                    Hdw.RFE_LPF = RFELPFBand.B30;
-                }
-                else if (freq <= 14.5)			// 12MHz to 14.5MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.B3020;
-
-                    Hdw.BPFRelay = BPFBand.B20;
-                    Hdw.RFE_LPF = RFELPFBand.B20;
-                }
-                else if (freq <= 21.5)			// 14.5MHz to 21.5MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.B1715;
-
-                    Hdw.BPFRelay = BPFBand.B20;
-                    Hdw.RFE_LPF = RFELPFBand.B1715;
-                }
-                else if (freq <= 24)				// 21.5MHz to 24MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.B1210;
-
-                    Hdw.BPFRelay = BPFBand.B20;
-                    Hdw.RFE_LPF = RFELPFBand.B1210;
-                }
-                else if (freq <= 30)				// 24MHz to 30MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.B1210;
-
-                    Hdw.BPFRelay = BPFBand.B10;
-                    Hdw.RFE_LPF = RFELPFBand.B1210;
-                }
-                else if (freq <= 36)				// 30MHz to 36MHz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.NONE;
-
-                    Hdw.BPFRelay = BPFBand.B10;
-                    Hdw.RFE_LPF = RFELPFBand.B6;
-                }
-                else if (freq <= 65)				// 36MHz to 65Mhz
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.NONE;
-
-                    Hdw.BPFRelay = BPFBand.B6;
-                    Hdw.RFE_LPF = RFELPFBand.B6;
-                }
-                else if (xvtr_present && freq >= 144 && freq <= 146)			//28MHz IF for transverter
-                {
-                    if (pa_present)
-                        Hdw.PA_LPF = PAFBand.NONE;
-
-                    Hdw.BPFRelay = BPFBand.B10;
-                    Hdw.RFE_LPF = RFELPFBand.B1210;
-                    Hdw.XVTR_RF = true;
-                }
-                if (xvtr_present && freq < 144)
-                    Hdw.XVTR_RF = false;
-
-                if (rx1_xvtr_index >= 0)
-                {
-                    Hdw.XVTR_RF = XVTRForm.GetXVTRRF(rx1_xvtr_index);
-                }
-            }
-
-        }
-
 
         public void SetAlexHPF(double freq)
         {
@@ -15067,59 +13901,6 @@ namespace PowerSDR
             }
         }
 
-
-        // kb9yig sr40 mod 		
-        // check and see if the band data includes alias data -- if so 
-        // zero out (very negative) the portions of the data that are 
-        // aliased 
-        public void AdjustDisplayDataForBandEdge(ref float[] display_data)
-        {
-            if (current_model != Model.SOFTROCK40)  // -- no aliasing going on 
-                return;
-
-            if (rx1_dsp_mode == DSPMode.DRM)  // for now don't worry about aliasing in DRM land 
-            {
-                return;
-            }
-
-            double hz_per_bin = sample_rate1 / Display.BUFFER_SIZE;
-            double data_center_freq = tuned_freq;
-            if (data_center_freq == 0)
-            {
-                return;
-            }
-            double data_low_edge_hz = (1000000.0 * data_center_freq) - sample_rate1 / 2;
-            double data_high_edge_hz = (1000000.0 * data_center_freq) + sample_rate1 / 2;
-            double alias_free_low_edge_hz = (1000000.0 * soft_rock_center_freq) - sample_rate1 / 2;
-            double alias_free_high_edge_hz = (1000000.0 * soft_rock_center_freq) + sample_rate1 / 2;
-            if (data_low_edge_hz < alias_free_low_edge_hz)   // data we have goes below alias free region -- zero it 
-            {
-                double hz_this_bin = data_low_edge_hz;
-                int bin_num = 0;
-                while (hz_this_bin < alias_free_low_edge_hz)
-                {
-                    display_data[bin_num] = -200.0f;
-                    ++bin_num;
-                    hz_this_bin += hz_per_bin;
-                }
-                // Debug.WriteLine("data_low: " + bin_num); 
-            }
-            else if (data_high_edge_hz > alias_free_high_edge_hz)
-            {
-                double hz_this_bin = data_high_edge_hz;
-                int bin_num = Display.BUFFER_SIZE - 1;
-                while (hz_this_bin > alias_free_high_edge_hz)
-                {
-                    display_data[bin_num] = -200.0f;
-                    --bin_num;
-                    hz_this_bin -= hz_per_bin;
-                }
-                // Debug.WriteLine("data_high: " + bin_num); 
-            }
-            return;
-        }
-        // end kb9yig sr40 mod 
-
         public void SelectRX1VarFilter()
         {
             if (rx1_filter == Filter.VAR1) return;
@@ -15144,86 +13925,6 @@ namespace PowerSDR
             radRX2FilterVar1.Checked = true;
             //SetFilter(Filter.VAR1); 
             UpdateRX2Filters(low, high);
-        }
-
-        private void UpdateExtCtrl()
-        {
-            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) return;
-            switch (TXBand)
-            {
-                case Band.B160M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_160_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_160_tx);
-                    break;
-                case Band.B80M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_80_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_80_tx);
-                    break;
-                case Band.B60M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_60_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_60_tx);
-                    break;
-                case Band.B40M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_40_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_40_tx);
-                    break;
-                case Band.B30M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_30_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_30_tx);
-                    break;
-                case Band.B20M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_20_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_20_tx);
-                    break;
-                case Band.B17M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_17_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_17_tx);
-                    break;
-                case Band.B15M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_15_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_15_tx);
-                    break;
-                case Band.B12M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_12_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_12_tx);
-                    break;
-                case Band.B10M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_10_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_10_tx);
-                    break;
-                case Band.B6M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_6_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_6_tx);
-                    break;
-                case Band.B2M:
-                    if (!mox)
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_2_rx);
-                    else
-                        Hdw.X2 = (byte)((Hdw.X2 & 0xC0) | x2_2_tx);
-                    break;
-            }
         }
 
         // Added 06/24/05 BT for CAT commands
@@ -16550,1521 +15251,6 @@ namespace PowerSDR
 
         #region Test and Calibration Routines
 
-        private Progress p;
-        public bool CalibratePABias(Progress progress, float driver_target, float final_target, float tol, int index)
-        {
-#if false
-            bool ret_val = false;
-            float driver_limit = 10.0f;
-            float final_limit = 10.0f;
-
-            if (!(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
-            {
-                progress.Text = "";
-                progress.Hide();
-                return false;
-            }
-
-            if (rx_only)
-            {
-                progress.Text = "";
-                progress.Hide();
-                MessageBox.Show("Cannot run this calibration while RX Only is selected\n(Setup Form -> General Tab)",
-                    "Error: RX Only is active",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (chkPower.Checked &&
-                (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
-                RX1DSPMode = DSPMode.DSB;
-
-            int val = 0;
-            float volts = 0.0f;
-            float current = 0.0f;
-            int counter = 0;
-
-            // read 13.8V for a sanity check of the ADC
-            FWC.ReadPAADC(2, out val);
-            volts = (float)val / 4096 * 2.5f;
-            float v138 = volts * 11;
-
-            if (v138 < 13.0 || v138 > 14.5)
-            {
-                progress.Hide();
-                MessageBox.Show("13.8V not within tolerance [13.0, 14.5] -- (read " + v138.ToString("f1") + ")",
-                    "ADC/Power Problem",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                calibration_running = false;
-                return false;
-            }
-
-            Thread.Sleep(100);
-
-            int chan = 4;
-            switch (current_model)
-            {
-                case Model.FLEX5000:
-                    chan = 4;
-                    break;
-                case Model.FLEX3000:
-                    chan = 3;
-                    break;
-            }
-            FWC.ReadPAADC(chan, out val);
-            volts = (float)val / 4096 * 2.5f;
-            double temp_c = 301 - volts * 1000 / 2.2;
-            if (temp_c > 50 || temp_c < 18)
-            {
-                progress.Hide();
-                MessageBox.Show("Temperature (" + temp_c.ToString("f0") + "°C) is outside of normal range (18-50°C).",
-                    "PA Bias Cal Error: Temp",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                calibration_running = false;
-                return false;
-            }
-
-            for (int i = 0; i < 8; i++)
-                flex5000DebugForm.SetPAPot(i, 0);
-
-            FWC.SetPABias(true);
-            tx_cal = true;
-
-            byte Q2 = 128, Q3 = 128;
-            // find point where Q2 and Q3 just tickle the driver bias current
-            float baseline = 0.0f;
-            Thread.Sleep(50);
-            baseline = ReadDriverBias(3);
-            /*if(baseline > 0.020)
-            {
-                Thread.Sleep(50);
-                baseline = ReadDriverBias(3);
-            }
-            if(baseline > 0.020) goto error;*/
-            //MessageBox.Show("Driver Baseline: "+baseline.ToString("f3"));
-            Debug.WriteLine("baseline: " + baseline.ToString("f3"));
-
-            for (int i = 0; i < 4; i++)
-                flex5000DebugForm.SetPAPot(i, 128);
-
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(0, Q2 += 10);
-                if (Q2 < 128)
-                {
-                    FWC.SetPABias(false);
-                    progress.Hide();
-                    MessageBox.Show("PA Bias Error: Unable to hit target bias on Q2.  Likely hardware problem.",
-                        "PA Bias Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    calibration_running = false;
-                    return false;
-                }
-                Thread.Sleep(50);
-                current = ReadDriverBias(3);
-                if (current > driver_limit) goto high_current;
-                if (Q2 == 255) goto error;
-            }
-            while (current < baseline + 0.002);
-            progress.SetPercent(++counter / (float)16);
-            flex5000DebugForm.SetPAPot(0, 0);
-            Q2 -= 10;
-
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(2, Q3 += 10);
-                if (Q3 < 128)
-                {
-                    FWC.SetPABias(false);
-                    progress.Hide();
-                    MessageBox.Show("PA Bias Error: Unable to hit target bias on Q3.  Likely hardware problem.",
-                        "PA Bias Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    calibration_running = false;
-                    return false;
-                }
-                Thread.Sleep(50);
-                current = ReadDriverBias(3);
-                if (current > driver_limit) goto high_current;
-                if (Q3 == 255) goto error;
-            }
-            while (current < baseline + 0.002);
-            progress.SetPercent(++counter / (float)16);
-            flex5000DebugForm.SetPAPot(2, 0);
-            Q3 -= 10;
-            Debug.WriteLine("Starting points  Q2:" + Q2 + "  Q3:" + Q3);
-            //MessageBox.Show("Starting points  Q2:"+Q2.ToString()+"  Q3:"+Q3.ToString());
-
-            // add half of one driver's target current to Q2
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(0, Q2 += 5);
-                if (Q2 < 128)
-                {
-                    FWC.SetPABias(false);
-                    progress.Hide();
-                    MessageBox.Show("PA Bias Error: Unable to hit target bias on Q2.  Likely hardware problem.",
-                        "PA Bias Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    calibration_running = false;
-                    return false;
-                }
-                Thread.Sleep(50);
-                current = ReadDriverBias(3);
-                if (current > driver_limit) goto high_current;
-                if (Q2 == 255) goto error;
-            }
-            while (current < baseline + driver_target / 4);
-
-            Q2 -= 5;
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(0, Q2 += 1);
-                if (Q2 < 128)
-                {
-                    FWC.SetPABias(false);
-                    progress.Hide();
-                    MessageBox.Show("PA Bias Error: Unable to hit target bias on Q2.  Likely hardware problem.",
-                        "PA Bias Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    calibration_running = false;
-                    return false;
-                }
-                Thread.Sleep(50);
-                current = ReadDriverBias(3);
-                if (current > driver_limit) goto high_current;
-                if (Q2 == 255) goto error;
-            }
-            while (current < baseline + driver_target / 4);
-            progress.SetPercent(++counter / (float)16);
-
-            float q2_current = current - baseline;
-            Debug.WriteLine("Q2 Current: " + q2_current.ToString("f3") + "  Q2:" + Q2);
-            //MessageBox.Show("Q2 Current: "+q2_current.ToString("f3")+"  Q2:"+Q2.ToString());
-
-            // add half of one driver's target current to Q3
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(2, Q3 += 5);
-                Thread.Sleep(50);
-                current = ReadDriverBias(3);
-                if (current > driver_limit) goto high_current;
-                if (Q3 == 255) goto error;
-            }
-            while (current < baseline + q2_current + driver_target / 4);
-            Q3 -= 5;
-
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(2, Q3 += 1);
-                Thread.Sleep(50);
-                current = ReadDriverBias(3);
-                if (current > driver_limit) goto high_current;
-                if (Q3 == 255) goto error;
-            }
-            while (current < baseline + q2_current + driver_target / 4);
-            progress.SetPercent(++counter / (float)16);
-
-            float q3_current = current - baseline - q2_current;
-            Debug.WriteLine("Q3 Current: " + q3_current.ToString("f3") + "  Q3:" + Q3);
-            //MessageBox.Show("Q3 Current: "+q3_current.ToString("f3")+"  Q3:"+Q3.ToString());
-
-            // add another half of one driver's target current to Q2
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(0, ++Q2);
-                Thread.Sleep(50);
-                current = ReadDriverBias(3);
-                if (current > driver_limit) goto high_current;
-                if (Q2 == 255) goto error;
-            }
-            while (current < baseline + q3_current + driver_target / 2);
-
-            // tweak for just above target
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(0, --Q2);
-                Thread.Sleep(100);
-                current = ReadDriverBias(5);
-                if (current > driver_limit) goto high_current;
-            }
-            while (current > baseline + q3_current + driver_target / 2);
-            progress.SetPercent(++counter / (float)16);
-            flex5000DebugForm.SetPAPot(0, ++Q2);
-            current = ReadDriverBias(5);
-            q2_current = current - q3_current - baseline;
-            Debug.WriteLine("Q2 Current: " + q2_current.ToString("f3") + "  Q2:" + Q2);
-            //MessageBox.Show("Q2 Current: "+q2_current.ToString("f3")+"  Q2:"+Q2.ToString());
-
-            // add another half of one driver's target current to Q3
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(2, ++Q3);
-                Thread.Sleep(50);
-                current = ReadDriverBias(3);
-                if (current > driver_limit) goto high_current;
-                if (Q3 == 255) goto error;
-            }
-            while (current < baseline + q2_current + driver_target / 2);
-
-            // tweak for just above target
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(2, --Q3);
-                Thread.Sleep(100);
-                current = ReadDriverBias(5);
-                if (current > driver_limit) goto high_current;
-            }
-            while (current > baseline + q2_current + driver_target / 2);
-            progress.SetPercent(++counter / (float)16);
-            flex5000DebugForm.SetPAPot(2, ++Q3);
-            current = ReadDriverBias(5);
-            q3_current = current - q2_current - baseline;
-            Debug.WriteLine("Q3 Current: " + q3_current.ToString("f3") + "  Q3:" + Q3);
-            //MessageBox.Show("Q3 Current: "+q3_current.ToString("f3")+"  Q3:"+Q3.ToString());
-
-            // tweak fine controls if available
-            uint pa_rev;
-            FWC.GetPARev(out pa_rev);
-
-            byte Q2_fine = 128, Q3_fine = 128;
-            if ((byte)(pa_rev >> 8) != 0) // not a beta radio
-            {
-                while (Math.Abs(q2_current - driver_target / 2) > 0.005)
-                {
-                    if (!progress.Visible) goto end;
-                    if (q2_current > driver_target / 2) Q2_fine--;
-                    else Q2_fine++;
-                    flex5000DebugForm.SetPAPot(1, Q2_fine);
-                    Thread.Sleep(50);
-                    current = ReadDriverBias(5);
-                    q2_current = current - q3_current - baseline;
-                    if (current > driver_limit) goto high_current;
-                    if (Q2_fine == 255 || Q2_fine == 0) goto error;
-                }
-
-                progress.SetPercent(++counter / (float)16);
-                Debug.WriteLine("Q2 Current: " + q2_current.ToString("f3") + "  Q2_fine:" + Q2_fine);
-                //MessageBox.Show("Q2 Current: "+q2_current.ToString("f3")+"  Q2_fine:"+Q2_fine.ToString());
-
-                while (Math.Abs(q3_current - driver_target / 2) > 0.005)
-                {
-                    if (!progress.Visible) goto end;
-                    if (q3_current > driver_target / 2) Q3_fine--;
-                    else Q3_fine++;
-                    flex5000DebugForm.SetPAPot(3, Q3_fine);
-                    Thread.Sleep(50);
-                    current = ReadDriverBias(5);
-                    q3_current = current - q2_current - baseline;
-                    if (current > driver_limit) goto high_current;
-                    if (Q3_fine == 255 || Q3_fine == 0) goto error;
-                }
-
-                progress.SetPercent(++counter / (float)16);
-                Debug.WriteLine("Q3 Current: " + q3_current.ToString("f3") + "  Q3_fine:" + Q3_fine);
-                //MessageBox.Show("Q3 Current: "+q3_current.ToString("f3")+"  Q3_fine:"+Q3_fine.ToString());
-            }
-            else counter += 2;
-
-            byte Q4 = 128, Q1 = 128;
-            // find point where Q4 and Q1 just tickle the final bias current
-            Thread.Sleep(50);
-            baseline = ReadFinalBias(3, true);
-            /*if(baseline > 0.100) 
-            {
-                Thread.Sleep(50);
-                baseline = ReadFinalBias(3);
-            }
-            if(baseline > 0.100) goto error;*/
-            //MessageBox.Show("Final baseline: "+baseline.ToString("f3"));
-            Debug.WriteLine("baseline: " + baseline.ToString("f3"));
-            for (int i = 4; i < 8; i++)
-                flex5000DebugForm.SetPAPot(i, 128);
-
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(4, Q4 += 10);
-                if (Q4 < 128)
-                {
-                    FWC.SetPABias(false);
-                    progress.Hide();
-                    MessageBox.Show("PA Bias Error: Unable to hit target bias on Q4.  Likely hardware problem.",
-                        "PA Bias Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    calibration_running = false;
-                    return false;
-                }
-                Thread.Sleep(50);
-                current = ReadFinalBias(3, true);
-                if (current > final_limit) goto high_current;
-                if (Q4 == 255) goto error;
-            }
-            while (current < baseline + 0.005);
-            progress.SetPercent(++counter / (float)16);
-            flex5000DebugForm.SetPAPot(4, Q4 -= 10);
-
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(6, Q1 += 10);
-                if (Q1 < 128)
-                {
-                    FWC.SetPABias(false);
-                    progress.Hide();
-                    MessageBox.Show("PA Bias Error: Unable to hit target bias on Q1.  Likely hardware problem.",
-                        "PA Bias Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    calibration_running = false;
-                    return false;
-                }
-                Thread.Sleep(50);
-                current = ReadFinalBias(3, true);
-                if (current > final_limit) goto high_current;
-                if (Q1 == 255) goto error;
-            }
-            while (current < baseline + 0.005);
-            progress.SetPercent(++counter / (float)16);
-            flex5000DebugForm.SetPAPot(6, Q1 -= 10);
-            Debug.WriteLine("Starting points  Q4:" + Q4 + "  Q1:" + Q1);
-            //MessageBox.Show("Starting points  Q4:"+Q4.ToString()+"  Q1:"+Q1.ToString());
-
-            // add half of one finals target current to Q4
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(4, Q4 += 5);
-                if (Q4 < 128)
-                {
-                    FWC.SetPABias(false);
-                    progress.Hide();
-                    MessageBox.Show("PA Bias Error: Unable to hit target bias on Q4.  Likely hardware problem.",
-                        "PA Bias Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    calibration_running = false;
-                    return false;
-                }
-                Thread.Sleep(50);
-                current = ReadFinalBias(3, true);
-                if (current > final_limit) goto high_current;
-                if (Q4 == 255) goto error;
-            }
-            while (current < baseline + final_target / 4);
-            Q4 -= 5;
-
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(4, Q4 += 1);
-                if (Q4 < 128)
-                {
-                    FWC.SetPABias(false);
-                    progress.Hide();
-                    MessageBox.Show("PA Bias Error: Unable to hit target bias on Q4.  Likely hardware problem.",
-                        "PA Bias Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    calibration_running = false;
-                    return false;
-                }
-                Thread.Sleep(50);
-                current = ReadFinalBias(3, true);
-                if (current > final_limit) goto high_current;
-                if (Q4 == 255) goto error;
-            }
-            while (current < baseline + final_target / 4);
-            progress.SetPercent(++counter / (float)16);
-
-            float q4_current = current - baseline;
-            Debug.WriteLine("Q4 Current: " + q4_current.ToString("f3") + "  Q4:" + Q4);
-            //MessageBox.Show("Q4 Current: "+q4_current.ToString("f3")+"  Q4:"+Q4.ToString());
-
-            // add half of one finals target current to Q1
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(6, Q1 += 5);
-                if (Q1 < 128)
-                {
-                    FWC.SetPABias(false);
-                    progress.Hide();
-                    MessageBox.Show("PA Bias Error: Unable to hit target bias on Q1.  Likely hardware problem.",
-                        "PA Bias Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    calibration_running = false;
-                    return false;
-                }
-                Thread.Sleep(50);
-                current = ReadFinalBias(3, true);
-                if (current > final_limit) goto high_current;
-                if (Q1 == 255) goto error;
-            }
-            while (current < baseline + q4_current + final_target / 4);
-            Q1 -= 5;
-
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(6, Q1 += 1);
-                if (Q1 < 128)
-                {
-                    FWC.SetPABias(false);
-                    progress.Hide();
-                    MessageBox.Show("PA Bias Error: Unable to hit target bias on Q1.  Likely hardware problem.",
-                        "PA Bias Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    calibration_running = false;
-                    return false;
-                }
-                Thread.Sleep(50);
-                current = ReadFinalBias(3, true);
-                if (current > final_limit) goto high_current;
-                if (Q1 == 255) goto error;
-            }
-            while (current < baseline + q4_current + final_target / 4);
-            progress.SetPercent(++counter / (float)16);
-
-            float q1_current = current - baseline - q4_current;
-            Debug.WriteLine("Q1 Current: " + q1_current.ToString("f3") + "  Q1:" + Q1);
-            //MessageBox.Show("Q1 Current: "+q1_current.ToString("f3")+"  Q1:"+Q1.ToString());
-
-            // add another half of one finals target current to Q4
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(4, ++Q4);
-                Thread.Sleep(50);
-                current = ReadFinalBias(3, true);
-                if (current > final_limit) goto high_current;
-                if (Q4 == 255) goto error;
-            }
-            while (current < baseline + q1_current + final_target / 2);
-
-            // tweak for just above target
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(4, --Q4);
-                Thread.Sleep(100);
-                current = ReadFinalBias(5, true);
-                if (current > final_limit) goto high_current;
-            }
-            while (current > baseline + q1_current + final_target / 2);
-            progress.SetPercent(++counter / (float)16);
-            flex5000DebugForm.SetPAPot(4, ++Q4);
-            current = ReadFinalBias(5, true);
-            q4_current = current - q1_current - baseline;
-            Debug.WriteLine("Q4 Current: " + q4_current.ToString("f3") + "  Q4:" + Q4);
-            //MessageBox.Show("Q4 Current: "+q4_current.ToString("f3")+"  Q4:"+Q4.ToString());
-
-            // add another half of one finals target current to Q1
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(6, ++Q1);
-                Thread.Sleep(50);
-                current = ReadFinalBias(3, true);
-                if (current > final_limit) goto high_current;
-                if (Q1 == 255) goto error;
-            }
-            while (current < baseline + q4_current + final_target / 2);
-
-            // tweak for just above target
-            do
-            {
-                if (!progress.Visible) goto end;
-                flex5000DebugForm.SetPAPot(6, --Q1);
-                Thread.Sleep(100);
-                current = ReadFinalBias(5, true);
-                if (current > final_limit) goto high_current;
-            }
-            while (current > baseline + q4_current + final_target / 2);
-            progress.SetPercent(++counter / (float)16);
-            flex5000DebugForm.SetPAPot(6, ++Q1);
-            current = ReadFinalBias(5, true);
-            q1_current = current - q4_current - baseline;
-            Debug.WriteLine("Q1 Current: " + q1_current.ToString("f3") + "  Q1:" + Q1);
-            //MessageBox.Show("Q1 Current: "+q1_current.ToString("f3")+"  Q1:"+Q1.ToString());
-
-            // tweak fine controls if available
-            byte Q4_fine = 128, Q1_fine = 128;
-            if ((byte)(pa_rev >> 8) != 0) // not a beta radio
-            {
-                while (Math.Abs(q4_current - final_target / 2) > tol)
-                {
-                    if (!progress.Visible) goto end;
-                    if (q4_current > final_target / 2) Q4_fine--;
-                    else Q4_fine++;
-                    flex5000DebugForm.SetPAPot(5, Q4_fine);
-                    Thread.Sleep(50);
-                    current = ReadFinalBias(5, true);
-                    q4_current = current - q1_current - baseline;
-                    if (current > final_limit) goto high_current;
-                    if (Q4_fine == 255 || Q4_fine == 0) goto error;
-                }
-
-                progress.SetPercent(++counter / (float)16);
-                Debug.WriteLine("Q4 Current: " + q4_current.ToString("f3") + "  Q4_fine:" + Q4_fine);
-                //MessageBox.Show("Q4 Current: "+q4_current.ToString("f3")+"  Q4_fine:"+Q4_fine.ToString());
-
-                while (Math.Abs(q1_current - final_target / 2) > tol)
-                {
-                    if (!progress.Visible) goto end;
-                    if (q1_current > final_target / 2) Q1_fine--;
-                    else Q1_fine++;
-                    flex5000DebugForm.SetPAPot(7, Q1_fine);
-                    Thread.Sleep(50);
-                    current = ReadFinalBias(5, true);
-                    q1_current = current - q4_current - baseline;
-                    if (current > final_limit) goto high_current;
-                    if (Q1_fine == 255 || Q1_fine == 0) goto error;
-                }
-
-                progress.SetPercent(++counter / (float)16);
-                Debug.WriteLine("Q1 Current: " + q1_current.ToString("f3") + "  Q1_fine:" + Q1_fine);
-                //MessageBox.Show("Q1 Current: "+q1_current.ToString("f3")+"  Q1_fine:"+Q1_fine.ToString());
-            }
-            else counter += 2;
-
-            ret_val = true;
-        end:
-            FWC.SetPABias(false);
-            tx_cal = false;
-            progress.Hide();
-            if (progress.Text != "")
-            {
-                for (int i = 0; i < 8; i++)
-                    pa_bias_table[index][i] = flex5000DebugForm.GetPAPot(i);
-            }
-            return ret_val;
-        high_current:
-            FWC.SetPABias(false);
-            tx_cal = false;
-            progress.Hide();
-            MessageBox.Show("Error in PA Bias Calibration: High Current Detected.",
-                "PA Bias: High Current Detected",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-            return false;
-        error:
-            FWC.SetPABias(false);
-            tx_cal = false;
-            progress.Hide();
-            MessageBox.Show("Error in PA Bias Calibration: Unable to reach current.",
-                "PA Bias: Current Error",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-#endif
-            return false;
-        }
-
-        public float ReadDriverBias(int num_avg)
-        {
-            /*  int val;
-              int sum = 0;
-              for (int i = 0; i < num_avg; i++)
-              {
-                  FWC.ReadPAADC(1, out val);
-                  sum += val;
-                  if (i != num_avg - 1) Thread.Sleep(100);
-              }
-              sum /= num_avg;
-              float current = (float)sum / 4096 * 2.5f; // 50 milliohm
-              if (((byte)(FWCEEPROM.PARev >> 8)) == 0) current /= 2; // 100 milliohm
-              flex5000DebugForm.SetADCText(current.ToString("f3") + " A");
-              if (flex5000FinalTestForm != null)
-                  flex5000FinalTestForm.UpdateDriverBiasDebug(current); */
-            return 0.0f;// current;
-        }
-
-        public float ReadFinalBias(int num_avg, bool show_debug)
-        {
-            /*  int val;
-              int sum = 0;
-              for (int i = 0; i < num_avg; i++)
-              {
-                  FWC.ReadPAADC(0, out val);
-                  sum += val;
-                  if (i != num_avg - 1) Thread.Sleep(100);
-              }
-              sum /= num_avg;
-              float current = (float)sum / 4096 * 2.5f * 10;
-              flex5000DebugForm.SetADCText(current.ToString("f3") + " A");
-              if (flex5000FinalTestForm != null && show_debug)
-                  flex5000FinalTestForm.UpdateFinalBiasDebug(current); */
-            return 0.0f;// current;
-        }
-
-        public double ReadFwdPower(int num_avg)
-        {
-            if (current_model != Model.FLEX5000 && current_model != Model.FLEX3000) return 0.0;
-            int val;
-            int sum = 0;
-            int chan = 0;
-            switch (current_model)
-            {
-                case Model.FLEX5000:
-                    chan = 7;
-                    break;
-                case Model.FLEX3000:
-                    chan = 5;
-                    break;
-            }
-
-            for (int i = 0; i < num_avg; i++)
-            {
-                FWC.ReadPAADC(chan, out val);
-                sum += val;
-                if (i != num_avg - 1) Thread.Sleep(200);
-            }
-            sum /= num_avg;
-
-            return FWCPAPower(sum);
-        }
-
-        public float ReadFwdPowerVolts(int num_avg)
-        {
-            if (current_model != Model.FLEX5000 && current_model != Model.FLEX3000) return 0.0f;
-            int val;
-            int sum = 0;
-            int chan = 0;
-            switch (current_model)
-            {
-                case Model.FLEX5000:
-                    chan = 7;
-                    break;
-                case Model.FLEX3000:
-                    chan = 5;
-                    break;
-            }
-
-            for (int i = 0; i < num_avg; i++)
-            {
-                FWC.ReadPAADC(chan, out val);
-                sum += val;
-                if (i != num_avg - 1) Thread.Sleep(100);
-            }
-            sum /= num_avg;
-            float volts = (float)sum / 4096 * 2.5f;
-            return volts;
-        }
-
-        public float ReadRefPowerVolts(int num_avg)
-        {
-            if (current_model != Model.FLEX5000 && current_model != Model.FLEX3000) return 0.0f;
-            int val;
-            int sum = 0;
-            int chan = 0;
-            switch (current_model)
-            {
-                case Model.FLEX5000:
-                    chan = 6;
-                    break;
-                case Model.FLEX3000:
-                    chan = 4;
-                    break;
-            }
-
-            for (int i = 0; i < num_avg; i++)
-            {
-                FWC.ReadPAADC(chan, out val);
-                sum += val;
-                if (i != num_avg - 1) Thread.Sleep(100);
-            }
-            sum /= num_avg;
-            float volts = (float)sum / 4096 * 2.5f;
-            return volts;
-        }
-
-        public double ReadRefPower(int num_avg)
-        {
-            if (current_model != Model.FLEX5000 && current_model != Model.FLEX3000) return 0.0;
-            int val;
-            int sum = 0;
-            int chan = 0;
-            switch (current_model)
-            {
-                case Model.FLEX5000:
-                    chan = 6;
-                    break;
-                case Model.FLEX3000:
-                    chan = 4;
-                    break;
-            }
-
-            for (int i = 0; i < num_avg; i++)
-            {
-                FWC.ReadPAADC(chan, out val);
-                sum += val;
-                if (i != num_avg - 1) Thread.Sleep(200);
-            }
-            sum /= num_avg;
-
-            return FWCPAPower(sum) * swr_table[(int)tx_band];
-        }
-
-        public float[] min_tx_carrier = new float[(int)Band.LAST];
-        public bool CalibrateTXCarrier(float freq, Progress progress, bool suppress_errors)
-        {
-            bool ret_val = false;
-#if false 
-            if (!(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
-            {
-                progress.Text = "";
-                progress.Hide();
-                return false;
-            }
-
-            if (!chkPower.Checked)
-            {
-                MessageBox.Show("Power must be on in order to calibrate TX Carrier.", "Power Is Off",
-                    MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                calibration_running = false;
-                progress.Text = "";
-                return false;
-            }
-
-            HiPerfTimer t1 = new HiPerfTimer();
-            t1.Start();
-            HiPerfTimer t2 = new HiPerfTimer();
-
-            bool ret_val = false;
-            calibration_running = true;
-            progress.SetPercent(0.0f);
-
-            // Setup hardware
-            FWC.SetQSD(true);
-            //Thread.Sleep(50);
-            FWC.SetQSE(true);
-            //Thread.Sleep(50);
-            FWC.SetTR(true);
-            //Thread.Sleep(50);
-            FWC.SetSig(true);
-            //Thread.Sleep(50);
-            FWC.SetGen(false);
-            //Thread.Sleep(50);
-            FWC.SetTest(true);
-            //Thread.Sleep(50);
-            FWC.SetTXMon(false);
-            //Thread.Sleep(50);
-            FWC.SetPDrvMon(true);
-
-            bool duplex = full_duplex;
-            FullDuplex = true;
-
-            // bool spur_red = chkSR.Checked;					// save current spur reduction setting
-            // chkSR.Checked = false;							// turn spur reduction off
-
-            bool polyphase = SetupForm.Polyphase;			// save current polyphase setting
-            SetupForm.Polyphase = false;					// disable polyphase
-
-            int dsp_buf_size = SetupForm.DSPPhoneRXBuffer;		// save current DSP buffer size
-            SetupForm.DSPPhoneRXBuffer = 4096;					// set DSP Buffer Size to 4096
-
-            // setup display mode
-            string display = comboDisplayMode.Text;
-            comboDisplayMode.Text = "Spectrum";
-
-            // setup dsp mode
-            DSPMode dsp_mode = RX1DSPMode;
-            RX1DSPMode = DSPMode.DSB;
-
-            /*bool rx1_preamp = chkRX1Preamp.Checked;
-            chkRX1Preamp.Checked = true;*/
-            PreampMode preamp = rx1_preamp_mode;
-            switch (current_model)
-            {
-                case Model.FLEX5000:
-                    RX1PreampMode = PreampMode.HIGH;
-                    break;
-                case Model.FLEX3000:
-                    if (BandByFreq(freq, -1, true, current_region) == Band.B160M)
-                        RX1PreampMode = PreampMode.LOW;
-                    else RX1PreampMode = PreampMode.HIGH;
-                    break;
-            }
-
-            // setup filter
-            Filter filter = RX1Filter;
-            UpdateRX1Filters(-1000, 1000);
-
-            double vfoa = VFOAFreq;
-            VFOAFreq = freq;
-
-            double vfob = VFOBFreq;
-            VFOBFreq = freq;
-
-            // setup transmit to be carrier only
-            Audio.TXInputSignal = Audio.SignalSource.SILENCE;
-
-            // default pots
-            for (int i = 1; i < 4; i++)
-                FWC.TRXPotSetRDAC(i, 0);
-
-            // find carrier peak
-            float[] a = new float[Display.BUFFER_SIZE];
-            for (int i = 0; i < 5; i++)
-            {
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(0, ptr);// get the spectrum values
-                calibration_mutex.ReleaseMutex();
-                Thread.Sleep(50);
-            }
-
-            // find peak bin
-            int peak_bin = 2048 + (int)(0.0 / sample_rate1 * 4096.0);
-            float max_signal = float.MinValue;
-            float sum = 0.0f;
-            int filt_low_bin = 2048 + (int)(-1000.0 / sample_rate1 * 4096.0);
-            int filt_high_bin = 2048 + (int)(1000.0 / sample_rate1 * 4096.0);
-            for (int i = 0; i < 20; i++)
-            {
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(0, ptr);// get the spectrum values
-                calibration_mutex.ReleaseMutex();
-
-                if (i == 19)
-                {
-                    for (int j = 0; j < Display.BUFFER_SIZE; j++)
-                    {
-                        if (a[j] > max_signal)
-                        {
-                            max_signal = a[j];
-                            peak_bin = j;
-                        }
-                    }
-                }
-                for (int j = filt_low_bin; j < filt_high_bin; j++)
-                {
-                    if (j < peak_bin - 8 || j > peak_bin + 8)
-                        sum += a[j];
-                }
-                Thread.Sleep(100);
-            }
-            float noise_floor = (sum / (float)(((filt_high_bin - filt_low_bin) - 17) * 20));
-            Debug.WriteLine("noise_floor: " + (noise_floor + Display.RX1DisplayCalOffset + Display.RX1PreampOffset).ToString("f1") + " peak_bin:" + peak_bin);
-
-            int c0_step = 8, c1_step = 8, c2_step = 8, c3_step = 8;
-            int c0_global_min = 128, c1_global_min = 128, c2_global_min = 128, c3_global_min = 128;
-            int c0_index = 128, c1_index = 128, c2_index = 128, c3_index = 128;
-            int c0_dir = 1, c1_dir = 1, c2_dir = 1, c3_dir = 1;
-            int c0_count = 1, c1_count = 1, c2_count = 1, c3_count = 1;
-            float global_min_value = float.MaxValue;
-            float start = 0.0f;
-            int wrong_direction_count;
-            int switch_direction_count;
-
-            if (max_signal < noise_floor + 30.0)
-            {
-                if (!suppress_errors)
-                {
-                    MessageBox.Show("Carrier not found (max signal < noise floor + 30dB).  Please try again.\n" +
-                        DateTime.Now.ToShortTimeString(),
-                        "Carrier Not Found",
-                        MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                }
-                calibration_running = false;
-                //progress.Text = "";
-                goto end2;
-            }
-
-            for (int i = 0; i < 4; i++)
-                FWC.TRXPotSetRDAC(i, 128);
-
-            float tol = 10.0f;
-            bool first_time;
-            // null 3 of 4 pots (leave first pot alone...pot index 0)
-            bool progressing = true;
-            while (progressing)
-            {
-                //find minimum of the peak signal over the range of C1 settings
-                float min_signal = float.MaxValue;
-                max_signal = float.MinValue;
-                wrong_direction_count = switch_direction_count = 0;
-                first_time = true;
-                t2.Start();
-                for (int i = c1_global_min; i >= 0 && i <= 255; i += (c1_step * c1_dir))
-                {
-                    flex5000DebugForm.SetTRXPot(1, (byte)i);
-                    FWC.TRXPotSetRDAC(1, i);
-                    Thread.Sleep(200);
-
-                    sum = 0.0f;
-                    int num_avg = (int)Math.Min(4, (1.0 / (c1_step / 8.0)));
-                    for (int j = 0; j < num_avg; j++)
-                    {
-                        calibration_mutex.WaitOne();
-                        fixed (float* ptr = &a[0])
-                            DttSP.GetSpectrum(0, ptr);
-                        calibration_mutex.ReleaseMutex();
-                        sum += a[peak_bin];
-                        if (j < num_avg - 1) Thread.Sleep(50);
-                    }
-                    sum /= num_avg;
-                    a[peak_bin] = sum;
-
-                    if (a[peak_bin] < min_signal)			// if carrier is less than minimum
-                    {
-                        min_signal = a[peak_bin];
-                        c1_index = i;
-                        if (min_signal < global_min_value)
-                        {
-                            global_min_value = a[peak_bin];
-                            c1_global_min = c1_index;
-                        }
-                    }
-
-                    if (first_time)
-                    {
-                        first_time = false;
-                        start = a[peak_bin];
-                        max_signal = a[peak_bin];
-                    }
-                    else
-                    {
-                        if (a[peak_bin] > max_signal && a[peak_bin] > start + 1.0)
-                        {
-                            max_signal = a[peak_bin];
-                            wrong_direction_count++; Debug.Write("W");
-                            if (wrong_direction_count > 1)
-                            {
-                                wrong_direction_count = 0;
-                                if (++switch_direction_count > 1)
-                                {
-                                    // handle switched direction twice
-                                    c1_step /= 2;
-                                    if (c1_step < 1) c1_step = 1;
-                                    c1_dir *= -1;
-                                    Debug.WriteLine("c1 exit dir - c1_step:" + c1_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                    break;
-                                }
-
-                                min_signal = start;
-                                max_signal = start;
-                                c1_dir *= -1;
-                                i = c1_global_min;
-                            }
-                        }
-                        else
-                        {
-                            if (min_signal > noise_floor + 20.0) tol = 3.0f;
-                            else tol = 5.0f;
-                            if (min_signal < start - 3.0 && a[peak_bin] > min_signal + tol)
-                            {
-                                c1_step /= 2;
-                                if (c1_step < 1) c1_step = 1;
-                                c1_dir *= -1;
-                                Debug.WriteLine("c1 thresh - c1_step:" + c1_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                break;
-                            }
-                        }
-                    }
-
-                    if (!progress.Visible) goto end;
-                    else
-                    {
-                        t1.Stop();
-                        if (t1.Duration > 90.0)
-                        {
-                            /*MessageBox.Show("TX Carrier Calibration Failed.  Values have been returned to previous settings.\n"+
-                                DateTime.Now.ToShortTimeString(),
-                                "TX Carrier Failed",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);*/
-                            goto end;
-                        }
-                        else progress.SetPercent((float)(t1.Duration / 45.0));
-                    }
-                }
-
-                t2.Stop();
-                c1_count++;
-                Debug.WriteLine("t2 c1(" + c1_count + "): " + t2.Duration);
-
-                flex5000DebugForm.SetTRXPot(1, (byte)c1_global_min);
-                FWC.TRXPotSetRDAC(1, c1_global_min);
-
-                if (!progressing) break;
-
-                //find minimum of the peak signal over the range of C2 settings
-                min_signal = float.MaxValue;
-                max_signal = float.MinValue;
-                wrong_direction_count = switch_direction_count = 0;
-                first_time = true;
-                t2.Start();
-                for (int i = c2_global_min; i >= 0 && i <= 255; i += (c2_step * c2_dir))
-                {
-                    flex5000DebugForm.SetTRXPot(2, (byte)i);
-                    FWC.TRXPotSetRDAC(2, i);
-                    Thread.Sleep(200);
-
-                    sum = 0.0f;
-                    int num_avg = (int)Math.Max(4, (1.0 / (c2_step / 8.0)));
-                    for (int j = 0; j < num_avg; j++)
-                    {
-                        calibration_mutex.WaitOne();
-                        fixed (float* ptr = &a[0])
-                            DttSP.GetSpectrum(0, ptr);
-                        calibration_mutex.ReleaseMutex();
-                        sum += a[peak_bin];
-                        if (j < num_avg - 1) Thread.Sleep(50);
-                    }
-                    sum /= num_avg;
-                    a[peak_bin] = sum;
-
-                    if (a[peak_bin] < min_signal)			// if carrier is less than minimum
-                    {
-                        min_signal = a[peak_bin];
-                        c2_index = i;
-                        if (min_signal < global_min_value)
-                        {
-                            global_min_value = a[peak_bin];
-                            c2_global_min = c2_index;
-                        }
-                    }
-
-                    if (first_time)
-                    {
-                        first_time = false;
-                        start = a[peak_bin];
-                        max_signal = a[peak_bin];
-                    }
-                    else
-                    {
-                        if (a[peak_bin] > max_signal && a[peak_bin] > start + 1.0)
-                        {
-                            max_signal = a[peak_bin];
-                            wrong_direction_count++; Debug.Write("W");
-                            if (wrong_direction_count > 1)
-                            {
-                                wrong_direction_count = 0;
-                                if (++switch_direction_count > 1)
-                                {
-                                    // handle switched direction twice
-                                    c2_step /= 2;
-                                    if (c2_step < 1) c2_step = 1;
-                                    c2_dir *= -1;
-                                    Debug.WriteLine("c2 exit dir - c2_step:" + c2_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                    break;
-                                }
-
-                                min_signal = start;
-                                max_signal = start;
-                                c2_dir *= -1;
-                                i = c2_global_min;
-                            }
-                        }
-                        else
-                        {
-                            if (min_signal > noise_floor + 20.0) tol = 3.0f;
-                            else tol = 5.0f;
-                            if (min_signal < start - 3.0 && a[peak_bin] > min_signal + tol)
-                            {
-                                c2_step /= 2;
-                                if (c2_step < 1) c2_step = 1;
-                                c2_dir *= -1;
-                                Debug.WriteLine("c2 thresh - c2_step:" + c2_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                break;
-                            }
-                        }
-                    }
-
-                    if (!progress.Visible) goto end;
-                    else
-                    {
-                        t1.Stop();
-                        if (t1.Duration > 90.0)
-                        {
-                            /*MessageBox.Show("TX Carrier Calibration Failed.  Values have been returned to previous settings.\n"+
-                                DateTime.Now.ToShortTimeString(),
-                                "TX Carrier Failed",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);*/
-                            goto end;
-                        }
-                        else progress.SetPercent((float)(t1.Duration / 45.0));
-                    }
-                }
-
-                t2.Stop();
-                c2_count++;
-                Debug.WriteLine("t2 c2(" + c2_count + "): " + t2.Duration);
-
-                flex5000DebugForm.SetTRXPot(2, (byte)c2_global_min);
-                FWC.TRXPotSetRDAC(2, c2_global_min);
-
-                if (!progressing) break;
-
-                //find minimum of the peak signal over the range of C3 settings
-                min_signal = float.MaxValue;
-                max_signal = float.MinValue;
-                wrong_direction_count = switch_direction_count = 0;
-                first_time = true;
-                t2.Start();
-                for (int i = c3_global_min; i >= 0 && i <= 255; i += (c3_step * c3_dir))
-                {
-                    flex5000DebugForm.SetTRXPot(3, (byte)i);
-                    FWC.TRXPotSetRDAC(3, i);
-                    Thread.Sleep(200);
-
-                    sum = 0.0f;
-                    int num_avg = (int)Math.Min(4, (1.0 / (c3_step / 8.0)));
-                    for (int j = 0; j < num_avg; j++)
-                    {
-                        calibration_mutex.WaitOne();
-                        fixed (float* ptr = &a[0])
-                            DttSP.GetSpectrum(0, ptr);
-                        calibration_mutex.ReleaseMutex();
-                        sum += a[peak_bin];
-                        if (j < num_avg - 1) Thread.Sleep(50);
-                    }
-                    sum /= num_avg;
-                    a[peak_bin] = sum;
-
-                    if (a[peak_bin] < min_signal)			// if carrier is less than minimum
-                    {
-                        min_signal = a[peak_bin];
-                        c3_index = i;
-                        if (min_signal < global_min_value)
-                        {
-                            global_min_value = a[peak_bin];
-                            c3_global_min = c3_index;
-                        }
-                    }
-
-                    if (first_time)
-                    {
-                        first_time = false;
-                        start = a[peak_bin];
-                        max_signal = a[peak_bin];
-                    }
-                    else
-                    {
-                        if (a[peak_bin] > max_signal && a[peak_bin] > start + 1.0)
-                        {
-                            max_signal = a[peak_bin];
-                            wrong_direction_count++; Debug.Write("W");
-                            if (wrong_direction_count > 1)
-                            {
-                                wrong_direction_count = 0;
-                                if (++switch_direction_count > 1)
-                                {
-                                    // handle switched direction twice
-                                    c3_step /= 2;
-                                    if (c3_step < 1) c3_step = 1;
-                                    c3_dir *= -1;
-                                    Debug.WriteLine("c3 exit dir - c3_step:" + c3_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                    break;
-                                }
-
-                                min_signal = start;
-                                max_signal = start;
-                                c3_dir *= -1;
-                                i = c3_global_min;
-                            }
-                        }
-                        else
-                        {
-                            if (min_signal > noise_floor + 20.0) tol = 3.0f;
-                            else tol = 5.0f;
-                            if (min_signal < start - 3.0 && a[peak_bin] > min_signal + tol)
-                            {
-                                c3_step /= 2;
-                                if (c3_step < 1) c3_step = 1;
-                                c3_dir *= -1;
-                                Debug.WriteLine("c3 thresh - c3_step:" + c3_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                break;
-                            }
-                        }
-                    }
-
-                    if (!progress.Visible) goto end;
-                    else
-                    {
-                        t1.Stop();
-                        if (t1.Duration > 90.0)
-                        {
-                            /*MessageBox.Show("TX Carrier Calibration Failed.  Values have been returned to previous settings.\n"+
-                                DateTime.Now.ToShortTimeString(),
-                                "TX Carrier Failed",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);*/
-                            goto end;
-                        }
-                        else progress.SetPercent((float)(t1.Duration / 45.0));
-                    }
-                }
-
-                t2.Stop();
-                c3_count++;
-                Debug.WriteLine("t2 c3(" + c3_count + "): " + t2.Duration);
-
-                flex5000DebugForm.SetTRXPot(3, (byte)c3_global_min);
-                FWC.TRXPotSetRDAC(3, c3_global_min);
-
-                if (!progressing) break;
-
-                //find minimum of the peak signal over the range of C1 settings
-                min_signal = float.MaxValue;
-                max_signal = float.MinValue;
-                wrong_direction_count = switch_direction_count = 0;
-                first_time = true;
-                t2.Start();
-                for (int i = c0_global_min; i >= 0 && i <= 255; i += (c0_step * c0_dir))
-                {
-                    flex5000DebugForm.SetTRXPot(0, (byte)i);
-                    FWC.TRXPotSetRDAC(0, i);
-                    Thread.Sleep(200);
-
-                    sum = 0.0f;
-                    int num_avg = (int)Math.Min(4, (1.0 / (c0_step / 8.0)));
-                    for (int j = 0; j < num_avg; j++)
-                    {
-                        calibration_mutex.WaitOne();
-                        fixed (float* ptr = &a[0])
-                            DttSP.GetSpectrum(0, ptr);
-                        calibration_mutex.ReleaseMutex();
-                        sum += a[peak_bin];
-                        if (j < num_avg - 1) Thread.Sleep(50);
-                    }
-                    sum /= num_avg;
-                    a[peak_bin] = sum;
-
-                    if (a[peak_bin] < min_signal)			// if carrier is less than minimum
-                    {
-                        min_signal = a[peak_bin];
-                        c0_index = i;
-                        if (min_signal < global_min_value)
-                        {
-                            global_min_value = a[peak_bin];
-                            c0_global_min = c0_index;
-                        }
-                    }
-
-                    if (first_time)
-                    {
-                        first_time = false;
-                        start = a[peak_bin];
-                        max_signal = a[peak_bin];
-                    }
-                    else
-                    {
-                        if (a[peak_bin] > max_signal && a[peak_bin] > start + 1.0)
-                        {
-                            max_signal = a[peak_bin];
-                            wrong_direction_count++; Debug.Write("W");
-                            if (wrong_direction_count > 1)
-                            {
-                                wrong_direction_count = 0;
-                                if (++switch_direction_count > 1)
-                                {
-                                    // handle switched direction twice
-                                    c0_step /= 2;
-                                    if (c0_step < 1) c0_step = 1;
-                                    c0_dir *= -1;
-                                    Debug.WriteLine("c0 exit dir - c0_step:" + c0_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                    break;
-                                }
-
-                                min_signal = start;
-                                max_signal = start;
-                                c0_dir *= -1;
-                                i = c0_global_min;
-                            }
-                        }
-                        else
-                        {
-                            if (min_signal > noise_floor + 20.0) tol = 3.0f;
-                            else tol = 5.0f;
-                            if (min_signal < start - 3.0 && a[peak_bin] > min_signal + tol)
-                            {
-                                c0_step /= 2;
-                                if (c0_step < 1) c0_step = 1;
-                                c0_dir *= -1;
-                                Debug.WriteLine("c0 thresh - c0_step:" + c0_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                break;
-                            }
-                        }
-                    }
-
-                    if (!progress.Visible) goto end;
-                    else
-                    {
-                        t1.Stop();
-                        if (t1.Duration > 90.0)
-                        {
-                            /*MessageBox.Show("TX Carrier Calibration Failed.  Values have been returned to previous settings.\n"+
-                                DateTime.Now.ToShortTimeString(),
-                                "TX Carrier Failed",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);*/
-                            goto end;
-                        }
-                        else progress.SetPercent((float)(t1.Duration / 45.0));
-                    }
-                }
-
-                t2.Stop();
-                c0_count++;
-                Debug.WriteLine("t2 c0(" + c0_count + "): " + t2.Duration);
-
-                flex5000DebugForm.SetTRXPot(0, (byte)c0_global_min);
-                FWC.TRXPotSetRDAC(0, c0_global_min);
-
-                if (!progressing) break;
-
-                if (c0_count > 5 && c1_count > 5 && c2_count > 5 && c3_count > 5)
-                    progressing = false;
-            }
-            ret_val = true;
-            Debug.WriteLine("Carrier Null: [" + c0_global_min + ", " + c1_global_min + ", " + c2_global_min + ", " + c3_global_min + "]");
-
-        end:
-            if (!progress.Visible) progress.Text = "";
-            else
-            {
-                flex5000DebugForm.SetTRXPot(0, (byte)c0_global_min);
-                flex5000DebugForm.SetTRXPot(1, (byte)c1_global_min);
-                flex5000DebugForm.SetTRXPot(2, (byte)c2_global_min);
-                flex5000DebugForm.SetTRXPot(3, (byte)c3_global_min);
-                tx_carrier_table[(int)tx_band][0] = c0_global_min;
-                tx_carrier_table[(int)tx_band][1] = c1_global_min;
-                tx_carrier_table[(int)tx_band][2] = c2_global_min;
-                tx_carrier_table[(int)tx_band][3] = c3_global_min;
-            }
-        end2:
-            progress.Hide();
-            // return output tone
-            Audio.TXInputSignal = Audio.SignalSource.RADIO;
-
-            min_tx_carrier[(int)tx_band] = global_min_value + Display.RX1DisplayCalOffset + Display.RX1PreampOffset;
-
-            // return hardware to normal operation
-            //Thread.Sleep(50);
-            FWC.SetQSD(true);
-            //Thread.Sleep(50);
-            FWC.SetQSE(false);
-            //Thread.Sleep(50);
-            FWC.SetTR(false);
-            //Thread.Sleep(50);
-            FWC.SetSig(false);
-            //Thread.Sleep(50);
-            FWC.SetGen(false);
-            //Thread.Sleep(50);
-            FWC.SetTest(false);
-            //Thread.Sleep(50);
-            FWC.SetTXMon(false);
-            //Thread.Sleep(50);
-            FWC.SetPDrvMon(false);
-            //Thread.Sleep(50);
-
-            if (current_model == Model.FLEX3000)
-                FWC.SetFan(false);
-
-            SetupForm.Polyphase = polyphase;
-            SetupForm.DSPPhoneRXBuffer = dsp_buf_size;
-            // chkSR.Checked = spur_red;
-            FullDuplex = duplex;
-
-            VFOAFreq = vfoa;
-            VFOBFreq = vfob;
-
-            comboDisplayMode.Text = display;
-
-            RX1DSPMode = dsp_mode;
-            RX1Filter = filter;
-            RX1PreampMode = preamp;
-
-            calibration_running = false;
-#endif
-            return ret_val;
-        }
-
-        public void CallCalSigGen()
-        {
-            p = new Progress("Calibrate Signal Generator");
-            Thread t = new Thread(new ThreadStart(CalSigGen));
-            t.Name = "Calibrate Signal Generator Thread";
-            t.IsBackground = true;
-            t.Priority = ThreadPriority.Normal;
-            t.Start();
-            p.Show();
-        }
-
-        private void CalSigGen()
-        {
-            if (!(fwc_init && current_model == Model.FLEX5000))
-            {
-                p.Hide();
-                return;
-            }
-
-            double low = 1.0;
-            double high = 65.0;
-            double step = 0.1;
-            int num_steps = (int)((high - low) / step);
-            int count = 0;
-            StreamWriter sw = new StreamWriter(app_data_path + "\\sig_gen.csv");
-
-            FullDuplex = true;
-            FWC.SetSig(true);
-            FWC.SetGen(true);
-            FWC.SetTest(true);
-            RX1DSPMode = DSPMode.USB;
-            RX1Filter = Filter.VAR2;
-            UpdateRX1Filters(480, 520);
-
-            for (double i = low; i <= high; i += step)
-            {
-                VFOAFreq = i;
-                //Thread.Sleep(20);
-                VFOBFreq = i + 0.0005;
-                Thread.Sleep(200);
-                float sum = 0.0f;
-                for (int j = 0; j < 10; j++)
-                {
-                    sum += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-                    sum = sum +
-                        rx1_meter_cal_offset +
-                        rx1_preamp_offset[(int)rx1_preamp_mode] +
-                        rx1_filter_size_cal_offset;
-                    Thread.Sleep(50);
-                }
-                sum /= 10;
-
-                sw.WriteLine(i.ToString("f6") + "," + sum.ToString("f3"));
-                p.SetPercent(count++ / (float)num_steps);
-                if (!p.Visible) break;
-            }
-            sw.Close();
-            FWC.SetSig(false);
-            FWC.SetGen(false);
-            FWC.SetTest(false);
-            p.Hide();
-        }
-
         public static bool FreqCalibrationRunning = false;
         public bool CalibrateFreq(float freq)
         {
@@ -18830,267 +16016,6 @@ namespace PowerSDR
                 return ret_val;
             } */
 
-        public float[] rx_image_rejection = new float[(int)Band.LAST];
-        public float[] rx_image_from_floor = new float[(int)Band.LAST];
-        public bool CalibrateRXImage(float freq, Progress progress, bool suppress_errors)
-        {
-            HiPerfTimer t1 = new HiPerfTimer();
-            t1.Start();
-            HiPerfTimer t2 = new HiPerfTimer();
-
-            // Setup Rig for Image Null Cal
-            bool ret_val = false;
-            calibration_running = true;
-
-            if (!chkPower.Checked)
-            {
-                if (!suppress_errors)
-                {
-                    MessageBox.Show("Power must be on in order to calibrate RX Image.", "Power Is Off",
-                        MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                }
-                calibration_running = false;
-                progress.Text = "";
-                return false;
-            }
-
-            //  bool spur_red = chkSR.Checked;					// save current spur reduction setting
-            // chkSR.Checked = false;							// turn spur reduction off
-
-            //bool rx_only = SetupForm.RXOnly;				// save RX Only Setting
-            //SetupForm.RXOnly = true;
-
-            bool split = chkVFOSplit.Checked;
-            chkVFOSplit.Checked = false;
-
-            bool polyphase = SetupForm.Polyphase;			// save current polyphase setting
-            SetupForm.Polyphase = false;					// disable polyphase
-
-            int dsp_buf_size = SetupForm.DSPPhoneRXBuffer;		// save current DSP buffer size
-            SetupForm.DSPPhoneRXBuffer = 4096;					// set DSP Buffer Size to 4096
-
-            string display_mode = comboDisplayMode.Text;
-            comboDisplayMode.Text = "Spectrum";
-
-            bool avg = chkDisplayAVG.Checked;		// save current average state
-            chkDisplayAVG.Checked = true;
-
-            DSPMode dsp_mode = rx1_dsp_mode;			// save current dsp mode
-            RX1DSPMode = DSPMode.DSB;					// set dsp mode to DSB
-
-            int filt_low = RX1FilterLow;
-            int filt_high = RX1FilterHigh;
-            Filter filter = rx1_filter;					// save current filter
-            RX1Filter = Filter.F1;						// set filter to 6kHz
-
-            DttSP.SetCorrectIQEnable(0); // turn off I/Q correction
-            DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 0);
-            DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 1);
-
-            PreampMode preamp = rx1_preamp_mode;		// save current preamp setting
-            switch (current_model)
-            {
-                case Model.SDR1000:
-                case Model.FLEX5000:
-                    RX1PreampMode = PreampMode.HIGH;			// set preamp to high
-                    break;
-                case Model.FLEX3000:
-                    if (FWCEEPROM.TRXRev >> 8 < 6) // before rev G
-                    {
-                        if (BandByFreq(freq, -1, true, current_region) == Band.B160M)
-                            RX1PreampMode = PreampMode.LOW;
-                        else RX1PreampMode = PreampMode.HIGH;
-                    }
-                    else // rev G+
-                    {
-                        switch (BandByFreq(freq, -1, true, current_region))
-                        {
-                            case Band.B160M:
-                            case Band.B80M:
-                            case Band.B60M:
-                                RX1PreampMode = PreampMode.LOW;
-                                break;
-                            default:
-                                RX1PreampMode = PreampMode.HIGH;
-                                break;
-                        }
-                    }
-                    break;
-            }
-
-            bool duplex = full_duplex;
-            FullDuplex = true;
-
-            bool rx2 = chkRX2.Checked;
-            if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK)
-                chkRX2.Checked = false;
-
-            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-            {
-                VFOBFreq = freq;
-                //Thread.Sleep(50);
-                FWC.SetTest(true);
-                //Thread.Sleep(50);
-                FWC.SetGen(true);
-                //Thread.Sleep(50);
-                FWC.SetSig(true);
-                //Thread.Sleep(50);
-                FWC.SetQSE(false);
-                //Thread.Sleep(50);
-            }
-
-            double vfo_freq = VFOAFreq;						// save current frequency
-            VFOAFreq = freq + 2 * (float)if_freq;				// set frequency to passed value + 2*IF
-
-            DisableAllFilters();
-            DisableAllModes();
-            VFOLock = true;
-            comboPreamp.Enabled = false;
-            comboDisplayMode.Enabled = false;
-
-            //int retval = 0;
-            progress.SetPercent(0.0f);
-
-            float[] a = new float[Display.BUFFER_SIZE];
-            float[] init_max = new float[4];
-
-            Thread.Sleep(200);
-            float sum = 0.0f;
-            int peak_bin = -1;
-            float max_signal = float.MinValue;
-
-            for (int i = 0; i < 5; i++)
-            {
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(0, ptr);// get the spectrum values
-                calibration_mutex.ReleaseMutex();
-                Thread.Sleep(50);
-            }
-
-            for (int i = 0; i < 5; i++)
-            {
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(0, ptr);// get the spectrum values
-                calibration_mutex.ReleaseMutex();
-
-                for (int j = 0; i == 4 && j < Display.BUFFER_SIZE; j++)
-                {
-                    if (a[j] > max_signal)
-                    {
-                        max_signal = a[j];
-                        peak_bin = j;
-                    }
-                }
-
-                for (int j = 1948; j < 2148; j++) // TODO: Fix limits for 48/96kHz
-                {
-                    if (j < 2040 || j > 2055)
-                        sum += a[j];
-                }
-                Thread.Sleep(50);
-            }
-
-            float noise_floor = (sum / 925.0f);
-            float worst_image = max_signal;
-            Debug.WriteLine("noise_floor: " + (noise_floor + Display.RX1DisplayCalOffset + Display.RX1PreampOffset).ToString("f6") + " peak_bin: " + peak_bin);
-
-            if (max_signal < noise_floor + 25.0)
-            {
-                if (!suppress_errors)
-                {
-                    MessageBox.Show("Image not found (max signal < noise floor + 30dB).  Please try again.\n" +
-                        DateTime.Now.ToShortTimeString(),
-                        "Image Not Found",
-                        MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                }
-                calibration_running = false;
-                DttSP.SetCorrectIQEnable(1); // turn on I/Q correction
-                //progress.Text = "";
-                goto end;
-            }
-
-            calibrating = true;
-            DttSP.SetCorrectIQEnable(1); // turn on I/Q correction
-
-            int count = 0;
-            for (int i = 0; i < 15; i++)
-            {
-                if (i < 9) DttSP.SetCorrectIQMu(0, 0, 0.1 - i * 0.01);
-                if (!progress.Visible) goto end;
-                progress.SetPercent(count++ / 15.0f);
-                Thread.Sleep(100);
-            }
-
-            // Finish the algorithm and reset the values
-            ret_val = true;
-        end:
-
-            if (!progress.Visible) progress.Text = "";
-            else
-            {
-                float real, imag;
-                DttSP.SetCorrectIQMu(0, 0, 0);
-                DttSP.GetCorrectRXIQw(0, 0, &real, &imag, 1);
-                DttSP.SetCorrectRXIQw(0, 0, real, imag, 0);
-                DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 1);
-                Debug.WriteLine("RX Image Real: " + real.ToString("f6") + "  Imag: " + imag.ToString("f6"));
-                rx1_image_gain_table[(int)rx1_band] = real;
-                rx1_image_phase_table[(int)rx1_band] = imag;
-            }
-            progress.Hide();
-            calibration_running = false;
-            wbir_tuned = true;
-            calibrating = false;
-
-            rx_image_rejection[(int)rx1_band] = (float)(-24.0 - (noise_floor + Display.RX1DisplayCalOffset + Display.RX1PreampOffset));
-            rx_image_from_floor[(int)rx1_band] = 0.0f;
-
-            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-            {
-                VFOBFreq = vfo_freq;
-                //Thread.Sleep(50);
-                FWC.SetTest(false);
-                //Thread.Sleep(50);
-                FWC.SetGen(false);
-                //Thread.Sleep(50);
-                FWC.SetSig(false);
-                //Thread.Sleep(50);
-            }
-
-            EnableAllFilters();
-            EnableAllModes();
-            VFOLock = false;
-            FullDuplex = duplex;
-            comboPreamp.Enabled = true;
-            comboDisplayMode.Enabled = true;
-
-            chkVFOSplit.Checked = split;
-            // chkSR.Checked = spur_red;							// restore spur reduction setting
-            RX1PreampMode = preamp;							// restore preamp mode
-            comboDisplayMode.Text = display_mode;				// restore display mode
-            //SetupForm.RXOnly = rx_only;						// restore RX Only setting
-            RX1DSPMode = dsp_mode;							// restore dsp mode
-            RX1Filter = filter;								// restore filter
-            if (filter == Filter.VAR1 || filter == Filter.VAR2)
-                UpdateRX1Filters(filt_low, filt_high);
-
-            VFOAFreq = vfo_freq;								// restore frequency
-            txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-            chkDisplayAVG.Checked = avg;						// restore average state
-            SetupForm.DSPPhoneRXBuffer = dsp_buf_size;				// restore DSP Buffer Size
-            SetupForm.Polyphase = polyphase;					// restore polyphase
-
-            if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK)
-                chkRX2.Checked = rx2;
-
-            t1.Stop();
-            //MessageBox.Show(t1.Duration.ToString());
-            Debug.WriteLine("timer: " + t1.Duration);
-            return ret_val;
-        }
-
         public bool CalibrateRX2Level(float level, float freq, Progress progress, bool suppress_errors)
         {
             // Calibration routine called by Setup Form.
@@ -19374,826 +16299,6 @@ namespace PowerSDR
             calibration_running = false;
             return ret_val;
         }
-
-        public bool CalibrateRX2Image(float freq, Progress progress, bool suppress_errors)
-        {
-            if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK) return false;
-
-            HiPerfTimer t1 = new HiPerfTimer();
-            t1.Start();
-            HiPerfTimer t2 = new HiPerfTimer();
-
-            //float global_min_value = float.MaxValue;
-
-            // Setup Rig for Image Null Cal
-            bool ret_val = false;
-            calibration_running = true;
-
-            if (!chkPower.Checked)
-            {
-                if (!suppress_errors)
-                {
-                    MessageBox.Show("Power must be on in order to calibrate RX Image.", "Power Is Off",
-                        MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                }
-                calibration_running = false;
-                progress.Text = "";
-                return false;
-            }
-
-            double vfoa = VFOAFreq;
-            double vfob = VFOBFreq;
-
-            DttSP.SetCorrectIQEnable(0);					// turn off I/Q correction
-            DttSP.SetCorrectRXIQw(2, 0, 0.0f, 0.0f, 0);
-            DttSP.SetCorrectRXIQw(2, 0, 0.0f, 0.0f, 1);
-
-            // bool spur_red = chkSR.Checked;					// save current spur reduction setting
-            //  chkSR.Checked = false;							// turn spur reduction off
-            //Thread.Sleep(50);
-
-            bool rx2_sr = chkRX2SR.Checked;
-            chkRX2SR.Checked = false;
-            //Thread.Sleep(50);
-
-            //bool rx_only = SetupForm.RXOnly;				// save RX Only Setting
-            //SetupForm.RXOnly = true;
-
-            bool split = chkVFOSplit.Checked;
-            chkVFOSplit.Checked = false;
-
-            bool polyphase = SetupForm.Polyphase;			// save current polyphase setting
-            SetupForm.Polyphase = false;					// disable polyphase
-
-            int dsp_buf_size = SetupForm.DSPPhoneRXBuffer;	// save current DSP buffer size
-            SetupForm.DSPPhoneRXBuffer = 4096;				// set DSP Buffer Size to 4096
-
-            bool rx2 = rx2_enabled;
-            RX2Enabled = true;
-
-            string display_mode = comboDisplayMode.Text;
-            comboDisplayMode.Text = "Spectrum";
-
-            bool avg = chkDisplayAVG.Checked;				// save current average state
-            chkDisplayAVG.Checked = true;
-
-            DSPMode dsp_mode = rx1_dsp_mode;				// save current dsp mode
-            DSPMode dsp2_mode = rx2_dsp_mode;				// save current dsp mode
-
-            RX1DSPMode = DSPMode.DSB;						// set dsp mode to DSB
-            //Thread.Sleep(50);
-            RX2DSPMode = DSPMode.DSB;						// set dsp mode to DSB
-
-            int filt1_low = RX1FilterLow;
-            int filt1_high = RX1FilterHigh;
-            Filter filter1 = rx1_filter;					// save current filter
-
-            int filt2_low = RX1FilterLow;
-            int filt2_high = RX1FilterHigh;
-            Filter filter2 = rx1_filter;					// save current filter
-
-            PreampMode preamp = rx1_preamp_mode;			// save current preamp setting
-            RX1PreampMode = PreampMode.HIGH;				// set preamp to high
-            //bool preamp = fwc_rx2_preamp;
-            FWC.SetRX2Preamp(true);
-            //Thread.Sleep(50);
-
-            bool duplex = full_duplex;
-            FullDuplex = true;
-
-            VFOAFreq = freq;
-            //Thread.Sleep(50);
-            FWC.SetTest(true);
-            //Thread.Sleep(50);
-            FWC.SetGen(true);
-            //Thread.Sleep(50);
-            FWC.SetSig(true);
-            //Thread.Sleep(50);
-            FWC.SetQSE(false);
-            //Thread.Sleep(50);
-
-            VFOBFreq = freq + 2 * (float)if_freq;				// set frequency to passed value + 2*IF
-            //Thread.Sleep(100);
-
-            UpdateRX1Filters(-5000, 5000);
-            UpdateRX2Filters(-5000, 5000);
-
-            FWCAnt rx2_antenna = RX2Ant;
-            RX2Ant = FWCAnt.RX1TAP;
-            //Thread.Sleep(50);
-
-            DisableAllFilters();
-            DisableAllModes();
-            VFOLock = true;
-            comboPreamp.Enabled = false;
-            comboDisplayMode.Enabled = false;
-
-            //int retval = 0;
-            progress.SetPercent(0.0f);
-
-            float[] a = new float[Display.BUFFER_SIZE];
-
-            Thread.Sleep(200);
-            float sum = 0.0f;
-            int peak_bin = -1;
-            float max_signal = float.MinValue;
-
-            for (int i = 0; i < 5; i++)
-            {
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(2, ptr);				// get the spectrum values
-                calibration_mutex.ReleaseMutex();
-                Thread.Sleep(50);
-            }
-
-            for (int i = 0; i < 5; i++)
-            {
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(2, ptr);				// get the spectrum values
-                calibration_mutex.ReleaseMutex();
-
-                for (int j = 0; i == 4 && j < Display.BUFFER_SIZE; j++)
-                {
-                    if (a[j] > max_signal)
-                    {
-                        max_signal = a[j];
-                        peak_bin = j;
-                    }
-                }
-                max_signal = a[2048];
-                peak_bin = 2048;
-
-                for (int j = 1948; j < 2148; j++) // TODO: Fix limits for 48/96kHz
-                {
-                    if (j < 2040 || j > 2055)
-                        sum += a[j];
-                }
-                Thread.Sleep(50);
-            }
-
-            float noise_floor = (sum / 925.0f);
-            float worst_image = max_signal;
-            Debug.WriteLine("noise_floor: " + noise_floor.ToString("f6") + " peak_bin: " + peak_bin);
-
-            if (max_signal < noise_floor + 30.0)
-            {
-                if (!suppress_errors)
-                {
-                    MessageBox.Show("Image not found (max signal < noise floor + 30dB).  Please try again.\n" +
-                        DateTime.Now.ToShortTimeString(),
-                        "Image Not Found",
-                        MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                }
-                calibration_running = false;
-                DttSP.SetCorrectIQEnable(1); // turn on I/Q correction
-                //progress.Text = "";
-                goto end;
-            }
-
-            calibrating = true;
-            DttSP.SetCorrectIQEnable(1); // turn on I/Q correction
-
-            int count = 0;
-            for (int i = 0; i < 15; i++)
-            {
-                if (i < 9) DttSP.SetCorrectIQMu(2, 0, 0.1 - i * 0.01);
-                if (!progress.Visible) goto end;
-                progress.SetPercent(count++ / 15.0f);
-                Thread.Sleep(100);
-            }
-
-            // Finish the algorithm and reset the values
-            ret_val = true;
-        end:
-            if (!progress.Visible) progress.Text = "";
-            else
-            {
-                float real, imag;
-                DttSP.SetCorrectIQMu(2, 0, 0);
-                DttSP.GetCorrectRXIQw(2, 0, &real, &imag, 1);
-                DttSP.SetCorrectRXIQw(2, 0, real, imag, 0);
-                DttSP.SetCorrectRXIQw(2, 0, 0.0f, 0.0f, 1);
-                rx2_image_gain_table[(int)rx2_band] = real;
-                rx2_image_phase_table[(int)rx2_band] = imag;
-            }
-            progress.Hide();
-            calibration_running = false;
-            wbir_tuned = true;
-            calibrating = false;
-
-            rx_image_rejection[(int)rx2_band] = (float)(-24.0 - (noise_floor + Display.RX2DisplayCalOffset + Display.RX2PreampOffset));
-            rx_image_from_floor[(int)rx2_band] = 0.0f;
-
-            FWC.SetTest(false);
-            //Thread.Sleep(50);
-            FWC.SetGen(false);
-            //Thread.Sleep(50);
-            FWC.SetSig(false);
-            //Thread.Sleep(50);
-
-            EnableAllFilters();
-            EnableAllModes();
-            VFOLock = false;
-            FullDuplex = duplex;
-            //FWC.SetRX2Preamp(preamp);
-            //Thread.Sleep(50);
-            comboDisplayMode.Enabled = true;
-
-            chkVFOSplit.Checked = split;
-            // chkSR.Checked = spur_red;							// restore spur reduction setting
-            //Thread.Sleep(50);
-            //  chkRX2SR.Checked = rx2_sr;
-            //Thread.Sleep(50);
-            //RX1PreampMode = preamp;							// restore preamp mode
-            comboDisplayMode.Text = display_mode;				// restore display mode
-            //SetupForm.RXOnly = rx_only;						// restore RX Only setting
-            RX1DSPMode = dsp_mode;								// restore dsp mode
-            //Thread.Sleep(50);
-            RX2DSPMode = dsp2_mode;								// restore dsp mode
-            RX1Filter = filter1;								// restore filter
-            if (filter1 == Filter.VAR1 || filter1 == Filter.VAR2)
-                UpdateRX1Filters(filt1_low, filt1_high);
-            RX2Filter = filter2;
-            if (filter2 == Filter.VAR1 || filter2 == Filter.VAR2)
-                UpdateRX2Filters(filt2_low, filt2_high);
-
-            VFOAFreq = vfoa;									// restore frequency
-            //Thread.Sleep(100);
-            txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-            //Thread.Sleep(100);
-            VFOBFreq = vfob;
-            //Thread.Sleep(100);
-            RX2Enabled = rx2;
-            RX2Ant = rx2_antenna;
-            //Thread.Sleep(50);
-            chkDisplayAVG.Checked = avg;						// restore average state
-            SetupForm.DSPPhoneRXBuffer = dsp_buf_size;			// restore DSP Buffer Size
-            SetupForm.Polyphase = polyphase;					// restore polyphase
-
-            t1.Stop();
-            //MessageBox.Show(t1.Duration.ToString());
-            Debug.WriteLine("timer: " + t1.Duration);
-            return ret_val;
-        }
-
-        public float[] tx_image_rejection = new float[(int)Band.LAST];
-        public bool CalibrateTXImage(float freq, Progress progress, bool suppress_errors)
-        {
-            if (!fwc_init || (current_model != Model.FLEX5000 && current_model != Model.FLEX3000))
-            {
-                progress.Text = "";
-                progress.Hide();
-                return false;
-            }
-
-            if (!chkPower.Checked)
-            {
-                if (!suppress_errors)
-                {
-                    MessageBox.Show("Power must be on in order to calibrate TX Image.", "Power Is Off",
-                        MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                }
-                calibration_running = false;
-                progress.Text = "";
-                tx_image_rejection[(int)tx_band] = 0.0f;
-                return false;
-            }
-
-            calibrating = true;
-
-            float tol = 10.0f;
-            float phase_step = 2;
-            float gain_step = 2;
-            float global_min_phase = 0;
-            float global_min_gain = 0;
-            float gain_index = 0.0f, phase_index = 0.0f;
-            float global_min_value = float.MaxValue;
-            bool progressing = true;
-            int gain_dir = -1;
-            int phase_dir = 1;
-            int gain_count = 1, phase_count = 1;
-            int wrong_direction_count;
-            int switch_direction_count;
-            string index_string;
-            string val_string;
-            string gain_string = "";
-            string phase_string = "";
-            float fundamental = -200.0f;
-
-            switch (current_model)
-            {
-                case Model.FLEX3000:
-                    phase_step = 4;
-                    gain_step = 4;
-                    break;
-            }
-
-            HiPerfTimer t1 = new HiPerfTimer();
-            t1.Start();
-            HiPerfTimer t2 = new HiPerfTimer();
-
-            // Setup Rig for TX Image Null Cal
-            bool ret_val = false;
-            calibration_running = true;
-
-            //int retval = 0;
-            progress.SetPercent(0.0f);
-
-            // bool spur_red = chkSR.Checked;					// save current spur reduction setting
-            // chkSR.Checked = false;							// turn spur reduction off
-
-            bool polyphase = SetupForm.Polyphase;			// save current polyphase setting
-            SetupForm.Polyphase = false;					// disable polyphase
-
-            int dsp_buf_size = SetupForm.DSPPhoneRXBuffer;		// save current DSP buffer size
-            SetupForm.DSPPhoneRXBuffer = 4096;					// set DSP Buffer Size to 4096
-
-            DSPMode dsp_mode = rx1_dsp_mode;			// save current dsp mode
-            RX1DSPMode = DSPMode.USB;					// set dsp mode to USB
-
-            // Setting filters for TX calibration (optmized for SSB) and we need to fix the VAR filter setting
-            // consequence of this action
-
-            string display_mode = comboDisplayMode.Text;
-            comboDisplayMode.Text = "Spectrum";
-
-            bool avg = chkDisplayAVG.Checked;				// save current average state
-            chkDisplayAVG.Checked = true;
-
-            Filter filter = rx1_filter;					// save current filter
-            UpdateRX1Filters(300, 3000);						// set filter to -3k, -300 ... LSB for image
-
-            int tx_filt_low = SetupForm.TXFilterLow;		// save tx filter low cut
-            SetupForm.TXFilterLow = 300;					// set low cut to 300Hz
-
-            int tx_filt_high = SetupForm.TXFilterHigh;		// save tx filter high cut
-            SetupForm.TXFilterHigh = 3000;					// set high cut to 3kHz
-
-            PreampMode preamp = rx1_preamp_mode;		// save current preamp setting
-            switch (current_model)
-            {
-                case Model.FLEX5000:
-                    RX1PreampMode = PreampMode.HIGH;			// set preamp to high
-                    break;
-                case Model.FLEX3000:
-                    if (BandByFreq(freq, -1, true, current_region) == Band.B160M)
-                        RX1PreampMode = PreampMode.LOW;
-                    else RX1PreampMode = PreampMode.HIGH;
-                    break;
-            }
-
-
-            bool duplex = full_duplex;
-            FullDuplex = true;
-
-            double vfo_freq = VFOAFreq;						// save current frequency
-            VFOAFreq = freq;								// set frequency to passed value
-            VFOBFreq = freq;
-
-            Audio.TXInputSignal = Audio.SignalSource.SINE;
-            double last_scale = Audio.SourceScale;			// saved audio scale
-            Audio.SourceScale = 1.0;
-            double tone_freq = Audio.SineFreq1;				// save tone freq
-            Audio.SineFreq1 = 1500.0;						// set freq
-
-            int pwr = ptbPWR.Value;
-            ptbPWR.Value = 100;
-            Audio.RadioVolume = 0.500; // changed from 0.200 4/8/09
-
-            FWC.SetQSD(true);
-            //Thread.Sleep(50);
-            FWC.SetQSE(true);
-            //Thread.Sleep(50);
-            FWC.SetTR(true);
-            //Thread.Sleep(50);
-            FWC.SetSig(true);
-            //Thread.Sleep(50);
-            FWC.SetGen(false);
-            //Thread.Sleep(50);
-            FWC.SetTest(true);
-            //Thread.Sleep(50);
-            FWC.SetTXMon(false);
-            //Thread.Sleep(50);
-            FWC.SetPDrvMon(true);
-            //Thread.Sleep(50);
-
-            DisableAllFilters();
-            DisableAllModes();
-            VFOLock = true;
-            comboPreamp.Enabled = false;
-            comboDisplayMode.Enabled = false;
-
-            SetupForm.ImageGainTX = -200.0f;
-            SetupForm.ImagePhaseTX = -200.0f;
-
-            float[] a = new float[Display.BUFFER_SIZE];
-            for (int i = 0; i < 5; i++)
-            {
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(0, ptr);// get the spectrum values
-                calibration_mutex.ReleaseMutex();
-                Thread.Sleep(50);
-            }
-
-            float max_signal = float.MinValue;
-            int peak_bin = 2048 + (int)(1500.0 / sample_rate1 * 4096.0);
-
-            Thread.Sleep(100);
-            for (int i = 0; i < 20; i++)
-            {
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(0, ptr);// get the spectrum values
-                calibration_mutex.ReleaseMutex();
-                for (int j = 0; i == 19 && j < Display.BUFFER_SIZE; j++)
-                {
-                    if (a[j] > max_signal)
-                    {
-                        max_signal = a[j];
-                        peak_bin = j;
-                    }
-                }
-                Thread.Sleep(100);
-            }
-            fundamental = max_signal;
-            UpdateRX1Filters(-3000, -300);
-            Thread.Sleep(100);
-
-            peak_bin = 2048 + (int)(-1500.0 / sample_rate1 * 4096.0);
-            max_signal = float.MinValue;
-            float sum = 0.0f;
-            int filt_low_bin = 2048 + (int)(-3000.0 / sample_rate1 * 4096.0);
-            int filt_high_bin = 2048 + (int)(-300.0 / sample_rate1 * 4096.0);
-            for (int i = 0; i < 20; i++)
-            {
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(0, ptr);// get the spectrum values
-                calibration_mutex.ReleaseMutex();
-                for (int j = 0; i == 19 && j < Display.BUFFER_SIZE; j++)
-                {
-                    if (a[j] > max_signal)
-                    {
-                        max_signal = a[j];
-                        peak_bin = j;
-                    }
-                }
-                for (int j = filt_low_bin; j < filt_high_bin; j++)
-                {
-                    if (j < peak_bin - 8 || j > peak_bin + 8)
-                        sum += a[j];
-                }
-                Thread.Sleep(100);
-            }
-            float noise_floor = (sum / (float)(((filt_high_bin - filt_low_bin) - 17) * 20));
-            Debug.WriteLine("noise_floor: " + noise_floor.ToString("f6") + " peak_bin:" + peak_bin);
-            //MessageBox.Show("Noise Floor: "+(noise_floor + Display.DisplayCalOffset + Display.PreampOffset).ToString("f1"));
-
-            if (max_signal < noise_floor + 30.0)
-            {
-                if (!suppress_errors)
-                {
-                    MessageBox.Show("Image not found (max signal < noise floor + 30dB).  Please try again.\n" +
-                        DateTime.Now.ToShortTimeString(),
-                        "Image Not Found",
-                        MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                }
-                calibration_running = false;
-                //progress.Text = "";
-                goto end;
-            }
-
-            SetupForm.ImagePhaseTX = 0.0f;
-            SetupForm.ImageGainTX = 0.0f;
-
-
-            while (progressing)
-            {
-                // find minimum of the peak signal over 
-                // the range of Gain settings
-
-                float start = 0.0f;
-                float min_signal = float.MaxValue;
-                max_signal = float.MinValue;
-                wrong_direction_count = switch_direction_count = 0;
-                bool first_time = true;
-
-                Debug.WriteLine("gain_dir:" + gain_dir + " gain_step: " + gain_step.ToString("f3"));
-                t2.Start();
-                index_string = "";
-                val_string = "";
-                gain_string += (gain_count + "," + gain_dir + "," + gain_step.ToString("f6") + "\n");
-                for (float i = global_min_gain; i >= -500.0 && i <= 500.0; i += (gain_step * gain_dir))
-                {
-                    SetupForm.ImageGainTX = i;				//set gain slider
-                    Thread.Sleep(200);
-
-                    int num_avg = gain_count;
-                    //if(gain_step <= 0.01) num_avg = 4;
-                    sum = 0.0f;
-                    for (int j = 0; j < num_avg; j++)
-                    {
-                        calibration_mutex.WaitOne();
-                        fixed (float* ptr = &a[0])
-                            DttSP.GetSpectrum(0, ptr);// get the spectrum values
-                        sum += a[peak_bin];
-                        calibration_mutex.ReleaseMutex();
-                        if (j < num_avg - 1) Thread.Sleep(50);
-                    }
-                    sum /= num_avg;
-                    a[peak_bin] = sum;
-
-                    index_string += i.ToString("f4") + ",";
-                    val_string += a[peak_bin].ToString("f4") + ",";
-
-                    if (a[peak_bin] < min_signal)			// if image is less than minimum
-                    {
-                        min_signal = a[peak_bin];
-                        gain_index = i;
-                        if (min_signal < global_min_value)
-                        {
-                            global_min_value = min_signal;
-                            global_min_gain = gain_index;
-                        }
-                    }
-
-                    // cal complete condition
-                    if (min_signal < noise_floor + 12.0f)
-                    {
-                        progressing = false;
-                        break;
-                    }
-
-                    if (first_time)
-                    {
-                        first_time = false;
-                        start = a[peak_bin];
-                        max_signal = a[peak_bin];
-                    }
-                    else
-                    {
-                        if (a[peak_bin] > max_signal && a[peak_bin] > start + 1.0)
-                        {
-                            max_signal = a[peak_bin];
-                            wrong_direction_count++; Debug.Write("W");
-                            if (wrong_direction_count > 1)
-                            {
-                                wrong_direction_count = 0;
-                                if (++switch_direction_count > 1)
-                                {
-                                    // handle switched direction twice
-                                    if (gain_step >= 0.1) gain_step /= 2.0f;
-                                    else gain_step /= 2.0f;
-                                    gain_dir *= -1;
-                                    Debug.WriteLine("gain exit dir - gain_step:" + gain_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                    break;
-                                }
-
-                                min_signal = start;
-                                max_signal = start;
-                                gain_dir *= -1;
-                                i = global_min_gain;
-                            }
-                        }
-                        else
-                        {
-                            if (min_signal > noise_floor + 20.0) tol = 3.0f;
-                            else tol = 3.0f;
-                            if (a[peak_bin] > min_signal + tol)
-                            {
-                                if (gain_step > 0.1) gain_step /= 2.0f;
-                                else gain_step /= 2.0f;
-                                gain_dir *= -1;
-                                Debug.WriteLine("exit gain thresh - gain_step:" + gain_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                break;
-                            }
-                        }
-                    }
-
-                    if (!progress.Visible) goto end;
-                    else
-                    {
-                        t1.Stop();
-                        if (t1.Duration > 90.0)
-                        {
-                            /*MessageBox.Show("TX Image Reject Calibration Failed.  Values have been returned to previous settings.\n"+
-                                DateTime.Now.ToShortTimeString(),
-                                "TX Image Failed",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);*/
-                            goto end;
-                        }
-                        else progress.SetPercent((float)(t1.Duration / 90.0));
-                    }
-                }
-
-                t2.Stop();
-                Debug.WriteLine("t2 gain(" + gain_count++ + "): " + t2.Duration);
-                if (gain_count < 10)
-                {
-                    gain_string += (index_string + "\n");
-                    gain_string += (val_string + "\n\n");
-                }
-
-                SetupForm.ImageGainTX = global_min_gain;			//set gain slider to min found
-
-                if (!progressing) break;
-
-                // find minimum of the peak signal over 
-                // the range of Phase settings
-                min_signal = float.MaxValue;
-                max_signal = float.MinValue;
-                wrong_direction_count = switch_direction_count = 0;
-                first_time = true;
-
-                t2.Start();
-                index_string = "";
-                val_string = "";
-                phase_string += (phase_count + "," + phase_dir + "," + phase_step.ToString("f3") + "\n");
-                for (float i = global_min_phase; i >= -400.0 && i <= 400.0; i += (phase_step * phase_dir))
-                {
-                    SetupForm.ImagePhaseTX = i;				// phase slider
-                    Thread.Sleep(200);
-
-                    sum = 0.0f;
-                    int num_avg = phase_count;
-                    //if(phase_step <= 0.01) num_avg = 4;
-                    for (int j = 0; j < num_avg; j++)
-                    {
-                        calibration_mutex.WaitOne();
-                        fixed (float* ptr = &a[0])
-                            DttSP.GetSpectrum(0, ptr);// get the spectrum values
-                        sum += a[peak_bin];
-                        calibration_mutex.ReleaseMutex();
-                        if (j < num_avg - 1) Thread.Sleep(50);
-                    }
-                    sum /= num_avg;
-                    a[peak_bin] = sum;
-
-                    index_string += i.ToString("f4") + ",";
-                    val_string += a[peak_bin].ToString("f4") + ",";
-
-                    if (a[peak_bin] < min_signal)			// if image is less than minimum
-                    {
-                        min_signal = a[peak_bin];
-                        phase_index = i;
-                        if (min_signal < global_min_value)
-                        {
-                            global_min_value = min_signal;
-                            global_min_phase = phase_index;
-                        }
-                    }
-
-                    // cal complete condition
-                    if (min_signal < noise_floor + 12.0f)
-                    {
-                        progressing = false;
-                        break;
-                    }
-
-                    if (first_time)
-                    {
-                        first_time = false;
-                        start = a[peak_bin];
-                        max_signal = a[peak_bin];
-                    }
-                    else
-                    {
-                        if (a[peak_bin] > max_signal && a[peak_bin] > start + 1.0)
-                        {
-                            max_signal = a[peak_bin];
-                            wrong_direction_count++; Debug.Write("W");
-                            if (wrong_direction_count > 1)
-                            {
-                                wrong_direction_count = 0;
-                                if (++switch_direction_count > 1)
-                                {
-                                    // handle switched direction twice
-                                    if (phase_step >= 0.1) phase_step /= 2.0f;
-                                    else phase_step /= 2.0f;
-                                    phase_dir *= -1;
-                                    Debug.WriteLine("phase exit dir - phase_step:" + phase_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                    break;
-                                }
-
-                                min_signal = start;
-                                max_signal = start;
-                                phase_dir *= -1;
-                                i = global_min_phase;
-                            }
-                        }
-                        else
-                        {
-                            if (min_signal > noise_floor + 20.0) tol = 3.0f;
-                            else tol = 3.0f;
-                            if (a[peak_bin] > min_signal + tol)
-                            {
-                                if (phase_step >= 0.1) phase_step /= 2.0f;
-                                else phase_step /= 2.0f;
-                                phase_dir *= -1;
-                                Debug.WriteLine("phase exit thresh - phase_step:" + phase_step.ToString("f4") + "  distance:" + (global_min_value - noise_floor).ToString("f1"));
-                                break;
-                            }
-                        }
-                    }
-
-                    if (!progress.Visible) goto end;
-                    else
-                    {
-                        t1.Stop();
-                        if (t1.Duration > 90.0)
-                        {
-                            /*MessageBox.Show("TX Image Reject Calibration Failed.  Values have been returned to previous settings.\n"+
-                                DateTime.Now.ToShortTimeString(),
-                                "TX Image Failed",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);*/
-                            goto end;
-                        }
-                        else progress.SetPercent((float)(t1.Duration / 90.0));
-                    }
-                }
-
-                t2.Stop();
-                Debug.WriteLine("t2 phase(" + phase_count++ + "): " + t2.Duration);
-
-                SetupForm.ImagePhaseTX = global_min_phase;			//set phase slider to min found
-
-                if (!progressing) break;
-            }
-
-            // Finish the algorithm and reset the values
-            ret_val = true;
-        end:
-            if (!progress.Visible) progress.Text = "";
-            else
-            {
-                tx_image_gain_table[(int)tx_band] = SetupForm.ImageGainTX;
-                tx_image_phase_table[(int)tx_band] = SetupForm.ImagePhaseTX;
-            }
-            progress.Hide();
-            calibration_running = false;
-
-            tx_image_rejection[(int)tx_band] = global_min_value - fundamental;
-
-            Audio.TXInputSignal = Audio.SignalSource.RADIO;
-            Audio.SourceScale = last_scale;						// recall tone scale
-            Audio.SineFreq1 = tone_freq;						// recall tone freq
-            ptbPWR.Value = pwr;
-
-            FullDuplex = duplex;
-            //Thread.Sleep(50);
-            FWC.SetQSD(true);
-            //Thread.Sleep(50);
-            FWC.SetQSE(false);
-            //Thread.Sleep(50);
-            FWC.SetTR(false);
-            //Thread.Sleep(50);
-            FWC.SetSig(false);
-            //Thread.Sleep(50);
-            FWC.SetGen(false);
-            //Thread.Sleep(50);
-            FWC.SetTest(false);
-            //Thread.Sleep(50);
-            FWC.SetTXMon(false);
-            //Thread.Sleep(50);
-            FWC.SetPDrvMon(false);
-            //Thread.Sleep(50);
-
-            if (current_model == Model.FLEX3000)
-                FWC.SetFan(false);
-
-            EnableAllFilters();
-            EnableAllModes();
-            VFOLock = false;
-            comboPreamp.Enabled = true;
-            comboDisplayMode.Enabled = true;
-
-            SetupForm.TXFilterHigh = tx_filt_high;				// restore TX filter settings
-            SetupForm.TXFilterLow = tx_filt_low;
-            //  chkSR.Checked = spur_red;							// restore spur reduction setting
-            RX1PreampMode = preamp;							// restore preamp mode
-            comboDisplayMode.Text = display_mode;				// restore display mode
-            //SetupForm.RXOnly = rx_only;							// restore RX Only setting
-            RX1DSPMode = dsp_mode;							// restore dsp mode
-            RX1Filter = filter;								// restore filter
-            VFOAFreq = vfo_freq;								// restore frequency
-            txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-            chkDisplayAVG.Checked = avg;						// restore average state
-            SetupForm.DSPPhoneRXBuffer = dsp_buf_size;				// restore DSP Buffer Size
-            SetupForm.Polyphase = polyphase;					// restore polyphase
-
-            t1.Stop();
-            //MessageBox.Show(t1.Duration.ToString());
-            Debug.WriteLine("timer: " + t1.Duration);
-
-            return ret_val;
-        }
-
-
 
         public bool CalibratePAGain(Progress progress, bool[] run, int target_watts) // calibrate PA Gain values
         {
@@ -20574,20 +16679,7 @@ namespace PowerSDR
                 {
                     VFOLock = false;
                     VFOAFreq = band_freqs[i];
-                    if (fwc_init)
-                    {
-                        switch (current_model)
-                        {
-                            case Model.FLEX5000:
-                                FWC.SetTXAnt(1);
-                                break;
-                            case Model.FLEX3000:
-                                FWC.SetAmpTX1(false);
-                                FWC.SetRCATX1(false);
-                                break;
-                        }
-                    }
-
+                   
                     VFOLock = true;
                     Audio.SourceScale = 0.04 / audio_volts1;
                     double last_watts = 0.0;
@@ -20750,12 +16842,6 @@ namespace PowerSDR
             chkMOX.Checked = false;
             Audio.TXInputSignal = Audio.SignalSource.RADIO;
             Audio.TXOutputSignal = Audio.SignalSource.RADIO;
-
-            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                FullDuplex = false;
-
-            if (current_model == Model.FLEX3000)
-                FWC.SetAmpTX1(true);
 
             EnableAllFilters();
             EnableAllModes();
@@ -21354,7 +17440,7 @@ namespace PowerSDR
             }
         }
 
-        private bool wheel_tunes_vfob = true;
+        private bool wheel_tunes_vfob = false;
         public bool WheelTunesVFOB
         {
             get { return wheel_tunes_vfob; }
@@ -21368,102 +17454,6 @@ namespace PowerSDR
             set { disable_ui_mox_changes = value; }
         }
 
-        private HiPerfTimer mic_down_timer = new HiPerfTimer();
-        private bool mic_down_running = false;
-        private bool mic_down = false;
-        public bool MicDown
-        {
-            get { return mic_down; }
-            set
-            {
-                mic_down = value;
-                Debug.WriteLine("mic_down: " + value.ToString());
-                mic_down_timer.Start();
-                if (mic_down)
-                {
-                    if (mic_down_running)
-                        mic_down_running = false;
-                    else if (mic_up_running)
-                        mic_up_running = false;
-                    else
-                    {
-                        if (mic_fast)
-                            VFOAFreq -= 0.001000;
-                        else VFOAFreq -= 0.000050;
-                    }
-                }
-            }
-        }
-
-        private HiPerfTimer mic_up_timer = new HiPerfTimer();
-        private bool mic_up_running = false;
-        private bool mic_up = false;
-        public bool MicUp
-        {
-            get { return mic_up; }
-            set
-            {
-                mic_up = value;
-                Debug.WriteLine("mic_up: " + value.ToString());
-                mic_up_timer.Start();
-                if (mic_up)
-                {
-                    if (mic_up_running)
-                        mic_up_running = false;
-                    else if (mic_down_running)
-                        mic_down_running = false;
-                    else
-                    {
-                        if (mic_fast)
-                            VFOAFreq += 0.001000;
-                        else VFOAFreq += 0.000050;
-                    }
-                }
-            }
-        }
-
-        private HiPerfTimer mic_fast_timer = new HiPerfTimer();
-        private bool mic_fast = false;
-        public bool MicFast
-        {
-            get { return mic_fast; }
-            set
-            {
-                mic_fast = value;
-                Debug.WriteLine("mic_fast: " + value.ToString());
-                mic_fast_timer.Start();
-            }
-        }
-
-        private bool f3k_fan = false;
-        private bool F3KFan
-        {
-            get { return f3k_fan; }
-            set
-            {
-                f3k_fan = value;
-                FWC.SetFan(value);
-            }
-        }
-
-        private float f3k_temp_thresh = 70.0f;
-        public float F3KTempThresh
-        {
-            get { return f3k_temp_thresh; }
-            set
-            {
-                if (value < 30.0f) value = 30.0f;
-                if (value > 70.0f) value = 70.0f;
-                f3k_temp_thresh = value;
-            }
-        }
-
-        private bool flex_wire_ucb = false;
-        public bool FlexWireUCB
-        {
-            get { return flex_wire_ucb; }
-            set { flex_wire_ucb = value; }
-        }
 
         private float loop_gain = 0.0f;
         private float rx1_loop_offset = 0.0f;
@@ -21514,8 +17504,7 @@ namespace PowerSDR
             {
                 bool old = fwc_amp_tx1;
                 fwc_amp_tx1 = value;
-                if (old != value || initializing)
-                    FWC.SetAmpTX1(value);
+               
             }
         }
 
@@ -21527,8 +17516,7 @@ namespace PowerSDR
             {
                 bool old = fwc_amp_tx2;
                 fwc_amp_tx2 = value;
-                if (old != value || initializing)
-                    FWC.SetAmpTX2(value);
+               
             }
         }
 
@@ -21540,8 +17528,7 @@ namespace PowerSDR
             {
                 bool old = fwc_amp_tx3;
                 fwc_amp_tx3 = value;
-                if (old != value || initializing)
-                    FWC.SetAmpTX3(value);
+               
             }
         }
 
@@ -21553,8 +17540,7 @@ namespace PowerSDR
             {
                 bool old = fwc_pa_bias;
                 fwc_pa_bias = value;
-                if (old != value)
-                    FWC.SetPABias(value);
+               
             }
         }
 
@@ -21566,8 +17552,7 @@ namespace PowerSDR
             {
                 bool old = fwc_rx1_attn;
                 fwc_rx1_attn = value;
-                if (old != value)
-                    FWC.SetRXAttn(value);
+               
             }
         }
 
@@ -21579,8 +17564,7 @@ namespace PowerSDR
             {
                 bool old = fwc_rx1_preamp;
                 fwc_rx1_preamp = value;
-                if (old != value)
-                    FWC.SetTRXPreamp(value);
+               
             }
         }
 
@@ -21592,8 +17576,7 @@ namespace PowerSDR
             {
                 bool old = fwc_rx2_preamp;
                 fwc_rx2_preamp = value;
-                if (old != value)
-                    FWC.SetRX2Preamp(value);
+               
             }
         }
 
@@ -21604,26 +17587,6 @@ namespace PowerSDR
             set
             {
                 enable_6m_preamp = value;
-                if (value)
-                {
-                    if (rx1_band == Band.B6M)
-                        chkRX1Preamp.Enabled = true;
-                    if (FWCEEPROM.RX2OK && rx2_band == Band.B6M)
-                        chkRX2Preamp.Enabled = true;
-                }
-                else
-                {
-                    if (rx1_band == Band.B6M)
-                    {
-                        chkRX1Preamp.Enabled = false;
-                        chkRX1Preamp.Checked = true;
-                    }
-                    if (FWCEEPROM.RX2OK && rx2_band == Band.B6M)
-                    {
-                        chkRX2Preamp.Enabled = false;
-                        chkRX2Preamp.Checked = true;
-                    }
-                }
             }
         }
 
@@ -21895,12 +17858,6 @@ namespace PowerSDR
             set
             {
                 current_ant_mode = value;
-                if (current_ant_mode == AntMode.Expert && !initializing)
-                {
-                    RX1Ant = GetRX1Ant(rx1_band);
-                    if (FWCEEPROM.RX2OK) RX2Ant = GetRX2Ant(rx1_band);
-                    TXAnt = GetTXAnt(rx1_band);
-                }
             }
         }
 
@@ -22064,7 +18021,7 @@ namespace PowerSDR
                 rx1_loop = value;
                 if (old != value || initializing)
                 {
-                    FWC.SetRX1Loop(rx1_loop);
+                   
 
                     if (rx1_loop)
                         rx1_loop_offset = loop_gain;
@@ -22091,26 +18048,26 @@ namespace PowerSDR
                     {
                         case FWCAnt.NC:
                             lblAntRX1.Text = "RX1: N/C";
-                            FWC.SetRX1Ant(0);
+                           // FWC.SetRX1Ant(0);
                             break;
                         case FWCAnt.ANT1:
                             lblAntRX1.Text = "RX1: ANT1";
-                            FWC.SetRX1Ant(1);
+                          //  FWC.SetRX1Ant(1);
                             rx1_path_offset = 0.5f;
                             break;
                         case FWCAnt.ANT2:
                             lblAntRX1.Text = "RX1: ANT2";
-                            FWC.SetRX1Ant(2);
+                            //FWC.SetRX1Ant(2);
                             rx1_path_offset = 0.5f;
                             break;
                         case FWCAnt.ANT3:
                             lblAntRX1.Text = "RX1: ANT3";
-                            FWC.SetRX1Ant(3);
+                           // FWC.SetRX1Ant(3);
                             rx1_path_offset = 0.5f;
                             break;
                         case FWCAnt.RX1IN:
                             lblAntRX1.Text = "RX1: RX1 IN";
-                            FWC.SetRX1Ant(4);
+                           // FWC.SetRX1Ant(4);
                             rx1_path_offset = 0.0f;
                             break;
                         case FWCAnt.SIG_GEN:
@@ -22120,11 +18077,7 @@ namespace PowerSDR
                     }
 
                     UpdateDisplayOffsets();
-                    if (FWCEEPROM.RX2OK && rx2_ant == FWCAnt.RX1TAP)
-                    {
-                        RX2Ant = rx2_ant;
-                    }
-                }
+              }
             }
         }
 
@@ -22143,19 +18096,19 @@ namespace PowerSDR
                     {
                         case FWCAnt.ANT1:
                             lblAntRX2.Text = "RX2: ANT1";
-                            FWC.SetRX2Ant(1);
+                           // FWC.SetRX2Ant(1);
                             rx2_path_offset = -rx2_res_offset - 2.9f;
                             rx2_loop_offset = 0.0f;
                             break;
                         case FWCAnt.RX2IN:
                             lblAntRX2.Text = "RX2: RX2 IN";
-                            FWC.SetRX2Ant(5);
+                          //  FWC.SetRX2Ant(5);
                             rx2_path_offset = -rx2_res_offset - 2.8f;
                             rx2_loop_offset = 0.0f;
                             break;
                         case FWCAnt.RX1TAP:
                             lblAntRX2.Text = "RX2: RX1 Tap";
-                            FWC.SetRX2Ant(6);
+                          //  FWC.SetRX2Ant(6);
                             switch (rx1_ant)
                             {
                                 case FWCAnt.ANT1:
@@ -22172,12 +18125,12 @@ namespace PowerSDR
                             break;
                         case FWCAnt.NC:
                             lblAntRX2.Text = "RX2: N/C";
-                            FWC.SetRX2Ant(0);
+                           // FWC.SetRX2Ant(0);
                             rx2_path_offset = -rx2_res_offset - 2.8f;
                             rx2_loop_offset = 0.0f;
                             break;
                         default:
-                            FWC.SetRX2Ant(5);
+                           // FWC.SetRX2Ant(5);
                             lblAntRX2.Text = "RX2: RX2 IN";
                             rx2_path_offset = -2.0f;
                             rx2_loop_offset = 0.0f;
@@ -22205,15 +18158,15 @@ namespace PowerSDR
                     {
                         case FWCAnt.ANT1:
                             lblAntTX.Text = "TX: ANT1";
-                            FWC.SetTXAnt(1);
+                          //  FWC.SetTXAnt(1);
                             break;
                         case FWCAnt.ANT2:
                             lblAntTX.Text = "TX: ANT2";
-                            FWC.SetTXAnt(2);
+                           // FWC.SetTXAnt(2);
                             break;
                         case FWCAnt.ANT3:
                             lblAntTX.Text = "TX: ANT3";
-                            FWC.SetTXAnt(3);
+                           // FWC.SetTXAnt(3);
                             break;
                     }
                 }
@@ -24315,17 +20268,7 @@ namespace PowerSDR
                     case Model.FLEX5000:
                         MinFreq = Math.Max(if_freq, 0.0000010);
                         MaxFreq = 65.0;
-                        if (!fwc_init)
-                        {
-                            //fwc_init = FWCMidi.Open();
-                            // fwc_init = Pal.Init();
-                            if (fwc_init)
-                            {
-                                FWCEEPROM.Init();
-                                FWC.SetPalCallback();
-                            }
-                        }
-                        if (fwc_init)
+                          if (fwc_init)
                         {
                             /*string preamp = comboPreamp.Text;
                             comboPreamp.Items.Clear();
@@ -24350,17 +20293,17 @@ namespace PowerSDR
                             chkBCI.Visible = false;
                             chkBCI.Checked = false;
 
-                            FWC.WriteCodecReg(0x1B, 0x02);
-                            if (fwcMixForm == null) fwcMixForm = new FWCMixForm(this);
-                            if (fwcAntForm == null) fwcAntForm = new FWCAntForm(this);
+                           // FWC.WriteCodecReg(0x1B, 0x02);
+                           // if (fwcMixForm == null) fwcMixForm = new FWCMixForm(this);
+                          //  if (fwcAntForm == null) fwcAntForm = new FWCAntForm(this);
 
                             chkFWCATUBypass.Visible = true;
-                            bool b;
-                            FWC.GetATUOK(out b);
+                            bool b = false;
+                           // FWC.GetATUOK(out b);
                             if (b)
                             {
                                 // mnuATU.Visible = true;
-                                if (fwcAtuForm == null) fwcAtuForm = new FWCATUForm(this);
+                              //  if (fwcAtuForm == null) fwcAtuForm = new FWCATUForm(this);
                                // chkFWCATU.Enabled = true;
                                // chkFWCATU.Text = "ATU";
                                // chkFWCATUBypass.Enabled = true;
@@ -24385,17 +20328,7 @@ namespace PowerSDR
                         MinFreq = Math.Max(if_freq, 0.0000010);
                         MaxFreq = 65.0;
                         FWCDDSClockCorrection = fwc_dds_clock_correction;
-                        if (!fwc_init)
-                        {
-                            //fwc_init = FWCMidi.Open();
-                            // fwc_init = Pal.Init();
-                            if (fwc_init)
-                            {
-                                FWCEEPROM.Init();
-                                FWC.SetPalCallback();
-                            }
-                        }
-                        if (fwc_init)
+                              if (fwc_init)
                         {
                             comboPreamp.Visible = true;
                             chkRX1Preamp.Visible = false;
@@ -24591,13 +20524,6 @@ namespace PowerSDR
                     set { saved_vfob_freq = value; }
                 }
         */
-
-        private bool ext_ctrl_enabled = false;
-        public bool ExtCtrlEnabled
-        {
-            get { return ext_ctrl_enabled; }
-            set { ext_ctrl_enabled = value; }
-        }
 
         private bool penny_ext_ctrl_enabled = false;
         public bool PennyExtCtrlEnabled
@@ -26142,21 +22068,15 @@ namespace PowerSDR
         {
             get
             {
-                if (this.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK)
                     return cat_rx2nb2_status;
-                else
-                    return 0;
-            }
+             }
             set
             {
-                if (this.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK)
-                {
                     if (value == 0)
                         chkRX2NB2.Checked = false;
                     else
                         chkRX2NB2.Checked = true;
-                }
-            }
+             }
         }
 
         // Added 06/22/05 BT for CAT commands
@@ -26261,8 +22181,6 @@ namespace PowerSDR
         // Added/repaired 7/10/05 BT for cat commands
         public PreampMode CATPreamp
         {
-            //set{comboPreamp.SelectedIndex = value;}
-            //get{return comboPreamp.SelectedIndex;}
             set { RX1PreampMode = value; }
             get { return RX1PreampMode; }
         }
@@ -26572,106 +22490,6 @@ namespace PowerSDR
                     rx1_preamp_by_band[(int)old_band] = rx1_preamp_mode;
                 //  rx1_preamp_by_band[(int)old_band] = rx1_preamp_mode;
 
-                if (fwc_init)
-                {
-                    switch (current_model)
-                    {
-                        case Model.FLEX5000:
-                            double freq = VFOAFreq;
-                            if (freq < 2.0)
-                            {
-                                if (chkRX1Preamp.Enabled) chkRX1Preamp.Enabled = false;
-                                if (chkRX1Preamp.Checked) chkRX1Preamp.Checked = false;
-                            }
-                            else if (freq >= 28.0 && rx1_xvtr_index < 0 && !enable_6m_preamp)
-                            {
-                                if (chkRX1Preamp.Enabled) chkRX1Preamp.Enabled = false;
-                                if (!chkRX1Preamp.Checked) chkRX1Preamp.Checked = true;
-                            }
-                            else if (!chkRX1Preamp.Enabled) chkRX1Preamp.Enabled = true;
-                            break;
-                        case Model.FLEX3000:
-                            freq = VFOAFreq;
-                            if (FWCEEPROM.TRXRev >> 8 < 6) // before rev G
-                            {
-                                if (freq < 2.0)
-                                {
-                                    if (!comboPreamp.Items.Contains("Attn"))
-                                        comboPreamp.Items.Insert(0, "Attn");
-                                    if (!comboPreamp.Items.Contains("Off"))
-                                        comboPreamp.Items.Insert(1, "Off");
-                                    if (comboPreamp.Items.Contains("Pre1"))
-                                        comboPreamp.Items.Remove("Pre1");
-                                    if (comboPreamp.Items.Contains("Pre2"))
-                                        comboPreamp.Items.Remove("Pre2");
-
-                                    if (comboPreamp.SelectedIndex < 0)
-                                        comboPreamp.Text = "Off";
-                                }
-                                else
-                                {
-                                    if (!comboPreamp.Items.Contains("Attn"))
-                                        comboPreamp.Items.Insert(0, "Attn");
-                                    if (!comboPreamp.Items.Contains("Off"))
-                                        comboPreamp.Items.Insert(1, "Off");
-                                    if (!comboPreamp.Items.Contains("Pre1"))
-                                        comboPreamp.Items.Insert(2, "Pre1");
-                                    if (!comboPreamp.Items.Contains("Pre2"))
-                                        comboPreamp.Items.Insert(3, "Pre2");
-
-                                    if (comboPreamp.SelectedIndex < 0)
-                                        comboPreamp.Text = "Pre2";
-                                }
-                            }
-                            else // revs G+
-                            {
-                                if (freq < 7.0)
-                                {
-                                    if (!comboPreamp.Items.Contains("Attn"))
-                                        comboPreamp.Items.Insert(0, "Attn");
-                                    if (!comboPreamp.Items.Contains("Off"))
-                                        comboPreamp.Items.Insert(1, "Off");
-                                    if (comboPreamp.Items.Contains("Pre1"))
-                                        comboPreamp.Items.Remove("Pre1");
-                                    if (comboPreamp.Items.Contains("Pre2"))
-                                        comboPreamp.Items.Remove("Pre2");
-
-                                    if (comboPreamp.SelectedIndex < 0)
-                                        comboPreamp.Text = "Off";
-                                }
-                                else if (freq < 13.0)
-                                {
-                                    if (!comboPreamp.Items.Contains("Attn"))
-                                        comboPreamp.Items.Insert(0, "Attn");
-                                    if (!comboPreamp.Items.Contains("Off"))
-                                        comboPreamp.Items.Insert(1, "Off");
-                                    if (!comboPreamp.Items.Contains("Pre1"))
-                                        comboPreamp.Items.Insert(2, "Pre1");
-                                    if (comboPreamp.Items.Contains("Pre2"))
-                                        comboPreamp.Items.Remove("Pre2");
-
-                                    if (comboPreamp.SelectedIndex < 0)
-                                        comboPreamp.Text = "Off";
-                                }
-                                else
-                                {
-                                    if (!comboPreamp.Items.Contains("Attn"))
-                                        comboPreamp.Items.Insert(0, "Attn");
-                                    if (!comboPreamp.Items.Contains("Off"))
-                                        comboPreamp.Items.Insert(1, "Off");
-                                    if (!comboPreamp.Items.Contains("Pre1"))
-                                        comboPreamp.Items.Insert(2, "Pre1");
-                                    if (!comboPreamp.Items.Contains("Pre2"))
-                                        comboPreamp.Items.Insert(3, "Pre2");
-
-                                    if (comboPreamp.SelectedIndex < 0)
-                                        comboPreamp.Text = "Off";
-                                }
-                            }
-                            break;
-                    }
-                }
-
                 if (rx1_band != old_band || initializing)
                 {
                     // save values for old band
@@ -26680,67 +22498,6 @@ namespace PowerSDR
                     RX1PreampMode = rx1_preamp_by_band[(int)value];
                     RF = rx1_agct_by_band[(int)value];
                     ptbRF_Scroll(this, EventArgs.Empty);
-
-                    if (fwc_init)
-                    {
-                        switch (current_model)
-                        {
-                            case Model.FLEX5000:
-                                // set saved values for new band
-                                if (current_ant_mode == AntMode.Expert)
-                                {
-                                    int band = (int)value;
-                                    if (rx1_xvtr_index >= 0)
-                                        band = (int)Band.VHF0 + rx1_xvtr_index;
-
-                                    if (rx1_ant != FWCAnt.SIG_GEN)
-                                        RX1Ant = rx1_ant_by_band[band];
-                                    if (rx1_ant != FWCAnt.RX1IN)
-                                        RX1Loop = rx1_loop_by_band[band];
-                                }
-
-                                var b = rx1_band;
-                                if (rx1_xvtr_index >= 0) b = lo_band;
-                                RX1DisplayCalOffset = rx1_level_table[(int)b][0];
-                                rx1_preamp_offset[(int)PreampMode.OFF] = 0.0f;
-                                rx1_preamp_offset[(int)PreampMode.HIGH] = rx1_level_table[(int)b][1];
-                                rx1_meter_cal_offset = rx1_level_table[(int)b][2];
-                                UpdateDisplayOffsets();
-
-                                if (FWCEEPROM.RX1ImageVer == 4)
-                                {
-                                    radio.GetDSPRX(0, 0).SetRXCorrectIQW(rx1_image_gain_table[(int)b], rx1_image_phase_table[(int)b]);
-                                    radio.GetDSPRX(0, 1).SetRXCorrectIQW(rx1_image_gain_table[(int)b], rx1_image_phase_table[(int)b]);
-                                }
-
-                                Audio.IQGain = 1.0f + 0.001f * rx1_image_gain_table[(int)b];
-                                Audio.IQPhase = 0.001f * rx1_image_phase_table[(int)b];
-
-                                if (fwcAntForm != null && !fwcAntForm.IsDisposed)
-                                    fwcAntForm.SetBand(value);
-                                break;
-                            case Model.FLEX3000:
-                                b = rx1_band;
-                                if (rx1_xvtr_index >= 0) b = lo_band;
-                                RX1DisplayCalOffset = rx1_level_table[(int)b][0];
-                                rx1_preamp_offset[(int)PreampMode.OFF] = rx1_level_table[(int)b][1];
-                                rx1_preamp_offset[(int)PreampMode.LOW] = 0.0f;
-                                rx1_preamp_offset[(int)PreampMode.MED] = rx1_level_table[(int)b][1] + rx1_level_table[(int)b][2];
-                                rx1_preamp_offset[(int)PreampMode.HIGH] = rx1_level_table[(int)b][2];
-                                rx1_meter_cal_offset = rx1_level_table[(int)b][0] + 27.2f;
-                                UpdateDisplayOffsets();
-
-                                if (FWCEEPROM.RX1ImageVer == 4)
-                                {
-                                    radio.GetDSPRX(0, 0).SetRXCorrectIQW(rx1_image_gain_table[(int)b], rx1_image_phase_table[(int)b]);
-                                    radio.GetDSPRX(0, 1).SetRXCorrectIQW(rx1_image_gain_table[(int)b], rx1_image_phase_table[(int)b]);
-                                }
-
-                                Audio.IQGain = 1.0f + 0.001f * rx1_image_gain_table[(int)b];
-                                Audio.IQPhase = 0.001f * rx1_image_phase_table[(int)b];
-                                break;
-                        }
-                    }
                 }
             }
         }
@@ -26884,15 +22641,7 @@ namespace PowerSDR
                         //rx2_meter_cal_offset = rx2_level_table[(int)b][2];
                         //UpdateDisplayOffsets();
 
-                        if (FWCEEPROM.RX2ImageVer == 4)
-                        {
-                            //  radio.GetDSPRX(1, 0).SetRXCorrectIQW(rx2_image_gain_table[(int)b], rx2_image_phase_table[(int)b]);
-                            //  radio.GetDSPRX(1, 1).SetRXCorrectIQW(rx2_image_gain_table[(int)b], rx2_image_phase_table[(int)b]);
-                        }
-
-                        if (fwcAntForm != null && !fwcAntForm.IsDisposed)
-                            fwcAntForm.SetBand(value);
-                    }
+                     }
                     /*
                     Band b = rx2_band;
                     if (rx2_xvtr_index >= 0) b = lo_band;
@@ -27519,8 +23268,8 @@ namespace PowerSDR
                 Audio.SineFreq1 = cw_pitch;
                 udCWPitch.Value = cw_pitch;
                 Display.CWPitch = cw_pitch;
-                if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                    FWC.SetCWPitch((uint)cw_pitch);
+               // if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+                  //  FWC.SetCWPitch((uint)cw_pitch);
 
                 for (Filter f = Filter.F1; f < Filter.LAST; f++)
                 {
@@ -27791,7 +23540,7 @@ namespace PowerSDR
                         break; // do nothing
                     case DSPMode.LSB:
                     case DSPMode.DIGL:
-                        if (current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && rx2_enabled && chkVFOBTX.Checked)
+                        if (rx2_enabled && chkVFOBTX.Checked)
                             Invoke(new MethodInvoker(radRX2ModeCWL.Select)); // switch RX2 to CWL mode
                         else Invoke(new MethodInvoker(radModeCWL.Select)); // switch RX1 to CWL mode
                         break;
@@ -27802,7 +23551,7 @@ namespace PowerSDR
                     case DSPMode.FM:
                     case DSPMode.DSB:
                     case DSPMode.DRM:
-                        if (current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && rx2_enabled && chkVFOBTX.Checked)
+                        if (rx2_enabled && chkVFOBTX.Checked)
                             Invoke(new MethodInvoker(radRX2ModeCWU.Select)); // switch RX2 to CWU mode    
                         else Invoke(new MethodInvoker(radModeCWU.Select)); // switch RX1 to CWU mode
                         break;
@@ -27820,7 +23569,7 @@ namespace PowerSDR
                         break; // do nothing
                     default:
                         RadioButtonTS rad = null;
-                        bool rx2 = (current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && rx2_enabled && chkVFOBTX.Checked);
+                        bool rx2 = (rx2_enabled && chkVFOBTX.Checked);
                         switch (saved_cw_auto_switch_dsp_mode)
                         {
                             case DSPMode.LSB:
@@ -33333,7 +29082,7 @@ namespace PowerSDR
 
         private void PollFWCPAPWR()
         {
-            if (!fwc_init || current_model == Model.SDR1000 || !FWCEEPROM.PAOK) return;
+             return;
             //int count = 0;
             int high_swr_count = 0;
             int fwd = 0, rev = 0/*, temp, volts*/;
@@ -33342,21 +29091,6 @@ namespace PowerSDR
             {
                 if (mox)
                 {
-                    if (!atu_tuning)
-                    {
-                        switch (current_model)
-                        {
-                            case Model.FLEX5000:
-                                FWC.ReadPAADC(7, out fwd); // FLEX-5000
-                                FWC.ReadPAADC(6, out rev); // FLEX-5000
-                                break;
-                            case Model.FLEX3000:
-                                FWC.ReadPAADC(5, out fwd); // FLEX-3000
-                                FWC.ReadPAADC(4, out rev); // FLEX-3000
-                                break;
-                        }
-                    }
-
                     pa_fwd_power = fwd;
                     pa_rev_power = rev;
 
@@ -33656,8 +29390,8 @@ namespace PowerSDR
             {
                 //if(!mox)
                 {
-                    int val;
-                    FWC.ReadPAADC(3, out val);
+                    int val = 0;
+                   // FWC.ReadPAADC(3, out val);
                     float volts = (float)val / 4096 * 2.5f;
                     double temp_c = 301 - volts * 1000 / 2.2;
 
@@ -33687,7 +29421,7 @@ namespace PowerSDR
                         }
                         else
                         {
-                            speed = ((float)temp_c - f3k_temp_thresh) / (100.0 - f3k_temp_thresh);
+                            speed = 0.0;// ((float)temp_c - f3k_temp_thresh) / (100.0 - f3k_temp_thresh);
                             if (speed > 1.0) speed = 1.0;
                             if (speed < 0.0) speed = 0.0;
                             if (speed < 0.5)
@@ -33704,7 +29438,7 @@ namespace PowerSDR
 
                         if (fan_on != last_3k_fan_on || fan_off != last_3k_fan_off)
                         {
-                            FWC.SetFanPWM(fan_on, fan_off);
+                          //  FWC.SetFanPWM(fan_on, fan_off);
                             Debug.WriteLine("Fan Speed: " + speed.ToString("f2") + "  on: " + fan_on + "  off: " + fan_off);
                             last_3k_fan_on = fan_on;
                             last_3k_fan_off = fan_off;
@@ -33718,55 +29452,6 @@ namespace PowerSDR
 
                 }
                 Thread.Sleep(2500);
-            }
-        }
-
-        private void F3KMicFunctions()
-        {
-            double running_thresh_ms = 600;
-            while (chkPower.Checked)
-            {
-                mic_down_timer.Stop();
-                mic_up_timer.Stop();
-                mic_fast_timer.Stop();
-
-                if (mic_up)
-                {
-                    if (!mic_up_running)
-                    {
-                        if (mic_up_timer.DurationMsec > running_thresh_ms)
-                        {
-                            mic_down_running = false;
-                            mic_up_running = true;
-                        }
-                    }
-                }
-                else if (mic_down)
-                {
-                    if (!mic_down_running)
-                    {
-                        if (mic_down_timer.DurationMsec > running_thresh_ms)
-                        {
-                            mic_up_running = false;
-                            mic_down_running = true;
-                        }
-                    }
-                }
-
-                if (mic_up_running)
-                {
-                    double increment = 0.000100;
-                    if (mic_fast) increment = 0.000500;
-                    VFOAFreq += increment;
-                }
-                else if (mic_down_running)
-                {
-                    double decrement = 0.000100;
-                    if (mic_fast) decrement = 0.000500;
-                    VFOAFreq -= decrement;
-                }
-
-                Thread.Sleep(50);
             }
         }
 
@@ -35009,26 +30694,7 @@ namespace PowerSDR
                 Hdw.DDSTuningWord = 0;
                 fwc_dds_freq = 0.0f;
                 rx2_dds_freq = 0.0f;
-                /*   switch (current_model)
-                   {
-                         case Model.FLEX5000:
-                           if (fwc_init) FWC.SetStandby(false);
-                           fwc_dds_freq = 0.0f;
-                          // last_tw = 0;
-                           rx2_dds_freq = 0.0f;
-                          // rx2_last_tw = 0;
-                           RX1Ant = rx1_ant;
-                           break;
-                       default:
-                           Hdw.PowerOn();
-                           Hdw.DDSTuningWord = 0;
-                           fwc_dds_freq = 0.0f;
-                          // last_tw = 0;
-                           rx2_dds_freq = 0.0f;
-                          // rx2_last_tw = 0;
-                           break;
-                   }*/
-
+  
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                 comboDisplayMode_SelectedIndexChanged(this, EventArgs.Empty);
                 // wjt added 
@@ -35136,59 +30802,6 @@ namespace PowerSDR
                     poll_ptt_thread.Priority = ThreadPriority.Normal;
                     poll_ptt_thread.IsBackground = true;
                     poll_ptt_thread.Start();
-                }
-
-                if (fwc_init && current_model == Model.FLEX3000)
-                {
-                    if (FWCEEPROM.PAOK)
-                    {
-                        if (f3k_temp_thread == null || !f3k_temp_thread.IsAlive)
-                        {
-                            f3k_temp_thread = new Thread(new ThreadStart(F3KReadTemp));
-                            f3k_temp_thread.Name = "F3K Temp Thread";
-                            f3k_temp_thread.Priority = ThreadPriority.Lowest;
-                            f3k_temp_thread.IsBackground = true;
-                            f3k_temp_thread.Start();
-                        }
-                    }
-
-                    if (f3k_mic_function_thread == null || !f3k_mic_function_thread.IsAlive)
-                    {
-                        f3k_mic_function_thread = new Thread(new ThreadStart(F3KMicFunctions));
-                        f3k_mic_function_thread.Name = "F3K Mic Feature Thread";
-                        f3k_mic_function_thread.Priority = ThreadPriority.Normal;
-                        f3k_mic_function_thread.IsBackground = true;
-                        f3k_mic_function_thread.Start();
-                    }
-                }
-
-                switch (current_model)
-                {
-                    case Model.FLEX5000:
-                    case Model.FLEX3000:
-                        if (poll_pa_pwr_thread == null || !poll_pa_pwr_thread.IsAlive)
-                        {
-                            poll_pa_pwr_thread = new Thread(new ThreadStart(PollFWCPAPWR));
-                            poll_pa_pwr_thread.Name = "Poll FWC PA PWR Thread";
-                            poll_pa_pwr_thread.Priority = ThreadPriority.BelowNormal;
-                            poll_pa_pwr_thread.IsBackground = true;
-                            poll_pa_pwr_thread.Start();
-                        }
-                        break;
-                    // default:
-                    case Model.SDR1000:
-                        if (pa_present)
-                        {
-                            // if (poll_pa_pwr_thread == null || !poll_pa_pwr_thread.IsAlive)
-                            // {
-                            poll_pa_pwr_thread = new Thread(new ThreadStart(PollPAPWR));
-                            poll_pa_pwr_thread.Name = "Poll PA PWR Thread";
-                            poll_pa_pwr_thread.Priority = ThreadPriority.BelowNormal;
-                            poll_pa_pwr_thread.IsBackground = true;
-                            poll_pa_pwr_thread.Start();
-                            //  }
-                        }
-                        break;
                 }
 
                 /* wbir_thread = new Thread(new ThreadStart(WBIR));
@@ -35505,13 +31118,13 @@ namespace PowerSDR
                 case DisplayMode.SCOPE:
                 case DisplayMode.SCOPE2:
                 case DisplayMode.OFF:
-                    chkDisplayAVG.Enabled = false;
-                    if (chkDisplayAVG.Checked)
-                        chkDisplayAVG.BackColor = SystemColors.Control;
+                   // chkDisplayAVG.Enabled = false;
+                   // if (chkDisplayAVG.Checked)
+                      //  chkDisplayAVG.BackColor = SystemColors.Control;
                     //chkDisplayAVG.Checked = false;
-                    chkDisplayPeak.Enabled = false;
-                    if (chkDisplayPeak.Checked)
-                        chkDisplayPeak.BackColor = SystemColors.Control;
+                  //  chkDisplayPeak.Enabled = false;
+                   // if (chkDisplayPeak.Checked)
+                     //   chkDisplayPeak.BackColor = SystemColors.Control;
                     //chkDisplayPeak.Checked = false;
                     break;
                 case DisplayMode.WATERFALL:
@@ -35773,12 +31386,6 @@ namespace PowerSDR
             if (CWXForm != null) CWXForm.Hide();
             if (EQForm != null) EQForm.Hide();
             if (XVTRForm != null) XVTRForm.Hide();
-            if (fwcMixForm != null) fwcMixForm.Hide();
-            if (flex3000MixerForm != null) flex3000MixerForm.Hide();
-            if (flex5000LLHWForm != null) flex5000LLHWForm.Hide();
-            // if (flex5000DebugForm != null) flex5000DebugForm.Hide();
-            if (fwcAntForm != null) fwcAntForm.Hide();
-            if (fwcAtuForm != null) fwcAtuForm.Hide();
             if (memoryForm != null) memoryForm.Hide();
             //  if (preSelForm != null) preSelForm.Hide();
 
@@ -35793,13 +31400,7 @@ namespace PowerSDR
             if (SetupForm != null) SetupForm.SaveOptions();
             if (EQForm != null) EQForm.Close();
             if (XVTRForm != null) XVTRForm.Close();
-            if (fwcMixForm != null) fwcMixForm.Close();
-            if (flex3000MixerForm != null) flex3000MixerForm.Close();
-            if (flex5000LLHWForm != null) flex5000LLHWForm.Close();
-            // if (flex5000DebugForm != null) flex5000DebugForm.Close();
-            if (fwcAntForm != null) fwcAntForm.Close();
-            if (fwcAtuForm != null) fwcAtuForm.Close();
-            if (memoryForm != null) memoryForm.Close();
+             if (memoryForm != null) memoryForm.Close();
             //  if (preSelForm != null) preSelForm.Close();
         }
 
@@ -36461,13 +32062,6 @@ namespace PowerSDR
                    else
                    { */
                 if (num_channels == 2) Hdw.MuteRelay = !chkMON.Checked;
-
-                if (ext_ctrl_enabled)
-                {
-                    Hdw.UpdateHardware = true;
-                    UpdateExtCtrl();
-                    Hdw.UpdateHardware = false;
-                }
 
                 Band lo_band = Band.FIRST;
 
@@ -37837,7 +33431,6 @@ namespace PowerSDR
                     if (SetupForm != null) SetupForm.VOXEnable = chkVOX.Checked;
                     Audio.VOXActive = false;
                     chkVOX.BackColor = SystemColors.Control;
-
                 }
             }
             else chkVAC1.BackColor = SystemColors.Control;
@@ -37921,7 +33514,6 @@ namespace PowerSDR
                 chkBCI.BackColor = button_selected_color;
             else
                 chkBCI.BackColor = SystemColors.Control;
-            SetHWFilters(dds_freq);
         }
 
         public bool CheckForTXCW()
@@ -38382,9 +33974,6 @@ namespace PowerSDR
 
             if (chkPower.Checked)
             {
-                if (ext_ctrl_enabled)
-                    UpdateExtCtrl();
-
                 if (rx1_xvtr_index >= 0)
                 {
                     // Fix Penny O/C VHF control Vk4xv
@@ -39260,10 +34849,7 @@ namespace PowerSDR
             if (tx_xvtr_index >= 0)
                 tx_freq = XVTRForm.TranslateFreq(tx_freq);
 
-            if (ext_ctrl_enabled)
-                UpdateExtCtrl();
-
-            //tx
+             //tx
             if (last_tx_xvtr_index != tx_xvtr_index)
             {
                 if (tx_xvtr_index >= 0)
@@ -42521,7 +38107,7 @@ namespace PowerSDR
                     btnFilterShiftReset.Enabled = true;
                     if (new_mode != DSPMode.SPEC || new_mode != DSPMode.FM)
                         EnableAllFilters();
-                    if_freq = SetupForm.IFFreq;
+                   // if_freq = SetupForm.IFFreq;
                     CalcDisplayFreq();
                     chkTNF.Enabled = true;
                     btnTNFAdd.Enabled = true;
@@ -42762,7 +38348,7 @@ namespace PowerSDR
                     break;
                 case DSPMode.DRM:
                     if_shift = false;
-                    vfo_offset = -0.012;
+                    vfo_offset = 0.0;
                     radModeDRM.BackColor = button_selected_color;
                     //grpMode.Text = "Mode - DRM";
                     if (vac_auto_enable)
@@ -42777,7 +38363,8 @@ namespace PowerSDR
                     ptbFilterShift.Enabled = false;
                     btnFilterShiftReset.Enabled = false;
                     //grpFilter.Text = "Filter - DRM";
-                    radio.GetDSPRX(0, 0).SetRXFilter(7000, 17000);
+                  //  radio.GetDSPRX(0, 0).SetRXFilter(7000, 17000);
+                    radio.GetDSPRX(0, 0).SetRXFilter(-5000, 5000);
                     /*Display.RXDisplayLow = -8000;
                         Display.RXDisplayHigh = 8000;*/
                     panelModeSpecificDigital.BringToFront();
@@ -44864,47 +40451,6 @@ namespace PowerSDR
             filterRX2Form.Focus();
         }
 
-        private void mnuMixer_Click(object sender, System.EventArgs e)
-        {
-            if (fwc_init)
-            {
-                switch (current_model)
-                {
-                    case Model.FLEX5000:
-                        if (fwcMixForm == null || fwcMixForm.IsDisposed)
-                            fwcMixForm = new FWCMixForm(this);
-                        fwcMixForm.Show();
-                        fwcMixForm.Focus();
-                        break;
-                    case Model.FLEX3000:
-                        if (flex3000MixerForm == null || flex3000MixerForm.IsDisposed)
-                            flex3000MixerForm = new FLEX3000MixerForm(this);
-                        flex3000MixerForm.Show();
-                        flex3000MixerForm.Focus();
-                        break;
-                }
-            }
-        }
-
-        private void mnuAntenna_Click(object sender, System.EventArgs e)
-        {
-            if (fwc_init && current_model == Model.FLEX5000)
-            {
-                if (fwcAntForm == null || fwcAntForm.IsDisposed)
-                    fwcAntForm = new FWCAntForm(this);
-                fwcAntForm.Show();
-                fwcAntForm.Focus();
-            }
-        }
-
-        private void mnuRelays_Click(object sender, System.EventArgs e)
-        {
-        }
-
-        private void mnuATU_Click(object sender, System.EventArgs e)
-        {
-        }
-
         private void mnuProfiles_Click(object sender, System.EventArgs e)
         {
             if (ProfileForm == null || ProfileForm.IsDisposed)
@@ -45052,140 +40598,6 @@ namespace PowerSDR
         }
 
         #endregion
-
-        public void TestTXCarrier()
-        {
-            if (!chkPower.Checked)
-            {
-                MessageBox.Show("Power must be on.");
-                return;
-            }
-
-            double vfoa = VFOAFreq;
-            double vfob = VFOBFreq;
-
-            bool duplex = full_duplex;
-            FullDuplex = true;
-
-            // bool spur_red = chkSR.Checked;					// save current spur reduction setting
-            // chkSR.Checked = false;							// turn spur reduction off
-
-            bool polyphase = SetupForm.Polyphase;			// save current polyphase setting
-            SetupForm.Polyphase = false;					// disable polyphase
-
-            int dsp_buf_size = SetupForm.DSPPhoneRXBuffer;		// save current DSP buffer size
-            SetupForm.DSPPhoneRXBuffer = 4096;					// set DSP Buffer Size to 4096
-
-            // setup display mode
-            string display = comboDisplayMode.Text;
-            comboDisplayMode.Text = "Spectrum";
-
-            // setup dsp mode
-            DSPMode dsp_mode = RX1DSPMode;
-            RX1DSPMode = DSPMode.DSB;
-
-            // setup filter
-            Filter filter = RX1Filter;
-            UpdateRX1Filters(-500, 500);
-
-            FullDuplex = true;
-            FWC.SetQSD(true);
-            FWC.SetQSE(true);
-            FWC.SetTR(true);
-            FWC.SetSig(true);
-            FWC.SetGen(false);
-            FWC.SetTest(true);
-            FWC.SetTXMon(false);
-
-            Audio.TXInputSignal = Audio.SignalSource.SILENCE;
-            //Audio.SourceScale = 1.0;
-
-            double start = 14.0;
-            double end = 14.350;
-            double step = 0.001;
-            float[] a = new float[Display.BUFFER_SIZE];
-            StringBuilder s = new StringBuilder();
-
-            for (double freq = start; freq < end; freq += step)
-            {
-                VFOAFreq = freq;
-                VFOBFreq = freq;
-                Thread.Sleep(100);
-
-                float sum = 0.0f;
-                for (int i = 0; i < 5; i++)
-                {
-                    calibration_mutex.WaitOne();
-                    fixed (float* ptr = &a[0])
-                        DttSP.GetSpectrum(0, ptr);// get the spectrum values
-                    calibration_mutex.ReleaseMutex();
-                    Thread.Sleep(50);
-
-                    sum += a[2048];
-                }
-                float avg = (sum / 5) + Display.RX1DisplayCalOffset + Display.RX1PreampOffset;
-                s.Append(freq.ToString("f6") + "," + avg.ToString("f1") + "\n");
-            }
-
-            StreamWriter writer = new StreamWriter(app_data_path + "\\tx_carrier" + start.ToString("f6") + "-" + end.ToString("f6") + ".csv");
-            writer.WriteLine("freq,carrier");
-            writer.Write(s.ToString());
-            writer.Close();
-
-            // return output tone
-            Audio.TXInputSignal = Audio.SignalSource.RADIO;
-
-            // return hardware to normal operation
-            FWC.SetSig(false);
-            FWC.SetTest(false);
-            FWC.SetQSE(false);
-
-            SetupForm.Polyphase = polyphase;
-            SetupForm.DSPPhoneRXBuffer = dsp_buf_size;
-            // chkSR.Checked = spur_red;
-            FullDuplex = duplex;
-
-            VFOAFreq = vfoa;
-            VFOBFreq = vfob;
-
-            comboDisplayMode.Text = display;
-
-            RX1DSPMode = dsp_mode;
-            RX1Filter = filter;
-        }
-
-        public void CallCalStepGen()
-        {
-            p = new Progress("Calibrate Gen");
-            Thread t = new Thread(new ThreadStart(CalStepGen));
-            t.Name = "Run Calibrate Gen Thread";
-            t.IsBackground = true;
-            t.Priority = ThreadPriority.Normal;
-            t.Start();
-            p.Show();
-        }
-
-        public void CalStepGen()
-        {
-            if (!chkPower.Checked)
-            {
-                MessageBox.Show("Power must be on.");
-                return;
-            }
-
-            if (current_model != Model.FLEX5000) return;
-
-            VFOAFreq = 14.100;
-            VFOBFreq = 14.004;
-
-            for (int i = 0; i < 100; i++)
-            {
-                VFOBFreq = 14.004 + i * 0.001920;
-                Thread.Sleep(100);
-            }
-
-            p.Hide();
-        }
 
         private bool full_duplex = false;
         public bool FullDuplex
@@ -46354,7 +41766,7 @@ namespace PowerSDR
                     break;
                 case DSPMode.DRM:
                     // rx2_if_shift = false;
-                    rx2_vfo_offset = -0.012;
+                   // rx2_vfo_offset = -0.012;
                     radRX2ModeDRM.BackColor = button_selected_color;
                     //grpRX2Mode.Text = "RX2 Mode - DRM";
                     if (rx2_enabled && vac2_auto_enable)

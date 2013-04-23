@@ -27085,7 +27085,7 @@
             0,
             65536});
             this.udANAN100PAGain6.Minimum = new decimal(new int[] {
-            463,
+            450,
             0,
             0,
             65536});
@@ -28168,7 +28168,7 @@
             0,
             65536});
             this.udANANPAGain6.Minimum = new decimal(new int[] {
-            458,
+            455,
             0,
             0,
             65536});

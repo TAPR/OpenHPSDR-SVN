@@ -2702,7 +2702,7 @@ namespace PowerSDR
             return Pal.WriteOp(Opcode.FWC_OP_SET_VU_TX_V, Convert.ToUInt32(b), 0);
         }
 
-		private static Pal.NotificationCallback callback = new Pal.NotificationCallback(Notify);
+		//private static Pal.NotificationCallback callback = new Pal.NotificationCallback(Notify);
 
         public static bool ignore_dash = false;
 		public static Console console;

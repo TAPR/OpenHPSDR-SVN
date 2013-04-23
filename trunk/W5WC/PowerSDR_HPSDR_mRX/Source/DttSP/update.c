@@ -1265,6 +1265,7 @@ Process_Phase (unsigned int thread, float *results, int numpoints)
 	uni[thread].spec.type = SPEC_POST_AGC;
 	uni[thread].spec.scale = SPEC_PWR;
 	uni[thread].spec.rxk = 0;
+
 	snap_scope (&uni[thread].spec, uni[thread].spec.type);
 	//sem_post (&top[thread].sync.upd.sem);
 	for (i = 0, j = 0; i < numpoints; i++, j += 2)
