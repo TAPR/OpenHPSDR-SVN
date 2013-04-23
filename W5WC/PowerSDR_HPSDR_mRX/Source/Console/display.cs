@@ -9276,7 +9276,7 @@ namespace PowerSDR
             {
                 // draw the connected points
                 g.DrawLines(data_line_pen, points);
-                g.FillPolygon(data_line_pen.Brush, points);
+                g.FillPolygon(data_line_pen.Brush, points, System.Drawing.Drawing2D.FillMode.Alternate);
             }
 
             // draw long cursor
@@ -9945,8 +9945,9 @@ namespace PowerSDR
                     points[W + 1].Y += H;
                 }
                 // data_line_pen.Color = Color.FromArgb(100, 255, 255, 255);
-                if (local_mox) g.FillPolygon(tx_data_line_fpen.Brush, points);
-                else g.FillPolygon(data_line_fpen.Brush, points);
+                if (local_mox) g.FillPolygon(tx_data_line_fpen.Brush, points, System.Drawing.Drawing2D.FillMode.Alternate);
+                else g.FillPolygon(data_line_fpen.Brush, points, System.Drawing.Drawing2D.FillMode.Alternate);
+               // g.FillPolygon(data_line_fpen.Brush, points, System.Drawing.Drawing2D.FillMode.Winding);
                 points[W] = points[W - 1];
                 points[W + 1] = points[W - 1];
                 data_line_pen.Color = data_line_color;
@@ -10161,7 +10162,7 @@ namespace PowerSDR
                             points[W + 1].Y += H;
                         }
                         data_line_pen.Color = Color.FromArgb(100, 255, 255, 255);
-                        g.FillPolygon(data_line_pen.Brush, points);
+                        g.FillPolygon(data_line_pen.Brush, points, System.Drawing.Drawing2D.FillMode.Alternate);
                         points[W] = points[W - 1];
                         points[W + 1] = points[W - 1];
                         data_line_pen.Color = data_line_color;

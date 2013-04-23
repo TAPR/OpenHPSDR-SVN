@@ -5386,52 +5386,7 @@ namespace PowerSDR
         {
             if (radGenModelFLEX5000.Checked)
             {
-                if (!console.fwc_init)
-                {
-                    // console.fwc_init = Pal.Init();
-                    if (console.fwc_init)
-                    {
-                        FWCEEPROM.Init();
-                        // console.CurrentRegion = FWCEEPROM.Region;
-                        FWC.SetPalCallback();
-                    }
-                }
-                if (console.fwc_init)
-                {
-                    switch (FWCEEPROM.Model)
-                    {
-                        case 0:
-                        case 1:
-                        case 2:
-                            console.CurrentModel = Model.FLEX5000;
-                            radGenModelFLEX5000.Text = "FLEX-5000";
-                            grpGeneralHardwareFLEX5000.Text = "FLEX-5000 Config";
-                            lblRFIORev.Visible = true;
-                            break;
-                        case 3:
-                            console.CurrentModel = Model.FLEX3000;
-                            radGenModelFLEX5000.Text = "FLEX-3000";
-                            grpGeneralHardwareFLEX5000.Text = "FLEX-3000 Config";
-                            lblRFIORev.Visible = false;
-                           // chkGenFLEX5000ExtRef.Visible = false;
-                            udTXFilterHigh.Maximum = 3650;
-                            if (comboAudioSampleRate1.Items.Contains(192000))
-                                comboAudioSampleRate1.Items.Remove(192000);
-                            if (comboAudioSampleRate1.SelectedIndex == -1)
-                                comboAudioSampleRate1.SelectedIndex = 1;
-                           // lblF3KFanTempThresh.Visible = true;
-                           // udF3KFanTempThresh.Visible = true;
-                            chkGenTX1Delay.Visible = true;
-                            lblGenTX1Delay.Visible = true;
-                            udGenTX1Delay.Visible = true;
-                            chkSigGenRX2.Visible = false;
-                            lblModel.Visible = false;
-                            lblSerialNum.Left = 16;
-                            chkGenOptionsShowATUPopup.Visible = true;
-                            break;
-                    }
-                }
-                comboAudioSoundCard.Text = "Unsupported Card";
+                 comboAudioSoundCard.Text = "Unsupported Card";
                 //comboAudioSampleRate1.Text = "96000";
 
                 foreach (PADeviceInfo p in comboAudioDriver1.Items)
@@ -5474,28 +5429,16 @@ namespace PowerSDR
                         MessageBoxIcon.Exclamation);*/
                     console.PowerEnabled = false;
                 }
+#if false
                 else
                 {
                     bool trx_ok, pa_ok, rfio_ok, rx2_ok, atu_ok;
-                    trx_ok = FWCEEPROM.TRXOK;
-                    pa_ok = FWCEEPROM.PAOK;
-                    rfio_ok = FWCEEPROM.RFIOOK;
-                    rx2_ok = FWCEEPROM.RX2OK;
-
+  
                     chkSigGenRX2.Visible = rx2_ok;
 
                     if (console.CurrentModel == Model.FLEX5000)
                         FWC.GetATUOK(out atu_ok);
                     else atu_ok = true;
-
-                    switch (FWCEEPROM.Model)
-                    {
-                        case 0: lblModel.Text = "Model: A"; break;
-                        case 1: lblModel.Text = "Model: C"; break;
-                        case 2: lblModel.Text = "Model: D"; break;
-                    }
-
-                    lblSerialNum.Text = "S/N: " + FWCEEPROM.SerialToString(FWCEEPROM.SerialNumber);
 
                     uint val;
                     FWC.GetFirmwareRev(out val);
@@ -5569,7 +5512,8 @@ namespace PowerSDR
                     else comboKeyerConnPrimary.Text = key;
                     comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                     chkPANewCal.Checked = true;
-                }
+                } 
+#endif
             }
             else console.PowerEnabled = true;
 
@@ -6698,17 +6642,6 @@ namespace PowerSDR
 
         private void btnGeneralCalImageStart_Click(object sender, System.EventArgs e)
         {
-            btnGeneralCalImageStart.Enabled = false;
-            progress = new Progress("Calibrate RX Image Rejection");
-
-            Thread t = new Thread(new ThreadStart(CalibrateRXImage));
-            t.Name = "RX Image Calibration Thread";
-            t.IsBackground = true;
-            t.Priority = ThreadPriority.AboveNormal;
-            t.Start();
-
-            if (console.PowerOn)
-                progress.Show();
         }
 
         private void CalibrateFreq()
@@ -6742,14 +6675,6 @@ namespace PowerSDR
             btnCalLevel.Enabled = true;
             UpdateDisplayMeter();
 
-        }
-
-
-        private void CalibrateRXImage()
-        {
-            bool done = console.CalibrateRXImage((float)udGeneralCalFreq3.Value, progress, false);
-            if (done) MessageBox.Show("RX Image Rejection Calibration complete.");
-            btnGeneralCalImageStart.Enabled = true;
         }
 
         private void chkGeneralDisablePTT_CheckedChanged(object sender, System.EventArgs e)
@@ -9696,15 +9621,7 @@ namespace PowerSDR
         {
             // RadioDSP.KeyerIambic = chkCWKeyerIambic.Checked;
             CWKeyer.Iambic = chkCWKeyerIambic.Checked;
-            console.CWIambic = chkCWKeyerIambic.Checked;
-            switch (console.CurrentModel)
-            {
-                case Model.FLEX3000:
-                case Model.FLEX5000:
-                    if (console.fwc_init)
-                        FWC.SetIambic(chkCWKeyerIambic.Checked);
-                    break;
-            }
+            console.CWIambic = chkCWKeyerIambic.Checked;          
         }
 
         private void udCWKeyerWeight_ValueChanged(object sender, System.EventArgs e)
@@ -10257,37 +10174,6 @@ namespace PowerSDR
             comboDSPDigTXBuf.Text = (string)dr["Digi_TX_DSP_Buffer"];
             comboDSPCWRXBuf.Text = (string)dr["CW_RX_DSP_Buffer"];
 
-            switch (console.CurrentModel)
-            {
-                case Model.FLEX5000:
-                    if (console.fwcMixForm != null)
-                    {
-                        console.fwcMixForm.MicInputSelected = (string)dr["Mic_Input_On"];
-                        console.fwcMixForm.MicInput = (int)dr["Mic_Input_Level"];
-                        console.fwcMixForm.LineInRCASelected = (string)dr["Line_Input_On"];
-                        console.fwcMixForm.LineInRCA = (int)dr["Line_Input_Level"];
-                        console.fwcMixForm.LineInPhonoSelected = (string)dr["Balanced_Line_Input_On"];
-                        console.fwcMixForm.LineInPhono = (int)dr["Balanced_Line_Input_Level"];
-                        console.fwcMixForm.LineInDB9Selected = (string)dr["FlexWire_Input_On"];
-                        console.fwcMixForm.LineInDB9 = (int)dr["FlexWire_Input_Level"];
-                    }
-                    break;
-
-                case Model.FLEX3000:
-                    if (console.flex3000MixerForm != null)
-                    {
-                        console.flex3000MixerForm.MicInputSelected = (string)dr["Mic_Input_On"];
-                        console.flex3000MixerForm.MicInput = (int)dr["Mic_Input_Level"];
-                        console.flex3000MixerForm.LineInDB9Selected = (string)dr["FlexWire_Input_On"];
-                        console.flex3000MixerForm.LineInDB9 = (int)dr["FlexWire_Input_Level"];
-                    }
-                    break;
-
-                default:
-                    // do nothing for other radios models
-                    break;
-            }
-
             current_profile = comboTXProfileName.Text;
         }
 
@@ -10417,32 +10303,7 @@ namespace PowerSDR
             dr["Digi_TX_DSP_Buffer"] = (string)comboDSPDigTXBuf.Text;
             dr["CW_RX_DSP_Buffer"] = (string)comboDSPCWRXBuf.Text;
 
-            switch (console.CurrentModel)
-            {
-                case Model.FLEX5000:
-                    dr["Mic_Input_On"] = (string)console.fwcMixForm.MicInputSelected;
-                    dr["Mic_Input_Level"] = (int)console.fwcMixForm.MicInput;
-                    dr["Line_Input_On"] = (string)console.fwcMixForm.LineInRCASelected;
-                    dr["Line_Input_Level"] = (int)console.fwcMixForm.LineInRCA;
-                    dr["Balanced_Line_Input_On"] = (string)console.fwcMixForm.LineInPhonoSelected;
-                    dr["Balanced_Line_Input_Level"] = (int)console.fwcMixForm.LineInPhono;
-                    dr["FlexWire_Input_On"] = (string)console.fwcMixForm.LineInDB9Selected;
-                    dr["FlexWire_Input_Level"] = (int)console.fwcMixForm.LineInDB9;
-                    break;
-
-                case Model.FLEX3000:
-                    dr["Mic_Input_On"] = (string)console.flex3000MixerForm.MicInputSelected;
-                    dr["Mic_Input_Level"] = (int)console.flex3000MixerForm.MicInput;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = (string)console.flex3000MixerForm.LineInDB9Selected;
-                    dr["FlexWire_Input_Level"] = (int)console.flex3000MixerForm.LineInDB9;
-                    break;
-
-                default:
-                    dr["Mic_Input_On"] = "0";
+                     dr["Mic_Input_On"] = "0";
                     dr["Mic_Input_Level"] = 0;
                     dr["Line_Input_On"] = "0";
                     dr["Line_Input_Level"] = 0;
@@ -10450,9 +10311,7 @@ namespace PowerSDR
                     dr["Balanced_Line_Input_Level"] = 0;
                     dr["FlexWire_Input_On"] = "0";
                     dr["FlexWire_Input_Level"] = 0;
-                    break;
-            }
-
+ 
             if (!comboTXProfileName.Items.Contains(name))
             {
                 DB.ds.Tables["TxProfile"].Rows.Add(dr);
@@ -12817,21 +12676,7 @@ namespace PowerSDR
         private FWCAnt old_ant = FWCAnt.ANT1;
         private void ckEnableSigGen_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (console.fwc_init)
-            {
-                if (ckEnableSigGen.Checked)
-                {
-                    old_ant = console.RX1Ant;
-                    console.RX1Ant = FWCAnt.SIG_GEN;
-                }
-                else console.RX1Ant = old_ant;
-                FWC.SetTest(ckEnableSigGen.Checked);
-                FWC.SetGen(ckEnableSigGen.Checked);
-                FWC.SetSig(ckEnableSigGen.Checked);
-            }
-
-            if (!console.FullDuplex)
-                FWC.SetFullDuplex(ckEnableSigGen.Checked);
+            
         }
 
         private void chkPANewCal_CheckedChanged(object sender, System.EventArgs e)
@@ -13376,14 +13221,14 @@ namespace PowerSDR
         private void chkGenTX1Delay_CheckedChanged(object sender, System.EventArgs e)
         {
             if (!console.fwc_init || console.CurrentModel != Model.FLEX3000) return;
-            FWC.SetAmpTX1DelayEnable(chkGenTX1Delay.Checked);
+           // FWC.SetAmpTX1DelayEnable(chkGenTX1Delay.Checked);
             udGenTX1Delay.Enabled = chkGenTX1Delay.Checked;
         }
 
         private void udGenTX1Delay_ValueChanged(object sender, System.EventArgs e)
         {
             if (!console.fwc_init || console.CurrentModel != Model.FLEX3000) return;
-            FWC.SetAmpTX1Delay((uint)udGenTX1Delay.Value);
+           // FWC.SetAmpTX1Delay((uint)udGenTX1Delay.Value);
         }
 
         private void comboAppSkin_SelectedIndexChanged(object sender, EventArgs e)

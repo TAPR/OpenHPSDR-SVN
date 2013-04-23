@@ -277,43 +277,6 @@
     <Compile Include="FilterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FWC\FLEX3000MixerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FWC\FLEX5000LLHWForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FWC\FLEX5000LPFForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FWC\FLEX5000RelayForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FWC\FLEX5000RX2CalForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FWC\fwc.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="FWC\fwcAntForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FWC\fwcatuform.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FWC\fwcCalForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FWC\fwcmixform.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FWC\fwc_atu.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="FWC\fwc_eeprom.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="FWC\pal.cs" />
     <Compile Include="hardware_v2.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -499,42 +462,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FilterForm.resx">
       <DependentUpon>FilterForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FWC\FLEX3000MixerForm.resx">
-      <DependentUpon>FLEX3000MixerForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FWC\FLEX5000LLHWForm.resx">
-      <DependentUpon>FLEX5000LLHWForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FWC\FLEX5000LPFForm.resx">
-      <DependentUpon>FLEX5000LPFForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FWC\FLEX5000RelayForm.resx">
-      <DependentUpon>FLEX5000RelayForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FWC\FLEX5000RX2CalForm.resx">
-      <DependentUpon>FLEX5000RX2CalForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FWC\fwcAntForm.resx">
-      <DependentUpon>fwcAntForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FWC\fwcatuform.resx">
-      <DependentUpon>fwcatuform.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FWC\fwcCalForm.resx">
-      <DependentUpon>fwcCalForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FWC\fwcmixform.resx">
-      <DependentUpon>fwcmixform.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="images\clock.jpg" />
