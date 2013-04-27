@@ -19,8 +19,6 @@
  *
  */
 
-
-
 #include <stdio.h> 
 #include "private.h"
 #include "Ozyutils.h"

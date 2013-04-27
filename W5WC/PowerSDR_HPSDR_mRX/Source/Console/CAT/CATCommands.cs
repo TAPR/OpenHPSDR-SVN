@@ -1892,7 +1892,7 @@ namespace PowerSDR
             }
 
         }
-
+     
         //Constructs the state word for DDUtil
         //read only
         public string ZZDU()
@@ -1902,28 +1902,47 @@ namespace PowerSDR
             string status = "";
 
             parser.nAns = 1;
-            status += ZZSW("") + sep;
+            status += ZZSW("") + sep; 
             status += ZZSP("") + sep;
             status += ZZTU("") + sep;
             status += ZZTX("") + sep;
-            status += "0:0:0:0:";
+           // status += ZZOA("") + sep;
+           // status += ZZOB("") + sep;
+           // status += ZZOC("") + sep;
+            status += "0:0:0:";
+
+            status += ZZRS("") + sep;
             status += ZZRT("") + sep;
+            status += ZZDM("") + sep;
+            status += ZZGT("") + sep;
+            status += ZZMU("") + sep;
+            status += ZZXS("") + sep;
 
             parser.nAns = 2;
             status += ZZAC("") + sep;
             status += ZZMD("") + sep;
             status += ZZME("") + sep;
             status += ZZFJ("") + sep;
+            status += ZZFI("") + sep;
 
             parser.nAns = 3;
+           // status += ZZOF("") + sep;
+            status += "000:";
             status += ZZBT("") + sep;
-               
+            status += ZZPC("") + sep;
+            status += ZZBS("") + sep;
+            status += ZZAG("") + sep;
+            status += ZZKS("") + sep;
+            status += ZZTO("") + sep;
+          
             parser.nAns = 4;
+           // status += ZZRV() + sep;
             status += "0000:";
             status += ZZSM("0") + sep;
 
             parser.nAns = 5;
             status += ZZRF("") + sep;
+           // status += ZZTS() + sep;
             status += "00000:";
             status += ZZXF("") + sep;
 

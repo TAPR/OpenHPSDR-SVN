@@ -90,6 +90,8 @@ extern KD5TFDVK6APHAUDIO_API int ReadI2C(struct usb_dev_handle *hdev, int i2c_ad
 extern KD5TFDVK6APHAUDIO_API int Set_I2C_Speed(struct usb_dev_handle *hdev, int speed);
 extern KD5TFDVK6APHAUDIO_API int WriteControlMsg(struct usb_dev_handle *hdev, int requesttype, int request, int value, 
                                               int index, unsigned char *bytes, int length, int timeout);
+extern void getI2CByte(int i2c_value);
+extern void getI2CBytes(int i2c_value);
 
 // IOThread rountines
 extern void *IOThreadMain(void *argp);
@@ -311,10 +313,10 @@ extern int FwdPower;
 extern int RefPower;
 extern int AlexFwdPower;
 
-extern int ApolloFilt;
-extern int ApolloTuner;
-extern int ApolloATU;
-extern int HermesFilt;
+int ApolloFilt;
+int ApolloTuner;
+int ApolloATU;
+int HermesFilt;
 
 extern int ADC_Overloads;
 extern float swr_protect;
