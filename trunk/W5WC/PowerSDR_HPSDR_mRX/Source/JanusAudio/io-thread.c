@@ -702,7 +702,7 @@ void ForceCandCFrame(void) {
 	Sleep(10);
 	ForceCandCFrames(1, 6, VFOfreq_rx2);
 
-	if(nreceivers == 2) {
+	if(nreceivers == 2 || nreceivers == 4) {
 	Sleep(10);
 	ForceCandCFrames(1, 8, VFOfreq_rx3);
 	Sleep(10);
@@ -1282,7 +1282,6 @@ void IOThreadMainLoop(void) {
 					case 13: //RX7 VFO
 						FPGAWriteBufp[writebufpos] |= 0x10;
 						break;
-
 					}
 
 					ControlBytesOut[0] = FPGAWriteBufp[writebufpos];

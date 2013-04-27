@@ -7134,9 +7134,9 @@ namespace PowerSDR
             // draw RX filter
             if (!local_mox)// && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
             {
-                int filter_left_x = (int)((float)(filter_low - Low - f_diff - rit_hz) / width * W);
-                int filter_right_x = (int)((float)(filter_high - Low - f_diff - rit_hz) / width * W);
-                
+                 int filter_left_x = (int)((float)(filter_low - Low - f_diff) / width * W);
+                 int filter_right_x = (int)((float)(filter_high - Low - f_diff) / width * W);
+             
                 // make the filter display at least one pixel wide.
                 if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
 

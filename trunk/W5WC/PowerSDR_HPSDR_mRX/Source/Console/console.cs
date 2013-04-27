@@ -13250,8 +13250,8 @@ namespace PowerSDR
                     retval = CheckValidTXFreq_Private(r, f);
                     break;
                 case DSPMode.DRM:
-                    retval = (CheckValidTXFreq_Private(r, f + Display.TXFilterLow * 1e-6) &&
-                        CheckValidTXFreq_Private(r, f + Display.TXFilterHigh * 1e-6));
+                    retval = (CheckValidTXFreq_Private(r, f - 0.012 + Display.TXFilterLow * 1e-6) &&
+                        CheckValidTXFreq_Private(r, f - 0.012 + Display.TXFilterHigh * 1e-6));
                     break;
             }
 
@@ -15261,7 +15261,7 @@ namespace PowerSDR
                 return false;
             }
             calibration_running = true;
-            JanusAudio.FreqCorrectionFactor = 1.0;
+           // JanusAudio.FreqCorrectionFactor = 1.0;
             SetupForm.HPSDRFreqCorrectFactor = 1.0;         // TURN-OFF CORRECTION
 
             string vfo_freq_text = txtVFOAFreq.Text;		// save current frequency
@@ -15320,7 +15320,7 @@ namespace PowerSDR
             // Calculate the frequency difference between the known signal and the measured signal
             double diff = bin_width * (fft_size / 2 - max_index);
             double correct_factor = 1.0d - ((diff / (double)(freq * 1e6)));
-            JanusAudio.FreqCorrectionFactor = correct_factor;
+           // JanusAudio.FreqCorrectionFactor = correct_factor;
             SetupForm.HPSDRFreqCorrectFactor = correct_factor;  //TURN-ON CORRECTION
 
             SetupForm.RXOnly = rx_only;				    	// restore RX Only setting
@@ -19117,6 +19117,7 @@ namespace PowerSDR
                     {
                         case DSPMode.DIGL:
                         case DSPMode.DIGU:
+                        case DSPMode.DRM:
                             SetupForm.VACEnable = true;
                             break;
                         default:
@@ -21237,6 +21238,7 @@ namespace PowerSDR
                   }  */
 
             }
+            if (initializing) return;
 
             JanusAudio.SetVFOfreqRX1(rx1_dds_freq_mhz);
             // JanusAudio.SetVFOfreqRX2(rx1_dds_freq_mhz);
@@ -24024,6 +24026,18 @@ namespace PowerSDR
                     }
                 }
 
+            }
+        }
+
+        private bool apollo_tuner_enabled = false;
+        public bool ApolloTunerEnabled
+        {
+            get { return apollo_tuner_enabled; }
+            set
+            {
+                apollo_tuner_enabled = value;
+                if (apollo_tuner_enabled) JanusAudio.EnableApolloTuner(1);
+                else JanusAudio.EnableApolloTuner(0);
             }
         }
 
@@ -32371,11 +32385,11 @@ namespace PowerSDR
                 return;
             }
 
-            if (current_hpsdr_hardware == HPSDRHW.Angelia && current_hpsdr_model != HPSDRModel.ANAN100D)
+          /*  if (current_hpsdr_hardware == HPSDRHW.Angelia && current_hpsdr_model != HPSDRModel.ANAN100D)
             {
                 chkMOX.Checked = false;
                 return;
-            }
+            } */
 
             if (allow_mox_bypass && current_ptt_mode != PTTMode.MIC && 
                                     current_ptt_mode != PTTMode.SPACE && 
@@ -32997,6 +33011,9 @@ namespace PowerSDR
                     JanusAudio.SetUserOut2(1);
                 }
 
+                if (apollopresent && apollo_tuner_enabled)
+                    JanusAudio.EnableApolloAutoTune(1);
+
                 /*if(atu_present && tx_band != Band.B2M &&
                     (ATUTuneMode)comboTuneMode.SelectedIndex != ATUTuneMode.BYPASS)
                 {
@@ -33040,6 +33057,9 @@ namespace PowerSDR
                     }
                 }
 
+                if (apollopresent)
+                    JanusAudio.EnableApolloAutoTune(0);
+
                 /*if(!(atu_present && tx_band != Band.B2M &&
                     (ATUTuneMode)comboTuneMode.SelectedIndex != ATUTuneMode.BYPASS))
                 {
@@ -33055,12 +33075,12 @@ namespace PowerSDR
                     }
                 }*/
 
-                if (!(atu_present && tx_band != Band.B2M &&
+              /*  if (!(atu_present && tx_band != Band.B2M &&
                      (ATUTuneMode)comboTuneMode.SelectedIndex != ATUTuneMode.BYPASS))
                 {
                     if (tx_xvtr_index < 0 || xvtr_tune_power)
                         TunePower = ptbPWR.Value;
-                }
+                } */
 
                 PWR = PreviousPWR;
                 //DttSP.SetMode(1, 0, rx1_dsp_mode);
@@ -33779,7 +33799,10 @@ namespace PowerSDR
                   {
                       VFOAFreq = center_frequency + ((-sample_rate1 / 2) + 1) * 0.0000010;
                       return;
-                  } 
+                  }
+
+                  if (chkRIT.Checked)
+                      rx1_osc -= (int)udRIT.Value;// *0.000001;
 
                 if (rx1_osc > -sample_rate1 / 2 && rx1_osc < sample_rate1 / 2)
                 {
@@ -36812,8 +36835,8 @@ namespace PowerSDR
                                 else
                                 {
                                     if (!click_tune_display)
-                                    freq = double.Parse(txtVFOAFreq.Text) + (double)x * 0.0000010;
-                                    else freq = center_frequency + (double)x * 0.0000010;
+                                        freq = double.Parse(txtVFOAFreq.Text) + (double)x * 0.0000010;
+                                        else freq = center_frequency + (double)x * 0.0000010;
 
                                     switch (rx1_dsp_mode)
                                     {
@@ -38095,7 +38118,7 @@ namespace PowerSDR
                     break;
                 case DSPMode.DRM:
                     radModeDRM.BackColor = SystemColors.Control;
-                    //if_shift = true;
+                   // if_shift = true;
                     vfo_offset = 0.0;
                     if (vac_auto_enable &&
                         new_mode != DSPMode.DIGL &&
@@ -38348,7 +38371,7 @@ namespace PowerSDR
                     break;
                 case DSPMode.DRM:
                     if_shift = false;
-                    vfo_offset = 0.0;
+                    vfo_offset = -0.012;
                     radModeDRM.BackColor = button_selected_color;
                     //grpMode.Text = "Mode - DRM";
                     if (vac_auto_enable)
@@ -38363,8 +38386,7 @@ namespace PowerSDR
                     ptbFilterShift.Enabled = false;
                     btnFilterShiftReset.Enabled = false;
                     //grpFilter.Text = "Filter - DRM";
-                  //  radio.GetDSPRX(0, 0).SetRXFilter(7000, 17000);
-                    radio.GetDSPRX(0, 0).SetRXFilter(-5000, 5000);
+                    radio.GetDSPRX(0, 0).SetRXFilter(7000, 17000);
                     /*Display.RXDisplayLow = -8000;
                         Display.RXDisplayHigh = 8000;*/
                     panelModeSpecificDigital.BringToFront();
@@ -39900,6 +39922,7 @@ namespace PowerSDR
             {
                 chkRIT.BackColor = button_selected_color;
                 chkRIT.ForeColor = Color.Red;
+                if(!click_tune_display)
                 Display.RIT = (int)udRIT.Value;
             }
             else
@@ -39917,7 +39940,7 @@ namespace PowerSDR
         {
             if (chkRIT.Checked && !mox)
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-            if (chkRIT.Checked) Display.RIT = (int)udRIT.Value;
+            if (chkRIT.Checked && !click_tune_display) Display.RIT = (int)udRIT.Value;
 
             /*if(udRIT.Focused)
                 btnHidden.Focus();*/
@@ -39927,20 +39950,10 @@ namespace PowerSDR
         {
             if (chkXIT.Checked)
             {
-                if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                {
-                    if (chkVFOSplit.Checked || full_duplex)
+                     if (chkVFOSplit.Checked)
                         txtVFOBFreq_LostFocus(this, EventArgs.Empty);
                     else
                         txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-                }
-                else
-                {
-                    if (chkVFOSplit.Checked)
-                        txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-                    else
-                        txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-                }
             }
 #if false
 			//wjtFIXME
@@ -41766,7 +41779,7 @@ namespace PowerSDR
                     break;
                 case DSPMode.DRM:
                     // rx2_if_shift = false;
-                   // rx2_vfo_offset = -0.012;
+                    rx2_vfo_offset = -0.012;
                     radRX2ModeDRM.BackColor = button_selected_color;
                     //grpRX2Mode.Text = "RX2 Mode - DRM";
                     if (rx2_enabled && vac2_auto_enable)
@@ -46023,7 +46036,14 @@ namespace PowerSDR
         private void chkFWCATU_CheckedChanged(object sender, EventArgs e)
         {
             // if (SetupForm != null) SetupForm.X2TR = chkX2TR.Checked;
-            ClickTuneDisplay = chkFWCATU.Checked;
+          //  if (chkFWCATU.Checked)
+            {
+                bool rit_on = chkRIT.Checked;
+                chkRIT.Checked = false;
+                ClickTuneDisplay = chkFWCATU.Checked;
+                chkRIT.Checked = rit_on;
+            }
+          //  else ClickTuneDisplay = false;
 
             // if (chkX2TR.Checked) chkX2TR.BackColor = button_selected_color;
             // else chkX2TR.BackColor = SystemColors.Control;

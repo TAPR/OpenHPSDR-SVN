@@ -301,90 +301,6 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 
 }
 
-
-// ff in hz 
-KD5TFDVK6APHAUDIO_API void SetRX1VFOfreq(int rx1) {
-         VFOfreq_rx1 = rx1; // center
-       return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetRX2VFOfreq(int rx2) {
-       VFOfreq_rx2 = rx2;
-       return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetRX3VFOfreq(int rx3) {
-       VFOfreq_rx3 = rx3;
-       return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetRX4VFOfreq(int rx4) {
-       VFOfreq_rx4 = rx4;
-       return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetRX5VFOfreq(int rx5) {
-       VFOfreq_rx5 = rx5; 
-       return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetRX6VFOfreq(int rx6) {
-       VFOfreq_rx6 = rx6;
-       return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetRX7VFOfreq(int rx7) {
-       VFOfreq_rx7 = rx7;
-       return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(int tx) {
-       VFOfreq_tx = tx;
-        return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetUserOut0(int out) {
-        if ( out == 0 ) {
-                UserOut0 = 0;
-        }
-        else {
-                UserOut0 = 1;
-        }
-       return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetUserOut1(int out) {
-       UserOut1 = out;
-        if ( out == 0 ) {
-                UserOut1 = 0;
-        }
-        else {
-                UserOut1 = 0x2;
-        }
-        return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetUserOut2(int out) {
-       UserOut2 = out;
-        if ( out == 0 ) {
-                UserOut2 = 0;
-        }
-        else {
-                UserOut2 = 0x4;
-        }
-        return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetUserOut3(int out) {
-       UserOut3 = out;
-        if ( out == 0 ) {
-                UserOut3 = 0;
-        }
-        else {
-                UserOut3 = 0x8;
-        }
-        return;
-}
 //
 // StopAudio -- undo what start audio did.  Close/Free/Destroy that which StartAudio Opened/Alloc'd/Created.
 //
@@ -438,23 +354,288 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
         return;
 }
 
+/*
+C0
+0 0 0 0 0 0 0 0
+          | | |
+          | | + --------- PTT  (1 = active, 0 = inactive), GPIO[23]= Ozy J8-8, Hermes J16-1 
+          | +------------ DASH (1 = active, 0 = inactive), GPIO[21]= Ozy J8-6, Hermes J6-2
+          +-------------- DOT  (1 = active, 0 = inactive), GPIO[22]= Ozy J8-7, Hermes J6-3 
+*/
+
+int getDDPTTcount = 0; 
+int last_DDP = 0; 
+
+KD5TFDVK6APHAUDIO_API int nativeGetDotDashPTT() {
+		
+	if ( last_DDP != (DotDashBits & 0x7) ) { 
+		last_DDP = DotDashBits & 0x7; 
+	//	printf("ddp: 0x%04x\n", last_DDP);  fflush(stdout); 
+	}		
+    return DotDashBits & 0x7;
+}
+
+/*
+C1 
+0 0 0 0 0 0 0 0
+  | | | | | | |
+  | | | | | | +---------- LT2208 Overflow (1 = active, 0 = inactive)
+  | | | | | +------------ Hermes I01 (0 = active, 1 = inactive)
+  | | | | +-------------- Hermes I02 (0 = active, 1 = inactive)
+  | | | +---------------- Hermes I03 (0 = active, 1 = inactive)
+  | | +------------------ Hermes I04 (0 = active, 1 = inactive)
+  | +-------------------- Cyclops PLL locked (0 = unlocked, 1 = locked)
+  +---------------------- Cyclops - Mercury frequency changed, bit toggles   
+ */
+
+KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() { 
+	int n; 
+	if ( !isMetis ) { 
+	getI2CBytes(I2C_MERC1_ADC_OFS);
+	getI2CBytes(I2C_MERC2_ADC_OFS);
+	//getI2CBytes(I2C_MERC3_ADC_OFS);
+	//getI2CBytes(I2C_MERC4_ADC_OFS);
+	}
+	n = ADC_Overloads; 
+	ADC_Overloads = 0; 
+	return n; 
+} 
+
+//C2 – 	Mercury software serial number  (0 to 255) - set to 0 when Hermes
+
+KD5TFDVK6APHAUDIO_API int getMercuryFWVersion() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_MERC1_FW);
+	}
+	return MercuryFWVersion; 
+} 
+
+//C3 -  Penelope software serial number (0 to 255) – set to 0 when Hermes
+
+KD5TFDVK6APHAUDIO_API int getPenelopeFWVersion() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_PENNY_FW);
+	}
+	return PenelopeFWVersion; 
+} 
+
+//C4 -  Ozy/Magister or Metis or Hermes software serial number (0 to 255) 
+
+KD5TFDVK6APHAUDIO_API int getOzyFWVersion() { 
+	return OzyFWVersion; 
+} 
+
+/*
+C0
+0 0 0 0 1 x x x    
+C1 – Bits 15-8 of Forward Power from Penelope or Hermes* (AIN5)
+C2 - Bits 7-0  of Forward Power from Penelope or Hermes* (AIN5)
+C3 – Bits 15-8 of Forward Power from Alex or Apollo*(AIN1)
+C4 – Bits 7-0  of Forward Power from Alex or Apollo*(AIN1)
+*/
+
+KD5TFDVK6APHAUDIO_API int getFwdPower() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_PENNY_ALC);
+	}
+	return FwdPower; 
+} 
+
+KD5TFDVK6APHAUDIO_API int getAlexFwdPower() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_PENNY_FWD);
+	}
+	return AlexFwdPower; 
+} 
+
+/*
+C0
+0 0 0 1 0 x x x    
+C1 – Bits 15-8 of Reverse Power from Alex or Apollo*(AIN2)
+C2 - Bits 7-0  of Reverse Power from Alex or Apollo*(AIN2)
+C3 – Bits 15-8 of AIN3 from Penny or Hermes*
+C4 – Bits 7-0  of AIN3 from Penny or Hermes*
+*/
+
+KD5TFDVK6APHAUDIO_API int getRefPower() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_PENNY_REV);
+	}
+	return RefPower; 
+} 
+
+/*
+C0
+0 0 0 1 1 x x x    
+C1 – Bits 15-8 of AIN4 from Penny or Hermes*
+C2 - Bits 7-0  of AIN4 from Penny or Hermes*
+C3 – Bits 15-8 of AIN6,13.8v supply on Hermes*
+C4 – Bits 7-0  of AIN6,13.8v supply on Hermes*
+*/
+
+KD5TFDVK6APHAUDIO_API int getHermesDCVoltage() { 
+	return HermesDCV;
+} 
+
+/*
+C0
+0 0 1 0 0 x x x    
+C1 
+0 0 0 0 0 0 0 0
+|           | |
+|           | +---------- Mercury 1 LT2208 Overflow (1 = active, 0 = inactive)
++-----------+------------ Mercury 1 software version (0 to 127)
+(NOTE: This is a duplicate of C0 = 00000xxx to maintain software
+ compatibility)
+ */
+
+
+/*
+C2 
+0 0 0 0 0 0 0 0
+|           | |
+|           | +---------- Mercury 2 LT2208 Overflow (1 = active, 0 = inactive)
++-----------+------------ Mercury 2 software version (0 to 127)
+*/
+
+KD5TFDVK6APHAUDIO_API int getMercury2FWVersion() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_MERC2_FW);
+	}
+	return Mercury2FWVersion; 
+} 
+
+/*
+C3 
+0 0 0 0 0 0 0 0
+|           | |
+|           | +---------- Mercury 3 LT2208 Overflow (1 = active, 0 = inactive)
++-----------+------------ Mercury 3 software version (0 to 127) 
+*/
+
+KD5TFDVK6APHAUDIO_API int getMercury3FWVersion() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_MERC3_FW);
+	}
+	return Mercury3FWVersion; 
+} 
+
+/*
+C4 
+0 0 0 0 0 0 0 0
+|           | |
+|           | +---------- Mercury 4 LT2208 Overflow (1 = active, 0 = inactive)
++-----------+------------ Mercury 4 software version (0 to 127) 
+*/
+
+KD5TFDVK6APHAUDIO_API int getMercury4FWVersion() { 
+	if ( !isMetis ) { 
+		getI2CBytes(I2C_MERC4_FW);
+	}
+	return Mercury4FWVersion; 
+} 
+
+/*
+C0
+0 0 0 0 0 0 0 0
+              | 
+              +------------ MOX (1 = active, 0 = inactive)
+*/
+
+KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmit) { 
+        if ( xmit != 0 ) {
+                XmitBit = 1;
+        }
+        else {
+                XmitBit = 0;
+        }
+}
+
+/*
+C1
+0 0 0 0 0 0 0 0
+| | | | | | | |
+| | | | | | + +------------ Speed (00 = 48kHz, 01 = 96kHz, 10 = 192kHz, 11 = 384kHz)
+| | | | + +---------------- 10MHz Ref. (00 = Atlas/Excalibur, 01 = Penelope, 10 = Mercury)
+| | | +-------------------- 122.88MHz source (0 = Penelope, 1 = Mercury)
+| + +---------------------- Config (00 = nil, 01 = Penelope, 10 = Mercury, 11 = both)
++-------------------------- Mic source (0 = Janus, 1 = Penelope)
+*/
+
 KD5TFDVK6APHAUDIO_API void SetC1Bits(int bits) { 
 	C1Mask = bits; 
 	return;
 }
 
-KD5TFDVK6APHAUDIO_API int GetC1Bits(void) { 
-	return C1Mask; 
-}
+/*
+C2
+0 0 0 0 0 0 0 0
+|           | |
+|           | +------------ Mode (1 = Class E, 0 = All other modes)
++---------- +-------------- Open Collector Outputs on Penelope or Hermes (bit 6…..bit 0)
+*/
 
+KD5TFDVK6APHAUDIO_API void EnableEClassModulation(int bit) { 
+        if ( bit != 0 ) {
+                EClass = 1;
+        }
+        else {
+                EClass = 0;
+        }
+}
 
 KD5TFDVK6APHAUDIO_API void SetPennyOCBits(int b) { 
 	PennyOCBits = b << 1; 
 	return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetSWRProtect(float g) { 
-	swr_protect = g; 
+/*
+C3
+0 0 0 0 0 0 0 0
+| | | | | | | |
+| | | | | | + +------------ Alex Attenuator (00 = 0dB, 01 = 10dB, 10 = 20dB, 11 = 30dB)
+| | | | | +---------------- Preamp On/Off (0 = Off, 1 = On)
+| | | | +------------------ LT2208 Dither (0 = Off, 1 = On)
+| | | + ------------------- LT2208 Random (0= Off, 1 = On)
+| + + --------------------- Alex Rx Antenna (00 = none, 01 = Rx1, 10 = Rx2, 11 = XV)
++ ------------------------- Alex Rx out (0 = off, 1 = on). Set if Alex Rx Antenna > 0.
+*/
+
+KD5TFDVK6APHAUDIO_API void SetAlexAtten(int bits) { 
+	AlexAtten = bits; 
+	if ( AlexAtten > 3 ) AlexAtten = 0; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetMercPreamp(int bits) { 
+	if ( bits != 0 ) { 
+		MercPreamp = (1 << 2); 
+		Merc1Preamp = bits;
+	} 
+	else { 
+		MercPreamp = 0;
+		Merc1Preamp = 0;
+	}	
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetMercDither(int bits) { 
+	if ( bits != 0 ) { 
+		MercDither = (1 << 3); 
+	} 
+	else { 
+		MercDither = 0;
+	}	
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetMercRandom(int bits) { 
+	if ( bits != 0 ) { 
+		MercRandom = (1 << 4); 
+	} 
+	else { 
+		MercRandom = 0; 
+	}	
 	return;
 }
 
@@ -475,6 +656,29 @@ KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out) {
 	return;
 }
 
+/*
+C4 
+0 0 0 0 0 0 0 0
+| | | | | | | |
+| | | | | | + + ----------- Alex Tx relay (00 = Tx1, 01= Tx2, 10 = Tx3)
+| | | | | + --------------- Duplex (0 = off, 1 = on)
+| | + + +------------------ Number of Receivers (000 = 1, 111 = 8)
+| +------------------------ Time stamp – 1PPS on LSB of Mic data (0 = off, 1 = on)
++-------------------------- Common Mercury Frequency (0 = independent frequencies to Mercury 
+			      Boards, 1 = same frequency to all Mercury boards)
+*/
+
+
+KD5TFDVK6APHAUDIO_API void SetDuplex(int dupx) {   // dupx == 0, half duplex, != 0, full duplex
+        if ( dupx != 0 ) {
+                Duplex = (1 << 2);
+        }
+        else {
+                Duplex = 0;
+        }
+		return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetNRx(int nrx) {  
 	receivers = nrx * 2;
 	nreceivers = nrx;
@@ -483,45 +687,169 @@ KD5TFDVK6APHAUDIO_API void SetNRx(int nrx) {
 	return;
 }
 
-int getDDPTTcount = 0; 
-int last_DDP = 0; 
+/*
+C0
+0 0 0 0 0 0 1 x     C1, C2, C3, C4 NCO Frequency in Hz for Transmitter, Apollo ATU
+                   (32 bit binary representation - MSB in C1) 
+C0
+0 0 0 0 0 1 0 x     C1, C2, C3, C4   NCO Frequency in Hz for Receiver_1
+C0
+0 0 0 0 0 1 1 x     C1, C2, C3, C4   NCO Frequency in Hz for Receiver _2 
+C0
+0 0 0 0 1 0 0 x     C1, C2, C3, C4   NCO Frequency in Hz for Receiver _3 
+C0
+0 0 0 0 1 0 1 x     C1, C2, C3, C4   NCO Frequency in Hz for Receiver _4 
+C0
+0 0 0 0 1 1 0 x     C1, C2, C3, C4   NCO Frequency in Hz for Receiver _5 
+C0
+0 0 0 0 1 1 1 x     C1, C2, C3, C4   NCO Frequency in Hz for Receiver _6 
+C0
+0 0 0 1 0 0 0 x     C1, C2, C3, C4   NCO Frequency in Hz for Receiver _7 
+*/
 
-KD5TFDVK6APHAUDIO_API int nativeGetDotDashPTT() {
-		
-	if ( last_DDP != (DotDashBits & 0x7) ) { 
-		last_DDP = DotDashBits & 0x7; 
-	//	printf("ddp: 0x%04x\n", last_DDP);  fflush(stdout); 
-	}		
-    return DotDashBits & 0x7;
+// ff in hz 
+KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(int tx) {
+       VFOfreq_tx = tx;
+        return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetRX1VFOfreq(int rx1) {
+         VFOfreq_rx1 = rx1; 
+       return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetRX2VFOfreq(int rx2) {
+       VFOfreq_rx2 = rx2;
+       return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetRX3VFOfreq(int rx3) {
+       VFOfreq_rx3 = rx3;
+       return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetRX4VFOfreq(int rx4) {
+       VFOfreq_rx4 = rx4;
+       return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetRX5VFOfreq(int rx5) {
+       VFOfreq_rx5 = rx5; 
+       return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetRX6VFOfreq(int rx6) {
+       VFOfreq_rx6 = rx6;
+       return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetRX7VFOfreq(int rx7) {
+       VFOfreq_rx7 = rx7;
+       return;
+}
+
+/*
+C0
+0 0 0 1 0 0 1 x    
+C1
+0 0 0 0 0 0 0 0
+|             |
++-------------+------------ Hermes/PennyLane Drive Level (0-255)
+*/
+
+KD5TFDVK6APHAUDIO_API void SetOutputPowerFactor(int u) {
+	OutputPowerFactor = (unsigned int)(u & 0xff);
+}
+
+/*
+C2
+0 0 0 0 0 0 0 0
+| | | | | | | |
+| | | | | | | +------------ Hermes/Metis Penelope Mic boost (0 = 0dB, 1 = 20dB)
+| | | | | | +-------------- Metis/Penelope or PennyLane Mic/Line-in (0 = mic, 1 = Line-in)
+| | | | | +---------------- Hermes – Enable/disable Apollo filter (0 = disable, 1 = enable)
+| | | | +------------------ Hermes – Enable/disable Apollo tuner (0 = disable, 1 = enable)
+| | | +-------------------- Hermes – Apollo auto tune (0 = end, 1 = start)
+| | +---------------------- Hermes – select filter board (0 = Alex, 1 = Apollo)
+| +------------------------ Alex   - manual HPF/LPF filter select (0 = disable, 1 = enable)
++-------------------------- VNA Mode (0 = off, 1 = on)
+*/
+
+KD5TFDVK6APHAUDIO_API void SetMicBoost(int bits) { 
+        if ( bits != 0 ) {
+                MicBoost = 1;
+        }
+        else {
+                MicBoost = 0;
+        }
+		return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetLineIn(int bits) { 
+	if ( bits != 0 ) { 
+		LineIn = 0x2; 
+	} 
+	else { 
+		LineIn = 0;
+	}	
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableApolloFilter(int bits) { 
+	if (bits != 0)
+		ApolloFilt = 0x4; 
+	else
+		ApolloFilt = 0;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableApolloTuner(int bits) { 
+	if (bits != 0)
+		ApolloTuner = 0x8; 
+	else
+		ApolloTuner = 0;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableApolloAutoTune(int bits) { 
+	if (bits != 0)
+		ApolloATU = 0x10; 
+	else
+		ApolloATU = 0;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetHermesFilter(int bits) { 
+	if (bits != 0)
+		HermesFilt = 0x20; 
+	else
+		HermesFilt = 0;
+	return;
 }
 
 KD5TFDVK6APHAUDIO_API void SetAlexManEnable(int bit) { 
-        if ( bit == 0 ) {
+        if ( bit != 0 ) {
+                AlexManEnable = 0x40;
+        }
+        else {
                 AlexManEnable = 0;
         }
-        else {
-                AlexManEnable = 0x40; //(1 << 6);
-        }
 //printf("SetAlexEnable: %d\n", bit); fflush(stdout); 
 }
 
-KD5TFDVK6APHAUDIO_API void SetAlexEnabled(int bit) { 
-        if ( bit == 0 ) {
-                AlexEnabled = 0;
-        }
-        else {
-                AlexEnabled = 1;
-        }
-//printf("SetAlexEnable: %d\n", bit); fflush(stdout); 
-}
-
-KD5TFDVK6APHAUDIO_API void SetAlexTRRelayBit(int bit) { 
-	if (bit == 1)
-		AlexTRRelay = 0x80; 
-	else
-		AlexTRRelay = 0;
-	return;
-}
+/*
+C3
+0 0 0 0 0 0 0 0
+| | | | | | | |
+| | | | | | | +------------ Alex   -	select 13MHz  HPF (0 = disable, 1 = enable)
+| | | | | | +-------------- Alex   -	select 20MHz  HPF (0 = disable, 1 = enable)
+| | | | | +---------------- Alex   -	select 9.5MHz HPF (0 = disable, 1 = enable)
+| | | | +------------------ Alex   -	select 6.5MHz HPF (0 = disable, 1 = enable)
+| | | +-------------------- Alex   -	select 1.5MHz HPF (0 = disable, 1 = enable)
+| | +---------------------- Alex   -	Bypass all HPFs   (0 = disable, 1 = enable)
+| +------------------------ Alex   -	6M low noise amplifier (0 = disable, 1 = enable)
++-------------------------- Disable Alex T/R relay (0 = enable, 1 = disable) 
+*/
 
 KD5TFDVK6APHAUDIO_API void SetAlexHPFBits(int bits) { 
 	AlexHPFMask = bits; 
@@ -543,6 +871,27 @@ KD5TFDVK6APHAUDIO_API void SetAlex4HPFBits(int bits) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetAlexTRRelayBit(int bit) { 
+	if (bit != 0)
+		AlexTRRelay = 0x80; 
+	else
+		AlexTRRelay = 0;
+	return;
+}
+
+/*
+C4
+0 0 0 0 0 0 0 0
+  | | | | | | |
+  | | | | | | +------------ Alex   - 	select 30/20m LPF (0 = disable, 1 = enable)
+  | | | | | +-------------- Alex   - 	select 60/40m LPF (0 = disable, 1 = enable)
+  | | | | +---------------- Alex   - 	select 80m    LPF (0 = disable, 1 = enable)
+  | | | +------------------ Alex   - 	select 160m   LPF (0 = disable, 1 = enable)
+  | | +-------------------- Alex   - 	select 6m     LPF (0 = disable, 1 = enable)
+  | +---------------------- Alex   - 	select 12/10m LPF (0 = disable, 1 = enable)
+  +------------------------ Alex   - 	select 17/15m LPF (0 = disable, 1 = enable)
+ */
+
 KD5TFDVK6APHAUDIO_API void SetAlexLPFBits(int bits) { 
 	AlexLPFMask = bits; 
 	return;
@@ -563,123 +912,17 @@ KD5TFDVK6APHAUDIO_API void SetAlex4LPFBits(int bits) {
 	return;
 }
 
-KD5TFDVK6APHAUDIO_API void EnableApolloFilter(int bits) { 
-	if (bits == 1)
-		ApolloFilt = 0x4; 
-	else
-		ApolloFilt = 0;
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void EnableApolloTuner(int bits) { 
-	if (bits == 1)
-		ApolloTuner = 0x8; 
-	else
-		ApolloTuner = 0;
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void EnableApolloAutoTune(int bits) { 
-	if (bits == 1)
-		ApolloATU = 0x10; 
-	else
-		ApolloATU = 0;
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void EnableEClassModulation(int bit) { 
-        if ( bit == 0 ) {
-                EClass = 0;
-        }
-        else {
-                EClass = 1;
-        }
-}
-
-KD5TFDVK6APHAUDIO_API void SetHermesFilter(int bits) { 
-	if (bits == 1)
-		HermesFilt = 0x20; 
-	else
-		HermesFilt = 0;
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmit) {   // bit xmitbit ==0, recv mode, != 0, xmit mode
-        if ( xmit == 0 ) {
-                XmitBit = 0;
-        }
-        else {
-                XmitBit = 1;
-        }
-}
-
-KD5TFDVK6APHAUDIO_API void SetDuplex(int dupx) {   // dupx == 0, half duplex, != 0, full duplex
-        if ( dupx != 0 ) {
-                Duplex = (1 << 2);
-        }
-        else {
-                Duplex = 0;
-        }
-		return;
-}
-
-KD5TFDVK6APHAUDIO_API void EnableHermesPower(int enabled) { 
-	printf("HermesPowerEndabled: %d\n", enabled); fflush(stdout); 
-	HermesPowerEnabled = enabled; 
-} 
-
-KD5TFDVK6APHAUDIO_API void SetMicBoost(int bits) { // 0 == 0dB, 1 == 20dB
-        if ( bits == 0 ) {
-                MicBoost = 0;
-        }
-        else {
-                MicBoost = 1;
-        }
-		return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetLineIn(int bits) { // 0 == Mic-In, 1 == Line-In
-	if ( bits != 0 ) { 
-		LineIn = (1 << 1); 
-	} 
-	else { 
-		LineIn = 0;
-	}	
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetLineBoost(int bits) {
-		LineBoost = bits;
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetAlexAtten(int bits) { 
-	AlexAtten = bits; 
-	if ( AlexAtten > 3 ) AlexAtten = 0; 
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetMercDither(int bits) { 
-	if ( bits != 0 ) { 
-		MercDither = (1 << 3); 
-	} 
-	else { 
-		MercDither = 0;
-	}	
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetMercPreamp(int bits) { 
-	if ( bits != 0 ) { 
-		MercPreamp = (1 << 2); 
-		Merc1Preamp = bits;
-	} 
-	else { 
-		MercPreamp = 0;
-		Merc1Preamp = 0;
-	}	
-	return;
-}
+/*
+C0
+0 0 0 1 0 1 0 x   
+C1
+0 0 0 0 0 0 0 0
+        | | | |
+        | | | +------------ Rx1 pre-amp (0=OFF, 1= ON)
+        | | +-------------- Rx2 pre-amp (0=OFF, 1= ON)
+        | +---------------- Rx3 pre-amp (0=OFF, 1= ON)
+        +------------------ Rx4 pre-amp (0=OFF, 1= ON)
+*/
 
 KD5TFDVK6APHAUDIO_API void SetMerc2Preamp(int bits) { 
 	if ( bits != 0 ) { 
@@ -689,6 +932,89 @@ KD5TFDVK6APHAUDIO_API void SetMerc2Preamp(int bits) {
 		Merc2Preamp = 0; 
 	}	
 	return;
+}
+
+/*
+C2
+0 0 0 0 0 0 0 0
+      | | | | |
+      | | | | +------------ TLV320 Line-in Gain bit 03 
+      | | | +-------------- TLV320 Line-in Gain bit 13
+      | | +---------------- TLV320 Line-in Gain bit 23
+      | +------------------ TLV320 Line-in Gain bit 33
+      +-------------------- TLV320 Line-in Gain bit 43
+*/
+
+KD5TFDVK6APHAUDIO_API void SetLineBoost(int bits) {
+		LineBoost = bits;
+	return;
+}
+
+/*
+C3
+0 0 0 0 0 0 0 0
+        | | | |
+        | | | +------------ Metis DB9 pin 1 Open Drain Output (0=OFF, 1= ON)
+        | | +-------------- Metis DB9 pin 2 Open Drain Output (0=OFF, 1= ON)
+        | +---------------- Metis DB9 pin 3 3.3v TTL Output (0=OFF, 1= ON)
+        +------------------ Metis DB9 pin 4 3.3v TTL Output (0=OFF, 1= ON)
+*/
+
+KD5TFDVK6APHAUDIO_API void SetUserOut0(int out) {
+        if ( out == 0 ) {
+                UserOut0 = 0;
+        }
+        else {
+                UserOut0 = 1;
+        }
+       return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetUserOut1(int out) {
+       UserOut1 = out;
+        if ( out == 0 ) {
+                UserOut1 = 0;
+        }
+        else {
+                UserOut1 = 0x2;
+        }
+        return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetUserOut2(int out) {
+       UserOut2 = out;
+        if ( out == 0 ) {
+                UserOut2 = 0;
+        }
+        else {
+                UserOut2 = 0x4;
+        }
+        return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetUserOut3(int out) {
+       UserOut3 = out;
+        if ( out == 0 ) {
+                UserOut3 = 0;
+        }
+        else {
+                UserOut3 = 0x8;
+        }
+        return;
+}
+
+/*
+C4
+0 0 0 0 0 0 0 0
+    | |       |
+    | +-------+------------ Hermes Input Attenuator (0 – 31dB) [4:0]
+    +---------------------- Hermes Attenuator enable (0 = disable, 1 = enable)
+                            If disabled then Preamp On/Off bit is used.
+*/
+
+KD5TFDVK6APHAUDIO_API void SetHermesAttenData(int bits) { 
+		Hermes_att_data = bits & 0x1f; 
+    	return;
 }
 
 KD5TFDVK6APHAUDIO_API void EnableHermesAtten(int bits) { 
@@ -701,130 +1027,16 @@ KD5TFDVK6APHAUDIO_API void EnableHermesAtten(int bits) {
 	return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetHermesAttenData(int bits) { 
-		Hermes_att_data = bits & 0x1f; 
-    	return;
+// *************************************************
+// misc functions
+// *************************************************
+
+KD5TFDVK6APHAUDIO_API int GetC1Bits(void) { 
+	return C1Mask; 
 }
-
-KD5TFDVK6APHAUDIO_API void SetMercRandom(int bits) { 
-	if ( bits != 0 ) { 
-		MercRandom = (1 << 4); 
-	} 
-	else { 
-		MercRandom = 0; 
-	}	
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetFPGATestMode(int i) {
-	FPGATestMode = i;
-}
-
-KD5TFDVK6APHAUDIO_API void SetOutputPowerFactor(int u) {
-	OutputPowerFactor = (unsigned int)(u & 0xff);
-}
-
-KD5TFDVK6APHAUDIO_API void SetLegacyDotDashPTT(int bit) { 
-	if ( bit ) { 
-		CandCAddrMask = 0xfc; 
-		CandCFwdPowerBit = 0x4; 
-		DotDashMask = 0x3;
-	}
-	else { 
-		CandCAddrMask = 0xf8; 
-		CandCFwdPowerBit = 0x8; 
-		DotDashMask = 0x7;
-	} 
-}
-
-KD5TFDVK6APHAUDIO_API void SetDiscoveryMode(int bit) { 
-	if ( bit == 0 ) {
-		full_discovery = 0;
-	}
-	else {
-		full_discovery = 1;
-	}
-}
-
-KD5TFDVK6APHAUDIO_API int getHermesDCVoltage() { 
-	return HermesDCV;
-} 
-
-KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() { 
-	int n; 
-	if ( !isMetis ) { 
-	getI2CBytes(I2C_MERC1_ADC_OFS);
-	getI2CBytes(I2C_MERC2_ADC_OFS);
-	//getI2CBytes(I2C_MERC3_ADC_OFS);
-	//getI2CBytes(I2C_MERC4_ADC_OFS);
-	}
-	n = ADC_Overloads; 
-	ADC_Overloads = 0; 
-	return n; 
-} 
-
-KD5TFDVK6APHAUDIO_API int getMercuryFWVersion() { 
-	if ( !isMetis ) { 
-		getI2CBytes(I2C_MERC1_FW);
-	}
-	return MercuryFWVersion; 
-} 
-
-KD5TFDVK6APHAUDIO_API int getMercury2FWVersion() { 
-	if ( !isMetis ) { 
-		getI2CBytes(I2C_MERC2_FW);
-	}
-	return Mercury2FWVersion; 
-} 
-
-KD5TFDVK6APHAUDIO_API int getMercury3FWVersion() { 
-	if ( !isMetis ) { 
-		getI2CBytes(I2C_MERC3_FW);
-	}
-	return Mercury3FWVersion; 
-} 
-
-KD5TFDVK6APHAUDIO_API int getMercury4FWVersion() { 
-	if ( !isMetis ) { 
-		getI2CBytes(I2C_MERC4_FW);
-	}
-	return Mercury4FWVersion; 
-} 
-
-KD5TFDVK6APHAUDIO_API int getPenelopeFWVersion() { 
-	if ( !isMetis ) { 
-		getI2CBytes(I2C_PENNY_FW);
-	}
-	return PenelopeFWVersion; 
-} 
-
-KD5TFDVK6APHAUDIO_API int getOzyFWVersion() { 
-	return OzyFWVersion; 
-} 
 
 KD5TFDVK6APHAUDIO_API int getHaveSync() { 
 	return HaveSync; 
-} 
-
-KD5TFDVK6APHAUDIO_API int getFwdPower() { 
-	if ( !isMetis ) { 
-		getI2CBytes(I2C_PENNY_ALC);
-	}
-	return FwdPower; 
-} 
-
-KD5TFDVK6APHAUDIO_API int getRefPower() { 
-	if ( !isMetis ) { 
-		getI2CBytes(I2C_PENNY_REV);
-	}
-	return RefPower; 
-} 
-
-KD5TFDVK6APHAUDIO_API int getAlexFwdPower() { 
-	if ( !isMetis ) { 
-		getI2CBytes(I2C_PENNY_FWD);
-	}
-	return AlexFwdPower; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getControlByteIn(int n) { 
@@ -883,5 +1095,52 @@ KD5TFDVK6APHAUDIO_API int GetDiagData(int *a, int count) {
         a[13] = HaveSync;
         return 14;
 }
+
+KD5TFDVK6APHAUDIO_API void SetSWRProtect(float g) { 
+	swr_protect = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetAlexEnabled(int bit) { //unused
+        if ( bit != 0 ) {
+                AlexEnabled = 1;
+        }
+        else {
+                AlexEnabled = 0;
+        }
+//printf("SetAlexEnable: %d\n", bit); fflush(stdout); 
+}
+
+KD5TFDVK6APHAUDIO_API void EnableHermesPower(int enabled) { 
+	printf("HermesPowerEndabled: %d\n", enabled); fflush(stdout); 
+	HermesPowerEnabled = enabled; 
+} 
+
+KD5TFDVK6APHAUDIO_API void SetFPGATestMode(int i) {
+	FPGATestMode = i;
+}
+
+KD5TFDVK6APHAUDIO_API void SetLegacyDotDashPTT(int bit) { 
+	if ( bit ) { 
+		CandCAddrMask = 0xfc; 
+		CandCFwdPowerBit = 0x4; 
+		DotDashMask = 0x3;
+	}
+	else { 
+		CandCAddrMask = 0xf8; 
+		CandCFwdPowerBit = 0x8; 
+		DotDashMask = 0x7;
+	} 
+}
+
+KD5TFDVK6APHAUDIO_API void SetDiscoveryMode(int bit) { 
+	if ( bit == 0 ) {
+		full_discovery = 0;
+	}
+	else {
+		full_discovery = 1;
+	}
+}
+
 
 

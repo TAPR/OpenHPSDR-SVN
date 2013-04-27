@@ -2707,6 +2707,7 @@ namespace PowerSDR
 
             // Calibration Tab
             udTXDisplayCalOffset_ValueChanged(this, e);
+            udHPSDRFreqCorrectFactor_ValueChanged(this, e);
 
             // Test Tab
             udTestFreq_ValueChanged(this, e);
@@ -4172,7 +4173,10 @@ namespace PowerSDR
         public double HPSDRFreqCorrectFactor
         {
             get { return (double)udHPSDRFreqCorrectFactor.Value; }
-            set { udHPSDRFreqCorrectFactor.Value = (decimal)value; }
+            set { 
+                udHPSDRFreqCorrectFactor.Value = (decimal)value;
+                JanusAudio.FreqCorrectionFactor = (double)value;
+                }
         }
 
 
@@ -7658,7 +7662,9 @@ namespace PowerSDR
 
         private void chk20dbMicBoost_CheckedChanged(object sender, System.EventArgs e)
         {
+            if (chk20dbMicBoost.Checked) udVOXGain_ValueChanged(this, e);
             console.MicBoost = chk20dbMicBoost.Checked;
+            udVOXGain.Enabled = chk20dbMicBoost.Checked;
             //console.SetMicGain();
         }
 
@@ -10373,7 +10379,7 @@ namespace PowerSDR
 
         private void udVOXGain_ValueChanged(object sender, System.EventArgs e)
         {
-            Audio.VOXGain = (float)udVOXGain.Value / 10000.0f;
+            Audio.VOXGain = (float)udVOXGain.Value;// / 10000.0f;
         }
 
         private void udTXVOXHangTime_ValueChanged(object sender, System.EventArgs e)
@@ -10567,17 +10573,17 @@ namespace PowerSDR
             
             if (radGenModelANAN100.Checked)
             {
-                ANAN100PAGain160 = 53.2f;
-                ANAN100PAGain80 = 53.7f;
-                ANAN100PAGain60 = 53.5f;
-                ANAN100PAGain40 = 53.2f;
-                ANAN100PAGain30 = 52.3f;
-                ANAN100PAGain20 = 51.0f;
-                ANAN100PAGain17 = 51.0f;
-                ANAN100PAGain15 = 50.5f;
-                ANAN100PAGain12 = 48.2f;
-                ANAN100PAGain10 = 49.0f;
-                ANAN100PAGain6 = 47.0f;
+                ANAN100PAGain160 = 52.5f;
+                ANAN100PAGain80 = 52.5f;
+                ANAN100PAGain60 = 52.0f;
+                ANAN100PAGain40 = 51.7f;
+                ANAN100PAGain30 = 50.7f;
+                ANAN100PAGain20 = 50.0f;
+                ANAN100PAGain17 = 49.8f;
+                ANAN100PAGain15 = 49.3f;
+                ANAN100PAGain12 = 48.0f;
+                ANAN100PAGain10 = 48.0f;
+                ANAN100PAGain6 = 45.4f;
 
                 udANAN100PAGainVHF0.Value = 56.2M;
                 udANAN100PAGainVHF1.Value = 56.2M;
@@ -10597,17 +10603,17 @@ namespace PowerSDR
 
             if (radGenModelANAN100D.Checked && !chkBypassANANPASettings.Checked)
             {
-                ANANPAGain160 = 52.0f;
-                ANANPAGain80 = 52.5f;
-                ANANPAGain60 = 52.5f;
-                ANANPAGain40 = 52.1f;
-                ANANPAGain30 = 51.2f;
+                ANANPAGain160 = 52.5f;
+                ANANPAGain80 = 53.0f;
+                ANANPAGain60 = 53.0f;
+                ANANPAGain40 = 52.5f;
+                ANANPAGain30 = 52.0f;
                 ANANPAGain20 = 50.5f;
-                ANANPAGain17 = 50.1f;
+                ANANPAGain17 = 50.5f;
                 ANANPAGain15 = 50.0f;
-                ANANPAGain12 = 47.0f;
-                ANANPAGain10 = 47.7f;
-                ANANPAGain6 = 46.5f;
+                ANANPAGain12 = 49.0f;
+                ANANPAGain10 = 48.7f;
+                ANANPAGain6 = 46.0f;
 
                 udANANPAGainVHF0.Value = 56.2M;
                 udANANPAGainVHF1.Value = 56.2M;
@@ -14401,7 +14407,8 @@ namespace PowerSDR
         private void btnHPSDRFreqCalReset_Click(object sender, System.EventArgs e)
         {
             HPSDRFreqCorrectFactor = 1.0;
-            if (console != null)
+          //  JanusAudio.FreqCorrectionFactor = 1.0;
+          /*  if (console != null)
             {
                 if (console.PowerOn)
                 {
@@ -14409,7 +14416,7 @@ namespace PowerSDR
                     Thread.Sleep(100);
                     console.PowerOn = true;
                 }
-            }
+            } */
         }
 
         private void tpHPSDR_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -14496,7 +14503,9 @@ namespace PowerSDR
 
         private void udHPSDRFreqCorrectFactor_ValueChanged(object sender, System.EventArgs e)
         {
-            JanusAudio.freqCorrectionChanged();
+           // if (!console.initializing)
+                JanusAudio.FreqCorrectionFactor = (double)udHPSDRFreqCorrectFactor.Value;
+           // JanusAudio.freqCorrectionChanged();
         }
 
         private void udFXtal_ValueChanged_1(object sender, System.EventArgs e) // modif F8CHK
@@ -15606,8 +15615,10 @@ namespace PowerSDR
 
         private void chkApolloTuner_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkApolloTuner.Checked) JanusAudio.EnableApolloTuner(1);
-            else JanusAudio.EnableApolloTuner(0);
+            console.ApolloTunerEnabled = chkApolloTuner.Checked;
+
+           // if (chkApolloTuner.Checked) JanusAudio.EnableApolloTuner(1);
+           // else JanusAudio.EnableApolloTuner(0);
         }
 
         private void chkEClassModulation_CheckedChanged(object sender, EventArgs e)

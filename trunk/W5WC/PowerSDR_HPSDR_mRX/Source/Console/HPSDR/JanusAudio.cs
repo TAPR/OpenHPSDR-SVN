@@ -315,7 +315,7 @@ namespace PowerSDR
         // and set fwVersionmsg to point to an appropriate message
         private static bool fwVersionsGood()
         {
-           // return true;
+            // return true;
             bool result = true;
             Console c = Console.getConsole();
             int penny_ver = 0;
@@ -337,12 +337,12 @@ namespace PowerSDR
                 {
                     byte metis_vernum = metis_ver[0];
                     mercury_ver = getMercuryFWVersion();
-  
+
                     if (c.PennyPresent || c.PennyLanePresent)
                     {
                         do
                         {
-                           // Thread.Sleep(500);
+                            // Thread.Sleep(500);
                             penny_ver = getPenelopeFWVersion();
                             if (penny_ver < 16 || penny_ver > 80)
                             {
@@ -365,17 +365,17 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                             }
+                            }
                             break;
-                        case 18: 
+                        case 18:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 32)))
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                             }
+                            }
                             break;
-                        case 19: 
+                        case 19:
                         case 20:
                         case 21:
                         case 22:
@@ -387,7 +387,7 @@ namespace PowerSDR
                             {
                                 result = false;
                                 c.SetupForm.alex_fw_good = false;
-                              }
+                            }
                             break;
                         case 26:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 18)) ||
@@ -401,7 +401,7 @@ namespace PowerSDR
                             // fwVersionMsg = "Invalid Firmware Level.\nPowerSDR requires Mercury v3.1\nYou have version: " + mercury_ver.ToString("0\\.0");
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                             break;
+                            break;
                     }
 
                     mercury2_ver = getMercury2FWVersion();
@@ -433,27 +433,27 @@ namespace PowerSDR
             //System.Console.WriteLine("ozy: " + ozy_ver); 
             //System.Console.WriteLine("merc: " + merc_ver); 
             //System.Console.WriteLine("penny: " + penny_ver); 
-          //  c.SetI2CSpeed();
-           // Thread.Sleep(100);
+            //  c.SetI2CSpeed();
+            // Thread.Sleep(100);
 
             if (fx2_version_string.CompareTo("20090524") >= 0)
             {
-             //   do
+                //   do
                 for (int i = 0; i < 5; i++)
-                {                   
+                {
                     ozy_ver = getOzyFWVersion();
                     if (ozy_ver > 17) break;
                     Thread.Sleep(100);
                 }
-              //  while (ozy_ver < 12);
-               // Thread.Sleep(2000);
+                //  while (ozy_ver < 12);
+                // Thread.Sleep(2000);
                 if (c.MercuryPresent)
                 {
-                  //  do
-                  //  for (int i = 0; i < 2; i++)
+                    //  do
+                    //  for (int i = 0; i < 2; i++)
                     {
                         mercury_ver = getMercuryFWVersion();
-                       // if (mercury_ver > 0) break;
+                        // if (mercury_ver > 0) break;
                         Thread.Sleep(100);
                     }
                     mercury_ver = getMercuryFWVersion();
@@ -464,7 +464,7 @@ namespace PowerSDR
                 {
                     do
                     {
-                       // Thread.Sleep(500);
+                        // Thread.Sleep(500);
                         penny_ver = getPenelopeFWVersion();
                         if (penny_ver < 11)
                         {
@@ -485,7 +485,7 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                         }
+                        }
                         break;
                     case 19:
                         // if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 14)) ||
@@ -493,7 +493,7 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                          }
+                        }
                         break;
                     case 20:
                         // if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 15)) ||
@@ -501,7 +501,7 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                         }
+                        }
                         break;
                     case 21:
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 16)) ||
@@ -509,37 +509,37 @@ namespace PowerSDR
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                          }
+                        }
                         break;
-                    case 22: 
+                    case 22:
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
                             (c != null && c.MercuryPresent && (mercury_ver != 32 && mercury_ver != 33)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                         }
+                        }
                         break;
-                    case 23: 
+                    case 23:
                     case 24:
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 17)) ||
                             (c != null && c.MercuryPresent && (mercury_ver != 33)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                         }
+                        }
                         break;
                     case 25:
-                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 18)) ||
-                            (c != null && c.MercuryPresent && (mercury_ver != 34)))
+                        if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 18)) ||
+                           (c != null && c.MercuryPresent && (mercury_ver != 34)))
                         {
                             result = false;
                             c.SetupForm.alex_fw_good = false;
-                         }
-                       break;
+                        }
+                        break;
                     default:
                         result = false;
                         c.SetupForm.alex_fw_good = false;
-                         break;
+                        break;
                 }
 
                 mercury2_ver = getMercury2FWVersion();
@@ -584,7 +584,7 @@ namespace PowerSDR
                     fwVersionsChecked = true;
                 }
             }
-          //  InitMic();
+            //  InitMic();
             return result;
         }
 
@@ -644,7 +644,7 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetHermesFilter(int bits);
- 
+
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetUserOut0(int bits);
 
@@ -656,7 +656,7 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetUserOut3(int bits);
-    
+
         [DllImport("JanusAudio.dll")] // sets number of receivers
         unsafe public static extern void SetNRx(int nrx);
 
@@ -718,40 +718,46 @@ namespace PowerSDR
         public static double FreqCorrectionFactor
         {
             get { return freq_correction_factor; }
-            set { freq_correction_factor = value; }
+            set
+            {
+                freq_correction_factor = value;
+                freqCorrectionChanged();
+            }
         }
 
         public static void freqCorrectionChanged()
         {
-               if (!Console.FreqCalibrationRunning)    // we can't be applying freq correction when cal is running 
-                {
-                    SetVFOfreqRX1(lastVFORX1freq);
-                    SetVFOfreqRX2(lastVFORX2freq);
-                    SetVFOfreqRX3(lastVFORX3freq);
-                    SetVFOfreqRX4(lastVFORX4freq);
-                    SetVFOfreqRX5(lastVFORX5freq);
-                    SetVFOfreqTX(lastVFOTXfreq);
-                }
+            if (!Console.FreqCalibrationRunning)    // we can't be applying freq correction when cal is running 
+            {
+                SetVFOfreqRX1(lastVFORX1freq);
+                SetVFOfreqRX2(lastVFORX2freq);
+                SetVFOfreqRX3(lastVFORX3freq);
+                SetVFOfreqRX4(lastVFORX4freq);
+                SetVFOfreqRX5(lastVFORX5freq);
+                SetVFOfreqTX(lastVFOTXfreq);
+            }
         }
 
         private static double lastVFORX1freq = 0.0;
         unsafe public static void SetVFOfreqRX1(double f)
         {
+           // Console c = Console.getConsole();
             lastVFORX1freq = f;
 
             int f_freq = (int)((f * 1e6) * freq_correction_factor);
             SetRX1VFOfreq(f_freq); // center freq
-           
-           // c.SetupForm.txtRX1VFO.Text = f_freq.ToString();
+
+           // if(c != null)
+          //  c.SetupForm.txtRX1VFO.Text = f_freq.ToString();
         }
 
         private static double lastVFORX2freq = 0.0;
         unsafe public static void SetVFOfreqRX2(double f)
         {
-           lastVFORX2freq = f;
-           int f_freq = (int)((f * 1e6) * freq_correction_factor);
-             SetRX2VFOfreq(f_freq); 
-           // c.SetupForm.txtRX2VFO.Text = f_freq.ToString();
+            lastVFORX2freq = f;
+            int f_freq = (int)((f * 1e6) * freq_correction_factor);
+            SetRX2VFOfreq(f_freq);
+            // c.SetupForm.txtRX2VFO.Text = f_freq.ToString();
         }
 
         private static double lastVFORX3freq = 0.0;
@@ -816,7 +822,7 @@ namespace PowerSDR
             lastVFOTXfreq = f;
             int f_freq = (int)((f * 1e6) * freq_correction_factor);
             SetTXVFOfreq(f_freq);
-           // c.SetupForm.txtTXVFO.Text = f_freq.ToString();
+            // c.SetupForm.txtTXVFO.Text = f_freq.ToString();
         }
 
         [DllImport("JanusAudio.dll")]
@@ -839,7 +845,7 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetLineBoost(int bits);
-        
+
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetAlexAtten(int bits);
 
@@ -893,22 +899,22 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern int getAlexFwdPower();
- 
+
         [DllImport("JanusAudio.dll")]
         unsafe public static extern int getHermesDCVoltage();
 
         public static float computeHermesDCVoltage()
         {
-            Console c = Console.getConsole();
+            // Console c = Console.getConsole();
 
             int adcValue = getHermesDCVoltage();
             float volts = (float)adcValue * (3.3f / 4095);
             volts = volts / 0.143f;
-           // adc >>= 4;
-           // float volts = (float)adc * (3.3f / 2047);
+            // adc >>= 4;
+            // float volts = (float)adc * (3.3f / 2047);
 
-            c.SetupForm.txtFwdADC.Text = adcValue.ToString();
-            c.SetupForm.txtAlexFwdADC.Text = volts.ToString();
+            //  c.SetupForm.txtFwdADC.Text = adcValue.ToString();
+            //  c.SetupForm.txtAlexFwdADC.Text = volts.ToString();
 
             return volts;
         }
@@ -1027,7 +1033,7 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetDiscoveryMode(int b);
-        
+
         [DllImport("JanusAudio.dll")]
         unsafe public static extern void SetPennyOCBits(int b);
 
