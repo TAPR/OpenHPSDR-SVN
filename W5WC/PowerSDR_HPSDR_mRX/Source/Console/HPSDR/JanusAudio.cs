@@ -754,10 +754,13 @@ namespace PowerSDR
         private static double lastVFORX2freq = 0.0;
         unsafe public static void SetVFOfreqRX2(double f)
         {
+          //  Console c = Console.getConsole();
             lastVFORX2freq = f;
             int f_freq = (int)((f * 1e6) * freq_correction_factor);
             SetRX2VFOfreq(f_freq);
-            // c.SetupForm.txtRX2VFO.Text = f_freq.ToString();
+
+           // if (c != null)
+           // c.SetupForm.txtRX2VFO.Text = f_freq.ToString();
         }
 
         private static double lastVFORX3freq = 0.0;
@@ -780,7 +783,7 @@ namespace PowerSDR
         unsafe public static void SetVFOfreqRX5(double f)
         {
             lastVFORX5freq = f;
-            int f_freq = (int)((f * 1e6 * freq_correction_factor) + high_freq_offset);// * 2.0));
+            int f_freq = (int)((f * 1e6 * freq_correction_factor) + high_freq_offset);
             SetRX5VFOfreq(f_freq); // highest freq
         }
 
@@ -918,6 +921,7 @@ namespace PowerSDR
 
             return volts;
         }
+
         // 
         // compute fwd power from Penny based on count returned 
         // this conversion is a linear interpolation of values measured on an 
@@ -932,25 +936,36 @@ namespace PowerSDR
 
         public static float computeRefPower()
         {
-            // Console c = Console.getConsole();
+           // Console c = Console.getConsole();
             int adc = JanusAudio.getRefPower();
-            float volts = (float)adc * (3.3f / 4095);
-            float watts = (float)(Math.Pow(volts, 2) / 0.09f);
+            if (adc < 300) adc = 0;
+            float volts = (float)adc * (3.3f / 4095.0f);
+            float watts = (float)(Math.Pow(volts, 2) / 0.095f);
 
-            //  c.SetupForm.txtAlexRevPower.Text = Watts.ToString();
-            //  c.SetupForm.txtAlexRevADC.Text = Voltage.ToString();
+          /*  if (c != null)
+            {
+                c.SetupForm.txtRevADCValue.Text = adc.ToString();
+                c.SetupForm.txtRevVoltage.Text = volts.ToString();
+                c.SetupForm.txtPARevPower.Text = watts.ToString();              
+            } */
 
             return watts;
         }
 
         public static float computeAlexFwdPower()
         {
-            // Console c = Console.getConsole();
+          //  Console c = Console.getConsole();
             int adc = JanusAudio.getAlexFwdPower();
-            float volts = (float)adc * (3.3f / 4095);
-            float watts = (float)(Math.Pow(volts, 2) / 0.09f);
-            //  c.SetupForm.txtAlexFwdPower.Text = Watts.ToString();
-            //  c.SetupForm.txtAlexFwdADC.Text = Voltage.ToString();
+            if (adc < 300) adc = 0;
+            float volts = (float)adc * (3.3f / 4095.0f);
+            float watts = (float)(Math.Pow(volts, 2) / 0.095f);
+
+           /* if (c != null)
+            {
+                c.SetupForm.txtFwdADCValue.Text = adc.ToString();
+                c.SetupForm.txtFwdVoltage.Text = volts.ToString();
+                c.SetupForm.txtPAFwdPower.Text = watts.ToString();
+            } */
 
             return watts;
         }
@@ -959,7 +974,7 @@ namespace PowerSDR
         {
             // Console c = Console.getConsole();
             double power_f = (double)power_int;
-            double result;
+            double result = 0.0;
 
             if (power_int <= 2095)
             {

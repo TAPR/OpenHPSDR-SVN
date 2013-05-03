@@ -5068,6 +5068,91 @@ namespace PowerSDR
             get { return (float)udRX2DisplayGridMax.Value; }
             set { udRX2DisplayGridMax.Value = (decimal)value; }
         }
+
+        public float PA10W
+        {
+            get { return (float)udPA10W.Value; }
+            set { udPA10W.Value = (decimal)value; }
+        }
+
+        public float PA20W
+        {
+            get { return (float)udPA20W.Value; }
+            set { udPA20W.Value = (decimal)value; }
+        }
+
+        public float PA30W
+        {
+            get { return (float)udPA30W.Value; }
+            set { udPA30W.Value = (decimal)value; }
+        }
+
+        public float PA40W
+        {
+            get { return (float)udPA40W.Value; }
+            set { udPA40W.Value = (decimal)value; }
+        }
+
+        public float PA50W
+        {
+            get { return (float)udPA50W.Value; }
+            set { udPA50W.Value = (decimal)value; }
+        }
+
+        public float PA60W
+        {
+            get { return (float)udPA60W.Value; }
+            set { udPA60W.Value = (decimal)value; }
+        }
+
+        public float PA70W
+        {
+            get { return (float)udPA70W.Value; }
+            set { udPA70W.Value = (decimal)value; }
+        }
+
+        public float PA80W
+        {
+            get { return (float)udSWR80W.Value; }
+            set { udSWR80W.Value = (decimal)value; }
+        }
+
+        public float PA90W
+        {
+            get { return (float)udPA90W.Value; }
+            set { udPA90W.Value = (decimal)value; }
+        }
+
+        public float PA100W
+        {
+            get { return (float)udPA100W.Value; }
+            set { udPA100W.Value = (decimal)value; }
+        }
+
+        public float PA110W
+        {
+            get { return (float)udPA110W.Value; }
+            set { udPA110W.Value = (decimal)value; }
+        }
+
+        public float PA120W
+        {
+            get { return (float)udPA120W.Value; }
+            set { udPA120W.Value = (decimal)value; }
+        }
+
+        public float PA130W
+        {
+            get { return (float)udPA130W.Value; }
+            set { udPA130W.Value = (decimal)value; }
+        }
+
+        public float PA140W
+        {
+            get { return (float)udPA140W.Value; }
+            set { udPA140W.Value = (decimal)value; }
+        }
+
         // Added 06/21/05 BT for CAT commands
 
         public int CATNB1Threshold
@@ -5724,7 +5809,7 @@ namespace PowerSDR
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 grpANAN100PAGainByBand.BringToFront();
-                labelRXAntControl.Text = " EXT1  EXT2  XVTR";
+                labelRXAntControl.Text = " EXT2  EXT1  XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
@@ -5800,7 +5885,7 @@ namespace PowerSDR
                 grpANANPAGainByBand.BringToFront();
                 else grpPAGainByBand.BringToFront();
                 
-                labelRXAntControl.Text = " EXT1  EXT2  XVTR";
+                labelRXAntControl.Text = " EXT2  EXT1  XVTR";
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
@@ -7333,8 +7418,8 @@ namespace PowerSDR
             bool power = console.PowerOn;
 
             CWKeyer.AudioLatency = Math.Max(10.0, new_size / (double)console.SampleRate1 * 1e3);
-            console.specRX.GetSpecRX(0).BlockSize = new_size;
-            console.specRX.GetSpecRX(1).BlockSize = new_size;
+          //  console.specRX.GetSpecRX(0).BlockSize = new_size;
+          //  console.specRX.GetSpecRX(1).BlockSize = new_size;
 
             if (power && old_size != new_size)
             {
@@ -7342,6 +7427,8 @@ namespace PowerSDR
                 Thread.Sleep(100);
             }
 
+            console.specRX.GetSpecRX(0).BlockSize = new_size;
+            console.specRX.GetSpecRX(1).BlockSize = new_size;
             console.BlockSize1 = new_size;
 
             if (power && old_size != new_size) console.PowerOn = true;
@@ -10573,17 +10660,17 @@ namespace PowerSDR
             
             if (radGenModelANAN100.Checked)
             {
-                ANAN100PAGain160 = 52.5f;
-                ANAN100PAGain80 = 52.5f;
-                ANAN100PAGain60 = 52.0f;
-                ANAN100PAGain40 = 51.7f;
-                ANAN100PAGain30 = 50.7f;
-                ANAN100PAGain20 = 50.0f;
-                ANAN100PAGain17 = 49.8f;
-                ANAN100PAGain15 = 49.3f;
-                ANAN100PAGain12 = 48.0f;
-                ANAN100PAGain10 = 48.0f;
-                ANAN100PAGain6 = 45.4f;
+                ANAN100PAGain160 = 50.0f;
+                ANAN100PAGain80 = 50.5f;
+                ANAN100PAGain60 = 50.5f;
+                ANAN100PAGain40 = 50.0f;
+                ANAN100PAGain30 = 49.5f;
+                ANAN100PAGain20 = 48.5f;
+                ANAN100PAGain17 = 48.0f;
+                ANAN100PAGain15 = 47.5f;
+                ANAN100PAGain12 = 46.5f;
+                ANAN100PAGain10 = 42.0f;
+                ANAN100PAGain6 = 43.0f;
 
                 udANAN100PAGainVHF0.Value = 56.2M;
                 udANAN100PAGainVHF1.Value = 56.2M;
@@ -10603,17 +10690,17 @@ namespace PowerSDR
 
             if (radGenModelANAN100D.Checked && !chkBypassANANPASettings.Checked)
             {
-                ANANPAGain160 = 52.5f;
-                ANANPAGain80 = 53.0f;
-                ANANPAGain60 = 53.0f;
-                ANANPAGain40 = 52.5f;
-                ANANPAGain30 = 52.0f;
-                ANANPAGain20 = 50.5f;
-                ANANPAGain17 = 50.5f;
-                ANANPAGain15 = 50.0f;
-                ANANPAGain12 = 49.0f;
-                ANANPAGain10 = 48.7f;
-                ANANPAGain6 = 46.0f;
+                ANANPAGain160 = 49.5f;
+                ANANPAGain80 = 50.5f;
+                ANANPAGain60 = 50.5f;
+                ANANPAGain40 = 50.0f;
+                ANANPAGain30 = 49.0f;
+                ANANPAGain20 = 48.0f;
+                ANANPAGain17 = 47.0f;
+                ANANPAGain15 = 46.5f;
+                ANANPAGain12 = 46.0f;
+                ANANPAGain10 = 43.5f;
+                ANANPAGain6 = 43.0f;
 
                 udANANPAGainVHF0.Value = 56.2M;
                 udANANPAGainVHF1.Value = 56.2M;
@@ -16412,8 +16499,13 @@ namespace PowerSDR
         {
             Display.RX2WaterfallAGC = chkRX2WaterfallAGC.Checked;
             udRX2DisplayWaterfallLowLevel.Enabled = !chkRX2WaterfallAGC.Checked;
-        } 
-    }
+        }
+
+        private void chkPAValues_CheckedChanged(object sender, EventArgs e)
+        {
+            panelPAValues.Visible = chkPAValues.Checked;
+        }
+   }
 
     #region PADeviceInfo Helper Class
 
