@@ -610,11 +610,11 @@ KD5TFDVK6APHAUDIO_API void SetAlexAtten(int bits) {
 KD5TFDVK6APHAUDIO_API void SetMercPreamp(int bits) { 
 	if ( bits != 0 ) { 
 		MercPreamp = (1 << 2); 
-		Merc1Preamp = bits;
+		//Merc1Preamp = bits;
 	} 
 	else { 
 		MercPreamp = 0;
-		Merc1Preamp = 0;
+		//Merc1Preamp = 0;
 	}	
 	return;
 }
@@ -639,14 +639,20 @@ KD5TFDVK6APHAUDIO_API void SetMercRandom(int bits) {
 	return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out) {  
+KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_only_ant, int trx_ant, int rx_out) {  
 	
-	rx_ant = ( rx_ant << 5); 
-	AlexRxAnt = rx_ant & 0x60; 
 
-	AlexTxAnt = (tx_ant - 1) & 0x3;
-	if ( AlexTxAnt >= 3 ) AlexTxAnt = 0;  
-	
+	trx_ant = (trx_ant - 1) & 0x3;
+	if ( trx_ant >= 3 ) {
+		AlexTxAnt = 0;  
+	}
+	else {
+		AlexTxAnt = trx_ant;
+	}
+
+	rx_only_ant = ( rx_only_ant << 5); 
+	AlexRxAnt = rx_only_ant & 0x60; 
+
 	if ( rx_out ) { 
 		AlexRxOut = 0x80; 
 	} 
@@ -734,7 +740,7 @@ KD5TFDVK6APHAUDIO_API void SetRX4VFOfreq(int rx4) {
 }
 
 KD5TFDVK6APHAUDIO_API void SetRX5VFOfreq(int rx5) {
-       VFOfreq_rx5 = rx5; 
+       VFOfreq_rx5 = rx5;
        return;
 }
 
@@ -852,7 +858,15 @@ C3
 */
 
 KD5TFDVK6APHAUDIO_API void SetAlexHPFBits(int bits) { 
-	AlexHPFMask = bits; 
+	AlexHPFMask = bits;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetAlexTRRelayBit(int bit) { 
+	if (bit != 0)
+		AlexTRRelay = 0x80; 
+	else
+		AlexTRRelay = 0;
 	return;
 }
 
@@ -871,13 +885,6 @@ KD5TFDVK6APHAUDIO_API void SetAlex4HPFBits(int bits) {
 	return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetAlexTRRelayBit(int bit) { 
-	if (bit != 0)
-		AlexTRRelay = 0x80; 
-	else
-		AlexTRRelay = 0;
-	return;
-}
 
 /*
 C4
@@ -914,7 +921,7 @@ KD5TFDVK6APHAUDIO_API void SetAlex4LPFBits(int bits) {
 
 /*
 C0
-0 0 0 1 0 1 0 x   
+0 0 0 1 0 1 0 x   '0x14'
 C1
 0 0 0 0 0 0 0 0
         | | | |
@@ -924,12 +931,24 @@ C1
         +------------------ Rx4 pre-amp (0=OFF, 1= ON)
 */
 
-KD5TFDVK6APHAUDIO_API void SetMerc2Preamp(int bits) { 
+KD5TFDVK6APHAUDIO_API void SetRX1Preamp(int bits) { 
 	if ( bits != 0 ) { 
-		Merc2Preamp = (1 << 1); 
+		RX1Preamp = 1; 
+		MercPreamp = (1 << 2);
 	} 
 	else { 
-		Merc2Preamp = 0; 
+		RX1Preamp = 0; 
+		MercPreamp = 0;
+	}	
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetRX2Preamp(int bits) { 
+	if ( bits != 0 ) { 
+		RX2Preamp = (1 << 1); 
+	} 
+	else { 
+		RX2Preamp = 0; 
 	}	
 	return;
 }
@@ -1006,23 +1025,45 @@ KD5TFDVK6APHAUDIO_API void SetUserOut3(int out) {
 /*
 C4
 0 0 0 0 0 0 0 0
-    | |       |
-    | +-------+------------ Hermes Input Attenuator (0 – 31dB) [4:0]
-    +---------------------- Hermes Attenuator enable (0 = disable, 1 = enable)
+| | | |       |
+| | | +-------+------------ Hermes Input Attenuator (0 – 31dB) [4:0]
+| | +---------------------- Hermes Attenuator enable (0 = disable, 1 = enable)
+| +------------------------ RX2 Step Attenuator enable (0 = disable, 1 = enable)
++-------------------------- RX3 Step Attenuator enable (0 = disable, 1 = enable)
                             If disabled then Preamp On/Off bit is used.
 */
 
-KD5TFDVK6APHAUDIO_API void SetHermesAttenData(int bits) { 
-		Hermes_att_data = bits & 0x1f; 
+KD5TFDVK6APHAUDIO_API void SetStepAttenData(int bits) { 
+		step_att_data = bits & 0x1f; 
     	return;
 }
 
-KD5TFDVK6APHAUDIO_API void EnableHermesAtten(int bits) { 
+KD5TFDVK6APHAUDIO_API void EnableRX1StepAtten(int bits) { 
 	if ( bits != 0 ) { 
-		Hermes_att_enable = 0x20; 
+		enable_RX1_step_att = 0x20; 
 	} 
 	else { 
-		Hermes_att_enable = 0; 
+		enable_RX1_step_att = 0; 
+	}	
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableRX2StepAtten(int bits) { 
+	if ( bits != 0 ) { 
+		enable_RX2_step_att = 0x40; 
+	} 
+	else { 
+		enable_RX2_step_att = 0; 
+	}	
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableRX3StepAtten(int bits) { 
+	if ( bits != 0 ) { 
+		enable_RX3_step_att = 0x80; 
+	} 
+	else { 
+		enable_RX3_step_att = 0; 
 	}	
 	return;
 }

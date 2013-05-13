@@ -323,6 +323,7 @@ namespace PowerSDR
             byte[] metis_ver = new byte[1];
             int mercury2_ver = 0;
 
+           // if (c.CurrentHPSDRModel == HPSDRModel.ANAN100D) c.RX2PreampPresent = true;
             if (forceFWGood == true || c.CurrentModel == Model.HERMES)
             {
                 System.Console.WriteLine("Firmware ver check forced good!");
@@ -411,9 +412,9 @@ namespace PowerSDR
                         mercury2_ver = getMercury2FWVersion();
                     }
                     if (mercury2_ver < 32) //check if physical rx2 present
-                        c.rx2_preamp_present = false;
+                        c.RX2PreampPresent = false;
                     else
-                        c.rx2_preamp_present = true;
+                        c.RX2PreampPresent = true;
 
                     if (c.SetupForm.FirmwareBypass == true) result = true;
 
@@ -549,9 +550,9 @@ namespace PowerSDR
                     mercury2_ver = getMercury2FWVersion();
                 }
                 if (mercury2_ver < 32) //check if physical rx2 present
-                    c.rx2_preamp_present = false;
+                    c.RX2PreampPresent = false;
                 else
-                    c.rx2_preamp_present = true;
+                    c.RX2PreampPresent = true;
 
                 if (c.SetupForm.FirmwareBypass == true) result = true;
 
@@ -859,16 +860,22 @@ namespace PowerSDR
         unsafe public static extern void SetMercRandom(int bits);
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetMercPreamp(int bits);
+        unsafe public static extern void SetRX1Preamp(int bits);
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetMerc2Preamp(int bits);
+        unsafe public static extern void SetRX2Preamp(int bits);
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void EnableHermesAtten(int bits);
+        unsafe public static extern void EnableRX1StepAtten(int bits);
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetHermesAttenData(int bits);
+        unsafe public static extern void EnableRX2StepAtten(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void EnableRX3StepAtten(int bits);
+        
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetStepAttenData(int bits);
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern int getAndResetADC_Overload();
@@ -906,28 +913,12 @@ namespace PowerSDR
         [DllImport("JanusAudio.dll")]
         unsafe public static extern int getHermesDCVoltage();
 
-        public static float computeHermesDCVoltage()
-        {
-            // Console c = Console.getConsole();
-
-            int adcValue = getHermesDCVoltage();
-            float volts = (float)adcValue * (3.3f / 4095);
-            volts = volts / 0.143f;
-            // adc >>= 4;
-            // float volts = (float)adc * (3.3f / 2047);
-
-            //  c.SetupForm.txtFwdADC.Text = adcValue.ToString();
-            //  c.SetupForm.txtAlexFwdADC.Text = volts.ToString();
-
-            return volts;
-        }
-
         // 
         // compute fwd power from Penny based on count returned 
         // this conversion is a linear interpolation of values measured on an 
         // actual penny board 		
         // 
-        public static float computeFwdPower()
+    /*    public static float computeFwdPower()
         {
             int power_int = getFwdPower();
             double computed_result = computePower(power_int);
@@ -936,36 +927,36 @@ namespace PowerSDR
 
         public static float computeRefPower()
         {
-           // Console c = Console.getConsole();
+            Console c = Console.getConsole();
             int adc = JanusAudio.getRefPower();
             if (adc < 300) adc = 0;
             float volts = (float)adc * (3.3f / 4095.0f);
             float watts = (float)(Math.Pow(volts, 2) / 0.095f);
 
-          /*  if (c != null)
+            if (c != null && c.PAValues)
             {
                 c.SetupForm.txtRevADCValue.Text = adc.ToString();
                 c.SetupForm.txtRevVoltage.Text = volts.ToString();
-                c.SetupForm.txtPARevPower.Text = watts.ToString();              
-            } */
+              //  c.SetupForm.txtPARevPower.Text = watts.ToString();              
+            } 
 
             return watts;
         }
 
         public static float computeAlexFwdPower()
         {
-          //  Console c = Console.getConsole();
+            Console c = Console.getConsole();
             int adc = JanusAudio.getAlexFwdPower();
             if (adc < 300) adc = 0;
             float volts = (float)adc * (3.3f / 4095.0f);
             float watts = (float)(Math.Pow(volts, 2) / 0.095f);
 
-           /* if (c != null)
+            if (c != null && c.PAValues)
             {
                 c.SetupForm.txtFwdADCValue.Text = adc.ToString();
                 c.SetupForm.txtFwdVoltage.Text = volts.ToString();
-                c.SetupForm.txtPAFwdPower.Text = watts.ToString();
-            } */
+               // c.SetupForm.txtPAFwdPower.Text = watts.ToString();
+            } 
 
             return watts;
         }
@@ -1025,7 +1016,7 @@ namespace PowerSDR
             // c.SetupForm.txtFwdADC.Text = power_int.ToString();
 
             return (float)result;
-        }
+        } */
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern int getControlByteIn(int n);

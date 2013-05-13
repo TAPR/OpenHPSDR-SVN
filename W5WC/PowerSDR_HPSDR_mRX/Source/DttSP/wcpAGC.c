@@ -111,7 +111,7 @@ void loadWcpAGC (WCPAGC a)
 	a->fast_backmult = 1.0 - exp(-1.0 / (a->sample_rate * a->tau_fast_backaverage));
 	a->onemfast_backmult = 1.0 - a->fast_backmult;
 
-	a->out_target = a->out_targ * (1.0 - exp(-a->n_tau)) * 0.99;
+	a->out_target = a->out_targ * (1.0 - exp(-a->n_tau)) * 0.9999;
 	a->min_volts = a->out_target / (a->var_gain * a->max_gain);
 
 	tmp = log10(a->out_target / (a->max_input * a->var_gain * a->max_gain));

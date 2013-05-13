@@ -26,7 +26,7 @@
 //    Austin, TX 78750
 //    USA
 //=================================================================
-
+//#define LINCOR
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2870,6 +2870,9 @@ namespace PowerSDR
             udDSPNBTransition_ValueChanged(this, e);
             udDSPNBLead_ValueChanged(this, e);
             udDSPNBLag_ValueChanged(this, e);
+#if LINCOR
+            console.lcform.ForceLincor();
+#endif
         }
 
         public string[] GetTXProfileStrings()
@@ -3189,6 +3192,19 @@ namespace PowerSDR
             }
         }
 
+        public int ATTOnTX
+        {
+            get
+            {
+                if (udATTOnTX != null) return (int)udATTOnTX.Value;
+                else return -1;
+            }
+            set
+            {
+                if (udATTOnTX != null) udATTOnTX.Value = value;
+            }
+        }
+        
         public int VACDriver
         {
             get
@@ -5735,6 +5751,9 @@ namespace PowerSDR
                 chkAutoPACalibrate.Visible = false;
                 grpANAN10PAGainByBand.BringToFront();
                 labelRXAntControl.Text = "  RX1   RX2    XVTR";
+                labelATTOnTX.Visible = true;
+                udATTOnTX.Visible = true;
+                console.RX2PreampPresent = false;
             }
             console.ANAN10Present = radGenModelANAN10.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5810,6 +5829,9 @@ namespace PowerSDR
                 chkAutoPACalibrate.Visible = false;
                 grpANAN100PAGainByBand.BringToFront();
                 labelRXAntControl.Text = " EXT2  EXT1  XVTR";
+                labelATTOnTX.Visible = true;
+                udATTOnTX.Visible = true;
+                console.RX2PreampPresent = false;
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
@@ -5881,11 +5903,16 @@ namespace PowerSDR
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 chkBypassANANPASettings.Visible = true;
+
                 if (!chkBypassANANPASettings.Checked)
                 grpANANPAGainByBand.BringToFront();
                 else grpPAGainByBand.BringToFront();
                 
                 labelRXAntControl.Text = " EXT2  EXT1  XVTR";
+                labelATTOnTX.Visible = true;
+                udATTOnTX.Visible = true;
+               // console.RX2PreampPresent = true;
+                console.RX2PreampPresent = false;
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
@@ -5956,13 +5983,19 @@ namespace PowerSDR
                 chkAutoPACalibrate.Visible = false;
                 grpHermesPAGainByBand.BringToFront();
                 labelRXAntControl.Text = "  RX1   RX2    XVTR";
+                labelATTOnTX.Visible = true;
+                udATTOnTX.Visible = true;
+                console.RX2PreampPresent = false;
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
             if (radGenModelHermes.Checked)
             {
                 int nr;
-                if (chkLimitRX.Checked) nr = 2;
+                if (chkLimitRX.Checked)
+                {
+                    nr = 2;
+                }
                 else nr = 4;
 
                 int old_rate = console.NReceivers;
@@ -6020,6 +6053,9 @@ namespace PowerSDR
                 chkAutoPACalibrate.Visible = true;
                 grpPAGainByBand.BringToFront();
                 labelRXAntControl.Text = "  RX1   RX2    XVTR";
+                labelATTOnTX.Visible = false;
+                udATTOnTX.Visible = false;
+                console.RX2PreampPresent = false;
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, false);
             if (chkHermesStepAttenuator.Checked) chkHermesStepAttenuator.Checked = false;
@@ -6278,34 +6314,34 @@ namespace PowerSDR
                     chkAlexTRRelay.Visible = false;
                 }
 
-                if (console.rx2_preamp_present)
-                {
-                    tpAlexFilterControl.Text = "Alex-1 Filters";
+                /*  if (console.RX2PreampPresent)
+                  {
+                      tpAlexFilterControl.Text = "Alex-1 Filters";
 
-                    if (!tcGeneral.TabPages.Contains(tpAlex2FilterControl))
-                    {
-                        Common.TabControlInsert(tcGeneral, tpAlex2FilterControl, 6);
-                    }
-                    else
-                    {
-                        if (tcGeneral.TabPages.IndexOf(tpAlex2FilterControl) != 6)
-                        {
-                            tcGeneral.TabPages.Remove(tpAlexControl);
-                            Common.TabControlInsert(tcGeneral, tpAlex2FilterControl, 6);
-                        }
-                    }
-                }
-                else
-                {
-                    if (console.rx2_preamp_present)
-                    {
-                        if (tcGeneral.TabPages.Contains(tpAlex2FilterControl))
-                        {
-                            tcGeneral.TabPages.Remove(tpAlex2FilterControl);
-                            tcGeneral.SelectedIndex = 0;
-                        }
-                    }
-                }
+                      if (!tcGeneral.TabPages.Contains(tpAlex2FilterControl))
+                      {
+                          Common.TabControlInsert(tcGeneral, tpAlex2FilterControl, 6);
+                      }
+                      else
+                      {
+                          if (tcGeneral.TabPages.IndexOf(tpAlex2FilterControl) != 6)
+                          {
+                              tcGeneral.TabPages.Remove(tpAlexControl);
+                              Common.TabControlInsert(tcGeneral, tpAlex2FilterControl, 6);
+                          }
+                      }
+                  }
+                  else
+                  {
+                      if (console.RX2PreampPresent)
+                      {
+                          if (tcGeneral.TabPages.Contains(tpAlex2FilterControl))
+                          {
+                              tcGeneral.TabPages.Remove(tpAlex2FilterControl);
+                              tcGeneral.SelectedIndex = 0;
+                          }
+                      }
+                  } */
 
                 if (radGenModelHPSDR.Checked) tpPennyCtrl.Text = "Penny Ctrl";
                 else if (radGenModelHermes.Checked) tpPennyCtrl.Text = "Hermes Ctrl";
@@ -6387,11 +6423,11 @@ namespace PowerSDR
             } 
 
 
-            if (tcGeneral.TabPages.Contains(tpInfo))
+          /*  if (tcGeneral.TabPages.Contains(tpInfo))
             {
                 tcGeneral.TabPages.Remove(tpInfo);
                 tcGeneral.SelectedIndex = 0;
-            } 
+            } */
 
             if (!tcGeneral.TabPages.Contains(tpHPSDR))
             {
@@ -6448,7 +6484,7 @@ namespace PowerSDR
                     }
                 }
             }
-            else // if (!console.rx2_preamp_present)
+            else // if (!console.RX2PreampPresent)
             {
                 if (tcGeneral.TabPages.Contains(tpApolloControl))
                 {
@@ -6457,29 +6493,29 @@ namespace PowerSDR
                 }
             }
 
-            if (console.rx2_preamp_present)
-            {
-                if (!tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
-                {
-                    Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
-                }
-                else
-                {
-                    if (tcAlexControl.TabPages.IndexOf(tpAlex2FilterControl) != 8)
-                    {
-                        tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
-                        Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
-                    }
-                }
-            }
-            else // if (!console.rx2_preamp_present)
-            {
+            /*   if (console.RX2PreampPresent)
+               {
+                   if (!tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
+                   {
+                       Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
+                   }
+                   else
+                   {
+                       if (tcAlexControl.TabPages.IndexOf(tpAlex2FilterControl) != 8)
+                       {
+                           tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
+                           Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
+                       }
+                   }
+               } */
+            // else // if (!console.RX2PreampPresent)
+           // {
                 if (tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
                 {
                     tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
                     tcAlexControl.SelectedIndex = 0;
                 }
-            }
+           // }
 
             // now make sure enablements are correct 
             if (!chkAlexPresent.Checked)
@@ -7315,7 +7351,9 @@ namespace PowerSDR
             lblDisplayBinWidth.Text = bin_width.ToString("N3");
             bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(1).FFTSize;
             lblRX2DisplayBinWidth.Text = bin_width.ToString("N3");
-
+#if LINCOR
+            console.lcform.setLincorSampleRate((double)new_rate);
+#endif
             bool power = console.PowerOn;
 
             if (power && new_rate != old_rate)
@@ -8515,7 +8553,7 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(96000);
                     if (!comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Add(192000);
-                    if (radMetis.Checked)
+                  //  if (radMetis.Checked)
                     {
                         if (!comboAudioSampleRate1.Items.Contains(384000))
                             comboAudioSampleRate1.Items.Add(384000);
@@ -13609,7 +13647,7 @@ namespace PowerSDR
                 //    grpAlexAntCtrl.Enabled = false;
                 // }
                 console.chkSR.Enabled = true;
-                if (console.rx2_preamp_present) console.chkRX2Preamp.Visible = false;
+                // if (console.RX2PreampPresent && !radGenModelANAN100D.Checked) console.comboRX2Preamp.Visible = false;
                 if (chkApolloPresent.Checked) chkApolloPresent.Checked = false;
                 if (radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN100.Checked ||
                      radGenModelANAN100D.Checked) JanusAudio.SetHermesFilter(0);
@@ -13622,10 +13660,11 @@ namespace PowerSDR
                 radAlexAutoCntl.Checked = true;
                 radAlexManualCntl.Enabled = false;
                 console.chkSR.Enabled = false;
-                if (console.rx2_preamp_present) console.chkRX2Preamp.Visible = true;
+                //  if (console.RX2PreampPresent) console.comboRX2Preamp.Visible = true;
             }
+           // if (radGenModelANAN100D.Checked) console.comboRX2Preamp.Visible = true;
             console.AlexPresent = chkAlexPresent.Checked;
-            console.SetComboPreampForHPSDR();
+           // console.SetComboPreampForHPSDR();
             // if (chkHermesStepAttenuator.Checked) chkHermesStepAttenuator.Checked = true;
             udHermesStepAttenuatorData_ValueChanged(this, EventArgs.Empty);
         }
@@ -14510,7 +14549,7 @@ namespace PowerSDR
         {
             if (console.PowerOn && radGenModelHPSDR.Checked)
             {
-                lblMercury2FWVer.Visible = console.rx2_preamp_present;
+                lblMercury2FWVer.Visible = console.RX2PreampPresent;
 
                 try // this will take an exception in the conversion for Metis .. 
                 {
@@ -14785,6 +14824,10 @@ namespace PowerSDR
                     region = FRSRegion.Russia;
                     console.Extended = false;
                     break;
+                case "Sweden":
+                    region = FRSRegion.Sweden;
+                    console.Extended = false;
+                    break;
                 case "Extended":
                     console.Extended = true;
                     break;
@@ -14800,7 +14843,7 @@ namespace PowerSDR
             }
             if (console.CurrentRegion == FRSRegion.US)
             {
-                console.band_60m_register = 12;
+                console.band_60m_register = 5;
                 console.Init60mChannels();
             }
         }
@@ -14847,8 +14890,10 @@ namespace PowerSDR
                 grpMetisAddr.Visible = false;
                 radMicIn_CheckedChanged(this, EventArgs.Empty);
                 radLineIn_CheckedChanged(this, EventArgs.Empty);
-                if (comboAudioSampleRate1.Items.Contains(384000))
-                    comboAudioSampleRate1.Items.Remove(384000);
+               // if (comboAudioSampleRate1.Items.Contains(384000))
+                   // comboAudioSampleRate1.Items.Remove(384000);
+                if (!comboAudioSampleRate1.Items.Contains(384000))
+                    comboAudioSampleRate1.Items.Add(384000);
             }
             else
             {
@@ -15502,7 +15547,7 @@ namespace PowerSDR
 
         private void tpGeneralCalibration_Paint(object sender, PaintEventArgs e)
         {
-            panelRX2LevelCal.Visible = false; // console.rx2_preamp_present;
+            panelRX2LevelCal.Visible = false;
         }
 
         private void chkShowAGC_CheckedChanged(object sender, EventArgs e)
@@ -15804,7 +15849,7 @@ namespace PowerSDR
 
         private void chkHermesStepAttenuator_CheckedChanged(object sender, EventArgs e)
         {
-            console.HermesStepAttenuator = chkHermesStepAttenuator.Checked;
+            console.RX1StepAttenuator = chkHermesStepAttenuator.Checked;
             if (chkHermesStepAttenuator.Checked)
             {
                 udHermesStepAttenuatorData_ValueChanged(this, EventArgs.Empty);
@@ -15813,7 +15858,7 @@ namespace PowerSDR
 
         private void udHermesStepAttenuatorData_ValueChanged(object sender, EventArgs e)
         {
-            console.HermesAttenuatorData = (int)udHermesStepAttenuatorData.Value;
+            console.RX1AttenuatorData = (int)udHermesStepAttenuatorData.Value;
 
             if (AlexPresent && !console.ANAN10Present)
                 udHermesStepAttenuatorData.Maximum = (decimal)61;
@@ -16504,6 +16549,20 @@ namespace PowerSDR
         private void chkPAValues_CheckedChanged(object sender, EventArgs e)
         {
             panelPAValues.Visible = chkPAValues.Checked;
+            console.PAValues = chkPAValues.Checked;
+        }
+
+        private void btnResetPAValues_Click(object sender, EventArgs e)
+        {
+            txtDCVolts.Text = "";
+            txtFwdADCValue.Text = "";
+            txtFwdPowerCalibrated.Text = "";
+            txtFwdVoltage.Text = "";
+            txtDrivePower.Text = "";
+            txtPAFwdPower.Text = "";
+            txtPARevPower.Text = "";
+            txtRevADCValue.Text = "";
+            txtRevVoltage.Text = "";
         }
    }
 

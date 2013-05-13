@@ -1377,7 +1377,7 @@ namespace PowerSDR
                 t.Rows.Add(dr);
             }
         }
-        
+
         private static void AddRegionIsraelBandText160m()
         {
             DataTable t = ds.Tables["BandText"];
@@ -1931,29 +1931,29 @@ namespace PowerSDR
             DataTable t = ds.Tables["BandText"];
 
             object[] data = {
-                                5.100000, 5.258499, "60M General",              false,
-                                5.258500, 5.263999, "60M UK",                   true,
-                                5.264000, 5.275999, "60M General",              false,
-                                5.276000, 5.283999, "60M UK",                   true,
-                                5.284000, 5.288499, "60M General",              false,
-                                5.288500, 5.291999, "60M UK",                   true,
-                                5.292000, 5.297999, "60M General",              false,
-                                5.298000, 5.306999, "60M UK",                   true,
-                                5.307000, 5.312999, "60M General",              false,
-                                5.313000, 5.322999, "60M UK",                   true,
-                                5.323000, 5.332999, "60M General",              false,
-                                5.333000, 5.337999, "60M UK",                   true,
-                                5.338000, 5.353999, "60M General",              false,
-                                5.354000, 5.357999, "60M UK",                   true,
-                                5.358000, 5.361999, "60M General",              false,
-                                5.362000, 5.374499, "60M UK",                   true,
-                                5.374500, 5.377999, "60M General",              false,
-                                5.378000, 5.381999, "60M UK",                   true,
-                                5.382000, 5.394999, "60M General",              false,
-                                5.395000, 5.401499, "60M UK",                   true,
-                                5.401500, 5.403499, "60M General",              false,
-                                5.403500, 5.406499, "60M UK",                   true,
-                                5.406500, 5.499999, "60M General",              false,
+                                5.100000, 5.258499, "60M Band",              false,
+                                5.258500, 5.263999, "60M Band Segment 1",    true,
+                                5.264000, 5.275999, "60M Band",              false,
+                                5.276000, 5.283999, "60M Band Segment 2",    true,
+                                5.284000, 5.288499, "60M Band",              false,
+                                5.288500, 5.291999, "60M Band Segment 3",    true,
+                                5.292000, 5.297999, "60M Band",              false,
+                                5.298000, 5.306999, "60M Band Segment 4",    true,
+                                5.307000, 5.312999, "60M Band",              false,
+                                5.313000, 5.322999, "60M Band Segment 5",    true,
+                                5.323000, 5.332999, "60M Band",              false,
+                                5.333000, 5.337999, "60M Band Segment 6",    true,
+                                5.338000, 5.353999, "60M Band",              false,
+                                5.354000, 5.357999, "60M Band Segment 7",    true,
+                                5.358000, 5.361999, "60M Band",              false,
+                                5.362000, 5.374499, "60M Band Segment 8",    true,
+                                5.374500, 5.377999, "60M Band",              false,
+                                5.378000, 5.381999, "60M Band Segment 9",    true,
+                                5.382000, 5.394999, "60M Band",              false,
+                                5.395000, 5.401499, "60M Band Segment 10",   true,
+                                5.401500, 5.403499, "60M Band",              false,
+                                5.403500, 5.406499, "60M Band Segment 11",   true,
+                                5.406500, 5.499999, "60M Band",              false,
 			};
 
             for (int i = 0; i < data.Length / 4; i++)
@@ -1972,9 +1972,34 @@ namespace PowerSDR
             DataTable t = ds.Tables["BandText"];
 
             object[] data = {
-                                5.100000, 5.249999, "60M General RX",           false,
-                                5.250000, 2.450000, "60M General",              true,
-                                5.450000, 5.499999, "60M General RX",           false,
+                                5.250000, 5.449999, "60M Amateur Service",      true,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddSwedenBandText60m()
+        {
+            DataTable t = ds.Tables["BandText"];
+
+            object[] data = {
+                               5.250000, 5.309999, "60M Band", false, 
+		                       5.310000, 5.313000, "60M Band Segment 1", true, 
+		                       5.313001, 5.319999, "60M Band", false, 
+		                       5.320000, 5.323000, "60M Band Segment 2", true, 
+		                       5.323001, 5.379999, "60M Band", false, 
+		                       5.380000, 5.383000, "60M Band Segment 3", true, 
+		                       5.383001, 5.389999, "60M Band", false, 
+		                       5.390000, 5.393000, "60M Band Segment 4", true, 
+		                       5.393001, 5.449999, "60M Band", false
                             };
 
             for (int i = 0; i < data.Length / 4; i++)
@@ -2002,6 +2027,30 @@ namespace PowerSDR
                                 7.090000, 7.090000, "40M SSB QRP",              true,
                                 7.090001, 7.099999, "40M All Modes",            true,
                                 7.100000, 7.199999, "40M General RX",           false,
+                            };
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+        }
+
+        private static void AddRussiaBandText12m()
+        {
+            DataTable t = ds.Tables["BandText"];
+            object[] data = {
+								24.890000, 24.905999, "12M CW",					true,
+                                24.906000, 24.906000, "12M CW QRP",		        true,
+                                24.906001, 24.914999, "12M CW",					true,
+                                24.915000, 24.928999, "12M Narrow Band Modes",	true,
+								24.929000, 24.930999, "12M Beacons",		    true,
+                                24.931000, 24.939999, "12M All Modes Digital",	true,
+                                24.940000, 25.139999, "12M All Modes",			true,
                             };
 
             for (int i = 0; i < data.Length / 4; i++)
@@ -2454,6 +2503,75 @@ namespace PowerSDR
 								"GEN", "SAM", "F7", 9.550000,
                                 "GEN", "SAM", "F7", 3.850000,
 								"GEN", "SAM", "F8", 0.590000,
+			};
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = ds.Tables["BandStack"].NewRow();
+                dr["BandName"] = (string)data[i * 4 + 0];
+                dr["Mode"] = (string)data[i * 4 + 1];
+                dr["Filter"] = (string)data[i * 4 + 2];
+                dr["Freq"] = ((double)data[i * 4 + 3]).ToString("f6");
+                ds.Tables["BandStack"].Rows.Add(dr);
+            }
+        }
+
+        private static void AddSwedenBandStack()
+        {
+            ds.Tables["BandStack"].Clear();
+            DataTable t = ds.Tables["BandStack"];
+
+            object[] data = {
+          "160M", "CWL", "F1", 1.820000, 
+		  "160M", "DIGU", "F1", 1.838000, 
+		  "160M", "USB", "F6", 1.843000, 
+		  "80M", "CWL", "F1", 3.510000, 
+		  "80M", "DIGU","F1", 3.590000, 
+		  "80M", "LSB", "F6", 3.750000, 
+		  "60M", "USB", "F6", 5.310000, 
+		  "60M", "USB", "F6", 5.320000, 
+		  "60M", "USB", "F6", 5.380000,
+          "60M", "USB", "F6", 5.390000, 
+		  "40M", "CWL", "F1", 7.010000, 
+		  "40M", "DIGU", "F1", 7.045000, 
+		  "40M", "LSB", "F6", 7.100000, 
+		  "30M", "CWU", "F1", 10.110000, 
+		  "30M", "CWU", "F1", 10.120000, 
+		  "30M", "DIGU", "F1",10.140000, 
+		  "20M", "CWU", "F1", 14.010000, 
+		  "20M", "DIGU", "F1", 14.085000,
+          "20M", "USB", "F6", 14.225000, 
+		  "17M", "CWU", "F1", 18.078000, 
+		  "17M", "DIGU", "F1", 18.100000, 
+		  "17M", "USB", "F6", 18.140000, 
+		  "15M", "CWU", "F1", 21.010000, 
+		  "15M", "DIGU", "F1", 21.090000, 
+		  "15M", "USB", "F6", 21.300000, 
+		  "12M", "CWU", "F1", 24.900000, 
+		  "12M", "DIGU", "F1", 24.920000,
+          "12M", "USB", "F6", 24.940000, 
+		  "10M", "CWU", "F1", 28.010000, 
+		  "10M", "DIGU", "F1", 28.120000, 
+		  "10M", "USB", "F6", 28.400000, 
+		  "6M", "CWU","F1", 50.090000, 
+		  "6M", "USB", "F6", 50.150000, 
+		  "6M", "DIGU", "F1", 50.250000, 
+		  "2M", "CWU", "F1", 144.050000, 
+		  "2M", "DIGU", "F1", 144.138000,
+          "2M", "USB", "F6", 144.300000, 
+		  "WWV", "SAM", "F5", 2.500000, 
+		  "WWV", "SAM", "F5", 5.000000, 
+		  "WWV", "SAM", "F5", 10.000000, 
+		  "WWV", "SAM","F5", 15.000000, 
+		  "WWV", "SAM", "F5", 20.000000, 
+		  "WWV", "USB", "F6", 3.330000, 
+		  "WWV", "USB", "F6", 7.850000, 
+		  "WWV", "USB", "F6", 14.670000,
+          "GEN", "SAM", "F6", 13.845000, 
+		  "GEN", "SAM", "F7", 5.975000, 
+		  "GEN", "SAM", "F7", 9.550000, 
+		  "GEN", "SAM", "F7", 3.850000, 
+		  "GEN", "SAM", "F8", 0.590000,
 			};
 
             for (int i = 0; i < data.Length / 4; i++)
@@ -4998,10 +5116,29 @@ namespace PowerSDR
                     AddRegion1BandText20m();
                     AddRegion1BandText17m();
                     AddRegion1BandText15m();
-                    AddRegion1BandText12m();
+                    AddRussiaBandText12m();
                     AddRussiaBandText11m();
                     AddRegion1BandText10m();
                     AddGreeceBandText6m();
+                    AddRegion1BandText4m();
+                    AddRegion1BandTextVHFplus();
+                    AddBandTextSWB();
+                    break;
+
+                case FRSRegion.Sweden:
+                    AddSwedenBandStack();
+                    ClearBandText();
+                    AddRegion1BandText160m();
+                    AddRegion1BandText80m();
+                    AddSwedenBandText60m();
+                    AddRegion1BandText40m();
+                    AddRegion1BandText30m();
+                    AddRegion1BandText20m();
+                    AddRegion1BandText17m();
+                    AddRegion1BandText15m();
+                    AddRegion1BandText12m();
+                    AddRegion1BandText10m();
+                    AddRegion1BandText6m();
                     AddRegion1BandText4m();
                     AddRegion1BandTextVHFplus();
                     AddBandTextSWB();
