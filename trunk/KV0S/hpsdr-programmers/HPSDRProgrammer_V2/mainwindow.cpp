@@ -53,12 +53,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QCoreApplication::setOrganizationDomain("openhpsdr.org");
     QCoreApplication::setApplicationName("HPSDRProgrammer_V2");
 
-    //settings.setValue("dir", "");
+    settings.setValue("dir", "");
 
 
-    //receiveThread=NULL;
-    //rawReceiveThread=NULL;
-    //discovery=NULL;
+    receiveThread=NULL;
+    rawReceiveThread=NULL;
+    discovery=NULL;
     currentboard="";
 
     deviceIndicator->setIndent(0);
@@ -68,10 +68,10 @@ MainWindow::MainWindow(QWidget *parent) :
     statusBar()->addPermanentWidget (deviceIndicator);
 
 
-    //for (int i = 0; i < interfaces.getInterfaces(); ++i)
-    //{   ui->   interfaceComboBox->addItem(interfaces.getInterfaceNameAt(i));
-    //    ++nInterfaces;
-    //}
+    for (int i = 0; i < interfaces.getInterfaces(); ++i)
+    {   ui->   interfaceComboBox->addItem(interfaces.getInterfaceNameAt(i));
+        ++nInterfaces;
+    }
 
     connect(ui->actionAbout,SIGNAL(triggered()),ab,SLOT(show()));
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(quit()));
@@ -128,9 +128,9 @@ void MainWindow::status(QString text) {
 // SLOT - interfaceSelected - called when the interface selection is changed
 void MainWindow::interfaceSelected(int index) {
     bool ok;
-    //interfaceName=interfaces.getInterfaceNameAt(index);
-    //ip=interfaces.getInterfaceIPAddress(index);
-    //hwAddress=interfaces.getInterfaceHardwareAddress(index);
+    interfaceName=interfaces.getInterfaceNameAt(index);
+    ip=interfaces.getInterfaceIPAddress(index);
+    hwAddress=interfaces.getInterfaceHardwareAddress(index);
     if(hwAddress==NULL) {
         ui->IPInterfaceLabel->setText("0.0.0.0");
         ui->MACInterfaceLabel->setText("00:00:00:00:00:00");
@@ -200,16 +200,16 @@ void MainWindow::discover() {
 
     clearDiscovery();
 
-    //QString myip=interfaces.getInterfaceIPAddress(interfaceName);
+    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
 
     if(!socket.bind(QHostAddress(ip),0,QUdpSocket::ReuseAddressHint)) {
         qDebug()<<"Error: Discovery: bind failed "<<socket.errorString();
         return;
     }
 
-    //discovery=new Discovery(&socket,myip);
-    //connect(discovery,SIGNAL(board_found(Board*)),this,SLOT(board_found(Board*)));
-    //discovery->discover();
+    discovery=new Discovery(&socket,myip);
+    connect(discovery,SIGNAL(board_found(Board*)),this,SLOT(board_found(Board*)));
+    discovery->discover();
     // disable the Discovery button
     ui->discoverButton->setDisabled(true);
 
@@ -220,7 +220,7 @@ void MainWindow::discover() {
 
 void MainWindow::discovery_timeout() {
 
-    //discovery->stop();
+    discovery->stop();
     if(ui->discoverComboBox->count()>0) {
         ui->discoverComboBox->setCurrentIndex(0);
         metisSelected(0);
@@ -245,7 +245,7 @@ void MainWindow::discovery_timeout() {
 
 void MainWindow::board_found(Board* m) {
 
-    /*if(htonl(m->getIpAddress())!=ip) {
+    if(htonl(m->getIpAddress())!=ip) {
         bd.append(m);
         ui->discoverComboBox->addItem(m->toAllString());
         add->getIPaddress(m);
@@ -258,7 +258,7 @@ void MainWindow::board_found(Board* m) {
         status(m->toAllString());
 
 
-    }*/
+    }
 }
 
 
@@ -363,7 +363,7 @@ void MainWindow::eraseData() {
     //} else {
         sendCommand(ERASE_METIS_FLASH);
         // wait 20 seconds to allow replys
-        QTimer::singleShot(20000,this,SLOT(erase_timeout()));
+        QTimer::singleShot(9000,this,SLOT(erase_timeout()));
     //}
 }
 
@@ -372,7 +372,7 @@ void MainWindow::eraseData() {
 void MainWindow::readIPaddress() {
     status("Reading board's IP address ... (takes several seconds)");
     sendCommand(READ_METIS_IP);
-    QTimer::singleShot(20000,this,SLOT(erase_timeout()));
+    QTimer::singleShot(9000,this,SLOT(erase_timeout()));
 }
 
 
@@ -671,7 +671,7 @@ void MainWindow::setIP_UDP()
             QMessageBox::information(this, tr("HPSDRProgramer_V2"),
                          QString("The HPSDR board listed as:\n%0 \n\nHas been changed to IP address: %1.\n").arg(bd[currentBoardIndex]->toAllString()).arg(ipstr),QMessageBox::Close);
             discover();
-    }else if( bdtype.contains("angelia") && (int(ver) >= 23) && (result > 0) ){
+    }else if( bdtype.contains("angelia") && (int(ver) >= 14) && (result > 0) ){
             ChangeIPAddress *cipa = new ChangeIPAddress( &socket, bd[currentBoardIndex]->getMACAddress() );
             cipa->changeIP( saddr );
             QMessageBox::information(this, tr("HPSDRProgramer_V2"),
