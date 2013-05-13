@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 win32 {
     INCLUDEPATH += "c:/WpdPack/Include"
-    LIBS += "c:/WpdPack/Lib/wpcap.lib" C:/MinGW/lib/libws2_32.a
+    LIBS += "c:/WpdPack/Lib/wpcap.lib"  "C:/Qt/4.8.4/tools/MinGW-gcc-4.4.0-2/mingw/lib/libws2_32.a"
  }
 
 macx {
