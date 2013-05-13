@@ -129,9 +129,8 @@ extern int MetisBulkRead(int endpoint, char *bufp, int buflen);
 extern int MetisBulkWrite(int endpoint, char *bufp, int buflen);
 extern int MetisReadDirect(char *bufp, int buflen);
 
-extern void ForceCandCFrame(void);
+extern void ForceCandCFrame(int);
 // all extern declarations need to be above this point
-
 
 // global variables for the DLL
 #ifdef GLOBAL_DECL
@@ -272,13 +271,15 @@ extern int Alex3Atten;
 extern int Alex4Atten;
 extern int MercDither;
 extern int MercPreamp;
-extern int Merc1Preamp;
-extern int Merc2Preamp;
+extern int RX1Preamp;
+extern int RX2Preamp;
 extern int Merc3Preamp;
 extern int Merc4Preamp;
 extern int MercRandom;
-extern int Hermes_att_enable;
-extern int Hermes_att_data;
+extern int enable_RX1_step_att;
+extern int enable_RX2_step_att;
+extern int enable_RX3_step_att;
+extern int step_att_data;
 
 extern int MicBoost;
 extern int LineIn;

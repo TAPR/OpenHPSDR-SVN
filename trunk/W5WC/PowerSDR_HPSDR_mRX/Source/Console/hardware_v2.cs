@@ -435,8 +435,6 @@ namespace PowerSDR
                    // {
                    //     c.Keyer.sp.RtsEnable = false;
                    // }
-
-                    pio_ic1.ClearBit(TR);
                 }
 			}
 		}

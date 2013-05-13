@@ -670,7 +670,7 @@ void ForceCandCFrames(int count, int c0, int vfofreq) {
 	buf[4] = (SampleRateIn2Bits	& 3) | ( C1Mask	& 0xfc ); /* c1	*/
 	buf[5] = PennyOCBits <<	1;							  /* c2	*/
 	buf[6] = (AlexAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; /* c3 */
-	buf[7] = NRx | Duplex; //0x24; //0x34; //0x0c; // duplex with 7 receivers
+	buf[7] = AlexTxAnt | NRx | Duplex; /* c4 */
 
 	buf[512] = 0x7f; 
 	buf[513] = 0x7f; 
@@ -695,23 +695,47 @@ void ForceCandCFrames(int count, int c0, int vfofreq) {
 	}
 } 
 
-void ForceCandCFrame(void) { 
-	ForceCandCFrames(1, 2, VFOfreq_tx); 
+void ForceCandCFrame(int count) { 
+	ForceCandCFrames(count, 2, VFOfreq_tx); 
 	Sleep(10);
-	ForceCandCFrames(1, 4, VFOfreq_rx1);
+	ForceCandCFrames(count, 4, VFOfreq_rx1);
 	Sleep(10);
-	ForceCandCFrames(1, 6, VFOfreq_rx2);
+  
+   /*  if(nreceivers >= 2) {
+	ForceCandCFrames(count, 6, VFOfreq_rx2);
+	Sleep(10);
+	}
+	else {
+    ForceCandCFrames(count, 6, 0);
+	Sleep(10);
+	} 
 
-	if(nreceivers == 2 || nreceivers == 4) {
+	if(nreceivers >= 3) {
+	ForceCandCFrames(count, 8, VFOfreq_rx3);
 	Sleep(10);
-	ForceCandCFrames(1, 8, VFOfreq_rx3);
-	Sleep(10);
-	ForceCandCFrames(1, 0x0a, VFOfreq_rx4);
 	}
+	else {
+	ForceCandCFrames(count, 8, 0);
+	Sleep(10);
+	}
+
+	if(nreceivers >= 4) {
+	ForceCandCFrames(count, 0x0a, VFOfreq_rx4);
+	Sleep(10);
+	}
+	else {
+	ForceCandCFrames(count, 0x0a, 0);
+	Sleep(10);
+	}
+
 	if (nreceivers == 5) {
-	Sleep(10);
-    ForceCandCFrames(1, 0x0c, VFOfreq_rx5);
-	}
+    ForceCandCFrames(count, 0x0c, VFOfreq_rx5);
+	} 
+	else {
+	ForceCandCFrames(count, 0x0c, 0);
+	} */
+
+
 //	Sleep(10);
 //	ForceCandCFrames(1, 0x0e, VFOfreq_rx6);
 //	Sleep(10);
@@ -833,7 +857,7 @@ void IOThreadMainLoop(void) {
 		break;
 	}
 
-	ForceCandCFrame(); // send 3 C&C frames to make sure ozy knows the clock settings 
+	ForceCandCFrame(1); // send 3 C&C frames to make sure ozy knows the clock settings 
 	// printf("iot: main loop starting\n"); fflush(stdout);
 	// main loop - read a buffer, processe it and then write a buffer if we have one to write
 	while ( io_keep_running != 0 ) {
@@ -881,7 +905,7 @@ void IOThreadMainLoop(void) {
 #endif
 
 				fprintf(stdout, "OzyBulkRead failed rc=%d\n", numread);  fflush(stdout);
-				ForceCandCFrame();  /* force a C and C frame in case Ozy is looking at wrong clocks */ 
+				ForceCandCFrame(1);  /* force a C and C frame in case Ozy is looking at wrong clocks */ 
 			}
 
 #ifdef EP6FILEDUMP 
@@ -1020,7 +1044,7 @@ void IOThreadMainLoop(void) {
 						break;
 					case 0x18://bits 15-8 (AIN6) Hermes
 						if (HermesPowerEnabled)
-						hermes_dcv = ((ControlBytesIn[3] << 8) & 0xff00); //Hermes 13.8v (22v scale)
+							hermes_dcv = ((ControlBytesIn[3] << 8) & 0xff00); //Hermes 13.8v (22.2v scale)
 						break;
 					case 0x20:
 						//  Mercury3FWVersion =  (int)(ControlBytesIn[3] >> 1);										                 
@@ -1048,8 +1072,8 @@ void IOThreadMainLoop(void) {
 						break;
 					case 0x18:
 						if (HermesPowerEnabled) {
-						hermes_dcv |=  (((int)(ControlBytesIn[4])) & 0xff);// bits 7-0 (AIN6) Hermes
-						HermesDCV = hermes_dcv; //Hermes 13.8v (22v scale)
+							hermes_dcv |=  (((int)(ControlBytesIn[4])) & 0xff);// bits 7-0 (AIN6) Hermes
+							HermesDCV = hermes_dcv; //Hermes 13.8v (22.2v scale)
 						}
 						break;
 					case 0x20:
@@ -1093,7 +1117,7 @@ void IOThreadMainLoop(void) {
 					}
 					else 
 					{
-			    		state = STATE_SAMPLE_MIC_HI;
+						state = STATE_SAMPLE_MIC_HI;
 						rx_sample_loops = 1;
 					}
 
@@ -1121,7 +1145,7 @@ void IOThreadMainLoop(void) {
 					}
 
 					++samples_this_sync;  // 1-rx = 189, 2-rx = 180, 3-rx = 175  4-rx = 171 7-rx = 165
-				    state = samples_this_sync == sync_samples ? STATE_PADDING_LOOP : STATE_SAMPLE_HI; 
+					state = samples_this_sync == sync_samples ? STATE_PADDING_LOOP : STATE_SAMPLE_HI; 
 					if (state == STATE_PADDING_LOOP && padding_loops == 0) state = STATE_SYNC_HI;
 
 					//printf("s_t_s: %d\n", samples_this_sync);
@@ -1236,9 +1260,8 @@ void IOThreadMainLoop(void) {
 
 				case OUT_STATE_CONTROL0: //C0
 					out_state = OUT_STATE_CONTROL1;
-
 					FPGAWriteBufp[writebufpos] = (unsigned char)XmitBit;                                                    
-					FPGAWriteBufp[writebufpos] &= 1; // not needed ?
+					//FPGAWriteBufp[writebufpos] &= 1; // not needed ?
 					switch (out_control_idx) {
 					case 0:
 						FPGAWriteBufp[writebufpos] |= 0;
@@ -1282,6 +1305,32 @@ void IOThreadMainLoop(void) {
 					case 13: //RX7 VFO
 						FPGAWriteBufp[writebufpos] |= 0x10;
 						break;
+
+					case 14:
+						FPGAWriteBufp[writebufpos] |= 0;
+						break;
+					case 15:
+						FPGAWriteBufp[writebufpos] |= 0;
+						break;
+					case 16:
+						FPGAWriteBufp[writebufpos] |= 0;
+						break;
+					case 17:
+						FPGAWriteBufp[writebufpos] |= 0;
+						break;
+					case 18:
+						FPGAWriteBufp[writebufpos] |= 0;
+						break;
+					case 19:
+						FPGAWriteBufp[writebufpos] |= 0;
+						break;
+					case 20:
+						FPGAWriteBufp[writebufpos] |= 0;
+						break;
+					case 21:
+						FPGAWriteBufp[writebufpos] |= 0;
+						break;
+
 					}
 
 					ControlBytesOut[0] = FPGAWriteBufp[writebufpos];
@@ -1323,8 +1372,8 @@ void IOThreadMainLoop(void) {
 						} 
 						break;
 					case 7:
-						FPGAWriteBufp[writebufpos] = ( Merc2Preamp | Merc1Preamp) & 0xf; 
-						// printf(" pamp1: %d pamp2: %d\n", Merc1Preamp, Merc2Preamp);
+						FPGAWriteBufp[writebufpos] = ( RX2Preamp | RX1Preamp) & 0xf; 
+						// printf(" pamp1: %d pamp2: %d\n", RX1Preamp, RX2Preamp);
 						break;
 					case 8:
 						FPGAWriteBufp[writebufpos] = 0;
@@ -1344,7 +1393,40 @@ void IOThreadMainLoop(void) {
 					case 13:
 						FPGAWriteBufp[writebufpos] =  (VFOfreq_rx7 >> 24) & 0xff; // RX7
 						break;
-				} 
+
+					case 14:
+						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
+						// printf(" C1Mask: %d\n", C1Mask);
+						break;
+					case 15:
+						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
+						// printf(" C1Mask: %d\n", C1Mask);
+						break;
+					case 16:
+						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
+						// printf(" C1Mask: %d\n", C1Mask);
+						break;
+					case 17:
+						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
+						// printf(" C1Mask: %d\n", C1Mask);
+						break;
+					case 18:
+						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
+						// printf(" C1Mask: %d\n", C1Mask);
+						break;
+					case 19:
+						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
+						// printf(" C1Mask: %d\n", C1Mask);
+						break;
+					case 20:
+						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
+						// printf(" C1Mask: %d\n", C1Mask);
+						break;
+					case 21:
+						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
+						// printf(" C1Mask: %d\n", C1Mask);
+						break;					
+					} 
 
 					ControlBytesOut[1] = FPGAWriteBufp[writebufpos];
 					break;
@@ -1396,7 +1478,32 @@ void IOThreadMainLoop(void) {
 					case 13:
 						FPGAWriteBufp[writebufpos] = (VFOfreq_rx7 >> 16) & 0xff; // RX7 freq
 						break;
-				}
+
+					case 14:
+						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
+						break;
+					case 15:
+						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
+						break;
+					case 16:
+						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
+						break;
+					case 17:
+						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
+						break;
+					case 18:
+						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
+						break;
+					case 19:
+						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
+						break;
+					case 20:
+						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
+						break;
+					case 21:
+						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
+						break;					
+					}
 
 					ControlBytesOut[2] = FPGAWriteBufp[writebufpos];
 					break;
@@ -1407,8 +1514,6 @@ void IOThreadMainLoop(void) {
 					case 0:
 						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
 							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
-						// FPGAWriteBufp[writebufpos] = ( MercAtten | MercDither | MercRandom |
-						// AlexRxAnt | AlexRxOut) & 0xff; 
 						break;
 					case 1:
 						FPGAWriteBufp[writebufpos] = (VFOfreq_tx >> 8) & 0xff;
@@ -1426,7 +1531,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = (VFOfreq_rx4 >> 8) & 0xff;
 						break;
 					case 6:
-						FPGAWriteBufp[writebufpos] = AlexTRRelay | AlexHPFMask & 0x7f;
+						FPGAWriteBufp[writebufpos] = AlexTRRelay | AlexHPFMask & 0xff;
 						break;
 					case 7: // (0, 1 = open drain pins 1,2) (2, 3 = TTL pins 3,4)
 						FPGAWriteBufp[writebufpos] = (UserOut0 | UserOut1 | UserOut2 | UserOut3) & 0x0f;
@@ -1449,7 +1554,40 @@ void IOThreadMainLoop(void) {
 					case 13:
 						FPGAWriteBufp[writebufpos] = (VFOfreq_rx7 >> 8) & 0xff;
 						break;
-				}                                                         
+
+					case 14:
+						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
+							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
+						break;
+					case 15:
+						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
+							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
+						break;
+					case 16:
+						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
+							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
+						break;
+					case 17:
+						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
+							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
+						break;
+					case 18:
+						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
+							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
+						break;
+					case 19:
+						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
+							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
+						break;
+					case 20:
+						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
+							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
+						break;
+					case 21:
+						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
+							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
+						break;
+					}                                                         
 
 					ControlBytesOut[3] = FPGAWriteBufp[writebufpos];
 					break;
@@ -1480,7 +1618,8 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = AlexLPFMask & 0x7f;
 						break;
 					case 7:
-						FPGAWriteBufp[writebufpos] = (Hermes_att_enable | Hermes_att_data) & 0x3f;
+						FPGAWriteBufp[writebufpos] = (enable_RX1_step_att | enable_RX2_step_att | 
+							                          enable_RX3_step_att | step_att_data) & 0xff;
 						break;
 					case 8:
 						FPGAWriteBufp[writebufpos] = 0;
@@ -1500,7 +1639,32 @@ void IOThreadMainLoop(void) {
 					case 13:
 						FPGAWriteBufp[writebufpos] = VFOfreq_rx7 & 0xff;
 						break;
-				}
+
+					case 14:
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
+						break;
+					case 15:
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
+						break;
+					case 16:
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
+						break;
+					case 17:
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
+						break;
+					case 18:
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
+						break;
+					case 19:
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
+						break;
+					case 20:
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
+						break;
+					case 21:
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
+						break;			
+					}
 
 					ControlBytesOut[4] = FPGAWriteBufp[writebufpos];
 					++out_frame_idx;
@@ -1510,34 +1674,36 @@ void IOThreadMainLoop(void) {
 						out_control_idx = 1;
 						break;
 					case 1: // tx vfo
-						out_control_idx = 2;
+						//out_control_idx = 2;
+						out_control_idx = 14;
 						break;
 					case 2: //rx1 vfo
-						out_control_idx = 3;
+						// out_control_idx = 3;
+						out_control_idx = 15;
 						break;
 					case 3: //rx2 vfo
-						if(nreceivers == 2)
-						 out_control_idx = 6;
-						else
-							out_control_idx = 4;
-						//out_control_idx = 6; //(HermesPowerEnabled || isMetis || AlexEnabled) ? 6 : 7;
+						//out_control_idx = 4;
+						out_control_idx = 16;
 						break;
 					case 4: //rx3 vfo
-						out_control_idx = 5;
+						//out_control_idx = 5;
+						out_control_idx = 17;
 						break; 
 					case 5: //rx4 vfo
-						out_control_idx = 11; //11
+						//out_control_idx = 6; //11;
+						out_control_idx = 18;
 						break;
 					case 6: //Alex filters
-						out_control_idx = 7;
+						//out_control_idx = 7;
+						out_control_idx = 19;
 						break;
 					case 7: //Preamp controls
-						//out_control_idx = 0; // loop back to beginning
-						out_control_idx = 8; //  Goto Alex 2 Controls
+						//out_control_idx = 8; //  Goto Alex 2 Controls
+						out_control_idx = 20;
 						break;
 					case 8: // Alex 2 control
-						//	out_control_idx = 9;
-						out_control_idx = 0;
+						// out_control_idx = 0;
+						out_control_idx = 21;
 						break;
 					case 9: // Alex 3 control
 						out_control_idx = 10;
@@ -1554,7 +1720,32 @@ void IOThreadMainLoop(void) {
 					case 13: //rx7 vfo
 						out_control_idx = 6;
 						break;
-				}
+
+					case 14:
+						out_control_idx = 2;
+						break;
+					case 15: 
+						out_control_idx = 3;
+						break;
+					case 16: 
+						out_control_idx = 4;
+						break;
+					case 17: 
+						out_control_idx = 5;
+						break;
+					case 18: 
+						out_control_idx = 6;
+						break;
+					case 19: 
+						out_control_idx = 7;
+						break;
+					case 20: 
+						out_control_idx = 1; //8;
+						break;
+					case 21: 
+						out_control_idx = 1;
+						break;				
+					}
 					break; 
 
 				case OUT_STATE_MON_LEFT_HI_NEEDED:
@@ -1741,19 +1932,19 @@ void IOThreadMainLoop(void) {
 // 1 - thread not running
 // 2 - pthread_join failed
 int IOThreadStop() {
-        int rc;
-        void *junk;
+	int rc;
+	void *junk;
 
-        if ( io_keep_running == 0 ) {  // not running
-                return 1;
-        }
-        io_keep_running = 0;  // flag to stop
-        rc = pthread_join(IOThreadID, &junk);
-        if ( rc != 0 ) {
-                fprintf(stderr, "Warning: io-thread.c, pthread_join failed with rc=%d\n", rc);
-                return 2;
-        }
-        return 0;
+	if ( io_keep_running == 0 ) {  // not running
+		return 1;
+	}
+	io_keep_running = 0;  // flag to stop
+	rc = pthread_join(IOThreadID, &junk);
+	if ( rc != 0 ) {
+		fprintf(stderr, "Warning: io-thread.c, pthread_join failed with rc=%d\n", rc);
+		return 2;
+	}
+	return 0;
 }
 
 

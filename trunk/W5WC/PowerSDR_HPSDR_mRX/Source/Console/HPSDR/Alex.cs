@@ -177,8 +177,8 @@ namespace PowerSDR
 				JanusAudio.SetAlexAntBits(0, 0, 0); 
 				return;
 			}
-			int rx_ant; 
-			int tx_ant; 
+			int rx_only_ant; 
+			int trx_ant; 
 			int rx_out; 
 
 			int idx = (int)band - (int)Band.B160M; 
@@ -197,19 +197,19 @@ namespace PowerSDR
 			
 
 			if ( tx ) 
-			{ 
-				rx_ant = 0;
+			{
+                rx_only_ant = 0;
                 rx_out = RxOutOnTx ? 1 : 0; 
-				tx_ant = TxAnt[idx]; 
+				trx_ant = TxAnt[idx]; 
 			} 
 			else 
 			{ 
-				rx_ant = RxOnlyAnt[idx]; 
-				rx_out = rx_ant != 0 ? 1 : 0; 
-				tx_ant = RxAnt[idx]; 
+				rx_only_ant = RxOnlyAnt[idx]; 
+				rx_out = rx_only_ant != 0 ? 1 : 0; 
+				trx_ant = RxAnt[idx]; 
 			}
           //  int rc = JanusAudio.SetAlexAntBits(rx_ant, tx_ant, 1);
-			JanusAudio.SetAlexAntBits(rx_ant, tx_ant, rx_out); 
+			JanusAudio.SetAlexAntBits(rx_only_ant, trx_ant, rx_out); 
 
 			// don't allow changing antenna selections when mox is activated 
 		/*	if ( tx )  

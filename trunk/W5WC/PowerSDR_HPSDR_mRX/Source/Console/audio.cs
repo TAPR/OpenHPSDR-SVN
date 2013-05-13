@@ -33,6 +33,7 @@
 //#define TIMER
 //#define INTERLEAVED
 //#define SPLIT_INTERLEAVED
+//#define LINCOR
 
 using System;
 using System.Collections;
@@ -1598,6 +1599,10 @@ namespace PowerSDR
             tx_out_r = (float*)array_ptr_output[3]; //CallbackOutRbufp
             rx2_out_l = (float*)array_ptr_output[4]; //CallbackOutL2bufp
             rx2_out_r = (float*)array_ptr_output[5]; //CallbackOutR2bufp
+
+#if LINCOR
+            lincor.LincorControlAndCapture(frameCount, rx2_in_l, rx2_in_r, rx1_in_l, rx1_in_r, localmox, true);
+#endif
 
             if (!localmox)
             {
@@ -3170,7 +3175,10 @@ namespace PowerSDR
 			t1.Stop();
 			Debug.WriteLine(t1.Duration);
 #endif
-
+#if LINCOR
+            lincor.LincorGenTwoTone(frameCount, out_l2, out_r2);
+            lincor.lincorCorrect(frameCount, out_l2, out_r2);
+#endif
             return callback_return;
         }
 

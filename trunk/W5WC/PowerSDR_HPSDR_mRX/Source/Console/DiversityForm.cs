@@ -545,7 +545,7 @@ namespace PowerSDR
 
 		private void btnSync_Click(object sender, System.EventArgs e)
 		{
-            console.RX2SpurReduction = console.SpurReduction;
+            //console.RX2SpurReduction = console.SpurReduction;
             console.RX2DSPMode = console.RX1DSPMode;
             console.RX2Filter = console.RX1Filter;
             console.RX2PreampMode = console.RX1PreampMode;
