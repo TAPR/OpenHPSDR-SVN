@@ -28986,9 +28986,9 @@ namespace PowerSDR
                                 SetupForm.HermesEnableAttenuator = old_satt;
                                 SetupForm.HermesAttenuatorData = old_satt_data;
  
-                                RX2PreampMode = rx2_preamp;
-                                RX2StepAttenuator = old_rx2_satt;
-                                RX2ATT = old_rx2_satt_data;
+                               // RX2PreampMode = rx2_preamp;
+                               // RX2StepAttenuator = old_rx2_satt;
+                           //     RX2ATT = old_rx2_satt_data;
  
                                 update_preamp_mode = false;
                             }
@@ -28999,9 +28999,9 @@ namespace PowerSDR
                                 old_satt_data = SetupForm.HermesAttenuatorData;
                                 old_satt = rx1_step_attenuator;
 
-                                rx2_preamp = RX2PreampMode;
-                                old_rx2_satt_data = RX2AttenuatorData;
-                                old_rx2_satt = RX2StepAttenuator;
+                              //  rx2_preamp = RX2PreampMode;
+                               // old_rx2_satt_data = RX2AttenuatorData;
+                               // old_rx2_satt = RX2StepAttenuator;
 
                                 update_preamp = false;
                             }
