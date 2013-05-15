@@ -29926,7 +29926,7 @@
             65536});
             this.udPA100W.Location = new System.Drawing.Point(184, 72);
             this.udPA100W.Maximum = new decimal(new int[] {
-            100,
+            120,
             0,
             0,
             0});
@@ -29976,7 +29976,7 @@
             65536});
             this.udPA90W.Location = new System.Drawing.Point(184, 48);
             this.udPA90W.Maximum = new decimal(new int[] {
-            100,
+            110,
             0,
             0,
             0});
@@ -30027,7 +30027,7 @@
             65536});
             this.udPA110W.Location = new System.Drawing.Point(184, 96);
             this.udPA110W.Maximum = new decimal(new int[] {
-            100,
+            130,
             0,
             0,
             0});
@@ -30040,7 +30040,7 @@
             this.udPA110W.Size = new System.Drawing.Size(48, 20);
             this.udPA110W.TabIndex = 108;
             this.udPA110W.Value = new decimal(new int[] {
-            100,
+            110,
             0,
             0,
             0});
@@ -30084,7 +30084,7 @@
             65536});
             this.udPA120W.Location = new System.Drawing.Point(184, 120);
             this.udPA120W.Maximum = new decimal(new int[] {
-            100,
+            140,
             0,
             0,
             0});
@@ -30097,7 +30097,7 @@
             this.udPA120W.Size = new System.Drawing.Size(48, 20);
             this.udPA120W.TabIndex = 109;
             this.udPA120W.Value = new decimal(new int[] {
-            100,
+            120,
             0,
             0,
             0});
@@ -30164,7 +30164,7 @@
             65536});
             this.udPA130W.Location = new System.Drawing.Point(184, 144);
             this.udPA130W.Maximum = new decimal(new int[] {
-            100,
+            150,
             0,
             0,
             0});
@@ -30177,7 +30177,7 @@
             this.udPA130W.Size = new System.Drawing.Size(48, 20);
             this.udPA130W.TabIndex = 111;
             this.udPA130W.Value = new decimal(new int[] {
-            100,
+            130,
             0,
             0,
             0});
@@ -30255,7 +30255,7 @@
             65536});
             this.udPA140W.Location = new System.Drawing.Point(184, 168);
             this.udPA140W.Maximum = new decimal(new int[] {
-            100,
+            160,
             0,
             0,
             0});
@@ -30268,7 +30268,7 @@
             this.udPA140W.Size = new System.Drawing.Size(48, 20);
             this.udPA140W.TabIndex = 113;
             this.udPA140W.Value = new decimal(new int[] {
-            100,
+            140,
             0,
             0,
             0});
