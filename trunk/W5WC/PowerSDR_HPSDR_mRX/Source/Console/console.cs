@@ -17270,13 +17270,13 @@ namespace PowerSDR
                 {
                     lblPreamp.Text = "S-ATT";
                     udRX1StepAttData.BringToFront();
-                   // JanusAudio.EnableRX1StepAtten(1);
+                    JanusAudio.EnableRX1StepAtten(1);
                 }
                 else
                 {
                     lblPreamp.Text = "ATT";
                     comboPreamp.BringToFront();
-                   // JanusAudio.EnableRX1StepAtten(0);
+                    JanusAudio.EnableRX1StepAtten(0);
 
                     if (AlexPresent)
                         JanusAudio.SetAlexAtten(alex_atten); // normal up alex attenuator setting
@@ -17304,7 +17304,7 @@ namespace PowerSDR
 
                 if (rx1_step_attenuator)
                 {
-                    JanusAudio.EnableRX2StepAtten(0);
+                   // JanusAudio.EnableRX2StepAtten(0);
                     JanusAudio.EnableRX1StepAtten(1);
                     if (AlexPresent && !ANAN10Present)
                     {
@@ -17373,10 +17373,9 @@ namespace PowerSDR
 
                 if (rx2_step_attenuator)
                 {
-                    JanusAudio.EnableRX1StepAtten(0);
+                   // JanusAudio.EnableRX1StepAtten(0);
                     JanusAudio.EnableRX2StepAtten(1);
-                    JanusAudio.SetStepAttenData(rx2_attenuator_data);
-                      
+                    JanusAudio.SetStepAttenData(rx2_attenuator_data);                      
                 }
                 else
                     JanusAudio.EnableRX2StepAtten(0);
@@ -28680,7 +28679,8 @@ namespace PowerSDR
         {
             float bridge_volt = 0.09f;
             if (current_hpsdr_model == HPSDRModel.ANAN100 ||
-                current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.082775f;
+                current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.095f;
+               // current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.082775f;
             
             int adc = JanusAudio.getRefPower();
             if (adc < 100) adc = 0;
@@ -28700,7 +28700,8 @@ namespace PowerSDR
         {
             float bridge_volt = 0.09f;
             if (current_hpsdr_model == HPSDRModel.ANAN100 ||
-                current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.082775f;
+                current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.095f;
+               // current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.082775f;
             
             int adc = JanusAudio.getAlexFwdPower();
             if (adc < 100) adc = 0;
