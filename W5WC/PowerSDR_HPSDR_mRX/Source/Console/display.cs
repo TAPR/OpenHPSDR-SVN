@@ -7010,8 +7010,9 @@ namespace PowerSDR
             int grid_step = 0; // spectrum_grid_step;
             int f_diff = 0;
 
-            if (CurrentDisplayMode == DisplayMode.PANAFALL ||
-                (CurrentDisplayMode == DisplayMode.PANADAPTER && display_duplex)) displayduplex = true;
+            if ((CurrentDisplayMode == DisplayMode.PANAFALL && (console.NReceivers <= 2 && display_duplex)) ||
+                (CurrentDisplayMode == DisplayMode.PANAFALL && console.NReceivers > 2) ||
+               (CurrentDisplayMode == DisplayMode.PANADAPTER && display_duplex)) displayduplex = true;
 
             if (local_mox && !displayduplex)// || (mox && tx_on_vfob))
             {
@@ -9727,7 +9728,9 @@ namespace PowerSDR
             if (rx == 1 && !tx_on_vfob && mox) local_mox = true;
             if (rx == 2 && tx_on_vfob && mox) local_mox = true;
             if (rx == 1 && tx_on_vfob && mox && !console.RX2Enabled) local_mox = true;
-            if (CurrentDisplayMode == DisplayMode.PANAFALL ||
+
+            if ((CurrentDisplayMode == DisplayMode.PANAFALL && (console.NReceivers <= 2 && display_duplex)) ||
+                (CurrentDisplayMode == DisplayMode.PANAFALL && console.NReceivers > 2) ||
                (CurrentDisplayMode == DisplayMode.PANADAPTER && display_duplex)) displayduplex = true;
 
             if (rx == 2)
@@ -10269,7 +10272,8 @@ namespace PowerSDR
             Color mid_color = Color.Red;
             Color high_color = Color.Blue;
 
-            if (CurrentDisplayMode == DisplayMode.PANAFALL ||
+            if ((CurrentDisplayMode == DisplayMode.PANAFALL && (console.NReceivers <= 2 && display_duplex)) ||
+                (CurrentDisplayMode == DisplayMode.PANAFALL && console.NReceivers > 2) ||
                (CurrentDisplayMode == DisplayMode.PANADAPTER && display_duplex)) displayduplex = true;
 
             if (rx == 2)
@@ -10372,16 +10376,16 @@ namespace PowerSDR
                     data_ready_bottom = false;
                 }
 
-                /*            if (rx == 1)
+                if (rx == 1 && average_on && local_mox && !displayduplex)
                                 console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data);
-                            else if (rx == 2)
-                                console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
+                           // else if (rx == 2)
+                             //   console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
 
-                            if (rx == 1 && peak_on)
+                            if (rx == 1 && peak_on && local_mox && !displayduplex)
                                 UpdateDisplayPeak(rx1_peak_buffer, current_display_data);
-                            else if (rx == 2 && rx2_peak_on)
-                                UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom);
-                            */
+                           // else if (rx == 2 && rx2_peak_on)
+                               // UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom);
+                            
 
                 int duration = 0;
                 if (rx == 1)
@@ -10420,16 +10424,20 @@ namespace PowerSDR
 
                         if (rx == 1)
                         {
-                            max = current_display_data[i];
-                            /*  if (slope <= 1.0 || lindex == rindex)
-                              {
-                                  max = current_display_data[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % 4096] * (dval - (float)lindex);
-                              }
-                              else
-                              {
-                                  for (int j = lindex; j < rindex; j++)
-                                      if (current_display_data[j % 4096] > max) max = current_display_data[j % 4096];
-                              } */
+                            if (local_mox && !displayduplex)
+                            {
+                                if (slope <= 1.0 || lindex == rindex)
+                                {
+                                    max = current_display_data[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % 4096] * (dval - (float)lindex);
+                                }
+                                else
+                                {
+                                    for (int j = lindex; j < rindex; j++)
+                                        if (current_display_data[j % 4096] > max) max = current_display_data[j % 4096];
+                                }
+                            }
+                            else
+                                max = current_display_data[i];
                         }
                         else if (rx == 2)
                         {

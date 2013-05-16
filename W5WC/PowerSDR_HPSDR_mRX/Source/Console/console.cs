@@ -1703,7 +1703,7 @@ namespace PowerSDR
                 switch (current_hpsdr_model)
                 {
                     case HPSDRModel.ANAN100D:
-                        rx1_meter_cal_offset = -49.64704f;
+                        rx1_meter_cal_offset = -46.50807f;
                         break;
                     case HPSDRModel.HPSDR:
                         rx1_meter_cal_offset = -41.96943f;
@@ -1750,7 +1750,7 @@ namespace PowerSDR
                 switch (current_hpsdr_model)
                 {
                     case HPSDRModel.ANAN100D:
-                        rx2_meter_cal_offset = -49.64704f;
+                        rx2_meter_cal_offset = -46.50807f;
                         break;
                     case HPSDRModel.HPSDR:
                         rx2_meter_cal_offset = -41.96943f;
@@ -1797,7 +1797,7 @@ namespace PowerSDR
                 switch (current_hpsdr_model)
                 {
                     case HPSDRModel.ANAN100D:
-                        RX1DisplayCalOffset = -7.174f;
+                        RX1DisplayCalOffset = -4.357f;
                         break;
                     default:
                         RX1DisplayCalOffset = -3.465f;
@@ -7900,7 +7900,7 @@ namespace PowerSDR
             SetupForm.StartPosition = FormStartPosition.Manual;
            		
             SetupForm.AddHPSDRPages();
-           // SetComboPreampForHPSDR();
+            SetComboPreampForHPSDR();
  
             //SetupForm.GetTxProfiles();
             UpdateTXProfile(SetupForm.TXProfile);
@@ -8133,7 +8133,7 @@ namespace PowerSDR
                // udRX2StepAttData.Visible = true;
             //    rx2_preamp_present = true;
            // }
-            SetComboPreampForHPSDR();
+           // SetComboPreampForHPSDR();
             //siolisten = new SIOListenerII(this);
             //Init60mChannels();						// Load 60m Channel Freqs
             update_rx2_display = true;
@@ -18468,7 +18468,7 @@ namespace PowerSDR
             if (rx1_step_attenuator)
             {
                 Display.RX1PreampOffset = rx1_attenuator_data;
-                Display.RX2PreampOffset = rx1_attenuator_data;
+               // Display.RX2PreampOffset = rx1_attenuator_data;
             }
             else
             {
@@ -18476,10 +18476,32 @@ namespace PowerSDR
 
                 if (!alexpresent && rx2_preamp_present)
                     Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
-                else
-                    Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+              //  else
+                  //  Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
             }
 
+            if (rx1_step_attenuator)
+            {
+                if (rx1_attenuator_data > 31)
+                    Display.RX2PreampOffset = rx1_attenuator_data - 29.0f;
+                else
+                    Display.RX2PreampOffset = (float)rx1_attenuator_data;
+            }
+            else
+            {
+                switch (rx1_preamp_mode)
+                {
+                    case PreampMode.HPSDR_OFF:
+                    case PreampMode.HPSDR_MINUS40:
+                    case PreampMode.HPSDR_MINUS50:
+                        Display.RX2PreampOffset = 20.0f;
+                        break;
+                    default:
+                        Display.RX2PreampOffset = 0.0f;
+                        break;
+                }
+            }
+            
             switch (Display.CurrentDisplayMode)
             {
                 case DisplayMode.WATERFALL:
@@ -28276,7 +28298,7 @@ namespace PowerSDR
                             //  break;
                             case DisplayMode.WATERFALL:
                             case DisplayMode.PANAFALL:
-                                if (current_display_engine == DisplayEngine.GDI_PLUS)
+                              /*  if (current_display_engine == DisplayEngine.GDI_PLUS)
                                 {
                                     fixed (float* ptr = &Display.new_display_data[0])
                                         SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
@@ -28286,9 +28308,36 @@ namespace PowerSDR
                                     fixed (float* ptr = &Display.new_waterfall_data[0])
                                         SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
                                     Display.WaterfallDataReady = true;
+                                } */
+
+                                if (mox && !display_duplex && (NReceivers <= 2))
+                                {
+                                    if (chkVFOATX.Checked || !chkRX2.Checked)
+                                    {
+                                        fixed (float* ptr = &Display.new_display_data[0])
+                                            DttSP.GetPanadapter(top_thread, ptr);
+                                    }
+                                    else
+                                    {
+                                        fixed (float* ptr = &Display.new_display_data[0])
+                                            SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
+                                    }
                                 }
-
-
+                                else //rx
+                                {
+                                    if (current_display_engine == DisplayEngine.GDI_PLUS)
+                                    {
+                                        fixed (float* ptr = &Display.new_display_data[0])
+                                            SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
+                                    }
+                                    else
+                                    {
+                                        fixed (float* ptr = &Display.new_waterfall_data[0])
+                                            SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
+                                        Display.WaterfallDataReady = true;
+                                    }
+                                }
+ 
                                 // fixed (float* ptr = &Display.new_display_data[0])
                                 //  SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
                                 // Display.WaterfallDataReady = true;
@@ -28581,8 +28630,29 @@ namespace PowerSDR
                     float num = 0f;
                     float rx2PreampOffset = 0.0f;
 
-                    if (rx1_step_attenuator) rx2PreampOffset = (float)rx1_attenuator_data;
-                    else rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+                    if (rx1_step_attenuator)
+                    {
+                        if (rx1_attenuator_data > 31)
+                            rx2PreampOffset = rx1_attenuator_data - 29.0f;
+                        else
+                            rx2PreampOffset = (float)rx1_attenuator_data;
+                    }
+                    else
+                    {
+                        switch (rx1_preamp_mode)
+                        {
+                            case PreampMode.HPSDR_OFF:
+                            case PreampMode.HPSDR_MINUS40:
+                            case PreampMode.HPSDR_MINUS50:
+                                rx2PreampOffset = 20.0f;
+                                break;
+                            default:
+                                rx2PreampOffset = 0.0f;
+                                break;
+                        }
+ 
+                       // rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+                    }
 
                     switch (mode)
                     {
@@ -28803,16 +28873,17 @@ namespace PowerSDR
             while (chkPower.Checked && rx2_enabled)
             {
                 float num = DttSP.CalculateRXMeter(2, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-                float rx2PreampOffset = 0.0f;
+               // float rx2PreampOffset = 0.0f;
 
-                if (rx2_step_attenuator) rx2PreampOffset = (float)rx2_attenuator_data;
-                else rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+               // if (rx2_step_attenuator) rx2PreampOffset = (float)rx2_attenuator_data;
+               // else rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
                 //Debug.WriteLine("SQL Read: "+num.ToString("f1"));
 
                 num = num +
                     rx1_meter_cal_offset +
                     // rx1_preamp_offset[(int)rx1_preamp_mode] +
-                    rx2PreampOffset +
+                    Display.RX2PreampOffset +
+                   // rx2PreampOffset +
                     rx2_filter_size_cal_offset;// +
                 //rx2_path_offset;
 
@@ -42970,11 +43041,11 @@ namespace PowerSDR
                 chkVFOSync.BackColor = button_selected_color;
                 if (click_tune_display)
                     chkFWCATU.Checked = false;
-                if (!initializing && RX2Enabled)
-                {
-                    RX2DSPMode = RX1DSPMode;
-                    RX2Filter = RX1Filter;
-                }
+               // if (!initializing && RX2Enabled)
+              //  {
+                //    RX2DSPMode = RX1DSPMode;
+                //    RX2Filter = RX1Filter;
+              //  }
                // RX2PreampMode = RX1PreampMode;
                 // console.RX2AGCMode = console.RX1AGCMode;    // no custom AGC mode for RX2 causes UHE
              //   RX2RF = RF;                 //W4TME
