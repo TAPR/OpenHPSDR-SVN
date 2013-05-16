@@ -13664,7 +13664,7 @@ namespace PowerSDR
             }
            // if (radGenModelANAN100D.Checked) console.comboRX2Preamp.Visible = true;
             console.AlexPresent = chkAlexPresent.Checked;
-           // console.SetComboPreampForHPSDR();
+            console.SetComboPreampForHPSDR();
             // if (chkHermesStepAttenuator.Checked) chkHermesStepAttenuator.Checked = true;
             udHermesStepAttenuatorData_ValueChanged(this, EventArgs.Empty);
         }
