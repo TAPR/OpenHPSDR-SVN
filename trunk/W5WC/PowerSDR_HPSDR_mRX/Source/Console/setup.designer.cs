@@ -189,15 +189,6 @@
             this.tpGeneral = new System.Windows.Forms.TabPage();
             this.tcGeneral = new System.Windows.Forms.TabControl();
             this.tpGeneralHardware = new System.Windows.Forms.TabPage();
-            this.grpMetisAddr = new System.Windows.Forms.GroupBoxTS();
-            this.lblMetisBoardID = new System.Windows.Forms.LabelTS();
-            this.labelTS88 = new System.Windows.Forms.LabelTS();
-            this.lblMetisCodeVersion = new System.Windows.Forms.LabelTS();
-            this.lblMetisVer = new System.Windows.Forms.LabelTS();
-            this.labelTS16 = new System.Windows.Forms.LabelTS();
-            this.labelTS9 = new System.Windows.Forms.LabelTS();
-            this.lblMetisMAC = new System.Windows.Forms.LabelTS();
-            this.lblMetisIP = new System.Windows.Forms.LabelTS();
             this.grpLimtRX = new System.Windows.Forms.GroupBoxTS();
             this.chkLimitRX = new System.Windows.Forms.CheckBoxTS();
             this.udDDSIFFreq = new System.Windows.Forms.NumericUpDownTS();
@@ -271,6 +262,15 @@
             this.udGeneralLPTDelay = new System.Windows.Forms.NumericUpDownTS();
             this.lblGeneralLPTAddr = new System.Windows.Forms.LabelTS();
             this.comboGeneralLPTAddr = new System.Windows.Forms.ComboBoxTS();
+            this.grpMetisAddr = new System.Windows.Forms.GroupBoxTS();
+            this.lblMetisBoardID = new System.Windows.Forms.LabelTS();
+            this.labelTS88 = new System.Windows.Forms.LabelTS();
+            this.lblMetisCodeVersion = new System.Windows.Forms.LabelTS();
+            this.lblMetisVer = new System.Windows.Forms.LabelTS();
+            this.labelTS16 = new System.Windows.Forms.LabelTS();
+            this.labelTS9 = new System.Windows.Forms.LabelTS();
+            this.lblMetisIP = new System.Windows.Forms.LabelTS();
+            this.lblMetisMAC = new System.Windows.Forms.LabelTS();
             this.tpGeneralOptions = new System.Windows.Forms.TabPage();
             this.grpHermesStepAttenuator = new System.Windows.Forms.GroupBoxTS();
             this.udHermesStepAttenuatorData = new System.Windows.Forms.NumericUpDownTS();
@@ -969,28 +969,28 @@
             this.labelTS19 = new System.Windows.Forms.LabelTS();
             this.labelTS18 = new System.Windows.Forms.LabelTS();
             this.labelTS17 = new System.Windows.Forms.LabelTS();
-            this.txtTXVFO = new System.Windows.Forms.TextBoxTS();
-            this.txtRX2VFO = new System.Windows.Forms.TextBoxTS();
-            this.txtRX1DisplayOffset = new System.Windows.Forms.TextBoxTS();
-            this.txtRX2MeterOffset = new System.Windows.Forms.TextBoxTS();
-            this.txtRX1MeterOffset = new System.Windows.Forms.TextBoxTS();
-            this.txtAlexRevADC = new System.Windows.Forms.TextBoxTS();
-            this.txtCalcMeterData = new System.Windows.Forms.TextBoxTS();
-            this.txtRX2RawMeterData = new System.Windows.Forms.TextBoxTS();
-            this.txtRX1CalcMeterData = new System.Windows.Forms.TextBoxTS();
-            this.txtRX1RawMeterData = new System.Windows.Forms.TextBoxTS();
-            this.txtRX1PreampOffset = new System.Windows.Forms.TextBoxTS();
-            this.txtRX2DisplayOffset = new System.Windows.Forms.TextBoxTS();
-            this.txtAlexFwdADC = new System.Windows.Forms.TextBoxTS();
-            this.txtFwdADC = new System.Windows.Forms.TextBoxTS();
+            this.textTXVFO = new System.Windows.Forms.TextBoxTS();
+            this.textRX2VFO = new System.Windows.Forms.TextBoxTS();
+            this.textRX1DisplayOffset = new System.Windows.Forms.TextBoxTS();
+            this.textRX2MeterOffset = new System.Windows.Forms.TextBoxTS();
+            this.textRX1MeterOffset = new System.Windows.Forms.TextBoxTS();
+            this.textAlexRevADC = new System.Windows.Forms.TextBoxTS();
+            this.textCalcMeterData = new System.Windows.Forms.TextBoxTS();
+            this.textRX2RawMeterData = new System.Windows.Forms.TextBoxTS();
+            this.textRX1CalcMeterData = new System.Windows.Forms.TextBoxTS();
+            this.textRX1RawMeterData = new System.Windows.Forms.TextBoxTS();
+            this.textRX1PreampOffset = new System.Windows.Forms.TextBoxTS();
+            this.textRX2DisplayOffset = new System.Windows.Forms.TextBoxTS();
+            this.textAlexFwdADC = new System.Windows.Forms.TextBoxTS();
+            this.textFwdADC = new System.Windows.Forms.TextBoxTS();
             this.labelTS92 = new System.Windows.Forms.LabelTS();
             this.labelTS91 = new System.Windows.Forms.LabelTS();
             this.labelTS90 = new System.Windows.Forms.LabelTS();
             this.labelTS89 = new System.Windows.Forms.LabelTS();
-            this.txtAlexRevPower = new System.Windows.Forms.TextBoxTS();
-            this.txtFwdPower = new System.Windows.Forms.TextBoxTS();
-            this.txtRX1VFO = new System.Windows.Forms.TextBoxTS();
-            this.txtAlexFwdPower = new System.Windows.Forms.TextBoxTS();
+            this.textAlexRevPower = new System.Windows.Forms.TextBoxTS();
+            this.textFwdPower = new System.Windows.Forms.TextBoxTS();
+            this.textRX1VFO = new System.Windows.Forms.TextBoxTS();
+            this.textAlexFwdPower = new System.Windows.Forms.TextBoxTS();
             this.tpApolloControl = new System.Windows.Forms.TabPage();
             this.grpApolloCtrl = new System.Windows.Forms.GroupBoxTS();
             this.chkApolloFilter = new System.Windows.Forms.CheckBoxTS();
@@ -1312,18 +1312,6 @@
             this.labelTS144 = new System.Windows.Forms.LabelTS();
             this.udDSPNB2 = new System.Windows.Forms.NumericUpDownTS();
             this.lblDSPNB2Threshold = new System.Windows.Forms.LabelTS();
-            this.tpDSPImageReject = new System.Windows.Forms.TabPage();
-            this.chkDSPImageExpert = new System.Windows.Forms.CheckBoxTS();
-            this.grpDSPImageRejectTX = new System.Windows.Forms.GroupBoxTS();
-            this.checkboxTXImagCal = new System.Windows.Forms.CheckBoxTS();
-            this.lblDSPGainValTX = new System.Windows.Forms.LabelTS();
-            this.lblDSPPhaseValTX = new System.Windows.Forms.LabelTS();
-            this.udDSPImageGainTX = new System.Windows.Forms.NumericUpDownTS();
-            this.udDSPImagePhaseTX = new System.Windows.Forms.NumericUpDownTS();
-            this.lblDSPImageGainTX = new System.Windows.Forms.LabelTS();
-            this.tbDSPImagePhaseTX = new System.Windows.Forms.TrackBarTS();
-            this.lblDSPImagePhaseTX = new System.Windows.Forms.LabelTS();
-            this.tbDSPImageGainTX = new System.Windows.Forms.TrackBarTS();
             this.tpDSPKeyer = new System.Windows.Forms.TabPage();
             this.chkCWDisableUI = new System.Windows.Forms.CheckBoxTS();
             this.grpKeyerConnections = new System.Windows.Forms.GroupBoxTS();
@@ -1778,6 +1766,7 @@
             this.labelTS253 = new System.Windows.Forms.LabelTS();
             this.udHermesPAGain160 = new System.Windows.Forms.NumericUpDownTS();
             this.tpWattMeter = new System.Windows.Forms.TabPage();
+            this.btnResetWattMeterValues = new System.Windows.Forms.ButtonTS();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.grpWattMeterTrim = new System.Windows.Forms.GroupBox();
             this.udPA10W = new System.Windows.Forms.NumericUpDownTS();
@@ -1788,7 +1777,7 @@
             this.labelTS255 = new System.Windows.Forms.LabelTS();
             this.labelTS258 = new System.Windows.Forms.LabelTS();
             this.udPA110W = new System.Windows.Forms.NumericUpDownTS();
-            this.udSWR80W = new System.Windows.Forms.NumericUpDownTS();
+            this.udPA80W = new System.Windows.Forms.NumericUpDownTS();
             this.udPA120W = new System.Windows.Forms.NumericUpDownTS();
             this.labelTS259 = new System.Windows.Forms.LabelTS();
             this.labelTS267 = new System.Windows.Forms.LabelTS();
@@ -1811,22 +1800,22 @@
             this.panelPAValues = new System.Windows.Forms.PanelTS();
             this.btnResetPAValues = new System.Windows.Forms.ButtonTS();
             this.labelTS254 = new System.Windows.Forms.LabelTS();
-            this.txtDCVolts = new System.Windows.Forms.TextBoxTS();
+            this.textDCVolts = new System.Windows.Forms.TextBoxTS();
             this.labelTS276 = new System.Windows.Forms.LabelTS();
             this.labelTS271 = new System.Windows.Forms.LabelTS();
-            this.txtPAFwdPower = new System.Windows.Forms.TextBoxTS();
-            this.txtRevADCValue = new System.Windows.Forms.TextBoxTS();
-            this.txtDrivePower = new System.Windows.Forms.TextBoxTS();
-            this.txtPARevPower = new System.Windows.Forms.TextBoxTS();
+            this.textPAFwdPower = new System.Windows.Forms.TextBoxTS();
+            this.textRevADCValue = new System.Windows.Forms.TextBoxTS();
+            this.textDrivePower = new System.Windows.Forms.TextBoxTS();
+            this.textPARevPower = new System.Windows.Forms.TextBoxTS();
             this.labelTS275 = new System.Windows.Forms.LabelTS();
             this.labelTS274 = new System.Windows.Forms.LabelTS();
             this.labelTS273 = new System.Windows.Forms.LabelTS();
-            this.txtFwdPowerCalibrated = new System.Windows.Forms.TextBoxTS();
+            this.textFwdPowerCalibrated = new System.Windows.Forms.TextBoxTS();
             this.labelTS272 = new System.Windows.Forms.LabelTS();
-            this.txtFwdADCValue = new System.Windows.Forms.TextBoxTS();
+            this.textFwdADCValue = new System.Windows.Forms.TextBoxTS();
             this.labelTS269 = new System.Windows.Forms.LabelTS();
-            this.txtFwdVoltage = new System.Windows.Forms.TextBoxTS();
-            this.txtRevVoltage = new System.Windows.Forms.TextBoxTS();
+            this.textFwdVoltage = new System.Windows.Forms.TextBoxTS();
+            this.textRevVoltage = new System.Windows.Forms.TextBoxTS();
             this.labelTS270 = new System.Windows.Forms.LabelTS();
             this.chkPAValues = new System.Windows.Forms.CheckBoxTS();
             this.tpAppearance = new System.Windows.Forms.TabPage();
@@ -2078,6 +2067,46 @@
             this.label14 = new System.Windows.Forms.Label();
             this.btnConfigure = new System.Windows.Forms.Button();
             this.cbConsoleSelect = new System.Windows.Forms.ComboBox();
+            this.tpCAT2 = new System.Windows.Forms.TabPage();
+            this.txtCAT4 = new System.Windows.Forms.TextBoxTS();
+            this.txtCAT3 = new System.Windows.Forms.TextBoxTS();
+            this.txtCAT2 = new System.Windows.Forms.TextBoxTS();
+            this.grpCat4ControlBox = new System.Windows.Forms.GroupBoxTS();
+            this.comboCAT4Port = new System.Windows.Forms.ComboBoxTS();
+            this.comboCAT4baud = new System.Windows.Forms.ComboBoxTS();
+            this.lblCAT4Baud = new System.Windows.Forms.LabelTS();
+            this.lblCAT4Port = new System.Windows.Forms.LabelTS();
+            this.chkCAT4Enable = new System.Windows.Forms.CheckBoxTS();
+            this.lblCAT4Parity = new System.Windows.Forms.LabelTS();
+            this.lblCAT4Data = new System.Windows.Forms.LabelTS();
+            this.lblCAT4Stop = new System.Windows.Forms.LabelTS();
+            this.comboCAT4parity = new System.Windows.Forms.ComboBoxTS();
+            this.comboCAT4databits = new System.Windows.Forms.ComboBoxTS();
+            this.comboCAT4stopbits = new System.Windows.Forms.ComboBoxTS();
+            this.grpCat3ControlBox = new System.Windows.Forms.GroupBoxTS();
+            this.comboCAT3Port = new System.Windows.Forms.ComboBoxTS();
+            this.comboCAT3baud = new System.Windows.Forms.ComboBoxTS();
+            this.lblCAT3Baud = new System.Windows.Forms.LabelTS();
+            this.lblCAT3Port = new System.Windows.Forms.LabelTS();
+            this.chkCAT3Enable = new System.Windows.Forms.CheckBoxTS();
+            this.lblCAT3Parity = new System.Windows.Forms.LabelTS();
+            this.lblCAT3Data = new System.Windows.Forms.LabelTS();
+            this.lblCAT3Stop = new System.Windows.Forms.LabelTS();
+            this.comboCAT3parity = new System.Windows.Forms.ComboBoxTS();
+            this.comboCAT3databits = new System.Windows.Forms.ComboBoxTS();
+            this.comboCAT3stopbits = new System.Windows.Forms.ComboBoxTS();
+            this.grpCat2ControlBox = new System.Windows.Forms.GroupBoxTS();
+            this.comboCAT2Port = new System.Windows.Forms.ComboBoxTS();
+            this.comboCAT2baud = new System.Windows.Forms.ComboBoxTS();
+            this.lblCAT2Baud = new System.Windows.Forms.LabelTS();
+            this.lblCAT2Port = new System.Windows.Forms.LabelTS();
+            this.chkCAT2Enable = new System.Windows.Forms.CheckBoxTS();
+            this.lblCAT2Parity = new System.Windows.Forms.LabelTS();
+            this.lblCAT2Data = new System.Windows.Forms.LabelTS();
+            this.lblCAT2Stop = new System.Windows.Forms.LabelTS();
+            this.comboCAT2parity = new System.Windows.Forms.ComboBoxTS();
+            this.comboCAT2databits = new System.Windows.Forms.ComboBoxTS();
+            this.comboCAT2stopbits = new System.Windows.Forms.ComboBoxTS();
             this.tpTests = new System.Windows.Forms.TabPage();
             this.grpBoxTS1 = new System.Windows.Forms.GroupBoxTS();
             this.udTestFreq = new System.Windows.Forms.NumericUpDownTS();
@@ -2187,6 +2216,8 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
+            this.radTestIMDInput = new System.Windows.Forms.RadioButtonTS();
+            this.radTestIMDOutput = new System.Windows.Forms.RadioButtonTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -2233,7 +2264,6 @@
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
             this.tpGeneralHardware.SuspendLayout();
-            this.grpMetisAddr.SuspendLayout();
             this.grpLimtRX.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
             this.grpOzyType.SuspendLayout();
@@ -2260,6 +2290,7 @@
             this.grpGeneralHardwareFLEX5000.SuspendLayout();
             this.grpGeneralHardwareSDR1000.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralLPTDelay)).BeginInit();
+            this.grpMetisAddr.SuspendLayout();
             this.tpGeneralOptions.SuspendLayout();
             this.grpHermesStepAttenuator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udHermesStepAttenuatorData)).BeginInit();
@@ -2511,12 +2542,6 @@
             this.grpDSPNB2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPNB2b)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPNB2)).BeginInit();
-            this.tpDSPImageReject.SuspendLayout();
-            this.grpDSPImageRejectTX.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPImageGainTX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPImagePhaseTX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbDSPImagePhaseTX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbDSPImageGainTX)).BeginInit();
             this.tpDSPKeyer.SuspendLayout();
             this.grpKeyerConnections.SuspendLayout();
             this.grpDSPCWPitch.SuspendLayout();
@@ -2728,7 +2753,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.udPA100W)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPA90W)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPA110W)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udSWR80W)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udPA80W)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPA120W)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPA70W)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPA130W)).BeginInit();
@@ -2796,6 +2821,10 @@
             this.grpPTTBitBang.SuspendLayout();
             this.tpMidiCat.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tpCAT2.SuspendLayout();
+            this.grpCat4ControlBox.SuspendLayout();
+            this.grpCat3ControlBox.SuspendLayout();
+            this.grpCat2ControlBox.SuspendLayout();
             this.tpTests.SuspendLayout();
             this.grpBoxTS1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTestFreq)).BeginInit();
@@ -2966,6 +2995,8 @@
             // chkATTOnTX
             // 
             this.chkATTOnTX.AutoSize = true;
+            this.chkATTOnTX.Checked = true;
+            this.chkATTOnTX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkATTOnTX.Image = null;
             this.chkATTOnTX.Location = new System.Drawing.Point(453, 148);
             this.chkATTOnTX.Name = "chkATTOnTX";
@@ -5057,7 +5088,6 @@
             // tpGeneralHardware
             // 
             this.tpGeneralHardware.BackColor = System.Drawing.SystemColors.Control;
-            this.tpGeneralHardware.Controls.Add(this.grpMetisAddr);
             this.tpGeneralHardware.Controls.Add(this.grpLimtRX);
             this.tpGeneralHardware.Controls.Add(this.udDDSIFFreq);
             this.tpGeneralHardware.Controls.Add(this.grpOzyType);
@@ -5069,102 +5099,13 @@
             this.tpGeneralHardware.Controls.Add(this.groupBoxHPSDRHW);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareFLEX5000);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareSDR1000);
+            this.tpGeneralHardware.Controls.Add(this.grpMetisAddr);
             this.tpGeneralHardware.Location = new System.Drawing.Point(4, 22);
             this.tpGeneralHardware.Name = "tpGeneralHardware";
             this.tpGeneralHardware.Size = new System.Drawing.Size(580, 318);
             this.tpGeneralHardware.TabIndex = 0;
             this.tpGeneralHardware.Text = "Hardware Config";
             this.tpGeneralHardware.Paint += new System.Windows.Forms.PaintEventHandler(this.tpGeneralHardware_Paint);
-            // 
-            // grpMetisAddr
-            // 
-            this.grpMetisAddr.Controls.Add(this.lblMetisBoardID);
-            this.grpMetisAddr.Controls.Add(this.labelTS88);
-            this.grpMetisAddr.Controls.Add(this.lblMetisCodeVersion);
-            this.grpMetisAddr.Controls.Add(this.lblMetisVer);
-            this.grpMetisAddr.Controls.Add(this.labelTS16);
-            this.grpMetisAddr.Controls.Add(this.labelTS9);
-            this.grpMetisAddr.Controls.Add(this.lblMetisMAC);
-            this.grpMetisAddr.Controls.Add(this.lblMetisIP);
-            this.grpMetisAddr.Location = new System.Drawing.Point(326, 235);
-            this.grpMetisAddr.Name = "grpMetisAddr";
-            this.grpMetisAddr.Size = new System.Drawing.Size(251, 56);
-            this.grpMetisAddr.TabIndex = 35;
-            this.grpMetisAddr.TabStop = false;
-            this.grpMetisAddr.Text = "Metis  Address";
-            this.grpMetisAddr.Visible = false;
-            // 
-            // lblMetisBoardID
-            // 
-            this.lblMetisBoardID.Image = null;
-            this.lblMetisBoardID.Location = new System.Drawing.Point(219, 34);
-            this.lblMetisBoardID.Name = "lblMetisBoardID";
-            this.lblMetisBoardID.Size = new System.Drawing.Size(26, 16);
-            this.lblMetisBoardID.TabIndex = 7;
-            this.lblMetisBoardID.Text = "00";
-            // 
-            // labelTS88
-            // 
-            this.labelTS88.Image = null;
-            this.labelTS88.Location = new System.Drawing.Point(189, 34);
-            this.labelTS88.Name = "labelTS88";
-            this.labelTS88.Size = new System.Drawing.Size(21, 16);
-            this.labelTS88.TabIndex = 6;
-            this.labelTS88.Text = "ID:";
-            // 
-            // lblMetisCodeVersion
-            // 
-            this.lblMetisCodeVersion.Image = null;
-            this.lblMetisCodeVersion.Location = new System.Drawing.Point(220, 13);
-            this.lblMetisCodeVersion.Name = "lblMetisCodeVersion";
-            this.lblMetisCodeVersion.Size = new System.Drawing.Size(26, 16);
-            this.lblMetisCodeVersion.TabIndex = 5;
-            this.lblMetisCodeVersion.Text = "00";
-            // 
-            // lblMetisVer
-            // 
-            this.lblMetisVer.Image = null;
-            this.lblMetisVer.Location = new System.Drawing.Point(189, 13);
-            this.lblMetisVer.Name = "lblMetisVer";
-            this.lblMetisVer.Size = new System.Drawing.Size(26, 16);
-            this.lblMetisVer.TabIndex = 4;
-            this.lblMetisVer.Text = "Ver:";
-            // 
-            // labelTS16
-            // 
-            this.labelTS16.Image = null;
-            this.labelTS16.Location = new System.Drawing.Point(8, 16);
-            this.labelTS16.Name = "labelTS16";
-            this.labelTS16.Size = new System.Drawing.Size(20, 16);
-            this.labelTS16.TabIndex = 3;
-            this.labelTS16.Text = "IP:";
-            // 
-            // labelTS9
-            // 
-            this.labelTS9.Image = null;
-            this.labelTS9.Location = new System.Drawing.Point(8, 34);
-            this.labelTS9.Name = "labelTS9";
-            this.labelTS9.Size = new System.Drawing.Size(34, 16);
-            this.labelTS9.TabIndex = 2;
-            this.labelTS9.Text = "MAC:";
-            // 
-            // lblMetisMAC
-            // 
-            this.lblMetisMAC.Image = null;
-            this.lblMetisMAC.Location = new System.Drawing.Point(46, 34);
-            this.lblMetisMAC.Name = "lblMetisMAC";
-            this.lblMetisMAC.Size = new System.Drawing.Size(128, 16);
-            this.lblMetisMAC.TabIndex = 1;
-            this.lblMetisMAC.Text = "00:00:00:00:00:00";
-            // 
-            // lblMetisIP
-            // 
-            this.lblMetisIP.Image = null;
-            this.lblMetisIP.Location = new System.Drawing.Point(46, 16);
-            this.lblMetisIP.Name = "lblMetisIP";
-            this.lblMetisIP.Size = new System.Drawing.Size(128, 16);
-            this.lblMetisIP.TabIndex = 0;
-            this.lblMetisIP.Text = "0.0.0.0";
             // 
             // grpLimtRX
             // 
@@ -5194,7 +5135,7 @@
             0,
             0,
             0});
-            this.udDDSIFFreq.Location = new System.Drawing.Point(346, 265);
+            this.udDDSIFFreq.Location = new System.Drawing.Point(332, 295);
             this.udDDSIFFreq.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -6363,6 +6304,96 @@
             this.comboGeneralLPTAddr.SelectedIndexChanged += new System.EventHandler(this.comboGeneralLPTAddr_SelectedIndexChanged);
             this.comboGeneralLPTAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboGeneralLPTAddr_KeyDown);
             this.comboGeneralLPTAddr.LostFocus += new System.EventHandler(this.comboGeneralLPTAddr_LostFocus);
+            // 
+            // grpMetisAddr
+            // 
+            this.grpMetisAddr.Controls.Add(this.lblMetisBoardID);
+            this.grpMetisAddr.Controls.Add(this.labelTS88);
+            this.grpMetisAddr.Controls.Add(this.lblMetisCodeVersion);
+            this.grpMetisAddr.Controls.Add(this.lblMetisVer);
+            this.grpMetisAddr.Controls.Add(this.labelTS16);
+            this.grpMetisAddr.Controls.Add(this.labelTS9);
+            this.grpMetisAddr.Controls.Add(this.lblMetisIP);
+            this.grpMetisAddr.Controls.Add(this.lblMetisMAC);
+            this.grpMetisAddr.Location = new System.Drawing.Point(326, 235);
+            this.grpMetisAddr.Name = "grpMetisAddr";
+            this.grpMetisAddr.Size = new System.Drawing.Size(251, 56);
+            this.grpMetisAddr.TabIndex = 35;
+            this.grpMetisAddr.TabStop = false;
+            this.grpMetisAddr.Text = "Metis  Address";
+            this.grpMetisAddr.Visible = false;
+            // 
+            // lblMetisBoardID
+            // 
+            this.lblMetisBoardID.Image = null;
+            this.lblMetisBoardID.Location = new System.Drawing.Point(219, 34);
+            this.lblMetisBoardID.Name = "lblMetisBoardID";
+            this.lblMetisBoardID.Size = new System.Drawing.Size(26, 16);
+            this.lblMetisBoardID.TabIndex = 7;
+            this.lblMetisBoardID.Text = "00";
+            // 
+            // labelTS88
+            // 
+            this.labelTS88.Image = null;
+            this.labelTS88.Location = new System.Drawing.Point(189, 34);
+            this.labelTS88.Name = "labelTS88";
+            this.labelTS88.Size = new System.Drawing.Size(21, 16);
+            this.labelTS88.TabIndex = 6;
+            this.labelTS88.Text = "ID:";
+            // 
+            // lblMetisCodeVersion
+            // 
+            this.lblMetisCodeVersion.Image = null;
+            this.lblMetisCodeVersion.Location = new System.Drawing.Point(220, 13);
+            this.lblMetisCodeVersion.Name = "lblMetisCodeVersion";
+            this.lblMetisCodeVersion.Size = new System.Drawing.Size(26, 16);
+            this.lblMetisCodeVersion.TabIndex = 5;
+            this.lblMetisCodeVersion.Text = "00";
+            // 
+            // lblMetisVer
+            // 
+            this.lblMetisVer.Image = null;
+            this.lblMetisVer.Location = new System.Drawing.Point(189, 13);
+            this.lblMetisVer.Name = "lblMetisVer";
+            this.lblMetisVer.Size = new System.Drawing.Size(26, 16);
+            this.lblMetisVer.TabIndex = 4;
+            this.lblMetisVer.Text = "Ver:";
+            // 
+            // labelTS16
+            // 
+            this.labelTS16.Image = null;
+            this.labelTS16.Location = new System.Drawing.Point(8, 16);
+            this.labelTS16.Name = "labelTS16";
+            this.labelTS16.Size = new System.Drawing.Size(20, 16);
+            this.labelTS16.TabIndex = 3;
+            this.labelTS16.Text = "IP:";
+            // 
+            // labelTS9
+            // 
+            this.labelTS9.Image = null;
+            this.labelTS9.Location = new System.Drawing.Point(8, 34);
+            this.labelTS9.Name = "labelTS9";
+            this.labelTS9.Size = new System.Drawing.Size(34, 16);
+            this.labelTS9.TabIndex = 2;
+            this.labelTS9.Text = "MAC:";
+            // 
+            // lblMetisIP
+            // 
+            this.lblMetisIP.Image = null;
+            this.lblMetisIP.Location = new System.Drawing.Point(46, 16);
+            this.lblMetisIP.Name = "lblMetisIP";
+            this.lblMetisIP.Size = new System.Drawing.Size(128, 16);
+            this.lblMetisIP.TabIndex = 0;
+            this.lblMetisIP.Text = "0.0.0.0";
+            // 
+            // lblMetisMAC
+            // 
+            this.lblMetisMAC.Image = null;
+            this.lblMetisMAC.Location = new System.Drawing.Point(46, 34);
+            this.lblMetisMAC.Name = "lblMetisMAC";
+            this.lblMetisMAC.Size = new System.Drawing.Size(128, 16);
+            this.lblMetisMAC.TabIndex = 1;
+            this.lblMetisMAC.Text = "00:00:00:00:00:00";
             // 
             // tpGeneralOptions
             // 
@@ -14205,7 +14236,7 @@
             this.udAlex10mLPFStart.Size = new System.Drawing.Size(75, 20);
             this.udAlex10mLPFStart.TabIndex = 23;
             this.udAlex10mLPFStart.Value = new decimal(new int[] {
-            24800001,
+            25000001,
             0,
             0,
             393216});
@@ -14365,12 +14396,12 @@
             196608});
             this.udAlex15mLPFEnd.Location = new System.Drawing.Point(432, 129);
             this.udAlex15mLPFEnd.Maximum = new decimal(new int[] {
-            248,
+            25000000,
             0,
             0,
-            65536});
+            393216});
             this.udAlex15mLPFEnd.Minimum = new decimal(new int[] {
-            24000001,
+            23000001,
             0,
             0,
             393216});
@@ -14378,10 +14409,10 @@
             this.udAlex15mLPFEnd.Size = new System.Drawing.Size(75, 20);
             this.udAlex15mLPFEnd.TabIndex = 17;
             this.udAlex15mLPFEnd.Value = new decimal(new int[] {
-            248,
+            25000000,
             0,
             0,
-            65536});
+            393216});
             this.udAlex15mLPFEnd.ValueChanged += new System.EventHandler(this.udAlex15mLPFEnd_ValueChanged);
             // 
             // udAlex40mLPFEnd
@@ -15915,28 +15946,28 @@
             this.tpInfo.Controls.Add(this.labelTS19);
             this.tpInfo.Controls.Add(this.labelTS18);
             this.tpInfo.Controls.Add(this.labelTS17);
-            this.tpInfo.Controls.Add(this.txtTXVFO);
-            this.tpInfo.Controls.Add(this.txtRX2VFO);
-            this.tpInfo.Controls.Add(this.txtRX1DisplayOffset);
-            this.tpInfo.Controls.Add(this.txtRX2MeterOffset);
-            this.tpInfo.Controls.Add(this.txtRX1MeterOffset);
-            this.tpInfo.Controls.Add(this.txtAlexRevADC);
-            this.tpInfo.Controls.Add(this.txtCalcMeterData);
-            this.tpInfo.Controls.Add(this.txtRX2RawMeterData);
-            this.tpInfo.Controls.Add(this.txtRX1CalcMeterData);
-            this.tpInfo.Controls.Add(this.txtRX1RawMeterData);
-            this.tpInfo.Controls.Add(this.txtRX1PreampOffset);
-            this.tpInfo.Controls.Add(this.txtRX2DisplayOffset);
-            this.tpInfo.Controls.Add(this.txtAlexFwdADC);
-            this.tpInfo.Controls.Add(this.txtFwdADC);
+            this.tpInfo.Controls.Add(this.textTXVFO);
+            this.tpInfo.Controls.Add(this.textRX2VFO);
+            this.tpInfo.Controls.Add(this.textRX1DisplayOffset);
+            this.tpInfo.Controls.Add(this.textRX2MeterOffset);
+            this.tpInfo.Controls.Add(this.textRX1MeterOffset);
+            this.tpInfo.Controls.Add(this.textAlexRevADC);
+            this.tpInfo.Controls.Add(this.textCalcMeterData);
+            this.tpInfo.Controls.Add(this.textRX2RawMeterData);
+            this.tpInfo.Controls.Add(this.textRX1CalcMeterData);
+            this.tpInfo.Controls.Add(this.textRX1RawMeterData);
+            this.tpInfo.Controls.Add(this.textRX1PreampOffset);
+            this.tpInfo.Controls.Add(this.textRX2DisplayOffset);
+            this.tpInfo.Controls.Add(this.textAlexFwdADC);
+            this.tpInfo.Controls.Add(this.textFwdADC);
             this.tpInfo.Controls.Add(this.labelTS92);
             this.tpInfo.Controls.Add(this.labelTS91);
             this.tpInfo.Controls.Add(this.labelTS90);
             this.tpInfo.Controls.Add(this.labelTS89);
-            this.tpInfo.Controls.Add(this.txtAlexRevPower);
-            this.tpInfo.Controls.Add(this.txtFwdPower);
-            this.tpInfo.Controls.Add(this.txtRX1VFO);
-            this.tpInfo.Controls.Add(this.txtAlexFwdPower);
+            this.tpInfo.Controls.Add(this.textAlexRevPower);
+            this.tpInfo.Controls.Add(this.textFwdPower);
+            this.tpInfo.Controls.Add(this.textRX1VFO);
+            this.tpInfo.Controls.Add(this.textAlexFwdPower);
             this.tpInfo.Location = new System.Drawing.Point(4, 22);
             this.tpInfo.Name = "tpInfo";
             this.tpInfo.Padding = new System.Windows.Forms.Padding(3);
@@ -16099,159 +16130,159 @@
             this.labelTS17.Text = "RX2 Freq";
             this.labelTS17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtTXVFO
+            // textTXVFO
             // 
-            this.txtTXVFO.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtTXVFO.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtTXVFO.ForeColor = System.Drawing.Color.White;
-            this.txtTXVFO.Location = new System.Drawing.Point(24, 240);
-            this.txtTXVFO.Name = "txtTXVFO";
-            this.txtTXVFO.ReadOnly = true;
-            this.txtTXVFO.Size = new System.Drawing.Size(157, 20);
-            this.txtTXVFO.TabIndex = 157;
+            this.textTXVFO.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textTXVFO.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textTXVFO.ForeColor = System.Drawing.Color.White;
+            this.textTXVFO.Location = new System.Drawing.Point(24, 240);
+            this.textTXVFO.Name = "textTXVFO";
+            this.textTXVFO.ReadOnly = true;
+            this.textTXVFO.Size = new System.Drawing.Size(157, 20);
+            this.textTXVFO.TabIndex = 157;
             // 
-            // txtRX2VFO
+            // textRX2VFO
             // 
-            this.txtRX2VFO.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRX2VFO.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRX2VFO.ForeColor = System.Drawing.Color.White;
-            this.txtRX2VFO.Location = new System.Drawing.Point(24, 195);
-            this.txtRX2VFO.Name = "txtRX2VFO";
-            this.txtRX2VFO.ReadOnly = true;
-            this.txtRX2VFO.Size = new System.Drawing.Size(157, 20);
-            this.txtRX2VFO.TabIndex = 156;
+            this.textRX2VFO.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRX2VFO.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRX2VFO.ForeColor = System.Drawing.Color.White;
+            this.textRX2VFO.Location = new System.Drawing.Point(24, 195);
+            this.textRX2VFO.Name = "textRX2VFO";
+            this.textRX2VFO.ReadOnly = true;
+            this.textRX2VFO.Size = new System.Drawing.Size(157, 20);
+            this.textRX2VFO.TabIndex = 156;
             // 
-            // txtRX1DisplayOffset
+            // textRX1DisplayOffset
             // 
-            this.txtRX1DisplayOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRX1DisplayOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRX1DisplayOffset.ForeColor = System.Drawing.Color.White;
-            this.txtRX1DisplayOffset.Location = new System.Drawing.Point(219, 240);
-            this.txtRX1DisplayOffset.Name = "txtRX1DisplayOffset";
-            this.txtRX1DisplayOffset.ReadOnly = true;
-            this.txtRX1DisplayOffset.Size = new System.Drawing.Size(157, 20);
-            this.txtRX1DisplayOffset.TabIndex = 155;
+            this.textRX1DisplayOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRX1DisplayOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRX1DisplayOffset.ForeColor = System.Drawing.Color.White;
+            this.textRX1DisplayOffset.Location = new System.Drawing.Point(219, 240);
+            this.textRX1DisplayOffset.Name = "textRX1DisplayOffset";
+            this.textRX1DisplayOffset.ReadOnly = true;
+            this.textRX1DisplayOffset.Size = new System.Drawing.Size(157, 20);
+            this.textRX1DisplayOffset.TabIndex = 155;
             // 
-            // txtRX2MeterOffset
+            // textRX2MeterOffset
             // 
-            this.txtRX2MeterOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRX2MeterOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRX2MeterOffset.ForeColor = System.Drawing.Color.White;
-            this.txtRX2MeterOffset.Location = new System.Drawing.Point(219, 195);
-            this.txtRX2MeterOffset.Name = "txtRX2MeterOffset";
-            this.txtRX2MeterOffset.ReadOnly = true;
-            this.txtRX2MeterOffset.Size = new System.Drawing.Size(157, 20);
-            this.txtRX2MeterOffset.TabIndex = 154;
+            this.textRX2MeterOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRX2MeterOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRX2MeterOffset.ForeColor = System.Drawing.Color.White;
+            this.textRX2MeterOffset.Location = new System.Drawing.Point(219, 195);
+            this.textRX2MeterOffset.Name = "textRX2MeterOffset";
+            this.textRX2MeterOffset.ReadOnly = true;
+            this.textRX2MeterOffset.Size = new System.Drawing.Size(157, 20);
+            this.textRX2MeterOffset.TabIndex = 154;
             // 
-            // txtRX1MeterOffset
+            // textRX1MeterOffset
             // 
-            this.txtRX1MeterOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRX1MeterOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRX1MeterOffset.ForeColor = System.Drawing.Color.White;
-            this.txtRX1MeterOffset.Location = new System.Drawing.Point(219, 150);
-            this.txtRX1MeterOffset.Name = "txtRX1MeterOffset";
-            this.txtRX1MeterOffset.ReadOnly = true;
-            this.txtRX1MeterOffset.Size = new System.Drawing.Size(157, 20);
-            this.txtRX1MeterOffset.TabIndex = 153;
+            this.textRX1MeterOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRX1MeterOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRX1MeterOffset.ForeColor = System.Drawing.Color.White;
+            this.textRX1MeterOffset.Location = new System.Drawing.Point(219, 150);
+            this.textRX1MeterOffset.Name = "textRX1MeterOffset";
+            this.textRX1MeterOffset.ReadOnly = true;
+            this.textRX1MeterOffset.Size = new System.Drawing.Size(157, 20);
+            this.textRX1MeterOffset.TabIndex = 153;
             // 
-            // txtAlexRevADC
+            // textAlexRevADC
             // 
-            this.txtAlexRevADC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtAlexRevADC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtAlexRevADC.ForeColor = System.Drawing.Color.White;
-            this.txtAlexRevADC.Location = new System.Drawing.Point(219, 105);
-            this.txtAlexRevADC.Name = "txtAlexRevADC";
-            this.txtAlexRevADC.ReadOnly = true;
-            this.txtAlexRevADC.Size = new System.Drawing.Size(157, 20);
-            this.txtAlexRevADC.TabIndex = 152;
+            this.textAlexRevADC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textAlexRevADC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textAlexRevADC.ForeColor = System.Drawing.Color.White;
+            this.textAlexRevADC.Location = new System.Drawing.Point(219, 105);
+            this.textAlexRevADC.Name = "textAlexRevADC";
+            this.textAlexRevADC.ReadOnly = true;
+            this.textAlexRevADC.Size = new System.Drawing.Size(157, 20);
+            this.textAlexRevADC.TabIndex = 152;
             // 
-            // txtCalcMeterData
+            // textCalcMeterData
             // 
-            this.txtCalcMeterData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtCalcMeterData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtCalcMeterData.ForeColor = System.Drawing.Color.White;
-            this.txtCalcMeterData.Location = new System.Drawing.Point(420, 150);
-            this.txtCalcMeterData.Name = "txtCalcMeterData";
-            this.txtCalcMeterData.ReadOnly = true;
-            this.txtCalcMeterData.Size = new System.Drawing.Size(157, 20);
-            this.txtCalcMeterData.TabIndex = 151;
+            this.textCalcMeterData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textCalcMeterData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textCalcMeterData.ForeColor = System.Drawing.Color.White;
+            this.textCalcMeterData.Location = new System.Drawing.Point(420, 150);
+            this.textCalcMeterData.Name = "textCalcMeterData";
+            this.textCalcMeterData.ReadOnly = true;
+            this.textCalcMeterData.Size = new System.Drawing.Size(157, 20);
+            this.textCalcMeterData.TabIndex = 151;
             // 
-            // txtRX2RawMeterData
+            // textRX2RawMeterData
             // 
-            this.txtRX2RawMeterData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRX2RawMeterData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRX2RawMeterData.ForeColor = System.Drawing.Color.White;
-            this.txtRX2RawMeterData.Location = new System.Drawing.Point(420, 105);
-            this.txtRX2RawMeterData.Name = "txtRX2RawMeterData";
-            this.txtRX2RawMeterData.ReadOnly = true;
-            this.txtRX2RawMeterData.Size = new System.Drawing.Size(157, 20);
-            this.txtRX2RawMeterData.TabIndex = 150;
+            this.textRX2RawMeterData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRX2RawMeterData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRX2RawMeterData.ForeColor = System.Drawing.Color.White;
+            this.textRX2RawMeterData.Location = new System.Drawing.Point(420, 105);
+            this.textRX2RawMeterData.Name = "textRX2RawMeterData";
+            this.textRX2RawMeterData.ReadOnly = true;
+            this.textRX2RawMeterData.Size = new System.Drawing.Size(157, 20);
+            this.textRX2RawMeterData.TabIndex = 150;
             // 
-            // txtRX1CalcMeterData
+            // textRX1CalcMeterData
             // 
-            this.txtRX1CalcMeterData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRX1CalcMeterData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRX1CalcMeterData.ForeColor = System.Drawing.Color.White;
-            this.txtRX1CalcMeterData.Location = new System.Drawing.Point(420, 60);
-            this.txtRX1CalcMeterData.Name = "txtRX1CalcMeterData";
-            this.txtRX1CalcMeterData.ReadOnly = true;
-            this.txtRX1CalcMeterData.Size = new System.Drawing.Size(157, 20);
-            this.txtRX1CalcMeterData.TabIndex = 149;
+            this.textRX1CalcMeterData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRX1CalcMeterData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRX1CalcMeterData.ForeColor = System.Drawing.Color.White;
+            this.textRX1CalcMeterData.Location = new System.Drawing.Point(420, 60);
+            this.textRX1CalcMeterData.Name = "textRX1CalcMeterData";
+            this.textRX1CalcMeterData.ReadOnly = true;
+            this.textRX1CalcMeterData.Size = new System.Drawing.Size(157, 20);
+            this.textRX1CalcMeterData.TabIndex = 149;
             // 
-            // txtRX1RawMeterData
+            // textRX1RawMeterData
             // 
-            this.txtRX1RawMeterData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRX1RawMeterData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRX1RawMeterData.ForeColor = System.Drawing.Color.White;
-            this.txtRX1RawMeterData.Location = new System.Drawing.Point(420, 20);
-            this.txtRX1RawMeterData.Name = "txtRX1RawMeterData";
-            this.txtRX1RawMeterData.ReadOnly = true;
-            this.txtRX1RawMeterData.Size = new System.Drawing.Size(157, 20);
-            this.txtRX1RawMeterData.TabIndex = 148;
+            this.textRX1RawMeterData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRX1RawMeterData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRX1RawMeterData.ForeColor = System.Drawing.Color.White;
+            this.textRX1RawMeterData.Location = new System.Drawing.Point(420, 20);
+            this.textRX1RawMeterData.Name = "textRX1RawMeterData";
+            this.textRX1RawMeterData.ReadOnly = true;
+            this.textRX1RawMeterData.Size = new System.Drawing.Size(157, 20);
+            this.textRX1RawMeterData.TabIndex = 148;
             // 
-            // txtRX1PreampOffset
+            // textRX1PreampOffset
             // 
-            this.txtRX1PreampOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRX1PreampOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRX1PreampOffset.ForeColor = System.Drawing.Color.White;
-            this.txtRX1PreampOffset.Location = new System.Drawing.Point(420, 195);
-            this.txtRX1PreampOffset.Name = "txtRX1PreampOffset";
-            this.txtRX1PreampOffset.ReadOnly = true;
-            this.txtRX1PreampOffset.Size = new System.Drawing.Size(157, 20);
-            this.txtRX1PreampOffset.TabIndex = 147;
+            this.textRX1PreampOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRX1PreampOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRX1PreampOffset.ForeColor = System.Drawing.Color.White;
+            this.textRX1PreampOffset.Location = new System.Drawing.Point(420, 195);
+            this.textRX1PreampOffset.Name = "textRX1PreampOffset";
+            this.textRX1PreampOffset.ReadOnly = true;
+            this.textRX1PreampOffset.Size = new System.Drawing.Size(157, 20);
+            this.textRX1PreampOffset.TabIndex = 147;
             // 
-            // txtRX2DisplayOffset
+            // textRX2DisplayOffset
             // 
-            this.txtRX2DisplayOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRX2DisplayOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRX2DisplayOffset.ForeColor = System.Drawing.Color.White;
-            this.txtRX2DisplayOffset.Location = new System.Drawing.Point(420, 240);
-            this.txtRX2DisplayOffset.Name = "txtRX2DisplayOffset";
-            this.txtRX2DisplayOffset.ReadOnly = true;
-            this.txtRX2DisplayOffset.Size = new System.Drawing.Size(157, 20);
-            this.txtRX2DisplayOffset.TabIndex = 146;
+            this.textRX2DisplayOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRX2DisplayOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRX2DisplayOffset.ForeColor = System.Drawing.Color.White;
+            this.textRX2DisplayOffset.Location = new System.Drawing.Point(420, 240);
+            this.textRX2DisplayOffset.Name = "textRX2DisplayOffset";
+            this.textRX2DisplayOffset.ReadOnly = true;
+            this.textRX2DisplayOffset.Size = new System.Drawing.Size(157, 20);
+            this.textRX2DisplayOffset.TabIndex = 146;
             // 
-            // txtAlexFwdADC
+            // textAlexFwdADC
             // 
-            this.txtAlexFwdADC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtAlexFwdADC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtAlexFwdADC.ForeColor = System.Drawing.Color.White;
-            this.txtAlexFwdADC.Location = new System.Drawing.Point(219, 60);
-            this.txtAlexFwdADC.Name = "txtAlexFwdADC";
-            this.txtAlexFwdADC.ReadOnly = true;
-            this.txtAlexFwdADC.Size = new System.Drawing.Size(157, 20);
-            this.txtAlexFwdADC.TabIndex = 145;
+            this.textAlexFwdADC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textAlexFwdADC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textAlexFwdADC.ForeColor = System.Drawing.Color.White;
+            this.textAlexFwdADC.Location = new System.Drawing.Point(219, 60);
+            this.textAlexFwdADC.Name = "textAlexFwdADC";
+            this.textAlexFwdADC.ReadOnly = true;
+            this.textAlexFwdADC.Size = new System.Drawing.Size(157, 20);
+            this.textAlexFwdADC.TabIndex = 145;
             // 
-            // txtFwdADC
+            // textFwdADC
             // 
-            this.txtFwdADC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtFwdADC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtFwdADC.ForeColor = System.Drawing.Color.White;
-            this.txtFwdADC.Location = new System.Drawing.Point(219, 20);
-            this.txtFwdADC.Name = "txtFwdADC";
-            this.txtFwdADC.ReadOnly = true;
-            this.txtFwdADC.Size = new System.Drawing.Size(157, 20);
-            this.txtFwdADC.TabIndex = 144;
+            this.textFwdADC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textFwdADC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textFwdADC.ForeColor = System.Drawing.Color.White;
+            this.textFwdADC.Location = new System.Drawing.Point(219, 20);
+            this.textFwdADC.Name = "textFwdADC";
+            this.textFwdADC.ReadOnly = true;
+            this.textFwdADC.Size = new System.Drawing.Size(157, 20);
+            this.textFwdADC.TabIndex = 144;
             // 
             // labelTS92
             // 
@@ -16297,49 +16328,49 @@
             this.labelTS89.Text = "Fwd Power";
             this.labelTS89.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtAlexRevPower
+            // textAlexRevPower
             // 
-            this.txtAlexRevPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtAlexRevPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtAlexRevPower.ForeColor = System.Drawing.Color.White;
-            this.txtAlexRevPower.Location = new System.Drawing.Point(24, 105);
-            this.txtAlexRevPower.Name = "txtAlexRevPower";
-            this.txtAlexRevPower.ReadOnly = true;
-            this.txtAlexRevPower.Size = new System.Drawing.Size(157, 20);
-            this.txtAlexRevPower.TabIndex = 139;
+            this.textAlexRevPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textAlexRevPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textAlexRevPower.ForeColor = System.Drawing.Color.White;
+            this.textAlexRevPower.Location = new System.Drawing.Point(24, 105);
+            this.textAlexRevPower.Name = "textAlexRevPower";
+            this.textAlexRevPower.ReadOnly = true;
+            this.textAlexRevPower.Size = new System.Drawing.Size(157, 20);
+            this.textAlexRevPower.TabIndex = 139;
             // 
-            // txtFwdPower
+            // textFwdPower
             // 
-            this.txtFwdPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtFwdPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtFwdPower.ForeColor = System.Drawing.Color.White;
-            this.txtFwdPower.Location = new System.Drawing.Point(24, 20);
-            this.txtFwdPower.Name = "txtFwdPower";
-            this.txtFwdPower.ReadOnly = true;
-            this.txtFwdPower.Size = new System.Drawing.Size(157, 20);
-            this.txtFwdPower.TabIndex = 138;
+            this.textFwdPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textFwdPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textFwdPower.ForeColor = System.Drawing.Color.White;
+            this.textFwdPower.Location = new System.Drawing.Point(24, 20);
+            this.textFwdPower.Name = "textFwdPower";
+            this.textFwdPower.ReadOnly = true;
+            this.textFwdPower.Size = new System.Drawing.Size(157, 20);
+            this.textFwdPower.TabIndex = 138;
             // 
-            // txtRX1VFO
+            // textRX1VFO
             // 
-            this.txtRX1VFO.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRX1VFO.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRX1VFO.ForeColor = System.Drawing.Color.White;
-            this.txtRX1VFO.Location = new System.Drawing.Point(24, 150);
-            this.txtRX1VFO.Name = "txtRX1VFO";
-            this.txtRX1VFO.ReadOnly = true;
-            this.txtRX1VFO.Size = new System.Drawing.Size(157, 20);
-            this.txtRX1VFO.TabIndex = 137;
+            this.textRX1VFO.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRX1VFO.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRX1VFO.ForeColor = System.Drawing.Color.White;
+            this.textRX1VFO.Location = new System.Drawing.Point(24, 150);
+            this.textRX1VFO.Name = "textRX1VFO";
+            this.textRX1VFO.ReadOnly = true;
+            this.textRX1VFO.Size = new System.Drawing.Size(157, 20);
+            this.textRX1VFO.TabIndex = 137;
             // 
-            // txtAlexFwdPower
+            // textAlexFwdPower
             // 
-            this.txtAlexFwdPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtAlexFwdPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtAlexFwdPower.ForeColor = System.Drawing.Color.White;
-            this.txtAlexFwdPower.Location = new System.Drawing.Point(24, 60);
-            this.txtAlexFwdPower.Name = "txtAlexFwdPower";
-            this.txtAlexFwdPower.ReadOnly = true;
-            this.txtAlexFwdPower.Size = new System.Drawing.Size(157, 20);
-            this.txtAlexFwdPower.TabIndex = 136;
+            this.textAlexFwdPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textAlexFwdPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textAlexFwdPower.ForeColor = System.Drawing.Color.White;
+            this.textAlexFwdPower.Location = new System.Drawing.Point(24, 60);
+            this.textAlexFwdPower.Name = "textAlexFwdPower";
+            this.textAlexFwdPower.ReadOnly = true;
+            this.textAlexFwdPower.Size = new System.Drawing.Size(157, 20);
+            this.textAlexFwdPower.TabIndex = 136;
             // 
             // tpApolloControl
             // 
@@ -19930,7 +19961,6 @@
             // tcDSP
             // 
             this.tcDSP.Controls.Add(this.tpDSPOptions);
-            this.tcDSP.Controls.Add(this.tpDSPImageReject);
             this.tcDSP.Controls.Add(this.tpDSPKeyer);
             this.tcDSP.Controls.Add(this.tpDSPAGCALC);
             this.tcDSP.Controls.Add(this.tpDSPAMSAM);
@@ -21232,181 +21262,6 @@
             this.lblDSPNB2Threshold.Size = new System.Drawing.Size(64, 16);
             this.lblDSPNB2Threshold.TabIndex = 10;
             this.lblDSPNB2Threshold.Text = "Thresh 1:";
-            // 
-            // tpDSPImageReject
-            // 
-            this.tpDSPImageReject.Controls.Add(this.chkDSPImageExpert);
-            this.tpDSPImageReject.Controls.Add(this.grpDSPImageRejectTX);
-            this.tpDSPImageReject.Location = new System.Drawing.Point(4, 22);
-            this.tpDSPImageReject.Name = "tpDSPImageReject";
-            this.tpDSPImageReject.Size = new System.Drawing.Size(592, 318);
-            this.tpDSPImageReject.TabIndex = 1;
-            this.tpDSPImageReject.Text = "Image Reject";
-            // 
-            // chkDSPImageExpert
-            // 
-            this.chkDSPImageExpert.Image = null;
-            this.chkDSPImageExpert.Location = new System.Drawing.Point(3, 193);
-            this.chkDSPImageExpert.Name = "chkDSPImageExpert";
-            this.chkDSPImageExpert.Size = new System.Drawing.Size(56, 24);
-            this.chkDSPImageExpert.TabIndex = 35;
-            this.chkDSPImageExpert.Text = "Expert";
-            this.chkDSPImageExpert.CheckedChanged += new System.EventHandler(this.chkDSPImageExpert_CheckedChanged);
-            // 
-            // grpDSPImageRejectTX
-            // 
-            this.grpDSPImageRejectTX.Controls.Add(this.checkboxTXImagCal);
-            this.grpDSPImageRejectTX.Controls.Add(this.lblDSPGainValTX);
-            this.grpDSPImageRejectTX.Controls.Add(this.lblDSPPhaseValTX);
-            this.grpDSPImageRejectTX.Controls.Add(this.udDSPImageGainTX);
-            this.grpDSPImageRejectTX.Controls.Add(this.udDSPImagePhaseTX);
-            this.grpDSPImageRejectTX.Controls.Add(this.lblDSPImageGainTX);
-            this.grpDSPImageRejectTX.Controls.Add(this.tbDSPImagePhaseTX);
-            this.grpDSPImageRejectTX.Controls.Add(this.lblDSPImagePhaseTX);
-            this.grpDSPImageRejectTX.Controls.Add(this.tbDSPImageGainTX);
-            this.grpDSPImageRejectTX.Location = new System.Drawing.Point(3, 3);
-            this.grpDSPImageRejectTX.Name = "grpDSPImageRejectTX";
-            this.grpDSPImageRejectTX.Size = new System.Drawing.Size(240, 184);
-            this.grpDSPImageRejectTX.TabIndex = 33;
-            this.grpDSPImageRejectTX.TabStop = false;
-            this.grpDSPImageRejectTX.Text = "Transmit Rejection";
-            // 
-            // checkboxTXImagCal
-            // 
-            this.checkboxTXImagCal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkboxTXImagCal.Image = null;
-            this.checkboxTXImagCal.Location = new System.Drawing.Point(48, 144);
-            this.checkboxTXImagCal.Name = "checkboxTXImagCal";
-            this.checkboxTXImagCal.Size = new System.Drawing.Size(144, 16);
-            this.checkboxTXImagCal.TabIndex = 37;
-            this.checkboxTXImagCal.Text = "Enable TX Image Tone";
-            this.toolTip1.SetToolTip(this.checkboxTXImagCal, "Check this box while in MOX on USB to calibrate the Transmit Rejection using the " +
-        "controls above.");
-            this.checkboxTXImagCal.CheckedChanged += new System.EventHandler(this.chkTXImagCal_CheckedChanged);
-            // 
-            // lblDSPGainValTX
-            // 
-            this.lblDSPGainValTX.Image = null;
-            this.lblDSPGainValTX.Location = new System.Drawing.Point(72, 104);
-            this.lblDSPGainValTX.Name = "lblDSPGainValTX";
-            this.lblDSPGainValTX.Size = new System.Drawing.Size(163, 16);
-            this.lblDSPGainValTX.TabIndex = 15;
-            this.lblDSPGainValTX.Text = "-500    -250       0       250     500";
-            // 
-            // lblDSPPhaseValTX
-            // 
-            this.lblDSPPhaseValTX.Image = null;
-            this.lblDSPPhaseValTX.Location = new System.Drawing.Point(72, 56);
-            this.lblDSPPhaseValTX.Name = "lblDSPPhaseValTX";
-            this.lblDSPPhaseValTX.Size = new System.Drawing.Size(163, 16);
-            this.lblDSPPhaseValTX.TabIndex = 14;
-            this.lblDSPPhaseValTX.Text = "-400    -200       0       200     400";
-            // 
-            // udDSPImageGainTX
-            // 
-            this.udDSPImageGainTX.DecimalPlaces = 2;
-            this.udDSPImageGainTX.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPImageGainTX.Location = new System.Drawing.Point(16, 88);
-            this.udDSPImageGainTX.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.udDSPImageGainTX.Minimum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            -2147483648});
-            this.udDSPImageGainTX.Name = "udDSPImageGainTX";
-            this.udDSPImageGainTX.Size = new System.Drawing.Size(56, 20);
-            this.udDSPImageGainTX.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.udDSPImageGainTX, "Sets the amplitude/gain offset between the I and Q channels.  ");
-            this.udDSPImageGainTX.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDSPImageGainTX.ValueChanged += new System.EventHandler(this.udDSPImageGainTX_ValueChanged);
-            this.udDSPImageGainTX.LostFocus += new System.EventHandler(this.udDSPImageGainTX_LostFocus);
-            // 
-            // udDSPImagePhaseTX
-            // 
-            this.udDSPImagePhaseTX.DecimalPlaces = 2;
-            this.udDSPImagePhaseTX.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPImagePhaseTX.Location = new System.Drawing.Point(16, 40);
-            this.udDSPImagePhaseTX.Maximum = new decimal(new int[] {
-            400,
-            0,
-            0,
-            0});
-            this.udDSPImagePhaseTX.Minimum = new decimal(new int[] {
-            400,
-            0,
-            0,
-            -2147483648});
-            this.udDSPImagePhaseTX.Name = "udDSPImagePhaseTX";
-            this.udDSPImagePhaseTX.Size = new System.Drawing.Size(56, 20);
-            this.udDSPImagePhaseTX.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.udDSPImagePhaseTX, "Sets the phase offset between the I and Q channels.  ");
-            this.udDSPImagePhaseTX.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDSPImagePhaseTX.ValueChanged += new System.EventHandler(this.udDSPImagePhaseTX_ValueChanged);
-            this.udDSPImagePhaseTX.LostFocus += new System.EventHandler(this.udDSPImagePhaseTX_LostFocus);
-            // 
-            // lblDSPImageGainTX
-            // 
-            this.lblDSPImageGainTX.Image = null;
-            this.lblDSPImageGainTX.Location = new System.Drawing.Point(16, 72);
-            this.lblDSPImageGainTX.Name = "lblDSPImageGainTX";
-            this.lblDSPImageGainTX.Size = new System.Drawing.Size(48, 16);
-            this.lblDSPImageGainTX.TabIndex = 6;
-            this.lblDSPImageGainTX.Text = "Gain:";
-            // 
-            // tbDSPImagePhaseTX
-            // 
-            this.tbDSPImagePhaseTX.LargeChange = 1;
-            this.tbDSPImagePhaseTX.Location = new System.Drawing.Point(72, 24);
-            this.tbDSPImagePhaseTX.Maximum = 400;
-            this.tbDSPImagePhaseTX.Minimum = -400;
-            this.tbDSPImagePhaseTX.Name = "tbDSPImagePhaseTX";
-            this.tbDSPImagePhaseTX.Size = new System.Drawing.Size(160, 45);
-            this.tbDSPImagePhaseTX.TabIndex = 3;
-            this.tbDSPImagePhaseTX.TickFrequency = 50;
-            this.toolTip1.SetToolTip(this.tbDSPImagePhaseTX, "Sets the phase offset between the I and Q channels.  ");
-            this.tbDSPImagePhaseTX.Scroll += new System.EventHandler(this.tbDSPImagePhaseTX_Scroll);
-            // 
-            // lblDSPImagePhaseTX
-            // 
-            this.lblDSPImagePhaseTX.Image = null;
-            this.lblDSPImagePhaseTX.Location = new System.Drawing.Point(16, 24);
-            this.lblDSPImagePhaseTX.Name = "lblDSPImagePhaseTX";
-            this.lblDSPImagePhaseTX.Size = new System.Drawing.Size(48, 16);
-            this.lblDSPImagePhaseTX.TabIndex = 5;
-            this.lblDSPImagePhaseTX.Text = "Phase:";
-            // 
-            // tbDSPImageGainTX
-            // 
-            this.tbDSPImageGainTX.LargeChange = 1;
-            this.tbDSPImageGainTX.Location = new System.Drawing.Point(72, 72);
-            this.tbDSPImageGainTX.Maximum = 500;
-            this.tbDSPImageGainTX.Minimum = -500;
-            this.tbDSPImageGainTX.Name = "tbDSPImageGainTX";
-            this.tbDSPImageGainTX.Size = new System.Drawing.Size(160, 45);
-            this.tbDSPImageGainTX.TabIndex = 4;
-            this.tbDSPImageGainTX.TickFrequency = 50;
-            this.toolTip1.SetToolTip(this.tbDSPImageGainTX, "Sets the amplitude/gain offset between the I and Q channels.  ");
-            this.tbDSPImageGainTX.Scroll += new System.EventHandler(this.tbDSPImageGainTX_Scroll);
             // 
             // tpDSPKeyer
             // 
@@ -23286,6 +23141,8 @@
             // 
             // chkTXLimitSlew
             // 
+            this.chkTXLimitSlew.Checked = true;
+            this.chkTXLimitSlew.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTXLimitSlew.Image = null;
             this.chkTXLimitSlew.Location = new System.Drawing.Point(326, 70);
             this.chkTXLimitSlew.Name = "chkTXLimitSlew";
@@ -23910,9 +23767,9 @@
             this.lblTransmitTunePower.Image = null;
             this.lblTransmitTunePower.Location = new System.Drawing.Point(8, 24);
             this.lblTransmitTunePower.Name = "lblTransmitTunePower";
-            this.lblTransmitTunePower.Size = new System.Drawing.Size(64, 16);
+            this.lblTransmitTunePower.Size = new System.Drawing.Size(45, 16);
             this.lblTransmitTunePower.TabIndex = 5;
-            this.lblTransmitTunePower.Text = "Power (W):";
+            this.lblTransmitTunePower.Text = "Power:";
             // 
             // udTXTunePower
             // 
@@ -23921,7 +23778,7 @@
             0,
             0,
             0});
-            this.udTXTunePower.Location = new System.Drawing.Point(72, 24);
+            this.udTXTunePower.Location = new System.Drawing.Point(64, 22);
             this.udTXTunePower.Maximum = new decimal(new int[] {
             100,
             0,
@@ -25083,7 +24940,7 @@
             this.btnPAGainReset.Size = new System.Drawing.Size(48, 23);
             this.btnPAGainReset.TabIndex = 21;
             this.btnPAGainReset.Text = "Reset";
-            this.toolTip1.SetToolTip(this.btnPAGainReset, "Reset all Gain values to the default 48.0dB");
+            this.toolTip1.SetToolTip(this.btnPAGainReset, "Reset all Gain values to the default.");
             this.btnPAGainReset.Click += new System.EventHandler(this.btnPAGainReset_Click);
             // 
             // lblPAGainByBand10
@@ -26176,7 +26033,7 @@
             this.btnANAN10PAGainReset.Size = new System.Drawing.Size(48, 23);
             this.btnANAN10PAGainReset.TabIndex = 21;
             this.btnANAN10PAGainReset.Text = "Reset";
-            this.toolTip1.SetToolTip(this.btnANAN10PAGainReset, "Reset all Gain values to the default 48.0dB");
+            this.toolTip1.SetToolTip(this.btnANAN10PAGainReset, "Reset all Gain values to the default.");
             this.btnANAN10PAGainReset.Click += new System.EventHandler(this.btnPAGainReset_Click);
             // 
             // labelTS219
@@ -27259,7 +27116,7 @@
             this.btnANAN100PAGainReset.Size = new System.Drawing.Size(48, 23);
             this.btnANAN100PAGainReset.TabIndex = 21;
             this.btnANAN100PAGainReset.Text = "Reset";
-            this.toolTip1.SetToolTip(this.btnANAN100PAGainReset, "Reset all Gain values to the default 48.0dB");
+            this.toolTip1.SetToolTip(this.btnANAN100PAGainReset, "Reset all Gain values to the default.");
             this.btnANAN100PAGainReset.Click += new System.EventHandler(this.btnPAGainReset_Click);
             // 
             // labelTS194
@@ -28342,7 +28199,7 @@
             this.btnANANPAGainReset.Size = new System.Drawing.Size(48, 23);
             this.btnANANPAGainReset.TabIndex = 21;
             this.btnANANPAGainReset.Text = "Reset";
-            this.toolTip1.SetToolTip(this.btnANANPAGainReset, "Reset all Gain values to the default 48.0dB");
+            this.toolTip1.SetToolTip(this.btnANANPAGainReset, "Reset all Gain values to the default.");
             this.btnANANPAGainReset.Click += new System.EventHandler(this.btnPAGainReset_Click);
             // 
             // labelTS170
@@ -29425,7 +29282,7 @@
             this.btnHermesPAGainReset.Size = new System.Drawing.Size(48, 23);
             this.btnHermesPAGainReset.TabIndex = 21;
             this.btnHermesPAGainReset.Text = "Reset";
-            this.toolTip1.SetToolTip(this.btnHermesPAGainReset, "Reset all Gain values to the default 48.0dB");
+            this.toolTip1.SetToolTip(this.btnHermesPAGainReset, "Reset all Gain values to the default.");
             this.btnHermesPAGainReset.Click += new System.EventHandler(this.btnPAGainReset_Click);
             // 
             // labelTS244
@@ -29831,6 +29688,7 @@
             // tpWattMeter
             // 
             this.tpWattMeter.BackColor = System.Drawing.SystemColors.Control;
+            this.tpWattMeter.Controls.Add(this.btnResetWattMeterValues);
             this.tpWattMeter.Controls.Add(this.richTextBox1);
             this.tpWattMeter.Controls.Add(this.grpWattMeterTrim);
             this.tpWattMeter.Controls.Add(this.panelPAValues);
@@ -29841,6 +29699,18 @@
             this.tpWattMeter.Size = new System.Drawing.Size(576, 337);
             this.tpWattMeter.TabIndex = 1;
             this.tpWattMeter.Text = "Watt Meter";
+            // 
+            // btnResetWattMeterValues
+            // 
+            this.btnResetWattMeterValues.Image = null;
+            this.btnResetWattMeterValues.Location = new System.Drawing.Point(107, 217);
+            this.btnResetWattMeterValues.Name = "btnResetWattMeterValues";
+            this.btnResetWattMeterValues.Size = new System.Drawing.Size(50, 23);
+            this.btnResetWattMeterValues.TabIndex = 6;
+            this.btnResetWattMeterValues.Text = "Reset";
+            this.toolTip1.SetToolTip(this.btnResetWattMeterValues, "Reset trim values to default.");
+            this.btnResetWattMeterValues.UseVisualStyleBackColor = true;
+            this.btnResetWattMeterValues.Click += new System.EventHandler(this.btnResetWattMeterValues_Click);
             // 
             // richTextBox1
             // 
@@ -29861,7 +29731,7 @@
             this.grpWattMeterTrim.Controls.Add(this.labelTS255);
             this.grpWattMeterTrim.Controls.Add(this.labelTS258);
             this.grpWattMeterTrim.Controls.Add(this.udPA110W);
-            this.grpWattMeterTrim.Controls.Add(this.udSWR80W);
+            this.grpWattMeterTrim.Controls.Add(this.udPA80W);
             this.grpWattMeterTrim.Controls.Add(this.udPA120W);
             this.grpWattMeterTrim.Controls.Add(this.labelTS259);
             this.grpWattMeterTrim.Controls.Add(this.labelTS267);
@@ -30046,29 +29916,29 @@
             0});
             this.udPA110W.Visible = false;
             // 
-            // udSWR80W
+            // udPA80W
             // 
-            this.udSWR80W.DecimalPlaces = 1;
-            this.udSWR80W.Increment = new decimal(new int[] {
+            this.udPA80W.DecimalPlaces = 1;
+            this.udPA80W.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.udSWR80W.Location = new System.Drawing.Point(184, 24);
-            this.udSWR80W.Maximum = new decimal(new int[] {
+            this.udPA80W.Location = new System.Drawing.Point(184, 24);
+            this.udPA80W.Maximum = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.udSWR80W.Minimum = new decimal(new int[] {
+            this.udPA80W.Minimum = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.udSWR80W.Name = "udSWR80W";
-            this.udSWR80W.Size = new System.Drawing.Size(48, 20);
-            this.udSWR80W.TabIndex = 101;
-            this.udSWR80W.Value = new decimal(new int[] {
+            this.udPA80W.Name = "udPA80W";
+            this.udPA80W.Size = new System.Drawing.Size(48, 20);
+            this.udPA80W.TabIndex = 101;
+            this.udPA80W.Value = new decimal(new int[] {
             80,
             0,
             0,
@@ -30448,22 +30318,22 @@
             this.panelPAValues.AutoScrollMinSize = new System.Drawing.Size(0, 0);
             this.panelPAValues.Controls.Add(this.btnResetPAValues);
             this.panelPAValues.Controls.Add(this.labelTS254);
-            this.panelPAValues.Controls.Add(this.txtDCVolts);
+            this.panelPAValues.Controls.Add(this.textDCVolts);
             this.panelPAValues.Controls.Add(this.labelTS276);
             this.panelPAValues.Controls.Add(this.labelTS271);
-            this.panelPAValues.Controls.Add(this.txtPAFwdPower);
-            this.panelPAValues.Controls.Add(this.txtRevADCValue);
-            this.panelPAValues.Controls.Add(this.txtDrivePower);
-            this.panelPAValues.Controls.Add(this.txtPARevPower);
+            this.panelPAValues.Controls.Add(this.textPAFwdPower);
+            this.panelPAValues.Controls.Add(this.textRevADCValue);
+            this.panelPAValues.Controls.Add(this.textDrivePower);
+            this.panelPAValues.Controls.Add(this.textPARevPower);
             this.panelPAValues.Controls.Add(this.labelTS275);
             this.panelPAValues.Controls.Add(this.labelTS274);
             this.panelPAValues.Controls.Add(this.labelTS273);
-            this.panelPAValues.Controls.Add(this.txtFwdPowerCalibrated);
+            this.panelPAValues.Controls.Add(this.textFwdPowerCalibrated);
             this.panelPAValues.Controls.Add(this.labelTS272);
-            this.panelPAValues.Controls.Add(this.txtFwdADCValue);
+            this.panelPAValues.Controls.Add(this.textFwdADCValue);
             this.panelPAValues.Controls.Add(this.labelTS269);
-            this.panelPAValues.Controls.Add(this.txtFwdVoltage);
-            this.panelPAValues.Controls.Add(this.txtRevVoltage);
+            this.panelPAValues.Controls.Add(this.textFwdVoltage);
+            this.panelPAValues.Controls.Add(this.textRevVoltage);
             this.panelPAValues.Controls.Add(this.labelTS270);
             this.panelPAValues.Location = new System.Drawing.Point(261, 6);
             this.panelPAValues.Name = "panelPAValues";
@@ -30479,6 +30349,7 @@
             this.btnResetPAValues.Size = new System.Drawing.Size(50, 23);
             this.btnResetPAValues.TabIndex = 5;
             this.btnResetPAValues.Text = "Reset";
+            this.toolTip1.SetToolTip(this.btnResetPAValues, "Clears all text boxes.");
             this.btnResetPAValues.UseVisualStyleBackColor = true;
             this.btnResetPAValues.Click += new System.EventHandler(this.btnResetPAValues_Click);
             // 
@@ -30494,17 +30365,17 @@
             this.labelTS254.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelTS254.Visible = false;
             // 
-            // txtDCVolts
+            // textDCVolts
             // 
-            this.txtDCVolts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtDCVolts.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtDCVolts.ForeColor = System.Drawing.Color.White;
-            this.txtDCVolts.Location = new System.Drawing.Point(8, 37);
-            this.txtDCVolts.Name = "txtDCVolts";
-            this.txtDCVolts.ReadOnly = true;
-            this.txtDCVolts.Size = new System.Drawing.Size(89, 20);
-            this.txtDCVolts.TabIndex = 179;
-            this.txtDCVolts.Visible = false;
+            this.textDCVolts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textDCVolts.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textDCVolts.ForeColor = System.Drawing.Color.White;
+            this.textDCVolts.Location = new System.Drawing.Point(8, 37);
+            this.textDCVolts.Name = "textDCVolts";
+            this.textDCVolts.ReadOnly = true;
+            this.textDCVolts.Size = new System.Drawing.Size(89, 20);
+            this.textDCVolts.TabIndex = 179;
+            this.textDCVolts.Visible = false;
             // 
             // labelTS276
             // 
@@ -30528,49 +30399,49 @@
             this.labelTS271.Text = "Fwd ADC Value";
             this.labelTS271.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtPAFwdPower
+            // textPAFwdPower
             // 
-            this.txtPAFwdPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtPAFwdPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtPAFwdPower.ForeColor = System.Drawing.Color.White;
-            this.txtPAFwdPower.Location = new System.Drawing.Point(106, 85);
-            this.txtPAFwdPower.Name = "txtPAFwdPower";
-            this.txtPAFwdPower.ReadOnly = true;
-            this.txtPAFwdPower.Size = new System.Drawing.Size(90, 20);
-            this.txtPAFwdPower.TabIndex = 163;
+            this.textPAFwdPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textPAFwdPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textPAFwdPower.ForeColor = System.Drawing.Color.White;
+            this.textPAFwdPower.Location = new System.Drawing.Point(106, 85);
+            this.textPAFwdPower.Name = "textPAFwdPower";
+            this.textPAFwdPower.ReadOnly = true;
+            this.textPAFwdPower.Size = new System.Drawing.Size(90, 20);
+            this.textPAFwdPower.TabIndex = 163;
             // 
-            // txtRevADCValue
+            // textRevADCValue
             // 
-            this.txtRevADCValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRevADCValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRevADCValue.ForeColor = System.Drawing.Color.White;
-            this.txtRevADCValue.Location = new System.Drawing.Point(8, 127);
-            this.txtRevADCValue.Name = "txtRevADCValue";
-            this.txtRevADCValue.ReadOnly = true;
-            this.txtRevADCValue.Size = new System.Drawing.Size(90, 20);
-            this.txtRevADCValue.TabIndex = 177;
+            this.textRevADCValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRevADCValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRevADCValue.ForeColor = System.Drawing.Color.White;
+            this.textRevADCValue.Location = new System.Drawing.Point(8, 127);
+            this.textRevADCValue.Name = "textRevADCValue";
+            this.textRevADCValue.ReadOnly = true;
+            this.textRevADCValue.Size = new System.Drawing.Size(90, 20);
+            this.textRevADCValue.TabIndex = 177;
             // 
-            // txtDrivePower
+            // textDrivePower
             // 
-            this.txtDrivePower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtDrivePower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtDrivePower.ForeColor = System.Drawing.Color.White;
-            this.txtDrivePower.Location = new System.Drawing.Point(8, 84);
-            this.txtDrivePower.Name = "txtDrivePower";
-            this.txtDrivePower.ReadOnly = true;
-            this.txtDrivePower.Size = new System.Drawing.Size(90, 20);
-            this.txtDrivePower.TabIndex = 164;
+            this.textDrivePower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textDrivePower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textDrivePower.ForeColor = System.Drawing.Color.White;
+            this.textDrivePower.Location = new System.Drawing.Point(8, 84);
+            this.textDrivePower.Name = "textDrivePower";
+            this.textDrivePower.ReadOnly = true;
+            this.textDrivePower.Size = new System.Drawing.Size(90, 20);
+            this.textDrivePower.TabIndex = 164;
             // 
-            // txtPARevPower
+            // textPARevPower
             // 
-            this.txtPARevPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtPARevPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtPARevPower.ForeColor = System.Drawing.Color.White;
-            this.txtPARevPower.Location = new System.Drawing.Point(205, 128);
-            this.txtPARevPower.Name = "txtPARevPower";
-            this.txtPARevPower.ReadOnly = true;
-            this.txtPARevPower.Size = new System.Drawing.Size(90, 20);
-            this.txtPARevPower.TabIndex = 165;
+            this.textPARevPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textPARevPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textPARevPower.ForeColor = System.Drawing.Color.White;
+            this.textPARevPower.Location = new System.Drawing.Point(205, 128);
+            this.textPARevPower.Name = "textPARevPower";
+            this.textPARevPower.ReadOnly = true;
+            this.textPARevPower.Size = new System.Drawing.Size(90, 20);
+            this.textPARevPower.TabIndex = 165;
             // 
             // labelTS275
             // 
@@ -30605,16 +30476,16 @@
             this.labelTS273.Text = "PA Fwd Power";
             this.labelTS273.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtFwdPowerCalibrated
+            // textFwdPowerCalibrated
             // 
-            this.txtFwdPowerCalibrated.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtFwdPowerCalibrated.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtFwdPowerCalibrated.ForeColor = System.Drawing.Color.White;
-            this.txtFwdPowerCalibrated.Location = new System.Drawing.Point(205, 85);
-            this.txtFwdPowerCalibrated.Name = "txtFwdPowerCalibrated";
-            this.txtFwdPowerCalibrated.ReadOnly = true;
-            this.txtFwdPowerCalibrated.Size = new System.Drawing.Size(90, 20);
-            this.txtFwdPowerCalibrated.TabIndex = 175;
+            this.textFwdPowerCalibrated.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textFwdPowerCalibrated.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textFwdPowerCalibrated.ForeColor = System.Drawing.Color.White;
+            this.textFwdPowerCalibrated.Location = new System.Drawing.Point(205, 85);
+            this.textFwdPowerCalibrated.Name = "textFwdPowerCalibrated";
+            this.textFwdPowerCalibrated.ReadOnly = true;
+            this.textFwdPowerCalibrated.Size = new System.Drawing.Size(90, 20);
+            this.textFwdPowerCalibrated.TabIndex = 175;
             // 
             // labelTS272
             // 
@@ -30627,16 +30498,16 @@
             this.labelTS272.Text = "PA Rev Power";
             this.labelTS272.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtFwdADCValue
+            // textFwdADCValue
             // 
-            this.txtFwdADCValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtFwdADCValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtFwdADCValue.ForeColor = System.Drawing.Color.White;
-            this.txtFwdADCValue.Location = new System.Drawing.Point(106, 36);
-            this.txtFwdADCValue.Name = "txtFwdADCValue";
-            this.txtFwdADCValue.ReadOnly = true;
-            this.txtFwdADCValue.Size = new System.Drawing.Size(90, 20);
-            this.txtFwdADCValue.TabIndex = 169;
+            this.textFwdADCValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textFwdADCValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textFwdADCValue.ForeColor = System.Drawing.Color.White;
+            this.textFwdADCValue.Location = new System.Drawing.Point(106, 36);
+            this.textFwdADCValue.Name = "textFwdADCValue";
+            this.textFwdADCValue.ReadOnly = true;
+            this.textFwdADCValue.Size = new System.Drawing.Size(90, 20);
+            this.textFwdADCValue.TabIndex = 169;
             // 
             // labelTS269
             // 
@@ -30649,27 +30520,27 @@
             this.labelTS269.Text = "Rev Voltage";
             this.labelTS269.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtFwdVoltage
+            // textFwdVoltage
             // 
-            this.txtFwdVoltage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtFwdVoltage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtFwdVoltage.ForeColor = System.Drawing.Color.White;
-            this.txtFwdVoltage.Location = new System.Drawing.Point(205, 37);
-            this.txtFwdVoltage.Name = "txtFwdVoltage";
-            this.txtFwdVoltage.ReadOnly = true;
-            this.txtFwdVoltage.Size = new System.Drawing.Size(90, 20);
-            this.txtFwdVoltage.TabIndex = 170;
+            this.textFwdVoltage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textFwdVoltage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textFwdVoltage.ForeColor = System.Drawing.Color.White;
+            this.textFwdVoltage.Location = new System.Drawing.Point(205, 37);
+            this.textFwdVoltage.Name = "textFwdVoltage";
+            this.textFwdVoltage.ReadOnly = true;
+            this.textFwdVoltage.Size = new System.Drawing.Size(90, 20);
+            this.textFwdVoltage.TabIndex = 170;
             // 
-            // txtRevVoltage
+            // textRevVoltage
             // 
-            this.txtRevVoltage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.txtRevVoltage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.txtRevVoltage.ForeColor = System.Drawing.Color.White;
-            this.txtRevVoltage.Location = new System.Drawing.Point(106, 128);
-            this.txtRevVoltage.Name = "txtRevVoltage";
-            this.txtRevVoltage.ReadOnly = true;
-            this.txtRevVoltage.Size = new System.Drawing.Size(90, 20);
-            this.txtRevVoltage.TabIndex = 171;
+            this.textRevVoltage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.textRevVoltage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textRevVoltage.ForeColor = System.Drawing.Color.White;
+            this.textRevVoltage.Location = new System.Drawing.Point(106, 128);
+            this.textRevVoltage.Name = "textRevVoltage";
+            this.textRevVoltage.ReadOnly = true;
+            this.textRevVoltage.Size = new System.Drawing.Size(90, 20);
+            this.textRevVoltage.TabIndex = 171;
             // 
             // labelTS270
             // 
@@ -30692,6 +30563,7 @@
             this.chkPAValues.Size = new System.Drawing.Size(66, 23);
             this.chkPAValues.TabIndex = 1;
             this.chkPAValues.Text = "PA Values";
+            this.toolTip1.SetToolTip(this.chkPAValues, "Show PA power and voltage.");
             this.chkPAValues.UseVisualStyleBackColor = true;
             this.chkPAValues.CheckedChanged += new System.EventHandler(this.chkPAValues_CheckedChanged);
             // 
@@ -33263,6 +33135,7 @@
             // 
             this.tcCAT.Controls.Add(this.tpCAT);
             this.tcCAT.Controls.Add(this.tpMidiCat);
+            this.tcCAT.Controls.Add(this.tpCAT2);
             this.tcCAT.Location = new System.Drawing.Point(0, 3);
             this.tcCAT.Name = "tcCAT";
             this.tcCAT.SelectedIndex = 0;
@@ -33717,6 +33590,496 @@
             this.cbConsoleSelect.Name = "cbConsoleSelect";
             this.cbConsoleSelect.Size = new System.Drawing.Size(215, 21);
             this.cbConsoleSelect.TabIndex = 4;
+            // 
+            // tpCAT2
+            // 
+            this.tpCAT2.BackColor = System.Drawing.SystemColors.Control;
+            this.tpCAT2.Controls.Add(this.txtCAT4);
+            this.tpCAT2.Controls.Add(this.txtCAT3);
+            this.tpCAT2.Controls.Add(this.txtCAT2);
+            this.tpCAT2.Controls.Add(this.grpCat4ControlBox);
+            this.tpCAT2.Controls.Add(this.grpCat3ControlBox);
+            this.tpCAT2.Controls.Add(this.grpCat2ControlBox);
+            this.tpCAT2.Location = new System.Drawing.Point(4, 22);
+            this.tpCAT2.Name = "tpCAT2";
+            this.tpCAT2.Padding = new System.Windows.Forms.Padding(3);
+            this.tpCAT2.Size = new System.Drawing.Size(579, 284);
+            this.tpCAT2.TabIndex = 2;
+            this.tpCAT2.Text = "CAT+";
+            // 
+            // txtCAT4
+            // 
+            this.txtCAT4.BackColor = System.Drawing.SystemColors.Window;
+            this.txtCAT4.Location = new System.Drawing.Point(394, 231);
+            this.txtCAT4.Multiline = true;
+            this.txtCAT4.Name = "txtCAT4";
+            this.txtCAT4.Size = new System.Drawing.Size(160, 40);
+            this.txtCAT4.TabIndex = 96;
+            // 
+            // txtCAT3
+            // 
+            this.txtCAT3.BackColor = System.Drawing.SystemColors.Window;
+            this.txtCAT3.Location = new System.Drawing.Point(208, 231);
+            this.txtCAT3.Multiline = true;
+            this.txtCAT3.Name = "txtCAT3";
+            this.txtCAT3.Size = new System.Drawing.Size(160, 40);
+            this.txtCAT3.TabIndex = 95;
+            // 
+            // txtCAT2
+            // 
+            this.txtCAT2.BackColor = System.Drawing.SystemColors.Window;
+            this.txtCAT2.Location = new System.Drawing.Point(16, 231);
+            this.txtCAT2.Multiline = true;
+            this.txtCAT2.Name = "txtCAT2";
+            this.txtCAT2.Size = new System.Drawing.Size(160, 40);
+            this.txtCAT2.TabIndex = 94;
+            // 
+            // grpCat4ControlBox
+            // 
+            this.grpCat4ControlBox.Controls.Add(this.comboCAT4Port);
+            this.grpCat4ControlBox.Controls.Add(this.comboCAT4baud);
+            this.grpCat4ControlBox.Controls.Add(this.lblCAT4Baud);
+            this.grpCat4ControlBox.Controls.Add(this.lblCAT4Port);
+            this.grpCat4ControlBox.Controls.Add(this.chkCAT4Enable);
+            this.grpCat4ControlBox.Controls.Add(this.lblCAT4Parity);
+            this.grpCat4ControlBox.Controls.Add(this.lblCAT4Data);
+            this.grpCat4ControlBox.Controls.Add(this.lblCAT4Stop);
+            this.grpCat4ControlBox.Controls.Add(this.comboCAT4parity);
+            this.grpCat4ControlBox.Controls.Add(this.comboCAT4databits);
+            this.grpCat4ControlBox.Controls.Add(this.comboCAT4stopbits);
+            this.grpCat4ControlBox.Location = new System.Drawing.Point(394, 9);
+            this.grpCat4ControlBox.Name = "grpCat4ControlBox";
+            this.grpCat4ControlBox.Size = new System.Drawing.Size(160, 216);
+            this.grpCat4ControlBox.TabIndex = 93;
+            this.grpCat4ControlBox.TabStop = false;
+            this.grpCat4ControlBox.Text = "CAT4 Control";
+            // 
+            // comboCAT4Port
+            // 
+            this.comboCAT4Port.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT4Port.DropDownWidth = 56;
+            this.comboCAT4Port.Location = new System.Drawing.Point(72, 48);
+            this.comboCAT4Port.Name = "comboCAT4Port";
+            this.comboCAT4Port.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT4Port.TabIndex = 95;
+            this.toolTip1.SetToolTip(this.comboCAT4Port, "Sets the COM port to be used for the CAT interface.");
+            this.comboCAT4Port.SelectedIndexChanged += new System.EventHandler(this.comboCAT4Port_SelectedIndexChanged);
+            // 
+            // comboCAT4baud
+            // 
+            this.comboCAT4baud.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT4baud.DropDownWidth = 56;
+            this.comboCAT4baud.Items.AddRange(new object[] {
+            "300",
+            "1200",
+            "2400",
+            "4800",
+            "9600",
+            "19200",
+            "38400",
+            "57600"});
+            this.comboCAT4baud.Location = new System.Drawing.Point(72, 88);
+            this.comboCAT4baud.Name = "comboCAT4baud";
+            this.comboCAT4baud.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT4baud.TabIndex = 93;
+            this.comboCAT4baud.SelectedIndexChanged += new System.EventHandler(this.comboCAT4baud_SelectedIndexChanged);
+            // 
+            // lblCAT4Baud
+            // 
+            this.lblCAT4Baud.Image = null;
+            this.lblCAT4Baud.Location = new System.Drawing.Point(24, 88);
+            this.lblCAT4Baud.Name = "lblCAT4Baud";
+            this.lblCAT4Baud.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT4Baud.TabIndex = 5;
+            this.lblCAT4Baud.Text = "Baud";
+            // 
+            // lblCAT4Port
+            // 
+            this.lblCAT4Port.Image = null;
+            this.lblCAT4Port.Location = new System.Drawing.Point(24, 48);
+            this.lblCAT4Port.Name = "lblCAT4Port";
+            this.lblCAT4Port.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT4Port.TabIndex = 3;
+            this.lblCAT4Port.Text = "Port:";
+            // 
+            // chkCAT4Enable
+            // 
+            this.chkCAT4Enable.Image = null;
+            this.chkCAT4Enable.Location = new System.Drawing.Point(16, 24);
+            this.chkCAT4Enable.Name = "chkCAT4Enable";
+            this.chkCAT4Enable.Size = new System.Drawing.Size(104, 24);
+            this.chkCAT4Enable.TabIndex = 0;
+            this.chkCAT4Enable.Text = "Enable CAT4";
+            this.chkCAT4Enable.CheckedChanged += new System.EventHandler(this.chkCAT4Enable_CheckedChanged);
+            // 
+            // lblCAT4Parity
+            // 
+            this.lblCAT4Parity.Image = null;
+            this.lblCAT4Parity.Location = new System.Drawing.Point(24, 120);
+            this.lblCAT4Parity.Name = "lblCAT4Parity";
+            this.lblCAT4Parity.Size = new System.Drawing.Size(48, 23);
+            this.lblCAT4Parity.TabIndex = 92;
+            this.lblCAT4Parity.Text = "Parity";
+            // 
+            // lblCAT4Data
+            // 
+            this.lblCAT4Data.Image = null;
+            this.lblCAT4Data.Location = new System.Drawing.Point(24, 152);
+            this.lblCAT4Data.Name = "lblCAT4Data";
+            this.lblCAT4Data.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT4Data.TabIndex = 92;
+            this.lblCAT4Data.Text = "Data";
+            // 
+            // lblCAT4Stop
+            // 
+            this.lblCAT4Stop.Image = null;
+            this.lblCAT4Stop.Location = new System.Drawing.Point(24, 184);
+            this.lblCAT4Stop.Name = "lblCAT4Stop";
+            this.lblCAT4Stop.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT4Stop.TabIndex = 92;
+            this.lblCAT4Stop.Text = "Stop";
+            // 
+            // comboCAT4parity
+            // 
+            this.comboCAT4parity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT4parity.DropDownWidth = 56;
+            this.comboCAT4parity.Items.AddRange(new object[] {
+            "none",
+            "odd ",
+            "even",
+            "mark",
+            "space"});
+            this.comboCAT4parity.Location = new System.Drawing.Point(72, 120);
+            this.comboCAT4parity.Name = "comboCAT4parity";
+            this.comboCAT4parity.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT4parity.TabIndex = 92;
+            this.comboCAT4parity.SelectedIndexChanged += new System.EventHandler(this.comboCAT4parity_SelectedIndexChanged);
+            // 
+            // comboCAT4databits
+            // 
+            this.comboCAT4databits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT4databits.DropDownWidth = 56;
+            this.comboCAT4databits.Items.AddRange(new object[] {
+            "8",
+            "7",
+            "6"});
+            this.comboCAT4databits.Location = new System.Drawing.Point(72, 152);
+            this.comboCAT4databits.Name = "comboCAT4databits";
+            this.comboCAT4databits.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT4databits.TabIndex = 93;
+            this.comboCAT4databits.SelectedIndexChanged += new System.EventHandler(this.comboCAT4databits_SelectedIndexChanged);
+            // 
+            // comboCAT4stopbits
+            // 
+            this.comboCAT4stopbits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT4stopbits.DropDownWidth = 56;
+            this.comboCAT4stopbits.Items.AddRange(new object[] {
+            "1",
+            "1.5",
+            "2"});
+            this.comboCAT4stopbits.Location = new System.Drawing.Point(72, 184);
+            this.comboCAT4stopbits.Name = "comboCAT4stopbits";
+            this.comboCAT4stopbits.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT4stopbits.TabIndex = 94;
+            this.comboCAT4stopbits.SelectedIndexChanged += new System.EventHandler(this.comboCAT4stopbits_SelectedIndexChanged);
+            // 
+            // grpCat3ControlBox
+            // 
+            this.grpCat3ControlBox.Controls.Add(this.comboCAT3Port);
+            this.grpCat3ControlBox.Controls.Add(this.comboCAT3baud);
+            this.grpCat3ControlBox.Controls.Add(this.lblCAT3Baud);
+            this.grpCat3ControlBox.Controls.Add(this.lblCAT3Port);
+            this.grpCat3ControlBox.Controls.Add(this.chkCAT3Enable);
+            this.grpCat3ControlBox.Controls.Add(this.lblCAT3Parity);
+            this.grpCat3ControlBox.Controls.Add(this.lblCAT3Data);
+            this.grpCat3ControlBox.Controls.Add(this.lblCAT3Stop);
+            this.grpCat3ControlBox.Controls.Add(this.comboCAT3parity);
+            this.grpCat3ControlBox.Controls.Add(this.comboCAT3databits);
+            this.grpCat3ControlBox.Controls.Add(this.comboCAT3stopbits);
+            this.grpCat3ControlBox.Location = new System.Drawing.Point(208, 9);
+            this.grpCat3ControlBox.Name = "grpCat3ControlBox";
+            this.grpCat3ControlBox.Size = new System.Drawing.Size(160, 216);
+            this.grpCat3ControlBox.TabIndex = 92;
+            this.grpCat3ControlBox.TabStop = false;
+            this.grpCat3ControlBox.Text = "CAT3 Control";
+            // 
+            // comboCAT3Port
+            // 
+            this.comboCAT3Port.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT3Port.DropDownWidth = 56;
+            this.comboCAT3Port.Location = new System.Drawing.Point(72, 48);
+            this.comboCAT3Port.Name = "comboCAT3Port";
+            this.comboCAT3Port.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT3Port.TabIndex = 95;
+            this.toolTip1.SetToolTip(this.comboCAT3Port, "Sets the COM port to be used for the CAT interface.");
+            this.comboCAT3Port.SelectedIndexChanged += new System.EventHandler(this.comboCAT3Port_SelectedIndexChanged);
+            // 
+            // comboCAT3baud
+            // 
+            this.comboCAT3baud.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT3baud.DropDownWidth = 56;
+            this.comboCAT3baud.Items.AddRange(new object[] {
+            "300",
+            "1200",
+            "2400",
+            "4800",
+            "9600",
+            "19200",
+            "38400",
+            "57600"});
+            this.comboCAT3baud.Location = new System.Drawing.Point(72, 88);
+            this.comboCAT3baud.Name = "comboCAT3baud";
+            this.comboCAT3baud.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT3baud.TabIndex = 93;
+            this.comboCAT3baud.SelectedIndexChanged += new System.EventHandler(this.comboCAT3baud_SelectedIndexChanged);
+            // 
+            // lblCAT3Baud
+            // 
+            this.lblCAT3Baud.Image = null;
+            this.lblCAT3Baud.Location = new System.Drawing.Point(24, 88);
+            this.lblCAT3Baud.Name = "lblCAT3Baud";
+            this.lblCAT3Baud.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT3Baud.TabIndex = 5;
+            this.lblCAT3Baud.Text = "Baud";
+            // 
+            // lblCAT3Port
+            // 
+            this.lblCAT3Port.Image = null;
+            this.lblCAT3Port.Location = new System.Drawing.Point(24, 48);
+            this.lblCAT3Port.Name = "lblCAT3Port";
+            this.lblCAT3Port.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT3Port.TabIndex = 3;
+            this.lblCAT3Port.Text = "Port:";
+            // 
+            // chkCAT3Enable
+            // 
+            this.chkCAT3Enable.Image = null;
+            this.chkCAT3Enable.Location = new System.Drawing.Point(16, 24);
+            this.chkCAT3Enable.Name = "chkCAT3Enable";
+            this.chkCAT3Enable.Size = new System.Drawing.Size(104, 24);
+            this.chkCAT3Enable.TabIndex = 0;
+            this.chkCAT3Enable.Text = "Enable CAT3";
+            this.chkCAT3Enable.CheckedChanged += new System.EventHandler(this.chkCAT3Enable_CheckedChanged);
+            // 
+            // lblCAT3Parity
+            // 
+            this.lblCAT3Parity.Image = null;
+            this.lblCAT3Parity.Location = new System.Drawing.Point(24, 120);
+            this.lblCAT3Parity.Name = "lblCAT3Parity";
+            this.lblCAT3Parity.Size = new System.Drawing.Size(48, 23);
+            this.lblCAT3Parity.TabIndex = 92;
+            this.lblCAT3Parity.Text = "Parity";
+            // 
+            // lblCAT3Data
+            // 
+            this.lblCAT3Data.Image = null;
+            this.lblCAT3Data.Location = new System.Drawing.Point(24, 152);
+            this.lblCAT3Data.Name = "lblCAT3Data";
+            this.lblCAT3Data.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT3Data.TabIndex = 92;
+            this.lblCAT3Data.Text = "Data";
+            // 
+            // lblCAT3Stop
+            // 
+            this.lblCAT3Stop.Image = null;
+            this.lblCAT3Stop.Location = new System.Drawing.Point(24, 184);
+            this.lblCAT3Stop.Name = "lblCAT3Stop";
+            this.lblCAT3Stop.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT3Stop.TabIndex = 92;
+            this.lblCAT3Stop.Text = "Stop";
+            // 
+            // comboCAT3parity
+            // 
+            this.comboCAT3parity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT3parity.DropDownWidth = 56;
+            this.comboCAT3parity.Items.AddRange(new object[] {
+            "none",
+            "odd ",
+            "even",
+            "mark",
+            "space"});
+            this.comboCAT3parity.Location = new System.Drawing.Point(72, 120);
+            this.comboCAT3parity.Name = "comboCAT3parity";
+            this.comboCAT3parity.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT3parity.TabIndex = 92;
+            this.comboCAT3parity.SelectedIndexChanged += new System.EventHandler(this.comboCAT3parity_SelectedIndexChanged);
+            // 
+            // comboCAT3databits
+            // 
+            this.comboCAT3databits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT3databits.DropDownWidth = 56;
+            this.comboCAT3databits.Items.AddRange(new object[] {
+            "8",
+            "7",
+            "6"});
+            this.comboCAT3databits.Location = new System.Drawing.Point(72, 152);
+            this.comboCAT3databits.Name = "comboCAT3databits";
+            this.comboCAT3databits.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT3databits.TabIndex = 93;
+            this.comboCAT3databits.SelectedIndexChanged += new System.EventHandler(this.comboCAT3databits_SelectedIndexChanged);
+            // 
+            // comboCAT3stopbits
+            // 
+            this.comboCAT3stopbits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT3stopbits.DropDownWidth = 56;
+            this.comboCAT3stopbits.Items.AddRange(new object[] {
+            "1",
+            "1.5",
+            "2"});
+            this.comboCAT3stopbits.Location = new System.Drawing.Point(72, 184);
+            this.comboCAT3stopbits.Name = "comboCAT3stopbits";
+            this.comboCAT3stopbits.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT3stopbits.TabIndex = 94;
+            this.comboCAT3stopbits.SelectedIndexChanged += new System.EventHandler(this.comboCAT3stopbits_SelectedIndexChanged);
+            // 
+            // grpCat2ControlBox
+            // 
+            this.grpCat2ControlBox.Controls.Add(this.comboCAT2Port);
+            this.grpCat2ControlBox.Controls.Add(this.comboCAT2baud);
+            this.grpCat2ControlBox.Controls.Add(this.lblCAT2Baud);
+            this.grpCat2ControlBox.Controls.Add(this.lblCAT2Port);
+            this.grpCat2ControlBox.Controls.Add(this.chkCAT2Enable);
+            this.grpCat2ControlBox.Controls.Add(this.lblCAT2Parity);
+            this.grpCat2ControlBox.Controls.Add(this.lblCAT2Data);
+            this.grpCat2ControlBox.Controls.Add(this.lblCAT2Stop);
+            this.grpCat2ControlBox.Controls.Add(this.comboCAT2parity);
+            this.grpCat2ControlBox.Controls.Add(this.comboCAT2databits);
+            this.grpCat2ControlBox.Controls.Add(this.comboCAT2stopbits);
+            this.grpCat2ControlBox.Location = new System.Drawing.Point(16, 9);
+            this.grpCat2ControlBox.Name = "grpCat2ControlBox";
+            this.grpCat2ControlBox.Size = new System.Drawing.Size(160, 216);
+            this.grpCat2ControlBox.TabIndex = 91;
+            this.grpCat2ControlBox.TabStop = false;
+            this.grpCat2ControlBox.Text = "CAT2 Control";
+            // 
+            // comboCAT2Port
+            // 
+            this.comboCAT2Port.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT2Port.DropDownWidth = 56;
+            this.comboCAT2Port.Location = new System.Drawing.Point(72, 48);
+            this.comboCAT2Port.Name = "comboCAT2Port";
+            this.comboCAT2Port.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT2Port.TabIndex = 95;
+            this.toolTip1.SetToolTip(this.comboCAT2Port, "Sets the COM port to be used for the CAT interface.");
+            this.comboCAT2Port.SelectedIndexChanged += new System.EventHandler(this.comboCAT2Port_SelectedIndexChanged);
+            // 
+            // comboCAT2baud
+            // 
+            this.comboCAT2baud.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT2baud.DropDownWidth = 56;
+            this.comboCAT2baud.Items.AddRange(new object[] {
+            "300",
+            "1200",
+            "2400",
+            "4800",
+            "9600",
+            "19200",
+            "38400",
+            "57600"});
+            this.comboCAT2baud.Location = new System.Drawing.Point(72, 88);
+            this.comboCAT2baud.Name = "comboCAT2baud";
+            this.comboCAT2baud.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT2baud.TabIndex = 93;
+            this.comboCAT2baud.SelectedIndexChanged += new System.EventHandler(this.comboCAT2baud_SelectedIndexChanged);
+            // 
+            // lblCAT2Baud
+            // 
+            this.lblCAT2Baud.Image = null;
+            this.lblCAT2Baud.Location = new System.Drawing.Point(24, 88);
+            this.lblCAT2Baud.Name = "lblCAT2Baud";
+            this.lblCAT2Baud.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT2Baud.TabIndex = 5;
+            this.lblCAT2Baud.Text = "Baud";
+            // 
+            // lblCAT2Port
+            // 
+            this.lblCAT2Port.Image = null;
+            this.lblCAT2Port.Location = new System.Drawing.Point(24, 48);
+            this.lblCAT2Port.Name = "lblCAT2Port";
+            this.lblCAT2Port.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT2Port.TabIndex = 3;
+            this.lblCAT2Port.Text = "Port:";
+            // 
+            // chkCAT2Enable
+            // 
+            this.chkCAT2Enable.Image = null;
+            this.chkCAT2Enable.Location = new System.Drawing.Point(16, 24);
+            this.chkCAT2Enable.Name = "chkCAT2Enable";
+            this.chkCAT2Enable.Size = new System.Drawing.Size(104, 24);
+            this.chkCAT2Enable.TabIndex = 0;
+            this.chkCAT2Enable.Text = "Enable CAT2";
+            this.chkCAT2Enable.CheckedChanged += new System.EventHandler(this.chkCAT2Enable_CheckedChanged);
+            // 
+            // lblCAT2Parity
+            // 
+            this.lblCAT2Parity.Image = null;
+            this.lblCAT2Parity.Location = new System.Drawing.Point(24, 120);
+            this.lblCAT2Parity.Name = "lblCAT2Parity";
+            this.lblCAT2Parity.Size = new System.Drawing.Size(48, 23);
+            this.lblCAT2Parity.TabIndex = 92;
+            this.lblCAT2Parity.Text = "Parity";
+            // 
+            // lblCAT2Data
+            // 
+            this.lblCAT2Data.Image = null;
+            this.lblCAT2Data.Location = new System.Drawing.Point(24, 152);
+            this.lblCAT2Data.Name = "lblCAT2Data";
+            this.lblCAT2Data.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT2Data.TabIndex = 92;
+            this.lblCAT2Data.Text = "Data";
+            // 
+            // lblCAT2Stop
+            // 
+            this.lblCAT2Stop.Image = null;
+            this.lblCAT2Stop.Location = new System.Drawing.Point(24, 184);
+            this.lblCAT2Stop.Name = "lblCAT2Stop";
+            this.lblCAT2Stop.Size = new System.Drawing.Size(40, 23);
+            this.lblCAT2Stop.TabIndex = 92;
+            this.lblCAT2Stop.Text = "Stop";
+            // 
+            // comboCAT2parity
+            // 
+            this.comboCAT2parity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT2parity.DropDownWidth = 56;
+            this.comboCAT2parity.Items.AddRange(new object[] {
+            "none",
+            "odd ",
+            "even",
+            "mark",
+            "space"});
+            this.comboCAT2parity.Location = new System.Drawing.Point(72, 120);
+            this.comboCAT2parity.Name = "comboCAT2parity";
+            this.comboCAT2parity.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT2parity.TabIndex = 92;
+            this.comboCAT2parity.SelectedIndexChanged += new System.EventHandler(this.comboCAT2parity_SelectedIndexChanged);
+            // 
+            // comboCAT2databits
+            // 
+            this.comboCAT2databits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT2databits.DropDownWidth = 56;
+            this.comboCAT2databits.Items.AddRange(new object[] {
+            "8",
+            "7",
+            "6"});
+            this.comboCAT2databits.Location = new System.Drawing.Point(72, 152);
+            this.comboCAT2databits.Name = "comboCAT2databits";
+            this.comboCAT2databits.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT2databits.TabIndex = 93;
+            this.comboCAT2databits.SelectedIndexChanged += new System.EventHandler(this.comboCAT2databits_SelectedIndexChanged);
+            // 
+            // comboCAT2stopbits
+            // 
+            this.comboCAT2stopbits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCAT2stopbits.DropDownWidth = 56;
+            this.comboCAT2stopbits.Items.AddRange(new object[] {
+            "1",
+            "1.5",
+            "2"});
+            this.comboCAT2stopbits.Location = new System.Drawing.Point(72, 184);
+            this.comboCAT2stopbits.Name = "comboCAT2stopbits";
+            this.comboCAT2stopbits.Size = new System.Drawing.Size(72, 21);
+            this.comboCAT2stopbits.TabIndex = 94;
+            this.comboCAT2stopbits.SelectedIndexChanged += new System.EventHandler(this.comboCAT2stopbits_SelectedIndexChanged);
             // 
             // tpTests
             // 
@@ -34232,7 +34595,7 @@
             this.grpTestX2.Controls.Add(this.chkTestX2Pin3);
             this.grpTestX2.Controls.Add(this.chkTestX2Pin2);
             this.grpTestX2.Controls.Add(this.chkTestX2Pin1);
-            this.grpTestX2.Location = new System.Drawing.Point(8, 160);
+            this.grpTestX2.Location = new System.Drawing.Point(8, 286);
             this.grpTestX2.Name = "grpTestX2";
             this.grpTestX2.Size = new System.Drawing.Size(160, 72);
             this.grpTestX2.TabIndex = 87;
@@ -34305,6 +34668,8 @@
             // 
             // grpTestTXIMD
             // 
+            this.grpTestTXIMD.Controls.Add(this.radTestIMDOutput);
+            this.grpTestTXIMD.Controls.Add(this.radTestIMDInput);
             this.grpTestTXIMD.Controls.Add(this.lblTwoToneLevel);
             this.grpTestTXIMD.Controls.Add(this.udTwoToneLevel);
             this.grpTestTXIMD.Controls.Add(this.lblTestToneFreq2);
@@ -34316,7 +34681,7 @@
             this.grpTestTXIMD.Controls.Add(this.udTestIMDFreq1);
             this.grpTestTXIMD.Location = new System.Drawing.Point(8, 8);
             this.grpTestTXIMD.Name = "grpTestTXIMD";
-            this.grpTestTXIMD.Size = new System.Drawing.Size(152, 152);
+            this.grpTestTXIMD.Size = new System.Drawing.Size(152, 198);
             this.grpTestTXIMD.TabIndex = 83;
             this.grpTestTXIMD.TabStop = false;
             this.grpTestTXIMD.Text = "Two Tone Test";
@@ -34341,10 +34706,10 @@
             65536});
             this.udTwoToneLevel.Location = new System.Drawing.Point(70, 68);
             this.udTwoToneLevel.Maximum = new decimal(new int[] {
-            13,
             0,
             0,
-            0});
+            0,
+            65536});
             this.udTwoToneLevel.Minimum = new decimal(new int[] {
             96,
             0,
@@ -34385,10 +34750,10 @@
             0,
             0});
             this.udTestIMDFreq2.Minimum = new decimal(new int[] {
+            20000,
             0,
             0,
-            0,
-            0});
+            -2147483648});
             this.udTestIMDFreq2.Name = "udTestIMDFreq2";
             this.udTestIMDFreq2.Size = new System.Drawing.Size(56, 20);
             this.udTestIMDFreq2.TabIndex = 87;
@@ -34431,7 +34796,7 @@
             this.udTestIMDPower.Size = new System.Drawing.Size(56, 20);
             this.udTestIMDPower.TabIndex = 85;
             this.udTestIMDPower.Value = new decimal(new int[] {
-            50,
+            10,
             0,
             0,
             0});
@@ -34441,7 +34806,7 @@
             // 
             this.chekTestIMD.Appearance = System.Windows.Forms.Appearance.Button;
             this.chekTestIMD.Image = null;
-            this.chekTestIMD.Location = new System.Drawing.Point(48, 122);
+            this.chekTestIMD.Location = new System.Drawing.Point(44, 162);
             this.chekTestIMD.Name = "chekTestIMD";
             this.chekTestIMD.Size = new System.Drawing.Size(60, 23);
             this.chekTestIMD.TabIndex = 84;
@@ -34473,10 +34838,10 @@
             0,
             0});
             this.udTestIMDFreq1.Minimum = new decimal(new int[] {
+            20000,
             0,
             0,
-            0,
-            0});
+            -2147483648});
             this.udTestIMDFreq1.Name = "udTestIMDFreq1";
             this.udTestIMDFreq1.Size = new System.Drawing.Size(56, 20);
             this.udTestIMDFreq1.TabIndex = 82;
@@ -35643,6 +36008,26 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
+            // radTestIMDInput
+            // 
+            this.radTestIMDInput.Image = null;
+            this.radTestIMDInput.Location = new System.Drawing.Point(12, 126);
+            this.radTestIMDInput.Name = "radTestIMDInput";
+            this.radTestIMDInput.Size = new System.Drawing.Size(50, 16);
+            this.radTestIMDInput.TabIndex = 100;
+            this.radTestIMDInput.Text = "Input";
+            // 
+            // radTestIMDOutput
+            // 
+            this.radTestIMDOutput.Checked = true;
+            this.radTestIMDOutput.Image = null;
+            this.radTestIMDOutput.Location = new System.Drawing.Point(70, 126);
+            this.radTestIMDOutput.Name = "radTestIMDOutput";
+            this.radTestIMDOutput.Size = new System.Drawing.Size(58, 16);
+            this.radTestIMDOutput.TabIndex = 101;
+            this.radTestIMDOutput.TabStop = true;
+            this.radTestIMDOutput.Text = "Output";
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -35703,7 +36088,6 @@
             this.tpGeneral.ResumeLayout(false);
             this.tcGeneral.ResumeLayout(false);
             this.tpGeneralHardware.ResumeLayout(false);
-            this.grpMetisAddr.ResumeLayout(false);
             this.grpLimtRX.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).EndInit();
             this.grpOzyType.ResumeLayout(false);
@@ -35733,6 +36117,7 @@
             this.grpGeneralHardwareFLEX5000.ResumeLayout(false);
             this.grpGeneralHardwareSDR1000.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralLPTDelay)).EndInit();
+            this.grpMetisAddr.ResumeLayout(false);
             this.tpGeneralOptions.ResumeLayout(false);
             this.grpHermesStepAttenuator.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udHermesStepAttenuatorData)).EndInit();
@@ -36012,13 +36397,6 @@
             this.grpDSPNB2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udDSPNB2b)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPNB2)).EndInit();
-            this.tpDSPImageReject.ResumeLayout(false);
-            this.grpDSPImageRejectTX.ResumeLayout(false);
-            this.grpDSPImageRejectTX.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPImageGainTX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPImagePhaseTX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbDSPImagePhaseTX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbDSPImageGainTX)).EndInit();
             this.tpDSPKeyer.ResumeLayout(false);
             this.grpKeyerConnections.ResumeLayout(false);
             this.grpDSPCWPitch.ResumeLayout(false);
@@ -36235,7 +36613,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.udPA100W)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPA90W)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPA110W)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udSWR80W)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udPA80W)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPA120W)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPA70W)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPA130W)).EndInit();
@@ -36308,6 +36686,11 @@
             this.tpMidiCat.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tpCAT2.ResumeLayout(false);
+            this.tpCAT2.PerformLayout();
+            this.grpCat4ControlBox.ResumeLayout(false);
+            this.grpCat3ControlBox.ResumeLayout(false);
+            this.grpCat2ControlBox.ResumeLayout(false);
             this.tpTests.ResumeLayout(false);
             this.grpBoxTS1.ResumeLayout(false);
             this.grpBoxTS1.PerformLayout();
@@ -36981,7 +37364,7 @@
         private System.Windows.Forms.LabelTS labelTS257;
         private System.Windows.Forms.NumericUpDownTS udPA90W;
         private System.Windows.Forms.LabelTS labelTS258;
-        private System.Windows.Forms.NumericUpDownTS udSWR80W;
+        private System.Windows.Forms.NumericUpDownTS udPA80W;
         private System.Windows.Forms.LabelTS labelTS259;
         private System.Windows.Forms.NumericUpDownTS udPA70W;
         private System.Windows.Forms.LabelTS labelTS260;
@@ -37003,21 +37386,21 @@
         private System.Windows.Forms.LabelTS labelTS268;
         private System.Windows.Forms.NumericUpDownTS udPA140W;
         private System.Windows.Forms.LabelTS labelTS275;
-        public System.Windows.Forms.TextBoxTS txtFwdPowerCalibrated;
+        public System.Windows.Forms.TextBoxTS textFwdPowerCalibrated;
         private System.Windows.Forms.LabelTS labelTS269;
         private System.Windows.Forms.LabelTS labelTS270;
         private System.Windows.Forms.LabelTS labelTS271;
-        public System.Windows.Forms.TextBoxTS txtRevVoltage;
-        public System.Windows.Forms.TextBoxTS txtFwdVoltage;
-        public System.Windows.Forms.TextBoxTS txtFwdADCValue;
+        public System.Windows.Forms.TextBoxTS textRevVoltage;
+        public System.Windows.Forms.TextBoxTS textFwdVoltage;
+        public System.Windows.Forms.TextBoxTS textFwdADCValue;
         private System.Windows.Forms.LabelTS labelTS272;
         private System.Windows.Forms.LabelTS labelTS273;
         private System.Windows.Forms.LabelTS labelTS274;
-        public System.Windows.Forms.TextBoxTS txtPARevPower;
-        public System.Windows.Forms.TextBoxTS txtDrivePower;
-        public System.Windows.Forms.TextBoxTS txtPAFwdPower;
+        public System.Windows.Forms.TextBoxTS textPARevPower;
+        public System.Windows.Forms.TextBoxTS textDrivePower;
+        public System.Windows.Forms.TextBoxTS textPAFwdPower;
         private System.Windows.Forms.LabelTS labelTS276;
-        public System.Windows.Forms.TextBoxTS txtRevADCValue;
+        public System.Windows.Forms.TextBoxTS textRevADCValue;
         private System.Windows.Forms.TabControl tcPowerAmplifier;
         private System.Windows.Forms.TabPage tpGainByBand;
         private System.Windows.Forms.TabPage tpWattMeter;
@@ -37026,7 +37409,50 @@
         private System.Windows.Forms.GroupBox grpWattMeterTrim;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.LabelTS labelTS254;
-        public System.Windows.Forms.TextBoxTS txtDCVolts;
+        public System.Windows.Forms.TextBoxTS textDCVolts;
         private System.Windows.Forms.ButtonTS btnResetPAValues;
+        private System.Windows.Forms.ButtonTS btnResetWattMeterValues;
+        private System.Windows.Forms.TabPage tpCAT2;
+        private System.Windows.Forms.GroupBoxTS grpCat4ControlBox;
+        private System.Windows.Forms.ComboBoxTS comboCAT4Port;
+        private System.Windows.Forms.ComboBoxTS comboCAT4baud;
+        private System.Windows.Forms.LabelTS lblCAT4Baud;
+        private System.Windows.Forms.LabelTS lblCAT4Port;
+        private System.Windows.Forms.CheckBoxTS chkCAT4Enable;
+        private System.Windows.Forms.LabelTS lblCAT4Parity;
+        private System.Windows.Forms.LabelTS lblCAT4Data;
+        private System.Windows.Forms.LabelTS lblCAT4Stop;
+        private System.Windows.Forms.ComboBoxTS comboCAT4parity;
+        private System.Windows.Forms.ComboBoxTS comboCAT4databits;
+        private System.Windows.Forms.ComboBoxTS comboCAT4stopbits;
+        private System.Windows.Forms.GroupBoxTS grpCat3ControlBox;
+        private System.Windows.Forms.ComboBoxTS comboCAT3Port;
+        private System.Windows.Forms.ComboBoxTS comboCAT3baud;
+        private System.Windows.Forms.LabelTS lblCAT3Baud;
+        private System.Windows.Forms.LabelTS lblCAT3Port;
+        private System.Windows.Forms.CheckBoxTS chkCAT3Enable;
+        private System.Windows.Forms.LabelTS lblCAT3Parity;
+        private System.Windows.Forms.LabelTS lblCAT3Data;
+        private System.Windows.Forms.LabelTS lblCAT3Stop;
+        private System.Windows.Forms.ComboBoxTS comboCAT3parity;
+        private System.Windows.Forms.ComboBoxTS comboCAT3databits;
+        private System.Windows.Forms.ComboBoxTS comboCAT3stopbits;
+        private System.Windows.Forms.GroupBoxTS grpCat2ControlBox;
+        private System.Windows.Forms.ComboBoxTS comboCAT2Port;
+        private System.Windows.Forms.ComboBoxTS comboCAT2baud;
+        private System.Windows.Forms.LabelTS lblCAT2Baud;
+        private System.Windows.Forms.LabelTS lblCAT2Port;
+        private System.Windows.Forms.CheckBoxTS chkCAT2Enable;
+        private System.Windows.Forms.LabelTS lblCAT2Parity;
+        private System.Windows.Forms.LabelTS lblCAT2Data;
+        private System.Windows.Forms.LabelTS lblCAT2Stop;
+        private System.Windows.Forms.ComboBoxTS comboCAT2parity;
+        private System.Windows.Forms.ComboBoxTS comboCAT2databits;
+        private System.Windows.Forms.ComboBoxTS comboCAT2stopbits;
+        private System.Windows.Forms.TextBoxTS txtCAT4;
+        private System.Windows.Forms.TextBoxTS txtCAT3;
+        private System.Windows.Forms.TextBoxTS txtCAT2;
+        private System.Windows.Forms.RadioButtonTS radTestIMDOutput;
+        private System.Windows.Forms.RadioButtonTS radTestIMDInput;
     }
 }

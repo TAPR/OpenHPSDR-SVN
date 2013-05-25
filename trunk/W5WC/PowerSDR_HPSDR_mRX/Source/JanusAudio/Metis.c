@@ -35,7 +35,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib, "IPHLPAPI.lib")
 
@@ -898,3 +897,21 @@ int MetisBulkWrite(int endpoint, char *bufp, int buflen) {
 	} 
 	return result; 
 }
+
+void SendCommandToMetis(unsigned char command) 	 {
+	 
+	 struct outdgram {
+		 unsigned char packetbuf[64];
+	 } outpacket;
+
+	 int i;  
+
+	 memset(outpacket.packetbuf, 0, sizeof(outpacket)); // fill the frame with 0x00
+
+	 outpacket.packetbuf[0] = 0xef; 
+	 outpacket.packetbuf[1] = 0xfe; 
+	 outpacket.packetbuf[2] = 0x03; 
+	 outpacket.packetbuf[3] = command;
+	 
+	 sendto(listenSock, (char *) &outpacket, sizeof(outpacket), 0, (SOCKADDR *)&MetisSockAddr, sizeof(MetisSockAddr)); 
+} 

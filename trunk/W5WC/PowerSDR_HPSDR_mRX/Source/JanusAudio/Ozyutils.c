@@ -119,7 +119,7 @@ int Load_Firmware(struct usb_dev_handle *hdev, const char *filename)
                 fclose(f);
                 return -1;
             }
-            if (Write_RAM(hdev, addr, data, length) == -1) {
+            if (Write_RAM(hdev, addr, (char *)data, length) == -1) {
                 printf("write failed\n");
                 fclose(f);
                 return -1;
