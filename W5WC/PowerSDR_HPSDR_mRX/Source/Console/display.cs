@@ -598,6 +598,9 @@ namespace PowerSDR
                 Audio.ScopeDisplayWidth = W;
                 if (specready)
                 {
+                    if (rx1_dsp_mode == DSPMode.DRM)
+                        console.specRX.GetSpecRX(0).Pixels = 4096;
+                    else
                     console.specRX.GetSpecRX(0).Pixels = W;
                     console.specRX.GetSpecRX(1).Pixels = W;
                 }
@@ -9768,14 +9771,14 @@ namespace PowerSDR
                 }
             }
 
-            int yRange = grid_max - grid_min;
-            int width = High - Low;
-
             if (rx1_dsp_mode == DSPMode.DRM)
             {
                 Low += 12000;
                 High += 12000;
             }
+
+            int yRange = grid_max - grid_min;
+            int width = High - Low;
 
             if (rx == 1 && data_ready)
             {
@@ -9848,10 +9851,10 @@ namespace PowerSDR
             }
 #endif
 
-            if (local_mox && !displayduplex)
+            if (local_mox && !displayduplex)// || rx1_dsp_mode == DSPMode.DRM)
             {
                 start_sample_index = (BUFFER_SIZE >> 1) + ((Low * BUFFER_SIZE) / sample_rate);
-                num_samples = ((BUFFER_SIZE * width) / sample_rate);
+                num_samples = (width * BUFFER_SIZE / sample_rate);
                 if (start_sample_index < 0) start_sample_index += 4096;
                 if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
                     num_samples = (BUFFER_SIZE - start_sample_index);
@@ -9869,7 +9872,7 @@ namespace PowerSDR
 
                 if (rx == 1)
                 {
-                    if (local_mox && !displayduplex)
+                    if (local_mox && !displayduplex)// || rx1_dsp_mode == DSPMode.DRM)
                     {
                         if (slope <= 1.0 || lindex == rindex)
                         {

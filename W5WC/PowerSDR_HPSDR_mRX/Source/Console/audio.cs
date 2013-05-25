@@ -1770,8 +1770,8 @@ namespace PowerSDR
                 {
                     peak = MaxSample(tx_in_l, tx_in_r, frameCount);
 
-                    if (console.MicBoost)    // G3OQD !!!!
-                        peak = peak / vox_gain; // 10;
+                    if (console.MicBoost)   
+                        peak = peak / vox_gain; 
                     // compare power to threshold
                     vox_active = peak > vox_threshold;
                 }
@@ -1952,7 +1952,7 @@ namespace PowerSDR
                             ramp_down = false;
                         }
                     }*/
-                    break;
+                   break;
                 case SignalSource.SINE_TWO_TONE:
                     double dump;
                     SineWave2Tone(tx_in_l, frameCount, phase_accumulator1, phase_accumulator2,
@@ -2355,7 +2355,7 @@ namespace PowerSDR
 
             #endregion
 
-            if (localmox && ramp)
+            if (localmox && ramp) 
             {
                 for (int i = 0; i < frameCount; i++)
                 {

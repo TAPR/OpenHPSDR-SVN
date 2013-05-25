@@ -4710,14 +4710,13 @@ namespace PowerSDR
 
                 switch (console.CurrentModel)
                 {
-                    case Model.FLEX5000:
+                    case Model.HERMES:
                         if (s == "0")
                         {
                             num = num +
                             console.MultiMeterCalOffset +
                             Display.RX1PreampOffset +
                             console.RX1FilterSizeCalOffset +
-                            console.RX1PathOffset +
                             console.RX1XVTRGainOffset;
                          }
                         else if (s == "1")
@@ -4726,20 +4725,10 @@ namespace PowerSDR
                             console.RX2MeterCalOffset +
                             Display.RX2PreampOffset +
                             console.RX2FilterSizeCalOffset +
-                            console.RX2PathOffset +
                             console.RX2XVTRGainOffset;
                          }
                         break;
-                    case Model.FLEX3000:
-                        num = num +
-                        console.MultiMeterCalOffset +
-                        Display.RX1PreampOffset +
-                        console.RX1FilterSizeCalOffset +
-                        console.RX1PathOffset +
-                        console.RX1XVTRGainOffset;
-                        break;
-                    //case Model.FLEX1500:
-                    case Model.SDR1000:
+                    case Model.HPSDR:
                         num = num +
                         console.MultiMeterCalOffset +
                         Display.RX1PreampOffset +

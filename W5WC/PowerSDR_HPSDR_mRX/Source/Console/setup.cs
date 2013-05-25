@@ -340,16 +340,6 @@ namespace PowerSDR
         private LabelTS lblDSPCWPitchFreq;
         private NumericUpDownTS udDSPCWPitch;
         private TabControl tcDSP;
-        private TabPage tpDSPImageReject;
-        private GroupBoxTS grpDSPImageRejectTX;
-        private LabelTS lblDSPGainValTX;
-        private LabelTS lblDSPPhaseValTX;
-        private NumericUpDownTS udDSPImageGainTX;
-        private NumericUpDownTS udDSPImagePhaseTX;
-        private LabelTS lblDSPImageGainTX;
-        private TrackBarTS tbDSPImagePhaseTX;
-        private LabelTS lblDSPImagePhaseTX;
-        private TrackBarTS tbDSPImageGainTX;
         private TabPage tpDSPOptions;
         private GroupBoxTS grpDSPBufferSize;
         private GroupBoxTS grpDSPNB;
@@ -467,7 +457,6 @@ namespace PowerSDR
         private ComboBoxTS comboCATPort;
         private ComboBoxTS comboCATPTTPort;
         private CheckBoxTS chkCATPTTEnabled;
-        private CheckBoxTS checkboxTXImagCal;
         private GroupBoxTS grpAudioChannels;
         private ComboBoxTS comboAudioChannels1;
         private GroupBoxTS grpAudioVACGain;
@@ -629,7 +618,6 @@ namespace PowerSDR
         private CheckBoxTS ckEnableSigGen;
         private CheckBoxTS chkBoxJanusOzyControl;
         private CheckBoxTS chkCalExpert;
-        private CheckBoxTS chkDSPImageExpert;
         private CheckBoxTS chkGenAllModeMicPTT;
         private CheckBoxTS chkDigUIsUSB;
         private GroupBoxTS grpGenCustomTitleText;
@@ -1407,28 +1395,28 @@ namespace PowerSDR
         private LabelTS lblMetisCodeVersion;
         private LabelTS lblMetisVer;
         private TabPage tpInfo;
-        public TextBoxTS txtAlexFwdPower;
-        public TextBoxTS txtRX1VFO;
-        public TextBoxTS txtAlexRevPower;
-        public TextBoxTS txtFwdPower;
+        public TextBoxTS textAlexFwdPower;
+        public TextBoxTS textRX1VFO;
+        public TextBoxTS textAlexRevPower;
+        public TextBoxTS textFwdPower;
         private LabelTS labelTS92;
         private LabelTS labelTS91;
         private LabelTS labelTS90;
         private LabelTS labelTS89;
-        public TextBoxTS txtTXVFO;
-        public TextBoxTS txtRX2VFO;
-        public TextBoxTS txtRX1DisplayOffset;
-        public TextBoxTS txtRX2MeterOffset;
-        public TextBoxTS txtRX1MeterOffset;
-        public TextBoxTS txtAlexRevADC;
-        public TextBoxTS txtCalcMeterData;
-        public TextBoxTS txtRX2RawMeterData;
-        public TextBoxTS txtRX1CalcMeterData;
-        public TextBoxTS txtRX1RawMeterData;
-        public TextBoxTS txtRX1PreampOffset;
-        public TextBoxTS txtRX2DisplayOffset;
-        public TextBoxTS txtAlexFwdADC;
-        public TextBoxTS txtFwdADC;
+        public TextBoxTS textTXVFO;
+        public TextBoxTS textRX2VFO;
+        public TextBoxTS textRX1DisplayOffset;
+        public TextBoxTS textRX2MeterOffset;
+        public TextBoxTS textRX1MeterOffset;
+        public TextBoxTS textAlexRevADC;
+        public TextBoxTS textCalcMeterData;
+        public TextBoxTS textRX2RawMeterData;
+        public TextBoxTS textRX1CalcMeterData;
+        public TextBoxTS textRX1RawMeterData;
+        public TextBoxTS textRX1PreampOffset;
+        public TextBoxTS textRX2DisplayOffset;
+        public TextBoxTS textAlexFwdADC;
+        public TextBoxTS textFwdADC;
         private LabelTS labelTS103;
         private LabelTS labelTS102;
         private LabelTS labelTS101;
@@ -1665,6 +1653,28 @@ namespace PowerSDR
             comboCATdatabits.Text = "8";
             comboCATstopbits.Text = "1";
             comboCATRigType.Text = "TS-2000";
+
+            if (comboCAT2Port.Items.Count > 0) comboCAT2Port.SelectedIndex = 0;
+           // if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
+            comboCAT2baud.Text = "1200";
+            comboCAT2parity.Text = "none";
+            comboCAT2databits.Text = "8";
+            comboCAT2stopbits.Text = "1";
+
+            if (comboCAT3Port.Items.Count > 0) comboCAT3Port.SelectedIndex = 0;
+           // if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
+            comboCAT3baud.Text = "1200";
+            comboCAT3parity.Text = "none";
+            comboCAT3databits.Text = "8";
+            comboCAT3stopbits.Text = "1";
+
+            if (comboCAT4Port.Items.Count > 0) comboCAT4Port.SelectedIndex = 0;
+          //  if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
+            comboCAT4baud.Text = "1200";
+            comboCAT4parity.Text = "none";
+            comboCAT4databits.Text = "8";
+            comboCAT4stopbits.Text = "1";
+
             // comboFRSRegion.Text = "United States";
 
             //fillMetisIPAddrCombo();  /* must happen before GetOptions is called */ 
@@ -1692,6 +1702,39 @@ namespace PowerSDR
                 {
                     chkCATEnable.Checked = false;
                     chkCATEnable.Enabled = false;
+                }
+            }
+
+            if (comboCAT2Port.SelectedIndex < 0)
+            {
+                if (comboCAT2Port.Items.Count > 0)
+                    comboCAT2Port.SelectedIndex = 0;
+                else
+                {
+                    chkCAT2Enable.Checked = false;
+                    chkCAT2Enable.Enabled = false;
+                }
+            }
+
+            if (comboCAT3Port.SelectedIndex < 0)
+            {
+                if (comboCAT3Port.Items.Count > 0)
+                    comboCAT3Port.SelectedIndex = 0;
+                else
+                {
+                    chkCAT3Enable.Checked = false;
+                    chkCAT3Enable.Enabled = false;
+                }
+            }
+
+            if (comboCAT4Port.SelectedIndex < 0)
+            {
+                if (comboCAT4Port.Items.Count > 0)
+                    comboCAT4Port.SelectedIndex = 0;
+                else
+                {
+                    chkCAT4Enable.Checked = false;
+                    chkCAT4Enable.Enabled = false;
                 }
             }
 
@@ -1729,6 +1772,21 @@ namespace PowerSDR
                 chkCATEnable_CheckedChanged(this, EventArgs.Empty);
             }
 
+            if (chkCAT2Enable.Checked)
+            {
+                chkCAT2Enable_CheckedChanged(this, EventArgs.Empty);
+            }
+
+            if (chkCAT3Enable.Checked)
+            {
+                chkCAT3Enable_CheckedChanged(this, EventArgs.Empty);
+            }
+
+            if (chkCAT4Enable.Checked)
+            {
+                chkCAT4Enable_CheckedChanged(this, EventArgs.Empty);
+            }
+
             if (chkCATPTTEnabled.Checked)
             {
                 chkCATPTTEnabled_CheckedChanged(this, EventArgs.Empty);
@@ -1750,8 +1808,6 @@ namespace PowerSDR
             comboAudioReceive1_SelectedIndexChanged(this, e);
             //  udLMSANF_ValueChanged(this, e);
             // udLMSNR_ValueChanged(this, e);
-            udDSPImagePhaseTX_ValueChanged(this, e);
-            udDSPImageGainTX_ValueChanged(this, e);
             udDSPCWPitch_ValueChanged(this, e);
             udTXFilterHigh_ValueChanged(this, e);
             udTXFilterLow_ValueChanged(this, e);
@@ -2029,6 +2085,9 @@ namespace PowerSDR
             comboKeyerConnSecondary.Items.Add("CAT");
 
             comboCATPort.Items.Clear();
+            comboCAT2Port.Items.Clear();
+            comboCAT3Port.Items.Clear();
+            comboCAT4Port.Items.Clear();
             comboCATPTTPort.Items.Clear();
 
             comboKeyerConnPrimary.Items.AddRange(com_ports);
@@ -2036,6 +2095,12 @@ namespace PowerSDR
 
             comboCATPort.Items.Add("None");
             comboCATPort.Items.AddRange(com_ports);
+            comboCAT2Port.Items.Add("None");
+            comboCAT2Port.Items.AddRange(com_ports);
+            comboCAT3Port.Items.Add("None");
+            comboCAT3Port.Items.AddRange(com_ports);
+            comboCAT4Port.Items.Add("None");
+            comboCAT4Port.Items.AddRange(com_ports);
 
             comboCATPTTPort.Items.Add("None");
             comboCATPTTPort.Items.AddRange(com_ports);
@@ -3346,6 +3411,45 @@ namespace PowerSDR
             }
         }
 
+        public bool CAT2Enabled
+        {
+            get
+            {
+                if (chkCAT2Enable != null) return chkCAT2Enable.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkCAT2Enable != null) chkCAT2Enable.Checked = value;
+            }
+        }
+
+        public bool CAT3Enabled
+        {
+            get
+            {
+                if (chkCAT3Enable != null) return chkCAT3Enable.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkCAT3Enable != null) chkCAT3Enable.Checked = value;
+            }
+        }
+
+        public bool CAT4Enabled
+        {
+            get
+            {
+                if (chkCAT4Enable != null) return chkCAT4Enable.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkCAT4Enable != null) chkCAT4Enable.Checked = value;
+            }
+        }
+
         public int RXAGCAttack
         {
             get
@@ -4232,38 +4336,6 @@ namespace PowerSDR
             set { chkPTTOutDelay.Checked = value; }
         }
 
-        public float ImageGainTX
-        {
-            get { return (float)udDSPImageGainTX.Value; }
-            set
-            {
-                try
-                {
-                    udDSPImageGainTX.Value = (decimal)value;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Error setting TX Image Gain (" + value.ToString("f2") + ")");
-                }
-            }
-        }
-
-        public float ImagePhaseTX
-        {
-            get { return (float)udDSPImagePhaseTX.Value; }
-            set
-            {
-                try
-                {
-                    udDSPImagePhaseTX.Value = (decimal)value;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Error setting TX Image Phase (" + value.ToString("f2") + ")");
-                }
-            }
-        }
-
         // PAGain for HPSDR
         public float PAGain160
         {
@@ -5129,8 +5201,8 @@ namespace PowerSDR
 
         public float PA80W
         {
-            get { return (float)udSWR80W.Value; }
-            set { udSWR80W.Value = (decimal)value; }
+            get { return (float)udPA80W.Value; }
+            set { udPA80W.Value = (decimal)value; }
         }
 
         public float PA90W
@@ -5651,18 +5723,8 @@ namespace PowerSDR
                 grpGenCalRXImage.Visible = true;
             }
 
-            chkDSPImageExpert.Visible = b;
-            chkDSPImageExpert_CheckedChanged(this, EventArgs.Empty);
-            if (!b)
-            {
-                grpDSPImageRejectTX.Visible = true;
-            }
-
             grpPAGainByBand.Visible = true;
             chkPANewCal.Visible = false;
-
-           // rtxtPACalReq.Visible = !b;
-
             grpImpulseTest.Visible = !b;
             ckEnableSigGen.Visible = b;
             grpTestX2.Visible = !b;
@@ -6157,9 +6219,9 @@ namespace PowerSDR
                 DttSP.SetCorrectIQEnable(0); // turn off I/Q correction
                 DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 0);
                 DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 1);
-                udDSPImagePhaseTX.Value = 0.0M;
-                udDSPImageGainTX.Value = 0.0M;
-                grpDSPImageRejectTX.Enabled = false;
+               // udDSPImagePhaseTX.Value = 0.0M;
+               // udDSPImageGainTX.Value = 0.0M;
+               // grpDSPImageRejectTX.Enabled = false;
                 // force setting of audio card 
                 comboAudioSoundCard.Text = "HPSDR";
                 comboAudioSoundCard.Enabled = false;
@@ -6350,7 +6412,7 @@ namespace PowerSDR
             else
             {
                 RemoveHPSDRPages();
-                grpDSPImageRejectTX.Enabled = true;
+              //  grpDSPImageRejectTX.Enabled = true;
 
                 grpOzyType.Visible = false;
                 grpOzyType.Enabled = false;
@@ -6416,19 +6478,25 @@ namespace PowerSDR
                    tcAudio.SelectedIndex = 0;
                } */
 
-            if (tcDSP.TabPages.Contains(tpDSPImageReject))
+          /*  if (tcDSP.TabPages.Contains(tpDSPImageReject))
             {
                 tcDSP.TabPages.Remove(tpDSPImageReject);
                 tcDSP.SelectedIndex = 0;
-            } 
+            } */
 
 
-          /*  if (tcGeneral.TabPages.Contains(tpInfo))
+            if (tcGeneral.TabPages.Contains(tpInfo)) // Info page
             {
                 tcGeneral.TabPages.Remove(tpInfo);
                 tcGeneral.SelectedIndex = 0;
-            } */
+            }
 
+            if (tcCAT.TabPages.Contains(tpCAT2)) // CAT2 page
+            {
+                tcCAT.TabPages.Remove(tpCAT2);
+                tcCAT.SelectedIndex = 0;
+            }
+            
             if (!tcGeneral.TabPages.Contains(tpHPSDR))
             {
                 Common.TabControlInsert(tcGeneral, tpHPSDR, 1);
@@ -9625,48 +9693,7 @@ namespace PowerSDR
 
         #region Image Reject
 
-        private void udDSPImagePhaseTX_ValueChanged(object sender, System.EventArgs e)
-        {
-            try
-            {
-                console.radio.GetDSPTX(0).TXCorrectIQPhase = (double)udDSPImagePhaseTX.Value;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error setting TX Image Phase (" + udDSPImagePhaseTX.Value + ")");
-                udDSPImagePhaseTX.Value = 0;
-            }
-            if (tbDSPImagePhaseTX.Value != (int)udDSPImagePhaseTX.Value)
-                tbDSPImagePhaseTX.Value = (int)udDSPImagePhaseTX.Value;
-
-        }
-
-        private void tbDSPImagePhaseTX_Scroll(object sender, System.EventArgs e)
-        {
-            udDSPImagePhaseTX.Value = tbDSPImagePhaseTX.Value;
-        }
-
-        private void udDSPImageGainTX_ValueChanged(object sender, System.EventArgs e)
-        {
-            try
-            {
-                console.radio.GetDSPTX(0).TXCorrectIQGain = (double)udDSPImageGainTX.Value;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error setting TX Image Gain (" + udDSPImageGainTX.Value + ")");
-                udDSPImageGainTX.Value = 0;
-            }
-            if (tbDSPImageGainTX.Value != (int)udDSPImageGainTX.Value)
-                tbDSPImageGainTX.Value = (int)udDSPImageGainTX.Value;
-        }
-
-        private void tbDSPImageGainTX_Scroll(object sender, System.EventArgs e)
-        {
-            udDSPImageGainTX.Value = tbDSPImageGainTX.Value;
-        }
-
-        private void udLMSANF_ValueChanged(object sender, System.EventArgs e)   // (NR0V) modified
+       private void udLMSANF_ValueChanged(object sender, System.EventArgs e)   // (NR0V) modified
         {
             console.radio.GetDSPRX(0, 0).SetANFVals(
                 (int)udLMSANFtaps.Value,
@@ -9718,25 +9745,6 @@ namespace PowerSDR
             DttSP.SetANFposition(2, 1, position);
             DttSP.SetNRposition(2, 0, position);
             DttSP.SetNRposition(2, 1, position);
-        }
-
-        private bool old_cpdr = false;
-        private void chkTXImagCal_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (checkboxTXImagCal.Checked)
-            {
-                old_cpdr = console.CPDR;
-                console.CPDR = false;
-
-                Audio.SineFreq1 = console.CWPitch;
-                Audio.TXInputSignal = Audio.SignalSource.SINE;
-                Audio.SourceScale = 1.0;
-            }
-            else
-            {
-                Audio.TXInputSignal = Audio.SignalSource.RADIO;
-                old_cpdr = console.CPDR;
-            }
         }
 
         #endregion
@@ -11136,6 +11144,45 @@ namespace PowerSDR
                 chkCATPTTEnabled.Enabled = false;
                 chkCATPTTEnabled.Checked = false;
             }
+
+            console.CAT2Enabled = chkCAT2Enable.Checked;
+            if (comboCAT2Port.Text.StartsWith("COM"))
+                console.CAT2Port = Int32.Parse(comboCAT2Port.Text.Substring(3));
+           // console.CATPTTRTS = chkCATPTT_RTS.Checked;
+           // console.CATPTTDTR = chkCATPTT_DTR.Checked;
+            //console.PTTBitBangEnabled = chkCATPTTEnabled.Checked; 
+           // if (comboCATPTTPort.Text.StartsWith("COM"))
+               // console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3));
+            console.CAT2Parity = SDRSerialPort.StringToParity((string)comboCAT2parity.SelectedItem);
+            console.CAT2DataBits = int.Parse((string)comboCAT2databits.SelectedItem);
+            console.CAT2StopBits = SDRSerialPort.StringToStopBits((string)comboCAT2stopbits.SelectedItem);
+            console.CAT2Enabled = chkCAT2Enable.Checked;
+
+            console.CAT3Enabled = chkCAT3Enable.Checked;
+            if (comboCAT3Port.Text.StartsWith("COM"))
+                console.CAT3Port = Int32.Parse(comboCAT3Port.Text.Substring(3));
+            // console.CATPTTRTS = chkCATPTT_RTS.Checked;
+            // console.CATPTTDTR = chkCATPTT_DTR.Checked;
+            //console.PTTBitBangEnabled = chkCATPTTEnabled.Checked; 
+            // if (comboCATPTTPort.Text.StartsWith("COM"))
+            // console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3));
+            console.CAT3Parity = SDRSerialPort.StringToParity((string)comboCAT3parity.SelectedItem);
+            console.CAT3DataBits = int.Parse((string)comboCAT3databits.SelectedItem);
+            console.CAT3StopBits = SDRSerialPort.StringToStopBits((string)comboCAT3stopbits.SelectedItem);
+            console.CAT3Enabled = chkCAT3Enable.Checked;
+
+            console.CAT4Enabled = chkCAT4Enable.Checked;
+            if (comboCAT4Port.Text.StartsWith("COM"))
+                console.CAT4Port = Int32.Parse(comboCAT4Port.Text.Substring(3));
+            // console.CATPTTRTS = chkCATPTT_RTS.Checked;
+            // console.CATPTTDTR = chkCATPTT_DTR.Checked;
+            //console.PTTBitBangEnabled = chkCATPTTEnabled.Checked; 
+            // if (comboCATPTTPort.Text.StartsWith("COM"))
+            // console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3));
+            console.CAT4Parity = SDRSerialPort.StringToParity((string)comboCAT4parity.SelectedItem);
+            console.CAT4DataBits = int.Parse((string)comboCAT4databits.SelectedItem);
+            console.CAT4StopBits = SDRSerialPort.StringToStopBits((string)comboCAT4stopbits.SelectedItem);
+            console.CAT4Enabled = chkCAT4Enable.Checked;
         }
 
         // called in error cases to set the dialiog vars from 
@@ -11157,6 +11204,48 @@ namespace PowerSDR
             // wjt fixme -- need to hand baudrate, parity, data, stop -- see initCATandPTTprops 
         }
 
+
+        public void copyCAT2PropsToDialogVars()
+        {
+            chkCAT2Enable.Checked = console.CAT2Enabled;
+            string port = "COM" + console.CAT2Port.ToString();
+            if (comboCAT2Port.Items.Contains(port))
+                comboCAT2Port.Text = port;
+           // chkCATPTT_RTS.Checked = console.CATPTTRTS;
+           // chkCATPTT_DTR.Checked = console.CATPTTDTR;
+           // chkCATPTTEnabled.Checked = console.PTTBitBangEnabled;
+           // port = "COM" + console.CATPTTBitBangPort.ToString();
+           // if (comboCATPTTPort.Items.Contains(port))
+              //  comboCATPTTPort.Text = port;
+        }
+
+        public void copyCAT3PropsToDialogVars()
+        {
+            chkCAT3Enable.Checked = console.CAT3Enabled;
+            string port = "COM" + console.CAT3Port.ToString();
+            if (comboCAT3Port.Items.Contains(port))
+                comboCAT3Port.Text = port;
+           // chkCATPTT_RTS.Checked = console.CATPTTRTS;
+           // chkCATPTT_DTR.Checked = console.CATPTTDTR;
+           // chkCATPTTEnabled.Checked = console.PTTBitBangEnabled;
+           // port = "COM" + console.CATPTTBitBangPort.ToString();
+           // if (comboCATPTTPort.Items.Contains(port))
+              //  comboCATPTTPort.Text = port;
+        }
+
+        public void copyCAT4PropsToDialogVars()
+        {
+            chkCAT4Enable.Checked = console.CAT4Enabled;
+            string port = "COM" + console.CAT4Port.ToString();
+            if (comboCAT4Port.Items.Contains(port))
+                comboCAT4Port.Text = port;
+          //  chkCATPTT_RTS.Checked = console.CATPTTRTS;
+           // chkCATPTT_DTR.Checked = console.CATPTTDTR;
+           // chkCATPTTEnabled.Checked = console.PTTBitBangEnabled;
+           // port = "COM" + console.CATPTTBitBangPort.ToString();
+           // if (comboCATPTTPort.Items.Contains(port))
+             //   comboCATPTTPort.Text = port;
+       }
 
         private void chkCATEnable_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -11220,12 +11309,222 @@ namespace PowerSDR
             }
         }
 
+        private void chkCAT2Enable_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (initializing) return;
+
+            if (comboCAT2Port.Text == "" || !comboCAT2Port.Text.StartsWith("COM"))
+            {
+                if (chkCAT2Enable.Focused)
+                {
+                    if (chkCAT2Enable.Focused && chkCAT2Enable.Checked)
+                    {
+                        MessageBox.Show("The CAT port \"" + comboCAT2Port.Text + "\" is not a valid port.\n" +
+                            "Please select another port.");
+                        chkCAT2Enable.Checked = false;
+                    }
+                }
+                return;
+            }
+
+            // make sure we're not using the same comm port as the bit banger 
+            if (chkCAT2Enable.Checked && console.PTTBitBangEnabled &&
+                (comboCAT2Port.Text == comboCATPTTPort.Text))
+            {
+                MessageBox.Show("CAT port cannot be the same as Bit Bang Port", "Port Selection Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                chkCAT2Enable.Checked = false;
+            }
+
+            // if enabled, disable changing of serial port 
+            bool enable_sub_fields = !chkCAT2Enable.Checked;
+            comboCAT2Port.Enabled = enable_sub_fields;
+
+            enableCAT2_HardwareFields(enable_sub_fields);
+
+            if (chkCAT2Enable.Checked)
+            {
+                try
+                {
+                    console.CAT2Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    console.CAT2Enabled = false;
+                    chkCAT2Enable.Checked = false;
+                    MessageBox.Show("Could not initialize CAT control.  Exception was:\n\n " + ex.Message +
+                        "\n\nCAT control has been disabled.", "Error Initializing CAT control",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+               /* if (comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
+                {
+                    MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
+                        "CAT Disabled",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    comboKeyerConnSecondary.Text = "None";
+                } */
+                console.CAT2Enabled = false;
+            }
+        }
+
+        private void chkCAT3Enable_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (initializing) return;
+
+            if (comboCAT3Port.Text == "" || !comboCAT3Port.Text.StartsWith("COM"))
+            {
+                if (chkCAT3Enable.Focused)
+                {
+                    if (chkCAT3Enable.Focused && chkCAT3Enable.Checked)
+                    {
+                        MessageBox.Show("The CAT port \"" + comboCAT3Port.Text + "\" is not a valid port.\n" +
+                            "Please select another port.");
+                        chkCAT3Enable.Checked = false;
+                    }
+                }
+                return;
+            }
+
+            // make sure we're not using the same comm port as the bit banger 
+            if (chkCAT3Enable.Checked && console.PTTBitBangEnabled &&
+                (comboCAT3Port.Text == comboCATPTTPort.Text))
+            {
+                MessageBox.Show("CAT port cannot be the same as Bit Bang Port", "Port Selection Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                chkCAT3Enable.Checked = false;
+            }
+
+            // if enabled, disable changing of serial port 
+            bool enable_sub_fields = !chkCAT3Enable.Checked;
+            comboCAT3Port.Enabled = enable_sub_fields;
+
+            enableCAT3_HardwareFields(enable_sub_fields);
+
+            if (chkCAT3Enable.Checked)
+            {
+                try
+                {
+                    console.CAT3Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    console.CAT3Enabled = false;
+                    chkCAT3Enable.Checked = false;
+                    MessageBox.Show("Could not initialize CAT control.  Exception was:\n\n " + ex.Message +
+                        "\n\nCAT control has been disabled.", "Error Initializing CAT control",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+               /* if (comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
+                {
+                    MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
+                        "CAT Disabled",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    comboKeyerConnSecondary.Text = "None";
+                } */
+                console.CAT3Enabled = false;
+            }
+        }
+
+        private void chkCAT4Enable_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (initializing) return;
+
+            if (comboCAT4Port.Text == "" || !comboCAT4Port.Text.StartsWith("COM"))
+            {
+                if (chkCAT4Enable.Focused)
+                {
+                    if (chkCAT4Enable.Focused && chkCAT4Enable.Checked)
+                    {
+                        MessageBox.Show("The CAT port \"" + comboCAT4Port.Text + "\" is not a valid port.\n" +
+                            "Please select another port.");
+                        chkCAT4Enable.Checked = false;
+                    }
+                }
+                return;
+            }
+
+            // make sure we're not using the same comm port as the bit banger 
+            if (chkCAT4Enable.Checked && console.PTTBitBangEnabled &&
+                (comboCAT4Port.Text == comboCATPTTPort.Text))
+            {
+                MessageBox.Show("CAT port cannot be the same as Bit Bang Port", "Port Selection Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                chkCAT4Enable.Checked = false;
+            }
+
+            // if enabled, disable changing of serial port 
+            bool enable_sub_fields = !chkCAT4Enable.Checked;
+            comboCAT4Port.Enabled = enable_sub_fields;
+
+            enableCAT4_HardwareFields(enable_sub_fields);
+
+            if (chkCAT4Enable.Checked)
+            {
+                try
+                {
+                    console.CAT4Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    console.CAT4Enabled = false;
+                    chkCAT4Enable.Checked = false;
+                    MessageBox.Show("Could not initialize CAT control.  Exception was:\n\n " + ex.Message +
+                        "\n\nCAT control has been disabled.", "Error Initializing CAT control",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+               /* if (comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
+                {
+                    MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
+                        "CAT Disabled",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    comboKeyerConnSecondary.Text = "None";
+                } */
+                console.CAT4Enabled = false;
+            }
+        }
+
         private void enableCAT_HardwareFields(bool enable)
         {
             comboCATbaud.Enabled = enable;
             comboCATparity.Enabled = enable;
             comboCATdatabits.Enabled = enable;
             comboCATstopbits.Enabled = enable;
+        }
+
+        private void enableCAT2_HardwareFields(bool enable)
+        {
+            comboCAT2baud.Enabled = enable;
+            comboCAT2parity.Enabled = enable;
+            comboCAT2databits.Enabled = enable;
+            comboCAT2stopbits.Enabled = enable;
+        }
+
+        private void enableCAT3_HardwareFields(bool enable)
+        {
+            comboCAT3baud.Enabled = enable;
+            comboCAT3parity.Enabled = enable;
+            comboCAT3databits.Enabled = enable;
+            comboCAT3stopbits.Enabled = enable;
+        }
+
+        private void enableCAT4_HardwareFields(bool enable)
+        {
+            comboCAT4baud.Enabled = enable;
+            comboCAT4parity.Enabled = enable;
+            comboCAT4databits.Enabled = enable;
+            comboCAT4stopbits.Enabled = enable;
         }
 
         private void doEnablementOnBitBangEnable()
@@ -11303,6 +11602,30 @@ namespace PowerSDR
             console.CATParity = SDRSerialPort.StringToParity(selection);
         }
 
+        private void comboCAT2parity_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            string selection = comboCAT2parity.SelectedText;
+            if (selection == null) return;
+
+            console.CAT2Parity = SDRSerialPort.StringToParity(selection);
+        }
+
+        private void comboCAT3parity_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            string selection = comboCAT3parity.SelectedText;
+            if (selection == null) return;
+
+            console.CAT3Parity = SDRSerialPort.StringToParity(selection);
+        }
+
+        private void comboCAT4parity_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            string selection = comboCAT4parity.SelectedText;
+            if (selection == null) return;
+
+            console.CAT4Parity = SDRSerialPort.StringToParity(selection);
+        }
+
         private void comboCATPort_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboCATPort.Text == "None")
@@ -11319,6 +11642,60 @@ namespace PowerSDR
 
             if (comboCATPort.Text.StartsWith("COM"))
                 console.CATPort = Int32.Parse(comboCATPort.Text.Substring(3));
+        }
+
+        private void comboCAT2Port_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT2Port.Text == "None")
+            {
+                if (chkCAT2Enable.Checked)
+                {
+                    if (comboCAT2Port.Focused)
+                        chkCAT2Enable.Checked = false;
+                }
+
+                chkCAT2Enable.Enabled = false;
+            }
+            else chkCAT2Enable.Enabled = true;
+
+            if (comboCAT2Port.Text.StartsWith("COM"))
+                console.CAT2Port = Int32.Parse(comboCAT2Port.Text.Substring(3));
+        }
+
+        private void comboCAT3Port_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT3Port.Text == "None")
+            {
+                if (chkCAT3Enable.Checked)
+                {
+                    if (comboCAT3Port.Focused)
+                        chkCAT3Enable.Checked = false;
+                }
+
+                chkCAT3Enable.Enabled = false;
+            }
+            else chkCAT3Enable.Enabled = true;
+
+            if (comboCAT3Port.Text.StartsWith("COM"))
+                console.CAT3Port = Int32.Parse(comboCAT3Port.Text.Substring(3));
+        }
+
+        private void comboCAT4Port_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT4Port.Text == "None")
+            {
+                if (chkCAT4Enable.Checked)
+                {
+                    if (comboCAT4Port.Focused)
+                        chkCAT4Enable.Checked = false;
+                }
+
+                chkCAT4Enable.Enabled = false;
+            }
+            else chkCAT4Enable.Enabled = true;
+
+            if (comboCAT4Port.Text.StartsWith("COM"))
+                console.CAT4Port = Int32.Parse(comboCAT4Port.Text.Substring(3));
         }
 
         private void comboCATPTTPort_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -11353,16 +11730,70 @@ namespace PowerSDR
                 console.CATBaudRate = Int32.Parse(comboCATbaud.Text);
         }
 
+        private void comboCAT2baud_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT2baud.SelectedIndex >= 0)
+                console.CAT2BaudRate = Int32.Parse(comboCAT2baud.Text);
+        }
+
+        private void comboCAT3baud_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT3baud.SelectedIndex >= 0)
+                console.CAT3BaudRate = Int32.Parse(comboCAT3baud.Text);
+        }
+
+        private void comboCAT4baud_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT4baud.SelectedIndex >= 0)
+                console.CAT4BaudRate = Int32.Parse(comboCAT4baud.Text);
+        }
+
         private void comboCATdatabits_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboCATdatabits.SelectedIndex >= 0)
                 console.CATDataBits = int.Parse(comboCATdatabits.Text);
         }
 
+        private void comboCAT2databits_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT2databits.SelectedIndex >= 0)
+                console.CAT2DataBits = int.Parse(comboCAT2databits.Text);
+        }
+
+        private void comboCAT3databits_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT3databits.SelectedIndex >= 0)
+                console.CAT3DataBits = int.Parse(comboCAT3databits.Text);
+        }
+
+        private void comboCAT4databits_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT4databits.SelectedIndex >= 0)
+                console.CAT4DataBits = int.Parse(comboCAT4databits.Text);
+        }
+
         private void comboCATstopbits_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboCATstopbits.SelectedIndex >= 0)
                 console.CATStopBits = SDRSerialPort.StringToStopBits(comboCATstopbits.Text);
+        }
+
+        private void comboCAT2stopbits_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT2stopbits.SelectedIndex >= 0)
+                console.CAT2StopBits = SDRSerialPort.StringToStopBits(comboCAT2stopbits.Text);
+        }
+ 
+        private void comboCAT3stopbits_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT3stopbits.SelectedIndex >= 0)
+                console.CAT3StopBits = SDRSerialPort.StringToStopBits(comboCAT3stopbits.Text);
+        }
+
+        private void comboCAT4stopbits_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCAT4stopbits.SelectedIndex >= 0)
+                console.CAT4StopBits = SDRSerialPort.StringToStopBits(comboCAT4stopbits.Text);
         }
 
         private void btnCATTest_Click(object sender, System.EventArgs e)
@@ -11402,8 +11833,10 @@ namespace PowerSDR
 
         private void chkTestIMD_CheckedChanged(object sender, System.EventArgs e)
         {
+           // Audio.SignalSource source = Audio.TXInputSignal;
+
             if (chekTestIMD.Checked)
-            {
+            {                
                 if (!console.PowerOn)
                 {
                     MessageBox.Show("Power must be on to run this test.",
@@ -11416,31 +11849,37 @@ namespace PowerSDR
                 console.PreviousPWR = console.PWR;
                 console.PWR = (int)udTestIMDPower.Value;
                 console.MOX = true;
+                
 
                 if (!console.MOX)
                 {
                     chekTestIMD.Checked = false;
                     return;
                 }
-
+  
                 Audio.MOX = true;
                 chekTestIMD.BackColor = console.ButtonSelectedColor;
                 Audio.SineFreq1 = (double)udTestIMDFreq1.Value;
                 Audio.SineFreq2 = (double)udTestIMDFreq2.Value;
                 Audio.two_tone = true;
+                if (radTestIMDInput.Checked)
                 Audio.TXInputSignal = Audio.SignalSource.SINE_TWO_TONE;
-                Audio.SourceScale = Math.Pow(10.0, (double)udTwoToneLevel.Value / 20.0);
+                else
+                Audio.TXOutputSignal = Audio.SignalSource.SINE_TWO_TONE;
+                Audio.SourceScale = (Math.Pow(10.0, (double)udTwoToneLevel.Value / 20.0)) * 0.9999;
             }
             else
             {
                 udTestIMDPower.Value = console.PWR;
                 console.PWR = console.PreviousPWR;
                 Audio.TXInputSignal = Audio.SignalSource.RADIO;
+                Audio.TXOutputSignal = Audio.SignalSource.RADIO;
                 Audio.MOX = false;
                 console.MOX = false;
                 Audio.SineFreq1 = (double)udDSPCWPitch.Value;
                 Audio.two_tone = false;
                 chekTestIMD.BackColor = SystemColors.Control;
+                Audio.Ramp = false;
             }
         }
 
@@ -11820,7 +12259,7 @@ namespace PowerSDR
             if (saving)
             {
                 this.Hide();
-            }//w5wc
+            }
             else
             {
                 Thread t = new Thread(new ThreadStart(SaveOptions));
@@ -12233,16 +12672,6 @@ namespace PowerSDR
         private void udDSPNB2_LostFocus(object sender, EventArgs e)
         {
             udDSPNB2.Value = udDSPNB2.Value;
-        }
-
-        private void udDSPImageGainTX_LostFocus(object sender, EventArgs e)
-        {
-            udDSPImageGainTX.Value = udDSPImageGainTX.Value;
-        }
-
-        private void udDSPImagePhaseTX_LostFocus(object sender, EventArgs e)
-        {
-            udDSPImagePhaseTX.Value = udDSPImagePhaseTX.Value;
         }
 
         private void udDSPCWPitch_LostFocus(object sender, EventArgs e)
@@ -12988,31 +13417,6 @@ namespace PowerSDR
                         grpGenCalRXImage.Visible = b;
                         break;
                 }
-            }
-        }
-
-        private void chkDSPImageExpert_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (radGenModelFLEX5000.Checked)
-            {
-                if (chkDSPImageExpert.Checked && chkDSPImageExpert.Focused)
-                {
-                    DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n" +
-                        "experienced PowerSDR users should use.  These controls may allow the user\n" +
-                        "to cause damage to the radio or change important calibration parameters.\n" +
-                        "Are you sure you want to enable Expert mode?",
-                        "Warning: Enable Expert Mode?",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning);
-                    if (dr == DialogResult.No)
-                    {
-                        chkDSPImageExpert.Checked = false;
-                        return;
-                    }
-                }
-
-                bool b = chkDSPImageExpert.Checked;
-                grpDSPImageRejectTX.Visible = b;
             }
         }
 
@@ -16554,17 +16958,36 @@ namespace PowerSDR
 
         private void btnResetPAValues_Click(object sender, EventArgs e)
         {
-            txtDCVolts.Text = "";
-            txtFwdADCValue.Text = "";
-            txtFwdPowerCalibrated.Text = "";
-            txtFwdVoltage.Text = "";
-            txtDrivePower.Text = "";
-            txtPAFwdPower.Text = "";
-            txtPARevPower.Text = "";
-            txtRevADCValue.Text = "";
-            txtRevVoltage.Text = "";
+            textDCVolts.Text = "";
+            textFwdADCValue.Text = "";
+            textFwdPowerCalibrated.Text = "";
+            textFwdVoltage.Text = "";
+            textDrivePower.Text = "";
+            textPAFwdPower.Text = "";
+            textPARevPower.Text = "";
+            textRevADCValue.Text = "";
+            textRevVoltage.Text = "";
         }
-   }
+
+        private void btnResetWattMeterValues_Click(object sender, EventArgs e)
+        {
+            udPA10W.Value = 10;
+            udPA20W.Value = 20;
+            udPA30W.Value = 30;
+            udPA40W.Value = 40;
+            udPA50W.Value = 50;
+            udPA60W.Value = 60;
+            udPA70W.Value = 70;
+            udPA80W.Value = 80;
+            udPA90W.Value = 90;
+            udPA100W.Value = 100;
+            udPA110W.Value = 110;
+            udPA120W.Value = 120;
+            udPA130W.Value = 130;
+            udPA140W.Value = 140;
+        }
+
+    }
 
     #region PADeviceInfo Helper Class
 

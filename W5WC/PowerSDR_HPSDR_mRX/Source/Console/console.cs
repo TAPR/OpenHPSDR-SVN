@@ -503,6 +503,9 @@ namespace PowerSDR
         public SpecRX specRX;
 
         private SIOListenerII siolisten = null;
+        private SIO2ListenerII sio2listen = null;
+        private SIO3ListenerII sio3listen = null;
+        private SIO4ListenerII sio4listen = null;
         private Thread[] audio_process_thread;				// threads to run DttSP functions
         private Thread draw_display_thread;					// draws the main display 
         private Thread multimeter_thread;					// updates the rx1/tx meter data
@@ -1841,7 +1844,7 @@ namespace PowerSDR
                 switch (current_hpsdr_model)
                 {
                     case HPSDRModel.ANAN100D:
-                        RX1DisplayCalOffset = -7.174f;
+                        RX1DisplayCalOffset = -4.357f;
                         break;
                     default:
                         RX1DisplayCalOffset = -3.465f;
@@ -7885,6 +7888,9 @@ namespace PowerSDR
             hw = new HW(0x378);					// create hardware object
 
             siolisten = new SIOListenerII(this);
+            sio2listen = new SIO2ListenerII(this);
+            sio3listen = new SIO3ListenerII(this);
+            sio4listen = new SIO4ListenerII(this);
 
             // Keyer = new CWKeyer2(this);			// create new Keyer
             CWSensorItem.Init();
@@ -17326,7 +17332,7 @@ namespace PowerSDR
                     JanusAudio.EnableRX1StepAtten(0);
 
                 udRX1StepAttData.Value = rx1_attenuator_data;
-
+                if (!mox) update_preamp = true;
                 UpdateDisplayOffsets();
             }
         }
@@ -17381,12 +17387,12 @@ namespace PowerSDR
                     JanusAudio.EnableRX2StepAtten(0);
 
               //  udRX2StepAttData.Value = rx2_attenuator_data;
-
+                if (!mox) update_preamp = true;
                 UpdateDisplayOffsets();
             }
         }
 
-        private bool limit_slew = false;
+        private bool limit_slew = true;
         public bool LimitSlew
         {
             get { return limit_slew; }
@@ -18482,24 +18488,29 @@ namespace PowerSDR
 
             if (rx1_step_attenuator)
             {
-                if (rx1_attenuator_data > 31)
+                if (current_hpsdr_model == HPSDRModel.ANAN100D && rx1_attenuator_data > 31)
                     Display.RX2PreampOffset = rx1_attenuator_data - 29.0f;
                 else
                     Display.RX2PreampOffset = (float)rx1_attenuator_data;
             }
             else
             {
-                switch (rx1_preamp_mode)
+                if (current_hpsdr_model == HPSDRModel.ANAN100D)
                 {
-                    case PreampMode.HPSDR_OFF:
-                    case PreampMode.HPSDR_MINUS40:
-                    case PreampMode.HPSDR_MINUS50:
-                        Display.RX2PreampOffset = 20.0f;
-                        break;
-                    default:
-                        Display.RX2PreampOffset = 0.0f;
-                        break;
+                    switch (rx1_preamp_mode)
+                    {
+                        case PreampMode.HPSDR_OFF:
+                        case PreampMode.HPSDR_MINUS40:
+                        case PreampMode.HPSDR_MINUS50:
+                            Display.RX2PreampOffset = 20.0f;
+                            break;
+                        default:
+                            Display.RX2PreampOffset = 0.0f;
+                            break;
+                    }
                 }
+                else
+                    Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
             }
             
             switch (Display.CurrentDisplayMode)
@@ -19338,6 +19349,36 @@ namespace PowerSDR
                 //Keyer.Siolisten = value;
             }
         }
+
+        public SIO2ListenerII Sio2listen
+        {
+            get { return sio2listen; }
+            set
+            {
+                sio2listen = value;
+                //Keyer.Siolisten = value;
+            }
+        }
+
+        public SIO3ListenerII Sio3listen
+        {
+            get { return sio3listen; }
+            set
+            {
+                sio3listen = value;
+                //Keyer.Siolisten = value;
+            }
+        }
+        public SIO4ListenerII Sio4listen
+        {
+            get { return sio4listen; }
+            set
+            {
+                sio4listen = value;
+                //Keyer.Siolisten = value;
+            }
+        } 
+        
         public bool HideTuneStep
         {
             get { return txtWheelTune.Visible; }
@@ -22273,12 +22314,53 @@ namespace PowerSDR
             get { return cat_parity; }
         }
 
+        private Parity cat2_parity;
+        public Parity CAT2Parity
+        {
+            set { cat2_parity = value; }
+            get { return cat2_parity; }
+        }
+
+        private Parity cat3_parity;
+        public Parity CAT3Parity
+        {
+            set { cat3_parity = value; }
+            get { return cat3_parity; }
+        }
+
+        private Parity cat4_parity;
+        public Parity CAT4Parity
+        {
+            set { cat4_parity = value; }
+            get { return cat4_parity; }
+        }
 
         private StopBits cat_stop_bits;
         public StopBits CATStopBits
         {
             set { cat_stop_bits = value; }
             get { return cat_stop_bits; }
+        }
+
+        private StopBits cat2_stop_bits;
+        public StopBits CAT2StopBits
+        {
+            set { cat2_stop_bits = value; }
+            get { return cat2_stop_bits; }
+        }
+
+        private StopBits cat3_stop_bits;
+        public StopBits CAT3StopBits
+        {
+            set { cat3_stop_bits = value; }
+            get { return cat3_stop_bits; }
+        }
+
+        private StopBits cat4_stop_bits;
+        public StopBits CAT4StopBits
+        {
+            set { cat4_stop_bits = value; }
+            get { return cat4_stop_bits; }
         }
 
         private int cat_data_bits;
@@ -22288,10 +22370,52 @@ namespace PowerSDR
             get { return cat_data_bits; }
         }
 
+        private int cat2_data_bits;
+        public int CAT2DataBits
+        {
+            set { cat2_data_bits = value; }
+            get { return cat2_data_bits; }
+        }
+
+        private int cat3_data_bits;
+        public int CAT3DataBits
+        {
+            set { cat3_data_bits = value; }
+            get { return cat3_data_bits; }
+        }
+
+        private int cat4_data_bits;
+        public int CAT4DataBits
+        {
+            set { cat4_data_bits = value; }
+            get { return cat4_data_bits; }
+        }
+
         private int cat_baud_rate;
         public int CATBaudRate
         {
             set { cat_baud_rate = value; }
+            get { return cat_baud_rate; }
+        }
+
+        private int cat2_baud_rate;
+        public int CAT2BaudRate
+        {
+            set { cat2_baud_rate = value; }
+            get { return cat2_baud_rate; }
+        }
+
+        private int cat3_baud_rate;
+        public int CAT3BaudRate
+        {
+            set { cat3_baud_rate = value; }
+            get { return cat3_baud_rate; }
+        }
+
+        private int cat4_baud_rate;
+        public int CAT4BaudRate
+        {
+            set { cat4_baud_rate = value; }
             get { return cat_baud_rate; }
         }
 
@@ -22329,6 +22453,108 @@ namespace PowerSDR
             get { return cat_enabled; }
         }
 
+        private bool cat2_enabled;
+        public bool CAT2Enabled
+        {
+            set
+            {
+                try
+                {
+                    cat2_enabled = value;
+                    // Keyer.CATEnabled = value;
+                    if (sio2listen != null)  // if we've got a listener tell them about state change 
+                    {
+                        if (cat2_enabled)
+                        {
+                            Sio2listen.enableCAT2();
+                        }
+                        else
+                        {
+                            Sio2listen.disableCAT2();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error enabling CAT on COM" + cat_port + ".\n" +
+                        "Please check CAT settings and try again.",
+                        "CAT Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    if (SetupForm != null) SetupForm.CAT2Enabled = false;
+                }
+            }
+            get { return cat2_enabled; }
+        }
+
+        private bool cat3_enabled;
+        public bool CAT3Enabled
+        {
+            set
+            {
+                try
+                {
+                    cat3_enabled = value;
+                    // Keyer.CATEnabled = value;
+                    if (sio3listen != null)  // if we've got a listener tell them about state change 
+                    {
+                        if (cat3_enabled)
+                        {
+                            Sio3listen.enableCAT3();
+                        }
+                        else
+                        {
+                            Sio3listen.disableCAT3();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error enabling CAT on COM" + cat_port + ".\n" +
+                        "Please check CAT settings and try again.",
+                        "CAT Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    if (SetupForm != null) SetupForm.CAT3Enabled = false;
+                }
+            }
+            get { return cat3_enabled; }
+        }
+
+        private bool cat4_enabled;
+        public bool CAT4Enabled
+        {
+            set
+            {
+                try
+                {
+                    cat4_enabled = value;
+                    // Keyer.CATEnabled = value;
+                    if (sio4listen != null)  // if we've got a listener tell them about state change 
+                    {
+                        if (cat4_enabled)
+                        {
+                            Sio4listen.enableCAT4();
+                        }
+                        else
+                        {
+                            Sio4listen.disableCAT4();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error enabling CAT on COM" + cat_port + ".\n" +
+                        "Please check CAT settings and try again.",
+                        "CAT Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    if (SetupForm != null) SetupForm.CAT4Enabled = false;
+                }
+            }
+            get { return cat4_enabled; }
+        }
+
         private int cat_rig_type;
         public int CATRigType
         {
@@ -22343,6 +22569,27 @@ namespace PowerSDR
             set { cat_port = value; }
         }
 
+        private int cat2_port;
+        public int CAT2Port
+        {
+            get { return cat2_port; }
+            set { cat2_port = value; }
+        }
+
+        private int cat3_port;
+        public int CAT3Port
+        {
+            get { return cat3_port; }
+            set { cat3_port = value; }
+        }
+
+        private int cat4_port;
+        public int CAT4Port
+        {
+            get { return cat4_port; }
+            set { cat4_port = value; }
+        }
+        
         private bool cat_ptt_rts = false;
         public bool CATPTTRTS
         {
@@ -22688,12 +22935,18 @@ namespace PowerSDR
         public string CATReadSigStrength()
         {
             float num = 0f;
+            float rx1PreampOffset = 0.0f;
+
+            if (rx1_step_attenuator) rx1PreampOffset = (float)rx1_attenuator_data;
+            else rx1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+            
             num = DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
             num = num +
                 rx1_meter_cal_offset +
-                rx1_preamp_offset[(int)rx1_preamp_mode] +
+               // rx1_preamp_offset[(int)rx1_preamp_mode] +
+                rx1PreampOffset +
                 rx1_filter_size_cal_offset +
-                rx1_path_offset +
+              //  rx1_path_offset +
                 rx1_xvtr_gain_offset;
             return num.ToString("f1") + " dBm";
         }
@@ -23927,7 +24180,7 @@ namespace PowerSDR
             }
         }
 
-        private bool attontx = false;
+        private bool attontx = true;
         public bool ATTOnTX
         {
             get { return attontx; }
@@ -25669,6 +25922,9 @@ namespace PowerSDR
             switch (current_display_engine)
             {
                 case DisplayEngine.GDI_PLUS:
+                    if (rx1_dsp_mode == DSPMode.DRM)
+                        specRX.GetSpecRX(0).Pixels = 4096;
+                    else
                     specRX.GetSpecRX(0).Pixels = picDisplay.Width;
                     specRX.GetSpecRX(1).Pixels = picDisplay.Width;
                     picDisplay.Invalidate();
@@ -28575,16 +28831,16 @@ namespace PowerSDR
                                     new_meter_data = calfwdpower;
                                     if (pa_values)
                                     {
-                                        SetupForm.txtFwdPowerCalibrated.Text = new_meter_data.ToString("f1") + " W";
-                                        SetupForm.txtPAFwdPower.Text = alex_fwd.ToString("f1") + " W";
-                                        SetupForm.txtPARevPower.Text = alex_rev.ToString("f1") + " W";
+                                        SetupForm.textFwdPowerCalibrated.Text = new_meter_data.ToString("f1") + " W";
+                                        SetupForm.textPAFwdPower.Text = alex_fwd.ToString("f1") + " W";
+                                        SetupForm.textPARevPower.Text = alex_rev.ToString("f1") + " W";
                                     }
                                 }
                                 else
                                      new_meter_data = drivepwr;
   
                                 if (current_meter_tx_mode == MeterTXMode.SWR_POWER) new_swrmeter_data = alex_swr;
-                                if (pa_values) SetupForm.txtDrivePower.Text = average_drivepwr.ToString("f2") + " mW";
+                                if (pa_values) SetupForm.textDrivePower.Text = average_drivepwr.ToString("f2") + " mW";
                                 break;
                             case MeterTXMode.REVERSE_POWER:
 
@@ -28607,7 +28863,7 @@ namespace PowerSDR
                     picMultiMeterDigital.Invalidate();
                 }
 
-                if (pa_values) SetupForm.txtDCVolts.Text = volts_138.ToString("f2") + " V";
+                if (pa_values) SetupForm.textDCVolts.Text = volts_138.ToString("f2") + " V";
 
                 if (chkPower.Checked)
                     Thread.Sleep(Math.Min(meter_delay, meter_dig_delay));
@@ -28632,26 +28888,29 @@ namespace PowerSDR
 
                     if (rx1_step_attenuator)
                     {
-                        if (rx1_attenuator_data > 31)
+                        if (current_hpsdr_model == HPSDRModel.ANAN100D && rx1_attenuator_data > 31)
                             rx2PreampOffset = rx1_attenuator_data - 29.0f;
                         else
                             rx2PreampOffset = (float)rx1_attenuator_data;
                     }
                     else
                     {
-                        switch (rx1_preamp_mode)
+                        if (current_hpsdr_model == HPSDRModel.ANAN100D)
                         {
-                            case PreampMode.HPSDR_OFF:
-                            case PreampMode.HPSDR_MINUS40:
-                            case PreampMode.HPSDR_MINUS50:
-                                rx2PreampOffset = 20.0f;
-                                break;
-                            default:
-                                rx2PreampOffset = 0.0f;
-                                break;
+                            switch (rx1_preamp_mode)
+                            {
+                                case PreampMode.HPSDR_OFF:
+                                case PreampMode.HPSDR_MINUS40:
+                                case PreampMode.HPSDR_MINUS50:
+                                    rx2PreampOffset = 20.0f;
+                                    break;
+                                default:
+                                    rx2PreampOffset = 0.0f;
+                                    break;
+                            }
                         }
- 
-                       // rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+                        else 
+                        rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
                     }
 
                     switch (mode)
@@ -28759,8 +29018,8 @@ namespace PowerSDR
 
             if (PAValues)
             {
-                SetupForm.txtRevADCValue.Text = adc.ToString();
-                SetupForm.txtRevVoltage.Text = volts.ToString("f2") + " V";
+                SetupForm.textRevADCValue.Text = adc.ToString();
+                SetupForm.textRevVoltage.Text = volts.ToString("f2") + " V";
             }
 
             return watts;
@@ -28780,8 +29039,8 @@ namespace PowerSDR
 
             if (PAValues)
             {
-                SetupForm.txtFwdADCValue.Text = adc.ToString();
-                SetupForm.txtFwdVoltage.Text = volts.ToString("f2") + " V";
+                SetupForm.textFwdADCValue.Text = adc.ToString();
+                SetupForm.textFwdVoltage.Text = volts.ToString("f2") + " V";
              }
 
             return watts;
@@ -32230,7 +32489,7 @@ namespace PowerSDR
 
         private HiPerfTimer t1 = new HiPerfTimer();
         //  private double timer1 = 0.0;
-
+        private bool is_tune = false;
         private bool mox = false;
         private void chkMOX_CheckedChanged2(object sender, System.EventArgs e)
         {
@@ -32492,7 +32751,18 @@ namespace PowerSDR
                 {
                     case DSPMode.CWL:
                     case DSPMode.CWU:
-                        Audio.MOX = tx; // switch manually since ramping is already done
+                       if (limit_slew && is_tune)
+                        {
+                            Audio.Ramp = true;
+                            int audio_buffer = (int)(block_size1 / (double)sample_rate1 * 1e3); // in ms
+                            int dsp_buffer = (int)(radio.GetDSPTX(0).BufferSize / (double)sample_rate1 * 1e3); // in ms
+                            Thread.Sleep(2 * (audio_buffer + dsp_buffer));
+                            is_tune = false;
+                        }
+                        else
+                        {
+                            Audio.MOX = tx; // switch manually since ramping is already done
+                        }
                         break;
                     default:
                         if (limit_slew)
@@ -32933,6 +33203,8 @@ namespace PowerSDR
 
                 if (apollopresent && apollo_tuner_enabled)
                     JanusAudio.EnableApolloAutoTune(1);
+
+                is_tune = true;
 
                 /*if(atu_present && tx_band != Band.B2M &&
                     (ATUTuneMode)comboTuneMode.SelectedIndex != ATUTuneMode.BYPASS)
@@ -38030,7 +38302,7 @@ namespace PowerSDR
                 case DSPMode.DRM:
                     radModeDRM.BackColor = SystemColors.Control;
                     // if_shift = true;
-                    vfo_offset = 0.0;
+                    vfo_offset = 0.0;                    
                     if (vac_auto_enable &&
                         new_mode != DSPMode.DIGL &&
                         new_mode != DSPMode.DIGU)
@@ -38041,7 +38313,7 @@ namespace PowerSDR
                     btnFilterShiftReset.Enabled = true;
                     if (new_mode != DSPMode.SPEC || new_mode != DSPMode.FM)
                         EnableAllFilters();
-                    // if_freq = SetupForm.IFFreq;
+                   // if_freq = SetupForm.IFFreq;
                     CalcDisplayFreq();
                     chkTNF.Enabled = true;
                     btnTNFAdd.Enabled = true;
@@ -38051,6 +38323,7 @@ namespace PowerSDR
             switch (new_mode)
             {
                 case DSPMode.LSB:
+                    vfo_offset = 0.0;
                     radModeLSB.BackColor = button_selected_color;
                     //grpMode.Text = "Mode - LSB";
                     if (!rx_only && PowerOn)
@@ -38193,7 +38466,7 @@ namespace PowerSDR
                         //  chkBIN.Checked = false;
                         // chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-                        //radio.GetDSPTX(0).TXOsc = 11025.0; //w5wc-1
+                        //radio.GetDSPTX(0).TXOsc = 11025.0;
 
                         ptbFMMic_Scroll(this, EventArgs.Empty);
                     }
@@ -38212,7 +38485,7 @@ namespace PowerSDR
                         chkBIN.Checked = false;
                         chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-                        //radio.GetDSPTX(0).TXOsc = 11025.0; // w5wc-1
+                        //radio.GetDSPTX(0).TXOsc = 11025.0;
                     }
                     panelModeSpecificPhone.BringToFront();
                     break;
@@ -38228,7 +38501,7 @@ namespace PowerSDR
                         chkBIN.Checked = false;
                         chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-                        //radio.GetDSPTX(0).TXOsc = 11025.0; // w5wc-1
+                        //radio.GetDSPTX(0).TXOsc = 11025.0; 
                     }
                     panelModeSpecificPhone.BringToFront();
                     break;

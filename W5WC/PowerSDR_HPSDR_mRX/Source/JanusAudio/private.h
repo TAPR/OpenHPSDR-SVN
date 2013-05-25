@@ -128,6 +128,7 @@ extern void MetisStopReadThread(void);
 extern int MetisBulkRead(int endpoint, char *bufp, int buflen);
 extern int MetisBulkWrite(int endpoint, char *bufp, int buflen);
 extern int MetisReadDirect(char *bufp, int buflen);
+extern void SendCommandToMetis(unsigned char command);
 
 extern void ForceCandCFrame(int);
 // all extern declarations need to be above this point
