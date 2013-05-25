@@ -27,6 +27,7 @@ ECHO  9. Quartus V10.1sp1
 ECHO  A. Quartus V11.0sp1
 ECHO  B. Quartus V11.1sp2
 ECHO  C. Quartus v12.1
+ECHO  D. Quartus v13.0
 ECHO  Q. Quit
 ECHO.
 SET Choice=
@@ -46,6 +47,7 @@ IF /I '%Choice%'=='9' GOTO Q101sp1
 IF /I '%Choice%'=='A' GOTO Q110sp1
 IF /I '%Choice%'=='B' GOTO Q111sp2
 IF /I '%Choice%'=='C' GOTO Q121
+IF /I '%Choice%'=='D' GOTO Q13
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
 ECHO.
@@ -102,6 +104,9 @@ GOTO LOOP
 SET DIRECTORY=c:\altera\12.1\qprogrammer\bin\quartus_pgm
 GOTO LOOP
 
+:Q13
+SET DIRECTORY=c:\altera\13.0\qprogrammer\bin\quartus_pgm
+GOTO LOOP
 
 :: prompt the user for the file to use
 :LOOP
@@ -123,6 +128,7 @@ ECHO Leu. Program using Mercury_eu_V3.0
 ECHO M. Program using Mercury_v3.1
 ECHO N. Program using Mercury_v3.2
 ECHO O. Program using Mercury_v3.3
+ECHO P. Program using Mercury_v3.4
 ECHO Oeu. Program using Mercury_eu_v3.3
 ECHO.
 ECHO Z. Mercury Test (carrier at 7.68MHz)
@@ -152,6 +158,7 @@ IF /I '%Choice%'=='Leu' GOTO ItemLEU
 IF /I '%Choice%'=='M' GOTO ItemM
 IF /I '%Choice%'=='N' GOTO ItemN
 IF /I '%Choice%'=='O' GOTO ItemO
+IF /I '%Choice%'=='P' GOTO ItemP
 IF /I '%Choice%'=='Oeu' GOTO ItemOEU
 IF /I '%Choice%'=='Z' GOTO ItemZ
 
@@ -206,6 +213,9 @@ GOTO CONTINUE
 GOTO CONTINUE
 :ItemO
 %DIRECTORY% -c USB-Blaster mercury_v3.3.cdf
+GOTO CONTINUE
+:ItemP
+%DIRECTORY% -c USB-Blaster mercury_v3.4.cdf
 GOTO CONTINUE
 :ItemOEU
 %DIRECTORY% -c USB-Blaster mercury_EU_v3.3.cdf
