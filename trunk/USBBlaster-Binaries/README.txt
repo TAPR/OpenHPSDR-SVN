@@ -1,4 +1,4 @@
-Phil Harman - VK6APH - 29 April 2012
+Phil Harman - VK6APH - 25 May 2013
 
  *******  NOTE:  Altera indicates that their software will run on 32 bit versions of XP and Vista. Support or Win7 or 64 bit vesions is included from V10.0  ******
 
@@ -15,7 +15,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on 
 
    https://www.altera.com/support/software/download/programming/quartus2/dnl-quartus2_programmer.jsp
 
-   The latest version that has been tested successfully is V11.1sp2.
+   The latest version that has been tested successfully is V13.0.
 
    Install in the default directory. If you install in a different directory then edit
    Program-Mercury-EPCS16.bat, Program-Penelope-EPCS4.bat and Program-Janus-EPM240T100.bat to reflect the change. 

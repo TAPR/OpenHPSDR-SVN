@@ -27,6 +27,7 @@ ECHO  9. Quartus V10.1sp1
 ECHO  A. Quartus V11.0sp1
 ECHO  B. Quartus V11.1sp2
 ECHO  C. Quartus v12.1
+ECHO  D. Quartus v13.0
 ECHO  Q. Quit
 ECHO.
 SET Choice=
@@ -46,6 +47,7 @@ IF /I '%Choice%'=='9' GOTO Q101sp1
 IF /I '%Choice%'=='A' GOTO Q110sp1
 IF /I '%Choice%'=='B' GOTO Q111sp2
 IF /I '%Choice%'=='C' GOTO Q121
+IF /I '%Choice%'=='D' GOTO Q13
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
 ECHO.
@@ -99,6 +101,10 @@ GOTO LOOP
 SET DIRECTORY=c:\altera\12.1\qprogrammer\bin\quartus_pgm
 GOTO LOOP
 
+:Q13
+SET DIRECTORY=c:\altera\13.0\qprogrammer\bin\quartus_pgm
+GOTO LOOP
+
 :: prompt the user for the file to use
 :LOOP
 ECHO.
@@ -110,6 +116,7 @@ ECHO D. Program using Penelope_v1.4
 ECHO E. Program using Penelope_V1.5
 ECHO F. Program using Penelope_V1.6
 ECHO G. Program using Penelope_V1.7
+ECHO H. Program using Penelope_V1.8
 ECHO Q. Quit
 ECHO.
 SET Choice=
@@ -125,6 +132,7 @@ IF /I '%Choice%'=='D' GOTO ItemD
 IF /I '%Choice%'=='E' GOTO ItemE
 IF /I '%Choice%'=='F' GOTO ItemF
 IF /I '%Choice%'=='G' GOTO ItemG
+IF /I '%Choice%'=='H' GOTO ItemH
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
 ECHO.
@@ -149,6 +157,9 @@ GOTO CONTINUE
 GOTO CONTINUE
 :ItemG
 %DIRECTORY% -c USB-Blaster Penelope_v1.7.cdf
+GOTO CONTINUE
+:ItemH
+%DIRECTORY% -c USB-Blaster Penelope_v1.8.cdf
 GOTO CONTINUE
 :CONTINUE
 PAUSE
