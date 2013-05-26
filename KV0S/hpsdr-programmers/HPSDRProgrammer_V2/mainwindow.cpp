@@ -80,6 +80,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->discoverButton,SIGNAL(clicked()),this,SLOT(discover()));
 
+
     connect(ui->programButton,SIGNAL(clicked()),this,SLOT(program()));
     connect(ui->browseButton,SIGNAL(clicked()),this,SLOT(browse()));
 
@@ -342,12 +343,13 @@ void MainWindow::flashProgram() {
     data_command=PROGRAM_METIS_FLASH;
 
     // start a thread to listen for replies
-    //QString myip=interfaces.getInterfaceIPAddress(interfaceName);
-    //receiveThread=new ReceiveThread(&socket,myip,selectedBoardHostAddress);
+    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
+    receiveThread=new ReceiveThread(&socket,myip,selectedBoardHostAddress);
 
-    //connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
-    //connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
-    //connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
+    connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
+    connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
+    //connect(receiveThread,SIGNAL(discover()),this,SLOT(discover()));
+    connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
 
     state=ERASING;
     eraseData();
@@ -363,7 +365,7 @@ void MainWindow::eraseData() {
     //} else {
         sendCommand(ERASE_METIS_FLASH);
         // wait 20 seconds to allow replys
-        QTimer::singleShot(9000,this,SLOT(erase_timeout()));
+        QTimer::singleShot(20000,this,SLOT(erase_timeout()));
     //}
 }
 
@@ -407,7 +409,7 @@ void MainWindow::sendCommand(unsigned char command) {
     }
 
     qDebug()<<"before send";
-    //receiveThread->send((const char*)buffer,sizeof(buffer));
+    receiveThread->send((const char*)buffer,sizeof(buffer));
 
 }
 
@@ -432,7 +434,7 @@ void MainWindow::sendData() {
         buffer[i+8]=(unsigned char)data[i+offset];
     }
 
-    //receiveThread->send((const char*)buffer,sizeof(buffer));
+    receiveThread->send((const char*)buffer,sizeof(buffer));
 
     int p=(offset+256)*100/(end-start);
     if(p!=percent) {
@@ -464,6 +466,7 @@ void MainWindow::nextBuffer() {
         status(text);
         status("If using DHCP this can take up to 5 seconds.");
         status("To use other functions you will need to run Discovery again.");
+
 
         idle();
         QApplication::restoreOverrideCursor();
@@ -761,7 +764,7 @@ int MainWindow::testSubnet( QStringList *saddr )
 
     if( (addr[0] == ipaddr[0]) && (addr[1] == ipaddr[1]) && (addr[2] == ipaddr[2]) && (addr[3] == ipaddr[3]) )
     {
-       // new address is the same ca the PC
+       // new address is the same as the PC
        result = -1;
     }else if( (addr[0] == ipaddr[0]) && (addr[1] == ipaddr[1]) && (addr[2] == ipaddr[2]) && (addr[3] != ipaddr[3]) ) {
        // new address is the same subnet as the PC but a different fourth number, OK change with no comment

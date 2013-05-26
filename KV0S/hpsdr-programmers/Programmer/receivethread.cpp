@@ -64,6 +64,10 @@ void ReceiveThread::readyRead() {
 
         if(buffer[0]==0xEF && buffer[1]==0xFE) {
             switch(buffer[2]) {
+            case 2:
+                qDebug() << "call Discovery";
+                emit discover();
+                break;
             case 3:  // erase completed
                 qDebug()<<"commandCompleted";
                 emit eraseCompleted();
@@ -73,7 +77,7 @@ void ReceiveThread::readyRead() {
                 emit nextBuffer();
                 break;
             default:
-                qDebug()<<"invalid reply="<<buffer[3];
+                qDebug()<<"invalid reply="<< buffer[2] << buffer[3];
                 break;
             }
         } else {
