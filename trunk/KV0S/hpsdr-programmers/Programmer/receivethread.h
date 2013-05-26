@@ -29,6 +29,8 @@ signals:
     void eraseCompleted();
     void nextBuffer();
     void timeout();
+    void discover();
+    void idle();
 public slots:
     void readyRead();
 private:
