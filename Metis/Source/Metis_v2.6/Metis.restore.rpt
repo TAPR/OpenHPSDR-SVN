@@ -1,5 +1,5 @@
 Restore Archived Project report for Metis
-Sat May 25 16:42:29 2013
+Mon May 27 19:38:01 2013
 Quartus II 64-Bit Version 12.1 Build 177 11/07/2012 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------+
 ; Restore Archived Project Summary                                        ;
 +---------------------------------+---------------------------------------+
-; Restore Archived Project Status ; Successful - Sat May 25 16:42:29 2013 ;
+; Restore Archived Project Status ; Successful - Mon May 27 19:38:00 2013 ;
 ; Revision Name                   ; Metis                                 ;
 ; Top-level Entity Name           ; Metis                                 ;
 ; Family                          ; Cyclone III                           ;
@@ -50,9 +50,9 @@ Info: Successfully restored 'E:/HPSDR/trunk/Metis/Source/Metis_v2.6/Metis_v2.6.q
 Info: Generated report 'Metis.restore.rpt'
 Info (23030): Evaluation of Tcl script e:/altera/12.1/quartus/common/tcl/apps/qpm/qar.tcl was successful
 Info: Quartus II 64-Bit Shell was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 285 megabytes
-    Info: Processing ended: Sat May 25 16:42:29 2013
-    Info: Elapsed time: 00:00:01
+    Info: Peak virtual memory: 289 megabytes
+    Info: Processing ended: Mon May 27 19:38:01 2013
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 
