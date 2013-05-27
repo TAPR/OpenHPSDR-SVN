@@ -79,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->discoverComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(metisSelected(int)));
 
     connect(ui->discoverButton,SIGNAL(clicked()),this,SLOT(discover()));
-
+    connect(this,SIGNAL(checkfirmware()),this,SLOT(discover()));
 
     connect(ui->programButton,SIGNAL(clicked()),this,SLOT(program()));
     connect(ui->browseButton,SIGNAL(clicked()),this,SLOT(browse()));
@@ -89,7 +89,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     connect(add,SIGNAL(writeIP()),this,SLOT(setIP_UDP()));
-
 
 
     if(ui->interfaceComboBox->count()>0) {
@@ -199,6 +198,8 @@ void MainWindow::clearDiscovery() {
 
 void MainWindow::discover() {
 
+    qDebug() << "MainWindow::discover()";
+
     clearDiscovery();
 
     QString myip=interfaces.getInterfaceIPAddress(interfaceName);
@@ -221,6 +222,7 @@ void MainWindow::discover() {
 
 void MainWindow::discovery_timeout() {
 
+    qDebug() << "MainWindow::discovery_timeout()";
     discovery->stop();
     if(ui->discoverComboBox->count()>0) {
         ui->discoverComboBox->setCurrentIndex(0);
@@ -287,6 +289,7 @@ void MainWindow::program() {
                 //} else {
                     flashProgram();
                 //}
+
             }
         } else {
             status("Error: no file selected");
@@ -294,6 +297,7 @@ void MainWindow::program() {
     } else {
         status("Error: no interface selected");
     }
+
 }
 
 // private load an rbf file
@@ -348,7 +352,6 @@ void MainWindow::flashProgram() {
 
     connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
     connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
-    //connect(receiveThread,SIGNAL(discover()),this,SLOT(discover()));
     connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
 
     state=ERASING;
@@ -465,11 +468,15 @@ void MainWindow::nextBuffer() {
         text=QString("Please wait for %0 to restart.").arg(currentboard);
         status(text);
         status("If using DHCP this can take up to 5 seconds.");
-        status("To use other functions you will need to run Discovery again.");
+        status(QString("Attempting to rediscover the %0 board, please wait for a few seconds.").arg(currentboard));
 
 
         idle();
+
         QApplication::restoreOverrideCursor();
+        QTimer::singleShot(6000,this,SLOT(discover()));
+
+
     }
 }
 
@@ -548,10 +555,10 @@ void MainWindow::idle() {
     qDebug()<<"idle";
     state=IDLE;
 
-    //if(receiveThread!=NULL) {
-    //    receiveThread->stop();
-   //     receiveThread=NULL;
-    //}
+    if(receiveThread!=NULL) {
+        receiveThread->stop();
+        receiveThread=NULL;
+    }
 
 }
 
