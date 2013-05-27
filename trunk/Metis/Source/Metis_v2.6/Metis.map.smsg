@@ -1,10 +1,10 @@
 Warning (10268): Verilog HDL information at I2C_Master.v(107): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at Metis.v(360): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at Metis.v(545): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at Metis.v(824): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at Metis.v(1497): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at Metis.v(1790): always construct contains both blocking and non-blocking assignments
-Info (10281): Verilog HDL Declaration information at Metis.v(345): object "This_MAC" differs only in case from object "this_MAC" in the same scope
+Warning (10268): Verilog HDL information at Metis.v(361): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at Metis.v(546): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at Metis.v(825): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at Metis.v(1498): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at Metis.v(1791): always construct contains both blocking and non-blocking assignments
+Info (10281): Verilog HDL Declaration information at Metis.v(346): object "This_MAC" differs only in case from object "this_MAC" in the same scope
 Warning (10268): Verilog HDL information at Rx_MAC.v(328): always construct contains both blocking and non-blocking assignments
 Info (10281): Verilog HDL Declaration information at Rx_MAC.v(166): object "This_MAC" differs only in case from object "this_MAC" in the same scope
 Info (10281): Verilog HDL Declaration information at Rx_MAC.v(185): object "METIS_discovery" differs only in case from object "METIS_DISCOVERY" in the same scope
