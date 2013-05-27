@@ -101,12 +101,13 @@ SET DIRECTORY=c:\altera\11.1sp2\qprogrammer\bin\quartus_pgm
 GOTO LOOP
 
 :Q121
-SET DIRECTORY=c:\altera\12.1\qprogrammer\bin\quartus_pgm
+SET DIRECTORY=e:\altera\12.1\qprogrammer\bin\quartus_pgm
 GOTO LOOP
 
 :Q13
-SET DIRECTORY=c:\altera\13.0\qprogrammer\bin\quartus_pgm
+SET DIRECTORY=e:\altera\13.0\qprogrammer\bin\quartus_pgm
 GOTO LOOP
+
 
 :: prompt the user for the file to use
 :LOOP
