@@ -1,8 +1,8 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-#define VERSION "(version 2.0.3.3)"
-#define RELEASE "2013-5-26"
+#define VERSION "(version 2.0.3.4)"
+#define RELEASE "2013-5-27"
 
 // Version 1.0 initial release
 // Version 1.1 fixes from Berndt VK5ABN for Windows
@@ -13,5 +13,6 @@
 // Version 1.6 More Hermes text changes
 // KV0S revise interface
 // Version 2.0 move to Qt5,  revise GUI
+// Fixed the rediscovery after programming
 
 #endif // VERSION_H
