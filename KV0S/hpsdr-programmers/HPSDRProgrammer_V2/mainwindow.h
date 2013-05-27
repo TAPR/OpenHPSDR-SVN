@@ -86,6 +86,8 @@ public slots:
 
     void board_found(Board*);
 
+signals:
+    void checkfirmware();
 
 private:
     Ui::MainWindow *ui;
