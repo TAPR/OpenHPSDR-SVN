@@ -148,7 +148,6 @@ set_location_assignment PIN_67 -to A22
 set_global_assignment -name SEARCH_PATH common/ -tag from_archive
 set_location_assignment PIN_72 -to SCL
 set_location_assignment PIN_69 -to SDA
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name VERILOG_FILE cpl_cordic.v
 set_global_assignment -name VERILOG_FILE PLL_clock_detector.v
 set_global_assignment -name SDC_FILE Penelope.sdc
@@ -162,3 +161,4 @@ set_global_assignment -name VERILOG_FILE ADC.v
 set_global_assignment -name VERILOG_FILE cicint.v
 set_global_assignment -name VERILOG_FILE Penelope.v
 set_global_assignment -name VERILOG_FILE common/I2S_rcv.v
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
