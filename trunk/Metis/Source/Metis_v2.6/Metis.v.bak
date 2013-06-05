@@ -77,6 +77,7 @@
 						  Rx2 Q data on A4, Rx3 I data on A8, and Rx3 Q data on A3, in order to support 384ksps Rx sampling rates
 						  for up to three receivers on a single Mercury or three Mercury boards.  
 						  Changed version number to v2.6.
+					27 - Increased wideband FIFO to 16k words, released as V2.6a
 		
 						
 						**** Built using Quartus II V12.1  ****
@@ -657,7 +658,7 @@ i2c_interface interface_inst(.Tx_clock_2(Tx_clock_2),
 										.sda(ATLAS_A21), 
 										.scl(ATLAS_A20), 
 										.probe(probe), 
-										.mic_boost(IF_mic_boost), 
+										.mic_boost(IF_Mic_boost), 
 										.line_in(IF_Line_in), 
 										.line_gain(IF_line_boost), 
 										.Penny_ALC(Penny_ALC),
@@ -1081,11 +1082,11 @@ FIFO #(RX_FIFO_SZ) RXF (.rst(IF_rst), .clk (IF_clk), .full(IF_Rx_fifo_full), .us
 
 
 //------------------------------------------------
-//   SP_fifo  (4096 words) dual clock FIFO
+//   SP_fifo  (16k words) dual clock FIFO
 //------------------------------------------------
 
 /*
-        The spectrum data FIFO is 16 by 4096 words long on the input.
+        The spectrum data FIFO is 16 by 16k words long on the input.
         Output is in Bytes for easy interface to the PHY code
         NB: The output flags are only valid after a read/write clock has taken place
 
@@ -1096,7 +1097,7 @@ FIFO #(RX_FIFO_SZ) RXF (.rst(IF_rst), .clk (IF_clk), .full(IF_Rx_fifo_full), .us
 						|				         |
 	sp_fifo_wrreq	|wrreq	     wrempty| sp_fifo_wrempty
 						|				         |
-			IF_clk	|>wrclk [11:0]wrusedw| sp_fifo_wrused
+			IF_clk	|>wrclk              | 
 						---------------------
 	sp_fifo_rdreq	|rdreq		   q[7:0]| sp_fifo_rddata
 						|                    | 
@@ -1118,14 +1119,14 @@ wire [7:0]sp_fifo_rddata;
 wire sp_fifo_wrempty;
 wire sp_fifo_wrfull;
 wire sp_fifo_wrreq;
-wire [11:0]sp_fifo_wrused;
+
 
 
 //--------------------------------------------------
 //  Receive Wideband Spectrum Data from Mercury
 //--------------------------------------------------
 
-//	When wide_spectrum is set and sp_fifo_wrempty then a trigger is sent to Mercury (Atlas_C21) which sends 4k words 
+//	 When wide_spectrum is set and sp_fifo_wrempty then a trigger is sent to Mercury (Atlas_C21) which sends 16k words 
 //  of consecutive ADC samples.
 //  Reset fifo when !run so the data always starts at a known state.
 
@@ -1135,7 +1136,7 @@ wire have_sp_data;
 
 SP_fifo  SPF (.aclr(IF_rst | !run), .wrclk (IF_clk), .rdclk(Tx_clock_2), 
              .wrreq (sp_fifo_wrreq), .data (sp_fifo_wdata), .rdreq (sp_fifo_rdreq),
-             .q(sp_fifo_rddata), .wrfull(sp_fifo_wrfull), .wrempty(sp_fifo_wrempty), .wrusedw(sp_fifo_wrused)); 
+             .q(sp_fifo_rddata), .wrfull(sp_fifo_wrfull), .wrempty(sp_fifo_wrempty)); 
 
 
 NWire_rcv #(.DATA_BITS(16), .ICLK_FREQ(125000000), .XCLK_FREQ(48000000), .SLOWEST_FREQ(80000))  

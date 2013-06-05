@@ -78,6 +78,7 @@
 						  for up to three receivers on a single Mercury or three Mercury boards.  
 						  Changed version number to v2.6.
 					27 - Increased wideband FIFO to 16k words, released as V2.6a
+			  Jun  5 - Added mic boost, released as V2.6b.
 		
 						
 						**** Built using Quartus II V12.1  ****
