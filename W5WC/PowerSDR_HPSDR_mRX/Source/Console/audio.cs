@@ -1601,7 +1601,10 @@ namespace PowerSDR
             rx2_out_r = (float*)array_ptr_output[5]; //CallbackOutR2bufp
 
 #if LINCOR
-            lincor.LincorControlAndCapture(frameCount, rx2_in_l, rx2_in_r, rx1_in_l, rx1_in_r, localmox, true);
+            if (console.VFOATX)
+                lincor.LincorControlAndCapture(frameCount, (float*)array_ptr_input[10], (float*)array_ptr_input[11], rx1_in_l, rx1_in_r, localmox, true);
+            if (console.VFOBTX)
+                lincor.LincorControlAndCapture(frameCount, (float*)array_ptr_input[10], (float*)array_ptr_input[11], rx2_in_l, rx2_in_r, localmox, true);
 #endif
 
             if (!localmox)
@@ -2150,6 +2153,32 @@ namespace PowerSDR
                     }
                 case 5:
                     {
+                        if (console.CurrentModel == Model.HERMES)
+                        {
+                            if (console.specRX.GetSpecRX(0).NBOn)
+                            {
+                                SpecHPSDRDLL.blanker(0, 0, (float*)array_ptr_input[6], (float*)array_ptr_input[7]); // rx3
+                                SpecHPSDRDLL.blanker(0, 1, rx1_in_l, rx1_in_r);
+                                SpecHPSDRDLL.blanker(0, 2, (float*)array_ptr_input[8], (float*)array_ptr_input[9]); // rx4
+                            }
+
+                            if (console.specRX.GetSpecRX(1).NBOn)
+                            {
+                                SpecHPSDRDLL.blanker(1, 0, rx2_in_l, rx2_in_r);
+                            }
+
+                            if (console.SpecDisplay)
+                            {
+                                SpecHPSDRDLL.Spectrum(0, 0, 0, (float*)array_ptr_input[7], (float*)array_ptr_input[6]); //rx3
+                                SpecHPSDRDLL.Spectrum(0, 1, 0, rx1_in_r, rx1_in_l);
+                                SpecHPSDRDLL.Spectrum(0, 2, 0, (float*)array_ptr_input[9], (float*)array_ptr_input[8]); //rx4
+                            }
+
+                            if (console.RX2Enabled)
+                                SpecHPSDRDLL.Spectrum(1, 0, 0, rx2_in_r, rx2_in_l);
+                        }
+                        else
+                        {
                         if (console.specRX.GetSpecRX(0).NBOn)
                         {
                             SpecHPSDRDLL.blanker(0, 0, (float*)array_ptr_input[6], (float*)array_ptr_input[7]); //rx3
@@ -2171,6 +2200,7 @@ namespace PowerSDR
 
                         if (console.RX2Enabled)
                         SpecHPSDRDLL.Spectrum(1, 0, 0, rx2_in_r, rx2_in_l);
+                        }
                         break;
                     }
 

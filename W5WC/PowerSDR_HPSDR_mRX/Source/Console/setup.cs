@@ -241,9 +241,6 @@ namespace PowerSDR
         private NumericUpDownTS udDisplayMultiPeakHoldTime;
         private NumericUpDownTS udDisplayMultiTextHoldTime;
         private LabelTS lblDisplayMeterTextHoldTime;
-        private GroupBoxTS grpGeneralUpdates;
-        private CheckBoxTS chkGeneralUpdateRelease;
-        private CheckBoxTS chkGeneralUpdateBeta;
         private CheckBoxTS chkGeneralRXOnly;
         private LabelTS lblTestX2;
         private LabelTS lblTestToneFreq2;
@@ -1104,7 +1101,6 @@ namespace PowerSDR
         private LabelTS lblPulsePeriod;
         private NumericUpDownTS udTestFreq;
         private GroupBoxTS grpBoxTXDisplayCal;
-        private CheckBoxTS chkDSPALCEnabled;
         private TextBox txtDisplayOffset;
         private TextBox txtMeterOffset;
         private LabelTS labelTS54;
@@ -1891,8 +1887,6 @@ namespace PowerSDR
             chkGeneralSoftwareGainCorr.Checked = console.NoHardwareOffset;
             chkGeneralEnableX2.Checked = console.X2Enabled;
             chkGeneralCustomFilter.Checked = console.EnableLPF0;
-            chkGeneralUpdateRelease.Checked = console.NotifyOnRelease;
-            chkGeneralUpdateBeta.Checked = console.NotifyOnBeta;
         }
 
         private void InitAudioTab()
@@ -2735,12 +2729,10 @@ namespace PowerSDR
             chkGeneralSpurRed_CheckedChanged(this, e);
             chkGeneralDisablePTT_CheckedChanged(this, e);
             chkGeneralSoftwareGainCorr_CheckedChanged(this, e);
-            chkGeneralEnableX2_CheckedChanged(this, e);
-            udGeneralX2Delay_ValueChanged(this, e);
+           // chkGeneralEnableX2_CheckedChanged(this, e);
+           // udGeneralX2Delay_ValueChanged(this, e);
             chkGeneralCustomFilter_CheckedChanged(this, e);
             comboGeneralProcessPriority_SelectedIndexChanged(this, e);
-            chkGeneralUpdateRelease_CheckedChanged(this, e);
-            chkGeneralUpdateBeta_CheckedChanged(this, e);
             chkFullDiscovery_CheckedChanged(this, e);
             btnSetIPAddr_Click(this, e);
             radOzyUSB_CheckedChanged(this, e);
@@ -2843,7 +2835,6 @@ namespace PowerSDR
             udDSPLevelerDecay_ValueChanged(this, e);
             udDSPLevelerHangTime_ValueChanged(this, e);
             //ALC
-            chkDSPALCEnabled_CheckedChanged(this, e);
             udDSPALCThreshold_ValueChanged(this, e);
             udDSPALCAttack_ValueChanged(this, e);
             udDSPALCDecay_ValueChanged(this, e);
@@ -3217,6 +3208,20 @@ namespace PowerSDR
 
         #region Properties
 
+        public bool LimitStitchedRx
+        {
+            get
+            {
+                if (chkLimitRX != null) return chkLimitRX.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkLimitRX != null)
+                    chkLimitRX.Checked = value;
+            }
+        }
+
         public bool AlexTRRelay
         {
             get
@@ -3254,6 +3259,19 @@ namespace PowerSDR
             set
             {
                 if (udHermesStepAttenuatorData != null) udHermesStepAttenuatorData.Value = value;
+            }
+        }
+
+        public bool RX2EnableAtt
+        {
+            get
+            {
+                if (chkRX2StepAtt != null) return chkRX2StepAtt.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkRX2StepAtt != null) chkRX2StepAtt.Checked = value;
             }
         }
 
@@ -5973,9 +5991,10 @@ namespace PowerSDR
                 labelRXAntControl.Text = " EXT2  EXT1  XVTR";
                 labelATTOnTX.Visible = true;
                 udATTOnTX.Visible = true;
-               // console.RX2PreampPresent = true;
-                console.RX2PreampPresent = false;
+                console.RX2PreampPresent = true;
+               // console.RX2PreampPresent = false;
             }
+            console.ANAN100DPresent = radGenModelANAN100D.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
             if (radGenModelANAN100D.Checked)
@@ -6059,6 +6078,9 @@ namespace PowerSDR
                     nr = 2;
                 }
                 else nr = 4;
+#if LINCOR
+                nr = 5;
+#endif
 
                 int old_rate = console.NReceivers;
                 int new_rate = nr;
@@ -6853,7 +6875,7 @@ namespace PowerSDR
                 false);
             if (done) MessageBox.Show("Level Calibration complete.");
             btnGeneralCalLevelStart.Enabled = true;
-            UpdateDisplayMeter();
+           // UpdateDisplayMeter();
 
         }
 
@@ -6866,7 +6888,7 @@ namespace PowerSDR
                 false);
             if (done) MessageBox.Show("Level Calibration complete.");
             btnCalLevel.Enabled = true;
-            UpdateDisplayMeter();
+          //  UpdateDisplayMeter();
 
         }
 
@@ -6974,16 +6996,6 @@ namespace PowerSDR
         private void chkGeneralCustomFilter_CheckedChanged(object sender, System.EventArgs e)
         {
             console.EnableLPF0 = chkGeneralCustomFilter.Checked;
-        }
-
-        private void chkGeneralUpdateRelease_CheckedChanged(object sender, System.EventArgs e)
-        {
-            console.NotifyOnRelease = chkGeneralUpdateRelease.Checked;
-        }
-
-        private void chkGeneralUpdateBeta_CheckedChanged(object sender, System.EventArgs e)
-        {
-            console.NotifyOnBeta = chkGeneralUpdateBeta.Checked;
         }
 
         private void chkGenAutoMute_CheckedChanged(object sender, System.EventArgs e)
@@ -10093,11 +10105,6 @@ namespace PowerSDR
         #endregion
 
         #region ALC
-
-        private void chkDSPALCEnabled_CheckedChanged(object sender, System.EventArgs e)
-        {
-            console.radio.GetDSPTX(0).TXALCOn = chkDSPALCEnabled.Checked;
-        }
 
         private void udDSPALCHangTime_ValueChanged(object sender, System.EventArgs e)
         {
@@ -16253,7 +16260,7 @@ namespace PowerSDR
 
         private void chkHermesStepAttenuator_CheckedChanged(object sender, EventArgs e)
         {
-            console.RX1StepAttenuator = chkHermesStepAttenuator.Checked;
+            console.RX1StepAttPresent = chkHermesStepAttenuator.Checked;
             if (chkHermesStepAttenuator.Checked)
             {
                 udHermesStepAttenuatorData_ValueChanged(this, EventArgs.Empty);
@@ -16267,6 +16274,11 @@ namespace PowerSDR
             if (AlexPresent && !console.ANAN10Present)
                 udHermesStepAttenuatorData.Maximum = (decimal)61;
             else udHermesStepAttenuatorData.Maximum = (decimal)31;
+        }
+
+        private void chkRX2StepAtt_CheckedChanged(object sender, EventArgs e)
+        {
+            console.RX2StepAttPresent = chkRX2StepAtt.Checked;
         }
 
         private void udAlex160mLPFStart_ValueChanged(object sender, EventArgs e)

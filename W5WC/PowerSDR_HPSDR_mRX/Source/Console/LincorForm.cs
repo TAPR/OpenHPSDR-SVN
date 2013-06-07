@@ -85,7 +85,7 @@ namespace PowerSDR
         {
             tt_cal = true;
             lincor.reset();
-            lincor.setLincorTwoTone(-750, +750, 0.500, 0.500, 1);
+            lincor.setLincorTwoTone(-750, +750, 0.500, 0.500, 1, 0);
             Thread.Sleep(100);
             bool oldmox = console.MOX;
             console.MOX = true;
@@ -94,7 +94,7 @@ namespace PowerSDR
             Thread.Sleep(1100);
             console.MOX = oldmox;
             if (!chkDSPXLTwoTone.Checked)
-                lincor.setLincorTwoTone(-750, +750, 0.500, 0.500, 0);
+                lincor.setLincorTwoTone(-750, +750, 0.500, 0.500, 0, 0);
             tt_cal = false;
         }
 
@@ -102,11 +102,11 @@ namespace PowerSDR
         {
             if (chkDSPXLTwoTone.Checked)
             {
-                lincor.setLincorTwoTone(-750, +750, 0.500, 0.500, 1);
+                lincor.setLincorTwoTone(-750, +750, 0.500, 0.500, 1, 0);
             }
             else
             {
-                lincor.setLincorTwoTone(-750, +750, 0.500, 0.500, 0);
+                lincor.setLincorTwoTone(-750, +750, 0.500, 0.500, 0, 0);
             }
         }
 
@@ -136,6 +136,26 @@ namespace PowerSDR
         private void udDSPXLMoxDelay_ValueChanged(object sender, EventArgs e)
         {
             lincor.setLincorMoxDelay((double)udDSPXLMoxDelay.Value);
+        }
+
+        private void btnDSPXLSweep_Click(object sender, EventArgs e)
+        {
+            chkDSPXLAutoCorrect.Checked = false;
+            lincor.reset();
+            console.MOX = true;
+            Thread.Sleep(100);
+            lincor.setLincorTwoTone(-750, +750, 0.500, 0.500, 1, 1);
+        }
+
+        private void btnDSPXLSave_Click(object sender, EventArgs e)
+        {
+            System.IO.Directory.CreateDirectory("Lincor");
+            lincor.doLincorSaveCorrection("Lincor/" + txtDSPXLSave.Text + ".txt");
+        }
+
+        private void btnDSPXLRestore_Click(object sender, EventArgs e)
+        {
+            lincor.doLincorRestoreCorrection("Lincor/" + txtDSPXLRestore.Text + ".txt");
         }
 
         #endregion
@@ -173,15 +193,15 @@ namespace PowerSDR
                 resetConsole();
         }
 
-        private void setConsole()
+        /*private void setConsole()
         {
-            /*
-             * This version of code assumes that the TX samples are being returned on receiver 2 and
-             * that receiver 1 is being used to receive the OUTPUT of the amplifier to be corrected.
-             * VFO-A + RIT is assumed to hold the desired frequency and VFO-B will be forced to this same
-             * frequency during transmissions so that RX2 can capture and return the transmit sample
-             * stream.  XIT is not allowed as receive and transmit frequencies must match.
-            */
+            //
+             // This version of code assumes that the TX samples are being returned on receiver 2 and
+             // that receiver 1 is being used to receive the OUTPUT of the amplifier to be corrected.
+             // VFO-A + RIT is assumed to hold the desired frequency and VFO-B will be forced to this same
+             // frequency during transmissions so that RX2 can capture and return the transmit sample
+             // stream.  XIT is not allowed as receive and transmit frequencies must match.
+           //
             if ((lincor.auto == 1) || tt_cal)
             {
                 console.RX2Enabled = true;
@@ -201,16 +221,40 @@ namespace PowerSDR
                 console.VFOBTX = true;
                 console_set = true;
             }
+        }*/
+
+        private void setConsole()
+        {
+            //Version assuming TX samples come back in rx5.  rx5 will be set to VFOA freq.
+            //Duplex must be used to get RX samples back in rx1 while transmitting on VFOA.
+            if ((lincor.auto == 1) || tt_cal)
+            {
+                if (console.VFOATX) 
+                    JanusAudio.SetVFOfreqRX5(console.VFOAFreq);
+                if (console.VFOBTX)
+                    if (console.RX2Enabled == true)
+                        JanusAudio.SetVFOfreqRX5(console.VFOBFreq);
+                    else
+                    {
+                        console.VFOBTX = false;
+                        console.VFOATX = true;
+                    }
+                rit = console.RITValue;
+                xit = console.XITValue;
+                riton = console.RITOn;
+                xiton = console.XITOn;
+
+                if (riton) console.XITValue = (int)rit;
+
+                console_set = true;
+            }
         }
 
         private void resetConsole()
         {
             if (console_set)
             {
-                console.VFOBFreq = vfoB_oldfreq;
-                console.XITOn = xiton;
-                console.VFOATX = vfoA_tx;
-                console.VFOBTX = vfoB_tx;
+                console.XITValue = (int)xit;
                 console_set = false;
             }
         }
@@ -296,7 +340,13 @@ namespace PowerSDR
         public static extern void doLincorPrintSamples(string filename);
 
         [DllImport("LincorDLL.dll", EntryPoint = "setLincorTwoTone", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void setLincorTwoTone(double ftone1, double ftone2, double amptone1, double amptone2, int doit);
+        public static extern void setLincorTwoTone(double ftone1, double ftone2, double amptone1, double amptone2, int doit, int mode);
+
+        [DllImport("LincorDLL.dll", EntryPoint = "doLincorSaveCorrection", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void doLincorSaveCorrection(string filename);
+
+        [DllImport("LincorDLL.dll", EntryPoint = "doLincorRestoreCorrection", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void doLincorRestoreCorrection(string filename);
 
         #endregion
 

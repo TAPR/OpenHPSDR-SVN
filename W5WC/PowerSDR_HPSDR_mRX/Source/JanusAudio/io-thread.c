@@ -1264,6 +1264,15 @@ void IOThreadMainLoop(void) {
 					//FPGAWriteBufp[writebufpos] &= 1; // not needed ?
 					switch (out_control_idx) {
 					case 0:
+					case 14:
+					case 15:
+					case 16:
+					case 17:
+					case 18:
+					case 19:
+					case 20:
+					case 21:
+					case 22:
 						FPGAWriteBufp[writebufpos] |= 0;
 						break;
 					case 1: //TX VFO
@@ -1287,7 +1296,7 @@ void IOThreadMainLoop(void) {
 					case 7: //Preamp control
 						FPGAWriteBufp[writebufpos] |= 0x14; //C0 0001 010x
 						break;
-					case 8: // Alex 2 control
+					case 8: // Step ATT control
 						FPGAWriteBufp[writebufpos] |= 0x16; //C0 0001 011x
 						break;
 					case 9: // Alex 3 control
@@ -1305,32 +1314,6 @@ void IOThreadMainLoop(void) {
 					case 13: //RX7 VFO
 						FPGAWriteBufp[writebufpos] |= 0x10;
 						break;
-
-					case 14:
-						FPGAWriteBufp[writebufpos] |= 0;
-						break;
-					case 15:
-						FPGAWriteBufp[writebufpos] |= 0;
-						break;
-					case 16:
-						FPGAWriteBufp[writebufpos] |= 0;
-						break;
-					case 17:
-						FPGAWriteBufp[writebufpos] |= 0;
-						break;
-					case 18:
-						FPGAWriteBufp[writebufpos] |= 0;
-						break;
-					case 19:
-						FPGAWriteBufp[writebufpos] |= 0;
-						break;
-					case 20:
-						FPGAWriteBufp[writebufpos] |= 0;
-						break;
-					case 21:
-						FPGAWriteBufp[writebufpos] |= 0;
-						break;
-
 					}
 
 					ControlBytesOut[0] = FPGAWriteBufp[writebufpos];
@@ -1341,6 +1324,15 @@ void IOThreadMainLoop(void) {
 					// send sample rate in C1 low 2 bits
 					switch (out_control_idx) {
 					case 0:
+					case 14:
+					case 15:
+					case 16:
+					case 17:
+					case 18:
+					case 19:
+					case 20:
+					case 21:
+					case 22:
 						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
 						// printf(" C1Mask: %d\n", C1Mask);
 						break;
@@ -1376,7 +1368,7 @@ void IOThreadMainLoop(void) {
 						// printf(" pamp1: %d pamp2: %d\n", RX1Preamp, RX2Preamp);
 						break;
 					case 8:
-						FPGAWriteBufp[writebufpos] = 0;
+						FPGAWriteBufp[writebufpos] = (enable_RX2_step_att | rx2_step_att_data) & 0x3f;
 						break;
 					case 9:
 						FPGAWriteBufp[writebufpos] = 0;
@@ -1393,39 +1385,6 @@ void IOThreadMainLoop(void) {
 					case 13:
 						FPGAWriteBufp[writebufpos] =  (VFOfreq_rx7 >> 24) & 0xff; // RX7
 						break;
-
-					case 14:
-						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-						// printf(" C1Mask: %d\n", C1Mask);
-						break;
-					case 15:
-						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-						// printf(" C1Mask: %d\n", C1Mask);
-						break;
-					case 16:
-						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-						// printf(" C1Mask: %d\n", C1Mask);
-						break;
-					case 17:
-						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-						// printf(" C1Mask: %d\n", C1Mask);
-						break;
-					case 18:
-						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-						// printf(" C1Mask: %d\n", C1Mask);
-						break;
-					case 19:
-						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-						// printf(" C1Mask: %d\n", C1Mask);
-						break;
-					case 20:
-						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-						// printf(" C1Mask: %d\n", C1Mask);
-						break;
-					case 21:
-						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
-						// printf(" C1Mask: %d\n", C1Mask);
-						break;					
 					} 
 
 					ControlBytesOut[1] = FPGAWriteBufp[writebufpos];
@@ -1436,6 +1395,15 @@ void IOThreadMainLoop(void) {
 
 					switch (out_control_idx) {
 					case 0:
+					case 14:
+					case 15:
+					case 16:
+					case 17:
+					case 18:
+					case 19:
+					case 20:
+					case 21:
+					case 22:
 						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
 						break;
 					case 1:
@@ -1461,7 +1429,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = LineBoost & 0x1f; 
 						break;
 					case 8:
-						FPGAWriteBufp[writebufpos] = Alex2HPFMask & 0x7f;
+						FPGAWriteBufp[writebufpos] = 0; //Alex2HPFMask & 0x7f;
 						break;
 					case 9:
 						FPGAWriteBufp[writebufpos] = Alex3HPFMask & 0x7f;
@@ -1478,31 +1446,6 @@ void IOThreadMainLoop(void) {
 					case 13:
 						FPGAWriteBufp[writebufpos] = (VFOfreq_rx7 >> 16) & 0xff; // RX7 freq
 						break;
-
-					case 14:
-						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
-						break;
-					case 15:
-						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
-						break;
-					case 16:
-						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
-						break;
-					case 17:
-						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
-						break;
-					case 18:
-						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
-						break;
-					case 19:
-						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
-						break;
-					case 20:
-						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
-						break;
-					case 21:
-						FPGAWriteBufp[writebufpos] = (PennyOCBits | EClass) & 0xff; 
-						break;					
 					}
 
 					ControlBytesOut[2] = FPGAWriteBufp[writebufpos];
@@ -1512,6 +1455,15 @@ void IOThreadMainLoop(void) {
 					out_state = OUT_STATE_CONTROL4;
 					switch (out_control_idx) {
 					case 0:
+					case 14:
+					case 15:
+					case 16:
+					case 17:
+					case 18:
+					case 19:
+					case 20:
+					case 21:
+					case 22:
 						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
 							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
 						break;
@@ -1537,7 +1489,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = (UserOut0 | UserOut1 | UserOut2 | UserOut3) & 0x0f;
 						break;
 					case 8:
-						FPGAWriteBufp[writebufpos] = Alex2LPFMask & 0x7f;
+						FPGAWriteBufp[writebufpos] = 0;//Alex2LPFMask & 0x7f;
 						break;
 					case 9:
 						FPGAWriteBufp[writebufpos] = Alex3LPFMask & 0x7f;
@@ -1554,39 +1506,6 @@ void IOThreadMainLoop(void) {
 					case 13:
 						FPGAWriteBufp[writebufpos] = (VFOfreq_rx7 >> 8) & 0xff;
 						break;
-
-					case 14:
-						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
-							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
-						break;
-					case 15:
-						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
-							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
-						break;
-					case 16:
-						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
-							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
-						break;
-					case 17:
-						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
-							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
-						break;
-					case 18:
-						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
-							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
-						break;
-					case 19:
-						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
-							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
-						break;
-					case 20:
-						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
-							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
-						break;
-					case 21:
-						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
-							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
-						break;
 					}                                                         
 
 					ControlBytesOut[3] = FPGAWriteBufp[writebufpos];
@@ -1597,6 +1516,15 @@ void IOThreadMainLoop(void) {
 					// write_buf[writebufpos] = ControlBytesIn[4];
 					switch (out_control_idx) {
 					case 0:
+					case 14:
+					case 15:
+					case 16:
+					case 17:
+					case 18:
+					case 19:
+					case 20:
+					case 21:
+					case 22:
 						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
 						break;
 					case 1:
@@ -1618,8 +1546,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = AlexLPFMask & 0x7f;
 						break;
 					case 7:
-						FPGAWriteBufp[writebufpos] = (enable_RX1_step_att | enable_RX2_step_att | 
-							                          enable_RX3_step_att | step_att_data) & 0xff;
+						FPGAWriteBufp[writebufpos] = (enable_RX1_step_att | rx1_step_att_data) & 0x3f;
 						break;
 					case 8:
 						FPGAWriteBufp[writebufpos] = 0;
@@ -1639,31 +1566,6 @@ void IOThreadMainLoop(void) {
 					case 13:
 						FPGAWriteBufp[writebufpos] = VFOfreq_rx7 & 0xff;
 						break;
-
-					case 14:
-						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
-						break;
-					case 15:
-						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
-						break;
-					case 16:
-						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
-						break;
-					case 17:
-						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
-						break;
-					case 18:
-						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
-						break;
-					case 19:
-						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
-						break;
-					case 20:
-						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
-						break;
-					case 21:
-						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
-						break;			
 					}
 
 					ControlBytesOut[4] = FPGAWriteBufp[writebufpos];
@@ -1701,7 +1603,7 @@ void IOThreadMainLoop(void) {
 						//out_control_idx = 8; //  Goto Alex 2 Controls
 						out_control_idx = 20;
 						break;
-					case 8: // Alex 2 control
+					case 8: // Step ATT control
 						// out_control_idx = 0;
 						out_control_idx = 21;
 						break;
@@ -1712,7 +1614,7 @@ void IOThreadMainLoop(void) {
 						out_control_idx = 0;
 						break;
 					case 11: // rx5 vfo
-						out_control_idx = 6;
+						out_control_idx = 22;
 						break;
 					case 12: //rx6 vfo
 						out_control_idx = 13;
@@ -1740,9 +1642,12 @@ void IOThreadMainLoop(void) {
 						out_control_idx = 7;
 						break;
 					case 20: 
-						out_control_idx = 1; //8;
+						out_control_idx = 8; 
 						break;
 					case 21: 
+						out_control_idx = 11; 
+						break;
+					case 22: 
 						out_control_idx = 1;
 						break;				
 					}

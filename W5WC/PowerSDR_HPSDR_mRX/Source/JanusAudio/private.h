@@ -280,7 +280,9 @@ extern int MercRandom;
 extern int enable_RX1_step_att;
 extern int enable_RX2_step_att;
 extern int enable_RX3_step_att;
-extern int step_att_data;
+extern int rx1_step_att_data;
+extern int rx2_step_att_data;
+extern int rx3_step_att_data;
 
 extern int MicBoost;
 extern int LineIn;

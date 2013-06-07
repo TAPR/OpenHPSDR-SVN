@@ -784,7 +784,7 @@ namespace PowerSDR
         unsafe public static void SetVFOfreqRX5(double f)
         {
             lastVFORX5freq = f;
-            int f_freq = (int)((f * 1e6 * freq_correction_factor) + high_freq_offset);
+            int f_freq = (int)((f * 1e6 * freq_correction_factor)); // + high_freq_offset);
             SetRX5VFOfreq(f_freq); // highest freq
         }
 
@@ -875,7 +875,13 @@ namespace PowerSDR
         unsafe public static extern void EnableRX3StepAtten(int bits);
         
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetStepAttenData(int bits);
+        unsafe public static extern void SetRX1StepAttenData(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetRX2StepAttenData(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetRX3StepAttenData(int bits);
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern int getAndResetADC_Overload();

@@ -348,9 +348,6 @@ namespace PowerSDR
 		[DllImport("DttSP.dll", EntryPoint="SetTXLevelerSt")]///
 		public static extern void SetTXLevelerSt(uint thread, bool state);
 
-        [DllImport("DttSP.dll", EntryPoint = "SetTXALCSt")]///
-        public static extern void SetTXALCSt(uint thread, bool state);
-
 		[DllImport("DttSP.dll", EntryPoint="SetWindow")]///
 		public static extern void SetWindow(uint thread, Window windowset);
 

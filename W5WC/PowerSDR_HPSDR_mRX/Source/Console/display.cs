@@ -598,9 +598,9 @@ namespace PowerSDR
                 Audio.ScopeDisplayWidth = W;
                 if (specready)
                 {
-                    if (rx1_dsp_mode == DSPMode.DRM)
-                        console.specRX.GetSpecRX(0).Pixels = 4096;
-                    else
+                   // if (rx1_dsp_mode == DSPMode.DRM)
+                     //   console.specRX.GetSpecRX(0).Pixels = 4096;
+                   // else
                     console.specRX.GetSpecRX(0).Pixels = W;
                     console.specRX.GetSpecRX(1).Pixels = W;
                 }

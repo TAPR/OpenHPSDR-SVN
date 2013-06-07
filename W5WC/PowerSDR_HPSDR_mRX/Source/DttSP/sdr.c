@@ -1474,8 +1474,8 @@ do_tx_post (unsigned int thread)
 	
 	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.o), peakr(tx[thread].buf.o));
 
-	if (tx[thread].alc.flag || (tx[thread].mode == AM) || (tx[thread].mode == SAM))  // (NR0V)
-		WcpAGC (tx[thread].alc.gen);
+	// if (tx[thread].alc.flag || (tx[thread].mode == AM) || (tx[thread].mode == SAM))  // (NR0V)
+		WcpAGC (tx[thread].alc.gen); // ALC hardwired to ON
 
 	if ((tx[thread].mode == AM) || (tx[thread].mode == SAM))
 	{

@@ -1025,16 +1025,14 @@ KD5TFDVK6APHAUDIO_API void SetUserOut3(int out) {
 /*
 C4
 0 0 0 0 0 0 0 0
-| | | |       |
-| | | +-------+------------ Hermes Input Attenuator (0 – 31dB) [4:0]
-| | +---------------------- Hermes Attenuator enable (0 = disable, 1 = enable)
-| +------------------------ RX2 Step Attenuator enable (0 = disable, 1 = enable)
-+-------------------------- RX3 Step Attenuator enable (0 = disable, 1 = enable)
-                            If disabled then Preamp On/Off bit is used.
+    | |       |
+    | +-------+------------ Hermes/Angelia/Orion RX1 Input Attenuator (0 – 31dB) [4:0]
+    +---------------------- Hermes/Angelia/Orion RX1 Attenuator enable (0 = disable, 1 = enable)
+                             If disabled then Preamp On/Off bit is used.
 */
 
-KD5TFDVK6APHAUDIO_API void SetStepAttenData(int bits) { 
-		step_att_data = bits & 0x1f; 
+KD5TFDVK6APHAUDIO_API void SetRX1StepAttenData(int bits) { 
+		rx1_step_att_data = bits & 0x1f; 
     	return;
 }
 
@@ -1048,9 +1046,24 @@ KD5TFDVK6APHAUDIO_API void EnableRX1StepAtten(int bits) {
 	return;
 }
 
+/*
+C0
+0 0 0 1 0 1 1 x   
+C1
+0 0 0 0 0 0 0 0
+    | |       |
+    | +-------+------------ Angelia/Orion RX2 Input Attenuator (0 – 31dB) [4:0]
+    +---------------------- Angelia/Orion RX2 Attenuator enable (0 = disable, 1 = enable)
+*/
+
+KD5TFDVK6APHAUDIO_API void SetRX2StepAttenData(int bits) { 
+		rx2_step_att_data = bits & 0x1f; 
+    	return;
+}
+
 KD5TFDVK6APHAUDIO_API void EnableRX2StepAtten(int bits) { 
 	if ( bits != 0 ) { 
-		enable_RX2_step_att = 0x40; 
+		enable_RX2_step_att = 0x20; 
 	} 
 	else { 
 		enable_RX2_step_att = 0; 
@@ -1058,9 +1071,22 @@ KD5TFDVK6APHAUDIO_API void EnableRX2StepAtten(int bits) {
 	return;
 }
 
+/*
+C2
+0 0 0 0 0 0 0 0
+    | |       |
+    | +-------+------------ Orion RX3 Input Attenuator (0 – 31dB) [4:0]
+    +---------------------- Orion RX3 Attenuator enable (0 = disable, 1 = enable)
+*/
+
+KD5TFDVK6APHAUDIO_API void SetRX3StepAttenData(int bits) { 
+		rx3_step_att_data = bits & 0x1f; 
+    	return;
+}
+
 KD5TFDVK6APHAUDIO_API void EnableRX3StepAtten(int bits) { 
 	if ( bits != 0 ) { 
-		enable_RX3_step_att = 0x80; 
+		enable_RX3_step_att = 0x20; 
 	} 
 	else { 
 		enable_RX3_step_att = 0; 
