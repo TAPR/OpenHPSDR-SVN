@@ -62,6 +62,14 @@
             this.udDSPXLIntervals = new System.Windows.Forms.NumericUpDownTS();
             this.labelTS4 = new System.Windows.Forms.LabelTS();
             this.udDSPXLMoxDelay = new System.Windows.Forms.NumericUpDownTS();
+            this.btnDSPXLSweep = new System.Windows.Forms.ButtonTS();
+            this.grpLincorSave = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS6 = new System.Windows.Forms.LabelTS();
+            this.txtDSPXLSave = new System.Windows.Forms.TextBoxTS();
+            this.btnDSPXLSave = new System.Windows.Forms.ButtonTS();
+            this.labelTS5 = new System.Windows.Forms.LabelTS();
+            this.txtDSPXLRestore = new System.Windows.Forms.TextBoxTS();
+            this.btnDSPXLRestore = new System.Windows.Forms.ButtonTS();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPXLPhnum)).BeginInit();
             this.grpLincorPS.SuspendLayout();
             this.grpLincorInfo.SuspendLayout();
@@ -69,6 +77,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPXLNsamps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPXLIntervals)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPXLMoxDelay)).BeginInit();
+            this.grpLincorSave.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -142,9 +151,9 @@
             this.grpLincorPS.Controls.Add(this.btnDSPXLPrintSamples);
             this.grpLincorPS.Controls.Add(this.labelTS1);
             this.grpLincorPS.Controls.Add(this.txtSamplesFile);
-            this.grpLincorPS.Location = new System.Drawing.Point(388, 255);
+            this.grpLincorPS.Location = new System.Drawing.Point(270, 255);
             this.grpLincorPS.Name = "grpLincorPS";
-            this.grpLincorPS.Size = new System.Drawing.Size(200, 123);
+            this.grpLincorPS.Size = new System.Drawing.Size(125, 123);
             this.grpLincorPS.TabIndex = 24;
             this.grpLincorPS.TabStop = false;
             this.grpLincorPS.Text = "Print Samples";
@@ -152,7 +161,7 @@
             // btnDSPXLPrintSamples
             // 
             this.btnDSPXLPrintSamples.Image = null;
-            this.btnDSPXLPrintSamples.Location = new System.Drawing.Point(64, 50);
+            this.btnDSPXLPrintSamples.Location = new System.Drawing.Point(25, 59);
             this.btnDSPXLPrintSamples.Name = "btnDSPXLPrintSamples";
             this.btnDSPXLPrintSamples.Size = new System.Drawing.Size(75, 23);
             this.btnDSPXLPrintSamples.TabIndex = 2;
@@ -166,15 +175,15 @@
             this.labelTS1.Image = null;
             this.labelTS1.Location = new System.Drawing.Point(6, 27);
             this.labelTS1.Name = "labelTS1";
-            this.labelTS1.Size = new System.Drawing.Size(57, 13);
+            this.labelTS1.Size = new System.Drawing.Size(26, 13);
             this.labelTS1.TabIndex = 1;
-            this.labelTS1.Text = "File Name:";
+            this.labelTS1.Text = "File:";
             // 
             // txtSamplesFile
             // 
-            this.txtSamplesFile.Location = new System.Drawing.Point(94, 24);
+            this.txtSamplesFile.Location = new System.Drawing.Point(35, 24);
             this.txtSamplesFile.Name = "txtSamplesFile";
-            this.txtSamplesFile.Size = new System.Drawing.Size(100, 20);
+            this.txtSamplesFile.Size = new System.Drawing.Size(77, 20);
             this.txtSamplesFile.TabIndex = 0;
             this.txtSamplesFile.Text = "samples";
             // 
@@ -523,11 +532,97 @@
             65536});
             this.udDSPXLMoxDelay.ValueChanged += new System.EventHandler(this.udDSPXLMoxDelay_ValueChanged);
             // 
+            // btnDSPXLSweep
+            // 
+            this.btnDSPXLSweep.Image = null;
+            this.btnDSPXLSweep.Location = new System.Drawing.Point(38, 210);
+            this.btnDSPXLSweep.Name = "btnDSPXLSweep";
+            this.btnDSPXLSweep.Size = new System.Drawing.Size(85, 23);
+            this.btnDSPXLSweep.TabIndex = 31;
+            this.btnDSPXLSweep.Text = "Sweep";
+            this.btnDSPXLSweep.UseVisualStyleBackColor = true;
+            this.btnDSPXLSweep.Click += new System.EventHandler(this.btnDSPXLSweep_Click);
+            // 
+            // grpLincorSave
+            // 
+            this.grpLincorSave.Controls.Add(this.labelTS6);
+            this.grpLincorSave.Controls.Add(this.txtDSPXLSave);
+            this.grpLincorSave.Controls.Add(this.btnDSPXLSave);
+            this.grpLincorSave.Controls.Add(this.labelTS5);
+            this.grpLincorSave.Controls.Add(this.txtDSPXLRestore);
+            this.grpLincorSave.Controls.Add(this.btnDSPXLRestore);
+            this.grpLincorSave.Location = new System.Drawing.Point(401, 255);
+            this.grpLincorSave.Name = "grpLincorSave";
+            this.grpLincorSave.Size = new System.Drawing.Size(187, 123);
+            this.grpLincorSave.TabIndex = 32;
+            this.grpLincorSave.TabStop = false;
+            this.grpLincorSave.Text = "Correction Save / Restore";
+            // 
+            // labelTS6
+            // 
+            this.labelTS6.AutoSize = true;
+            this.labelTS6.Image = null;
+            this.labelTS6.Location = new System.Drawing.Point(75, 27);
+            this.labelTS6.Name = "labelTS6";
+            this.labelTS6.Size = new System.Drawing.Size(26, 13);
+            this.labelTS6.TabIndex = 6;
+            this.labelTS6.Text = "File:";
+            // 
+            // txtDSPXLSave
+            // 
+            this.txtDSPXLSave.Location = new System.Drawing.Point(104, 24);
+            this.txtDSPXLSave.Name = "txtDSPXLSave";
+            this.txtDSPXLSave.Size = new System.Drawing.Size(77, 20);
+            this.txtDSPXLSave.TabIndex = 5;
+            this.txtDSPXLSave.Text = "40MCorr";
+            // 
+            // btnDSPXLSave
+            // 
+            this.btnDSPXLSave.Image = null;
+            this.btnDSPXLSave.Location = new System.Drawing.Point(6, 22);
+            this.btnDSPXLSave.Name = "btnDSPXLSave";
+            this.btnDSPXLSave.Size = new System.Drawing.Size(53, 23);
+            this.btnDSPXLSave.TabIndex = 4;
+            this.btnDSPXLSave.Text = "Save";
+            this.btnDSPXLSave.UseVisualStyleBackColor = true;
+            this.btnDSPXLSave.Click += new System.EventHandler(this.btnDSPXLSave_Click);
+            // 
+            // labelTS5
+            // 
+            this.labelTS5.AutoSize = true;
+            this.labelTS5.Image = null;
+            this.labelTS5.Location = new System.Drawing.Point(75, 77);
+            this.labelTS5.Name = "labelTS5";
+            this.labelTS5.Size = new System.Drawing.Size(26, 13);
+            this.labelTS5.TabIndex = 3;
+            this.labelTS5.Text = "File:";
+            // 
+            // txtDSPXLRestore
+            // 
+            this.txtDSPXLRestore.Location = new System.Drawing.Point(104, 74);
+            this.txtDSPXLRestore.Name = "txtDSPXLRestore";
+            this.txtDSPXLRestore.Size = new System.Drawing.Size(77, 20);
+            this.txtDSPXLRestore.TabIndex = 2;
+            this.txtDSPXLRestore.Text = "40MCorr";
+            // 
+            // btnDSPXLRestore
+            // 
+            this.btnDSPXLRestore.Image = null;
+            this.btnDSPXLRestore.Location = new System.Drawing.Point(6, 72);
+            this.btnDSPXLRestore.Name = "btnDSPXLRestore";
+            this.btnDSPXLRestore.Size = new System.Drawing.Size(53, 23);
+            this.btnDSPXLRestore.TabIndex = 0;
+            this.btnDSPXLRestore.Text = "Restore";
+            this.btnDSPXLRestore.UseVisualStyleBackColor = true;
+            this.btnDSPXLRestore.Click += new System.EventHandler(this.btnDSPXLRestore_Click);
+            // 
             // LincorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 397);
+            this.Controls.Add(this.grpLincorSave);
+            this.Controls.Add(this.btnDSPXLSweep);
             this.Controls.Add(this.labelTS4);
             this.Controls.Add(this.udDSPXLMoxDelay);
             this.Controls.Add(this.lblDelay);
@@ -548,7 +643,7 @@
             this.Controls.Add(this.labelTS133);
             this.Controls.Add(this.udDSPXLIntervals);
             this.Name = "LincorForm";
-            this.Text = "Linearity Correction";
+            this.Text = "Linearity Correction 0.13";
             ((System.ComponentModel.ISupportInitialize)(this.udDSPXLPhnum)).EndInit();
             this.grpLincorPS.ResumeLayout(false);
             this.grpLincorPS.PerformLayout();
@@ -558,6 +653,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPXLNsamps)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPXLIntervals)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPXLMoxDelay)).EndInit();
+            this.grpLincorSave.ResumeLayout(false);
+            this.grpLincorSave.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -598,5 +695,13 @@
         private System.Windows.Forms.LabelTS lblDelay;
         private System.Windows.Forms.LabelTS labelTS4;
         private System.Windows.Forms.NumericUpDownTS udDSPXLMoxDelay;
+        private System.Windows.Forms.ButtonTS btnDSPXLSweep;
+        private System.Windows.Forms.GroupBoxTS grpLincorSave;
+        private System.Windows.Forms.LabelTS labelTS6;
+        private System.Windows.Forms.TextBoxTS txtDSPXLSave;
+        private System.Windows.Forms.ButtonTS btnDSPXLSave;
+        private System.Windows.Forms.LabelTS labelTS5;
+        private System.Windows.Forms.TextBoxTS txtDSPXLRestore;
+        private System.Windows.Forms.ButtonTS btnDSPXLRestore;
     }
 }

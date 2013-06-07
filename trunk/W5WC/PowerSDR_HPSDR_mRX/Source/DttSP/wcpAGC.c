@@ -544,14 +544,6 @@ SetTXLevelerSt (unsigned int thread, BOOLEAN state)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void // (W5WC) ALC On/Off Control
-SetTXALCSt (unsigned int thread, BOOLEAN state)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	tx[thread].alc.flag = state;
-	sem_post(&top[thread].sync.upd.sem);
-}
-
 DttSP_EXP void
 SetTXLevelerAttack (unsigned int thread, int attack)
 {

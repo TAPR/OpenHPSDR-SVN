@@ -344,6 +344,7 @@ namespace PowerSDR
 
         const double KEEP_TIME = 0.1;
         private int max_w;
+        private double freq_offset = 12000.0;
 
         public void initAnalyzer()
         {
@@ -406,6 +407,14 @@ namespace PowerSDR
                         //FSCLIPH is bins-width if pan_slider is 0; it's 0 if pan_slider is 1
                         span_clip_l = (int)Math.Floor(pan_slider * (bins - width));
                         span_clip_h = bins - width - span_clip_l;
+
+                        if (Display.RX1DSPMode == DSPMode.DRM)
+                        {
+                            //Apply any desired frequency offset
+                            int bin_offset = (int)(freq_offset / bin_width);
+                            if ((span_clip_h -= bin_offset) < 0) span_clip_h = 0;
+                            span_clip_l = bins - width - span_clip_h;
+                        }
 
                         //As for the low and high frequencies that are being displayed:
                         low = -(int)((double)stitches / 2.0 * bw_per_subspan - (double)span_clip_l * bin_width + bin_width / 2.0);

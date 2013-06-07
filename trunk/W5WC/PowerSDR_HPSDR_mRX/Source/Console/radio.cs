@@ -1259,7 +1259,6 @@ namespace PowerSDR
 			TXLevelerDecay = tx_leveler_decay;
 			TXLevelerHang = tx_leveler_hang;
 			TXLevelerOn = tx_leveler_on;
-            TXALCOn = tx_alc_on;
 			CurrentWindow = current_window;
 			SpectrumPolyphase = spectrum_polyphase;
 			TXSquelchThreshold = tx_squelch_threshold;
@@ -1856,25 +1855,6 @@ namespace PowerSDR
 				}
 			}
 		}
-
-        private bool tx_alc_on_dsp = true;
-        private bool tx_alc_on = true;
-        public bool TXALCOn
-        {
-            get { return tx_alc_on; }
-            set
-            {
-                tx_alc_on = value;
-                if (update)
-                {
-                    if (value != tx_alc_on_dsp || force)
-                    {
-                        DttSP.SetTXALCSt(thread, value);
-                        tx_alc_on_dsp = value;
-                    }
-                }
-            }
-        }
 
 		private Window current_window_dsp = Window.BLKHARRIS;
 		private Window current_window = Window.BLKHARRIS;

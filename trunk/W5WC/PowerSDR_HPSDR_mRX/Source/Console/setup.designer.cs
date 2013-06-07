@@ -272,6 +272,7 @@
             this.lblMetisIP = new System.Windows.Forms.LabelTS();
             this.lblMetisMAC = new System.Windows.Forms.LabelTS();
             this.tpGeneralOptions = new System.Windows.Forms.TabPage();
+            this.chkRX2StepAtt = new System.Windows.Forms.CheckBoxTS();
             this.grpHermesStepAttenuator = new System.Windows.Forms.GroupBoxTS();
             this.udHermesStepAttenuatorData = new System.Windows.Forms.NumericUpDownTS();
             this.chkHermesStepAttenuator = new System.Windows.Forms.CheckBoxTS();
@@ -319,9 +320,6 @@
             this.chkGenTX1Delay = new System.Windows.Forms.CheckBoxTS();
             this.grpGeneralProcessPriority = new System.Windows.Forms.GroupBoxTS();
             this.comboGeneralProcessPriority = new System.Windows.Forms.ComboBoxTS();
-            this.grpGeneralUpdates = new System.Windows.Forms.GroupBoxTS();
-            this.chkGeneralUpdateBeta = new System.Windows.Forms.CheckBoxTS();
-            this.chkGeneralUpdateRelease = new System.Windows.Forms.CheckBoxTS();
             this.tpGeneralCalibration = new System.Windows.Forms.TabPage();
             this.grpBoxTXDisplayCal = new System.Windows.Forms.GroupBoxTS();
             this.labelTS55 = new System.Windows.Forms.LabelTS();
@@ -1364,7 +1362,6 @@
             this.lblDSPLevelerThreshold = new System.Windows.Forms.LabelTS();
             this.tbDSPLevelerHangThreshold = new System.Windows.Forms.TrackBarTS();
             this.grpDSPALC = new System.Windows.Forms.GroupBoxTS();
-            this.chkDSPALCEnabled = new System.Windows.Forms.CheckBoxTS();
             this.lblDSPALCHangThreshold = new System.Windows.Forms.LabelTS();
             this.tbDSPALCHangThreshold = new System.Windows.Forms.TrackBarTS();
             this.udDSPALCHangTime = new System.Windows.Forms.NumericUpDownTS();
@@ -2147,6 +2144,8 @@
             this.chkTestX2Pin2 = new System.Windows.Forms.CheckBoxTS();
             this.chkTestX2Pin1 = new System.Windows.Forms.CheckBoxTS();
             this.grpTestTXIMD = new System.Windows.Forms.GroupBoxTS();
+            this.radTestIMDOutput = new System.Windows.Forms.RadioButtonTS();
+            this.radTestIMDInput = new System.Windows.Forms.RadioButtonTS();
             this.lblTwoToneLevel = new System.Windows.Forms.LabelTS();
             this.udTwoToneLevel = new System.Windows.Forms.NumericUpDownTS();
             this.lblTestToneFreq2 = new System.Windows.Forms.LabelTS();
@@ -2216,8 +2215,6 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
-            this.radTestIMDInput = new System.Windows.Forms.RadioButtonTS();
-            this.radTestIMDOutput = new System.Windows.Forms.RadioButtonTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -2308,7 +2305,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udGenTX1Delay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralX2Delay)).BeginInit();
             this.grpGeneralProcessPriority.SuspendLayout();
-            this.grpGeneralUpdates.SuspendLayout();
             this.tpGeneralCalibration.SuspendLayout();
             this.grpBoxTXDisplayCal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTXDisplayCalOffset)).BeginInit();
@@ -6398,6 +6394,7 @@
             // tpGeneralOptions
             // 
             this.tpGeneralOptions.BackColor = System.Drawing.SystemColors.Control;
+            this.tpGeneralOptions.Controls.Add(this.chkRX2StepAtt);
             this.tpGeneralOptions.Controls.Add(this.grpHermesStepAttenuator);
             this.tpGeneralOptions.Controls.Add(this.grpGenCustomTitleText);
             this.tpGeneralOptions.Controls.Add(this.grpOptMisc);
@@ -6406,12 +6403,23 @@
             this.tpGeneralOptions.Controls.Add(this.grpGenTuningOptions);
             this.tpGeneralOptions.Controls.Add(this.grpGeneralOptions);
             this.tpGeneralOptions.Controls.Add(this.grpGeneralProcessPriority);
-            this.tpGeneralOptions.Controls.Add(this.grpGeneralUpdates);
             this.tpGeneralOptions.Location = new System.Drawing.Point(4, 22);
             this.tpGeneralOptions.Name = "tpGeneralOptions";
             this.tpGeneralOptions.Size = new System.Drawing.Size(580, 318);
             this.tpGeneralOptions.TabIndex = 1;
             this.tpGeneralOptions.Text = "Options";
+            // 
+            // chkRX2StepAtt
+            // 
+            this.chkRX2StepAtt.Image = null;
+            this.chkRX2StepAtt.Location = new System.Drawing.Point(426, 232);
+            this.chkRX2StepAtt.Name = "chkRX2StepAtt";
+            this.chkRX2StepAtt.Size = new System.Drawing.Size(115, 16);
+            this.chkRX2StepAtt.TabIndex = 4;
+            this.chkRX2StepAtt.Text = "Enable RX2 Att";
+            this.toolTip1.SetToolTip(this.chkRX2StepAtt, "Enable the step attenuator.");
+            this.chkRX2StepAtt.Visible = false;
+            this.chkRX2StepAtt.CheckedChanged += new System.EventHandler(this.chkRX2StepAtt_CheckedChanged);
             // 
             // grpHermesStepAttenuator
             // 
@@ -7135,42 +7143,6 @@
             this.comboGeneralProcessPriority.TabIndex = 0;
             this.toolTip1.SetToolTip(this.comboGeneralProcessPriority, "Sets the process priority of the PowerSDR software.");
             this.comboGeneralProcessPriority.SelectedIndexChanged += new System.EventHandler(this.comboGeneralProcessPriority_SelectedIndexChanged);
-            // 
-            // grpGeneralUpdates
-            // 
-            this.grpGeneralUpdates.Controls.Add(this.chkGeneralUpdateBeta);
-            this.grpGeneralUpdates.Controls.Add(this.chkGeneralUpdateRelease);
-            this.grpGeneralUpdates.Location = new System.Drawing.Point(414, 219);
-            this.grpGeneralUpdates.Name = "grpGeneralUpdates";
-            this.grpGeneralUpdates.Size = new System.Drawing.Size(120, 72);
-            this.grpGeneralUpdates.TabIndex = 24;
-            this.grpGeneralUpdates.TabStop = false;
-            this.grpGeneralUpdates.Text = "Update Notification";
-            this.grpGeneralUpdates.Visible = false;
-            // 
-            // chkGeneralUpdateBeta
-            // 
-            this.chkGeneralUpdateBeta.Image = null;
-            this.chkGeneralUpdateBeta.Location = new System.Drawing.Point(16, 48);
-            this.chkGeneralUpdateBeta.Name = "chkGeneralUpdateBeta";
-            this.chkGeneralUpdateBeta.Size = new System.Drawing.Size(56, 16);
-            this.chkGeneralUpdateBeta.TabIndex = 1;
-            this.chkGeneralUpdateBeta.Text = "Beta";
-            this.toolTip1.SetToolTip(this.chkGeneralUpdateBeta, "Check this box to enable the PowerSDR software to look at the FlexRadio website a" +
-        "nd see if there are any new Beta Releases");
-            this.chkGeneralUpdateBeta.CheckedChanged += new System.EventHandler(this.chkGeneralUpdateBeta_CheckedChanged);
-            // 
-            // chkGeneralUpdateRelease
-            // 
-            this.chkGeneralUpdateRelease.Image = null;
-            this.chkGeneralUpdateRelease.Location = new System.Drawing.Point(16, 24);
-            this.chkGeneralUpdateRelease.Name = "chkGeneralUpdateRelease";
-            this.chkGeneralUpdateRelease.Size = new System.Drawing.Size(72, 16);
-            this.chkGeneralUpdateRelease.TabIndex = 0;
-            this.chkGeneralUpdateRelease.Text = "Release";
-            this.toolTip1.SetToolTip(this.chkGeneralUpdateRelease, "Check this box to enable the PowerSDR software to look at the FlexRadio website a" +
-        "nd see if there are any new Official Releases");
-            this.chkGeneralUpdateRelease.CheckedChanged += new System.EventHandler(this.chkGeneralUpdateRelease_CheckedChanged);
             // 
             // tpGeneralCalibration
             // 
@@ -22062,7 +22034,6 @@
             // 
             // grpDSPALC
             // 
-            this.grpDSPALC.Controls.Add(this.chkDSPALCEnabled);
             this.grpDSPALC.Controls.Add(this.lblDSPALCHangThreshold);
             this.grpDSPALC.Controls.Add(this.tbDSPALCHangThreshold);
             this.grpDSPALC.Controls.Add(this.udDSPALCHangTime);
@@ -22081,20 +22052,6 @@
             this.grpDSPALC.TabIndex = 38;
             this.grpDSPALC.TabStop = false;
             this.grpDSPALC.Text = "ALC";
-            // 
-            // chkDSPALCEnabled
-            // 
-            this.chkDSPALCEnabled.Checked = true;
-            this.chkDSPALCEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDSPALCEnabled.Enabled = false;
-            this.chkDSPALCEnabled.Image = null;
-            this.chkDSPALCEnabled.Location = new System.Drawing.Point(16, 24);
-            this.chkDSPALCEnabled.Name = "chkDSPALCEnabled";
-            this.chkDSPALCEnabled.Size = new System.Drawing.Size(104, 16);
-            this.chkDSPALCEnabled.TabIndex = 44;
-            this.chkDSPALCEnabled.Text = "Enabled";
-            this.toolTip1.SetToolTip(this.chkDSPALCEnabled, "Check this box to Enable (activate) the ALC feature.");
-            this.chkDSPALCEnabled.CheckedChanged += new System.EventHandler(this.chkDSPALCEnabled_CheckedChanged);
             // 
             // lblDSPALCHangThreshold
             // 
@@ -34686,6 +34643,26 @@
             this.grpTestTXIMD.TabStop = false;
             this.grpTestTXIMD.Text = "Two Tone Test";
             // 
+            // radTestIMDOutput
+            // 
+            this.radTestIMDOutput.Checked = true;
+            this.radTestIMDOutput.Image = null;
+            this.radTestIMDOutput.Location = new System.Drawing.Point(70, 126);
+            this.radTestIMDOutput.Name = "radTestIMDOutput";
+            this.radTestIMDOutput.Size = new System.Drawing.Size(58, 16);
+            this.radTestIMDOutput.TabIndex = 101;
+            this.radTestIMDOutput.TabStop = true;
+            this.radTestIMDOutput.Text = "Output";
+            // 
+            // radTestIMDInput
+            // 
+            this.radTestIMDInput.Image = null;
+            this.radTestIMDInput.Location = new System.Drawing.Point(12, 126);
+            this.radTestIMDInput.Name = "radTestIMDInput";
+            this.radTestIMDInput.Size = new System.Drawing.Size(50, 16);
+            this.radTestIMDInput.TabIndex = 100;
+            this.radTestIMDInput.Text = "Input";
+            // 
             // lblTwoToneLevel
             // 
             this.lblTwoToneLevel.Image = null;
@@ -36008,26 +35985,6 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
-            // radTestIMDInput
-            // 
-            this.radTestIMDInput.Image = null;
-            this.radTestIMDInput.Location = new System.Drawing.Point(12, 126);
-            this.radTestIMDInput.Name = "radTestIMDInput";
-            this.radTestIMDInput.Size = new System.Drawing.Size(50, 16);
-            this.radTestIMDInput.TabIndex = 100;
-            this.radTestIMDInput.Text = "Input";
-            // 
-            // radTestIMDOutput
-            // 
-            this.radTestIMDOutput.Checked = true;
-            this.radTestIMDOutput.Image = null;
-            this.radTestIMDOutput.Location = new System.Drawing.Point(70, 126);
-            this.radTestIMDOutput.Name = "radTestIMDOutput";
-            this.radTestIMDOutput.Size = new System.Drawing.Size(58, 16);
-            this.radTestIMDOutput.TabIndex = 101;
-            this.radTestIMDOutput.TabStop = true;
-            this.radTestIMDOutput.Text = "Output";
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -36136,7 +36093,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udGenTX1Delay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralX2Delay)).EndInit();
             this.grpGeneralProcessPriority.ResumeLayout(false);
-            this.grpGeneralUpdates.ResumeLayout(false);
             this.tpGeneralCalibration.ResumeLayout(false);
             this.grpBoxTXDisplayCal.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udTXDisplayCalOffset)).EndInit();
@@ -37454,5 +37410,6 @@
         private System.Windows.Forms.TextBoxTS txtCAT2;
         private System.Windows.Forms.RadioButtonTS radTestIMDOutput;
         private System.Windows.Forms.RadioButtonTS radTestIMDInput;
+        private System.Windows.Forms.CheckBoxTS chkRX2StepAtt;
     }
 }
