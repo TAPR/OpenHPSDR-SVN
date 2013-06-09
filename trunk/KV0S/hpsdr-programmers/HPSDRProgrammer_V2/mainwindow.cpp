@@ -174,11 +174,18 @@ void MainWindow::browse()
 {
     QString dd = settings.value("dir").toString();
     QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),dd,tr("rbf Files (*.rbf)"));
-    QFileInfo *fileif = new QFileInfo(fileName);
-    qDebug() << fileif->filePath();
-    settings.setValue("dir", fileif->filePath());
-    ui->fileLineEdit->setText(fileName);
-    status( QString("Reading rbf file: %0").arg(fileName) );
+    if( fileName.contains("metis") || fileName.contains("Metis") || fileName.contains("hermes") || fileName.contains("Hermes") || fileName.contains("griffin") || fileName.contains("Griffin") || fileName.contains("angelia") || fileName.contains("Angelia") ){
+      QFileInfo *fileif = new QFileInfo(fileName);
+      qDebug() << fileif->filePath();
+      settings.setValue("dir", fileif->filePath());
+      ui->fileLineEdit->setText(fileName);
+      status( QString("Reading rbf file: %0").arg(fileName) );
+    }else{
+      QMessageBox::information(this, tr("HPSDRProgramer_V2"),
+              QString("HPSDRProgrammer will only write to boards with and ethernet connection! \n\n Use HPSDRBootloader as a JTAG programmer for %0").arg(fileName), QMessageBox::Close);
+      status( QString("HPSDRProgrammer will only write to boards with and ethernet connection!") );
+      status( QString("Use HPSDRBootloader as a JTAG programmer for %0").arg(fileName));
+    }
 }
 
 void MainWindow::clearDiscovery() {
