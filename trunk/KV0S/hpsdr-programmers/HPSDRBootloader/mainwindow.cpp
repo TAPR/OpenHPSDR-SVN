@@ -271,6 +271,8 @@ void MainWindow::bootloaderProgram() {
     handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
         qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
+        QMessageBox::information(this, tr("HPSDRBootloader"),
+              QString("Error: cannot open interface (are you running as root)"), QMessageBox::Close);
         status("Error: cannot open interface (are you running as root)");
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
@@ -334,6 +336,8 @@ void MainWindow::bootloaderErase() {
     handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
         qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
+        QMessageBox::information(this, tr("HPSDRBootloader"),
+              QString("Error: cannot open interface (are you running as root)"), QMessageBox::Close);
         status("Error: cannot open interface (are you running as root)");
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
@@ -380,6 +384,8 @@ void MainWindow::getMAC() {
         handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
+            QMessageBox::information(this, tr("HPSDRBootloader"),
+                  QString("Error: cannot open interface (are you running as root)"), QMessageBox::Close);
             status("Error: cannot open interface (are you running as root)");
         } else {
 
@@ -428,6 +434,8 @@ void MainWindow::getIP() {
         handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
+            QMessageBox::information(this, tr("HPSDRBootloader"),
+                  QString("Error: cannot open interface (are you running as root)"), QMessageBox::Close);
             status("Error: cannot open interface (are you running as root)");
         } else {
 
@@ -494,6 +502,8 @@ void MainWindow::setIP() {
     handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
+            QMessageBox::information(this, tr("HPSDRBootloader"),
+                  QString("Error: cannot open interface (are you running as root)"), QMessageBox::Close);
             status("Error: cannot open interface (are you running as root)");
         } else {
             state=WRITE_IP;
@@ -1063,6 +1073,8 @@ void MainWindow::jtagInterrogate() {
     handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
         qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
+        QMessageBox::information(this, tr("HPSDRBootloader"),
+              QString("Error: cannot open interface (are you running as root)"), QMessageBox::Close);
         status("Error: cannot open interface (are you running as root)");
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
@@ -1224,6 +1236,8 @@ void MainWindow::jtagBootloaderProgram() {
     handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
         qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
+        QMessageBox::information(this, tr("HPSDRBootloader"),
+              QString("Error: cannot open interface (are you running as root)"), QMessageBox::Close);
         status("Error: cannot open interface (are you running as root)");
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
@@ -1244,18 +1258,24 @@ void MainWindow::jtagEraseData() {
 }
 
 void MainWindow::jtagFlashBrowse() {
+
     QString dd = settings.value("dir").toString();
     QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),dd,tr("rbf Files (*.rbf)"));
-    if( fileName.contains("mercury") || fileName.contains("Mercury") || fileName.contains("penelope") || fileName.contains("Penelope") ){
-      QFileInfo *fileif = new QFileInfo(fileName);
-      qDebug() << fileif->filePath();
-      settings.setValue("firmwaredir", fileif->filePath());
-      ui->firmwareLineEdit->setText(fileName);
+    if(ui->interogateLineEdit->text().contains("Mercury") && (fileName.contains("mercury") || fileName.contains("Mercury") )){
+       QFileInfo *fileif = new QFileInfo(fileName);
+       qDebug() << fileif->filePath();
+       settings.setValue("firmwaredir", fileif->filePath());
+       ui->firmwareLineEdit->setText(fileName);
+    }  else if( ui->interogateLineEdit->text().contains("Penelope") && (fileName.contains("penelope") || fileName.contains("Penelope") )){
+       QFileInfo *fileif = new QFileInfo(fileName);
+       qDebug() << fileif->filePath();
+       settings.setValue("firmwaredir", fileif->filePath());
+       ui->firmwareLineEdit->setText(fileName);
     }else{
-      QMessageBox::information(this, tr("HPSDRBootloader"),
-              QString("HPSDRBootloader JTAG Programmer will only write to Mercury and Penelope/Pennylane boards! \n\n Use HPSDRBootloader Programmer for %0").arg(fileName), QMessageBox::Close);
-      status( QString("HPSDRBootloader JTAG Programmer will only write to Mercury and Penelope/Pennylane boards!") );
-      status( QString("Use HPSDRBootloader Programmer for %0").arg(fileName));
+       QMessageBox::information(this, tr("HPSDRBootloader"),
+             QString("%0 has been found! This rbf does not match: %1").arg(ui->interogateLineEdit->text()).arg(fileName), QMessageBox::Close);
+       status( QString("HPSDRBootloader JTAG Programmer will only write to Mercury and Penelope/Pennylane boards!") );
+       status( QString("Penelope has been found! This rbf does not match: %0").arg(fileName));
     }
 
 }
@@ -1300,6 +1320,8 @@ void MainWindow::jtagFlashProgram() {
     handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
         qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
+        QMessageBox::information(this, tr("HPSDRBootloader"),
+              QString("Error: cannot open interface (are you running as root)"), QMessageBox::Close);
         status("Error: cannot open interface (are you running as root)");
     }
 
