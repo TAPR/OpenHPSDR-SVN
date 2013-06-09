@@ -377,7 +377,7 @@ void MainWindow::eraseData() {
 void MainWindow::readIPaddress() {
     status("Reading board's IP address ... (takes several seconds)");
     sendCommand(READ_METIS_IP);
-    QTimer::singleShot(9000,this,SLOT(erase_timeout()));
+    QTimer::singleShot(20000,this,SLOT(erase_timeout()));
 }
 
 
