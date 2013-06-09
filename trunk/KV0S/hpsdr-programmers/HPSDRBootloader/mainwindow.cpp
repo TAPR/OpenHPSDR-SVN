@@ -1246,10 +1246,18 @@ void MainWindow::jtagEraseData() {
 void MainWindow::jtagFlashBrowse() {
     QString dd = settings.value("dir").toString();
     QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),dd,tr("rbf Files (*.rbf)"));
-    QFileInfo *fileif = new QFileInfo(fileName);
-    qDebug() << fileif->filePath();
-    settings.setValue("firmwaredir", fileif->filePath());
-    ui->firmwareLineEdit->setText(fileName);
+    if( fileName.contains("mercury") || fileName.contains("Mercury") || fileName.contains("penelope") || fileName.contains("Penelope") ){
+      QFileInfo *fileif = new QFileInfo(fileName);
+      qDebug() << fileif->filePath();
+      settings.setValue("firmwaredir", fileif->filePath());
+      ui->firmwareLineEdit->setText(fileName);
+    }else{
+      QMessageBox::information(this, tr("HPSDRBootloader"),
+              QString("HPSDRBootloader JTAG Programmer will only write to Mercury and Penelope/Pennylane boards! \n\n Use HPSDRBootloader Programmer for %0").arg(fileName), QMessageBox::Close);
+      status( QString("HPSDRBootloader JTAG Programmer will only write to Mercury and Penelope/Pennylane boards!") );
+      status( QString("Use HPSDRBootloader Programmer for %0").arg(fileName));
+    }
+
 }
 
 void MainWindow::jtagFlashProgram() {
