@@ -4,6 +4,8 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o"
   "libgnuradio-hpsdr.pdb"
   "libgnuradio-hpsdr.so"
+  "libgnuradio-hpsdr.pdb"
+  "CMakeFiles/CMakeRelink.dir/libgnuradio-hpsdr.so"
 )
 
 # Per-language clean rules from dependency scanning.

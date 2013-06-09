@@ -4,5 +4,5 @@
 # compile CXX with /usr/bin/c++
 CXX_FLAGS = -O3 -DNDEBUG -fPIC -I/home/tom/gr-hpsdr/include -I/usr/local/include -I/usr/local/include/gnuradio    -fvisibility=hidden
 
-CXX_DEFINES = -Dgnuradio_hpsdr_EXPORTS -DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN
+CXX_DEFINES = -DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN -Dgnuradio_hpsdr_EXPORTS
 

@@ -70,6 +70,8 @@ swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/
 swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gnuradio/gr_block.h
 swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gnuradio/gr_complex.h
 swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gnuradio/gr_core_api.h
+swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gnuradio/gr_io_signature.h
+swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gnuradio/gr_logger.h
 swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gnuradio/gr_msg_accepter.h
 swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gnuradio/gr_runtime_types.h
 swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gnuradio/gr_sptr_magic.h
@@ -80,4 +82,5 @@ swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/
 swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gruel/msg_accepter.h
 swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gruel/pmt.h
 swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gruel/pmt_sugar.h
+swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o: /usr/local/include/gruel/thread.h
 

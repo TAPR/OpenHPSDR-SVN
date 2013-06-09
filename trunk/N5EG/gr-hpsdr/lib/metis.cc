@@ -319,6 +319,9 @@ void* metis_receive_thread(void* arg) {
     while(1) {
    	bytes_read=recvfrom(discovery_socket,buffer,sizeof(buffer),0,(struct sockaddr*)&addr,(socklen_t *)&length);
         if(bytes_read<0) {
+            if (errno == EINTR)	// new code to handle case of signal received
+              continue;
+
             perror("recvfrom socket failed for metis_receive_thread");
             exit(1);
         }

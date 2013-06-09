@@ -20,6 +20,7 @@ SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/local/include/gnuradio/swig"
   "/usr/local/include/gruel/swig"
   "/usr/include/python2.7"
+  "/usr/include/x86_64-linux-gnu/python2.7"
   "../swig"
   "swig"
   )
