@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.3.1">
   <compounddef id="classhpsdr__hermesNB" kind="class" prot="public">
     <compoundname>hpsdr_hermesNB</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_block</basecompoundref>
     <includes refid="hpsdr__hermesNB_8h" local="no">hpsdr_hermesNB.h</includes>
       <sectiondef kind="friend">
       <memberdef kind="friend" id="classhpsdr__hermesNB_1a81ce2f55445b0654e4ad1d4e65044ecb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -439,6 +440,28 @@
 </parameteritem>
 </parameterlist>
 </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>gr_block</label>
+      </node>
+      <node id="4">
+        <label>hpsdr_hermesNB</label>
+        <link refid="classhpsdr__hermesNB"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="7">
+        <label>gr_block</label>
+      </node>
+      <node id="6">
+        <label>hpsdr_hermesNB</label>
+        <link refid="classhpsdr__hermesNB"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
     <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="67" bodyfile="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" bodystart="66" bodyend="96"/>
     <listofallmembers>
       <member refid="classhpsdr__hermesNB_1add1083f9e1eade21df7c228f0bb4c041" prot="public" virt="non-virtual"><scope>hpsdr_hermesNB</scope><name>general_work</name></member>

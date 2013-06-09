@@ -110,7 +110,7 @@ lib/clean: lib/CMakeFiles/gnuradio-hpsdr.dir/clean
 .PHONY : lib/clean
 
 # Convenience name for "preinstall" pass in the directory.
-lib/preinstall:
+lib/preinstall: lib/CMakeFiles/gnuradio-hpsdr.dir/preinstall
 .PHONY : lib/preinstall
 
 #=============================================================================
@@ -139,6 +139,15 @@ lib/CMakeFiles/gnuradio-hpsdr.dir/rule: cmake_check_build_system
 gnuradio-hpsdr: lib/CMakeFiles/gnuradio-hpsdr.dir/rule
 .PHONY : gnuradio-hpsdr
 
+# Pre-install relink rule for target.
+lib/CMakeFiles/gnuradio-hpsdr.dir/preinstall:
+	$(MAKE) -f lib/CMakeFiles/gnuradio-hpsdr.dir/build.make lib/CMakeFiles/gnuradio-hpsdr.dir/preinstall
+.PHONY : lib/CMakeFiles/gnuradio-hpsdr.dir/preinstall
+
+# Prepare target for install.
+preinstall: lib/CMakeFiles/gnuradio-hpsdr.dir/preinstall
+.PHONY : preinstall
+
 # clean rule for target.
 lib/CMakeFiles/gnuradio-hpsdr.dir/clean:
 	$(MAKE) -f lib/CMakeFiles/gnuradio-hpsdr.dir/build.make lib/CMakeFiles/gnuradio-hpsdr.dir/clean
@@ -166,7 +175,7 @@ swig/clean: swig/CMakeFiles/pygen_swig_5a281.dir/clean
 .PHONY : swig/clean
 
 # Convenience name for "preinstall" pass in the directory.
-swig/preinstall:
+swig/preinstall: swig/CMakeFiles/_hpsdr_swig.dir/preinstall
 .PHONY : swig/preinstall
 
 #=============================================================================
@@ -196,6 +205,15 @@ swig/CMakeFiles/_hpsdr_swig.dir/rule: cmake_check_build_system
 # Convenience name for target.
 _hpsdr_swig: swig/CMakeFiles/_hpsdr_swig.dir/rule
 .PHONY : _hpsdr_swig
+
+# Pre-install relink rule for target.
+swig/CMakeFiles/_hpsdr_swig.dir/preinstall:
+	$(MAKE) -f swig/CMakeFiles/_hpsdr_swig.dir/build.make swig/CMakeFiles/_hpsdr_swig.dir/preinstall
+.PHONY : swig/CMakeFiles/_hpsdr_swig.dir/preinstall
+
+# Prepare target for install.
+preinstall: swig/CMakeFiles/_hpsdr_swig.dir/preinstall
+.PHONY : preinstall
 
 # clean rule for target.
 swig/CMakeFiles/_hpsdr_swig.dir/clean:

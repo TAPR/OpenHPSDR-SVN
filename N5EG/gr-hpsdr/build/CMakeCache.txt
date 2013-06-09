@@ -24,16 +24,13 @@ Boost_INCLUDE_DIR:PATH=/usr/include
 Boost_LIBRARY_DIRS:FILEPATH=/usr/lib
 
 //The Boost UNIT_TEST_FRAMEWORK library
-Boost_UNIT_TEST_FRAMEWORK_LIBRARY:FILEPATH=/usr/lib/libboost_unit_test_framework-mt.so
+Boost_UNIT_TEST_FRAMEWORK_LIBRARY:FILEPATH=/usr/lib/libboost_unit_test_framework.so
 
 //Boost unit_test_framework library (debug)
-Boost_UNIT_TEST_FRAMEWORK_LIBRARY_DEBUG:FILEPATH=/usr/lib/libboost_unit_test_framework-mt.so
+Boost_UNIT_TEST_FRAMEWORK_LIBRARY_DEBUG:FILEPATH=/usr/lib/libboost_unit_test_framework.so
 
 //Boost unit_test_framework library (release)
-Boost_UNIT_TEST_FRAMEWORK_LIBRARY_RELEASE:FILEPATH=/usr/lib/libboost_unit_test_framework-mt.so
-
-//Path to a program.
-CMAKE_AR:FILEPATH=/usr/bin/ar
+Boost_UNIT_TEST_FRAMEWORK_LIBRARY_RELEASE:FILEPATH=/usr/lib/libboost_unit_test_framework.so
 
 //Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
@@ -60,7 +57,7 @@ CMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
 CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 
 //Flags used by the compiler during Release with Debug Info builds.
-CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g
+CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
 //C compiler.
 CMAKE_C_COMPILER:FILEPATH=/usr/bin/gcc
@@ -80,7 +77,7 @@ CMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
 CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 
 //Flags used by the compiler during Release with Debug Info builds.
-CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g
+CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
 //Flags used by the linker.
 CMAKE_EXE_LINKER_FLAGS:STRING=' '
@@ -104,9 +101,6 @@ CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
 
 //Path to a program.
-CMAKE_LINKER:FILEPATH=/usr/bin/ld
-
-//Path to a program.
 CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make
 
 //Flags used by the linker during the creation of modules.
@@ -124,20 +118,8 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=
 //Flags used by the linker during Release with Debug Info builds.
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
-//Path to a program.
-CMAKE_NM:FILEPATH=/usr/bin/nm
-
-//Path to a program.
-CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
-
-//Path to a program.
-CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
-
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=gr-hpsdr
-
-//Path to a program.
-CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
 
 //Flags used by the linker during the creation of dll's.
 CMAKE_SHARED_LINKER_FLAGS:STRING=' '
@@ -160,9 +142,6 @@ CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
 
 //If set, runtime paths are not added when using shared libraries.
 CMAKE_SKIP_RPATH:BOOL=NO
-
-//Path to a program.
-CMAKE_STRIP:FILEPATH=/usr/bin/strip
 
 //If true, cmake will use relative paths in makefiles and projects.
 CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
@@ -203,8 +182,11 @@ PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python
 //Path to a file.
 PYTHON_INCLUDE_DIR:PATH=/usr/include/python2.7
 
+//Path to a file.
+PYTHON_INCLUDE_DIR2:PATH=/usr/include/x86_64-linux-gnu/python2.7
+
 //Path to a library.
-PYTHON_LIBRARY:FILEPATH=/usr/lib/python3.2/config/libpython3.2.so
+PYTHON_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libpython2.7.so
 
 //Path to a file.
 SWIG_DIR:PATH=/usr/share/swig2.0
@@ -213,10 +195,10 @@ SWIG_DIR:PATH=/usr/share/swig2.0
 SWIG_EXECUTABLE:FILEPATH=/usr/bin/swig2.0
 
 //Swig version
-SWIG_VERSION:STRING=2.0.7
+SWIG_VERSION:STRING=2.0.8
 
 //Dependencies for the target
-_hpsdr_swig_LIB_DEPENDS:STATIC=general;/usr/lib/python3.2/config/libpython3.2.so;general;gnuradio-hpsdr;
+_hpsdr_swig_LIB_DEPENDS:STATIC=general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;gnuradio-hpsdr;
 
 //Dependencies for the target
 gnuradio-hpsdr_LIB_DEPENDS:STATIC=general;/usr/local/lib/libgruel.so;general;/usr/local/lib/libgnuradio-core.so;
@@ -237,7 +219,7 @@ Boost_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_LIBRARY_DIRS
 Boost_LIBRARY_DIRS-ADVANCED:INTERNAL=1
 //The library version string for boost libraries
-Boost_LIB_VERSION:INTERNAL=1_49
+Boost_LIB_VERSION:INTERNAL=1_53
 //Whether the Boost UNIT_TEST_FRAMEWORK library found
 Boost_UNIT_TEST_FRAMEWORK_FOUND:INTERNAL=ON
 //ADVANCED property for variable: Boost_UNIT_TEST_FRAMEWORK_LIBRARY
@@ -247,9 +229,7 @@ Boost_UNIT_TEST_FRAMEWORK_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_UNIT_TEST_FRAMEWORK_LIBRARY_RELEASE
 Boost_UNIT_TEST_FRAMEWORK_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //The version number for boost libraries
-Boost_VERSION:INTERNAL=104900
-//ADVANCED property for variable: CMAKE_AR
-CMAKE_AR-ADVANCED:INTERNAL=1
+Boost_VERSION:INTERNAL=105300
 //ADVANCED property for variable: CMAKE_BUILD_TOOL
 CMAKE_BUILD_TOOL-ADVANCED:INTERNAL=1
 //What is the target build tool cmake is generating for.
@@ -261,7 +241,7 @@ CMAKE_CACHE_MAJOR_VERSION:INTERNAL=2
 //Minor version of cmake used to create the current loaded cache
 CMAKE_CACHE_MINOR_VERSION:INTERNAL=8
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=9
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=10
 //ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
 CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
@@ -270,9 +250,6 @@ CMAKE_COMMAND:INTERNAL=/usr/bin/cmake
 CMAKE_CPACK_COMMAND:INTERNAL=/usr/bin/cpack
 //Path to ctest program executable.
 CMAKE_CTEST_COMMAND:INTERNAL=/usr/bin/ctest
-//ADVANCED property for variable: CMAKE_CXX_COMPILER
-CMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1
-CMAKE_CXX_COMPILER_WORKS:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS
 CMAKE_CXX_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_DEBUG
@@ -283,9 +260,6 @@ CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO
 CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_COMPILER
-CMAKE_C_COMPILER-ADVANCED:INTERNAL=1
-CMAKE_C_COMPILER_WORKS:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS
 CMAKE_C_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS_DEBUG
@@ -296,12 +270,6 @@ CMAKE_C_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_C_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS_RELWITHDEBINFO
 CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//Result of TRY_COMPILE
-CMAKE_DETERMINE_CXX_ABI_COMPILED:INTERNAL=TRUE
-//Result of TRY_COMPILE
-CMAKE_DETERMINE_C_ABI_COMPILED:INTERNAL=TRUE
-//Executable file format
-CMAKE_EXECUTABLE_FORMAT:INTERNAL=ELF
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS
 CMAKE_EXE_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_DEBUG
@@ -321,8 +289,6 @@ CMAKE_GENERATOR:INTERNAL=Unix Makefiles
 CMAKE_HOME_DIRECTORY:INTERNAL=/home/tom/gr-hpsdr
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
-//ADVANCED property for variable: CMAKE_LINKER
-CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MAKE_PROGRAM
 CMAKE_MAKE_PROGRAM-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS
@@ -335,16 +301,8 @@ CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_NM
-CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
 CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=8
-//ADVANCED property for variable: CMAKE_OBJCOPY
-CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_OBJDUMP
-CMAKE_OBJDUMP-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_RANLIB
-CMAKE_RANLIB-ADVANCED:INTERNAL=1
 //Path to CMake installation.
 CMAKE_ROOT:INTERNAL=/usr/share/cmake-2.8
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
@@ -361,10 +319,6 @@ CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_SKIP_INSTALL_RPATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SKIP_RPATH
 CMAKE_SKIP_RPATH-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_STRIP
-CMAKE_STRIP-ADVANCED:INTERNAL=1
-//uname command
-CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_USE_RELATIVE_PATHS
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
@@ -374,7 +328,7 @@ DOXYGEN_DOT_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DOXYGEN_EXECUTABLE
 DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
 //Details about finding Doxygen
-FIND_PACKAGE_MESSAGE_DETAILS_Doxygen:INTERNAL=[/usr/bin/doxygen][v1.8.1.2()]
+FIND_PACKAGE_MESSAGE_DETAILS_Doxygen:INTERNAL=[/usr/bin/doxygen][v1.8.3.1()]
 //Details about finding GNURADIO_CORE
 FIND_PACKAGE_MESSAGE_DETAILS_GNURADIO_CORE:INTERNAL=[/usr/local/lib/libgnuradio-core.so][/usr/local/include/gnuradio][v()]
 //Details about finding GRUEL
@@ -382,11 +336,11 @@ FIND_PACKAGE_MESSAGE_DETAILS_GRUEL:INTERNAL=[/usr/local/lib/libgruel.so][/usr/lo
 //Details about finding PkgConfig
 FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.26()]
 //Details about finding PythonInterp
-FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python][v2.7.3()]
+FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python][v2.7.4()]
 //Details about finding PythonLibs
-FIND_PACKAGE_MESSAGE_DETAILS_PythonLibs:INTERNAL=[/usr/lib/python3.2/config/libpython3.2.so][/usr/include/python2.7][v2.7.3()]
+FIND_PACKAGE_MESSAGE_DETAILS_PythonLibs:INTERNAL=[/usr/lib/x86_64-linux-gnu/libpython2.7.so][/usr/include/python2.7;/usr/include/x86_64-linux-gnu/python2.7][v2.7.4()]
 //Details about finding SWIG
-FIND_PACKAGE_MESSAGE_DETAILS_SWIG:INTERNAL=[/usr/bin/swig2.0][/usr/share/swig2.0][v2.0.7()]
+FIND_PACKAGE_MESSAGE_DETAILS_SWIG:INTERNAL=[/usr/bin/swig2.0][/usr/share/swig2.0][v2.0.8()]
 //ADVANCED property for variable: GNURADIO_CORE_INCLUDE_DIRS
 GNURADIO_CORE_INCLUDE_DIRS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GNURADIO_CORE_LIBRARIES
@@ -403,10 +357,10 @@ PC_GNURADIO_CORE_CFLAGS_OTHER:INTERNAL=
 PC_GNURADIO_CORE_FOUND:INTERNAL=1
 PC_GNURADIO_CORE_INCLUDEDIR:INTERNAL=/usr/local/include/gnuradio
 PC_GNURADIO_CORE_INCLUDE_DIRS:INTERNAL=/usr/local/include/gnuradio;/usr/local/include
-PC_GNURADIO_CORE_LDFLAGS:INTERNAL=-L/usr/local/lib;-lgnuradio-core;-lgruel;-lfftw3f;-lm
+PC_GNURADIO_CORE_LDFLAGS:INTERNAL=-L/usr/local/lib;-lgnuradio-core;-lgruel;-lfftw3f
 PC_GNURADIO_CORE_LDFLAGS_OTHER:INTERNAL=
 PC_GNURADIO_CORE_LIBDIR:INTERNAL=/usr/local/lib
-PC_GNURADIO_CORE_LIBRARIES:INTERNAL=gnuradio-core;gruel;fftw3f;m
+PC_GNURADIO_CORE_LIBRARIES:INTERNAL=gnuradio-core;gruel;fftw3f
 PC_GNURADIO_CORE_LIBRARY_DIRS:INTERNAL=/usr/local/lib
 PC_GNURADIO_CORE_LIBS:INTERNAL=
 PC_GNURADIO_CORE_LIBS_L:INTERNAL=
@@ -426,7 +380,7 @@ PC_GNURADIO_CORE_STATIC_LIBS:INTERNAL=
 PC_GNURADIO_CORE_STATIC_LIBS_L:INTERNAL=
 PC_GNURADIO_CORE_STATIC_LIBS_OTHER:INTERNAL=
 PC_GNURADIO_CORE_STATIC_LIBS_PATHS:INTERNAL=
-PC_GNURADIO_CORE_VERSION:INTERNAL=3.6.3rc0
+PC_GNURADIO_CORE_VERSION:INTERNAL=3.6.5
 PC_GNURADIO_CORE_gnuradio-core_INCLUDEDIR:INTERNAL=
 PC_GNURADIO_CORE_gnuradio-core_LIBDIR:INTERNAL=
 PC_GNURADIO_CORE_gnuradio-core_PREFIX:INTERNAL=
@@ -460,7 +414,7 @@ PC_GRUEL_STATIC_LIBS:INTERNAL=
 PC_GRUEL_STATIC_LIBS_L:INTERNAL=
 PC_GRUEL_STATIC_LIBS_OTHER:INTERNAL=
 PC_GRUEL_STATIC_LIBS_PATHS:INTERNAL=
-PC_GRUEL_VERSION:INTERNAL=3.6.3rc0
+PC_GRUEL_VERSION:INTERNAL=3.6.5
 PC_GRUEL_gruel_INCLUDEDIR:INTERNAL=
 PC_GRUEL_gruel_LIBDIR:INTERNAL=
 PC_GRUEL_gruel_PREFIX:INTERNAL=
@@ -471,6 +425,8 @@ PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PYTHON_INCLUDE_DIR
 PYTHON_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PYTHON_INCLUDE_DIR2
+PYTHON_INCLUDE_DIR2-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PYTHON_LIBRARY
 PYTHON_LIBRARY-ADVANCED:INTERNAL=1
 __pkg_config_checked_PC_GNURADIO_CORE:INTERNAL=1

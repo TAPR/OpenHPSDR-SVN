@@ -9,6 +9,8 @@ lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o
  /usr/local/include/gnuradio/gr_block.h
  /usr/local/include/gnuradio/gr_complex.h
  /usr/local/include/gnuradio/gr_core_api.h
+ /usr/local/include/gnuradio/gr_io_signature.h
+ /usr/local/include/gnuradio/gr_logger.h
  /usr/local/include/gnuradio/gr_msg_accepter.h
  /usr/local/include/gnuradio/gr_runtime_types.h
  /usr/local/include/gnuradio/gr_sptr_magic.h
@@ -19,6 +21,7 @@ lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o
  /usr/local/include/gruel/msg_accepter.h
  /usr/local/include/gruel/pmt.h
  /usr/local/include/gruel/pmt_sugar.h
+ /usr/local/include/gruel/thread.h
 lib/CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o
  ../include/HermesProxy.h
  ../include/hpsdr_api.h
@@ -29,6 +32,7 @@ lib/CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o
  /usr/local/include/gnuradio/gr_complex.h
  /usr/local/include/gnuradio/gr_core_api.h
  /usr/local/include/gnuradio/gr_io_signature.h
+ /usr/local/include/gnuradio/gr_logger.h
  /usr/local/include/gnuradio/gr_msg_accepter.h
  /usr/local/include/gnuradio/gr_runtime_types.h
  /usr/local/include/gnuradio/gr_sptr_magic.h
@@ -39,6 +43,7 @@ lib/CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o
  /usr/local/include/gruel/msg_accepter.h
  /usr/local/include/gruel/pmt.h
  /usr/local/include/gruel/pmt_sugar.h
+ /usr/local/include/gruel/thread.h
 lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o
  ../include/HermesProxy.h
  ../include/metis.h
@@ -47,6 +52,8 @@ lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o
  /usr/local/include/gnuradio/gr_block.h
  /usr/local/include/gnuradio/gr_complex.h
  /usr/local/include/gnuradio/gr_core_api.h
+ /usr/local/include/gnuradio/gr_io_signature.h
+ /usr/local/include/gnuradio/gr_logger.h
  /usr/local/include/gnuradio/gr_msg_accepter.h
  /usr/local/include/gnuradio/gr_runtime_types.h
  /usr/local/include/gnuradio/gr_sptr_magic.h
@@ -57,3 +64,4 @@ lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o
  /usr/local/include/gruel/msg_accepter.h
  /usr/local/include/gruel/pmt.h
  /usr/local/include/gruel/pmt_sugar.h
+ /usr/local/include/gruel/thread.h

@@ -71,6 +71,8 @@ swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o
  /usr/local/include/gnuradio/gr_block.h
  /usr/local/include/gnuradio/gr_complex.h
  /usr/local/include/gnuradio/gr_core_api.h
+ /usr/local/include/gnuradio/gr_io_signature.h
+ /usr/local/include/gnuradio/gr_logger.h
  /usr/local/include/gnuradio/gr_msg_accepter.h
  /usr/local/include/gnuradio/gr_runtime_types.h
  /usr/local/include/gnuradio/gr_sptr_magic.h
@@ -81,3 +83,4 @@ swig/CMakeFiles/_hpsdr_swig.dir/hpsdr_swigPYTHON_wrap.cxx.o
  /usr/local/include/gruel/msg_accepter.h
  /usr/local/include/gruel/pmt.h
  /usr/local/include/gruel/pmt_sugar.h
+ /usr/local/include/gruel/thread.h

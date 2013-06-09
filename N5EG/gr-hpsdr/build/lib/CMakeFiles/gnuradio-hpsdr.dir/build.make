@@ -141,6 +141,29 @@ lib/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/link.txt
 lib/CMakeFiles/gnuradio-hpsdr.dir/build: lib/libgnuradio-hpsdr.so
 .PHONY : lib/CMakeFiles/gnuradio-hpsdr.dir/build
 
+# Object files for target gnuradio-hpsdr
+gnuradio__hpsdr_OBJECTS = \
+"CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o" \
+"CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o" \
+"CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o"
+
+# External object files for target gnuradio-hpsdr
+gnuradio__hpsdr_EXTERNAL_OBJECTS =
+
+lib/CMakeFiles/CMakeRelink.dir/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o
+lib/CMakeFiles/CMakeRelink.dir/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o
+lib/CMakeFiles/CMakeRelink.dir/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o
+lib/CMakeFiles/CMakeRelink.dir/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/build.make
+lib/CMakeFiles/CMakeRelink.dir/libgnuradio-hpsdr.so: /usr/local/lib/libgruel.so
+lib/CMakeFiles/CMakeRelink.dir/libgnuradio-hpsdr.so: /usr/local/lib/libgnuradio-core.so
+lib/CMakeFiles/CMakeRelink.dir/libgnuradio-hpsdr.so: lib/CMakeFiles/gnuradio-hpsdr.dir/relink.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX shared library CMakeFiles/CMakeRelink.dir/libgnuradio-hpsdr.so"
+	cd /home/tom/gr-hpsdr/build/lib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gnuradio-hpsdr.dir/relink.txt --verbose=$(VERBOSE)
+
+# Rule to relink during preinstall.
+lib/CMakeFiles/gnuradio-hpsdr.dir/preinstall: lib/CMakeFiles/CMakeRelink.dir/libgnuradio-hpsdr.so
+.PHONY : lib/CMakeFiles/gnuradio-hpsdr.dir/preinstall
+
 lib/CMakeFiles/gnuradio-hpsdr.dir/requires: lib/CMakeFiles/gnuradio-hpsdr.dir/hpsdr_hermesNB.cc.o.requires
 lib/CMakeFiles/gnuradio-hpsdr.dir/requires: lib/CMakeFiles/gnuradio-hpsdr.dir/HermesProxy.cc.o.requires
 lib/CMakeFiles/gnuradio-hpsdr.dir/requires: lib/CMakeFiles/gnuradio-hpsdr.dir/metis.cc.o.requires
