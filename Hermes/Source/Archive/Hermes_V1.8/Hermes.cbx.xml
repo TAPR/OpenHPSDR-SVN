@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="Hermes">
+		<CBX_INST_ENTRY INSTANCE_NAME="|Hermes|FIFO:RXF|altsyncram:mem_rtl_1" CBX_FILE_NAME="altsyncram_j3j1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Hermes|lpm_mult:Mult0" CBX_FILE_NAME="mult_t311.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Hermes|receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component" CBX_FILE_NAME="mult_6hp.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Hermes|receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component" CBX_FILE_NAME="mult_6hp.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Hermes|FIFO:TXF|altsyncram:mem_rtl_0" CBX_FILE_NAME="altsyncram_v3j1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Hermes|receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component" CBX_FILE_NAME="shift_taps_bjs.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Hermes|receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component" CBX_FILE_NAME="shift_taps_bjs.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Hermes|receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a0a1.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

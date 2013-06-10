@@ -1,0 +1,9 @@
+<sld_project_info>
+  <file_info>
+    <file checksum="0x01103F71" device="EP3C40Q240C8" path="Hermes.sof" usercode="0xFFFFFFFF"/>
+    <file checksum="0x19BDB71C" device="EPCS16" path="Hermes.pof" usercode="0x00000000"/>
+    <file path="Hermes.rbf"/>
+  </file_info>
+  <hub_info ir_width="0" node_count="0"/>
+  <node_info/>
+</sld_project_info>
