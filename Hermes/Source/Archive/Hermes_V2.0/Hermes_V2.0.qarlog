@@ -1,0 +1,77 @@
+Quartus II Archive log --	E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes_V2.0.qarlog
+
+Archive:	E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes_V2.0.qar
+Date:		Sat Dec 01 16:31:08 2012
+Quartus II 32-bit		11.1 Build 259 01/25/2012 SP 2 SJ Web Edition
+
+	=========== Files Selected: ===========
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/ASMI.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/ASMI_interface.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Apollo.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Attenuator.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/C10_PLL.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/C122_PLL.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/CRC32.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/DHCP.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/EEPROM.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/EPCS_fifo.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/FIFO.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/HPF_select.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes.dpf
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes.qpf
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes.qsf
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes.sdc
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes_ADC.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes_Tx_fifo_ctrl.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes_assignment_defaults.qdf
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Hermes_clk_lrclk_gen.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/I2S_rcv.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/I2S_xmit.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/LPF_select.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Led_control.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Led_flash.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/MDIO.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/PHY_Rx_fifo.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/PLL_IF.ppf
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/PLL_IF.qip
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/PLL_IF.vhd
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/PLL_clocks.ppf
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/PLL_clocks.qip
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/PLL_clocks.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Rx_MAC.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/SPI.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/SP_fifo.qip
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/SP_fifo.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/TLV320_SPI.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Tx_MAC.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/Tx_fifo.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/assignment_defaults.qdf
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/cdc_mcp.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/cdc_sync.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/cic.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/cic_comb.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/cic_integrator.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/cicint.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/clk_div.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/cordic.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/cpl_cordic.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/debounce.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/fir.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/fir_coeffs.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/fir_coeffs_rom.hex
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/fir_coeffs_rom.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/fir_mac.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/fir_shiftreg.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/incremental_db/compiled_partitions/Hermes.db_info
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/mult_24Sx24S.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/phase_accumulator.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/pulsegen.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/receiver.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/receiver_vna.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/sp_rcv_ctrl.v
+E:/HPSDR/trunk/Hermes/Source/Hermes_V2.0/varcic.v
+	======= Total: 66 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
