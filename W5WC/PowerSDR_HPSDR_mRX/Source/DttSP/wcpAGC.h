@@ -38,7 +38,7 @@ Santa Cruz, CA  95060
 //{ agcOFF, agcLONG, agcSLOW, agcMED, agcFAST} AGCMODE;
 
 #define MAX_SAMPLE_RATE		(384000.0)
-#define MAX_N_TAU			(4)
+#define MAX_N_TAU			(8)		
 #define MAX_TAU_ATTACK		(0.01)
 #define RB_SIZE				(int)(MAX_SAMPLE_RATE * MAX_N_TAU * MAX_TAU_ATTACK + 1)
 

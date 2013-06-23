@@ -7790,7 +7790,7 @@ namespace PowerSDR
                 atu_swr_table[i] = 1.0f;
 
             atu_tuning = false;
-            tune_power = 10;
+            tune_power = 0;
             calibrating = false;
             run_setup_wizard = true;
 
@@ -8146,6 +8146,9 @@ namespace PowerSDR
             //siolisten = new SIOListenerII(this);
             //Init60mChannels();						// Load 60m Channel Freqs
             update_rx2_display = true;
+
+            if (startdiversity) 
+                eSCToolStripMenuItem_Click(this, EventArgs.Empty);
         }
 
         private static void CreateAnalyzer()
@@ -8825,6 +8828,7 @@ namespace PowerSDR
             a.Add("panelBandVHF.Visible/" + whatisVHF);//w3sz added
             a.Add("iscollapsed/" + iscollapsed);//w3sz added
             a.Add("isexpanded/" + isexpanded);//w3sz added
+            a.Add("diversity/" + diversity2);
 
             for (int i = (int)PreampMode.FIRST + 1; i < (int)PreampMode.LAST; i++)
                 a.Add("rx1_preamp_offset[" + i.ToString() + "]/" + rx1_preamp_offset[i].ToString("f3"));
@@ -9377,6 +9381,9 @@ namespace PowerSDR
                             iscollapsed = false;
                         }
                         break; //added by w3sz
+                    case "diversity":
+                        startdiversity = bool.Parse(val);
+                        break;
                     case "quick_save_mode":
                         quick_save_mode = (DSPMode)(Int32.Parse(val));
                         break;
@@ -16740,6 +16747,34 @@ namespace PowerSDR
         // ======================================================
         // Properties
         // ======================================================
+        private bool startdiversity = false;
+        private bool diversity2 = false;
+        public bool Diversity2
+        {
+            get { return diversity2; }
+            set
+            {
+                diversity2 = value;
+                if (diversity2)
+                {
+                    SetupForm.LimitStitchedRx = true;
+                    JanusAudio.EnableDiversity(1);
+                   // Audio.diversity2 = true;
+                    chkRX2.Checked = false;
+                    chkRX2.Enabled = false;
+                    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+               }
+                else
+                {
+                   // SetupForm.LimitStitchedRx = false;
+                    JanusAudio.EnableDiversity(0);
+                   // Audio.diversity2 = false;
+                   // chkRX2.Checked = false;
+                    chkRX2.Enabled = true;
+                }
+            }
+        }
+
         private double center_frequency = 0.0;
         public double CenterFrequency
         {
@@ -17109,7 +17144,7 @@ namespace PowerSDR
             }
         }
 
-        public bool CATDiversityEnable
+     /*   public bool CATDiversityEnable
         {
             get
             {
@@ -17126,7 +17161,7 @@ namespace PowerSDR
                     else
                         diversityForm.CATEnable = false;
             }
-        }
+        } */
 
         public bool CATDiversityForm
         {
@@ -22200,6 +22235,13 @@ namespace PowerSDR
 
         #endregion
 
+        private bool tx_tune_power = false;
+        public bool TXTunePower
+        {
+            get { return tx_tune_power; }
+            set { tx_tune_power = value; }
+        }
+
         private int tune_power;								// power setting to use when TUN button is pressed
         public int TunePower
         {
@@ -22210,7 +22252,7 @@ namespace PowerSDR
                 if (SetupForm != null)
                     SetupForm.TunePower = tune_power;
 
-                if (chkTUN.Checked)
+                if (chkTUN.Checked && !tx_tune_power)
                     PWR = tune_power;
             }
         }
@@ -31253,6 +31295,7 @@ namespace PowerSDR
             if (EQForm != null) EQForm.Hide();
             if (XVTRForm != null) XVTRForm.Hide();
             if (memoryForm != null) memoryForm.Hide();
+            if (diversityForm != null) diversityForm.Hide();
             //  if (preSelForm != null) preSelForm.Hide();
 
             MemoryList.Save();
@@ -31267,6 +31310,7 @@ namespace PowerSDR
             if (EQForm != null) EQForm.Close();
             if (XVTRForm != null) XVTRForm.Close();
             if (memoryForm != null) memoryForm.Close();
+            if (diversityForm != null) diversityForm.Close();
             //  if (preSelForm != null) preSelForm.Close();
         }
 
@@ -32779,9 +32823,9 @@ namespace PowerSDR
                 }
 
                 DttSP.SetMode(1, 0, DSPMode.DIGU);
-
+                if (!tx_tune_power)
                 PreviousPWR = ptbPWR.Value; // save current value
-                if (!xvtr_tune_power || tx_xvtr_index < 0) // switch to TUN value
+                if ((!xvtr_tune_power || tx_xvtr_index < 0) && !tx_tune_power) // switch to TUN value
                     PWR = tune_power;
 
                 if (!chkVFOSplit.Checked && !chkVFOBTX.Checked)
@@ -32875,10 +32919,10 @@ namespace PowerSDR
                 if (apollopresent)
                     JanusAudio.EnableApolloAutoTune(0);
 
-                if (tx_xvtr_index < 0 || xvtr_tune_power)
+                if ((tx_xvtr_index < 0 || xvtr_tune_power) && !tx_tune_power)
                     TunePower = ptbPWR.Value;
 
-
+                if (!tx_tune_power)
                 PWR = PreviousPWR;
                 DSPMode mode = radio.GetDSPTX(0).CurrentDSPMode;
                 DttSP.SetMode(1, 0, mode);
@@ -35902,7 +35946,7 @@ namespace PowerSDR
                                         if (agc_rx2_thresh_point < -143.0) agc_rx2_thresh_point = -143.0;
                                         // Debug.WriteLine("agc_db_point2: " + agc_db_point);
 
-                                        double agc_rx2_top;
+                                        double agc_rx2_top = 0.0;
                                         DttSP.SetRXAGCThresh(2, 0, agc_rx2_thresh_point);
                                         DttSP.GetRXAGCMaxGain(2, 0, &agc_rx2_top);
 
@@ -35937,7 +35981,7 @@ namespace PowerSDR
                                         if (agc_thresh_point < -143.0) agc_thresh_point = -143.0;
                                         // Debug.WriteLine("agc_db_point2: " + agc_db_point);
 
-                                        double agc_top;
+                                        double agc_top = 0.0;
                                         DttSP.SetRXAGCThresh(0, 0, agc_thresh_point);
                                         DttSP.GetRXAGCMaxGain(0, 0, &agc_top);
                                         agc_top = Math.Round(agc_top);
@@ -35976,7 +36020,7 @@ namespace PowerSDR
                                         // Debug.WriteLine("agc_db_point2: " + agc_db_point);
 
                                         // SetupForm.AGCMaxGain = agc_db_point - agc_slope;
-                                        int hang_threshold;
+                                        int hang_threshold = 0;
                                         DttSP.SetRXAGCHangLevel(2, 0, agc_hang_point);
                                         DttSP.GetRXAGCHangThreshold(2, 0, &hang_threshold);
                                         if (hang_threshold > 100)
@@ -36004,7 +36048,7 @@ namespace PowerSDR
                                         if (agc_hang_point < -121.0) agc_hang_point = -121.0;
                                         // Debug.WriteLine("agc_db_point2: " + agc_db_point);
                                         // SetupForm.AGCMaxGain = agc_db_point - agc_slope;
-                                        int hang_threshold;
+                                        int hang_threshold = 0;
                                         DttSP.SetRXAGCHangLevel(0, 0, agc_hang_point);
                                         DttSP.GetRXAGCHangThreshold(0, 0, &hang_threshold);
                                         if (hang_threshold > 100)
@@ -38859,7 +38903,7 @@ namespace PowerSDR
                     rx1_filters[(int)rx1_dsp_mode].SetLow(rx1_filter, (int)udFilterLow.Value);
             }
 
-            if (save_filter_changes)
+            if (save_filter_changes && rx1_filter >= Filter.F1 && rx1_filter <= Filter.VAR2)
                 rx1_filters[(int)rx1_dsp_mode].SetLow(rx1_filter, (int)udFilterLow.Value);
 
             /*if(udFilterLow.Focused)
@@ -38882,7 +38926,7 @@ namespace PowerSDR
                     rx1_filters[(int)rx1_dsp_mode].SetHigh(rx1_filter, (int)udFilterHigh.Value);
             }
 
-            if (save_filter_changes)
+            if (save_filter_changes && rx1_filter >= Filter.F1 && rx1_filter <= Filter.VAR2)
                 rx1_filters[(int)rx1_dsp_mode].SetHigh(rx1_filter, (int)udFilterHigh.Value);
 
             /*if(udFilterHigh.Focused)
@@ -42030,7 +42074,7 @@ namespace PowerSDR
                     rx2_filters[(int)rx2_dsp_mode].SetLow(rx2_filter, (int)udRX2FilterLow.Value);
             }
 
-            if (save_filter_changes)
+            if (save_filter_changes && rx2_filter >= Filter.F1 && rx2_filter <= Filter.VAR2)
                 rx2_filters[(int)rx2_dsp_mode].SetLow(rx2_filter, (int)udRX2FilterLow.Value);
 
             /*if(udFilterLow.Focused)

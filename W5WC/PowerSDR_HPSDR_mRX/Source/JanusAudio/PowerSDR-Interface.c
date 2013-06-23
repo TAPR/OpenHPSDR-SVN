@@ -1209,5 +1209,43 @@ KD5TFDVK6APHAUDIO_API void SetDiscoveryMode(int bit) {
 	}
 }
 
+KD5TFDVK6APHAUDIO_API void EnableDiversity(int g) { 
+	if ( g == 0 ) diversitymode = 0; 
+	else diversitymode = 1;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetMercSource(int g) { 
+	MercSource = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetrefMerc(int g) { 
+	refMerc = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetIQ_Rotate(double a, double b) { 
+	I_Rotate = a; 
+	Q_Rotate = b;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetTheta(double a) { 
+	theta = a; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetIQ_RotateA(double a, double b) { 
+	I_RotateA = a; 
+	Q_RotateA = b;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetIQ_RotateB(double a, double b) { 
+	I_RotateB = a; 
+	Q_RotateB = b;
+	return;
+}
 
 

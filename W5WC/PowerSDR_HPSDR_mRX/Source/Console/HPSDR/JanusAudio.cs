@@ -1063,6 +1063,28 @@ namespace PowerSDR
             Console.getConsole().SetMicGain();
         }
 
+        // Diversity
+        [DllImport("JanusAudio.dll")]
+        public static extern void EnableDiversity(int g);
+
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetMercSource(int g);
+
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetrefMerc(int g);
+
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetIQ_Rotate(double a, double b);
+
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetIQ_RotateA(double a, double b);
+
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetIQ_RotateB(double a, double b);
+
+        [DllImport("JanusAudio.dll")]
+        public static extern void SetTheta(double a); 
+
         // Ozyutils
         [DllImport("JanusAudio.dll")]
         unsafe extern public static int GetOzyID(IntPtr usb_h, byte[] bytes, int length);

@@ -1636,12 +1636,12 @@ namespace PowerSDR
                 {
                     if (s == "1")
                     {
-                        console.CATDiversityEnable = true;
+                       // console.CATDiversityEnable = true;
                         return "";
                     }
                     else if (s == "0")
                     {
-                        console.CATDiversityEnable = false;
+                      //  console.CATDiversityEnable = false;
                         return "";
                     }
                     else
@@ -1649,9 +1649,9 @@ namespace PowerSDR
                 }
                 else if (s.Length == parser.nGet)
                 {
-                    if (console.CATDiversityEnable)
-                        return "1";
-                    else
+                   // if (console.CATDiversityEnable)
+                     //   return "1";
+                  //  else
                         return "0";
                 }
                 else

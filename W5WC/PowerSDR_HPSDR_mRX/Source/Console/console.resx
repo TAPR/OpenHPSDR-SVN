@@ -7638,9 +7638,6 @@
   <data name="eSCToolStripMenuItem.Text" xml:space="preserve">
     <value>Diversity</value>
   </data>
-  <data name="eSCToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="collapseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
   </data>

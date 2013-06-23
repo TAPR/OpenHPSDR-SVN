@@ -1651,21 +1651,21 @@ namespace PowerSDR
             comboCATRigType.Text = "TS-2000";
 
             if (comboCAT2Port.Items.Count > 0) comboCAT2Port.SelectedIndex = 0;
-           // if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
+            // if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
             comboCAT2baud.Text = "1200";
             comboCAT2parity.Text = "none";
             comboCAT2databits.Text = "8";
             comboCAT2stopbits.Text = "1";
 
             if (comboCAT3Port.Items.Count > 0) comboCAT3Port.SelectedIndex = 0;
-           // if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
+            // if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
             comboCAT3baud.Text = "1200";
             comboCAT3parity.Text = "none";
             comboCAT3databits.Text = "8";
             comboCAT3stopbits.Text = "1";
 
             if (comboCAT4Port.Items.Count > 0) comboCAT4Port.SelectedIndex = 0;
-          //  if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
+            //  if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
             comboCAT4baud.Text = "1200";
             comboCAT4parity.Text = "none";
             comboCAT4databits.Text = "8";
@@ -1974,7 +1974,7 @@ namespace PowerSDR
         private void InitDSPTab()
         {
             udDSPCWPitch.Value = console.CWPitch;
-           // comboDSPWindow.SelectedIndex = (int)console.radio.GetDSPRX(0, 0).CurrentWindow;
+            // comboDSPWindow.SelectedIndex = (int)console.radio.GetDSPRX(0, 0).CurrentWindow;
             comboDSPWindow.SelectedIndex = (int)console.radio.GetDSPTX(0).CurrentWindow;
         }
 
@@ -2729,8 +2729,8 @@ namespace PowerSDR
             chkGeneralSpurRed_CheckedChanged(this, e);
             chkGeneralDisablePTT_CheckedChanged(this, e);
             chkGeneralSoftwareGainCorr_CheckedChanged(this, e);
-           // chkGeneralEnableX2_CheckedChanged(this, e);
-           // udGeneralX2Delay_ValueChanged(this, e);
+            // chkGeneralEnableX2_CheckedChanged(this, e);
+            // udGeneralX2Delay_ValueChanged(this, e);
             chkGeneralCustomFilter_CheckedChanged(this, e);
             comboGeneralProcessPriority_SelectedIndexChanged(this, e);
             chkFullDiscovery_CheckedChanged(this, e);
@@ -2842,7 +2842,7 @@ namespace PowerSDR
             // AM/SAM Tab
             chkLevelFades_CheckedChanged(this, e);
             chkRX2LevelFades_CheckedChanged(this, e);
-            radLSBUSB_CheckedChanged(this,e);
+            radLSBUSB_CheckedChanged(this, e);
             radLSB_CheckedChanged(this, e);
             radUSB_CheckedChanged(this, e);
             radRX2LSBUSB_CheckedChanged(this, e);
@@ -3163,7 +3163,7 @@ namespace PowerSDR
                 }
             }
         }
- 
+
         public void UpdateDisplayGridBandInfo()
         {
             if (!initializing)
@@ -3287,7 +3287,7 @@ namespace PowerSDR
                 if (udATTOnTX != null) udATTOnTX.Value = value;
             }
         }
-        
+
         public int VACDriver
         {
             get
@@ -4311,10 +4311,11 @@ namespace PowerSDR
         public double HPSDRFreqCorrectFactor
         {
             get { return (double)udHPSDRFreqCorrectFactor.Value; }
-            set { 
+            set
+            {
                 udHPSDRFreqCorrectFactor.Value = (decimal)value;
                 JanusAudio.FreqCorrectionFactor = (double)value;
-                }
+            }
         }
 
 
@@ -5484,8 +5485,8 @@ namespace PowerSDR
 
         public bool AutoMuteRX2onVFOATX
         {
-                get { return chkRX2AutoMuteTX.Checked; }
-                set { chkRX2AutoMuteTX.Checked = value; }
+            get { return chkRX2AutoMuteTX.Checked; }
+            set { chkRX2AutoMuteTX.Checked = value; }
         }
 
         public bool AutoMuteRX1onVFOBTX
@@ -5493,7 +5494,7 @@ namespace PowerSDR
             get { return chkRX2AutoMuteRX1OnVFOBTX.Checked; }
             set { chkRX2AutoMuteRX1OnVFOBTX.Checked = value; }
         }
-        
+
         private bool rtty_offset_enabled_a;
         public bool RttyOffsetEnabledA
         {
@@ -5581,7 +5582,7 @@ namespace PowerSDR
         {
             if (radGenModelFLEX5000.Checked)
             {
-                 comboAudioSoundCard.Text = "Unsupported Card";
+                comboAudioSoundCard.Text = "Unsupported Card";
                 //comboAudioSampleRate1.Text = "96000";
 
                 foreach (PADeviceInfo p in comboAudioDriver1.Items)
@@ -5716,7 +5717,7 @@ namespace PowerSDR
             radPACalAllBands_CheckedChanged(this, EventArgs.Empty);
             grpGeneralHardwareSDR1000.Visible = !b;
             grpGeneralHardwareFLEX5000.Visible = b;
-           // btnWizard.Visible = !b;
+            // btnWizard.Visible = !b;
             grpGenAutoMute.Visible = !b;
 
             grpAudioDetails1.Visible = !b;
@@ -5776,11 +5777,11 @@ namespace PowerSDR
                 comboKeyerConnPrimary.Text = key == "Radio" ? "SDR" : key;
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 //lblF3KFanTempThresh.Visible = false;
-               // udF3KFanTempThresh.Visible = false;
+                // udF3KFanTempThresh.Visible = false;
                 chkGenTX1Delay.Visible = false;
                 lblGenTX1Delay.Visible = false;
                 udGenTX1Delay.Visible = false;
-               // grpHWSoftRock.Visible = false;
+                // grpHWSoftRock.Visible = false;
             }
             else console.XVTRPresent = false;
         }
@@ -5811,7 +5812,7 @@ namespace PowerSDR
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
                 chkGeneralRXOnly.Visible = true;
-               // chkGeneralRXOnly.Checked = false;
+                // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
                 radMetis.Text = "ANAN";
@@ -5845,6 +5846,9 @@ namespace PowerSDR
                 int nr;
                 if (chkLimitRX.Checked) nr = 2;
                 else nr = 4;
+#if LINCOR
+                nr = 5;
+#endif
 
                 int old_rate = console.NReceivers;
                 int new_rate = nr;
@@ -5888,7 +5892,7 @@ namespace PowerSDR
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
                 chkGeneralRXOnly.Visible = true;
-               // chkGeneralRXOnly.Checked = false;
+                // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
                 radMetis.Text = "ANAN";
@@ -5920,6 +5924,9 @@ namespace PowerSDR
                 int nr;
                 if (chkLimitRX.Checked) nr = 2;
                 else nr = 4;
+#if LINCOR
+                nr = 5;
+#endif
 
                 int old_rate = console.NReceivers;
                 int new_rate = nr;
@@ -5963,7 +5970,7 @@ namespace PowerSDR
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
                 chkGeneralRXOnly.Visible = true;
-               // chkGeneralRXOnly.Checked = false;
+                // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
                 radMetis.Text = "ANAN";
@@ -5985,14 +5992,14 @@ namespace PowerSDR
                 chkBypassANANPASettings.Visible = true;
 
                 if (!chkBypassANANPASettings.Checked)
-                grpANANPAGainByBand.BringToFront();
+                    grpANANPAGainByBand.BringToFront();
                 else grpPAGainByBand.BringToFront();
-                
+
                 labelRXAntControl.Text = " EXT2  EXT1  XVTR";
                 labelATTOnTX.Visible = true;
                 udATTOnTX.Visible = true;
                 console.RX2PreampPresent = true;
-               // console.RX2PreampPresent = false;
+                // console.RX2PreampPresent = false;
             }
             console.ANAN100DPresent = radGenModelANAN100D.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -6002,7 +6009,10 @@ namespace PowerSDR
                 int nr;
                 if (chkLimitRX.Checked) nr = 2;
                 else nr = 4; //nr = 5;
-                
+#if LINCOR
+                nr = 5;
+#endif
+
                 int old_rate = console.NReceivers;
                 int new_rate = nr;
                 bool power = console.PowerOn;
@@ -6043,7 +6053,7 @@ namespace PowerSDR
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
                 chkGeneralRXOnly.Visible = true;
-              //  chkGeneralRXOnly.Checked = false;
+                //  chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "Hermes Options";
                 radMetis.Text = "Hermes";
@@ -6132,7 +6142,7 @@ namespace PowerSDR
                 comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
                 chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
-              //  chkAutoPACalibrate.Checked = true;
+                //  chkAutoPACalibrate.Checked = true;
                 chkBypassANANPASettings.Visible = false;
                 chkAutoPACalibrate.Visible = true;
                 grpPAGainByBand.BringToFront();
@@ -6183,18 +6193,18 @@ namespace PowerSDR
                 }
                 chkGeneralRXOnly.Enabled = true; // modif F8CHK
                 //lblF3KFanTempThresh.Visible = false;
-               // udF3KFanTempThresh.Visible = false;
+                // udF3KFanTempThresh.Visible = false;
                 chkGenTX1Delay.Visible = false;
                 lblGenTX1Delay.Visible = false;
                 udGenTX1Delay.Visible = false;
 
-               // grpHWSoftRock.Visible = !console.si570_used;  // modif F8CHK
-               // grpSI570.Visible = console.si570_used;
+                // grpHWSoftRock.Visible = !console.si570_used;  // modif F8CHK
+                // grpSI570.Visible = console.si570_used;
             }
             else
             {
                 chkGeneralUseSi570.Visible = false; // modif F8CHK    
-               // grpSI570.Visible = false;
+                // grpSI570.Visible = false;
             }
         }
 
@@ -6215,8 +6225,8 @@ namespace PowerSDR
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                     force_model = false;
-                  //  lblF3KFanTempThresh.Visible = false;
-                   // udF3KFanTempThresh.Visible = false;
+                    //  lblF3KFanTempThresh.Visible = false;
+                    // udF3KFanTempThresh.Visible = false;
                     chkGenTX1Delay.Visible = false;
                     lblGenTX1Delay.Visible = false;
                     udGenTX1Delay.Visible = false;
@@ -6241,9 +6251,9 @@ namespace PowerSDR
                 DttSP.SetCorrectIQEnable(0); // turn off I/Q correction
                 DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 0);
                 DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 1);
-               // udDSPImagePhaseTX.Value = 0.0M;
-               // udDSPImageGainTX.Value = 0.0M;
-               // grpDSPImageRejectTX.Enabled = false;
+                // udDSPImagePhaseTX.Value = 0.0M;
+                // udDSPImageGainTX.Value = 0.0M;
+                // grpDSPImageRejectTX.Enabled = false;
                 // force setting of audio card 
                 comboAudioSoundCard.Text = "HPSDR";
                 comboAudioSoundCard.Enabled = false;
@@ -6256,11 +6266,11 @@ namespace PowerSDR
                 grpFRSRegion.Visible = true;
                 grpPAGainByBand.Visible = true;
                 grpGeneralHardwareSDR1000.Visible = false;
-               // grpGeneralDDS.Visible = false;
-               // btnWizard.Visible = true;
+                // grpGeneralDDS.Visible = false;
+                // btnWizard.Visible = true;
                 //chkGeneralRXOnly.Checked = false;
                 //chkGeneralRXOnly.Enabled = true;
-               // grpHWSoftRock.Visible = false;
+                // grpHWSoftRock.Visible = false;
                 chkGeneralCustomFilter.Visible = false;
                 grpGenAutoMute.Visible = false;
                 grpGenCalRXImage.Visible = false;
@@ -6271,7 +6281,7 @@ namespace PowerSDR
                 chkGeneralEnableX2.Visible = false;
                 lblGeneralX2Delay.Visible = false;
                 udGeneralX2Delay.Visible = false;
-              //  rtxtPACalReq.Visible = false;
+                //  rtxtPACalReq.Visible = false;
                 lblPTTOutDelay.Visible = true;
                 udGenPTTOutDelay.Visible = true;
                 lblMoxDelay.Visible = true;
@@ -6288,9 +6298,9 @@ namespace PowerSDR
 
                 if (is_hermes)
                 {
-                 //   int old_rate = console.NReceivers;
-                  //  int new_rate = 4;
-                  //  bool power = console.PowerOn;
+                    //   int old_rate = console.NReceivers;
+                    //  int new_rate = 4;
+                    //  bool power = console.PowerOn;
 
                     groupBoxHPSDRHW.Visible = true;
                     grpOzyType.Visible = true;
@@ -6303,22 +6313,22 @@ namespace PowerSDR
                     // }
                     radOzyUSB.Enabled = false;
 
-                /*    if (power && new_rate != old_rate)
-                    {
-                        console.PowerOn = false;
-                        Thread.Sleep(100);
-                    }
+                    /*    if (power && new_rate != old_rate)
+                        {
+                            console.PowerOn = false;
+                            Thread.Sleep(100);
+                        }
 
-                    console.NReceivers = 4;
+                        console.NReceivers = 4;
  
-                    if (power && new_rate != old_rate)
-                        console.PowerOn = true; */
+                        if (power && new_rate != old_rate)
+                            console.PowerOn = true; */
                 }
                 else
                 {
-                  //  int old_rate = console.NReceivers;
-                  //  int new_rate = 2;
-                  //  bool power = console.PowerOn;
+                    //  int old_rate = console.NReceivers;
+                    //  int new_rate = 2;
+                    //  bool power = console.PowerOn;
 
                     groupBoxHPSDRHW.Visible = true;
                     grpOzyType.Visible = true;
@@ -6329,16 +6339,16 @@ namespace PowerSDR
                         radOzyUSB.Checked = true;
                     }
 
-                 /*   if (power && new_rate != old_rate)
-                    {
-                        console.PowerOn = false;
-                        Thread.Sleep(100);
-                    }
+                    /*   if (power && new_rate != old_rate)
+                       {
+                           console.PowerOn = false;
+                           Thread.Sleep(100);
+                       }
                     
-                    console.NReceivers = 2;
+                       console.NReceivers = 2;
  
-                    if (power && new_rate != old_rate)
-                        console.PowerOn = true; */
+                       if (power && new_rate != old_rate)
+                           console.PowerOn = true; */
                 }
 
                 chkGeneralSpurRed.Visible = false;
@@ -6434,7 +6444,7 @@ namespace PowerSDR
             else
             {
                 RemoveHPSDRPages();
-              //  grpDSPImageRejectTX.Enabled = true;
+                //  grpDSPImageRejectTX.Enabled = true;
 
                 grpOzyType.Visible = false;
                 grpOzyType.Enabled = false;
@@ -6447,7 +6457,7 @@ namespace PowerSDR
 
                 grpPAGainByBand.Visible = true;
                 grpGeneralHardwareSDR1000.Visible = true;
-               // grpGeneralDDS.Visible = true;
+                // grpGeneralDDS.Visible = true;
                 grpGenCalRXImage.Visible = true;
 
                 groupBoxHPSDRHW.Visible = false;
@@ -6500,11 +6510,11 @@ namespace PowerSDR
                    tcAudio.SelectedIndex = 0;
                } */
 
-          /*  if (tcDSP.TabPages.Contains(tpDSPImageReject))
-            {
-                tcDSP.TabPages.Remove(tpDSPImageReject);
-                tcDSP.SelectedIndex = 0;
-            } */
+            /*  if (tcDSP.TabPages.Contains(tpDSPImageReject))
+              {
+                  tcDSP.TabPages.Remove(tpDSPImageReject);
+                  tcDSP.SelectedIndex = 0;
+              } */
 
 
             if (tcGeneral.TabPages.Contains(tpInfo)) // Info page
@@ -6518,7 +6528,7 @@ namespace PowerSDR
                 tcCAT.TabPages.Remove(tpCAT2);
                 tcCAT.SelectedIndex = 0;
             }
-            
+
             if (!tcGeneral.TabPages.Contains(tpHPSDR))
             {
                 Common.TabControlInsert(tcGeneral, tpHPSDR, 1);
@@ -6599,13 +6609,13 @@ namespace PowerSDR
                    }
                } */
             // else // if (!console.RX2PreampPresent)
-           // {
-                if (tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
-                {
-                    tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
-                    tcAlexControl.SelectedIndex = 0;
-                }
-           // }
+            // {
+            if (tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
+            {
+                tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
+                tcAlexControl.SelectedIndex = 0;
+            }
+            // }
 
             // now make sure enablements are correct 
             if (!chkAlexPresent.Checked)
@@ -6657,7 +6667,7 @@ namespace PowerSDR
 
         private void udSoftRockCenterFreq_ValueChanged(object sender, System.EventArgs e)
         {
-           // console.SoftRockCenterFreq = (double)udSoftRockCenterFreq.Value;
+            // console.SoftRockCenterFreq = (double)udSoftRockCenterFreq.Value;
         }
 
         private void comboGeneralLPTAddr_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -6802,12 +6812,12 @@ namespace PowerSDR
 
         private void udDDSCorrection_ValueChanged(object sender, System.EventArgs e)
         {
-           // console.DDSClockCorrection = (double)(udDDSCorrection.Value / 1000000);
+            // console.DDSClockCorrection = (double)(udDDSCorrection.Value / 1000000);
         }
 
         private void udDDSPLLMult_ValueChanged(object sender, System.EventArgs e)
         {
-           // console.Hdw.PLLMult = (int)udDDSPLLMult.Value;
+            // console.Hdw.PLLMult = (int)udDDSPLLMult.Value;
         }
 
         private void udDDSIFFreq_ValueChanged(object sender, System.EventArgs e)
@@ -6875,7 +6885,7 @@ namespace PowerSDR
                 false);
             if (done) MessageBox.Show("Level Calibration complete.");
             btnGeneralCalLevelStart.Enabled = true;
-           // UpdateDisplayMeter();
+            // UpdateDisplayMeter();
 
         }
 
@@ -6888,7 +6898,7 @@ namespace PowerSDR
                 false);
             if (done) MessageBox.Show("Level Calibration complete.");
             btnCalLevel.Enabled = true;
-          //  UpdateDisplayMeter();
+            //  UpdateDisplayMeter();
 
         }
 
@@ -7318,7 +7328,7 @@ namespace PowerSDR
 
                 udVAC2Latency.Value = 120;
             }
-            
+
             console.AudioDriverIndex3 = new_driver;
             Audio.Host3 = new_driver;
             GetDevices3();
@@ -7536,8 +7546,8 @@ namespace PowerSDR
             bool power = console.PowerOn;
 
             CWKeyer.AudioLatency = Math.Max(10.0, new_size / (double)console.SampleRate1 * 1e3);
-          //  console.specRX.GetSpecRX(0).BlockSize = new_size;
-          //  console.specRX.GetSpecRX(1).BlockSize = new_size;
+            //  console.specRX.GetSpecRX(0).BlockSize = new_size;
+            //  console.specRX.GetSpecRX(1).BlockSize = new_size;
 
             if (power && old_size != new_size)
             {
@@ -8450,9 +8460,9 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Remove(96000);
                     if (comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Remove(192000);
-                     if (!comboAudioSampleRate1.Items.Contains(384000))
+                    if (!comboAudioSampleRate1.Items.Contains(384000))
                         comboAudioSampleRate1.Items.Add(384000);
-                   comboAudioSampleRate1.Text = "48000";
+                    comboAudioSampleRate1.Text = "48000";
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
                     {
                         if (p.Name == "ASIO")
@@ -8575,9 +8585,9 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(96000);
                     if (comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Remove(192000);
-                     if (!comboAudioSampleRate1.Items.Contains(384000))
+                    if (!comboAudioSampleRate1.Items.Contains(384000))
                         comboAudioSampleRate1.Items.Add(384000);
-                   if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
                         comboAudioSampleRate1.Text = "48000";
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
                     {
@@ -8633,7 +8643,7 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(96000);
                     if (!comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Add(192000);
-                  //  if (radMetis.Checked)
+                    //  if (radMetis.Checked)
                     {
                         if (!comboAudioSampleRate1.Items.Contains(384000))
                             comboAudioSampleRate1.Items.Add(384000);
@@ -8684,9 +8694,9 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(96000);
                     if (comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Remove(192000);
-                     if (!comboAudioSampleRate1.Items.Contains(384000))
+                    if (!comboAudioSampleRate1.Items.Contains(384000))
                         comboAudioSampleRate1.Items.Add(384000);
-                   if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
                         comboAudioSampleRate1.Text = "48000";
                     foreach (PADeviceInfo p in comboAudioDriver1.Items)
                     {
@@ -8820,9 +8830,9 @@ namespace PowerSDR
                         comboAudioSampleRate1.Items.Add(96000);
                     if (!comboAudioSampleRate1.Items.Contains(192000))
                         comboAudioSampleRate1.Items.Add(192000);
-                     if (!comboAudioSampleRate1.Items.Contains(384000))
+                    if (!comboAudioSampleRate1.Items.Contains(384000))
                         comboAudioSampleRate1.Items.Add(384000);
-                   if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
                         comboAudioSampleRate1.Text = "48000";
                     grpAudioDetails1.Enabled = true;
                     grpAudioMicInGain1.Enabled = true;
@@ -8879,9 +8889,9 @@ namespace PowerSDR
 
         private void udDisplayGridMax_ValueChanged(object sender, System.EventArgs e)
         {
-           // if (udDisplayGridMax.Value <= udDisplayGridMin.Value)
-             //   udDisplayGridMax.Value = udDisplayGridMin.Value + 10;
-           // Display.SpectrumGridMax = (int)udDisplayGridMax.Value;
+            // if (udDisplayGridMax.Value <= udDisplayGridMin.Value)
+            //   udDisplayGridMax.Value = udDisplayGridMin.Value + 10;
+            // Display.SpectrumGridMax = (int)udDisplayGridMax.Value;
             UpdateDisplayGridBandInfo();
             switch (console.RX1Band)
             {
@@ -8943,13 +8953,13 @@ namespace PowerSDR
                     break;
             }
 
-         }
+        }
 
         private void udDisplayGridMin_ValueChanged(object sender, System.EventArgs e)
         {
-           // if (udDisplayGridMin.Value >= udDisplayGridMax.Value)
-             //   udDisplayGridMin.Value = udDisplayGridMax.Value - 10;
-           // Display.SpectrumGridMin = (int)udDisplayGridMin.Value;
+            // if (udDisplayGridMin.Value >= udDisplayGridMax.Value)
+            //   udDisplayGridMin.Value = udDisplayGridMax.Value - 10;
+            // Display.SpectrumGridMin = (int)udDisplayGridMin.Value;
             UpdateDisplayGridBandInfo();
             switch (console.RX1Band)
             {
@@ -9011,7 +9021,7 @@ namespace PowerSDR
                     break;
             }
 
-         }
+        }
 
         private void udDisplayGridStep_ValueChanged(object sender, System.EventArgs e)
         {
@@ -9020,10 +9030,10 @@ namespace PowerSDR
 
         private void udRX2DisplayGridMax_ValueChanged(object sender, System.EventArgs e)
         {
-           // if (udRX2DisplayGridMax.Value <= udRX2DisplayGridMin.Value)
+            // if (udRX2DisplayGridMax.Value <= udRX2DisplayGridMin.Value)
             //    udRX2DisplayGridMax.Value = udRX2DisplayGridMin.Value + 10;
-           // Display.RX2SpectrumGridMax = (int)udRX2DisplayGridMax.Value;
-            UpdateDisplayGridBandInfo(); 
+            // Display.RX2SpectrumGridMax = (int)udRX2DisplayGridMax.Value;
+            UpdateDisplayGridBandInfo();
             switch (console.RX2Band)
             {
                 case Band.B160M:
@@ -9087,10 +9097,10 @@ namespace PowerSDR
 
         private void udRX2DisplayGridMin_ValueChanged(object sender, System.EventArgs e)
         {
-           // if (udRX2DisplayGridMin.Value >= udRX2DisplayGridMax.Value)
+            // if (udRX2DisplayGridMin.Value >= udRX2DisplayGridMax.Value)
             //    udRX2DisplayGridMin.Value = udRX2DisplayGridMax.Value - 10;
-          //  Display.RX2SpectrumGridMin = (int)udRX2DisplayGridMin.Value;
-            UpdateDisplayGridBandInfo(); 
+            //  Display.RX2SpectrumGridMin = (int)udRX2DisplayGridMin.Value;
+            UpdateDisplayGridBandInfo();
             switch (console.RX2Band)
             {
                 case Band.B160M:
@@ -9156,7 +9166,7 @@ namespace PowerSDR
         {
             Display.RX2SpectrumGridStep = (int)udRX2DisplayGridStep.Value;
         }
-        
+
         private void comboDisplayLabelAlign_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             switch (comboDisplayLabelAlign.Text)
@@ -9369,7 +9379,7 @@ namespace PowerSDR
             console.MultimeterTextPeakTime = (int)udDisplayMultiTextHoldTime.Value;
         }
 
-// RX2 WaterFall
+        // RX2 WaterFall
         private void clrbtnRX2WaterfallLow_Changed(object sender, System.EventArgs e)
         {
             Display.RX2WaterfallLowColor = clrbtnRX2WaterfallLow.Color;
@@ -9516,17 +9526,17 @@ namespace PowerSDR
 
         private void chkSpectrumPolyphase_CheckedChanged(object sender, System.EventArgs e)
         {
-           // console.radio.GetDSPRX(0, 0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
-           // console.radio.GetDSPRX(1, 0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
+            // console.radio.GetDSPRX(0, 0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
+            // console.radio.GetDSPRX(1, 0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
             console.radio.GetDSPTX(0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
         }
 
         private void chkRX2SpectrumPolyphase_CheckedChanged(object sender, System.EventArgs e)
         {
-           // console.radio.GetDSPRX(0, 0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
+            // console.radio.GetDSPRX(0, 0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
             console.radio.GetDSPRX(1, 0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
         }
-        
+
         private void udDisplayScopeTime_ValueChanged(object sender, System.EventArgs e)
         {
             //console.ScopeTime = (int)udDisplayScopeTime.Value;
@@ -9665,10 +9675,10 @@ namespace PowerSDR
 
         private void comboDSPWindow_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-           // console.radio.GetDSPRX(0, 0).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
-           // console.radio.GetDSPRX(0, 1).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
-          //  console.radio.GetDSPRX(1, 0).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
-           // console.radio.GetDSPRX(1, 1).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
+            // console.radio.GetDSPRX(0, 0).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
+            // console.radio.GetDSPRX(0, 1).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
+            //  console.radio.GetDSPRX(1, 0).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
+            // console.radio.GetDSPRX(1, 1).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
             console.radio.GetDSPTX(0).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
         }
 
@@ -9705,7 +9715,7 @@ namespace PowerSDR
 
         #region Image Reject
 
-       private void udLMSANF_ValueChanged(object sender, System.EventArgs e)   // (NR0V) modified
+        private void udLMSANF_ValueChanged(object sender, System.EventArgs e)   // (NR0V) modified
         {
             console.radio.GetDSPRX(0, 0).SetANFVals(
                 (int)udLMSANFtaps.Value,
@@ -9772,7 +9782,7 @@ namespace PowerSDR
         {
             // RadioDSP.KeyerIambic = chkCWKeyerIambic.Checked;
             CWKeyer.Iambic = chkCWKeyerIambic.Checked;
-            console.CWIambic = chkCWKeyerIambic.Checked;          
+            console.CWIambic = chkCWKeyerIambic.Checked;
         }
 
         private void udCWKeyerWeight_ValueChanged(object sender, System.EventArgs e)
@@ -10184,6 +10194,11 @@ namespace PowerSDR
             console.TunePower = (int)udTXTunePower.Value;
         }
 
+        private void chkTXTunePower_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.TXTunePower = chkTXTunePower.Checked;
+        }
+
         private string current_profile = "";
         private void comboTXProfileName_SelectedIndexChanged(object sender, System.EventArgs e)
         {
@@ -10449,15 +10464,15 @@ namespace PowerSDR
             dr["Digi_TX_DSP_Buffer"] = (string)comboDSPDigTXBuf.Text;
             dr["CW_RX_DSP_Buffer"] = (string)comboDSPCWRXBuf.Text;
 
-                     dr["Mic_Input_On"] = "0";
-                    dr["Mic_Input_Level"] = 0;
-                    dr["Line_Input_On"] = "0";
-                    dr["Line_Input_Level"] = 0;
-                    dr["Balanced_Line_Input_On"] = "0";
-                    dr["Balanced_Line_Input_Level"] = 0;
-                    dr["FlexWire_Input_On"] = "0";
-                    dr["FlexWire_Input_Level"] = 0;
- 
+            dr["Mic_Input_On"] = "0";
+            dr["Mic_Input_Level"] = 0;
+            dr["Line_Input_On"] = "0";
+            dr["Line_Input_Level"] = 0;
+            dr["Balanced_Line_Input_On"] = "0";
+            dr["Balanced_Line_Input_Level"] = 0;
+            dr["FlexWire_Input_On"] = "0";
+            dr["FlexWire_Input_Level"] = 0;
+
             if (!comboTXProfileName.Items.Contains(name))
             {
                 DB.ds.Tables["TxProfile"].Rows.Add(dr);
@@ -10694,7 +10709,7 @@ namespace PowerSDR
                 ANAN10PAGain12 = 38.8f;
                 ANAN10PAGain10 = 38.8f;
                 ANAN10PAGain6 = 38.8f;
-                
+
                 udANAN10PAGainVHF0.Value = 56.2M;
                 udANAN10PAGainVHF1.Value = 56.2M;
                 udANAN10PAGainVHF2.Value = 56.2M;
@@ -10710,7 +10725,7 @@ namespace PowerSDR
                 udANAN10PAGainVHF12.Value = 56.2M;
                 udANAN10PAGainVHF13.Value = 56.2M;
             }
-            
+
             if (radGenModelANAN100.Checked)
             {
                 ANAN100PAGain160 = 50.0f;
@@ -11155,11 +11170,11 @@ namespace PowerSDR
             console.CAT2Enabled = chkCAT2Enable.Checked;
             if (comboCAT2Port.Text.StartsWith("COM"))
                 console.CAT2Port = Int32.Parse(comboCAT2Port.Text.Substring(3));
-           // console.CATPTTRTS = chkCATPTT_RTS.Checked;
-           // console.CATPTTDTR = chkCATPTT_DTR.Checked;
+            // console.CATPTTRTS = chkCATPTT_RTS.Checked;
+            // console.CATPTTDTR = chkCATPTT_DTR.Checked;
             //console.PTTBitBangEnabled = chkCATPTTEnabled.Checked; 
-           // if (comboCATPTTPort.Text.StartsWith("COM"))
-               // console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3));
+            // if (comboCATPTTPort.Text.StartsWith("COM"))
+            // console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3));
             console.CAT2Parity = SDRSerialPort.StringToParity((string)comboCAT2parity.SelectedItem);
             console.CAT2DataBits = int.Parse((string)comboCAT2databits.SelectedItem);
             console.CAT2StopBits = SDRSerialPort.StringToStopBits((string)comboCAT2stopbits.SelectedItem);
@@ -11218,12 +11233,12 @@ namespace PowerSDR
             string port = "COM" + console.CAT2Port.ToString();
             if (comboCAT2Port.Items.Contains(port))
                 comboCAT2Port.Text = port;
-           // chkCATPTT_RTS.Checked = console.CATPTTRTS;
-           // chkCATPTT_DTR.Checked = console.CATPTTDTR;
-           // chkCATPTTEnabled.Checked = console.PTTBitBangEnabled;
-           // port = "COM" + console.CATPTTBitBangPort.ToString();
-           // if (comboCATPTTPort.Items.Contains(port))
-              //  comboCATPTTPort.Text = port;
+            // chkCATPTT_RTS.Checked = console.CATPTTRTS;
+            // chkCATPTT_DTR.Checked = console.CATPTTDTR;
+            // chkCATPTTEnabled.Checked = console.PTTBitBangEnabled;
+            // port = "COM" + console.CATPTTBitBangPort.ToString();
+            // if (comboCATPTTPort.Items.Contains(port))
+            //  comboCATPTTPort.Text = port;
         }
 
         public void copyCAT3PropsToDialogVars()
@@ -11232,12 +11247,12 @@ namespace PowerSDR
             string port = "COM" + console.CAT3Port.ToString();
             if (comboCAT3Port.Items.Contains(port))
                 comboCAT3Port.Text = port;
-           // chkCATPTT_RTS.Checked = console.CATPTTRTS;
-           // chkCATPTT_DTR.Checked = console.CATPTTDTR;
-           // chkCATPTTEnabled.Checked = console.PTTBitBangEnabled;
-           // port = "COM" + console.CATPTTBitBangPort.ToString();
-           // if (comboCATPTTPort.Items.Contains(port))
-              //  comboCATPTTPort.Text = port;
+            // chkCATPTT_RTS.Checked = console.CATPTTRTS;
+            // chkCATPTT_DTR.Checked = console.CATPTTDTR;
+            // chkCATPTTEnabled.Checked = console.PTTBitBangEnabled;
+            // port = "COM" + console.CATPTTBitBangPort.ToString();
+            // if (comboCATPTTPort.Items.Contains(port))
+            //  comboCATPTTPort.Text = port;
         }
 
         public void copyCAT4PropsToDialogVars()
@@ -11246,13 +11261,13 @@ namespace PowerSDR
             string port = "COM" + console.CAT4Port.ToString();
             if (comboCAT4Port.Items.Contains(port))
                 comboCAT4Port.Text = port;
-          //  chkCATPTT_RTS.Checked = console.CATPTTRTS;
-           // chkCATPTT_DTR.Checked = console.CATPTTDTR;
-           // chkCATPTTEnabled.Checked = console.PTTBitBangEnabled;
-           // port = "COM" + console.CATPTTBitBangPort.ToString();
-           // if (comboCATPTTPort.Items.Contains(port))
-             //   comboCATPTTPort.Text = port;
-       }
+            //  chkCATPTT_RTS.Checked = console.CATPTTRTS;
+            // chkCATPTT_DTR.Checked = console.CATPTTDTR;
+            // chkCATPTTEnabled.Checked = console.PTTBitBangEnabled;
+            // port = "COM" + console.CATPTTBitBangPort.ToString();
+            // if (comboCATPTTPort.Items.Contains(port))
+            //   comboCATPTTPort.Text = port;
+        }
 
         private void chkCATEnable_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -11366,14 +11381,14 @@ namespace PowerSDR
             }
             else
             {
-               /* if (comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
-                {
-                    MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
-                        "CAT Disabled",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                    comboKeyerConnSecondary.Text = "None";
-                } */
+                /* if (comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
+                 {
+                     MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
+                         "CAT Disabled",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information);
+                     comboKeyerConnSecondary.Text = "None";
+                 } */
                 console.CAT2Enabled = false;
             }
         }
@@ -11428,14 +11443,14 @@ namespace PowerSDR
             }
             else
             {
-               /* if (comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
-                {
-                    MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
-                        "CAT Disabled",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                    comboKeyerConnSecondary.Text = "None";
-                } */
+                /* if (comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
+                 {
+                     MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
+                         "CAT Disabled",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information);
+                     comboKeyerConnSecondary.Text = "None";
+                 } */
                 console.CAT3Enabled = false;
             }
         }
@@ -11490,14 +11505,14 @@ namespace PowerSDR
             }
             else
             {
-               /* if (comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
-                {
-                    MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
-                        "CAT Disabled",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                    comboKeyerConnSecondary.Text = "None";
-                } */
+                /* if (comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
+                 {
+                     MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
+                         "CAT Disabled",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information);
+                     comboKeyerConnSecondary.Text = "None";
+                 } */
                 console.CAT4Enabled = false;
             }
         }
@@ -11790,7 +11805,7 @@ namespace PowerSDR
             if (comboCAT2stopbits.SelectedIndex >= 0)
                 console.CAT2StopBits = SDRSerialPort.StringToStopBits(comboCAT2stopbits.Text);
         }
- 
+
         private void comboCAT3stopbits_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboCAT3stopbits.SelectedIndex >= 0)
@@ -11840,10 +11855,10 @@ namespace PowerSDR
 
         private void chkTestIMD_CheckedChanged(object sender, System.EventArgs e)
         {
-           // Audio.SignalSource source = Audio.TXInputSignal;
+            // Audio.SignalSource source = Audio.TXInputSignal;
 
             if (chekTestIMD.Checked)
-            {                
+            {
                 if (!console.PowerOn)
                 {
                     MessageBox.Show("Power must be on to run this test.",
@@ -11856,23 +11871,23 @@ namespace PowerSDR
                 console.PreviousPWR = console.PWR;
                 console.PWR = (int)udTestIMDPower.Value;
                 console.MOX = true;
-                
+
 
                 if (!console.MOX)
                 {
                     chekTestIMD.Checked = false;
                     return;
                 }
-  
+
                 Audio.MOX = true;
                 chekTestIMD.BackColor = console.ButtonSelectedColor;
                 Audio.SineFreq1 = (double)udTestIMDFreq1.Value;
                 Audio.SineFreq2 = (double)udTestIMDFreq2.Value;
                 Audio.two_tone = true;
                 if (radTestIMDInput.Checked)
-                Audio.TXInputSignal = Audio.SignalSource.SINE_TWO_TONE;
+                    Audio.TXInputSignal = Audio.SignalSource.SINE_TWO_TONE;
                 else
-                Audio.TXOutputSignal = Audio.SignalSource.SINE_TWO_TONE;
+                    Audio.TXOutputSignal = Audio.SignalSource.SINE_TWO_TONE;
                 Audio.SourceScale = (Math.Pow(10.0, (double)udTwoToneLevel.Value / 20.0)) * 0.9999;
             }
             else
@@ -12458,22 +12473,22 @@ namespace PowerSDR
 
         private void udSoftRockCenterFreq_LostFocus(object sender, EventArgs e)
         {
-           // udSoftRockCenterFreq.Value = udSoftRockCenterFreq.Value;
+            // udSoftRockCenterFreq.Value = udSoftRockCenterFreq.Value;
         }
 
         private void udDDSCorrection_LostFocus(object sender, EventArgs e)
         {
-           // udDDSCorrection.Value = udDDSCorrection.Value;
+            // udDDSCorrection.Value = udDDSCorrection.Value;
         }
 
         private void udDDSIFFreq_LostFocus(object sender, EventArgs e)
         {
-           // udDDSIFFreq.Value = udDDSIFFreq.Value;
+            // udDDSIFFreq.Value = udDDSIFFreq.Value;
         }
 
         private void udDDSPLLMult_LostFocus(object sender, EventArgs e)
         {
-          //  udDDSPLLMult.Value = udDDSPLLMult.Value;
+            //  udDDSPLLMult.Value = udDDSPLLMult.Value;
         }
 
         private void udGeneralLPTDelay_LostFocus(object sender, EventArgs e)
@@ -12831,7 +12846,7 @@ namespace PowerSDR
             udMicGainMin.Value = udMicGainMin.Value;
         }
 
-          private void udPAGain10_LostFocus(object sender, EventArgs e)
+        private void udPAGain10_LostFocus(object sender, EventArgs e)
         {
             udPAGain10.Value = udPAGain10.Value;
         }
@@ -13203,7 +13218,7 @@ namespace PowerSDR
         {
             Display.RX2WaterfallUpdatePeriod = (int)udRX2DisplayWaterfallUpdatePeriod.Value;
         }
- 
+
         private void chkSnapClickTune_CheckedChanged(object sender, System.EventArgs e)
         {
             console.SnapToClickTuning = chkSnapClickTune.Checked;
@@ -13243,7 +13258,7 @@ namespace PowerSDR
         private FWCAnt old_ant = FWCAnt.ANT1;
         private void ckEnableSigGen_CheckedChanged(object sender, System.EventArgs e)
         {
-            
+
         }
 
         private void chkPANewCal_CheckedChanged(object sender, System.EventArgs e)
@@ -13352,41 +13367,41 @@ namespace PowerSDR
 
         private void chkGenDDSExpert_CheckedChanged(object sender, System.EventArgs e)
         {
-          /*  if (chkGenDDSExpert.Checked && chkGenDDSExpert.Focused)
-            {
-                DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n" +
-                    "experienced PowerSDR users should use.  These controls may allow the user\n" +
-                    "to change important calibration parameters.\n" +
-                    "Are you sure you want to enable Expert mode?",
-                    "Warning: Enable Expert Mode?",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
-                if (dr == DialogResult.No)
-                {
-                    chkGenDDSExpert.Checked = false;
-                    return;
-                }
-            }
+            /*  if (chkGenDDSExpert.Checked && chkGenDDSExpert.Focused)
+              {
+                  DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n" +
+                      "experienced PowerSDR users should use.  These controls may allow the user\n" +
+                      "to change important calibration parameters.\n" +
+                      "Are you sure you want to enable Expert mode?",
+                      "Warning: Enable Expert Mode?",
+                      MessageBoxButtons.YesNo,
+                      MessageBoxIcon.Warning);
+                  if (dr == DialogResult.No)
+                  {
+                      chkGenDDSExpert.Checked = false;
+                      return;
+                  }
+              }
 
-            bool b = chkGenDDSExpert.Checked;
-            switch (console.CurrentModel)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    lblClockCorrection.Visible = b;
-                    udDDSCorrection.Visible = b;
-                    lblIFFrequency.Visible = b;
-                    udDDSIFFreq.Visible = b;
-                    break;
-                default:
-                    lblClockCorrection.Visible = b;
-                    udDDSCorrection.Visible = b;
-                    lblPLLMult.Visible = b;
-                    udDDSPLLMult.Visible = b;
-                    lblIFFrequency.Visible = b;
-                    udDDSIFFreq.Visible = b;
-                    break;
-            } */
+              bool b = chkGenDDSExpert.Checked;
+              switch (console.CurrentModel)
+              {
+                  case Model.FLEX5000:
+                  case Model.FLEX3000:
+                      lblClockCorrection.Visible = b;
+                      udDDSCorrection.Visible = b;
+                      lblIFFrequency.Visible = b;
+                      udDDSIFFreq.Visible = b;
+                      break;
+                  default:
+                      lblClockCorrection.Visible = b;
+                      udDDSCorrection.Visible = b;
+                      lblPLLMult.Visible = b;
+                      udDDSPLLMult.Visible = b;
+                      lblIFFrequency.Visible = b;
+                      udDDSIFFreq.Visible = b;
+                      break;
+              } */
         }
 
         private void chkCalExpert_CheckedChanged(object sender, System.EventArgs e)
@@ -13444,8 +13459,8 @@ namespace PowerSDR
 
         private void chkGenFLEX5000ExtRef_CheckedChanged(object sender, System.EventArgs e)
         {
-          //  if (radGenModelFLEX5000.Checked)
-              //  FWC.SetXREF(chkGenFLEX5000ExtRef.Checked);
+            //  if (radGenModelFLEX5000.Checked)
+            //  FWC.SetXREF(chkGenFLEX5000ExtRef.Checked);
         }
 
         private void chkGenAllModeMicPTT_CheckedChanged(object sender, System.EventArgs e)
@@ -13757,20 +13772,20 @@ namespace PowerSDR
 
         private void udF3KFanTempThresh_ValueChanged(object sender, System.EventArgs e)
         {
-           // console.F3KTempThresh = (float)udF3KFanTempThresh.Value;
+            // console.F3KTempThresh = (float)udF3KFanTempThresh.Value;
         }
 
         private void chkGenTX1Delay_CheckedChanged(object sender, System.EventArgs e)
         {
             if (!console.fwc_init || console.CurrentModel != Model.FLEX3000) return;
-           // FWC.SetAmpTX1DelayEnable(chkGenTX1Delay.Checked);
+            // FWC.SetAmpTX1DelayEnable(chkGenTX1Delay.Checked);
             udGenTX1Delay.Enabled = chkGenTX1Delay.Checked;
         }
 
         private void udGenTX1Delay_ValueChanged(object sender, System.EventArgs e)
         {
             if (!console.fwc_init || console.CurrentModel != Model.FLEX3000) return;
-           // FWC.SetAmpTX1Delay((uint)udGenTX1Delay.Value);
+            // FWC.SetAmpTX1Delay((uint)udGenTX1Delay.Value);
         }
 
         private void comboAppSkin_SelectedIndexChanged(object sender, EventArgs e)
@@ -13810,7 +13825,7 @@ namespace PowerSDR
 
         private void chkGenOptionsShowATUPopup_CheckedChanged(object sender, System.EventArgs e)
         {
-          //  if (console.flex3000ATUForm != null && !console.flex3000ATUForm.IsDisposed)
+            //  if (console.flex3000ATUForm != null && !console.flex3000ATUForm.IsDisposed)
             //    console.flex3000ATUForm.ShowFeedbackPopup = chkGenOptionsShowATUPopup.Checked;
         }
 
@@ -13862,12 +13877,12 @@ namespace PowerSDR
         {
             string path = console.AppDataPath;
             path = path.Substring(0, path.LastIndexOf("\\"));
-           // string appdatapath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                //  + "\\FlexRadio Systems\\PowerSDR mRX\\";
-           // string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            // string appdatapath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            //  + "\\FlexRadio Systems\\PowerSDR mRX\\";
+            // string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string datetime = DateTime.Now.ToShortDateString().Replace("/", "-") + "_" +
                     DateTime.Now.ToShortTimeString().Replace(":", ".");
-          //  saveFileDialog1.FileName = desktop + "\\PowerSDR_database_export_" + datetime + ".xml";
+            //  saveFileDialog1.FileName = desktop + "\\PowerSDR_database_export_" + datetime + ".xml";
             saveFileDialog1.FileName = path + "\\PowerSDR_database_export_" + datetime + ".xml";
             saveFileDialog1.ShowDialog();
         }
@@ -14073,7 +14088,7 @@ namespace PowerSDR
                 console.chkSR.Enabled = false;
                 //  if (console.RX2PreampPresent) console.comboRX2Preamp.Visible = true;
             }
-           // if (radGenModelANAN100D.Checked) console.comboRX2Preamp.Visible = true;
+            // if (radGenModelANAN100D.Checked) console.comboRX2Preamp.Visible = true;
             console.AlexPresent = chkAlexPresent.Checked;
             console.SetComboPreampForHPSDR();
             // if (chkHermesStepAttenuator.Checked) chkHermesStepAttenuator.Checked = true;
@@ -14944,16 +14959,16 @@ namespace PowerSDR
         private void btnHPSDRFreqCalReset_Click(object sender, System.EventArgs e)
         {
             HPSDRFreqCorrectFactor = 1.0;
-          //  JanusAudio.FreqCorrectionFactor = 1.0;
-          /*  if (console != null)
-            {
-                if (console.PowerOn)
-                {
-                    console.PowerOn = false;
-                    Thread.Sleep(100);
-                    console.PowerOn = true;
-                }
-            } */
+            //  JanusAudio.FreqCorrectionFactor = 1.0;
+            /*  if (console != null)
+              {
+                  if (console.PowerOn)
+                  {
+                      console.PowerOn = false;
+                      Thread.Sleep(100);
+                      console.PowerOn = true;
+                  }
+              } */
         }
 
         private void tpHPSDR_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -15040,21 +15055,21 @@ namespace PowerSDR
 
         private void udHPSDRFreqCorrectFactor_ValueChanged(object sender, System.EventArgs e)
         {
-           // if (!console.initializing)
-                JanusAudio.FreqCorrectionFactor = (double)udHPSDRFreqCorrectFactor.Value;
-           // JanusAudio.freqCorrectionChanged();
+            // if (!console.initializing)
+            JanusAudio.FreqCorrectionFactor = (double)udHPSDRFreqCorrectFactor.Value;
+            // JanusAudio.freqCorrectionChanged();
         }
 
         private void udFXtal_ValueChanged_1(object sender, System.EventArgs e) // modif F8CHK
         {
-           // console.SI570FXtal = (double)udFXtal.Value;
+            // console.SI570FXtal = (double)udFXtal.Value;
         }
 
         private void chkGeneralUseSi570_CheckedChanged(object sender, EventArgs e) // modif F8CHK
         {
-           // console.si570_used = chkGeneralUseSi570.Checked;
-          //  grpHWSoftRock.Visible = !chkGeneralUseSi570.Checked;
-          //  grpSI570.Visible = chkGeneralUseSi570.Checked;
+            // console.si570_used = chkGeneralUseSi570.Checked;
+            //  grpHWSoftRock.Visible = !chkGeneralUseSi570.Checked;
+            //  grpSI570.Visible = chkGeneralUseSi570.Checked;
         }
 
         private void chkHERCULES_CheckedChanged(object sender, EventArgs e)
@@ -15069,7 +15084,7 @@ namespace PowerSDR
                             ((CheckBoxTS)c).Checked = false;
                         }
                     }
-   
+
                     chkPenOCrcv1601.Checked = true;
                     chkPenOCxmit1601.Checked = true;
                     chkPenOCrcv802.Checked = true;
@@ -15113,14 +15128,14 @@ namespace PowerSDR
                     chkPenOCrcv66.Checked = true;
                     break;
                 case false:
-                   foreach (Control c in grpPennyExtCtrl.Controls)
+                    foreach (Control c in grpPennyExtCtrl.Controls)
                     {
                         if (c.Name.StartsWith("chkPenOC"))
                         {
                             ((CheckBoxTS)c).Checked = false;
                         }
                     }
-                     break;
+                    break;
             }
         }
 
@@ -15185,11 +15200,11 @@ namespace PowerSDR
                 case "United Kingdom":
                     region = FRSRegion.UK;
                     //console.Extended = false;
-                   // Display.Init();
+                    // Display.Init();
                     break;
                 case "United States":
                     region = FRSRegion.US;
-                   // Display.Init();
+                    // Display.Init();
                     break;
                 case "Norway":
                     region = FRSRegion.Norway;
@@ -15301,8 +15316,8 @@ namespace PowerSDR
                 grpMetisAddr.Visible = false;
                 radMicIn_CheckedChanged(this, EventArgs.Empty);
                 radLineIn_CheckedChanged(this, EventArgs.Empty);
-               // if (comboAudioSampleRate1.Items.Contains(384000))
-                   // comboAudioSampleRate1.Items.Remove(384000);
+                // if (comboAudioSampleRate1.Items.Contains(384000))
+                // comboAudioSampleRate1.Items.Remove(384000);
                 if (!comboAudioSampleRate1.Items.Contains(384000))
                     comboAudioSampleRate1.Items.Add(384000);
             }
@@ -16160,8 +16175,8 @@ namespace PowerSDR
         {
             console.ApolloTunerEnabled = chkApolloTuner.Checked;
 
-           // if (chkApolloTuner.Checked) JanusAudio.EnableApolloTuner(1);
-           // else JanusAudio.EnableApolloTuner(0);
+            // if (chkApolloTuner.Checked) JanusAudio.EnableApolloTuner(1);
+            // else JanusAudio.EnableApolloTuner(0);
         }
 
         private void chkEClassModulation_CheckedChanged(object sender, EventArgs e)
@@ -16454,7 +16469,7 @@ namespace PowerSDR
                 udAlex6_5HPFEnd.Value = udAlex9_5HPFStart.Value - (decimal)0.000001;
                 return;
             }
- 
+
         }
 
         private void udAlex9_5HPFEnd_ValueChanged(object sender, EventArgs e)
@@ -16473,7 +16488,7 @@ namespace PowerSDR
                 udAlex9_5HPFEnd.Value = udAlex13HPFStart.Value - (decimal)0.000001;
                 return;
             }
- 
+
         }
 
         private void udAlex13HPFEnd_ValueChanged(object sender, EventArgs e)
@@ -16492,7 +16507,7 @@ namespace PowerSDR
                 udAlex13HPFEnd.Value = udAlex20HPFStart.Value - (decimal)0.000001;
                 return;
             }
- 
+
         }
 
         private void udAlex20HPFEnd_ValueChanged(object sender, EventArgs e)
@@ -16510,12 +16525,12 @@ namespace PowerSDR
             {
                 udAlex20HPFEnd.Value = udAlex6BPFStart.Value - (decimal)0.000001;
                 return;
-            } 
+            }
         }
 
         private void udAlex6BPFEnd_ValueChanged(object sender, EventArgs e)
         {
-  
+
         }
 
         private void chkSWRTuneProtection_CheckedChanged(object sender, EventArgs e)
@@ -16526,21 +16541,21 @@ namespace PowerSDR
         private void tbDisplayFFTSize_Scroll(object sender, EventArgs e)
         {
             console.specRX.GetSpecRX(0).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbDisplayFFTSize.Value))));
-          //  console.specRX.GetSpecRX(1).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbDisplayFFTSize.Value))));
+            //  console.specRX.GetSpecRX(1).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbDisplayFFTSize.Value))));
             console.UpdateRXSpectrumDisplayVars();
             double bin_width = (double)Display.SampleRate / (double)console.specRX.GetSpecRX(0).FFTSize;
             lblDisplayBinWidth.Text = bin_width.ToString("N3");
             Display.RX1FFTSizeOffset = tbDisplayFFTSize.Value * 2;
-           // Display.RX2FFTSizeOffset = tbDisplayFFTSize.Value * 2;
+            // Display.RX2FFTSizeOffset = tbDisplayFFTSize.Value * 2;
         }
 
         private void tbRX2DisplayFFTSize_Scroll(object sender, EventArgs e)
         {
-           // console.specRX.GetSpecRX(0).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbDisplayFFTSize.Value))));
+            // console.specRX.GetSpecRX(0).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbDisplayFFTSize.Value))));
             console.specRX.GetSpecRX(1).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbRX2DisplayFFTSize.Value))));
             double bin_width = (double)Display.SampleRate / (double)console.specRX.GetSpecRX(1).FFTSize;
             lblRX2DisplayBinWidth.Text = bin_width.ToString("N3");
-           // Display.RX1FFTSizeOffset = tbDisplayFFTSize.Value * 2;
+            // Display.RX1FFTSizeOffset = tbDisplayFFTSize.Value * 2;
             Display.RX2FFTSizeOffset = tbRX2DisplayFFTSize.Value * 2;
         }
 
@@ -16734,7 +16749,7 @@ namespace PowerSDR
             else if (radGenModelANAN100D.Checked) radGenModelANAN100D_CheckedChanged(this, EventArgs.Empty);
             else if (radGenModelHermes.Checked) radGenModelHermes_CheckedChanged(this, EventArgs.Empty);
         }
-        
+
         private void chkCBlock_CheckedChanged(object sender, EventArgs e)
         {
             if (chkCBlock.Checked)

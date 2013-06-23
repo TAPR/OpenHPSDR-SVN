@@ -118,6 +118,9 @@ namespace PowerSDR
             lblInfo2.Text = lincor.Info[2].ToString();
             lblInfo3.Text = lincor.Info[3].ToString();
             lblInfo4.Text = lincor.Info[4].ToString();
+            if (lincor.Info[4] != 5) lblInfo5.BackColor = Color.SeaShell;
+            else if (lincor.Info[5] < 0) lblInfo5.BackColor = Color.Red;
+            else lblInfo5.BackColor = Color.Green;
         }
 
         private void btnDSPXLPrintSamples_Click(object sender, EventArgs e)
