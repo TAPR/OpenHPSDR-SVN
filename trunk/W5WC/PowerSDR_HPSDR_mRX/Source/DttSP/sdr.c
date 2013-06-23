@@ -37,7 +37,7 @@ Bridgewater, NJ 08807
 #include <analyzer.h>
 
 #define NEW_DISPLAYS
-//FILE *wcpfile;	// (NR0V)
+FILE *wcpfile;	// (NR0V)
 
 //========================================================================
 /* initialization and termination */
@@ -440,18 +440,18 @@ setup_tx (unsigned int thread)
 		uni[thread].samplerate,			//sample rate
 		0.002,							//tau_attack
 		0.500,							//tau_decay
-		4,								//n_tau
+		8,								//n_tau	
 		1.778,							//max_gain
 		1.0,							//var_gain
 		1.0,							//fixed_gain
 		1.0,							//max_input
-		1.0,							//out_targ
+		1.05,							//out_targ	
 		0.250,							//tau_fast_backaverage
 		0.005,							//tau_fast_decay
 		5.0,							//pop_ratio
 		0.500,							//tau_hang_backmult
 		0.500,							//hangtime
-		0.250,							//hang_thresh
+		2.000,							//hang_thresh
 		0.100,							//tau_hang_decay
 		"LVL");							//tag
 	tx[thread].leveler.flag = TRUE;
@@ -483,7 +483,7 @@ setup_tx (unsigned int thread)
 		uni[thread].samplerate,			//sample rate
 		0.002,							//tau_attack
 		0.010,							//tau_decay
-		4,								//n_tau
+		8,								//n_tau	
 		1.0,							//max_gain
 		1.0,							//var_gain
 		1.0,							//fixed_gain
@@ -494,7 +494,7 @@ setup_tx (unsigned int thread)
 		5.0,							//pop_ratio
 		0.500,							//tau_hang_backmult
 		0.500,							//hangtime
-		0.250,							//hang_thresh
+		2.000,							//hang_thresh	
 		0.100,							//tau_hang_decay
 		"ALC");							//tag
 	tx[thread].alc.flag = TRUE;
@@ -520,7 +520,7 @@ setup_workspace (REAL rate, int buflen, SDRMODE mode,
                  char *wisdom, int specsize, int numrecv, int cpdsize, unsigned int thread)
 {
 	int k;
-	//wcpfile = fopen ("wcptest", "w"); // (NR0V)
+	//wcpfile = fopen ("wcptest.txt", "w"); // (NR0V)	
 
 	setup_all (rate, buflen, mode, wisdom, specsize, numrecv, cpdsize, thread);
 
@@ -539,6 +539,7 @@ void
 destroy_workspace (unsigned int thread)
 {
 	int i, k;
+	//fflush (wcpfile);	
 	//fclose (wcpfile); // (NR0V)
 
 	/* TX */
@@ -1139,6 +1140,7 @@ do_rx_post (int k, unsigned int thread)
 		c_block (rx[thread][k].cbl.gen);
 	//if (rx[thread][k].hpsdr.specflag)
 	//	Spectrum2(rx[thread][k].hpsdr.disp, rx[thread][k].hpsdr.ss, rx[thread][k].hpsdr.LO, (REAL *)CXBbase(rx[thread][k].buf.o));
+
 }
 
 /* demod processing */
@@ -1474,8 +1476,8 @@ do_tx_post (unsigned int thread)
 	
 	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.o), peakr(tx[thread].buf.o));
 
-	// if (tx[thread].alc.flag || (tx[thread].mode == AM) || (tx[thread].mode == SAM))  // (NR0V)
-		WcpAGC (tx[thread].alc.gen); // ALC hardwired to ON
+	if (tx[thread].alc.flag || (tx[thread].mode == AM) || (tx[thread].mode == SAM))  // (NR0V)
+		WcpAGC (tx[thread].alc.gen);
 
 	if ((tx[thread].mode == AM) || (tx[thread].mode == SAM))
 	{
@@ -1513,6 +1515,11 @@ do_tx_post (unsigned int thread)
 	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.o), peakr(tx[thread].buf.o));
 	//fprintf(stderr,"\n");
 	//fflush(stderr);
+	/*{	
+		double buffpeak = CXBpeak(tx[thread].buf.o);
+		fprintf (wcpfile, "%.17f\n", buffpeak);
+		if (buffpeak >= 1.0) fprintf (wcpfile, "******************************************************\n");
+	}*/
 }
 
 /* modulator processing */

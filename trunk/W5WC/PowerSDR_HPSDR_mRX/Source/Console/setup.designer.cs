@@ -1459,6 +1459,7 @@
             this.btnTXProfileSave = new System.Windows.Forms.ButtonTS();
             this.comboTXProfileName = new System.Windows.Forms.ComboBoxTS();
             this.grpPATune = new System.Windows.Forms.GroupBoxTS();
+            this.chkTXTunePower = new System.Windows.Forms.CheckBoxTS();
             this.comboTXTUNMeter = new System.Windows.Forms.ComboBoxTS();
             this.lblTXTUNMeter = new System.Windows.Forms.LabelTS();
             this.lblTransmitTunePower = new System.Windows.Forms.LabelTS();
@@ -23499,7 +23500,7 @@
             this.grpTXVOX.Controls.Add(this.chkTXVOXEnabled);
             this.grpTXVOX.Controls.Add(this.lblTXVOXThreshold);
             this.grpTXVOX.Controls.Add(this.udTXVOXThreshold);
-            this.grpTXVOX.Location = new System.Drawing.Point(8, 165);
+            this.grpTXVOX.Location = new System.Drawing.Point(8, 205);
             this.grpTXVOX.Name = "grpTXVOX";
             this.grpTXVOX.Size = new System.Drawing.Size(136, 141);
             this.grpTXVOX.TabIndex = 50;
@@ -23682,16 +23683,28 @@
             // 
             // grpPATune
             // 
+            this.grpPATune.Controls.Add(this.chkTXTunePower);
             this.grpPATune.Controls.Add(this.comboTXTUNMeter);
             this.grpPATune.Controls.Add(this.lblTXTUNMeter);
             this.grpPATune.Controls.Add(this.lblTransmitTunePower);
             this.grpPATune.Controls.Add(this.udTXTunePower);
             this.grpPATune.Location = new System.Drawing.Point(8, 85);
             this.grpPATune.Name = "grpPATune";
-            this.grpPATune.Size = new System.Drawing.Size(136, 75);
+            this.grpPATune.Size = new System.Drawing.Size(136, 114);
             this.grpPATune.TabIndex = 22;
             this.grpPATune.TabStop = false;
             this.grpPATune.Text = "Tune";
+            // 
+            // chkTXTunePower
+            // 
+            this.chkTXTunePower.Image = null;
+            this.chkTXTunePower.Location = new System.Drawing.Point(15, 79);
+            this.chkTXTunePower.Name = "chkTXTunePower";
+            this.chkTXTunePower.Size = new System.Drawing.Size(108, 16);
+            this.chkTXTunePower.TabIndex = 51;
+            this.chkTXTunePower.Text = "Use Drive Power";
+            this.toolTip1.SetToolTip(this.chkTXTunePower, "Use Drive Power for TUN");
+            this.chkTXTunePower.CheckedChanged += new System.EventHandler(this.chkTXTunePower_CheckedChanged);
             // 
             // comboTXTUNMeter
             // 
@@ -23751,7 +23764,7 @@
             this.udTXTunePower.TabIndex = 4;
             this.toolTip1.SetToolTip(this.udTXTunePower, "Power used when using the TUN button on the front panel.");
             this.udTXTunePower.Value = new decimal(new int[] {
-            10,
+            0,
             0,
             0,
             0});
@@ -37411,5 +37424,6 @@
         private System.Windows.Forms.RadioButtonTS radTestIMDOutput;
         private System.Windows.Forms.RadioButtonTS radTestIMDInput;
         private System.Windows.Forms.CheckBoxTS chkRX2StepAtt;
+        private System.Windows.Forms.CheckBoxTS chkTXTunePower;
     }
 }

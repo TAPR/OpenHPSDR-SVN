@@ -340,14 +340,24 @@ unsigned char fpga_test_buf[512] = {
 #define STATE_SYNC_HI (7)
 #define STATE_SYNC_MID (8)
 #define STATE_SYNC_LO (9)
-#define STATE_SAMPLE_HI (10)
-#define STATE_SAMPLE_MID (11)
-#define STATE_SAMPLE_LO (12)
-#define STATE_SAMPLE_MIC_HI (13)
-#define STATE_SAMPLE_MIC_LO (14)
-
-#define STATE_PADDING_LOOP (15)
-
+#define STATE_SAMPLE_I1_HI (10)
+#define STATE_SAMPLE_I1_MID (11)
+#define STATE_SAMPLE_I1_LO (12)
+#define STATE_SAMPLE_Q1_HI (13)
+#define STATE_SAMPLE_Q1_MID (14)
+#define STATE_SAMPLE_Q1_LO (15)
+#define STATE_SAMPLE_I2_HI (16)
+#define STATE_SAMPLE_I2_MID (17)
+#define STATE_SAMPLE_I2_LO (18)
+#define STATE_SAMPLE_Q2_HI (19)
+#define STATE_SAMPLE_Q2_MID (20)
+#define STATE_SAMPLE_Q2_LO (21)
+#define STATE_SAMPLE_MIC_HI (22)
+#define STATE_SAMPLE_MIC_LO (23)
+#define STATE_PADDING_LOOP  (24)
+#define STATE_SAMPLE_HI (25)
+#define STATE_SAMPLE_MID (26)
+#define STATE_SAMPLE_LO (27)
 #define OUT_STATE_SYNC_HI_NEEDED (1)
 #define OUT_STATE_LEFT_HI_NEEDED (2)
 #define OUT_STATE_RIGHT_HI_NEEDED (3)
@@ -670,7 +680,8 @@ void ForceCandCFrames(int count, int c0, int vfofreq) {
 	buf[4] = (SampleRateIn2Bits	& 3) | ( C1Mask	& 0xfc ); /* c1	*/
 	buf[5] = PennyOCBits <<	1;							  /* c2	*/
 	buf[6] = (AlexAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; /* c3 */
-	buf[7] = AlexTxAnt | NRx | Duplex; /* c4 */
+//	buf[7] = (AlexTxAnt & 0x3) | 0x08; //dual Mercs
+	buf[7] =  0x08 | 0x80; //0x08 dual Mercs, 0x80 common Merc freq
 
 	buf[512] = 0x7f; 
 	buf[513] = 0x7f; 
@@ -792,6 +803,20 @@ void IOThreadMainLoop(void) {
 	int frames_written_this_read = 0; // how many frames have we written on this read
 	int sync_samples = 0;
 	int padding_loops = 0;
+	double R_I = 0;				//I component of phase-shift rotate vector R
+	double R_Q = 0;				//Q component of phase-shift rotate vector R
+	double R_IA = 0;
+	double R_QA = 0;
+	int r_Merc;					//Mercury board to use as reference stream
+	double I_shift = 0;			//for vector phase shift calc
+	double Q_shift = 0;			//for vector phase shift calc
+	int Merc1_I = 0;			//I input from first Merc board
+	int Merc1_Q = 0;			//Q input from first Merc board
+	int Merc2_I = 0;		    //I input from second Merc board
+	int Merc2_Q = 0;			//Q input from second Merc board
+	int div_toggle = 0;			//toggle for updating freq for Merc11, Merc2, and Tx (same freq for all)
+	int IQ_stream;				//sets the IQ stream processing (1: Merc1 only, 2: Merc2 only, 
+	//3: both Mercs in diversity/directional nulling mode)
 
 	int wrote_frame = 0;
 	int ok_to_write = 0;
@@ -857,7 +882,13 @@ void IOThreadMainLoop(void) {
 		break;
 	}
 
-	ForceCandCFrame(1); // send 3 C&C frames to make sure ozy knows the clock settings 
+	if (MercSource == 0){
+		MercSource = 3; //set default to diversity Rx mode
+	}
+	if (refMerc == 0) {
+		refMerc = 1;  //set default to Mercury 1 for reference stream
+	}
+	ForceCandCFrame(3); // send 3 C&C frames to make sure ozy knows the clock settings 
 	// printf("iot: main loop starting\n"); fflush(stdout);
 	// main loop - read a buffer, processe it and then write a buffer if we have one to write
 	while ( io_keep_running != 0 ) {
@@ -865,6 +896,12 @@ void IOThreadMainLoop(void) {
 		// if we wrote a frame last time (saying we may still have data waiting to be written) around
 		// and there is space in the fifo, skip the read and write another frame
 		//
+		//first get the current MercSource value to determine how to process the IQ data streams from Metis/Ozy/Magister
+		// MercSource = 1, process Mercury 1 IQ stream only
+		// MercSource = 2, process Mercury 2 IQ stream only
+		// MercSource = 3, process both Merc IQ streams in directional steering mode
+
+		IQ_stream = MercSource; //get the current value
 
 		if ( !isMetis || !wrote_frame ) { /* if not metis write, or if we did not write frame last time, time to read */ 				
 
@@ -1081,11 +1118,131 @@ void IOThreadMainLoop(void) {
 						break;
 					}
 
-					state = STATE_SAMPLE_HI;
-					//  sample_is_left = 1;
+					if (0)//(diversitymode)	//if diversity
+						state = STATE_SAMPLE_I1_HI;
+					else
+						state = STATE_SAMPLE_HI;
+
 					// printf("fa: %d fp: %d\n", RxFifoAvail, RxFramePlaying);
 					break;
 
+				case STATE_SAMPLE_I1_HI:
+					Merc1_I = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
+					state = STATE_SAMPLE_I1_MID;
+					break;
+
+				case STATE_SAMPLE_I1_MID:
+					Merc1_I = (((unsigned char)FPGAReadBufp[i]) <<8) | Merc1_I;  // add in middle part of sample -- unsigned!
+					state = STATE_SAMPLE_I1_LO;
+					break;
+
+				case STATE_SAMPLE_I1_LO:
+					Merc1_I = ((unsigned char)FPGAReadBufp[i]) | Merc1_I; // add in last part of sample
+					++samples_this_sync;
+					state = STATE_SAMPLE_Q1_HI;
+					break;
+
+				case STATE_SAMPLE_Q1_HI:
+					Merc1_Q = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
+					state = STATE_SAMPLE_Q1_MID;
+					break;
+
+				case STATE_SAMPLE_Q1_MID:
+					Merc1_Q = (((unsigned char)FPGAReadBufp[i]) <<8) | Merc1_Q;  // add in middle part of sample -- unsigned!
+					state = STATE_SAMPLE_Q1_LO;
+					break;
+
+				case STATE_SAMPLE_Q1_LO:
+					Merc1_Q = ((unsigned char)FPGAReadBufp[i]) | Merc1_Q; // add in last part of sample
+					++samples_this_sync;
+					state = STATE_SAMPLE_I2_HI;
+					break;
+
+				case STATE_SAMPLE_I2_HI:
+					Merc2_I = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
+					state = STATE_SAMPLE_I2_MID;
+					break;
+
+				case STATE_SAMPLE_I2_MID:
+					Merc2_I = (((unsigned char)FPGAReadBufp[i]) <<8) | Merc2_I;  // add in middle part of sample -- unsigned!
+					state = STATE_SAMPLE_I2_LO;
+					break;
+
+				case STATE_SAMPLE_I2_LO:
+					Merc2_I = ((unsigned char)FPGAReadBufp[i]) | Merc2_I; // add in last part of sample
+					++samples_this_sync;
+					state = STATE_SAMPLE_Q2_HI;
+					break;
+
+				case STATE_SAMPLE_Q2_HI:
+					Merc2_Q = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
+					state = STATE_SAMPLE_Q2_MID;
+					break;
+
+				case STATE_SAMPLE_Q2_MID:
+					Merc2_Q = (((unsigned char)FPGAReadBufp[i]) <<8) | Merc2_Q;  // add in middle part of sample -- unsigned!
+					state = STATE_SAMPLE_Q2_LO;
+					break;
+
+				case STATE_SAMPLE_Q2_LO:
+					Merc2_Q = ((unsigned char)FPGAReadBufp[i]) | Merc2_Q; // add in last part of sample
+					++samples_this_sync;
+						//now load IOSampleInBufp buffer with the appropriate sample values for I and Q
+					if (IQ_stream == 1){
+						IOSampleInBufp[sample_count] = Merc1_I;
+						++sample_count;
+						IOSampleInBufp[sample_count] = Merc1_Q;
+						++sample_count;
+					}
+					if (IQ_stream == 2){
+						IOSampleInBufp[sample_count] = Merc2_I;
+						++sample_count;
+						IOSampleInBufp[sample_count] = Merc2_Q;
+						++sample_count;
+					}
+					if (IQ_stream == 3){
+						R_IA = I_RotateA;   //read external A shift vector I component
+						R_QA = Q_RotateA;   //read external A shift vector Q component
+						//R_I = I_Rotate;		//read external shift vector I component
+						//R_Q = Q_Rotate;		//read external shift vector Q component
+						r_Merc = refMerc;   //read which Mercury board to use for reference stream
+
+						if (r_Merc == 1) {
+							//shift Merc2 stream
+							I_shift = (double) Merc2_I;
+							Q_shift = (double) Merc2_Q;
+							Merc2_I = (int)((I_shift * R_IA) - (Q_shift * R_QA)); //calc Mer2 I component for new rotated vector value
+							Merc2_Q = (int)((Q_shift * R_IA) + (I_shift * R_QA)); //calc Merc2 Q component for new rotated vector value
+
+							//combine the two streams
+							IOSampleInBufp[sample_count] = (Merc1_I + Merc2_I);
+							++sample_count;
+							IOSampleInBufp[sample_count] = (Merc1_Q + Merc2_Q);
+							++sample_count;
+						}
+
+						if (r_Merc == 2) {
+							//shift Merc1 stream
+							I_shift = (double) Merc1_I;
+							Q_shift = (double) Merc1_Q;
+							Merc1_I = (int)((I_shift * R_IA) - (Q_shift * R_QA)); //calc Mer1 I component for new rotated vector value
+							Merc1_Q = (int)((Q_shift * R_IA) + (I_shift * R_QA)); //calc Merc1 Q component for new rotated vector value
+
+							//combine the two streams
+							IOSampleInBufp[sample_count] = (Merc2_I + Merc1_I);
+							++sample_count;
+							IOSampleInBufp[sample_count] = (Merc2_Q + Merc1_Q);
+							++sample_count;
+						}
+					}
+
+					IOSampleInBufp[sample_count] = 0;	// Zero the RX2 I and Q buffers
+					++sample_count;	
+					IOSampleInBufp[sample_count] = 0;
+					++sample_count;
+	
+					state = STATE_SAMPLE_MIC_HI;				
+					break;
 				case STATE_SAMPLE_HI:
 					//printf(" HI");
 					this_num = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
@@ -1145,7 +1302,20 @@ void IOThreadMainLoop(void) {
 					}
 
 					++samples_this_sync;  // 1-rx = 189, 2-rx = 180, 3-rx = 175  4-rx = 171 7-rx = 165
-					state = samples_this_sync == sync_samples ? STATE_PADDING_LOOP : STATE_SAMPLE_HI; 
+					//state = samples_this_sync == sync_samples ? STATE_PADDING_LOOP : STATE_SAMPLE_I1_HI;//STATE_SAMPLE_HI; 
+					if (samples_this_sync == sync_samples) {
+						state = STATE_PADDING_LOOP;
+					}
+					else {										
+						//if (diversitymode) {
+						if (0) {
+							state = STATE_SAMPLE_I1_HI;
+						}
+						else {
+							state = STATE_SAMPLE_HI;
+						}
+					}					
+
 					if (state == STATE_PADDING_LOOP && padding_loops == 0) state = STATE_SYNC_HI;
 
 					//printf("s_t_s: %d\n", samples_this_sync);
@@ -1525,6 +1695,9 @@ void IOThreadMainLoop(void) {
 					case 20:
 					case 21:
 					case 22:
+						if(diversitymode)
+						FPGAWriteBufp[writebufpos] = AlexTxAnt | 0x04 | 0x08 | 0x80;
+						else
 						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex;
 						break;
 					case 1:
@@ -1621,7 +1794,58 @@ void IOThreadMainLoop(void) {
 						break;
 					case 13: //rx7 vfo
 						out_control_idx = 6;
+						break; 
+
+			/*	case 0:
+						out_control_idx = 1;
 						break;
+					case 1: // tx vfo
+						out_control_idx = 2;
+						//out_control_idx = 14;
+						break;
+					case 2: //rx1 vfo
+						 out_control_idx = 3;
+						//out_control_idx = 15;
+						break;
+					case 3: //rx2 vfo
+						out_control_idx = 6;//4;
+						//out_control_idx = 16;
+						break;
+					case 4: //rx3 vfo
+						//out_control_idx = 5;
+						out_control_idx = 17;
+						break; 
+					case 5: //rx4 vfo
+						//out_control_idx = 6; //11;
+						out_control_idx = 18;
+						break;
+					case 6: //Alex filters
+						out_control_idx = 7;
+						//out_control_idx = 19;
+						break;
+					case 7: //Preamp controls
+						out_control_idx = 8; //  Goto Alex 2 Controls
+						//out_control_idx = 20;
+						break;
+					case 8: // Step ATT control
+						 out_control_idx = 0;
+						//out_control_idx = 21;
+						break;
+					case 9: // Alex 3 control
+						out_control_idx = 10;
+						break;
+					case 10: // Alex 4 control
+						out_control_idx = 0;
+						break;
+					case 11: // rx5 vfo
+						out_control_idx = 22;
+						break;
+					case 12: //rx6 vfo
+						out_control_idx = 13;
+						break;
+					case 13: //rx7 vfo
+						out_control_idx = 6;
+						break; */
 
 					case 14:
 						out_control_idx = 2;

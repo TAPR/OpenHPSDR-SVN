@@ -70,6 +70,8 @@
             this.labelTS5 = new System.Windows.Forms.LabelTS();
             this.txtDSPXLRestore = new System.Windows.Forms.TextBoxTS();
             this.btnDSPXLRestore = new System.Windows.Forms.ButtonTS();
+            this.lblInfo5 = new System.Windows.Forms.LabelTS();
+            this.labelTS8 = new System.Windows.Forms.LabelTS();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPXLPhnum)).BeginInit();
             this.grpLincorPS.SuspendLayout();
             this.grpLincorInfo.SuspendLayout();
@@ -212,6 +214,8 @@
             // 
             // grpLincorInfo
             // 
+            this.grpLincorInfo.Controls.Add(this.lblInfo5);
+            this.grpLincorInfo.Controls.Add(this.labelTS8);
             this.grpLincorInfo.Controls.Add(this.lblInfo4);
             this.grpLincorInfo.Controls.Add(this.labelTS146);
             this.grpLincorInfo.Controls.Add(this.lblInfo3);
@@ -616,6 +620,29 @@
             this.btnDSPXLRestore.UseVisualStyleBackColor = true;
             this.btnDSPXLRestore.Click += new System.EventHandler(this.btnDSPXLRestore_Click);
             // 
+            // lblInfo5
+            // 
+            this.lblInfo5.AutoSize = true;
+            this.lblInfo5.BackColor = System.Drawing.Color.SeaShell;
+            this.lblInfo5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblInfo5.ForeColor = System.Drawing.Color.Black;
+            this.lblInfo5.Image = null;
+            this.lblInfo5.Location = new System.Drawing.Point(185, 48);
+            this.lblInfo5.Name = "lblInfo5";
+            this.lblInfo5.Size = new System.Drawing.Size(22, 15);
+            this.lblInfo5.TabIndex = 11;
+            this.lblInfo5.Text = "FB";
+            // 
+            // labelTS8
+            // 
+            this.labelTS8.AutoSize = true;
+            this.labelTS8.Image = null;
+            this.labelTS8.Location = new System.Drawing.Point(126, 48);
+            this.labelTS8.Name = "labelTS8";
+            this.labelTS8.Size = new System.Drawing.Size(52, 13);
+            this.labelTS8.TabIndex = 10;
+            this.labelTS8.Text = "feedback";
+            // 
             // LincorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -643,7 +670,7 @@
             this.Controls.Add(this.labelTS133);
             this.Controls.Add(this.udDSPXLIntervals);
             this.Name = "LincorForm";
-            this.Text = "Linearity Correction 0.13";
+            this.Text = "Linearity Correction 0.14";
             ((System.ComponentModel.ISupportInitialize)(this.udDSPXLPhnum)).EndInit();
             this.grpLincorPS.ResumeLayout(false);
             this.grpLincorPS.PerformLayout();
@@ -703,5 +730,7 @@
         private System.Windows.Forms.LabelTS labelTS5;
         private System.Windows.Forms.TextBoxTS txtDSPXLRestore;
         private System.Windows.Forms.ButtonTS btnDSPXLRestore;
+        private System.Windows.Forms.LabelTS lblInfo5;
+        private System.Windows.Forms.LabelTS labelTS8;
     }
 }

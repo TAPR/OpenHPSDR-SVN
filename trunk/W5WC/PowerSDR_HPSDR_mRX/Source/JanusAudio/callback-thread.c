@@ -64,6 +64,43 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 		(INpointer[nc - 1])[i] = ((float)(bufp[(nc*i)+ nc - 1]))/(float)32767.0;
 	}
 
+	// DIVERSITY SECTION
+	if (diversitymode) {
+	 switch (MercSource)
+	{
+	case 2:
+		for (i = 0; i < BlockSize; i++)
+			{
+				(INpointer[0])[i] = (INpointer[2])[i];
+				(INpointer[1])[i] = (INpointer[3])[i];
+			}
+		break;
+	case 3:
+		if (refMerc == 1)
+		{
+			for (i = 0; i < BlockSize; i++)
+                {
+                    (INpointer[0])[i] += (I_RotateA * (INpointer[2])[i] - Q_RotateA * (INpointer[3])[i]);
+                    (INpointer[1])[i] += (I_RotateA * (INpointer[3])[i] + Q_RotateA * (INpointer[2])[i]);
+                }
+		}
+		if (refMerc == 2)
+		{
+			for (i = 0; i < BlockSize; i++)
+                {
+                    float rx1I = (INpointer[0])[i];
+                    float rx1Q = (INpointer[1])[i];
+                    (INpointer[0])[i] = (INpointer[2])[i] + (I_RotateA * rx1I - Q_RotateA * rx1Q);
+                    (INpointer[1])[i] = (INpointer[3])[i] + (I_RotateA * rx1Q + Q_RotateA * rx1I);
+                }
+		}
+		break;
+	default:
+		break;
+	} 
+  } 
+	// END DIVERSITY
+
 	if ( MicResamplerP != NULL && MicResampleBufp != NULL ) {  // we need to resample mic data 
 		int out_sample_count; 
 		int sample_incr; 

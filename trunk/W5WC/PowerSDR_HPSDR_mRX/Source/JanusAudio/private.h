@@ -266,6 +266,17 @@ extern char PennyOCBits; /* pennny open collector bits */
 
 extern int nreceivers;
 
+extern int MercSource;	//diversity mode IQ source identifier
+extern int refMerc;		//reference Mercury board for diversity phasing
+extern double theta;    //direction angle
+extern double I_Rotate;	//diversity mode phase shift parameter
+extern double Q_Rotate;  //diversity mode phase shift parameter
+extern double I_RotateA; //directional mode A phase shift I parameter
+extern double Q_RotateA; //directional mode A phase shift Q parameter
+extern double I_RotateB; //directional mode A phase shift I parameter
+extern double Q_RotateB; //directional mode A phase shift Q parameter
+extern int diversitymode; // enables diversity mode
+
 extern int AlexAtten;
 extern int Alex2Atten;
 extern int Alex3Atten;
