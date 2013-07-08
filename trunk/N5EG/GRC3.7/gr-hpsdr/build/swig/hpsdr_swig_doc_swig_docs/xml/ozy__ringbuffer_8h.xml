@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="ozy__ringbuffer_8h" kind="file">
+    <compoundname>ozy_ringbuffer.h</compoundname>
+    <innerclass refid="structozy__ringbuffer" prot="public">ozy_ringbuffer</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="ozy__ringbuffer_8h_1a3793789edff213cccc78faa0b629ce00" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structozy__ringbuffer" kindref="compound">ozy_ringbuffer</ref> *</type>
+        <definition>struct ozy_ringbuffer* ozy_output_buffer</definition>
+        <argsstring></argsstring>
+        <name>ozy_output_buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="46"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ozy__ringbuffer_8h_1a843088193edf5ddae85a794f7a7ea03f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structozy__ringbuffer" kindref="compound">ozy_ringbuffer</ref> *</type>
+        <definition>struct ozy_ringbuffer* new_ozy_ringbuffer</definition>
+        <argsstring>(int n)</argsstring>
+        <name>new_ozy_ringbuffer</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="48"/>
+      </memberdef>
+      <memberdef kind="function" id="ozy__ringbuffer_8h_1a370c981c2363faa251b5bdc436790626" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ozy_ringbuffer_put</definition>
+        <argsstring>(struct ozy_ringbuffer *buffer, unsigned char *c, int n)</argsstring>
+        <name>ozy_ringbuffer_put</name>
+        <param>
+          <type>struct <ref refid="structozy__ringbuffer" kindref="compound">ozy_ringbuffer</ref> *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="49"/>
+      </memberdef>
+      <memberdef kind="function" id="ozy__ringbuffer_8h_1aaa05a34c6450e8ea787e47cefe9ddae4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ozy_ringbuffer_get</definition>
+        <argsstring>(struct ozy_ringbuffer *buffer, unsigned char *c, int n)</argsstring>
+        <name>ozy_ringbuffer_get</name>
+        <param>
+          <type>struct <ref refid="structozy__ringbuffer" kindref="compound">ozy_ringbuffer</ref> *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="50"/>
+      </memberdef>
+      <memberdef kind="function" id="ozy__ringbuffer_8h_1ab1844b84039e049a032060715e4da816" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ozy_ringbuffer_entries</definition>
+        <argsstring>(struct ozy_ringbuffer *buffer)</argsstring>
+        <name>ozy_ringbuffer_entries</name>
+        <param>
+          <type>struct <ref refid="structozy__ringbuffer" kindref="compound">ozy_ringbuffer</ref> *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="51"/>
+      </memberdef>
+      <memberdef kind="function" id="ozy__ringbuffer_8h_1a69f28d90ac3cb4f750198716463de918" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void create_ozy_ringbuffer</definition>
+        <argsstring>(int n)</argsstring>
+        <name>create_ozy_ringbuffer</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="52"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Header files for the Ozy ringbuffer functions. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="author"><para>John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S </para></simplesect>
+<simplesect kind="version"><para>0.1 </para></simplesect>
+<simplesect kind="date"><para>2009-01-05 </para></simplesect>
+</para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="9"><highlight class="comment">/*<sp/>Copyright<sp/>(C)<sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="comment">*<sp/>2009<sp/>-<sp/>John<sp/>Melton,<sp/>G0ORX/N6LYT,<sp/>Doxygen<sp/>Comments<sp/>Dave<sp/>Larsen,<sp/>KV0S</highlight></codeline>
+<codeline lineno="11"><highlight class="comment">*<sp/>This<sp/>program<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or</highlight></codeline>
+<codeline lineno="12"><highlight class="comment">*<sp/>modify<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="13"><highlight class="comment">*<sp/>as<sp/>published<sp/>by<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either<sp/>version<sp/>2</highlight></codeline>
+<codeline lineno="14"><highlight class="comment">*<sp/>of<sp/>the<sp/>License,<sp/>or<sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment">*<sp/></highlight></codeline>
+<codeline lineno="16"><highlight class="comment">*<sp/>This<sp/>program<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="17"><highlight class="comment">*<sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="18"><highlight class="comment">*<sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="19"><highlight class="comment">*<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="20"><highlight class="comment">*<sp/></highlight></codeline>
+<codeline lineno="21"><highlight class="comment">*<sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="22"><highlight class="comment">*<sp/>along<sp/>with<sp/>this<sp/>program;<sp/>if<sp/>not,<sp/>write<sp/>to<sp/>the<sp/>Free<sp/>Software</highlight></codeline>
+<codeline lineno="23"><highlight class="comment">*<sp/>Foundation,<sp/>Inc.,<sp/>59<sp/>Temple<sp/>Place<sp/>-<sp/>Suite<sp/>330,<sp/>Boston,<sp/>MA<sp/><sp/>02111-1307,<sp/>USA.</highlight></codeline>
+<codeline lineno="24"><highlight class="comment">*<sp/></highlight></codeline>
+<codeline lineno="25"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>_OZY_RINGBUFFER_H</highlight></codeline>
+<codeline lineno="28"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>_OZY_RINGBUFFER_H</highlight></codeline>
+<codeline lineno="29"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/><sp/>__cplusplus</highlight></codeline>
+<codeline lineno="31"><highlight class="preprocessor"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>--------------------------------------------------------------------------*/</highlight></codeline>
+<codeline lineno="38" refid="structozy__ringbuffer" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structozy__ringbuffer" kindref="compound" tooltip="ozy_ringbuffer">ozy_ringbuffer</ref><sp/>{</highlight></codeline>
+<codeline lineno="39" refid="structozy__ringbuffer_1a64b3533a0f8d4e16c7d717379ee0a9a4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structozy__ringbuffer_1a64b3533a0f8d4e16c7d717379ee0a9a4" kindref="member">size</ref>;</highlight></codeline>
+<codeline lineno="40" refid="structozy__ringbuffer_1ad0ce5f1a1e18e6e02083666baa1d3524" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structozy__ringbuffer_1ad0ce5f1a1e18e6e02083666baa1d3524" kindref="member">entries</ref>;</highlight></codeline>
+<codeline lineno="41" refid="structozy__ringbuffer_1aa181343853ad347a0374ebc81cb36939" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structozy__ringbuffer_1aa181343853ad347a0374ebc81cb36939" kindref="member">buffer</ref>;</highlight></codeline>
+<codeline lineno="42" refid="structozy__ringbuffer_1a03e56ec671e81fa0ff98a053de8cbb08" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structozy__ringbuffer_1a03e56ec671e81fa0ff98a053de8cbb08" kindref="member">insert_index</ref>;</highlight></codeline>
+<codeline lineno="43" refid="structozy__ringbuffer_1a1ce8a41e87a75f4bbd9e47ca5691cc18" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structozy__ringbuffer_1a1ce8a41e87a75f4bbd9e47ca5691cc18" kindref="member">remove_index</ref>;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structozy__ringbuffer" kindref="compound" tooltip="ozy_ringbuffer">ozy_ringbuffer</ref>*<sp/><ref refid="ozy__ringbuffer_8h_1a3793789edff213cccc78faa0b629ce00" kindref="member">ozy_output_buffer</ref>;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structozy__ringbuffer" kindref="compound" tooltip="ozy_ringbuffer">ozy_ringbuffer</ref>*<sp/><ref refid="ozy__ringbuffer_8h_1a843088193edf5ddae85a794f7a7ea03f" kindref="member">new_ozy_ringbuffer</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ozy__ringbuffer_8h_1a370c981c2363faa251b5bdc436790626" kindref="member">ozy_ringbuffer_put</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structozy__ringbuffer" kindref="compound" tooltip="ozy_ringbuffer">ozy_ringbuffer</ref>*<sp/><ref refid="structozy__ringbuffer_1aa181343853ad347a0374ebc81cb36939" kindref="member">buffer</ref>,</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>c,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ozy__ringbuffer_8h_1aaa05a34c6450e8ea787e47cefe9ddae4" kindref="member">ozy_ringbuffer_get</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structozy__ringbuffer" kindref="compound" tooltip="ozy_ringbuffer">ozy_ringbuffer</ref>*<sp/><ref refid="structozy__ringbuffer_1aa181343853ad347a0374ebc81cb36939" kindref="member">buffer</ref>,</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>c,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ozy__ringbuffer_8h_1ab1844b84039e049a032060715e4da816" kindref="member">ozy_ringbuffer_entries</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structozy__ringbuffer" kindref="compound" tooltip="ozy_ringbuffer">ozy_ringbuffer</ref>*<sp/><ref refid="structozy__ringbuffer_1aa181343853ad347a0374ebc81cb36939" kindref="member">buffer</ref>)<sp/>;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="ozy__ringbuffer_8h_1a69f28d90ac3cb4f750198716463de918" kindref="member">create_ozy_ringbuffer</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/><sp/>__cplusplus</highlight></codeline>
+<codeline lineno="55"><highlight class="preprocessor"></highlight><highlight class="normal">}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="57"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">/*<sp/>_OZY_RINGBUFFER_H<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h"/>
+  </compounddef>
+</doxygen>

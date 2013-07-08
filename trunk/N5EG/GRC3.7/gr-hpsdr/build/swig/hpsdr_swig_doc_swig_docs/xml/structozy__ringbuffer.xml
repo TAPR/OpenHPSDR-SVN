@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structozy__ringbuffer" kind="struct" prot="public">
+    <compoundname>ozy_ringbuffer</compoundname>
+    <includes refid="ozy__ringbuffer_8h" local="no">ozy_ringbuffer.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structozy__ringbuffer_1a64b3533a0f8d4e16c7d717379ee0a9a4" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ozy_ringbuffer::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="39" bodyfile="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structozy__ringbuffer_1ad0ce5f1a1e18e6e02083666baa1d3524" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ozy_ringbuffer::entries</definition>
+        <argsstring></argsstring>
+        <name>entries</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="40" bodyfile="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structozy__ringbuffer_1aa181343853ad347a0374ebc81cb36939" prot="public" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* ozy_ringbuffer::buffer</definition>
+        <argsstring></argsstring>
+        <name>buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="41" bodyfile="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structozy__ringbuffer_1a03e56ec671e81fa0ff98a053de8cbb08" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ozy_ringbuffer::insert_index</definition>
+        <argsstring></argsstring>
+        <name>insert_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="42" bodyfile="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structozy__ringbuffer_1a1ce8a41e87a75f4bbd9e47ca5691cc18" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ozy_ringbuffer::remove_index</definition>
+        <argsstring></argsstring>
+        <name>remove_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="43" bodyfile="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="structozy__ringbuffer" kindref="compound">ozy_ringbuffer</ref> </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" line="38" bodyfile="/home/tom/gr-hpsdr/include/ozy_ringbuffer.h" bodystart="38" bodyend="44"/>
+    <listofallmembers>
+      <member refid="structozy__ringbuffer_1aa181343853ad347a0374ebc81cb36939" prot="public" virt="non-virtual"><scope>ozy_ringbuffer</scope><name>buffer</name></member>
+      <member refid="structozy__ringbuffer_1ad0ce5f1a1e18e6e02083666baa1d3524" prot="public" virt="non-virtual"><scope>ozy_ringbuffer</scope><name>entries</name></member>
+      <member refid="structozy__ringbuffer_1a03e56ec671e81fa0ff98a053de8cbb08" prot="public" virt="non-virtual"><scope>ozy_ringbuffer</scope><name>insert_index</name></member>
+      <member refid="structozy__ringbuffer_1a1ce8a41e87a75f4bbd9e47ca5691cc18" prot="public" virt="non-virtual"><scope>ozy_ringbuffer</scope><name>remove_index</name></member>
+      <member refid="structozy__ringbuffer_1a64b3533a0f8d4e16c7d717379ee0a9a4" prot="public" virt="non-virtual"><scope>ozy_ringbuffer</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
