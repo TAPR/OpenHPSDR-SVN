@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.3.1">
+  <compounddef id="hpsdr__hermesNB_8h" kind="file">
+    <compoundname>hpsdr_hermesNB.h</compoundname>
+    <includes refid="hpsdr__api_8h" local="no">hpsdr_api.h</includes>
+    <includes local="no">gr_block.h</includes>
+    <incdepgraph>
+      <node id="9">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="10">
+        <label>gr_block.h</label>
+      </node>
+      <node id="8">
+        <label>hpsdr_api.h</label>
+        <link refid="hpsdr__api_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h</label>
+        <link refid="hpsdr_hermesNB.h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classhpsdr__hermesNB" prot="public">hpsdr_hermesNB</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classhpsdr__hermesNB" kindref="compound">hpsdr_hermesNB</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;hpsdr_hermesNB&gt; hpsdr_hermesNB_sptr</definition>
+        <argsstring></argsstring>
+        <name>hpsdr_hermesNB_sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="34" bodyfile="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="hpsdr__hermesNB_8h_1a81ce2f55445b0654e4ad1d4e65044ecb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>__GR_ATTR_IMPORT <ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT hpsdr_hermesNB_sptr hpsdr_make_hermesNB</definition>
+        <argsstring>(int RxF, int RxSmp, int RxPre, const char *Intfc, const char *ClkS, const char *AlexC, int NumRx)</argsstring>
+        <name>hpsdr_make_hermesNB</name>
+        <param>
+          <type>int</type>
+          <declname>RxF</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>RxSmp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>RxPre</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>Intfc</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>ClkS</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>AlexC</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>NumRx</declname>
+        </param>
+        <briefdescription>
+<para>Make a HermesNB module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>RxF</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Receive frequency, Hz. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>RxSmp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Receive Sample Rate, 192000, 96000, or 48000 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>RxPre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Rx Preamp on (1) / off (0) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Intfc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ethernet interface to use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>NumRx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of Receivers (1 or 2) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ClkS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HPSDR Clock Source (register C1 when C0 = 0x00) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AlexC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HPSDR Alex Control (register (MSB)C3, C4 for C0=0 and C3, C4(LSB) for C0 = 0x12) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h" line="48"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>-*-<sp/>c++<sp/>-*-<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*<sp/></highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>2012<sp/>Thomas<sp/>C.<sp/>McDermott,<sp/>N5EG.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>This<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or<sp/>modify</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>as<sp/>published<sp/>by</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either<sp/>version<sp/>3,<sp/>or<sp/>(at<sp/>your<sp/>option)</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>This<sp/>software<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>along<sp/>with<sp/>this<sp/>software;<sp/>see<sp/>the<sp/>file<sp/>COPYING.<sp/><sp/>If<sp/>not,<sp/>write<sp/>to</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>the<sp/>Free<sp/>Software<sp/>Foundation,<sp/>Inc.,<sp/>51<sp/>Franklin<sp/>Street,</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>Boston,<sp/>MA<sp/>02110-1301,<sp/>USA.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Version:<sp/>December<sp/>15,<sp/>2012</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>INCLUDED_HPSDR_HERMESNB_H</highlight></codeline>
+<codeline lineno="26"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_HPSDR_HERMESNB_H</highlight></codeline>
+<codeline lineno="27"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="hpsdr__api_8h" kindref="compound">hpsdr_api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_block.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhpsdr__hermesNB" kindref="compound" tooltip="Prototype for Hermes module.">hpsdr_hermesNB</ref>;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;hpsdr_hermesNB&gt;<sp/><ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref>;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><ref refid="hpsdr__api_8h_1a80229b92a018bb12b0f2995f2657bdac" kindref="member">HPSDR_API</ref><sp/><ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref><sp/><ref refid="hpsdr__hermesNB_8h_1a81ce2f55445b0654e4ad1d4e65044ecb" kindref="member" tooltip="Make a HermesNB module.">hpsdr_make_hermesNB</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxF,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxSmp,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxPre,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>Intfc,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>ClkS,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>AlexC,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>NumRx);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="classhpsdr__hermesNB" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="hpsdr__api_8h_1a80229b92a018bb12b0f2995f2657bdac" kindref="member">HPSDR_API</ref><sp/><ref refid="classhpsdr__hermesNB" kindref="compound" tooltip="Prototype for Hermes module.">hpsdr_hermesNB</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr_block</highlight></codeline>
+<codeline lineno="67"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="hpsdr__api_8h_1a80229b92a018bb12b0f2995f2657bdac" kindref="member">HPSDR_API</ref><sp/><ref refid="hpsdr__hermesNB_8h_1a49293348bb3b399c1b5731dfdf46888d" kindref="member">hpsdr_hermesNB_sptr</ref><sp/><ref refid="hpsdr__hermesNB_8h_1a81ce2f55445b0654e4ad1d4e65044ecb" kindref="member" tooltip="Make a HermesNB module.">hpsdr_make_hermesNB</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxF,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxSmp,</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxPre,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>Intfc,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>ClkS,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>AlexC,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>NumRx);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhpsdr__hermesNB" kindref="compound" tooltip="Prototype for Hermes module.">hpsdr_hermesNB</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxF,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxSmp,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>RxPre,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>Intfc,</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>ClkS,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>AlexC,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>NumRx);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~<ref refid="classhpsdr__hermesNB" kindref="compound" tooltip="Prototype for Hermes module.">hpsdr_hermesNB</ref>();</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_Receive0Frequency(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">);<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_Receive1Frequency(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">);<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_TransmitFrequency(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">);<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_RxSampRate(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_RxPreamp(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_PTTMode(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_PTTOffMutesTx(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_PTTOnMutesRx(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_TxDrive(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_ClockSource(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*);<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_AlexControl(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*);<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>callback</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>stop();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>override</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>start();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>override</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>general_work<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_vector_int<sp/>&amp;ninput_items,</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_vector_const_void_star<sp/>&amp;input_items,</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_vector_void_star<sp/>&amp;output_items);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_HPSDR_HERMESNB_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="99"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/tom/gr-hpsdr/include/hpsdr_hermesNB.h"/>
+  </compounddef>
+</doxygen>

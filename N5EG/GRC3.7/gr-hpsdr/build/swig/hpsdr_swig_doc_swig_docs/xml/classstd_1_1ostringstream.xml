@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.1.2">
+  <compounddef id="classstd_1_1ostringstream" kind="class" prot="public">
+    <compoundname>std::ostringstream</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::basic_ostringstream&lt; char &gt;</basecompoundref>
+    <briefdescription>
+<para>STL class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="516">
+        <label>std::ostringstream</label>
+        <childnode refid="517" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="517">
+        <label>std::basic_ostringstream&lt; char &gt;</label>
+        <childnode refid="518" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="518">
+        <label>std::basic_ostream&lt; Char &gt;</label>
+        <childnode refid="519" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="519">
+        <label>std::basic_ios&lt; Char &gt;</label>
+        <childnode refid="520" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="520">
+        <label>std::ios_base</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="521">
+        <label>std::ostringstream</label>
+        <childnode refid="522" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="522">
+        <label>std::basic_ostringstream&lt; char &gt;</label>
+        <childnode refid="523" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="523">
+        <label>std::basic_ostream&lt; Char &gt;</label>
+        <childnode refid="524" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="524">
+        <label>std::basic_ios&lt; Char &gt;</label>
+        <childnode refid="525" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="525">
+        <label>std::ios_base</label>
+      </node>
+    </collaborationgraph>
+    <location file="[STL]" line="1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
