@@ -1,7 +1,9 @@
-README.TXT   November 19, 2012    Tom McDermott, N5EG
+README.TXT   July 8, 2013    Tom McDermott, N5EG
 
+The SVN repository  ./trunk/N5EG/GRC3.7 contains the gnuradio module for Hermes/Metis for GRC Version 3.7. this is a work in progress is is not yet ready.
+PLEASE DON'T CHECK-OUT the. GRC3.7 branch yet - IT'S NOT READY.
 
-The SVN repository  ./trunk/N5EG contains the gnuradio module for Hermes/Metis.
+The SVN repository  ./trunk/N5EG/GRC3.6 contains the gnuradio module for Hermes/Metis for GRC Version 3.6 (tested up through 3.6.5).
 
 Right now, gnuradio only runs on linux. As far as I know, there is no windows
 or Mac version available.
