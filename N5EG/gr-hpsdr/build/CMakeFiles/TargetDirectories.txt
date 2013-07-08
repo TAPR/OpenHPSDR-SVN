@@ -1,8 +1,0 @@
-/home/tom/gr-hpsdr/build/swig/CMakeFiles/_hpsdr_swig.dir
-/home/tom/gr-hpsdr/build/swig/CMakeFiles/_hpsdr_swig_doc_tag.dir
-/home/tom/gr-hpsdr/build/swig/CMakeFiles/_hpsdr_swig_swig_tag.dir
-/home/tom/gr-hpsdr/build/lib/CMakeFiles/gnuradio-hpsdr.dir
-/home/tom/gr-hpsdr/build/apps/CMakeFiles/pygen_apps_9a6dd.dir
-/home/tom/gr-hpsdr/build/python/CMakeFiles/pygen_python_3fc09.dir
-/home/tom/gr-hpsdr/build/swig/CMakeFiles/pygen_swig_5a281.dir
-/home/tom/gr-hpsdr/build/CMakeFiles/uninstall.dir
