@@ -1,0 +1,7 @@
+/*!
+ * \defgroup block GNU Radio HPSDR C++ Signal Processing Blocks
+ * \brief All C++ blocks that can be used from the HPSDR GNU Radio
+ *        module are listed here or in the subcategories below.
+ *
+ */
+
