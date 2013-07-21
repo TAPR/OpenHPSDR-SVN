@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.3.1">
+  <compounddef id="dir_d44c64559bbebec7f509842c48db8b23" kind="dir">
+    <compoundname>/home/tom/gr-hpsdr/include</compoundname>
+    <innerdir refid="dir_b023b814069fe707437211241650afb3">/home/tom/gr-hpsdr/include/hpsdr</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tom/gr-hpsdr/include/"/>
+  </compounddef>
+</doxygen>
