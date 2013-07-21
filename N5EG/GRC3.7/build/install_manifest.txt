@@ -1,0 +1,13 @@
+/usr/local/include/hpsdr/api.h
+/usr/local/include/hpsdr/hermesNB.h
+/usr/local/lib/libgnuradio-hpsdr.so
+/usr/local/lib/python2.7/dist-packages/hpsdr/_hpsdr_swig.so
+/usr/local/lib/python2.7/dist-packages/hpsdr/hpsdr_swig.py
+/usr/local/lib/python2.7/dist-packages/hpsdr/hpsdr_swig.pyc
+/usr/local/lib/python2.7/dist-packages/hpsdr/hpsdr_swig.pyo
+/usr/local/include/hpsdr/hpsdr/swig/hpsdr_swig.i
+/usr/local/include/hpsdr/hpsdr/swig/hpsdr_swig_doc.i
+/usr/local/lib/python2.7/dist-packages/hpsdr/__init__.py
+/usr/local/lib/python2.7/dist-packages/hpsdr/__init__.pyc
+/usr/local/lib/python2.7/dist-packages/hpsdr/__init__.pyo
+/usr/local/share/gnuradio/grc/blocks/hpsdr_hermesNB.xml
