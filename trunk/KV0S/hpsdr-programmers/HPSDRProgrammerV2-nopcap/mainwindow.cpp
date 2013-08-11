@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    this->setWindowTitle(QString("HPSDRProgrammer V2 nppcap %1").arg(QString("%0 %1").arg(VERSION).arg(RELEASE)));
+    this->setWindowTitle(QString("HPSDRProgrammer V2 no pcap %1").arg(QString("%0 %1").arg(VERSION).arg(RELEASE)));
 
     interfaces = Interfaces();
     eraseTimeouts = 0;

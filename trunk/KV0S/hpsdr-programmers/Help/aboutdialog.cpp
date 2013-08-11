@@ -38,7 +38,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->TitleLabel->setText("HPSDRProgrammer_V2a");
+    ui->TitleLabel->setText("HPSDRBootloader");
     ui->logoLabel->setPixmap(QPixmap(":icons/hpsdr4sm.png"));
 
     connect(ui->OKButton,SIGNAL(clicked()),this,SLOT(close()));
