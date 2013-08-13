@@ -1,7 +1,7 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-#define VERSION "(version 2.0.3.4)"
+#define VERSION "(version 2.0.4.0)"
 #define RELEASE "2013-8-10"
 
 // KV0S revise interface
