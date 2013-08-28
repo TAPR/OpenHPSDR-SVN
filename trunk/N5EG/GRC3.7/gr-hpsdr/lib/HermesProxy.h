@@ -47,7 +47,7 @@
 					
 
 typedef float* IQBuf_t;			// IQ buffer type (IQ samples as floats)
-typedef unsigned char * RawBuf_t;	// Raw transmit buffer type
+typedef unsigned char* RawBuf_t;	// Raw transmit buffer type
 
 enum {  PTTOff,				// PTT disabled
 	PTTVox,				// PTT vox mode (examines TxFrame to decide whether to Tx)
@@ -116,7 +116,7 @@ public:
 
 	void SendTxIQ();		// send an IQ buffer to Hermes transmit hardware
 	void BuildControlRegs(unsigned, RawBuf_t);	// fill in the 8 byte sync+control registers from RegNum
-	int PutTxIQ(const gr_complex *, int);	// post a transmit TxIQ buffer
+	int PutTxIQ(const gr_complex *, /*const gr_complex *,*/ int);	// post a transmit TxIQ buffer
 	void ScheduleTxFrame(unsigned long);    // Schedule a Tx frame
 	RawBuf_t GetNextTxBuf(); // get an empty Tx Buffer
 
@@ -133,7 +133,6 @@ public:
 
 	// Not yet implemented
 
-	void SendAudioLR();		// send an LR audio buffer to Hermes hardware
 	void ReceiveMicLR();		// receive an LR audio bufer from Hermes hardware
 
 };

@@ -83,7 +83,7 @@ HermesProxy::HermesProxy(int RxFreq, int RxSmp, const char* Intfc,
 	sscanf(ClkS, "%x", &cs);
 	ClockSource = (cs & 0xFC);
 
-	unsigned int ac;		// Convert AlecControl string to unsigned, then initialize
+	unsigned int ac;		// Convert AlexControl string to unsigned, then initialize
 	sscanf(AlexC, "%x", &ac);
 	AlexControl = ac;
 
@@ -752,9 +752,11 @@ void HermesProxy::BuildControlRegs(unsigned RegNum, RawBuf_t outbuf)
 
 // hermesNB calls this routine to give IQ data from the block input connector to the proxy.
 // Packs transformed data into one HPSDR USB buffer with control registers.
-// HermesNB gives us 63 complex samples - we fill one USB buffer with them
+// HermesNB gives us 63 complex samples from in0, we fill one USB buffer with them.
+// Audio output could come from in1 but that forms a flowgraph loop in most useful cases
+// which is disallowed by GNU Radio, so that code is commented out.
 
-int HermesProxy::PutTxIQ(const gr_complex * in, int nsamples) // called by HermesNB to give us IQ data to send
+int HermesProxy::PutTxIQ(const gr_complex * in0, /*const gr_complex * in1,*/ int nsamples) // called by HermesNB to give us IQ data to send
 {
 
         RawBuf_t outbuf;
@@ -780,17 +782,37 @@ int HermesProxy::PutTxIQ(const gr_complex * in, int nsamples) // called by Herme
 
 	for (int i=0; i<nsamples; i++)			// put 63 IQ samples into frame
         {
-	  outbuf[i*8 + 8] = 0;		// L1 MSB audio channel out
-	  outbuf[i*8 + 9] = 0;		// L0 LSB
-	  outbuf[i*8 + 10] = 0;		// R1 MSB audio channel out
-	  outbuf[i*8 + 11] = 0;		// R0 LSB
+
+	// Note: cannot implement audio output because the flowgraph would form a flow loop
+	// for any Hermes received data which is not allowed in GNU Radio.
+
+/*	  A = (int)(in1[i].real() * 32767.0);	// scale to 16 bits
+	  B = (int)(in1[i].imag() * 32767.0);	// scale to 16 bits
+          I = (unsigned int)A;
+	  Q = (unsigned int)B;
 
  	  // convert float to 2's complement 16-bit
 
-	  A = (int)(in[i].real() * 32767.0);	// scale to 16 bits
-	  B = (int)(in[i].imag() * 32767.0);	// scale to 16 bits
+	  outbuf[i*8 + 8] = (unsigned char)((I & 0xff00) >> 8);  // L1 MSB audio channel out
+	  outbuf[i*8 + 9] = (unsigned char)(I & 0xff);		 // L0 LSB
+	  outbuf[i*8 + 10] = (unsigned char)((Q & 0xff00) >> 8); // R1 MSB audio channel out
+	  outbuf[i*8 + 11] = (unsigned char)(Q & 0xff);		 // R0 LSB
+*/
+
+	// Zero out the audio Left and Right channel outputs.
+
+	  outbuf[i*8 + 8] = 0;		// L1 MSB audio channel out
+	  outbuf[i*8 + 9] = 0;		// L0 LSB
+	  outbuf[i*8 + 10] = 0;		// R1 MSB audio channel out
+	  outbuf[i*8 + 11] = 0;		// R0 LSB   
+
+ 	  // convert float to 2's complement 16-bit
+
+	  A = (int)(in0[i].real() * 32767.0);	// scale to 16 bits
+	  B = (int)(in0[i].imag() * 32767.0);	// scale to 16 bits
           I = (unsigned int)A;
 	  Q = (unsigned int)B;
+
 
 	  if(PTTOffMutesTx & (PTTMode == PTTOff))	// Kill Tx if in Rx and PTTControls the Tx
 	  {
@@ -802,7 +824,9 @@ int HermesProxy::PutTxIQ(const gr_complex * in, int nsamples) // called by Herme
 	  outbuf[i*8 + 13] = (unsigned char)(I & 0xff);		 // I0 LSB
 	  outbuf[i*8 + 14] = (unsigned char)((Q & 0xff00) >> 8); // Q1 MSB
 	  outbuf[i*8 + 15] = (unsigned char)(Q & 0xff);		 // Q0 LSB
+
         };
+
 
 	if(PTTMode == PTTVox)		// if we are in Vox mode, check frame IQ contents
 	{
@@ -915,7 +939,6 @@ void HermesProxy::SendTxIQ()
 
 
 // TODO not yet implemented
-void HermesProxy::SendAudioLR() {};	// send an LR audio buffer to Hermes hardware
 void HermesProxy::ReceiveMicLR() {};	// receive an LR audio bufer from Hermes hardware
 
 

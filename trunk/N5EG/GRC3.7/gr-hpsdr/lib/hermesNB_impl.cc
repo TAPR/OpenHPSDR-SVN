@@ -48,8 +48,8 @@ namespace gr {
     hermesNB_impl::hermesNB_impl(int RxF, int RxSmp, int RxPre,
 	 const char* Intfc, const char * ClkS, const char * AlexC, int NumRx)
       : gr::block("hermesNB",
-              gr::io_signature::make(1, 1, sizeof(gr_complex)),
-              gr::io_signature::make(1, 2, sizeof(gr_complex)) )
+              gr::io_signature::make(1, 1, sizeof(gr_complex)),		// inputs to hermesNB block
+              gr::io_signature::make(1, 2, sizeof(gr_complex)) )	// outputs from hermesNB block
     {
 	Hermes = new HermesProxy(RxF, RxSmp, Intfc, ClkS, AlexC, NumRx);	// Create proxy, do Hermes ethernet discovery
 	Hermes->RxSampleRate = RxSmp;
@@ -87,7 +87,7 @@ void hermesNB::set_Receive0Frequency (float Rx0F) // callback to allow slider to
 	Hermes->Receive0Frequency = (unsigned)Rx0F;	// slider must be of type real, convert to unsigned
     }
 
-void hermesNB::hermesNB::set_Receive1Frequency (float Rx1F) // callback to allow slider to set frequency
+void hermesNB::set_Receive1Frequency (float Rx1F) // callback to allow slider to set frequency
     {
 	Hermes->Receive1Frequency = (unsigned)Rx1F;	// slider must be of type real, convert to unsigned
     }
@@ -154,10 +154,12 @@ int hermesNB_impl::general_work (int noutput_items,
                        gr_vector_void_star &output_items)
     {
 
-       const gr_complex *in = (const gr_complex *) input_items[0];
-       gr_complex *out0 = (gr_complex *) output_items[0];
-  
-       gr_complex *out1;
+       const gr_complex *in0 = (const gr_complex *) input_items[0];	// Tx samples
+ //      const gr_complex *in1 = (const gr_complex *) input_items[1];	// Audio output samples
+
+       gr_complex *out0 = (gr_complex *) output_items[0];		// Rcvr 0 samples
+    
+       gr_complex *out1;						// Rcvr 1 samples
        if (output_items.size() == 2)
 	 out1 = (gr_complex *) output_items[1];
 
@@ -196,9 +198,9 @@ int hermesNB_impl::general_work (int noutput_items,
   // Send I and Q samples received on input port to HermesProxy, it may or may not
   // consume them. Hermes needs 63 complex samples in each HPSDR-USB frame.
 
-       if (ninput_items[0] >= 63)
+       if ((ninput_items[0] >= 63) /*&& (ninput_items[1] >= 63)*/)
        {
-         int consumed = Hermes->PutTxIQ(in, 63);
+         int consumed = Hermes->PutTxIQ(in0, /*in1,*/ 63);
          consume_each(consumed); // Tell runtime system how many input items we consumed on
   				 // each input stream.
        };
