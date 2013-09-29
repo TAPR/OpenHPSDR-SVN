@@ -2,7 +2,7 @@
 #define VERSION_H
 
 #define VERSION "(version 2.0.4.0)"
-#define RELEASE "2013-8-10"
+#define RELEASE "2013-9-28"
 
 // KV0S revise interface
 // Version 2.0 move to Qt5,  revise GUI

@@ -39,7 +39,7 @@ void WriteBoard::discovery()
     QTimer *timer = new QTimer(this);
     timer->setSingleShot(true);
     connect(timer, SIGNAL(timeout()), this, SLOT(update_discovery()));
-    timer->start(4000);
+    timer->start(BOARD_DISCOVERY_TIMEOUT);
 
 
 
@@ -56,7 +56,8 @@ void WriteBoard::update_discovery()
 void WriteBoard::update_command()
 {
     qDebug() << "No return from the erase command";
-    qDebug() << "Power cycle";
+    qDebug() << "Try again";
+
 }
 
 // private load an rbf file
@@ -126,7 +127,7 @@ void WriteBoard::sendCommand(unsigned char command, Board *bd) {
     QTimer *timer = new QTimer(this);
     timer->setSingleShot(true);
     connect(timer, SIGNAL(timeout()), this, SLOT(update_command()));
-    timer->start(20000);
+    timer->start(MAX_ERASE_TIMEOUTS);
 
 }
 
@@ -174,18 +175,18 @@ void WriteBoard::sendData(Board *bd)
 
 // private function to send the command to erase
 void WriteBoard::eraseData(Board *bd) {
-     //qDebug("Erasing device ... (takes several seconds)");
-    stat->status("Erasing device ... (takes several seconds)");
+     //qDebug("Erasing device ... (can take upto  seconds)");
+    stat->status(QString("Erasing device ... (can take upto %0 seconds)").arg(MAX_ERASE_TIMEOUTS/1000));
     sendCommand(ERASE_METIS_FLASH, bd);
     // wait to allow replys
     QTimer::singleShot(MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
 }
 
 void WriteBoard::erase_timeout() {
-    qDebug()<<"WriteBoard::erase_timeout";
+    //qDebug()<<"WriteBoard::erase_timeout";
     if(state==ERASING || state==ERASING_ONLY) {
-        qDebug("Error: erase timeout.");
-        qDebug("Power cycle and try again.");
+        //qDebug("Error: erase timeout.");
+        //qDebug("Try again.");
 
     }
 }
@@ -229,8 +230,6 @@ where MAC_Address is the MAC address of the Metis card that the IP address
 is to the set  - (6 bytes) and IP_Address is the IP address to write to
 that card - (4 bytes).
 
-Once the new IP address has been written then the power needs to be cycled
-in order for the new address to be read using a Discovery."
 
  */
 
@@ -318,6 +317,8 @@ void WriteBoard::readyRead() {
                      boards[bd->toAllString()] = bd;
                      MACaddr.append( bd->getMACAddress() );
                      qDebug() << "board address" << bd->toAllString();
+                     emit update_discovery();
+                     return;
                   }
                 }
                 break;
@@ -339,6 +340,7 @@ void WriteBoard::incOffset()
         sendData(boards[currentboard]);
     }else{
         stat->status("Programming device completed successfully.");
+        emit programmingCompleted();
         emit discover();
     }
 
