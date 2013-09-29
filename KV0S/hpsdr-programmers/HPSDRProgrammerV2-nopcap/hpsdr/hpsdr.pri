@@ -13,7 +13,8 @@ SOURCES += $$PWD/addressdialogprog.cpp \
 HEADERS  += $$PWD/addressdialogprog.h \
 	    $$PWD/board.h \
             $$PWD/interfaces.h \
-            $$PWD/writeboard.h
+            $$PWD/writeboard.h \
+    hpsdr/timeouts.h
 
 FORMS    += $$PWD/addressdialogprog.ui 
             

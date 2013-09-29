@@ -11,6 +11,7 @@
 #include <QTimer>
 
 #include "./hpsdr/board.h"
+#include "./hpsdr/timeouts.h"
 
 // command codes
 #define PROGRAM_METIS_FLASH 0x01
@@ -42,7 +43,7 @@
 #define WRITE_IP 6
 
 
-#define MAX_ERASE_TIMEOUTS 20000 // 20 seconds
+
 
 class WriteBoard : public QObject
 {
@@ -59,6 +60,7 @@ signals:
     void discover();
     void discoveryBoxUpdate();
     void eraseCompleted();
+    void programmingCompleted();
     void nextBuffer();
     void timeout();
 

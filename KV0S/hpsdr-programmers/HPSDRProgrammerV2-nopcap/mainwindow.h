@@ -19,7 +19,9 @@
 #include "./hpsdr/addressdialogprog.h"
 #include "./hpsdr/interfaces.h"
 #include "./hpsdr/writeboard.h"
+#include "./hpsdr/timeouts.h"
 #include "version.h"
+
 
 // states
 #define IDLE 0
@@ -34,7 +36,6 @@
 #define FLASH_ERASING 9
 #define FLASH_PROGRAM 10
 
-#define MAX_ERASE_TIMEOUTS (9000) // 90 seconds
 
 namespace Ui {
 class MainWindow;
@@ -80,8 +81,13 @@ private slots:
     void setIP_UDP();
     void timeout();
     void eraseCompleted();
+    void programmingCompleted();
     void nextBuffer();
     void stbar(QString text);
+
+private:
+    bool discoveryDone;
+    bool programComplete;
 };
 
 #endif // MAINWINDOW_H

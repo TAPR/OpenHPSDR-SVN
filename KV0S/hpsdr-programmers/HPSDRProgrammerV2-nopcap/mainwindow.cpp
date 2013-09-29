@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    this->setWindowTitle(QString("HPSDRProgrammer V2 no pcap %1").arg(QString("%0 %1").arg(VERSION).arg(RELEASE)));
+    this->setWindowTitle(QString("HPSDRProgrammer V2 nopcap %1").arg(QString("%0 %1").arg(VERSION).arg(RELEASE)));
 
     interfaces = Interfaces();
     eraseTimeouts = 0;
@@ -50,6 +50,9 @@ MainWindow::MainWindow(QWidget *parent) :
     add = new AddressDialog(this);
 
     socket = new QUdpSocket(this);
+
+    discoveryDone = false;
+    programComplete = false;
 
     QCoreApplication::setOrganizationName("HPSDR");
     QCoreApplication::setOrganizationDomain("openhpsdr.org");
@@ -103,6 +106,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(wb,SIGNAL(discover()),this,SLOT(discover()));
     connect(wb,SIGNAL(discoveryBoxUpdate()),this,SLOT(discoveryUpdate()));
     connect(wb,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
+    connect(wb,SIGNAL(programmingCompleted()),this,SLOT(programmingCompleted()));
     connect(wb,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
     connect(wb,SIGNAL(timeout()),this,SLOT(timeout()));
 }
@@ -140,6 +144,8 @@ void MainWindow::discover()
     ui->discoverComboBox->clear();
     ui->fileLineEdit->clear();
     wb->boards.clear();
+    discoveryDone = false;
+    programComplete = false;
     wb->discovery();
     qDebug() << "in MainWindow::discover after broadcast";
 }
@@ -147,33 +153,36 @@ void MainWindow::discover()
 void MainWindow::discoveryUpdate()
 {
     QString text;
-    qDebug() << "in MainWindow::discoverUpdate";
+    //qDebug() << "in MainWindow::discoverUpdate";
     qDebug() << wb->boards.uniqueKeys();
 
-    if( wb->boards.uniqueKeys().count() > 0 )
-    {
-
-       ui->discoverComboBox->addItems( QStringList(wb->boards.uniqueKeys()) );
-       wb->currentboard = ui->discoverComboBox->currentText();
-       add->getIPaddress(wb->boards[wb->currentboard]);
-       if( ui->discoverComboBox->count() < 2 )
+    if( discoveryDone == false ){
+       if( wb->boards.uniqueKeys().count() > 0 )
        {
-          text = QString("%0 board found.").arg(ui->discoverComboBox->count());
-       }else{
-          text = QString("%0 boards found.").arg(ui->discoverComboBox->count());
-       }
-       deviceIndicator->setIndent(0);
-       deviceIndicator->setPixmap (QPixmap(":/icons/green16.png"));
-       deviceIndicator->setToolTip (QString ("Device open %0").arg(wb->boards[wb->currentboard]->toIPString()));
-       status( wb->currentboard );
-       status( text );
-     }else{
-        status(" No boards found you may need to use HPSDRBootloader.");
-        int ret = QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
-                                       tr("Discovery has failed\n" "Check that board is on and no jumper on J1 or J12.\n"
+
+          ui->discoverComboBox->addItems( QStringList(wb->boards.uniqueKeys()) );
+          wb->currentboard = ui->discoverComboBox->currentText();
+          add->getIPaddress(wb->boards[wb->currentboard]);
+          if( ui->discoverComboBox->count() < 2 )
+          {
+             text = QString("%0 board found.").arg(ui->discoverComboBox->count());
+          }else{
+             text = QString("%0 boards found.").arg(ui->discoverComboBox->count());
+          }
+          deviceIndicator->setIndent(0);
+          deviceIndicator->setPixmap (QPixmap(":/icons/green16.png"));
+          deviceIndicator->setToolTip (QString ("Device open %0").arg(wb->boards[wb->currentboard]->toIPString()));
+          status( wb->currentboard );
+          status( text );
+          discoveryDone = true;
+        }else{
+          status(" No boards found you may need to use HPSDRBootloader.");
+          QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+                                      tr("Discovery has failed\n" "Check that board is on and no jumper on J1 or J12.\n"
                                           "You may need to use HPSDRBootloader."),
                                        QMessageBox::Ok);
-        return;
+          return;
+       }
     }
 
 }
@@ -216,13 +225,13 @@ void MainWindow::setIP_UDP()
     QStringList *saddr = new QStringList();
     add->getNewIPAddress(saddr);
     wb->changeIP(saddr, wb->boards[wb->currentboard]->getMACAddress());
-    ui->discoverComboBox->clear();
 
+    ui->discoverComboBox->clear();
     stat->status("Rediscovery.");
     QTimer *timer = new QTimer(this);
     timer->setSingleShot(true);
     connect(timer, SIGNAL(timeout()), this, SLOT(discover()));
-    timer->start(2000);
+    timer->start(BOARD_DISCOVERY_TIMEOUT);
 
 
 }
@@ -234,11 +243,12 @@ void MainWindow::timeout() {
     switch(state) {
     case ERASING:
     case ERASING_ONLY:
-            stat->status("Error: erase timeout.");
-            stat->status("Power cycle and try again.");
-            //idle();
-            QApplication::restoreOverrideCursor();
-        //}
+        stat->status("Error: erase timeout.");
+        stat->status("Try again.");
+        QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+                             tr("Erase has timeout at %0 seconds\n").arg(MAX_ERASE_TIMEOUTS/1000),
+                             QMessageBox::Retry, QMessageBox::Cancel);
+        QApplication::restoreOverrideCursor();
         break;
     case PROGRAMMING:
         qDebug()<<"timeout";
@@ -263,37 +273,40 @@ void MainWindow::timeout() {
    }
 }
 
-
+void MainWindow::programmingCompleted() {
+    programComplete = true;
+}
 
 
 // SLOT - eraseCompleted
 void MainWindow::eraseCompleted() {
-    QString text;
-    switch(state) {
-    case ERASING:
-        stat->status("Device erased successfully");
-        state=PROGRAMMING;
-        qDebug("Programming device ...");
-        wb->sendData(wb->boards[wb->currentboard]);
-        break;
-    case ERASING_ONLY:
-        stat->status("Device erased successfully");
-        //status("Device erased successfully");
-        //idle();
-        QApplication::restoreOverrideCursor();
-        break;
-    case READ_MAC:
-        qDebug()<<"received eraseCompleted when state is READ_MAC";
-        break;
-    case READ_IP:
-        qDebug()<<"received eraseCompleted when state is READ_IP";
-        break;
-    case WRITE_IP:
-        stat->status("IP address written successfully");
-        //text=QString("IP address written successfully");
-        //status(text);
-        //idle();
-        break;
+    if( programComplete == false ){
+      switch(state) {
+      case ERASING:
+          stat->status("Device erased successfully");
+          state=PROGRAMMING;
+          qDebug("Programming device ...");
+          wb->sendData(wb->boards[wb->currentboard]);
+          break;
+      case ERASING_ONLY:
+          stat->status("Device erased successfully");
+          //status("Device erased successfully");
+          //idle();
+          QApplication::restoreOverrideCursor();
+          break;
+      case READ_MAC:
+          qDebug()<<"received eraseCompleted when state is READ_MAC";
+          break;
+      case READ_IP:
+          qDebug()<<"received eraseCompleted when state is READ_IP";
+          break;
+      case WRITE_IP:
+          stat->status("IP address written successfully");
+          //text=QString("IP address written successfully");
+          //status(text);
+          //idle();
+          break;
+      }
     }
 }
 
