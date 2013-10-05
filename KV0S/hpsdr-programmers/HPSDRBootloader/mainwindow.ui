@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>739</width>
-    <height>417</height>
+    <height>482</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
     <item row="0" column="0">
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
-       <string>Interface</string>
+       <string>Computer Interface</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
@@ -29,7 +29,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Computer Interface:</string>
+            <string>Interface:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -77,7 +77,7 @@
             <item>
              <widget class="QLabel" name="label_2">
               <property name="text">
-               <string>IP Address:</string>
+               <string>Computer IP Address: </string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -94,7 +94,7 @@
             <item>
              <widget class="QLabel" name="label_4">
               <property name="text">
-               <string>MAC:</string>
+               <string>Computer MAC:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -116,13 +116,13 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="0">
+    <item row="2" column="0">
      <widget class="QGroupBox" name="groupBox_2">
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This programmer can only program primary HPSDR boards with an ethernet connection. The bootloader jumpers (J1 or J12) must be set on the connected board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
-       <string>Programmer</string>
+       <string>Board Programmer</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
@@ -178,13 +178,13 @@
       </layout>
      </widget>
     </item>
-    <item row="2" column="0">
+    <item row="3" column="0">
      <widget class="QGroupBox" name="groupBox_3">
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use the primary HPSDR board as a JTAG programmer for another secondary HPSDR board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
-       <string>JTAG Programmer</string>
+       <string>Use Board as a JTAG Programmer</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_6">
        <item row="0" column="0">
@@ -283,6 +283,60 @@
       </layout>
      </widget>
     </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="title">
+       <string>Board Bootloader</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_8">
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Board MAC address:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="boardMACaddress">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="testStatement">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="boardTest">
+           <property name="text">
+            <string>Test for Bootloader</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -291,7 +345,7 @@
      <x>0</x>
      <y>0</y>
      <width>739</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -339,7 +393,7 @@
   </action>
   <action name="actionStatus">
    <property name="icon">
-    <iconset resource="../Resources/Resources.qrc">
+    <iconset>
      <normaloff>:/icons/status16.png</normaloff>:/icons/status16.png</iconset>
    </property>
    <property name="text">
@@ -351,7 +405,7 @@
   </action>
   <action name="actionIP_Address">
    <property name="icon">
-    <iconset resource="../Resources/Resources.qrc">
+    <iconset>
      <normaloff>:/icons/IPaddress.png</normaloff>:/icons/IPaddress.png</iconset>
    </property>
    <property name="text">
@@ -363,7 +417,7 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="../Resources/Resources.qrc">
+    <iconset>
      <normaloff>:/icons/help16.png</normaloff>:/icons/help16.png</iconset>
    </property>
    <property name="text">
