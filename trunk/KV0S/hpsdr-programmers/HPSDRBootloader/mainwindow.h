@@ -38,7 +38,7 @@
 
 
 #define TIMEOUT 10 // ms
-#define MAX_ERASE_TIMEOUTS (9000) // 90 seconds
+#define MAX_ERASE_TIMEOUTS (40000) // 40 seconds
 
 
 
@@ -54,6 +54,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+signals:
+    void retryProgram();
 
 
 public slots:

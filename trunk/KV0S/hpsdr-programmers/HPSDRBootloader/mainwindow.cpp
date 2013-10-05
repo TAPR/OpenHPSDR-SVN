@@ -77,12 +77,14 @@ MainWindow::MainWindow(QWidget *parent) :
     // Programmer Buttons
     connect(ui->fileBrowseButton,SIGNAL(clicked()),this,SLOT(browse()));
     connect(ui->fileProgramButton,SIGNAL(clicked()),this,SLOT(program()));
+    connect(this,SIGNAL(retryProgram()),this,SLOT(program()));
 
     //JTAG programmer buttons
     connect(ui->interogateButton,SIGNAL(clicked()),this,SLOT(jtagInterrogate()));
     //connect(ui->jtagHelperButton,SIGNAL(clicked()),this,SLOT(jtagBrowse()));
     connect(ui->firmwareButton,SIGNAL(clicked()),this,SLOT(jtagFlashBrowse()));
     connect(ui->jtagProgramButton,SIGNAL(clicked()),this,SLOT(jtagFlashProgram()));
+    connect(ui->boardTest,SIGNAL(clicked()),this,SLOT(getMAC()));
 
     connect(add,SIGNAL(writeIP()),this,SLOT(setIP()));
     connect(add,SIGNAL(readMACAddress()),this,SLOT(getMAC()));
@@ -384,6 +386,7 @@ void MainWindow::getMAC() {
         handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toUtf8().constData()),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toUtf8().constData()<<errbuf;
+            ui->testStatement->setText(QString("No Board with Bootloader Found"));
             QMessageBox::information(this, tr("HPSDRBootloader"),
                   QString("Error: cannot open interface (are you running as root)"), QMessageBox::Close);
             status("Error: cannot open interface (are you running as root)");
@@ -409,6 +412,8 @@ void MainWindow::macAddress(unsigned char* mac) {
     text.sprintf("%02X:%02X:%02X:%02X:%02X:%02X",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
     //ui->programMACLabel->setText(text);
     add->setMACaddress(text);
+    ui->boardMACaddress->setText(text);
+    ui->testStatement->setText(QString("Board with Bootloader Found"));
     text.sprintf("MAC address read successfully");
     idle();
 }
@@ -560,13 +565,13 @@ void MainWindow::setIP() {
 // private function to send the command to erase
 void MainWindow::eraseData() {
     eraseTimeouts=0;
-    status("Erasing device ... (takes several seconds)");
+    status(QString("Erasing device ... (takes up to %0 seconds)").arg(MAX_ERASE_TIMEOUTS/1000));
     if(bootloader) {
         sendRawCommand(ERASE_METIS_FLASH);
     } else {
         sendCommand(ERASE_METIS_FLASH);
         // wait 20 seconds to allow replys
-        QTimer::singleShot(20000,this,SLOT(erase_timeout()));
+        QTimer::singleShot(MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
     }
 }
 
@@ -575,7 +580,7 @@ void MainWindow::erase_timeout() {
     qDebug()<<"MainWindow::erase_timeout";
     if(state==ERASING || state==ERASING_ONLY) {
         status("Error: erase timeout.");
-        status("Power cycle and try again.");
+        status("Try again.");
         idle();
         QApplication::restoreOverrideCursor();
     }
@@ -959,7 +964,7 @@ void MainWindow::nextBuffer() {
     } else {
         status("Programming device completed successfully.");
         if(bootloader) {
-            text.sprintf("Remember to remove jumper on (J1 or J12). Then power cycle.");
+            text.sprintf("Remember to remove jumper on (J1 or J12). Power cycle.");
             status(text);
 
         }
@@ -982,14 +987,23 @@ void MainWindow::timeout() {
             //qDebug()<<"eraseTimeouts="<<eraseTimeouts;
             if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
                 status("Error: erase timeout.");
-                text.sprintf("Remember to remove jumper on (J1 or J12). Then power cycle.");
+                QMessageBox::StandardButton reply;
+                //reply = QMessageBox::question(this, tr("HPSDRBootloader"),
+                //      QString("Erase timed out, try again?"), QMessageBox::No|QMessageBox::Yes);
+                //if (reply == QMessageBox::Yes) {
+                //    qDebug() << "Yes was clicked";
+                //    emit retryProgram();
+                //}
+
+
+                text.sprintf("Remember to remove jumper on (J1 or J12). Try program again.");
                 status(text);
                 idle();
                 QApplication::restoreOverrideCursor();
             }
         } else {
             status("Error: erase timeout.");
-            status("Power cycle and try again.");
+            status("Try program again.");
             idle();
             QApplication::restoreOverrideCursor();
         }
@@ -1031,7 +1045,7 @@ void MainWindow::timeout() {
     case FLASH_ERASING:
         eraseTimeouts++;
         if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
-            status("Error: erase timeout - power cycle and try again?");
+            status("Error: erase timeout - try again?");
             idle();
             QApplication::restoreOverrideCursor();
         }
