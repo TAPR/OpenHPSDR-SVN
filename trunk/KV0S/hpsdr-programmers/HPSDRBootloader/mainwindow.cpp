@@ -240,6 +240,7 @@ void MainWindow::program() {
 
     // check that an interface has been selected
     if(ui->interfaceComboBox->currentIndex()!=-1) {
+        qDebug() << "Hardware address" << hwAddress << hw;
         // check that a file has been selected
         if(ui->fileLineEdit->text().endsWith(".rbf")) {
         //if(ui->fileLineEdit->text().endsWith(".pof")) {
