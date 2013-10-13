@@ -164,12 +164,12 @@ namespace PowerSDR
 		}
 
 
-		public void UpdateAlexAntSelection(Band band, bool tx)  
+        public void UpdateAlexAntSelection(Band band, bool tx, bool xvtr)  
 		{ 
-			UpdateAlexAntSelection(band, tx, true); 
+			UpdateAlexAntSelection(band, tx, true, xvtr); 
 		}
 
-		public void UpdateAlexAntSelection(Band band, bool tx, bool alex_enabled) 
+		public void UpdateAlexAntSelection(Band band, bool tx, bool alex_enabled, bool xvtr) 
 		{
 
 			if ( !alex_enabled ) 
@@ -204,7 +204,8 @@ namespace PowerSDR
 			} 
 			else 
 			{ 
-				rx_only_ant = RxOnlyAnt[idx]; 
+				rx_only_ant = RxOnlyAnt[idx];
+                if (rx_only_ant == 3 && !xvtr) rx_only_ant = 0; // do not use XVTR ant port if not using transverter
 				rx_out = rx_only_ant != 0 ? 1 : 0; 
 				trx_ant = RxAnt[idx]; 
 			}

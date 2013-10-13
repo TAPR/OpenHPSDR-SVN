@@ -2635,12 +2635,6 @@ namespace PowerSDR
 
             if (!localmox)// && !full_duplex)
             {
-               // ScaleBuffer(out_l1, out_r1, frameCount, (float)monitor_volume); // test
-               // ScaleBuffer(out_r1, out_l1, frameCount, (float)monitor_volume);
-
-                //clear the tx out during rx
-              //  ClearBuffer(out_l1, frameCount);
-              //  ClearBuffer(out_r1, frameCount);
                 ClearBuffer(out_l2, frameCount);
                 ClearBuffer(out_r2, frameCount);
 
@@ -2651,17 +2645,10 @@ namespace PowerSDR
                 // Hermes power level set by command and control to programmable gain amp .. 
                 //no need to do digital scaling  for power 
                 {
-                   // ScaleBuffer(out_l2, out_l1, frameCount, (float)TXScale);
-                  //  ScaleBuffer(out_r2, out_r1, frameCount, (float)TXScale);
                     ScaleBuffer(out_l2, out_l2, frameCount, (float)TXScale);
                     ScaleBuffer(out_r2, out_r2, frameCount, (float)TXScale);
                 }
-              //  else //
-               // {
-                  //  CopyBuffer(out_l2, out_l1, frameCount);
-                   // CopyBuffer(out_r2, out_r1, frameCount);
-               //  }
-            }
+             }
 
             if (!full_duplex)
             {
@@ -2673,31 +2660,23 @@ namespace PowerSDR
                         AddBuffer(out_l4, out_l3, frameCount);
                         AddBuffer(out_r4, out_r3, frameCount);
                     }
-                   // ScaleBuffer(out_l4, out_r2, frameCount, (float)monitor_volume);
-                  //  ScaleBuffer(out_r4, out_l2, frameCount, (float)monitor_volume);
                     ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
                     ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
                 }
                 else if (mon) // TX + Monitor
                 {
                     // scale monitor output to match receiver level (half scale)
-                  //  ScaleBuffer(out_l2, out_l2, frameCount, 0.5f);
-                  //  ScaleBuffer(out_r2, out_r2, frameCount, 0.5f);
                     ScaleBuffer(out_l2, out_l1, frameCount, 0.5f);
                     ScaleBuffer(out_r2, out_r1, frameCount, 0.5f);
 
                     // if RX2 is present, combine the outputs
                     if (rx2_enabled && !rx2_auto_mute_tx)
                     {
-                      //  AddBuffer(out_l2, out_r3, frameCount);
-                      //  AddBuffer(out_r2, out_l3, frameCount);
                         AddBuffer(out_l1, out_r3, frameCount);
                         AddBuffer(out_r1, out_l3, frameCount);
                     }
 
                     // Scale the output for Mercury
-                  //  ScaleBuffer(out_l2, out_l2, frameCount, (float)monitor_volume);
-                  //  ScaleBuffer(out_r2, out_r2, frameCount, (float)monitor_volume);
                     ScaleBuffer(out_l1, out_l1, frameCount, (float)monitor_volume);
                     ScaleBuffer(out_r1, out_r1, frameCount, (float)monitor_volume);
                 }
@@ -2707,16 +2686,12 @@ namespace PowerSDR
                     if (rx2_enabled && !rx2_auto_mute_tx)
                     {
                         // Scale the output for Mercury
-                      //  ScaleBuffer(out_l3, out_r2, frameCount, (float)monitor_volume);
-                      //  ScaleBuffer(out_r3, out_l2, frameCount, (float)monitor_volume);
                         ScaleBuffer(out_l3, out_r1, frameCount, (float)monitor_volume);
                         ScaleBuffer(out_r3, out_l1, frameCount, (float)monitor_volume);
                     }
                     else // no RX2, so output RX1
                     {
                         // output silence to Mercury
-                      //  ClearBuffer(out_l2, frameCount);
-                     //   ClearBuffer(out_r2, frameCount);
                         ClearBuffer(out_l1, frameCount);
                         ClearBuffer(out_r1, frameCount);
                     }
@@ -2732,26 +2707,15 @@ namespace PowerSDR
                         if (mon)
                         {
                             // scale monitor output to match receiver level (half scale)
-                          //  ScaleBuffer(out_l2, out_l2, frameCount, 0.5f);
-                           // ScaleBuffer(out_r2, out_r2, frameCount, 0.5f);
                             ScaleBuffer(out_l2, out_l1, frameCount, 0.5f);
                             ScaleBuffer(out_r2, out_r1, frameCount, 0.5f);
 
-                            // copy the non-scaled output to the Line Out channel
-                          //  CopyBuffer(out_l2, out_l4, frameCount);
-                          //  CopyBuffer(out_l1, out_l4, frameCount);
-
-                            // Scale the output for the headphones
-                           // ScaleBuffer(out_l2, out_l2, frameCount, (float)monitor_volume);
-                           // ScaleBuffer(out_r2, out_r2, frameCount, (float)monitor_volume);
                             ScaleBuffer(out_l1, out_l1, frameCount, (float)monitor_volume);
                             ScaleBuffer(out_r1, out_r1, frameCount, (float)monitor_volume);
                         }
                         else // monitor is off, should hear RX audio
                         {
                             // Scale the output for Mercury
-                          //  ScaleBuffer(out_l4, out_r2, frameCount, (float)monitor_volume);
-                          //  ScaleBuffer(out_r4, out_l2, frameCount, (float)monitor_volume);
                             ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
                             ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
                         }
@@ -2766,16 +2730,12 @@ namespace PowerSDR
                         AddBuffer(out_r4, out_r3, frameCount);
 
                         // Scale the output for Mercury
-                      //  ScaleBuffer(out_l4, out_r2, frameCount, (float)monitor_volume);
-                      //  ScaleBuffer(out_r4, out_l2, frameCount, (float)monitor_volume);
                         ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
                         ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
                     }
                     else if (mon) // monitor is on, should hear RX1 + TX audio
                     {
                         // scale monitor output to match receiver level (half scale)
-                      //  ScaleBuffer(out_l2, out_l2, frameCount, 0.5f);
-                      //  ScaleBuffer(out_r2, out_r2, frameCount, 0.5f);
                         ScaleBuffer(out_l2, out_l1, frameCount, 0.5f);
                         ScaleBuffer(out_r2, out_r1, frameCount, 0.5f);
 
@@ -2784,386 +2744,19 @@ namespace PowerSDR
                         AddBuffer(out_r4, out_r2, frameCount);
 
                         // Scale the output for Mercury
-                       // ScaleBuffer(out_l4, out_r2, frameCount, (float)monitor_volume);
-                       // ScaleBuffer(out_r4, out_l2, frameCount, (float)monitor_volume);
                         ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
                         ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
                     }
                     else // monitor is off, should hear RX1 audio
                     {
                         // Scale the output for the headphones
-                      //  ScaleBuffer(out_l4, out_r2, frameCount, (float)monitor_volume);
-                      //  ScaleBuffer(out_r4, out_l2, frameCount, (float)monitor_volume);
                         ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
                         ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
                     }
                 }
             } 
 
-            //end
-            /*    if (!localmox)// && !full_duplex)
-                {
-                    //clear the tx out during rx
-                    ClearBuffer(out_l2, frameCount);
-                    ClearBuffer(out_r2, frameCount);
-
-                }
-                else // otherwise, scale using power factors
-                {
-                    if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent)
-                    // Hermes power level set by command and control to programmable gain amp .. 
-                    //no need to do digital scaling  for power 
-                    {
-                        ScaleBuffer(out_l2, out_l2, frameCount, (float)tx_vol);
-                        ScaleBuffer(out_r2, out_r2, frameCount, (float)tx_vol);
-                    }
-                    else // do hermes/pennylane style scaling 
-                    {
-                        ScaleBuffer(out_l2, out_l2, frameCount, GetPennylaneIQScale());
-                        ScaleBuffer(out_r2, out_r2, frameCount, GetPennylaneIQScale());
-                    }
-                }
-
-                if (!full_duplex)
-                {
-                    if (!localmox) // RX Mode
-                    {
-                        if (rx2_enabled)
-                        {
-                            // Scale the output for Mercury
-                            AddBuffer(out_l4, out_l3, frameCount);
-                            AddBuffer(out_r4, out_r3, frameCount);
-                        }
-                        ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                        ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-
-                        // Copy the output for the Ext Spkr
-                        CopyBuffer(out_l1, out_l3, frameCount);
-                        CopyBuffer(out_r1, out_r3, frameCount);
-
-                        // Copy the output for the Int Spkr
-                        CopyBuffer(out_r1, out_r4, frameCount);
-                    }
-                    else if (mon) // TX + Monitor
-                    {
-                        // scale monitor output to match receiver level (half scale)
-                        ScaleBuffer(out_l2, out_l1, frameCount, 0.5f);
-                        ScaleBuffer(out_r2, out_r1, frameCount, 0.5f);
-
-                        // if RX2 is present, combine the outputs
-                        if (rx2_enabled && !rx2_auto_mute_tx)
-                        {
-                            AddBuffer(out_l1, out_r3, frameCount);
-                            AddBuffer(out_r1, out_l3, frameCount);
-                        }
-
-                        // copy the non-scaled output to the Line Out channel
-                        CopyBuffer(out_l1, out_l4, frameCount);
-
-                        // Scale the output for Mercury
-                        ScaleBuffer(out_l1, out_l1, frameCount, (float)monitor_volume);
-                        ScaleBuffer(out_r1, out_r1, frameCount, (float)monitor_volume);
-
-                        // Copy the output for the Ext Spkr
-                        CopyBuffer(out_l1, out_l3, frameCount);
-                        CopyBuffer(out_r1, out_r3, frameCount);
-
-                        // Copy the output for the Int Spkr
-                        CopyBuffer(out_r1, out_r4, frameCount);
-                    }
-                    else // TX (w/o Monitor)
-                    {
-                        // if RX2 is present, use that output
-                        if (rx2_enabled && !rx2_auto_mute_tx)
-                        {
-                            // copy non-scaled output to the Line Out channel
-                            CopyBuffer(out_l3, out_l4, frameCount);
-
-                            // Scale the output for Mercury
-                            ScaleBuffer(out_l3, out_r1, frameCount, (float)monitor_volume);
-                            ScaleBuffer(out_r3, out_l1, frameCount, (float)monitor_volume);
-
-                            // Copy the output for the Ext Spkr
-                            CopyBuffer(out_l1, out_l3, frameCount);
-                            CopyBuffer(out_r1, out_r3, frameCount);
-
-                            // Copy the output for the Int Spkr
-                            CopyBuffer(out_r1, out_r4, frameCount);
-                        }
-                        else // no RX2, so output RX1
-                        {
-                            // output silence to Line Out
-                            ClearBuffer(out_l4, frameCount);
-
-                            // output silence to Mercury
-                            ClearBuffer(out_l1, frameCount);
-                            ClearBuffer(out_r1, frameCount);
-
-                            // output silence to Ext Spkr
-                            ClearBuffer(out_l3, frameCount);
-                            ClearBuffer(out_r3, frameCount);
-
-                            // output silence to Int Spkr
-                            ClearBuffer(out_r4, frameCount);
-                        }
-                    }
-                }
-                else // Full Duplex
-                {
-                    if (!rx2_enabled)
-                    {
-                        // monitor is on, should hear TX audio
-                        //  if (localmox)
-                        {
-                            if (mon)
-                            {
-                                // scale monitor output to match receiver level (half scale)
-                                ScaleBuffer(out_l2, out_l1, frameCount, 0.5f);
-                                ScaleBuffer(out_r2, out_r1, frameCount, 0.5f);
-
-                                // Scale the output for the headphones
-                                ScaleBuffer(out_l1, out_l1, frameCount, (float)monitor_volume);
-                                ScaleBuffer(out_r1, out_r1, frameCount, (float)monitor_volume);
-
-                                // Copy the output for the Ext Spkr
-                                CopyBuffer(out_l1, out_l3, frameCount);
-                                CopyBuffer(out_r1, out_r3, frameCount);
-
-                                // Copy the output for the Int Spkr
-                                CopyBuffer(out_r1, out_r4, frameCount);
-                            }
-                            else // monitor is off, should hear RX audio
-                            {
-                                // Scale the output for Mercury
-                                ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                                ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-
-                                // Copy the output for the Ext Spkr
-                                CopyBuffer(out_l1, out_l3, frameCount);
-                                CopyBuffer(out_r1, out_r3, frameCount);
-
-                                // Copy the output for the Int Spkr
-                                CopyBuffer(out_r1, out_r4, frameCount);
-                            }
-                        }
-                    }
-                    else // RX2 is enabled
-                    {
-                        if (!localmox)
-                        {
-                            // combine RX2 audio with RX1
-                            AddBuffer(out_l4, out_l3, frameCount);
-                            AddBuffer(out_r4, out_r3, frameCount);
-
-                            // Scale the output for Mercury
-                            ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                            ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-
-                            // Copy the output for the Ext Spkr
-                            CopyBuffer(out_l1, out_l3, frameCount);
-                            CopyBuffer(out_r1, out_r3, frameCount);
-
-                            // Copy the output for the Int Spkr
-                            CopyBuffer(out_r1, out_r4, frameCount);
-                        }
-                        else if (mon) // monitor is on, should hear RX1 + TX audio
-                        {
-                            // scale monitor output to match receiver level (half scale)
-                            ScaleBuffer(out_l2, out_l1, frameCount, 0.5f);
-                            ScaleBuffer(out_r2, out_r1, frameCount, 0.5f);
-
-                            // combine the RX1 and TX audio
-                            AddBuffer(out_l4, out_l2, frameCount);
-                            AddBuffer(out_r4, out_r2, frameCount);
-
-                            // Scale the output for Mercury
-                            ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                            ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-
-                            // Copy the output for the Ext Spkr
-                            CopyBuffer(out_l1, out_l3, frameCount);
-                            CopyBuffer(out_r1, out_r3, frameCount);
-
-                            // Copy the output for the Int Spkr
-                            CopyBuffer(out_r1, out_r4, frameCount);
-                        }
-                        else // monitor is off, should hear RX1 audio
-                        {
-                            // Scale the output for the headphones
-                            ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                            ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-
-                            // Copy the output for the Ext Spkr
-                            CopyBuffer(out_l1, out_l3, frameCount);
-                            CopyBuffer(out_r1, out_r3, frameCount);
-
-                            // Copy the output for the Int Spkr
-                            CopyBuffer(out_r1, out_r4, frameCount);
-                        }
-                    }
-                } */
-
-            /*          double tx_vol = TXScale;
-            if (tx_vol > 1.0) tx_vol = 1.0; // above 1.0 creates spurs
-
-             //redirect main audio to spare buffer
-             CopyBuffer(out_l1, out_l4, frameCount);
-             CopyBuffer(out_r1, out_r4, frameCount);
-
-             if (!localmox && !mon)
-             {
-                 //clear the tx out during rx
-                 ClearBuffer(out_l2, frameCount);
-                 ClearBuffer(out_r2, frameCount);
-
-             }
-             else // otherwise, scale using power factors
-             {
-                 if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent)
-                 // Hermes power level set by command and control to programmable gain amp .. 
-                 //no need to do digital scaling  for power 
-                 {
-                     ScaleBuffer(out_l2, out_l2, frameCount, (float)tx_vol);
-                     ScaleBuffer(out_r2, out_r2, frameCount, (float)tx_vol);
-                 }
-                 else // do hermes/pennylane style scaling 
-                 {
-                     ScaleBuffer(out_l2, out_l2, frameCount, GetPennylaneIQScale());
-                     ScaleBuffer(out_r2, out_r2, frameCount, GetPennylaneIQScale());
-                 }
-             }
-
-             if (!full_duplex)
-             {
-                 if (!localmox) // RX Mode
-                 {
-                     if (!rx2_enabled)
-                     {
-                         // Scale the output for Mercury
-                         // ScaleBuffer(out_l1, out_r1, frameCount, (float)monitor_volume);
-                         // ScaleBuffer(out_r1, out_l1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-                     }
-                     else // RX2 is enabled
-                     {
-                         // Combine RX2 with RX1                   
-
-                         {
-                             // AddBuffer(out_l1, out_l3, frameCount);
-                             // AddBuffer(out_r1, out_r3, frameCount);
-                             AddBuffer(out_l4, out_l3, frameCount);
-                             AddBuffer(out_r4, out_r3, frameCount);
-                         }
-                         // Scale the output for Mercury
-                         // ScaleBuffer(out_l1, out_l1, frameCount, (float)monitor_volume);
-                         // ScaleBuffer(out_r1, out_r1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-                     }
-                 }
-                 else if (mon) // TX + Monitor
-                 {
-                     // scale monitor output to match receiver level (half scale)
-                     ScaleBuffer(out_l2, out_l1, frameCount, 0.5f);
-                     ScaleBuffer(out_r2, out_r1, frameCount, 0.5f);
-
-                     // if RX2 is present, combine the outputs
-                     if (rx2_enabled && !rx2_auto_mute_tx)
-                     {
-                         // AddBuffer(out_l1, out_r3, frameCount);
-                         // AddBuffer(out_r1, out_l3, frameCount);
-                         AddBuffer(out_l1, out_r3, frameCount);
-                         AddBuffer(out_r1, out_l3, frameCount);
-                     }
-                     else // output RX1
-                     {
-                         AddBuffer(out_l1, out_r4, frameCount);
-                         AddBuffer(out_r1, out_l4, frameCount);
-                     }
-
-                     // Scale the output for Mercury
-                     ScaleBuffer(out_l1, out_l1, frameCount, (float)monitor_volume);
-                     ScaleBuffer(out_r1, out_r1, frameCount, (float)monitor_volume);
-                 }
-                 else // TX (w/o Monitor)
-                 {
-                     // if RX2 is present, use that output
-                     if (rx2_enabled && !rx2_auto_mute_tx)
-                     {
-                         // Scale the output for Mercury
-                         ScaleBuffer(out_l3, out_r1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_r3, out_l1, frameCount, (float)monitor_volume);
-                     }
-                     else // no RX2, so output RX1
-                     {
-                         // output silence to Mercury
-                         ClearBuffer(out_l1, frameCount);
-                         ClearBuffer(out_r1, frameCount);
-                         // ScaleBuffer(out_l4, out_l1, frameCount, (float)monitor_volume);
-                         // ScaleBuffer(out_r4, out_r1, frameCount, (float)monitor_volume);
-                     }
-                 }
-             }
-             else // Full Duplex
-             {
-                 if (!rx2_enabled)
-                 {
-                     // monitor is on, should hear TX audio
-                     if (mon)
-                     {
-                         // scale monitor output to match receiver level (half scale)
-                         ScaleBuffer(out_l2, out_l1, frameCount, 0.5f);
-                         ScaleBuffer(out_r2, out_r1, frameCount, 0.5f);
-
-                         // Scale the output for the headphones
-                         ScaleBuffer(out_l1, out_l1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_r1, out_r1, frameCount, (float)monitor_volume);
-                     }
-                     else // monitor is off, should hear RX audio
-                     {
-                         // Scale the output for Mercury
-                         // ScaleBuffer(out_l1, out_r1, frameCount, (float)monitor_volume);
-                         // ScaleBuffer(out_r1, out_l1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-                     }
-                 }
-                 else // RX2 is enabled
-                 {
-                     if (!localmox)
-                     {
-                         // combine RX2 audio with RX1
-                         AddBuffer(out_l4, out_l3, frameCount);
-                         AddBuffer(out_r4, out_r3, frameCount);
-
-                         // Scale the output for Mercury
-                         ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-                     }
-                     else if (mon) // monitor is on, should hear RX1 + TX audio
-                     {
-                         // scale monitor output to match receiver level (half scale)
-                         ScaleBuffer(out_l2, out_l1, frameCount, 0.5f);
-                         ScaleBuffer(out_r2, out_r1, frameCount, 0.5f);
-
-                         // combine the RX1 and TX audio
-                         AddBuffer(out_l1, out_l4, frameCount);
-                         AddBuffer(out_r1, out_r4, frameCount);
-
-                         // Scale the output for Mercury
-                         ScaleBuffer(out_l1, out_r1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_r1, out_l1, frameCount, (float)monitor_volume);
-                     }
-                     else // monitor is off, should hear RX1 audio
-                     {
-                         // Scale the output for the headphones
-                         ScaleBuffer(out_l4, out_r1, frameCount, (float)monitor_volume);
-                         ScaleBuffer(out_r4, out_l1, frameCount, (float)monitor_volume);
-                     }
-                 }
-             } */
-
+ 
 
 #if(MINMAX)
 			Debug.Write(MaxSample(out_l2, out_r2, frameCount).ToString("f6")+",");
@@ -3183,20 +2776,6 @@ namespace PowerSDR
 #endif
             return callback_return;
         }
-
-        /*   private static float GetPennylaneIQScale()
-           {
-               float pennylane_scale;
-               if (TXScale >= PennylanePowerBreakPoint)
-               {
-                   pennylane_scale = (float)TXScale;
-               }
-               else
-               {
-                   pennylane_scale = (float)PennylanePowerBreakPoint;
-               }
-               return pennylane_scale;
-           } */
 
 
 #if(TIMER)
