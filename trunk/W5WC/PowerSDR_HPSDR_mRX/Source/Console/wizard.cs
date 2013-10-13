@@ -1747,10 +1747,10 @@ namespace PowerSDR
                     console.SetupForm.forceAudioSampleRate1("192000");
                     break;
                 default:
-                    console.SetupForm.XVTRPresent = xvtr_present;
-					console.SetupForm.PAPresent = pa_present;
-					console.SetupForm.USBPresent = usb_present;
-					console.SetupForm.ATUPresent = atu_present;
+                  //  console.SetupForm.XVTRPresent = xvtr_present;
+					//console.SetupForm.PAPresent = pa_present;
+					//console.SetupForm.USBPresent = usb_present;
+					//console.SetupForm.ATUPresent = atu_present;
 
 					if(sound_card_index >= 0)
 					{
@@ -1796,8 +1796,8 @@ namespace PowerSDR
 						
 					}
 				
-					if(xvtr_present)
-						console.SetupForm.XVTRSelection = xvtr_index;					
+					//if(xvtr_present)
+					//	console.SetupForm.XVTRSelection = xvtr_index;					
 
 					if(pa_present)
 					{

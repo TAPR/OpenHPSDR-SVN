@@ -61,14 +61,10 @@ namespace PowerSDR
         private TabPage tpDSP;
         private TabPage tpDisplay;
         private TabPage tpGeneral;
-        private ComboBoxTS comboGeneralLPTAddr;
         private ButtonTS btnOK;
         private ButtonTS btnCancel;
         private ButtonTS btnApply;
         public CheckBoxTS chkGeneralSpurRed;
-        private LabelTS lblGeneralLPTAddr;
-        private NumericUpDownTS udGeneralLPTDelay;
-        private LabelTS lblGeneralLPTDelay;
         public TabControl tcSetup;
         private TabPage tpKeyboard;
         private LabelTS lblKBTuneDown;
@@ -157,7 +153,6 @@ namespace PowerSDR
         private LabelTS lblDisplayWaterfallLowLevel;
         public NumericUpDownTS udDisplayWaterfallLowLevel;
         private LabelTS lblDisplayWaterfallLowColor;
-        private CheckBoxTS chkGeneralPAPresent;
         private ButtonTS btnGeneralCalLevelStart;
         private ButtonTS btnGeneralCalFreqStart;
         private ButtonTS btnGeneralCalImageStart;
@@ -196,7 +191,6 @@ namespace PowerSDR
         private CheckBoxTS chkGeneralEnableX2;
         private LabelTS lblGeneralX2Delay;
         private NumericUpDownTS udGeneralX2Delay;
-        private CheckBoxTS chkGeneralATUPresent;
         private ButtonTS btnPAGainReset;
         private ComboBoxTS comboGeneralProcessPriority;
         private GroupBoxTS grpGeneralProcessPriority;
@@ -232,7 +226,6 @@ namespace PowerSDR
         private LabelTS lblDisplayAVGTime;
         private GroupBoxTS grpTestX2;
         private GroupBoxTS grpTestAudioBalance;
-        private CheckBoxTS chkGeneralUSBPresent;
         private GroupBoxTS grpPATune;
         private LabelTS lblTransmitTunePower;
         private NumericUpDownTS udTXTunePower;
@@ -600,20 +593,9 @@ namespace PowerSDR
         private NumericUpDownTS udMeterDigitalDelay;
         private LabelTS lblMultimeterDigitalDelay;
         private RadioButtonTS radGenModelFLEX5000;
-        private GroupBoxTS grpGeneralHardwareSDR1000;
-        private GroupBoxTS grpGeneralHardwareFLEX5000;
         private CheckBoxTS chkPA6;
         private CheckBoxTS chkMouseTuneStep;
-        private LabelTS lblModel;
-        private LabelTS lblSerialNum;
-        private LabelTS lblTRXRev;
-        private LabelTS lblPARev;
-        private LabelTS lblRFIORev;
-        private LabelTS lblATURev;
-        private LabelTS lblRX2Rev;
-        private LabelTS lblFirmwareRev;
         private CheckBoxTS ckEnableSigGen;
-        private CheckBoxTS chkBoxJanusOzyControl;
         private CheckBoxTS chkCalExpert;
         private CheckBoxTS chkGenAllModeMicPTT;
         private CheckBoxTS chkDigUIsUSB;
@@ -1035,8 +1017,6 @@ namespace PowerSDR
         private ButtonTS btnPennyCtrlReset;
         private GroupBoxTS grpFRSRegion;
         public ComboBoxTS comboFRSRegion;
-        private ComboBoxTS comboGeneralXVTR;
-        private CheckBoxTS chkGeneralXVTRPresent;
         private LabelTS lblPAGainByBandVHF9;
         private NumericUpDownTS udPAGainVHF9;
         private LabelTS lblPAGainByBandVHF8;
@@ -1604,8 +1584,8 @@ namespace PowerSDR
 
             RefreshSkinList();
 
-            comboGeneralLPTAddr.SelectedIndex = -1;
-            comboGeneralXVTR.SelectedIndex = (int)XVTRTRMode.POSITIVE;
+           // comboGeneralLPTAddr.SelectedIndex = -1;
+           // comboGeneralXVTR.SelectedIndex = (int)XVTRTRMode.POSITIVE;
             comboGeneralProcessPriority.Text = "Normal";
             comboOptFilterWidthMode.Text = "Linear";
             comboAudioSoundCard.Text = "Unsupported Card";
@@ -1872,16 +1852,16 @@ namespace PowerSDR
 
         private void InitGeneralTab()
         {
-            if (console.Hdw != null)
-                comboGeneralLPTAddr.Text = Convert.ToString(console.Hdw.LPTAddr, 16);
+           // if (console.Hdw != null)
+              //  comboGeneralLPTAddr.Text = Convert.ToString(console.Hdw.LPTAddr, 16);
             chkPTTOutDelay.Checked = console.Hdw.PTTODelayControl;
-            udGeneralLPTDelay.Value = console.LatchDelay;
+           // udGeneralLPTDelay.Value = console.LatchDelay;
             chkGeneralRXOnly.Checked = console.RXOnly;
-            chkGeneralUSBPresent.Checked = console.USBPresent;
-            chkBoxJanusOzyControl.Checked = console.OzyControl;
-            chkGeneralPAPresent.Checked = console.PAPresent;
-            chkGeneralXVTRPresent.Checked = console.XVTRPresent;
-            comboGeneralXVTR.SelectedItem = (int)console.CurrentXVTRTRMode;
+           // chkGeneralUSBPresent.Checked = console.USBPresent;
+           // chkBoxJanusOzyControl.Checked = console.OzyControl;
+           // chkGeneralPAPresent.Checked = console.PAPresent;
+           // chkGeneralXVTRPresent.Checked = console.XVTRPresent;
+           // comboGeneralXVTR.SelectedItem = (int)console.CurrentXVTRTRMode;
             chkGeneralSpurRed.Checked = true;
             chkGeneralDisablePTT.Checked = console.DisablePTT;
             chkGeneralSoftwareGainCorr.Checked = console.NoHardwareOffset;
@@ -2926,6 +2906,10 @@ namespace PowerSDR
             udDSPNBTransition_ValueChanged(this, e);
             udDSPNBLead_ValueChanged(this, e);
             udDSPNBLag_ValueChanged(this, e);
+
+            // RX2 tab
+            chkRX2AutoMuteTX_CheckedChanged(this, e);
+
 #if LINCOR
             console.lcform.ForceLincor();
 #endif
@@ -3504,6 +3488,45 @@ namespace PowerSDR
             set
             {
                 if (udDSPAGCDecay != null) udDSPAGCDecay.Value = value;
+            }
+        }
+
+        public int RX2AGCAttack
+        {
+            get
+            {
+                if (udDSPAGCRX2Attack != null) return (int)udDSPAGCRX2Attack.Value;
+                else return 0;
+            }
+            set
+            {
+                if (udDSPAGCRX2Attack != null) udDSPAGCRX2Attack.Value = value;
+            }
+        }
+
+        public int RX2AGCHang
+        {
+            get
+            {
+                if (udDSPAGCRX2HangTime != null) return (int)udDSPAGCRX2HangTime.Value;
+                else return 0;
+            }
+            set
+            {
+                if (udDSPAGCRX2HangTime != null) udDSPAGCRX2HangTime.Value = value;
+            }
+        }
+
+        public int RX2AGCDecay
+        {
+            get
+            {
+                if (udDSPAGCRX2Decay != null) return (int)udDSPAGCRX2Decay.Value;
+                else return 0;
+            }
+            set
+            {
+                if (udDSPAGCRX2Decay != null) udDSPAGCRX2Decay.Value = value;
             }
         }
 
@@ -4102,18 +4125,49 @@ namespace PowerSDR
                 udDSPAGCAttack.Enabled = value;
                 udDSPAGCDecay.Enabled = value;
                 udDSPAGCHangTime.Enabled = value;
+                // udDSPAGCRX2Attack.Enabled = value;
+                // udDSPAGCRX2Decay.Enabled = value;
+                // udDSPAGCRX2HangTime.Enabled = value;
+
+                if (value)
+                {
+                    console.radio.GetDSPRX(0, 0).Force = true;
+                    console.radio.GetDSPRX(0, 1).Force = true;
+                    udDSPAGCAttack_ValueChanged(this, EventArgs.Empty);
+                    udDSPAGCDecay_ValueChanged(this, EventArgs.Empty);
+                    udDSPAGCHangTime_ValueChanged(this, EventArgs.Empty);
+                    //  udDSPAGCRX2Attack_ValueChanged(this, EventArgs.Empty);
+                    //  udDSPAGCRX2Decay_ValueChanged(this, EventArgs.Empty);
+                    //  udDSPAGCRX2HangTime_ValueChanged(this, EventArgs.Empty);
+                    console.radio.GetDSPRX(0, 0).Force = false;
+                    console.radio.GetDSPRX(0, 1).Force = false;
+                }
+            }
+        }
+
+        public bool CustomRX2AGCEnabled
+        {
+            set
+            {
+                // udDSPAGCAttack.Enabled = value;
+                // udDSPAGCDecay.Enabled = value;
+                // udDSPAGCHangTime.Enabled = value;
                 udDSPAGCRX2Attack.Enabled = value;
                 udDSPAGCRX2Decay.Enabled = value;
                 udDSPAGCRX2HangTime.Enabled = value;
 
                 if (value)
                 {
-                    udDSPAGCAttack_ValueChanged(this, EventArgs.Empty);
-                    udDSPAGCDecay_ValueChanged(this, EventArgs.Empty);
-                    udDSPAGCHangTime_ValueChanged(this, EventArgs.Empty);
+                    console.radio.GetDSPRX(1, 0).Force = true;
+                    //   console.radio.GetDSPRX(1, 1).Force = true;
+                    // udDSPAGCAttack_ValueChanged(this, EventArgs.Empty);
+                    // udDSPAGCDecay_ValueChanged(this, EventArgs.Empty);
+                    // udDSPAGCHangTime_ValueChanged(this, EventArgs.Empty);
                     udDSPAGCRX2Attack_ValueChanged(this, EventArgs.Empty);
                     udDSPAGCRX2Decay_ValueChanged(this, EventArgs.Empty);
                     udDSPAGCRX2HangTime_ValueChanged(this, EventArgs.Empty);
+                    console.radio.GetDSPRX(1, 0).Force = false;
+                    // console.radio.GetDSPRX(1, 1).Force = false;
                 }
             }
         }
@@ -4196,6 +4250,10 @@ namespace PowerSDR
                         force_model = true;
                         radGenModelANAN100D.Checked = true;
                         break;
+                    case Model.ORION:
+                        force_model = true;
+                        radGenModelOrion.Checked = true;
+                        break;
 
                 }
             }
@@ -4219,7 +4277,7 @@ namespace PowerSDR
             set
             {
                 mox = value;
-                grpGeneralHardwareSDR1000.Enabled = !mox;
+               // grpGeneralHardwareSDR1000.Enabled = !mox;
                 if (comboAudioSoundCard.SelectedIndex == (int)SoundCard.UNSUPPORTED_CARD)
                     grpAudioDetails1.Enabled = !mox;
                 grpAudioCard.Enabled = !mox;
@@ -4266,42 +4324,7 @@ namespace PowerSDR
             }
         }
 
-        public bool USBPresent
-        {
-            get { return chkGeneralUSBPresent.Checked; }
-            set { chkGeneralUSBPresent.Checked = value; }
-        }
-
-        public bool OzyControl
-        {
-            get { return chkBoxJanusOzyControl.Checked; }
-            set { chkBoxJanusOzyControl.Checked = value; }
-        }
-
-        public bool XVTRPresent
-        {
-            get { return chkGeneralXVTRPresent.Checked; }
-            set { chkGeneralXVTRPresent.Checked = value; }
-        }
-
-        public int XVTRSelection
-        {
-            get { return comboGeneralXVTR.SelectedIndex; }
-            set { comboGeneralXVTR.SelectedIndex = value; }
-        }
-
-        public bool PAPresent
-        {
-            get { return chkGeneralPAPresent.Checked; }
-            set { chkGeneralPAPresent.Checked = value; }
-        }
-
-        public bool ATUPresent
-        {
-            get { return chkGeneralATUPresent.Checked; }
-            set { chkGeneralATUPresent.Checked = value; }
-        }
-
+ 
         public bool SpurRedEnabled
         {
             get { return chkGeneralSpurRed.Enabled; }
@@ -5105,6 +5128,156 @@ namespace PowerSDR
             set { udANANPAGainVHF13.Value = (decimal)value; }
         }
 
+        //PAGain Orion
+        public float OrionPAGain160
+        {
+            get { return (float)udOrionPAGain160.Value; }
+            set { udOrionPAGain160.Value = (decimal)value; }
+        }
+
+        public float OrionPAGain80
+        {
+            get { return (float)udOrionPAGain80.Value; }
+            set { udOrionPAGain80.Value = (decimal)value; }
+        }
+
+        public float OrionPAGain60
+        {
+            get { return (float)udOrionPAGain60.Value; }
+            set { udOrionPAGain60.Value = (decimal)value; }
+        }
+
+        public float OrionPAGain40
+        {
+            get { return (float)udOrionPAGain40.Value; }
+            set { udOrionPAGain40.Value = (decimal)value; }
+        }
+
+        public float OrionPAGain30
+        {
+            get { return (float)udOrionPAGain30.Value; }
+            set { udOrionPAGain30.Value = (decimal)value; }
+        }
+
+        public float OrionPAGain20
+        {
+            get { return (float)udOrionPAGain20.Value; }
+            set { udOrionPAGain20.Value = (decimal)value; }
+        }
+
+        public float OrionPAGain17
+        {
+            get { return (float)udOrionPAGain17.Value; }
+            set { udOrionPAGain17.Value = (decimal)value; }
+        }
+
+        public float OrionPAGain15
+        {
+            get { return (float)udOrionPAGain15.Value; }
+            set { udOrionPAGain15.Value = (decimal)value; }
+        }
+
+        public float OrionPAGain12
+        {
+            get { return (float)udOrionPAGain12.Value; }
+            set { udOrionPAGain12.Value = (decimal)value; }
+        }
+
+        public float OrionPAGain10
+        {
+            get { return (float)udOrionPAGain10.Value; }
+            set { udOrionPAGain10.Value = (decimal)value; }
+        }
+
+        public float OrionPAGain6
+        {
+            get { return (float)udOrionPAGain6.Value; }
+            set { udOrionPAGain6.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF0
+        {
+            get { return (float)udOrionPAGainVHF0.Value; }
+            set { udOrionPAGainVHF0.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF1
+        {
+            get { return (float)udOrionPAGainVHF1.Value; }
+            set { udOrionPAGainVHF1.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF2
+        {
+            get { return (float)udOrionPAGainVHF2.Value; }
+            set { udOrionPAGainVHF2.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF3
+        {
+            get { return (float)udOrionPAGainVHF3.Value; }
+            set { udOrionPAGainVHF3.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF4
+        {
+            get { return (float)udOrionPAGainVHF4.Value; }
+            set { udOrionPAGainVHF4.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF5
+        {
+            get { return (float)udOrionPAGainVHF5.Value; }
+            set { udOrionPAGainVHF5.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF6
+        {
+            get { return (float)udOrionPAGainVHF6.Value; }
+            set { udOrionPAGainVHF6.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF7
+        {
+            get { return (float)udOrionPAGainVHF7.Value; }
+            set { udOrionPAGainVHF7.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF8
+        {
+            get { return (float)udOrionPAGainVHF8.Value; }
+            set { udOrionPAGainVHF8.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF9
+        {
+            get { return (float)udOrionPAGainVHF9.Value; }
+            set { udOrionPAGainVHF9.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF10
+        {
+            get { return (float)udOrionPAGainVHF10.Value; }
+            set { udOrionPAGainVHF10.Value = (decimal)value; }
+        }
+        public float OrionPAGainVHF11
+        {
+            get { return (float)udOrionPAGainVHF11.Value; }
+            set { udOrionPAGainVHF11.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF12
+        {
+            get { return (float)udOrionPAGainVHF12.Value; }
+            set { udOrionPAGainVHF12.Value = (decimal)value; }
+        }
+
+        public float OrionPAGainVHF13
+        {
+            get { return (float)udOrionPAGainVHF13.Value; }
+            set { udOrionPAGainVHF13.Value = (decimal)value; }
+        }
+
         public int TunePower
         {
             get { return (int)udTXTunePower.Value; }
@@ -5715,8 +5888,8 @@ namespace PowerSDR
 
             bool b = radGenModelFLEX5000.Checked;
             radPACalAllBands_CheckedChanged(this, EventArgs.Empty);
-            grpGeneralHardwareSDR1000.Visible = !b;
-            grpGeneralHardwareFLEX5000.Visible = b;
+           // grpGeneralHardwareSDR1000.Visible = !b;
+          //  grpGeneralHardwareFLEX5000.Visible = b;
             // btnWizard.Visible = !b;
             grpGenAutoMute.Visible = !b;
 
@@ -6029,6 +6202,91 @@ namespace PowerSDR
             }
         }
 
+        private void radGenModelOrion_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelOrion.Checked)
+            {
+                console.CurrentModel = Model.HERMES;
+                console.CurrentHPSDRModel = HPSDRModel.ORION;
+                chkPennyPresent.Checked = false;
+                chkPennyPresent.Enabled = false;
+                chkMercuryPresent.Checked = true;
+                chkMercuryPresent.Enabled = false;
+                chkJanusPresent.Checked = false;
+                chkJanusPresent.Enabled = false;
+                chkExcaliburPresent.Checked = false;
+                chkExcaliburPresent.Enabled = false;
+                chkPennyLane.Checked = true;
+                chkPennyLane.Enabled = false;
+                radPenny10MHz.Checked = true;
+                rad12288MHzPenny.Checked = true;
+                chkAlexPresent.Checked = true;
+                chkAlexPresent.Enabled = false;
+                chkApolloPresent.Checked = false;
+                chkApolloPresent.Enabled = false;
+                groupBox10MhzClock.Visible = false;
+                groupBox122MHz.Visible = false;
+                groupBoxMicSource.Visible = false;
+                chkGeneralRXOnly.Visible = true;
+                // chkGeneralRXOnly.Checked = false;
+                chkHermesStepAttenuator.Enabled = true;
+                groupBoxRXOptions.Text = "Orion Options";
+                radMetis.Text = "Orion";
+                grpMetisAddr.Text = "Orion Address";
+                grpHermesStepAttenuator.Text = "Orion Step Attenuator";
+                string key = comboKeyerConnPrimary.Text;
+                if (comboKeyerConnPrimary.Items.Contains("5000"))
+                    comboKeyerConnPrimary.Items.Remove("5000");
+                if (comboKeyerConnPrimary.Items.Contains("SDR"))
+                    comboKeyerConnPrimary.Items.Remove("SDR");
+                if (!comboKeyerConnPrimary.Items.Contains("Ozy/Hermes"))
+                    comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
+                comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
+                comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+                chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
+                chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+                chkAutoPACalibrate.Checked = false;
+                chkAutoPACalibrate.Visible = false;
+                chkBypassANANPASettings.Visible = true;
+
+               // if (!chkBypassANANPASettings.Checked)
+                    grpOrionPAGainByBand.BringToFront();
+              //  else grpPAGainByBand.BringToFront();
+
+                labelRXAntControl.Text = " EXT2  EXT1  XVTR";
+                labelATTOnTX.Visible = true;
+                udATTOnTX.Visible = true;
+                console.RX2PreampPresent = true;
+                // console.RX2PreampPresent = false;
+            }
+            console.OrionPresent = radGenModelOrion.Checked;
+            radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
+
+            if (radGenModelOrion.Checked)
+            {
+                int nr;
+                if (chkLimitRX.Checked) nr = 2;
+                else nr = 4; //nr = 5;
+#if LINCOR
+                nr = 5;
+#endif
+
+                int old_rate = console.NReceivers;
+                int new_rate = nr;
+                bool power = console.PowerOn;
+                if (power && new_rate != old_rate)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(100);
+                }
+
+                console.NReceivers = nr;
+
+                if (power && new_rate != old_rate)
+                    console.PowerOn = true;
+            }
+        }
+
         private void radGenModelHermes_CheckedChanged(object sender, System.EventArgs e)
         {
             if (radGenModelHermes.Checked)
@@ -6241,7 +6499,7 @@ namespace PowerSDR
             // add or remove setup pages for HPSDR stuff 
             //
             bool b = is_hermes ? radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN100.Checked ||
-                                 radGenModelANAN100D.Checked : radGenModelHPSDR.Checked;
+                                 radGenModelANAN100D.Checked || radGenModelOrion.Checked : radGenModelHPSDR.Checked;
 
             if (b)
             {
@@ -6265,7 +6523,7 @@ namespace PowerSDR
                 // and enable the gain by band page 
                 grpFRSRegion.Visible = true;
                 grpPAGainByBand.Visible = true;
-                grpGeneralHardwareSDR1000.Visible = false;
+               // grpGeneralHardwareSDR1000.Visible = false;
                 // grpGeneralDDS.Visible = false;
                 // btnWizard.Visible = true;
                 //chkGeneralRXOnly.Checked = false;
@@ -6301,8 +6559,16 @@ namespace PowerSDR
                     //   int old_rate = console.NReceivers;
                     //  int new_rate = 4;
                     //  bool power = console.PowerOn;
-
-                    groupBoxHPSDRHW.Visible = true;
+                    if (radGenModelOrion.Checked)
+                    {
+                        groupBoxHPSDRHW.Visible = false;
+                        grpGeneralHardwareORION.Visible = true;
+                    }
+                    else
+                    {
+                        grpGeneralHardwareORION.Visible = false;
+                        groupBoxHPSDRHW.Visible = true;
+                    }
                     grpOzyType.Visible = true;
                     grpOzyType.Enabled = true;
                     // make sure one of these is checked 
@@ -6394,7 +6660,8 @@ namespace PowerSDR
                     labelAlexFilterActive.Location = new Point(275, 0);
                 }
 
-                if (radGenModelANAN10.Checked || radGenModelANAN100.Checked || radGenModelANAN100D.Checked)
+                if (radGenModelANAN10.Checked || radGenModelANAN100.Checked || 
+                    radGenModelANAN100D.Checked || radGenModelOrion.Checked)
                 {
                     tpAlexControl.Text = "Ant/Filters";
                     chkAlexTRRelay.Visible = true;
@@ -6439,6 +6706,7 @@ namespace PowerSDR
 
                 if (radGenModelHPSDR.Checked) tpPennyCtrl.Text = "Penny Ctrl";
                 else if (radGenModelHermes.Checked) tpPennyCtrl.Text = "Hermes Ctrl";
+                else if (radGenModelOrion.Checked) tpPennyCtrl.Text = "Orion Ctrl";
                 else tpPennyCtrl.Text = "ANAN Ctrl";
             }
             else
@@ -6456,7 +6724,7 @@ namespace PowerSDR
                 btnAudioVoltTest1.Visible = true;
 
                 grpPAGainByBand.Visible = true;
-                grpGeneralHardwareSDR1000.Visible = true;
+               // grpGeneralHardwareSDR1000.Visible = true;
                 // grpGeneralDDS.Visible = true;
                 grpGenCalRXImage.Visible = true;
 
@@ -6672,33 +6940,33 @@ namespace PowerSDR
 
         private void comboGeneralLPTAddr_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (comboGeneralLPTAddr.Text == "" || console.CurrentModel != Model.SDR1000)
-                return;
-            console.Hdw.LPTAddr = Convert.ToUInt16(comboGeneralLPTAddr.Text, 16);
+        //    if (comboGeneralLPTAddr.Text == "" || console.CurrentModel != Model.SDR1000)
+        //        return;
+        //    console.Hdw.LPTAddr = Convert.ToUInt16(comboGeneralLPTAddr.Text, 16);
         }
 
         private void comboGeneralLPTAddr_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            if (console.CurrentModel != Model.SDR1000) return;
-            if (comboGeneralLPTAddr.Text == "") return;
-            if (e.KeyData != Keys.Enter) return;
-            if (comboGeneralLPTAddr.Text.Length > 4)
-            {
-                MessageBox.Show("Invalid Parallel Port Address (" + comboGeneralLPTAddr.Text + ")");
-                comboGeneralLPTAddr.Text = "378";
-                return;
-            }
+            //if (console.CurrentModel != Model.SDR1000) return;
+            //if (comboGeneralLPTAddr.Text == "") return;
+            //if (e.KeyData != Keys.Enter) return;
+            //if (comboGeneralLPTAddr.Text.Length > 4)
+            //{
+            //    MessageBox.Show("Invalid Parallel Port Address (" + comboGeneralLPTAddr.Text + ")");
+            //    comboGeneralLPTAddr.Text = "378";
+            //    return;
+            //}
 
-            if (comboGeneralLPTAddr.Text.Any(c => !Char.IsDigit(c) &&
-                                                  Char.ToLower(c) < 'a' &&
-                                                  Char.ToLower(c) > 'f'))
-            {
-                MessageBox.Show("Invalid Parallel Port Address (" + comboGeneralLPTAddr.Text + ")");
-                comboGeneralLPTAddr.Text = "378";
-                return;
-            }
+            //if (comboGeneralLPTAddr.Text.Any(c => !Char.IsDigit(c) &&
+            //                                      Char.ToLower(c) < 'a' &&
+            //                                      Char.ToLower(c) > 'f'))
+            //{
+            //    MessageBox.Show("Invalid Parallel Port Address (" + comboGeneralLPTAddr.Text + ")");
+            //    comboGeneralLPTAddr.Text = "378";
+            //    return;
+            //}
 
-            console.Hdw.LPTAddr = Convert.ToUInt16(comboGeneralLPTAddr.Text, 16);
+            //console.Hdw.LPTAddr = Convert.ToUInt16(comboGeneralLPTAddr.Text, 16);
         }
 
         private void comboGeneralLPTAddr_LostFocus(object sender, System.EventArgs e)
@@ -6734,75 +7002,75 @@ namespace PowerSDR
 
         private void chkGeneralUSBPresent_CheckedChanged(object sender, System.EventArgs e)
         {
-            try
-            {
-                console.USBPresent = chkGeneralUSBPresent.Checked;
-                if (chkGeneralUSBPresent.Checked)
-                {
-                    if (!USB.Init(true, chkGeneralPAPresent.Checked))
-                        chkGeneralUSBPresent.Checked = false;
-                    else USB.Console = console;
-                }
-                else
-                    USB.Exit();
+            //try
+            //{
+            //    console.USBPresent = chkGeneralUSBPresent.Checked;
+            //    if (chkGeneralUSBPresent.Checked)
+            //    {
+            //        if (!USB.Init(true, chkGeneralPAPresent.Checked))
+            //            chkGeneralUSBPresent.Checked = false;
+            //        else USB.Console = console;
+            //    }
+            //    else
+            //        USB.Exit();
 
-                if (console.PowerOn)
-                {
-                    console.PowerOn = false;
-                    Thread.Sleep(100);
-                    console.PowerOn = true;
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("A required DLL was not found (Sdr1kUsb.dll).  Please download the\n" +
-                    "installer from the FlexRadio private download page and try again.",
-                    "Error: Missing DLL",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                chkGeneralUSBPresent.Checked = false;
-            }
+            //    if (console.PowerOn)
+            //    {
+            //        console.PowerOn = false;
+            //        Thread.Sleep(100);
+            //        console.PowerOn = true;
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("A required DLL was not found (Sdr1kUsb.dll).  Please download the\n" +
+            //        "installer from the FlexRadio private download page and try again.",
+            //        "Error: Missing DLL",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Error);
+            //    chkGeneralUSBPresent.Checked = false;
+            //}
         }
 
         private void chkGeneralPAPresent_CheckedChanged(object sender, System.EventArgs e)
         {
-            console.PAPresent = false;
-            chkGeneralATUPresent.Visible = chkGeneralPAPresent.Checked;
-            grpPAGainByBand.Visible = true;
-            //rtxtPACalReq.Visible = chkGeneralPAPresent.Checked;
+            //console.PAPresent = false;
+            //chkGeneralATUPresent.Visible = chkGeneralPAPresent.Checked;
+            //grpPAGainByBand.Visible = true;
+            ////rtxtPACalReq.Visible = chkGeneralPAPresent.Checked;
 
-            if (!chkGeneralPAPresent.Checked)
-                chkGeneralATUPresent.Checked = false;
-            else if (console.PowerOn)
-            {
-                console.PowerOn = false;
-                Thread.Sleep(100);
-                console.PowerOn = true;
-            }
+            //if (!chkGeneralPAPresent.Checked)
+            //    chkGeneralATUPresent.Checked = false;
+            //else if (console.PowerOn)
+            //{
+            //    console.PowerOn = false;
+            //    Thread.Sleep(100);
+            //    console.PowerOn = true;
+            //}
 
-            if (chkGeneralUSBPresent.Checked)
-            {
-                chkGeneralUSBPresent.Checked = false;
-                chkGeneralUSBPresent.Checked = true;
-            }
+            //if (chkGeneralUSBPresent.Checked)
+            //{
+            //    chkGeneralUSBPresent.Checked = false;
+            //    chkGeneralUSBPresent.Checked = true;
+            //}
         }
 
         private void chkGeneralATUPresent_CheckedChanged(object sender, System.EventArgs e)
         {
-            console.ATUPresent = chkGeneralATUPresent.Checked;
+            //console.ATUPresent = chkGeneralATUPresent.Checked;
         }
 
         private void chkXVTRPresent_CheckedChanged(object sender, System.EventArgs e)
         {
-            console.XVTRPresent = chkGeneralXVTRPresent.Checked;
-            comboGeneralXVTR.Visible = chkGeneralXVTRPresent.Checked;
-            if (chkGeneralXVTRPresent.Checked)
-            {
-                if (comboGeneralXVTR.SelectedIndex == (int)XVTRTRMode.POSITIVE)
-                    comboGeneralXVTR_SelectedIndexChanged(this, EventArgs.Empty);
-                else
-                    comboGeneralXVTR.SelectedIndex = (int)XVTRTRMode.POSITIVE;
-            }
+            //console.XVTRPresent = chkGeneralXVTRPresent.Checked;
+            //comboGeneralXVTR.Visible = chkGeneralXVTRPresent.Checked;
+            //if (chkGeneralXVTRPresent.Checked)
+            //{
+            //    if (comboGeneralXVTR.SelectedIndex == (int)XVTRTRMode.POSITIVE)
+            //        comboGeneralXVTR_SelectedIndexChanged(this, EventArgs.Empty);
+            //    else
+            //        comboGeneralXVTR.SelectedIndex = (int)XVTRTRMode.POSITIVE;
+            //}
         }
 
         private void chkGeneralSpurRed_CheckedChanged(object sender, System.EventArgs e)
@@ -6909,21 +7177,21 @@ namespace PowerSDR
 
         private void comboGeneralXVTR_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            switch (comboGeneralXVTR.SelectedIndex)
-            {
-                case (int)XVTRTRMode.NEGATIVE:
-                    if (comboGeneralXVTR.Focused)
-                    {
-                        MessageBox.Show("The default TR Mode for the DEMI144-28FRS sold by FlexRadio Systems is\n" +
-                            "Postive TR Logic.  Please use caution when using other TR modes.", "Warning");
-                    }
-                    break;
-                case (int)XVTRTRMode.POSITIVE:
-                case (int)XVTRTRMode.NONE:
-                    break;
-            }
+            //switch (comboGeneralXVTR.SelectedIndex)
+            //{
+            //    case (int)XVTRTRMode.NEGATIVE:
+            //        if (comboGeneralXVTR.Focused)
+            //        {
+            //            MessageBox.Show("The default TR Mode for the DEMI144-28FRS sold by FlexRadio Systems is\n" +
+            //                "Postive TR Logic.  Please use caution when using other TR modes.", "Warning");
+            //        }
+            //        break;
+            //    case (int)XVTRTRMode.POSITIVE:
+            //    case (int)XVTRTRMode.NONE:
+            //        break;
+            //}
 
-            console.CurrentXVTRTRMode = (XVTRTRMode)comboGeneralXVTR.SelectedIndex;
+            //console.CurrentXVTRTRMode = (XVTRTRMode)comboGeneralXVTR.SelectedIndex;
         }
 
         private void chkGeneralSoftwareGainCorr_CheckedChanged(object sender, System.EventArgs e)
@@ -9989,7 +10257,7 @@ namespace PowerSDR
 
         private void udDSPAGCAttack_ValueChanged(object sender, System.EventArgs e)
         {
-            if (udDSPAGCAttack.Enabled)
+            //  if (udDSPAGCAttack.Enabled)
             {
                 console.radio.GetDSPRX(0, 0).RXAGCAttack = (int)udDSPAGCAttack.Value;
                 console.radio.GetDSPRX(0, 1).RXAGCAttack = (int)udDSPAGCAttack.Value;
@@ -9999,7 +10267,7 @@ namespace PowerSDR
         private void udDSPAGCRX2MaxGaindB_ValueChanged(object sender, EventArgs e)
         {
             console.radio.GetDSPRX(1, 0).RXAGCMaxGain = (double)udDSPAGCRX2MaxGaindB.Value;
-            console.radio.GetDSPRX(1, 1).RXAGCMaxGain = (double)udDSPAGCRX2MaxGaindB.Value;
+            // console.radio.GetDSPRX(1, 1).RXAGCMaxGain = (double)udDSPAGCRX2MaxGaindB.Value;
 
             if (console.RX2AGCMode != AGCMode.FIXD)
                 console.RX2RF = (int)udDSPAGCRX2MaxGaindB.Value;
@@ -10008,7 +10276,7 @@ namespace PowerSDR
         private void udDSPAGCRX2FixedGaindB_ValueChanged(object sender, EventArgs e)
         {
             console.radio.GetDSPRX(1, 0).RXFixedAGC = (double)udDSPAGCRX2FixedGaindB.Value;
-            console.radio.GetDSPRX(1, 1).RXFixedAGC = (double)udDSPAGCRX2FixedGaindB.Value;
+            //  console.radio.GetDSPRX(1, 1).RXFixedAGC = (double)udDSPAGCRX2FixedGaindB.Value;
 
             if (console.RX2AGCMode == AGCMode.FIXD)
                 console.RX2RF = (int)udDSPAGCRX2FixedGaindB.Value;
@@ -10016,16 +10284,16 @@ namespace PowerSDR
 
         private void udDSPAGCRX2Attack_ValueChanged(object sender, System.EventArgs e)
         {
-            if (udDSPAGCRX2Attack.Enabled)
+            // if (udDSPAGCRX2Attack.Enabled)
             {
                 console.radio.GetDSPRX(1, 0).RXAGCAttack = (int)udDSPAGCRX2Attack.Value;
-                console.radio.GetDSPRX(1, 1).RXAGCAttack = (int)udDSPAGCRX2Attack.Value;
+                //     console.radio.GetDSPRX(1, 1).RXAGCAttack = (int)udDSPAGCRX2Attack.Value;
             }
         }
 
         private void udDSPAGCDecay_ValueChanged(object sender, System.EventArgs e)
         {
-            if (udDSPAGCDecay.Enabled)
+            // if (udDSPAGCDecay.Enabled)
             {
                 console.radio.GetDSPRX(0, 0).RXAGCDecay = (int)udDSPAGCDecay.Value;
                 console.radio.GetDSPRX(0, 1).RXAGCDecay = (int)udDSPAGCDecay.Value;
@@ -10034,10 +10302,10 @@ namespace PowerSDR
 
         private void udDSPAGCRX2Decay_ValueChanged(object sender, System.EventArgs e)
         {
-            if (udDSPAGCRX2Decay.Enabled)
+            //  if (udDSPAGCRX2Decay.Enabled)
             {
                 console.radio.GetDSPRX(1, 0).RXAGCDecay = (int)udDSPAGCRX2Decay.Value;
-                console.radio.GetDSPRX(1, 1).RXAGCDecay = (int)udDSPAGCRX2Decay.Value;
+                //    console.radio.GetDSPRX(1, 1).RXAGCDecay = (int)udDSPAGCRX2Decay.Value;
             }
         }
 
@@ -10050,12 +10318,12 @@ namespace PowerSDR
         private void udDSPAGCRX2Slope_ValueChanged(object sender, System.EventArgs e)
         {
             console.radio.GetDSPRX(1, 0).RXAGCSlope = 10 * (int)(udDSPAGCRX2Slope.Value);
-            console.radio.GetDSPRX(1, 1).RXAGCSlope = 10 * (int)(udDSPAGCRX2Slope.Value);
+            //    console.radio.GetDSPRX(1, 1).RXAGCSlope = 10 * (int)(udDSPAGCRX2Slope.Value);
         }
 
         private void udDSPAGCHangTime_ValueChanged(object sender, System.EventArgs e)
         {
-            if (udDSPAGCHangTime.Enabled)
+            // if (udDSPAGCHangTime.Enabled)
             {
                 console.radio.GetDSPRX(0, 0).RXAGCHang = (int)udDSPAGCHangTime.Value;
                 console.radio.GetDSPRX(0, 1).RXAGCHang = (int)udDSPAGCHangTime.Value;
@@ -10064,10 +10332,10 @@ namespace PowerSDR
 
         private void udDSPAGCRX2HangTime_ValueChanged(object sender, System.EventArgs e)
         {
-            if (udDSPAGCRX2HangTime.Enabled)
+            // if (udDSPAGCRX2HangTime.Enabled)
             {
                 console.radio.GetDSPRX(1, 0).RXAGCHang = (int)udDSPAGCRX2HangTime.Value;
-                console.radio.GetDSPRX(1, 1).RXAGCHang = (int)udDSPAGCRX2HangTime.Value;
+                //    console.radio.GetDSPRX(1, 1).RXAGCHang = (int)udDSPAGCRX2HangTime.Value;
             }
         }
 
@@ -10080,7 +10348,7 @@ namespace PowerSDR
         private void tbDSPAGCRX2HangThreshold_Scroll(object sender, System.EventArgs e)
         {
             console.radio.GetDSPRX(1, 0).RXAGCHangThreshold = (int)tbDSPAGCRX2HangThreshold.Value;
-            console.radio.GetDSPRX(1, 1).RXAGCHangThreshold = (int)tbDSPAGCRX2HangThreshold.Value;
+            //   console.radio.GetDSPRX(1, 1).RXAGCHangThreshold = (int)tbDSPAGCRX2HangThreshold.Value;
         }
 
         #endregion
@@ -10784,6 +11052,36 @@ namespace PowerSDR
                 udANANPAGainVHF11.Value = 56.2M;
                 udANANPAGainVHF12.Value = 56.2M;
                 udANANPAGainVHF13.Value = 56.2M;
+            }
+
+            if (radGenModelOrion.Checked && !chkBypassANANPASettings.Checked)
+            {
+                OrionPAGain160 = 49.5f;
+                OrionPAGain80 = 50.5f;
+                OrionPAGain60 = 50.5f;
+                OrionPAGain40 = 50.0f;
+                OrionPAGain30 = 49.0f;
+                OrionPAGain20 = 48.0f;
+                OrionPAGain17 = 47.0f;
+                OrionPAGain15 = 46.5f;
+                OrionPAGain12 = 46.0f;
+                OrionPAGain10 = 43.5f;
+                OrionPAGain6 = 43.0f;
+
+                udOrionPAGainVHF0.Value = 56.2M;
+                udOrionPAGainVHF1.Value = 56.2M;
+                udOrionPAGainVHF2.Value = 56.2M;
+                udOrionPAGainVHF3.Value = 56.2M;
+                udOrionPAGainVHF4.Value = 56.2M;
+                udOrionPAGainVHF5.Value = 56.2M;
+                udOrionPAGainVHF6.Value = 56.2M;
+                udOrionPAGainVHF7.Value = 56.2M;
+                udOrionPAGainVHF8.Value = 56.2M;
+                udOrionPAGainVHF9.Value = 56.2M;
+                udOrionPAGainVHF10.Value = 56.2M;
+                udOrionPAGainVHF11.Value = 56.2M;
+                udOrionPAGainVHF12.Value = 56.2M;
+                udOrionPAGainVHF13.Value = 56.2M;
             }
 
             if (radGenModelHPSDR.Checked || (radGenModelANAN100D.Checked && chkBypassANANPASettings.Checked))
@@ -12322,7 +12620,7 @@ namespace PowerSDR
 
         private void udGeneralLPTDelay_ValueChanged(object sender, System.EventArgs e)
         {
-            console.LatchDelay = (int)udGeneralLPTDelay.Value;
+          //  console.LatchDelay = (int)udGeneralLPTDelay.Value;
         }
 
         private void Setup_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -12491,14 +12789,9 @@ namespace PowerSDR
             //  udDDSPLLMult.Value = udDDSPLLMult.Value;
         }
 
-        private void udGeneralLPTDelay_LostFocus(object sender, EventArgs e)
-        {
-            udGeneralLPTDelay.Value = udGeneralLPTDelay.Value;
-        }
-
         private void udOptClickTuneOffsetDIGL_LostFocus(object sender, EventArgs e)
         {
-            udOptClickTuneOffsetDIGL.Value = udOptClickTuneOffsetDIGL.Value;
+      //      udOptClickTuneOffsetDIGL.Value = udOptClickTuneOffsetDIGL.Value;
         }
 
         private void udOptClickTuneOffsetDIGU_LostFocus(object sender, EventArgs e)
@@ -13330,41 +13623,6 @@ namespace PowerSDR
             console.MouseTuneStep = chkMouseTuneStep.Checked;
         }
 
-        private void chkBoxJanusOzyControl_CheckedChanged(object sender, System.EventArgs e)
-        {
-            try
-            {
-                console.OzyControl = chkBoxJanusOzyControl.Checked;
-                if (chkBoxJanusOzyControl.Checked)
-                {
-                    chkBoxJanusOzyControl.Checked = false;
-                    MessageBox.Show("Error initializing Ozy; Ozy Control has been disabled. ", "Ozy Initialization Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-
-                }
-                else
-                {
-                    OzySDR1kControl.Close();
-                }
-
-                if (console.PowerOn)
-                {
-                    console.PowerOn = false;
-                    Thread.Sleep(100);
-                    console.PowerOn = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Console.WriteLine("OzyInitException: " + ex.ToString());
-                MessageBox.Show("Exception initializing Ozy: " + ex.Message, "Ozy Init Error: ",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                chkBoxJanusOzyControl.Checked = false;
-            }
-        }
-
         private void chkGenDDSExpert_CheckedChanged(object sender, System.EventArgs e)
         {
             /*  if (chkGenDDSExpert.Checked && chkGenDDSExpert.Focused)
@@ -13609,7 +13867,8 @@ namespace PowerSDR
 
         private void chkRX2AutoMuteTX_CheckedChanged(object sender, System.EventArgs e)
         {
-            Audio.RX2AutoMuteTX = chkRX2AutoMuteTX.Checked;
+            //Audio.RX2AutoMuteTX = chkRX2AutoMuteTX.Checked;
+            console.MuteRX2OnVFOATX = chkRX2AutoMuteTX.Checked;
         }
 
         private void chkAudioIQtoVAC_CheckedChanged(object sender, System.EventArgs e)

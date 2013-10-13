@@ -223,6 +223,7 @@
             this.comboFRSRegion = new System.Windows.Forms.ComboBoxTS();
             this.chkGeneralUseSi570 = new System.Windows.Forms.CheckBoxTS();
             this.grpGeneralModel = new System.Windows.Forms.GroupBoxTS();
+            this.radGenModelOrion = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelANAN100D = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelANAN100 = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelANAN10 = new System.Windows.Forms.RadioButtonTS();
@@ -234,34 +235,6 @@
             this.radGenModelSDR1000 = new System.Windows.Forms.RadioButtonTS();
             this.btnWizard = new System.Windows.Forms.ButtonTS();
             this.chkGeneralRXOnly = new System.Windows.Forms.CheckBoxTS();
-            this.groupBoxHPSDRHW = new System.Windows.Forms.GroupBoxTS();
-            this.chkApolloPresent = new System.Windows.Forms.CheckBoxTS();
-            this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
-            this.chkExcaliburPresent = new System.Windows.Forms.CheckBoxTS();
-            this.chkAlexPresent = new System.Windows.Forms.CheckBoxTS();
-            this.chkJanusPresent = new System.Windows.Forms.CheckBoxTS();
-            this.chkMercuryPresent = new System.Windows.Forms.CheckBoxTS();
-            this.chkPennyPresent = new System.Windows.Forms.CheckBoxTS();
-            this.grpGeneralHardwareFLEX5000 = new System.Windows.Forms.GroupBoxTS();
-            this.lblFirmwareRev = new System.Windows.Forms.LabelTS();
-            this.lblRX2Rev = new System.Windows.Forms.LabelTS();
-            this.lblATURev = new System.Windows.Forms.LabelTS();
-            this.lblRFIORev = new System.Windows.Forms.LabelTS();
-            this.lblPARev = new System.Windows.Forms.LabelTS();
-            this.lblTRXRev = new System.Windows.Forms.LabelTS();
-            this.lblSerialNum = new System.Windows.Forms.LabelTS();
-            this.lblModel = new System.Windows.Forms.LabelTS();
-            this.grpGeneralHardwareSDR1000 = new System.Windows.Forms.GroupBoxTS();
-            this.comboGeneralXVTR = new System.Windows.Forms.ComboBoxTS();
-            this.chkBoxJanusOzyControl = new System.Windows.Forms.CheckBoxTS();
-            this.chkGeneralXVTRPresent = new System.Windows.Forms.CheckBoxTS();
-            this.chkGeneralUSBPresent = new System.Windows.Forms.CheckBoxTS();
-            this.chkGeneralATUPresent = new System.Windows.Forms.CheckBoxTS();
-            this.chkGeneralPAPresent = new System.Windows.Forms.CheckBoxTS();
-            this.lblGeneralLPTDelay = new System.Windows.Forms.LabelTS();
-            this.udGeneralLPTDelay = new System.Windows.Forms.NumericUpDownTS();
-            this.lblGeneralLPTAddr = new System.Windows.Forms.LabelTS();
-            this.comboGeneralLPTAddr = new System.Windows.Forms.ComboBoxTS();
             this.grpMetisAddr = new System.Windows.Forms.GroupBoxTS();
             this.lblMetisBoardID = new System.Windows.Forms.LabelTS();
             this.labelTS88 = new System.Windows.Forms.LabelTS();
@@ -271,6 +244,31 @@
             this.labelTS9 = new System.Windows.Forms.LabelTS();
             this.lblMetisIP = new System.Windows.Forms.LabelTS();
             this.lblMetisMAC = new System.Windows.Forms.LabelTS();
+            this.groupBoxHPSDRHW = new System.Windows.Forms.GroupBoxTS();
+            this.chkApolloPresent = new System.Windows.Forms.CheckBoxTS();
+            this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
+            this.chkExcaliburPresent = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlexPresent = new System.Windows.Forms.CheckBoxTS();
+            this.chkJanusPresent = new System.Windows.Forms.CheckBoxTS();
+            this.chkMercuryPresent = new System.Windows.Forms.CheckBoxTS();
+            this.chkPennyPresent = new System.Windows.Forms.CheckBoxTS();
+            this.grpGeneralHardwareORION = new System.Windows.Forms.GroupBoxTS();
+            this.panelOrion10MHzOsc = new System.Windows.Forms.PanelTS();
+            this.radOrion10MHzExt = new System.Windows.Forms.RadioButtonTS();
+            this.radOrion10MHzInt = new System.Windows.Forms.RadioButtonTS();
+            this.lblOrion10MHZOSC = new System.Windows.Forms.LabelTS();
+            this.panelOrionPTT = new System.Windows.Forms.PanelTS();
+            this.radOrionPTTOn = new System.Windows.Forms.RadioButtonTS();
+            this.radOrionPTTOff = new System.Windows.Forms.RadioButtonTS();
+            this.lblOrionPTT = new System.Windows.Forms.LabelTS();
+            this.panelOrionBias = new System.Windows.Forms.PanelTS();
+            this.radOrionBiasOn = new System.Windows.Forms.RadioButtonTS();
+            this.radOrionBiasOff = new System.Windows.Forms.RadioButtonTS();
+            this.lblOrionBias = new System.Windows.Forms.LabelTS();
+            this.panelOrionMic = new System.Windows.Forms.PanelTS();
+            this.radOrionMicRing = new System.Windows.Forms.RadioButtonTS();
+            this.radOrionMicTip = new System.Windows.Forms.RadioButtonTS();
+            this.lblOrionMic = new System.Windows.Forms.LabelTS();
             this.tpGeneralOptions = new System.Windows.Forms.TabPage();
             this.chkRX2StepAtt = new System.Windows.Forms.CheckBoxTS();
             this.grpHermesStepAttenuator = new System.Windows.Forms.GroupBoxTS();
@@ -2216,6 +2214,59 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
+            this.grpOrionPAGainByBand = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS277 = new System.Windows.Forms.LabelTS();
+            this.checkBoxTS7 = new System.Windows.Forms.CheckBoxTS();
+            this.udOrionPAGainVHF13 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS278 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF12 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS279 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF11 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS280 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF10 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS281 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF9 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS282 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF8 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS283 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF7 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS284 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF6 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS285 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF5 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS286 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF4 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS287 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF3 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS288 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF2 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS289 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF1 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS290 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGainVHF0 = new System.Windows.Forms.NumericUpDownTS();
+            this.udOrionPAGain6 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS291 = new System.Windows.Forms.LabelTS();
+            this.btnOrionPAGainReset = new System.Windows.Forms.ButtonTS();
+            this.labelTS292 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGain10 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS293 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGain12 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS294 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGain15 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS295 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGain17 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS296 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGain20 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS297 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGain30 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS298 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGain40 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS299 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGain60 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS300 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGain80 = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS301 = new System.Windows.Forms.LabelTS();
+            this.udOrionPAGain160 = new System.Windows.Forms.NumericUpDownTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -2284,11 +2335,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.udStaticIP1)).BeginInit();
             this.grpFRSRegion.SuspendLayout();
             this.grpGeneralModel.SuspendLayout();
-            this.groupBoxHPSDRHW.SuspendLayout();
-            this.grpGeneralHardwareFLEX5000.SuspendLayout();
-            this.grpGeneralHardwareSDR1000.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udGeneralLPTDelay)).BeginInit();
             this.grpMetisAddr.SuspendLayout();
+            this.groupBoxHPSDRHW.SuspendLayout();
+            this.grpGeneralHardwareORION.SuspendLayout();
+            this.panelOrion10MHzOsc.SuspendLayout();
+            this.panelOrionPTT.SuspendLayout();
+            this.panelOrionBias.SuspendLayout();
+            this.panelOrionMic.SuspendLayout();
             this.tpGeneralOptions.SuspendLayout();
             this.grpHermesStepAttenuator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udHermesStepAttenuatorData)).BeginInit();
@@ -2877,6 +2930,32 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS35)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS36)).BeginInit();
             this.panelTS4.SuspendLayout();
+            this.grpOrionPAGainByBand.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain30)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain40)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain60)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain80)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain160)).BeginInit();
             this.SuspendLayout();
             // 
             // tpAlexAntCtrl
@@ -5093,10 +5172,9 @@
             this.tpGeneralHardware.Controls.Add(this.grpGeneralModel);
             this.tpGeneralHardware.Controls.Add(this.btnWizard);
             this.tpGeneralHardware.Controls.Add(this.chkGeneralRXOnly);
-            this.tpGeneralHardware.Controls.Add(this.groupBoxHPSDRHW);
-            this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareFLEX5000);
-            this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareSDR1000);
             this.tpGeneralHardware.Controls.Add(this.grpMetisAddr);
+            this.tpGeneralHardware.Controls.Add(this.groupBoxHPSDRHW);
+            this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareORION);
             this.tpGeneralHardware.Location = new System.Drawing.Point(4, 22);
             this.tpGeneralHardware.Name = "tpGeneralHardware";
             this.tpGeneralHardware.Size = new System.Drawing.Size(580, 318);
@@ -5809,6 +5887,7 @@
             // 
             // grpGeneralModel
             // 
+            this.grpGeneralModel.Controls.Add(this.radGenModelOrion);
             this.grpGeneralModel.Controls.Add(this.radGenModelANAN100D);
             this.grpGeneralModel.Controls.Add(this.radGenModelANAN100);
             this.grpGeneralModel.Controls.Add(this.radGenModelANAN10);
@@ -5824,6 +5903,17 @@
             this.grpGeneralModel.TabIndex = 25;
             this.grpGeneralModel.TabStop = false;
             this.grpGeneralModel.Text = "Radio Model";
+            // 
+            // radGenModelOrion
+            // 
+            this.radGenModelOrion.Image = null;
+            this.radGenModelOrion.Location = new System.Drawing.Point(16, 140);
+            this.radGenModelOrion.Name = "radGenModelOrion";
+            this.radGenModelOrion.Size = new System.Drawing.Size(88, 24);
+            this.radGenModelOrion.TabIndex = 9;
+            this.radGenModelOrion.Text = "ORION";
+            this.radGenModelOrion.UseVisualStyleBackColor = true;
+            this.radGenModelOrion.CheckedChanged += new System.EventHandler(this.radGenModelOrion_CheckedChanged);
             // 
             // radGenModelANAN100D
             // 
@@ -5954,6 +6044,96 @@
             this.toolTip1.SetToolTip(this.chkGeneralRXOnly, "Check to disable transmit functionality.");
             this.chkGeneralRXOnly.CheckedChanged += new System.EventHandler(this.chkGeneralRXOnly_CheckedChanged);
             // 
+            // grpMetisAddr
+            // 
+            this.grpMetisAddr.Controls.Add(this.lblMetisBoardID);
+            this.grpMetisAddr.Controls.Add(this.labelTS88);
+            this.grpMetisAddr.Controls.Add(this.lblMetisCodeVersion);
+            this.grpMetisAddr.Controls.Add(this.lblMetisVer);
+            this.grpMetisAddr.Controls.Add(this.labelTS16);
+            this.grpMetisAddr.Controls.Add(this.labelTS9);
+            this.grpMetisAddr.Controls.Add(this.lblMetisIP);
+            this.grpMetisAddr.Controls.Add(this.lblMetisMAC);
+            this.grpMetisAddr.Location = new System.Drawing.Point(326, 235);
+            this.grpMetisAddr.Name = "grpMetisAddr";
+            this.grpMetisAddr.Size = new System.Drawing.Size(251, 56);
+            this.grpMetisAddr.TabIndex = 35;
+            this.grpMetisAddr.TabStop = false;
+            this.grpMetisAddr.Text = "Metis  Address";
+            this.grpMetisAddr.Visible = false;
+            // 
+            // lblMetisBoardID
+            // 
+            this.lblMetisBoardID.Image = null;
+            this.lblMetisBoardID.Location = new System.Drawing.Point(219, 34);
+            this.lblMetisBoardID.Name = "lblMetisBoardID";
+            this.lblMetisBoardID.Size = new System.Drawing.Size(26, 16);
+            this.lblMetisBoardID.TabIndex = 7;
+            this.lblMetisBoardID.Text = "00";
+            // 
+            // labelTS88
+            // 
+            this.labelTS88.Image = null;
+            this.labelTS88.Location = new System.Drawing.Point(189, 34);
+            this.labelTS88.Name = "labelTS88";
+            this.labelTS88.Size = new System.Drawing.Size(21, 16);
+            this.labelTS88.TabIndex = 6;
+            this.labelTS88.Text = "ID:";
+            // 
+            // lblMetisCodeVersion
+            // 
+            this.lblMetisCodeVersion.Image = null;
+            this.lblMetisCodeVersion.Location = new System.Drawing.Point(220, 13);
+            this.lblMetisCodeVersion.Name = "lblMetisCodeVersion";
+            this.lblMetisCodeVersion.Size = new System.Drawing.Size(26, 16);
+            this.lblMetisCodeVersion.TabIndex = 5;
+            this.lblMetisCodeVersion.Text = "00";
+            // 
+            // lblMetisVer
+            // 
+            this.lblMetisVer.Image = null;
+            this.lblMetisVer.Location = new System.Drawing.Point(189, 13);
+            this.lblMetisVer.Name = "lblMetisVer";
+            this.lblMetisVer.Size = new System.Drawing.Size(26, 16);
+            this.lblMetisVer.TabIndex = 4;
+            this.lblMetisVer.Text = "Ver:";
+            // 
+            // labelTS16
+            // 
+            this.labelTS16.Image = null;
+            this.labelTS16.Location = new System.Drawing.Point(8, 16);
+            this.labelTS16.Name = "labelTS16";
+            this.labelTS16.Size = new System.Drawing.Size(20, 16);
+            this.labelTS16.TabIndex = 3;
+            this.labelTS16.Text = "IP:";
+            // 
+            // labelTS9
+            // 
+            this.labelTS9.Image = null;
+            this.labelTS9.Location = new System.Drawing.Point(8, 34);
+            this.labelTS9.Name = "labelTS9";
+            this.labelTS9.Size = new System.Drawing.Size(34, 16);
+            this.labelTS9.TabIndex = 2;
+            this.labelTS9.Text = "MAC:";
+            // 
+            // lblMetisIP
+            // 
+            this.lblMetisIP.Image = null;
+            this.lblMetisIP.Location = new System.Drawing.Point(46, 16);
+            this.lblMetisIP.Name = "lblMetisIP";
+            this.lblMetisIP.Size = new System.Drawing.Size(128, 16);
+            this.lblMetisIP.TabIndex = 0;
+            this.lblMetisIP.Text = "0.0.0.0";
+            // 
+            // lblMetisMAC
+            // 
+            this.lblMetisMAC.Image = null;
+            this.lblMetisMAC.Location = new System.Drawing.Point(46, 34);
+            this.lblMetisMAC.Name = "lblMetisMAC";
+            this.lblMetisMAC.Size = new System.Drawing.Size(128, 16);
+            this.lblMetisMAC.TabIndex = 1;
+            this.lblMetisMAC.Text = "00:00:00:00:00:00";
+            // 
             // groupBoxHPSDRHW
             // 
             this.groupBoxHPSDRHW.Controls.Add(this.chkApolloPresent);
@@ -6054,343 +6234,206 @@
             this.chkPennyPresent.UseVisualStyleBackColor = true;
             this.chkPennyPresent.CheckedChanged += new System.EventHandler(this.chkPennyPresent_CheckedChanged);
             // 
-            // grpGeneralHardwareFLEX5000
+            // grpGeneralHardwareORION
             // 
-            this.grpGeneralHardwareFLEX5000.Controls.Add(this.lblFirmwareRev);
-            this.grpGeneralHardwareFLEX5000.Controls.Add(this.lblRX2Rev);
-            this.grpGeneralHardwareFLEX5000.Controls.Add(this.lblATURev);
-            this.grpGeneralHardwareFLEX5000.Controls.Add(this.lblRFIORev);
-            this.grpGeneralHardwareFLEX5000.Controls.Add(this.lblPARev);
-            this.grpGeneralHardwareFLEX5000.Controls.Add(this.lblTRXRev);
-            this.grpGeneralHardwareFLEX5000.Controls.Add(this.lblSerialNum);
-            this.grpGeneralHardwareFLEX5000.Controls.Add(this.lblModel);
-            this.grpGeneralHardwareFLEX5000.Location = new System.Drawing.Point(160, 8);
-            this.grpGeneralHardwareFLEX5000.Name = "grpGeneralHardwareFLEX5000";
-            this.grpGeneralHardwareFLEX5000.Size = new System.Drawing.Size(160, 183);
-            this.grpGeneralHardwareFLEX5000.TabIndex = 11;
-            this.grpGeneralHardwareFLEX5000.TabStop = false;
-            this.grpGeneralHardwareFLEX5000.Text = "FLEX-5000 Config";
-            this.grpGeneralHardwareFLEX5000.Visible = false;
+            this.grpGeneralHardwareORION.Controls.Add(this.panelOrion10MHzOsc);
+            this.grpGeneralHardwareORION.Controls.Add(this.lblOrion10MHZOSC);
+            this.grpGeneralHardwareORION.Controls.Add(this.panelOrionPTT);
+            this.grpGeneralHardwareORION.Controls.Add(this.lblOrionPTT);
+            this.grpGeneralHardwareORION.Controls.Add(this.panelOrionBias);
+            this.grpGeneralHardwareORION.Controls.Add(this.lblOrionBias);
+            this.grpGeneralHardwareORION.Controls.Add(this.panelOrionMic);
+            this.grpGeneralHardwareORION.Controls.Add(this.lblOrionMic);
+            this.grpGeneralHardwareORION.Location = new System.Drawing.Point(160, 8);
+            this.grpGeneralHardwareORION.Name = "grpGeneralHardwareORION";
+            this.grpGeneralHardwareORION.Size = new System.Drawing.Size(160, 171);
+            this.grpGeneralHardwareORION.TabIndex = 8;
+            this.grpGeneralHardwareORION.TabStop = false;
+            this.grpGeneralHardwareORION.Text = "Orion Hardware Setup";
             // 
-            // lblFirmwareRev
+            // panelOrion10MHzOsc
             // 
-            this.lblFirmwareRev.Image = null;
-            this.lblFirmwareRev.Location = new System.Drawing.Point(16, 48);
-            this.lblFirmwareRev.Name = "lblFirmwareRev";
-            this.lblFirmwareRev.Size = new System.Drawing.Size(120, 16);
-            this.lblFirmwareRev.TabIndex = 7;
-            this.lblFirmwareRev.Text = "Firmware: 0.0.0.0";
+            this.panelOrion10MHzOsc.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.panelOrion10MHzOsc.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.panelOrion10MHzOsc.Controls.Add(this.radOrion10MHzExt);
+            this.panelOrion10MHzOsc.Controls.Add(this.radOrion10MHzInt);
+            this.panelOrion10MHzOsc.Location = new System.Drawing.Point(71, 133);
+            this.panelOrion10MHzOsc.Name = "panelOrion10MHzOsc";
+            this.panelOrion10MHzOsc.Size = new System.Drawing.Size(83, 24);
+            this.panelOrion10MHzOsc.TabIndex = 7;
             // 
-            // lblRX2Rev
+            // radOrion10MHzExt
             // 
-            this.lblRX2Rev.Image = null;
-            this.lblRX2Rev.Location = new System.Drawing.Point(16, 136);
-            this.lblRX2Rev.Name = "lblRX2Rev";
-            this.lblRX2Rev.Size = new System.Drawing.Size(136, 16);
-            this.lblRX2Rev.TabIndex = 6;
-            this.lblRX2Rev.Text = "RX2: 8888-8888 (8.8.8.8)";
+            this.radOrion10MHzExt.AutoSize = true;
+            this.radOrion10MHzExt.Image = null;
+            this.radOrion10MHzExt.Location = new System.Drawing.Point(39, 2);
+            this.radOrion10MHzExt.Name = "radOrion10MHzExt";
+            this.radOrion10MHzExt.Size = new System.Drawing.Size(40, 17);
+            this.radOrion10MHzExt.TabIndex = 1;
+            this.radOrion10MHzExt.TabStop = true;
+            this.radOrion10MHzExt.Text = "Ext";
+            this.radOrion10MHzExt.UseVisualStyleBackColor = true;
             // 
-            // lblATURev
+            // radOrion10MHzInt
             // 
-            this.lblATURev.Image = null;
-            this.lblATURev.Location = new System.Drawing.Point(16, 120);
-            this.lblATURev.Name = "lblATURev";
-            this.lblATURev.Size = new System.Drawing.Size(136, 16);
-            this.lblATURev.TabIndex = 5;
-            this.lblATURev.Text = "ATU: 8888-8888 (8.8.8.8)";
+            this.radOrion10MHzInt.AutoSize = true;
+            this.radOrion10MHzInt.Checked = true;
+            this.radOrion10MHzInt.Image = null;
+            this.radOrion10MHzInt.Location = new System.Drawing.Point(3, 2);
+            this.radOrion10MHzInt.Name = "radOrion10MHzInt";
+            this.radOrion10MHzInt.Size = new System.Drawing.Size(37, 17);
+            this.radOrion10MHzInt.TabIndex = 0;
+            this.radOrion10MHzInt.TabStop = true;
+            this.radOrion10MHzInt.Text = "Int";
+            this.radOrion10MHzInt.UseVisualStyleBackColor = true;
             // 
-            // lblRFIORev
+            // lblOrion10MHZOSC
             // 
-            this.lblRFIORev.Image = null;
-            this.lblRFIORev.Location = new System.Drawing.Point(16, 104);
-            this.lblRFIORev.Name = "lblRFIORev";
-            this.lblRFIORev.Size = new System.Drawing.Size(140, 16);
-            this.lblRFIORev.TabIndex = 4;
-            this.lblRFIORev.Text = "RFIO: 8888-8888 (8.8.8.8)";
+            this.lblOrion10MHZOSC.AutoSize = true;
+            this.lblOrion10MHZOSC.Image = null;
+            this.lblOrion10MHZOSC.Location = new System.Drawing.Point(5, 137);
+            this.lblOrion10MHZOSC.Name = "lblOrion10MHZOSC";
+            this.lblOrion10MHZOSC.Size = new System.Drawing.Size(63, 13);
+            this.lblOrion10MHZOSC.TabIndex = 6;
+            this.lblOrion10MHZOSC.Text = "10MHz Osc";
             // 
-            // lblPARev
+            // panelOrionPTT
             // 
-            this.lblPARev.Image = null;
-            this.lblPARev.Location = new System.Drawing.Point(16, 88);
-            this.lblPARev.Name = "lblPARev";
-            this.lblPARev.Size = new System.Drawing.Size(136, 16);
-            this.lblPARev.TabIndex = 3;
-            this.lblPARev.Text = "PA: 8888-8888 (8.8.8.8)";
+            this.panelOrionPTT.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.panelOrionPTT.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.panelOrionPTT.Controls.Add(this.radOrionPTTOn);
+            this.panelOrionPTT.Controls.Add(this.radOrionPTTOff);
+            this.panelOrionPTT.Location = new System.Drawing.Point(40, 75);
+            this.panelOrionPTT.Name = "panelOrionPTT";
+            this.panelOrionPTT.Size = new System.Drawing.Size(114, 24);
+            this.panelOrionPTT.TabIndex = 5;
             // 
-            // lblTRXRev
+            // radOrionPTTOn
             // 
-            this.lblTRXRev.Image = null;
-            this.lblTRXRev.Location = new System.Drawing.Point(16, 72);
-            this.lblTRXRev.Name = "lblTRXRev";
-            this.lblTRXRev.Size = new System.Drawing.Size(136, 16);
-            this.lblTRXRev.TabIndex = 2;
-            this.lblTRXRev.Text = "TRX: 8888-8888 (28F)";
+            this.radOrionPTTOn.AutoSize = true;
+            this.radOrionPTTOn.Image = null;
+            this.radOrionPTTOn.Location = new System.Drawing.Point(49, 2);
+            this.radOrionPTTOn.Name = "radOrionPTTOn";
+            this.radOrionPTTOn.Size = new System.Drawing.Size(39, 17);
+            this.radOrionPTTOn.TabIndex = 1;
+            this.radOrionPTTOn.TabStop = true;
+            this.radOrionPTTOn.Text = "On";
+            this.radOrionPTTOn.UseVisualStyleBackColor = true;
             // 
-            // lblSerialNum
+            // radOrionPTTOff
             // 
-            this.lblSerialNum.Image = null;
-            this.lblSerialNum.Location = new System.Drawing.Point(67, 24);
-            this.lblSerialNum.Name = "lblSerialNum";
-            this.lblSerialNum.Size = new System.Drawing.Size(86, 16);
-            this.lblSerialNum.TabIndex = 1;
-            this.lblSerialNum.Text = "S/N: 0000-0000";
+            this.radOrionPTTOff.AutoSize = true;
+            this.radOrionPTTOff.Checked = true;
+            this.radOrionPTTOff.Image = null;
+            this.radOrionPTTOff.Location = new System.Drawing.Point(3, 2);
+            this.radOrionPTTOff.Name = "radOrionPTTOff";
+            this.radOrionPTTOff.Size = new System.Drawing.Size(39, 17);
+            this.radOrionPTTOff.TabIndex = 0;
+            this.radOrionPTTOff.TabStop = true;
+            this.radOrionPTTOff.Text = "Off";
+            this.radOrionPTTOff.UseVisualStyleBackColor = true;
             // 
-            // lblModel
+            // lblOrionPTT
             // 
-            this.lblModel.Image = null;
-            this.lblModel.Location = new System.Drawing.Point(16, 24);
-            this.lblModel.Name = "lblModel";
-            this.lblModel.Size = new System.Drawing.Size(52, 16);
-            this.lblModel.TabIndex = 0;
-            this.lblModel.Text = "Model: A";
+            this.lblOrionPTT.AutoSize = true;
+            this.lblOrionPTT.Image = null;
+            this.lblOrionPTT.Location = new System.Drawing.Point(9, 79);
+            this.lblOrionPTT.Name = "lblOrionPTT";
+            this.lblOrionPTT.Size = new System.Drawing.Size(28, 13);
+            this.lblOrionPTT.TabIndex = 4;
+            this.lblOrionPTT.Text = "PTT";
             // 
-            // grpGeneralHardwareSDR1000
+            // panelOrionBias
             // 
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.comboGeneralXVTR);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.chkBoxJanusOzyControl);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.chkGeneralXVTRPresent);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.chkGeneralUSBPresent);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.chkGeneralATUPresent);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.chkGeneralPAPresent);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.lblGeneralLPTDelay);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.udGeneralLPTDelay);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.lblGeneralLPTAddr);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.comboGeneralLPTAddr);
-            this.grpGeneralHardwareSDR1000.Location = new System.Drawing.Point(160, 8);
-            this.grpGeneralHardwareSDR1000.Name = "grpGeneralHardwareSDR1000";
-            this.grpGeneralHardwareSDR1000.Size = new System.Drawing.Size(160, 183);
-            this.grpGeneralHardwareSDR1000.TabIndex = 1;
-            this.grpGeneralHardwareSDR1000.TabStop = false;
-            this.grpGeneralHardwareSDR1000.Text = "SDR-1000 Config";
+            this.panelOrionBias.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.panelOrionBias.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.panelOrionBias.Controls.Add(this.radOrionBiasOn);
+            this.panelOrionBias.Controls.Add(this.radOrionBiasOff);
+            this.panelOrionBias.Location = new System.Drawing.Point(40, 48);
+            this.panelOrionBias.Name = "panelOrionBias";
+            this.panelOrionBias.Size = new System.Drawing.Size(114, 24);
+            this.panelOrionBias.TabIndex = 3;
             // 
-            // comboGeneralXVTR
+            // radOrionBiasOn
             // 
-            this.comboGeneralXVTR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboGeneralXVTR.DropDownWidth = 136;
-            this.comboGeneralXVTR.Items.AddRange(new object[] {
-            "No TR Logic",
-            "Negative TR Logic",
-            "Positive TR Logic"});
-            this.comboGeneralXVTR.Location = new System.Drawing.Point(16, 189);
-            this.comboGeneralXVTR.Name = "comboGeneralXVTR";
-            this.comboGeneralXVTR.Size = new System.Drawing.Size(136, 21);
-            this.comboGeneralXVTR.TabIndex = 35;
-            this.toolTip1.SetToolTip(this.comboGeneralXVTR, "XVTR TR Logic Selection -- Negative for XVTR FlexRadio Systems provides.  Positiv" +
-        "e for 25W version.  No TR logic for other XVTRs.");
-            this.comboGeneralXVTR.Visible = false;
+            this.radOrionBiasOn.AutoSize = true;
+            this.radOrionBiasOn.Image = null;
+            this.radOrionBiasOn.Location = new System.Drawing.Point(49, 2);
+            this.radOrionBiasOn.Name = "radOrionBiasOn";
+            this.radOrionBiasOn.Size = new System.Drawing.Size(39, 17);
+            this.radOrionBiasOn.TabIndex = 1;
+            this.radOrionBiasOn.TabStop = true;
+            this.radOrionBiasOn.Text = "On";
+            this.radOrionBiasOn.UseVisualStyleBackColor = true;
             // 
-            // chkBoxJanusOzyControl
+            // radOrionBiasOff
             // 
-            this.chkBoxJanusOzyControl.Image = null;
-            this.chkBoxJanusOzyControl.Location = new System.Drawing.Point(16, 152);
-            this.chkBoxJanusOzyControl.Name = "chkBoxJanusOzyControl";
-            this.chkBoxJanusOzyControl.Size = new System.Drawing.Size(128, 16);
-            this.chkBoxJanusOzyControl.TabIndex = 11;
-            this.chkBoxJanusOzyControl.Text = "Janus/Ozy Control";
-            this.toolTip1.SetToolTip(this.chkBoxJanusOzyControl, "Check if Ozy being used to control the SDR-1000");
-            this.chkBoxJanusOzyControl.CheckedChanged += new System.EventHandler(this.chkBoxJanusOzyControl_CheckedChanged);
+            this.radOrionBiasOff.AutoSize = true;
+            this.radOrionBiasOff.Checked = true;
+            this.radOrionBiasOff.Image = null;
+            this.radOrionBiasOff.Location = new System.Drawing.Point(3, 2);
+            this.radOrionBiasOff.Name = "radOrionBiasOff";
+            this.radOrionBiasOff.Size = new System.Drawing.Size(39, 17);
+            this.radOrionBiasOff.TabIndex = 0;
+            this.radOrionBiasOff.TabStop = true;
+            this.radOrionBiasOff.Text = "Off";
+            this.radOrionBiasOff.UseVisualStyleBackColor = true;
             // 
-            // chkGeneralXVTRPresent
+            // lblOrionBias
             // 
-            this.chkGeneralXVTRPresent.Image = null;
-            this.chkGeneralXVTRPresent.Location = new System.Drawing.Point(16, 136);
-            this.chkGeneralXVTRPresent.Name = "chkGeneralXVTRPresent";
-            this.chkGeneralXVTRPresent.Size = new System.Drawing.Size(104, 16);
-            this.chkGeneralXVTRPresent.TabIndex = 34;
-            this.chkGeneralXVTRPresent.Text = "XVTR Present";
-            this.toolTip1.SetToolTip(this.chkGeneralXVTRPresent, "Check if DEMI XVTR is installed.");
-            this.chkGeneralXVTRPresent.CheckedChanged += new System.EventHandler(this.chkXVTRPresent_CheckedChanged);
+            this.lblOrionBias.AutoSize = true;
+            this.lblOrionBias.Image = null;
+            this.lblOrionBias.Location = new System.Drawing.Point(10, 52);
+            this.lblOrionBias.Name = "lblOrionBias";
+            this.lblOrionBias.Size = new System.Drawing.Size(27, 13);
+            this.lblOrionBias.TabIndex = 2;
+            this.lblOrionBias.Text = "Bias";
             // 
-            // chkGeneralUSBPresent
+            // panelOrionMic
             // 
-            this.chkGeneralUSBPresent.Image = null;
-            this.chkGeneralUSBPresent.Location = new System.Drawing.Point(16, 88);
-            this.chkGeneralUSBPresent.Name = "chkGeneralUSBPresent";
-            this.chkGeneralUSBPresent.Size = new System.Drawing.Size(96, 16);
-            this.chkGeneralUSBPresent.TabIndex = 10;
-            this.chkGeneralUSBPresent.Text = "USB Adapter";
-            this.toolTip1.SetToolTip(this.chkGeneralUSBPresent, "Check if the USB adapter is being used.");
-            this.chkGeneralUSBPresent.CheckedChanged += new System.EventHandler(this.chkGeneralUSBPresent_CheckedChanged);
+            this.panelOrionMic.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.panelOrionMic.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.panelOrionMic.Controls.Add(this.radOrionMicRing);
+            this.panelOrionMic.Controls.Add(this.radOrionMicTip);
+            this.panelOrionMic.Location = new System.Drawing.Point(40, 20);
+            this.panelOrionMic.Name = "panelOrionMic";
+            this.panelOrionMic.Size = new System.Drawing.Size(114, 24);
+            this.panelOrionMic.TabIndex = 1;
             // 
-            // chkGeneralATUPresent
+            // radOrionMicRing
             // 
-            this.chkGeneralATUPresent.Image = null;
-            this.chkGeneralATUPresent.Location = new System.Drawing.Point(16, 120);
-            this.chkGeneralATUPresent.Name = "chkGeneralATUPresent";
-            this.chkGeneralATUPresent.Size = new System.Drawing.Size(88, 16);
-            this.chkGeneralATUPresent.TabIndex = 9;
-            this.chkGeneralATUPresent.Text = "ATU Present";
-            this.toolTip1.SetToolTip(this.chkGeneralATUPresent, "Check if integrated LDG Z-100 is installed.");
-            this.chkGeneralATUPresent.Visible = false;
-            this.chkGeneralATUPresent.CheckedChanged += new System.EventHandler(this.chkGeneralATUPresent_CheckedChanged);
+            this.radOrionMicRing.AutoSize = true;
+            this.radOrionMicRing.Image = null;
+            this.radOrionMicRing.Location = new System.Drawing.Point(49, 2);
+            this.radOrionMicRing.Name = "radOrionMicRing";
+            this.radOrionMicRing.Size = new System.Drawing.Size(47, 17);
+            this.radOrionMicRing.TabIndex = 1;
+            this.radOrionMicRing.TabStop = true;
+            this.radOrionMicRing.Text = "Ring";
+            this.radOrionMicRing.UseVisualStyleBackColor = true;
             // 
-            // chkGeneralPAPresent
+            // radOrionMicTip
             // 
-            this.chkGeneralPAPresent.Image = null;
-            this.chkGeneralPAPresent.Location = new System.Drawing.Point(16, 104);
-            this.chkGeneralPAPresent.Name = "chkGeneralPAPresent";
-            this.chkGeneralPAPresent.Size = new System.Drawing.Size(88, 16);
-            this.chkGeneralPAPresent.TabIndex = 8;
-            this.chkGeneralPAPresent.Text = "PA Present";
-            this.toolTip1.SetToolTip(this.chkGeneralPAPresent, "Check if FlexRadio Systems 100W PA is installed.");
-            this.chkGeneralPAPresent.CheckedChanged += new System.EventHandler(this.chkGeneralPAPresent_CheckedChanged);
+            this.radOrionMicTip.AutoSize = true;
+            this.radOrionMicTip.Checked = true;
+            this.radOrionMicTip.Image = null;
+            this.radOrionMicTip.Location = new System.Drawing.Point(3, 2);
+            this.radOrionMicTip.Name = "radOrionMicTip";
+            this.radOrionMicTip.Size = new System.Drawing.Size(40, 17);
+            this.radOrionMicTip.TabIndex = 0;
+            this.radOrionMicTip.TabStop = true;
+            this.radOrionMicTip.Text = "Tip";
+            this.radOrionMicTip.UseVisualStyleBackColor = true;
             // 
-            // lblGeneralLPTDelay
+            // lblOrionMic
             // 
-            this.lblGeneralLPTDelay.Image = null;
-            this.lblGeneralLPTDelay.Location = new System.Drawing.Point(16, 56);
-            this.lblGeneralLPTDelay.Name = "lblGeneralLPTDelay";
-            this.lblGeneralLPTDelay.Size = new System.Drawing.Size(80, 16);
-            this.lblGeneralLPTDelay.TabIndex = 6;
-            this.lblGeneralLPTDelay.Text = "LPT Delay:";
-            // 
-            // udGeneralLPTDelay
-            // 
-            this.udGeneralLPTDelay.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udGeneralLPTDelay.Location = new System.Drawing.Point(96, 56);
-            this.udGeneralLPTDelay.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.udGeneralLPTDelay.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udGeneralLPTDelay.Name = "udGeneralLPTDelay";
-            this.udGeneralLPTDelay.Size = new System.Drawing.Size(56, 20);
-            this.udGeneralLPTDelay.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.udGeneralLPTDelay, "Delay to compensate for longer Parallel cables.");
-            this.udGeneralLPTDelay.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udGeneralLPTDelay.ValueChanged += new System.EventHandler(this.udGeneralLPTDelay_ValueChanged);
-            this.udGeneralLPTDelay.LostFocus += new System.EventHandler(this.udGeneralLPTDelay_LostFocus);
-            // 
-            // lblGeneralLPTAddr
-            // 
-            this.lblGeneralLPTAddr.Image = null;
-            this.lblGeneralLPTAddr.Location = new System.Drawing.Point(16, 24);
-            this.lblGeneralLPTAddr.Name = "lblGeneralLPTAddr";
-            this.lblGeneralLPTAddr.Size = new System.Drawing.Size(80, 16);
-            this.lblGeneralLPTAddr.TabIndex = 3;
-            this.lblGeneralLPTAddr.Text = "LPT Address:";
-            // 
-            // comboGeneralLPTAddr
-            // 
-            this.comboGeneralLPTAddr.DropDownWidth = 56;
-            this.comboGeneralLPTAddr.Items.AddRange(new object[] {
-            "278",
-            "378",
-            "3BC",
-            "B800",
-            "BC00"});
-            this.comboGeneralLPTAddr.Location = new System.Drawing.Point(96, 24);
-            this.comboGeneralLPTAddr.Name = "comboGeneralLPTAddr";
-            this.comboGeneralLPTAddr.Size = new System.Drawing.Size(56, 21);
-            this.comboGeneralLPTAddr.TabIndex = 0;
-            this.comboGeneralLPTAddr.Text = "378";
-            this.toolTip1.SetToolTip(this.comboGeneralLPTAddr, "Parallel Port Address");
-            this.comboGeneralLPTAddr.SelectedIndexChanged += new System.EventHandler(this.comboGeneralLPTAddr_SelectedIndexChanged);
-            this.comboGeneralLPTAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboGeneralLPTAddr_KeyDown);
-            this.comboGeneralLPTAddr.LostFocus += new System.EventHandler(this.comboGeneralLPTAddr_LostFocus);
-            // 
-            // grpMetisAddr
-            // 
-            this.grpMetisAddr.Controls.Add(this.lblMetisBoardID);
-            this.grpMetisAddr.Controls.Add(this.labelTS88);
-            this.grpMetisAddr.Controls.Add(this.lblMetisCodeVersion);
-            this.grpMetisAddr.Controls.Add(this.lblMetisVer);
-            this.grpMetisAddr.Controls.Add(this.labelTS16);
-            this.grpMetisAddr.Controls.Add(this.labelTS9);
-            this.grpMetisAddr.Controls.Add(this.lblMetisIP);
-            this.grpMetisAddr.Controls.Add(this.lblMetisMAC);
-            this.grpMetisAddr.Location = new System.Drawing.Point(326, 235);
-            this.grpMetisAddr.Name = "grpMetisAddr";
-            this.grpMetisAddr.Size = new System.Drawing.Size(251, 56);
-            this.grpMetisAddr.TabIndex = 35;
-            this.grpMetisAddr.TabStop = false;
-            this.grpMetisAddr.Text = "Metis  Address";
-            this.grpMetisAddr.Visible = false;
-            // 
-            // lblMetisBoardID
-            // 
-            this.lblMetisBoardID.Image = null;
-            this.lblMetisBoardID.Location = new System.Drawing.Point(219, 34);
-            this.lblMetisBoardID.Name = "lblMetisBoardID";
-            this.lblMetisBoardID.Size = new System.Drawing.Size(26, 16);
-            this.lblMetisBoardID.TabIndex = 7;
-            this.lblMetisBoardID.Text = "00";
-            // 
-            // labelTS88
-            // 
-            this.labelTS88.Image = null;
-            this.labelTS88.Location = new System.Drawing.Point(189, 34);
-            this.labelTS88.Name = "labelTS88";
-            this.labelTS88.Size = new System.Drawing.Size(21, 16);
-            this.labelTS88.TabIndex = 6;
-            this.labelTS88.Text = "ID:";
-            // 
-            // lblMetisCodeVersion
-            // 
-            this.lblMetisCodeVersion.Image = null;
-            this.lblMetisCodeVersion.Location = new System.Drawing.Point(220, 13);
-            this.lblMetisCodeVersion.Name = "lblMetisCodeVersion";
-            this.lblMetisCodeVersion.Size = new System.Drawing.Size(26, 16);
-            this.lblMetisCodeVersion.TabIndex = 5;
-            this.lblMetisCodeVersion.Text = "00";
-            // 
-            // lblMetisVer
-            // 
-            this.lblMetisVer.Image = null;
-            this.lblMetisVer.Location = new System.Drawing.Point(189, 13);
-            this.lblMetisVer.Name = "lblMetisVer";
-            this.lblMetisVer.Size = new System.Drawing.Size(26, 16);
-            this.lblMetisVer.TabIndex = 4;
-            this.lblMetisVer.Text = "Ver:";
-            // 
-            // labelTS16
-            // 
-            this.labelTS16.Image = null;
-            this.labelTS16.Location = new System.Drawing.Point(8, 16);
-            this.labelTS16.Name = "labelTS16";
-            this.labelTS16.Size = new System.Drawing.Size(20, 16);
-            this.labelTS16.TabIndex = 3;
-            this.labelTS16.Text = "IP:";
-            // 
-            // labelTS9
-            // 
-            this.labelTS9.Image = null;
-            this.labelTS9.Location = new System.Drawing.Point(8, 34);
-            this.labelTS9.Name = "labelTS9";
-            this.labelTS9.Size = new System.Drawing.Size(34, 16);
-            this.labelTS9.TabIndex = 2;
-            this.labelTS9.Text = "MAC:";
-            // 
-            // lblMetisIP
-            // 
-            this.lblMetisIP.Image = null;
-            this.lblMetisIP.Location = new System.Drawing.Point(46, 16);
-            this.lblMetisIP.Name = "lblMetisIP";
-            this.lblMetisIP.Size = new System.Drawing.Size(128, 16);
-            this.lblMetisIP.TabIndex = 0;
-            this.lblMetisIP.Text = "0.0.0.0";
-            // 
-            // lblMetisMAC
-            // 
-            this.lblMetisMAC.Image = null;
-            this.lblMetisMAC.Location = new System.Drawing.Point(46, 34);
-            this.lblMetisMAC.Name = "lblMetisMAC";
-            this.lblMetisMAC.Size = new System.Drawing.Size(128, 16);
-            this.lblMetisMAC.TabIndex = 1;
-            this.lblMetisMAC.Text = "00:00:00:00:00:00";
+            this.lblOrionMic.AutoSize = true;
+            this.lblOrionMic.Image = null;
+            this.lblOrionMic.Location = new System.Drawing.Point(10, 26);
+            this.lblOrionMic.Name = "lblOrionMic";
+            this.lblOrionMic.Size = new System.Drawing.Size(24, 13);
+            this.lblOrionMic.TabIndex = 0;
+            this.lblOrionMic.Text = "Mic";
             // 
             // tpGeneralOptions
             // 
@@ -24002,11 +24045,12 @@
             this.tpGainByBand.BackColor = System.Drawing.SystemColors.Control;
             this.tpGainByBand.Controls.Add(this.chkAutoPACalibrate);
             this.tpGainByBand.Controls.Add(this.panelAutoPACalibrate);
+            this.tpGainByBand.Controls.Add(this.grpOrionPAGainByBand);
+            this.tpGainByBand.Controls.Add(this.grpANANPAGainByBand);
+            this.tpGainByBand.Controls.Add(this.grpHermesPAGainByBand);
             this.tpGainByBand.Controls.Add(this.grpPAGainByBand);
             this.tpGainByBand.Controls.Add(this.grpANAN10PAGainByBand);
             this.tpGainByBand.Controls.Add(this.grpANAN100PAGainByBand);
-            this.tpGainByBand.Controls.Add(this.grpANANPAGainByBand);
-            this.tpGainByBand.Controls.Add(this.grpHermesPAGainByBand);
             this.tpGainByBand.Location = new System.Drawing.Point(4, 22);
             this.tpGainByBand.Name = "tpGainByBand";
             this.tpGainByBand.Padding = new System.Windows.Forms.Padding(3);
@@ -35998,6 +36042,1064 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
+            // grpOrionPAGainByBand
+            // 
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS277);
+            this.grpOrionPAGainByBand.Controls.Add(this.checkBoxTS7);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF13);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS278);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF12);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS279);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF11);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS280);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF10);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS281);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF9);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS282);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF8);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS283);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF7);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS284);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF6);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS285);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF5);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS286);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF4);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS287);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF3);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS288);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF2);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS289);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF1);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS290);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGainVHF0);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain6);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS291);
+            this.grpOrionPAGainByBand.Controls.Add(this.btnOrionPAGainReset);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS292);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain10);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS293);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain12);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS294);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain15);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS295);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain17);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS296);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain20);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS297);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain30);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS298);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain40);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS299);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain60);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS300);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain80);
+            this.grpOrionPAGainByBand.Controls.Add(this.labelTS301);
+            this.grpOrionPAGainByBand.Controls.Add(this.udOrionPAGain160);
+            this.grpOrionPAGainByBand.Location = new System.Drawing.Point(8, 8);
+            this.grpOrionPAGainByBand.Name = "grpOrionPAGainByBand";
+            this.grpOrionPAGainByBand.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.grpOrionPAGainByBand.Size = new System.Drawing.Size(387, 302);
+            this.grpOrionPAGainByBand.TabIndex = 117;
+            this.grpOrionPAGainByBand.TabStop = false;
+            this.grpOrionPAGainByBand.Text = "Gain By Band (dB) Orion";
+            // 
+            // labelTS277
+            // 
+            this.labelTS277.Image = null;
+            this.labelTS277.Location = new System.Drawing.Point(254, 168);
+            this.labelTS277.Name = "labelTS277";
+            this.labelTS277.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS277.Size = new System.Drawing.Size(43, 16);
+            this.labelTS277.TabIndex = 114;
+            this.labelTS277.Text = "VHF13:";
+            this.labelTS277.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // checkBoxTS7
+            // 
+            this.checkBoxTS7.Image = null;
+            this.checkBoxTS7.Location = new System.Drawing.Point(262, 262);
+            this.checkBoxTS7.Name = "checkBoxTS7";
+            this.checkBoxTS7.Size = new System.Drawing.Size(120, 32);
+            this.checkBoxTS7.TabIndex = 83;
+            this.checkBoxTS7.Text = "Use Advanced Calibration Routine";
+            this.checkBoxTS7.Visible = false;
+            // 
+            // udOrionPAGainVHF13
+            // 
+            this.udOrionPAGainVHF13.DecimalPlaces = 1;
+            this.udOrionPAGainVHF13.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF13.Location = new System.Drawing.Point(299, 168);
+            this.udOrionPAGainVHF13.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF13.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF13.Name = "udOrionPAGainVHF13";
+            this.udOrionPAGainVHF13.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF13.TabIndex = 113;
+            this.udOrionPAGainVHF13.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS278
+            // 
+            this.labelTS278.Image = null;
+            this.labelTS278.Location = new System.Drawing.Point(254, 144);
+            this.labelTS278.Name = "labelTS278";
+            this.labelTS278.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS278.Size = new System.Drawing.Size(43, 16);
+            this.labelTS278.TabIndex = 112;
+            this.labelTS278.Text = "VHF12:";
+            this.labelTS278.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // udOrionPAGainVHF12
+            // 
+            this.udOrionPAGainVHF12.DecimalPlaces = 1;
+            this.udOrionPAGainVHF12.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF12.Location = new System.Drawing.Point(299, 144);
+            this.udOrionPAGainVHF12.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF12.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF12.Name = "udOrionPAGainVHF12";
+            this.udOrionPAGainVHF12.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF12.TabIndex = 111;
+            this.udOrionPAGainVHF12.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS279
+            // 
+            this.labelTS279.Image = null;
+            this.labelTS279.Location = new System.Drawing.Point(254, 120);
+            this.labelTS279.Name = "labelTS279";
+            this.labelTS279.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS279.Size = new System.Drawing.Size(43, 16);
+            this.labelTS279.TabIndex = 110;
+            this.labelTS279.Text = "VHF11:";
+            this.labelTS279.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // udOrionPAGainVHF11
+            // 
+            this.udOrionPAGainVHF11.DecimalPlaces = 1;
+            this.udOrionPAGainVHF11.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF11.Location = new System.Drawing.Point(299, 120);
+            this.udOrionPAGainVHF11.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF11.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF11.Name = "udOrionPAGainVHF11";
+            this.udOrionPAGainVHF11.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF11.TabIndex = 109;
+            this.udOrionPAGainVHF11.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS280
+            // 
+            this.labelTS280.Image = null;
+            this.labelTS280.Location = new System.Drawing.Point(254, 96);
+            this.labelTS280.Name = "labelTS280";
+            this.labelTS280.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS280.Size = new System.Drawing.Size(43, 16);
+            this.labelTS280.TabIndex = 108;
+            this.labelTS280.Text = "VHF10:";
+            this.labelTS280.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // udOrionPAGainVHF10
+            // 
+            this.udOrionPAGainVHF10.DecimalPlaces = 1;
+            this.udOrionPAGainVHF10.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF10.Location = new System.Drawing.Point(299, 96);
+            this.udOrionPAGainVHF10.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF10.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF10.Name = "udOrionPAGainVHF10";
+            this.udOrionPAGainVHF10.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF10.TabIndex = 107;
+            this.udOrionPAGainVHF10.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS281
+            // 
+            this.labelTS281.Image = null;
+            this.labelTS281.Location = new System.Drawing.Point(259, 72);
+            this.labelTS281.Name = "labelTS281";
+            this.labelTS281.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS281.Size = new System.Drawing.Size(40, 16);
+            this.labelTS281.TabIndex = 106;
+            this.labelTS281.Text = "VHF9:";
+            this.labelTS281.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGainVHF9
+            // 
+            this.udOrionPAGainVHF9.DecimalPlaces = 1;
+            this.udOrionPAGainVHF9.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF9.Location = new System.Drawing.Point(299, 72);
+            this.udOrionPAGainVHF9.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF9.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF9.Name = "udOrionPAGainVHF9";
+            this.udOrionPAGainVHF9.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF9.TabIndex = 105;
+            this.udOrionPAGainVHF9.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS282
+            // 
+            this.labelTS282.Image = null;
+            this.labelTS282.Location = new System.Drawing.Point(259, 48);
+            this.labelTS282.Name = "labelTS282";
+            this.labelTS282.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS282.Size = new System.Drawing.Size(40, 16);
+            this.labelTS282.TabIndex = 104;
+            this.labelTS282.Text = "VHF8:";
+            this.labelTS282.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGainVHF8
+            // 
+            this.udOrionPAGainVHF8.DecimalPlaces = 1;
+            this.udOrionPAGainVHF8.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF8.Location = new System.Drawing.Point(299, 48);
+            this.udOrionPAGainVHF8.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF8.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF8.Name = "udOrionPAGainVHF8";
+            this.udOrionPAGainVHF8.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF8.TabIndex = 103;
+            this.udOrionPAGainVHF8.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS283
+            // 
+            this.labelTS283.Image = null;
+            this.labelTS283.Location = new System.Drawing.Point(259, 24);
+            this.labelTS283.Name = "labelTS283";
+            this.labelTS283.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS283.Size = new System.Drawing.Size(40, 16);
+            this.labelTS283.TabIndex = 102;
+            this.labelTS283.Text = "VHF7:";
+            this.labelTS283.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGainVHF7
+            // 
+            this.udOrionPAGainVHF7.DecimalPlaces = 1;
+            this.udOrionPAGainVHF7.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF7.Location = new System.Drawing.Point(299, 24);
+            this.udOrionPAGainVHF7.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF7.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF7.Name = "udOrionPAGainVHF7";
+            this.udOrionPAGainVHF7.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF7.TabIndex = 101;
+            this.udOrionPAGainVHF7.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS284
+            // 
+            this.labelTS284.Image = null;
+            this.labelTS284.Location = new System.Drawing.Point(147, 167);
+            this.labelTS284.Name = "labelTS284";
+            this.labelTS284.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS284.Size = new System.Drawing.Size(40, 16);
+            this.labelTS284.TabIndex = 100;
+            this.labelTS284.Text = "VHF6:";
+            this.labelTS284.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGainVHF6
+            // 
+            this.udOrionPAGainVHF6.DecimalPlaces = 1;
+            this.udOrionPAGainVHF6.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF6.Location = new System.Drawing.Point(187, 167);
+            this.udOrionPAGainVHF6.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF6.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF6.Name = "udOrionPAGainVHF6";
+            this.udOrionPAGainVHF6.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF6.TabIndex = 99;
+            this.udOrionPAGainVHF6.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS285
+            // 
+            this.labelTS285.Image = null;
+            this.labelTS285.Location = new System.Drawing.Point(147, 143);
+            this.labelTS285.Name = "labelTS285";
+            this.labelTS285.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS285.Size = new System.Drawing.Size(40, 16);
+            this.labelTS285.TabIndex = 98;
+            this.labelTS285.Text = "VHF5:";
+            this.labelTS285.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGainVHF5
+            // 
+            this.udOrionPAGainVHF5.DecimalPlaces = 1;
+            this.udOrionPAGainVHF5.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF5.Location = new System.Drawing.Point(187, 143);
+            this.udOrionPAGainVHF5.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF5.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF5.Name = "udOrionPAGainVHF5";
+            this.udOrionPAGainVHF5.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF5.TabIndex = 97;
+            this.udOrionPAGainVHF5.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS286
+            // 
+            this.labelTS286.Image = null;
+            this.labelTS286.Location = new System.Drawing.Point(147, 120);
+            this.labelTS286.Name = "labelTS286";
+            this.labelTS286.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS286.Size = new System.Drawing.Size(40, 16);
+            this.labelTS286.TabIndex = 96;
+            this.labelTS286.Text = "VHF4:";
+            this.labelTS286.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGainVHF4
+            // 
+            this.udOrionPAGainVHF4.DecimalPlaces = 1;
+            this.udOrionPAGainVHF4.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF4.Location = new System.Drawing.Point(187, 120);
+            this.udOrionPAGainVHF4.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF4.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF4.Name = "udOrionPAGainVHF4";
+            this.udOrionPAGainVHF4.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF4.TabIndex = 95;
+            this.udOrionPAGainVHF4.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS287
+            // 
+            this.labelTS287.Image = null;
+            this.labelTS287.Location = new System.Drawing.Point(147, 96);
+            this.labelTS287.Name = "labelTS287";
+            this.labelTS287.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS287.Size = new System.Drawing.Size(40, 16);
+            this.labelTS287.TabIndex = 94;
+            this.labelTS287.Text = "VHF3:";
+            this.labelTS287.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGainVHF3
+            // 
+            this.udOrionPAGainVHF3.DecimalPlaces = 1;
+            this.udOrionPAGainVHF3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF3.Location = new System.Drawing.Point(187, 96);
+            this.udOrionPAGainVHF3.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF3.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF3.Name = "udOrionPAGainVHF3";
+            this.udOrionPAGainVHF3.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF3.TabIndex = 93;
+            this.udOrionPAGainVHF3.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS288
+            // 
+            this.labelTS288.Image = null;
+            this.labelTS288.Location = new System.Drawing.Point(147, 72);
+            this.labelTS288.Name = "labelTS288";
+            this.labelTS288.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS288.Size = new System.Drawing.Size(40, 16);
+            this.labelTS288.TabIndex = 92;
+            this.labelTS288.Text = "VHF2:";
+            this.labelTS288.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGainVHF2
+            // 
+            this.udOrionPAGainVHF2.DecimalPlaces = 1;
+            this.udOrionPAGainVHF2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF2.Location = new System.Drawing.Point(187, 72);
+            this.udOrionPAGainVHF2.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF2.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF2.Name = "udOrionPAGainVHF2";
+            this.udOrionPAGainVHF2.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF2.TabIndex = 91;
+            this.udOrionPAGainVHF2.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS289
+            // 
+            this.labelTS289.Image = null;
+            this.labelTS289.Location = new System.Drawing.Point(147, 48);
+            this.labelTS289.Name = "labelTS289";
+            this.labelTS289.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS289.Size = new System.Drawing.Size(40, 16);
+            this.labelTS289.TabIndex = 90;
+            this.labelTS289.Text = "VHF1:";
+            this.labelTS289.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGainVHF1
+            // 
+            this.udOrionPAGainVHF1.DecimalPlaces = 1;
+            this.udOrionPAGainVHF1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF1.Location = new System.Drawing.Point(187, 48);
+            this.udOrionPAGainVHF1.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF1.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF1.Name = "udOrionPAGainVHF1";
+            this.udOrionPAGainVHF1.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF1.TabIndex = 89;
+            this.udOrionPAGainVHF1.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS290
+            // 
+            this.labelTS290.Image = null;
+            this.labelTS290.Location = new System.Drawing.Point(147, 24);
+            this.labelTS290.Name = "labelTS290";
+            this.labelTS290.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS290.Size = new System.Drawing.Size(40, 16);
+            this.labelTS290.TabIndex = 88;
+            this.labelTS290.Text = "VHF0:";
+            this.labelTS290.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // udOrionPAGainVHF0
+            // 
+            this.udOrionPAGainVHF0.DecimalPlaces = 1;
+            this.udOrionPAGainVHF0.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF0.Location = new System.Drawing.Point(187, 24);
+            this.udOrionPAGainVHF0.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGainVHF0.Minimum = new decimal(new int[] {
+            388,
+            0,
+            0,
+            65536});
+            this.udOrionPAGainVHF0.Name = "udOrionPAGainVHF0";
+            this.udOrionPAGainVHF0.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGainVHF0.TabIndex = 87;
+            this.udOrionPAGainVHF0.Value = new decimal(new int[] {
+            562,
+            0,
+            0,
+            65536});
+            // 
+            // udOrionPAGain6
+            // 
+            this.udOrionPAGain6.DecimalPlaces = 1;
+            this.udOrionPAGain6.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain6.Location = new System.Drawing.Point(56, 264);
+            this.udOrionPAGain6.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain6.Minimum = new decimal(new int[] {
+            413,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain6.Name = "udOrionPAGain6";
+            this.udOrionPAGain6.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain6.TabIndex = 86;
+            this.udOrionPAGain6.Value = new decimal(new int[] {
+            43,
+            0,
+            0,
+            0});
+            // 
+            // labelTS291
+            // 
+            this.labelTS291.Image = null;
+            this.labelTS291.Location = new System.Drawing.Point(26, 264);
+            this.labelTS291.Name = "labelTS291";
+            this.labelTS291.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS291.Size = new System.Drawing.Size(24, 16);
+            this.labelTS291.TabIndex = 85;
+            this.labelTS291.Text = "6m:";
+            this.labelTS291.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnOrionPAGainReset
+            // 
+            this.btnOrionPAGainReset.Image = null;
+            this.btnOrionPAGainReset.Location = new System.Drawing.Point(187, 264);
+            this.btnOrionPAGainReset.Name = "btnOrionPAGainReset";
+            this.btnOrionPAGainReset.Size = new System.Drawing.Size(48, 23);
+            this.btnOrionPAGainReset.TabIndex = 21;
+            this.btnOrionPAGainReset.Text = "Reset";
+            this.toolTip1.SetToolTip(this.btnOrionPAGainReset, "Reset all Gain values to the default.");
+            this.btnOrionPAGainReset.Click += new System.EventHandler(this.btnPAGainReset_Click);
+            // 
+            // labelTS292
+            // 
+            this.labelTS292.Image = null;
+            this.labelTS292.Location = new System.Drawing.Point(16, 240);
+            this.labelTS292.Name = "labelTS292";
+            this.labelTS292.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS292.Size = new System.Drawing.Size(40, 16);
+            this.labelTS292.TabIndex = 19;
+            this.labelTS292.Text = "10m:";
+            this.labelTS292.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGain10
+            // 
+            this.udOrionPAGain10.DecimalPlaces = 1;
+            this.udOrionPAGain10.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain10.Location = new System.Drawing.Point(56, 240);
+            this.udOrionPAGain10.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain10.Minimum = new decimal(new int[] {
+            415,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain10.Name = "udOrionPAGain10";
+            this.udOrionPAGain10.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain10.TabIndex = 18;
+            this.udOrionPAGain10.Value = new decimal(new int[] {
+            435,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS293
+            // 
+            this.labelTS293.Image = null;
+            this.labelTS293.Location = new System.Drawing.Point(16, 216);
+            this.labelTS293.Name = "labelTS293";
+            this.labelTS293.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS293.Size = new System.Drawing.Size(40, 16);
+            this.labelTS293.TabIndex = 17;
+            this.labelTS293.Text = "12m:";
+            this.labelTS293.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGain12
+            // 
+            this.udOrionPAGain12.DecimalPlaces = 1;
+            this.udOrionPAGain12.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain12.Location = new System.Drawing.Point(56, 216);
+            this.udOrionPAGain12.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain12.Minimum = new decimal(new int[] {
+            44,
+            0,
+            0,
+            0});
+            this.udOrionPAGain12.Name = "udOrionPAGain12";
+            this.udOrionPAGain12.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain12.TabIndex = 16;
+            this.udOrionPAGain12.Value = new decimal(new int[] {
+            46,
+            0,
+            0,
+            0});
+            // 
+            // labelTS294
+            // 
+            this.labelTS294.Image = null;
+            this.labelTS294.Location = new System.Drawing.Point(16, 192);
+            this.labelTS294.Name = "labelTS294";
+            this.labelTS294.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS294.Size = new System.Drawing.Size(40, 16);
+            this.labelTS294.TabIndex = 15;
+            this.labelTS294.Text = "15m:";
+            this.labelTS294.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGain15
+            // 
+            this.udOrionPAGain15.DecimalPlaces = 1;
+            this.udOrionPAGain15.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain15.Location = new System.Drawing.Point(56, 192);
+            this.udOrionPAGain15.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain15.Minimum = new decimal(new int[] {
+            445,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain15.Name = "udOrionPAGain15";
+            this.udOrionPAGain15.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain15.TabIndex = 14;
+            this.udOrionPAGain15.Value = new decimal(new int[] {
+            465,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS295
+            // 
+            this.labelTS295.Image = null;
+            this.labelTS295.Location = new System.Drawing.Point(16, 168);
+            this.labelTS295.Name = "labelTS295";
+            this.labelTS295.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS295.Size = new System.Drawing.Size(40, 16);
+            this.labelTS295.TabIndex = 13;
+            this.labelTS295.Text = "17m:";
+            this.labelTS295.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGain17
+            // 
+            this.udOrionPAGain17.DecimalPlaces = 1;
+            this.udOrionPAGain17.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain17.Location = new System.Drawing.Point(56, 168);
+            this.udOrionPAGain17.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain17.Minimum = new decimal(new int[] {
+            45,
+            0,
+            0,
+            0});
+            this.udOrionPAGain17.Name = "udOrionPAGain17";
+            this.udOrionPAGain17.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain17.TabIndex = 12;
+            this.udOrionPAGain17.Value = new decimal(new int[] {
+            47,
+            0,
+            0,
+            0});
+            // 
+            // labelTS296
+            // 
+            this.labelTS296.Image = null;
+            this.labelTS296.Location = new System.Drawing.Point(16, 144);
+            this.labelTS296.Name = "labelTS296";
+            this.labelTS296.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS296.Size = new System.Drawing.Size(40, 16);
+            this.labelTS296.TabIndex = 11;
+            this.labelTS296.Text = "20m:";
+            this.labelTS296.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGain20
+            // 
+            this.udOrionPAGain20.DecimalPlaces = 1;
+            this.udOrionPAGain20.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain20.Location = new System.Drawing.Point(56, 144);
+            this.udOrionPAGain20.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain20.Minimum = new decimal(new int[] {
+            46,
+            0,
+            0,
+            0});
+            this.udOrionPAGain20.Name = "udOrionPAGain20";
+            this.udOrionPAGain20.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain20.TabIndex = 10;
+            this.udOrionPAGain20.Value = new decimal(new int[] {
+            48,
+            0,
+            0,
+            0});
+            // 
+            // labelTS297
+            // 
+            this.labelTS297.Image = null;
+            this.labelTS297.Location = new System.Drawing.Point(16, 120);
+            this.labelTS297.Name = "labelTS297";
+            this.labelTS297.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS297.Size = new System.Drawing.Size(40, 16);
+            this.labelTS297.TabIndex = 9;
+            this.labelTS297.Text = "30m:";
+            this.labelTS297.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGain30
+            // 
+            this.udOrionPAGain30.DecimalPlaces = 1;
+            this.udOrionPAGain30.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain30.Location = new System.Drawing.Point(56, 120);
+            this.udOrionPAGain30.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain30.Minimum = new decimal(new int[] {
+            47,
+            0,
+            0,
+            0});
+            this.udOrionPAGain30.Name = "udOrionPAGain30";
+            this.udOrionPAGain30.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain30.TabIndex = 8;
+            this.udOrionPAGain30.Value = new decimal(new int[] {
+            490,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS298
+            // 
+            this.labelTS298.Image = null;
+            this.labelTS298.Location = new System.Drawing.Point(16, 96);
+            this.labelTS298.Name = "labelTS298";
+            this.labelTS298.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS298.Size = new System.Drawing.Size(40, 16);
+            this.labelTS298.TabIndex = 7;
+            this.labelTS298.Text = "40m:";
+            this.labelTS298.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGain40
+            // 
+            this.udOrionPAGain40.DecimalPlaces = 1;
+            this.udOrionPAGain40.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain40.Location = new System.Drawing.Point(56, 96);
+            this.udOrionPAGain40.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain40.Minimum = new decimal(new int[] {
+            48,
+            0,
+            0,
+            0});
+            this.udOrionPAGain40.Name = "udOrionPAGain40";
+            this.udOrionPAGain40.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain40.TabIndex = 6;
+            this.udOrionPAGain40.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS299
+            // 
+            this.labelTS299.Image = null;
+            this.labelTS299.Location = new System.Drawing.Point(16, 72);
+            this.labelTS299.Name = "labelTS299";
+            this.labelTS299.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS299.Size = new System.Drawing.Size(40, 16);
+            this.labelTS299.TabIndex = 5;
+            this.labelTS299.Text = "60m:";
+            this.labelTS299.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGain60
+            // 
+            this.udOrionPAGain60.DecimalPlaces = 1;
+            this.udOrionPAGain60.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain60.Location = new System.Drawing.Point(56, 72);
+            this.udOrionPAGain60.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain60.Minimum = new decimal(new int[] {
+            485,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain60.Name = "udOrionPAGain60";
+            this.udOrionPAGain60.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain60.TabIndex = 4;
+            this.udOrionPAGain60.Value = new decimal(new int[] {
+            505,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS300
+            // 
+            this.labelTS300.Image = null;
+            this.labelTS300.Location = new System.Drawing.Point(16, 48);
+            this.labelTS300.Name = "labelTS300";
+            this.labelTS300.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS300.Size = new System.Drawing.Size(40, 16);
+            this.labelTS300.TabIndex = 3;
+            this.labelTS300.Text = "80m:";
+            this.labelTS300.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // udOrionPAGain80
+            // 
+            this.udOrionPAGain80.DecimalPlaces = 1;
+            this.udOrionPAGain80.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain80.Location = new System.Drawing.Point(56, 48);
+            this.udOrionPAGain80.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain80.Minimum = new decimal(new int[] {
+            485,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain80.Name = "udOrionPAGain80";
+            this.udOrionPAGain80.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain80.TabIndex = 2;
+            this.udOrionPAGain80.Value = new decimal(new int[] {
+            505,
+            0,
+            0,
+            65536});
+            // 
+            // labelTS301
+            // 
+            this.labelTS301.Image = null;
+            this.labelTS301.Location = new System.Drawing.Point(16, 24);
+            this.labelTS301.Name = "labelTS301";
+            this.labelTS301.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTS301.Size = new System.Drawing.Size(40, 16);
+            this.labelTS301.TabIndex = 1;
+            this.labelTS301.Text = "160m:";
+            this.labelTS301.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // udOrionPAGain160
+            // 
+            this.udOrionPAGain160.DecimalPlaces = 1;
+            this.udOrionPAGain160.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain160.Location = new System.Drawing.Point(56, 24);
+            this.udOrionPAGain160.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udOrionPAGain160.Minimum = new decimal(new int[] {
+            475,
+            0,
+            0,
+            65536});
+            this.udOrionPAGain160.Name = "udOrionPAGain160";
+            this.udOrionPAGain160.Size = new System.Drawing.Size(48, 20);
+            this.udOrionPAGain160.TabIndex = 0;
+            this.udOrionPAGain160.Value = new decimal(new int[] {
+            495,
+            0,
+            0,
+            65536});
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -36082,12 +37184,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.udStaticIP1)).EndInit();
             this.grpFRSRegion.ResumeLayout(false);
             this.grpGeneralModel.ResumeLayout(false);
+            this.grpMetisAddr.ResumeLayout(false);
             this.groupBoxHPSDRHW.ResumeLayout(false);
             this.groupBoxHPSDRHW.PerformLayout();
-            this.grpGeneralHardwareFLEX5000.ResumeLayout(false);
-            this.grpGeneralHardwareSDR1000.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.udGeneralLPTDelay)).EndInit();
-            this.grpMetisAddr.ResumeLayout(false);
+            this.grpGeneralHardwareORION.ResumeLayout(false);
+            this.grpGeneralHardwareORION.PerformLayout();
+            this.panelOrion10MHzOsc.ResumeLayout(false);
+            this.panelOrion10MHzOsc.PerformLayout();
+            this.panelOrionPTT.ResumeLayout(false);
+            this.panelOrionPTT.PerformLayout();
+            this.panelOrionBias.ResumeLayout(false);
+            this.panelOrionBias.PerformLayout();
+            this.panelOrionMic.ResumeLayout(false);
+            this.panelOrionMic.PerformLayout();
             this.tpGeneralOptions.ResumeLayout(false);
             this.grpHermesStepAttenuator.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udHermesStepAttenuatorData)).EndInit();
@@ -36719,6 +37828,32 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS36)).EndInit();
             this.panelTS4.ResumeLayout(false);
             this.panelTS4.PerformLayout();
+            this.grpOrionPAGainByBand.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGainVHF0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain30)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain40)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain60)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain80)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udOrionPAGain160)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -37425,5 +38560,76 @@
         private System.Windows.Forms.RadioButtonTS radTestIMDInput;
         private System.Windows.Forms.CheckBoxTS chkRX2StepAtt;
         private System.Windows.Forms.CheckBoxTS chkTXTunePower;
+        private System.Windows.Forms.RadioButtonTS radGenModelOrion;
+        private System.Windows.Forms.GroupBoxTS grpGeneralHardwareORION;
+        private System.Windows.Forms.PanelTS panelOrion10MHzOsc;
+        private System.Windows.Forms.RadioButtonTS radOrion10MHzExt;
+        private System.Windows.Forms.RadioButtonTS radOrion10MHzInt;
+        private System.Windows.Forms.LabelTS lblOrion10MHZOSC;
+        private System.Windows.Forms.PanelTS panelOrionPTT;
+        private System.Windows.Forms.RadioButtonTS radOrionPTTOn;
+        private System.Windows.Forms.RadioButtonTS radOrionPTTOff;
+        private System.Windows.Forms.LabelTS lblOrionPTT;
+        private System.Windows.Forms.PanelTS panelOrionBias;
+        private System.Windows.Forms.RadioButtonTS radOrionBiasOn;
+        private System.Windows.Forms.RadioButtonTS radOrionBiasOff;
+        private System.Windows.Forms.LabelTS lblOrionBias;
+        private System.Windows.Forms.PanelTS panelOrionMic;
+        private System.Windows.Forms.RadioButtonTS radOrionMicRing;
+        private System.Windows.Forms.RadioButtonTS radOrionMicTip;
+        private System.Windows.Forms.LabelTS lblOrionMic;
+        private System.Windows.Forms.GroupBoxTS grpOrionPAGainByBand;
+        private System.Windows.Forms.LabelTS labelTS277;
+        private System.Windows.Forms.CheckBoxTS checkBoxTS7;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF13;
+        private System.Windows.Forms.LabelTS labelTS278;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF12;
+        private System.Windows.Forms.LabelTS labelTS279;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF11;
+        private System.Windows.Forms.LabelTS labelTS280;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF10;
+        private System.Windows.Forms.LabelTS labelTS281;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF9;
+        private System.Windows.Forms.LabelTS labelTS282;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF8;
+        private System.Windows.Forms.LabelTS labelTS283;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF7;
+        private System.Windows.Forms.LabelTS labelTS284;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF6;
+        private System.Windows.Forms.LabelTS labelTS285;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF5;
+        private System.Windows.Forms.LabelTS labelTS286;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF4;
+        private System.Windows.Forms.LabelTS labelTS287;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF3;
+        private System.Windows.Forms.LabelTS labelTS288;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF2;
+        private System.Windows.Forms.LabelTS labelTS289;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF1;
+        private System.Windows.Forms.LabelTS labelTS290;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGainVHF0;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain6;
+        private System.Windows.Forms.LabelTS labelTS291;
+        private System.Windows.Forms.ButtonTS btnOrionPAGainReset;
+        private System.Windows.Forms.LabelTS labelTS292;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain10;
+        private System.Windows.Forms.LabelTS labelTS293;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain12;
+        private System.Windows.Forms.LabelTS labelTS294;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain15;
+        private System.Windows.Forms.LabelTS labelTS295;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain17;
+        private System.Windows.Forms.LabelTS labelTS296;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain20;
+        private System.Windows.Forms.LabelTS labelTS297;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain30;
+        private System.Windows.Forms.LabelTS labelTS298;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain40;
+        private System.Windows.Forms.LabelTS labelTS299;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain60;
+        private System.Windows.Forms.LabelTS labelTS300;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain80;
+        private System.Windows.Forms.LabelTS labelTS301;
+        private System.Windows.Forms.NumericUpDownTS udOrionPAGain160;
     }
 }

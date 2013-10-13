@@ -492,29 +492,29 @@ namespace PowerSDR
 			set
 			{
 				rx_agc_mode = value;
-				switch(rx_agc_mode)
+			/*	switch(rx_agc_mode)
 				{
 					case AGCMode.LONG:
-						rx_agc_attack = rx_agc_attack_dsp = 2;
-						rx_agc_hang = rx_agc_hang_dsp = 2000;
-						rx_agc_decay = rx_agc_decay_dsp = 2000;
+                        RXAGCAttack = 2;
+                        RXAGCHang = 2000;
+						RXAGCDecay = 2000;
 						break;
 					case AGCMode.SLOW:
-						rx_agc_attack = rx_agc_attack_dsp = 2;
-						rx_agc_hang = rx_agc_hang_dsp = 1000;
-						rx_agc_decay = rx_agc_decay_dsp = 500;
+                        RXAGCAttack = 2;
+                        RXAGCHang = 1000;
+                        RXAGCDecay = 500;
 						break;					
 					case AGCMode.MED:
-						rx_agc_attack = rx_agc_attack_dsp = 2;
-						rx_agc_hang = rx_agc_hang_dsp = 250;
-						rx_agc_decay = rx_agc_decay_dsp = 250;
+                        RXAGCAttack = 2;
+                        RXAGCHang = 250;
+                        RXAGCDecay = 250;
 						break;
 					case AGCMode.FAST:
-						rx_agc_attack = rx_agc_attack_dsp = 2;
-						rx_agc_hang = rx_agc_hang_dsp = 100;
-						rx_agc_decay = rx_agc_decay_dsp = 50;
+                        RXAGCAttack = 2;
+                        RXAGCHang = 100;
+                        RXAGCDecay = 50;
 						break;
-				}
+				} */
 
 				if(update)
 				{
@@ -1229,7 +1229,7 @@ namespace PowerSDR
 		private void SyncAll()
 		{
 			//BufferSize = buffer_size;
-			AudioSize = audio_size;			
+			//AudioSize = audio_size;			
 			CurrentDSPMode = current_dsp_mode;
 			SetTXFilter(tx_filter_low, tx_filter_high);
 			TXOsc = tx_osc;
