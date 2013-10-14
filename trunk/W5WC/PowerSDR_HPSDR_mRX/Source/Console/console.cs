@@ -29292,7 +29292,11 @@ namespace PowerSDR
                     alex_rev = computeRefPower();
                     drivepwr = computeFwdPower(); // low power
                     calfwdpower = CalibratedPAPower();
-
+                    if (!alexpresent)
+                    {
+                        alex_fwd = 0;
+                        alex_rev = 0;
+                    }
                     rho = (float)(Math.Sqrt(alex_rev / alex_fwd));
                    // alex_swr = (float)ALEXSWR(alex_fwd, alex_rev);
                     swr = (1.0f + rho) / (1.0f - rho);
