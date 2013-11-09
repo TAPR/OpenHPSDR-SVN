@@ -9,7 +9,9 @@
 #include "../Programmer/board.h"
 
 #include <sys/types.h>
-#ifndef __WIN32
+#ifdef __WIN32
+#include <winsock2.h>
+#else
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
