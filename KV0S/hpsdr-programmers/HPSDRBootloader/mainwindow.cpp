@@ -932,10 +932,18 @@ void MainWindow::fpgaId(unsigned char* data) {
             status("The target board has the 'Last JTAG' jumper installed.");
             status("There are no other boards on the Atlas Bus.");
         } else if(fpga_id==0x020F30) {
-            status("found Mercury");
-            ui->interogateLineEdit->setText("Mercury - 0x020F30");
-            rbfstr = QString(":/rbf/Mercury_JTAG.rbf");
-            //ui->jtagLineEdit->setText(rbfstr);
+
+            status("found Mercury, Select Source");
+            int ret = QMessageBox::information(this, tr("HPSDRBootloader"),
+                  QString("Found a Mercury, is it a TAPR board?"), QMessageBox::Yes, QMessageBox::No);
+            if( ret == QMessageBox::Yes ){
+               ui->interogateLineEdit->setText("TAPR-Mercury - 0x020F30");
+               rbfstr = QString(":/rbf/Mercury_JTAG.rbf");
+            }else if( ret == QMessageBox::No ){
+               ui->interogateLineEdit->setText("EU-Mercury - 0x020F30");
+               rbfstr = QString(":/rbf/MercuryEURev1_JTAG.rbf");
+            }
+
         } else if(fpga_id==0x020B20) {
             status("found Penelope");
             ui->interogateLineEdit->setText("Penelope - 0x020B20");
@@ -988,7 +996,7 @@ void MainWindow::timeout() {
             //qDebug()<<"eraseTimeouts="<<eraseTimeouts;
             if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
                 status("Error: erase timeout.");
-                QMessageBox::StandardButton reply;
+                //QMessageBox::StandardButton reply;
                 //reply = QMessageBox::question(this, tr("HPSDRBootloader"),
                 //      QString("Erase timed out, try again?"), QMessageBox::No|QMessageBox::Yes);
                 //if (reply == QMessageBox::Yes) {
@@ -1080,6 +1088,7 @@ void MainWindow::jtagInterrogate() {
     //Clear Program lineedit
     ui->fileLineEdit->clear();
     ui->firmwareLineEdit->clear();
+
     //ui->jtagLineEdit->clear();
 
     stat->clear();
