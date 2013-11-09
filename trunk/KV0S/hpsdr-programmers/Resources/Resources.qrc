@@ -10,5 +10,6 @@
     <qresource prefix="/rbf">
         <file>Mercury_JTAG.rbf</file>
         <file>Penelope_JTAG.rbf</file>
+        <file>MercuryEURev1_JTAG.rbf</file>
     </qresource>
 </RCC>
