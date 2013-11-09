@@ -21,7 +21,7 @@ include( ../Resources/Resources.pri )
 
 win32 {
     INCLUDEPATH += "c:/WpdPack/Include"
-    LIBS += "c:/WpdPack/Lib/wpcap.lib" #C:/MinGW/lib/libws2_32.a
+    LIBS += "c:/WpdPack/Lib/wpcap.lib" "C:/MinGW/lib/libws2_32.a"
  }
 
 macx {
