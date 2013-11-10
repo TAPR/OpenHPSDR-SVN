@@ -11,6 +11,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = HPSDRProgrammer_V2_nopcap
 TEMPLATE = app
 
+win32 {
+   LIBS += "C:\Qt\Qt5.1.0\Tools\mingw48_32\i686-w64-mingw32\lib\libwsock32.a"
+ }
+
 # Included PRI files
 include( ../Help/Help.pri )
 include( ./hpsdr/hpsdr.pri)
