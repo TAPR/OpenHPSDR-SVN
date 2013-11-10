@@ -45,8 +45,85 @@ void AddressDialog::getMACaddress(Board *m)
 void AddressDialog::setupIPwrite()
 {
     qDebug() << "in writeIPsetup";
+
+    // IP error range test code suggested by Andrea Montefusco
+
+    QString errorMessage;
+    QString IPstring =  ui->IPLineEdit1->text() + '.' +
+                        ui->IPLineEdit2->text() + '.' +
+                        ui->IPLineEdit3->text() + '.' +
+                        ui->IPLineEdit4->text() ;
+    bool ok1, ok2, ok3, ok4;
+
+    int o1 = (ui->IPLineEdit1->text().toInt(&ok1, 10));
+    int o2 = (ui->IPLineEdit2->text().toInt(&ok2, 10));
+    int o3 = (ui->IPLineEdit3->text().toInt(&ok3, 10));
+    int o4 = (ui->IPLineEdit4->text().toInt(&ok4, 10));
+
+    // Range test of interger values
+
+    if ( ((ok1 != true) || o1 < 0 || o1 > 255) || ((ok2 != true) || o2 < 0 || o2 > 255) ||
+         ((ok3 != true) || o3 < 0 || o3 > 255) || ((ok4 != true) || o4 < 0 || o4 > 255) )
+    {
+         errorMessage = "Integer values out of range for IP4 address!";
+         invalidIPAddress( errorMessage );
+         return;
+    }
+
+    sockaddr_in new_addr;
+    sockaddr_in class_e_addr;
+    sockaddr_in multicast_addr;
+    sockaddr_in broadcast_addr;
+
+    // convert in binary form for further checks
+    new_addr.sin_addr.s_addr       = ntohl (inet_addr( IPstring.toUtf8().constData() ));
+    class_e_addr.sin_addr.s_addr   = ntohl (inet_addr("240.0.0.0"));
+    multicast_addr.sin_addr.s_addr = ntohl (inet_addr("224.0.0.0"));
+    broadcast_addr.sin_addr.s_addr = ntohl (inet_addr("255.255.255.255"));
+
+    // Check for empty address
+    if (new_addr.sin_addr.s_addr == 0)
+    {
+        invalidIPAddress( "New Address empty");
+        return;
+    }
+
+    // Check for broadcast address
+    else if (new_addr.sin_addr.s_addr == broadcast_addr.sin_addr.s_addr )
+    {
+        invalidIPAddress( "New Address is a broadcast address");
+        return;
+    }
+
+    // Check for localhost address
+    else if (o1 == 127)
+    {
+        invalidIPAddress( QString("localhost address reserved"));
+        return;
+    }
+
+    // Check for restricted address space
+    else if (o1 == 169 && o2 == 254)
+    {
+        invalidIPAddress( QString("restricted address space"));
+        return;
+    }
+
+    // Class E address space not allowed
+    else if (new_addr.sin_addr.s_addr >= class_e_addr.sin_addr.s_addr) {
+        invalidIPAddress( QString("Class E address space restricted") );
+        return;
+    }
+
+    // Multicast address not allowed
+    else if (new_addr.sin_addr.s_addr >= multicast_addr.sin_addr.s_addr) {
+        invalidIPAddress( QString("multicast address space restricted") );
+        return;
+    }
+
     emit writeIP();
     this->close();
+    return;
 }
 
 
@@ -84,4 +161,8 @@ void AddressDialog::readIP()
     emit readIPAddress();
 }
 
-
+void AddressDialog::invalidIPAddress(QString str)
+{
+    qDebug() << QString("ERROR: %0").arg(str);
+    QMessageBox::warning(this, tr("HPSDRBootloader"),QString("ERROR: %0\n\nThe new IP address will not be used").arg(str),  QMessageBox::Close);
+}

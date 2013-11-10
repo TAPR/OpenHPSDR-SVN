@@ -4,7 +4,19 @@
 #include <QDialog>
 #include <QDebug>
 #include <QStringList>
+#include <QString>
+#include <QMessageBox>
 #include "../Programmer/board.h"
+
+
+#include <sys/types.h>
+#ifdef __WIN32
+#include <winsock2.h>
+#else
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#endif
 
 namespace Ui {
 class AddressDialog;
@@ -24,6 +36,7 @@ public:
     Ui::AddressDialog *ui;
     void writeEnabled();
     void setMACaddress(QString mac);
+    void invalidIPAddress(QString str);
 
 signals:
     void writeIP();
