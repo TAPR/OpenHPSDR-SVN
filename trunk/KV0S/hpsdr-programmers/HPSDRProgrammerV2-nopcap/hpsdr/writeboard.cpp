@@ -294,7 +294,7 @@ void WriteBoard::readyRead() {
         qDebug()<<"Error: WriteBoard: readDatagram failed "<< socket->errorString();
         return;
     }
-    qDebug()<< "WriteBoard: readDatagram read " << boardAddress.toString() << boardPort;
+    qDebug()<< "WriteBoard: readDatagram read " << boardAddress.toString() << boardPort << buffer[2];
 
 
     if(buffer[0]==0xEF && buffer[1]==0xFE) {
