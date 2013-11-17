@@ -6,4 +6,7 @@
 #define HERMES_MAX_ERASE_TIMEOUTS 40000 // 40 seconds
 #define ANGELIA_MAX_ERASE_TIMEOUTS 90000 // 90 seconds
 
+
+
+
 #endif // TIMEOUTS_H
