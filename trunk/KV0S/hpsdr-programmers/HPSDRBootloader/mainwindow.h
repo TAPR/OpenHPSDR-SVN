@@ -38,8 +38,9 @@
 
 
 #define TIMEOUT 10 // ms
-#define MAX_ERASE_TIMEOUTS (40000) // 40 seconds
-
+#define METIS_MAX_ERASE_TIMEOUTS (20000) // 20 seconds
+#define HERMES_MAX_ERASE_TIMEOUTS (40000) // 40 seconds
+#define ANGELIA_MAX_ERASE_TIMEOUTS (90000) // 90 seconds
 
 
 

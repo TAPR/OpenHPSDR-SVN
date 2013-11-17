@@ -566,13 +566,27 @@ void MainWindow::setIP() {
 // private function to send the command to erase
 void MainWindow::eraseData() {
     eraseTimeouts=0;
-    status(QString("Erasing device ... (takes up to %0 seconds)").arg(MAX_ERASE_TIMEOUTS/1000));
+    if( bd.at(currentBoardIndex)->getBoardString() == "metis" ){
+        status(QString("Erasing device ... (takes up to %0 seconds)").arg(METIS_MAX_ERASE_TIMEOUTS/1000));
+    }else if( bd.at(currentBoardIndex)->getBoardString() == "hermes" ){
+        status(QString("Erasing device ... (takes up to %0 seconds)").arg(HERMES_MAX_ERASE_TIMEOUTS/1000));
+    }else{
+        status(QString("Erasing device ... (takes up to %0 seconds)").arg(ANGELIA_MAX_ERASE_TIMEOUTS/1000));
+    }
+
     if(bootloader) {
         sendRawCommand(ERASE_METIS_FLASH);
     } else {
         sendCommand(ERASE_METIS_FLASH);
         // wait 20 seconds to allow replys
-        QTimer::singleShot(MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
+        if( bd.at(currentBoardIndex)->getBoardString() == "metis" ){
+            QTimer::singleShot(METIS_MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
+        }else if( bd.at(currentBoardIndex)->getBoardString() == "hermes" ){
+            QTimer::singleShot(HERMES_MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
+        }else{
+            QTimer::singleShot(ANGELIA_MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
+        }
+
     }
 }
 
@@ -994,7 +1008,7 @@ void MainWindow::timeout() {
         if(bootloader) {
             eraseTimeouts++;
             //qDebug()<<"eraseTimeouts="<<eraseTimeouts;
-            if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
+            if(eraseTimeouts==ANGELIA_MAX_ERASE_TIMEOUTS) {
                 status("Error: erase timeout.");
                 //QMessageBox::StandardButton reply;
                 //reply = QMessageBox::question(this, tr("HPSDRBootloader"),
@@ -1053,7 +1067,7 @@ void MainWindow::timeout() {
         break;
     case FLASH_ERASING:
         eraseTimeouts++;
-        if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
+        if(eraseTimeouts==ANGELIA_MAX_ERASE_TIMEOUTS) {
             status("Error: erase timeout - try again?");
             idle();
             QApplication::restoreOverrideCursor();
