@@ -25,8 +25,8 @@
 
 // states
 #define IDLE 0
-#define ERASING 2
-#define PROGRAMMING 1
+#define ERASING 1
+#define PROGRAMMING 2
 #define ERASING_ONLY 3
 #define READ_MAC 4
 #define READ_IP 5
