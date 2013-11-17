@@ -192,6 +192,7 @@ void WriteBoard::eraseData(Board *bd) {
     }
 
     sendCommand(ERASE_METIS_FLASH, bd);
+
     // wait to allow replys
     if ( boards[currentboard]->getBoardString() == "metis" ){
         QTimer::singleShot(METIS_MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
