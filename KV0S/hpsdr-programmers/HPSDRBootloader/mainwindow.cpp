@@ -590,6 +590,7 @@ void MainWindow::eraseData() {
     }
 }
 
+
 // slot for erase timout
 void MainWindow::erase_timeout() {
     qDebug()<<"MainWindow::erase_timeout";
