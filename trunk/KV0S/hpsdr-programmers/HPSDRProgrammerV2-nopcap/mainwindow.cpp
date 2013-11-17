@@ -221,7 +221,7 @@ void MainWindow::program()
 void MainWindow::setIP_UDP()
 {
     qDebug() << "in MainWindow::setIP_UDP";
-    QString text;
+
     QStringList *saddr = new QStringList();
     add->getNewIPAddress(saddr);
     wb->changeIP(saddr, wb->boards[wb->currentboard]->getMACAddress());
@@ -245,9 +245,21 @@ void MainWindow::timeout() {
     case ERASING_ONLY:
         stat->status("Error: erase timeout.");
         stat->status("Try again.");
-        QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
-                             tr("Erase has timeout at %0 seconds\n").arg(MAX_ERASE_TIMEOUTS/1000),
-                             QMessageBox::Retry, QMessageBox::Cancel);
+
+        if ( wb->boards[wb->currentboard]->getBoardString() == "metis" ){
+            QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+                                 tr("Erase has timeout at %0 seconds\n").arg(METIS_MAX_ERASE_TIMEOUTS/1000),
+                                 QMessageBox::Retry, QMessageBox::Cancel);
+        }else if ( wb->boards[wb->currentboard]->getBoardString() == "hermes" ){
+            QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+                                 tr("Erase has timeout at %0 seconds\n").arg(HERMES_MAX_ERASE_TIMEOUTS/1000),
+                                 QMessageBox::Retry, QMessageBox::Cancel);
+        }else {  // Angelia
+            QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+                                 tr("Erase has timeout at %0 seconds\n").arg(ANGELIA_MAX_ERASE_TIMEOUTS/1000),
+                                 QMessageBox::Retry, QMessageBox::Cancel);
+        }
+
         QApplication::restoreOverrideCursor();
         break;
     case PROGRAMMING:

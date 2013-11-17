@@ -127,7 +127,14 @@ void WriteBoard::sendCommand(unsigned char command, Board *bd) {
     QTimer *timer = new QTimer(this);
     timer->setSingleShot(true);
     connect(timer, SIGNAL(timeout()), this, SLOT(update_command()));
-    timer->start(MAX_ERASE_TIMEOUTS);
+    if ( boards[currentboard]->getBoardString() == "metis" ){
+        timer->start(METIS_MAX_ERASE_TIMEOUTS);
+    }else if ( boards[currentboard]->getBoardString() == "hermes" ){
+        timer->start(HERMES_MAX_ERASE_TIMEOUTS);
+    }else {  // Angelia
+        timer->start(ANGELIA_MAX_ERASE_TIMEOUTS);
+    }
+
 
 }
 
@@ -176,10 +183,24 @@ void WriteBoard::sendData(Board *bd)
 // private function to send the command to erase
 void WriteBoard::eraseData(Board *bd) {
      //qDebug("Erasing device ... (can take upto  seconds)");
-    stat->status(QString("Erasing device ... (can take upto %0 seconds)").arg(MAX_ERASE_TIMEOUTS/1000));
+    if ( boards[currentboard]->getBoardString() == "metis" ){
+        stat->status(QString("Erasing device ... (can take upto %0 seconds)").arg(METIS_MAX_ERASE_TIMEOUTS/1000));
+    }else if ( boards[currentboard]->getBoardString() == "hermes" ){
+        stat->status(QString("Erasing device ... (can take upto %0 seconds)").arg(HERMES_MAX_ERASE_TIMEOUTS/1000));
+    }else {  // Angelia
+        stat->status(QString("Erasing device ... (can take upto %0 seconds)").arg(ANGELIA_MAX_ERASE_TIMEOUTS/1000));
+    }
+
     sendCommand(ERASE_METIS_FLASH, bd);
     // wait to allow replys
-    QTimer::singleShot(MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
+    if ( boards[currentboard]->getBoardString() == "metis" ){
+        QTimer::singleShot(METIS_MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
+    }else if ( boards[currentboard]->getBoardString() == "hermes" ){
+        QTimer::singleShot(HERMES_MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
+    }else {  // Angelia
+        QTimer::singleShot(ANGELIA_MAX_ERASE_TIMEOUTS,this,SLOT(erase_timeout()));
+    }
+
 }
 
 void WriteBoard::erase_timeout() {
