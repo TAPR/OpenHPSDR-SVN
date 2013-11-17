@@ -37,6 +37,7 @@ public:
     void writeEnabled();
     void setMACaddress(QString mac);
     void invalidIPAddress(QString str);
+    void dhcpIPAddress(QString str);
 
 signals:
     void writeIP();

@@ -81,31 +81,12 @@ void AddressDialog::setupIPwrite()
     multicast_addr.sin_addr.s_addr = ntohl (inet_addr("224.0.0.0"));
     broadcast_addr.sin_addr.s_addr = ntohl (inet_addr("255.255.255.255"));
 
-    // Check for empty address
-    if (new_addr.sin_addr.s_addr == 0)
-    {
-        invalidIPAddress( "New Address empty");
-        return;
-    }
 
-    // Check for broadcast address
-    else if (new_addr.sin_addr.s_addr == broadcast_addr.sin_addr.s_addr )
-    {
-        invalidIPAddress( "New Address is a broadcast address");
-        return;
-    }
 
     // Check for localhost address
-    else if (o1 == 127)
+    if (o1 == 127)
     {
         invalidIPAddress( QString("localhost address reserved"));
-        return;
-    }
-
-    // Check for restricted address space
-    else if (o1 == 169 && o2 == 254)
-    {
-        invalidIPAddress( QString("restricted address space"));
         return;
     }
 
@@ -119,6 +100,18 @@ void AddressDialog::setupIPwrite()
     else if (new_addr.sin_addr.s_addr >= multicast_addr.sin_addr.s_addr) {
         invalidIPAddress( QString("multicast address space restricted") );
         return;
+    }
+
+    // Check for empty address
+    if (new_addr.sin_addr.s_addr == 0)
+    {
+        dhcpIPAddress( "New Address empty");
+    }
+
+    // Check for broadcast address
+    else if (new_addr.sin_addr.s_addr == broadcast_addr.sin_addr.s_addr )
+    {
+        dhcpIPAddress( "New Address is a broadcast address");
     }
 
     emit writeIP();
@@ -164,5 +157,12 @@ void AddressDialog::readIP()
 void AddressDialog::invalidIPAddress(QString str)
 {
     qDebug() << QString("ERROR: %0").arg(str);
-    QMessageBox::warning(this, tr("HPSDRBootloader"),QString("ERROR: %0\n\nThe new IP address will not be used").arg(str),  QMessageBox::Close);
+    QMessageBox::warning(this, tr("HPSDRBootloader"),QString("ERROR: %0\n\nThe new IP address will use DHCP").arg(str),  QMessageBox::Close);
+}
+
+
+void AddressDialog::dhcpIPAddress(QString str)
+{
+    qDebug() << QString("WARNING: %0").arg(str);
+    QMessageBox::warning(this, tr("HPSDRBootloader"),QString("WARNING: %0\n\nThe new IP address will uses DHCP").arg(str),  QMessageBox::Close);
 }
