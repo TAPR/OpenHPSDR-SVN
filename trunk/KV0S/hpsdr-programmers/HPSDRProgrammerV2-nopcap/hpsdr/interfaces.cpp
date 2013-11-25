@@ -128,5 +128,6 @@ QString Interfaces::getInterfaceIPAddress(QString name) {
     QString ip;
     ip.sprintf("%ld.%ld.%ld.%ld",(a>>24)&0xFF,(a>>16)&0xFF,(a>>8)&0xFF,a&0xFF);
 
+
     return ip;
 }

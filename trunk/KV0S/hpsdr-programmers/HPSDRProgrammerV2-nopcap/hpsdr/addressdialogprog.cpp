@@ -92,16 +92,16 @@ void AddressDialog::setupIPwrite()
     }
 
     // Class E address space not allowed
-    else if (new_addr.sin_addr.s_addr >= class_e_addr.sin_addr.s_addr) {
-        invalidIPAddress( QString("Class E address space restricted") );
-        return;
-    }
+    //else if (new_addr.sin_addr.s_addr >= class_e_addr.sin_addr.s_addr) {
+    //    invalidIPAddress( QString("Class E address space restricted") );
+     //   return;
+    //}
 
     // Multicast address not allowed
-    else if (new_addr.sin_addr.s_addr >= multicast_addr.sin_addr.s_addr) {
-        invalidIPAddress( QString("multicast address space restricted") );
-        return;
-    }
+    //else if (new_addr.sin_addr.s_addr >= multicast_addr.sin_addr.s_addr) {
+    //    invalidIPAddress( QString("multicast address space restricted") );
+    //    return;
+    //}
 
     // Check for empty address
     if (new_addr.sin_addr.s_addr == 0)
