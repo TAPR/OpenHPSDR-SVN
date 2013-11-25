@@ -69,6 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
     for (int i = 0; i < interfaces.count(); ++i)
     {
         ui->interfaceComboBox->addItem(interfaces.getInterfaceNameAt(i));
+
     }
 
 
@@ -96,6 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
     if(ui->interfaceComboBox->count()>0) {
        ui->interfaceComboBox->setCurrentIndex(0);
        interfaceSelected(0);
+
     } else {
        // dont allow discovery if no interface found
        ui->discoverButton->setEnabled(false);
@@ -120,8 +122,16 @@ MainWindow::~MainWindow()
 void MainWindow::interfaceSelected(int id)
 {
     qDebug( "in InterfaceSelected" );
+    qDebug() << interfaces.getInterfaceNameAt(id);
     ui->IPInterfaceLabel->setText( interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id) ) );
     ui->MACInterfaceLabel->setText( interfaces.getInterfaceHardwareAddress(id) );
+    ui->discoverComboBox->clear();
+    socket->close();
+    //socket->bind(QHostAddress( interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id))),1024 );
+    if(!socket->bind(QHostAddress(interfaces.getInterfaceIPAddress(interfaces.getInterfaceNameAt(id))),1024,QUdpSocket::ReuseAddressHint)) {
+        qDebug()<<"Error: Server::bind bind failed "<<socket->errorString();
+    }
+
 }
 
 // private function to display message in the status window
