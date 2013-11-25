@@ -97,7 +97,6 @@ MainWindow::MainWindow(QWidget *parent) :
     if(ui->interfaceComboBox->count()>0) {
        ui->interfaceComboBox->setCurrentIndex(0);
        interfaceSelected(0);
-
     } else {
        // dont allow discovery if no interface found
        ui->discoverButton->setEnabled(false);
@@ -127,10 +126,11 @@ void MainWindow::interfaceSelected(int id)
     ui->MACInterfaceLabel->setText( interfaces.getInterfaceHardwareAddress(id) );
     ui->discoverComboBox->clear();
     socket->close();
+    socket->bind();
     //socket->bind(QHostAddress( interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id))),1024 );
-    if(!socket->bind(QHostAddress(interfaces.getInterfaceIPAddress(interfaces.getInterfaceNameAt(id))),1024,QUdpSocket::ReuseAddressHint)) {
-        qDebug()<<"Error: Server::bind bind failed "<<socket->errorString();
-    }
+    //if(!socket->bind(QHostAddress(interfaces.getInterfaceIPAddress(interfaces.getInterfaceNameAt(id))),1024,QUdpSocket::ReuseAddressHint)) {
+    //    qDebug()<<"Error: Server::bind bind failed "<<socket->errorString();
+    //}
 
 }
 
