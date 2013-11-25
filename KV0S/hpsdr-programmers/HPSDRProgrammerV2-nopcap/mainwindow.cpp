@@ -125,13 +125,15 @@ void MainWindow::interfaceSelected(int id)
     ui->IPInterfaceLabel->setText( interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id) ) );
     ui->MACInterfaceLabel->setText( interfaces.getInterfaceHardwareAddress(id) );
     ui->discoverComboBox->clear();
+#ifdef win32
     socket->close();
     socket->bind();
-    //socket->bind(QHostAddress( interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id))),1024 );
-    //if(!socket->bind(QHostAddress(interfaces.getInterfaceIPAddress(interfaces.getInterfaceNameAt(id))),1024,QUdpSocket::ReuseAddressHint)) {
-    //    qDebug()<<"Error: Server::bind bind failed "<<socket->errorString();
-    //}
-
+#else
+    socket->bind(QHostAddress( interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id))),1024 );
+    if(!socket->bind(QHostAddress(interfaces.getInterfaceIPAddress(interfaces.getInterfaceNameAt(id))),1024,QUdpSocket::ReuseAddressHint)) {
+        qDebug()<<"Error: Server::bind bind failed "<<socket->errorString();
+    }
+#endif
 }
 
 // private function to display message in the status window
