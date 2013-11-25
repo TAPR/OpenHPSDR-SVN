@@ -125,7 +125,7 @@ void MainWindow::interfaceSelected(int id)
     ui->IPInterfaceLabel->setText( interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id) ) );
     ui->MACInterfaceLabel->setText( interfaces.getInterfaceHardwareAddress(id) );
     ui->discoverComboBox->clear();
-#ifdef win32
+#ifdef WIN32
     socket->close();
     socket->bind();
 #else
