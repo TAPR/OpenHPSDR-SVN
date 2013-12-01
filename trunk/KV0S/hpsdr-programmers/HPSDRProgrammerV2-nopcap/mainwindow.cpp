@@ -129,10 +129,13 @@ void MainWindow::interfaceSelected(int id)
     socket->close();
     socket->bind();
 #else
-    socket->bind(QHostAddress( interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id))),1024 );
+    socket->close();
+    qDebug() << "interface addresses " << interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id));
+    //socket->bind(QHostAddress( interfaces.getInterfaceIPAddress( interfaces.getInterfaceNameAt(id))),1024 );
     if(!socket->bind(QHostAddress(interfaces.getInterfaceIPAddress(interfaces.getInterfaceNameAt(id))),1024,QUdpSocket::ReuseAddressHint)) {
         qDebug()<<"Error: Server::bind bind failed "<<socket->errorString();
     }
+    qDebug() << socket->localAddress();
 #endif
 }
 
@@ -190,8 +193,10 @@ void MainWindow::discoveryUpdate()
         }else{
           status(" No boards found you may need to use HPSDRBootloader.");
           QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
-                                      tr("Discovery has failed\n" "Check that board is on and no jumper on J1 or J12.\n"
-                                          "You may need to use HPSDRBootloader."),
+                                      tr("Discovery has failed\n"
+                                         "If you have more that one interface, check you are using the correct one.  "
+                                         "Check that the board is on and no jumper on J1 or J12.\n"
+                                         "You may need to use HPSDRBootloader."),
                                        QMessageBox::Ok);
           return;
        }

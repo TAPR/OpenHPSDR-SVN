@@ -38,6 +38,7 @@ public:
     void setMACaddress(QString mac);
     void invalidIPAddress(QString str);
     void dhcpIPAddress(QString str);
+    void okIPAddress(QString str);
 
 signals:
     void writeIP();
@@ -45,9 +46,13 @@ signals:
     void readMACAddress();
 
 private:
+    int i1;
+    int i2;
+    int i3;
 
 private slots:
     void setupIPwrite();
+    void dhcpIPwrite();
     void readIP();
     void readMAC();
 
