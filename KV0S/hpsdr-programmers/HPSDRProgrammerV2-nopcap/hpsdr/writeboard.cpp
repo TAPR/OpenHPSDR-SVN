@@ -32,7 +32,7 @@ void WriteBoard::discovery()
     }
 
     if(socket->writeDatagram((const char*)buffer,sizeof(buffer),QHostAddress::Broadcast,1024)<0) {
-        qDebug()<<"Error: changeIP: writeDatagram failed "<<socket->errorString();
+        qDebug()<<"Error: discovery: writeDatagram failed "<<socket->errorString();
         return;
     }
 

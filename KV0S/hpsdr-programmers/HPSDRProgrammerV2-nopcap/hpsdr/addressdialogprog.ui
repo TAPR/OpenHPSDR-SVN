@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>605</width>
-    <height>144</height>
+    <height>112</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,27 +28,14 @@
         <enum>QFrame::Raised</enum>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
+        <item row="0" column="1">
          <widget class="QLabel" name="label">
           <property name="text">
            <string>IP Address</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="4">
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="2" colspan="3">
+        <item row="0" column="3" colspan="3">
          <widget class="QFrame" name="frame_2">
           <property name="frameShape">
            <enum>QFrame::Panel</enum>
@@ -79,7 +66,7 @@
           </layout>
          </widget>
         </item>
-        <item row="0" column="5">
+        <item row="0" column="6">
          <widget class="QPushButton" name="writeButton">
           <property name="toolTip">
            <string extracomment="Write this IP address to the connected HPSDR board">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Write this IP address to the connected HPSDR board. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -89,61 +76,29 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="5">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>82</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="4">
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>17</width>
-            <height>82</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="2">
+        <item row="1" column="3">
          <widget class="QLabel" name="label_2">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
-        <item row="2" column="5">
+        <item row="1" column="6">
          <widget class="QPushButton" name="closeButton">
           <property name="text">
            <string>Close</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="dhcpButton">
+          <property name="text">
+           <string>use DHCP</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
+         </widget>
         </item>
-        <item row="2" column="0">
-         <spacer name="horizontalSpacer_4">
+        <item row="1" column="4">
+         <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
