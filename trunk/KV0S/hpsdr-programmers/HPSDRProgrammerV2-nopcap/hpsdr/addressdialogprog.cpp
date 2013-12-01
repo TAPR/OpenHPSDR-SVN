@@ -213,16 +213,20 @@ void AddressDialog::setupIPwrite()
         okIPAddress(QString("New Address is in current %0.%1.%2.x address space").arg(o1).arg(o2).arg(o3));
     }
 
-    // If using another address space restrict private address space addresses
-    else if( (o1 == 192) && (o2 == 168) && (o3 == 1) )
+    else if( (o1 == 192) && (o2 == 168) )
     {
-        okIPAddress( "New Address is in the 192.168.1.x address space");
+        okIPAddress( "New Address is in the 192.168/16 address space");
+    }
+
+    else if( (o1 == 172) && ( o2 >= 0 && o2 <= 31 ) )
+    {
+        okIPAddress( "New Address is in the 172.16/12 address space");
     }
 
     // If using another address space restrict private address space addresses
-    else if( (o1 == 10) && (o2 == 0) && (o3 == 0) )
+    else if( (o1 == 10)  )
     {
-        okIPAddress( "New Address is in the 10.0.0.x address space");
+         okIPAddress( "New Address is in the 10/8 address space");
     }
 
     // Drop through proposed address did not meet standard assumptions
