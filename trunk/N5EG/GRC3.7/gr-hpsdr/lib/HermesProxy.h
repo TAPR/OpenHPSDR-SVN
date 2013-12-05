@@ -27,7 +27,8 @@
 //
 // Version:  December 15, 2012
 //	     July 10, 2013		-- Updates for GRC 3.7
-
+// 	     December 4, 2013		-- Fix bug in free() on termination.
+//					-- Add additional parameters to constructor
 
 #include <gnuradio/io_signature.h>
 
@@ -108,7 +109,12 @@ public:
 	bool PTTOnMutesRx;		// PTT On receiver
 	char interface[16];
 
-	HermesProxy(int, int, const char*, const char*, const char*, int); // constructor
+
+	HermesProxy(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
+			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
+			 unsigned char TxDr, int RxSmp, const char* Intfc, 
+			 const char * ClkS, const char * AlexC, int NumRx);	// constructor
+
 	~HermesProxy();			// destructor
 
 	void Stop();			// stop ethernet I/O

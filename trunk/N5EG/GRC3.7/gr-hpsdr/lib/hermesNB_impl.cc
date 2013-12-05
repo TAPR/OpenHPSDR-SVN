@@ -35,25 +35,31 @@ namespace gr {
   namespace hpsdr {
 
     hermesNB::sptr
-    hermesNB::make(int RxF, int RxSmp, int RxPre,
-	 const char* Intfc, const char * ClkS, const char * AlexC, int NumRx)
+    hermesNB::make(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
+			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
+			 unsigned char TxDr, int RxSmp, const char* Intfc, 
+			 const char * ClkS, const char * AlexC, int NumRx)
     {
       return gnuradio::get_initial_sptr
-        (new hermesNB_impl(RxF, RxSmp, RxPre, Intfc,  ClkS,  AlexC, NumRx));
+        (new hermesNB_impl(RxFreq0, RxFreq1, TxFreq, RxPre, PTTModeSel, PTTTxMute,
+			PTTRxMute, TxDr, RxSmp, Intfc,  ClkS,  AlexC, NumRx));
     }
 
     /*
      * The private constructor
      */
-    hermesNB_impl::hermesNB_impl(int RxF, int RxSmp, int RxPre,
-	 const char* Intfc, const char * ClkS, const char * AlexC, int NumRx)
+    hermesNB_impl::hermesNB_impl(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
+			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
+			 unsigned char TxDr, int RxSmp, const char* Intfc, 
+			 const char * ClkS, const char * AlexC, int NumRx)
       : gr::block("hermesNB",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),		// inputs to hermesNB block
               gr::io_signature::make(1, 2, sizeof(gr_complex)) )	// outputs from hermesNB block
     {
-	Hermes = new HermesProxy(RxF, RxSmp, Intfc, ClkS, AlexC, NumRx);	// Create proxy, do Hermes ethernet discovery
-	Hermes->RxSampleRate = RxSmp;
-	Hermes->RxPreamp = RxPre;
+	Hermes = new HermesProxy(RxFreq0, RxFreq1, TxFreq, RxPre, PTTModeSel, PTTTxMute,
+		 PTTRxMute, TxDr, RxSmp, Intfc, ClkS, AlexC, NumRx);	// Create proxy, do Hermes ethernet discovery
+	//Hermes->RxSampleRate = RxSmp;
+	//Hermes->RxPreamp = RxPre;
 
 	gr::block::set_output_multiple(256);		// process outputs in groups of at least 256 samples
 	//gr::block::set_relative_rate((double) NumRx);	// FIXME - need to also account for Rx sample rate

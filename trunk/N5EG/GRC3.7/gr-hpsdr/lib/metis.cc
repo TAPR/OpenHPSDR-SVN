@@ -246,14 +246,10 @@ int metis_found() {
 // close socket, stop receive thread, wait for thread to terminate
 void metis_stop_receive_thread() {
 
-    void* result;
-
     shutdown(discovery_socket, 2);
-
     pthread_cancel(receive_thread_id);
+    pthread_join(receive_thread_id, NULL);
 
-    pthread_join(receive_thread_id, &result);
-    free(result);
 };
 
 char* metis_ip_address(int entry) {

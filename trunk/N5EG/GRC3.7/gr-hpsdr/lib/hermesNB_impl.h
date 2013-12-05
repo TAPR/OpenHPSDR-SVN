@@ -34,17 +34,25 @@ namespace gr {
      public:
 
 /*! \brief Construct a HermesNB module
- * \param RxF    Receive frequency, Hz.
+ * \param RxFreq0    Receiver 0 frequency, Hz.
+ * \param RxFreq1    Receiver 1 frequency, Hz.
+ * \param TxFreq     Transmitter frequency, Hz.
+ * \param RxPre      Rx Preamp on (1) / off (0)
+ * \param PTTModeSel PTT mode selector off (0), VOX (1), on (2)
+ * \param PTTTxMute  Mute Tx on PTT
+ * \param PTTRxMute  Mute Rx on PTT
+ * \param TxDr       Transmit Drive Level (0..255)
  * \param RxSmp  Receive Sample Rate, 192000, 96000, or 48000
- * \param RxPre  Rx Preamp on (1) / off (0)
  * \param Intfc  Ethernet interface to use
  * \param ClkS   HPSDR Clock Source (register C1 when C0 = 0x00)
  * \param AlexC  HPSDR Alex Control (register (MSB)C3, C4 for C0=0 and C3, C4(LSB) for C0 = 0x12)
  * \param NumRx  Number of Receivers (1 or 2)
  *
  */
-      hermesNB_impl(int RxF, int RxSmp, int RxPre,
-	 const char* Intfc, const char * ClkS, const char * AlexC, int NumRx);
+      hermesNB_impl(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
+			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
+			 unsigned char TxDr, int RxSmp, const char* Intfc, 
+			 const char * ClkS, const char * AlexC, int NumRx);
       ~hermesNB_impl();
 
       // Where all the action really happens
