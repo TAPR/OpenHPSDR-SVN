@@ -4,7 +4,7 @@
   <key>hpsdr_hermesNB</key>
   <category>hpsdr</category>
   <import>import hpsdr</import>
-  <make>hpsdr.hermesNB($Rx0F, $RxSmp, $RxPre, $Intfc, $CkS, $AlexC, $num_outputs)</make>
+  <make>hpsdr.hermesNB($Rx0F, $Rx1F, $TxF, $RxPre, $PTTmode, $PTTTx, $PTTRx, $TxDrive, $RxSmp, $Intfc, $CkS, $AlexC, $num_outputs)</make>
   <callback>set_Receive0Frequency($Rx0F)</callback>
   <callback>set_Receive1Frequency($Rx1F)</callback>
   <callback>set_RxSampRate($RxSmp)</callback>

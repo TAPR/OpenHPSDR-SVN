@@ -40,7 +40,7 @@
 // Version:  December 15, 2012
 // Updates:   Make Clock Source and AlexControl programmable from GUI
 //           July 10, 2013 - update for GRC 3.7
-//		
+//	     December 4, 2013 - additional parameters in constructor	
 
 #include <gnuradio/io_signature.h>
 #include "HermesProxy.h"
@@ -49,7 +49,9 @@
 #include <cstring>
 
 
-HermesProxy::HermesProxy(int RxFreq, int RxSmp, const char* Intfc, 
+HermesProxy::HermesProxy(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
+			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
+			 unsigned char TxDr, int RxSmp, const char* Intfc, 
 			 const char * ClkS, const char * AlexC, int NumRx)	// constructor
 {
 
@@ -87,17 +89,20 @@ HermesProxy::HermesProxy(int RxFreq, int RxSmp, const char* Intfc,
 	sscanf(AlexC, "%x", &ac);
 	AlexControl = ac;
 
-	TxDrive = 0x00;		// default to (almost) off
+	Receive0Frequency = (unsigned)RxFreq0;
+	Receive1Frequency = (unsigned)RxFreq1; 
+	TransmitFrequency = (unsigned)TxFreq;		// initialize frequencies
+	TxDrive = TxDr;		// default to (almost) off
+	PTTMode = PTTModeSel;
+	RxPreamp = RxPre;
+	PTTOffMutesTx = PTTTxMute;   // PTT Off mutes the transmitter
+	PTTOnMutesRx = PTTRxMute;	// PTT On mutes receiver
 
-	PTTMode = PTTOff;
-	RxPreamp = false;
 	ADCdither = false;
 	ADCrandom = false;
 	RxAtten = 0;		// Hermes V2.0
 	Duplex = true;		// Allows TxF to program separately from RxF
 
-	PTTOffMutesTx = true;   // PTT Off mutes the transmitter
-	PTTOnMutesRx = true;	// PTT On mutes receiver
 	TxStop = false;
 
 	RxWriteCounter = 0;	//
@@ -125,10 +130,6 @@ HermesProxy::HermesProxy(int RxFreq, int RxSmp, const char* Intfc,
 	// allocate the transmit buffers
 	for(int i=0; i<NUMTXBUFS; i++)
 		TxBuf[i] = new unsigned char[TXBUFSIZE];
-
-	Receive0Frequency = (unsigned)RxFreq;
-	Receive1Frequency = 7250000; 
-	TransmitFrequency = 700000;		// initialize transceive
 
 	metis_discover((const char *)(interface));
 

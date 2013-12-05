@@ -46,8 +46,10 @@ namespace gr {
        * class. hpsdr::hermesNB::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int RxF, int RxSmp, int RxPre,
-	 const char* Intfc, const char * ClkS, const char * AlexC, int NumRx);
+      static sptr make(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
+			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
+			 unsigned char TxDr, int RxSmp, const char* Intfc, 
+			 const char * ClkS, const char * AlexC, int NumRx);
 
       void set_Receive0Frequency(float);	// callback
       void set_Receive1Frequency(float);	// callback
