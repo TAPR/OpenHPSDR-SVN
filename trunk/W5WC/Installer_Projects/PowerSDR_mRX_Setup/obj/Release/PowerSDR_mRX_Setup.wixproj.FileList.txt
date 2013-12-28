@@ -4,3 +4,5 @@ obj\Release\Product.wixobj
 obj\Release\PowerSDR_mRX_Setup.wixproj.BindContentsFileListnull.txt
 obj\Release\PowerSDR_mRX_Setup.wixproj.BindOutputsFileListnull.txt
 obj\Release\PowerSDR_mRX_Setup.wixproj.BindBuiltOutputsFileListnull.txt
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\Installer_Projects\PowerSDR_mRX_Setup\bin\Release\PowerSDR_mRX_v3.2.x.0_Setup.msi
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\Installer_Projects\PowerSDR_mRX_Setup\bin\Release\PowerSDR_mRX_v3.2.x.0_Setup.wixpdb
