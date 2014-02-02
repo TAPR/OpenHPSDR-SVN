@@ -1,5 +1,5 @@
 Archive Project report for Hermes
-Fri Jan 24 20:27:27 2014
+Fri Jan 31 18:43:59 2014
 Quartus II 64-Bit Version 13.0.0 Build 156 04/24/2013 SJ Web Edition
 
 
@@ -35,7 +35,7 @@ applicable agreement for further details.
 +----------------------------------------------------------------+
 ; Archive Project Summary                                        ;
 +------------------------+---------------------------------------+
-; Archive Project Status ; Successful - Fri Jan 24 20:27:27 2014 ;
+; Archive Project Status ; Successful - Fri Jan 31 18:43:59 2014 ;
 ; Revision Name          ; Hermes                                ;
 ; Top-level Entity Name  ; Hermes                                ;
 ; Family                 ; Cyclone III                           ;
@@ -50,15 +50,15 @@ Info: File Set 'Source control' contains:
     Info: Automatically detected source files
 Info: ----------------------------------------------------------
 Info: ----------------------------------------------------------
-Info: Generated archive 'E:/HPSDR/trunk/Hermes/Source/Hermes_V2.5/Hermes_V2.5.qar'
+Info: Generated archive 'E:/HPSDR/trunk/Hermes/Source/Hermes_V2.5/Hermes_V2.5a.qar'
 Info: ----------------------------------------------------------
 Info: ----------------------------------------------------------
 Info: Generated report 'Hermes.archive.rpt'
 Info (23030): Evaluation of Tcl script e:/altera/13.0/quartus/common/tcl/apps/qpm/qar.tcl was successful
 Info: Quartus II 64-Bit Shell was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 398 megabytes
-    Info: Processing ended: Fri Jan 24 20:27:27 2014
-    Info: Elapsed time: 00:00:03
+    Info: Processing ended: Fri Jan 31 18:43:59 2014
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:03
 
 

@@ -1,14 +1,14 @@
-Analysis & Synthesis Status : Successful - Fri Jan 24 20:03:13 2014
+Analysis & Synthesis Status : Successful - Thu Jan 30 19:14:40 2014
 Quartus II 64-Bit Version : 13.0.0 Build 156 04/24/2013 SJ Web Edition
 Revision Name : Hermes
 Top-level Entity Name : Hermes
 Family : Cyclone III
-Total logic elements : 43,537
-    Total combinational functions : 33,211
-    Dedicated logic registers : 29,383
-Total registers : 29383
+Total logic elements : 43,829
+    Total combinational functions : 33,453
+    Dedicated logic registers : 29,473
+Total registers : 29473
 Total pins : 119
 Total virtual pins : 0
 Total memory bits : 977,664
-Embedded Multiplier 9-bit elements : 244
+Embedded Multiplier 9-bit elements : 252
 Total PLLs : 4
