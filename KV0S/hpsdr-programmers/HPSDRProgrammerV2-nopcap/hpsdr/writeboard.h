@@ -62,6 +62,7 @@ signals:
     void eraseCompleted();
     void programmingCompleted();
     void nextBuffer();
+    void readyRead();
     void timeout();
 
 public slots:
@@ -71,7 +72,7 @@ public slots:
     void update_discovery();
     void update_command();
     void writeRBF();
-    void readyRead();
+    void readPending();
     void sendData(Board *bd);
     void eraseData(Board *bd);
     void erase_timeout();
