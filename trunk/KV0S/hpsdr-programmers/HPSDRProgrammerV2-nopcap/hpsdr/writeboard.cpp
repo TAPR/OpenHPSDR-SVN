@@ -8,7 +8,7 @@ WriteBoard::WriteBoard(QUdpSocket *s, StatusDialog *st)
 
     stat = st;
 
-    connect(socket, SIGNAL(readyRead()),this, SLOT(readyRead()));
+    connect(socket, SIGNAL(readyRead()),this, SLOT(readPending()));
 
 }
 
@@ -36,11 +36,11 @@ void WriteBoard::discovery()
         return;
     }
 
-    QTimer *timer = new QTimer(this);
-    timer->setSingleShot(true);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update_discovery()));
-    timer->start(BOARD_DISCOVERY_TIMEOUT);
-
+    //QTimer *timer = new QTimer(this);
+    //timer->setSingleShot(true);
+    //connect(timer, SIGNAL(timeout()), this, SLOT(update_discovery()));
+    //timer->start(BOARD_DISCOVERY_TIMEOUT);
+    QTimer::singleShot(BOARD_DISCOVERY_TIMEOUT, this, SLOT(update_discovery()));
 
 
     qDebug()<< "discovery packet sent";
@@ -50,6 +50,7 @@ void WriteBoard::discovery()
 void WriteBoard::update_discovery()
 {
     qDebug() <<" discoveryBoxUpdate";
+    state=IDLE;
     emit discoveryBoxUpdate();
 }
 
@@ -206,11 +207,56 @@ void WriteBoard::eraseData(Board *bd) {
 
 void WriteBoard::erase_timeout() {
     //qDebug()<<"WriteBoard::erase_timeout";
-    if(state==ERASING || state==ERASING_ONLY) {
+    //if(state==ERASING || state==ERASING_ONLY) {
         //qDebug("Error: erase timeout.");
         //qDebug("Try again.");
 
-    }
+    //}
+    QString text;
+    qDebug()<<"MainWindow::timeout state="<<state;
+    switch(state) {
+    case ERASING:
+    case ERASING_ONLY:
+        stat->status("Error: erase timeout.");
+        stat->status("Try again.");
+
+        if ( boards[currentboard]->getBoardString() == "metis" ){
+            //QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+            qDebug() <<  tr("Erase has timeout at %0 seconds\n").arg(METIS_MAX_ERASE_TIMEOUTS/1000);
+            //                     QMessageBox::Retry, QMessageBox::Cancel);
+        }else if ( boards[currentboard]->getBoardString() == "hermes" ){
+            //QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+            qDebug() << tr("Erase has timeout at %0 seconds\n").arg(HERMES_MAX_ERASE_TIMEOUTS/1000);
+            //                     QMessageBox::Retry, QMessageBox::Cancel);
+        }else {  // Angelia
+           // QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+           qDebug() << tr("Erase has timeout at %0 seconds\n").arg(ANGELIA_MAX_ERASE_TIMEOUTS/1000);
+           //                      QMessageBox::Retry, QMessageBox::Cancel);
+        }
+
+        //QApplication::restoreOverrideCursor();
+        break;
+    case PROGRAMMING:
+        qDebug()<<"timeout";
+        break;
+    case READ_MAC:
+        stat->status("Error: timeout reading MAC address!");
+        stat->status("Check that the correct interface is selected.");
+        text=QString("Check that there is a jumper");
+        stat->status(text);
+        //idle();
+        break;
+    case READ_IP:
+        stat->status("Error: timeout reading IP address!");
+        stat->status("Check that the correct interface is selected.");
+        text=QString("Check that there is a jumper");
+        stat->status(text);
+        //idle();
+        break;
+    case WRITE_IP:
+        // should not happen as there is no repsonse
+        break;
+   }
 }
 
 
@@ -303,56 +349,58 @@ void WriteBoard::changeIP(QStringList *saddr,  unsigned char* macaddr)
 }
 
 
-void WriteBoard::readyRead() {
+void WriteBoard::readPending() {
 
-    QHostAddress boardAddress;
-    quint16 boardPort;
-    unsigned char buffer[1024];
-    QList<unsigned char*> MACaddr;
+    while (socket->hasPendingDatagrams()) {
+        QHostAddress boardAddress;
+        quint16 boardPort;
+        unsigned char buffer[1024];
+        QList<unsigned char*> MACaddr;
 
-    qDebug()<<"WriteBoard::readyRead";
+        qDebug()<<"WriteBoard::readyRead";
 
-    if( socket->readDatagram((char*)&buffer,(qint64)sizeof(buffer),&boardAddress,&boardPort)<0) {
-        qDebug()<<"Error: WriteBoard: readDatagram failed "<< socket->errorString();
-        return;
-    }
-    qDebug()<< "WriteBoard: readDatagram read " << boardAddress.toString() << boardPort << buffer[2];
-
-
-    if(buffer[0]==0xEF && buffer[1]==0xFE) {
-        switch(buffer[2]) {
-            case 4:  // ready for next buffer
-                 qDebug()<<"ready for next buffer";
-                 emit nextBuffer();
-                 break;
-            case 3:  // reply
-                // request eraseflash done
-                qDebug() << "Case 3";
-                emit eraseCompleted();
-                state = ERASE_DONE;
-                break;
-            case 2:  // response to a discovery packet
-                qDebug() << "Case 2";
-                if( 1  ) {
-                  Board* bd=new Board(boardAddress.toIPv4Address(), &buffer[3], buffer[9], buffer[10]);
-                  if( !(MACaddr.contains( bd->getMACAddress())) ){
-                     boards[bd->toAllString()] = bd;
-                     MACaddr.append( bd->getMACAddress() );
-                     qDebug() << "board address" << bd->toAllString();
-                     emit update_discovery();
-                     return;
-                  }
-                }
-                break;
-            case 1:  // a data packet
-               qDebug() << "Case 1";
-               // should not happen on this port
-               break;
+        if( socket->readDatagram((char*)&buffer,(qint64)sizeof(buffer),&boardAddress,&boardPort)<0) {
+            qDebug()<<"Error: WriteBoard: readDatagram failed "<< socket->errorString();
+            return;
         }
-    } else {
-        qDebug() << "received invalid response to discovery";
-    }
+        qDebug()<< "WriteBoard: readDatagram read " << boardAddress.toString() << boardPort << buffer[2];
 
+
+        if(buffer[0]==0xEF && buffer[1]==0xFE) {
+            switch(buffer[2]) {
+                case 4:  // ready for next buffer
+                     qDebug()<<"ready for next buffer";
+                    emit nextBuffer();
+                    break;
+                case 3:  // reply
+                    // request eraseflash done
+                    qDebug() << "Case 3";
+                    emit eraseCompleted();
+                    state = ERASE_DONE;
+                    break;
+                case 2:  // response to a discovery packet
+                    qDebug() << "Case 2";
+                    if( 1  ) {
+                        qDebug() << "******* " << &buffer[3] << buffer[9] << buffer[10];
+                        Board* bd=new Board(boardAddress.toIPv4Address(), &buffer[3], buffer[9], buffer[10]);
+                        //if( !(MACaddr.contains( bd->getMACAddress())) ){
+                            boards[bd->toAllString()] = bd;
+                            MACaddr.append( bd->getMACAddress() );
+                            qDebug() << "board address" << bd->toAllString();
+                            return;
+                       // }
+                    }
+                    break;
+                case 1:  // a data packet
+                    qDebug() << "Case 1";
+                    // should not happen on this port
+                    break;
+           }
+        } else {
+            qDebug() << "received invalid response to discovery";
+        }
+    }
+    return;
 }
 
 void WriteBoard::incOffset()
@@ -361,9 +409,8 @@ void WriteBoard::incOffset()
     if(offset<end) {
         sendData(boards[currentboard]);
     }else{
-        stat->status("Programming device completed successfully.");
+        stat->status(tr("Programming device completed successfully. (Will rediscovery board in %0 seconds)").arg(BOARD_DISCOVERY_DELAY/1000));
         emit programmingCompleted();
-        emit discover();
     }
 
 }

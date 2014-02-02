@@ -52,11 +52,13 @@ Board::Board(quint32 ipaddr,unsigned char* macaddr,unsigned char software_versio
     boardtype[1] = "hermes";
     boardtype[2] = "griffin";
     boardtype[4] = "angelia";
+    boardtype[5] = "orion";
 
     jumper[0] = "J1";
     jumper[1] = "J12";
     jumper[2] = "J";
-    jumper[4] = "J12";
+    jumper[4] = "J17";
+    jumper[5] = "J17";
 }
 
 /*! \brief getIpAddress()

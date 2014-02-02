@@ -155,7 +155,7 @@ void MainWindow::stbar(QString text)
 void MainWindow::discover()
 {
     qDebug() << "in MainWindow::discover";
-    status("Attempting to discover HPSDR boards.");
+    status(tr("Attempting to discover HPSDR boards. (May take upto %0 seconds)").arg(BOARD_DISCOVERY_TIMEOUT/1000));
     ui->discoverComboBox->clear();
     ui->fileLineEdit->clear();
     wb->boards.clear();
@@ -191,7 +191,7 @@ void MainWindow::discoveryUpdate()
           status( text );
           discoveryDone = true;
         }else{
-          status(" No boards found you may need to use HPSDRBootloader.");
+          stat->status(tr("Discovery has timeout at %0 seconds\n No boards found, you may need to use HPSDRBootloader.").arg(BOARD_DISCOVERY_TIMEOUT/1000));
           QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
                                       tr("Discovery has failed\n"
                                          "If you have more that one interface, check you are using the correct one.  "
@@ -260,18 +260,20 @@ void MainWindow::timeout() {
     switch(state) {
     case ERASING:
     case ERASING_ONLY:
-        stat->status("Error: erase timeout.");
-        stat->status("Try again.");
+
 
         if ( wb->boards[wb->currentboard]->getBoardString() == "metis" ){
+            stat->status(tr("Erase has timeout at %0 seconds\nTry again.\n").arg(METIS_MAX_ERASE_TIMEOUTS/1000));
             QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
                                  tr("Erase has timeout at %0 seconds\n").arg(METIS_MAX_ERASE_TIMEOUTS/1000),
                                  QMessageBox::Retry, QMessageBox::Cancel);
         }else if ( wb->boards[wb->currentboard]->getBoardString() == "hermes" ){
+            stat->status(tr("Erase has timeout at %0 seconds\nTry again.\n").arg(HERMES_MAX_ERASE_TIMEOUTS/1000));
             QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
                                  tr("Erase has timeout at %0 seconds\n").arg(HERMES_MAX_ERASE_TIMEOUTS/1000),
                                  QMessageBox::Retry, QMessageBox::Cancel);
         }else {  // Angelia
+            stat->status(tr("Erase has timeout at %0 seconds\nTry again.\n").arg(ANGELIA_MAX_ERASE_TIMEOUTS/1000));
             QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
                                  tr("Erase has timeout at %0 seconds\n").arg(ANGELIA_MAX_ERASE_TIMEOUTS/1000),
                                  QMessageBox::Retry, QMessageBox::Cancel);
@@ -304,6 +306,11 @@ void MainWindow::timeout() {
 
 void MainWindow::programmingCompleted() {
     programComplete = true;
+    state=IDLE;
+    wb->state =IDLE;
+    ui->discoverComboBox->clear();
+    QTimer::singleShot(BOARD_DISCOVERY_DELAY, this, SLOT(discover()));
+
 }
 
 

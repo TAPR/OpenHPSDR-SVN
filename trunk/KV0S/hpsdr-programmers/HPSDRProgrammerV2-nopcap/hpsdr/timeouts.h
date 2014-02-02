@@ -1,12 +1,12 @@
 #ifndef TIMEOUTS_H
 #define TIMEOUTS_H
 
-#define BOARD_DISCOVERY_TIMEOUT  4000  // 4 seconds
+#define BOARD_DISCOVERY_TIMEOUT  6000  // 6 seconds
+#define BOARD_DISCOVERY_DELAY  8000  // 8 seconds
 #define METIS_MAX_ERASE_TIMEOUTS 20000 // 20 seconds
 #define HERMES_MAX_ERASE_TIMEOUTS 40000 // 40 seconds
 #define ANGELIA_MAX_ERASE_TIMEOUTS 90000 // 90 seconds
-
-
-
+#define ORION_MAX_ERASE_TIMEOUTS 180000 // 180 seconds
 
 #endif // TIMEOUTS_H
+
