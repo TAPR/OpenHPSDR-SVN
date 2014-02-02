@@ -133,6 +133,8 @@
 	 6             - Increase Tx cFIR to 1024 coefficients. 
 	18             - Enabled VNA features and select Rx5 on Rx 
 	24 Jan  2014   - Released as V2.5
+	30 Jan  2014   - Fixed bug whereby Rx5 was not set to correct frequency but followed Tx frequency.
+						  Released as V2.5a.
 	
 
 
@@ -1271,7 +1273,9 @@ generate
 endgenerate
 
 wire [15:0] select_input;
-assign select_input = FPGA_PTT ?  temp_DACD : temp_ADC;
+wire [31:0] select_frequency;
+assign select_input = FPGA_PTT ?  temp_DACD : temp_ADC;												// ADC on Rx and DAC on Tx
+assign select_frequency = FPGA_PTT ? C122_sync_phase_word_Tx : C122_sync_phase_word[4]; 	// Rx5 freq on Rx and Tx freq on Tx
 
 
 receiver receiver_inst0(   // Rx1
@@ -1331,10 +1335,10 @@ receiver2 receiver_inst3(	// Rx4 -uses by2 & by4
 	);
 
 	receiver2 receiver_inst4(	// Rx5 - has DAC data on TX and ADC on Rx
-	//control
+	//control						// also Tx frequency on Tx and Rx5 on Rx
 	.clock(C122_clk),
 	.rate(rate),
-	.frequency(C122_sync_phase_word_Tx),
+	.frequency(select_frequency),
 	.out_strobe(strobe[4]),
 	//input
 	.in_data(select_input),
@@ -1563,7 +1567,7 @@ cpl_cordic #(.OUT_WIDTH(16))
 // the CORDIC output is stable on the negative edge of the clock
 
 always @ (negedge _122MHz)
-	DACD = C122_cordic_i_out[13:0];   //gain of 4
+	DACD <= C122_cordic_i_out[13:0];   //gain of 4
 
 
 //------------------------------------------------------------

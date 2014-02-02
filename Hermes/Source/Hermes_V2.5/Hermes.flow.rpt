@@ -1,5 +1,5 @@
 Flow report for Hermes
-Fri Jan 24 20:13:56 2014
+Thu Jan 30 19:24:29 2014
 Quartus II 64-Bit Version 13.0.0 Build 156 04/24/2013 SJ Web Edition
 
 
@@ -40,21 +40,21 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Flow Summary                                                                    ;
 +------------------------------------+--------------------------------------------+
-; Flow Status                        ; Successful - Fri Jan 24 20:13:06 2014      ;
+; Flow Status                        ; Successful - Thu Jan 30 19:24:03 2014      ;
 ; Quartus II 64-Bit Version          ; 13.0.0 Build 156 04/24/2013 SJ Web Edition ;
 ; Revision Name                      ; Hermes                                     ;
 ; Top-level Entity Name              ; Hermes                                     ;
 ; Family                             ; Cyclone III                                ;
 ; Device                             ; EP3C40Q240C8                               ;
 ; Timing Models                      ; Final                                      ;
-; Total logic elements               ; 37,631 / 39,600 ( 95 % )                   ;
-;     Total combinational functions  ; 33,215 / 39,600 ( 84 % )                   ;
-;     Dedicated logic registers      ; 27,549 / 39,600 ( 70 % )                   ;
-; Total registers                    ; 27549                                      ;
+; Total logic elements               ; 37,662 / 39,600 ( 95 % )                   ;
+;     Total combinational functions  ; 33,498 / 39,600 ( 85 % )                   ;
+;     Dedicated logic registers      ; 27,639 / 39,600 ( 70 % )                   ;
+; Total registers                    ; 27639                                      ;
 ; Total pins                         ; 119 / 129 ( 92 % )                         ;
 ; Total virtual pins                 ; 0                                          ;
 ; Total memory bits                  ; 977,664 / 1,161,216 ( 84 % )               ;
-; Embedded Multiplier 9-bit elements ; 244 / 252 ( 97 % )                         ;
+; Embedded Multiplier 9-bit elements ; 252 / 252 ( 100 % )                        ;
 ; Total PLLs                         ; 4 / 4 ( 100 % )                            ;
 +------------------------------------+--------------------------------------------+
 
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 01/24/2014 20:00:12 ;
+; Start date & time ; 01/30/2014 19:11:40 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Hermes              ;
 +-------------------+---------------------+
@@ -77,7 +77,7 @@ applicable agreement for further details.
 +-----------------------------------------+---------------------------------------+---------------+-------------+------------+
 ; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP     ; On                                    ; Off           ; --          ; --         ;
 ; ALLOW_POWER_UP_DONT_CARE                ; Off                                   ; On            ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                   ; 694449418451.139056481106164          ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                   ; 694449418451.139108030002428          ; --            ; --          ; --         ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE        ; Speed                                 ; Balanced      ; --          ; --         ;
 ; ENABLE_BENEFICIAL_SKEW_OPTIMIZATION     ; On                                    ; Off           ; --          ; --         ;
 ; FITTER_EFFORT                           ; Standard Fit                          ; Auto Fit      ; --          ; --         ;
@@ -99,6 +99,7 @@ applicable agreement for further details.
 ; MISC_FILE                               ; PLL_IF.ppf                            ; --            ; --          ; --         ;
 ; MISC_FILE                               ; PLL_clocks.bsf                        ; --            ; --          ; --         ;
 ; MISC_FILE                               ; PLL_clocks.ppf                        ; --            ; --          ; --         ;
+; NUM_PARALLEL_PROCESSORS                 ; All                                   ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS          ; Half Signal Swing                     ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS          ; Half Signal Swing                     ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_NEAR_END_VMEAS         ; Half Vccio                            ; --            ; --          ; --         ;
@@ -117,6 +118,7 @@ applicable agreement for further details.
 ; SEARCH_PATH                             ; Hermes_v1.9/                          ; --            ; --          ; --         ;
 ; SEARCH_PATH                             ; 100% timing met_v4.7/                 ; --            ; --          ; --         ;
 ; SEARCH_PATH                             ; Polyphase_FIR/                        ; --            ; --          ; --         ;
+; SMART_RECOMPILE                         ; On                                    ; Off           ; --          ; --         ;
 ; STATE_MACHINE_PROCESSING                ; User-Encoded                          ; Auto          ; --          ; --         ;
 ; SYNTH_TIMING_DRIVEN_SYNTHESIS           ; On                                    ; Off           ; --          ; --         ;
 ; VERILOG_INPUT_VERSION                   ; SystemVerilog_2005                    ; Verilog_2001  ; --          ; --         ;
@@ -129,11 +131,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:02:55     ; 1.0                     ; 1125 MB             ; 00:02:55                           ;
-; Fitter                    ; 00:08:56     ; 2.0                     ; 1805 MB             ; 00:17:01                           ;
-; Assembler                 ; 00:00:10     ; 1.0                     ; 600 MB              ; 00:00:04                           ;
-; TimeQuest Timing Analyzer ; 00:00:31     ; 1.8                     ; 1190 MB             ; 00:00:33                           ;
-; Total                     ; 00:12:32     ; --                      ; --                  ; 00:20:33                           ;
+; Analysis & Synthesis      ; 00:02:54     ; 1.0                     ; 1148 MB             ; 00:02:54                           ;
+; Fitter                    ; 00:09:05     ; 2.1                     ; 1844 MB             ; 00:17:00                           ;
+; Assembler                 ; 00:00:04     ; 1.0                     ; 596 MB              ; 00:00:04                           ;
+; TimeQuest Timing Analyzer ; 00:00:24     ; 1.4                     ; 1179 MB             ; 00:00:33                           ;
+; Total                     ; 00:12:27     ; --                      ; --                  ; 00:20:31                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
