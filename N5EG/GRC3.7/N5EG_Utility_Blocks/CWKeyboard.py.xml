@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='ASCII'?>
+<block>
+  <name>CWKeyboard</name>
+  <key>CWKeyboard</key>
+  <category>hpsdr</category>
+  <import>execfile("/home/tom/.grc_gnuradio/CWKeyboard.py")</import>
+  <make>CWKeyboard($sampRate, $WPM)</make>
+  <callback>set_TextInput($Text_In)</callback>
+  <callback>set_WPM($WPM)</callback>
+  <callback>set_sampleRate($sampRate)</callback>
+  <param>
+    <name>Text String Input</name>
+    <key>Text_In</key>
+    <value>0</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>Words Per Minute</name>
+    <key>WPM</key>
+    <value>20</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Sample Rate</name>
+    <key>sampRate</key>
+    <value>48000</value>
+    <type>int</type>
+  </param>
+  <source>
+    <name>out</name>
+    <type>float</type>
+    <vlen>1</vlen>
+  </source>
+<doc>
+/home/tom/.grc_gnuradio/CWKeyboard.py
+</doc>
+<grc_source></grc_source>
+</block>

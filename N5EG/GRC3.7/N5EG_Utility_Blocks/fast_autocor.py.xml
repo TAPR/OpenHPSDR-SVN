@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='ASCII'?>
+<block>
+  <name>Fast Autocor</name>
+  <key>fast_autocor</key>
+  <category>hpsdr</category>
+  <import>execfile("/home/tom/.grc_gnuradio/fast_autocor.py")</import>
+  <make>fast_autocor(
+    fft_size=$fft_size,
+)</make>
+  <callback>set_fft_size($fft_size)</callback>
+  <param>
+    <name>fft_size</name>
+    <key>fft_size</key>
+    <value>4096</value>
+    <type>raw</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>float</type>
+    <vlen>1</vlen>
+  </source>
+  <doc>
+/home/tom/.grc_gnuradio/fast_autocor.py
+Fast autocorrelation. fft_size is the block size to compute the fft.
+It must be an integer power of 2 (256, 512, 1024, 2048, etc.).
+
+The output is a time series, mirrored around fft_size/2.
+Set the time output display device for zero to fft_size/2. 
+
+</doc>
+  <grc_source>/home/tom/.grc_gnuradio/fast_autocor.grc</grc_source>
+</block>
