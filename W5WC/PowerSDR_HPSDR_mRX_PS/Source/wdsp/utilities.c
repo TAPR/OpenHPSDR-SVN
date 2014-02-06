@@ -1,0 +1,171 @@
+/*  utilities.c
+
+This file is part of a program that implements a Software-Defined Radio.
+
+Copyright (C) 2013 Warren Pratt, NR0V
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+The author can be reached by email at  
+
+warren@wpratt.com
+
+*/
+
+#define _CRT_SECURE_NO_WARNINGS
+#include "comm.h"
+
+/********************************************************************************************************
+*																										*
+*											Required Utilities											*
+*																										*
+********************************************************************************************************/
+
+void *malloc0 (int size)
+{
+	int alignment = 16;
+	void* p = _aligned_malloc (size, alignment);
+	if (p != 0) memset (p, 0, size);
+	return p;
+}
+
+// Exported calls
+
+PORT void
+*NewCriticalSection()
+{	// used by VAC
+	LPCRITICAL_SECTION cs_ptr;
+	cs_ptr = (LPCRITICAL_SECTION)calloc (1,sizeof (CRITICAL_SECTION));
+	return (void *)cs_ptr;
+}
+
+PORT void
+DestroyCriticalSection (LPCRITICAL_SECTION cs_ptr)
+{	// used by VAC
+	free ((char *)cs_ptr);
+}
+
+
+/********************************************************************************************************
+*																										*
+*										Test & Debug Utilities											*
+*																										*
+********************************************************************************************************/
+
+void print_impulse (const char* filename, int N, double* impulse, int rtype, int pr_mode)
+{
+	int i;
+	FILE* file;
+	if (pr_mode == 0)
+		file = fopen (filename, "w");
+	else
+		file = fopen (filename, "a");
+	if (rtype == 0)
+		for (i = 0; i < N; i++)
+			fprintf (file, "%.17e\n", impulse[i]);
+	else
+		for (i = 0; i < N; i++)
+			fprintf (file, "%.17e\t%.17e\n", impulse[2 * i + 0], impulse[2 * i + 1]);
+	fprintf (file, "\n\n\n\n");
+	fflush (file);
+	fclose (file);
+}
+
+void print_peak_env (const char* filename, int N, double* buff)
+{
+	int i;
+	double peak = 0.0;
+	double new_peak;
+	FILE* file = fopen (filename, "a");
+	for (i = 0; i < N; i++)
+	{
+		new_peak = sqrt (buff[2 * i + 0] * buff[2 * i + 0] + buff[2 * i + 1] * buff[2 * i + 1]);
+		if (new_peak > peak) peak = new_peak;
+	}
+	fprintf (file, "%.17e\n", peak);
+	fflush (file);
+	fclose (file);
+}
+
+void print_peak_env_f2 (const char* filename, int N, float* Ibuff, float* Qbuff)
+{
+	int i;
+	double peak = 0.0;
+	double new_peak;
+	FILE* file = fopen (filename, "a");
+	for (i = 0; i < N; i++)
+	{
+		new_peak = sqrt (Ibuff[i] * Ibuff[i] + Qbuff[i] * Qbuff[i]);
+		if (new_peak > peak) peak = new_peak;
+	}
+	fprintf (file, "%.17e\n", peak);
+	fflush (file);
+	fclose (file);
+}
+
+PORT
+void print_buffer_parameters (const char* filename, int channel)
+{
+	IOB a = ch[channel].iob.pc;
+	FILE* file = fopen (filename, "w");
+	fprintf (file, "in_size            = %d\n", a->in_size);
+	fprintf (file, "r1_outsize         = %d\n", a->r1_outsize);
+	fprintf (file, "r1_size            = %d\n", a->r1_size);
+	fprintf (file, "r2_size            = %d\n", a->r2_size);
+	fprintf (file, "out_size		   = %d\n", a->out_size);
+	fprintf (file, "r2_insize          = %d\n", a->r2_insize);
+	fprintf (file, "r1_active_buffsize = %d\n", a->r1_active_buffsize);
+	fprintf (file, "f2_active_buffsize = %d\n", a->r2_active_buffsize);
+	fprintf (file, "r1_inidx           = %d\n", a->r1_inidx);
+	fprintf (file, "r1_outidx          = %d\n", a->r1_outidx);
+	fprintf (file, "r1_unqueuedsamps   = %d\n", a->r1_unqueuedsamps);
+	fprintf (file, "r2_inidx           = %d\n", a->r2_inidx);
+	fprintf (file, "r2_outidx          = %d\n", a->r2_outidx);
+	fprintf (file, "r2_havesamps       = %d\n", a->r2_havesamps);
+	fprintf (file, "in_rate            = %d\n", ch[channel].in_rate);
+	fprintf (file, "dsp_rate           = %d\n", ch[channel].dsp_rate);
+	fprintf (file, "out_rate           = %d\n", ch[channel].out_rate);
+	fflush (file);
+	fclose (file);
+}
+
+void print_meter (const char* filename, double* meter, int enum_av, int enum_pk, int enum_gain)
+{
+	FILE* file = fopen (filename, "a");
+	if (enum_gain >= 0)
+		fprintf (file, "%.4e\t%.4e\t%.4e\n", meter[enum_av], meter[enum_pk], meter[enum_gain]);
+	else
+		fprintf (file, "%.4e\t%.4e\n", meter[enum_av], meter[enum_pk]);
+	fflush (file);
+	fclose (file);
+}
+
+void print_message (const char* filename, const char* message, int p0, int p1, int p2)
+{
+	FILE* file = fopen (filename, "a");
+	const char* msg = message;
+	fprintf (file, "%s     %d     %d     %d\n", msg, p0, p1, p2);
+	fflush (file);
+	fclose (file);
+}
+
+void print_deviation (const char* filename, double dpmax, double rate)
+{
+	FILE* file = fopen (filename, "a");
+	double peak = dpmax * rate / TWOPI;
+	fprintf (file, "Peak Dev = %.4f\n", peak);
+	fflush (file);
+	fclose (file);
+}

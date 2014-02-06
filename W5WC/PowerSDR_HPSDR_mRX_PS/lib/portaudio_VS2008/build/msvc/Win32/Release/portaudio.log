@@ -1,0 +1,91 @@
+﻿Build started 11/22/2013 5:40:27 PM.
+     1>Project "E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\lib\portaudio_VS2008\build\msvc\portaudio.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Win32\Release\portaudio.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Win32\Release\portaudio.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\src\common /I..\..\include /I.\ /I..\..\src\os\win /I..\..\src\hostapi\asio\asiosdk\common /I..\..\src\hostapi\asio\asiosdk\host /I..\..\src\hostapi\asio\asiosdk\host\pc /I")" /Zi /nologo /W3 /WX- /Ox /Ob2 /Oi /Ot /Oy- /D WIN32 /D NDEBUG /D _USRDLL /D _CRT_SECURE_NO_DEPRECATE /D PAWIN_USE_WDMKS_DEVICE_INFO /D PA19_EXPORTS /D _VC80_UPGRADE=0x0600 /D _WINDLL /GF /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Win32\Release\\" /Fd"Win32\Release\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\src\common\pa_allocation.c ..\..\src\common\pa_converters.c ..\..\src\common\pa_cpuload.c ..\..\src\common\pa_debugprint.c ..\..\src\common\pa_dither.c ..\..\src\common\pa_front.c ..\..\src\common\pa_process.c ..\..\src\common\pa_ringbuffer.c ..\..\src\common\pa_skeleton.c ..\..\src\common\pa_stream.c ..\..\src\common\pa_trace.c ..\..\src\hostapi\dsound\pa_win_ds.c ..\..\src\hostapi\dsound\pa_win_ds_dynlink.c ..\..\src\hostapi\wmme\pa_win_wmme.c ..\..\src\hostapi\wasapi\pa_win_wasapi.c ..\..\src\hostapi\wdmks\pa_win_wdmks.c ..\..\src\os\win\pa_win_hostapis.c ..\..\src\os\win\pa_win_util.c ..\..\src\os\win\pa_win_waveformat.c ..\..\src\os\win\pa_win_wdmks_utils.c ..\..\src\os\win\pa_x86_plain_converters.c
+         pa_allocation.c
+         pa_converters.c
+         pa_cpuload.c
+         pa_debugprint.c
+         pa_dither.c
+         pa_front.c
+         pa_process.c
+         pa_ringbuffer.c
+         pa_skeleton.c
+         pa_stream.c
+         pa_trace.c
+         pa_win_ds.c
+         pa_win_ds_dynlink.c
+         pa_win_wmme.c
+         pa_win_wasapi.c
+         pa_win_wdmks.c
+         pa_win_hostapis.c
+         pa_win_util.c
+         pa_win_waveformat.c
+         pa_win_wdmks_utils.c
+         Generating Code...
+         Compiling...
+         pa_x86_plain_converters.c
+         Generating Code...
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\src\common /I..\..\include /I.\ /I..\..\src\os\win /I..\..\src\hostapi\asio\asiosdk\common /I..\..\src\hostapi\asio\asiosdk\host /I..\..\src\hostapi\asio\asiosdk\host\pc /I")" /Zi /nologo /W3 /WX- /Ox /Ob2 /Oi /Ot /Oy- /D WIN32 /D NDEBUG /D _USRDLL /D _CRT_SECURE_NO_DEPRECATE /D PAWIN_USE_WDMKS_DEVICE_INFO /D PA19_EXPORTS /D _VC80_UPGRADE=0x0600 /D _WINDLL /GF /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Win32\Release\\" /Fd"Win32\Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\hostapi\asio\iasiothiscallresolver.cpp ..\..\src\hostapi\asio\asiosdk\common\asio.cpp ..\..\src\hostapi\asio\asiosdk\common\combase.cpp ..\..\src\hostapi\asio\asiosdk\common\debugmessage.cpp ..\..\src\hostapi\asio\asiosdk\common\register.cpp ..\..\src\hostapi\asio\asiosdk\host\ASIOConvertSamples.cpp ..\..\src\hostapi\asio\asiosdk\host\asiodrivers.cpp ..\..\src\hostapi\asio\asiosdk\host\pc\asiolist.cpp PA19.cpp
+         iasiothiscallresolver.cpp
+         asio.cpp
+         combase.cpp
+         debugmessage.cpp
+         register.cpp
+         ASIOConvertSamples.cpp
+         asiodrivers.cpp
+         asiolist.cpp
+         PA19.cpp
+         Generating Code...
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\src\hostapi\asio\ASIOSDK\host /I..\..\src\hostapi\asio\ASIOSDK\host\pc /I..\..\src\hostapi\asio\ASIOSDK\common /I..\..\src\common /I..\..\include /I.\ /I..\..\src\os\win /I..\..\src\hostapi\asio\asiosdk\common /I..\..\src\hostapi\asio\asiosdk\host /I..\..\src\hostapi\asio\asiosdk\host\pc /I")" /Zi /nologo /W3 /WX- /Ox /Ob2 /Oi /Ot /Oy- /D WIN32 /D NDEBUG /D _USRDLL /D _CRT_SECURE_NO_DEPRECATE /D PAWIN_USE_WDMKS_DEVICE_INFO /D PA19_EXPORTS /D _VC80_UPGRADE=0x0600 /D _WINDLL /GF /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Win32\Release\\" /Fd"Win32\Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\hostapi\asio\pa_asio.cpp
+         pa_asio.cpp
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\lib\portaudio_VS2008\build\msvc\Win32\Release\portaudio.dll) does not match the Linker's OutputFile property value (E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\bin\Release\PA19.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(992,5): warning MSB8012: TargetName(portaudio) does not match the Linker's OutputFile property value (PA19). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\..\..\bin\Release\PA19.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\..\lib setupapi.lib dsound.lib winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:".\portaudio.def" /MANIFEST /ManifestFile:"Win32\Release\portaudio.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"Win32\Release\PA19.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"Win32\Release\PA19.lib" /MACHINE:X86 /DLL Win32\Release\pa_allocation.obj
+         Win32\Release\pa_converters.obj
+         Win32\Release\pa_cpuload.obj
+         Win32\Release\pa_debugprint.obj
+         Win32\Release\pa_dither.obj
+         Win32\Release\pa_front.obj
+         Win32\Release\pa_process.obj
+         Win32\Release\pa_ringbuffer.obj
+         Win32\Release\pa_skeleton.obj
+         Win32\Release\pa_stream.obj
+         Win32\Release\pa_trace.obj
+         Win32\Release\iasiothiscallresolver.obj
+         Win32\Release\pa_asio.obj
+         Win32\Release\asio.obj
+         Win32\Release\combase.obj
+         Win32\Release\debugmessage.obj
+         Win32\Release\register.obj
+         Win32\Release\ASIOConvertSamples.obj
+         Win32\Release\asiodrivers.obj
+         Win32\Release\asiolist.obj
+         Win32\Release\pa_win_ds.obj
+         Win32\Release\pa_win_ds_dynlink.obj
+         Win32\Release\pa_win_wmme.obj
+         Win32\Release\pa_win_wasapi.obj
+         Win32\Release\pa_win_wdmks.obj
+         Win32\Release\PA19.obj
+         Win32\Release\pa_win_hostapis.obj
+         Win32\Release\pa_win_util.obj
+         Win32\Release\pa_win_waveformat.obj
+         Win32\Release\pa_win_wdmks_utils.obj
+         Win32\Release\pa_x86_plain_converters.obj
+            Creating library Win32\Release\PA19.lib and object Win32\Release\PA19.exp
+         portaudio.vcxproj -> E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\lib\portaudio_VS2008\build\msvc\Win32\Release\portaudio.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"..\..\..\..\bin\Release\PA19.dll;#2" /manifest Win32\Release\portaudio.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Win32\Release\portaudio.unsuccessfulbuild".
+         Touching "Win32\Release\portaudio.lastbuildstate".
+     1>Done Building Project "E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\lib\portaudio_VS2008\build\msvc\portaudio.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.46

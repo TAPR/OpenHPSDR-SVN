@@ -1,0 +1,30 @@
+﻿Build started 10/14/2013 10:55:17 AM.
+     1>Project "E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-10-14 PowerSDR_HPSDR_mRX\lib\pthread\pthread.vcxproj" on node 2 (rebuild target(s)).
+     1>InitializeBuildStatus:
+         Creating "Win32\Debug\temp\pthread.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I. /nologo /W3 /WX- /Od /Oy- /D __CLEANUP_C /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /D _USRDLL /D PTW32_BUILD /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Win32\Debug\temp\\" /Fd"Win32\Debug\temp\vc70.pdb" /FR"Win32\Debug\temp\\" /Gd /TC /analyze- /errorReport:prompt pthread.c
+         pthread.c
+     1>e:\documents\ham radio\1 hpsdr\1 wdsp\2013-10-14 powersdr_hpsdr_mrx\lib\pthread\ptw32_relmillisecs.c(97): warning C4996: '_ftime64': This function or variable may be unsafe. Consider using _ftime64_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\sys/timeb.h(124) : see declaration of '_ftime64'
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _DEBUG /D PTW32_RC_MSC /D _VC80_UPGRADE=0x0710 /l"0x0409" /I. /nologo /fo"Win32\Debug\temp\version.res" version.rc 
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-10-14 PowerSDR_HPSDR_mRX\lib\pthread\Win32\Debug\pthread.dll) does not match the Linker's OutputFile property value (E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-10-14 PowerSDR_HPSDR_mRX\bin\Debug\pthreadVC.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(992,5): warning MSB8012: TargetName(pthread) does not match the Linker's OutputFile property value (pthreadVC). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\bin\Debug\pthreadVC.dll" /INCREMENTAL:NO /NOLOGO ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Win32\Debug\temp\pthread.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /MAP:"Win32\Debug\temp\pthreadVC.map" /MAPINFO:EXPORTS /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"Win32\Debug\temp\pthreadVC.lib" /MACHINE:X86 /DLL Win32\Debug\temp\version.res
+         Win32\Debug\temp\pthread.obj
+            Creating library Win32\Debug\temp\pthreadVC.lib and object Win32\Debug\temp\pthreadVC.exp
+         pthread.vcxproj -> E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-10-14 PowerSDR_HPSDR_mRX\lib\pthread\Win32\Debug\pthread.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"..\..\bin\Debug\pthreadVC.dll;#2" /manifest Win32\Debug\temp\pthread.dll.intermediate.manifest
+       BscMake:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\bscmake.exe /nologo /o"Win32\Debug\pthread.bsc" Win32\Debug\temp\pthread.sbr
+       FinalizeBuildStatus:
+         Deleting file "Win32\Debug\temp\pthread.unsuccessfulbuild".
+         Touching "Win32\Debug\temp\pthread.lastbuildstate".
+     1>Done Building Project "E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-10-14 PowerSDR_HPSDR_mRX\lib\pthread\pthread.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.72
