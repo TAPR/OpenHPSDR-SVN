@@ -109,7 +109,7 @@
                                   Protocol="udp"
                                   Scope="any"
                                   IgnoreFailure="yes"
-                                  Profile="private" />
+                                  Profile="all" />
         </File>
       </Component>
 

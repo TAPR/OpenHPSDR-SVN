@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
       xmlns:fire="http://schemas.microsoft.com/wix/FirewallExtension">
-	<Product Id="*" Name="PowerSDR mRX PS" Language="1033" Version="3.2.7.0" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="234FB74A-174D-418A-B2C9-4E4F369B60F5">
+	<Product Id="*" Name="PowerSDR mRX PS" Language="1033" Version="3.2.8.0" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="234FB74A-174D-418A-B2C9-4E4F369B60F5">
 		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -108,7 +108,7 @@
                       Protocol="udp"
                       Scope="any"
                       IgnoreFailure="yes"
-                      Profile="private" />
+                      Profile="all" />
         </File>
       </Component>
       
@@ -286,6 +286,14 @@
               KeyPath="yes"
               />
       </Component>
+
+      <Component Guid="*">
+        <File Id="PureSignal.PDF"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\PureSignal.pdf"
+              KeyPath="yes"
+              />
+      </Component>
+
       <!--
       <Component Guid="795964DC-2354-445B-B236-B01B742D5AE3">
         <File Id="OpenHPSDR_Skins.exe"
