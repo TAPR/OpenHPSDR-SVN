@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "PowerSDR_mRX_Setup", "PowerSDR_mRX_Setup.wixproj", "{B3FB4FDC-D517-4C56-872D-9E86627B5A53}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "PowerSDR_mRX_PS_Setup", "PowerSDR_mRX_PS_Setup.wixproj", "{B3FB4FDC-D517-4C56-872D-9E86627B5A53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
