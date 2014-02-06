@@ -291,7 +291,7 @@ void stitch(int disp)
 	int pix_count = 0;
 	double factor;
 
-	EnterCriticalSection(&a->PreAverageSection);
+	EnterCriticalSection(&a->ResampleSection);
 	m = 0;
 	switch (a->av_mode)
 	{
@@ -329,9 +329,7 @@ void stitch(int disp)
 			break;
 		}
 	}
-	LeaveCriticalSection(&a->PreAverageSection);
 	
-	EnterCriticalSection(&a->ResampleSection);
 	for (i = 0; i < a->num_pixels; i++)
 		a->t_pixels[i] = -1000.0;
 
@@ -358,9 +356,7 @@ void stitch(int disp)
 			}
 		}
 	}
-	LeaveCriticalSection(&a->ResampleSection);
 
-	EnterCriticalSection(&a->PostAverageSection);
 	switch (a->av_mode)
 	{
 	case -1:	//peak detection
@@ -468,7 +464,7 @@ void stitch(int disp)
 			break;
 		}
 	}
-	LeaveCriticalSection(&a->PostAverageSection);
+	LeaveCriticalSection(&a->ResampleSection);
 
 	EnterCriticalSection(&a->PB_ControlsSection);
 		a->last_pix_buff = a->w_pix_buff;	
@@ -1036,9 +1032,7 @@ void ICreateAnalyzer(	int disp,
 			a->hSnapEvent[i][j] = CreateEvent(NULL, FALSE, FALSE, TEXT("snap"));
 			a->snap[i][j] = 0;
 		}
-	InitializeCriticalSectionAndSpinCount(&a->PostAverageSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->ResampleSection, 0);
-	InitializeCriticalSectionAndSpinCount(&a->PreAverageSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->PB_ControlsSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->SetAnalyzerSection, 0);
 	InitializeCriticalSectionAndSpinCount(&a->StitchSection, 0);
@@ -1219,9 +1213,7 @@ void DestroyAnalyzer(int disp)
 
 	DeleteCriticalSection(&a->PB_ControlsSection);
 	DeleteCriticalSection(&a->SetAnalyzerSection);
-	DeleteCriticalSection(&a->PreAverageSection);
 	DeleteCriticalSection(&a->ResampleSection);
-	DeleteCriticalSection(&a->PostAverageSection);
 
 	for (i = 0; i < a->max_stitch; i++)
 		for (j = 0; j < a->max_num_fft; j++)

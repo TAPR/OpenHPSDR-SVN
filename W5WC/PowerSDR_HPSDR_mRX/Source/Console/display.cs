@@ -6387,161 +6387,137 @@ namespace PowerSDR
 
         #region GDI+
 
-        unsafe public static void RenderGDIPlus(ref PaintEventArgs e)
+        unsafe public static bool RenderGDIPlus(ref PaintEventArgs e)
         {
-            /*BitmapData display_bmpData = display_bmp.LockBits(
-                new Rectangle(0, 0, W, H),
-                ImageLockMode.WriteOnly,
-                display_bmp.PixelFormat);
 
-            background_image_mutex.WaitOne();			// get background image
-
-            BitmapData background_bmpData = background_bmp.LockBits(
-                new Rectangle(0, 0, background_bmp.Width, background_bmp.Height),
-                ImageLockMode.ReadOnly,
-                background_bmp.PixelFormat);
-				
-            int total_size = background_bmpData.Stride * background_bmpData.Height;		// find buffer size
-
-            byte *srcptr = (byte *)background_bmpData.Scan0.ToPointer();
-            byte *destptr = (byte *)display_bmpData.Scan0.ToPointer();
-
-            Win32.memcpy(destptr, srcptr, total_size);
-
-            background_bmp.UnlockBits(background_bmpData);
-            background_image_mutex.ReleaseMutex();
-
-            display_bmp.UnlockBits(display_bmpData);*/
-
-            //Graphics g = Graphics.FromImage(display_bitmap);
-            //g.SmoothingMode = SmoothingMode.AntiAlias;
-            //bool update = true;
-
-            if (!split_display)
+            try
             {
-                switch (current_display_mode)
+                bool result = true;
+
+                if (!split_display)
                 {
-                    case DisplayMode.SPECTRUM:
-                        DrawSpectrum(e.Graphics, W, H, false);
-                        break;
-                    case DisplayMode.PANADAPTER:
-                        DrawPanadapter(e.Graphics, W, H, 1, false);
-                        break;
-                    case DisplayMode.SCOPE:
-                        DrawScope(e.Graphics, W, H, false);
-                        break;
-                    case DisplayMode.SCOPE2:
-                        DrawScope2(e.Graphics, W, H, false);
-                        break;
-                    case DisplayMode.PHASE:
-                        DrawPhase(e.Graphics, W, H, false);
-                        break;
-                    case DisplayMode.PHASE2:
-                        DrawPhase2(e.Graphics, W, H, false);
-                        break;
-                    case DisplayMode.WATERFALL:
-                        DrawWaterfall(e.Graphics, W, H, 1, false);
-                        break;
-                    case DisplayMode.HISTOGRAM:
-                        DrawHistogram(e.Graphics, W, H);
-                        break;
-                    case DisplayMode.PANAFALL:
-                        split_display = true;
-                        DrawPanadapter(e.Graphics, W, H / 2, 1, false);
-                        DrawWaterfall(e.Graphics, W, H / 2, 1, true);
-                        split_display = false;
-                        break;
-                    case DisplayMode.PANASCOPE:
-                        split_display = true;
-                        DrawPanadapter(e.Graphics, W, H / 2, 1, false);
-                        DrawScope(e.Graphics, W, H / 2, true);
-                        split_display = false;
-                        break;
-                    case DisplayMode.SPECTRASCOPE:
-                        split_display = true;
-                        DrawSpectrum(e.Graphics, W, H / 2, false);
-                        DrawScope(e.Graphics, W, H / 2, true);
-                        split_display = false;
-                        break;
-                    case DisplayMode.OFF:
-                        //Thread.Sleep(1000);
-                        break;
-                    default:
-                        break;
+                    switch (current_display_mode)
+                    {
+                        case DisplayMode.SPECTRUM:
+                            DrawSpectrum(e.Graphics, W, H, false);
+                            break;
+                        case DisplayMode.PANADAPTER:
+                            DrawPanadapter(e.Graphics, W, H, 1, false);
+                            break;
+                        case DisplayMode.SCOPE:
+                            DrawScope(e.Graphics, W, H, false);
+                            break;
+                        case DisplayMode.SCOPE2:
+                            DrawScope2(e.Graphics, W, H, false);
+                            break;
+                        case DisplayMode.PHASE:
+                            DrawPhase(e.Graphics, W, H, false);
+                            break;
+                        case DisplayMode.PHASE2:
+                            DrawPhase2(e.Graphics, W, H, false);
+                            break;
+                        case DisplayMode.WATERFALL:
+                            DrawWaterfall(e.Graphics, W, H, 1, false);
+                            break;
+                        case DisplayMode.HISTOGRAM:
+                            DrawHistogram(e.Graphics, W, H);
+                            break;
+                        case DisplayMode.PANAFALL:
+                            split_display = true;
+                            DrawPanadapter(e.Graphics, W, H / 2, 1, false);
+                            DrawWaterfall(e.Graphics, W, H / 2, 1, true);
+                            split_display = false;
+                            break;
+                        case DisplayMode.PANASCOPE:
+                            split_display = true;
+                            DrawPanadapter(e.Graphics, W, H / 2, 1, false);
+                            DrawScope(e.Graphics, W, H / 2, true);
+                            split_display = false;
+                            break;
+                        case DisplayMode.SPECTRASCOPE:
+                            split_display = true;
+                            DrawSpectrum(e.Graphics, W, H / 2, false);
+                            DrawScope(e.Graphics, W, H / 2, true);
+                            split_display = false;
+                            break;
+                        case DisplayMode.OFF:
+                            //Thread.Sleep(1000);
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                else
+                {
+                    switch (current_display_mode)
+                    {
+                        case DisplayMode.SPECTRUM:
+                            DrawSpectrum(e.Graphics, W, H / 2, false);
+                            break;
+                        case DisplayMode.PANADAPTER:
+                            DrawPanadapter(e.Graphics, W, H / 2, 1, false);
+                            break;
+                        case DisplayMode.SCOPE:
+                            DrawScope(e.Graphics, W, H / 2, false);
+                            break;
+                        case DisplayMode.PHASE:
+                            DrawPhase(e.Graphics, W, H / 2, false);
+                            break;
+                        case DisplayMode.PHASE2:
+                            DrawPhase2(e.Graphics, W, H / 2, false);
+                            break;
+                        case DisplayMode.WATERFALL:
+                            DrawWaterfall(e.Graphics, W, H / 2, 1, false);
+                            break;
+                        case DisplayMode.HISTOGRAM:
+                            DrawHistogram(e.Graphics, W, H / 2);
+                            break;
+                        case DisplayMode.OFF:
+                            DrawOffBackground(e.Graphics, W, H / 2, false);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    switch (current_display_mode_bottom)
+                    {
+                        case DisplayMode.SPECTRUM:
+                            DrawSpectrum(e.Graphics, W, H / 2, true);
+                            break;
+                        case DisplayMode.PANADAPTER:
+                            DrawPanadapter(e.Graphics, W, H / 2, 2, true);
+                            break;
+                        case DisplayMode.SCOPE:
+                            DrawScope(e.Graphics, W, H / 2, true);
+                            break;
+                        case DisplayMode.PHASE:
+                            DrawPhase(e.Graphics, W, H / 2, true);
+                            break;
+                        case DisplayMode.PHASE2:
+                            DrawPhase2(e.Graphics, W, H / 2, true);
+                            break;
+                        case DisplayMode.WATERFALL:
+                            DrawWaterfall(e.Graphics, W, H / 2, 2, true);
+                            break;
+                        case DisplayMode.HISTOGRAM:
+                            DrawHistogram(e.Graphics, W, H / 2);
+                            break;
+                        case DisplayMode.OFF:
+                            DrawOffBackground(e.Graphics, W, H / 2, true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                return result;
             }
-            else
+            catch (Exception ex)
             {
-                switch (current_display_mode)
-                {
-                    case DisplayMode.SPECTRUM:
-                        DrawSpectrum(e.Graphics, W, H / 2, false);
-                        break;
-                    case DisplayMode.PANADAPTER:
-                        DrawPanadapter(e.Graphics, W, H / 2, 1, false);
-                        break;
-                    case DisplayMode.SCOPE:
-                        DrawScope(e.Graphics, W, H / 2, false);
-                        break;
-                    case DisplayMode.PHASE:
-                        DrawPhase(e.Graphics, W, H / 2, false);
-                        break;
-                    case DisplayMode.PHASE2:
-                        DrawPhase2(e.Graphics, W, H / 2, false);
-                        break;
-                    case DisplayMode.WATERFALL:
-                        DrawWaterfall(e.Graphics, W, H / 2, 1, false);
-                        break;
-                    case DisplayMode.HISTOGRAM:
-                        DrawHistogram(e.Graphics, W, H / 2);
-                        break;
-                    case DisplayMode.OFF:
-                        DrawOffBackground(e.Graphics, W, H / 2, false);
-                        break;
-                    default:
-                        break;
-                }
-
-                switch (current_display_mode_bottom)
-                {
-                    case DisplayMode.SPECTRUM:
-                        DrawSpectrum(e.Graphics, W, H / 2, true);
-                        break;
-                    case DisplayMode.PANADAPTER:
-                        DrawPanadapter(e.Graphics, W, H / 2, 2, true);
-                        break;
-                    case DisplayMode.SCOPE:
-                        DrawScope(e.Graphics, W, H / 2, true);
-                        break;
-                    case DisplayMode.PHASE:
-                        DrawPhase(e.Graphics, W, H / 2, true);
-                        break;
-                    case DisplayMode.PHASE2:
-                        DrawPhase2(e.Graphics, W, H / 2, true);
-                        break;
-                    case DisplayMode.WATERFALL:
-                        DrawWaterfall(e.Graphics, W, H / 2, 2, true);
-                        break;
-                    case DisplayMode.HISTOGRAM:
-                        DrawHistogram(e.Graphics, W, H / 2);
-                        break;
-                    case DisplayMode.OFF:
-                        DrawOffBackground(e.Graphics, W, H / 2, true);
-                        break;
-                    default:
-                        break;
-                }
+                Debug.Write(ex.ToString());
+                return false;
             }
 
-            /*if(update)
-            {
-                //e.Graphics.DrawImage(display_bmp, 0, 0);
-            }
-            else
-            {
-                Debug.WriteLine("display update = false");
-            }*/
-        }
+         }
 
         private static void UpdateDisplayPeak(float[] buffer, float[] new_data)
         {
@@ -7012,7 +6988,7 @@ namespace PowerSDR
             int grid_min = 0;
             int grid_step = 0; // spectrum_grid_step;
             int f_diff = 0;
-
+ 
             if ((CurrentDisplayMode == DisplayMode.PANAFALL && (console.NReceivers <= 2 && display_duplex)) ||
                 (CurrentDisplayMode == DisplayMode.PANAFALL && console.NReceivers > 2) ||
                (CurrentDisplayMode == DisplayMode.PANADAPTER && display_duplex)) displayduplex = true;
@@ -7721,7 +7697,8 @@ namespace PowerSDR
             long vfo_delta = (long)(vfo - vfo_round);
 
             int f_steps = (width / freq_step_size) + 1;
-            // Draw vertical lines
+
+            // Draw vertical lines - band edge markers and freq text
             for (int i = 0; i < f_steps + 1; i++)
             {
                 string label;
@@ -7786,13 +7763,14 @@ namespace PowerSDR
                             if (actual_fgrid == 0.1357 || actual_fgrid == 0.1378 ||
                                 actual_fgrid == 0.472 || actual_fgrid == 0.479 ||
                                 actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
-                                         actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
-                                         actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
-                                         actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
-                                         actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
-                                         actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
-                                         actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
-                                         actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                                 actual_fgrid == 50.0 || actual_fgrid == 54.0 ||
                                 actual_fgrid == 144.0 || actual_fgrid == 148.0)
                             {
@@ -8780,8 +8758,8 @@ namespace PowerSDR
                             actual_fgrid == 50.0 || actual_fgrid == 54.0 ||
                             actual_fgrid == 144.0 || actual_fgrid == 148.0)
                             {
-                                /* if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
-                                 else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);*/
+                             //    if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                             //    else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                                 label = actual_fgrid.ToString("f3");
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
@@ -9079,7 +9057,7 @@ namespace PowerSDR
                                     //	label = label.Substring(label.Length-4);
 
                                     if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
-                                    else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                     else offsetL = (int)((label.Length + 1) * 4.1) - 8;
                                 }
                                 else
@@ -9096,15 +9074,15 @@ namespace PowerSDR
 
                                     if (actual_fgrid < 10) offsetL = (int)((label.Length) * 4.1) - 14;
                                     else if (actual_fgrid < 100.0) offsetL = (int)((label.Length) * 4.1) - 11;
-                                    else offsetL = (int)((label.Length) * 4.1) - 8;
+                                 else offsetL = (int)((label.Length) * 4.1) - 8;
                                 }
                                 switch (current_display_mode)  //w3sz added switch for waterfall frequency labels
                                 {
                                     case DisplayMode.PANAFALL:
                                         break;
                                     default:
-                                        if (bottom) g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                        else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                                 if (bottom) g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                 else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
                                         break;
                                 }
                                 break;
@@ -9132,19 +9110,19 @@ namespace PowerSDR
             }
 
             /*   int[] band_edge_list = { 1800000, 2000000, 3500000, 4000000,
-                                          7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
-                                          24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
-			
+									   7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
+									   24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
+
                for(int i=0; i<band_edge_list.Length; i++)
-               {
+            {
                    double band_edge_offset = band_edge_list[i] - vfo;
-                   if (band_edge_offset >= low && band_edge_offset <= high)
-                   {
-                       int temp_vline =  (int)((double)(band_edge_offset-low)/(high-low)*W);//wa6ahl
+                if (band_edge_offset >= low && band_edge_offset <= high)
+                {
+                    int temp_vline = (int)((double)(band_edge_offset - low) / (high - low) * W);//wa6ahl
                        if(bottom) g.DrawLine(new Pen(band_edge_color), temp_vline, H, temp_vline, H+top);//wa6ahl
                        else g.DrawLine(new Pen(band_edge_color), temp_vline, 0, temp_vline, top);
-                   }
-                   if(i == 1 && !show_freq_offset) break;
+                }
+                if (i == 1 && !show_freq_offset) break;
                } */
 
             /*// Draw horizontal lines
@@ -9863,109 +9841,123 @@ namespace PowerSDR
                 slope = (float)num_samples / (float)W;
             }
 
-            for (int i = 0; i < W; i++)
+            try
             {
-                float max = float.MinValue;
-                float dval = i * slope + start_sample_index;
-                int lindex = (int)Math.Floor(dval);
-                int rindex = (int)Math.Floor(dval + slope);
-
-                if (rx == 1)
+                for (int i = 0; i < W; i++)
                 {
-                    if (local_mox && !displayduplex)// || rx1_dsp_mode == DSPMode.DRM)
+                    float max = float.MinValue;
+                    float dval = i * slope + start_sample_index;
+                    int lindex = (int)Math.Floor(dval);
+                    int rindex = (int)Math.Floor(dval + slope);
+
+                    if (rx == 1)
                     {
-                        if (slope <= 1.0 || lindex == rindex)
+                        if (local_mox && !displayduplex)// || rx1_dsp_mode == DSPMode.DRM)
                         {
-                            max = current_display_data[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % 4096] * (dval - (float)lindex);
+                            if (slope <= 1.0 || lindex == rindex)
+                            {
+                                max = current_display_data[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % 4096] * (dval - (float)lindex);
+                            }
+                            else
+                            {
+                                for (int j = lindex; j < rindex; j++)
+                                    if (current_display_data[j % 4096] > max) max = current_display_data[j % 4096];
+                            }
                         }
-                        else
+
+                        else max = current_display_data[i];
+                    }
+                    else if (rx == 2)
+                    {
+                        if (local_mox)
                         {
-                            for (int j = lindex; j < rindex; j++)
-                                if (current_display_data[j % 4096] > max) max = current_display_data[j % 4096];
+                            if (slope <= 1.0 || lindex == rindex)
+                            {
+                                max = current_display_data_bottom[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data_bottom[(lindex + 1) % 4096] * (dval - (float)lindex);
+                            }
+                            else
+                            {
+                                for (int j = lindex; j < rindex; j++)
+                                    if (current_display_data_bottom[j % 4096] > max) max = current_display_data_bottom[j % 4096];
+                            }
                         }
+                        else max = current_display_data_bottom[i];
+
                     }
 
-                    else max = current_display_data[i];
-                }
-                else if (rx == 2)
-                {
-                    if (local_mox)
+                    if (rx == 1)
                     {
-                        if (slope <= 1.0 || lindex == rindex)
+                        if (local_mox && !displayduplex) max += tx_display_cal_offset;
+                        else if (mox && tx_on_vfob && !displayduplex)
                         {
-                            max = current_display_data_bottom[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data_bottom[(lindex + 1) % 4096] * (dval - (float)lindex);
+                            if (console.RX2Enabled) max += rx1_display_cal_offset;
+                            else max += tx_display_cal_offset;
                         }
-                        else
-                        {
-                            for (int j = lindex; j < rindex; j++)
-                                if (current_display_data_bottom[j % 4096] > max) max = current_display_data_bottom[j % 4096];
-                        }
+                        else max += rx1_display_cal_offset;
                     }
-                    else max = current_display_data_bottom[i];
-
-                }
-
-                if (rx == 1)
-                {
-                    if (local_mox && !displayduplex) max += tx_display_cal_offset;
-                    else if (mox && tx_on_vfob && !displayduplex)
+                    else if (rx == 2)
                     {
-                        if (console.RX2Enabled) max += rx1_display_cal_offset;
-                        else max += tx_display_cal_offset;
+                        if (local_mox) max += tx_display_cal_offset;
+                        else max += rx2_display_cal_offset;
                     }
-                    else max += rx1_display_cal_offset;
-                }
-                else if (rx == 2)
-                {
-                    if (local_mox) max += tx_display_cal_offset;
-                    else max += rx2_display_cal_offset;
-                }
+                    
+                    if (!local_mox || (local_mox && displayduplex))
+                    {
+                        if (rx == 1) max += rx1_preamp_offset;
+                        else if (rx == 2) max += rx2_preamp_offset;
+                    }
 
-                if (!local_mox || (local_mox && displayduplex))
-                {
-                    if (rx == 1) max += rx1_preamp_offset;
-                    else if (rx == 2) max += rx2_preamp_offset;
-                }
+                    if (max > local_max_y)
+                    {
+                        local_max_y = max;
+                        max_x = i;
+                    }
 
-                if (max > local_max_y)
-                {
-                    local_max_y = max;
-                    max_x = i;
-                }
+                    points[i].X = i;
+                    points[i].Y = (int)(Math.Floor((grid_max - max) * H / yRange));
+                    points[i].Y = Math.Min(points[i].Y, H);
 
-                points[i].X = i;
-                points[i].Y = (int)(Math.Floor((grid_max - max) * H / yRange));
-                points[i].Y = Math.Min(points[i].Y, H);
-                if (bottom) points[i].Y += H;
+                    if (bottom) points[i].Y += H;
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
 
             if (!bottom) max_y = local_max_y;
 
-            if (pan_fill)
+            try
             {
-                points[W].X = W; points[W].Y = H;
-                points[W + 1].X = 0; points[W + 1].Y = H;
-                if (bottom)
+                if (pan_fill)
                 {
-                    points[W].Y += H;
-                    points[W + 1].Y += H;
+                    points[W].X = W; points[W].Y = H;
+                    points[W + 1].X = 0; points[W + 1].Y = H;
+                    if (bottom)
+                    {
+                        points[W].Y += H;
+                        points[W + 1].Y += H;
+                    }
+                    // data_line_pen.Color = Color.FromArgb(100, 255, 255, 255);
+                    if (local_mox) g.FillPolygon(tx_data_line_fpen.Brush, points);
+                    else g.FillPolygon(data_line_fpen.Brush, points);
+                    // g.FillPolygon(data_line_fpen.Brush, points, System.Drawing.Drawing2D.FillMode.Winding);
+                    points[W] = points[W - 1];
+                    points[W + 1] = points[W - 1];
+                    data_line_pen.Color = data_line_color;
+                    if (local_mox) g.DrawLines(tx_data_line_pen, points);
+                    else g.DrawLines(data_line_pen, points);
                 }
-                // data_line_pen.Color = Color.FromArgb(100, 255, 255, 255);
-                if (local_mox) g.FillPolygon(tx_data_line_fpen.Brush, points, System.Drawing.Drawing2D.FillMode.Alternate);
-                else g.FillPolygon(data_line_fpen.Brush, points, System.Drawing.Drawing2D.FillMode.Alternate);
-               // g.FillPolygon(data_line_fpen.Brush, points, System.Drawing.Drawing2D.FillMode.Winding);
-                points[W] = points[W - 1];
-                points[W + 1] = points[W - 1];
-                data_line_pen.Color = data_line_color;
-                if (local_mox) g.DrawLines(tx_data_line_pen, points);
-                else g.DrawLines(data_line_pen, points);
+                else
+                {
+                    if (local_mox) g.DrawLines(tx_data_line_pen, points);
+                    else g.DrawLines(data_line_pen, points);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                if (local_mox) g.DrawLines(tx_data_line_pen, points);
-                else g.DrawLines(data_line_pen, points);
+               // Trace.WriteLine(ex);
             }
-
 
             // draw notch zoom if enabled
             if (tnf_zoom)
@@ -10181,30 +10173,38 @@ namespace PowerSDR
             points = null;
 
             // draw long cursor
-            if (current_click_tune_mode != ClickTuneMode.Off)
+            try
             {
-                Pen p;
-                if (current_click_tune_mode == ClickTuneMode.VFOA)
-                    p = new Pen(grid_text_color);
-                else p = new Pen(Color.Red);
-                if (bottom)
+                if (current_click_tune_mode != ClickTuneMode.Off)
                 {
-                    if (display_cursor_y > H)
+                    Pen p;
+                    if (current_click_tune_mode == ClickTuneMode.VFOA)
+                        p = new Pen(grid_text_color);
+                    else p = new Pen(Color.Red);
+                    if (bottom)
                     {
-                        g.DrawLine(p, display_cursor_x, H, display_cursor_x, H + H);
-                        g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
+                        if (display_cursor_y > H)
+                        {
+                            g.DrawLine(p, display_cursor_x, H, display_cursor_x, H + H);
+                            g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
+                        }
                     }
-                }
-                else
-                {
-                    if (display_cursor_y <= H)
+                    else
                     {
-                        g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
-                        g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
+                        if (display_cursor_y <= H)
+                        {
+                            g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
+                            g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
+                        }
                     }
                 }
             }
-
+            catch (Exception ex)
+            {
+            }
+            //if(rx == 1)
+            //    g.DrawString(rx1_preamp_offset.ToString(), font14, Brushes.Red, 50, 20);
+            //else g.DrawString(rx2_preamp_offset.ToString(), font14, Brushes.Red, 50, 20 + H);
             return true;
         }
 

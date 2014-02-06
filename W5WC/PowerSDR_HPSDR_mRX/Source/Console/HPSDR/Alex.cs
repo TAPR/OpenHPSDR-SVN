@@ -59,7 +59,9 @@ namespace PowerSDR
 		private byte[] RxOnlyAnt = new byte[12]; // 1 = rx1, 2 = rx2, 3 = xv, 0 = none selected 
 
         public static bool RxOutOnTx = false;
-	
+        public static bool Ext1OutOnTx = false;
+        public static bool Ext2OutOnTx = false;
+
 		public void setRxAnt(Band band, byte ant) 
 		{ 
 			if ( ant > 3 ) 
@@ -74,7 +76,7 @@ namespace PowerSDR
 		{ 
 			if ( ant > 3 ) 
 			{ 
-				ant = 0; 
+				//ant = 0; 
 			} 
 			int idx = (int)band - (int)Band.B160M; 
 			RxOnlyAnt[idx] = ant; 
@@ -198,14 +200,26 @@ namespace PowerSDR
 
 			if ( tx ) 
 			{
-                rx_only_ant = 0;
-                rx_out = RxOutOnTx ? 1 : 0; 
-				trx_ant = TxAnt[idx]; 
-			} 
+                if (Ext2OutOnTx) rx_only_ant = 1;
+                else if (Ext1OutOnTx) rx_only_ant = 2;
+                else rx_only_ant = 0;
+
+                rx_out = RxOutOnTx || Ext1OutOnTx || Ext2OutOnTx ? 1 : 0;
+                trx_ant = TxAnt[idx];
+            } 
 			else 
 			{ 
 				rx_only_ant = RxOnlyAnt[idx];
-                if (rx_only_ant == 3 && !xvtr) rx_only_ant = 0; // do not use XVTR ant port if not using transverter
+                if (xvtr)
+                {
+                    if (rx_only_ant >= 3) rx_only_ant = 3;
+                    else rx_only_ant = 0;
+                }
+                else
+                {
+                    if (rx_only_ant >= 3) rx_only_ant -= 3; // do not use XVTR ant port if not using transverter
+                }
+
 				rx_out = rx_only_ant != 0 ? 1 : 0; 
 				trx_ant = RxAnt[idx]; 
 			}

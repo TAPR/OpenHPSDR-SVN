@@ -27,7 +27,17 @@
 //=================================================================
 
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace PowerSDR
 {
@@ -235,11 +245,15 @@ namespace PowerSDR
         /// <param name="e"></param>
         private void MemoryRecordAdd_Click(object sender, EventArgs e)
         {
-            console.MemoryList.List.Add(new MemoryRecord("", console.VFOAFreq, "", console.RX1DSPMode, true, console.TuneStepList[console.TuneStepIndex].Name,
+            string mem_name = Convert.ToString(console.VFOAFreq);   //W4TME
+            console.MemoryList.List.Add(new MemoryRecord("", console.VFOAFreq, mem_name, console.RX1DSPMode, true, console.TuneStepList[console.TuneStepIndex].Name,
                 console.CurrentFMTXMode, console.FMTXOffsetMHz, console.radio.GetDSPTX(0).CTCSSFlag, console.radio.GetDSPTX(0).CTCSSFreqHz, console.PWR,
                 (int)console.radio.GetDSPTX(0).TXFMDeviation, console.VFOSplit, console.TXFreq, console.RX1Filter, console.RX1FilterLow, 
                 console.RX1FilterHigh, "", console.radio.GetDSPRX(0, 0).RXAGCMode, console.RF));
-        }
+ 
+            Common.SaveForm(this, "MemoryForm");    // w4tme
+            console.MemoryList.Save();              // w4tme 
+       }
 
         /// <summary>
         /// Copy an existing row into a new one.
@@ -250,6 +264,9 @@ namespace PowerSDR
         {
             if (console.MemoryList.List.Count == 0) return;
             console.MemoryList.List.Add(new MemoryRecord(console.MemoryList.List[dataGridView1.CurrentCell.RowIndex]));
+
+            Common.SaveForm(this, "MemoryForm");    // w4tme
+            console.MemoryList.Save();              // w4tme 
         }
 
         /// <summary>
@@ -283,6 +300,9 @@ namespace PowerSDR
             {
                 console.MemoryList.List.Remove(console.MemoryList.List[dataGridView1.CurrentCell.RowIndex]);
             }
+
+            Common.SaveForm(this, "MemoryForm");    // w4tme
+            console.MemoryList.Save();              // w4tme 
         }
 
         /// <summary>
@@ -300,7 +320,12 @@ namespace PowerSDR
             console.changeComboFMMemory(index);
 
             if (chkMemoryFormClose.Checked)
+            {
+                Common.SaveForm(this, "MemoryForm");    // w4tme
+                console.MemoryList.Save();              // w4tme 
                 this.Close();
+            }
+
             //console.RecallMemory(MemoryList.List[index]);
         }
 

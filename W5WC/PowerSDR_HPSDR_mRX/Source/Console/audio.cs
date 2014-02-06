@@ -2650,6 +2650,13 @@ namespace PowerSDR
                 }
              }
 
+            if (localmox && radio_volume == 0 && !console.PennyPresent)
+            {
+                ClearBuffer(out_l2, frameCount);
+                ClearBuffer(out_r2, frameCount);
+            }
+
+
             if (!full_duplex)
             {
                 if (!localmox) // RX Mode

@@ -1910,8 +1910,8 @@ namespace PowerSDR
 			a.Add("SetupWizard/1");
 			DB.SaveVars("State", ref a);
 
-			console.SetupForm.SaveOptions();
-			console.SaveState();
+			//console.SetupForm.SaveOptions();
+			//console.SaveState();
 
 			done = true;
 			this.Close();

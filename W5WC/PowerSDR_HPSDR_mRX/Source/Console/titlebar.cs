@@ -34,18 +34,8 @@ namespace PowerSDR
 {
     class TitleBar
     {
-#if (HPSDR_2RX)
-        public const string BUILD_NAME = "2Rx";
-        public const string BUILD_DATE = "(1/19/13)";
-#elif (K5SO_2RX)
-        public const string BUILD_NAME = "_diversity_dual_Rx";
-        public const string BUILD_DATE = "(19JAN2013)";
-#elif (K5SO_3RX)
-        public const string BUILD_NAME = "_diversity_triple_Rx";
-        public const string BUILD_DATE = "(19JAN2013)";
-#endif
         public const string BUILD_NAME = "mRX-FFT";
-        public const string BUILD_DATE = "(10/14/13)";
+        public const string BUILD_DATE = "(1/10/14)";
 
         public static string GetString()
         {

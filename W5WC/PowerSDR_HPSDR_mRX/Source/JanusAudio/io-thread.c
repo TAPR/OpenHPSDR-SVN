@@ -1534,11 +1534,11 @@ void IOThreadMainLoop(void) {
 						} 
 						break;
 					case 7:
-						FPGAWriteBufp[writebufpos] = ( RX2Preamp | RX1Preamp) & 0xf; 
+						FPGAWriteBufp[writebufpos] = ( RX2Preamp | RX1Preamp | MicTR | MicBias) & 0x3f; 
 						// printf(" pamp1: %d pamp2: %d\n", RX1Preamp, RX2Preamp);
 						break;
 					case 8:
-						FPGAWriteBufp[writebufpos] = (enable_RX2_step_att | rx2_step_att_data) & 0x3f;
+						FPGAWriteBufp[writebufpos] = (enable_ADC2_step_att | adc2_step_att_data) & 0x3f;
 						break;
 					case 9:
 						FPGAWriteBufp[writebufpos] = 0;
@@ -1599,7 +1599,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = LineBoost & 0x1f; 
 						break;
 					case 8:
-						FPGAWriteBufp[writebufpos] = 0; //Alex2HPFMask & 0x7f;
+						FPGAWriteBufp[writebufpos] = (enable_ADC3_step_att | adc3_step_att_data) & 0x3f;
 						break;
 					case 9:
 						FPGAWriteBufp[writebufpos] = Alex3HPFMask & 0x7f;
@@ -1719,7 +1719,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = AlexLPFMask & 0x7f;
 						break;
 					case 7:
-						FPGAWriteBufp[writebufpos] = (enable_RX1_step_att | rx1_step_att_data) & 0x3f;
+						FPGAWriteBufp[writebufpos] = (enable_ADC1_step_att | adc1_step_att_data) & 0x3f;
 						break;
 					case 8:
 						FPGAWriteBufp[writebufpos] = 0;
