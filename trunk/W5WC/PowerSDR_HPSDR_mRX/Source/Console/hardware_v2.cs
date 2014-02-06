@@ -173,10 +173,10 @@ namespace PowerSDR
 
 		#region Constructor
 
-		public HW(int addr)
+		public HW()
 		{
 			//Parallel.InitPortTalk();
-			lpt_addr = (ushort)addr;
+			//lpt_addr = (ushort)addr;
 			write_reg = new Register8WriteDel(UpdateRegister8);
 
 			pio_ic1 = new Register8("pio_ic1", write_reg, new Config(PIO, PIO_IC1));
@@ -203,12 +203,12 @@ namespace PowerSDR
 
 		#region Configurations
 
-		private ushort lpt_addr;
-		public ushort LPTAddr
-		{
-			get { return lpt_addr; }
-			set { lpt_addr = value; }
-		}
+        //private ushort lpt_addr;
+        //public ushort LPTAddr
+        //{
+        //    get { return lpt_addr; }
+        //    set { lpt_addr = value; }
+        //}
  
         // returns true if current model is hpsdr, false otherwise 
         private bool isHPSDRorHermes()
@@ -765,47 +765,47 @@ namespace PowerSDR
 			}
 		}
 
-		private long dds_tuning_word = 0;
-		public long DDSTuningWord
-		{
-			get { return dds_tuning_word; }
-			set
-			{
-				if(value != dds_tuning_word)
-				{
-					dds_tuning_word = value;		   //save new tuning word    
+//        private long dds_tuning_word = 0;
+//        public long DDSTuningWord
+//        {
+//            get { return dds_tuning_word; }
+//            set
+//            {
+//                if(value != dds_tuning_word)
+//                {
+//                    dds_tuning_word = value;		   //save new tuning word    
 
-                    Console c = Console.getConsole();
+//                    Console c = Console.getConsole();
 
-#if false 
-					if (c != null && c.label_DDStune != null ) 
-					{ 
-						double dds_tune = c.TuningWordToFreq(dds_tuning_word);	// = dds_tuning_word * c.DDSClockCorrection / Math.Pow(2,48);
-						c.label_DDStune.Text = "DDS: " + dds_tune.ToString("f6");
-					}
-#endif
-                    if (c != null)
-                    {   
-                       // c.SetupForm.txtTuningWord.Text = dds_tuning_word.ToString();
-                        //double dds_tune = c.TuningWordToFreq(dds_tuning_word);
-                        double dds_tune = c.TW2Freq(dds_tuning_word);
-                       // c.SetupForm.txt_DDStune.Text = dds_tune.ToString();
-                       // c.SetupForm.txtDDSRounded.Text = Math.Round(dds_tune, 6).ToString();
-                        //JanusAudio.SetVFOfreq(Math.Round(dds_tune, 6));
+//#if false 
+//                    if (c != null && c.label_DDStune != null ) 
+//                    { 
+//                        double dds_tune = c.TuningWordToFreq(dds_tuning_word);	// = dds_tuning_word * c.DDSClockCorrection / Math.Pow(2,48);
+//                        c.label_DDStune.Text = "DDS: " + dds_tune.ToString("f6");
+//                    }
+//#endif
+//                    if (c != null)
+//                    {   
+//                       // c.SetupForm.txtTuningWord.Text = dds_tuning_word.ToString();
+//                        //double dds_tune = c.TuningWordToFreq(dds_tuning_word);
+//                       // double dds_tune = c.TW2Freq(dds_tuning_word);
+//                       // c.SetupForm.txt_DDStune.Text = dds_tune.ToString();
+//                       // c.SetupForm.txtDDSRounded.Text = Math.Round(dds_tune, 6).ToString();
+//                        //JanusAudio.SetVFOfreq(Math.Round(dds_tune, 6));
 
-                    }
+//                    }
 
-                    if (!isHPSDRorHermes())
-                    {
-                        for (int i = 0; i < 6; i++)
-                        {
-                            byte b = (byte)(dds_tuning_word >> (40 - i * 8));
-                            DDSWrite(b, (byte)(4 + i));
-                        }
-                    }
-				}
-			}
-		}
+//                    if (!isHPSDRorHermes())
+//                    {
+//                        for (int i = 0; i < 6; i++)
+//                        {
+//                            byte b = (byte)(dds_tuning_word >> (40 - i * 8));
+//                            DDSWrite(b, (byte)(4 + i));
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
 		private bool update_hardware = false;
 		public bool UpdateHardware
@@ -896,29 +896,29 @@ namespace PowerSDR
 							if((i & data) == 0)	// Current bit is low
 							{
 								tmp_data = (byte)(pio_data | SCLR_NOT); tmp_data |= DCDR_NE;
-								LatchRegister(lpt_addr, PIO_IC1, tmp_data);			// Output 0 bit
+								//LatchRegister(lpt_addr, PIO_IC1, tmp_data);			// Output 0 bit
 								tmp_data |= SCK;
-								LatchRegister(lpt_addr, PIO_IC1, tmp_data);		// Clock 0 into shift register
+								//LatchRegister(lpt_addr, PIO_IC1, tmp_data);		// Clock 0 into shift register
 							}
 							else				// Current bit is high
 							{
 								tmp_data = (byte)(pio_data | SCLR_NOT); tmp_data |= DCDR_NE; tmp_data |= SER;
-								LatchRegister(lpt_addr, PIO_IC1, tmp_data);		// Output 1 bit
+								//LatchRegister(lpt_addr, PIO_IC1, tmp_data);		// Output 1 bit
 								tmp_data |= SCK;
-								LatchRegister(lpt_addr, PIO_IC1, tmp_data);// Clock 1 into shift register
+								//LatchRegister(lpt_addr, PIO_IC1, tmp_data);// Clock 1 into shift register
 							}
 
 							tmp_data = (byte)(pio_data | SCLR_NOT); tmp_data |= DCDR_NE;
-							LatchRegister(lpt_addr, PIO_IC1, tmp_data);				// Return SCK low
+							//LatchRegister(lpt_addr, PIO_IC1, tmp_data);				// Return SCK low
 						}
 						// Strobe the RFE 1:4 decoder output to transfer contents
 						// of shift register to output latches
 						tmp_data = (byte)(pio_data | SCLR_NOT); tmp_data |= config.address; tmp_data |= DCDR_NE; 
-						LatchRegister(lpt_addr, PIO_IC1, tmp_data);		// Latch 2:4 decoder outputs
+						//LatchRegister(lpt_addr, PIO_IC1, tmp_data);		// Latch 2:4 decoder outputs
 						tmp_data = (byte)(pio_data | SCLR_NOT); tmp_data |= config.address;
-						LatchRegister(lpt_addr, PIO_IC1, tmp_data);		// Take 2:4 decoder enable low
+						//LatchRegister(lpt_addr, PIO_IC1, tmp_data);		// Take 2:4 decoder enable low
 						tmp_data = (byte)(pio_data | SCLR_NOT); tmp_data |= config.address; tmp_data |= DCDR_NE; 
-						LatchRegister(lpt_addr, PIO_IC1, tmp_data);		// Take 2:4 decoder enable high
+						//LatchRegister(lpt_addr, PIO_IC1, tmp_data);		// Take 2:4 decoder enable high
 					}
 					
 			}
@@ -940,8 +940,8 @@ namespace PowerSDR
             }
             else
 			{
-				LatchRegister(lpt_addr, PIO_IC8, (byte)(DDSRESET | DDSWRB));	// Reset the DDS chip
-				LatchRegister(lpt_addr, PIO_IC8, DDSWRB);					// Leave WRB high
+				//LatchRegister(lpt_addr, PIO_IC8, (byte)(DDSRESET | DDSWRB));	// Reset the DDS chip
+				//LatchRegister(lpt_addr, PIO_IC8, DDSWRB);					// Leave WRB high
 			}
 
 			DDSWrite(COMP_PD, 0x1D);		//Power down comparator
@@ -969,16 +969,16 @@ namespace PowerSDR
             else
 			{
 				//Set up data bits
-				LatchRegister(lpt_addr, PIO_IC11, data);
+				//LatchRegister(lpt_addr, PIO_IC11, data);
 			
 				//Set up address bits with WRB high
-				LatchRegister(lpt_addr, PIO_IC8, (byte)(addr | DDSWRB));
+				//LatchRegister(lpt_addr, PIO_IC8, (byte)(addr | DDSWRB));
     
 				//Send write command with WRB low
-				LatchRegister(lpt_addr, PIO_IC8, addr);
+				//LatchRegister(lpt_addr, PIO_IC8, addr);
     
 				//Return WRB high
-				LatchRegister(lpt_addr, PIO_IC8, (byte)(addr | DDSWRB));
+				//LatchRegister(lpt_addr, PIO_IC8, (byte)(addr | DDSWRB));
 			}
 		}
 
@@ -1008,7 +1008,7 @@ namespace PowerSDR
 		public void Init()
 		{
 			UpdateHardware = false;
-			DDSTuningWord = 0;
+			//DDSTuningWord = 0;
 			ResetDDS();
 
 			UpdateRegister8(1<<MUTE, new Config(PIO, PIO_IC1));
@@ -1030,7 +1030,7 @@ namespace PowerSDR
 		public void StandBy()
 		{
 			UpdateHardware = false;
-			DDSTuningWord = 0;
+			//DDSTuningWord = 0;
 			ResetDDS();			
 
 			byte pio_ic1_temp = pio_ic1.GetData();
@@ -1074,7 +1074,7 @@ namespace PowerSDR
 		public void PowerOn()
 		{
 			ResetDDS();
-			DDSTuningWord = dds_tuning_word;
+			//DDSTuningWord = dds_tuning_word;
 
 			pio_ic1.ForceUpdate();
 			pio_ic3.ForceUpdate();
@@ -1253,10 +1253,10 @@ namespace PowerSDR
 		{
 			for(int i=0; i<8; i++)
 			{
-				LatchRegister(lpt_addr, PIO_IC1, (byte)(1<<i));
-				LatchRegister(lpt_addr, PIO_IC3, (byte)(1<<i));
-				LatchRegister(lpt_addr, PIO_IC8, (byte)(1<<i));
-				LatchRegister(lpt_addr, PIO_IC11, (byte)(1<<i));
+                //LatchRegister(lpt_addr, PIO_IC1, (byte)(1<<i));
+                //LatchRegister(lpt_addr, PIO_IC3, (byte)(1<<i));
+                //LatchRegister(lpt_addr, PIO_IC8, (byte)(1<<i));
+                //LatchRegister(lpt_addr, PIO_IC11, (byte)(1<<i));
 				Thread.Sleep(2);
 			}
 		}
@@ -1279,26 +1279,26 @@ namespace PowerSDR
 				}
 			}
 
-			LatchRegister(lpt_addr, PIO_IC1, data);
-			LatchRegister(lpt_addr, PIO_IC3, data);
-			LatchRegister(lpt_addr, PIO_IC8, data);
-			LatchRegister(lpt_addr, PIO_IC11, data);
+            //LatchRegister(lpt_addr, PIO_IC1, data);
+            //LatchRegister(lpt_addr, PIO_IC3, data);
+            //LatchRegister(lpt_addr, PIO_IC8, data);
+            //LatchRegister(lpt_addr, PIO_IC11, data);
 		}
 
 		public void TestPIO3()
 		{
 			byte data = 0xFF;
-			LatchRegister(lpt_addr, PIO_IC1, data);
-			LatchRegister(lpt_addr, PIO_IC3, data);
-			LatchRegister(lpt_addr, PIO_IC8, data);
-			LatchRegister(lpt_addr, PIO_IC11, data);
+            //LatchRegister(lpt_addr, PIO_IC1, data);
+            //LatchRegister(lpt_addr, PIO_IC3, data);
+            //LatchRegister(lpt_addr, PIO_IC8, data);
+            //LatchRegister(lpt_addr, PIO_IC11, data);
 			Thread.Sleep(2);
 
 			data = 0;
-			LatchRegister(lpt_addr, PIO_IC1, data);
-			LatchRegister(lpt_addr, PIO_IC3, data);
-			LatchRegister(lpt_addr, PIO_IC8, data);
-			LatchRegister(lpt_addr, PIO_IC11, data);
+            //LatchRegister(lpt_addr, PIO_IC1, data);
+            //LatchRegister(lpt_addr, PIO_IC3, data);
+            //LatchRegister(lpt_addr, PIO_IC8, data);
+            //LatchRegister(lpt_addr, PIO_IC11, data);
 			Thread.Sleep(2);
 		}
 

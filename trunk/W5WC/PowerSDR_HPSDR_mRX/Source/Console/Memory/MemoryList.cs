@@ -27,8 +27,14 @@
 //=================================================================
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading;
+using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using System.Text;
 using System.Diagnostics;
 
 namespace PowerSDR
@@ -75,12 +81,8 @@ namespace PowerSDR
 
         #region Routines
 
-        public void Save()
+        private void Save(string file_name)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                    + "\\FlexRadio Systems\\";
-            string file_name = path + "memory.xml";
-
             TextWriter writer = new StreamWriter(file_name);
 
             try
@@ -97,16 +99,47 @@ namespace PowerSDR
             writer.Close();
         }
 
-        public static MemoryList Restore()
+        public void Save()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                    + "\\FlexRadio Systems\\";
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FlexRadio Systems\\";
             string file_name = path + "memory.xml";
 
-            MemoryList mem_list = new MemoryList();
-            if (!File.Exists(file_name)) return mem_list; // no file, just return an empty list
+            Save(file_name);
+        }
 
-            StreamReader reader = new StreamReader(file_name);
+        public static MemoryList Restore()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FlexRadio Systems\\";
+            string file_name = path + "memory.xml";
+            string bak_file_name = path + "memory_bak.xml";
+
+            MemoryList mem_list = new MemoryList();
+            StreamReader reader;
+
+            try
+            {
+                if (!File.Exists(file_name))
+                {
+                    throw new FileNotFoundException();
+                }
+
+                reader = new StreamReader(file_name);
+
+                XmlSerializer ser = new XmlSerializer(typeof(MemoryList),
+                    new Type[] { typeof(MemoryRecord), typeof(SortableBindingList<MemoryRecord>), typeof(int) });
+                mem_list = (MemoryList)ser.Deserialize(reader);
+
+                // save backup file
+                mem_list.Save(bak_file_name);
+            }
+            catch (Exception ex1)
+            {
+                Debug.WriteLine(ex1);
+                // check to see if backup file exists
+                // if so, try to deserialize it
+                if(!File.Exists(bak_file_name)) return mem_list;  // no memory, no backup
+
+                reader = new StreamReader(bak_file_name);
 
             try
             {
@@ -114,9 +147,10 @@ namespace PowerSDR
                     new Type[] { typeof(MemoryRecord), typeof(SortableBindingList<MemoryRecord>), typeof(int) });
                 mem_list = (MemoryList)ser.Deserialize(reader);
             }
-            catch (Exception ex)
+                catch (Exception ex2)
             {
-                Debug.WriteLine(ex);
+                 Debug.WriteLine(ex2); 
+                }
             }
 
             reader.Close();

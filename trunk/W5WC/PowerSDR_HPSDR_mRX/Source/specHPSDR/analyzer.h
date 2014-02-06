@@ -151,8 +151,6 @@ typedef struct _dp
 	CRITICAL_SECTION StitchSection;
 	CRITICAL_SECTION EliminateSection[MAX_STITCH];
 	CRITICAL_SECTION ResampleSection;
-	CRITICAL_SECTION PostAverageSection;
-	CRITICAL_SECTION PreAverageSection;
 }  dp, *DP;
 
 DP pdisp[MAX_DISPLAYS];									//array of pointers to instance data

@@ -33,7 +33,6 @@
 //#define INTERLEAVED
 //#define SPLIT_INTERLEAVED
 //#define SDRX
-//#define LINCOR
 
 namespace PowerSDR
 {
@@ -337,10 +336,10 @@ namespace PowerSDR
     public enum PreampMode
     {
         FIRST = -1,
-        OFF,
-        LOW,
-        MED,
-        HIGH,
+        // OFF,
+        // LOW,
+        // MED,
+        // HIGH,
         HPSDR_OFF,
         HPSDR_ON,
         HPSDR_MINUS10,
@@ -348,7 +347,7 @@ namespace PowerSDR
         HPSDR_MINUS30,
         HPSDR_MINUS40,
         HPSDR_MINUS50,
-        STEP_ATTEN,
+        // STEP_ATTEN,
         LAST,
     }
 
@@ -488,6 +487,7 @@ namespace PowerSDR
         Hermes = 1,
         Griffin = 2,
         Angelia = 4,
+        Orion = 5,
     }
     #endregion
 
@@ -508,6 +508,7 @@ namespace PowerSDR
         private SIO2ListenerII sio2listen = null;
         private SIO3ListenerII sio3listen = null;
         private SIO4ListenerII sio4listen = null;
+
         private Thread[] audio_process_thread;				// threads to run DttSP functions
         private Thread draw_display_thread;					// draws the main display 
         private Thread multimeter_thread;					// updates the rx1/tx meter data
@@ -518,8 +519,8 @@ namespace PowerSDR
         private Thread rx2_sql_update_thread;				// polls the RX2 signal strength
         private Thread vox_update_thread;					// polls the mic input
         private Thread noise_gate_update_thread;			// polls the mic input during TX
-        private Thread f3k_temp_thread;				        // polls the temp on the FLEX-3000 to turn fan on/off
-        private Thread f3k_mic_function_thread;				// handles the FLEX-3000 mic inputs (Up, Down, Fast)
+        //  private Thread f3k_temp_thread;				        // polls the temp on the FLEX-3000 to turn fan on/off
+        //  private Thread f3k_mic_function_thread;				// handles the FLEX-3000 mic inputs (Up, Down, Fast)
         // private Thread wbir_thread;
         // private Thread wbir_rx2_thread;
         //  private Thread update_rx1_dds_thread;
@@ -527,6 +528,7 @@ namespace PowerSDR
         //  private Thread update_tx_dds_thread;
         // private Thread audio_watchdog_thread;
         // private Thread digital_watchdog_thread;
+
         // private HiPerfTimer polltimer;
         public bool pause_DisplayThread;// = false;
         private bool calibration_running = false;
@@ -543,31 +545,15 @@ namespace PowerSDR
         public FilterForm filterRX1Form;
         public FilterForm filterRX2Form;
         public DiversityForm diversityForm;
-        //public FWCForm fwcForm;
-        //  public FLEX5000LLHWForm flex5000LLHWForm;
-        //  public FLEX5000DebugForm flex5000DebugForm;
-        // public FWCMixForm fwcMixForm;
-        //  public FLEX3000MixerForm flex3000MixerForm;
-        // public FWCAntForm fwcAntForm;
-        //  public FLEX5000RelayForm flex5000RelayForm;
-        // public FWCATUForm fwcAtuForm;
-        // public FLEX3000ATUForm flex3000ATUForm;
-        // public FWCTestForm fwcTestForm;
-        //  public FLEX5000LPFForm flex5000LPFForm;
-        //  public FWCCalForm fwcCalForm;
-        // public FLEX5000ProdTestForm flex5000ProdTestForm;
-        // public FLEX5000FinalTestForm flex5000FinalTestForm;
-        // public FLEX5000RX2CalForm flex5000RX2CalForm;
-        // public FLEX3000TestForm flex3000TestForm;
-        // public DSPTestForm dspTestForm;
-        // public PreSelForm preSelForm;
-        public bool buffiszero = false;
-        public bool fwc_init = false;
-        public int fwc_index = -1;
-        private long fwc_last_cal_date_time = 0;
-        private uint fwc_serial_num = 0;
-        private uint fwc_trx_serial_num = 0;
-        // private uint rx2_trx_match_serial = 0;
+
+        // public bool buffiszero = false;
+
+        //  public bool fwc_init = false;
+        // public int fwc_index = -1;
+        // private long fwc_last_cal_date_time = 0;
+        // private uint fwc_serial_num = 0;
+        // private uint fwc_trx_serial_num = 0;
+
 
         private int rx1_squelch_threshold_scroll = -160;
         private int rx2_squelch_threshold_scroll = -160;
@@ -576,8 +562,8 @@ namespace PowerSDR
         private int rx1_fm_squelch_threshold_scroll = 0;
         private int rx2_fm_squelch_threshold_scroll = 0;
 
-        private long rx2_last_cal_date_time = 0;
-        private uint rx2_serial_num = 0;
+        // private long rx2_last_cal_date_time = 0;
+        // private uint rx2_serial_num = 0;
 
         public MemoryForm memoryForm;
         public MemoryList MemoryList { get; private set; }
@@ -672,6 +658,8 @@ namespace PowerSDR
         public float rx2_meter_cal_offset;					// multimeter calibration offset per volume setting in dB
         public float rx1_filter_size_cal_offset = 9;		// filter offset based on DSP filter size
         public float rx2_filter_size_cal_offset = 9;		// filter offset based on DSP filter size
+        private int[] rx1_step_attenuator_by_band;
+        private int[] rx2_step_attenuator_by_band;
 
         private bool meter_data_ready;						// used to synchronize the new DSP data with the multimeter
         private float new_meter_data;						// new data for the multimeter from the DSP
@@ -689,47 +677,47 @@ namespace PowerSDR
         private int rx2_meter_peak_count;					// Counter for peak hold on multimeter
         private int rx2_meter_peak_value;					// Value for peak hold on multimeter
 
-        public float[][] power_table;						// table used to store power in new power cal routine
+        //  public float[][] power_table;						// table used to store power in new power cal routine
         public int pa_fwd_power;							// forward power as read by the ADC on the PA
         public int pa_rev_power;							// reverse power as read by the ADC on the PA
-       // public double alex_fwd_power;
-       // public double alex_rev_power;
+        // public double alex_fwd_power;
+        // public double alex_rev_power;
         private bool tuning;								// true when the TUN button is active
-        public bool atu_tuning;		    					// true while the atu is tuning
-        private Band tuned_band;							// last band that the atu was tuned on
-        public float[][][] pa_gain_by_radio;
+        // public bool atu_tuning;		    					// true while the atu is tuning
+        // private Band tuned_band;							// last band that the atu was tuned on
+        // public float[][][] pa_gain_by_radio;
 
-        public float[] rx1_image_gain_table;				// table used to store image cal info
-        public float[] rx1_image_phase_table;				// table used to store image cal info
-        public float[] rx2_image_gain_table;				// table used to store image cal info
-        public float[] rx2_image_phase_table;				// table used to store image cal info
-        public float[] tx_image_gain_table;					// table used to store image cal info
-        public float[] tx_image_phase_table;				// table used to store image cal info
-        public int[][] tx_carrier_table;					// table used to store tx carrier cal info
-        public int[][] pa_bias_table;						// table used to store PA Bias settings
+        //public float[] rx1_image_gain_table;				// table used to store image cal info
+        //public float[] rx1_image_phase_table;				// table used to store image cal info
+        //public float[] rx2_image_gain_table;				// table used to store image cal info
+        //public float[] rx2_image_phase_table;				// table used to store image cal info
+        //public float[] tx_image_gain_table;					// table used to store image cal info
+        //public float[] tx_image_phase_table;				// table used to store image cal info
+        //public int[][] tx_carrier_table;					// table used to store tx carrier cal info
+        //public int[][] pa_bias_table;						// table used to store PA Bias settings
         public float[][] rx1_level_table;					// table used to store RX1 Level cal settings
         public float[][] rx2_level_table;					// table used to store RX2 Level cal settings
-        public float[][] pa_bridge_table;					// table used to store PA Bridge cal settings
-        public float[] swr_table;							// table used to calibrate SWR
-        public float[] atu_swr_table;						// table used to cal SWR at ATU power
-        public float rx2_res_offset;
-        private float[] pwr_avg;
+        // public float[][] pa_bridge_table;					// table used to store PA Bridge cal settings
+        //public float[] swr_table;							// table used to calibrate SWR
+        //public float[] atu_swr_table;						// table used to cal SWR at ATU power
+        //public float rx2_res_offset;
+        //private float[] pwr_avg;
 
-        public byte rx1_level_checksum;
-        public byte rx1_image_gain_checksum;
-        public byte rx1_image_phase_checksum;
-        public byte tx_image_gain_checksum;
-        public byte tx_image_phase_checksum;
-        public byte tx_carrier_checksum;
-        public byte pa_bias_checksum;
-        public byte pa_bridge_checksum;
-        public byte pa_power_checksum;
-        public byte pa_swr_checksum;
-        public byte atu_swr_checksum;
+        //public byte rx1_level_checksum;
+        //public byte rx1_image_gain_checksum;
+        //public byte rx1_image_phase_checksum;
+        //public byte tx_image_gain_checksum;
+        //public byte tx_image_phase_checksum;
+        //public byte tx_carrier_checksum;
+        //public byte pa_bias_checksum;
+        //public byte pa_bridge_checksum;
+        //public byte pa_power_checksum;
+        //public byte pa_swr_checksum;
+        //public byte atu_swr_checksum;
 
-        public byte rx2_level_checksum;
-        public byte rx2_image_gain_checksum;
-        public byte rx2_image_phase_checksum;
+        //public byte rx2_level_checksum;
+        //public byte rx2_image_gain_checksum;
+        //public byte rx2_image_phase_checksum;
 
         public double[] CTCSS_array =  {
             67.0 , 69.3 , 71.9 , 74.4 , 77.0 , 79.7 , 82.5 , 85.4 , 88.5 , 91.5 ,
@@ -1704,11 +1692,15 @@ namespace PowerSDR
                 w.ShowDialog();
             }
 
+            // RX1Band = TXBand = rx1_band;
+            // RX2Band = rx2_band;
+
             if (rx1_meter_cal_offset == 0.0f)
             {
                 switch (current_hpsdr_model)
                 {
                     case HPSDRModel.ANAN100D:
+                    case HPSDRModel.ORION:
                         rx1_meter_cal_offset = -46.50807f;
                         break;
                     case HPSDRModel.HPSDR:
@@ -1756,6 +1748,7 @@ namespace PowerSDR
                 switch (current_hpsdr_model)
                 {
                     case HPSDRModel.ANAN100D:
+                    case HPSDRModel.ORION:
                         rx2_meter_cal_offset = -46.50807f;
                         break;
                     case HPSDRModel.HPSDR:
@@ -6898,6 +6891,7 @@ namespace PowerSDR
             this.grpVFOBetween.Controls.Add(this.btnMemoryQuickRestore);
             this.grpVFOBetween.Controls.Add(this.btnMemoryQuickSave);
             this.grpVFOBetween.Controls.Add(this.txtMemoryQuick);
+            this.grpVFOBetween.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             resources.ApplyResources(this.grpVFOBetween, "grpVFOBetween");
             this.grpVFOBetween.Name = "grpVFOBetween";
             this.grpVFOBetween.TabStop = false;
@@ -6961,6 +6955,7 @@ namespace PowerSDR
             // panelBandVHF
             // 
             resources.ApplyResources(this.panelBandVHF, "panelBandVHF");
+            this.panelBandVHF.BackColor = System.Drawing.Color.Transparent;
             this.panelBandVHF.Controls.Add(this.radBandVHF13);
             this.panelBandVHF.Controls.Add(this.radBandVHF12);
             this.panelBandVHF.Controls.Add(this.radBandVHF11);
@@ -7135,6 +7130,7 @@ namespace PowerSDR
             // panelModeSpecificFM
             // 
             resources.ApplyResources(this.panelModeSpecificFM, "panelModeSpecificFM");
+            this.panelModeSpecificFM.BackColor = System.Drawing.Color.Transparent;
             this.panelModeSpecificFM.Controls.Add(this.ptbFMMic);
             this.panelModeSpecificFM.Controls.Add(this.chkFMTXRev);
             this.panelModeSpecificFM.Controls.Add(this.chkFMTXHigh);
@@ -7254,12 +7250,12 @@ namespace PowerSDR
             this.Controls.Add(this.ptbSquelch);
             this.Controls.Add(this.panelRX2Power);
             this.Controls.Add(this.lblRF2);
-            this.Controls.Add(this.panelBandVHF);
-            this.Controls.Add(this.panelBandHF);
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificFM);
             this.Controls.Add(this.panelModeSpecificDigital);
             this.Controls.Add(this.panelModeSpecificCW);
+            this.Controls.Add(this.panelBandHF);
+            this.Controls.Add(this.panelBandVHF);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Console";
@@ -7575,72 +7571,41 @@ namespace PowerSDR
             vfoa_hover_digit = -1;
             vfob_hover_digit = -1;
 
-            rx1_ant_by_band = new FWCAnt[(int)Band.LAST];
-            for (int i = 0; i < (int)Band.LAST; i++) rx1_ant_by_band[i] = FWCAnt.ANT1;
-            rx2_ant_by_band = new FWCAnt[(int)Band.LAST];
-            for (int i = 0; i < (int)Band.LAST; i++) rx2_ant_by_band[i] = FWCAnt.RX2IN;
-            tx_ant_by_band = new FWCAnt[(int)Band.LAST];
-            for (int i = 0; i < (int)Band.LAST; i++) tx_ant_by_band[i] = FWCAnt.ANT1;
-            rx1_loop_by_band = new bool[(int)Band.LAST];
-            rx1_preamp_by_band = new PreampMode[(int)Band.LAST];
+            //rx1_ant_by_band = new FWCAnt[(int)Band.LAST];
+            //for (int i = 0; i < (int)Band.LAST; i++) rx1_ant_by_band[i] = FWCAnt.ANT1;
+            //rx2_ant_by_band = new FWCAnt[(int)Band.LAST];
+            //for (int i = 0; i < (int)Band.LAST; i++) rx2_ant_by_band[i] = FWCAnt.RX2IN;
+            //tx_ant_by_band = new FWCAnt[(int)Band.LAST];
+            //for (int i = 0; i < (int)Band.LAST; i++) tx_ant_by_band[i] = FWCAnt.ANT1;
+            //rx1_loop_by_band = new bool[(int)Band.LAST];
 
+            rx1_preamp_by_band = new PreampMode[(int)Band.LAST];
+            rx2_preamp_by_band = new PreampMode[(int)Band.LAST];
+            rx1_step_attenuator_by_band = new int[(int)Band.LAST];
+            rx2_step_attenuator_by_band = new int[(int)Band.LAST];
             for (int i = 0; i < (int)Band.LAST; i++)
             {
-                switch (current_model)
+                switch ((Band)i)
                 {
-                    case Model.FLEX3000:
-                        switch ((Band)i)
-                        {
-                            case Band.B6M:
-                            case Band.B10M:
-                                rx1_preamp_by_band[i] = PreampMode.HIGH;
-                                break;
-                            case Band.B12M:
-                            case Band.B15M:
-                                rx1_preamp_by_band[i] = PreampMode.MED;
-                                break;
-                            default:
-                                rx1_preamp_by_band[i] = PreampMode.LOW;
-                                break;
-                        }
-                        break;
-                    case Model.FLEX5000:
-                        switch ((Band)i)
-                        {
-                            case Band.B6M:
-                            case Band.B10M:
-                            case Band.B12M:
-                            case Band.B15M:
-                                rx1_preamp_by_band[i] = PreampMode.HIGH;
-                                break;
-                            default:
-                                rx1_preamp_by_band[i] = PreampMode.OFF;
-                                break;
-                        }
-                        break;
-                    case Model.HERMES:
-                    case Model.HPSDR:
-                        switch ((Band)i)
-                        {
-                            case Band.B6M:
-                            case Band.B10M:
-                            case Band.B12M:
-                            case Band.B15M:
-                                rx1_preamp_by_band[i] = PreampMode.HPSDR_ON;
-                                break;
-                            default:
-                                rx1_preamp_by_band[i] = PreampMode.HPSDR_OFF;
-                                break;
-                        }
+                    case Band.GEN:
+                    case Band.B160M:
+                    case Band.B80M:
+                    case Band.B60M:
+                    case Band.B40M:
+                    case Band.B30M:
+                        rx1_preamp_by_band[i] = PreampMode.HPSDR_OFF;
+                        rx2_preamp_by_band[i] = PreampMode.HPSDR_OFF;
+                        rx1_step_attenuator_by_band[i] = 20;
+                        rx2_step_attenuator_by_band[i] = 20;
                         break;
                     default:
-                        rx1_preamp_by_band[i] = PreampMode.HPSDR_OFF;
+                        rx1_preamp_by_band[i] = PreampMode.HPSDR_ON;
+                        rx2_preamp_by_band[i] = PreampMode.HPSDR_ON;
+                        rx1_step_attenuator_by_band[i] = 0;
+                        rx2_step_attenuator_by_band[i] = 0;
                         break;
                 }
             }
-
-            rx2_preamp_by_band = new PreampMode[(int)Band.LAST];
-            for (int i = 0; i < (int)Band.LAST; i++) rx2_preamp_by_band[i] = PreampMode.HIGH;
 
             power_by_band = new int[(int)Band.LAST];
             for (int i = 0; i < (int)Band.LAST; i++) power_by_band[i] = 50;
@@ -7652,8 +7617,6 @@ namespace PowerSDR
                 {
                     case Band.B6M: fm_tx_offset_by_band_mhz[i] = 1; break; // 1MHz
                     case Band.B10M: fm_tx_offset_by_band_mhz[i] = 0.1; break; // 100kHz
-                    // case Band.VHF0: fm_tx_offset_by_band_mhz[i] = 0.6; break; // 600kHz
-                    // case Band.VHF1: fm_tx_offset_by_band_mhz[i] = 5; break; // 5MHz
                     default: fm_tx_offset_by_band_mhz[i] = 0.1; break; // 100kHz
                 }
             }
@@ -7664,16 +7627,28 @@ namespace PowerSDR
             {
                 switch ((Band)i)
                 {
+                    case Band.B160M:
+                    case Band.B80M:
+                    case Band.B60M:
+                        rx1_agct_by_band[i] = 75;
+                        rx2_agct_by_band[i] = 75;
+                        break;
+                    case Band.B40M:
+                    case Band.B30M:
+                        rx1_agct_by_band[i] = 80;
+                        rx2_agct_by_band[i] = 80;
+                        break;
+                    case Band.B20M:
+                    case Band.B17M:
+                        rx1_agct_by_band[i] = 85;
+                        rx2_agct_by_band[i] = 85;
+                        break;
+                    case Band.B10M:
+                        rx1_agct_by_band[i] = 95;
+                        rx2_agct_by_band[i] = 95;
+                        break;
                     case Band.B6M:
-                        switch (current_model)
-                        {
-                            case Model.FLEX3000:
-                                rx1_agct_by_band[i] = 100;
-                                break;
-                            default:
-                                rx1_agct_by_band[i] = 110;
-                                break;
-                        }
+                        rx1_agct_by_band[i] = 110;
                         rx2_agct_by_band[i] = 110;
                         break;
                     default:
@@ -7682,12 +7657,13 @@ namespace PowerSDR
                         break;
                 }
             }
-            tx1_by_band = new bool[(int)Band.LAST];
-            tx2_by_band = new bool[(int)Band.LAST];
-            tx3_by_band = new bool[(int)Band.LAST];
 
-            for (int i = 0; i < (int)Band.LAST; i++)
-                tx1_by_band[i] = tx2_by_band[i] = tx3_by_band[i] = true;
+            //tx1_by_band = new bool[(int)Band.LAST];
+            //tx2_by_band = new bool[(int)Band.LAST];
+            //tx3_by_band = new bool[(int)Band.LAST];
+
+            //for (int i = 0; i < (int)Band.LAST; i++)
+            //    tx1_by_band[i] = tx2_by_band[i] = tx3_by_band[i] = true;
 
             vhf_text = new RadioButtonTS[15];
             vhf_text[0] = radBandVHF0;
@@ -7705,9 +7681,9 @@ namespace PowerSDR
             vhf_text[12] = radBandVHF12;
             vhf_text[13] = radBandVHF13;
 
-            power_table = new float[(int)Band.LAST][];
-            for (int i = 0; i < (int)Band.LAST; i++)
-                power_table[i] = new float[13];
+            //power_table = new float[(int)Band.LAST][];
+            //for (int i = 0; i < (int)Band.LAST; i++)
+            //    power_table[i] = new float[13];
 
             // Radio / Band / PA Gain
             /*  pa_gain_by_radio = new float[(int)HPSDRModel.LAST][][];
@@ -7721,50 +7697,36 @@ namespace PowerSDR
             //float [,,] pa_gain_by_rad = new float[(int)HPSDRModel.LAST, (int)Band.LAST, 13];
 
 
-            rx1_image_gain_table = new float[(int)Band.LAST];
-            rx1_image_phase_table = new float[(int)Band.LAST];
-            rx2_image_gain_table = new float[(int)Band.LAST];
-            rx2_image_phase_table = new float[(int)Band.LAST];
-            tx_image_gain_table = new float[(int)Band.LAST];
-            tx_image_phase_table = new float[(int)Band.LAST];
+            //rx1_image_gain_table = new float[(int)Band.LAST];
+            //rx1_image_phase_table = new float[(int)Band.LAST];
+            //rx2_image_gain_table = new float[(int)Band.LAST];
+            //rx2_image_phase_table = new float[(int)Band.LAST];
+            //tx_image_gain_table = new float[(int)Band.LAST];
+            //tx_image_phase_table = new float[(int)Band.LAST];
 
-            tx_carrier_table = new int[(int)Band.LAST][];
-            for (int i = 0; i < (int)Band.LAST; i++)
-            {
-                tx_carrier_table[i] = new int[4];
-                for (int j = 0; j < 4; j++)
-                    tx_carrier_table[i][j] = 128;
-            }
+            //tx_carrier_table = new int[(int)Band.LAST][];
+            //for (int i = 0; i < (int)Band.LAST; i++)
+            //{
+            //    tx_carrier_table[i] = new int[4];
+            //    for (int j = 0; j < 4; j++)
+            //        tx_carrier_table[i][j] = 128;
+            //}
 
-            pa_bias_table = new int[4][]; // 4 groups of 8 pot settings
-            for (int i = 0; i < 4; i++)
-            {
-                pa_bias_table[i] = new int[8];
-                for (int j = 0; j < 8; j++)
-                    pa_bias_table[i][j] = 0;
-            }
+            //pa_bias_table = new int[4][]; // 4 groups of 8 pot settings
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    pa_bias_table[i] = new int[8];
+            //    for (int j = 0; j < 8; j++)
+            //        pa_bias_table[i][j] = 0;
+            //}
 
             rx1_level_table = new float[(int)Band.LAST][]; // 3 settings per band (display_offset, preamp, multimeter offset)
-            switch (current_model)
+            for (int i = 0; i < (int)Band.LAST; i++)
             {
-                case Model.FLEX3000:
-                    for (int i = 0; i < (int)Band.LAST; i++)
-                    {
-                        rx1_level_table[i] = new float[3];
-                        rx1_level_table[i][0] = -71.0f;	// setup defaults;
-                        rx1_level_table[i][1] = 19.8f;
-                        rx1_level_table[i][2] = -26.0f;
-                    }
-                    break;
-                default:
-                    for (int i = 0; i < (int)Band.LAST; i++)
-                    {
-                        rx1_level_table[i] = new float[3];
-                        rx1_level_table[i][0] = -37.5f;	// setup defaults;
-                        rx1_level_table[i][1] = 20.0f;
-                        rx1_level_table[i][2] = -11.5f;
-                    }
-                    break;
+                rx1_level_table[i] = new float[3];
+                rx1_level_table[i][0] = -37.5f;	// setup defaults;
+                rx1_level_table[i][1] = 20.0f;
+                rx1_level_table[i][2] = -11.5f;
             }
 
             rx2_level_table = new float[(int)Band.LAST][]; // 3 settings per band (display_offset, preamp, multimeter offset)
@@ -7784,17 +7746,17 @@ namespace PowerSDR
                       pa_bridge_table[i][j] = 0.0f;
               } */
 
-            swr_table = new float[(int)Band.LAST];
-            for (int i = 0; i < (int)Band.LAST; i++)
-                swr_table[i] = 1.0f;
+            //swr_table = new float[(int)Band.LAST];
+            //for (int i = 0; i < (int)Band.LAST; i++)
+            //    swr_table[i] = 1.0f;
 
-            pwr_avg = new float[200];
+            //pwr_avg = new float[200];
 
-            atu_swr_table = new float[(int)Band.LAST];
-            for (int i = 0; i < (int)Band.LAST; i++)
-                atu_swr_table[i] = 1.0f;
+            //atu_swr_table = new float[(int)Band.LAST];
+            //for (int i = 0; i < (int)Band.LAST; i++)
+            //    atu_swr_table[i] = 1.0f;
 
-            atu_tuning = false;
+            //atu_tuning = false;
             tune_power = 0;
             calibrating = false;
             run_setup_wizard = true;
@@ -7836,11 +7798,11 @@ namespace PowerSDR
             current_meter_data = -200.0f;
             new_meter_data = -200.0f;
 
-            rx1_preamp_offset = new float[12];
-            rx1_preamp_offset[(int)PreampMode.OFF] = 20.0f;
-            rx1_preamp_offset[(int)PreampMode.LOW] = 0.0f;
-            rx1_preamp_offset[(int)PreampMode.MED] = 0.0f;
-            rx1_preamp_offset[(int)PreampMode.HIGH] = 0.0f;
+            rx1_preamp_offset = new float[7];
+            // rx1_preamp_offset[(int)PreampMode.OFF] = 20.0f;
+            // rx1_preamp_offset[(int)PreampMode.LOW] = 0.0f;
+            // rx1_preamp_offset[(int)PreampMode.MED] = 0.0f;
+            // rx1_preamp_offset[(int)PreampMode.HIGH] = 0.0f;
 
             rx1_preamp_offset[(int)PreampMode.HPSDR_OFF] = 20.0f; //atten inline
             rx1_preamp_offset[(int)PreampMode.HPSDR_ON] = 0.0f; //no atten
@@ -7849,13 +7811,13 @@ namespace PowerSDR
             rx1_preamp_offset[(int)PreampMode.HPSDR_MINUS30] = 30.0f;
             rx1_preamp_offset[(int)PreampMode.HPSDR_MINUS40] = 40.0f;
             rx1_preamp_offset[(int)PreampMode.HPSDR_MINUS50] = 50.0f;
-            rx1_preamp_offset[(int)PreampMode.STEP_ATTEN] = (float)RX1AttenuatorData;
+            // rx1_preamp_offset[(int)PreampMode.STEP_ATTEN] = (float)RX1AttenuatorData;
 
-            rx2_preamp_offset = new float[9];
-            rx2_preamp_offset[(int)PreampMode.OFF] = 20.0f;
-            rx2_preamp_offset[(int)PreampMode.HIGH] = 0.0f;
+            rx2_preamp_offset = new float[8];
+            rx2_preamp_offset[(int)PreampMode.HPSDR_OFF] = 20.0f;
+            rx2_preamp_offset[(int)PreampMode.HPSDR_ON] = 0.0f;
             rx2_preamp_offset[(int)PreampMode.HPSDR_MINUS10] = 10.0f;
-            rx2_preamp_offset[(int)PreampMode.HPSDR_MINUS20] = 20.0f;
+            // rx2_preamp_offset[(int)PreampMode.HPSDR_MINUS20] = 20.0f;
             rx2_preamp_offset[(int)PreampMode.HPSDR_MINUS30] = 30.0f;
 
             //  if (!alexpresent && rx2_preamp_present)
@@ -7892,8 +7854,7 @@ namespace PowerSDR
                 */
             }
 
-            //if(current_model == Model.SDR1000)
-            hw = new HW(0x378);					// create hardware object
+            hw = new HW();					// create hardware object
 
             siolisten = new SIOListenerII(this);
             sio2listen = new SIO2ListenerII(this);
@@ -7914,7 +7875,7 @@ namespace PowerSDR
             SetupForm.StartPosition = FormStartPosition.Manual;
 
             SetupForm.AddHPSDRPages();
-            SetComboPreampForHPSDR();
+            // SetComboPreampForHPSDR();
 
             //SetupForm.GetTxProfiles();
             UpdateTXProfile(SetupForm.TXProfile);
@@ -7934,8 +7895,8 @@ namespace PowerSDR
             //rx1_filter = Filter.F2600;
 
             //RX1AGCMode = AGCMode.MED;				// Initialize front panel controls
-            comboPreamp.Text = "High";
-            chkRX1Preamp.Checked = true;
+            //comboPreamp.Text = "0dB";
+            //chkRX1Preamp.Checked = true;
             vfob_dsp_mode = DSPMode.LSB;
             vfob_filter = Filter.F3;
             comboDisplayMode.Text = "Panadapter";
@@ -7953,6 +7914,18 @@ namespace PowerSDR
             comboFMCTCSS.Text = "100.0";
 
             GetState();							// recall saved state
+
+            SetComboPreampForHPSDR();
+            initializing = false;
+            // double freq = double.Parse(txtVFOAFreq.Text);
+            // Band b = BandByFreq(freq, rx1_xvtr_index, false, current_region);
+            // if (b != rx1_band)
+            // SetRX1Band(b);
+            RX1PreampMode = rx1_preamp_by_band[(int)rx1_band];
+            RX1AttenuatorData = rx1_step_attenuator_by_band[(int)rx1_band];
+            RX2PreampMode = rx2_preamp_by_band[(int)rx2_band];
+            RX2AttenuatorData = rx2_step_attenuator_by_band[(int)rx2_band];
+            initializing = true;
 
             chkFullDuplex.Checked = false;
             if (rx1_dsp_mode == DSPMode.FIRST || rx1_dsp_mode == DSPMode.LAST)
@@ -7993,8 +7966,19 @@ namespace PowerSDR
             ptbRX2RF_Scroll(this, EventArgs.Empty);
             ptbRX2Squelch_Scroll(this, EventArgs.Empty);
             initializing = false;
-            RX1PreampMode = rx1_preamp_mode;
-            RX2PreampMode = rx2_preamp_mode;
+            // initializing = false;
+            // double freq = double.Parse(txtVFOAFreq.Text);
+            // Band b = BandByFreq(freq, rx1_xvtr_index, false, current_region);
+            // if (b != rx1_band)
+            // SetRX1Band(b);
+            RX1PreampMode = rx1_preamp_by_band[(int)rx1_band];
+            RX1AttenuatorData = rx1_step_attenuator_by_band[(int)rx1_band];
+            RX2PreampMode = rx2_preamp_by_band[(int)rx2_band];
+            RX2AttenuatorData = rx2_step_attenuator_by_band[(int)rx2_band];
+            // initializing = true;
+
+            // RX1PreampMode = rx1_preamp_mode;
+            // RX2PreampMode = rx2_preamp_mode;
             initializing = true;
             ptbDisplayZoom_Scroll(this, EventArgs.Empty);
             ptbRX0Gain_Scroll(this, EventArgs.Empty);
@@ -8003,7 +7987,7 @@ namespace PowerSDR
             ptbPanSubRX_Scroll(this, EventArgs.Empty);
             ptbRX2Pan_Scroll(this, EventArgs.Empty);
             ptbRX2Gain_Scroll(this, EventArgs.Empty);
-            chkRX2Preamp_CheckedChanged(this, EventArgs.Empty);
+            // chkRX2Preamp_CheckedChanged(this, EventArgs.Empty);
             ptbRF_Scroll(this, EventArgs.Empty);
             ptbVACRXGain_Scroll(this, EventArgs.Empty);
             ptbVACTXGain_Scroll(this, EventArgs.Empty);
@@ -8040,15 +8024,17 @@ namespace PowerSDR
                radModeDIGU_CheckedChanged(this, EventArgs.Empty);
                radModeSPEC_CheckedChanged(this, EventArgs.Empty);*/
             booting = false;
+
             CalcDisplayFreq();
             CalcRX2DisplayFreq();
             CpuUsage();
 
             tune_step_index--;					// Setup wheel tuning
             ChangeTuneStepUp();
-            UpdateDisplayOffsets();
-
+            UpdateRX1DisplayOffsets();
+            UpdateRX2DisplayOffsets();
             SetupForm.initCATandPTTprops();   // wjt added -- get console props setup for cat and ptt 
+
             if (CmdLineArgs != null)
             {
                 foreach (string t in CmdLineArgs)
@@ -8154,12 +8140,6 @@ namespace PowerSDR
 
             if (startdiversity)
                 eSCToolStripMenuItem_Click(this, EventArgs.Empty);
-        }
-
-        private static void CreateAnalyzer()
-        {
-            int rc = 0;
-            SpecHPSDRDLL.XCreateAnalyzer(0, ref rc, 262144, 1, 3, appdatapath + "specWisdom");
         }
 
         public void Init60mChannels()
@@ -8290,40 +8270,42 @@ namespace PowerSDR
             // Automatically saves all control settings to the database in the tab
             // pages on this form of the following types: CheckBox, ComboBox,
             // NumericUpDown, RadioButton, TextBox, and TrackBar (slider)
-            string s;
-            chkPower.Checked = false;		// turn off the power first
-
-            ArrayList a = new ArrayList();
-
-            foreach (Control c in this.Controls)			// For each control
+            try
             {
-                // if it is a groupbox or panel, check for sub controls
-                if (c.GetType() == typeof(GroupBoxTS) || c.GetType() == typeof(PanelTS))
+                string s;
+                chkPower.Checked = false;		// turn off the power first
+
+                ArrayList a = new ArrayList();
+
+                foreach (Control c in this.Controls)			// For each control
                 {
-                    foreach (Control c2 in c.Controls)	// for each sub-control
-                    {	// check to see if it is a value type we need to save
-                        if (c2.Enabled)
-                        {
-                            if (c2.GetType() == typeof(CheckBoxTS))
-                                a.Add(c2.Name + "/" + ((CheckBoxTS)c2).Checked.ToString());
-                            else if (c2.GetType() == typeof(ComboBoxTS))
+                    // if it is a groupbox or panel, check for sub controls
+                    if (c.GetType() == typeof(GroupBoxTS) || c.GetType() == typeof(PanelTS))
+                    {
+                        foreach (Control c2 in c.Controls)	// for each sub-control
+                        {	// check to see if it is a value type we need to save
+                            if (c2.Enabled)
                             {
-                                if (((ComboBoxTS)c2).Items.Count > 0)
-                                    a.Add(c2.Name + "/" + ((ComboBoxTS)c2).Text);
-                            }
-                            else if (c2.GetType() == typeof(NumericUpDownTS))
-                                a.Add(c2.Name + "/" + ((NumericUpDownTS)c2).Value.ToString());
-                            else if (c2.GetType() == typeof(RadioButtonTS))
-                                a.Add(c2.Name + "/" + ((RadioButtonTS)c2).Checked.ToString());
-                            else if (c2.GetType() == typeof(TextBoxTS))
-                            {
-                                if (((TextBoxTS)c2).ReadOnly == false)
-                                    a.Add(c2.Name + "/" + ((TextBoxTS)c2).Text);
-                            }
-                            else if (c2.GetType() == typeof(TrackBarTS))
-                                a.Add(c2.Name + "/" + ((TrackBarTS)c2).Value.ToString());
-                            else if (c2.GetType() == typeof(PrettyTrackBar))
-                                a.Add(c2.Name + "/" + ((PrettyTrackBar)c2).Value.ToString());
+                                if (c2.GetType() == typeof(CheckBoxTS))
+                                    a.Add(c2.Name + "/" + ((CheckBoxTS)c2).Checked.ToString());
+                                else if (c2.GetType() == typeof(ComboBoxTS))
+                                {
+                                    if (((ComboBoxTS)c2).Items.Count > 0)
+                                        a.Add(c2.Name + "/" + ((ComboBoxTS)c2).Text);
+                                }
+                                else if (c2.GetType() == typeof(NumericUpDownTS))
+                                    a.Add(c2.Name + "/" + ((NumericUpDownTS)c2).Value.ToString());
+                                else if (c2.GetType() == typeof(RadioButtonTS))
+                                    a.Add(c2.Name + "/" + ((RadioButtonTS)c2).Checked.ToString());
+                                else if (c2.GetType() == typeof(TextBoxTS))
+                                {
+                                    if (((TextBoxTS)c2).ReadOnly == false)
+                                        a.Add(c2.Name + "/" + ((TextBoxTS)c2).Text);
+                                }
+                                else if (c2.GetType() == typeof(TrackBarTS))
+                                    a.Add(c2.Name + "/" + ((TrackBarTS)c2).Value.ToString());
+                                else if (c2.GetType() == typeof(PrettyTrackBar))
+                                    a.Add(c2.Name + "/" + ((PrettyTrackBar)c2).Value.ToString());
 #if(DEBUG)
                             else if (c2.GetType() == typeof(GroupBox) ||
                                 c2.GetType() == typeof(CheckBox) ||
@@ -8334,33 +8316,33 @@ namespace PowerSDR
                                 c2.GetType() == typeof(TrackBar))
                                 Debug.WriteLine(c2.Name + " needs to be converted to a Thread Safe control.");
 #endif
+                            }
                         }
                     }
-                }
-                else // it is not a group box
-                {	// check to see if it is a value type we need to save
-                    if (c.Enabled)
-                    {
-                        if (c.GetType() == typeof(CheckBoxTS))
-                            a.Add(c.Name + "/" + ((CheckBoxTS)c).Checked.ToString());
-                        else if (c.GetType() == typeof(ComboBoxTS))
+                    else // it is not a group box
+                    {	// check to see if it is a value type we need to save
+                        if (c.Enabled)
                         {
-                            if (((ComboBoxTS)c).SelectedIndex >= 0)
-                                a.Add(c.Name + "/" + ((ComboBoxTS)c).Text);
-                        }
-                        else if (c.GetType() == typeof(NumericUpDownTS))
-                            a.Add(c.Name + "/" + ((NumericUpDownTS)c).Value.ToString());
-                        else if (c.GetType() == typeof(RadioButtonTS))
-                            a.Add(c.Name + "/" + ((RadioButtonTS)c).Checked.ToString());
-                        else if (c.GetType() == typeof(TextBoxTS))
-                        {
-                            if (((TextBoxTS)c).ReadOnly == false)
-                                a.Add(c.Name + "/" + ((TextBoxTS)c).Text);
-                        }
-                        else if (c.GetType() == typeof(TrackBarTS))
-                            a.Add(c.Name + "/" + ((TrackBarTS)c).Value.ToString());
-                        else if (c.GetType() == typeof(PrettyTrackBar))
-                            a.Add(c.Name + "/" + ((PrettyTrackBar)c).Value.ToString());
+                            if (c.GetType() == typeof(CheckBoxTS))
+                                a.Add(c.Name + "/" + ((CheckBoxTS)c).Checked.ToString());
+                            else if (c.GetType() == typeof(ComboBoxTS))
+                            {
+                                if (((ComboBoxTS)c).SelectedIndex >= 0)
+                                    a.Add(c.Name + "/" + ((ComboBoxTS)c).Text);
+                            }
+                            else if (c.GetType() == typeof(NumericUpDownTS))
+                                a.Add(c.Name + "/" + ((NumericUpDownTS)c).Value.ToString());
+                            else if (c.GetType() == typeof(RadioButtonTS))
+                                a.Add(c.Name + "/" + ((RadioButtonTS)c).Checked.ToString());
+                            else if (c.GetType() == typeof(TextBoxTS))
+                            {
+                                if (((TextBoxTS)c).ReadOnly == false)
+                                    a.Add(c.Name + "/" + ((TextBoxTS)c).Text);
+                            }
+                            else if (c.GetType() == typeof(TrackBarTS))
+                                a.Add(c.Name + "/" + ((TrackBarTS)c).Value.ToString());
+                            else if (c.GetType() == typeof(PrettyTrackBar))
+                                a.Add(c.Name + "/" + ((PrettyTrackBar)c).Value.ToString());
 #if(DEBUG)
                         else if (c.GetType() == typeof(GroupBox) ||
                             c.GetType() == typeof(CheckBox) ||
@@ -8371,498 +8353,518 @@ namespace PowerSDR
                             c.GetType() == typeof(TrackBar))
                             Debug.WriteLine(c.Name + " needs to be converted to a Thread Safe control.");
 #endif
+                        }
                     }
                 }
-            }
 
-            //  string ver_num = TitleBar.GetVerNum();
+                //  string ver_num = TitleBar.GetVerNum();
 
-            a.Add("current_datetime_mode/" + (int)current_datetime_mode);
-            a.Add("rx1_display_cal_offset/" + rx1_display_cal_offset.ToString("f3"));
-            a.Add("rx1_meter_cal_offset/" + rx1_meter_cal_offset);
+                a.Add("current_datetime_mode/" + (int)current_datetime_mode);
+                a.Add("rx1_display_cal_offset/" + rx1_display_cal_offset.ToString("f3"));
+                a.Add("rx1_meter_cal_offset/" + rx1_meter_cal_offset);
 
-            a.Add("rx2_display_cal_offset/" + rx2_display_cal_offset.ToString("f3"));
-            a.Add("rx2_meter_cal_offset/" + rx2_meter_cal_offset);
+                a.Add("rx2_display_cal_offset/" + rx2_display_cal_offset.ToString("f3"));
+                a.Add("rx2_meter_cal_offset/" + rx2_meter_cal_offset);
 
-            a.Add("txtMemoryQuick/" + txtMemoryQuick.Text);		// save quick memory settings
-            a.Add("quick_save_mode/" + (int)quick_save_mode);
-            a.Add("quick_save_filter/" + (int)quick_save_filter);
+                a.Add("txtMemoryQuick/" + txtMemoryQuick.Text);		// save quick memory settings
+                a.Add("quick_save_mode/" + (int)quick_save_mode);
+                a.Add("quick_save_filter/" + (int)quick_save_filter);
 
-            // a.Add("fwc_last_cal_date_time/" + fwc_last_cal_date_time);
-            //  a.Add("fwc_serial_num/" + fwc_serial_num);
-            //  a.Add("fwc_trx_serial_num/" + fwc_trx_serial_num);
+                // a.Add("fwc_last_cal_date_time/" + fwc_last_cal_date_time);
+                //  a.Add("fwc_serial_num/" + fwc_serial_num);
+                //  a.Add("fwc_trx_serial_num/" + fwc_trx_serial_num);
 
-            //  a.Add("rx2_last_cal_date_time/" + rx2_last_cal_date_time);
-            //  a.Add("rx2_serial_num/" + rx2_serial_num);
-            //  a.Add("rx2_trx_match_serial/" + rx2_trx_match_serial);
+                //  a.Add("rx2_last_cal_date_time/" + rx2_last_cal_date_time);
+                //  a.Add("rx2_serial_num/" + rx2_serial_num);
+                //  a.Add("rx2_trx_match_serial/" + rx2_trx_match_serial);
 
-            //FM Squelch Save
-            a.Add("rx1_squelch_on/" + rx1_squelch_on);
-            a.Add("rx1_squelch_threshold_scroll/" + rx1_squelch_threshold_scroll);
-            a.Add("rx1_fm_squelch_threshold_scroll/" + rx1_fm_squelch_threshold_scroll);
+                //FM Squelch Save
+                a.Add("rx1_squelch_on/" + rx1_squelch_on);
+                a.Add("rx1_squelch_threshold_scroll/" + rx1_squelch_threshold_scroll);
+                a.Add("rx1_fm_squelch_threshold_scroll/" + rx1_fm_squelch_threshold_scroll);
 
-            a.Add("rx2_squelch_on/" + rx2_squelch_on);
-            a.Add("rx2_squelch_threshold_scroll/" + rx2_squelch_threshold_scroll);
-            a.Add("rx2_fm_squelch_threshold_scroll/" + rx2_fm_squelch_threshold_scroll);
+                a.Add("rx2_squelch_on/" + rx2_squelch_on);
+                a.Add("rx2_squelch_threshold_scroll/" + rx2_squelch_threshold_scroll);
+                a.Add("rx2_fm_squelch_threshold_scroll/" + rx2_fm_squelch_threshold_scroll);
 
-            a.Add("center_frequency/" + center_frequency);
-            a.Add("center_rx2_frequency/" + center_rx2_frequency);
+                a.Add("center_frequency/" + center_frequency);
+                a.Add("center_rx2_frequency/" + center_rx2_frequency);
 
-            a.Add("waterfall_high_threshold_160m/" + waterfall_high_threshold_160m);
-            a.Add("waterfall_low_threshold_160m/" + waterfall_low_threshold_160m);
-            a.Add("waterfall_high_threshold_80m/" + waterfall_high_threshold_80m);
-            a.Add("waterfall_low_threshold_80m/" + waterfall_low_threshold_80m);
-            a.Add("waterfall_high_threshold_60m/" + waterfall_high_threshold_60m);
-            a.Add("waterfall_low_threshold_60m/" + waterfall_low_threshold_60m);
-            a.Add("waterfall_high_threshold_40m/" + waterfall_high_threshold_40m);
-            a.Add("waterfall_low_threshold_40m/" + waterfall_low_threshold_40m);
-            a.Add("waterfall_high_threshold_30m/" + waterfall_high_threshold_30m);
-            a.Add("waterfall_low_threshold_30m/" + waterfall_low_threshold_30m);
-            a.Add("waterfall_high_threshold_20m/" + waterfall_high_threshold_20m);
-            a.Add("waterfall_low_threshold_20m/" + waterfall_low_threshold_20m);
-            a.Add("waterfall_high_threshold_17m/" + waterfall_high_threshold_17m);
-            a.Add("waterfall_low_threshold_17m/" + waterfall_low_threshold_17m);
-            a.Add("waterfall_high_threshold_15m/" + waterfall_high_threshold_15m);
-            a.Add("waterfall_low_threshold_15m/" + waterfall_low_threshold_15m);
-            a.Add("waterfall_high_threshold_12m/" + waterfall_high_threshold_12m);
-            a.Add("waterfall_low_threshold_12m/" + waterfall_low_threshold_12m);
-            a.Add("waterfall_high_threshold_10m/" + waterfall_high_threshold_10m);
-            a.Add("waterfall_low_threshold_10m/" + waterfall_low_threshold_10m);
-            a.Add("waterfall_high_threshold_6m/" + waterfall_high_threshold_6m);
-            a.Add("waterfall_low_threshold_6m/" + waterfall_low_threshold_6m);
-            a.Add("waterfall_high_threshold_wwv/" + waterfall_high_threshold_wwv);
-            a.Add("waterfall_low_threshold_wwv/" + waterfall_low_threshold_wwv);
-            a.Add("waterfall_high_threshold_gen/" + waterfall_high_threshold_gen);
-            a.Add("waterfall_low_threshold_gen/" + waterfall_low_threshold_gen);
-            a.Add("waterfall_high_threshold_xvtr/" + waterfall_high_threshold_xvtr);
-            a.Add("waterfall_low_threshold_xvtr/" + waterfall_low_threshold_xvtr);
+                a.Add("waterfall_high_threshold_160m/" + waterfall_high_threshold_160m);
+                a.Add("waterfall_low_threshold_160m/" + waterfall_low_threshold_160m);
+                a.Add("waterfall_high_threshold_80m/" + waterfall_high_threshold_80m);
+                a.Add("waterfall_low_threshold_80m/" + waterfall_low_threshold_80m);
+                a.Add("waterfall_high_threshold_60m/" + waterfall_high_threshold_60m);
+                a.Add("waterfall_low_threshold_60m/" + waterfall_low_threshold_60m);
+                a.Add("waterfall_high_threshold_40m/" + waterfall_high_threshold_40m);
+                a.Add("waterfall_low_threshold_40m/" + waterfall_low_threshold_40m);
+                a.Add("waterfall_high_threshold_30m/" + waterfall_high_threshold_30m);
+                a.Add("waterfall_low_threshold_30m/" + waterfall_low_threshold_30m);
+                a.Add("waterfall_high_threshold_20m/" + waterfall_high_threshold_20m);
+                a.Add("waterfall_low_threshold_20m/" + waterfall_low_threshold_20m);
+                a.Add("waterfall_high_threshold_17m/" + waterfall_high_threshold_17m);
+                a.Add("waterfall_low_threshold_17m/" + waterfall_low_threshold_17m);
+                a.Add("waterfall_high_threshold_15m/" + waterfall_high_threshold_15m);
+                a.Add("waterfall_low_threshold_15m/" + waterfall_low_threshold_15m);
+                a.Add("waterfall_high_threshold_12m/" + waterfall_high_threshold_12m);
+                a.Add("waterfall_low_threshold_12m/" + waterfall_low_threshold_12m);
+                a.Add("waterfall_high_threshold_10m/" + waterfall_high_threshold_10m);
+                a.Add("waterfall_low_threshold_10m/" + waterfall_low_threshold_10m);
+                a.Add("waterfall_high_threshold_6m/" + waterfall_high_threshold_6m);
+                a.Add("waterfall_low_threshold_6m/" + waterfall_low_threshold_6m);
+                a.Add("waterfall_high_threshold_wwv/" + waterfall_high_threshold_wwv);
+                a.Add("waterfall_low_threshold_wwv/" + waterfall_low_threshold_wwv);
+                a.Add("waterfall_high_threshold_gen/" + waterfall_high_threshold_gen);
+                a.Add("waterfall_low_threshold_gen/" + waterfall_low_threshold_gen);
+                a.Add("waterfall_high_threshold_xvtr/" + waterfall_high_threshold_xvtr);
+                a.Add("waterfall_low_threshold_xvtr/" + waterfall_low_threshold_xvtr);
 
-            a.Add("rx2_waterfall_high_threshold_160m/" + rx2_waterfall_high_threshold_160m);
-            a.Add("rx2_waterfall_low_threshold_160m/" + rx2_waterfall_low_threshold_160m);
-            a.Add("rx2_waterfall_high_threshold_80m/" + rx2_waterfall_high_threshold_80m);
-            a.Add("rx2_waterfall_low_threshold_80m/" + rx2_waterfall_low_threshold_80m);
-            a.Add("rx2_waterfall_high_threshold_60m/" + rx2_waterfall_high_threshold_60m);
-            a.Add("rx2_waterfall_low_threshold_60m/" + rx2_waterfall_low_threshold_60m);
-            a.Add("rx2_waterfall_high_threshold_40m/" + rx2_waterfall_high_threshold_40m);
-            a.Add("rx2_waterfall_low_threshold_40m/" + rx2_waterfall_low_threshold_40m);
-            a.Add("rx2_waterfall_high_threshold_30m/" + rx2_waterfall_high_threshold_30m);
-            a.Add("rx2_waterfall_low_threshold_30m/" + rx2_waterfall_low_threshold_30m);
-            a.Add("rx2_waterfall_high_threshold_20m/" + rx2_waterfall_high_threshold_20m);
-            a.Add("rx2_waterfall_low_threshold_20m/" + rx2_waterfall_low_threshold_20m);
-            a.Add("rx2_waterfall_high_threshold_17m/" + rx2_waterfall_high_threshold_17m);
-            a.Add("rx2_waterfall_low_threshold_17m/" + rx2_waterfall_low_threshold_17m);
-            a.Add("rx2_waterfall_high_threshold_15m/" + rx2_waterfall_high_threshold_15m);
-            a.Add("rx2_waterfall_low_threshold_15m/" + rx2_waterfall_low_threshold_15m);
-            a.Add("rx2_waterfall_high_threshold_12m/" + rx2_waterfall_high_threshold_12m);
-            a.Add("rx2_waterfall_low_threshold_12m/" + rx2_waterfall_low_threshold_12m);
-            a.Add("rx2_waterfall_high_threshold_10m/" + rx2_waterfall_high_threshold_10m);
-            a.Add("rx2_waterfall_low_threshold_10m/" + rx2_waterfall_low_threshold_10m);
-            a.Add("rx2_waterfall_high_threshold_6m/" + rx2_waterfall_high_threshold_6m);
-            a.Add("rx2_waterfall_low_threshold_6m/" + rx2_waterfall_low_threshold_6m);
-            a.Add("rx2_waterfall_high_threshold_wwv/" + rx2_waterfall_high_threshold_wwv);
-            a.Add("rx2_waterfall_low_threshold_wwv/" + rx2_waterfall_low_threshold_wwv);
-            a.Add("rx2_waterfall_high_threshold_gen/" + rx2_waterfall_high_threshold_gen);
-            a.Add("rx2_waterfall_low_threshold_gen/" + rx2_waterfall_low_threshold_gen);
-            a.Add("rx2_waterfall_high_threshold_xvtr/" + rx2_waterfall_high_threshold_xvtr);
-            a.Add("rx2_waterfall_low_threshold_xvtr/" + rx2_waterfall_low_threshold_xvtr);
+                a.Add("rx2_waterfall_high_threshold_160m/" + rx2_waterfall_high_threshold_160m);
+                a.Add("rx2_waterfall_low_threshold_160m/" + rx2_waterfall_low_threshold_160m);
+                a.Add("rx2_waterfall_high_threshold_80m/" + rx2_waterfall_high_threshold_80m);
+                a.Add("rx2_waterfall_low_threshold_80m/" + rx2_waterfall_low_threshold_80m);
+                a.Add("rx2_waterfall_high_threshold_60m/" + rx2_waterfall_high_threshold_60m);
+                a.Add("rx2_waterfall_low_threshold_60m/" + rx2_waterfall_low_threshold_60m);
+                a.Add("rx2_waterfall_high_threshold_40m/" + rx2_waterfall_high_threshold_40m);
+                a.Add("rx2_waterfall_low_threshold_40m/" + rx2_waterfall_low_threshold_40m);
+                a.Add("rx2_waterfall_high_threshold_30m/" + rx2_waterfall_high_threshold_30m);
+                a.Add("rx2_waterfall_low_threshold_30m/" + rx2_waterfall_low_threshold_30m);
+                a.Add("rx2_waterfall_high_threshold_20m/" + rx2_waterfall_high_threshold_20m);
+                a.Add("rx2_waterfall_low_threshold_20m/" + rx2_waterfall_low_threshold_20m);
+                a.Add("rx2_waterfall_high_threshold_17m/" + rx2_waterfall_high_threshold_17m);
+                a.Add("rx2_waterfall_low_threshold_17m/" + rx2_waterfall_low_threshold_17m);
+                a.Add("rx2_waterfall_high_threshold_15m/" + rx2_waterfall_high_threshold_15m);
+                a.Add("rx2_waterfall_low_threshold_15m/" + rx2_waterfall_low_threshold_15m);
+                a.Add("rx2_waterfall_high_threshold_12m/" + rx2_waterfall_high_threshold_12m);
+                a.Add("rx2_waterfall_low_threshold_12m/" + rx2_waterfall_low_threshold_12m);
+                a.Add("rx2_waterfall_high_threshold_10m/" + rx2_waterfall_high_threshold_10m);
+                a.Add("rx2_waterfall_low_threshold_10m/" + rx2_waterfall_low_threshold_10m);
+                a.Add("rx2_waterfall_high_threshold_6m/" + rx2_waterfall_high_threshold_6m);
+                a.Add("rx2_waterfall_low_threshold_6m/" + rx2_waterfall_low_threshold_6m);
+                a.Add("rx2_waterfall_high_threshold_wwv/" + rx2_waterfall_high_threshold_wwv);
+                a.Add("rx2_waterfall_low_threshold_wwv/" + rx2_waterfall_low_threshold_wwv);
+                a.Add("rx2_waterfall_high_threshold_gen/" + rx2_waterfall_high_threshold_gen);
+                a.Add("rx2_waterfall_low_threshold_gen/" + rx2_waterfall_low_threshold_gen);
+                a.Add("rx2_waterfall_high_threshold_xvtr/" + rx2_waterfall_high_threshold_xvtr);
+                a.Add("rx2_waterfall_low_threshold_xvtr/" + rx2_waterfall_low_threshold_xvtr);
 
-            a.Add("display_grid_max_160m/" + display_grid_max_160m);
-            a.Add("display_grid_min_160m/" + display_grid_min_160m);
-            a.Add("display_grid_max_80m/" + display_grid_max_80m);
-            a.Add("display_grid_min_80m/" + display_grid_min_80m);
-            a.Add("display_grid_max_60m/" + display_grid_max_60m);
-            a.Add("display_grid_min_60m/" + display_grid_min_60m);
-            a.Add("display_grid_max_40m/" + display_grid_max_40m);
-            a.Add("display_grid_min_40m/" + display_grid_min_40m);
-            a.Add("display_grid_max_30m/" + display_grid_max_30m);
-            a.Add("display_grid_min_30m/" + display_grid_min_30m);
-            a.Add("display_grid_max_20m/" + display_grid_max_20m);
-            a.Add("display_grid_min_20m/" + display_grid_min_20m);
-            a.Add("display_grid_max_17m/" + display_grid_max_17m);
-            a.Add("display_grid_min_17m/" + display_grid_min_17m);
-            a.Add("display_grid_max_15m/" + display_grid_max_15m);
-            a.Add("display_grid_min_15m/" + display_grid_min_15m);
-            a.Add("display_grid_max_12m/" + display_grid_max_12m);
-            a.Add("display_grid_min_12m/" + display_grid_min_12m);
-            a.Add("display_grid_max_10m/" + display_grid_max_10m);
-            a.Add("display_grid_min_10m/" + display_grid_min_10m);
-            a.Add("display_grid_max_6m/" + display_grid_max_6m);
-            a.Add("display_grid_min_6m/" + display_grid_min_6m);
-            a.Add("display_grid_max_wwv/" + display_grid_max_wwv);
-            a.Add("display_grid_min_wwv/" + display_grid_min_wwv);
-            a.Add("display_grid_max_gen/" + display_grid_max_gen);
-            a.Add("display_grid_min_gen/" + display_grid_min_gen);
-            a.Add("display_grid_max_xvtr/" + display_grid_max_xvtr);
-            a.Add("display_grid_min_xvtr/" + display_grid_min_xvtr);
+                a.Add("display_grid_max_160m/" + display_grid_max_160m);
+                a.Add("display_grid_min_160m/" + display_grid_min_160m);
+                a.Add("display_grid_max_80m/" + display_grid_max_80m);
+                a.Add("display_grid_min_80m/" + display_grid_min_80m);
+                a.Add("display_grid_max_60m/" + display_grid_max_60m);
+                a.Add("display_grid_min_60m/" + display_grid_min_60m);
+                a.Add("display_grid_max_40m/" + display_grid_max_40m);
+                a.Add("display_grid_min_40m/" + display_grid_min_40m);
+                a.Add("display_grid_max_30m/" + display_grid_max_30m);
+                a.Add("display_grid_min_30m/" + display_grid_min_30m);
+                a.Add("display_grid_max_20m/" + display_grid_max_20m);
+                a.Add("display_grid_min_20m/" + display_grid_min_20m);
+                a.Add("display_grid_max_17m/" + display_grid_max_17m);
+                a.Add("display_grid_min_17m/" + display_grid_min_17m);
+                a.Add("display_grid_max_15m/" + display_grid_max_15m);
+                a.Add("display_grid_min_15m/" + display_grid_min_15m);
+                a.Add("display_grid_max_12m/" + display_grid_max_12m);
+                a.Add("display_grid_min_12m/" + display_grid_min_12m);
+                a.Add("display_grid_max_10m/" + display_grid_max_10m);
+                a.Add("display_grid_min_10m/" + display_grid_min_10m);
+                a.Add("display_grid_max_6m/" + display_grid_max_6m);
+                a.Add("display_grid_min_6m/" + display_grid_min_6m);
+                a.Add("display_grid_max_wwv/" + display_grid_max_wwv);
+                a.Add("display_grid_min_wwv/" + display_grid_min_wwv);
+                a.Add("display_grid_max_gen/" + display_grid_max_gen);
+                a.Add("display_grid_min_gen/" + display_grid_min_gen);
+                a.Add("display_grid_max_xvtr/" + display_grid_max_xvtr);
+                a.Add("display_grid_min_xvtr/" + display_grid_min_xvtr);
 
-            a.Add("rx2_display_grid_max_160m/" + rx2_display_grid_max_160m);
-            a.Add("rx2_display_grid_min_160m/" + rx2_display_grid_min_160m);
-            a.Add("rx2_display_grid_max_80m/" + rx2_display_grid_max_80m);
-            a.Add("rx2_display_grid_min_80m/" + rx2_display_grid_min_80m);
-            a.Add("rx2_display_grid_max_60m/" + rx2_display_grid_max_60m);
-            a.Add("rx2_display_grid_min_60m/" + rx2_display_grid_min_60m);
-            a.Add("rx2_display_grid_max_40m/" + rx2_display_grid_max_40m);
-            a.Add("rx2_display_grid_min_40m/" + rx2_display_grid_min_40m);
-            a.Add("rx2_display_grid_max_30m/" + rx2_display_grid_max_30m);
-            a.Add("rx2_display_grid_min_30m/" + rx2_display_grid_min_30m);
-            a.Add("rx2_display_grid_max_20m/" + rx2_display_grid_max_20m);
-            a.Add("rx2_display_grid_min_20m/" + rx2_display_grid_min_20m);
-            a.Add("rx2_display_grid_max_17m/" + rx2_display_grid_max_17m);
-            a.Add("rx2_display_grid_min_17m/" + rx2_display_grid_min_17m);
-            a.Add("rx2_display_grid_max_15m/" + rx2_display_grid_max_15m);
-            a.Add("rx2_display_grid_min_15m/" + rx2_display_grid_min_15m);
-            a.Add("rx2_display_grid_max_12m/" + rx2_display_grid_max_12m);
-            a.Add("rx2_display_grid_min_12m/" + rx2_display_grid_min_12m);
-            a.Add("rx2_display_grid_max_10m/" + rx2_display_grid_max_10m);
-            a.Add("rx2_display_grid_min_10m/" + rx2_display_grid_min_10m);
-            a.Add("rx2_display_grid_max_6m/" + rx2_display_grid_max_6m);
-            a.Add("rx2_display_grid_min_6m/" + rx2_display_grid_min_6m);
-            a.Add("rx2_display_grid_max_wwv/" + rx2_display_grid_max_wwv);
-            a.Add("rx2_display_grid_min_wwv/" + rx2_display_grid_min_wwv);
-            a.Add("rx2_display_grid_max_gen/" + rx2_display_grid_max_gen);
-            a.Add("rx2_display_grid_min_gen/" + rx2_display_grid_min_gen);
-            a.Add("rx2_display_grid_max_xvtr/" + rx2_display_grid_max_xvtr);
-            a.Add("rx2_display_grid_min_xvtr/" + rx2_display_grid_min_xvtr);
+                a.Add("rx2_display_grid_max_160m/" + rx2_display_grid_max_160m);
+                a.Add("rx2_display_grid_min_160m/" + rx2_display_grid_min_160m);
+                a.Add("rx2_display_grid_max_80m/" + rx2_display_grid_max_80m);
+                a.Add("rx2_display_grid_min_80m/" + rx2_display_grid_min_80m);
+                a.Add("rx2_display_grid_max_60m/" + rx2_display_grid_max_60m);
+                a.Add("rx2_display_grid_min_60m/" + rx2_display_grid_min_60m);
+                a.Add("rx2_display_grid_max_40m/" + rx2_display_grid_max_40m);
+                a.Add("rx2_display_grid_min_40m/" + rx2_display_grid_min_40m);
+                a.Add("rx2_display_grid_max_30m/" + rx2_display_grid_max_30m);
+                a.Add("rx2_display_grid_min_30m/" + rx2_display_grid_min_30m);
+                a.Add("rx2_display_grid_max_20m/" + rx2_display_grid_max_20m);
+                a.Add("rx2_display_grid_min_20m/" + rx2_display_grid_min_20m);
+                a.Add("rx2_display_grid_max_17m/" + rx2_display_grid_max_17m);
+                a.Add("rx2_display_grid_min_17m/" + rx2_display_grid_min_17m);
+                a.Add("rx2_display_grid_max_15m/" + rx2_display_grid_max_15m);
+                a.Add("rx2_display_grid_min_15m/" + rx2_display_grid_min_15m);
+                a.Add("rx2_display_grid_max_12m/" + rx2_display_grid_max_12m);
+                a.Add("rx2_display_grid_min_12m/" + rx2_display_grid_min_12m);
+                a.Add("rx2_display_grid_max_10m/" + rx2_display_grid_max_10m);
+                a.Add("rx2_display_grid_min_10m/" + rx2_display_grid_min_10m);
+                a.Add("rx2_display_grid_max_6m/" + rx2_display_grid_max_6m);
+                a.Add("rx2_display_grid_min_6m/" + rx2_display_grid_min_6m);
+                a.Add("rx2_display_grid_max_wwv/" + rx2_display_grid_max_wwv);
+                a.Add("rx2_display_grid_min_wwv/" + rx2_display_grid_min_wwv);
+                a.Add("rx2_display_grid_max_gen/" + rx2_display_grid_max_gen);
+                a.Add("rx2_display_grid_min_gen/" + rx2_display_grid_min_gen);
+                a.Add("rx2_display_grid_max_xvtr/" + rx2_display_grid_max_xvtr);
+                a.Add("rx2_display_grid_min_xvtr/" + rx2_display_grid_min_xvtr);
 
-            for (int m = (int)DSPMode.FIRST + 1; m < (int)DSPMode.LAST; m++)
-            {	// save filter settings per mode
-                for (Filter f = Filter.FIRST + 1; f < Filter.LAST; f++)
-                {
-                    a.Add("rx1_filters[" + m.ToString() + "][" + ((int)f).ToString() + "]/" + rx1_filters[m].ToString(f));
+                for (int m = (int)DSPMode.FIRST + 1; m < (int)DSPMode.LAST; m++)
+                {	// save filter settings per mode
+                    for (Filter f = Filter.FIRST + 1; f < Filter.LAST; f++)
+                    {
+                        a.Add("rx1_filters[" + m.ToString() + "][" + ((int)f).ToString() + "]/" + rx1_filters[m].ToString(f));
+                    }
+                    a.Add("last_rx1_filter[" + m.ToString() + "]/" + rx1_filters[m].LastFilter.ToString());
                 }
-                a.Add("last_rx1_filter[" + m.ToString() + "]/" + rx1_filters[m].LastFilter.ToString());
-            }
 
-            for (int m = (int)DSPMode.FIRST + 1; m < (int)DSPMode.LAST; m++)
-            {	// save filter settings per mode
-                for (Filter f = Filter.FIRST + 1; f < Filter.LAST; f++)
-                {
-                    a.Add("rx2_filters[" + m.ToString() + "][" + ((int)f).ToString() + "]/" + rx2_filters[m].ToString(f));
+                for (int m = (int)DSPMode.FIRST + 1; m < (int)DSPMode.LAST; m++)
+                {	// save filter settings per mode
+                    for (Filter f = Filter.FIRST + 1; f < Filter.LAST; f++)
+                    {
+                        a.Add("rx2_filters[" + m.ToString() + "][" + ((int)f).ToString() + "]/" + rx2_filters[m].ToString(f));
+                    }
+                    a.Add("last_rx2_filter[" + m.ToString() + "]/" + rx2_filters[m].LastFilter.ToString());
                 }
-                a.Add("last_rx2_filter[" + m.ToString() + "]/" + rx2_filters[m].LastFilter.ToString());
-            }
 
-            for (int i = 0; i < NotchList.List.Count; i++)
-            {
-                // only save off the permanent notches (ones where a right-click remember has been performed)
-                if (NotchList.List[i].Permanent)
+                for (int i = 0; i < NotchList.List.Count; i++)
                 {
-                    a.Add("notchlist[" + i + "]/" + NotchList.List[i].ToString());
+                    // only save off the permanent notches (ones where a right-click remember has been performed)
+                    if (NotchList.List[i].Permanent)
+                    {
+                        a.Add("notchlist[" + i + "]/" + NotchList.List[i].ToString());
+                    }
                 }
-            }
 
-            /* for (int i = 0; i < (int)Band.LAST; i++)
-             {
-                 s = "power_table[" + i + "]/";
-                 for (int j = 0; j < 13; j++)
-                     s += power_table[i][j].ToString("f4") + "|";
-                 s = s.Substring(0, s.Length - 1);
-                 a.Add(s);
-             }
+                /* for (int i = 0; i < (int)Band.LAST; i++)
+                 {
+                     s = "power_table[" + i + "]/";
+                     for (int j = 0; j < 13; j++)
+                         s += power_table[i][j].ToString("f4") + "|";
+                     s = s.Substring(0, s.Length - 1);
+                     a.Add(s);
+                 }
 
-             for (int i = 0; i < (int)Band.LAST; i++)
-             {
-                 s = "tx_carrier_table[" + i + "]/";
-                 for (int j = 0; j < 4; j++)
-                     s += tx_carrier_table[i][j].ToString() + "|";
-                 s = s.Substring(0, s.Length - 1);
-                 a.Add(s);
-             }
+                 for (int i = 0; i < (int)Band.LAST; i++)
+                 {
+                     s = "tx_carrier_table[" + i + "]/";
+                     for (int j = 0; j < 4; j++)
+                         s += tx_carrier_table[i][j].ToString() + "|";
+                     s = s.Substring(0, s.Length - 1);
+                     a.Add(s);
+                 }
 
-             for (int i = 0; i < 4; i++)
-             {
-                 s = "pa_bias_table[" + i + "]/";
-                 for (int j = 0; j < 8; j++)
-                     s += pa_bias_table[i][j].ToString() + "|";
-                 s = s.Substring(0, s.Length - 1);
-                 a.Add(s);
-             } */
+                 for (int i = 0; i < 4; i++)
+                 {
+                     s = "pa_bias_table[" + i + "]/";
+                     for (int j = 0; j < 8; j++)
+                         s += pa_bias_table[i][j].ToString() + "|";
+                     s = s.Substring(0, s.Length - 1);
+                     a.Add(s);
+                 } */
 
-            for (int i = 0; i < (int)Band.LAST; i++)
-            {
-                s = "rx1_level_table[" + i + "]/";
-                for (int j = 0; j < 3; j++)
-                    s += rx1_level_table[i][j].ToString("f3") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
-            }
-
-            for (int i = 0; i < (int)Band.LAST; i++)
-            {
-                s = "rx2_level_table[" + i + "]/";
-                for (int j = 0; j < 3; j++)
-                    s += rx2_level_table[i][j].ToString("f3") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
-            }
-
-            /*  for (int i = 0; i < (int)Band.LAST; i++)
-              {
-                  s = "pa_bridge_table[" + i + "]/";
-                  for (int j = 0; j < 6; j++)
-                      s += pa_bridge_table[i][j].ToString("f4") + "|";
-                  s = s.Substring(0, s.Length - 1);
-                  a.Add(s);
-              } */
-
-            /*   for (int i = 0; i < (int)Band.LAST; i++)
-               {
-                   s = "swr_table[" + i + "]/";
-                   s += swr_table[i].ToString("f4");
-                   a.Add(s);
-               }
-
-               for (int i = 0; i < (int)Band.LAST; i++)
-               {
-                   s = "atu_swr_table[" + i + "]/";
-                   s += atu_swr_table[i].ToString("f4");
-                   a.Add(s);
-               }
-
-              // a.Add("current_ant_mode/" + ((int)current_ant_mode).ToString());
-               a.Add("rx1_ant/" + ((int)rx1_ant).ToString());
-               s = "rx1_ant_by_band/";
-               for (int i = 0; i < (int)Band.LAST; i++)
-                   s += ((int)rx1_ant_by_band[i]).ToString() + "|";
-               s = s.Substring(0, s.Length - 1);
-               a.Add(s);
-               a.Add("rx1_loop/" + rx1_loop.ToString());
-
-               a.Add("rx2_ant/" + ((int)rx2_ant).ToString());
-               s = "rx2_ant_by_band/";
-               for (int i = 0; i < (int)Band.LAST; i++)
-                   s += ((int)rx2_ant_by_band[i]).ToString() + "|";
-               s = s.Substring(0, s.Length - 1);
-               a.Add(s);
-
-               a.Add("tx_ant/" + ((int)tx_ant).ToString());
-               s = "tx_ant_by_band/";
-               for (int i = 0; i < (int)Band.LAST; i++)
-                   s += ((int)tx_ant_by_band[i]).ToString() + "|";
-               s = s.Substring(0, s.Length - 1);
-               a.Add(s);
-
-               s = "rx1_loop_by_band/";
-               for (int i = 0; i < (int)Band.LAST; i++)
-                   s += Convert.ToUInt16(rx1_loop_by_band[i]).ToString() + "|";
-               s = s.Substring(0, s.Length - 1);
-               a.Add(s); */
-
-            rx1_preamp_by_band[(int)rx1_band] = rx1_preamp_mode;
-            s = "rx1_preamp_by_band/";
-            for (int i = 0; i < (int)Band.LAST; i++)
-                s += ((int)rx1_preamp_by_band[i]).ToString() + "|";
-            s = s.Substring(0, s.Length - 1);
-            a.Add(s);
-
-            rx2_preamp_by_band[(int)rx2_band] = rx2_preamp_mode;
-            s = "rx2_preamp_by_band/";
-            for (int i = 0; i < (int)Band.LAST; i++)
-                s += ((int)rx2_preamp_by_band[i]).ToString() + "|";
-            s = s.Substring(0, s.Length - 1);
-            a.Add(s);
-
-            s = "power_by_band/";
-            for (int i = 0; i < (int)Band.LAST; i++)
-                s += power_by_band[i].ToString() + "|";
-            s = s.Substring(0, s.Length - 1);
-            a.Add(s);
-
-            s = "fm_tx_offset_by_band_mhz/";
-            for (int i = 0; i < (int)Band.LAST; i++)
-                s += fm_tx_offset_by_band_mhz[i].ToString("R") + "|";
-            s = s.Substring(0, s.Length - 1);
-            a.Add(s);
-
-            s = "rx1_agct_by_band/";
-            for (int i = 0; i < (int)Band.LAST; i++)
-                s += rx1_agct_by_band[i].ToString() + "|";
-            s = s.Substring(0, s.Length - 1);
-            a.Add(s);
-
-            s = "rx2_agct_by_band/";
-            for (int i = 0; i < (int)Band.LAST; i++)
-                s += rx2_agct_by_band[i].ToString() + "|";
-            s = s.Substring(0, s.Length - 1);
-            a.Add(s);
-
-            /*    s = "tx1_by_band/";
                 for (int i = 0; i < (int)Band.LAST; i++)
-                    s += Convert.ToUInt16(tx1_by_band[i]).ToString() + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+                {
+                    s = "rx1_level_table[" + i + "]/";
+                    for (int j = 0; j < 3; j++)
+                        s += rx1_level_table[i][j].ToString("f3") + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+                }
 
-                s = "tx2_by_band/";
                 for (int i = 0; i < (int)Band.LAST; i++)
-                    s += Convert.ToUInt16(tx2_by_band[i]).ToString() + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+                {
+                    s = "rx2_level_table[" + i + "]/";
+                    for (int j = 0; j < 3; j++)
+                        s += rx2_level_table[i][j].ToString("f3") + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+                }
 
-                s = "tx3_by_band/";
-                for (int i = 0; i < (int)Band.LAST; i++)
-                    s += Convert.ToUInt16(tx3_by_band[i]).ToString() + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+                /*  for (int i = 0; i < (int)Band.LAST; i++)
+                  {
+                      s = "pa_bridge_table[" + i + "]/";
+                      for (int j = 0; j < 6; j++)
+                          s += pa_bridge_table[i][j].ToString("f4") + "|";
+                      s = s.Substring(0, s.Length - 1);
+                      a.Add(s);
+                  } */
 
-                s = "rx1_image_gain_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += rx1_image_gain_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
-
-                s = "rx1_image_phase_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += rx1_image_phase_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
-
-                s = "rx2_image_gain_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += rx2_image_gain_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
-
-                s = "rx2_image_phase_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += rx2_image_phase_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
-
-                s = "tx_image_gain_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += tx_image_gain_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
-
-                s = "tx_image_phase_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += tx_image_phase_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
-
-                a.Add("rx1_level_checksum/" + rx1_level_checksum.ToString());
-                a.Add("rx1_image_gain_checksum/" + rx1_image_gain_checksum.ToString());
-                a.Add("rx1_image_phase_checksum/" + rx1_image_phase_checksum.ToString());
-                a.Add("tx_image_gain_checksum/" + tx_image_gain_checksum.ToString());
-                a.Add("tx_image_phase_checksum/" + tx_image_phase_checksum.ToString());
-                a.Add("tx_carrier_checksum/" + tx_carrier_checksum.ToString());
-                a.Add("pa_bias_checksum/" + pa_bias_checksum.ToString());
-                a.Add("pa_bridge_checksum/" + pa_bridge_checksum.ToString());
-                a.Add("pa_power_checksum/" + pa_power_checksum.ToString());
-                a.Add("pa_swr_checksum/" + pa_swr_checksum.ToString());
-                a.Add("atu_swr_checksum/" + atu_swr_checksum.ToString());
-                a.Add("rx2_level_checksum/" + rx2_level_checksum.ToString());
-                a.Add("rx2_image_gain_checksum/" + rx2_image_gain_checksum.ToString());
-                a.Add("rx2_image_phase_checksum/" + rx2_image_phase_checksum.ToString());
-                */
-            /*   try
-               {
-                   StreamWriter writer = new StreamWriter(app_data_path + "\\power.csv");
-                   writer.WriteLine("Band, 1, 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100");
-                   for (int i = 1; i <= (int)Band.B6M; i++)
+                /*   for (int i = 0; i < (int)Band.LAST; i++)
                    {
-                       writer.Write(((Band)i).ToString() + ",");
-                       for (int j = 0; j < 13; j++)
-                           writer.Write(power_table[i][j].ToString("f4") + ",");
-                       writer.WriteLine("");
+                       s = "swr_table[" + i + "]/";
+                       s += swr_table[i].ToString("f4");
+                       a.Add(s);
                    }
-                   writer.Close();
-               }
-               catch (Exception)
-               {
-                   MessageBox.Show("Error writing power.csv file.  Please make sure this file is not open and try again.",
-                       "Error writing power.csv",
-                       MessageBoxButtons.OK,
-                       MessageBoxIcon.Error);
-               } */
 
-            /*try
-            {
-                StreamWriter writer = new StreamWriter(app_data_path+"\\rx1_level.csv");
-                writer.WriteLine("Band, 0, 1, 2");
-                for(int i=1; i<=(int)Band.B6M; i++)
+                   for (int i = 0; i < (int)Band.LAST; i++)
+                   {
+                       s = "atu_swr_table[" + i + "]/";
+                       s += atu_swr_table[i].ToString("f4");
+                       a.Add(s);
+                   }
+
+                  // a.Add("current_ant_mode/" + ((int)current_ant_mode).ToString());
+                   a.Add("rx1_ant/" + ((int)rx1_ant).ToString());
+                   s = "rx1_ant_by_band/";
+                   for (int i = 0; i < (int)Band.LAST; i++)
+                       s += ((int)rx1_ant_by_band[i]).ToString() + "|";
+                   s = s.Substring(0, s.Length - 1);
+                   a.Add(s);
+                   a.Add("rx1_loop/" + rx1_loop.ToString());
+
+                   a.Add("rx2_ant/" + ((int)rx2_ant).ToString());
+                   s = "rx2_ant_by_band/";
+                   for (int i = 0; i < (int)Band.LAST; i++)
+                       s += ((int)rx2_ant_by_band[i]).ToString() + "|";
+                   s = s.Substring(0, s.Length - 1);
+                   a.Add(s);
+
+                   a.Add("tx_ant/" + ((int)tx_ant).ToString());
+                   s = "tx_ant_by_band/";
+                   for (int i = 0; i < (int)Band.LAST; i++)
+                       s += ((int)tx_ant_by_band[i]).ToString() + "|";
+                   s = s.Substring(0, s.Length - 1);
+                   a.Add(s);
+
+                   s = "rx1_loop_by_band/";
+                   for (int i = 0; i < (int)Band.LAST; i++)
+                       s += Convert.ToUInt16(rx1_loop_by_band[i]).ToString() + "|";
+                   s = s.Substring(0, s.Length - 1);
+                   a.Add(s); */
+
+                rx1_preamp_by_band[(int)rx1_band] = rx1_preamp_mode;
+                s = "rx1_preamp_by_band/";
+                for (int i = 0; i < (int)Band.LAST; i++)
+                    s += ((int)rx1_preamp_by_band[i]).ToString() + "|";
+                s = s.Substring(0, s.Length - 1);
+                a.Add(s);
+
+                rx2_preamp_by_band[(int)rx2_band] = rx2_preamp_mode;
+                s = "rx2_preamp_by_band/";
+                for (int i = 0; i < (int)Band.LAST; i++)
+                    s += ((int)rx2_preamp_by_band[i]).ToString() + "|";
+                s = s.Substring(0, s.Length - 1);
+                a.Add(s);
+
+                rx1_step_attenuator_by_band[(int)rx1_band] = rx1_attenuator_data;
+                s = "rx1_step_attenuator_by_band/";
+                for (int i = 0; i < (int)Band.LAST; i++)
+                    s += ((int)rx1_step_attenuator_by_band[i]).ToString() + "|";
+                s = s.Substring(0, s.Length - 1);
+                a.Add(s);
+
+                rx2_step_attenuator_by_band[(int)rx2_band] = rx2_attenuator_data;
+                s = "rx2_step_attenuator_by_band/";
+                for (int i = 0; i < (int)Band.LAST; i++)
+                    s += ((int)rx2_step_attenuator_by_band[i]).ToString() + "|";
+                s = s.Substring(0, s.Length - 1);
+                a.Add(s);
+
+                s = "power_by_band/";
+                for (int i = 0; i < (int)Band.LAST; i++)
+                    s += power_by_band[i].ToString() + "|";
+                s = s.Substring(0, s.Length - 1);
+                a.Add(s);
+
+                s = "fm_tx_offset_by_band_mhz/";
+                for (int i = 0; i < (int)Band.LAST; i++)
+                    s += fm_tx_offset_by_band_mhz[i].ToString("R") + "|";
+                s = s.Substring(0, s.Length - 1);
+                a.Add(s);
+
+                s = "rx1_agct_by_band/";
+                for (int i = 0; i < (int)Band.LAST; i++)
+                    s += rx1_agct_by_band[i].ToString() + "|";
+                s = s.Substring(0, s.Length - 1);
+                a.Add(s);
+
+                s = "rx2_agct_by_band/";
+                for (int i = 0; i < (int)Band.LAST; i++)
+                    s += rx2_agct_by_band[i].ToString() + "|";
+                s = s.Substring(0, s.Length - 1);
+                a.Add(s);
+
+                /*    s = "tx1_by_band/";
+                    for (int i = 0; i < (int)Band.LAST; i++)
+                        s += Convert.ToUInt16(tx1_by_band[i]).ToString() + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+
+                    s = "tx2_by_band/";
+                    for (int i = 0; i < (int)Band.LAST; i++)
+                        s += Convert.ToUInt16(tx2_by_band[i]).ToString() + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+
+                    s = "tx3_by_band/";
+                    for (int i = 0; i < (int)Band.LAST; i++)
+                        s += Convert.ToUInt16(tx3_by_band[i]).ToString() + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+
+                    s = "rx1_image_gain_table/";
+                    for (int i = 0; i <= (int)Band.B6M; i++)
+                        s += rx1_image_gain_table[i].ToString("R") + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+
+                    s = "rx1_image_phase_table/";
+                    for (int i = 0; i <= (int)Band.B6M; i++)
+                        s += rx1_image_phase_table[i].ToString("R") + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+
+                    s = "rx2_image_gain_table/";
+                    for (int i = 0; i <= (int)Band.B6M; i++)
+                        s += rx2_image_gain_table[i].ToString("R") + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+
+                    s = "rx2_image_phase_table/";
+                    for (int i = 0; i <= (int)Band.B6M; i++)
+                        s += rx2_image_phase_table[i].ToString("R") + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+
+                    s = "tx_image_gain_table/";
+                    for (int i = 0; i <= (int)Band.B6M; i++)
+                        s += tx_image_gain_table[i].ToString("R") + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+
+                    s = "tx_image_phase_table/";
+                    for (int i = 0; i <= (int)Band.B6M; i++)
+                        s += tx_image_phase_table[i].ToString("R") + "|";
+                    s = s.Substring(0, s.Length - 1);
+                    a.Add(s);
+
+                    a.Add("rx1_level_checksum/" + rx1_level_checksum.ToString());
+                    a.Add("rx1_image_gain_checksum/" + rx1_image_gain_checksum.ToString());
+                    a.Add("rx1_image_phase_checksum/" + rx1_image_phase_checksum.ToString());
+                    a.Add("tx_image_gain_checksum/" + tx_image_gain_checksum.ToString());
+                    a.Add("tx_image_phase_checksum/" + tx_image_phase_checksum.ToString());
+                    a.Add("tx_carrier_checksum/" + tx_carrier_checksum.ToString());
+                    a.Add("pa_bias_checksum/" + pa_bias_checksum.ToString());
+                    a.Add("pa_bridge_checksum/" + pa_bridge_checksum.ToString());
+                    a.Add("pa_power_checksum/" + pa_power_checksum.ToString());
+                    a.Add("pa_swr_checksum/" + pa_swr_checksum.ToString());
+                    a.Add("atu_swr_checksum/" + atu_swr_checksum.ToString());
+                    a.Add("rx2_level_checksum/" + rx2_level_checksum.ToString());
+                    a.Add("rx2_image_gain_checksum/" + rx2_image_gain_checksum.ToString());
+                    a.Add("rx2_image_phase_checksum/" + rx2_image_phase_checksum.ToString());
+                    */
+                /*   try
+                   {
+                       StreamWriter writer = new StreamWriter(app_data_path + "\\power.csv");
+                       writer.WriteLine("Band, 1, 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100");
+                       for (int i = 1; i <= (int)Band.B6M; i++)
+                       {
+                           writer.Write(((Band)i).ToString() + ",");
+                           for (int j = 0; j < 13; j++)
+                               writer.Write(power_table[i][j].ToString("f4") + ",");
+                           writer.WriteLine("");
+                       }
+                       writer.Close();
+                   }
+                   catch (Exception)
+                   {
+                       MessageBox.Show("Error writing power.csv file.  Please make sure this file is not open and try again.",
+                           "Error writing power.csv",
+                           MessageBoxButtons.OK,
+                           MessageBoxIcon.Error);
+                   } */
+
+                /*try
                 {
-                    writer.Write(((Band)i).ToString()+",");
-                    for(int j=0; j<3; j++)
-                        writer.Write(rx1_level_table[i][j].ToString("f10")+",");
-                    writer.WriteLine("");
+                    StreamWriter writer = new StreamWriter(app_data_path+"\\rx1_level.csv");
+                    writer.WriteLine("Band, 0, 1, 2");
+                    for(int i=1; i<=(int)Band.B6M; i++)
+                    {
+                        writer.Write(((Band)i).ToString()+",");
+                        for(int j=0; j<3; j++)
+                            writer.Write(rx1_level_table[i][j].ToString("f10")+",");
+                        writer.WriteLine("");
+                    }
+                    writer.Close();
                 }
-                writer.Close();
+                catch(Exception)
+                {
+                    MessageBox.Show("Error writing rx1_level.csv file.  Please make sure this file is not open and try again.",
+                        "Error writing rx1_level.csv",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }*/
+
+                // a.Add("rx2_fixed_gain/"+rx2_fixed_gain.ToString());
+                //a.Add("rx2_max_gain/"+rx2_max_gain.ToString());
+
+                a.Add("band_160m_index/" + band_160m_index.ToString());
+                a.Add("band_80m_index/" + band_80m_index.ToString());
+                a.Add("band_60m_index/" + band_60m_index.ToString());
+                a.Add("band_40m_index/" + band_40m_index.ToString());
+                a.Add("band_30m_index/" + band_30m_index.ToString());
+                a.Add("band_20m_index/" + band_20m_index.ToString());
+                a.Add("band_17m_index/" + band_17m_index.ToString());
+                a.Add("band_15m_index/" + band_15m_index.ToString());
+                a.Add("band_12m_index/" + band_12m_index.ToString());
+                a.Add("band_10m_index/" + band_10m_index.ToString());
+                a.Add("band_6m_index/" + band_6m_index.ToString());
+                a.Add("band_2m_index/" + band_2m_index.ToString());
+                a.Add("band_wwv_index/" + band_wwv_index.ToString());
+                a.Add("band_gen_index/" + band_gen_index.ToString());
+                a.Add("band_vhf0_index/" + band_vhf0_index.ToString());
+                a.Add("band_vhf1_index/" + band_vhf1_index.ToString());
+                a.Add("band_vhf2_index/" + band_vhf2_index.ToString());
+                a.Add("band_vhf3_index/" + band_vhf3_index.ToString());
+                a.Add("band_vhf4_index/" + band_vhf4_index.ToString());
+                a.Add("band_vhf5_index/" + band_vhf5_index.ToString());
+                a.Add("band_vhf6_index/" + band_vhf6_index.ToString());
+                a.Add("band_vhf7_index/" + band_vhf7_index.ToString());
+                a.Add("band_vhf8_index/" + band_vhf8_index.ToString());
+                a.Add("band_vhf9_index/" + band_vhf9_index.ToString());
+                a.Add("band_vhf10_index/" + band_vhf10_index.ToString());
+                a.Add("band_vhf11_index/" + band_vhf11_index.ToString());
+                a.Add("band_vhf12_index/" + band_vhf12_index.ToString());
+                a.Add("band_vhf13_index/" + band_vhf13_index.ToString());
+
+                a.Add("panelBandHF.Visible/" + whatisHF);//w3sz added
+                a.Add("panelBandVHF.Visible/" + whatisVHF);//w3sz added
+                a.Add("iscollapsed/" + iscollapsed);//w3sz added
+                a.Add("isexpanded/" + isexpanded);//w3sz added
+                a.Add("diversity/" + diversity2);
+
+                for (int i = (int)PreampMode.FIRST + 1; i < (int)PreampMode.LAST; i++)
+                    a.Add("rx1_preamp_offset[" + i.ToString() + "]/" + rx1_preamp_offset[i].ToString("f3"));
+
+                //a.Add("fwc_preamp_offset/"+fwc_preamp_offset.ToString());
+                /*for(int i=0; i<32; i++)
+                    a.Add("fwc_att_offset["+i.ToString()+"]/"+fwc_att_offset[i].ToString());*/
+
+                a.Add("wheel_tune_index/" + tune_step_index.ToString());		// Save wheel tune value
+
+                a.Add("vfob_dsp_mode/" + ((int)vfob_dsp_mode).ToString());			// Save VFO B values 
+                a.Add("vfob_filter/" + ((int)vfob_filter).ToString());
+
+                a.Add("console_top/" + this.Top.ToString());		// save form positions
+                a.Add("console_left/" + this.Left.ToString());
+                a.Add("console_width/" + this.Width.ToString());
+                a.Add("console_height/" + this.Height.ToString());
+                a.Add("setup_top/" + SetupForm.Top.ToString());
+                a.Add("setup_left/" + SetupForm.Left.ToString());
+                a.Add("saved_rx_only/" + saved_rx_only.ToString());
+                a.Add("mon_recall/" + mon_recall.ToString());
+
+                a.Add("Version/" + this.Text);		// save the current version
+                //  a.Add("VersionNumber/" + ver_num);      // PowerSDR version number in a.b.c format
+                // a.Add("RadioType/" + CurrentModel);     // radio model string (ex. FLEX1500)
+                a.Add("BandTextID/" + current_region);  // TURF Region
+
+                DB.PurgeNotches();                  // remove old notches from DB
+                DB.SaveVars("State", ref a);		// save the values to the DB
             }
-            catch(Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error writing rx1_level.csv file.  Please make sure this file is not open and try again.",
-                    "Error writing rx1_level.csv",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }*/
+                MessageBox.Show("Error in SaveState!\n" + ex.ToString());
+            }
 
-            // a.Add("rx2_fixed_gain/"+rx2_fixed_gain.ToString());
-            //a.Add("rx2_max_gain/"+rx2_max_gain.ToString());
-
-            a.Add("band_160m_index/" + band_160m_index.ToString());
-            a.Add("band_80m_index/" + band_80m_index.ToString());
-            a.Add("band_60m_index/" + band_60m_index.ToString());
-            a.Add("band_40m_index/" + band_40m_index.ToString());
-            a.Add("band_30m_index/" + band_30m_index.ToString());
-            a.Add("band_20m_index/" + band_20m_index.ToString());
-            a.Add("band_17m_index/" + band_17m_index.ToString());
-            a.Add("band_15m_index/" + band_15m_index.ToString());
-            a.Add("band_12m_index/" + band_12m_index.ToString());
-            a.Add("band_10m_index/" + band_10m_index.ToString());
-            a.Add("band_6m_index/" + band_6m_index.ToString());
-            a.Add("band_2m_index/" + band_2m_index.ToString());
-            a.Add("band_wwv_index/" + band_wwv_index.ToString());
-            a.Add("band_gen_index/" + band_gen_index.ToString());
-            a.Add("band_vhf0_index/" + band_vhf0_index.ToString());
-            a.Add("band_vhf1_index/" + band_vhf1_index.ToString());
-            a.Add("band_vhf2_index/" + band_vhf2_index.ToString());
-            a.Add("band_vhf3_index/" + band_vhf3_index.ToString());
-            a.Add("band_vhf4_index/" + band_vhf4_index.ToString());
-            a.Add("band_vhf5_index/" + band_vhf5_index.ToString());
-            a.Add("band_vhf6_index/" + band_vhf6_index.ToString());
-            a.Add("band_vhf7_index/" + band_vhf7_index.ToString());
-            a.Add("band_vhf8_index/" + band_vhf8_index.ToString());
-            a.Add("band_vhf9_index/" + band_vhf9_index.ToString());
-            a.Add("band_vhf10_index/" + band_vhf10_index.ToString());
-            a.Add("band_vhf11_index/" + band_vhf11_index.ToString());
-            a.Add("band_vhf12_index/" + band_vhf12_index.ToString());
-            a.Add("band_vhf13_index/" + band_vhf13_index.ToString());
-
-            a.Add("panelBandHF.Visible/" + whatisHF);//w3sz added
-            a.Add("panelBandVHF.Visible/" + whatisVHF);//w3sz added
-            a.Add("iscollapsed/" + iscollapsed);//w3sz added
-            a.Add("isexpanded/" + isexpanded);//w3sz added
-            a.Add("diversity/" + diversity2);
-
-            for (int i = (int)PreampMode.FIRST + 1; i < (int)PreampMode.LAST; i++)
-                a.Add("rx1_preamp_offset[" + i.ToString() + "]/" + rx1_preamp_offset[i].ToString("f3"));
-
-            //a.Add("fwc_preamp_offset/"+fwc_preamp_offset.ToString());
-            /*for(int i=0; i<32; i++)
-                a.Add("fwc_att_offset["+i.ToString()+"]/"+fwc_att_offset[i].ToString());*/
-
-            a.Add("wheel_tune_index/" + tune_step_index.ToString());		// Save wheel tune value
-
-            a.Add("vfob_dsp_mode/" + ((int)vfob_dsp_mode).ToString());			// Save VFO B values 
-            a.Add("vfob_filter/" + ((int)vfob_filter).ToString());
-
-            a.Add("console_top/" + this.Top.ToString());		// save form positions
-            a.Add("console_left/" + this.Left.ToString());
-            a.Add("console_width/" + this.Width.ToString());
-            a.Add("console_height/" + this.Height.ToString());
-            a.Add("setup_top/" + SetupForm.Top.ToString());
-            a.Add("setup_left/" + SetupForm.Left.ToString());
-            a.Add("saved_rx_only/" + saved_rx_only.ToString());
-            a.Add("mon_recall/" + mon_recall.ToString());
-
-            a.Add("Version/" + this.Text);		// save the current version
-            //  a.Add("VersionNumber/" + ver_num);      // PowerSDR version number in a.b.c format
-            // a.Add("RadioType/" + CurrentModel);     // radio model string (ex. FLEX1500)
-            a.Add("BandTextID/" + current_region);  // TURF Region
-
-            DB.PurgeNotches();                  // remove old notches from DB
-            DB.SaveVars("State", ref a);		// save the values to the DB
         }
 
         public void GetState()
@@ -8879,1142 +8881,1160 @@ namespace PowerSDR
             ArrayList trackbar_list = new ArrayList();
             ArrayList prettytrackbar_list = new ArrayList();
 
-            //ArrayList controls = new ArrayList();	// list of controls to restore
-            foreach (Control c in this.Controls)
+            try
             {
-                // if control is a groupbox or panel, retrieve all subcontrols
-                if (c.GetType() == typeof(GroupBoxTS) || c.GetType() == typeof(PanelTS))
+                //ArrayList controls = new ArrayList();	// list of controls to restore
+                foreach (Control c in this.Controls)
                 {
-                    foreach (Control c2 in c.Controls)
+                    // if control is a groupbox or panel, retrieve all subcontrols
+                    if (c.GetType() == typeof(GroupBoxTS) || c.GetType() == typeof(PanelTS))
                     {
-                        if (c2.Enabled)
+                        foreach (Control c2 in c.Controls)
                         {
-                            if (c2.GetType() == typeof(CheckBoxTS))			// the control is a CheckBox
-                                checkbox_list.Add(c2);
-                            else if (c2.GetType() == typeof(ComboBoxTS))		// the control is a ComboBox
-                                combobox_list.Add(c2);
-                            else if (c2.GetType() == typeof(NumericUpDownTS))	// the control is a NumericUpDown
-                                numericupdown_list.Add(c2);
-                            else if (c2.GetType() == typeof(RadioButtonTS))	// the control is a RadioButton
-                                radiobutton_list.Add(c2);
-                            else if (c2.GetType() == typeof(TextBoxTS))		// the control is a TextBox
-                                textbox_list.Add(c2);
-                            else if (c2.GetType() == typeof(TrackBarTS))		// the control is a TrackBar (slider)
-                                trackbar_list.Add(c2);
-                            else if (c2.GetType() == typeof(PrettyTrackBar))
-                                prettytrackbar_list.Add(c2);
+                            if (c2.Enabled)
+                            {
+                                if (c2.GetType() == typeof(CheckBoxTS))			// the control is a CheckBox
+                                    checkbox_list.Add(c2);
+                                else if (c2.GetType() == typeof(ComboBoxTS))		// the control is a ComboBox
+                                    combobox_list.Add(c2);
+                                else if (c2.GetType() == typeof(NumericUpDownTS))	// the control is a NumericUpDown
+                                    numericupdown_list.Add(c2);
+                                else if (c2.GetType() == typeof(RadioButtonTS))	// the control is a RadioButton
+                                    radiobutton_list.Add(c2);
+                                else if (c2.GetType() == typeof(TextBoxTS))		// the control is a TextBox
+                                    textbox_list.Add(c2);
+                                else if (c2.GetType() == typeof(TrackBarTS))		// the control is a TrackBar (slider)
+                                    trackbar_list.Add(c2);
+                                else if (c2.GetType() == typeof(PrettyTrackBar))
+                                    prettytrackbar_list.Add(c2);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (c.Enabled)
+                        {
+                            if (c.GetType() == typeof(CheckBoxTS))				// the control is a CheckBox
+                                checkbox_list.Add(c);
+                            else if (c.GetType() == typeof(ComboBoxTS))		// the control is a ComboBox
+                                combobox_list.Add(c);
+                            else if (c.GetType() == typeof(NumericUpDownTS))	// the control is a NumericUpDown
+                                numericupdown_list.Add(c);
+                            else if (c.GetType() == typeof(RadioButtonTS))		// the control is a RadioButton
+                                radiobutton_list.Add(c);
+                            else if (c.GetType() == typeof(TextBoxTS))			// the control is a TextBox
+                                textbox_list.Add(c);
+                            else if (c.GetType() == typeof(TrackBarTS))		// the control is a TrackBar (slider)
+                                trackbar_list.Add(c);
+                            else if (c.GetType() == typeof(PrettyTrackBar))
+                                prettytrackbar_list.Add(c);
                         }
                     }
                 }
-                else
+
+                ArrayList a = DB.GetVars("State");							// Get the saved list of controls
+                a.Sort();
+                int num_controls = checkbox_list.Count + combobox_list.Count +
+                    numericupdown_list.Count + radiobutton_list.Count +
+                    textbox_list.Count + trackbar_list.Count;
+
+                foreach (string s in a)				// string is in the format "name,value"
                 {
-                    if (c.Enabled)
+                    string[] vals = s.Split('/');
+                    if (vals.Length > 2)
                     {
-                        if (c.GetType() == typeof(CheckBoxTS))				// the control is a CheckBox
-                            checkbox_list.Add(c);
-                        else if (c.GetType() == typeof(ComboBoxTS))		// the control is a ComboBox
-                            combobox_list.Add(c);
-                        else if (c.GetType() == typeof(NumericUpDownTS))	// the control is a NumericUpDown
-                            numericupdown_list.Add(c);
-                        else if (c.GetType() == typeof(RadioButtonTS))		// the control is a RadioButton
-                            radiobutton_list.Add(c);
-                        else if (c.GetType() == typeof(TextBoxTS))			// the control is a TextBox
-                            textbox_list.Add(c);
-                        else if (c.GetType() == typeof(TrackBarTS))		// the control is a TrackBar (slider)
-                            trackbar_list.Add(c);
-                        else if (c.GetType() == typeof(PrettyTrackBar))
-                            prettytrackbar_list.Add(c);
+                        for (int i = 2; i < vals.Length; i++)
+                            vals[1] += "/" + vals[i];
                     }
-                }
-            }
 
-            ArrayList a = DB.GetVars("State");							// Get the saved list of controls
-            a.Sort();
-            int num_controls = checkbox_list.Count + combobox_list.Count +
-                numericupdown_list.Count + radiobutton_list.Count +
-                textbox_list.Count + trackbar_list.Count;
+                    string name = vals[0];
+                    string val = vals[1];
+                    int num = 0;
 
-            foreach (string s in a)				// string is in the format "name,value"
-            {
-                string[] vals = s.Split('/');
-                if (vals.Length > 2)
-                {
-                    for (int i = 2; i < vals.Length; i++)
-                        vals[1] += "/" + vals[i];
-                }
+                    if (name.StartsWith("rx1_filters["))
+                    {
+                        int start = name.IndexOf("[") + 1;
+                        int length = name.IndexOf("]") - start;
+                        int mode_index = Int32.Parse(name.Substring(start, length));
 
-                string name = vals[0];
-                string val = vals[1];
-                int num = 0;
+                        start = name.LastIndexOf("[") + 1;
+                        length = name.LastIndexOf("]") - start;
+                        int filter_mode = Int32.Parse(name.Substring(start, length));
 
-                if (name.StartsWith("rx1_filters["))
-                {
-                    int start = name.IndexOf("[") + 1;
-                    int length = name.IndexOf("]") - start;
-                    int mode_index = Int32.Parse(name.Substring(start, length));
+                        length = val.IndexOf(":");
+                        string n = val.Substring(0, length);
 
-                    start = name.LastIndexOf("[") + 1;
-                    length = name.LastIndexOf("]") - start;
-                    int filter_mode = Int32.Parse(name.Substring(start, length));
+                        if (!val.Contains("|"))
+                            val = val.Replace(",", "|");
 
-                    length = val.IndexOf(":");
-                    string n = val.Substring(0, length);
+                        start = val.IndexOf(":") + 2;
+                        length = val.IndexOf("|") - start;
+                        int low = Int32.Parse(val.Substring(start, length));
 
-                    if (!val.Contains("|"))
-                        val = val.Replace(",", "|");
+                        start = val.IndexOf("|") + 1;
+                        int high = Int32.Parse(val.Substring(start));
 
-                    start = val.IndexOf(":") + 2;
-                    length = val.IndexOf("|") - start;
-                    int low = Int32.Parse(val.Substring(start, length));
+                        rx1_filters[mode_index].SetFilter((Filter)filter_mode, low, high, n);
+                    }
+                    else if (name.StartsWith("rx2_filters["))
+                    {
+                        int start = name.IndexOf("[") + 1;
+                        int length = name.IndexOf("]") - start;
+                        int mode_index = Int32.Parse(name.Substring(start, length));
 
-                    start = val.IndexOf("|") + 1;
-                    int high = Int32.Parse(val.Substring(start));
+                        start = name.LastIndexOf("[") + 1;
+                        length = name.LastIndexOf("]") - start;
+                        int filter_mode = Int32.Parse(name.Substring(start, length));
 
-                    rx1_filters[mode_index].SetFilter((Filter)filter_mode, low, high, n);
-                }
-                else if (name.StartsWith("rx2_filters["))
-                {
-                    int start = name.IndexOf("[") + 1;
-                    int length = name.IndexOf("]") - start;
-                    int mode_index = Int32.Parse(name.Substring(start, length));
+                        length = val.IndexOf(":");
+                        string n = val.Substring(0, length);
 
-                    start = name.LastIndexOf("[") + 1;
-                    length = name.LastIndexOf("]") - start;
-                    int filter_mode = Int32.Parse(name.Substring(start, length));
+                        if (!val.Contains("|"))
+                            val = val.Replace(",", "|");
 
-                    length = val.IndexOf(":");
-                    string n = val.Substring(0, length);
+                        start = val.IndexOf(":") + 2;
+                        length = val.IndexOf("|") - start;
+                        int low = Int32.Parse(val.Substring(start, length));
 
-                    if (!val.Contains("|"))
-                        val = val.Replace(",", "|");
+                        start = val.IndexOf("|") + 1;
+                        int high = Int32.Parse(val.Substring(start));
 
-                    start = val.IndexOf(":") + 2;
-                    length = val.IndexOf("|") - start;
-                    int low = Int32.Parse(val.Substring(start, length));
+                        rx2_filters[mode_index].SetFilter((Filter)filter_mode, low, high, n);
+                    }
+                    else if (name.StartsWith("notchlist"))
+                    {
+                        NotchList.List.Add(Notch.Parse(val));
+                    }
+                    else if (name.StartsWith("last_rx1_filter["))
+                    {
+                        int start = name.IndexOf("[") + 1;
+                        int length = name.IndexOf("]") - start;
+                        int mode_index = Int32.Parse(name.Substring(start, length));
 
-                    start = val.IndexOf("|") + 1;
-                    int high = Int32.Parse(val.Substring(start));
+                        rx1_filters[mode_index].LastFilter = (Filter)Enum.Parse(typeof(Filter), val);
+                    }
+                    else if (name.StartsWith("last_rx2_filter["))
+                    {
+                        int start = name.IndexOf("[") + 1;
+                        int length = name.IndexOf("]") - start;
+                        int mode_index = Int32.Parse(name.Substring(start, length));
 
-                    rx2_filters[mode_index].SetFilter((Filter)filter_mode, low, high, n);
-                }
-                else if (name.StartsWith("notchlist"))
-                {
-                    NotchList.List.Add(Notch.Parse(val));
-                }
-                else if (name.StartsWith("last_rx1_filter["))
-                {
-                    int start = name.IndexOf("[") + 1;
-                    int length = name.IndexOf("]") - start;
-                    int mode_index = Int32.Parse(name.Substring(start, length));
+                        rx2_filters[mode_index].LastFilter = (Filter)Enum.Parse(typeof(Filter), val);
+                    }
+                    else if (name.StartsWith("rx1_preamp_offset["))
+                    {
+                        int start = name.IndexOf("[") + 1;
+                        int length = name.IndexOf("]") - start;
+                        int index = Int32.Parse(name.Substring(start, length));
 
-                    rx1_filters[mode_index].LastFilter = (Filter)Enum.Parse(typeof(Filter), val);
-                }
-                else if (name.StartsWith("last_rx2_filter["))
-                {
-                    int start = name.IndexOf("[") + 1;
-                    int length = name.IndexOf("]") - start;
-                    int mode_index = Int32.Parse(name.Substring(start, length));
+                        rx1_preamp_offset[index] = (float)Math.Round(float.Parse(val), 3);
+                    }
+                    /*else if(name.StartsWith("fwc_att_offset"))
+                    {
+                        int start = name.IndexOf("[")+1;
+                        int length = name.IndexOf("]")-start;
+                        int index = int.Parse(name.Substring(start, length));
 
-                    rx2_filters[mode_index].LastFilter = (Filter)Enum.Parse(typeof(Filter), val);
-                }
-                else if (name.StartsWith("rx1_preamp_offset["))
-                {
-                    int start = name.IndexOf("[") + 1;
-                    int length = name.IndexOf("]") - start;
-                    int index = Int32.Parse(name.Substring(start, length));
+                        fwc_att_offset[index] = float.Parse(val);
+                    }
+                    else if (name.StartsWith("power_table"))
+                    {
+                        int start = name.IndexOf("[") + 1;
+                        int length = name.IndexOf("]") - start;
+                        int index = int.Parse(name.Substring(start, length));
 
-                    rx1_preamp_offset[index] = (float)Math.Round(float.Parse(val), 3);
-                }
-                /*else if(name.StartsWith("fwc_att_offset"))
-                {
-                    int start = name.IndexOf("[")+1;
-                    int length = name.IndexOf("]")-start;
-                    int index = int.Parse(name.Substring(start, length));
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < 13 && i < list.Length; i++)
+                            power_table[index][i] = (float)Math.Round(float.Parse(list[i]), 4);
+                    }
+                    else if (name.StartsWith("tx_carrier_table"))
+                    {
+                        int start = name.IndexOf("[") + 1;
+                        int length = name.IndexOf("]") - start;
+                        int index = int.Parse(name.Substring(start, length));
 
-                    fwc_att_offset[index] = float.Parse(val);
-                }
-                else if (name.StartsWith("power_table"))
-                {
-                    int start = name.IndexOf("[") + 1;
-                    int length = name.IndexOf("]") - start;
-                    int index = int.Parse(name.Substring(start, length));
-
-                    string[] list = val.Split('|');
-                    for (int i = 0; i < 13 && i < list.Length; i++)
-                        power_table[index][i] = (float)Math.Round(float.Parse(list[i]), 4);
-                }
-                else if (name.StartsWith("tx_carrier_table"))
-                {
-                    int start = name.IndexOf("[") + 1;
-                    int length = name.IndexOf("]") - start;
-                    int index = int.Parse(name.Substring(start, length));
-
-                    string[] list = val.Split('|');
-                    for (int i = 0; i < 4; i++)
-                        tx_carrier_table[index][i] = int.Parse(list[i]);
-                }
-                  else if (name.StartsWith("pa_bias_table"))
-                  {
-                      int start = name.IndexOf("[") + 1;
-                      int length = name.IndexOf("]") - start;
-                      int index = int.Parse(name.Substring(start, length));
-
-                      string[] list = val.Split('|');
-                      for (int i = 0; i < 8 && i < list.Length; i++)
-                          pa_bias_table[index][i] = int.Parse(list[i]);
-
-                      if (fwc_init && index == 0 &&
-                          (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < 4; i++)
+                            tx_carrier_table[index][i] = int.Parse(list[i]);
+                    }
+                      else if (name.StartsWith("pa_bias_table"))
                       {
-                          if (flex5000DebugForm != null && !flex5000DebugForm.IsDisposed)
-                          {
-                              for (int i = 0; i < 8; i++)
-                                  flex5000DebugForm.SetPAPot(i, (byte)pa_bias_table[index][i]);
-                          }
-                      }
-                  } */
-                else if (name.StartsWith("rx1_level_table"))
-                {
-                    int start = name.IndexOf("[") + 1;
-                    int length = name.IndexOf("]") - start;
-                    int index = int.Parse(name.Substring(start, length));
+                          int start = name.IndexOf("[") + 1;
+                          int length = name.IndexOf("]") - start;
+                          int index = int.Parse(name.Substring(start, length));
 
-                    string[] list = val.Split('|');
-                    for (int i = 0; i < 3; i++)
-                        rx1_level_table[index][i] = (float)Math.Round(float.Parse(list[i]), 3);
-                }
-                else if (name.StartsWith("rx2_level_table"))
-                {
-                    int start = name.IndexOf("[") + 1;
-                    int length = name.IndexOf("]") - start;
-                    int index = int.Parse(name.Substring(start, length));
-
-                    string[] list = val.Split('|');
-                    for (int i = 0; i < 3; i++)
-                        rx2_level_table[index][i] = (float)Math.Round(float.Parse(list[i]), 3);
-                }
-                /*   else if (name.StartsWith("pa_bridge_table"))
-                   {
-                       int start = name.IndexOf("[") + 1;
-                       int length = name.IndexOf("]") - start;
-                       int index = int.Parse(name.Substring(start, length));
-
-                       string[] list = val.Split('|');
-                       for (int i = 0; i < 6; i++)
-                           pa_bridge_table[index][i] = (float)Math.Round(float.Parse(list[i]), 4);
-                   } 
-                   else if (name.StartsWith("swr_table"))
-                   {
-                       int start = name.IndexOf("[") + 1;
-                       int length = name.IndexOf("]") - start;
-                       int index = int.Parse(name.Substring(start, length));
-
-                       swr_table[index] = (float)Math.Round(float.Parse(val), 4);
-                   }
-                   else if (name.StartsWith("atu_swr_table"))
-                   {
-                       int start = name.IndexOf("[") + 1;
-                       int length = name.IndexOf("]") - start;
-                       int index = int.Parse(name.Substring(start, length));
-
-                       atu_swr_table[index] = (float)Math.Round(float.Parse(val), 4);
-                   }
-                   else if (name.StartsWith("rx1_ant_by_band"))
-                   {
-                       string[] list = val.Split('|');
-                       for (int i = 0; i < (int)Band.LAST; i++)
-                           rx1_ant_by_band[i] = (FWCAnt)int.Parse(list[i]);
-                   }
-                   else if (name.StartsWith("rx2_ant_by_band"))
-                   {
-                       string[] list = val.Split('|');
-                       for (int i = 0; i < (int)Band.LAST; i++)
-                           rx2_ant_by_band[i] = (FWCAnt)int.Parse(list[i]);
-                   }
-                   else if (name.StartsWith("tx_ant_by_band"))
-                   {
-                       string[] list = val.Split('|');
-                       for (int i = 0; i < (int)Band.LAST; i++)
-                           tx_ant_by_band[i] = (FWCAnt)int.Parse(list[i]);
-                   }
-                   else if (name.StartsWith("rx1_loop_by_band"))
-                   {
-                       string[] list = val.Split('|');
-                       for (int i = 0; i < (int)Band.LAST; i++)
-                           rx1_loop_by_band[i] = Convert.ToBoolean(int.Parse(list[i]));
-                   } */
-                else if (name.StartsWith("rx1_preamp_by_band"))
-                {
-                    string[] list = val.Split('|');
-                    for (int i = 0; i < (int)Band.LAST; i++)
-                        rx1_preamp_by_band[i] = (PreampMode)(int.Parse(list[i]));
-                }
-                else if (name.StartsWith("rx2_preamp_by_band"))
-                {
-                    string[] list = val.Split('|');
-                    for (int i = 0; i < (int)Band.LAST; i++)
-                        rx2_preamp_by_band[i] = (PreampMode)(int.Parse(list[i]));
-                }
-                else if (name.StartsWith("power_by_band"))
-                {
-                    string[] list = val.Split('|');
-                    for (int i = 0; i < (int)Band.LAST; i++)
-                        power_by_band[i] = int.Parse(list[i]);
-                }
-                else if (name.StartsWith("fm_tx_offset_by_band_mhz"))
-                {
-                    string[] list = val.Split('|');
-                    for (int i = 0; i < (int)Band.LAST; i++)
-                        fm_tx_offset_by_band_mhz[i] = double.Parse(list[i]);
-                }
-                else if (name.StartsWith("rx1_agct_by_band"))
-                {
-                    string[] list = val.Split('|');
-                    for (int i = 0; i < (int)Band.LAST; i++)
-                        rx1_agct_by_band[i] = int.Parse(list[i]);
-                }
-                else if (name.StartsWith("rx2_agct_by_band"))
-                {
-                    string[] list = val.Split('|');
-                    for (int i = 0; i < (int)Band.LAST; i++)
-                        rx2_agct_by_band[i] = int.Parse(list[i]);
-                }
-                /* else if (name.StartsWith("tx1_by_band"))
-                  {
-                      string[] list = val.Split('|');
-                      for (int i = 0; i < (int)Band.LAST; i++)
-                          tx1_by_band[i] = Convert.ToBoolean(int.Parse(list[i]));
-                  }
-                  else if (name.StartsWith("tx2_by_band"))
-                  {
-                      string[] list = val.Split('|');
-                      for (int i = 0; i < (int)Band.LAST; i++)
-                          tx2_by_band[i] = Convert.ToBoolean(int.Parse(list[i]));
-                  }
-                  else if (name.StartsWith("tx3_by_band"))
-                  {
-                      string[] list = val.Split('|');
-                      for (int i = 0; i < (int)Band.LAST; i++)
-                          tx3_by_band[i] = Convert.ToBoolean(int.Parse(list[i]));
-                  } */
-
-                switch (name)
-                {
-                    /* case "rx2_res_offset":
-                         rx2_res_offset = float.Parse(val);
-                         break;
-                     case "current_ant_mode":
-                         current_ant_mode = (AntMode)int.Parse(val);
-                         break;
-                     case "rx1_ant":
-                         rx1_ant = (FWCAnt)int.Parse(val);
-                         break;
-                     case "rx1_loop":
-                         rx1_loop = bool.Parse(val);
-                         break;
-                     case "rx2_ant":
-                         rx2_ant = (FWCAnt)int.Parse(val);
-                         break;
-                     case "tx_ant":
-                         tx_ant = (FWCAnt)int.Parse(val);
-                         break;
-                     case "fwc_preamp_offset":
-                         fwc_preamp_offset = float.Parse(val);
-                         break;
-                     case "fwc_last_cal_date_time":
-                         fwc_last_cal_date_time = long.Parse(val);
-                         break;
-                     case "fwc_serial_num":
-                         fwc_serial_num = uint.Parse(val);
-                         break;
-                     case "fwc_trx_serial_num":
-                         fwc_trx_serial_num = uint.Parse(val);
-                         break;
-                     case "rx2_last_cal_date_time":
-                         rx2_last_cal_date_time = long.Parse(val);
-                         break;
-                     case "rx2_serial_num":
-                         rx2_serial_num = uint.Parse(val);
-                         break;
-                     case "rx2_trx_match_serial":
-                         rx2_trx_match_serial = uint.Parse(val);
-                         break; */
-                    //case "rx2_fixed_gain":
-                    //rx2_fixed_gain = int.Parse(val);
-                    //break;
-                    //case "rx2_max_gain":
-                    //	rx2_max_gain = int.Parse(val);
-                    //	break;
-                    case "band_160m_index":
-                        band_160m_index = Int32.Parse(val);
-                        break;
-                    case "band_80m_index":
-                        band_80m_index = Int32.Parse(val);
-                        break;
-                    case "band_60m_index":
-                        band_60m_index = Int32.Parse(val);
-                        break;
-                    case "band_40m_index":
-                        band_40m_index = Int32.Parse(val);
-                        break;
-                    case "band_30m_index":
-                        band_30m_index = Int32.Parse(val);
-                        break;
-                    case "band_20m_index":
-                        band_20m_index = Int32.Parse(val);
-                        break;
-                    case "band_17m_index":
-                        band_17m_index = Int32.Parse(val);
-                        break;
-                    case "band_15m_index":
-                        band_15m_index = Int32.Parse(val);
-                        break;
-                    case "band_12m_index":
-                        band_12m_index = Int32.Parse(val);
-                        break;
-                    case "band_10m_index":
-                        band_10m_index = Int32.Parse(val);
-                        break;
-                    case "band_6m_index":
-                        band_6m_index = Int32.Parse(val);
-                        break;
-                    case "band_2m_index":
-                        band_2m_index = Int32.Parse(val);
-                        break;
-                    case "band_wwv_index":
-                        band_wwv_index = Int32.Parse(val);
-                        break;
-                    case "band_gen_index":
-                        band_gen_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf0_index":
-                        band_vhf0_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf1_index":
-                        band_vhf1_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf2_index":
-                        band_vhf2_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf3_index":
-                        band_vhf3_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf4_index":
-                        band_vhf4_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf5_index":
-                        band_vhf5_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf6_index":
-                        band_vhf6_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf7_index":
-                        band_vhf7_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf8_index":
-                        band_vhf8_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf9_index":
-                        band_vhf9_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf10_index":
-                        band_vhf10_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf11_index":
-                        band_vhf11_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf12_index":
-                        band_vhf12_index = Int32.Parse(val);
-                        break;
-                    case "band_vhf13_index":
-                        band_vhf13_index = Int32.Parse(val);
-                        break;
-                    case "current_datetime_mode":
-                        CurrentDateTimeMode = (DateTimeMode)(Int32.Parse(val));
-                        break;
-                    case "wheel_tune_index":
-                        tune_step_index = Int32.Parse(val);
-                        break;
-                    case "txtMemoryQuick":
-                        txtMemoryQuick.Text = val;
-                        break;
-                    case "rx1_display_cal_offset":
-                        RX1DisplayCalOffset = float.Parse(val);
-                        break;
-                    //  case "tx_display_cal_offset":
-                    //    TXDisplayCalOffset = float.Parse(val);
-                    //     break;
-                    case "rx1_meter_cal_offset":
-                        rx1_meter_cal_offset = float.Parse(val);
-                        break;
-                    case "rx2_display_cal_offset":
-                        RX2DisplayCalOffset = float.Parse(val);
-                        break;
-                    //  case "tx_display_cal_offset":
-                    //    TXDisplayCalOffset = float.Parse(val);
-                    //     break;
-                    case "rx2_meter_cal_offset":
-                        rx2_meter_cal_offset = float.Parse(val);
-                        break;
-                    case "panelBandHF.Visible": //added by w3sz
-                        whatisHF = bool.Parse(val); //added by w3sz
-                        panelBandHF.Visible = whatisHF; //added by w3sz
-                        if (panelBandHF.Visible) //added by w3sz
-                            btnBandHF_Click(btnBandHF, EventArgs.Empty); //added by w3sz
-                        break; //added by w3sz
-                    case "panelBandVHF.Visible": //added by w3sz
-                        whatisVHF = bool.Parse(val); //added by w3sz
-                        panelBandVHF.Visible = whatisVHF; //added by w3sz
-                        if (panelBandVHF.Visible) //added by w3sz
-                            btnBandVHF_Click(btnBandVHF, EventArgs.Empty); //added by w3sz
-                        break;  //added by w3sz
-                    case "iscollapsed":  //added by w3sz
-                        iscollapsed = bool.Parse(val);    //added by w3sz
-                        if (iscollapsed)   //added by w3sz
-                        {
-                            this.CollapseDisplay();
-                            iscollapsed = true;
-                            isexpanded = false;
-                        }
-                        break; //added by w3sz
-                    case "isexpanded":  //added by w3sz
-                        isexpanded = bool.Parse(val);    //added by w3sz
-                        if (isexpanded)   //added by w3sz
-                        {
-                            //  this.ExpandDisplay();
-                            isexpanded = true;
-                            iscollapsed = false;
-                        }
-                        break; //added by w3sz
-                    case "diversity":
-                        startdiversity = bool.Parse(val);
-                        break;
-                    case "quick_save_mode":
-                        quick_save_mode = (DSPMode)(Int32.Parse(val));
-                        break;
-                    case "quick_save_filter":
-                        quick_save_filter = (Filter)(Int32.Parse(val));
-                        break;
-                    case "vfob_dsp_mode":
-                        vfob_dsp_mode = (DSPMode)(Int32.Parse(val));
-                        break;
-                    case "vfob_filter":
-                        vfob_filter = (Filter)(Int32.Parse(val));
-                        break;
-                    case "console_top":
-                        num = Int32.Parse(val);
-                        /*if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Height && Screen.AllScreens.Length == 1))
-                            num = 0;*/
-                        this.Top = num;
-                        break;
-                    case "console_left":
-                        num = Int32.Parse(val);
-                        /*if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Width && Screen.AllScreens.Length == 1))
-                            num = 0;*/
-                        this.Left = num;
-                        break;
-                    case "console_width":
-                        if (dpi <= 96) this.Width = int.Parse(val);
-                        break;
-                    case "console_height":
-                        if (dpi <= 96) this.Height = int.Parse(val);
-                        break;
-                    case "setup_top":
-                        num = Int32.Parse(val);
-                        /*if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Height && Screen.AllScreens.Length == 1))
-                            num = 0;*/
-                        SetupForm.Top = num;
-                        break;
-                    case "setup_left":
-                        num = Int32.Parse(val);
-                        /*if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Width && Screen.AllScreens.Length == 1))
-                            num = 0;*/
-                        SetupForm.Left = num;
-                        break;
-                    /*	case "mem_top":
-                            num = Int32.Parse(val);
-                            if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Height && Screen.AllScreens.Length == 1))
-                                num = 0;
-                            MemForm.Top = num;
-                            break;
-                        case "mem_left":
-                            num = Int32.Parse(val);
-                            if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Width && Screen.AllScreens.Length == 1))
-                                num = 0;
-                            MemForm.Left = num;
-                            break; */
-                    case "SetupWizard":
-                        if (val == "1")
-                            run_setup_wizard = false;
-                        break;
-                    //case "show_alpha_warning":
-                    //	show_alpha_warning = bool.Parse(val);
-                    //	break;
-                    // case "show_mobile_warning":
-                    //    show_mobile_warning = bool.Parse(val);
-                    //    break;
-                    /*  case "rx1_image_gain_table":
                           string[] list = val.Split('|');
-                          for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
-                              rx1_image_gain_table[i] = float.Parse(list[i]);
-                          break;
-                      case "rx1_image_phase_table":
-                          list = val.Split('|');
-                          for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
-                              rx1_image_phase_table[i] = float.Parse(list[i]);
-                          break;
-                      case "rx2_image_gain_table":
-                          list = val.Split('|');
-                          for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
-                              rx2_image_gain_table[i] = float.Parse(list[i]);
-                          break;
-                      case "rx2_image_phase_table":
-                          list = val.Split('|');
-                          for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
-                              rx2_image_phase_table[i] = float.Parse(list[i]);
-                          break;
-                      case "tx_image_gain_table":
-                          list = val.Split('|');
-                          for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
-                              tx_image_gain_table[i] = float.Parse(list[i]);
-                          break;
-                      case "tx_image_phase_table":
-                          list = val.Split('|');
-                          for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
-                              tx_image_phase_table[i] = float.Parse(list[i]);
-                          break;
-                      case "rx1_level_checksum":
-                          rx1_level_checksum = byte.Parse(val);
-                          break;
-                      case "rx1_image_gain_checksum":
-                          rx1_image_gain_checksum = byte.Parse(val);
-                          break;
-                      case "rx1_image_phase_checksum":
-                          rx1_image_phase_checksum = byte.Parse(val);
-                          break;
-                      case "tx_image_gain_checksum":
-                          tx_image_gain_checksum = byte.Parse(val);
-                          break;
-                      case "tx_image_phase_checksum":
-                          tx_image_phase_checksum = byte.Parse(val);
-                          break;
-                      case "tx_carrier_checksum":
-                          tx_carrier_checksum = byte.Parse(val);
-                          break;
-                      case "pa_bias_checksum":
-                          pa_bias_checksum = byte.Parse(val);
-                          break;
-                      case "pa_bridge_checksum":
-                          pa_bridge_checksum = byte.Parse(val);
-                          break;
-                      case "pa_power_checksum":
-                          pa_power_checksum = byte.Parse(val);
-                          break;
-                      case "pa_swr_checksum":
-                          pa_swr_checksum = byte.Parse(val);
-                          break;
-                      case "atu_swr_checksum":
-                          atu_swr_checksum = byte.Parse(val);
-                          break;
-                      case "rx2_level_checksum":
-                          rx2_level_checksum = byte.Parse(val);
-                          break;
-                      case "rx2_image_gain_checksum":
-                          rx2_image_gain_checksum = byte.Parse(val);
-                          break;
-                      case "rx2_image_phase_checksum":
-                          rx2_image_phase_checksum = byte.Parse(val);
-                          break; */
-                    case "saved_rx_only":
-                        saved_rx_only = bool.Parse(val);
-                        break;
-                    case "mon_recall":
-                        mon_recall = bool.Parse(val);
-                        break;
-                    case "rx1_squelch_on":
-                        rx1_squelch_on = bool.Parse(val);
-                        break;
-                    case "rx1_squelch_threshold_scroll":
-                        rx1_squelch_threshold_scroll = int.Parse(val);
-                        break;
-                    case "rx1_fm_squelch_threshold_scroll":
-                        rx1_fm_squelch_threshold_scroll = int.Parse(val);
-                        break;
-                    case "rx2_squelch_on":
-                        rx1_squelch_on = bool.Parse(val);
-                        break;
-                    case "rx2_squelch_threshold_scroll":
-                        rx2_squelch_threshold_scroll = int.Parse(val);
-                        break;
-                    case "rx2_fm_squelch_threshold_scroll":
-                        rx2_fm_squelch_threshold_scroll = int.Parse(val);
-                        break;
-                    case "center_frequency":
-                        center_frequency = double.Parse(val);
-                        break;
-                    case "center_rx2_frequency":
-                        center_rx2_frequency = double.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_160m":
-                        waterfall_high_threshold_160m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_160m":
-                        waterfall_low_threshold_160m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_80m":
-                        waterfall_high_threshold_80m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_80m":
-                        waterfall_low_threshold_80m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_60m":
-                        waterfall_high_threshold_60m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_60m":
-                        waterfall_low_threshold_60m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_40m":
-                        waterfall_high_threshold_40m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_40m":
-                        waterfall_low_threshold_40m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_30m":
-                        waterfall_high_threshold_30m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_30m":
-                        waterfall_low_threshold_30m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_20m":
-                        waterfall_high_threshold_20m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_20m":
-                        waterfall_low_threshold_20m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_17m":
-                        waterfall_high_threshold_17m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_17m":
-                        waterfall_low_threshold_17m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_15m":
-                        waterfall_high_threshold_15m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_15m":
-                        waterfall_low_threshold_15m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_12m":
-                        waterfall_high_threshold_12m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_12m":
-                        waterfall_low_threshold_12m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_10m":
-                        waterfall_high_threshold_10m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_10m":
-                        waterfall_low_threshold_10m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_6m":
-                        waterfall_high_threshold_6m = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_6m":
-                        waterfall_low_threshold_6m = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_wwv":
-                        waterfall_high_threshold_wwv = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_wwv":
-                        waterfall_low_threshold_wwv = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_gen":
-                        waterfall_high_threshold_gen = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_gen":
-                        waterfall_low_threshold_gen = float.Parse(val);
-                        break;
-                    case "waterfall_high_threshold_xvtr":
-                        waterfall_high_threshold_xvtr = float.Parse(val);
-                        break;
-                    case "waterfall_low_threshold_xvtr":
-                        waterfall_low_threshold_xvtr = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_160m":
-                        rx2_waterfall_high_threshold_160m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_160m":
-                        rx2_waterfall_low_threshold_160m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_80m":
-                        rx2_waterfall_high_threshold_80m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_80m":
-                        rx2_waterfall_low_threshold_80m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_60m":
-                        rx2_waterfall_high_threshold_60m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_60m":
-                        rx2_waterfall_low_threshold_60m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_40m":
-                        rx2_waterfall_high_threshold_40m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_40m":
-                        rx2_waterfall_low_threshold_40m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_30m":
-                        rx2_waterfall_high_threshold_30m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_30m":
-                        rx2_waterfall_low_threshold_30m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_20m":
-                        rx2_waterfall_high_threshold_20m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_20m":
-                        rx2_waterfall_low_threshold_20m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_17m":
-                        rx2_waterfall_high_threshold_17m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_17m":
-                        rx2_waterfall_low_threshold_17m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_15m":
-                        rx2_waterfall_high_threshold_15m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_15m":
-                        rx2_waterfall_low_threshold_15m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_12m":
-                        rx2_waterfall_high_threshold_12m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_12m":
-                        rx2_waterfall_low_threshold_12m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_10m":
-                        rx2_waterfall_high_threshold_10m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_10m":
-                        rx2_waterfall_low_threshold_10m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_6m":
-                        rx2_waterfall_high_threshold_6m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_6m":
-                        rx2_waterfall_low_threshold_6m = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_wwv":
-                        rx2_waterfall_high_threshold_wwv = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_wwv":
-                        rx2_waterfall_low_threshold_wwv = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_gen":
-                        rx2_waterfall_high_threshold_gen = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_gen":
-                        rx2_waterfall_low_threshold_gen = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_high_threshold_xvtr":
-                        rx2_waterfall_high_threshold_xvtr = float.Parse(val);
-                        break;
-                    case "rx2_waterfall_low_threshold_xvtr":
-                        rx2_waterfall_low_threshold_xvtr = float.Parse(val);
-                        break;
-                    case "display_grid_max_160m":
-                        display_grid_max_160m = float.Parse(val);
-                        break;
-                    case "display_grid_min_160m":
-                        display_grid_min_160m = float.Parse(val);
-                        break;
-                    case "display_grid_max_80m":
-                        display_grid_max_80m = float.Parse(val);
-                        break;
-                    case "display_grid_min_80m":
-                        display_grid_min_80m = float.Parse(val);
-                        break;
-                    case "display_grid_max_60m":
-                        display_grid_max_60m = float.Parse(val);
-                        break;
-                    case "display_grid_min_60m":
-                        display_grid_min_60m = float.Parse(val);
-                        break;
-                    case "display_grid_max_40m":
-                        display_grid_max_40m = float.Parse(val);
-                        break;
-                    case "display_grid_min_40m":
-                        display_grid_min_40m = float.Parse(val);
-                        break;
-                    case "display_grid_max_30m":
-                        display_grid_max_30m = float.Parse(val);
-                        break;
-                    case "display_grid_min_30m":
-                        display_grid_min_30m = float.Parse(val);
-                        break;
-                    case "display_grid_max_20m":
-                        display_grid_max_20m = float.Parse(val);
-                        break;
-                    case "display_grid_min_20m":
-                        display_grid_min_20m = float.Parse(val);
-                        break;
-                    case "display_grid_max_17m":
-                        display_grid_max_17m = float.Parse(val);
-                        break;
-                    case "display_grid_min_17m":
-                        display_grid_min_17m = float.Parse(val);
-                        break;
-                    case "display_grid_max_15m":
-                        display_grid_max_15m = float.Parse(val);
-                        break;
-                    case "display_grid_min_15m":
-                        display_grid_min_15m = float.Parse(val);
-                        break;
-                    case "display_grid_max_12m":
-                        display_grid_max_12m = float.Parse(val);
-                        break;
-                    case "display_grid_min_12m":
-                        display_grid_min_12m = float.Parse(val);
-                        break;
-                    case "display_grid_max_10m":
-                        display_grid_max_10m = float.Parse(val);
-                        break;
-                    case "display_grid_min_10m":
-                        display_grid_min_10m = float.Parse(val);
-                        break;
-                    case "display_grid_max_6m":
-                        display_grid_max_6m = float.Parse(val);
-                        break;
-                    case "display_grid_min_6m":
-                        display_grid_min_6m = float.Parse(val);
-                        break;
-                    case "display_grid_max_wwv":
-                        display_grid_max_wwv = float.Parse(val);
-                        break;
-                    case "display_grid_min_wwv":
-                        display_grid_min_wwv = float.Parse(val);
-                        break;
-                    case "display_grid_max_gen":
-                        display_grid_max_gen = float.Parse(val);
-                        break;
-                    case "display_grid_min_gen":
-                        display_grid_min_gen = float.Parse(val);
-                        break;
-                    case "display_grid_max_xvtr":
-                        display_grid_max_xvtr = float.Parse(val);
-                        break;
-                    case "display_grid_min_xvtr":
-                        display_grid_min_xvtr = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_160m":
-                        rx2_display_grid_max_160m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_160m":
-                        rx2_display_grid_min_160m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_80m":
-                        rx2_display_grid_max_80m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_80m":
-                        rx2_display_grid_min_80m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_60m":
-                        rx2_display_grid_max_60m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_60m":
-                        rx2_display_grid_min_60m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_40m":
-                        rx2_display_grid_max_40m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_40m":
-                        rx2_display_grid_min_40m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_30m":
-                        rx2_display_grid_max_30m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_30m":
-                        rx2_display_grid_min_30m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_20m":
-                        rx2_display_grid_max_20m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_20m":
-                        rx2_display_grid_min_20m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_17m":
-                        rx2_display_grid_max_17m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_17m":
-                        rx2_display_grid_min_17m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_15m":
-                        rx2_display_grid_max_15m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_15m":
-                        rx2_display_grid_min_15m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_12m":
-                        rx2_display_grid_max_12m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_12m":
-                        rx2_display_grid_min_12m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_10m":
-                        rx2_display_grid_max_10m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_10m":
-                        rx2_display_grid_min_10m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_6m":
-                        rx2_display_grid_max_6m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_6m":
-                        rx2_display_grid_min_6m = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_wwv":
-                        rx2_display_grid_max_wwv = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_wwv":
-                        rx2_display_grid_min_wwv = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_gen":
-                        rx2_display_grid_max_gen = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_gen":
-                        rx2_display_grid_min_gen = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_max_xvtr":
-                        rx2_display_grid_max_xvtr = float.Parse(val);
-                        break;
-                    case "rx2_display_grid_min_xvtr":
-                        rx2_display_grid_min_xvtr = float.Parse(val);
-                        break;
+                          for (int i = 0; i < 8 && i < list.Length; i++)
+                              pa_bias_table[index][i] = int.Parse(list[i]);
+
+                          if (fwc_init && index == 0 &&
+                              (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+                          {
+                              if (flex5000DebugForm != null && !flex5000DebugForm.IsDisposed)
+                              {
+                                  for (int i = 0; i < 8; i++)
+                                      flex5000DebugForm.SetPAPot(i, (byte)pa_bias_table[index][i]);
+                              }
+                          }
+                      } */
+                    else if (name.StartsWith("rx1_level_table"))
+                    {
+                        int start = name.IndexOf("[") + 1;
+                        int length = name.IndexOf("]") - start;
+                        int index = int.Parse(name.Substring(start, length));
+
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < 3; i++)
+                            rx1_level_table[index][i] = (float)Math.Round(float.Parse(list[i]), 3);
+                    }
+                    else if (name.StartsWith("rx2_level_table"))
+                    {
+                        int start = name.IndexOf("[") + 1;
+                        int length = name.IndexOf("]") - start;
+                        int index = int.Parse(name.Substring(start, length));
+
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < 3; i++)
+                            rx2_level_table[index][i] = (float)Math.Round(float.Parse(list[i]), 3);
+                    }
+                    /*   else if (name.StartsWith("pa_bridge_table"))
+                       {
+                           int start = name.IndexOf("[") + 1;
+                           int length = name.IndexOf("]") - start;
+                           int index = int.Parse(name.Substring(start, length));
+
+                           string[] list = val.Split('|');
+                           for (int i = 0; i < 6; i++)
+                               pa_bridge_table[index][i] = (float)Math.Round(float.Parse(list[i]), 4);
+                       } 
+                       else if (name.StartsWith("swr_table"))
+                       {
+                           int start = name.IndexOf("[") + 1;
+                           int length = name.IndexOf("]") - start;
+                           int index = int.Parse(name.Substring(start, length));
+
+                           swr_table[index] = (float)Math.Round(float.Parse(val), 4);
+                       }
+                       else if (name.StartsWith("atu_swr_table"))
+                       {
+                           int start = name.IndexOf("[") + 1;
+                           int length = name.IndexOf("]") - start;
+                           int index = int.Parse(name.Substring(start, length));
+
+                           atu_swr_table[index] = (float)Math.Round(float.Parse(val), 4);
+                       }
+                       else if (name.StartsWith("rx1_ant_by_band"))
+                       {
+                           string[] list = val.Split('|');
+                           for (int i = 0; i < (int)Band.LAST; i++)
+                               rx1_ant_by_band[i] = (FWCAnt)int.Parse(list[i]);
+                       }
+                       else if (name.StartsWith("rx2_ant_by_band"))
+                       {
+                           string[] list = val.Split('|');
+                           for (int i = 0; i < (int)Band.LAST; i++)
+                               rx2_ant_by_band[i] = (FWCAnt)int.Parse(list[i]);
+                       }
+                       else if (name.StartsWith("tx_ant_by_band"))
+                       {
+                           string[] list = val.Split('|');
+                           for (int i = 0; i < (int)Band.LAST; i++)
+                               tx_ant_by_band[i] = (FWCAnt)int.Parse(list[i]);
+                       }
+                       else if (name.StartsWith("rx1_loop_by_band"))
+                       {
+                           string[] list = val.Split('|');
+                           for (int i = 0; i < (int)Band.LAST; i++)
+                               rx1_loop_by_band[i] = Convert.ToBoolean(int.Parse(list[i]));
+                       } */
+                    else if (name.StartsWith("rx1_preamp_by_band"))
+                    {
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < (int)Band.LAST; i++)
+                            rx1_preamp_by_band[i] = (PreampMode)(int.Parse(list[i]));
+                    }
+                    else if (name.StartsWith("rx2_preamp_by_band"))
+                    {
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < (int)Band.LAST; i++)
+                            rx2_preamp_by_band[i] = (PreampMode)(int.Parse(list[i]));
+                    }
+                    else if (name.StartsWith("rx1_step_attenuator_by_band"))
+                    {
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < (int)Band.LAST; i++)
+                            rx1_step_attenuator_by_band[i] = int.Parse(list[i]);
+                    }
+                    else if (name.StartsWith("rx2_step_attenuator_by_band"))
+                    {
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < (int)Band.LAST; i++)
+                            rx2_step_attenuator_by_band[i] = int.Parse(list[i]);
+                    }
+                    else if (name.StartsWith("power_by_band"))
+                    {
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < (int)Band.LAST; i++)
+                            power_by_band[i] = int.Parse(list[i]);
+                    }
+                    else if (name.StartsWith("fm_tx_offset_by_band_mhz"))
+                    {
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < (int)Band.LAST; i++)
+                            fm_tx_offset_by_band_mhz[i] = double.Parse(list[i]);
+                    }
+                    else if (name.StartsWith("rx1_agct_by_band"))
+                    {
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < (int)Band.LAST; i++)
+                            rx1_agct_by_band[i] = int.Parse(list[i]);
+                    }
+                    else if (name.StartsWith("rx2_agct_by_band"))
+                    {
+                        string[] list = val.Split('|');
+                        for (int i = 0; i < (int)Band.LAST; i++)
+                            rx2_agct_by_band[i] = int.Parse(list[i]);
+                    }
+                    /* else if (name.StartsWith("tx1_by_band"))
+                      {
+                          string[] list = val.Split('|');
+                          for (int i = 0; i < (int)Band.LAST; i++)
+                              tx1_by_band[i] = Convert.ToBoolean(int.Parse(list[i]));
+                      }
+                      else if (name.StartsWith("tx2_by_band"))
+                      {
+                          string[] list = val.Split('|');
+                          for (int i = 0; i < (int)Band.LAST; i++)
+                              tx2_by_band[i] = Convert.ToBoolean(int.Parse(list[i]));
+                      }
+                      else if (name.StartsWith("tx3_by_band"))
+                      {
+                          string[] list = val.Split('|');
+                          for (int i = 0; i < (int)Band.LAST; i++)
+                              tx3_by_band[i] = Convert.ToBoolean(int.Parse(list[i]));
+                      } */
+
+                    switch (name)
+                    {
+                        /* case "rx2_res_offset":
+                             rx2_res_offset = float.Parse(val);
+                             break;
+                         case "current_ant_mode":
+                             current_ant_mode = (AntMode)int.Parse(val);
+                             break;
+                         case "rx1_ant":
+                             rx1_ant = (FWCAnt)int.Parse(val);
+                             break;
+                         case "rx1_loop":
+                             rx1_loop = bool.Parse(val);
+                             break;
+                         case "rx2_ant":
+                             rx2_ant = (FWCAnt)int.Parse(val);
+                             break;
+                         case "tx_ant":
+                             tx_ant = (FWCAnt)int.Parse(val);
+                             break;
+                         case "fwc_preamp_offset":
+                             fwc_preamp_offset = float.Parse(val);
+                             break;
+                         case "fwc_last_cal_date_time":
+                             fwc_last_cal_date_time = long.Parse(val);
+                             break;
+                         case "fwc_serial_num":
+                             fwc_serial_num = uint.Parse(val);
+                             break;
+                         case "fwc_trx_serial_num":
+                             fwc_trx_serial_num = uint.Parse(val);
+                             break;
+                         case "rx2_last_cal_date_time":
+                             rx2_last_cal_date_time = long.Parse(val);
+                             break;
+                         case "rx2_serial_num":
+                             rx2_serial_num = uint.Parse(val);
+                             break;
+                         case "rx2_trx_match_serial":
+                             rx2_trx_match_serial = uint.Parse(val);
+                             break; */
+                        //case "rx2_fixed_gain":
+                        //rx2_fixed_gain = int.Parse(val);
+                        //break;
+                        //case "rx2_max_gain":
+                        //	rx2_max_gain = int.Parse(val);
+                        //	break;
+                        case "band_160m_index":
+                            band_160m_index = Int32.Parse(val);
+                            break;
+                        case "band_80m_index":
+                            band_80m_index = Int32.Parse(val);
+                            break;
+                        case "band_60m_index":
+                            band_60m_index = Int32.Parse(val);
+                            break;
+                        case "band_40m_index":
+                            band_40m_index = Int32.Parse(val);
+                            break;
+                        case "band_30m_index":
+                            band_30m_index = Int32.Parse(val);
+                            break;
+                        case "band_20m_index":
+                            band_20m_index = Int32.Parse(val);
+                            break;
+                        case "band_17m_index":
+                            band_17m_index = Int32.Parse(val);
+                            break;
+                        case "band_15m_index":
+                            band_15m_index = Int32.Parse(val);
+                            break;
+                        case "band_12m_index":
+                            band_12m_index = Int32.Parse(val);
+                            break;
+                        case "band_10m_index":
+                            band_10m_index = Int32.Parse(val);
+                            break;
+                        case "band_6m_index":
+                            band_6m_index = Int32.Parse(val);
+                            break;
+                        case "band_2m_index":
+                            band_2m_index = Int32.Parse(val);
+                            break;
+                        case "band_wwv_index":
+                            band_wwv_index = Int32.Parse(val);
+                            break;
+                        case "band_gen_index":
+                            band_gen_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf0_index":
+                            band_vhf0_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf1_index":
+                            band_vhf1_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf2_index":
+                            band_vhf2_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf3_index":
+                            band_vhf3_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf4_index":
+                            band_vhf4_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf5_index":
+                            band_vhf5_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf6_index":
+                            band_vhf6_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf7_index":
+                            band_vhf7_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf8_index":
+                            band_vhf8_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf9_index":
+                            band_vhf9_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf10_index":
+                            band_vhf10_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf11_index":
+                            band_vhf11_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf12_index":
+                            band_vhf12_index = Int32.Parse(val);
+                            break;
+                        case "band_vhf13_index":
+                            band_vhf13_index = Int32.Parse(val);
+                            break;
+                        case "current_datetime_mode":
+                            CurrentDateTimeMode = (DateTimeMode)(Int32.Parse(val));
+                            break;
+                        case "wheel_tune_index":
+                            tune_step_index = Int32.Parse(val);
+                            break;
+                        case "txtMemoryQuick":
+                            txtMemoryQuick.Text = val;
+                            break;
+                        case "rx1_display_cal_offset":
+                            RX1DisplayCalOffset = float.Parse(val);
+                            break;
+                        //  case "tx_display_cal_offset":
+                        //    TXDisplayCalOffset = float.Parse(val);
+                        //     break;
+                        case "rx1_meter_cal_offset":
+                            rx1_meter_cal_offset = float.Parse(val);
+                            break;
+                        case "rx2_display_cal_offset":
+                            RX2DisplayCalOffset = float.Parse(val);
+                            break;
+                        //  case "tx_display_cal_offset":
+                        //    TXDisplayCalOffset = float.Parse(val);
+                        //     break;
+                        case "rx2_meter_cal_offset":
+                            rx2_meter_cal_offset = float.Parse(val);
+                            break;
+                        case "panelBandHF.Visible": //added by w3sz
+                            whatisHF = bool.Parse(val); //added by w3sz
+                            panelBandHF.Visible = whatisHF; //added by w3sz
+                            if (panelBandHF.Visible) //added by w3sz
+                                btnBandHF_Click(btnBandHF, EventArgs.Empty); //added by w3sz
+                            break; //added by w3sz
+                        case "panelBandVHF.Visible": //added by w3sz
+                            whatisVHF = bool.Parse(val); //added by w3sz
+                            panelBandVHF.Visible = whatisVHF; //added by w3sz
+                            if (panelBandVHF.Visible) //added by w3sz
+                                btnBandVHF_Click(btnBandVHF, EventArgs.Empty); //added by w3sz
+                            break;  //added by w3sz
+                        case "iscollapsed":  //added by w3sz
+                            iscollapsed = bool.Parse(val);    //added by w3sz
+                            if (iscollapsed)   //added by w3sz
+                            {
+                                this.CollapseDisplay();
+                                iscollapsed = true;
+                                isexpanded = false;
+                            }
+                            break; //added by w3sz
+                        case "isexpanded":  //added by w3sz
+                            isexpanded = bool.Parse(val);    //added by w3sz
+                            if (isexpanded)   //added by w3sz
+                            {
+                                //  this.ExpandDisplay();
+                                isexpanded = true;
+                                iscollapsed = false;
+                            }
+                            break; //added by w3sz
+                        case "diversity":
+                            startdiversity = bool.Parse(val);
+                            break;
+                        case "quick_save_mode":
+                            quick_save_mode = (DSPMode)(Int32.Parse(val));
+                            break;
+                        case "quick_save_filter":
+                            quick_save_filter = (Filter)(Int32.Parse(val));
+                            break;
+                        case "vfob_dsp_mode":
+                            vfob_dsp_mode = (DSPMode)(Int32.Parse(val));
+                            break;
+                        case "vfob_filter":
+                            vfob_filter = (Filter)(Int32.Parse(val));
+                            break;
+                        case "console_top":
+                            num = Int32.Parse(val);
+                            /*if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Height && Screen.AllScreens.Length == 1))
+                                num = 0;*/
+                            this.Top = num;
+                            break;
+                        case "console_left":
+                            num = Int32.Parse(val);
+                            /*if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Width && Screen.AllScreens.Length == 1))
+                                num = 0;*/
+                            this.Left = num;
+                            break;
+                        case "console_width":
+                            if (dpi <= 96) this.Width = int.Parse(val);
+                            break;
+                        case "console_height":
+                            if (dpi <= 96) this.Height = int.Parse(val);
+                            break;
+                        case "setup_top":
+                            num = Int32.Parse(val);
+                            /*if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Height && Screen.AllScreens.Length == 1))
+                                num = 0;*/
+                            SetupForm.Top = num;
+                            break;
+                        case "setup_left":
+                            num = Int32.Parse(val);
+                            /*if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Width && Screen.AllScreens.Length == 1))
+                                num = 0;*/
+                            SetupForm.Left = num;
+                            break;
+                        /*	case "mem_top":
+                                num = Int32.Parse(val);
+                                if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Height && Screen.AllScreens.Length == 1))
+                                    num = 0;
+                                MemForm.Top = num;
+                                break;
+                            case "mem_left":
+                                num = Int32.Parse(val);
+                                if((num < 0) || (num > Screen.PrimaryScreen.Bounds.Width && Screen.AllScreens.Length == 1))
+                                    num = 0;
+                                MemForm.Left = num;
+                                break; */
+                        case "SetupWizard":
+                            if (val == "1")
+                                run_setup_wizard = false;
+                            break;
+                        //case "show_alpha_warning":
+                        //	show_alpha_warning = bool.Parse(val);
+                        //	break;
+                        // case "show_mobile_warning":
+                        //    show_mobile_warning = bool.Parse(val);
+                        //    break;
+                        /*  case "rx1_image_gain_table":
+                              string[] list = val.Split('|');
+                              for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
+                                  rx1_image_gain_table[i] = float.Parse(list[i]);
+                              break;
+                          case "rx1_image_phase_table":
+                              list = val.Split('|');
+                              for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
+                                  rx1_image_phase_table[i] = float.Parse(list[i]);
+                              break;
+                          case "rx2_image_gain_table":
+                              list = val.Split('|');
+                              for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
+                                  rx2_image_gain_table[i] = float.Parse(list[i]);
+                              break;
+                          case "rx2_image_phase_table":
+                              list = val.Split('|');
+                              for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
+                                  rx2_image_phase_table[i] = float.Parse(list[i]);
+                              break;
+                          case "tx_image_gain_table":
+                              list = val.Split('|');
+                              for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
+                                  tx_image_gain_table[i] = float.Parse(list[i]);
+                              break;
+                          case "tx_image_phase_table":
+                              list = val.Split('|');
+                              for (int i = 0; i <= (int)Band.B6M && i < list.Length; i++)
+                                  tx_image_phase_table[i] = float.Parse(list[i]);
+                              break;
+                          case "rx1_level_checksum":
+                              rx1_level_checksum = byte.Parse(val);
+                              break;
+                          case "rx1_image_gain_checksum":
+                              rx1_image_gain_checksum = byte.Parse(val);
+                              break;
+                          case "rx1_image_phase_checksum":
+                              rx1_image_phase_checksum = byte.Parse(val);
+                              break;
+                          case "tx_image_gain_checksum":
+                              tx_image_gain_checksum = byte.Parse(val);
+                              break;
+                          case "tx_image_phase_checksum":
+                              tx_image_phase_checksum = byte.Parse(val);
+                              break;
+                          case "tx_carrier_checksum":
+                              tx_carrier_checksum = byte.Parse(val);
+                              break;
+                          case "pa_bias_checksum":
+                              pa_bias_checksum = byte.Parse(val);
+                              break;
+                          case "pa_bridge_checksum":
+                              pa_bridge_checksum = byte.Parse(val);
+                              break;
+                          case "pa_power_checksum":
+                              pa_power_checksum = byte.Parse(val);
+                              break;
+                          case "pa_swr_checksum":
+                              pa_swr_checksum = byte.Parse(val);
+                              break;
+                          case "atu_swr_checksum":
+                              atu_swr_checksum = byte.Parse(val);
+                              break;
+                          case "rx2_level_checksum":
+                              rx2_level_checksum = byte.Parse(val);
+                              break;
+                          case "rx2_image_gain_checksum":
+                              rx2_image_gain_checksum = byte.Parse(val);
+                              break;
+                          case "rx2_image_phase_checksum":
+                              rx2_image_phase_checksum = byte.Parse(val);
+                              break; */
+                        case "saved_rx_only":
+                            saved_rx_only = bool.Parse(val);
+                            break;
+                        case "mon_recall":
+                            mon_recall = bool.Parse(val);
+                            break;
+                        case "rx1_squelch_on":
+                            rx1_squelch_on = bool.Parse(val);
+                            break;
+                        case "rx1_squelch_threshold_scroll":
+                            rx1_squelch_threshold_scroll = int.Parse(val);
+                            break;
+                        case "rx1_fm_squelch_threshold_scroll":
+                            rx1_fm_squelch_threshold_scroll = int.Parse(val);
+                            break;
+                        case "rx2_squelch_on":
+                            rx2_squelch_on = bool.Parse(val);
+                            break;
+                        case "rx2_squelch_threshold_scroll":
+                            rx2_squelch_threshold_scroll = int.Parse(val);
+                            break;
+                        case "rx2_fm_squelch_threshold_scroll":
+                            rx2_fm_squelch_threshold_scroll = int.Parse(val);
+                            break;
+                        case "center_frequency":
+                            center_frequency = double.Parse(val);
+                            break;
+                        case "center_rx2_frequency":
+                            center_rx2_frequency = double.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_160m":
+                            waterfall_high_threshold_160m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_160m":
+                            waterfall_low_threshold_160m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_80m":
+                            waterfall_high_threshold_80m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_80m":
+                            waterfall_low_threshold_80m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_60m":
+                            waterfall_high_threshold_60m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_60m":
+                            waterfall_low_threshold_60m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_40m":
+                            waterfall_high_threshold_40m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_40m":
+                            waterfall_low_threshold_40m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_30m":
+                            waterfall_high_threshold_30m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_30m":
+                            waterfall_low_threshold_30m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_20m":
+                            waterfall_high_threshold_20m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_20m":
+                            waterfall_low_threshold_20m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_17m":
+                            waterfall_high_threshold_17m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_17m":
+                            waterfall_low_threshold_17m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_15m":
+                            waterfall_high_threshold_15m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_15m":
+                            waterfall_low_threshold_15m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_12m":
+                            waterfall_high_threshold_12m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_12m":
+                            waterfall_low_threshold_12m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_10m":
+                            waterfall_high_threshold_10m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_10m":
+                            waterfall_low_threshold_10m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_6m":
+                            waterfall_high_threshold_6m = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_6m":
+                            waterfall_low_threshold_6m = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_wwv":
+                            waterfall_high_threshold_wwv = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_wwv":
+                            waterfall_low_threshold_wwv = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_gen":
+                            waterfall_high_threshold_gen = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_gen":
+                            waterfall_low_threshold_gen = float.Parse(val);
+                            break;
+                        case "waterfall_high_threshold_xvtr":
+                            waterfall_high_threshold_xvtr = float.Parse(val);
+                            break;
+                        case "waterfall_low_threshold_xvtr":
+                            waterfall_low_threshold_xvtr = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_160m":
+                            rx2_waterfall_high_threshold_160m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_160m":
+                            rx2_waterfall_low_threshold_160m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_80m":
+                            rx2_waterfall_high_threshold_80m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_80m":
+                            rx2_waterfall_low_threshold_80m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_60m":
+                            rx2_waterfall_high_threshold_60m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_60m":
+                            rx2_waterfall_low_threshold_60m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_40m":
+                            rx2_waterfall_high_threshold_40m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_40m":
+                            rx2_waterfall_low_threshold_40m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_30m":
+                            rx2_waterfall_high_threshold_30m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_30m":
+                            rx2_waterfall_low_threshold_30m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_20m":
+                            rx2_waterfall_high_threshold_20m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_20m":
+                            rx2_waterfall_low_threshold_20m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_17m":
+                            rx2_waterfall_high_threshold_17m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_17m":
+                            rx2_waterfall_low_threshold_17m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_15m":
+                            rx2_waterfall_high_threshold_15m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_15m":
+                            rx2_waterfall_low_threshold_15m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_12m":
+                            rx2_waterfall_high_threshold_12m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_12m":
+                            rx2_waterfall_low_threshold_12m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_10m":
+                            rx2_waterfall_high_threshold_10m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_10m":
+                            rx2_waterfall_low_threshold_10m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_6m":
+                            rx2_waterfall_high_threshold_6m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_6m":
+                            rx2_waterfall_low_threshold_6m = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_wwv":
+                            rx2_waterfall_high_threshold_wwv = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_wwv":
+                            rx2_waterfall_low_threshold_wwv = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_gen":
+                            rx2_waterfall_high_threshold_gen = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_gen":
+                            rx2_waterfall_low_threshold_gen = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_high_threshold_xvtr":
+                            rx2_waterfall_high_threshold_xvtr = float.Parse(val);
+                            break;
+                        case "rx2_waterfall_low_threshold_xvtr":
+                            rx2_waterfall_low_threshold_xvtr = float.Parse(val);
+                            break;
+                        case "display_grid_max_160m":
+                            display_grid_max_160m = float.Parse(val);
+                            break;
+                        case "display_grid_min_160m":
+                            display_grid_min_160m = float.Parse(val);
+                            break;
+                        case "display_grid_max_80m":
+                            display_grid_max_80m = float.Parse(val);
+                            break;
+                        case "display_grid_min_80m":
+                            display_grid_min_80m = float.Parse(val);
+                            break;
+                        case "display_grid_max_60m":
+                            display_grid_max_60m = float.Parse(val);
+                            break;
+                        case "display_grid_min_60m":
+                            display_grid_min_60m = float.Parse(val);
+                            break;
+                        case "display_grid_max_40m":
+                            display_grid_max_40m = float.Parse(val);
+                            break;
+                        case "display_grid_min_40m":
+                            display_grid_min_40m = float.Parse(val);
+                            break;
+                        case "display_grid_max_30m":
+                            display_grid_max_30m = float.Parse(val);
+                            break;
+                        case "display_grid_min_30m":
+                            display_grid_min_30m = float.Parse(val);
+                            break;
+                        case "display_grid_max_20m":
+                            display_grid_max_20m = float.Parse(val);
+                            break;
+                        case "display_grid_min_20m":
+                            display_grid_min_20m = float.Parse(val);
+                            break;
+                        case "display_grid_max_17m":
+                            display_grid_max_17m = float.Parse(val);
+                            break;
+                        case "display_grid_min_17m":
+                            display_grid_min_17m = float.Parse(val);
+                            break;
+                        case "display_grid_max_15m":
+                            display_grid_max_15m = float.Parse(val);
+                            break;
+                        case "display_grid_min_15m":
+                            display_grid_min_15m = float.Parse(val);
+                            break;
+                        case "display_grid_max_12m":
+                            display_grid_max_12m = float.Parse(val);
+                            break;
+                        case "display_grid_min_12m":
+                            display_grid_min_12m = float.Parse(val);
+                            break;
+                        case "display_grid_max_10m":
+                            display_grid_max_10m = float.Parse(val);
+                            break;
+                        case "display_grid_min_10m":
+                            display_grid_min_10m = float.Parse(val);
+                            break;
+                        case "display_grid_max_6m":
+                            display_grid_max_6m = float.Parse(val);
+                            break;
+                        case "display_grid_min_6m":
+                            display_grid_min_6m = float.Parse(val);
+                            break;
+                        case "display_grid_max_wwv":
+                            display_grid_max_wwv = float.Parse(val);
+                            break;
+                        case "display_grid_min_wwv":
+                            display_grid_min_wwv = float.Parse(val);
+                            break;
+                        case "display_grid_max_gen":
+                            display_grid_max_gen = float.Parse(val);
+                            break;
+                        case "display_grid_min_gen":
+                            display_grid_min_gen = float.Parse(val);
+                            break;
+                        case "display_grid_max_xvtr":
+                            display_grid_max_xvtr = float.Parse(val);
+                            break;
+                        case "display_grid_min_xvtr":
+                            display_grid_min_xvtr = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_160m":
+                            rx2_display_grid_max_160m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_160m":
+                            rx2_display_grid_min_160m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_80m":
+                            rx2_display_grid_max_80m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_80m":
+                            rx2_display_grid_min_80m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_60m":
+                            rx2_display_grid_max_60m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_60m":
+                            rx2_display_grid_min_60m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_40m":
+                            rx2_display_grid_max_40m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_40m":
+                            rx2_display_grid_min_40m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_30m":
+                            rx2_display_grid_max_30m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_30m":
+                            rx2_display_grid_min_30m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_20m":
+                            rx2_display_grid_max_20m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_20m":
+                            rx2_display_grid_min_20m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_17m":
+                            rx2_display_grid_max_17m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_17m":
+                            rx2_display_grid_min_17m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_15m":
+                            rx2_display_grid_max_15m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_15m":
+                            rx2_display_grid_min_15m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_12m":
+                            rx2_display_grid_max_12m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_12m":
+                            rx2_display_grid_min_12m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_10m":
+                            rx2_display_grid_max_10m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_10m":
+                            rx2_display_grid_min_10m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_6m":
+                            rx2_display_grid_max_6m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_6m":
+                            rx2_display_grid_min_6m = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_wwv":
+                            rx2_display_grid_max_wwv = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_wwv":
+                            rx2_display_grid_min_wwv = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_gen":
+                            rx2_display_grid_max_gen = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_gen":
+                            rx2_display_grid_min_gen = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_max_xvtr":
+                            rx2_display_grid_max_xvtr = float.Parse(val);
+                            break;
+                        case "rx2_display_grid_min_xvtr":
+                            rx2_display_grid_min_xvtr = float.Parse(val);
+                            break;
+                    }
+                }
+
+                // restore saved values to the controls
+                foreach (string s in a)				// string is in the format "name,value"
+                {
+                    string[] vals = s.Split('/');
+                    string name = vals[0];
+                    string val = vals[1];
+
+                    if (s.StartsWith("chk"))			// control is a CheckBox
+                    {
+                        for (int i = 0; i < checkbox_list.Count; i++)
+                        {	// look through each control to find the matching name
+                            CheckBoxTS c = (CheckBoxTS)checkbox_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Checked = bool.Parse(val);	// restore value
+                                i = checkbox_list.Count + 1;
+                            }
+                            if (i == checkbox_list.Count)
+                                MessageBox.Show("Control not found: " + name, "GetState Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else if (s.StartsWith("combo"))	// control is a ComboBox
+                    {
+                        for (int i = 0; i < combobox_list.Count; i++)
+                        {	// look through each control to find the matching name
+                            ComboBoxTS c = (ComboBoxTS)combobox_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Text = val;	// restore value
+                                i = combobox_list.Count + 1;
+                            }
+                            if (i == combobox_list.Count)
+                                MessageBox.Show("Control not found: " + name, "GetState Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else if (s.StartsWith("ud"))
+                    {
+                        for (int i = 0; i < numericupdown_list.Count; i++)
+                        {	// look through each control to find the matching name
+                            NumericUpDownTS c = (NumericUpDownTS)numericupdown_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                decimal num = decimal.Parse(val);
+
+                                if (num > c.Maximum) num = c.Maximum;		// check endpoints
+                                else if (num < c.Minimum) num = c.Minimum;
+                                c.Value = num;			// restore value
+                                i = numericupdown_list.Count + 1;
+                            }
+                            if (i == numericupdown_list.Count)
+                                MessageBox.Show("Control not found: " + name, "GetState Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else if (s.StartsWith("rad"))
+                    {	// look through each control to find the matching name
+                        for (int i = 0; i < radiobutton_list.Count; i++)
+                        {
+                            RadioButtonTS c = (RadioButtonTS)radiobutton_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                if (!val.ToLower().Equals("true") && !val.ToLower().Equals("false"))
+                                    val = "True";
+                                c.Checked = bool.Parse(val);	// restore value
+                                i = radiobutton_list.Count + 1;
+                            }
+                            if (i == radiobutton_list.Count)
+                                MessageBox.Show("Control not found: " + name, "GetState Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else if (s.StartsWith("txt"))
+                    {	// look through each control to find the matching name
+                        for (int i = 0; i < textbox_list.Count; i++)
+                        {
+                            TextBoxTS c = (TextBoxTS)textbox_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Text = val;	// restore value
+                                i = textbox_list.Count + 1;
+                            }
+                            if (i == textbox_list.Count)
+                                MessageBox.Show("Control not found: " + name, "GetState Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else if (s.StartsWith("tb"))
+                    {
+                        // look through each control to find the matching name
+                        for (int i = 0; i < trackbar_list.Count; i++)
+                        {
+                            TrackBarTS c = (TrackBarTS)trackbar_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Value = Int32.Parse(val);
+                                i = trackbar_list.Count + 1;
+                            }
+                            if (i == trackbar_list.Count)
+                                MessageBox.Show("Control not found: " + name, "GetState Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else if (s.StartsWith("ptb"))
+                    {
+                        // look through each control to find the matching name
+                        for (int i = 0; i < prettytrackbar_list.Count; i++)
+                        {
+                            PrettyTrackBar c = (PrettyTrackBar)prettytrackbar_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Value = Int32.Parse(val);
+                                i = prettytrackbar_list.Count + 1;
+                            }
+                            if (i == prettytrackbar_list.Count)
+                                MessageBox.Show("Control not found: " + name, "GetState Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
                 }
             }
-
-            // restore saved values to the controls
-            foreach (string s in a)				// string is in the format "name,value"
+            catch (Exception ex)
             {
-                string[] vals = s.Split('/');
-                string name = vals[0];
-                string val = vals[1];
-
-                if (s.StartsWith("chk"))			// control is a CheckBox
-                {
-                    for (int i = 0; i < checkbox_list.Count; i++)
-                    {	// look through each control to find the matching name
-                        CheckBoxTS c = (CheckBoxTS)checkbox_list[i];
-                        if (c.Name.Equals(name))		// name found
-                        {
-                            c.Checked = bool.Parse(val);	// restore value
-                            i = checkbox_list.Count + 1;
-                        }
-                        if (i == checkbox_list.Count)
-                            MessageBox.Show("Control not found: " + name, "GetState Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                else if (s.StartsWith("combo"))	// control is a ComboBox
-                {
-                    for (int i = 0; i < combobox_list.Count; i++)
-                    {	// look through each control to find the matching name
-                        ComboBoxTS c = (ComboBoxTS)combobox_list[i];
-                        if (c.Name.Equals(name))		// name found
-                        {
-                            c.Text = val;	// restore value
-                            i = combobox_list.Count + 1;
-                        }
-                        if (i == combobox_list.Count)
-                            MessageBox.Show("Control not found: " + name, "GetState Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                else if (s.StartsWith("ud"))
-                {
-                    for (int i = 0; i < numericupdown_list.Count; i++)
-                    {	// look through each control to find the matching name
-                        NumericUpDownTS c = (NumericUpDownTS)numericupdown_list[i];
-                        if (c.Name.Equals(name))		// name found
-                        {
-                            decimal num = decimal.Parse(val);
-
-                            if (num > c.Maximum) num = c.Maximum;		// check endpoints
-                            else if (num < c.Minimum) num = c.Minimum;
-                            c.Value = num;			// restore value
-                            i = numericupdown_list.Count + 1;
-                        }
-                        if (i == numericupdown_list.Count)
-                            MessageBox.Show("Control not found: " + name, "GetState Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                else if (s.StartsWith("rad"))
-                {	// look through each control to find the matching name
-                    for (int i = 0; i < radiobutton_list.Count; i++)
-                    {
-                        RadioButtonTS c = (RadioButtonTS)radiobutton_list[i];
-                        if (c.Name.Equals(name))		// name found
-                        {
-                            if (!val.ToLower().Equals("true") && !val.ToLower().Equals("false"))
-                                val = "True";
-                            c.Checked = bool.Parse(val);	// restore value
-                            i = radiobutton_list.Count + 1;
-                        }
-                        if (i == radiobutton_list.Count)
-                            MessageBox.Show("Control not found: " + name, "GetState Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                else if (s.StartsWith("txt"))
-                {	// look through each control to find the matching name
-                    for (int i = 0; i < textbox_list.Count; i++)
-                    {
-                        TextBoxTS c = (TextBoxTS)textbox_list[i];
-                        if (c.Name.Equals(name))		// name found
-                        {
-                            c.Text = val;	// restore value
-                            i = textbox_list.Count + 1;
-                        }
-                        if (i == textbox_list.Count)
-                            MessageBox.Show("Control not found: " + name, "GetState Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                else if (s.StartsWith("tb"))
-                {
-                    // look through each control to find the matching name
-                    for (int i = 0; i < trackbar_list.Count; i++)
-                    {
-                        TrackBarTS c = (TrackBarTS)trackbar_list[i];
-                        if (c.Name.Equals(name))		// name found
-                        {
-                            c.Value = Int32.Parse(val);
-                            i = trackbar_list.Count + 1;
-                        }
-                        if (i == trackbar_list.Count)
-                            MessageBox.Show("Control not found: " + name, "GetState Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                else if (s.StartsWith("ptb"))
-                {
-                    // look through each control to find the matching name
-                    for (int i = 0; i < prettytrackbar_list.Count; i++)
-                    {
-                        PrettyTrackBar c = (PrettyTrackBar)prettytrackbar_list[i];
-                        if (c.Name.Equals(name))		// name found
-                        {
-                            c.Value = Int32.Parse(val);
-                            i = prettytrackbar_list.Count + 1;
-                        }
-                        if (i == prettytrackbar_list.Count)
-                            MessageBox.Show("Control not found: " + name, "GetState Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-
+                MessageBox.Show("Error in GetState()" + ex.ToString());
             }
 
             Common.ForceFormOnScreen(this);
@@ -12349,47 +12369,47 @@ namespace PowerSDR
             if (old_band != b)
                 UpdateBandButtonColors();
 
-            if (!(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
-            {
-                if (atu_present && xvtr_present)
-                {
-                    if (b == Band.B2M)
-                        comboTuneMode.Enabled = false;
-                    else
-                        comboTuneMode.Enabled = true;
-                }
+            //if (!(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
+            //{
+            //    if (atu_present && xvtr_present)
+            //    {
+            //        if (b == Band.B2M)
+            //            comboTuneMode.Enabled = false;
+            //        else
+            //            comboTuneMode.Enabled = true;
+            //    }
 
-                if (xvtr_present)
-                {
-                    if (atu_present &&
-                        comboTuneMode.SelectedIndex > 0 &&
-                        (ATUTuneMode)comboTuneMode.SelectedIndex != ATUTuneMode.BYPASS &&
-                        (tuned_band != b) &&
-                        tuned_band != Band.FIRST)
-                    {
-                        Hdw.PA_ATUTune(ATUTuneMode.BYPASS);
-                        tuned_band = Band.FIRST;
-                        chkTUN.BackColor = SystemColors.Control;
-                    }
+            //    if (xvtr_present)
+            //    {
+            //        if (atu_present &&
+            //            comboTuneMode.SelectedIndex > 0 &&
+            //            (ATUTuneMode)comboTuneMode.SelectedIndex != ATUTuneMode.BYPASS &&
+            //            (tuned_band != b) &&
+            //            tuned_band != Band.FIRST)
+            //        {
+            //            Hdw.PA_ATUTune(ATUTuneMode.BYPASS);
+            //            tuned_band = Band.FIRST;
+            //            chkTUN.BackColor = SystemColors.Control;
+            //        }
 
-                    if (b == Band.B2M)
-                    {
-                        if (comboPreamp.Items.Contains("Off"))
-                            comboPreamp.Items.Remove("Off");
-                        if (comboPreamp.Items.Contains("Med"))
-                            comboPreamp.Items.Remove("Med");
-                        if (comboPreamp.SelectedIndex < 0)
-                            comboPreamp.Text = "High";
-                    }
-                    else
-                    {
-                        if (!comboPreamp.Items.Contains("Off"))
-                            comboPreamp.Items.Insert(0, "Off");
-                        if (!comboPreamp.Items.Contains("Med"))
-                            comboPreamp.Items.Insert(2, "Med");
-                    }
-                }
-            }
+            //        if (b == Band.B2M)
+            //        {
+            //            if (comboPreamp.Items.Contains("Off"))
+            //                comboPreamp.Items.Remove("Off");
+            //            if (comboPreamp.Items.Contains("Med"))
+            //                comboPreamp.Items.Remove("Med");
+            //            if (comboPreamp.SelectedIndex < 0)
+            //                comboPreamp.Text = "High";
+            //        }
+            //        else
+            //        {
+            //            if (!comboPreamp.Items.Contains("Off"))
+            //                comboPreamp.Items.Insert(0, "Off");
+            //            if (!comboPreamp.Items.Contains("Med"))
+            //                comboPreamp.Items.Insert(2, "Med");
+            //        }
+            //    }
+            // }
         }
 
         private float GainByBand(Band b)
@@ -12734,7 +12754,7 @@ namespace PowerSDR
                         break;
                 }
             }
-            
+
             if (current_hpsdr_model == HPSDRModel.HERMES)
             {
                 switch (b)
@@ -13034,6 +13054,7 @@ namespace PowerSDR
             return swr;
         }
 
+#if false
         public double ALEXSWR(double g_fwd, double g_rev)
         {
             double rho = Math.Sqrt(g_rev / g_fwd);
@@ -13099,19 +13120,20 @@ namespace PowerSDR
             }
             return swr;
         }
+#endif
 
-        public double FWCSWR(int adc_fwd, int adc_rev)
-        {
-            double f = FWCPAPower(adc_fwd);
-            double r = FWCPAPower(adc_rev) * swr_table[(int)tx_band];
-            //Debug.WriteLine("FWCSWR: fwd:"+adc_fwd+" rev:"+adc_rev+" f:"+f.ToString("f2")+" r:"+r.ToString("f2"));
+        //public double FWCSWR(int adc_fwd, int adc_rev)
+        //{
+        //    double f = FWCPAPower(adc_fwd);
+        //    double r = FWCPAPower(adc_rev) * swr_table[(int)tx_band];
+        //    //Debug.WriteLine("FWCSWR: fwd:"+adc_fwd+" rev:"+adc_rev+" f:"+f.ToString("f2")+" r:"+r.ToString("f2"));
 
-            if ((adc_fwd == 0 && adc_rev == 0) || (f < 1.0 && r < 1.0)) return 1.0;
-            if (adc_rev > adc_fwd) return 50.0;
+        //    if ((adc_fwd == 0 && adc_rev == 0) || (f < 1.0 && r < 1.0)) return 1.0;
+        //    if (adc_rev > adc_fwd) return 50.0;
 
-            double sqrt_r_over_f = Math.Sqrt(r / f);
-            return (1.0 + sqrt_r_over_f) / (1.0 - sqrt_r_over_f);
-        }
+        //    double sqrt_r_over_f = Math.Sqrt(r / f);
+        //    return (1.0 + sqrt_r_over_f) / (1.0 - sqrt_r_over_f);
+        //}
 
         private double ScaledVoltage(int adc)
         {
@@ -13157,87 +13179,126 @@ namespace PowerSDR
         public float CalibratedPAPower()
         {
             float watts = alex_fwd; // computeAlexFwdPower();
-            /******************************************************************
-            * Begin with both numbers in each line equal to the comment value.
-            * For each power level from 10W to maximum, adjust power such that
-            * the P*SDR meter just achieves the value in the comment. 
-            * Record the actual power output as indicated by an external 
-            * calibrated meter.  Use the recorded values as the FIRST numbers
-            * in the respective lines of the table.
-            ******************************************************************/
-            float[] table = new float[15] {   1.0f,                       //   0W 
-                                             SetupForm.PA10W  /  10.0f,   //  10W 
-                                             SetupForm.PA20W  /  20.0f,   //  20W 
-                                             SetupForm.PA30W  /  30.0f,   //  30W 
-                                             SetupForm.PA40W  /  40.0f,   //  40W 
-                                             SetupForm.PA50W  /  50.0f,   //  50W 
-                                             SetupForm.PA60W  /  60.0f,   //  60W 
-                                             SetupForm.PA70W  /  70.0f,   //  70W
-                                             SetupForm.PA80W  /  80.0f,   //  80W 
-                                             SetupForm.PA90W  /  90.0f,   //  90W
-                                             SetupForm.PA100W / 100.0f,   // 100W
-                                             SetupForm.PA110W / 110.0f,   // 110W
-                                             SetupForm.PA120W / 120.0f,   // 120W 
-                                             SetupForm.PA130W / 130.0f,   // 130W
-                                             SetupForm.PA140W / 140.0f }; // 140W
-            int idx = (int)(0.1f * watts);
-            float frac = 0.1f * watts - idx;
-            watts *= (1.0f - frac) * table[idx] + frac * table[idx + 1];
-            return watts;
+            //********************************************************************
+            // Begin with all spinners set equal to their labelled value.
+            // For each spinner, from 10W to maximum, adjust the output power
+            // such that your CALIBRATED EXTERNAL METER is equal to the spinner
+            // value.  Record the values appearing in the PowerSDR 'Fwd Pwr' meter.
+            // After completing measurements for all spinners, enter your
+            // recorded values into the respective spinners.  DO NOT USE
+            // POWER EXCEEDING THE RATING OF YOUR RADIO!
+            //********************************************************************
+            const int entries = 11;                                 // number of table entries
+            float[] table = new float[entries];
+            float[] ANAN100Cal = new float[entries] {    0.0f,      // predetermined calibration factors
+                                                        11.0f,
+                                                        24.0f,
+                                                        35.0f,
+                                                        46.0f,
+                                                        57.0f,
+                                                        67.0f,
+                                                        81.0f,
+                                                        90.0f,
+                                                       103.0f,
+                                                       114.0f };
+
+            float[] PAsets = new float[entries] { 0.0f,
+                                                  SetupForm.PA10W,
+                                                  SetupForm.PA20W,
+                                                  SetupForm.PA30W,
+                                                  SetupForm.PA40W,
+                                                  SetupForm.PA50W,
+                                                  SetupForm.PA60W,
+                                                  SetupForm.PA70W,
+                                                  SetupForm.PA80W,
+                                                  SetupForm.PA90W,
+                                                  SetupForm.PA100W };
+
+            switch (CurrentHPSDRModel)
+            {
+                // case HPSDRModel.ANAN100:
+                case HPSDRModel.ANAN100D:
+                    watts = PowerKernel(watts, entries, ANAN100Cal);
+                    break;
+                default:
+
+                    break;
+            }
+
+            return PowerKernel(watts, entries, PAsets);
         }
 
-        public double FWCPAPower(int adc) // adc in, watts out
+        private float PowerKernel(float watts, int entries, float[] table)
         {
-            if (adc < 2) return 0.0;
-            double[] table = { 1.0, 2.0, 5.0, 10.0, 20.0, 90.0 };
-
-            double watts = 0.0;
-            double volts = (double)adc / 4096 * 2.5;
-            double v2 = Math.Pow(volts, 2);
-
-            int high_index = 0;
-            for (int i = 0; i < 6; i++)
-            {
-                if (volts < pa_bridge_table[(int)tx_band][i])
-                {
-                    high_index = i;
-                    break;
-                }
-                if (i == 5) high_index = 6;
-            }
-
-            if (high_index != 6)
-            {
-                double v_low = 0.0, v_high = 0.0;
-                double p_low = 0.0, p_high = 0.0;
-
-                if (high_index != 0) v_low = pa_bridge_table[(int)tx_band][high_index - 1];
-                v_high = pa_bridge_table[(int)tx_band][high_index];
-                if (high_index != 0) p_low = table[high_index - 1];
-                p_high = table[high_index];
-                Debug.Assert(v_low <= volts && v_high >= volts);
-
-                double v_low_2 = Math.Pow(v_low, 2.0);
-                double v_high_2 = Math.Pow(v_high, 2.0);
-
-                watts = p_low + (p_high - p_low) * ((v2 - v_low_2) / (v_high_2 - v_low_2));
-            }
+            int idx = 0;
+            if (watts > table[entries - 1])
+                idx = entries - 2;
             else
             {
-                double v_low_2 = Math.Pow(pa_bridge_table[(int)tx_band][4], 2.0);
-                double v_high_2 = Math.Pow(pa_bridge_table[(int)tx_band][5], 2.0);
-
-                if (v_low_2 != v_high_2)
-                {
-                    double a = 70.0 / (v_high_2 - v_low_2);
-                    double b = 90.0 / (a * v_high_2);
-
-                    watts = a * v2 + b;
-                }
+                while (watts > table[idx]) idx++;
+                if (idx > 0) idx--;
             }
-
+            float frac = (watts - table[idx]) / (table[idx + 1] - table[idx]);
+            if (idx > 0)
+                watts *= 10.0f * ((1.0f - frac) * idx / table[idx] + frac * (idx + 1.0f) / table[idx + 1]);
+            else
+                watts *= 10.0f / table[idx + 1];
             return watts;
         }
+
+
+        //public double FWCPAPower(int adc) // adc in, watts out
+        //{
+        //    if (adc < 2) return 0.0;
+        //    double[] table = { 1.0, 2.0, 5.0, 10.0, 20.0, 90.0 };
+
+        //    double watts = 0.0;
+        //    double volts = (double)adc / 4096 * 2.5;
+        //    double v2 = Math.Pow(volts, 2);
+
+        //    int high_index = 0;
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        if (volts < pa_bridge_table[(int)tx_band][i])
+        //        {
+        //            high_index = i;
+        //            break;
+        //        }
+        //        if (i == 5) high_index = 6;
+        //    }
+
+        //    if (high_index != 6)
+        //    {
+        //        double v_low = 0.0, v_high = 0.0;
+        //        double p_low = 0.0, p_high = 0.0;
+
+        //        if (high_index != 0) v_low = pa_bridge_table[(int)tx_band][high_index - 1];
+        //        v_high = pa_bridge_table[(int)tx_band][high_index];
+        //        if (high_index != 0) p_low = table[high_index - 1];
+        //        p_high = table[high_index];
+        //        Debug.Assert(v_low <= volts && v_high >= volts);
+
+        //        double v_low_2 = Math.Pow(v_low, 2.0);
+        //        double v_high_2 = Math.Pow(v_high, 2.0);
+
+        //        watts = p_low + (p_high - p_low) * ((v2 - v_low_2) / (v_high_2 - v_low_2));
+        //    }
+        //    else
+        //    {
+        //        double v_low_2 = Math.Pow(pa_bridge_table[(int)tx_band][4], 2.0);
+        //        double v_high_2 = Math.Pow(pa_bridge_table[(int)tx_band][5], 2.0);
+
+        //        if (v_low_2 != v_high_2)
+        //        {
+        //            double a = 70.0 / (v_high_2 - v_low_2);
+        //            double b = 90.0 / (a * v_high_2);
+
+        //            watts = a * v2 + b;
+        //        }
+        //    }
+
+        //    return watts;
+        //}
 
         private static bool CheckForOpenProcesses()
         {
@@ -15607,8 +15668,8 @@ namespace PowerSDR
 
             rx1_preamp_offset[(int)PreampMode.HPSDR_OFF] = -off_offset;
             rx1_preamp_offset[(int)PreampMode.HPSDR_ON] = 0.0f;
-            rx2_preamp_offset[(int)PreampMode.OFF] = -off_offset;
-            rx2_preamp_offset[(int)PreampMode.HIGH] = 0.0f;
+            rx2_preamp_offset[(int)PreampMode.HPSDR_OFF] = -off_offset;
+            rx2_preamp_offset[(int)PreampMode.HPSDR_ON] = 0.0f;
 
             if (alexpresent && !ANAN10Present)
             {
@@ -15908,7 +15969,7 @@ namespace PowerSDR
             Thread.Sleep(50);
 
             //  PreampMode preamp = RX2PreampMode;				// save current preamp mode
-            RX2PreampMode = PreampMode.HIGH;		    	// set to high
+            RX2PreampMode = PreampMode.HPSDR_ON;		    	// set to high
 
             MeterRXMode rx_meter = CurrentMeterRXMode;			// save current RX Meter mode
             CurrentMeterRXMode = MeterRXMode.OFF;				// turn RX Meter off
@@ -16004,7 +16065,7 @@ namespace PowerSDR
             avg = num / 50.0f;
 
 
-            RX2PreampMode = PreampMode.OFF;
+            RX2PreampMode = PreampMode.HPSDR_OFF;
             //RX1PreampMode = PreampMode.HPSDR_OFF;
             Thread.Sleep(200);
 
@@ -16022,9 +16083,9 @@ namespace PowerSDR
 
             float off_offset = avg2 - avg;
 
-            rx2_preamp_offset[(int)PreampMode.OFF] = -off_offset;
-            rx2_preamp_offset[(int)PreampMode.HIGH] = 0.0f;
-            RX2PreampMode = PreampMode.HIGH;
+            rx2_preamp_offset[(int)PreampMode.HPSDR_OFF] = -off_offset;
+            rx2_preamp_offset[(int)PreampMode.HPSDR_ON] = 0.0f;
+            RX2PreampMode = PreampMode.HPSDR_ON;
             // RX2PreampMode = PreampMode.OFF;
             Thread.Sleep(200);
 
@@ -16419,295 +16480,296 @@ namespace PowerSDR
 
         public bool CalibratePAGain2(Progress progress, bool[] run, bool suppress_warnings)
         {
-            bool ret_val = false;
+            //    bool ret_val = false;
 
-            if (!chkPower.Checked)
-            {
-                MessageBox.Show("Power must be on in order to calibrate PA Gain 2.", "Power Is Off",
-                    MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
-            }
+            //    if (!chkPower.Checked)
+            //    {
+            //        MessageBox.Show("Power must be on in order to calibrate PA Gain 2.", "Power Is Off",
+            //            MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //        return false;
+            //    }
 
-            progress.SetPercent(0.0f);
-            int progress_count = 0;
-            int progress_total = 0;
-            for (int i = 0; i < 11; i++)
-                if (run[i]) progress_total += 13;
+            //    progress.SetPercent(0.0f);
+            //    int progress_count = 0;
+            //    int progress_total = 0;
+            //    for (int i = 0; i < 11; i++)
+            //        if (run[i]) progress_total += 13;
 
-            float[] band_freqs = { 1.85f, 3.75f, 5.3715f, 7.15f, 10.125f, 14.175f, 18.1f, 21.300f, 24.9f, 28.4f, 50.11f };
-            int[] target_table = { 1, 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-            double tol = 2.0;
-            bool fduplex = FullDuplex;
-            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-            {
-                tol = 0.5;
-                FullDuplex = false;
-            }
+            //    float[] band_freqs = { 1.85f, 3.75f, 5.3715f, 7.15f, 10.125f, 14.175f, 18.1f, 21.300f, 24.9f, 28.4f, 50.11f };
+            //    int[] target_table = { 1, 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+            //    double tol = 2.0;
+            //    bool fduplex = FullDuplex;
+            //    if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+            //    {
+            //        tol = 0.5;
+            //        FullDuplex = false;
+            //    }
 
-            calibrating = true;
+            //    calibrating = true;
 
-            DSPMode mode = rx1_dsp_mode; // save current dsp mode
-            RX1DSPMode = DSPMode.USB;
+            //    DSPMode mode = rx1_dsp_mode; // save current dsp mode
+            //    RX1DSPMode = DSPMode.USB;
 
-            double vfoa = VFOAFreq;			// save VFO A frequency
-            chkVFOSplit.Checked = false;
-            comboMeterTXMode.Text = "Fwd Pwr";
+            //    double vfoa = VFOAFreq;			// save VFO A frequency
+            //    chkVFOSplit.Checked = false;
+            //    comboMeterTXMode.Text = "Fwd Pwr";
 
-            bool tx_eq = chkTXEQ.Checked;
-            chkTXEQ.Checked = false;
+            //    bool tx_eq = chkTXEQ.Checked;
+            //    chkTXEQ.Checked = false;
 
-            bool dx = chkDX.Checked;
-            chkDX.Checked = false;
+            //    bool dx = chkDX.Checked;
+            //    chkDX.Checked = false;
 
-            bool cpdr = chkCPDR.Checked;
-            chkCPDR.Checked = false;
+            //    bool cpdr = chkCPDR.Checked;
+            //    chkCPDR.Checked = false;
 
-            DisableAllFilters();
-            DisableAllModes();
-            VFOLock = true;
-            comboPreamp.Enabled = false;
-            comboDisplayMode.Enabled = false;
+            //    DisableAllFilters();
+            //    DisableAllModes();
+            //    VFOLock = true;
+            //    comboPreamp.Enabled = false;
+            //    comboDisplayMode.Enabled = false;
 
-            int on_time = 2500;
-            int off_time = 2500;
+            //    int on_time = 2500;
+            //    int off_time = 2500;
 
-            switch (current_soundcard)
-            {
-                case SoundCard.AUDIGY_2_ZS:
-                    on_time = 3000;
-                    off_time = 4000;
-                    break;
-                case SoundCard.DELTA_44:
-                    on_time = 2000;
-                    off_time = 2000;
-                    break;
-            }
+            //    switch (current_soundcard)
+            //    {
+            //        case SoundCard.AUDIGY_2_ZS:
+            //            on_time = 3000;
+            //            off_time = 4000;
+            //            break;
+            //        case SoundCard.DELTA_44:
+            //            on_time = 2000;
+            //            off_time = 2000;
+            //            break;
+            //    }
 
-            switch (current_model)
-            {
-                case Model.FLEX5000:
-                case Model.FLEX3000:
-                    on_time = 1000;
-                    off_time = 1000;
-                    break;
-            }
+            //    switch (current_model)
+            //    {
+            //        case Model.FLEX5000:
+            //        case Model.FLEX3000:
+            //            on_time = 1000;
+            //            off_time = 1000;
+            //            break;
+            //    }
 
-            for (int i = 0; i < band_freqs.Length; i++)
-            {
-                if (i == 10 && current_model == Model.SDR1000 || current_model == Model.HPSDR ||
-                    current_model == Model.HERMES)
-                {
-                    // do nothing
-                }
-                else if (run[i])
-                {
-                    VFOLock = false;
-                    VFOAFreq = band_freqs[i];
+            //    for (int i = 0; i < band_freqs.Length; i++)
+            //    {
+            //        if (i == 10 && current_model == Model.SDR1000 || current_model == Model.HPSDR ||
+            //            current_model == Model.HERMES)
+            //        {
+            //            // do nothing
+            //        }
+            //        else if (run[i])
+            //        {
+            //            VFOLock = false;
+            //            VFOAFreq = band_freqs[i];
 
-                    VFOLock = true;
-                    Audio.SourceScale = 0.04 / audio_volts1;
-                    double last_watts = 0.0;
-                    double last_volts = 0.0;
-                    if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) tol = 0.5;
+            //            VFOLock = true;
+            //            Audio.SourceScale = 0.04 / audio_volts1;
+            //            double last_watts = 0.0;
+            //            double last_volts = 0.0;
+            //            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) tol = 0.5;
 
-                    for (int j = 0; j < power_table[i].Length; j++)
-                    {
-                        if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000) && j == 8) tol = 1.0;
-                        if (j < 3 && current_model == Model.SDR1000 || current_model == Model.HPSDR ||
-                    current_model == Model.HERMES)
-                        {
-                            // do nothing
-                        }
-                        else
-                        {
-                            bool found_power = false;
-                            double target = target_table[j];
-                            int count = 0;
-                            while (!found_power && chkPower.Checked)
-                            {
-                                //								if(Audio.TXInputSignal != Audio.SignalSource.SINE)
-                                //									Audio.TXInputSignal = Audio.SignalSource.SINE;
-                                if (Audio.TXOutputSignal != Audio.SignalSource.SINE)
-                                    Audio.TXOutputSignal = Audio.SignalSource.SINE;
-                                //Audio.SourceScale = 1.0;
-                                if (!chkMOX.Checked) chkMOX.Checked = true;
-                                for (int k = 0; k < on_time / 100; k++)
-                                {
-                                    Thread.Sleep(100);
-                                    if (!progress.Visible)
-                                        goto end;
-                                }
+            //            for (int j = 0; j < power_table[i].Length; j++)
+            //            {
+            //                if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000) && j == 8) tol = 1.0;
+            //                if (j < 3 && current_model == Model.SDR1000 || current_model == Model.HPSDR ||
+            //            current_model == Model.HERMES)
+            //                {
+            //                    // do nothing
+            //                }
+            //                else
+            //                {
+            //                    bool found_power = false;
+            //                    double target = target_table[j];
+            //                    int count = 0;
+            //                    while (!found_power && chkPower.Checked)
+            //                    {
+            //                        //								if(Audio.TXInputSignal != Audio.SignalSource.SINE)
+            //                        //									Audio.TXInputSignal = Audio.SignalSource.SINE;
+            //                        if (Audio.TXOutputSignal != Audio.SignalSource.SINE)
+            //                            Audio.TXOutputSignal = Audio.SignalSource.SINE;
+            //                        //Audio.SourceScale = 1.0;
+            //                        if (!chkMOX.Checked) chkMOX.Checked = true;
+            //                        for (int k = 0; k < on_time / 100; k++)
+            //                        {
+            //                            Thread.Sleep(100);
+            //                            if (!progress.Visible)
+            //                                goto end;
+            //                        }
 
-                                double watts = 0;
-                                if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                                    watts = FWCPAPower(pa_fwd_power);
-                                else watts = PAPower(pa_fwd_power);
+            //                        double watts = 0;
+            //                        if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+            //                            watts = FWCPAPower(pa_fwd_power);
+            //                        else watts = PAPower(pa_fwd_power);
 
-                                if (HighSWR)
-                                {
-                                    chkMOX.Checked = false;
-                                    MessageBox.Show("PA Calibration Error: High SWR.  Please check\n" +
-                                        "connections and try again.",
-                                        "PA Power: High SWR",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
-                                    goto end;
-                                }
+            //                        if (HighSWR)
+            //                        {
+            //                            chkMOX.Checked = false;
+            //                            MessageBox.Show("PA Calibration Error: High SWR.  Please check\n" +
+            //                                "connections and try again.",
+            //                                "PA Power: High SWR",
+            //                                MessageBoxButtons.OK,
+            //                                MessageBoxIcon.Error);
+            //                            goto end;
+            //                        }
 
-                                Debug.WriteLine("watts: " + watts.ToString("f3"));
-                                if (target > 50)
-                                {
-                                    Audio.TXInputSignal = Audio.SignalSource.RADIO;
-                                    Audio.TXOutputSignal = Audio.SignalSource.RADIO;
-                                    //Audio.SourceScale = 1.0;
-                                    chkMOX.Checked = false;
-                                    for (int k = 0; k < off_time / 100; k++)
-                                    {
-                                        Thread.Sleep(100);
-                                        if (!progress.Visible)
-                                            goto end;
-                                    }
-                                }
-                                else Thread.Sleep(100);
+            //                        Debug.WriteLine("watts: " + watts.ToString("f3"));
+            //                        if (target > 50)
+            //                        {
+            //                            Audio.TXInputSignal = Audio.SignalSource.RADIO;
+            //                            Audio.TXOutputSignal = Audio.SignalSource.RADIO;
+            //                            //Audio.SourceScale = 1.0;
+            //                            chkMOX.Checked = false;
+            //                            for (int k = 0; k < off_time / 100; k++)
+            //                            {
+            //                                Thread.Sleep(100);
+            //                                if (!progress.Visible)
+            //                                    goto end;
+            //                            }
+            //                        }
+            //                        else Thread.Sleep(100);
 
-                                double diff = target - watts;
-                                if (Math.Abs(diff) < tol)
-                                {
-                                    found_power = true;
-                                    power_table[i + 1][j] = (float)Math.Round(Audio.SourceScale * audio_volts1, 4);
+            //                        double diff = target - watts;
+            //                        if (Math.Abs(diff) < tol)
+            //                        {
+            //                            found_power = true;
+            //                            power_table[i + 1][j] = (float)Math.Round(Audio.SourceScale * audio_volts1, 4);
 
-                                    if (j + 1 == power_table[i].Length) break;
-                                    // calculate line  in y = ax + b format
-                                    double x2 = Math.Pow(power_table[i + 1][j], 2.0);
-                                    double x1 = 0.0;
-                                    if (j > 0) x1 = Math.Pow(power_table[i + 1][j - 1], 2.0);
+            //                            if (j + 1 == power_table[i].Length) break;
+            //                            // calculate line  in y = ax + b format
+            //                            double x2 = Math.Pow(power_table[i + 1][j], 2.0);
+            //                            double x1 = 0.0;
+            //                            if (j > 0) x1 = Math.Pow(power_table[i + 1][j - 1], 2.0);
 
-                                    double y1 = target;
-                                    double y2 = target_table[j + 1];
+            //                            double y1 = target;
+            //                            double y2 = target_table[j + 1];
 
-                                    double a = (y2 - y1) / (x2 - x1); // a = (y2-y1)/(x2-x1)
-                                    double b = target - a * x2;
+            //                            double a = (y2 - y1) / (x2 - x1); // a = (y2-y1)/(x2-x1)
+            //                            double b = target - a * x2;
 
-                                    double next_volts = Math.Sqrt((target_table[j + 1] - b) / a);  // solved y = ax + b to get x = (y - b)/a
-                                    //double next_volts = current_volts * Math.Sqrt((target+10)/target);
-                                    Audio.SourceScale = next_volts / audio_volts1;
-                                }
-                                else
-                                {
-                                    if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000) && target <= 10)
-                                    {
-                                        // calculate line  in y = ax + b format
-                                        double x1 = Math.Pow(last_volts, 2.0);
-                                        double x2 = Math.Pow(Audio.SourceScale, 2.0);
-                                        double y1 = last_watts;
-                                        double y2 = watts;
+            //                            double next_volts = Math.Sqrt((target_table[j + 1] - b) / a);  // solved y = ax + b to get x = (y - b)/a
+            //                            //double next_volts = current_volts * Math.Sqrt((target+10)/target);
+            //                            Audio.SourceScale = next_volts / audio_volts1;
+            //                        }
+            //                        else
+            //                        {
+            //                            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000) && target <= 10)
+            //                            {
+            //                                // calculate line  in y = ax + b format
+            //                                double x1 = Math.Pow(last_volts, 2.0);
+            //                                double x2 = Math.Pow(Audio.SourceScale, 2.0);
+            //                                double y1 = last_watts;
+            //                                double y2 = watts;
 
-                                        double a = (y2 - y1) / (x2 - x1);
-                                        double b = y2 - a * x2;
+            //                                double a = (y2 - y1) / (x2 - x1);
+            //                                double b = y2 - a * x2;
 
-                                        Debug.WriteLine("a: " + a.ToString("f2") + " b: " + b.ToString("f2"));
-                                        double next_volts = Math.Sqrt((target - b) / a);
-                                        if (double.IsNaN(next_volts))
-                                        {
-                                            //count = 8; // error out -- two times through the cap will do this
-                                            next_volts = power_table[i + 1][j - 1];
-                                        }
-                                        last_volts = Audio.SourceScale;
-                                        Audio.SourceScale = next_volts / audio_volts1;
-                                        //double v_ratio = Math.Sqrt(target) / Math.Sqrt(Math.Max(1, watts));
-                                        //Audio.RadioVolume *= v_ratio;
-                                        if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                                        {
-                                            Audio.SourceScale = Math.Min(0.5, Audio.SourceScale); // 0.5 cap where 0.83 is max before overloading QSE
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Audio.SourceScale *= Math.Sqrt(target / watts);
-                                    }
-                                }
+            //                                Debug.WriteLine("a: " + a.ToString("f2") + " b: " + b.ToString("f2"));
+            //                                double next_volts = Math.Sqrt((target - b) / a);
+            //                                if (double.IsNaN(next_volts))
+            //                                {
+            //                                    //count = 8; // error out -- two times through the cap will do this
+            //                                    next_volts = power_table[i + 1][j - 1];
+            //                                }
+            //                                last_volts = Audio.SourceScale;
+            //                                Audio.SourceScale = next_volts / audio_volts1;
+            //                                //double v_ratio = Math.Sqrt(target) / Math.Sqrt(Math.Max(1, watts));
+            //                                //Audio.RadioVolume *= v_ratio;
+            //                                if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+            //                                {
+            //                                    Audio.SourceScale = Math.Min(0.5, Audio.SourceScale); // 0.5 cap where 0.83 is max before overloading QSE
+            //                                }
+            //                            }
+            //                            else
+            //                            {
+            //                                Audio.SourceScale *= Math.Sqrt(target / watts);
+            //                            }
+            //                        }
 
-                                last_watts = watts;
+            //                        last_watts = watts;
 
-                                // check for error conditions
-                                if (count++ == 12) // poop out
-                                {
-                                    found_power = true;
-                                    //if(double.IsNaN(Audio.RadioVolume)) Audio.RadioVolume = power_table[i+1][Math.Max(0, j-1)];
-                                    //double final_value = Math.Min(power_table[i+1][Math.Max(0, j-1)], Audio.RadioVolume * 0.945); // 0.945 ~= down 0.5 dB
-                                    double final_value = (j == 0 ? 0.0 : power_table[i + 1][j - 1]);
-                                    for (int k = j; k < power_table[i].Length; k++)
-                                        power_table[i + 1][k] = (float)Math.Round(final_value, 4);
-                                    j = power_table.Length; // end loop for this band
-                                    Audio.TXInputSignal = Audio.SignalSource.RADIO;
-                                    Audio.TXOutputSignal = Audio.SignalSource.RADIO;
-                                    chkMOX.Checked = false;
-                                    //if(!suppress_warnings)
-                                    {
-                                        MessageBox.Show("Unable to calibrate PA Power on current band.",
-                                            "PA Power Cal Error",
-                                            MessageBoxButtons.OK,
-                                            MessageBoxIcon.Error);
-                                    }
-                                }
-                            }
-                            progress.SetPercent((float)((float)(++progress_count) / progress_total));
-                        }
-                    }
-                }
-            }
+            //                        // check for error conditions
+            //                        if (count++ == 12) // poop out
+            //                        {
+            //                            found_power = true;
+            //                            //if(double.IsNaN(Audio.RadioVolume)) Audio.RadioVolume = power_table[i+1][Math.Max(0, j-1)];
+            //                            //double final_value = Math.Min(power_table[i+1][Math.Max(0, j-1)], Audio.RadioVolume * 0.945); // 0.945 ~= down 0.5 dB
+            //                            double final_value = (j == 0 ? 0.0 : power_table[i + 1][j - 1]);
+            //                            for (int k = j; k < power_table[i].Length; k++)
+            //                                power_table[i + 1][k] = (float)Math.Round(final_value, 4);
+            //                            j = power_table.Length; // end loop for this band
+            //                            Audio.TXInputSignal = Audio.SignalSource.RADIO;
+            //                            Audio.TXOutputSignal = Audio.SignalSource.RADIO;
+            //                            chkMOX.Checked = false;
+            //                            //if(!suppress_warnings)
+            //                            {
+            //                                MessageBox.Show("Unable to calibrate PA Power on current band.",
+            //                                    "PA Power Cal Error",
+            //                                    MessageBoxButtons.OK,
+            //                                    MessageBoxIcon.Error);
+            //                            }
+            //                        }
+            //                    }
+            //                    progress.SetPercent((float)((float)(++progress_count) / progress_total));
+            //                }
+            //            }
+            //        }
+            //    }
 
-            ret_val = true;
+            //    ret_val = true;
 
-        end:
-            if (!progress.Visible) progress.Text = "";
-            progress.Hide();
+            //end:
+            //    if (!progress.Visible) progress.Text = "";
+            //    progress.Hide();
 
-            chkMOX.Checked = false;
-            Audio.TXInputSignal = Audio.SignalSource.RADIO;
-            Audio.TXOutputSignal = Audio.SignalSource.RADIO;
+            //    chkMOX.Checked = false;
+            //    Audio.TXInputSignal = Audio.SignalSource.RADIO;
+            //    Audio.TXOutputSignal = Audio.SignalSource.RADIO;
 
-            EnableAllFilters();
-            EnableAllModes();
-            VFOLock = false;
-            comboPreamp.Enabled = true;
-            comboDisplayMode.Enabled = true;
+            //    EnableAllFilters();
+            //    EnableAllModes();
+            //    VFOLock = false;
+            //    comboPreamp.Enabled = true;
+            //    comboDisplayMode.Enabled = true;
 
-            chkTXEQ.Checked = tx_eq;
-            chkDX.Checked = dx;
-            chkCPDR.Checked = cpdr;
+            //    chkTXEQ.Checked = tx_eq;
+            //    chkDX.Checked = dx;
+            //    chkCPDR.Checked = cpdr;
 
-            for (int i = (int)Band.B2M; i < (int)Band.LAST; i++)
-                for (int j = 0; j < 13; j++)
-                    power_table[i][j] = (float)Math.Round(power_table[10][j], 4);
+            //    for (int i = (int)Band.B2M; i < (int)Band.LAST; i++)
+            //        for (int j = 0; j < 13; j++)
+            //            power_table[i][j] = (float)Math.Round(power_table[10][j], 4);
 
-            RX1DSPMode = mode;							// restore dsp mode
-            VFOAFreq = 0.590;
-            VFOAFreq = vfoa;								// restore frequency
+            //    RX1DSPMode = mode;							// restore dsp mode
+            //    VFOAFreq = 0.590;
+            //    VFOAFreq = vfoa;								// restore frequency
 
-            try
-            {
-                StreamWriter writer = new StreamWriter(app_data_path + "\\power.csv");
-                writer.WriteLine("Band, 1, 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100");
-                for (int i = 1; i <= (int)Band.B6M; i++)
-                {
-                    writer.Write(((Band)i).ToString() + ",");
-                    for (int j = 0; j < 13; j++)
-                        writer.Write(power_table[i][j].ToString("f4") + ",");
-                    writer.WriteLine("");
-                }
-                writer.Close();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error writing power.csv file.  Please make sure this file is not open and try again.",
-                    "Error writing power.csv",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            //    try
+            //    {
+            //        StreamWriter writer = new StreamWriter(app_data_path + "\\power.csv");
+            //        writer.WriteLine("Band, 1, 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100");
+            //        for (int i = 1; i <= (int)Band.B6M; i++)
+            //        {
+            //            writer.Write(((Band)i).ToString() + ",");
+            //            for (int j = 0; j < 13; j++)
+            //                writer.Write(power_table[i][j].ToString("f4") + ",");
+            //            writer.WriteLine("");
+            //        }
+            //        writer.Close();
+            //    }
+            //    catch (Exception)
+            //    {
+            //        MessageBox.Show("Error writing power.csv file.  Please make sure this file is not open and try again.",
+            //            "Error writing power.csv",
+            //            MessageBoxButtons.OK,
+            //            MessageBoxIcon.Error);
+            //    }
 
-            calibrating = false;
-            return ret_val;
+            //    calibrating = false;
+            //   return ret_val;
+            return true;
         }
 
         public bool LowPowerPASweep(Progress progress, int power) // calibrate PA Gain values
@@ -16932,13 +16994,13 @@ namespace PowerSDR
                     lblPreamp.Text = "S-ATT";
                     udRX1StepAttData.BringToFront();
                     // JanusAudio.SetRX1StepAttenData(rx1_attenuator_data);
-                    JanusAudio.EnableRX1StepAtten(1);
+                    JanusAudio.EnableADC1StepAtten(1);
                 }
                 else
                 {
                     lblPreamp.Text = "ATT";
                     comboPreamp.BringToFront();
-                    JanusAudio.EnableRX1StepAtten(0);
+                    JanusAudio.EnableADC1StepAtten(0);
 
                     if (AlexPresent)
                         JanusAudio.SetAlexAtten(alex_atten); // normal up alex attenuator setting
@@ -16947,7 +17009,7 @@ namespace PowerSDR
                 if (CollapsedDisplay)
                     CollapseDisplay();
                 if (!mox) update_preamp = true;
-                UpdateDisplayOffsets();
+                UpdateRX1DisplayOffsets();
             }
         }
 
@@ -16958,7 +17020,7 @@ namespace PowerSDR
             set
             {
                 rx1_attenuator_data = value;
-
+                if (initializing) return;
                 if (AlexPresent && !ANAN10Present)
                     udRX1StepAttData.Maximum = (decimal)61;
                 else udRX1StepAttData.Maximum = (decimal)31;
@@ -16971,23 +17033,26 @@ namespace PowerSDR
                         if (rx1_attenuator_data <= 31)
                         {
                             JanusAudio.SetAlexAtten(0); // 0dB Alex Attenuator
-                            JanusAudio.SetRX1StepAttenData(rx1_attenuator_data);
+                            JanusAudio.SetADC1StepAttenData(rx1_attenuator_data);
                         }
                         else
                         {
                             JanusAudio.SetAlexAtten(3); // -30dB Alex Attenuator
-                            JanusAudio.SetRX1StepAttenData(rx1_attenuator_data + 2);
+                            JanusAudio.SetADC1StepAttenData(rx1_attenuator_data + 2);
                         }
                     }
                     else
-                        JanusAudio.SetRX1StepAttenData(rx1_attenuator_data);
+                        JanusAudio.SetADC1StepAttenData(rx1_attenuator_data);
                 }
                 // else
                 //  JanusAudio.EnableRX1StepAtten(0);
 
+                if (!initializing && !mox)
+                    rx1_step_attenuator_by_band[(int)rx1_band] = rx1_attenuator_data;
+
                 udRX1StepAttData.Value = rx1_attenuator_data;
                 if (!mox) update_preamp = true;
-                UpdateDisplayOffsets();
+                UpdateRX1DisplayOffsets();
             }
         }
 
@@ -17003,20 +17068,20 @@ namespace PowerSDR
                     lblRX2Preamp.Text = "S-ATT";
                     udRX2StepAttData.BringToFront();
                     udRX2StepAttData_ValueChanged(this, EventArgs.Empty);
-                    JanusAudio.EnableRX2StepAtten(1);
+                    JanusAudio.EnableADC2StepAtten(1);
                 }
                 else
                 {
                     lblRX2Preamp.Text = "ATT";
                     comboRX2Preamp.BringToFront();
                     comboRX2Preamp_SelectedIndexChanged(this, EventArgs.Empty);
-                    JanusAudio.EnableRX2StepAtten(1);
+                    JanusAudio.EnableADC2StepAtten(1);
                 }
 
                 if (CollapsedDisplay)
                     CollapseDisplay();
                 if (!mox) update_preamp = true;
-                UpdateDisplayOffsets();
+                UpdateRX2DisplayOffsets();
 
             }
         }
@@ -17038,14 +17103,16 @@ namespace PowerSDR
                 // if (rx2_step_att_present)
                 //  {
                 // JanusAudio.EnableRX2StepAtten(1);
-                JanusAudio.SetRX2StepAttenData(rx2_attenuator_data);
+                JanusAudio.SetADC2StepAttenData(rx2_attenuator_data);
                 //  }
                 // else
                 // JanusAudio.EnableRX2StepAtten(0);
 
                 //  udRX2StepAttData.Value = rx2_attenuator_data;
+                if (!initializing && !mox)
+                    rx2_step_attenuator_by_band[(int)rx2_band] = value;
                 if (!mox) update_preamp = true;
-                UpdateDisplayOffsets();
+                UpdateRX2DisplayOffsets();
             }
         }
 
@@ -17368,24 +17435,24 @@ namespace PowerSDR
         }
 
 
-        private float loop_gain = 0.0f;
-        private float rx1_loop_offset = 0.0f;
-        private float rx2_loop_offset = 0.0f;
-        public float LoopGain
-        {
-            get { return loop_gain; }
-            set
-            {
-                loop_gain = value;
-                if (rx1_loop)
-                {
-                    rx1_loop_offset = loop_gain;
-                    if (rx2_ant == FWCAnt.RX1TAP)
-                        rx2_loop_offset = loop_gain;
-                    UpdateDisplayOffsets();
-                }
-            }
-        }
+        //private float loop_gain = 0.0f;
+        //private float rx1_loop_offset = 0.0f;
+        //private float rx2_loop_offset = 0.0f;
+        //public float LoopGain
+        //{
+        //    get { return loop_gain; }
+        //    set
+        //    {
+        //        loop_gain = value;
+        //        if (rx1_loop)
+        //        {
+        //            rx1_loop_offset = loop_gain;
+        //            if (rx2_ant == FWCAnt.RX1TAP)
+        //                rx2_loop_offset = loop_gain;
+        //            UpdateDisplayOffsets();
+        //        }
+        //    }
+        //}
 
         private float rx1_xvtr_gain_offset;						// gain offset as entered on the xvtr form
         public float RX1XVTRGainOffset
@@ -17394,7 +17461,7 @@ namespace PowerSDR
             set
             {
                 rx1_xvtr_gain_offset = value;
-                UpdateDisplayOffsets();
+                UpdateRX1DisplayOffsets();
             }
         }
 
@@ -17405,7 +17472,7 @@ namespace PowerSDR
             set
             {
                 rx2_xvtr_gain_offset = value;
-                UpdateDisplayOffsets();
+                UpdateRX2DisplayOffsets();
             }
         }
 
@@ -17653,74 +17720,74 @@ namespace PowerSDR
             get { return rx2_path_offset; }
         }
 
-        private bool[] tx1_by_band;
-        public void SetTX1(Band b, bool on)
-        {
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    FWCAmpTX1 = on;
-                    break;
-                case AntMode.Expert:
-                    tx1_by_band[(int)b] = on;
-                    Band band = tx_band;
-                    if (tx_xvtr_index >= 0)
-                        band = (Band)((int)Band.VHF0 + tx_xvtr_index);
-                    if (band == b) FWCAmpTX1 = on;
-                    break;
-            }
-        }
+        //private bool[] tx1_by_band;
+        //public void SetTX1(Band b, bool on)
+        //{
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            FWCAmpTX1 = on;
+        //            break;
+        //        case AntMode.Expert:
+        //            tx1_by_band[(int)b] = on;
+        //            Band band = tx_band;
+        //            if (tx_xvtr_index >= 0)
+        //                band = (Band)((int)Band.VHF0 + tx_xvtr_index);
+        //            if (band == b) FWCAmpTX1 = on;
+        //            break;
+        //    }
+        //}
 
-        public bool GetTX1(Band b)
-        {
-            return tx1_by_band[(int)b];
-        }
+        //public bool GetTX1(Band b)
+        //{
+        //    return tx1_by_band[(int)b];
+        //}
 
-        private bool[] tx2_by_band;
-        public void SetTX2(Band b, bool on)
-        {
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    FWCAmpTX2 = on;
-                    break;
-                case AntMode.Expert:
-                    tx2_by_band[(int)b] = on;
-                    Band band = tx_band;
-                    if (tx_xvtr_index >= 0)
-                        band = (Band)((int)Band.VHF0 + tx_xvtr_index);
-                    if (band == b) FWCAmpTX2 = on;
-                    break;
-            }
-        }
+        //private bool[] tx2_by_band;
+        //public void SetTX2(Band b, bool on)
+        //{
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            FWCAmpTX2 = on;
+        //            break;
+        //        case AntMode.Expert:
+        //            tx2_by_band[(int)b] = on;
+        //            Band band = tx_band;
+        //            if (tx_xvtr_index >= 0)
+        //                band = (Band)((int)Band.VHF0 + tx_xvtr_index);
+        //            if (band == b) FWCAmpTX2 = on;
+        //            break;
+        //    }
+        //}
 
-        public bool GetTX2(Band b)
-        {
-            return tx2_by_band[(int)b];
-        }
+        //public bool GetTX2(Band b)
+        //{
+        //    return tx2_by_band[(int)b];
+        //}
 
-        private bool[] tx3_by_band;
-        public void SetTX3(Band b, bool on)
-        {
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    FWCAmpTX3 = on;
-                    break;
-                case AntMode.Expert:
-                    tx3_by_band[(int)b] = on;
-                    Band band = tx_band;
-                    if (tx_xvtr_index >= 0)
-                        band = (Band)((int)Band.VHF0 + tx_xvtr_index);
-                    if (band == b) FWCAmpTX3 = on;
-                    break;
-            }
-        }
+        //private bool[] tx3_by_band;
+        //public void SetTX3(Band b, bool on)
+        //{
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            FWCAmpTX3 = on;
+        //            break;
+        //        case AntMode.Expert:
+        //            tx3_by_band[(int)b] = on;
+        //            Band band = tx_band;
+        //            if (tx_xvtr_index >= 0)
+        //                band = (Band)((int)Band.VHF0 + tx_xvtr_index);
+        //            if (band == b) FWCAmpTX3 = on;
+        //            break;
+        //    }
+        //}
 
-        public bool GetTX3(Band b)
-        {
-            return tx3_by_band[(int)b];
-        }
+        //public bool GetTX3(Band b)
+        //{
+        //    return tx3_by_band[(int)b];
+        //}
 
         private PreampMode[] rx1_preamp_by_band;
         public void SetRX1Preamp(Band b, PreampMode mode)
@@ -17764,139 +17831,139 @@ namespace PowerSDR
 
         private int[] rx2_agct_by_band;
 
-        private AntMode current_ant_mode = AntMode.Simple;
-        public AntMode CurrentAntMode
-        {
-            get { return current_ant_mode; }
-            set
-            {
-                current_ant_mode = value;
-            }
-        }
+        //private AntMode current_ant_mode = AntMode.Simple;
+        //public AntMode CurrentAntMode
+        //{
+        //    get { return current_ant_mode; }
+        //    set
+        //    {
+        //        current_ant_mode = value;
+        //    }
+        //}
 
-        private FWCAnt[] rx1_ant_by_band;
-        public void SetRX1Ant(Band b, FWCAnt ant)
-        {
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    RX1Ant = ant;
-                    break;
-                case AntMode.Expert:
-                    if (initializing) return;
-                    rx1_ant_by_band[(int)b] = ant;
-                    if (rx1_band == b) RX1Ant = ant;
-                    break;
-            }
-        }
+        //private FWCAnt[] rx1_ant_by_band;
+        //public void SetRX1Ant(Band b, FWCAnt ant)
+        //{
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            RX1Ant = ant;
+        //            break;
+        //        case AntMode.Expert:
+        //            if (initializing) return;
+        //            rx1_ant_by_band[(int)b] = ant;
+        //            if (rx1_band == b) RX1Ant = ant;
+        //            break;
+        //    }
+        //}
 
-        public FWCAnt GetRX1Ant(Band b)
-        {
-            FWCAnt ret = FWCAnt.ANT1;
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    ret = rx1_ant;
-                    break;
-                case AntMode.Expert:
-                    ret = rx1_ant_by_band[(int)b];
-                    break;
-            }
-            return ret;
-        }
+        //public FWCAnt GetRX1Ant(Band b)
+        //{
+        //    FWCAnt ret = FWCAnt.ANT1;
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            ret = rx1_ant;
+        //            break;
+        //        case AntMode.Expert:
+        //            ret = rx1_ant_by_band[(int)b];
+        //            break;
+        //    }
+        //    return ret;
+        //}
 
-        private FWCAnt[] rx2_ant_by_band;
-        public void SetRX2Ant(Band b, FWCAnt ant)
-        {
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    RX2Ant = ant;
-                    break;
-                case AntMode.Expert:
-                    if (initializing) return;
-                    rx2_ant_by_band[(int)b] = ant;
-                    if (rx2_band == b) RX2Ant = ant;
-                    break;
-            }
-        }
+        //private FWCAnt[] rx2_ant_by_band;
+        //public void SetRX2Ant(Band b, FWCAnt ant)
+        //{
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            RX2Ant = ant;
+        //            break;
+        //        case AntMode.Expert:
+        //            if (initializing) return;
+        //            rx2_ant_by_band[(int)b] = ant;
+        //            if (rx2_band == b) RX2Ant = ant;
+        //            break;
+        //    }
+        //}
 
-        public FWCAnt GetRX2Ant(Band b)
-        {
-            FWCAnt ret = FWCAnt.ANT1;
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    ret = rx2_ant;
-                    break;
-                case AntMode.Expert:
-                    ret = rx2_ant_by_band[(int)b];
-                    break;
-            }
-            return ret;
-        }
+        //public FWCAnt GetRX2Ant(Band b)
+        //{
+        //    FWCAnt ret = FWCAnt.ANT1;
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            ret = rx2_ant;
+        //            break;
+        //        case AntMode.Expert:
+        //            ret = rx2_ant_by_band[(int)b];
+        //            break;
+        //    }
+        //    return ret;
+        //}
 
-        private FWCAnt[] tx_ant_by_band;
-        public void SetTXAnt(Band b, FWCAnt ant)
-        {
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    TXAnt = ant;
-                    break;
-                case AntMode.Expert:
-                    if (initializing) return;
-                    tx_ant_by_band[(int)b] = ant;
-                    if (tx_band == b) TXAnt = ant;
-                    break;
-            }
-        }
+        //private FWCAnt[] tx_ant_by_band;
+        //public void SetTXAnt(Band b, FWCAnt ant)
+        //{
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            TXAnt = ant;
+        //            break;
+        //        case AntMode.Expert:
+        //            if (initializing) return;
+        //            tx_ant_by_band[(int)b] = ant;
+        //            if (tx_band == b) TXAnt = ant;
+        //            break;
+        //    }
+        //}
 
-        public FWCAnt GetTXAnt(Band b)
-        {
-            FWCAnt ret = FWCAnt.ANT1;
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    ret = tx_ant;
-                    break;
-                case AntMode.Expert:
-                    ret = tx_ant_by_band[(int)b];
-                    break;
-            }
-            return ret;
-        }
+        //public FWCAnt GetTXAnt(Band b)
+        //{
+        //    FWCAnt ret = FWCAnt.ANT1;
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            ret = tx_ant;
+        //            break;
+        //        case AntMode.Expert:
+        //            ret = tx_ant_by_band[(int)b];
+        //            break;
+        //    }
+        //    return ret;
+        //}
 
-        private bool[] rx1_loop_by_band;
-        public void SetRX1Loop(Band b, bool on)
-        {
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    RX1Loop = on;
-                    break;
-                case AntMode.Expert:
-                    if (initializing) return;
-                    rx1_loop_by_band[(int)b] = on;
-                    if (rx1_band == b && !mox) RX1Loop = on;
-                    break;
-            }
-        }
+        //private bool[] rx1_loop_by_band;
+        //public void SetRX1Loop(Band b, bool on)
+        //{
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            RX1Loop = on;
+        //            break;
+        //        case AntMode.Expert:
+        //            if (initializing) return;
+        //            rx1_loop_by_band[(int)b] = on;
+        //            if (rx1_band == b && !mox) RX1Loop = on;
+        //            break;
+        //    }
+        //}
 
-        public bool GetRX1Loop(Band b)
-        {
-            bool ret = false;
-            switch (current_ant_mode)
-            {
-                case AntMode.Simple:
-                    ret = rx1_loop;
-                    break;
-                case AntMode.Expert:
-                    ret = rx1_loop_by_band[(int)b];
-                    break;
-            }
-            return ret;
-        }
+        //public bool GetRX1Loop(Band b)
+        //{
+        //    bool ret = false;
+        //    switch (current_ant_mode)
+        //    {
+        //        case AntMode.Simple:
+        //            ret = rx1_loop;
+        //            break;
+        //        case AntMode.Expert:
+        //            ret = rx1_loop_by_band[(int)b];
+        //            break;
+        //    }
+        //    return ret;
+        //}
 
         private bool mouse_tune_step = false;
         public bool MouseTuneStep
@@ -17924,167 +17991,167 @@ namespace PowerSDR
             set { chkShowTXFilter.Checked = value; }
         }
 
-        private bool rx1_loop = false;
-        public bool RX1Loop
-        {
-            get { return rx1_loop; }
-            set
-            {
-                bool old = rx1_loop;
-                rx1_loop = value;
-                if (old != value || initializing)
-                {
+        //private bool rx1_loop = false;
+        //public bool RX1Loop
+        //{
+        //    get { return rx1_loop; }
+        //    set
+        //    {
+        //        bool old = rx1_loop;
+        //        rx1_loop = value;
+        //        if (old != value || initializing)
+        //        {
 
 
-                    if (rx1_loop)
-                        rx1_loop_offset = loop_gain;
-                    else rx1_loop_offset = 0.0f;
-                    if (rx2_ant == FWCAnt.RX1TAP)
-                        rx2_loop_offset = rx1_loop_offset;
-                    UpdateDisplayOffsets();
-                }
-            }
-        }
+        //            if (rx1_loop)
+        //                rx1_loop_offset = loop_gain;
+        //            else rx1_loop_offset = 0.0f;
+        //            if (rx2_ant == FWCAnt.RX1TAP)
+        //                rx2_loop_offset = rx1_loop_offset;
+        //            UpdateDisplayOffsets();
+        //        }
+        //    }
+        //}
 
-        private FWCAnt rx1_ant = FWCAnt.ANT1;
-        public FWCAnt RX1Ant
-        {
-            get { return rx1_ant; }
-            set
-            {
-                if (!fwc_init || current_model != Model.FLEX5000) return;
-                FWCAnt old = rx1_ant;
-                rx1_ant = value;
-                if (value != old || initializing)
-                {
-                    switch (rx1_ant)
-                    {
-                        case FWCAnt.NC:
-                            lblAntRX1.Text = "RX1: N/C";
-                            // FWC.SetRX1Ant(0);
-                            break;
-                        case FWCAnt.ANT1:
-                            lblAntRX1.Text = "RX1: ANT1";
-                            //  FWC.SetRX1Ant(1);
-                            rx1_path_offset = 0.5f;
-                            break;
-                        case FWCAnt.ANT2:
-                            lblAntRX1.Text = "RX1: ANT2";
-                            //FWC.SetRX1Ant(2);
-                            rx1_path_offset = 0.5f;
-                            break;
-                        case FWCAnt.ANT3:
-                            lblAntRX1.Text = "RX1: ANT3";
-                            // FWC.SetRX1Ant(3);
-                            rx1_path_offset = 0.5f;
-                            break;
-                        case FWCAnt.RX1IN:
-                            lblAntRX1.Text = "RX1: RX1 IN";
-                            // FWC.SetRX1Ant(4);
-                            rx1_path_offset = 0.0f;
-                            break;
-                        case FWCAnt.SIG_GEN:
-                            lblAntRX1.Text = "RX1: Sig Gen";
-                            rx1_path_offset = 0.0f;
-                            break;
-                    }
+        //private FWCAnt rx1_ant = FWCAnt.ANT1;
+        //public FWCAnt RX1Ant
+        //{
+        //    get { return rx1_ant; }
+        //    set
+        //    {
+        //        if (!fwc_init || current_model != Model.FLEX5000) return;
+        //        FWCAnt old = rx1_ant;
+        //        rx1_ant = value;
+        //        if (value != old || initializing)
+        //        {
+        //            switch (rx1_ant)
+        //            {
+        //                case FWCAnt.NC:
+        //                    lblAntRX1.Text = "RX1: N/C";
+        //                    // FWC.SetRX1Ant(0);
+        //                    break;
+        //                case FWCAnt.ANT1:
+        //                    lblAntRX1.Text = "RX1: ANT1";
+        //                    //  FWC.SetRX1Ant(1);
+        //                    rx1_path_offset = 0.5f;
+        //                    break;
+        //                case FWCAnt.ANT2:
+        //                    lblAntRX1.Text = "RX1: ANT2";
+        //                    //FWC.SetRX1Ant(2);
+        //                    rx1_path_offset = 0.5f;
+        //                    break;
+        //                case FWCAnt.ANT3:
+        //                    lblAntRX1.Text = "RX1: ANT3";
+        //                    // FWC.SetRX1Ant(3);
+        //                    rx1_path_offset = 0.5f;
+        //                    break;
+        //                case FWCAnt.RX1IN:
+        //                    lblAntRX1.Text = "RX1: RX1 IN";
+        //                    // FWC.SetRX1Ant(4);
+        //                    rx1_path_offset = 0.0f;
+        //                    break;
+        //                case FWCAnt.SIG_GEN:
+        //                    lblAntRX1.Text = "RX1: Sig Gen";
+        //                    rx1_path_offset = 0.0f;
+        //                    break;
+        //            }
 
-                    UpdateDisplayOffsets();
-                }
-            }
-        }
+        //            UpdateDisplayOffsets();
+        //        }
+        //    }
+        //}
 
-        private FWCAnt rx2_ant = FWCAnt.RX2IN;
-        public FWCAnt RX2Ant
-        {
-            get { return rx2_ant; }
-            set
-            {
-                if (!fwc_init || current_model != Model.FLEX5000) return;
-                FWCAnt old = rx2_ant;
-                rx2_ant = value;
-                if (old != value || initializing)
-                {
-                    switch (rx2_ant)
-                    {
-                        case FWCAnt.ANT1:
-                            lblAntRX2.Text = "RX2: ANT1";
-                            // FWC.SetRX2Ant(1);
-                            rx2_path_offset = -rx2_res_offset - 2.9f;
-                            rx2_loop_offset = 0.0f;
-                            break;
-                        case FWCAnt.RX2IN:
-                            lblAntRX2.Text = "RX2: RX2 IN";
-                            //  FWC.SetRX2Ant(5);
-                            rx2_path_offset = -rx2_res_offset - 2.8f;
-                            rx2_loop_offset = 0.0f;
-                            break;
-                        case FWCAnt.RX1TAP:
-                            lblAntRX2.Text = "RX2: RX1 Tap";
-                            //  FWC.SetRX2Ant(6);
-                            switch (rx1_ant)
-                            {
-                                case FWCAnt.ANT1:
-                                case FWCAnt.ANT2:
-                                case FWCAnt.ANT3:
-                                    rx2_path_offset = 0.6f;
-                                    break;
-                                case FWCAnt.RX1IN:
-                                case FWCAnt.SIG_GEN:
-                                    rx2_path_offset = 0.0f;
-                                    break;
-                            }
-                            rx2_loop_offset = rx1_loop_offset;
-                            break;
-                        case FWCAnt.NC:
-                            lblAntRX2.Text = "RX2: N/C";
-                            // FWC.SetRX2Ant(0);
-                            rx2_path_offset = -rx2_res_offset - 2.8f;
-                            rx2_loop_offset = 0.0f;
-                            break;
-                        default:
-                            // FWC.SetRX2Ant(5);
-                            lblAntRX2.Text = "RX2: RX2 IN";
-                            rx2_path_offset = -2.0f;
-                            rx2_loop_offset = 0.0f;
-                            break;
-                    }
-                    UpdateDisplayOffsets();
-                }
-            }
-        }
+        //private FWCAnt rx2_ant = FWCAnt.RX2IN;
+        //public FWCAnt RX2Ant
+        //{
+        //    get { return rx2_ant; }
+        //    set
+        //    {
+        //        if (!fwc_init || current_model != Model.FLEX5000) return;
+        //        FWCAnt old = rx2_ant;
+        //        rx2_ant = value;
+        //        if (old != value || initializing)
+        //        {
+        //            switch (rx2_ant)
+        //            {
+        //                case FWCAnt.ANT1:
+        //                    lblAntRX2.Text = "RX2: ANT1";
+        //                    // FWC.SetRX2Ant(1);
+        //                    rx2_path_offset = -rx2_res_offset - 2.9f;
+        //                    rx2_loop_offset = 0.0f;
+        //                    break;
+        //                case FWCAnt.RX2IN:
+        //                    lblAntRX2.Text = "RX2: RX2 IN";
+        //                    //  FWC.SetRX2Ant(5);
+        //                    rx2_path_offset = -rx2_res_offset - 2.8f;
+        //                    rx2_loop_offset = 0.0f;
+        //                    break;
+        //                case FWCAnt.RX1TAP:
+        //                    lblAntRX2.Text = "RX2: RX1 Tap";
+        //                    //  FWC.SetRX2Ant(6);
+        //                    switch (rx1_ant)
+        //                    {
+        //                        case FWCAnt.ANT1:
+        //                        case FWCAnt.ANT2:
+        //                        case FWCAnt.ANT3:
+        //                            rx2_path_offset = 0.6f;
+        //                            break;
+        //                        case FWCAnt.RX1IN:
+        //                        case FWCAnt.SIG_GEN:
+        //                            rx2_path_offset = 0.0f;
+        //                            break;
+        //                    }
+        //                    rx2_loop_offset = rx1_loop_offset;
+        //                    break;
+        //                case FWCAnt.NC:
+        //                    lblAntRX2.Text = "RX2: N/C";
+        //                    // FWC.SetRX2Ant(0);
+        //                    rx2_path_offset = -rx2_res_offset - 2.8f;
+        //                    rx2_loop_offset = 0.0f;
+        //                    break;
+        //                default:
+        //                    // FWC.SetRX2Ant(5);
+        //                    lblAntRX2.Text = "RX2: RX2 IN";
+        //                    rx2_path_offset = -2.0f;
+        //                    rx2_loop_offset = 0.0f;
+        //                    break;
+        //            }
+        //            UpdateDisplayOffsets();
+        //        }
+        //    }
+        //}
 
-        bool tx_ant_6m_reset = false;
-        private FWCAnt tx_ant = FWCAnt.ANT1;
-        public FWCAnt TXAnt
-        {
-            get { return tx_ant; }
-            set
-            {
-                if (!fwc_init || current_model != Model.FLEX5000) return;
-                FWCAnt old = tx_ant;
-                tx_ant = value;
-                if (old != value || tx_ant_6m_reset || initializing)
-                {
-                    if (tx_ant_6m_reset) tx_ant_6m_reset = false;
-                    switch (tx_ant)
-                    {
-                        case FWCAnt.ANT1:
-                            lblAntTX.Text = "TX: ANT1";
-                            //  FWC.SetTXAnt(1);
-                            break;
-                        case FWCAnt.ANT2:
-                            lblAntTX.Text = "TX: ANT2";
-                            // FWC.SetTXAnt(2);
-                            break;
-                        case FWCAnt.ANT3:
-                            lblAntTX.Text = "TX: ANT3";
-                            // FWC.SetTXAnt(3);
-                            break;
-                    }
-                }
-            }
-        }
+        //bool tx_ant_6m_reset = false;
+        //private FWCAnt tx_ant = FWCAnt.ANT1;
+        //public FWCAnt TXAnt
+        //{
+        //    get { return tx_ant; }
+        //    set
+        //    {
+        //        if (!fwc_init || current_model != Model.FLEX5000) return;
+        //        FWCAnt old = tx_ant;
+        //        tx_ant = value;
+        //        if (old != value || tx_ant_6m_reset || initializing)
+        //        {
+        //            if (tx_ant_6m_reset) tx_ant_6m_reset = false;
+        //            switch (tx_ant)
+        //            {
+        //                case FWCAnt.ANT1:
+        //                    lblAntTX.Text = "TX: ANT1";
+        //                    //  FWC.SetTXAnt(1);
+        //                    break;
+        //                case FWCAnt.ANT2:
+        //                    lblAntTX.Text = "TX: ANT2";
+        //                    // FWC.SetTXAnt(2);
+        //                    break;
+        //                case FWCAnt.ANT3:
+        //                    lblAntTX.Text = "TX: ANT3";
+        //                    // FWC.SetTXAnt(3);
+        //                    break;
+        //            }
+        //        }
+        //    }
+        //}
 
         private bool zero_beat_rit = false;
         public bool ZeroBeatRIT
@@ -18126,12 +18193,14 @@ namespace PowerSDR
         }*/
 
         private float meter_offset = 0.0f;
-        private void UpdateDisplayOffsets()
+        private void UpdateRX1DisplayOffsets()
         {
+            if (initializing) return;
+
             if (rx1_step_att_present)
             {
                 Display.RX1PreampOffset = rx1_attenuator_data;
-                if (current_hpsdr_model != HPSDRModel.ANAN100D)
+                if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ORION)
                     Display.RX2PreampOffset = rx1_attenuator_data;
             }
             else
@@ -18141,24 +18210,24 @@ namespace PowerSDR
                 //  if (!alexpresent && rx2_preamp_present)
                 //    Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
                 //  else
-                if (current_hpsdr_model != HPSDRModel.ANAN100D)
+                if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ORION)
                     Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
             }
 
-            if (rx2_step_att_present)
-            {
-                Display.RX2PreampOffset = rx2_attenuator_data;
-            }
-            else
-            {
-                if (current_hpsdr_model == HPSDRModel.ANAN100D)
-                {
-                    // if (lblRX2Preamp.Text == "ATT")
-                    Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
-                }
-                //  else
-                //  Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
-            }
+            //if (rx2_step_att_present)
+            //{
+            //    Display.RX2PreampOffset = rx2_attenuator_data;
+            //}
+            //else
+            //{
+            //    if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
+            //    {
+            //        // if (lblRX2Preamp.Text == "ATT")
+            //        Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
+            //    }
+            //    //  else
+            //    //  Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+            //}
 
             /*   if (rx1_step_att_present)
                {
@@ -18201,9 +18270,106 @@ namespace PowerSDR
                     // if (!initializing) SetupForm.txtRX1MeterOffset.Text = rx1_display_cal_offset.ToString();
                     break;
                 default:
-                    Display.RX1DisplayCalOffset = rx1_display_cal_offset + rx1_path_offset + rx1_xvtr_gain_offset + rx1_loop_offset;
+                    Display.RX1DisplayCalOffset = rx1_display_cal_offset + rx1_path_offset + rx1_xvtr_gain_offset;
                     break;
             }
+
+            //switch (Display.CurrentDisplayModeBottom)
+            //{
+            //    case DisplayMode.WATERFALL:
+            //    case DisplayMode.PANADAPTER:
+            //        // Display.RX2DisplayCalOffset = -5 + rx2_xvtr_gain_offset;
+            //        Display.RX2DisplayCalOffset = rx1_display_cal_offset + rx2_xvtr_gain_offset;
+            //        break;
+            //    default:
+            //        Display.RX2DisplayCalOffset = rx2_display_cal_offset + rx2_path_offset + rx2_xvtr_gain_offset;
+            //        break;
+            //}
+            //Display.RX1DisplayCalOffset = rx1_level_table[(int)rx1_band][0]+rx1_path_offset+rx1_xvtr_gain_offset+rx1_loop_offset;
+            //Display.RX2DisplayCalOffset = rx2_level_table[(int)rx2_band][0]+rx2_path_offset+rx2_xvtr_gain_offset+rx2_loop_offset;
+        }
+
+        private void UpdateRX2DisplayOffsets()
+        {
+            if (initializing) return;
+
+            //if (rx1_step_att_present)
+            //{
+            //    Display.RX1PreampOffset = rx1_attenuator_data;
+            //    if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ORION)
+            //        Display.RX2PreampOffset = rx1_attenuator_data;
+            //}
+            //else
+            //{
+            //    Display.RX1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+
+            //    //  if (!alexpresent && rx2_preamp_present)
+            //    //    Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
+            //    //  else
+            //    if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ORION)
+            //        Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+            //}
+
+            if (rx2_step_att_present)
+            {
+                Display.RX2PreampOffset = rx2_attenuator_data;
+            }
+            else
+            {
+                if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
+                {
+                    // if (lblRX2Preamp.Text == "ATT")
+                    Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
+                }
+                //  else
+                //  Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+            }
+
+            /*   if (rx1_step_att_present)
+               {
+                   if (current_hpsdr_model == HPSDRModel.ANAN100D && rx1_attenuator_data > 31)
+                       Display.RX2PreampOffset = rx1_attenuator_data - 29.0f;
+                   else
+                       Display.RX2PreampOffset = (float)rx1_attenuator_data;
+               }
+               else
+               {
+                   if (current_hpsdr_model == HPSDRModel.ANAN100D)
+                   {
+                       switch (rx1_preamp_mode)
+                       {
+                           case PreampMode.HPSDR_OFF:
+                           case PreampMode.HPSDR_MINUS40:
+                           case PreampMode.HPSDR_MINUS50:
+                               Display.RX2PreampOffset = 20.0f;
+                               break;
+                           default:
+                               Display.RX2PreampOffset = 0.0f;
+                               break;
+                       }
+                   }
+                   else
+                       Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+               } */
+
+            //switch (Display.CurrentDisplayMode)
+            //{
+            //    case DisplayMode.WATERFALL:
+            //    case DisplayMode.PANADAPTER:
+            //    case DisplayMode.PANAFALL:
+            //    case DisplayMode.PANASCOPE:
+            //    case DisplayMode.SPECTRUM:
+            //    case DisplayMode.HISTOGRAM:
+            //    case DisplayMode.SPECTRASCOPE:
+            //        // Display.RX1DisplayCalOffset = -5 + rx1_xvtr_gain_offset;
+            //        Display.RX1DisplayCalOffset = rx1_display_cal_offset + rx1_xvtr_gain_offset;
+            //        // if (!initializing) SetupForm.txtRX1MeterOffset.Text = rx1_display_cal_offset.ToString();
+            //        break;
+            //    default:
+            //        Display.RX1DisplayCalOffset = rx1_display_cal_offset + rx1_path_offset + rx1_xvtr_gain_offset;
+            //        break;
+            //}
+
             switch (Display.CurrentDisplayModeBottom)
             {
                 case DisplayMode.WATERFALL:
@@ -18212,7 +18378,7 @@ namespace PowerSDR
                     Display.RX2DisplayCalOffset = rx1_display_cal_offset + rx2_xvtr_gain_offset;
                     break;
                 default:
-                    Display.RX2DisplayCalOffset = rx2_display_cal_offset + rx2_path_offset + rx2_xvtr_gain_offset + rx2_loop_offset;
+                    Display.RX2DisplayCalOffset = rx2_display_cal_offset + rx2_path_offset + rx2_xvtr_gain_offset;
                     break;
             }
             //Display.RX1DisplayCalOffset = rx1_level_table[(int)rx1_band][0]+rx1_path_offset+rx1_xvtr_gain_offset+rx1_loop_offset;
@@ -20223,6 +20389,9 @@ namespace PowerSDR
                             comboMeterTXMode.Items.Insert(3, "Fwd SWR");
                         break;
                 }
+
+                SetComboPreampForHPSDR();
+
             }
         }
 
@@ -20243,10 +20412,10 @@ namespace PowerSDR
             set
             {
                 Model saved_model = current_model;
-                if (value == Model.SDR1000 && hw == null)
+                if (hw == null)
                 {
-                    hw = new HW(0x378);
-                    hw.USBPresent = usb_present;
+                    hw = new HW();
+                    // hw.USBPresent = usb_present;
                 }
                 current_model = value;
                 Display.CurrentModel = value;
@@ -20256,124 +20425,61 @@ namespace PowerSDR
                     case Model.FLEX5000:
                         MinFreq = Math.Max(if_freq, 0.0000010);
                         MaxFreq = 65.0;
-                        if (fwc_init)
-                        {
-                            /*string preamp = comboPreamp.Text;
-                            comboPreamp.Items.Clear();
-                            comboPreamp.Items.Add("Off");
-                            comboPreamp.Items.Add("On");
-                            if(preamp == "Off") comboPreamp.Text = "Off";
-                            else comboPreamp.Text = "On";*/
+                        //if (fwc_init)
+                        //{
+                        //    /*string preamp = comboPreamp.Text;
+                        //    comboPreamp.Items.Clear();
+                        //    comboPreamp.Items.Add("Off");
+                        //    comboPreamp.Items.Add("On");
+                        //    if(preamp == "Off") comboPreamp.Text = "Off";
+                        //    else comboPreamp.Text = "On";*/
 
-                            comboPreamp.Visible = false;
-                            //lblPreamp.Visible = false;
-                            chkRX1Preamp.Visible = true;
-                            chkRX1Preamp_CheckedChanged(this, EventArgs.Empty);
+                        //    comboPreamp.Visible = false;
+                        //    //lblPreamp.Visible = false;
+                        //    chkRX1Preamp.Visible = true;
+                        //    chkRX1Preamp_CheckedChanged(this, EventArgs.Empty);
 
-                            if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
-                                comboMeterTXMode.Items.Insert(1, "Ref Pwr");
-                            if (!comboMeterTXMode.Items.Contains("SWR"))
-                                comboMeterTXMode.Items.Insert(2, "SWR");
+                        //    if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
+                        //        comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                        //    if (!comboMeterTXMode.Items.Contains("SWR"))
+                        //        comboMeterTXMode.Items.Insert(2, "SWR");
 
-                            if (comboMeterTXMode.SelectedIndex < 0)
-                                comboMeterTXMode.SelectedIndex = 0;
+                        //    if (comboMeterTXMode.SelectedIndex < 0)
+                        //        comboMeterTXMode.SelectedIndex = 0;
 
-                            chkBCI.Visible = false;
-                            chkBCI.Checked = false;
+                        //    chkBCI.Visible = false;
+                        //    chkBCI.Checked = false;
 
-                            // FWC.WriteCodecReg(0x1B, 0x02);
-                            // if (fwcMixForm == null) fwcMixForm = new FWCMixForm(this);
-                            //  if (fwcAntForm == null) fwcAntForm = new FWCAntForm(this);
+                        //    // FWC.WriteCodecReg(0x1B, 0x02);
+                        //    // if (fwcMixForm == null) fwcMixForm = new FWCMixForm(this);
+                        //    //  if (fwcAntForm == null) fwcAntForm = new FWCAntForm(this);
 
-                            chkFWCATUBypass.Visible = true;
-                            bool b = false;
-                            // FWC.GetATUOK(out b);
-                            if (b)
-                            {
-                                // mnuATU.Visible = true;
-                                //  if (fwcAtuForm == null) fwcAtuForm = new FWCATUForm(this);
-                                // chkFWCATU.Enabled = true;
-                                // chkFWCATU.Text = "ATU";
-                                // chkFWCATUBypass.Enabled = true;
-                                //  chkFWCATUBypass.Text = "BYP";
-                            }
-                            else
-                            {
-                                //  chkX2TR.Text = "";
-                                //  chkX2TR.Enabled = false;
-                            }
-                            //  if (flex5000DebugForm == null) flex5000DebugForm = new FLEX5000DebugForm(this);
+                        //    chkFWCATUBypass.Visible = true;
+                        //    bool b = false;
+                        //    // FWC.GetATUOK(out b);
+                        //    if (b)
+                        //    {
+                        //        // mnuATU.Visible = true;
+                        //        //  if (fwcAtuForm == null) fwcAtuForm = new FWCATUForm(this);
+                        //        // chkFWCATU.Enabled = true;
+                        //        // chkFWCATU.Text = "ATU";
+                        //        // chkFWCATUBypass.Enabled = true;
+                        //        //  chkFWCATUBypass.Text = "BYP";
+                        //    }
+                        //    else
+                        //    {
+                        //        //  chkX2TR.Text = "";
+                        //        //  chkX2TR.Enabled = false;
+                        //  }
+                        //  if (flex5000DebugForm == null) flex5000DebugForm = new FLEX5000DebugForm(this);
 
-                            //chkFullDuplex.Visible = true;
-                            panelAntenna.Visible = true;
-                        }
-                        else
-                        {
-                            chkPower.Enabled = false;
-                        }
-                        break;
-                    case Model.FLEX3000:
-                        MinFreq = Math.Max(if_freq, 0.0000010);
-                        MaxFreq = 65.0;
-                        FWCDDSClockCorrection = fwc_dds_clock_correction;
-                        if (fwc_init)
-                        {
-                            comboPreamp.Visible = true;
-                            chkRX1Preamp.Visible = false;
-                            lblPreamp.Text = "RX Gain";
-                            string preamp = comboPreamp.Text;
-                            comboPreamp.Items.Clear();
-                            comboPreamp.Items.Add("Attn");
-                            comboPreamp.Items.Add("Off");
-                            comboPreamp.Items.Add("Pre1");
-                            comboPreamp.Items.Add("Pre2");
-                            comboPreamp.Text = preamp;
-                            if (comboPreamp.SelectedIndex < 0)
-                                comboPreamp.SelectedIndex = 1;
-                            //comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
-
-                            if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
-                                comboMeterTXMode.Items.Insert(1, "Ref Pwr");
-                            if (!comboMeterTXMode.Items.Contains("SWR"))
-                                comboMeterTXMode.Items.Insert(2, "SWR");
-
-                            if (comboMeterTXMode.SelectedIndex < 0)
-                                comboMeterTXMode.SelectedIndex = 0;
-
-                            chkBCI.Visible = false;
-                            chkBCI.Checked = false;
-
-                            //  chkX2TR.Text = "";
-                            // chkX2TR.Enabled = false;
-
-                            //chkFullDuplex.Visible = true;
-                            panelAntenna.Visible = false;
-                        }
-                        else
-                        {
-                            chkPower.Enabled = false;
-                        }
-                        break;
-                    case Model.SDR1000:
-                        MinFreq = Math.Max(if_freq, 0.0000010);
-                        if (XVTRPresent)
-                            MaxFreq = 146.0;
-                        else MaxFreq = 65.0;
-                        comboPreamp.Items.Clear();
-                        comboPreamp.Items.Add("Off");
-                        comboPreamp.Items.Add("Low");
-                        comboPreamp.Items.Add("Med");
-                        comboPreamp.Items.Add("High");
-                        comboPreamp.Visible = true;
-                        //lblPreamp.Visible = true;
-                        chkRX1Preamp.Visible = false;
-                        comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
-
-                        chkBCI.Visible = false;
-                        //mnuFWC.Visible = false;
-                        panelAntenna.Visible = false;
-                        //chkFWCATU.Visible = false;
-                        // chkFWCATUBypass.Visible = false;
+                        //chkFullDuplex.Visible = true;
+                        panelAntenna.Visible = true;
+                        // }
+                        // else
+                        // {
+                        chkPower.Enabled = false;
+                        // }
                         break;
 
                     case Model.HPSDR:
@@ -20381,8 +20487,8 @@ namespace PowerSDR
                         MinFreq = 0.000000;
                         MaxFreq = 61.0;
                         // SetComboPreampForHPSDR();
-                        comboPreamp.Text = "0dB";
-                        comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
+                        // comboPreamp.Text = "0dB";
+                        //comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
                         chkBCI.Visible = false;
                         chkFWCATU.Visible = true;
                         chkFWCATUBypass.Visible = false;
@@ -20410,22 +20516,6 @@ namespace PowerSDR
                         }
                         break;
 
-                    case Model.SOFTROCK40:
-                        if (si570_used) // modif F8CHK
-                        {
-                            MinFreq = Math.Max(if_freq, 0.0000010);
-                            MaxFreq = 65.0;
-                        }
-                        else
-                        {
-                            MinFreq = soft_rock_center_freq - sample_rate1 / 2 * 0.0000010;
-                            MaxFreq = soft_rock_center_freq + sample_rate1 / 2 * 0.0000010;
-                        }
-                        //mnuFWC.Visible = false;
-                        panelAntenna.Visible = false;
-                        chkFWCATU.Visible = true;
-                        chkFWCATUBypass.Visible = false;
-                        break;
                     case Model.DEMO:
                         MinFreq = Math.Max(if_freq, 0.000001);
                         if (XVTRPresent)
@@ -20641,7 +20731,7 @@ namespace PowerSDR
                 else
                 {
                     rx2_step_att_present = false;
-                    JanusAudio.EnableRX2StepAtten(0);
+                    JanusAudio.EnableADC2StepAtten(0);
                     comboRX2Preamp.Hide();
                     udRX2StepAttData.Hide();
                     lblRX2Preamp.Visible = false;
@@ -20777,61 +20867,61 @@ namespace PowerSDR
             }
         }
 
-        private double dds_step_size = 200.0 / 0xFFFFFFFFFFFF;
-        private double corrected_dds_clock = 200.0;
-        private double dds_clock_correction = 0.0;
-        public double DDSClockCorrection
-        {
-            get { return dds_clock_correction; }
-            set
-            {
-                if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                {
-                    FWCDDSClockCorrection = value;
-                }
-                else
-                {
-                    dds_clock_correction = value;
-                    if (ModelIsHPSDRorHermes())
-                    {
-                        corrected_dds_clock = 122.88;
-                    }
-                    else
-                    {
-                        corrected_dds_clock = 200.0 + dds_clock_correction;
-                    }
-                    dds_step_size = corrected_dds_clock / 0xFFFFFFFFFFFF;
-                    DDSFreq = dds_freq;
-                }
-            }
-        }
+        //private double dds_step_size = 200.0 / 0xFFFFFFFFFFFF;
+        //private double corrected_dds_clock = 200.0;
+        //private double dds_clock_correction = 0.0;
+        //public double DDSClockCorrection
+        //{
+        //    get { return dds_clock_correction; }
+        //    set
+        //    {
+        //        if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+        //        {
+        //            FWCDDSClockCorrection = value;
+        //        }
+        //        else
+        //        {
+        //            dds_clock_correction = value;
+        //            if (ModelIsHPSDRorHermes())
+        //            {
+        //                corrected_dds_clock = 122.88;
+        //            }
+        //            else
+        //            {
+        //                corrected_dds_clock = 200.0 + dds_clock_correction;
+        //            }
+        //            dds_step_size = corrected_dds_clock / 0xFFFFFFFFFFFF;
+        //            DDSFreq = dds_freq;
+        //        }
+        //    }
+        //}
 
-        private double fwc_dds_step_size = 500.0 / 0xFFFFFFFF;
-        private double fwc_corrected_dds_clock = 500.0;
-        private double fwc_dds_clock_correction = 0.0;
-        public double FWCDDSClockCorrection
-        {
-            get { return fwc_dds_clock_correction; }
-            set
-            {
-                double clock = 500.0;
-                switch (current_model)
-                {
-                    case Model.FLEX3000:
-                        clock = 499.201;
-                        break;
-                    case Model.FLEX5000:
-                        clock = 500.0;
-                        break;
-                }
+        //private double fwc_dds_step_size = 500.0 / 0xFFFFFFFF;
+        //private double fwc_corrected_dds_clock = 500.0;
+        //private double fwc_dds_clock_correction = 0.0;
+        //public double FWCDDSClockCorrection
+        //{
+        //    get { return fwc_dds_clock_correction; }
+        //    set
+        //    {
+        //        double clock = 500.0;
+        //        switch (current_model)
+        //        {
+        //            case Model.FLEX3000:
+        //                clock = 499.201;
+        //                break;
+        //            case Model.FLEX5000:
+        //                clock = 500.0;
+        //                break;
+        //        }
 
-                fwc_dds_clock_correction = value;
-                fwc_corrected_dds_clock = clock + fwc_dds_clock_correction;
-                fwc_dds_step_size = fwc_corrected_dds_clock / 0xFFFFFFFF;
-                if (SetupForm != null)
-                    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-            }
-        }
+        //        fwc_dds_clock_correction = value;
+        //        fwc_corrected_dds_clock = clock + fwc_dds_clock_correction;
+        //        fwc_dds_step_size = fwc_corrected_dds_clock / 0xFFFFFFFF;
+        //        if (SetupForm != null)
+        //            txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+        //    }
+        //}
 
         /*private double rx2_dds_step_size = 500.0 / 0xFFFFFFFF;
         private double rx2_corrected_dds_clock = 500.0;
@@ -20874,43 +20964,43 @@ namespace PowerSDR
             set { display_duplex = value; }
         }
 
-        private long Freq2TW(double freq)
-        {
-            long tw = 0;
-            switch (current_model)
-            {
-                case Model.HPSDR:
-                case Model.HERMES:
-                case Model.SDR1000:
-                    tw = (long)(0xFFFFFFFFFFFF * freq / corrected_dds_clock);
-                    break;
-                case Model.FLEX3000:
-                case Model.FLEX5000:
-                    tw = (long)(0xFFFFFFFF * freq / fwc_corrected_dds_clock);
-                    break;
-            }
-            return tw;
-        }
+        //private long Freq2TW(double freq)
+        //{
+        //    long tw = 0;
+        //    switch (current_model)
+        //    {
+        //        case Model.HPSDR:
+        //        case Model.HERMES:
+        //        case Model.SDR1000:
+        //            tw = (long)(0xFFFFFFFFFFFF * freq / corrected_dds_clock);
+        //            break;
+        //        case Model.FLEX3000:
+        //        case Model.FLEX5000:
+        //            tw = (long)(0xFFFFFFFF * freq / fwc_corrected_dds_clock);
+        //            break;
+        //    }
+        //    return tw;
+        //}
 
-        public double TW2Freq(long tw)
-        {
-            double freq = 0.0;
-            switch (current_model)
-            {
-                case Model.HPSDR:
-                case Model.HERMES:
-                case Model.SDR1000:
-                    freq = tw * corrected_dds_clock / 0xFFFFFFFFFFFF;
-                    break;
-                case Model.FLEX3000:
-                case Model.FLEX5000:
-                    freq = tw * fwc_corrected_dds_clock / 0xFFFFFFFF;
-                    break;
+        //public double TW2Freq(long tw)
+        //{
+        //    double freq = 0.0;
+        //    switch (current_model)
+        //    {
+        //        case Model.HPSDR:
+        //        case Model.HERMES:
+        //        case Model.SDR1000:
+        //            freq = tw * corrected_dds_clock / 0xFFFFFFFFFFFF;
+        //            break;
+        //        case Model.FLEX3000:
+        //        case Model.FLEX5000:
+        //            freq = tw * fwc_corrected_dds_clock / 0xFFFFFFFF;
+        //            break;
 
 
-            }
-            return freq;
-        }
+        //    }
+        //    return freq;
+        //}
 
         bool rx1_dds_freq_updated = false;
         //uint rx1_dds_freq_tw;
@@ -20990,7 +21080,7 @@ namespace PowerSDR
 
         bool tx_dds_freq_updated = false;
         // uint tx_dds_freq_tw;
-        double tx_dds_freq_mhz = 7.1;
+        double tx_dds_freq_mhz = 7.0;
         private void UpdateTXDDSFreq()
         {
             if (chkPower.Checked)// && tx_dds_freq_updated)
@@ -21051,7 +21141,7 @@ namespace PowerSDR
         }
 
         //private uint last_tw = 0;
-        private double fwc_dds_freq = 7.1;
+        private double fwc_dds_freq = 7.0;
         public double FWCDDSFreq
         {
             get { return fwc_dds_freq; }
@@ -21068,7 +21158,7 @@ namespace PowerSDR
             }
         }
 
-        private double rx2_dds_freq = 7.1;
+        private double rx2_dds_freq = 7.0;
         public double RX2DDSFreq
         {
             get { return rx2_dds_freq; }
@@ -21085,7 +21175,7 @@ namespace PowerSDR
             }
         }
 
-        private double dds_freq = 7.1;
+        private double dds_freq = 7.0;
         public double DDSFreq
         {
             get { return dds_freq; }
@@ -21166,10 +21256,10 @@ namespace PowerSDR
             }
         }
 
-        public double TuningWordToFreq(long word)
-        {
-            return word * corrected_dds_clock / Math.Pow(2, 48);
-        }
+        //public double TuningWordToFreq(long word)
+        //{
+        //    return word * corrected_dds_clock / Math.Pow(2, 48);
+        //}
 
         private double min_freq = 0.0;
         public double MinFreq
@@ -22396,9 +22486,15 @@ namespace PowerSDR
                     // Fix Penny O/C VHF control Vk4xv
                     lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
 
-                if (rx1_preamp_mode > PreampMode.FIRST)
+                if (!initializing && rx1_preamp_mode > PreampMode.FIRST)
+                {
+                    // comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
+                    // RX1PreampMode = rx1_preamp_by_band[(int)old_band];
+                    // RX1AttenuatorData = rx1_step_attenuator_by_band[(int)old_band];
+
                     rx1_preamp_by_band[(int)old_band] = rx1_preamp_mode;
-                //  rx1_preamp_by_band[(int)old_band] = rx1_preamp_mode;
+                    rx1_step_attenuator_by_band[(int)old_band] = rx1_attenuator_data;
+                }
 
                 if (rx1_band != old_band || initializing)
                 {
@@ -22406,6 +22502,7 @@ namespace PowerSDR
                     rx1_agct_by_band[(int)old_band] = ptbRF.Value;
 
                     RX1PreampMode = rx1_preamp_by_band[(int)value];
+                    RX1AttenuatorData = rx1_step_attenuator_by_band[(int)value];
                     RF = rx1_agct_by_band[(int)value];
                     ptbRF_Scroll(this, EventArgs.Empty);
                 }
@@ -22504,7 +22601,11 @@ namespace PowerSDR
                 if (rx2_xvtr_index >= 0)
                     lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOBFreq), -1, false, current_region);
 
-                rx2_preamp_by_band[(int)old_band] = rx2_preamp_mode;
+                if (!initializing && rx2_preamp_mode > PreampMode.FIRST)
+                {
+                    rx2_preamp_by_band[(int)old_band] = rx2_preamp_mode;
+                    rx2_step_attenuator_by_band[(int)old_band] = rx2_attenuator_data;
+                }
 
                 if (rx2_band != old_band || initializing)
                 {
@@ -22513,6 +22614,7 @@ namespace PowerSDR
 
                     // if(rx2_preamp_present)
                     RX2PreampMode = rx2_preamp_by_band[(int)value];
+                    RX2ATT = rx2_step_attenuator_by_band[(int)value];
                     RX2RF = rx2_agct_by_band[(int)value];
                     ptbRX2RF_Scroll(this, EventArgs.Empty);
 
@@ -22657,7 +22759,8 @@ namespace PowerSDR
 
             if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
             {
-                num = (float)Math.Max(-20.0, -DttSP.CalculateTXMeter(0, DttSP.MeterType.ALC));
+                // num = (float)Math.Max(-20.0, -DttSP.CalculateTXMeter(0, DttSP.MeterType.ALC));
+                num = (float)Math.Max(-30.0f, -DttSP.CalculateTXMeter(1, DttSP.MeterType.ALC));
                 return num.ToString("f1") + " dB";
             }
             else return "0" + separator + "0 dB";
@@ -22668,30 +22771,31 @@ namespace PowerSDR
             double power = 0.0;
             float num = 0f;
 
-            if (pa_present && VFOAFreq < 30.0)
+            if (alexpresent)
             {
                 //pa_power_mutex.WaitOne();
-                power = PAPower(pa_fwd_power);
+                power = calfwdpower; // PAPower(pa_fwd_power);
                 //pa_power_mutex.ReleaseMutex();
 
                 return power.ToString("f0") + " W";
             }
             else
             {
-                if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
-                {
-                    num = (float)Math.Max(0.0, DttSP.CalculateTXMeter(0, DttSP.MeterType.PWR));
-                    num *= (float)((double)ptbPWR.Value * 0.01);
-                    return num.ToString("f2") + " W";
-                }
-                else return "0" + separator + "00 W";
+                //if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
+                //{
+                //    num = (float)Math.Max(0.0, DttSP.CalculateTXMeter(0, DttSP.MeterType.PWR));
+                //    num *= (float)((double)ptbPWR.Value * 0.01);
+                //    return num.ToString("f2") + " W";
+                //}
+                // else 
+                return "0" + separator + "00 W";
             }
         }
 
         public string CATReadPeakPwr()
         {
             float num = 0f;
-            if (pa_present && VFOAFreq < 30.0)
+            if (alexpresent)
             {
                 if (Audio.CurrentAudioState1 == Audio.AudioState.DTTSP)
                 {
@@ -22728,16 +22832,16 @@ namespace PowerSDR
         {
             double power = 0.0;
             //pa_power_mutex.WaitOne();
-            power = PAPower(pa_rev_power);
+            power = alex_rev; // PAPower(pa_rev_power);
             //pa_power_mutex.ReleaseMutex();
             return power.ToString("f0") + " W";
         }
 
         public string CATReadSWR()
         {
-            double swr = 0.0;
+            double swr = 1.0;
             //pa_power_mutex.WaitOne();
-            swr = SWR(pa_fwd_power, pa_rev_power);
+            swr = alex_swr;// SWR(pa_fwd_power, pa_rev_power);
             //pa_power_mutex.ReleaseMutex();
             return swr.ToString("f1") + " : 1";
         }
@@ -24073,150 +24177,154 @@ namespace PowerSDR
         }
 
         private int alex_atten;
-        private PreampMode rx1_preamp_mode = PreampMode.HIGH;
+        private PreampMode rx1_preamp_mode = PreampMode.HPSDR_OFF;
         public PreampMode RX1PreampMode
         {
             get { return rx1_preamp_mode; }
             set
             {
                 rx1_preamp_mode = value;
-                if (ModelIsHPSDRorHermes())
-                {
-                    // make sure value being set makes sense base on installed hardware - morph it if not 
-                    if (rx1_preamp_mode == PreampMode.OFF ||
-                        rx1_preamp_mode == PreampMode.MED ||
-                        rx1_preamp_mode == PreampMode.LOW ||
-                        rx1_preamp_mode == PreampMode.HIGH)
-                    {
-                        rx1_preamp_mode = PreampMode.HPSDR_OFF;
-                    }
-                    else if (!alexpresent &&
-                                ((rx1_preamp_mode == PreampMode.HPSDR_MINUS10) ||
-                                    (rx1_preamp_mode == PreampMode.HPSDR_MINUS20) ||
-                                    (rx1_preamp_mode == PreampMode.HPSDR_MINUS30) ||
-                                    (rx1_preamp_mode == PreampMode.HPSDR_MINUS40) ||
-                                    (rx1_preamp_mode == PreampMode.HPSDR_MINUS50)
-                                )
-                            )
-                    {
-                        rx1_preamp_mode = PreampMode.HPSDR_OFF;
-                    }
-                }
-                else
-                {
-                    if (rx1_preamp_mode == PreampMode.HPSDR_ON ||
-                        rx1_preamp_mode == PreampMode.HPSDR_OFF ||
-                        rx1_preamp_mode == PreampMode.HPSDR_MINUS10 ||
-                        rx1_preamp_mode == PreampMode.HPSDR_MINUS20 ||
-                        rx1_preamp_mode == PreampMode.HPSDR_MINUS30 ||
-                        rx1_preamp_mode == PreampMode.HPSDR_MINUS40 ||
-                        rx1_preamp_mode == PreampMode.HPSDR_MINUS50)
-                    {
-                        rx1_preamp_mode = PreampMode.OFF;
-                    }
-                }
-                if (fwc_init && current_model == Model.FLEX5000)
-                {
-                    switch (rx1_preamp_mode)
-                    {
-                        case PreampMode.OFF:
-                            //FWC.SetPreamp(false);
-                            break;
-                        case PreampMode.HIGH:
-                            //FWC.SetPreamp(true);
-                            break;
-                    }
-                }
-                else if (ModelIsHPSDRorHermes())
-                {
-                    alex_atten = 0;
-                    int merc_preamp = 0;
-                    switch (rx1_preamp_mode)
-                    {
-                        case PreampMode.HPSDR_ON:  //0dB
-                            merc_preamp = 1; //no attn
-                            alex_atten = 0;
-                            break;
-                        case PreampMode.HPSDR_OFF: //-20dB
-                            merc_preamp = 0; //attn inline
-                            alex_atten = 0;
-                            break;
-                        case PreampMode.HPSDR_MINUS10:
-                            merc_preamp = 1;
-                            alex_atten = 1;
-                            break;
-                        case PreampMode.HPSDR_MINUS20:
-                            merc_preamp = 1;
-                            alex_atten = 2;
-                            break;
-                        case PreampMode.HPSDR_MINUS30:
-                            merc_preamp = 1;
-                            alex_atten = 3;
-                            break;
-                        case PreampMode.HPSDR_MINUS40:
-                            merc_preamp = 0;
-                            alex_atten = 2;
-                            break;
-                        case PreampMode.HPSDR_MINUS50:
-                            merc_preamp = 0;
-                            alex_atten = 3;
-                            break;
-                    }
-                    JanusAudio.SetRX1Preamp(merc_preamp);
-                    JanusAudio.SetAlexAtten(alex_atten);
-                    if (rx2_preamp_present && current_hpsdr_model == HPSDRModel.HPSDR)
-                    {
-                        JanusAudio.SetRX2Preamp(merc_preamp);
-                        Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
-                    }
+                if (initializing) return;
 
-                }
-                else
+                // if (ModelIsHPSDRorHermes())
+                // {
+                // make sure value being set makes sense base on installed hardware - morph it if not 
+                //if (rx1_preamp_mode == PreampMode.OFF)
+                //{
+                //    rx1_preamp_mode = PreampMode.HPSDR_OFF;
+                //}
+
+                //if (rx1_preamp_mode == PreampMode.MED ||
+                //    rx1_preamp_mode == PreampMode.LOW ||
+                //    rx1_preamp_mode == PreampMode.HIGH)
+                //{
+                //    rx1_preamp_mode = PreampMode.HPSDR_ON;
+                //}
+
+                if (!alexpresent &&
+                        ((rx1_preamp_mode == PreampMode.HPSDR_MINUS10) ||
+                            (rx1_preamp_mode == PreampMode.HPSDR_MINUS20) ||
+                            (rx1_preamp_mode == PreampMode.HPSDR_MINUS30) ||
+                            (rx1_preamp_mode == PreampMode.HPSDR_MINUS40) ||
+                            (rx1_preamp_mode == PreampMode.HPSDR_MINUS50)
+                        )
+                    )
                 {
-                    switch (rx1_preamp_mode)
-                    {
-                        case PreampMode.OFF:
-                            Hdw.Attn = true;
-                            Hdw.GainRelay = true;	// 0dB
-                            break;
-                        case PreampMode.LOW:
-                            Hdw.Attn = false;
-                            Hdw.GainRelay = true;	// 0dB
-                            break;
-                        case PreampMode.MED:
-                            Hdw.Attn = true;
-                            Hdw.GainRelay = false;	// 26dB
-                            break;
-                        case PreampMode.HIGH:
-                            Hdw.Attn = false;
-                            Hdw.GainRelay = false;
-                            break;
-                    }
+                    rx1_preamp_mode = PreampMode.HPSDR_OFF;
                 }
+                //  }
+                //else
+                //{
+                //    if (rx1_preamp_mode == PreampMode.HPSDR_ON ||
+                //        rx1_preamp_mode == PreampMode.HPSDR_OFF ||
+                //        rx1_preamp_mode == PreampMode.HPSDR_MINUS10 ||
+                //        rx1_preamp_mode == PreampMode.HPSDR_MINUS20 ||
+                //        rx1_preamp_mode == PreampMode.HPSDR_MINUS30 ||
+                //        rx1_preamp_mode == PreampMode.HPSDR_MINUS40 ||
+                //        rx1_preamp_mode == PreampMode.HPSDR_MINUS50)
+                //    {
+                //        rx1_preamp_mode = PreampMode.OFF;
+                //    }
+                //}
+
+                //if (fwc_init && current_model == Model.FLEX5000)
+                //{
+                //    switch (rx1_preamp_mode)
+                //    {
+                //        case PreampMode.OFF:
+                //            //FWC.SetPreamp(false);
+                //            break;
+                //        case PreampMode.HIGH:
+                //            //FWC.SetPreamp(true);
+                //            break;
+                //    }
+                // }
+                // else
+
+                //  if (ModelIsHPSDRorHermes())
+                //  {
+                alex_atten = 0;
+                int merc_preamp = 0;
+                switch (rx1_preamp_mode)
+                {
+                    case PreampMode.HPSDR_ON:  //0dB
+                        merc_preamp = 1; //no attn
+                        alex_atten = 0;
+                        break;
+                    case PreampMode.HPSDR_OFF: //-20dB
+                        merc_preamp = 0; //attn inline
+                        alex_atten = 0;
+                        break;
+                    case PreampMode.HPSDR_MINUS10:
+                        merc_preamp = 1;
+                        alex_atten = 1;
+                        break;
+                    case PreampMode.HPSDR_MINUS20:
+                        merc_preamp = 1;
+                        alex_atten = 2;
+                        break;
+                    case PreampMode.HPSDR_MINUS30:
+                        merc_preamp = 1;
+                        alex_atten = 3;
+                        break;
+                    case PreampMode.HPSDR_MINUS40:
+                        merc_preamp = 0;
+                        alex_atten = 2;
+                        break;
+                    case PreampMode.HPSDR_MINUS50:
+                        merc_preamp = 0;
+                        alex_atten = 3;
+                        break;
+                }
+                JanusAudio.SetRX1Preamp(merc_preamp);
+                JanusAudio.SetAlexAtten(alex_atten);
+
+                if (rx2_preamp_present && current_hpsdr_model == HPSDRModel.HPSDR)
+                {
+                    JanusAudio.SetRX2Preamp(merc_preamp);
+                    Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
+                }
+
+                rx1_preamp_by_band[(int)rx1_band] = rx1_preamp_mode;
+                // rx1_step_attenuator_by_band[(int)rx1_band] = rx1_attenuator_data;
+                //  }
+                //else
+                //{
+                //    switch (rx1_preamp_mode)
+                //    {
+                //        case PreampMode.OFF:
+                //            Hdw.Attn = true;
+                //            Hdw.GainRelay = true;	// 0dB
+                //            break;
+                //        case PreampMode.LOW:
+                //            Hdw.Attn = false;
+                //            Hdw.GainRelay = true;	// 0dB
+                //            break;
+                //        case PreampMode.MED:
+                //            Hdw.Attn = true;
+                //            Hdw.GainRelay = false;	// 26dB
+                //            break;
+                //        case PreampMode.HIGH:
+                //            Hdw.Attn = false;
+                //            Hdw.GainRelay = false;
+                //            break;
+                //    }
+                //}
 
                 switch (rx1_preamp_mode)
                 {
-                    case PreampMode.OFF:
-                        comboPreamp.Text = "Off";
-                        break;
-                    case PreampMode.LOW:
-                        comboPreamp.Text = "Low";
-                        break;
-                    case PreampMode.MED:
-                        comboPreamp.Text = "Med";
-                        break;
-                    case PreampMode.HIGH:
-                        switch (current_model)
-                        {
-                            case Model.FLEX5000:
-                                comboPreamp.Text = "On";
-                                break;
-                            default:
-                                comboPreamp.Text = "High";
-                                break;
-                        }
-                        break;
-
+                    //case PreampMode.OFF:
+                    //    comboPreamp.Text = "Off";
+                    //    break;
+                    //case PreampMode.LOW:
+                    //    comboPreamp.Text = "Low";
+                    //    break;
+                    //case PreampMode.MED:
+                    //    comboPreamp.Text = "Med";
+                    //    break;
+                    //case PreampMode.HIGH:
+                    //    comboPreamp.Text = "High";
+                    //    break;
                     case PreampMode.HPSDR_ON:
                         comboPreamp.Text = "0dB";
                         break;
@@ -24247,7 +24355,7 @@ namespace PowerSDR
                 }
                 //  if (!hermes_step_attenuator)
                 //  Display.RX1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
-                UpdateDisplayOffsets();
+                UpdateRX1DisplayOffsets();
 
                 if (chkSquelch.Checked)
                     ptbSquelch_Scroll(this, EventArgs.Empty);
@@ -24255,7 +24363,7 @@ namespace PowerSDR
             }
         }
 
-        private PreampMode rx2_preamp_mode = PreampMode.HIGH;
+        private PreampMode rx2_preamp_mode = PreampMode.HPSDR_OFF;
         public PreampMode RX2PreampMode
         {
             get { return rx2_preamp_mode; }
@@ -24268,46 +24376,51 @@ namespace PowerSDR
 
                 switch (rx2_preamp_mode)
                 {
-                    case PreampMode.OFF: // -20dB HPSDR_OFF
+                    case PreampMode.HPSDR_OFF: // -20dB HPSDR_OFF
                         rx2_preamp = 1;
                         rx2_att_value = 20;
                         //chkRX2Preamp.Checked = false;
+                        comboRX2Preamp.Text = "-20dB";
                         break;
-                    case PreampMode.HIGH: //0dB HPSDR_ON
+                    case PreampMode.HPSDR_ON: //0dB HPSDR_ON
                         rx2_preamp = 1;
                         rx2_att_value = 0;
                         // chkRX2Preamp.Checked = true;
+                        comboRX2Preamp.Text = "0dB";
                         break;
 
                     case PreampMode.HPSDR_MINUS10:
                         rx2_preamp = 1;
                         rx2_att_value = 10;
-                        // comboPreamp.Text = "-10db";
+                        comboRX2Preamp.Text = "-10dB";
                         break;
 
                     case PreampMode.HPSDR_MINUS20:
                         rx2_preamp = 1;
                         rx2_att_value = 20;
-                        //  comboPreamp.Text = "-20db";
+                        comboRX2Preamp.Text = "-20dB";
                         break;
 
                     case PreampMode.HPSDR_MINUS30:
                         rx2_preamp = 1;
                         rx2_att_value = 30;
-                        // comboPreamp.Text = "-30db";
+                        comboRX2Preamp.Text = "-30dB";
                         break;
                 }
 
                 //  if (!alexpresent || current_hpsdr_model == HPSDRModel.ANAN100D)
                 // JanusAudio.SetRX2Preamp(rx2_preamp);
-                if (current_hpsdr_model == HPSDRModel.ANAN100D)
+                if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
                 {
                     // JanusAudio.SetRX2StepAttenData(rx2_att_value);
-                    RX2AttenuatorData = rx2_att_value;
-                    JanusAudio.EnableRX2StepAtten(rx2_preamp);
+                    // RX2AttenuatorData = rx2_att_value;
+                    JanusAudio.SetADC2StepAttenData(rx2_att_value);
+                    JanusAudio.EnableADC2StepAtten(rx2_preamp);
                 }
 
-                UpdateDisplayOffsets();
+                rx2_preamp_by_band[(int)rx2_band] = rx2_preamp_mode;
+                UpdateRX2DisplayOffsets();
+
                 //  Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
 
                 if (chkRX2Squelch.Checked)
@@ -24507,6 +24620,13 @@ namespace PowerSDR
         {
             get { return disable_ptt; }
             set { disable_ptt = value; }
+        }
+
+        private bool mic_ptt_disabled = true;
+        public bool MicPTTDisabled
+        {
+            get { return mic_ptt_disabled; }
+            set { mic_ptt_disabled = value; }
         }
 
         public bool PowerOn
@@ -25351,7 +25471,7 @@ namespace PowerSDR
             set
             {
                 usb_present = value;
-               
+
             }
         }
 
@@ -25362,7 +25482,7 @@ namespace PowerSDR
             set
             {
                 ozy_control = value;
-               
+
             }
         }
 
@@ -25678,6 +25798,7 @@ namespace PowerSDR
                     */
             }
         }
+
         private int change_overload_color_count = 0;
         private void UpdatePeakText()
         {
@@ -28574,7 +28695,7 @@ namespace PowerSDR
                                     new_meter_data = calfwdpower;
                                     if (pa_values)
                                     {
-                                        SetupForm.textFwdPowerCalibrated.Text = new_meter_data.ToString("f1") + " W";
+                                        // SetupForm.textDriveFwdADCValue.Text = new_meter_data.ToString("f1") + " W";
                                         SetupForm.textPAFwdPower.Text = alex_fwd.ToString("f1") + " W";
                                         SetupForm.textPARevPower.Text = alex_rev.ToString("f1") + " W";
                                     }
@@ -28655,7 +28776,7 @@ namespace PowerSDR
                           else 
                           rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
                           */
-                    if (current_hpsdr_model == HPSDRModel.ANAN100D)
+                    if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
                     {
                         if (rx2_step_att_present)
                             rx2PreampOffset = (float)rx2_attenuator_data;
@@ -28769,13 +28890,16 @@ namespace PowerSDR
         public float computeRefPower()
         {
             float bridge_volt = 0.09f;
+            float refvoltage = 3.3f;
+            if (current_hpsdr_model == HPSDRModel.ORION) refvoltage = 5.0f;
             if (current_hpsdr_model == HPSDRModel.ANAN100 ||
                 current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.095f;
-            // current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.082775f;
+
+            if (current_hpsdr_model == HPSDRModel.ORION) bridge_volt = 0.083f;
 
             int adc = JanusAudio.getRefPower();
             if (adc < 100) adc = 0;
-            float volts = (float)adc / 4095 * 3.3f;
+            float volts = (float)adc / 4095 * refvoltage;
             float watts = (float)(Math.Pow(volts, 2) / bridge_volt);
 
             if (PAValues)
@@ -28787,20 +28911,22 @@ namespace PowerSDR
             return watts;
         }
 
-       // private int pwr_avg_i = 0;
+        // private int pwr_avg_i = 0;
         public float computeAlexFwdPower()
         {
-           // float p_min = float.MaxValue; //32767.0f;
-           // float p_max = float.MinValue; //-32768.0f;
+
+            // float p_min = float.MaxValue; //32767.0f;
+            // float p_max = float.MinValue; //-32768.0f;
 
             int adc = 0;
             int addadc = 0;
 
             float bridge_volt = 0.09f;
+            float refvoltage = 3.3f;
+            if (current_hpsdr_model == HPSDRModel.ORION) refvoltage = 5.0f;
             if (current_hpsdr_model == HPSDRModel.ANAN100 ||
                 current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.095f;
-            // current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.082775f;
-           // adc = JanusAudio.getAlexFwdPower();
+            if (current_hpsdr_model == HPSDRModel.ORION) bridge_volt = 0.083f;
 
             for (int count = 0; count < 4; count++)
             {
@@ -28808,22 +28934,10 @@ namespace PowerSDR
                 adc = JanusAudio.getAlexFwdPower();
                 addadc += adc;
             }
-            adc = addadc/4;
-           // if (adc < 100) adc = 0;
+            adc = addadc / 4;
 
-            float volts = (float)adc / 4095 * 3.3f;
+            float volts = (float)adc / 4095 * refvoltage;
             float watts = (float)(Math.Pow(volts, 2) / bridge_volt);
-
-          //  pwr_avg[pwr_avg_i] = watts;
-          //  pwr_avg_i++;
-          //  if (pwr_avg_i == 10) pwr_avg_i = 0;
-
-          //  for (int j = 0; j < 10; j++)
-           // {
-            //    if (p_min > pwr_avg[j]) p_min = pwr_avg[j];
-             //   if (p_max < pwr_avg[j]) p_max = pwr_avg[j];
-          //  }
-          //  watts = (p_min + p_max) / 2.0f; // average power
 
             if (PAValues)
             {
@@ -28839,6 +28953,12 @@ namespace PowerSDR
             int power_int = JanusAudio.getFwdPower();
             double power_f = (double)power_int;
             double result = 0.0;
+
+            if (PAValues)
+            {
+                SetupForm.textDriveFwdADCValue.Text = power_int.ToString();
+            }
+
             // SetupForm.txtFwdADCValue.Text = power_int.ToString();
             if (power_int <= 2095)
             {
@@ -28882,6 +29002,130 @@ namespace PowerSDR
                 {
                     result = 400.0 + ((power_f - 3038.0) * 0.243902);
                 }
+            }
+
+            return (float)result;
+        }
+
+        public float computeOrionFwdPower()
+        {
+            int power_int = JanusAudio.getFwdPower();
+            double power_f = (double)power_int;
+            double result = 0.0;
+
+            if (PAValues)
+            {
+                SetupForm.textDriveFwdADCValue.Text = power_int.ToString();
+            }
+
+            if (power_int <= 1340)
+            {
+                if (power_int <= 580)
+                {
+                    if (power_int <= 68)
+                    {
+                        result = 0.0;
+                    }
+                    else  // > 68 
+                    {
+                        result = (power_f - 68.0) * 0.097656;
+                    }
+                }
+                else  // > 580
+                {
+                    if (power_int <= 905)
+                    {
+                        result = 50.0 + ((power_f - 580.0) * 0.153846);
+                    }
+                    else  // > 905
+                    {
+                        result = 100.0 + ((power_f - 905.0) * 0.229885);
+                    }
+                }
+            }
+            else  // > 1340
+            {
+                if (power_int <= 1950)
+                {
+                    if (power_int <= 1680)
+                    {
+                        result = 200.0 + ((power_f - 1340.0) * 0.294118);
+                    }
+                    else  // > 1680, <1950 
+                    {
+                        result = 300.0 + ((power_f - 1680.0) * 0.370370);
+                    }
+                }
+                else  // > 1950
+                {
+                    result = 400.0 + ((power_f - 1950.0) * 0.540540);
+                }
+            }
+
+            return (float)result;
+        }
+
+        public float computeANANFwdPower()
+        // public float computeAlexFwdPower()
+        {
+            int power_int = JanusAudio.getAlexFwdPower();
+            double power_f = (double)power_int;
+            double result = 0.0;
+
+            // if (PAValues)
+            // {
+            //     SetupForm.textDriveFwdADCValue.Text = power_int.ToString();
+            // }
+            if (power_int <= 2551)
+            {
+                if (power_int <= 1253)
+                {
+                    if (power_int <= 68)
+                    {
+                        result = 0.0;
+                    }
+                    else  // > 68 
+                    {
+                        result = (power_f - 68.0) * 0.008439;
+                    }
+                }
+
+                else  // > 1253
+                {
+                    if (power_int <= 1856)
+                    {
+                        result = 10.0 + ((power_f - 1253.0) * 0.024876);
+                    }
+                    else  // > 1856
+                    {
+                        result = 25.0 + ((power_f - 1856.0) * 0.035971);
+                    }
+                }
+            }
+
+            else  // > 2551
+            {
+                if (power_int <= 3628)
+                {
+                    if (power_int <= 3101)
+                    {
+                        result = 50.0 + ((power_f - 2551.0) * 0.045454);
+                    }
+                    else  // > 3101, <3628 
+                    {
+                        result = 75.0 + ((power_f - 3101.0) * 0.370370);
+                    }
+                }
+                else  // > 3628
+                {
+                    result = 100.0 + ((power_f - 3628.0) * 0.064935);
+                }
+            }
+
+            if (PAValues)
+            {
+                SetupForm.textFwdADCValue.Text = power_int.ToString();
+                // SetupForm.textFwdVoltage.Text = volts.ToString("f2") + " V";
             }
 
             return (float)result;
@@ -28995,6 +29239,41 @@ namespace PowerSDR
         {
             while (chkPower.Checked)
             {
+                if (!mox && attontx)
+                {
+                    if (update_preamp_mode)
+                    {
+                        RX1PreampMode = preamp;
+                        SetupForm.HermesEnableAttenuator = old_satt;
+                        SetupForm.HermesAttenuatorData = old_satt_data;
+
+                        if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
+                        {
+                            RX2PreampMode = rx2_preamp;
+                            RX2StepAttPresent = old_rx2_satt;
+                            RX2ATT = old_rx2_satt_data;
+                        }
+
+                        update_preamp_mode = false;
+                    }
+
+                    if (update_preamp)
+                    {
+                        preamp = RX1PreampMode;				// save current preamp mode
+                        old_satt_data = SetupForm.HermesAttenuatorData;
+                        old_satt = rx1_step_att_present;
+
+                        if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
+                        {
+                            rx2_preamp = RX2PreampMode;
+                            old_rx2_satt_data = rx2_attenuator_data;// RX2AttenuatorData;
+                            old_rx2_satt = RX2StepAttPresent;
+                        }
+
+                        update_preamp = false;
+                    }
+                }
+
                 dotdashptt = JanusAudio.nativeGetDotDashPTT();
                 DSPMode tx_mode = rx1_dsp_mode;
 
@@ -29007,7 +29286,9 @@ namespace PowerSDR
 
                     if ((dotdashptt & 0x1) != 0)
                     {
-                        mic_ptt = temp;
+                        if (current_hpsdr_model == HPSDRModel.ORION && mic_ptt_disabled)
+                            mic_ptt = false;
+                        else mic_ptt = temp;
                     }
 
                     temp = (dotdashptt & 0x02) != 0; // dash
@@ -29084,11 +29365,11 @@ namespace PowerSDR
                                 Audio.VACBypass = true;
 
                             chkMOX.Checked = true;
-                            if (!mox)
-                            {
-                                //  chkPower.Checked = false;
-                                return;
-                            }
+                            // if (!mox)
+                            //  {
+                            // chkPower.Checked = false;
+                            //  return;
+                            //  }
                         }
 
                         if ((tx_mode == DSPMode.LSB ||
@@ -29106,40 +29387,40 @@ namespace PowerSDR
                             chkMOX.Checked = true;
                         }
 
-                        if (!mox && attontx)
-                        {
-                            if (update_preamp_mode)
-                            {
-                                RX1PreampMode = preamp;
-                                SetupForm.HermesEnableAttenuator = old_satt;
-                                SetupForm.HermesAttenuatorData = old_satt_data;
+                        //if (!mox && attontx)
+                        //{
+                        //    if (update_preamp_mode)
+                        //    {
+                        //        RX1PreampMode = preamp;
+                        //        SetupForm.HermesEnableAttenuator = old_satt;
+                        //        SetupForm.HermesAttenuatorData = old_satt_data;
 
-                                if (current_hpsdr_model == HPSDRModel.ANAN100D)
-                                {
-                                    RX2PreampMode = rx2_preamp;
-                                    RX2StepAttPresent = old_rx2_satt;
-                                    RX2ATT = old_rx2_satt_data;
-                                }
+                        //        if (current_hpsdr_model == HPSDRModel.ANAN100D)
+                        //        {
+                        //            RX2PreampMode = rx2_preamp;
+                        //            RX2StepAttPresent = old_rx2_satt;
+                        //            RX2ATT = old_rx2_satt_data;
+                        //        }
 
-                                update_preamp_mode = false;
-                            }
+                        //        update_preamp_mode = false;
+                        //    }
 
-                            if (update_preamp)
-                            {
-                                preamp = RX1PreampMode;				// save current preamp mode
-                                old_satt_data = SetupForm.HermesAttenuatorData;
-                                old_satt = rx1_step_att_present;
+                        //    if (update_preamp)
+                        //    {
+                        //        preamp = RX1PreampMode;				// save current preamp mode
+                        //        old_satt_data = SetupForm.HermesAttenuatorData;
+                        //        old_satt = rx1_step_att_present;
 
-                                if (current_hpsdr_model == HPSDRModel.ANAN100D)
-                                {
-                                    rx2_preamp = RX2PreampMode;
-                                    old_rx2_satt_data = RX2AttenuatorData;
-                                    old_rx2_satt = RX2StepAttPresent;
-                                }
+                        //        if (current_hpsdr_model == HPSDRModel.ANAN100D)
+                        //        {
+                        //            rx2_preamp = RX2PreampMode;
+                        //            old_rx2_satt_data = RX2AttenuatorData;
+                        //            old_rx2_satt = RX2StepAttPresent;
+                        //        }
 
-                                update_preamp = false;
-                            }
-                        }
+                        //        update_preamp = false;
+                        //    }
+                        //}
 
                     }
                     else // else if(mox)
@@ -29186,79 +29467,79 @@ namespace PowerSDR
             //			poll_ptt_running = false;
         }
 
-        private void PollFWCPAPWR()
-        {
-            return;
-            //int count = 0;
-            int high_swr_count = 0;
-            int fwd = 0, rev = 0/*, temp, volts*/;
-            //float old_temp = 0.0f, old_supply = 0.0f;
-            while (chkPower.Checked)
-            {
-                if (mox)
-                {
-                    pa_fwd_power = fwd;
-                    pa_rev_power = rev;
+        //private void PollFWCPAPWR()
+        //{
+        //    return;
+        //    //int count = 0;
+        //    int high_swr_count = 0;
+        //    int fwd = 0, rev = 0/*, temp, volts*/;
+        //    //float old_temp = 0.0f, old_supply = 0.0f;
+        //    while (chkPower.Checked)
+        //    {
+        //        if (mox)
+        //        {
+        //            pa_fwd_power = fwd;
+        //            pa_rev_power = rev;
 
-                    double swr_scale = SWRScale(FWCPAPower(rev) * swr_table[(int)tx_band]);
-                    if (swr_scale < Audio.HighSWRScale)
-                    {
-                        high_swr_count++;
-                        if (high_swr_count >= 3)
-                        {
-                            high_swr_count = 0;
-                            HighSWR = true;
-                            Audio.HighSWRScale = swr_scale;
-                            UpdateDisplay();
-                        }
-                    }
-                    else
-                    {
-                        high_swr_count = 0;
-                        Audio.HighSWRScale = Math.Min(1.0, Audio.HighSWRScale + 0.01);
-                        if (Audio.HighSWRScale == 1.0 && HighSWR)
-                            HighSWR = false;
-                    }
+        //            double swr_scale = SWRScale(FWCPAPower(rev) * swr_table[(int)tx_band]);
+        //            if (swr_scale < Audio.HighSWRScale)
+        //            {
+        //                high_swr_count++;
+        //                if (high_swr_count >= 3)
+        //                {
+        //                    high_swr_count = 0;
+        //                    HighSWR = true;
+        //                    Audio.HighSWRScale = swr_scale;
+        //                    UpdateDisplay();
+        //                }
+        //            }
+        //            else
+        //            {
+        //                high_swr_count = 0;
+        //                Audio.HighSWRScale = Math.Min(1.0, Audio.HighSWRScale + 0.01);
+        //                if (Audio.HighSWRScale == 1.0 && HighSWR)
+        //                    HighSWR = false;
+        //            }
 
-                    /*if(++count%25 == 24) // check temp every ~5s
-                    {
-                        Thread.Sleep(40);
-                        FWC.ReadPAADC(4, out temp);
-                        float c = 301-((float)temp/4096*2.5f)*1000/2.2f;
-                        if(old_temp == 0.0f) old_temp = c;
-                        else old_temp = (c * 0.1f) + (old_temp * 0.9f);
-					
-                        if(old_temp >= 70)
-                        {
-                            if(Audio.TempScale != 0.5)
-                            {
-                                Audio.TempScale = 0.5;
-                                Invoke(new MethodInvoker(TempWarn));
-                            }
-                        }
-                        else Audio.TempScale = 1.0;
-                        //Debug.WriteLine("old_temp: "+old_temp.ToString("f1"));
-                    }
+        //            /*if(++count%25 == 24) // check temp every ~5s
+        //            {
+        //                Thread.Sleep(40);
+        //                FWC.ReadPAADC(4, out temp);
+        //                float c = 301-((float)temp/4096*2.5f)*1000/2.2f;
+        //                if(old_temp == 0.0f) old_temp = c;
+        //                else old_temp = (c * 0.1f) + (old_temp * 0.9f);
 
-                    if(count%300 == 299) // check voltage every ~60s
-                    {
-                        Thread.Sleep(40);
-                        FWC.ReadPAADC(2, out volts);
-                        float new_supply = (float)volts/4096*2.5f*11;
-                        if(old_supply == 0.0f) old_supply = new_supply;
-                        else old_supply = (0.1f * new_supply) + (0.9f * old_supply);
-                        if(old_supply > 15.0 || old_supply < 13.0)
-                            Invoke(new MethodInvoker(VoltsWarn));
-                    }*/
-                }
+        //                if(old_temp >= 70)
+        //                {
+        //                    if(Audio.TempScale != 0.5)
+        //                    {
+        //                        Audio.TempScale = 0.5;
+        //                        Invoke(new MethodInvoker(TempWarn));
+        //                    }
+        //                }
+        //                else Audio.TempScale = 1.0;
+        //                //Debug.WriteLine("old_temp: "+old_temp.ToString("f1"));
+        //            }
 
-                Thread.Sleep(100);
-            }
+        //            if(count%300 == 299) // check voltage every ~60s
+        //            {
+        //                Thread.Sleep(40);
+        //                FWC.ReadPAADC(2, out volts);
+        //                float new_supply = (float)volts/4096*2.5f*11;
+        //                if(old_supply == 0.0f) old_supply = new_supply;
+        //                else old_supply = (0.1f * new_supply) + (0.9f * old_supply);
+        //                if(old_supply > 15.0 || old_supply < 13.0)
+        //                    Invoke(new MethodInvoker(VoltsWarn));
+        //            }*/
+        //        }
 
-            pa_fwd_power = 0;
-            pa_rev_power = 0;
-            HighSWR = false;
-        }
+        //        Thread.Sleep(100);
+        //    }
+
+        //    pa_fwd_power = 0;
+        //    pa_rev_power = 0;
+        //    HighSWR = false;
+        //}
 
         /*private void TempWarn()
         {
@@ -29290,38 +29571,49 @@ namespace PowerSDR
                 {
                     alex_fwd = computeAlexFwdPower(); //high power
                     alex_rev = computeRefPower();
-                    drivepwr = computeFwdPower(); // low power
+
+                    if (current_hpsdr_hardware == HPSDRHW.Orion)
+                        drivepwr = computeOrionFwdPower();
+                    else
+                        drivepwr = computeFwdPower(); // low power
+
                     calfwdpower = CalibratedPAPower();
-                    if (!alexpresent)
-                    {
-                        alex_fwd = 0;
-                        alex_rev = 0;
-                    }
+
                     rho = (float)(Math.Sqrt(alex_rev / alex_fwd));
-                   // alex_swr = (float)ALEXSWR(alex_fwd, alex_rev);
                     swr = (1.0f + rho) / (1.0f - rho);
 
-                    if ((alex_fwd > 5.0f) && ((alex_fwd - alex_rev) < 1.0f)) // open ant condition
+                    if (alexpresent)
                     {
-                        swr = 50.0f;
-                        JanusAudio.SetSWRProtect(0.01f);
-                        chkMOX.Checked = false;
-                        goto end;
+                        if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f) // open ant condition
+                        {
+                            swr = 50.0f;
+                            JanusAudio.SetSWRProtect(0.01f);
+                            chkMOX.Checked = false;
+
+                            MessageBox.Show("Please check your antenna connection.",
+                            "High SWR condition detected",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+
+                            goto end;
+                        }
+                    }
+                    else
+                    {
+                        swr = 1.0f;
+                        alex_fwd = 0;
+                        alex_rev = 0;
                     }
 
                     average_drivepwr = alpha * average_drivepwr + (1.0f - alpha) * drivepwr;
 
-                    if (!alexpresent)// || alex_fwd < 0.5)
-                    {
-                        swr = 1.0f;                      
-                    }
-
                     if (chkTUN.Checked && disable_swr_on_tune && (alexpresent || apollopresent))
                     {
-                        if (alex_fwd <= 10.0)
+                        if (alex_fwd >= 1.0 && alex_fwd <= 10.0 && ptbPWR.Value <= 20)
                         {
                             swr_pass = true;
                         }
+                        else swr_pass = false;
                     }
 
                     if (swr > 2.0 && swrprotection && !swr_pass)
@@ -29333,7 +29625,7 @@ namespace PowerSDR
                             JanusAudio.SetSWRProtect(0.5f);
                             HighSWR = true;
                             if (swr > 3) JanusAudio.SetSWRProtect(0.25f);
-                       
+
                             if (current_display_engine == DisplayEngine.GDI_PLUS)
                                 picDisplay.Invalidate();
                         }
@@ -29341,7 +29633,7 @@ namespace PowerSDR
                     else
                     {
                         high_swr_count = 0;
-                        JanusAudio.SetSWRProtect(1.0f);                      
+                        JanusAudio.SetSWRProtect(1.0f);
                         HighSWR = false;
                         if (current_display_engine == DisplayEngine.GDI_PLUS)
                             picDisplay.Invalidate();
@@ -29350,9 +29642,8 @@ namespace PowerSDR
                 end:
                     swr_pass = false;
                     alex_swr = swr;
-
                 }
-               
+
                 // volts_138 = computeHermesDCVoltage();
 
                 Thread.Sleep(100);
@@ -29366,69 +29657,6 @@ namespace PowerSDR
             alex_swr = 0;
             average_drivepwr = 0;
         }
-
- /*         rho = Math.Sqrt(g_rev / g_fwd);
-            swr = (1.0 + rho) / (1.0 - rho); ;
-
-            if (!alexpresent || g_fwd < 0.5)
-            {
-                JanusAudio.SetSWRProtect(1.0f);
-                HighSWR = false;
-                return 1.0; // swr;
-            }
-
-            if (!swrprotection)
-            {
-                // double rho = Math.Sqrt(g_rev / g_fwd);
-                // swr = (1.0 + rho) / (1.0 - rho);
-                JanusAudio.SetSWRProtect(1.0f);
-                if (swr > 2.2) HighSWR = true;
-                else HighSWR = false;
-                return swr;
-            }
-
-            if (chkTUN.Checked && disable_swr_on_tune && (alexpresent || apollopresent))
-            {
-                if (g_fwd <= 10.0)
-                {
-                    //  double rho = Math.Sqrt(g_rev / g_fwd);
-                    //  swr = (1.0 + rho) / (1.0 - rho);
-                    JanusAudio.SetSWRProtect(1.0f);
-                    HighSWR = false;
-                    return swr;
-                }
-            }
-
-            //  if (g_rev > g_fwd)
-            //  {
-            //    HighSWR = true;
-            //   swr = 5.0;
-            //   if (current_display_engine == DisplayEngine.GDI_PLUS)
-            //      picDisplay.Invalidate();
-
-            //  }
-            //  else
-            // {
-            //     double rho = Math.Sqrt(g_rev / g_fwd);
-            //     swr = (1.0 + rho) / (1.0 - rho);
-            //  }
-
-            if (swr > 2.2)
-            {
-                JanusAudio.SetSWRProtect(0.5f);
-                HighSWR = true;
-                if (swr > 3) JanusAudio.SetSWRProtect(0.25f);
-                if (current_display_engine == DisplayEngine.GDI_PLUS)
-                    picDisplay.Invalidate();
-            }
-            else
-            {
-                JanusAudio.SetSWRProtect(1.0f);
-                HighSWR = false;
-                if (current_display_engine == DisplayEngine.GDI_PLUS)
-                    picDisplay.Invalidate();
-            }
- */
 
         private double SWRScale(double ref_pow)
         {
@@ -29509,43 +29737,43 @@ namespace PowerSDR
             }
         }
 
-        private void Tune()
-        {
-            switch ((ATUTuneMode)comboTuneMode.SelectedIndex)
-            {
-                case ATUTuneMode.MEMORY:
-                    PWR = 15;
-                    atu_tuning = true;
-                    if (!Hdw.PA_ATUTune(ATUTuneMode.MEMORY))
-                        goto atu_error;
-                    atu_tuning = false;
-                    tuned_band = tx_band;
-                    break;
-                case ATUTuneMode.FULL:
-                    PWR = 15;
-                    atu_tuning = true;
-                    if (!Hdw.PA_ATUTune(ATUTuneMode.FULL))
-                        goto atu_error;
-                    atu_tuning = false;
-                    tuned_band = tx_band;
-                    break;
-            }
+        //private void Tune()
+        //{
+        //    switch ((ATUTuneMode)comboTuneMode.SelectedIndex)
+        //    {
+        //        case ATUTuneMode.MEMORY:
+        //            PWR = 15;
+        //            atu_tuning = true;
+        //            if (!Hdw.PA_ATUTune(ATUTuneMode.MEMORY))
+        //                goto atu_error;
+        //            atu_tuning = false;
+        //            tuned_band = tx_band;
+        //            break;
+        //        case ATUTuneMode.FULL:
+        //            PWR = 15;
+        //            atu_tuning = true;
+        //            if (!Hdw.PA_ATUTune(ATUTuneMode.FULL))
+        //                goto atu_error;
+        //            atu_tuning = false;
+        //            tuned_band = tx_band;
+        //            break;
+        //    }
 
-            chkTUN.Checked = false;
-            chkTUN.Enabled = true;
-            comboTuneMode.Enabled = true;
-            chkTUN.BackColor = button_selected_color;
-            return;
+        //    chkTUN.Checked = false;
+        //    chkTUN.Enabled = true;
+        //    comboTuneMode.Enabled = true;
+        //    chkTUN.BackColor = button_selected_color;
+        //    return;
 
-        atu_error:
-            chkTUN.Checked = false;
-            chkTUN.Enabled = true;
-            comboTuneMode.Enabled = true;
-            MessageBox.Show("Error communicating with the ATU",
-                "ATU Error",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-        }
+        //atu_error:
+        //    chkTUN.Checked = false;
+        //    chkTUN.Enabled = true;
+        //    comboTuneMode.Enabled = true;
+        //    MessageBox.Show("Error communicating with the ATU",
+        //        "ATU Error",
+        //        MessageBoxButtons.OK,
+        //        MessageBoxIcon.Error);
+        //}
 
         private void DelayedDisplayReset()
         {
@@ -29561,241 +29789,241 @@ namespace PowerSDR
             set { tx_cal = value; }
         }
 
-        private int last_3k_fan_on = 0;
-        private int last_3k_fan_off = 25;
-        private void F3KReadTemp()
-        {
-            while (chkPower.Checked)
-            {
-                //if(!mox)
-                {
-                    int val = 0;
-                    // FWC.ReadPAADC(3, out val);
-                    float volts = (float)val / 4096 * 2.5f;
-                    double temp_c = 301 - volts * 1000 / 2.2;
+        //private int last_3k_fan_on = 0;
+        //private int last_3k_fan_off = 25;
+        //private void F3KReadTemp()
+        //{
+        //    while (chkPower.Checked)
+        //    {
+        //        //if(!mox)
+        //        {
+        //            int val = 0;
+        //            // FWC.ReadPAADC(3, out val);
+        //            float volts = (float)val / 4096 * 2.5f;
+        //            double temp_c = 301 - volts * 1000 / 2.2;
 
-                    if (temp_c < 150.0 && temp_c > -30.0) // filter unreasonable temps
-                    {
-                        int MAX = 15;
-                        int fan_on = MAX;
-                        int fan_off = MAX;
-                        double speed;
+        //            if (temp_c < 150.0 && temp_c > -30.0) // filter unreasonable temps
+        //            {
+        //                int MAX = 15;
+        //                int fan_on = MAX;
+        //                int fan_off = MAX;
+        //                double speed;
 
-                        if (mox || tx_cal)
-                        {
-                            speed = (temp_c - 40.0) / (70.0 - 40.0);
-                            if (speed > 1.0) speed = 1.0;
-                            if (speed < 0.0) speed = 0.0;
+        //                if (mox || tx_cal)
+        //                {
+        //                    speed = (temp_c - 40.0) / (70.0 - 40.0);
+        //                    if (speed > 1.0) speed = 1.0;
+        //                    if (speed < 0.0) speed = 0.0;
 
-                            if (speed < 0.5)
-                            {
-                                fan_on = (int)(MAX * speed * 2);
-                                fan_off = MAX;
-                            }
-                            else
-                            {
-                                fan_on = MAX;
-                                fan_off = (int)(MAX * (1.0 - speed) * 2);
-                            }
-                        }
-                        else
-                        {
-                            speed = 0.0;// ((float)temp_c - f3k_temp_thresh) / (100.0 - f3k_temp_thresh);
-                            if (speed > 1.0) speed = 1.0;
-                            if (speed < 0.0) speed = 0.0;
-                            if (speed < 0.5)
-                            {
-                                fan_on = (int)(MAX * speed * 2);
-                                fan_off = MAX;
-                            }
-                            else
-                            {
-                                fan_on = MAX;
-                                fan_off = (int)(MAX * (1.0 - speed) * 2);
-                            }
-                        }
+        //                    if (speed < 0.5)
+        //                    {
+        //                        fan_on = (int)(MAX * speed * 2);
+        //                        fan_off = MAX;
+        //                    }
+        //                    else
+        //                    {
+        //                        fan_on = MAX;
+        //                        fan_off = (int)(MAX * (1.0 - speed) * 2);
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    speed = 0.0;// ((float)temp_c - f3k_temp_thresh) / (100.0 - f3k_temp_thresh);
+        //                    if (speed > 1.0) speed = 1.0;
+        //                    if (speed < 0.0) speed = 0.0;
+        //                    if (speed < 0.5)
+        //                    {
+        //                        fan_on = (int)(MAX * speed * 2);
+        //                        fan_off = MAX;
+        //                    }
+        //                    else
+        //                    {
+        //                        fan_on = MAX;
+        //                        fan_off = (int)(MAX * (1.0 - speed) * 2);
+        //                    }
+        //                }
 
-                        if (fan_on != last_3k_fan_on || fan_off != last_3k_fan_off)
-                        {
-                            //  FWC.SetFanPWM(fan_on, fan_off);
-                            Debug.WriteLine("Fan Speed: " + speed.ToString("f2") + "  on: " + fan_on + "  off: " + fan_off);
-                            last_3k_fan_on = fan_on;
-                            last_3k_fan_off = fan_off;
-                        }
-                    }
+        //                if (fan_on != last_3k_fan_on || fan_off != last_3k_fan_off)
+        //                {
+        //                    //  FWC.SetFanPWM(fan_on, fan_off);
+        //                    Debug.WriteLine("Fan Speed: " + speed.ToString("f2") + "  on: " + fan_on + "  off: " + fan_off);
+        //                    last_3k_fan_on = fan_on;
+        //                    last_3k_fan_off = fan_off;
+        //                }
+        //            }
 
-                    /*if(temp_c >= f3k_temp_thresh && !f3k_fan)
-                        F3KFan = true;
-                    else if(temp_c < f3k_temp_thresh && f3k_fan)
-                        F3KFan = false;*/
+        //            /*if(temp_c >= f3k_temp_thresh && !f3k_fan)
+        //                F3KFan = true;
+        //            else if(temp_c < f3k_temp_thresh && f3k_fan)
+        //                F3KFan = false;*/
 
-                }
-                Thread.Sleep(2500);
-            }
-        }
+        //        }
+        //        Thread.Sleep(2500);
+        //    }
+        //}
 
-        private enum WBIR_State
-        {
-            FastAdapt,
-            SlowAdapt,
-        }
-        private bool wbir_tuned = true;
-        private void WBIR()
-        {
-            WBIR_State state = WBIR_State.FastAdapt;
-            int fast_count = 0;
-            int countdown = 10000;
+        //private enum WBIR_State
+        //{
+        //    FastAdapt,
+        //    SlowAdapt,
+        //}
+        //private bool wbir_tuned = true;
+        //private void WBIR()
+        //{
+        //    WBIR_State state = WBIR_State.FastAdapt;
+        //    int fast_count = 0;
+        //    int countdown = 10000;
 
-            while (chkPower.Checked)
-            {
-                switch (state)
-                {
-                    case WBIR_State.FastAdapt:
-                        if (wbir_tuned)
-                        {
-                            wbir_tuned = false;
-                            fast_count = 0;
-                        }
-                        DttSP.SetCorrectIQMu(0, 0, 0.05 - (fast_count * 0.005));
-                        //Debug.WriteLine(" WBIR Fast, Mu: " + (0.05 - (fast_count * 0.005)).ToString("f6"));
-                        fast_count++;
-                        if (fast_count == 10)
-                        {
-                            fast_count = 0;
-                            state = WBIR_State.SlowAdapt;
-                        }
-                        break;
-                    case WBIR_State.SlowAdapt:
-                        countdown -= 100;
-                        //Debug.WriteLine("WBIR Slow, countdown: "+countdown);
-                        if (!calibrating && (countdown <= 0 || wbir_tuned))
-                        {
-                            wbir_tuned = false;
-                            countdown = 10000;
-                            state = WBIR_State.FastAdapt;
-                        }
-                        break;
-                }
+        //    while (chkPower.Checked)
+        //    {
+        //        switch (state)
+        //        {
+        //            case WBIR_State.FastAdapt:
+        //                if (wbir_tuned)
+        //                {
+        //                    wbir_tuned = false;
+        //                    fast_count = 0;
+        //                }
+        //                DttSP.SetCorrectIQMu(0, 0, 0.05 - (fast_count * 0.005));
+        //                //Debug.WriteLine(" WBIR Fast, Mu: " + (0.05 - (fast_count * 0.005)).ToString("f6"));
+        //                fast_count++;
+        //                if (fast_count == 10)
+        //                {
+        //                    fast_count = 0;
+        //                    state = WBIR_State.SlowAdapt;
+        //                }
+        //                break;
+        //            case WBIR_State.SlowAdapt:
+        //                countdown -= 100;
+        //                //Debug.WriteLine("WBIR Slow, countdown: "+countdown);
+        //                if (!calibrating && (countdown <= 0 || wbir_tuned))
+        //                {
+        //                    wbir_tuned = false;
+        //                    countdown = 10000;
+        //                    state = WBIR_State.FastAdapt;
+        //                }
+        //                break;
+        //        }
 
-                Thread.Sleep(100);
+        //        Thread.Sleep(100);
 
-                /*if(!calibrating && (wbir_tuned || (wbcountdown <= 0)))
-                {
-                    wbir_tuned = false;
-                    double setit=0.1;
-					
-                    for(int i=0;i<9 && !wbir_tuned;i++)
-                    {
-                        DttSP.SetCorrectIQMu(0, 0, setit);
-                        setit -= 0.01;
-                        Thread.Sleep(100);
-                        //Debug.WriteLine("WBIR Slower, Mu: "+setit.ToString("f6"));
-                    }
-                    //Debug.WriteLine("WBIR Slow, Mu: "+setit.ToString("f6"));
-                    wbcountdown = 10000;
-                } 
-                else 
-                {
-                    Thread.Sleep(100);
-                    wbcountdown -= 100;
-                }*/
-            }
-        }
+        //        /*if(!calibrating && (wbir_tuned || (wbcountdown <= 0)))
+        //        {
+        //            wbir_tuned = false;
+        //            double setit=0.1;
 
-        private bool wbir_rx2_tuned = true;
-        private void WBIR_RX2()
-        {
-            WBIR_State state = WBIR_State.FastAdapt;
-            int fast_count = 0;
-            int countdown = 10000;
+        //            for(int i=0;i<9 && !wbir_tuned;i++)
+        //            {
+        //                DttSP.SetCorrectIQMu(0, 0, setit);
+        //                setit -= 0.01;
+        //                Thread.Sleep(100);
+        //                //Debug.WriteLine("WBIR Slower, Mu: "+setit.ToString("f6"));
+        //            }
+        //            //Debug.WriteLine("WBIR Slow, Mu: "+setit.ToString("f6"));
+        //            wbcountdown = 10000;
+        //        } 
+        //        else 
+        //        {
+        //            Thread.Sleep(100);
+        //            wbcountdown -= 100;
+        //        }*/
+        //    }
+        //}
 
-            while (chkPower.Checked)
-            {
-                switch (state)
-                {
-                    case WBIR_State.FastAdapt:
-                        if (wbir_rx2_tuned)
-                        {
-                            wbir_rx2_tuned = false;
-                            fast_count = 0;
-                        }
-                        DttSP.SetCorrectIQMu(2, 0, 0.05 - (fast_count * 0.005));
-                        //Debug.WriteLine("WBIR2 Fast, Mu: " + (0.05 - (fast_count * 0.005)).ToString("f6"));
-                        fast_count++;
-                        if (fast_count == 10)
-                        {
-                            fast_count = 0;
-                            state = WBIR_State.SlowAdapt;
-                        }
-                        break;
-                    case WBIR_State.SlowAdapt:
-                        countdown -= 100;
-                        //Debug.WriteLine("WBIR2 Slow, wbcountdown2: "+countdown);
-                        if (!calibrating && (countdown <= 0 || wbir_rx2_tuned))
-                        {
-                            wbir_rx2_tuned = false;
-                            countdown = 10000;
-                            state = WBIR_State.FastAdapt;
-                        }
-                        break;
-                }
+        //private bool wbir_rx2_tuned = true;
+        //private void WBIR_RX2()
+        //{
+        //    WBIR_State state = WBIR_State.FastAdapt;
+        //    int fast_count = 0;
+        //    int countdown = 10000;
 
-                Thread.Sleep(100);
+        //    while (chkPower.Checked)
+        //    {
+        //        switch (state)
+        //        {
+        //            case WBIR_State.FastAdapt:
+        //                if (wbir_rx2_tuned)
+        //                {
+        //                    wbir_rx2_tuned = false;
+        //                    fast_count = 0;
+        //                }
+        //                DttSP.SetCorrectIQMu(2, 0, 0.05 - (fast_count * 0.005));
+        //                //Debug.WriteLine("WBIR2 Fast, Mu: " + (0.05 - (fast_count * 0.005)).ToString("f6"));
+        //                fast_count++;
+        //                if (fast_count == 10)
+        //                {
+        //                    fast_count = 0;
+        //                    state = WBIR_State.SlowAdapt;
+        //                }
+        //                break;
+        //            case WBIR_State.SlowAdapt:
+        //                countdown -= 100;
+        //                //Debug.WriteLine("WBIR2 Slow, wbcountdown2: "+countdown);
+        //                if (!calibrating && (countdown <= 0 || wbir_rx2_tuned))
+        //                {
+        //                    wbir_rx2_tuned = false;
+        //                    countdown = 10000;
+        //                    state = WBIR_State.FastAdapt;
+        //                }
+        //                break;
+        //        }
 
-                /*if(!calibrating && (wbir_rx2_tuned || (wbcountdown2 <= 0)))
-                {
-                    wbir_rx2_tuned = false;
-                    //Debug.WriteLine("WBIR RX2 Fast");
-                    double setit=0.1;
-                    for(int i=0;i<9 && !wbir_rx2_tuned;i++)
-                    {
-                        DttSP.SetCorrectIQMu(2, 0, setit);
-                        setit -= 0.01;
-                        Thread.Sleep(100);
-                        //Debug.WriteLine("WBIR RX2 Slower");
-                    }
-                    //Debug.WriteLine("WBIR RX2 Slow");
-                    wbcountdown2 = 10000;
-                } 
-                else 				
-                {
-                    Thread.Sleep(100);
-                    wbcountdown2 -= 100;
-                }*/
-            }
-        }
+        //        Thread.Sleep(100);
+
+        //        /*if(!calibrating && (wbir_rx2_tuned || (wbcountdown2 <= 0)))
+        //        {
+        //            wbir_rx2_tuned = false;
+        //            //Debug.WriteLine("WBIR RX2 Fast");
+        //            double setit=0.1;
+        //            for(int i=0;i<9 && !wbir_rx2_tuned;i++)
+        //            {
+        //                DttSP.SetCorrectIQMu(2, 0, setit);
+        //                setit -= 0.01;
+        //                Thread.Sleep(100);
+        //                //Debug.WriteLine("WBIR RX2 Slower");
+        //            }
+        //            //Debug.WriteLine("WBIR RX2 Slow");
+        //            wbcountdown2 = 10000;
+        //        } 
+        //        else 				
+        //        {
+        //            Thread.Sleep(100);
+        //            wbcountdown2 -= 100;
+        //        }*/
+        //    }
+        // }
 
         private void AudioStart(int nr)
         {
             Audio.Start(nr);
         }
 
-        private void DigitalWatchdog()
-        {
-            int limit = (sample_rate1 / Audio.BlockSize) / 60;
-            //int count = 0;
-            HiPerfTimer t = new HiPerfTimer();
-            t.Start();
+        //private void DigitalWatchdog()
+        //{
+        //    int limit = (sample_rate1 / Audio.BlockSize) / 60;
+        //    //int count = 0;
+        //    HiPerfTimer t = new HiPerfTimer();
+        //    t.Start();
 
-            while (chkPower.Checked)
-            {
-                if (Audio.EmptyBuffers > limit) // 1 second dropout
-                    // {
-                    buffiszero = true;
-                else
-                    buffiszero = false;
+        //    while (chkPower.Checked)
+        //    {
+        //        if (Audio.EmptyBuffers > limit) // 1 second dropout
+        //            // {
+        //            buffiszero = true;
+        //        else
+        //            buffiszero = false;
 
-                // Audio.TestMute = false;
-                //count++;
-                //  Audio.StopAudio1();
-                //  if (vac_enabled)
-                //    Audio.StopAudioVAC();
-                // Thread.Sleep(500);
-                // this.Invoke(new MethodInvoker(AudioStart));
-                // }
-                // Thread.Sleep(3000);
-            }
-        }
+        //        // Audio.TestMute = false;
+        //        //count++;
+        //        //  Audio.StopAudio1();
+        //        //  if (vac_enabled)
+        //        //    Audio.StopAudioVAC();
+        //        // Thread.Sleep(500);
+        //        // this.Invoke(new MethodInvoker(AudioStart));
+        //        // }
+        //        // Thread.Sleep(3000);
+        //    }
+        //}
 
 
         #endregion
@@ -30870,7 +31098,7 @@ namespace PowerSDR
                 if (chkEnableMultiRX.Checked) chkEnableMultiRX_CheckedChanged(this, EventArgs.Empty);
                 if (chkVFOSplit.Checked) chkVFOSplit_CheckedChanged(this, EventArgs.Empty);
 
-                Hdw.DDSTuningWord = 0;
+                // Hdw.DDSTuningWord = 0;
                 fwc_dds_freq = 0.0f;
                 rx2_dds_freq = 0.0f;
 
@@ -31101,6 +31329,9 @@ namespace PowerSDR
                             break;
                         case 4:
                             current_hpsdr_hardware = HPSDRHW.Angelia;
+                            break;
+                        case 5:
+                            current_hpsdr_hardware = HPSDRHW.Orion;
                             break;
                     }
                 }
@@ -31452,7 +31683,7 @@ namespace PowerSDR
 
             was_panadapter = false;
             was_waterfall = false;
-            UpdateDisplayOffsets();
+            UpdateRX1DisplayOffsets();
 
             if (comboDisplayMode.Focused)
                 btnHidden.Focus();
@@ -31522,10 +31753,10 @@ namespace PowerSDR
                     //   SetupForm.RXAGCDecay = 250;
                     radio.GetDSPRX(0, 0).RXAGCAttack = 2;
                     radio.GetDSPRX(0, 1).RXAGCAttack = 2;
-                    radio.GetDSPRX(0, 0).RXAGCHang = 2000;
-                    radio.GetDSPRX(0, 1).RXAGCHang = 2000;
-                    radio.GetDSPRX(0, 0).RXAGCDecay = 2000;
-                    radio.GetDSPRX(0, 1).RXAGCDecay = 2000;
+                    radio.GetDSPRX(0, 0).RXAGCHang = 0;
+                    radio.GetDSPRX(0, 1).RXAGCHang = 0;
+                    radio.GetDSPRX(0, 0).RXAGCDecay = 250;
+                    radio.GetDSPRX(0, 1).RXAGCDecay = 250;
                     // SetupForm.AGCHangThreshold = 100;
                     //DttSP.SetRXAGCHangLevel(0, 0, 100.0);
                     DttSP.SetRXAGCHangThreshold(0, 0, 100);
@@ -31542,8 +31773,8 @@ namespace PowerSDR
                     // SetupForm.RXAGCDecay = 50;
                     radio.GetDSPRX(0, 0).RXAGCAttack = 2;
                     radio.GetDSPRX(0, 1).RXAGCAttack = 2;
-                    radio.GetDSPRX(0, 0).RXAGCHang = 5000;
-                    radio.GetDSPRX(0, 1).RXAGCHang = 5000;
+                    radio.GetDSPRX(0, 0).RXAGCHang = 0;
+                    radio.GetDSPRX(0, 1).RXAGCHang = 0;
                     radio.GetDSPRX(0, 0).RXAGCDecay = 50;
                     radio.GetDSPRX(0, 1).RXAGCDecay = 50;
                     //SetupForm.AGCHangThreshold = 100;
@@ -31628,19 +31859,19 @@ namespace PowerSDR
             {
                 case "-20dB":
                     mode = PreampMode.HPSDR_OFF;
-                    comboPreamp.Text = "-20dB";
-                    if (!rx2_preamp_present)
-                        comboRX2Preamp.Text = "-20dB";
+                    // comboPreamp.Text = "-20dB";
+                    // if (!rx2_preamp_present)
+                    //  comboRX2Preamp.Text = "-20dB";
                     break;
 
-                case "Low":
-                case "Med":
-                case "High":
+                // case "Low":
+                // case "Med":
+                // case "High":
                 case "0dB":
                     mode = PreampMode.HPSDR_ON;
-                    comboPreamp.Text = "0dB";
-                    if (!rx2_preamp_present)
-                        comboRX2Preamp.Text = "0dB";
+                    // comboPreamp.Text = "0dB";
+                    // if (!rx2_preamp_present)
+                    //   comboRX2Preamp.Text = "0dB";
                     break;
 
                 case "-10db":
@@ -31681,36 +31912,33 @@ namespace PowerSDR
         {
             //if (initializing) return;
             PreampMode mode = PreampMode.FIRST;
-            // bool exit = false;
+            bool exit = false;
 
             switch (comboRX2Preamp.Text)
             {
                 case "-20dB":
-                    mode = PreampMode.OFF;
+                    mode = PreampMode.HPSDR_OFF;
                     // comboRX2Preamp.Text = "-20dB";
                     break;
                 case "0dB":
-                    mode = PreampMode.HIGH;
+                    mode = PreampMode.HPSDR_ON;
                     // comboRX2Preamp.Text = "0dB";
                     break;
                 case "-10dB":
                     mode = PreampMode.HPSDR_MINUS10;
                     break;
-
-                // case "-20dB":
-                //   mode = PreampMode.HPSDR_MINUS20;
-                //   break;
-
                 case "-30dB":
                     mode = PreampMode.HPSDR_MINUS30;
                     break;
-
+                default:
+                    exit = true;
+                    break;
             }
 
             if (comboRX2Preamp.Focused)
                 btnHidden.Focus();
 
-            // if (exit) return;
+            if (exit) return;
 
             RX2PreampMode = mode;
             update_preamp = true;
@@ -31989,33 +32217,33 @@ namespace PowerSDR
             }
             else //non-FM Squelch
             {
-                if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                {
-                    radio.GetDSPRX(0, 0).RXSquelchThreshold = ((float)ptbSquelch.Value -
-                        rx1_meter_cal_offset -
-                        rx1_preamp_offset[(int)rx1_preamp_mode] -
-                        rx1_filter_size_cal_offset -
-                        rx1_path_offset);
-                    radio.GetDSPRX(0, 1).RXSquelchThreshold = ((float)ptbSquelch.Value -
-                        rx1_meter_cal_offset -
-                        rx1_preamp_offset[(int)rx1_preamp_mode] -
-                        rx1_filter_size_cal_offset -
-                        rx1_path_offset);
-                }
-                else
-                {
-                    radio.GetDSPRX(0, 0).RXSquelchThreshold = (float)ptbSquelch.Value -
-                        rx1_preamp_offset[(int)rx1_preamp_mode] -
-                        rx1_meter_cal_offset -
-                        rx1_filter_size_cal_offset -
-                        (-alex_preamp_offset);
+                //if (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)
+                //{
+                //    radio.GetDSPRX(0, 0).RXSquelchThreshold = ((float)ptbSquelch.Value -
+                //        rx1_meter_cal_offset -
+                //        rx1_preamp_offset[(int)rx1_preamp_mode] -
+                //        rx1_filter_size_cal_offset -
+                //        rx1_path_offset);
+                //    radio.GetDSPRX(0, 1).RXSquelchThreshold = ((float)ptbSquelch.Value -
+                //        rx1_meter_cal_offset -
+                //        rx1_preamp_offset[(int)rx1_preamp_mode] -
+                //        rx1_filter_size_cal_offset -
+                //        rx1_path_offset);
+                //}
+                //else
+                //{
+                radio.GetDSPRX(0, 0).RXSquelchThreshold = (float)ptbSquelch.Value -
+                    rx1_preamp_offset[(int)rx1_preamp_mode] -
+                    rx1_meter_cal_offset -
+                    rx1_filter_size_cal_offset -
+                    (-alex_preamp_offset);
 
-                    radio.GetDSPRX(0, 1).RXSquelchThreshold = (float)ptbSquelch.Value -
-                        rx1_preamp_offset[(int)rx1_preamp_mode] -
-                        rx1_meter_cal_offset -
-                        rx1_filter_size_cal_offset -
-                        (-alex_preamp_offset);
-                }
+                radio.GetDSPRX(0, 1).RXSquelchThreshold = (float)ptbSquelch.Value -
+                    rx1_preamp_offset[(int)rx1_preamp_mode] -
+                    rx1_meter_cal_offset -
+                    rx1_filter_size_cal_offset -
+                    (-alex_preamp_offset);
+                // }
             }
 
             if (ptbSquelch.Focused) btnHidden.Focus();
@@ -32171,12 +32399,12 @@ namespace PowerSDR
             lcform.fixConsole(tx);
 #endif
 
-            if (rx1_xvtr_index >= 0 && alex_tr_relay)
-                if (alex_tr_relay)
-                {
-                    JanusAudio.SetAlexTRRelayBit(1);
-                }
-                else JanusAudio.SetAlexTRRelayBit(0);
+            //if (rx1_xvtr_index >= 0 && alex_tr_relay)
+            //    if (alex_tr_relay)
+            //    {
+            //       JanusAudio.SetAlexTRRelayBit(1);
+            //    }
+            //    else JanusAudio.SetAlexTRRelayBit(0);
 
 
             if (tx)
@@ -32218,10 +32446,10 @@ namespace PowerSDR
                 else
                 {
                     if (penny_ext_ctrl_enabled)
-                        Penny.getPenny().UpdateExtCtrl(rx1_band, mox);
+                        Penny.getPenny().UpdateExtCtrl(tx_band, mox);
 
                     if (alex_ant_ctrl_enabled)
-                        Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox, false);
+                        Alex.getAlex().UpdateAlexAntSelection(tx_band, mox, false);
                 }
 
 
@@ -32374,7 +32602,7 @@ namespace PowerSDR
 
             if (!disable_ui_mox_changes)
             {
-                SetupForm.SpurRedEnabled = false;
+                // SetupForm.SpurRedEnabled = false;
                 DisableAllBands();
                 DisableAllModes();
                 chkVFOSplit.Enabled = false;
@@ -32419,7 +32647,7 @@ namespace PowerSDR
 
             if (!disable_ui_mox_changes)
             {
-                SetupForm.SpurRedEnabled = true;
+                //  SetupForm.SpurRedEnabled = true;
                 EnableAllBands();
                 EnableAllModes();
                 chkVFOSplit.Enabled = true;
@@ -32458,7 +32686,7 @@ namespace PowerSDR
             t.Start();*/
         }
 
-       // private HiPerfTimer t1 = new HiPerfTimer();
+        // private HiPerfTimer t1 = new HiPerfTimer();
         //  private double timer1 = 0.0;
         private bool is_tune = false;
         private bool mox = false;
@@ -32466,18 +32694,25 @@ namespace PowerSDR
         {
 
             //Debug.WriteLine("MOX: "+chkMOX.Checked);	
-           // t1.Start();
+            // t1.Start();
             if (rx_only && chkMOX.Checked)
             {
                 chkMOX.Checked = false;
                 return;
             }
 
-            if (current_hpsdr_hardware == HPSDRHW.Angelia && current_hpsdr_model != HPSDRModel.ANAN100D)
-            {
-                chkMOX.Checked = false;
-                return;
-            }
+            // if ((current_hpsdr_hardware == HPSDRHW.Angelia && 
+            //    current_hpsdr_model != HPSDRModel.ANAN100D) ||
+            //    (current_hpsdr_hardware == HPSDRHW.Angelia && 
+            //    current_hpsdr_model != HPSDRModel.ORION))
+            //{
+            //    chkMOX.Checked = false;
+            //    MessageBox.Show("Please select the correct radio model in Setup",
+            //    "Incorrect radio selected",
+            //    MessageBoxButtons.OK,
+            //    MessageBoxIcon.Warning);
+            //    return;
+            //}
 
             if (allow_mox_bypass && current_ptt_mode != PTTMode.MIC &&
                                     current_ptt_mode != PTTMode.SPACE &&
@@ -32626,6 +32861,7 @@ namespace PowerSDR
                                     break;
                             }
                         }
+                        // current_ptt_mode = PTTMode.NONE;
                         chkMOX.Checked = false;
                         return;
                     }
@@ -32683,13 +32919,13 @@ namespace PowerSDR
                     if (chkVFOATX.Checked || (chkVFOBTX.Checked && !RX2Enabled) || mute_rx1_on_vfob_tx)
                     {
                         // Tell the RX in the DSP to begin a shutdown so that it can properly ramp down the audio output signal.
-                       // DttSP.SetThreadProcessingMode(0, 1);
+                        // DttSP.SetThreadProcessingMode(0, 1);
                         // Wait a while for:  (1) the DSP to ramp down the signal, and (2) the last of the audio to make its way through the network and the hardware to the speaker.
-                       // Thread.Sleep(20);
+                        // Thread.Sleep(20);
                         // Completely de-activate the RX in the DSP.
-                        DttSP.SetThreadProcessingMode(0, 0);                     
+                        DttSP.SetThreadProcessingMode(0, 0);
                     }
-                  if (chkVFOBTX.Checked && RX2Enabled) DttSP.SetThreadProcessingMode(2, 0);
+                    if (chkVFOBTX.Checked && RX2Enabled) DttSP.SetThreadProcessingMode(2, 0);
 
                     DttSP.FlushAllBufs(0, false);
                     DttSP.FlushAllBufs(1, true);
@@ -32761,16 +32997,16 @@ namespace PowerSDR
                 }
 
                 mox = tx;
-              //  AudioMOXChanged(tx);
- 
+                //  AudioMOXChanged(tx);
+
                 if (mox_delay > 0) Thread.Sleep(mox_delay); // default 10
                 HdwMOXChanged(tx, freq);
 
                 // Tell the TX in the DSP to begin a shutdown so that it can properly ramp down it's output signal.
-               // DttSP.SetThreadProcessingMode(1, 1);
+                // DttSP.SetThreadProcessingMode(1, 1);
                 // Wait a while for:  (1) the DSP to ramp down the signal, (2) the ramp-down signal to propagate through the network and the transmitter so the transmitter hardware is no longer transmitting, and (3) "clean" 
                 // receive samples to be collected after the transmitter hardware stops transmitting and for them to make their way back to the RX in the DSP.
-               // Thread.Sleep(20);
+                // Thread.Sleep(20);
                 // Completely de-activate the TX in the DSP.
                 DttSP.SetThreadProcessingMode(1, 0);
 
@@ -32782,8 +33018,8 @@ namespace PowerSDR
                 // Activate the RX in the DSP.
                 DttSP.SetThreadProcessingMode(0, 2);
                 if (chkVFOBTX.Checked && RX2Enabled) DttSP.SetThreadProcessingMode(2, 2);
-              //  AudioMOXChanged(tx);
-              }
+                //  AudioMOXChanged(tx);
+            }
 
             if (!tx)
             {
@@ -33282,17 +33518,17 @@ namespace PowerSDR
 
         private void comboTuneMode_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (atu_present)
-            {
-                if (comboTuneMode.SelectedIndex == (int)ATUTuneMode.BYPASS)
-                {
-                    if (current_model == Model.SDR1000)
-                        Hdw.PA_ATUTune(ATUTuneMode.BYPASS);
-                    tuned_band = Band.FIRST;
-                    if (chkTUN.BackColor == button_selected_color)
-                        chkTUN.BackColor = SystemColors.Control;
-                }
-            }
+            //if (atu_present)
+            //{
+            //    if (comboTuneMode.SelectedIndex == (int)ATUTuneMode.BYPASS)
+            //    {
+            //        if (current_model == Model.SDR1000)
+            //            Hdw.PA_ATUTune(ATUTuneMode.BYPASS);
+            //        tuned_band = Band.FIRST;
+            //        if (chkTUN.BackColor == button_selected_color)
+            //            chkTUN.BackColor = SystemColors.Control;
+            //    }
+            //}
 
             if (comboTuneMode.Focused)
                 btnHidden.Focus();
@@ -34103,25 +34339,24 @@ namespace PowerSDR
                } */
 
             //handle XVTRs
-            if (last_rx1_xvtr_index != rx1_xvtr_index)
+            //  if (last_rx1_xvtr_index != rx1_xvtr_index)
+            //  {
+            //rx
+            if (rx1_xvtr_index >= 0)
             {
-                //rx
-                if (rx1_xvtr_index >= 0)
-                {
-                    RX1XVTRGainOffset = XVTRForm.GetRXGain(rx1_xvtr_index);
-
-                    // EW: don't need to handle RX Only on RX Side
-                    /*if (last_rx1_xvtr_index == -1)
-                        saved_rx_only = rx_only;
-
-                    RXOnly = xvtrForm.GetRXOnly(rx1_xvtr_index);*/
-                }
-                else if (rx1_xvtr_index < 0)
-                {
-                    RX1XVTRGainOffset = 0.0f;
-                    comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
-                }
+                RX1XVTRGainOffset = XVTRForm.GetRXGain(rx1_xvtr_index);
+                if (alex_tr_relay) JanusAudio.SetAlexTRRelayBit(1);
+                else JanusAudio.SetAlexTRRelayBit(0);
             }
+
+            if (rx1_xvtr_index < 0)
+            {
+                RX1XVTRGainOffset = 0.0f;
+                JanusAudio.SetAlexTRRelayBit(0);
+                comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
+            }
+            //   }
+
             //tx
             if (last_tx_xvtr_index != tx_xvtr_index)
             {
@@ -34132,19 +34367,14 @@ namespace PowerSDR
 
                     RXOnly = XVTRForm.GetRXOnly(tx_xvtr_index);
                 }
-                else if (tx_xvtr_index < 0)
+
+                if (tx_xvtr_index < 0)
                 {
                     if (last_tx_xvtr_index >= 0)
                         RXOnly = saved_rx_only;
                 }
 
             }
-
-            //  if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.VUOK &&
-            //     (tx_xvtr_index == 0 || tx_xvtr_index == 1) &&
-            //      chkVFOATX.Checked)
-            //  ptbPWR_Scroll(this, EventArgs.Empty);
-
 
             // update Band Info
             string bandInfo;
@@ -35201,7 +35431,12 @@ namespace PowerSDR
         set_rx2_freq:
             rx2_xvtr_index = xvtr_index;
 
-            SetRX2Band(BandByFreq(freq, rx2_xvtr_index, false, current_region));
+            Band band = BandByFreq(freq, rx2_xvtr_index, false, current_region);
+            if (band != rx2_band)
+                SetRX2Band(band);
+
+            // SetRX2Band(BandByFreq(freq, rx2_xvtr_index, false, current_region));
+
             if (rx2_xvtr_index >= 0) freq = XVTRForm.TranslateFreq(freq);
 
             if (xvtr_index < 0)
@@ -37599,8 +37834,8 @@ namespace PowerSDR
             //double edge_alias = 7200.0;
             //double if_freq = 11025.0;
             double spur_tune_width = 200e6 / Math.Pow(2, 16);
-            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                spur_tune_width = 500e6 / Math.Pow(2, 16);
+            // if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+            // spur_tune_width = 500e6 / Math.Pow(2, 16);
             int width = Display.RXDisplayHigh - Display.RXDisplayLow;
 
             int max_pan_width = (int)(sample_rate1 - 2 * spur_tune_width - width);
@@ -38216,7 +38451,7 @@ namespace PowerSDR
                         if (new_mode != DSPMode.AM &&
                             new_mode != DSPMode.SAM)
                         {
-                           // chkMON.Enabled = true;
+                            // chkMON.Enabled = true;
                             chkBIN.Enabled = true;
                         }
                         chkMON.Enabled = true;
@@ -38467,10 +38702,10 @@ namespace PowerSDR
                     {
                         if (!rx_only && chkPower.Checked)
                             chkMOX.Enabled = true;
-                         chkMON.Checked = false;
-                         chkMON.Enabled = false;
-                         chkBIN.Checked = false;
-                         chkBIN.Enabled = false;
+                        chkMON.Checked = false;
+                        chkMON.Enabled = false;
+                        chkBIN.Checked = false;
+                        chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
                         //radio.GetDSPTX(0).TXOsc = 11025.0;
 
@@ -38502,8 +38737,8 @@ namespace PowerSDR
                         chkMOX.Enabled = true;
                     if (chkVFOATX.Checked || !rx2_enabled)
                     {
-                      //  chkMON.Checked = false;
-                      //  chkMON.Enabled = true;
+                        //  chkMON.Checked = false;
+                        //  chkMON.Enabled = true;
                         chkBIN.Checked = false;
                         chkBIN.Enabled = false;
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
@@ -40858,12 +41093,14 @@ namespace PowerSDR
         protected override void WndProc(ref Message m)
         {
             const int WM_QUERYENDSESSION = 0x0011;
+
             // Listen for operating system messages. 
 
             if (m.Msg == WM_QUERYENDSESSION)
             {
                 chkPower.Checked = false;
-                this.Close();
+                ExitConsole();
+                // this.Close();
             }
             else base.WndProc(ref m);
         }
@@ -40990,7 +41227,7 @@ namespace PowerSDR
                     Display.CurrentDisplayModeBottom = DisplayMode.OFF;
                     break;
             }
-            UpdateDisplayOffsets();
+            UpdateRX2DisplayOffsets();
         }
 
         private void ckQuickPlay_CheckedChanged(object sender, System.EventArgs e)
@@ -41333,6 +41570,7 @@ namespace PowerSDR
             rad_mode_drm_basis = radModeDRM.Location;
         }
 
+        private string old_rx1_display_mode = "";
         private bool set_rx2_freq = false;
         private bool rx2_enabled = false;
         public bool RX2Enabled
@@ -41341,9 +41579,12 @@ namespace PowerSDR
             set
             {
                 rx2_enabled = value;
-                chkRX2.Checked = value;
+                chkRX2.Checked = value;             
+
                 if (rx2_enabled)
                 {
+                    old_rx1_display_mode = comboDisplayMode.Text;
+
                     if (chkPower.Checked)
                     {
                         if (rx2_meter_thread == null || !rx2_meter_thread.IsAlive)
@@ -41434,6 +41675,8 @@ namespace PowerSDR
                         comboDisplayMode.Items.Insert(comboDisplayMode.Items.Count - 1, "Panafall");
                     if (!comboDisplayMode.Items.Contains("Panascope"))
                         comboDisplayMode.Items.Insert(comboDisplayMode.Items.Count - 1, "Panascope");
+
+                   comboDisplayMode.Text = old_rx1_display_mode;
                 }
 
                 Audio.RX2Enabled = rx2_enabled;
@@ -42549,12 +42792,12 @@ namespace PowerSDR
             if (chkRX2Preamp.Checked)
             {
                 chkRX2Preamp.BackColor = button_selected_color;
-                RX2PreampMode = PreampMode.HIGH;
+                // RX2PreampMode = PreampMode.HPSDR_ON;
             }
             else
             {
                 chkRX2Preamp.BackColor = SystemColors.Control;
-                RX2PreampMode = PreampMode.OFF;
+                //  RX2PreampMode = PreampMode.HPSDR_OFF;
             }
 
         }
@@ -42640,18 +42883,18 @@ namespace PowerSDR
 
         private void chkRX1Preamp_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (!fwc_init || current_model != Model.FLEX5000) return;
+            // if (!fwc_init || current_model != Model.FLEX5000) return;
             if (chkRX1Preamp.Checked)
             {
                 chkRX1Preamp.BackColor = button_selected_color;
                 chkRX1Preamp.Text = "On";
-                RX1PreampMode = PreampMode.HIGH;
+                RX1PreampMode = PreampMode.HPSDR_ON;
             }
             else
             {
                 chkRX1Preamp.BackColor = SystemColors.Control;
                 chkRX1Preamp.Text = "Off";
-                RX1PreampMode = PreampMode.OFF;
+                RX1PreampMode = PreampMode.HPSDR_OFF;
             }
         }
 
@@ -43295,7 +43538,7 @@ namespace PowerSDR
                     //  SetupForm.RX2AGCHang = 5000; // OFF
                     //  SetupForm.RX2AGCDecay = 250;
                     radio.GetDSPRX(1, 0).RXAGCAttack = 2;
-                    radio.GetDSPRX(1, 0).RXAGCHang = 5000;
+                    radio.GetDSPRX(1, 0).RXAGCHang = 0;
                     radio.GetDSPRX(1, 0).RXAGCDecay = 250;
                     toolTip1.SetToolTip(comboRX2AGC, "Automatic Gain Control Mode Setting:\n" +
                         "Medium (Attack 2ms, Hang OFF, Decay 250ms)");
@@ -43308,7 +43551,7 @@ namespace PowerSDR
                     // SetupForm.RX2AGCHang = 5000; // OFF
                     // SetupForm.RX2AGCDecay = 50;
                     radio.GetDSPRX(1, 0).RXAGCAttack = 2;
-                    radio.GetDSPRX(1, 0).RXAGCHang = 5000;
+                    radio.GetDSPRX(1, 0).RXAGCHang = 0;
                     radio.GetDSPRX(1, 0).RXAGCDecay = 50;
                     toolTip1.SetToolTip(comboRX2AGC, "Automatic Gain Control Mode Setting:\n" +
                        "Fast (Attack 2ms, Hang OFF, Decay 50ms)");
@@ -44504,17 +44747,26 @@ namespace PowerSDR
             {
                 comboPreamp.Items.AddRange(alex_preamp_settings);
             }
-            comboPreamp.Text = "0dB";
+            // comboPreamp.Text = "0dB";
 
             if (comboRX2Preamp != null)
             {
                 comboRX2Preamp.Items.Clear();
-                if (anan100dpresent)
+                if (anan100dpresent || orionpresent)
                     comboRX2Preamp.Items.AddRange(anan100d_preamp_settings);
                 else
                     comboRX2Preamp.Items.AddRange(on_off_preamp_settings);
-                comboRX2Preamp.Text = "0dB";
+                // comboRX2Preamp.Text = "0dB";
+                RX2PreampMode = rx2_preamp_by_band[(int)rx2_band];
+                comboRX2Preamp_SelectedIndexChanged(this, EventArgs.Empty);
+                RX2AttenuatorData = rx2_step_attenuator_by_band[(int)rx2_band];
             }
+
+            RX1PreampMode = rx1_preamp_by_band[(int)rx1_band];
+            comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
+            RX1AttenuatorData = rx1_step_attenuator_by_band[(int)rx1_band];
+
+
         }
 
         public void si570_resolve(double fo, ref double rfreq, ref ulong hs_div, ref ulong n1) // modif F8CHK
@@ -46279,6 +46531,7 @@ namespace PowerSDR
 
         private void udRX2StepAttData_ValueChanged(object sender, EventArgs e)
         {
+            // RX2AttenuatorData = (int)udRX2StepAttData.Value;
             RX2AttenuatorData = (int)udRX2StepAttData.Value;
             if (udRX2StepAttData.Focused) btnHidden.Focus();
         }

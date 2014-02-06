@@ -924,11 +924,13 @@ C0
 0 0 0 1 0 1 0 x   '0x14'
 C1
 0 0 0 0 0 0 0 0
-        | | | |
-        | | | +------------ Rx1 pre-amp (0=OFF, 1= ON)
-        | | +-------------- Rx2 pre-amp (0=OFF, 1= ON)
-        | +---------------- Rx3 pre-amp (0=OFF, 1= ON)
-        +------------------ Rx4 pre-amp (0=OFF, 1= ON)
+    | | | | | |
+    | | | | | +------------ Rx1 pre-amp (0=OFF, 1= ON)
+    | | | | +-------------- Rx2 pre-amp (0=OFF, 1= ON)
+    | | | +---------------- Rx3 pre-amp (0=OFF, 1= ON)
+    | | +------------------ Rx4 pre-amp (0=OFF, 1= ON)
+    | +-------------------- 0=PTT to ring/mic audio & bias to tip 1=PTT to tip/mic audio & bias to ring
+    +---------------------- Mic Bias (0=OFF, 1=ON)
 */
 
 KD5TFDVK6APHAUDIO_API void SetRX1Preamp(int bits) { 
@@ -953,6 +955,25 @@ KD5TFDVK6APHAUDIO_API void SetRX2Preamp(int bits) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetMicTR(int bits) { 
+	if ( bits != 0 ) { 
+		MicTR = (1 << 4); 
+	} 
+	else { 
+		MicTR = 0; 
+	}	
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetMicBias(int bits) { 
+	if ( bits != 0 ) { 
+		MicBias = (1 << 5); 
+	} 
+	else { 
+		MicBias = 0; 
+	}	
+	return;
+}
 /*
 C2
 0 0 0 0 0 0 0 0
@@ -1031,17 +1052,17 @@ C4
                              If disabled then Preamp On/Off bit is used.
 */
 
-KD5TFDVK6APHAUDIO_API void SetRX1StepAttenData(int bits) { 
-		rx1_step_att_data = bits & 0x1f; 
+KD5TFDVK6APHAUDIO_API void SetADC1StepAttenData(int bits) { 
+		adc1_step_att_data = bits & 0x1f; 
     	return;
 }
 
-KD5TFDVK6APHAUDIO_API void EnableRX1StepAtten(int bits) { 
+KD5TFDVK6APHAUDIO_API void EnableADC1StepAtten(int bits) { 
 	if ( bits != 0 ) { 
-		enable_RX1_step_att = 0x20; 
+		enable_ADC1_step_att = 0x20; 
 	} 
 	else { 
-		enable_RX1_step_att = 0; 
+		enable_ADC1_step_att = 0; 
 	}	
 	return;
 }
@@ -1052,21 +1073,21 @@ C0
 C1
 0 0 0 0 0 0 0 0
     | |       |
-    | +-------+------------ Angelia/Orion RX2 Input Attenuator (0 – 31dB) [4:0]
-    +---------------------- Angelia/Orion RX2 Attenuator enable (0 = disable, 1 = enable)
+    | +-------+------------ Angelia/Orion ADC2 Input Attenuator (0 – 31dB) [4:0]
+    +---------------------- Angelia/Orion ADC2 Attenuator enable (0 = disable, 1 = enable)
 */
 
-KD5TFDVK6APHAUDIO_API void SetRX2StepAttenData(int bits) { 
-		rx2_step_att_data = bits & 0x1f; 
+KD5TFDVK6APHAUDIO_API void SetADC2StepAttenData(int bits) { 
+		adc2_step_att_data = bits & 0x1f; 
     	return;
 }
 
-KD5TFDVK6APHAUDIO_API void EnableRX2StepAtten(int bits) { 
+KD5TFDVK6APHAUDIO_API void EnableADC2StepAtten(int bits) { 
 	if ( bits != 0 ) { 
-		enable_RX2_step_att = 0x20; 
+		enable_ADC2_step_att = 0x20; 
 	} 
 	else { 
-		enable_RX2_step_att = 0; 
+		enable_ADC2_step_att = 0; 
 	}	
 	return;
 }
@@ -1075,21 +1096,21 @@ KD5TFDVK6APHAUDIO_API void EnableRX2StepAtten(int bits) {
 C2
 0 0 0 0 0 0 0 0
     | |       |
-    | +-------+------------ Orion RX3 Input Attenuator (0 – 31dB) [4:0]
-    +---------------------- Orion RX3 Attenuator enable (0 = disable, 1 = enable)
+    | +-------+------------ Orion ADC3 Input Attenuator (0 – 31dB) [4:0]
+    +---------------------- Orion ADC3 Attenuator enable (0 = disable, 1 = enable)
 */
 
-KD5TFDVK6APHAUDIO_API void SetRX3StepAttenData(int bits) { 
-		rx3_step_att_data = bits & 0x1f; 
+KD5TFDVK6APHAUDIO_API void SetADC3StepAttenData(int bits) { 
+		adc3_step_att_data = bits & 0x1f; 
     	return;
 }
 
-KD5TFDVK6APHAUDIO_API void EnableRX3StepAtten(int bits) { 
+KD5TFDVK6APHAUDIO_API void EnableADC3StepAtten(int bits) { 
 	if ( bits != 0 ) { 
-		enable_RX3_step_att = 0x20; 
+		enable_ADC3_step_att = 0x20; 
 	} 
 	else { 
-		enable_RX3_step_att = 0; 
+		enable_ADC3_step_att = 0; 
 	}	
 	return;
 }

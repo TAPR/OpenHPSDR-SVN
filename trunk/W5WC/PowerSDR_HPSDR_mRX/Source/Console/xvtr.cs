@@ -251,28 +251,28 @@ namespace PowerSDR
 			console = c;
 			SetupControlArrays();
 			Common.RestoreForm(this, "XVTR", false);
-			if(console.fwc_init && console.CurrentModel == Model.FLEX5000)
-				lblXVTRRF.Text = "Split RF";
-			else if(console.fwc_init && console.CurrentModel == Model.FLEX3000)
-			{
-				lblXVTRRF.Visible = false;
-				chkXVTRRF0.Visible = false;
-				chkXVTRRF1.Visible = false;
-				chkXVTRRF2.Visible = false;
-				chkXVTRRF3.Visible = false;
-				chkXVTRRF4.Visible = false;
-				chkXVTRRF5.Visible = false;
-				chkXVTRRF6.Visible = false;
-				chkXVTRRF7.Visible = false;
-				chkXVTRRF8.Visible = false;
-				chkXVTRRF9.Visible = false;
-				chkXVTRRF10.Visible = false;
-				chkXVTRRF11.Visible = false;
-				chkXVTRRF12.Visible = false;
-				chkXVTRRF13.Visible = false;
-				chkXVTRRF14.Visible = false;
-				chkXVTRRF15.Visible = false;
-			}
+            //if(console.fwc_init && console.CurrentModel == Model.FLEX5000)
+            //    lblXVTRRF.Text = "Split RF";
+            //else if(console.fwc_init && console.CurrentModel == Model.FLEX3000)
+            //{
+            //    lblXVTRRF.Visible = false;
+            //    chkXVTRRF0.Visible = false;
+            //    chkXVTRRF1.Visible = false;
+            //    chkXVTRRF2.Visible = false;
+            //    chkXVTRRF3.Visible = false;
+            //    chkXVTRRF4.Visible = false;
+            //    chkXVTRRF5.Visible = false;
+            //    chkXVTRRF6.Visible = false;
+            //    chkXVTRRF7.Visible = false;
+            //    chkXVTRRF8.Visible = false;
+            //    chkXVTRRF9.Visible = false;
+            //    chkXVTRRF10.Visible = false;
+            //    chkXVTRRF11.Visible = false;
+            //    chkXVTRRF12.Visible = false;
+            //    chkXVTRRF13.Visible = false;
+            //    chkXVTRRF14.Visible = false;
+            //    chkXVTRRF15.Visible = false;
+            //}
 		}
 
 		/// <summary>

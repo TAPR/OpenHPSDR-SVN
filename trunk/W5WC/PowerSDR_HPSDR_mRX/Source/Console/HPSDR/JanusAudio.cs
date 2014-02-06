@@ -866,22 +866,28 @@ namespace PowerSDR
         unsafe public static extern void SetRX2Preamp(int bits);
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void EnableRX1StepAtten(int bits);
+        unsafe public static extern void EnableADC1StepAtten(int bits);
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void EnableRX2StepAtten(int bits);
+        unsafe public static extern void EnableADC2StepAtten(int bits);
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void EnableRX3StepAtten(int bits);
+        unsafe public static extern void EnableADC3StepAtten(int bits);
         
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetRX1StepAttenData(int bits);
+        unsafe public static extern void SetADC1StepAttenData(int bits);
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetRX2StepAttenData(int bits);
+        unsafe public static extern void SetADC2StepAttenData(int bits);
 
         [DllImport("JanusAudio.dll")]
-        unsafe public static extern void SetRX3StepAttenData(int bits);
+        unsafe public static extern void SetADC3StepAttenData(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetMicTR(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetMicBias(int bits);
 
         [DllImport("JanusAudio.dll")]
         unsafe public static extern int getAndResetADC_Overload();

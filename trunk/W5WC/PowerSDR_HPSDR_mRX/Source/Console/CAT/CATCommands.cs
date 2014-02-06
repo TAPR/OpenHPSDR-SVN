@@ -3855,8 +3855,24 @@ namespace PowerSDR
 		//Sets or reads the TX relay RCA jack
 		public string ZZOF(string s)
 		{
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
+                //if (s.Length == parser.nSet)
+                //{
+                //    if (s.Substring(0, 1) == "1")
+                //        console.AlexTRRelay = true;
+                //    else
+                //        console.AlexTRRelay = false;
+                //    return "";
+                //}
+                //else if (s.Length == parser.nGet)
+                //{
+                //    bool rly1 = console.AlexTRRelay;
+                //    if (rly1)
+                //        return "100";
+                //    else
+                //        return "000";
+                //}
+                //else
+                    return parser.Error1;
 		}
 
 
@@ -4039,7 +4055,7 @@ namespace PowerSDR
         {
                 if (s.Length == parser.nGet)
                 {
-                    if (console.RX2PreampMode == PreampMode.OFF)
+                    if (console.RX2PreampMode == PreampMode.HPSDR_OFF)
                         return "0";
                     else
                         return "1";
@@ -4047,9 +4063,9 @@ namespace PowerSDR
                 else if (s.Length == parser.nSet)
                 {
                     if (s == "1")
-                        console.RX2PreampMode = PreampMode.HIGH;
+                        console.RX2PreampMode = PreampMode.HPSDR_ON;
                     else
-                        console.RX2PreampMode = PreampMode.OFF;
+                        console.RX2PreampMode = PreampMode.HPSDR_OFF;
                     return "";
                 }
                 else

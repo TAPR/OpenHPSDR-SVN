@@ -32,6 +32,7 @@ namespace System.Windows.Forms
 {
 	public class TextBoxTS : TextBox
 	{
+
 		#region Properties
 
 		public new bool AcceptsReturn
