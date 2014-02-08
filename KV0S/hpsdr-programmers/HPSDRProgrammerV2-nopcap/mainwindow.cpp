@@ -218,10 +218,30 @@ void MainWindow::browse()
     dir = dr.path();
     //qDebug() << "dir2" << dir;
     settings.setValue("dir", QVariant(dir) );
-
-    text = QString("Opening file: %0").arg(fileName);
-    status( text );
-
+    QString fn = fi.baseName();
+    bool brdtest= true;
+    QString brd = wb->boards[wb->currentboard]->getBoardString();
+    if (  brd.contains("metis") && !(fn.contains("metis") || fn.contains("Metis"))  ){
+        brdtest = false;
+    }else if ( brd.contains("hermes") && !(fn.contains("hermes") || fn.contains("Hermes")) ){
+        brdtest = false;
+    }else if ( brd.contains("angelia") && !(fn.contains("angelia") || fn.contains("Angleia")) ){
+        brdtest = false;
+    }else if ( brd.contains("orion") && !(fn.contains("orian") || fn.contains("Orion")) ){
+        brdtest = false;
+    }
+    if ( brdtest == false ){
+      stat->status(tr("Discovery shows you have a %0 board\n The filename %1 is not for a metis board.").arg(brd, fi.completeBaseName()));
+      QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+                                        tr("Discovery shows you are loading a <b>%0</b> board! \n <br/><br/>"
+                                           "The filename for the RBF file <b>\"%1\"</b> does not seem to match.").arg(brd, fi.completeBaseName()),
+                                         QMessageBox::Ok);
+      fileName.clear();
+      ui->fileLineEdit->clear();
+    }else{
+      text = QString("Opening file: %0").arg(fileName);
+      status( text );
+    }
 }
 
 void MainWindow::program()
