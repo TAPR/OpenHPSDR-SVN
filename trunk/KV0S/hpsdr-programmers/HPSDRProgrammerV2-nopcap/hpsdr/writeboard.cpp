@@ -132,7 +132,9 @@ void WriteBoard::sendCommand(unsigned char command, Board *bd) {
         timer->start(METIS_MAX_ERASE_TIMEOUTS);
     }else if ( boards[currentboard]->getBoardString() == "hermes" ){
         timer->start(HERMES_MAX_ERASE_TIMEOUTS);
-    }else {  // Angelia
+    }else if ( boards[currentboard]->getBoardString() == "angelia" ){
+        timer->start(ANGELIA_MAX_ERASE_TIMEOUTS);
+    }else {  // Orion
         timer->start(ANGELIA_MAX_ERASE_TIMEOUTS);
     }
 
