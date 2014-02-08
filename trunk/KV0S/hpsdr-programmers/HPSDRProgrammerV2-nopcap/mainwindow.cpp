@@ -168,7 +168,7 @@ void MainWindow::discover()
 void MainWindow::discoveryUpdate()
 {
     QString text;
-    //qDebug() << "in MainWindow::discoverUpdate";
+    qDebug() << "in MainWindow::discoverUpdate";
     qDebug() << wb->boards.uniqueKeys();
 
     if( discoveryDone == false ){

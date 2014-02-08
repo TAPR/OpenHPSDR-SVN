@@ -175,7 +175,7 @@ void AddressDialog::setupIPwrite()
     }
 
     // restrict fixed address in adhoc address space
-    else if ((o1 == 169) || (o1 == 169) && (o2 == 254)) {
+    else if ((o1 == 169) || ((o1 == 169) && (o2 == 254))) {
         invalidIPAddress( QString("Ad Hoc address space not suitable for fixed address") );
         return;
     }
