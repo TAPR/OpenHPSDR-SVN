@@ -49,7 +49,7 @@ void WriteBoard::discovery()
 
 void WriteBoard::update_discovery()
 {
-    qDebug() <<" discoveryBoxUpdate";
+    qDebug() <<" writeboard::discoveryUpdate ";
     state=IDLE;
     emit discoveryBoxUpdate();
 }

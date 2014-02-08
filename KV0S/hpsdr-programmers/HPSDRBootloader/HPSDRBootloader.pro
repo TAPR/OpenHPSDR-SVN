@@ -21,7 +21,7 @@ include( ../Resources/Resources.pri )
 
 win32 {
     INCLUDEPATH += "c:/WpdPack/Include"
-    LIBS += "c:/WpdPack/Lib/wpcap.lib" "C:\Qt\Qt5.1.0\Tools\mingw48_32\i686-w64-mingw32\lib\libws2_32.a"
+    LIBS += "c:/WpdPack/Lib/wpcap.lib" "C:\Qt\Qt5.1.1\Tools\mingw48_32\i686-w64-mingw32\lib\libws2_32.a"
  }
 
 macx {
