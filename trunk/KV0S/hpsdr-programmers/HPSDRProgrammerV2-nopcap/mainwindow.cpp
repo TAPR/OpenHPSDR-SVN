@@ -221,15 +221,17 @@ void MainWindow::browse()
     QString fn = fi.baseName();
     bool brdtest= true;
     QString brd = wb->boards[wb->currentboard]->getBoardString();
+
     if (  brd.contains("metis") && !(fn.contains("metis") || fn.contains("Metis"))  ){
         brdtest = false;
     }else if ( brd.contains("hermes") && !(fn.contains("hermes") || fn.contains("Hermes")) ){
         brdtest = false;
-    }else if ( brd.contains("angelia") && !(fn.contains("angelia") || fn.contains("Angleia")) ){
+    }else if ( brd.contains("angelia") && !(fn.contains("angelia") || fn.contains("Angelia")) ){
         brdtest = false;
-    }else if ( brd.contains("orion") && !(fn.contains("orian") || fn.contains("Orion")) ){
+    }else if ( brd.contains("orion") && !(fn.contains("orion") || fn.contains("Orion")) ){
         brdtest = false;
     }
+
     if ( brdtest == false ){
       stat->status(tr("Discovery shows you have a %0 board\n The filename %1 is not for a metis board.").arg(brd, fi.completeBaseName()));
       QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
