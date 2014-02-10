@@ -76,7 +76,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionAbout,SIGNAL(triggered()),ab,SLOT(show()));
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(close()));
     connect(ui->interfaceComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(interfaceSelected(int)));
-    //connect(ui->discoverComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(metisSelected(int)));
+    connect(ui->discoverComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(boardSelected(int)));
 
     connect(ui->discoverButton,SIGNAL(clicked()),this,SLOT(discover()));
 
@@ -101,6 +101,29 @@ MainWindow::MainWindow(QWidget *parent) :
        // dont allow discovery if no interface found
        ui->discoverButton->setEnabled(false);
     }
+
+
+    /* qDebug()<<"interface:"<<server->getInterface();
+    index=ui->comboBoxInterface->findText(server->getInterface());
+    if(index!=-1) {
+        ui->comboBoxInterface->setCurrentIndex(index);
+    } else {
+        // interface not found
+
+    }
+
+    qDebug()<<"after updateInterfaces interface:"<<server->getInterface();
+    if(server->getInterface()!="") {
+        server->bind();
+        actionDiscover();
+        index=ui->comboBoxMetis->findText(server->getMetisDetail());
+        if(index!=-1) {
+            ui->comboBoxMetis->setCurrentIndex(index);
+        } else {
+            server->setMetisDetail("");
+        }
+    } */
+
 
     wb = new WriteBoard( socket, stat);
 
@@ -137,6 +160,20 @@ void MainWindow::interfaceSelected(int id)
     }
     qDebug() << socket->localAddress();
 #endif
+}
+
+void MainWindow::boardSelected(int id)
+{
+    qDebug( "in boardSelected" );
+    if (id < 0 ){
+        id = 0;
+    }
+    qDebug() << id;
+    if( wb->boards.uniqueKeys().count() > 0 )
+    {
+       qDebug() << (wb->boards.keys())[id];
+       wb->currentboard = (wb->boards.keys())[id];
+    }
 }
 
 // private function to display message in the status window
