@@ -140,7 +140,7 @@ namespace PowerSDR
             radRxSourceRx1Rx2_CheckedChanged(this, e);
             radioButtonMerc1_CheckedChanged(this, e);
             radioButtonMerc2_CheckedChanged(this, e);
-
+            wdsp.SetEXTDIVNr(0, 2);
             console.Diversity2 = true;
         }
 
@@ -1132,7 +1132,7 @@ namespace PowerSDR
             }
         }
 
-        private void UpdateDiversity()
+        private unsafe void UpdateDiversity()
         {
             double c = 2.9979E8;                                //speed of light
             double pi = Math.PI;
@@ -1145,7 +1145,8 @@ namespace PowerSDR
             lambda = c / (console.VFOAFreq * 1E6);              //convert freq from MHz to Hz
             d_lambda = (double)udAntSpacing.Value / lambda;     //antenna spacing to wavelength ratio
             label_d.Text = d_lambda.ToString("0.00");
-
+            double[] Irotate = new double[2];
+            double[] Qrotate = new double[2];
             if (radioButtonMerc1.Checked)
             {
                 //calculate phase shift for IQ stream 2 based on antenna spacing, frequency, steering angle, and apply a 180 degree phase
@@ -1158,6 +1159,13 @@ namespace PowerSDR
                 // console.SetIQ_RotateA(a_A, b_A);   
                 // Audio.I_RotateA = a_A;
                 // Audio.Q_RotateA = b_A;
+                Irotate[0] = 1.0; 
+                Qrotate[0] = 0.0;
+                Irotate[1] = a_A;
+                Qrotate[1] = b_A;
+                fixed (double* Iptr = &Irotate[0])
+                fixed (double* Qptr = &Qrotate[0])
+                    wdsp.SetEXTDIVRotate(0, 2, Iptr, Qptr);
             }
             if (radioButtonMerc2.Checked)
             {
@@ -1169,6 +1177,13 @@ namespace PowerSDR
                 // console.SetIQ_RotateA(a_A, b_A); 
                 // Audio.I_RotateA = a_A;
                 // Audio.Q_RotateA = b_A;
+                Irotate[1] = 1.0;
+                Qrotate[1] = 0.0;
+                Irotate[0] = a_A;
+                Qrotate[0] = b_A;
+                fixed (double* Iptr = &Irotate[0])
+                fixed (double* Qptr = &Qrotate[0])
+                    wdsp.SetEXTDIVRotate(0, 2, Iptr, Qptr);
             }
 
 
@@ -1498,22 +1513,31 @@ namespace PowerSDR
         private void radRxSource1_CheckedChanged(object sender, EventArgs e)
         {
             if (radRxSource1.Checked)
-                // Audio.IQSource = 1;
+            // Audio.IQSource = 1;
+            {
                 JanusAudio.SetMercSource(1);
+                wdsp.SetEXTDIVOutput(0, 0);
+            }
         }
 
         private void radRxSource2_CheckedChanged(object sender, EventArgs e)
         {
             if (radRxSource2.Checked)
-                // Audio.IQSource = 2;
+            // Audio.IQSource = 2;
+            {
                 JanusAudio.SetMercSource(2);
+                wdsp.SetEXTDIVOutput(0, 1);
+            }
         }
 
         private void radRxSourceRx1Rx2_CheckedChanged(object sender, EventArgs e)
         {
             if (radRxSourceRx1Rx2.Checked)
-                // Audio.IQSource = 3;
+            // Audio.IQSource = 3;
+            {
                 JanusAudio.SetMercSource(3);
+                wdsp.SetEXTDIVOutput(0, 2);
+            }
         }
     }
 }

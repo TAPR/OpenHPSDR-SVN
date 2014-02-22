@@ -79,6 +79,9 @@ namespace PowerSDR
         [DllImport("wdsp.dll", EntryPoint = "SetTXAMode")]
         public static extern void SetTXAMode(int channel, DSPMode mode);
 
+        [DllImport("wdsp.dll", EntryPoint = "fexchange0")]
+        public static extern void fexchange0 (int channel, double* Cin, double* Cout, int* error);
+
         [DllImport("wdsp.dll", EntryPoint = "fexchange2")]
         public static extern void fexchange2(int channel, float* Iin, float* Qin, float* Iout, float* Qout, int* error);
 
@@ -376,6 +379,33 @@ namespace PowerSDR
         [DllImport("wdsp.dll", EntryPoint = "SetTXAPreGenSweepRate", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAPreGenSweepRate(int channel, double rate);
 
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPreGenSawtoothMag", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAPreGenSawtoothMag(int channel, double mag);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPreGenSawtoothFreq", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAPreGenSawtoothFreq(int channel, double freq);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPreGenTriangleMag", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAPreGenTriangleMag(int channel, double mag);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPreGenTriangleFreq", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAPreGenTriangleFreq(int channel, double freq);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPreGenPulseMag", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAPreGenPulseMag(int channel, double mag);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPreGenPulseFreq", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAPreGenPulseFreq(int channel, double freq);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPreGenPulseDutyCycle", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAPreGenPulseDutyCycle(int channel, double dc);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPreGenPulseToneFreq", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAPreGenPulseToneFreq(int channel, double freq);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPreGenPulseTransition", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAPreGenPulseTransition(int channel, double transtime);
+
         [DllImport("wdsp.dll", EntryPoint = "SetTXAPostGenRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAPostGenRun(int channel, int run);
 
@@ -402,6 +432,26 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "SetTXAPostGenSweepRate", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAPostGenSweepRate(int channel, double rate);
+
+        // diversity
+
+        [DllImport("wdsp.dll", EntryPoint = "create_divEXT", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void create_divEXT(int id, int run, int nr, int size);
+
+        [DllImport("wdsp.dll", EntryPoint = "destroy_divEXT", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void destroy_divEXT (int id);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEXTDIVRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTDIVRun(int id, int run);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEXTDIVNr", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTDIVNr (int id, int nr);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEXTDIVOutput", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTDIVOutput (int id, int output);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEXTDIVRotate", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTDIVRotate(int id, int nr, double* Irotate, double* Qrotate);
 
         #endregion
 

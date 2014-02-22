@@ -275,6 +275,16 @@ namespace PowerSDR
             }
         }
 
+        private static double dsp_adjust = 1.0 / 0.98;
+        public static double DspAdjust
+        {
+            get { return dsp_adjust; }
+            set
+            {
+                dsp_adjust = value;
+            }
+        }
+
         //  public static double PennylanePowerBreakPoint = 0.4;
         private static double radio_volume = 0.0;
         public static double RadioVolume
@@ -292,7 +302,7 @@ namespace PowerSDR
                     // {
                     //   penny_power = (float)(radio_volume / PennylanePowerBreakPoint);
                     // }
-                    JanusAudio.SetOutputPower((float)value);
+                    JanusAudio.SetOutputPower((float)(value * dsp_adjust));
                 }
                 else
                 {
@@ -1564,6 +1574,24 @@ namespace PowerSDR
             int error;
             float** input = (float**)ins;
             float** output = (float**)outs;
+
+            // fexchange0() test code
+            /*double[] Cin  = new double[4096];
+            double[] Cout = new double[4096];
+            for (i = 0; i < block_size1; i++)
+            {
+                Cin[2 * i + 0] = (double)input[0][i];
+                Cin[2 * i + 1] = (double)input[1][i];
+            }
+            fixed(double* pCin  = &Cin[0])
+            fixed(double* pCout = &Cout[0])
+                wdsp.fexchange0(wdsp.id(0, 0), pCin, pCout, &error);
+            for (i = 0; i < numsamples; i++)
+            {
+                output[0][i] = (float)Cout[2 * i + 0];
+                output[1][i] = (float)Cout[2 * i + 1];
+            }*/
+
             wdsp.fexchange2(wdsp.id(0, 0), input[0], input[1], output[0], output[1], &error);
             wdsp.fexchange2(wdsp.id(0, 1), input[0], input[1], output[6], output[7], &error);
             if (console.radio.GetDSPRX(0, 1).Active)
@@ -1647,6 +1675,8 @@ namespace PowerSDR
                 else rx_idx = 2 * console.psform.RXrcvr;
                 if (console.psform.TXrcvr == 1) tx_idx = 0;
                 else tx_idx = 2 * console.psform.TXrcvr;
+                //rx_idx = 0;
+                //tx_idx = 8;
                 puresignal.psccF(wdsp.id(1, 0), frameCount,
                     (float*)array_ptr_input[tx_idx + 0],
                     (float*)array_ptr_input[tx_idx + 1],
@@ -1971,7 +2001,7 @@ namespace PowerSDR
                     {
                         if (console.specRX.GetSpecRX(0).NBOn)
                         {
-                            SpecHPSDRDLL.blanker(0, 0, rx1_in_l, rx1_in_r);
+                            SpecHPSDRDLL.xanbEXTF(0, rx1_in_l, rx1_in_r);
                         }
 
                         if (console.SpecDisplay)
@@ -1985,12 +2015,12 @@ namespace PowerSDR
                     {
                         if (console.specRX.GetSpecRX(0).NBOn)
                         {
-                            SpecHPSDRDLL.blanker(0, 0, rx1_in_l, rx1_in_r);
+                            SpecHPSDRDLL.xanbEXTF(0, rx1_in_l, rx1_in_r);
                         }
 
                         if (console.specRX.GetSpecRX(1).NBOn)
                         {
-                            SpecHPSDRDLL.blanker(1, 0, rx2_in_l, rx2_in_r);
+                            SpecHPSDRDLL.xanbEXTF(3, rx2_in_l, rx2_in_r);
                         }
 
                         if (console.SpecDisplay)
@@ -2009,19 +2039,19 @@ namespace PowerSDR
                             switch (console.StitchedReceivers)
                             {
                                 case 1:
-                                    SpecHPSDRDLL.blanker(0, 1, rx1_in_l, rx1_in_r);
+                                    SpecHPSDRDLL.xanbEXTF(1, rx1_in_l, rx1_in_r);
                                     break;
                                 case 3:
-                                    SpecHPSDRDLL.blanker(0, 0, (float*)array_ptr_input[6], (float*)array_ptr_input[7]); // rx3
-                                    SpecHPSDRDLL.blanker(0, 1, rx1_in_l, rx1_in_r);
-                                    SpecHPSDRDLL.blanker(0, 2, (float*)array_ptr_input[8], (float*)array_ptr_input[9]); // rx4
+                                    SpecHPSDRDLL.xanbEXTF(0, (float*)array_ptr_input[6], (float*)array_ptr_input[7]); // rx3
+                                    SpecHPSDRDLL.xanbEXTF(1, rx1_in_l, rx1_in_r);
+                                    SpecHPSDRDLL.xanbEXTF(2, (float*)array_ptr_input[8], (float*)array_ptr_input[9]); // rx4
                                     break;
                             }
                         }
 
                         if (console.specRX.GetSpecRX(1).NBOn)
                         {
-                            SpecHPSDRDLL.blanker(1, 0, rx2_in_l, rx2_in_r);
+                            SpecHPSDRDLL.xanbEXTF(3, rx2_in_l, rx2_in_r);
                         }
 
                         if (console.SpecDisplay)
@@ -2050,19 +2080,19 @@ namespace PowerSDR
                             switch (console.StitchedReceivers)
                             {
                                 case 1:
-                                    SpecHPSDRDLL.blanker(0, 0, rx1_in_l, rx1_in_r);
+                                    SpecHPSDRDLL.xanbEXTF(0, rx1_in_l, rx1_in_r);
                                     break;
                                 case 3:
-                                    SpecHPSDRDLL.blanker(0, 0, (float*)array_ptr_input[6], (float*)array_ptr_input[7]); // rx3
-                                    SpecHPSDRDLL.blanker(0, 1, rx1_in_l, rx1_in_r);
-                                    SpecHPSDRDLL.blanker(0, 2, (float*)array_ptr_input[8], (float*)array_ptr_input[9]); // rx4
+                                    SpecHPSDRDLL.xanbEXTF(0, (float*)array_ptr_input[6], (float*)array_ptr_input[7]); // rx3
+                                    SpecHPSDRDLL.xanbEXTF(1, rx1_in_l, rx1_in_r);
+                                    SpecHPSDRDLL.xanbEXTF(2, (float*)array_ptr_input[8], (float*)array_ptr_input[9]); // rx4
                                     break;
                             }
                         }
 
                         if (console.specRX.GetSpecRX(1).NBOn)
                         {
-                            SpecHPSDRDLL.blanker(1, 0, rx2_in_l, rx2_in_r);
+                            SpecHPSDRDLL.xanbEXTF(3, rx2_in_l, rx2_in_r);
                         }
 
                         if (console.SpecDisplay)
@@ -2112,7 +2142,19 @@ namespace PowerSDR
 			Debug.Write(MaxSample(out_l_ptr2, frameCount).ToString("f6")+",");
 			Debug.Write(MaxSample(out_r_ptr2, frameCount).ToString("f6")+"\n");
 #endif
-
+            /*if (scope)    //rx1_rx4_envelope_scope_hack
+            {
+                float* rx4_in_l = (float*)array_ptr_input[8];
+                float* rx4_in_r = (float*)array_ptr_input[9];
+                for (int i = 0; i < frameCount; i++)
+                {
+                    rx1_in_l[i] = 2.0f * (float)Math.Sqrt(rx1_in_l[i] * rx1_in_l[i] + rx1_in_r[i] * rx1_in_r[i]);
+                    rx1_in_r[i] = 2.0f * (float)Math.Sqrt(rx4_in_l[i] * rx4_in_l[i] + rx4_in_r[i] * rx4_in_r[i]);
+                }
+                DoScope(rx1_in_l, frameCount);
+                DoScope2(rx1_in_r, frameCount);
+            }*/
+            
             if (scope)
             {
                 if (!localmox)
@@ -2126,7 +2168,7 @@ namespace PowerSDR
                     DoScope2(tx_out_r, out_count);
                 }
             }
-
+            
             if (wave_record)
             {
                 if (!localmox)

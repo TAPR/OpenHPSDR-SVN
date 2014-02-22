@@ -2,7 +2,7 @@
 // database.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2012  FlexRadio Systems Copyright (C) 2010-2012  Doug Wigley
+// Copyright (C) 2004-2012  FlexRadio Systems Copyright (C) 2010-2014  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -2248,65 +2248,71 @@ namespace PowerSDR
             t.Columns.Add("Mode", typeof(string));
             t.Columns.Add("Filter", typeof(string));
             t.Columns.Add("Freq", typeof(double));
+            t.Columns.Add("CTUN", typeof(bool));
+            t.Columns.Add("ZoomFactor", typeof(double));
+            t.Columns.Add("CenterFreq", typeof(double));
 
             object[] data = {
-								"160M", "CWL", "F5", 1.810000,
-								"160M", "CWU", "F1", 1.835000,
-								"160M", "USB", "F6", 1.845000,
-								"80M", "CWL", "F1", 3.501000,
-								"80M", "LSB", "F6", 3.751000,
-								"80M", "LSB", "F6", 3.850000,
-								"60M", "USB", "F6", 5.330500,
-								"60M", "USB", "F6", 5.346500,
-								"60M", "USB", "F6", 5.357000,
-								"60M", "USB", "F6", 5.371500,                               
-								"60M", "USB", "F6", 5.403500,
-								"40M", "CWL", "F1", 7.001000,
-								"40M", "LSB", "F6", 7.152000,
-								"40M", "LSB", "F6", 7.255000,
-								"30M", "CWU", "F1", 10.120000,
-								"30M", "CWU", "F1", 10.130000,
-								"30M", "CWU", "F5", 10.140000,
-								"20M", "CWU", "F1", 14.010000,
-								"20M", "USB", "F6", 14.230000,
-								"20M", "USB", "F6", 14.336000,
-								"17M", "CWU", "F1", 18.090000,
-								"17M", "USB", "F6", 18.125000,
-								"17M", "USB", "F6", 18.140000,
-								"15M", "CWU", "F1", 21.001000,
-								"15M", "USB", "F6", 21.255000,
-								"15M", "USB", "F6", 21.300000,
-								"12M", "CWU", "F1", 24.895000,
-								"12M", "USB", "F6", 24.900000,
-								"12M", "USB", "F6", 24.910000,
-								"10M", "CWU", "F1", 28.010000,
-								"10M", "USB", "F6", 28.300000,
-								"10M", "USB", "F6", 28.400000,
-								"6M", "CWU", "F1", 50.010000,
-								"6M", "USB", "F6", 50.125000,
-								"6M", "USB", "F6", 50.200000,
-								"2M", "CWU", "F1", 144.010000,
-								"2M", "USB", "F6", 144.200000,
-								"2M", "USB", "F6", 144.210000,
-								"WWV", "SAM", "F7", 2.500000,
-								"WWV", "SAM", "F7", 5.000000,
-								"WWV", "SAM", "F7", 10.000000,
-								"WWV", "SAM", "F7", 15.000000,
-								"WWV", "SAM", "F7", 20.000000,
-								"GEN", "SAM", "F5", 13.845000,
-								"GEN", "SAM", "F5", 9.550000,
-                                "GEN", "SAM", "F5", 5.975000,
-                                "GEN", "SAM", "F5", 3.250000,
-								"GEN", "SAM", "F4", 0.590000,
+								"160M", "CWL", "F5", 1.810000, false, 150, 0.0,
+								"160M", "CWU", "F1", 1.835000, false, 150, 0.0,
+								"160M", "USB", "F6", 1.845000, false, 150, 0.0,
+								"80M", "CWL", "F1", 3.501000, false, 150, 0.0,
+								"80M", "LSB", "F6", 3.751000, false, 150, 0.0,
+								"80M", "LSB", "F6", 3.850000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.330500, false, 150, 0.0, 
+								"60M", "USB", "F6", 5.346500, false, 150, 0.0,
+								"60M", "USB", "F6", 5.357000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.371500, false, 150, 0.0,                             
+								"60M", "USB", "F6", 5.403500, false, 150, 0.0,
+								"40M", "CWL", "F1", 7.001000, false, 150, 0.0,
+								"40M", "LSB", "F6", 7.152000, false, 150, 0.0,
+								"40M", "LSB", "F6", 7.255000, false, 150, 0.0, 
+								"30M", "CWU", "F1", 10.120000, false, 150, 0.0,
+								"30M", "CWU", "F1", 10.130000, false, 150, 0.0,
+								"30M", "CWU", "F5", 10.140000, false, 150, 0.0,
+								"20M", "CWU", "F1", 14.010000, false, 150, 0.0,
+								"20M", "USB", "F6", 14.230000, false, 150, 0.0,
+								"20M", "USB", "F6", 14.336000, false, 150, 0.0,
+								"17M", "CWU", "F1", 18.090000, false, 150, 0.0,
+								"17M", "USB", "F6", 18.125000, false, 150, 0.0,
+								"17M", "USB", "F6", 18.140000, false, 150, 0.0,
+								"15M", "CWU", "F1", 21.001000, false, 150, 0.0,
+								"15M", "USB", "F6", 21.255000, false, 150, 0.0,
+								"15M", "USB", "F6", 21.300000, false, 150, 0.0,
+								"12M", "CWU", "F1", 24.895000, false, 150, 0.0,
+								"12M", "USB", "F6", 24.900000, false, 150, 0.0,
+								"12M", "USB", "F6", 24.910000, false, 150, 0.0,
+								"10M", "CWU", "F1", 28.010000, false, 150, 0.0,
+								"10M", "USB", "F6", 28.300000, false, 150, 0.0,
+								"10M", "USB", "F6", 28.400000, false, 150, 0.0,
+								"6M", "CWU", "F1", 50.010000, false, 150, 0.0,
+								"6M", "USB", "F6", 50.125000, false, 150, 0.0,
+								"6M", "USB", "F6", 50.200000, false, 150, 0.0,
+								"2M", "CWU", "F1", 144.010000, false, 150, 0.0,
+								"2M", "USB", "F6", 144.200000, false, 150, 0.0,
+								"2M", "USB", "F6", 144.210000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 2.500000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 5.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 10.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 15.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 20.000000, false, 150, 0.0,
+								"GEN", "SAM", "F5", 13.845000, false, 150, 0.0,
+								"GEN", "SAM", "F5", 9.550000, false, 150, 0.0,
+                                "GEN", "SAM", "F5", 5.975000, false, 150, 0.0,
+                                "GEN", "SAM", "F5", 3.250000, false, 150, 0.0,
+								"GEN", "SAM", "F4", 0.590000, false, 150, 0.0,
 			};
 
-            for (int i = 0; i < data.Length / 4; i++)
+            for (int i = 0; i < data.Length / 7; i++)
             {
                 DataRow dr = ds.Tables["BandStack"].NewRow();
-                dr["BandName"] = (string)data[i * 4 + 0];
-                dr["Mode"] = (string)data[i * 4 + 1];
-                dr["Filter"] = (string)data[i * 4 + 2];
-                dr["Freq"] = ((double)data[i * 4 + 3]).ToString("f6");
+                dr["BandName"] = (string)data[i * 7 + 0];
+                dr["Mode"] = (string)data[i * 7 + 1];
+                dr["Filter"] = (string)data[i * 7 + 2];
+                dr["Freq"] = ((double)data[i * 7 + 3]).ToString("f6");
+                dr["CTUN"] = ((bool)data[i * 7 + 4]);
+                dr["ZoomFactor"] = ((int)data[i * 7 + 5]).ToString("f6");
+                dr["CenterFreq"] = ((double)data[i * 7 + 6]).ToString("f6");
                 ds.Tables["BandStack"].Rows.Add(dr);
             }
         }
@@ -2317,61 +2323,64 @@ namespace PowerSDR
             DataTable t = ds.Tables["BandStack"];
 
             object[] data = {
-								"160M", "CWL", "F1", 1.820000,
-								"160M", "DIGU", "F1", 1.838000,
-								"160M", "USB", "F6", 1.843000,
-								"80M", "CWL", "F1", 3.510000,
-								"80M", "DIGU", "F1", 3.590000,
-								"80M", "LSB", "F6", 3.750000,
-                                "60M", "USB", "F6", 5.250000,
-								"60M", "USB", "F6", 5.325000,
-								"60M", "USB", "F6", 5.400000,
-                                "40M", "CWL", "F1", 7.010000,
-								"40M", "DIGU", "F1", 7.045000,
-								"40M", "LSB", "F6", 7.10000,
-								"30M", "CWU", "F1", 10.110000,
-								"30M", "CWU", "F1", 10.120000,
-								"30M", "DIGU", "F1", 10.140000,
-								"20M", "CWU", "F1", 14.010000,
-								"20M", "DIGU", "F1", 14.085000,
-								"20M", "USB", "F6", 14.225000,
-								"17M", "CWU", "F1", 18.078000,
-								"17M", "DIGU", "F1", 18.100000,
-								"17M", "USB", "F6", 18.140000,
-								"15M", "CWU", "F1", 21.010000,
-								"15M", "DIGU", "F1", 21.090000,
-								"15M", "USB", "F6", 21.300000,
-								"12M", "CWU", "F1", 24.900000,
-								"12M", "DIGU", "F1", 24.920000,
-								"12M", "USB", "F6", 24.940000,
-								"10M", "CWU", "F1", 28.010000,
-								"10M", "DIGU", "F1", 28.120000,
-								"10M", "USB", "F6", 28.400000,
-								"6M", "CWU", "F1", 50.090000,
-								"6M", "USB", "F6", 50.150000,
-								"6M", "DIGU", "F1", 50.250000,
-								"2M", "CWU", "F1", 144.050000,
-								"2M", "DIGU", "F1", 144.138000,
-								"2M", "USB", "F6", 144.300000,
-								"WWV", "SAM", "F7", 2.500000,
-								"WWV", "SAM", "F7", 5.000000,
-								"WWV", "SAM", "F7", 10.000000,
-								"WWV", "SAM", "F7", 15.000000,
-								"WWV", "SAM", "F7", 20.000000,
-								"GEN", "SAM", "F6", 13.845000,
-								"GEN", "SAM", "F7", 5.975000,
-								"GEN", "SAM", "F7", 9.550000,
-                                "GEN", "SAM", "F7", 3.850000,
-                                "GEN", "SAM", "F8", 0.590000,
+								"160M", "CWL", "F1", 1.820000, false, 150, 0.0,
+								"160M", "DIGU", "F1", 1.838000, false, 150, 0.0,
+								"160M", "USB", "F6", 1.843000, false, 150, 0.0,
+								"80M", "CWL", "F1", 3.510000, false, 150, 0.0,
+								"80M", "DIGU", "F1", 3.590000, false, 150, 0.0,
+								"80M", "LSB", "F6", 3.750000, false, 150, 0.0,
+                                "60M", "USB", "F6", 5.250000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.325000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.400000, false, 150, 0.0,
+                                "40M", "CWL", "F1", 7.010000, false, 150, 0.0,
+								"40M", "DIGU", "F1", 7.045000, false, 150, 0.0,
+								"40M", "LSB", "F6", 7.10000, false, 150, 0.0,
+								"30M", "CWU", "F1", 10.110000, false, 150, 0.0,
+								"30M", "CWU", "F1", 10.120000, false, 150, 0.0,
+								"30M", "DIGU", "F1", 10.140000, false, 150, 0.0,
+								"20M", "CWU", "F1", 14.010000, false, 150, 0.0,
+								"20M", "DIGU", "F1", 14.085000, false, 150, 0.0,
+								"20M", "USB", "F6", 14.225000, false, 150, 0.0,
+								"17M", "CWU", "F1", 18.078000, false, 150, 0.0,
+								"17M", "DIGU", "F1", 18.100000, false, 150, 0.0,
+								"17M", "USB", "F6", 18.140000, false, 150, 0.0,
+								"15M", "CWU", "F1", 21.010000, false, 150, 0.0,
+								"15M", "DIGU", "F1", 21.090000, false, 150, 0.0,
+								"15M", "USB", "F6", 21.300000, false, 150, 0.0,
+								"12M", "CWU", "F1", 24.900000, false, 150, 0.0,
+								"12M", "DIGU", "F1", 24.920000, false, 150, 0.0,
+								"12M", "USB", "F6", 24.940000, false, 150, 0.0,
+								"10M", "CWU", "F1", 28.010000, false, 150, 0.0,
+								"10M", "DIGU", "F1", 28.120000, false, 150, 0.0,
+								"10M", "USB", "F6", 28.400000, false, 150, 0.0,
+								"6M", "CWU", "F1", 50.090000, false, 150, 0.0,
+								"6M", "USB", "F6", 50.150000, false, 150, 0.0,
+								"6M", "DIGU", "F1", 50.250000, false, 150, 0.0,
+								"2M", "CWU", "F1", 144.050000, false, 150, 0.0,
+								"2M", "DIGU", "F1", 144.138000, false, 150, 0.0,
+								"2M", "USB", "F6", 144.300000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 2.500000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 5.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 10.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 15.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 20.000000, false, 150, 0.0,
+								"GEN", "SAM", "F6", 13.845000, false, 150, 0.0,
+								"GEN", "SAM", "F7", 5.975000, false, 150, 0.0,
+								"GEN", "SAM", "F7", 9.550000, false, 150, 0.0,
+                                "GEN", "SAM", "F7", 3.850000, false, 150, 0.0,
+                                "GEN", "SAM", "F8", 0.590000, false, 150, 0.0,
 			};
 
-            for (int i = 0; i < data.Length / 4; i++)
+            for (int i = 0; i < data.Length / 7; i++)
             {
                 DataRow dr = ds.Tables["BandStack"].NewRow();
-                dr["BandName"] = (string)data[i * 4 + 0];
-                dr["Mode"] = (string)data[i * 4 + 1];
-                dr["Filter"] = (string)data[i * 4 + 2];
-                dr["Freq"] = ((double)data[i * 4 + 3]).ToString("f6");
+                dr["BandName"] = (string)data[i * 7 + 0];
+                dr["Mode"] = (string)data[i * 7 + 1];
+                dr["Filter"] = (string)data[i * 7 + 2];
+                dr["Freq"] = ((double)data[i * 7 + 3]).ToString("f6");
+                dr["CTUN"] = ((bool)data[i * 7 + 4]);
+                dr["ZoomFactor"] = ((int)data[i * 7 + 5]).ToString("f6");
+                dr["CenterFreq"] = ((double)data[i * 7 + 6]).ToString("f6");
                 ds.Tables["BandStack"].Rows.Add(dr);
             }
         }
@@ -2382,63 +2391,66 @@ namespace PowerSDR
             DataTable t = ds.Tables["BandStack"];
 
             object[] data = {
-								"160M", "CWL", "F5", 1.810000,
-								"160M", "CWU", "F1", 1.835000,
-								"160M", "USB", "F6", 1.845000,
-								"80M", "CWL", "F1", 3.501000,
-								"80M", "LSB", "F6", 3.751000,
-								"80M", "LSB", "F6", 3.850000,
-								"60M", "USB", "F6", 5.330500,
-								"60M", "USB", "F6", 5.346500,
-								"60M", "USB", "F6", 5.357000,
-								"60M", "USB", "F6", 5.371500,                               
-								"60M", "USB", "F6", 5.403500,
-								"40M", "CWL", "F1", 7.001000,
-								"40M", "LSB", "F6", 7.152000,
-								"40M", "LSB", "F6", 7.255000,
-								"30M", "CWU", "F1", 10.120000,
-								"30M", "CWU", "F1", 10.130000,
-								"30M", "CWU", "F5", 10.140000,
-								"20M", "CWU", "F1", 14.010000,
-								"20M", "USB", "F6", 14.230000,
-								"20M", "USB", "F6", 14.336000,
-								"17M", "CWU", "F1", 18.090000,
-								"17M", "USB", "F6", 18.125000,
-								"17M", "USB", "F6", 18.140000,
-								"15M", "CWU", "F1", 21.001000,
-								"15M", "USB", "F6", 21.255000,
-								"15M", "USB", "F6", 21.300000,
-								"12M", "CWU", "F1", 24.895000,
-								"12M", "USB", "F6", 24.900000,
-								"12M", "USB", "F6", 24.910000,
-								"10M", "CWU", "F1", 28.010000,
-								"10M", "USB", "F6", 28.300000,
-								"10M", "USB", "F6", 28.400000,
-								"6M", "CWU", "F1", 50.010000,
-								"6M", "USB", "F6", 50.125000,
-								"6M", "USB", "F6", 50.200000,								
-								"2M", "CWU", "F1", 144.010000,
-								"2M", "USB", "F6", 144.200000,
-								"2M", "USB", "F6", 144.210000,
-								"WWV", "SAM", "F7", 2.500000,
-								"WWV", "SAM", "F7", 5.000000,
-								"WWV", "SAM", "F7", 10.000000,
-								"WWV", "SAM", "F7", 15.000000,
-								"WWV", "SAM", "F7", 20.000000,
-								"GEN", "SAM", "F5", 13.845000,
-								"GEN", "SAM", "F5", 9.550000,
-                                "GEN", "SAM", "F5", 5.975000,
-                                "GEN", "SAM", "F5", 3.250000,
-								"GEN", "SAM", "F4", 0.590000,
+								"160M", "CWL", "F5", 1.810000, false, 150, 0.0,
+								"160M", "CWU", "F1", 1.835000, false, 150, 0.0,
+								"160M", "USB", "F6", 1.845000, false, 150, 0.0,
+								"80M", "CWL", "F1", 3.501000, false, 150, 0.0,
+								"80M", "LSB", "F6", 3.751000, false, 150, 0.0,
+								"80M", "LSB", "F6", 3.850000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.330500, false, 150, 0.0,
+								"60M", "USB", "F6", 5.346500, false, 150, 0.0,
+								"60M", "USB", "F6", 5.357000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.371500, false, 150, 0.0,                              
+								"60M", "USB", "F6", 5.403500, false, 150, 0.0,
+								"40M", "CWL", "F1", 7.001000, false, 150, 0.0,
+								"40M", "LSB", "F6", 7.152000, false, 150, 0.0,
+								"40M", "LSB", "F6", 7.255000, false, 150, 0.0,
+								"30M", "CWU", "F1", 10.120000, false, 150, 0.0,
+								"30M", "CWU", "F1", 10.130000, false, 150, 0.0,
+								"30M", "CWU", "F5", 10.140000, false, 150, 0.0,
+								"20M", "CWU", "F1", 14.010000, false, 150, 0.0,
+								"20M", "USB", "F6", 14.230000, false, 150, 0.0,
+								"20M", "USB", "F6", 14.336000, false, 150, 0.0,
+								"17M", "CWU", "F1", 18.090000, false, 150, 0.0,
+								"17M", "USB", "F6", 18.125000, false, 150, 0.0,
+								"17M", "USB", "F6", 18.140000, false, 150, 0.0,
+								"15M", "CWU", "F1", 21.001000, false, 150, 0.0,
+								"15M", "USB", "F6", 21.255000, false, 150, 0.0,
+								"15M", "USB", "F6", 21.300000, false, 150, 0.0,
+								"12M", "CWU", "F1", 24.895000, false, 150, 0.0,
+								"12M", "USB", "F6", 24.900000, false, 150, 0.0,
+								"12M", "USB", "F6", 24.910000, false, 150, 0.0,
+								"10M", "CWU", "F1", 28.010000, false, 150, 0.0,
+								"10M", "USB", "F6", 28.300000, false, 150, 0.0,
+								"10M", "USB", "F6", 28.400000, false, 150, 0.0,
+								"6M", "CWU", "F1", 50.010000, false, 150, 0.0,
+								"6M", "USB", "F6", 50.125000, false, 150, 0.0,
+								"6M", "USB", "F6", 50.200000, false, 150, 0.0,								
+								"2M", "CWU", "F1", 144.010000, false, 150, 0.0,
+								"2M", "USB", "F6", 144.200000, false, 150, 0.0,
+								"2M", "USB", "F6", 144.210000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 2.500000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 5.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 10.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 15.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 20.000000, false, 150, 0.0,
+								"GEN", "SAM", "F5", 13.845000, false, 150, 0.0,
+								"GEN", "SAM", "F5", 9.550000, false, 150, 0.0,
+                                "GEN", "SAM", "F5", 5.975000, false, 150, 0.0,
+                                "GEN", "SAM", "F5", 3.250000, false, 150, 0.0,
+								"GEN", "SAM", "F4", 0.590000, false, 150, 0.0,
 			};
 
-            for (int i = 0; i < data.Length / 4; i++)
+            for (int i = 0; i < data.Length / 7; i++)
             {
                 DataRow dr = ds.Tables["BandStack"].NewRow();
-                dr["BandName"] = (string)data[i * 4 + 0];
-                dr["Mode"] = (string)data[i * 4 + 1];
-                dr["Filter"] = (string)data[i * 4 + 2];
-                dr["Freq"] = ((double)data[i * 4 + 3]).ToString("f6");
+                dr["BandName"] = (string)data[i * 7 + 0];
+                dr["Mode"] = (string)data[i * 7 + 1];
+                dr["Filter"] = (string)data[i * 7 + 2];
+                dr["Freq"] = ((double)data[i * 7 + 3]).ToString("f6");
+                dr["CTUN"] = ((bool)data[i * 7 + 4]);
+                dr["ZoomFactor"] = ((int)data[i * 7 + 5]).ToString("f6");
+                dr["CenterFreq"] = ((double)data[i * 7 + 6]).ToString("f6");
                 ds.Tables["BandStack"].Rows.Add(dr);
             }
         }
@@ -2449,69 +2461,72 @@ namespace PowerSDR
             DataTable t = ds.Tables["BandStack"];
 
             object[] data = {
-								"160M", "CWL", "F1", 1.820000,
-								"160M", "DIGU", "F1", 1.838000,
-								"160M", "USB", "F6", 1.843000,
-								"80M", "CWL", "F1", 3.510000,
-								"80M", "DIGU", "F1", 3.590000,
-								"80M", "LSB", "F6", 3.750000,
-                                "60M", "USB", "F6", 5.258500,
-								"60M", "USB", "F6", 5.276000,
-								"60M", "USB", "F6", 5.288500,
-								"60M", "USB", "F6", 5.298000,
-								"60M", "USB", "F6", 5.313000,
-								"60M", "USB", "F6", 5.333000,
-								"60M", "USB", "F6", 5.354000,
-								"60M", "USB", "F6", 5.362000,
-								"60M", "USB", "F6", 5.378000,
-								"60M", "USB", "F6", 5.395000,
-								"60M", "USB", "F6", 5.403500,
-                                "40M", "CWL", "F1", 7.010000,
-								"40M", "DIGU", "F1", 7.045000,
-								"40M", "LSB", "F6", 7.10000,
-								"30M", "CWU", "F1", 10.110000,
-								"30M", "CWU", "F1", 10.120000,
-								"30M", "DIGU", "F1", 10.140000,
-								"20M", "CWU", "F1", 14.010000,
-								"20M", "DIGU", "F1", 14.085000,
-								"20M", "USB", "F6", 14.225000,
-								"17M", "CWU", "F1", 18.078000,
-								"17M", "DIGU", "F1", 18.100000,
-								"17M", "USB", "F6", 18.140000,
-								"15M", "CWU", "F1", 21.010000,
-								"15M", "DIGU", "F1", 21.090000,
-								"15M", "USB", "F6", 21.300000,
-								"12M", "CWU", "F1", 24.900000,
-								"12M", "DIGU", "F1", 24.920000,
-								"12M", "USB", "F6", 24.940000,
-								"10M", "CWU", "F1", 28.010000,
-								"10M", "DIGU", "F1", 28.120000,
-								"10M", "USB", "F6", 28.400000,
-								"6M", "CWU", "F1", 50.090000,
-								"6M", "USB", "F6", 50.150000,
-								"6M", "DIGU", "F1", 50.250000,
-								"2M", "CWU", "F1", 144.050000,
-								"2M", "DIGU", "F1", 144.138000,
-								"2M", "USB", "F6", 144.300000,
-								"WWV", "SAM", "F7", 2.500000,
-								"WWV", "SAM", "F7", 5.000000,
-								"WWV", "SAM", "F7", 10.000000,
-								"WWV", "SAM", "F7", 15.000000,
-								"WWV", "SAM", "F7", 20.000000,
-								"GEN", "SAM", "F6", 13.845000,
-								"GEN", "SAM", "F7", 5.975000,
-								"GEN", "SAM", "F7", 9.550000,
-                                "GEN", "SAM", "F7", 3.850000,
-								"GEN", "SAM", "F8", 0.590000,
+								"160M", "CWL", "F1", 1.820000, false, 150, 0.0,
+								"160M", "DIGU", "F1", 1.838000, false, 150, 0.0,
+								"160M", "USB", "F6", 1.843000, false, 150, 0.0,
+								"80M", "CWL", "F1", 3.510000, false, 150, 0.0,
+								"80M", "DIGU", "F1", 3.590000, false, 150, 0.0,
+								"80M", "LSB", "F6", 3.750000, false, 150, 0.0,
+                                "60M", "USB", "F6", 5.258500, false, 150, 0.0,
+								"60M", "USB", "F6", 5.276000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.288500, false, 150, 0.0,
+								"60M", "USB", "F6", 5.298000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.313000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.333000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.354000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.362000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.378000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.395000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.403500, false, 150, 0.0,
+                                "40M", "CWL", "F1", 7.010000, false, 150, 0.0,
+								"40M", "DIGU", "F1", 7.045000, false, 150, 0.0,
+								"40M", "LSB", "F6", 7.10000, false, 150, 0.0,
+								"30M", "CWU", "F1", 10.110000, false, 150, 0.0,
+								"30M", "CWU", "F1", 10.120000, false, 150, 0.0,
+								"30M", "DIGU", "F1", 10.140000, false, 150, 0.0,
+								"20M", "CWU", "F1", 14.010000, false, 150, 0.0,
+								"20M", "DIGU", "F1", 14.085000, false, 150, 0.0,
+								"20M", "USB", "F6", 14.225000, false, 150, 0.0,
+								"17M", "CWU", "F1", 18.078000, false, 150, 0.0,
+								"17M", "DIGU", "F1", 18.100000, false, 150, 0.0,
+								"17M", "USB", "F6", 18.140000, false, 150, 0.0,
+								"15M", "CWU", "F1", 21.010000, false, 150, 0.0,
+								"15M", "DIGU", "F1", 21.090000, false, 150, 0.0,
+								"15M", "USB", "F6", 21.300000, false, 150, 0.0,
+								"12M", "CWU", "F1", 24.900000, false, 150, 0.0,
+								"12M", "DIGU", "F1", 24.920000, false, 150, 0.0,
+								"12M", "USB", "F6", 24.940000, false, 150, 0.0,
+								"10M", "CWU", "F1", 28.010000, false, 150, 0.0,
+								"10M", "DIGU", "F1", 28.120000, false, 150, 0.0,
+								"10M", "USB", "F6", 28.400000, false, 150, 0.0,
+								"6M", "CWU", "F1", 50.090000, false, 150, 0.0,
+								"6M", "USB", "F6", 50.150000, false, 150, 0.0,
+								"6M", "DIGU", "F1", 50.250000, false, 150, 0.0,
+								"2M", "CWU", "F1", 144.050000, false, 150, 0.0,
+								"2M", "DIGU", "F1", 144.138000, false, 150, 0.0,
+								"2M", "USB", "F6", 144.300000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 2.500000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 5.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 10.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 15.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 20.000000, false, 150, 0.0,
+								"GEN", "SAM", "F6", 13.845000, false, 150, 0.0,
+								"GEN", "SAM", "F7", 5.975000, false, 150, 0.0,
+								"GEN", "SAM", "F7", 9.550000, false, 150, 0.0,
+                                "GEN", "SAM", "F7", 3.850000, false, 150, 0.0,
+								"GEN", "SAM", "F8", 0.590000, false, 150, 0.0,
 			};
 
-            for (int i = 0; i < data.Length / 4; i++)
+            for (int i = 0; i < data.Length / 7; i++)
             {
                 DataRow dr = ds.Tables["BandStack"].NewRow();
-                dr["BandName"] = (string)data[i * 4 + 0];
-                dr["Mode"] = (string)data[i * 4 + 1];
-                dr["Filter"] = (string)data[i * 4 + 2];
-                dr["Freq"] = ((double)data[i * 4 + 3]).ToString("f6");
+                dr["BandName"] = (string)data[i * 7 + 0];
+                dr["Mode"] = (string)data[i * 7 + 1];
+                dr["Filter"] = (string)data[i * 7 + 2];
+                dr["Freq"] = ((double)data[i * 7 + 3]).ToString("f6");
+                dr["CTUN"] = ((bool)data[i * 7 + 4]);
+                dr["ZoomFactor"] = ((int)data[i * 7 + 5]).ToString("f6");
+                dr["CenterFreq"] = ((double)data[i * 7 + 6]).ToString("f6");
                 ds.Tables["BandStack"].Rows.Add(dr);
             }
         }
@@ -2522,65 +2537,68 @@ namespace PowerSDR
             DataTable t = ds.Tables["BandStack"];
 
             object[] data = {
-          "160M", "CWL", "F1", 1.820000, 
-		  "160M", "DIGU", "F1", 1.838000, 
-		  "160M", "USB", "F6", 1.843000, 
-		  "80M", "CWL", "F1", 3.510000, 
-		  "80M", "DIGU","F1", 3.590000, 
-		  "80M", "LSB", "F6", 3.750000, 
-		  "60M", "USB", "F6", 5.310000, 
-		  "60M", "USB", "F6", 5.320000, 
-		  "60M", "USB", "F6", 5.380000,
-          "60M", "USB", "F6", 5.390000, 
-		  "40M", "CWL", "F1", 7.010000, 
-		  "40M", "DIGU", "F1", 7.045000, 
-		  "40M", "LSB", "F6", 7.100000, 
-		  "30M", "CWU", "F1", 10.110000, 
-		  "30M", "CWU", "F1", 10.120000, 
-		  "30M", "DIGU", "F1",10.140000, 
-		  "20M", "CWU", "F1", 14.010000, 
-		  "20M", "DIGU", "F1", 14.085000,
-          "20M", "USB", "F6", 14.225000, 
-		  "17M", "CWU", "F1", 18.078000, 
-		  "17M", "DIGU", "F1", 18.100000, 
-		  "17M", "USB", "F6", 18.140000, 
-		  "15M", "CWU", "F1", 21.010000, 
-		  "15M", "DIGU", "F1", 21.090000, 
-		  "15M", "USB", "F6", 21.300000, 
-		  "12M", "CWU", "F1", 24.900000, 
-		  "12M", "DIGU", "F1", 24.920000,
-          "12M", "USB", "F6", 24.940000, 
-		  "10M", "CWU", "F1", 28.010000, 
-		  "10M", "DIGU", "F1", 28.120000, 
-		  "10M", "USB", "F6", 28.400000, 
-		  "6M", "CWU","F1", 50.090000, 
-		  "6M", "USB", "F6", 50.150000, 
-		  "6M", "DIGU", "F1", 50.250000, 
-		  "2M", "CWU", "F1", 144.050000, 
-		  "2M", "DIGU", "F1", 144.138000,
-          "2M", "USB", "F6", 144.300000, 
-		  "WWV", "SAM", "F5", 2.500000, 
-		  "WWV", "SAM", "F5", 5.000000, 
-		  "WWV", "SAM", "F5", 10.000000, 
-		  "WWV", "SAM","F5", 15.000000, 
-		  "WWV", "SAM", "F5", 20.000000, 
-		  "WWV", "USB", "F6", 3.330000, 
-		  "WWV", "USB", "F6", 7.850000, 
-		  "WWV", "USB", "F6", 14.670000,
-          "GEN", "SAM", "F6", 13.845000, 
-		  "GEN", "SAM", "F7", 5.975000, 
-		  "GEN", "SAM", "F7", 9.550000, 
-		  "GEN", "SAM", "F7", 3.850000, 
-		  "GEN", "SAM", "F8", 0.590000,
+          "160M", "CWL", "F1", 1.820000, false, 150, 0.0,
+		  "160M", "DIGU", "F1", 1.838000, false, 150, 0.0,
+		  "160M", "USB", "F6", 1.843000, false, 150, 0.0,
+		  "80M", "CWL", "F1", 3.510000, false, 150, 0.0,
+		  "80M", "DIGU","F1", 3.590000, false, 150, 0.0,
+		  "80M", "LSB", "F6", 3.750000, false, 150, 0.0,
+		  "60M", "USB", "F6", 5.310000, false, 150, 0.0,
+		  "60M", "USB", "F6", 5.320000, false, 150, 0.0,
+		  "60M", "USB", "F6", 5.380000, false, 150, 0.0,
+          "60M", "USB", "F6", 5.390000, false, 150, 0.0,
+		  "40M", "CWL", "F1", 7.010000, false, 150, 0.0,
+		  "40M", "DIGU", "F1", 7.045000, false, 150, 0.0,
+		  "40M", "LSB", "F6", 7.100000, false, 150, 0.0,
+		  "30M", "CWU", "F1", 10.110000, false, 150, 0.0,
+		  "30M", "CWU", "F1", 10.120000, false, 150, 0.0,
+		  "30M", "DIGU", "F1",10.140000, false, 150, 0.0,
+		  "20M", "CWU", "F1", 14.010000, false, 150, 0.0,
+		  "20M", "DIGU", "F1", 14.085000, false, 150, 0.0,
+          "20M", "USB", "F6", 14.225000, false, 150, 0.0,
+		  "17M", "CWU", "F1", 18.078000, false, 150, 0.0,
+		  "17M", "DIGU", "F1", 18.100000, false, 150, 0.0,
+		  "17M", "USB", "F6", 18.140000, false, 150, 0.0,
+		  "15M", "CWU", "F1", 21.010000, false, 150, 0.0,
+		  "15M", "DIGU", "F1", 21.090000, false, 150, 0.0,
+		  "15M", "USB", "F6", 21.300000, false, 150, 0.0,
+		  "12M", "CWU", "F1", 24.900000, false, 150, 0.0,
+		  "12M", "DIGU", "F1", 24.920000, false, 150, 0.0,
+          "12M", "USB", "F6", 24.940000, false, 150, 0.0,
+		  "10M", "CWU", "F1", 28.010000, false, 150, 0.0,
+		  "10M", "DIGU", "F1", 28.120000, false, 150, 0.0,
+		  "10M", "USB", "F6", 28.400000, false, 150, 0.0,
+		  "6M", "CWU","F1", 50.090000, false, 150, 0.0,
+		  "6M", "USB", "F6", 50.150000, false, 150, 0.0,
+		  "6M", "DIGU", "F1", 50.250000, false, 150, 0.0,
+		  "2M", "CWU", "F1", 144.050000, false, 150, 0.0,
+		  "2M", "DIGU", "F1", 144.138000, false, 150, 0.0,
+          "2M", "USB", "F6", 144.300000, false, 150, 0.0,
+		  "WWV", "SAM", "F5", 2.500000, false, 150, 0.0,
+		  "WWV", "SAM", "F5", 5.000000, false, 150, 0.0,
+		  "WWV", "SAM", "F5", 10.000000, false, 150, 0.0,
+		  "WWV", "SAM","F5", 15.000000, false, 150, 0.0,
+		  "WWV", "SAM", "F5", 20.000000, false, 150, 0.0,
+		  "WWV", "USB", "F6", 3.330000, false, 150, 0.0,
+		  "WWV", "USB", "F6", 7.850000, false, 150, 0.0,
+		  "WWV", "USB", "F6", 14.670000, false, 150, 0.0,
+          "GEN", "SAM", "F6", 13.845000, false, 150, 0.0,
+		  "GEN", "SAM", "F7", 5.975000, false, 150, 0.0,
+		  "GEN", "SAM", "F7", 9.550000, false, 150, 0.0,
+		  "GEN", "SAM", "F7", 3.850000, false, 150, 0.0,
+		  "GEN", "SAM", "F8", 0.590000, false, 150, 0.0,
 			};
 
-            for (int i = 0; i < data.Length / 4; i++)
+            for (int i = 0; i < data.Length / 7; i++)
             {
                 DataRow dr = ds.Tables["BandStack"].NewRow();
-                dr["BandName"] = (string)data[i * 4 + 0];
-                dr["Mode"] = (string)data[i * 4 + 1];
-                dr["Filter"] = (string)data[i * 4 + 2];
-                dr["Freq"] = ((double)data[i * 4 + 3]).ToString("f6");
+                dr["BandName"] = (string)data[i * 7 + 0];
+                dr["Mode"] = (string)data[i * 7 + 1];
+                dr["Filter"] = (string)data[i * 7 + 2];
+                dr["Freq"] = ((double)data[i * 7 + 3]).ToString("f6");
+                dr["CTUN"] = ((bool)data[i * 7 + 4]);
+                dr["ZoomFactor"] = ((int)data[i * 7 + 5]).ToString("f6");
+                dr["CenterFreq"] = ((double)data[i * 7 + 6]).ToString("f6");
                 ds.Tables["BandStack"].Rows.Add(dr);
             }
         }
@@ -4728,7 +4746,7 @@ namespace PowerSDR
             return retvals;
         }
 
-        public static bool GetBandStack(string band, int index, out string mode, out string filter, out double freq)
+        public static bool GetBandStack(string band, int index, out string mode, out string filter, out double freq, out bool CTUN, out int ZoomFactor, out double CenterFreq)
         {
             DataRow[] rows = ds.Tables["BandStack"].Select("'" + band + "' = BandName");
 
@@ -4739,6 +4757,9 @@ namespace PowerSDR
                 mode = "";
                 filter = "";
                 freq = 0.0f;
+                CTUN = false;
+                ZoomFactor = 150;
+                CenterFreq = 0.0f; 
                 return false;
             }
 
@@ -4747,20 +4768,26 @@ namespace PowerSDR
             mode = (string)((DataRow)rows[index])["Mode"];
             filter = (string)((DataRow)rows[index])["Filter"];
             freq = (double)((DataRow)rows[index])["Freq"];
+            CTUN = (bool)((DataRow)rows[index])["CTUN"];
+            ZoomFactor = (int)((double)((DataRow)rows[index])["ZoomFactor"]);
+            CenterFreq = (double)((DataRow)rows[index])["CenterFreq"];
             return true;
         }
 
-        public static void AddBandStack(string band, string mode, string filter, double freq)
+        public static void AddBandStack(string band, string mode, string filter, double freq, bool CTUN, int ZoomFactor, double CenterFreq)
         {
             DataRow dr = ds.Tables["BandStack"].NewRow();
             dr["BandName"] = band;
             dr["Mode"] = mode;
             dr["Filter"] = filter;
             dr["Freq"] = freq;
+            dr["CTUN"] = CTUN;
+            dr["ZoomFactor"] = ZoomFactor;
+            dr["CenterFreq"] = CenterFreq;
             ds.Tables["BandStack"].Rows.Add(dr);
         }
 
-        public static void SaveBandStack(string band, int index, string mode, string filter, double freq)
+        public static void SaveBandStack(string band, int index, string mode, string filter, double freq, bool CTUN, int ZoomFactor, double CenterFreq)
         {
             DataRow[] rows = ds.Tables["BandStack"].Select("'" + band + "' = BandName");
 
@@ -4773,6 +4800,9 @@ namespace PowerSDR
                 {
                     datarow["Filter"] = filter;
                     datarow["Mode"] = mode;
+                    datarow["CTUN"] = CTUN;
+                    datarow["ZoomFactor"] = ZoomFactor;
+                    datarow["CenterFreq"] = CenterFreq;
                     return;
                 }
             }
@@ -4783,6 +4813,10 @@ namespace PowerSDR
             d["Mode"] = mode;
             d["Filter"] = filter;
             d["Freq"] = freq;
+            d["CTUN"] = CTUN;
+            d["ZoomFactor"] = ZoomFactor;
+            d["CenterFreq"] = CenterFreq;
+
         }
 
         // This removes the notches from the state database so we can rewrite all of them without
@@ -4799,6 +4833,19 @@ namespace PowerSDR
                 foreach (var row in rows)
                     row.Delete();
             }
+            //rows = ds.Tables["State"].Select("Key = 'udRX1StepAttData'");
+            //if (rows != null)
+            //{
+            //    foreach (var row in rows)
+            //        row.Delete();
+            //}
+            //rows = ds.Tables["State"].Select("Key ='udRX2StepAttData'");
+            //if (rows != null)
+            //{
+            //    foreach (var row in rows)
+            //        row.Delete();
+            //}
+
         }
 
         public static void SaveVars(string tableName, ref ArrayList list)

@@ -54,6 +54,47 @@ void calc_sweep (GEN a)
 	a->sweep.dphsmax = TWOPI * a->sweep.f2 / a->rate;
 }
 
+void calc_sawtooth (GEN a)
+{
+	a->saw.period = 1.0 / a->saw.f;
+	a->saw.delta = 1.0 / a->rate;
+	a->saw.t = 0.0;
+}
+
+void calc_triangle (GEN a)
+{
+	a->tri.period = 1.0 / a->tri.f;
+	a->tri.half = 0.5 * a->tri.period;
+	a->tri.delta = 1.0 / a->rate;
+	a->tri.t = 0.0;
+	a->tri.t1 = 0.0;
+}
+
+void calc_pulse (GEN a)
+{
+	int i;
+	double delta, theta;
+	a->pulse.pperiod = 1.0 / a->pulse.pf;
+	a->pulse.tphs = 0.0;
+	a->pulse.tdelta = TWOPI * a->pulse.tf / a->rate;
+	a->pulse.tcosdelta = cos (a->pulse.tdelta);
+	a->pulse.tsindelta = sin (a->pulse.tdelta);
+	a->pulse.pntrans = (int)(a->pulse.ptranstime * a->rate);
+	a->pulse.pnon = (int)(a->pulse.pdutycycle * a->pulse.pperiod * a->rate);
+	a->pulse.pnoff = (int)(a->pulse.pperiod * a->rate) - a->pulse.pnon - 2 * a->pulse.pntrans;
+	if (a->pulse.pnoff < 0) a->pulse.pnoff = 0;
+	a->pulse.pcount = a->pulse.pnoff;
+	a->pulse.state = 0;
+	a->pulse.ctrans   = (double *) malloc0 ((a->pulse.pntrans + 1) * sizeof (double));
+	delta = PI / (double)a->pulse.pntrans;
+	theta = 0.0;
+	for (i = 0; i <= a->pulse.pntrans; i++)
+	{
+		a->pulse.ctrans[i] = 0.5 * (1.0 - cos (theta));
+		theta += delta;
+	}
+}
+
 GEN create_gen (int run, int size, double* in, double* out, int rate, int mode)
 {
 	GEN a = (GEN) malloc0 (sizeof (gen));
@@ -82,6 +123,21 @@ GEN create_gen (int run, int size, double* in, double* out, int rate, int mode)
 	a->sweep.f2 = +20000.0;
 	a->sweep.sweeprate = +4000.0;
 	calc_sweep (a);
+	// sawtooth
+	a->saw.mag = 1.0;
+	a->saw.f = 500.0;
+	calc_sawtooth (a);
+	// triangle
+	a->tri.mag = 1.0;
+	a->tri.f = 500.0;
+	calc_triangle (a);
+	// pulse
+	a->pulse.mag = 1.0;
+	a->pulse.pf = 0.25;
+	a->pulse.pdutycycle = 0.25;
+	a->pulse.ptranstime = 0.002;
+	a->pulse.tf = 1000.0;
+	calc_pulse (a);
 	return a;
 }
 
@@ -93,8 +149,16 @@ void destroy_gen (GEN a)
 
 void flush_gen (GEN a)
 {
-
+	a->pulse.state = 0;
 }
+
+enum pstate 
+{
+	OFF,
+	UP,
+	ON,
+	DOWN
+};
 
 void xgen (GEN a)
 {
@@ -185,6 +249,89 @@ void xgen (GEN a)
 				}
 				break;
 			}
+		case 4:  // sawtooth (audio only)
+			{
+				int i;
+				for (i = 0; i < a->size; i++)
+				{
+					if (a->saw.t > a->saw.period) a->saw.t -= a->saw.period;
+					a->out[2 * i + 0] = a->saw.mag * (a->saw.t * a->saw.f - 1.0);
+					a->out[2 * i + 1] = 0.0;
+					a->saw.t += a->saw.delta;
+				}
+			}
+			break;
+		case 5:  // triangle (audio only)
+			{
+				int i;
+				for (i = 0; i < a->size; i++)
+				{
+					if (a->tri.t > a->tri.period) a->tri.t1 = a->tri.t -= a->tri.period;
+					if (a->tri.t > a->tri.half)	a->tri.t1 -= a->tri.delta;
+					else						a->tri.t1 += a->tri.delta;
+					a->out[2 * i + 0] = a->tri.mag * (4.0 * a->tri.t1 * a->tri.f - 1.0);
+					a->out[2 * i + 1] = 0.0;
+					a->tri.t += a->tri.delta;
+				}
+			}
+			break;
+		case 6:  // pulse (audio only)
+			{
+				int i;
+				double t1, t2;
+				double cosphase = cos (a->pulse.tphs);
+				double sinphase = sin (a->pulse.tphs);
+				for (i = 0; i < a->size; i++)
+				{
+					if (a->pulse.pnoff != 0)
+						switch (a->pulse.state)
+						{
+						case OFF:
+							a->out[2 * i + 0] = 0.0;
+							if (--a->pulse.pcount == 0)
+							{
+								a->pulse.state = UP;
+								a->pulse.pcount = a->pulse.pntrans;
+							}
+							break;
+						case UP:
+							a->out[2 * i + 0] = a->pulse.mag * cosphase * a->pulse.ctrans[a->pulse.pntrans - a->pulse.pcount];
+							if (--a->pulse.pcount == 0)
+							{
+								a->pulse.state = ON;
+								a->pulse.pcount = a->pulse.pnon;
+							}
+							break;
+						case ON:
+							a->out[2 * i + 0] = a->pulse.mag * cosphase;
+							if (--a->pulse.pcount == 0)
+							{
+								a->pulse.state = DOWN;
+								a->pulse.pcount = a->pulse.pntrans;
+							}
+							break;
+						case DOWN:
+							a->out[2 * i + 0] = a->pulse.mag * cosphase * a->pulse.ctrans[a->pulse.pcount];
+							if (--a->pulse.pcount == 0)
+							{
+								a->pulse.state = OFF;
+								a->pulse.pcount = a->pulse.pnoff;
+							}
+							break;
+						}
+					else
+						a->out[2 * i + 0] = 0.0;
+					a->out[2 * i + 1] = 0.0;
+					t1 = cosphase;
+					t2 = sinphase;
+					cosphase = t1 * a->pulse.tcosdelta - t2 * a->pulse.tsindelta;
+					sinphase = t1 * a->pulse.tsindelta + t2 * a->pulse.tcosdelta;
+					a->pulse.tphs += a->pulse.tdelta;
+					if (a->pulse.tphs >= TWOPI) a->pulse.tphs -= TWOPI;
+					if (a->pulse.tphs <   0.0 ) a->pulse.tphs += TWOPI;
+				}
+			}
+			break;
 		default:	// silence
 			{
 				memset (a->out, 0, a->size * sizeof (complex));
@@ -347,6 +494,84 @@ void SetTXAPreGenSweepRate (int channel, double rate)
 	EnterCriticalSection (&ch[channel].csDSP);
 	txa[channel].gen0.p->sweep.sweeprate = rate;
 	calc_sweep (txa[channel].gen0.p);
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetTXAPreGenSawtoothMag (int channel, double mag)
+{
+	EnterCriticalSection (&ch[channel].csDSP);
+	txa[channel].gen0.p->saw.mag = mag;
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetTXAPreGenSawtoothFreq (int channel, double freq)
+{
+	EnterCriticalSection (&ch[channel].csDSP);
+	txa[channel].gen0.p->saw.f = freq;
+	calc_sawtooth (txa[channel].gen0.p);
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetTXAPreGenTriangleMag (int channel, double mag)
+{
+	EnterCriticalSection (&ch[channel].csDSP);
+	txa[channel].gen0.p->tri.mag = mag;
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetTXAPreGenTriangleFreq (int channel, double freq)
+{
+	EnterCriticalSection (&ch[channel].csDSP);
+	txa[channel].gen0.p->tri.f = freq;
+	calc_triangle (txa[channel].gen0.p);
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetTXAPreGenPulseMag (int channel, double mag)
+{
+	EnterCriticalSection (&ch[channel].csDSP);
+	txa[channel].gen0.p->pulse.mag = mag;
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetTXAPreGenPulseFreq (int channel, double freq)
+{
+	EnterCriticalSection (&ch[channel].csDSP);
+	txa[channel].gen0.p->pulse.pf = freq;
+	calc_pulse (txa[channel].gen0.p);
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetTXAPreGenPulseDutyCycle (int channel, double dc)
+{
+	EnterCriticalSection (&ch[channel].csDSP);
+	txa[channel].gen0.p->pulse.pdutycycle = dc;
+	calc_pulse (txa[channel].gen0.p);
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetTXAPreGenPulseToneFreq (int channel, double freq)
+{
+	EnterCriticalSection (&ch[channel].csDSP);
+	txa[channel].gen0.p->pulse.tf = freq;
+	calc_pulse (txa[channel].gen0.p);
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetTXAPreGenPulseTransition (int channel, double transtime)
+{
+	EnterCriticalSection (&ch[channel].csDSP);
+	txa[channel].gen0.p->pulse.ptranstime = transtime;
+	calc_pulse (txa[channel].gen0.p);
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
 

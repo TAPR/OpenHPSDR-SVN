@@ -65,9 +65,13 @@ typedef struct _fmsq
 	double unmute_thresh;
 	double min_tail;
 	double max_tail;
+	int ready;
+	double ramp;
+	double rstep;
+	double tdelay;
 } fmsq, *FMSQ;
 
-extern FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trigger, int rate, double fc, double pllpole, double avtau, double longtau, double tup, double tdown, double tail_thresh, double unmute_thresh, double min_tail, double max_tail);
+extern FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trigger, int rate, double fc, double pllpole, double tdelay, double avtau, double longtau, double tup, double tdown, double tail_thresh, double unmute_thresh, double min_tail, double max_tail);
 
 extern void destroy_fmsq (FMSQ a);
 

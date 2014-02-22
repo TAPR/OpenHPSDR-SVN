@@ -39,7 +39,8 @@ void create_txa (int channel)
 		txa[channel].inbuff,						// pointer to input buffer
 		txa[channel].midbuff,						// pointer to output buffer
 		ch[channel].in_rate,						// input sample rate
-		ch[channel].dsp_rate);						// output sample rate
+		ch[channel].dsp_rate, 						// output sample rate
+		1.0);										// gain
 
 	txa[channel].gen0.p = create_gen (
 		0,											// run
@@ -303,9 +304,10 @@ void create_txa (int channel)
 		ch[channel].dsp_rate,						// samplerate
 		16,											// ints
 		256,										// spi
-		(1.0 / 0.416),								// hw_scale
+		(1.0 / 0.4072),								// hw_scale
 		0.1,										// mox delay
-		0.0);										// loop delay
+		0.0,										// loop delay
+		0.9);										// ptol
 
 	txa[channel].iqc.p0 = txa[channel].iqc.p1 = create_iqc (
 		0,											// run
@@ -322,7 +324,8 @@ void create_txa (int channel)
 		txa[channel].midbuff,						// pointer to input buffer
 		txa[channel].outbuff,						// pointer to output buffer
 		ch[channel].dsp_rate,						// input sample rate
-		ch[channel].out_rate);						// output sample rate
+		ch[channel].out_rate,						// output sample rate
+		0.980);										// gain
 
 	txa[channel].outmeter.p = create_meter (
 		1,											// run
@@ -433,6 +436,7 @@ void xtxa (int channel)
 	xiqc (txa[channel].iqc.p0);
 	xresample (txa[channel].rsmpout.p);
 	xmeter (txa[channel].outmeter.p);
+	// print_peak_env ("env_exception.txt", ch[channel].dsp_outsize, txa[channel].outbuff, 0.990);
 }
 
 /********************************************************************************************************

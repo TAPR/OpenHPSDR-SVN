@@ -6222,9 +6222,9 @@ namespace PowerSDR
                 chkPennyLane.Enabled = false;
                 radPenny10MHz.Checked = true;
                 rad12288MHzPenny.Checked = true;
-                chkAlexPresent.Checked = false;
+               // chkAlexPresent.Checked = false;
                 chkAlexPresent.Enabled = true;
-                chkApolloPresent.Checked = false;
+               // chkApolloPresent.Checked = false;
                 chkApolloPresent.Enabled = true;
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
@@ -9949,10 +9949,10 @@ namespace PowerSDR
 
         private void udDSPNB_ValueChanged(object sender, System.EventArgs e)
         {
-            SpecHPSDRDLL.SetANBthreshold(0, 0, 0.165 * (double)(udDSPNB.Value));
-            SpecHPSDRDLL.SetANBthreshold(0, 1, 0.165 * (double)(udDSPNB.Value));
-            SpecHPSDRDLL.SetANBthreshold(0, 2, 0.165 * (double)(udDSPNB.Value));
-            SpecHPSDRDLL.SetANBthreshold(1, 0, 0.165 * (double)(udDSPNB.Value));
+            SpecHPSDRDLL.SetEXTANBThreshold(0, 0.165 * (double)(udDSPNB.Value));
+            SpecHPSDRDLL.SetEXTANBThreshold(1, 0.165 * (double)(udDSPNB.Value));
+            SpecHPSDRDLL.SetEXTANBThreshold(2, 0.165 * (double)(udDSPNB.Value));
+            SpecHPSDRDLL.SetEXTANBThreshold(3, 0.165 * (double)(udDSPNB.Value));
             //console.radio.GetDSPRX(0, 0).NBThreshold = 0.165 * (double)(udDSPNB.Value);
             //console.radio.GetDSPRX(0, 1).NBThreshold = 0.165 * (double)(udDSPNB.Value);
             //console.radio.GetDSPRX(1, 0).NBThreshold = 0.165 * (double)(udDSPNB.Value);
@@ -12452,6 +12452,27 @@ namespace PowerSDR
                     wdsp.SetTXAPreGenSweepMag(wdsp.id(1, 0), Math.Pow(10, (double)udTXGenScale.Value / 20.0));
                     wdsp.SetTXAPreGenSweepFreq(wdsp.id(1, 0), (double)udTXGenSweepLow.Value, (double)udTXGenSweepHigh.Value);
                     wdsp.SetTXAPreGenSweepRate(wdsp.id(1, 0), (double)udTXGenSweepRate.Value);
+                    wdsp.SetTXAPreGenRun(wdsp.id(1, 0), 1);
+                    break;
+                case "Sawtooth":
+                    wdsp.SetTXAPreGenMode(wdsp.id(1, 0), 4);
+                    wdsp.SetTXAPreGenSawtoothMag(wdsp.id(1, 0), Math.Pow(10, (double)udTXGenScale.Value / 20.0));
+                    wdsp.SetTXAPreGenSawtoothFreq(wdsp.id(1, 0), (double)udTXGenFreq.Value);
+                    wdsp.SetTXAPreGenRun(wdsp.id(1, 0), 1);
+                    break;
+                case "Triangle":
+                    wdsp.SetTXAPreGenMode(wdsp.id(1, 0), 5);
+                    wdsp.SetTXAPreGenTriangleMag(wdsp.id(1, 0), Math.Pow(10, (double)udTXGenScale.Value / 20.0));
+                    wdsp.SetTXAPreGenTriangleFreq(wdsp.id(1, 0), (double)udTXGenFreq.Value);
+                    wdsp.SetTXAPreGenRun(wdsp.id(1, 0), 1);
+                    break;
+                case "Pulse":
+                    wdsp.SetTXAPreGenMode(wdsp.id(1, 0), 6);
+                    wdsp.SetTXAPreGenPulseMag(wdsp.id(1, 0), Math.Pow(10, (double)udTXGenScale.Value / 20.0));
+                    wdsp.SetTXAPreGenPulseToneFreq(wdsp.id(1, 0), (double)udTXGenFreq.Value);
+                    wdsp.SetTXAPreGenPulseFreq(wdsp.id(1, 0), (double)udTXGenPulseFreq.Value);
+                    wdsp.SetTXAPreGenPulseDutyCycle(wdsp.id(1, 0), (double)udTXGenPulseDutyCycle.Value);
+                    wdsp.SetTXAPreGenPulseTransition(wdsp.id(1, 0), (double)udTXGenPulseTransition.Value);
                     wdsp.SetTXAPreGenRun(wdsp.id(1, 0), 1);
                     break;
                 case "Silence":
@@ -16942,22 +16963,22 @@ namespace PowerSDR
         private void udDSPNBTransition_ValueChanged(object sender, EventArgs e)
         {
             for (int i = 0; i < 3; i++)
-                SpecHPSDRDLL.SetANBtranstime(0, i, 0.001 * (double)udDSPNBTransition.Value);
-            SpecHPSDRDLL.SetANBtranstime(1, 0, 0.001 * (double)udDSPNBTransition.Value);
+                SpecHPSDRDLL.SetEXTANBTau(i, 0.001 * (double)udDSPNBTransition.Value);
+            SpecHPSDRDLL.SetEXTANBTau(3, 0.001 * (double)udDSPNBTransition.Value);
         }
 
         private void udDSPNBLead_ValueChanged(object sender, EventArgs e)
         {
             for (int i = 0; i < 3; i++)
-                SpecHPSDRDLL.SetANBadvtime(0, i, 0.001 * (double)udDSPNBLead.Value);
-            SpecHPSDRDLL.SetANBadvtime(1, 0, 0.001 * (double)udDSPNBLead.Value);
+                SpecHPSDRDLL.SetEXTANBAdvtime(i, 0.001 * (double)udDSPNBLead.Value);
+            SpecHPSDRDLL.SetEXTANBAdvtime(3, 0.001 * (double)udDSPNBLead.Value);
         }
 
         private void udDSPNBLag_ValueChanged(object sender, EventArgs e)
         {
             for (int i = 0; i < 3; i++)
-                SpecHPSDRDLL.SetANBhangtime(0, i, 0.001 * (double)udDSPNBLag.Value);
-            SpecHPSDRDLL.SetANBhangtime(1, 0, 0.001 * (double)udDSPNBLag.Value);
+                SpecHPSDRDLL.SetEXTANBHangtime(i, 0.001 * (double)udDSPNBLag.Value);
+            SpecHPSDRDLL.SetEXTANBHangtime(3, 0.001 * (double)udDSPNBLag.Value);
         }
 
         private void chkLimitRX_CheckedChanged(object sender, EventArgs e)
@@ -17393,6 +17414,15 @@ namespace PowerSDR
                 case "Sweep":
                     wdsp.SetTXAPreGenSweepMag(wdsp.id(1, 0), Math.Pow(10, (double)udTXGenScale.Value / 20.0));
                     break;
+                case "Sawtooth":
+                    wdsp.SetTXAPreGenSawtoothMag(wdsp.id(1, 0), Math.Pow(10, (double)udTXGenScale.Value / 20.0));
+                    break;
+                case "Triangle":
+                    wdsp.SetTXAPreGenTriangleMag(wdsp.id(1, 0), Math.Pow(10, (double)udTXGenScale.Value / 20.0));
+                    break;
+                case "Pulse":
+                    wdsp.SetTXAPreGenPulseMag(wdsp.id(1, 0), Math.Pow(10, (double)udTXGenScale.Value / 20.0));
+                    break;
             }
         }
 
@@ -17402,6 +17432,15 @@ namespace PowerSDR
             {
                 case "Tone":
                     wdsp.SetTXAPreGenToneFreq(wdsp.id(1, 0), (double)udTXGenFreq.Value);
+                    break;
+                case "Sawtooth":
+                    wdsp.SetTXAPreGenSawtoothFreq(wdsp.id(1, 0), (double)udTXGenFreq.Value);
+                    break;
+                case "Triangle":
+                    wdsp.SetTXAPreGenTriangleFreq(wdsp.id(1, 0), (double)udTXGenFreq.Value);
+                    break;
+                case "Pulse":
+                    wdsp.SetTXAPreGenPulseToneFreq(wdsp.id(1, 0), (double)udTXGenFreq.Value);
                     break;
             }
         }
@@ -17487,6 +17526,21 @@ namespace PowerSDR
         private void chkTXInhibitSense_CheckedChanged(object sender, EventArgs e)
         {
             console.tx_inhibit_sense = chkTXInhibitSense.Checked;
+        }
+
+        private void udTXGenPulseFreq_ValueChanged(object sender, EventArgs e)
+        {
+            wdsp.SetTXAPreGenPulseFreq(wdsp.id(1, 0), (double)udTXGenPulseFreq.Value);
+        }
+
+        private void udTXGenPulseDutyCycle_ValueChanged(object sender, EventArgs e)
+        {
+            wdsp.SetTXAPreGenPulseDutyCycle(wdsp.id(1, 0), (double)udTXGenPulseDutyCycle.Value);
+        }
+
+        private void udTXGenPulseTransition_ValueChanged(object sender, EventArgs e)
+        {
+            wdsp.SetTXAPreGenPulseTransition(wdsp.id(1, 0), (double)udTXGenPulseTransition.Value);
         }
 
     }

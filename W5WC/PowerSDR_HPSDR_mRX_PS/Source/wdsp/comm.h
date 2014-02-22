@@ -34,6 +34,7 @@ warren@wpratt.com
 #include "amd.h"
 #include "ammod.h"
 #include "amsq.h"
+#include "analyzer.h"
 #include "anf.h"
 #include "anr.h"
 #include "bandpass.h"
@@ -42,6 +43,7 @@ warren@wpratt.com
 #include "channel.h"
 #include "compress.h"
 #include "delay.h"
+#include "div.h"
 #include "eq.h"
 #include "fcurve.h"
 #include "fir.h"
@@ -55,6 +57,7 @@ warren@wpratt.com
 #include "main.h"
 #include "meter.h"
 #include "meterlog10.h"
+#include "nob.h"
 #include "patchpanel.h"
 #include "resample.h"
 #include "RXA.h"
@@ -66,14 +69,35 @@ warren@wpratt.com
 #include "utilities.h"
 #include "wcpAGC.h"
 
+// channel definitions
+#define MAX_CHANNELS					32					// maximum number of supported channels
 #define DSP_MULT						2					// number of dsp_buffsizes that are held in an iobuff pseudo-ring
 #define INREAL							float				// data type for channel input buffer
 #define OUTREAL							float				// data type for channel output buffer
-#define MAX_CHANNELS					32					// maximum number of supported channels
 
+// display definitions
+#define dMAX_DISPLAYS					16					// maximum number of displays = max instances
+#define dMAX_STITCH						4					// maximum number of sub-spans to stitch together
+#define dMAX_NUM_FFT					1					// maximum number of ffts for an elimination
+#define dMAX_PIXELS						2560				// maximum number of pixels that can be requested
+#define dMAX_AVERAGE					60					// maximum number of pixel frames that will be window-averaged
+#define dINREAL							float
+#define dOUTREAL						float
+#define dSAMP_BUFF_MULT					2					// ratio of input sample buffer size to fft size (for overlap)
+#define dNUM_PIXEL_BUFFS				3					// number of pixel output buffers
+#define dMAX_M							1					// number of variables to calibrate
+#define dMAX_N							100					// maximum number of frequencies at which to calibrate
+#define dMAX_CAL_SETS					2					// maximum number of calibration data sets
+
+
+// wisdom definitions
+#define MAX_WISDOM_SIZE_DISPLAY			262144
+#define MAX_WISDOM_SIZE_FILTER			32769
+
+// math definitions
 #define PI								3.1415926535897932
 #define TWOPI							6.2831853071795864
 
+// miscellaneous
 typedef double complex[2];
-
-#define PORT		__declspec( dllexport )
+#define PORT							__declspec( dllexport )

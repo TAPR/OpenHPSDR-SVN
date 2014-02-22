@@ -65,7 +65,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WIN32;_MBCS;NDEBUG;_WINDOWS;_USRDLL;SPECHPSDR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
-      <AdditionalIncludeDirectories>.;..\specHPSDR;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <CompileAs>CompileAsC</CompileAs>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -78,13 +78,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <OutputFile>../../bin/Release/wdsp.dll</OutputFile>
       <AdditionalDependencies>specHPSDR.lib;libfftw3-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../specHPSDR;../Release</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../Release</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="amd.h" />
     <ClInclude Include="ammod.h" />
     <ClInclude Include="amsq.h" />
+    <ClInclude Include="analyzer.h" />
     <ClInclude Include="anf.h" />
     <ClInclude Include="anr.h" />
     <ClInclude Include="bandpass.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="cblock.h" />
     <ClInclude Include="compress.h" />
     <ClInclude Include="delay.h" />
+    <ClInclude Include="div.h" />
     <ClInclude Include="eq.h" />
     <ClInclude Include="channel.h" />
     <ClInclude Include="comm.h" />
@@ -107,6 +109,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="meter.h" />
     <ClInclude Include="meterlog10.h" />
+    <ClInclude Include="nob.h" />
     <ClInclude Include="patchpanel.h" />
     <ClInclude Include="resample.h" />
     <ClInclude Include="RXA.h" />
@@ -123,6 +126,7 @@
     <ClCompile Include="amd.c" />
     <ClCompile Include="ammod.c" />
     <ClCompile Include="amsq.c" />
+    <ClCompile Include="analyzer.c" />
     <ClCompile Include="anf.c" />
     <ClCompile Include="anr.c" />
     <ClCompile Include="bandpass.c" />
@@ -130,6 +134,7 @@
     <ClCompile Include="cblock.c" />
     <ClCompile Include="compress.c" />
     <ClCompile Include="delay.c" />
+    <ClCompile Include="div.c" />
     <ClCompile Include="eq.c" />
     <ClCompile Include="channel.c" />
     <ClCompile Include="fcurve.c" />
@@ -143,6 +148,7 @@
     <ClCompile Include="iobuffs.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="meter.c" />
+    <ClCompile Include="nob.c" />
     <ClCompile Include="patchpanel.c" />
     <ClCompile Include="resample.c" />
     <ClCompile Include="RXA.c" />

@@ -42,6 +42,7 @@ typedef struct _calcc
 	double* cs;
 	double* rxs;
 	double* txs;
+	double ptol;
 	int* info;
 	int* binfo;
 	struct _ctrl
@@ -80,7 +81,7 @@ typedef struct _calcc
 	double* temprx;				//////////////////////////////////////////////////// temporary rx complex buffer - remove with new callback3port()
 } calcc, *CALCC;
 
-extern CALCC create_calcc (int channel, int rate, int ints, int spi, double hw_scale, double moxdelay, double loopdelay);
+extern CALCC create_calcc (int channel, int rate, int ints, int spi, double hw_scale, double moxdelay, double loopdelay, double ptol);
 
 extern void destroy_calcc (CALCC a);
 

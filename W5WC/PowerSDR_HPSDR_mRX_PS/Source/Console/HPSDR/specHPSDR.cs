@@ -105,9 +105,9 @@ namespace PowerSDR
                 if (update) initAnalyzer();
                 if (disp == 0)
                     for (int i = 0; i < 3; i++)
-                        SpecHPSDRDLL.SetANBBuffSize(0, i, blocksize);
+                        SpecHPSDRDLL.SetEXTANBBuffsize(i, blocksize);
                 if (disp == 1)
-                    SpecHPSDRDLL.SetANBBuffSize(1, 0, blocksize);
+                    SpecHPSDRDLL.SetEXTANBBuffsize(3, blocksize);
 
             }
         }
@@ -329,9 +329,9 @@ namespace PowerSDR
                 if (update) initAnalyzer();
                 if (disp == 0)
                     for (int i = 0; i < 3; i++)
-                        SpecHPSDRDLL.SetANBSampleRate(0, i, sample_rate);
+                        SpecHPSDRDLL.SetEXTANBSamplerate(i, sample_rate);
                 if (disp == 1)
-                    SpecHPSDRDLL.SetANBSampleRate(1, 0, sample_rate);
+                    SpecHPSDRDLL.SetEXTANBSamplerate(3, sample_rate);
             }
         }
 
@@ -561,87 +561,77 @@ namespace PowerSDR
     unsafe class SpecHPSDRDLL
     {
         #region DLL Method Declarations
-        [DllImport("specHPSDR.dll")]
+        [DllImport("wdsp.dll")]
         public static extern void SetAnalyzer(int disp, int n_fft, int type, IntPtr flp, int sz, int buff_size, int win_type, double pi, int ovrlp, int clp,
             int fsclipL, int fsclipH, int n_pix, int n_stch, int av_mode, int n_av, double avb, int cal_set, double fmin, double fmax, int max_w);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void CreateAnalyzer(int disp, ref int success, String app_data_path);
-        // public static extern void CreateAnalyzer(int disp, ref int success);
-
-        [DllImport("specHPSDR.dll")]
+        [DllImport("wdsp.dll")]
         public static extern void XCreateAnalyzer(int disp, ref int success, int m_size, int m_LO, int m_stitch, string app_data_path);
         // public static extern void XCreateAnalyzer(int disp, ref int success, int m_size, int m_LO, int m_stitch);
 
-        [DllImport("specHPSDR.dll")]
+        [DllImport("wdsp.dll")]
         public static extern void DestroyAnalyzer(int disp);
 
-        [DllImport("specHPSDR.dll")]
+        [DllImport("wdsp.dll")]
         public static extern void GetPixels(int disp, IntPtr pix, ref int flag);
 
-        [DllImport("specHPSDR.dll")]
+        [DllImport("wdsp.dll")]
         public static extern void GetNAPixels(int disp, IntPtr pix, ref int flag);
 
-        [DllImport("specHPSDR.dll")]
+        [DllImport("wdsp.dll")]
         public static extern void GetPixels(int disp, float* pix, ref int flag);
 
-        [DllImport("specHPSDR.dll")]
+        [DllImport("wdsp.dll")]
         public static extern void GetNAPixels(int disp, float* pix, ref int flag);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void OpenBuffer(int disp, int ss, int LO, IntPtr* Iptr, IntPtr* Qptr);
-
-        [DllImport("specHPSDR.dll")]
-        public static extern void CloseBuffer(int disp, int ss, int LO);
-
-        [DllImport("specHPSDR.dll")]
+        [DllImport("wdsp.dll")]
         public static extern void Spectrum(int disp, int ss, int LO, float* pI, float* pQ);
 
-        [DllImport("specHPSDR.dll")]
+        [DllImport("wdsp.dll")]
         public static extern void SetCalibration(int disp, int set, int points, IntPtr cal);
 
-        [DllImport("specHPSDR.dll")]
+        [DllImport("wdsp.dll")]
         public static extern void SnapSpectrum(int disp, int ss, int LO, double* snap_buff);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void CreateANB(
-            int disp,                       //display number
-            int ss,                         //subspan number
-            int buffsize,                   //buffer size (number of samples)
-            double samplerate,              //sample rate
-            double tau,                     //time to transition to/from zero
-            double hangtime,                //time to stay at zero after noise appears to be gone
-            double advtime,                 //time to be at zero before noise detected
-            double backtau,                 //time-constant for averaging signal magnitude
-            double threshold                //blanker triggers if(magnitude > threshold * average_magnitude)
+        [DllImport("wdsp.dll")]
+        public static extern void create_anbEXT(
+            int id,
+            int run,
+            int buffsize,
+            double samplerate,
+            double tau,
+            double hangtime,
+            double advtime,
+            double backtau,
+            double threshold
             );
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void DestroyANB(int disp, int ss);
+        [DllImport("wdsp.dll")]
+        public static extern void destroy_anbEXT(int id);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void SetANBBuffSize(int disp, int ss, int BuffSize);
+        [DllImport("wdsp.dll")]
+        public static extern void xanbEXTF(int id, float* I, float* Q);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void SetANBSampleRate(int disp, int ss, double SampleRate);
+        [DllImport("wdsp.dll")]
+        public static extern void SetEXTANBBuffsize(int id, int size);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void SetANBthreshold(int disp, int ss, double threshold);
+        [DllImport("wdsp.dll")]
+        public static extern void SetEXTANBSamplerate(int id, int rate);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void blanker(int disp, int ss, float* Ibuff, float* Qbuff);
+        [DllImport("wdsp.dll")]
+        public static extern void SetEXTANBTau(int id, double tau);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void SetANBtranstime(int disp, int ss, double transtime);
+        [DllImport("wdsp.dll")]
+        public static extern void SetEXTANBHangtime(int id, double time);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void SetANBadvtime(int disp, int ss, double advtime);
+        [DllImport("wdsp.dll")]
+        public static extern void SetEXTANBAdvtime(int id, double time);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern void SetANBhangtime(int disp, int ss, double hangtime);
+        [DllImport("wdsp.dll")]
+        public static extern void SetEXTANBBacktau(int id, double tau);
 
-        [DllImport("specHPSDR.dll")]
-        public static extern int GetSpecWisdomStatus();
+        [DllImport("wdsp.dll")]
+        public static extern void SetEXTANBThreshold(int id, double thresh);
 
         #endregion
     }

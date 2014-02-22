@@ -422,6 +422,14 @@ namespace PowerSDR
                 PSdispRX.Text = dispRCVR.ToString();
             }
         }
+
+        private void chkPSRelaxPtol_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPSRelaxPtol.Checked)
+                puresignal.SetPSPtol(txachannel, 0.400);
+            else
+                puresignal.SetPSPtol(txachannel, 0.900);
+        }
         
         #endregion
 
@@ -445,6 +453,7 @@ namespace PowerSDR
             udPSPhnum_ValueChanged(this, e);
             udPSMoxDelay_ValueChanged(this, e);
             SetPSReceivers(console.CurrentHPSDRModel);
+            chkPSRelaxPtol_CheckedChanged(this, e);
         }
 
         public void ResetPureSignal()
@@ -558,7 +567,6 @@ namespace PowerSDR
         }
 
         #endregion
-
     }
 
     unsafe static class puresignal
@@ -609,6 +617,9 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "GetPSMaxTX", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetPSMaxTX(int channel, double* maxtx);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetPSPtol", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetPSPtol(int channel, double ptol);
 
         #endregion
 

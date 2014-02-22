@@ -99,22 +99,22 @@ namespace PowerSDR
                 //+ "\\FlexRadio Systems\\PowerSDR mRX\\wisdom";
                 + "\\FlexRadio Systems\\PowerSDR mRX PS\\";
             wdsp.WDSPwisdom(app_data_path);
-			//DttSP.SetupSDR(app_data_path);
             wdsp.OpenChannel(wdsp.id(0, 0), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
             wdsp.OpenChannel(wdsp.id(0, 1), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
             wdsp.OpenChannel(wdsp.id(2, 0), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
             wdsp.OpenChannel(wdsp.id(2, 1), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
             wdsp.OpenChannel(wdsp.id(1, 0), 1024, 4096, 48000, 48000, 48000, 1, 0, 0.010, 0.025, 0.000, 0.010);
+            wdsp.create_divEXT(0, 0, 2, 1024);
 		}
 
 		public static void DestroyDSP()
 		{
-			//DttSP.Exit();
             wdsp.CloseChannel(wdsp.id(1, 0));
             wdsp.CloseChannel(wdsp.id(2, 1));
             wdsp.CloseChannel(wdsp.id(2, 0));
             wdsp.CloseChannel(wdsp.id(0, 1));
             wdsp.CloseChannel(wdsp.id(0, 0));
+            wdsp.destroy_divEXT(0);
 		}
 
 		private static double sample_rate = 48000.0;
