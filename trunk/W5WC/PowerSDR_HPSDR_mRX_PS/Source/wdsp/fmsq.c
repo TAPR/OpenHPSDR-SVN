@@ -26,7 +26,7 @@ warren@wpratt.com
 
 #include "comm.h"
 
-FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trigger, int rate, double fc, double pllpole, double avtau, double longtau, double tup, double tdown, double tail_thresh, double unmute_thresh, double min_tail, double max_tail)
+FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trigger, int rate, double fc, double pllpole, double tdelay, double avtau, double longtau, double tup, double tdown, double tail_thresh, double unmute_thresh, double min_tail, double max_tail)
 {
 	FMSQ a = (FMSQ) malloc0 (sizeof (fmsq));
 	double delta, theta;
@@ -90,6 +90,10 @@ FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trig
 	a->min_tail = min_tail;
 	a->max_tail = max_tail;
 	a->state = 0;
+	a->ready = 0;
+	a->ramp = 0.0;
+	a->rstep = 1.0 / a->rate;
+	a->tdelay = tdelay;
 	return a;
 }
 
@@ -112,6 +116,8 @@ void flush_fmsq (FMSQ a)
 	a->avnoise = 100.0;
 	a->longnoise = 1.0;
 	a->state = 0;
+	a->ready = 0;
+	a->ramp = 0.0;
 }
 
 enum _fmsqstate
@@ -146,10 +152,13 @@ void xfmsq (FMSQ a)
 			noise = sqrt(a->noise[2 * i + 0] * a->noise[2 * i + 0] + a->noise[2 * i + 1] * a->noise[2 * i + 1]);
 			a->avnoise = a->avm * a->avnoise + a->onem_avm * noise;
 			a->longnoise = a->longavm * a->longnoise + a->onem_longavm * noise;
+			if (!a->ready) a->ramp += a->rstep;
+			if (a->ramp >= a->tdelay) a->ready = 1;
+
 			switch (a->state)
 			{
 			case MUTED:
-				if (a->avnoise < a->unmute_thresh)
+				if (a->avnoise < a->unmute_thresh && a->ready)
 				{
 					a->state = INCREASE;
 					a->count = a->ntup;

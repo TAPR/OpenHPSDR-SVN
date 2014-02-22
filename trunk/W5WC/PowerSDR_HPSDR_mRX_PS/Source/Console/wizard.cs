@@ -130,6 +130,7 @@ namespace PowerSDR
         private RadioButtonTS radGenModelANAN100D;
         private RadioButtonTS radGenModelANAN100;
         private RadioButtonTS radGenModelANAN10;
+        private RadioButtonTS radGenModelOrion;
         private System.ComponentModel.Container components = null;
 
 		#endregion
@@ -196,6 +197,10 @@ namespace PowerSDR
                 case Model.ANAN100D:
                     radGenModelANAN100D.Checked = true;
                     break;
+                case Model.ORION:
+                    radGenModelOrion.Checked = true;
+                    break;
+
             }
 
 			CurPage = Page.WELCOME;
@@ -231,6 +236,7 @@ namespace PowerSDR
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.grpModel = new System.Windows.Forms.GroupBoxTS();
+            this.radGenModelOrion = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelANAN100D = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelANAN100 = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelANAN10 = new System.Windows.Forms.RadioButtonTS();
@@ -313,6 +319,7 @@ namespace PowerSDR
             // 
             // grpModel
             // 
+            this.grpModel.Controls.Add(this.radGenModelOrion);
             this.grpModel.Controls.Add(this.radGenModelANAN100D);
             this.grpModel.Controls.Add(this.radGenModelANAN100);
             this.grpModel.Controls.Add(this.radGenModelANAN10);
@@ -324,11 +331,23 @@ namespace PowerSDR
             this.grpModel.Controls.Add(this.radGenModelSDR1000);
             this.grpModel.Location = new System.Drawing.Point(256, 24);
             this.grpModel.Name = "grpModel";
-            this.grpModel.Size = new System.Drawing.Size(120, 182);
+            this.grpModel.Size = new System.Drawing.Size(120, 216);
             this.grpModel.TabIndex = 20;
             this.grpModel.TabStop = false;
             this.grpModel.Text = "Model";
             this.grpModel.Visible = false;
+            // 
+            // radGenModelOrion
+            // 
+            this.radGenModelOrion.AutoSize = true;
+            this.radGenModelOrion.Image = null;
+            this.radGenModelOrion.Location = new System.Drawing.Point(19, 141);
+            this.radGenModelOrion.Name = "radGenModelOrion";
+            this.radGenModelOrion.Size = new System.Drawing.Size(84, 17);
+            this.radGenModelOrion.TabIndex = 12;
+            this.radGenModelOrion.Text = "ANAN-200D";
+            this.radGenModelOrion.UseVisualStyleBackColor = true;
+            this.radGenModelOrion.CheckedChanged += new System.EventHandler(this.radGenModelOrion_CheckedChanged);
             // 
             // radGenModelANAN100D
             // 
@@ -394,7 +413,7 @@ namespace PowerSDR
             // 
             this.radGenModelFLEX5000.Checked = true;
             this.radGenModelFLEX5000.Image = null;
-            this.radGenModelFLEX5000.Location = new System.Drawing.Point(18, 141);
+            this.radGenModelFLEX5000.Location = new System.Drawing.Point(18, 186);
             this.radGenModelFLEX5000.Name = "radGenModelFLEX5000";
             this.radGenModelFLEX5000.Size = new System.Drawing.Size(88, 24);
             this.radGenModelFLEX5000.TabIndex = 6;
@@ -406,7 +425,7 @@ namespace PowerSDR
             // radGenModelDemoNone
             // 
             this.radGenModelDemoNone.Image = null;
-            this.radGenModelDemoNone.Location = new System.Drawing.Point(18, 141);
+            this.radGenModelDemoNone.Location = new System.Drawing.Point(18, 186);
             this.radGenModelDemoNone.Name = "radGenModelDemoNone";
             this.radGenModelDemoNone.Size = new System.Drawing.Size(88, 24);
             this.radGenModelDemoNone.TabIndex = 5;
@@ -417,7 +436,7 @@ namespace PowerSDR
             // radGenModelSoftRock40
             // 
             this.radGenModelSoftRock40.Image = null;
-            this.radGenModelSoftRock40.Location = new System.Drawing.Point(18, 141);
+            this.radGenModelSoftRock40.Location = new System.Drawing.Point(18, 186);
             this.radGenModelSoftRock40.Name = "radGenModelSoftRock40";
             this.radGenModelSoftRock40.Size = new System.Drawing.Size(88, 24);
             this.radGenModelSoftRock40.TabIndex = 4;
@@ -428,7 +447,7 @@ namespace PowerSDR
             // radGenModelSDR1000
             // 
             this.radGenModelSDR1000.Image = null;
-            this.radGenModelSDR1000.Location = new System.Drawing.Point(18, 141);
+            this.radGenModelSDR1000.Location = new System.Drawing.Point(18, 186);
             this.radGenModelSDR1000.Name = "radGenModelSDR1000";
             this.radGenModelSDR1000.Size = new System.Drawing.Size(88, 24);
             this.radGenModelSDR1000.TabIndex = 3;
@@ -1046,7 +1065,7 @@ namespace PowerSDR
             this.chkMercury.TabIndex = 0;
             this.chkMercury.Text = "Mercury";
             this.chkMercury.CheckedChanged += new System.EventHandler(this.chkMercury_CheckedChanged);
-            //
+            // 
             // comboBox10
             // 
             this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1075,7 +1094,7 @@ namespace PowerSDR
             this.comboBox10.Name = "comboBox10";
             this.comboBox10.Size = new System.Drawing.Size(184, 21);
             this.comboBox10.TabIndex = 22;
-           // 
+            // 
             // lblMessage1
             // 
             this.lblMessage1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1494,6 +1513,7 @@ namespace PowerSDR
                         case Model.ANAN10:
                         case Model.ANAN100:
                         case Model.ANAN100D:
+                        case Model.ORION:
                             CurPage = Page.HPSDR_HARDWARE_SELECT;
                             btnNext.Focus();
                             break;
@@ -1746,6 +1766,13 @@ namespace PowerSDR
                     console.SetupForm.AlexPresent = alex_present;
                     console.SetupForm.forceAudioSampleRate1("192000");
                     break;
+                case Model.ORION:
+                    console.SetupForm.PennyLanePresent = pennylane_present;
+                    console.SetupForm.MercuryPresent = mercury_present;
+                    console.SetupForm.AlexPresent = alex_present;
+                    console.SetupForm.forceAudioSampleRate1("192000");
+                    break;
+
                 default:
                   //  console.SetupForm.XVTRPresent = xvtr_present;
 					//console.SetupForm.PAPresent = pa_present;
@@ -2173,6 +2200,32 @@ namespace PowerSDR
             }
         }
 
+        private void radGenModelOrion_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelOrion.Checked)
+            {
+                model = Model.ORION;
+                //if (grpModel.Visible)
+                pictureBox1.Image = null;
+                pictureBox1.Visible = false;
+                //pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.hpsdr.jpg"));
+                chkMercury.Checked = radGenModelOrion.Checked;
+                chkPennyLane.Checked = radGenModelOrion.Checked;
+                chkMercury.Enabled = false;
+                chkPennyLane.Enabled = false;
+                chkPenny.Enabled = false;
+                chkPenny.Checked = false;
+                chkExcalibur.Enabled = false;
+                chkExcalibur.Checked = false;
+                chkAlex.Checked = true;
+                chkAlex.Enabled = true;
+                radMetis.Checked = true;
+                radMetis.Enabled = false;
+                radMetis.Text = "ANAN";
+                radOzy.Enabled = false;
+            }
+        }
+        
         private void chkMercury_CheckedChanged(object sender, System.EventArgs e)
         {
             mercury_present = chkMercury.Checked;
@@ -2200,5 +2253,6 @@ namespace PowerSDR
             excalibur_present = chkExcalibur.Checked;
         }
         #endregion
+
     }
 }

@@ -2162,6 +2162,13 @@
             this.tpTests = new System.Windows.Forms.TabPage();
             this.grpBoxTS1 = new System.Windows.Forms.GroupBoxTS();
             this.grpSigGenTransmit = new System.Windows.Forms.GroupBoxTS();
+            this.grpPulse = new System.Windows.Forms.GroupBoxTS();
+            this.udTXGenPulseTransition = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS317 = new System.Windows.Forms.LabelTS();
+            this.udTXGenPulseDutyCycle = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS316 = new System.Windows.Forms.LabelTS();
+            this.udTXGenPulseFreq = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS315 = new System.Windows.Forms.LabelTS();
             this.labelTS313 = new System.Windows.Forms.LabelTS();
             this.grpTXGenSweep = new System.Windows.Forms.GroupBoxTS();
             this.labelTS306 = new System.Windows.Forms.LabelTS();
@@ -2910,6 +2917,10 @@
             this.tpTests.SuspendLayout();
             this.grpBoxTS1.SuspendLayout();
             this.grpSigGenTransmit.SuspendLayout();
+            this.grpPulse.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGenPulseTransition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGenPulseDutyCycle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGenPulseFreq)).BeginInit();
             this.grpTXGenSweep.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTXGenSweepRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udTXGenSweepHigh)).BeginInit();
@@ -5971,7 +5982,7 @@
             this.radGenModelOrion.Name = "radGenModelOrion";
             this.radGenModelOrion.Size = new System.Drawing.Size(88, 24);
             this.radGenModelOrion.TabIndex = 9;
-            this.radGenModelOrion.Text = "ORION";
+            this.radGenModelOrion.Text = "ANAN-200D";
             this.radGenModelOrion.UseVisualStyleBackColor = true;
             this.radGenModelOrion.CheckedChanged += new System.EventHandler(this.radGenModelOrion_CheckedChanged);
             // 
@@ -35231,6 +35242,7 @@
             // 
             // grpSigGenTransmit
             // 
+            this.grpSigGenTransmit.Controls.Add(this.grpPulse);
             this.grpSigGenTransmit.Controls.Add(this.labelTS313);
             this.grpSigGenTransmit.Controls.Add(this.grpTXGenSweep);
             this.grpSigGenTransmit.Controls.Add(this.udTXGenFreq);
@@ -35246,12 +35258,144 @@
             this.grpSigGenTransmit.TabStop = false;
             this.grpSigGenTransmit.Text = "Transmit";
             // 
+            // grpPulse
+            // 
+            this.grpPulse.Controls.Add(this.udTXGenPulseTransition);
+            this.grpPulse.Controls.Add(this.labelTS317);
+            this.grpPulse.Controls.Add(this.udTXGenPulseDutyCycle);
+            this.grpPulse.Controls.Add(this.labelTS316);
+            this.grpPulse.Controls.Add(this.udTXGenPulseFreq);
+            this.grpPulse.Controls.Add(this.labelTS315);
+            this.grpPulse.Location = new System.Drawing.Point(7, 220);
+            this.grpPulse.Name = "grpPulse";
+            this.grpPulse.Size = new System.Drawing.Size(138, 100);
+            this.grpPulse.TabIndex = 119;
+            this.grpPulse.TabStop = false;
+            this.grpPulse.Text = "Pulse";
+            // 
+            // udTXGenPulseTransition
+            // 
+            this.udTXGenPulseTransition.DecimalPlaces = 4;
+            this.udTXGenPulseTransition.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            262144});
+            this.udTXGenPulseTransition.Location = new System.Drawing.Point(76, 70);
+            this.udTXGenPulseTransition.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udTXGenPulseTransition.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            262144});
+            this.udTXGenPulseTransition.Name = "udTXGenPulseTransition";
+            this.udTXGenPulseTransition.Size = new System.Drawing.Size(56, 20);
+            this.udTXGenPulseTransition.TabIndex = 115;
+            this.toolTip1.SetToolTip(this.udTXGenPulseTransition, "Tone Frequency.");
+            this.udTXGenPulseTransition.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            196608});
+            this.udTXGenPulseTransition.ValueChanged += new System.EventHandler(this.udTXGenPulseTransition_ValueChanged);
+            // 
+            // labelTS317
+            // 
+            this.labelTS317.Image = null;
+            this.labelTS317.Location = new System.Drawing.Point(6, 72);
+            this.labelTS317.Name = "labelTS317";
+            this.labelTS317.Size = new System.Drawing.Size(64, 16);
+            this.labelTS317.TabIndex = 114;
+            this.labelTS317.Text = "Trans. (sec)";
+            // 
+            // udTXGenPulseDutyCycle
+            // 
+            this.udTXGenPulseDutyCycle.DecimalPlaces = 2;
+            this.udTXGenPulseDutyCycle.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udTXGenPulseDutyCycle.Location = new System.Drawing.Point(76, 43);
+            this.udTXGenPulseDutyCycle.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udTXGenPulseDutyCycle.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udTXGenPulseDutyCycle.Name = "udTXGenPulseDutyCycle";
+            this.udTXGenPulseDutyCycle.Size = new System.Drawing.Size(56, 20);
+            this.udTXGenPulseDutyCycle.TabIndex = 113;
+            this.toolTip1.SetToolTip(this.udTXGenPulseDutyCycle, "Tone Frequency.");
+            this.udTXGenPulseDutyCycle.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udTXGenPulseDutyCycle.ValueChanged += new System.EventHandler(this.udTXGenPulseDutyCycle_ValueChanged);
+            // 
+            // labelTS316
+            // 
+            this.labelTS316.Image = null;
+            this.labelTS316.Location = new System.Drawing.Point(6, 45);
+            this.labelTS316.Name = "labelTS316";
+            this.labelTS316.Size = new System.Drawing.Size(64, 16);
+            this.labelTS316.TabIndex = 112;
+            this.labelTS316.Text = "Duty Cycle";
+            // 
+            // udTXGenPulseFreq
+            // 
+            this.udTXGenPulseFreq.DecimalPlaces = 2;
+            this.udTXGenPulseFreq.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udTXGenPulseFreq.Location = new System.Drawing.Point(76, 16);
+            this.udTXGenPulseFreq.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udTXGenPulseFreq.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udTXGenPulseFreq.Name = "udTXGenPulseFreq";
+            this.udTXGenPulseFreq.Size = new System.Drawing.Size(56, 20);
+            this.udTXGenPulseFreq.TabIndex = 111;
+            this.toolTip1.SetToolTip(this.udTXGenPulseFreq, "Tone Frequency.");
+            this.udTXGenPulseFreq.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udTXGenPulseFreq.ValueChanged += new System.EventHandler(this.udTXGenPulseFreq_ValueChanged);
+            // 
+            // labelTS315
+            // 
+            this.labelTS315.Image = null;
+            this.labelTS315.Location = new System.Drawing.Point(6, 18);
+            this.labelTS315.Name = "labelTS315";
+            this.labelTS315.Size = new System.Drawing.Size(55, 16);
+            this.labelTS315.TabIndex = 110;
+            this.labelTS315.Text = "Freq (Hz):";
+            // 
             // labelTS313
             // 
             this.labelTS313.AutoSize = true;
             this.labelTS313.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTS313.Image = null;
-            this.labelTS313.Location = new System.Drawing.Point(17, 18);
+            this.labelTS313.Location = new System.Drawing.Point(17, 15);
             this.labelTS313.Name = "labelTS313";
             this.labelTS313.Size = new System.Drawing.Size(119, 13);
             this.labelTS313.TabIndex = 118;
@@ -35265,9 +35409,9 @@
             this.grpTXGenSweep.Controls.Add(this.udTXGenSweepHigh);
             this.grpTXGenSweep.Controls.Add(this.labelTS52);
             this.grpTXGenSweep.Controls.Add(this.udTXGenSweepLow);
-            this.grpTXGenSweep.Location = new System.Drawing.Point(7, 158);
+            this.grpTXGenSweep.Location = new System.Drawing.Point(7, 115);
             this.grpTXGenSweep.Name = "grpTXGenSweep";
-            this.grpTXGenSweep.Size = new System.Drawing.Size(138, 131);
+            this.grpTXGenSweep.Size = new System.Drawing.Size(138, 102);
             this.grpTXGenSweep.TabIndex = 110;
             this.grpTXGenSweep.TabStop = false;
             this.grpTXGenSweep.Text = "Sweep";
@@ -35275,7 +35419,7 @@
             // labelTS306
             // 
             this.labelTS306.Image = null;
-            this.labelTS306.Location = new System.Drawing.Point(3, 87);
+            this.labelTS306.Location = new System.Drawing.Point(3, 70);
             this.labelTS306.Name = "labelTS306";
             this.labelTS306.Size = new System.Drawing.Size(67, 16);
             this.labelTS306.TabIndex = 90;
@@ -35288,7 +35432,7 @@
             0,
             0,
             0});
-            this.udTXGenSweepRate.Location = new System.Drawing.Point(76, 87);
+            this.udTXGenSweepRate.Location = new System.Drawing.Point(76, 70);
             this.udTXGenSweepRate.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -35313,7 +35457,7 @@
             // labelTS305
             // 
             this.labelTS305.Image = null;
-            this.labelTS305.Location = new System.Drawing.Point(3, 56);
+            this.labelTS305.Location = new System.Drawing.Point(3, 43);
             this.labelTS305.Name = "labelTS305";
             this.labelTS305.Size = new System.Drawing.Size(60, 16);
             this.labelTS305.TabIndex = 88;
@@ -35326,7 +35470,7 @@
             0,
             0,
             0});
-            this.udTXGenSweepHigh.Location = new System.Drawing.Point(76, 56);
+            this.udTXGenSweepHigh.Location = new System.Drawing.Point(76, 43);
             this.udTXGenSweepHigh.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -35351,7 +35495,7 @@
             // labelTS52
             // 
             this.labelTS52.Image = null;
-            this.labelTS52.Location = new System.Drawing.Point(3, 26);
+            this.labelTS52.Location = new System.Drawing.Point(3, 18);
             this.labelTS52.Name = "labelTS52";
             this.labelTS52.Size = new System.Drawing.Size(60, 16);
             this.labelTS52.TabIndex = 86;
@@ -35364,7 +35508,7 @@
             0,
             0,
             0});
-            this.udTXGenSweepLow.Location = new System.Drawing.Point(76, 24);
+            this.udTXGenSweepLow.Location = new System.Drawing.Point(76, 16);
             this.udTXGenSweepLow.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -35393,7 +35537,7 @@
             0,
             0,
             0});
-            this.udTXGenFreq.Location = new System.Drawing.Point(83, 119);
+            this.udTXGenFreq.Location = new System.Drawing.Point(83, 91);
             this.udTXGenFreq.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -35418,7 +35562,7 @@
             // labelTS304
             // 
             this.labelTS304.Image = null;
-            this.labelTS304.Location = new System.Drawing.Point(10, 119);
+            this.labelTS304.Location = new System.Drawing.Point(10, 91);
             this.labelTS304.Name = "labelTS304";
             this.labelTS304.Size = new System.Drawing.Size(55, 16);
             this.labelTS304.TabIndex = 108;
@@ -35432,7 +35576,7 @@
             0,
             0,
             65536});
-            this.udTXGenScale.Location = new System.Drawing.Point(83, 84);
+            this.udTXGenScale.Location = new System.Drawing.Point(83, 64);
             this.udTXGenScale.Maximum = new decimal(new int[] {
             13,
             0,
@@ -35457,7 +35601,7 @@
             // labelTS303
             // 
             this.labelTS303.Image = null;
-            this.labelTS303.Location = new System.Drawing.Point(10, 86);
+            this.labelTS303.Location = new System.Drawing.Point(10, 66);
             this.labelTS303.Name = "labelTS303";
             this.labelTS303.Size = new System.Drawing.Size(60, 16);
             this.labelTS303.TabIndex = 101;
@@ -35466,7 +35610,7 @@
             // lblSigGenTXMode
             // 
             this.lblSigGenTXMode.Image = null;
-            this.lblSigGenTXMode.Location = new System.Drawing.Point(17, 41);
+            this.lblSigGenTXMode.Location = new System.Drawing.Point(17, 34);
             this.lblSigGenTXMode.Name = "lblSigGenTXMode";
             this.lblSigGenTXMode.Size = new System.Drawing.Size(40, 16);
             this.lblSigGenTXMode.TabIndex = 96;
@@ -35481,8 +35625,11 @@
             "Tone",
             "Noise",
             "Sweep",
+            "Sawtooth",
+            "Triangle",
+            "Pulse",
             "Silence"});
-            this.cmboSigGenTXMode.Location = new System.Drawing.Point(57, 41);
+            this.cmboSigGenTXMode.Location = new System.Drawing.Point(57, 34);
             this.cmboSigGenTXMode.Name = "cmboSigGenTXMode";
             this.cmboSigGenTXMode.Size = new System.Drawing.Size(88, 21);
             this.cmboSigGenTXMode.TabIndex = 91;
@@ -35513,7 +35660,7 @@
             this.labelTS312.AutoSize = true;
             this.labelTS312.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTS312.Image = null;
-            this.labelTS312.Location = new System.Drawing.Point(15, 18);
+            this.labelTS312.Location = new System.Drawing.Point(15, 15);
             this.labelTS312.Name = "labelTS312";
             this.labelTS312.Size = new System.Drawing.Size(119, 13);
             this.labelTS312.TabIndex = 117;
@@ -35539,9 +35686,9 @@
             this.grpRXGenSweep.Controls.Add(this.udRXGenSweepHigh);
             this.grpRXGenSweep.Controls.Add(this.labelTS309);
             this.grpRXGenSweep.Controls.Add(this.udRXGenSweepLow);
-            this.grpRXGenSweep.Location = new System.Drawing.Point(7, 158);
+            this.grpRXGenSweep.Location = new System.Drawing.Point(7, 115);
             this.grpRXGenSweep.Name = "grpRXGenSweep";
-            this.grpRXGenSweep.Size = new System.Drawing.Size(138, 131);
+            this.grpRXGenSweep.Size = new System.Drawing.Size(138, 102);
             this.grpRXGenSweep.TabIndex = 115;
             this.grpRXGenSweep.TabStop = false;
             this.grpRXGenSweep.Text = "Sweep";
@@ -35549,7 +35696,7 @@
             // labelTS307
             // 
             this.labelTS307.Image = null;
-            this.labelTS307.Location = new System.Drawing.Point(3, 87);
+            this.labelTS307.Location = new System.Drawing.Point(3, 70);
             this.labelTS307.Name = "labelTS307";
             this.labelTS307.Size = new System.Drawing.Size(67, 16);
             this.labelTS307.TabIndex = 90;
@@ -35562,7 +35709,7 @@
             0,
             0,
             0});
-            this.udRXGenSweepRate.Location = new System.Drawing.Point(76, 87);
+            this.udRXGenSweepRate.Location = new System.Drawing.Point(76, 70);
             this.udRXGenSweepRate.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -35587,7 +35734,7 @@
             // labelTS308
             // 
             this.labelTS308.Image = null;
-            this.labelTS308.Location = new System.Drawing.Point(3, 56);
+            this.labelTS308.Location = new System.Drawing.Point(3, 43);
             this.labelTS308.Name = "labelTS308";
             this.labelTS308.Size = new System.Drawing.Size(60, 16);
             this.labelTS308.TabIndex = 88;
@@ -35600,7 +35747,7 @@
             0,
             0,
             0});
-            this.udRXGenSweepHigh.Location = new System.Drawing.Point(76, 56);
+            this.udRXGenSweepHigh.Location = new System.Drawing.Point(76, 43);
             this.udRXGenSweepHigh.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -35625,7 +35772,7 @@
             // labelTS309
             // 
             this.labelTS309.Image = null;
-            this.labelTS309.Location = new System.Drawing.Point(3, 26);
+            this.labelTS309.Location = new System.Drawing.Point(3, 18);
             this.labelTS309.Name = "labelTS309";
             this.labelTS309.Size = new System.Drawing.Size(60, 16);
             this.labelTS309.TabIndex = 86;
@@ -35638,7 +35785,7 @@
             0,
             0,
             0});
-            this.udRXGenSweepLow.Location = new System.Drawing.Point(76, 24);
+            this.udRXGenSweepLow.Location = new System.Drawing.Point(76, 16);
             this.udRXGenSweepLow.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -35667,7 +35814,7 @@
             0,
             0,
             0});
-            this.udRXGenFreq.Location = new System.Drawing.Point(83, 119);
+            this.udRXGenFreq.Location = new System.Drawing.Point(83, 91);
             this.udRXGenFreq.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -35692,7 +35839,7 @@
             // labelTS310
             // 
             this.labelTS310.Image = null;
-            this.labelTS310.Location = new System.Drawing.Point(10, 119);
+            this.labelTS310.Location = new System.Drawing.Point(10, 91);
             this.labelTS310.Name = "labelTS310";
             this.labelTS310.Size = new System.Drawing.Size(55, 16);
             this.labelTS310.TabIndex = 113;
@@ -35706,7 +35853,7 @@
             0,
             0,
             65536});
-            this.udRXGenScale.Location = new System.Drawing.Point(83, 84);
+            this.udRXGenScale.Location = new System.Drawing.Point(83, 64);
             this.udRXGenScale.Maximum = new decimal(new int[] {
             13,
             0,
@@ -35731,7 +35878,7 @@
             // labelTS311
             // 
             this.labelTS311.Image = null;
-            this.labelTS311.Location = new System.Drawing.Point(10, 86);
+            this.labelTS311.Location = new System.Drawing.Point(10, 66);
             this.labelTS311.Name = "labelTS311";
             this.labelTS311.Size = new System.Drawing.Size(60, 16);
             this.labelTS311.TabIndex = 111;
@@ -35750,7 +35897,7 @@
             // lblSigGenRXMode
             // 
             this.lblSigGenRXMode.Image = null;
-            this.lblSigGenRXMode.Location = new System.Drawing.Point(16, 44);
+            this.lblSigGenRXMode.Location = new System.Drawing.Point(16, 34);
             this.lblSigGenRXMode.Name = "lblSigGenRXMode";
             this.lblSigGenRXMode.Size = new System.Drawing.Size(40, 16);
             this.lblSigGenRXMode.TabIndex = 96;
@@ -35766,7 +35913,7 @@
             "Noise",
             "Sweep",
             "Silence"});
-            this.cmboSigGenRXMode.Location = new System.Drawing.Point(56, 44);
+            this.cmboSigGenRXMode.Location = new System.Drawing.Point(57, 34);
             this.cmboSigGenRXMode.Name = "cmboSigGenRXMode";
             this.cmboSigGenRXMode.Size = new System.Drawing.Size(88, 21);
             this.cmboSigGenRXMode.TabIndex = 91;
@@ -37935,6 +38082,10 @@
             this.grpBoxTS1.ResumeLayout(false);
             this.grpSigGenTransmit.ResumeLayout(false);
             this.grpSigGenTransmit.PerformLayout();
+            this.grpPulse.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGenPulseTransition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGenPulseDutyCycle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGenPulseFreq)).EndInit();
             this.grpTXGenSweep.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udTXGenSweepRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udTXGenSweepHigh)).EndInit();
@@ -38805,5 +38956,12 @@
         private System.Windows.Forms.GroupBoxTS grpExtTXInhibit;
         private System.Windows.Forms.CheckBoxTS chkTXInhibit;
         private System.Windows.Forms.CheckBoxTS chkTXInhibitSense;
+        private System.Windows.Forms.GroupBoxTS grpPulse;
+        private System.Windows.Forms.NumericUpDownTS udTXGenPulseDutyCycle;
+        private System.Windows.Forms.LabelTS labelTS316;
+        private System.Windows.Forms.NumericUpDownTS udTXGenPulseFreq;
+        private System.Windows.Forms.LabelTS labelTS315;
+        private System.Windows.Forms.NumericUpDownTS udTXGenPulseTransition;
+        private System.Windows.Forms.LabelTS labelTS317;
     }
 }

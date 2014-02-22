@@ -25,7 +25,7 @@
 #include <stdio.h> 
 #include "KD5TFD-VK6APH-Audio.h"
 #include "private.h" 
-
+extern DttSP_EXP void xdivEXTF (int id, int size, float **input, float *Iout, float *Qout);
 int cb_keep_running; 
 
 // this is the main loop of the callback thread -- basically suck stuff out of the fifo from the io 
@@ -36,9 +36,6 @@ int sctr = 0;
 void Callback_ProcessBuffer(int *bufp, int buflen) { 
 	int rc; 
 	int j;
-	int k;
-	int index;
-
 	int i; 
 	float *callback_in[12]; 
 	float *callback_out[8]; 
@@ -65,7 +62,7 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	}
 
 	// DIVERSITY SECTION
-	if (diversitymode2) {
+	/*if (diversitymode2) {
 	 switch (MercSource)
 	{
 	case 2:
@@ -98,8 +95,9 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	default:
 		break;
 	} 
-  } 
+  } */
 	// END DIVERSITY
+	xdivEXTF (0, BlockSize, INpointer, INpointer[0], INpointer[1]);
 
 	if ( MicResamplerP != NULL && MicResampleBufp != NULL ) {  // we need to resample mic data 
 		int out_sample_count; 

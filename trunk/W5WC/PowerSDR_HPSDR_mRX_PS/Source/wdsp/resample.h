@@ -39,6 +39,7 @@ typedef struct _resample
 	int size;			// number of input samples per buffer
 	double* in;			// input buffer for resampler
 	double* out;		// output buffer for resampler
+	double gain;
 	int idx_in;			// index for input into ring
 	int ncoef;			// number of coefficients
 	int L;				// interpolation factor
@@ -50,7 +51,7 @@ typedef struct _resample
 	int phnum;			// phase number
 } resample, *RESAMPLE;
 
-extern RESAMPLE create_resample (int run, int size, double* in, double* out, int in_rate, int out_rate);
+extern RESAMPLE create_resample (int run, int size, double* in, double* out, int in_rate, int out_rate, double gain);
 
 extern void destroy_resample (RESAMPLE a);
 

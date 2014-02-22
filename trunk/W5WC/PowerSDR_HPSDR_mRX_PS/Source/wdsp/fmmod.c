@@ -122,8 +122,8 @@ void xfmmod (FMMOD a)
 			a->sphase += dp;
 			if (a->sphase >= TWOPI) a->sphase -= TWOPI;
 			if (a->sphase <   0.0 ) a->sphase += TWOPI;
-			a->out[2 * i + 0] = 0.5000 * cos (a->sphase);
-			a->out[2 * i + 1] = 0.5000 * sin (a->sphase);
+			a->out[2 * i + 0] = 0.7071 * cos (a->sphase);
+			a->out[2 * i + 1] = 0.7071 * sin (a->sphase);
 			if ((magdp = dp) < 0.0) magdp = - magdp;
 			if (magdp > peak) peak = magdp;
 		}

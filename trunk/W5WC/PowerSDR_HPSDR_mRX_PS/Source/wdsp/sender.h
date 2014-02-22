@@ -32,9 +32,6 @@ warren@wpratt.com
 #ifndef _sender_h
 #define _sender_h
 
-extern __declspec (dllexport)
-void Spectrum2(int disp, int ss, int LO, float* pbuff);
-
 typedef struct _sender
 {
 	int run;			// 0 = send OFF, 1 = send ON

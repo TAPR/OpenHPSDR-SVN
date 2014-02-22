@@ -49,7 +49,8 @@ void create_rxa (int channel)
 		rxa[channel].inbuff,							// pointer to input buffer
 		rxa[channel].midbuff,							// pointer to output buffer
 		ch[channel].in_rate,							// input samplerate
-		ch[channel].dsp_rate);							// output samplerate
+		ch[channel].dsp_rate,							// output samplerate
+		1.0);											// gain
 
 	// signal generator
 	rxa[channel].gen0.p = create_gen (
@@ -174,9 +175,10 @@ void create_rxa (int channel)
 		ch[channel].dsp_rate,							// sample rate
 		5000.0,											// cutoff freq for noise filter (Hz)
 		rxa[channel].fmd.p->pllpole,					// pole frequency of the fmd pll (Hz)
+		0.100,											// delay time after channel flush
 		0.001,											// tau for noise averaging
 		0.100,											// tau for long noise averaging
-		0.070,											// signal up transition time
+		0.050,											// signal up transition time
 		0.010,											// signal down transition time
 		0.750,											// noise level to initiate tail
 		0.562,											// noise level to initiate unmute
@@ -332,7 +334,8 @@ void create_rxa (int channel)
 		rxa[channel].midbuff,							// pointer to input buffer
 		rxa[channel].outbuff,							// pointer to output buffer
 		ch[channel].dsp_rate,							// input sample rate
-		ch[channel].out_rate);							// output sample rate
+		ch[channel].out_rate,							// output sample rate
+		1.0);											// gain
 
 	// turn OFF / ON resamplers as needed
 	RXAResCheck (channel);

@@ -378,6 +378,12 @@
     <Compile Include="radio.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="RAForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RAForm.designer.cs">
+      <DependentUpon>RAForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="release_notes.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -513,6 +519,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PSForm.resx">
       <DependentUpon>PSForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RAForm.resx">
+      <DependentUpon>RAForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="setup.resx">
       <DependentUpon>setup.cs</DependentUpon>

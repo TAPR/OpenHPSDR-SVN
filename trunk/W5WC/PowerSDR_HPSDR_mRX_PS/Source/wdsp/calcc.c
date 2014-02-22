@@ -27,7 +27,7 @@ warren@wpratt.com
 #define _CRT_SECURE_NO_WARNINGS
 #include "comm.h"
 
-CALCC create_calcc (int channel, int rate, int ints, int spi, double hw_scale, double moxdelay, double loopdelay)
+CALCC create_calcc (int channel, int rate, int ints, int spi, double hw_scale, double moxdelay, double loopdelay, double ptol)
 {
 	int i;
 	CALCC a = (CALCC) malloc0 (sizeof (calcc));
@@ -39,6 +39,7 @@ CALCC create_calcc (int channel, int rate, int ints, int spi, double hw_scale, d
 	a->hw_scale = hw_scale;
 	a->ctrl.moxdelay = moxdelay;
 	a->ctrl.loopdelay = loopdelay;
+	a->ptol = ptol;
 
 	a->t =	(double *) malloc0 ((a->ints + 1) * sizeof(double));
 	a->t1 = (double *) malloc0 ((a->ints + 1) * sizeof(double));
@@ -246,7 +247,7 @@ void cull (int* n, int ints, double* x, double* t, double ptol)
 	*n -= k;
 }
 
-void builder (int points, double *x, double *y, int ints, double *t, int *info, double *c)
+void builder (int points, double *x, double *y, int ints, double *t, int *info, double *c, double ptol)
 {
 	double *catxy;
 	double *sx;
@@ -352,7 +353,7 @@ void builder (int points, double *x, double *y, int ints, double *t, int *info, 
 		sy[i] = catxy[2 * i + 1];
 	}
 
-	cull (&points, ints, sx, t, 0.9);
+	cull (&points, ints, sx, t, ptol);
 
 	if (sx[points - 1] > t[ints])
 	{
@@ -546,7 +547,7 @@ void calc (CALCC a)
 		env_RX[i] = sqrt (a->rxs[2 * i + 0] * a->rxs[2 * i + 0] + a->rxs[2 * i + 1] * a->rxs[2 * i + 1]);
 	}
 
-	builder (a->nsamps, env_TX, env_RX, a->ints, a->t1, &(a->binfo[0]), txrxcoefs);
+	builder (a->nsamps, env_TX, env_RX, a->ints, a->t1, &(a->binfo[0]), txrxcoefs, a->ptol);
 	if (a->binfo[0] != 0)
 		goto cleanup;
 	dx = a->t1[a->ints] - a->t1[a->ints - 1];
@@ -565,9 +566,9 @@ void calc (CALCC a)
 		ys[i] = (- a->txs[2 * i + 0] * a->rxs[2 * i + 1] + a->txs[2 * i + 1] * a->rxs[2 * i + 0]) / norm;
 	}
 
-	builder (a->nsamps, x, ym, a->ints, a->t, &(a->binfo[1]), a->cm);
-	builder (a->nsamps, x, yc, a->ints, a->t, &(a->binfo[2]), a->cc);
-	builder (a->nsamps, x, ys, a->ints, a->t, &(a->binfo[3]), a->cs);
+	builder (a->nsamps, x, ym, a->ints, a->t, &(a->binfo[1]), a->cm, a->ptol);
+	builder (a->nsamps, x, yc, a->ints, a->t, &(a->binfo[2]), a->cc, a->ptol);
+	builder (a->nsamps, x, ys, a->ints, a->t, &(a->binfo[3]), a->cs, a->ptol);
 	if (a->cm[0] != a->cm[0]) a->binfo[1] = -999;
 	if ((a->cm[4 * intm1 + 0] == 0.0) && (a->cm[4 * intm1 + 1] == 0.0) && 
 		(a->cm[4 * intm1 + 2] == 0.0) && (a->cm[4 * intm1 + 3] == 0.0)) a->binfo[1] = -997;
@@ -1026,5 +1027,13 @@ void GetPSMaxTX (int channel, double* maxtx)
 {
 	EnterCriticalSection (&txa[channel].calcc.cs_update);
 	*maxtx = txa[channel].calcc.p->ctrl.env_maxtx;
+	LeaveCriticalSection (&txa[channel].calcc.cs_update);
+}
+
+PORT
+void SetPSPtol (int channel, double ptol)
+{
+	EnterCriticalSection (&txa[channel].calcc.cs_update);
+	txa[channel].calcc.p->ptol = ptol;
 	LeaveCriticalSection (&txa[channel].calcc.cs_update);
 }

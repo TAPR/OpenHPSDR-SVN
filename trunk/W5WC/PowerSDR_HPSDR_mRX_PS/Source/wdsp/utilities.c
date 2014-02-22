@@ -83,20 +83,26 @@ void print_impulse (const char* filename, int N, double* impulse, int rtype, int
 	fclose (file);
 }
 
-void print_peak_env (const char* filename, int N, double* buff)
+void print_peak_env (const char* filename, int N, double* buff, double thresh)
 {
 	int i;
+	static unsigned int seqnum;
 	double peak = 0.0;
 	double new_peak;
-	FILE* file = fopen (filename, "a");
+	FILE* file;
 	for (i = 0; i < N; i++)
 	{
 		new_peak = sqrt (buff[2 * i + 0] * buff[2 * i + 0] + buff[2 * i + 1] * buff[2 * i + 1]);
 		if (new_peak > peak) peak = new_peak;
 	}
-	fprintf (file, "%.17e\n", peak);
-	fflush (file);
-	fclose (file);
+	if (peak >= thresh)
+	{
+		file = fopen (filename, "a");
+		fprintf (file, "%d\t\t%.17e\n", seqnum, peak);
+		fflush (file);
+		fclose (file);
+	}
+	seqnum++;
 }
 
 void print_peak_env_f2 (const char* filename, int N, float* Ibuff, float* Qbuff)
@@ -168,4 +174,30 @@ void print_deviation (const char* filename, double dpmax, double rate)
 	fprintf (file, "Peak Dev = %.4f\n", peak);
 	fflush (file);
 	fclose (file);
+}
+
+void __cdecl CalccPrintSamples (void *pargs)
+{
+	int i;
+	double env_tx, env_rx;
+	int channel = (int)pargs;
+	CALCC a = txa[channel].calcc.p;
+	FILE* file = fopen("samples.txt", "w");
+	fprintf (file, "\n");
+	for (i = 0; i < a->nsamps; i++)
+	{
+		env_tx = sqrt(a->txs[2 * i + 0] * a->txs[2 * i + 0] + a->txs[2 * i + 1] * a->txs[2 * i + 1]);
+		env_rx = sqrt(a->rxs[2 * i + 0] * a->rxs[2 * i + 0] + a->rxs[2 * i + 1] * a->rxs[2 * i + 1]);
+		fprintf(file, "%.12f  %.12f  %.12f      %.12f  %.12f  %.12f\n", 
+			a->txs[2 * i + 0], a->txs[2 * i + 1], env_tx,
+			a->rxs[2 * i + 0], a->rxs[2 * i + 1], env_rx);
+	}
+	fflush(file);
+	fclose(file);
+	_endthread();
+}
+
+void doCalccPrintSamples(int channel)
+{	// no sample buffering - use in single cal mode
+	_beginthread(CalccPrintSamples, 0, (void *)channel);
 }

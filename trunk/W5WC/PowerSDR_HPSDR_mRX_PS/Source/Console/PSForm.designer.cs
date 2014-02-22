@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PSForm));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblPSWelcome = new System.Windows.Forms.Label();
+            this.chkPSRelaxPtol = new System.Windows.Forms.CheckBoxTS();
             this.lblDisabled = new System.Windows.Forms.LabelTS();
             this.btnPSTwoToneGen = new System.Windows.Forms.ButtonTS();
             this.labelTS8 = new System.Windows.Forms.LabelTS();
@@ -94,6 +95,20 @@
             this.lblPSWelcome.Size = new System.Drawing.Size(349, 37);
             this.lblPSWelcome.TabIndex = 33;
             this.lblPSWelcome.Text = "Welcome to PureSignal";
+            // 
+            // chkPSRelaxPtol
+            // 
+            this.chkPSRelaxPtol.AutoSize = true;
+            this.chkPSRelaxPtol.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkPSRelaxPtol.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.chkPSRelaxPtol.Image = null;
+            this.chkPSRelaxPtol.Location = new System.Drawing.Point(38, 368);
+            this.chkPSRelaxPtol.Name = "chkPSRelaxPtol";
+            this.chkPSRelaxPtol.Size = new System.Drawing.Size(104, 17);
+            this.chkPSRelaxPtol.TabIndex = 39;
+            this.chkPSRelaxPtol.Text = "Relax Tolerance";
+            this.chkPSRelaxPtol.UseVisualStyleBackColor = true;
+            this.chkPSRelaxPtol.CheckedChanged += new System.EventHandler(this.chkPSRelaxPtol_CheckedChanged);
             // 
             // lblDisabled
             // 
@@ -606,6 +621,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(627, 397);
+            this.Controls.Add(this.chkPSRelaxPtol);
             this.Controls.Add(this.lblDisabled);
             this.Controls.Add(this.btnPSTwoToneGen);
             this.Controls.Add(this.labelTS8);
@@ -686,5 +702,6 @@
         private System.Windows.Forms.LabelTS labelTS3;
         private System.Windows.Forms.TextBoxTS PSdispRX;
         private System.Windows.Forms.LabelTS labelTS6;
+        private System.Windows.Forms.CheckBoxTS chkPSRelaxPtol;
     }
 }

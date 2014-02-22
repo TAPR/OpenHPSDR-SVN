@@ -74,6 +74,43 @@ typedef struct _gen
 		double d2phs;
 		double dphsmax;
 	} sweep;
+	struct _saw
+	{
+		double mag;
+		double f;
+		double period;
+		double delta;
+		double t;
+	} saw;
+	struct _tri
+	{
+		double mag;
+		double f;
+		double period;
+		double half;
+		double delta;
+		double t;
+		double t1;
+	} tri;
+	struct _pulse
+	{
+		double mag;
+		double pf;
+		double pdutycycle;
+		double ptranstime;
+		double* ctrans;
+		int pcount;
+		int pnon;
+		int pntrans;
+		int pnoff;
+		double pperiod;
+		double tf;
+		double tphs;
+		double tdelta;
+		double tcosdelta;
+		double tsindelta;
+		int state;
+	} pulse;
 } gen, *GEN;
 
 extern GEN create_gen (int run, int size, double* in, double* out, int rate, int mode);

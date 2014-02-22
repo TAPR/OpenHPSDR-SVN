@@ -123,6 +123,15 @@
     <ClInclude Include="fcurve.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="nob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="div.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="analyzer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="channel.c">
@@ -228,6 +237,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fcurve.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nob.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="div.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="analyzer.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

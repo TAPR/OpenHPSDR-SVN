@@ -32,7 +32,7 @@ warren@wpratt.com
 *																								*
 ************************************************************************************************/
 
-RESAMPLE create_resample ( int run, int size, double* in, double* out, int in_rate, int out_rate)
+RESAMPLE create_resample ( int run, int size, double* in, double* out, int in_rate, int out_rate, double gain)
 {
 	RESAMPLE a = (RESAMPLE) malloc0 (sizeof (resample));
 	int x, y, z;
@@ -46,6 +46,7 @@ RESAMPLE create_resample ( int run, int size, double* in, double* out, int in_ra
 	a->size = size;
 	a->in = in;
 	a->out = out;
+	a->gain = gain;
 	x = in_rate;
 	y = out_rate;
 	while (y != 0)
@@ -65,7 +66,7 @@ RESAMPLE create_resample ( int run, int size, double* in, double* out, int in_ra
 	a->ncoef = (a->ncoef / a->L + 1) * a->L;
 	a->cpp = a->ncoef / a->L;
 	a->h = (double *) malloc0 (a->ncoef * sizeof (double));
-	impulse = fir_bandpass (a->ncoef, -fc_norm, +fc_norm, 1.0, 1, 0, (double)a->L);
+	impulse = fir_bandpass (a->ncoef, -fc_norm, +fc_norm, 1.0, 1, 0, a->gain * (double)a->L);
 	i = 0;
 	for (j = 0; j < a->L; j ++)
 		for (k = 0; k < a->ncoef; k += a->L)

@@ -952,24 +952,24 @@ C1
 */
 
 KD5TFDVK6APHAUDIO_API void SetRX1Preamp(int bits) { 
-	//if ( bits != 0 ) { 
+	if ( bits != 0 ) { 
 	//	RX1Preamp = 1; 
-	//	MercPreamp = (1 << 2);
-	//} 
-	//else { 
-		RX1Preamp = 0; 
+		MercPreamp = (1 << 2);
+	} 
+	else { 
+		//RX1Preamp = 0; 
 		MercPreamp = 0;
-	//}	
+	}	
 	return;
 }
 
 KD5TFDVK6APHAUDIO_API void SetRX2Preamp(int bits) { 
-	//if ( bits != 0 ) { 
-	//	RX2Preamp = (1 << 1); 
-	//} 
-	//else { 
+	if ( bits != 0 ) { 
+		RX2Preamp = (1 << 1); 
+	} 
+	else { 
 		RX2Preamp = 0; 
-	//}	
+	}	
 	return;
 }
 
