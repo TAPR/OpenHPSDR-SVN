@@ -12176,6 +12176,12 @@ namespace PowerSDR
         #endregion
 
         #region Test Tab Event Handlers
+        public bool TestIMD
+        { 
+            set { chkTestIMD.Checked = value; } 
+        } 
+
+
 
         private static bool ttgenrun = false;
         public bool TTgenrun
