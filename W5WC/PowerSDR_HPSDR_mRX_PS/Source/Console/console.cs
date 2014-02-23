@@ -516,7 +516,7 @@ namespace PowerSDR
         private Thread rx2_meter_thread;					// updates the rx2 meter data
         private Thread poll_ptt_thread;						// polls the PTT line on the parallel port
         private Thread poll_pa_pwr_thread;					// polls the FWD and REV power if the PA is installed
-        private Thread update_preamps_thread;
+        private Thread poll_tx_inhibit_thead;
         private Thread sql_update_thread;					// polls the RX signal strength
         private Thread rx2_sql_update_thread;				// polls the RX2 signal strength
         private Thread vox_update_thread;					// polls the mic input
@@ -17077,7 +17077,12 @@ namespace PowerSDR
 
                 if (CollapsedDisplay)
                     CollapseDisplay();
-                if (!mox) update_preamp = true;
+                if (!mox)
+                {
+                    //update_preamp_mode = false;
+                    update_preamp = true;
+                    UpdatePreamps();
+                }
                 UpdateRX1DisplayOffsets();
             }
         }
@@ -17120,7 +17125,11 @@ namespace PowerSDR
                     rx1_step_attenuator_by_band[(int)rx1_band] = rx1_attenuator_data;
 
                 udRX1StepAttData.Value = rx1_attenuator_data;
-                if (!mox) update_preamp = true;
+                if (!mox)
+                {
+                    update_preamp = true;
+                    UpdatePreamps();
+                }
                 UpdateRX1DisplayOffsets();
             }
         }
@@ -17149,7 +17158,12 @@ namespace PowerSDR
 
                 if (CollapsedDisplay)
                     CollapseDisplay();
-                if (!mox) update_preamp = true;
+                if (!mox)
+                {
+                    //update_preamp_mode = false;
+                    update_preamp = true;
+                    UpdatePreamps();
+                }
                 UpdateRX2DisplayOffsets();
 
             }
@@ -17172,7 +17186,12 @@ namespace PowerSDR
 
                 if (!initializing && !mox)
                     rx2_step_attenuator_by_band[(int)rx2_band] = value;
-                if (!mox) update_preamp = true;
+                if (!mox)
+                {
+                   // update_preamp_mode = false;
+                    update_preamp = true;
+                    UpdatePreamps();
+                }
                 UpdateRX2DisplayOffsets();
             }
         }
@@ -29448,6 +29467,7 @@ namespace PowerSDR
 
         }
 
+        private bool update_preamp_mutex = false;
         private PreampMode preamp;
         private PreampMode rx2_preamp;
         private bool old_satt = false;
@@ -29457,6 +29477,71 @@ namespace PowerSDR
         private bool update_preamp = true;
         private bool update_preamp_mode = false;
         private void UpdatePreamps()
+        {
+           // while (chkPower.Checked)
+          //  {
+                //if (tx_inhibit_enabled && current_hpsdr_model != HPSDRModel.HPSDR)
+                //{
+                //    bool inhibit_input = JanusAudio.getUserI01();
+                //    if (tx_inhibit_sense)
+                //    {
+                //        if (inhibit_input) TXInhibit = true;
+                //        else TXInhibit = false;
+                //    }
+                //    else
+                //    {
+                //        if (inhibit_input) TXInhibit = false;
+                //        else TXInhibit = true;
+                //    }
+                //}
+              //  else TXInhibit = false;
+
+                if (!mox && attontx && !initializing)
+                {
+                    if (update_preamp_mode && !update_preamp_mutex)
+                    {
+                        update_preamp_mutex = true;
+                        RX1PreampMode = preamp;
+                        SetupForm.HermesEnableAttenuator = old_satt;
+                        SetupForm.HermesAttenuatorData = old_satt_data;
+
+                        if (current_hpsdr_model == HPSDRModel.ANAN100D || 
+                            current_hpsdr_model == HPSDRModel.ORION)
+                        {
+                            RX2PreampMode = rx2_preamp;
+                            RX2StepAttPresent = old_rx2_satt;
+                            RX2ATT = old_rx2_satt_data;
+                        }
+                          update_preamp_mode = false;
+                          update_preamp_mutex = false;
+                                           
+                    }
+
+                    if (update_preamp && !update_preamp_mutex)
+                    {
+                        
+                        preamp = RX1PreampMode;				// save current preamp mode
+                        old_satt_data = SetupForm.HermesAttenuatorData;
+                        old_satt = rx1_step_att_present;
+
+                        if (current_hpsdr_model == HPSDRModel.ANAN100D || 
+                            current_hpsdr_model == HPSDRModel.ORION)
+                        {
+                            rx2_preamp = RX2PreampMode;
+                            old_rx2_satt_data = rx2_attenuator_data;// RX2AttenuatorData;
+                            old_rx2_satt = RX2StepAttPresent;
+                        }
+                        update_preamp = false;
+                        
+                    }
+                }
+
+              //  Thread.Sleep(2);
+          //  }
+
+        }
+
+        private void PollTXInhibit()
         {
             while (chkPower.Checked)
             {
@@ -29474,46 +29559,9 @@ namespace PowerSDR
                         else TXInhibit = true;
                     }
                 }
-              //  else TXInhibit = false;
-
-                if (!mox && attontx)
-                {
-                    if (update_preamp_mode)
-                    {
-                        RX1PreampMode = preamp;
-                        SetupForm.HermesEnableAttenuator = old_satt;
-                        SetupForm.HermesAttenuatorData = old_satt_data;
-
-                        if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
-                        {
-                            RX2PreampMode = rx2_preamp;
-                            RX2StepAttPresent = old_rx2_satt;
-                            RX2ATT = old_rx2_satt_data;
-                        }
-
-                        update_preamp_mode = false;
-                    }
-
-                    if (update_preamp)
-                    {
-                        preamp = RX1PreampMode;				// save current preamp mode
-                        old_satt_data = SetupForm.HermesAttenuatorData;
-                        old_satt = rx1_step_att_present;
-
-                        if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
-                        {
-                            rx2_preamp = RX2PreampMode;
-                            old_rx2_satt_data = rx2_attenuator_data;// RX2AttenuatorData;
-                            old_rx2_satt = RX2StepAttPresent;
-                        }
-
-                        update_preamp = false;
-                    }
-                }
-
-                Thread.Sleep(2);
+                //  else TXInhibit = false;
+                Thread.Sleep(40);
             }
-
         }
 
         //private void PollFWCPAPWR()
@@ -31274,13 +31322,13 @@ namespace PowerSDR
                     poll_pa_pwr_thread.Start();
                 }
 
-                if (update_preamps_thread == null || !update_preamps_thread.IsAlive)
+                if (poll_tx_inhibit_thead == null || !poll_tx_inhibit_thead.IsAlive)
                 {
-                    update_preamps_thread = new Thread(new ThreadStart(UpdatePreamps));
-                    update_preamps_thread.Name = "Update Preamps Thread";
-                    update_preamps_thread.Priority = ThreadPriority.Normal;
-                    update_preamps_thread.IsBackground = true;
-                    update_preamps_thread.Start();
+                    poll_tx_inhibit_thead = new Thread(new ThreadStart(PollTXInhibit));
+                    poll_tx_inhibit_thead.Name = "Update Preamps Thread";
+                    poll_tx_inhibit_thead.Priority = ThreadPriority.Normal;
+                    poll_tx_inhibit_thead.IsBackground = true;
+                    poll_tx_inhibit_thead.Start();
                 }
 
                 /* wbir_thread = new Thread(new ThreadStart(WBIR));
@@ -31404,6 +31452,8 @@ namespace PowerSDR
             }
             else
             {
+                SetupForm.TestIMD = false;
+
                 wdsp.SetChannelState(wdsp.id(0, 0), 0, 1);
                 if (radio.GetDSPRX(0, 1).Active) wdsp.SetChannelState(wdsp.id(0, 1), 0, 1);
                 if (radio.GetDSPRX(1, 0).Active) wdsp.SetChannelState(wdsp.id(2, 0), 0, 1);
@@ -31984,7 +32034,11 @@ namespace PowerSDR
             if (exit) return;
 
             RX1PreampMode = mode;
-            update_preamp = true;
+            if (!mox)
+            {
+                update_preamp = true;
+                UpdatePreamps();
+            }
         }
 
         private void comboRX2Preamp_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -32020,7 +32074,12 @@ namespace PowerSDR
             if (exit) return;
 
             RX2PreampMode = mode;
-            update_preamp = true;
+            if (!mox)
+            {
+                //update_preamp_mode = false;
+                update_preamp = true;
+                UpdatePreamps();
+            }
         }
 
         private void chkMUT_CheckedChanged(object sender, System.EventArgs e)
@@ -32580,6 +32639,41 @@ namespace PowerSDR
 
                 Hdw.TransmitRelay = false;
 
+                if (!mox && attontx)
+                {
+                    //if (update_preamp_mode)
+                    //{
+                    //    RX1PreampMode = preamp;
+                    //    SetupForm.HermesEnableAttenuator = old_satt;
+                    //    SetupForm.HermesAttenuatorData = old_satt_data;
+
+                    //    if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
+                    //    {
+                    //        RX2PreampMode = rx2_preamp;
+                    //        RX2StepAttPresent = old_rx2_satt;
+                    //        RX2ATT = old_rx2_satt_data;
+                    //    }
+
+                    //    update_preamp_mode = false;
+                    //}
+
+                    //if (update_preamp)
+                    //{
+                    //    preamp = RX1PreampMode;				// save current preamp mode
+                    //    old_satt_data = SetupForm.HermesAttenuatorData;
+                    //    old_satt = rx1_step_att_present;
+
+                    //    if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
+                    //    {
+                    //        rx2_preamp = RX2PreampMode;
+                    //        old_rx2_satt_data = rx2_attenuator_data;// RX2AttenuatorData;
+                    //        old_rx2_satt = RX2StepAttPresent;
+                    //    }
+
+                    //    update_preamp = false;
+                    //}
+                }
+
                 /*  if (x2_enabled)
                   {
                       Hdw.UpdateHardware = true;
@@ -33022,8 +33116,8 @@ namespace PowerSDR
                             RX2StepAttPresent = true;                            
                         }
                     }
-                    update_preamp = true;
-                    update_preamp_mode = true;
+                  //  update_preamp = true;
+                  //  update_preamp_mode = true;
                 }
 
                 AudioMOXChanged(tx);    // set MOX in audio.cs
@@ -33048,6 +33142,13 @@ namespace PowerSDR
                     wdsp.SetChannelState(wdsp.id(2, 0), 1, 0);
                 if (radio.GetDSPRX(0, 1).Active)
                     wdsp.SetChannelState(wdsp.id(0, 1), 1, 0);
+
+                if (attontx)
+                {
+                   update_preamp_mode = true;
+                   update_preamp = true;
+                   UpdatePreamps();                  
+                }
 
             }
 
@@ -34945,6 +35046,44 @@ namespace PowerSDR
             last_tx_xvtr_index = tx_xvtr_index;
 
             UpdateRX1Notches();
+
+            UpdatePreamps();
+
+            //if (!mox && attontx)
+            //{
+            //    if (update_preamp_mode)
+            //    {
+            //        RX1PreampMode = preamp;
+            //        SetupForm.HermesEnableAttenuator = old_satt;
+            //        SetupForm.HermesAttenuatorData = old_satt_data;
+
+            //        if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
+            //        {
+            //            RX2PreampMode = rx2_preamp;
+            //            RX2StepAttPresent = old_rx2_satt;
+            //            RX2ATT = old_rx2_satt_data;
+            //        }
+
+            //        update_preamp_mode = false;
+            //    }
+
+            //    if (update_preamp)
+            //    {
+            //        preamp = RX1PreampMode;				// save current preamp mode
+            //        old_satt_data = SetupForm.HermesAttenuatorData;
+            //        old_satt = rx1_step_att_present;
+
+            //        if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
+            //        {
+            //            rx2_preamp = RX2PreampMode;
+            //            old_rx2_satt_data = rx2_attenuator_data;// RX2AttenuatorData;
+            //            old_rx2_satt = RX2StepAttPresent;
+            //        }
+
+            //        update_preamp = false;
+            //    }
+            //}
+
         }
 
 #if false 
