@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='ASCII'?>
+<block>
+  <name>ChirpSource</name>
+  <key>ChirpSource</key>
+  <category>hpsdr</category>
+  <import>execfile("/home/tom/.grc_gnuradio/ChirpSource.py")</import>
+  <make>ChirpSource($chirpRate, $sampRate, $direction, $amplitude)</make>
+  <callback>set_chirpRate($chirpRate)</callback>
+  <callback>set_sampleRate($sampRate)</callback>
+  <callback>set_direction($direction)</callback>
+  <callback>set_amplitude($amplitude)</callback>
+  <param>
+    <name>Chirp Rate</name>
+    <key>chirpRate</key>
+    <value>2000</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Sample Rate</name>
+    <key>sampRate</key>
+    <value>48000</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Direction</name>
+    <key>direction</key>
+    <value>0</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Amplitude</name>
+    <key>amplitude</key>
+    <value>1</value>
+    <type>float</type>
+  </param>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </source>
+<doc>
+/home/tom/.grc_gnuradio/ChirpSource.py
+Chirp goes from -samp_rate/2 to +samp_rate/2 (up).
+or +samp_rate/2 to -samp_rate/2 (down).
+
+Chirp Rate: KiloHertz per second
+Sample Rate: Samples per second
+Direction: 0 = down-chirp.  1= up-chirp
+Amplitude: Maximum value of 1.0
+
+</doc>
+<grc_source></grc_source>
+</block>
