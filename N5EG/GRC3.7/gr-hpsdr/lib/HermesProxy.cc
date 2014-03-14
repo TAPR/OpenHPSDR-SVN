@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /* 
- * Copyright 2013 Tom McDermott, N5EG
+ * Copyright 2013, 2014 Tom McDermott, N5EG
  * 
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +41,8 @@
 // Updates:   Make Clock Source and AlexControl programmable from GUI
 //           July 10, 2013 - update for GRC 3.7
 //	     December 4, 2013 - additional parameters in constructor	
+//           March 13, 2014 - flip transmit I and Q symbols, due to FPGA
+//           reversing them. Set TxDrive default to 0 (rather than 255).
 
 #include <gnuradio/io_signature.h>
 #include "HermesProxy.h"
@@ -811,8 +813,15 @@ int HermesProxy::PutTxIQ(const gr_complex * in0, /*const gr_complex * in1,*/ int
 
 	  A = (int)(in0[i].real() * 32767.0);	// scale to 16 bits
 	  B = (int)(in0[i].imag() * 32767.0);	// scale to 16 bits
-          I = (unsigned int)A;
-	  Q = (unsigned int)B;
+
+
+//        I = (unsigned int)A;
+//	  Q = (unsigned int)B;
+// 03-13-2014  Note: Hermes FPGA reverses transmit I & Q (thus contrary to documentation V1.43)
+// Put them back into the correct places.
+          Q = (unsigned int)A;
+	  I = (unsigned int)B;
+
 
 
 	  if(PTTOffMutesTx & (PTTMode == PTTOff))	// Kill Tx if in Rx and PTTControls the Tx

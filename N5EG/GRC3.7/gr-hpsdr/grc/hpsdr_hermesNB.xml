@@ -73,7 +73,7 @@
   <param>
     <name>Tx Drive Level (0..255)</name>
     <key>TxDrive</key>
-    <value>255</value>
+    <value>0</value>
     <type>int</type>
   </param>
   <param>
@@ -147,5 +147,6 @@
   MSB->C3, 3rd byte->C4 for C0=0,  2nd byte->C3, LSB->C4 for C0 = 0x12.
     Example: "0x00000000" {including quote marks}
   See "HPSDR - USB Data Protocol" document.
+  Update: 03-13-2014: Reverse transmit I and Q samples (FPGA reverses them).
   </doc>
 </block>
