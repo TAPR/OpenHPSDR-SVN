@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>addDialog</class>
+ <widget class="QDialog" name="addDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>648</width>
+    <height>448</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_8">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Contact</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_7">
+         <item row="0" column="0">
+          <layout class="QFormLayout" name="formLayout">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Date</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="dateEdit">
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Current Date from system clock</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>UTC</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="timeEdit">
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string extracomment="System time from clock"/>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Callsign</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="callEdit">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="statusTip">
+              <string>Callsign for the contact</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>TXrst</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="txrstBox">
+             <property name="toolTip">
+              <string>Transmitted Signal strength</string>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>59</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>58</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>57</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>56</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>55</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>54</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>53</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>52</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>51</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>50</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>49</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>48</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>47</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>46</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>45</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>44</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>43</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>42</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>41</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>40</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>39</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>38</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>37</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>36</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>35</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>29</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>28</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>27</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>26</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>25</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>RXrst</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QComboBox" name="rxrstBox">
+             <property name="focusPolicy">
+              <enum>Qt::WheelFocus</enum>
+             </property>
+             <property name="toolTip">
+              <string comment="Received signal strength"/>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>59</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>58</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>57</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>56</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>55</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>54</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>53</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>52</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>51</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>50</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>49</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>48</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>47</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>46</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>45</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>44</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>43</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>42</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>41</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>40</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>39</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>38</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>37</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>36</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>35</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>29</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>28</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>27</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>26</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>25</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLineEdit" name="nameEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Name of contact</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>QTH</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLineEdit" name="qthEdit">
+             <property name="toolTip">
+              <string>Location of contact</string>
+             </property>
+             <property name="statusTip">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_23">
+             <property name="text">
+              <string>Grid Sq</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QLineEdit" name="gridsqEdit">
+             <property name="toolTip">
+              <string>Maidenhead grid for the contact</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="1">
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Frequency</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="freqEdit">
+             <property name="toolTip">
+              <string>Frequency read from QtRadio</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Mode</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>Country</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>State</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_13">
+             <property name="text">
+              <string>Event</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QComboBox" name="eventBox">
+             <property name="toolTip">
+              <string>An event flag</string>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>Home</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QLineEdit" name="checkEdit">
+             <property name="toolTip">
+              <string>Check number from contact</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="label_14">
+             <property name="text">
+              <string>Check</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="modeEdit">
+             <property name="toolTip">
+              <string>Mode read from QtRadio</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QSpinBox" name="contactBox">
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>count of your conatcts for this event</string>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>9999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Contact</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLineEdit" name="countyEdit">
+             <property name="toolTip">
+              <string>County of the contact</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_24">
+             <property name="text">
+              <string>County</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="countryBox">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="toolTip">
+              <string>Country, will change as you enter callsign</string>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+             <property name="frame">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QComboBox" name="subdivisionBox">
+             <property name="toolTip">
+              <string>Subdivision, will change as you enter callsign</string>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0" colspan="2">
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_15">
+             <property name="text">
+              <string>Comment</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="commentEdit">
+             <property name="toolTip">
+              <string>Comment</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Owner</string>
+      </attribute>
+      <layout class="QFormLayout" name="formLayout_3">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="0">
+          <layout class="QFormLayout" name="formLayout_8">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_21">
+             <property name="text">
+              <string>Operator</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="operatorEdit"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_20">
+             <property name="text">
+              <string>Home QTH</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="homeqthEdit"/>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="1">
+          <layout class="QFormLayout" name="formLayout_4">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_16">
+             <property name="text">
+              <string>Station_Call</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="stationEdit"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="homegridEdit"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>Grid square</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>QSL</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <layout class="QFormLayout" name="formLayout_6">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>QSL_RCVD</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_19">
+             <property name="text">
+              <string>QSL_RCVD_VIA</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QDateEdit" name="qslrcvdEdit"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="qslrcvdviaBox">
+             <item>
+              <property name="text">
+               <string>None</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Direct</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Bureau</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Electronic</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Manager</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="1">
+          <layout class="QFormLayout" name="formLayout_7">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_22">
+             <property name="text">
+              <string>QSL_SENT</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_26">
+             <property name="text">
+              <string>QSL_SENT_VIA</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QDateEdit" name="qslsentEdit"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="qslsentviaBox">
+             <item>
+              <property name="text">
+               <string>None</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Direct</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Bureau</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Electronic</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Manager</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <item row="0" column="0">
+      <widget class="QPushButton" name="addButton">
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="resetButton">
+       <property name="text">
+        <string>Reset</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>txrstBox</tabstop>
+  <tabstop>rxrstBox</tabstop>
+  <tabstop>nameEdit</tabstop>
+  <tabstop>qthEdit</tabstop>
+  <tabstop>gridsqEdit</tabstop>
+  <tabstop>commentEdit</tabstop>
+  <tabstop>countyEdit</tabstop>
+  <tabstop>checkEdit</tabstop>
+  <tabstop>addButton</tabstop>
+  <tabstop>resetButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>freqEdit</tabstop>
+  <tabstop>modeEdit</tabstop>
+  <tabstop>eventBox</tabstop>
+  <tabstop>contactBox</tabstop>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>timeEdit</tabstop>
+  <tabstop>operatorEdit</tabstop>
+  <tabstop>stationEdit</tabstop>
+  <tabstop>qslrcvdEdit</tabstop>
+  <tabstop>qslrcvdviaBox</tabstop>
+  <tabstop>qslsentEdit</tabstop>
+  <tabstop>qslsentviaBox</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>callEdit</tabstop>
+  <tabstop>homeqthEdit</tabstop>
+  <tabstop>homegridEdit</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
