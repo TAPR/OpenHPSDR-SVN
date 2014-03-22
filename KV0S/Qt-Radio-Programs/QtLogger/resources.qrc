@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>filefolder.svg</file>
+        <file>filefolder16.svg</file>
+        <file>filefolder32.svg</file>
+        <file>filefoldergrey.svg</file>
+        <file>filefoldergrey16.svg</file>
+        <file>hpsdr5.svg</file>
+        <file>minus-red.svg</file>
+        <file>plus-green.svg</file>
+    </qresource>
+    <qresource prefix="/help">
+        <file>daveStyle.css</file>
+        <file>QtLogger.html</file>
+    </qresource>
+    <qresource prefix="/xml">
+        <file>adif_codes_2.2.7.xml</file>
+        <file>DXCCcountries.xml</file>
+    </qresource>
+</RCC>
