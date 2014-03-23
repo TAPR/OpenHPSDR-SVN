@@ -3,7 +3,7 @@
   <name>ChirpSource</name>
   <key>ChirpSource</key>
   <category>hpsdr</category>
-  <import>execfile("/home/tom/.grc_gnuradio/ChirpSource.py")</import>
+  <import>execfile("~/.grc_gnuradio/ChirpSource.py")</import>
   <make>ChirpSource($chirpRate, $sampRate, $direction, $amplitude)</make>
   <callback>set_chirpRate($chirpRate)</callback>
   <callback>set_sampleRate($sampRate)</callback>
@@ -39,7 +39,7 @@
     <vlen>1</vlen>
   </source>
 <doc>
-/home/tom/.grc_gnuradio/ChirpSource.py
+~/.grc_gnuradio/ChirpSource.py
 Chirp goes from -samp_rate/2 to +samp_rate/2 (up).
 or +samp_rate/2 to -samp_rate/2 (down).
 
