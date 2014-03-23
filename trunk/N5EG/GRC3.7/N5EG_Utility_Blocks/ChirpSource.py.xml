@@ -3,7 +3,7 @@
   <name>ChirpSource</name>
   <key>ChirpSource</key>
   <category>hpsdr</category>
-  <import>execfile("~/.grc_gnuradio/ChirpSource.py")</import>
+  <import>execfile("/home/tom/.grc_gnuradio/ChirpSource.py")</import>
   <make>ChirpSource($chirpRate, $sampRate, $direction, $amplitude)</make>
   <callback>set_chirpRate($chirpRate)</callback>
   <callback>set_sampleRate($sampRate)</callback>

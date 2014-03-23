@@ -3,7 +3,7 @@
   <name>Staticphaseshifter</name>
   <key>StaticPhaseShifter</key>
   <category>hpsdr</category>
-  <import>execfile("~/.grc_gnuradio/StaticPhaseShifter.py")</import>
+  <import>execfile("/home/tom/.grc_gnuradio/StaticPhaseShifter.py")</import>
   <make>StaticPhaseShifter()</make>
   <sink>
     <name>SignalIn</name>

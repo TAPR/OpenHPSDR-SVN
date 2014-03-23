@@ -3,7 +3,7 @@ utilities. Place these files in ~/.grc_gnuradio folder
 (normally hidden) to make them availabile under
 Gnuradio 3.7.2.
 
-the blocks available:
+The blocks available:
 
 Static Phase shifter - allows shifting the pahse of a signal by
 a constant amount from -Pi to +Pi.
@@ -16,5 +16,17 @@ is no text buffering. You need to wiat for the current line to
 complete sending before entering new text. The CW speed must be
 8 WPM or faster.
 
-02/04/2014  Tom McDermott, N5EG
+chirpsource - genrateds a linearly-chirped signal between
+-samp_rate/2 and +samp_rate/2 with selectable direction.
+
+03/22/2014  Tom McDermott, N5EG
+
+************************
+NOTE:
+
+You must hand edit the path in the .XML file to point to
+the location on disk where your .grc_gnuradio diretory is
+located. I've tried ~/ but it doesn't work -- the path needs
+to be something like /home/tom/.grc_gnuradio/exectuable name
+*************************
 
