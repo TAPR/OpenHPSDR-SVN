@@ -107,7 +107,7 @@ class ChirpSource(gr.sync_block):
         self.count = self.n / 4096        # number of full buffers
         self.remainder = self.n % 4096    #last buffer size
         
-        print " count =",self.count," remainder =",self.remainder
+#        print " count =",self.count," remainder =",self.remainder
                    
         x = 0
         while x < self.count:

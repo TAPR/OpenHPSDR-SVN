@@ -3,7 +3,7 @@
   <name>Staticphaseshifter</name>
   <key>StaticPhaseShifter</key>
   <category>hpsdr</category>
-  <import>execfile("/home/tom/.grc_gnuradio/StaticPhaseShifter.py")</import>
+  <import>execfile("~/.grc_gnuradio/StaticPhaseShifter.py")</import>
   <make>StaticPhaseShifter()</make>
   <sink>
     <name>SignalIn</name>
@@ -20,7 +20,7 @@
     <type>complex</type>
     <vlen>1</vlen>
   </source>
-  <doc> /home/tom/.grc_gnuradio/StaticPhaseShifter.py
+  <doc> ~/.grc_gnuradio/StaticPhaseShifter.py
 
   Shifts the phase of the SignalIn (complex) port producing SignalOut
   (complex). Adjust is a (float) with a value of -PI to +PI radians,

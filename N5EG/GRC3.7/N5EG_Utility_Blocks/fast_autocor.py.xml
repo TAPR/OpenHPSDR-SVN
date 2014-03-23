@@ -3,7 +3,7 @@
   <name>Fast Autocor</name>
   <key>fast_autocor</key>
   <category>hpsdr</category>
-  <import>execfile("/home/tom/.grc_gnuradio/fast_autocor.py")</import>
+  <import>execfile("~/.grc_gnuradio/fast_autocor.py")</import>
   <make>fast_autocor(
     fft_size=$fft_size,
 )</make>
@@ -25,7 +25,7 @@
     <vlen>1</vlen>
   </source>
   <doc>
-/home/tom/.grc_gnuradio/fast_autocor.py
+~/.grc_gnuradio/fast_autocor.py
 Fast autocorrelation. fft_size is the block size to compute the fft.
 It must be an integer power of 2 (256, 512, 1024, 2048, etc.).
 

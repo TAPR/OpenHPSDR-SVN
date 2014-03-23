@@ -3,7 +3,7 @@
   <name>CWKeyboard</name>
   <key>CWKeyboard</key>
   <category>hpsdr</category>
-  <import>execfile("/home/tom/.grc_gnuradio/CWKeyboard.py")</import>
+  <import>execfile("~/.grc_gnuradio/CWKeyboard.py")</import>
   <make>CWKeyboard($sampRate, $WPM)</make>
   <callback>set_TextInput($Text_In)</callback>
   <callback>set_WPM($WPM)</callback>
@@ -32,7 +32,7 @@
     <vlen>1</vlen>
   </source>
 <doc>
-/home/tom/.grc_gnuradio/CWKeyboard.py
+~/.grc_gnuradio/CWKeyboard.py
 </doc>
 <grc_source></grc_source>
 </block>
