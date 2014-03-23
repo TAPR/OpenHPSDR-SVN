@@ -3,7 +3,7 @@
   <name>Fast Autocor</name>
   <key>fast_autocor</key>
   <category>hpsdr</category>
-  <import>execfile("~/.grc_gnuradio/fast_autocor.py")</import>
+  <import>execfile("/home/tom/.grc_gnuradio/fast_autocor.py")</import>
   <make>fast_autocor(
     fft_size=$fft_size,
 )</make>
