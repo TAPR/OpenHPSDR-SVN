@@ -94,6 +94,8 @@
     <ClInclude Include="compress.h" />
     <ClInclude Include="delay.h" />
     <ClInclude Include="div.h" />
+    <ClInclude Include="eer.h" />
+    <ClInclude Include="emph.h" />
     <ClInclude Include="eq.h" />
     <ClInclude Include="channel.h" />
     <ClInclude Include="comm.h" />
@@ -104,6 +106,7 @@
     <ClInclude Include="fmmod.h" />
     <ClInclude Include="gain.h" />
     <ClInclude Include="gen.h" />
+    <ClInclude Include="iir.h" />
     <ClInclude Include="iobuffs.h" />
     <ClInclude Include="iqc.h" />
     <ClInclude Include="main.h" />
@@ -135,12 +138,15 @@
     <ClCompile Include="compress.c" />
     <ClCompile Include="delay.c" />
     <ClCompile Include="div.c" />
+    <ClCompile Include="eer.c" />
+    <ClCompile Include="emph.c" />
     <ClCompile Include="eq.c" />
     <ClCompile Include="channel.c" />
     <ClCompile Include="fcurve.c" />
     <ClCompile Include="fmd.c" />
     <ClCompile Include="gain.c" />
     <ClCompile Include="gen.c" />
+    <ClCompile Include="iir.c" />
     <ClCompile Include="iqc.c" />
     <ClCompile Include="meterlog10.c" />
     <ClCompile Include="fir.c" />

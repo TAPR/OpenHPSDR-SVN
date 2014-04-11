@@ -24,7 +24,7 @@ warren@wpratt.com
 
 */
 
-#include <comm.h>
+#include "comm.h"
 
 ANR create_anr	(
 				int run,

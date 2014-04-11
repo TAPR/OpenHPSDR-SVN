@@ -112,6 +112,10 @@ struct _txa
 	} ammod;
 	struct
 	{
+		EMPH p;
+	} preemph;
+	struct
+	{
 		FMMOD p;
 	} fmmod;
 	struct
@@ -136,6 +140,10 @@ struct _txa
 		IQC p0, p1;
 		// p0 for dsp-synchronized reference, p1 for other
 	} iqc;
+	struct
+	{
+		EER p;
+	} eer;
 } txa[MAX_CHANNELS];
 
 extern void create_txa (int channel);

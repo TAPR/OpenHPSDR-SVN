@@ -5728,7 +5728,7 @@ namespace PowerSDR
 
                 if ((mode == 3) || (mode == 4) || (mode == 7) || (mode == 8) || (mode == 9))
                 {
-                    tuningstep = tuningstep;
+                    ; // tuningstep = tuningstep;
                 }
                 else
                 {

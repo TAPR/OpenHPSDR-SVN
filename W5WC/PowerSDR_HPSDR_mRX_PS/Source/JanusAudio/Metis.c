@@ -396,7 +396,7 @@ else {
 		 sendto(listenSock, (char *) &outpacket, sizeof(outpacket), 0, (SOCKADDR *)&dest_addr, sizeof(dest_addr)); 
 		 printf("discovery packet sent\n");  fflush(stdout); 
 
-		 for ( j = 0; j < 5; j++ ) {
+		 for ( j = 0; j < 2; j++ ) {
 			 rc = recvfrom_withtimeout(listenSock,  (char *) &inpacket, sizeof(inpacket), 0, 
 				 (SOCKADDR *)&disc_reply_addr, &disc_reply_addr_len, 3, 0); 
 			 printf("recvfrom_withtimeout rc=%d\n", rc); 

@@ -2,7 +2,7 @@
 
 This file is part of a program that implements a Software-Defined Radio.
 
-Copyright (C) 2013 Warren Pratt, NR0V
+Copyright (C) 2013, 2014 Warren Pratt, NR0V
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -91,7 +91,8 @@ CALCC create_calcc (int channel, int rate, int ints, int spi, double hw_scale, d
 		0,											// output buffer	[stuff later]
 		a->rate,									// sample rate
 		20.0e-09,									// delta (delay stepsize)
-		0.0);										// delay
+		0.0,										// delay
+		3);											// delay both I and Q
 	a->txdelay = create_delay (
 		1,											// run
 		0,											// size				[stuff later]
@@ -99,7 +100,16 @@ CALCC create_calcc (int channel, int rate, int ints, int spi, double hw_scale, d
 		0,											// output buffer	[stuff later]
 		a->rate,									// sample rate
 		20.0e-09,									// delta (delay stepsize)
-		0.0);										// delay	
+		0.0,										// delay
+		3);											// delay both I and Q
+	a->disp.x  = (double *) malloc0 (a->nsamps * sizeof (double));
+	a->disp.ym = (double *) malloc0 (a->nsamps * sizeof (double));
+	a->disp.yc = (double *) malloc0 (a->nsamps * sizeof (double));
+	a->disp.ys = (double *) malloc0 (a->nsamps * sizeof (double));
+	a->disp.cm = (double *) malloc0 (a->ints * 4 * sizeof(double));
+	a->disp.cc = (double *) malloc0 (a->ints * 4 * sizeof(double));
+	a->disp.cs = (double *) malloc0 (a->ints * 4 * sizeof(double));
+	InitializeCriticalSectionAndSpinCount (&a->disp.cs_disp, 2500);
 	a->util.ints = a->ints;
 	a->util.channel = a->channel;
 	a->temprx = (double *)malloc0 (2048 * sizeof (complex));														// remove later
@@ -111,6 +121,13 @@ void destroy_calcc (CALCC a)
 {
 	_aligned_free (a->temptx);																						// remove later
 	_aligned_free (a->temprx);																						// remove later
+	DeleteCriticalSection (&a->disp.cs_disp);
+	_aligned_free (a->disp.cs);
+	_aligned_free (a->disp.cc);
+	_aligned_free (a->disp.cm);
+	_aligned_free (a->disp.ys);
+	_aligned_free (a->disp.yc);
+	_aligned_free (a->disp.ym);
 	destroy_delay (a->txdelay);
 	destroy_delay (a->rxdelay);
 	DeleteCriticalSection (&txa[a->channel].calcc.cs_update);
@@ -153,7 +170,7 @@ void decomp(int n, double *a, int *piv, int *info)
 	int i, j, k;
 	int t_piv;
 	double m_row, mt_row, m_col, mt_col;
-	double *wrk = (double *)malloc(n * sizeof(double));
+	double *wrk = (double *)malloc0(n * sizeof(double));
 	*info = 0;
 	for (i = 0; i < n; i++)
 	{
@@ -205,7 +222,7 @@ void decomp(int n, double *a, int *piv, int *info)
 	if (a[n * n - 1] == 0.0)
 		*info = - n;
 cleanup:
-	free (wrk);
+	_aligned_free (wrk);
 }
 
 void dsolve(int n, double *a, int *piv, double *b, double *x)
@@ -249,97 +266,41 @@ void cull (int* n, int ints, double* x, double* t, double ptol)
 
 void builder (int points, double *x, double *y, int ints, double *t, int *info, double *c, double ptol)
 {
-	double *catxy;
-	double *sx;
-	double *sy;
-	double *h;
-	int *p;
-	int *np;
+	double *catxy = (double *)malloc0(2 * points * sizeof(double));
+	double *sx =	(double *)malloc0(points * sizeof(double));
+	double *sy =	(double *)malloc0(points * sizeof(double));
+	double *h =		(double *)malloc0(ints * sizeof(double));
+	int *p =		(int *)   malloc0(ints * sizeof(int));
+	int *np =	    (int *)   malloc0(ints * sizeof(int));
 	double u, v, alpha, beta, gamma, delta;
-	double *taa;
-	double *tab;
-	double *tag;
-	double *tad;
-	double *tbb;
-	double *tbg;
-	double *tbd;
-	double *tgg;
-	double *tgd;
-	double *tdd;
-	double *A;
-	double *B;
-	double *C;
-	double *D;
-	double *E;
-	double *F;
-	double *G;
-	double *MAT;
-	double *RHS;
-	double *SLN;
-	double *z;
-	double *zp;
-	int i, j, k, m;
-
-	int dinfo;
-	int *ipiv;
-
+	double *taa =   (double *)malloc0(ints * sizeof(double));
+	double *tab =   (double *)malloc0(ints * sizeof(double));
+	double *tag =   (double *)malloc0(ints * sizeof(double));
+	double *tad =   (double *)malloc0(ints * sizeof(double));
+	double *tbb =   (double *)malloc0(ints * sizeof(double));
+	double *tbg =   (double *)malloc0(ints * sizeof(double));
+	double *tbd =   (double *)malloc0(ints * sizeof(double));
+	double *tgg =   (double *)malloc0(ints * sizeof(double));
+	double *tgd =   (double *)malloc0(ints * sizeof(double));
+	double *tdd =   (double *)malloc0(ints * sizeof(double));
 	int nsize = 3*ints + 1;
 	int intp1 = ints + 1;
 	int intm1 = ints - 1;
-
-	catxy = (double *)malloc(2 * points * sizeof(double));
-	sx =	(double *)malloc(points * sizeof(double));
-	sy =	(double *)malloc(points * sizeof(double));
-	h =		(double *)malloc(ints * sizeof(double));
-	p =		(int *)malloc(ints * sizeof(int));
-	np =	(int *)malloc(ints * sizeof(int));
-
-	taa = (double *)malloc(ints * sizeof(double));
-	tab = (double *)malloc(ints * sizeof(double));
-	tag = (double *)malloc(ints * sizeof(double));
-	tad = (double *)malloc(ints * sizeof(double));
-	tbb = (double *)malloc(ints * sizeof(double));
-	tbg = (double *)malloc(ints * sizeof(double));
-	tbd = (double *)malloc(ints * sizeof(double));
-	tgg = (double *)malloc(ints * sizeof(double));
-	tgd = (double *)malloc(ints * sizeof(double));
-	tdd = (double *)malloc(ints * sizeof(double));
-
-	A = (double *)malloc(intp1 * intp1 * sizeof(double));
-	B = (double *)malloc(intp1 * intp1 * sizeof(double));
-	C = (double *)malloc(intm1 * intp1 * sizeof(double));
-	D = (double *)malloc(intp1 * sizeof(double));
-	E = (double *)malloc(intp1 * intp1 * sizeof(double));
-	F = (double *)malloc(intm1 * intp1 * sizeof(double));
-	G = (double *)malloc(intp1 * sizeof(double));
-
-	MAT = (double *)malloc(nsize * nsize * sizeof(double));
-	RHS = (double *)malloc(nsize * sizeof(double));
-	SLN = (double *)malloc(nsize * sizeof(double));
-
-	z =	 (double *)malloc(intp1 * sizeof(double));
-	zp = (double *)malloc(intp1 * sizeof(double));
-
-	memset(np, 0, ints * sizeof(int));
-
-	memset(taa, 0, ints * sizeof(double));
-	memset(tab, 0, ints * sizeof(double));
-	memset(tag, 0, ints * sizeof(double));
-	memset(tad, 0, ints * sizeof(double));
-	memset(tbb, 0, ints * sizeof(double));
-	memset(tbg, 0, ints * sizeof(double));
-	memset(tbd, 0, ints * sizeof(double));
-	memset(tgg, 0, ints * sizeof(double));
-	memset(tgd, 0, ints * sizeof(double));
-	memset(tdd, 0, ints * sizeof(double));
-
-	memset(A, 0, intp1 * intp1 * sizeof(double));
-	memset(B, 0, intp1 * intp1 * sizeof(double));
-	memset(C, 0, intm1 * intp1 * sizeof(double));
-	memset(D, 0, intp1 * sizeof(double));
-	memset(E, 0, intp1 * intp1 * sizeof(double));
-	memset(F, 0, intm1 * intp1 * sizeof(double));
-	memset(G, 0, intp1 * sizeof(double));
+	double *A =     (double *)malloc0(intp1 * intp1 * sizeof(double));
+	double *B =     (double *)malloc0(intp1 * intp1 * sizeof(double));
+	double *C =     (double *)malloc0(intm1 * intp1 * sizeof(double));
+	double *D =     (double *)malloc0(intp1 * sizeof(double));
+	double *E =     (double *)malloc0(intp1 * intp1 * sizeof(double));
+	double *F =     (double *)malloc0(intm1 * intp1 * sizeof(double));
+	double *G =     (double *)malloc0(intp1 * sizeof(double));
+	double *MAT =   (double *)malloc0(nsize * nsize * sizeof(double));
+	double *RHS =   (double *)malloc0(nsize * sizeof(double));
+	double *SLN =   (double *)malloc0(nsize * sizeof(double));
+	double *z =	    (double *)malloc0(intp1 * sizeof(double));
+	double *zp =    (double *)malloc0(intp1 * sizeof(double));
+	int i, j, k, m;
+	int dinfo;
+	int *ipiv =        (int *)malloc0(nsize * sizeof(int));
 
 	for (i = 0; i < points; i++)
 	{
@@ -352,9 +313,7 @@ void builder (int points, double *x, double *y, int ints, double *t, int *info, 
 		sx[i] = catxy[2 * i + 0];
 		sy[i] = catxy[2 * i + 1];
 	}
-
 	cull (&points, ints, sx, t, ptol);
-
 	if (sx[points - 1] > t[ints])
 	{
 		*info = -1000;
@@ -364,7 +323,6 @@ void builder (int points, double *x, double *y, int ints, double *t, int *info, 
 
 	for(j = 0; j < ints; j++)
 		h[j] = t[j + 1] - t[j];
-
 	p[0] = 0;
 	j = 0;
 	for (i = 0; i < points; i++)
@@ -379,7 +337,6 @@ void builder (int points, double *x, double *y, int ints, double *t, int *info, 
 			np[j] = 1;
 		}
 	}
-
 	for (i = 0; i < ints; i++)
 		for (j = p[i]; j < p[i] + np[i]; j++)
 		{
@@ -428,7 +385,6 @@ void builder (int points, double *x, double *y, int ints, double *t, int *info, 
 		F[i * intp1 + (i + 1)] = 2.0 * (h[i] + h[i + 1]);
 		F[i * intp1 + (i + 2)] = h[i];
 	}
-
 	for (i = 0, k = 0; i < intp1; i++, k++)
 	{
 		for (j = 0, m = 0; j < intp1; j++, m++)
@@ -459,11 +415,8 @@ void builder (int points, double *x, double *y, int ints, double *t, int *info, 
 			MAT[k*nsize + m] = 0.0;
 		RHS[k] = 0.0;
 	}
-
-	ipiv = (int *)malloc(nsize * sizeof(int));
 	decomp(nsize, MAT, ipiv, &dinfo);
 	dsolve(nsize, MAT, ipiv, RHS, SLN);
-	free (ipiv);
 	if (dinfo != 0)
 	{
 		*info = dinfo;
@@ -483,63 +436,55 @@ void builder (int points, double *x, double *y, int ints, double *t, int *info, 
 		c[4 * i + 3] = 2.0 / (h[i] * h[i] * h[i]) * (z[i] - z[i + 1]) + 1.0 / (h[i] * h[i]) * (zp[i] + zp[i + 1]);
 	}
 cleanup:
-	free (catxy);
-	free (sx);
-	free (sy);
-	free (h);
-	free (p);
-	free (np);
+	_aligned_free (ipiv);
+	_aligned_free (catxy);
+	_aligned_free (sx);
+	_aligned_free (sy);
+	_aligned_free (h);
+	_aligned_free (p);
+	_aligned_free (np);
 
-	free (taa);
-	free (tab);
-	free (tag);
-	free (tad);
-	free (tbb);
-	free (tbg);
-	free (tbd);
-	free (tgg);
-	free (tgd);
-	free (tdd);
+	_aligned_free (taa);
+	_aligned_free (tab);
+	_aligned_free (tag);
+	_aligned_free (tad);
+	_aligned_free (tbb);
+	_aligned_free (tbg);
+	_aligned_free (tbd);
+	_aligned_free (tgg);
+	_aligned_free (tgd);
+	_aligned_free (tdd);
 
-	free (A);
-	free (B);
-	free (C);
-	free (D);
-	free (E);
-	free (F);
-	free (G);
+	_aligned_free (A);
+	_aligned_free (B);
+	_aligned_free (C);
+	_aligned_free (D);
+	_aligned_free (E);
+	_aligned_free (F);
+	_aligned_free (G);
 
-	free (MAT);
-	free (RHS);
-	free (SLN);
+	_aligned_free (MAT);
+	_aligned_free (RHS);
+	_aligned_free (SLN);
 
-	free (z);
-	free (zp);
+	_aligned_free (z);
+	_aligned_free (zp);
 }
 
 void calc (CALCC a)
 {
 	int i;
-	double *env_TX;
-	double *env_RX;
-	double *txrxcoefs;
-	double *x;
-	double *ym;
-	double *yc;
-	double *ys;
+	double *env_TX =	(double *)malloc0(a->nsamps * sizeof(double));
+	double *env_RX =	(double *)malloc0(a->nsamps * sizeof(double));
+	double *txrxcoefs = (double *)malloc0(a->ints * 4 * sizeof(double));
+	double *x =			(double *)malloc0(a->nsamps * sizeof(double));
+	double *ym =		(double *)malloc0(a->nsamps * sizeof(double));
+	double *yc =		(double *)malloc0(a->nsamps * sizeof(double));
+	double *ys =		(double *)malloc0(a->nsamps * sizeof(double));
 	double dx;
 	double rx_scale;
 	int intm1;
 	double norm;
-
-	env_TX =	(double *)malloc(a->nsamps * sizeof(double));
-	env_RX =	(double *)malloc(a->nsamps * sizeof(double));
-	txrxcoefs = (double *)malloc(a->ints * 4 * sizeof(double));
-
-	x =			(double *)malloc(a->nsamps * sizeof(double));
-	ym =		(double *)malloc(a->nsamps * sizeof(double));
-	yc =		(double *)malloc(a->nsamps * sizeof(double));
-	ys =		(double *)malloc(a->nsamps * sizeof(double));
 
 	for (i = 0; i < a->nsamps; i++)
 	{
@@ -572,15 +517,33 @@ void calc (CALCC a)
 	if (a->cm[0] != a->cm[0]) a->binfo[1] = -999;
 	if ((a->cm[4 * intm1 + 0] == 0.0) && (a->cm[4 * intm1 + 1] == 0.0) && 
 		(a->cm[4 * intm1 + 2] == 0.0) && (a->cm[4 * intm1 + 3] == 0.0)) a->binfo[1] = -997;
+	EnterCriticalSection (&a->disp.cs_disp);
+	memcpy(a->disp.x,  x,  a->nsamps * sizeof (double));
+	memcpy(a->disp.ym, ym, a->nsamps * sizeof (double));
+	memcpy(a->disp.yc, yc, a->nsamps * sizeof (double));
+	memcpy(a->disp.ys, ys, a->nsamps * sizeof (double));
+	if ((a->binfo[0] == 0) && (a->binfo[1] == 0) && (a->binfo[2] == 0) && (a->binfo[3] == 0))
+	{
+		memcpy(a->disp.cm, a->cm, a->ints * 4 * sizeof (double));
+		memcpy(a->disp.cc, a->cc, a->ints * 4 * sizeof (double));
+		memcpy(a->disp.cs, a->cs, a->ints * 4 * sizeof (double));
+	}
+	else
+	{
+		memset(a->disp.cm, 0, a->ints * 4 * sizeof (double));
+		memset(a->disp.cc, 0, a->ints * 4 * sizeof (double));
+		memset(a->disp.cs, 0, a->ints * 4 * sizeof (double));
+	}
+	LeaveCriticalSection (&a->disp.cs_disp);
 cleanup:
-	free (x);
-	free (ym);
-	free (yc);
-	free (ys);
+	_aligned_free (x);
+	_aligned_free (ym);
+	_aligned_free (yc);
+	_aligned_free (ys);
 
-	free (env_TX);
-	free (env_RX);
-	free (txrxcoefs);
+	_aligned_free (env_TX);
+	_aligned_free (env_RX);
+	_aligned_free (txrxcoefs);
 }
 
 void __cdecl doCalcCorrection (void *arg)
@@ -1036,4 +999,19 @@ void SetPSPtol (int channel, double ptol)
 	EnterCriticalSection (&txa[channel].calcc.cs_update);
 	txa[channel].calcc.p->ptol = ptol;
 	LeaveCriticalSection (&txa[channel].calcc.cs_update);
+}
+
+PORT
+void GetPSDisp (int channel, double* x, double* ym, double* yc, double* ys, double* cm, double* cc, double* cs)
+{
+	CALCC a = txa[channel].calcc.p;
+	EnterCriticalSection (&a->disp.cs_disp);
+	memcpy (x,  a->disp.x,  a->nsamps * sizeof (double));
+	memcpy (ym, a->disp.ym, a->nsamps * sizeof (double));
+	memcpy (yc, a->disp.yc, a->nsamps * sizeof (double));
+	memcpy (ys, a->disp.ys, a->nsamps * sizeof (double));
+	memcpy (cm, a->disp.cm, a->ints * 4 * sizeof (double));
+	memcpy (cc, a->disp.cc, a->ints * 4 * sizeof (double));
+	memcpy (cs, a->disp.cs, a->ints * 4 * sizeof (double));
+	LeaveCriticalSection (&a->disp.cs_disp);
 }

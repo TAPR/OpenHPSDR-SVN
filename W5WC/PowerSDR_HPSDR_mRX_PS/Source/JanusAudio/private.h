@@ -68,6 +68,8 @@ extern DttSP_EXP void destroy_resampleFV (/*ResSt*/ void * resst);
 //#include <pthread.h>
 //#include <semaphore.h>
 
+extern const int numInputBuffs;
+
 // PowerSDR interface routines
 // extern KD5TFDVK6APHAUDIO_API int StartAudio(int block_size);
 extern KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), int sample_bits, int no_send);
@@ -299,6 +301,12 @@ extern int enable_ADC3_step_att;
 extern int adc1_step_att_data;
 extern int adc2_step_att_data;
 extern int adc3_step_att_data;
+
+extern int set_cw_keyer;
+extern int cw_sidetone_volume;
+extern int cw_ptt_delay;
+extern int cw_hang_time;
+extern int cw_sidetone_freq;
 
 extern int MicBoost;
 extern int LineIn;

@@ -123,6 +123,17 @@ void create_txa (int channel)
 		-1,											// index for gain value
 		0);											// pointer for gain computation
 
+	txa[channel].preemph.p = create_emph (
+		1,											// run
+		1,											// position
+		ch[channel].dsp_size,						// size
+		txa[channel].midbuff,						// input buffer
+		txa[channel].midbuff,						// output buffer,
+		ch[channel].dsp_rate,						// sample rate
+		0,											// pre-emphasis type
+		300.0,										// f_low
+		3000.0);									// f_high
+
 	txa[channel].leveler.p = create_wcpagc (
 		0,											// run - OFF by default
 		5,											// mode
@@ -318,6 +329,16 @@ void create_txa (int channel)
 		16,											// ints
 		0.005);										// changeover time
 
+	txa[channel].eer.p = create_eer (
+		0,											// run
+		ch[channel].dsp_size,						// size
+		txa[channel].midbuff,						// input buffer
+		txa[channel].midbuff,						// output buffer
+		ch[channel].dsp_rate,						// sample rate
+		0.5,										// magnitude gain
+		0.5,										// phase gain
+		1.0e-05);									// phase delay
+
 	txa[channel].rsmpout.p = create_resample (
 		0,											// run - will be turned ON below if needed
 		ch[channel].dsp_size,						// input size
@@ -350,6 +371,7 @@ void destroy_txa (int channel)
 	// in reverse order, free each item we created
 	destroy_meter (txa[channel].outmeter.p);
 	destroy_resample (txa[channel].rsmpout.p);
+	destroy_eer (txa[channel].eer.p);
 	destroy_iqc (txa[channel].iqc.p0);
 	destroy_calcc (txa[channel].calcc.p);
 	destroy_siphon (txa[channel].sip1.p);
@@ -366,6 +388,7 @@ void destroy_txa (int channel)
 	destroy_bandpass (txa[channel].bp0.p);
 	destroy_meter (txa[channel].lvlrmeter.p);
 	destroy_wcpagc (txa[channel].leveler.p);
+	destroy_emph (txa[channel].preemph.p);
 	destroy_meter (txa[channel].eqmeter.p);
 	destroy_eq (txa[channel].eq.p);
 	destroy_amsq (txa[channel].amsq.p);
@@ -390,6 +413,7 @@ void flush_txa (int channel)
 	flush_amsq (txa[channel].amsq.p);
 	flush_eq (txa[channel].eq.p);
 	flush_meter (txa[channel].eqmeter.p);
+	flush_emph (txa[channel].preemph.p);
 	flush_wcpagc (txa[channel].leveler.p);
 	flush_meter (txa[channel].lvlrmeter.p);
 	flush_bandpass (txa[channel].bp0.p);
@@ -405,6 +429,7 @@ void flush_txa (int channel)
 	flush_meter (txa[channel].alcmeter.p);
 	flush_siphon (txa[channel].sip1.p);
 	flush_iqc (txa[channel].iqc.p0);
+	flush_eer (txa[channel].eer.p);
 	flush_resample (txa[channel].rsmpout.p);
 	flush_meter (txa[channel].outmeter.p);
 }
@@ -419,6 +444,7 @@ void xtxa (int channel)
 	xamsq (txa[channel].amsq.p);
 	xeq (txa[channel].eq.p);
 	xmeter (txa[channel].eqmeter.p);
+	xemph (txa[channel].preemph.p, 0);
 	xwcpagc (txa[channel].leveler.p);
 	xmeter (txa[channel].lvlrmeter.p);
 	xbandpass (txa[channel].bp0.p);
@@ -428,12 +454,14 @@ void xtxa (int channel)
 	xgain (txa[channel].pfgain.p);
 	xwcpagc (txa[channel].alc.p);
 	xammod (txa[channel].ammod.p);
+	xemph (txa[channel].preemph.p, 1);
 	xfmmod (txa[channel].fmmod.p);
 	xgen (txa[channel].gen1.p);
 	xuslew (txa[channel].uslew.p);
 	xmeter (txa[channel].alcmeter.p);
 	xsiphon (txa[channel].sip1.p);
 	xiqc (txa[channel].iqc.p0);
+	xeer (txa[channel].eer.p);
 	xresample (txa[channel].rsmpout.p);
 	xmeter (txa[channel].outmeter.p);
 	// print_peak_env ("env_exception.txt", ch[channel].dsp_outsize, txa[channel].outbuff, 0.990);
@@ -450,25 +478,27 @@ void SetTXAMode (int channel, int mode)
 {
 	EnterCriticalSection (&ch[channel].csDSP);
 	txa[channel].mode = mode;
-	txa[channel].ammod.p->run  = 0;
-	txa[channel].fmmod.p->run  = 0;
-	txa[channel].pfgain.p->run = 0;
+	txa[channel].ammod.p->run   = 0;
+	txa[channel].fmmod.p->run   = 0;
+	txa[channel].pfgain.p->run  = 0;
+	txa[channel].preemph.p->run = 0;
 	switch (mode)
 	{
 	case TXA_AM:
 	case TXA_SAM:
-		txa[channel].ammod.p->run  = 1;
-		txa[channel].ammod.p->mode = 0;
-		txa[channel].pfgain.p->run = 1;
+		txa[channel].ammod.p->run   = 1;
+		txa[channel].ammod.p->mode  = 0;
+		txa[channel].pfgain.p->run  = 1;
 		break;
 	case TXA_DSB:
-		txa[channel].ammod.p->run  = 1;
-		txa[channel].ammod.p->mode = 1;
-		txa[channel].pfgain.p->run = 1;
+		txa[channel].ammod.p->run   = 1;
+		txa[channel].ammod.p->mode  = 1;
+		txa[channel].pfgain.p->run  = 1;
 		break;
 	case TXA_FM:
-		txa[channel].fmmod.p->run  = 1;
-		txa[channel].pfgain.p->run = 1;
+		txa[channel].fmmod.p->run   = 1;
+		txa[channel].pfgain.p->run  = 1;
+		txa[channel].preemph.p->run = 1;
 		break;
 	default:
 

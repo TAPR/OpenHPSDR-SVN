@@ -68,6 +68,17 @@ typedef struct _calcc
 		double env_maxtx;
 		volatile long running;
 	} ctrl;
+	struct _disp
+	{
+		double* x;
+		double* ym;
+		double* yc;
+		double* ys;
+		double* cm;
+		double* cc;
+		double* cs;
+		CRITICAL_SECTION cs_disp;
+	} disp;
 	DELAY rxdelay;
 	DELAY txdelay;
 	struct _util

@@ -42,12 +42,6 @@ FMMOD create_fmmod (int run, int size, double* in, double* out, int rate, double
 	a->ctcss_run = ctcss_run;
 	a->ctcss_level = ctcss_level;
 	a->ctcss_freq = ctcss_freq;
-	// pre-emphasis filter
-	a->mults = fc_mults (a->size, a->f_low, a->f_high, - 20.0 * log10 (a->f_high / a->f_low), 0.0, 0, a->samplerate, 1.0 / (2.0 * a->size), 0, 1);
-	a->infilt  = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->product = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt,  (fftw_complex *)a->product, FFTW_FORWARD,  FFTW_PATIENT);
-	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_PATIENT);
 	// ctcss gen
 	a->tscale = 1.0 / (1.0 + a->ctcss_level);
 	a->tphase = 0.0;
@@ -75,17 +69,11 @@ void destroy_fmmod (FMMOD a)
 	_aligned_free (a->bp_product);
 	_aligned_free (a->bp_infilt);
 	_aligned_free (a->bp_mults);
-	fftw_destroy_plan (a->CRev);
-	fftw_destroy_plan (a->CFor);
-	_aligned_free (a->product);
-	_aligned_free (a->infilt);
-	_aligned_free (a->mults);
 	_aligned_free (a);
 }
 
 void flush_fmmod (FMMOD a)
 {
-	memset (a->infilt, 0, 2 * a->size * sizeof (complex));
 	memset (a->bp_infilt, 0, 2 * a->size * sizeof (complex));
 	a->tphase = 0.0;
 	a->sphase = 0.0;
@@ -98,17 +86,6 @@ void xfmmod (FMMOD a)
 	double dp, magdp, peak;
 	if (a->run)
 	{
-		memcpy (&(a->infilt[2 * a->size]), a->in, a->size * sizeof (complex));
-		fftw_execute (a->CFor);
-		for (i = 0; i < 2 * a->size; i++)
-		{
-			I = a->product[2 * i + 0];
-			Q = a->product[2 * i + 1];
-			a->product[2 * i + 0] = I * a->mults[2 * i + 0] - Q * a->mults[2 * i + 1];
-			a->product[2 * i + 1] = I * a->mults[2 * i + 1] + Q * a->mults[2 * i + 0];
-		}
-		fftw_execute (a->CRev);
-		memcpy (a->infilt, &(a->infilt[2 * a->size]), a->size * sizeof(complex));
 		peak = 0.0;
 		for (i = 0; i < a->size; i++)
 		{
@@ -116,7 +93,7 @@ void xfmmod (FMMOD a)
 			{
 				a->tphase += a->tdelta;
 				if (a->tphase >= TWOPI) a->tphase -= TWOPI;
-				a->out[2 * i + 0] = a->tscale * (a->out[2 * i + 0] + a->ctcss_level * cos (a->tphase));
+				a->out[2 * i + 0] = a->tscale * (a->in[2 * i + 0] + a->ctcss_level * cos (a->tphase));
 			}
 			dp = a->out[2 * i + 0] * a->sdelta;
 			a->sphase += dp;

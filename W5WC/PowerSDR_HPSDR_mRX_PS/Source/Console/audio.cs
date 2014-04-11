@@ -271,7 +271,7 @@ namespace PowerSDR
             get { return monitor_volume; }
             set
             {
-                monitor_volume = value;
+                monitor_volume = value;                
             }
         }
 
@@ -484,6 +484,13 @@ namespace PowerSDR
         {
             get { return rx2_enabled; }
             set { rx2_enabled = value; }
+        }
+
+        private static bool cw_fw_keyer = false;
+        public static bool CWFWKeyer
+        {
+            get { return cw_fw_keyer; }
+            set { cw_fw_keyer = value; }
         }
 
         public static Console console;
@@ -2126,11 +2133,23 @@ namespace PowerSDR
             {
                 dspExchange(ex_input, ex_output, out_count);
                 double time = CWSensorItem.GetCurrentTime();
+                if(cw_fw_keyer)
+                {
+                    ClearBuffer(tx_out_l, frameCount);
+                    ClearBuffer(tx_out_r, frameCount);
+                }
+                else
                 CWSynth.Advance(tx_out_l, tx_out_r, out_count, time);
             }
             else if (tx_dsp_mode == DSPMode.CWL || tx_dsp_mode == DSPMode.CWU)
             {
                 double time = CWSensorItem.GetCurrentTime();
+                if (cw_fw_keyer)
+                {
+                    ClearBuffer(tx_out_l, frameCount);
+                    ClearBuffer(tx_out_r, frameCount);
+                }
+                else
                 CWSynth.Advance(tx_out_l, tx_out_r, out_count, time);
                 dspExchange(ex_input, ex_output, out_count);
             }

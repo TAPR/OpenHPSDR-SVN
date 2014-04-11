@@ -133,7 +133,7 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 			callback_in[i] = INpointer[i];
 		for (i = 4; i < 6; i++)
 			callback_in[i] = INpointer[2 * nreceivers + i - 4];
-		for (i = 6; i < 2 * nreceivers + 2; i++)
+		for (i = 6; i < numInputBuffs; i++)
 			callback_in[i] = INpointer[i - 2];
 
 		for (i = 0; i < 8; i++)
