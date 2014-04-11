@@ -34,301 +34,310 @@ namespace PowerSDR
 
         #region wdsp method definitions
 
-        [DllImport("wdsp.dll", EntryPoint = "OpenChannel")]
+        [DllImport("wdsp.dll", EntryPoint = "OpenChannel", CallingConvention = CallingConvention.Cdecl)]
         public static extern void OpenChannel(int channel, int in_size, int dsp_size, int input_samplerate, int dsp_rate, int output_samplerate, int type, int state, double tdelayup, double tslewup, double tdelaydown, double tslewdown);
 
-        [DllImport("wdsp.dll", EntryPoint = "CloseChannel")]
+        [DllImport("wdsp.dll", EntryPoint = "CloseChannel", CallingConvention = CallingConvention.Cdecl)]
         public static extern void CloseChannel(int channel);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetInputBuffsize")]
+        [DllImport("wdsp.dll", EntryPoint = "SetInputBuffsize", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetInputBuffsize(int channel, int in_size);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetDSPBuffsize")]
+        [DllImport("wdsp.dll", EntryPoint = "SetDSPBuffsize", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetDSPBuffsize(int channel, int dsp_size);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetInputSamplerate")]
+        [DllImport("wdsp.dll", EntryPoint = "SetInputSamplerate", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetInputSamplerate(int channel, int rate);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetDSPSamplerate")]
+        [DllImport("wdsp.dll", EntryPoint = "SetDSPSamplerate", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetDSPSamplerate(int channel, int rate);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetOutputSamplerate")]
+        [DllImport("wdsp.dll", EntryPoint = "SetOutputSamplerate", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetOutputSamplerate(int channel, int rate);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetAllRates")]
+        [DllImport("wdsp.dll", EntryPoint = "SetAllRates", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetAllRates(int channel, int in_rate, int dsp_rate, int out_rate);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetChannelState")]
+        [DllImport("wdsp.dll", EntryPoint = "SetChannelState", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetChannelState(int channel, int state, int dmode);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetChannelTDelayUp")]
+        [DllImport("wdsp.dll", EntryPoint = "SetChannelTDelayUp", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetChannelTDelayUp(int channel, double time);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetChannelTSlewUp")]
+        [DllImport("wdsp.dll", EntryPoint = "SetChannelTSlewUp", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetChannelTSlewUp(int channel, double time);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetChannelTDelayDown")]
+        [DllImport("wdsp.dll", EntryPoint = "SetChannelTDelayDown", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetChannelTDelayDown(int channel, double time);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetChannelTSlewDown")]
+        [DllImport("wdsp.dll", EntryPoint = "SetChannelTSlewDown", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetChannelTSlewDown(int channel, double time);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAMode")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAMode(int channel, DSPMode mode);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAMode")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAMode(int channel, DSPMode mode);
 
-        [DllImport("wdsp.dll", EntryPoint = "fexchange0")]
+        [DllImport("wdsp.dll", EntryPoint = "fexchange0", CallingConvention = CallingConvention.Cdecl)]
         public static extern void fexchange0 (int channel, double* Cin, double* Cout, int* error);
 
-        [DllImport("wdsp.dll", EntryPoint = "fexchange2")]
+        [DllImport("wdsp.dll", EntryPoint = "fexchange2", CallingConvention = CallingConvention.Cdecl)]
         public static extern void fexchange2(int channel, float* Iin, float* Qin, float* Iout, float* Qout, int* error);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCMode")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCMode(int channel, AGCMode mode);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCFixed")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCFixed", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCFixed(int channel, double fixed_agc);
 
-        [DllImport("wdsp.dll", EntryPoint = "GetRXAAGCTop")]
+        [DllImport("wdsp.dll", EntryPoint = "GetRXAAGCTop", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetRXAAGCTop(int channel, double* max_agc);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCTop")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCTop", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCTop(int channel, double max_agc);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCAttack")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCAttack", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCAttack(int channel, int attack);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCDecay")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCDecay", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCDecay(int channel, int decay);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCHang")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCHang", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCHang(int channel, int hang);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCSlope")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCSlope", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCSlope(int channel, int slope);
 
-        [DllImport("wdsp.dll", EntryPoint = "GetRXAAGCHangThreshold")]
+        [DllImport("wdsp.dll", EntryPoint = "GetRXAAGCHangThreshold", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetRXAAGCHangThreshold(int channel, int* hangthreshold);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCHangThreshold")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCHangThreshold", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCHangThreshold(int channel, int hangthreshold);
 
-        [DllImport("wdsp.dll", EntryPoint = "GetRXAAGCThresh")]
+        [DllImport("wdsp.dll", EntryPoint = "GetRXAAGCThresh", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetRXAAGCThresh(int channel, double* thresh, double size, double rate);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCThresh")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCThresh", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCThresh(int channel, double thresh, double size, double rate);
 
-        [DllImport("wdsp.dll", EntryPoint = "GetRXAAGCHangLevel")]
+        [DllImport("wdsp.dll", EntryPoint = "GetRXAAGCHangLevel", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetRXAAGCHangLevel(int channel, double* hanglevel);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCHangLevel")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCHangLevel", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCHangLevel(int channel, double hanglevel);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAALCAttack")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAALCAttack", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAALCAttack(int channel, int attack);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAALCDecay")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAALCDecay", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAALCDecay(int channel, int decay);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAALCHang")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAALCHang", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAALCHang(int channel, int hang);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAMDSBMode")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAMDSBMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAMDSBMode(int channel, int sbmode);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAMDFadeLevel")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAMDFadeLevel", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAMDFadeLevel(int channel, int fadelevel);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAMSQRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAMSQRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAMSQRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAAMSQThreshold")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAMSQThreshold", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAMSQThreshold(int channel, double threshold);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAAMSQRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAAMSQRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAAMSQRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAAMSQMutedGain")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAAMSQMutedGain", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAAMSQMutedGain(int channel, double dBlevel);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAAMSQThreshold")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAAMSQThreshold", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAAMSQThreshold(int channel, double threshold);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAAMCarrierLevel")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAAMCarrierLevel", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAAMCarrierLevel(int channel, double carrier);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAANFRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFVals")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFVals", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAANFVals(int channel, int taps, int delay, double gain, double leak);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFTaps")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFTaps", CallingConvention = CallingConvention.Cdecl)]
         public extern static void SetRXAANFTaps(int channel, int taps);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFDelay")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFDelay", CallingConvention = CallingConvention.Cdecl)]
         public extern static void SetRXAANFDelay(int channel, int delay);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFGain")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFGain", CallingConvention = CallingConvention.Cdecl)]
         public extern static void SetRXAANFGain(int channel, double gain);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFLeakage")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFLeakage", CallingConvention = CallingConvention.Cdecl)]
         public extern static void SetRXAANFLeakage(int channel, double leakage);
-        
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFPosition")]
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANFPosition", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAANFPosition(int channel, int position);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAANRRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRVals")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRVals", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAANRVals(int channel, int taps, int delay, double gain, double leak);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRTaps")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRTaps", CallingConvention = CallingConvention.Cdecl)]
         public extern static void SetRXAANRTaps(int channel, int taps);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRDelay")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRDelay", CallingConvention = CallingConvention.Cdecl)]
         public extern static void SetRXAANRDelay(int channel, int delay);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRGain")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRGain", CallingConvention = CallingConvention.Cdecl)]
         public extern static void SetRXAANRGain(int channel, double gain);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRLeakage")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRLeakage", CallingConvention = CallingConvention.Cdecl)]
         public extern static void SetRXAANRLeakage(int channel, double leakage);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRPosition")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAANRPosition", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAANRPosition(int channel, int position);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXABandpassFreqs")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXABandpassFreqs", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXABandpassFreqs(int channel, double low, double high);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXABandpassWindow")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXABandpassWindow", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXABandpassWindow(int channel, int wintype);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXABandpassFreqs")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXABandpassFreqs", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXABandpassFreqs(int channel, double low, double high);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXABandpassWindow")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXABandpassWindow", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXABandpassWindow(int channel, int wintype);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXACBLRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXACBLRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXACBLRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXACompressorRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXACompressorRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXACompressorRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXACompressorGain")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXACompressorGain", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXACompressorGain(int channel, double gain);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAEQRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAEQRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAEQRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAEQRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAEQRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAEQRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAGrphEQ")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAGrphEQ", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAGrphEQ(int channel, int* ptr);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAGrphEQ")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAGrphEQ", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAGrphEQ(int channel, int* ptr);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAGrphEQ10")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAGrphEQ10", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAGrphEQ10(int channel, int* ptr);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAGrphEQ10")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAGrphEQ10", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAGrphEQ10(int channel, int* ptr);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAFMDeviation")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAFMDeviation", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAFMDeviation(int channel, double deviation);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAFMSQRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAFMSQRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAFMSQRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAFMSQThreshold")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAFMSQThreshold", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAFMSQThreshold(int channel, double threshold);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAFMDeviation")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAFMDeviation", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAFMDeviation(int channel, double deviation);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXACTCSSRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAFMEmphPosition", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAFMEmphPosition(int channel, bool position);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXACTCSSRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXACTCSSRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXACTCSSFreq")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXACTCSSFreq", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXACTCSSFreq(int channel, double freq_hz);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerTop")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXACTCSSRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXACTCSSRun(int channel, bool run);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXACTCSSFreq", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXACTCSSFreq(int channel, double freq_hz);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerTop", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXALevelerTop(int channel, double maxgain);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerAttack")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerAttack", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXALevelerAttack(int channel, int attack);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerDecay")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerDecay", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXALevelerDecay(int channel, int decay);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerHang")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerHang", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXALevelerHang(int channel, int hang);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerSt")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerSt", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXALevelerSt(int channel, bool state);
 
-        [DllImport("wdsp.dll", EntryPoint = "GetRXAMeter")]
+        [DllImport("wdsp.dll", EntryPoint = "GetRXAMeter", CallingConvention = CallingConvention.Cdecl)]
         public static extern double GetRXAMeter(int channel, rxaMeterType meter);
 
-        [DllImport("wdsp.dll", EntryPoint = "GetTXAMeter")]
+        [DllImport("wdsp.dll", EntryPoint = "GetTXAMeter", CallingConvention = CallingConvention.Cdecl)]
         public static extern double GetTXAMeter(int channel, txaMeterType meter);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAPanelRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAPanelRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAPanelRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAPanelSelect")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAPanelSelect", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAPanelSelect(int channel, int select);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAPanelGain1")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAPanelGain1", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAPanelGain1(int channel, double gain);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAPanelPan")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAPanelPan", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAPanelPan(int channel, double pan);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAPanelBinaural")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAPanelBinaural", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAPanelBinaural(int channel, bool bin);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAPanelRun")]
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPanelRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAPanelRun(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXAShiftFreq")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAShiftFreq", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAShiftFreq(int channel, double freq);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetRXASpectrum")]
+        [DllImport("wdsp.dll", EntryPoint = "SetRXASpectrum", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXASpectrum(int channel, int flag, int disp, int ss, int LO);
 
-        [DllImport("wdsp.dll", EntryPoint = "TXAGetSpecF1")]
+        [DllImport("wdsp.dll", EntryPoint = "TXAGetSpecF1", CallingConvention = CallingConvention.Cdecl)]
         public static extern void TXAGetSpecF1(int channel, float* results);
 
-        [DllImport("wdsp.dll", EntryPoint = "RXAGetaSipF")]
+        [DllImport("wdsp.dll", EntryPoint = "RXAGetaSipF", CallingConvention = CallingConvention.Cdecl)]
         public static extern void RXAGetaSipF(int channel, float* results, int size);
 
-        [DllImport("wdsp.dll", EntryPoint = "RXAGetaSipF1")]
+        [DllImport("wdsp.dll", EntryPoint = "RXAGetaSipF1", CallingConvention = CallingConvention.Cdecl)]
         public static extern void RXAGetaSipF1(int channel, float* results, int size);
 
-        [DllImport("wdsp.dll", EntryPoint = "TXAGetaSipF")]
+        [DllImport("wdsp.dll", EntryPoint = "TXAGetaSipF", CallingConvention = CallingConvention.Cdecl)]
         public static extern void TXAGetaSipF(int channel, float* results, int size);
 
-        [DllImport("wdsp.dll", EntryPoint = "TXAGetaSipF1")]
+        [DllImport("wdsp.dll", EntryPoint = "TXAGetaSipF1", CallingConvention = CallingConvention.Cdecl)]
         public static extern void TXAGetaSipF1(int channel, float* results, int size);
 
-        [DllImport("wdsp.dll", EntryPoint = "create_resampleFV")]
+        [DllImport("wdsp.dll", EntryPoint = "create_resampleFV", CallingConvention = CallingConvention.Cdecl)]
         public static extern void* create_resampleFV(int in_rate, int out_rate);
 
-        [DllImport("wdsp.dll", EntryPoint = "xresampleFV")]
+        [DllImport("wdsp.dll", EntryPoint = "xresampleFV", CallingConvention = CallingConvention.Cdecl)]
         public static extern void xresampleFV(float* input, float* output, int numsamps, int* outsamps, void* ptr);
 
-        [DllImport("wdsp.dll", EntryPoint = "destroy_resampleFV")]
+        [DllImport("wdsp.dll", EntryPoint = "destroy_resampleFV", CallingConvention = CallingConvention.Cdecl)]
         public static extern void destroy_resampleFV(void* ptr);
 
-        [DllImport("wdsp.dll", EntryPoint = "WDSPwisdom")]
+        [DllImport("wdsp.dll", EntryPoint = "WDSPwisdom", CallingConvention = CallingConvention.Cdecl)]
         public static extern void WDSPwisdom(string directory);
 
         [DllImport("wdsp.dll", EntryPoint = "SetRXAPreGenRun", CallingConvention = CallingConvention.Cdecl)]
@@ -452,6 +461,20 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "SetEXTDIVRotate", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEXTDIVRotate(int id, int nr, double* Irotate, double* Qrotate);
+
+        // eer
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAEERRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAEERRun(int channel, bool run);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAEERMgain", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAEERMgain(int channel, double gain);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAEERPgain", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAEERPgain(int channel, double gain);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAEERPdelay", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAEERPdelay(int channel, double delay);
 
         #endregion
 

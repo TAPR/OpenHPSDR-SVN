@@ -30,6 +30,8 @@
 #include "private.h"
 #include "Ozyutils.h"
 
+const int numInputBuffs = 12;
+
 //
 // StartAudio -- called when we need to start reading audio and passing it to PowerSDR via the callback.
 //
@@ -161,8 +163,8 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 
         do { // once
                 // allocate buffers for callback buffers
-			INbufp = (float *)calloc(1, sizeof(float) * BlockSize * nchannels);
-			for (i = 0; i < nchannels; i++)
+			INbufp = (float *)calloc(1, sizeof(float) * BlockSize * numInputBuffs);
+			for (i = 0; i < numInputBuffs; i++)
 				INpointer[i] = INbufp + (i * BlockSize);
 
   		    OUTbufp = (float *)calloc(1, sizeof(float) * BlockSize * 8);
@@ -953,11 +955,11 @@ C1
 
 KD5TFDVK6APHAUDIO_API void SetRX1Preamp(int bits) { 
 	if ( bits != 0 ) { 
-	//	RX1Preamp = 1; 
+		RX1Preamp = 1; 
 		MercPreamp = (1 << 2);
 	} 
 	else { 
-		//RX1Preamp = 0; 
+		RX1Preamp = 0; 
 		MercPreamp = 0;
 	}	
 	return;
@@ -996,11 +998,11 @@ KD5TFDVK6APHAUDIO_API void SetMicBias(int bits) {
 C2
 0 0 0 0 0 0 0 0
       | | | | |
-      | | | | +------------ TLV320 Line-in Gain bit 03 
-      | | | +-------------- TLV320 Line-in Gain bit 13
-      | | +---------------- TLV320 Line-in Gain bit 23
-      | +------------------ TLV320 Line-in Gain bit 33
-      +-------------------- TLV320 Line-in Gain bit 43
+      | | | | +------------ TLV320 Line-in Gain bit 0 
+      | | | +-------------- TLV320 Line-in Gain bit 1
+      | | +---------------- TLV320 Line-in Gain bit 2
+      | +------------------ TLV320 Line-in Gain bit 3
+      +-------------------- TLV320 Line-in Gain bit 4
 */
 
 KD5TFDVK6APHAUDIO_API void SetLineBoost(int bits) {
@@ -1131,6 +1133,117 @@ KD5TFDVK6APHAUDIO_API void EnableADC3StepAtten(int bits) {
 		enable_ADC3_step_att = 0; 
 	}	
 	return;
+}
+
+/*
+C0
+0 0 0 1 1 0 0 x   	    
+*/
+
+/*
+C0
+0 0 0 1 1 0 1 x   	
+*/
+
+/*
+C0
+0 0 0 1 1 1 0 x  
+C1
+0 0 0 0 0 0 0 0
+| | | | | | | |
+| | | | | | +-+------------ ADC assignment for RX1, where 00 = ADC1, 01 = ADC2, 10 = ADC3
+| | | | +-+---------------- ADC assignment for RX2, where 00 = ADC1, 01 = ADC2, 10 = ADC3
+| | +-+-------------------- ADC assignment for RX3, where 00 = ADC1, 01 = ADC2, 10 = ADC3
++-+------------------------ ADC assignment for RX4, where 00 = ADC1, 01 = ADC2, 10 = ADC3	
+*/
+
+/*
+C2
+0 0 0 0 0 0 0 0
+    | | | | | |
+    | | | | +-+------------ ADC assignment for RX5, where 00 = ADC1, 01 = ADC2, 10 = ADC3*
+    | | +-+---------------- ADC assignment for RX6, where 00 = ADC1, 01 = ADC2, 10 = ADC3
+    +-+-------------------- ADC assignment for RX7, where 00 = ADC1, 01 = ADC2, 10 = ADC3
+* Except on Tx where RX5 input is assigned to the Tx DAC
+*/
+
+// C2-C4 currently not used.
+  
+/*
+C0
+0 0 0 1 1 1 1 x  
+C1
+0 0 0 0 0 0 0 0
+              |
+              +------------ CW (0 = External, 1 = Internal)
+*/
+
+KD5TFDVK6APHAUDIO_API void SetCWKeyer(int enable) { 
+	if ( enable != 0 ) { 
+		set_cw_keyer = 1; 
+	} 
+	else { 
+		set_cw_keyer = 0; 
+	}	
+	return;
+}
+
+/*
+C2
+0 0 0 0 0 0 0 0
+|             |
++-------------+------------ CW Sidetone Volume (0 to 255 [7:0])
+*/
+
+KD5TFDVK6APHAUDIO_API void SetCWSidetoneVolume(int vol) {
+	cw_sidetone_volume = vol;
+}
+
+/*
+C3
+0 0 0 0 0 0 0 0
+|             |
++-------------+------------ CW PTT delay mS (0 to 255 [7:0])
+*/
+
+KD5TFDVK6APHAUDIO_API void SetCWPTTDelay(int delay) {
+	cw_ptt_delay = delay & 0xff;
+}
+
+//C4 currently not used – reserved for raised cosine profile time if required
+
+/*
+C0
+0 0 1 0 0 0 0 x  
+C1
+0 0 0 0 0 0 0 0
+|             |
++-------------+------------ CW Hang Time mS (bits [9:2])
+
+C2
+0 0 0 0 0 0 0 0
+            | |
+            +-+------------ CW Hang Time mS (bits [1:0])
+*/
+
+KD5TFDVK6APHAUDIO_API void SetCWHangTime(int time) {
+         cw_hang_time = time; 
+}
+
+/*
+C3
+0 0 0 0 0 0 0 0
+|             |
++-------------+------------ CW Sidetone Frequency Hz (bits [9:2])
+
+C4
+0 0 0 0 0 0 0 0
+            | |
+            +-+------------ CW Sidetone Frequency Hz (bits [1:0])
+*/
+
+KD5TFDVK6APHAUDIO_API void SetCWSidetoneFreq(int freq) {
+         cw_sidetone_freq = freq; 
 }
 
 // *************************************************

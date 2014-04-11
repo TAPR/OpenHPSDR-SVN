@@ -35,40 +35,40 @@ namespace PowerSDR
 	{
 		#region Dll Method Definitions
 
-		[DllImport("msvcrt.dll", EntryPoint="memcpy")]
+        [DllImport("msvcrt.dll", EntryPoint = "memcpy", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void memcpy(void *destptr, void *srcptr, int n);
 
-		[DllImport("kernel32.dll", EntryPoint="EnterCriticalSection")]
+        [DllImport("kernel32.dll", EntryPoint = "EnterCriticalSection")]
 		public static extern void EnterCriticalSection(void *cs_ptr);
 
-		[DllImport("kernel32.dll", EntryPoint="LeaveCriticalSection")]
+        [DllImport("kernel32.dll", EntryPoint = "LeaveCriticalSection")]
 		public static extern void LeaveCriticalSection(void *cs_ptr);
 
-		[DllImport("kernel32.dll", EntryPoint="InitializeCriticalSection")]
+        [DllImport("kernel32.dll", EntryPoint = "InitializeCriticalSection")]
 		public static extern void InitializeCriticalSection(void *cs_ptr);
 
-		[DllImport("kernel32.dll", EntryPoint="InitializeCriticalSectionAndSpinCount")]
+        [DllImport("kernel32.dll", EntryPoint = "InitializeCriticalSectionAndSpinCount")]
 		public static extern int InitializeCriticalSectionAndSpinCount(void *cs_ptr, uint spincount);
 
-		[DllImport("kernel32.dll", EntryPoint="DeleteCriticalSection")]
+        [DllImport("kernel32.dll", EntryPoint = "DeleteCriticalSection")]
 		public static extern byte DeleteCriticalSection(void *cs_ptr);
 
-		[DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll")]
 		public static extern IntPtr GetCurrentThread();
 
-		[DllImport("kernel32.dll", SetLastError=true)] 
+        [DllImport("kernel32.dll", SetLastError = true)] 
 		public static extern int SetThreadAffinityMask(IntPtr hThread, IntPtr dwThreadAffinityMask);
 
-		[DllImport("wdsp.dll", EntryPoint="NewCriticalSection")]
+        [DllImport("wdsp.dll", EntryPoint = "NewCriticalSection", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void *NewCriticalSection();
 
-		[DllImport("wdsp.dll", EntryPoint="DestroyCriticalSection")]
+        [DllImport("wdsp.dll", EntryPoint = "DestroyCriticalSection", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DestroyCriticalSection(void *cs_ptr);
 
-		[DllImport("msvcrt.dll", EntryPoint="memset")]
+        [DllImport("msvcrt.dll", EntryPoint = "memset", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void memset(void *addr, byte val, int n);
 
-		[DllImport("user32.dll", EntryPoint="SetWindowPos")]
+        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
 		public static extern int SetWindowPos(int hwnd, int hWndInsertAfter, int x, int y, int cx, int cy, int wFlags);
 
         [DllImport("user32.dll", EntryPoint = "keybd_event", CharSet = CharSet.Auto, ExactSpelling = true)]
@@ -76,7 +76,7 @@ namespace PowerSDR
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool AllocConsole();
-        
+
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool FreeConsole();
 
@@ -88,6 +88,8 @@ namespace PowerSDR
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
+
         #endregion
-	}
+
+    }
 }

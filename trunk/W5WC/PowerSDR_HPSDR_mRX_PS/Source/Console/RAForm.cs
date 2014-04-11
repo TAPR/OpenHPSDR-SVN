@@ -574,7 +574,6 @@ namespace PowerSDR
 
         private void picRAGraph_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            String s;
             float power;
             float time;
             power = (float)e.Y / (float)Y_range * (display_y_min - display_y_max) + display_y_max;

@@ -37,9 +37,22 @@ namespace PowerSDR
         private static double PShwpeak;
         private static double GetPSpeakval;
 
+        public static AmpView ampv = null;
+        public static Thread ampvThread = null;
+
         #endregion
 
         #region properties
+
+        private bool dismissAmpv = false;
+        public bool DismissAmpv
+        {
+            get { return dismissAmpv; }
+            set
+            {
+                dismissAmpv = value;
+            }
+        }
 
         private static bool psenabled = false;
         public bool PSEnabled
@@ -221,9 +234,34 @@ namespace PowerSDR
 
         private void PSForm_Closing(object sender, FormClosingEventArgs e)
         {
+            if (ampv != null)
+            {
+                dismissAmpv = true;
+                ampvThread.Join();
+                ampv.Close();
+                ampv = null;
+            }
             this.Hide();
             e.Cancel = true;
             Common.SaveForm(this, "PureSignal");
+        }
+
+        public void RunAmpv()
+        {
+            ampv = new AmpView(this);
+            Application.Run(ampv);
+        }
+
+        private void btnPSAmpView_Click(object sender, EventArgs e)
+        {
+            if (ampv == null || (ampv != null && ampv.IsDisposed))
+            {
+                dismissAmpv = false;
+                ampvThread = new Thread(RunAmpv);
+                ampvThread.SetApartmentState(ApartmentState.STA);
+                ampvThread.Name = "Ampv Thread";
+                ampvThread.Start();
+            }
         }
 
         private void btnPSInformation_Click(object sender, EventArgs e)
@@ -368,15 +406,19 @@ namespace PowerSDR
                 alpha = 255;
                 if (puresignal.Info[4] > 181)
                 {
-                    red = 0;  green = 255;  blue = 0;
+                    red = 0; green = 0; blue = 255;
                 }
                 else if (puresignal.Info[4] > 128)
                 {
-                    red = 255; green = 255; blue = 0;
+                    red = 000; green = 255; blue = 000;
+                }
+                else if (puresignal.Info[4] > 90)
+                {
+                    red = 255; green = 255; blue = 000;
                 }
                 else
                 {
-                    red = 255;  green = 0;  blue = 0;
+                    red = 255; green = 000; blue = 000;
                 }
             }
             lblPSInfoFB.BackColor = Color.FromArgb((alpha << 24) | (red << 16) | (green << 8) | blue);
@@ -620,6 +662,9 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "SetPSPtol", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetPSPtol(int channel, double ptol);
+
+        [DllImport("wdsp.dll", EntryPoint = "GetPSDisp", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void GetPSDisp(int channel, IntPtr x, IntPtr ym, IntPtr yc, IntPtr ys, IntPtr cm, IntPtr cc, IntPtr cs);
 
         #endregion
 

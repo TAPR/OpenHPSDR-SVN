@@ -186,9 +186,9 @@ namespace PowerSDR
             this.RXEQOn = rx.rx_eq_on;
             this.NBOn = rx.nb_on;
             this.NBThreshold = rx.nb_threshold;
-           // this.RXCorrectIQMu = rx.rx_correct_iq_mu;
-            this.SDROM = rx.sdrom;
-            this.SDROMThreshold = rx.sdrom_threshold;
+            this.NBTau = rx.nb_tau;
+            this.NBAdvTime = rx.nb_advtime;
+            this.NBHangTime = rx.nb_hangtime;
             this.RXFixedAGC = rx.rx_fixed_agc;
             this.RXAGCMaxGain = rx.rx_agc_max_gain;
             this.RXAGCAttack = rx.rx_agc_attack;
@@ -197,8 +197,6 @@ namespace PowerSDR
             this.RXOutputGain = rx.rx_output_gain;
             this.RXAGCSlope = rx.rx_agc_slope;
             this.RXAGCHangThreshold = rx.rx_agc_hang_threshold;
-            this.CurrentWindow = rx.current_window;
-            this.SpectrumPolyphase = rx.spectrum_polyphase;
             this.BinOn = rx.bin_on;
             this.RXSquelchThreshold = rx.rx_squelch_threshold;
             this.FMSquelchThreshold = rx.fm_squelch_threshold;
@@ -207,9 +205,24 @@ namespace PowerSDR
             this.Active = rx.active;
             this.Pan = rx.pan;
             this.RXOsc = rx.rx_osc;
-            this.DCBlock = rx.dc_block;
             this.RXFMSquelchOn = rx.rx_fm_squelch_on;
             this.RXFMDeviation = rx.rx_fm_deviation;
+            this.RXFMCTCSSFilter = rx.rx_fm_ctcss_filter;
+            this.RXANFPosition = rx.rx_anf_position;
+            this.RXANRPosition = rx.rx_anr_position;
+            this.RXCBLRun = rx.rx_cbl_run;
+            this.RXAMDFadeLevel = rx.rx_amd_fadelevel;
+            this.RXAMDSBMode = rx.rx_amd_sbmode;
+            this.RXBandpassWindow = rx.rx_bandpass_window;
+            this.RXPreGenRun = rx.rx_pregen_run;
+            this.RXPreGenMode = rx.rx_pregen_mode;
+            this.RXPreGenToneMag = rx.rx_pregen_tone_mag;
+            this.RXPreGenToneFreq = rx.rx_pregen_tone_freq;
+            this.RXPreGenNoiseMag = rx.rx_pregen_noise_mag;
+            this.RXPreGenSweepMag = rx.rx_pregen_sweep_mag;
+            this.RXPreGenSweepFreq1 = rx.rx_pregen_sweep_freq1;
+            this.RXPreGenSweepFreq2 = rx.rx_pregen_sweep_freq2;
+            this.RXPreGenSweepRate = rx.rx_pregen_sweep_rate;
         }
 
 		private void SyncAll()
@@ -237,9 +250,9 @@ namespace PowerSDR
 			RXEQOn = rx_eq_on;
 			NBOn = nb_on;
 			NBThreshold = nb_threshold;
-			//RXCorrectIQMu = rx_correct_iq_mu;
-			SDROM = sdrom;
-			SDROMThreshold = sdrom_threshold;
+            NBTau = nb_tau;
+            NBAdvTime = nb_advtime;
+            NBHangTime = nb_hangtime;
 			RXFixedAGC = rx_fixed_agc;
 			RXAGCMaxGain = rx_agc_max_gain;
 			RXAGCAttack = rx_agc_attack;
@@ -248,8 +261,6 @@ namespace PowerSDR
 			RXOutputGain = rx_output_gain;
 			RXAGCSlope = rx_agc_slope;
 			RXAGCHangThreshold = rx_agc_hang_threshold;
-			CurrentWindow = current_window;
-			SpectrumPolyphase = spectrum_polyphase;
 			BinOn = bin_on;
 			RXSquelchThreshold = rx_squelch_threshold;
 			RXAMSquelchOn = rx_am_squelch_on;
@@ -258,11 +269,26 @@ namespace PowerSDR
 			Active = active;
 			Pan = pan;
 			RXOsc = rx_osc;
-            DCBlock = dc_block;
             RXFMDeviation = rx_fm_deviation;
+            RXFMCTCSSFilter = rx_fm_ctcss_filter;
+            RXANFPosition = rx_anf_position;
+            RXANRPosition = rx_anr_position;
+            RXCBLRun = rx_cbl_run;
+            RXAMDFadeLevel = rx_amd_fadelevel;
+            RXAMDSBMode = rx_amd_sbmode;
+            RXBandpassWindow = rx_bandpass_window;
+            RXPreGenRun = rx_pregen_run;
+            RXPreGenMode = rx_pregen_mode;
+            RXPreGenToneMag = rx_pregen_tone_mag;
+            RXPreGenToneFreq = rx_pregen_tone_freq;
+            RXPreGenNoiseMag = rx_pregen_noise_mag;
+            RXPreGenSweepMag = rx_pregen_sweep_mag;
+            RXPreGenSweepFreq1 = rx_pregen_sweep_freq1;
+            RXPreGenSweepFreq2 = rx_pregen_sweep_freq2;
+            RXPreGenSweepRate = rx_pregen_sweep_rate;
 
-            for (uint i = 0; i < 9; i++)
-                SetNotchOn(i, notch_on[i]);
+            // for (uint i = 0; i < 9; i++)
+            //     SetNotchOn(i, notch_on[i]);
 
         }
 
@@ -309,7 +335,6 @@ namespace PowerSDR
 					if(value != buffer_size_dsp || force)
 					{
 						//Debug.WriteLine("RX "+thread+":"+subrx+" "+value);
-						//DttSP.ResizeSDR(thread, value);
                         wdsp.SetDSPBuffsize(wdsp.id(thread, 0), value);
                         wdsp.SetDSPBuffsize(wdsp.id(thread, 1), value);
 						buffer_size_dsp = value;
@@ -331,7 +356,6 @@ namespace PowerSDR
 				{
 					if(value != audio_size_dsp || force)
 					{
-						//DttSP.SetAudioSize(value);
                         wdsp.SetInputBuffsize(wdsp.id(0, 0), value);
                         wdsp.SetInputBuffsize(wdsp.id(0, 1), value);
                         wdsp.SetInputBuffsize(wdsp.id(2, 0), value);
@@ -355,7 +379,6 @@ namespace PowerSDR
 				{
 					if(value != dsp_mode_dsp || force)
 					{
-						//DttSP.SetMode(thread, subrx, value);
                         wdsp.SetRXAMode(wdsp.id(thread, subrx), value);
 						dsp_mode_dsp = value;
 					}
@@ -371,7 +394,6 @@ namespace PowerSDR
 			{
 				if(low != rx_filter_low_dsp || high != rx_filter_high_dsp || force)
 				{
-					//DttSP.SetRXFilter(thread, subrx, low, high);
                     wdsp.SetRXABandpassFreqs(wdsp.id(thread, subrx), low, high);
 					rx_filter_low_dsp = low;
 					rx_filter_high_dsp = high;
@@ -391,7 +413,6 @@ namespace PowerSDR
 				{
 					if(value != rx_filter_low_dsp || force)
 					{
-						//DttSP.SetRXFilter(thread, subrx, value, rx_filter_high);
                         wdsp.SetRXABandpassFreqs(wdsp.id(thread, subrx), value, rx_filter_high);
 						rx_filter_low_dsp = value;
 					}
@@ -411,7 +432,6 @@ namespace PowerSDR
 				{
 					if(value != rx_filter_high_dsp || force)
 					{
-						//DttSP.SetRXFilter(thread, subrx, rx_filter_low, value);
                         wdsp.SetRXABandpassFreqs(wdsp.id(thread, subrx), rx_filter_low, value);
 						rx_filter_high_dsp = value;
 					}
@@ -431,7 +451,6 @@ namespace PowerSDR
 				{
 					if(value != noise_reduction_dsp || force)
 					{
-						//DttSP.SetNR(thread, subrx, value);
                         wdsp.SetRXAANRRun(wdsp.id(thread, subrx), value);
 						noise_reduction_dsp = value;
 					}
@@ -458,7 +477,6 @@ namespace PowerSDR
 				if(taps != nr_taps_dsp || delay != nr_delay_dsp ||
 					gain != nr_gain_dsp || leak != nr_leak_dsp || force)
 				{
-					//DttSP.SetNRvals(thread, subrx, taps, delay, gain, leak);
                     wdsp.SetRXAANRVals(wdsp.id(thread, subrx), taps, delay, gain, leak);
 					nr_taps_dsp = taps;
 					nr_delay_dsp = delay;
@@ -480,7 +498,6 @@ namespace PowerSDR
 				{
 					if(value != auto_notch_filter_dsp || force)
 					{
-						//DttSP.SetANF(thread, subrx, value);
                         wdsp.SetRXAANFRun(wdsp.id(thread, subrx), value);
 						auto_notch_filter_dsp = value;
 					}
@@ -507,7 +524,6 @@ namespace PowerSDR
 				if(taps != anf_taps_dsp || delay != anf_delay_dsp ||
 					gain != anf_gain_dsp || leak != anf_leak_dsp || force)
 				{
-					//DttSP.SetANFvals(thread, subrx, taps, delay, gain, leak);
                     wdsp.SetRXAANFVals(wdsp.id(thread, subrx), taps, delay, gain, leak);
 					anf_taps_dsp = taps;
 					anf_delay_dsp = delay;
@@ -525,35 +541,10 @@ namespace PowerSDR
 			set
 			{
 				rx_agc_mode = value;
-			/*	switch(rx_agc_mode)
-				{
-					case AGCMode.LONG:
-                        RXAGCAttack = 2;
-                        RXAGCHang = 2000;
-						RXAGCDecay = 2000;
-						break;
-					case AGCMode.SLOW:
-                        RXAGCAttack = 2;
-                        RXAGCHang = 1000;
-                        RXAGCDecay = 500;
-						break;					
-					case AGCMode.MED:
-                        RXAGCAttack = 2;
-                        RXAGCHang = 250;
-                        RXAGCDecay = 250;
-						break;
-					case AGCMode.FAST:
-                        RXAGCAttack = 2;
-                        RXAGCHang = 100;
-                        RXAGCDecay = 50;
-						break;
-				} */
-
 				if(update)
 				{
 					if(value != rx_agc_mode_dsp || force)
 					{
-						//DttSP.SetRXAGC(thread, subrx, value);
                         wdsp.SetRXAAGCMode(wdsp.id(thread, subrx), value);
 						rx_agc_mode_dsp = value;
 					}
@@ -579,19 +570,6 @@ namespace PowerSDR
 					rx_eq3[i] = value[i];
 				if(update)
 				{
-					/*bool need_update = false;
-					for(int i=0; i<rx_eq3_dsp.Length && i<value.Length; i++)
-					{
-						if(value[i] != rx_eq3_dsp[i] || force)
-						{
-							need_update = true;
-							break;
-						}
-					}
-
-					if(need_update)
-					{*/
-						//DttSP.SetGrphRXEQ(thread, subrx, rx_eq3);
                     unsafe
                     {
                         fixed (int* ptr = &(rx_eq3[0]))
@@ -599,7 +577,6 @@ namespace PowerSDR
                     }
 						for(int i=0; i<rx_eq3_dsp.Length && i<value.Length; i++)
 							rx_eq3_dsp[i] = value[i];
-					//}
 				}
 			}
 		}
@@ -615,19 +592,6 @@ namespace PowerSDR
 					rx_eq10[i] = value[i];
 				if(update)
 				{
-					/*bool need_update = false;
-					for(int i=0; i<rx_eq10_dsp.Length && i<value.Length; i++)
-					{
-						if(value[i] != rx_eq10_dsp[i] || force)
-						{
-							need_update = true;
-							break;
-						}
-					}
-
-					if(need_update)
-					{*/
-						//DttSP.SetGrphRXEQ10(thread, subrx, rx_eq10);
                     unsafe
                     {
                         fixed (int* ptr = &(rx_eq10[0]))
@@ -635,7 +599,6 @@ namespace PowerSDR
                     }
 						for(int i=0; i<rx_eq10_dsp.Length && i<value.Length; i++)
 							rx_eq10_dsp[i] = value[i];
-					//}
 				}
 			}
 		}
@@ -652,7 +615,6 @@ namespace PowerSDR
 				{
 					if(value != rx_eq_on_dsp || force)
 					{
-						//DttSP.SetGrphRXEQcmd(thread, subrx, value);
                         wdsp.SetRXAEQRun(wdsp.id(thread, subrx), value);
 						rx_eq_on_dsp = value;
 					}
@@ -691,102 +653,85 @@ namespace PowerSDR
 				{
 					if(value != nb_threshold_dsp || force)
 					{
-						//DttSP.SetNBvals(thread, subrx, value);    // NOT USED
+                        if (thread == 0 && subrx == 0)
+                            for (int i = 0; i < 3; i++)
+                                SpecHPSDRDLL.SetEXTANBThreshold(i, value);
+                        else if (thread == 2 && subrx == 0)
+                            SpecHPSDRDLL.SetEXTANBThreshold(3, value);
 						nb_threshold_dsp = value;
 					}
 				}
 			}
 		}
 
-		private float rx_correct_iq_w_real_dsp = 0.0f;
-		private float rx_correct_iq_w_real = 0.0f;
-		public float RXCorrectIQWReal
-		{
-			get { return rx_correct_iq_w_real; }
-		}
+        private double nb_tau_dsp = 0.0001;
+        private double nb_tau = 0.0001;
+        public double NBTau
+        {
+            get { return nb_tau; }
+            set
+            {
+                nb_tau = value;
+                if (update)
+                {
+                    if (value != nb_tau_dsp || force)
+                    {
+                        if (thread == 0 && subrx == 0)
+                            for (int i = 0; i < 3; i++)
+                                SpecHPSDRDLL.SetEXTANBTau(i, value);
+                        else if (thread == 2 && subrx == 0)
+                            SpecHPSDRDLL.SetEXTANBTau(3, value);
+                        nb_tau_dsp = value;
+                    }
+                }
+            }
+        }
 
-		private float rx_correct_iq_w_imag_dsp = 0.0f;
-		private float rx_correct_iq_w_imag = 0.0f;
-		public float RXCorrectIQWImag
-		{
-			get { return rx_correct_iq_w_imag; }
-		}
+        private double nb_advtime_dsp = 0.0001;
+        private double nb_advtime = 0.0001;
+        public double NBAdvTime
+        {
+            get { return nb_advtime; }
+            set
+            {
+                nb_advtime = value;
+                if (update)
+                {
+                    if (value != nb_advtime_dsp || force)
+                    {
+                        if (thread == 0 && subrx == 0)
+                            for (int i = 0; i < 3; i++)
+                                SpecHPSDRDLL.SetEXTANBAdvtime(i, value);
+                        else if (thread == 2 && subrx == 0)
+                            SpecHPSDRDLL.SetEXTANBAdvtime(3, value);
+                        nb_advtime_dsp = value;
+                    }
+                }
+            }
+        }
 
-		public void SetRXCorrectIQW(float real, float imag) 
-		{
-			//Debug.WriteLine("RX IQ Gain "+thread+" "+subrx+": "+value.ToString("f4"));
-			rx_correct_iq_w_real = real;
-			rx_correct_iq_w_imag = imag;
-
-			if(update)
-			{
-				if((real != rx_correct_iq_w_real_dsp) ||
-					(imag != rx_correct_iq_w_imag_dsp) || force)
-				{
-					//DttSP.SetCorrectRXIQw(thread, subrx, real, imag, 0);      // NOT USED
-					rx_correct_iq_w_real_dsp = real;
-					rx_correct_iq_w_imag_dsp = imag;
-				}
-			}
-		}
-
-		private double rx_correct_iq_mu_dsp = 0.000;
-		private double rx_correct_iq_mu = 0.000;
-		public double RXCorrectIQMu
-		{
-			get { return rx_correct_iq_mu; }
-			set
-			{
-				//Debug.WriteLine("RX IQ Phase "+thread+" "+subrx+": "+value.ToString("f4"));
-				rx_correct_iq_mu = value;
-				if(update)
-				{
-					if(value != rx_correct_iq_mu_dsp || force)
-					{
-						//DttSP.SetCorrectIQMu(thread, subrx, value);       // NOT USED
-						rx_correct_iq_mu_dsp = value;
-					}
-				}
-			}
-		}
-
-		private bool sdrom_dsp = false;
-		private bool sdrom = false;
-		public bool SDROM
-		{
-			get { return sdrom; }
-			set
-			{
-				sdrom = value;
-				if(update)
-				{
-					if(value != sdrom_dsp || force)
-					{
-						//DttSP.SetSDROM(thread, subrx, value);     // NOT USED
-						sdrom_dsp = value;
-					}
-				}
-			}
-		}
-
-		private double sdrom_threshold_dsp = 2.475;
-		private double sdrom_threshold = 2.475;
-		public double SDROMThreshold
-		{
-			get { return sdrom_threshold; }
-			set
-			{
-				sdrom_threshold = value;
-				if(update)
-				{
-					if(value != sdrom_threshold_dsp || force)
-					{
-						//DttSP.SetSDROMvals(thread, subrx, value);     // NOT USED
-						sdrom_threshold_dsp = value;
-					}
-				}
-			}
-		}
+        private double nb_hangtime_dsp = 0.0001;
+        private double nb_hangtime = 0.0001;
+        public double NBHangTime
+        {
+            get { return nb_hangtime; }
+            set
+            {
+                nb_hangtime = value;
+                if (update)
+                {
+                    if (value != nb_hangtime_dsp || force)
+                    {
+                        if (thread == 0 && subrx == 0)
+                            for (int i = 0; i < 3; i++)
+                                SpecHPSDRDLL.SetEXTANBHangtime(i, value);
+                        else if (thread == 2 && subrx == 0)
+                            SpecHPSDRDLL.SetEXTANBHangtime(3, value);
+                        nb_hangtime_dsp = value;
+                    }
+                }
+            }
+        }
 
 		private double rx_fixed_agc_dsp = 20.0;
 		private double rx_fixed_agc = 20.0;
@@ -800,7 +745,6 @@ namespace PowerSDR
 				{
 					if(value != rx_fixed_agc_dsp || force)
 					{
-						//DttSP.SetFixedAGC(thread, subrx, value);
                         wdsp.SetRXAAGCFixed(wdsp.id(thread, subrx), value);
 						rx_fixed_agc_dsp = value;
 					}
@@ -820,7 +764,6 @@ namespace PowerSDR
 				{
 					if(value != rx_agc_max_gain_dsp || force)
 					{
-						//DttSP.SetRXAGCMaxGain(thread, subrx, value);
                         wdsp.SetRXAAGCTop(wdsp.id(thread, subrx), value);
 						rx_agc_max_gain_dsp = value;
 					}
@@ -840,7 +783,6 @@ namespace PowerSDR
 				{
 					if(value != rx_agc_attack_dsp || force)
 					{
-						//DttSP.SetRXAGCAttack(thread, subrx, value);
                         wdsp.SetRXAAGCAttack(wdsp.id(thread, subrx), value);
 						rx_agc_attack_dsp = value;
 					}
@@ -860,7 +802,6 @@ namespace PowerSDR
 				{
 					if(value != rx_agc_decay_dsp || force)
 					{
-						//DttSP.SetRXAGCDecay(thread, subrx, value);
                         wdsp.SetRXAAGCDecay(wdsp.id(thread, subrx), value);
 						rx_agc_decay_dsp = value;
 					}
@@ -880,7 +821,6 @@ namespace PowerSDR
 				{
 					if(value != rx_agc_hang_dsp || force)
 					{
-						//DttSP.SetRXAGCHang(thread, subrx, value);
                         wdsp.SetRXAAGCHang(wdsp.id(thread, subrx), value);
 						rx_agc_hang_dsp = value;
 					}
@@ -900,7 +840,6 @@ namespace PowerSDR
 				{
 					if(value != rx_output_gain_dsp || force)
 					{
-						//DttSP.SetRXOutputGain(thread, subrx, value);
                         wdsp.SetRXAPanelGain1(wdsp.id(thread, subrx), value);
 						rx_output_gain_dsp = value;
 					}
@@ -920,7 +859,6 @@ namespace PowerSDR
 				{
 					if(value != rx_agc_slope_dsp || force)
 					{
-						//DttSP.SetRXAGCSlope(thread, subrx, value);
                         wdsp.SetRXAAGCSlope(wdsp.id(thread, subrx), value);
 						rx_agc_slope_dsp = value;
 					}
@@ -940,47 +878,8 @@ namespace PowerSDR
 				{
 					if(value != rx_agc_hang_threshold_dsp || force)
 					{
-						//DttSP.SetRXAGCHangThreshold(thread, subrx, value);
                         wdsp.SetRXAAGCHangThreshold(wdsp.id(thread, subrx), value);
 						rx_agc_hang_threshold_dsp = value;
-					}
-				}
-			}
-		}
-
-		private Window current_window_dsp = Window.BLKHARRIS;
-		private Window current_window = Window.BLKHARRIS;
-		public Window CurrentWindow
-		{
-			get { return current_window; }
-			set
-			{
-				current_window = value;
-				if(update)
-				{
-					if(value != current_window_dsp || force)
-					{
-						//DttSP.SetWindow(thread, value);   // NOT USED
-						current_window_dsp = value;
-					}
-				}
-			}
-		}
-
-		private bool spectrum_polyphase_dsp = false;
-		private bool spectrum_polyphase = false;
-		public bool SpectrumPolyphase
-		{
-			get { return spectrum_polyphase; }
-			set
-			{
-				spectrum_polyphase = value;
-				if(update)
-				{
-					if(value != spectrum_polyphase_dsp || force)
-					{
-						//DttSP.SetSpectrumPolyphase(thread, value);    // NOT USED
-						spectrum_polyphase_dsp = value;
 					}
 				}
 			}
@@ -998,7 +897,6 @@ namespace PowerSDR
 				{
 					if(value != bin_on_dsp || force)
 					{
-						//DttSP.SetBIN(thread, subrx, value);
                         wdsp.SetRXAPanelBinaural(wdsp.id(thread, subrx), value);
 						bin_on_dsp = value;
 					}
@@ -1013,13 +911,11 @@ namespace PowerSDR
             get { return rx_squelch_threshold; }
             set
             {
-                //Debug.WriteLine("Squelch Threshold: "+value);
                 rx_squelch_threshold = value;
                 if (update)
                 {
                     if (value != rx_squelch_threshold_dsp || force)
                     {
-                        //DttSP.SetSquelchVal(thread, subrx, value);
                         wdsp.SetRXAAMSQThreshold(wdsp.id(thread, subrx), value);
                         rx_squelch_threshold_dsp = value;
                     }
@@ -1039,7 +935,6 @@ namespace PowerSDR
                     if (value != fm_squelch_threshold_dsp || force)
                     {
                         {
-                            //DttSP.SetFMSquelchThreshold(thread, subrx, value);
                             wdsp.SetRXAFMSQThreshold(wdsp.id(thread, subrx), value);
                             fm_squelch_threshold_dsp = value;
                         }
@@ -1060,7 +955,6 @@ namespace PowerSDR
 				{
 					if(value != rx_am_squelch_on_dsp || force)
 					{
-						//DttSP.SetSquelchState(thread, subrx, value);
                         wdsp.SetRXAAMSQRun(wdsp.id(thread, subrx), value);
 						rx_am_squelch_on_dsp = value;
 					}
@@ -1119,7 +1013,6 @@ namespace PowerSDR
 				{
 					if(value != active_dsp || force)
 					{
-						//DttSP.SetRXOn(thread, subrx, value);
 						active_dsp = value;
 					}
 				}
@@ -1138,7 +1031,6 @@ namespace PowerSDR
 				{
 					if(value != pan_dsp || force)
 					{
-						//DttSP.SetRXPan(thread, subrx, value);
                         wdsp.SetRXAPanelPan (wdsp.id(thread, subrx), (double)value);
 						pan_dsp = value;
 					}
@@ -1158,49 +1050,12 @@ namespace PowerSDR
 				{
 					if(value != rx_osc_dsp || force)
 					{
-						//DttSP.SetRXOsc(thread, subrx, value);
                         wdsp.SetRXAShiftFreq(wdsp.id(thread, subrx), -value);
 						rx_osc_dsp = value;
 					}
 				}
 			}
 		}
-
-		private double osc_phase_dsp = 0.0;
-		public double OSC_PHASE_DSP
-		{
-			get { return osc_phase_dsp; }
-			set
-			{
-				if(update)
-				{
-					if (value != osc_phase_dsp || force)
-					{
-						osc_phase_dsp = value;
-						//DttSP.SetOscPhase(osc_phase_dsp);     // NOT USED
-					}
-				}
-			}
-		}
-
-        private bool dc_block_dsp = false;
-        private bool dc_block = false;
-        public bool DCBlock
-        {
-            get { return dc_block; }
-            set
-            {
-                dc_block = value;
-                if (update)
-                {
-                    if (value != dc_block_dsp || force)
-                    {
-                        //DttSP.SetRXDCBlock(thread, subrx, value);     // NOT USED
-                        dc_block_dsp = value;
-                    }
-                }
-            }
-        }
 
         private double rx_fm_deviation = 5000.0;
         private double rx_fm_deviation_dsp = 5000.0;
@@ -1214,7 +1069,6 @@ namespace PowerSDR
                 {
                     if (value != rx_fm_deviation_dsp || force)
                     {
-                        //DttSP.SetRXFMDeviation(thread, subrx, value);
                         wdsp.SetRXAFMDeviation(wdsp.id(thread, subrx), value);
                         rx_fm_deviation_dsp = value;
                     }
@@ -1288,6 +1142,312 @@ namespace PowerSDR
             }
         }
 
+        private bool rx_fm_ctcss_filter_dsp = true;
+        private bool rx_fm_ctcss_filter = true;
+        public bool RXFMCTCSSFilter
+        {
+            get { return rx_fm_ctcss_filter; }
+            set
+            {
+                rx_fm_ctcss_filter = value;
+                if (update)
+                {
+                    if (value != rx_fm_ctcss_filter_dsp || force)
+                    {
+                        wdsp.SetRXACTCSSRun(wdsp.id(thread, subrx), value);
+                        rx_fm_ctcss_filter_dsp = value;
+                    }
+                }
+            }
+
+        }
+
+        private int rx_anf_position_dsp = 0;
+        private int rx_anf_position = 0;
+        public int RXANFPosition
+        {
+            get { return rx_anf_position; }
+            set
+            {
+                rx_anf_position = value;
+                if (update)
+                {
+                    if (value != rx_anf_position_dsp || force)
+                    {
+                        wdsp.SetRXAANFPosition(wdsp.id(thread, subrx), value);
+                        rx_anf_position_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_anr_position_dsp = 0;
+        private int rx_anr_position = 0;
+        public int RXANRPosition
+        {
+            get { return rx_anr_position; }
+            set
+            {
+                rx_anr_position = value;
+                if (update)
+                {
+                    if (value != rx_anr_position_dsp || force)
+                    {
+                        wdsp.SetRXAANRPosition(wdsp.id(thread, subrx), value);
+                        rx_anr_position_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private bool rx_cbl_run_dsp = true;
+        private bool rx_cbl_run = true;
+        public bool RXCBLRun
+        {
+            get { return rx_cbl_run; }
+            set
+            {
+                rx_cbl_run = value;
+                if (update)
+                {
+                    if (value != rx_cbl_run_dsp || force)
+                    {
+                        wdsp.SetRXACBLRun(wdsp.id(thread, subrx), value);
+                        rx_cbl_run_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_amd_fadelevel_dsp = 1;
+        private int rx_amd_fadelevel = 1;
+        public int RXAMDFadeLevel
+        {
+            get { return rx_amd_fadelevel; }
+            set
+            {
+                rx_amd_fadelevel = value;
+                if (update)
+                {
+                    if (value != rx_amd_fadelevel_dsp || force)
+                    {
+                        wdsp.SetRXAAMDFadeLevel(wdsp.id(thread, subrx), value);
+                        rx_amd_fadelevel_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_amd_sbmode_dsp = 0;
+        private int rx_amd_sbmode = 0;
+        public int RXAMDSBMode
+        {
+            get { return rx_amd_sbmode; }
+            set
+            {
+                rx_amd_sbmode = value;
+                if (update)
+                {
+                    if (value != rx_amd_sbmode_dsp || force)
+                    {
+                        wdsp.SetRXAAMDSBMode(wdsp.id(thread, subrx), value);
+                        rx_amd_sbmode_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_bandpass_window_dsp = 1;
+        private int rx_bandpass_window = 1;
+        public int RXBandpassWindow
+        {
+            get { return rx_bandpass_window; }
+            set
+            {
+                rx_bandpass_window = value;
+                if (update)
+                {
+                    if (value != rx_bandpass_window_dsp || force)
+                    {
+                        wdsp.SetRXABandpassWindow(wdsp.id(thread, subrx), value);
+                        rx_bandpass_window_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_pregen_run_dsp = 0;
+        private int rx_pregen_run = 0;
+        public int RXPreGenRun
+        {
+            get { return rx_pregen_run; }
+            set
+            {
+                rx_pregen_run = value;
+                if (update)
+                {
+                    if (value != rx_pregen_run_dsp || force)
+                    {
+                        wdsp.SetRXAPreGenRun(wdsp.id(thread,subrx), value);
+                        rx_pregen_run_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_pregen_mode_dsp = 0;
+        private int rx_pregen_mode = 0;
+        public int RXPreGenMode
+        {
+            get { return rx_pregen_mode; }
+            set
+            {
+                rx_pregen_mode = value;
+                if (update)
+                {
+                    if (value != rx_pregen_mode_dsp || force)
+                    {
+                        wdsp.SetRXAPreGenMode(wdsp.id(thread, subrx), value);
+                        rx_pregen_mode_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double rx_pregen_tone_mag_dsp = 0.0;
+        private double rx_pregen_tone_mag = 0.0;
+        public double RXPreGenToneMag
+        {
+            get { return rx_pregen_tone_mag; }
+            set
+            {
+                rx_pregen_tone_mag = value;
+                if (update)
+                {
+                    if (value != rx_pregen_tone_mag_dsp || force)
+                    {
+                        wdsp.SetRXAPreGenToneMag(wdsp.id(thread, subrx), value);
+                        rx_pregen_tone_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double rx_pregen_tone_freq_dsp = 0.0;
+        private double rx_pregen_tone_freq = 0.0;
+        public double RXPreGenToneFreq
+        {
+            get { return rx_pregen_tone_freq; }
+            set
+            {
+                rx_pregen_tone_freq = value;
+                if (update)
+                {
+                    if (value != rx_pregen_tone_freq_dsp || force)
+                    {
+                        wdsp.SetRXAPreGenToneFreq(wdsp.id(thread, subrx), value);
+                        rx_pregen_tone_freq_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double rx_pregen_noise_mag_dsp = 0.0;
+        private double rx_pregen_noise_mag = 0.0;
+        public double RXPreGenNoiseMag
+        {
+            get { return rx_pregen_noise_mag; }
+            set
+            {
+                rx_pregen_noise_mag = value;
+                if (update)
+                {
+                    if (value != rx_pregen_noise_mag_dsp || force)
+                    {
+                        wdsp.SetRXAPreGenNoiseMag(wdsp.id(thread, subrx), value);
+                        rx_pregen_noise_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double rx_pregen_sweep_mag_dsp = 0.0;
+        private double rx_pregen_sweep_mag = 0.0;
+        public double RXPreGenSweepMag
+        {
+            get { return rx_pregen_sweep_mag; }
+            set
+            {
+                rx_pregen_sweep_mag = value;
+                if (update)
+                {
+                    if (value != rx_pregen_sweep_mag_dsp || force)
+                    {
+                        wdsp.SetRXAPreGenSweepMag(wdsp.id(thread, subrx), value);
+                        rx_pregen_sweep_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double rx_pregen_sweep_freq1_dsp = 0.0;
+        private double rx_pregen_sweep_freq1 = 0.0;
+        public double RXPreGenSweepFreq1
+        {
+            get { return rx_pregen_sweep_freq1; }
+            set
+            {
+                rx_pregen_sweep_freq1 = value;
+                if (update)
+                {
+                    if (value != rx_pregen_sweep_freq1_dsp || force)
+                    {
+                        rx_pregen_sweep_freq1_dsp = value;
+                        wdsp.SetRXAPreGenSweepFreq(wdsp.id(thread, subrx), rx_pregen_sweep_freq1_dsp, rx_pregen_sweep_freq2_dsp);
+                        
+                    }
+                }
+            }
+        }
+
+        private double rx_pregen_sweep_freq2_dsp = 0.0;
+        private double rx_pregen_sweep_freq2 = 0.0;
+        public double RXPreGenSweepFreq2
+        {
+            get { return rx_pregen_sweep_freq2; }
+            set
+            {
+                rx_pregen_sweep_freq2 = value;
+                if (update)
+                {
+                    if (value != rx_pregen_sweep_freq2_dsp || force)
+                    {
+                        rx_pregen_sweep_freq2_dsp = value;
+                        wdsp.SetRXAPreGenSweepFreq(wdsp.id(thread, subrx), rx_pregen_sweep_freq1_dsp, rx_pregen_sweep_freq2_dsp);
+                    }
+                }
+            }
+        }
+
+        private double rx_pregen_sweep_rate_dsp = 0.0;
+        private double rx_pregen_sweep_rate = 0.0;
+        public double RXPreGenSweepRate
+        {
+            get { return rx_pregen_sweep_rate; }
+            set
+            {
+                rx_pregen_sweep_rate = value;
+                if (update)
+                {
+                    if (value != rx_pregen_sweep_rate_dsp || force)
+                    {
+                        wdsp.SetRXAPreGenSweepRate(wdsp.id(thread, subrx), value);
+                        rx_pregen_sweep_rate_dsp = value;
+                    }
+                }
+            }
+        }
+
 		#endregion
 	}
 
@@ -1326,10 +1486,7 @@ namespace PowerSDR
 			TXEQOn = tx_eq_on;
 			Notch160 = notch_160;
 			TXCorrectIQGain = tx_correct_iq_gain;
-			TXCorrectIQPhase = tx_correct_iq_phase;
-			TXCorrectIQMu = tx_correct_iq_mu;
 			TXAMCarrierLevel = tx_am_carrier_level;
-			TXALCBottom = tx_alc_bottom;
 			TXALCAttack = tx_alc_attack;
 			TXALCDecay = tx_alc_decay;
 			TXALCHang = tx_alc_hang;
@@ -1338,8 +1495,6 @@ namespace PowerSDR
 			TXLevelerDecay = tx_leveler_decay;
 			TXLevelerHang = tx_leveler_hang;
 			TXLevelerOn = tx_leveler_on;
-			CurrentWindow = current_window;
-			SpectrumPolyphase = spectrum_polyphase;
 			TXSquelchThreshold = tx_squelch_threshold;
 			TXSquelchAttenuate = tx_squelch_attenuate;
 			TXSquelchOn = tx_squelch_on;
@@ -1349,6 +1504,42 @@ namespace PowerSDR
             CTCSSFreqHz = ctcss_freq_hz;
             TXFMDeviation = tx_fm_deviation;
             CTCSSFlag = ctcss_flag;
+            TXFMEmphOn = tx_fm_emph_on;
+            TXEERModeRun = tx_eer_mode_run;
+            TXEERModeMgain = tx_eer_mode_mgain;
+            TXEERModePgain = tx_eer_mode_pgain;
+            TXEERModePdelay = tx_eer_mode_pdelay;
+            TXBandpassWindow = tx_bandpass_window;
+            TXPreGenRun = tx_pregen_run;
+            TXPreGenMode = tx_pregen_mode;
+            TXPreGenToneMag = tx_pregen_tone_mag;
+            TXPreGenToneFreq = tx_pregen_tone_freq;
+            TXPreGenNoiseMag = tx_pregen_noise_mag;
+            TXPreGenSweepMag = tx_pregen_sweep_mag;
+            TXPreGenSweepFreq1 = tx_pregen_sweep_freq1;
+            TXPreGenSweepFreq2 = tx_pregen_sweep_freq2;
+            TXPreGenSweepRate = tx_pregen_sweep_rate;
+            TXPreGenSawtoothMag = tx_pregen_sawtooth_mag;
+            TXPreGenSawtoothFreq = tx_pregen_sawtooth_freq;
+            TXPreGenTriangleMag = tx_pregen_triangle_mag;
+            TXPreGenTriangleFreq = tx_pregen_triangle_freq;
+            TXPreGenPulseMag = tx_pregen_pulse_mag;
+            TXPreGenPulseFreq = tx_pregen_pulse_freq;
+            TXPreGenPulseDutyCycle = tx_pregen_pulse_dutycycle;
+            TXPreGenPulseToneFreq = tx_pregen_pulse_tonefreq;
+            TXPreGenPulseTransition = tx_pregen_pulse_transition;
+            TXPostGenRun = tx_postgen_run;
+            TXPostGenMode = tx_postgen_mode;
+            TXPostGenToneMag = tx_postgen_tone_mag;
+            TXPostGenToneFreq = tx_postgen_tone_freq;
+            TXPostGenTTMag1 = tx_postgen_tt_mag1;
+            TXPostGenTTMag2 = tx_postgen_tt_mag2;
+            TXPostGenTTFreq1 = tx_postgen_tt_freq1;
+            TXPostGenTTFreq2 = tx_postgen_tt_freq2;
+            TXPostGenSweepMag = tx_postgen_sweep_mag;
+            TXPostGenSweepFreq1 = tx_postgen_sweep_freq1;
+            TXPostGenSweepFreq2 = tx_postgen_sweep_freq2;
+            TXPostGenSweepRate = tx_postgen_sweep_rate;
 		}
 
 		#region Non-Static Properties & Routines
@@ -1393,8 +1584,6 @@ namespace PowerSDR
 				{
 					if(value != buffer_size_dsp || force)
 					{
-						//Debug.WriteLine("TX "+thread+" "+value);
-						//DttSP.ResizeSDR(thread, value);
                         wdsp.SetDSPBuffsize(wdsp.id(thread, 0), value);
 						buffer_size_dsp = value;
 						//SyncAll();
@@ -1415,7 +1604,6 @@ namespace PowerSDR
 				{
 					if(value != audio_size_dsp || force)
 					{
-						//DttSP.SetAudioSize(value);
                         wdsp.SetInputBuffsize(wdsp.id(1, 0), value);
 						audio_size_dsp = value;
 					}
@@ -1435,7 +1623,6 @@ namespace PowerSDR
 				{
 					if(value != current_dsp_mode_dsp || force)
 					{
-						//DttSP.SetTXMode(thread, value);
                         wdsp.SetTXAMode(wdsp.id(thread, 0), value);
 						current_dsp_mode_dsp = value;
 					}
@@ -1451,7 +1638,6 @@ namespace PowerSDR
 			{
 				if(low != tx_filter_low_dsp || high != tx_filter_high_dsp || force)
 				{
-					//DttSP.SetTXFilter(thread, low, high);
                     wdsp.SetTXABandpassFreqs(wdsp.id(thread, 0), low, high);
 					tx_filter_low_dsp = low;
 					tx_filter_high_dsp = high;
@@ -1471,7 +1657,6 @@ namespace PowerSDR
 				{
 					if(value != tx_filter_low_dsp || force)
 					{
-						//DttSP.SetTXFilter(thread, value, tx_filter_high);
                         wdsp.SetTXABandpassFreqs(wdsp.id(thread, 0), value, tx_filter_high);
 						tx_filter_low_dsp = value;
 					}
@@ -1491,7 +1676,6 @@ namespace PowerSDR
 				{
 					if(value != tx_filter_high_dsp || force)
 					{
-						//DttSP.SetTXFilter(thread, tx_filter_low, value);
                         wdsp.SetTXABandpassFreqs(wdsp.id(thread, 0), tx_filter_low, value);
 						tx_filter_high_dsp = value;
 					}
@@ -1555,19 +1739,6 @@ namespace PowerSDR
 					tx_eq3[i] = value[i];
 				if(update)
 				{
-					/*bool need_update = false;
-					for(int i=0; i<tx_eq3_dsp.Length && i<value.Length; i++)
-					{
-						if(value[i] != tx_eq3_dsp[i] || force)
-						{
-							need_update = true;
-							break;
-						}
-					}
-
-					if(need_update)
-					{*/
-						//DttSP.SetGrphTXEQ(thread, tx_eq3);
                     unsafe
                     {
                         fixed (int* ptr = &(tx_eq3[0]))
@@ -1575,7 +1746,6 @@ namespace PowerSDR
                     }
 						for(int i=0; i<tx_eq3_dsp.Length && i<value.Length; i++)
 							tx_eq3_dsp[i] = value[i];
-					//}
 				}
 			}
 		}
@@ -1591,19 +1761,6 @@ namespace PowerSDR
 					tx_eq10[i] = value[i];
 				if(update)
 				{
-					/*bool need_update = false;
-					for(int i=0; i<tx_eq10_dsp.Length && i<value.Length; i++)
-					{
-						if(value[i] != tx_eq10_dsp[i] || force)
-						{
-							need_update = true;
-							break;
-						}
-					}
-
-					if(need_update)
-					{*/
-						//DttSP.SetGrphTXEQ10(thread, tx_eq10);
                     unsafe
                     {
                         fixed (int* ptr = &(tx_eq10[0]))
@@ -1611,7 +1768,6 @@ namespace PowerSDR
                     }
 						for(int i=0; i<tx_eq10_dsp.Length && i<value.Length; i++)
 							tx_eq10_dsp[i] = value[i];
-					//}
 				}
 			}
 		}
@@ -1628,7 +1784,6 @@ namespace PowerSDR
 				{
 					if(value != tx_eq_on_dsp || force)
 					{
-						//DttSP.SetGrphTXEQcmd(thread, value);
                         wdsp.SetTXAEQRun(wdsp.id(thread, 0), value);
 						tx_eq_on_dsp = value;
 					}
@@ -1686,7 +1841,6 @@ namespace PowerSDR
                 {
                     if (value != tx_fm_deviation_dsp || force)
                     {
-                        //DttSP.SetTXFMDeviation(thread, value);
                         wdsp.SetTXAFMDeviation(wdsp.id(thread, 0), value);
                         tx_fm_deviation_dsp = value;
                     }
@@ -1706,8 +1860,10 @@ namespace PowerSDR
                 {
                     if (value != ctcss_freq_hz_dsp || force)
                     {
-                        //DttSP.SetCTCSSFreq(thread, value);
                         wdsp.SetTXACTCSSFreq(wdsp.id(thread, 0), value);
+                        wdsp.SetRXACTCSSFreq(wdsp.id(0, 0), value);
+                        wdsp.SetRXACTCSSFreq(wdsp.id(0, 1), value);
+                        wdsp.SetRXACTCSSFreq(wdsp.id(2, 0), value);
                         ctcss_freq_hz_dsp = value;
                     }
                 }
@@ -1726,51 +1882,12 @@ namespace PowerSDR
                     if (value != ctcss_flag_dsp || force)
                     {
                         {
-                            //DttSP.SetCTCSSFlag(thread, value);
                             wdsp.SetTXACTCSSRun(wdsp.id(thread, 0), value);
                             ctcss_flag_dsp = value;
                         }
                     }
             }
         }
-
-        private double tx_correct_iq_phase_dsp = 0.0;
-		private double tx_correct_iq_phase = 0.0;
-		public double TXCorrectIQPhase
-		{
-			get { return tx_correct_iq_phase; }
-			set
-			{
-				tx_correct_iq_phase = value;
-				if(update)
-				{
-					if(value != tx_correct_iq_phase_dsp || force)
-					{
-						//DttSP.SetTXIQPhase(thread, value);    // NOT USED
-						tx_correct_iq_phase_dsp = value;
-					}
-				}
-			}
-		}
-
-		private double tx_correct_iq_mu_dsp = 0.0;
-		private double tx_correct_iq_mu = 0.0;
-		public double TXCorrectIQMu
-		{
-			get { return tx_correct_iq_mu; }
-			set
-			{
-				tx_correct_iq_mu = value;
-				if(update)
-				{
-					if(value != tx_correct_iq_mu_dsp || force)
-					{
-						//DttSP.SetTXIQMu(thread, value);       // NOT USED
-						tx_correct_iq_mu_dsp = value;
-					}
-				}
-			}
-		}
 
 		private double tx_am_carrier_level_dsp = 0.4;
 		private double tx_am_carrier_level = 0.4;
@@ -1784,29 +1901,8 @@ namespace PowerSDR
 				{
 					if(value != tx_am_carrier_level_dsp || force)
 					{
-						//DttSP.SetTXAMCarrierLevel(thread, value);
                         wdsp.SetTXAAMCarrierLevel(wdsp.id(thread, 0), value);
 						tx_am_carrier_level_dsp = value;
-					}
-				}
-			}
-		}
-
-
-		private int tx_alc_bottom_dsp = -120;
-		private int tx_alc_bottom = -120;
-		private int TXALCBottom
-		{
-			get { return tx_alc_bottom; }
-			set
-			{
-				tx_alc_bottom = value;
-				if(update)
-				{
-					if(value != tx_alc_bottom_dsp || force)
-					{
-						//DttSP.SetTXALCBot(thread, value);     // NOT USED
-						tx_alc_bottom_dsp = value;
 					}
 				}
 			}
@@ -1824,7 +1920,6 @@ namespace PowerSDR
 				{
 					if(value != tx_alc_attack_dsp || force)
 					{
-						//DttSP.SetTXALCAttack(thread, value);
                         wdsp.SetTXAALCAttack(wdsp.id(thread, 0), value);
 						tx_alc_attack_dsp = value;
 					}
@@ -1844,7 +1939,6 @@ namespace PowerSDR
 				{
 					if(value != tx_alc_decay_dsp || force)
 					{
-						//DttSP.SetTXALCDecay(thread, value);
                         wdsp.SetTXAALCDecay(wdsp.id(thread, 0), value);
 						tx_alc_decay_dsp = value;
 					}
@@ -1859,7 +1953,6 @@ namespace PowerSDR
 			set
 			{
 				tx_alc_hang = value;
-				//DttSP.SetTXALCHang(thread, value);
                 wdsp.SetTXAALCHang(wdsp.id(thread, 0), value);
 			}
 		}
@@ -1876,7 +1969,6 @@ namespace PowerSDR
 				{
 					if(value != tx_leveler_max_gain_dsp || force)
 					{
-						//DttSP.SetTXLevelerMaxGain(thread, value);
                         wdsp.SetTXALevelerTop(wdsp.id(thread, 0), value);
 						tx_leveler_max_gain_dsp = value;
 					}
@@ -1896,7 +1988,6 @@ namespace PowerSDR
 				{
 					if(value != tx_leveler_attack_dsp || force)
 					{
-						//DttSP.SetTXLevelerAttack(thread, value);
                         wdsp.SetTXALevelerAttack(wdsp.id(thread, 0), value);
 						tx_leveler_attack_dsp = value;
 					}
@@ -1916,7 +2007,6 @@ namespace PowerSDR
 				{
 					if(value != tx_leveler_decay_dsp || force)
 					{
-						//DttSP.SetTXLevelerDecay(thread, value);
                         wdsp.SetTXALevelerDecay(wdsp.id(thread, 0), value);
 						tx_leveler_decay_dsp = value;
 					}
@@ -1936,7 +2026,6 @@ namespace PowerSDR
 				{
 					if(value != tx_leveler_hang_dsp || force)
 					{
-						//DttSP.SetTXLevelerHang(thread, value);
                         wdsp.SetTXALevelerHang(wdsp.id(thread, 0), value);
 						tx_leveler_hang_dsp = value;
 					}
@@ -1956,47 +2045,8 @@ namespace PowerSDR
 				{
 					if(value != tx_leveler_on_dsp || force)
 					{
-						//DttSP.SetTXLevelerSt(thread, value);
                         wdsp.SetTXALevelerSt(wdsp.id(thread, 0), value);
 						tx_leveler_on_dsp = value;
-					}
-				}
-			}
-		}
-
-		private Window current_window_dsp = Window.BLKHARRIS;
-		private Window current_window = Window.BLKHARRIS;
-		public Window CurrentWindow
-		{
-			get { return current_window; }
-			set
-			{
-				current_window = value;
-				if(update)
-				{
-					if(value != current_window_dsp || force)
-					{
-						//DttSP.SetWindow(thread, value);   // NOT USED
-						current_window_dsp = value;
-					}
-				}
-			}
-		}
-
-		private bool spectrum_polyphase_dsp = false;
-		private bool spectrum_polyphase = false;
-		public bool SpectrumPolyphase
-		{
-			get { return spectrum_polyphase; }
-			set
-			{
-				spectrum_polyphase = value;
-				if(update)
-				{
-					if(value != spectrum_polyphase_dsp || force)
-					{
-						//DttSP.SetSpectrumPolyphase(thread, value);    // NOT USED
-						spectrum_polyphase_dsp = value;
 					}
 				}
 			}
@@ -2014,7 +2064,6 @@ namespace PowerSDR
 				{
 					if(value != tx_squelch_threshold_dsp || force)
 					{
-						//DttSP.SetTXSquelchVal(thread, value);
                         wdsp.SetTXAAMSQThreshold(wdsp.id(thread, 0), (double)value);
 						tx_squelch_threshold_dsp = value;
 					}
@@ -2034,7 +2083,6 @@ namespace PowerSDR
 				{
 					if(value != tx_squelch_attenuate_dsp || force)
 					{
-						//DttSP.SetTXSquelchAtt(thread, value);
                         wdsp.SetTXAAMSQMutedGain(wdsp.id(thread, 0), 20.0 * Math.Log10(1.0 - value / 100.0));
 						tx_squelch_attenuate_dsp = value;
 					}
@@ -2054,7 +2102,6 @@ namespace PowerSDR
 				{
 					if(value != tx_squelch_on_dsp || force)
 					{
-						//DttSP.SetTXSquelchState(thread, value);
                         wdsp.SetTXAAMSQRun(wdsp.id(thread, 0), value);
 						tx_squelch_on_dsp = value;
 					}
@@ -2075,11 +2122,8 @@ namespace PowerSDR
 				{
 					if(value != tx_compand_on_dsp || force)
 					{
-						//DttSP.SetTXCompandSt(thread, value);
-                        //DttSP.SetTXCompressorSt(thread, value);
                         wdsp.SetTXACompressorRun(wdsp.id(thread, 0), value);
 						tx_compand_on_dsp = value;
-						//Debug.WriteLine("TXCompandOn: "+value.ToString());
 					}
 				}
 			}
@@ -2098,11 +2142,8 @@ namespace PowerSDR
 				{
 					if(value != tx_compand_level_dsp || force)
 					{
-						//DttSP.SetTXCompand(thread, value);
-                        //DttSP.SetTXCompressor(thread, value);
                         wdsp.SetTXACompressorGain(wdsp.id(thread, 0), value);
 						tx_compand_level_dsp = value;
-						//Debug.WriteLine("TXCompandLevel: "+value.ToString("f2"));
 					}
 				}
 			}
@@ -2126,45 +2167,699 @@ namespace PowerSDR
 				}
 			}
 		}
-/*
-		private bool active_dsp = false;
-		private bool active = false;
-		public bool Active
-		{
-			get { return active; }
-			set
-			{
-				active = value;
-				if(update)
-				{
-					if(value != active_dsp || force)
-					{
-						DttSP.SetRXOn(thread, subrx, value);
-						active_dsp = value;
-					}
-				}
-			}
-		}
 
-		private float pan_dsp = 0.5f;
-		private float pan = 0.5f;
-		public float Pan
-		{
-			get { return pan; }
-			set
-			{
-				pan = value;
-				if(update)
-				{
-					if(value != pan_dsp || force)
-					{
-						DttSP.SetRXPan(thread, subrx, value);
-						pan_dsp = value;
-					}
-				}
-			}
-		}
-*/
+        private bool tx_fm_emph_on_dsp = true;
+        private bool tx_fm_emph_on = true;
+        public bool TXFMEmphOn
+        {
+            get { return tx_fm_emph_on; }
+            set
+            {
+                tx_fm_emph_on = value;
+
+                if (update)
+                {
+                    if (value != tx_fm_emph_on_dsp || force)
+                    {
+                        wdsp.SetTXAFMEmphPosition(wdsp.id(thread, 0), value);
+                        tx_fm_emph_on_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private bool tx_eer_mode_run_dsp = false;
+        private bool tx_eer_mode_run = false;
+        public bool TXEERModeRun
+        {
+            get { return tx_eer_mode_run; }
+            set
+            {
+                tx_eer_mode_run = value;
+
+                if (update)
+                {
+                    if (value != tx_eer_mode_run_dsp || force)
+                    {
+                        wdsp.SetTXAEERRun(wdsp.id(1, 0), value);
+                        tx_eer_mode_run_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_eer_mode_mgain_dsp = 0.5;
+        private double tx_eer_mode_mgain = 0.5;
+        public double TXEERModeMgain
+        {
+            get { return tx_eer_mode_mgain; }
+            set
+            {
+                tx_eer_mode_mgain = value;
+
+                if (update)
+                {
+                    if (value != tx_eer_mode_mgain_dsp || force)
+                    {
+                        wdsp.SetTXAEERMgain(wdsp.id(1, 0), value);
+                        tx_eer_mode_mgain_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_eer_mode_pgain_dsp = 0.5;
+        private double tx_eer_mode_pgain = 0.5;
+        public double TXEERModePgain
+        {
+            get { return tx_eer_mode_pgain; }
+            set
+            {
+                tx_eer_mode_pgain = value;
+
+                if (update)
+                {
+                    if (value != tx_eer_mode_pgain_dsp || force)
+                    {
+                        wdsp.SetTXAEERPgain(wdsp.id(1, 0), value);
+                        tx_eer_mode_pgain_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_eer_mode_pdelay_dsp = 1.0e-05;
+        private double tx_eer_mode_pdelay = 1.0e-05;
+        public double TXEERModePdelay
+        {
+            get { return tx_eer_mode_pdelay; }
+            set
+            {
+                tx_eer_mode_pdelay = value;
+
+                if (update)
+                {
+                    if (value != tx_eer_mode_pdelay_dsp || force)
+                    {
+                        wdsp.SetTXAEERPdelay(wdsp.id(1, 0), value);
+                        tx_eer_mode_pdelay_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int tx_bandpass_window_dsp = 1;
+        private int tx_bandpass_window = 1;
+        public int TXBandpassWindow
+        {
+            get { return tx_bandpass_window; }
+            set
+            {
+                tx_bandpass_window = value;
+                if (update)
+                {
+                    if (value != tx_bandpass_window_dsp || force)
+                    {
+                        wdsp.SetTXABandpassWindow(wdsp.id(1, 0), value);
+                        tx_bandpass_window_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int tx_pregen_run_dsp = 0;
+        private int tx_pregen_run = 0;
+        public int TXPreGenRun
+        {
+            get { return tx_pregen_run; }
+            set
+            {
+                tx_pregen_run = value;
+                if (update)
+                {
+                    if (value != tx_pregen_run_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenRun(wdsp.id(1, 0), value);
+                        tx_pregen_run_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int tx_pregen_mode_dsp = 0;
+        private int tx_pregen_mode = 0;
+        public int TXPreGenMode
+        {
+            get { return tx_pregen_mode; }
+            set
+            {
+                tx_pregen_mode = value;
+                if (update)
+                {
+                    if (value != tx_pregen_mode_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenMode(wdsp.id(1, 0), value);
+                        tx_pregen_mode_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_tone_mag_dsp = 0.0;
+        private double tx_pregen_tone_mag = 0.0;
+        public double TXPreGenToneMag
+        {
+            get { return tx_pregen_tone_mag; }
+            set
+            {
+                tx_pregen_tone_mag = value;
+                if (update)
+                {
+                    if (value != tx_pregen_tone_mag_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenToneMag(wdsp.id(1, 0), value);
+                        tx_pregen_tone_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_tone_freq_dsp = 0.0;
+        private double tx_pregen_tone_freq = 0.0;
+        public double TXPreGenToneFreq
+        {
+            get { return tx_pregen_tone_freq; }
+            set
+            {
+                tx_pregen_tone_freq = value;
+                if (update)
+                {
+                    if (value != tx_pregen_tone_freq_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenToneFreq(wdsp.id(1, 0), value);
+                        tx_pregen_tone_freq_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_noise_mag_dsp = 0.0;
+        private double tx_pregen_noise_mag = 0.0;
+        public double TXPreGenNoiseMag
+        {
+            get { return tx_pregen_noise_mag; }
+            set
+            {
+                tx_pregen_noise_mag = value;
+                if (update)
+                {
+                    if (value != tx_pregen_noise_mag_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenNoiseMag(wdsp.id(1, 0), value);
+                        tx_pregen_noise_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_sweep_mag_dsp = 0.0;
+        private double tx_pregen_sweep_mag = 0.0;
+        public double TXPreGenSweepMag
+        {
+            get { return tx_pregen_sweep_mag; }
+            set
+            {
+                tx_pregen_sweep_mag = value;
+                if (update)
+                {
+                    if (value != tx_pregen_sweep_mag_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenSweepMag(wdsp.id(1, 0), value);
+                        tx_pregen_sweep_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_sweep_freq1_dsp = 0.0;
+        private double tx_pregen_sweep_freq1 = 0.0;
+        public double TXPreGenSweepFreq1
+        {
+            get { return tx_pregen_sweep_freq1; }
+            set
+            {
+                tx_pregen_sweep_freq1 = value;
+                if (update)
+                {
+                    if (value != tx_pregen_sweep_freq1_dsp || force)
+                    {
+                        tx_pregen_sweep_freq1_dsp = value;
+                        wdsp.SetTXAPreGenSweepFreq(wdsp.id(1, 0), tx_pregen_sweep_freq1_dsp, tx_pregen_sweep_freq2_dsp);
+
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_sweep_freq2_dsp = 0.0;
+        private double tx_pregen_sweep_freq2 = 0.0;
+        public double TXPreGenSweepFreq2
+        {
+            get { return tx_pregen_sweep_freq2; }
+            set
+            {
+                tx_pregen_sweep_freq2 = value;
+                if (update)
+                {
+                    if (value != tx_pregen_sweep_freq2_dsp || force)
+                    {
+                        tx_pregen_sweep_freq2_dsp = value;
+                        wdsp.SetTXAPreGenSweepFreq(wdsp.id(1, 0), tx_pregen_sweep_freq1_dsp, tx_pregen_sweep_freq2_dsp);
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_sweep_rate_dsp = 0.0;
+        private double tx_pregen_sweep_rate = 0.0;
+        public double TXPreGenSweepRate
+        {
+            get { return tx_pregen_sweep_rate; }
+            set
+            {
+                tx_pregen_sweep_rate = value;
+                if (update)
+                {
+                    if (value != tx_pregen_sweep_rate_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenSweepRate(wdsp.id(1, 0), value);
+                        tx_pregen_sweep_rate_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_sawtooth_mag_dsp = 0.0;
+        private double tx_pregen_sawtooth_mag = 0.0;
+        public double TXPreGenSawtoothMag
+        {
+            get { return tx_pregen_sawtooth_mag; }
+            set
+            {
+                tx_pregen_sawtooth_mag = value;
+                if (update)
+                {
+                    if (value != tx_pregen_sawtooth_mag_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenSawtoothMag(wdsp.id(1, 0), value);
+                        tx_pregen_sawtooth_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_sawtooth_freq_dsp = 0.0;
+        private double tx_pregen_sawtooth_freq = 0.0;
+        public double TXPreGenSawtoothFreq
+        {
+            get { return tx_pregen_sawtooth_freq; }
+            set
+            {
+                tx_pregen_sawtooth_freq = value;
+                if (update)
+                {
+                    if (value != tx_pregen_sawtooth_freq_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenSawtoothFreq(wdsp.id(1, 0), value);
+                        tx_pregen_sawtooth_freq_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_triangle_mag_dsp = 0.0;
+        private double tx_pregen_triangle_mag = 0.0;
+        public double TXPreGenTriangleMag
+        {
+            get { return tx_pregen_triangle_mag; }
+            set
+            {
+                tx_pregen_triangle_mag = value;
+                if (update)
+                {
+                    if (value != tx_pregen_triangle_mag_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenTriangleMag(wdsp.id(1, 0), value);
+                        tx_pregen_triangle_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_triangle_freq_dsp = 0.0;
+        private double tx_pregen_triangle_freq = 0.0;
+        public double TXPreGenTriangleFreq
+        {
+            get { return tx_pregen_triangle_freq; }
+            set
+            {
+                tx_pregen_triangle_freq = value;
+                if (update)
+                {
+                    if (value != tx_pregen_triangle_freq_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenTriangleFreq(wdsp.id(1, 0), value);
+                        tx_pregen_triangle_freq_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_pulse_mag_dsp = 0.0;
+        private double tx_pregen_pulse_mag = 0.0;
+        public double TXPreGenPulseMag
+        {
+            get { return tx_pregen_pulse_mag; }
+            set
+            {
+                tx_pregen_pulse_mag = value;
+                if (update)
+                {
+                    if (value != tx_pregen_pulse_mag_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenPulseMag(wdsp.id(1, 0), value);
+                        tx_pregen_pulse_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_pulse_freq_dsp = 0.0;
+        private double tx_pregen_pulse_freq = 0.0;
+        public double TXPreGenPulseFreq
+        {
+            get { return tx_pregen_pulse_freq; }
+            set
+            {
+                tx_pregen_pulse_freq = value;
+                if (update)
+                {
+                    if (value != tx_pregen_pulse_freq_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenPulseFreq(wdsp.id(1, 0), value);
+                        tx_pregen_pulse_freq_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_pulse_dutycycle_dsp = 0.0;
+        private double tx_pregen_pulse_dutycycle = 0.0;
+        public double TXPreGenPulseDutyCycle
+        {
+            get { return tx_pregen_pulse_dutycycle; }
+            set
+            {
+                tx_pregen_pulse_dutycycle = value;
+                if (update)
+                {
+                    if (value != tx_pregen_pulse_dutycycle_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenPulseDutyCycle(wdsp.id(1, 0), value);
+                        tx_pregen_pulse_dutycycle_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_pulse_tonefreq_dsp = 0.0;
+        private double tx_pregen_pulse_tonefreq = 0.0;
+        public double TXPreGenPulseToneFreq
+        {
+            get { return tx_pregen_pulse_tonefreq; }
+            set
+            {
+                tx_pregen_pulse_tonefreq = value;
+                if (update)
+                {
+                    if (value != tx_pregen_pulse_tonefreq_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenPulseToneFreq(wdsp.id(1, 0), value);
+                        tx_pregen_pulse_tonefreq_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_pregen_pulse_transition_dsp = 0.0;
+        private double tx_pregen_pulse_transition = 0.0;
+        public double TXPreGenPulseTransition
+        {
+            get { return tx_pregen_pulse_transition; }
+            set
+            {
+                tx_pregen_pulse_transition = value;
+                if (update)
+                {
+                    if (value != tx_pregen_pulse_transition_dsp || force)
+                    {
+                        wdsp.SetTXAPreGenPulseTransition(wdsp.id(1, 0), value);
+                        tx_pregen_pulse_transition_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int tx_postgen_run_dsp = 0;
+        private int tx_postgen_run = 0;
+        public int TXPostGenRun
+        {
+            get { return tx_postgen_run; }
+            set
+            {
+                tx_postgen_run = value;
+                if (update)
+                {
+                    if (value != tx_postgen_run_dsp || force)
+                    {
+                        wdsp.SetTXAPostGenRun(wdsp.id(1, 0), value);
+                        tx_postgen_run_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int tx_postgen_mode_dsp = 0;
+        private int tx_postgen_mode = 0;
+        public int TXPostGenMode
+        {
+            get { return tx_postgen_mode; }
+            set
+            {
+                tx_postgen_mode = value;
+                if (update)
+                {
+                    if (value != tx_postgen_mode_dsp || force)
+                    {
+                        wdsp.SetTXAPostGenMode(wdsp.id(1, 0), value);
+                        tx_postgen_mode_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_postgen_tone_mag_dsp = 0.0;
+        private double tx_postgen_tone_mag = 0.0;
+        public double TXPostGenToneMag
+        {
+            get { return tx_postgen_tone_mag; }
+            set
+            {
+                tx_postgen_tone_mag = value;
+                if (update)
+                {
+                    if (value != tx_postgen_tone_mag_dsp || force)
+                    {
+                        wdsp.SetTXAPostGenToneMag(wdsp.id(1, 0), value);
+                        tx_postgen_tone_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_postgen_tone_freq_dsp = 0.0;
+        private double tx_postgen_tone_freq = 0.0;
+        public double TXPostGenToneFreq
+        {
+            get { return tx_postgen_tone_freq; }
+            set
+            {
+                tx_postgen_tone_freq = value;
+                if (update)
+                {
+                    if (value != tx_postgen_tone_freq_dsp || force)
+                    {
+                        wdsp.SetTXAPostGenToneFreq(wdsp.id(1, 0), value);
+                        tx_postgen_tone_freq_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_postgen_tt_mag1_dsp = 0.0;
+        private double tx_postgen_tt_mag1 = 0.0;
+        public double TXPostGenTTMag1
+        {
+            get { return tx_postgen_tt_mag1; }
+            set
+            {
+                tx_postgen_tt_mag1 = value;
+                if (update)
+                {
+                    if (value != tx_postgen_tt_mag1_dsp || force)
+                    {
+                        tx_postgen_tt_mag1_dsp = value;
+                        wdsp.SetTXAPostGenTTMag(wdsp.id(1, 0), tx_postgen_tt_mag1_dsp, tx_postgen_tt_mag2_dsp);
+                    }
+                }
+            }
+        }
+
+        private double tx_postgen_tt_mag2_dsp = 0.0;
+        private double tx_postgen_tt_mag2 = 0.0;
+        public double TXPostGenTTMag2
+        {
+            get { return tx_postgen_tt_mag2; }
+            set
+            {
+                tx_postgen_tt_mag2 = value;
+                if (update)
+                {
+                    if (value != tx_postgen_tt_mag2_dsp || force)
+                    {
+                        tx_postgen_tt_mag2_dsp = value;
+                        wdsp.SetTXAPostGenTTMag(wdsp.id(1, 0), tx_postgen_tt_mag1_dsp, tx_postgen_tt_mag2_dsp);
+                    }
+                }
+            }
+        }
+
+        private double tx_postgen_tt_freq1_dsp = 0.0;
+        private double tx_postgen_tt_freq1 = 0.0;
+        public double TXPostGenTTFreq1
+        {
+            get { return tx_postgen_tt_freq1; }
+            set
+            {
+                tx_postgen_tt_freq1 = value;
+                if (update)
+                {
+                    if (value != tx_postgen_tt_freq1_dsp || force)
+                    {
+                        tx_postgen_tt_freq1_dsp = value;
+                        wdsp.SetTXAPostGenTTFreq(wdsp.id(1, 0), tx_postgen_tt_freq1_dsp, tx_postgen_tt_freq2_dsp);
+
+                    }
+                }
+            }
+        }
+
+        private double tx_postgen_tt_freq2_dsp = 0.0;
+        private double tx_postgen_tt_freq2 = 0.0;
+        public double TXPostGenTTFreq2
+        {
+            get { return tx_postgen_tt_freq2; }
+            set
+            {
+                tx_postgen_tt_freq2 = value;
+                if (update)
+                {
+                    if (value != tx_postgen_tt_freq2_dsp || force)
+                    {
+                        tx_postgen_tt_freq2_dsp = value;
+                        wdsp.SetTXAPostGenTTFreq(wdsp.id(1, 0), tx_postgen_tt_freq1_dsp, tx_postgen_tt_freq2_dsp);
+
+                    }
+                }
+            }
+        }
+
+        private double tx_postgen_sweep_mag_dsp = 0.0;
+        private double tx_postgen_sweep_mag = 0.0;
+        public double TXPostGenSweepMag
+        {
+            get { return tx_postgen_sweep_mag; }
+            set
+            {
+                tx_postgen_sweep_mag = value;
+                if (update)
+                {
+                    if (value != tx_postgen_sweep_mag_dsp || force)
+                    {
+                        wdsp.SetTXAPostGenSweepMag(wdsp.id(1, 0), value);
+                        tx_postgen_sweep_mag_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_postgen_sweep_freq1_dsp = 0.0;
+        private double tx_postgen_sweep_freq1 = 0.0;
+        public double TXPostGenSweepFreq1
+        {
+            get { return tx_postgen_sweep_freq1; }
+            set
+            {
+                tx_postgen_sweep_freq1 = value;
+                if (update)
+                {
+                    if (value != tx_postgen_sweep_freq1_dsp || force)
+                    {
+                        tx_postgen_sweep_freq1_dsp = value;
+                        wdsp.SetTXAPostGenSweepFreq(wdsp.id(1, 0), tx_postgen_sweep_freq1_dsp, tx_postgen_sweep_freq2_dsp);
+
+                    }
+                }
+            }
+        }
+
+        private double tx_postgen_sweep_freq2_dsp = 0.0;
+        private double tx_postgen_sweep_freq2 = 0.0;
+        public double TXPostGenSweepFreq2
+        {
+            get { return tx_postgen_sweep_freq2; }
+            set
+            {
+                tx_postgen_sweep_freq2 = value;
+                if (update)
+                {
+                    if (value != tx_postgen_sweep_freq2_dsp || force)
+                    {
+                        tx_postgen_sweep_freq2_dsp = value;
+                        wdsp.SetTXAPostGenSweepFreq(wdsp.id(1, 0), tx_postgen_sweep_freq1_dsp, tx_postgen_sweep_freq2_dsp);
+                    }
+                }
+            }
+        }
+
+        private double tx_postgen_sweep_rate_dsp = 0.0;
+        private double tx_postgen_sweep_rate = 0.0;
+        public double TXPostGenSweepRate
+        {
+            get { return tx_postgen_sweep_rate; }
+            set
+            {
+                tx_postgen_sweep_rate = value;
+                if (update)
+                {
+                    if (value != tx_postgen_sweep_rate_dsp || force)
+                    {
+                        wdsp.SetTXAPostGenSweepRate(wdsp.id(1, 0), value);
+                        tx_postgen_sweep_rate_dsp = value;
+                    }
+                }
+            }
+        }
 		
 		#endregion
 	}

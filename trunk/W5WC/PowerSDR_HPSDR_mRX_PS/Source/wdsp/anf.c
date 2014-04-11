@@ -24,7 +24,7 @@ warren@wpratt.com
 
 */
 
-#include <comm.h>
+#include "comm.h"
 
 ANF create_anf	(
 				int run,

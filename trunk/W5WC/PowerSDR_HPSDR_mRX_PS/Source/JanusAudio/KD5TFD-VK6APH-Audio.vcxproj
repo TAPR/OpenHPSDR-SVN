@@ -49,7 +49,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\specHPSDR;..\nanotimer;..\wdsp;..\pthread;..\FFTW;libusb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\nanotimer;..\wdsp;..\pthread;..\FFTW;libusb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;KD5TFDVK6APHAUDIO_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -63,7 +63,7 @@
     <Link>
       <AdditionalDependencies>wdsp.lib;libusb.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../../bin/Debug/JanusAudio.dll</OutputFile>
-      <AdditionalLibraryDirectories>libusb;../specHPSDR;../Release;../Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>libusb;../Release;../Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)KD5TFD-VK6APH-Audio.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>

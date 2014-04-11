@@ -148,7 +148,7 @@ void xwcpagc (WCPAGC a)
 	int i, j, k;
 	double mult;
 	if (a->run)
-		{
+	{
 		if (a->mode == 0)
 		{
 			for (i = 0; i < a->io_buffsize; i++)
@@ -322,7 +322,8 @@ void xwcpagc (WCPAGC a)
 			a->out[2 * i + 1] = a->out_sample[1] * mult;
 		}
 	}
-	return;
+	else if (a->out != a->in)
+		memcpy(a->out, a->in, a->io_buffsize * sizeof (complex));
 }
 
 /********************************************************************************************************
@@ -339,26 +340,22 @@ SetRXAAGCMode (int channel, int mode)
 	{
 		case 0:	//agcOFF
 			rxa[channel].agc.p->mode = 0;
-			rxa[channel].agc.p->run = 1;
 			loadWcpAGC ( rxa[channel].agc.p );
 			break;
 		case 1:	//agcLONG
 			rxa[channel].agc.p->mode = 1;
-			rxa[channel].agc.p->run = 1;
 			rxa[channel].agc.p->hangtime = 2.000;
 			rxa[channel].agc.p->tau_decay = 2.000;
 			loadWcpAGC ( rxa[channel].agc.p );
 			break;
 		case 2:	//agcSLOW
 			rxa[channel].agc.p->mode = 2;
-			rxa[channel].agc.p->run = 1;
 			rxa[channel].agc.p->hangtime = 1.000;
 			rxa[channel].agc.p->tau_decay = 0.500;
 			loadWcpAGC ( rxa[channel].agc.p );
 			break;
 		case 3:	//agcMED
 			rxa[channel].agc.p->mode = 3;
-			rxa[channel].agc.p->run = 1;
 			rxa[channel].agc.p->hang_thresh = 1.0;
 			rxa[channel].agc.p->hangtime = 0.000;
 			rxa[channel].agc.p->tau_decay = 0.250;
@@ -366,7 +363,6 @@ SetRXAAGCMode (int channel, int mode)
 			break;
 		case 4:	//agcFAST
 			rxa[channel].agc.p->mode = 4;
-			rxa[channel].agc.p->run = 1;
 			rxa[channel].agc.p->hang_thresh = 1.0;
 			rxa[channel].agc.p->hangtime = 0.000;
 			rxa[channel].agc.p->tau_decay = 0.050;
@@ -374,7 +370,6 @@ SetRXAAGCMode (int channel, int mode)
 			break;
 		default:
 			rxa[channel].agc.p->mode = 5;
-			rxa[channel].agc.p->run = 1;
 			break;
 	}
 	LeaveCriticalSection (&ch[channel].csDSP);

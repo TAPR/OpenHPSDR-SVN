@@ -163,7 +163,10 @@ void create_rxa (int channel)
 		+8000.0,										// fmax
 		1.0,											// zeta
 		20000.0,										// omegaN
-		0.02);											// tau - for dc removal
+		0.02,											// tau - for dc removal
+		0.5,											// audio gain
+		1,												// run tone filter
+		254.1);											// ctcss frequency
 
 	// FM squelch
 	rxa[channel].fmsq.p = create_fmsq (
@@ -245,7 +248,7 @@ void create_rxa (int channel)
 
 	// AGC
 	rxa[channel].agc.p = create_wcpagc (
-		1,												// run - always ON
+		1,												// run
 		3,												// mode
 		1,												// peakmode = envelope
 		rxa[channel].midbuff,							// pointer to input buffer
@@ -438,6 +441,7 @@ void SetRXAMode (int channel, int mode)
 	rxa[channel].mode = mode;
 	rxa[channel].amd.p->run  = 0;
 	rxa[channel].fmd.p->run  = 0;
+	rxa[channel].agc.p->run  = 1;
 	switch (mode)
 	{
 	case RXA_AM:
@@ -453,6 +457,7 @@ void SetRXAMode (int channel, int mode)
 		break;
 	case RXA_FM:
 		rxa[channel].fmd.p->run  = 1;
+		rxa[channel].agc.p->run  = 0;
 		break;
 	default:
 

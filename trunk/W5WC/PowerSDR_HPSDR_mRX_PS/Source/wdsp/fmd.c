@@ -26,7 +26,7 @@ warren@wpratt.com
 
 #include "comm.h"
 
-FMD create_fmd( int run, int size, double* in, double* out, int rate, double deviation, double f_low, double f_high, double fmin, double fmax, double zeta, double omegaN, double tau)
+FMD create_fmd( int run, int size, double* in, double* out, int rate, double deviation, double f_low, double f_high, double fmin, double fmax, double zeta, double omegaN, double tau, double afgain, int sntch_run, double ctcss_freq)
 {
 	FMD a = (FMD) malloc0 (sizeof (fmd));
 	double* impulse;
@@ -67,18 +67,24 @@ FMD create_fmd( int run, int size, double* in, double* out, int rate, double dev
 	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt,  (fftw_complex *)a->product, FFTW_FORWARD,  FFTW_PATIENT);
 	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->outfilt,  FFTW_BACKWARD, FFTW_PATIENT);
 	// audio filter
-	impulse = fir_bandpass (a->size + 1, 0.9 * a->f_low, 1.1 * a->f_high, a->rate, 0, 1, 1.0 / (2.0 * a->size));
+	a->afgain = afgain;
+	impulse = fir_bandpass (a->size + 1, 0.8 * a->f_low, 1.1 * a->f_high, a->rate, 0, 1, a->afgain / (2.0 * a->size));
 	a->amults = fftcv_mults (2 * a->size, impulse);
 	a->ainfilt  = (double *) malloc0 (2 * a->size * sizeof (complex));
 	a->aproduct = (double *) malloc0 (2 * a->size * sizeof (complex));
 	a->aCFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->ainfilt,  (fftw_complex *)a->aproduct, FFTW_FORWARD,  FFTW_PATIENT);
 	a->aCRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->aproduct, (fftw_complex *)a->out,      FFTW_BACKWARD, FFTW_PATIENT);
 	_aligned_free (impulse);
+	// CTCSS Removal
+	a->sntch_run = sntch_run;
+	a->ctcss_freq = ctcss_freq;
+	a->sntch = create_snotch (1, a->size, a->out, a->out, (int)a->rate, a->ctcss_freq, 0.0002);
 	return a;
 }
 
 void destroy_fmd (FMD a)
 {
+	destroy_snotch (a->sntch);
 	fftw_destroy_plan (a->aCRev);
 	fftw_destroy_plan (a->aCFor);
 	_aligned_free (a->aproduct);
@@ -103,6 +109,7 @@ void flush_fmd (FMD a)
 	a->fil_out = 0.0;
 	a->omega = 0.0;
 	a->fmdc = 0.0;
+	flush_snotch (a->sntch);
 }
 
 void xfmd (FMD a)
@@ -159,6 +166,8 @@ void xfmd (FMD a)
 		}
 		fftw_execute (a->aCRev);
 		memcpy (a->ainfilt, &(a->ainfilt[2 * a->size]), a->size * sizeof(complex));
+		// CTCSS Removal
+		xsnotch (a->sntch);
 	}
 	else if (a->in != a->out)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
@@ -178,5 +187,27 @@ void SetRXAFMDeviation (int channel, double deviation)
 	a = rxa[channel].fmd.p;
 	a->deviation = deviation;
 	a->again = a->rate / (a->deviation * TWOPI);
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetRXACTCSSFreq (int channel, double freq)
+{
+	FMD a;
+	EnterCriticalSection (&ch[channel].csDSP);
+	a = rxa[channel].fmd.p;
+	a->ctcss_freq = freq;
+	SetSNCTCSSFreq (a->sntch, a->ctcss_freq);
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetRXACTCSSRun (int channel, int run)
+{
+	FMD a;
+	EnterCriticalSection (&ch[channel].csDSP);
+	a = rxa[channel].fmd.p;
+	a->sntch_run = run;
+	SetSNCTCSSRun (a->sntch, a->sntch_run);
 	LeaveCriticalSection (&ch[channel].csDSP);
 }

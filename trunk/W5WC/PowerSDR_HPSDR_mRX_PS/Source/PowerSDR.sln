@@ -7,6 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSDR", "Console\PowerSD
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JanusAudio", "JanusAudio\KD5TFD-VK6APH-Audio.vcxproj", "{501522F9-17B4-4259-973D-0CEB6341A64B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6DBDF457-8E84-4DFF-B1E4-A9177D15D89F} = {6DBDF457-8E84-4DFF-B1E4-A9177D15D89F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pthread", "..\lib\pthread\pthread.vcxproj", "{7889761C-C21D-4DDD-95D7-86E11EFA9005}"
 EndProject
@@ -56,6 +59,7 @@ Global
 		{501522F9-17B4-4259-973D-0CEB6341A64B}.Release|Any CPU.ActiveCfg = Release|Win32
 		{501522F9-17B4-4259-973D-0CEB6341A64B}.Release|Any CPU.Build.0 = Release|Win32
 		{501522F9-17B4-4259-973D-0CEB6341A64B}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{501522F9-17B4-4259-973D-0CEB6341A64B}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{501522F9-17B4-4259-973D-0CEB6341A64B}.Release|Win32.ActiveCfg = Release|Win32
 		{501522F9-17B4-4259-973D-0CEB6341A64B}.Release|Win32.Build.0 = Release|Win32
 		{501522F9-17B4-4259-973D-0CEB6341A64B}.Release|x86.ActiveCfg = Release|Win32
@@ -70,6 +74,7 @@ Global
 		{7889761C-C21D-4DDD-95D7-86E11EFA9005}.Release|Any CPU.ActiveCfg = Release|Win32
 		{7889761C-C21D-4DDD-95D7-86E11EFA9005}.Release|Any CPU.Build.0 = Release|Win32
 		{7889761C-C21D-4DDD-95D7-86E11EFA9005}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{7889761C-C21D-4DDD-95D7-86E11EFA9005}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{7889761C-C21D-4DDD-95D7-86E11EFA9005}.Release|Win32.ActiveCfg = Release|Win32
 		{7889761C-C21D-4DDD-95D7-86E11EFA9005}.Release|Win32.Build.0 = Release|Win32
 		{7889761C-C21D-4DDD-95D7-86E11EFA9005}.Release|x86.ActiveCfg = Release|Win32
@@ -84,6 +89,7 @@ Global
 		{0A18A071-125E-442F-AFF7-A3F68ABECF99}.Release|Any CPU.ActiveCfg = Release|Win32
 		{0A18A071-125E-442F-AFF7-A3F68ABECF99}.Release|Any CPU.Build.0 = Release|Win32
 		{0A18A071-125E-442F-AFF7-A3F68ABECF99}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{0A18A071-125E-442F-AFF7-A3F68ABECF99}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{0A18A071-125E-442F-AFF7-A3F68ABECF99}.Release|Win32.ActiveCfg = Release|Win32
 		{0A18A071-125E-442F-AFF7-A3F68ABECF99}.Release|Win32.Build.0 = Release|Win32
 		{0A18A071-125E-442F-AFF7-A3F68ABECF99}.Release|x86.ActiveCfg = Release|Win32

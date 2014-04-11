@@ -118,854 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="timer_cpu_meter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>618, 17</value>
+    <value>658, 17</value>
   </metadata>
   <metadata name="timer_peak_text.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>755, 17</value>
+    <value>800, 17</value>
   </metadata>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>887, 17</value>
+    <value>937, 17</value>
   </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="picSquelch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 495</value>
-  </data>
-  <data name="picSquelch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 3</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="picSquelch.TabIndex" type="System.Int32, mscorlib">
-    <value>73</value>
-  </data>
-  <data name="&gt;&gt;picSquelch.Name" xml:space="preserve">
-    <value>picSquelch</value>
-  </data>
-  <data name="&gt;&gt;picSquelch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;picSquelch.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;picSquelch.ZOrder" xml:space="preserve">
-    <value>27</value>
-  </data>
-  <metadata name="timer_clock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 54</value>
-  </metadata>
-  <metadata name="contextMenuStripFilterRX1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>143, 17</value>
-  </metadata>
-  <data name="toolStripMenuItemRX1FilterConfigure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="toolStripMenuItemRX1FilterConfigure.Text" xml:space="preserve">
-    <value>Configure...</value>
-  </data>
-  <data name="toolStripMenuItemRX1FilterReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="toolStripMenuItemRX1FilterReset.Text" xml:space="preserve">
-    <value>Reset to Defaults</value>
-  </data>
-  <data name="contextMenuStripFilterRX1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 48</value>
-  </data>
-  <data name="contextMenuStripFilterRX1.Text" xml:space="preserve">
-    <value>RX1 Filter</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripFilterRX1.Name" xml:space="preserve">
-    <value>contextMenuStripFilterRX1</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripFilterRX1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <metadata name="contextMenuStripFilterRX2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>326, 17</value>
-  </metadata>
-  <data name="toolStripMenuItemRX2FilterConfigure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="toolStripMenuItemRX2FilterConfigure.Text" xml:space="preserve">
-    <value>Configure...</value>
-  </data>
-  <data name="toolStripMenuItemRX2FilterReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="toolStripMenuItemRX2FilterReset.Text" xml:space="preserve">
-    <value>Reset to Defaults</value>
-  </data>
-  <data name="contextMenuStripFilterRX2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 48</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripFilterRX2.Name" xml:space="preserve">
-    <value>contextMenuStripFilterRX2</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripFilterRX2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <metadata name="timer_navigate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="contextMenuStripNotch.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>125, 54</value>
-  </metadata>
-  <data name="toolStripNotchDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
-  </data>
-  <data name="toolStripNotchDelete.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="toolStripNotchRemember.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
-  </data>
-  <data name="toolStripNotchRemember.Text" xml:space="preserve">
-    <value>Remember</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 6</value>
-  </data>
-  <data name="toolStripNotchNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
-  </data>
-  <data name="toolStripNotchNormal.Text" xml:space="preserve">
-    <value>Normal (x1)</value>
-  </data>
-  <data name="toolStripNotchDeep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
-  </data>
-  <data name="toolStripNotchDeep.Text" xml:space="preserve">
-    <value>Deep (x2)</value>
-  </data>
-  <data name="toolStripNotchVeryDeep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
-  </data>
-  <data name="toolStripNotchVeryDeep.Text" xml:space="preserve">
-    <value>Very Deep (x3)</value>
-  </data>
-  <data name="contextMenuStripNotch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 120</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripNotch.Name" xml:space="preserve">
-    <value>contextMenuStripNotch</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripNotch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>0, 0</value>
-  </metadata>
-  <data name="setupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 20</value>
-  </data>
-  <data name="setupToolStripMenuItem.Text" xml:space="preserve">
-    <value>Setup</value>
-  </data>
-  <data name="memoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
-  </data>
-  <data name="memoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Memory</value>
-  </data>
-  <data name="waveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="waveToolStripMenuItem.Text" xml:space="preserve">
-    <value>Wave</value>
-  </data>
-  <data name="equalizerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 20</value>
-  </data>
-  <data name="equalizerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Equalizer</value>
-  </data>
-  <data name="xVTRsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
-  </data>
-  <data name="xVTRsToolStripMenuItem.Text" xml:space="preserve">
-    <value>XVTRs</value>
-  </data>
-  <data name="cWXToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 20</value>
-  </data>
-  <data name="cWXToolStripMenuItem.Text" xml:space="preserve">
-    <value>CWX</value>
-  </data>
-  <data name="eSCToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
-  </data>
-  <data name="eSCToolStripMenuItem.Text" xml:space="preserve">
-    <value>Diversity</value>
-  </data>
-  <data name="collapseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
-  </data>
-  <data name="collapseToolStripMenuItem.Text" xml:space="preserve">
-    <value>Collapse</value>
-  </data>
-  <data name="topControlsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
-  </data>
-  <data name="topControlsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Top Controls</value>
-  </data>
-  <data name="bandControlsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
-  </data>
-  <data name="bandControlsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Band Controls</value>
-  </data>
-  <data name="modeControlsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
-  </data>
-  <data name="modeControlsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Mode Controls</value>
-  </data>
-  <data name="displayControlsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 20</value>
-  </data>
-  <data name="displayControlsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Display Controls</value>
-  </data>
-  <data name="displayControlsToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="NRToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 22</value>
-  </data>
-  <data name="NRToolStripMenuItem.Text" xml:space="preserve">
-    <value>NR</value>
-  </data>
-  <data name="ANFToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 22</value>
-  </data>
-  <data name="ANFToolStripMenuItem.Text" xml:space="preserve">
-    <value>ANF</value>
-  </data>
-  <data name="NBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 22</value>
-  </data>
-  <data name="NBToolStripMenuItem.Text" xml:space="preserve">
-    <value>NB</value>
-  </data>
-  <data name="NB2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 22</value>
-  </data>
-  <data name="NB2ToolStripMenuItem.Text" xml:space="preserve">
-    <value>NB2</value>
-  </data>
-  <data name="BINToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 22</value>
-  </data>
-  <data name="BINToolStripMenuItem.Text" xml:space="preserve">
-    <value>BIN</value>
-  </data>
-  <data name="MultiRXToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 22</value>
-  </data>
-  <data name="MultiRXToolStripMenuItem.Text" xml:space="preserve">
-    <value>Multi-RX</value>
-  </data>
-  <data name="RX1AVGToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 22</value>
-  </data>
-  <data name="RX1AVGToolStripMenuItem.Text" xml:space="preserve">
-    <value>AVG</value>
-  </data>
-  <data name="RX1PeakToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 22</value>
-  </data>
-  <data name="RX1PeakToolStripMenuItem.Text" xml:space="preserve">
-    <value>Peak</value>
-  </data>
-  <data name="dSPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 20</value>
-  </data>
-  <data name="dSPToolStripMenuItem.Text" xml:space="preserve">
-    <value>DSP</value>
-  </data>
-  <data name="dSPToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="bandtoolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem1.Text" xml:space="preserve">
-    <value>160</value>
-  </data>
-  <data name="bandtoolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem2.Text" xml:space="preserve">
-    <value>80</value>
-  </data>
-  <data name="bandtoolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem3.Text" xml:space="preserve">
-    <value>60</value>
-  </data>
-  <data name="bandtoolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem4.Text" xml:space="preserve">
-    <value>40</value>
-  </data>
-  <data name="bandtoolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem5.Text" xml:space="preserve">
-    <value>30</value>
-  </data>
-  <data name="bandtoolStripMenuItem14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem14.Text" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="bandtoolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem7.Text" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="bandtoolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem8.Text" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="bandtoolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem9.Text" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="bandtoolStripMenuItem10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem10.Text" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="bandtoolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem11.Text" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="bandtoolStripMenuItem12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem12.Text" xml:space="preserve">
-    <value>WWV</value>
-  </data>
-  <data name="bandtoolStripMenuItem13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="bandtoolStripMenuItem13.Text" xml:space="preserve">
-    <value>GEN</value>
-  </data>
-  <data name="bandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
-  </data>
-  <data name="bandToolStripMenuItem.Text" xml:space="preserve">
-    <value>Band</value>
-  </data>
-  <data name="bandToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="lSBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="lSBToolStripMenuItem.Text" xml:space="preserve">
-    <value>LSB</value>
-  </data>
-  <data name="uSBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="uSBToolStripMenuItem.Text" xml:space="preserve">
-    <value>USB</value>
-  </data>
-  <data name="dSBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="dSBToolStripMenuItem.Text" xml:space="preserve">
-    <value>DSB</value>
-  </data>
-  <data name="cWLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="cWLToolStripMenuItem.Text" xml:space="preserve">
-    <value>CWL</value>
-  </data>
-  <data name="cWUToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="cWUToolStripMenuItem.Text" xml:space="preserve">
-    <value>CWU</value>
-  </data>
-  <data name="fMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="fMToolStripMenuItem.Text" xml:space="preserve">
-    <value>FM</value>
-  </data>
-  <data name="aMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="aMToolStripMenuItem.Text" xml:space="preserve">
-    <value>AM</value>
-  </data>
-  <data name="sAMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="sAMToolStripMenuItem.Text" xml:space="preserve">
-    <value>SAM</value>
-  </data>
-  <data name="sPECToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="sPECToolStripMenuItem.Text" xml:space="preserve">
-    <value>SPEC</value>
-  </data>
-  <data name="dIGLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="dIGLToolStripMenuItem.Text" xml:space="preserve">
-    <value>DIGL</value>
-  </data>
-  <data name="dIGUToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="dIGUToolStripMenuItem.Text" xml:space="preserve">
-    <value>DIGU</value>
-  </data>
-  <data name="dRMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="dRMToolStripMenuItem.Text" xml:space="preserve">
-    <value>DRM</value>
-  </data>
-  <data name="modeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="modeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Mode</value>
-  </data>
-  <data name="modeToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="FilterToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="FilterToolStripMenuItem1.Text" xml:space="preserve">
-    <value>6.0k</value>
-  </data>
-  <data name="FilterToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="FilterToolStripMenuItem2.Text" xml:space="preserve">
-    <value>4.0k</value>
-  </data>
-  <data name="FilterToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="FilterToolStripMenuItem3.Text" xml:space="preserve">
-    <value>2.6k</value>
-  </data>
-  <data name="FilterToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="FilterToolStripMenuItem4.Text" xml:space="preserve">
-    <value>2.1k</value>
-  </data>
-  <data name="FilterToolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="FilterToolStripMenuItem5.Text" xml:space="preserve">
-    <value>1.0k</value>
-  </data>
-  <data name="FilterToolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="FilterToolStripMenuItem6.Text" xml:space="preserve">
-    <value>500</value>
-  </data>
-  <data name="FilterToolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="FilterToolStripMenuItem7.Text" xml:space="preserve">
-    <value>250</value>
-  </data>
-  <data name="FilterToolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="FilterToolStripMenuItem8.Text" xml:space="preserve">
-    <value>100</value>
-  </data>
-  <data name="FilterToolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="FilterToolStripMenuItem9.Text" xml:space="preserve">
-    <value>50</value>
-  </data>
-  <data name="FilterToolStripMenuItem10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="FilterToolStripMenuItem10.Text" xml:space="preserve">
-    <value>25</value>
-  </data>
-  <data name="filterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 20</value>
-  </data>
-  <data name="filterToolStripMenuItem.Text" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="filterToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem2.Text" xml:space="preserve">
-    <value>160m</value>
-  </data>
-  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem3.Text" xml:space="preserve">
-    <value>80m</value>
-  </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem4.Text" xml:space="preserve">
-    <value>60m</value>
-  </data>
-  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem5.Text" xml:space="preserve">
-    <value>40m</value>
-  </data>
-  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem6.Text" xml:space="preserve">
-    <value>30m</value>
-  </data>
-  <data name="toolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem7.Text" xml:space="preserve">
-    <value>20m</value>
-  </data>
-  <data name="toolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem8.Text" xml:space="preserve">
-    <value>17m</value>
-  </data>
-  <data name="toolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem9.Text" xml:space="preserve">
-    <value>15m</value>
-  </data>
-  <data name="toolStripMenuItem10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem10.Text" xml:space="preserve">
-    <value>12m</value>
-  </data>
-  <data name="toolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem11.Text" xml:space="preserve">
-    <value>10m</value>
-  </data>
-  <data name="toolStripMenuItem12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="toolStripMenuItem12.Text" xml:space="preserve">
-    <value>6m</value>
-  </data>
-  <data name="wWVToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="wWVToolStripMenuItem.Text" xml:space="preserve">
-    <value>WWV</value>
-  </data>
-  <data name="gENToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
-  </data>
-  <data name="gENToolStripMenuItem.Text" xml:space="preserve">
-    <value>GEN</value>
-  </data>
-  <data name="bandToolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 22</value>
-  </data>
-  <data name="bandToolStripMenuItem6.Text" xml:space="preserve">
-    <value>Band</value>
-  </data>
-  <data name="lSBToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="lSBToolStripMenuItem1.Text" xml:space="preserve">
-    <value>LSB</value>
-  </data>
-  <data name="uSBToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="uSBToolStripMenuItem1.Text" xml:space="preserve">
-    <value>USB</value>
-  </data>
-  <data name="dSBToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="dSBToolStripMenuItem1.Text" xml:space="preserve">
-    <value>DSB</value>
-  </data>
-  <data name="cWLToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="cWLToolStripMenuItem1.Text" xml:space="preserve">
-    <value>CWL</value>
-  </data>
-  <data name="cWUToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="cWUToolStripMenuItem1.Text" xml:space="preserve">
-    <value>CWU</value>
-  </data>
-  <data name="fMToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="fMToolStripMenuItem1.Text" xml:space="preserve">
-    <value>FM</value>
-  </data>
-  <data name="aMToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="aMToolStripMenuItem1.Text" xml:space="preserve">
-    <value>AM</value>
-  </data>
-  <data name="sAMToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="sAMToolStripMenuItem1.Text" xml:space="preserve">
-    <value>SAM</value>
-  </data>
-  <data name="dIGLToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="dIGLToolStripMenuItem1.Text" xml:space="preserve">
-    <value>DIGL</value>
-  </data>
-  <data name="dIGUToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="dIGUToolStripMenuItem1.Text" xml:space="preserve">
-    <value>DIGU</value>
-  </data>
-  <data name="dRMToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
-  </data>
-  <data name="dRMToolStripMenuItem1.Text" xml:space="preserve">
-    <value>DRM</value>
-  </data>
-  <data name="modeToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 22</value>
-  </data>
-  <data name="modeToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Mode</value>
-  </data>
-  <data name="kToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="kToolStripMenuItem.Text" xml:space="preserve">
-    <value>6.0k</value>
-  </data>
-  <data name="kToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="kToolStripMenuItem1.Text" xml:space="preserve">
-    <value>4.0k</value>
-  </data>
-  <data name="kToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="kToolStripMenuItem2.Text" xml:space="preserve">
-    <value>2.6k</value>
-  </data>
-  <data name="kToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="kToolStripMenuItem3.Text" xml:space="preserve">
-    <value>2.1k</value>
-  </data>
-  <data name="kToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="kToolStripMenuItem4.Text" xml:space="preserve">
-    <value>1.0k</value>
-  </data>
-  <data name="toolStripMenuItem13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="toolStripMenuItem13.Text" xml:space="preserve">
-    <value>500</value>
-  </data>
-  <data name="toolStripMenuItem14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="toolStripMenuItem14.Text" xml:space="preserve">
-    <value>250</value>
-  </data>
-  <data name="filterToolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 22</value>
-  </data>
-  <data name="filterToolStripMenuItem11.Text" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="nR2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="nR2ToolStripMenuItem.Text" xml:space="preserve">
-    <value>NR</value>
-  </data>
-  <data name="aNF2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="aNF2ToolStripMenuItem.Text" xml:space="preserve">
-    <value>ANF</value>
-  </data>
-  <data name="nB2ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="nB2ToolStripMenuItem1.Text" xml:space="preserve">
-    <value>NB</value>
-  </data>
-  <data name="nBRX2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="nBRX2ToolStripMenuItem.Text" xml:space="preserve">
-    <value>NB2</value>
-  </data>
-  <data name="bIN2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="bIN2ToolStripMenuItem.Text" xml:space="preserve">
-    <value>BIN</value>
-  </data>
-  <data name="RX2AVGToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="RX2AVGToolStripMenuItem.Text" xml:space="preserve">
-    <value>AVG</value>
-  </data>
-  <data name="RX2PeakToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="RX2PeakToolStripMenuItem.Text" xml:space="preserve">
-    <value>Peak</value>
-  </data>
-  <data name="dSPToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 22</value>
-  </data>
-  <data name="dSPToolStripMenuItem1.Text" xml:space="preserve">
-    <value>DSP</value>
-  </data>
-  <data name="rX2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
-  </data>
-  <data name="rX2ToolStripMenuItem.Text" xml:space="preserve">
-    <value>RX2</value>
-  </data>
-  <data name="rX2ToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="linearityToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
-  </data>
-  <data name="linearityToolStripMenuItem.Text" xml:space="preserve">
-    <value>Linearity</value>
-  </data>
-  <data name="RAtoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 20</value>
-  </data>
-  <data name="RAtoolStripMenuItem.Text" xml:space="preserve">
-    <value>RA</value>
-  </data>
-  <data name="RAtoolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Radio Astronomy data acquisition</value>
-  </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1017, 24</value>
-  </data>
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>136</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <metadata name="timerNotchZoom.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>292, 54</value>
-  </metadata>
-  <data name="picRX2Squelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="picRX2Squelch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 690</value>
-  </data>
-  <data name="picRX2Squelch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 3</value>
-  </data>
-  <data name="picRX2Squelch.TabIndex" type="System.Int32, mscorlib">
-    <value>137</value>
-  </data>
-  <data name="&gt;&gt;picRX2Squelch.Name" xml:space="preserve">
-    <value>picRX2Squelch</value>
-  </data>
-  <data name="&gt;&gt;picRX2Squelch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;picRX2Squelch.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;picRX2Squelch.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="panelRX2RF.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panelRX2RF.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
   <data name="ptbRX2RF.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
   <data name="ptbRX2RF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ptbRX2RF.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 24</value>
   </data>
@@ -978,6 +146,7 @@
   <data name="ptbRX2RF.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 24</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ptbRX2RF.TabIndex" type="System.Int32, mscorlib">
     <value>118</value>
   </data>
@@ -1032,60 +201,6 @@
   <data name="&gt;&gt;lblRX2RF.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="panelRX2RF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 593</value>
-  </data>
-  <data name="panelRX2RF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 50</value>
-  </data>
-  <data name="panelRX2RF.TabIndex" type="System.Int32, mscorlib">
-    <value>139</value>
-  </data>
-  <data name="&gt;&gt;panelRX2RF.Name" xml:space="preserve">
-    <value>panelRX2RF</value>
-  </data>
-  <data name="&gt;&gt;panelRX2RF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;panelRX2RF.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelRX2RF.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ptbRX2Squelch.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="ptbRX2Squelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="ptbRX2Squelch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 670</value>
-  </data>
-  <data name="ptbRX2Squelch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="ptbRX2Squelch.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="ptbRX2Squelch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 24</value>
-  </data>
-  <data name="ptbRX2Squelch.TabIndex" type="System.Int32, mscorlib">
-    <value>132</value>
-  </data>
-  <data name="&gt;&gt;ptbRX2Squelch.Name" xml:space="preserve">
-    <value>ptbRX2Squelch</value>
-  </data>
-  <data name="&gt;&gt;ptbRX2Squelch.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ptbRX2Squelch.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ptbRX2Squelch.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="chkRX2Squelch.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
@@ -1124,12 +239,6 @@
   </data>
   <data name="&gt;&gt;chkRX2Squelch.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="panelRX2DSP.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panelRX2DSP.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
   </data>
   <data name="chkRX2Mute.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1469,33 +578,6 @@
   </data>
   <data name="&gt;&gt;chkRX2BIN.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="panelRX2DSP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 592</value>
-  </data>
-  <data name="panelRX2DSP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 104</value>
-  </data>
-  <data name="panelRX2DSP.TabIndex" type="System.Int32, mscorlib">
-    <value>128</value>
-  </data>
-  <data name="&gt;&gt;panelRX2DSP.Name" xml:space="preserve">
-    <value>panelRX2DSP</value>
-  </data>
-  <data name="&gt;&gt;panelRX2DSP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;panelRX2DSP.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelRX2DSP.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="panelOptions.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panelOptions.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
   </data>
   <data name="ckQuickPlay.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1857,75 +939,6 @@
   <data name="&gt;&gt;comboTuneMode.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="chkFWCATU.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="chkFWCATU.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="chkFWCATU.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="chkFWCATU.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="chkFWCATU.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="chkFWCATU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 53</value>
-  </data>
-  <data name="chkFWCATU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="chkFWCATU.TabIndex" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <data name="chkFWCATU.Text" xml:space="preserve">
-    <value>CTUN</value>
-  </data>
-  <data name="chkFWCATU.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="chkFWCATU.ToolTip" xml:space="preserve">
-    <value>Enables Click Tune Drag</value>
-  </data>
-  <data name="&gt;&gt;chkFWCATU.Name" xml:space="preserve">
-    <value>chkFWCATU</value>
-  </data>
-  <data name="&gt;&gt;chkFWCATU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkFWCATU.Parent" xml:space="preserve">
-    <value>panelOptions</value>
-  </data>
-  <data name="&gt;&gt;chkFWCATU.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="panelOptions.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="panelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 65</value>
-  </data>
-  <data name="panelOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 105</value>
-  </data>
-  <data name="panelOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>116</value>
-  </data>
-  <data name="&gt;&gt;panelOptions.Name" xml:space="preserve">
-    <value>panelOptions</value>
-  </data>
-  <data name="&gt;&gt;panelOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;panelOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelOptions.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="chkX2TR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
@@ -2013,6 +1026,51 @@
   <data name="&gt;&gt;chkFWCATUBypass.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="chkFWCATU.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="chkFWCATU.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="chkFWCATU.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="chkFWCATU.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="chkFWCATU.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="chkFWCATU.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 53</value>
+  </data>
+  <data name="chkFWCATU.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="chkFWCATU.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <data name="chkFWCATU.Text" xml:space="preserve">
+    <value>CTUN</value>
+  </data>
+  <data name="chkFWCATU.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="chkFWCATU.ToolTip" xml:space="preserve">
+    <value>Enables Click Tune Drag</value>
+  </data>
+  <data name="&gt;&gt;chkFWCATU.Name" xml:space="preserve">
+    <value>chkFWCATU</value>
+  </data>
+  <data name="&gt;&gt;chkFWCATU.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkFWCATU.Parent" xml:space="preserve">
+    <value>panelOptions</value>
+  </data>
+  <data name="&gt;&gt;chkFWCATU.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
   <data name="comboRX2Band.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
@@ -2080,7 +1138,7 @@
     <value>panelRX2Power</value>
   </data>
   <data name="&gt;&gt;comboRX2Band.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="chkRX2Preamp.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4228,7 +3286,7 @@
     <value>panelSoundControls</value>
   </data>
   <data name="&gt;&gt;comboPreamp.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="lblRF.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -7509,43 +6567,37 @@
   <data name="&gt;&gt;chkMUT.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="chkCWDisableTXDisplay.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="chkCWDisableTXDisplay.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="chkCWFWKeyer.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="chkCWDisableTXDisplay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="chkCWDisableTXDisplay.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="chkCWFWKeyer.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 110</value>
   </data>
-  <data name="chkCWDisableTXDisplay.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="chkCWFWKeyer.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 16</value>
   </data>
-  <data name="chkCWDisableTXDisplay.TabIndex" type="System.Int32, mscorlib">
-    <value>116</value>
+  <data name="chkCWFWKeyer.TabIndex" type="System.Int32, mscorlib">
+    <value>118</value>
   </data>
-  <data name="chkCWDisableTXDisplay.Text" xml:space="preserve">
-    <value>Disable CW TX Display</value>
+  <data name="chkCWFWKeyer.Text" xml:space="preserve">
+    <value>Firmware Keyer</value>
   </data>
-  <data name="chkCWDisableTXDisplay.ToolTip" xml:space="preserve">
-    <value>Disable the Display during TX.</value>
+  <data name="chkCWFWKeyer.ToolTip" xml:space="preserve">
+    <value>Enables the firmware CW keyer.</value>
   </data>
-  <data name="chkCWDisableTXDisplay.Visible" type="System.Boolean, mscorlib">
+  <data name="chkCWFWKeyer.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;chkCWDisableTXDisplay.Name" xml:space="preserve">
-    <value>chkCWDisableTXDisplay</value>
+  <data name="&gt;&gt;chkCWFWKeyer.Name" xml:space="preserve">
+    <value>chkCWFWKeyer</value>
   </data>
-  <data name="&gt;&gt;chkCWDisableTXDisplay.Type" xml:space="preserve">
+  <data name="&gt;&gt;chkCWFWKeyer.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;chkCWDisableTXDisplay.Parent" xml:space="preserve">
+  <data name="&gt;&gt;chkCWFWKeyer.Parent" xml:space="preserve">
     <value>panelModeSpecificCW</value>
   </data>
-  <data name="&gt;&gt;chkCWDisableTXDisplay.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;chkCWFWKeyer.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="chkShowCWZero.Font" type="System.Drawing.Font, System.Drawing">
@@ -8215,7 +7267,7 @@
     <value>109</value>
   </data>
   <data name="ptbRX2AF.ToolTip" xml:space="preserve">
-    <value>AF Gain - Monitor Volume for RX/TX</value>
+    <value>AF Gain - Monitor Volume for RX2</value>
   </data>
   <data name="&gt;&gt;ptbRX2AF.Name" xml:space="preserve">
     <value>ptbRX2AF</value>
@@ -8251,7 +7303,7 @@
     <value>107</value>
   </data>
   <data name="ptbRX1AF.ToolTip" xml:space="preserve">
-    <value>AF Gain - Monitor Volume for RX/TX</value>
+    <value>AF Gain - Monitor Volume for RX</value>
   </data>
   <data name="&gt;&gt;ptbRX1AF.Name" xml:space="preserve">
     <value>ptbRX1AF</value>
@@ -8365,7 +7417,7 @@
     <value>panelSoundControls</value>
   </data>
   <data name="&gt;&gt;udRX1StepAttData.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="comboRX2Preamp.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -8392,7 +7444,7 @@
     <value>panelRX2Power</value>
   </data>
   <data name="&gt;&gt;comboRX2Preamp.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="udRX2StepAttData.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 79</value>
@@ -8419,46 +7471,955 @@
     <value>panelRX2Power</value>
   </data>
   <data name="&gt;&gt;udRX2StepAttData.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="picSquelch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 495</value>
+  </data>
+  <data name="picSquelch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 3</value>
+  </data>
+  <data name="picSquelch.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="&gt;&gt;picSquelch.Name" xml:space="preserve">
+    <value>picSquelch</value>
+  </data>
+  <data name="&gt;&gt;picSquelch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picSquelch.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;picSquelch.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <metadata name="timer_clock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 54</value>
+  </metadata>
+  <metadata name="contextMenuStripFilterRX1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>264, 17</value>
+  </metadata>
+  <data name="toolStripMenuItemRX1FilterConfigure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="toolStripMenuItemRX1FilterConfigure.Text" xml:space="preserve">
+    <value>Configure...</value>
+  </data>
+  <data name="toolStripMenuItemRX1FilterReset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="toolStripMenuItemRX1FilterReset.Text" xml:space="preserve">
+    <value>Reset to Defaults</value>
+  </data>
+  <data name="contextMenuStripFilterRX1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 48</value>
+  </data>
+  <data name="contextMenuStripFilterRX1.Text" xml:space="preserve">
+    <value>RX1 Filter</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripFilterRX1.Name" xml:space="preserve">
+    <value>contextMenuStripFilterRX1</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripFilterRX1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="contextMenuStripFilterRX2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>461, 17</value>
+  </metadata>
+  <data name="toolStripMenuItemRX2FilterConfigure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="toolStripMenuItemRX2FilterConfigure.Text" xml:space="preserve">
+    <value>Configure...</value>
+  </data>
+  <data name="toolStripMenuItemRX2FilterReset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="toolStripMenuItemRX2FilterReset.Text" xml:space="preserve">
+    <value>Reset to Defaults</value>
+  </data>
+  <data name="contextMenuStripFilterRX2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 48</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripFilterRX2.Name" xml:space="preserve">
+    <value>contextMenuStripFilterRX2</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripFilterRX2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="timer_navigate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>132, 17</value>
+  </metadata>
+  <metadata name="contextMenuStripNotch.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>125, 54</value>
+  </metadata>
+  <data name="toolStripNotchDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 22</value>
+  </data>
+  <data name="toolStripNotchDelete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="toolStripNotchRemember.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 22</value>
+  </data>
+  <data name="toolStripNotchRemember.Text" xml:space="preserve">
+    <value>Remember</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 6</value>
+  </data>
+  <data name="toolStripNotchNormal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 22</value>
+  </data>
+  <data name="toolStripNotchNormal.Text" xml:space="preserve">
+    <value>Normal (x1)</value>
+  </data>
+  <data name="toolStripNotchDeep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 22</value>
+  </data>
+  <data name="toolStripNotchDeep.Text" xml:space="preserve">
+    <value>Deep (x2)</value>
+  </data>
+  <data name="toolStripNotchVeryDeep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 22</value>
+  </data>
+  <data name="toolStripNotchVeryDeep.Text" xml:space="preserve">
+    <value>Very Deep (x3)</value>
+  </data>
+  <data name="contextMenuStripNotch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 120</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripNotch.Name" xml:space="preserve">
+    <value>contextMenuStripNotch</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripNotch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="setupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 20</value>
+  </data>
+  <data name="setupToolStripMenuItem.Text" xml:space="preserve">
+    <value>Setup</value>
+  </data>
+  <data name="memoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
+  </data>
+  <data name="memoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="waveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="waveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Wave</value>
+  </data>
+  <data name="equalizerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 20</value>
+  </data>
+  <data name="equalizerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Equalizer</value>
+  </data>
+  <data name="xVTRsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="xVTRsToolStripMenuItem.Text" xml:space="preserve">
+    <value>XVTRs</value>
+  </data>
+  <data name="cWXToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 20</value>
+  </data>
+  <data name="cWXToolStripMenuItem.Text" xml:space="preserve">
+    <value>CWX</value>
+  </data>
+  <data name="eSCToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
+  </data>
+  <data name="eSCToolStripMenuItem.Text" xml:space="preserve">
+    <value>Diversity</value>
+  </data>
+  <data name="collapseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
+  </data>
+  <data name="collapseToolStripMenuItem.Text" xml:space="preserve">
+    <value>Collapse</value>
+  </data>
+  <data name="topControlsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 22</value>
+  </data>
+  <data name="topControlsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Top Controls</value>
+  </data>
+  <data name="bandControlsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 22</value>
+  </data>
+  <data name="bandControlsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Band Controls</value>
+  </data>
+  <data name="modeControlsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 22</value>
+  </data>
+  <data name="modeControlsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Mode Controls</value>
+  </data>
+  <data name="displayControlsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 20</value>
+  </data>
+  <data name="displayControlsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Display Controls</value>
+  </data>
+  <data name="displayControlsToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="NRToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 22</value>
+  </data>
+  <data name="NRToolStripMenuItem.Text" xml:space="preserve">
+    <value>NR</value>
+  </data>
+  <data name="ANFToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 22</value>
+  </data>
+  <data name="ANFToolStripMenuItem.Text" xml:space="preserve">
+    <value>ANF</value>
+  </data>
+  <data name="NBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 22</value>
+  </data>
+  <data name="NBToolStripMenuItem.Text" xml:space="preserve">
+    <value>NB</value>
+  </data>
+  <data name="NB2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 22</value>
+  </data>
+  <data name="NB2ToolStripMenuItem.Text" xml:space="preserve">
+    <value>NB2</value>
+  </data>
+  <data name="BINToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 22</value>
+  </data>
+  <data name="BINToolStripMenuItem.Text" xml:space="preserve">
+    <value>BIN</value>
+  </data>
+  <data name="MultiRXToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 22</value>
+  </data>
+  <data name="MultiRXToolStripMenuItem.Text" xml:space="preserve">
+    <value>Multi-RX</value>
+  </data>
+  <data name="RX1AVGToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 22</value>
+  </data>
+  <data name="RX1AVGToolStripMenuItem.Text" xml:space="preserve">
+    <value>AVG</value>
+  </data>
+  <data name="RX1PeakToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 22</value>
+  </data>
+  <data name="RX1PeakToolStripMenuItem.Text" xml:space="preserve">
+    <value>Peak</value>
+  </data>
+  <data name="dSPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="dSPToolStripMenuItem.Text" xml:space="preserve">
+    <value>DSP</value>
+  </data>
+  <data name="dSPToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="bandtoolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem1.Text" xml:space="preserve">
+    <value>160</value>
+  </data>
+  <data name="bandtoolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem2.Text" xml:space="preserve">
+    <value>80</value>
+  </data>
+  <data name="bandtoolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem3.Text" xml:space="preserve">
+    <value>60</value>
+  </data>
+  <data name="bandtoolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem4.Text" xml:space="preserve">
+    <value>40</value>
+  </data>
+  <data name="bandtoolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem5.Text" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="bandtoolStripMenuItem14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem14.Text" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="bandtoolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem7.Text" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="bandtoolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem8.Text" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="bandtoolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem9.Text" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="bandtoolStripMenuItem10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem10.Text" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="bandtoolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem11.Text" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="bandtoolStripMenuItem12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem12.Text" xml:space="preserve">
+    <value>WWV</value>
+  </data>
+  <data name="bandtoolStripMenuItem13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="bandtoolStripMenuItem13.Text" xml:space="preserve">
+    <value>GEN</value>
+  </data>
+  <data name="bandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="bandToolStripMenuItem.Text" xml:space="preserve">
+    <value>Band</value>
+  </data>
+  <data name="bandToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lSBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="lSBToolStripMenuItem.Text" xml:space="preserve">
+    <value>LSB</value>
+  </data>
+  <data name="uSBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="uSBToolStripMenuItem.Text" xml:space="preserve">
+    <value>USB</value>
+  </data>
+  <data name="dSBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="dSBToolStripMenuItem.Text" xml:space="preserve">
+    <value>DSB</value>
+  </data>
+  <data name="cWLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="cWLToolStripMenuItem.Text" xml:space="preserve">
+    <value>CWL</value>
+  </data>
+  <data name="cWUToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="cWUToolStripMenuItem.Text" xml:space="preserve">
+    <value>CWU</value>
+  </data>
+  <data name="fMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="fMToolStripMenuItem.Text" xml:space="preserve">
+    <value>FM</value>
+  </data>
+  <data name="aMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="aMToolStripMenuItem.Text" xml:space="preserve">
+    <value>AM</value>
+  </data>
+  <data name="sAMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="sAMToolStripMenuItem.Text" xml:space="preserve">
+    <value>SAM</value>
+  </data>
+  <data name="sPECToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="sPECToolStripMenuItem.Text" xml:space="preserve">
+    <value>SPEC</value>
+  </data>
+  <data name="dIGLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="dIGLToolStripMenuItem.Text" xml:space="preserve">
+    <value>DIGL</value>
+  </data>
+  <data name="dIGUToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="dIGUToolStripMenuItem.Text" xml:space="preserve">
+    <value>DIGU</value>
+  </data>
+  <data name="dRMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="dRMToolStripMenuItem.Text" xml:space="preserve">
+    <value>DRM</value>
+  </data>
+  <data name="modeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="modeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="modeToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="FilterToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="FilterToolStripMenuItem1.Text" xml:space="preserve">
+    <value>6.0k</value>
+  </data>
+  <data name="FilterToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="FilterToolStripMenuItem2.Text" xml:space="preserve">
+    <value>4.0k</value>
+  </data>
+  <data name="FilterToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="FilterToolStripMenuItem3.Text" xml:space="preserve">
+    <value>2.6k</value>
+  </data>
+  <data name="FilterToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="FilterToolStripMenuItem4.Text" xml:space="preserve">
+    <value>2.1k</value>
+  </data>
+  <data name="FilterToolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="FilterToolStripMenuItem5.Text" xml:space="preserve">
+    <value>1.0k</value>
+  </data>
+  <data name="FilterToolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="FilterToolStripMenuItem6.Text" xml:space="preserve">
+    <value>500</value>
+  </data>
+  <data name="FilterToolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="FilterToolStripMenuItem7.Text" xml:space="preserve">
+    <value>250</value>
+  </data>
+  <data name="FilterToolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="FilterToolStripMenuItem8.Text" xml:space="preserve">
+    <value>100</value>
+  </data>
+  <data name="FilterToolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="FilterToolStripMenuItem9.Text" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="FilterToolStripMenuItem10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="FilterToolStripMenuItem10.Text" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="filterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 20</value>
+  </data>
+  <data name="filterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="filterToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem2.Text" xml:space="preserve">
+    <value>160m</value>
+  </data>
+  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem3.Text" xml:space="preserve">
+    <value>80m</value>
+  </data>
+  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem4.Text" xml:space="preserve">
+    <value>60m</value>
+  </data>
+  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem5.Text" xml:space="preserve">
+    <value>40m</value>
+  </data>
+  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem6.Text" xml:space="preserve">
+    <value>30m</value>
+  </data>
+  <data name="toolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem7.Text" xml:space="preserve">
+    <value>20m</value>
+  </data>
+  <data name="toolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem8.Text" xml:space="preserve">
+    <value>17m</value>
+  </data>
+  <data name="toolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem9.Text" xml:space="preserve">
+    <value>15m</value>
+  </data>
+  <data name="toolStripMenuItem10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem10.Text" xml:space="preserve">
+    <value>12m</value>
+  </data>
+  <data name="toolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem11.Text" xml:space="preserve">
+    <value>10m</value>
+  </data>
+  <data name="toolStripMenuItem12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="toolStripMenuItem12.Text" xml:space="preserve">
+    <value>6m</value>
+  </data>
+  <data name="wWVToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="wWVToolStripMenuItem.Text" xml:space="preserve">
+    <value>WWV</value>
+  </data>
+  <data name="gENToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="gENToolStripMenuItem.Text" xml:space="preserve">
+    <value>GEN</value>
+  </data>
+  <data name="bandToolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 22</value>
+  </data>
+  <data name="bandToolStripMenuItem6.Text" xml:space="preserve">
+    <value>Band</value>
+  </data>
+  <data name="lSBToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="lSBToolStripMenuItem1.Text" xml:space="preserve">
+    <value>LSB</value>
+  </data>
+  <data name="uSBToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="uSBToolStripMenuItem1.Text" xml:space="preserve">
+    <value>USB</value>
+  </data>
+  <data name="dSBToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="dSBToolStripMenuItem1.Text" xml:space="preserve">
+    <value>DSB</value>
+  </data>
+  <data name="cWLToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="cWLToolStripMenuItem1.Text" xml:space="preserve">
+    <value>CWL</value>
+  </data>
+  <data name="cWUToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="cWUToolStripMenuItem1.Text" xml:space="preserve">
+    <value>CWU</value>
+  </data>
+  <data name="fMToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="fMToolStripMenuItem1.Text" xml:space="preserve">
+    <value>FM</value>
+  </data>
+  <data name="aMToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="aMToolStripMenuItem1.Text" xml:space="preserve">
+    <value>AM</value>
+  </data>
+  <data name="sAMToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="sAMToolStripMenuItem1.Text" xml:space="preserve">
+    <value>SAM</value>
+  </data>
+  <data name="dIGLToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="dIGLToolStripMenuItem1.Text" xml:space="preserve">
+    <value>DIGL</value>
+  </data>
+  <data name="dIGUToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="dIGUToolStripMenuItem1.Text" xml:space="preserve">
+    <value>DIGU</value>
+  </data>
+  <data name="dRMToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 22</value>
+  </data>
+  <data name="dRMToolStripMenuItem1.Text" xml:space="preserve">
+    <value>DRM</value>
+  </data>
+  <data name="modeToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 22</value>
+  </data>
+  <data name="modeToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="kToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="kToolStripMenuItem.Text" xml:space="preserve">
+    <value>6.0k</value>
+  </data>
+  <data name="kToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="kToolStripMenuItem1.Text" xml:space="preserve">
+    <value>4.0k</value>
+  </data>
+  <data name="kToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="kToolStripMenuItem2.Text" xml:space="preserve">
+    <value>2.6k</value>
+  </data>
+  <data name="kToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="kToolStripMenuItem3.Text" xml:space="preserve">
+    <value>2.1k</value>
+  </data>
+  <data name="kToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="kToolStripMenuItem4.Text" xml:space="preserve">
+    <value>1.0k</value>
+  </data>
+  <data name="toolStripMenuItem13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="toolStripMenuItem13.Text" xml:space="preserve">
+    <value>500</value>
+  </data>
+  <data name="toolStripMenuItem14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="toolStripMenuItem14.Text" xml:space="preserve">
+    <value>250</value>
+  </data>
+  <data name="filterToolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 22</value>
+  </data>
+  <data name="filterToolStripMenuItem11.Text" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="nR2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="nR2ToolStripMenuItem.Text" xml:space="preserve">
+    <value>NR</value>
+  </data>
+  <data name="aNF2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="aNF2ToolStripMenuItem.Text" xml:space="preserve">
+    <value>ANF</value>
+  </data>
+  <data name="nB2ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="nB2ToolStripMenuItem1.Text" xml:space="preserve">
+    <value>NB</value>
+  </data>
+  <data name="nBRX2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="nBRX2ToolStripMenuItem.Text" xml:space="preserve">
+    <value>NB2</value>
+  </data>
+  <data name="bIN2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="bIN2ToolStripMenuItem.Text" xml:space="preserve">
+    <value>BIN</value>
+  </data>
+  <data name="RX2AVGToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="RX2AVGToolStripMenuItem.Text" xml:space="preserve">
+    <value>AVG</value>
+  </data>
+  <data name="RX2PeakToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="RX2PeakToolStripMenuItem.Text" xml:space="preserve">
+    <value>Peak</value>
+  </data>
+  <data name="dSPToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 22</value>
+  </data>
+  <data name="dSPToolStripMenuItem1.Text" xml:space="preserve">
+    <value>DSP</value>
+  </data>
+  <data name="rX2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 20</value>
+  </data>
+  <data name="rX2ToolStripMenuItem.Text" xml:space="preserve">
+    <value>RX2</value>
+  </data>
+  <data name="rX2ToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="linearityToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
+  </data>
+  <data name="linearityToolStripMenuItem.Text" xml:space="preserve">
+    <value>Linearity</value>
+  </data>
+  <data name="RAtoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 20</value>
+  </data>
+  <data name="RAtoolStripMenuItem.Text" xml:space="preserve">
+    <value>RA</value>
+  </data>
+  <data name="RAtoolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Radio Astronomy data acquisition</value>
+  </data>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1017, 24</value>
+  </data>
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>136</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <metadata name="timerNotchZoom.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>307, 54</value>
+  </metadata>
+  <data name="picRX2Squelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="picRX2Squelch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>169, 690</value>
+  </data>
+  <data name="picRX2Squelch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 3</value>
+  </data>
+  <data name="picRX2Squelch.TabIndex" type="System.Int32, mscorlib">
+    <value>137</value>
+  </data>
+  <data name="&gt;&gt;picRX2Squelch.Name" xml:space="preserve">
+    <value>picRX2Squelch</value>
+  </data>
+  <data name="&gt;&gt;picRX2Squelch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picRX2Squelch.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;picRX2Squelch.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="panelRX2RF.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelRX2RF.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelRX2RF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>154, 593</value>
+  </data>
+  <data name="panelRX2RF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 50</value>
+  </data>
+  <data name="panelRX2RF.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="&gt;&gt;panelRX2RF.Name" xml:space="preserve">
+    <value>panelRX2RF</value>
+  </data>
+  <data name="&gt;&gt;panelRX2RF.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelRX2RF.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelRX2RF.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ptbRX2Squelch.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="ptbRX2Squelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="ptbRX2Squelch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 670</value>
+  </data>
+  <data name="ptbRX2Squelch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ptbRX2Squelch.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ptbRX2Squelch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 24</value>
+  </data>
+  <data name="ptbRX2Squelch.TabIndex" type="System.Int32, mscorlib">
+    <value>132</value>
+  </data>
+  <data name="&gt;&gt;ptbRX2Squelch.Name" xml:space="preserve">
+    <value>ptbRX2Squelch</value>
+  </data>
+  <data name="&gt;&gt;ptbRX2Squelch.Type" xml:space="preserve">
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ptbRX2Squelch.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ptbRX2Squelch.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="panelRX2DSP.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelRX2DSP.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelRX2DSP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 592</value>
+  </data>
+  <data name="panelRX2DSP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 104</value>
+  </data>
+  <data name="panelRX2DSP.TabIndex" type="System.Int32, mscorlib">
+    <value>128</value>
+  </data>
+  <data name="&gt;&gt;panelRX2DSP.Name" xml:space="preserve">
+    <value>panelRX2DSP</value>
+  </data>
+  <data name="&gt;&gt;panelRX2DSP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelRX2DSP.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelRX2DSP.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="panelOptions.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelOptions.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelOptions.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="panelOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 65</value>
+  </data>
+  <data name="panelOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 105</value>
+  </data>
+  <data name="panelOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>116</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.Name" xml:space="preserve">
+    <value>panelOptions</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="panelRX2Power.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="panelRX2Power.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
-  </data>
-  <data name="lblRX2Preamp.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="lblRX2Preamp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="lblRX2Preamp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 60</value>
-  </data>
-  <data name="lblRX2Preamp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 16</value>
-  </data>
-  <data name="lblRX2Preamp.TabIndex" type="System.Int32, mscorlib">
-    <value>114</value>
-  </data>
-  <data name="lblRX2Preamp.Text" xml:space="preserve">
-    <value>ATT</value>
-  </data>
-  <data name="lblRX2Preamp.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;lblRX2Preamp.Name" xml:space="preserve">
-    <value>lblRX2Preamp</value>
-  </data>
-  <data name="&gt;&gt;lblRX2Preamp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblRX2Preamp.Parent" xml:space="preserve">
-    <value>panelRX2Power</value>
-  </data>
-  <data name="&gt;&gt;lblRX2Preamp.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="lblRX2Band.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -8491,7 +8452,40 @@
     <value>panelRX2Power</value>
   </data>
   <data name="&gt;&gt;lblRX2Band.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
+  </data>
+  <data name="lblRX2Preamp.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="lblRX2Preamp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="lblRX2Preamp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 60</value>
+  </data>
+  <data name="lblRX2Preamp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 16</value>
+  </data>
+  <data name="lblRX2Preamp.TabIndex" type="System.Int32, mscorlib">
+    <value>114</value>
+  </data>
+  <data name="lblRX2Preamp.Text" xml:space="preserve">
+    <value>ATT</value>
+  </data>
+  <data name="lblRX2Preamp.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;lblRX2Preamp.Name" xml:space="preserve">
+    <value>lblRX2Preamp</value>
+  </data>
+  <data name="&gt;&gt;lblRX2Preamp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=3.2.9.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblRX2Preamp.Parent" xml:space="preserve">
+    <value>panelRX2Power</value>
+  </data>
+  <data name="&gt;&gt;lblRX2Preamp.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="panelRX2Power.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 591</value>
@@ -9610,7 +9604,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificCW.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>39</value>
   </data>
   <data name="panelRX2Filter.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10753,7 +10747,7 @@
     <value>panelSoundControls</value>
   </data>
   <data name="&gt;&gt;lblPreamp.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="panelSoundControls.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 175</value>
@@ -11347,7 +11341,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificPhone.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>40</value>
   </data>
   <data name="panelModeSpecificDigital.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -11578,7 +11572,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificDigital.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>42</value>
   </data>
   <data name="panelDisplay.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -13981,13 +13975,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificFM.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>41</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>53</value>
+    <value>25</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>

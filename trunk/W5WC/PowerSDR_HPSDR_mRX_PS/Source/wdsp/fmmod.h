@@ -40,12 +40,6 @@ typedef struct _fmmod
 	int ctcss_run;
 	double ctcss_level;
 	double ctcss_freq;
-	// for pre-emphasis filter
-	double* infilt;
-	double* product;
-	double* mults;
-	fftw_plan CFor;
-	fftw_plan CRev;
 	// for ctcss gen
 	double tscale;
 	double tphase;

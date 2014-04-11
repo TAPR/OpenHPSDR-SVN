@@ -26,7 +26,7 @@ warren@wpratt.com
 
 #include "comm.h"
 
-DELAY create_delay (int run, int size, double* in, double* out, int rate, double tdelta, double tdelay)
+DELAY create_delay (int run, int size, double* in, double* out, int rate, double tdelta, double tdelay, int dlyIQ)
 {
 	DELAY a = (DELAY) malloc0 (sizeof (delay));
 	a->run = run;
@@ -36,6 +36,7 @@ DELAY create_delay (int run, int size, double* in, double* out, int rate, double
 	a->rate = rate;
 	a->tdelta = tdelta;
 	a->tdelay = tdelay;
+	a->dlyIQ = dlyIQ;
 	a->L = (int)(0.5 + 1.0 / (a->tdelta * (double)a->rate));
 	a->ft = 0.45 / (double)a->L;
 	a->ncoef = (int)(60.0 / a->ft);
@@ -50,6 +51,8 @@ DELAY create_delay (int run, int size, double* in, double* out, int rate, double
 	a->h = fir_bandpass (a->ncoef,-a->ft, +a->ft, 1.0, 1, 0, (double)a->L);	
 	a->rsize = a->cpp + (WSDEL - 1);
 	a->ring = (double *) malloc0 (a->rsize * sizeof (complex));
+	a->dlyI = a->dlyIQ &  1;
+	a->dlyQ = a->dlyIQ >> 1;
 	InitializeCriticalSectionAndSpinCount ( &a->cs_update, 2500 );
 	return a;
 }
@@ -88,8 +91,10 @@ void xdelay (DELAY a)
 				Itmp += a->ring[2 * idx + 0] * a->h[k + a->phnum];
 				Qtmp += a->ring[2 * idx + 1] * a->h[k + a->phnum];
 			}
-			a->out[2 * i + 0] = Itmp;
-			a->out[2 * i + 1] = Qtmp;
+			if (a->dlyI) a->out[2 * i + 0] = Itmp;
+			else		 a->out[2 * i + 0] = a->in[2 * i + 0];
+			if (a->dlyQ) a->out[2 * i + 1] = Qtmp;
+			else		 a->out[2 * i + 1] = a->in[2 * i + 1];
 			if (--a->idx_in < 0) a->idx_in = a->rsize - 1;
 		}
 	}

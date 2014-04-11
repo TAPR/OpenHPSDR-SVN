@@ -26,7 +26,7 @@ warren@wpratt.com
 
 #ifndef _fmd_h
 #define _fmd_h
-
+#include "iir.h"
 typedef struct _fmd
 {
 	int run;
@@ -68,11 +68,16 @@ typedef struct _fmd
 	double* ainfilt;
 	double* aproduct;
 	double* amults;
+	double afgain;
 	fftw_plan aCFor;
 	fftw_plan aCRev;
+	// CTCSS removal
+	SNOTCH sntch;
+	int sntch_run;
+	double ctcss_freq;
 } fmd, *FMD;
 
-extern FMD create_fmd ( int run, int size, double* in, double* out, int rate, double deviation, double f_low, double f_high, double fmin, double fmax, double zeta, double omegaN, double tau);
+extern FMD create_fmd ( int run, int size, double* in, double* out, int rate, double deviation, double f_low, double f_high, double fmin, double fmax, double zeta, double omegaN, double tau, double afgain, int sntch_run, double ctcss_freq);
 
 extern void destroy_fmd (FMD a);
 

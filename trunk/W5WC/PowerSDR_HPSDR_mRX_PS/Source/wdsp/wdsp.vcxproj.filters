@@ -132,6 +132,15 @@
     <ClInclude Include="analyzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="emph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="channel.c">
@@ -246,6 +255,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="analyzer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="emph.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iir.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eer.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

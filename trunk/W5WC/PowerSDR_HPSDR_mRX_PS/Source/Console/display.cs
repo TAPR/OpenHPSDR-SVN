@@ -1691,13 +1691,6 @@ namespace PowerSDR
             set { show_cth_line = value; }
         }
 
-        private static bool cw_disable_tx_display = false;
-        public static bool CWDisableTXDisplay
-        {
-            get { return cw_disable_tx_display; }
-            set { cw_disable_tx_display = value; }
-        }
-
         private static double f_center = vfoa_hz;
         public static double F_Center
         {
@@ -6990,7 +6983,7 @@ namespace PowerSDR
                 (CurrentDisplayMode == DisplayMode.PANAFALL && console.NReceivers > 2) ||
                (CurrentDisplayMode == DisplayMode.PANADAPTER && display_duplex)) displayduplex = true;
 
-            if (local_mox && !displayduplex)// || (mox && tx_on_vfob))
+            if (local_mox)// && !displayduplex)// || (mox && tx_on_vfob))
             {
                 Low = tx_display_low;
                 High = tx_display_high;
@@ -8232,7 +8225,9 @@ namespace PowerSDR
                 }
             }
 
-            if (console.PowerOn && current_display_mode == DisplayMode.PANADAPTER)
+            if (console.PowerOn && (current_display_mode == DisplayMode.PANADAPTER || 
+                current_display_mode == DisplayMode.PANAFALL || 
+                current_display_mode == DisplayMode.PANASCOPE))
             {
                 // get filter screen coordinates
                 int filter_left_x = (int)((float)(filter_low - Low) / width * W);
@@ -9734,7 +9729,7 @@ namespace PowerSDR
             }
             else
             {
-                if (local_mox && !displayduplex) // && !tx_on_vfob)
+                if (local_mox)// && !displayduplex) // && !tx_on_vfob)
                 {
                     Low = tx_display_low;
                     High = tx_display_high;
@@ -9966,7 +9961,7 @@ namespace PowerSDR
             {
                // Trace.WriteLine(ex);
             }
-
+#if false
             // draw notch zoom if enabled
             if (tnf_zoom)
             {
@@ -10177,7 +10172,7 @@ namespace PowerSDR
                     else g.DrawLines(data_line_pen, points);
                 }
             }
-
+#endif
             points = null;
 
             // draw long cursor

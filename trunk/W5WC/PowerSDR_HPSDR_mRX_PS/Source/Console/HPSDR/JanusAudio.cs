@@ -40,10 +40,10 @@ namespace PowerSDR
 
         public static bool isFirmwareLoaded = false;
 
-        private static void dummy_to_remove_warning() // added to remove fallacious warning about variable never being used
-        {
-            isFirmwareLoaded = isFirmwareLoaded;
-        }
+        //private static void dummy_to_remove_warning() // added to remove fallacious warning about variable never being used
+        //{
+        //    isFirmwareLoaded = isFirmwareLoaded;
+        //}
 
         // get ozy firmware version string - 8 bytes.  returns 
         // null for error 
@@ -162,10 +162,10 @@ namespace PowerSDR
             return fx2_fw_version;
         }
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void EnableHermesPower(int enable);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetOutputPowerFactor(int i);
 
         public static void SetOutputPower(float f)
@@ -187,10 +187,10 @@ namespace PowerSDR
         // [DllImport("JanusAudio.dll")]
         // public static extern int getNetworkAddrs(Int32[] addrs, Int32 count); 
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void DeInitMetisSockets();
 
-        [DllImport("JanusAudio.dll", CharSet = CharSet.Ansi)]
+        [DllImport("JanusAudio.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int nativeInitMetis(String netaddr, bool dostatic);
 
         //		private static bool MetisInitialized = false;
@@ -391,6 +391,8 @@ namespace PowerSDR
                             }
                             break;
                         case 26:
+                        case 27:
+                        case 28:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 18)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 34)))
                             {
@@ -411,10 +413,10 @@ namespace PowerSDR
                         Thread.Sleep(300);
                         mercury2_ver = getMercury2FWVersion();
                     }
-                    if (mercury2_ver < 32) //check if physical rx2 present
-                        c.RX2PreampPresent = false;
-                    else
+                    if (mercury2_ver > 32) //check if physical rx2 present
                         c.RX2PreampPresent = true;
+                    else
+                        c.RX2PreampPresent = false;
 
                     if (c.SetupForm.FirmwareBypass == true) result = true;
 
@@ -589,97 +591,97 @@ namespace PowerSDR
             return result;
         }
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetMetisIPAddr();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetMetisMACAddr(byte[] addr_bytes);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetMetisCodeVersion(byte[] addr_bytes);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetMetisBoardID(byte[] addr_bytes);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int StartAudioNative(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int StopAudio();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetC1Bits(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetAlexManEnable(int bit);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetAlexEnabled(int bit);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetAlexHPFBits(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetAlexLPFBits(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetAlexTRRelayBit(int bit);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetAlex2HPFBits(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetAlex2LPFBits(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void EnableApolloFilter(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void EnableApolloTuner(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void EnableApolloAutoTune(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void EnableEClassModulation(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetHermesFilter(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetUserOut0(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetUserOut1(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetUserOut2(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetUserOut3(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern bool getUserI01(); // TX Inhibit input sense
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern bool getUserI02();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern bool getUserI03();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern bool getUserI04();
 
-        [DllImport("JanusAudio.dll")] // sets number of receivers
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)] // sets number of receivers
         unsafe public static extern void SetNRx(int nrx);
 
-        [DllImport("JanusAudio.dll")] // sets full or half duplex
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)] // sets full or half duplex
         unsafe public static extern void SetDuplex(int dupx);
-        
-        [DllImport("JanusAudio.dll")]
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int GetC1Bits();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int nativeGetDotDashPTT();  // bit 0 = ptt, bit1 = dash asserted, bit 2 = dot asserted 
         unsafe public static int GetDotDashPTT()
         {
@@ -694,37 +696,37 @@ namespace PowerSDR
             return bits;
         }
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetLegacyDotDashPTT(int bit);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int GetDiagData(int* a, int count);  // get diag data, count is how many slots are in array 
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX1VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX2VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX3VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX4VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX5VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX6VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX7VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetTXVFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
         private static double freq_correction_factor = 1.0;
@@ -843,101 +845,116 @@ namespace PowerSDR
             // c.SetupForm.txtTXVFO.Text = f_freq.ToString();
         }
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern IntPtr OzyOpen();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void OzyClose(IntPtr ozyh);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern IntPtr OzyHandleToRealHandle(IntPtr ozh);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int IsOzyAttached();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetMicBoost(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetLineIn(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetLineBoost(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetAlexAtten(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetMercDither(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetMercRandom(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX1Preamp(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX2Preamp(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void EnableADC1StepAtten(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void EnableADC2StepAtten(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void EnableADC3StepAtten(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetADC1StepAttenData(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetADC2StepAttenData(int bits);
-        
-        [DllImport("JanusAudio.dll")]
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetADC3StepAttenData(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetMicTR(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetMicBias(int bits);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getAndResetADC_Overload();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getMercuryFWVersion();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getMercury2FWVersion();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getMercury3FWVersion();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getMercury4FWVersion();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getPenelopeFWVersion();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getOzyFWVersion();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getHaveSync();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getFwdPower();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getRefPower();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getAlexFwdPower();
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getHermesDCVoltage();
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWKeyer(int enable);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWSidetoneVolume(int vol);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWPTTDelay(int delay);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWHangTime(int hang);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWSidetoneFreq(int freq);
 
         // 
         // compute fwd power from Penny based on count returned 
@@ -1044,10 +1061,10 @@ namespace PowerSDR
             return (float)result;
         } */
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getControlByteIn(int n);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetFPGATestMode(int i);
 
         // return true if ozy vid/pid found on usb bus .. native code does all the real work 
@@ -1063,65 +1080,60 @@ namespace PowerSDR
             return true;
         }
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetDiscoveryMode(int b);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetPennyOCBits(int b);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetSWRProtect(float g);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int GetEP4Data(char* bufp);
 
-        private static void InitMic()
-        {
-            Console.getConsole().SetMicGain();
-        }
-
         // Diversity
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void EnableDiversity2(int g);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetMercSource(int g);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetrefMerc(int g);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetIQ_Rotate(double a, double b);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetIQ_RotateA(double a, double b);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetIQ_RotateB(double a, double b);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTheta(double a); 
 
         // Ozyutils
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe extern public static int GetOzyID(IntPtr usb_h, byte[] bytes, int length);
 
-        //[DllImport("JanusAudio.dll")]
+        //[DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         // unsafe extern public static bool Write_I2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe extern public static bool WriteI2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe extern public static bool ReadI2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe extern public static bool Set_I2C_Speed(IntPtr hdev, int speed);
 
-        [DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe extern public static int WriteControlMsg(IntPtr hdev, int requesttype, int request, int value,
                                               int index, byte[] bytes, int length, int timeout);
 #if false

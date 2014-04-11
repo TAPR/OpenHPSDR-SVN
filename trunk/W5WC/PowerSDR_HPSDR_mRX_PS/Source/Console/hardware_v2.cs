@@ -403,7 +403,11 @@ namespace PowerSDR
 				Console c = Console.getConsole();
                 if (value)
                 {
-                    JanusAudio.SetXmitBit(1);
+                    if (c.CWFWKeyer &&
+                        c.RX1DSPMode == DSPMode.CWL ||
+                        c.RX1DSPMode == DSPMode.CWU)
+                    JanusAudio.SetXmitBit(0);
+                    else JanusAudio.SetXmitBit(1);
 
                     if (c.serialPTT != null)
                     {
@@ -415,7 +419,7 @@ namespace PowerSDR
                     //    c.Keyer.sp.RtsEnable = true;
                    // }
 
-                    pio_ic1.SetBit(TR);
+                   // pio_ic1.SetBit(TR);
                 }
                 else
                 {
