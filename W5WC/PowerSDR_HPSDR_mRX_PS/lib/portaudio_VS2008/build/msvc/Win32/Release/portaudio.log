@@ -1,5 +1,5 @@
-﻿Build started 11/22/2013 5:40:27 PM.
-     1>Project "E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\lib\portaudio_VS2008\build\msvc\portaudio.vcxproj" on node 2 (rebuild target(s)).
+﻿Build started 4/7/2014 3:00:02 PM.
+     1>Project "C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\portaudio_VS2008\build\msvc\portaudio.vcxproj" on node 4 (rebuild target(s)).
      1>_PrepareForClean:
          Deleting file "Win32\Release\portaudio.lastbuildstate".
        InitializeBuildStatus:
@@ -43,7 +43,7 @@
          Generating Code...
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\src\hostapi\asio\ASIOSDK\host /I..\..\src\hostapi\asio\ASIOSDK\host\pc /I..\..\src\hostapi\asio\ASIOSDK\common /I..\..\src\common /I..\..\include /I.\ /I..\..\src\os\win /I..\..\src\hostapi\asio\asiosdk\common /I..\..\src\hostapi\asio\asiosdk\host /I..\..\src\hostapi\asio\asiosdk\host\pc /I")" /Zi /nologo /W3 /WX- /Ox /Ob2 /Oi /Ot /Oy- /D WIN32 /D NDEBUG /D _USRDLL /D _CRT_SECURE_NO_DEPRECATE /D PAWIN_USE_WDMKS_DEVICE_INFO /D PA19_EXPORTS /D _VC80_UPGRADE=0x0600 /D _WINDLL /GF /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Win32\Release\\" /Fd"Win32\Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\hostapi\asio\pa_asio.cpp
          pa_asio.cpp
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\lib\portaudio_VS2008\build\msvc\Win32\Release\portaudio.dll) does not match the Linker's OutputFile property value (E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\bin\Release\PA19.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\portaudio_VS2008\build\msvc\Win32\Release\portaudio.dll) does not match the Linker's OutputFile property value (C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\bin\Release\PA19.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(992,5): warning MSB8012: TargetName(portaudio) does not match the Linker's OutputFile property value (PA19). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\..\..\bin\Release\PA19.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\..\lib setupapi.lib dsound.lib winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:".\portaudio.def" /MANIFEST /ManifestFile:"Win32\Release\portaudio.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"Win32\Release\PA19.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"Win32\Release\PA19.lib" /MACHINE:X86 /DLL Win32\Release\pa_allocation.obj
@@ -78,14 +78,14 @@
          Win32\Release\pa_win_wdmks_utils.obj
          Win32\Release\pa_x86_plain_converters.obj
             Creating library Win32\Release\PA19.lib and object Win32\Release\PA19.exp
-         portaudio.vcxproj -> E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\lib\portaudio_VS2008\build\msvc\Win32\Release\portaudio.dll
+         portaudio.vcxproj -> C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\portaudio_VS2008\build\msvc\Win32\Release\portaudio.dll
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"..\..\..\..\bin\Release\PA19.dll;#2" /manifest Win32\Release\portaudio.dll.intermediate.manifest
        FinalizeBuildStatus:
          Deleting file "Win32\Release\portaudio.unsuccessfulbuild".
          Touching "Win32\Release\portaudio.lastbuildstate".
-     1>Done Building Project "E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\lib\portaudio_VS2008\build\msvc\portaudio.vcxproj" (rebuild target(s)).
+     1>Done Building Project "C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\portaudio_VS2008\build\msvc\portaudio.vcxproj" (rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:04.46
+Time Elapsed 00:00:05.26
