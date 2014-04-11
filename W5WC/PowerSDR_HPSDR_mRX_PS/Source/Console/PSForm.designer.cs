@@ -72,6 +72,7 @@
             this.btnPSCalibrate = new System.Windows.Forms.ButtonTS();
             this.labelTS140 = new System.Windows.Forms.LabelTS();
             this.udPSCalWait = new System.Windows.Forms.NumericUpDownTS();
+            this.btnPSAmpView = new System.Windows.Forms.ButtonTS();
             this.grpLincorSave.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udPSMoxDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPSPhnum)).BeginInit();
@@ -615,12 +616,26 @@
             65536});
             this.udPSCalWait.ValueChanged += new System.EventHandler(this.udPSCalWait_ValueChanged);
             // 
+            // btnPSAmpView
+            // 
+            this.btnPSAmpView.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPSAmpView.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnPSAmpView.Image = null;
+            this.btnPSAmpView.Location = new System.Drawing.Point(38, 246);
+            this.btnPSAmpView.Name = "btnPSAmpView";
+            this.btnPSAmpView.Size = new System.Drawing.Size(95, 23);
+            this.btnPSAmpView.TabIndex = 40;
+            this.btnPSAmpView.Text = "AmpView";
+            this.btnPSAmpView.UseVisualStyleBackColor = false;
+            this.btnPSAmpView.Click += new System.EventHandler(this.btnPSAmpView_Click);
+            // 
             // PSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(627, 397);
+            this.Controls.Add(this.btnPSAmpView);
             this.Controls.Add(this.chkPSRelaxPtol);
             this.Controls.Add(this.lblDisabled);
             this.Controls.Add(this.btnPSTwoToneGen);
@@ -642,6 +657,7 @@
             this.Controls.Add(this.btnPSCalibrate);
             this.Controls.Add(this.labelTS140);
             this.Controls.Add(this.udPSCalWait);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PSForm";
             this.Text = "PureSignal 1.0";
@@ -703,5 +719,6 @@
         private System.Windows.Forms.TextBoxTS PSdispRX;
         private System.Windows.Forms.LabelTS labelTS6;
         private System.Windows.Forms.CheckBoxTS chkPSRelaxPtol;
+        private System.Windows.Forms.ButtonTS btnPSAmpView;
     }
 }
