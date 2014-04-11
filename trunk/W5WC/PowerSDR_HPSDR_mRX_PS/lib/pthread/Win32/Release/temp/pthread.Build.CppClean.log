@@ -1,27 +1,22 @@
-E:\DOCUMENTS\HAM RADIO\1 HPSDR\1 WDSP\2013-11-08 MRX\BIN\RELEASE\PTHREADVC.DLL
-E:\DOCUMENTS\HAM RADIO\1 HPSDR\1 WDSP\2013-11-08 MRX\LIB\PTHREAD\WIN32\RELEASE\TEMP\PTHREAD.DLL.INTERMEDIATE.MANIFEST
-E:\DOCUMENTS\HAM RADIO\1 HPSDR\1 WDSP\2013-11-08 MRX\LIB\PTHREAD\WIN32\RELEASE\TEMP\PTHREAD.OBJ
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\lib\pthread\Win32\Release\temp\pthreadVC.exp
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2013-11-08 mRX\lib\pthread\Win32\Release\temp\pthreadVC.lib
-E:\DOCUMENTS\HAM RADIO\1 HPSDR\1 WDSP\2013-11-08 MRX\LIB\PTHREAD\WIN32\RELEASE\TEMP\VC100.PDB
-E:\DOCUMENTS\HAM RADIO\1 HPSDR\1 WDSP\2013-11-08 MRX\LIB\PTHREAD\WIN32\RELEASE\TEMP\VERSION.RES
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\cl.command.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\CL.read.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\CL.write.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\link.command.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\link.read.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\link.write.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\link-cvtres.read.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\link-cvtres.write.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\mt.command.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\mt.read.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\mt.write.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\pthread.dll.intermediate.manifest
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\pthread.obj
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\pthread.write.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\pthreadVC.exp
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\rc.command.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\rc.read.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\rc.write.1.tlog
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\vc100.pdb
-E:\Documents\Ham Radio\1 HPSDR\1 WDSP\2014-02-04 mRX_PS\lib\pthread\Win32\Release\temp\version.res
+C:\USERS\DOUG\DESKTOP\OPENHPSDR\W5WC\POWERSDR_HPSDR_MRX_PS\BIN\RELEASE\PTHREADVC.DLL
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\cl.command.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\CL.read.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\CL.write.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\link.command.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\link.read.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\link.write.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\link-cvtres.read.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\link-cvtres.write.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\mt.command.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\mt.read.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\mt.write.1.tlog
+C:\USERS\DOUG\DESKTOP\OPENHPSDR\W5WC\POWERSDR_HPSDR_MRX_PS\LIB\PTHREAD\WIN32\RELEASE\TEMP\PTHREAD.DLL.INTERMEDIATE.MANIFEST
+C:\USERS\DOUG\DESKTOP\OPENHPSDR\W5WC\POWERSDR_HPSDR_MRX_PS\LIB\PTHREAD\WIN32\RELEASE\TEMP\PTHREAD.OBJ
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\pthread.write.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\pthreadVC.exp
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\pthreadVC.lib
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\rc.command.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\rc.read.1.tlog
+C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\temp\rc.write.1.tlog
+C:\USERS\DOUG\DESKTOP\OPENHPSDR\W5WC\POWERSDR_HPSDR_MRX_PS\LIB\PTHREAD\WIN32\RELEASE\TEMP\VC100.PDB
+C:\USERS\DOUG\DESKTOP\OPENHPSDR\W5WC\POWERSDR_HPSDR_MRX_PS\LIB\PTHREAD\WIN32\RELEASE\TEMP\VERSION.RES
