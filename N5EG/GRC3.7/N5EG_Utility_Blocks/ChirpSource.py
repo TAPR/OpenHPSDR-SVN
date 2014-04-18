@@ -28,12 +28,12 @@ import numpy as np
 import math
 
  
-# create a linear chirped baseband output, from -freq to +freq
+# create a linear chirped baseband output, from -deviation to +deviation
 # The parameter is chirp rate - in Hertz per millisecond.
 
 class ChirpSource(gr.sync_block):
     
-    def __init__(self, chirpRate, sampRate, direction, amplitude):
+    def __init__(self, chirpRate, sampRate, direction, amplitude, deviation):
         gr.sync_block.__init__(
             self,
             name="ChirpSource",
@@ -44,8 +44,9 @@ class ChirpSource(gr.sync_block):
         self.sampleRate = sampRate
         self.direction = direction
         self.amplitude = amplitude
+        self.deviation = deviation
         self.indexer = 0
-        self.BuildArray(chirpRate, sampRate, direction, amplitude)    
+        self.BuildArray()    
         return
 
 
@@ -80,24 +81,24 @@ class ChirpSource(gr.sync_block):
 # t = time in seconds for one chirp sweep
 
 
-    def BuildArray(self, chirpRate, sampRate, direction, amplitude):  
-        self.k = chirpRate * 1000  # convert to Hertz per second
-        self.t = sampRate / float(self.k) # time for one chirp
-        self.n = int(self.t * sampRate)    # number of time samples in one chirp
-        self.f0 = -sampRate/2    #lowest frequency (start of) chirp
+    def BuildArray(self):  
+        self.k = self.chirpRate * 1000  # convert to Hertz per second
+        self.t = (self.deviation * 2) / float(self.k) # time for one chirp
+        self.f0 = -self.deviation    #lowest frequency (start of) chirp
+        self.n = int(self.t * self.sampleRate)    # number of time samples in one chirp
         self.buf = []           # empty list
         self.chirpbuf = []      #empty list
 
         
-        print "BuildArray: k=",self.k," t=",self.t," n=",self.n," f0=",self.f0,
+#        print "BuildArray: k=",self.k," t=",self.t," n=",self.n," f0=",self.f0,
          
         # build complete sample array as one python list 
         for i in range(self.n):
-            time = i / float(sampRate)
+            time = i / float(self.sampleRate)
             phi = 2.0 * math.pi * (self.f0 * time + self.k * time * time /2.0)
-            re = amplitude * math.cos(phi)
-            im = amplitude * math.sin(phi)
-            if direction:
+            re = self.amplitude * math.cos(phi)
+            im = self.amplitude * math.sin(phi)
+            if self.direction:
                 self.buf.append(complex(re, -im))
             else:
                 self.buf.append(complex(re, im))
@@ -127,27 +128,32 @@ class ChirpSource(gr.sync_block):
 
     def set_chirpRate(self, chirpRate):
         self.chirpRate = chirpRate
-        self.BuildArray(chirpRate, self.sampleRate, self.direction, self.amplitude)
+        self.BuildArray()
         return
 
         
     def set_sampleRate(self, sampRate):
         self.sampleRate = sampRate
-        self.BuildArray(self.chirpRate, sampRate, self.direction, self.amplitude)
+        self.BuildArray()
         return
 
 
     def set_direction(self, direction):
         self.direction = direction
-        self.BuildArray(self.chirpRate, self.sampRate, direction, self.amplitude)
+        self.BuildArray()
         return
 
 
     def set_amplitude(self, amplitude):
         self.amplitude = amplitude
-        self.BuildArray(self.chirpRate, self.sampRate, self.direction, amplitude)
+        self.BuildArray()
         return
 
+
+    def set_deviation(self, deviation):
+        self.deviation = deviation
+        self.BuildArray()
+        return
 
             
       
