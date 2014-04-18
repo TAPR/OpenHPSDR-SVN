@@ -30,10 +30,12 @@ import math
  
 # create a linear chirped baseband output, from -deviation to +deviation
 # The parameter is chirp rate - in Hertz per millisecond.
+# Optionally zero-pad to 2^N samples. 
 
 class ChirpSource(gr.sync_block):
     
-    def __init__(self, chirpRate, sampRate, direction, amplitude, deviation):
+    def __init__(self, chirpRate, sampRate, direction, amplitude, deviation,
+                 zeropad):
         gr.sync_block.__init__(
             self,
             name="ChirpSource",
@@ -45,6 +47,7 @@ class ChirpSource(gr.sync_block):
         self.direction = direction
         self.amplitude = amplitude
         self.deviation = deviation
+        self.zeropad = zeropad
         self.indexer = 0
         self.BuildArray()    
         return
@@ -86,13 +89,34 @@ class ChirpSource(gr.sync_block):
         self.t = (self.deviation * 2) / float(self.k) # time for one chirp
         self.f0 = -self.deviation    #lowest frequency (start of) chirp
         self.n = int(self.t * self.sampleRate)    # number of time samples in one chirp
+
+
+        # compute size of 2^n block that fits the set of samples
+        if self.zeropad == 1:
+            log2size = math.log(self.n, 2)
+            m = int(log2size)
+            if log2size > float(m):
+                m += 1
+            block = 2 ** m
+            excess = block - self.n
+            self.pre = int(excess / 2)       # #samples to pre-zeropad
+            self.post = excess - self.pre    # #samples to post-zeropad
+        else:
+            self.pre = 0                     # no zeropad
+            self.post = 0
+
         self.buf = []           # empty list
         self.chirpbuf = []      #empty list
 
         
-#        print "BuildArray: k=",self.k," t=",self.t," n=",self.n," f0=",self.f0,
+        print "BuildArray: k=",self.k," t=",self.t," n=",self.n," f0=",self.f0,
+        print "padding =", self.pre+self.post, "total_block =",self.n+self.pre+self.post
          
         # build complete sample array as one python list 
+
+        for i in range(self.pre):
+            self.buf.append(complex(0.0, 0.0))
+            
         for i in range(self.n):
             time = i / float(self.sampleRate)
             phi = 2.0 * math.pi * (self.f0 * time + self.k * time * time /2.0)
@@ -103,7 +127,11 @@ class ChirpSource(gr.sync_block):
             else:
                 self.buf.append(complex(re, im))
 
-                          
+        for i in range(self.post):
+            self.buf.append(complex(0.0, 0.0))
+     
+        self.n = self.pre + self.n + self.post # total sample count
+     
         # split sample list into multiple np.arrays  
         self.count = self.n / 4096        # number of full buffers
         self.remainder = self.n % 4096    #last buffer size
@@ -155,6 +183,10 @@ class ChirpSource(gr.sync_block):
         self.BuildArray()
         return
 
+    def set_zeropad(self, zeropad):
+        self.zeropad = zeropad
+        self.BuildArray()
+        return
             
       
     
