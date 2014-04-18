@@ -4,12 +4,13 @@
   <key>ChirpSource</key>
   <category>hpsdr</category>
   <import>execfile("/home/tom/.grc_gnuradio/ChirpSource.py")</import>
-  <make>ChirpSource($chirpRate, $sampRate, $direction, $amplitude, $deviation)</make>
+  <make>ChirpSource($chirpRate, $sampRate, $direction, $amplitude, $deviation, $zeropad)</make>
   <callback>set_chirpRate($chirpRate)</callback>
   <callback>set_sampleRate($sampRate)</callback>
   <callback>set_direction($direction)</callback>
   <callback>set_amplitude($amplitude)</callback>
   <callback>set_deviation($deviation)</callback>
+  <callback>set_zeropad($zeropad)</callback>
   <param>
     <name>Chirp Rate</name>
     <key>chirpRate</key>
@@ -40,9 +41,16 @@
     <value>20000</value>
     <type>int</type>
   </param>
+  <param>
+    <name>Zero Pad</name>
+    <key>zeropad</key>
+    <value>0</value>
+    <type>int</type>
+  </param>
 
   <check>$sampRate >= $deviation * 2</check>
   <check>$deviation > 0</check>
+  <check>$zeropad > -1 and 2 > $zeropad</check>
 
   <source>
     <name>out</name>
@@ -61,6 +69,8 @@ Sample Rate: Samples per second
 Direction: 0 = up-chirp.  1 = down-chirp
 Amplitude: Maximum value of 1.0
 Deviation: half-width of chirp, in Hertz.
+Zero Pad: 0 = No.
+          1 = Yes - zero-pad block to fit 2^N samples.
 
 </doc>
 <grc_source></grc_source>
