@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
       xmlns:fire="http://schemas.microsoft.com/wix/FirewallExtension">
-	<Product Id="*" Name="PowerSDR mRX PS" Language="1033" Version="3.2.9.0" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="234FB74A-174D-418A-B2C9-4E4F369B60F5">
+	<Product Id="*" Name="PowerSDR mRX PS" Language="1033" Version="3.2.12.0" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="234FB74A-174D-418A-B2C9-4E4F369B60F5">
 		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -253,6 +253,20 @@
       </Component>
 
       <Component Guid="*">
+        <File Id="Ozy_Janus.v26.rbf"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\Ozy_Janus.v26.rbf"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="*">
+        <File Id="Ozy_Janus.v27.rbf"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\Ozy_Janus.v27.rbf"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="*">
         <File Id="ozyfwsdr1k.hex"
               Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\ozyfw-sdr1k.hex"
               KeyPath="yes"
@@ -262,13 +276,6 @@
       <Component Guid="*">
         <File Id="fftw_wisdom.exe"
               Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\fftw_wisdom.exe"
-              KeyPath="yes"
-              />
-      </Component>
-
-      <Component Guid="*">
-        <File Id="FlexCW.dll"
-              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\FlexCW.dll"
               KeyPath="yes"
               />
       </Component>
@@ -305,12 +312,15 @@
       -->
     <Binary Id="InstallSkins" SourceFile="OpenHPSDR_Skins.exe" />
     <CustomAction Id="InstallSkins_CA" BinaryKey="InstallSkins"
-        Impersonate="yes" Execute="deferred" ExeCommand="" Return="check"/>
+        Impersonate="yes" Execute="deferred" ExeCommand="[SystemFolder]cmd.exe /C start OpenHPSDR_Skins.exe &amp; exit" 
+                  Return="check"/>
    
     <!--     -->
 
    <InstallExecuteSequence>
-      <Custom Action='InstallSkins_CA' Before='InstallFinalize' />
+     <Custom Action='InstallSkins_CA' Before='InstallFinalize'>
+       NOT Installed
+     </Custom>
     </InstallExecuteSequence>
     <!--   -->
   </Fragment>
