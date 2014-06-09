@@ -24,7 +24,7 @@ warren@wpratt.com
 
 */
 
-# include "comm.h"
+#include "comm.h"
 
 #define MAX_TAU			(0.002)		// maximum transition time, signal<->zero
 #define MAX_ADVTIME		(0.002)		// maximum deadtime (zero output) in advance of detected noise
@@ -208,8 +208,8 @@ void xanb (ANB a)
 *																										*
 ********************************************************************************************************/
 
-#define MAX_EXT_NOBS	(32)						// maximum number of NOBs called from outside wdsp
-__declspec (align (16)) ANB pnob[MAX_EXT_NOBS];		// array of pointers for NOBs used EXTERNAL to wdsp
+#define MAX_EXT_ANBS	(32)						// maximum number of NOBs called from outside wdsp
+__declspec (align (16)) ANB panb[MAX_EXT_ANBS];		// array of pointers for NOBs used EXTERNAL to wdsp
 
 PORT
 void create_anbEXT	(
@@ -224,25 +224,25 @@ void create_anbEXT	(
 	double threshold
 					)
 {
-	pnob[id] = create_anb (run, buffsize, 0, 0,samplerate, tau, hangtime, advtime, backtau, threshold);
+	panb[id] = create_anb (run, buffsize, 0, 0,samplerate, tau, hangtime, advtime, backtau, threshold);
 }
 
 PORT
 void destroy_anbEXT (int id)
 {
-	destroy_anb (pnob[id]);
+	destroy_anb (panb[id]);
 }
 
 PORT
 void flush_anbEXT (int id)
 {
-	flush_anb (pnob[id]);
+	flush_anb (panb[id]);
 }
 
 PORT
 void xanbEXT (int id, double* in, double* out)
 {
-	ANB a = pnob[id];
+	ANB a = panb[id];
 	a->in = in;
 	a->out = out;
 	xanb (a);
@@ -251,7 +251,7 @@ void xanbEXT (int id, double* in, double* out)
 PORT
 void SetEXTANBRun (int id, int run)
 {
-	ANB a = pnob[id];
+	ANB a = panb[id];
 	EnterCriticalSection (&a->cs_update);
 	a->run = run;
 	LeaveCriticalSection (&a->cs_update);
@@ -260,7 +260,7 @@ void SetEXTANBRun (int id, int run)
 PORT
 void SetEXTANBBuffsize (int id, int size)
 {
-	ANB a = pnob[id];
+	ANB a = panb[id];
 	EnterCriticalSection (&a->cs_update);
 	a->buffsize = size;
 	LeaveCriticalSection (&a->cs_update);
@@ -269,7 +269,7 @@ void SetEXTANBBuffsize (int id, int size)
 PORT
 void SetEXTANBSamplerate (int id, int rate)
 {
-	ANB a = pnob[id];
+	ANB a = panb[id];
 	EnterCriticalSection (&a->cs_update);
 	a->samplerate = (double) rate;
 	initBlanker (a);
@@ -279,7 +279,7 @@ void SetEXTANBSamplerate (int id, int rate)
 PORT
 void SetEXTANBTau (int id, double tau)
 {
-	ANB a = pnob[id];
+	ANB a = panb[id];
 	EnterCriticalSection (&a->cs_update);
 	a->tau = tau;
 	initBlanker (a);
@@ -289,7 +289,7 @@ void SetEXTANBTau (int id, double tau)
 PORT
 void SetEXTANBHangtime (int id, double time)
 {
-	ANB a = pnob[id];
+	ANB a = panb[id];
 	EnterCriticalSection (&a->cs_update);
 	a->hangtime = time;
 	initBlanker (a);
@@ -299,7 +299,7 @@ void SetEXTANBHangtime (int id, double time)
 PORT
 void SetEXTANBAdvtime (int id, double time)
 {
-	ANB a = pnob[id];
+	ANB a = panb[id];
 	EnterCriticalSection (&a->cs_update);
 	a->advtime = time;
 	initBlanker (a);
@@ -309,7 +309,7 @@ void SetEXTANBAdvtime (int id, double time)
 PORT
 void SetEXTANBBacktau (int id, double tau)
 {
-	ANB a = pnob[id];
+	ANB a = panb[id];
 	EnterCriticalSection (&a->cs_update);
 	a->backtau = tau;
 	initBlanker (a);
@@ -319,7 +319,7 @@ void SetEXTANBBacktau (int id, double tau)
 PORT
 void SetEXTANBThreshold (int id, double thresh)
 {
-	ANB a = pnob[id];
+	ANB a = panb[id];
 	EnterCriticalSection (&a->cs_update);
 	a->threshold = thresh;
 	LeaveCriticalSection (&a->cs_update);
@@ -335,7 +335,7 @@ PORT
 void xanbEXTF (int id, float *I, float *Q)
 {
 	int i;
-	ANB a = pnob[id];
+	ANB a = panb[id];
 	a->in = a->legacy;
 	a->out = a->legacy;
 	for (i = 0; i < a->buffsize; i++)

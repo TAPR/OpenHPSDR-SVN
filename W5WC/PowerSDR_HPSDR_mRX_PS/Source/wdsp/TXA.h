@@ -70,6 +70,7 @@ struct _txa
 	double* midbuff;
 	int mode;
 	double meter[TXA_METERTYPE_LAST];
+	CRITICAL_SECTION* pmtupdate[TXA_METERTYPE_LAST];
 	struct
 	{
 		METER p;
@@ -140,10 +141,7 @@ struct _txa
 		IQC p0, p1;
 		// p0 for dsp-synchronized reference, p1 for other
 	} iqc;
-	struct
-	{
-		EER p;
-	} eer;
+
 } txa[MAX_CHANNELS];
 
 extern void create_txa (int channel);

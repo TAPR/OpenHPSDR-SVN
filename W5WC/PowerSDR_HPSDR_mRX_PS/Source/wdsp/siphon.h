@@ -45,6 +45,7 @@ typedef struct _siphon
 	int specmode;
 	fftw_plan sipplan;
 	double* window;
+	CRITICAL_SECTION update;
 } siphon, *SIPHON;
 
 extern SIPHON create_siphon (int run, int insize, double* in, int sipsize, int fftsize, int specmode);

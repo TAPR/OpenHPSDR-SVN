@@ -71,6 +71,7 @@ void create_txa (int channel)
 		0.100,										// averaging time constant
 		0.100,										// peak decay time constant
 		txa[channel].meter,							// result vector
+		txa[channel].pmtupdate,						// locks for meter access
 		TXA_MIC_AV,									// index for average value
 		TXA_MIC_PK,									// index for peak value
 		-1,											// index for gain value
@@ -118,6 +119,7 @@ void create_txa (int channel)
 		0.100,										// averaging time constant
 		0.100,										// peak decay time constant
 		txa[channel].meter,							// result vector
+		txa[channel].pmtupdate,						// locks for meter access
 		TXA_EQ_AV,									// index for average value
 		TXA_EQ_PK,									// index for peak value
 		-1,											// index for gain value
@@ -144,7 +146,7 @@ void create_txa (int channel)
 		ch[channel].dsp_rate,						// sample rate
 		0.002,										// tau_attack
 		0.500,										// tau_decay
-		8,											// n_tau
+		6,											// n_tau
 		1.778,										// max_gain
 		1.0,										// var_gain
 		1.0,										// fixed_gain
@@ -167,6 +169,7 @@ void create_txa (int channel)
 		0.100,										// averaging time constant
 		0.100,										// peak decay time constant
 		txa[channel].meter,							// result vector
+		txa[channel].pmtupdate,						// locks for meter access
 		TXA_LVLR_AV,								// index for average value
 		TXA_LVLR_PK,								// index for peak value
 		TXA_LVLR_GAIN,								// index for gain value
@@ -199,6 +202,7 @@ void create_txa (int channel)
 		0.100,										// averaging time constant
 		0.100,										// peak decay time constant
 		txa[channel].meter,							// result vector
+		txa[channel].pmtupdate,						// locks for meter access
 		TXA_COMP_AV,								// index for average value
 		TXA_COMP_PK,								// index for peak value
 		-1,											// index for gain value
@@ -233,7 +237,7 @@ void create_txa (int channel)
 		ch[channel].dsp_rate,						// sample rate
 		0.002,										// tau_attack
 		0.010,										// tau_decay
-		8,											// n_tau
+		6,											// n_tau
 		1.0,										// max_gain
 		1.0,										// var_gain
 		1.0,										// fixed_gain
@@ -297,6 +301,7 @@ void create_txa (int channel)
 		0.100,										// averaging time constant
 		0.100,										// peak decay time constant
 		txa[channel].meter,							// result vector
+		txa[channel].pmtupdate,						// locks for meter access
 		TXA_ALC_AV,									// index for average value
 		TXA_ALC_PK,									// index for peak value
 		TXA_ALC_GAIN,								// index for gain value
@@ -329,16 +334,6 @@ void create_txa (int channel)
 		16,											// ints
 		0.005);										// changeover time
 
-	txa[channel].eer.p = create_eer (
-		0,											// run
-		ch[channel].dsp_size,						// size
-		txa[channel].midbuff,						// input buffer
-		txa[channel].midbuff,						// output buffer
-		ch[channel].dsp_rate,						// sample rate
-		0.5,										// magnitude gain
-		0.5,										// phase gain
-		1.0e-05);									// phase delay
-
 	txa[channel].rsmpout.p = create_resample (
 		0,											// run - will be turned ON below if needed
 		ch[channel].dsp_size,						// input size
@@ -357,6 +352,7 @@ void create_txa (int channel)
 		0.100,										// averaging time constant
 		0.100,										// peak decay time constant
 		txa[channel].meter,							// result vector
+		txa[channel].pmtupdate,						// locks for meter access
 		TXA_OUT_AV,									// index for average value
 		TXA_OUT_PK,									// index for peak value
 		-1,											// index for gain value
@@ -371,7 +367,6 @@ void destroy_txa (int channel)
 	// in reverse order, free each item we created
 	destroy_meter (txa[channel].outmeter.p);
 	destroy_resample (txa[channel].rsmpout.p);
-	destroy_eer (txa[channel].eer.p);
 	destroy_iqc (txa[channel].iqc.p0);
 	destroy_calcc (txa[channel].calcc.p);
 	destroy_siphon (txa[channel].sip1.p);
@@ -429,7 +424,6 @@ void flush_txa (int channel)
 	flush_meter (txa[channel].alcmeter.p);
 	flush_siphon (txa[channel].sip1.p);
 	flush_iqc (txa[channel].iqc.p0);
-	flush_eer (txa[channel].eer.p);
 	flush_resample (txa[channel].rsmpout.p);
 	flush_meter (txa[channel].outmeter.p);
 }
@@ -461,7 +455,6 @@ void xtxa (int channel)
 	xmeter (txa[channel].alcmeter.p);
 	xsiphon (txa[channel].sip1.p);
 	xiqc (txa[channel].iqc.p0);
-	xeer (txa[channel].eer.p);
 	xresample (txa[channel].rsmpout.p);
 	xmeter (txa[channel].outmeter.p);
 	// print_peak_env ("env_exception.txt", ch[channel].dsp_outsize, txa[channel].outbuff, 0.990);

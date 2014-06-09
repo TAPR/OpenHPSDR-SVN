@@ -944,14 +944,15 @@ C0
 0 0 0 1 0 1 0 x   '0x14'
 C1
 0 0 0 0 0 0 0 0
-    | | | | | |
-    | | | | | +------------ Rx1 pre-amp (0=OFF, 1= ON)
-    | | | | +-------------- Rx2 pre-amp (0=OFF, 1= ON)
-    | | | +---------------- Rx3 pre-amp (0=OFF, 1= ON)
-    | | +------------------ Rx4 pre-amp (0=OFF, 1= ON)
-    | +-------------------- 0=PTT to ring/mic audio & bias to tip 1=PTT to tip/mic audio & bias to ring
-    +---------------------- Mic Bias (0=OFF, 1=ON)
-*/
+  | | | | | | |
+  | | | | | | +------------ Rx1 pre-amp (0=OFF, 1= ON)
+  | | | | | +-------------- Rx2 pre-amp (0=OFF, 1= ON)
+  | | | | +---------------- Rx3 pre-amp (0=OFF, 1= ON)
+  | | | +------------------ Rx4 pre-amp (0=OFF, 1= ON)
+  | | +-------------------- 0=PTT to ring/mic audio & bias to tip 1=PTT to tip/mic audio & bias to ring (Orion)
+  | +---------------------- Mic Bias (0=OFF, 1=ON) (Orion)
+  +------------------------ Mic PTT (0=Enable, 1=Disable) (Orion)
+  */
 
 KD5TFDVK6APHAUDIO_API void SetRX1Preamp(int bits) { 
 	if ( bits != 0 ) { 
@@ -975,12 +976,12 @@ KD5TFDVK6APHAUDIO_API void SetRX2Preamp(int bits) {
 	return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetMicTR(int bits) { 
+KD5TFDVK6APHAUDIO_API void SetMicTipRing(int bits) { 
 	if ( bits != 0 ) { 
-		MicTR = (1 << 4); 
+		MicTipRing = (1 << 4); 
 	} 
 	else { 
-		MicTR = 0; 
+		MicTipRing = 0; 
 	}	
 	return;
 }
@@ -994,15 +995,27 @@ KD5TFDVK6APHAUDIO_API void SetMicBias(int bits) {
 	}	
 	return;
 }
+
+KD5TFDVK6APHAUDIO_API void SetMicPTT(int bits) { 
+	if ( bits != 0 ) { 
+		MicPTT = (1 << 6); 
+	} 
+	else { 
+		MicPTT = 0; 
+	}	
+	return;
+}
+
 /*
 C2
 0 0 0 0 0 0 0 0
-      | | | | |
-      | | | | +------------ TLV320 Line-in Gain bit 0 
-      | | | +-------------- TLV320 Line-in Gain bit 1
-      | | +---------------- TLV320 Line-in Gain bit 2
-      | +------------------ TLV320 Line-in Gain bit 3
-      +-------------------- TLV320 Line-in Gain bit 4
+|     | | | | |
+|     | | | | +------------ TLV320 Line-in Gain bit 0 
+|     | | | +-------------- TLV320 Line-in Gain bit 1
+|     | | +---------------- TLV320 Line-in Gain bit 2
+|     | +------------------ TLV320 Line-in Gain bit 3
+|     +-------------------- TLV320 Line-in Gain bit 4
++-------------------------- Penelope board in use
 */
 
 KD5TFDVK6APHAUDIO_API void SetLineBoost(int bits) {
@@ -1010,6 +1023,15 @@ KD5TFDVK6APHAUDIO_API void SetLineBoost(int bits) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetPennyPresent(int bit) {
+        if ( bit != 0 ) {
+                PennyPresent = 0x80;
+        }
+        else {
+                PennyPresent = 0;
+        }
+        return;
+}
 /*
 C3
 0 0 0 0 0 0 0 0
@@ -1031,7 +1053,6 @@ KD5TFDVK6APHAUDIO_API void SetUserOut0(int out) {
 }
 
 KD5TFDVK6APHAUDIO_API void SetUserOut1(int out) {
-       UserOut1 = out;
         if ( out == 0 ) {
                 UserOut1 = 0;
         }
@@ -1042,7 +1063,6 @@ KD5TFDVK6APHAUDIO_API void SetUserOut1(int out) {
 }
 
 KD5TFDVK6APHAUDIO_API void SetUserOut2(int out) {
-       UserOut2 = out;
         if ( out == 0 ) {
                 UserOut2 = 0;
         }
@@ -1053,7 +1073,6 @@ KD5TFDVK6APHAUDIO_API void SetUserOut2(int out) {
 }
 
 KD5TFDVK6APHAUDIO_API void SetUserOut3(int out) {
-       UserOut3 = out;
         if ( out == 0 ) {
                 UserOut3 = 0;
         }
@@ -1115,9 +1134,10 @@ KD5TFDVK6APHAUDIO_API void EnableADC2StepAtten(int bits) {
 /*
 C2
 0 0 0 0 0 0 0 0
-    | |       |
-    | +-------+------------ Orion ADC3 Input Attenuator (0 – 31dB) [4:0]
-    +---------------------- Orion ADC3 Attenuator enable (0 = disable, 1 = enable)
+  | | |       |
+  | | +-------+------------ Orion ADC3 Input Attenuator (0 – 31dB) [4:0]
+  | +---------------------- Orion ADC3 Attenuator enable (0 = disable, 1 = enable)
+  +------------------------ Reverse Paddles (0 = disable, 1 = enable)
 */
 
 KD5TFDVK6APHAUDIO_API void SetADC3StepAttenData(int bits) { 
@@ -1131,6 +1151,56 @@ KD5TFDVK6APHAUDIO_API void EnableADC3StepAtten(int bits) {
 	} 
 	else { 
 		enable_ADC3_step_att = 0; 
+	}	
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void ReversePaddles(int bits) { 
+	if ( bits != 0 ) { 
+		reverse_paddles = 0x40; 
+	} 
+	else { 
+		reverse_paddles = 0; 
+	}	
+	return;
+}
+
+/*
+C3
+0 0 0 0 0 0 0 0
+| | |         |
+| | +---------+------------ Keyer speed [5:0] (1-60 WPM)
++-+------------------------ Keyer Mode [1:0] (00 = straight/bug, 01 = Mode A, 10 = Mode B)
+*/
+
+KD5TFDVK6APHAUDIO_API void SetCWKeyerSpeed(int speed) {
+	cw_speed = speed & 0x3f;
+}
+
+KD5TFDVK6APHAUDIO_API void SetCWKeyerMode(int mode) {
+	if (mode > 3) mode = 0;
+	cw_mode = mode << 6;
+}
+
+
+/*
+C4 
+0 0 0 0 0 0 0 0
+| |           |
+| +-----------+------------ Keyer Weight [6:0] (0 – 100)
++-------------+------------ Keyer Spacing (0 = off, 1 = on)
+*/
+
+KD5TFDVK6APHAUDIO_API void SetCWKeyerWeight(int weight) {
+	cw_weight = weight & 0x7f;
+}
+
+KD5TFDVK6APHAUDIO_API void EnableCWKeyerSpacing(int bits) { 
+	if ( bits != 0 ) { 
+		enable_cw_spacing = 0x80; 
+	} 
+	else { 
+		enable_cw_spacing = 0x0; 
 	}	
 	return;
 }
@@ -1157,6 +1227,15 @@ C1
 +-+------------------------ ADC assignment for RX4, where 00 = ADC1, 01 = ADC2, 10 = ADC3	
 */
 
+KD5TFDVK6APHAUDIO_API void SetADC_cntrl1(int g) { 
+	ADC_cntrl1 = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API int GetADC_cntrl1() { 
+	return ADC_cntrl1;
+}
+
 /*
 C2
 0 0 0 0 0 0 0 0
@@ -1167,7 +1246,26 @@ C2
 * Except on Tx where RX5 input is assigned to the Tx DAC
 */
 
-// C2-C4 currently not used.
+KD5TFDVK6APHAUDIO_API void SetADC_cntrl2(int g) { 
+	ADC_cntrl2 = g; 
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API int GetADC_cntrl2() { 
+	return ADC_cntrl2;
+}
+
+//C3
+//0 0 0 0 0 0 0 0
+//      |       |
+//      +-------+------------ ADC Input Attenuator Tx (0-31dB) [4:0]
+
+KD5TFDVK6APHAUDIO_API void SetTxAttenData(int bits) { 
+		tx_att_data = bits & 0x1f; 
+    	return;
+}
+
+// C4 currently not used.
   
 /*
 C0
@@ -1178,12 +1276,12 @@ C1
               +------------ CW (0 = External, 1 = Internal)
 */
 
-KD5TFDVK6APHAUDIO_API void SetCWKeyer(int enable) { 
+KD5TFDVK6APHAUDIO_API void EnableCWKeyer(int enable) { 
 	if ( enable != 0 ) { 
-		set_cw_keyer = 1; 
+		enable_cw_keyer = 1; 
 	} 
 	else { 
-		set_cw_keyer = 0; 
+		enable_cw_keyer = 0; 
 	}	
 	return;
 }
@@ -1249,6 +1347,32 @@ KD5TFDVK6APHAUDIO_API void SetCWSidetoneFreq(int freq) {
 // *************************************************
 // misc functions
 // *************************************************
+KD5TFDVK6APHAUDIO_API void SetCWDash(int bit) { 
+	if ( bit != 0 ) {
+		cw_dash = 2;
+	}
+	else {
+		cw_dash = 0;
+	}
+}
+
+KD5TFDVK6APHAUDIO_API void SetCWDot(int bit) { 
+	if ( bit != 0 ) {
+		cw_dot = 4;
+	}
+	else {
+		cw_dot = 0;
+	}
+}
+
+KD5TFDVK6APHAUDIO_API void SetCWX(int bit) { 
+	if ( bit != 0 ) {
+		cwx = 1;
+	}
+	else {
+		cwx = 0;
+	}
+}
 
 KD5TFDVK6APHAUDIO_API int GetC1Bits(void) { 
 	return C1Mask; 
@@ -1360,7 +1484,6 @@ KD5TFDVK6APHAUDIO_API void SetDiscoveryMode(int bit) {
 		full_discovery = 1;
 	}
 }
-
 
 KD5TFDVK6APHAUDIO_API void SetMercSource(int g) { 
 	MercSource = g; 

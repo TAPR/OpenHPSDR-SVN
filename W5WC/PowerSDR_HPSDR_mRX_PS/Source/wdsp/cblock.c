@@ -72,10 +72,10 @@ void xcbl (CBL a)
 		int i;
 		for (i = 0; i < a->buff_size; i++)
 		{
-			a->dcI = a->mtau * a->dcI + a->onem_mtau * a->in_buff[2 * i + 0];
-			a->dcQ = a->mtau * a->dcQ + a->onem_mtau * a->in_buff[2 * i + 1];
-			a->out_buff[2 * i + 0] = (a->in_buff[2 * i + 0] - a->dcI);
-			a->out_buff[2 * i + 1] = (a->in_buff[2 * i + 1] - a->dcQ);
+			if (fabs(a->dcI = a->mtau * a->dcI + a->onem_mtau * a->in_buff[2 * i + 0]) < 1.0e-100) a->dcI = 0.0;
+			if (fabs(a->dcQ = a->mtau * a->dcQ + a->onem_mtau * a->in_buff[2 * i + 1]) < 1.0e-100) a->dcQ = 0.0;
+			a->out_buff[2 * i + 0] = a->in_buff[2 * i + 0] - a->dcI;
+			a->out_buff[2 * i + 1] = a->in_buff[2 * i + 1] - a->dcQ;
 		}
 	}
 	else if (a->in_buff != a->out_buff)

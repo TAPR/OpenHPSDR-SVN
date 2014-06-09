@@ -464,17 +464,63 @@ namespace PowerSDR
 
         // eer
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAEERRun", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTXAEERRun(int channel, bool run);
+        [DllImport("wdsp.dll", EntryPoint = "create_eerEXT", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void create_eerEXT(int id, int run, int size, int rate, double mgain, double pgain, double mdelay, int amiq);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAEERMgain", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTXAEERMgain(int channel, double gain);
+        [DllImport("wdsp.dll", EntryPoint = "destroy_eerEXT", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void destroy_eerEXT(int id);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAEERPgain", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTXAEERPgain(int channel, double gain);
+        [DllImport("wdsp.dll", EntryPoint = "xeerEXTF", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void xeerEXTF(int id, float* inI, float* inQ, float* outI, float* outQ, float* outM);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAEERPdelay", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTXAEERPdelay(int channel, double delay);
+        [DllImport("wdsp.dll", EntryPoint = "SetEERRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEERRun(int id, bool run);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEERAMIQ", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEERAMIQ(int id, bool amiq);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEERMgain", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEERMgain (int id, double gain);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEERPgain", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEERPgain(int id, double gain);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEERMdelay", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEERMdelay(int id, double delay);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEERSize", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEERSize(int id, int size);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEERSamplerate", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEERSamplerate(int id, int rate);
+
+        // apf
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXASPCWRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXASPCWRun(int channel, bool run);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXASPCWFreq", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXASPCWFreq(int channel, double freq);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXASPCWBandwidth", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXASPCWBandwidth(int channel, double bw);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXASPCWGain", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXASPCWGain(int channel, double gain);
+
+        // dolly filter
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAmpeakRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXAmpeakRun(int channel, bool run);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAmpeakFilFreq", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXAmpeakFilFreq(int channel, int fil, double freq);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAmpeakFilBw", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXAmpeakFilBw(int channel, int fil, double bw);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAmpeakFilGain", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXAmpeakFilGain(int channel, int fil, double gain);
 
         #endregion
 

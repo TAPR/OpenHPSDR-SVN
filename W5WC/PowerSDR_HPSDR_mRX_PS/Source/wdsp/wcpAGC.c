@@ -179,7 +179,7 @@ void xwcpagc (WCPAGC a)
 			a->fast_backaverage = a->fast_backmult * a->abs_out_sample + a->onemfast_backmult * a->fast_backaverage;
 			a->hang_backaverage = a->hang_backmult * a->abs_out_sample + a->onemhang_backmult * a->hang_backaverage;
 
-			if ((a->abs_out_sample >= a->ring_max) && (a->abs_out_sample > 0))
+			if ((a->abs_out_sample >= a->ring_max) && (a->abs_out_sample > 0.0))
 			{
 				a->ring_max = 0.0;
 				k = a->out_index;

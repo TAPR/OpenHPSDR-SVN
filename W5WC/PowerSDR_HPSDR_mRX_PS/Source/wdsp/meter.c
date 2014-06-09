@@ -26,7 +26,7 @@ warren@wpratt.com
 
 #include "comm.h"
 
-METER create_meter (int run, int* prun, int size, double* buff, int rate, double tau_av, double tau_decay, double* result, int enum_av, int enum_pk, int enum_gain, double* pgain)
+METER create_meter (int run, int* prun, int size, double* buff, int rate, double tau_av, double tau_decay, double* result, CRITICAL_SECTION** pmtupdate, int enum_av, int enum_pk, int enum_gain, double* pgain)
 {
 	METER a = (METER) malloc0 (sizeof (meter));
 	a->run = run;
@@ -43,12 +43,17 @@ METER create_meter (int run, int* prun, int size, double* buff, int rate, double
 	a->pgain = pgain;
 	a->mult_average = exp (-1.0 / (a->rate * a->tau_average));
 	a->mult_peak = exp (-1.0 / (a->rate * a->tau_peak_decay));
+	InitializeCriticalSectionAndSpinCount (&a->mtupdate, 2500);
+	pmtupdate[enum_av]   = &a->mtupdate;
+	pmtupdate[enum_pk]   = &a->mtupdate;
+	pmtupdate[enum_gain] = &a->mtupdate;
 	flush_meter (a);
 	return a;
 }
 
 void destroy_meter (METER a)
 {
+	DeleteCriticalSection (&a->mtupdate);
 	_aligned_free (a);
 }
 
@@ -65,6 +70,7 @@ void flush_meter (METER a)
 void xmeter (METER a)
 {
 	int srun;
+	EnterCriticalSection (&a->mtupdate);
 	if (a->prun != 0)
 		srun = *(a->prun);
 	else
@@ -93,6 +99,7 @@ void xmeter (METER a)
 		if (a->enum_pk   >= 0) a->result[a->enum_pk]   = - 400.0;
 		if (a->enum_gain >= 0) a->result[a->enum_gain] = +   0.0;
 	}
+	LeaveCriticalSection (&a->mtupdate);
 }
 
 /********************************************************************************************************
@@ -105,9 +112,10 @@ PORT
 double GetRXAMeter (int channel, int mt)
 {
 	double val;
-	EnterCriticalSection (&ch[channel].csDSP);
+	CRITICAL_SECTION* a = rxa[channel].pmtupdate[mt];
+	EnterCriticalSection (a);
 	val = rxa[channel].meter[mt];
-	LeaveCriticalSection (&ch[channel].csDSP);
+	LeaveCriticalSection (a);
 	return val;
 }
 
@@ -121,8 +129,9 @@ PORT
 double GetTXAMeter (int channel, int mt)
 {
 	double val;
-	EnterCriticalSection (&ch[channel].csDSP);
+	CRITICAL_SECTION* a = txa[channel].pmtupdate[mt];
+	EnterCriticalSection (a);
 	val = txa[channel].meter[mt];
-	LeaveCriticalSection (&ch[channel].csDSP);
+	LeaveCriticalSection (a);
 	return val;
 }

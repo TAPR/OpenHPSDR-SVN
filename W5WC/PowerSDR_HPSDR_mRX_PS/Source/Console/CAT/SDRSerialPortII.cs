@@ -26,24 +26,22 @@ using System;
 using System.Threading;
 using System.IO.Ports;
 
-using FlexCW;
-
 namespace PowerSDR
 {
-	public class SDRSerialPort
-	{
-		public static event SerialRXEventHandler serial_rx_event;
-		
-		private SerialPort commPort;
+    public class SDRSerialPort
+    {
+        public static event SerialRXEventHandler serial_rx_event;
+
+        private SerialPort commPort;
         public SerialPort BasePort
         {
             get { return commPort; }
         }
 
-        private bool isOpen = false; 
-		private bool bitBangOnly = false; 
+        private bool isOpen = false;
+        private bool bitBangOnly = false;
 
-		//Added 2/14/2008 BT
+        //Added 2/14/2008 BT
         public bool IsOpen
         {
             get { return commPort.IsOpen; }
@@ -58,57 +56,57 @@ namespace PowerSDR
         {
             commPort.Close();
         }
-        
-		public static Parity StringToParity(string s) 
-		{
-			if (s == "none") return Parity.None; 
-			if (s == "odd") return Parity.Odd;
-			if (s == "even") return Parity.Even; 
-			if (s == "space") return Parity.Space; 
-			if (s == "mark") return Parity.Mark; 
-			return Parity.None;  // error -- default to none
-		}
 
-		public static StopBits StringToStopBits(string s) 
-		{
+        public static Parity StringToParity(string s)
+        {
+            if (s == "none") return Parity.None;
+            if (s == "odd") return Parity.Odd;
+            if (s == "even") return Parity.Even;
+            if (s == "space") return Parity.Space;
+            if (s == "mark") return Parity.Mark;
+            return Parity.None;  // error -- default to none
+        }
+
+        public static StopBits StringToStopBits(string s)
+        {
             if (s == "0") return StopBits.None;
-			if (s == "1") return StopBits.One; 
-			if (s == "1.5") return StopBits.OnePointFive; 
-			if (s == "2") return StopBits.Two; 
-			return StopBits.One; // error -- default 
-		}
+            if (s == "1") return StopBits.One;
+            if (s == "1.5") return StopBits.OnePointFive;
+            if (s == "2") return StopBits.Two;
+            return StopBits.One; // error -- default 
+        }
 
-		public SDRSerialPort(int portidx)
-		{
-			commPort = new SerialPort();
-			commPort.Encoding = System.Text.Encoding.ASCII;
-			commPort.RtsEnable = true; // hack for soft rock ptt 
-			commPort.DtrEnable = true; // set dtr off 
+        public SDRSerialPort(int portidx)
+        {
+            commPort = new SerialPort();
+            commPort.Encoding = System.Text.Encoding.ASCII;
+            commPort.RtsEnable = true; // hack for soft rock ptt 
+            commPort.DtrEnable = true; // set dtr off 
             //commPort.ErrorReceived += new SerialErrorReceivedEventHandler(this.SerialErrorReceived);
             commPort.DataReceived += new SerialDataReceivedEventHandler(this.SerialReceivedData);
-			commPort.PinChanged += new SerialPinChangedEventHandler(this.SerialPinChanged);
+            commPort.PinChanged += new SerialPinChangedEventHandler(this.SerialPinChanged);
 
-			commPort.PortName = "COM" + portidx.ToString(); 
+            commPort.PortName = "COM" + portidx.ToString();
 
-			commPort.Parity = Parity.None; 
-			commPort.StopBits = StopBits.One;
-			commPort.DataBits = 8; 
-			commPort.BaudRate = 9600; 
-			commPort.ReadTimeout = 5000;
-			commPort.WriteTimeout = 500;	
-			commPort.ReceivedBytesThreshold = 1;
-		}
-		// set the comm parms ... can only be done if port is not open -- silently fails if port is open (fixme -- add some error checking) 
-		// 
-		public void setCommParms(int baudrate, Parity p, int databits, StopBits stop)  
-		{ 
-			if ( commPort.IsOpen ) return; // bail out if it's already open 
-			
-			commPort.BaudRate = baudrate;
+            commPort.Parity = Parity.None;
+            commPort.StopBits = StopBits.One;
+            commPort.DataBits = 8;
+            commPort.BaudRate = 9600;
+            commPort.ReadTimeout = 5000;
+            commPort.WriteTimeout = 500;
+            commPort.ReceivedBytesThreshold = 1;
+        }
+        // set the comm parms ... can only be done if port is not open -- silently fails if port is open (fixme -- add some error checking) 
+        // 
+        public void setCommParms(int baudrate, Parity p, int databits, StopBits stop)
+        {
+            if (commPort.IsOpen) return; // bail out if it's already open 
+
+            commPort.BaudRate = baudrate;
             commPort.Parity = p;
-            commPort.StopBits = stop;						
-			commPort.DataBits = databits;					
-		}
+            commPort.StopBits = stop;
+            commPort.DataBits = databits;
+        }
 
         public uint put(string s)
         {
@@ -117,71 +115,71 @@ namespace PowerSDR
             return (uint)s.Length; // wjt fixme -- hack -- we don't know if we actually wrote things 			
         }
 
-		public int Create()
-		{
-			return Create(false); 
-		}
+        public int Create()
+        {
+            return Create(false);
+        }
 
-		// create port 
-		public int Create(bool bit_bang_only) 
-		{ 
-			bitBangOnly = bit_bang_only; 
-			if ( isOpen ){ return -1; }
-			commPort.Open();  
-			isOpen = commPort.IsOpen; 			
-			if ( isOpen )
+        // create port 
+        public int Create(bool bit_bang_only)
+        {
+            bitBangOnly = bit_bang_only;
+            if (isOpen) { return -1; }
+            commPort.Open();
+            isOpen = commPort.IsOpen;
+            if (isOpen)
                 return 0; // all is well
-			else
-				return -1;  //error
-		}				  
-				  
-		public void Destroy()
-		{
-			try 
-			{
-				commPort.Close(); 
-			}
-			catch(Exception)
-			{
+            else
+                return -1;  //error
+        }
 
-			}
-			isOpen = false;
-		}
+        public void Destroy()
+        {
+            try
+            {
+                commPort.Close();
+            }
+            catch (Exception)
+            {
 
-		public bool isCTS() 
-		{ 		
-			if ( !isOpen ) return false; // fixme error check 
-			return commPort.CtsHolding; 			
-		}
+            }
+            isOpen = false;
+        }
 
-		public bool isDSR() 
-		{
-			if ( !isOpen ) return false; // fixme error check 
-			return commPort.DsrHolding; 
-			
-		}
-		public bool isRI()
-		{
-			if ( !isOpen ) return false; // fixme error check 
-			return false; 
-		}
+        public bool isCTS()
+        {
+            if (!isOpen) return false; // fixme error check 
+            return commPort.CtsHolding;
+        }
 
-		public bool isRLSD() 
-		{
-			if ( !isOpen ) return false; // fixme error check 
-			return commPort.CDHolding; 
-		}
+        public bool isDSR()
+        {
+            if (!isOpen) return false; // fixme error check 
+            return commPort.DsrHolding;
 
-		public void setDTR(bool v) 
-		{ 
-			if ( !isOpen ) return; 
-			commPort.DtrEnable = v; 
-		}	
+        }
+        public bool isRI()
+        {
+            if (!isOpen) return false; // fixme error check 
+            return false;
+        }
 
-		void SerialErrorReceived(object source, SerialErrorReceivedEventArgs e)
-		{
-			
-		}
+        public bool isRLSD()
+        {
+            if (!isOpen) return false; // fixme error check 
+            return commPort.CDHolding;
+        }
+
+        public void setDTR(bool v)
+        {
+            if (!isOpen) return;
+            commPort.DtrEnable = v;
+        }
+
+        void SerialErrorReceived(object source, SerialErrorReceivedEventArgs e)
+        {
+
+        }
 
         private bool use_for_keyptt = false;
         public bool UseForKeyPTT
@@ -225,13 +223,6 @@ namespace PowerSDR
             set { key_on_rts = value; }
         }
 
-        private static bool reverse_paddles = false;
-        public static bool ReversePaddles
-        {
-            get { return reverse_paddles; }
-            set { reverse_paddles = value; }
-        }
-
         void SerialPinChanged(object source, SerialPinChangedEventArgs e)
         {
             if (!use_for_keyptt && !use_for_paddles) return;
@@ -241,33 +232,27 @@ namespace PowerSDR
                 switch (e.EventType)
                 {
                     case SerialPinChange.DsrChanged:
-                        bool b = commPort.DsrHolding;
 
                         if (ptt_on_dtr)
                         {
-                            CWPTTItem item = new CWPTTItem(b, CWSensorItem.GetCurrentTime());
-                            CWKeyer.PTTEnqueue(item);
+                            CWInput.KeyerPTT = commPort.DsrHolding;
                         }
 
                         if (key_on_dtr)
                         {
-                            CWSensorItem item = new CWSensorItem(CWSensorItem.InputType.StraightKey, b);
-                            CWKeyer.SensorEnqueue(item);
+                            JanusAudio.SetCWX(Convert.ToInt32(commPort.DsrHolding));
                         }
                         break;
                     case SerialPinChange.CtsChanged:
-                        b = commPort.CtsHolding;
 
                         if (ptt_on_rts)
                         {
-                            CWPTTItem item = new CWPTTItem(b, CWSensorItem.GetCurrentTime());
-                            CWKeyer.PTTEnqueue(item);
+                            CWInput.KeyerPTT = commPort.CtsHolding;
                         }
 
                         if (key_on_rts)
                         {
-                            CWSensorItem item = new CWSensorItem(CWSensorItem.InputType.StraightKey, b);
-                            CWKeyer.SensorEnqueue(item);
+                            JanusAudio.SetCWX(Convert.ToInt32(commPort.CtsHolding));
                         }
                         break;
                 }
@@ -277,16 +262,10 @@ namespace PowerSDR
                 switch (e.EventType)
                 {
                     case SerialPinChange.DsrChanged:
-                        CWSensorItem.InputType type = CWSensorItem.InputType.Dot;
-                        if (reverse_paddles) type = CWSensorItem.InputType.Dash;
-                        CWSensorItem item = new CWSensorItem(type, commPort.DsrHolding);
-                        CWKeyer.SensorEnqueue(item);
+                        JanusAudio.SetCWDot(Convert.ToInt32(commPort.DsrHolding));
                         break;
                     case SerialPinChange.CtsChanged:
-                        type = CWSensorItem.InputType.Dash;
-                        if (reverse_paddles) type = CWSensorItem.InputType.Dot;
-                        item = new CWSensorItem(type, commPort.CtsHolding);
-                        CWKeyer.SensorEnqueue(item);
+                        JanusAudio.SetCWDash(Convert.ToInt32(commPort.CtsHolding));
                         break;
                 }
             }
@@ -297,5 +276,5 @@ namespace PowerSDR
             serial_rx_event(this, new SerialRXEvent(commPort.ReadExisting()));
         }
 
-	}
+    }
 }

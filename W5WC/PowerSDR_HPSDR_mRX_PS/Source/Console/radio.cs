@@ -46,7 +46,6 @@ namespace PowerSDR
 		{
 			RadioDSP.CreateDSP();
             Thread.Sleep(100);
-			//DttSP.ReleaseUpdate();
 
 			dsp_rx = new RadioDSPRX[NUM_RX_THREADS][];
 			for(int i=0; i<NUM_RX_THREADS; i++)
@@ -60,12 +59,6 @@ namespace PowerSDR
 			dsp_tx[0] = new RadioDSPTX(1);
 
 			dsp_rx[0][0].Active = true; // enable main RX
-			//dsp_tx[0].Active = true; // enable main TX
-
-			// set for half duplex
-			//DttSP.SetThreadProcessingMode(0,2);
-			//DttSP.SetThreadProcessingMode(1,1);
-            //wdsp.SetChannelState(wdsp.id(0, 0), 1, 0);                        ////////////////////////////////
 		}
 
 		public RadioDSPRX GetDSPRX(int thread, int subrx)
@@ -105,6 +98,7 @@ namespace PowerSDR
             wdsp.OpenChannel(wdsp.id(2, 1), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
             wdsp.OpenChannel(wdsp.id(1, 0), 1024, 4096, 48000, 48000, 48000, 1, 0, 0.010, 0.025, 0.000, 0.010);
             wdsp.create_divEXT(0, 0, 2, 1024);
+            wdsp.create_eerEXT(0, 0, 1024, 48000, 1.0, 1.0, 0.0, 1);
 		}
 
 		public static void DestroyDSP()
@@ -115,6 +109,7 @@ namespace PowerSDR
             wdsp.CloseChannel(wdsp.id(0, 1));
             wdsp.CloseChannel(wdsp.id(0, 0));
             wdsp.destroy_divEXT(0);
+            wdsp.destroy_eerEXT(0);
 		}
 
 		private static double sample_rate = 48000.0;
@@ -124,12 +119,12 @@ namespace PowerSDR
 			set 
 			{
 				sample_rate = value;
-				//DttSP.SetSampleRate(value);
                 wdsp.SetAllRates(wdsp.id(0, 0), (int)value, (int)value, 48000);
                 wdsp.SetAllRates(wdsp.id(0, 1), (int)value, (int)value, 48000);
                 wdsp.SetAllRates(wdsp.id(2, 0), (int)value, (int)value, 48000);
                 wdsp.SetAllRates(wdsp.id(2, 1), (int)value, (int)value, 48000);
                 wdsp.SetAllRates(wdsp.id(1, 0), (int)value, (int)value, 48000);
+                wdsp.SetEERSamplerate(0, 48000);
 			}		
 		}
 
@@ -189,6 +184,7 @@ namespace PowerSDR
             this.NBTau = rx.nb_tau;
             this.NBAdvTime = rx.nb_advtime;
             this.NBHangTime = rx.nb_hangtime;
+            this.NBMode = rx.nb_mode;
             this.RXFixedAGC = rx.rx_fixed_agc;
             this.RXAGCMaxGain = rx.rx_agc_max_gain;
             this.RXAGCAttack = rx.rx_agc_attack;
@@ -223,6 +219,13 @@ namespace PowerSDR
             this.RXPreGenSweepFreq1 = rx.rx_pregen_sweep_freq1;
             this.RXPreGenSweepFreq2 = rx.rx_pregen_sweep_freq2;
             this.RXPreGenSweepRate = rx.rx_pregen_sweep_rate;
+            this.RXAPFRun = rx.rx_apf_run;
+            this.RXAPFFreq = rx.rx_apf_freq;
+            this.RXAPFBw = rx.rx_apf_bw;
+            this.RXAPFGain = rx.rx_apf_gain;
+            this.RXADollyRun = rx.rx_dolly_run;
+            this.RXADollyFreq0 = rx.rx_dolly_freq0;
+            this.RXADollyFreq1 = rx.rx_dolly_freq1;
         }
 
 		private void SyncAll()
@@ -253,6 +256,7 @@ namespace PowerSDR
             NBTau = nb_tau;
             NBAdvTime = nb_advtime;
             NBHangTime = nb_hangtime;
+            NBMode = nb_mode;
 			RXFixedAGC = rx_fixed_agc;
 			RXAGCMaxGain = rx_agc_max_gain;
 			RXAGCAttack = rx_agc_attack;
@@ -286,6 +290,13 @@ namespace PowerSDR
             RXPreGenSweepFreq1 = rx_pregen_sweep_freq1;
             RXPreGenSweepFreq2 = rx_pregen_sweep_freq2;
             RXPreGenSweepRate = rx_pregen_sweep_rate;
+            RXAPFRun = rx_apf_run;
+            RXAPFFreq = rx_apf_freq;
+            RXAPFBw = rx_apf_bw;
+            RXAPFGain = rx_apf_gain;
+            RXADollyRun = rx_dolly_run;
+            RXADollyFreq0 = rx_dolly_freq0;
+            RXADollyFreq1 = rx_dolly_freq1;
 
             // for (uint i = 0; i < 9; i++)
             //     SetNotchOn(i, notch_on[i]);
@@ -655,17 +666,23 @@ namespace PowerSDR
 					{
                         if (thread == 0 && subrx == 0)
                             for (int i = 0; i < 3; i++)
+                            {
                                 SpecHPSDRDLL.SetEXTANBThreshold(i, value);
+                                SpecHPSDRDLL.SetEXTNOBThreshold(i, value);
+                            }
                         else if (thread == 2 && subrx == 0)
+                        {
                             SpecHPSDRDLL.SetEXTANBThreshold(3, value);
+                            SpecHPSDRDLL.SetEXTNOBThreshold(3, value);
+                        }
 						nb_threshold_dsp = value;
 					}
 				}
 			}
 		}
 
-        private double nb_tau_dsp = 0.0001;
-        private double nb_tau = 0.0001;
+        private double nb_tau_dsp = 0.00005;
+        private double nb_tau = 0.00005;
         public double NBTau
         {
             get { return nb_tau; }
@@ -678,17 +695,23 @@ namespace PowerSDR
                     {
                         if (thread == 0 && subrx == 0)
                             for (int i = 0; i < 3; i++)
+                            {
                                 SpecHPSDRDLL.SetEXTANBTau(i, value);
+                                SpecHPSDRDLL.SetEXTNOBTau(i, value);
+                            }
                         else if (thread == 2 && subrx == 0)
+                        {
                             SpecHPSDRDLL.SetEXTANBTau(3, value);
+                            SpecHPSDRDLL.SetEXTNOBTau(3, value);
+                        }
                         nb_tau_dsp = value;
                     }
                 }
             }
         }
 
-        private double nb_advtime_dsp = 0.0001;
-        private double nb_advtime = 0.0001;
+        private double nb_advtime_dsp = 0.00005;
+        private double nb_advtime = 0.00005;
         public double NBAdvTime
         {
             get { return nb_advtime; }
@@ -701,17 +724,23 @@ namespace PowerSDR
                     {
                         if (thread == 0 && subrx == 0)
                             for (int i = 0; i < 3; i++)
+                            {
                                 SpecHPSDRDLL.SetEXTANBAdvtime(i, value);
+                                SpecHPSDRDLL.SetEXTNOBAdvtime(i, value);
+                            }
                         else if (thread == 2 && subrx == 0)
+                        {
                             SpecHPSDRDLL.SetEXTANBAdvtime(3, value);
+                            SpecHPSDRDLL.SetEXTNOBAdvtime(3, value);
+                        }
                         nb_advtime_dsp = value;
                     }
                 }
             }
         }
 
-        private double nb_hangtime_dsp = 0.0001;
-        private double nb_hangtime = 0.0001;
+        private double nb_hangtime_dsp = 0.00005;
+        private double nb_hangtime = 0.00005;
         public double NBHangTime
         {
             get { return nb_hangtime; }
@@ -724,10 +753,39 @@ namespace PowerSDR
                     {
                         if (thread == 0 && subrx == 0)
                             for (int i = 0; i < 3; i++)
+                            {
                                 SpecHPSDRDLL.SetEXTANBHangtime(i, value);
+                                SpecHPSDRDLL.SetEXTNOBHangtime(i, value);
+                            }
                         else if (thread == 2 && subrx == 0)
+                        {
                             SpecHPSDRDLL.SetEXTANBHangtime(3, value);
+                            SpecHPSDRDLL.SetEXTNOBHangtime(3, value);
+                        }
                         nb_hangtime_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int nb_mode_dsp = 0;
+        private int nb_mode = 0;
+        public int NBMode
+        {
+            get { return nb_mode; }
+            set
+            {
+                nb_mode = value;
+                if (update)
+                {
+                    if (value != nb_mode_dsp || force)
+                    {
+                        if (thread == 0 && subrx == 0)
+                            for (int i = 0; i < 3; i++)
+                                SpecHPSDRDLL.SetEXTNOBMode(i, value);
+                        else if (thread == 2 && subrx == 0)
+                            SpecHPSDRDLL.SetEXTNOBMode(3, value);
+                        nb_mode_dsp = value;
                     }
                 }
             }
@@ -1448,6 +1506,139 @@ namespace PowerSDR
             }
         }
 
+        private bool rx_apf_run_dsp = false;
+        private bool rx_apf_run = false;
+        public bool RXAPFRun
+        {
+            get { return rx_apf_run; }
+            set
+            {
+                rx_apf_run = value;
+                if (update)
+                {
+                    if (value != rx_apf_run_dsp || force)
+                    {
+                        wdsp.SetRXASPCWRun(wdsp.id(thread, subrx), value);
+                        rx_apf_run_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double rx_apf_freq_dsp = 600.0;
+        private double rx_apf_freq = 600.0;
+        public double RXAPFFreq
+        {
+            get { return rx_apf_freq; }
+            set
+            {
+                rx_apf_freq = value;
+                if (update)
+                {
+                    if (value != rx_apf_freq_dsp || force)
+                    {
+                        wdsp.SetRXASPCWFreq(wdsp.id(thread, subrx), value);
+                        rx_apf_freq_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double rx_apf_bw_dsp = 600.0;
+        private double rx_apf_bw = 600.0;
+        public double RXAPFBw
+        {
+            get { return rx_apf_bw; }
+            set
+            {
+                rx_apf_bw = value;
+                if (update)
+                {
+                    if (value != rx_apf_bw_dsp || force)
+                    {
+                        wdsp.SetRXASPCWBandwidth(wdsp.id(thread, subrx), value);
+                        rx_apf_bw_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double rx_apf_gain_dsp = 1.0;
+        private double rx_apf_gain = 1.0;
+        public double RXAPFGain
+        {
+            get { return rx_apf_gain; }
+            set
+            {
+                rx_apf_gain = value;
+                if (update)
+                {
+                    if (value != rx_apf_gain_dsp || force)
+                    {
+                        wdsp.SetRXASPCWGain(wdsp.id(thread, subrx), value);
+                        rx_apf_gain_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private bool rx_dolly_run_dsp = false;
+        private bool rx_dolly_run = false;
+        public bool RXADollyRun
+        {
+            get { return rx_dolly_run; }
+            set
+            {
+                rx_dolly_run = value;
+                if (update)
+                {
+                    if (value != rx_dolly_run_dsp || force)
+                    {
+                        wdsp.SetRXAmpeakRun(wdsp.id(thread, subrx), value);
+                        rx_dolly_run_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double rx_dolly_freq0_dsp = 2125.0;
+        private double rx_dolly_freq0 = 2125.0;
+        public double RXADollyFreq0
+        {
+            get { return rx_dolly_freq0; }
+            set
+            {
+                rx_dolly_freq0 = value;
+                if (update)
+                {
+                    if (value != rx_dolly_freq0_dsp || force)
+                    {
+                        wdsp.SetRXAmpeakFilFreq(wdsp.id(thread, subrx), 0, value);
+                        rx_dolly_freq0_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double rx_dolly_freq1_dsp = 2295.0;
+        private double rx_dolly_freq1 = 2295.0;
+        public double RXADollyFreq1
+        {
+            get { return rx_dolly_freq1; }
+            set
+            {
+                rx_dolly_freq1 = value;
+                if (update)
+                {
+                    if (value != rx_dolly_freq1_dsp || force)
+                    {
+                        wdsp.SetRXAmpeakFilFreq(wdsp.id(thread, subrx), 1, value);
+                        rx_dolly_freq1_dsp = value;
+                    }
+                }
+            }
+        }
+
 		#endregion
 	}
 
@@ -1506,9 +1697,11 @@ namespace PowerSDR
             CTCSSFlag = ctcss_flag;
             TXFMEmphOn = tx_fm_emph_on;
             TXEERModeRun = tx_eer_mode_run;
+            TXEERModeAMIQ = tx_eer_mode_am_iq;
             TXEERModeMgain = tx_eer_mode_mgain;
             TXEERModePgain = tx_eer_mode_pgain;
-            TXEERModePdelay = tx_eer_mode_pdelay;
+            TXEERModeMdelay = tx_eer_mode_mdelay;
+            // TXEERModeSamplerate = tx_eer_mode_samplerate;
             TXBandpassWindow = tx_bandpass_window;
             TXPreGenRun = tx_pregen_run;
             TXPreGenMode = tx_pregen_mode;
@@ -2201,8 +2394,28 @@ namespace PowerSDR
                 {
                     if (value != tx_eer_mode_run_dsp || force)
                     {
-                        wdsp.SetTXAEERRun(wdsp.id(1, 0), value);
+                        wdsp.SetEERRun(0, value);
                         tx_eer_mode_run_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private bool tx_eer_mode_am_iq_dsp = true;
+        private bool tx_eer_mode_am_iq = true;
+        public bool TXEERModeAMIQ
+        {
+            get { return tx_eer_mode_am_iq; }
+            set
+            {
+                tx_eer_mode_am_iq = value;
+
+                if (update)
+                {
+                    if (value != tx_eer_mode_am_iq_dsp || force)
+                    {
+                        wdsp.SetEERAMIQ(0, value);
+                        tx_eer_mode_am_iq_dsp = value;
                     }
                 }
             }
@@ -2221,7 +2434,7 @@ namespace PowerSDR
                 {
                     if (value != tx_eer_mode_mgain_dsp || force)
                     {
-                        wdsp.SetTXAEERMgain(wdsp.id(1, 0), value);
+                        wdsp.SetEERMgain(0, value);
                         tx_eer_mode_mgain_dsp = value;
                     }
                 }
@@ -2241,28 +2454,48 @@ namespace PowerSDR
                 {
                     if (value != tx_eer_mode_pgain_dsp || force)
                     {
-                        wdsp.SetTXAEERPgain(wdsp.id(1, 0), value);
+                        wdsp.SetEERPgain(0, value);
                         tx_eer_mode_pgain_dsp = value;
                     }
                 }
             }
         }
 
-        private double tx_eer_mode_pdelay_dsp = 1.0e-05;
-        private double tx_eer_mode_pdelay = 1.0e-05;
-        public double TXEERModePdelay
+        private double tx_eer_mode_mdelay_dsp = 1.0e-04;
+        private double tx_eer_mode_mdelay = 1.0e-04;
+        public double TXEERModeMdelay
         {
-            get { return tx_eer_mode_pdelay; }
+            get { return tx_eer_mode_mdelay; }
             set
             {
-                tx_eer_mode_pdelay = value;
+                tx_eer_mode_mdelay = value;
 
                 if (update)
                 {
-                    if (value != tx_eer_mode_pdelay_dsp || force)
+                    if (value != tx_eer_mode_mdelay_dsp || force)
                     {
-                        wdsp.SetTXAEERPdelay(wdsp.id(1, 0), value);
-                        tx_eer_mode_pdelay_dsp = value;
+                        wdsp.SetEERMdelay(0, value);
+                        tx_eer_mode_mdelay_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int tx_eer_mode_samplerate_dsp = 48000;
+        private int tx_eer_mode_samplerate = 48000;
+        public int TXEERModeSamplerate
+        {
+            get { return tx_eer_mode_samplerate; }
+            set
+            {
+                tx_eer_mode_samplerate = value;
+
+                if (update)
+                {
+                    if (value != tx_eer_mode_samplerate_dsp || force)
+                    {
+                        wdsp.SetEERSamplerate(0, value);
+                        tx_eer_mode_samplerate_dsp = value;
                     }
                 }
             }

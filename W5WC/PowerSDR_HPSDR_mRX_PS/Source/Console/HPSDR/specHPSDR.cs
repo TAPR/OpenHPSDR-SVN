@@ -105,9 +105,15 @@ namespace PowerSDR
                 if (update) initAnalyzer();
                 if (disp == 0)
                     for (int i = 0; i < 3; i++)
+                    {
                         SpecHPSDRDLL.SetEXTANBBuffsize(i, blocksize);
+                        SpecHPSDRDLL.SetEXTNOBBuffsize(i, blocksize);
+                    }
                 if (disp == 1)
+                {
                     SpecHPSDRDLL.SetEXTANBBuffsize(3, blocksize);
+                    SpecHPSDRDLL.SetEXTNOBBuffsize(3, blocksize);
+                }
 
             }
         }
@@ -329,9 +335,15 @@ namespace PowerSDR
                 if (update) initAnalyzer();
                 if (disp == 0)
                     for (int i = 0; i < 3; i++)
+                    {
                         SpecHPSDRDLL.SetEXTANBSamplerate(i, sample_rate);
+                        SpecHPSDRDLL.SetEXTNOBSamplerate(i, sample_rate);
+                    }
                 if (disp == 1)
+                {
                     SpecHPSDRDLL.SetEXTANBSamplerate(3, sample_rate);
+                    SpecHPSDRDLL.SetEXTNOBSamplerate(3, sample_rate);
+                }
             }
         }
 
@@ -340,6 +352,13 @@ namespace PowerSDR
         {
             get { return nb_on; }
             set { nb_on = value; }
+        }
+
+        private bool nb2_on = false;
+        public bool NB2On
+        {
+            get { return nb2_on; }
+            set { nb2_on = value; }
         }
 
         const double KEEP_TIME = 0.1;
@@ -561,39 +580,83 @@ namespace PowerSDR
     unsafe class SpecHPSDRDLL
     {
         #region DLL Method Declarations
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetAnalyzer(int disp, int n_fft, int type, IntPtr flp, int sz, int buff_size, int win_type, double pi, int ovrlp, int clp,
             int fsclipL, int fsclipH, int n_pix, int n_stch, int av_mode, int n_av, double avb, int cal_set, double fmin, double fmax, int max_w);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void XCreateAnalyzer(int disp, ref int success, int m_size, int m_LO, int m_stitch, string app_data_path);
         // public static extern void XCreateAnalyzer(int disp, ref int success, int m_size, int m_LO, int m_stitch);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void DestroyAnalyzer(int disp);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetPixels(int disp, IntPtr pix, ref int flag);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetNAPixels(int disp, IntPtr pix, ref int flag);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetPixels(int disp, float* pix, ref int flag);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetNAPixels(int disp, float* pix, ref int flag);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Spectrum(int disp, int ss, int LO, float* pI, float* pQ);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetCalibration(int disp, int set, int points, IntPtr cal);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SnapSpectrum(int disp, int ss, int LO, double* snap_buff);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void create_nobEXT(
+            int id,
+            int run,
+            int mode,
+            int buffsize,
+            double samplerate,
+            double tau,
+            double hangtime,
+            double advtime,
+            double backtau,
+            double threshold
+            );
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void destroy_nobEXT(int id);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void xnobEXTF(int id, float* I, float* Q);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTNOBBuffsize(int id, int size);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTNOBSamplerate(int id, int rate);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTNOBTau(int id, double tau);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTNOBHangtime(int id, double time);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTNOBAdvtime(int id, double time);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTNOBBacktau(int id, double tau);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTNOBThreshold(int id, double thresh);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEXTNOBMode(int id, int mode);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void create_anbEXT(
             int id,
             int run,
@@ -606,31 +669,31 @@ namespace PowerSDR
             double threshold
             );
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void destroy_anbEXT(int id);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void xanbEXTF(int id, float* I, float* Q);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEXTANBBuffsize(int id, int size);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEXTANBSamplerate(int id, int rate);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEXTANBTau(int id, double tau);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEXTANBHangtime(int id, double time);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEXTANBAdvtime(int id, double time);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEXTANBBacktau(int id, double tau);
 
-        [DllImport("wdsp.dll")]
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEXTANBThreshold(int id, double thresh);
 
         #endregion

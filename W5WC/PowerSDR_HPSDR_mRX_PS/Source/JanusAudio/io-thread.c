@@ -1496,11 +1496,11 @@ void IOThreadMainLoop(void) {
 					case 13: //RX7 VFO
 						FPGAWriteBufp[writebufpos] |= 0x10;
 						break;
-					case 24: // ADC assignments
-						FPGAWriteBufp[writebufpos] |= 0x1c;
+					case 24: // ADC assignments & ADC Tx ATT
+						FPGAWriteBufp[writebufpos] |= 0x1c; //C0 0001 110x
 						break;
 				    case 26: // CW
-						FPGAWriteBufp[writebufpos] |= 0x1e;
+						FPGAWriteBufp[writebufpos] |= 0x1e; //C0 0001 111x
 						break;
 				    case 28: // CW
 						FPGAWriteBufp[writebufpos] |= 0x20;
@@ -1546,7 +1546,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] =  (VFOfreq_rx4 >> 24) & 0xff; // RX4
 						break;
 					case 6:
-						if (HermesPowerEnabled) { 															     
+						if (HermesPowerEnabled || enable_cw_keyer) { 															     
 							if (swr_protect == 0.0f) swr_protect = 0.3f;
 							pf = (unsigned char) (OutputPowerFactor * swr_protect);
 							FPGAWriteBufp[writebufpos] = (unsigned char) (pf & 0xff); //(OutputPowerFactor & 0xff);
@@ -1558,7 +1558,7 @@ void IOThreadMainLoop(void) {
 						} 
 						break;
 					case 7:					
-						    FPGAWriteBufp[writebufpos] = ( RX2Preamp | RX1Preamp | MicTR | MicBias) & 0x3f; 					
+						    FPGAWriteBufp[writebufpos] = ( RX2Preamp | RX1Preamp | MicTipRing | MicBias | MicPTT) & 0x7f; 					
 						   // FPGAWriteBufp[writebufpos] = ( MicTR | MicBias ) & 0x30; 
 						// printf(" pamp1: %d pamp2: %d\n", RX1Preamp, RX2Preamp);
 						break;
@@ -1584,10 +1584,10 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] =  (VFOfreq_rx7 >> 24) & 0xff; // RX7
 						break;
 					case 24: // ADC
-						FPGAWriteBufp[writebufpos] = 0;
+						FPGAWriteBufp[writebufpos] =  ADC_cntrl1 & 0xff;   //RX1, RX2, RX3, and RX4 ADC assignments;
 						break;
 				    case 26:
-						FPGAWriteBufp[writebufpos] = set_cw_keyer & 0x01;
+						FPGAWriteBufp[writebufpos] = enable_cw_keyer & 0x01;
 						break;
 				    case 28:
 						FPGAWriteBufp[writebufpos] =  (cw_hang_time >> 2) & 0xff;
@@ -1636,10 +1636,10 @@ void IOThreadMainLoop(void) {
 							ApolloTuner | ApolloATU | HermesFilt | AlexManEnable) & 0x7f;
 						break;																 
 					case 7:
-						FPGAWriteBufp[writebufpos] = LineBoost & 0x1f; 
+						FPGAWriteBufp[writebufpos] = (LineBoost | PennyPresent) & 0x9f; 
 						break;
 					case 8:
-						FPGAWriteBufp[writebufpos] = (enable_ADC3_step_att | adc3_step_att_data) & 0x3f;
+						FPGAWriteBufp[writebufpos] = (enable_ADC3_step_att | adc3_step_att_data | reverse_paddles) & 0x7f;
 						break;
 					case 9:
 						FPGAWriteBufp[writebufpos] = Alex3HPFMask & 0x7f;
@@ -1657,7 +1657,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = (VFOfreq_rx7 >> 16) & 0xff; // RX7 freq
 						break;
 					case 24: // ADC
-						FPGAWriteBufp[writebufpos] = 0;
+						FPGAWriteBufp[writebufpos] = ADC_cntrl2 & 0x3f;  //RX5, RX6, RX7 ADC assignments;
 						break;
 				    case 26:
 						FPGAWriteBufp[writebufpos] =  cw_sidetone_volume & 0xff;
@@ -1711,7 +1711,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = (UserOut0 | UserOut1 | UserOut2 | UserOut3) & 0x0f;
 						break;
 					case 8:
-						FPGAWriteBufp[writebufpos] = 0;//Alex2LPFMask & 0x7f;
+						FPGAWriteBufp[writebufpos] = (cw_speed | cw_mode) & 0xff;
 						break;
 					case 9:
 						FPGAWriteBufp[writebufpos] = Alex3LPFMask & 0x7f;
@@ -1729,7 +1729,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = (VFOfreq_rx7 >> 8) & 0xff;
 						break;
 					case 24: // ADC
-						FPGAWriteBufp[writebufpos] = 0;
+						FPGAWriteBufp[writebufpos] = tx_att_data & 0x1f;
 						break;
 				    case 26:
 						FPGAWriteBufp[writebufpos] =  cw_ptt_delay & 0xff;
@@ -1784,7 +1784,7 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = (enable_ADC1_step_att | adc1_step_att_data) & 0x3f;
 						break;
 					case 8:
-						FPGAWriteBufp[writebufpos] = 0;
+						FPGAWriteBufp[writebufpos] = (cw_weight | enable_cw_spacing) & 0xff;
 						break;
 					case 9:
 						FPGAWriteBufp[writebufpos] = 0;
@@ -1954,7 +1954,12 @@ void IOThreadMainLoop(void) {
 
 				case OUT_STATE_LEFT_LO_NEEDED:
 					out_state = OUT_STATE_RIGHT_HI_NEEDED;
+					if (enable_cw_keyer) {
+                    FPGAWriteBufp[writebufpos] = (cw_dash | cw_dot | cwx) & 0x07;
+					}
+					else {
 					FPGAWriteBufp[writebufpos] = outbufp[outbufpos];
+					}
 					++outbufpos;
 					break;
 

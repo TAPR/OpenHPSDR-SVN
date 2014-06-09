@@ -26,6 +26,7 @@
 #include "KD5TFD-VK6APH-Audio.h"
 #include "private.h" 
 extern DttSP_EXP void xdivEXTF (int id, int size, float **input, float *Iout, float *Qout);
+extern DttSP_EXP void xeerEXTF (int id, float* inI, float* inQ, float* outI, float* outQ, float* outM, int mox, int size);
 int cb_keep_running; 
 
 // this is the main loop of the callback thread -- basically suck stuff out of the fifo from the io 
@@ -178,7 +179,7 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	default:
 		fprintf(stderr, "Mayday Mayday - bad sample rate in callback-thread.c"); 
 	} 
-
+	xeerEXTF(0, OUTpointer[2], OUTpointer[3], OUTpointer[2], OUTpointer[3], OUTpointer[0], XmitBit, BlockSize/out_sample_incr);
 	for ( i = 0, outidx = 0 ; i < BlockSize; i += out_sample_incr, outidx++ ) { 
 		for (j = 0; j < 4; j++)
 

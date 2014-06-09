@@ -46,6 +46,7 @@ namespace PowerSDR
 		private CheckBoxTS[] rx_only;
 		private NumericUpDownTS[] power;
 		private CheckBoxTS[] xvtr_rf;
+        private CheckBox[] disable_pa;
 
 		private System.Windows.Forms.TextBoxTS txtBandButton0;
 		private System.Windows.Forms.TextBoxTS txtBandButton1;
@@ -236,6 +237,23 @@ namespace PowerSDR
 		private System.Windows.Forms.LabelTS lblRXGain;
 		private System.Windows.Forms.CheckBoxTS chkUseXVTRTUNPWR;
         public CheckBoxTS chkAlexTRRelay;
+        private CheckBoxTS chkDisablePA15;
+        private CheckBoxTS chkDisablePA14;
+        private CheckBoxTS chkDisablePA13;
+        private CheckBoxTS chkDisablePA12;
+        private CheckBoxTS chkDisablePA11;
+        private CheckBoxTS chkDisablePA10;
+        private CheckBoxTS chkDisablePA9;
+        private CheckBoxTS chkDisablePA8;
+        private CheckBoxTS chkDisablePA7;
+        private CheckBoxTS chkDisablePA6;
+        private CheckBoxTS chkDisablePA5;
+        private CheckBoxTS chkDisablePA4;
+        private CheckBoxTS chkDisablePA3;
+        private CheckBoxTS chkDisablePA2;
+        private CheckBoxTS chkDisablePA1;
+        private CheckBoxTS chkDisablePA0;
+        private LabelTS lblDisablePA;
 		private System.ComponentModel.Container components = null;
 
 		#endregion
@@ -489,6 +507,23 @@ namespace PowerSDR
             this.chkEnable0 = new System.Windows.Forms.CheckBoxTS();
             this.lblButtonText = new System.Windows.Forms.LabelTS();
             this.lblBandButton = new System.Windows.Forms.LabelTS();
+            this.chkDisablePA15 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA14 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA13 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA12 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA11 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA10 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA9 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA8 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA7 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA6 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA5 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA4 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA3 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA2 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA1 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA0 = new System.Windows.Forms.CheckBoxTS();
+            this.lblDisablePA = new System.Windows.Forms.LabelTS();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain13)).BeginInit();
@@ -597,6 +632,7 @@ namespace PowerSDR
             this.chkAlexTRRelay.TabIndex = 206;
             this.chkAlexTRRelay.Text = "Disable ANAN PA ";
             this.chkAlexTRRelay.UseVisualStyleBackColor = true;
+            this.chkAlexTRRelay.Visible = false;
             this.chkAlexTRRelay.CheckedChanged += new System.EventHandler(this.chkAlexTRRelay_CheckedChanged);
             // 
             // chkUseXVTRTUNPWR
@@ -4309,9 +4345,179 @@ namespace PowerSDR
             this.lblBandButton.TabIndex = 0;
             this.lblBandButton.Text = "Band Button";
             // 
+            // chkDisablePA15
+            // 
+            this.chkDisablePA15.Enabled = false;
+            this.chkDisablePA15.Image = null;
+            this.chkDisablePA15.Location = new System.Drawing.Point(820, 408);
+            this.chkDisablePA15.Name = "chkDisablePA15";
+            this.chkDisablePA15.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA15.TabIndex = 223;
+            // 
+            // chkDisablePA14
+            // 
+            this.chkDisablePA14.Enabled = false;
+            this.chkDisablePA14.Image = null;
+            this.chkDisablePA14.Location = new System.Drawing.Point(820, 384);
+            this.chkDisablePA14.Name = "chkDisablePA14";
+            this.chkDisablePA14.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA14.TabIndex = 222;
+            // 
+            // chkDisablePA13
+            // 
+            this.chkDisablePA13.Enabled = false;
+            this.chkDisablePA13.Image = null;
+            this.chkDisablePA13.Location = new System.Drawing.Point(820, 360);
+            this.chkDisablePA13.Name = "chkDisablePA13";
+            this.chkDisablePA13.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA13.TabIndex = 220;
+            // 
+            // chkDisablePA12
+            // 
+            this.chkDisablePA12.Enabled = false;
+            this.chkDisablePA12.Image = null;
+            this.chkDisablePA12.Location = new System.Drawing.Point(820, 336);
+            this.chkDisablePA12.Name = "chkDisablePA12";
+            this.chkDisablePA12.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA12.TabIndex = 219;
+            // 
+            // chkDisablePA11
+            // 
+            this.chkDisablePA11.Enabled = false;
+            this.chkDisablePA11.Image = null;
+            this.chkDisablePA11.Location = new System.Drawing.Point(820, 312);
+            this.chkDisablePA11.Name = "chkDisablePA11";
+            this.chkDisablePA11.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA11.TabIndex = 218;
+            // 
+            // chkDisablePA10
+            // 
+            this.chkDisablePA10.Enabled = false;
+            this.chkDisablePA10.Image = null;
+            this.chkDisablePA10.Location = new System.Drawing.Point(820, 288);
+            this.chkDisablePA10.Name = "chkDisablePA10";
+            this.chkDisablePA10.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA10.TabIndex = 217;
+            // 
+            // chkDisablePA9
+            // 
+            this.chkDisablePA9.Enabled = false;
+            this.chkDisablePA9.Image = null;
+            this.chkDisablePA9.Location = new System.Drawing.Point(820, 264);
+            this.chkDisablePA9.Name = "chkDisablePA9";
+            this.chkDisablePA9.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA9.TabIndex = 216;
+            // 
+            // chkDisablePA8
+            // 
+            this.chkDisablePA8.Enabled = false;
+            this.chkDisablePA8.Image = null;
+            this.chkDisablePA8.Location = new System.Drawing.Point(820, 240);
+            this.chkDisablePA8.Name = "chkDisablePA8";
+            this.chkDisablePA8.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA8.TabIndex = 215;
+            // 
+            // chkDisablePA7
+            // 
+            this.chkDisablePA7.Enabled = false;
+            this.chkDisablePA7.Image = null;
+            this.chkDisablePA7.Location = new System.Drawing.Point(820, 216);
+            this.chkDisablePA7.Name = "chkDisablePA7";
+            this.chkDisablePA7.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA7.TabIndex = 214;
+            // 
+            // chkDisablePA6
+            // 
+            this.chkDisablePA6.Enabled = false;
+            this.chkDisablePA6.Image = null;
+            this.chkDisablePA6.Location = new System.Drawing.Point(820, 192);
+            this.chkDisablePA6.Name = "chkDisablePA6";
+            this.chkDisablePA6.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA6.TabIndex = 213;
+            // 
+            // chkDisablePA5
+            // 
+            this.chkDisablePA5.Enabled = false;
+            this.chkDisablePA5.Image = null;
+            this.chkDisablePA5.Location = new System.Drawing.Point(820, 168);
+            this.chkDisablePA5.Name = "chkDisablePA5";
+            this.chkDisablePA5.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA5.TabIndex = 212;
+            // 
+            // chkDisablePA4
+            // 
+            this.chkDisablePA4.Enabled = false;
+            this.chkDisablePA4.Image = null;
+            this.chkDisablePA4.Location = new System.Drawing.Point(820, 144);
+            this.chkDisablePA4.Name = "chkDisablePA4";
+            this.chkDisablePA4.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA4.TabIndex = 211;
+            // 
+            // chkDisablePA3
+            // 
+            this.chkDisablePA3.Enabled = false;
+            this.chkDisablePA3.Image = null;
+            this.chkDisablePA3.Location = new System.Drawing.Point(820, 120);
+            this.chkDisablePA3.Name = "chkDisablePA3";
+            this.chkDisablePA3.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA3.TabIndex = 210;
+            // 
+            // chkDisablePA2
+            // 
+            this.chkDisablePA2.Enabled = false;
+            this.chkDisablePA2.Image = null;
+            this.chkDisablePA2.Location = new System.Drawing.Point(820, 96);
+            this.chkDisablePA2.Name = "chkDisablePA2";
+            this.chkDisablePA2.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA2.TabIndex = 209;
+            // 
+            // chkDisablePA1
+            // 
+            this.chkDisablePA1.Enabled = false;
+            this.chkDisablePA1.Image = null;
+            this.chkDisablePA1.Location = new System.Drawing.Point(820, 72);
+            this.chkDisablePA1.Name = "chkDisablePA1";
+            this.chkDisablePA1.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA1.TabIndex = 208;
+            // 
+            // chkDisablePA0
+            // 
+            this.chkDisablePA0.Enabled = false;
+            this.chkDisablePA0.Image = null;
+            this.chkDisablePA0.Location = new System.Drawing.Point(820, 48);
+            this.chkDisablePA0.Name = "chkDisablePA0";
+            this.chkDisablePA0.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA0.TabIndex = 207;
+            // 
+            // lblDisablePA
+            // 
+            this.lblDisablePA.Image = null;
+            this.lblDisablePA.Location = new System.Drawing.Point(812, 16);
+            this.lblDisablePA.Name = "lblDisablePA";
+            this.lblDisablePA.Size = new System.Drawing.Size(42, 32);
+            this.lblDisablePA.TabIndex = 221;
+            this.lblDisablePA.Text = "Disable PA";
+            // 
             // XVTRForm
             // 
-            this.ClientSize = new System.Drawing.Size(830, 454);
+            this.ClientSize = new System.Drawing.Size(859, 454);
+            this.Controls.Add(this.chkDisablePA15);
+            this.Controls.Add(this.chkDisablePA14);
+            this.Controls.Add(this.chkDisablePA13);
+            this.Controls.Add(this.chkDisablePA12);
+            this.Controls.Add(this.chkDisablePA11);
+            this.Controls.Add(this.chkDisablePA10);
+            this.Controls.Add(this.chkDisablePA9);
+            this.Controls.Add(this.chkDisablePA8);
+            this.Controls.Add(this.chkDisablePA7);
+            this.Controls.Add(this.chkDisablePA6);
+            this.Controls.Add(this.chkDisablePA5);
+            this.Controls.Add(this.chkDisablePA4);
+            this.Controls.Add(this.chkDisablePA3);
+            this.Controls.Add(this.chkDisablePA2);
+            this.Controls.Add(this.chkDisablePA1);
+            this.Controls.Add(this.chkDisablePA0);
+            this.Controls.Add(this.lblDisablePA);
             this.Controls.Add(this.chkAlexTRRelay);
             this.Controls.Add(this.chkUseXVTRTUNPWR);
             this.Controls.Add(this.udRXGain15);
@@ -4505,7 +4711,6 @@ namespace PowerSDR
             this.Name = "XVTRForm";
             this.Text = "XVTR Setup";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.XVTRForm_Closing);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.XVTRForm_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain13)).EndInit();
@@ -4818,6 +5023,24 @@ namespace PowerSDR
 			xvtr_rf[13] = chkXVTRRF13;
 			xvtr_rf[14] = chkXVTRRF14;
 			xvtr_rf[15] = chkXVTRRF15;
+
+            disable_pa = new CheckBoxTS[16];
+            disable_pa[0] = chkDisablePA0;
+            disable_pa[1] = chkDisablePA1;
+            disable_pa[2] = chkDisablePA2;
+            disable_pa[3] = chkDisablePA3;
+            disable_pa[4] = chkDisablePA4;
+            disable_pa[5] = chkDisablePA5;
+            disable_pa[6] = chkDisablePA6;
+            disable_pa[7] = chkDisablePA7;
+            disable_pa[8] = chkDisablePA8;
+            disable_pa[9] = chkDisablePA9;
+            disable_pa[10] = chkDisablePA10;
+            disable_pa[11] = chkDisablePA11;
+            disable_pa[12] = chkDisablePA12;
+            disable_pa[13] = chkDisablePA13;
+            disable_pa[14] = chkDisablePA14;
+            disable_pa[15] = chkDisablePA15;
 		}
 
 		public bool GetEnabled(int index)
@@ -4872,6 +5095,11 @@ namespace PowerSDR
 			return xvtr_rf[index].Checked;
 		}
 
+        public bool GetDisablePA(int index)
+        {
+            return disable_pa[index].Checked;
+        }
+
 		#endregion
 
 		#region Event Handlers
@@ -4897,6 +5125,7 @@ namespace PowerSDR
 			chkRXOnly0.Enabled = b;
 			udPower0.Enabled = b;
 			chkXVTRRF0.Enabled = b;
+            chkDisablePA0.Enabled = b;
 
 			console.SetVHFEnabled(0, b);
 		}
@@ -4913,6 +5142,7 @@ namespace PowerSDR
 			chkRXOnly1.Enabled = b;
 			udPower1.Enabled = b;
 			chkXVTRRF1.Enabled = b;
+            chkDisablePA1.Enabled = b;
 
 			console.SetVHFEnabled(1, b);
 		}
@@ -4930,6 +5160,7 @@ namespace PowerSDR
 			chkRXOnly2.Enabled = b;
 			udPower2.Enabled = b;
 			chkXVTRRF2.Enabled = b;
+            chkDisablePA2.Enabled = b;
 
 			console.SetVHFEnabled(2, b);
 		}
@@ -4947,6 +5178,7 @@ namespace PowerSDR
 			chkRXOnly3.Enabled = b;
 			udPower3.Enabled = b;
 			chkXVTRRF3.Enabled = b;
+            chkDisablePA3.Enabled = b;
 
 			console.SetVHFEnabled(3, b);
 		}
@@ -4964,6 +5196,7 @@ namespace PowerSDR
 			chkRXOnly4.Enabled = b;
 			udPower4.Enabled = b;
 			chkXVTRRF4.Enabled = b;
+            chkDisablePA4.Enabled = b;
 
 			console.SetVHFEnabled(4, b);
 		}
@@ -4981,6 +5214,7 @@ namespace PowerSDR
 			chkRXOnly5.Enabled = b;
 			udPower5.Enabled = b;
 			chkXVTRRF5.Enabled = b;
+            chkDisablePA5.Enabled = b;
 
 			console.SetVHFEnabled(5, b);
 		}
@@ -4998,6 +5232,7 @@ namespace PowerSDR
 			chkRXOnly6.Enabled = b;
 			udPower6.Enabled = b;
 			chkXVTRRF6.Enabled = b;
+            chkDisablePA6.Enabled = b;
 
 			console.SetVHFEnabled(6, b);
 		}
@@ -5015,6 +5250,7 @@ namespace PowerSDR
 			chkRXOnly7.Enabled = b;
 			udPower7.Enabled = b;
 			chkXVTRRF7.Enabled = b;
+            chkDisablePA7.Enabled = b;
 
 			console.SetVHFEnabled(7, b);
 		}
@@ -5032,6 +5268,7 @@ namespace PowerSDR
 			chkRXOnly8.Enabled = b;
 			udPower8.Enabled = b;
 			chkXVTRRF8.Enabled = b;
+            chkDisablePA8.Enabled = b;
 
 			console.SetVHFEnabled(8, b);
 		}
@@ -5049,6 +5286,7 @@ namespace PowerSDR
 			chkRXOnly9.Enabled = b;
 			udPower9.Enabled = b;
 			chkXVTRRF9.Enabled = b;
+            chkDisablePA9.Enabled = b;
 
 			console.SetVHFEnabled(9, b);
 		}
@@ -5066,6 +5304,7 @@ namespace PowerSDR
 			chkRXOnly10.Enabled = b;
 			udPower10.Enabled = b;
 			chkXVTRRF10.Enabled = b;
+            chkDisablePA10.Enabled = b;
 
 			console.SetVHFEnabled(10, b);
 		}
@@ -5083,6 +5322,7 @@ namespace PowerSDR
 			chkRXOnly11.Enabled = b;
 			udPower11.Enabled = b;
 			chkXVTRRF11.Enabled = b;
+            chkDisablePA11.Enabled = b;
 
 			console.SetVHFEnabled(11, b);
 		}
@@ -5100,6 +5340,7 @@ namespace PowerSDR
 			chkRXOnly12.Enabled = b;
 			udPower12.Enabled = b;
 			chkXVTRRF12.Enabled = b;
+            chkDisablePA12.Enabled = b;
 
 			console.SetVHFEnabled(12, b);
 		}
@@ -5117,6 +5358,7 @@ namespace PowerSDR
 			chkRXOnly13.Enabled = b;
 			udPower13.Enabled = b;
 			chkXVTRRF13.Enabled = b;
+            chkDisablePA13.Enabled = b;
 
 			console.SetVHFEnabled(13, b);
 		}
@@ -5134,6 +5376,7 @@ namespace PowerSDR
 			chkRXOnly14.Enabled = b;
 			udPower14.Enabled = b;
 			chkXVTRRF14.Enabled = b;
+            chkDisablePA14.Enabled = b;
 		}
 
 		private void chkEnable15_CheckedChanged(object sender, System.EventArgs e)
@@ -5149,6 +5392,7 @@ namespace PowerSDR
 			chkRXOnly15.Enabled = b;
 			udPower15.Enabled = b;
 			chkXVTRRF15.Enabled = b;
+            chkDisablePA15.Enabled = b;
 		}
 
 		#endregion 
@@ -5211,7 +5455,7 @@ namespace PowerSDR
 
         private void chkAlexTRRelay_CheckedChanged(object sender, EventArgs e)
         {
-            console.AlexTRRelay = chkAlexTRRelay.Checked;
+          //  console.VHFTRRelay = chkAlexTRRelay.Checked;
         }
 
         public bool AlexTRRelay
@@ -5229,19 +5473,7 @@ namespace PowerSDR
 
         private void XVTRForm_Paint(object sender, PaintEventArgs e)
         {
-            if (console.CurrentHPSDRModel == HPSDRModel.ANAN10 ||
-                console.CurrentHPSDRModel == HPSDRModel.ANAN100 ||
-                console.CurrentHPSDRModel == HPSDRModel.ANAN100D)
-            {
-                chkAlexTRRelay.Visible = true;
-                chkAlexTRRelay.Enabled = true;
-            }
-            else
-            {
-                chkAlexTRRelay.Visible = false;
-                chkAlexTRRelay.Enabled = false;
-                chkAlexTRRelay.Checked = false;
-            }
+
         }
 
         private void udPower_ValueChanged(object sender, EventArgs e)

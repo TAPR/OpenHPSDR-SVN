@@ -4750,9 +4750,9 @@ namespace PowerSDR
         //Reads the radio serial number
         public string ZZSN()
         {
-            string ret_val = "";
-                     parser.Verbose_Error_Code = 7;
-                    ret_val = parser.Error1;
+            string ret_val = console.SetupForm.SerialNumber;
+                    // parser.Verbose_Error_Code = 7;
+                   // ret_val = parser.Error1;
 
             return ret_val;
         }
