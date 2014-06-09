@@ -71,6 +71,7 @@ void create_rxa (int channel)
 		0.100,											// averaging time constant
 		0.100,											// peak decay time constant
 		rxa[channel].meter,								// result vector
+		rxa[channel].pmtupdate,							// locks for meter access
 		RXA_ADC_AV,										// index for average value
 		RXA_ADC_PK,										// index for peak value
 		-1,												// index for gain value
@@ -110,6 +111,7 @@ void create_rxa (int channel)
 		0.100,											// averaging time constant
 		0.100,											// peak decay time constant
 		rxa[channel].meter,								// result vector
+		rxa[channel].pmtupdate,							// locks for meter access
 		RXA_S_AV,										// index for average value
 		RXA_S_PK,										// index for peak value
 		-1,												// index for gain value
@@ -281,6 +283,7 @@ void create_rxa (int channel)
 		0.100,											// averaging time constant
 		0.100,											// peak decay time constant
 		rxa[channel].meter,								// result vector
+		rxa[channel].pmtupdate,							// locks for meter access
 		RXA_AGC_AV,										// index for average value
 		RXA_AGC_PK,										// index for peak value
 		RXA_AGC_GAIN,									// index for gain value
@@ -317,6 +320,39 @@ void create_rxa (int channel)
 		ch[channel].dsp_rate,							// sample rate
 		0.02);											// tau
 
+	// peaking filter
+	rxa[channel].speak.p = create_speak (
+		0,												// run
+		ch[channel].dsp_size,							// buffer size,
+		rxa[channel].midbuff,							// pointer to input buffer
+		rxa[channel].midbuff,							// pointer to output buffer
+		ch[channel].dsp_rate,							// sample rate
+		600.0,											// center frequency
+		100.0,											// bandwidth
+		2.0,											// gain
+		4,												// number of stages
+		1);												// design
+
+	// multiple peak filter
+	{
+		int def_enable[2] = {1, 1};
+		double def_freq[2] = {2125.0, 2295.0};
+		double def_bw[2] = {75.0, 75.0};
+		double def_gain[2] = {1.0, 1.0};
+		rxa[channel].mpeak.p = create_mpeak (
+			0,											// run
+			ch[channel].dsp_size,						// size
+			rxa[channel].midbuff,						// pointer to input buffer
+			rxa[channel].midbuff,						// pointer to output buffer
+			ch[channel].dsp_rate,						// sample rate
+			2,											// number of peaking filters
+			def_enable,									// enable vector
+			def_freq,									// frequency vector
+			def_bw,										// bandwidth vector
+			def_gain,									// gain vector
+			4 );										// number of stages
+	}
+
 	// patchpanel
 	rxa[channel].panel.p = create_panel (
 		channel,										// channel number
@@ -348,6 +384,8 @@ void destroy_rxa (int channel)
 {
 	destroy_resample (rxa[channel].rsmpout.p);
 	destroy_panel (rxa[channel].panel.p);
+	destroy_mpeak (rxa[channel].mpeak.p);
+	destroy_speak (rxa[channel].speak.p);
 	destroy_cbl (rxa[channel].cbl.p);
 	destroy_siphon (rxa[channel].sip1.p);
 	destroy_bandpass (rxa[channel].bp1.p);
@@ -396,6 +434,8 @@ void flush_rxa (int channel)
 	flush_bandpass (rxa[channel].bp1.p);
 	flush_siphon (rxa[channel].sip1.p);
 	flush_cbl (rxa[channel].cbl.p);
+	flush_speak (rxa[channel].speak.p);
+	flush_mpeak (rxa[channel].mpeak.p);
 	flush_panel (rxa[channel].panel.p);
 	flush_resample (rxa[channel].rsmpout.p);
 }
@@ -423,6 +463,8 @@ void xrxa (int channel)
 	xbandpass (rxa[channel].bp1.p);
 	xsiphon (rxa[channel].sip1.p);
 	xcbl (rxa[channel].cbl.p);
+	xspeak (rxa[channel].speak.p);
+	xmpeak (rxa[channel].mpeak.p);
 	xpanel (rxa[channel].panel.p);
 	xamsq (rxa[channel].amsq.p);
 	xresample (rxa[channel].rsmpout.p);

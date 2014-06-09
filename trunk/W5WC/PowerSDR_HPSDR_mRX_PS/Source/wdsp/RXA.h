@@ -63,6 +63,7 @@ struct _rxa
 	double* midbuff;
 	int mode;
 	double meter[RXA_METERTYPE_LAST];
+	CRITICAL_SECTION* pmtupdate[RXA_METERTYPE_LAST];
 	struct
 	{
 		METER p;
@@ -119,6 +120,14 @@ struct _rxa
 	{
 		WCPAGC p;
 	} agc;
+	struct
+	{
+		SPEAK p;
+	} speak;
+	struct
+	{
+		MPEAK p;
+	} mpeak;
 	struct
 	{
 		PANEL p;

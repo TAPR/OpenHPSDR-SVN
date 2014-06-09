@@ -24,6 +24,12 @@ warren@wpratt.com
 
 */
 
+/********************************************************************************************************
+*																										*
+*											Bi-Quad Notch												*
+*																										*
+********************************************************************************************************/
+
 #ifndef _snotch_h
 #define _snotch_h
 
@@ -52,5 +58,81 @@ extern void xsnotch (SNOTCH a);
 extern void SetSNCTCSSFreq (SNOTCH a, double freq);
 
 extern void SetSNCTCSSRun (SNOTCH a, int run);
+
+#endif
+
+/********************************************************************************************************
+*																										*
+*											Complex Bi-Quad Peaking										*
+*																										*
+********************************************************************************************************/
+
+#ifndef _speak_h
+#define _speak_h
+
+typedef struct _speak
+{
+	int run;
+	int size;
+	double* in;
+	double* out;
+	double rate;
+	double f;
+	double bw;
+	double cbw;
+	double gain;
+	double fgain;
+	int nstages;
+	int design;
+	double a0, a1, a2, b1, b2;
+	double *x0, *x1, *x2, *y0, *y1, *y2;
+	CRITICAL_SECTION cs_update;
+} speak, *SPEAK;
+
+extern SPEAK create_speak (int run, int size, double* in, double* out, int rate, double f, double bw, double gain, int nstages, int design);
+
+extern void destroy_speak (SPEAK a);
+
+extern void flush_speak (SPEAK a);
+
+extern void xspeak (SPEAK a);
+
+#endif
+
+/********************************************************************************************************
+*																										*
+*										Complex Multiple Peaking										*
+*																										*
+********************************************************************************************************/
+
+#ifndef _mpeak_h
+#define _mpeak_h
+
+typedef struct _mpeak
+{
+	int run;
+	int size;
+	double* in;
+	double* out;
+	int rate;
+	int npeaks;
+	int* enable;
+	double* f;
+	double* bw;
+	double* gain;
+	int nstages;
+	SPEAK* pfil;
+	double* tmp;
+	double* mix;
+	CRITICAL_SECTION cs_update;
+} mpeak, *MPEAK;
+
+extern MPEAK create_mpeak (int run, int size, double* in, double* out, int rate, int npeaks, int* enable, double* f, double* bw, double* gain, int nstages);
+
+extern void destroy_mpeak (MPEAK a);
+
+extern void flush_mpeak (MPEAK a);
+
+extern void xmpeak (MPEAK a);
 
 #endif

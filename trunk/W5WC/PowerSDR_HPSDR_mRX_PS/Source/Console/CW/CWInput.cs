@@ -108,6 +108,13 @@ namespace PowerSDR
             }
         }
 
+        private static bool keyerptt = false;
+        public static bool KeyerPTT
+        {
+            get { return keyerptt; }
+            set { keyerptt = value; }
+        }
+
         public static bool SetPrimaryInput(string s)
         {
             if (s.ToUpper().StartsWith("COM") && s.Length > 3)

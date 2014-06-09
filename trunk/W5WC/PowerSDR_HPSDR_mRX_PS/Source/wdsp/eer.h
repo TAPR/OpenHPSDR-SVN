@@ -22,6 +22,8 @@ The author can be reached by email at
 
 warren@wpratt.com
 
+NOTE:  THIS FILE IS CURRENTLY EXPERIMENTAL AND WILL CHANGE LATER.
+
 */
 
 #ifndef _eer_h
@@ -30,17 +32,22 @@ warren@wpratt.com
 typedef struct _eer
 {
 	int run;
+	int amiq;
 	int size;
 	double* in;
 	double* out;
+	double* outM;
 	int rate;
 	double mgain;
 	double pgain;
-	double pdelay;
-	DELAY pdel;
+	double mdelay;
+	DELAY mdel;
+	CRITICAL_SECTION cs_update;
+	double *legacy;																										////////////  legacy interface - remove
+	double *legacyM;																									////////////  legacy interface - remove
 } eer, *EER;
 
-extern EER create_eer (int run, int size, double* in, double* out, int rate, double mgain, double pgain, double pdelay);
+extern EER create_eer (int run, int size, double* in, double* out, double* outM, int rate, double mgain, double pgain, double mdelay, int amiq);
 
 extern void destroy_eer (EER a);
 

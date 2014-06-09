@@ -41,8 +41,6 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
-using FlexCW;
-
 namespace PowerSDR
 {
     public class Audio
@@ -172,14 +170,14 @@ namespace PowerSDR
             set { tx_output_signal = value; }
         }
 
-        private static bool record_rx_preprocessed = true;
+        private static bool record_rx_preprocessed = false;
         public static bool RecordRXPreProcessed
         {
             get { return record_rx_preprocessed; }
             set { record_rx_preprocessed = value; }
         }
 
-        private static bool record_tx_preprocessed;
+        private static bool record_tx_preprocessed = true;
         public static bool RecordTXPreProcessed
         {
             get { return record_tx_preprocessed; }
@@ -292,16 +290,11 @@ namespace PowerSDR
             get { return radio_volume; }
             set
             {
-                //Debug.WriteLine("radio_volume: "+value.ToString("f3"));
-                //System.Console.WriteLine("radio_volume: " + value.ToString("f3"));
                 radio_volume = value;
-                if (console.CurrentModel == Model.HERMES || console.PennyLanePresent)
+                if (console.CurrentModel == Model.HERMES || 
+                                            console.PennyLanePresent ||
+                                           (console.PennyPresent && console.CWFWKeyer))
                 {
-                    // float penny_power = 1.0f;
-                    // if (radio_volume < PennylanePowerBreakPoint)
-                    // {
-                    //   penny_power = (float)(radio_volume / PennylanePowerBreakPoint);
-                    // }
                     JanusAudio.SetOutputPower((float)(value * dsp_adjust));
                 }
                 else
@@ -484,13 +477,6 @@ namespace PowerSDR
         {
             get { return rx2_enabled; }
             set { rx2_enabled = value; }
-        }
-
-        private static bool cw_fw_keyer = false;
-        public static bool CWFWKeyer
-        {
-            get { return cw_fw_keyer; }
-            set { cw_fw_keyer = value; }
         }
 
         public static Console console;
@@ -1033,7 +1019,6 @@ namespace PowerSDR
             set 
             { 
                 out_rate = value;
-                CWSynth.SampleRate = value;
                 SetOutCount();
             }
         }
@@ -1053,7 +1038,6 @@ namespace PowerSDR
             set 
             { 
                 out_count = value;
-                CWSynth.SampleRate = out_rate;
             }
         }
 
@@ -2011,6 +1995,11 @@ namespace PowerSDR
                             SpecHPSDRDLL.xanbEXTF(0, rx1_in_l, rx1_in_r);
                         }
 
+                        if (console.specRX.GetSpecRX(0).NB2On)
+                        {
+                            SpecHPSDRDLL.xnobEXTF(0, rx1_in_l, rx1_in_r);
+                        }
+
                         if (console.SpecDisplay)
                         {
                             SpecHPSDRDLL.Spectrum(0, 0, 0, rx1_in_r, rx1_in_l);
@@ -2030,6 +2019,16 @@ namespace PowerSDR
                             SpecHPSDRDLL.xanbEXTF(3, rx2_in_l, rx2_in_r);
                         }
 
+                        if (console.specRX.GetSpecRX(0).NB2On)
+                        {
+                            SpecHPSDRDLL.xnobEXTF(0, rx1_in_l, rx1_in_r);
+                        }
+
+                        if (console.specRX.GetSpecRX(1).NB2On)
+                        {
+                            SpecHPSDRDLL.xnobEXTF(3, rx2_in_l, rx2_in_r);
+                        }
+
                         if (console.SpecDisplay)
                         {
                             SpecHPSDRDLL.Spectrum(0, 0, 0, rx1_in_r, rx1_in_l);
@@ -2040,46 +2039,6 @@ namespace PowerSDR
                         break;
                     }
                 case 4:
-                    {
-                        if (console.specRX.GetSpecRX(0).NBOn)
-                        {
-                            switch (console.StitchedReceivers)
-                            {
-                                case 1:
-                                    SpecHPSDRDLL.xanbEXTF(1, rx1_in_l, rx1_in_r);
-                                    break;
-                                case 3:
-                                    SpecHPSDRDLL.xanbEXTF(0, (float*)array_ptr_input[6], (float*)array_ptr_input[7]); // rx3
-                                    SpecHPSDRDLL.xanbEXTF(1, rx1_in_l, rx1_in_r);
-                                    SpecHPSDRDLL.xanbEXTF(2, (float*)array_ptr_input[8], (float*)array_ptr_input[9]); // rx4
-                                    break;
-                            }
-                        }
-
-                        if (console.specRX.GetSpecRX(1).NBOn)
-                        {
-                            SpecHPSDRDLL.xanbEXTF(3, rx2_in_l, rx2_in_r);
-                        }
-
-                        if (console.SpecDisplay)
-                        {
-                            switch (console.StitchedReceivers)
-                            {
-                                case 1:
-                                    SpecHPSDRDLL.Spectrum(0, 0, 0, rx1_in_r, rx1_in_l);
-                                    break;
-                                case 3:
-                                    SpecHPSDRDLL.Spectrum(0, 0, 0, (float*)array_ptr_input[7], (float*)array_ptr_input[6]); //rx3
-                                    SpecHPSDRDLL.Spectrum(0, 1, 0, rx1_in_r, rx1_in_l);
-                                    SpecHPSDRDLL.Spectrum(0, 2, 0, (float*)array_ptr_input[9], (float*)array_ptr_input[8]); //rx4
-                                    break;
-                            }
-                        }
-
-                        if (console.RX2Enabled)
-                            SpecHPSDRDLL.Spectrum(1, 0, 0, bottom_pan_r, bottom_pan_l);
-                        break;
-                    }
                 case 5:
                     {
                         if (console.specRX.GetSpecRX(0).NBOn)
@@ -2100,6 +2059,26 @@ namespace PowerSDR
                         if (console.specRX.GetSpecRX(1).NBOn)
                         {
                             SpecHPSDRDLL.xanbEXTF(3, rx2_in_l, rx2_in_r);
+                        }
+
+                        if (console.specRX.GetSpecRX(0).NB2On)
+                        {
+                            switch (console.StitchedReceivers)
+                            {
+                                case 1:
+                                    SpecHPSDRDLL.xnobEXTF(0, rx1_in_l, rx1_in_r);
+                                    break;
+                                case 3:
+                                    SpecHPSDRDLL.xnobEXTF(0, (float*)array_ptr_input[6], (float*)array_ptr_input[7]); // rx3
+                                    SpecHPSDRDLL.xnobEXTF(1, rx1_in_l, rx1_in_r);
+                                    SpecHPSDRDLL.xnobEXTF(2, (float*)array_ptr_input[8], (float*)array_ptr_input[9]); // rx4
+                                    break;
+                            }
+                        }
+
+                        if (console.specRX.GetSpecRX(1).NB2On)
+                    {
+                            SpecHPSDRDLL.xnobEXTF(3, rx2_in_l, rx2_in_r);
                         }
 
                         if (console.SpecDisplay)
@@ -2132,25 +2111,13 @@ namespace PowerSDR
             if (localmox && (tx_dsp_mode == DSPMode.CWL || tx_dsp_mode == DSPMode.CWU))
             {
                 dspExchange(ex_input, ex_output, out_count);
-                double time = CWSensorItem.GetCurrentTime();
-                if(cw_fw_keyer)
-                {
-                    ClearBuffer(tx_out_l, frameCount);
-                    ClearBuffer(tx_out_r, frameCount);
-                }
-                else
-                CWSynth.Advance(tx_out_l, tx_out_r, out_count, time);
+                ClearBuffer(tx_out_l, frameCount);
+                ClearBuffer(tx_out_r, frameCount);
             }
             else if (tx_dsp_mode == DSPMode.CWL || tx_dsp_mode == DSPMode.CWU)
             {
-                double time = CWSensorItem.GetCurrentTime();
-                if (cw_fw_keyer)
-                {
-                    ClearBuffer(tx_out_l, frameCount);
-                    ClearBuffer(tx_out_r, frameCount);
-                }
-                else
-                CWSynth.Advance(tx_out_l, tx_out_r, out_count, time);
+                ClearBuffer(tx_out_l, frameCount);
+                ClearBuffer(tx_out_r, frameCount);
                 dspExchange(ex_input, ex_output, out_count);
             }
             else

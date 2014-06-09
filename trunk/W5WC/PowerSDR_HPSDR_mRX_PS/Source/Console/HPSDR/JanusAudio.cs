@@ -163,6 +163,9 @@ namespace PowerSDR
         }
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetPennyPresent(int present);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void EnableHermesPower(int enable);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -393,6 +396,8 @@ namespace PowerSDR
                         case 26:
                         case 27:
                         case 28:
+                        case 29:
+                        case 30:
                             if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 18)) ||
                                 (c != null && c.MercuryPresent && (mercury_ver != 34)))
                             {
@@ -413,10 +418,10 @@ namespace PowerSDR
                         Thread.Sleep(300);
                         mercury2_ver = getMercury2FWVersion();
                     }
-                    if (mercury2_ver > 32) //check if physical rx2 present
-                        c.RX2PreampPresent = true;
-                    else
+                    if (mercury2_ver < 32 || mercury2_ver == 127) //check if physical rx2 present
                         c.RX2PreampPresent = false;
+                    else
+                        c.RX2PreampPresent = true;
 
                     if (c.SetupForm.FirmwareBypass == true) result = true;
 
@@ -532,6 +537,8 @@ namespace PowerSDR
                         }
                         break;
                     case 25:
+                    case 26:
+                    case 27:
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 18)) ||
                            (c != null && c.MercuryPresent && (mercury_ver != 34)))
                         {
@@ -551,7 +558,7 @@ namespace PowerSDR
                     Thread.Sleep(300);
                     mercury2_ver = getMercury2FWVersion();
                 }
-                if (mercury2_ver < 32) //check if physical rx2 present
+                if (mercury2_ver < 32 || mercury2_ver == 127) //check if physical rx2 present
                     c.RX2PreampPresent = false;
                 else
                     c.RX2PreampPresent = true;
@@ -873,7 +880,10 @@ namespace PowerSDR
         unsafe public static extern void SetMercDither(int bits);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMercRandom(int bits);
+        unsafe public static extern void SetMercRandom(int bits);      
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetTxAttenData(int bits);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX1Preamp(int bits);
@@ -900,10 +910,13 @@ namespace PowerSDR
         unsafe public static extern void SetADC3StepAttenData(int bits);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMicTR(int bits);
+        unsafe public static extern void SetMicTipRing(int bits);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetMicBias(int bits);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetMicPTT(int bits);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int getAndResetADC_Overload();
@@ -942,7 +955,7 @@ namespace PowerSDR
         unsafe public static extern int getHermesDCVoltage();
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWKeyer(int enable);
+        unsafe public static extern void EnableCWKeyer(int enable);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetCWSidetoneVolume(int vol);
@@ -955,6 +968,30 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetCWSidetoneFreq(int freq);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWKeyerSpeed(int speed);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWKeyerMode(int mode);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWKeyerWeight(int weight);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void EnableCWKeyerSpacing(int bits);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void ReversePaddles(int bits);
+        
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWDash(int bit);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWDot(int bit);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetCWX(int bit);
 
         // 
         // compute fwd power from Penny based on count returned 
@@ -1094,6 +1131,18 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int GetEP4Data(char* bufp);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetADC_cntrl1(int g);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetADC_cntrl1();
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetADC_cntrl2(int g);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetADC_cntrl2();
 
         // Diversity
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]

@@ -45,9 +45,10 @@ typedef struct _meter
 	double* pgain;
 	double avg;
 	double peak;
+	CRITICAL_SECTION mtupdate;
 } meter, *METER;
 
-extern METER create_meter (int run, int* prun, int size, double* buff, int rate, double tau_av, double tau_decay, double* result, int enum_av, int enum_pk, int enum_gain, double* pgain);
+extern METER create_meter (int run, int* prun, int size, double* buff, int rate, double tau_av, double tau_decay, double* result, CRITICAL_SECTION** pmtupdate, int enum_av, int enum_pk, int enum_gain, double* pgain);
 
 extern void destroy_meter (METER a);
 

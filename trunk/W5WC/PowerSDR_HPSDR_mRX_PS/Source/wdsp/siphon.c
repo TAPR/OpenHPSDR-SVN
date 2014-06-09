@@ -65,12 +65,14 @@ SIPHON create_siphon (int run, int insize, double* in, int sipsize, int fftsize,
 	a->specmode = specmode;
 	a->sipplan = fftw_plan_dft_1d (a->fftsize, (fftw_complex *)a->sipout, (fftw_complex *)a->specout, FFTW_FORWARD, FFTW_PATIENT);
 	a->window  = (double *) malloc0 (a->fftsize * sizeof (complex));
+	InitializeCriticalSectionAndSpinCount(&a->update, 2500);
 	build_window (a);
 	return a;
 }
 
 void destroy_siphon (SIPHON a)
 {
+	DeleteCriticalSection(&a->update);
 	fftw_destroy_plan (a->sipplan);
 	_aligned_free (a->window);
 	_aligned_free (a->specout);
@@ -89,6 +91,7 @@ void flush_siphon (SIPHON a)
 
 void xsiphon (SIPHON a)
 {
+	EnterCriticalSection(&a->update);
 	if (a->run)
 	{
 		if (a->insize >= a->sipsize)
@@ -99,6 +102,7 @@ void xsiphon (SIPHON a)
 			if ((a->idx += a->insize) == a->sipsize) a->idx = 0;
 		}
 	}
+	LeaveCriticalSection(&a->update);
 }
 
 void suck (SIPHON a)
@@ -138,13 +142,12 @@ void sip_spectrum (SIPHON a)
 PORT
 void RXAGetaSipF (int channel, float* out, int size)
 {	// return raw samples as floats
-	SIPHON a;
+	SIPHON a= rxa[channel].sip1.p;
 	int i;
-	EnterCriticalSection (&ch[channel].csDSP);
-	a = rxa[channel].sip1.p;
+	EnterCriticalSection (&a->update);
 	a->outsize = size;
 	suck (a);
-	LeaveCriticalSection (&ch[channel].csDSP);
+	LeaveCriticalSection (&a->update);
 	for (i = 0; i < size; i++)
 	{
 		out[i] = (float)a->sipout[2 * i + 0];
@@ -154,13 +157,12 @@ void RXAGetaSipF (int channel, float* out, int size)
 PORT
 void RXAGetaSipF1 (int channel, float* out, int size)
 {	// return raw samples as floats
-	SIPHON a;
+	SIPHON a= rxa[channel].sip1.p;
 	int i;
-	EnterCriticalSection (&ch[channel].csDSP);
-	a = rxa[channel].sip1.p;
+	EnterCriticalSection (&a->update);
 	a->outsize = size;
 	suck (a);
-	LeaveCriticalSection (&ch[channel].csDSP);
+	LeaveCriticalSection (&a->update);
 	for (i = 0; i < size; i++)
 	{
 		out[2 * i + 0] = (float)a->sipout[2 * i + 0];
@@ -177,13 +179,12 @@ void RXAGetaSipF1 (int channel, float* out, int size)
 PORT
 void TXAGetaSipF (int channel, float* out, int size)
 {	// return raw samples as floats
-	SIPHON a;
+	SIPHON a = txa[channel].sip1.p;
 	int i;
-	EnterCriticalSection (&ch[channel].csDSP);
-	a = txa[channel].sip1.p;
+	EnterCriticalSection (&a->update);
 	a->outsize = size;
 	suck (a);
-	LeaveCriticalSection (&ch[channel].csDSP);
+	LeaveCriticalSection (&a->update);
 	for (i = 0; i < size; i++)
 	{
 		out[i] = (float)a->sipout[2 * i + 0];
@@ -193,13 +194,12 @@ void TXAGetaSipF (int channel, float* out, int size)
 PORT
 void TXAGetaSipF1 (int channel, float* out, int size)
 {	// return raw samples as floats
-	SIPHON a;
+	SIPHON a = txa[channel].sip1.p;
 	int i;
-	EnterCriticalSection (&ch[channel].csDSP);
-	a = txa[channel].sip1.p;
+	EnterCriticalSection (&a->update);
 	a->outsize = size;
 	suck (a);
-	LeaveCriticalSection (&ch[channel].csDSP);
+	LeaveCriticalSection (&a->update);
 	for (i = 0; i < size; i++)
 	{
 		out[2 * i + 0] = (float)a->sipout[2 * i + 0];
@@ -210,13 +210,12 @@ void TXAGetaSipF1 (int channel, float* out, int size)
 PORT
 void TXAGetSpecF1 (int channel, float* out)
 {	// return spectrum magnitudes in dB
-	SIPHON a;
+	SIPHON a = txa[channel].sip1.p;
 	int i, j, mid, m, n;
-	EnterCriticalSection (&ch[channel].csDSP);
-	a = txa[channel].sip1.p;
+	EnterCriticalSection (&a->update);
 	a->outsize = a->fftsize;
 	suck (a);
-	LeaveCriticalSection (&ch[channel].csDSP);
+	LeaveCriticalSection (&a->update);
 	sip_spectrum (a);
 	mid = a->fftsize / 2;
 	if (a->specmode == 0)

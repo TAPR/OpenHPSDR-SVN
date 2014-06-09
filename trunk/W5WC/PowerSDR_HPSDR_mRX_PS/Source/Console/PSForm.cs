@@ -512,16 +512,16 @@ namespace PowerSDR
             switch (model)
             {
                 case HPSDRModel.HERMES:
-                    rxRCVR = 4;
-                    txRCVR = 5;
+                    rxRCVR = 3;
+                    txRCVR = 4;
                     break;
                 case HPSDRModel.ANAN10:
-                    rxRCVR = 4;
-                    txRCVR = 5;
+                    rxRCVR = 3;
+                    txRCVR = 4;
                     break;
                 case HPSDRModel.ANAN100:
-                    rxRCVR = 4;
-                    txRCVR = 5;
+                    rxRCVR = 3;
+                    txRCVR = 4;
                     break;
                 case HPSDRModel.ANAN100D:
                     rxRCVR = 4;
@@ -548,13 +548,13 @@ namespace PowerSDR
             switch (model)
             {
                 case HPSDRModel.HERMES:
-                    newnr = Math.Max(5, nr);
+                    newnr = Math.Max(4, nr);
                     break;
                 case HPSDRModel.ANAN10:
-                    newnr = Math.Max(5, nr);
+                    newnr = Math.Max(4, nr);
                     break;
                 case HPSDRModel.ANAN100:
-                    newnr = Math.Max(5, nr);
+                    newnr = Math.Max(4, nr);
                     break;
                 case HPSDRModel.ANAN100D:
                     newnr = Math.Max(5, nr);

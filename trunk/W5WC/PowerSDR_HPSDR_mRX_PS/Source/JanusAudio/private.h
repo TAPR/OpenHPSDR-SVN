@@ -228,6 +228,8 @@ extern int VFOfreq_rx6;
 extern int VFOfreq_rx7;
 extern int VFOfreq_tx;
 extern int full_discovery;
+extern int ADC_cntrl1;
+extern int ADC_cntrl2;
 
 extern int FPGATestMode;
 
@@ -290,8 +292,9 @@ extern int MercDither;
 extern int MercPreamp;
 extern int RX1Preamp;
 extern int RX2Preamp;
-extern int MicTR;
+extern int MicTipRing;
 extern int MicBias;
+extern int MicPTT;
 extern int Merc3Preamp;
 extern int Merc4Preamp;
 extern int MercRandom;
@@ -301,12 +304,21 @@ extern int enable_ADC3_step_att;
 extern int adc1_step_att_data;
 extern int adc2_step_att_data;
 extern int adc3_step_att_data;
+extern int tx_att_data;
 
-extern int set_cw_keyer;
+extern int enable_cw_keyer;
 extern int cw_sidetone_volume;
 extern int cw_ptt_delay;
 extern int cw_hang_time;
 extern int cw_sidetone_freq;
+extern int cw_speed;
+extern int cw_mode;
+extern int cw_weight;
+extern int enable_cw_spacing;
+extern int reverse_paddles;
+extern int cw_dash;
+extern int cw_dot;
+extern int cwx;
 
 extern int MicBoost;
 extern int LineIn;
@@ -352,6 +364,7 @@ extern int User_I01;
 extern int User_I02;
 extern int User_I03;
 extern int User_I04;
+extern int PennyPresent;
 extern float swr_protect;
 unsigned char pf;
 
