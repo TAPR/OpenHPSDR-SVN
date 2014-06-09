@@ -41,7 +41,7 @@ set_global_assignment -name DEVICE EP3C40Q240C8
 set_global_assignment -name TOP_LEVEL_ENTITY Bootloader
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "9.1 SP2"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:08:58  NOVEMBER 09, 2010"
-set_global_assignment -name LAST_QUARTUS_VERSION "9.1 SP2"
+set_global_assignment -name LAST_QUARTUS_VERSION 13.0
 set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
@@ -177,7 +177,6 @@ set_location_assignment PIN_232 -to SI
 set_location_assignment PIN_231 -to NCONFIG
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -entity OzyII -section_id Top
 set_global_assignment -name MISC_FILE "C:/HPSDR/WIP/OzyII/Verilog/Beta Code/Bootloader/Bootloader.dpf"
-set_global_assignment -name USE_TIMEQUEST_TIMING_ANALYZER OFF
 set_global_assignment -name USE_CONFIGURATION_DEVICE ON
 set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
 set_global_assignment -name STRATIXIII_UPDATE_MODE REMOTE
