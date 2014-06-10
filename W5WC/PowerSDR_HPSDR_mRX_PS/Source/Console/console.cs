@@ -7788,10 +7788,10 @@ namespace PowerSDR
             sio4listen = new SIO4ListenerII(this);
 
             // Keyer = new CWKeyer2(this);			// create new Keyer
-           // CWSensorItem.Init();
+            // CWSensorItem.Init();
             //CWPTT.Init();
             //CWPTT.MoxChanged += new CWPTT.MoxCallback(SetConsoleMox);
-           // CWPTT.MuteChanged += new CWPTT.MuteCallback(SetTRMute);
+            // CWPTT.MuteChanged += new CWPTT.MuteCallback(SetTRMute);
 
             EQForm = new EQForm(this);
 
@@ -16926,7 +16926,7 @@ namespace PowerSDR
                 cw_fw_keyer = value;
                 udCWBreakInDelay_ValueChanged(this, EventArgs.Empty);
                 JanusAudio.EnableCWKeyer(Convert.ToInt32(value));
-                
+
                 if (!initializing)
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             }
@@ -17010,7 +17010,7 @@ namespace PowerSDR
             get { return vhf_tr_relay; }
             set
             {
-                vhf_tr_relay = value;                
+                vhf_tr_relay = value;
             }
         }
 
@@ -17122,7 +17122,7 @@ namespace PowerSDR
                     lblRX2Preamp.Text = "S-ATT";
                     udRX2StepAttData.BringToFront();
                     udRX2StepAttData.Value = rx2_step_attenuator_by_band[(int)rx2_band];
-                   // udRX2StepAttData_ValueChanged(this, EventArgs.Empty);
+                    // udRX2StepAttData_ValueChanged(this, EventArgs.Empty);
                     JanusAudio.EnableADC2StepAtten(1);
                 }
                 else
@@ -17806,14 +17806,14 @@ namespace PowerSDR
 
             if (rx2_step_att_present)
             {
-                Display.RX2PreampOffset = rx2_attenuator_data; 
+                Display.RX2PreampOffset = rx2_attenuator_data;
             }
             else
             {
                 if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION || rx2_preamp_present)
                 {
                     Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
-                }              
+                }
             }
 
             switch (Display.CurrentDisplayModeBottom)
@@ -19830,16 +19830,16 @@ namespace PowerSDR
                 switch (current_hpsdr_model)
                 {
                     case HPSDRModel.HPSDR:
-                      //  chkCWFWKeyer.Checked = false;
-                       // chkCWFWKeyer.Visible = true;
+                        //  chkCWFWKeyer.Checked = false;
+                        // chkCWFWKeyer.Visible = true;
                         break;
                     case HPSDRModel.HERMES:
-                      //  chkCWFWKeyer.Checked = false;
-                       // chkCWFWKeyer.Visible = true;
+                        //  chkCWFWKeyer.Checked = false;
+                        // chkCWFWKeyer.Visible = true;
                         break;
                     case HPSDRModel.ANAN10:
-                       // chkCWFWKeyer.Checked = false;
-                      //  chkCWFWKeyer.Visible = true;
+                        // chkCWFWKeyer.Checked = false;
+                        //  chkCWFWKeyer.Visible = true;
                         if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
                             comboMeterTXMode.Items.Insert(1, "Ref Pwr");
                         if (!comboMeterTXMode.Items.Contains("SWR"))
@@ -19848,8 +19848,8 @@ namespace PowerSDR
                             comboMeterTXMode.Items.Insert(3, "Fwd SWR");
                         break;
                     case HPSDRModel.ANAN100:
-                      //  chkCWFWKeyer.Checked = false;
-                      //  chkCWFWKeyer.Visible = true;
+                        //  chkCWFWKeyer.Checked = false;
+                        //  chkCWFWKeyer.Visible = true;
                         if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
                             comboMeterTXMode.Items.Insert(1, "Ref Pwr");
                         if (!comboMeterTXMode.Items.Contains("SWR"))
@@ -19858,7 +19858,7 @@ namespace PowerSDR
                             comboMeterTXMode.Items.Insert(3, "Fwd SWR");
                         break;
                     case HPSDRModel.ANAN100D:
-                      //  chkCWFWKeyer.Visible = true;
+                        //  chkCWFWKeyer.Visible = true;
                         if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
                             comboMeterTXMode.Items.Insert(1, "Ref Pwr");
                         if (!comboMeterTXMode.Items.Contains("SWR"))
@@ -19867,7 +19867,7 @@ namespace PowerSDR
                             comboMeterTXMode.Items.Insert(3, "Fwd SWR");
                         break;
                     case HPSDRModel.ORION:
-                       // chkCWFWKeyer.Visible = true;
+                        // chkCWFWKeyer.Visible = true;
                         if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
                             comboMeterTXMode.Items.Insert(1, "Ref Pwr");
                         if (!comboMeterTXMode.Items.Contains("SWR"))
@@ -19960,7 +19960,7 @@ namespace PowerSDR
                         //  if (flex5000DebugForm == null) flex5000DebugForm = new FLEX5000DebugForm(this);
 
                         //chkFullDuplex.Visible = true;
-                       // panelAntenna.Visible = true;
+                        // panelAntenna.Visible = true;
                         // }
                         // else
                         // {
@@ -19975,10 +19975,10 @@ namespace PowerSDR
                         // SetComboPreampForHPSDR();
                         // comboPreamp.Text = "0dB";
                         //comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
-                       // chkBCI.Visible = false;
+                        // chkBCI.Visible = false;
                         chkFWCATU.Visible = true;
                         chkFWCATUBypass.Visible = false;
-                      //  panelAntenna.Visible = false;
+                        //  panelAntenna.Visible = false;
                         // chkX2TR.Visible = false;
 
                         int hermes_power_enable;
@@ -20008,7 +20008,7 @@ namespace PowerSDR
                             MaxFreq = 146.0;
                         else MaxFreq = 65.0;
                         //mnuFWC.Visible = false;
-                       // panelAntenna.Visible = false;
+                        // panelAntenna.Visible = false;
                         chkFWCATU.Visible = false;
                         chkFWCATUBypass.Visible = false;
                         break;
@@ -21185,18 +21185,18 @@ namespace PowerSDR
         {
             get
             {
-              //  if (chkBCI.Checked)
-               //     cat_bci_reject = 1;
-              //  else
-                    cat_bci_reject = 0;
+                //  if (chkBCI.Checked)
+                //     cat_bci_reject = 1;
+                //  else
+                cat_bci_reject = 0;
                 return cat_bci_reject;
             }
             set
             {
-              //  if (value == 1)
-               //     chkBCI.Checked = true;
-              //  else
-               //     chkBCI.Checked = false;
+                //  if (value == 1)
+                //     chkBCI.Checked = true;
+                //  else
+                //     chkBCI.Checked = false;
             }
         }
         // Added 06/20/05 BT for CAT commands
@@ -23083,7 +23083,7 @@ namespace PowerSDR
                     apf_gain = value;
                     ptbCWAPFGain.Value = value;
                     double gain_value = Math.Round(ptbCWAPFGain.Value / 10.0, 0);
-                    lblCWAPFGain.Text = "Gain:  " + gain_value.ToString();                  
+                    lblCWAPFGain.Text = "Gain:  " + gain_value.ToString();
                 }
             }
         }
@@ -23099,8 +23099,8 @@ namespace PowerSDR
         public bool ReversePaddles
         {
             get { return reverse_paddles; }
-            set 
-            { 
+            set
+            {
                 reverse_paddles = value;
                 JanusAudio.ReversePaddles(Convert.ToInt32(value));
             }
@@ -23119,7 +23119,7 @@ namespace PowerSDR
                         rx1_dsp_mode != DSPMode.CWU)
                         CWFWKeyer = false;
                 }
-               // chkCWFWKeyer_CheckedChanged(this, EventArgs.Empty);
+                // chkCWFWKeyer_CheckedChanged(this, EventArgs.Empty);
             }
         }
 
@@ -23643,7 +23643,7 @@ namespace PowerSDR
                     if (attontx) JanusAudio.SetTxAttenData(tx_step_attenuator_by_band[(int)rx1_band]);
                     else JanusAudio.SetTxAttenData(rx1_attenuator_data);
                 }
- 
+
             }
         }
 
@@ -24264,8 +24264,8 @@ namespace PowerSDR
         public bool MicPTTDisabled
         {
             get { return mic_ptt_disabled; }
-            set 
-            { 
+            set
+            {
                 mic_ptt_disabled = value;
                 JanusAudio.SetMicPTT(Convert.ToInt32(value));
             }
@@ -28916,12 +28916,12 @@ namespace PowerSDR
                     bool mic_ptt = false, cat_ptt_local = false, vox_ptt = false, cw_ptt = false;
                     bool temp = (dotdashptt & 0x01) != 0; // ptt
 
-                  //  if ((dotdashptt & 0x1) != 0)
-                   // {
-                       // if (current_hpsdr_model == HPSDRModel.ORION && mic_ptt_disabled)
-                           // mic_ptt = false;
-                       // else mic_ptt = temp;                        
-                  //  }
+                    //  if ((dotdashptt & 0x1) != 0)
+                    // {
+                    // if (current_hpsdr_model == HPSDRModel.ORION && mic_ptt_disabled)
+                    // mic_ptt = false;
+                    // else mic_ptt = temp;                        
+                    //  }
 
                     cw_ptt = CWInput.KeyerPTT;
                     mic_ptt = temp;
@@ -29044,11 +29044,11 @@ namespace PowerSDR
                 dotdashptt = JanusAudio.nativeGetDotDashPTT();
                 bool state = (dotdashptt & 0x01) != 0; // ptt                
                 state = (dotdashptt & 0x02) != 0; // dash    
-              
+
                 if ((dotdashptt & 0x02) != (last_bmp & 0x02))
                 {
                     FWDash = state;
-                   // SetConsoleMox(state);
+                    // SetConsoleMox(state);
                 }
 
                 state = (dotdashptt & 0x04) != 0; // dot                   
@@ -29147,7 +29147,7 @@ namespace PowerSDR
                         current_hpsdr_model == HPSDRModel.ORION)
                     {
                         RX2PreampMode = rx2_preamp;
-                       // RX2StepAttPresent = old_rx2_satt;
+                        // RX2StepAttPresent = old_rx2_satt;
                         SetupForm.RX2EnableAtt = old_rx2_satt;
                         RX2ATT = old_rx2_satt_data;
                     }
@@ -31068,7 +31068,7 @@ namespace PowerSDR
                 Display.ResetRX2DisplayAverage();
                 Display.ResetRX2DisplayPeak();
 
-               // CWPTT.Stop();
+                // CWPTT.Stop();
 
                 Audio.callback_return = 2;
                 JanusAudio.StopAudio();
@@ -32098,9 +32098,9 @@ namespace PowerSDR
                         txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                     }
                 if (click_tune_rx2_display)
-                    {
-                        txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-                    }
+                {
+                    txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                }
 
                 // make sure TX freq has been set
                 //  if (tx_dds_freq_updated)
@@ -32170,9 +32170,9 @@ namespace PowerSDR
                         txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                     }
                 if (click_tune_rx2_display)
-                    {
-                        txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-                    }
+                {
+                    txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                }
 
                 UpdateRX1DDSFreq();
                 UpdateRX2DDSFreq();
@@ -33681,10 +33681,10 @@ namespace PowerSDR
                     SetupForm.RX1subAPFGain = ptbCWAPFGain.Value;
                 if (SetupForm.RX2APFControls)
                     SetupForm.RX2APFGain = ptbCWAPFGain.Value;
-               // apf_gain = ptbCWAPFGain.Value;
+                // apf_gain = ptbCWAPFGain.Value;
             }
             double gain_value = Math.Round(ptbCWAPFGain.Value / 10.0, 0);
-           // lblCWAPFGain.Text = "Gain:  " + ptbCWAPFGain.Value.ToString();
+            // lblCWAPFGain.Text = "Gain:  " + ptbCWAPFGain.Value.ToString();
             lblCWAPFGain.Text = "Gain:  " + gain_value.ToString();
             if (ptbCWAPFGain.Focused) btnHidden.Focus();
         }
@@ -33798,9 +33798,9 @@ namespace PowerSDR
 
         private void chkBCI_CheckedChanged(object sender, System.EventArgs e)
         {
-          //  if (chkBCI.Checked)
-          //      chkBCI.BackColor = button_selected_color;
-          //  else
+            //  if (chkBCI.Checked)
+            //      chkBCI.BackColor = button_selected_color;
+            //  else
             //    chkBCI.BackColor = SystemColors.Control;
         }
 
@@ -34269,7 +34269,7 @@ namespace PowerSDR
                 }
             }
 
-            if (alexpresent && rx1_band == Band.B6M && 
+            if (alexpresent && rx1_band == Band.B6M &&
                (chkSR.Checked || (!chkSR.Checked && !disable_6m_lna_on_rx)) &&
                 current_hpsdr_model != HPSDRModel.ANAN10)
                 RX16mGainOffset = -20.0f;
@@ -34704,37 +34704,37 @@ namespace PowerSDR
             double freq = double.Parse(txtVFOBFreq.Text);
 
             if (!click_tune_rx2_display)
-            center_rx2_frequency = freq;
+                center_rx2_frequency = freq;
             // Lock the display
             if ((click_tune_rx2_display) &&
                              ((Display.CurrentDisplayModeBottom == DisplayMode.PANADAPTER && mox && !VFOBTX) ||
                              (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && mox && !VFOBTX) ||
                              (Display.CurrentDisplayModeBottom == DisplayMode.PANADAPTER && !mox) ||
                              (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && !mox)))
-                        {
-                            double rx2_osc = Math.Round(-(VFOBFreq - center_rx2_frequency) * 1e6);
+            {
+                double rx2_osc = Math.Round(-(VFOBFreq - center_rx2_frequency) * 1e6);
 
-                            if (rx2_osc < -sample_rate1 / 2)
-                            {
-                                VFOBFreq = center_rx2_frequency + ((sample_rate1 / 2) - 1) * 0.0000010;
-                                return;
-                            }
-                            else if (rx2_osc > sample_rate1 / 2)
-                            {
-                                VFOBFreq = center_rx2_frequency + ((-sample_rate1 / 2) + 1) * 0.0000010;
-                                return;
-                            }
+                if (rx2_osc < -sample_rate1 / 2)
+                {
+                    VFOBFreq = center_rx2_frequency + ((sample_rate1 / 2) - 1) * 0.0000010;
+                    return;
+                }
+                else if (rx2_osc > sample_rate1 / 2)
+                {
+                    VFOBFreq = center_rx2_frequency + ((-sample_rate1 / 2) + 1) * 0.0000010;
+                    return;
+                }
 
-                            if (rx2_osc > -sample_rate1 / 2 && rx2_osc < sample_rate1 / 2)
-                            {
-                                radio.GetDSPRX(1, 0).RXOsc = rx2_osc; // keep tuning
-                                Display.RX2FreqDiff = (int)radio.GetDSPRX(1, 0).RXOsc;
-                            }
+                if (rx2_osc > -sample_rate1 / 2 && rx2_osc < sample_rate1 / 2)
+                {
+                    radio.GetDSPRX(1, 0).RXOsc = rx2_osc; // keep tuning
+                    Display.RX2FreqDiff = (int)radio.GetDSPRX(1, 0).RXOsc;
+                }
 
-                            // SetupForm.txtRX1VFO.Text = rx1_osc.ToString();
-                            // SetupForm.txtRX2VFO.Text = diff.ToString();
-                            //  UpdateRX1SubNotches();
-                        }
+                // SetupForm.txtRX1VFO.Text = rx1_osc.ToString();
+                // SetupForm.txtRX2VFO.Text = diff.ToString();
+                //  UpdateRX1SubNotches();
+            }
             else
             {
                 radio.GetDSPRX(1, 0).RXOsc = 0.0;
@@ -34774,11 +34774,11 @@ namespace PowerSDR
                                  (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && mox && !VFOBTX) ||
                                  (Display.CurrentDisplayModeBottom == DisplayMode.PANADAPTER && !mox) ||
                                  (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && !mox)))
-                                {
-                                    Display.VFOB = (long)(center_rx2_frequency * 1e6);
-                                }
+                {
+                    Display.VFOB = (long)(center_rx2_frequency * 1e6);
+                }
                 else
-                Display.VFOB = (long)(freq * 1e6);
+                    Display.VFOB = (long)(freq * 1e6);
 
                 if (chkTUN.Checked && chkVFOBTX.Checked)
                 {
@@ -35027,7 +35027,7 @@ namespace PowerSDR
 
             //Debug.WriteLine("freq: "+freq.ToString("f6"));             // - G3OQD
             if (!click_tune_rx2_display || set_rx2_freq)
-            RX2DDSFreq = freq;
+                RX2DDSFreq = freq;
 
             if (click_tune_rx2_display && rx2_spectrum_tune_drag)
                 RX2DDSFreq = center_rx2_frequency;
@@ -36850,10 +36850,18 @@ namespace PowerSDR
                                 if (rx2_enabled && e.Y > picDisplay.Height / 2) //RX2
                                 {
                                     x = PixelToHz(e.X, 2);
-                                    if (!click_tune_rx2_display)
+                                    //if (!click_tune_rx2_display)
+                                    //    freq = double.Parse(txtVFOBFreq.Text) + (double)x * 0.0000010; // click tune w/x-hairs
+                                    //else if (click_tune_drag) freq = center_rx2_frequency + (double)x * 0.0000010; // click tune & drag vfo
+                                    //else freq = double.Parse(txtVFOBFreq.Text); // click & drag vfo
+                                    if (click_tune_rx2_display && current_click_tune_mode != ClickTuneMode.Off)
+                                        freq = center_rx2_frequency + (double)x * 0.0000010;
+                                    else if (current_click_tune_mode != ClickTuneMode.Off) 
                                         freq = double.Parse(txtVFOBFreq.Text) + (double)x * 0.0000010; // click tune w/x-hairs
-                                    else if(click_tune_drag) freq = center_rx2_frequency + (double)x * 0.0000010; // click tune & drag vfo
-                                    else freq = double.Parse(txtVFOBFreq.Text); // click & drag vfo
+                                    else if (click_tune_drag) 
+                                        freq = center_rx2_frequency + (double)x * 0.0000010; // click tune & drag vfo
+                                    else 
+                                        freq = double.Parse(txtVFOBFreq.Text); // click & drag vfo
 
                                     switch (rx2_dsp_mode)
                                     {
@@ -36888,10 +36896,14 @@ namespace PowerSDR
                                 }
                                 else
                                 {
-                                    if (!click_tune_display)
+                                    if (click_tune_display && current_click_tune_mode != ClickTuneMode.Off)
+                                        freq = center_frequency + (double)x * 0.0000010;
+                                    else if (current_click_tune_mode != ClickTuneMode.Off)
                                         freq = double.Parse(txtVFOAFreq.Text) + (double)x * 0.0000010; // click tune w/x-hairs
-                                    else if (click_tune_drag) freq = center_frequency + (double)x * 0.0000010; // click tune & drag vfo
-                                    else freq = double.Parse(txtVFOAFreq.Text); // click & drag vfo
+                                    else if (click_tune_drag)
+                                        freq = center_frequency + (double)x * 0.0000010; // click tune & drag vfo
+                                    else
+                                        freq = double.Parse(txtVFOAFreq.Text); // click & drag vfo
 
                                     switch (rx1_dsp_mode)
                                     {
@@ -36928,81 +36940,84 @@ namespace PowerSDR
                                 //  if (click_tune_rx2_display || click_tune_display)
                                 // {
                                 // spectrum_drag_last_x = e.X;
-
-                                if (rx2_enabled && e.Y > picDisplay.Height / 2)
+                                if (current_click_tune_mode == ClickTuneMode.Off)
                                 {
-                                    spectrum_drag_last_x = e.X;
-                                    if (click_tune_rx2_display)
+                                    if (rx2_enabled && e.Y > picDisplay.Height / 2)
                                     {
-                                        if (e.Y < ((picDisplay.Height / 2) + 15))
+                                        spectrum_drag_last_x = e.X;
+                                        if (click_tune_rx2_display)
                                         {
-                                            rx2_spectrum_tune_drag = true;
-                                            Cursor = Cursors.SizeWE;
+                                            if (e.Y < ((picDisplay.Height / 2) + 15))
+                                            {
+                                                rx2_spectrum_tune_drag = true;
+                                                Cursor = Cursors.SizeWE;
+                                            }
+                                            else
+                                            {
+                                                rx2_click_tune_drag = true;
+                                                Cursor = grabbing;
+                                            }
                                         }
-                                        else
-                                        {
-                                            rx2_click_tune_drag = true;
-                                            Cursor = grabbing;
-                                        }
+                                        else rx2_spectrum_drag = true;
                                     }
-                                    else rx2_spectrum_drag = true;
-                                }
-                                else
-                                {
-                                    spectrum_drag_last_x = e.X;
-                                    if (click_tune_display)
+                                    else
                                     {
-                                        if (e.Y < 15)
+                                        spectrum_drag_last_x = e.X;
+                                        if (click_tune_display)
                                         {
-                                            rx1_spectrum_tune_drag = true;
-                                            Cursor = Cursors.SizeWE;
+                                            if (e.Y < 15)
+                                            {
+                                                rx1_spectrum_tune_drag = true;
+                                                Cursor = Cursors.SizeWE;
+                                            }
+                                            else
+                                            {
+                                                rx1_click_tune_drag = true;
+                                                Cursor = grabbing;
+                                            }
                                         }
-                                        else
-                                        {
-                                            rx1_click_tune_drag = true;
-                                            Cursor = grabbing;
-                                        }
+                                        else rx1_spectrum_drag = true;
                                     }
-                                    else rx1_spectrum_drag = true;
                                 }
                                 // }
 
                                 if (!rx1_spectrum_drag && !rx2_spectrum_drag)
                                 {
-                                if (!rx2_enabled)
-                                {
+                                    if (!rx2_enabled)
+                                    {
                                         if (!rx1_spectrum_tune_drag)
                                         {
-                                            if (current_click_tune_mode == ClickTuneMode.VFOA || click_tune_display)
-                                    {
-                                        VFOAFreq = Math.Round(freq, 6);
+                                            if (current_click_tune_mode == ClickTuneMode.VFOA ||
+                                                (click_tune_display && current_click_tune_mode != ClickTuneMode.VFOB))
+                                            {
+                                                VFOAFreq = Math.Round(freq, 6);
+                                            }
+                                            else
+                                                VFOBFreq = Math.Round(freq, 6);
+                                        }
                                     }
                                     else
-                                        VFOBFreq = Math.Round(freq, 6);
-                                }
-                                    }
-                                else
-                                {
+                                    {
 
-                                    if (current_click_tune_mode == ClickTuneMode.VFOB && // red cross hairs
-                                        (chkVFOSplit.Checked || chkEnableMultiRX.Checked))
-                                    {
-                                        VFOASubFreq = Math.Round(freq, 6);
-                                    }
-                                    else
-                                    {
+                                        if (current_click_tune_mode == ClickTuneMode.VFOB && // red cross hairs
+                                            (chkVFOSplit.Checked || chkEnableMultiRX.Checked))
+                                        {
+                                            VFOASubFreq = Math.Round(freq, 6);
+                                        }
+                                        else
+                                        {
                                             if (e.Y <= picDisplay.Height / 2)
                                             {
                                                 if (!rx1_spectrum_tune_drag)
                                                     VFOAFreq = Math.Round(freq, 6);
-                                }
+                                            }
 
                                             else
-                                {
+                                            {
                                                 if (!rx2_spectrum_tune_drag)
                                                     VFOBFreq = Math.Round(freq, 6);
                                             }
-                                    }
+                                        }
                                     }
                                 }
 
@@ -37205,8 +37220,8 @@ namespace PowerSDR
                                 {
                                     spectrum_drag_last_x = e.X;
                                     if (rx2_enabled && e.Y > picDisplay.Height / 2) rx2_spectrum_drag = true;
-                                        else rx1_spectrum_drag = true;
-                                    }
+                                    else rx1_spectrum_drag = true;
+                                }
 
                                 break;
                         }
@@ -38156,7 +38171,7 @@ namespace PowerSDR
                     // turn off APF
                     radio.GetDSPRX(0, 0).RXAPFRun = false;
                     radio.GetDSPRX(0, 1).RXAPFRun = false;
-                   // radio.GetDSPRX(1, 0).RXAPFRun = false;
+                    // radio.GetDSPRX(1, 0).RXAPFRun = false;
 
                     if (!RX1IsOn60mChannel())
                     {
@@ -38189,7 +38204,7 @@ namespace PowerSDR
                     // turn off APF
                     radio.GetDSPRX(0, 0).RXAPFRun = false;
                     radio.GetDSPRX(0, 1).RXAPFRun = false;
-                   // radio.GetDSPRX(1, 0).RXAPFRun = false;
+                    // radio.GetDSPRX(1, 0).RXAPFRun = false;
 
                     if (!RX1IsOn60mChannel())
                     {
@@ -41152,7 +41167,7 @@ namespace PowerSDR
                 chkSquelch.Location = new Point(chk_squelch_basis.X, chk_squelch_basis.Y + (v_delta / 2));
                 picSquelch.Location = new Point(pic_sql_basis.X, pic_sql_basis.Y + (v_delta / 2));
                 ptbSquelch.Location = new Point(tb_sql_basis.X, tb_sql_basis.Y + (v_delta / 2));
-               // panelAntenna.Location = new Point(gr_antenna_basis.X, gr_antenna_basis.Y + (v_delta / 8) + (v_delta / 2));
+                // panelAntenna.Location = new Point(gr_antenna_basis.X, gr_antenna_basis.Y + (v_delta / 8) + (v_delta / 2));
                 panelDateTime.Location = new Point(gr_date_time_basis.X, gr_date_time_basis.Y + (v_delta / 2) + (v_delta / 4));
                 //lblCPUMeter.Location = new Point(lbl_cpu_meter_basis.X,lbl_cpu_meter_basis.Y+(v_delta/8)+(v_delta/2)+(v_delta/4));
 
@@ -41258,7 +41273,7 @@ namespace PowerSDR
             chk_squelch_basis = this.chkSquelch.Location;
             pic_sql_basis = this.picSquelch.Location;
             tb_sql_basis = this.ptbSquelch.Location;
-           // gr_antenna_basis = this.panelAntenna.Location;
+            // gr_antenna_basis = this.panelAntenna.Location;
             gr_date_time_basis = this.panelDateTime.Location;
             //lbl_cpu_meter_basis = this.lblCPUMeter.Location;
 
@@ -41388,7 +41403,7 @@ namespace PowerSDR
                 {
                     old_rx1_display_mode = comboDisplayMode.Text;
                     UpdateRXADCCtrl();
-                   // comboRX2Preamp_SelectedIndexChanged(this, EventArgs.Empty);
+                    // comboRX2Preamp_SelectedIndexChanged(this, EventArgs.Empty);
 
                     if (chkPower.Checked)
                     {
@@ -44984,7 +44999,7 @@ namespace PowerSDR
             //w3sz section ends here
             // panelBandVHF.Show();
 
-           // chkBCI.Hide();
+            // chkBCI.Hide();
             lblAF2.Hide();
             lblRF2.Hide();
             lblPWR2.Hide();
@@ -45304,7 +45319,7 @@ namespace PowerSDR
             {
                 panelBandHF.Hide();
             }
-           // chkBCI.Hide();
+            // chkBCI.Hide();
             grpVFOBetween.Hide();
             // grpVFOB.Hide();
             grpMultimeter.Hide();
@@ -45690,7 +45705,7 @@ namespace PowerSDR
                         chkMOX.Location = new Point(chkTUN.Location.X, chkTUN.Location.Y + chkTUN.Height + 4);
                         chkVOX.Location = new Point(chkMON.Location.X - chkVOX.Width - 10, chkMON.Location.Y);
                         chkRX2SR.Location = new Point(chkTUN.Location.X - chkRX2SR.Width - 10, chkTUN.Location.Y); //DUP
-                      //  chkFWCATU.Location = new Point(chkMOX.Location.X - chkFWCATU.Width - 10, chkMOX.Location.Y); //CTUN
+                        //  chkFWCATU.Location = new Point(chkMOX.Location.X - chkFWCATU.Width - 10, chkMOX.Location.Y); //CTUN
                         chkX2TR.Location = new Point(chkMOX.Location.X - chkX2TR.Width - 10, chkMOX.Location.Y); //RX2 CTUN
                         lblAF2.Location = new Point(5, chkPower.Location.Y + chkPower.Height + 5);
                         //ptbAF.Location = new Point(lblAF2.Location.X + lblAF2.Width, lblAF2.Location.Y); 

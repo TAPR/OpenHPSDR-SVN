@@ -45,7 +45,7 @@ namespace PowerSDR
         public const string BUILD_DATE = "(19JAN2013)";
 #endif
         public const string BUILD_NAME = "mRX PS";
-        public const string BUILD_DATE = "(6/7/14)";
+        public const string BUILD_DATE = "(6/9/14)";
 
         public static string GetString()
         {
