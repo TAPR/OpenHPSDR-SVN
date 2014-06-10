@@ -6983,7 +6983,7 @@ namespace PowerSDR
                 (CurrentDisplayMode == DisplayMode.PANAFALL && console.NReceivers > 2) ||
                (CurrentDisplayMode == DisplayMode.PANADAPTER && display_duplex)) displayduplex = true;
 
-            if (local_mox)// && !displayduplex)// || (mox && tx_on_vfob))
+            if (local_mox && !displayduplex)// || (mox && tx_on_vfob))
             {
                 Low = tx_display_low;
                 High = tx_display_high;
