@@ -1636,7 +1636,7 @@ void IOThreadMainLoop(void) {
 							ApolloTuner | ApolloATU | HermesFilt | AlexManEnable) & 0x7f;
 						break;																 
 					case 7:
-						FPGAWriteBufp[writebufpos] = (LineBoost | PennyPresent) & 0x9f; 
+						FPGAWriteBufp[writebufpos] = (LineBoost | MercTxAtten | PureSignal | PennyPresent) & 0xff; 
 						break;
 					case 8:
 						FPGAWriteBufp[writebufpos] = (enable_ADC3_step_att | adc3_step_att_data | reverse_paddles) & 0x7f;

@@ -14635,11 +14635,12 @@ namespace PowerSDR
                 radMercury12288MHz.Enabled = true;
 
                 bits |= 0x40;   // 0100 0000
+                JanusAudio.SetMercTxAtten(Convert.ToInt32(chkATTOnTX.Checked));
             }
             JanusAudio.SetC1Bits(bits);
             checkHPSDRDefaults(sender, e);
             console.MercuryPresent = chkMercuryPresent.Checked;
-            JanusAudio.fwVersionsChecked = false;
+            JanusAudio.fwVersionsChecked = false;            
         }
 
         private void chkAlexPresent_CheckedChanged(object sender, System.EventArgs e)
@@ -17639,9 +17640,16 @@ namespace PowerSDR
                 chkDisablePureSignal.Checked = true;
             console.psform.PSEnabled = !chkDisablePureSignal.Checked;
             if (chkDisablePureSignal.Checked)
+            {
                 psDisabled = true;
+                JanusAudio.SetPureSignal(0);
+            }
             else
+            {
                 chkLimitRX.Checked = true;
+                JanusAudio.SetPureSignal(1);
+            }
+
             switch (console.CurrentHPSDRModel)
             {
                 case HPSDRModel.HPSDR:
