@@ -1009,18 +1009,40 @@ KD5TFDVK6APHAUDIO_API void SetMicPTT(int bits) {
 /*
 C2
 0 0 0 0 0 0 0 0
-|     | | | | |
-|     | | | | +------------ TLV320 Line-in Gain bit 0 
-|     | | | +-------------- TLV320 Line-in Gain bit 1
-|     | | +---------------- TLV320 Line-in Gain bit 2
-|     | +------------------ TLV320 Line-in Gain bit 3
-|     +-------------------- TLV320 Line-in Gain bit 4
+| | | | | | | |
+| | | | | | | +------------ TLV320 Line-in Gain bit 0 
+| | | | | | +-------------- TLV320 Line-in Gain bit 1
+| | | | | +---------------- TLV320 Line-in Gain bit 2
+| | | | +------------------ TLV320 Line-in Gain bit 3
+| | | +-------------------- TLV320 Line-in Gain bit 4
+| | +---------------------- If set enable 20dB Attenuator on Mercury when on Tx*
+| +------------------------ PureSignal (0 = disable, 1 = enable)
 +-------------------------- Penelope board in use
 */
 
 KD5TFDVK6APHAUDIO_API void SetLineBoost(int bits) {
 		LineBoost = bits;
 	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetMercTxAtten(int bit) {
+        if ( bit != 0 ) {
+                MercTxAtten = 0x20;
+        }
+        else {
+			MercTxAtten = 0;
+        }
+        return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetPureSignal(int bit) {
+        if ( bit != 0 ) {
+                PureSignal = 0x40;
+        }
+        else {
+                PureSignal = 0;
+        }
+        return;
 }
 
 KD5TFDVK6APHAUDIO_API void SetPennyPresent(int bit) {
@@ -1032,6 +1054,7 @@ KD5TFDVK6APHAUDIO_API void SetPennyPresent(int bit) {
         }
         return;
 }
+
 /*
 C3
 0 0 0 0 0 0 0 0

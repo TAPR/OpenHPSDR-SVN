@@ -305,6 +305,8 @@ extern int adc1_step_att_data;
 extern int adc2_step_att_data;
 extern int adc3_step_att_data;
 extern int tx_att_data;
+extern int PureSignal;
+extern int MercTxAtten;
 
 extern int enable_cw_keyer;
 extern int cw_sidetone_volume;

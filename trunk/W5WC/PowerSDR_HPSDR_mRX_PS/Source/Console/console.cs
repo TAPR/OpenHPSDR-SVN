@@ -23642,6 +23642,9 @@ namespace PowerSDR
                 {
                     if (attontx) JanusAudio.SetTxAttenData(tx_step_attenuator_by_band[(int)rx1_band]);
                     else JanusAudio.SetTxAttenData(rx1_attenuator_data);
+
+                    if (MercuryPresent)
+                        JanusAudio.SetMercTxAtten(Convert.ToInt32(attontx));
                 }
 
             }

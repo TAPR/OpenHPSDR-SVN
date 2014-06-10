@@ -682,6 +682,9 @@ namespace PowerSDR
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)] // sets number of receivers
         unsafe public static extern void SetNRx(int nrx);
 
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)] // controls PureSignal
+        unsafe public static extern void SetPureSignal(int enable);
+        
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)] // sets full or half duplex
         unsafe public static extern void SetDuplex(int dupx);
 
@@ -884,6 +887,9 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetTxAttenData(int bits);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetMercTxAtten(int bits);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetRX1Preamp(int bits);
