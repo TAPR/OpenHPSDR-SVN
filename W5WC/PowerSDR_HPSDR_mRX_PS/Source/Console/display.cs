@@ -769,7 +769,7 @@ namespace PowerSDR
         }
 
 
-        private static float tx_display_cal_offset = -63.2f;					// display calibration offset in dB
+        private static float tx_display_cal_offset = 0f;					// display calibration offset in dB
         public static float TXDisplayCalOffset
         {
             get { return tx_display_cal_offset; }
@@ -7009,9 +7009,18 @@ namespace PowerSDR
             {
                 Low = rx_display_low;
                 High = rx_display_high;
-                grid_max = spectrum_grid_max;
-                grid_min = spectrum_grid_min;
-                grid_step = spectrum_grid_step;
+                if (local_mox)
+                {
+                    grid_max = tx_spectrum_grid_max;
+                    grid_min = tx_spectrum_grid_min;
+                    grid_step = tx_spectrum_grid_step;
+                }
+                else
+                {
+                    grid_max = spectrum_grid_max;
+                    grid_min = spectrum_grid_min;
+                    grid_step = spectrum_grid_step;
+                }
                 g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
                 f_diff = freq_diff;
             }
@@ -9883,7 +9892,7 @@ namespace PowerSDR
 
                 if (rx == 1)
                 {
-                    if (local_mox && !displayduplex) max += tx_display_cal_offset;
+                    if (local_mox) max += tx_display_cal_offset;
                     else if (mox && tx_on_vfob && !displayduplex)
                     {
                         if (console.RX2Enabled) max += rx1_display_cal_offset;

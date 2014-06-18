@@ -41,13 +41,15 @@ typedef struct _eer
 	double mgain;
 	double pgain;
 	double mdelay;
+	double pdelay;
 	DELAY mdel;
+	DELAY pdel;
 	CRITICAL_SECTION cs_update;
 	double *legacy;																										////////////  legacy interface - remove
 	double *legacyM;																									////////////  legacy interface - remove
 } eer, *EER;
 
-extern EER create_eer (int run, int size, double* in, double* out, double* outM, int rate, double mgain, double pgain, double mdelay, int amiq);
+extern EER create_eer (int run, int size, double* in, double* out, double* outM, int rate, double mgain, double pgain, double mdelay, double pdelay, int amiq);
 
 extern void destroy_eer (EER a);
 

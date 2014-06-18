@@ -98,7 +98,7 @@ namespace PowerSDR
             wdsp.OpenChannel(wdsp.id(2, 1), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
             wdsp.OpenChannel(wdsp.id(1, 0), 1024, 4096, 48000, 48000, 48000, 1, 0, 0.010, 0.025, 0.000, 0.010);
             wdsp.create_divEXT(0, 0, 2, 1024);
-            wdsp.create_eerEXT(0, 0, 1024, 48000, 1.0, 1.0, 0.0, 1);
+            wdsp.create_eerEXT(0, 0, 1024, 48000, 1.0, 1.0, 0.0, 0.0, 1);
 		}
 
 		public static void DestroyDSP()
@@ -1701,6 +1701,7 @@ namespace PowerSDR
             TXEERModeMgain = tx_eer_mode_mgain;
             TXEERModePgain = tx_eer_mode_pgain;
             TXEERModeMdelay = tx_eer_mode_mdelay;
+            TXEERModePdelay = tx_eer_mode_pdelay;
             // TXEERModeSamplerate = tx_eer_mode_samplerate;
             TXBandpassWindow = tx_bandpass_window;
             TXPreGenRun = tx_pregen_run;
@@ -2461,8 +2462,8 @@ namespace PowerSDR
             }
         }
 
-        private double tx_eer_mode_mdelay_dsp = 1.0e-04;
-        private double tx_eer_mode_mdelay = 1.0e-04;
+        private double tx_eer_mode_mdelay_dsp = 0.0;
+        private double tx_eer_mode_mdelay = 0.0;
         public double TXEERModeMdelay
         {
             get { return tx_eer_mode_mdelay; }
@@ -2476,6 +2477,26 @@ namespace PowerSDR
                     {
                         wdsp.SetEERMdelay(0, value);
                         tx_eer_mode_mdelay_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private double tx_eer_mode_pdelay_dsp = 0.0;
+        private double tx_eer_mode_pdelay = 0.0;
+        public double TXEERModePdelay
+        {
+            get { return tx_eer_mode_pdelay; }
+            set
+            {
+                tx_eer_mode_pdelay = value;
+
+                if (update)
+                {
+                    if (value != tx_eer_mode_pdelay_dsp || force)
+                    {
+                        wdsp.SetEERPdelay(0, value);
+                        tx_eer_mode_pdelay_dsp = value;
                     }
                 }
             }

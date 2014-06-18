@@ -402,8 +402,10 @@ KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() {
 	//getI2CBytes(I2C_MERC3_ADC_OFS);
 	//getI2CBytes(I2C_MERC4_ADC_OFS);
 	}
-	n = ADC_Overloads; 
-	ADC_Overloads = 0; 
+
+	//n = ADC_Overloads; 
+	//ADC_Overloads = 0; 
+	n = ADC_Overload | ADC1_Overload | ADC2_Overload | ADC3_Overload;// | ADC4_Overload;
 	return n; 
 } 
 

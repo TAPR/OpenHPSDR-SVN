@@ -668,6 +668,8 @@ namespace PowerSDR
         private int[] rx2_step_attenuator_by_band;
         private int[] tx_step_attenuator_by_band;
 
+        private bool rx1_above30;
+        private bool rx2_above30;
         private bool meter_data_ready;						// used to synchronize the new DSP data with the multimeter
         private float new_meter_data;						// new data for the multimeter from the DSP
         private float current_meter_data;					// current data for the multimeter
@@ -4550,7 +4552,7 @@ namespace PowerSDR
             this.ptbCWAPFBandwidth.HeadImage = null;
             this.ptbCWAPFBandwidth.LargeChange = 1;
             this.ptbCWAPFBandwidth.Maximum = 150;
-            this.ptbCWAPFBandwidth.Minimum = 50;
+            this.ptbCWAPFBandwidth.Minimum = 10;
             this.ptbCWAPFBandwidth.Name = "ptbCWAPFBandwidth";
             this.ptbCWAPFBandwidth.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.ptbCWAPFBandwidth.SmallChange = 1;
@@ -17515,6 +17517,18 @@ namespace PowerSDR
             }
         }
 
+        private float rx_6m_gain_offset = 20;
+        public float RX6mGainOffset
+        {
+            get { return rx_6m_gain_offset; }
+            set
+            {
+                rx_6m_gain_offset = value;
+                if (SetupForm != null)
+                    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+            }
+        }
+
         private float rx1_6m_gain_offset = 0;
         public float RX16mGainOffset
         {
@@ -25459,17 +25473,20 @@ namespace PowerSDR
                 // Debug.WriteLine("oload" + oload);
                 if (oload == 1)
                 {
-                    if (rx2_preamp_present)
-                        txtOverload.Text = "RX1 Overload!";
-                    else txtOverload.Text = "ADC Overload!";
+                    txtOverload.Text = "ADC1 Overload!";
+
                 }
                 if (oload == 2)
                 {
-                    txtOverload.Text = "RX2 Overload!";
+                    txtOverload.Text = "ADC2 Overload!";
                 }
-                if (oload == 3)
+                if (oload == 3 || oload > 4)
                 {
                     txtOverload.Text = "ADC Overload!";
+                }
+                if (oload == 4)
+                {
+                    txtOverload.Text = "ADC3 Overload!";
                 }
 
                 ++change_overload_color_count;
@@ -25777,15 +25794,30 @@ namespace PowerSDR
                                 switch ((int)g.DpiX)
                                 {
                                     case 96:
-                                        double s = (num + 127) / 6;
-                                        if (s <= 9.0F)
-                                            pixel_x = (int)((s * 7.5) + 2);
+                                        double s;
+                                        if (rx1_above30)
+                                        {
+                                            s = (num + 147) / 6;
+                                            if (s <= 9.0F)
+                                                pixel_x = (int)((s * 7.5) + 2);
+                                            else
+                                            {
+                                                double over_s9 = num + 93;
+                                                pixel_x = 69 + (int)(over_s9 * 1.05);
+                                            }
+                                        }
                                         else
                                         {
-                                            double over_s9 = num + 73;
-                                            pixel_x = 69 + (int)(over_s9 * 1.05);
+                                            s = (num + 127) / 6;
+                                            if (s <= 9.0F)
+                                                pixel_x = (int)((s * 7.5) + 2);
+                                            else
+                                            {
+                                                double over_s9 = num + 73;
+                                                pixel_x = 69 + (int)(over_s9 * 1.05);
+                                            }
                                         }
-                                        break;
+                                       break;
                                     case 120:
                                         if (num <= -97.0f)
                                             pixel_x = (int)(0 + (num + 100.0) / 3.0 * 10);
@@ -26128,24 +26160,48 @@ namespace PowerSDR
                                 case MeterRXMode.SIGNAL_AVERAGE:
                                     if (s_meter)      // modif F8CHK
                                     {
-                                        if (num <= -124.0f) output = "    S 0";
-                                        else if (num > -124.0f & num <= -118.0f) output = "    S 1";
-                                        else if (num > -118.0f & num <= -112.0f) output = "    S 2";
-                                        else if (num > -112.0f & num <= -106.0f) output = "    S 3";
-                                        else if (num > -106.0f & num <= -100.0f) output = "    S 4";
-                                        else if (num > -100.0f & num <= -94.0f) output = "    S 5";
-                                        else if (num > -94.0f & num <= -88.0f) output = "    S 6";
-                                        else if (num > -88.0f & num <= -82.0f) output = "    S 7";
-                                        else if (num > -82.0f & num <= -76.0f) output = "    S 8";
-                                        else if (num > -76.0f & num <= -70.0f) output = "    S 9";
-                                        else if (num > -70.0f & num <= -66.0f) output = "    S 9 + 5";
-                                        else if (num > -66.0f & num <= -60.0f) output = "    S 9 + 10";
-                                        else if (num > -60.0f & num <= -56.0f) output = "    S 9 + 15";
-                                        else if (num > -56.0f & num <= -46.0f) output = "    S 9 + 20";
-                                        else if (num > -46.0f & num <= -36.0f) output = "    S 9 + 30";
-                                        else if (num > -36.0f & num <= -26.0f) output = "    S 9 + 40";
-                                        else if (num > -26.0f & num <= -16.0f) output = "    S 9 + 50";
-                                        else if (num > -16.0f) output = "    S 9 + 60";
+                                        if (rx1_above30)
+                                        {
+                                            if (num <= -124.0f) output = "    S 0";
+                                            else if (num > -144.0f & num <= -138.0f) output = "    S 1";
+                                            else if (num > -138.0f & num <= -132.0f) output = "    S 2";
+                                            else if (num > -132.0f & num <= -126.0f) output = "    S 3";
+                                            else if (num > -126.0f & num <= -120.0f) output = "    S 4";
+                                            else if (num > -120.0f & num <= -114.0f) output = "    S 5";
+                                            else if (num > -114.0f & num <= -108.0f) output = "    S 6";
+                                            else if (num > -108.0f & num <= -102.0f) output = "    S 7";
+                                            else if (num > -102.0f & num <= -96.0f) output = "    S 8";
+                                            else if (num > -96.0f & num <= -90.0f) output = "    S 9";
+                                            else if (num > -90.0f & num <= -86.0f) output = "    S 9 + 5";
+                                            else if (num > -86.0f & num <= -80.0f) output = "    S 9 + 10";
+                                            else if (num > -80.0f & num <= -76.0f) output = "    S 9 + 15";
+                                            else if (num > -76.0f & num <= -66.0f) output = "    S 9 + 20";
+                                            else if (num > -66.0f & num <= -56.0f) output = "    S 9 + 30";
+                                            else if (num > -56.0f & num <= -46.0f) output = "    S 9 + 40";
+                                            else if (num > -46.0f & num <= -36.0f) output = "    S 9 + 50";
+                                            else if (num > -36.0f) output = "    S 9 + 60";
+                                        }
+                                        else
+                                        {
+                                            if (num <= -124.0f) output = "    S 0";
+                                            else if (num > -124.0f & num <= -118.0f) output = "    S 1";
+                                            else if (num > -118.0f & num <= -112.0f) output = "    S 2";
+                                            else if (num > -112.0f & num <= -106.0f) output = "    S 3";
+                                            else if (num > -106.0f & num <= -100.0f) output = "    S 4";
+                                            else if (num > -100.0f & num <= -94.0f) output = "    S 5";
+                                            else if (num > -94.0f & num <= -88.0f) output = "    S 6";
+                                            else if (num > -88.0f & num <= -82.0f) output = "    S 7";
+                                            else if (num > -82.0f & num <= -76.0f) output = "    S 8";
+                                            else if (num > -76.0f & num <= -70.0f) output = "    S 9";
+                                            else if (num > -70.0f & num <= -66.0f) output = "    S 9 + 5";
+                                            else if (num > -66.0f & num <= -60.0f) output = "    S 9 + 10";
+                                            else if (num > -60.0f & num <= -56.0f) output = "    S 9 + 15";
+                                            else if (num > -56.0f & num <= -46.0f) output = "    S 9 + 20";
+                                            else if (num > -46.0f & num <= -36.0f) output = "    S 9 + 30";
+                                            else if (num > -36.0f & num <= -26.0f) output = "    S 9 + 40";
+                                            else if (num > -26.0f & num <= -16.0f) output = "    S 9 + 50";
+                                            else if (num > -16.0f) output = "    S 9 + 60";
+                                        }
                                     }
                                     else output = num.ToString(format) + " dBm";
                                     break;
@@ -26264,14 +26320,29 @@ namespace PowerSDR
                                     g.DrawString("+" + (i * 20).ToString(), font7, high_brush, (int)(W * 0.5 + i * spacing - (int)string_width * 3 - i / 3 * 2), (int)(H - 4 - 8 - string_height));
                                 }
 
-                                if (num > -73.0) // high area
+                                if (rx1_above30)
                                 {
-                                    pixel_x = (int)(W * 0.5 + (73.0 + num) / 63.0 * (W * 0.5 - 3));
+                                    if (num > -93.0) // high area
+                                    {
+                                        pixel_x = (int)(W * 0.5 + (93.0 + num) / 63.0 * (W * 0.5 - 3));
+                                    }
+                                    else
+                                    {
+                                        pixel_x = (int)((num + 153.0) / 60.0 * (W * 0.5));
+                                    }
                                 }
                                 else
                                 {
-                                    pixel_x = (int)((num + 133.0) / 60.0 * (W * 0.5));
+                                    if (num > -73.0) // high area
+                                    {
+                                        pixel_x = (int)(W * 0.5 + (73.0 + num) / 63.0 * (W * 0.5 - 3));
+                                    }
+                                    else
+                                    {
+                                        pixel_x = (int)((num + 133.0) / 60.0 * (W * 0.5));
+                                    }
                                 }
+
                                 break;
                             case MeterRXMode.ADC_L:
                             case MeterRXMode.ADC_R:
@@ -27305,24 +27376,48 @@ namespace PowerSDR
                                 case MeterRXMode.SIGNAL_AVERAGE:
                                     if (s_meter)      // modif F8CHK
                                     {
-                                        if (num <= -124.0f) output = "    S 0";
-                                        else if (num > -124.0f & num <= -118.0f) output = "    S 1";
-                                        else if (num > -118.0f & num <= -112.0f) output = "    S 2";
-                                        else if (num > -112.0f & num <= -106.0f) output = "    S 3";
-                                        else if (num > -106.0f & num <= -100.0f) output = "    S 4";
-                                        else if (num > -100.0f & num <= -94.0f) output = "    S 5";
-                                        else if (num > -94.0f & num <= -88.0f) output = "    S 6";
-                                        else if (num > -88.0f & num <= -82.0f) output = "    S 7";
-                                        else if (num > -82.0f & num <= -76.0f) output = "    S 8";
-                                        else if (num > -76.0f & num <= -70.0f) output = "    S 9";
-                                        else if (num > -70.0f & num <= -66.0f) output = "    S 9 + 5";
-                                        else if (num > -66.0f & num <= -60.0f) output = "    S 9 + 10";
-                                        else if (num > -60.0f & num <= -56.0f) output = "    S 9 + 15";
-                                        else if (num > -56.0f & num <= -46.0f) output = "    S 9 + 20";
-                                        else if (num > -46.0f & num <= -36.0f) output = "    S 9 + 30";
-                                        else if (num > -36.0f & num <= -26.0f) output = "    S 9 + 40";
-                                        else if (num > -26.0f & num <= -16.0f) output = "    S 9 + 50";
-                                        else if (num > -16.0f) output = "    S 9 + 60";
+                                        if (rx1_above30)
+                                        {
+                                            if (num <= -124.0f) output = "    S 0";
+                                            else if (num > -144.0f & num <= -138.0f) output = "    S 1";
+                                            else if (num > -138.0f & num <= -132.0f) output = "    S 2";
+                                            else if (num > -132.0f & num <= -126.0f) output = "    S 3";
+                                            else if (num > -126.0f & num <= -120.0f) output = "    S 4";
+                                            else if (num > -120.0f & num <= -114.0f) output = "    S 5";
+                                            else if (num > -114.0f & num <= -108.0f) output = "    S 6";
+                                            else if (num > -108.0f & num <= -102.0f) output = "    S 7";
+                                            else if (num > -102.0f & num <= -96.0f) output = "    S 8";
+                                            else if (num > -96.0f & num <= -90.0f) output = "    S 9";
+                                            else if (num > -90.0f & num <= -86.0f) output = "    S 9 + 5";
+                                            else if (num > -86.0f & num <= -80.0f) output = "    S 9 + 10";
+                                            else if (num > -80.0f & num <= -76.0f) output = "    S 9 + 15";
+                                            else if (num > -76.0f & num <= -66.0f) output = "    S 9 + 20";
+                                            else if (num > -66.0f & num <= -56.0f) output = "    S 9 + 30";
+                                            else if (num > -56.0f & num <= -46.0f) output = "    S 9 + 40";
+                                            else if (num > -46.0f & num <= -36.0f) output = "    S 9 + 50";
+                                            else if (num > -36.0f) output = "    S 9 + 60";
+                                        }
+                                        else
+                                        {
+                                            if (num <= -124.0f) output = "    S 0";
+                                            else if (num > -124.0f & num <= -118.0f) output = "    S 1";
+                                            else if (num > -118.0f & num <= -112.0f) output = "    S 2";
+                                            else if (num > -112.0f & num <= -106.0f) output = "    S 3";
+                                            else if (num > -106.0f & num <= -100.0f) output = "    S 4";
+                                            else if (num > -100.0f & num <= -94.0f) output = "    S 5";
+                                            else if (num > -94.0f & num <= -88.0f) output = "    S 6";
+                                            else if (num > -88.0f & num <= -82.0f) output = "    S 7";
+                                            else if (num > -82.0f & num <= -76.0f) output = "    S 8";
+                                            else if (num > -76.0f & num <= -70.0f) output = "    S 9";
+                                            else if (num > -70.0f & num <= -66.0f) output = "    S 9 + 5";
+                                            else if (num > -66.0f & num <= -60.0f) output = "    S 9 + 10";
+                                            else if (num > -60.0f & num <= -56.0f) output = "    S 9 + 15";
+                                            else if (num > -56.0f & num <= -46.0f) output = "    S 9 + 20";
+                                            else if (num > -46.0f & num <= -36.0f) output = "    S 9 + 30";
+                                            else if (num > -36.0f & num <= -26.0f) output = "    S 9 + 40";
+                                            else if (num > -26.0f & num <= -16.0f) output = "    S 9 + 50";
+                                            else if (num > -16.0f) output = "    S 9 + 60";
+                                        }
                                     }
                                     else output = num.ToString(format) + " dBm";
                                     break;
@@ -27416,13 +27511,28 @@ namespace PowerSDR
                             switch ((int)g.DpiX)
                             {
                                 case 96:
-                                    double s = (num + 127) / 6;
-                                    if (s <= 9.0F)
-                                        pixel_x = (int)((s * 7.5) + 2);
+                                    double s;
+                                    if (rx2_above30)
+                                    {
+                                        s = (num + 147) / 6;
+                                        if (s <= 9.0F)
+                                            pixel_x = (int)((s * 7.5) + 2);
+                                        else
+                                        {
+                                            double over_s9 = num + 93;
+                                            pixel_x = 69 + (int)(over_s9 * 1.05);
+                                        }
+                                    }
                                     else
                                     {
-                                        double over_s9 = num + 73;
-                                        pixel_x = 69 + (int)(over_s9 * 1.05);
+                                        s = (num + 127) / 6;
+                                        if (s <= 9.0F)
+                                            pixel_x = (int)((s * 7.5) + 2);
+                                        else
+                                        {
+                                            double over_s9 = num + 73;
+                                            pixel_x = 69 + (int)(over_s9 * 1.05);
+                                        }
                                     }
                                     break;
                                 case 120:
@@ -27531,7 +27641,53 @@ namespace PowerSDR
                         {
                             case MeterRXMode.SIGNAL_STRENGTH:
                             case MeterRXMode.SIGNAL_AVERAGE:
-                                output = num.ToString(format) + " dBm";
+                                if (s_meter)      // modif F8CHK
+                                {
+                                    if (rx1_above30)
+                                    {
+                                        if (num <= -124.0f) output = "    S 0";
+                                        else if (num > -144.0f & num <= -138.0f) output = "    S 1";
+                                        else if (num > -138.0f & num <= -132.0f) output = "    S 2";
+                                        else if (num > -132.0f & num <= -126.0f) output = "    S 3";
+                                        else if (num > -126.0f & num <= -120.0f) output = "    S 4";
+                                        else if (num > -120.0f & num <= -114.0f) output = "    S 5";
+                                        else if (num > -114.0f & num <= -108.0f) output = "    S 6";
+                                        else if (num > -108.0f & num <= -102.0f) output = "    S 7";
+                                        else if (num > -102.0f & num <= -96.0f) output = "    S 8";
+                                        else if (num > -96.0f & num <= -90.0f) output = "    S 9";
+                                        else if (num > -90.0f & num <= -86.0f) output = "    S 9 + 5";
+                                        else if (num > -86.0f & num <= -80.0f) output = "    S 9 + 10";
+                                        else if (num > -80.0f & num <= -76.0f) output = "    S 9 + 15";
+                                        else if (num > -76.0f & num <= -66.0f) output = "    S 9 + 20";
+                                        else if (num > -66.0f & num <= -56.0f) output = "    S 9 + 30";
+                                        else if (num > -56.0f & num <= -46.0f) output = "    S 9 + 40";
+                                        else if (num > -46.0f & num <= -36.0f) output = "    S 9 + 50";
+                                        else if (num > -36.0f) output = "    S 9 + 60";
+                                    }
+                                    else
+                                    {
+                                        if (num <= -124.0f) output = "    S 0";
+                                        else if (num > -124.0f & num <= -118.0f) output = "    S 1";
+                                        else if (num > -118.0f & num <= -112.0f) output = "    S 2";
+                                        else if (num > -112.0f & num <= -106.0f) output = "    S 3";
+                                        else if (num > -106.0f & num <= -100.0f) output = "    S 4";
+                                        else if (num > -100.0f & num <= -94.0f) output = "    S 5";
+                                        else if (num > -94.0f & num <= -88.0f) output = "    S 6";
+                                        else if (num > -88.0f & num <= -82.0f) output = "    S 7";
+                                        else if (num > -82.0f & num <= -76.0f) output = "    S 8";
+                                        else if (num > -76.0f & num <= -70.0f) output = "    S 9";
+                                        else if (num > -70.0f & num <= -66.0f) output = "    S 9 + 5";
+                                        else if (num > -66.0f & num <= -60.0f) output = "    S 9 + 10";
+                                        else if (num > -60.0f & num <= -56.0f) output = "    S 9 + 15";
+                                        else if (num > -56.0f & num <= -46.0f) output = "    S 9 + 20";
+                                        else if (num > -46.0f & num <= -36.0f) output = "    S 9 + 30";
+                                        else if (num > -36.0f & num <= -26.0f) output = "    S 9 + 40";
+                                        else if (num > -26.0f & num <= -16.0f) output = "    S 9 + 50";
+                                        else if (num > -16.0f) output = "    S 9 + 60";
+                                    }
+                                }
+                                else
+                                    output = num.ToString(format) + " dBm";
                                 break;
                             case MeterRXMode.ADC_L:
                             case MeterRXMode.ADC_R:
@@ -27614,13 +27770,28 @@ namespace PowerSDR
                                 g.DrawString("+" + (i * 20).ToString(), font7, high_brush, (int)(W * 0.5 + i * spacing - (int)string_width * 3 - i / 3 * 2), (int)(H - 4 - 8 - string_height));
                             }
 
-                            if (num > -73.0) // high area
+                            if (rx2_above30)
                             {
-                                pixel_x = (int)(W * 0.5 + (73.0 + num) / 63.0 * (W * 0.5 - 3));
+                                if (num > -93.0) // high area
+                                {
+                                    pixel_x = (int)(W * 0.5 + (93.0 + num) / 63.0 * (W * 0.5 - 3));
+                                }
+                                else
+                                {
+                                    pixel_x = (int)((num + 153.0) / 60.0 * (W * 0.5));
+                                }
                             }
                             else
                             {
-                                pixel_x = (int)((num + 133.0) / 60.0 * (W * 0.5));
+
+                                if (num > -73.0) // high area
+                                {
+                                    pixel_x = (int)(W * 0.5 + (73.0 + num) / 63.0 * (W * 0.5 - 3));
+                                }
+                                else
+                                {
+                                    pixel_x = (int)((num + 133.0) / 60.0 * (W * 0.5));
+                                }
                             }
                             break;
                         case MeterRXMode.ADC_L:
@@ -27685,7 +27856,53 @@ namespace PowerSDR
                         {
                             case MeterRXMode.SIGNAL_STRENGTH:
                             case MeterRXMode.SIGNAL_AVERAGE:
-                                output = num.ToString(format) + " dBm";
+                                if (s_meter)      // modif F8CHK
+                                {
+                                    if (rx2_above30)
+                                    {
+                                        if (num <= -124.0f) output = "    S 0";
+                                        else if (num > -144.0f & num <= -138.0f) output = "    S 1";
+                                        else if (num > -138.0f & num <= -132.0f) output = "    S 2";
+                                        else if (num > -132.0f & num <= -126.0f) output = "    S 3";
+                                        else if (num > -126.0f & num <= -120.0f) output = "    S 4";
+                                        else if (num > -120.0f & num <= -114.0f) output = "    S 5";
+                                        else if (num > -114.0f & num <= -108.0f) output = "    S 6";
+                                        else if (num > -108.0f & num <= -102.0f) output = "    S 7";
+                                        else if (num > -102.0f & num <= -96.0f) output = "    S 8";
+                                        else if (num > -96.0f & num <= -90.0f) output = "    S 9";
+                                        else if (num > -90.0f & num <= -86.0f) output = "    S 9 + 5";
+                                        else if (num > -86.0f & num <= -80.0f) output = "    S 9 + 10";
+                                        else if (num > -80.0f & num <= -76.0f) output = "    S 9 + 15";
+                                        else if (num > -76.0f & num <= -66.0f) output = "    S 9 + 20";
+                                        else if (num > -66.0f & num <= -56.0f) output = "    S 9 + 30";
+                                        else if (num > -56.0f & num <= -46.0f) output = "    S 9 + 40";
+                                        else if (num > -46.0f & num <= -36.0f) output = "    S 9 + 50";
+                                        else if (num > -36.0f) output = "    S 9 + 60";
+                                    }
+                                    else
+                                    {
+                                        if (num <= -124.0f) output = "    S 0";
+                                        else if (num > -124.0f & num <= -118.0f) output = "    S 1";
+                                        else if (num > -118.0f & num <= -112.0f) output = "    S 2";
+                                        else if (num > -112.0f & num <= -106.0f) output = "    S 3";
+                                        else if (num > -106.0f & num <= -100.0f) output = "    S 4";
+                                        else if (num > -100.0f & num <= -94.0f) output = "    S 5";
+                                        else if (num > -94.0f & num <= -88.0f) output = "    S 6";
+                                        else if (num > -88.0f & num <= -82.0f) output = "    S 7";
+                                        else if (num > -82.0f & num <= -76.0f) output = "    S 8";
+                                        else if (num > -76.0f & num <= -70.0f) output = "    S 9";
+                                        else if (num > -70.0f & num <= -66.0f) output = "    S 9 + 5";
+                                        else if (num > -66.0f & num <= -60.0f) output = "    S 9 + 10";
+                                        else if (num > -60.0f & num <= -56.0f) output = "    S 9 + 15";
+                                        else if (num > -56.0f & num <= -46.0f) output = "    S 9 + 20";
+                                        else if (num > -46.0f & num <= -36.0f) output = "    S 9 + 30";
+                                        else if (num > -36.0f & num <= -26.0f) output = "    S 9 + 40";
+                                        else if (num > -26.0f & num <= -16.0f) output = "    S 9 + 50";
+                                        else if (num > -16.0f) output = "    S 9 + 60";
+                                    }
+                                }
+                                else
+                                    output = num.ToString(format) + " dBm";
                                 break;
                             case MeterRXMode.ADC_L:
                             case MeterRXMode.ADC_R:
@@ -30840,8 +31057,14 @@ namespace PowerSDR
                 fwc_dds_freq = 0.0f;
                 rx2_dds_freq = 0.0f;
 
-                if (ClickTuneDisplay)
-                    FWCDDSFreq = center_frequency;      // Start up frequency generator to centre frequency if CTUN - G3OQD
+                //  if (ClickTuneDisplay)
+
+                // FWCDDSFreq = center_frequency;      // Start up frequency generator to centre frequency if CTUN - G3OQD
+                //  if (rx1_xvtr_index >= 0)
+                //   FWCDDSFreq = XVTRForm.TranslateFreq(center_frequency);
+                // else
+                //  FWCDDSFreq = center_frequency;
+
 
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                 comboDisplayMode_SelectedIndexChanged(this, EventArgs.Empty);
@@ -34051,8 +34274,10 @@ namespace PowerSDR
             }
 
             double freq = double.Parse(txtVFOAFreq.Text);
+            if (freq > 30.0) rx1_above30 = true;
+            else rx1_above30 = false;
 
-            if (!click_tune_display)
+            if (!click_tune_display || initializing)
                 center_frequency = freq;
 
             // Lock the display
@@ -34140,7 +34365,7 @@ namespace PowerSDR
 
             rx1_xvtr_index = XVTRForm.XVTRFreq(freq);
 
-            if (!chkVFOSplit.Checked && !chkVFOBTX.Checked) //d
+            if (!chkVFOSplit.Checked && !chkVFOBTX.Checked)
                 tx_xvtr_index = rx1_xvtr_index;
 
             if (rx1_xvtr_index < 0) //in HF
@@ -34275,7 +34500,7 @@ namespace PowerSDR
             if (alexpresent && rx1_band == Band.B6M &&
                (chkSR.Checked || (!chkSR.Checked && !disable_6m_lna_on_rx)) &&
                 current_hpsdr_model != HPSDRModel.ANAN10)
-                RX16mGainOffset = -20.0f;
+                RX16mGainOffset = -RX6mGainOffset;
             else RX16mGainOffset = 0;
 
             double rx_freq = freq;
@@ -34384,7 +34609,12 @@ namespace PowerSDR
                         FWCDDSFreq = rx_freq; // update rx freq
 
                     if (click_tune_display && rx1_spectrum_tune_drag)
-                        FWCDDSFreq = center_frequency;
+                    {
+                        if (rx1_xvtr_index >= 0)
+                            FWCDDSFreq = XVTRForm.TranslateFreq(center_frequency);
+                        else
+                            FWCDDSFreq = center_frequency;
+                    }
 
                     if (chkEnableMultiRX.Checked)
                     {
@@ -34403,6 +34633,11 @@ namespace PowerSDR
 
                 }
             }
+            else if (rx1_xvtr_index >= 0)
+                FWCDDSFreq = XVTRForm.TranslateFreq(center_frequency);
+            else
+                FWCDDSFreq = center_frequency;
+
 
             if (chkVFOSync.Checked && txtVFOBFreq.Text != txtVFOAFreq.Text)
             {
@@ -34705,6 +34940,8 @@ namespace PowerSDR
             }
 
             double freq = double.Parse(txtVFOBFreq.Text);
+            if (freq > 30.0) rx2_above30 = true;
+            else rx2_above30 = false;
 
             if (!click_tune_rx2_display)
                 center_rx2_frequency = freq;
@@ -36859,11 +37096,11 @@ namespace PowerSDR
                                     //else freq = double.Parse(txtVFOBFreq.Text); // click & drag vfo
                                     if (click_tune_rx2_display && current_click_tune_mode != ClickTuneMode.Off)
                                         freq = center_rx2_frequency + (double)x * 0.0000010;
-                                    else if (current_click_tune_mode != ClickTuneMode.Off) 
+                                    else if (current_click_tune_mode != ClickTuneMode.Off)
                                         freq = double.Parse(txtVFOBFreq.Text) + (double)x * 0.0000010; // click tune w/x-hairs
-                                    else if (click_tune_drag) 
+                                    else if (click_tune_drag)
                                         freq = center_rx2_frequency + (double)x * 0.0000010; // click tune & drag vfo
-                                    else 
+                                    else
                                         freq = double.Parse(txtVFOBFreq.Text); // click & drag vfo
 
                                     switch (rx2_dsp_mode)
@@ -36883,6 +37120,7 @@ namespace PowerSDR
                                     }
 
                                     if (snap_to_click_tuning &&
+                                        current_click_tune_mode != ClickTuneMode.Off &&
                                         rx2_dsp_mode != DSPMode.CWL &&
                                         rx2_dsp_mode != DSPMode.CWU &&
                                         rx2_dsp_mode != DSPMode.DIGL &&
@@ -36925,6 +37163,7 @@ namespace PowerSDR
                                     }
 
                                     if (snap_to_click_tuning &&
+                                        current_click_tune_mode != ClickTuneMode.Off &&
                                         rx1_dsp_mode != DSPMode.CWL &&
                                         rx1_dsp_mode != DSPMode.CWU &&
                                         rx1_dsp_mode != DSPMode.DIGL &&
