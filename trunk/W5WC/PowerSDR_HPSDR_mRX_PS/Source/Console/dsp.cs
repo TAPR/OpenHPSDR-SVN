@@ -465,7 +465,7 @@ namespace PowerSDR
         // eer
 
         [DllImport("wdsp.dll", EntryPoint = "create_eerEXT", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void create_eerEXT(int id, int run, int size, int rate, double mgain, double pgain, double mdelay, int amiq);
+        public static extern void create_eerEXT(int id, int run, int size, int rate, double mgain, double pgain, double mdelay, double pdelay, int amiq);
 
         [DllImport("wdsp.dll", EntryPoint = "destroy_eerEXT", CallingConvention = CallingConvention.Cdecl)]
         public static extern void destroy_eerEXT(int id);
@@ -487,6 +487,9 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "SetEERMdelay", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEERMdelay(int id, double delay);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEERPdelay", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEERPdelay(int id, double delay);
 
         [DllImport("wdsp.dll", EntryPoint = "SetEERSize", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEERSize(int id, int size);

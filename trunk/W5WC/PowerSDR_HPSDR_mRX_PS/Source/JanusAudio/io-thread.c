@@ -1015,8 +1015,9 @@ void IOThreadMainLoop(void) {
 
 					switch (ControlBytesIn[0] & CandCAddrMask) {
 					case 0:
+						ADC_Overload = ControlBytesIn[1] & 1;
 						if (HermesPowerEnabled) {
-						processOverloadBit((ControlBytesIn[1] & 1), (ControlBytesIn[1] & 1));
+						//processOverloadBit((ControlBytesIn[1] & 1), (ControlBytesIn[1] & 1));
 						User_I01 = ControlBytesIn[1] & 0x02;
 						User_I02 = ControlBytesIn[1] & 0x04;
 						User_I03 = ControlBytesIn[1] & 0x08;
@@ -1035,6 +1036,7 @@ void IOThreadMainLoop(void) {
 					case 0x20:
 						MercuryFWVersion =  (int)(ControlBytesIn[1] >> 1);
 						//processOverloadBit(ControlBytesIn[1] & 1);
+						ADC1_Overload = ControlBytesIn[1] & 1;
 						break;
 					}
 					// TxOverrun = FPGAReadBufp[i];
@@ -1063,8 +1065,9 @@ void IOThreadMainLoop(void) {
 						break;
 					case 0x20:
 						Mercury2FWVersion =  (int)(ControlBytesIn[2] >> 1);										                 
-						if (!HermesPowerEnabled) processOverloadBit((ControlBytesIn[1] & 1), 
-							(ControlBytesIn[2] & 1));
+						//if (!HermesPowerEnabled) 
+							//processOverloadBit((ControlBytesIn[1] & 1), (ControlBytesIn[2] & 1));
+						ADC2_Overload = (ControlBytesIn[2] & 1) << 1;
 						break;
 					}
 
@@ -1090,7 +1093,8 @@ void IOThreadMainLoop(void) {
 							hermes_dcv = ((ControlBytesIn[3] << 8) & 0xff00); //Hermes 13.8v (22.2v scale)
 						break;
 					case 0x20:
-						//  Mercury3FWVersion =  (int)(ControlBytesIn[3] >> 1);										                 
+						//  Mercury3FWVersion =  (int)(ControlBytesIn[3] >> 1);	
+						ADC3_Overload = (ControlBytesIn[3] & 1) << 2;
 						break;
 					}
 
@@ -1120,7 +1124,8 @@ void IOThreadMainLoop(void) {
 						}
 						break;
 					case 0x20:
-						// Mercury4FWVersion = (int)(ControlBytesIn[4] >> 1);										                 
+						// Mercury4FWVersion = (int)(ControlBytesIn[4] >> 1);	
+						//ADC4_Overload = (ControlBytesIn[4] & 1) << 3;
 						break;
 					}
 
@@ -1131,126 +1136,6 @@ void IOThreadMainLoop(void) {
 
 					// printf("fa: %d fp: %d\n", RxFifoAvail, RxFramePlaying);
 					break;
-
-#if 0
-				case STATE_SAMPLE_I1_HI:
-					Merc1_I = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
-					state = STATE_SAMPLE_I1_MID;
-					break;
-
-				case STATE_SAMPLE_I1_MID:
-					Merc1_I = (((unsigned char)FPGAReadBufp[i]) <<8) | Merc1_I;  // add in middle part of sample -- unsigned!
-					state = STATE_SAMPLE_I1_LO;
-					break;
-
-				case STATE_SAMPLE_I1_LO:
-					Merc1_I = ((unsigned char)FPGAReadBufp[i]) | Merc1_I; // add in last part of sample
-					++samples_this_sync;
-					state = STATE_SAMPLE_Q1_HI;
-					break;
-
-				case STATE_SAMPLE_Q1_HI:
-					Merc1_Q = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
-					state = STATE_SAMPLE_Q1_MID;
-					break;
-
-				case STATE_SAMPLE_Q1_MID:
-					Merc1_Q = (((unsigned char)FPGAReadBufp[i]) <<8) | Merc1_Q;  // add in middle part of sample -- unsigned!
-					state = STATE_SAMPLE_Q1_LO;
-					break;
-
-				case STATE_SAMPLE_Q1_LO:
-					Merc1_Q = ((unsigned char)FPGAReadBufp[i]) | Merc1_Q; // add in last part of sample
-					++samples_this_sync;
-					state = STATE_SAMPLE_I2_HI;
-					break;
-
-				case STATE_SAMPLE_I2_HI:
-					Merc2_I = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
-					state = STATE_SAMPLE_I2_MID;
-					break;
-
-				case STATE_SAMPLE_I2_MID:
-					Merc2_I = (((unsigned char)FPGAReadBufp[i]) <<8) | Merc2_I;  // add in middle part of sample -- unsigned!
-					state = STATE_SAMPLE_I2_LO;
-					break;
-
-				case STATE_SAMPLE_I2_LO:
-					Merc2_I = ((unsigned char)FPGAReadBufp[i]) | Merc2_I; // add in last part of sample
-					++samples_this_sync;
-					state = STATE_SAMPLE_Q2_HI;
-					break;
-
-				case STATE_SAMPLE_Q2_HI:
-					Merc2_Q = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
-					state = STATE_SAMPLE_Q2_MID;
-					break;
-
-				case STATE_SAMPLE_Q2_MID:
-					Merc2_Q = (((unsigned char)FPGAReadBufp[i]) <<8) | Merc2_Q;  // add in middle part of sample -- unsigned!
-					state = STATE_SAMPLE_Q2_LO;
-					break;
-
-				case STATE_SAMPLE_Q2_LO:
-					Merc2_Q = ((unsigned char)FPGAReadBufp[i]) | Merc2_Q; // add in last part of sample
-					++samples_this_sync;
-						//now load IOSampleInBufp buffer with the appropriate sample values for I and Q
-					if (IQ_stream == 1){
-						IOSampleInBufp[sample_count] = Merc1_I;
-						++sample_count;
-						IOSampleInBufp[sample_count] = Merc1_Q;
-						++sample_count;
-					}
-					if (IQ_stream == 2){
-						IOSampleInBufp[sample_count] = Merc2_I;
-						++sample_count;
-						IOSampleInBufp[sample_count] = Merc2_Q;
-						++sample_count;
-					}
-					if (IQ_stream == 3){
-						R_IA = I_RotateA;   //read external A shift vector I component
-						R_QA = Q_RotateA;   //read external A shift vector Q component
-						//R_I = I_Rotate;		//read external shift vector I component
-						//R_Q = Q_Rotate;		//read external shift vector Q component
-						r_Merc = refMerc;   //read which Mercury board to use for reference stream
-
-						if (r_Merc == 1) {
-							//shift Merc2 stream
-							I_shift = (double) Merc2_I;
-							Q_shift = (double) Merc2_Q;
-							Merc2_I = (int)((I_shift * R_IA) - (Q_shift * R_QA)); //calc Mer2 I component for new rotated vector value
-							Merc2_Q = (int)((Q_shift * R_IA) + (I_shift * R_QA)); //calc Merc2 Q component for new rotated vector value
-
-							//combine the two streams
-							IOSampleInBufp[sample_count] = (Merc1_I + Merc2_I);
-							++sample_count;
-							IOSampleInBufp[sample_count] = (Merc1_Q + Merc2_Q);
-							++sample_count;
-						}
-
-						if (r_Merc == 2) {
-							//shift Merc1 stream
-							I_shift = (double) Merc1_I;
-							Q_shift = (double) Merc1_Q;
-							Merc1_I = (int)((I_shift * R_IA) - (Q_shift * R_QA)); //calc Mer1 I component for new rotated vector value
-							Merc1_Q = (int)((Q_shift * R_IA) + (I_shift * R_QA)); //calc Merc1 Q component for new rotated vector value
-
-							//combine the two streams
-							IOSampleInBufp[sample_count] = (Merc2_I + Merc1_I);
-							++sample_count;
-							IOSampleInBufp[sample_count] = (Merc2_Q + Merc1_Q);
-							++sample_count;
-						}
-					}
-
-					IOSampleInBufp[sample_count] = 0;	// Zero the RX2 I and Q buffers
-					++sample_count;	
-					IOSampleInBufp[sample_count] = 0;
-					++sample_count;
-	
-					state = STATE_SAMPLE_MIC_HI;				
-					break;
-#endif
 				case STATE_SAMPLE_HI:
 					//printf(" HI");
 					this_num = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
@@ -1546,16 +1431,16 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] =  (VFOfreq_rx4 >> 24) & 0xff; // RX4
 						break;
 					case 6:
-						if (HermesPowerEnabled || enable_cw_keyer) { 															     
+					//	if (HermesPowerEnabled || enable_cw_keyer) { 															     
 							if (swr_protect == 0.0f) swr_protect = 0.3f;
 							pf = (unsigned char) (OutputPowerFactor * swr_protect);
 							FPGAWriteBufp[writebufpos] = (unsigned char) (pf & 0xff); //(OutputPowerFactor & 0xff);
 							//printf("outPower: %u\n", OutputPowerFactor);  fflush(stdout);
-						} 
+	/*					} 
 						else 
 						{
 							FPGAWriteBufp[writebufpos] = 0;
-						} 
+						} */
 						break;
 					case 7:					
 						    FPGAWriteBufp[writebufpos] = ( RX2Preamp | RX1Preamp | MicTipRing | MicBias | MicPTT) & 0x7f; 					

@@ -92,7 +92,8 @@ WCPAGC create_wcpagc (	int run,
 	a->hang_counter = 0;
 	a->decay_type = 0;
 	a->state = 0;
-
+	a->ring = (double *) malloc0 (RB_SIZE * sizeof (complex));
+	a->abs_ring = (double *) malloc0 (RB_SIZE * sizeof (double));
 	loadWcpAGC (a);
 
 	return a;
@@ -133,6 +134,8 @@ void loadWcpAGC (WCPAGC a)
 
 void destroy_wcpagc (WCPAGC a)
 {
+	_aligned_free (a->abs_ring);
+	_aligned_free (a->ring);
 	_aligned_free (a);
 }
 
@@ -166,15 +169,15 @@ void xwcpagc (WCPAGC a)
 			if (++a->in_index >= a->ring_buffsize)
 				a->in_index -= a->ring_buffsize;
 	
-			a->out_sample[0] = a->ring[a->out_index][0];
-			a->out_sample[1] = a->ring[a->out_index][1];
+			a->out_sample[0] = a->ring[2 * a->out_index + 0];
+			a->out_sample[1] = a->ring[2 * a->out_index + 1];
 			a->abs_out_sample = a->abs_ring[a->out_index];
-			a->ring[a->in_index][0] = a->in[2 * i + 0];
-			a->ring[a->in_index][1] = a->in[2 * i + 1];
+			a->ring[2 * a->in_index + 0] = a->in[2 * i + 0];
+			a->ring[2 * a->in_index + 1] = a->in[2 * i + 1];
 			if (a->pmode == 0)
-				a->abs_ring[a->in_index] = max(fabs(a->ring[a->in_index][0]), fabs(a->ring[a->in_index][1]));
+				a->abs_ring[a->in_index] = max(fabs(a->ring[2 * a->in_index + 0]), fabs(a->ring[2 * a->in_index + 1]));
 			else
-				a->abs_ring[a->in_index] = sqrt(a->ring[a->in_index][0] * a->ring[a->in_index][0] + a->ring[a->in_index][1] * a->ring[a->in_index][1]);
+				a->abs_ring[a->in_index] = sqrt(a->ring[2 * a->in_index + 0] * a->ring[2 * a->in_index + 0] + a->ring[2 * a->in_index + 1] * a->ring[2 * a->in_index + 1]);
 
 			a->fast_backaverage = a->fast_backmult * a->abs_out_sample + a->onemfast_backmult * a->fast_backaverage;
 			a->hang_backaverage = a->hang_backmult * a->abs_out_sample + a->onemhang_backmult * a->hang_backaverage;

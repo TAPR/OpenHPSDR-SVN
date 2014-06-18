@@ -92,6 +92,7 @@ void OpenChannel (int channel, int in_size, int dsp_size, int input_samplerate, 
 		InterlockedBitTestAndSet (&ch[channel].iob.pc->slew.ch_upslew, 0);
 		InterlockedBitTestAndSet (&ch[channel].exchange, 0);
 	}
+	_MM_SET_FLUSH_ZERO_MODE (_MM_FLUSH_ZERO_ON);
 }
 
 void pre_main_destroy (int channel)

@@ -28,7 +28,7 @@ NOTE:  THIS FILE IS CURRENTLY EXPERIMENTAL AND WILL CHANGE LATER.
 
 #include "comm.h"
 
-EER create_eer (int run, int size, double* in, double* out, double* outM, int rate, double mgain, double pgain, double mdelay, int amiq)
+EER create_eer (int run, int size, double* in, double* out, double* outM, int rate, double mgain, double pgain, double mdelay, double pdelay, int amiq)
 {
 	EER a = (EER) malloc0 (sizeof (eer));
 	a->run = run;
@@ -39,6 +39,7 @@ EER create_eer (int run, int size, double* in, double* out, double* outM, int ra
 	a->mgain = mgain;
 	a->pgain = pgain / PI;
 	a->mdelay = mdelay;
+	a->pdelay = pdelay;
 	a->amiq = amiq;
 	a->mdel = create_delay (
 		1,											// run
@@ -48,7 +49,16 @@ EER create_eer (int run, int size, double* in, double* out, double* outM, int ra
 		a->rate,									// sample rate
 		20.0e-09,									// delta (delay stepsize)
 		a->mdelay,									// delay
-		1);											// delay only I
+		3);											// delay I & Q
+	a->pdel = create_delay (
+		1,											// run
+		a->size,									// size
+		a->out,										// input buffer
+		a->out,										// output buffer
+		a->rate,									// sample rate
+		20.0e-09,									// delta (delay stepsize)
+		a->pdelay,									// delay
+		3);											// delay I & Q
 	InitializeCriticalSectionAndSpinCount(&a->cs_update, 2500);
 
 	a->legacy  = (double *) malloc0 (2048 * sizeof (complex));														/////////////// legacy interface - remove
@@ -59,6 +69,7 @@ EER create_eer (int run, int size, double* in, double* out, double* outM, int ra
 
 void destroy_eer (EER a)
 {
+	destroy_delay (a->pdel);
 	destroy_delay (a->mdel);
 	_aligned_free (a);
 }
@@ -66,6 +77,7 @@ void destroy_eer (EER a)
 void flush_eer (EER a)
 {
 	flush_delay (a->mdel);
+	flush_delay (a->pdel);
 }
 
 void xeer (EER a)
@@ -79,8 +91,8 @@ void xeer (EER a)
 		{
 			I = a->in[2 * i + 0];
 			Q = a->in[2 * i + 1];
-			mag = sqrt (I * I + Q * Q);
-			a->outM[2 * i + 0] = a->mgain * mag;
+			a->outM[2 * i + 0] = I * a->mgain;
+			a->outM[2 * i + 1] = Q * a->mgain;
 			if(a->amiq)
 			{
 				a->out [2 * i + 0] = a->pgain * I;
@@ -88,11 +100,13 @@ void xeer (EER a)
 			}
 			else
 			{
+				mag = sqrt (I * I + Q * Q);
 				a->out [2 * i + 0] = a->pgain * I / mag;
 				a->out [2 * i + 1] = a->pgain * Q / mag;
 			}
 		}
 		xdelay (a->mdel);
+		xdelay (a->pdel);
 	}
 	else if (a->out != a->in)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
@@ -110,9 +124,9 @@ __declspec (align (16)) EER peer[MAX_EXT_EERS];		// array of pointers for EERs u
 
 
 PORT
-void create_eerEXT (int id, int run, int size, int rate, double mgain, double pgain, double mdelay, int amiq)
+void create_eerEXT (int id, int run, int size, int rate, double mgain, double pgain, double mdelay, double pdelay, int amiq)
 {
-	peer[id] = create_eer (run, size, 0, 0, 0, rate, mgain, pgain, mdelay, amiq);
+	peer[id] = create_eer (run, size, 0, 0, 0, rate, mgain, pgain, mdelay, pdelay, amiq);
 }
 
 PORT
@@ -174,12 +188,23 @@ void SetEERMdelay (int id, double delay)
 }
 
 PORT
+void SetEERPdelay (int id, double delay)
+{
+	EER a = peer[id];
+	EnterCriticalSection (&a->cs_update);
+	a->pdelay = delay;
+	SetDelayValue (a->pdel, a->pdelay);
+	LeaveCriticalSection (&a->cs_update);
+}
+
+PORT
 void SetEERSize (int id, int size)
 {
 	EER a = peer[id];
 	EnterCriticalSection (&a->cs_update);
 	a->size = size;
 	SetDelayBuffs (a->mdel, a->size, a->outM, a->outM);
+	SetDelayBuffs (a->pdel, a->size, a->out, a->out);
 	LeaveCriticalSection (&a->cs_update);
 }
 
@@ -198,7 +223,16 @@ void SetEERSamplerate (int id, int rate)
 		a->rate,									// sample rate
 		20.0e-09,									// delta (delay stepsize)
 		a->mdelay,									// delay
-		1);											// delay only I
+		3);											// delay only I
+	a->pdel = create_delay (
+		1,											// run
+		a->size,									// size
+		a->out,										// input buffer
+		a->out,										// output buffer
+		a->rate,									// sample rate
+		20.0e-09,									// delta (delay stepsize)
+		a->pdelay,									// delay
+		3);	
 	LeaveCriticalSection (&a->cs_update);
 }
 
@@ -210,7 +244,7 @@ void SetEERSamplerate (int id, int rate)
 ********************************************************************************************************/
 
 PORT
-void xeerEXTF (int id, float* inI, float* inQ, float* outI, float* outQ, float* outM, int mox, int size)
+void xeerEXTF (int id, float* inI, float* inQ, float* outI, float* outQ, float* outMI, float* outMQ, int mox, int size)
 {
 	EER a = peer[id];
 	if (mox && a->run)
@@ -221,6 +255,7 @@ void xeerEXTF (int id, float* inI, float* inQ, float* outI, float* outQ, float* 
 		a->outM = a->legacyM;
 		a->size = size;
 		SetDelayBuffs (a->mdel, a->size, a->outM, a->outM);
+		SetDelayBuffs (a->pdel, a->size, a->out, a->out);
 		for (i = 0; i < a->size; i++)
 		{
 			a->legacy[2 * i + 0] = (double)inI[i];
@@ -229,9 +264,10 @@ void xeerEXTF (int id, float* inI, float* inQ, float* outI, float* outQ, float* 
 		xeer (a);
 		for (i = 0; i < a->size; i++)
 		{
-			outI[i] = (float)a->legacy [2 * i + 0];
-			outQ[i] = (float)a->legacy [2 * i + 1];
-			outM[i] = (float)a->legacyM[2 * i + 0];
+			outI[i]  = (float)a->legacy [2 * i + 0];
+			outQ[i]  = (float)a->legacy [2 * i + 1];
+			outMI[i] = (float)a->legacyM[2 * i + 0];
+			outMQ[i] = (float)a->legacyM[2 * i + 1];
 		}
 	}
 }

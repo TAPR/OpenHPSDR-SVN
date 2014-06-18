@@ -2788,6 +2788,7 @@ namespace PowerSDR
             udDSPEERmgain_ValueChanged(this, e);
             udDSPEERpgain_ValueChanged(this, e);
             udDSPEERmdelay_ValueChanged(this, e);
+            udDSPEERpdelay_ValueChanged(this, e);
             chkDSPEERamIQ_CheckedChanged(this, e);
             // Transmit Tab
             udTXFilterHigh_ValueChanged(this, e);
@@ -3187,6 +3188,18 @@ namespace PowerSDR
             set { psDisabled = value; }
         }
 
+        public float RX6mGainOffset
+        {
+            get
+            {
+                if (ud6mLNAGainOffset != null) return (float)ud6mLNAGainOffset.Value;
+                else return -1;
+            }
+            set
+            {
+                if (ud6mLNAGainOffset != null) ud6mLNAGainOffset.Value = (decimal)value;
+            }
+        }
 
         public bool LimitStitchedRx
         {
@@ -18200,6 +18213,16 @@ namespace PowerSDR
         {
             if(chkATTOnTX.Checked)
             JanusAudio.SetTxAttenData((int)udATTOnTX.Value);
+        }
+
+        private void ud6mLNAGainOffset_ValueChanged(object sender, EventArgs e)
+        {
+            console.RX6mGainOffset = (float)ud6mLNAGainOffset.Value;
+        }
+
+        private void udDSPEERpdelay_ValueChanged(object sender, EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXEERModePdelay = (double)udDSPEERpdelay.Value / 1.0e+06;
         }
 
     }
