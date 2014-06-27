@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='ASCII'?>
+<block>
+  <name>Clipper</name>
+  <key>Clipper</key>
+  <category>hpsdr</category>
+  <import>execfile("/home/tom/.grc_gnuradio/Clipper.py")</import>
+  <make>Clipper($ClipLevel)</make>
+  <callback>set_ClipLevel($ClipLevel)</callback>
+  <param>
+    <name>Clip Level</name>
+    <key>ClipLevel</key>
+    <value>1.0</value>
+    <type>float</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </source>
+
+<doc>
+~/.grc_gnuradio/Clipper.py
+
+Clips the magnitude of the stream to +/-Clip Level.
+
+</doc>
+<grc_source></grc_source>
+</block>

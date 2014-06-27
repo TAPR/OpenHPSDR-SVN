@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='ASCII'?>
+<block>
+  <name>PulseSource</name>
+  <key>PulseSource</key>
+  <category>hpsdr</category>
+  <import>execfile("/home/tom/.grc_gnuradio/PulseSource.py")</import>
+  <make>PulseSource($pulseWidth, $sampRate, $pulseSep, $amplitude)</make>
+  <callback>set_pulseWidth($pulseWidth)</callback>
+  <callback>set_sampleRate($sampRate)</callback>
+  <callback>set_pulseSep($pulseSep)</callback>
+  <callback>set_amplitude($amplitude)</callback>
+  <param>
+    <name>Pulse Width</name>
+    <key>pulseWidth</key>
+    <value>1</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Sample Rate</name>
+    <key>sampRate</key>
+    <value>48000</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Pulse Separation</name>
+    <key>pulseSep</key>
+    <value>20</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Amplitude</name>
+    <key>amplitude</key>
+    <value>1</value>
+    <type>float</type>
+  </param>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </source>
+<doc>
+~/.grc_gnuradio/PulseSource.py
+Outputs a sinusoidal pulse at +6000 Khz Offset frequency.
+
+Pulse Width: (int) W x 166.7 microseconds
+Pulse Separation: (int) S x 166.7 microseconds
+Amplitude: Maximum value of 1.0
+
+</doc>
+<grc_source></grc_source>
+</block>
