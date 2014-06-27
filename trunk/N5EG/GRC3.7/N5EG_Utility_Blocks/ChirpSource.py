@@ -31,11 +31,13 @@ import math
 # create a linear chirped baseband output, from -deviation to +deviation
 # The parameter is chirp rate - in Hertz per millisecond.
 # Optionally zero-pad to 2^N samples. 
+# zeropad pads out the chirp to 2^n sampltes with zeros front and back.
+# window is the time to ramp voltage up and down using a raised cosine time window
 
 class ChirpSource(gr.sync_block):
     
     def __init__(self, chirpRate, sampRate, direction, amplitude, deviation,
-                 zeropad):
+                 zeropad, window):
         gr.sync_block.__init__(
             self,
             name="ChirpSource",
@@ -48,6 +50,7 @@ class ChirpSource(gr.sync_block):
         self.amplitude = amplitude
         self.deviation = deviation
         self.zeropad = zeropad
+        self.window = window
         self.indexer = 0
         self.BuildArray()    
         return
@@ -89,7 +92,7 @@ class ChirpSource(gr.sync_block):
         self.t = (self.deviation * 2) / float(self.k) # time for one chirp
         self.f0 = -self.deviation    #lowest frequency (start of) chirp
         self.n = int(self.t * self.sampleRate)    # number of time samples in one chirp
-
+        self.w = (self.window * self.sampleRate) #ramp duration in samples
 
         # compute size of 2^n block that fits the set of samples
         if self.zeropad == 1:
@@ -111,6 +114,8 @@ class ChirpSource(gr.sync_block):
         
         print "BuildArray: k=",self.k," t=",self.t," n=",self.n," f0=",self.f0,
         print "padding =", self.pre+self.post, "total_block =",self.n+self.pre+self.post
+        print "window =", self.window, " w=",self.w     
+         
          
         # build complete sample array as one python list 
 
@@ -118,10 +123,19 @@ class ChirpSource(gr.sync_block):
             self.buf.append(complex(0.0, 0.0))
             
         for i in range(self.n):
+            ampl = self.amplitude
+            
+            if i < self.w:  #raised cosine ramp up
+                rampangle = float(i) / float(self.w) * math.pi
+                ampl = ampl * (1.0 - (1.0 + math.cos(rampangle))/2.0)
+            if i > (self.n - self.w): #raised cosine ramp down
+                rampangle = float(self.n - i) * math.pi / float(self.w)
+                ampl = ampl * (1.0 - (1.0 + math.cos(rampangle))/2.0) 
+                
             time = i / float(self.sampleRate)
             phi = 2.0 * math.pi * (self.f0 * time + self.k * time * time /2.0)
-            re = self.amplitude * math.cos(phi)
-            im = self.amplitude * math.sin(phi)
+            re = ampl * math.cos(phi)
+            im = ampl * math.sin(phi)        
             if self.direction:
                 self.buf.append(complex(re, -im))
             else:
@@ -188,7 +202,10 @@ class ChirpSource(gr.sync_block):
         self.BuildArray()
         return
             
-      
+    def set_window(self, window):
+        self.window = window
+        self.BuildArray()
+        return
     
         
         
