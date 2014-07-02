@@ -287,11 +287,18 @@ void MainWindow::program()
 {
     qDebug() << "in MainWindow::program";
     // read RBF
-    wb->loadRBF( fileName );
-    // erase device
-    state=ERASING;
-    wb->eraseData(wb->boards[wb->currentboard]);
-    // program device
+    if (fileName.isEmpty() ){
+        QMessageBox::warning(this, tr("HPSDRProgrammer_V2"),
+             tr("The RBF file is missing! \n "
+             "The filename for the RBF file \"%1\" does not seem exists.").arg( fileName),
+                  QMessageBox::Ok);
+    }else{
+       wb->loadRBF( fileName );
+       // erase device
+       state=ERASING;
+       wb->eraseData(wb->boards[wb->currentboard]);
+       // program device
+    }
 }
 
 void MainWindow::setIP_UDP()
