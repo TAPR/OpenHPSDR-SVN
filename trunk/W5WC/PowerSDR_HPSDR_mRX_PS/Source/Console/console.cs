@@ -23426,6 +23426,7 @@ namespace PowerSDR
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
+                    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                 }
             }
         }
@@ -23606,6 +23607,7 @@ namespace PowerSDR
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
+                    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                 }
             }
         }
@@ -31057,14 +31059,8 @@ namespace PowerSDR
                 fwc_dds_freq = 0.0f;
                 rx2_dds_freq = 0.0f;
 
-                //  if (ClickTuneDisplay)
-
-                // FWCDDSFreq = center_frequency;      // Start up frequency generator to centre frequency if CTUN - G3OQD
-                //  if (rx1_xvtr_index >= 0)
-                //   FWCDDSFreq = XVTRForm.TranslateFreq(center_frequency);
-                // else
-                //  FWCDDSFreq = center_frequency;
-
+              //  if (ClickTuneDisplay)
+                //    FWCDDSFreq = center_frequency;      // Start up frequency generator to centre frequency if CTUN - G3OQD
 
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                 comboDisplayMode_SelectedIndexChanged(this, EventArgs.Empty);
@@ -34498,7 +34494,7 @@ namespace PowerSDR
             }
 
             if (alexpresent && rx1_band == Band.B6M &&
-               (chkSR.Checked || (!chkSR.Checked && !disable_6m_lna_on_rx)) &&
+               (chkSR.Checked || (!chkSR.Checked && !disable_6m_lna_on_rx && !alex6bphpf_bypass && !alex_hpf_bypass)) &&
                 current_hpsdr_model != HPSDRModel.ANAN10)
                 RX16mGainOffset = -RX6mGainOffset;
             else RX16mGainOffset = 0;
@@ -35200,9 +35196,8 @@ namespace PowerSDR
                     chkMOX.Checked = false;
                     return;
                 }
-            }
-            // if (mox)
-            // {
+            }          
+
             switch (tx_mode)
             {
                 case DSPMode.AM:
@@ -35218,9 +35213,11 @@ namespace PowerSDR
                     if (chkTUN.Checked) tx_freq += (double)cw_pitch * 1e-6;
                     break;
                 case DSPMode.CWL:
+                    if (!cw_fw_keyer || (cw_fw_keyer && chkTUN.Checked))
                     tx_freq += (double)cw_pitch * 0.0000010;
                     break;
                 case DSPMode.CWU:
+                    if (!cw_fw_keyer || (cw_fw_keyer && chkTUN.Checked))
                     tx_freq -= (double)cw_pitch * 0.0000010;
                     break;
             }
@@ -37120,7 +37117,7 @@ namespace PowerSDR
                                     }
 
                                     if (snap_to_click_tuning &&
-                                        current_click_tune_mode != ClickTuneMode.Off &&
+                                        (current_click_tune_mode != ClickTuneMode.Off || click_tune_drag) &&
                                         rx2_dsp_mode != DSPMode.CWL &&
                                         rx2_dsp_mode != DSPMode.CWU &&
                                         rx2_dsp_mode != DSPMode.DIGL &&
@@ -37163,7 +37160,7 @@ namespace PowerSDR
                                     }
 
                                     if (snap_to_click_tuning &&
-                                        current_click_tune_mode != ClickTuneMode.Off &&
+                                        (current_click_tune_mode != ClickTuneMode.Off || click_tune_drag) &&
                                         rx1_dsp_mode != DSPMode.CWL &&
                                         rx1_dsp_mode != DSPMode.CWU &&
                                         rx1_dsp_mode != DSPMode.DIGL &&
