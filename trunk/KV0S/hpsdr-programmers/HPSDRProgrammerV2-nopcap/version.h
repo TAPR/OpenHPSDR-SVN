@@ -1,8 +1,8 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-#define VERSION "(version 2.0.4.9)"
-#define RELEASE "2014-2-9"
+#define VERSION "(version 2.0.4.10)"
+#define RELEASE "2014-7-2"
 
 // KV0S revise interface
 // Version 2.0 move to Qt5,  revise GUI
@@ -12,5 +12,7 @@
 //2.0.4.7 (2014-2-8) - worked on protection in loading the wrong type of board
 //2.0.4.8 (2014-2-8) - Fixed spelling error
 //2.0.4.9 (2014-2-9) - Fixed the multi board selection problem
+//2.0.4.10 (2014-7-2) - Disallow progamming with no file selected
+
 
 #endif // VERSION_H
