@@ -91,8 +91,7 @@ CALCC create_calcc (int channel, int rate, int ints, int spi, double hw_scale, d
 		0,											// output buffer	[stuff later]
 		a->rate,									// sample rate
 		20.0e-09,									// delta (delay stepsize)
-		0.0,										// delay
-		3);											// delay both I and Q
+		0.0);										// delay
 	a->txdelay = create_delay (
 		1,											// run
 		0,											// size				[stuff later]
@@ -100,8 +99,7 @@ CALCC create_calcc (int channel, int rate, int ints, int spi, double hw_scale, d
 		0,											// output buffer	[stuff later]
 		a->rate,									// sample rate
 		20.0e-09,									// delta (delay stepsize)
-		0.0,										// delay
-		3);											// delay both I and Q
+		0.0);										// delay
 	a->disp.x  = (double *) malloc0 (a->nsamps * sizeof (double));
 	a->disp.ym = (double *) malloc0 (a->nsamps * sizeof (double));
 	a->disp.yc = (double *) malloc0 (a->nsamps * sizeof (double));

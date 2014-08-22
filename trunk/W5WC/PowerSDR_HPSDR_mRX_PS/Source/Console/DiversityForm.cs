@@ -107,6 +107,7 @@ namespace PowerSDR
         private GroupBoxTS groupBoxTS1;
         private CheckBoxTS chkLockR;
         private CheckBoxTS chkLockAngle;
+        private CheckBoxTS chkEnableDiversity;
 
         /// <summary>
         /// Required designer variable.
@@ -141,7 +142,8 @@ namespace PowerSDR
             radioButtonMerc1_CheckedChanged(this, e);
             radioButtonMerc2_CheckedChanged(this, e);
             wdsp.SetEXTDIVNr(0, 2);
-            console.Diversity2 = true;
+           // console.Diversity2 = true;
+            chkEnableDiversity_CheckedChanged(this, e);
         }
 
         /// <summary>
@@ -193,6 +195,8 @@ namespace PowerSDR
             this.labelTS6 = new System.Windows.Forms.LabelTS();
             this.labelTS9 = new System.Windows.Forms.LabelTS();
             this.groupBox_refMerc = new System.Windows.Forms.GroupBoxTS();
+            this.chkLockAngle = new System.Windows.Forms.CheckBoxTS();
+            this.chkLockR = new System.Windows.Forms.CheckBoxTS();
             this.chkCrossFire = new System.Windows.Forms.CheckBoxTS();
             this.labelTS4 = new System.Windows.Forms.LabelTS();
             this.labelTS33 = new System.Windows.Forms.LabelTS();
@@ -205,8 +209,7 @@ namespace PowerSDR
             this.btnShiftUp45 = new System.Windows.Forms.ButtonTS();
             this.udR = new System.Windows.Forms.NumericUpDownTS();
             this.udAngle = new System.Windows.Forms.NumericUpDownTS();
-            this.chkLockR = new System.Windows.Forms.CheckBoxTS();
-            this.chkLockAngle = new System.Windows.Forms.CheckBoxTS();
+            this.chkEnableDiversity = new System.Windows.Forms.CheckBoxTS();
             ((System.ComponentModel.ISupportInitialize)(this.picRadar)).BeginInit();
             this.panelDivControls.SuspendLayout();
             this.grpRxSource.SuspendLayout();
@@ -284,6 +287,7 @@ namespace PowerSDR
             // panelDivControls
             // 
             this.panelDivControls.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelDivControls.Controls.Add(this.chkEnableDiversity);
             this.panelDivControls.Controls.Add(this.grpRxSource);
             this.panelDivControls.Controls.Add(this.groupBoxTS1);
             this.panelDivControls.Controls.Add(this.labelTS5);
@@ -309,7 +313,7 @@ namespace PowerSDR
             this.grpRxSource.Controls.Add(this.radRxSourceRx1Rx2);
             this.grpRxSource.Controls.Add(this.radRxSource2);
             this.grpRxSource.Controls.Add(this.radRxSource1);
-            this.grpRxSource.Location = new System.Drawing.Point(283, 16);
+            this.grpRxSource.Location = new System.Drawing.Point(245, 16);
             this.grpRxSource.Name = "grpRxSource";
             this.grpRxSource.Size = new System.Drawing.Size(113, 90);
             this.grpRxSource.TabIndex = 52;
@@ -604,6 +608,30 @@ namespace PowerSDR
             this.groupBox_refMerc.Text = "Reference Source";
             this.groupBox_refMerc.Enter += new System.EventHandler(this.groupBox_refMerc_Enter);
             // 
+            // chkLockAngle
+            // 
+            this.chkLockAngle.AutoSize = true;
+            this.chkLockAngle.Image = null;
+            this.chkLockAngle.Location = new System.Drawing.Point(155, 61);
+            this.chkLockAngle.Name = "chkLockAngle";
+            this.chkLockAngle.Size = new System.Drawing.Size(83, 17);
+            this.chkLockAngle.TabIndex = 104;
+            this.chkLockAngle.Text = "Lock Phase";
+            this.chkLockAngle.UseVisualStyleBackColor = true;
+            this.chkLockAngle.CheckedChanged += new System.EventHandler(this.chkLockAngle_CheckedChanged);
+            // 
+            // chkLockR
+            // 
+            this.chkLockR.AutoSize = true;
+            this.chkLockR.Image = null;
+            this.chkLockR.Location = new System.Drawing.Point(70, 84);
+            this.chkLockR.Name = "chkLockR";
+            this.chkLockR.Size = new System.Drawing.Size(75, 17);
+            this.chkLockR.TabIndex = 103;
+            this.chkLockR.Text = "Lock Gain";
+            this.chkLockR.UseVisualStyleBackColor = true;
+            this.chkLockR.CheckedChanged += new System.EventHandler(this.chkLockR_CheckedChanged);
+            // 
             // chkCrossFire
             // 
             this.chkCrossFire.AutoSize = true;
@@ -841,29 +869,20 @@ namespace PowerSDR
             0});
             this.udAngle.ValueChanged += new System.EventHandler(this.udTheta_ValueChanged);
             // 
-            // chkLockR
+            // chkEnableDiversity
             // 
-            this.chkLockR.AutoSize = true;
-            this.chkLockR.Image = null;
-            this.chkLockR.Location = new System.Drawing.Point(70, 84);
-            this.chkLockR.Name = "chkLockR";
-            this.chkLockR.Size = new System.Drawing.Size(75, 17);
-            this.chkLockR.TabIndex = 103;
-            this.chkLockR.Text = "Lock Gain";
-            this.chkLockR.UseVisualStyleBackColor = true;
-            this.chkLockR.CheckedChanged += new System.EventHandler(this.chkLockR_CheckedChanged);
-            // 
-            // chkLockAngle
-            // 
-            this.chkLockAngle.AutoSize = true;
-            this.chkLockAngle.Image = null;
-            this.chkLockAngle.Location = new System.Drawing.Point(155, 61);
-            this.chkLockAngle.Name = "chkLockAngle";
-            this.chkLockAngle.Size = new System.Drawing.Size(83, 17);
-            this.chkLockAngle.TabIndex = 104;
-            this.chkLockAngle.Text = "Lock Phase";
-            this.chkLockAngle.UseVisualStyleBackColor = true;
-            this.chkLockAngle.CheckedChanged += new System.EventHandler(this.chkLockAngle_CheckedChanged);
+            this.chkEnableDiversity.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkEnableDiversity.AutoSize = true;
+            this.chkEnableDiversity.Checked = true;
+            this.chkEnableDiversity.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkEnableDiversity.Image = null;
+            this.chkEnableDiversity.Location = new System.Drawing.Point(381, 53);
+            this.chkEnableDiversity.Name = "chkEnableDiversity";
+            this.chkEnableDiversity.Size = new System.Drawing.Size(50, 23);
+            this.chkEnableDiversity.TabIndex = 101;
+            this.chkEnableDiversity.Text = "Enable";
+            this.chkEnableDiversity.UseVisualStyleBackColor = true;
+            this.chkEnableDiversity.CheckedChanged += new System.EventHandler(this.chkEnableDiversity_CheckedChanged);
             // 
             // DiversityForm
             // 
@@ -1018,6 +1037,8 @@ namespace PowerSDR
                     p = PolarToXY(r, -locked_angle);
                     locked_r = r;
                     udR.Value = (decimal)r;
+                    if (radioButtonMerc1.Checked) udR2.Value = udR.Value;
+                    else udR1.Value = udR.Value;
                     udAngle0.Value = (decimal)ConvertAngleToAngle0(angle);
                     udAngle.Value = (decimal)locked_angle;
                     //udFineNull.Value = (decimal)locked_angle;
@@ -1159,7 +1180,7 @@ namespace PowerSDR
                 // console.SetIQ_RotateA(a_A, b_A);   
                 // Audio.I_RotateA = a_A;
                 // Audio.Q_RotateA = b_A;
-                Irotate[0] = 1.0; 
+                Irotate[0] = 1.0;
                 Qrotate[0] = 0.0;
                 Irotate[1] = a_A;
                 Qrotate[1] = b_A;
@@ -1308,6 +1329,9 @@ namespace PowerSDR
             {
                 udR1.Visible = false;
                 udR2.Visible = true;
+                updateR2 = false;
+
+                udR2_ValueChanged(this, EventArgs.Empty);
                 //  chkLockR.Location = new System.Drawing.Point(199, 81);
                 //  chkLockR.BackColor = System.Drawing.SystemColors.Control;
                 udFineNull.BackColor = System.Drawing.Color.White;
@@ -1315,11 +1339,11 @@ namespace PowerSDR
                 if (chkLockR.Checked) udR1.Value = udR.Value;
                 JanusAudio.SetrefMerc(1);
                 // Audio.RefMerc = 1;
-
                 //p = PolarToXY((double)udR.Value, -(double)ConvertAngle0ToAngle((double)udAngle0.Value));
                 UpdateDiversity();
                 //btnShift180.PerformClick();
             }
+            console.DiversityRXRef = radioButtonMerc1.Checked;
         }
 
         private void radioButtonMerc2_CheckedChanged(object sender, EventArgs e)
@@ -1328,6 +1352,8 @@ namespace PowerSDR
             {
                 udR1.Visible = true;
                 udR2.Visible = false;
+                updateR1 = false;
+                udR1_ValueChanged(this, EventArgs.Empty);
                 // chkLockR.Location = new System.Drawing.Point(199, 52);
                 //chkLockR.BackColor = System.Drawing.Color.Yellow;
                 //udFineNull.BackColor = System.Drawing.Color.Yellow;
@@ -1358,26 +1384,162 @@ namespace PowerSDR
 
         }
 
+        private bool updateR2 = true;
         private void udR2_ValueChanged(object sender, EventArgs e)
         {
-            if (chkLockR.Checked)
-            {
-                r_A = locked_r;
-                udR2.Value = (decimal)locked_r;
-            }
-            udR.Value = udR2.Value;
-            UpdateDiversity();
+          //  if (radioButtonMerc1.Checked)
+           // {
+                if (chkLockR.Checked)
+                {
+                    r_A = locked_r;
+                    udR2.Value = (decimal)locked_r;
+                }
+                udR.Value = udR2.Value;
+                UpdateDiversity();
+
+                if (updateR2)
+                {
+                    switch (console.RX1Band)
+                    {
+                        case Band.B160M:
+                            console.DiversityR2Gain160m = udR2.Value;
+                            break;
+                        case Band.B80M:
+                            console.DiversityR2Gain80m = udR2.Value;
+                            break;
+                        case Band.B60M:
+                            console.DiversityR2Gain60m = udR2.Value;
+                            break;
+                        case Band.B40M:
+                            console.DiversityR2Gain40m = udR2.Value;
+                            break;
+                        case Band.B30M:
+                            console.DiversityR2Gain30m = udR2.Value;
+                            break;
+                        case Band.B20M:
+                            console.DiversityR2Gain20m = udR2.Value;
+                            break;
+                        case Band.B17M:
+                            console.DiversityR2Gain17m = udR2.Value;
+                            break;
+                        case Band.B15M:
+                            console.DiversityR2Gain15m = udR2.Value;
+                            break;
+                        case Band.B12M:
+                            console.DiversityR2Gain12m = udR2.Value;
+                            break;
+                        case Band.B10M:
+                            console.DiversityR2Gain10m = udR2.Value;
+                            break;
+                        case Band.B6M:
+                            console.DiversityR2Gain6m = udR2.Value;
+                            break;
+                        case Band.WWV:
+                            console.DiversityR2GainWWV = udR2.Value;
+                            break;
+                        case Band.GEN:
+                            console.DiversityR2GainGEN = udR2.Value;
+                            break;
+                        default:
+                            console.DiversityR2GainXVTR = udR2.Value;
+                            break;
+                    }
+                }
+                updateR2 = true;
+
+          //  }
         }
 
+        private bool updateR1 = true;
         private void udR1_ValueChanged(object sender, EventArgs e)
         {
-            if (chkLockR.Checked)
+          //  if (radioButtonMerc2.Checked)
+          //  {
+                if (chkLockR.Checked)
+                {
+                    r_A = locked_r;
+                    udR1.Value = (decimal)locked_r;
+                }
+                udR.Value = udR1.Value;
+                UpdateDiversity();
+
+                if (updateR1)
+                {
+                    switch (console.RX1Band)
+                    {
+                        case Band.B160M:
+                            console.DiversityGain160m = udR1.Value;
+                            break;
+                        case Band.B80M:
+                            console.DiversityGain80m = udR1.Value;
+                            break;
+                        case Band.B60M:
+                            console.DiversityGain60m = udR1.Value;
+                            break;
+                        case Band.B40M:
+                            console.DiversityGain40m = udR1.Value;
+                            break;
+                        case Band.B30M:
+                            console.DiversityGain30m = udR1.Value;
+                            break;
+                        case Band.B20M:
+                            console.DiversityGain20m = udR1.Value;
+                            break;
+                        case Band.B17M:
+                            console.DiversityGain17m = udR1.Value;
+                            break;
+                        case Band.B15M:
+                            console.DiversityGain15m = udR1.Value;
+                            break;
+                        case Band.B12M:
+                            console.DiversityGain12m = udR1.Value;
+                            break;
+                        case Band.B10M:
+                            console.DiversityGain10m = udR1.Value;
+                            break;
+                        case Band.B6M:
+                            console.DiversityGain6m = udR1.Value;
+                            break;
+                        case Band.WWV:
+                            console.DiversityGainWWV = udR1.Value;
+                            break;
+                        case Band.GEN:
+                            console.DiversityGainGEN = udR1.Value;
+                            break;
+                        default:
+                            console.DiversityGainXVTR = udR1.Value;
+                            break;
+                    }
+                }
+                updateR1 = true;
+
+          //  }
+        }
+
+        public bool DiversityRXRef
+        {
+            set
             {
-                r_A = locked_r;
-                udR1.Value = (decimal)locked_r;
+                if (value)
+                    radioButtonMerc1.Checked = true;
+                else
+                    radioButtonMerc2.Checked = true;
             }
-            udR.Value = udR1.Value;
-            UpdateDiversity();
+        }
+
+        public decimal DiversityGain
+        {
+            set { udR1.Value = value; }
+        }
+
+        public decimal DiversityR2Gain
+        {
+            set { udR2.Value = value; }
+        }
+
+        public decimal DiversityPhase
+        {
+            set { udFineNull.Value = value; }
         }
 
         private void udCalib_ValueChanged(object sender, EventArgs e)
@@ -1508,6 +1670,53 @@ namespace PowerSDR
                 //angle = (double)udAngle.Value;
             }
             UpdateDiversity();
+
+            switch (console.RX1Band)
+            {
+                case Band.B160M:
+                    console.DiversityPhase160m = udFineNull.Value;
+                    break;
+                case Band.B80M:
+                    console.DiversityPhase80m = udFineNull.Value;
+                    break;
+                case Band.B60M:
+                    console.DiversityPhase60m = udFineNull.Value;
+                    break;
+                case Band.B40M:
+                    console.DiversityPhase40m = udFineNull.Value;
+                    break;
+                case Band.B30M:
+                    console.DiversityPhase30m = udFineNull.Value;
+                    break;
+                case Band.B20M:
+                    console.DiversityPhase20m = udFineNull.Value;
+                    break;
+                case Band.B17M:
+                    console.DiversityPhase17m = udFineNull.Value;
+                    break;
+                case Band.B15M:
+                    console.DiversityPhase15m = udFineNull.Value;
+                    break;
+                case Band.B12M:
+                    console.DiversityPhase12m = udFineNull.Value;
+                    break;
+                case Band.B10M:
+                    console.DiversityPhase10m = udFineNull.Value;
+                    break;
+                case Band.B6M:
+                    console.DiversityPhase6m = udFineNull.Value;
+                    break;
+                case Band.WWV:
+                    console.DiversityPhaseWWV = udFineNull.Value;
+                    break;
+                case Band.GEN:
+                    console.DiversityPhaseGEN = udFineNull.Value;
+                    break;
+                default:
+                    console.DiversityPhaseXVTR = udFineNull.Value;
+                    break;
+            }
+
         }
 
         private void radRxSource1_CheckedChanged(object sender, EventArgs e)
@@ -1538,6 +1747,11 @@ namespace PowerSDR
                 JanusAudio.SetMercSource(3);
                 wdsp.SetEXTDIVOutput(0, 2);
             }
+        }
+
+        private void chkEnableDiversity_CheckedChanged(object sender, EventArgs e)
+        {
+            console.Diversity2 = chkEnableDiversity.Checked;
         }
     }
 }

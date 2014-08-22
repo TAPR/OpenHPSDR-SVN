@@ -69,6 +69,7 @@ warren@wpratt.com
 #include "shift.h"
 #include "siphon.h"
 #include "slew.h"
+#include "staticpd.h"
 #include "TXA.h"
 #include "utilities.h"
 #include "wcpAGC.h"

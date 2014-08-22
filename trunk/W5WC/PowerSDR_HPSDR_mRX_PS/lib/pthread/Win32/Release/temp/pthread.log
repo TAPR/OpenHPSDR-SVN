@@ -1,5 +1,5 @@
-﻿Build started 4/30/2014 11:17:25 PM.
-     1>Project "C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\pthread.vcxproj" on node 3 (rebuild target(s)).
+﻿Build started 8/22/2014 10:59:07 AM.
+     1>Project "C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\pthread.vcxproj" on node 2 (rebuild target(s)).
      1>_PrepareForClean:
          Deleting file "Win32\Release\temp\pthread.lastbuildstate".
        InitializeBuildStatus:
@@ -27,4 +27,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.00
+Time Elapsed 00:00:05.51

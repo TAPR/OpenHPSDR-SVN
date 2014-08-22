@@ -22,7 +22,8 @@
 
 #define DBG_PRINT
 
-using System; 
+using System;
+using System.IO.Ports;
 
 namespace PowerSDR
 {
@@ -31,6 +32,7 @@ namespace PowerSDR
 	/// </summary>
 	public class SerialPortPTT
 	{
+        public static event SerialRXEventHandler serial_rx_event;
 
 		// instance vars 
 		// 
@@ -68,7 +70,7 @@ namespace PowerSDR
 			{
 				if ( Initialized ) return;  							
 				if ( portNum == 0 ) return; // bail out 
-				commPort = new SDRSerialPort(portNum); 
+				commPort = new SDRSerialPort(portNum);//, null); 
 				commPort.Create(true); // true says to create bit bang only port  -- fixme needs error checking! 
 				Initialized = true; 
 			}
@@ -111,5 +113,11 @@ namespace PowerSDR
 				commPort = null; 
 			}
 		}
+
+        void SerialReceivedData(object source, SerialDataReceivedEventArgs e)
+        {
+            serial_rx_event(this, new SerialRXEvent(commPort.BasePort.ReadExisting()));
+        }
+
 	}
 }

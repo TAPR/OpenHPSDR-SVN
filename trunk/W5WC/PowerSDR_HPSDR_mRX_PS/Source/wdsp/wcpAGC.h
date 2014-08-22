@@ -85,6 +85,7 @@ typedef struct _wcpagc
 	double fast_decay_mult;
 	double pop_ratio;
 
+	int hang_enable;
 	double hang_backaverage;
 	double tau_hang_backmult;
 	double hang_backmult;
@@ -121,6 +122,7 @@ extern WCPAGC create_wcpagc (	int run,
 								double tau_fast_backaverage,
 								double tau_fast_decay,
 								double pop_ratio,
+								int hang_enable,
 								double tau_hang_backmult,
 								double hangtime,
 								double hang_thresh,

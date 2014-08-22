@@ -653,6 +653,12 @@ namespace PowerSDR
         unsafe public static extern void EnableEClassModulation(int bits);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetEERPWMmin(int min);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetEERPWMmax(int max);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetHermesFilter(int bits);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]

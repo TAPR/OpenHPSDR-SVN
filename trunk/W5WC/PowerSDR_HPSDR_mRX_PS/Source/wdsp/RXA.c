@@ -257,7 +257,7 @@ void create_rxa (int channel)
 		rxa[channel].midbuff,							// pointer to output buffer
 		ch[channel].dsp_size,							// buffer size
 		ch[channel].dsp_rate,							// sample rate
-		0.002,											// tau_attack
+		0.001,											// tau_attack
 		0.250,											// tau_decay
 		4,												// n_tau
 		10000.0,										// max_gain
@@ -268,6 +268,7 @@ void create_rxa (int channel)
 		0.250,											// tau_fast_backaverage
 		0.005,											// tau_fast_decay
 		5.0,											// pop_ratio
+		1,												// hang_enable
 		0.500,											// tau_hang_backmult
 		0.250,											// hangtime
 		0.250,											// hang_thresh

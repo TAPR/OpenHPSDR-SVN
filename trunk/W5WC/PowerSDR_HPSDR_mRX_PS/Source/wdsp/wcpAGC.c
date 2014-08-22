@@ -49,6 +49,7 @@ WCPAGC create_wcpagc (	int run,
 						double tau_fast_backaverage,
 						double tau_fast_decay,
 						double pop_ratio,
+						int hang_enable,
 						double tau_hang_backmult,
 						double hangtime,
 						double hang_thresh,
@@ -76,6 +77,7 @@ WCPAGC create_wcpagc (	int run,
 	a->tau_fast_backaverage = tau_fast_backaverage;
 	a->tau_fast_decay = tau_fast_decay;
 	a->pop_ratio = pop_ratio;
+	a->hang_enable = hang_enable;
 	a->tau_hang_backmult = tau_hang_backmult;
 	a->hangtime = hangtime;
 	a->hang_thresh = hang_thresh;
@@ -217,7 +219,7 @@ void xwcpagc (WCPAGC a)
 						}
 						else
 						{
-							if (a->hang_backaverage > a->hang_level)
+							if (a->hang_enable && (a->hang_backaverage > a->hang_level))
 							{
 								a->state = 2;
 								a->hang_counter = (int)(a->hangtime * a->sample_rate);

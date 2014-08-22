@@ -127,14 +127,8 @@ namespace PowerSDR
         [DllImport("wdsp.dll", EntryPoint = "SetRXAAGCHangLevel", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAGCHangLevel(int channel, double hanglevel);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAALCAttack", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTXAALCAttack(int channel, int attack);
-
         [DllImport("wdsp.dll", EntryPoint = "SetTXAALCDecay", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAALCDecay(int channel, int decay);
-
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAALCHang", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTXAALCHang(int channel, int hang);
 
         [DllImport("wdsp.dll", EntryPoint = "SetRXAAMDSBMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAMDSBMode(int channel, int sbmode);
@@ -271,14 +265,8 @@ namespace PowerSDR
         [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerTop", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXALevelerTop(int channel, double maxgain);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerAttack", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTXALevelerAttack(int channel, int attack);
-
         [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerDecay", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXALevelerDecay(int channel, int decay);
-
-        [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerHang", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTXALevelerHang(int channel, int hang);
 
         [DllImport("wdsp.dll", EntryPoint = "SetTXALevelerSt", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXALevelerSt(int channel, bool state);
@@ -465,7 +453,7 @@ namespace PowerSDR
         // eer
 
         [DllImport("wdsp.dll", EntryPoint = "create_eerEXT", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void create_eerEXT(int id, int run, int size, int rate, double mgain, double pgain, double mdelay, double pdelay, int amiq);
+        public static extern void create_eerEXT(int id, int run, int size, int rate, double mgain, double pgain, bool rundelays, double mdelay, double pdelay, int amiq);
 
         [DllImport("wdsp.dll", EntryPoint = "destroy_eerEXT", CallingConvention = CallingConvention.Cdecl)]
         public static extern void destroy_eerEXT(int id);
@@ -484,6 +472,9 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "SetEERPgain", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEERPgain(int id, double gain);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetEERRunDelays", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEERRunDelays(int id, bool run);
 
         [DllImport("wdsp.dll", EntryPoint = "SetEERMdelay", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEERMdelay(int id, double delay);
@@ -524,6 +515,14 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "SetRXAmpeakFilGain", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAmpeakFilGain(int channel, int fil, double gain);
+
+        // static PD
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAStaticPDRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAStaticPDRun(int channel, bool run);
+        
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAStaticPDGain", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAStaticPDGain(int channel, double* coefs);
 
         #endregion
 

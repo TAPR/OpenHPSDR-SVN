@@ -24,6 +24,7 @@ using System;
 using System.Text;
 using System.Windows.Forms; // needed for MessageBox (wjt)
 using System.Text.RegularExpressions;
+using System.IO.Ports;
 
 namespace PowerSDR
 {	
@@ -40,7 +41,6 @@ namespace PowerSDR
 
             //event handler for Serial RX Events
             SDRSerialPort.serial_rx_event += new SerialRXEventHandler(SerialRXEventHandler);
-
 
             if (console.CATEnabled)  // if CAT is on fire it up 
             {
@@ -71,8 +71,8 @@ namespace PowerSDR
 				if ( cat_enabled ) return; // nothing to do already enabled 
 				cat_enabled = true; 
 			}
-			int port_num = console.CATPort; 
-			SIO = new SDRSerialPort(port_num);
+			int port_num = console.CATPort;
+            SIO = new SDRSerialPort(port_num);
 			SIO.setCommParms(console.CATBaudRate, 
 							console.CATParity, 
 							console.CATDataBits, 
@@ -81,6 +81,15 @@ namespace PowerSDR
 			Initialize();	
 		}
  
+        public bool UseForCATPTT
+        {
+            set
+            {
+                if (SIO != null)
+                    SIO.UseForCATPTT = value;
+            }
+        }
+        
         public bool UseForKeyPTT
         {
             set
@@ -324,7 +333,7 @@ namespace PowerSDR
             parser = new CATParser(console);
 
             //event handler for Serial RX Events
-            SDRSerialPort.serial_rx_event += new SerialRXEventHandler(SerialRX2EventHandler);
+            SDRSerialPort2.serial_rx_event += new SerialRXEventHandler(SerialRX2EventHandler);
 
             if (console.CAT2Enabled)  // if CAT is on fire it up 
             {
@@ -357,7 +366,7 @@ namespace PowerSDR
                 cat2_enabled = true;
             }
             int port_num = console.CAT2Port;
-            SIO2 = new SDRSerialPort(port_num);
+            SIO2 = new SDRSerialPort2(port_num);
             SIO2.setCommParms(console.CAT2BaudRate,
                             console.CAT2Parity,
                             console.CAT2DataBits,
@@ -444,7 +453,7 @@ namespace PowerSDR
 
         #region Variables
 
-        public SDRSerialPort SIO2;
+        public SDRSerialPort2 SIO2;
 
         Console console;
         ASCIIEncoding AE = new ASCIIEncoding();
@@ -491,7 +500,7 @@ namespace PowerSDR
         }
 
         StringBuilder CommBuffer = new StringBuilder();//"";				//holds incoming serial data from the port
-        private void SerialRX2EventHandler(object source, SerialRXEvent e)
+        private void SerialRX2EventHandler(object sender, SerialRXEvent e)
         {
             //			SIOMonitor.Interval = 5000;		// set the timer for 5 seconds
             //			SIOMonitor.Enabled = true;		// start or restart the timer
@@ -499,6 +508,9 @@ namespace PowerSDR
             //double T0 = 0.00;
             //double T1 = 0.00;
             //int bufferLen = 0;
+           // SerialPort spL = (SerialPort)sender;
+         //   SDRSerialPort2 spL = (SDRSerialPort2)sender;
+           // if (!SIO2.IsOpen || spL.BasePort.PortName != SIO2.BasePort.PortName) return;
 
             CommBuffer.Append(e.buffer);                                		// put the data in the string
             if (parser != null)													// is the parser instantiated
@@ -538,7 +550,6 @@ namespace PowerSDR
             }
         }
 
-
         #endregion Events
     }
 
@@ -554,7 +565,7 @@ namespace PowerSDR
             parser = new CATParser(console);
 
             //event handler for Serial RX Events
-            SDRSerialPort.serial_rx_event += new SerialRXEventHandler(SerialRX3EventHandler);
+            SDRSerialPort3.serial_rx_event += new SerialRXEventHandler(SerialRX3EventHandler);
 
             if (console.CAT3Enabled)  // if CAT is on fire it up 
             {
@@ -587,7 +598,7 @@ namespace PowerSDR
                 cat3_enabled = true;
             }
             int port_num = console.CAT3Port;
-            SIO3 = new SDRSerialPort(port_num);
+            SIO3 = new SDRSerialPort3(port_num);
             SIO3.setCommParms(console.CAT3BaudRate,
                             console.CAT3Parity,
                             console.CAT3DataBits,
@@ -674,7 +685,7 @@ namespace PowerSDR
 
         #region Variables
 
-        public SDRSerialPort SIO3;
+        public SDRSerialPort3 SIO3;
 
         Console console;
         ASCIIEncoding AE = new ASCIIEncoding();
@@ -720,7 +731,7 @@ namespace PowerSDR
             }
         }
 
-        StringBuilder CommBuffer = new StringBuilder();//"";				//holds incoming serial data from the port
+        StringBuilder CommBuffer = new StringBuilder();//"";			//holds incoming serial data from the port
         private void SerialRX3EventHandler(object source, SerialRXEvent e)
         {
             //			SIOMonitor.Interval = 5000;		// set the timer for 5 seconds
@@ -768,7 +779,6 @@ namespace PowerSDR
             }
         }
 
-
         #endregion Events
     }
     public class SIO4ListenerII
@@ -783,7 +793,7 @@ namespace PowerSDR
             parser = new CATParser(console);
 
             //event handler for Serial RX Events
-            SDRSerialPort.serial_rx_event += new SerialRXEventHandler(SerialRX4EventHandler);
+            SDRSerialPort4.serial_rx_event += new SerialRXEventHandler(SerialRX4EventHandler);
 
                if (console.CAT4Enabled)  // if CAT is on fire it up 
                {
@@ -815,7 +825,7 @@ namespace PowerSDR
                    cat4_enabled = true;
                }
                int port_num = console.CAT4Port;
-               SIO4 = new SDRSerialPort(port_num);
+               SIO4 = new SDRSerialPort4(port_num);
                SIO4.setCommParms(console.CAT4BaudRate,
                                console.CAT4Parity,
                                console.CAT4DataBits,
@@ -902,7 +912,7 @@ namespace PowerSDR
 
         #region Variables
 
-        public SDRSerialPort SIO4;
+        public SDRSerialPort4 SIO4;
 
         Console console;
         ASCIIEncoding AE = new ASCIIEncoding();

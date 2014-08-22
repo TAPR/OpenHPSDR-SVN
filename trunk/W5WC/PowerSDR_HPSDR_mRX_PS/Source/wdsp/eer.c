@@ -28,7 +28,7 @@ NOTE:  THIS FILE IS CURRENTLY EXPERIMENTAL AND WILL CHANGE LATER.
 
 #include "comm.h"
 
-EER create_eer (int run, int size, double* in, double* out, double* outM, int rate, double mgain, double pgain, double mdelay, double pdelay, int amiq)
+EER create_eer (int run, int size, double* in, double* out, double* outM, int rate, double mgain, double pgain, int rundelays, double mdelay, double pdelay, int amiq)
 {
 	EER a = (EER) malloc0 (sizeof (eer));
 	a->run = run;
@@ -37,28 +37,27 @@ EER create_eer (int run, int size, double* in, double* out, double* outM, int ra
 	a->out = out;
 	a->rate = rate;
 	a->mgain = mgain;
-	a->pgain = pgain / PI;
+	a->pgain = pgain;
+	a->rundelays = rundelays;
 	a->mdelay = mdelay;
 	a->pdelay = pdelay;
 	a->amiq = amiq;
 	a->mdel = create_delay (
-		1,											// run
+		a->rundelays,								// run
 		a->size,									// size
 		a->outM,									// input buffer
 		a->outM,									// output buffer
 		a->rate,									// sample rate
 		20.0e-09,									// delta (delay stepsize)
-		a->mdelay,									// delay
-		3);											// delay I & Q
+		a->mdelay);									// delay
 	a->pdel = create_delay (
-		1,											// run
+		a->rundelays,								// run
 		a->size,									// size
 		a->out,										// input buffer
 		a->out,										// output buffer
 		a->rate,									// sample rate
 		20.0e-09,									// delta (delay stepsize)
-		a->pdelay,									// delay
-		3);											// delay I & Q
+		a->pdelay);									// delay
 	InitializeCriticalSectionAndSpinCount(&a->cs_update, 2500);
 
 	a->legacy  = (double *) malloc0 (2048 * sizeof (complex));														/////////////// legacy interface - remove
@@ -124,9 +123,9 @@ __declspec (align (16)) EER peer[MAX_EXT_EERS];		// array of pointers for EERs u
 
 
 PORT
-void create_eerEXT (int id, int run, int size, int rate, double mgain, double pgain, double mdelay, double pdelay, int amiq)
+void create_eerEXT (int id, int run, int size, int rate, double mgain, double pgain, int rundelays, double mdelay, double pdelay, int amiq)
 {
-	peer[id] = create_eer (run, size, 0, 0, 0, rate, mgain, pgain, mdelay, pdelay, amiq);
+	peer[id] = create_eer (run, size, 0, 0, 0, rate, mgain, pgain, rundelays, mdelay, pdelay, amiq);
 }
 
 PORT
@@ -178,6 +177,17 @@ void SetEERPgain (int id, double gain)
 }
 
 PORT
+void SetEERRunDelays (int id, int run)
+{
+	EER a = peer[id];
+	EnterCriticalSection (&a->cs_update);
+	a->rundelays = run;
+	SetDelayRun (a->mdel, a->rundelays);
+	SetDelayRun (a->pdel, a->rundelays);
+	LeaveCriticalSection (&a->cs_update);
+}
+
+PORT
 void SetEERMdelay (int id, double delay)
 {
 	EER a = peer[id];
@@ -215,24 +225,23 @@ void SetEERSamplerate (int id, int rate)
 	EnterCriticalSection (&a->cs_update);
 	a->rate = rate;
 	destroy_delay (a->mdel);
+	destroy_delay (a->pdel);
 	a->mdel = create_delay (
-		1,											// run
+		a->rundelays,								// run
 		a->size,									// size
 		a->outM,									// input buffer
 		a->outM,									// output buffer
 		a->rate,									// sample rate
 		20.0e-09,									// delta (delay stepsize)
-		a->mdelay,									// delay
-		3);											// delay only I
+		a->mdelay);									// delay
 	a->pdel = create_delay (
-		1,											// run
+		a->rundelays,								// run
 		a->size,									// size
 		a->out,										// input buffer
 		a->out,										// output buffer
 		a->rate,									// sample rate
 		20.0e-09,									// delta (delay stepsize)
-		a->pdelay,									// delay
-		3);	
+		a->pdelay);									// delay
 	LeaveCriticalSection (&a->cs_update);
 }
 

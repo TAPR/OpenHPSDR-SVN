@@ -150,6 +150,7 @@ namespace PowerSDR
         HPSDR,
         HERMES,
         ANAN10,
+        ANAN100B,
         ANAN100,
         ANAN100D,
         ANAN200D,
@@ -162,6 +163,7 @@ namespace PowerSDR
         HPSDR,
         HERMES,
         ANAN10,
+        ANAN100B,
         ANAN100,
         ANAN100D,
         ANAN200D,
@@ -667,6 +669,8 @@ namespace PowerSDR
         private int[] rx1_step_attenuator_by_band;
         private int[] rx2_step_attenuator_by_band;
         private int[] tx_step_attenuator_by_band;
+        private bool[] diversity_rx1_ref_by_band;
+        private bool[] diversity_rx2_ref_by_band;
 
         private bool rx1_above30;
         private bool rx2_above30;
@@ -1470,6 +1474,8 @@ namespace PowerSDR
         private CheckBoxTS chkCWAPFEnabled;
         private PrettyTrackBar ptbCWAPFGain;
         private LabelTS lblCWAPFGain;
+        private LabelTS lblRX1APF;
+        private LabelTS lblRX2APF;
         public PictureBox picWaterfall;
 
         #endregion
@@ -1576,14 +1582,68 @@ namespace PowerSDR
 
                             string file = db_file_name.Substring(db_file_name.LastIndexOf("\\") + 1);
                             file = file.Substring(0, file.Length - 4);
+                            if (!Directory.Exists(AppDataPath + "\\DB_Archive\\"))
+                                Directory.CreateDirectory(AppDataPath + "\\DB_Archive\\");
 
-                            File.Copy(db_file_name, desktop + "\\PowerSDR_" + file + "_" + datetime + ".xml");
-
+                            File.Copy(db_file_name, AppDataPath + "\\DB_Archive\\PowerSDR_" + file + "_" + datetime + ".xml");
                             File.Delete(db_file_name);
                             Thread.Sleep(100);
                         }
                     }
                 }
+
+                if (File.Exists(db_file_name))
+                {
+                    DB.Init();
+
+                    string DBVersion = "";
+                    string version = getVersion();
+                    ArrayList a = DB.GetVars("State");
+                    a.Sort();
+                    foreach (string s in a)
+                    {
+                        string[] vals = s.Split('/');
+                        string name = vals[0];
+                        string val = vals[1];
+
+                        switch (name)
+                        {
+                            case "VersionNumber":
+                                DBVersion = val;
+                                break;
+                        }
+                    }
+
+                    if (DBVersion != "" && DBVersion != version)
+                    {
+                        DialogResult dr = MessageBox.Show(
+                            "The database was created by a previous version of PowerSDR.\n" +
+                            "This can result in an undesirable behavior of your radio.\n\n\n" +
+                            "Would you like to reset the database to default values?",
+                            "Wrong Database Detected!",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning,
+                            MessageBoxDefaultButton.Button1,
+                            (MessageBoxOptions)0x40000);
+
+                        if (dr == DialogResult.Yes)
+                        {
+                            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                            string datetime = DateTime.Now.ToShortDateString().Replace("/", "-") + "_" +
+                                DateTime.Now.ToShortTimeString().Replace(":", ".");
+
+                            string file = db_file_name.Substring(db_file_name.LastIndexOf("\\") + 1);
+                            file = file.Substring(0, file.Length - 4);
+                            if (!Directory.Exists(AppDataPath + "\\DB_Archive\\"))
+                                Directory.CreateDirectory(AppDataPath + "\\DB_Archive\\");
+
+                            File.Copy(db_file_name, AppDataPath + "\\DB_Archive\\PowerSDR_" + file + "_" + datetime + ".xml");
+                            File.Delete(db_file_name);
+                            Thread.Sleep(100);
+                        }
+                    }
+                }
+
             }
 
             CmdLineArgs = args;
@@ -1627,22 +1687,6 @@ namespace PowerSDR
                             break;
                     }
                 }
-
-                /*   ArrayList b = DB.GetVars("Options");
-                   b.Sort();
-                   foreach (string o in b)
-                   {
-                       string[] valsb = o.Split('/');
-                       string nameb = valsb[0];
-                       string valb = valsb[1];
-                       switch (nameb)
-                       {
-                           case "comboFRSRegion":
-                               SetupForm.comboFRSRegion.Text = valb;
-                               break;
-                       }
-                   } */
-
             }
 
             Application.DoEvents();
@@ -1752,6 +1796,7 @@ namespace PowerSDR
 
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         //private int dispose_count = 0;
@@ -2224,6 +2269,7 @@ namespace PowerSDR
             this.panelBandHF = new System.Windows.Forms.PanelTS();
             this.txtVFOAFreq = new System.Windows.Forms.TextBoxTS();
             this.grpVFOA = new System.Windows.Forms.GroupBoxTS();
+            this.lblRX1APF = new System.Windows.Forms.LabelTS();
             this.lblRX1MuteVFOA = new System.Windows.Forms.LabelTS();
             this.lblFilterLabel = new System.Windows.Forms.LabelTS();
             this.lblModeLabel = new System.Windows.Forms.LabelTS();
@@ -2234,6 +2280,7 @@ namespace PowerSDR
             this.txtVFOABand = new System.Windows.Forms.TextBoxTS();
             this.btnHidden = new System.Windows.Forms.ButtonTS();
             this.grpVFOB = new System.Windows.Forms.GroupBoxTS();
+            this.lblRX2APF = new System.Windows.Forms.LabelTS();
             this.panelVFOBHover = new System.Windows.Forms.Panel();
             this.txtVFOBBand = new System.Windows.Forms.TextBoxTS();
             this.txtVFOBLSD = new System.Windows.Forms.TextBoxTS();
@@ -6545,6 +6592,7 @@ namespace PowerSDR
             // grpVFOA
             // 
             this.grpVFOA.BackColor = System.Drawing.Color.Transparent;
+            this.grpVFOA.Controls.Add(this.lblRX1APF);
             this.grpVFOA.Controls.Add(this.lblRX1MuteVFOA);
             this.grpVFOA.Controls.Add(this.lblFilterLabel);
             this.grpVFOA.Controls.Add(this.lblModeLabel);
@@ -6560,6 +6608,13 @@ namespace PowerSDR
             this.grpVFOA.ForeColor = System.Drawing.Color.Red;
             this.grpVFOA.Name = "grpVFOA";
             this.grpVFOA.TabStop = false;
+            // 
+            // lblRX1APF
+            // 
+            this.lblRX1APF.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.lblRX1APF, "lblRX1APF");
+            this.lblRX1APF.ForeColor = System.Drawing.Color.DarkOrange;
+            this.lblRX1APF.Name = "lblRX1APF";
             // 
             // lblRX1MuteVFOA
             // 
@@ -6644,6 +6699,7 @@ namespace PowerSDR
             // grpVFOB
             // 
             this.grpVFOB.BackColor = System.Drawing.Color.Transparent;
+            this.grpVFOB.Controls.Add(this.lblRX2APF);
             this.grpVFOB.Controls.Add(this.chkVFOBTX);
             this.grpVFOB.Controls.Add(this.panelVFOBHover);
             this.grpVFOB.Controls.Add(this.txtVFOBBand);
@@ -6658,6 +6714,13 @@ namespace PowerSDR
             this.grpVFOB.ForeColor = System.Drawing.Color.White;
             this.grpVFOB.Name = "grpVFOB";
             this.grpVFOB.TabStop = false;
+            // 
+            // lblRX2APF
+            // 
+            this.lblRX2APF.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.lblRX2APF, "lblRX2APF");
+            this.lblRX2APF.ForeColor = System.Drawing.Color.DarkOrange;
+            this.lblRX2APF.Name = "lblRX2APF";
             // 
             // panelVFOBHover
             // 
@@ -7323,7 +7386,7 @@ namespace PowerSDR
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
                 app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                     + "\\FlexRadio Systems\\PowerSDR mRX PS\\";
 #if(DEBUG)
@@ -7586,12 +7649,14 @@ namespace PowerSDR
                 }
             }
 
-            //tx1_by_band = new bool[(int)Band.LAST];
-            //tx2_by_band = new bool[(int)Band.LAST];
-            //tx3_by_band = new bool[(int)Band.LAST];
+            diversity_rx1_ref_by_band = new bool[(int)Band.LAST];
+            diversity_rx2_ref_by_band = new bool[(int)Band.LAST];
 
-            //for (int i = 0; i < (int)Band.LAST; i++)
-            //    tx1_by_band[i] = tx2_by_band[i] = tx3_by_band[i] = true;
+            for (int i = 0; i < (int)Band.LAST; i++)
+            {
+                diversity_rx1_ref_by_band[i] = true;
+                diversity_rx2_ref_by_band[i] = false;
+            }
 
             vhf_text = new RadioButtonTS[15];
             vhf_text[0] = radBandVHF0;
@@ -7760,27 +7825,26 @@ namespace PowerSDR
             InitAGCModes();						// Initialize AGC Modes
             InitMultiMeterModes();				// Initialize MultiMeter Modes
 
-            ProcessSampleThreadController[] pstc = new ProcessSampleThreadController[3];
-            audio_process_thread = new Thread[3];
-            for (uint proc_thread = 0; proc_thread < 3; proc_thread++)
-            {
-                pstc[proc_thread] = new ProcessSampleThreadController(proc_thread);
-                audio_process_thread[proc_thread] = new Thread(new ThreadStart(pstc[proc_thread].ProcessSampleThread));
-                audio_process_thread[proc_thread].Name = "Audio Process Thread " + proc_thread.ToString();
-                audio_process_thread[proc_thread].Priority = ThreadPriority.Highest;
-                audio_process_thread[proc_thread].IsBackground = true;
-                audio_process_thread[proc_thread].Start();
-
-                /*				DttSP.SetThreadCom(proc_thread);
-
-                                audio_process_thread = new Thread(	// create audio process thread
-                                    new ThreadStart(DttSP.ProcessSamplesThread));
-                                audio_process_thread.Name = "Audio Process Thread ";
-                                audio_process_thread.Priority = ThreadPriority.Highest;
-                                audio_process_thread.IsBackground = true;
-                                audio_process_thread.Start();
-                */
-            }
+            //ProcessSampleThreadController[] pstc = new ProcessSampleThreadController[3];
+            //audio_process_thread = new Thread[3];
+            //for (uint proc_thread = 0; proc_thread < 3; proc_thread++)
+            //{
+            //    pstc[proc_thread] = new ProcessSampleThreadController(proc_thread);
+            //    audio_process_thread[proc_thread] = new Thread(new ThreadStart(pstc[proc_thread].ProcessSampleThread));
+            //    audio_process_thread[proc_thread].Name = "Audio Process Thread " + proc_thread.ToString();
+            //    audio_process_thread[proc_thread].Priority = ThreadPriority.Highest;
+            //    audio_process_thread[proc_thread].IsBackground = true;
+            //    audio_process_thread[proc_thread].Start();
+            //
+            //
+            //                    audio_process_thread = new Thread(	// create audio process thread
+            //                        new ThreadStart(DttSP.ProcessSamplesThread));
+            //                    audio_process_thread.Name = "Audio Process Thread ";
+            //                    audio_process_thread.Priority = ThreadPriority.Highest;
+            //                    audio_process_thread.IsBackground = true;
+            //                    audio_process_thread.Start();
+            //
+            //}
 
             //hw = new HW();					// create hardware object
 
@@ -8268,7 +8332,7 @@ namespace PowerSDR
             a.Remove("udRX1StepAttData/" + udRX1StepAttData.Value.ToString());
             a.Remove("udRX2StepAttData/" + udRX2StepAttData.Value.ToString());
 
-            //  string ver_num = TitleBar.GetVerNum();
+            string ver_num = TitleBar.GetVerNum();
 
             a.Add("current_datetime_mode/" + (int)current_datetime_mode);
             a.Add("rx1_display_cal_offset/" + rx1_display_cal_offset.ToString("f3"));
@@ -8302,6 +8366,49 @@ namespace PowerSDR
 
             a.Add("center_frequency/" + center_frequency);
             a.Add("center_rx2_frequency/" + center_rx2_frequency);
+
+            a.Add("diversity_gain_160m/" + diversity_gain_160m);
+            a.Add("diversity_gain_r2_160m/" + diversity_gain_r2_160m);
+            a.Add("diversity_phase_160m/" + diversity_phase_160m);
+            a.Add("diversity_gain_80m/" + diversity_gain_80m);
+            a.Add("diversity_gain_r2_80m/" + diversity_gain_r2_80m);
+            a.Add("diversity_phase_80m/" + diversity_phase_80m);
+            a.Add("diversity_gain_60m/" + diversity_gain_60m);
+            a.Add("diversity_gain_r2_60m/" + diversity_gain_r2_60m);
+            a.Add("diversity_phase_60m/" + diversity_phase_60m);
+            a.Add("diversity_gain_40m/" + diversity_gain_40m);
+            a.Add("diversity_gain_r2_40m/" + diversity_gain_r2_40m);
+            a.Add("diversity_phase_40m/" + diversity_phase_40m);
+            a.Add("diversity_gain_30m/" + diversity_gain_30m);
+            a.Add("diversity_gain_r2_30m/" + diversity_gain_r2_30m);
+            a.Add("diversity_phase_30m/" + diversity_phase_30m);
+            a.Add("diversity_gain_20m/" + diversity_gain_20m);
+            a.Add("diversity_gain_r2_20m/" + diversity_gain_r2_20m);
+            a.Add("diversity_phase_20m/" + diversity_phase_20m);
+            a.Add("diversity_gain_17m/" + diversity_gain_17m);
+            a.Add("diversity_gain_r2_17m/" + diversity_gain_r2_17m);
+            a.Add("diversity_phase_17m/" + diversity_phase_17m);
+            a.Add("diversity_gain_15m/" + diversity_gain_15m);
+            a.Add("diversity_gain_r2_15m/" + diversity_gain_r2_15m);
+            a.Add("diversity_phase_15m/" + diversity_phase_15m);
+            a.Add("diversity_gain_12m/" + diversity_gain_12m);
+            a.Add("diversity_gain_r2_12m/" + diversity_gain_r2_12m);
+            a.Add("diversity_phase_12m/" + diversity_phase_12m);
+            a.Add("wdiversity_gain_10m/" + diversity_gain_10m);
+            a.Add("wdiversity_gain_r2_10m/" + diversity_gain_r2_10m);
+            a.Add("diversity_phase_10m/" + diversity_phase_10m);
+            a.Add("diversity_gain_6m/" + diversity_gain_6m);
+            a.Add("diversity_gain_r2_6m/" + diversity_gain_r2_6m);
+            a.Add("diversity_phase_6m/" + diversity_phase_6m);
+            a.Add("diversity_gain_wwv/" + diversity_gain_wwv);
+            a.Add("diversity_gain_r2_wwv/" + diversity_gain_r2_wwv);
+            a.Add("diversity_phase_wwv/" + diversity_phase_wwv);
+            a.Add("diversity_gain_gen/" + diversity_gain_gen);
+            a.Add("diversity_gain_r2_gen/" + diversity_gain_r2_gen);
+            a.Add("diversity_phase_gen/" + diversity_phase_gen);
+            a.Add("diversity_gain_xvtr/" + diversity_gain_xvtr);
+            a.Add("diversity_gain_r2_xvtr/" + diversity_gain_r2_xvtr);
+            a.Add("diversity_phase_xvtr/" + diversity_phase_xvtr);
 
             a.Add("waterfall_high_threshold_160m/" + waterfall_high_threshold_160m);
             a.Add("waterfall_low_threshold_160m/" + waterfall_low_threshold_160m);
@@ -8616,75 +8723,75 @@ namespace PowerSDR
             s = s.Substring(0, s.Length - 1);
             a.Add(s);
 
-            /*    s = "tx1_by_band/";
-                for (int i = 0; i < (int)Band.LAST; i++)
-                    s += Convert.ToUInt16(tx1_by_band[i]).ToString() + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+            s = "diversity_rx1_ref_by_band/";
+            for (int i = 0; i < (int)Band.LAST; i++)
+                s += Convert.ToUInt16(diversity_rx1_ref_by_band[i]).ToString() + "|";
+            s = s.Substring(0, s.Length - 1);
+            a.Add(s);
 
-                s = "tx2_by_band/";
-                for (int i = 0; i < (int)Band.LAST; i++)
-                    s += Convert.ToUInt16(tx2_by_band[i]).ToString() + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+            /*              s = "tx2_by_band/";
+                          for (int i = 0; i < (int)Band.LAST; i++)
+                              s += Convert.ToUInt16(tx2_by_band[i]).ToString() + "|";
+                          s = s.Substring(0, s.Length - 1);
+                          a.Add(s);
 
-                s = "tx3_by_band/";
-                for (int i = 0; i < (int)Band.LAST; i++)
-                    s += Convert.ToUInt16(tx3_by_band[i]).ToString() + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+                          s = "tx3_by_band/";
+                          for (int i = 0; i < (int)Band.LAST; i++)
+                              s += Convert.ToUInt16(tx3_by_band[i]).ToString() + "|";
+                          s = s.Substring(0, s.Length - 1);
+                          a.Add(s);
 
-                s = "rx1_image_gain_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += rx1_image_gain_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+                          s = "rx1_image_gain_table/";
+                          for (int i = 0; i <= (int)Band.B6M; i++)
+                              s += rx1_image_gain_table[i].ToString("R") + "|";
+                          s = s.Substring(0, s.Length - 1);
+                          a.Add(s);
 
-                s = "rx1_image_phase_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += rx1_image_phase_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+                          s = "rx1_image_phase_table/";
+                          for (int i = 0; i <= (int)Band.B6M; i++)
+                              s += rx1_image_phase_table[i].ToString("R") + "|";
+                          s = s.Substring(0, s.Length - 1);
+                          a.Add(s);
 
-                s = "rx2_image_gain_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += rx2_image_gain_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+                          s = "rx2_image_gain_table/";
+                          for (int i = 0; i <= (int)Band.B6M; i++)
+                              s += rx2_image_gain_table[i].ToString("R") + "|";
+                          s = s.Substring(0, s.Length - 1);
+                          a.Add(s);
 
-                s = "rx2_image_phase_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += rx2_image_phase_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+                          s = "rx2_image_phase_table/";
+                          for (int i = 0; i <= (int)Band.B6M; i++)
+                              s += rx2_image_phase_table[i].ToString("R") + "|";
+                          s = s.Substring(0, s.Length - 1);
+                          a.Add(s);
 
-                s = "tx_image_gain_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += tx_image_gain_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+                          s = "tx_image_gain_table/";
+                          for (int i = 0; i <= (int)Band.B6M; i++)
+                              s += tx_image_gain_table[i].ToString("R") + "|";
+                          s = s.Substring(0, s.Length - 1);
+                          a.Add(s);
 
-                s = "tx_image_phase_table/";
-                for (int i = 0; i <= (int)Band.B6M; i++)
-                    s += tx_image_phase_table[i].ToString("R") + "|";
-                s = s.Substring(0, s.Length - 1);
-                a.Add(s);
+                          s = "tx_image_phase_table/";
+                          for (int i = 0; i <= (int)Band.B6M; i++)
+                              s += tx_image_phase_table[i].ToString("R") + "|";
+                          s = s.Substring(0, s.Length - 1);
+                          a.Add(s);
 
-                a.Add("rx1_level_checksum/" + rx1_level_checksum.ToString());
-                a.Add("rx1_image_gain_checksum/" + rx1_image_gain_checksum.ToString());
-                a.Add("rx1_image_phase_checksum/" + rx1_image_phase_checksum.ToString());
-                a.Add("tx_image_gain_checksum/" + tx_image_gain_checksum.ToString());
-                a.Add("tx_image_phase_checksum/" + tx_image_phase_checksum.ToString());
-                a.Add("tx_carrier_checksum/" + tx_carrier_checksum.ToString());
-                a.Add("pa_bias_checksum/" + pa_bias_checksum.ToString());
-                a.Add("pa_bridge_checksum/" + pa_bridge_checksum.ToString());
-                a.Add("pa_power_checksum/" + pa_power_checksum.ToString());
-                a.Add("pa_swr_checksum/" + pa_swr_checksum.ToString());
-                a.Add("atu_swr_checksum/" + atu_swr_checksum.ToString());
-                a.Add("rx2_level_checksum/" + rx2_level_checksum.ToString());
-                a.Add("rx2_image_gain_checksum/" + rx2_image_gain_checksum.ToString());
-                a.Add("rx2_image_phase_checksum/" + rx2_image_phase_checksum.ToString());
-                */
+                          a.Add("rx1_level_checksum/" + rx1_level_checksum.ToString());
+                          a.Add("rx1_image_gain_checksum/" + rx1_image_gain_checksum.ToString());
+                          a.Add("rx1_image_phase_checksum/" + rx1_image_phase_checksum.ToString());
+                          a.Add("tx_image_gain_checksum/" + tx_image_gain_checksum.ToString());
+                          a.Add("tx_image_phase_checksum/" + tx_image_phase_checksum.ToString());
+                          a.Add("tx_carrier_checksum/" + tx_carrier_checksum.ToString());
+                          a.Add("pa_bias_checksum/" + pa_bias_checksum.ToString());
+                          a.Add("pa_bridge_checksum/" + pa_bridge_checksum.ToString());
+                          a.Add("pa_power_checksum/" + pa_power_checksum.ToString());
+                          a.Add("pa_swr_checksum/" + pa_swr_checksum.ToString());
+                          a.Add("atu_swr_checksum/" + atu_swr_checksum.ToString());
+                          a.Add("rx2_level_checksum/" + rx2_level_checksum.ToString());
+                          a.Add("rx2_image_gain_checksum/" + rx2_image_gain_checksum.ToString());
+                          a.Add("rx2_image_phase_checksum/" + rx2_image_phase_checksum.ToString());
+                          */
             /*   try
                {
                    StreamWriter writer = new StreamWriter(app_data_path + "\\power.csv");
@@ -8787,7 +8894,7 @@ namespace PowerSDR
             a.Add("mon_recall/" + mon_recall.ToString());
 
             a.Add("Version/" + this.Text);		// save the current version
-            //  a.Add("VersionNumber/" + ver_num);      // PowerSDR version number in a.b.c format
+            a.Add("VersionNumber/" + ver_num);      // PowerSDR version number in a.b.c format
             // a.Add("RadioType/" + CurrentModel);     // radio model string (ex. FLEX1500)
             a.Add("BandTextID/" + current_region);  // TURF Region
 
@@ -9139,14 +9246,14 @@ namespace PowerSDR
                     for (int i = 0; i < (int)Band.LAST; i++)
                         rx2_agcm_by_band[i] = (AGCMode)(int.Parse(list[i]));
                 }
+                else if (name.StartsWith("diversity_rx1_ref_by_band"))
+                {
+                    string[] list = val.Split('|');
+                    for (int i = 0; i < (int)Band.LAST; i++)
+                        diversity_rx1_ref_by_band[i] = Convert.ToBoolean(int.Parse(list[i]));
+                }
 
-                /* else if (name.StartsWith("tx1_by_band"))
-                  {
-                      string[] list = val.Split('|');
-                      for (int i = 0; i < (int)Band.LAST; i++)
-                          tx1_by_band[i] = Convert.ToBoolean(int.Parse(list[i]));
-                  }
-                  else if (name.StartsWith("tx2_by_band"))
+                /*  else if (name.StartsWith("tx2_by_band"))
                   {
                       string[] list = val.Split('|');
                       for (int i = 0; i < (int)Band.LAST; i++)
@@ -9521,6 +9628,132 @@ namespace PowerSDR
                         break;
                     case "center_rx2_frequency":
                         center_rx2_frequency = double.Parse(val);
+                        break;
+                    case "diversity_gain_160m":
+                        diversity_gain_160m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_160m":
+                        diversity_gain_r2_160m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_160m":
+                        diversity_phase_160m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_80m":
+                        diversity_gain_80m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_80m":
+                        diversity_gain_r2_80m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_80m":
+                        diversity_phase_80m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_60m":
+                        diversity_gain_60m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_60m":
+                        diversity_gain_r2_60m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_60m":
+                        diversity_phase_60m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_40m":
+                        diversity_gain_40m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_40m":
+                        diversity_gain_r2_40m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_40m":
+                        diversity_phase_40m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_30m":
+                        diversity_gain_30m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_30m":
+                        diversity_gain_r2_30m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_30m":
+                        diversity_phase_30m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_20m":
+                        diversity_gain_20m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_20m":
+                        diversity_gain_r2_20m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_20m":
+                        diversity_phase_20m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_17m":
+                        diversity_gain_17m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_17m":
+                        diversity_gain_r2_17m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_17m":
+                        diversity_phase_17m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_15m":
+                        diversity_gain_15m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_15m":
+                        diversity_gain_r2_15m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_15m":
+                        diversity_phase_15m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_12m":
+                        diversity_gain_12m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_12m":
+                        diversity_gain_r2_12m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_12m":
+                        diversity_phase_12m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_10m":
+                        diversity_gain_10m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_10m":
+                        diversity_gain_r2_10m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_10m":
+                        diversity_phase_10m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_6m":
+                        diversity_gain_6m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_6m":
+                        diversity_gain_r2_6m = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_6m":
+                        diversity_phase_6m = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_wwv":
+                        diversity_gain_wwv = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_wwv":
+                        diversity_gain_r2_wwv = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_wwv":
+                        diversity_phase_wwv = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_gen":
+                        diversity_gain_gen = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_gen":
+                        diversity_gain_r2_gen = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_gen":
+                        diversity_phase_gen = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_xvtr":
+                        diversity_gain_xvtr = decimal.Parse(val);
+                        break;
+                    case "diversity_gain_r2_xvtr":
+                        diversity_gain_r2_xvtr = decimal.Parse(val);
+                        break;
+                    case "diversity_phase_xvtr":
+                        diversity_phase_xvtr = decimal.Parse(val);
                         break;
                     case "waterfall_high_threshold_160m":
                         waterfall_high_threshold_160m = float.Parse(val);
@@ -12285,6 +12518,7 @@ namespace PowerSDR
                 UpdateBandButtonColors();
                 UpdateWaterfallLevelValues();
                 UpdateDisplayGridLevelValues();
+                UpdateDiversityValues();
             }
 
             if (rx1_xvtr_index >= 0)
@@ -12332,48 +12566,6 @@ namespace PowerSDR
             TXBand = b;
             if (old_band != b)
                 UpdateBandButtonColors();
-
-            //if (!(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
-            //{
-            //    if (atu_present && xvtr_present)
-            //    {
-            //        if (b == Band.B2M)
-            //            comboTuneMode.Enabled = false;
-            //        else
-            //            comboTuneMode.Enabled = true;
-            //    }
-
-            //    if (xvtr_present)
-            //    {
-            //        if (atu_present &&
-            //            comboTuneMode.SelectedIndex > 0 &&
-            //            (ATUTuneMode)comboTuneMode.SelectedIndex != ATUTuneMode.BYPASS &&
-            //            (tuned_band != b) &&
-            //            tuned_band != Band.FIRST)
-            //        {
-            //            Hdw.PA_ATUTune(ATUTuneMode.BYPASS);
-            //            tuned_band = Band.FIRST;
-            //            chkTUN.BackColor = SystemColors.Control;
-            //        }
-
-            //        if (b == Band.B2M)
-            //        {
-            //            if (comboPreamp.Items.Contains("Off"))
-            //                comboPreamp.Items.Remove("Off");
-            //            if (comboPreamp.Items.Contains("Med"))
-            //                comboPreamp.Items.Remove("Med");
-            //            if (comboPreamp.SelectedIndex < 0)
-            //                comboPreamp.Text = "High";
-            //        }
-            //        else
-            //        {
-            //            if (!comboPreamp.Items.Contains("Off"))
-            //                comboPreamp.Items.Insert(0, "Off");
-            //            if (!comboPreamp.Items.Contains("Med"))
-            //                comboPreamp.Items.Insert(2, "Med");
-            //        }
-            //    }
-            // }
         }
 
         private float GainByBand(Band b)
@@ -12457,6 +12649,91 @@ namespace PowerSDR
                         break;
                     case Band.VHF13:
                         retval = SetupForm.ANAN10PAGainVHF13;
+                        break;
+                    default:
+                        retval = 1000;
+                        break;
+                }
+            }
+
+            if (current_hpsdr_model == HPSDRModel.ANAN100B)
+            {
+                switch (b)
+                {
+                    case Band.B160M:
+                        retval = SetupForm.ANAN100BPAGain160;
+                        break;
+                    case Band.B80M:
+                        retval = SetupForm.ANAN100BPAGain80;
+                        break;
+                    case Band.B60M:
+                        retval = SetupForm.ANAN100BPAGain60;
+                        break;
+                    case Band.B40M:
+                        retval = SetupForm.ANAN100BPAGain40;
+                        break;
+                    case Band.B30M:
+                        retval = SetupForm.ANAN100BPAGain30;
+                        break;
+                    case Band.B20M:
+                        retval = SetupForm.ANAN100BPAGain20;
+                        break;
+                    case Band.B17M:
+                        retval = SetupForm.ANAN100BPAGain17;
+                        break;
+                    case Band.B15M:
+                        retval = SetupForm.ANAN100BPAGain15;
+                        break;
+                    case Band.B12M:
+                        retval = SetupForm.ANAN100BPAGain12;
+                        break;
+                    case Band.B10M:
+                        retval = SetupForm.ANAN100BPAGain10;
+                        break;
+                    case Band.B6M:
+                        retval = SetupForm.ANAN100BPAGain6;
+                        break;
+                    case Band.VHF0:
+                        retval = SetupForm.ANAN100BPAGainVHF0;
+                        break;
+                    case Band.VHF1:
+                        retval = SetupForm.ANAN100BPAGainVHF1;
+                        break;
+                    case Band.VHF2:
+                        retval = SetupForm.ANAN100BPAGainVHF2;
+                        break;
+                    case Band.VHF3:
+                        retval = SetupForm.ANAN100BPAGainVHF3;
+                        break;
+                    case Band.VHF4:
+                        retval = SetupForm.ANAN100BPAGainVHF4;
+                        break;
+                    case Band.VHF5:
+                        retval = SetupForm.ANAN100BPAGainVHF5;
+                        break;
+                    case Band.VHF6:
+                        retval = SetupForm.ANAN100BPAGainVHF6;
+                        break;
+                    case Band.VHF7:
+                        retval = SetupForm.ANAN100BPAGainVHF7;
+                        break;
+                    case Band.VHF8:
+                        retval = SetupForm.ANAN100BPAGainVHF8;
+                        break;
+                    case Band.VHF9:
+                        retval = SetupForm.ANAN100BPAGainVHF9;
+                        break;
+                    case Band.VHF10:
+                        retval = SetupForm.ANAN100BPAGainVHF10;
+                        break;
+                    case Band.VHF11:
+                        retval = SetupForm.ANAN100BPAGainVHF11;
+                        break;
+                    case Band.VHF12:
+                        retval = SetupForm.ANAN100BPAGainVHF12;
+                        break;
+                    case Band.VHF13:
+                        retval = SetupForm.ANAN100BPAGainVHF13;
                         break;
                     default:
                         retval = 1000;
@@ -14900,6 +15177,88 @@ namespace PowerSDR
             if (name != "") comboTXProfile.Text = name;
         }
 
+        private void UpdateDiversityValues()
+        {
+            if (!initializing && diversityForm != null)
+            {
+                diversityForm.DiversityRXRef = diversity_rx1_ref_by_band[(int)rx1_band];
+
+                switch (RX1Band)
+                {
+                    case Band.B160M:
+                        diversityForm.DiversityGain = DiversityGain160m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain160m;
+                        diversityForm.DiversityPhase = DiversityPhase160m;
+                        break;
+                    case Band.B80M:
+                        diversityForm.DiversityGain = DiversityGain80m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain80m;
+                        diversityForm.DiversityPhase = DiversityPhase80m;
+                        break;
+                    case Band.B60M:
+                        diversityForm.DiversityGain = DiversityGain60m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain60m;
+                        diversityForm.DiversityPhase = DiversityPhase60m;
+                        break;
+                    case Band.B40M:
+                        diversityForm.DiversityGain = DiversityGain40m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain40m;
+                        diversityForm.DiversityPhase = DiversityPhase40m;
+                        break;
+                    case Band.B30M:
+                        diversityForm.DiversityGain = DiversityGain30m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain30m;
+                        diversityForm.DiversityPhase = DiversityPhase30m;
+                        break;
+                    case Band.B20M:
+                        diversityForm.DiversityGain = DiversityGain20m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain20m;
+                        diversityForm.DiversityPhase = DiversityPhase20m;
+                        break;
+                    case Band.B17M:
+                        diversityForm.DiversityGain = DiversityGain17m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain17m;
+                       diversityForm.DiversityPhase = DiversityPhase17m;
+                        break;
+                    case Band.B15M:
+                        diversityForm.DiversityGain = DiversityGain15m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain15m;
+                        diversityForm.DiversityPhase = DiversityPhase15m;
+                        break;
+                    case Band.B12M:
+                        diversityForm.DiversityGain = DiversityGain12m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain12m;
+                        diversityForm.DiversityPhase = DiversityPhase12m;
+                        break;
+                    case Band.B10M:
+                        diversityForm.DiversityGain = DiversityGain10m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain10m;
+                        diversityForm.DiversityPhase = DiversityPhase10m;
+                        break;
+                    case Band.B6M:
+                        diversityForm.DiversityGain = DiversityGain6m;
+                        diversityForm.DiversityR2Gain = DiversityR2Gain6m;
+                        diversityForm.DiversityPhase = DiversityPhase6m;
+                        break;
+                    case Band.WWV:
+                        diversityForm.DiversityGain = DiversityGainWWV;
+                        diversityForm.DiversityR2Gain = DiversityR2GainWWV;
+                        diversityForm.DiversityPhase = DiversityPhaseWWV;
+                        break;
+                    case Band.GEN:
+                        diversityForm.DiversityGain = DiversityGainGEN;
+                        diversityForm.DiversityR2Gain = DiversityR2GainGEN;
+                        diversityForm.DiversityPhase = DiversityPhaseGEN;
+                        break;
+                    default:
+                        diversityForm.DiversityGain = DiversityGainXVTR;
+                        diversityForm.DiversityR2Gain = DiversityR2GainXVTR;
+                        diversityForm.DiversityPhase = DiversityPhaseXVTR;
+                        break;
+                }
+            }
+        }
+
         private void UpdateWaterfallLevelValues()
         {
             if (!initializing)
@@ -15681,7 +16040,7 @@ namespace PowerSDR
             rx2_preamp_offset[(int)PreampMode.HPSDR_OFF] = -off_offset;
             rx2_preamp_offset[(int)PreampMode.HPSDR_ON] = 0.0f;
 
-            if (alexpresent && !ANAN10Present)
+            if (alexpresent && !ANAN10Present && !ANAN100BPresent)
             {
                 RX1PreampMode = PreampMode.HPSDR_MINUS10; //-10dB
                 Thread.Sleep(100);
@@ -16919,6 +17278,48 @@ namespace PowerSDR
         // ======================================================
         // Properties
         // ======================================================
+        private string apf_btn = "APF";
+        public string APFbtn
+        {
+            get
+            {
+                return apf_btn;
+            }
+            set
+            {
+                apf_btn = value;
+                chkCWAPFEnabled.Text = value;
+            }
+        }
+
+        private string rx1_apf_label = "";
+        public string RX1APFlabel
+        {
+            get
+            {
+                return rx1_apf_label;
+            }
+            set
+            {
+                rx1_apf_label = value;
+                lblRX1APF.Text = value;
+            }
+        }
+
+        private string rx2_apf_label = "";
+        public string RX2APFlabel
+        {
+            get
+            {
+                return rx2_apf_label;
+            }
+            set
+            {
+                rx2_apf_label = value;
+                lblRX2APF.Text = value;
+            }
+        }
+
         private bool cw_fw_keyer = true;
         public bool CWFWKeyer
         {
@@ -16983,6 +17384,26 @@ namespace PowerSDR
             set
             {
                 center_rx2_frequency = value;
+            }
+        }
+
+        private bool update_centerfreq = false;
+        public bool UpdateCenterFreq
+        {
+            get { return update_centerfreq; }
+            set
+            {
+                update_centerfreq = value;
+            }
+        }
+
+        private bool update_rx2_centerfreq = false;
+        public bool UpdateRX2CenterFreq
+        {
+            get { return update_rx2_centerfreq; }
+            set
+            {
+                update_rx2_centerfreq = value;
             }
         }
 
@@ -17071,13 +17492,13 @@ namespace PowerSDR
             {
                 rx1_attenuator_data = value;
                 if (initializing) return;
-                if (AlexPresent && !ANAN10Present)
+                if (AlexPresent && !ANAN10Present && !ANAN100BPresent)
                     udRX1StepAttData.Maximum = (decimal)61;
                 else udRX1StepAttData.Maximum = (decimal)31;
 
                 if (rx1_step_att_present)
                 {
-                    if (AlexPresent && !ANAN10Present)
+                    if (AlexPresent && !ANAN10Present && !ANAN100BPresent)
                     {
                         if (rx1_attenuator_data <= 31)
                         {
@@ -17125,7 +17546,7 @@ namespace PowerSDR
                     udRX2StepAttData.BringToFront();
                     udRX2StepAttData.Value = rx2_step_attenuator_by_band[(int)rx2_band];
                     // udRX2StepAttData_ValueChanged(this, EventArgs.Empty);
-                    JanusAudio.EnableADC2StepAtten(1);
+                    //  JanusAudio.EnableADC2StepAtten(1);
                 }
                 else
                 {
@@ -17133,9 +17554,9 @@ namespace PowerSDR
                     lblRX2Preamp.Text = "ATT";
                     comboRX2Preamp.Visible = true;
                     comboRX2Preamp.BringToFront();
-                    comboRX2Preamp_SelectedIndexChanged(this, EventArgs.Empty);
-                    if (current_hpsdr_model != HPSDRModel.HPSDR)
-                        JanusAudio.EnableADC2StepAtten(1);
+                    // comboRX2Preamp_SelectedIndexChanged(this, EventArgs.Empty);
+                    // if (current_hpsdr_model != HPSDRModel.HPSDR)
+                    //  JanusAudio.EnableADC2StepAtten(1);
                 }
 
                 if (CollapsedDisplay)
@@ -17785,7 +18206,7 @@ namespace PowerSDR
             if (rx1_step_att_present)
             {
                 Display.RX1PreampOffset = rx1_attenuator_data;
-                if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ORION && !rx2_preamp_present)
+                if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ORION && !rx2_preamp_present || mox)
                     Display.RX2PreampOffset = rx1_attenuator_data;
             }
             else
@@ -18956,6 +19377,317 @@ namespace PowerSDR
             }
         }
 
+        private bool diversity_rx_ref;
+        public bool DiversityRXRef
+        {
+            get
+            {
+                return diversity_rx1_ref_by_band[(int)rx1_band];
+            }
+            set
+            {
+                if (!initializing)
+                {
+                    diversity_rx_ref = value;
+                    diversity_rx1_ref_by_band[(int)rx1_band] = value;
+                }
+            }
+        }
+
+        private decimal diversity_gain_160m = 1.0M;
+        public decimal DiversityGain160m
+        {
+            get { return diversity_gain_160m; }
+            set { diversity_gain_160m = value; }
+        }
+
+        private decimal diversity_gain_80m = 1.0M;
+        public decimal DiversityGain80m
+        {
+            get { return diversity_gain_80m; }
+            set { diversity_gain_80m = value; }
+        }
+
+        private decimal diversity_gain_60m = 1.0M;
+        public decimal DiversityGain60m
+        {
+            get { return diversity_gain_60m; }
+            set { diversity_gain_60m = value; }
+        }
+
+        private decimal diversity_gain_40m = 1.0M;
+        public decimal DiversityGain40m
+        {
+            get { return diversity_gain_40m; }
+            set { diversity_gain_40m = value; }
+        }
+
+        private decimal diversity_gain_30m = 1.0M;
+        public decimal DiversityGain30m
+        {
+            get { return diversity_gain_30m; }
+            set { diversity_gain_30m = value; }
+        }
+
+        private decimal diversity_gain_20m = 1.0M;
+        public decimal DiversityGain20m
+        {
+            get { return diversity_gain_20m; }
+            set { diversity_gain_20m = value; }
+        }
+
+        private decimal diversity_gain_17m = 1.0M;
+        public decimal DiversityGain17m
+        {
+            get { return diversity_gain_17m; }
+            set { diversity_gain_17m = value; }
+        }
+
+        private decimal diversity_gain_15m = 1.0M;
+        public decimal DiversityGain15m
+        {
+            get { return diversity_gain_15m; }
+            set { diversity_gain_15m = value; }
+        }
+
+        private decimal diversity_gain_12m = 1.0M;
+        public decimal DiversityGain12m
+        {
+            get { return diversity_gain_12m; }
+            set { diversity_gain_12m = value; }
+        }
+
+        private decimal diversity_gain_10m = 1.0M;
+        public decimal DiversityGain10m
+        {
+            get { return diversity_gain_10m; }
+            set { diversity_gain_10m = value; }
+        }
+
+        private decimal diversity_gain_6m = 1.0M;
+        public decimal DiversityGain6m
+        {
+            get { return diversity_gain_6m; }
+            set { diversity_gain_6m = value; }
+        }
+
+        private decimal diversity_gain_wwv = 1.0M;
+        public decimal DiversityGainWWV
+        {
+            get { return diversity_gain_wwv; }
+            set { diversity_gain_wwv = value; }
+        }
+
+        private decimal diversity_gain_gen = 1.0M;
+        public decimal DiversityGainGEN
+        {
+            get { return diversity_gain_gen; }
+            set { diversity_gain_gen = value; }
+        }
+
+        private decimal diversity_gain_xvtr = 1.0M;
+        public decimal DiversityGainXVTR
+        {
+            get { return diversity_gain_xvtr; }
+            set { diversity_gain_xvtr = value; }
+        }
+
+        private decimal diversity_gain_r2_160m = 1.0M;
+        public decimal DiversityR2Gain160m
+        {
+            get { return diversity_gain_r2_160m; }
+            set { diversity_gain_r2_160m = value; }
+        }
+
+        private decimal diversity_gain_r2_80m = 1.0M;
+        public decimal DiversityR2Gain80m
+        {
+            get { return diversity_gain_r2_80m; }
+            set { diversity_gain_r2_80m = value; }
+        }
+
+        private decimal diversity_gain_r2_60m = 1.0M;
+        public decimal DiversityR2Gain60m
+        {
+            get { return diversity_gain_r2_60m; }
+            set { diversity_gain_r2_60m = value; }
+        }
+
+        private decimal diversity_gain_r2_40m = 1.0M;
+        public decimal DiversityR2Gain40m
+        {
+            get { return diversity_gain_r2_40m; }
+            set { diversity_gain_r2_40m = value; }
+        }
+
+        private decimal diversity_gain_r2_30m = 1.0M;
+        public decimal DiversityR2Gain30m
+        {
+            get { return diversity_gain_r2_30m; }
+            set { diversity_gain_r2_30m = value; }
+        }
+
+        private decimal diversity_gain_r2_20m = 1.0M;
+        public decimal DiversityR2Gain20m
+        {
+            get { return diversity_gain_r2_20m; }
+            set { diversity_gain_r2_20m = value; }
+        }
+
+        private decimal diversity_gain_r2_17m = 1.0M;
+        public decimal DiversityR2Gain17m
+        {
+            get { return diversity_gain_r2_17m; }
+            set { diversity_gain_r2_17m = value; }
+        }
+
+        private decimal diversity_gain_r2_15m = 1.0M;
+        public decimal DiversityR2Gain15m
+        {
+            get { return diversity_gain_r2_15m; }
+            set { diversity_gain_r2_15m = value; }
+        }
+
+        private decimal diversity_gain_r2_12m = 1.0M;
+        public decimal DiversityR2Gain12m
+        {
+            get { return diversity_gain_r2_12m; }
+            set { diversity_gain_r2_12m = value; }
+        }
+
+        private decimal diversity_gain_r2_10m = 1.0M;
+        public decimal DiversityR2Gain10m
+        {
+            get { return diversity_gain_r2_10m; }
+            set { diversity_gain_r2_10m = value; }
+        }
+
+        private decimal diversity_gain_r2_6m = 1.0M;
+        public decimal DiversityR2Gain6m
+        {
+            get { return diversity_gain_r2_6m; }
+            set { diversity_gain_r2_6m = value; }
+        }
+
+        private decimal diversity_gain_r2_wwv = 1.0M;
+        public decimal DiversityR2GainWWV
+        {
+            get { return diversity_gain_r2_wwv; }
+            set { diversity_gain_r2_wwv = value; }
+        }
+
+        private decimal diversity_gain_r2_gen = 1.0M;
+        public decimal DiversityR2GainGEN
+        {
+            get { return diversity_gain_r2_gen; }
+            set { diversity_gain_r2_gen = value; }
+        }
+
+        private decimal diversity_gain_r2_xvtr = 1.0M;
+        public decimal DiversityR2GainXVTR
+        {
+            get { return diversity_gain_r2_xvtr; }
+            set { diversity_gain_r2_xvtr = value; }
+        }
+
+        private decimal diversity_phase_160m = 0.0M;
+        public decimal DiversityPhase160m
+        {
+            get { return diversity_phase_160m; }
+            set { diversity_phase_160m = value; }
+        }
+
+        private decimal diversity_phase_80m = 0.0M;
+        public decimal DiversityPhase80m
+        {
+            get { return diversity_phase_80m; }
+            set { diversity_phase_80m = value; }
+        }
+
+        private decimal diversity_phase_60m = 0.0M;
+        public decimal DiversityPhase60m
+        {
+            get { return diversity_phase_60m; }
+            set { diversity_phase_60m = value; }
+        }
+
+        private decimal diversity_phase_40m = 0.0M;
+        public decimal DiversityPhase40m
+        {
+            get { return diversity_phase_40m; }
+            set { diversity_phase_40m = value; }
+        }
+
+        private decimal diversity_phase_30m = 0.0M;
+        public decimal DiversityPhase30m
+        {
+            get { return diversity_phase_30m; }
+            set { diversity_phase_30m = value; }
+        }
+
+        private decimal diversity_phase_20m = 0.0M;
+        public decimal DiversityPhase20m
+        {
+            get { return diversity_phase_20m; }
+            set { diversity_phase_20m = value; }
+        }
+
+        private decimal diversity_phase_17m = 0.0M;
+        public decimal DiversityPhase17m
+        {
+            get { return diversity_phase_17m; }
+            set { diversity_phase_17m = value; }
+        }
+
+        private decimal diversity_phase_15m = 0.0M;
+        public decimal DiversityPhase15m
+        {
+            get { return diversity_phase_15m; }
+            set { diversity_phase_15m = value; }
+        }
+
+        private decimal diversity_phase_12m = 0.0M;
+        public decimal DiversityPhase12m
+        {
+            get { return diversity_phase_12m; }
+            set { diversity_phase_12m = value; }
+        }
+
+        private decimal diversity_phase_10m = 0.0M;
+        public decimal DiversityPhase10m
+        {
+            get { return diversity_phase_10m; }
+            set { diversity_phase_10m = value; }
+        }
+
+        private decimal diversity_phase_6m = 0.0M;
+        public decimal DiversityPhase6m
+        {
+            get { return diversity_phase_6m; }
+            set { diversity_phase_6m = value; }
+        }
+
+        private decimal diversity_phase_wwv = 0.0M;
+        public decimal DiversityPhaseWWV
+        {
+            get { return diversity_phase_wwv; }
+            set { diversity_phase_wwv = value; }
+        }
+
+        private decimal diversity_phase_gen = 0.0M;
+        public decimal DiversityPhaseGEN
+        {
+            get { return diversity_phase_gen; }
+            set { diversity_phase_gen = value; }
+        }
+
+        private decimal diversity_phase_xvtr = 0.0M;
+        public decimal DiversityPhaseXVTR
+        {
+            get { return diversity_phase_xvtr; }
+            set { diversity_phase_xvtr = value; }
+        }
+
         private float waterfall_high_threshold_160m = -80.0F;
         public float WaterfallHighThreshold160m
         {
@@ -19840,48 +20572,12 @@ namespace PowerSDR
             set
             {
                 current_hpsdr_model = value;
-
                 switch (current_hpsdr_model)
                 {
                     case HPSDRModel.HPSDR:
-                        //  chkCWFWKeyer.Checked = false;
-                        // chkCWFWKeyer.Visible = true;
-                        break;
                     case HPSDRModel.HERMES:
-                        //  chkCWFWKeyer.Checked = false;
-                        // chkCWFWKeyer.Visible = true;
                         break;
-                    case HPSDRModel.ANAN10:
-                        // chkCWFWKeyer.Checked = false;
-                        //  chkCWFWKeyer.Visible = true;
-                        if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
-                            comboMeterTXMode.Items.Insert(1, "Ref Pwr");
-                        if (!comboMeterTXMode.Items.Contains("SWR"))
-                            comboMeterTXMode.Items.Insert(2, "SWR");
-                        if (!comboMeterTXMode.Items.Contains("Fwd SWR"))
-                            comboMeterTXMode.Items.Insert(3, "Fwd SWR");
-                        break;
-                    case HPSDRModel.ANAN100:
-                        //  chkCWFWKeyer.Checked = false;
-                        //  chkCWFWKeyer.Visible = true;
-                        if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
-                            comboMeterTXMode.Items.Insert(1, "Ref Pwr");
-                        if (!comboMeterTXMode.Items.Contains("SWR"))
-                            comboMeterTXMode.Items.Insert(2, "SWR");
-                        if (!comboMeterTXMode.Items.Contains("Fwd SWR"))
-                            comboMeterTXMode.Items.Insert(3, "Fwd SWR");
-                        break;
-                    case HPSDRModel.ANAN100D:
-                        //  chkCWFWKeyer.Visible = true;
-                        if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
-                            comboMeterTXMode.Items.Insert(1, "Ref Pwr");
-                        if (!comboMeterTXMode.Items.Contains("SWR"))
-                            comboMeterTXMode.Items.Insert(2, "SWR");
-                        if (!comboMeterTXMode.Items.Contains("Fwd SWR"))
-                            comboMeterTXMode.Items.Insert(3, "Fwd SWR");
-                        break;
-                    case HPSDRModel.ORION:
-                        // chkCWFWKeyer.Visible = true;
+                    default:
                         if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
                             comboMeterTXMode.Items.Insert(1, "Ref Pwr");
                         if (!comboMeterTXMode.Items.Contains("SWR"))
@@ -22829,8 +23525,13 @@ namespace PowerSDR
                     string name = rx1_filters[(int)DSPMode.CWL].GetName(f);
 
                     int bw = high - low;
-                    low = -cw_pitch - bw / 2;
-                    high = -cw_pitch + bw / 2;
+
+                    if (f != Filter.VAR1 && f != Filter.VAR2)
+                    {
+                        low = -cw_pitch - bw / 2;
+                        high = -cw_pitch + bw / 2;
+                    }
+
                     rx1_filters[(int)DSPMode.CWL].SetFilter(f, low, high, name);
                     rx2_filters[(int)DSPMode.CWL].SetFilter(f, low, high, name); // n6vl
 
@@ -22839,8 +23540,13 @@ namespace PowerSDR
                     name = rx1_filters[(int)DSPMode.CWU].GetName(f);
 
                     bw = high - low;
-                    low = cw_pitch - bw / 2;
-                    high = cw_pitch + bw / 2;
+
+                    if (f != Filter.VAR1 && f != Filter.VAR2)
+                    {
+                        low = cw_pitch - bw / 2;
+                        high = cw_pitch + bw / 2;
+                    }
+
                     rx1_filters[(int)DSPMode.CWU].SetFilter(f, low, high, name);
                     rx2_filters[(int)DSPMode.CWU].SetFilter(f, low, high, name); // n6vl
                 }
@@ -23689,6 +24395,29 @@ namespace PowerSDR
             }
         }
 
+        private bool anan10bpresent = false;
+        public bool ANAN100BPresent
+        {
+            get { return anan10bpresent; }
+            set
+            {
+                anan10bpresent = value;
+                if (anan10bpresent)
+                {
+                    if (!comboMeterTXMode.Items.Contains("Fwd SWR"))
+                        comboMeterTXMode.Items.Insert(3, "Fwd SWR");
+                }
+                else
+                {
+                    if (!initializing)
+                    {
+                        if (comboMeterTXMode.Items.Contains("Fwd SWR"))
+                            comboMeterTXMode.Items.Remove("Fwd SWR");
+                    }
+                }
+            }
+        }
+
         private bool anan100dpresent = false;
         public bool ANAN100DPresent
         {
@@ -24044,8 +24773,8 @@ namespace PowerSDR
                 if (current_hpsdr_model == HPSDRModel.ANAN100D ||
                     current_hpsdr_model == HPSDRModel.ORION)
                 {
-                    JanusAudio.SetADC2StepAttenData(rx2_att_value);
                     JanusAudio.EnableADC2StepAtten(1);
+                    JanusAudio.SetADC2StepAttenData(rx2_att_value);
                 }
 
                 if (current_hpsdr_model == HPSDRModel.HPSDR)
@@ -25819,7 +26548,7 @@ namespace PowerSDR
                                                 pixel_x = 69 + (int)(over_s9 * 1.05);
                                             }
                                         }
-                                       break;
+                                        break;
                                     case 120:
                                         if (num <= -97.0f)
                                             pixel_x = (int)(0 + (num + 100.0) / 3.0 * 10);
@@ -29135,7 +29864,7 @@ namespace PowerSDR
 
                 if (!manual_mox && !disable_ptt && !rx_only && !tx_inhibit)// 
                 {
-                    bool mic_ptt = false, cat_ptt_local = false, vox_ptt = false, cw_ptt = false;
+                    bool mic_ptt = false, cat_ptt_local = false, vox_ptt = false, cw_ptt = false, cat_hs_ptt = false;
                     bool temp = (dotdashptt & 0x01) != 0; // ptt
 
                     //  if ((dotdashptt & 0x1) != 0)
@@ -29145,10 +29874,12 @@ namespace PowerSDR
                     // else mic_ptt = temp;                        
                     //  }
 
+                    cat_hs_ptt = CWInput.CATPTT;
                     cw_ptt = CWInput.KeyerPTT;
                     mic_ptt = temp;
                     vox_ptt = Audio.VOXActive;
-                    cat_ptt_local = (ptt_bit_bang_enabled && serialPTT != null && serialPTT.isPTT()) | cat_ptt;
+                    cat_ptt_local = (ptt_bit_bang_enabled && serialPTT != null && serialPTT.isPTT()) |
+                        (!ptt_bit_bang_enabled && cat_hs_ptt) | cat_ptt;
 
                     if (!mox)
                     {
@@ -31059,7 +31790,7 @@ namespace PowerSDR
                 fwc_dds_freq = 0.0f;
                 rx2_dds_freq = 0.0f;
 
-              //  if (ClickTuneDisplay)
+                //  if (ClickTuneDisplay)
                 //    FWCDDSFreq = center_frequency;      // Start up frequency generator to centre frequency if CTUN - G3OQD
 
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
@@ -31630,8 +32361,6 @@ namespace PowerSDR
                     //  SetupForm.RXAGCAttack = 2;
                     //  SetupForm.RXAGCHang = 2000;
                     // SetupForm.RXAGCDecay = 2000;
-                    radio.GetDSPRX(0, 0).RXAGCAttack = 2;
-                    radio.GetDSPRX(0, 1).RXAGCAttack = 2;
                     radio.GetDSPRX(0, 0).RXAGCHang = 2000;
                     radio.GetDSPRX(0, 1).RXAGCHang = 2000;
                     radio.GetDSPRX(0, 0).RXAGCDecay = 2000;
@@ -31649,8 +32378,6 @@ namespace PowerSDR
                     // SetupForm.RXAGCAttack = 2;
                     // SetupForm.RXAGCHang = 1000;
                     // SetupForm.RXAGCDecay = 500;
-                    radio.GetDSPRX(0, 0).RXAGCAttack = 2;
-                    radio.GetDSPRX(0, 1).RXAGCAttack = 2;
                     radio.GetDSPRX(0, 0).RXAGCHang = 1000;
                     radio.GetDSPRX(0, 1).RXAGCHang = 1000;
                     radio.GetDSPRX(0, 0).RXAGCDecay = 500;
@@ -31668,8 +32395,6 @@ namespace PowerSDR
                     //   SetupForm.RXAGCAttack = 2;
                     //   SetupForm.RXAGCHang = 5000; // OFF
                     //   SetupForm.RXAGCDecay = 250;
-                    radio.GetDSPRX(0, 0).RXAGCAttack = 2;
-                    radio.GetDSPRX(0, 1).RXAGCAttack = 2;
                     radio.GetDSPRX(0, 0).RXAGCHang = 0;
                     radio.GetDSPRX(0, 1).RXAGCHang = 0;
                     radio.GetDSPRX(0, 0).RXAGCDecay = 250;
@@ -31689,8 +32414,6 @@ namespace PowerSDR
                     // SetupForm.RXAGCAttack = 2;
                     // SetupForm.RXAGCHang = 5000; // OFF
                     // SetupForm.RXAGCDecay = 50;
-                    radio.GetDSPRX(0, 0).RXAGCAttack = 2;
-                    radio.GetDSPRX(0, 1).RXAGCAttack = 2;
                     radio.GetDSPRX(0, 0).RXAGCHang = 0;
                     radio.GetDSPRX(0, 1).RXAGCHang = 0;
                     radio.GetDSPRX(0, 0).RXAGCDecay = 50;
@@ -32140,8 +32863,8 @@ namespace PowerSDR
 
             if (rx1_dsp_mode == DSPMode.FM) //FM Squelch
             {
-                radio.GetDSPRX(0, 0).FMSquelchThreshold = (float)Math.Pow(10.0, -2 * ptbSquelch.Value / 100.0);
-                radio.GetDSPRX(0, 1).FMSquelchThreshold = (float)Math.Pow(10.0, -2 * ptbSquelch.Value / 100.0);
+                radio.GetDSPRX(0, 0).FMSquelchThreshold = (float)Math.Pow(10.0, -2.0 * ptbSquelch.Value / 100.0);
+                radio.GetDSPRX(0, 1).FMSquelchThreshold = (float)Math.Pow(10.0, -2.0 * ptbSquelch.Value / 100.0);
             }
             else //non-FM Squelch
             {
@@ -32778,6 +33501,8 @@ namespace PowerSDR
                         SetupForm.HermesAttenuatorData = tx_step_attenuator_by_band[(int)rx1_band];
                         JanusAudio.SetTxAttenData(tx_step_attenuator_by_band[(int)rx1_band]);
                         SetupForm.HermesEnableAttenuator = true;
+                        comboRX2Preamp.Enabled = false;
+                        udRX2StepAttData.Enabled = false;
 
                         //if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
                         //{
@@ -32834,6 +33559,8 @@ namespace PowerSDR
                     }
                     else
                     {
+                        comboRX2Preamp.Enabled = true;
+                        udRX2StepAttData.Enabled = true;
 
                         update_preamp_mode = true;
                         update_preamp = true;
@@ -33860,6 +34587,7 @@ namespace PowerSDR
                     SetupForm.RX1subAPFEnable = chkCWAPFEnabled.Checked;
                 if (SetupForm.RX2APFControls)
                     SetupForm.RX2APFEnable = chkCWAPFEnabled.Checked;
+                else SetupForm.RX2APFEnable = SetupForm.RX2APFEnable;
             }
         }
 
@@ -34273,8 +35001,11 @@ namespace PowerSDR
             if (freq > 30.0) rx1_above30 = true;
             else rx1_above30 = false;
 
-            if (!click_tune_display || initializing)
+            if (!click_tune_display || update_centerfreq || initializing)
+            {
                 center_frequency = freq;
+                update_centerfreq = false;
+            }
 
             // Lock the display
             if (click_tune_display &&
@@ -34939,8 +35670,12 @@ namespace PowerSDR
             if (freq > 30.0) rx2_above30 = true;
             else rx2_above30 = false;
 
-            if (!click_tune_rx2_display)
+            if (!click_tune_rx2_display || update_rx2_centerfreq)
+            {
                 center_rx2_frequency = freq;
+                update_rx2_centerfreq = false;
+            }
+
             // Lock the display
             if ((click_tune_rx2_display) &&
                              ((Display.CurrentDisplayModeBottom == DisplayMode.PANADAPTER && mox && !VFOBTX) ||
@@ -35196,7 +35931,7 @@ namespace PowerSDR
                     chkMOX.Checked = false;
                     return;
                 }
-            }          
+            }
 
             switch (tx_mode)
             {
@@ -35214,11 +35949,11 @@ namespace PowerSDR
                     break;
                 case DSPMode.CWL:
                     if (!cw_fw_keyer || (cw_fw_keyer && chkTUN.Checked))
-                    tx_freq += (double)cw_pitch * 0.0000010;
+                        tx_freq += (double)cw_pitch * 0.0000010;
                     break;
                 case DSPMode.CWU:
                     if (!cw_fw_keyer || (cw_fw_keyer && chkTUN.Checked))
-                    tx_freq -= (double)cw_pitch * 0.0000010;
+                        tx_freq -= (double)cw_pitch * 0.0000010;
                     break;
             }
             // }
@@ -37885,6 +38620,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand80_Click(object sender, EventArgs e)
@@ -37910,6 +38646,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand60_Click(object sender, EventArgs e)
@@ -37963,6 +38700,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand40_Click(object sender, EventArgs e)
@@ -37988,6 +38726,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand30_Click(object sender, EventArgs e)
@@ -38013,6 +38752,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand20_Click(object sender, EventArgs e)
@@ -38038,6 +38778,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand17_Click(object sender, EventArgs e)
@@ -38063,6 +38804,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand15_Click(object sender, EventArgs e)
@@ -38088,6 +38830,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand12_Click(object sender, EventArgs e)
@@ -38113,6 +38856,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand10_Click(object sender, EventArgs e)
@@ -38138,6 +38882,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand6_Click(object sender, EventArgs e)
@@ -38163,6 +38908,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBand2_Click(object sender, EventArgs e)
@@ -38213,6 +38959,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBandGEN_Click(object sender, EventArgs e)
@@ -38238,6 +38985,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         private void radBandVHF_Click(object sender, EventArgs e)
@@ -38331,6 +39079,7 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+            UpdateDiversityValues();
         }
 
         #endregion
@@ -38379,6 +39128,14 @@ namespace PowerSDR
                 wdsp.SetChannelTSlewDown(wdsp.id(0, 1), 0.010);
             }
 
+            //if (new_mode != DSPMode.CWL || new_mode != DSPMode.CWU)
+            //{
+            //    // turn off APF
+            //    radio.GetDSPRX(0, 0).RXAPFRun = false;
+            //    radio.GetDSPRX(0, 1).RXAPFRun = false;
+            //}
+
+
             double rx1_freq = VFOAFreq;
             // int old_txosc = (int)radio.GetDSPTX(0).TXOsc;
 
@@ -38410,7 +39167,8 @@ namespace PowerSDR
                     // turn off APF
                     radio.GetDSPRX(0, 0).RXAPFRun = false;
                     radio.GetDSPRX(0, 1).RXAPFRun = false;
-                    // radio.GetDSPRX(1, 0).RXAPFRun = false;
+                    SetupForm.EnableRX1APFControl = false;
+                    lblRX1APF.Hide();
 
                     if (!RX1IsOn60mChannel())
                     {
@@ -38443,7 +39201,8 @@ namespace PowerSDR
                     // turn off APF
                     radio.GetDSPRX(0, 0).RXAPFRun = false;
                     radio.GetDSPRX(0, 1).RXAPFRun = false;
-                    // radio.GetDSPRX(1, 0).RXAPFRun = false;
+                    SetupForm.EnableRX1APFControl = false;
+                    lblRX1APF.Hide();
 
                     if (!RX1IsOn60mChannel())
                     {
@@ -38661,8 +39420,10 @@ namespace PowerSDR
                         txtVFOAFreq.Text = rx1_freq.ToString("f6");
                     }
 
+                    SetupForm.EnableRX1APFControl = true;
+                    lblRX1APF.Show();
                     chkCWFWKeyer_CheckedChanged(this, EventArgs.Empty);
-                    chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
+                    // chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
                     panelModeSpecificCW.BringToFront();
                     break;
                 case DSPMode.CWU:
@@ -38705,8 +39466,10 @@ namespace PowerSDR
                         txtVFOAFreq.Text = rx1_freq.ToString("f6");
                     }
 
+                    SetupForm.EnableRX1APFControl = true;
+                    lblRX1APF.Show();
                     chkCWFWKeyer_CheckedChanged(this, EventArgs.Empty);
-                    chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
+                    // chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
                     panelModeSpecificCW.BringToFront();
                     break;
                 case DSPMode.FM:
@@ -38930,6 +39693,10 @@ namespace PowerSDR
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);
             chkSquelch_CheckedChanged(this, EventArgs.Empty);
             CalcDisplayFreq();
+            if (new_mode == DSPMode.CWL || new_mode == DSPMode.CWU)
+            {
+                chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
+            }
         }
 
         private void radModeButton_CheckedChanged(object sender, System.EventArgs e)
@@ -41959,6 +42726,13 @@ namespace PowerSDR
                 wdsp.SetChannelTSlewDown(wdsp.id(2, 1), 0.010);
             }
 
+            //if (new_mode != DSPMode.CWL || new_mode != DSPMode.CWU)
+            //{
+            //    // turn off APF
+            //    radio.GetDSPRX(1, 0).RXAPFRun = false;
+            //}
+
+
             double rx2_freq = VFOBFreq;
             int old_txosc = (int)radio.GetDSPTX(0).TXOsc;
 
@@ -41993,7 +42767,8 @@ namespace PowerSDR
                     }
 
                     radio.GetDSPRX(1, 0).RXAPFRun = false;
-
+                    SetupForm.EnableRX2APFControl = false;
+                    lblRX2APF.Hide();
                     break;
                 case DSPMode.CWU:
                     radRX2ModeCWU.BackColor = SystemColors.Control;
@@ -42015,7 +42790,8 @@ namespace PowerSDR
                     }
 
                     radio.GetDSPRX(1, 0).RXAPFRun = false;
-
+                    SetupForm.EnableRX2APFControl = false;
+                    lblRX2APF.Hide();
                     break;
                 case DSPMode.FM:
                     radRX2ModeFMN.BackColor = SystemColors.Control;
@@ -42176,7 +42952,9 @@ namespace PowerSDR
                         }
                         txtVFOBFreq.Text = rx2_freq.ToString("f6");
                     }
-                    chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
+                    SetupForm.EnableRX2APFControl = true;
+                    lblRX2APF.Show();
+                    // chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
                     break;
                 case DSPMode.CWU:
                     radRX2ModeCWU.BackColor = button_selected_color;
@@ -42204,7 +42982,9 @@ namespace PowerSDR
                         }
                         txtVFOBFreq.Text = rx2_freq.ToString("f6");
                     }
-                    chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
+                    SetupForm.EnableRX2APFControl = true;
+                    lblRX2APF.Show();
+                    // chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
                     break;
                 case DSPMode.FM:
                     radRX2ModeFMN.BackColor = button_selected_color;
@@ -42416,6 +43196,11 @@ namespace PowerSDR
                 UpdateDSPBufRX2();
                 if (chkVFOBTX.Checked)
                     UpdateDSPBufTX();
+            }
+
+            if (new_mode == DSPMode.CWL || new_mode == DSPMode.CWU)
+            {
+                chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
             }
 
             txtVFOBFreq_LostFocus(this, EventArgs.Empty);
@@ -43642,7 +44427,6 @@ namespace PowerSDR
                     // SetupForm.RX2AGCAttack = 2;
                     //  SetupForm.RX2AGCHang = 2000;
                     //  SetupForm.RX2AGCDecay = 2000;  
-                    radio.GetDSPRX(1, 0).RXAGCAttack = 2;
                     radio.GetDSPRX(1, 0).RXAGCHang = 2000;
                     radio.GetDSPRX(1, 0).RXAGCDecay = 2000;
                     SetupForm.SetAGCRX2HangThreshold = SetupForm.tbDSPAGCRX2HangThreshold.Value;
@@ -43656,7 +44440,6 @@ namespace PowerSDR
                     //  SetupForm.RX2AGCAttack = 2;
                     //  SetupForm.RX2AGCHang = 1000;
                     //   SetupForm.RX2AGCDecay = 500;
-                    radio.GetDSPRX(1, 0).RXAGCAttack = 2;
                     radio.GetDSPRX(1, 0).RXAGCHang = 1000;
                     radio.GetDSPRX(1, 0).RXAGCDecay = 500;
                     SetupForm.SetAGCRX2HangThreshold = SetupForm.tbDSPAGCRX2HangThreshold.Value;
@@ -43670,7 +44453,6 @@ namespace PowerSDR
                     // SetupForm.RX2AGCAttack = 2;
                     //  SetupForm.RX2AGCHang = 5000; // OFF
                     //  SetupForm.RX2AGCDecay = 250;
-                    radio.GetDSPRX(1, 0).RXAGCAttack = 2;
                     radio.GetDSPRX(1, 0).RXAGCHang = 0;
                     radio.GetDSPRX(1, 0).RXAGCDecay = 250;
                     toolTip1.SetToolTip(comboRX2AGC, "Automatic Gain Control Mode Setting:\n" +
@@ -43683,7 +44465,6 @@ namespace PowerSDR
                     // SetupForm.RX2AGCAttack = 2;
                     // SetupForm.RX2AGCHang = 5000; // OFF
                     // SetupForm.RX2AGCDecay = 50;
-                    radio.GetDSPRX(1, 0).RXAGCAttack = 2;
                     radio.GetDSPRX(1, 0).RXAGCHang = 0;
                     radio.GetDSPRX(1, 0).RXAGCDecay = 50;
                     toolTip1.SetToolTip(comboRX2AGC, "Automatic Gain Control Mode Setting:\n" +
@@ -44161,7 +44942,7 @@ namespace PowerSDR
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
+            string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
             return version;
         }
 
@@ -46565,6 +47346,7 @@ namespace PowerSDR
 
             diversityForm.Show();
             diversityForm.Focus();
+            UpdateDiversityValues();
         }
 
         private void ptbRX1AF_Scroll(object sender, EventArgs e)
@@ -46793,6 +47575,11 @@ namespace PowerSDR
         private void chkCWFWKeyer_CheckedChanged(object sender, EventArgs e)
         {
             CWFWKeyer = chkCWFWKeyer.Checked;
+        }
+
+        private void CAT2port_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+
         }
 
     }
