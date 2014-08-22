@@ -2177,6 +2177,7 @@ namespace PowerSDR
 				else
 					s = s.Insert(5, separator);
 
+                console.UpdateCenterFreq = true;
 				console.VFOAFreq = double.Parse(s);
 				return "";
 			}
@@ -2219,6 +2220,7 @@ namespace PowerSDR
 				else
 					s = s.Insert(5, separator);
 
+                console.UpdateRX2CenterFreq = true;
 				console.VFOBFreq = double.Parse(s);
 				return "";
 			}
@@ -8437,7 +8439,13 @@ namespace PowerSDR
 				case 4096:
 					ans = "4";
 					break;
-				default:
+                case 8192:
+                    ans = "5";
+                    break;
+                case 16384:
+                    ans = "6";
+                    break;
+                default:
 					ans = "0";
 					break;
 			}
@@ -8464,7 +8472,13 @@ namespace PowerSDR
 				case "4":
 					ans = 4096;
 					break;
-				default:
+                case "5":
+                    ans = 8192;
+                    break;
+                case "6":
+                    ans = 16384;
+                    break;
+                default:
 					ans = 256;
 					break;
 			}

@@ -331,6 +331,8 @@ extern int UserOut1;
 extern int UserOut2;
 extern int UserOut3;
 extern int EClass;
+extern int eer_pwm_min;
+extern int eer_pwm_max;
 
 extern unsigned char AlexManEnable;
 extern unsigned char AlexEnabled;

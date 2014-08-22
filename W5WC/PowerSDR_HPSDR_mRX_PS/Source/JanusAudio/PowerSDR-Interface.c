@@ -1369,6 +1369,40 @@ KD5TFDVK6APHAUDIO_API void SetCWSidetoneFreq(int freq) {
          cw_sidetone_freq = freq; 
 }
 
+/*
+C0
+0 0 1 0 0 0 1 x  
+C1
+0 0 0 0 0 0 0 0
+|             |
++-------------+------------ PWM Min pulse width (bits [9:2])
+
+C2
+0 0 0 0 0 0 0 0
+            | |
+            +-+------------ PWM Min pulse width (bits [1:0])
+*/
+
+KD5TFDVK6APHAUDIO_API void SetEERPWMmin(int min) {
+         eer_pwm_min = min; 
+}
+
+/*
+C3
+0 0 0 0 0 0 0 0
+|             |
++-------------+------------ PWM Max pulse width (bits [9:2])
+
+C4
+0 0 0 0 0 0 0 0
+            | |
+            +-+------------ PWM Max pulse width (bits [1:0])
+*/
+
+KD5TFDVK6APHAUDIO_API void SetEERPWMmax(int max) {
+         eer_pwm_max = max; 
+}
+
 // *************************************************
 // misc functions
 // *************************************************

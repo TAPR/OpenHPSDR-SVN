@@ -1388,8 +1388,12 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] |= 0x1e; //C0 0001 111x
 						break;
 				    case 28: // CW
-						FPGAWriteBufp[writebufpos] |= 0x20;
+						FPGAWriteBufp[writebufpos] |= 0x20; //C0 0010 000x
 						break;
+					case 30: // EER PWM
+						FPGAWriteBufp[writebufpos] |= 0x22; //C0 0010 001x
+						break;
+
 					}
 
 					ControlBytesOut[0] = FPGAWriteBufp[writebufpos];
@@ -1412,6 +1416,7 @@ void IOThreadMainLoop(void) {
 					case 23:
 					case 25:
 					case 27:
+					case 29:
 						FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
 						// printf(" C1Mask: %d\n", C1Mask);
 						break;
@@ -1477,6 +1482,9 @@ void IOThreadMainLoop(void) {
 				    case 28:
 						FPGAWriteBufp[writebufpos] =  (cw_hang_time >> 2) & 0xff;
 						break;
+					case 30:
+						FPGAWriteBufp[writebufpos] =  (eer_pwm_min >> 2) & 0xff;
+						break;
 					} 
 
 					ControlBytesOut[1] = FPGAWriteBufp[writebufpos];
@@ -1499,6 +1507,7 @@ void IOThreadMainLoop(void) {
 					case 23:
 					case 25:
 					case 27:
+					case 29:
 						FPGAWriteBufp[writebufpos] = (PennyOCBits | (EClass & XmitBit)) & 0xff; 
 						break;
 					case 1:
@@ -1550,6 +1559,9 @@ void IOThreadMainLoop(void) {
 				    case 28:
 						FPGAWriteBufp[writebufpos] =  cw_hang_time & 0x03;
 						break;
+					case 30:
+						FPGAWriteBufp[writebufpos] =  eer_pwm_min & 0x03;
+						break;
 					}
 
 					ControlBytesOut[2] = FPGAWriteBufp[writebufpos];
@@ -1571,6 +1583,7 @@ void IOThreadMainLoop(void) {
 				    case 23:
 					case 25:
 					case 27:
+					case 29:
 						FPGAWriteBufp[writebufpos] = ( AlexAtten | MercDither | MercPreamp |
 							MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 
 						break;
@@ -1622,6 +1635,9 @@ void IOThreadMainLoop(void) {
 				    case 28:
 						FPGAWriteBufp[writebufpos] =  (cw_sidetone_freq >> 4) & 0xff;
 						break;
+					case 30:
+						FPGAWriteBufp[writebufpos] =  (eer_pwm_max >> 2) & 0xff;
+						break;
 					}                                                         
 
 					ControlBytesOut[3] = FPGAWriteBufp[writebufpos];
@@ -1644,6 +1660,7 @@ void IOThreadMainLoop(void) {
 					case 23:
 					case 25:
 					case 27:
+					case 29:
 						FPGAWriteBufp[writebufpos] = AlexTxAnt | NRx | Duplex | diversitymode2 << 7;
 						break;
 
@@ -1693,7 +1710,10 @@ void IOThreadMainLoop(void) {
 						FPGAWriteBufp[writebufpos] = 0;
 						break;
 				    case 28:
-						FPGAWriteBufp[writebufpos] =  cw_sidetone_freq & 0x0F;
+						FPGAWriteBufp[writebufpos] =  cw_sidetone_freq & 0x0f;
+						break;
+					case 30:
+						FPGAWriteBufp[writebufpos] =  eer_pwm_max & 0x03;
 						break;
 					}
 
@@ -1797,13 +1817,17 @@ void IOThreadMainLoop(void) {
 						out_control_idx = 25; 
 						break;
 					case 27: // C0 0
-						out_control_idx = 1; 
+						out_control_idx = 29; 
 						break;
 					case 28: 
 						out_control_idx = 27;
 						break;		
-
-
+					case 29:
+						out_control_idx = 30; 
+						break;
+					case 30: 
+						out_control_idx = 1;
+						break;		
 					}
 					break; 
 

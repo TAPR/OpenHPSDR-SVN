@@ -54,16 +54,11 @@ typedef struct _delay
 	double adelta;		// actual delay increment
 	double adelay;		// actual delay
 
-	int dlyIQ;			// 0 for delay neither; 1 for I only;
-						// 2 for Q only; 3 for both
-	int dlyI;
-	int dlyQ;
-
 	CRITICAL_SECTION cs_update;
 
 } delay, *DELAY;
 
-extern DELAY create_delay (int run, int size, double* in, double* out, int rate, double tdelta, double tdelay, int dlyIQ);
+extern DELAY create_delay (int run, int size, double* in, double* out, int rate, double tdelta, double tdelay);
 
 extern void destroy_delay (DELAY a);
 

@@ -98,7 +98,7 @@ namespace PowerSDR
             wdsp.OpenChannel(wdsp.id(2, 1), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
             wdsp.OpenChannel(wdsp.id(1, 0), 1024, 4096, 48000, 48000, 48000, 1, 0, 0.010, 0.025, 0.000, 0.010);
             wdsp.create_divEXT(0, 0, 2, 1024);
-            wdsp.create_eerEXT(0, 0, 1024, 48000, 1.0, 1.0, 0.0, 0.0, 1);
+            wdsp.create_eerEXT(0, 0, 1024, 48000, 1.0, 1.0, false, 0.0, 0.0, 1);
 		}
 
 		public static void DestroyDSP()
@@ -187,7 +187,6 @@ namespace PowerSDR
             this.NBMode = rx.nb_mode;
             this.RXFixedAGC = rx.rx_fixed_agc;
             this.RXAGCMaxGain = rx.rx_agc_max_gain;
-            this.RXAGCAttack = rx.rx_agc_attack;
             this.RXAGCDecay = rx.rx_agc_decay;
             this.RXAGCHang = rx.rx_agc_hang;
             this.RXOutputGain = rx.rx_output_gain;
@@ -259,7 +258,6 @@ namespace PowerSDR
             NBMode = nb_mode;
 			RXFixedAGC = rx_fixed_agc;
 			RXAGCMaxGain = rx_agc_max_gain;
-			RXAGCAttack = rx_agc_attack;
 			RXAGCDecay = rx_agc_decay;
 			RXAGCHang = rx_agc_hang;
 			RXOutputGain = rx_output_gain;
@@ -824,25 +822,6 @@ namespace PowerSDR
 					{
                         wdsp.SetRXAAGCTop(wdsp.id(thread, subrx), value);
 						rx_agc_max_gain_dsp = value;
-					}
-				}
-			}
-		}
-
-		private int rx_agc_attack_dsp = 2;
-		private int rx_agc_attack = 2;
-		public int RXAGCAttack
-		{
-			get { return rx_agc_attack; }
-			set
-			{
-				rx_agc_attack = value;
-				if(update)
-				{
-					if(value != rx_agc_attack_dsp || force)
-					{
-                        wdsp.SetRXAAGCAttack(wdsp.id(thread, subrx), value);
-						rx_agc_attack_dsp = value;
 					}
 				}
 			}
@@ -1678,13 +1657,9 @@ namespace PowerSDR
 			Notch160 = notch_160;
 			TXCorrectIQGain = tx_correct_iq_gain;
 			TXAMCarrierLevel = tx_am_carrier_level;
-			TXALCAttack = tx_alc_attack;
 			TXALCDecay = tx_alc_decay;
-			TXALCHang = tx_alc_hang;
 			TXLevelerMaxGain = tx_leveler_max_gain;
-			TXLevelerAttack = tx_leveler_attack;
 			TXLevelerDecay = tx_leveler_decay;
-			TXLevelerHang = tx_leveler_hang;
 			TXLevelerOn = tx_leveler_on;
 			TXSquelchThreshold = tx_squelch_threshold;
 			TXSquelchAttenuate = tx_squelch_attenuate;
@@ -1700,6 +1675,7 @@ namespace PowerSDR
             TXEERModeAMIQ = tx_eer_mode_am_iq;
             TXEERModeMgain = tx_eer_mode_mgain;
             TXEERModePgain = tx_eer_mode_pgain;
+            TXEERModeRunDelays = tx_eer_mode_rundelays;
             TXEERModeMdelay = tx_eer_mode_mdelay;
             TXEERModePdelay = tx_eer_mode_pdelay;
             // TXEERModeSamplerate = tx_eer_mode_samplerate;
@@ -1734,6 +1710,8 @@ namespace PowerSDR
             TXPostGenSweepFreq1 = tx_postgen_sweep_freq1;
             TXPostGenSweepFreq2 = tx_postgen_sweep_freq2;
             TXPostGenSweepRate = tx_postgen_sweep_rate;
+            TXStaticPDRun = tx_static_pd_run;
+            TXStaticPD = tx_static_pd;
 		}
 
 		#region Non-Static Properties & Routines
@@ -2102,25 +2080,6 @@ namespace PowerSDR
 			}
 		}
 
-		private int tx_alc_attack_dsp = 2;
-		private int tx_alc_attack = 2;
-		public int TXALCAttack
-		{
-			get { return tx_alc_attack; }
-			set
-			{
-				tx_alc_attack = value;
-				if(update)
-				{
-					if(value != tx_alc_attack_dsp || force)
-					{
-                        wdsp.SetTXAALCAttack(wdsp.id(thread, 0), value);
-						tx_alc_attack_dsp = value;
-					}
-				}
-			}
-		}
-
 		private int tx_alc_decay_dsp = 10;
 		private int tx_alc_decay = 10;
 		public int TXALCDecay
@@ -2137,17 +2096,6 @@ namespace PowerSDR
 						tx_alc_decay_dsp = value;
 					}
 				}
-			}
-		}
-
-		private int tx_alc_hang = 500;
-		public int TXALCHang
-		{
-			get { return tx_alc_hang; }
-			set
-			{
-				tx_alc_hang = value;
-                wdsp.SetTXAALCHang(wdsp.id(thread, 0), value);
 			}
 		}
 
@@ -2170,24 +2118,6 @@ namespace PowerSDR
 			}
 		}
 
-		private int tx_leveler_attack_dsp = 2;
-		private int tx_leveler_attack = 2;
-		public int TXLevelerAttack
-		{
-			get { return tx_leveler_attack; }
-			set
-			{
-				tx_leveler_attack = value;
-				if(update)
-				{
-					if(value != tx_leveler_attack_dsp || force)
-					{
-                        wdsp.SetTXALevelerAttack(wdsp.id(thread, 0), value);
-						tx_leveler_attack_dsp = value;
-					}
-				}
-			}
-		}
 
 		private int tx_leveler_decay_dsp = 500;
 		private int tx_leveler_decay = 500;
@@ -2203,25 +2133,6 @@ namespace PowerSDR
 					{
                         wdsp.SetTXALevelerDecay(wdsp.id(thread, 0), value);
 						tx_leveler_decay_dsp = value;
-					}
-				}
-			}
-		}
-
-		private int tx_leveler_hang_dsp = 500;
-		private int tx_leveler_hang = 500;
-		public int TXLevelerHang
-		{
-			get { return tx_leveler_hang; }
-			set
-			{
-				tx_leveler_hang = value;
-				if(update)
-				{
-					if(value != tx_leveler_hang_dsp || force)
-					{
-                        wdsp.SetTXALevelerHang(wdsp.id(thread, 0), value);
-						tx_leveler_hang_dsp = value;
 					}
 				}
 			}
@@ -2457,6 +2368,26 @@ namespace PowerSDR
                     {
                         wdsp.SetEERPgain(0, value);
                         tx_eer_mode_pgain_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private bool tx_eer_mode_rundelays_dsp = true;
+        private bool tx_eer_mode_rundelays = true;
+        public bool TXEERModeRunDelays
+        {
+            get { return tx_eer_mode_rundelays; }
+            set
+            {
+                tx_eer_mode_rundelays = value;
+
+                if (update)
+                {
+                    if (value != tx_eer_mode_rundelays_dsp || force)
+                    {
+                        wdsp.SetEERRunDelays(0, value);
+                        tx_eer_mode_rundelays_dsp = value;
                     }
                 }
             }
@@ -3111,6 +3042,47 @@ namespace PowerSDR
                         wdsp.SetTXAPostGenSweepRate(wdsp.id(1, 0), value);
                         tx_postgen_sweep_rate_dsp = value;
                     }
+                }
+            }
+        }
+
+        private bool tx_static_pd_run_dsp = false;
+        private bool tx_static_pd_run = false;
+        public bool TXStaticPDRun
+        {
+            get { return tx_static_pd_run; }
+            set
+            {
+                tx_static_pd_run = value;
+                if (update)
+                {
+                    if (value != tx_static_pd_run_dsp || force)
+                    {
+                        wdsp.SetTXAStaticPDRun(wdsp.id(1, 0), value);
+                        tx_static_pd_run_dsp = value;
+                    }
+                }
+            }
+        }
+        
+        private double[] tx_static_pd_dsp = new double[12];
+        private double[] tx_static_pd = new double[12];
+        public double[] TXStaticPD
+        {
+            get { return tx_static_pd; }
+            set
+            {
+                for (int i = 0; i < tx_static_pd.Length && i < value.Length; i++)
+                    tx_static_pd[i] = value[i];
+                if (update)
+                {
+                    unsafe
+                    {
+                        fixed (double* ptr = &(tx_static_pd[0]))
+                            wdsp.SetTXAStaticPDGain(wdsp.id(thread, 0), ptr);
+                    }
+                    for (int i = 0; i < tx_static_pd_dsp.Length && i < value.Length; i++)
+                        tx_static_pd_dsp[i] = value[i];
                 }
             }
         }

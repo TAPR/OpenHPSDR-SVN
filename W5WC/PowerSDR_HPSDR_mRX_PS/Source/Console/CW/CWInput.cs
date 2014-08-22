@@ -31,12 +31,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.IO.Ports;
 using System.Diagnostics;
 
 namespace PowerSDR
 {
     class CWInput
     {
+        public static event SerialRXEventHandler serial_rx_event;
         private static SDRSerialPort primary_com_port;
         private static SDRSerialPort secondary_com_port;
 
@@ -115,6 +117,13 @@ namespace PowerSDR
             set { keyerptt = value; }
         }
 
+        private static bool cat_ptt = false;
+        public static bool CATPTT
+        {
+            get { return cat_ptt; }
+            set { cat_ptt = value; }
+        }
+        
         public static bool SetPrimaryInput(string s)
         {
             if (s.ToUpper().StartsWith("COM") && s.Length > 3)
@@ -131,7 +140,7 @@ namespace PowerSDR
                     primary_com_port = null;
                 }
 
-                primary_com_port = new SDRSerialPort(port);
+                primary_com_port = new SDRSerialPort(port);//, null);
                 try
                 {
                     primary_com_port.Open();
@@ -186,7 +195,7 @@ namespace PowerSDR
                     secondary_com_port = null;
                 }
 
-                secondary_com_port = new SDRSerialPort(port);
+                secondary_com_port = new SDRSerialPort(port);//, null);
 
                 try
                 {
@@ -226,5 +235,11 @@ namespace PowerSDR
             }
             return true;
         }
+
+        void SerialReceivedData(object source, SerialDataReceivedEventArgs e)
+        {
+            serial_rx_event(this, new SerialRXEvent(primary_com_port.BasePort.ReadExisting()));
+        }
+
     }
 }

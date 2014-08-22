@@ -1,5 +1,5 @@
-﻿Build started 4/30/2014 11:17:25 PM.
-     1>Project "C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\portaudio_VS2008\build\msvc\portaudio.vcxproj" on node 4 (rebuild target(s)).
+﻿Build started 8/22/2014 10:59:34 AM.
+     1>Project "C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\portaudio_VS2008\build\msvc\portaudio.vcxproj" on node 2 (rebuild target(s)).
      1>_PrepareForClean:
          Deleting file "Win32\Release\portaudio.lastbuildstate".
        InitializeBuildStatus:
@@ -88,4 +88,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.38
+Time Elapsed 00:00:05.61
