@@ -3637,7 +3637,7 @@ namespace PowerSDR
 
             int mode = Convert.ToInt16(commands.ZZMD(""));
 
-
+            commands.isMidi = true;
 
             switch (mode)  
             {
@@ -3721,6 +3721,7 @@ namespace PowerSDR
                         break;
                     }
             }
+            commands.isMidi = false;
         }
 
         private long SnapTune(long freq, int step, int num_steps)
@@ -3761,7 +3762,7 @@ namespace PowerSDR
             parser.nAns = 11;
 
             int mode = Convert.ToInt16(commands.ZZMD(""));
-
+            commands.isMidi2 = true;
 
             switch (mode)
             {
@@ -3845,10 +3846,8 @@ namespace PowerSDR
                         break;
                     }
             }
+            commands.isMidi2 = false;
         }
-
-
-
 
         private void BinauralOnOff(int msg)
         {
