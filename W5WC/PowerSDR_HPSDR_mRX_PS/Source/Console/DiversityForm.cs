@@ -176,6 +176,7 @@ namespace PowerSDR
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.picRadar = new System.Windows.Forms.PictureBox();
             this.panelDivControls = new System.Windows.Forms.GroupBoxTS();
+            this.chkEnableDiversity = new System.Windows.Forms.CheckBoxTS();
             this.grpRxSource = new System.Windows.Forms.GroupBoxTS();
             this.radRxSourceRx1Rx2 = new System.Windows.Forms.RadioButtonTS();
             this.radRxSource2 = new System.Windows.Forms.RadioButtonTS();
@@ -209,7 +210,6 @@ namespace PowerSDR
             this.btnShiftUp45 = new System.Windows.Forms.ButtonTS();
             this.udR = new System.Windows.Forms.NumericUpDownTS();
             this.udAngle = new System.Windows.Forms.NumericUpDownTS();
-            this.chkEnableDiversity = new System.Windows.Forms.CheckBoxTS();
             ((System.ComponentModel.ISupportInitialize)(this.picRadar)).BeginInit();
             this.panelDivControls.SuspendLayout();
             this.grpRxSource.SuspendLayout();
@@ -307,6 +307,23 @@ namespace PowerSDR
             this.panelDivControls.TabIndex = 51;
             this.panelDivControls.TabStop = false;
             this.panelDivControls.Enter += new System.EventHandler(this.panelDivControls_Enter);
+            // 
+            // chkEnableDiversity
+            // 
+            this.chkEnableDiversity.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkEnableDiversity.AutoSize = true;
+            this.chkEnableDiversity.BackColor = System.Drawing.SystemColors.Control;
+            this.chkEnableDiversity.Checked = true;
+            this.chkEnableDiversity.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkEnableDiversity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkEnableDiversity.Image = null;
+            this.chkEnableDiversity.Location = new System.Drawing.Point(381, 53);
+            this.chkEnableDiversity.Name = "chkEnableDiversity";
+            this.chkEnableDiversity.Size = new System.Drawing.Size(56, 23);
+            this.chkEnableDiversity.TabIndex = 101;
+            this.chkEnableDiversity.Text = "Enable";
+            this.chkEnableDiversity.UseVisualStyleBackColor = false;
+            this.chkEnableDiversity.CheckedChanged += new System.EventHandler(this.chkEnableDiversity_CheckedChanged);
             // 
             // grpRxSource
             // 
@@ -868,21 +885,6 @@ namespace PowerSDR
             0,
             0});
             this.udAngle.ValueChanged += new System.EventHandler(this.udTheta_ValueChanged);
-            // 
-            // chkEnableDiversity
-            // 
-            this.chkEnableDiversity.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkEnableDiversity.AutoSize = true;
-            this.chkEnableDiversity.Checked = true;
-            this.chkEnableDiversity.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkEnableDiversity.Image = null;
-            this.chkEnableDiversity.Location = new System.Drawing.Point(381, 53);
-            this.chkEnableDiversity.Name = "chkEnableDiversity";
-            this.chkEnableDiversity.Size = new System.Drawing.Size(50, 23);
-            this.chkEnableDiversity.TabIndex = 101;
-            this.chkEnableDiversity.Text = "Enable";
-            this.chkEnableDiversity.UseVisualStyleBackColor = true;
-            this.chkEnableDiversity.CheckedChanged += new System.EventHandler(this.chkEnableDiversity_CheckedChanged);
             // 
             // DiversityForm
             // 
@@ -1752,6 +1754,9 @@ namespace PowerSDR
         private void chkEnableDiversity_CheckedChanged(object sender, EventArgs e)
         {
             console.Diversity2 = chkEnableDiversity.Checked;
+            if (chkEnableDiversity.Checked)
+                chkEnableDiversity.BackColor = Color.LimeGreen;
+            else chkEnableDiversity.BackColor = Color.Red;
         }
     }
 }

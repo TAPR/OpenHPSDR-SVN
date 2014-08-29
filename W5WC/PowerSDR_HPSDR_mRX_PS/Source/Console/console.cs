@@ -26462,8 +26462,6 @@ namespace PowerSDR
             return (y - 16) * i * display_delay;
         }
 
-
-
         #endregion
 
         #region Paint Event Handlers
@@ -26473,9 +26471,6 @@ namespace PowerSDR
 
         private void picDisplay_Paint(object sender, PaintEventArgs e)
         {
-            if (rx1_xvtr_index >= 0) lblRX1MuteVFOA.SendToBack();
-            else lblRX1MuteVFOA.BringToFront();
-
             switch (current_display_engine)
             {
                 case DisplayEngine.GDI_PLUS:
@@ -26502,7 +26497,7 @@ namespace PowerSDR
             int pixel_x = 0;
             int pixel_x_swr = 0;
             string output = "";
-
+           
             switch (current_meter_display_mode)
             {
                 case MultiMeterDisplayMode.Original:
@@ -34307,6 +34302,9 @@ namespace PowerSDR
                 chkFWCATU.Checked = false;
             if (!rx2_click_tune_drag)
                 chkX2TR.Checked = false;
+
+                lblRX1MuteVFOA.SendToBack();
+                lblRX1APF.SendToBack();
         }
 
         private void btnBandHF_Click(object sender, System.EventArgs e)
@@ -34326,6 +34324,8 @@ namespace PowerSDR
             if (!rx2_click_tune_drag)
                 chkX2TR.Checked = false;
 
+                lblRX1MuteVFOA.BringToFront();
+                lblRX1APF.BringToFront();
         }
 
         private void udFilterLow_LostFocus(object sender, EventArgs e)

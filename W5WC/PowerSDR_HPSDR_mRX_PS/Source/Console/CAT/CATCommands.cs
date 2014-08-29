@@ -2157,7 +2157,8 @@ namespace PowerSDR
 				return parser.Error1;
 		}
 
-
+        public bool isMidi = false;
+        public bool isMidi2 = false;
 		//Sets or reads VFO A frequency
 		public string ZZFA(string s)
 		{
@@ -2177,6 +2178,7 @@ namespace PowerSDR
 				else
 					s = s.Insert(5, separator);
 
+                if (!isMidi)
                 console.UpdateCenterFreq = true;
 				console.VFOAFreq = double.Parse(s);
 				return "";
@@ -2220,6 +2222,7 @@ namespace PowerSDR
 				else
 					s = s.Insert(5, separator);
 
+                if (!isMidi2)
                 console.UpdateRX2CenterFreq = true;
 				console.VFOBFreq = double.Parse(s);
 				return "";
