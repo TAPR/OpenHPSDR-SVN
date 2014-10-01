@@ -19,10 +19,10 @@ rm -rf $PREFIX/lib/libgr*
 rm -rf $PREFIX/lib/libmblock*
 rm -rf $PREFIX/lib/libpmt*
 rm -rf $PREFIX/lib/libusrp*
-rm -rf $PREFIX/lib/python2.5/site-packages/gnuradio
-rm -rf $PREFIX/lib/python2.5/site-packages/usrpm
-rm -rf $PREFIX/lib/python2.5/site-packages/grc
-rm -rf $PREFIX/lib/python2.5/site-packages/grc_gnuradio
+rm -rf $PREFIX/lib/python2.7/site-packages/gnuradio
+rm -rf $PREFIX/lib/python2.7/site-packages/usrpm
+rm -rf $PREFIX/lib/python2.7/site-packages/grc
+rm -rf $PREFIX/lib/python2.7/site-packages/grc_gnuradio
 rm -rf $PREFIX/lib/pkgconfig/gnuradio*.pc
 rm -rf $PREFIX/lib/pkgconfig/gr-wxgui*.pc
 rm -rf $PREFIX/lib/pkgconfig/gruel.pc
