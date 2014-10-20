@@ -1,0 +1,68 @@
+
+// Change log:  Redesign of OzyJanus FPGA based upon only using IF_clk for logic - FEb 15, 2009
+Release notes for Ozy_Janus_v2.7
+
+// Aug 2, 2009: 1. Fix for "distortion" problem seen in audio.  NWire_xmit for LRAudio rate was
+//                 increased and PWM logic handshake improvements were made (see IF_PWM_state logic)
+//              2. New modules cdc_sync, cdc_mcp and pulsegen where added to replace discrete clock
+//                 domain crossing logic. These modules are now added to the "common" code area.
+//              3. General naming convention cleanup.  A signal such as Rx_fifo_rdata in the IF_clk
+//                 domain is renamed to IF_Rx_fifo_rdata (more needs to be done here)
+//              4. 1st attempt to get Janus working - untested    Kirk KD7IRS
+// Aug 12, 2009 1. Janus bug fix
+//              2. Support for Duplex mode with 1 Penelope and up to 8 Mercury boards/channels
+//              3. Separation of DASH/DOT/PTT data in FPGA to PC data block. See changes
+//                 made to Tx_fifo_ctrl.v  Kirk KD7IRS
+//
+// Aug 18, 2009 Altered PTT, dash, dot pin connections - Phil VK6APH 
+// Aug 22, 2009 Changed NWire_xmit to run at 10kHz, released as V1.6
+//
+// Aug 31, 2009 1. Changed from Async_usb to sync_usb to increase throughput when multiple
+//                 Mercury data channels are used.
+//              2. Changed Tx_fifo, Rx_fifo, SP_fifo to use a common file FIFO.v instead of
+//                 Megawizard functions
+// Sept 2, 2009 1. Added code to support multiple NWire_rcv's for multiple Mercury cards
+//              2. Added support for sending data from multiple mercury receivers to PC
+//                 Note: currently only support for 3 channels but support is in place to increase to 8
+//              3. Temporarily changed back to Async_usb
+// Sept 26,2009 - release as V1.7
+// Jan  10,2011 - Added support for PennyLane. Use Atlas_C18 for nWire Tx with Drive_Level. Release as V1.8
+// Jul  30,2011 - Added support for FWD and REV power from Penny(Lane).Release as V1.9
+// Sep  15,2011 - Added support for manual control of Alex filter relays. Added Drive level to C&C, removed
+//                nWire Drive level from Atlas_C18. Release as V2.0
+//		  29,2011 - Added support for mutiple receivers in one Mercury board.
+//					   Added support for 1PPS time stamp from Atlas A13 to LSB of mic data, rest of mic data set to zero.
+//						Selected when C0 = 0 and C4[6] = 1.  
+// Oct  8, 2012 - Fixed bug in C&C byte stream selection/assignments of frequencies for multiple receivers
+//					 - Added independent manual control of HPF/LPF relays for Alex 2
+//					   Released as v2.3 - built using Quartus II v11.1 sp2
+//
+// Oct 26, 2012 - fixed bug in Rx freq assignments that resulted in improper freq assignments 
+//		when certain hardware configurations/PC options are selected
+//		- Fixed bug in selection of 122.88 MHz clock at power up when Penelope is chosen as source
+//		Released as v2.4 - built using Quartus II v11.1 sp2
+//
+// May 4, 2013  - Added an i2c "monitor" module to extract data appearing on the i2c bus, including firmware
+//		version numbers for Penny(Lane) and all Mercury boards (up to four), Penny(Lane) output power,
+//		FWD output power from Alex, REV power from Alex, and ADC overflow status for all Mercury boards
+//		via the i2c bus instead of using NWire comm on Atlas A2, A3, A4, A5, and A6.  Removed references
+//		to Atlas A2 and A6 as well as the NWire comm modules previously used for those. Split I and Q data paths
+//		to implement indepentdent I and Q data paths on the Atlas bus in order to achieve up to 384ksps sampling
+//		rates.  Rx1 uses Atlas A10 to receive I data from Mercury and Atlas A5 for Q data, Rx2 uses Atlas A9 to
+//		receive I data from Mercury and A4 for Q data, Rx3 uses Atlas A8 for I data from Mercury and Atlas A3 for
+//		Q data. Created a new Ozy_Janus.sdc timing constraint file to meet timing requirements for all but the 
+//		Atlas C5 comm to Janus.  Janus support may be addressed later. 
+//		Released as v2.5  - built using Quartus II v12.1.
+//
+// May 11, 2014  - Added Iambic keyer. Built using Quartus V13.0.
+//		 - Released as v2.6
+//               - Constrained the design, closed timing.
+//
+//  May 17, 2014 - Added independent Penelope (vs PennyLane) drive level control in accordance with the latest USB comm protocol 
+//		specifications, re-closed timing.
+//
+// June 6, 2014	- Added PC control of "20 dB Mercury Rx attenuation on Tx" via C&C bit C3[4] when C0 = 0001_010x; "0" = disable, "1" = enable
+//		- Released as v2.7
+//
+// Sept 14,2014  - Fixed CW profile error and better matched power out in CW and TUNE modes. 
+//               - Released as v2.8
