@@ -1,0 +1,116 @@
+Restore Archived Project report for Ozy_Janus
+Mon Jun 23 18:55:32 2014
+Quartus II 64-Bit Version 13.0.0 Build 156 04/24/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Restore Archived Project Summary
+  3. Restore Archived Project Messages
+  4. Files Restored
+  5. Files Not Restored
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------+
+; Restore Archived Project Summary                                        ;
++---------------------------------+---------------------------------------+
+; Restore Archived Project Status ; Successful - Mon Jun 23 18:55:32 2014 ;
+; Revision Name                   ; Ozy_Janus                             ;
+; Top-level Entity Name           ; Ozy_Janus                             ;
+; Family                          ; Cyclone II                            ;
++---------------------------------+---------------------------------------+
+
+
++-----------------------------------+
+; Restore Archived Project Messages ;
++-----------------------------------+
+Info: Successfully restored 'E:/HPSDR/trunk/Ozymandias/Source/Ozy_V2.7/Ozy_Janus_v2.7.qar' into the 'E:/HPSDR/trunk/Ozymandias/Source/Ozy_V2.7/' directory
+Info: Generated report 'Ozy_Janus.restore.rpt'
+Info (23030): Evaluation of Tcl script e:/altera/13.0/quartus/common/tcl/apps/qpm/qar.tcl was successful
+Info: Quartus II 64-Bit Shell was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 297 megabytes
+    Info: Processing ended: Mon Jun 23 18:55:32 2014
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:01
+
+
++------------------------------------------------------+
+; Files Restored                                       ;
++------------------------------------------------------+
+; File Name                                            ;
++------------------------------------------------------+
+; FIFO.v                                               ;
+; I2S_LR_Capture.v                                     ;
+; Multiply2.v                                          ;
+; Ozy_Janus.qpf                                        ;
+; Ozy_Janus.qsf                                        ;
+; Ozy_Janus.sdc                                        ;
+; Ozy_Janus.v                                          ;
+; Ozy_Janus_assignment_defaults.qdf                    ;
+; SPI_REGS.v                                           ;
+; Tx_fifo_ctrl.v                                       ;
+; async_usb.v                                          ;
+; clkmult3.ppf                                         ;
+; clkmult3.qip                                         ;
+; clkmult3.v                                           ;
+; common/I2C_monitor.v                                 ;
+; common/I2S_rcv.v                                     ;
+; common/I2S_xmit.v                                    ;
+; common/NWire_rcv.v                                   ;
+; common/NWire_xmit.v                                  ;
+; common/cdc_mcp.v                                     ;
+; common/cdc_sync.v                                    ;
+; common/clk_lrclk_gen.v                               ;
+; common/deglitch.v                                    ;
+; common/pulsegen.v                                    ;
+; debounce.v                                           ;
+; divide2.v                                            ;
+; gpio_control.v                                       ;
+; gpio_oport.v                                         ;
+; iambic.v                                             ;
+; incremental_db/compiled_partitions/Ozy_Janus.db_info ;
+; led_blinker.v                                        ;
+; multiply.v                                           ;
+; profile.v                                            ;
+; profile_500.mif                                      ;
+; profile_ROM.qip                                      ;
+; profile_ROM.v                                        ;
+; sidetone2.v                                          ;
+; sim.v                                                ;
+; sine_table.mif                                       ;
+; sine_table.qip                                       ;
+; sine_table.v                                         ;
+; sp_rcv_ctrl.v                                        ;
+; sync_usb.v                                           ;
++------------------------------------------------------+
+
+
++--------------------+
+; Files Not Restored ;
++--------------------+
+; File Name          ;
++--------------------+
+
+

@@ -1,0 +1,301 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow Model Setup 'n/a'
+Slack : 1.180
+TNS   : 0.000
+
+Type  : Slow Model Setup 'cm3|altpll_component|pll|clk[0]'
+Slack : 1.192
+TNS   : 0.000
+
+Type  : Slow Model Setup 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 1.531
+TNS   : 0.000
+
+Type  : Slow Model Setup 'IF_clk'
+Slack : 2.498
+TNS   : 0.000
+
+Type  : Slow Model Setup 'I2C_monitor:I2C_inst|deglitch:deglitch_scl|out'
+Slack : 2.866
+TNS   : 0.000
+
+Type  : Slow Model Setup 'iambic_clk'
+Slack : 3.514
+TNS   : 0.000
+
+Type  : Slow Model Setup 'C5'
+Slack : 4.470
+TNS   : 0.000
+
+Type  : Slow Model Setup 'I2C_monitor:I2C_inst|deglitch:deglitch_sda|out'
+Slack : 7.650
+TNS   : 0.000
+
+Type  : Slow Model Setup 'pro_clock'
+Slack : 9.469
+TNS   : 0.000
+
+Type  : Slow Model Setup 'sidetone2:sidetone_inst|sidetone_clock'
+Slack : 14.605
+TNS   : 0.000
+
+Type  : Slow Model Setup 'cm3|altpll_component|pll|clk[1]'
+Slack : 43.515
+TNS   : 0.000
+
+Type  : Slow Model Setup 'SPI_SCK'
+Slack : 75.471
+TNS   : 0.000
+
+Type  : Slow Model Hold 'C5'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'I2C_monitor:I2C_inst|deglitch:deglitch_scl|out'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'IF_clk'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'SPI_SCK'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'cm3|altpll_component|pll|clk[0]'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'iambic_clk'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'pro_clock'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'cm3|altpll_component|pll|clk[1]'
+Slack : 0.599
+TNS   : 0.000
+
+Type  : Slow Model Hold 'sidetone2:sidetone_inst|sidetone_clock'
+Slack : 1.483
+TNS   : 0.000
+
+Type  : Slow Model Hold 'I2C_monitor:I2C_inst|deglitch:deglitch_sda|out'
+Slack : 2.500
+TNS   : 0.000
+
+Type  : Slow Model Hold 'n/a'
+Slack : 8.050
+TNS   : 0.000
+
+Type  : Slow Model Recovery 'I2C_monitor:I2C_inst|deglitch:deglitch_sda|out'
+Slack : 7.607
+TNS   : 0.000
+
+Type  : Slow Model Removal 'I2C_monitor:I2C_inst|deglitch:deglitch_sda|out'
+Slack : 12.960
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'cm3|altpll_component|pll|clk[0]'
+Slack : 2.230
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'IF_clk'
+Slack : 7.349
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'sidetone2:sidetone_inst|sidetone_clock'
+Slack : 7.639
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'I2C_monitor:I2C_inst|deglitch:deglitch_scl|out'
+Slack : 9.174
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'I2C_monitor:I2C_inst|deglitch:deglitch_sda|out'
+Slack : 9.174
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'cm3|altpll_component|pll|clk[1]'
+Slack : 24.799
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'C5'
+Slack : 39.448
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'SPI_SCK'
+Slack : 39.448
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 415.418
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'pro_clock'
+Slack : 5205.473
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'iambic_clk'
+Slack : 16665.158
+TNS   : 0.000
+
+Type  : Fast Model Setup 'C5'
+Slack : 4.145
+TNS   : 0.000
+
+Type  : Fast Model Setup 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 4.973
+TNS   : 0.000
+
+Type  : Fast Model Setup 'n/a'
+Slack : 6.205
+TNS   : 0.000
+
+Type  : Fast Model Setup 'IF_clk'
+Slack : 6.933
+TNS   : 0.000
+
+Type  : Fast Model Setup 'cm3|altpll_component|pll|clk[0]'
+Slack : 8.221
+TNS   : 0.000
+
+Type  : Fast Model Setup 'I2C_monitor:I2C_inst|deglitch:deglitch_scl|out'
+Slack : 8.231
+TNS   : 0.000
+
+Type  : Fast Model Setup 'I2C_monitor:I2C_inst|deglitch:deglitch_sda|out'
+Slack : 9.650
+TNS   : 0.000
+
+Type  : Fast Model Setup 'pro_clock'
+Slack : 17.096
+TNS   : 0.000
+
+Type  : Fast Model Setup 'sidetone2:sidetone_inst|sidetone_clock'
+Slack : 18.774
+TNS   : 0.000
+
+Type  : Fast Model Setup 'cm3|altpll_component|pll|clk[1]'
+Slack : 49.162
+TNS   : 0.000
+
+Type  : Fast Model Setup 'SPI_SCK'
+Slack : 79.407
+TNS   : 0.000
+
+Type  : Fast Model Setup 'iambic_clk'
+Slack : 97.933
+TNS   : 0.000
+
+Type  : Fast Model Hold 'IF_clk'
+Slack : 0.128
+TNS   : 0.000
+
+Type  : Fast Model Hold 'C5'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'I2C_monitor:I2C_inst|deglitch:deglitch_scl|out'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'SPI_SCK'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'cm3|altpll_component|pll|clk[0]'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'iambic_clk'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'pro_clock'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'cm3|altpll_component|pll|clk[1]'
+Slack : 0.245
+TNS   : 0.000
+
+Type  : Fast Model Hold 'sidetone2:sidetone_inst|sidetone_clock'
+Slack : 0.433
+TNS   : 0.000
+
+Type  : Fast Model Hold 'I2C_monitor:I2C_inst|deglitch:deglitch_sda|out'
+Slack : 0.646
+TNS   : 0.000
+
+Type  : Fast Model Hold 'n/a'
+Slack : 4.091
+TNS   : 0.000
+
+Type  : Fast Model Recovery 'I2C_monitor:I2C_inst|deglitch:deglitch_sda|out'
+Slack : 9.063
+TNS   : 0.000
+
+Type  : Fast Model Removal 'I2C_monitor:I2C_inst|deglitch:deglitch_sda|out'
+Slack : 11.650
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'cm3|altpll_component|pll|clk[0]'
+Slack : 2.472
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'IF_clk'
+Slack : 8.289
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'sidetone2:sidetone_inst|sidetone_clock'
+Slack : 8.493
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'I2C_monitor:I2C_inst|deglitch:deglitch_scl|out'
+Slack : 9.416
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'I2C_monitor:I2C_inst|deglitch:deglitch_sda|out'
+Slack : 9.416
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'cm3|altpll_component|pll|clk[1]'
+Slack : 25.041
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'C5'
+Slack : 39.690
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'SPI_SCK'
+Slack : 39.690
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'clk_lrclk_gen:clrgen|BCLK'
+Slack : 415.660
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'pro_clock'
+Slack : 5206.327
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'iambic_clk'
+Slack : 16665.400
+TNS   : 0.000
+
+------------------------------------------------------------
