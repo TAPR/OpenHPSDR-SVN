@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sun Oct 19 12:19:53 2014
+Quartus II 64-Bit Version : 13.0.0 Build 156 04/24/2013 SJ Web Edition
+Revision Name : Hermes
+Top-level Entity Name : Hermes
+Family : Cyclone III
+Device : EP3C40Q240C8
+Timing Models : Final
+Total logic elements : 36,239 / 39,600 ( 92 % )
+    Total combinational functions : 31,198 / 39,600 ( 79 % )
+    Dedicated logic registers : 26,020 / 39,600 ( 66 % )
+Total registers : 26020
+Total pins : 119 / 129 ( 92 % )
+Total virtual pins : 0
+Total memory bits : 983,456 / 1,161,216 ( 85 % )
+Embedded Multiplier 9-bit elements : 222 / 252 ( 88 % )
+Total PLLs : 4 / 4 ( 100 % )
