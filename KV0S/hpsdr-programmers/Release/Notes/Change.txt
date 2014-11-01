@@ -1,0 +1,6 @@
+Program: HPSDRProgrammer
+Version: 2.0.4.10
+Date: October 31, 2014
+
+Ensure that the dhcp code is working as expected.
+
