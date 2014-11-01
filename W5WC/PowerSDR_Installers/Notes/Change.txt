@@ -1,0 +1,8 @@
+Program: PowerSDR_mRX_PS
+
+
+Version: 3.2.19.0
+Date: November 1, 2014
+
+
+
