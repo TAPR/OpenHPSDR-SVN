@@ -17,6 +17,8 @@ WriteBoard::~WriteBoard()
 
 }
 
+
+
 void WriteBoard::discovery()
 {
     // send the discovery packet
@@ -40,7 +42,8 @@ void WriteBoard::discovery()
     //timer->setSingleShot(true);
     //connect(timer, SIGNAL(timeout()), this, SLOT(update_discovery()));
     //timer->start(BOARD_DISCOVERY_TIMEOUT);
-    QTimer::singleShot(BOARD_DISCOVERY_TIMEOUT, this, SLOT(update_discovery()));
+
+    QTimer::singleShot( BOARD_DISCOVERY_TIMEOUT , this, SLOT(update_discovery()));
 
 
     qDebug()<< "discovery packet sent";

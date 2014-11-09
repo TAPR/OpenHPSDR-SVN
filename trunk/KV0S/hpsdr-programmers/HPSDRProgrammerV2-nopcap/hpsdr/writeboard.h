@@ -56,6 +56,7 @@ public:
     StatusDialog *stat;
     int state;
 
+
 signals:
     void discover();
     void discoveryBoxUpdate();
@@ -92,6 +93,7 @@ private:
     int blocks;
     char* data;
     int percent;
+
 
 
 };

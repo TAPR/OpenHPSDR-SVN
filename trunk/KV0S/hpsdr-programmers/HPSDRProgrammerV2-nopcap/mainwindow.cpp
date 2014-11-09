@@ -86,6 +86,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionStatus,SIGNAL(triggered()),stat,SLOT(show()));
     connect(ui->actionAddress,SIGNAL(triggered()),add,SLOT(show()));
 
+
     connect(stat,SIGNAL(stbar(QString)),this,SLOT(stbar(QString)));
 
 
@@ -193,6 +194,7 @@ void MainWindow::discover()
 {
     qDebug() << "in MainWindow::discover";
     status(tr("Attempting to discover HPSDR boards. (May take upto %0 seconds)").arg(BOARD_DISCOVERY_TIMEOUT/1000));
+
     ui->discoverComboBox->clear();
     ui->fileLineEdit->clear();
     wb->boards.clear();
