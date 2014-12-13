@@ -46,9 +46,17 @@ typedef struct _iqc
 	int count;
 	int ntup;
 	int state;
+	struct
+	{
+		int spi;
+		int* cpi;
+		int full_ints;
+		int count;
+		CRITICAL_SECTION cs;
+	} dog;
 } iqc, *IQC;
 
-extern IQC create_iqc (int run, int size, double* in, double* out, double rate, int ints, double tup);
+extern IQC create_iqc (int run, int size, double* in, double* out, double rate, int ints, double tup, int spi);
 
 extern void destroy_iqc (IQC a);
 
@@ -67,5 +75,9 @@ extern __declspec (dllexport)  void SetTXAiqcSwap (int channel, double* cm, doub
 extern __declspec (dllexport)  void SetTXAiqcStart (int channel, double* cm, double* cc, double* cs);
 
 extern __declspec (dllexport)  void SetTXAiqcEnd (int channel);
+
+void GetTXAiqcDogCount (int channel, int* count);
+
+void SetTXAiqcDogCount (int channel, int  count);
 
 #endif

@@ -713,7 +713,10 @@ void pscc (int channel, int size, double* tx, double* rx, int mox, int solidmox)
 			else if (a->ctrl.turnon)
 				a->ctrl.state = LTURNON;
 			else if (mox && solidmox)
+			{
 				a->ctrl.state = LCOLLECT;
+				SetTXAiqcDogCount (channel, a->info[13] = 0);
+			}
 			else
 				a->ctrl.state = LWAIT;
 			break;
@@ -740,6 +743,7 @@ void pscc (int channel, int size, double* tx, double* rx, int mox, int solidmox)
 					++a->ctrl.count;
 				}
 			}
+			GetTXAiqcDogCount (channel, &a->info[13]);
 			if (a->ctrl.reset)
 				a->ctrl.state = LRESET;
 			else if (a->ctrl.turnon)
@@ -748,6 +752,8 @@ void pscc (int channel, int size, double* tx, double* rx, int mox, int solidmox)
 				a->ctrl.state = LWAIT;
 			else if (a->ctrl.full_ints == a->ints)
 				a->ctrl.state = MOXCHECK;
+			else if (a->info[13] >= 6)
+				a->ctrl.state = LRESET;
 			else if (a->ctrl.count >= (int)a->rate)
 				a->ctrl.state = LSETUP;
 			break;

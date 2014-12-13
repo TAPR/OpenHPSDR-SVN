@@ -1312,7 +1312,9 @@ namespace PowerSDR
 		private int length_counter;
 		private RingBufferFloat rb_l;
 		private RingBufferFloat rb_r;
-		private float[] in_buf_l;
+        private RingBufferFloat rb_rl;
+        private RingBufferFloat rb_rr;
+        private float[] in_buf_l;
 		private float[] in_buf_r;
 		private float[] out_buf_l;
 		private float[] out_buf_r;
@@ -1448,7 +1450,16 @@ namespace PowerSDR
 			//Debug.WriteLine("ReadSpace: "+rb.ReadSpace());
 		}
 
-		public string Stop()
+        unsafe public void AddWriteBuffer(float* left, float* right, float* r_left, float* r_right)
+        {
+            rb_l.WritePtr(left, frames_per_buffer);
+            rb_r.WritePtr(right, frames_per_buffer);
+            rb_rl.WritePtr(r_left, frames_per_buffer);
+            rb_rr.WritePtr(r_right, frames_per_buffer);
+            //Debug.WriteLine("ReadSpace: "+rb.ReadSpace());
+        }
+        
+        public string Stop()
 		{
 			record = false;
 			return filename;
@@ -1621,7 +1632,8 @@ namespace PowerSDR
 
             for (int i = 0; i < length; i++)
             {
-                byte_buf[i] = (byte)(dither8(out_buf[i] * 0x80) + 128); //128.0f) + 128);
+               // byte_buf[i] = (byte)(dither8(out_buf[i] * 0x80) + 128); //128.0f) + 128);
+                byte_buf[i] = (byte)(128 + ((byte)(out_buf[i] * (127.0f))));
 
               /*  Convert(out_buf[i], out result);
                 temp = BitConverter.GetBytes(result);

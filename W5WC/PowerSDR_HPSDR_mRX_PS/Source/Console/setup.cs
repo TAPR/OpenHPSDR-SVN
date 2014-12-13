@@ -2781,9 +2781,6 @@ namespace PowerSDR
             chkDSPEERamIQ_CheckedChanged(this, e);
             udDSPEERpwmMax_ValueChanged(this, e);
             udDSPEERpwmMin_ValueChanged(this, e);
-            // StaticPD Tab
-            chkDSPStaticPDEnable_CheckedChanged(this, e);
-            SetStaticPDGainEquation();
             // Transmit Tab
             udTXFilterHigh_ValueChanged(this, e);
             udTXFilterLow_ValueChanged(this, e);
@@ -4534,6 +4531,10 @@ namespace PowerSDR
                     case Model.ANAN10:
                         force_model = true;
                         radGenModelANAN10.Checked = true;
+                        break;
+                    case Model.ANAN10E:
+                        force_model = true;
+                        radGenModelANAN10E.Checked = true;
                         break;
                     case Model.ANAN100B:
                         force_model = true;
@@ -6460,6 +6461,7 @@ namespace PowerSDR
                 udATTOnTX.Visible = true;
                 // console.RX2PreampPresent = false;
                 groupBoxHPSDRHW.Visible = false;
+                console.RX2PreampPresent = false;
             }
 
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -6476,6 +6478,111 @@ namespace PowerSDR
                 if (chkLimitRX.Checked)
                     console.StitchedReceivers = 1;
                 else console.StitchedReceivers = 3;
+                if (!chkDisablePureSignal.Checked)
+                    nr = console.psform.NRX(nr, console.CurrentHPSDRModel);
+
+                int old_rate = console.NReceivers;
+                int new_rate = nr;
+                bool power = console.PowerOn;
+                if (power && new_rate != old_rate)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(100);
+                }
+                console.psform.SetPSReceivers(console.CurrentHPSDRModel);
+                console.NReceivers = nr;
+
+                if (power && new_rate != old_rate)
+                {
+                    pwr_cycled = true;
+                    console.PowerOn = true;
+                }
+
+                if (power && !pwr_cycled)
+                {
+                    if (old_model != console.CurrentHPSDRModel)
+                    {
+                        console.PowerOn = false;
+                        Thread.Sleep(100);
+                        console.PowerOn = true;
+                    }
+                }
+            }
+        }
+
+
+        private void radGenModelANAN10E_CheckedChanged(object sender, System.EventArgs e)
+        {
+            HPSDRModel old_model = console.CurrentHPSDRModel;
+            console.ANAN10EPresent = radGenModelANAN10E.Checked;
+
+            if (radGenModelANAN10E.Checked)
+            {
+                JanusAudio.fwVersionsChecked = false;
+                console.CurrentModel = Model.HERMES;
+                console.CurrentHPSDRModel = HPSDRModel.ANAN10E;
+                chkPennyPresent.Checked = false;
+                chkPennyPresent.Enabled = false;
+                chkMercuryPresent.Checked = true;
+                chkMercuryPresent.Enabled = false;
+                chkJanusPresent.Checked = false;
+                chkJanusPresent.Enabled = false;
+                chkExcaliburPresent.Checked = false;
+                chkExcaliburPresent.Enabled = false;
+                chkPennyLane.Checked = true;
+                chkPennyLane.Enabled = false;
+                radPenny10MHz.Checked = true;
+                rad12288MHzPenny.Checked = true;
+                chkAlexPresent.Checked = true;
+                chkAlexPresent.Enabled = false;
+                chkApolloPresent.Checked = false;
+                chkApolloPresent.Enabled = false;
+                groupBox10MhzClock.Visible = false;
+                groupBox122MHz.Visible = false;
+                groupBoxMicSource.Visible = false;
+                chkGeneralRXOnly.Visible = true;
+                // chkGeneralRXOnly.Checked = false;
+                chkHermesStepAttenuator.Enabled = true;
+                groupBoxRXOptions.Text = "ANAN Options";
+                radMetis.Text = "ANAN";
+                grpMetisAddr.Text = "ANAN Address";
+                grpHermesStepAttenuator.Text = "ANAN Step Attenuator";
+                tpAlexControl.Text = "Ant/Filters";
+                //string key = comboKeyerConnPrimary.Text;
+                //if (comboKeyerConnPrimary.Items.Contains("5000"))
+                //    comboKeyerConnPrimary.Items.Remove("5000");
+                //if (comboKeyerConnPrimary.Items.Contains("SDR"))
+                //    comboKeyerConnPrimary.Items.Remove("SDR");
+                //if (!comboKeyerConnPrimary.Items.Contains("Ozy/Hermes"))
+                //    comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
+                //comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
+                //comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+                chkAutoPACalibrate.Checked = false;
+                chkAutoPACalibrate.Visible = false;
+                grpANAN10PAGainByBand.BringToFront();
+                labelRXAntControl.Text = "  RX1   RX2    XVTR";
+                labelATTOnTX.Visible = true;
+                udATTOnTX.Visible = true;
+                // console.RX2PreampPresent = false;
+                groupBoxHPSDRHW.Visible = false;
+                console.RX2PreampPresent = false;
+            }
+
+            radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
+            chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
+            chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+
+            if (radGenModelANAN10E.Checked)
+            {
+                int nr;
+                bool pwr_cycled = false;
+                //if (chkLimitRX.Checked) 
+                    nr = 2;
+                //else nr = 4;
+                    chkLimitRX.Checked = true;
+                //if (chkLimitRX.Checked)
+                    console.StitchedReceivers = 1;
+                //else console.StitchedReceivers = 3;
                 if (!chkDisablePureSignal.Checked)
                     nr = console.psform.NRX(nr, console.CurrentHPSDRModel);
 
@@ -7394,7 +7501,7 @@ namespace PowerSDR
                 //comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
                 //comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
 
-                if (radGenModelANAN10.Checked || radGenModelANAN100B.Checked)
+                if (radGenModelANAN10.Checked || radGenModelANAN10E.Checked || radGenModelANAN100B.Checked)
                 {
                     chkRxOutOnTx.Checked = false;
                     chkRxOutOnTx.Enabled = false;
@@ -7431,6 +7538,11 @@ namespace PowerSDR
                     chkHFTRRelay.Visible = true;
                     chkHFTRRelay.Enabled = true;
                 }
+
+                if (radGenModelANAN10E.Checked)
+                    chkLimitRX.Enabled = false;
+                else
+                    chkLimitRX.Enabled = true;
 
                 /*  if (console.RX2PreampPresent)
                   {
@@ -7545,12 +7657,6 @@ namespace PowerSDR
                   tcDSP.TabPages.Remove(tpDSPEER);
                   tcDSP.SelectedIndex = 0;
               } */
-
-            if (tcDSP.TabPages.Contains(tpDSPStaticPD))
-            {
-                tcDSP.TabPages.Remove(tpDSPStaticPD);
-                tcDSP.SelectedIndex = 0;
-            }
 
             if (tcGeneral.TabPages.Contains(tpInfo)) // Info page
             {
@@ -11653,7 +11759,7 @@ namespace PowerSDR
 
         private void btnPAGainReset_Click(object sender, System.EventArgs e)
         {
-            if (radGenModelANAN10.Checked)
+            if (radGenModelANAN10.Checked || radGenModelANAN10E.Checked)
             {
                 ANAN10PAGain160 = 41.0f;
                 ANAN10PAGain80 = 41.2f;
@@ -14622,6 +14728,11 @@ namespace PowerSDR
             console.MuteRX1OnVFOBTX = chkRX2AutoMuteRX1OnVFOBTX.Checked;
         }
 
+        private void chkRX1BlankDisplayOnVFOBTX_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.BlankRX1OnVFOBTX = chkRX1BlankDisplayOnVFOBTX.Checked;
+        }
+        
         private void chkRX2BlankDisplayOnVFOATX_CheckedChanged(object sender, System.EventArgs e)
         {
             console.BlankRX2OnVFOATX = chkRX2BlankDisplayOnVFOATX.Checked;
@@ -15022,7 +15133,7 @@ namespace PowerSDR
                 console.chkSR.Enabled = true;
                 // if (console.RX2PreampPresent && !radGenModelANAN100D.Checked) console.comboRX2Preamp.Visible = false;
                 if (chkApolloPresent.Checked) chkApolloPresent.Checked = false;
-                if (radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN100.Checked ||
+                if (radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN10E.Checked || radGenModelANAN100.Checked ||
                      radGenModelANAN100D.Checked || radGenModelOrion.Checked) JanusAudio.SetHermesFilter(0);
             }
             else
@@ -15976,7 +16087,7 @@ namespace PowerSDR
                 lblPenelopeFWVer.Text = "";
             }
 
-            if (console.PowerOn && (radGenModelANAN10.Checked || radGenModelANAN100.Checked || radGenModelANAN100D.Checked))
+            if (console.PowerOn && (radGenModelANAN10.Checked || radGenModelANAN10E.Checked || radGenModelANAN100.Checked || radGenModelANAN100D.Checked))
             {
                 byte[] ver_bytes = new byte[1];
                 JanusAudio.GetMetisCodeVersion(ver_bytes);
@@ -17263,7 +17374,7 @@ namespace PowerSDR
         {
             console.RX1AttenuatorData = (int)udHermesStepAttenuatorData.Value;
 
-            if (AlexPresent && !console.ANAN10Present && !console.ANAN100BPresent)
+            if (AlexPresent && !console.ANAN10Present && !console.ANAN10EPresent && !console.ANAN100BPresent)
                 udHermesStepAttenuatorData.Maximum = (decimal)61;
             else udHermesStepAttenuatorData.Maximum = (decimal)31;
         }
@@ -17722,8 +17833,14 @@ namespace PowerSDR
                 case HPSDRModel.ANAN10:
                     radGenModelANAN10_CheckedChanged(this, EventArgs.Empty);
                     break;
+                case HPSDRModel.ANAN10E:
+                    radGenModelANAN10E_CheckedChanged(this, EventArgs.Empty);
+                    break;
                 case HPSDRModel.ANAN100:
                     radGenModelANAN100_CheckedChanged(this, EventArgs.Empty);
+                    break;
+                case HPSDRModel.ANAN100B:
+                    radGenModelANAN100B_CheckedChanged(this, EventArgs.Empty);
                     break;
                 case HPSDRModel.ANAN100D:
                     radGenModelANAN100D_CheckedChanged(this, EventArgs.Empty);
@@ -18619,59 +18736,6 @@ namespace PowerSDR
         private void chkDSPEERRunDelays_CheckedChanged(object sender, EventArgs e)
         {
             console.radio.GetDSPTX(0).TXEERModeRunDelays = chkDSPEERRunDelays.Checked;
-        }
-
-        private void SetStaticPDGainEquation()
-        {
-            double[] temp = new double[12];
-            temp[0] = (double)udDSPStaticPDa0.Value;
-            temp[1] = (double)udDSPStaticPDb0.Value;
-            temp[2] = (double)udDSPStaticPDb1.Value;
-            temp[3] = (double)udDSPStaticPDb2.Value;
-            temp[4] = (double)udDSPStaticPDb3.Value;
-            temp[5] = (double)udDSPStaticPDb4.Value;
-            temp[6] = (double)udDSPStaticPDb5.Value;
-            console.radio.GetDSPTX(0).TXStaticPD = temp;
-        }
-
-        private void udDSPStaticPDa0_ValueChanged(object sender, EventArgs e)
-        {
-            SetStaticPDGainEquation();
-        }
-
-        private void udDSPStaticPDb5_ValueChanged(object sender, EventArgs e)
-        {
-            SetStaticPDGainEquation();
-        }
-
-        private void udDSPStaticPDb4_ValueChanged(object sender, EventArgs e)
-        {
-            SetStaticPDGainEquation();
-        }
-
-        private void udDSPStaticPDb3_ValueChanged(object sender, EventArgs e)
-        {
-            SetStaticPDGainEquation();
-        }
-
-        private void udDSPStaticPDb2_ValueChanged(object sender, EventArgs e)
-        {
-            SetStaticPDGainEquation();
-        }
-
-        private void udDSPStaticPDb1_ValueChanged(object sender, EventArgs e)
-        {
-            SetStaticPDGainEquation();
-        }
-
-        private void udDSPStaticPDb0_ValueChanged(object sender, EventArgs e)
-        {
-            SetStaticPDGainEquation();
-        }
-
-        private void chkDSPStaticPDEnable_CheckedChanged(object sender, EventArgs e)
-        {
-            console.radio.GetDSPTX(0).TXStaticPDRun = chkDSPStaticPDEnable.Checked;
         }
 
         private void udDSPEERpwmMax_ValueChanged(object sender, EventArgs e)

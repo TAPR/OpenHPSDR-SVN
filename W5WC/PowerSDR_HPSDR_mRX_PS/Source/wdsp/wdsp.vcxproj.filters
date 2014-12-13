@@ -144,9 +144,6 @@
     <ClInclude Include="nobII.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="staticpd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="channel.c">
@@ -273,9 +270,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="nobII.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="staticpd.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

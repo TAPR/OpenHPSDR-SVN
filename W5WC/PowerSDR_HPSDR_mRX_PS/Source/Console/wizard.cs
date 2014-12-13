@@ -132,6 +132,7 @@ namespace PowerSDR
         private RadioButtonTS radGenModelANAN10;
         private RadioButtonTS radGenModelOrion;
         private RadioButtonTS radGenModelANAN100B;
+        private RadioButtonTS radGenModelANAN10E;
         private System.ComponentModel.Container components = null;
 
 		#endregion
@@ -192,6 +193,9 @@ namespace PowerSDR
                 case Model.ANAN10:
                     radGenModelANAN10.Checked = true;
                     break;
+                case Model.ANAN10E:
+                    radGenModelANAN10E.Checked = true;
+                    break;
                 case Model.ANAN100B:
                     radGenModelANAN100B.Checked = true;
                     break;
@@ -240,6 +244,7 @@ namespace PowerSDR
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.grpModel = new System.Windows.Forms.GroupBoxTS();
+            this.radGenModelANAN10E = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelANAN100B = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelOrion = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelANAN100D = new System.Windows.Forms.RadioButtonTS();
@@ -324,6 +329,7 @@ namespace PowerSDR
             // 
             // grpModel
             // 
+            this.grpModel.Controls.Add(this.radGenModelANAN10E);
             this.grpModel.Controls.Add(this.radGenModelANAN100B);
             this.grpModel.Controls.Add(this.radGenModelOrion);
             this.grpModel.Controls.Add(this.radGenModelANAN100D);
@@ -343,6 +349,18 @@ namespace PowerSDR
             this.grpModel.Text = "Model";
             this.grpModel.Visible = false;
             // 
+            // radGenModelANAN10B
+            // 
+            this.radGenModelANAN10E.AutoSize = true;
+            this.radGenModelANAN10E.Image = null;
+            this.radGenModelANAN10E.Location = new System.Drawing.Point(19, 71);
+            this.radGenModelANAN10E.Name = "radGenModelANAN10B";
+            this.radGenModelANAN10E.Size = new System.Drawing.Size(77, 17);
+            this.radGenModelANAN10E.TabIndex = 14;
+            this.radGenModelANAN10E.Text = "ANAN-10E";
+            this.radGenModelANAN10E.UseVisualStyleBackColor = true;
+            this.radGenModelANAN10E.CheckedChanged += new System.EventHandler(this.radGenModelANAN10E_CheckedChanged);
+            // 
             // radGenModelANAN100B
             // 
             this.radGenModelANAN100B.AutoSize = true;
@@ -359,7 +377,7 @@ namespace PowerSDR
             // 
             this.radGenModelOrion.AutoSize = true;
             this.radGenModelOrion.Image = null;
-            this.radGenModelOrion.Location = new System.Drawing.Point(19, 104);
+            this.radGenModelOrion.Location = new System.Drawing.Point(19, 121);
             this.radGenModelOrion.Name = "radGenModelOrion";
             this.radGenModelOrion.Size = new System.Drawing.Size(84, 17);
             this.radGenModelOrion.TabIndex = 12;
@@ -371,7 +389,7 @@ namespace PowerSDR
             // 
             this.radGenModelANAN100D.AutoSize = true;
             this.radGenModelANAN100D.Image = null;
-            this.radGenModelANAN100D.Location = new System.Drawing.Point(19, 87);
+            this.radGenModelANAN100D.Location = new System.Drawing.Point(19, 104);
             this.radGenModelANAN100D.Name = "radGenModelANAN100D";
             this.radGenModelANAN100D.Size = new System.Drawing.Size(84, 17);
             this.radGenModelANAN100D.TabIndex = 11;
@@ -383,7 +401,7 @@ namespace PowerSDR
             // 
             this.radGenModelANAN100.AutoSize = true;
             this.radGenModelANAN100.Image = null;
-            this.radGenModelANAN100.Location = new System.Drawing.Point(19, 71);
+            this.radGenModelANAN100.Location = new System.Drawing.Point(19, 88);
             this.radGenModelANAN100.Name = "radGenModelANAN100";
             this.radGenModelANAN100.Size = new System.Drawing.Size(76, 17);
             this.radGenModelANAN100.TabIndex = 10;
@@ -1529,6 +1547,7 @@ namespace PowerSDR
                         case Model.HPSDR:
                         case Model.HERMES:
                         case Model.ANAN10:
+                        case Model.ANAN10E:
                         case Model.ANAN100B:
                         case Model.ANAN100:
                         case Model.ANAN100D:
@@ -1768,6 +1787,7 @@ namespace PowerSDR
                     console.SetupForm.forceAudioSampleRate1("192000");
   					break;
                 case Model.ANAN10:
+                case Model.ANAN10E:
                     console.SetupForm.PennyLanePresent = pennylane_present;
                     console.SetupForm.MercuryPresent = mercury_present;
                     console.SetupForm.AlexPresent = alex_present;
@@ -2164,6 +2184,32 @@ namespace PowerSDR
                 chkPenny.Checked = false;
                 chkExcalibur.Enabled = false;
                 chkExcalibur.Checked = false;              
+                chkAlex.Checked = true;
+                chkAlex.Enabled = false;
+                radMetis.Checked = true;
+                radMetis.Enabled = false;
+                radMetis.Text = "ANAN";
+                radOzy.Enabled = false;
+            }
+        }
+
+        private void radGenModelANAN10E_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelANAN10E.Checked)
+            {
+                model = Model.ANAN10E;
+                //if (grpModel.Visible)
+                pictureBox1.Image = null;
+                pictureBox1.Visible = false;
+                //pictureBox1.Image = new Bitmap(GetResource("PowerSDR.images.hpsdr.jpg"));
+                chkMercury.Checked = radGenModelANAN10E.Checked;
+                chkPennyLane.Checked = radGenModelANAN10E.Checked;
+                chkMercury.Enabled = false;
+                chkPennyLane.Enabled = false;
+                chkPenny.Enabled = false;
+                chkPenny.Checked = false;
+                chkExcalibur.Enabled = false;
+                chkExcalibur.Checked = false;
                 chkAlex.Checked = true;
                 chkAlex.Enabled = false;
                 radMetis.Checked = true;

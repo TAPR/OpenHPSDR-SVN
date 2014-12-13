@@ -334,13 +334,8 @@ void create_txa (int channel)
 		txa[channel].midbuff,						// output buffer
 		(double)ch[channel].dsp_rate,				// sample rate
 		16,											// ints
-		0.005);										// changeover time
-
-	txa[channel].staticpd.p = create_staticpd (				// experimental, for Hans
-		0,											// run
-		ch[channel].dsp_size,						// size
-		txa[channel].midbuff,						// input buffer
-		txa[channel].midbuff);						// output buffer
+		0.005,										// changeover time
+		256);										// spi
 
 	txa[channel].rsmpout.p = create_resample (
 		0,											// run - will be turned ON below if needed
@@ -375,7 +370,6 @@ void destroy_txa (int channel)
 	// in reverse order, free each item we created
 	destroy_meter (txa[channel].outmeter.p);
 	destroy_resample (txa[channel].rsmpout.p);
-	destroy_staticpd (txa[channel].staticpd.p);	// experimental, for Hans
 	destroy_iqc (txa[channel].iqc.p0);
 	destroy_calcc (txa[channel].calcc.p);
 	destroy_siphon (txa[channel].sip1.p);
@@ -433,7 +427,6 @@ void flush_txa (int channel)
 	flush_meter (txa[channel].alcmeter.p);
 	flush_siphon (txa[channel].sip1.p);
 	flush_iqc (txa[channel].iqc.p0);
-	flush_staticpd (txa[channel].staticpd.p);	// experimental, for Hans
 	flush_resample (txa[channel].rsmpout.p);
 	flush_meter (txa[channel].outmeter.p);
 }
@@ -465,7 +458,6 @@ void xtxa (int channel)
 	xmeter (txa[channel].alcmeter.p);
 	xsiphon (txa[channel].sip1.p);
 	xiqc (txa[channel].iqc.p0);
-	xstaticpd (txa[channel].staticpd.p);	// experimantal, for Hans
 	xresample (txa[channel].rsmpout.p);
 	xmeter (txa[channel].outmeter.p);
 	// print_peak_env ("env_exception.txt", ch[channel].dsp_outsize, txa[channel].outbuff, 0.990);

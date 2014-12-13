@@ -26,7 +26,7 @@ warren@wpratt.com
 
 #include "comm.h"
 
-IQC create_iqc (int run, int size, double* in, double* out, double rate, int ints, double tup)
+IQC create_iqc (int run, int size, double* in, double* out, double rate, int ints, double tup, int spi)
 {
 	int i;
 	double delta, theta;
@@ -60,12 +60,19 @@ IQC create_iqc (int run, int size, double* in, double* out, double rate, int int
 		a->cup[i] = 0.5 * (1.0 - cos (theta));
 		theta += delta;
 	}
+	a->dog.cpi = (int *) malloc0 (a->ints * sizeof (int));
+	InitializeCriticalSectionAndSpinCount (&a->dog.cs, 2500);
+	a->dog.spi = spi;
+	a->dog.count = 0;
+	a->dog.full_ints = 0;
 	return a;
 }
 
 void destroy_iqc (IQC a)
 {
 	int i;
+	DeleteCriticalSection (&a->dog.cs);
+	_aligned_free (a->dog.cpi);
 	_aligned_free (a->cup);
 	for (i = 0; i < 2; i++)
 	{
@@ -114,7 +121,17 @@ void xiqc (IQC a)
 			switch (a->state)
 			{
 			case RUN:
-
+				if (a->dog.cpi[k] != a->dog.spi)
+					if (++a->dog.cpi[k] == a->dog.spi)
+						a->dog.full_ints++;
+				if (a->dog.full_ints == a->ints)
+				{
+					EnterCriticalSection (&a->dog.cs);
+					++a->dog.count;
+					LeaveCriticalSection (&a->dog.cs);
+					a->dog.full_ints = 0;
+					memset (a->dog.cpi, 0, a->ints * sizeof (int));
+				}
 				break;
 			case BEGIN:
 				PRE0 = (1.0 - a->cup[a->count]) * I + a->cup[a->count] * PRE0;
@@ -239,4 +256,20 @@ void SetTXAiqcEnd (int channel)
 	LeaveCriticalSection (&ch[channel].csDSP);
 	while (_InterlockedAnd (&a->busy, 1)) Sleep(1);
 	InterlockedBitTestAndReset (&txa[channel].iqc.p1->run, 0);
+}
+
+void GetTXAiqcDogCount (int channel, int* count)
+{
+	IQC a = txa[channel].iqc.p1;
+	EnterCriticalSection (&a->dog.cs);
+	*count = a->dog.count;
+	LeaveCriticalSection (&a->dog.cs);
+}
+
+void SetTXAiqcDogCount (int channel, int count)
+{
+	IQC a = txa[channel].iqc.p1;
+	EnterCriticalSection (&a->dog.cs);
+	a->dog.count = count;
+	LeaveCriticalSection (&a->dog.cs);
 }

@@ -539,6 +539,7 @@ namespace PowerSDR
                     case 25:
                     case 26:
                     case 27:
+                    case 28:
                         if ((c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver != 18)) ||
                            (c != null && c.MercuryPresent && (mercury_ver != 34)))
                         {

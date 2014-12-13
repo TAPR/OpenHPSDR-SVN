@@ -141,10 +141,6 @@ struct _txa
 		IQC p0, p1;
 		// p0 for dsp-synchronized reference, p1 for other
 	} iqc;
-	struct		// experimental, for Hans
-	{
-		STATICPD p;
-	} staticpd;
 } txa[MAX_CHANNELS];
 
 extern void create_txa (int channel);

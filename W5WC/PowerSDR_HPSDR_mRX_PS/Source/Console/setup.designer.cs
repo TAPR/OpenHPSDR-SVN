@@ -227,6 +227,7 @@
             this.comboFRSRegion = new System.Windows.Forms.ComboBoxTS();
             this.chkGeneralUseSi570 = new System.Windows.Forms.CheckBoxTS();
             this.grpGeneralModel = new System.Windows.Forms.GroupBoxTS();
+            this.radGenModelANAN10E = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelANAN100B = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelOrion = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelANAN100D = new System.Windows.Forms.RadioButtonTS();
@@ -1534,17 +1535,6 @@
             this.labelTS318 = new System.Windows.Forms.LabelTS();
             this.udDSPEERmgain = new System.Windows.Forms.NumericUpDownTS();
             this.chkDSPEERon = new System.Windows.Forms.CheckBoxTS();
-            this.tpDSPStaticPD = new System.Windows.Forms.TabPage();
-            this.udDSPStaticPDb0 = new System.Windows.Forms.NumericUpDownTS();
-            this.udDSPStaticPDb1 = new System.Windows.Forms.NumericUpDownTS();
-            this.udDSPStaticPDb2 = new System.Windows.Forms.NumericUpDownTS();
-            this.udDSPStaticPDb3 = new System.Windows.Forms.NumericUpDownTS();
-            this.udDSPStaticPDb4 = new System.Windows.Forms.NumericUpDownTS();
-            this.lblDSPStaticPDden = new System.Windows.Forms.LabelTS();
-            this.udDSPStaticPDb5 = new System.Windows.Forms.NumericUpDownTS();
-            this.lblDSPStaticPDNum = new System.Windows.Forms.LabelTS();
-            this.udDSPStaticPDa0 = new System.Windows.Forms.NumericUpDownTS();
-            this.chkDSPStaticPDEnable = new System.Windows.Forms.CheckBoxTS();
             this.tpTransmit = new System.Windows.Forms.TabPage();
             this.grpExtTXInhibit = new System.Windows.Forms.GroupBoxTS();
             this.chkTXInhibit = new System.Windows.Forms.CheckBoxTS();
@@ -2452,6 +2442,7 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
+            this.chkRX1BlankDisplayOnVFOBTX = new System.Windows.Forms.CheckBoxTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -2862,14 +2853,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPEERmdelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPEERpgain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPEERmgain)).BeginInit();
-            this.tpDSPStaticPD.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb0)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDa0)).BeginInit();
             this.tpTransmit.SuspendLayout();
             this.grpExtTXInhibit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).BeginInit();
@@ -6203,6 +6186,7 @@
             // 
             // grpGeneralModel
             // 
+            this.grpGeneralModel.Controls.Add(this.radGenModelANAN10E);
             this.grpGeneralModel.Controls.Add(this.radGenModelANAN100B);
             this.grpGeneralModel.Controls.Add(this.radGenModelOrion);
             this.grpGeneralModel.Controls.Add(this.radGenModelANAN100D);
@@ -6221,14 +6205,25 @@
             this.grpGeneralModel.TabStop = false;
             this.grpGeneralModel.Text = "Radio Model";
             // 
+            // radGenModelANAN10E
+            // 
+            this.radGenModelANAN10E.Image = null;
+            this.radGenModelANAN10E.Location = new System.Drawing.Point(90, 68);
+            this.radGenModelANAN10E.Name = "radGenModelANAN10E";
+            this.radGenModelANAN10E.Size = new System.Drawing.Size(44, 24);
+            this.radGenModelANAN10E.TabIndex = 11;
+            this.radGenModelANAN10E.Text = "10E";
+            this.radGenModelANAN10E.UseVisualStyleBackColor = true;
+            this.radGenModelANAN10E.CheckedChanged += new System.EventHandler(this.radGenModelANAN10E_CheckedChanged);
+            // 
             // radGenModelANAN100B
             // 
             this.radGenModelANAN100B.Image = null;
-            this.radGenModelANAN100B.Location = new System.Drawing.Point(16, 164);
+            this.radGenModelANAN100B.Location = new System.Drawing.Point(90, 92);
             this.radGenModelANAN100B.Name = "radGenModelANAN100B";
-            this.radGenModelANAN100B.Size = new System.Drawing.Size(88, 24);
+            this.radGenModelANAN100B.Size = new System.Drawing.Size(50, 24);
             this.radGenModelANAN100B.TabIndex = 10;
-            this.radGenModelANAN100B.Text = "ANAN-100B";
+            this.radGenModelANAN100B.Text = "100B";
             this.radGenModelANAN100B.UseVisualStyleBackColor = true;
             this.radGenModelANAN100B.Visible = false;
             this.radGenModelANAN100B.CheckedChanged += new System.EventHandler(this.radGenModelANAN100B_CheckedChanged);
@@ -6236,7 +6231,7 @@
             // radGenModelOrion
             // 
             this.radGenModelOrion.Image = null;
-            this.radGenModelOrion.Location = new System.Drawing.Point(16, 140);
+            this.radGenModelOrion.Location = new System.Drawing.Point(10, 140);
             this.radGenModelOrion.Name = "radGenModelOrion";
             this.radGenModelOrion.Size = new System.Drawing.Size(88, 24);
             this.radGenModelOrion.TabIndex = 9;
@@ -6247,7 +6242,7 @@
             // radGenModelANAN100D
             // 
             this.radGenModelANAN100D.Image = null;
-            this.radGenModelANAN100D.Location = new System.Drawing.Point(16, 116);
+            this.radGenModelANAN100D.Location = new System.Drawing.Point(10, 116);
             this.radGenModelANAN100D.Name = "radGenModelANAN100D";
             this.radGenModelANAN100D.Size = new System.Drawing.Size(88, 24);
             this.radGenModelANAN100D.TabIndex = 8;
@@ -6258,7 +6253,7 @@
             // radGenModelANAN100
             // 
             this.radGenModelANAN100.Image = null;
-            this.radGenModelANAN100.Location = new System.Drawing.Point(16, 92);
+            this.radGenModelANAN100.Location = new System.Drawing.Point(10, 92);
             this.radGenModelANAN100.Name = "radGenModelANAN100";
             this.radGenModelANAN100.Size = new System.Drawing.Size(88, 24);
             this.radGenModelANAN100.TabIndex = 7;
@@ -6269,9 +6264,9 @@
             // radGenModelANAN10
             // 
             this.radGenModelANAN10.Image = null;
-            this.radGenModelANAN10.Location = new System.Drawing.Point(16, 68);
+            this.radGenModelANAN10.Location = new System.Drawing.Point(10, 68);
             this.radGenModelANAN10.Name = "radGenModelANAN10";
-            this.radGenModelANAN10.Size = new System.Drawing.Size(88, 24);
+            this.radGenModelANAN10.Size = new System.Drawing.Size(70, 24);
             this.radGenModelANAN10.TabIndex = 6;
             this.radGenModelANAN10.Text = "ANAN-10";
             this.radGenModelANAN10.UseVisualStyleBackColor = true;
@@ -6280,7 +6275,7 @@
             // radGenModelHermes
             // 
             this.radGenModelHermes.Image = null;
-            this.radGenModelHermes.Location = new System.Drawing.Point(16, 44);
+            this.radGenModelHermes.Location = new System.Drawing.Point(10, 44);
             this.radGenModelHermes.Name = "radGenModelHermes";
             this.radGenModelHermes.Size = new System.Drawing.Size(88, 24);
             this.radGenModelHermes.TabIndex = 5;
@@ -6291,7 +6286,7 @@
             // radGenModelHPSDR
             // 
             this.radGenModelHPSDR.Image = null;
-            this.radGenModelHPSDR.Location = new System.Drawing.Point(16, 20);
+            this.radGenModelHPSDR.Location = new System.Drawing.Point(10, 20);
             this.radGenModelHPSDR.Name = "radGenModelHPSDR";
             this.radGenModelHPSDR.Size = new System.Drawing.Size(88, 24);
             this.radGenModelHPSDR.TabIndex = 4;
@@ -8314,6 +8309,7 @@
             // tpRX2
             // 
             this.tpRX2.BackColor = System.Drawing.SystemColors.Control;
+            this.tpRX2.Controls.Add(this.chkRX1BlankDisplayOnVFOBTX);
             this.tpRX2.Controls.Add(this.chkRX2BlankDisplayOnVFOATX);
             this.tpRX2.Controls.Add(this.chkRX2AutoMuteRX1OnVFOBTX);
             this.tpRX2.Controls.Add(this.chkRX2AutoMuteTX);
@@ -8331,7 +8327,7 @@
             this.chkRX2BlankDisplayOnVFOATX.Size = new System.Drawing.Size(196, 24);
             this.chkRX2BlankDisplayOnVFOATX.TabIndex = 3;
             this.chkRX2BlankDisplayOnVFOATX.Text = "Blank RX2 Display on VFO A TX";
-            this.toolTip1.SetToolTip(this.chkRX2BlankDisplayOnVFOATX, "Blanks RX2 Display when transmitting on VFO B when checked. ");
+            this.toolTip1.SetToolTip(this.chkRX2BlankDisplayOnVFOATX, "Blanks RX2 Display when transmitting on VFO A when checked. ");
             this.chkRX2BlankDisplayOnVFOATX.CheckedChanged += new System.EventHandler(this.chkRX2BlankDisplayOnVFOATX_CheckedChanged);
             // 
             // chkRX2AutoMuteRX1OnVFOBTX
@@ -20777,7 +20773,6 @@
             this.tcDSP.Controls.Add(this.tpDSPFM);
             this.tcDSP.Controls.Add(this.tpDSPAudio);
             this.tcDSP.Controls.Add(this.tpDSPEER);
-            this.tcDSP.Controls.Add(this.tpDSPStaticPD);
             this.tcDSP.Location = new System.Drawing.Point(0, 0);
             this.tcDSP.Name = "tcDSP";
             this.tcDSP.SelectedIndex = 0;
@@ -25035,261 +25030,6 @@
             this.toolTip1.SetToolTip(this.chkDSPEERon, "Turns on EER Mode for transmit.");
             this.chkDSPEERon.UseVisualStyleBackColor = true;
             this.chkDSPEERon.CheckedChanged += new System.EventHandler(this.chkDSPEERon_CheckedChanged);
-            // 
-            // tpDSPStaticPD
-            // 
-            this.tpDSPStaticPD.Controls.Add(this.udDSPStaticPDb0);
-            this.tpDSPStaticPD.Controls.Add(this.udDSPStaticPDb1);
-            this.tpDSPStaticPD.Controls.Add(this.udDSPStaticPDb2);
-            this.tpDSPStaticPD.Controls.Add(this.udDSPStaticPDb3);
-            this.tpDSPStaticPD.Controls.Add(this.udDSPStaticPDb4);
-            this.tpDSPStaticPD.Controls.Add(this.lblDSPStaticPDden);
-            this.tpDSPStaticPD.Controls.Add(this.udDSPStaticPDb5);
-            this.tpDSPStaticPD.Controls.Add(this.lblDSPStaticPDNum);
-            this.tpDSPStaticPD.Controls.Add(this.udDSPStaticPDa0);
-            this.tpDSPStaticPD.Controls.Add(this.chkDSPStaticPDEnable);
-            this.tpDSPStaticPD.Location = new System.Drawing.Point(4, 22);
-            this.tpDSPStaticPD.Name = "tpDSPStaticPD";
-            this.tpDSPStaticPD.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDSPStaticPD.Size = new System.Drawing.Size(592, 318);
-            this.tpDSPStaticPD.TabIndex = 8;
-            this.tpDSPStaticPD.Text = "StaticPD";
-            this.tpDSPStaticPD.UseVisualStyleBackColor = true;
-            // 
-            // udDSPStaticPDb0
-            // 
-            this.udDSPStaticPDb0.DecimalPlaces = 4;
-            this.udDSPStaticPDb0.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.udDSPStaticPDb0.Location = new System.Drawing.Point(463, 127);
-            this.udDSPStaticPDb0.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb0.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.udDSPStaticPDb0.Name = "udDSPStaticPDb0";
-            this.udDSPStaticPDb0.Size = new System.Drawing.Size(82, 20);
-            this.udDSPStaticPDb0.TabIndex = 9;
-            this.udDSPStaticPDb0.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb0.ValueChanged += new System.EventHandler(this.udDSPStaticPDb0_ValueChanged);
-            // 
-            // udDSPStaticPDb1
-            // 
-            this.udDSPStaticPDb1.DecimalPlaces = 4;
-            this.udDSPStaticPDb1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.udDSPStaticPDb1.Location = new System.Drawing.Point(375, 127);
-            this.udDSPStaticPDb1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb1.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.udDSPStaticPDb1.Name = "udDSPStaticPDb1";
-            this.udDSPStaticPDb1.Size = new System.Drawing.Size(82, 20);
-            this.udDSPStaticPDb1.TabIndex = 8;
-            this.udDSPStaticPDb1.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb1.ValueChanged += new System.EventHandler(this.udDSPStaticPDb1_ValueChanged);
-            // 
-            // udDSPStaticPDb2
-            // 
-            this.udDSPStaticPDb2.DecimalPlaces = 4;
-            this.udDSPStaticPDb2.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.udDSPStaticPDb2.Location = new System.Drawing.Point(287, 127);
-            this.udDSPStaticPDb2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb2.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.udDSPStaticPDb2.Name = "udDSPStaticPDb2";
-            this.udDSPStaticPDb2.Size = new System.Drawing.Size(82, 20);
-            this.udDSPStaticPDb2.TabIndex = 7;
-            this.udDSPStaticPDb2.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb2.ValueChanged += new System.EventHandler(this.udDSPStaticPDb2_ValueChanged);
-            // 
-            // udDSPStaticPDb3
-            // 
-            this.udDSPStaticPDb3.DecimalPlaces = 4;
-            this.udDSPStaticPDb3.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.udDSPStaticPDb3.Location = new System.Drawing.Point(199, 127);
-            this.udDSPStaticPDb3.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb3.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.udDSPStaticPDb3.Name = "udDSPStaticPDb3";
-            this.udDSPStaticPDb3.Size = new System.Drawing.Size(82, 20);
-            this.udDSPStaticPDb3.TabIndex = 6;
-            this.udDSPStaticPDb3.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb3.ValueChanged += new System.EventHandler(this.udDSPStaticPDb3_ValueChanged);
-            // 
-            // udDSPStaticPDb4
-            // 
-            this.udDSPStaticPDb4.DecimalPlaces = 4;
-            this.udDSPStaticPDb4.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.udDSPStaticPDb4.Location = new System.Drawing.Point(111, 127);
-            this.udDSPStaticPDb4.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb4.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.udDSPStaticPDb4.Name = "udDSPStaticPDb4";
-            this.udDSPStaticPDb4.Size = new System.Drawing.Size(82, 20);
-            this.udDSPStaticPDb4.TabIndex = 5;
-            this.udDSPStaticPDb4.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb4.ValueChanged += new System.EventHandler(this.udDSPStaticPDb4_ValueChanged);
-            // 
-            // lblDSPStaticPDden
-            // 
-            this.lblDSPStaticPDden.AutoSize = true;
-            this.lblDSPStaticPDden.Image = null;
-            this.lblDSPStaticPDden.Location = new System.Drawing.Point(20, 107);
-            this.lblDSPStaticPDden.Name = "lblDSPStaticPDden";
-            this.lblDSPStaticPDden.Size = new System.Drawing.Size(109, 13);
-            this.lblDSPStaticPDden.TabIndex = 4;
-            this.lblDSPStaticPDden.Text = "Denominator:  b5 - b0";
-            // 
-            // udDSPStaticPDb5
-            // 
-            this.udDSPStaticPDb5.DecimalPlaces = 4;
-            this.udDSPStaticPDb5.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.udDSPStaticPDb5.Location = new System.Drawing.Point(23, 127);
-            this.udDSPStaticPDb5.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb5.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.udDSPStaticPDb5.Name = "udDSPStaticPDb5";
-            this.udDSPStaticPDb5.Size = new System.Drawing.Size(82, 20);
-            this.udDSPStaticPDb5.TabIndex = 3;
-            this.udDSPStaticPDb5.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDb5.ValueChanged += new System.EventHandler(this.udDSPStaticPDb5_ValueChanged);
-            // 
-            // lblDSPStaticPDNum
-            // 
-            this.lblDSPStaticPDNum.AutoSize = true;
-            this.lblDSPStaticPDNum.Image = null;
-            this.lblDSPStaticPDNum.Location = new System.Drawing.Point(20, 54);
-            this.lblDSPStaticPDNum.Name = "lblDSPStaticPDNum";
-            this.lblDSPStaticPDNum.Size = new System.Drawing.Size(56, 13);
-            this.lblDSPStaticPDNum.TabIndex = 2;
-            this.lblDSPStaticPDNum.Text = "Numerator";
-            // 
-            // udDSPStaticPDa0
-            // 
-            this.udDSPStaticPDa0.DecimalPlaces = 4;
-            this.udDSPStaticPDa0.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.udDSPStaticPDa0.Location = new System.Drawing.Point(23, 74);
-            this.udDSPStaticPDa0.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDa0.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.udDSPStaticPDa0.Name = "udDSPStaticPDa0";
-            this.udDSPStaticPDa0.Size = new System.Drawing.Size(82, 20);
-            this.udDSPStaticPDa0.TabIndex = 1;
-            this.udDSPStaticPDa0.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDSPStaticPDa0.ValueChanged += new System.EventHandler(this.udDSPStaticPDa0_ValueChanged);
-            // 
-            // chkDSPStaticPDEnable
-            // 
-            this.chkDSPStaticPDEnable.AutoSize = true;
-            this.chkDSPStaticPDEnable.Image = null;
-            this.chkDSPStaticPDEnable.Location = new System.Drawing.Point(23, 24);
-            this.chkDSPStaticPDEnable.Name = "chkDSPStaticPDEnable";
-            this.chkDSPStaticPDEnable.Size = new System.Drawing.Size(59, 17);
-            this.chkDSPStaticPDEnable.TabIndex = 0;
-            this.chkDSPStaticPDEnable.Text = "Enable";
-            this.chkDSPStaticPDEnable.UseVisualStyleBackColor = true;
-            this.chkDSPStaticPDEnable.CheckedChanged += new System.EventHandler(this.chkDSPStaticPDEnable_CheckedChanged);
             // 
             // tpTransmit
             // 
@@ -40508,6 +40248,17 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
+            // chkRX1BlankDisplayOnVFOBTX
+            // 
+            this.chkRX1BlankDisplayOnVFOBTX.Image = null;
+            this.chkRX1BlankDisplayOnVFOBTX.Location = new System.Drawing.Point(8, 80);
+            this.chkRX1BlankDisplayOnVFOBTX.Name = "chkRX1BlankDisplayOnVFOBTX";
+            this.chkRX1BlankDisplayOnVFOBTX.Size = new System.Drawing.Size(196, 24);
+            this.chkRX1BlankDisplayOnVFOBTX.TabIndex = 4;
+            this.chkRX1BlankDisplayOnVFOBTX.Text = "Blank RX1 Display on VFO B TX";
+            this.toolTip1.SetToolTip(this.chkRX1BlankDisplayOnVFOBTX, "Blanks RX1 Display when transmitting on VFO B when checked. ");
+            this.chkRX1BlankDisplayOnVFOBTX.CheckedChanged += new System.EventHandler(this.chkRX1BlankDisplayOnVFOBTX_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -40991,15 +40742,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPEERmdelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPEERpgain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPEERmgain)).EndInit();
-            this.tpDSPStaticPD.ResumeLayout(false);
-            this.tpDSPStaticPD.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb0)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDb5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPStaticPDa0)).EndInit();
             this.tpTransmit.ResumeLayout(false);
             this.grpExtTXInhibit.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).EndInit();
@@ -42298,17 +42040,6 @@
         private System.Windows.Forms.LabelTS labelTS327;
         private System.Windows.Forms.NumericUpDownTS udDSPEERpdelay;
         private System.Windows.Forms.CheckBoxTS chkDSPEERRunDelays;
-        private System.Windows.Forms.TabPage tpDSPStaticPD;
-        private System.Windows.Forms.NumericUpDownTS udDSPStaticPDb0;
-        private System.Windows.Forms.NumericUpDownTS udDSPStaticPDb1;
-        private System.Windows.Forms.NumericUpDownTS udDSPStaticPDb2;
-        private System.Windows.Forms.NumericUpDownTS udDSPStaticPDb3;
-        private System.Windows.Forms.NumericUpDownTS udDSPStaticPDb4;
-        private System.Windows.Forms.LabelTS lblDSPStaticPDden;
-        private System.Windows.Forms.NumericUpDownTS udDSPStaticPDb5;
-        private System.Windows.Forms.LabelTS lblDSPStaticPDNum;
-        private System.Windows.Forms.NumericUpDownTS udDSPStaticPDa0;
-        private System.Windows.Forms.CheckBoxTS chkDSPStaticPDEnable;
         private System.Windows.Forms.GroupBoxTS grpDSPEERpwm;
         private System.Windows.Forms.NumericUpDownTS udDSPEERpwmMin;
         private System.Windows.Forms.NumericUpDownTS udDSPEERpwmMax;
@@ -42368,5 +42099,7 @@
         private System.Windows.Forms.NumericUpDownTS udANAN100BPAGain80;
         private System.Windows.Forms.LabelTS labelTS354;
         private System.Windows.Forms.NumericUpDownTS udANAN100BPAGain160;
+        private System.Windows.Forms.RadioButtonTS radGenModelANAN10E;
+        private System.Windows.Forms.CheckBoxTS chkRX1BlankDisplayOnVFOBTX;
     }
 }

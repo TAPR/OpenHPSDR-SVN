@@ -108,5 +108,6 @@ extern void flush_calcc (CALCC a);
 //		 4 - feedback level warning
 //		 5 - count of attempted calibrations
 //
+//		13 - dogcount
 //		14 - indicates iqc_Run = 1
 //		15 - control state

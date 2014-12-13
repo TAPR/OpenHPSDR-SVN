@@ -114,6 +114,13 @@ namespace PowerSDR
             set { rx2_auto_mute_tx = value; }
         }
 
+        private static bool rx1_blank_display_tx = false;
+        public static bool RX1BlankDisplayTX
+        {
+            get { return rx1_blank_display_tx; }
+            set { rx1_blank_display_tx = value; }
+        }
+        
         private static bool rx2_blank_display_tx = false;
         public static bool RX2BlankDisplayTX
         {
@@ -1686,6 +1693,12 @@ namespace PowerSDR
                 in_r = tx_in_r;
             }
 
+            if (localmox && rx1_blank_display_tx)
+            {
+                ClearBuffer(rx1_in_l, frameCount);
+                ClearBuffer(rx1_in_r, frameCount);
+            }
+
             if (localmox && rx2_enabled && rx2_blank_display_tx)
             {
                 ClearBuffer(rx2_in_l, frameCount);
@@ -1983,9 +1996,22 @@ namespace PowerSDR
                     vac2_rb_reset = true;
                 }
             }
-            int bottom_pan_idx = 2 * console.psform.DISPrcvr;
-            float* bottom_pan_l = (float*)array_ptr_input[bottom_pan_idx + 0];
-            float* bottom_pan_r = (float*)array_ptr_input[bottom_pan_idx + 1];
+           // bool enable_bottom_pan;
+            float* bottom_pan_l;
+            float* bottom_pan_r;
+            if (console.psform.DISPrcvr >= 0)
+            {
+                int bottom_pan_idx = 2 * console.psform.DISPrcvr;
+                bottom_pan_l = (float*)array_ptr_input[bottom_pan_idx + 0];
+                bottom_pan_r = (float*)array_ptr_input[bottom_pan_idx + 1];
+                //enable_bottom_pan = true;
+            }
+            else
+            {
+                bottom_pan_l = (float*)array_ptr_input[10]; // will be empty for ANAN-10B
+                bottom_pan_r = (float*)array_ptr_input[11];
+               // enable_bottom_pan = false;
+            }
             switch (console.NReceivers)
             {
                 case 1:
@@ -2034,7 +2060,7 @@ namespace PowerSDR
                             SpecHPSDRDLL.Spectrum(0, 0, 0, rx1_in_r, rx1_in_l);
                         }
 
-                        if (console.RX2Enabled)
+                        if (console.RX2Enabled) // && enable_bottom_pan)
                             SpecHPSDRDLL.Spectrum(1, 0, 0, bottom_pan_r, bottom_pan_l);
                         break;
                     }
@@ -2096,7 +2122,7 @@ namespace PowerSDR
                             }
                         }
 
-                        if (console.RX2Enabled)
+                        if (console.RX2Enabled) // && enable_bottom_pan)
                             SpecHPSDRDLL.Spectrum(1, 0, 0, bottom_pan_r, bottom_pan_l);
                         break;
                     }
@@ -2446,7 +2472,7 @@ namespace PowerSDR
                     ScaleBuffer(out_r2, out_r1, out_count, 0.5f);
 
                     // if RX2 is present, combine the outputs
-                    if (rx2_enabled && !rx2_auto_mute_tx)
+                    if (rx2_enabled && !rx2_auto_mute_tx && console.psform.DISPrcvr > 0)
                     {
                         AddBuffer(out_l1, out_r3, out_count);
                         AddBuffer(out_r1, out_l3, out_count);
@@ -2459,7 +2485,7 @@ namespace PowerSDR
                 else // TX (w/o Monitor)
                 {
                     // if RX2 is present, use that output
-                    if (rx2_enabled && !rx2_auto_mute_tx)
+                    if (rx2_enabled && !rx2_auto_mute_tx && console.psform.DISPrcvr > 0)
                     {
                         // Scale the output for Mercury
                         ScaleBuffer(out_l3, out_r1, out_count, (float)monitor_volume);
