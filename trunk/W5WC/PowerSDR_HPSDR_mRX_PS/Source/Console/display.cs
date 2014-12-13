@@ -914,6 +914,14 @@ namespace PowerSDR
             set { mox = value; }
         }
 
+
+        private static bool blank_bottom_display = false;
+        public static bool BlankBottomDisplay
+        {
+            get { return blank_bottom_display; }
+            set { blank_bottom_display = value; }
+        }
+
         private static DSPMode rx1_dsp_mode = DSPMode.USB;
         public static DSPMode RX1DSPMode
         {
@@ -9780,7 +9788,7 @@ namespace PowerSDR
             }
             else if (rx == 2 && data_ready_bottom)
             {
-                if (local_mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU))
+                if (blank_bottom_display || (local_mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU)))
                 {
                     for (int i = 0; i < current_display_data_bottom.Length; i++)
                         current_display_data_bottom[i] = grid_min - rx2_display_cal_offset;

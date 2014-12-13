@@ -1710,8 +1710,6 @@ namespace PowerSDR
             TXPostGenSweepFreq1 = tx_postgen_sweep_freq1;
             TXPostGenSweepFreq2 = tx_postgen_sweep_freq2;
             TXPostGenSweepRate = tx_postgen_sweep_rate;
-            TXStaticPDRun = tx_static_pd_run;
-            TXStaticPD = tx_static_pd;
 		}
 
 		#region Non-Static Properties & Routines
@@ -3042,47 +3040,6 @@ namespace PowerSDR
                         wdsp.SetTXAPostGenSweepRate(wdsp.id(1, 0), value);
                         tx_postgen_sweep_rate_dsp = value;
                     }
-                }
-            }
-        }
-
-        private bool tx_static_pd_run_dsp = false;
-        private bool tx_static_pd_run = false;
-        public bool TXStaticPDRun
-        {
-            get { return tx_static_pd_run; }
-            set
-            {
-                tx_static_pd_run = value;
-                if (update)
-                {
-                    if (value != tx_static_pd_run_dsp || force)
-                    {
-                        wdsp.SetTXAStaticPDRun(wdsp.id(1, 0), value);
-                        tx_static_pd_run_dsp = value;
-                    }
-                }
-            }
-        }
-        
-        private double[] tx_static_pd_dsp = new double[12];
-        private double[] tx_static_pd = new double[12];
-        public double[] TXStaticPD
-        {
-            get { return tx_static_pd; }
-            set
-            {
-                for (int i = 0; i < tx_static_pd.Length && i < value.Length; i++)
-                    tx_static_pd[i] = value[i];
-                if (update)
-                {
-                    unsafe
-                    {
-                        fixed (double* ptr = &(tx_static_pd[0]))
-                            wdsp.SetTXAStaticPDGain(wdsp.id(thread, 0), ptr);
-                    }
-                    for (int i = 0; i < tx_static_pd_dsp.Length && i < value.Length; i++)
-                        tx_static_pd_dsp[i] = value[i];
                 }
             }
         }

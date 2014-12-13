@@ -58,11 +58,13 @@ namespace PowerSDR
         public bool PSEnabled
         {
             get { return psenabled; }
-            set { 
-                    psenabled = value;
-                    if (!psenabled) ResetPureSignal();
-                    fixFreqs();
-                }
+            set
+            {
+                psenabled = value;
+                if (!psenabled) ResetPureSignal();
+                fixFreqs();
+                ChangeDispRcvr();
+            }
         }
 
         private static bool ttgenON = false;
@@ -82,7 +84,7 @@ namespace PowerSDR
         private static int txachannel = 4;
         public int TXAchannel
         {
-            get { return txachannel;  }
+            get { return txachannel; }
             set { txachannel = value; }
         }
 
@@ -101,6 +103,7 @@ namespace PowerSDR
         }
 
         // receiver to display on bottom panadapter for debug
+        private static int oldDispRcvr = 2;
         private static int dispRCVR = 2;
         public int DISPrcvr
         {
@@ -114,8 +117,8 @@ namespace PowerSDR
         public double RX1freq
         {
             get { return rxfreqs[1]; }
-            set 
-            { 
+            set
+            {
                 rxfreqs[1] = value;
                 if ((rxRCVR == 1) || (txRCVR == 1))
                     fixFreqs();
@@ -127,7 +130,7 @@ namespace PowerSDR
         public double RX2freq
         {
             get { return rxfreqs[2]; }
-            set 
+            set
             {
                 rxfreqs[2] = value;
                 if ((rxRCVR == 2) || (txRCVR == 2))
@@ -140,8 +143,8 @@ namespace PowerSDR
         public double RX3freq
         {
             get { return rxfreqs[3]; }
-            set 
-            { 
+            set
+            {
                 rxfreqs[3] = value;
                 if ((rxRCVR == 3) || (txRCVR == 3))
                     fixFreqs();
@@ -153,8 +156,8 @@ namespace PowerSDR
         public double RX4freq
         {
             get { return rxfreqs[4]; }
-            set 
-            { 
+            set
+            {
                 rxfreqs[4] = value;
                 if ((rxRCVR == 4) || (txRCVR == 4))
                     fixFreqs();
@@ -165,10 +168,10 @@ namespace PowerSDR
 
         public double RX5freq
         {
-            get 
+            get
             { return rxfreqs[5]; }
-            set 
-            { 
+            set
+            {
                 rxfreqs[5] = value;
                 if ((rxRCVR == 5) || (txRCVR == 5))
                     fixFreqs();
@@ -180,8 +183,8 @@ namespace PowerSDR
         public double TXfreq
         {
             get { return txfreq; }
-            set 
-            { 
+            set
+            {
                 txfreq = value;
                 JanusAudio.SetVFOfreqTX(txfreq);
                 fixFreqs();
@@ -192,25 +195,11 @@ namespace PowerSDR
         public bool Mox
         {
             get { return mox; }
-            set 
-            { 
+            set
+            {
                 mox = value;
-                if (mox)
-                {
-                    /*btnPSTwoToneGen.Enabled = false;
-                    if (ttgenON)
-                        btnPSTwoToneGen.BackColor = Color.LimeGreen;
-                    else
-                        btnPSTwoToneGen.BackColor = SystemColors.ButtonShadow;*/
-                }
-                else
-                {
-                    /*btnPSTwoToneGen.Enabled = true;
-                    if (ttgenON)
-                        btnPSTwoToneGen.BackColor = Color.FromArgb(gcolor);
-                    else
-                        btnPSTwoToneGen.BackColor = SystemColors.Control;*/
-                }
+                fixFreqs();
+                ChangeDispRcvr();
             }
         }
 
@@ -371,9 +360,9 @@ namespace PowerSDR
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            splashtrans(splashcount,   0,  10, 255, 255, 255, 255, 255, 255, 220,   0);
-            splashtrans(splashcount,  10,  20, 255, 255, 220,   0, 255, 255,  20,   0);
-            splashtrans(splashcount,  20, 120, 255, 255,  20,   0, 255,   0,   0,   0);
+            splashtrans(splashcount, 0, 10, 255, 255, 255, 255, 255, 255, 220, 0);
+            splashtrans(splashcount, 10, 20, 255, 255, 220, 0, 255, 255, 20, 0);
+            splashtrans(splashcount, 20, 120, 255, 255, 20, 0, 255, 0, 0, 0);
             if (splashcount > 120)
             {
                 lblPSWelcome.Visible = false;
@@ -385,7 +374,7 @@ namespace PowerSDR
             lblPSInfo1.Text = puresignal.Info[1].ToString();
             lblPSInfo2.Text = puresignal.Info[2].ToString();
             lblPSInfo3.Text = puresignal.Info[3].ToString();
-            
+
             if (puresignal.Info[14] == 1)
             {
                 lblPSInfoCO.BackColor = Color.FromArgb(gcolor);
@@ -455,13 +444,19 @@ namespace PowerSDR
 
         private void PSdispRX_TextChanged(object sender, EventArgs e)
         {
+            const int max_rcvrs = 5;
             int new_rcvr = dispRCVR;
             if (PSdispRX.Text != String.Empty)
             {
                 new_rcvr = Convert.ToInt32(PSdispRX.Text);
-                if (new_rcvr > 0 && new_rcvr <= 5)
+                if (new_rcvr >= 0 && new_rcvr <= max_rcvrs)
+                {
                     dispRCVR = new_rcvr;
-                PSdispRX.Text = dispRCVR.ToString();
+                    oldDispRcvr = new_rcvr;
+                }
+                else
+                    dispRCVR = -1;
+                PSdispRX.Text = new_rcvr.ToString();
             }
         }
 
@@ -472,7 +467,7 @@ namespace PowerSDR
             else
                 puresignal.SetPSPtol(txachannel, 0.900);
         }
-        
+
         #endregion
 
         #region methods
@@ -507,6 +502,28 @@ namespace PowerSDR
             puresignal.SetPSControl(txachannel, 1, 0, 0, 0);
         }
 
+        private void ChangeDispRcvr()
+        {
+            switch (console.CurrentHPSDRModel)
+            {
+                case HPSDRModel.ANAN10E:
+                    if (psenabled && mox)
+                    {
+                        dispRCVR = -1;                     // comment this line to display  
+                        // Display.BlankBottomDisplay = true; // comment this line to display
+                    }
+                    else
+                    {
+                        dispRCVR = oldDispRcvr;
+                        // Display.BlankBottomDisplay = false;
+                    }
+                    break;
+                default:
+                    // Display.BlankBottomDisplay = false;
+                    break;
+            }
+        }
+
         public void SetPSReceivers(HPSDRModel model)
         {
             switch (model)
@@ -519,7 +536,12 @@ namespace PowerSDR
                     rxRCVR = 3;
                     txRCVR = 4;
                     break;
+                case HPSDRModel.ANAN10E:
+                    rxRCVR = 1;
+                    txRCVR = 2;
+                    break;
                 case HPSDRModel.ANAN100:
+                case HPSDRModel.ANAN100B:
                     rxRCVR = 3;
                     txRCVR = 4;
                     break;
@@ -541,7 +563,7 @@ namespace PowerSDR
                     break;
             }
         }
-        
+
         public int NRX(int nr, HPSDRModel model)
         {
             int newnr;
@@ -553,7 +575,11 @@ namespace PowerSDR
                 case HPSDRModel.ANAN10:
                     newnr = Math.Max(4, nr);
                     break;
+                case HPSDRModel.ANAN10E:
+                    newnr = Math.Max(2, nr);
+                    break;
                 case HPSDRModel.ANAN100:
+                case HPSDRModel.ANAN100B:
                     newnr = Math.Max(4, nr);
                     break;
                 case HPSDRModel.ANAN100D:
@@ -572,12 +598,68 @@ namespace PowerSDR
             return newnr;
         }
 
-        private void fixFreqs()
+        /*private void fixFreqs()
         {
             if (psenabled)
             {
                 SetRXFreq(rxRCVR, txfreq, false);
                 SetRXFreq(txRCVR, txfreq, false);
+            }
+            else
+            {
+                SetRXFreq(rxRCVR, rxfreqs[rxRCVR], true);
+                SetRXFreq(txRCVR, rxfreqs[txRCVR], true);
+            }
+        }*/
+
+        private void fixFreqs()
+        {
+            if (psenabled)
+            {
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.HERMES:
+                        SetRXFreq(rxRCVR, txfreq, false);
+                        SetRXFreq(txRCVR, txfreq, false);
+                        break;
+                    case HPSDRModel.ANAN10:
+                        SetRXFreq(rxRCVR, txfreq, false);
+                        SetRXFreq(txRCVR, txfreq, false);
+                        break;
+                    case HPSDRModel.ANAN10E:
+                        if (mox)
+                        {
+                            SetRXFreq(rxRCVR, txfreq, false);
+                            SetRXFreq(txRCVR, txfreq, false);
+                        }
+                        else
+                        {
+                            SetRXFreq(rxRCVR, rxfreqs[rxRCVR], true);
+                            SetRXFreq(txRCVR, rxfreqs[txRCVR], true);
+                        }
+                        break;
+                    case HPSDRModel.ANAN100:
+                    case HPSDRModel.ANAN100B:
+                        SetRXFreq(rxRCVR, txfreq, false);
+                        SetRXFreq(txRCVR, txfreq, false);
+                        break;
+                    case HPSDRModel.ANAN100D:
+                        SetRXFreq(rxRCVR, txfreq, false);
+                        SetRXFreq(txRCVR, txfreq, false);
+                        break;
+                    case HPSDRModel.ORION:
+                        SetRXFreq(rxRCVR, txfreq, false);
+                        SetRXFreq(txRCVR, txfreq, false);
+                        break;
+                    case HPSDRModel.HPSDR:
+                        SetRXFreq(rxRCVR, txfreq, false);
+                        SetRXFreq(txRCVR, txfreq, false);
+                        break;
+                    default:
+                        SetRXFreq(rxRCVR, txfreq, false);
+                        SetRXFreq(txRCVR, txfreq, false);
+                        break;
+                }
             }
             else
             {

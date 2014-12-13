@@ -150,8 +150,9 @@ namespace PowerSDR
         HPSDR,
         HERMES,
         ANAN10,
-        ANAN100B,
+        ANAN10E,
         ANAN100,
+        ANAN100B,
         ANAN100D,
         ANAN200D,
         ORION
@@ -163,8 +164,9 @@ namespace PowerSDR
         HPSDR,
         HERMES,
         ANAN10,
-        ANAN100B,
+        ANAN10E,
         ANAN100,
+        ANAN100B,
         ANAN100D,
         ANAN200D,
         ORION,
@@ -12571,7 +12573,7 @@ namespace PowerSDR
         private float GainByBand(Band b)
         {
             float retval = 0;
-            if (current_hpsdr_model == HPSDRModel.ANAN10)
+            if (current_hpsdr_model == HPSDRModel.ANAN10 || current_hpsdr_model == HPSDRModel.ANAN10E)
             {
                 switch (b)
                 {
@@ -16040,7 +16042,7 @@ namespace PowerSDR
             rx2_preamp_offset[(int)PreampMode.HPSDR_OFF] = -off_offset;
             rx2_preamp_offset[(int)PreampMode.HPSDR_ON] = 0.0f;
 
-            if (alexpresent && !ANAN10Present && !ANAN100BPresent)
+            if (alexpresent && !ANAN10Present && !ANAN10EPresent && !ANAN100BPresent)
             {
                 RX1PreampMode = PreampMode.HPSDR_MINUS10; //-10dB
                 Thread.Sleep(100);
@@ -17492,13 +17494,13 @@ namespace PowerSDR
             {
                 rx1_attenuator_data = value;
                 if (initializing) return;
-                if (AlexPresent && !ANAN10Present && !ANAN100BPresent)
+                if (AlexPresent && !ANAN10Present && !ANAN10EPresent && !ANAN100BPresent)
                     udRX1StepAttData.Maximum = (decimal)61;
                 else udRX1StepAttData.Maximum = (decimal)31;
 
                 if (rx1_step_att_present)
                 {
-                    if (AlexPresent && !ANAN10Present && !ANAN100BPresent)
+                    if (AlexPresent && !ANAN10Present && !ANAN10EPresent && !ANAN100BPresent)
                     {
                         if (rx1_attenuator_data <= 31)
                         {
@@ -17538,36 +17540,39 @@ namespace PowerSDR
             set
             {
                 rx2_step_att_present = value;
-                if (rx2_step_att_present)
+                if (rx2_preamp_present)
                 {
-                    lblRX2Preamp.Visible = true;
-                    udRX2StepAttData.Visible = true;
-                    lblRX2Preamp.Text = "S-ATT";
-                    udRX2StepAttData.BringToFront();
-                    udRX2StepAttData.Value = rx2_step_attenuator_by_band[(int)rx2_band];
-                    // udRX2StepAttData_ValueChanged(this, EventArgs.Empty);
-                    //  JanusAudio.EnableADC2StepAtten(1);
-                }
-                else
-                {
-                    lblRX2Preamp.Visible = true;
-                    lblRX2Preamp.Text = "ATT";
-                    comboRX2Preamp.Visible = true;
-                    comboRX2Preamp.BringToFront();
-                    // comboRX2Preamp_SelectedIndexChanged(this, EventArgs.Empty);
-                    // if (current_hpsdr_model != HPSDRModel.HPSDR)
-                    //  JanusAudio.EnableADC2StepAtten(1);
-                }
+                    if (rx2_step_att_present)
+                    {
+                        lblRX2Preamp.Visible = true;
+                        udRX2StepAttData.Visible = true;
+                        lblRX2Preamp.Text = "S-ATT";
+                        udRX2StepAttData.BringToFront();
+                        udRX2StepAttData.Value = rx2_step_attenuator_by_band[(int)rx2_band];
+                        // udRX2StepAttData_ValueChanged(this, EventArgs.Empty);
+                        //  JanusAudio.EnableADC2StepAtten(1);
+                    }
+                    else
+                    {
+                        lblRX2Preamp.Visible = true;
+                        lblRX2Preamp.Text = "ATT";
+                        comboRX2Preamp.Visible = true;
+                        comboRX2Preamp.BringToFront();
+                        // comboRX2Preamp_SelectedIndexChanged(this, EventArgs.Empty);
+                        // if (current_hpsdr_model != HPSDRModel.HPSDR)
+                        //  JanusAudio.EnableADC2StepAtten(1);
+                    }
 
-                if (CollapsedDisplay)
-                    CollapseDisplay();
-                if (!mox)
-                {
-                    //update_preamp_mode = false;
-                    update_preamp = true;
-                    UpdatePreamps();
+                    if (CollapsedDisplay)
+                        CollapseDisplay();
+                    if (!mox)
+                    {
+                        //update_preamp_mode = false;
+                        update_preamp = true;
+                        UpdatePreamps();
+                    }
+                    UpdateRX2DisplayOffsets();
                 }
-                UpdateRX2DisplayOffsets();
 
             }
         }
@@ -20924,7 +20929,7 @@ namespace PowerSDR
                 }
                 else
                 {
-                    rx2_step_att_present = false;
+                    //rx2_step_att_present = false;
                     JanusAudio.EnableADC2StepAtten(0);
                     comboRX2Preamp.Hide();
                     udRX2StepAttData.Hide();
@@ -23202,7 +23207,9 @@ namespace PowerSDR
                         r = radModeDRM;
                         break;
                 }
-                r.Select();
+                //r.Select();
+                r.PerformClick();
+               // r.Checked = true;
             }
         }
 
@@ -24395,14 +24402,37 @@ namespace PowerSDR
             }
         }
 
-        private bool anan10bpresent = false;
-        public bool ANAN100BPresent
+        private bool anan10Epresent = false;
+        public bool ANAN10EPresent
         {
-            get { return anan10bpresent; }
+            get { return anan10Epresent; }
             set
             {
-                anan10bpresent = value;
-                if (anan10bpresent)
+                anan10Epresent = value;
+                if (anan10Epresent)
+                {
+                    if (!comboMeterTXMode.Items.Contains("Fwd SWR"))
+                        comboMeterTXMode.Items.Insert(3, "Fwd SWR");
+                }
+                else
+                {
+                    if (!initializing)
+                    {
+                        if (comboMeterTXMode.Items.Contains("Fwd SWR"))
+                            comboMeterTXMode.Items.Remove("Fwd SWR");
+                    }
+                }
+            }
+        }
+
+        private bool anan100Bpresent = false;
+        public bool ANAN100BPresent
+        {
+            get { return anan100Bpresent; }
+            set
+            {
+                anan100Bpresent = value;
+                if (anan100Bpresent)
                 {
                     if (!comboMeterTXMode.Items.Contains("Fwd SWR"))
                         comboMeterTXMode.Items.Insert(3, "Fwd SWR");
@@ -31970,7 +32000,7 @@ namespace PowerSDR
                             break;
                     }
                 }
-                wdsp.SetChannelState(wdsp.id(0, 0), 1, 1);                                                          //////////////////////////////////
+                wdsp.SetChannelState(wdsp.id(0, 0), 1, 1);
                 if (radio.GetDSPRX(0, 1).Active) wdsp.SetChannelState(wdsp.id(0, 1), 1, 1);
                 if (radio.GetDSPRX(1, 0).Active) wdsp.SetChannelState(wdsp.id(2, 0), 1, 1);
 
@@ -32635,11 +32665,11 @@ namespace PowerSDR
             if (SetupForm == null)
                 return;
 
-            if (ptbPWR.Value == 0)
-            {
-                Audio.RadioVolume = 0.0;
-                return;
-            }
+            //if (ptbPWR.Value == 0)
+            //{
+            //    Audio.RadioVolume = 0.0;
+            //    return;
+            //}
 
             //  int[] powers = { 1, 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
             float val = (float)ptbPWR.Value;
@@ -32711,7 +32741,20 @@ namespace PowerSDR
             target_dbm -= gbb;
 
             double target_volts = Math.Sqrt(Math.Pow(10, target_dbm * 0.1) * 0.05);		// E = Sqrt(P * R) 
-            Audio.RadioVolume = (double)Math.Min((target_volts / 0.8), 1.0);
+
+            if (ptbPWR.Value == 0)
+            {
+                Audio.RadioVolume = 0.0;
+                if (chkTUN.Checked)
+                    radio.GetDSPTX(0).TXPostGenRun = 0;
+            }
+            else
+            {
+                if (chkTUN.Checked)
+                    radio.GetDSPTX(0).TXPostGenRun = 1;
+                Audio.RadioVolume = (double)Math.Min((target_volts / 0.8), 1.0);
+            }
+
             toolTip1.SetToolTip(ptbPWR, Audio.RadioVolume.ToString("f3"));
             // }
             //  }
@@ -33460,8 +33503,8 @@ namespace PowerSDR
             {
                 if (!full_duplex)       // shutdown RX1 and RX2 as appropriate
                 {
-                    bool RX1_shutdown = chkVFOATX.Checked || (chkVFOBTX.Checked && !RX2Enabled) || mute_rx1_on_vfob_tx;
-                    bool RX2_shutdown = (chkVFOBTX.Checked && RX2Enabled) || mute_rx2_on_vfoa_tx;
+                    bool RX1_shutdown = chkVFOATX.Checked || (chkVFOBTX.Checked && !RX2Enabled) || mute_rx1_on_vfob_tx || (chkVFOBTX.Checked && ANAN10EPresent && psform.PSEnabled);
+                    bool RX2_shutdown = (chkVFOBTX.Checked && RX2Enabled) || mute_rx2_on_vfoa_tx || (chkVFOATX.Checked && RX2Enabled && ANAN10EPresent && psform.PSEnabled);
                     if (RX1_shutdown && !RX2_shutdown)
                     {
                         wdsp.SetChannelState(wdsp.id(0, 1), 0, 0);
@@ -33475,7 +33518,8 @@ namespace PowerSDR
                         wdsp.SetChannelState(wdsp.id(0, 0), 0, 0);
                         wdsp.SetChannelState(wdsp.id(2, 0), 0, 1);
                     }
-                }
+
+                 }
 
                 if (attontx)
                 {
@@ -33511,6 +33555,11 @@ namespace PowerSDR
                 AudioMOXChanged(tx);    // set MOX in audio.cs
                 HdwMOXChanged(tx, freq);// flip the hardware
                 psform.Mox = tx;
+
+                if (ANAN10EPresent && VFOBTX && psform.PSEnabled && psform.DISPrcvr < 0)
+                    Audio.RX1BlankDisplayTX = true;
+                else Audio.RX1BlankDisplayTX = blank_rx1_on_vfob_tx;
+
                 //  if (rf_delay > 0) Thread.Sleep(rf_delay);
                 if (radio.GetDSPTX(0).CurrentDSPMode != DSPMode.CWL &&
                     radio.GetDSPTX(0).CurrentDSPMode != DSPMode.CWU) // turn on the transmitter unless in CW mode
@@ -33538,11 +33587,15 @@ namespace PowerSDR
                 HdwMOXChanged(tx, freq);// flip the hardware
                 psform.Mox = tx;
 
+                if (ANAN10EPresent) if (mox_delay > 0) Thread.Sleep(mox_delay);
+
                 wdsp.SetChannelState(wdsp.id(0, 0), 1, 0);  // turn on appropriate receivers
                 if (RX2Enabled)
                     wdsp.SetChannelState(wdsp.id(2, 0), 1, 0);
                 if (radio.GetDSPRX(0, 1).Active)
                     wdsp.SetChannelState(wdsp.id(0, 1), 1, 0);
+
+                Audio.RX1BlankDisplayTX = blank_rx1_on_vfob_tx;
 
                 if (attontx)
                 {
@@ -44556,6 +44609,17 @@ namespace PowerSDR
             }
         }
 
+        private bool blank_rx1_on_vfob_tx = false;
+        public bool BlankRX1OnVFOBTX
+        {
+            get { return blank_rx1_on_vfob_tx; }
+            set
+            {
+                blank_rx1_on_vfob_tx = value;
+                if (chkVFOBTX.Checked)
+                    Audio.RX1BlankDisplayTX = value;
+            }
+        }
         private bool blank_rx2_on_vfoa_tx = false;
         public bool BlankRX2OnVFOATX
         {

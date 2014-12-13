@@ -516,14 +516,6 @@ namespace PowerSDR
         [DllImport("wdsp.dll", EntryPoint = "SetRXAmpeakFilGain", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAmpeakFilGain(int channel, int fil, double gain);
 
-        // static PD
-
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAStaticPDRun", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTXAStaticPDRun(int channel, bool run);
-        
-        [DllImport("wdsp.dll", EntryPoint = "SetTXAStaticPDGain", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTXAStaticPDGain(int channel, double* coefs);
-
         #endregion
 
         #region Enums
