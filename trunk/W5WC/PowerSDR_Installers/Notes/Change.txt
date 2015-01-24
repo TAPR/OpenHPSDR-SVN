@@ -21,3 +21,6 @@ This new control has been added in Setup on the DSP -> AM/SAM tab.
 - 'Disable PA' control now takes effect immediately.
 - Added shortcut keys that will allow the CWX memories to be called without the CWX form being open. To use press <CNTRL> + F1-F10. This changed was submitted by Roberto, IK4JPN
 
+3.2.21 (2015-1-23) 
+- Fix for bug introduced in 3.2.21 causing XVTR Form to crash. 
+- RIT will control RX1 and RX2 when VFOSunc is enabled. 
