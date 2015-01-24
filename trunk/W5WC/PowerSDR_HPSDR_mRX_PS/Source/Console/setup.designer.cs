@@ -371,6 +371,7 @@
             this.lblOptMaxFilter = new System.Windows.Forms.LabelTS();
             this.chkOptFilterSaveChanges = new System.Windows.Forms.CheckBoxTS();
             this.tpRX2 = new System.Windows.Forms.TabPage();
+            this.chkRX1BlankDisplayOnVFOBTX = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2BlankDisplayOnVFOATX = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2AutoMuteRX1OnVFOBTX = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2AutoMuteTX = new System.Windows.Forms.CheckBoxTS();
@@ -1271,6 +1272,8 @@
             this.tpDSP = new System.Windows.Forms.TabPage();
             this.tcDSP = new System.Windows.Forms.TabControl();
             this.tpDSPOptions = new System.Windows.Forms.TabPage();
+            this.grpDSPSpeechProcessor = new System.Windows.Forms.GroupBoxTS();
+            this.chkDSPCESSB = new System.Windows.Forms.CheckBoxTS();
             this.groupBoxTS5 = new System.Windows.Forms.GroupBoxTS();
             this.radANF2PreAGC = new System.Windows.Forms.RadioButtonTS();
             this.radANFPostAGC2 = new System.Windows.Forms.RadioButtonTS();
@@ -1437,6 +1440,9 @@
             this.udDSPAGCFixedGaindB = new System.Windows.Forms.NumericUpDownTS();
             this.lblDSPAGCFixed = new System.Windows.Forms.LabelTS();
             this.tpDSPAMSAM = new System.Windows.Forms.TabPage();
+            this.grpAMSQMaxTail = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS355 = new System.Windows.Forms.LabelTS();
+            this.udRXAMSQMaxTail = new System.Windows.Forms.NumericUpDownTS();
             this.grpAMSAM = new System.Windows.Forms.GroupBoxTS();
             this.chkCBlock = new System.Windows.Forms.CheckBoxTS();
             this.chkLevelFades = new System.Windows.Forms.CheckBoxTS();
@@ -2442,7 +2448,6 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
-            this.chkRX1BlankDisplayOnVFOBTX = new System.Windows.Forms.CheckBoxTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -2744,6 +2749,7 @@
             this.tpDSP.SuspendLayout();
             this.tcDSP.SuspendLayout();
             this.tpDSPOptions.SuspendLayout();
+            this.grpDSPSpeechProcessor.SuspendLayout();
             this.groupBoxTS5.SuspendLayout();
             this.groupBoxTS4.SuspendLayout();
             this.grpDSPLMSNR2.SuspendLayout();
@@ -2815,6 +2821,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCAttack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCFixedGaindB)).BeginInit();
             this.tpDSPAMSAM.SuspendLayout();
+            this.grpAMSQMaxTail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udRXAMSQMaxTail)).BeginInit();
             this.grpAMSAM.SuspendLayout();
             this.grpAMSBSEL.SuspendLayout();
             this.grpRX2AMSAM.SuspendLayout();
@@ -8318,6 +8326,17 @@
             this.tpRX2.Size = new System.Drawing.Size(580, 318);
             this.tpRX2.TabIndex = 4;
             this.tpRX2.Text = "RX2";
+            // 
+            // chkRX1BlankDisplayOnVFOBTX
+            // 
+            this.chkRX1BlankDisplayOnVFOBTX.Image = null;
+            this.chkRX1BlankDisplayOnVFOBTX.Location = new System.Drawing.Point(8, 80);
+            this.chkRX1BlankDisplayOnVFOBTX.Name = "chkRX1BlankDisplayOnVFOBTX";
+            this.chkRX1BlankDisplayOnVFOBTX.Size = new System.Drawing.Size(196, 24);
+            this.chkRX1BlankDisplayOnVFOBTX.TabIndex = 4;
+            this.chkRX1BlankDisplayOnVFOBTX.Text = "Blank RX1 Display on VFO B TX";
+            this.toolTip1.SetToolTip(this.chkRX1BlankDisplayOnVFOBTX, "Blanks RX1 Display when transmitting on VFO B when checked. ");
+            this.chkRX1BlankDisplayOnVFOBTX.CheckedChanged += new System.EventHandler(this.chkRX1BlankDisplayOnVFOBTX_CheckedChanged);
             // 
             // chkRX2BlankDisplayOnVFOATX
             // 
@@ -20781,6 +20800,7 @@
             // 
             // tpDSPOptions
             // 
+            this.tpDSPOptions.Controls.Add(this.grpDSPSpeechProcessor);
             this.tpDSPOptions.Controls.Add(this.groupBoxTS5);
             this.tpDSPOptions.Controls.Add(this.groupBoxTS4);
             this.tpDSPOptions.Controls.Add(this.grpDSPLMSNR2);
@@ -20797,13 +20817,35 @@
             this.tpDSPOptions.TabIndex = 2;
             this.tpDSPOptions.Text = "Options";
             // 
+            // grpDSPSpeechProcessor
+            // 
+            this.grpDSPSpeechProcessor.Controls.Add(this.chkDSPCESSB);
+            this.grpDSPSpeechProcessor.Location = new System.Drawing.Point(249, 262);
+            this.grpDSPSpeechProcessor.Name = "grpDSPSpeechProcessor";
+            this.grpDSPSpeechProcessor.Size = new System.Drawing.Size(200, 48);
+            this.grpDSPSpeechProcessor.TabIndex = 43;
+            this.grpDSPSpeechProcessor.TabStop = false;
+            this.grpDSPSpeechProcessor.Text = "Speech Processor";
+            // 
+            // chkDSPCESSB
+            // 
+            this.chkDSPCESSB.AutoSize = true;
+            this.chkDSPCESSB.Image = null;
+            this.chkDSPCESSB.Location = new System.Drawing.Point(7, 20);
+            this.chkDSPCESSB.Name = "chkDSPCESSB";
+            this.chkDSPCESSB.Size = new System.Drawing.Size(149, 17);
+            this.chkDSPCESSB.TabIndex = 0;
+            this.chkDSPCESSB.Text = "CESSB Overshoot Control";
+            this.chkDSPCESSB.UseVisualStyleBackColor = true;
+            this.chkDSPCESSB.CheckedChanged += new System.EventHandler(this.chkDSPCESSB_CheckedChanged);
+            // 
             // groupBoxTS5
             // 
             this.groupBoxTS5.Controls.Add(this.radANF2PreAGC);
             this.groupBoxTS5.Controls.Add(this.radANFPostAGC2);
-            this.groupBoxTS5.Location = new System.Drawing.Point(248, 144);
+            this.groupBoxTS5.Location = new System.Drawing.Point(248, 138);
             this.groupBoxTS5.Name = "groupBoxTS5";
-            this.groupBoxTS5.Size = new System.Drawing.Size(88, 128);
+            this.groupBoxTS5.Size = new System.Drawing.Size(88, 118);
             this.groupBoxTS5.TabIndex = 42;
             this.groupBoxTS5.TabStop = false;
             this.groupBoxTS5.Text = " NR/ANF Position";
@@ -20879,7 +20921,7 @@
             this.grpDSPLMSNR2.Controls.Add(this.lblLMSNR2delay);
             this.grpDSPLMSNR2.Controls.Add(this.udLMSNR2taps);
             this.grpDSPLMSNR2.Controls.Add(this.lblLMSNR2taps);
-            this.grpDSPLMSNR2.Location = new System.Drawing.Point(8, 144);
+            this.grpDSPLMSNR2.Location = new System.Drawing.Point(8, 138);
             this.grpDSPLMSNR2.Name = "grpDSPLMSNR2";
             this.grpDSPLMSNR2.Size = new System.Drawing.Size(112, 128);
             this.grpDSPLMSNR2.TabIndex = 40;
@@ -21049,7 +21091,7 @@
             this.grpDSPLMSANF2.Controls.Add(this.udLMSANF2delay);
             this.grpDSPLMSANF2.Controls.Add(this.lblLMSANF2Taps);
             this.grpDSPLMSANF2.Controls.Add(this.udLMSANF2taps);
-            this.grpDSPLMSANF2.Location = new System.Drawing.Point(128, 144);
+            this.grpDSPLMSANF2.Location = new System.Drawing.Point(128, 138);
             this.grpDSPLMSANF2.Name = "grpDSPLMSANF2";
             this.grpDSPLMSANF2.Size = new System.Drawing.Size(115, 128);
             this.grpDSPLMSANF2.TabIndex = 39;
@@ -23615,6 +23657,8 @@
             // 
             // tpDSPAMSAM
             // 
+            this.tpDSPAMSAM.BackColor = System.Drawing.SystemColors.Control;
+            this.tpDSPAMSAM.Controls.Add(this.grpAMSQMaxTail);
             this.tpDSPAMSAM.Controls.Add(this.grpAMSAM);
             this.tpDSPAMSAM.Controls.Add(this.grpRX2AMSAM);
             this.tpDSPAMSAM.Location = new System.Drawing.Point(4, 22);
@@ -23623,7 +23667,56 @@
             this.tpDSPAMSAM.Size = new System.Drawing.Size(592, 318);
             this.tpDSPAMSAM.TabIndex = 4;
             this.tpDSPAMSAM.Text = "AM/SAM";
-            this.tpDSPAMSAM.UseVisualStyleBackColor = true;
+            // 
+            // grpAMSQMaxTail
+            // 
+            this.grpAMSQMaxTail.Controls.Add(this.labelTS355);
+            this.grpAMSQMaxTail.Controls.Add(this.udRXAMSQMaxTail);
+            this.grpAMSQMaxTail.Location = new System.Drawing.Point(330, 40);
+            this.grpAMSQMaxTail.Name = "grpAMSQMaxTail";
+            this.grpAMSQMaxTail.Size = new System.Drawing.Size(172, 92);
+            this.grpAMSQMaxTail.TabIndex = 43;
+            this.grpAMSQMaxTail.TabStop = false;
+            this.grpAMSQMaxTail.Text = "RX AM/SSB Max Squelch Tail";
+            // 
+            // labelTS355
+            // 
+            this.labelTS355.AutoSize = true;
+            this.labelTS355.Image = null;
+            this.labelTS355.Location = new System.Drawing.Point(13, 39);
+            this.labelTS355.Name = "labelTS355";
+            this.labelTS355.Size = new System.Drawing.Size(43, 13);
+            this.labelTS355.TabIndex = 1;
+            this.labelTS355.Text = "Length:";
+            // 
+            // udRXAMSQMaxTail
+            // 
+            this.udRXAMSQMaxTail.DecimalPlaces = 1;
+            this.udRXAMSQMaxTail.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udRXAMSQMaxTail.Location = new System.Drawing.Point(62, 35);
+            this.udRXAMSQMaxTail.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            65536});
+            this.udRXAMSQMaxTail.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udRXAMSQMaxTail.Name = "udRXAMSQMaxTail";
+            this.udRXAMSQMaxTail.Size = new System.Drawing.Size(38, 20);
+            this.udRXAMSQMaxTail.TabIndex = 0;
+            this.udRXAMSQMaxTail.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            65536});
+            this.udRXAMSQMaxTail.ValueChanged += new System.EventHandler(this.udRXAMSQMaxTail_ValueChanged);
             // 
             // grpAMSAM
             // 
@@ -23807,6 +23900,7 @@
             // 
             // tpDSPFM
             // 
+            this.tpDSPFM.BackColor = System.Drawing.SystemColors.Control;
             this.tpDSPFM.Controls.Add(this.grpFMRX);
             this.tpDSPFM.Controls.Add(this.grpFMTX);
             this.tpDSPFM.Location = new System.Drawing.Point(4, 22);
@@ -23815,7 +23909,6 @@
             this.tpDSPFM.Size = new System.Drawing.Size(592, 318);
             this.tpDSPFM.TabIndex = 5;
             this.tpDSPFM.Text = "FM";
-            this.tpDSPFM.UseVisualStyleBackColor = true;
             // 
             // grpFMRX
             // 
@@ -23865,6 +23958,7 @@
             // 
             // tpDSPAudio
             // 
+            this.tpDSPAudio.BackColor = System.Drawing.SystemColors.Control;
             this.tpDSPAudio.Controls.Add(this.grpDSPAudRX2Dolly);
             this.tpDSPAudio.Controls.Add(this.grpDSPAudRX1SubDolly);
             this.tpDSPAudio.Controls.Add(this.grpDSPAudRX1Dolly);
@@ -23878,7 +23972,6 @@
             this.tpDSPAudio.Size = new System.Drawing.Size(592, 318);
             this.tpDSPAudio.TabIndex = 7;
             this.tpDSPAudio.Text = "Audio";
-            this.tpDSPAudio.UseVisualStyleBackColor = true;
             // 
             // grpDSPAudRX2Dolly
             // 
@@ -24721,6 +24814,7 @@
             // 
             // tpDSPEER
             // 
+            this.tpDSPEER.BackColor = System.Drawing.SystemColors.Control;
             this.tpDSPEER.Controls.Add(this.grpDSPEERpwm);
             this.tpDSPEER.Controls.Add(this.chkDSPEERRunDelays);
             this.tpDSPEER.Controls.Add(this.labelTS327);
@@ -24738,7 +24832,6 @@
             this.tpDSPEER.Size = new System.Drawing.Size(592, 318);
             this.tpDSPEER.TabIndex = 6;
             this.tpDSPEER.Text = "EER";
-            this.tpDSPEER.UseVisualStyleBackColor = true;
             // 
             // grpDSPEERpwm
             // 
@@ -40248,17 +40341,6 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
-            // chkRX1BlankDisplayOnVFOBTX
-            // 
-            this.chkRX1BlankDisplayOnVFOBTX.Image = null;
-            this.chkRX1BlankDisplayOnVFOBTX.Location = new System.Drawing.Point(8, 80);
-            this.chkRX1BlankDisplayOnVFOBTX.Name = "chkRX1BlankDisplayOnVFOBTX";
-            this.chkRX1BlankDisplayOnVFOBTX.Size = new System.Drawing.Size(196, 24);
-            this.chkRX1BlankDisplayOnVFOBTX.TabIndex = 4;
-            this.chkRX1BlankDisplayOnVFOBTX.Text = "Blank RX1 Display on VFO B TX";
-            this.toolTip1.SetToolTip(this.chkRX1BlankDisplayOnVFOBTX, "Blanks RX1 Display when transmitting on VFO B when checked. ");
-            this.chkRX1BlankDisplayOnVFOBTX.CheckedChanged += new System.EventHandler(this.chkRX1BlankDisplayOnVFOBTX_CheckedChanged);
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -40615,6 +40697,8 @@
             this.tpDSP.ResumeLayout(false);
             this.tcDSP.ResumeLayout(false);
             this.tpDSPOptions.ResumeLayout(false);
+            this.grpDSPSpeechProcessor.ResumeLayout(false);
+            this.grpDSPSpeechProcessor.PerformLayout();
             this.groupBoxTS5.ResumeLayout(false);
             this.groupBoxTS5.PerformLayout();
             this.groupBoxTS4.ResumeLayout(false);
@@ -40689,6 +40773,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCAttack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCFixedGaindB)).EndInit();
             this.tpDSPAMSAM.ResumeLayout(false);
+            this.grpAMSQMaxTail.ResumeLayout(false);
+            this.grpAMSQMaxTail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udRXAMSQMaxTail)).EndInit();
             this.grpAMSAM.ResumeLayout(false);
             this.grpAMSAM.PerformLayout();
             this.grpAMSBSEL.ResumeLayout(false);
@@ -42101,5 +42188,10 @@
         private System.Windows.Forms.NumericUpDownTS udANAN100BPAGain160;
         private System.Windows.Forms.RadioButtonTS radGenModelANAN10E;
         private System.Windows.Forms.CheckBoxTS chkRX1BlankDisplayOnVFOBTX;
+        private System.Windows.Forms.GroupBoxTS grpDSPSpeechProcessor;
+        private System.Windows.Forms.CheckBoxTS chkDSPCESSB;
+        private System.Windows.Forms.GroupBoxTS grpAMSQMaxTail;
+        private System.Windows.Forms.LabelTS labelTS355;
+        private System.Windows.Forms.NumericUpDownTS udRXAMSQMaxTail;
     }
 }

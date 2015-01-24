@@ -30,6 +30,7 @@ warren@wpratt.com
 typedef struct _gain
 {
 	int run;
+	int* prun;
 	int size;
 	double* in;
 	double* out;
@@ -37,7 +38,7 @@ typedef struct _gain
 	double Qgain;
 }gain, *GAIN;
 
-extern GAIN create_gain (int run, int size, double* in, double* out, double Igain, double Qgain);
+extern GAIN create_gain (int run, int* prun, int size, double* in, double* out, double Igain, double Qgain);
 
 extern void destroy_gain (GAIN a);
 

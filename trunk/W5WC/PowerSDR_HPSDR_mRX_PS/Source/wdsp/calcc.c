@@ -743,7 +743,7 @@ void pscc (int channel, int size, double* tx, double* rx, int mox, int solidmox)
 					++a->ctrl.count;
 				}
 			}
-			GetTXAiqcDogCount (channel, &a->info[13]);
+			GetTXAiqcDogCount (channel, &a->info[13]);		////////////////////////////////////////////////////////////
 			if (a->ctrl.reset)
 				a->ctrl.state = LRESET;
 			else if (a->ctrl.turnon)

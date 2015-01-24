@@ -86,7 +86,7 @@ SetTXACompressorRun (int channel, int run)
 {
 	EnterCriticalSection (&ch[channel].csDSP);
 	txa[channel].compressor.p->run = run;
-	txa[channel].bp0.p->run = run;		
+	txa[channel].bp1.p->run = run;
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
 
