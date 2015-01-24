@@ -35493,8 +35493,7 @@ namespace PowerSDR
             if (rx1_xvtr_index >= 0)
             {
                 RX1XVTRGainOffset = XVTRForm.GetRXGain(rx1_xvtr_index);
-                VHFTRRelay = XVTRForm.GetDisablePA(tx_xvtr_index);
-                if (vhf_tr_relay) JanusAudio.SetAlexTRRelayBit(1);
+                if (XVTRForm.GetDisablePA(tx_xvtr_index)) JanusAudio.SetAlexTRRelayBit(1);
                 else JanusAudio.SetAlexTRRelayBit(0);
             }
 
@@ -36068,7 +36067,7 @@ namespace PowerSDR
                              (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && !mox)))
             {
                 double rx2_osc = Math.Round(-(VFOBFreq - center_rx2_frequency) * 1e6);
-
+               
                 if (rx2_osc < -sample_rate1 / 2)
                 {
                     VFOBFreq = center_rx2_frequency + ((sample_rate1 / 2) - 1) * 0.0000010;
@@ -36079,6 +36078,9 @@ namespace PowerSDR
                     VFOBFreq = center_rx2_frequency + ((-sample_rate1 / 2) + 1) * 0.0000010;
                     return;
                 }
+
+               if (chkRIT.Checked && VFOSync)
+                    rx2_osc -= (int)udRIT.Value;// *0.000001;
 
                 if (rx2_osc > -sample_rate1 / 2 && rx2_osc < sample_rate1 / 2)
                 {
@@ -36372,6 +36374,9 @@ namespace PowerSDR
                 freq = XVTRForm.TranslateFreq(freq);
                 RX2XVTRGainOffset = XVTRForm.GetRXGain(xvtr_index);
             }
+
+            if (chkRIT.Checked && VFOSync)
+                freq += (int)udRIT.Value * 0.000001;
 
             if (freq < min_freq) freq = min_freq;
             else if (freq > max_freq) freq = max_freq;
@@ -41553,13 +41558,19 @@ namespace PowerSDR
             }
 
             if (!mox)
+            {
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+                txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+            }
         }
 
         private void udRIT_ValueChanged(object sender, System.EventArgs e)
         {
             if (chkRIT.Checked && !mox)
+            {
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+                txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+            }
             if (chkRIT.Checked && !click_tune_display) Display.RIT = (int)udRIT.Value;
 
             /*if(udRIT.Focused)

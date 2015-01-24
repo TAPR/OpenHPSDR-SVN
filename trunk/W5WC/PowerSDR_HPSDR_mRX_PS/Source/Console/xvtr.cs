@@ -235,8 +235,7 @@ namespace PowerSDR
 		private System.Windows.Forms.NumericUpDownTS udRXGain1;
 		private System.Windows.Forms.NumericUpDownTS udRXGain0;
 		private System.Windows.Forms.LabelTS lblRXGain;
-		private System.Windows.Forms.CheckBoxTS chkUseXVTRTUNPWR;
-        public CheckBoxTS chkAlexTRRelay;
+        private System.Windows.Forms.CheckBoxTS chkUseXVTRTUNPWR;
         private CheckBoxTS chkDisablePA15;
         private CheckBoxTS chkDisablePA14;
         private CheckBoxTS chkDisablePA13;
@@ -318,7 +317,23 @@ namespace PowerSDR
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XVTRForm));
-            this.chkAlexTRRelay = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA15 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA14 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA13 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA12 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA11 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA10 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA9 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA8 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA7 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA6 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA5 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA4 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA3 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA2 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA1 = new System.Windows.Forms.CheckBoxTS();
+            this.chkDisablePA0 = new System.Windows.Forms.CheckBoxTS();
+            this.lblDisablePA = new System.Windows.Forms.LabelTS();
             this.chkUseXVTRTUNPWR = new System.Windows.Forms.CheckBoxTS();
             this.udRXGain15 = new System.Windows.Forms.NumericUpDownTS();
             this.udRXGain14 = new System.Windows.Forms.NumericUpDownTS();
@@ -507,23 +522,6 @@ namespace PowerSDR
             this.chkEnable0 = new System.Windows.Forms.CheckBoxTS();
             this.lblButtonText = new System.Windows.Forms.LabelTS();
             this.lblBandButton = new System.Windows.Forms.LabelTS();
-            this.chkDisablePA15 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA14 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA13 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA12 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA11 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA10 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA9 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA8 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA7 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA6 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA5 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA4 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA3 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA2 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA1 = new System.Windows.Forms.CheckBoxTS();
-            this.chkDisablePA0 = new System.Windows.Forms.CheckBoxTS();
-            this.lblDisablePA = new System.Windows.Forms.LabelTS();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain13)).BeginInit();
@@ -622,18 +620,174 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udLOOffset0)).BeginInit();
             this.SuspendLayout();
             // 
-            // chkAlexTRRelay
+            // chkDisablePA15
             // 
-            this.chkAlexTRRelay.AutoSize = true;
-            this.chkAlexTRRelay.Image = null;
-            this.chkAlexTRRelay.Location = new System.Drawing.Point(285, 436);
-            this.chkAlexTRRelay.Name = "chkAlexTRRelay";
-            this.chkAlexTRRelay.Size = new System.Drawing.Size(114, 17);
-            this.chkAlexTRRelay.TabIndex = 206;
-            this.chkAlexTRRelay.Text = "Disable ANAN PA ";
-            this.chkAlexTRRelay.UseVisualStyleBackColor = true;
-            this.chkAlexTRRelay.Visible = false;
-            this.chkAlexTRRelay.CheckedChanged += new System.EventHandler(this.chkAlexTRRelay_CheckedChanged);
+            this.chkDisablePA15.Enabled = false;
+            this.chkDisablePA15.Image = null;
+            this.chkDisablePA15.Location = new System.Drawing.Point(820, 408);
+            this.chkDisablePA15.Name = "chkDisablePA15";
+            this.chkDisablePA15.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA15.TabIndex = 223;
+            this.chkDisablePA15.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA14
+            // 
+            this.chkDisablePA14.Enabled = false;
+            this.chkDisablePA14.Image = null;
+            this.chkDisablePA14.Location = new System.Drawing.Point(820, 384);
+            this.chkDisablePA14.Name = "chkDisablePA14";
+            this.chkDisablePA14.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA14.TabIndex = 222;
+            this.chkDisablePA14.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA13
+            // 
+            this.chkDisablePA13.Enabled = false;
+            this.chkDisablePA13.Image = null;
+            this.chkDisablePA13.Location = new System.Drawing.Point(820, 360);
+            this.chkDisablePA13.Name = "chkDisablePA13";
+            this.chkDisablePA13.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA13.TabIndex = 220;
+            this.chkDisablePA13.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA12
+            // 
+            this.chkDisablePA12.Enabled = false;
+            this.chkDisablePA12.Image = null;
+            this.chkDisablePA12.Location = new System.Drawing.Point(820, 336);
+            this.chkDisablePA12.Name = "chkDisablePA12";
+            this.chkDisablePA12.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA12.TabIndex = 219;
+            this.chkDisablePA12.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA11
+            // 
+            this.chkDisablePA11.Enabled = false;
+            this.chkDisablePA11.Image = null;
+            this.chkDisablePA11.Location = new System.Drawing.Point(820, 312);
+            this.chkDisablePA11.Name = "chkDisablePA11";
+            this.chkDisablePA11.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA11.TabIndex = 218;
+            this.chkDisablePA11.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA10
+            // 
+            this.chkDisablePA10.Enabled = false;
+            this.chkDisablePA10.Image = null;
+            this.chkDisablePA10.Location = new System.Drawing.Point(820, 288);
+            this.chkDisablePA10.Name = "chkDisablePA10";
+            this.chkDisablePA10.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA10.TabIndex = 217;
+            this.chkDisablePA10.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA9
+            // 
+            this.chkDisablePA9.Enabled = false;
+            this.chkDisablePA9.Image = null;
+            this.chkDisablePA9.Location = new System.Drawing.Point(820, 264);
+            this.chkDisablePA9.Name = "chkDisablePA9";
+            this.chkDisablePA9.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA9.TabIndex = 216;
+            this.chkDisablePA9.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA8
+            // 
+            this.chkDisablePA8.Enabled = false;
+            this.chkDisablePA8.Image = null;
+            this.chkDisablePA8.Location = new System.Drawing.Point(820, 240);
+            this.chkDisablePA8.Name = "chkDisablePA8";
+            this.chkDisablePA8.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA8.TabIndex = 215;
+            this.chkDisablePA8.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA7
+            // 
+            this.chkDisablePA7.Enabled = false;
+            this.chkDisablePA7.Image = null;
+            this.chkDisablePA7.Location = new System.Drawing.Point(820, 216);
+            this.chkDisablePA7.Name = "chkDisablePA7";
+            this.chkDisablePA7.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA7.TabIndex = 214;
+            this.chkDisablePA7.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA6
+            // 
+            this.chkDisablePA6.Enabled = false;
+            this.chkDisablePA6.Image = null;
+            this.chkDisablePA6.Location = new System.Drawing.Point(820, 192);
+            this.chkDisablePA6.Name = "chkDisablePA6";
+            this.chkDisablePA6.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA6.TabIndex = 213;
+            this.chkDisablePA6.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA5
+            // 
+            this.chkDisablePA5.Enabled = false;
+            this.chkDisablePA5.Image = null;
+            this.chkDisablePA5.Location = new System.Drawing.Point(820, 168);
+            this.chkDisablePA5.Name = "chkDisablePA5";
+            this.chkDisablePA5.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA5.TabIndex = 212;
+            this.chkDisablePA5.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA4
+            // 
+            this.chkDisablePA4.Enabled = false;
+            this.chkDisablePA4.Image = null;
+            this.chkDisablePA4.Location = new System.Drawing.Point(820, 144);
+            this.chkDisablePA4.Name = "chkDisablePA4";
+            this.chkDisablePA4.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA4.TabIndex = 211;
+            this.chkDisablePA4.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA3
+            // 
+            this.chkDisablePA3.Enabled = false;
+            this.chkDisablePA3.Image = null;
+            this.chkDisablePA3.Location = new System.Drawing.Point(820, 120);
+            this.chkDisablePA3.Name = "chkDisablePA3";
+            this.chkDisablePA3.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA3.TabIndex = 210;
+            this.chkDisablePA3.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA2
+            // 
+            this.chkDisablePA2.Enabled = false;
+            this.chkDisablePA2.Image = null;
+            this.chkDisablePA2.Location = new System.Drawing.Point(820, 96);
+            this.chkDisablePA2.Name = "chkDisablePA2";
+            this.chkDisablePA2.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA2.TabIndex = 209;
+            this.chkDisablePA2.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA1
+            // 
+            this.chkDisablePA1.Enabled = false;
+            this.chkDisablePA1.Image = null;
+            this.chkDisablePA1.Location = new System.Drawing.Point(820, 72);
+            this.chkDisablePA1.Name = "chkDisablePA1";
+            this.chkDisablePA1.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA1.TabIndex = 208;
+            this.chkDisablePA1.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // chkDisablePA0
+            // 
+            this.chkDisablePA0.Enabled = false;
+            this.chkDisablePA0.Image = null;
+            this.chkDisablePA0.Location = new System.Drawing.Point(820, 48);
+            this.chkDisablePA0.Name = "chkDisablePA0";
+            this.chkDisablePA0.Size = new System.Drawing.Size(16, 16);
+            this.chkDisablePA0.TabIndex = 207;
+            this.chkDisablePA0.CheckedChanged += new System.EventHandler(this.chkDisablePA_CheckedChanged);
+            // 
+            // lblDisablePA
+            // 
+            this.lblDisablePA.Image = null;
+            this.lblDisablePA.Location = new System.Drawing.Point(812, 16);
+            this.lblDisablePA.Name = "lblDisablePA";
+            this.lblDisablePA.Size = new System.Drawing.Size(42, 32);
+            this.lblDisablePA.TabIndex = 221;
+            this.lblDisablePA.Text = "Disable PA";
             // 
             // chkUseXVTRTUNPWR
             // 
@@ -4345,159 +4499,6 @@ namespace PowerSDR
             this.lblBandButton.TabIndex = 0;
             this.lblBandButton.Text = "Band Button";
             // 
-            // chkDisablePA15
-            // 
-            this.chkDisablePA15.Enabled = false;
-            this.chkDisablePA15.Image = null;
-            this.chkDisablePA15.Location = new System.Drawing.Point(820, 408);
-            this.chkDisablePA15.Name = "chkDisablePA15";
-            this.chkDisablePA15.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA15.TabIndex = 223;
-            // 
-            // chkDisablePA14
-            // 
-            this.chkDisablePA14.Enabled = false;
-            this.chkDisablePA14.Image = null;
-            this.chkDisablePA14.Location = new System.Drawing.Point(820, 384);
-            this.chkDisablePA14.Name = "chkDisablePA14";
-            this.chkDisablePA14.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA14.TabIndex = 222;
-            // 
-            // chkDisablePA13
-            // 
-            this.chkDisablePA13.Enabled = false;
-            this.chkDisablePA13.Image = null;
-            this.chkDisablePA13.Location = new System.Drawing.Point(820, 360);
-            this.chkDisablePA13.Name = "chkDisablePA13";
-            this.chkDisablePA13.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA13.TabIndex = 220;
-            // 
-            // chkDisablePA12
-            // 
-            this.chkDisablePA12.Enabled = false;
-            this.chkDisablePA12.Image = null;
-            this.chkDisablePA12.Location = new System.Drawing.Point(820, 336);
-            this.chkDisablePA12.Name = "chkDisablePA12";
-            this.chkDisablePA12.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA12.TabIndex = 219;
-            // 
-            // chkDisablePA11
-            // 
-            this.chkDisablePA11.Enabled = false;
-            this.chkDisablePA11.Image = null;
-            this.chkDisablePA11.Location = new System.Drawing.Point(820, 312);
-            this.chkDisablePA11.Name = "chkDisablePA11";
-            this.chkDisablePA11.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA11.TabIndex = 218;
-            // 
-            // chkDisablePA10
-            // 
-            this.chkDisablePA10.Enabled = false;
-            this.chkDisablePA10.Image = null;
-            this.chkDisablePA10.Location = new System.Drawing.Point(820, 288);
-            this.chkDisablePA10.Name = "chkDisablePA10";
-            this.chkDisablePA10.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA10.TabIndex = 217;
-            // 
-            // chkDisablePA9
-            // 
-            this.chkDisablePA9.Enabled = false;
-            this.chkDisablePA9.Image = null;
-            this.chkDisablePA9.Location = new System.Drawing.Point(820, 264);
-            this.chkDisablePA9.Name = "chkDisablePA9";
-            this.chkDisablePA9.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA9.TabIndex = 216;
-            // 
-            // chkDisablePA8
-            // 
-            this.chkDisablePA8.Enabled = false;
-            this.chkDisablePA8.Image = null;
-            this.chkDisablePA8.Location = new System.Drawing.Point(820, 240);
-            this.chkDisablePA8.Name = "chkDisablePA8";
-            this.chkDisablePA8.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA8.TabIndex = 215;
-            // 
-            // chkDisablePA7
-            // 
-            this.chkDisablePA7.Enabled = false;
-            this.chkDisablePA7.Image = null;
-            this.chkDisablePA7.Location = new System.Drawing.Point(820, 216);
-            this.chkDisablePA7.Name = "chkDisablePA7";
-            this.chkDisablePA7.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA7.TabIndex = 214;
-            // 
-            // chkDisablePA6
-            // 
-            this.chkDisablePA6.Enabled = false;
-            this.chkDisablePA6.Image = null;
-            this.chkDisablePA6.Location = new System.Drawing.Point(820, 192);
-            this.chkDisablePA6.Name = "chkDisablePA6";
-            this.chkDisablePA6.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA6.TabIndex = 213;
-            // 
-            // chkDisablePA5
-            // 
-            this.chkDisablePA5.Enabled = false;
-            this.chkDisablePA5.Image = null;
-            this.chkDisablePA5.Location = new System.Drawing.Point(820, 168);
-            this.chkDisablePA5.Name = "chkDisablePA5";
-            this.chkDisablePA5.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA5.TabIndex = 212;
-            // 
-            // chkDisablePA4
-            // 
-            this.chkDisablePA4.Enabled = false;
-            this.chkDisablePA4.Image = null;
-            this.chkDisablePA4.Location = new System.Drawing.Point(820, 144);
-            this.chkDisablePA4.Name = "chkDisablePA4";
-            this.chkDisablePA4.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA4.TabIndex = 211;
-            // 
-            // chkDisablePA3
-            // 
-            this.chkDisablePA3.Enabled = false;
-            this.chkDisablePA3.Image = null;
-            this.chkDisablePA3.Location = new System.Drawing.Point(820, 120);
-            this.chkDisablePA3.Name = "chkDisablePA3";
-            this.chkDisablePA3.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA3.TabIndex = 210;
-            // 
-            // chkDisablePA2
-            // 
-            this.chkDisablePA2.Enabled = false;
-            this.chkDisablePA2.Image = null;
-            this.chkDisablePA2.Location = new System.Drawing.Point(820, 96);
-            this.chkDisablePA2.Name = "chkDisablePA2";
-            this.chkDisablePA2.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA2.TabIndex = 209;
-            // 
-            // chkDisablePA1
-            // 
-            this.chkDisablePA1.Enabled = false;
-            this.chkDisablePA1.Image = null;
-            this.chkDisablePA1.Location = new System.Drawing.Point(820, 72);
-            this.chkDisablePA1.Name = "chkDisablePA1";
-            this.chkDisablePA1.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA1.TabIndex = 208;
-            // 
-            // chkDisablePA0
-            // 
-            this.chkDisablePA0.Enabled = false;
-            this.chkDisablePA0.Image = null;
-            this.chkDisablePA0.Location = new System.Drawing.Point(820, 48);
-            this.chkDisablePA0.Name = "chkDisablePA0";
-            this.chkDisablePA0.Size = new System.Drawing.Size(16, 16);
-            this.chkDisablePA0.TabIndex = 207;
-            // 
-            // lblDisablePA
-            // 
-            this.lblDisablePA.Image = null;
-            this.lblDisablePA.Location = new System.Drawing.Point(812, 16);
-            this.lblDisablePA.Name = "lblDisablePA";
-            this.lblDisablePA.Size = new System.Drawing.Size(42, 32);
-            this.lblDisablePA.TabIndex = 221;
-            this.lblDisablePA.Text = "Disable PA";
-            // 
             // XVTRForm
             // 
             this.ClientSize = new System.Drawing.Size(859, 454);
@@ -4518,7 +4519,6 @@ namespace PowerSDR
             this.Controls.Add(this.chkDisablePA1);
             this.Controls.Add(this.chkDisablePA0);
             this.Controls.Add(this.lblDisablePA);
-            this.Controls.Add(this.chkAlexTRRelay);
             this.Controls.Add(this.chkUseXVTRTUNPWR);
             this.Controls.Add(this.udRXGain15);
             this.Controls.Add(this.udRXGain14);
@@ -5453,24 +5453,6 @@ namespace PowerSDR
 			}
 		}
 
-        private void chkAlexTRRelay_CheckedChanged(object sender, EventArgs e)
-        {
-          //  console.VHFTRRelay = chkAlexTRRelay.Checked;
-        }
-
-        public bool AlexTRRelay
-        {
-            get
-            {
-                if (chkAlexTRRelay != null) return chkAlexTRRelay.Checked;
-                else return false;
-            }
-            set
-            {
-                if (chkAlexTRRelay != null) chkAlexTRRelay.Checked = value;
-            }
-        }
-
         private void XVTRForm_Paint(object sender, PaintEventArgs e)
         {
 
@@ -5480,6 +5462,15 @@ namespace PowerSDR
         {
             int index = int.Parse(((Control)sender).Name.Substring(7));
             console.SetPower((Band)((int)Band.VHF0 + index), (int)((NumericUpDownTS)sender).Value);
+        }
+
+        private void chkDisablePA_CheckedChanged(object sender, EventArgs e)
+        {
+            int index = int.Parse(((Control)sender).Name.Substring(12));
+            if (console.RX1XVTRIndex == index)
+            {
+                console.VFOAFreq = console.VFOAFreq;
+            }
         }
 
 

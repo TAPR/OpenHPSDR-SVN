@@ -7668,7 +7668,11 @@ namespace PowerSDR
             {
                 if (local_mox)
                     vfo = vfob_hz + xit_hz;
-                else vfo = vfob_hz + rit_hz;
+                else
+                {
+                    if (console.VFOSync) vfo = vfob_hz + rit_hz;
+                    else vfo = vfob_hz;
+                }
             }
 
             if (!bottom)
