@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewFrequency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:columnCount="5"
+                android:rowCount="3">
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:text="1" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:text="2" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="2"
+                    android:layout_row="0"
+                    android:text="3" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="3"
+                    android:layout_row="0"
+                    android:text="4" />
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="4"
+                    android:layout_row="0"
+                    android:text="5" />
+
+                <Button
+                    android:id="@+id/button6"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="0"
+                    android:layout_row="1"
+                    android:text="6" />
+
+                <Button
+                    android:id="@+id/button7"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="1"
+                    android:layout_row="1"
+                    android:text="7" />
+
+                <Button
+                    android:id="@+id/button8"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="2"
+                    android:layout_row="1"
+                    android:text="8" />
+
+                <Button
+                    android:id="@+id/button9"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="3"
+                    android:layout_row="1"
+                    android:text="9" />
+
+                <Button
+                    android:id="@+id/button0"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="4"
+                    android:layout_row="1"
+                    android:text="0" />
+
+                <Button
+                    android:id="@+id/buttonClear"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="1"
+                    android:layout_row="2"
+                    android:text="C" />
+
+                <Button
+                    android:id="@+id/buttonDelete"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_column="3"
+                    android:layout_row="2"
+                    android:text="&lt;X" />
+
+            </GridLayout>
+
+            <Button
+                android:id="@+id/buttonSetFrequency"
+                android:layout_width="292dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Set Frequency" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout><!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/layout/dialog_frequency.xml -->
