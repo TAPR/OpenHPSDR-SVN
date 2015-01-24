@@ -311,7 +311,6 @@ namespace PowerSDR
             // chkEnableDiversity
             // 
             this.chkEnableDiversity.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkEnableDiversity.AutoSize = true;
             this.chkEnableDiversity.BackColor = System.Drawing.SystemColors.Control;
             this.chkEnableDiversity.Checked = true;
             this.chkEnableDiversity.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -319,9 +318,10 @@ namespace PowerSDR
             this.chkEnableDiversity.Image = null;
             this.chkEnableDiversity.Location = new System.Drawing.Point(381, 53);
             this.chkEnableDiversity.Name = "chkEnableDiversity";
-            this.chkEnableDiversity.Size = new System.Drawing.Size(56, 23);
+            this.chkEnableDiversity.Size = new System.Drawing.Size(66, 23);
             this.chkEnableDiversity.TabIndex = 101;
-            this.chkEnableDiversity.Text = "Enable";
+            this.chkEnableDiversity.Text = "Enabled";
+            this.chkEnableDiversity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkEnableDiversity.UseVisualStyleBackColor = false;
             this.chkEnableDiversity.CheckedChanged += new System.EventHandler(this.chkEnableDiversity_CheckedChanged);
             // 
@@ -1755,8 +1755,15 @@ namespace PowerSDR
         {
             console.Diversity2 = chkEnableDiversity.Checked;
             if (chkEnableDiversity.Checked)
+            {
                 chkEnableDiversity.BackColor = Color.LimeGreen;
-            else chkEnableDiversity.BackColor = Color.Red;
+                chkEnableDiversity.Text = "Enabled";
+            }
+            else
+            {
+                chkEnableDiversity.BackColor = Color.Red;
+                chkEnableDiversity.Text = "Disabled";
+            }
         }
     }
 }

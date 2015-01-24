@@ -26,10 +26,11 @@ warren@wpratt.com
 
 #include "comm.h"
 
-GAIN create_gain (int run, int size, double* in, double* out, double Igain, double Qgain)
+GAIN create_gain (int run, int* prun, int size, double* in, double* out, double Igain, double Qgain)
 {
 	GAIN a = (GAIN) malloc0 (sizeof (gain));
 	a->run = run;
+	a->prun = prun;
 	a->size = size;
 	a->in = in;
 	a->out = out;
@@ -50,7 +51,12 @@ void flush_gain (GAIN a)
 
 void xgain (GAIN a)
 {
-	if (a->run)
+	int srun;
+	if (a->prun != 0)
+		srun = *(a->prun);
+	else
+		srun = 1;
+	if (a->run && srun)
 	{
 		int i;
 		for (i = 0; i < a->size; i++)

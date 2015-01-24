@@ -3,6 +3,7 @@
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2004-2009  FlexRadio Systems
+// Copyright (C) 2010-2015  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -195,6 +196,7 @@ namespace PowerSDR
             this.BinOn = rx.bin_on;
             this.RXSquelchThreshold = rx.rx_squelch_threshold;
             this.FMSquelchThreshold = rx.fm_squelch_threshold;
+            this.RXAMSquelchMaxTail = rx.rx_am_squelch_max_tail;
             this.RXAMSquelchOn = rx.rx_am_squelch_on;
             this.SpectrumPreFilter = rx.spectrum_pre_filter;
             this.Active = rx.active;
@@ -265,6 +267,7 @@ namespace PowerSDR
 			RXAGCHangThreshold = rx_agc_hang_threshold;
 			BinOn = bin_on;
 			RXSquelchThreshold = rx_squelch_threshold;
+            RXAMSquelchMaxTail = rx_am_squelch_max_tail;
 			RXAMSquelchOn = rx_am_squelch_on;
             FMSquelchThreshold = fm_squelch_threshold;
             SpectrumPreFilter = spectrum_pre_filter;
@@ -344,8 +347,8 @@ namespace PowerSDR
 					if(value != buffer_size_dsp || force)
 					{
 						//Debug.WriteLine("RX "+thread+":"+subrx+" "+value);
-                        wdsp.SetDSPBuffsize(wdsp.id(thread, 0), value);
-                        wdsp.SetDSPBuffsize(wdsp.id(thread, 1), value);
+                        wdsp.SetDSPBuffsize(wdsp.id(thread, subrx), value);
+                        //wdsp.SetDSPBuffsize(wdsp.id(thread, 1), value);
 						buffer_size_dsp = value;
 						//SyncAll();
 					}
@@ -959,7 +962,7 @@ namespace PowerSDR
                 }
             }
         }
-
+       
         private float fm_squelch_threshold = 1.0f;
         private float fm_squelch_threshold_dsp = 1.0f;
         public float FMSquelchThreshold
@@ -978,7 +981,6 @@ namespace PowerSDR
                     }
             }
         }
-
 
 		private bool rx_am_squelch_on_dsp = false;
 		private bool rx_am_squelch_on = false;
@@ -1017,7 +1019,26 @@ namespace PowerSDR
                 }
             }
         }
-        
+
+        private double rx_am_squelch_max_tail_dsp = 1.5;
+        private double rx_am_squelch_max_tail = 1.5;
+        public double RXAMSquelchMaxTail
+        {
+            get { return rx_am_squelch_max_tail; }
+            set
+            {
+                rx_am_squelch_max_tail = value;
+                if (update)
+                {
+                    if (value != rx_am_squelch_max_tail_dsp || force)
+                    {
+                        wdsp.SetRXAAMSQMaxTail(wdsp.id(thread, subrx), value);
+                        rx_am_squelch_max_tail_dsp = value;
+                    }
+                }
+            }
+        }
+ 
         private bool spectrum_pre_filter_dsp = true;
 		private bool spectrum_pre_filter = true;
 		public bool SpectrumPreFilter
@@ -1666,6 +1687,7 @@ namespace PowerSDR
 			TXSquelchOn = tx_squelch_on;
 			TXCompandOn = tx_compand_on;
 			TXCompandLevel = tx_compand_level;
+            TXOsctrlOn = tx_osctrl_on;
 			SpectrumPreFilter = spectrum_pre_filter;
             CTCSSFreqHz = ctcss_freq_hz;
             TXFMDeviation = tx_fm_deviation;
@@ -2251,6 +2273,26 @@ namespace PowerSDR
 				}
 			}
 		}
+
+        private bool tx_osctrl_on_dsp = false;
+        private bool tx_osctrl_on = false;
+        public bool TXOsctrlOn
+        {
+            get { return tx_osctrl_on; }
+            set
+            {
+                tx_osctrl_on = value;
+
+                if (update)
+                {
+                    if (value != tx_osctrl_on_dsp || force)
+                    {
+                        wdsp.SetTXAosctrlRun(wdsp.id(thread, 0), value);
+                        tx_osctrl_on_dsp = value;
+                    }
+                }
+            }
+        }
 
 		private bool spectrum_pre_filter_dsp = true;
 		private bool spectrum_pre_filter = true;

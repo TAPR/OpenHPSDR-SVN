@@ -3,7 +3,7 @@
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2004-2009  FlexRadio Systems
-// Copyright (C) 2010-2013  Doug Wigley
+// Copyright (C) 2010-2015  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -2736,6 +2736,8 @@ namespace PowerSDR
             chkCWKeyerIambic_CheckedChanged(this, e);
             udCWKeyerWeight_ValueChanged(this, e);
             chkStrictCharSpacing_CheckedChanged(this, e);
+            chkDSPCESSB_CheckedChanged(this, e);
+            udRXAMSQMaxTail_ValueChanged(this, e);
             //AGC
             udDSPAGCFixedGaindB_ValueChanged(this, e);
             udDSPAGCMaxGaindB_ValueChanged(this, e);
@@ -11649,31 +11651,31 @@ namespace PowerSDR
 
         private void chkShowTopControls_CheckedChanged(object sender, EventArgs e)
         {
-            this.console.ShowTopControls = chkShowTopControls.Checked;
-            this.console.topControlsToolStripMenuItem.Checked = chkShowTopControls.Checked;
-            this.console.bandToolStripMenuItem.Visible = !chkShowBandControls.Checked;
+            console.ShowTopControls = chkShowTopControls.Checked;
+            console.topControlsToolStripMenuItem.Checked = chkShowTopControls.Checked;
+            console.bandToolStripMenuItem.Visible = !chkShowBandControls.Checked;
 
-            if (this.console.CollapsedDisplay)
-                this.console.CollapseDisplay();
+            if (console.CollapsedDisplay)
+               console.CollapseDisplay();
         }
 
         private void chkShowBandControls_CheckedChanged(object sender, EventArgs e)
         {
-            this.console.ShowBandControls = chkShowBandControls.Checked;
-            this.console.bandControlsToolStripMenuItem.Checked = chkShowBandControls.Checked;
-            this.console.modeToolStripMenuItem.Visible = !chkShowModeControls.Checked;
+            console.ShowBandControls = chkShowBandControls.Checked;
+            console.bandControlsToolStripMenuItem.Checked = chkShowBandControls.Checked;
+            console.modeToolStripMenuItem.Visible = !chkShowModeControls.Checked;
 
-            if (this.console.CollapsedDisplay)
-                this.console.CollapseDisplay();
+            if (console.CollapsedDisplay)
+                console.CollapseDisplay();
         }
 
         private void chkModeControls_CheckedChanged(object sender, EventArgs e)
         {
-            this.console.ShowModeControls = chkShowModeControls.Checked;
-            this.console.modeControlsToolStripMenuItem.Checked = chkShowModeControls.Checked;
+            console.ShowModeControls = chkShowModeControls.Checked;
+            console.modeControlsToolStripMenuItem.Checked = chkShowModeControls.Checked;
 
-            if (this.console.CollapsedDisplay)
-                this.console.CollapseDisplay();
+            if (console.CollapsedDisplay)
+               console.CollapseDisplay();
         }
 
 
@@ -18787,6 +18789,28 @@ namespace PowerSDR
             comboCATPTTPort.Items.Add("None");
             comboCATPTTPort.Items.Add("CAT");
             comboCATPTTPort.Items.AddRange(com_ports);
+        }
+
+        private void chkDSPCESSB_CheckedChanged(object sender, EventArgs e)
+        {
+            console.TxOsctrl = chkDSPCESSB.Checked;
+            if (chkDSPCESSB.Checked)
+            {
+                if (console.radio.GetDSPTX(0).TXCompandOn)
+                    console.radio.GetDSPTX(0).TXOsctrlOn = true;
+            }
+            else
+            {
+                console.radio.GetDSPTX(0).TXOsctrlOn = false;
+            }
+        }
+
+        private void udRXAMSQMaxTail_ValueChanged(object sender, EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).RXAMSquelchMaxTail = (double)udRXAMSQMaxTail.Value;
+            console.radio.GetDSPRX(0, 1).RXAMSquelchMaxTail = (double)udRXAMSQMaxTail.Value;
+            console.radio.GetDSPRX(1, 0).RXAMSquelchMaxTail = (double)udRXAMSQMaxTail.Value;
+            console.radio.GetDSPRX(1, 1).RXAMSquelchMaxTail = (double)udRXAMSQMaxTail.Value;
         }
 
     }

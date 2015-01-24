@@ -118,6 +118,7 @@
     <ClInclude Include="meterlog10.h" />
     <ClInclude Include="nob.h" />
     <ClInclude Include="nobII.h" />
+    <ClInclude Include="osctrl.h" />
     <ClInclude Include="patchpanel.h" />
     <ClInclude Include="resample.h" />
     <ClInclude Include="RXA.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="meter.c" />
     <ClCompile Include="nob.c" />
     <ClCompile Include="nobII.c" />
+    <ClCompile Include="osctrl.c" />
     <ClCompile Include="patchpanel.c" />
     <ClCompile Include="resample.c" />
     <ClCompile Include="RXA.c" />

@@ -98,11 +98,15 @@ struct _txa
 	struct
 	{
 		BANDPASS p;
-	} bp0, bp1;
+	} bp0, bp1, bp2;
+	struct
+	{
+		OSCTRL p;
+	} osctrl;
 	struct
 	{
 		GAIN p;
-	} pfgain;
+	} pfgain0, pfgain1;
 	struct
 	{
 		WCPAGC p;

@@ -169,7 +169,27 @@ void SetTXABandpassFreqs (int channel, double f_low, double f_high)
 	double* impulse;
 	BANDPASS a;
 	EnterCriticalSection (&ch[channel].csDSP);
+	a = txa[channel].bp0.p;
+	if ((f_low != a->f_low) || (f_high != a->f_high))
+	{
+		a->f_low = f_low;
+		a->f_high = f_high;
+		_aligned_free (a->mults);
+		impulse = fir_bandpass (a->size + 1, f_low, f_high, a->samplerate, a->wintype, 1, a->gain / (2 * a->size));
+		a->mults = fftcv_mults (2 * a->size, impulse);
+		_aligned_free (impulse);
+	}
 	a = txa[channel].bp1.p;
+	if ((f_low != a->f_low) || (f_high != a->f_high))
+	{
+		a->f_low = f_low;
+		a->f_high = f_high;
+		_aligned_free (a->mults);
+		impulse = fir_bandpass (a->size + 1, f_low, f_high, a->samplerate, a->wintype, 1, a->gain / (2 * a->size));
+		a->mults = fftcv_mults (2 * a->size, impulse);
+		_aligned_free (impulse);
+	}
+	a = txa[channel].bp2.p;
 	if ((f_low != a->f_low) || (f_high != a->f_high))
 	{
 		a->f_low = f_low;
@@ -188,7 +208,25 @@ void SetTXABandpassWindow (int channel, int wintype)
 	double* impulse;
 	BANDPASS a;
 	EnterCriticalSection (&ch[channel].csDSP);
+	a = txa[channel].bp0.p;
+	if (a->wintype != wintype)
+	{
+		a->wintype = wintype;
+		_aligned_free (a->mults);
+		impulse = fir_bandpass (a->size + 1, a->f_low, a->f_high, a->samplerate, a->wintype, 1, a->gain / (2 * a->size));
+		a->mults = fftcv_mults (2 * a->size, impulse);
+		_aligned_free (impulse);
+	}
 	a = txa[channel].bp1.p;
+	if (a->wintype != wintype)
+	{
+		a->wintype = wintype;
+		_aligned_free (a->mults);
+		impulse = fir_bandpass (a->size + 1, a->f_low, a->f_high, a->samplerate, a->wintype, 1, a->gain / (2 * a->size));
+		a->mults = fftcv_mults (2 * a->size, impulse);
+		_aligned_free (impulse);
+	}
+	a = txa[channel].bp2.p;
 	if (a->wintype != wintype)
 	{
 		a->wintype = wintype;

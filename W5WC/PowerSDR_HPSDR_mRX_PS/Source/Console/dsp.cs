@@ -2,7 +2,7 @@
 
 This file is part of a program that implements a Software-Defined Radio.
 
-Copyright (C) 2013 Warren Pratt, NR0V
+Copyright (C) 2013-2015 Warren Pratt, NR0V
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -142,6 +142,9 @@ namespace PowerSDR
         [DllImport("wdsp.dll", EntryPoint = "SetRXAAMSQThreshold", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAMSQThreshold(int channel, double threshold);
 
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAAMSQMaxTail", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXAAMSQMaxTail(int channel, double tail);
+
         [DllImport("wdsp.dll", EntryPoint = "SetTXAAMSQRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAAMSQRun(int channel, bool run);
 
@@ -216,6 +219,9 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "SetTXACompressorGain", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXACompressorGain(int channel, double gain);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAosctrlRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAosctrlRun(int channel, bool run);
 
         [DllImport("wdsp.dll", EntryPoint = "SetRXAEQRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAEQRun(int channel, bool run);

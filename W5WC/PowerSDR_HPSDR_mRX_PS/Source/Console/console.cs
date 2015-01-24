@@ -3,7 +3,7 @@
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2004-2009  FlexRadio Systems 
-// Copyright (C) 2010-2013  Doug Wigley
+// Copyright (C) 2010-2015  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -904,6 +904,9 @@ namespace PowerSDR
         private Point pic_rx2meter_basis = new Point(100, 100);
         private Size pic_rx2meter_size_basis = new Size(100, 100);
         private Point lbl_multi_smeter_basis = new Point(100, 100);
+        private Size lbl_multi_smeter_size_basis = new Size(100, 100);
+        private Point lbl_rx2meter_basis = new Point(100, 100);
+        private Size lbl_rx2meter_size_basis = new Size(100, 100);
         private Point txt_multi_text_basis = new Point(100, 100);
         private Point txt_rx2meter_basis = new Point(100, 100);
         private Point chk_power_basis = new Point(100, 100);		//k6jca
@@ -2295,8 +2298,8 @@ namespace PowerSDR
             this.btnBandHF = new System.Windows.Forms.ButtonTS();
             this.grpMultimeter = new System.Windows.Forms.GroupBoxTS();
             this.picMultiMeterDigital = new System.Windows.Forms.PictureBox();
-            this.lblMultiSMeter = new System.Windows.Forms.LabelTS();
             this.txtMultiText = new System.Windows.Forms.TextBoxTS();
+            this.lblMultiSMeter = new System.Windows.Forms.LabelTS();
             this.lblTuneStep = new System.Windows.Forms.LabelTS();
             this.grpVFOBetween = new System.Windows.Forms.GroupBoxTS();
             this.lblDisplayModeTop = new System.Windows.Forms.LabelTS();
@@ -2304,8 +2307,8 @@ namespace PowerSDR
             this.grpDisplaySplit = new System.Windows.Forms.GroupBoxTS();
             this.grpRX2Meter = new System.Windows.Forms.GroupBoxTS();
             this.picRX2Meter = new System.Windows.Forms.PictureBox();
-            this.lblRX2Meter = new System.Windows.Forms.LabelTS();
             this.txtRX2Meter = new System.Windows.Forms.TextBoxTS();
+            this.lblRX2Meter = new System.Windows.Forms.LabelTS();
             this.panelBandVHF = new System.Windows.Forms.PanelTS();
             this.radBandVHF13 = new System.Windows.Forms.RadioButtonTS();
             this.radBandVHF12 = new System.Windows.Forms.RadioButtonTS();
@@ -2551,6 +2554,7 @@ namespace PowerSDR
             this.chkMON.Name = "chkMON";
             this.toolTip1.SetToolTip(this.chkMON, resources.GetString("chkMON.ToolTip"));
             this.chkMON.CheckedChanged += new System.EventHandler(this.chkMON_CheckedChanged);
+            this.chkMON.Click += new System.EventHandler(this.chkMON_Click);
             // 
             // ckQuickRec
             // 
@@ -6200,7 +6204,6 @@ namespace PowerSDR
             this.panelModeSpecificPhone.Controls.Add(this.lblDXVal);
             this.panelModeSpecificPhone.Controls.Add(this.lblMicVal);
             this.panelModeSpecificPhone.Controls.Add(this.ptbMic);
-            this.panelModeSpecificPhone.Controls.Add(this.lblCPUMeter);
             this.panelModeSpecificPhone.Controls.Add(this.lblMIC);
             this.panelModeSpecificPhone.Controls.Add(this.chkShowTXFilter);
             this.panelModeSpecificPhone.Controls.Add(this.chkDX);
@@ -6211,6 +6214,7 @@ namespace PowerSDR
             this.panelModeSpecificPhone.Controls.Add(this.chkCPDR);
             this.panelModeSpecificPhone.Controls.Add(this.chkVOX);
             this.panelModeSpecificPhone.Controls.Add(this.chkNoiseGate);
+            this.panelModeSpecificPhone.Controls.Add(this.lblCPUMeter);
             this.panelModeSpecificPhone.Name = "panelModeSpecificPhone";
             // 
             // picNoiseGate
@@ -6817,8 +6821,8 @@ namespace PowerSDR
             this.grpMultimeter.Controls.Add(this.picMultiMeterDigital);
             this.grpMultimeter.Controls.Add(this.comboMeterTXMode);
             this.grpMultimeter.Controls.Add(this.comboMeterRXMode);
-            this.grpMultimeter.Controls.Add(this.lblMultiSMeter);
             this.grpMultimeter.Controls.Add(this.txtMultiText);
+            this.grpMultimeter.Controls.Add(this.lblMultiSMeter);
             this.grpMultimeter.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.grpMultimeter, "grpMultimeter");
             this.grpMultimeter.Name = "grpMultimeter";
@@ -6833,13 +6837,6 @@ namespace PowerSDR
             this.picMultiMeterDigital.TabStop = false;
             this.picMultiMeterDigital.Paint += new System.Windows.Forms.PaintEventHandler(this.picMultiMeterDigital_Paint);
             // 
-            // lblMultiSMeter
-            // 
-            this.lblMultiSMeter.BackColor = System.Drawing.Color.Transparent;
-            this.lblMultiSMeter.ForeColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.lblMultiSMeter, "lblMultiSMeter");
-            this.lblMultiSMeter.Name = "lblMultiSMeter";
-            // 
             // txtMultiText
             // 
             this.txtMultiText.BackColor = System.Drawing.Color.Black;
@@ -6849,6 +6846,13 @@ namespace PowerSDR
             this.txtMultiText.Name = "txtMultiText";
             this.txtMultiText.ReadOnly = true;
             this.txtMultiText.GotFocus += new System.EventHandler(this.HideFocus);
+            // 
+            // lblMultiSMeter
+            // 
+            this.lblMultiSMeter.BackColor = System.Drawing.Color.Transparent;
+            this.lblMultiSMeter.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.lblMultiSMeter, "lblMultiSMeter");
+            this.lblMultiSMeter.Name = "lblMultiSMeter";
             // 
             // lblTuneStep
             // 
@@ -6898,9 +6902,9 @@ namespace PowerSDR
             // 
             this.grpRX2Meter.BackColor = System.Drawing.Color.Transparent;
             this.grpRX2Meter.Controls.Add(this.picRX2Meter);
-            this.grpRX2Meter.Controls.Add(this.lblRX2Meter);
             this.grpRX2Meter.Controls.Add(this.comboRX2MeterMode);
             this.grpRX2Meter.Controls.Add(this.txtRX2Meter);
+            this.grpRX2Meter.Controls.Add(this.lblRX2Meter);
             this.grpRX2Meter.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.grpRX2Meter, "grpRX2Meter");
             this.grpRX2Meter.Name = "grpRX2Meter";
@@ -6915,11 +6919,6 @@ namespace PowerSDR
             this.picRX2Meter.TabStop = false;
             this.picRX2Meter.Paint += new System.Windows.Forms.PaintEventHandler(this.picRX2Meter_Paint);
             // 
-            // lblRX2Meter
-            // 
-            resources.ApplyResources(this.lblRX2Meter, "lblRX2Meter");
-            this.lblRX2Meter.Name = "lblRX2Meter";
-            // 
             // txtRX2Meter
             // 
             this.txtRX2Meter.BackColor = System.Drawing.Color.Black;
@@ -6928,6 +6927,13 @@ namespace PowerSDR
             this.txtRX2Meter.ForeColor = System.Drawing.Color.Yellow;
             this.txtRX2Meter.Name = "txtRX2Meter";
             this.txtRX2Meter.ReadOnly = true;
+            // 
+            // lblRX2Meter
+            // 
+            this.lblRX2Meter.BackColor = System.Drawing.Color.Transparent;
+            this.lblRX2Meter.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.lblRX2Meter, "lblRX2Meter");
+            this.lblRX2Meter.Name = "lblRX2Meter";
             // 
             // panelBandVHF
             // 
@@ -15220,7 +15226,7 @@ namespace PowerSDR
                     case Band.B17M:
                         diversityForm.DiversityGain = DiversityGain17m;
                         diversityForm.DiversityR2Gain = DiversityR2Gain17m;
-                       diversityForm.DiversityPhase = DiversityPhase17m;
+                        diversityForm.DiversityPhase = DiversityPhase17m;
                         break;
                     case Band.B15M:
                         diversityForm.DiversityGain = DiversityGain15m;
@@ -17436,6 +17442,7 @@ namespace PowerSDR
             set
             {
                 vhf_tr_relay = value;
+                txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             }
         }
 
@@ -17446,6 +17453,7 @@ namespace PowerSDR
             set
             {
                 hf_tr_relay = value;
+                txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             }
         }
 
@@ -18420,13 +18428,14 @@ namespace PowerSDR
                             case MultiMeterDisplayMode.Edge:
                                 break;
                             default:
-                                if (collapsedDisplay) return;
                                 picMultiMeterDigital.Height -= lblMultiSMeter.ClientSize.Height;
                                 picMultiMeterDigital.BackColor = meter_background_color;
                                 picRX2Meter.Height -= lblRX2Meter.ClientSize.Height;
                                 picRX2Meter.BackColor = meter_background_color;
                                 lblMultiSMeter.Show();
                                 lblRX2Meter.Show();
+                                if (comboMeterTXMode.Items.Contains("Fwd SWR"))
+                                    comboMeterTXMode.Items.Remove("Fwd SWR");
                                 break;
                         }
                         break;
@@ -18440,11 +18449,15 @@ namespace PowerSDR
                                 picRX2Meter.BackColor = edge_meter_background_color;
                                 lblMultiSMeter.Hide();
                                 lblRX2Meter.Hide();
+                                if (!comboMeterTXMode.Items.Contains("Fwd SWR"))
+                                    comboMeterTXMode.Items.Insert(3, "Fwd SWR");
                                 break;
                         }
                         break;
                 }
                 current_meter_display_mode = value;
+
+                if (collapsedDisplay) CollapseDisplay();
                 picMultiMeterDigital.Invalidate();
             }
         }
@@ -23209,7 +23222,7 @@ namespace PowerSDR
                 }
                 //r.Select();
                 r.PerformClick();
-               // r.Checked = true;
+                // r.Checked = true;
             }
         }
 
@@ -23745,7 +23758,7 @@ namespace PowerSDR
                     {
                         ptbAF.Value = txaf;
 
-                        if (CWSidetone)
+                        if (cw_sidetone)
                         {
                             JanusAudio.SetCWSidetoneVolume((int)(ptbAF.Value * 1.27));
                         }
@@ -26527,7 +26540,7 @@ namespace PowerSDR
             int pixel_x = 0;
             int pixel_x_swr = 0;
             string output = "";
-           
+
             switch (current_meter_display_mode)
             {
                 case MultiMeterDisplayMode.Original:
@@ -26553,24 +26566,52 @@ namespace PowerSDR
                                         double s;
                                         if (rx1_above30)
                                         {
-                                            s = (num + 147) / 6;
-                                            if (s <= 9.0F)
-                                                pixel_x = (int)((s * 7.5) + 2);
+                                            if (collapsedDisplay)
+                                            {
+                                                s = (num + 147) / 6;
+                                                if (s <= 9.0F)
+                                                    pixel_x = (int)((s * 15) + 2);
+                                                else
+                                                {
+                                                    double over_s9 = num + 93;
+                                                    pixel_x = 138 + (int)(over_s9 * 2.10);
+                                                }
+                                            }
                                             else
                                             {
-                                                double over_s9 = num + 93;
-                                                pixel_x = 69 + (int)(over_s9 * 1.05);
+                                                s = (num + 147) / 6;
+                                                if (s <= 9.0F)
+                                                    pixel_x = (int)((s * 7.5) + 2);
+                                                else
+                                                {
+                                                    double over_s9 = num + 93;
+                                                    pixel_x = 69 + (int)(over_s9 * 1.05);
+                                                }
                                             }
                                         }
                                         else
                                         {
-                                            s = (num + 127) / 6;
-                                            if (s <= 9.0F)
-                                                pixel_x = (int)((s * 7.5) + 2);
+                                            if (collapsedDisplay)
+                                            {
+                                                s = (num + 127) / 6;
+                                                if (s <= 9.0F)
+                                                    pixel_x = (int)((s * 15) + 2);
+                                                else
+                                                {
+                                                    double over_s9 = num + 73;
+                                                    pixel_x = 138 + (int)(over_s9 * 2.10);
+                                                }
+                                            }
                                             else
                                             {
-                                                double over_s9 = num + 73;
-                                                pixel_x = 69 + (int)(over_s9 * 1.05);
+                                                s = (num + 127) / 6;
+                                                if (s <= 9.0F)
+                                                    pixel_x = (int)((s * 7.5) + 2);
+                                                else
+                                                {
+                                                    double over_s9 = num + 73;
+                                                    pixel_x = 69 + (int)(over_s9 * 1.05);
+                                                }
                                             }
                                         }
                                         break;
@@ -26601,7 +26642,9 @@ namespace PowerSDR
                                 switch ((int)g.DpiX)
                                 {
                                     case 96:
-                                        pixel_x = (int)(((num + 100) * 1.2) + 12);
+                                        if (collapsedDisplay)
+                                            pixel_x = (int)(((num + 100) * 2.4) + 24);
+                                        else pixel_x = (int)(((num + 100) * 1.2) + 12);
                                         break;
                                     case 120:
                                         if (num <= -100.0f)
@@ -26642,22 +26685,44 @@ namespace PowerSDR
                                 switch ((int)g.DpiX)
                                 {
                                     case 96:
-                                        if (num <= -20.0f)
-                                            pixel_x = (int)(0 + (num + 25.0) / 5.0 * 9);
-                                        else if (num <= -10.0f)
-                                            pixel_x = (int)(9 + (num + 20.0) / 10.0 * 27);
-                                        else if (num <= -5.0f)
-                                            pixel_x = (int)(36 + (num + 10.0) / 5.0 * 27);
-                                        else if (num <= 0.0f)
-                                            pixel_x = (int)(63 + (num + 5.0) / 5.0 * 24);
-                                        else if (num <= 1.0f)
-                                            pixel_x = (int)(87 + (num - 0.0) / 1.0 * 15);
-                                        else if (num <= 2.0f)
-                                            pixel_x = (int)(102 + (num - 1.0) / 1.0 * 15);
-                                        else if (num <= 3.0f)
-                                            pixel_x = (int)(117 + (num - 2.0) / 1.0 * 15);
+                                        if (collapsedDisplay)
+                                        {
+                                            if (num <= -20.0f)
+                                                pixel_x = (int)(0 + (num + 25.0) / 5.0 * 18);
+                                            else if (num <= -10.0f)
+                                                pixel_x = (int)(18 + (num + 20.0) / 10.0 * 54);
+                                            else if (num <= -5.0f)
+                                                pixel_x = (int)(72 + (num + 10.0) / 5.0 * 54);
+                                            else if (num <= 0.0f)
+                                                pixel_x = (int)(126 + (num + 5.0) / 5.0 * 48);
+                                            else if (num <= 1.0f)
+                                                pixel_x = (int)(174 + (num - 0.0) / 1.0 * 30);
+                                            else if (num <= 2.0f)
+                                                pixel_x = (int)(204 + (num - 1.0) / 1.0 * 30);
+                                            else if (num <= 3.0f)
+                                                pixel_x = (int)(234 + (num - 2.0) / 1.0 * 30);
+                                            else
+                                                pixel_x = (int)(264 + (num - 3.0) / 0.5 * 16);
+                                        }
                                         else
-                                            pixel_x = (int)(132 + (num - 3.0) / 0.5 * 8);
+                                        {
+                                            if (num <= -20.0f)
+                                                pixel_x = (int)(0 + (num + 25.0) / 5.0 * 9);
+                                            else if (num <= -10.0f)
+                                                pixel_x = (int)(9 + (num + 20.0) / 10.0 * 27);
+                                            else if (num <= -5.0f)
+                                                pixel_x = (int)(36 + (num + 10.0) / 5.0 * 27);
+                                            else if (num <= 0.0f)
+                                                pixel_x = (int)(63 + (num + 5.0) / 5.0 * 24);
+                                            else if (num <= 1.0f)
+                                                pixel_x = (int)(87 + (num - 0.0) / 1.0 * 15);
+                                            else if (num <= 2.0f)
+                                                pixel_x = (int)(102 + (num - 1.0) / 1.0 * 15);
+                                            else if (num <= 3.0f)
+                                                pixel_x = (int)(117 + (num - 2.0) / 1.0 * 15);
+                                            else
+                                                pixel_x = (int)(132 + (num - 3.0) / 0.5 * 8);
+                                        }
                                         break;
                                     case 120:
                                         if (num <= -20.0f)
@@ -26687,73 +26752,151 @@ namespace PowerSDR
                                 switch ((int)g.DpiX)
                                 {
                                     case 96:
-                                        if (anan10present)
+                                        if (collapsedDisplay)
                                         {
-                                            if (num <= 1.0f)
-                                                pixel_x = (int)(0 + num * 2);
-                                            else if (num <= 5.0f)
-                                                pixel_x = (int)(2 + (num - 1) / 4 * 24);
-                                            else if (num <= 10.0f)
-                                                pixel_x = (int)(26 + (num - 5) / 5 * 24);
-                                            else if (num <= 15.0f)
-                                                pixel_x = (int)(50 + (num - 10) / 5 * 24);
-                                            else if (num <= 20.0f)
-                                                pixel_x = (int)(74 + (num - 15) / 5 * 24);
-                                            else if (num <= 25.0f)
-                                                pixel_x = (int)(98 + (num - 20) / 5 * 24);
+                                            if (anan10present || anan10Epresent)
+                                            {
+                                                if (num <= 1.0f)
+                                                    pixel_x = (int)(0 + num * 16);
+                                                else if (num <= 5.0f)
+                                                    pixel_x = (int)(16 + (num - 1) / 4 * 48);
+                                                else if (num <= 10.0f)
+                                                    pixel_x = (int)(64 + (num - 5) / 5 * 48);
+                                                else if (num <= 15.0f)
+                                                    pixel_x = (int)(112 + (num - 10) / 5 * 48);
+                                                else if (num <= 20.0f)
+                                                    pixel_x = (int)(160 + (num - 15) / 5 * 48);
+                                                else if (num <= 25.0f)
+                                                    pixel_x = (int)(208 + (num - 20) / 5 * 48);
+                                                else
+                                                    pixel_x = (int)(256 + (num - 25) / 5 * 32);
+                                            }
+                                            else if (apollopresent)
+                                            {
+                                                if (num <= 1.0f)
+                                                    pixel_x = (int)(0 + num * 16);
+                                                else if (num <= 5.0f)
+                                                    pixel_x = (int)(16 + (num - 1) / 4 * 48);
+                                                else if (num <= 10.0f)
+                                                    pixel_x = (int)(64 + (num - 5) / 5 * 48);
+                                                else if (num <= 15.0f)
+                                                    pixel_x = (int)(112 + (num - 10) / 5 * 48);
+                                                else if (num <= 30.0f)
+                                                    pixel_x = (int)(160 + (num - 15) / 15 * 48);
+                                                else if (num <= 50.0f)
+                                                    pixel_x = (int)(208 + (num - 30) / 20 * 48);
+                                                else
+                                                    pixel_x = (int)(256 + (num - 50) / 50 * 32);
+                                            }
+                                            else if (alexpresent)
+                                            {
+                                                if (num <= 1.0f)
+                                                    pixel_x = (int)(0 + num * 16);
+                                                else if (num <= 5.0f)
+                                                    pixel_x = (int)(16 + (num - 1) / 4 * 48);
+                                                else if (num <= 10.0f)
+                                                    pixel_x = (int)(64 + (num - 5) / 5 * 48);
+                                                else if (num <= 50.0f)
+                                                    pixel_x = (int)(112 + (num - 10) / 40 * 48);
+                                                else if (num <= 100.0f)
+                                                    pixel_x = (int)(160 + (num - 50) / 50 * 48);
+                                                else if (num <= 208.0f)
+                                                    pixel_x = (int)(208 + (num - 100) / 20 * 48);
+                                                else
+                                                    pixel_x = (int)(256 + (num - 120) / 20 * 32);
+                                            }
                                             else
-                                                pixel_x = (int)(122 + (num - 25) / 5 * 16);
-                                        }
-                                        else if (apollopresent)
-                                        {
-                                            if (num <= 1.0f)
-                                                pixel_x = (int)(0 + num * 2);
-                                            else if (num <= 5.0f)
-                                                pixel_x = (int)(2 + (num - 1) / 4 * 24);
-                                            else if (num <= 10.0f)
-                                                pixel_x = (int)(26 + (num - 5) / 5 * 24);
-                                            else if (num <= 15.0f)
-                                                pixel_x = (int)(50 + (num - 10) / 5 * 24);
-                                            else if (num <= 30.0f)
-                                                pixel_x = (int)(74 + (num - 15) / 15 * 24);
-                                            else if (num <= 50.0f)
-                                                pixel_x = (int)(98 + (num - 30) / 20 * 24);
-                                            else
-                                                pixel_x = (int)(122 + (num - 50) / 50 * 16);
-                                        }
-                                        else if (alexpresent)
-                                        {
-                                            if (num <= 1.0f)
-                                                pixel_x = (int)(0 + num * 2);
-                                            else if (num <= 5.0f)
-                                                pixel_x = (int)(2 + (num - 1) / 4 * 24);
-                                            else if (num <= 10.0f)
-                                                pixel_x = (int)(26 + (num - 5) / 5 * 24);
-                                            else if (num <= 50.0f)
-                                                pixel_x = (int)(50 + (num - 10) / 40 * 24);
-                                            else if (num <= 100.0f)
-                                                pixel_x = (int)(74 + (num - 50) / 50 * 24);
-                                            else if (num <= 120.0f)
-                                                pixel_x = (int)(98 + (num - 100) / 20 * 24);
-                                            else
-                                                pixel_x = (int)(122 + (num - 120) / 20 * 16);
+                                            {
+                                                if (num <= 25.0f)
+                                                    pixel_x = (int)(0 + (num - 0.0) / 25.0 * 16);
+                                                else if (num <= 50.0f)
+                                                    pixel_x = (int)(16 + (num - 25.0) / 25.0 * 31);
+                                                else if (num <= 100.0f)
+                                                    pixel_x = (int)(31 + (num - 50.0) / 50.0 * 31);
+                                                else if (num <= 200.0f)
+                                                    pixel_x = (int)(62 + (num - 100.0) / 100.0 * 64);
+                                                else if (num <= 500.0f)
+                                                    pixel_x = (int)(126 + (num - 200.0) / 300.0 * 48);
+                                                else if (num <= 600.0f)
+                                                    pixel_x = (int)(174 + (num - 500.0) / 100.0 * 30);
+                                                else if (num <= 700.0f)
+                                                    pixel_x = (int)(204 + (num - 600.0) / 100.0 * 30);
+                                                else if (num <= 800.0f)
+                                                    pixel_x = (int)(234 + (num - 700.0) / 100.0 * 30);
+                                                else
+                                                    pixel_x = (int)(264 + (num - 800.0) / 100.0 * 16);
+                                            }
                                         }
                                         else
                                         {
-                                            if (num <= 100.0f)
-                                                pixel_x = (int)(0 + (num - 0.0) / 100.0 * 31);
-                                            else if (num <= 200.0f)
-                                                pixel_x = (int)(31 + (num - 100.0) / 100.0 * 32);
-                                            else if (num <= 500.0f)
-                                                pixel_x = (int)(63 + (num - 200.0) / 300.0 * 24);
-                                            else if (num <= 600.0f)
-                                                pixel_x = (int)(87 + (num - 500.0) / 100.0 * 15);
-                                            else if (num <= 700.0f)
-                                                pixel_x = (int)(102 + (num - 600.0) / 100.0 * 15);
-                                            else if (num <= 800.0f)
-                                                pixel_x = (int)(117 + (num - 700.0) / 100.0 * 15);
+                                            if (anan10present || anan10Epresent)
+                                            {
+                                                if (num <= 1.0f)
+                                                    pixel_x = (int)(0 + num * 2);
+                                                else if (num <= 5.0f)
+                                                    pixel_x = (int)(2 + (num - 1) / 4 * 24);
+                                                else if (num <= 10.0f)
+                                                    pixel_x = (int)(26 + (num - 5) / 5 * 24);
+                                                else if (num <= 15.0f)
+                                                    pixel_x = (int)(50 + (num - 10) / 5 * 24);
+                                                else if (num <= 20.0f)
+                                                    pixel_x = (int)(74 + (num - 15) / 5 * 24);
+                                                else if (num <= 25.0f)
+                                                    pixel_x = (int)(98 + (num - 20) / 5 * 24);
+                                                else
+                                                    pixel_x = (int)(122 + (num - 25) / 5 * 16);
+                                            }
+                                            else if (apollopresent)
+                                            {
+                                                if (num <= 1.0f)
+                                                    pixel_x = (int)(0 + num * 2);
+                                                else if (num <= 5.0f)
+                                                    pixel_x = (int)(2 + (num - 1) / 4 * 24);
+                                                else if (num <= 10.0f)
+                                                    pixel_x = (int)(26 + (num - 5) / 5 * 24);
+                                                else if (num <= 15.0f)
+                                                    pixel_x = (int)(50 + (num - 10) / 5 * 24);
+                                                else if (num <= 30.0f)
+                                                    pixel_x = (int)(74 + (num - 15) / 15 * 24);
+                                                else if (num <= 50.0f)
+                                                    pixel_x = (int)(98 + (num - 30) / 20 * 24);
+                                                else
+                                                    pixel_x = (int)(122 + (num - 50) / 50 * 16);
+                                            }
+                                            else if (alexpresent)
+                                            {
+                                                if (num <= 1.0f)
+                                                    pixel_x = (int)(0 + num * 2);
+                                                else if (num <= 5.0f)
+                                                    pixel_x = (int)(2 + (num - 1) / 4 * 24);
+                                                else if (num <= 10.0f)
+                                                    pixel_x = (int)(26 + (num - 5) / 5 * 24);
+                                                else if (num <= 50.0f)
+                                                    pixel_x = (int)(50 + (num - 10) / 40 * 24);
+                                                else if (num <= 100.0f)
+                                                    pixel_x = (int)(74 + (num - 50) / 50 * 24);
+                                                else if (num <= 120.0f)
+                                                    pixel_x = (int)(98 + (num - 100) / 20 * 24);
+                                                else
+                                                    pixel_x = (int)(122 + (num - 120) / 20 * 16);
+                                            }
                                             else
-                                                pixel_x = (int)(132 + (num - 800.0) / 100.0 * 8);
+                                            {
+                                                if (num <= 100.0f)
+                                                    pixel_x = (int)(0 + (num - 0.0) / 100.0 * 31);
+                                                else if (num <= 200.0f)
+                                                    pixel_x = (int)(31 + (num - 100.0) / 100.0 * 32);
+                                                else if (num <= 500.0f)
+                                                    pixel_x = (int)(63 + (num - 200.0) / 300.0 * 24);
+                                                else if (num <= 600.0f)
+                                                    pixel_x = (int)(87 + (num - 500.0) / 100.0 * 15);
+                                                else if (num <= 700.0f)
+                                                    pixel_x = (int)(102 + (num - 600.0) / 100.0 * 15);
+                                                else if (num <= 800.0f)
+                                                    pixel_x = (int)(117 + (num - 700.0) / 100.0 * 15);
+                                                else
+                                                    pixel_x = (int)(132 + (num - 800.0) / 100.0 * 8);
+                                            }
                                         }
                                         break;
 
@@ -26779,22 +26922,44 @@ namespace PowerSDR
                                 switch ((int)g.DpiX)
                                 {
                                     case 96:
-                                        if (double.IsInfinity(num))
-                                            pixel_x = 200;
-                                        else if (num <= 1.0f)
-                                            pixel_x = (int)(0 + num * 3);
-                                        else if (num <= 1.5f)
-                                            pixel_x = (int)(3 + (num - 1.0) / 0.5 * 27);
-                                        else if (num <= 2.0f)
-                                            pixel_x = (int)(30 + (num - 1.5) / 0.5 * 20);
-                                        else if (num <= 3.0f)
-                                            pixel_x = (int)(50 + (num - 2.0) / 1.0 * 21);
-                                        else if (num <= 5.0f)
-                                            pixel_x = (int)(71 + (num - 3.0) / 2.0 * 21);
-                                        else if (num <= 10.0f)
-                                            pixel_x = (int)(92 + (num - 5.0) / 5.0 * 21);
+                                        if (collapsedDisplay)
+                                        {
+                                            if (double.IsInfinity(num))
+                                                pixel_x = 200;
+                                            else if (num <= 1.0f)
+                                                pixel_x = (int)(0 + num * 6);
+                                            else if (num <= 1.5f)
+                                                pixel_x = (int)(6 + (num - 1.0) / 0.5 * 54);
+                                            else if (num <= 2.0f)
+                                                pixel_x = (int)(60 + (num - 1.5) / 0.5 * 40);
+                                            else if (num <= 3.0f)
+                                                pixel_x = (int)(100 + (num - 2.0) / 1.0 * 42);
+                                            else if (num <= 5.0f)
+                                                pixel_x = (int)(142 + (num - 3.0) / 2.0 * 42);
+                                            else if (num <= 10.0f)
+                                                pixel_x = (int)(184 + (num - 5.0) / 5.0 * 42);
+                                            else
+                                                pixel_x = (int)(226 + (num - 10.0) / 15.0 * 52);
+                                        }
                                         else
-                                            pixel_x = (int)(113 + (num - 10.0) / 15.0 * 26);
+                                        {
+                                            if (double.IsInfinity(num))
+                                                pixel_x = 200;
+                                            else if (num <= 1.0f)
+                                                pixel_x = (int)(0 + num * 3);
+                                            else if (num <= 1.5f)
+                                                pixel_x = (int)(3 + (num - 1.0) / 0.5 * 27);
+                                            else if (num <= 2.0f)
+                                                pixel_x = (int)(30 + (num - 1.5) / 0.5 * 20);
+                                            else if (num <= 3.0f)
+                                                pixel_x = (int)(50 + (num - 2.0) / 1.0 * 21);
+                                            else if (num <= 5.0f)
+                                                pixel_x = (int)(71 + (num - 3.0) / 2.0 * 21);
+                                            else if (num <= 10.0f)
+                                                pixel_x = (int)(92 + (num - 5.0) / 5.0 * 21);
+                                            else
+                                                pixel_x = (int)(113 + (num - 10.0) / 15.0 * 26);
+                                        }
                                         break;
                                     case 120:
                                         if (double.IsInfinity(num))
@@ -26821,18 +26986,36 @@ namespace PowerSDR
                                 switch ((int)g.DpiX)
                                 {
                                     case 96:
-                                        if (num <= 0.0f)
-                                            pixel_x = 3;
-                                        else if (num <= 5.0f)
-                                            pixel_x = (int)(3 + (num - 0.0) / 5.0 * 28);
-                                        else if (num <= 10.0f)
-                                            pixel_x = (int)(31 + (num - 5.0) / 5.0 * 29);
-                                        else if (num <= 15.0f)
-                                            pixel_x = (int)(60 + (num - 10.0) / 5.0 * 30);
-                                        else if (num <= 20.0f)
-                                            pixel_x = (int)(90 + (num - 15.0) / 5.0 * 31);
+                                        if (collapsedDisplay)
+                                        {
+                                            if (num <= 0.0f)
+                                                pixel_x = 6;
+                                            else if (num <= 5.0f)
+                                                pixel_x = (int)(6 + (num - 0.0) / 5.0 * 56);
+                                            else if (num <= 10.0f)
+                                                pixel_x = (int)(62 + (num - 5.0) / 5.0 * 58);
+                                            else if (num <= 15.0f)
+                                                pixel_x = (int)(120 + (num - 10.0) / 5.0 * 60);
+                                            else if (num <= 20.0f)
+                                                pixel_x = (int)(180 + (num - 15.0) / 5.0 * 62);
+                                            else
+                                                pixel_x = (int)(242 + (num - 20.0) / 5.0 * 58);
+                                        }
                                         else
-                                            pixel_x = (int)(121 + (num - 20.0) / 5.0 * 29);
+                                        {
+                                            if (num <= 0.0f)
+                                                pixel_x = 3;
+                                            else if (num <= 5.0f)
+                                                pixel_x = (int)(3 + (num - 0.0) / 5.0 * 28);
+                                            else if (num <= 10.0f)
+                                                pixel_x = (int)(31 + (num - 5.0) / 5.0 * 29);
+                                            else if (num <= 15.0f)
+                                                pixel_x = (int)(60 + (num - 10.0) / 5.0 * 30);
+                                            else if (num <= 20.0f)
+                                                pixel_x = (int)(90 + (num - 15.0) / 5.0 * 31);
+                                            else
+                                                pixel_x = (int)(121 + (num - 20.0) / 5.0 * 29);
+                                        }
                                         break;
                                     case 120:
                                         if (num <= 0.0f)
@@ -26858,7 +27041,8 @@ namespace PowerSDR
                     switch ((int)g.DpiX)
                     {
                         case 96:
-                            if (pixel_x > 139) pixel_x = 139;
+                            if (!collapsedDisplay)
+                                if (pixel_x > 139) pixel_x = 139;
                             break;
                         case 120:
                             if (pixel_x > 167) pixel_x = 167;
@@ -26875,8 +27059,16 @@ namespace PowerSDR
 
                             g.FillRectangle(brush, 0, 0, pixel_x, H);
 
-                        for (int i = 0; i < 21; i++)
-                            g.DrawLine(meter_background_pen, 6 + i * 8, 0, 6 + i * 8, H);
+                        if (collapsedDisplay)
+                        {
+                            for (int i = 0; i < 35; i++)
+                                g.DrawLine(meter_background_pen, 6 + i * 8, 0, 6 + i * 8, H);
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 21; i++)
+                                g.DrawLine(meter_background_pen, 6 + i * 8, 0, 6 + i * 8, H);
+                        }
 
                         g.DrawLine(Pens.Red, pixel_x, 0, pixel_x, H);
                         g.FillRectangle(meter_background_pen.Brush, pixel_x + 1, 0, W - pixel_x, H);
@@ -27188,7 +27380,7 @@ namespace PowerSDR
                             case MeterTXMode.REVERSE_POWER:
                                 if (alexpresent || apollopresent) num = Math.Round(num);
 
-                                if ((alexpresent || pa_present) && (!anan10present && !apollopresent))
+                                if ((alexpresent || pa_present) && (!anan10present && !anan10Epresent && !apollopresent))
                                 {
                                     g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
                                     g.FillRectangle(high_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 10, 2);
@@ -27246,7 +27438,7 @@ namespace PowerSDR
                                             pixel_x = (int)(W * 0.75 + spacing + (num - 120.0) / 60.0 * spacing);
                                     }
                                 }
-                                else if (anan10present)// || apollopresent)
+                                else if (anan10present || anan10Epresent)// || apollopresent)
                                 {
                                     g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
                                     g.FillRectangle(high_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 10, 2);
@@ -27422,7 +27614,7 @@ namespace PowerSDR
                                 break;
                             case MeterTXMode.SWR_POWER:
 
-                                if ((alexpresent || pa_present) && (!anan10present && !apollopresent))
+                                if ((alexpresent || pa_present) && (!anan10present && !anan10Epresent && !apollopresent))
                                 {
                                     g.FillRectangle(high_brush, (int)(W * 0.75), (H / 2) - 1, (int)(W * 0.25) - 4, 2);
                                     g.FillRectangle(low_brush, 0, (H / 2) - 1, (int)(W * 0.75), 4); // horizontal white line
@@ -27564,7 +27756,7 @@ namespace PowerSDR
                                     }
                                 }
 
-                                else if (anan10present)
+                                else if (anan10present || anan10Epresent)
                                 {
                                     g.FillRectangle(high_brush, (int)(W * 0.75), (H / 2) - 1, (int)(W * 0.25) - 4, 2);
                                     g.FillRectangle(low_brush, 0, (H / 2) - 1, (int)(W * 0.75), 4); // horizontal white line
@@ -28206,7 +28398,7 @@ namespace PowerSDR
                                 case MeterTXMode.FORWARD_POWER:
                                 case MeterTXMode.REVERSE_POWER:
                                 case MeterTXMode.SWR_POWER:
-                                    if (anan10present || apollopresent) output = num.ToString(format) + " W";
+                                    if (anan10present || anan10Epresent || apollopresent) output = num.ToString(format) + " W";
                                     else if (alexpresent || pa_present) output = num.ToString(format) + " W";
                                     else output = num.ToString(format) + " mW";
                                     break;
@@ -28270,24 +28462,52 @@ namespace PowerSDR
                                     double s;
                                     if (rx2_above30)
                                     {
-                                        s = (num + 147) / 6;
-                                        if (s <= 9.0F)
-                                            pixel_x = (int)((s * 7.5) + 2);
+                                        if (collapsedDisplay)
+                                        {
+                                            s = (num + 147) / 6;
+                                            if (s <= 9.0F)
+                                                pixel_x = (int)((s * 15) + 2);
+                                            else
+                                            {
+                                                double over_s9 = num + 93;
+                                                pixel_x = 138 + (int)(over_s9 * 2.10);
+                                            }
+                                        }
                                         else
                                         {
-                                            double over_s9 = num + 93;
-                                            pixel_x = 69 + (int)(over_s9 * 1.05);
+                                            s = (num + 147) / 6;
+                                            if (s <= 9.0F)
+                                                pixel_x = (int)((s * 15) + 2);
+                                            else
+                                            {
+                                                double over_s9 = num + 93;
+                                                pixel_x = 69 + (int)(over_s9 * 1.05);
+                                            }
                                         }
                                     }
                                     else
                                     {
-                                        s = (num + 127) / 6;
-                                        if (s <= 9.0F)
-                                            pixel_x = (int)((s * 7.5) + 2);
+                                        if (collapsedDisplay)
+                                        {
+                                            s = (num + 127) / 6;
+                                            if (s <= 9.0F)
+                                                pixel_x = (int)((s * 15) + 2);
+                                            else
+                                            {
+                                                double over_s9 = num + 73;
+                                                pixel_x = 138 + (int)(over_s9 * 2.10);
+                                            }
+                                        }
                                         else
                                         {
-                                            double over_s9 = num + 73;
-                                            pixel_x = 69 + (int)(over_s9 * 1.05);
+                                            s = (num + 127) / 6;
+                                            if (s <= 9.0F)
+                                                pixel_x = (int)((s * 7.5) + 2);
+                                            else
+                                            {
+                                                double over_s9 = num + 73;
+                                                pixel_x = 69 + (int)(over_s9 * 1.05);
+                                            }
                                         }
                                     }
                                     break;
@@ -28318,7 +28538,9 @@ namespace PowerSDR
                             switch ((int)g.DpiX)
                             {
                                 case 96:
-                                    pixel_x = (int)(((num + 100) * 1.2) + 12);
+                                    if (collapsedDisplay)
+                                        pixel_x = (int)(((num + 100) * 2.4) + 24);
+                                    else pixel_x = (int)(((num + 100) * 1.2) + 12);
                                     break;
                                 case 120:
                                     if (num <= -100.0f)
@@ -29544,6 +29766,8 @@ namespace PowerSDR
         {
             float bridge_volt = 0.09f;
             float refvoltage = 3.3f;
+            float adc_cal_offset = 0.0f;
+            if (tx_band == Band.B6M) adc_cal_offset = 200.0f;
             if (current_hpsdr_model == HPSDRModel.ORION) refvoltage = 5.0f;
             if (current_hpsdr_model == HPSDRModel.ANAN100 ||
                 current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.095f;
@@ -29551,8 +29775,8 @@ namespace PowerSDR
             if (current_hpsdr_model == HPSDRModel.ORION) bridge_volt = 0.108f;
 
             int adc = JanusAudio.getRefPower();
-            if (adc < 100) adc = 0;
-            float volts = (float)adc / 4095 * refvoltage;
+            if (adc < 200) adc = 0;
+            float volts = (float)((adc - adc_cal_offset) / 4095.0 * refvoltage);
             float watts = (float)(Math.Pow(volts, 2) / bridge_volt);
 
             if (PAValues)
@@ -29589,7 +29813,7 @@ namespace PowerSDR
             }
             adc = addadc / 3;
 
-            float volts = (float)adc / 4095 * refvoltage;
+            float volts = (float)(adc / 4095.0f * refvoltage);
             float watts = (float)(Math.Pow(volts, 2) / bridge_volt);
 
             if (PAValues)
@@ -30832,6 +31056,48 @@ namespace PowerSDR
             {
                 switch (e.KeyCode)
                 {
+                    // IK4JPN+ 9/11/2014
+                    case Keys.F1: // CWX memory 1
+                    case Keys.F2:
+                    case Keys.F3:
+                    case Keys.F4:
+                    case Keys.F5:
+                    case Keys.F6:
+                    case Keys.F7:
+                    case Keys.F8:
+                    case Keys.F9: // CWX memory 9
+                    case Keys.F10: // CWX memory stop
+                        // Make sure we have an instance of the form
+                        if (CWXForm == null || CWXForm.IsDisposed)
+                        {
+                            try
+                            {
+                                CWXForm = new CWX(this);
+                            }
+                            catch
+                            {
+                                e.Handled = true;
+                                return;
+                            }
+                        }
+
+                        int t_memory_num = 0;
+                        if (e.KeyCode == Keys.F1) t_memory_num = 1;
+                        else if (e.KeyCode == Keys.F2) t_memory_num = 2;
+                        else if (e.KeyCode == Keys.F3) t_memory_num = 3;
+                        else if (e.KeyCode == Keys.F4) t_memory_num = 4;
+                        else if (e.KeyCode == Keys.F5) t_memory_num = 5;
+                        else if (e.KeyCode == Keys.F6) t_memory_num = 6;
+                        else if (e.KeyCode == Keys.F7) t_memory_num = 7;
+                        else if (e.KeyCode == Keys.F8) t_memory_num = 8;
+                        else if (e.KeyCode == Keys.F9) t_memory_num = 9;
+
+                        if (t_memory_num == 0) CWXForm.CWXStop(); // stop memory
+                        else CWXForm.StartQueue = t_memory_num; // tx memory N
+
+                        e.Handled = true;
+                        break;
+                    // IK4JPN-
                     case Keys.Add:
                         if (ptbRF.Value != ptbRF.Maximum)
                         {
@@ -33270,6 +33536,8 @@ namespace PowerSDR
             comboMeterTXMode.ForeColor = Color.Gray;
             comboMeterRXMode.ForeColor = Color.White;
             comboMeterRXMode_SelectedIndexChanged(this, EventArgs.Empty);
+            comboRX2MeterMode_SelectedIndexChanged(this, EventArgs.Empty);
+            comboMeterTXMode_SelectedIndexChanged(this, EventArgs.Empty);
 
             pa_fwd_power = 0;
             pa_rev_power = 0;
@@ -33519,7 +33787,7 @@ namespace PowerSDR
                         wdsp.SetChannelState(wdsp.id(2, 0), 0, 1);
                     }
 
-                 }
+                }
 
                 if (attontx)
                 {
@@ -33735,19 +34003,40 @@ namespace PowerSDR
 
                 if (!mox)
                 {
-                    switch (mode)
+                    if (collapsedDisplay)
                     {
-                        case MeterRXMode.SIGNAL_STRENGTH:
-                        case MeterRXMode.SIGNAL_AVERAGE:
-                            lblMultiSMeter.Text = "  1   3   5   7   9  +20 +40 +60";
-                            break;
-                        case MeterRXMode.ADC_L:
-                        case MeterRXMode.ADC_R:
-                            lblMultiSMeter.Text = "-100  -80   -60   -40   -20    0";
-                            break;
-                        case MeterRXMode.OFF:
-                            lblMultiSMeter.Text = "";
-                            break;
+                        switch (mode)
+                        {
+                            case MeterRXMode.SIGNAL_STRENGTH:
+                            case MeterRXMode.SIGNAL_AVERAGE:
+                                lblMultiSMeter.Text = "     1       3         5        7        9          +20         +40         +60";
+                                break;
+                            case MeterRXMode.ADC_L:
+                            case MeterRXMode.ADC_R:
+                                lblMultiSMeter.Text = "   -100           -80           -60           -40           -20             0";
+                                break;
+                            case MeterRXMode.OFF:
+                                lblMultiSMeter.Text = "";
+                                break;
+                        }
+
+                    }
+                    else
+                    {
+                        switch (mode)
+                        {
+                            case MeterRXMode.SIGNAL_STRENGTH:
+                            case MeterRXMode.SIGNAL_AVERAGE:
+                                lblMultiSMeter.Text = "  1   3   5   7   9  +20 +40 +60";
+                                break;
+                            case MeterRXMode.ADC_L:
+                            case MeterRXMode.ADC_R:
+                                lblMultiSMeter.Text = "-100  -80   -60   -40   -20    0";
+                                break;
+                            case MeterRXMode.OFF:
+                                lblMultiSMeter.Text = "";
+                                break;
+                        }
                     }
                     ResetMultiMeterPeak();
                 }
@@ -33819,41 +34108,83 @@ namespace PowerSDR
 
             if (mox)
             {
-                switch (mode)
+                if (collapsedDisplay)
                 {
-                    case MeterTXMode.FIRST:
-                        lblMultiSMeter.Text = "";
-                        break;
-                    case MeterTXMode.MIC:
-                    case MeterTXMode.EQ:
-                    case MeterTXMode.LEVELER:
-                    case MeterTXMode.CPDR:
-                    case MeterTXMode.ALC:
-                        lblMultiSMeter.Text = "-20    -10     -5      0   1   2   3";
-                        break;
-                    case MeterTXMode.FORWARD_POWER:
-                    case MeterTXMode.REVERSE_POWER:
-                    case MeterTXMode.SWR_POWER:
-                        if (anan10present)
-                            lblMultiSMeter.Text = "1      5     10    15   20    25+";
-                        else if (apollopresent)
-                            lblMultiSMeter.Text = "1      5     10    15   30    50+";
-                        else if (alexpresent || pa_present)
-                            lblMultiSMeter.Text = "1      5     10    50   100  120+";
-                        else
-                            lblMultiSMeter.Text = "0      0.1     0.2     0.5        0.8";
-                        break;
-                    case MeterTXMode.SWR:
-                        lblMultiSMeter.Text = "1      1.5   2     3     5    10";
-                        //  lblMultiSMeter.Text = "0             10              20";
-                        break;
-                    case MeterTXMode.OFF:
-                        lblMultiSMeter.Text = "";
-                        break;
-                    case MeterTXMode.LVL_G:
-                    case MeterTXMode.ALC_G:
-                        lblMultiSMeter.Text = "0       5       10      15      20";
-                        break;
+                    switch (mode)
+                    {
+                        case MeterTXMode.FIRST:
+                            lblMultiSMeter.Text = "";
+                            break;
+                        case MeterTXMode.MIC:
+                        case MeterTXMode.EQ:
+                        case MeterTXMode.LEVELER:
+                        case MeterTXMode.CPDR:
+                        case MeterTXMode.ALC:
+                            lblMultiSMeter.Text = "   -20            -10               -5              0        1        2        3";
+                            break;
+                        case MeterTXMode.FORWARD_POWER:
+                        case MeterTXMode.REVERSE_POWER:
+                        case MeterTXMode.SWR_POWER:
+                            if (anan10present || anan10Epresent)
+                                lblMultiSMeter.Text = "    1              5             10            15            20            25+";
+                            else if (apollopresent)
+                                lblMultiSMeter.Text = "    1              5             10            15            30            50+";
+                            else if (alexpresent || pa_present)
+                                lblMultiSMeter.Text = "    1              5             10            50           100          120+";
+                            else
+                                lblMultiSMeter.Text = "   25    50   100     150       200     400         600           800+";
+                            break;
+                        case MeterTXMode.SWR:
+                            lblMultiSMeter.Text = " 1               1.5         2            3            5            10";
+                            //  lblMultiSMeter.Text = "0             10              20";
+                            break;
+                        case MeterTXMode.OFF:
+                            lblMultiSMeter.Text = "";
+                            break;
+                        case MeterTXMode.LVL_G:
+                        case MeterTXMode.ALC_G:
+                            lblMultiSMeter.Text = "0                  5                10                15                20";
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (mode)
+                    {
+                        case MeterTXMode.FIRST:
+                            lblMultiSMeter.Text = "";
+                            break;
+                        case MeterTXMode.MIC:
+                        case MeterTXMode.EQ:
+                        case MeterTXMode.LEVELER:
+                        case MeterTXMode.CPDR:
+                        case MeterTXMode.ALC:
+                            lblMultiSMeter.Text = "-20    -10     -5      0   1   2   3";
+                            break;
+                        case MeterTXMode.FORWARD_POWER:
+                        case MeterTXMode.REVERSE_POWER:
+                        case MeterTXMode.SWR_POWER:
+                            if (anan10present || anan10Epresent)
+                                lblMultiSMeter.Text = "1      5     10    15   20    25+";
+                            else if (apollopresent)
+                                lblMultiSMeter.Text = "1      5     10    15   30    50+";
+                            else if (alexpresent || pa_present)
+                                lblMultiSMeter.Text = "1      5     10    50   100  120+";
+                            else
+                                lblMultiSMeter.Text = "0      0.1     0.2     0.5        0.8";
+                            break;
+                        case MeterTXMode.SWR:
+                            lblMultiSMeter.Text = "1      1.5   2     3     5    10";
+                            //  lblMultiSMeter.Text = "0             10              20";
+                            break;
+                        case MeterTXMode.OFF:
+                            lblMultiSMeter.Text = "";
+                            break;
+                        case MeterTXMode.LVL_G:
+                        case MeterTXMode.ALC_G:
+                            lblMultiSMeter.Text = "0       5       10      15      20";
+                            break;
+                    }
                 }
                 ResetMultiMeterPeak();
             }
@@ -34347,8 +34678,8 @@ namespace PowerSDR
             whatisHF = false;
 
             {
-                if (this.collapsedDisplay)
-                    this.CollapseDisplay();
+                if (collapsedDisplay)
+                    CollapseDisplay();
             }
 
             if (!rx1_click_tune_drag)
@@ -34356,8 +34687,8 @@ namespace PowerSDR
             if (!rx2_click_tune_drag)
                 chkX2TR.Checked = false;
 
-                lblRX1MuteVFOA.SendToBack();
-                lblRX1APF.SendToBack();
+            lblRX1MuteVFOA.SendToBack();
+            lblRX1APF.SendToBack();
         }
 
         private void btnBandHF_Click(object sender, System.EventArgs e)
@@ -34368,8 +34699,8 @@ namespace PowerSDR
             whatisHF = true;
 
             {
-                if (this.collapsedDisplay)
-                    this.CollapseDisplay();
+                if (collapsedDisplay)
+                    CollapseDisplay();
             }
 
             if (!rx1_click_tune_drag)
@@ -34377,8 +34708,8 @@ namespace PowerSDR
             if (!rx2_click_tune_drag)
                 chkX2TR.Checked = false;
 
-                lblRX1MuteVFOA.BringToFront();
-                lblRX1APF.BringToFront();
+            lblRX1MuteVFOA.BringToFront();
+            lblRX1APF.BringToFront();
         }
 
         private void udFilterLow_LostFocus(object sender, EventArgs e)
@@ -41588,6 +41919,13 @@ namespace PowerSDR
 
         #region Mode Specific Events
 
+        private bool txosctrl = false;
+        public bool TxOsctrl
+        {
+            get { return txosctrl; }
+            set { txosctrl = value; }
+        }
+
         private void chkCPDR_CheckedChanged(object sender, System.EventArgs e)
         {
             if (chkCPDR.Checked)
@@ -41601,8 +41939,18 @@ namespace PowerSDR
                 chkCPDR.BackColor = SystemColors.Control;
             }
             if (chkDX.Checked || chkCPDR.Checked)
+            {
                 radio.GetDSPTX(0).TXCompandOn = true;
-            else radio.GetDSPTX(0).TXCompandOn = false;
+                if (txosctrl)
+                    radio.GetDSPTX(0).TXOsctrlOn = true;
+                else
+                    radio.GetDSPTX(0).TXOsctrlOn = false;
+            }
+            else
+            {
+                radio.GetDSPTX(0).TXCompandOn = false;
+                radio.GetDSPTX(0).TXOsctrlOn = false;
+            }
             cat_cmpd_status = Convert.ToInt32(chkCPDR.Checked);
         }
 
@@ -42256,8 +42604,8 @@ namespace PowerSDR
             previous_delta = h_delta + v_delta; //we'll check this next time through...
 
 
-            if (this.collapsedDisplay)
-                this.RepositionControlsForCollapsedlDisplay();
+            if (collapsedDisplay)
+                RepositionControlsForCollapsedlDisplay();
 
         }
 
@@ -42365,10 +42713,13 @@ namespace PowerSDR
             // :W1CEG:
             gr_multi_meter_size_basis = this.grpMultimeter.Size;
             pic_multi_meter_digital_basis = this.picMultiMeterDigital.Location;
-            lbl_multi_smeter_basis = this.lblMultiSMeter.Location;
             pic_multi_meter_size_basis = this.picMultiMeterDigital.Size;
+            lbl_multi_smeter_basis = this.lblMultiSMeter.Location;
+            lbl_multi_smeter_size_basis = this.lblMultiSMeter.Size;
             pic_rx2meter_basis = this.picRX2Meter.Location;
             pic_rx2meter_size_basis = this.picRX2Meter.Size;
+            lbl_rx2meter_basis = this.lblRX2Meter.Location;
+            lbl_rx2meter_size_basis = this.lblRX2Meter.Size;
             txt_multi_text_basis = this.txtMultiText.Location;
             txt_rx2meter_basis = this.txtRX2Meter.Location;
             gr_options_size_basis = this.panelOptions.Size;
@@ -43256,6 +43607,7 @@ namespace PowerSDR
                 chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
             }
 
+            UpdateDSPBufRX2();
             txtVFOBFreq_LostFocus(this, EventArgs.Empty);
             chkRX2Squelch_CheckedChanged(this, EventArgs.Empty);
             ptbPWR_Scroll(this, EventArgs.Empty);
@@ -43703,19 +44055,39 @@ namespace PowerSDR
                 }
                 rx2_meter_mode = mode;
 
-                switch (mode)
+                if (collapsedDisplay)
                 {
-                    case MeterRXMode.SIGNAL_STRENGTH:
-                    case MeterRXMode.SIGNAL_AVERAGE:
-                        lblRX2Meter.Text = "  1   3   5   7   9  +20 +40 +60";
-                        break;
-                    case MeterRXMode.ADC_L:
-                    case MeterRXMode.ADC_R:
-                        lblRX2Meter.Text = "-100  -80   -60   -40   -20    0";
-                        break;
-                    case MeterRXMode.OFF:
-                        lblRX2Meter.Text = "";
-                        break;
+                    switch (mode)
+                    {
+                        case MeterRXMode.SIGNAL_STRENGTH:
+                        case MeterRXMode.SIGNAL_AVERAGE:
+                            lblRX2Meter.Text = "     1       3         5        7        9          +20         +40         +60";
+                            break;
+                        case MeterRXMode.ADC_L:
+                        case MeterRXMode.ADC_R:
+                            lblRX2Meter.Text = "   -100           -80           -60           -40           -20             0";
+                            break;
+                        case MeterRXMode.OFF:
+                            lblRX2Meter.Text = "";
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (mode)
+                    {
+                        case MeterRXMode.SIGNAL_STRENGTH:
+                        case MeterRXMode.SIGNAL_AVERAGE:
+                            lblRX2Meter.Text = "  1   3   5   7   9  +20 +40 +60";
+                            break;
+                        case MeterRXMode.ADC_L:
+                        case MeterRXMode.ADC_R:
+                            lblRX2Meter.Text = "-100  -80   -60   -40   -20    0";
+                            break;
+                        case MeterRXMode.OFF:
+                            lblRX2Meter.Text = "";
+                            break;
+                    }
                 }
                 ResetRX2MeterPeak();
             }
@@ -44122,8 +44494,8 @@ namespace PowerSDR
                   case 256: offset = 12; break;
             }*/
             //RX2FilterSizeCalOffset = (float)offset;
-            if (radio.GetDSPRX(1, 0).BufferSize != size)// ||
-            //  radio.GetDSPRX(1, 1).BufferSize != size)
+            if (radio.GetDSPRX(1, 0).BufferSize != size ||
+               radio.GetDSPRX(1, 1).BufferSize != size)
             {
                 bool poweron = PowerOn;
                 if (poweron)
@@ -44134,23 +44506,23 @@ namespace PowerSDR
 
                 // RX2FilterSizeCalOffset = (float)offset;
                 radio.GetDSPRX(1, 0).BufferSize = size;
-                // radio.GetDSPRX(1, 1).BufferSize = size;
+                radio.GetDSPRX(1, 1).BufferSize = size;
 
                 if (!initializing)
                 {
                     RadioDSP.SyncStatic();
 
-                    // for (int i = 1; i < 2; i++)
-                    // {
-                    // for (int j = 0; j < 2; j++)
-                    // {
-                    RadioDSPRX dsp_rx = radio.GetDSPRX(1, 0);
-                    dsp_rx.Update = false;
-                    dsp_rx.Force = true;
-                    dsp_rx.Update = true;
-                    dsp_rx.Force = false;
-                    // }
-                    // }
+                    for (int i = 1; i < 2; i++)
+                    {
+                        for (int j = 0; j < 2; j++)
+                        {
+                            RadioDSPRX dsp_rx = radio.GetDSPRX(i, 0);
+                            dsp_rx.Update = false;
+                            dsp_rx.Force = true;
+                            dsp_rx.Update = true;
+                            dsp_rx.Force = false;
+                        }
+                    }
 
                     // for (int i = 0; i < 1; i++)
                     //  {
@@ -45691,7 +46063,7 @@ namespace PowerSDR
             else
             {
                 comboPreamp.Items.AddRange(on_off_preamp_settings);
-                if (alexpresent && !anan10present)
+                if (alexpresent && !anan10present && !anan10Epresent)
                 {
                     comboPreamp.Items.AddRange(alex_preamp_settings);
                 }
@@ -46033,13 +46405,16 @@ namespace PowerSDR
             this.bandToolStripMenuItem.Visible = false;
             this.modeToolStripMenuItem.Visible = false;
             int minWidth = console_basis_size.Width;
-            //int minHeight = (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK) ?
-            int minHeight = (current_model == Model.HPSDR || current_model == Model.HPSDR) ?
+            int minHeight = (current_model == Model.HPSDR) ?
                 console_basis_size.Height - (panelRX2Filter.Height + 8) :
                 console_basis_size.Height;
 
             this.Size = this.expandedSize;
             this.MinimumSize = new Size(minWidth, minHeight);
+            comboMeterRXMode_SelectedIndexChanged(this, EventArgs.Empty);
+            comboRX2MeterMode_SelectedIndexChanged(this, EventArgs.Empty);
+            comboMeterTXMode_SelectedIndexChanged(this, EventArgs.Empty);
+
             lblModeLabel.Hide();
             lblFilterLabel.Hide();
             lblRX2ModeLabel.Hide();
@@ -46137,11 +46512,20 @@ namespace PowerSDR
             picMultiMeterDigital.Parent = grpMultimeter;
             picMultiMeterDigital.Size = pic_multi_meter_size_basis;
             picMultiMeterDigital.Location = pic_multi_meter_digital_basis;
+            lblMultiSMeter.Parent = grpMultimeter;
+            lblMultiSMeter.Location = lbl_multi_smeter_basis;
+            lblMultiSMeter.Size = lbl_multi_smeter_size_basis;
             picRX2Meter.Parent = grpRX2Meter;
             picRX2Meter.Location = pic_rx2meter_basis;
             picRX2Meter.Size = pic_rx2meter_size_basis;
-            lblMultiSMeter.Parent = grpMultimeter;
-            lblMultiSMeter.Location = lbl_multi_smeter_basis;
+            lblRX2Meter.Parent = grpRX2Meter;
+            lblRX2Meter.Location = lbl_rx2meter_basis;
+            lblRX2Meter.Size = lbl_rx2meter_size_basis;
+            if (current_meter_display_mode == MultiMeterDisplayMode.Original)
+            {
+                picMultiMeterDigital.Height -= lblMultiSMeter.ClientSize.Height;
+                picRX2Meter.Height -= lblRX2Meter.ClientSize.Height;
+            }
             lblRX2RF.Parent = panelRX2RF;
             lblRX2RF.Location = lbl_rx2_rf_basis;
             txtMultiText.Parent = grpMultimeter;
@@ -46362,6 +46746,9 @@ namespace PowerSDR
                 {
                     minHeight += grpVFOB.Height + 10;
                 }
+                comboMeterRXMode_SelectedIndexChanged(this, EventArgs.Empty);
+                comboRX2MeterMode_SelectedIndexChanged(this, EventArgs.Empty);
+                comboMeterTXMode_SelectedIndexChanged(this, EventArgs.Empty);
             }
 
             if (this.showBandControls)
@@ -46427,6 +46814,11 @@ namespace PowerSDR
 
             if (this.showTopControls)
             {
+                comboPreamp.Parent = this;
+                comboRX2Preamp.Parent = this;
+                udRX1StepAttData.Parent = this;
+                udRX2StepAttData.Parent = this;
+
                 if (show_rx1)
                 {
                     grpVFOA.Show();
@@ -46490,14 +46882,14 @@ namespace PowerSDR
 
                     comboRX2Preamp.Hide();
                     udRX2StepAttData.Hide();
-                    comboPreamp.Parent = this;
+                    // comboPreamp.Parent = this;
                     comboPreamp.Show();
-                    udRX1StepAttData.Parent = this;
+                    // udRX1StepAttData.Parent = this;
                     udRX1StepAttData.Show();
 
                     // lblMultiSMeter.Parent = this;
                     lblMultiSMeter.Hide();
-                    lblRX2Meter.Hide();
+                    //lblRX2Meter.Hide();
                     comboMeterRXMode.Parent = this;
                     comboMeterRXMode.Show();
                     //combo2RXMeterMode.Parent = this;
@@ -46512,10 +46904,15 @@ namespace PowerSDR
 
                     if (current_meter_display_mode == MultiMeterDisplayMode.Original)
                     {
-                        current_meter_display_mode = MultiMeterDisplayMode.Edge;
-                        SetupForm.comboMeterType.Text = "Edge";
+                        // current_meter_display_mode = MultiMeterDisplayMode.Edge;
+                        // SetupForm.comboMeterType.Text = "Edge";
+                        //picMultiMeterDigital.Hide();
+                        lblMultiSMeter.Parent = this;
+                        picMultiMeterDigital.SendToBack();
+                        lblMultiSMeter.Show();
+                        lblMultiSMeter.BringToFront();
                     }
-                    /*      picMultiMeterDigital.Hide();
+                    /*    picMultiMeterDigital.Hide();
                           lblMultiSMeter.Show();
                       }
                       else
@@ -46592,22 +46989,22 @@ namespace PowerSDR
                     {
                         comboPreamp.Hide();
                         udRX1StepAttData.Hide();
-                        comboRX2Preamp.Parent = this;
+                        // comboRX2Preamp.Parent = this;
                         comboRX2Preamp.Show();
-                        udRX2StepAttData.Parent = this;
+                        // udRX2StepAttData.Parent = this;
                         udRX2StepAttData.Show();
                     }
                     else
                     {
                         comboRX2Preamp.Hide();
                         udRX2StepAttData.Hide();
-                        comboPreamp.Parent = this;
+                        // comboPreamp.Parent = this;
                         comboPreamp.Show();
-                        udRX1StepAttData.Parent = this;
+                        // udRX1StepAttData.Parent = this;
                         udRX1StepAttData.Show();
                     }
                     // lblMultiSMeter.Parent = this;
-                    lblMultiSMeter.Hide();
+                    //lblMultiSMeter.Hide();
                     lblRX2Meter.Hide();
                     // comboMeterRXMode.Parent = this;
                     comboMeterRXMode.Hide();
@@ -46622,8 +47019,12 @@ namespace PowerSDR
 
                     if (current_meter_display_mode == MultiMeterDisplayMode.Original)
                     {
-                        current_meter_display_mode = MultiMeterDisplayMode.Edge;
-                        SetupForm.comboMeterType.Text = "Edge";
+                        //current_meter_display_mode = MultiMeterDisplayMode.Edge;
+                        //SetupForm.comboMeterType.Text = "Edge";
+                        lblRX2Meter.Parent = this;
+                        picRX2Meter.SendToBack();
+                        lblRX2Meter.Show();
+                        lblRX2Meter.BringToFront();
                     }
                     /*      picMultiMeterDigital.Hide();
                           lblMultiSMeter.Show();
@@ -46671,10 +47072,10 @@ namespace PowerSDR
             else
                 panelMode.Hide();
 
-            this.RepositionControlsForCollapsedlDisplay();
+            RepositionControlsForCollapsedlDisplay();
 
-            this.Size = new Size(this.SetupForm.CollapsedWidth,
-                this.SetupForm.CollapsedHeight);
+            this.Size = new Size(SetupForm.CollapsedWidth,
+                SetupForm.CollapsedHeight);
         }
 
         private void RepositionControlsForCollapsedlDisplay()
@@ -46683,7 +47084,7 @@ namespace PowerSDR
             int h_delta = this.Width - console_basis_size.Width;
             int v_delta = Math.Max(this.Height - console_basis_size.Height, 0);
 
-            if (this.showTopControls)
+            if (showTopControls)
             {
                 if (show_rx1)
                 {
@@ -46701,14 +47102,16 @@ namespace PowerSDR
                         (picMultiMeterDigital.Width / 6)) * 2, txtMultiText.Location.Y + txtMultiText.Height + 9);
                     // picMultiMeterDigital.Size = new Size(pic_multi_meter_size_basis.Width * 2, pic_multi_meter_size_basis.Height);
                     //grpMultimeter.Size = new Size(grpMultimeter.Width, grpVFOB.Height);
-                    /* if (current_meter_display_mode == MultiMeterDisplayMode.Original)               
-                     {
-                         picMultiMeterDigital.Size = new Size(pic_multi_meter_size_basis.Width, pic_multi_meter_size_basis.Height);
-                         lblMultiSMeter.Location = new Point(picMultiMeterDigital.Location.X, picMultiMeterDigital.Location.Y +
-                                                             picMultiMeterDigital.Height);
-                         lblMultiSMeter.Show();
-                     }
-                     else lblMultiSMeter.Hide(); */
+                    if (current_meter_display_mode == MultiMeterDisplayMode.Original)
+                    {
+                        picMultiMeterDigital.Size = new Size(pic_multi_meter_size_basis.Width * 2, pic_multi_meter_size_basis.Height - lblMultiSMeter.Height);
+                        lblMultiSMeter.Size = new Size(lbl_multi_smeter_size_basis.Width * 2, lbl_multi_smeter_size_basis.Height);
+                        lblMultiSMeter.Location = new Point(picMultiMeterDigital.Location.X, picMultiMeterDigital.Location.Y +
+                                                            picMultiMeterDigital.Height);
+                        lblMultiSMeter.Show();
+                        lblMultiSMeter.BringToFront();
+                    }
+                    else lblMultiSMeter.Hide();
 
                     comboMeterRXMode.Location = new Point(txtMultiText.Location.X - comboMeterRXMode.Width - 5,
                         txtMultiText.Location.Y + 2);
@@ -46740,11 +47143,22 @@ namespace PowerSDR
                     ptbRF.Location = new Point(lblRF2.Location.X + lblRF2.Width, ptbRX1AF.Location.Y + ptbRX1AF.Height + 2);
                     comboAGC.Location = new Point(ptbRF.Location.X + ptbRF.Width + 2, ptbRF.Location.Y + 3);
                     //chkMUT.Location = new Point(ptbAF.Location.X + ptbAF.Width + 2, ptbAF.Location.Y);
-                    if (rx1_step_att_present)
-                        udRX1StepAttData.Location = new Point(comboAGC.Location.X + udRX1StepAttData.Width + 2, comboAGC.Location.Y);
-                    else
-                        comboPreamp.Location = new Point(comboAGC.Location.X + comboPreamp.Width + 2, comboAGC.Location.Y);
 
+                    udRX1StepAttData.Location = new Point(comboAGC.Location.X + udRX1StepAttData.Width + 2, comboAGC.Location.Y);
+                    comboPreamp.Location = new Point(comboAGC.Location.X + comboPreamp.Width + 2, comboAGC.Location.Y);
+
+                    if (rx1_step_att_present)
+                    {
+                        comboPreamp.Hide();
+                        udRX1StepAttData.Show();
+                        //udRX1StepAttData.Location = new Point(comboAGC.Location.X + udRX1StepAttData.Width + 2, comboAGC.Location.Y);
+                    }
+                    else
+                    {
+                        udRX1StepAttData.Hide();
+                        comboPreamp.Show();
+                        // comboPreamp.Location = new Point(comboAGC.Location.X + comboPreamp.Width + 2, comboAGC.Location.Y);
+                    }
                 }
                 else
                     if (show_rx2)
@@ -46763,14 +47177,16 @@ namespace PowerSDR
                             (picRX2Meter.Width / 6)) * 2, txtRX2Meter.Location.Y + txtRX2Meter.Height + 9);
                         // picMultiMeterDigital.Size = new Size(pic_multi_meter_size_basis.Width * 2, pic_multi_meter_size_basis.Height);
                         //grpMultimeter.Size = new Size(grpMultimeter.Width, grpVFOB.Height);
-                        /* if (current_meter_display_mode == MultiMeterDisplayMode.Original)               
-                         {
-                             picMultiMeterDigital.Size = new Size(pic_multi_meter_size_basis.Width, pic_multi_meter_size_basis.Height);
-                             lblMultiSMeter.Location = new Point(picMultiMeterDigital.Location.X, picMultiMeterDigital.Location.Y +
-                                                                 picMultiMeterDigital.Height);
-                             lblMultiSMeter.Show();
-                         }
-                         else lblMultiSMeter.Hide(); */
+                        if (current_meter_display_mode == MultiMeterDisplayMode.Original)
+                        {
+                            picRX2Meter.Size = new Size(pic_rx2meter_size_basis.Width * 2, pic_rx2meter_size_basis.Height - lblRX2Meter.Height);
+                            lblRX2Meter.Size = new Size(lbl_rx2meter_size_basis.Width * 2, lbl_rx2meter_size_basis.Height);
+                            lblRX2Meter.Location = new Point(picRX2Meter.Location.X, picRX2Meter.Location.Y +
+                                                                picRX2Meter.Height);
+                            lblRX2Meter.Show();
+                            lblRX2Meter.BringToFront();
+                        }
+                        else lblRX2Meter.Hide();
 
                         comboRX2MeterMode.Location = new Point(txtRX2Meter.Location.X - comboRX2MeterMode.Width - 5,
                             txtRX2Meter.Location.Y + 2);
@@ -46803,19 +47219,48 @@ namespace PowerSDR
                         //chkMUT.Location = new Point(ptbAF.Location.X + ptbAF.Width + 2, ptbAF.Location.Y);
                         //comboPreamp.Location = new Point(comboRX2AGC.Location.X + comboPreamp.Width + 2, comboRX2AGC.Location.Y);
 
+                        comboPreamp.Location = new Point(comboRX2AGC.Location.X + comboPreamp.Width + 2, comboRX2AGC.Location.Y);
+                        udRX1StepAttData.Location = new Point(comboRX2AGC.Location.X + udRX1StepAttData.Width + 2, comboRX2AGC.Location.Y);
+                        comboRX2Preamp.Location = new Point(comboRX2AGC.Location.X + comboRX2Preamp.Width + 2, comboRX2AGC.Location.Y);
+                        udRX2StepAttData.Location = new Point(comboRX2AGC.Location.X + udRX2StepAttData.Width + 2, comboRX2AGC.Location.Y);
+
                         if (rx2_preamp_present)
                         {
                             if (rx2_step_att_present)
-                                udRX2StepAttData.Location = new Point(comboRX2AGC.Location.X + udRX2StepAttData.Width + 2, comboRX2AGC.Location.Y);
+                            {
+                                comboPreamp.Hide();
+                                udRX1StepAttData.Hide();
+                                comboRX2Preamp.Hide();
+                                udRX2StepAttData.Show();
+                                // udRX2StepAttData.Location = new Point(comboRX2AGC.Location.X + udRX2StepAttData.Width + 2, comboRX2AGC.Location.Y);
+                            }
                             else
-                                comboRX2Preamp.Location = new Point(comboRX2AGC.Location.X + comboRX2Preamp.Width + 2, comboRX2AGC.Location.Y);
+                            {
+                                comboPreamp.Hide();
+                                udRX1StepAttData.Hide();
+                                udRX2StepAttData.Hide();
+                                comboRX2Preamp.Show();
+                                // comboRX2Preamp.Location = new Point(comboRX2AGC.Location.X + comboRX2Preamp.Width + 2, comboRX2AGC.Location.Y);
+                            }
                         }
                         else
                         {
                             if (rx1_step_att_present)
-                                udRX1StepAttData.Location = new Point(comboRX2AGC.Location.X + udRX1StepAttData.Width + 2, comboRX2AGC.Location.Y);
+                            {
+                                comboPreamp.Hide();
+                                comboRX2Preamp.Hide();
+                                udRX2StepAttData.Hide();
+                                udRX1StepAttData.Show();
+                                //udRX1StepAttData.Location = new Point(comboRX2AGC.Location.X + udRX1StepAttData.Width + 2, comboRX2AGC.Location.Y);
+                            }
                             else
-                                comboPreamp.Location = new Point(comboRX2AGC.Location.X + comboPreamp.Width + 2, comboRX2AGC.Location.Y);
+                            {
+                                udRX1StepAttData.Hide();
+                                comboRX2Preamp.Hide();
+                                udRX2StepAttData.Hide();
+                                comboPreamp.Show();
+                                // comboPreamp.Location = new Point(comboRX2AGC.Location.X + comboPreamp.Width + 2, comboRX2AGC.Location.Y);
+                            }
                         }
                     }
             }
@@ -47644,6 +48089,12 @@ namespace PowerSDR
         private void CAT2port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
 
+        }
+
+        private void chkMON_Click(object sender, EventArgs e)
+        {
+            if (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)
+                chkCWSidetone.Checked = chkMON.Checked;
         }
 
     }

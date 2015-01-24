@@ -62,6 +62,7 @@ warren@wpratt.com
 #include "meterlog10.h"
 #include "nob.h"
 #include "nobII.h"
+#include "osctrl.h"
 #include "patchpanel.h"
 #include "resample.h"
 #include "RXA.h"
