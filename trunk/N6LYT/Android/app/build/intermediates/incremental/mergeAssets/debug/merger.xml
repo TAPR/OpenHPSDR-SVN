@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="21.0.0"><source path="/home/john/AndroidstudioProjects/HPSDR-WDSP/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/assets"/></dataSet><dataSet config="main"><source path="/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/assets"/></dataSet><dataSet config="debug"><source path="/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/debug/assets"/></dataSet></merger>
