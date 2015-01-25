@@ -143,7 +143,7 @@ ADDED from AndroidManifest.xml:75:9
 		ADDED from AndroidManifest.xml:77:13
 	android:name
 		ADDED from AndroidManifest.xml:76:13
-activity#org.g0orx.openhpsdr.Radio2RXActivity
+activity#org.g0orx.openhpsdr.CWActivity
 ADDED from AndroidManifest.xml:80:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:83:13
@@ -151,29 +151,21 @@ ADDED from AndroidManifest.xml:80:9
 		ADDED from AndroidManifest.xml:82:13
 	android:name
 		ADDED from AndroidManifest.xml:81:13
-activity#org.g0orx.openhpsdr.CWActivity
+activity#org.g0orx.openhpsdr.WisdomActivity
 ADDED from AndroidManifest.xml:85:9
-	android:screenOrientation
-		ADDED from AndroidManifest.xml:88:13
 	android:label
 		ADDED from AndroidManifest.xml:87:13
 	android:name
 		ADDED from AndroidManifest.xml:86:13
-activity#org.g0orx.openhpsdr.WisdomActivity
-ADDED from AndroidManifest.xml:90:9
-	android:label
-		ADDED from AndroidManifest.xml:92:13
-	android:name
-		ADDED from AndroidManifest.xml:91:13
 activity#org.g0orx.openhpsdr.BandscopeActivity
-ADDED from AndroidManifest.xml:94:9
+ADDED from AndroidManifest.xml:89:9
 	android:label
-		ADDED from AndroidManifest.xml:96:13
+		ADDED from AndroidManifest.xml:91:13
 	android:name
-		ADDED from AndroidManifest.xml:95:13
+		ADDED from AndroidManifest.xml:90:13
 activity#org.g0orx.openhpsdr.IFActivity
-ADDED from AndroidManifest.xml:98:9
+ADDED from AndroidManifest.xml:93:9
 	android:label
-		ADDED from AndroidManifest.xml:100:13
+		ADDED from AndroidManifest.xml:95:13
 	android:name
-		ADDED from AndroidManifest.xml:99:13
+		ADDED from AndroidManifest.xml:94:13
