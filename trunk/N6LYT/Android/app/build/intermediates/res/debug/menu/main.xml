@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_help"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/title_activity_help"/>
+    
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/title_activity_about"/>
+
+</menu><!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/menu/main.xml -->
