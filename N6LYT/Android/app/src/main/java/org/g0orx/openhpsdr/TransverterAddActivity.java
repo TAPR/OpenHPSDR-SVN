@@ -114,7 +114,7 @@ public class TransverterAddActivity extends Activity implements OnTouchListener 
 			}
 			
 			if(!error) {
-				Transverter xvtr=new Transverter();
+				Transverter xvtr=new Transverter(3);
 				xvtr.setName(name);
 				xvtr.setIfFrequency(ifreq);
 				BandEdge bandedge=new BandEdge();
@@ -122,11 +122,20 @@ public class TransverterAddActivity extends Activity implements OnTouchListener 
 				bandedge.setHigh(efreq);
 				xvtr.setBandEdge(bandedge);
 				BandStack bandstack=new BandStack();
-				bandstack.setFilterLow(300);
-				bandstack.setFilterHigh(2700);
+                bandstack.setFilter(6);
 				bandstack.setMode(Modes.USB);
 				bandstack.setFrequency(sfreq+((efreq-sfreq)/2));
 				xvtr.setBandStack(0, bandstack);
+                bandstack=new BandStack();
+                bandstack.setFilter(6);
+                bandstack.setMode(Modes.USB);
+                bandstack.setFrequency(sfreq+((efreq-sfreq)/2));
+                xvtr.setBandStack(1, bandstack);
+                bandstack=new BandStack();
+                bandstack.setFilter(6);
+                bandstack.setMode(Modes.USB);
+                bandstack.setFrequency(sfreq+((efreq-sfreq)/2));
+                xvtr.setBandStack(2, bandstack);
 				configuration.bands.add(xvtr);
 				
 				Log.i("TransverterAddActivity",name+" Added");

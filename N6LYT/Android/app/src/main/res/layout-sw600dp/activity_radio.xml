@@ -11,24 +11,33 @@
        android:layout_height="wrap_content"
        android:background="@android:color/black" >
 
-       <Spinner
-           android:id="@+id/spinnerBand"
+       <Button
+           android:id="@+id/buttonBand"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_alignParentLeft="true" />
+           android:layout_alignParentLeft="true"
+           android:text="Band" />
 
-       <Spinner
-           android:id="@+id/spinnerMode"
+       <Button
+           android:id="@+id/buttonMode"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_toRightOf="@+id/spinnerBand" />
+           android:layout_toRightOf="@+id/buttonBand"
+           android:text="Mode" />
+
+       <Button
+           android:id="@+id/buttonFilter"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/buttonMode"
+           android:text="Filter" />
 
        <Button
            android:id="@+id/buttonConfigure"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="Configure"
-           android:layout_toRightOf="@+id/spinnerMode"/>
+           android:layout_toRightOf="@+id/buttonFilter"
+           android:text="Configure" />
 
        <Button
            android:id="@+id/buttonLock"
@@ -77,17 +86,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/black" >
-
-
-
-        <!--
-        <Button
-            android:id="@+id/buttonDebug"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="Debug" />
-        -->
         
     </RelativeLayout>
 

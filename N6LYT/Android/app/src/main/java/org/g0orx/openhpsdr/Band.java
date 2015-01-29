@@ -6,8 +6,13 @@ import java.io.Serializable;
 public class Band implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+
+    public Band() {
+
+    }
 	
-	public Band() {
+	public Band(int bandstacksize) {
+        bandstack=new BandStack[bandstacksize];
 	}
 	
 	public void setName(String name) {
@@ -15,7 +20,7 @@ public class Band implements Serializable {
 	}
 	
 	public void setBandStack(int entry,BandStack bandstack) throws IllegalArgumentException {
-		if(entry<0 || entry>=STACK_SIZE) {
+		if(entry<0 || entry>=this.bandstack.length) {
 			throw new IllegalArgumentException();
 		}
 		this.bandstack[entry]=bandstack;
@@ -44,6 +49,7 @@ public class Band implements Serializable {
 	public BandStack get() {
 		return bandstack[bandstackentry];
 	}
+    public int getBandstackentry() { return bandstackentry; }
 	
 	public float getTxGain() {
 		return txgain;
@@ -56,7 +62,7 @@ public class Band implements Serializable {
 	
 	public BandStack next() {
 		bandstackentry++;
-		if(bandstackentry>=STACK_SIZE) {
+		if(bandstackentry>=bandstack.length) {
 			bandstackentry=0;
 		}
 		return bandstack[bandstackentry];
@@ -65,7 +71,7 @@ public class Band implements Serializable {
 	public BandStack previous() {
 		bandstackentry--;
 		if(bandstackentry<0) {
-			bandstackentry=STACK_SIZE-1;
+			bandstackentry=bandstack.length-1;
 		}
 		return bandstack[bandstackentry];
 	}
@@ -81,12 +87,10 @@ public class Band implements Serializable {
 	public int getSquelchValue() {
 		return squelchvalue;
 	}
-	
-	public static final int STACK_SIZE=1;
 
 	private String name;
 	private int bandstackentry=0;
-	private BandStack[] bandstack=new BandStack[STACK_SIZE];
+	private BandStack[] bandstack;
 	private BandEdge bandedge;
 	
 	private boolean squelch=false;
