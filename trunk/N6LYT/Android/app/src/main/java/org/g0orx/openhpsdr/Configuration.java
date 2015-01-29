@@ -6,7 +6,7 @@ import org.g0orx.openhpsdr.discovery.Discovered;
 
 public class Configuration  implements Serializable {
 
-	private static final long serialVersionUID = 5L;
+	private static final long serialVersionUID = 6L;
 	
 	public static Configuration getInstance() {
 		if(instance==null) {

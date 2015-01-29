@@ -6,7 +6,12 @@ public class Transverter extends Band implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public Transverter() {
+    public Transverter() {
+
+    }
+
+	public Transverter(int bandstacks) {
+        super(bandstacks);
 	}
 	
 	public void setIfFrequency(long frequency) {

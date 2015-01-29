@@ -140,8 +140,8 @@ public class TransverterUpdateActivity extends Activity implements OnTouchListen
 				bandedge.setHigh(efreq);
 				xvtr.setBandEdge(bandedge);
 				BandStack bandstack=new BandStack();
-				bandstack.setFilterLow(300);
-				bandstack.setFilterHigh(2700);
+                Filter filter=Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
+                bandstack.setFilter(6);
 				bandstack.setMode(Modes.USB);
 				bandstack.setFrequency(sfreq+((efreq-sfreq)/2));
 				xvtr.setBandStack(0, bandstack);

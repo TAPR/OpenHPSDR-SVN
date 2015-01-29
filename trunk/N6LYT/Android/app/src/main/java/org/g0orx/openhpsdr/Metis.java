@@ -562,7 +562,8 @@ public class Metis extends Thread {
 
                     if (transmit) {
                         if (tuning) {
-                            tunefrequency=bandstack.getFilterLow()+((bandstack.getFilterHigh()-bandstack.getFilterLow())/2);
+                            Filter filter=Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
+                            tunefrequency=filter.getLow()+((filter.getHigh()-filter.getLow())/2);
                             phase = sineWave(inmiclsamples, inmiclsamples.length, phase, tunefrequency);
 
                             wdsp.fexchange2(txchannel, inmiclsamples, inmicrsamples, outlsamples, outrsamples, error);

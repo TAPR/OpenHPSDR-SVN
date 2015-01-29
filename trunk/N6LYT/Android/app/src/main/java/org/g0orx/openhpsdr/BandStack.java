@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class BandStack implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	public BandStack() {
 	}
@@ -20,14 +20,8 @@ public class BandStack implements Serializable {
 	public void setMode(int mode) {
 		this.mode=mode;
 	}
-	
-	public void setFilterLow(int filterlow) {
-		this.filterlow=filterlow;
-	}
-	
-	public void setFilterHigh(int filterhigh) {
-		this.filterhigh=filterhigh;
-	}
+
+    public void setFilter(int filter) { this.filter=filter; }
 	
 	public void setRxAntenna(int antenna) {
 		rxantenna=antenna;
@@ -48,14 +42,8 @@ public class BandStack implements Serializable {
 	public int getMode() {
 		return mode;
 	}
-	
-	public int getFilterLow() {
-		return filterlow;
-	}
-	
-	public int getFilterHigh() {
-		return filterhigh;
-	}
+
+    public int getFilter() { return filter; }
 	
 	public int getRxAntenna() {
 		return rxantenna;
@@ -77,8 +65,7 @@ public class BandStack implements Serializable {
 	private long frequency;
 	private long subrxfrequency;
 	private int mode;
-	private int filterlow;
-	private int filterhigh;
+    private int filter;
 	
 	private int agc=0;
 	
