@@ -33,7 +33,7 @@ unix {
     CUDA_DIR = $$system(which nvcc | sed 's,/bin/nvcc$,,')
 
 x86_64 { HOST_ARCH = x86_64-linux }
-arm7   { HOST_ARCH = armv7-linux-gnueabihf }
+armv7l { HOST_ARCH = armv7-linux-gnueabihf }
 
     INCLUDEPATH += \
         ./ \
