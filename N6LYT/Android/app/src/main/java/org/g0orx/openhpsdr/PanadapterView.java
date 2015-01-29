@@ -179,6 +179,11 @@ public class PanadapterView extends SurfaceView {
             canvas.drawLines(points, paint);
         }
 
+        if(metis.isADC1Overflow()) {
+            paint.setColor(Color.RED);
+            canvas.drawText("ADC Overflow", WIDTH - (WIDTH / 4), HEIGHT-20, paint);
+        }
+
     }
 
     public void plotSpectrum(float[] samples) {

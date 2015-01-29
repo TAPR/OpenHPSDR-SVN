@@ -1490,7 +1490,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                                                     low=configuration.cwsidetonefrequency-low;
                                                     high=configuration.cwsidetonefrequency+high;
                                                 }
-
+                                                setMode(bandstack.getMode());
                                                 wdsp.SetRXABandpassFreqs(rxchannel, low, high);
                                                 wdsp.SetRXABandpassFreqs(subrxchannel, low, high);
                                                 wdsp.SetTXABandpassFreqs(txchannel, low, high);
