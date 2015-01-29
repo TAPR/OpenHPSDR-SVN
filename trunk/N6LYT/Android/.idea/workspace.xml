@@ -55,30 +55,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="a55701af-2f6f-4ad8-a17e-cff519115f5b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Filter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Frequency.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/modes/Mode.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_band.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_filter.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_mode.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/openHPSDR.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="$PROJECT_DIR$/app/app-release.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Band.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Band.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/BandStack.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/BandStack.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Bands.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Bands.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/org/g0orx/openhpsdr/BuildConfig.java" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/org/g0orx/openhpsdr/BuildConfig.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/modes/Modes.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/modes/Modes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/g0orx/openhpsdr/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/g0orx/openhpsdr/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Transverter.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Transverter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/TransverterAddActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/TransverterAddActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/TransverterUpdateActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/TransverterUpdateActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_radio.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_radio.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout-sw600dp/activity_radio.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-sw600dp/activity_radio.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout-sw720dp/activity_radio.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-sw720dp/activity_radio.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HPSDR-WDSP.iws" />
@@ -110,21 +92,20 @@
       <file leaf-file-name="RadioActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="9641" max-vertical-offset="31050">
-              <caret line="736" column="0" selection-start-line="736" selection-start-column="0" selection-end-line="736" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="-742.7778" vertical-offset="0" max-vertical-offset="28320">
+              <caret line="1492" column="77" selection-start-line="1492" selection-start-column="77" selection-end-line="1492" selection-end-column="77" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_radio.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-sw600dp/activity_radio.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="2295">
-              <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.114503816" vertical-offset="0" max-vertical-offset="1560">
+              <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -163,12 +144,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Metis.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Metis.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36641222" vertical-offset="7143" max-vertical-offset="18210">
-              <caret line="511" column="26" selection-start-line="511" selection-start-column="26" selection-end-line="511" selection-end-column="26" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="18001" max-vertical-offset="18750">
+              <caret line="1256" column="27" selection-start-line="1256" selection-start-column="27" selection-end-line="1256" selection-end-column="27" />
+              <folding>
+                <element signature="e#40834#40835#0" expanded="true" />
+                <element signature="e#40869#40870#0" expanded="true" />
+                <element signature="e#40908#40909#0" expanded="true" />
+                <element signature="e#40943#40944#0" expanded="true" />
+                <element signature="e#40982#40983#0" expanded="true" />
+                <element signature="e#41017#41018#0" expanded="true" />
+                <element signature="e#41056#41057#0" expanded="true" />
+                <element signature="e#41091#41092#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -176,8 +166,8 @@
       <file leaf-file-name="PanadapterView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="6090">
-              <caret line="89" column="34" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2099" max-vertical-offset="5835">
+              <caret line="183" column="74" selection-start-line="183" selection-start-column="74" selection-end-line="183" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -858,7 +848,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Transverter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Frequency.java" />
@@ -876,11 +865,12 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout-sw600dp/activity_radio.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-sw720dp/activity_radio.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/modes/Mode.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Bands.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/TransverterAddActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -888,8 +878,8 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="75" />
-    <option name="y" value="87" />
+    <option name="x" value="58" />
+    <option name="y" value="68" />
     <option name="width" value="1500" />
     <option name="height" value="905" />
   </component>
@@ -1341,7 +1331,11 @@
       <created>1422199720529</created>
       <updated>1422199720529</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Updates for release 1.16">
+      <created>1422541120047</created>
+      <updated>1422541120047</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1365,7 +1359,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="75" y="87" width="1500" height="905" extended-state="0" />
+    <frame x="58" y="68" width="1500" height="905" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
@@ -1375,14 +1369,14 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27974683" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27690288" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329904" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32020998" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32677165" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27690288" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27690288" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27690288" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18518518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
@@ -1418,7 +1412,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Testing commit from Android Studio" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing commit from Android Studio" />
+    <MESSAGE value="Updates for release 1.16" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates for release 1.16" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1603,14 +1598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="1560">
-          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -1626,6 +1613,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="641" max-vertical-offset="1530">
           <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1648,6 +1636,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3060">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1688,6 +1677,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="516" max-vertical-offset="3435">
           <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1801,22 +1791,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9641" max-vertical-offset="31050">
-          <caret line="736" column="0" selection-start-line="736" selection-start-column="0" selection-end-line="736" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1034" max-vertical-offset="6000">
-          <caret line="89" column="34" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="15990">
@@ -1843,8 +1817,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36641222" vertical-offset="7143" max-vertical-offset="18210">
-          <caret line="511" column="26" selection-start-line="511" selection-start-column="26" selection-end-line="511" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="18001" max-vertical-offset="18750">
+          <caret line="1256" column="27" selection-start-line="1256" selection-start-column="27" selection-end-line="1256" selection-end-column="27" />
+          <folding>
+            <element signature="e#40834#40835#0" expanded="true" />
+            <element signature="e#40869#40870#0" expanded="true" />
+            <element signature="e#40908#40909#0" expanded="true" />
+            <element signature="e#40943#40944#0" expanded="true" />
+            <element signature="e#40982#40983#0" expanded="true" />
+            <element signature="e#41017#41018#0" expanded="true" />
+            <element signature="e#41056#41057#0" expanded="true" />
+            <element signature="e#41091#41092#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2099" max-vertical-offset="5835">
+          <caret line="183" column="74" selection-start-line="183" selection-start-column="74" selection-end-line="183" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-742.7778" vertical-offset="0" max-vertical-offset="28320">
+          <caret line="1492" column="77" selection-start-line="1492" selection-start-column="77" selection-end-line="1492" selection-end-column="77" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.114503816" vertical-offset="0" max-vertical-offset="1560">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
           <folding />
         </state>
       </provider>

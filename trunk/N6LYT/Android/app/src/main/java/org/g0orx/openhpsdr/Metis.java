@@ -515,6 +515,10 @@ public class Metis extends Thread {
 					ain6=(rxcontrol3<<8)+(rxcontrol4&0xFF);
 					break;
 				case 4:
+                    adc1overflow=(rxcontrol1&0x01)==0x01;
+                    adc2overflow=(rxcontrol2&0x01)==0x01;
+                    adc3overflow=(rxcontrol3&0x01)==0x01;
+                    adc4overflow=(rxcontrol4&0x01)==0x01;
 					break;
 				}
 				state++;
@@ -823,6 +827,15 @@ public class Metis extends Thread {
                         break;
                     }
                     case 4: {
+                        sendbuffer[11] = 0x1C;
+                        sendbuffer[12] = (byte)(0x00 & (rx1adc&0x03));
+                        sendbuffer[13] = 0x00;
+                        sendbuffer[14] = 0x00;
+                        sendbuffer[15] = 0x00;
+                        command++;
+                        break;
+                    }
+                    case 5: {
                         sendbuffer[11] = 0x1E;
                         int mode=bandstack.getMode();
                         sendbuffer[12]=(byte)configuration.cwinternal;
@@ -835,7 +848,7 @@ public class Metis extends Thread {
                         command++;
                         break;
                     }
-                    case 5: {
+                    case 6: {
                         sendbuffer[11] = 0x20;
                         sendbuffer[12] = (byte)configuration.cwhangtime;
                         sendbuffer[13] = (byte)(configuration.cwhangtime>>8);
@@ -1046,6 +1059,22 @@ public class Metis extends Thread {
         return (result[0]==1);
     }
 
+    public boolean isADC1Overflow() {
+        return adc1overflow;
+    }
+
+    public boolean isADC2Overflow() {
+        return adc2overflow;
+    }
+
+    public boolean isADC3Overflow() {
+        return adc3overflow;
+    }
+
+    public boolean isADC4Overflow() {
+        return adc4overflow;
+    }
+
     private boolean bandscope;
 
     private PTTListener pttListener;
@@ -1210,6 +1239,11 @@ public class Metis extends Thread {
 	private boolean dot=false;
 	
 	private boolean lt2208_overflow=false;
+    private boolean adc1overflow=false;
+    private boolean adc2overflow=false;
+    private boolean adc3overflow=false;
+    private boolean adc4overflow=false;
+
 	
 	private int ain3=0;
 	private int ain4=0;
@@ -1219,6 +1253,8 @@ public class Metis extends Thread {
 	private int txchannel=1;
 	private int subrxchannel=2;
     private int bschannel=3;
+
+    private int rx1adc=0x00; // ADC2
 	
 	public double getPacketLoss() {
 		double loss=(packetsmissed/packetsreceived)*100.0;
