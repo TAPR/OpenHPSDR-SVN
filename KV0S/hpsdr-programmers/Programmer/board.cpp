@@ -52,6 +52,7 @@ Board::Board(long ipaddr,unsigned char* macaddr,unsigned char software_version,u
     boardtype[1] = "hermes";
     boardtype[2] = "griffin";
     boardtype[4] = "angelia";
+    boardtype[5] = "orion";
 
     jumper[0] = "J1";
     jumper[1] = "J12";
