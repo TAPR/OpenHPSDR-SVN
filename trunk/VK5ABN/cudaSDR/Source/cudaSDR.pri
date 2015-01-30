@@ -25,7 +25,6 @@ HEADERS += \
 	./src/DataEngine/cusdr_dataIO.h \
 	./src/DataEngine/cusdr_discoverer.h \
 	./src/DataEngine/cusdr_receiver.h \
-	./src/QtDSP/fftw3.h \
 	./src/QtDSP/qtdsp_demodulation.h \
 	./src/QtDSP/qtdsp_dspEngine.h \
 	./src/QtDSP/qtdsp_dualModeAverager.h \
