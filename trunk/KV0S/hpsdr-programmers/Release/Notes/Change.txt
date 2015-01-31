@@ -1,3 +1,9 @@
+Program: HPSDRBottloader
+Version: 2.0.4.4
+Date: January 31, 2015
+
+2.0.4.4 (2015-1-31) Add missing Orion board name
+
 Program: HPSDRProgrammer
 Version: 2.0.4.10
 Date: October 31, 2014
@@ -6,7 +12,7 @@ Date: October 31, 2014
 2.0.4.7 (2014-2-8) - Worked on protection in loading the wrong type of board
 2.0.4.8 (2014-2-8) - Fixed spelling error
 2.0.4.9 (2014-2-9) - Fixed the multi board selection problem
-2.0.4.10 (2014-7-2) - Disallow progamming with no file selected
-2.0.4.11 (2014-11-9) - Shortened discovery delay (2 sec) from 12 sec.  Will levae 2.0.4.10 for those with problems.
+2.0.4.10 (2014-7-2) - Disallow programming with no file selected
+2.0.4.11 (2014-11-9) - Shortened discovery delay (2 sec) from 12 sec.  Will leave 2.0.4.10 for those with problems.
 
 
