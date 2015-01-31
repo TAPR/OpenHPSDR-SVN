@@ -7,6 +7,7 @@
 #define STARTUP_H
 
 #include <QtCore/QCoreApplication>
+#include <QObject>
 
 #include "client/clientlistener.h"
 #include "hpsdr/connection.h"
@@ -18,13 +19,14 @@
 */
 class Startup : public QObject
 {
+    Q_OBJECT;
 public:
 
     /** Constructor */
     Startup(int argc, char *argv[]);
 
 public slots:
-    void setSampleRate(int);
+    void setSampleRate(int rate);
 
 protected:
 

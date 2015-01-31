@@ -10,5 +10,6 @@ int main(int argc, char *argv[]) {
 
     Startup* startup=new Startup(argc,argv);
 
+    startup->exec();
     application.exec();
 }

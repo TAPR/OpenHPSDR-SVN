@@ -345,6 +345,7 @@ void WriteBoard::changeIP(QStringList *saddr,  unsigned char* macaddr)
     for(i=13;i<63;i++) {
         buffer[i]=(char)0x00;
     }
+    qDebug() << "buffer" << buffer;
 
     if(socket->writeDatagram((const char*)buffer,(qint64)sizeof(buffer),QHostAddress::Broadcast,1024)<0) {
         qDebug()<<"Error: changeIP: writeDatagram failed "<<socket->errorString();
