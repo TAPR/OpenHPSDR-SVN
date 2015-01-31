@@ -9,9 +9,9 @@ QT       += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 win32 {
-    INCLUDEPATH += "c:/WpdPack/Include"
-    LIBS += "c:/WpdPack/Lib/wpcap.lib"  "C:/Qt/4.8.4/tools/MinGW-gcc-4.4.0-2/mingw/lib/libws2_32.a"
- }
+    INCLUDEPATH += "C:/src/WpdPack/Include"
+    LIBS += "C:/src/WpdPack/Lib/wpcap.lib" "C:/Qt/Tools/mingw491_32/i686-w64-mingw32/lib/libwsock32.a"
+}
 
 macx {
     LIBS += -framework Security -lpcap
