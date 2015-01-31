@@ -2895,6 +2895,9 @@ namespace PowerSDR
             udDSPRX1DollyF1_ValueChanged(this, e);
             udDSPRX1SubDollyF1_ValueChanged(this, e);
             udDSPRX2DollyF1_ValueChanged(this, e);
+            // Alex
+            radAlexAutoControl_CheckedChanged(this, e);
+            radAlexManualControl_CheckedChanged(this, e);
         }
 
         public string[] GetTXProfileStrings()
@@ -17011,8 +17014,7 @@ namespace PowerSDR
                 //  console.AlexPresent = chkAlexPresent.Checked;
                 console.chkSR.Checked = false;
             }
-
-            // JanusAudio.SetAlexManEnable(val & 0x01);
+            else JanusAudio.SetAlexManEnable(0);
 
         }
 
@@ -17028,6 +17030,7 @@ namespace PowerSDR
                 //  radBPHPFled.Checked = true;
                 console.chkSR.Checked = true; //ALEX console
             }
+            else JanusAudio.SetAlexManEnable(0x01);
 
             /*  if (radAlexManualCntl.Checked)
               {

@@ -21,6 +21,7 @@
 // 
 // 
 using System;
+using System.Threading;
 
 namespace PowerSDR
 {
@@ -61,6 +62,7 @@ namespace PowerSDR
         public static bool RxOutOnTx = false;
         public static bool Ext1OutOnTx = false;
         public static bool Ext2OutOnTx = false;
+        public static bool init_update = false;
 
 		public void setRxAnt(Band band, byte ant) 
 		{ 
@@ -179,9 +181,12 @@ namespace PowerSDR
 				JanusAudio.SetAlexAntBits(0, 0, 0); 
 				return;
 			}
+            
+
 			int rx_only_ant; 
 			int trx_ant; 
-			int rx_out; 
+			int rx_out;
+            int xrx_out;
 
 			int idx = (int)band - (int)Band.B160M; 
 
@@ -223,7 +228,15 @@ namespace PowerSDR
                 rx_out = rx_only_ant != 0 ? 1 : 0;
                 trx_ant = RxAnt[idx];
             }
-          //  int rc = JanusAudio.SetAlexAntBits(rx_ant, tx_ant, 1);
+
+            if (init_update)
+            {
+                if (rx_out == 0) xrx_out = 1; // workaround for Hermes
+                else xrx_out = 0;
+                JanusAudio.SetAlexAntBits(rx_only_ant, trx_ant, xrx_out);
+                init_update = false;
+                Thread.Sleep(10);
+            }
 			JanusAudio.SetAlexAntBits(rx_only_ant, trx_ant, rx_out); 
 
 			// don't allow changing antenna selections when mox is activated 

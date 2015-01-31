@@ -3632,7 +3632,7 @@ namespace PowerSDR
             parser.nGet = 0;
             int step = StringToFreq(commands.ZZAC(""));
             parser.nSet = 11;
-            long freq = Convert.ToInt32(commands.ZZFA(""));
+            long freq = Convert.ToInt64(commands.ZZFA(""));
             parser.nAns = 11;
 
             int mode = Convert.ToInt16(commands.ZZMD(""));
@@ -3758,7 +3758,7 @@ namespace PowerSDR
             parser.nGet = 0;
             int step = StringToFreq(commands.ZZAC(""));
             parser.nSet = 11;
-            long freq = Convert.ToInt32(commands.ZZFB(""));
+            long freq = Convert.ToInt64(commands.ZZFB(""));
             parser.nAns = 11;
 
             int mode = Convert.ToInt16(commands.ZZMD(""));
