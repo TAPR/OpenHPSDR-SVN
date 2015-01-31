@@ -10,6 +10,9 @@
 
 #include <QDir>
 #include <QObject>
+#include <QCommandLineParser>
+#include <QtCore/QCoreApplication>
+#include <QRegExp>
 
 /** Name of this application */
 #define APPNAME "QtDSPServer"
@@ -21,9 +24,16 @@
 #define DESCRIPTION "Qt DSP Server"
 
 
-Startup::Startup(int argv, char* argc[]) {
+Startup::Startup(int argc, char* argv[]) {
 
-    //QString configFileName=Static::getConfigDir()+"/"+APPNAME+".ini";
+    QString configFileName=Static::getConfigDir()+"/"+APPNAME+".ini";
+
+
+    QCoreApplication app(argc, argv);
+    QCoreApplication::setApplicationName("QtDSPServer");
+    QCoreApplication::setApplicationVersion("1.0");
+
+    QCommandLineParser parser;
 
     // defaults
     receiver=0;
@@ -38,14 +48,14 @@ Startup::Startup(int argv, char* argc[]) {
     QRegExp serverArg("--serverport=(\\d{1,6}$)");
     QRegExp hostArg("--server=(\\S+$)");
 
-    for (int i = 1; i < argv; ++i) {
-        if (rxArg.indexIn(argc[i]) != -1 ) {
+    for (int i = 1; i < argc; ++i) {
+        if (rxArg.indexIn(argv[i]) != -1 ) {
             receiver=rxArg.cap(1).toInt();
-        } else if (clientArg.indexIn(argc[i]) != -1 ) {
+        } else if (clientArg.indexIn(argv[i]) != -1 ) {
             clientPort=clientArg.cap(1).toInt();
-        } else if (serverArg.indexIn(argc[i]) != -1 ) {
+        } else if (serverArg.indexIn(argv[i]) != -1 ) {
             serverPort=serverArg.cap(1).toInt();
-        } else if (hostArg.indexIn(argc[i]) != -1 ) {
+        } else if (hostArg.indexIn(argv[i]) != -1 ) {
             host=hostArg.cap(1);
         }
     }
@@ -53,6 +63,7 @@ Startup::Startup(int argv, char* argc[]) {
     qDebug()<<"clientPort:"<<clientPort;
     qDebug()<<"serverPort:"<<serverPort;
     qDebug()<<"host:"<<host;
+
 
     // startup the client listener
     connect(Connection::getInstance(),SIGNAL(setSampleRate(int)),this,SLOT(setSampleRate(int)));
