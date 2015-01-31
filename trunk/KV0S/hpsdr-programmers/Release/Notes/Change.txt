@@ -1,4 +1,4 @@
-Program: HPSDRBottloader
+Program: HPSDRBootloader
 Version: 2.0.4.4
 Date: January 31, 2015
 
