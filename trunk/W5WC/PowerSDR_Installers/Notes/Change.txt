@@ -29,6 +29,7 @@ This new control has been added in Setup on the DSP -> AM/SAM tab.
 - Corrects the sideband reversal when using the SAM sideband select feature.
 - Corrects the NaN error in the SWR display.
 - Corrects error in reporting negative 6m reverse power values.
+- Corrects problem when tuning in the 10GHz frequency range using a DJ Console.
 - Added workaround for initializing Hermes PA relays.
 - Added "Stereo Diversity" capability for Beta testing.
 
