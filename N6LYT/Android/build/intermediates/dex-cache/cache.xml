@@ -6,35 +6,21 @@
         jumboMode="false"
         revision="20.0.0"
         sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
-        <dex dex="/home/john/AndroidstudioProjects/openHPSDR/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-45fa6f66c61b62ed5c991ba87031991c4e18004f.jar" />
+        <dex dex="/home/john/AndroidstudioProjects/openHPSDR/app/build/intermediates/pre-dexed/release/internal_impl-21.0.0-45fa6f66c61b62ed5c991ba87031991c4e18004f.jar" />
     </item>
     <item
         jar="/home/john/Development/adt-bundle-linux-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
-        <dex dex="/home/john/AndroidstudioProjects/HPSDR-WDSP/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-06a059f68252a332d8b2374f40f6aaf18fc7496d.jar" />
-    </item>
-    <item
-        jar="/home/john/AndroidstudioProjects/HPSDR-WDSP/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
-        <dex dex="/home/john/AndroidstudioProjects/HPSDR-WDSP/app/build/intermediates/pre-dexed/debug/classes-258ce4fb8494f8b9ae7f0b8582bcb1d5ae5c6cbf.jar" />
+        <dex dex="/home/john/AndroidstudioProjects/openHPSDR/app/build/intermediates/pre-dexed/release/support-annotations-21.0.0-06a059f68252a332d8b2374f40f6aaf18fc7496d.jar" />
     </item>
     <item
         jar="/home/john/AndroidstudioProjects/openHPSDR/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="686344a780033e4ba22b926cd225f8d4941247e6">
-        <dex dex="/home/john/AndroidstudioProjects/openHPSDR/app/build/intermediates/pre-dexed/debug/classes-3000a27895fe1461b5da0c7998b15e0e94e7f2f5.jar" />
-    </item>
-    <item
-        jar="/home/john/AndroidstudioProjects/HPSDR-WDSP/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
-        <dex dex="/home/john/AndroidstudioProjects/HPSDR-WDSP/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-0111dd64c3da28a59337c0d335632efd07573ac0.jar" />
+        <dex dex="/home/john/AndroidstudioProjects/openHPSDR/app/build/intermediates/pre-dexed/release/classes-3000a27895fe1461b5da0c7998b15e0e94e7f2f5.jar" />
     </item>
 
 </items>

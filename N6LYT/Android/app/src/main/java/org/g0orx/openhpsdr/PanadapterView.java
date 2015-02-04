@@ -43,7 +43,6 @@ public class PanadapterView extends SurfaceView {
 
             Log.i("PanadapterView", "width=" + WIDTH + " height=" + HEIGHT);
 
-            waterfall = new float[WIDTH];
             points = new float[WIDTH * 4];
         }
     }
@@ -79,6 +78,20 @@ public class PanadapterView extends SurfaceView {
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
         Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
+        int low=filter.getLow();
+        int high=filter.getHigh();
+        if(bandstack.getMode()==Modes.CWL) {
+            low=-configuration.cwsidetonefrequency-low;
+            high=-configuration.cwsidetonefrequency+high;
+        } else if(bandstack.getMode()==Modes.CWU) {
+            low=configuration.cwsidetonefrequency-low;
+            high=configuration.cwsidetonefrequency+high;
+        }
+        filterLeft = ((int) low - (-(int) configuration.samplerate / 2)) * WIDTH / (int) configuration.samplerate;
+        filterRight = ((int) high - (-(int) configuration.samplerate / 2)) * WIDTH / (int) configuration.samplerate;
+        if (filterLeft == filterRight) {
+            filterRight++;
+        }
 
         long frequency = bandstack.getFrequency();
 
@@ -87,7 +100,7 @@ public class PanadapterView extends SurfaceView {
         canvas.drawRect(0, 0, WIDTH, HEIGHT, paint);
 
         // draw the filter
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.DKGRAY);
         canvas.drawRect(filterLeft, 0, filterRight, HEIGHT, paint);
 
         if (configuration.subrx) {
@@ -180,7 +193,7 @@ public class PanadapterView extends SurfaceView {
         // plot the spectrum
         paint.setColor(Color.WHITE);
 
-        if (configuration.spectrum) {
+        if (configuration.panadapter) {
             canvas.drawLines(points, paint);
         }
 
@@ -225,10 +238,6 @@ public class PanadapterView extends SurfaceView {
 
             if (sample > max) max = sample;
 
-            if (waterfall != null) {
-                waterfall[i] = sample;
-            }
-
             sample = (float) Math
                     .floor(((float) configuration.spectrumHigh - sample)
                             * (float) HEIGHT
@@ -248,6 +257,14 @@ public class PanadapterView extends SurfaceView {
             previous = sample;
         }
 
+        if (holder.getSurface().isValid()) {
+            Canvas canvas = holder.lockCanvas();
+            draw(canvas);
+            holder.unlockCanvasAndPost(canvas);
+        }
+
+        /*
+
         Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
         int low=filter.getLow();
         int high=filter.getHigh();
@@ -265,7 +282,7 @@ public class PanadapterView extends SurfaceView {
         }
 
         long frequency = bandstack.getFrequency();
-        if (configuration.spectrum || lastfrequency != frequency || lastfilterleft != filterLeft || lastfilterright != filterRight) {
+        if (configuration.panadapter || lastfrequency != frequency || lastfilterleft != filterLeft || lastfilterright != filterRight) {
             if (holder.getSurface().isValid()) {
                 Canvas canvas = holder.lockCanvas();
                 draw(canvas);
@@ -275,11 +292,8 @@ public class PanadapterView extends SurfaceView {
                 lastfilterright = filterRight;
             }
         }
+        */
 
-    }
-
-    public float[] getWaterfall() {
-        return waterfall;
     }
 
     public void setVfoLock() {
@@ -392,8 +406,6 @@ public class PanadapterView extends SurfaceView {
     private int HEIGHT = 0;
 
     private float[] points;
-
-    private float[] waterfall;
 
     private int filterLeft;
     private int filterRight;

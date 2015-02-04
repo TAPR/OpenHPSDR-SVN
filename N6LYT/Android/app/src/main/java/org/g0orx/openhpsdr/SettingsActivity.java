@@ -240,8 +240,8 @@ public class SettingsActivity extends Activity {
         settings.add(s);
 
         s = new Setting();
-        s.setTitle("Spectrum");
-        s.setValue(configuration.spectrum ? "On" : "Off");
+        s.setTitle("Panadapter");
+        s.setValue(configuration.panadapter ? "On" : "Off");
         settings.add(s);
 
         s = new Setting();
@@ -924,10 +924,10 @@ public class SettingsActivity extends Activity {
                                 }
                             });
                     d.show();
-                } else if ("Spectrum".equals(option)) {
+                } else if ("Panadapter".equals(option)) {
                     AlertDialog.Builder d = new AlertDialog.Builder(context);
 
-                    String title = "Spectrum";
+                    String title = "Panadapter";
                     String[] options = {"On", "Off"};
 
                     d.setTitle(title);
@@ -939,11 +939,11 @@ public class SettingsActivity extends Activity {
                                     Log.i("Configuration", "onClick:" + i);
                                     switch (i) {
                                         case 0:
-                                            configuration.spectrum = true;
+                                            configuration.panadapter = true;
                                             value = "On";
                                             break;
                                         case 1:
-                                            configuration.spectrum = false;
+                                            configuration.panadapter = false;
                                             value = "Off";
                                             break;
                                     }
