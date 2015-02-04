@@ -185,19 +185,19 @@ public class PanadapterView extends SurfaceView {
         }
 
         // paint the radio details
-        float sz=paint.getTextSize();
-        paint.setTextSize(sz*2.0F);
+        //float sz=paint.getTextSize();
+        //paint.setTextSize(sz*2.0F);
         paint.setColor(Color.GRAY);
         Discovered d=configuration.discovered;
         if(d!=null){
-            canvas.drawText(d.getDeviceName() + " " + d.getAddress() + " (" + d.getMac() + ")", 0, HEIGHT - 5, paint);
+            canvas.drawText(d.getDeviceName() + " " + d.getAddress() + " (" + d.getMac() + ")", 0, 20, paint);
         }
-        paint.setTextSize(sz);
+        //paint.setTextSize(sz);
 
 
         if(metis!=null && metis.isADC1Overflow()) {
             paint.setColor(Color.RED);
-            canvas.drawText("ADC Overflow", WIDTH - (WIDTH / 4), HEIGHT-20, paint);
+            canvas.drawText("ADC Overflow", WIDTH - (WIDTH / 4), 20, paint);
         }
 
     }
