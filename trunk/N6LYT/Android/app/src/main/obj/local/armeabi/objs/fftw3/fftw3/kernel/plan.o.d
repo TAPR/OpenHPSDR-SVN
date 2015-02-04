@@ -1,7 +1,7 @@
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/obj/local/armeabi/objs/fftw3/fftw3/kernel/plan.o: \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/kernel/plan.c \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/kernel/ifftw.h \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/config.h \
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/obj/local/armeabi/objs/fftw3/fftw3/kernel/plan.o: \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/kernel/plan.c \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/kernel/ifftw.h \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/config.h \
  /home/john/android-ndk-r10c/platforms/android-3/arch-arm/usr/include/stdlib.h \
  /home/john/android-ndk-r10c/platforms/android-3/arch-arm/usr/include/sys/cdefs.h \
  /home/john/android-ndk-r10c/platforms/android-3/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -31,9 +31,9 @@
  /home/john/android-ndk-r10c/platforms/android-3/arch-arm/usr/include/asm/siginfo.h \
  /home/john/android-ndk-r10c/platforms/android-3/arch-arm/usr/include/asm-generic/siginfo.h
 
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/kernel/ifftw.h:
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/kernel/ifftw.h:
 
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/config.h:
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/config.h:
 
 /home/john/android-ndk-r10c/platforms/android-3/arch-arm/usr/include/stdlib.h:
 

@@ -53,21 +53,11 @@ public class BandStack implements Serializable {
 		return txantenna;
 	}
 	
-	public void setAGC(int agc) {
-		this.agc=agc;
-	}
-	
-	public int getAGC() {
-		return agc;
-	}
-
-	
 	private long frequency;
 	private long subrxfrequency;
 	private int mode;
     private int filter;
-	
-	private int agc=0;
+
 	
 	private int rxantenna=NONE;
 	private int txantenna=ANT1;

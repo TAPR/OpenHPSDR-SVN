@@ -1,7 +1,7 @@
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/obj/local/x86/objs/fftw3/fftw3/kernel/tensor8.o: \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/kernel/tensor8.c \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/kernel/ifftw.h \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/config.h \
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/obj/local/x86/objs/fftw3/fftw3/kernel/tensor8.o: \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/kernel/tensor8.c \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/kernel/ifftw.h \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/config.h \
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/stdlib.h \
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/sys/cdefs.h \
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h \
@@ -32,9 +32,9 @@
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/asm/siginfo.h \
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/asm-generic/siginfo.h
 
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/kernel/ifftw.h:
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/kernel/ifftw.h:
 
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/config.h:
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/config.h:
 
 /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/stdlib.h:
 

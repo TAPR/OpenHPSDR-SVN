@@ -124,11 +124,14 @@ public class PanadapterView extends SurfaceView {
 
                     paint.setPathEffect(dashPath);
                     paint.setStrokeWidth(1);
-                    canvas.drawLine(i, 0, i, HEIGHT - 25, paint);
+                    canvas.drawLine(i, 0, i, HEIGHT, paint);
+
                     paint.setColor(Color.WHITE);
                     paint.setPathEffect(null);
+                    /*
                     fs = String.format("%d.%02d", f / 1000000, (f % 1000000) / 10000);
                     canvas.drawText(fs, i - 20, HEIGHT - 5, paint);
+                    */
                 }
             }
         }
@@ -137,8 +140,9 @@ public class PanadapterView extends SurfaceView {
         paint.setColor(Color.RED);
         canvas.drawLine((WIDTH / 2), 0, (WIDTH / 2), HEIGHT, paint);
 
+        /*
         // paint the frequency
-        if (metis.isTransmitting()) {
+        if (metis!=null && metis.isTransmitting()) {
             paint.setColor(Color.RED);
         } else {
             paint.setColor(Color.GREEN);
@@ -150,6 +154,7 @@ public class PanadapterView extends SurfaceView {
             paint.setColor(Color.GRAY);
             canvas.drawText(Frequency.toString(bandstack.getSubRxFrequency()), WIDTH - (WIDTH / 4), 40, paint);
         }
+        */
 
         // plot the band edge
         BandEdge bandedge = band.getBandEdge();
@@ -179,7 +184,18 @@ public class PanadapterView extends SurfaceView {
             canvas.drawLines(points, paint);
         }
 
-        if(metis.isADC1Overflow()) {
+        // paint the radio details
+        float sz=paint.getTextSize();
+        paint.setTextSize(sz*2.0F);
+        paint.setColor(Color.GRAY);
+        Discovered d=configuration.discovered;
+        if(d!=null){
+            canvas.drawText(d.getDeviceName() + " " + d.getAddress() + " (" + d.getMac() + ")", 0, HEIGHT - 5, paint);
+        }
+        paint.setTextSize(sz);
+
+
+        if(metis!=null && metis.isADC1Overflow()) {
             paint.setColor(Color.RED);
             canvas.drawText("ADC Overflow", WIDTH - (WIDTH / 4), HEIGHT-20, paint);
         }

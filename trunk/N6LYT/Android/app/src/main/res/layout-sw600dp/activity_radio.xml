@@ -68,18 +68,29 @@
 
    </RelativeLayout>
 
+    <org.g0orx.openhpsdr.VFOView
+        android:id="@+id/viewVFO"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".10" />
+
     <org.g0orx.openhpsdr.PanadapterView
         android:id="@+id/viewPanadapter"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight=".40"/>
+        android:layout_weight=".325" />
+
+    <org.g0orx.openhpsdr.FrequencyView
+        android:id="@+id/viewFrequency"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".05"/>
 
     <org.g0orx.openhpsdr.WaterfallView
         android:id="@+id/viewWaterfall"
-        style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight=".40" />
+        android:layout_weight=".325" />
      
     <RelativeLayout
         android:id="@+id/relativeLayout3"

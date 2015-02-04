@@ -30,6 +30,7 @@ public class Metis extends Thread {
 		
 		txcontrol1=(byte)(CONFIG_BOTH | MIC_SOURCE_PENELOPE | configuration.clock10 | configuration.clock122);
 		txcontrol3=(byte)(ALEX_ATTENUATION_0DB | configuration.dither | configuration.random | configuration.preamp);
+        txcontrol4=(byte)(DUPLEX | (((receivers-1)<<3)&0x038));
 
 		// allocate space for the input/output samples
 		inlsamples=new float[configuration.fftsize];
@@ -1108,7 +1109,10 @@ public class Metis extends Thread {
 	private byte rxcontrol3;
 	private byte rxcontrol4;
 
-	
+
+    private int receivers=1;
+    private int receiver=0;
+
 	// control 0
 	public static byte MOX_DISABLED  =  (byte)0x00;
 	public static byte MOX_ENABLED   =  (byte)0x01;

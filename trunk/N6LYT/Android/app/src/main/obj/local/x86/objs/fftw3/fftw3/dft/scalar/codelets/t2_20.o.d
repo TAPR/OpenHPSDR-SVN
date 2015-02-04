@@ -1,8 +1,8 @@
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/obj/local/x86/objs/fftw3/fftw3/dft/scalar/codelets/t2_20.o: \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/dft/scalar/codelets/t2_20.c \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/dft/codelet-dft.h \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/kernel/ifftw.h \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/config.h \
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/obj/local/x86/objs/fftw3/fftw3/dft/scalar/codelets/t2_20.o: \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/dft/scalar/codelets/t2_20.c \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/dft/codelet-dft.h \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/kernel/ifftw.h \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/config.h \
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/stdlib.h \
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/sys/cdefs.h \
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h \
@@ -32,13 +32,13 @@
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/time.h \
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/asm/siginfo.h \
  /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/asm-generic/siginfo.h \
- /home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/dft/scalar/t.h
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/dft/scalar/t.h
 
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/dft/codelet-dft.h:
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/dft/codelet-dft.h:
 
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/kernel/ifftw.h:
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/kernel/ifftw.h:
 
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/config.h:
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/config.h:
 
 /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/stdlib.h:
 
@@ -98,4 +98,4 @@
 
 /home/john/android-ndk-r10c/platforms/android-9/arch-x86/usr/include/asm-generic/siginfo.h:
 
-/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/jni/fftw3/dft/scalar/t.h:
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/fftw3/dft/scalar/t.h:

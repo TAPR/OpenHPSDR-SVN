@@ -1,5 +1,7 @@
 package org.g0orx.openhpsdr;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,7 +21,7 @@ public class Bands implements Serializable {
 	}
 	
 	public Band get() {
-		return bands.get(current);
+        return bands.get(current);
 	}
 
     public int get(Long frequency) {
@@ -50,8 +52,8 @@ public class Bands implements Serializable {
 	}
 	
 	public void set(int band) {
-		current=band;
-	}
+        current=band;
+    }
 
 	public int getCurrent() {
 		return current;
@@ -266,6 +268,11 @@ public class Bands implements Serializable {
         band.setBandStack(4, makeBandStack(20000000,Modes.SAM,6));
         bands.add(band);
 
+        // default to 20 Mtrs
+        current=get("20");
+        if(current==-1) {
+            current=0;
+        }
 	}
 	
 	private BandStack makeBandStack(long frequency,int mode,int filter) {

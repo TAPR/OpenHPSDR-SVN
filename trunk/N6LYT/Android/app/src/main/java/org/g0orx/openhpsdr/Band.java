@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class Band implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
     public Band() {
 
@@ -50,10 +50,26 @@ public class Band implements Serializable {
 		return bandstack[bandstackentry];
 	}
     public int getBandstackentry() { return bandstackentry; }
-	
-	public float getTxGain() {
-		return txgain;
-	}
+
+    public void setAGC(int agc) {
+        this.agc=agc;
+    }
+
+    public int getAGC() {
+        return agc;
+    }
+
+    public void setAGCGain(double gain) {
+        this.agcgain=gain;
+    }
+
+    public double getAGCGain() {
+        return agcgain;
+    }
+
+    public float getTxGain() {
+        return txgain;
+    }
 
     public byte getOCRx() { return OCRx; }
     public void setOCRx(byte b) { OCRx=b; }
@@ -95,6 +111,9 @@ public class Band implements Serializable {
 	
 	private boolean squelch=false;
 	private int squelchvalue=100;
+
+    private int agc=0;
+    private double agcgain=60.0;
 	
 	private float txgain=0.30F;
 

@@ -61,13 +61,17 @@ public class WaterfallView extends SurfaceView {
 			} else {
 				canvas.drawBitmap(waterfall, 0, 0, paint);
 			}
+            /*
             // paint the radio details
             float sz=paint.getTextSize();
             paint.setTextSize(sz*2.0F);
             paint.setColor(Color.GRAY);
             Discovered d=configuration.discovered;
-            canvas.drawText(d.getDeviceName()+" "+d.getAddress()+" ("+d.getMac()+")",0,height-40,paint);
+            if(d!=null){
+                canvas.drawText(d.getDeviceName() + " " + d.getAddress() + " (" + d.getMac() + ")", 0, height - 40, paint);
+            }
             paint.setTextSize(sz);
+            */
 		}
     }
 	
