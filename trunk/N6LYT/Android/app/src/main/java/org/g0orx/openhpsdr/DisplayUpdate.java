@@ -53,7 +53,9 @@ public class DisplayUpdate extends Thread {
                 for (int i = 0; i < samples.length; i++) {
                     samples[i] += -68.0F;
                 }
-                panadapterView.plotSpectrum(samples);
+                if(panadapterView!=null) {
+                    panadapterView.plotSpectrum(samples);
+                }
                 // no waterfall when transmitting
                 //if (configuration.waterfall) {
                 //    waterfallView.update(panadapterView.getWaterfall());
@@ -62,9 +64,11 @@ public class DisplayUpdate extends Thread {
             }
         } else {
             if (metis.Process_Panadapter(rxchannel, samples)) {
-                panadapterView.plotSpectrum(samples);
+                if(panadapterView!=null) {
+                    panadapterView.plotSpectrum(samples);
+                }
                 if (waterfallView!=null) {
-                    waterfallView.update(panadapterView.getWaterfall());
+                    waterfallView.update(samples);
                 }
                 int meter = (int) wdsp.GetRXAMeter(configuration.subrx ? subrxchannel : rxchannel, WDSP.S_AV);
                 meterView.setMeter(meter);

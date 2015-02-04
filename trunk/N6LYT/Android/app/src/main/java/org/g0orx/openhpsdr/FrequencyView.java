@@ -45,6 +45,20 @@ public class FrequencyView extends SurfaceView {
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
         Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
+        int low=filter.getLow();
+        int high=filter.getHigh();
+        if(bandstack.getMode()==Modes.CWL) {
+            low=-configuration.cwsidetonefrequency-low;
+            high=-configuration.cwsidetonefrequency+high;
+        } else if(bandstack.getMode()==Modes.CWU) {
+            low=configuration.cwsidetonefrequency-low;
+            high=configuration.cwsidetonefrequency+high;
+        }
+        filterLeft = ((int) low - (-(int) configuration.samplerate / 2)) * WIDTH / (int) configuration.samplerate;
+        filterRight = ((int) high - (-(int) configuration.samplerate / 2)) * WIDTH / (int) configuration.samplerate;
+        if (filterLeft == filterRight) {
+            filterRight++;
+        }
 
         long frequency = bandstack.getFrequency();
 
@@ -52,6 +66,10 @@ public class FrequencyView extends SurfaceView {
         paint.setTextSize(20.0F);
         paint.setColor(Color.BLACK);
         canvas.drawRect(0, 0, WIDTH, HEIGHT, paint);
+
+        // draw the filter
+        paint.setColor(Color.DKGRAY);
+        canvas.drawRect(filterLeft, 0, filterRight, HEIGHT, paint);
 
         paint.setColor(Color.WHITE);
         paint.setStrokeWidth(1);
@@ -74,6 +92,10 @@ public class FrequencyView extends SurfaceView {
             }
         }
 
+        // plot the cursor
+        paint.setColor(Color.RED);
+        canvas.drawLine((WIDTH / 2), 0, (WIDTH / 2), HEIGHT, paint);
+
     }
 
     public boolean update() {
@@ -94,4 +116,7 @@ public class FrequencyView extends SurfaceView {
 
     private int WIDTH = 0;
     private int HEIGHT = 0;
+
+    private int filterLeft;
+    private int filterRight;
 }

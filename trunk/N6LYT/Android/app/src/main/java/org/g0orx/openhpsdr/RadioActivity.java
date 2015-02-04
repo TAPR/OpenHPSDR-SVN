@@ -59,9 +59,17 @@ public class RadioActivity extends Activity implements OnTouchListener {
         filename = configuration.discovered.getMac() + ".conf";
 
         if(configuration.waterfall) {
-            setContentView(R.layout.activity_radio);
+            if(configuration.panadapter) {
+                setContentView(R.layout.activity_radio);
+            } else {
+                setContentView(R.layout.activity_radio_nopanadapter);
+            }
         } else {
-            setContentView(R.layout.activity_radio_nowaterfall);
+            if(configuration.panadapter) {
+                setContentView(R.layout.activity_radio_nowaterfall);
+            } else {
+                setContentView(R.layout.activity_radio_none);
+            }
         }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -97,8 +105,10 @@ public class RadioActivity extends Activity implements OnTouchListener {
         // get the main views
         vfoView = (VFOView) this.findViewById(R.id.viewVFO);
         vfoView.setMetis(metis);
-        panadapterView = (PanadapterView) this.findViewById(R.id.viewPanadapter);
-        panadapterView.setMetis(metis);
+        if(configuration.panadapter) {
+            panadapterView = (PanadapterView) this.findViewById(R.id.viewPanadapter);
+            panadapterView.setMetis(metis);
+        }
 
         if(configuration.waterfall) {
             waterfallView = (WaterfallView) this.findViewById(R.id.viewWaterfall);
@@ -177,7 +187,9 @@ public class RadioActivity extends Activity implements OnTouchListener {
         panadapterUpdate.startTimer();
 
         // setup the touch listener
-        panadapterView.setOnTouchListener(this);
+        if(panadapterView!=null) {
+            panadapterView.setOnTouchListener(this);
+        }
         if(waterfallView!=null) {
             waterfallView.setOnTouchListener(this);
         }
@@ -1827,9 +1839,9 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     int freqincrement = 100;
                     //Log.i("RadioActivity","onGenericMotionEvent vscroll:"+event.getAxisValue(MotionEvent.AXIS_VSCROLL));
                     if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f) {
-                        freqincrement = -100;
+                        freqincrement = -configuration.step;
                     } else {
-                        freqincrement = 100;
+                        freqincrement = configuration.step;
                     }
                     if (configuration.subrx) {
                         bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() - freqincrement));
@@ -1880,8 +1892,26 @@ public class RadioActivity extends Activity implements OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
 
         if (!locked) {
-            double hzperpixel = configuration.samplerate / (double) panadapterView.getWidth();
+            double hzperpixel = configuration.samplerate / (double) frequencyView.getWidth();
             BandStack bandstack = configuration.bands.get().get();
+            int step=10;
+            switch (configuration.step) {
+                case 0:
+                    step = 10;
+                    break;
+                case 1:
+                    step = 50;
+                    break;
+                case 2:
+                    step = 100;
+                    break;
+                case 3:
+                    step = 500;
+                    break;
+                case 4:
+                    step = 1000;
+                    break;
+            }
             switch (event.getAction()) {
                 case MotionEvent.ACTION_CANCEL:
                     break;
@@ -1895,10 +1925,10 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     long freqincrement = (long) ((double) increment * hzperpixel);
                     freqincrement = (freqincrement / 100L) * 100L;
                     if (configuration.subrx) {
-                        bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() - (freqincrement / 100 * 100)));
+                        bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() - (freqincrement/* / 100 * 100*/)));
                         wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                     } else {
-                        bandstack.setFrequency(bandstack.getFrequency() + (freqincrement / 100 * 100));
+                        bandstack.setFrequency(bandstack.getFrequency() + (freqincrement/* / 100 * 100*/));
                         setFrequency(bandstack.getFrequency());
                     }
                     startX = event.getX();
@@ -1911,8 +1941,8 @@ public class RadioActivity extends Activity implements OnTouchListener {
                         long start = bandstack.getFrequency() - ((long) configuration.samplerate / 2);
                         long f = start + (long) (event.getX() * hzperpixel);
 
-                        // make 100hz resolution
-                        f = f / 100 * 100;
+                        // make it step resolution
+                        f = f / (long)step * (long)step;
 
                         if (configuration.subrx) {
                             bandstack.setSubRxFrequency(setSubRxFrequency(f));

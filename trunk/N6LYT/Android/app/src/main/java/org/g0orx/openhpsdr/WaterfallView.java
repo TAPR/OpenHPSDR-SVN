@@ -78,6 +78,17 @@ public class WaterfallView extends SurfaceView {
 	public void update(float[] samples) {
 		if(samples!=null) {
 			if(samples.length==width) {
+
+                int p = 0;
+                float sample;
+                float previous = 0.0F;
+
+                float max = -400.0F;
+
+                for (int i = 0; i < width; i++) {
+                    samples[i] = samples[i] + configuration.displayCalibrationOffset + configuration.preampOffset;
+                }
+
 				if(holder!=null) {
 					if(holder.getSurface().isValid()) {
 						if(waterfall!=null) {
