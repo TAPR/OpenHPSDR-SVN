@@ -891,6 +891,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     final View view = View.inflate(activity, R.layout.dialog_configure, null);
 
                     final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    Band band = configuration.bands.get();
 
                     builder.setMessage("Configure Band " + band.getName())
                             .setView(view)
@@ -1065,6 +1066,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     seekbartxgain.setProgress((int) (255.0F * band.getTxGain()));
                     seekbartxgain.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
                         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                            Band band = configuration.bands.get();
                             float gain = (float) progress / 255.0F;
                             //Log.i("RadioActivity","tx gain="+gain);
                             band.setTxGain(gain);
@@ -1116,6 +1118,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                                         public void onCheckedChanged(RadioGroup group,
                                                                      int checkedId) {
                                             //Log.i("RadioActivity","Tx Group:"+checkedId);
+                                            Band band = configuration.bands.get();
                                             if (checkedId == R.id.radioAnt1) {
                                                 //Log.i("RadioActivity","ANT 1");
                                                 band.get().setTxAntenna(0);
@@ -1141,6 +1144,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                             public void onCheckedChanged(RadioGroup group,
                                                          int checkedId) {
                                 //Log.i("RadioActivity","Tx Group:"+checkedId);
+                                Band band = configuration.bands.get();
                                 if (checkedId == R.id.radioAnt1) {
                                     //Log.i("RadioActivity","ANT 1");
                                     band.get().setTxAntenna(0);
@@ -1201,6 +1205,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                             public void onCheckedChanged(RadioGroup group,
                                                          int checkedId) {
                                 //Log.i("RadioActivity","Rx Group:"+checkedId);
+                                Band band = configuration.bands.get();
                                 if (checkedId == R.id.radioNone) {
                                     //Log.i("RadioActivity","NONE");
                                     band.get().setRxAntenna(0);
@@ -1230,7 +1235,6 @@ public class RadioActivity extends Activity implements OnTouchListener {
                         rxgroup.setVisibility(View.GONE);
                     }
 
-                    final Band band=configuration.bands.get();
                     BandStack bandstack = band.get();
                     final TextView textViewagcgain = (TextView) view.findViewById(R.id.textViewAGCGain);
                     textViewagcgain.setText("AGC Gain: " + (int)band.getAGCGain());
@@ -1291,6 +1295,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cbocrx1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCRx((byte) (band.getOCRx() | 0x01));
                             } else {
@@ -1304,6 +1309,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cbocrx2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCRx((byte) (band.getOCRx() | 0x02));
                             } else {
@@ -1317,6 +1323,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cbocrx3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCRx((byte) (band.getOCRx() | 0x04));
                             } else {
@@ -1330,6 +1337,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cbocrx4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCRx((byte) (band.getOCRx() | 0x08));
                             } else {
@@ -1343,6 +1351,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cbocrx5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCRx((byte) (band.getOCRx() | 0x10));
                             } else {
@@ -1356,6 +1365,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cbocrx6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCRx((byte) (band.getOCRx() | 0x20));
                             } else {
@@ -1369,6 +1379,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cbocrx7.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCRx((byte) (band.getOCRx() | 0x40));
                             } else {
@@ -1382,6 +1393,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cboctx1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCTx((byte) (band.getOCTx() | 0x01));
                             } else {
@@ -1395,6 +1407,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cboctx2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCTx((byte) (band.getOCTx() | 0x02));
                             } else {
@@ -1408,6 +1421,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cboctx3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCTx((byte) (band.getOCTx() | 0x04));
                             } else {
@@ -1421,6 +1435,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cboctx4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCTx((byte) (band.getOCTx() | 0x08));
                             } else {
@@ -1434,6 +1449,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cboctx5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCTx((byte) (band.getOCTx() | 0x10));
                             } else {
@@ -1447,6 +1463,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cboctx6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCTx((byte) (band.getOCTx() | 0x20));
                             } else {
@@ -1460,6 +1477,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     cboctx7.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                            Band band = configuration.bands.get();
                             if (arg1) {
                                 band.setOCTx((byte) (band.getOCTx() | 0x40));
                             } else {
