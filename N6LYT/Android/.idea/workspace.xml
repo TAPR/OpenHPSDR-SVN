@@ -58,22 +58,14 @@
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/MainActivity.java" line="198" mnemonic="1" />
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" line="2021" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" line="2039" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="a55701af-2f6f-4ad8-a17e-cff519115f5b" name="Default" comment="Radio UI changes:&#10;Split frequency markers out as separate view.&#10;Split frequency display out as separate view.&#10;Turning off Waterfall now displays Panadater in all the space.&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_radio_none.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_radio_nopanadapter.xml" />
+    <list default="true" readonly="true" id="a55701af-2f6f-4ad8-a17e-cff519115f5b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="$PROJECT_DIR$/app/app-release.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/FrequencyView.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/FrequencyView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/g0orx/openhpsdr/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/g0orx/openhpsdr/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/org/g0orx/openhpsdr/BuildConfig.java" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/org/g0orx/openhpsdr/BuildConfig.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/WaterfallView.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/WaterfallView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HPSDR-WDSP.iws" />
@@ -105,8 +97,8 @@
       <file leaf-file-name="RadioActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.555555" vertical-offset="25890" max-vertical-offset="29940">
-              <caret line="1924" column="82" selection-start-line="1924" selection-start-column="82" selection-end-line="1924" selection-end-column="82" />
+            <state vertical-scroll-proportion="-10.962963" vertical-offset="16699" max-vertical-offset="30210">
+              <caret line="1236" column="0" selection-start-line="1236" selection-start-column="0" selection-end-line="1236" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2952#3198#0" expanded="true" />
@@ -124,6 +116,16 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
+              <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -161,10 +163,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FrequencyView.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Metis.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="16020" max-vertical-offset="18690">
+              <caret line="1113" column="27" selection-start-line="1113" selection-start-column="27" selection-end-line="1113" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FrequencyView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/FrequencyView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.74236643" vertical-offset="826" max-vertical-offset="1920">
+            <state vertical-scroll-proportion="0.0" vertical-offset="826" max-vertical-offset="1920">
               <caret line="81" column="41" selection-start-line="81" selection-start-column="41" selection-end-line="81" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -173,37 +185,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_radio_nopanadapter.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_nopanadapter.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.269231" vertical-offset="990" max-vertical-offset="2415">
-              <caret line="89" column="34" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_radio_none.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_none.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="7.9615383" vertical-offset="1437" max-vertical-offset="2310">
-              <caret line="82" column="37" selection-start-line="82" selection-start-column="37" selection-end-line="82" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingsActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="SettingsActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3130" max-vertical-offset="15990">
-              <caret line="243" column="43" selection-start-line="243" selection-start-column="43" selection-end-line="243" selection-end-column="43" />
+            <state vertical-scroll-proportion="-1.6438357" vertical-offset="945" max-vertical-offset="15990">
+              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -212,7 +198,7 @@
       <file leaf-file-name="Configuration.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="2295">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1665" max-vertical-offset="2295">
               <caret line="66" column="29" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
               <folding />
             </state>
@@ -868,7 +854,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/TransverterAddActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Bands.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_configure.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/BandStack.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/discovery/Discovered.java" />
@@ -884,9 +869,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/WaterfallView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/FrequencyView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -894,7 +880,7 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="162" />
+    <option name="x" value="158" />
     <option name="y" value="50" />
     <option name="width" value="1500" />
     <option name="height" value="905" />
@@ -1274,7 +1260,11 @@
       <created>1423066702098</created>
       <updated>1423066702098</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Cleaned up step increments when using tuna knob and mouse">
+      <created>1423071669527</created>
+      <updated>1423071669527</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1298,8 +1288,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="162" y="50" width="1500" height="905" extended-state="0" />
-    <editor active="true" />
+    <frame x="158" y="50" width="1500" height="905" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328084" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1355,7 +1345,8 @@
     <MESSAGE value="Fixes mode change not taking immediate effect" />
     <MESSAGE value="Added AGC Gain control.&#10;Moved AGC settings to Band rather then BandStack entry." />
     <MESSAGE value="Radio UI changes:&#10;Split frequency markers out as separate view.&#10;Split frequency display out as separate view.&#10;Turning off Waterfall now displays Panadater in all the space.&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Radio UI changes:&#10;Split frequency markers out as separate view.&#10;Split frequency display out as separate view.&#10;Turning off Waterfall now displays Panadater in all the space.&#10;" />
+    <MESSAGE value="Cleaned up step increments when using tuna knob and mouse" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up step increments when using tuna knob and mouse" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1570,14 +1561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="16695" max-vertical-offset="19350">
-          <caret line="1113" column="27" selection-start-line="1113" selection-start-column="27" selection-end-line="1113" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Bands.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1186" max-vertical-offset="4305">
@@ -1689,14 +1672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -1730,22 +1705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="2295">
-          <caret line="66" column="29" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3130" max-vertical-offset="15990">
-          <caret line="243" column="43" selection-start-line="243" selection-start-column="43" selection-end-line="243" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/WaterfallView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="975" max-vertical-offset="3420">
@@ -1772,18 +1731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.555555" vertical-offset="25890" max-vertical-offset="29940">
-          <caret line="1924" column="82" selection-start-line="1924" selection-start-column="82" selection-end-line="1924" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2952#3198#0" expanded="true" />
-            <element signature="e#3187#3188#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/PanadapterView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="989" max-vertical-offset="6315">
@@ -1797,11 +1744,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/FrequencyView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74236643" vertical-offset="826" max-vertical-offset="1920">
+        <state vertical-scroll-proportion="0.0" vertical-offset="826" max-vertical-offset="1920">
           <caret line="81" column="41" selection-start-line="81" selection-start-column="41" selection-end-line="81" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.962963" vertical-offset="16699" max-vertical-offset="30210">
+          <caret line="1236" column="0" selection-start-line="1236" selection-start-column="0" selection-end-line="1236" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2952#3198#0" expanded="true" />
+            <element signature="e#3187#3188#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="16695" max-vertical-offset="19350">
+          <caret line="1113" column="27" selection-start-line="1113" selection-start-column="27" selection-end-line="1113" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="2295">
+          <caret line="66" column="29" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.6438357" vertical-offset="945" max-vertical-offset="15990">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
