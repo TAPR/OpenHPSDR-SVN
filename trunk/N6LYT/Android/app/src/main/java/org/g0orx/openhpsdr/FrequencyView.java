@@ -87,7 +87,7 @@ public class FrequencyView extends SurfaceView {
                     fs = String.format("%d.%02d", f / 1000000, (f % 1000000) / 10000);
                     canvas.drawText(fs, i - 20, HEIGHT - 5, paint);
                 } else if((f%10000)<(long)hzPerPixel) {
-                    canvas.drawLine(i, 0, i, HEIGHT - 35, paint);
+                    canvas.drawLine(i, 0, i, HEIGHT - 30, paint);
                 }
             }
         }
