@@ -198,11 +198,9 @@ public class RadioActivity extends Activity implements OnTouchListener {
         // step spinner
         Spinner spinnerstep = (Spinner) findViewById(R.id.spinnerStep);
         ArrayList<String> steplist = new ArrayList<String>();
-        steplist.add(0, "Step 10 Hz");
-        steplist.add(1, "Step 50 Hz");
-        steplist.add(2, "Step 100 Hz");
-        steplist.add(3, "Step 500 Hz");
-        steplist.add(4, "Step 1000 Hz");
+        for(int i=0;i<Step.length();i++) {
+            steplist.add("Step "+Integer.toString(Step.getStep(i))+" Hz");
+        }
         ArrayAdapter stepadapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, steplist);
         stepadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerstep.setAdapter(stepadapter);
@@ -211,24 +209,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
             public void onItemSelected(AdapterView parent, View view, int pos, long id) {
                 configuration.step = pos;
-                int step = 1000;
-                switch (pos) {
-                    case 0: // 10
-                        step = 10;
-                        break;
-                    case 1: // 50
-                        step = 50;
-                        break;
-                    case 2: // 100
-                        step = 100;
-                        break;
-                    case 3: // 500
-                        step = 500;
-                        break;
-                    case 4: // 1000
-                        step = 1000;
-                        break;
-                }
+                int step = Step.getStep(configuration.step);
                 Button buttonMinus = (Button) findViewById(R.id.buttonMinus);
                 buttonMinus.setText("-" + Integer.toString(step));
                 Button buttonPlus = (Button) findViewById(R.id.buttonPlus);
@@ -239,24 +220,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
             }
         });
 
-        int step = 1000;
-        switch (configuration.step) {
-            case 0:
-                step = 10;
-                break;
-            case 1:
-                step = 50;
-                break;
-            case 2:
-                step = 100;
-                break;
-            case 3:
-                step = 500;
-                break;
-            case 4:
-                step = 1000;
-                break;
-        }
+        int step = Step.getStep(configuration.step);
 
         // tuning knob
         TuningKnobView tuningView = (TuningKnobView) findViewById(R.id.tuningKnob);
@@ -264,29 +228,13 @@ public class RadioActivity extends Activity implements OnTouchListener {
             tuningView.setTuningKnobListener(new TuningKnobView.TuningKnobListener() {
                                                  @Override
                                                  public void onKnobChanged(int arg) {
-                                                     switch (configuration.step) {
-                                                         case 0:
-                                                             increment = arg * 10;
-                                                             break;
-                                                         case 1:
-                                                             increment = arg * 50;
-                                                             break;
-                                                         case 2:
-                                                             increment = arg * 100;
-                                                             break;
-                                                         case 3:
-                                                             increment = arg * 500;
-                                                             break;
-                                                         case 4:
-                                                             increment = arg * 1000;
-                                                             break;
-                                                     }
+                                                     int step = Step.getStep(configuration.step);
                                                      BandStack bandstack = configuration.bands.get().get();
                                                      if (configuration.subrx) {
-                                                         bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() + increment));
+                                                         bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() + step));
                                                          wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                                                      } else {
-                                                         bandstack.setFrequency(bandstack.getFrequency() + increment);
+                                                         bandstack.setFrequency(bandstack.getFrequency() + step);
                                                          setFrequency(bandstack.getFrequency());
                                                      }
                                                  }
@@ -306,33 +254,18 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         Log.i("RadioActivity", "minus button down " + configuration.step);
                         if (!locked) {
-                            switch (configuration.step) {
-                                case 0:
-                                    increment = -10;
-                                    break;
-                                case 1:
-                                    increment = -50;
-                                    break;
-                                case 2:
-                                    increment = -100;
-                                    break;
-                                case 3:
-                                    increment = -500;
-                                    break;
-                                case 4:
-                                    increment = -1000;
-                                    break;
-                            }
+                            int step = Step.getStep(configuration.step);
                             BandStack bandstack = configuration.bands.get().get();
                             if (configuration.subrx) {
-                                bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() + increment));
+                                bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() - step));
                                 setSubRxFrequency(bandstack.getSubRxFrequency());
                                 wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                             } else {
-                                bandstack.setFrequency(bandstack.getFrequency() + increment);
+                                bandstack.setFrequency(bandstack.getFrequency() - step);
                                 setFrequency(bandstack.getFrequency());
                             }
                             handler.removeCallbacks(updateTask);
+                            updateincrement=-step;
                             handler.postAtTime(updateTask, SystemClock.uptimeMillis() + 500);
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -355,34 +288,19 @@ public class RadioActivity extends Activity implements OnTouchListener {
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         if (!locked) {
-                            switch (configuration.step) {
-                                case 0:
-                                    increment = 10;
-                                    break;
-                                case 1:
-                                    increment = 50;
-                                    break;
-                                case 2:
-                                    increment = 100;
-                                    break;
-                                case 3:
-                                    increment = 500;
-                                    break;
-                                case 4:
-                                    increment = 1000;
-                                    break;
-                            }
+                            int step = Step.getStep(configuration.step);
                             BandStack bandstack = configuration.bands.get().get();
                             if (configuration.subrx) {
-                                bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() + increment));
+                                bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() + step));
                                 setSubRxFrequency(bandstack.getSubRxFrequency());
                                 wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                             } else {
-                                bandstack.setFrequency(bandstack.getFrequency() + increment);
+                                bandstack.setFrequency(bandstack.getFrequency() + step);
                                 setFrequency(bandstack.getFrequency());
                             }
 
                             handler.removeCallbacks(updateTask);
+                            updateincrement=step;
                             handler.postAtTime(updateTask, SystemClock.uptimeMillis() + 500);
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -1854,18 +1772,16 @@ public class RadioActivity extends Activity implements OnTouchListener {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_SCROLL:
                     BandStack bandstack = configuration.bands.get().get();
-                    int freqincrement = 100;
+                    int step = Step.getStep(configuration.step);
                     //Log.i("RadioActivity","onGenericMotionEvent vscroll:"+event.getAxisValue(MotionEvent.AXIS_VSCROLL));
                     if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f) {
-                        freqincrement = -configuration.step;
-                    } else {
-                        freqincrement = configuration.step;
+                        step = -step;
                     }
                     if (configuration.subrx) {
-                        bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() - freqincrement));
+                        bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() - step));
                         wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                     } else {
-                        bandstack.setFrequency(bandstack.getFrequency() + freqincrement);
+                        bandstack.setFrequency(bandstack.getFrequency() + step);
                         setFrequency(bandstack.getFrequency());
                     }
                     return true;
@@ -1894,12 +1810,12 @@ public class RadioActivity extends Activity implements OnTouchListener {
             if (!locked) {
                 BandStack bandstack = configuration.bands.get().get();
                 if (configuration.subrx) {
-                    bandstack.setSubRxFrequency(bandstack.getSubRxFrequency() + increment);
+                    bandstack.setSubRxFrequency(bandstack.getSubRxFrequency() + updateincrement);
                     setSubRxFrequency(bandstack.getSubRxFrequency());
                     wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                     handler.postAtTime(this, SystemClock.uptimeMillis() + 100);
                 } else {
-                    bandstack.setFrequency(bandstack.getFrequency() + increment);
+                    bandstack.setFrequency(bandstack.getFrequency() + updateincrement);
                     setFrequency(bandstack.getFrequency());
                     handler.postAtTime(this, SystemClock.uptimeMillis() + 100);
                 }
@@ -1912,24 +1828,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
         if (!locked) {
             double hzperpixel = configuration.samplerate / (double) frequencyView.getWidth();
             BandStack bandstack = configuration.bands.get().get();
-            int step=10;
-            switch (configuration.step) {
-                case 0:
-                    step = 10;
-                    break;
-                case 1:
-                    step = 50;
-                    break;
-                case 2:
-                    step = 100;
-                    break;
-                case 3:
-                    step = 500;
-                    break;
-                case 4:
-                    step = 1000;
-                    break;
-            }
+            int step = Step.getStep(configuration.step);
             switch (event.getAction()) {
                 case MotionEvent.ACTION_CANCEL:
                     break;
@@ -2035,6 +1934,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
         wdsp.SetRXABandpassFreqs(subrxchannel, low, high);
         wdsp.SetTXABandpassFreqs(txchannel, low, high);
         vfoView.update();
+        frequencyView.update();
     }
 
     private void setAGC(int channel,int agc) {
@@ -2165,7 +2065,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
     private DisplayUpdate panadapterUpdate;
 
     private Band band;
-    private long increment;
+    private long updateincrement;
 
     private String filename = "hpsdr.conf"; // will be replaced with macaddress.conf
 
