@@ -9,12 +9,13 @@ import java.util.TimerTask;
 
 public class DisplayUpdate extends Thread {
 
-    public DisplayUpdate(VFOView vfoView,PanadapterView panadapterView, WaterfallView waterfallView, MeterView meterView, FrequencyView frequencyView, Metis metis, int pixels) {
+    public DisplayUpdate(VFOView vfoView,PanadapterView panadapterView, WaterfallView waterfallView, MeterView meterView, FrequencyView frequencyView, BandscopeView bandscopeView, Metis metis, int pixels) {
         this.vfoView = vfoView;
         this.panadapterView = panadapterView;
         this.waterfallView = waterfallView;
         this.meterView = meterView;
         this.frequencyView = frequencyView;
+        this.bandscopeView = bandscopeView;
         this.metis = metis;
         this.pixels = pixels;
         configuration = Configuration.getInstance();
@@ -48,30 +49,35 @@ public class DisplayUpdate extends Thread {
             }
         }
         if (metis.isTransmitting()) {
-            if (metis.Process_Panadapter(txchannel, samples)) {
-
+            if (metis.Process_Panadapter(Display.TX, samples)) {
+                /*
                 for (int i = 0; i < samples.length; i++) {
                     samples[i] += -68.0F;
                 }
+                */
                 if(panadapterView!=null) {
                     panadapterView.plotSpectrum(samples);
                 }
-                // no waterfall when transmitting
-                //if (configuration.waterfall) {
-                //    waterfallView.update(panadapterView.getWaterfall());
-                //}
                 meterView.setPower(metis.getPenelopeForwardPower(), metis.getAlexForwardPower(), metis.getAlexReversePower());
             }
         } else {
-            if (metis.Process_Panadapter(rxchannel, samples)) {
+            if (metis.Process_Panadapter(Display.RX, samples)) {
                 if(panadapterView!=null) {
                     panadapterView.plotSpectrum(samples);
                 }
                 if (waterfallView!=null) {
                     waterfallView.update(samples);
                 }
-                int meter = (int) wdsp.GetRXAMeter(configuration.subrx ? subrxchannel : rxchannel, WDSP.S_AV);
+                int meter = (int) wdsp.GetRXAMeter(configuration.subrx ? Channel.SUBRX : Channel.RX, WDSP.S_AV);
                 meterView.setMeter(meter);
+            }
+
+            if(bandscopeView!=null) {
+                if(metis.Process_Panadapter(Display.BS, samples)) {
+                    bandscopeView.update(samples);
+                } else {
+                    Log.i("DisplayUpdate", "Process_Panadapter FALSE");
+                }
             }
         }
         frames++;
@@ -106,12 +112,9 @@ public class DisplayUpdate extends Thread {
     private WaterfallView waterfallView;
     private MeterView meterView;
     private FrequencyView frequencyView;
+    private BandscopeView bandscopeView;
     private Metis metis;
     private WDSP wdsp;
-
-    private int rxchannel = 0;
-    private int txchannel = 1;
-    private int subrxchannel = 2;
 
     private int frames = 0;
 

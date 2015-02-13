@@ -38,10 +38,9 @@ public class Discovery extends Thread {
 		try {
 		    InetAddress address = InetAddress.getByName(toaddress);
 		    DatagramPacket datagram = new DatagramPacket(buffer, buffer.length,address,toport);
-            if(socket==null) {
-                init();
+            if(socket!=null) {
+                socket.send(datagram);
             }
-		    socket.send(datagram);
 		} catch (SocketException se) {
 			Log.i("DiscoverActivity","DiscoveryAsyncTask.doInBackground: "+se.toString());
             running=false;

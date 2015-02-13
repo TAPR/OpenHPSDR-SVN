@@ -160,12 +160,6 @@ ADDED from AndroidManifest.xml:85:9
 activity#org.g0orx.openhpsdr.BandscopeActivity
 ADDED from AndroidManifest.xml:89:9
 	android:label
-		ADDED from AndroidManifest.xml:91:13
-	android:name
 		ADDED from AndroidManifest.xml:90:13
-activity#org.g0orx.openhpsdr.IFActivity
-ADDED from AndroidManifest.xml:93:9
-	android:label
-		ADDED from AndroidManifest.xml:95:13
 	android:name
-		ADDED from AndroidManifest.xml:94:13
+		ADDED from AndroidManifest.xml:89:19

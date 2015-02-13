@@ -223,6 +223,25 @@ public class WDSP {
 	
 	public native void DestroyAnalyzer(int disp);
 
+    public static final int REAL=0;
+    public static final int COMPLEX=1;
+
+    public static final int RECTANGULAR=0;
+    public static final int BLACKMAN_HARRIS=1;
+    public static final int HANN=2;
+    public static final int FLAT_TOP=3;
+    public static final int HAMMING =4;
+    public static final int KAISER=5;
+
+    public static final int PEAK_DETECT=-1;
+    public static final int NO_AVERAGING=0;
+    public static final int TIME_WEIGHTED_LINEAR=1;
+    public static final int TIME_WEIGHTED_LOG=2;
+    public static final int WINDOW_LINEAR=3;
+    public static final int WINDOW_LOG=4;
+    public static final int WEIGHTED_LINEAR_LOW_NOISE=5;
+    public static final int WEIGHTED_LOG_LOW_NOISE=6;
+
     public native void SetAnalyzer(int disp,
                      int n_fft,                      //number of LO frequencies = number of ffts used in elimination
                      int typ,                        //0 for real input data (I only); 1 for complex input data (I & Q)

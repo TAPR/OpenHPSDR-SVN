@@ -10,7 +10,7 @@ import org.g0orx.openhpsdr.modes.Modes;
 
 public class Bands implements Serializable {
 	
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3L;
 
 	public Bands() {
 		init();
@@ -97,6 +97,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(135800,Modes.CWL,7));
 		band.setBandStack(1, makeBandStack(136500,Modes.CWL,7));
 		band.setBandStack(2, makeBandStack(137600,Modes.CWL,7));
+        band.setTransmit(true);
 		bands.add(band);
 
         bandedge=new BandEdge();
@@ -108,6 +109,7 @@ public class Bands implements Serializable {
         band.setBandStack(0, makeBandStack(473000,Modes.CWL,7));
         band.setBandStack(1, makeBandStack(475000,Modes.CWL,7));
         band.setBandStack(2, makeBandStack(478000,Modes.LSB,3));
+        band.setTransmit(true);
         bands.add(band);
 
         bandedge=new BandEdge();
@@ -119,6 +121,7 @@ public class Bands implements Serializable {
         band.setBandStack(0, makeBandStack(1801000,Modes.CWL,7));
         band.setBandStack(1, makeBandStack(1835000,Modes.LSB,3));
         band.setBandStack(2, makeBandStack(1840000,Modes.LSB,3));
+        band.setTransmit(true);
         bands.add(band);
 		
 		bandedge=new BandEdge();
@@ -130,6 +133,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(3501000,Modes.CWL,7));
 		band.setBandStack(1, makeBandStack(3751000,Modes.LSB,3));
 		band.setBandStack(2, makeBandStack(3850000,Modes.LSB,3));
+        band.setTransmit(true);
 		bands.add(band);
 		
 		bandedge=new BandEdge();
@@ -141,6 +145,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(5330500,Modes.CWL,7));
 		band.setBandStack(1, makeBandStack(5346500,Modes.CWL,7));
 		band.setBandStack(2, makeBandStack(5366500,Modes.CWL,7));
+        band.setTransmit(true);
 		bands.add(band);
 		
 		bandedge=new BandEdge();
@@ -152,6 +157,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(7001000,Modes.CWL,7));
 		band.setBandStack(1, makeBandStack(7100000,Modes.LSB,3));
 		band.setBandStack(2, makeBandStack(7200000,Modes.LSB,3));
+        band.setTransmit(true);
 		bands.add(band);
 		
 		bandedge=new BandEdge();
@@ -163,6 +169,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(10120000,Modes.CWU,7));
 		band.setBandStack(1, makeBandStack(10130000,Modes.USB,3));
 		band.setBandStack(2, makeBandStack(10140000,Modes.USB,3));
+        band.setTransmit(true);
 		bands.add(band);
 		
 		bandedge=new BandEdge();
@@ -174,6 +181,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(14010000,Modes.CWU,7));
 		band.setBandStack(1, makeBandStack(14230000,Modes.USB,3));
 		band.setBandStack(2, makeBandStack(14330000,Modes.USB,3));
+        band.setTransmit(true);
 		bands.add(band);
 		
 		bandedge=new BandEdge();
@@ -185,6 +193,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(18068600,Modes.CWU,7));
 		band.setBandStack(1, makeBandStack(18125000,Modes.USB,3));
 		band.setBandStack(2, makeBandStack(18140000,Modes.USB,3));
+        band.setTransmit(true);
 		bands.add(band);
 		
 		bandedge=new BandEdge();
@@ -196,6 +205,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(21001000,Modes.CWU,7));
 		band.setBandStack(1, makeBandStack(21255000,Modes.USB,3));
 		band.setBandStack(2, makeBandStack(21300000,Modes.USB,3));
+        band.setTransmit(true);
 		bands.add(band);
 		
 		bandedge=new BandEdge();
@@ -207,6 +217,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(24895000,Modes.CWU,7));
 		band.setBandStack(1, makeBandStack(24900000,Modes.USB,3));
 		band.setBandStack(2, makeBandStack(24910000,Modes.USB,3));
+        band.setTransmit(true);
 		bands.add(band);
 		
 		bandedge=new BandEdge();
@@ -218,6 +229,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(28001000,Modes.CWU,7));
 		band.setBandStack(1, makeBandStack(28300000,Modes.USB,3));
 		band.setBandStack(2, makeBandStack(28500000,Modes.USB,3));
+        band.setTransmit(true);
 		bands.add(band);
 		
 		bandedge=new BandEdge();
@@ -229,6 +241,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(50001000,Modes.CWU,7));
 		band.setBandStack(1, makeBandStack(50125000,Modes.USB,3));
 		band.setBandStack(2, makeBandStack(50200000,Modes.USB,3));
+        band.setTransmit(true);
 		bands.add(band);
 		
 
@@ -242,6 +255,7 @@ public class Bands implements Serializable {
 		band.setBandStack(0, makeBandStack(897000,Modes.AM,3));
 		band.setBandStack(1, makeBandStack(909000,Modes.AM,3));
 		band.setBandStack(2, makeBandStack(1215000,Modes.AM,3));
+        band.setTransmit(false);
 		bands.add(band);
 
         bandedge=new BandEdge();
@@ -253,6 +267,7 @@ public class Bands implements Serializable {
         band.setBandStack(0, makeBandStack(5975000,Modes.AM,6));
         band.setBandStack(1, makeBandStack(11710000,Modes.AM,6));
         band.setBandStack(2, makeBandStack(13845000,Modes.AM,6));
+        band.setTransmit(false);
         bands.add(band);
 
         bandedge=new BandEdge();
@@ -266,6 +281,7 @@ public class Bands implements Serializable {
         band.setBandStack(2, makeBandStack(10000000,Modes.SAM,6));
         band.setBandStack(3, makeBandStack(15000000,Modes.SAM,6));
         band.setBandStack(4, makeBandStack(20000000,Modes.SAM,6));
+        band.setTransmit(false);
         bands.add(band);
 
         // default to 20 Mtrs

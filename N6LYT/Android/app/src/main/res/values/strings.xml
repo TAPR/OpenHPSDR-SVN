@@ -85,8 +85,7 @@
     <string name="title_activity_cw">CW Configuration</string>
     <string name="title_activity_open_collector">OpenCollectorActivity</string>
     <string name="title_activity_wisdom">Create FFTW3 Wisdom file</string>
-    <string name="wisdom">Create FFTW Wisdom files\\n(This can take several minutes the first time to create them)</string>
-    <string name="title_activity_band_scope">BandScope</string>
-    <string name="title_activity_if">IFActivity</string>
+    <string name="wisdom">Create FFTW Wisdom file\\n(This can take several minutes the first time to create)</string>
+    <string name="title_activity_bandscope">BandscopeActivity</string>
 
 </resources>

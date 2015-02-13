@@ -104,6 +104,9 @@ public class Band implements Serializable {
 		return squelchvalue;
 	}
 
+    public void setTransmit(boolean state) { transmit=state; }
+    public boolean canTransmit() { return transmit; }
+
 	private String name;
 	private int bandstackentry=0;
 	private BandStack[] bandstack;
@@ -119,6 +122,8 @@ public class Band implements Serializable {
 
     private byte OCRx=0x00;
     private byte OCTx=0x00;
+
+    private boolean transmit=true;
 
 
 }

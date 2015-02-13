@@ -260,6 +260,11 @@ public class SettingsActivity extends Activity {
         settings.add(s);
 
         s = new Setting();
+        s.setTitle("Bandscope");
+        s.setValue(configuration.bandscope ? "On" : "Off");
+        settings.add(s);
+
+        s = new Setting();
         s.setTitle("FPS");
         s.setValue(Integer.toString(configuration.fps));
         settings.add(s);
@@ -853,7 +858,6 @@ public class SettingsActivity extends Activity {
                                 public void onClick(DialogInterface dialoginterface, int i) {
                                     Configuration configuration = Configuration.getInstance();
                                     String value = "";
-                                    Log.i("Configuration", "onClick:" + i);
                                     switch (i) {
                                         case 0:
                                             configuration.waterfall = true;
@@ -881,7 +885,6 @@ public class SettingsActivity extends Activity {
                                 public void onClick(DialogInterface dialoginterface, int i) {
                                     Configuration configuration = Configuration.getInstance();
                                     String value = "";
-                                    Log.i("Configuration", "onClick:" + i);
                                     switch (i) {
                                         case 0:
                                             configuration.waterfallGrayscale = false;
@@ -936,7 +939,6 @@ public class SettingsActivity extends Activity {
                                 public void onClick(DialogInterface dialoginterface, int i) {
                                     Configuration configuration = Configuration.getInstance();
                                     String value = "";
-                                    Log.i("Configuration", "onClick:" + i);
                                     switch (i) {
                                         case 0:
                                             configuration.panadapter = true;
@@ -944,6 +946,33 @@ public class SettingsActivity extends Activity {
                                             break;
                                         case 1:
                                             configuration.panadapter = false;
+                                            value = "Off";
+                                            break;
+                                    }
+                                    setting.setValue(value);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+                    d.show();
+                } else if ("Bandscope".equals(option)) {
+                    AlertDialog.Builder d = new AlertDialog.Builder(context);
+
+                    String title = "Bandscope";
+                    String[] options = {"On", "Off"};
+
+                    d.setTitle(title);
+                    d.setItems(options,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialoginterface, int i) {
+                                    Configuration configuration = Configuration.getInstance();
+                                    String value = "";
+                                    switch (i) {
+                                        case 0:
+                                            configuration.bandscope = true;
+                                            value = "On";
+                                            break;
+                                        case 1:
+                                            configuration.bandscope = false;
                                             value = "Off";
                                             break;
                                     }
