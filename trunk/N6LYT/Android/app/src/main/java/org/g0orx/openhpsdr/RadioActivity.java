@@ -5,7 +5,6 @@ import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,7 +23,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -58,19 +56,66 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
         filename = configuration.discovered.getMac() + ".conf";
 
+        /*
         if(configuration.waterfall) {
             if(configuration.panadapter) {
-                setContentView(R.layout.activity_radio);
+                if(configuration.bandscope) {
+                    setContentView(R.layout.activity_radio_bandscope);
+                } else {
+                    setContentView(R.layout.activity_radio);
+                }
             } else {
-                setContentView(R.layout.activity_radio_nopanadapter);
+                setContentView(R.layout.activity_radio_waterfall);
             }
         } else {
             if(configuration.panadapter) {
-                setContentView(R.layout.activity_radio_nowaterfall);
+                setContentView(R.layout.activity_radio_panadapter);
             } else {
                 setContentView(R.layout.activity_radio_none);
             }
         }
+        */
+
+        int layout=0;
+        int layoutid=R.layout.activity_radio_panadapter_waterfall_bandscope;
+        if(configuration.panadapter) {
+            layout+=4;
+        }
+        if(configuration.waterfall) {
+            layout+=2;
+        }
+        if(configuration.bandscope) {
+            layout+=1;
+        }
+
+        switch(layout) {
+            case 0:
+                layoutid=R.layout.activity_radio_none;
+                break;
+            case 1:
+                layoutid=R.layout.activity_radio_bandscope;
+                break;
+            case 2:
+                layoutid=R.layout.activity_radio_waterfall;
+                break;
+            case 3:
+                layoutid=R.layout.activity_radio_waterfall_bandscope;
+                break;
+            case 4:
+                layoutid=R.layout.activity_radio_panadapter;
+                break;
+            case 5:
+                layoutid=R.layout.activity_radio_panadapter_bandscope;
+                break;
+            case 6:
+                layoutid=R.layout.activity_radio_panadapter_waterfall;
+                break;
+            case 7:
+                layoutid=R.layout.activity_radio_panadapter_waterfall_bandscope;
+                break;
+        }
+
+        setContentView(layoutid);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
@@ -93,7 +138,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
         Log.i("RadioActivity", "onStart: width=" + width + " height=" + height);
 
-        metis = new Metis(width, false);
+        metis = new Metis(width, configuration.bandscope);
         metis.setPTTListener(new PTTListener() {
             @Override
             public void PTTChanged(boolean ptt) {
@@ -102,19 +147,30 @@ public class RadioActivity extends Activity implements OnTouchListener {
             }
         });
 
+
+
         // get the main views
         vfoView = (VFOView) this.findViewById(R.id.viewVFO);
         vfoView.setMetis(metis);
+
+
+        meterView = (MeterView) this.findViewById(R.id.viewMeter);
+
         if(configuration.panadapter) {
             panadapterView = (PanadapterView) this.findViewById(R.id.viewPanadapter);
             panadapterView.setMetis(metis);
         }
 
+
+        frequencyView = (FrequencyView) this.findViewById(R.id.viewFrequency);
+
         if(configuration.waterfall) {
             waterfallView = (WaterfallView) this.findViewById(R.id.viewWaterfall);
         }
-        meterView = (MeterView) this.findViewById(R.id.viewMeter);
-        frequencyView = (FrequencyView) this.findViewById(R.id.viewFrequency);
+
+        if(configuration.bandscope) {
+            bandscopeView = (BandscopeView) this.findViewById(R.id.viewBandscope);
+        }
 
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
@@ -141,50 +197,55 @@ public class RadioActivity extends Activity implements OnTouchListener {
         wdsp = WDSP.getInstance();
 
         // setup receiver
-        wdsp.OpenChannel(rxchannel, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
+        wdsp.OpenChannel(Channel.RX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
                 (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 1/*RUNNING*/, 0.0,
                 0.0, 0.0, 0.0);
 
-        wdsp.SetRXAMode(rxchannel, bandstack.getMode());
-        wdsp.SetRXABandpassFreqs(rxchannel, low, high);
-        wdsp.SetRXABandpassRun(rxchannel, 1);
-        setAGC(rxchannel,band.getAGC());
-        wdsp.SetRXAAGCTop(rxchannel,band.getAGCGain());
-        wdsp.SetRXAAMDSBMode(rxchannel, 0);
+        wdsp.SetRXAMode(Channel.RX, bandstack.getMode());
+        wdsp.SetRXABandpassFreqs(Channel.RX, low, high);
+        wdsp.SetRXABandpassRun(Channel.RX, 1);
+        setAGC(Channel.RX,band.getAGC());
+        wdsp.SetRXAAGCTop(Channel.RX,band.getAGCGain());
+        wdsp.SetRXAAMDSBMode(Channel.RX, 0);
 
         // setup transmitter
-        wdsp.OpenChannel(txchannel, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
+        wdsp.OpenChannel(Channel.TX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
                 (int) configuration.samplerate, (int) configuration.samplerate, 1/*tx*/, 0/*NOT RUNNING*/, 0.0,
                 0.0, 0.0, 0.0);
-        wdsp.SetTXAMode(txchannel, bandstack.getMode());
-        wdsp.SetTXABandpassFreqs(txchannel, low, high);
-        wdsp.SetTXABandpassRun(txchannel, 1);
+        wdsp.SetTXAMode(Channel.TX, bandstack.getMode());
+        wdsp.SetTXABandpassFreqs(Channel.TX, low, high);
+        wdsp.SetTXABandpassRun(Channel.TX, 1);
 
         // setup sub receiver
-        wdsp.OpenChannel(subrxchannel, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
+        wdsp.OpenChannel(Channel.SUBRX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
                 (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 0/*NOT RUNNING*/, 0.0,
                 0.0, 0.0, 0.0);
 
-        wdsp.SetRXAMode(subrxchannel, bandstack.getMode());
-        wdsp.SetRXABandpassFreqs(subrxchannel, low, high);
-        wdsp.SetRXABandpassRun(subrxchannel, 1);
-        setAGC(subrxchannel,band.getAGC());
-        wdsp.SetRXAAGCTop(subrxchannel,band.getAGCGain());
-        wdsp.SetRXAAMDSBMode(subrxchannel, 0);
-        wdsp.SetRXAShiftRun(subrxchannel, configuration.subrx ? 1 : 0);
-        wdsp.SetRXAShiftFreq(subrxchannel, bandstack.getSubRxFrequency());
+        wdsp.SetRXAMode(Channel.SUBRX, bandstack.getMode());
+        wdsp.SetRXABandpassFreqs(Channel.SUBRX, low, high);
+        wdsp.SetRXABandpassRun(Channel.SUBRX, 1);
+        setAGC(Channel.SUBRX,band.getAGC());
+        wdsp.SetRXAAGCTop(Channel.SUBRX,band.getAGCGain());
+        wdsp.SetRXAAMDSBMode(Channel.SUBRX, 0);
+        wdsp.SetRXAShiftRun(Channel.SUBRX, configuration.subrx ? 1 : 0);
+        wdsp.SetRXAShiftFreq(Channel.SUBRX, bandstack.getSubRxFrequency());
+
+        /*
+        wdsp.OpenChannel(Channel.BS, 4096, 4096, 48000,
+                48000, 48000, 0, 1, 0.0,
+                0.0, 0.0, 0.0);
+        */
 
         // create and start the Metis interface
-
         metis.start();
 
 
-        // start the panadapter update
-        if (panadapterUpdate == null || !panadapterUpdate.isAlive()) {
+        // start the display update
+        if (displayUpdate == null || !displayUpdate.isAlive()) {
             //Log.i("RadioActivity","onStart: new PanadapterUpdate");
-            panadapterUpdate = new DisplayUpdate(vfoView,panadapterView, waterfallView, meterView, frequencyView, metis, width);
+            displayUpdate = new DisplayUpdate(vfoView,panadapterView, waterfallView, meterView, frequencyView, bandscopeView, metis, width);
         }
-        panadapterUpdate.startTimer();
+        displayUpdate.startTimer();
 
         // setup the touch listener
         if(panadapterView!=null) {
@@ -232,7 +293,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                                                      BandStack bandstack = configuration.bands.get().get();
                                                      if (configuration.subrx) {
                                                          bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() + step));
-                                                         wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
+                                                         wdsp.SetRXAShiftFreq(Channel.SUBRX, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                                                      } else {
                                                          bandstack.setFrequency(bandstack.getFrequency() + step);
                                                          setFrequency(bandstack.getFrequency());
@@ -259,7 +320,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                             if (configuration.subrx) {
                                 bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() - step));
                                 setSubRxFrequency(bandstack.getSubRxFrequency());
-                                wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
+                                wdsp.SetRXAShiftFreq(Channel.SUBRX, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                             } else {
                                 bandstack.setFrequency(bandstack.getFrequency() - step);
                                 setFrequency(bandstack.getFrequency());
@@ -293,7 +354,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                             if (configuration.subrx) {
                                 bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() + step));
                                 setSubRxFrequency(bandstack.getSubRxFrequency());
-                                wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
+                                wdsp.SetRXAShiftFreq(Channel.SUBRX, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                             } else {
                                 bandstack.setFrequency(bandstack.getFrequency() + step);
                                 setFrequency(bandstack.getFrequency());
@@ -360,11 +421,11 @@ public class RadioActivity extends Activity implements OnTouchListener {
                             //Log.i("RadioActivity","Tune button: stop tuning");
 
                             //Log.i("RadioActivity","TUN: SetChannelState(1,0,1)");
-                            wdsp.SetChannelState(txchannel, 0, 1);
+                            wdsp.SetChannelState(Channel.TX, 0, 1);
                             //Log.i("RadioActivity","TUN: SetChannelState(0,1,0)");
-                            wdsp.SetChannelState(rxchannel, 1, 0);
+                            wdsp.SetChannelState(Channel.RX, 1, 0);
                             if (configuration.subrx) {
-                                wdsp.SetChannelState(subrxchannel, 1, 0);
+                                wdsp.SetChannelState(Channel.SUBRX, 1, 0);
                             }
 
                             metis.setTransmit(false, false);
@@ -384,12 +445,12 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
                             // receive to transmit
                             //Log.i("RadioActivity","TUN: SetChannelState(0,0,1)");
-                            wdsp.SetChannelState(rxchannel, 0, 1);
+                            wdsp.SetChannelState(Channel.RX, 0, 1);
                             if (configuration.subrx) {
-                                wdsp.SetChannelState(subrxchannel, 0, 1);
+                                wdsp.SetChannelState(Channel.SUBRX, 0, 1);
                             }
                             //Log.i("RadioActivity","TUN: SetChannelState(1,1,0)");
-                            wdsp.SetChannelState(txchannel, 1, 0);
+                            wdsp.SetChannelState(Channel.TX, 1, 0);
 
                             //configuration.transmit=true;
                             //configuration.tuning=true;
@@ -480,13 +541,13 @@ public class RadioActivity extends Activity implements OnTouchListener {
                                                     }
 
                                                     setFilter(low,high);
-                                                    setAGC(rxchannel,band.getAGC());
+                                                    setAGC(Channel.RX,band.getAGC());
 
                                                     if (configuration.subrx) {
                                                         configuration.subrx = false;
-                                                        wdsp.SetChannelState(subrxchannel, 0, 0);
-                                                        wdsp.SetRXAShiftRun(subrxchannel, 0);
-                                                        setAGC(subrxchannel,band.getAGC());
+                                                        wdsp.SetChannelState(Channel.SUBRX, 0, 0);
+                                                        wdsp.SetRXAShiftRun(Channel.SUBRX, 0);
+                                                        setAGC(Channel.SUBRX,band.getAGC());
                                                     }
 
                                                     setMode(bandstack.getMode());
@@ -499,11 +560,11 @@ public class RadioActivity extends Activity implements OnTouchListener {
                                                         double v1 = -2.0 * (double) band.getSquelchValue() / 100.0;
                                                         double v2 = Math.pow(10.0, v1);
                                                         Log.i("RadioActivity", "FM squelch set to " + band.getSquelchValue() + " " + v1 + " " + v2);
-                                                        wdsp.SetRXAFMSQThreshold(rxchannel, v2);
-                                                        wdsp.SetRXAFMSQRun(rxchannel, band.getSquelch() ? 1 : 0);
+                                                        wdsp.SetRXAFMSQThreshold(Channel.RX, v2);
+                                                        wdsp.SetRXAFMSQRun(Channel.RX, band.getSquelch() ? 1 : 0);
                                                     } else {
-                                                        wdsp.SetRXAAMSQThreshold(rxchannel, (double) -band.getSquelchValue());
-                                                        wdsp.SetRXAAMSQRun(rxchannel, band.getSquelch() ? 1 : 0);
+                                                        wdsp.SetRXAAMSQThreshold(Channel.RX, (double) -band.getSquelchValue());
+                                                        wdsp.SetRXAAMSQRun(Channel.RX, band.getSquelch() ? 1 : 0);
                                                     }
 
                                                     status.setText("Band " + band.getName() + "(" + band.getBandstackentry() + ")" + " " + Modes.getMode(bandstack.getMode()).getName() + " " + Frequency.toString(bandstack.getFrequency()));
@@ -573,8 +634,8 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         if (configuration.subrx) {
                             configuration.subrx = false;
-                            wdsp.SetChannelState(subrxchannel, 0, 0);
-                            wdsp.SetRXAShiftRun(subrxchannel, 0);
+                            wdsp.SetChannelState(Channel.SUBRX, 0, 0);
+                            wdsp.SetRXAShiftRun(Channel.SUBRX, 0);
                         } else {
                             configuration.subrx = true;
                             BandStack bandstack = configuration.bands.get().get();
@@ -583,9 +644,9 @@ public class RadioActivity extends Activity implements OnTouchListener {
                                 bandstack.setSubRxFrequency(bandstack.getFrequency());
                             }
                             bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency()));
-                            wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
-                            wdsp.SetRXAShiftRun(subrxchannel, 1);
-                            wdsp.SetChannelState(subrxchannel, 1, 0);
+                            wdsp.SetRXAShiftFreq(Channel.SUBRX, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
+                            wdsp.SetRXAShiftRun(Channel.SUBRX, 1);
+                            wdsp.SetChannelState(Channel.SUBRX, 1, 0);
                         }
                         vfoView.update();
                     }
@@ -660,13 +721,13 @@ public class RadioActivity extends Activity implements OnTouchListener {
                                             }
 
                                             setFilter(low,high);
-                                            setAGC(rxchannel,band.getAGC());
+                                            setAGC(Channel.RX,band.getAGC());
 
                                             if (configuration.subrx) {
                                                 configuration.subrx = false;
-                                                wdsp.SetChannelState(subrxchannel, 0, 0);
-                                                wdsp.SetRXAShiftRun(subrxchannel, 0);
-                                                setAGC(subrxchannel,band.getAGC());
+                                                wdsp.SetChannelState(Channel.SUBRX, 0, 0);
+                                                wdsp.SetRXAShiftRun(Channel.SUBRX, 0);
+                                                setAGC(Channel.SUBRX,band.getAGC());
                                             }
 
                                             setMode(bandstack.getMode());
@@ -1168,8 +1229,8 @@ public class RadioActivity extends Activity implements OnTouchListener {
                             Band band = configuration.bands.get();
                             band.setAGCGain(gain);
                             textViewagcgain.setText("AGC Gain: " + (int)band.getAGCGain());
-                            wdsp.SetRXAAGCTop(rxchannel,gain);
-                            wdsp.SetRXAAGCTop(subrxchannel,gain);
+                            wdsp.SetRXAAGCTop(Channel.RX,gain);
+                            wdsp.SetRXAAGCTop(Channel.SUBRX,gain);
                         }
 
                         public void onStartTrackingTouch(SeekBar seekBar) {
@@ -1197,8 +1258,8 @@ public class RadioActivity extends Activity implements OnTouchListener {
                             if (!locked) {
                                 Band band = configuration.bands.get();
                                 band.setAGC(pos);
-                                setAGC(rxchannel,band.getAGC());
-                                setAGC(subrxchannel,band.getAGC());
+                                setAGC(Channel.RX,band.getAGC());
+                                setAGC(Channel.SUBRX,band.getAGC());
                             }
                         }
 
@@ -1629,10 +1690,10 @@ public class RadioActivity extends Activity implements OnTouchListener {
                                 double v1 = -2.0 * (double) band.getSquelchValue() / 100.0;
                                 double v2 = Math.pow(10.0, v1);
                                 Log.i("RadioActivity", "FM squelch set to " + band.getSquelchValue() + " " + v1 + " " + v2);
-                                wdsp.SetRXAFMSQThreshold(rxchannel, v2);
+                                wdsp.SetRXAFMSQThreshold(Channel.RX, v2);
                                 checkbox.setText("Squelch: " + (int) (band.getSquelchValue()));
                             } else {
-                                wdsp.SetRXAAMSQThreshold(rxchannel, (double) -band.getSquelchValue());
+                                wdsp.SetRXAAMSQThreshold(Channel.RX, (double) -band.getSquelchValue());
                                 checkbox.setText("Squelch: " + (int) -(band.getSquelchValue()) + " dBm");
                             }
                         }
@@ -1656,16 +1717,16 @@ public class RadioActivity extends Activity implements OnTouchListener {
                                     double v1 = -2.0 * (double) band.getSquelchValue() / 100.0;
                                     double v2 = Math.pow(10.0, v1);
                                     Log.i("RadioActivity", "FM squelch set to " + band.getSquelchValue() + " " + v1 + " " + v2);
-                                    wdsp.SetRXAFMSQThreshold(rxchannel, v2);
+                                    wdsp.SetRXAFMSQThreshold(Channel.RX, v2);
                                 }
-                                wdsp.SetRXAFMSQRun(rxchannel, isChecked ? 1 : 0);
+                                wdsp.SetRXAFMSQRun(Channel.RX, isChecked ? 1 : 0);
                             } else {
                                 if (isChecked) {
                                     Log.i("RadioActivity", "AM squelch set to " + band.getSquelchValue());
-                                    wdsp.SetRXAAMSQThreshold(rxchannel, (double) -band.getSquelchValue());
+                                    wdsp.SetRXAAMSQThreshold(Channel.RX, (double) -band.getSquelchValue());
                                     checkbox.setText("Squelch: " + (int) -(band.getSquelchValue()) + " dBm");
                                 }
-                                wdsp.SetRXAAMSQRun(rxchannel, isChecked ? 1 : 0);
+                                wdsp.SetRXAAMSQRun(Channel.RX, isChecked ? 1 : 0);
                             }
 
                         }
@@ -1700,9 +1761,9 @@ public class RadioActivity extends Activity implements OnTouchListener {
             //configuration.tuning=false;
         }
 
-        if (panadapterUpdate.isRunning()) {
+        if (displayUpdate.isRunning()) {
             //Log.i("RadioActivity","onPause: panadapterUpdate.terminate");
-            panadapterUpdate.terminate();
+            displayUpdate.terminate();
         }
 
         if (metis.isRunning()) {
@@ -1710,9 +1771,17 @@ public class RadioActivity extends Activity implements OnTouchListener {
             metis.terminate();
         }
 
-        wdsp.CloseChannel(rxchannel);
-        wdsp.CloseChannel(subrxchannel);
-        wdsp.CloseChannel(txchannel);
+
+
+        wdsp.CloseChannel(Channel.RX);
+        wdsp.CloseChannel(Channel.SUBRX);
+        wdsp.CloseChannel(Channel.TX);
+        //wdsp.CloseChannel(Channel.BS);
+
+
+
+
+
 
         try {
             FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
@@ -1724,8 +1793,6 @@ public class RadioActivity extends Activity implements OnTouchListener {
             Log.i("RadioActivity", "onPause: " + e.toString());
         }
 
-        //temp fix
-        //System.exit(0);
     }
 
     @Override
@@ -1779,7 +1846,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     }
                     if (configuration.subrx) {
                         bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() - step));
-                        wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
+                        wdsp.SetRXAShiftFreq(Channel.SUBRX, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                     } else {
                         bandstack.setFrequency(bandstack.getFrequency() + step);
                         setFrequency(bandstack.getFrequency());
@@ -1812,7 +1879,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                 if (configuration.subrx) {
                     bandstack.setSubRxFrequency(bandstack.getSubRxFrequency() + updateincrement);
                     setSubRxFrequency(bandstack.getSubRxFrequency());
-                    wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
+                    wdsp.SetRXAShiftFreq(Channel.SUBRX, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                     handler.postAtTime(this, SystemClock.uptimeMillis() + 100);
                 } else {
                     bandstack.setFrequency(bandstack.getFrequency() + updateincrement);
@@ -1843,7 +1910,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                     freqincrement = (freqincrement / 100L) * 100L;
                     if (configuration.subrx) {
                         bandstack.setSubRxFrequency(setSubRxFrequency(bandstack.getSubRxFrequency() - (freqincrement/* / 100 * 100*/)));
-                        wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
+                        wdsp.SetRXAShiftFreq(Channel.SUBRX, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                     } else {
                         bandstack.setFrequency(bandstack.getFrequency() + (freqincrement/* / 100 * 100*/));
                         setFrequency(bandstack.getFrequency());
@@ -1863,7 +1930,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
                         if (configuration.subrx) {
                             bandstack.setSubRxFrequency(setSubRxFrequency(f));
-                            wdsp.SetRXAShiftFreq(subrxchannel, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
+                            wdsp.SetRXAShiftFreq(Channel.SUBRX, (double) (bandstack.getSubRxFrequency() - bandstack.getFrequency()));
                         } else {
                             bandstack.setFrequency(f);
                             setFrequency(bandstack.getFrequency());
@@ -1923,16 +1990,16 @@ public class RadioActivity extends Activity implements OnTouchListener {
     }
 
     private void setMode(int mode) {
-        wdsp.SetRXAMode(rxchannel, mode);
-        wdsp.SetRXAMode(subrxchannel, mode);
-        wdsp.SetTXAMode(txchannel, mode);
+        wdsp.SetRXAMode(Channel.RX, mode);
+        wdsp.SetRXAMode(Channel.SUBRX, mode);
+        wdsp.SetTXAMode(Channel.TX, mode);
         vfoView.update();
     }
 
     private void setFilter(int low, int high) {
-        wdsp.SetRXABandpassFreqs(rxchannel, low, high);
-        wdsp.SetRXABandpassFreqs(subrxchannel, low, high);
-        wdsp.SetTXABandpassFreqs(txchannel, low, high);
+        wdsp.SetRXABandpassFreqs(Channel.RX, low, high);
+        wdsp.SetRXABandpassFreqs(Channel.SUBRX, low, high);
+        wdsp.SetTXABandpassFreqs(Channel.TX, low, high);
         vfoView.update();
         frequencyView.update();
     }
@@ -2000,19 +2067,19 @@ public class RadioActivity extends Activity implements OnTouchListener {
                 Log.i("RadioActivity", "processPTT: start transmitting");
                 BandStack bandstack = configuration.bands.get().get();
 
-                Log.i("RadioActivity", "processPTT: SetChannelState(rxchannel,0,1)");
-                wdsp.SetChannelState(rxchannel, 0, 1);
+                Log.i("RadioActivity", "processPTT: SetChannelState(Channel.RX,0,1)");
+                wdsp.SetChannelState(Channel.RX, 0, 1);
                 if (configuration.subrx) {
-                    Log.i("RadioActivity", "processPTT: SetChannelState(subrxchannel,0,1)");
-                    wdsp.SetChannelState(subrxchannel, 0, 1);
+                    Log.i("RadioActivity", "processPTT: SetChannelState(Channel.SUBRX,0,1)");
+                    wdsp.SetChannelState(Channel.SUBRX, 0, 1);
                 }
-                Log.i("RadioActivity", "processPTT: SetChannelState(txchannel,1,0)");
-                wdsp.SetChannelState(txchannel, 1, 0);
+                Log.i("RadioActivity", "processPTT: SetChannelState(Channel.TX,1,0)");
+                wdsp.SetChannelState(Channel.TX, 1, 0);
 
                 Log.i("RadioActivity", "processPTT: metis.setTransmit(true,false)");
                 metis.setTransmit(true, false);
                 if (configuration.micsource == Configuration.MIC_SOURCE_LOCAL) {
-                    microphone = new Microphone(metis, txchannel);
+                    microphone = new Microphone(metis, Channel.TX);
                     microphone.start();
                 }
                 Log.i("RadioActivity", "Set PTT button red");
@@ -2020,10 +2087,10 @@ public class RadioActivity extends Activity implements OnTouchListener {
             }
         } else {
             // stop transmitting
-            wdsp.SetChannelState(txchannel, 0, 1);
-            wdsp.SetChannelState(rxchannel, 1, 0);
+            wdsp.SetChannelState(Channel.TX, 0, 1);
+            wdsp.SetChannelState(Channel.RX, 1, 0);
             if (configuration.subrx) {
-                wdsp.SetChannelState(subrxchannel, 1, 0);
+                wdsp.SetChannelState(Channel.SUBRX, 1, 0);
             }
             metis.setTransmit(false, false);
             ptt.getBackground().setColorFilter(Color.LTGRAY, Mode.MULTIPLY);
@@ -2050,9 +2117,6 @@ public class RadioActivity extends Activity implements OnTouchListener {
     private Metis metis;
 
     private WDSP wdsp;
-    private int rxchannel = 0;
-    private int txchannel = 1;
-    private int subrxchannel = 2;
 
     private Microphone microphone;
 
@@ -2061,8 +2125,9 @@ public class RadioActivity extends Activity implements OnTouchListener {
     private WaterfallView waterfallView;
     private FrequencyView frequencyView;
     private MeterView meterView;
+    private BandscopeView bandscopeView;
 
-    private DisplayUpdate panadapterUpdate;
+    private DisplayUpdate displayUpdate;
 
     private Band band;
     private long updateincrement;

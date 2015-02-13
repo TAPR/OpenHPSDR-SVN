@@ -66,6 +66,7 @@ public class Configuration  implements Serializable {
 
     public boolean panadapter=true;
 	public boolean waterfall=true;
+    public boolean bandscope=true;
 	
 	public boolean micboost=false;
 	

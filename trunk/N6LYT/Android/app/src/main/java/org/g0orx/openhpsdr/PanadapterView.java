@@ -263,37 +263,6 @@ public class PanadapterView extends SurfaceView {
             holder.unlockCanvasAndPost(canvas);
         }
 
-        /*
-
-        Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
-        int low=filter.getLow();
-        int high=filter.getHigh();
-        if(bandstack.getMode()==Modes.CWL) {
-            low=-configuration.cwsidetonefrequency-low;
-            high=-configuration.cwsidetonefrequency+high;
-        } else if(bandstack.getMode()==Modes.CWU) {
-            low=configuration.cwsidetonefrequency-low;
-            high=configuration.cwsidetonefrequency+high;
-        }
-        filterLeft = ((int) low - (-(int) configuration.samplerate / 2)) * WIDTH / (int) configuration.samplerate;
-        filterRight = ((int) high - (-(int) configuration.samplerate / 2)) * WIDTH / (int) configuration.samplerate;
-        if (filterLeft == filterRight) {
-            filterRight++;
-        }
-
-        long frequency = bandstack.getFrequency();
-        if (configuration.panadapter || lastfrequency != frequency || lastfilterleft != filterLeft || lastfilterright != filterRight) {
-            if (holder.getSurface().isValid()) {
-                Canvas canvas = holder.lockCanvas();
-                draw(canvas);
-                holder.unlockCanvasAndPost(canvas);
-                lastfrequency = frequency;
-                lastfilterleft = filterLeft;
-                lastfilterright = filterRight;
-            }
-        }
-        */
-
     }
 
     public void setVfoLock() {

@@ -22,6 +22,7 @@ public class Metis extends Thread {
 	
 	public Metis(int pixels, boolean bandscope) {
 
+        Log.i("Metis","pixels="+pixels+" bandscope="+bandscope);
         this.bandscope=bandscope;
 
 		configuration=Configuration.getInstance();
@@ -41,11 +42,12 @@ public class Metis extends Thread {
 		outrsamples=new float[configuration.fftsize];
 		suboutlsamples=new float[configuration.fftsize];
 		suboutrsamples=new float[configuration.fftsize];
-		
-		insamples=new double[configuration.fftsize*2];
-		outsamples=new double[configuration.fftsize*2];
 
-        bssamples=new float[4096];
+        bslsamples=new float[configuration.fftsize];
+        bsrsamples=new float[configuration.fftsize];
+        for(int i=0;i<configuration.fftsize;i++) {
+            bsrsamples[i]=0.0F;
+        }
 		
 
 		// calculate speed and increment
@@ -101,9 +103,9 @@ public class Metis extends Thread {
         }
 
         // rx spectrum
-        wdsp.XCreateAnalyzer(rxchannel, success, 262144, 1, 1,"");
+        wdsp.XCreateAnalyzer(Display.RX, success, 262144, 1, 1,"");
         if(success[0]!=0) {
-            Log.i("Metis", "XCreateAnalyzer rxchannel failed:" + success[0]);
+            Log.i("Metis", "XCreateAnalyzer Display.RX failed:" + success[0]);
         }
         int flp[] = {0};
         double KEEP_TIME=0.1;
@@ -129,7 +131,7 @@ public class Metis extends Thread {
 
         int max_w=fft_size + (int)Math.min(KEEP_TIME * (double)configuration.fps, KEEP_TIME * (double)fft_size * (double)configuration.fps);
 
-        wdsp.SetAnalyzer(rxchannel,
+        wdsp.SetAnalyzer(Display.RX,
                 spur_elimination_ffts,                      //number of LO frequencies = number of ffts used in elimination
                 data_type,                        //0 for real input data (I only); 1 for complex input data (I & Q)
                 flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
@@ -153,8 +155,7 @@ public class Metis extends Thread {
         );
 
         // tx spectrum
-
-        wdsp.XCreateAnalyzer(txchannel, success, 262144, 1, 1,"");
+        wdsp.XCreateAnalyzer(Display.TX, success, 262144, 1, 1,"");
         if(success[0]!=0) {
             Log.i("Metis", "XCreateAnalyzer txchannel failed:" + success[0]);
         }
@@ -186,7 +187,7 @@ public class Metis extends Thread {
         int max_w=fft_size + (int)Math.min(KEEP_TIME * (double)configuration.fps, KEEP_TIME * (double)fft_size * (double)configuration.fps);
         */
 
-        wdsp.SetAnalyzer(txchannel,
+        wdsp.SetAnalyzer(Display.TX,
                 spur_elimination_ffts,                      //number of LO frequencies = number of ffts used in elimination
                 data_type,                        //0 for real input data (I only); 1 for complex input data (I & Q)
                 flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
@@ -211,7 +212,7 @@ public class Metis extends Thread {
 
 
         // bandscope spectrum
-        wdsp.XCreateAnalyzer(bschannel, success, 262144, 1, 1,"");
+        wdsp.XCreateAnalyzer(Display.BS, success, 262144, 1, 1,"");
         if(success[0]!=0) {
             Log.i("Metis", "XCreateAnalyzer bschannel failed:" + success[0]);
         }
@@ -243,13 +244,13 @@ public class Metis extends Thread {
         int max_w=fft_size + (int)Math.min(KEEP_TIME * (double)configuration.fps, KEEP_TIME * (double)fft_size * (double)configuration.fps);
         */
 
-        wdsp.SetAnalyzer(bschannel,
+        wdsp.SetAnalyzer(Display.BS,
                 spur_elimination_ffts,                      //number of LO frequencies = number of ffts used in elimination
-                0,                        //0 for real input data (I only); 1 for complex input data (I & Q)
+                WDSP.REAL,                        //0 for real input data (I only); 1 for complex input data (I & Q)
                 flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
                 fft_size,                         //size of the fft, i.e., number of input samples
-                4096,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
-                window_type,           //integer specifying which window function to use
+                configuration.fftsize,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
+                WDSP.BLACKMAN_HARRIS,           //integer specifying which window function to use (Blackman-Harris)
                 kaiser_pi,                      //PiAlpha parameter for Kaiser window
                 overlap,                      //number of samples each fft (other than the first) is to re-use from the previous
                 clip,                        //number of fft output bins to be clipped from EACH side of each sub-span
@@ -257,7 +258,7 @@ public class Metis extends Thread {
                 span_clip_h,                     //number of bins to clip from high end of entire span
                 pixels,                      //number of pixel values to return.  may be either <= or > number of bins
                 stitches,                     //number of sub-spans to concatenate to form a complete span
-                avm,                       //averaging mode
+                WDSP.NO_AVERAGING,                       //averaging mode
                 display_average,                       //number of spans to (moving) average for pixel result
                 avb,            //back multiplier for weighted averaging
                 calibration_data_set,                     //identifier of which set of calibration data to use
@@ -317,7 +318,6 @@ public class Metis extends Thread {
 								//Log.i("Metis","run: EP6 sequence error: expected:"+ep6sequence+" got:"+sequence);
 								ep6sequence=sequence;
 							}
-							// 
 							demuxBuffer(rxbuffer,8);
 							demuxBuffer(rxbuffer,520);
 						} else if(endpoint==4) {
@@ -334,6 +334,7 @@ public class Metis extends Thread {
 					}
 				}
 			}
+
 		} catch (SocketException se) {
 			Log.i("Metis","run: "+se.toString());
 		} catch (UnknownHostException uhe) {
@@ -360,6 +361,10 @@ public class Metis extends Thread {
 		sendCommand();
 		
 		socket.close();
+
+        wdsp.DestroyAnalyzer(Display.RX);
+        wdsp.DestroyAnalyzer(Display.TX);
+        wdsp.DestroyAnalyzer(Display.BS);
 	}
 	
 	public void terminate() {
@@ -382,274 +387,276 @@ public class Metis extends Thread {
 
 
     private void processBandscope(byte[] bytes, int offset) {
-        short sample;
-        for(int i=offset;i<offset+512;i+=2) {
-            sample=(short)((bytes[i]<<8)+(bytes[i]&0xFF));
-            bssamples[bsoffset++]=(float)sample/32767.0F;
-            if(bsoffset==bssamples.length) {
-                // process the samples
-                wdsp.Spectrum(bschannel, 0, 0, bssamples, bssamples);
-                bsoffset=0;
+        if(running) {
+            short sample;
+            for (int i = offset; i < offset + 512; i += 2) {
+                sample = (short) ((bytes[i+1] << 8) + (bytes[i] & 0xFF));
+                bslsamples[bsoffset++] = (float) sample / 32767.0F;
+                if (bsoffset == bslsamples.length) {
+                    wdsp.Spectrum(Display.BS, 0, 0, bslsamples, bsrsamples);
+                    bsoffset = 0;
+                }
             }
         }
-
     }
 
 	private void demuxBuffer(byte[] bytes,int offset) {
 
-        Band band=configuration.bands.get();
-        BandStack bandstack=band.get();
-		// 512 byte buffer (startig at offset)
-		//    0: SYNC
-		//    1: SYNC
-		//    2: SYNC
-		//    3: Control 0
-		//    4: Control 1
-		//    5: Control 2
-		//    6: Control 3
-		//    7: Control 4
+        if(running) {
+            Band band = configuration.bands.get();
+            BandStack bandstack = band.get();
+            // 512 byte buffer (startig at offset)
+            //    0: SYNC
+            //    1: SYNC
+            //    2: SYNC
+            //    3: Control 0
+            //    4: Control 1
+            //    5: Control 2
+            //    6: Control 3
+            //    7: Control 4
 
-		//    8,9,10:   I   for 1 receiver  |
-		//    11,12,13: Q   for 1 receiver  |  repeated 63 times from 1 receiver
-		//    14,15:    MIC                 |
+            //    8,9,10:   I   for 1 receiver  |
+            //    11,12,13: Q   for 1 receiver  |  repeated 63 times from 1 receiver
+            //    14,15:    MIC                 |
 
-		boolean mydebug=dbg;
-		dbg=false;
-		state=STATE_SYNC0;
-		for(int i=offset;i<offset+512;i++) {
-			switch (state) {
-			case STATE_SYNC0:
-				if(bytes[i]!=SYNC) {
-					Log.i("Metis","SYNC error: offset:"+offset+":"+String.format("%02X",bytes[i]));
-					state=STATE_SYNC_ERROR;
-				} else {
-					state++;
-				}
-				break;
-			case STATE_SYNC1:
-				if(bytes[i]!=SYNC) {
-					Log.i("Metis","SYNC error: offset:"+offset+":"+String.format("%02X",bytes[i]));
-					state=STATE_SYNC_ERROR;
-				} else {
-					state++;
-				}
-				break;
-			case STATE_SYNC2:
-				if(bytes[i]!=SYNC) {
-					Log.i("Metis","SYNC error: offset:"+offset+":"+String.format("%02X",bytes[i]));
-					state=STATE_SYNC_ERROR;
-				} else {
-					state++;
-				}
-				break;
-			case STATE_CONTROL0:
-				rxcontrol0=(byte)(bytes[i]&0xFF);				
-				state++;
-				break;
-			case STATE_CONTROL1:
-				rxcontrol1=(byte)(bytes[i]&0xFF);
-				
-				state++;
-				break;
-			case STATE_CONTROL2:
-				rxcontrol2=(byte)(bytes[i]&0xFF);
-				state++;
-				break;
-			case STATE_CONTROL3:
-				rxcontrol3=(byte)(bytes[i]&0xFF);
-				state++;
-				break;
-			case STATE_CONTROL4:
-				rxcontrol4=(byte)(bytes[i]&0xFF);
-		        ptt=(rxcontrol0&0x01)==0x01;
-		        dash=(rxcontrol0&0x02)==0x02;
-		        dot=(rxcontrol0&0x04)==0x04;
-
-		        if(ptt!=last_ptt) {
-                    if(bandstack.getMode()!=Modes.CWL && bandstack.getMode()!=Modes.CWU) {
-                        if (pttListener != null) {
-                            pttListener.PTTChanged(ptt);
+            boolean mydebug = dbg;
+            dbg = false;
+            state = STATE_SYNC0;
+            for (int i = offset; i < offset + 512; i++) {
+                switch (state) {
+                    case STATE_SYNC0:
+                        if (bytes[i] != SYNC) {
+                            Log.i("Metis", "SYNC error: offset:" + offset + ":" + String.format("%02X", bytes[i]));
+                            state = STATE_SYNC_ERROR;
+                        } else {
+                            state++;
                         }
-                    }
-		        	Log.i("Metis","ptt changed="+ptt);
-                    last_ptt=ptt;
-		        }
-		        if(dash!=last_dash) {
-		        	Log.i("Metis","dash="+dash);
-                    last_dash=dash;
-		        }
-		        if(dot!=last_dot) {
-		        	Log.i("Metis","dot="+dot);
-                    last_dot=dot;
-		        }
-		        
-		        lt2208_overflow=(rxcontrol1&0x01)==0x01;
-		        
-				byte address=(byte)((rxcontrol0>>3)&0x1F);
-				switch(address) {
-				case 0:
-					if(mercury_software_version!=rxcontrol2) {
-				        mercury_software_version=rxcontrol2;
-				        //Log.i("Metis","Mercury: "+rxcontrol2);
-					}
-					if(penelope_software_version!=rxcontrol3) {
-					    penelope_software_version=rxcontrol3;
-					    //Log.i("Metis","Penelope: "+rxcontrol3);
-					}
-					if(metis_software_version!=rxcontrol4) {
-					    metis_software_version=rxcontrol4;
-					    //Log.i("Metis","Metis: "+rxcontrol4);
-					}
-					break;
-				case 1:
-					// forward power
-					penelope_forward_power=(rxcontrol1<<8)+(rxcontrol2&0xFF);
-					alex_forward_power=(rxcontrol3<<8)+(rxcontrol4&0xFF);
-					break;
-				case 2:
-					// reverse power
-					alex_reverse_power=(rxcontrol1<<8)+(rxcontrol2&0xFF);
-					ain3=(rxcontrol3<<8)+(rxcontrol4&0xFF);
-					break;
-				case 3:
-					ain4=(rxcontrol1<<8)+(rxcontrol2&0xFF);
-					ain6=(rxcontrol3<<8)+(rxcontrol4&0xFF);
-					break;
-				case 4:
-                    adc1overflow=(rxcontrol1&0x01)==0x01;
-                    adc2overflow=(rxcontrol2&0x01)==0x01;
-                    adc3overflow=(rxcontrol3&0x01)==0x01;
-                    adc4overflow=(rxcontrol4&0x01)==0x01;
-					break;
-				}
-				state++;
-				break;
-			case STATE_I0:
-				isample=bytes[i]<<16; // keep sign
-				state++;
-				break;
-			case STATE_I1:
-				isample|=(bytes[i]&0xFF)<<8;
-				state++;
-				break;
-			case STATE_I2:
-				isample|=bytes[i]&0xFF;
-				state++;
-				break;
-			case STATE_Q0:
-				qsample=bytes[i]<<16; // keep sign
-				state++;
-				break;
-			case STATE_Q1:
-				qsample|=(bytes[i]&0xFF)<<8;
-				state++;
-				break;
-			case STATE_Q2:
-				qsample|=bytes[i]&0xFF;
-				state++;
-				break;
-			case STATE_M0:
-				msample=bytes[i]<<8; // keep sign ????
-				state++;
-				break;
-			case STATE_M1:
-				msample|=bytes[i]&0xFF;
-				
-				// we now have an I, Q and Microphone sample
-				inlsamples[inoffset]=(float)isample/8388607.0F; // 24 bit sample convert to -1..+1
-				inrsamples[inoffset]=(float)qsample/8388607.0F; // 24 bit sample convert to -1..+1
-				inmiclsamples[inoffset]=(float)msample/32767.0F*configuration.micgain; // 16 bit sample convert to -1..+1
-                inmicrsamples[inoffset]=0.0F;
-
-				inoffset++;
-
-                if (inoffset == configuration.fftsize) {
-
-                    if (transmit) {
-                        if (tuning) {
-                            Filter filter=Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
-                            tunefrequency=filter.getLow()+((filter.getHigh()-filter.getLow())/2);
-                            phase = sineWave(inmiclsamples, inmiclsamples.length, phase, tunefrequency);
-
-                            wdsp.fexchange2(txchannel, inmiclsamples, inmicrsamples, outlsamples, outrsamples, error);
-                            if (error[0] != 0) {
-                                Log.i("Metis", "fexchange2 returned " + error[0]);
-                            }
-
-                        } else if (configuration.micsource == Configuration.MIC_SOURCE_RADIO) {
-
-                            wdsp.fexchange2(txchannel, inmiclsamples, inmicrsamples, outlsamples, outrsamples, error);
-                            if (error[0] != 0) {
-                                Log.i("Metis", "fexchange2 returned " + error[0]);
-                            }
-
+                        break;
+                    case STATE_SYNC1:
+                        if (bytes[i] != SYNC) {
+                            Log.i("Metis", "SYNC error: offset:" + offset + ":" + String.format("%02X", bytes[i]));
+                            state = STATE_SYNC_ERROR;
+                        } else {
+                            state++;
                         }
+                        break;
+                    case STATE_SYNC2:
+                        if (bytes[i] != SYNC) {
+                            Log.i("Metis", "SYNC error: offset:" + offset + ":" + String.format("%02X", bytes[i]));
+                            state = STATE_SYNC_ERROR;
+                        } else {
+                            state++;
+                        }
+                        break;
+                    case STATE_CONTROL0:
+                        rxcontrol0 = (byte) (bytes[i] & 0xFF);
+                        state++;
+                        break;
+                    case STATE_CONTROL1:
+                        rxcontrol1 = (byte) (bytes[i] & 0xFF);
 
-                        wdsp.Spectrum(txchannel, 0, 0, outrsamples, outlsamples);
+                        state++;
+                        break;
+                    case STATE_CONTROL2:
+                        rxcontrol2 = (byte) (bytes[i] & 0xFF);
+                        state++;
+                        break;
+                    case STATE_CONTROL3:
+                        rxcontrol3 = (byte) (bytes[i] & 0xFF);
+                        state++;
+                        break;
+                    case STATE_CONTROL4:
+                        rxcontrol4 = (byte) (bytes[i] & 0xFF);
+                        ptt = (rxcontrol0 & 0x01) == 0x01;
+                        dash = (rxcontrol0 & 0x02) == 0x02;
+                        dot = (rxcontrol0 & 0x04) == 0x04;
 
-                    } else {
-                        wdsp.fexchange2(rxchannel, inlsamples, inrsamples, outlsamples, outrsamples, error);
-                        if (error[0] != 0) {
-                            Log.i("Metis", "fexchange2 returned " + error[0]);
-                        }
-                        if (configuration.subrx) {
-                            wdsp.fexchange2(subrxchannel, inlsamples, inrsamples, suboutlsamples, suboutrsamples, error);
-                            if (error[0] != 0) {
-                                Log.i("Metis", "subrxchannel fexchange2 returned " + error[0]);
-                            }
-                        }
-                        //Log.i("Metis","calling Spectrum with "+inoffset+" samples");
-                        wdsp.Spectrum(rxchannel, 0, 0, inrsamples, inlsamples);
-                    }
-
-                    if(transmit) {
-                        if(tuning || configuration.micsource==Configuration.MIC_SOURCE_RADIO) {
-                            sendSamples(outlsamples, outrsamples);
-                        }
-                    } else {
-                        if(configuration.audiooutput==Configuration.AUDIO_OUTPUT_RADIO || configuration.audiooutput==Configuration.AUDIO_OUTPUT_BOTH) {
-                            if (configuration.subrx) {
-                                sendSamples(outlsamples, suboutrsamples);
-                            } else {
-                                sendSamples(outlsamples, outrsamples);
-                            }
-                        }
-                        if(configuration.audiooutput==Configuration.AUDIO_OUTPUT_LOCAL || configuration.audiooutput==Configuration.AUDIO_OUTPUT_BOTH) {
-                            for (int j = 0; j < outlsamples.length; j = j + audioincrement) {
-                                if (configuration.subrx) {
-                                    audiooutput[audiooutputindex++] = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
-                                    audiooutput[audiooutputindex++] = (short) (suboutrsamples[j] * 32767.0F * configuration.afgain);
-                                } else {
-                                    audiooutput[audiooutputindex++] = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
-                                    audiooutput[audiooutputindex++] = (short) (outrsamples[j] * 32767.0F * configuration.afgain);
+                        if (ptt != last_ptt) {
+                            if (bandstack.getMode() != Modes.CWL && bandstack.getMode() != Modes.CWU) {
+                                if (pttListener != null) {
+                                    pttListener.PTTChanged(ptt);
                                 }
-                                if (audiooutputindex == audiooutput.length) {
-                                    if (audiotrack != null) {
-                                        int sent = audiotrack.write(audiooutput, 0, audiooutput.length);
+                            }
+                            Log.i("Metis", "ptt changed=" + ptt);
+                            last_ptt = ptt;
+                        }
+                        if (dash != last_dash) {
+                            Log.i("Metis", "dash=" + dash);
+                            last_dash = dash;
+                        }
+                        if (dot != last_dot) {
+                            Log.i("Metis", "dot=" + dot);
+                            last_dot = dot;
+                        }
+
+                        lt2208_overflow = (rxcontrol1 & 0x01) == 0x01;
+
+                        byte address = (byte) ((rxcontrol0 >> 3) & 0x1F);
+                        switch (address) {
+                            case 0:
+                                if (mercury_software_version != rxcontrol2) {
+                                    mercury_software_version = rxcontrol2;
+                                    //Log.i("Metis","Mercury: "+rxcontrol2);
+                                }
+                                if (penelope_software_version != rxcontrol3) {
+                                    penelope_software_version = rxcontrol3;
+                                    //Log.i("Metis","Penelope: "+rxcontrol3);
+                                }
+                                if (metis_software_version != rxcontrol4) {
+                                    metis_software_version = rxcontrol4;
+                                    //Log.i("Metis","Metis: "+rxcontrol4);
+                                }
+                                break;
+                            case 1:
+                                // forward power
+                                penelope_forward_power = (rxcontrol1 << 8) + (rxcontrol2 & 0xFF);
+                                alex_forward_power = (rxcontrol3 << 8) + (rxcontrol4 & 0xFF);
+                                break;
+                            case 2:
+                                // reverse power
+                                alex_reverse_power = (rxcontrol1 << 8) + (rxcontrol2 & 0xFF);
+                                ain3 = (rxcontrol3 << 8) + (rxcontrol4 & 0xFF);
+                                break;
+                            case 3:
+                                ain4 = (rxcontrol1 << 8) + (rxcontrol2 & 0xFF);
+                                ain6 = (rxcontrol3 << 8) + (rxcontrol4 & 0xFF);
+                                break;
+                            case 4:
+                                adc1overflow = (rxcontrol1 & 0x01) == 0x01;
+                                adc2overflow = (rxcontrol2 & 0x01) == 0x01;
+                                adc3overflow = (rxcontrol3 & 0x01) == 0x01;
+                                adc4overflow = (rxcontrol4 & 0x01) == 0x01;
+                                break;
+                        }
+                        state++;
+                        break;
+                    case STATE_I0:
+                        isample = bytes[i] << 16; // keep sign
+                        state++;
+                        break;
+                    case STATE_I1:
+                        isample |= (bytes[i] & 0xFF) << 8;
+                        state++;
+                        break;
+                    case STATE_I2:
+                        isample |= bytes[i] & 0xFF;
+                        state++;
+                        break;
+                    case STATE_Q0:
+                        qsample = bytes[i] << 16; // keep sign
+                        state++;
+                        break;
+                    case STATE_Q1:
+                        qsample |= (bytes[i] & 0xFF) << 8;
+                        state++;
+                        break;
+                    case STATE_Q2:
+                        qsample |= bytes[i] & 0xFF;
+                        state++;
+                        break;
+                    case STATE_M0:
+                        msample = bytes[i] << 8; // keep sign ????
+                        state++;
+                        break;
+                    case STATE_M1:
+                        msample |= bytes[i] & 0xFF;
+
+                        // we now have an I, Q and Microphone sample
+                        inlsamples[inoffset] = (float) isample / 8388607.0F; // 24 bit sample convert to -1..+1
+                        inrsamples[inoffset] = (float) qsample / 8388607.0F; // 24 bit sample convert to -1..+1
+                        inmiclsamples[inoffset] = (float) msample / 32767.0F * configuration.micgain; // 16 bit sample convert to -1..+1
+                        inmicrsamples[inoffset] = 0.0F;
+
+                        inoffset++;
+
+                        if (inoffset == configuration.fftsize) {
+
+                            if (transmit) {
+                                if (tuning) {
+                                    Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
+                                    tunefrequency = filter.getLow() + ((filter.getHigh() - filter.getLow()) / 2);
+                                    phase = sineWave(inmiclsamples, inmiclsamples.length, phase, tunefrequency);
+
+                                    wdsp.fexchange2(Channel.TX, inmiclsamples, inmicrsamples, outlsamples, outrsamples, error);
+                                    if (error[0] != 0) {
+                                        Log.i("Metis", "fexchange2 returned " + error[0]);
                                     }
-                                    audiooutputindex = 0;
+
+                                } else if (configuration.micsource == Configuration.MIC_SOURCE_RADIO) {
+
+                                    wdsp.fexchange2(Channel.TX, inmiclsamples, inmicrsamples, outlsamples, outrsamples, error);
+                                    if (error[0] != 0) {
+                                        Log.i("Metis", "fexchange2 returned " + error[0]);
+                                    }
+
+                                }
+
+                                wdsp.Spectrum(Display.TX, 0, 0, outrsamples, outlsamples);
+
+                            } else {
+                                wdsp.fexchange2(Channel.RX, inlsamples, inrsamples, outlsamples, outrsamples, error);
+                                if (error[0] != 0) {
+                                    Log.i("Metis", "fexchange2 returned " + error[0]);
+                                }
+                                if (configuration.subrx) {
+                                    wdsp.fexchange2(Channel.SUBRX, inlsamples, inrsamples, suboutlsamples, suboutrsamples, error);
+                                    if (error[0] != 0) {
+                                        Log.i("Metis", "Channel.SUBRX fexchange2 returned " + error[0]);
+                                    }
+                                }
+                                //Log.i("Metis","calling Spectrum with "+inoffset+" samples");
+                                wdsp.Spectrum(Display.RX, 0, 0, inrsamples, inlsamples);
+                            }
+
+                            if (transmit) {
+                                if (tuning || configuration.micsource == Configuration.MIC_SOURCE_RADIO) {
+                                    sendSamples(outlsamples, outrsamples);
+                                }
+                            } else {
+                                if (configuration.audiooutput == Configuration.AUDIO_OUTPUT_RADIO || configuration.audiooutput == Configuration.AUDIO_OUTPUT_BOTH) {
+                                    if (configuration.subrx) {
+                                        sendSamples(outlsamples, suboutrsamples);
+                                    } else {
+                                        sendSamples(outlsamples, outrsamples);
+                                    }
+                                }
+                                if (configuration.audiooutput == Configuration.AUDIO_OUTPUT_LOCAL || configuration.audiooutput == Configuration.AUDIO_OUTPUT_BOTH) {
+                                    for (int j = 0; j < outlsamples.length; j = j + audioincrement) {
+                                        if (configuration.subrx) {
+                                            audiooutput[audiooutputindex++] = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
+                                            audiooutput[audiooutputindex++] = (short) (suboutrsamples[j] * 32767.0F * configuration.afgain);
+                                        } else {
+                                            audiooutput[audiooutputindex++] = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
+                                            audiooutput[audiooutputindex++] = (short) (outrsamples[j] * 32767.0F * configuration.afgain);
+                                        }
+                                        if (audiooutputindex == audiooutput.length) {
+                                            if (audiotrack != null) {
+                                                int sent = audiotrack.write(audiooutput, 0, audiooutput.length);
+                                            }
+                                            audiooutputindex = 0;
+                                        }
+                                    }
+                                }
+                                if (configuration.audiooutput == Configuration.AUDIO_OUTPUT_LOCAL) {
+                                    for (int j = 0; j < outlsamples.length; j = j + audioincrement) {
+                                        outlsamples[j] = outrsamples[j] = 0;
+                                    }
+                                    sendSamples(outlsamples, outrsamples);
                                 }
                             }
-                        }
-                        if(configuration.audiooutput==Configuration.AUDIO_OUTPUT_LOCAL) {
-                            for (int j = 0; j < outlsamples.length; j = j + audioincrement) {
-                                outlsamples[j]=outrsamples[j]=0;
-                            }
-                            sendSamples(outlsamples, outrsamples);
-                        }
-                    }
 
-                    inoffset = 0;
+                            inoffset = 0;
+                        }
+
+                        state = STATE_I0;
+                        break;
+
+                    case STATE_SYNC_ERROR:
+                        // discard
+                        return;
                 }
-
-                state=STATE_I0;
-				break;
-
-			case STATE_SYNC_ERROR:
-				// discard
-				return;
-			}
-		}
+            }
+        }
 	}
 
     public void sendMicSamples(float[] outlsamples,float[] outrsamples) {
@@ -981,7 +988,7 @@ public class Metis extends Thread {
 	    commandbuffer[1]=(byte)0xFE;
 	    commandbuffer[2]=(byte)0x04;
         if(bandscope) {
-            commandbuffer[3] = (byte) 0x02;
+            commandbuffer[3] = (byte) 0x03;
         } else {
             commandbuffer[3] = (byte) 0x01;
         }
@@ -1195,15 +1202,14 @@ public class Metis extends Thread {
 	private float[] outrsamples;
 	private float[] suboutlsamples;
 	private float[] suboutrsamples;
+    private int inoffset=0;
 
-    private float[] bssamples;
+    //private static final int BS_FFT_SIZE=8192;
+    //private static final int BS_BUFFER_SIZE=4096;
+    private float[] bslsamples;
+    private float[] bsrsamples;
     private int bsoffset=0;
-	
-	private double[] insamples;
-	private double[] outsamples;
-	
-	private int inoffset=0;
-	
+
 	private byte[] sendbuffer=new byte[1032];
 	private int txoffset=16;
 	
@@ -1252,11 +1258,6 @@ public class Metis extends Thread {
 	private int ain3=0;
 	private int ain4=0;
 	private int ain6=0;
-	
-	private int rxchannel=0;
-	private int txchannel=1;
-	private int subrxchannel=2;
-    private int bschannel=3;
 
     private int rx1adc=0x00; // ADC2
 	

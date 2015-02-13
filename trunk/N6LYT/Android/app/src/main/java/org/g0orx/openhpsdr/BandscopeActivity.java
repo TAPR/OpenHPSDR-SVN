@@ -2,8 +2,6 @@ package org.g0orx.openhpsdr;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,32 +11,14 @@ public class BandscopeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_band_scope);
-
-
+        setContentView(R.layout.activity_bandscope);
     }
 
-    @Override
-    public void onStart() {
-        //Log.i("RadioActivity","onStart");
-        super.onStart();
-
-        Display display = getWindowManager().getDefaultDisplay();
-        final int width = (display.getWidth());
-        final int height = (display.getHeight());
-
-
-        Log.i("BandscopeActivity", "onStart: width=" + width + " height=" + height);
-
-        metis = new Metis(width, false);
-        metis.start();
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_band_scope, menu);
+        getMenuInflater().inflate(R.menu.menu_bandscope, menu);
         return true;
     }
 
@@ -56,6 +36,4 @@ public class BandscopeActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    private Metis metis;
 }
