@@ -52,8 +52,8 @@ public class Discovered implements Serializable {
         case DEVICE_ORION:
             result="Orion";
             break;
-        case DEVICE_HERMES_LIGHT:
-            result="Hermes Light";
+        case DEVICE_HERMES_LITE:
+            result="Hermes Lite";
             break;
 		}
 		return result;
@@ -107,7 +107,7 @@ public class Discovered implements Serializable {
 	public static final int DEVICE_GRIFFIN=2;
 	public static final int DEVICE_ANGELIA=4;
     public static final int DEVICE_ORION=5;
-    public static final int DEVICE_HERMES_LIGHT=6;
+    public static final int DEVICE_HERMES_LITE=6;
 	
 	public static final int STATE_AVAILABLE=2;
 	public static final int STATE_SENDING=3;

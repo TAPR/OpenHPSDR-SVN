@@ -739,7 +739,8 @@ public class Metis extends Thread {
                         sendbuffer[11] = txcontrol0;
                         sendbuffer[12] = txcontrol1;
                         sendbuffer[13]=(byte)(txcontrol2|((transmit?configuration.bands.get().getOCTx():configuration.bands.get().getOCRx())<<1));
-                        byte tx3 = txcontrol3;
+                        //byte tx3 = txcontrol3;
+                        byte tx3=(byte)(ALEX_ATTENUATION_0DB | configuration.dither | configuration.random | configuration.preamp);
                         if(configuration.radio!=Configuration.METIS_PENELOPE &&
                                 configuration.radio!=Configuration.METIS_PENNYLANE) {
                             BandStack bs = configuration.bands.get().get();

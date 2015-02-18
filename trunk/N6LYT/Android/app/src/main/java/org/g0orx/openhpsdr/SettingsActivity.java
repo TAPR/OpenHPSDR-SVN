@@ -195,48 +195,8 @@ public class SettingsActivity extends Activity {
         settings.add(s);
 
         s = new Setting();
-        s.setTitle("LT2208 Dither");
-        s.setValue(configuration.dither == Metis.LT2208_DITHER_ON ? "On" : "Off");
-        settings.add(s);
-
-        s = new Setting();
-        s.setTitle("LT2208 Random");
-        s.setValue(configuration.random == Metis.LT2208_RANDOM_ON ? "On" : "Off");
-        settings.add(s);
-
-        s = new Setting();
-        s.setTitle("LT2208 Preamp");
-        s.setValue(configuration.preamp == Metis.LT2208_GAIN_ON ? "On" : "Off");
-        settings.add(s);
-
-
-        s = new Setting();
-        s.setTitle("Microphone Source");
-        if (configuration.micsource == Configuration.MIC_SOURCE_RADIO) {
-            s.setValue("Radio");
-        } else if (configuration.micsource == Configuration.MIC_SOURCE_LOCAL) {
-            s.setValue("Local");
-        }
-        settings.add(s);
-
-        s = new Setting();
-        s.setTitle("Microphone Boost");
-        if (configuration.micboost) {
-            s.setValue("20dB");
-        } else {
-            s.setValue("0dB");
-        }
-        settings.add(s);
-
-        s = new Setting();
-        s.setTitle("Audio Output");
-        if (configuration.audiooutput == Configuration.AUDIO_OUTPUT_RADIO) {
-            s.setValue("Radio");
-        } else if (configuration.audiooutput == Configuration.AUDIO_OUTPUT_LOCAL) {
-            s.setValue("Local");
-        } else if (configuration.audiooutput == Configuration.AUDIO_OUTPUT_BOTH) {
-            s.setValue("Both");
-        }
+        s.setTitle("Buffer Size");
+        s.setValue(Integer.toString((int) configuration.fftsize));
         settings.add(s);
 
         s = new Setting();
@@ -247,16 +207,6 @@ public class SettingsActivity extends Activity {
         s = new Setting();
         s.setTitle("Waterfall");
         s.setValue(configuration.waterfall ? "On" : "Off");
-        settings.add(s);
-
-        s = new Setting();
-        s.setTitle("Waterfall Display");
-        s.setValue(configuration.waterfallGrayscale ? "Gray Scale" : "Color");
-        settings.add(s);
-
-        s = new Setting();
-        s.setTitle("Waterfall Automatic Level");
-        s.setValue(configuration.waterfallAutomatic ? "Enabled" : "Disabled");
         settings.add(s);
 
         s = new Setting();
@@ -279,20 +229,6 @@ public class SettingsActivity extends Activity {
         s.setTitle("Tuna Knob (See http://www.tunadjgear.com/)");
         s.setValue(configuration.tunaknob ? "Yes" : "No");
         settings.add(s);
-
-        /*
-        s=new Setting();
-        s.setTitle("Meter Image");
-        switch(configuration.meter) {
-            case Configuration.METER_PNG:
-                s.setValue("meter.png");
-                break;
-            case Configuration.SMETER_PNG:
-                s.setValue("smeter.png");
-                break;
-        }
-        settings.add(s);
-        */
 
         /*
         s=new Setting();
@@ -448,12 +384,12 @@ public class SettingsActivity extends Activity {
                                 }
                             });
                     d.show();
-                } else if ("LT2208 Dither".equals(option)) {
+                } else if ("Buffer Size".equals(option)) {
 
                     AlertDialog.Builder d = new AlertDialog.Builder(context);
 
-                    String title = "LT2208 Dither";
-                    String[] options = {"Off", "On"};
+                    String title = "Buffer Size";
+                    String[] options = {"256", "512", "1024", "2048", "4096", "8192", "16384"};
 
                     d.setTitle(title);
                     d.setItems(options,
@@ -463,67 +399,28 @@ public class SettingsActivity extends Activity {
                                     Log.i("Configuration", "onClick:" + i);
                                     switch (i) {
                                         case 0:
-                                            configuration.dither = Metis.LT2208_DITHER_OFF;
+                                            configuration.fftsize = 256;
                                             break;
                                         case 1:
-                                            configuration.dither = Metis.LT2208_DITHER_ON;
+                                            configuration.fftsize = 512;
+                                            break;
+                                        case 2:
+                                            configuration.fftsize = 1024;
+                                            break;
+                                        case 3:
+                                            configuration.fftsize = 2048;
+                                            break;
+                                        case 4:
+                                            configuration.fftsize = 4096;
+                                            break;
+                                        case 5:
+                                            configuration.fftsize = 8192;
+                                            break;
+                                        case 6:
+                                            configuration.fftsize = 16384;
                                             break;
                                     }
-                                    setting.setValue(configuration.dither == Metis.LT2208_DITHER_OFF ? "Off" : "On");
-                                    adapter.notifyDataSetChanged();
-                                }
-                            });
-                    d.show();
-                } else if ("LT2208 Random".equals(option)) {
-
-                    AlertDialog.Builder d = new AlertDialog.Builder(context);
-
-                    String title = "LT2208 Random";
-                    String[] options = {"Off", "On"};
-
-                    d.setTitle(title);
-                    d.setItems(options,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int i) {
-                                    Configuration configuration = Configuration.getInstance();
-                                    Log.i("Configuration", "onClick:" + i);
-                                    switch (i) {
-                                        case 0:
-                                            configuration.random = Metis.LT2208_RANDOM_OFF;
-                                            break;
-                                        case 1:
-                                            configuration.random = Metis.LT2208_RANDOM_ON;
-                                            break;
-                                    }
-                                    setting.setValue(configuration.random == Metis.LT2208_RANDOM_OFF ? "Off" : "On");
-                                    adapter.notifyDataSetChanged();
-                                }
-                            });
-                    d.show();
-                } else if ("LT2208 Preamp".equals(option)) {
-
-                    AlertDialog.Builder d = new AlertDialog.Builder(context);
-
-                    String title = "LT2208 Preamp";
-                    String[] options = {"Off", "On"};
-
-                    d.setTitle(title);
-                    d.setItems(options,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int i) {
-                                    Configuration configuration = Configuration.getInstance();
-                                    Log.i("Configuration", "onClick:" + i);
-                                    switch (i) {
-                                        case 0:
-                                            configuration.preamp = Metis.LT2208_GAIN_OFF;
-                                            configuration.preampOffset = 0.0F;
-                                            break;
-                                        case 1:
-                                            configuration.preamp = Metis.LT2208_GAIN_ON;
-                                            configuration.preampOffset = -20.0F;
-                                            break;
-                                    }
-                                    setting.setValue(configuration.preamp == Metis.LT2208_GAIN_OFF ? "Off" : "On");
+                                    setting.setValue(Integer.toString((int) configuration.fftsize));
                                     adapter.notifyDataSetChanged();
                                 }
                             });
@@ -675,94 +572,6 @@ public class SettingsActivity extends Activity {
                                 }
                             });
                     d.show();
-                } else if ("Microphone Source".equals(option)) {
-                    AlertDialog.Builder d = new AlertDialog.Builder(context);
-
-                    String title = "Microphone Source";
-                    String[] options = {"Radio", "Local"};
-
-                    d.setTitle(title);
-                    d.setItems(options,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int i) {
-                                    Configuration configuration = Configuration.getInstance();
-                                    String value = "";
-                                    Log.i("Configuration", "onClick:" + i);
-                                    switch (i) {
-                                        case 0:
-                                            configuration.micsource = Configuration.MIC_SOURCE_RADIO;
-                                            value = "Radio";
-                                            break;
-                                        case 1:
-                                            configuration.micsource = Configuration.MIC_SOURCE_LOCAL;
-                                            value = "Local";
-                                            break;
-                                    }
-                                    setting.setValue(value);
-                                    adapter.notifyDataSetChanged();
-                                }
-                            });
-                    d.show();
-                } else if ("Microphone Boost".equals(option)) {
-                    AlertDialog.Builder d = new AlertDialog.Builder(context);
-
-                    String title = "Microphone Boost";
-                    String[] options = {"0dB", "20dB"};
-
-                    d.setTitle(title);
-                    d.setItems(options,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int i) {
-                                    Configuration configuration = Configuration.getInstance();
-                                    String value = "";
-                                    Log.i("Configuration", "onClick:" + i);
-                                    switch (i) {
-                                        case 0:
-                                            configuration.micboost = false;
-                                            value = "0dB";
-                                            break;
-                                        case 1:
-                                            configuration.micboost = true;
-                                            value = "20dB";
-                                            break;
-                                    }
-                                    setting.setValue(value);
-                                    adapter.notifyDataSetChanged();
-                                }
-                            });
-                    d.show();
-                } else if ("Audio Output".equals(option)) {
-                    AlertDialog.Builder d = new AlertDialog.Builder(context);
-
-                    String title = "Audio Output";
-                    String[] options = {"Radio", "Local", "Both"};
-
-                    d.setTitle(title);
-                    d.setItems(options,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int i) {
-                                    Configuration configuration = Configuration.getInstance();
-                                    String value = "";
-                                    Log.i("Configuration", "onClick:" + i);
-                                    switch (i) {
-                                        case 0:
-                                            configuration.audiooutput = Configuration.AUDIO_OUTPUT_RADIO;
-                                            value = "Radio";
-                                            break;
-                                        case 1:
-                                            configuration.audiooutput = Configuration.AUDIO_OUTPUT_LOCAL;
-                                            value = "Local";
-                                            break;
-                                        case 2:
-                                            configuration.audiooutput = Configuration.AUDIO_OUTPUT_BOTH;
-                                            value = "Both";
-                                            break;
-                                    }
-                                    setting.setValue(value);
-                                    adapter.notifyDataSetChanged();
-                                }
-                            });
-                    d.show();
                 } else if ("FPS".equals(option)) {
                     AlertDialog.Builder d = new AlertDialog.Builder(context);
 
@@ -866,60 +675,6 @@ public class SettingsActivity extends Activity {
                                         case 1:
                                             configuration.waterfall = false;
                                             value = "Off";
-                                            break;
-                                    }
-                                    setting.setValue(value);
-                                    adapter.notifyDataSetChanged();
-                                }
-                            });
-                    d.show();
-                } else if ("Waterfall Display".equals(option)) {
-                    AlertDialog.Builder d = new AlertDialog.Builder(context);
-
-                    String title = "Waterfall Display";
-                    String[] options = {"Color", "Gray Scale"};
-
-                    d.setTitle(title);
-                    d.setItems(options,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int i) {
-                                    Configuration configuration = Configuration.getInstance();
-                                    String value = "";
-                                    switch (i) {
-                                        case 0:
-                                            configuration.waterfallGrayscale = false;
-                                            value = "Color";
-                                            break;
-                                        case 1:
-                                            configuration.waterfallGrayscale = true;
-                                            value = "Gray Scale";
-                                            break;
-                                    }
-                                    setting.setValue(value);
-                                    adapter.notifyDataSetChanged();
-                                }
-                            });
-                    d.show();
-                } else if ("Waterfall Automatic Level".equals(option)) {
-                    AlertDialog.Builder d = new AlertDialog.Builder(context);
-
-                    String title = "Waterfall Automatic Level";
-                    String[] options = {"Disabled", "Enabled"};
-
-                    d.setTitle(title);
-                    d.setItems(options,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int i) {
-                                    Configuration configuration = Configuration.getInstance();
-                                    String value = "";
-                                    switch (i) {
-                                        case 0:
-                                            configuration.waterfallAutomatic = false;
-                                            value = "Disabled";
-                                            break;
-                                        case 1:
-                                            configuration.waterfallAutomatic = true;
-                                            value = "Enabled";
                                             break;
                                     }
                                     setting.setValue(value);
