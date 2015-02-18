@@ -118,6 +118,8 @@ public class Configuration  implements Serializable {
     public static final int ORION_BOARD_ONLY = 40;
     public static final int ORION_ANAN200D = 41;
 
+    public static final int HERMES_LITE_ONLY = 50;
+
     public int radio=RADIO_UNKNOWN;
 
     public int cwkeysreversed=0; // 0=disabled 1=enabled

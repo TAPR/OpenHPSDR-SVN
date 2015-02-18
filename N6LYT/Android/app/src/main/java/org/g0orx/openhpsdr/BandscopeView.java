@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import org.g0orx.openhpsdr.modes.Modes;
+import org.g0orx.openhpsdr.discovery.Discovered;
 
 /**
  * Created by john on 08/02/15.
@@ -46,7 +46,10 @@ public class BandscopeView extends SurfaceView {
         paint.setColor(Color.BLACK);
         canvas.drawRect(0, 0, width, height, paint);
 
-        float hzPerPixel = 62440000F / (float) width;
+        float hzPerPixel = 62440000F / (float) width; // 124.88 MHz xtal
+        if(configuration.discovered.getDevice()== Discovered.DEVICE_HERMES_LITE) {
+            hzPerPixel = 30720000F / (float)width; // 61.44 MHz xtal
+        }
 
         Band[] bands=configuration.bands.getBands();
         for(int i=0;i<bands.length;i++) {
@@ -85,6 +88,12 @@ public class BandscopeView extends SurfaceView {
 
         float f = 0;
         String fs;
+
+        int maxfrequency=65;
+        if(configuration.discovered.getDevice()== Discovered.DEVICE_HERMES_LITE) {
+            maxfrequency=32;
+        }
+
         for(int i=2;i<65;i+=2) {
             f=(float)i*1000000.0F;
             float x=f/hzPerPixel;
@@ -94,8 +103,6 @@ public class BandscopeView extends SurfaceView {
             paint.setColor(Color.WHITE);
             canvas.drawText(fs, x - 10, height - 5, paint);
         }
-
-
 
         paint.setColor(Color.YELLOW);
         paint.setPathEffect(null);
@@ -122,15 +129,8 @@ public class BandscopeView extends SurfaceView {
 
                 sample = samples[i];
 
-                //sample = sample + configuration.displayCalibrationOffset + configuration.preampOffset;
-
                 sample = sample + (-20.0F);
-                /*
-                sample = (float) Math
-                        .floor(((float) configuration.spectrumHigh - sample)
-                                * (float) height
-                                / (float) (configuration.spectrumHigh - configuration.spectrumLow));
-                                */
+
                 sample = (float) Math
                         .floor(((float) HIGH - sample)
                                 * (float) height
@@ -151,15 +151,10 @@ public class BandscopeView extends SurfaceView {
             }
 
             if (holder.getSurface().isValid()) {
-                //Log.i("BandscopeView", "surface valid");
                 Canvas canvas = holder.lockCanvas();
                 draw(canvas);
                 holder.unlockCanvasAndPost(canvas);
-            } else {
-                //Log.i("BandscopeView", "surface not valid");
             }
-
-            //Log.i("BandscopeView","update max="+max+" min="+min);
         }
 
     }
