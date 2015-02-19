@@ -35,6 +35,7 @@ int cb_keep_running;
 
 int sctr = 0;
 void Callback_ProcessBuffer(int *bufp, int buflen) { 
+	float ptn;
 	int rc; 
 	int j;
 	int i; 
@@ -180,7 +181,10 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 		fprintf(stderr, "Mayday Mayday - bad sample rate in callback-thread.c"); 
 	} 
 	xeerEXTF(0, OUTpointer[2], OUTpointer[3], OUTpointer[2], OUTpointer[3], OUTpointer[0], OUTpointer[1], XmitBit, BlockSize/out_sample_incr);
+	//** ptn = 1.0f / pow (10.0f, (float)AIN4 / 2730.0f);
 	for ( i = 0, outidx = 0 ; i < BlockSize; i += out_sample_incr, outidx++ ) { 
+		//** OUTpointer[2][outidx] *= ptn;
+		//** OUTpointer[3][outidx] *= ptn;
 		for (j = 0; j < 4; j++)
 
 	/*	LIMIT_SAMPLE(CallbackMonOutLbufp[i]);

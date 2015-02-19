@@ -144,7 +144,13 @@
     <ClInclude Include="nobII.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cfir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="osctrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="emnr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -275,7 +281,13 @@
     <ClCompile Include="nobII.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cfir.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="osctrl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="emnr.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

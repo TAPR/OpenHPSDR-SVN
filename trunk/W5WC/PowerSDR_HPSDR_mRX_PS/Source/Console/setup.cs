@@ -2783,6 +2783,17 @@ namespace PowerSDR
             chkDSPEERamIQ_CheckedChanged(this, e);
             udDSPEERpwmMax_ValueChanged(this, e);
             udDSPEERpwmMin_ValueChanged(this, e);
+            // NR Tab
+            radDSPNR2Linear_CheckedChanged(this, e);
+            radDSPNR2Log_CheckedChanged(this, e);
+            radDSPNR2OSMS_CheckedChanged(this, e);
+            radDSPNR2MMSE_CheckedChanged(this, e);
+            chkDSPNR2AE_CheckedChanged(this, e);
+            radDSPNR2LinearRX2_CheckedChanged(this, e);
+            radDSPNR2LogRX2_CheckedChanged(this, e);
+            radDSPNR2OSMSRX2_CheckedChanged(this, e);
+            radDSPNR2MMSERX2_CheckedChanged(this, e);
+            chkDSPNR2AERX2_CheckedChanged(this, e);
             // Transmit Tab
             udTXFilterHigh_ValueChanged(this, e);
             udTXFilterLow_ValueChanged(this, e);
@@ -4553,7 +4564,7 @@ namespace PowerSDR
                         force_model = true;
                         radGenModelANAN100D.Checked = true;
                         break;
-                    case Model.ORION:
+                    case Model.ANAN200D:
                         force_model = true;
                         radGenModelOrion.Checked = true;
                         break;
@@ -6970,7 +6981,7 @@ namespace PowerSDR
             {
                 JanusAudio.fwVersionsChecked = false;
                 console.CurrentModel = Model.HERMES;
-                console.CurrentHPSDRModel = HPSDRModel.ORION;
+                console.CurrentHPSDRModel = HPSDRModel.ANAN200D;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
                 chkMercuryPresent.Checked = true;
@@ -8599,6 +8610,17 @@ namespace PowerSDR
             comboAudioSampleRate1.Text = rate;
         }
 
+        private bool force_reset = false;
+        public bool ForceReset
+        {
+            set 
+            { 
+                force_reset = value;
+                if (value)
+                comboAudioSampleRate1_SelectedIndexChanged(this, EventArgs.Empty);
+            }
+        }
+
         private void comboAudioSampleRate1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboAudioSampleRate1.SelectedIndex < 0) return;
@@ -8615,7 +8637,7 @@ namespace PowerSDR
 
             bool power = console.PowerOn;
 
-            if (power && new_rate != old_rate)
+            if (power && (new_rate != old_rate || force_reset))
             {
                 console.PowerOn = false;
                 Thread.Sleep(100);
@@ -8651,16 +8673,10 @@ namespace PowerSDR
                 }
             }
 
-            if (power && new_rate != old_rate)
+            if (power && (new_rate != old_rate || force_reset))
             {
-                if (console.CurrentModel == Model.FLEX5000)
-                {
-                    console.PowerOn = true;
-                    Thread.Sleep(5000);
-                    console.PowerOn = false;
-                    console.PowerOn = true;
-                }
-                else console.PowerOn = true;
+                force_reset = false;
+                console.PowerOn = true;
             }
         }
 
@@ -10875,6 +10891,8 @@ namespace PowerSDR
             console.radio.GetDSPRX(0, 1).RXANFPosition = position;
             console.radio.GetDSPRX(0, 0).RXANRPosition = position;
             console.radio.GetDSPRX(0, 1).RXANRPosition = position;
+            console.radio.GetDSPRX(0, 0).RXANR2Position = position;
+            console.radio.GetDSPRX(0, 1).RXANR2Position = position;
         }
 
         private void radANF2PreAGC_CheckedChanged(object sender, EventArgs e)
@@ -10886,6 +10904,7 @@ namespace PowerSDR
                 position = 1;
             console.radio.GetDSPRX(1, 0).RXANFPosition = position;
             console.radio.GetDSPRX(1, 0).RXANRPosition = position;
+            console.radio.GetDSPRX(1, 0).RXANR2Position = position;
         }
 
         #endregion
@@ -17636,7 +17655,7 @@ namespace PowerSDR
             console.specRX.GetSpecRX(0).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbDisplayFFTSize.Value))));
             //  console.specRX.GetSpecRX(1).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbDisplayFFTSize.Value))));
             console.UpdateRXSpectrumDisplayVars();
-            double bin_width = (double)Display.SampleRate / (double)console.specRX.GetSpecRX(0).FFTSize;
+            double bin_width = (double)Display.RXSampleRate / (double)console.specRX.GetSpecRX(0).FFTSize;
             lblDisplayBinWidth.Text = bin_width.ToString("N3");
             Display.RX1FFTSizeOffset = tbDisplayFFTSize.Value * 2;
             // Display.RX2FFTSizeOffset = tbDisplayFFTSize.Value * 2;
@@ -17646,7 +17665,7 @@ namespace PowerSDR
         {
             // console.specRX.GetSpecRX(0).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbDisplayFFTSize.Value))));
             console.specRX.GetSpecRX(1).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbRX2DisplayFFTSize.Value))));
-            double bin_width = (double)Display.SampleRate / (double)console.specRX.GetSpecRX(1).FFTSize;
+            double bin_width = (double)Display.RXSampleRate / (double)console.specRX.GetSpecRX(1).FFTSize;
             lblRX2DisplayBinWidth.Text = bin_width.ToString("N3");
             // Display.RX1FFTSizeOffset = tbDisplayFFTSize.Value * 2;
             Display.RX2FFTSizeOffset = tbRX2DisplayFFTSize.Value * 2;
@@ -17850,7 +17869,7 @@ namespace PowerSDR
                 case HPSDRModel.ANAN100D:
                     radGenModelANAN100D_CheckedChanged(this, EventArgs.Empty);
                     break;
-                case HPSDRModel.ORION:
+                case HPSDRModel.ANAN200D:
                     radGenModelOrion_CheckedChanged(this, EventArgs.Empty);
                     break;
             }
@@ -18158,7 +18177,7 @@ namespace PowerSDR
                     if (chkLimitRX.Checked) nr = 2;
                     else nr = 4;
                     break;
-                case HPSDRModel.ORION:
+                case HPSDRModel.ANAN200D:
                     if (chkLimitRX.Checked) nr = 2;
                     else nr = 4;
                     break;
@@ -18194,9 +18213,9 @@ namespace PowerSDR
             int wintype = comboDSPRxWindow.SelectedIndex;
             if (wintype < 0)
             {
-                wintype = 1;
+                wintype = 0;
                 comboDSPRxWindow.Text = "BH - 4";
-                comboDSPRxWindow.SelectedIndex = wintype;
+                //comboDSPRxWindow.SelectedIndex = wintype;
             }
             console.radio.GetDSPRX(0, 0).RXBandpassWindow = wintype;
             console.radio.GetDSPRX(0, 1).RXBandpassWindow = wintype;
@@ -18208,9 +18227,9 @@ namespace PowerSDR
             int wintype = comboDSPTxWindow.SelectedIndex;
             if (wintype < 0)
             {
-                wintype = 1;
+                wintype = 0;
                 comboDSPTxWindow.Text = "BH - 4";
-                comboDSPTxWindow.SelectedIndex = wintype;
+                //comboDSPTxWindow.SelectedIndex = wintype;
             }
             console.radio.GetDSPTX(0).TXBandpassWindow = wintype;
         }
@@ -18815,6 +18834,101 @@ namespace PowerSDR
             console.radio.GetDSPRX(1, 0).RXAMSquelchMaxTail = (double)udRXAMSQMaxTail.Value;
             console.radio.GetDSPRX(1, 1).RXAMSquelchMaxTail = (double)udRXAMSQMaxTail.Value;
         }
+
+        private void radDSPNR2Linear_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radDSPNR2Linear.Checked)
+            {
+                console.radio.GetDSPRX(0, 0).RXANR2GainMethod = 0;
+                console.radio.GetDSPRX(0, 1).RXANR2GainMethod = 0;
+            }
+        }
+
+        private void radDSPNR2Log_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radDSPNR2Log.Checked)
+            {
+                console.radio.GetDSPRX(0, 0).RXANR2GainMethod = 1;
+                console.radio.GetDSPRX(0, 1).RXANR2GainMethod = 1;
+            }
+        }
+
+        private void radDSPNR2OSMS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radDSPNR2OSMS.Checked)
+            {
+                console.radio.GetDSPRX(0, 0).RXANR2NPEMethod = 0;
+                console.radio.GetDSPRX(0, 1).RXANR2NPEMethod = 0;
+            }
+        }
+
+        private void radDSPNR2MMSE_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radDSPNR2MMSE.Checked)
+            {
+                console.radio.GetDSPRX(0, 0).RXANR2NPEMethod = 1;
+                console.radio.GetDSPRX(0, 1).RXANR2NPEMethod = 1;
+            }
+        }
+
+        private void chkDSPNR2AE_CheckedChanged(object sender, EventArgs e)
+        {
+            int run;
+            if (chkDSPNR2AE.Checked)
+                run = 1;
+            else
+                run = 0;
+            console.radio.GetDSPRX(0, 0).RXANR2AERun = run;
+            console.radio.GetDSPRX(0, 1).RXANR2AERun = run;
+        }
+
+        private void radDSPNR2LinearRX2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radDSPNR2LinearRX2.Checked)
+            {
+                console.radio.GetDSPRX(1, 0).RXANR2GainMethod = 0;
+                console.radio.GetDSPRX(1, 1).RXANR2GainMethod = 0;
+            }
+        }
+
+        private void radDSPNR2LogRX2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radDSPNR2LogRX2.Checked)
+            {
+                console.radio.GetDSPRX(1, 0).RXANR2GainMethod = 1;
+                console.radio.GetDSPRX(1, 1).RXANR2GainMethod = 1;
+            }
+        }
+
+        private void radDSPNR2OSMSRX2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radDSPNR2OSMSRX2.Checked)
+            {
+                console.radio.GetDSPRX(1, 0).RXANR2NPEMethod = 0;
+                console.radio.GetDSPRX(1, 1).RXANR2NPEMethod = 0;
+            }
+        }
+
+        private void radDSPNR2MMSERX2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radDSPNR2MMSERX2.Checked)
+            {
+                console.radio.GetDSPRX(1, 0).RXANR2NPEMethod = 1;
+                console.radio.GetDSPRX(1, 1).RXANR2NPEMethod = 1;
+            }
+        }
+
+        private void chkDSPNR2AERX2_CheckedChanged(object sender, EventArgs e)
+        {
+            int run;
+            if (chkDSPNR2AERX2.Checked)
+                run = 1;
+            else
+                run = 0;
+            console.radio.GetDSPRX(1, 0).RXANR2AERun = run;
+            console.radio.GetDSPRX(1, 1).RXANR2AERun = run;
+        }
+
 
     }
 

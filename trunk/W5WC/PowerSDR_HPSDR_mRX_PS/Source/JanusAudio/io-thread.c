@@ -776,6 +776,7 @@ void IOThreadMainLoop(void) {
 	int fwd_power_stage; 
 	int ref_power_stage; 
 	int alex_fwd_power; 
+	int ain4;
 	short *sample_bufp = NULL;
 	int sample_count = 0;
 	int i;
@@ -1031,7 +1032,7 @@ void IOThreadMainLoop(void) {
 						ref_power_stage = ((ControlBytesIn[1] << 8) & 0xff00); // bits 15-8 (AIN2) Alex reverse power
 						break;
 					case 0x18:
-						//ain4 = ((ControlBytesIn[1] << 8) & 0xff00);
+						ain4 = ((ControlBytesIn[1] << 8) & 0xff00);	// bits 15-8 of AIN4
 						break;
 					case 0x20:
 						MercuryFWVersion =  (int)(ControlBytesIn[1] >> 1);
@@ -1060,8 +1061,8 @@ void IOThreadMainLoop(void) {
 						RefPower = ref_power_stage;
 						break;
 					case 0x18:
-						//ain4 |=  (((int)(ControlBytesIn[2])) & 0xff); // AIN4
-						//AIN4 = ain4;
+						ain4 |=  (((int)(ControlBytesIn[2])) & 0xff); // bits 7-0 of AIN4
+						AIN4 = ain4;
 						break;
 					case 0x20:
 						Mercury2FWVersion =  (int)(ControlBytesIn[2] >> 1);										                 

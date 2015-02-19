@@ -154,8 +154,7 @@ namespace PowerSDR
         ANAN100,
         ANAN100B,
         ANAN100D,
-        ANAN200D,
-        ORION
+        ANAN200D
     }
 
     public enum HPSDRModel
@@ -169,7 +168,6 @@ namespace PowerSDR
         ANAN100B,
         ANAN100D,
         ANAN200D,
-        ORION,
         LAST
     }
 
@@ -2489,8 +2487,10 @@ namespace PowerSDR
             this.chkRX2NR.FlatAppearance.BorderSize = 0;
             this.chkRX2NR.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkRX2NR.Name = "chkRX2NR";
+            this.chkRX2NR.ThreeState = true;
             this.toolTip1.SetToolTip(this.chkRX2NR, resources.GetString("chkRX2NR.ToolTip"));
             this.chkRX2NR.CheckedChanged += new System.EventHandler(this.chkRX2NR_CheckedChanged);
+            this.chkRX2NR.CheckStateChanged += new System.EventHandler(this.chkRX2NR_CheckStateChanged);
             // 
             // chkRX2NB
             // 
@@ -3144,8 +3144,10 @@ namespace PowerSDR
             this.chkNR.FlatAppearance.BorderSize = 0;
             this.chkNR.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkNR.Name = "chkNR";
+            this.chkNR.ThreeState = true;
             this.toolTip1.SetToolTip(this.chkNR, resources.GetString("chkNR.ToolTip"));
             this.chkNR.CheckedChanged += new System.EventHandler(this.chkNR_CheckedChanged);
+            this.chkNR.CheckStateChanged += new System.EventHandler(this.chkNR_CheckStateChanged);
             // 
             // chkDSPNB2
             // 
@@ -8342,6 +8344,8 @@ namespace PowerSDR
 
             string ver_num = TitleBar.GetVerNum();
 
+            a.Add("chkNR_checkstate/" + chkNR.CheckState.ToString());
+            a.Add("chkRX2NR_checkstate/" + chkRX2NR.CheckState.ToString());
             a.Add("current_datetime_mode/" + (int)current_datetime_mode);
             a.Add("rx1_display_cal_offset/" + rx1_display_cal_offset.ToString("f3"));
             a.Add("rx1_meter_cal_offset/" + rx1_meter_cal_offset);
@@ -9321,6 +9325,12 @@ namespace PowerSDR
                     //case "rx2_max_gain":
                     //	rx2_max_gain = int.Parse(val);
                     //	break;
+                    case "chkNR_checkstate":
+                        chkNR.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
+                        break;
+                    case "chkRX2NR_checkstate":
+                        chkRX2NR.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
+                        break;
                     case "band_160m_index":
                         band_160m_index = Int32.Parse(val);
                         break;
@@ -12919,7 +12929,7 @@ namespace PowerSDR
                 }
             }
 
-            if (current_hpsdr_model == HPSDRModel.ORION)
+            if (current_hpsdr_model == HPSDRModel.ANAN200D)
             {
                 switch (b)
                 {
@@ -15035,7 +15045,7 @@ namespace PowerSDR
                     break;
             }
 
-            specRX.GetSpecRX(0).CalcSpectrum(low, high, spec_blocksize);
+            specRX.GetSpecRX(0).CalcSpectrum(low, high, spec_blocksize, 48000);
             // UpdateDisplay();
             //  Display.RenderDirectX();
             /*   int low = 0, high = 0;
@@ -17291,7 +17301,26 @@ namespace PowerSDR
         public bool StereoDiversity
         {
             get { return stereo_diversity; }
-            set { stereo_diversity = value; }
+            set 
+            { 
+                stereo_diversity = value;
+
+                if (!initializing && RX2Enabled && value)
+                {
+                    RX2DSPMode = RX1DSPMode;
+                    RX2Filter = RX1Filter;
+                    RX2PreampMode = RX1PreampMode;
+                    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+                    txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                }
+
+                if (!initializing && RX2Enabled && !value)
+                {
+                    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+                    txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                }
+
+            }
         }
 
         private string apf_btn = "APF";
@@ -18227,14 +18256,14 @@ namespace PowerSDR
             if (rx1_step_att_present)
             {
                 Display.RX1PreampOffset = rx1_attenuator_data;
-                if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ORION && !rx2_preamp_present || mox)
+                if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ANAN200D && !rx2_preamp_present || mox)
                     Display.RX2PreampOffset = rx1_attenuator_data;
             }
             else
             {
                 Display.RX1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
 
-                if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ORION && !rx2_preamp_present)
+                if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ANAN200D && !rx2_preamp_present)
                     Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
             }
 
@@ -18266,7 +18295,7 @@ namespace PowerSDR
             }
             else
             {
-                if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION || rx2_preamp_present)
+                if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ANAN200D || rx2_preamp_present)
                 {
                     Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
                 }
@@ -21327,7 +21356,7 @@ namespace PowerSDR
                 if (!mox) SetAlex2LPF(rx2_dds_freq_mhz);
                 SetAlex2HPF(rx2_dds_freq_mhz);
                 if (!stereo_diversity)
-                psform.RX2freq = rx2_dds_freq_mhz;
+                    psform.RX2freq = rx2_dds_freq_mhz;
                 if (RX2Enabled)
                 {
                     // JanusAudio.SetVFOfreqRX2(rx2_dds_freq_mhz, false);
@@ -21938,9 +21967,22 @@ namespace PowerSDR
             set
             {
                 if (value == 0)
-                    chkNR.Checked = false;
+                    chkNR.CheckState = CheckState.Unchecked;
                 else if (value == 1)
-                    chkNR.Checked = true;
+                    chkNR.CheckState = CheckState.Checked;
+            }
+        }
+
+        private int cat_nr2_status = 0;
+        public int CATNR2
+        {
+            get { return cat_nr2_status; }
+            set
+            {
+                if (value == 0)
+                    chkNR.CheckState = CheckState.Unchecked;
+                else if (value == 1)
+                    chkNR.CheckState = CheckState.Indeterminate;
             }
         }
 
@@ -24817,7 +24859,7 @@ namespace PowerSDR
                 }
 
                 if (current_hpsdr_model == HPSDRModel.ANAN100D ||
-                    current_hpsdr_model == HPSDRModel.ORION)
+                    current_hpsdr_model == HPSDRModel.ANAN200D)
                 {
                     JanusAudio.EnableADC2StepAtten(1);
                     JanusAudio.SetADC2StepAttenData(rx2_att_value);
@@ -25249,7 +25291,7 @@ namespace PowerSDR
                 sample_rate1 = value;
                 RadioDSP.SampleRate = value;
                 Audio.SampleRate1 = value;
-                Display.SampleRate = value;
+                Display.RXSampleRate = value;
                 //CWSynth.SampleRate = value;
                 switch (rx1_dsp_mode)
                 {
@@ -25317,7 +25359,6 @@ namespace PowerSDR
                 radio.GetDSPRX(0, 1).AudioSize = value;
                 radio.GetDSPRX(1, 0).AudioSize = value;
                 radio.GetDSPRX(1, 1).AudioSize = value;
-
             }
         }
 
@@ -29653,7 +29694,7 @@ namespace PowerSDR
                           else 
                           rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
                           */
-                    if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION || rx2_preamp_present)
+                    if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ANAN200D || rx2_preamp_present)
                     {
                         if (rx2_step_att_present)
                             rx2PreampOffset = (float)rx2_attenuator_data;
@@ -29771,11 +29812,11 @@ namespace PowerSDR
             float refvoltage = 3.3f;
             int adc_cal_offset = 10;
             if (tx_band == Band.B6M) adc_cal_offset = 200;
-            if (current_hpsdr_model == HPSDRModel.ORION) refvoltage = 5.0f;
+            if (current_hpsdr_model == HPSDRModel.ANAN200D) refvoltage = 5.0f;
             if (current_hpsdr_model == HPSDRModel.ANAN100 ||
                 current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.095f;
 
-            if (current_hpsdr_model == HPSDRModel.ORION) bridge_volt = 0.108f;
+            if (current_hpsdr_model == HPSDRModel.ANAN200D) bridge_volt = 0.108f;
 
             int adc = JanusAudio.getRefPower();
             if (adc < adc_cal_offset) adc = adc_cal_offset = 0;
@@ -29804,10 +29845,10 @@ namespace PowerSDR
 
             float bridge_volt = 0.09f;
             float refvoltage = 3.3f;
-            if (current_hpsdr_model == HPSDRModel.ORION) refvoltage = 5.0f;
+            if (current_hpsdr_model == HPSDRModel.ANAN200D) refvoltage = 5.0f;
             if (current_hpsdr_model == HPSDRModel.ANAN100 ||
                 current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.095f;
-            if (current_hpsdr_model == HPSDRModel.ORION) bridge_volt = 0.108f; // 0.083f;
+            if (current_hpsdr_model == HPSDRModel.ANAN200D) bridge_volt = 0.108f; // 0.083f;
 
             for (int count = 0; count < 3; count++)
             {
@@ -30122,7 +30163,7 @@ namespace PowerSDR
 
                     //  if ((dotdashptt & 0x1) != 0)
                     // {
-                    // if (current_hpsdr_model == HPSDRModel.ORION && mic_ptt_disabled)
+                    // if (current_hpsdr_model == HPSDRModel.ANAN200D && mic_ptt_disabled)
                     // mic_ptt = false;
                     // else mic_ptt = temp;                        
                     //  }
@@ -30350,7 +30391,7 @@ namespace PowerSDR
                     SetupForm.HermesAttenuatorData = old_satt_data;
 
                     if (current_hpsdr_model == HPSDRModel.ANAN100D ||
-                        current_hpsdr_model == HPSDRModel.ORION)
+                        current_hpsdr_model == HPSDRModel.ANAN200D)
                     {
                         RX2PreampMode = rx2_preamp;
                         // RX2StepAttPresent = old_rx2_satt;
@@ -30370,7 +30411,7 @@ namespace PowerSDR
                     old_satt = rx1_step_att_present;
 
                     if (current_hpsdr_model == HPSDRModel.ANAN100D ||
-                        current_hpsdr_model == HPSDRModel.ORION)
+                        current_hpsdr_model == HPSDRModel.ANAN200D)
                     {
                         rx2_preamp = RX2PreampMode;
                         old_rx2_satt_data = rx2_attenuator_data;// RX2AttenuatorData;
@@ -30510,7 +30551,7 @@ namespace PowerSDR
                     alex_fwd = computeAlexFwdPower(); //high power
                     alex_rev = computeRefPower();
 
-                    if (current_hpsdr_model == HPSDRModel.ORION)
+                    if (current_hpsdr_model == HPSDRModel.ANAN200D)
                         drivepwr = computeOrionFwdPower();
                     else
                         drivepwr = computeFwdPower(); // low power
@@ -30521,7 +30562,7 @@ namespace PowerSDR
                     swr = (1.0f + rho) / (1.0f - rho);
                     if (alex_fwd == 0 && alex_rev == 0) swr = 1.0f;
 
-                    if (alexpresent)
+                    if (alexpresent || apollopresent)
                     {
                         if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f) // open ant condition
                         {
@@ -33591,7 +33632,7 @@ namespace PowerSDR
             // if ((current_hpsdr_hardware == HPSDRHW.Angelia && 
             //    current_hpsdr_model != HPSDRModel.ANAN100D) ||
             //    (current_hpsdr_hardware == HPSDRHW.Angelia && 
-            //    current_hpsdr_model != HPSDRModel.ORION))
+            //    current_hpsdr_model != HPSDRModel.ANAN200D))
             //{
             //    chkMOX.Checked = false;
             //    MessageBox.Show("Please select the correct radio model in Setup",
@@ -33817,7 +33858,7 @@ namespace PowerSDR
                         comboRX2Preamp.Enabled = false;
                         udRX2StepAttData.Enabled = false;
 
-                        //if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ORION)
+                        //if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ANAN200D)
                         //{
                         //    RX2ATT = SetupForm.ATTOnTX;
                         //    RX2StepAttPresent = true;
@@ -35379,7 +35420,7 @@ namespace PowerSDR
 
         private void txtVFOAFreq_LostFocus(object sender, System.EventArgs e)
         {
-            if (current_hpsdr_model == HPSDRModel.ORION) UpdateRXADCCtrl();
+            if (current_hpsdr_model == HPSDRModel.ANAN200D) UpdateRXADCCtrl();
 
             if (txtVFOAFreq.Text == "." || txtVFOAFreq.Text == "")
             {
@@ -39496,6 +39537,8 @@ namespace PowerSDR
             if (new_mode == DSPMode.FIRST || new_mode == DSPMode.LAST) return;
 
             DSPMode old_mode = rx1_dsp_mode;
+            bool old_sd = stereo_diversity;
+            StereoDiversity = false;
 
             radio.GetDSPRX(0, 0).DSPMode = new_mode;				// set new DSP mode
             radio.GetDSPRX(0, 1).DSPMode = new_mode;
@@ -39506,6 +39549,7 @@ namespace PowerSDR
                 radio.GetDSPTX(0).CurrentDSPMode = new_mode;
             }
             Display.RX1DSPMode = new_mode;
+            RadioDSP.RX1DSPMode = new_mode;
 
             if (new_mode == DSPMode.CWL || new_mode == DSPMode.CWU)
             {
@@ -39877,7 +39921,8 @@ namespace PowerSDR
                 case DSPMode.FM:
                     radModeFMN.BackColor = button_selected_color;
                     DisableAllFilters();
-
+                    if (chkNR.CheckState == CheckState.Indeterminate)
+                        chkNR.CheckState = CheckState.Unchecked;
                     if (!initializing)
                         rx1_squelch_threshold_scroll = ptbSquelch.Value;
 
@@ -40057,7 +40102,9 @@ namespace PowerSDR
                 chkSquelch.Checked = rx1_squelch_on; //!chkSquelch.Checked;
 
             if (old_mode == DSPMode.FM || new_mode == DSPMode.FM)
+            {
                 ptbSquelch_Scroll(this, EventArgs.Empty);
+            }
 
             if (rx1_dsp_mode != DSPMode.SPEC && rx1_dsp_mode != DSPMode.FM && rx1_dsp_mode != DSPMode.DRM)
             {
@@ -40099,6 +40146,14 @@ namespace PowerSDR
             {
                 chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
             }
+
+            if (old_mode == DSPMode.FM || new_mode == DSPMode.FM)
+            {
+                SetupForm.ForceReset = true;
+            }
+
+            StereoDiversity = old_sd;
+
         }
 
         private void radModeButton_CheckedChanged(object sender, System.EventArgs e)
@@ -41886,12 +41941,12 @@ namespace PowerSDR
 
         private void chkNR_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (chkNR.Checked) chkNR.BackColor = button_selected_color;
-            else chkNR.BackColor = SystemColors.Control;
-            radio.GetDSPRX(0, 0).NoiseReduction = chkNR.Checked;
-            radio.GetDSPRX(0, 1).NoiseReduction = chkNR.Checked;
-            cat_nr_status = Convert.ToInt32(chkNR.Checked);
-            NRToolStripMenuItem.Checked = chkNR.Checked;
+            //if (chkNR.Checked) chkNR.BackColor = button_selected_color;
+            //else chkNR.BackColor = SystemColors.Control;
+            //radio.GetDSPRX(0, 0).NoiseReduction = chkNR.Checked;
+            //radio.GetDSPRX(0, 1).NoiseReduction = chkNR.Checked;
+            //cat_nr_status = Convert.ToInt32(chkNR.Checked);
+            // NRToolStripMenuItem.Checked = chkNR.Checked;
         }
 
         private void chkANF_CheckedChanged(object sender, System.EventArgs e)
@@ -41955,15 +42010,16 @@ namespace PowerSDR
             if (chkCPDR.Checked)
             {
                 chkCPDR.BackColor = button_selected_color;
-                chkDX.Checked = false;
+                //chkDX.Checked = false;
                 ptbCPDR_Scroll(this, EventArgs.Empty);
             }
             else
             {
                 chkCPDR.BackColor = SystemColors.Control;
             }
-            if (chkDX.Checked || chkCPDR.Checked)
+            if (chkCPDR.Checked)
             {
+                //radio.GetDSPRX(0, 0).RXANR2Run = 1;  ////////////////////////////////////////////////////////////////////////
                 radio.GetDSPTX(0).TXCompandOn = true;
                 if (txosctrl)
                     radio.GetDSPTX(0).TXOsctrlOn = true;
@@ -41972,6 +42028,7 @@ namespace PowerSDR
             }
             else
             {
+                // radio.GetDSPRX(0, 0).RXANR2Run = 0;  ////////////////////////////////////////////////////////////////////////
                 radio.GetDSPTX(0).TXCompandOn = false;
                 radio.GetDSPTX(0).TXOsctrlOn = false;
             }
@@ -41992,20 +42049,20 @@ namespace PowerSDR
         {
             StereoDiversity = chkDX.Checked;
 
-            if (!initializing && RX2Enabled && chkDX.Checked)
-            {
-                RX2DSPMode = RX1DSPMode;
-                RX2Filter = RX1Filter;
-                RX2PreampMode = RX1PreampMode;
-                txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-                txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-            }
+            //if (!initializing && RX2Enabled && chkDX.Checked)
+            //{
+            //    RX2DSPMode = RX1DSPMode;
+            //    RX2Filter = RX1Filter;
+            //    RX2PreampMode = RX1PreampMode;
+            //    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+            //    txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+            //}
 
-            if (!initializing && RX2Enabled && !chkDX.Checked)
-            {
-                txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-                txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-            }
+            //if (!initializing && RX2Enabled && !chkDX.Checked)
+            //{
+            //    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+            //    txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+            //}
 
             //if (chkDX.Checked)
             //{
@@ -42026,9 +42083,9 @@ namespace PowerSDR
         {
             lblDXVal.Text = ptbDX.Value.ToString();
 
-            if (chkDX.Checked)
-                radio.GetDSPTX(0).TXCompandLevel = 1.0 + 0.4 * (double)ptbDX.Value;
-            if (ptbDX.Focused) btnHidden.Focus();
+            //if (chkDX.Checked)
+            //    radio.GetDSPTX(0).TXCompandLevel = 1.0 + 0.4 * (double)ptbDX.Value;
+            //if (ptbDX.Focused) btnHidden.Focus();
         }
 
         #endregion
@@ -43148,6 +43205,7 @@ namespace PowerSDR
                 }
             }
             Display.RX2DSPMode = new_mode;
+            RadioDSP.RX2DSPMode = new_mode;
 
             if (new_mode == DSPMode.CWL || new_mode == DSPMode.CWU)
             {
@@ -43435,6 +43493,8 @@ namespace PowerSDR
                 case DSPMode.FM:
                     radRX2ModeFMN.BackColor = button_selected_color;
                     DisableAllRX2Filters();    //this needs to be for RX2 only
+                    if (chkRX2NR.CheckState == CheckState.Indeterminate)
+                        chkRX2NR.CheckState = CheckState.Unchecked;
 
                     if (!initializing)
                         rx2_squelch_threshold_scroll = ptbRX2Squelch.Value;
@@ -43653,6 +43713,11 @@ namespace PowerSDR
             txtVFOBFreq_LostFocus(this, EventArgs.Empty);
             chkRX2Squelch_CheckedChanged(this, EventArgs.Empty);
             ptbPWR_Scroll(this, EventArgs.Empty);
+
+            if (old_mode == DSPMode.FM || new_mode == DSPMode.FM)
+            {
+                SetupForm.ForceReset = true;
+            }
         }
 
         private void radRX2ModeButton_CheckedChanged(object sender, System.EventArgs e)
@@ -44021,12 +44086,12 @@ namespace PowerSDR
 
         private void chkRX2NR_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (chkRX2NR.Checked) chkRX2NR.BackColor = button_selected_color;
-            else chkRX2NR.BackColor = SystemColors.Control;
-            radio.GetDSPRX(1, 0).NoiseReduction = chkRX2NR.Checked;
-            radio.GetDSPRX(1, 1).NoiseReduction = chkRX2NR.Checked;
-            //cat_nr_status = Convert.ToInt32(chkRX2NR.Checked);
-            nR2ToolStripMenuItem.Checked = chkRX2NR.Checked;
+            //if (chkRX2NR.Checked) chkRX2NR.BackColor = button_selected_color;
+            //else chkRX2NR.BackColor = SystemColors.Control;
+            //radio.GetDSPRX(1, 0).NoiseReduction = chkRX2NR.Checked;
+            //radio.GetDSPRX(1, 1).NoiseReduction = chkRX2NR.Checked;
+            ////cat_nr_status = Convert.ToInt32(chkRX2NR.Checked);
+            //nR2ToolStripMenuItem.Checked = chkRX2NR.Checked;
         }
 
         private void chkRX2ANF_CheckedChanged(object sender, System.EventArgs e)
@@ -48079,7 +48144,8 @@ namespace PowerSDR
                         chkCPDR.Checked = false;
                         chkRXEQ.Checked = false;
                         chkANF.Checked = false;
-                        chkNR.Checked = false;
+                        //chkNR.Checked = false;
+                        chkNR.CheckState = CheckState.Unchecked;
                         break;
                     case "preset":
                         rx1dm.DEXP = chkNoiseGate.Checked;
@@ -48088,7 +48154,7 @@ namespace PowerSDR
                         rx1dm.COMPRESSOR = chkCPDR.Checked;
                         rx1dm.RXEQ = chkRXEQ.Checked;
                         rx1dm.ANF = chkANF.Checked;
-                        rx1dm.NR = chkNR.Checked;
+                        rx1dm.NR = chkNR.CheckState;
                         break;
                     case "reset":
                         chkNoiseGate.Checked = rx1dm.DEXP;
@@ -48097,7 +48163,7 @@ namespace PowerSDR
                         chkCPDR.Checked = rx1dm.COMPRESSOR;
                         chkRXEQ.Checked = rx1dm.RXEQ;
                         chkANF.Checked = rx1dm.ANF;
-                        chkNR.Checked = rx1dm.NR;
+                        chkNR.CheckState = rx1dm.NR;
                         break;
                 }
             }
@@ -48109,15 +48175,15 @@ namespace PowerSDR
                 {
                     case "set":
                         chkRX2ANF.Checked = false;
-                        chkRX2NR.Checked = false;
+                        chkRX2NR.CheckState = CheckState.Unchecked;
                         break;
                     case "preset":
                         rx2dm.ANF = chkRX2ANF.Checked;
-                        rx2dm.NR = chkRX2NR.Checked;
+                        rx2dm.NR = chkRX2NR.CheckState;
                         break;
                     case "reset":
                         chkRX2ANF.Checked = rx2dm.ANF;
-                        chkRX2NR.Checked = rx2dm.NR;
+                        chkRX2NR.CheckState = rx2dm.NR;
                         break;
                 }
             }
@@ -48139,6 +48205,76 @@ namespace PowerSDR
                 chkCWSidetone.Checked = chkMON.Checked;
         }
 
+        private void chkNR_CheckStateChanged(object sender, EventArgs e)
+        {
+            switch (chkNR.CheckState)
+            {
+                case CheckState.Checked: // NR
+                    radio.GetDSPRX(0, 0).RXANR2Run = 0;
+                    radio.GetDSPRX(0, 1).RXANR2Run = 0;
+                    radio.GetDSPRX(0, 0).NoiseReduction = true;
+                    radio.GetDSPRX(0, 1).NoiseReduction = true;
+                    NRToolStripMenuItem.Checked = true;
+                    cat_nr2_status = 0;
+                    cat_nr_status = 1;
+                    chkNR.Text = "NR";
+                    break;
+                case CheckState.Indeterminate: // ANR2
+                    radio.GetDSPRX(0, 0).NoiseReduction = false;
+                    radio.GetDSPRX(0, 1).NoiseReduction = false;
+                    radio.GetDSPRX(0, 0).RXANR2Run = 1;
+                    radio.GetDSPRX(0, 1).RXANR2Run = 1;
+                    NRToolStripMenuItem.Checked = false;
+                    cat_nr_status = 0;
+                    cat_nr2_status = 1;
+                    chkNR.Text = "NR2";
+                    break;
+                case CheckState.Unchecked: // all off
+                    radio.GetDSPRX(0, 0).NoiseReduction = false;
+                    radio.GetDSPRX(0, 1).NoiseReduction = false;
+                    radio.GetDSPRX(0, 0).RXANR2Run = 0;
+                    radio.GetDSPRX(0, 1).RXANR2Run = 0;
+                    NRToolStripMenuItem.Checked = false;
+                    cat_nr_status = 0;
+                    cat_nr2_status = 0;
+                    chkNR.Text = "NR";
+                    break;
+
+            }
+        }
+
+        private void chkRX2NR_CheckStateChanged(object sender, EventArgs e)
+        {
+            switch (chkRX2NR.CheckState)
+            {
+                case CheckState.Checked: // NR
+                    radio.GetDSPRX(1, 0).RXANR2Run = 0;
+                    radio.GetDSPRX(1, 1).RXANR2Run = 0;
+                    radio.GetDSPRX(1, 0).NoiseReduction = true;
+                    radio.GetDSPRX(1, 1).NoiseReduction = true;
+                    nR2ToolStripMenuItem.Checked = true;
+                    chkRX2NR.Text = "NR";
+                    break;
+                case CheckState.Indeterminate: // ANR2
+                    radio.GetDSPRX(1, 0).RXANR2Run = 1;
+                    radio.GetDSPRX(1, 1).RXANR2Run = 1;
+                    radio.GetDSPRX(1, 0).NoiseReduction = false;
+                    radio.GetDSPRX(1, 1).NoiseReduction = false;
+                    nR2ToolStripMenuItem.Checked = false;
+                    chkRX2NR.Text = "NR2";
+                    break;
+                case CheckState.Unchecked: // all off
+                    radio.GetDSPRX(1, 0).NoiseReduction = false;
+                    radio.GetDSPRX(1, 1).NoiseReduction = false;
+                    radio.GetDSPRX(1, 0).RXANR2Run = 0;
+                    radio.GetDSPRX(1, 1).RXANR2Run = 0;
+                    nR2ToolStripMenuItem.Checked = false;
+                    chkRX2NR.Text = "NR";
+                    break;
+
+            }
+        }
+
     }
 
     public class DigiMode
@@ -48149,7 +48285,8 @@ namespace PowerSDR
         private bool compressor;
         private bool rxeq;
         private bool anf;
-        private bool nr;
+        //private bool nr;
+        private CheckState nr;
 
         public DigiMode()
         {
@@ -48192,7 +48329,13 @@ namespace PowerSDR
             set { anf = value; }
         }
 
-        public bool NR
+        //public bool NR
+        //{
+        //    get { return nr; }
+        //    set { nr = value; }
+        //}
+
+        public CheckState NR
         {
             get { return nr; }
             set { nr = value; }

@@ -886,11 +886,18 @@ namespace PowerSDR
             set { scope_time = value; }
         }
 
-        private static int sample_rate = 48000;
-        public static int SampleRate
+        private static int rx_sample_rate = 192000;
+        public static int RXSampleRate
         {
-            get { return sample_rate; }
-            set { sample_rate = value; }
+            get { return rx_sample_rate; }
+            set { rx_sample_rate = value; }
+        }
+
+        private static int tx_sample_rate = 96000;
+        public static int TXSampleRate
+        {
+            get { return tx_sample_rate; }
+            set { tx_sample_rate = value; }
         }
 
         private static bool high_swr = false;
@@ -3826,8 +3833,8 @@ namespace PowerSDR
 
                 if (local_mox && !waterfall)
                 {
-                    start_sample_index = (BUFFER_SIZE >> 1) + (int)((Low * BUFFER_SIZE) / sample_rate);
-                    num_samples = (int)((BUFFER_SIZE * (High - Low)) / sample_rate);
+                    start_sample_index = (BUFFER_SIZE >> 1) + (int)((Low * BUFFER_SIZE) / rx_sample_rate);
+                    num_samples = (int)((BUFFER_SIZE * (High - Low)) / rx_sample_rate);
                     if (start_sample_index < 0) start_sample_index += 4096;
                     if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
                         num_samples = (BUFFER_SIZE - start_sample_index);
@@ -5328,8 +5335,8 @@ namespace PowerSDR
                 else if (bottom && rx2_peak_on)
                     UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom); */
 
-                start_sample_index = (BUFFER_SIZE >> 1) + (int)((low * BUFFER_SIZE) / sample_rate);
-                num_samples = (int)((high - low) * BUFFER_SIZE / sample_rate);
+                start_sample_index = (BUFFER_SIZE >> 1) + (int)((low * BUFFER_SIZE) / rx_sample_rate);
+                num_samples = (int)((high - low) * BUFFER_SIZE / rx_sample_rate);
  
                 if (start_sample_index < 0) start_sample_index = 0;
                 if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
@@ -5450,8 +5457,8 @@ namespace PowerSDR
 
                 num_samples = (high - low);
 
-                start_sample_index = (BUFFER_SIZE >> 1) + (int)((low * BUFFER_SIZE) / sample_rate);
-                num_samples = (int)((high - low) * BUFFER_SIZE / sample_rate);
+                start_sample_index = (BUFFER_SIZE >> 1) + (int)((low * BUFFER_SIZE) / rx_sample_rate);
+                num_samples = (int)((high - low) * BUFFER_SIZE / rx_sample_rate);
                 if (start_sample_index < 0) start_sample_index = 0;
                 if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
                     num_samples = BUFFER_SIZE - start_sample_index;
@@ -6107,7 +6114,6 @@ namespace PowerSDR
             dev.SetStreamSource(0, Phase_vb, 0, 20);
             dev.DrawPrimitives(PrimitiveType.LineStrip, 0, phase_num_pts - 1);
         }
-
 
         #region GDI+ General Routines
 
@@ -8332,7 +8338,7 @@ namespace PowerSDR
                     double rx1_thresh = 0.0;
                     float rx1_agcknee_y_value = 0.0f;
                    // DttSP.GetRXAGCThresh(0, 0, &rx1_thresh);
-                    wdsp.GetRXAAGCThresh(wdsp.id(0, 0), &rx1_thresh, 4096.0, Display.sample_rate);
+                    wdsp.GetRXAAGCThresh(wdsp.id(0, 0), &rx1_thresh, 4096.0, rx_sample_rate);
 
                     rx1_thresh = Math.Round(rx1_thresh);
 
@@ -8410,7 +8416,7 @@ namespace PowerSDR
                     }
                     // get AGC-T level
                    // DttSP.GetRXAGCThresh(2, 0, &rx2_thresh);
-                    wdsp.GetRXAAGCThresh(wdsp.id(2, 0), &rx2_thresh, 4096.0, Display.sample_rate);
+                    wdsp.GetRXAAGCThresh(wdsp.id(2, 0), &rx2_thresh, 4096.0, rx_sample_rate);
                     rx2_thresh = Math.Round(rx2_thresh);
 
                    // DttSP.GetRXAGCHangLevel(2, 0, &rx2_hang);
@@ -9537,6 +9543,7 @@ namespace PowerSDR
             float local_max_y = float.MinValue;
             int grid_max = 0;
             int grid_min = 0;
+            int sample_rate = rx_sample_rate;
 
             if (!mox || (mox && tx_on_vfob && console.RX2Enabled))
             {
@@ -9551,6 +9558,8 @@ namespace PowerSDR
                 high = tx_spectrum_display_high;
                 grid_max = tx_spectrum_grid_max;
                 grid_min = tx_spectrum_grid_min;
+                if (!display_duplex)
+                    sample_rate = tx_sample_rate;
             }
 
             if (rx1_dsp_mode == DSPMode.DRM)
@@ -9848,8 +9857,8 @@ namespace PowerSDR
 
             if (local_mox && !displayduplex)// || rx1_dsp_mode == DSPMode.DRM)
             {
-                start_sample_index = (BUFFER_SIZE >> 1) + ((Low * BUFFER_SIZE) / sample_rate);
-                num_samples = (width * BUFFER_SIZE / sample_rate);
+                start_sample_index = (BUFFER_SIZE >> 1) + ((Low * BUFFER_SIZE) / tx_sample_rate);
+                num_samples = (width * BUFFER_SIZE / tx_sample_rate);
                 if (start_sample_index < 0) start_sample_index += 4096;
                 if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
                     num_samples = (BUFFER_SIZE - start_sample_index);
@@ -10287,6 +10296,7 @@ namespace PowerSDR
             int grid_max = 0;
             int grid_min = 0;
             bool displayduplex = false;
+            int sample_rate = rx_sample_rate;
             float low_threshold = 0.0f;
             float high_threshold = 0.0f;
             float waterfall_minimum = 0.0f;
@@ -10307,6 +10317,8 @@ namespace PowerSDR
                 {
                     grid_max = tx_spectrum_grid_max;
                     grid_min = tx_spectrum_grid_min;
+                    //if (!display_duplex)
+                       // sample_rate = tx_sample_rate;
                 }
                 else
                 {
@@ -10330,15 +10342,16 @@ namespace PowerSDR
             }
             else
             {
-                /*  if (local_mox) // && !tx_on_vfob)
-                  {
+               // if (local_mox)// && !display_duplex) // && !tx_on_vfob)
+                    //sample_rate = tx_sample_rate;
+                 /* {
                       Low = tx_display_low;
                       High = tx_display_high;
                       grid_max = tx_spectrum_grid_max;
                       grid_min = tx_spectrum_grid_min;
                   }
                   else */
-                {
+              //  {
                     cSheme = color_sheme;
                     low_color = waterfall_low_color;
                     mid_color = waterfall_mid_color;
@@ -10355,8 +10368,8 @@ namespace PowerSDR
                         low_threshold = RX1waterfallPreviousMinValue;
                     }
                     else
-                        low_threshold = waterfall_low_threshold;                   
-                }
+                        low_threshold = waterfall_low_threshold;
+               // }
             }
 
             if (console.PowerOn)
@@ -10402,15 +10415,15 @@ namespace PowerSDR
                 }
 
                 if (rx == 1 && average_on && local_mox && !displayduplex)
-                                console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data);
-                           // else if (rx == 2)
-                             //   console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
+                    console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data);
+                // else if (rx == 2)
+                //   console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
 
-                            if (rx == 1 && peak_on && local_mox && !displayduplex)
-                                UpdateDisplayPeak(rx1_peak_buffer, current_display_data);
-                           // else if (rx == 2 && rx2_peak_on)
-                               // UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom);
-                            
+                if (rx == 1 && peak_on && local_mox && !displayduplex)
+                    UpdateDisplayPeak(rx1_peak_buffer, current_display_data);
+                // else if (rx == 2 && rx2_peak_on)
+                // UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom);
+
 
                 int duration = 0;
                 if (rx == 1)
@@ -10424,9 +10437,9 @@ namespace PowerSDR
                     duration = (int)timer_waterfall2.DurationMsec;
                 }
 
-                if ( (rx == 1 && (duration > waterfall_update_period || duration < 0)) ||
-                    (rx == 2 && (duration > rx2_waterfall_update_period || duration < 0)) )
-               // if ((duration > waterfall_update_period) || (duration < 0))
+                if ((rx == 1 && (duration > waterfall_update_period || duration < 0)) ||
+                    (rx == 2 && (duration > rx2_waterfall_update_period || duration < 0)))
+                // if ((duration > waterfall_update_period) || (duration < 0))
                 {
                     if (rx == 1) timer_waterfall.Start();
                     else if (rx == 2) timer_waterfall2.Start();
@@ -10501,7 +10514,7 @@ namespace PowerSDR
                         else
                         {
                             if (rx == 1) max += (rx1_preamp_offset - alex_preamp_offset);
-                        } 
+                        }
 
                         if (max > local_max_y)
                         {
@@ -10627,7 +10640,7 @@ namespace PowerSDR
                                 // draw new data
                                 for (int i = 0; i < W; i++)	// for each pixel in the new line
                                 {
-                                   if (waterfall_data[i] <= low_threshold)
+                                    if (waterfall_data[i] <= low_threshold)
                                     {
                                         R = low_color.R;
                                         G = low_color.G;
@@ -10698,13 +10711,13 @@ namespace PowerSDR
 
                                     if (waterfall_minimum > waterfall_data[i]) //wfagc
                                         waterfall_minimum = waterfall_data[i];
-                                    
+
                                     // set pixel color
                                     row[i * pixel_size + 0] = (byte)B;	// set color in memory
                                     row[i * pixel_size + 1] = (byte)G;
                                     row[i * pixel_size + 2] = (byte)R;
                                 }
-                             }
+                            }
                             break;
 
                         case (ColorSheme.SPECTRAN):
@@ -10779,7 +10792,7 @@ namespace PowerSDR
 
                                     if (waterfall_minimum > waterfall_data[i]) //wfagc
                                         waterfall_minimum = waterfall_data[i];
-                                    
+
                                     // set pixel color
                                     row[i * pixel_size + 0] = (byte)B;	// set color in memory
                                     row[i * pixel_size + 1] = (byte)G;
@@ -10817,7 +10830,7 @@ namespace PowerSDR
 
                                     if (waterfall_minimum > waterfall_data[i]) //wfagc
                                         waterfall_minimum = waterfall_data[i];
-                                    
+
                                     // set pixel color
                                     row[i * pixel_size + 0] = (byte)B;	// set color in memory
                                     row[i * pixel_size + 1] = (byte)G;
@@ -11457,10 +11470,10 @@ namespace PowerSDR
                         waterfall_bmp2.UnlockBits(bitmapData);
 
                     if (rx == 1)
-                    RX1waterfallPreviousMinValue = (((RX1waterfallPreviousMinValue * 8) + (waterfall_minimum * 2)) / 10) + 1; //wfagc
+                        RX1waterfallPreviousMinValue = (((RX1waterfallPreviousMinValue * 8) + (waterfall_minimum * 2)) / 10) + 1; //wfagc
                     else
-                    RX2waterfallPreviousMinValue = ((RX2waterfallPreviousMinValue * 8) + (waterfall_minimum * 2)) / 10 + 1; //wfagc
-                 } 
+                        RX2waterfallPreviousMinValue = ((RX2waterfallPreviousMinValue * 8) + (waterfall_minimum * 2)) / 10 + 1; //wfagc
+                }
 
                 if (bottom)
                 {
@@ -11512,6 +11525,7 @@ namespace PowerSDR
             int low = 0;
             int high = 0;
             float local_max_y = Int32.MinValue;
+            int sample_rate = rx_sample_rate;
 
             if (!mox)								// Receive Mode
             {
@@ -11522,6 +11536,8 @@ namespace PowerSDR
             {
                 low = tx_spectrum_display_low;
                 high = tx_spectrum_display_high;
+                if (!display_duplex)
+                    sample_rate = tx_sample_rate;
             }
 
             if (rx1_dsp_mode == DSPMode.DRM)

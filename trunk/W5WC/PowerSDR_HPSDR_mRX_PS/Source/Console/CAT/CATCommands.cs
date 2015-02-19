@@ -3804,7 +3804,29 @@ namespace PowerSDR
 			}
 		}
 
-		//Sets or reads the ANF button status
+        public string ZZNS(string s)
+        {
+            int sx = 0;
+
+            if (s != "")
+                sx = Convert.ToInt32(s);
+
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                console.CATNR2 = sx;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                return console.CATNR2.ToString();
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+        
+        //Sets or reads the ANF button status
 		public string ZZNT(string s)
 		{
 			if(s.Length == parser.nSet && (s == "0" || s == "1"))

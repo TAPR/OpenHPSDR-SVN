@@ -188,3 +188,12 @@ void SetTXAPanelRun (int channel, int run)
 	txa[channel].panel.p->run = run;
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
+
+PORT
+void SetTXAPanelGain1 (int channel, double gain)
+{
+	EnterCriticalSection (&ch[channel].csDSP);
+	txa[channel].panel.p->gain1 = gain;
+	print_message ("micgainset.txt", "Set MIC Gain to", (int)(100.0 * gain), 0, 0);
+	LeaveCriticalSection (&ch[channel].csDSP);
+}

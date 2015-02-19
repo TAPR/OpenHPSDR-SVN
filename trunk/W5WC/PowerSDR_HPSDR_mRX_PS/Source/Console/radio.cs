@@ -93,11 +93,11 @@ namespace PowerSDR
                 //+ "\\FlexRadio Systems\\PowerSDR mRX\\wisdom";
                 + "\\FlexRadio Systems\\PowerSDR mRX PS\\";
             wdsp.WDSPwisdom(app_data_path);
-            wdsp.OpenChannel(wdsp.id(0, 0), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
-            wdsp.OpenChannel(wdsp.id(0, 1), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
-            wdsp.OpenChannel(wdsp.id(2, 0), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
-            wdsp.OpenChannel(wdsp.id(2, 1), 1024, 4096, 48000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010);
-            wdsp.OpenChannel(wdsp.id(1, 0), 1024, 4096, 48000, 48000, 48000, 1, 0, 0.010, 0.025, 0.000, 0.010);
+            wdsp.OpenChannel(wdsp.id(0, 0), 1024, 4096, 192000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010, 0);
+            wdsp.OpenChannel(wdsp.id(0, 1), 1024, 4096, 192000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010, 0);
+            wdsp.OpenChannel(wdsp.id(2, 0), 1024, 4096, 192000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010, 0);
+            wdsp.OpenChannel(wdsp.id(2, 1), 1024, 4096, 192000, 48000, 48000, 0, 0, 0.010, 0.025, 0.000, 0.010, 0);
+            wdsp.OpenChannel(wdsp.id(1, 0), 1024, 4096,  48000, 96000, 48000, 1, 0, 0.010, 0.025, 0.000, 0.010, 0);
             wdsp.create_divEXT(0, 0, 2, 1024);
             wdsp.create_eerEXT(0, 0, 1024, 48000, 1.0, 1.0, false, 0.0, 0.0, 1);
 		}
@@ -113,18 +113,55 @@ namespace PowerSDR
             wdsp.destroy_eerEXT(0);
 		}
 
-		private static double sample_rate = 48000.0;
+        private static DSPMode rx1_dsp_mode = DSPMode.FIRST;
+        public static DSPMode RX1DSPMode
+        {
+            get { return rx1_dsp_mode; }
+            set { rx1_dsp_mode = value; }
+        }
+
+        private static DSPMode rx2_dsp_mode = DSPMode.FIRST;
+        public static DSPMode RX2DSPMode
+        {
+            get { return rx2_dsp_mode; }
+            set { rx2_dsp_mode = value; }
+        }
+        
+        private static double sample_rate = 48000.0;
+        private static int rx1_dsp_rate = 48000;
+        private static int rx2_dsp_rate = 48000;
 		public static double SampleRate
 		{
 			get { return sample_rate; }
 			set 
 			{
-				sample_rate = value;
-                wdsp.SetAllRates(wdsp.id(0, 0), (int)value, (int)value, 48000);
-                wdsp.SetAllRates(wdsp.id(0, 1), (int)value, (int)value, 48000);
-                wdsp.SetAllRates(wdsp.id(2, 0), (int)value, (int)value, 48000);
-                wdsp.SetAllRates(wdsp.id(2, 1), (int)value, (int)value, 48000);
-                wdsp.SetAllRates(wdsp.id(1, 0), (int)value, (int)value, 48000);
+                switch (rx1_dsp_mode)
+                {
+                    case DSPMode.FM:
+                        rx1_dsp_rate = 192000;
+                        break;
+                    default:
+                        rx1_dsp_rate = 48000;
+                        break;
+                }
+
+                switch (rx2_dsp_mode)
+                {
+                    case DSPMode.FM:
+                        rx2_dsp_rate = 192000;
+                        break;
+                    default:
+                        rx2_dsp_rate = 48000;
+                        break;
+                }
+                
+                sample_rate = value;
+                wdsp.SetAllRates(wdsp.id(0, 0), (int)value, rx1_dsp_rate, 48000);
+                wdsp.SetAllRates(wdsp.id(0, 1), (int)value, rx1_dsp_rate, 48000);
+                wdsp.SetAllRates(wdsp.id(2, 0), (int)value, rx2_dsp_rate, 48000);
+                wdsp.SetAllRates(wdsp.id(2, 1), (int)value, rx2_dsp_rate, 48000);
+                wdsp.SetAllRates(wdsp.id(1, 0), (int)value, 96000, 48000);
+                puresignal.SetPSFeedbackRate(wdsp.id(1, 0), (int)value);
                 wdsp.SetEERSamplerate(0, 48000);
 			}		
 		}
@@ -227,6 +264,11 @@ namespace PowerSDR
             this.RXADollyRun = rx.rx_dolly_run;
             this.RXADollyFreq0 = rx.rx_dolly_freq0;
             this.RXADollyFreq1 = rx.rx_dolly_freq1;
+            this.RXANR2GainMethod = rx.rx_nr2_gain_method;
+            this.RXANR2NPEMethod = rx.rx_nr2_npe_method;
+            this.RXANR2AERun = rx.rx_nr2_ae_run;
+            this.RXANR2Run = rx.rx_nr2_run;
+            this.RXANR2Position = rx.rx_nr2_position;
         }
 
 		private void SyncAll()
@@ -298,6 +340,11 @@ namespace PowerSDR
             RXADollyRun = rx_dolly_run;
             RXADollyFreq0 = rx_dolly_freq0;
             RXADollyFreq1 = rx_dolly_freq1;
+            RXANR2GainMethod = rx_nr2_gain_method;
+            RXANR2NPEMethod = rx_nr2_npe_method;
+            RXANR2AERun = rx_nr2_ae_run;
+            RXANR2Run = rx_nr2_run;
+            RXANR2Position = rx_nr2_position;
 
             // for (uint i = 0; i < 9; i++)
             //     SetNotchOn(i, notch_on[i]);
@@ -472,8 +519,8 @@ namespace PowerSDR
 
 		private int nr_taps_dsp = 64;
 		private int nr_taps = 64;
-		private int nr_delay_dsp = 8;
-		private int nr_delay = 8;
+		private int nr_delay_dsp = 16;
+		private int nr_delay = 16;
         private double nr_gain_dsp = 16e-4;
         private double nr_gain = 16e-4;
         private double nr_leak_dsp = 10e-7;
@@ -519,8 +566,8 @@ namespace PowerSDR
 
 		private int anf_taps_dsp = 64;
 		private int anf_taps = 64;
-		private int anf_delay_dsp = 64;
-		private int anf_delay = 64;
+		private int anf_delay_dsp = 16;
+		private int anf_delay = 16;
         private double anf_gain_dsp = 10e-4;
         private double anf_gain = 10e-4;
         private double anf_leak_dsp = 1e-7;
@@ -1220,8 +1267,8 @@ namespace PowerSDR
 
         }
 
-        private int rx_anf_position_dsp = 0;
-        private int rx_anf_position = 0;
+        private int rx_anf_position_dsp = 1;
+        private int rx_anf_position = 1;
         public int RXANFPosition
         {
             get { return rx_anf_position; }
@@ -1239,8 +1286,8 @@ namespace PowerSDR
             }
         }
 
-        private int rx_anr_position_dsp = 0;
-        private int rx_anr_position = 0;
+        private int rx_anr_position_dsp = 1;
+        private int rx_anr_position = 1;
         public int RXANRPosition
         {
             get { return rx_anr_position; }
@@ -1315,8 +1362,8 @@ namespace PowerSDR
             }
         }
 
-        private int rx_bandpass_window_dsp = 1;
-        private int rx_bandpass_window = 1;
+        private int rx_bandpass_window_dsp = 0;
+        private int rx_bandpass_window = 0;
         public int RXBandpassWindow
         {
             get { return rx_bandpass_window; }
@@ -1634,6 +1681,101 @@ namespace PowerSDR
                     {
                         wdsp.SetRXAmpeakFilFreq(wdsp.id(thread, subrx), 1, value);
                         rx_dolly_freq1_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_nr2_gain_method = 1;
+        private int rx_nr2_gain_method_dsp = 1;
+        public int RXANR2GainMethod
+        {
+            get { return rx_nr2_gain_method; }
+            set
+            {
+                rx_nr2_gain_method = value;
+                if (update)
+                {
+                    if (value != rx_nr2_gain_method_dsp || force)
+                    {
+                        wdsp.SetRXAEMNRgainMethod(wdsp.id(thread, subrx), value);
+                        rx_nr2_gain_method_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_nr2_npe_method = 0;
+        private int rx_nr2_npe_method_dsp = 0;
+        public int RXANR2NPEMethod
+        {
+            get { return rx_nr2_npe_method; }
+            set
+            {
+                rx_nr2_npe_method = value;
+                if (update)
+                {
+                    if (value != rx_nr2_npe_method_dsp || force)
+                    {
+                        wdsp.SetRXAEMNRnpeMethod(wdsp.id(thread, subrx), value);
+                        rx_nr2_npe_method_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_nr2_ae_run = 1;
+        private int rx_nr2_ae_run_dsp = 1;
+        public int RXANR2AERun
+        {
+            get { return rx_nr2_ae_run; }
+            set
+            {
+                rx_nr2_ae_run = value;
+                if (update)
+                {
+                    if (value != rx_nr2_ae_run_dsp || force)
+                    {
+                        wdsp.SetRXAEMNRaeRun(wdsp.id(thread, subrx), value);
+                        rx_nr2_ae_run_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_nr2_run = 0;
+        private int rx_nr2_run_dsp = 0;
+        public int RXANR2Run
+        {
+            get { return rx_nr2_run; }
+            set
+            {
+                rx_nr2_run = value;
+                if (update)
+                {
+                    if (value != rx_nr2_run_dsp || force)
+                    {
+                        wdsp.SetRXAEMNRRun(wdsp.id(thread, subrx), value);
+                        rx_nr2_run_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private int rx_nr2_position = 1;
+        private int rx_nr2_position_dsp = 1;
+        public int RXANR2Position
+        {
+            get { return rx_nr2_position; }
+            set
+            {
+                rx_nr2_position = value;
+                if (update)
+                {
+                    if (value != rx_nr2_position_dsp || force)
+                    {
+                        wdsp.SetRXAEMNRPosition(wdsp.id(thread, subrx), value);
+                        rx_nr2_position_dsp = value;
                     }
                 }
             }

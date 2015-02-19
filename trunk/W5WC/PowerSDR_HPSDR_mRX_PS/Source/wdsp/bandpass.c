@@ -26,11 +26,13 @@ warren@wpratt.com
 
 #include "comm.h"
 
-BANDPASS create_bandpass (int run, int size, double* in, double* out, double f_low, double f_high, int samplerate, int wintype, double gain)
+BANDPASS create_bandpass (int run, int position, int size, double* in, double* out, 
+	double f_low, double f_high, int samplerate, int wintype, double gain)
 {
 	BANDPASS a = (BANDPASS) malloc0 (sizeof (bandpass));
 	double* impulse;
 	a->run = run;
+	a->position = position;
 	a->size = size;
 	a->samplerate = (double)samplerate;
 	a->wintype = wintype;
@@ -64,11 +66,11 @@ void flush_bandpass (BANDPASS a)
 	memset (a->infilt, 0, 2 * a->size * sizeof (complex));
 }
 
-void xbandpass (BANDPASS a)
+void xbandpass (BANDPASS a, int pos)
 {
 	int i;
 	double I, Q;
-	if (a->run)
+	if (a->run && pos == a->position)
 	{
 		memcpy (&(a->infilt[2 * a->size]), a->in, a->size * sizeof (complex));
 		fftw_execute (a->CFor);

@@ -35,7 +35,7 @@ namespace PowerSDR
         #region wdsp method definitions
 
         [DllImport("wdsp.dll", EntryPoint = "OpenChannel", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void OpenChannel(int channel, int in_size, int dsp_size, int input_samplerate, int dsp_rate, int output_samplerate, int type, int state, double tdelayup, double tslewup, double tdelaydown, double tslewdown);
+        public static extern void OpenChannel(int channel, int in_size, int dsp_size, int input_samplerate, int dsp_rate, int output_samplerate, int type, int state, double tdelayup, double tslewup, double tdelaydown, double tslewdown, int bfo);
 
         [DllImport("wdsp.dll", EntryPoint = "CloseChannel", CallingConvention = CallingConvention.Cdecl)]
         public static extern void CloseChannel(int channel);
@@ -222,6 +222,21 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "SetTXAosctrlRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAosctrlRun(int channel, bool run);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAEMNRRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXAEMNRRun(int channel, int run);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAEMNRPosition", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXAEMNRPosition(int channel, int position);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAEMNRgainMethod", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXAEMNRgainMethod(int channel, int method);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAEMNRnpeMethod", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXAEMNRnpeMethod(int channel, int method);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXAEMNRaeRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXAEMNRaeRun(int channel, int run);
 
         [DllImport("wdsp.dll", EntryPoint = "SetRXAEQRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAEQRun(int channel, bool run);

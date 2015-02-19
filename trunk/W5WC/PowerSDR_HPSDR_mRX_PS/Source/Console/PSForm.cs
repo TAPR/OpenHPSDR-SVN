@@ -549,7 +549,7 @@ namespace PowerSDR
                     rxRCVR = 4;
                     txRCVR = 5;
                     break;
-                case HPSDRModel.ORION:
+                case HPSDRModel.ANAN200D:
                     rxRCVR = 4;
                     txRCVR = 5;
                     break;
@@ -585,7 +585,7 @@ namespace PowerSDR
                 case HPSDRModel.ANAN100D:
                     newnr = Math.Max(5, nr);
                     break;
-                case HPSDRModel.ORION:
+                case HPSDRModel.ANAN200D:
                     newnr = Math.Max(5, nr);
                     break;
                 case HPSDRModel.HPSDR:
@@ -647,7 +647,7 @@ namespace PowerSDR
                         SetRXFreq(rxRCVR, txfreq, false);
                         SetRXFreq(txRCVR, txfreq, false);
                         break;
-                    case HPSDRModel.ORION:
+                    case HPSDRModel.ANAN200D:
                         SetRXFreq(rxRCVR, txfreq, false);
                         SetRXFreq(txRCVR, txfreq, false);
                         break;
@@ -747,6 +747,9 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "GetPSDisp", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetPSDisp(int channel, IntPtr x, IntPtr ym, IntPtr yc, IntPtr ys, IntPtr cm, IntPtr cc, IntPtr cs);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetPSFeedbackRate", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetPSFeedbackRate(int channel, int rate);
 
         #endregion
 

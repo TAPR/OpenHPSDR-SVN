@@ -33,6 +33,7 @@ warren@wpratt.com
 *																										*
 ********************************************************************************************************/
 
+PORT
 void *malloc0 (int size)
 {
 	int alignment = 16;
@@ -125,12 +126,13 @@ PORT
 void print_buffer_parameters (const char* filename, int channel)
 {
 	IOB a = ch[channel].iob.pc;
-	FILE* file = fopen (filename, "w");
+	FILE* file = fopen (filename, "a");
+	fprintf (file, "channel            = %d\n", channel);
 	fprintf (file, "in_size            = %d\n", a->in_size);
 	fprintf (file, "r1_outsize         = %d\n", a->r1_outsize);
 	fprintf (file, "r1_size            = %d\n", a->r1_size);
 	fprintf (file, "r2_size            = %d\n", a->r2_size);
-	fprintf (file, "out_size		   = %d\n", a->out_size);
+	fprintf (file, "out_size           = %d\n", a->out_size);
 	fprintf (file, "r2_insize          = %d\n", a->r2_insize);
 	fprintf (file, "r1_active_buffsize = %d\n", a->r1_active_buffsize);
 	fprintf (file, "f2_active_buffsize = %d\n", a->r2_active_buffsize);
@@ -143,6 +145,7 @@ void print_buffer_parameters (const char* filename, int channel)
 	fprintf (file, "in_rate            = %d\n", ch[channel].in_rate);
 	fprintf (file, "dsp_rate           = %d\n", ch[channel].dsp_rate);
 	fprintf (file, "out_rate           = %d\n", ch[channel].out_rate);
+	fprintf (file, "\n");
 	fflush (file);
 	fclose (file);
 }
@@ -200,4 +203,18 @@ void __cdecl CalccPrintSamples (void *pargs)
 void doCalccPrintSamples(int channel)
 {	// no sample buffering - use in single cal mode
 	_beginthread(CalccPrintSamples, 0, (void *)channel);
+}
+
+void print_anb_parms (const char* filename, ANB a)
+{
+	FILE* file = fopen (filename, "a");
+	fprintf (file, "Run         = %d\n", a->run);
+	fprintf (file, "Buffer Size = %d\n", a->buffsize);
+	fprintf (file, "Sample Rate = %d\n", (int)a->samplerate);
+	fprintf (file, "Threshold   = %.6f\n", a->threshold);
+	fprintf (file, "BackTau     = %.6f\n", a->backtau);
+	fprintf (file, "BackMult    = %.6f\n", a->backmult);
+	fprintf (file, "Tau         = %.6f\n", a->tau);
+	fflush (file);
+	fclose (file);
 }

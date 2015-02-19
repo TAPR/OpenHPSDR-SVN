@@ -357,6 +357,7 @@ extern int AlexRxOut;
 extern int FwdPower;
 extern int RefPower;
 extern int AlexFwdPower;
+extern int AIN4;
 
 int ApolloFilt;
 int ApolloTuner;
