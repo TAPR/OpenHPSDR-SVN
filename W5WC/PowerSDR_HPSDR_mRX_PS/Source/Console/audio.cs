@@ -211,6 +211,26 @@ namespace PowerSDR
             set { peak = value; }
         }
 
+        private static bool write_quad = false;
+        public static bool WriteQuad
+        {
+            get { return write_quad; }
+            set
+            {
+                write_quad = value;
+            }
+        }
+
+        private static bool read_quad = false;
+        public static bool ReadQuad
+        {
+            get { return read_quad; }
+            set
+            {
+                read_quad = value;
+            }
+        }
+
         private static bool vox_enabled;
         public static bool VOXEnabled
         {
@@ -1707,6 +1727,12 @@ namespace PowerSDR
 
             if (wave_playback)
             {
+                if (read_quad)
+                {
+                    wave_file_reader.GetPlayBuffer(in_l, in_r, rx2_in_l, rx2_in_r);
+                }
+                else
+                {
                 wave_file_reader.GetPlayBuffer(in_l, in_r);
                 if (rx2_enabled)
                 {
@@ -1721,6 +1747,7 @@ namespace PowerSDR
                     }
                 }
             }
+            }
 
             if (wave_record)
             {
@@ -1728,10 +1755,17 @@ namespace PowerSDR
                 {
                     if (record_rx_preprocessed)
                     {
+                        if (write_quad)
+                        {
+                            wave_file_writer.AddWriteBuffer(rx1_in_l, rx1_in_r, rx2_in_l, rx2_in_r);
+                        }
+                        else
+                        {
                         wave_file_writer.AddWriteBuffer(rx1_in_l, rx1_in_r);
                         if (wave_file_writer2 != null)
                             wave_file_writer2.AddWriteBuffer(rx2_in_l, rx2_in_r);
                     }
+                }
                 }
                 else
                 {

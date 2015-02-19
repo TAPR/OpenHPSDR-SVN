@@ -205,7 +205,7 @@ namespace PowerSDR
                 case Model.ANAN100D:
                     radGenModelANAN100D.Checked = true;
                     break;
-                case Model.ORION:
+                case Model.ANAN200D:
                     radGenModelOrion.Checked = true;
                     break;
 
@@ -1551,7 +1551,7 @@ namespace PowerSDR
                         case Model.ANAN100B:
                         case Model.ANAN100:
                         case Model.ANAN100D:
-                        case Model.ORION:
+                        case Model.ANAN200D:
                             CurPage = Page.HPSDR_HARDWARE_SELECT;
                             btnNext.Focus();
                             break;
@@ -1811,7 +1811,7 @@ namespace PowerSDR
                     console.SetupForm.AlexPresent = alex_present;
                     console.SetupForm.forceAudioSampleRate1("192000");
                     break;
-                case Model.ORION:
+                case Model.ANAN200D:
                     console.SetupForm.PennyLanePresent = pennylane_present;
                     console.SetupForm.MercuryPresent = mercury_present;
                     console.SetupForm.AlexPresent = alex_present;
@@ -2301,7 +2301,7 @@ namespace PowerSDR
         {
             if (radGenModelOrion.Checked)
             {
-                model = Model.ORION;
+                model = Model.ANAN200D;
                 //if (grpModel.Visible)
                 pictureBox1.Image = null;
                 pictureBox1.Visible = false;

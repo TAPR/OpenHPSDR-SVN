@@ -50,6 +50,8 @@ void create_rxa (int channel)
 		rxa[channel].midbuff,							// pointer to output buffer
 		ch[channel].in_rate,							// input samplerate
 		ch[channel].dsp_rate,							// output samplerate
+		0.0,											// select cutoff automatically
+		0,												// select ncoef automatically
 		1.0);											// gain
 
 	// signal generator
@@ -80,6 +82,7 @@ void create_rxa (int channel)
 	// bandpass filter
 	rxa[channel].bp0.p = create_bandpass (
 		1,												// run - always ON
+		0,												// position
 		ch[channel].dsp_size,							// buffer size
 		rxa[channel].midbuff,							// pointer to input buffer
 		rxa[channel].midbuff,							// pointer to output buffer
@@ -211,13 +214,13 @@ void create_rxa (int channel)
 	// ANF
 	rxa[channel].anf.p = create_anf (
 		0,												// run - OFF by default
-		0,												// position
+		1,												// position
 		ch[channel].dsp_size,							// buffer size
 		rxa[channel].midbuff,							// pointer to input buffer
 		rxa[channel].midbuff,							// pointer to output buffer
 		ANF_DLINE_SIZE,									// dline_size
-		256,											// taps
-		64,												// delay
+		64,												// taps
+		16,												// delay
 		0.0001,											// two_mu
 		0.1,											// gamma
 		1.0,											// lidx
@@ -231,13 +234,13 @@ void create_rxa (int channel)
 	// ANR
 	rxa[channel].anr.p = create_anr (
 		0,												// run - OFF by default
-		0,												// position
+		1,												// position
 		ch[channel].dsp_size,							// buffer size
 		rxa[channel].midbuff,							// pointer to input buffer
 		rxa[channel].midbuff,							// pointer to output buffer
 		ANR_DLINE_SIZE,									// dline_size
-		256,											// taps
-		64,												// delay			
+		64,												// taps
+		16,												// delay			
 		0.0001,											// two_mu	
 		0.1,											// gamma
 		120.0,											// lidx
@@ -247,6 +250,23 @@ void create_rxa (int channel)
 		6.25e-10,										// den_mult
 		1.0,											// lincr
 		3.0);											// ldecr
+
+	
+	// EMNR
+	rxa[channel].emnr.p = create_emnr (
+		1,												// run
+		1,												// position
+		ch[channel].dsp_size,							// buffer size
+		rxa[channel].midbuff,							// input buffer
+		rxa[channel].midbuff,							// output buffer
+		4096,											// FFT size
+		4,												// overlap
+		ch[channel].dsp_rate,							// samplerate
+		0,												// window type
+		1.0,											// gain
+		1,												// gain method
+		0,												// npe_method
+		1);												// ae_run
 
 	// AGC
 	rxa[channel].agc.p = create_wcpagc (
@@ -292,7 +312,8 @@ void create_rxa (int channel)
 
 	// bandpass filter
 	rxa[channel].bp1.p = create_bandpass (
-		1,												// run - used only with ( AM || ANF || ANR )
+		1,												// run - used only with ( AM || ANF || ANR || EMNR)
+		1,												// position
 		ch[channel].dsp_size,							// buffer size
 		rxa[channel].midbuff,							// pointer to input buffer
 		rxa[channel].midbuff,							// pointer to output buffer
@@ -375,6 +396,8 @@ void create_rxa (int channel)
 		rxa[channel].outbuff,							// pointer to output buffer
 		ch[channel].dsp_rate,							// input sample rate
 		ch[channel].out_rate,							// output sample rate
+		0.0,											// select cutoff automatically
+		0,												// select ncoef automatically
 		1.0);											// gain
 
 	// turn OFF / ON resamplers as needed
@@ -392,6 +415,7 @@ void destroy_rxa (int channel)
 	destroy_bandpass (rxa[channel].bp1.p);
 	destroy_meter (rxa[channel].agcmeter.p);
 	destroy_wcpagc (rxa[channel].agc.p);
+	destroy_emnr (rxa[channel].emnr.p);
 	destroy_anr (rxa[channel].anr.p);
 	destroy_anf (rxa[channel].anf.p);
 	destroy_eq (rxa[channel].eq.p);
@@ -430,6 +454,7 @@ void flush_rxa (int channel)
 	flush_eq (rxa[channel].eq.p);
 	flush_anf (rxa[channel].anf.p);
 	flush_anr (rxa[channel].anr.p);
+	flush_emnr (rxa[channel].emnr.p);
 	flush_wcpagc (rxa[channel].agc.p);
 	flush_meter (rxa[channel].agcmeter.p);
 	flush_bandpass (rxa[channel].bp1.p);
@@ -447,7 +472,7 @@ void xrxa (int channel)
 	xresample (rxa[channel].rsmpin.p);
 	xgen (rxa[channel].gen0.p);
 	xmeter (rxa[channel].adcmeter.p);
-	xbandpass (rxa[channel].bp0.p);
+	xbandpass (rxa[channel].bp0.p, 0);
 	xmeter (rxa[channel].smeter.p);
 	xsender (rxa[channel].sender.p);
 	xamsqcap (rxa[channel].amsq.p);
@@ -457,11 +482,14 @@ void xrxa (int channel)
 	xeq (rxa[channel].eq.p);
 	xanf (rxa[channel].anf.p, 0);
 	xanr (rxa[channel].anr.p, 0);
+	xemnr (rxa[channel].emnr.p, 0);
+	xbandpass (rxa[channel].bp1.p, 0);
 	xwcpagc (rxa[channel].agc.p);
 	xanf (rxa[channel].anf.p, 1);
 	xanr (rxa[channel].anr.p, 1);
+	xemnr (rxa[channel].emnr.p, 1);
+	xbandpass (rxa[channel].bp1.p, 1);
 	xmeter (rxa[channel].agcmeter.p);
-	xbandpass (rxa[channel].bp1.p);
 	xsiphon (rxa[channel].sip1.p);
 	xcbl (rxa[channel].cbl.p);
 	xspeak (rxa[channel].speak.p);
@@ -523,9 +551,10 @@ void RXAResCheck (int channel)
 void RXAbp1Check (int channel)
 {
 	int old = rxa[channel].bp1.p->run;
-	if ((rxa[channel].amd.p->run == 1) ||
-		(rxa[channel].anf.p->run == 1) ||
-		(rxa[channel].anr.p->run == 1))		rxa[channel].bp1.p->run = 1;
+	if ((rxa[channel].amd.p->run  == 1) ||
+		(rxa[channel].emnr.p->run == 1) ||
+		(rxa[channel].anf.p->run  == 1) ||
+		(rxa[channel].anr.p->run  == 1))	rxa[channel].bp1.p->run = 1;
 	else									rxa[channel].bp1.p->run = 0;
 	if (!old && rxa[channel].bp1.p->run) flush_bandpass (rxa[channel].bp1.p);
 }

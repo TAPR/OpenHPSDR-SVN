@@ -755,7 +755,7 @@ namespace PowerSDR
             DictButtons.Add(17, "NB2");
             DictButtons.Add(18, "ANF");
             DictButtons.Add(19, "NR");
-           // DictButtons.Add(20, "SR");
+            DictButtons.Add(20, "NR2");
             DictButtons.Add(21, "BIN");
             DictButtons.Add(22, "Wider Filter");
             DictButtons.Add(23, "Narrower Filter");
@@ -2205,7 +2205,8 @@ namespace PowerSDR
 
                 case 20:
                     {
-                        SpurReductionOnOff(msg);
+                        Rx2NoiseReductionOnOff(msg);
+                        //SpurReductionOnOff(msg);
                         break;
                     }
 
@@ -3938,6 +3939,28 @@ namespace PowerSDR
             }
         }
 
+        private void Rx2NoiseReductionOnOff(int msg)
+        {
+            if (msg == 127)
+            {
+                parser.nGet = 0;
+                parser.nSet = 1;
+
+                int NRState = Convert.ToInt16(commands.ZZNS(""));
+
+                if (NRState == 0)
+                {
+                    commands.ZZNS("1");
+                    return;
+                }
+                if (NRState == 1)
+                {
+                    commands.ZZNS("0");
+                    return;
+                }
+            }
+        }
+        
         private void Rx2PreAmpOnOff(int msg)
         {
             if (msg == 127)

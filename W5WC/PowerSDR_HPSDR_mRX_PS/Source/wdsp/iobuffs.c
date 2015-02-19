@@ -383,6 +383,7 @@ void downslew2 (IOB a, OUTREAL* pIout, OUTREAL* pQout)
 
 void create_iobuffs (int channel)
 {
+	int n;
 	IOB a = (IOB) malloc0 (sizeof(iob));
 	ch[channel].iob.pc = ch[channel].iob.pd = ch[channel].iob.pe = ch[channel].iob.pf = a;
 	a->channel = channel;
@@ -408,8 +409,12 @@ void create_iobuffs (int channel)
 	a->r2_inidx = (DSP_MULT - 1) * a->r2_size;
 	a->r2_outidx = 0;
 	a->r2_havesamps = (DSP_MULT - 1) * a->r2_size;
+	n = a->r2_havesamps / a->out_size;
+	a->r2_unqueuedsamps = a->r2_havesamps - n * a->out_size;
 	InitializeCriticalSectionAndSpinCount(&a->r2_ControlSection, 2500);
 	a->Sem_BuffReady = CreateSemaphore(0, 0, 1000, 0);
+	a->Sem_OutReady  = CreateSemaphore(0, n, 1000, 0);
+	a->bfo = ch[channel].bfo;
 	create_slews (a);
 }
 
@@ -417,6 +422,7 @@ void destroy_iobuffs (int channel)
 {
 	IOB a = ch[channel].iob.pc;
 	destroy_slews (a);
+	CloseHandle (a->Sem_OutReady);
 	CloseHandle (a->Sem_BuffReady);
 	DeleteCriticalSection(&a->r2_ControlSection);
 	_aligned_free (a->r2_baseptr);
@@ -426,6 +432,7 @@ void destroy_iobuffs (int channel)
 
 void flush_iobuffs (int channel)
 {
+	int n;
 	IOB a = ch[channel].iob.pf;
 	memset (a->r1_baseptr, 0, a->r1_active_buffsize * sizeof (complex));
 	memset (a->r2_baseptr, 0, a->r2_active_buffsize * sizeof (complex));
@@ -435,7 +442,11 @@ void flush_iobuffs (int channel)
 	a->r2_inidx = (DSP_MULT - 1) * a->r2_size;
 	a->r2_outidx = 0;
 	a->r2_havesamps = (DSP_MULT - 1) * a->r2_size;
-	while (!WaitForSingleObject (a->Sem_BuffReady, 1)) ;
+	while (!WaitForSingleObject (a->Sem_BuffReady, 1));
+	n = a->r2_havesamps / a->out_size;
+	a->r2_unqueuedsamps = a->r2_havesamps - n * a->out_size;
+	CloseHandle (a->Sem_OutReady);
+	a->Sem_OutReady  = CreateSemaphore(0, n, 1000, 0);
 	flush_slews (a);
 }
 
@@ -470,7 +481,8 @@ void fexchange0 (int channel, double* in, double* out, int* error)
 			doit = 1;
 		if ((a->r2_havesamps -= a->out_size) < 0) a->r2_havesamps = 0;
 		LeaveCriticalSection (&a->r2_ControlSection);
-		if (doit)
+		if (a->bfo) WaitForSingleObject (a->Sem_OutReady, INFINITE);
+		if (a->bfo || doit)
 			if (_InterlockedAnd (&a->slew.downflag, 1))
 			{
 				downslew0 (a, out);
@@ -527,7 +539,8 @@ void fexchange2 (int channel, INREAL *Iin, INREAL *Qin, OUTREAL *Iout, OUTREAL *
 			doit = 1;
 		if ((a->r2_havesamps -= a->out_size) < 0) a->r2_havesamps = 0;
 		LeaveCriticalSection (&a->r2_ControlSection);
-		if (doit)
+		if (a->bfo) WaitForSingleObject (a->Sem_OutReady, INFINITE);
+		if (a->bfo || doit)
 		{
 			if (_InterlockedAnd (&a->slew.downflag, 1))
 			{
@@ -559,6 +572,7 @@ void fexchange2 (int channel, INREAL *Iin, INREAL *Qin, OUTREAL *Iout, OUTREAL *
 
 void dexchange (int channel, double* in, double* out)
 {
+	int n;
 	IOB a = ch[channel].iob.pd;
 	if (!_InterlockedAnd (&ch[channel].run, 1)) _endthread();
 
@@ -568,7 +582,12 @@ void dexchange (int channel, double* in, double* out)
 	memcpy (a->r2_baseptr + 2 * a->r2_inidx, in, a->r2_insize * sizeof (complex));
 	if ((a->r2_inidx += a->r2_insize) == a->r2_active_buffsize)
 		a->r2_inidx = 0;
-
+	if (a->bfo && (a->r2_unqueuedsamps += a->r2_insize) >= a->out_size)
+	{
+		n = a->r2_unqueuedsamps / a->out_size;
+		ReleaseSemaphore(a->Sem_OutReady, n, 0);	
+		a->r2_unqueuedsamps -= n * a->out_size;
+	}
 	memcpy (out, a->r1_baseptr + 2 * a->r1_outidx, a->r1_outsize * sizeof (complex));
 	if ((a->r1_outidx += a->r1_outsize) == a->r1_active_buffsize)
 		a->r1_outidx = 0;

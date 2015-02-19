@@ -40,6 +40,8 @@ void create_txa (int channel)
 		txa[channel].midbuff,						// pointer to output buffer
 		ch[channel].in_rate,						// input sample rate
 		ch[channel].dsp_rate, 						// output sample rate
+		0.0,										// select cutoff automatically
+		0,											// select ncoef automatically
 		1.0);										// gain
 
 	txa[channel].gen0.p = create_gen (
@@ -178,6 +180,7 @@ void create_txa (int channel)
 
 	txa[channel].bp0.p = create_bandpass (
 		1,											// always runs
+		0,											// position
 		ch[channel].dsp_size,						// size
 		txa[channel].midbuff,						// pointer to input buffer
 		txa[channel].midbuff,						// pointer to output buffer 
@@ -205,6 +208,7 @@ void create_txa (int channel)
 
 	txa[channel].bp1.p = create_bandpass (
 		0,											// ONLY RUNS WHEN COMPRESSOR IS USED
+		0,											// position
 		ch[channel].dsp_size,						// size
 		txa[channel].midbuff,						// pointer to input buffer
 		txa[channel].midbuff,						// pointer to output buffer 
@@ -234,6 +238,7 @@ void create_txa (int channel)
 
 	txa[channel].bp2.p = create_bandpass (
 		0,											// ONLY RUNS WHEN COMPRESSOR IS USED
+		0,											// position
 		ch[channel].dsp_size,						// size
 		txa[channel].midbuff,						// pointer to input buffer
 		txa[channel].midbuff,						// pointer to output buffer 
@@ -349,13 +354,17 @@ void create_txa (int channel)
 
 	txa[channel].calcc.p = create_calcc (			
 		channel,									// channel number
+		1,											// run calibration
+		1024,										// input buffer size
 		ch[channel].dsp_rate,						// samplerate
 		16,											// ints
 		256,										// spi
 		(1.0 / 0.4072),								// hw_scale
 		0.1,										// mox delay
 		0.0,										// loop delay
-		0.9);										// ptol
+		0.9,										// ptol
+		0,											// mox
+		1);											// solidmox
 
 	txa[channel].iqc.p0 = txa[channel].iqc.p1 = create_iqc (
 		0,											// run
@@ -374,6 +383,8 @@ void create_txa (int channel)
 		txa[channel].outbuff,						// pointer to output buffer
 		ch[channel].dsp_rate,						// input sample rate
 		ch[channel].out_rate,						// output sample rate
+		0.0,										// select cutoff automatically
+		0,											// select ncoef automatically
 		0.980);										// gain
 
 	txa[channel].outmeter.p = create_meter (
@@ -480,13 +491,13 @@ void xtxa (int channel)
 	xemph (txa[channel].preemph.p, 0);
 	xwcpagc (txa[channel].leveler.p);
 	xmeter (txa[channel].lvlrmeter.p);
-	xbandpass (txa[channel].bp0.p);
+	xbandpass (txa[channel].bp0.p, 0);
 	xgain (txa[channel].pfgain0.p);
 	xcompressor (txa[channel].compressor.p);
-	xbandpass (txa[channel].bp1.p);
+	xbandpass (txa[channel].bp1.p, 0);
 	xgain (txa[channel].pfgain1.p);
 	xosctrl (txa[channel].osctrl.p);
-	xbandpass (txa[channel].bp2.p);
+	xbandpass (txa[channel].bp2.p, 0);
 	xmeter (txa[channel].compmeter.p);
 	xwcpagc (txa[channel].alc.p);
 	xammod (txa[channel].ammod.p);

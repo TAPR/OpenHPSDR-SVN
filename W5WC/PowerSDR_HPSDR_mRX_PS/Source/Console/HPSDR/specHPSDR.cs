@@ -382,7 +382,10 @@ namespace PowerSDR
 
             int low = 0;
             int high = 0;
+            int low_tx = 0;
+            int high_tx = 0;
             double bw_per_subspan = 0.0;
+            double bw_per_subspan_tx = 0.0;
 
             switch (data_type)
             {
@@ -404,12 +407,14 @@ namespace PowerSDR
 
                         //the amount of frequency in each fft bin (for complex samples) is given by:
                         double bin_width = (double)sample_rate / (double)fft_size;
+                        double bin_width_tx = 96000.0 / (double)fft_size;
 
                         //the number of useable bins per subspan is
                         int bins_per_subspan = fft_size - 2 * clip;
 
                         //the amount of useable bandwidth we get from each subspan is:
                         bw_per_subspan = bins_per_subspan * bin_width;
+                        bw_per_subspan_tx = bins_per_subspan * bin_width_tx;
 
                         //the total number of bins available to display is:
                         int bins = stitches * bins_per_subspan;
@@ -438,6 +443,8 @@ namespace PowerSDR
                         //As for the low and high frequencies that are being displayed:
                         low = -(int)((double)stitches / 2.0 * bw_per_subspan - (double)span_clip_l * bin_width + bin_width / 2.0);
                         high = +(int)((double)stitches / 2.0 * bw_per_subspan - (double)span_clip_h * bin_width - bin_width / 2.0);
+                        low_tx = -(int)((double)stitches / 2.0 * bw_per_subspan_tx - (double)span_clip_l * bin_width_tx + bin_width_tx / 2.0);
+                        high_tx = +(int)((double)stitches / 2.0 * bw_per_subspan_tx - (double)span_clip_h * bin_width_tx - bin_width_tx / 2.0);
                         //Note that the bin_width/2.0 factors are included because the complex FFT has one more negative output bin
                         //  than positive output bin.
                         max_w = fft_size + (int)Math.Min(KEEP_TIME * sample_rate, KEEP_TIME * fft_size * frame_rate);
@@ -453,8 +460,8 @@ namespace PowerSDR
                    if (Display.CurrentDisplayMode == DisplayMode.WATERFALL ||
                        Display.CurrentDisplayMode == DisplayMode.PANAFALL)
                     {
-                        Display.TXDisplayLow = low;
-                        Display.TXDisplayHigh = high;
+                        Display.TXDisplayLow = low_tx;
+                        Display.TXDisplayHigh = high_tx;
                     }
                     break;
                 case 1:
@@ -463,8 +470,8 @@ namespace PowerSDR
                     if (!(Display.CurrentDisplayMode == DisplayMode.WATERFALL ||
                         Display.CurrentDisplayMode == DisplayMode.PANAFALL))
                     {
-                        Display.TXDisplayLow = low;
-                        Display.TXDisplayHigh = high;
+                        Display.TXDisplayLow = low_tx;
+                        Display.TXDisplayHigh = high_tx;
                     }
                     break;
             }
@@ -504,7 +511,7 @@ namespace PowerSDR
                         max_w);
         }
 
-        public void CalcSpectrum(int filter_low, int filter_high, int spec_blocksize)
+        public void CalcSpectrum(int filter_low, int filter_high, int spec_blocksize, int sample_rate)
         {
             //filter_low is the low frequency setting for the filter
             //filter_high is the high frequency setting for the filter
@@ -553,6 +560,9 @@ namespace PowerSDR
             Display.RXSpectrumDisplayLow = lower_freq;
             Display.RXSpectrumDisplayHigh = upper_freq;
   
+            // set overlap as needed to achieve the desired frame rate
+            overlap = (int)Math.Max(0.0, Math.Ceiling(fft_size - (double)sample_rate / (double)frame_rate));
+
             SpecHPSDRDLL.SetAnalyzer(disp,
           spur_eliminationtion_ffts,
           data_type,

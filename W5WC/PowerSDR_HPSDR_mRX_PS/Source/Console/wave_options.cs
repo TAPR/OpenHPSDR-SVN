@@ -55,6 +55,7 @@ namespace PowerSDR
         private GroupBoxTS grpWaveDither;
         private CheckBoxTS chkWaveDither;
         private NumericUpDownTS udWaveDitherBits;
+        private CheckBoxTS chk4Chnl;
 		private System.ComponentModel.IContainer components;
 
 		#endregion
@@ -98,14 +99,9 @@ namespace PowerSDR
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaveOptions));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.chkWaveDither = new System.Windows.Forms.CheckBoxTS();
-            this.comboSampleRate = new System.Windows.Forms.ComboBoxTS();
-            this.radTXPostProcessed = new System.Windows.Forms.RadioButtonTS();
-            this.radTXPreProcessed = new System.Windows.Forms.RadioButtonTS();
-            this.radRXPostProcessed = new System.Windows.Forms.RadioButtonTS();
-            this.radRXPreProcessed = new System.Windows.Forms.RadioButtonTS();
             this.grpWaveDither = new System.Windows.Forms.GroupBoxTS();
             this.udWaveDitherBits = new System.Windows.Forms.NumericUpDownTS();
+            this.chkWaveDither = new System.Windows.Forms.CheckBoxTS();
             this.grpBitDepth = new System.Windows.Forms.GroupBoxTS();
             this.radBitDepth8PCM = new System.Windows.Forms.RadioButtonTS();
             this.radBitDepth16PCM = new System.Windows.Forms.RadioButtonTS();
@@ -113,8 +109,14 @@ namespace PowerSDR
             this.radBitDepth32PCM = new System.Windows.Forms.RadioButtonTS();
             this.radBitDepthIEEE = new System.Windows.Forms.RadioButtonTS();
             this.grpAudioSampleRate1 = new System.Windows.Forms.GroupBoxTS();
+            this.comboSampleRate = new System.Windows.Forms.ComboBoxTS();
             this.groupBox1 = new System.Windows.Forms.GroupBoxTS();
+            this.radTXPostProcessed = new System.Windows.Forms.RadioButtonTS();
+            this.radTXPreProcessed = new System.Windows.Forms.RadioButtonTS();
             this.grpReceive = new System.Windows.Forms.GroupBoxTS();
+            this.chk4Chnl = new System.Windows.Forms.CheckBoxTS();
+            this.radRXPostProcessed = new System.Windows.Forms.RadioButtonTS();
+            this.radRXPreProcessed = new System.Windows.Forms.RadioButtonTS();
             this.grpWaveDither.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udWaveDitherBits)).BeginInit();
             this.grpBitDepth.SuspendLayout();
@@ -122,88 +124,6 @@ namespace PowerSDR
             this.groupBox1.SuspendLayout();
             this.grpReceive.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // chkWaveDither
-            // 
-            this.chkWaveDither.AutoSize = true;
-            this.chkWaveDither.Image = null;
-            this.chkWaveDither.Location = new System.Drawing.Point(6, 19);
-            this.chkWaveDither.Name = "chkWaveDither";
-            this.chkWaveDither.Size = new System.Drawing.Size(59, 17);
-            this.chkWaveDither.TabIndex = 0;
-            this.chkWaveDither.Text = "Enable";
-            this.toolTip1.SetToolTip(this.chkWaveDither, "Enables Dithering for Recording");
-            this.chkWaveDither.UseVisualStyleBackColor = true;
-            this.chkWaveDither.CheckedChanged += new System.EventHandler(this.chkWaveDither_CheckedChanged);
-            // 
-            // comboSampleRate
-            // 
-            this.comboSampleRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboSampleRate.DropDownWidth = 64;
-            this.comboSampleRate.Items.AddRange(new object[] {
-            "1000",
-            "2000",
-            "3000",
-            "6000",
-            "12000",
-            "24000",
-            "48000",
-            "96000",
-            "192000",
-            "384000"});
-            this.comboSampleRate.Location = new System.Drawing.Point(16, 24);
-            this.comboSampleRate.Name = "comboSampleRate";
-            this.comboSampleRate.Size = new System.Drawing.Size(64, 21);
-            this.comboSampleRate.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.comboSampleRate, "Sample Rate -- Range is dependent on selected sound card! ");
-            // 
-            // radTXPostProcessed
-            // 
-            this.radTXPostProcessed.Image = null;
-            this.radTXPostProcessed.Location = new System.Drawing.Point(16, 48);
-            this.radTXPostProcessed.Name = "radTXPostProcessed";
-            this.radTXPostProcessed.Size = new System.Drawing.Size(144, 24);
-            this.radTXPostProcessed.TabIndex = 1;
-            this.radTXPostProcessed.Text = "Transmitter Output I/Q";
-            this.toolTip1.SetToolTip(this.radTXPostProcessed, "Transmitter I/Q data outbound to the hardware.");
-            this.radTXPostProcessed.CheckedChanged += new System.EventHandler(this.radTXPostProcessed_CheckedChanged);
-            // 
-            // radTXPreProcessed
-            // 
-            this.radTXPreProcessed.Checked = true;
-            this.radTXPreProcessed.Image = null;
-            this.radTXPreProcessed.Location = new System.Drawing.Point(16, 24);
-            this.radTXPreProcessed.Name = "radTXPreProcessed";
-            this.radTXPreProcessed.Size = new System.Drawing.Size(144, 24);
-            this.radTXPreProcessed.TabIndex = 0;
-            this.radTXPreProcessed.TabStop = true;
-            this.radTXPreProcessed.Text = "MIC Audio";
-            this.toolTip1.SetToolTip(this.radTXPreProcessed, "Raw MIC Audio Input coming from the hardware.");
-            this.radTXPreProcessed.CheckedChanged += new System.EventHandler(this.radTXPreProcessed_CheckedChanged);
-            // 
-            // radRXPostProcessed
-            // 
-            this.radRXPostProcessed.Checked = true;
-            this.radRXPostProcessed.Image = null;
-            this.radRXPostProcessed.Location = new System.Drawing.Point(16, 48);
-            this.radRXPostProcessed.Name = "radRXPostProcessed";
-            this.radRXPostProcessed.Size = new System.Drawing.Size(144, 24);
-            this.radRXPostProcessed.TabIndex = 1;
-            this.radRXPostProcessed.TabStop = true;
-            this.radRXPostProcessed.Text = "Receiver Output Audio";
-            this.toolTip1.SetToolTip(this.radRXPostProcessed, "The demodulated filtered audio you listen to.");
-            this.radRXPostProcessed.CheckedChanged += new System.EventHandler(this.radRXPostProcessed_CheckedChanged);
-            // 
-            // radRXPreProcessed
-            // 
-            this.radRXPreProcessed.Image = null;
-            this.radRXPreProcessed.Location = new System.Drawing.Point(16, 24);
-            this.radRXPreProcessed.Name = "radRXPreProcessed";
-            this.radRXPreProcessed.Size = new System.Drawing.Size(144, 24);
-            this.radRXPreProcessed.TabIndex = 0;
-            this.radRXPreProcessed.Text = "Receiver Input I/Q";
-            this.toolTip1.SetToolTip(this.radRXPreProcessed, "Raw I/Q Data coming from the hardware.");
-            this.radRXPreProcessed.CheckedChanged += new System.EventHandler(this.radRXPreProcessed_CheckedChanged);
             // 
             // grpWaveDither
             // 
@@ -244,6 +164,19 @@ namespace PowerSDR
             0,
             65536});
             // 
+            // chkWaveDither
+            // 
+            this.chkWaveDither.AutoSize = true;
+            this.chkWaveDither.Image = null;
+            this.chkWaveDither.Location = new System.Drawing.Point(6, 19);
+            this.chkWaveDither.Name = "chkWaveDither";
+            this.chkWaveDither.Size = new System.Drawing.Size(59, 17);
+            this.chkWaveDither.TabIndex = 0;
+            this.chkWaveDither.Text = "Enable";
+            this.toolTip1.SetToolTip(this.chkWaveDither, "Enables Dithering for Recording");
+            this.chkWaveDither.UseVisualStyleBackColor = true;
+            this.chkWaveDither.CheckedChanged += new System.EventHandler(this.chkWaveDither_CheckedChanged);
+            // 
             // grpBitDepth
             // 
             this.grpBitDepth.Controls.Add(this.radBitDepth8PCM);
@@ -251,9 +184,9 @@ namespace PowerSDR
             this.grpBitDepth.Controls.Add(this.radBitDepth24PCM);
             this.grpBitDepth.Controls.Add(this.radBitDepth32PCM);
             this.grpBitDepth.Controls.Add(this.radBitDepthIEEE);
-            this.grpBitDepth.Location = new System.Drawing.Point(207, 8);
+            this.grpBitDepth.Location = new System.Drawing.Point(244, 8);
             this.grpBitDepth.Name = "grpBitDepth";
-            this.grpBitDepth.Size = new System.Drawing.Size(168, 106);
+            this.grpBitDepth.Size = new System.Drawing.Size(147, 106);
             this.grpBitDepth.TabIndex = 37;
             this.grpBitDepth.TabStop = false;
             this.grpBitDepth.Text = "Bit Depth";
@@ -320,6 +253,27 @@ namespace PowerSDR
             this.grpAudioSampleRate1.TabStop = false;
             this.grpAudioSampleRate1.Text = "Sample Rate";
             // 
+            // comboSampleRate
+            // 
+            this.comboSampleRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSampleRate.DropDownWidth = 64;
+            this.comboSampleRate.Items.AddRange(new object[] {
+            "1000",
+            "2000",
+            "3000",
+            "6000",
+            "12000",
+            "24000",
+            "48000",
+            "96000",
+            "192000",
+            "384000"});
+            this.comboSampleRate.Location = new System.Drawing.Point(16, 24);
+            this.comboSampleRate.Name = "comboSampleRate";
+            this.comboSampleRate.Size = new System.Drawing.Size(64, 21);
+            this.comboSampleRate.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.comboSampleRate, "Sample Rate -- Range is dependent on selected sound card! ");
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.radTXPostProcessed);
@@ -331,16 +285,78 @@ namespace PowerSDR
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "When Transmitting, Record ...";
             // 
+            // radTXPostProcessed
+            // 
+            this.radTXPostProcessed.Image = null;
+            this.radTXPostProcessed.Location = new System.Drawing.Point(16, 48);
+            this.radTXPostProcessed.Name = "radTXPostProcessed";
+            this.radTXPostProcessed.Size = new System.Drawing.Size(144, 24);
+            this.radTXPostProcessed.TabIndex = 1;
+            this.radTXPostProcessed.Text = "Transmitter Output I/Q";
+            this.toolTip1.SetToolTip(this.radTXPostProcessed, "Transmitter I/Q data outbound to the hardware.");
+            this.radTXPostProcessed.CheckedChanged += new System.EventHandler(this.radTXPostProcessed_CheckedChanged);
+            // 
+            // radTXPreProcessed
+            // 
+            this.radTXPreProcessed.Checked = true;
+            this.radTXPreProcessed.Image = null;
+            this.radTXPreProcessed.Location = new System.Drawing.Point(16, 24);
+            this.radTXPreProcessed.Name = "radTXPreProcessed";
+            this.radTXPreProcessed.Size = new System.Drawing.Size(144, 24);
+            this.radTXPreProcessed.TabIndex = 0;
+            this.radTXPreProcessed.TabStop = true;
+            this.radTXPreProcessed.Text = "MIC Audio";
+            this.toolTip1.SetToolTip(this.radTXPreProcessed, "Raw MIC Audio Input coming from the hardware.");
+            this.radTXPreProcessed.CheckedChanged += new System.EventHandler(this.radTXPreProcessed_CheckedChanged);
+            // 
             // grpReceive
             // 
+            this.grpReceive.Controls.Add(this.chk4Chnl);
             this.grpReceive.Controls.Add(this.radRXPostProcessed);
             this.grpReceive.Controls.Add(this.radRXPreProcessed);
             this.grpReceive.Location = new System.Drawing.Point(8, 8);
             this.grpReceive.Name = "grpReceive";
-            this.grpReceive.Size = new System.Drawing.Size(168, 80);
+            this.grpReceive.Size = new System.Drawing.Size(230, 80);
             this.grpReceive.TabIndex = 0;
             this.grpReceive.TabStop = false;
             this.grpReceive.Text = "When Receiving, Record ...";
+            // 
+            // chk4Chnl
+            // 
+            this.chk4Chnl.AutoSize = true;
+            this.chk4Chnl.Image = null;
+            this.chk4Chnl.Location = new System.Drawing.Point(155, 29);
+            this.chk4Chnl.Name = "chk4Chnl";
+            this.chk4Chnl.Size = new System.Drawing.Size(56, 17);
+            this.chk4Chnl.TabIndex = 2;
+            this.chk4Chnl.Text = "4-Chnl";
+            this.toolTip1.SetToolTip(this.chk4Chnl, "Enables Recording of 4 channel I/Q");
+            this.chk4Chnl.UseVisualStyleBackColor = true;
+            this.chk4Chnl.CheckedChanged += new System.EventHandler(this.chk4Chnl_CheckedChanged);
+            // 
+            // radRXPostProcessed
+            // 
+            this.radRXPostProcessed.Checked = true;
+            this.radRXPostProcessed.Image = null;
+            this.radRXPostProcessed.Location = new System.Drawing.Point(16, 48);
+            this.radRXPostProcessed.Name = "radRXPostProcessed";
+            this.radRXPostProcessed.Size = new System.Drawing.Size(144, 24);
+            this.radRXPostProcessed.TabIndex = 1;
+            this.radRXPostProcessed.TabStop = true;
+            this.radRXPostProcessed.Text = "Receiver Output Audio";
+            this.toolTip1.SetToolTip(this.radRXPostProcessed, "The demodulated filtered audio you listen to.");
+            this.radRXPostProcessed.CheckedChanged += new System.EventHandler(this.radRXPostProcessed_CheckedChanged);
+            // 
+            // radRXPreProcessed
+            // 
+            this.radRXPreProcessed.Image = null;
+            this.radRXPreProcessed.Location = new System.Drawing.Point(16, 24);
+            this.radRXPreProcessed.Name = "radRXPreProcessed";
+            this.radRXPreProcessed.Size = new System.Drawing.Size(133, 24);
+            this.radRXPreProcessed.TabIndex = 0;
+            this.radRXPreProcessed.Text = "Receiver Input I/Q";
+            this.toolTip1.SetToolTip(this.radRXPreProcessed, "Raw I/Q Data coming from the hardware.");
+            this.radRXPreProcessed.CheckedChanged += new System.EventHandler(this.radRXPreProcessed_CheckedChanged);
             // 
             // WaveOptions
             // 
@@ -361,6 +377,7 @@ namespace PowerSDR
             this.grpAudioSampleRate1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.grpReceive.ResumeLayout(false);
+            this.grpReceive.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -469,6 +486,11 @@ namespace PowerSDR
                 WaveFileWriter.dither = true;
             else
                 WaveFileWriter.dither = false;
+        }
+
+        private void chk4Chnl_CheckedChanged(object sender, System.EventArgs e)
+        {
+            Audio.WriteQuad = chk4Chnl.Checked;
         }
 	}
 }

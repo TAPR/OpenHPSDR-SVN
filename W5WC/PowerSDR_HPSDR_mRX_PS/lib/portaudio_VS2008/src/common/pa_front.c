@@ -383,7 +383,7 @@ const char *Pa_GetErrorText( PaError errorCode )
     case paNotInitialized:           result = "PortAudio not initialized"; break;
     /** @todo could catenate the last host error text to result in the case of paUnanticipatedHostError */
     case paUnanticipatedHostError:   result = "Unanticipated host error"; break;
-    case paInvalidChannelCount:      result = "Invalid number of channels"; break;
+    case paInvalidChannelCount:      result = "Invalid number of channels, \nTry connecting a microphone to your computer’s sound card"; break;
     case paInvalidSampleRate:        result = "Invalid sample rate"; break;
     case paInvalidDevice:            result = "Invalid device"; break;
     case paInvalidFlag:              result = "Invalid flag"; break;

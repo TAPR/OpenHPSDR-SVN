@@ -118,6 +118,10 @@ struct _rxa
 	} anr;
 	struct
 	{
+		EMNR p;
+	} emnr;
+	struct
+	{
 		WCPAGC p;
 	} agc;
 	struct
