@@ -143,7 +143,7 @@ void PowerSpectrum::ProcessSpectrum(CPX &in, int size, int maxCnt) {
 				tmpCPX[i] = MultCPX(dataCPX.at(i), windowCPX.at(i));
 
 			m_mutex.lock();
-			m_fft->DoFFTWMagnForward(tmpCPX, m_size * 2, m_baseline, m_correction, m_fPsdBm);
+            m_fft->DoFFTWMagnForward((cufftComplex *) tmpCPX.data(), m_size * 2, m_baseline, m_correction, m_fPsdBm);
 			m_mutex.unlock();
 		}
 

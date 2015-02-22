@@ -2031,7 +2031,7 @@ void DataEngine::processFileBuffer(const QList<qreal> buffer) {
 
 	if (m_rxSamples == 2*BUFFER_SIZE) {
 
-		m_chirpDspEngine->fft->DoFFTWForward(cpxIn, cpxOut, 2*BUFFER_SIZE);
+        m_chirpDspEngine->fft->DoFFTWForward((cufftComplex *) cpxIn.data(), (cufftComplex *) cpxOut.data(), 2*BUFFER_SIZE);
 
 		// reorder the spectrum buffer
 		for (int i = 0; i < BUFFER_SIZE; i++) {
@@ -3722,7 +3722,7 @@ void WideBandDataProcessor::processWideBandInputBuffer(const QByteArray &buffer)
 		cpxWBIn[i/2].im = sample * io->wbWindow.at(i/2);
 	}
 
-	wbFFT->DoFFTWForward(cpxWBIn, cpxWBOut, size/2);
+    wbFFT->DoFFTWForward((cufftComplex *) cpxWBIn.data(), (cufftComplex *) cpxWBOut.data(), size/2);
 
 	// averaging
 	QVector<float> specBuf(size/4);

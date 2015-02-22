@@ -109,9 +109,9 @@ void QFilter::ProcessFilter(CPX &in, CPX &out, int bsize) {
 	Q_UNUSED (bsize)
 
 	memcpy(tmp0.data(), in.data(), sizeof(cpx) * m_size);
-    ovlpfft->DoFFTWForward(tmp0, tmp1, m_size * 2);
+    ovlpfft->DoFFTWForward((cufftComplex *) tmp0.data(), (cufftComplex *) tmp1.data(), m_size * 2);
     DoConvolutionCPX();
-    ovlpfft->DoFFTWInverse(tmp0, tmp1, m_size * 2);
+    ovlpfft->DoFFTWInverse((cufftComplex *) tmp0.data(), (cufftComplex *) tmp1.data(), m_size * 2);
 
     if (m_streamMode) {
 
@@ -146,7 +146,7 @@ void QFilter::ProcessForwardFilter(CPX &in, CPX &out, int bsize) {
 
 	//memcpy(tmp0, in, sizeof(CPX) * m_size);
 	memcpy(tmp0.data(), in.data(), sizeof(cpx) * m_size);
-    ovlpfft->DoFFTWForward(tmp0, tmp1, m_size * 2);
+    ovlpfft->DoFFTWForward((cufftComplex *) tmp0.data(), (cufftComplex *) tmp1.data(), m_size * 2);
 
     DoConvolutionCPX();
     //ovlpfft->DoFFTWInverse(tmp0, tmp1, m_size * 2);
@@ -176,9 +176,9 @@ int QFilter::ProcessAndDecimate(CPX &in, CPX &out, int bsize) {
 	tmp1.resize(m_size * 2);
 	tmp0.resize(m_size);
 
-    ovlpfft->DoFFTWForward(tmp0, tmp1, m_size * 2);
+    ovlpfft->DoFFTWForward((cufftComplex *) tmp0.data(), (cufftComplex *) tmp1.data(), m_size * 2);
     DoConvolutionCPX();
-    ovlpfft->DoFFTWInverse(tmp0, tmp1, m_size * 2);
+    ovlpfft->DoFFTWInverse((cufftComplex *) tmp0.data(), (cufftComplex *) tmp1.data(), m_size * 2);
 
     if (m_streamMode) {
 		
@@ -338,7 +338,7 @@ void QFilter::MakeFilter(const float lo, const float hi, const int ftype = 2, co
 
     mutex.lock();
     //filtfft->DoFFTWForward(tmpfilt0, tmpfilt1, m_size * 2);
-	filtfft->DoFFTWForward(tmpfilt0, filter, m_size * 2);
+    filtfft->DoFFTWForward((cufftComplex *) tmpfilt0.data(), (cufftComplex *) filter.data(), m_size * 2);
 
 	for (int i = 0; i < m_size * 2; i++) {
 

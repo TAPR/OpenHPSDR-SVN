@@ -283,7 +283,7 @@ void ChirpProcessor::matchedFilterFIRFilter(QList<qreal> data) {
 	}
 
 	// map rx signal to the frequency domain
-	m_matchedFFT->DoFFTWForward(m_cpxInFilt, m_cpxRxFFT, FULL_BUFFERSIZE);
+    m_matchedFFT->DoFFTWForward((cufftComplex *) m_cpxInFilt.data(), (cufftComplex *) m_cpxRxFFT.data(), FULL_BUFFERSIZE);
 	
 	// multiply the chirp signal with the complex conjugate of the received signal
 	for (int i = 0; i < FULL_BUFFERSIZE; i++) {
@@ -302,7 +302,7 @@ void ChirpProcessor::matchedFilterFIRFilter(QList<qreal> data) {
 	}
 	
 	// map back to time domain
-	m_matchedFFT->DoFFTWInverse(m_tmp1, m_cpxOut, FULL_BUFFERSIZE);
+    m_matchedFFT->DoFFTWInverse((cufftComplex *) m_tmp1.data(), (cufftComplex *) m_cpxOut.data(), FULL_BUFFERSIZE);
 	
 	float max = -1000;
 	float min = 1000;
@@ -464,7 +464,7 @@ void ChirpProcessor::generateLocalChirp() {
 	//m_filter->ProcessFilter(m_cpxChirpTmp, m_cpxChirpIn, FULL_BUFFERSIZE);
 
 	// transform chirp signal to frequency domain
-	m_chirpFFT->DoFFTWForward(m_cpxChirpIn, m_cpxChirpOut, FULL_BUFFERSIZE);
+    m_chirpFFT->DoFFTWForward((cufftComplex *) m_cpxChirpIn.data(), (cufftComplex *) m_cpxChirpOut.data(), FULL_BUFFERSIZE);
 
 	float dur = set->getChirpBufferDurationUs() / 1000.0f;
 

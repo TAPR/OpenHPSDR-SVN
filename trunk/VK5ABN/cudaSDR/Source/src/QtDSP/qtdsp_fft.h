@@ -29,36 +29,37 @@
 #ifndef _QTDSP_FFT_H
 #define	_QTDSP_FFT_H
 
-#include <QObject>
+//#include <QObject>
 
 #include <cmath>
 #include <cufftw.h>
 #include <cuda_runtime.h>
-#include "qtdsp_qComplex.h"
+//#include "qtdsp_qComplex.h"
 
 
-class QFFT : public QObject {
-
-	Q_OBJECT
+//class QFFT : public QObject {
+class QFFT {
 
 public:
     QFFT(int size = 0);
     ~QFFT();
 
-public slots:
-    void DoFFTWForward(CPX &in, CPX &out, int size);
-    void DoFFTWInverse(CPX &in, CPX &out, int size);
-    void DoFFTWMagnForward(CPX &in, int size, float baseline, float correction, float* fbr);
+    void DoFFTWForward(cufftComplex *in, cufftComplex *out, int size);
+    void DoFFTWInverse(cufftComplex *in, cufftComplex *out, int size);
+    void DoFFTWMagnForward(cufftComplex *in, int size, float baseline, float correction, float* fbr);
+
+    float magCPX(cufftComplex in);
+    float sqrtMagCPX(cufftComplex in);
+    float pwrMagCPX(cufftComplex in);
 
 private:    
-    cufftComplex	*cpxbuf;
+    cufftComplex	*cpxbuf1, *cpxbuf2;
 
-    cudaStream_t stream1, stream2;
+    cudaStream_t stream1, stream2, stream3;
 
     cufftHandle		plan_fwd;
     cufftHandle		plan_rev;
-
-    CPX		buf;
+    cufftHandle     plan_mag;
 
     int		m_size;
     int		half_sz;
