@@ -173,7 +173,7 @@ void SpectrumAnalyserThread::calculateTotalSpectrum(const QByteArray &buffer, in
 		}
 
 		// calculate the FFT
-		m_fft->DoFFTWForward(m_cpxInput, m_cpxOutput, SpectrumLengthSamples);
+        m_fft->DoFFTWForward((cufftComplex *) m_cpxInput.data(), (cufftComplex *) m_cpxOutput.data(), SpectrumLengthSamples);
 
 		/*for (int i = 0; i < BUFFER_SIZE; i += 32) {
 			qDebug() << "m_cpxOutput.re =" << m_cpxOutput[i].re << "m_cpxOutput.im =" << m_cpxOutput[i].im;
@@ -225,7 +225,7 @@ void SpectrumAnalyserThread::calculateSpectrum(const QByteArray &buffer, int inp
     }
 
     // Calculate the FFT
-    m_fft->DoFFTWForward(m_cpxInput, m_cpxOutput, SpectrumLengthSamples);
+    m_fft->DoFFTWForward((cufftComplex *) m_cpxInput.data(), (cufftComplex *) m_cpxOutput.data(), SpectrumLengthSamples);
 
     // Analyze output to obtain amplitude and phase for each frequency
     for (int i = 2; i <= m_numSamples / 2; ++i) {
