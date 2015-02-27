@@ -97,7 +97,6 @@ SOURCES += \
 	./src/QtDSP/qtdsp_demodulation.cpp \
 	./src/QtDSP/qtdsp_dspEngine.cpp \
 	./src/QtDSP/qtdsp_dualModeAverager.cpp \
-	./src/QtDSP/qtdsp_fft.cpp \
 	./src/QtDSP/qtdsp_filter.cpp \
 	./src/QtDSP/qtdsp_powerSpectrum.cpp \
 	./src/QtDSP/qtdsp_signalMeter.cpp \
@@ -137,3 +136,11 @@ SOURCES += \
         ./src/Util/cusdr_cpuUsage_unix.cpp
 
 #win32:SOURCES += ./src/Util/cusdr_cpuUsage.cpp \
+
+
+# Cuda sources
+OTHER_FILES += \
+        ./src/QtDSP/qtdsp_fft.cu
+
+CUDA_SOURCES += \
+        ./src/QtDSP/qtdsp_fft.cu

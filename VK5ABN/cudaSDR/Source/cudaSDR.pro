@@ -31,20 +31,21 @@ RESOURCES += res/cusdr.qrc
 
 unix {
     CUDA_DIR = $$system(which nvcc | sed 's,/bin/nvcc$,,')
+    CUDA_ARCH = sm_30
 
 x86_64 { HOST_ARCH = x86_64-linux }
 armv7l { HOST_ARCH = armv7-linux-gnueabihf }
 
     INCLUDEPATH += \
         ./ \
-        src/ \
-        src/AudioEngine \
-        src/CL \
-        src/Cuda \
-        src/DataEngine \
-        src/GL \
-        src/QtDSP \
-        src/Util \
+        $$PWD/src/ \
+        $$PWD/src/AudioEngine \
+        $$PWD/src/CL \
+        $$PWD/src/Cuda \
+        $$PWD/src/DataEngine \
+        $$PWD/src/GL \
+        $$PWD/src/QtDSP \
+        $$PWD/src/Util \
         $$CUDA_DIR/targets/$$HOST_ARCH/include
 
     LIBS += \
@@ -52,6 +53,20 @@ armv7l { HOST_ARCH = armv7-linux-gnueabihf }
         -lcufftw \
         -lcufft \
         -L$$CUDA_DIR/targets/$$HOST_ARCH/lib
+
+    CUDA_INC = $$join(INCLUDEPATH,' -I','-I',' ')
+
+    NVCCFLAGS = --compiler-options -fno-strict-aliasing -use_fast_math --ptxas-options=-v
+
+    cuda.commands = $$CUDA_DIR/bin/nvcc -m64 -O3 -arch=$$CUDA_ARCH -c $$NVCCFLAGS \
+                    $$CUDA_INC $$LIBS  ${QMAKE_FILE_NAME} -o ${QMAKE_FILE_OUT}
+
+    cuda.dependency_type = TYPE_C
+    cuda.depend_command = $$CUDA_DIR/bin/nvcc -O3 -M $$CUDA_INC $$NVCCFLAGS ${QMAKE_FILE_NAME}
+    cuda.input = CUDA_SOURCES
+    cuda.output = ${OBJECTS_DIR}${QMAKE_FILE_BASE}.o
+
+    QMAKE_EXTRA_COMPILERS += cuda
 }
 
 # ********************************************************
