@@ -52,8 +52,8 @@ public:
     float sqrtMagCPX(cufftComplex in);
     float pwrMagCPX(cufftComplex in);
 
-private:    
-    cufftComplex	*cpxbuf1, *cpxbuf2;
+private:
+    cufftComplex	*cpxbuf1, *cpxbuf2, *cpxbuf3;
 
     cudaStream_t stream1, stream2, stream3;
 
@@ -64,5 +64,7 @@ private:
     int		m_size;
     int		half_sz;
 };
+
+__global__ void pwrCPX(cufftComplex *in);
 
 #endif	// _QTDSP_FFT_H

@@ -38,8 +38,9 @@ QFFT::QFFT(int size)
     m_size = size;
     half_sz = size/2;
 
-    checkCudaErrors(cudaMallocHost((void **) &cpxbuf1, sizeof(cufftComplex) * m_size));
-    checkCudaErrors(cudaMallocHost((void **) &cpxbuf2, sizeof(cufftComplex) * m_size));
+    checkCudaErrors(cudaMallocManaged((void **) &cpxbuf1, sizeof(cufftComplex) * m_size));
+    checkCudaErrors(cudaMallocManaged((void **) &cpxbuf2, sizeof(cufftComplex) * m_size));
+    checkCudaErrors(cudaMallocManaged((void **) &cpxbuf3, sizeof(cufftComplex) * m_size));
 
     checkCudaErrors(cudaMemset(cpxbuf1, 0, m_size * sizeof(cufftComplex)));
     checkCudaErrors(cudaMemset(cpxbuf2, 0, m_size * sizeof(cufftComplex)));
@@ -52,9 +53,18 @@ QFFT::QFFT(int size)
     checkCudaErrors(cufftPlan1d(&plan_rev, m_size, CUFFT_C2C, 1));
     checkCudaErrors(cufftPlan1d(&plan_mag, m_size, CUFFT_C2C, 1));
 
+    size_t work_size;
+    checkCudaErrors(cufftMakePlan1d(plan_fwd, m_size, CUFFT_C2C, 1, &work_size));
+    checkCudaErrors(cufftMakePlan1d(plan_rev, m_size, CUFFT_C2C, 1, &work_size));
+    checkCudaErrors(cufftMakePlan1d(plan_mag, m_size, CUFFT_C2C, 1, &work_size));
+
     checkCudaErrors(cufftSetStream(plan_fwd, stream1));
     checkCudaErrors(cufftSetStream(plan_rev, stream2));
     checkCudaErrors(cufftSetStream(plan_mag, stream3));
+
+    checkCudaErrors(cudaStreamAttachMemAsync(stream1, cpxbuf1, 0, cudaMemAttachSingle));
+    checkCudaErrors(cudaStreamAttachMemAsync(stream2, cpxbuf2, 0, cudaMemAttachSingle));
+    checkCudaErrors(cudaStreamAttachMemAsync(stream3, cpxbuf3, 0, cudaMemAttachSingle));
 }
 
 QFFT::~QFFT() {
@@ -71,15 +81,16 @@ QFFT::~QFFT() {
     checkCudaErrors(cufftDestroy(plan_rev));
     checkCudaErrors(cufftDestroy(plan_mag));
 
-    checkCudaErrors(cudaFreeHost(cpxbuf1));
-    checkCudaErrors(cudaFreeHost(cpxbuf2));
+    checkCudaErrors(cudaFree(cpxbuf1));
+    checkCudaErrors(cudaFree(cpxbuf2));
+    checkCudaErrors(cudaFree(cpxbuf3));
 }
 
 void QFFT::DoFFTWForward(cufftComplex *in, cufftComplex *out, int size) {
 
     checkCudaErrors(cudaMemcpyAsync(cpxbuf1, in, sizeof(cufftComplex) * size, cudaMemcpyHostToDevice, stream1));
-    checkCudaErrors(cufftExecC2C(plan_fwd, cpxbuf1, cpxbuf2, CUFFT_FORWARD));
-    checkCudaErrors(cudaMemcpyAsync(out, cpxbuf2, sizeof(cufftComplex) * size, cudaMemcpyDeviceToHost, stream1));
+    checkCudaErrors(cufftExecC2C(plan_fwd, cpxbuf1, cpxbuf1, CUFFT_FORWARD));
+    checkCudaErrors(cudaMemcpyAsync(out, cpxbuf1, sizeof(cufftComplex) * size, cudaMemcpyDeviceToHost, stream1));
     checkCudaErrors(cudaDeviceSynchronize());
     checkCudaErrors(cudaStreamSynchronize(stream1));
 }
@@ -87,8 +98,8 @@ void QFFT::DoFFTWForward(cufftComplex *in, cufftComplex *out, int size) {
 
 void QFFT::DoFFTWInverse(cufftComplex *in, cufftComplex *out, int size)  {
 
-    checkCudaErrors(cudaMemcpyAsync(cpxbuf1, in, sizeof(cufftComplex) * size, cudaMemcpyHostToDevice, stream2));
-    checkCudaErrors(cufftExecC2C(plan_rev, cpxbuf1, cpxbuf2, CUFFT_INVERSE));
+    checkCudaErrors(cudaMemcpyAsync(cpxbuf2, in, sizeof(cufftComplex) * size, cudaMemcpyHostToDevice, stream2));
+    checkCudaErrors(cufftExecC2C(plan_rev, cpxbuf2, cpxbuf2, CUFFT_INVERSE));
     checkCudaErrors(cudaMemcpyAsync(out, cpxbuf2, sizeof(cufftComplex) * size, cudaMemcpyDeviceToHost, stream2));
     checkCudaErrors(cudaDeviceSynchronize());
     checkCudaErrors(cudaStreamSynchronize(stream2));
@@ -97,8 +108,8 @@ void QFFT::DoFFTWInverse(cufftComplex *in, cufftComplex *out, int size)  {
 
 void QFFT::DoFFTWMagnForward(cufftComplex *in, int size, float baseline, float correction, float *fbr) {
 
-    checkCudaErrors(cudaMemcpyAsync(cpxbuf1, in, sizeof(cufftComplex) * size, cudaMemcpyHostToDevice, stream3));
-    checkCudaErrors(cufftExecC2C(plan_mag, cpxbuf1, cpxbuf2, CUFFT_FORWARD));
+    checkCudaErrors(cudaMemcpyAsync(cpxbuf3, in, sizeof(cufftComplex) * size, cudaMemcpyHostToDevice, stream3));
+    checkCudaErrors(cufftExecC2C(plan_mag, cpxbuf3, cpxbuf3, CUFFT_FORWARD));
     checkCudaErrors(cudaDeviceSynchronize());
     checkCudaErrors(cudaStreamSynchronize(stream3));
 
@@ -115,22 +126,12 @@ void QFFT::DoFFTWMagnForward(cufftComplex *in, int size, float baseline, float c
 */
     for (int i = size - 1, j = half_sz - 1; i > half_sz - 1; i--, j--) {
 
-        *(fbr+size-i-1) = (pwrMagCPX(cpxbuf2[j])) + correction ;
-        *(fbr+size-j-1) = (pwrMagCPX(cpxbuf2[i])) + correction ;
+        *(fbr+size-i-1) = (pwrMagCPX(cpxbuf3[j])) + correction ;
+        *(fbr+size-j-1) = (pwrMagCPX(cpxbuf3[i])) + correction ;
     }
 }
 
-float QFFT::magCPX(cufftComplex in)
-{
-    return in.x * in.x + in.y * in.y;
-}
-
-float QFFT::sqrtMagCPX(cufftComplex in)
-{
-    return sqrt(in.x * in.x + in.y * in.y);
-}
-
-float QFFT::pwrMagCPX(cufftComplex in)
+__device__ __host__ inline float QFFT::pwrMagCPX(cufftComplex in)
 {
     return 10* log10((in.x * in.x + in.y * in.y));
 }
