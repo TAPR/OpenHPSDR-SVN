@@ -135,3 +135,8 @@ __device__ __host__ inline float QFFT::pwrMagCPX(cufftComplex in)
 {
     return 10* log10((in.x * in.x + in.y * in.y));
 }
+
+__global__ void pwrCPX(cufftComplex *in)
+{
+
+}
