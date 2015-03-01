@@ -50,7 +50,7 @@ public:
 
     float magCPX(cufftComplex in);
     float sqrtMagCPX(cufftComplex in);
-    float pwrMagCPX(cufftComplex in);
+__device__ __host__ inline float pwrMagCPX(cufftComplex in);
 
 private:
     cufftComplex	*cpxbuf1, *cpxbuf2, *cpxbuf3;
