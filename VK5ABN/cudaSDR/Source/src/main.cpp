@@ -88,66 +88,6 @@ void cuSDRMessageHandler(QtMsgType type, const QMessageLogContext &context, cons
     ts << txt << endl << flush;
 }
 
-static void my_fftw_write_char(char c, void *f) { fputc(c, (FILE *) f); }
-#define fftw_export_wisdom_to_file(f) fftw_export_wisdom(my_fftw_write_char, (void*) (f))
-#define fftwf_export_wisdom_to_file(f) fftwf_export_wisdom(my_fftw_write_char, (void*) (f))
-#define fftwl_export_wisdom_to_file(f) fftwl_export_wisdom(my_fftw_write_char, (void*) (f))
-
-static int my_fftw_read_char(void *f) { return fgetc((FILE *) f); }
-#define fftw_import_wisdom_from_file(f) fftw_import_wisdom(my_fftw_read_char, (void*) (f))
-#define fftwf_import_wisdom_from_file(f) fftwf_import_wisdom(my_fftw_read_char, (void*) (f))
-#define fftwl_import_wisdom_from_file(f) fftwl_import_wisdom(my_fftw_read_char, (void*) (f))
-
-void runFFTWWisdom() {
-
-	QString directory = QDir::currentPath();
-	
-	QDir currentDir = QDir(directory);
-	qDebug() << currentDir;
-	
-	if (currentDir.exists("wisdom")) {
-	
-		qDebug() << "wisdom exists !";
-		return;
-	}
-	else {
-	
-		qDebug() << "wisdom does not exist - planning FFT...";
-
-		/*const char* wisdom_file = "wisdom";
-		if (!fftw_import_wisdom_from_file(wisdom_file)) {
-
-			int size = 64;
-		
-			QString str = "Planning FFT size %1";
-
-			fftwf_complex* cpxbuf;
-			fftwf_plan plan_fwd;
-			fftwf_plan plan_rev;
-
-			while (size <= MAX_FFTSIZE) {
-
-				qDebug() << str.arg(size);
-				cpxbuf = (fftwf_complex *) fftwf_malloc(sizeof(fftwf_complex) * size);
-			
-				plan_fwd = fftwf_plan_dft_1d(size , cpxbuf, cpxbuf, FFTW_FORWARD, FFTW_PATIENT);
-				fftwf_execute(plan_fwd);
-				fftwf_destroy_plan(plan_fwd);
-
-				plan_rev = fftwf_plan_dft_1d(size, cpxbuf, cpxbuf, FFTW_BACKWARD, FFTW_PATIENT);
-				fftwf_execute(plan_rev);
-				fftwf_destroy_plan(plan_rev);
-
-				size *= 2;
-			}
-			fftw_export_wisdom_to_file(wisdom_file);
-		}*/
-		//QProcess process;
-		//process.start("fftwf-wisdom.exe");
-		//process.waitForFinished();
-	}
-}
-
 int main(int argc, char *argv[]) {
 
 	#ifndef DEBUG
