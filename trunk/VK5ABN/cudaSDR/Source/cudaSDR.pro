@@ -58,7 +58,7 @@ armv7l { HOST_ARCH = armv7-linux-gnueabihf }
 
     NVCCFLAGS = --compiler-options -fno-strict-aliasing -use_fast_math --ptxas-options=-v
 
-    cuda.commands = $$CUDA_DIR/bin/nvcc -m64 -O3 -arch=$$CUDA_ARCH -c $$NVCCFLAGS \
+    cuda.commands = $$CUDA_DIR/bin/nvcc -O3 -arch=$$CUDA_ARCH -c $$NVCCFLAGS \
                     $$CUDA_INC $$LIBS  ${QMAKE_FILE_NAME} -o ${QMAKE_FILE_OUT}
 
     cuda.dependency_type = TYPE_C
