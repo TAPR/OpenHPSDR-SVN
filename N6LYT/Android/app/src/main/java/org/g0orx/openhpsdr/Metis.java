@@ -10,6 +10,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
+import org.g0orx.openhpsdr.discovery.Discovered;
 import org.g0orx.openhpsdr.modes.Modes;
 import org.g0orx.openhpsdr.wdsp.WDSP;
 
@@ -19,117 +20,116 @@ import android.media.AudioTrack;
 import android.util.Log;
 
 public class Metis extends Thread {
-	
-	public Metis(int pixels, boolean bandscope) {
 
-        Log.i("Metis","pixels="+pixels+" bandscope="+bandscope);
-        this.bandscope=bandscope;
+    public Metis(int pixels, boolean bandscope) {
 
-		configuration=Configuration.getInstance();
+        Log.i("Metis", "pixels=" + pixels + " bandscope=" + bandscope);
+        this.bandscope = bandscope;
 
-		this.wdsp=WDSP.getInstance();
-		
-		txcontrol1=(byte)(CONFIG_BOTH | MIC_SOURCE_PENELOPE | configuration.clock10 | configuration.clock122);
-		txcontrol3=(byte)(ALEX_ATTENUATION_0DB | configuration.dither | configuration.random | configuration.preamp);
-        txcontrol4=(byte)(DUPLEX | (((receivers-1)<<3)&0x038));
+        configuration = Configuration.getInstance();
 
-		// allocate space for the input/output samples
-		inlsamples=new float[configuration.fftsize];
-		inrsamples=new float[configuration.fftsize];
-		inmiclsamples=new float[configuration.fftsize];
-        inmicrsamples=new float[configuration.fftsize];
-		outlsamples=new float[configuration.fftsize];
-		outrsamples=new float[configuration.fftsize];
-		suboutlsamples=new float[configuration.fftsize];
-		suboutrsamples=new float[configuration.fftsize];
+        this.wdsp = WDSP.getInstance();
 
-        bslsamples=new float[configuration.fftsize];
-        bsrsamples=new float[configuration.fftsize];
-        for(int i=0;i<configuration.fftsize;i++) {
-            bsrsamples[i]=0.0F;
-        }
-		
+        txcontrol1 = (byte) (CONFIG_BOTH | MIC_SOURCE_PENELOPE | configuration.clock10 | configuration.clock122);
+        txcontrol3 = (byte) (ALEX_ATTENUATION_0DB | configuration.dither | configuration.random | configuration.preamp);
+        txcontrol4 = (byte) (DUPLEX | (((receivers - 1) << 3) & 0x038));
 
-		// calculate speed and increment
-		if(configuration.samplerate==48000.0) {
-			increment=1;
-			audioincrement=1;
-			txcontrol1|=SPEED_48KHZ;
-		} else if(configuration.samplerate==96000.0) {
-			increment=2;
-			audioincrement=2;
-			txcontrol1|=SPEED_96KHZ;
-		} else if(configuration.samplerate==192000.0) {
-			increment=4;
-			audioincrement=4;
-			txcontrol1|=SPEED_192KHZ;
-		} else if(configuration.samplerate==384000.0) {
-			increment=8;
-			audioincrement=8;
-			txcontrol1|=SPEED_384KHZ;
-		}
-		
-		// build the toaddress InetAddress
-		try {
-		    toaddress = InetAddress.getByName(configuration.discovered.getAddress());
-		} catch (Exception e) {
-			Log.i("Metis","constructor: "+e.toString());
-		}
+        // allocate space for the input/output samples
+        inlsamples = new float[configuration.fftsize];
+        inrsamples = new float[configuration.fftsize];
+        inmiclsamples = new float[configuration.fftsize];
+        inmicrsamples = new float[configuration.fftsize];
+        outlsamples = new float[configuration.fftsize];
+        outrsamples = new float[configuration.fftsize];
+        suboutlsamples = new float[configuration.fftsize];
+        suboutrsamples = new float[configuration.fftsize];
 
-		// create the DatagramPackets for commands and samples
-		commanddatagram = new DatagramPacket(commandbuffer,commandbuffer.length,toaddress,toport);
-		samplesdatagram = new DatagramPacket(sendbuffer, sendbuffer.length, toaddress, toport);
-		
-		try {
-			audiotrack = new AudioTrack(AudioManager.STREAM_MUSIC, 48000,
-					AudioFormat.CHANNEL_OUT_STEREO,
-					AudioFormat.ENCODING_PCM_16BIT, 1024,
-					AudioTrack.MODE_STREAM);
-		} catch (IllegalArgumentException e) {
-			Log.i("Metis","new AudioTrack Error: "+e.getMessage());
-			audiotrack=null;
-		}
-		
-		// Calculate sample values for baseband CW note^M
-        double deltaf=Math.PI/40.0;     // (2 PI f / 48k) gives an 600 Hz note at 48 ksps
-        for(int i=0;i<240;++i)
-        {
-            cwnotesin[i] = (float)((Math.pow(2, 15) - 1) * Math.sin(deltaf * i) / 32767.0);
-            cwnotecos[i] = (float)((Math.pow(2, 15) - 1) * Math.cos(deltaf * i) / 32767.0);
+        bslsamples = new float[configuration.fftsize];
+        bsrsamples = new float[configuration.fftsize];
+        for (int i = 0; i < configuration.fftsize; i++) {
+            bsrsamples[i] = 0.0F;
         }
 
-        if(audiotrack!=null) {
+
+        // calculate speed and increment
+        if (configuration.samplerate == 48000.0) {
+            increment = 1;
+            audioincrement = 1;
+            txcontrol1 |= SPEED_48KHZ;
+        } else if (configuration.samplerate == 96000.0) {
+            increment = 2;
+            audioincrement = 2;
+            txcontrol1 |= SPEED_96KHZ;
+        } else if (configuration.samplerate == 192000.0) {
+            increment = 4;
+            audioincrement = 4;
+            txcontrol1 |= SPEED_192KHZ;
+        } else if (configuration.samplerate == 384000.0) {
+            increment = 8;
+            audioincrement = 8;
+            txcontrol1 |= SPEED_384KHZ;
+        }
+
+        // build the toaddress InetAddress
+        try {
+            toaddress = InetAddress.getByName(configuration.discovered.getAddress());
+        } catch (Exception e) {
+            Log.i("Metis", "constructor: " + e.toString());
+        }
+
+        // create the DatagramPackets for commands and samples
+        commanddatagram = new DatagramPacket(commandbuffer, commandbuffer.length, toaddress, toport);
+        samplesdatagram = new DatagramPacket(sendbuffer, sendbuffer.length, toaddress, toport);
+
+        try {
+            audiotrack = new AudioTrack(AudioManager.STREAM_MUSIC, 48000,
+                    AudioFormat.CHANNEL_OUT_STEREO,
+                    AudioFormat.ENCODING_PCM_16BIT, 1024,
+                    AudioTrack.MODE_STREAM);
+        } catch (IllegalArgumentException e) {
+            Log.i("Metis", "new AudioTrack Error: " + e.getMessage());
+            audiotrack = null;
+        }
+
+        // Calculate sample values for baseband CW note^M
+        double deltaf = Math.PI / 40.0;     // (2 PI f / 48k) gives an 600 Hz note at 48 ksps
+        for (int i = 0; i < 240; ++i) {
+            cwnotesin[i] = (float) ((Math.pow(2, 15) - 1) * Math.sin(deltaf * i) / 32767.0);
+            cwnotecos[i] = (float) ((Math.pow(2, 15) - 1) * Math.cos(deltaf * i) / 32767.0);
+        }
+
+        if (audiotrack != null) {
             audiotrack.play();
         }
 
         // rx spectrum
-        wdsp.XCreateAnalyzer(Display.RX, success, 262144, 1, 1,"");
-        if(success[0]!=0) {
+        wdsp.XCreateAnalyzer(Display.RX, success, 262144, 1, 1, "");
+        if (success[0] != 0) {
             Log.i("Metis", "XCreateAnalyzer Display.RX failed:" + success[0]);
         }
         int flp[] = {0};
-        double KEEP_TIME=0.1;
-        int spur_elimination_ffts=1;
-        int data_type=1;
-        int fft_size=8192;
-        int window_type=4;
-        double kaiser_pi=14.0;
-        int overlap=2048;
-        int clip=0;
-        int span_clip_l=0;
-        int span_clip_h=0;
+        double KEEP_TIME = 0.1;
+        int spur_elimination_ffts = 1;
+        int data_type = 1;
+        int fft_size = 8192;
+        int window_type = 4;
+        double kaiser_pi = 14.0;
+        int overlap = 2048;
+        int clip = 0;
+        int span_clip_l = 0;
+        int span_clip_h = 0;
         //int pixels=1280;
-        int stitches=1;
-        int avm=0;
-        double tau=0.001*120.0;
-        int MAX_AV_FRAMES=60;
-        int display_average = Math.max(2, (int)Math.min((double)MAX_AV_FRAMES, (double)configuration.fps * tau));
+        int stitches = 1;
+        int avm = 0;
+        double tau = 0.001 * 120.0;
+        int MAX_AV_FRAMES = 60;
+        int display_average = Math.max(2, (int) Math.min((double) MAX_AV_FRAMES, (double) configuration.fps * tau));
         double avb = Math.exp(-1.0 / (configuration.fps * tau));
-        int calibration_data_set=0;
-        double span_min_freq=0.0;
-        double span_max_freq=0.0;
+        int calibration_data_set = 0;
+        double span_min_freq = 0.0;
+        double span_max_freq = 0.0;
 
-        int max_w=fft_size + (int)Math.min(KEEP_TIME * (double)configuration.fps, KEEP_TIME * (double)fft_size * (double)configuration.fps);
+        int max_w = fft_size + (int) Math.min(KEEP_TIME * (double) configuration.fps, KEEP_TIME * (double) fft_size * (double) configuration.fps);
 
         wdsp.SetAnalyzer(Display.RX,
                 spur_elimination_ffts,                      //number of LO frequencies = number of ffts used in elimination
@@ -155,8 +155,8 @@ public class Metis extends Thread {
         );
 
         // tx spectrum
-        wdsp.XCreateAnalyzer(Display.TX, success, 262144, 1, 1,"");
-        if(success[0]!=0) {
+        wdsp.XCreateAnalyzer(Display.TX, success, 262144, 1, 1, "");
+        if (success[0] != 0) {
             Log.i("Metis", "XCreateAnalyzer txchannel failed:" + success[0]);
         }
 
@@ -212,8 +212,8 @@ public class Metis extends Thread {
 
 
         // bandscope spectrum
-        wdsp.XCreateAnalyzer(Display.BS, success, 262144, 1, 1,"");
-        if(success[0]!=0) {
+        wdsp.XCreateAnalyzer(Display.BS, success, 262144, 1, 1, "");
+        if (success[0] != 0) {
             Log.i("Metis", "XCreateAnalyzer bschannel failed:" + success[0]);
         }
 
@@ -269,128 +269,133 @@ public class Metis extends Thread {
     }
 
     public void setPTTListener(PTTListener listener) {
-        this.pttListener=listener;
+        this.pttListener = listener;
     }
-	
-	// run the thread to read/write samples from/to Metis
-	public void run() {
-		int status;
-		long sequence;
-		int endpoint;
-		//Log.i("Metis","run: "+this.getName());
-		
-		myaddress=getLocalIpAddress();
-		//Log.i("Metis","run: myAddress:"+myaddress);
-		
-		running=true;
-		
-		time=System.currentTimeMillis();
-		
-		try {
-            InetSocketAddress socketaddress=new InetSocketAddress(myaddress,myport);
-        	
-        	//Log.i("Metis","run: socketaddress: "+socketaddress.toString());
-        	
-        	socket=new DatagramSocket(socketaddress);
-        	socket.setReuseAddress(true);
-        	socket.setBroadcast(true);
-			socket.setSoTimeout(0);
-			InetAddress address = InetAddress.getByName(configuration.discovered.getAddress());
-			rxdatagram = new DatagramPacket(rxbuffer, rxbuffer.length, address, toport);
-			
-			prime();
-			
-			while(running) {
-				socket.receive(rxdatagram);
-				if(rxdatagram.getLength()==1032 && (rxbuffer[0]&0xFF)==0xEF && (rxbuffer[1]&0xFF)==0xFE) {
-					status=rxbuffer[2]&0xFF;
-					if(status==1) {
-						endpoint=rxbuffer[3]&0xFF;
-						if(endpoint==6) {
-							sequence=((rxbuffer[4]&0xFF)<<24)|
-									((rxbuffer[5]&0xFF)<<16)|
-									((rxbuffer[6]&0xFF)<<8)|
-									((rxbuffer[7]&0xFF));
-							packetsreceived++;
-							ep6sequence++;
-							if(sequence!=ep6sequence) {
-								packetsmissed+=(sequence-ep6sequence);
-								//Log.i("Metis","run: EP6 sequence error: expected:"+ep6sequence+" got:"+sequence);
-								ep6sequence=sequence;
-							}
-							demuxBuffer(rxbuffer,8);
-							demuxBuffer(rxbuffer,520);
-						} else if(endpoint==4) {
-							processBandscope(rxbuffer,8);
-                            processBandscope(rxbuffer,520);
-						}
-					} else {
-						Log.i("Metis","run: received unknown status: "+status);
-					}
-				} else {
-					Log.i("Metis","run: received unknown packet: length:"+rxdatagram.getLength());
-					for(int i=0;i<rxdatagram.getLength();i++) {
-						Log.i("Metis", Integer.toString(i)+":"+Integer.toHexString(rxbuffer[i]&0xFF));
-					}
-				}
-			}
 
-		} catch (SocketException se) {
-			Log.i("Metis","run: "+se.toString());
-		} catch (UnknownHostException uhe) {
-			Log.i("Metis","run: "+uhe.toString());
-		} catch (IOException ioe) {
-			Log.i("Metis","run: "+ioe.toString());
-		}
-		
-		//Log.i("Metis","run ending: "+this.getName());
-		
-		if(audiotrack!=null) {
-		    audiotrack.stop();
-		    audiotrack.release();
-		}
+    // run the thread to read/write samples from/to Metis
+    public void run() {
+        int status;
+        long sequence;
+        int endpoint;
+        //Log.i("Metis","run: "+this.getName());
 
-		// send stop command
-		commandbuffer[0]=(byte)0xEF;
-		commandbuffer[1]=(byte)0xFE;
-		commandbuffer[2]=(byte)0x04;
-		commandbuffer[3]=(byte)0x00;
-		for(int i=4;i<64;i++) {
-			commandbuffer[i]=(byte)0x00;
-		}
-		sendCommand();
-		
-		socket.close();
+        myaddress = getLocalIpAddress();
+        //Log.i("Metis","run: myAddress:"+myaddress);
+
+        running = true;
+
+        time = System.currentTimeMillis();
+
+        try {
+            InetSocketAddress socketaddress = new InetSocketAddress(myaddress, myport);
+
+            //Log.i("Metis","run: socketaddress: "+socketaddress.toString());
+
+            socket = new DatagramSocket(socketaddress);
+            socket.setReuseAddress(true);
+            socket.setBroadcast(true);
+            socket.setSoTimeout(0);
+            InetAddress address = InetAddress.getByName(configuration.discovered.getAddress());
+            rxdatagram = new DatagramPacket(rxbuffer, rxbuffer.length, address, toport);
+
+            prime();
+
+            while (running) {
+                socket.receive(rxdatagram);
+                if (rxdatagram.getLength() == 1032 && (rxbuffer[0] & 0xFF) == 0xEF && (rxbuffer[1] & 0xFF) == 0xFE) {
+                    status = rxbuffer[2] & 0xFF;
+                    if (status == 1) {
+                        endpoint = rxbuffer[3] & 0xFF;
+                        if (endpoint == 6) {
+                            sequence = ((rxbuffer[4] & 0xFF) << 24) |
+                                    ((rxbuffer[5] & 0xFF) << 16) |
+                                    ((rxbuffer[6] & 0xFF) << 8) |
+                                    ((rxbuffer[7] & 0xFF));
+                            packetsreceived++;
+                            ep6sequence++;
+                            if (sequence != ep6sequence) {
+                                packetsmissed += (sequence - ep6sequence);
+                                //Log.i("Metis","run: EP6 sequence error: expected:"+ep6sequence+" got:"+sequence);
+                                ep6sequence = sequence;
+                            }
+                            demuxBuffer(rxbuffer, 8);
+                            demuxBuffer(rxbuffer, 520);
+                        } else if (endpoint == 4) {
+                            processBandscope(rxbuffer, 8);
+                            processBandscope(rxbuffer, 520);
+                        }
+                    } else {
+                        Log.i("Metis", "run: received unknown status: " + status);
+                    }
+                } else {
+                    Log.i("Metis", "run: received unknown packet: length:" + rxdatagram.getLength());
+                    for (int i = 0; i < rxdatagram.getLength(); i++) {
+                        Log.i("Metis", Integer.toString(i) + ":" + Integer.toHexString(rxbuffer[i] & 0xFF));
+                    }
+                }
+            }
+
+        } catch (SocketException se) {
+            Log.i("Metis", "run: " + se.toString());
+        } catch (UnknownHostException uhe) {
+            Log.i("Metis", "run: " + uhe.toString());
+        } catch (IOException ioe) {
+            Log.i("Metis", "run: " + ioe.toString());
+        }
+
+        //Log.i("Metis","run ending: "+this.getName());
+
+        if (audiotrack != null) {
+            audiotrack.stop();
+            audiotrack.release();
+        }
+
+        // send stop command
+        commandbuffer[0] = (byte) 0xEF;
+        commandbuffer[1] = (byte) 0xFE;
+        commandbuffer[2] = (byte) 0x04;
+        commandbuffer[3] = (byte) 0x00;
+        for (int i = 4; i < 64; i++) {
+            commandbuffer[i] = (byte) 0x00;
+        }
+        sendCommand();
+
+        socket.close();
 
         wdsp.DestroyAnalyzer(Display.RX);
         wdsp.DestroyAnalyzer(Display.TX);
         wdsp.DestroyAnalyzer(Display.BS);
-	}
-	
-	public void terminate() {
-		running=false;
-	}
-	
-	public boolean isRunning() {
-		return running;
-	}
+    }
+
+    public void terminate() {
+        running = false;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
 
 
     public void setTransmit(boolean transmit, boolean tuning) {
-        Log.i("Metis","setTransmit: transmit="+transmit+" tuning="+tuning);
-        this.transmit=transmit;
-        this.tuning=tuning;
+        Log.i("Metis", "setTransmit: transmit=" + transmit + " tuning=" + tuning);
+        this.transmit = transmit;
+        this.tuning = tuning;
     }
 
-    public boolean isTransmitting() { return this.transmit; }
-    public boolean isTuning() { return this.tuning; }
+    public boolean isTransmitting() {
+        return this.transmit;
+    }
+
+    public boolean isTuning() {
+        return this.tuning;
+    }
 
 
     private void processBandscope(byte[] bytes, int offset) {
-        if(running) {
+        if (running) {
             short sample;
             for (int i = offset; i < offset + 512; i += 2) {
-                sample = (short) ((bytes[i+1] << 8) + (bytes[i] & 0xFF));
+                sample = (short) ((bytes[i + 1] << 8) + (bytes[i] & 0xFF));
                 bslsamples[bsoffset++] = (float) sample / 32767.0F;
                 if (bsoffset == bslsamples.length) {
                     wdsp.Spectrum(Display.BS, 0, 0, bslsamples, bsrsamples);
@@ -400,9 +405,9 @@ public class Metis extends Thread {
         }
     }
 
-	private void demuxBuffer(byte[] bytes,int offset) {
+    private void demuxBuffer(byte[] bytes, int offset) {
 
-        if(running) {
+        if (running) {
             Band band = configuration.bands.get();
             BandStack bandstack = band.get();
             // 512 byte buffer (startig at offset)
@@ -657,92 +662,126 @@ public class Metis extends Thread {
                 }
             }
         }
-	}
-
-    public void sendMicSamples(float[] outlsamples,float[] outrsamples) {
-        //Log.i("Metis","sendMicSamples: "+outlsamples.length);
-        int savedIncrement=increment;
-        increment=1;   // local mic samples are always at 48000
-        sendSamples(outlsamples,outrsamples);
-        increment=savedIncrement;
     }
 
-	public synchronized void sendSamples(float[] outlsamples, float[] outrsamples) {
+    public void sendMicSamples(float[] outlsamples, float[] outrsamples) {
+        //Log.i("Metis","sendMicSamples: "+outlsamples.length);
+        int savedIncrement = increment;
+        increment = 1;   // local mic samples are always at 48000
+        sendSamples(outlsamples, outrsamples);
+        increment = savedIncrement;
+    }
+
+    public synchronized void sendSamples(float[] outlsamples, float[] outrsamples) {
         //Log.i("Metis","sendSamples: "+outlsamples.length);
-        Band band=configuration.bands.get();
-        BandStack bandstack=band.get();
-		float rfgain=1.0F;  // for PENNYLANE
-		if(configuration.radio==Configuration.METIS_PENELOPE || configuration.radio==Configuration.METIS_PENELOPE_ALEX) {
-			rfgain=configuration.rfgain;
-			if(tuning) {
-			    rfgain=configuration.tunegain;
-		    }
-            rfgain=rfgain*configuration.bands.get().getTxGain();
-		}
-	
-		// send data back to Metis
-		for(int j=0;j<outlsamples.length;j=j+increment) {
-			
-			if(transmit) {
-				sendbuffer[txoffset++]=(byte)0; // rx
-				sendbuffer[txoffset++]=(byte)0; // rx
-				sendbuffer[txoffset++]=(byte)0; // rx
-				sendbuffer[txoffset++]=(byte)0; // rx
+        Band band = configuration.bands.get();
+        BandStack bandstack = band.get();
+        float rfgain = 1.0F;  // for PENNYLANE
+        if (configuration.radio == Configuration.METIS_PENELOPE || configuration.radio == Configuration.METIS_PENELOPE_ALEX) {
+            rfgain = configuration.rfgain;
+            if (tuning) {
+                rfgain = configuration.tunegain;
+            }
+            rfgain = rfgain * configuration.bands.get().getTxGain();
+        }
 
-				short l=(short)(outlsamples[j]*32767.0F*rfgain);
-				short r=(short)(outrsamples[j]*32767.0F*rfgain);
-				sendbuffer[txoffset++]=(byte)((l>>8)&0xFF);
-				sendbuffer[txoffset++]=(byte)(l&0xFF);
-				sendbuffer[txoffset++]=(byte)((r>>8)&0xFF);
-				sendbuffer[txoffset++]=(byte)(r&0xFF);
-			} else {
-				short l=(short)(outlsamples[j]*32767.0F*configuration.afgain);
-			    short r=(short)(outrsamples[j]*32767.0F*configuration.afgain);
-				sendbuffer[txoffset++]=(byte)((l>>8)&0xFF);
-				sendbuffer[txoffset++]=(byte)(l&0xFF);
-				sendbuffer[txoffset++]=(byte)((r>>8)&0xFF);
-				sendbuffer[txoffset++]=(byte)(r&0xFF);
+        // send data back to Metis
+        for (int j = 0; j < outlsamples.length; j = j + increment) {
 
-				sendbuffer[txoffset++]=(byte)0; // tx
-				sendbuffer[txoffset++]=(byte)0; // tx
-				sendbuffer[txoffset++]=(byte)0; // tx
-				sendbuffer[txoffset++]=(byte)0; // tx
-			}
-			
-			if(txoffset==520) {
-				// first OZY buffer filled
-				txoffset=528;
-			} else if(txoffset==1032) {
-				// second OZY buffer filled
+            if (transmit) {
+                sendbuffer[txoffset++] = (byte) 0; // rx
+                sendbuffer[txoffset++] = (byte) 0; // rx
+                sendbuffer[txoffset++] = (byte) 0; // rx
+                sendbuffer[txoffset++] = (byte) 0; // rx
 
-				// put in the header
-				sendbuffer[0]=(byte)0xEF;
-				sendbuffer[1]=(byte)0xFE;
-				sendbuffer[2]=(byte)0x01;
-				sendbuffer[3]=(byte)0x02;  // to EP2
-				
-				// put in the tx sequence number
-				sendbuffer[4]=(byte)((txsequence>>24)&0xFF);
-				sendbuffer[5]=(byte)((txsequence>>16)&0xFF);
-				sendbuffer[6]=(byte)((txsequence>>8)&0xFF);
-				sendbuffer[7]=(byte)(txsequence&0xFF);
+                short l = (short) (outlsamples[j] * 32767.0F * rfgain);
+                short r = (short) (outrsamples[j] * 32767.0F * rfgain);
+                sendbuffer[txoffset++] = (byte) ((l >> 8) & 0xFF);
+                sendbuffer[txoffset++] = (byte) (l & 0xFF);
+                sendbuffer[txoffset++] = (byte) ((r >> 8) & 0xFF);
+                sendbuffer[txoffset++] = (byte) (r & 0xFF);
+            } else {
+                short l = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
+                short r = (short) (outrsamples[j] * 32767.0F * configuration.afgain);
+                sendbuffer[txoffset++] = (byte) ((l >> 8) & 0xFF);
+                sendbuffer[txoffset++] = (byte) (l & 0xFF);
+                sendbuffer[txoffset++] = (byte) ((r >> 8) & 0xFF);
+                sendbuffer[txoffset++] = (byte) (r & 0xFF);
 
-				// put in the OZY control bytes
-				sendbuffer[8]=SYNC;
-				sendbuffer[9]=SYNC;
-				sendbuffer[10]=SYNC;
+                sendbuffer[txoffset++] = (byte) 0; // tx
+                sendbuffer[txoffset++] = (byte) 0; // tx
+                sendbuffer[txoffset++] = (byte) 0; // tx
+                sendbuffer[txoffset++] = (byte) 0; // tx
+            }
 
-                byte mox=transmit?MOX_ENABLED:MOX_DISABLED;
+            if (txoffset == 520) {
+                // first OZY buffer filled
+                txoffset = 528;
+            } else if (txoffset == 1032) {
+                // second OZY buffer filled
 
-                switch(command) {
+                // put in the header
+                sendbuffer[0] = (byte) 0xEF;
+                sendbuffer[1] = (byte) 0xFE;
+                sendbuffer[2] = (byte) 0x01;
+                sendbuffer[3] = (byte) 0x02;  // to EP2
+
+                // put in the tx sequence number
+                sendbuffer[4] = (byte) ((txsequence >> 24) & 0xFF);
+                sendbuffer[5] = (byte) ((txsequence >> 16) & 0xFF);
+                sendbuffer[6] = (byte) ((txsequence >> 8) & 0xFF);
+                sendbuffer[7] = (byte) (txsequence & 0xFF);
+
+                // put in the OZY control bytes
+                sendbuffer[8] = SYNC;
+                sendbuffer[9] = SYNC;
+                sendbuffer[10] = SYNC;
+
+                byte mox = transmit ? MOX_ENABLED : MOX_DISABLED;
+
+                switch (command) {
                     case 0: {
                         sendbuffer[11] = txcontrol0;
                         sendbuffer[12] = txcontrol1;
-                        sendbuffer[13]=(byte)(txcontrol2|((transmit?configuration.bands.get().getOCTx():configuration.bands.get().getOCRx())<<1));
-                        //byte tx3 = txcontrol3;
-                        byte tx3=(byte)(ALEX_ATTENUATION_0DB | configuration.dither | configuration.random | configuration.preamp);
-                        if(configuration.radio!=Configuration.METIS_PENELOPE &&
-                                configuration.radio!=Configuration.METIS_PENNYLANE) {
+                        sendbuffer[13] = (byte) (txcontrol2 | ((transmit ? configuration.bands.get().getOCTx() : configuration.bands.get().getOCRx()) << 1));
+                        byte tx3 = 0x00;
+                        switch (configuration.discovered.getDevice()) {
+                            case Discovered.DEVICE_HERMES_LITE:
+                                tx3 |= (byte) (ALEX_ATTENUATION_0DB | configuration.random);
+                                if (configuration.random == LT2208_RANDOM_OFF) { // AGC off
+                                    if (lna_dither[configuration.attenuation + 12]) {
+                                        tx3 |= LT2208_DITHER_ON;
+                                    }
+                                }
+                                break;
+                            case Discovered.DEVICE_HERMES:
+                            case Discovered.DEVICE_ANGELIA:
+                            case Discovered.DEVICE_ORION:
+                                tx3 |= (byte) (configuration.dither | configuration.random | configuration.preamp);
+                                if (configuration.attenuation > 31) {
+                                    tx3 |= (byte) ALEX_ATTENUATION_30DB;
+                                }
+                                break;
+                            case Discovered.DEVICE_METIS:
+                                tx3 |= (byte) (configuration.dither | configuration.random | configuration.preamp);
+                                switch (configuration.attenuation) {
+                                    case 0:
+                                        tx3 |= (byte) ALEX_ATTENUATION_0DB;
+                                        break;
+                                    case 10:
+                                        tx3 |= (byte) ALEX_ATTENUATION_10DB;
+                                        break;
+                                    case 20:
+                                        tx3 |= (byte) ALEX_ATTENUATION_20DB;
+                                        break;
+                                    case 30:
+                                        tx3 |= (byte) ALEX_ATTENUATION_30DB;
+                                        break;
+                                }
+                                break;
+                        }
+                        if (configuration.radio != Configuration.METIS_PENELOPE &&
+                                configuration.radio != Configuration.METIS_PENNYLANE) {
                             BandStack bs = configuration.bands.get().get();
                             switch (bs.getRxAntenna()) {
                                 case BandStack.NONE:
@@ -761,8 +800,8 @@ public class Metis extends Thread {
                         }
                         sendbuffer[14] = tx3;
                         byte tx4 = txcontrol4;
-                        if(configuration.radio!=Configuration.METIS_PENELOPE &&
-                                configuration.radio!=Configuration.METIS_PENNYLANE) {
+                        if (configuration.radio != Configuration.METIS_PENELOPE &&
+                                configuration.radio != Configuration.METIS_PENNYLANE) {
                             BandStack bs = configuration.bands.get().get();
                             switch (bs.getTxAntenna()) {
                                 case BandStack.ANT1:
@@ -778,6 +817,8 @@ public class Metis extends Thread {
                         }
                         sendbuffer[15] = tx4;
                         command++;
+
+
                         break;
                     }
                     case 1: {
@@ -787,12 +828,11 @@ public class Metis extends Thread {
                         } else {
                             sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getTxGain() * configuration.rfgain);
                         }
-
-                        //Log.i("power=", Integer.toHexString(sendbuffer[12] & 0xFF));
                         sendbuffer[13] = 0;
                         sendbuffer[14] = (byte) 0;
                         sendbuffer[15] = (byte) 0;
                         command++;
+
                         break;
                     }
                     case 2: {
@@ -810,14 +850,33 @@ public class Metis extends Thread {
                             }
                         }
                         */
-                        int mode=bandstack.getMode();
-                        if(mode!=Modes.CWU && mode!=Modes.CWL) {
+                        int mode = bandstack.getMode();
+                        if (mode != Modes.CWU && mode != Modes.CWL) {
                             c1 = (byte) ((configuration.oriontipring << 4) | (configuration.orionmicbias << 5) | (configuration.orionmicptt << 6));
                         }
                         sendbuffer[12] = c1;
                         sendbuffer[13] = 0;
                         sendbuffer[14] = 0;
-                        byte c4 = (byte) (0x20 | configuration.attenuation);
+
+                        byte c4 = 0x00;
+                        switch (configuration.discovered.getDevice()) {
+                            case Discovered.DEVICE_HERMES_LITE:
+                                if (configuration.random == LT2208_RANDOM_OFF) {
+                                    c4 = lna_att[configuration.attenuation + 12];
+                                    //c4 |= (byte) 0x20; // enable
+                                }
+                                break;
+                            case Discovered.DEVICE_HERMES:
+                            case Discovered.DEVICE_ANGELIA:
+                            case Discovered.DEVICE_ORION:
+                                if (configuration.attenuation > 31) {
+                                    c4 = (byte) (configuration.attenuation - 30);
+                                } else {
+                                    c4 = (byte) (configuration.attenuation);
+                                }
+                                c4 |= (byte) 0x20;
+                                break;
+                        }
                         sendbuffer[15] = c4;
                         command++;
 
@@ -827,17 +886,17 @@ public class Metis extends Thread {
                         sendbuffer[11] = 0x16;
                         sendbuffer[12] = 0x00;
                         sendbuffer[13] = 0x00;
-                        if(configuration.cwkeysreversed!=0) {
+                        if (configuration.cwkeysreversed != 0) {
                             sendbuffer[13] |= 0x40;
                         }
-                        sendbuffer[14] = (byte)(configuration.cwkeyerspeed | (configuration.cwkeyermode<<6));
-                        sendbuffer[15] = (byte)(configuration.cwkeyerweight | (configuration.cwkeyerspacing<<7));
+                        sendbuffer[14] = (byte) (configuration.cwkeyerspeed | (configuration.cwkeyermode << 6));
+                        sendbuffer[15] = (byte) (configuration.cwkeyerweight | (configuration.cwkeyerspacing << 7));
                         command++;
                         break;
                     }
                     case 4: {
                         sendbuffer[11] = 0x1C;
-                        sendbuffer[12] = (byte)(0x00 & (rx1adc&0x03));
+                        sendbuffer[12] = (byte) (0x00 & (rx1adc & 0x03));
                         sendbuffer[13] = 0x00;
                         sendbuffer[14] = 0x00;
                         sendbuffer[15] = 0x00;
@@ -846,45 +905,44 @@ public class Metis extends Thread {
                     }
                     case 5: {
                         sendbuffer[11] = 0x1E;
-                        int mode=bandstack.getMode();
-                        sendbuffer[12]=(byte)configuration.cwinternal;
-                        if((mode!=Modes.CWU && mode!=Modes.CWL) || tuning || transmit) {
-                            sendbuffer[12]=(byte)0;
+                        int mode = bandstack.getMode();
+                        sendbuffer[12] = (byte) configuration.cwinternal;
+                        if ((mode != Modes.CWU && mode != Modes.CWL) || tuning || transmit) {
+                            sendbuffer[12] = (byte) 0;
                         }
-                        sendbuffer[13] = (byte)configuration.cwsidetonevolume;
-                        sendbuffer[14] = (byte)configuration.cwpttdelay;
+                        sendbuffer[13] = (byte) configuration.cwsidetonevolume;
+                        sendbuffer[14] = (byte) configuration.cwpttdelay;
                         sendbuffer[15] = 0x00;
                         command++;
                         break;
                     }
                     case 6: {
                         sendbuffer[11] = 0x20;
-                        sendbuffer[12] = (byte)configuration.cwhangtime;
-                        sendbuffer[13] = (byte)(configuration.cwhangtime>>8);
-                        sendbuffer[14] = (byte)configuration.cwsidetonefrequency;
-                        sendbuffer[15] = (byte)(configuration.cwsidetonefrequency>>8);
-                        command=0;
+                        sendbuffer[12] = (byte) configuration.cwhangtime;
+                        sendbuffer[13] = (byte) (configuration.cwhangtime >> 8);
+                        sendbuffer[14] = (byte) configuration.cwsidetonefrequency;
+                        sendbuffer[15] = (byte) (configuration.cwsidetonefrequency >> 8);
+                        command = 0;
                         break;
                     }
                 }
 
                 // turn on transmit if needed
                 sendbuffer[11] |= mox;
-				
-				// put in the frequency
 
-				long frequency=bandstack.getFrequency();
-				if(band instanceof Transverter) {
-					Transverter xvtr=(Transverter)band;
-					frequency=frequency-xvtr.getIfFrequency();
-				}
+                // put in the frequency
+                long frequency = bandstack.getFrequency();
+                if (band instanceof Transverter) {
+                    Transverter xvtr = (Transverter) band;
+                    frequency = frequency - xvtr.getIfFrequency();
+                }
 
 
-				sendbuffer[520]=SYNC;
-				sendbuffer[521]=SYNC;
-				sendbuffer[522]=SYNC;
+                sendbuffer[520] = SYNC;
+                sendbuffer[521] = SYNC;
+                sendbuffer[522] = SYNC;
 
-                switch(freqcommand) {
+                switch (freqcommand) {
                     case 0: { // rx frequency
                         sendbuffer[523] = (byte) (txcontrol0 | ((configuration.receiver + 2) << 1) | mox);
                         sendbuffer[524] = (byte) ((frequency >> 24) & 0xFF);
@@ -895,177 +953,177 @@ public class Metis extends Thread {
                         break;
                     }
                     case 1: { // tx frequency
-                        if(bandstack.getMode()==Modes.CWL) {
-                            frequency=frequency-configuration.cwsidetonefrequency;
-                        } else if(bandstack.getMode()==Modes.CWU) {
-                            frequency=frequency+configuration.cwsidetonefrequency;
+                        if (bandstack.getMode() == Modes.CWL) {
+                            frequency = frequency - configuration.cwsidetonefrequency;
+                        } else if (bandstack.getMode() == Modes.CWU) {
+                            frequency = frequency + configuration.cwsidetonefrequency;
                         }
                         sendbuffer[523] = (byte) (txcontrol0 | 0x02 | mox);
                         sendbuffer[524] = (byte) ((frequency >> 24) & 0xFF);
                         sendbuffer[525] = (byte) ((frequency >> 16) & 0xFF);
                         sendbuffer[526] = (byte) ((frequency >> 8) & 0xFF);
                         sendbuffer[527] = (byte) (frequency & 0xFF);
-                        freqcommand=0;
+                        freqcommand = 0;
                         break;
                     }
 
                 }
 
-				send();
+                send();
 
-				txoffset=16;
-			 }
-		}
-		
-	}
-	
-	public synchronized void send() {
-		try {
+                txoffset = 16;
+            }
+        }
+
+    }
+
+    public synchronized void send() {
+        try {
             socket.send(samplesdatagram);
-		} catch (SocketException se) {
-			Log.i("Metis","send: "+se.toString());
-		} catch (UnknownHostException uhe) {
-			Log.i("Metis","send: "+uhe.toString());
-		} catch (IOException ioe) {
-			Log.i("Metis","send: "+ioe.toString());
-		}
-		txsequence++;
-	}
-	
-	public synchronized void sendCommand() {
-		//Log.i("Metis","sendCommand: "+Integer.toHexString(commandbuffer[0]&0xFF)+":"+
-		//		Integer.toHexString(commandbuffer[1]&0xFF)+":"+
-		//		Integer.toHexString(commandbuffer[2]&0xFF)+":"+
-		//		Integer.toHexString(commandbuffer[3]&0xFF));
-		try {
-			socket.send(commanddatagram);
-		} catch (SocketException se) {
-			Log.i("Metis","sendCommand: "+se.toString());
-		} catch (UnknownHostException uhe) {
-			Log.i("Metis","sendCommand: "+uhe.toString());
-		} catch (IOException ioe) {
-			Log.i("Metis","sendCommand: "+ioe.toString());
-		}
-	}
+        } catch (SocketException se) {
+            Log.i("Metis", "send: " + se.toString());
+        } catch (UnknownHostException uhe) {
+            Log.i("Metis", "send: " + uhe.toString());
+        } catch (IOException ioe) {
+            Log.i("Metis", "send: " + ioe.toString());
+        }
+        txsequence++;
+    }
 
-	private synchronized void prime() {
-		// prime the device so it starts sending samples to us
-		sendbuffer[0]=(byte)0xEF;
-		sendbuffer[1]=(byte)0xFE;
-		sendbuffer[2]=(byte)0x01;
-		sendbuffer[3]=(byte)0x02;  // to EP2
-		
-		sendbuffer[4]=(byte)((txsequence>>24)&0xF);
-		sendbuffer[5]=(byte)((txsequence>>16)&0xF);
-		sendbuffer[6]=(byte)((txsequence>>8)&0xF);
-		sendbuffer[7]=(byte)(txsequence&0xF);
-		
-		
-		for(int i=0;i<2;i++) {
-			sendbuffer[(i*512)+8]=SYNC;
-			sendbuffer[(i*512)+9]=SYNC;
-			sendbuffer[(i*512)+10]=SYNC;
-			sendbuffer[(i*512)+11]=txcontrol0;
-			sendbuffer[(i*512)+12]=txcontrol1;
-			sendbuffer[(i*512)+13]=txcontrol2;
-			sendbuffer[(i*512)+14]=txcontrol3;
-			sendbuffer[(i*512)+15]=txcontrol4;
-		    for(int j=0;j<504;j++) {
-		    	sendbuffer[(i*512)+16+j]=0;
-		    }
-		}
-		
-		send();
-		
-		sendbuffer[4]=(byte)((txsequence>>24)&0xF);
-		sendbuffer[5]=(byte)((txsequence>>16)&0xF);
-		sendbuffer[6]=(byte)((txsequence>>8)&0xF);
-		sendbuffer[7]=(byte)(txsequence&0xF);
-	    
-	    send();
-	    
-	    // send start command
-	    commandbuffer[0]=(byte)0xEF;
-	    commandbuffer[1]=(byte)0xFE;
-	    commandbuffer[2]=(byte)0x04;
-        if(bandscope) {
+    public synchronized void sendCommand() {
+        //Log.i("Metis","sendCommand: "+Integer.toHexString(commandbuffer[0]&0xFF)+":"+
+        //		Integer.toHexString(commandbuffer[1]&0xFF)+":"+
+        //		Integer.toHexString(commandbuffer[2]&0xFF)+":"+
+        //		Integer.toHexString(commandbuffer[3]&0xFF));
+        try {
+            socket.send(commanddatagram);
+        } catch (SocketException se) {
+            Log.i("Metis", "sendCommand: " + se.toString());
+        } catch (UnknownHostException uhe) {
+            Log.i("Metis", "sendCommand: " + uhe.toString());
+        } catch (IOException ioe) {
+            Log.i("Metis", "sendCommand: " + ioe.toString());
+        }
+    }
+
+    private synchronized void prime() {
+        // prime the device so it starts sending samples to us
+        sendbuffer[0] = (byte) 0xEF;
+        sendbuffer[1] = (byte) 0xFE;
+        sendbuffer[2] = (byte) 0x01;
+        sendbuffer[3] = (byte) 0x02;  // to EP2
+
+        sendbuffer[4] = (byte) ((txsequence >> 24) & 0xF);
+        sendbuffer[5] = (byte) ((txsequence >> 16) & 0xF);
+        sendbuffer[6] = (byte) ((txsequence >> 8) & 0xF);
+        sendbuffer[7] = (byte) (txsequence & 0xF);
+
+
+        for (int i = 0; i < 2; i++) {
+            sendbuffer[(i * 512) + 8] = SYNC;
+            sendbuffer[(i * 512) + 9] = SYNC;
+            sendbuffer[(i * 512) + 10] = SYNC;
+            sendbuffer[(i * 512) + 11] = txcontrol0;
+            sendbuffer[(i * 512) + 12] = txcontrol1;
+            sendbuffer[(i * 512) + 13] = txcontrol2;
+            sendbuffer[(i * 512) + 14] = txcontrol3;
+            sendbuffer[(i * 512) + 15] = txcontrol4;
+            for (int j = 0; j < 504; j++) {
+                sendbuffer[(i * 512) + 16 + j] = 0;
+            }
+        }
+
+        send();
+
+        sendbuffer[4] = (byte) ((txsequence >> 24) & 0xF);
+        sendbuffer[5] = (byte) ((txsequence >> 16) & 0xF);
+        sendbuffer[6] = (byte) ((txsequence >> 8) & 0xF);
+        sendbuffer[7] = (byte) (txsequence & 0xF);
+
+        send();
+
+        // send start command
+        commandbuffer[0] = (byte) 0xEF;
+        commandbuffer[1] = (byte) 0xFE;
+        commandbuffer[2] = (byte) 0x04;
+        if (bandscope) {
             commandbuffer[3] = (byte) 0x03;
         } else {
             commandbuffer[3] = (byte) 0x01;
         }
-	    for(int i=4;i<64;i++) {
-	    	commandbuffer[i]=(byte)0x00;
-	    }
+        for (int i = 4; i < 64; i++) {
+            commandbuffer[i] = (byte) 0x00;
+        }
 
-	    sendCommand();
+        sendCommand();
 
-	}
-	
-	private String getLocalIpAddress() {
-    	String result="";
-    	try {
-    		for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
-    			NetworkInterface intf = en.nextElement();
-    			for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-    				InetAddress inetAddress = enumIpAddr.nextElement();
-    				if (!inetAddress.isLoopbackAddress()) {
-    					result=inetAddress.getHostAddress().toString();
-    					//Log.i("Metis","getLocalIpAddress: "+result);
-    					if(result.contains(".")) {
-    						return result;
-    					}
-    				}
-    			}
-    		}
-    	} catch (Exception ex) {
-    		Log.i("Metis","getLocalIpAddress:"+ex.toString());
-    	}
-    	return result;
     }
-	
-	double sineWave(float[] buf, int samples, double phase, double freq) {
-	    double phase_step = 2*Math.PI*freq/configuration.samplerate;
-	    int i;
 
-	    for(i=0; i<samples; i++ ) {
-	        buf[i] = (float)Math.sin(phase);
-	        phase += phase_step;
-	    }
-	    return phase;
-	}
-	
-	public int getMercurySoftwareVersion() {
-		return mercury_software_version;
-	}
-	
-	public int getPenelopeSoftwareVersion() {
-		return penelope_software_version;
-	}
-	
-	public int getMetisSoftwareVersion() {
-		return metis_software_version;
-	}
-	
-	public int getPenelopeForwardPower() {
-		return penelope_forward_power;
-	}
-	
-	public int getAlexForwardPower() {
-		return alex_forward_power;
-	}
-	
-	public int getAlexReversePower() {
-		return alex_reverse_power;
-	}
-	
-	public void debug() {
-		this.dbg=true;
-	}
+    private String getLocalIpAddress() {
+        String result = "";
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()) {
+                        result = inetAddress.getHostAddress().toString();
+                        //Log.i("Metis","getLocalIpAddress: "+result);
+                        if (result.contains(".")) {
+                            return result;
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            Log.i("Metis", "getLocalIpAddress:" + ex.toString());
+        }
+        return result;
+    }
 
-    public boolean Process_Panadapter(int channel,float[] samples) {
-        int[] result=new int[1];
-        wdsp.GetPixels(channel,samples,result);
-        return (result[0]==1);
+    double sineWave(float[] buf, int samples, double phase, double freq) {
+        double phase_step = 2 * Math.PI * freq / configuration.samplerate;
+        int i;
+
+        for (i = 0; i < samples; i++) {
+            buf[i] = (float) Math.sin(phase);
+            phase += phase_step;
+        }
+        return phase;
+    }
+
+    public int getMercurySoftwareVersion() {
+        return mercury_software_version;
+    }
+
+    public int getPenelopeSoftwareVersion() {
+        return penelope_software_version;
+    }
+
+    public int getMetisSoftwareVersion() {
+        return metis_software_version;
+    }
+
+    public int getPenelopeForwardPower() {
+        return penelope_forward_power;
+    }
+
+    public int getAlexForwardPower() {
+        return alex_forward_power;
+    }
+
+    public int getAlexReversePower() {
+        return alex_reverse_power;
+    }
+
+    public void debug() {
+        this.dbg = true;
+    }
+
+    public boolean Process_Panadapter(int channel, float[] samples) {
+        int[] result = new int[1];
+        wdsp.GetPixels(channel, samples, result);
+        return (result[0] == 1);
     }
 
     public boolean isADC1Overflow() {
@@ -1088,199 +1146,216 @@ public class Metis extends Thread {
 
     private PTTListener pttListener;
 
-	private boolean dbg=false;
-	
-	private double phase=0.0;
-	private double tunefrequency=600;
-	
-	private Configuration configuration;
-	
-	private int toport=1024;
-	
-	private String myaddress="127.0.0.1";
-	private int myport=1024;
-	private DatagramSocket socket;
-	
-	private byte rxbuffer[]=new byte[1032];
-	private DatagramPacket rxdatagram;
-	
-	private long ep6sequence=-1; 
-	private boolean running;
+    private boolean dbg = false;
 
-	private WDSP wdsp;
-	
-	private byte SYNC=0x7F;
-	
-	private byte rxcontrol0;
-	private byte rxcontrol1;
-	private byte rxcontrol2;
-	private byte rxcontrol3;
-	private byte rxcontrol4;
+    private double phase = 0.0;
+    private double tunefrequency = 600;
+
+    private Configuration configuration;
+
+    private int toport = 1024;
+
+    private String myaddress = "127.0.0.1";
+    private int myport = 1024;
+    private DatagramSocket socket;
+
+    private byte rxbuffer[] = new byte[1032];
+    private DatagramPacket rxdatagram;
+
+    private long ep6sequence = -1;
+    private boolean running;
+
+    private WDSP wdsp;
+
+    private byte SYNC = 0x7F;
+
+    private byte rxcontrol0;
+    private byte rxcontrol1;
+    private byte rxcontrol2;
+    private byte rxcontrol3;
+    private byte rxcontrol4;
 
 
-    private int receivers=1;
-    private int receiver=0;
+    private int receivers = 1;
+    private int receiver = 0;
 
-	// control 0
-	public static byte MOX_DISABLED  =  (byte)0x00;
-	public static byte MOX_ENABLED   =  (byte)0x01;
+    // control 0
+    public static byte MOX_DISABLED = (byte) 0x00;
+    public static byte MOX_ENABLED = (byte) 0x01;
 
-	// control 1
-	public static byte MIC_SOURCE_JANUS = (byte)0x00;
-	public static byte MIC_SOURCE_PENELOPE = (byte)0x80;
-	public static byte CONFIG_NONE     = (byte)0x00;
-	public static byte CONFIG_PENELOPE = (byte)0x20;
-	public static byte CONFIG_MERCURY  = (byte)0x40;
-	public static byte CONFIG_BOTH     = (byte)0x60;
-	public static byte PENELOPE_122_88MHZ_SOURCE = (byte)0x00;
-	public static byte MERCURY_122_88MHZ_SOURCE  = (byte)0x10;
-	public static byte ATLAS_10MHZ_SOURCE        = (byte)0x00;
-	public static byte PENELOPE_10MHZ_SOURCE     = (byte)0x04;
-	public static byte MERCURY_10MHZ_SOURCE      = (byte)0x08;
-	public static byte SPEED_48KHZ               = (byte)0x00;
-	public static byte SPEED_96KHZ               = (byte)0x01;
-	public static byte SPEED_192KHZ              = (byte)0x02;
-	public static byte SPEED_384KHZ              = (byte)0x03;
+    // control 1
+    public static byte MIC_SOURCE_JANUS = (byte) 0x00;
+    public static byte MIC_SOURCE_PENELOPE = (byte) 0x80;
+    public static byte CONFIG_NONE = (byte) 0x00;
+    public static byte CONFIG_PENELOPE = (byte) 0x20;
+    public static byte CONFIG_MERCURY = (byte) 0x40;
+    public static byte CONFIG_BOTH = (byte) 0x60;
+    public static byte PENELOPE_122_88MHZ_SOURCE = (byte) 0x00;
+    public static byte MERCURY_122_88MHZ_SOURCE = (byte) 0x10;
+    public static byte ATLAS_10MHZ_SOURCE = (byte) 0x00;
+    public static byte PENELOPE_10MHZ_SOURCE = (byte) 0x04;
+    public static byte MERCURY_10MHZ_SOURCE = (byte) 0x08;
+    public static byte SPEED_48KHZ = (byte) 0x00;
+    public static byte SPEED_96KHZ = (byte) 0x01;
+    public static byte SPEED_192KHZ = (byte) 0x02;
+    public static byte SPEED_384KHZ = (byte) 0x03;
 
-	// control 2
-	public static byte MODE_CLASS_E              = (byte)0x01;
-	public static byte MODE_OTHERS               = (byte)0x00;
+    // control 2
+    public static byte MODE_CLASS_E = (byte) 0x01;
+    public static byte MODE_OTHERS = (byte) 0x00;
 
-	// control 3
-	public static byte ALEX_ATTENUATION_0DB      = (byte)0x00;
-	public static byte ALEX_ATTENUATION_10DB     = (byte)0x01;
-	public static byte ALEX_ATTENUATION_20DB     = (byte)0x02;
-	public static byte ALEX_ATTENUATION_30DB     = (byte)0x03;
-	public static byte LT2208_GAIN_OFF           = (byte)0x00;
-	public static byte LT2208_GAIN_ON            = (byte)0x04;
-	public static byte LT2208_DITHER_OFF         = (byte)0x00;
-	public static byte LT2208_DITHER_ON          = (byte)0x08;
-	public static byte LT2208_RANDOM_OFF         = (byte)0x00;
-	public static byte LT2208_RANDOM_ON          = (byte)0x10;
+    // control 3
+    public static byte ALEX_ATTENUATION_0DB = (byte) 0x00;
+    public static byte ALEX_ATTENUATION_10DB = (byte) 0x01;
+    public static byte ALEX_ATTENUATION_20DB = (byte) 0x02;
+    public static byte ALEX_ATTENUATION_30DB = (byte) 0x03;
+    public static byte LT2208_GAIN_OFF = (byte) 0x00;
+    public static byte LT2208_GAIN_ON = (byte) 0x04;
+    public static byte LT2208_DITHER_OFF = (byte) 0x00;
+    public static byte LT2208_DITHER_ON = (byte) 0x08;
+    public static byte LT2208_RANDOM_OFF = (byte) 0x00;
+    public static byte LT2208_RANDOM_ON = (byte) 0x10;
 
-	// control 4
-	private static byte DUPLEX                    = (byte)0x04;
+    // control 4
+    private static byte DUPLEX = (byte) 0x04;
 
-	
-	// default tx control bytes
-	private byte txcontrol0=(byte)(MOX_DISABLED);
-	private byte txcontrol1=(byte)(CONFIG_BOTH /*| MERCURY_122_88MHZ_SOURCE | MERCURY_10MHZ_SOURCE*/ | MIC_SOURCE_PENELOPE | SPEED_48KHZ);
-	private byte txcontrol2=(byte)(MODE_OTHERS);
-	private byte txcontrol3=(byte)(ALEX_ATTENUATION_0DB  /* |LT2208_GAIN_OFF  | LT2208_DITHER_ON | LT2208_RANDOM_ON */);
-	private byte txcontrol4=(byte)(DUPLEX);
-	
-	private long txsequence=0L;
-	
-	private static final int STATE_SYNC0=0;
-	private static final int STATE_SYNC1=1;
-	private static final int STATE_SYNC2=2;
-	private static final int STATE_CONTROL0=3;
-	private static final int STATE_CONTROL1=4;
-	private static final int STATE_CONTROL2=5;
-	private static final int STATE_CONTROL3=6;
-	private static final int STATE_CONTROL4=7;
-	private static final int STATE_I0=8;
-	private static final int STATE_I1=9;
-	private static final int STATE_I2=10;
-	private static final int STATE_Q0=11;
-	private static final int STATE_Q1=12;
-	private static final int STATE_Q2=13;
-	private static final int STATE_M0=14;
-	private static final int STATE_M1=15;
-	private static final int STATE_SYNC_ERROR=16;
-	
-	private int state=STATE_SYNC0;
-	
-	private int isample;
-	private int qsample;
-	private int msample;
-	
-	private float[] inlsamples;
-	private float[] inrsamples;
-	private float[] inmiclsamples;
+
+    // default tx control bytes
+    private byte txcontrol0 = (byte) (MOX_DISABLED);
+    private byte txcontrol1 = (byte) (CONFIG_BOTH /*| MERCURY_122_88MHZ_SOURCE | MERCURY_10MHZ_SOURCE*/ | MIC_SOURCE_PENELOPE | SPEED_48KHZ);
+    private byte txcontrol2 = (byte) (MODE_OTHERS);
+    private byte txcontrol3 = (byte) (ALEX_ATTENUATION_0DB  /* |LT2208_GAIN_OFF  | LT2208_DITHER_ON | LT2208_RANDOM_ON */);
+    private byte txcontrol4 = (byte) (DUPLEX);
+
+    private long txsequence = 0L;
+
+    private static final int STATE_SYNC0 = 0;
+    private static final int STATE_SYNC1 = 1;
+    private static final int STATE_SYNC2 = 2;
+    private static final int STATE_CONTROL0 = 3;
+    private static final int STATE_CONTROL1 = 4;
+    private static final int STATE_CONTROL2 = 5;
+    private static final int STATE_CONTROL3 = 6;
+    private static final int STATE_CONTROL4 = 7;
+    private static final int STATE_I0 = 8;
+    private static final int STATE_I1 = 9;
+    private static final int STATE_I2 = 10;
+    private static final int STATE_Q0 = 11;
+    private static final int STATE_Q1 = 12;
+    private static final int STATE_Q2 = 13;
+    private static final int STATE_M0 = 14;
+    private static final int STATE_M1 = 15;
+    private static final int STATE_SYNC_ERROR = 16;
+
+    private int state = STATE_SYNC0;
+
+    private int isample;
+    private int qsample;
+    private int msample;
+
+    private float[] inlsamples;
+    private float[] inrsamples;
+    private float[] inmiclsamples;
     private float[] inmicrsamples;
-	private float[] outlsamples;
-	private float[] outrsamples;
-	private float[] suboutlsamples;
-	private float[] suboutrsamples;
-    private int inoffset=0;
+    private float[] outlsamples;
+    private float[] outrsamples;
+    private float[] suboutlsamples;
+    private float[] suboutrsamples;
+    private int inoffset = 0;
 
     //private static final int BS_FFT_SIZE=8192;
     //private static final int BS_BUFFER_SIZE=4096;
     private float[] bslsamples;
     private float[] bsrsamples;
-    private int bsoffset=0;
+    private int bsoffset = 0;
 
-	private byte[] sendbuffer=new byte[1032];
-	private int txoffset=16;
-	
-	private byte[] commandbuffer=new byte[84];
-	
-	private InetAddress toaddress;
-	private DatagramPacket commanddatagram;
-	private DatagramPacket samplesdatagram;
+    private byte[] sendbuffer = new byte[1032];
+    private int txoffset = 16;
 
-	// local audio
-	private AudioTrack audiotrack;
-	
-	private int audioincrement;
-	private int increment=1;
-	private short[] audiooutput=new short[1024*2];
-	private int audiooutputindex=0;
-	
-	private long time;
+    private byte[] commandbuffer = new byte[84];
 
-	private int cwnoteindex=0;
-	private float cwnotesin[]=new float[240];
-	private float cwnotecos[]=new float[240];
-	
-	private double packetsreceived=0.0;
-	private double packetsmissed=0.0; 
-	
-	public int metis_software_version=0;
-    public int mercury_software_version=0;
-	public int penelope_software_version=0;
-	
-	private int penelope_forward_power=0;
-	private int alex_forward_power=0;
-	private int alex_reverse_power=0;
-	
-	private boolean ptt=false;
-	private boolean dash=false;
-	private boolean dot=false;
-	
-	private boolean lt2208_overflow=false;
-    private boolean adc1overflow=false;
-    private boolean adc2overflow=false;
-    private boolean adc3overflow=false;
-    private boolean adc4overflow=false;
+    private InetAddress toaddress;
+    private DatagramPacket commanddatagram;
+    private DatagramPacket samplesdatagram;
 
-	
-	private int ain3=0;
-	private int ain4=0;
-	private int ain6=0;
+    // local audio
+    private AudioTrack audiotrack;
 
-    private int rx1adc=0x00; // ADC2
-	
-	public double getPacketLoss() {
-		double loss=(packetsmissed/packetsreceived)*100.0;
-		packetsmissed=packetsreceived=0.0;
-		return loss;
-	}
-	
-	private int[] error=new int[1];
+    private int audioincrement;
+    private int increment = 1;
+    private short[] audiooutput = new short[1024 * 2];
+    private int audiooutputindex = 0;
 
-    private int[] success=new int[1];
+    private long time;
 
-    private int command=0;
-    private int freqcommand=0;
+    private int cwnoteindex = 0;
+    private float cwnotesin[] = new float[240];
+    private float cwnotecos[] = new float[240];
+
+    private double packetsreceived = 0.0;
+    private double packetsmissed = 0.0;
+
+    public int metis_software_version = 0;
+    public int mercury_software_version = 0;
+    public int penelope_software_version = 0;
+
+    private int penelope_forward_power = 0;
+    private int alex_forward_power = 0;
+    private int alex_reverse_power = 0;
+
+    private boolean ptt = false;
+    private boolean dash = false;
+    private boolean dot = false;
+
+    private boolean lt2208_overflow = false;
+    private boolean adc1overflow = false;
+    private boolean adc2overflow = false;
+    private boolean adc3overflow = false;
+    private boolean adc4overflow = false;
 
 
-    private boolean transmit=false;
-    private boolean tuning=false;
+    private int ain3 = 0;
+    private int ain4 = 0;
+    private int ain6 = 0;
 
-    boolean last_ptt=false;
-    boolean last_dot=false;
-    boolean last_dash=false;
+    private int rx1adc = 0x00; // ADC2
+
+    public double getPacketLoss() {
+        double loss = (packetsmissed / packetsreceived) * 100.0;
+        packetsmissed = packetsreceived = 0.0;
+        return loss;
+    }
+
+    private int[] error = new int[1];
+
+    private int[] success = new int[1];
+
+    private int command = 0;
+    private int freqcommand = 0;
+
+
+    private boolean transmit = false;
+    private boolean tuning = false;
+
+    boolean last_ptt = false;
+    boolean last_dot = false;
+    boolean last_dash = false;
+
+    boolean lna_dither[] = {true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true,
+            false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false};
+    byte lna_att[] = {31, 30, 29, 28, 27, 26, 25, 24,
+            23, 22, 21, 20, 19, 18, 17, 16,
+            15, 14, 13, 12, 11, 10, 9, 8,
+            7, 6, 5, 4, 3, 2, 1, 0,
+            31, 30, 29, 28, 27, 26, 25, 24,
+            23, 22, 21, 20, 19, 18, 17, 16,
+            15, 14, 13, 12, 11, 10, 9, 8,
+            7, 6, 5, 4, 3, 2, 1, 0};
 
 }

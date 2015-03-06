@@ -25,8 +25,8 @@
                     android:layout_height="wrap_content"
                     android:text="Receiver Configuration"
                     android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -50,19 +50,19 @@
                             android:id="@+id/radioButtonAudioLocal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Local"/>
+                            android:text="Local" />
 
                         <RadioButton
                             android:id="@+id/radioButtonAudioRadio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Radio"/>
+                            android:text="Radio" />
 
                         <RadioButton
                             android:id="@+id/radioButtonAudioBoth"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Both"/>
+                            android:text="Both" />
                     </RadioGroup>
 
                 </LinearLayout>
@@ -106,25 +106,37 @@
                     android:id="@+id/checkBoxDither"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dither"/>
+                    android:text="Dither" />
 
                 <CheckBox
                     android:id="@+id/checkBoxRandom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Random"/>
+                    android:text="Random" />
 
                 <CheckBox
                     android:id="@+id/checkBoxPreamp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Preamp"/>
+                    android:text="Preamp" />
+
+                <TextView
+                    android:id="@+id/textViewAttenuation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Attenuation: " />
+
+                <SeekBar
+                    android:id="@+id/seekBarAttenuation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"/>
 
 
             </LinearLayout>
 
         </ScrollView>
-
 
 
         <!-- page -->
@@ -143,100 +155,68 @@
                     android:layout_height="wrap_content"
                     android:text="Display Configuration"
                     android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textViewSpectrumHigh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spectrum High: " />
+
+                <SeekBar
+                    android:id="@+id/seekBarSpectrumHigh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal">
+                    android:layout_alignParentLeft="true" />
 
-                    <TextView
-                        android:id="@+id/textViewSpectrumHigh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Spectrum High: " />
+                <TextView
+                    android:id="@+id/textViewSpectrumLow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spectrum Low: " />
 
-                    <org.g0orx.openhpsdr.NumberPicker
-                        android:id="@+id/numberPickerSpectrumHigh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <SeekBar
+                    android:id="@+id/seekBarSpectrumLow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textViewSpectrumLow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Spectrum Low: " />
-
-                    <org.g0orx.openhpsdr.NumberPicker
-                        android:id="@+id/numberPickerSpectrumLow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" />
-
-                </LinearLayout>
+                    android:layout_alignParentLeft="true" />
 
                 <CheckBox
                     android:id="@+id/checkBoxWaterfallAutomatic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Waterfall Automatic"/>
+                    android:text="Waterfall Automatic" />
 
                 <CheckBox
                     android:id="@+id/checkBoxWaterfallGrayscale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Waterfall Grayscale"/>
+                    android:text="Waterfall Grayscale" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textViewWaterfallHigh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Waterfall High: " />
+
+                <SeekBar
+                    android:id="@+id/seekBarWaterfallHigh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal">
+                    android:layout_alignParentLeft="true" />
 
-                    <TextView
-                        android:id="@+id/textViewWaterfallHigh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Waterfall High: " />
+                <TextView
+                    android:id="@+id/textViewWaterfallLow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Waterfall Low: " />
 
-                    <org.g0orx.openhpsdr.NumberPicker
-                        android:id="@+id/numberPickerWaterfallHigh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <SeekBar
+                    android:id="@+id/seekBarWaterfallLow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textViewWaterfallLow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Waterfall Low: " />
-
-                    <org.g0orx.openhpsdr.NumberPicker
-                        android:id="@+id/numberPickerWaterfallLow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" />
-
-                </LinearLayout>
+                    android:layout_alignParentLeft="true" />
 
 
             </LinearLayout>
@@ -259,8 +239,8 @@
                     android:layout_height="wrap_content"
                     android:text="Antenna Configuration"
                     android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -375,8 +355,8 @@
                     android:layout_height="wrap_content"
                     android:text="Transmit Configuration"
                     android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -400,13 +380,13 @@
                             android:id="@+id/radioButtonLocal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Local"/>
+                            android:text="Local" />
 
                         <RadioButton
                             android:id="@+id/radioButtonRadio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Radio"/>
+                            android:text="Radio" />
                     </RadioGroup>
                 </LinearLayout>
 
@@ -495,8 +475,8 @@
                     android:layout_height="wrap_content"
                     android:text="Open Collector Configuration"
                     android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewOCRx"
