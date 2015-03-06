@@ -175,8 +175,80 @@ public class ConfigureDialog extends Dialog {
         });
 
         if (configuration.discovered.getDevice() == Discovered.DEVICE_HERMES_LITE) {
-            checkBoxDither.setText("ADC-wide hardware AGC");
+            checkBoxDither.setVisibility(View.GONE);
         }
+
+
+
+        final TextView textViewAttenuation = (TextView)this.findViewById(R.id.textViewAttenuation);
+        if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES_LITE) {
+            textViewAttenuation.setText("LNA Gain: "+configuration.attenuation+" dB");
+        } else {
+            textViewAttenuation.setText("Attenuation: " + configuration.attenuation + " dB");
+        }
+
+        final SeekBar seekBarAttenuation=(SeekBar)this.findViewById(R.id.seekBarAttenuation);
+        switch(configuration.discovered.getDevice()) {
+            case Discovered.DEVICE_HERMES_LITE:
+                seekBarAttenuation.setMax(60); // -12 .. 48
+                seekBarAttenuation.setProgress(configuration.attenuation+12);
+                break;
+            case Discovered.DEVICE_HERMES:
+            case Discovered.DEVICE_ANGELIA:
+            case Discovered.DEVICE_ORION:
+                if(configuration.radio==Configuration.HERMES_ALEX ||
+                        configuration.radio==Configuration.ANGELIA_ANAN100D ||
+                        configuration.radio==Configuration.ORION_ANAN200D) {
+                    seekBarAttenuation.setMax(61); // 0 .. 61
+                } else {
+                    seekBarAttenuation.setMax(31); // 0 .. 31
+                }
+                seekBarAttenuation.setProgress(configuration.attenuation);
+                break;
+            case Discovered.DEVICE_METIS:
+                seekBarAttenuation.setMax(30); // 0 .. 30
+                seekBarAttenuation.setProgress(configuration.attenuation/10);
+                break;
+            default:
+                break;
+        }
+
+
+        seekBarAttenuation.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                switch(configuration.discovered.getDevice()) {
+                    case Discovered.DEVICE_HERMES_LITE:
+                        configuration.attenuation = progress - 12;
+                        break;
+                    case Discovered.DEVICE_HERMES:
+                    case Discovered.DEVICE_ANGELIA:
+                    case Discovered.DEVICE_ORION:
+                        configuration.attenuation = progress;
+                        break;
+                    case Discovered.DEVICE_METIS:
+                        configuration.attenuation = progress*10;
+                        break;
+                    default:
+                        break;
+                }
+                if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES_LITE) {
+                    textViewAttenuation.setText("LNA Gain: "+configuration.attenuation+" dB");
+                } else {
+                    textViewAttenuation.setText("Attenuation: " + configuration.attenuation + " dB");
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         CheckBox checkBoxRandom = (CheckBox) this.findViewById(R.id.checkBoxRandom);
         checkBoxRandom.setChecked(configuration.random == Metis.LT2208_RANDOM_ON);
@@ -185,14 +257,26 @@ public class ConfigureDialog extends Dialog {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     configuration.random = Metis.LT2208_RANDOM_ON;
+                    if (configuration.discovered.getDevice() == Discovered.DEVICE_HERMES_LITE) {
+                        textViewAttenuation.setEnabled(false);
+                        seekBarAttenuation.setEnabled(false);
+                    }
                 } else {
                     configuration.random = Metis.LT2208_RANDOM_OFF;
+                    if (configuration.discovered.getDevice() == Discovered.DEVICE_HERMES_LITE) {
+                        textViewAttenuation.setEnabled(true);
+                        seekBarAttenuation.setEnabled(true);
+                    }
                 }
             }
         });
 
         if (configuration.discovered.getDevice() == Discovered.DEVICE_HERMES_LITE) {
-            checkBoxRandom.setVisibility(View.GONE);
+            checkBoxRandom.setText("ADC-wide hardware AGC");
+            if(configuration.random==Metis.LT2208_RANDOM_ON) {
+                textViewAttenuation.setEnabled(false);
+                seekBarAttenuation.setEnabled(false);
+            }
         }
 
         CheckBox checkBoxPreamp = (CheckBox) this.findViewById(R.id.checkBoxPreamp);
@@ -214,6 +298,99 @@ public class ConfigureDialog extends Dialog {
             checkBoxPreamp.setVisibility(View.GONE);
         }
 
+        final TextView textViewSpectrumHigh = (TextView) this.findViewById(R.id.textViewSpectrumHigh);
+        textViewSpectrumHigh.setText("Spectrum High: "+configuration.spectrumHigh);
+        final SeekBar seekBarSpectrumHigh = (SeekBar) this.findViewById(R.id.seekBarSpectrumHigh);
+        seekBarSpectrumHigh.setMax(30); // -200..100
+        seekBarSpectrumHigh.setProgress((configuration.spectrumHigh + 200)/10);
+        seekBarSpectrumHigh.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                configuration.spectrumHigh=(progress-20)*10;
+                textViewSpectrumHigh.setText("Spectrum High: "+configuration.spectrumHigh);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        final TextView textViewSpectrumLow = (TextView) this.findViewById(R.id.textViewSpectrumLow);
+        textViewSpectrumLow.setText("Spectrum Low: "+configuration.spectrumLow);
+        final SeekBar seekBarSpectrumLow = (SeekBar) this.findViewById(R.id.seekBarSpectrumLow);
+        seekBarSpectrumLow.setMax(30); // -200..100
+        seekBarSpectrumLow.setProgress((configuration.spectrumLow + 200)/10);
+        seekBarSpectrumLow.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                configuration.spectrumLow=(progress-20)*10;
+                textViewSpectrumLow.setText("Spectrum Low: "+configuration.spectrumLow);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        final TextView textViewWaterfallHigh = (TextView) this.findViewById(R.id.textViewWaterfallHigh);
+        textViewWaterfallHigh.setText("Waterfall High: "+configuration.waterfallHigh);
+        final SeekBar seekBarWaterfallHigh = (SeekBar) this.findViewById(R.id.seekBarWaterfallHigh);
+        seekBarWaterfallHigh.setMax(30); // -200..100
+        seekBarWaterfallHigh.setProgress((configuration.waterfallHigh + 200)/10);
+        seekBarWaterfallHigh.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                configuration.waterfallHigh=(progress-20)*10;
+                textViewWaterfallHigh.setText("Waterfall High: "+configuration.waterfallHigh);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        final TextView textViewWaterfallLow = (TextView) this.findViewById(R.id.textViewWaterfallLow);
+        textViewWaterfallLow.setText("Waterfall Low: "+configuration.waterfallLow);
+        final SeekBar seekBarWaterfallLow = (SeekBar) this.findViewById(R.id.seekBarWaterfallLow);
+        seekBarWaterfallLow.setMax(30); // -200..100
+        seekBarWaterfallLow.setProgress((configuration.waterfallLow + 200)/10);
+        seekBarWaterfallLow.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                configuration.waterfallLow=(progress-20)*10;
+                textViewWaterfallLow.setText("Waterfall Low: "+configuration.waterfallLow);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        /*
         final NumberPicker spectrumHigh = (NumberPicker) this.findViewById(R.id.numberPickerSpectrumHigh);
         spectrumHigh.setMaximum(100);
         spectrumHigh.setMinimum(-200);
@@ -242,18 +419,24 @@ public class ConfigureDialog extends Dialog {
 
         final NumberPicker waterfallHigh = (NumberPicker) this.findViewById(R.id.numberPickerWaterfallHigh);
         final NumberPicker waterfallLow = (NumberPicker) this.findViewById(R.id.numberPickerWaterfallLow);
+
+        */
         final CheckBox checkBoxWaterfallAutomatic = (CheckBox) this.findViewById(R.id.checkBoxWaterfallAutomatic);
         checkBoxWaterfallAutomatic.setChecked(configuration.waterfallAutomatic);
+        if (configuration.waterfallAutomatic) {
+            seekBarWaterfallHigh.setEnabled(false);
+            seekBarWaterfallLow.setEnabled(false);
+        }
         checkBoxWaterfallAutomatic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 configuration.waterfallAutomatic = isChecked;
                 if (isChecked) {
-                    waterfallHigh.setEnabled(false);
-                    waterfallLow.setEnabled(false);
+                    seekBarWaterfallHigh.setEnabled(false);
+                    seekBarWaterfallLow.setEnabled(false);
                 } else {
-                    waterfallHigh.setEnabled(true);
-                    waterfallLow.setEnabled(true);
+                    seekBarWaterfallHigh.setEnabled(true);
+                    seekBarWaterfallLow.setEnabled(true);
                 }
             }
         });
@@ -267,6 +450,7 @@ public class ConfigureDialog extends Dialog {
             }
         });
 
+        /*
         waterfallHigh.setMaximum(100);
         waterfallHigh.setMinimum(-200);
         waterfallHigh.setIncrement(1);
@@ -295,6 +479,7 @@ public class ConfigureDialog extends Dialog {
             waterfallHigh.setEnabled(false);
             waterfallLow.setEnabled(false);
         }
+        */
 
         final RadioButton radioButtonLocal = (RadioButton) this.findViewById(R.id.radioButtonLocal);
         final RadioButton radioButtonRadio = (RadioButton) this.findViewById(R.id.radioButtonRadio);
