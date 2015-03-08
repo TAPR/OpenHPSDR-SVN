@@ -80,6 +80,7 @@ public class DisplayUpdate extends Thread {
                 }
             }
         }
+        /*
         frames++;
         if (frames == configuration.fps) {
             long elapsed = System.currentTimeMillis() - time;
@@ -89,6 +90,7 @@ public class DisplayUpdate extends Thread {
             frames = 0;
             time = System.currentTimeMillis();
         }
+        */
     }
 
     public boolean isRunning() {

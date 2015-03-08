@@ -61,7 +61,7 @@ void DeleteCriticalSection(pthread_mutex_t *mutex) {
 	pthread_mutex_destroy(mutex);
 }
 
-int WaitForSingleObject(sem_t *sem,int ms) {
+int LinuxWaitForSingleObject(sem_t *sem,int ms) {
 	int result=0;
 	if(ms==INFINITE) {
 		// wait for the lock
@@ -89,7 +89,7 @@ int CreateSemaphore(sem_t* sem,int attributes,int initial_count,int maximum_coun
 	return result;
 }
 
-void ReleaseSemaphore(sem_t* sem,int release_count, int* previous_count) {
+void LinuxReleaseSemaphore(sem_t* sem,int release_count, int* previous_count) {
 	while(release_count>0) {
 		sem_post(sem);
 		release_count--;
@@ -103,7 +103,7 @@ int CreateEvent(sem_t* sem,void* security_attributes,int bManualReset,int bIniti
 	return result;
 }
 
-void SetEvent(sem_t* sem) {
+void LinuxSetEvent(sem_t* sem) {
 	sem_post(sem);
 }
 

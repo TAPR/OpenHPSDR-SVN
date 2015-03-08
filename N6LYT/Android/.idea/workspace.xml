@@ -46,17 +46,332 @@
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/MainActivity.java" line="198" mnemonic="1" />
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" line="1387" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" line="1382" />
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="a55701af-2f6f-4ad8-a17e-cff519115f5b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="$PROJECT_DIR$/app/app-release.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/RXA.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/RXA.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/RXA.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/RXA.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/RXA.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/RXA.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/TXA.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/TXA.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/TXA.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/TXA.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/TXA.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/TXA.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amd.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amd.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amd.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/ammod.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/ammod.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/ammod.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/ammod.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/ammod.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/ammod.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amsq.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amsq.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amsq.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/analyzer.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/analyzer.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/analyzer.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/analyzer.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/analyzer.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/analyzer.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anf.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anf.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anf.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anf.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anf.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anf.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anr.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anr.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anr.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anr.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anr.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anr.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/bandpass.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/bandpass.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/bandpass.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/bandpass.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/bandpass.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/bandpass.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/calcc.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/calcc.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/calcc.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/calcc.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/calcc.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/calcc.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/cblock.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/cblock.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/cblock.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/cblock.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/cblock.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/cblock.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/channel.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/channel.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/channel.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/channel.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/channel.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/channel.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/compress.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/compress.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/compress.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/compress.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/compress.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/compress.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/delay.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/delay.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/delay.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/delay.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/delay.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/delay.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/div.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/div.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/div.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/div.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/div.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/div.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eer.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eer.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eer.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eer.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eer.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eer.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/emph.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/emph.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/emph.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/emph.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/emph.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/emph.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eq.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eq.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eq.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fcurve.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fcurve.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fcurve.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fcurve.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fcurve.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fcurve.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fir.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fir.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fir.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fir.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fir.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fir.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmd.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmd.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmd.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmmod.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmmod.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmmod.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmmod.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmmod.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmmod.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmsq.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmsq.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmsq.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gain.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gain.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gain.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gain.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gain.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gain.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gen.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gen.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gen.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gen.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gen.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gen.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iir.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iir.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iir.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iir.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iir.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iir.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iobuffs.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iobuffs.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iobuffs.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iobuffs.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iobuffs.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iobuffs.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iqc.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iqc.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iqc.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iqc.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iqc.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iqc.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/libs/armeabi/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/libs/armeabi/libwdsp.so" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/libs/armeabi-v7a/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/libs/armeabi-v7a/libwdsp.so" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/libs/x86/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/libs/x86/libwdsp.so" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/libwdsp.so" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/libwdsp.so" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/libwdsp.so" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/linux_port.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/linux_port.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/linux_port.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/linux_port.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/linux_port.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/linux_port.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/main.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/main.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/main.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/main.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/main.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/main.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meter.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meter.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meter.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meter.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meter.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meter.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meterlog10.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meterlog10.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meterlog10.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meterlog10.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meterlog10.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meterlog10.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/nob.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/nob.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/nob.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/nob.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/nob.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/nob.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/nobII.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/nobII.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/nobII.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/nobII.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/nobII.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/nobII.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/patchpanel.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/patchpanel.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/patchpanel.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/patchpanel.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/patchpanel.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/patchpanel.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/resample.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/resample.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/resample.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/resample.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/resample.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/resample.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/sender.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/sender.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/sender.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/sender.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/sender.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/sender.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/shift.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/shift.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/shift.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/shift.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/shift.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/shift.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/siphon.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/siphon.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/siphon.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/siphon.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/siphon.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/siphon.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/slew.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/slew.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/slew.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/slew.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/slew.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/slew.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/utilities.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/utilities.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/utilities.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/utilities.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/utilities.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/utilities.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wcpAGC.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wcpAGC.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wcpAGC.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wcpAGC.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wcpAGC.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wcpAGC.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wisdom.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wisdom.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wisdom.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wisdom.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wisdom.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wisdom.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/org/g0orx/openhpsdr/BuildConfig.java" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/org/g0orx/openhpsdr/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/ConfigureDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/ConfigureDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/Makefile" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/Makefile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/g0orx/openhpsdr/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/g0orx/openhpsdr/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_configure.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_configure.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/RXA.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/RXA.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/RXA.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/RXA.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/RXA.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/RXA.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/RXA.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/RXA.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/RXA.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/RXA.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/TXA.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/TXA.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/TXA.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/TXA.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/TXA.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/TXA.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/TXA.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/TXA.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/TXA.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/TXA.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/amd.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/amd.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amd.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amd.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amd.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amd.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amd.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amd.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/ammod.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/ammod.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/ammod.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/ammod.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/ammod.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/ammod.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/amsq.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/amsq.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/amsq.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/amsq.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amsq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amsq.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amsq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amsq.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amsq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amsq.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/analyzer.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/analyzer.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/analyzer.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/analyzer.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/analyzer.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/analyzer.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/analyzer.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/analyzer.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/analyzer.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/analyzer.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anf.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anf.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anf.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anf.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anf.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anf.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anr.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anr.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anr.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anr.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anr.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anr.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/bandpass.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/bandpass.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/bandpass.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/bandpass.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/bandpass.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/bandpass.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/bandpass.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/bandpass.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/bandpass.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/bandpass.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/calcc.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/calcc.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/calcc.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/calcc.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/calcc.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/calcc.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/calcc.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/calcc.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/calcc.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/calcc.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/cblock.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/cblock.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/cblock.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/cblock.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/cblock.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/cblock.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/channel.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/channel.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/channel.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/channel.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/channel.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/channel.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/channel.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/channel.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/channel.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/channel.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/comm.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/comm.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/compress.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/compress.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/compress.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/compress.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/compress.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/compress.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/compress.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/compress.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/delay.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/delay.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/delay.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/delay.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/delay.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/delay.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/div.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/div.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/div.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/div.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/div.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/div.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/div.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/div.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/div.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/div.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/eer.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/eer.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/eer.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/eer.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eer.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eer.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eer.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eer.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eer.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eer.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/emph.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/emph.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/emph.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/emph.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/emph.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/emph.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eq.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eq.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eq.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fcurve.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fcurve.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fcurve.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fcurve.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fcurve.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fcurve.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fir.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fir.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fir.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmd.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmd.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmd.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmd.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmd.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmd.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmmod.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmmod.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmmod.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmmod.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmmod.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmmod.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmsq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmsq.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmsq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmsq.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmsq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmsq.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/gain.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/gain.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/gain.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/gain.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gain.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gain.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gain.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gain.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gain.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gain.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gen.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gen.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gen.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gen.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gen.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gen.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iir.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iir.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iir.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/iobuffs.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/iobuffs.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/iobuffs.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/iobuffs.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iobuffs.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iobuffs.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iobuffs.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iobuffs.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iobuffs.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iobuffs.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iqc.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iqc.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iqc.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iqc.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iqc.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iqc.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/linux_port.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/linux_port.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/linux_port.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/linux_port.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/linux_port.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/linux_port.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/linux_port.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/linux_port.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/linux_port.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/linux_port.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/main.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/main.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/main.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/main.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/main.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/main.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/main.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/main.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/main.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/main.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meter.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meter.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meter.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meter.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meter.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meter.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meterlog10.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meterlog10.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meterlog10.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meterlog10.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meterlog10.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meterlog10.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/nob.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/nob.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/nob.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/nob.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/nob.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/nob.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/nob.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/nob.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/nob.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/nob.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/nobII.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/nobII.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/nobII.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/nobII.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/nobII.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/nobII.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/nobII.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/nobII.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/nobII.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/nobII.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/patchpanel.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/patchpanel.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/patchpanel.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/patchpanel.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/patchpanel.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/patchpanel.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/patchpanel.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/patchpanel.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/resample.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/resample.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/resample.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/resample.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/resample.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/resample.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/resample.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/resample.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/resample.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/resample.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/sender.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/sender.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/sender.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/sender.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/sender.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/sender.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/sender.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/sender.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/shift.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/shift.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/shift.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/shift.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/shift.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/shift.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/siphon.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/siphon.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/siphon.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/siphon.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/siphon.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/siphon.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/siphon.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/siphon.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/siphon.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/siphon.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/slew.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/slew.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/slew.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/slew.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/slew.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/slew.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/sources.mk" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/sources.mk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/utilities.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/utilities.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/utilities.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/utilities.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/utilities.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/utilities.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/utilities.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/utilities.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/utilities.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/utilities.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wcpAGC.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wcpAGC.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wcpAGC.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wcpAGC.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wcpAGC.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wcpAGC.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wisdom.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wisdom.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wisdom.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wisdom.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wisdom.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wisdom.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HPSDR-WDSP.iws" />
@@ -85,26 +400,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RadioActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="RadioActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="18870" max-vertical-offset="23145">
-              <caret line="1258" column="0" selection-start-line="1258" selection-start-column="0" selection-end-line="1258" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.76086956" vertical-offset="1935" max-vertical-offset="20685">
+              <caret line="203" column="33" selection-start-line="203" selection-start-column="33" selection-end-line="203" selection-end-column="33" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dialog_configure.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_configure.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1626" max-vertical-offset="9060">
-              <caret line="133" column="59" selection-start-line="133" selection-start-column="59" selection-end-line="133" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -128,11 +430,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="1530">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="412" max-vertical-offset="1530">
+              <caret line="25" column="64" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WDSP.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="4485">
+              <caret line="32" column="72" selection-start-line="32" selection-start-column="72" selection-end-line="32" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -148,22 +460,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Metis.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="13980" max-vertical-offset="20505">
-              <caret line="932" column="39" selection-start-line="932" selection-start-column="39" selection-end-line="932" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SettingsActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="2955" max-vertical-offset="13785">
               <caret line="197" column="31" selection-start-line="197" selection-start-column="31" selection-end-line="197" selection-end-column="31" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Metis.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="8040" max-vertical-offset="19770">
+              <caret line="608" column="42" selection-start-line="608" selection-start-column="42" selection-end-line="608" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DisplayUpdate.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1875">
+              <caret line="92" column="10" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
+              <folding>
+                <element signature="e#3318#3319#0" expanded="true" />
+                <element signature="e#3348#3349#0" expanded="true" />
+                <element signature="e#3379#3380#0" expanded="true" />
+                <element signature="e#3410#3411#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -913,7 +1240,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_filter.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Filter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Filters.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/FiltersAM.java" />
@@ -941,8 +1267,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Channel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/discovery/Discovery.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Display.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_radio_waterfall.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_radio_panadapter_waterfall.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_radio_none.xml" />
@@ -957,13 +1281,16 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/discovery/Discovered.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/BandscopeView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_configuration.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_configure.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/ConfigureDialog.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java" />
+        <option value="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.c" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
       </list>
     </option>
   </component>
@@ -971,10 +1298,10 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="73" />
-    <option name="y" value="24" />
+    <option name="x" value="74" />
+    <option name="y" value="35" />
     <option name="width" value="1450" />
-    <option name="height" value="1026" />
+    <option name="height" value="968" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -1010,6 +1337,70 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="HPSDR-WDSP" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HPSDR-WDSP" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HPSDR-WDSP" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openhpsdr" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HPSDR-WDSP" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openhpsdr" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wdsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HPSDR-WDSP" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -1293,7 +1684,11 @@
       <created>1424285855180</created>
       <updated>1424285855180</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fixed Hermes Lite attenuation.">
+      <created>1425648730322</created>
+      <updated>1425648730322</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1317,8 +1712,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="73" y="24" width="1450" height="1026" extended-state="4" />
-    <editor active="false" />
+    <frame x="74" y="35" width="1450" height="968" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3278481" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1331,11 +1726,11 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329904" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31823328" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32658228" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26387316" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3260606" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28242424" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32283464" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1846591" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1846591" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329904" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24965706" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1379,7 +1774,8 @@
     <MESSAGE value="Some code cleanup" />
     <MESSAGE value="Added Bandscope View" />
     <MESSAGE value="Restructured configuration.&#10;Added support for Hermes Lite.&#10;Fixed Tuna Knob only tuning one direction." />
-    <option name="LAST_COMMIT_MESSAGE" value="Restructured configuration.&#10;Added support for Hermes Lite.&#10;Fixed Tuna Knob only tuning one direction." />
+    <MESSAGE value="Fixed Hermes Lite attenuation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Hermes Lite attenuation." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1387,14 +1783,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="507">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1440">
@@ -1436,6 +1824,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
           <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1443,6 +1832,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1065">
           <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1453,27 +1843,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="1950">
-          <caret line="70" column="96" selection-start-line="70" selection-start-column="89" selection-end-line="70" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/images/120.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_waterfall.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.307693" vertical-offset="1015" max-vertical-offset="2415">
           <caret line="89" column="34" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsAdapter.java">
@@ -1484,69 +1867,69 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_bandscope.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.307693" vertical-offset="985" max-vertical-offset="2400">
           <caret line="87" column="33" selection-start-line="84" selection-start-column="4" selection-end-line="88" selection-end-column="38" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_none.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_none.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.1153846" vertical-offset="996" max-vertical-offset="2310">
           <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_panadapter.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_panadapter.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="38.076923" vertical-offset="1050" max-vertical-offset="2280">
           <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_panadapter_waterfall.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_panadapter_waterfall.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.1153846" vertical-offset="1161" max-vertical-offset="2490">
           <caret line="88" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="160" selection-end-column="15" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_panadapter_waterfall_bandscope.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_panadapter_waterfall_bandscope.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6538463" vertical-offset="1161" max-vertical-offset="2580">
           <caret line="82" column="33" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_waterfall_bandscope.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_waterfall_bandscope.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.730769" vertical-offset="1041" max-vertical-offset="2490">
           <caret line="88" column="34" selection-start-line="88" selection-start-column="34" selection-end-line="88" selection-end-column="34" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/images/121.png">
@@ -1555,14 +1938,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_radio_panadapter_bandscope.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.769231" vertical-offset="1026" max-vertical-offset="2490">
           <caret line="94" column="34" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="34" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/images/122.png">
@@ -1578,20 +1961,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_mode.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="13.846154" vertical-offset="360" max-vertical-offset="3585">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3285" max-vertical-offset="4425">
-          <caret line="243" column="0" selection-start-line="243" selection-start-column="0" selection-end-line="243" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1656,21 +2032,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3540" max-vertical-offset="6120">
           <caret line="236" column="92" selection-start-line="236" selection-start-column="85" selection-end-line="236" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="20760">
-          <caret line="1258" column="0" selection-start-line="1258" selection-start-column="0" selection-end-line="1258" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12960">
-          <caret line="197" column="31" selection-start-line="197" selection-start-column="31" selection-end-line="197" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -1716,14 +2077,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_configure.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1626" max-vertical-offset="9060">
           <caret line="133" column="59" selection-start-line="133" selection-start-column="59" selection-end-line="133" selection-end-column="59" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Microphone.java">
@@ -1742,14 +2103,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/ConfigureDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2715" max-vertical-offset="15990">
-          <caret line="238" column="17" selection-start-line="238" selection-start-column="17" selection-end-line="238" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/discovery/Discovered.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1620">
@@ -1758,18 +2111,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9750" max-vertical-offset="20025">
-          <caret line="932" column="39" selection-start-line="932" selection-start-column="39" selection-end-line="932" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="4425">
+          <caret line="32" column="72" selection-start-line="32" selection-start-column="72" selection-end-line="32" selection-end-column="72" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26785713" vertical-offset="0" max-vertical-offset="12630">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="1530">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="412" max-vertical-offset="1530">
+          <caret line="25" column="64" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/ConfigureDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2715" max-vertical-offset="15990">
+          <caret line="238" column="17" selection-start-line="238" selection-start-column="17" selection-end-line="238" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3420" max-vertical-offset="12930">
+          <caret line="197" column="31" selection-start-line="197" selection-start-column="31" selection-end-line="197" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8040" max-vertical-offset="19770">
+          <caret line="608" column="42" selection-start-line="608" selection-start-column="42" selection-end-line="608" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1875">
+          <caret line="92" column="10" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
+          <folding>
+            <element signature="e#3318#3319#0" expanded="true" />
+            <element signature="e#3348#3349#0" expanded="true" />
+            <element signature="e#3379#3380#0" expanded="true" />
+            <element signature="e#3410#3411#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76086956" vertical-offset="1935" max-vertical-offset="20685">
+          <caret line="203" column="33" selection-start-line="203" selection-start-column="33" selection-end-line="203" selection-end-column="33" />
           <folding />
         </state>
       </provider>

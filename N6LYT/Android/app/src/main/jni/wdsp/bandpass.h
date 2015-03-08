@@ -30,6 +30,7 @@ warren@wpratt.com
 typedef struct _bandpass
 {
 	int run;
+	int position;
 	int size;
 	double* in;
 	double* out;
@@ -45,13 +46,14 @@ typedef struct _bandpass
 	fftw_plan CRev;
 }bandpass, *BANDPASS;
 
-extern BANDPASS create_bandpass (int run, int size, double* in, double* out, double f_low, double f_high, int samplerate, int wintype, double gain);
+extern BANDPASS create_bandpass (int run, int position, int size, double* in, double* out, 
+	double f_low, double f_high, int samplerate, int wintype, double gain);
 
 extern void destroy_bandpass (BANDPASS a);
 
 extern void flush_bandpass (BANDPASS a);
 
-extern void xbandpass (BANDPASS a);
+extern void xbandpass (BANDPASS a, int pos);
 
 // RXA Prototypes
 

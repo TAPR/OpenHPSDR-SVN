@@ -584,14 +584,14 @@ public class Metis extends Thread {
 
                                     wdsp.fexchange2(Channel.TX, inmiclsamples, inmicrsamples, outlsamples, outrsamples, error);
                                     if (error[0] != 0) {
-                                        Log.i("Metis", "fexchange2 returned " + error[0]);
+                                        //Log.i("Metis", "fexchange2 returned " + error[0]);
                                     }
 
                                 } else if (configuration.micsource == Configuration.MIC_SOURCE_RADIO) {
 
                                     wdsp.fexchange2(Channel.TX, inmiclsamples, inmicrsamples, outlsamples, outrsamples, error);
                                     if (error[0] != 0) {
-                                        Log.i("Metis", "fexchange2 returned " + error[0]);
+                                        //Log.i("Metis", "fexchange2 returned " + error[0]);
                                     }
 
                                 }
@@ -601,12 +601,12 @@ public class Metis extends Thread {
                             } else {
                                 wdsp.fexchange2(Channel.RX, inlsamples, inrsamples, outlsamples, outrsamples, error);
                                 if (error[0] != 0) {
-                                    Log.i("Metis", "fexchange2 returned " + error[0]);
+                                    //Log.i("Metis", "fexchange2 returned " + error[0]);
                                 }
                                 if (configuration.subrx) {
                                     wdsp.fexchange2(Channel.SUBRX, inlsamples, inrsamples, suboutlsamples, suboutrsamples, error);
                                     if (error[0] != 0) {
-                                        Log.i("Metis", "Channel.SUBRX fexchange2 returned " + error[0]);
+                                        //Log.i("Metis", "Channel.SUBRX fexchange2 returned " + error[0]);
                                     }
                                 }
                                 //Log.i("Metis","calling Spectrum with "+inoffset+" samples");
