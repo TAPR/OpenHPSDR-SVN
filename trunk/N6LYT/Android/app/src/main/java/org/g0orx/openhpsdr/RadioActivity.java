@@ -119,6 +119,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
         Log.i("RadioActivity", "onStart: width=" + width + " height=" + height);
 
+        // create the Metis interfcae
         metis = new Metis(width, configuration.bandscope);
         metis.setPTTListener(new PTTListener() {
             @Override
@@ -179,8 +180,8 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
         // setup receiver
         wdsp.OpenChannel(Channel.RX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
-                (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 1/*RUNNING*/, 0.0,
-                0.0, 0.0, 0.0);
+                (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 1/*RUNNING*/, 0.010,
+                0.025, 0.0, 0.010, 0);
 
         wdsp.SetRXAMode(Channel.RX, bandstack.getMode());
         wdsp.SetRXABandpassFreqs(Channel.RX, low, high);
@@ -191,16 +192,16 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
         // setup transmitter
         wdsp.OpenChannel(Channel.TX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
-                (int) configuration.samplerate, (int) configuration.samplerate, 1/*tx*/, 0/*NOT RUNNING*/, 0.0,
-                0.0, 0.0, 0.0);
+                (int) configuration.samplerate, (int) configuration.samplerate, 1/*tx*/, 0/*NOT RUNNING*/, 0.010,
+                0.025, 0.0, 0.010, 0);
         wdsp.SetTXAMode(Channel.TX, bandstack.getMode());
         wdsp.SetTXABandpassFreqs(Channel.TX, low, high);
         wdsp.SetTXABandpassRun(Channel.TX, 1);
 
         // setup sub receiver
         wdsp.OpenChannel(Channel.SUBRX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
-                (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 0/*NOT RUNNING*/, 0.0,
-                0.0, 0.0, 0.0);
+                (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 0/*NOT RUNNING*/, 0.010,
+                0.025, 0.0, 0.010, 0);
 
         wdsp.SetRXAMode(Channel.SUBRX, bandstack.getMode());
         wdsp.SetRXABandpassFreqs(Channel.SUBRX, low, high);
@@ -211,13 +212,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
         wdsp.SetRXAShiftRun(Channel.SUBRX, configuration.subrx ? 1 : 0);
         wdsp.SetRXAShiftFreq(Channel.SUBRX, bandstack.getSubRxFrequency());
 
-        /*
-        wdsp.OpenChannel(Channel.BS, 4096, 4096, 48000,
-                48000, 48000, 0, 1, 0.0,
-                0.0, 0.0, 0.0);
-        */
-
-        // create and start the Metis interface
+        // start the Metis interface
         metis.start();
 
 

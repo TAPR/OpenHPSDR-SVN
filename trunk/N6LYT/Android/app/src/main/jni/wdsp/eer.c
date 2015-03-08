@@ -28,6 +28,7 @@ NOTE:  THIS FILE IS CURRENTLY EXPERIMENTAL AND WILL CHANGE LATER.
 
 #include "comm.h"
 
+PORT
 EER create_eer (int run, int size, double* in, double* out, double* outM, int rate, double mgain, double pgain, int rundelays, double mdelay, double pdelay, int amiq)
 {
 	EER a = (EER) malloc0 (sizeof (eer));
@@ -66,19 +67,23 @@ EER create_eer (int run, int size, double* in, double* out, double* outM, int ra
 	return a;
 }
 
+PORT
 void destroy_eer (EER a)
 {
+	DeleteCriticalSection (&a->cs_update);
 	destroy_delay (a->pdel);
 	destroy_delay (a->mdel);
 	_aligned_free (a);
 }
 
+PORT
 void flush_eer (EER a)
 {
 	flush_delay (a->mdel);
 	flush_delay (a->pdel);
 }
 
+PORT
 void xeer (EER a)
 {
 	EnterCriticalSection (&a->cs_update);
@@ -222,6 +227,108 @@ PORT
 void SetEERSamplerate (int id, int rate)
 {
 	EER a = peer[id];
+	EnterCriticalSection (&a->cs_update);
+	a->rate = rate;
+	destroy_delay (a->mdel);
+	destroy_delay (a->pdel);
+	a->mdel = create_delay (
+		a->rundelays,								// run
+		a->size,									// size
+		a->outM,									// input buffer
+		a->outM,									// output buffer
+		a->rate,									// sample rate
+		20.0e-09,									// delta (delay stepsize)
+		a->mdelay);									// delay
+	a->pdel = create_delay (
+		a->rundelays,								// run
+		a->size,									// size
+		a->out,										// input buffer
+		a->out,										// output buffer
+		a->rate,									// sample rate
+		20.0e-09,									// delta (delay stepsize)
+		a->pdelay);									// delay
+	LeaveCriticalSection (&a->cs_update);
+}
+
+/********************************************************************************************************
+*																										*
+*								            POINTER-BASED PROPERTIES	    							*
+*																										*
+********************************************************************************************************/
+
+PORT
+void pSetEERRun (EER a, int run)
+{
+	EnterCriticalSection (&a->cs_update);
+	a->run = run;
+	LeaveCriticalSection (&a->cs_update);
+}
+
+PORT
+void pSetEERAMIQ (EER a, int amiq)
+{
+	EnterCriticalSection (&a->cs_update);
+	a->amiq = amiq;
+	LeaveCriticalSection (&a->cs_update);
+}
+
+PORT
+void pSetEERMgain (EER a, double gain)
+{
+	EnterCriticalSection (&a->cs_update);
+	a->mgain = gain;
+	LeaveCriticalSection (&a->cs_update);
+}
+
+PORT
+void pSetEERPgain (EER a, double gain)
+{
+	EnterCriticalSection (&a->cs_update);
+	a->pgain = gain;
+	LeaveCriticalSection (&a->cs_update);
+}
+
+PORT
+void pSetEERRunDelays (EER a, int run)
+{
+	EnterCriticalSection (&a->cs_update);
+	a->rundelays = run;
+	SetDelayRun (a->mdel, a->rundelays);
+	SetDelayRun (a->pdel, a->rundelays);
+	LeaveCriticalSection (&a->cs_update);
+}
+
+PORT
+void pSetEERMdelay (EER a, double delay)
+{
+	EnterCriticalSection (&a->cs_update);
+	a->mdelay = delay;
+	SetDelayValue (a->mdel, a->mdelay);
+	LeaveCriticalSection (&a->cs_update);
+}
+
+PORT
+void pSetEERPdelay (EER a, double delay)
+{
+	EnterCriticalSection (&a->cs_update);
+	a->pdelay = delay;
+	SetDelayValue (a->pdel, a->pdelay);
+	LeaveCriticalSection (&a->cs_update);
+}
+
+PORT
+void pSetEERSize (EER a, int size)
+{
+	EnterCriticalSection (&a->cs_update);
+	a->size = size;
+	SetDelayBuffs (a->mdel, a->size, a->outM, a->outM);
+	SetDelayBuffs (a->pdel, a->size, a->out, a->out);
+	LeaveCriticalSection (&a->cs_update);
+}
+
+PORT
+void pSetEERSamplerate (EER a, int rate)
+{
 	EnterCriticalSection (&a->cs_update);
 	a->rate = rate;
 	destroy_delay (a->mdel);

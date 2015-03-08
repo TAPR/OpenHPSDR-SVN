@@ -78,7 +78,7 @@ typedef struct _nob
 	double *legacy;																										////////////  legacy interface - remove
 } nob, *NOB;
 
-extern NOB create_nob	(
+__declspec (dllexport) NOB create_nob	(
 	int run,
 	int buffsize,
 	double* in,
@@ -94,10 +94,48 @@ extern NOB create_nob	(
 	double threshold
 						);
 
-extern void destroy_nob (NOB a);
+__declspec (dllexport) void destroy_nob (NOB a);
 
-extern void flush_nob (NOB a);
+__declspec (dllexport) void flush_nob (NOB a);
 
-extern void xnob (NOB a);
+__declspec (dllexport) void xnob (NOB a);
+
+extern __declspec (dllexport) void create_nobEXT	(
+	int id,
+	int run,
+	int mode,
+	int buffsize,
+	double samplerate,
+	double slewtime,
+	double hangtime,
+	double advtime,
+	double backtau,
+	double threshold
+					);
+
+extern __declspec (dllexport) void destroy_nobEXT (int id);
+
+extern __declspec (dllexport) void flush_nobEXT (int id);
+
+extern __declspec (dllexport) void xnobEXT (int id, double* in, double* out);
+
+
+extern __declspec (dllexport) void pSetRCVRNOBRun (NOB a, int run);
+
+extern __declspec (dllexport) void pSetRCVRNOBMode (NOB a, int mode);
+
+extern __declspec (dllexport) void pSetRCVRNOBBuffsize (NOB a, int size);
+
+extern __declspec (dllexport) void pSetRCVRNOBSamplerate (NOB a, int size);
+
+extern __declspec (dllexport) void pSetRCVRNOBTau (NOB a, double tau);
+
+extern __declspec (dllexport) void pSetRCVRNOBHangtime (NOB a, double time);
+
+extern __declspec (dllexport) void pSetRCVRNOBAdvtime (NOB a, double time);
+
+extern __declspec (dllexport) void pSetRCVRNOBBacktau (NOB a, double tau);
+
+extern __declspec (dllexport) void pSetRCVRNOBThreshold (NOB a, double thresh);
 
 #endif
