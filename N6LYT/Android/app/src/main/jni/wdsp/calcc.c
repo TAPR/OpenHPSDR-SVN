@@ -27,13 +27,11 @@ warren@wpratt.com
 #define _CRT_SECURE_NO_WARNINGS
 #include "comm.h"
 
-CALCC create_calcc (int channel, int runcal, int size, int rate, int ints, int spi, double hw_scale, double moxdelay, double loopdelay, double ptol, int mox, int solidmox)
+CALCC create_calcc (int channel, int rate, int ints, int spi, double hw_scale, double moxdelay, double loopdelay, double ptol)
 {
 	int i;
 	CALCC a = (CALCC) malloc0 (sizeof (calcc));
 	a->channel = channel;
-	a->runcal = runcal;
-	a->size = size;
 	a->rate = rate;
 	a->ints = ints;
 	a->spi = spi;
@@ -42,8 +40,6 @@ CALCC create_calcc (int channel, int runcal, int size, int rate, int ints, int s
 	a->ctrl.moxdelay = moxdelay;
 	a->ctrl.loopdelay = loopdelay;
 	a->ptol = ptol;
-	a->mox = mox;
-	a->solidmox = solidmox;
 
 	a->t =	(double *) malloc0 ((a->ints + 1) * sizeof(double));
 	a->t1 = (double *) malloc0 ((a->ints + 1) * sizeof(double));
@@ -650,187 +646,184 @@ void __cdecl RestoreCorrection(void *pargs)
 ********************************************************************************************************/
 
 PORT
-void pscc (int channel, int size, double* tx, double* rx)
+void pscc (int channel, int size, double* tx, double* rx, int mox, int solidmox)
 {
 	int i, n, m;
 	double env;
 	CALCC a;
 	EnterCriticalSection (&txa[channel].calcc.cs_update);
 	a = txa[channel].calcc.p;
-	if (a->runcal)
+
+	if (a->txdelay->tdelay != 0.0)
 	{
-		a->size = size;
-		if (a->mox && a->txdelay->tdelay != 0.0)
-		{
-			SetDelayBuffs (a->rxdelay, a->size, rx, rx);
-			xdelay (a->rxdelay);
-			SetDelayBuffs (a->txdelay, a->size, tx, tx);
-			xdelay (a->txdelay);
-		}
-		a->info[15] = a->ctrl.state;
+		SetDelayBuffs (a->rxdelay, size, rx, rx);
+		xdelay (a->rxdelay);
+		SetDelayBuffs (a->txdelay, size, tx, tx);
+		xdelay (a->txdelay);
+	}
+	a->info[15] = a->ctrl.state;
 
-		switch (a->ctrl.state)
-		{
-			case LRESET:
-				a->ctrl.reset = 0;
-				if (!a->ctrl.turnon)
-					if (InterlockedBitTestAndReset (&a->ctrl.running, 0))
-						_beginthread (doTurnoff, 0, (void *)a);
-				a->info[14] = 0;
-				a->ctrl.env_maxtx = 0.0;
-				if (a->ctrl.turnon)
-					a->ctrl.state = LTURNON;
-				else if (a->ctrl.automode || a->ctrl.mancal)
-					a->ctrl.state = LWAIT;
-				break;
-			case LWAIT:
-				a->ctrl.mancal = 0;
-				a->ctrl.moxcount = 0;
-				if (a->ctrl.reset)
-					a->ctrl.state = LRESET;
-				else if (a->ctrl.turnon)
-					a->ctrl.state = LTURNON;
-				else if (a->mox)
-					a->ctrl.state = LMOXDELAY;
-				break;
-			case LMOXDELAY:
-				a->ctrl.moxcount += a->size;
-				if (a->ctrl.reset)
-					a->ctrl.state = LRESET;
-				else if (a->ctrl.turnon)
-					a->ctrl.state = LTURNON;
-				else if (!a->mox || !a->solidmox)
-					a->ctrl.state = LWAIT;
-				else if ((a->ctrl.moxcount - a->size) >= a->ctrl.moxsamps)
-					a->ctrl.state = LSETUP;
-				break;
-			case LSETUP:
-				a->ctrl.count = 0;
-				for (i = 0; i < a->ints; i++)
-				{
-					a->ctrl.cpi[i] = 0;
-					a->ctrl.sindex[i] = 0;
-				}
-				a->ctrl.full_ints = 0;
-				a->ctrl.waitcount = 0;
+	switch (a->ctrl.state)
+	{
+		case LRESET:
+			a->ctrl.reset = 0;
+			if (!a->ctrl.turnon)
+				if (InterlockedBitTestAndReset (&a->ctrl.running, 0))
+					_beginthread (doTurnoff, 0, (void *)a);
+			a->info[14] = 0;
+			a->ctrl.env_maxtx = 0.0;
+			if (a->ctrl.turnon)
+				a->ctrl.state = LTURNON;
+			else if (a->ctrl.automode || a->ctrl.mancal)
+				a->ctrl.state = LWAIT;
+			break;
+		case LWAIT:
+			a->ctrl.mancal = 0;
+			a->ctrl.moxcount = 0;
+			if (a->ctrl.reset)
+				a->ctrl.state = LRESET;
+			else if (a->ctrl.turnon)
+				a->ctrl.state = LTURNON;
+			else if (mox)
+				a->ctrl.state = LMOXDELAY;
+			break;
+		case LMOXDELAY:
+			a->ctrl.moxcount += size;
+			if (a->ctrl.reset)
+				a->ctrl.state = LRESET;
+			else if (a->ctrl.turnon)
+				a->ctrl.state = LTURNON;
+			else if (!mox || !solidmox)
+				a->ctrl.state = LWAIT;
+			else if ((a->ctrl.moxcount - size) >= a->ctrl.moxsamps)
+				a->ctrl.state = LSETUP;
+			break;
+		case LSETUP:
+			a->ctrl.count = 0;
+			for (i = 0; i < a->ints; i++)
+			{
+				a->ctrl.cpi[i] = 0;
+				a->ctrl.sindex[i] = 0;
+			}
+			a->ctrl.full_ints = 0;
+			a->ctrl.waitcount = 0;
 				
-				if (a->ctrl.reset)
-					a->ctrl.state = LRESET;
-				else if (a->ctrl.turnon)
-					a->ctrl.state = LTURNON;
-				else if (a->mox && a->solidmox)
+			if (a->ctrl.reset)
+				a->ctrl.state = LRESET;
+			else if (a->ctrl.turnon)
+				a->ctrl.state = LTURNON;
+			else if (mox && solidmox)
+			{
+				a->ctrl.state = LCOLLECT;
+				SetTXAiqcDogCount (channel, a->info[13] = 0);
+			}
+			else
+				a->ctrl.state = LWAIT;
+			break;
+		case LCOLLECT:
+			for (i = 0; i < size; i++)
+			{
+				env = sqrt(tx[2 * i + 0] * tx[2 * i + 0] + tx[2 * i + 1] * tx[2 * i + 1]);
+				if (env > a->ctrl.env_maxtx)
+					a->ctrl.env_maxtx = env;
+				if ((env *= a->hw_scale * (double)a->ints) <= (double)a->ints)
 				{
-					a->ctrl.state = LCOLLECT;
-					SetTXAiqcDogCount (channel, a->info[13] = 0);
+					if (env == (double)a->ints)
+						n = a->ints - 1;
+					else
+						n = (int)env;
+					m = a->ctrl.sbase[n] + a->ctrl.sindex[n];
+					a->txs[2 * m + 0] = tx[2 * i + 0];
+					a->txs[2 * m + 1] = tx[2 * i + 1];
+					a->rxs[2 * m + 0] = rx[2 * i + 0];
+					a->rxs[2 * m + 1] = rx[2 * i + 1];
+					if (++a->ctrl.sindex[n] == a->spi) a->ctrl.sindex[n] = 0;
+					if (a->ctrl.cpi[n] != a->spi)
+						if (++a->ctrl.cpi[n] == a->spi) a->ctrl.full_ints++;
+					++a->ctrl.count;
 				}
-				else
-					a->ctrl.state = LWAIT;
-				break;
-			case LCOLLECT:
-				for (i = 0; i < a->size; i++)
-				{
-					env = sqrt(tx[2 * i + 0] * tx[2 * i + 0] + tx[2 * i + 1] * tx[2 * i + 1]);
-					if (env > a->ctrl.env_maxtx)
-						a->ctrl.env_maxtx = env;
-					if ((env *= a->hw_scale * (double)a->ints) <= (double)a->ints)
-					{
-						if (env == (double)a->ints)
-							n = a->ints - 1;
-						else
-							n = (int)env;
-						m = a->ctrl.sbase[n] + a->ctrl.sindex[n];
-						a->txs[2 * m + 0] = tx[2 * i + 0];
-						a->txs[2 * m + 1] = tx[2 * i + 1];
-						a->rxs[2 * m + 0] = rx[2 * i + 0];
-						a->rxs[2 * m + 1] = rx[2 * i + 1];
-						if (++a->ctrl.sindex[n] == a->spi) a->ctrl.sindex[n] = 0;
-						if (a->ctrl.cpi[n] != a->spi)
-							if (++a->ctrl.cpi[n] == a->spi) a->ctrl.full_ints++;
-						++a->ctrl.count;
-					}
-				}
-				GetTXAiqcDogCount (channel, &a->info[13]);
-				if (a->ctrl.reset)
-					a->ctrl.state = LRESET;
-				else if (a->ctrl.turnon)
-					a->ctrl.state = LTURNON;
-				else if (!a->mox || !a->solidmox)
-					a->ctrl.state = LWAIT;
-				else if (a->ctrl.full_ints == a->ints)
-					a->ctrl.state = MOXCHECK;
-				else if (a->info[13] >= 6)
-					a->ctrl.state = LRESET;
-				else if (a->ctrl.count >= (int)a->rate)
-					a->ctrl.state = LSETUP;
-				break;
-			case MOXCHECK:
-				if (a->ctrl.reset)
-					a->ctrl.state = LRESET;
-				else if (a->ctrl.turnon)
-					a->ctrl.state = LTURNON;
-				else if (!a->mox || !a->solidmox)
-					a->ctrl.state = LWAIT;
-				else
-					a->ctrl.state = LCALC;
-				break;
-			case LCALC:
-				if (!a->ctrl.calcinprogress)	
-				{
-					a->ctrl.calcinprogress = 1;
-					_beginthread(doCalcCorrection, 0, (void *)a);
-				}
+			}
+			GetTXAiqcDogCount (channel, &a->info[13]);
+			if (a->ctrl.reset)
+				a->ctrl.state = LRESET;
+			else if (a->ctrl.turnon)
+				a->ctrl.state = LTURNON;
+			else if (!mox || !solidmox)
+				a->ctrl.state = LWAIT;
+			else if (a->ctrl.full_ints == a->ints)
+				a->ctrl.state = MOXCHECK;
+			else if (a->info[13] >= 6)
+				a->ctrl.state = LRESET;
+			else if (a->ctrl.count >= (int)a->rate)
+				a->ctrl.state = LSETUP;
+			break;
+		case MOXCHECK:
+			if (a->ctrl.reset)
+				a->ctrl.state = LRESET;
+			else if (a->ctrl.turnon)
+				a->ctrl.state = LTURNON;
+			else if (!mox || !solidmox)
+				a->ctrl.state = LWAIT;
+			else
+				a->ctrl.state = LCALC;
+			break;
+		case LCALC:
+			if (!a->ctrl.calcinprogress)	
+			{
+				a->ctrl.calcinprogress = 1;
+				_beginthread(doCalcCorrection, 0, (void *)a);
+			}
 
-				if (InterlockedBitTestAndReset(&a->ctrl.calcdone, 0))
-				{
-					memcpy (a->info, a->binfo, 6 * sizeof (int));
-					a->ctrl.calcinprogress = 0;
-					if (a->ctrl.reset)
-						a->ctrl.state = LRESET;
-					else if (a->ctrl.turnon)
-						a->ctrl.state = LTURNON;
-					else if ((a->info[0] == 0) && (a->info[1] == 0) && (a->info[2] == 0) && (a->info[3] == 0))
-					{
-						a->info[14] = 1;
-						a->ctrl.state = LDELAY;
-					}
-					else
-					{
-						a->info[14] = 0;
-						if (a->mox && a->solidmox) a->ctrl.state = LSETUP;
-						else a->ctrl.state = LWAIT;
-					}
-				}
-				break;
-			case LDELAY:
-				a->ctrl.waitcount += a->size;
+			if (InterlockedBitTestAndReset(&a->ctrl.calcdone, 0))
+			{
+				memcpy (a->info, a->binfo, 6 * sizeof (int));
+				a->ctrl.calcinprogress = 0;
 				if (a->ctrl.reset)
 					a->ctrl.state = LRESET;
 				else if (a->ctrl.turnon)
 					a->ctrl.state = LTURNON;
-				else if ((a->ctrl.waitcount - a->size) >= a->ctrl.waitsamps)
+				else if ((a->info[0] == 0) && (a->info[1] == 0) && (a->info[2] == 0) && (a->info[3] == 0))
 				{
-					if (a->ctrl.automode)
-					{
-						if (a->mox && a->solidmox)
-							a->ctrl.state = LSETUP;
-						else
-							a->ctrl.state = LWAIT;
-					}
-					else
-						a->ctrl.state = LSTAYON;
+					a->info[14] = 1;
+					a->ctrl.state = LDELAY;
 				}
-				break;
-			case LSTAYON:
-				if (a->ctrl.reset || a->ctrl.automode || a->ctrl.mancal)
-					a->ctrl.state = LRESET;
-				break;
-			case LTURNON:
-				a->ctrl.turnon = 0;
-				a->ctrl.automode = 0;
-				a->info[14] = 1;
-				a->ctrl.state = LSTAYON;
-				break;
-		}
+				else
+				{
+					a->info[14] = 0;
+					if (mox && solidmox) a->ctrl.state = LSETUP;
+					else a->ctrl.state = LWAIT;
+				}
+			}
+			break;
+		case LDELAY:
+			a->ctrl.waitcount += size;
+			if (a->ctrl.reset)
+				a->ctrl.state = LRESET;
+			else if (a->ctrl.turnon)
+				a->ctrl.state = LTURNON;
+			else if ((a->ctrl.waitcount - size) >= a->ctrl.waitsamps)
+			{
+				if (a->ctrl.automode)
+				{
+					if (mox && solidmox)
+						a->ctrl.state = LSETUP;
+					else
+						a->ctrl.state = LWAIT;
+				}
+				else
+					a->ctrl.state = LSTAYON;
+			}
+			break;
+		case LSTAYON:
+			if (a->ctrl.reset || a->ctrl.automode || a->ctrl.mancal)
+				a->ctrl.state = LRESET;
+			break;
+		case LTURNON:
+			a->ctrl.turnon = 0;
+			a->ctrl.automode = 0;
+			a->info[14] = 1;
+			a->ctrl.state = LSTAYON;
+			break;
 	}
 	LeaveCriticalSection (&txa[channel].calcc.cs_update);
 }
@@ -842,8 +835,6 @@ void psccF (int channel, int size, float *Itxbuff, float *Qtxbuff, float *Irxbuf
 	CALCC a;
 	EnterCriticalSection (&txa[channel].calcc.cs_update);
 	a = txa[channel].calcc.p;
-	a->mox = mox;
-	a->solidmox = solidmox;
 	LeaveCriticalSection (&txa[channel].calcc.cs_update);
 	for (i = 0; i < size; i++)
 	{
@@ -852,7 +843,7 @@ void psccF (int channel, int size, float *Itxbuff, float *Qtxbuff, float *Irxbuf
 		a->temprx[2 * i + 0] = (double)Irxbuff[i];
 		a->temprx[2 * i + 1] = (double)Qrxbuff[i];
 	}
-	pscc (channel, size, a->temptx, a->temprx);
+	pscc (channel, size, a->temptx, a->temprx, mox, solidmox);
 }
 
 PORT
@@ -885,46 +876,6 @@ void PSRestoreCorr (int channel, char* filename)
 *											  Properties												*
 *																										*
 ********************************************************************************************************/
-
-PORT
-void SetPSRunCal (int channel, int run)
-{
-	CALCC a;
-	EnterCriticalSection (&txa[channel].calcc.cs_update);
-	a = txa[channel].calcc.p;
-	a->runcal = run;
-	LeaveCriticalSection (&txa[channel].calcc.cs_update);
-}
-
-PORT
-void SetPSInSize (int channel, int size)
-{
-	CALCC a;
-	EnterCriticalSection (&txa[channel].calcc.cs_update);
-	a = txa[channel].calcc.p;
-	a->size = size;
-	LeaveCriticalSection (&txa[channel].calcc.cs_update);
-}
-
-PORT
-void SetPSMox (int channel, int mox)
-{
-	CALCC a;
-	EnterCriticalSection (&txa[channel].calcc.cs_update);
-	a = txa[channel].calcc.p;
-	a->mox = mox;
-	LeaveCriticalSection (&txa[channel].calcc.cs_update);
-}
-
-PORT
-void SetPSSolidmox (int channel, int solidmox)
-{
-	CALCC a;
-	EnterCriticalSection (&txa[channel].calcc.cs_update);
-	a = txa[channel].calcc.p;
-	a->solidmox = solidmox;
-	LeaveCriticalSection (&txa[channel].calcc.cs_update);
-}
 
 PORT 
 void GetPSInfo (int channel, int *info)
@@ -1012,8 +963,7 @@ double SetPSTXDelay (int channel, double delay)
 	double adelay;
 	EnterCriticalSection (&txa[channel].calcc.cs_update);
 	a = txa[channel].calcc.p;
-	a->txdel = delay;
-	adelay = SetDelayValue (a->txdelay, a->txdel);
+	adelay = SetDelayValue (a->txdelay, delay);
 	LeaveCriticalSection (&txa[channel].calcc.cs_update);
 	return adelay;
 }
@@ -1068,33 +1018,4 @@ void GetPSDisp (int channel, double* x, double* ym, double* yc, double* ys, doub
 	memcpy (cc, a->disp.cc, a->ints * 4 * sizeof (double));
 	memcpy (cs, a->disp.cs, a->ints * 4 * sizeof (double));
 	LeaveCriticalSection (&a->disp.cs_disp);
-}
-
-PORT
-void SetPSFeedbackRate (int channel, int rate)
-{
-	CALCC a = txa[channel].calcc.p;
-	EnterCriticalSection (&txa[channel].calcc.cs_update);
-	a->rate = rate;
-	a->ctrl.moxsamps = (int)(a->rate * a->ctrl.moxdelay);
-	a->ctrl.waitsamps = (int)(a->rate * a->ctrl.loopdelay);
-	destroy_delay (a->txdelay);
-	destroy_delay (a->rxdelay);
-	a->rxdelay = create_delay (
-		1,											// run
-		0,											// size				[stuff later]
-		0,											// input buffer		[stuff later]
-		0,											// output buffer	[stuff later]
-		a->rate,									// sample rate
-		20.0e-09,									// delta (delay stepsize)
-		0.0);										// delay
-	a->txdelay = create_delay (
-		1,											// run
-		0,											// size				[stuff later]
-		0,											// input buffer		[stuff later]
-		0,											// output buffer	[stuff later]
-		a->rate,									// sample rate
-		20.0e-09,									// delta (delay stepsize)
-		a->txdel);									// delay
-	LeaveCriticalSection (&txa[channel].calcc.cs_update);
 }

@@ -7,13 +7,11 @@ anr.c \
 bandpass.c \
 calcc.c \
 cblock.c \
-cfir.c \
 channel.c \
 compress.c \
 delay.c \
 div.c \
 eer.c \
-emnr.c \
 emph.c \
 eq.c \
 fcurve.c \
@@ -31,7 +29,6 @@ meter.c \
 meterlog10.c \
 nob.c \
 nobII.c \
-osctrl.c \
 patchpanel.c \
 resample.c \
 RXA.c \

@@ -199,12 +199,12 @@ void xamd (AMD a)
 							}
 						case 1:	//LSB
 							{
-								audio = (ai_ps - bi_ps) + (aq_ps + bq_ps);
+								audio = (ai_ps + bi_ps) - (aq_ps - bq_ps);
 								break;
 							}
 						case 2:	//USB
 							{
-								audio = (ai_ps + bi_ps) - (aq_ps - bq_ps);
+								audio = (ai_ps - bi_ps) + (aq_ps + bq_ps);
 								break;
 							}
 						}

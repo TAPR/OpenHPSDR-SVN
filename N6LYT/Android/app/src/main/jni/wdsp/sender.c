@@ -62,11 +62,11 @@ void xsender (SENDER a)
 		case 0:
 			{
 				int i;
-				dINREAL* outf = (dINREAL *)a->out;
+				float* outf = (float *)a->out;
 				for (i = 0; i < a->size; i++)
 				{
-					outf [2 * i + 0] = (dINREAL)a->in[2 * i + 1];	// note the I/Q swap
-					outf [2 * i + 1] = (dINREAL)a->in[2 * i + 0];
+					outf [2 * i + 0] = (float)a->in[2 * i + 1];	// note the I/Q swap
+					outf [2 * i + 1] = (float)a->in[2 * i + 0];
 				}
 				Spectrum2 (a->arg0, a->arg1, a->arg2, outf);	// Spectrum2 (disp, ss, LO, buff);
 				break;

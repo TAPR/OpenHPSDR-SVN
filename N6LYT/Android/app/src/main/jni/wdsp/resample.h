@@ -51,17 +51,13 @@ typedef struct _resample
 	int phnum;			// phase number
 } resample, *RESAMPLE;
 
-__declspec (dllexport)
-RESAMPLE create_resample (int run, int size, double* in, double* out, int in_rate, int out_rate, double fc, int ncoef, double gain);
+extern RESAMPLE create_resample (int run, int size, double* in, double* out, int in_rate, int out_rate, double gain);
 
-__declspec (dllexport)
-void destroy_resample (RESAMPLE a);
+extern void destroy_resample (RESAMPLE a);
 
-__declspec (dllexport)
-void flush_resample (RESAMPLE a);
+extern void flush_resample (RESAMPLE a);
 
-__declspec (dllexport)
-int xresample (RESAMPLE a);
+extern int xresample (RESAMPLE a);
 
 #endif
 

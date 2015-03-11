@@ -828,7 +828,16 @@ public class Metis extends Thread {
                         } else {
                             sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getTxGain() * configuration.rfgain);
                         }
-                        sendbuffer[13] = 0;
+                        byte c2=0x00;
+                        if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES) {
+                            if(configuration.radio==Configuration.HERMES_APOLLO) {
+                                c2=(byte)(APOLLO_BOARD | APOLLO_FILTER | APOLLO_TUNER);
+                                if(tuning) {
+                                    c2|=APOLLO_TUNE;
+                                }
+                            }
+                        }
+                        sendbuffer[13] = c2;
                         sendbuffer[14] = (byte) 0;
                         sendbuffer[15] = (byte) 0;
                         command++;
@@ -1203,6 +1212,11 @@ public class Metis extends Thread {
     // control 2
     public static byte MODE_CLASS_E = (byte) 0x01;
     public static byte MODE_OTHERS = (byte) 0x00;
+
+    public static byte APOLLO_FILTER = (byte)0x04;
+    public static byte APOLLO_TUNER = (byte)0x08;
+    public static byte APOLLO_TUNE = (byte)0x10;
+    public static byte APOLLO_BOARD = (byte)0x20;
 
     // control 3
     public static byte ALEX_ATTENUATION_0DB = (byte) 0x00;

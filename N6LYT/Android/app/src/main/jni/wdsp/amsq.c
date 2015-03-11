@@ -193,17 +193,6 @@ void SetRXAAMSQThreshold (int channel, double threshold)
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
 
-PORT
-void SetRXAAMSQMaxTail (int channel, double tail)
-{
-	AMSQ a;
-	EnterCriticalSection (&ch[channel].csDSP);
-	a = rxa[channel].amsq.p;
-	if (tail < a->min_tail) tail = a->min_tail;
-	a->max_tail = tail;
-	LeaveCriticalSection (&ch[channel].csDSP);
-}
-
 /********************************************************************************************************
 *																										*
 *											TXA Properties												*

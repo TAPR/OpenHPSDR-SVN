@@ -181,7 +181,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
         // setup receiver
         wdsp.OpenChannel(Channel.RX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
                 (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 1/*RUNNING*/, 0.010,
-                0.025, 0.0, 0.010, 0);
+                0.025, 0.0, 0.010/*, 0*/);
 
         wdsp.SetRXAMode(Channel.RX, bandstack.getMode());
         wdsp.SetRXABandpassFreqs(Channel.RX, low, high);
@@ -193,7 +193,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
         // setup transmitter
         wdsp.OpenChannel(Channel.TX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
                 (int) configuration.samplerate, (int) configuration.samplerate, 1/*tx*/, 0/*NOT RUNNING*/, 0.010,
-                0.025, 0.0, 0.010, 0);
+                0.025, 0.0, 0.010/*, 0*/);
         wdsp.SetTXAMode(Channel.TX, bandstack.getMode());
         wdsp.SetTXABandpassFreqs(Channel.TX, low, high);
         wdsp.SetTXABandpassRun(Channel.TX, 1);
@@ -201,7 +201,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
         // setup sub receiver
         wdsp.OpenChannel(Channel.SUBRX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
                 (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 0/*NOT RUNNING*/, 0.010,
-                0.025, 0.0, 0.010, 0);
+                0.025, 0.0, 0.010/*, 0*/);
 
         wdsp.SetRXAMode(Channel.SUBRX, bandstack.getMode());
         wdsp.SetRXABandpassFreqs(Channel.SUBRX, low, high);
@@ -289,7 +289,6 @@ public class RadioActivity extends Activity implements OnTouchListener {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        Log.i("RadioActivity", "minus button down " + configuration.step);
                         if (!locked) {
                             int step = Step.getStep(configuration.step);
                             BandStack bandstack = configuration.bands.get().get();
@@ -306,7 +305,6 @@ public class RadioActivity extends Activity implements OnTouchListener {
                             handler.postAtTime(updateTask, SystemClock.uptimeMillis() + 500);
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                        Log.i("RadioActivity", "minus button up");
                         handler.removeCallbacks(updateTask);
                     }
                     return false;

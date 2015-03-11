@@ -38,7 +38,11 @@ void main (void *pargs)
 	case 0:	// rxa
 		while (_InterlockedAnd (&ch[channel].run, 1))
 		{
+#ifdef linux
+                        WaitForSingleObject(&ch[channel].iob.pd->Sem_BuffReady,INFINITE);
+#else
 			WaitForSingleObject(ch[channel].iob.pd->Sem_BuffReady,INFINITE);
+#endif
 			EnterCriticalSection (&ch[channel].csDSP);
 			dexchange (channel, rxa[channel].outbuff, rxa[channel].inbuff);
 			xrxa (channel);
@@ -48,7 +52,11 @@ void main (void *pargs)
 	case 1:  // txa
 		while (_InterlockedAnd (&ch[channel].run, 1))
 		{
+#ifdef linux
+                        WaitForSingleObject(&ch[channel].iob.pd->Sem_BuffReady,INFINITE);
+#else
 			WaitForSingleObject(ch[channel].iob.pd->Sem_BuffReady,INFINITE);
+#endif
 			EnterCriticalSection (&ch[channel].csDSP);
 			dexchange (channel, txa[channel].outbuff, txa[channel].inbuff);
 			xtxa (channel);

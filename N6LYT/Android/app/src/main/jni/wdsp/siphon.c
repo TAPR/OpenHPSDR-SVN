@@ -91,7 +91,6 @@ void flush_siphon (SIPHON a)
 
 void xsiphon (SIPHON a)
 {
-	int first, second;
 	EnterCriticalSection(&a->update);
 	if (a->run)
 	{
@@ -99,19 +98,8 @@ void xsiphon (SIPHON a)
 			memcpy (a->sipbuff, &(a->in[2 * (a->insize - a->sipsize)]), a->sipsize * sizeof (complex));
 		else
 		{
-			if (a->insize > (a->sipsize - a->idx))
-			{
-				first = a->sipsize - a->idx;
-				second = a->insize - first;
-			}
-			else
-			{
-				first = a->insize;
-				second = 0;
-			}
-			memcpy (a->sipbuff + 2 * a->idx, a->in, first * sizeof (complex));
-			memcpy (a->sipbuff, a->in + 2 * first, second * sizeof (complex));
-			if ((a->idx += a->insize) >= a->sipsize) a->idx -= a->sipsize;
+			memcpy (&(a->sipbuff[2 * a->idx]), a->in, a->insize * sizeof (complex));
+			if ((a->idx += a->insize) == a->sipsize) a->idx = 0;
 		}
 	}
 	LeaveCriticalSection(&a->update);
@@ -244,65 +232,4 @@ void TXAGetSpecF1 (int channel, float* out)
 			out[i] = (float)(10.0 * mlog10 (a->specout[2 * j + 0] * a->specout[2 * j + 0] + a->specout[2 * j + 1] * a->specout[2 * j + 1] + 1.0e-60));
 			out[m] = (float)(10.0 * mlog10 (a->specout[2 * n + 0] * a->specout[2 * n + 0] + a->specout[2 * n + 1] * a->specout[2 * n + 1] + 1.0e-60));
 		}
-}
-
-/********************************************************************************************************
-*																										*
-*									    CALLS FOR EXTERNAL USE											*
-*																										*
-********************************************************************************************************/
-
-#define MAX_EXT_SIPHONS	(2)									// maximum number of Siphons called from outside wdsp
-__declspec (align (16)) SIPHON psiphon[MAX_EXT_SIPHONS];	// array of pointers for Siphons used EXTERNAL to wdsp
-
-
-PORT
-void create_siphonEXT (int id, int run, int insize, int sipsize, int fftsize, int specmode)
-{
-	psiphon[id] = create_siphon (run, insize, 0, sipsize, fftsize, specmode);
-}
-
-PORT
-void destroy_siphonEXT (int id)
-{
-	destroy_siphon (psiphon[id]);
-}
-
-PORT
-void flush_siphonEXT (int id)
-{
-	flush_siphon (psiphon[id]);
-}
-
-PORT
-void xsiphonEXT (int id, double* buff)
-{
-	SIPHON a = psiphon[id];
-	a->in = buff;
-	xsiphon (a);
-}
-
-PORT
-void GetaSipF1EXT (int id, float* out, int size)
-{	// return raw samples as floats
-	SIPHON a = psiphon[id];
-	int i;
-	EnterCriticalSection (&a->update);
-	a->outsize = size;
-	suck (a);
-	LeaveCriticalSection (&a->update);
-	for (i = 0; i < size; i++)
-	{
-		out[2 * i + 0] = (float)a->sipout[2 * i + 0];
-		out[2 * i + 1] = (float)a->sipout[2 * i + 1];
-	}
-}
-
-PORT
-void SetSiphonInsize (int id, int size)
-{
-	SIPHON a = psiphon[id];
-	EnterCriticalSection (&a->update);
-	a->insize = size;
-	LeaveCriticalSection (&a->update);
 }

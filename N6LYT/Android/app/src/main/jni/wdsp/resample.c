@@ -32,14 +32,14 @@ warren@wpratt.com
 *																								*
 ************************************************************************************************/
 
-PORT
-RESAMPLE create_resample ( int run, int size, double* in, double* out, int in_rate, int out_rate, double fc, int ncoef, double gain)
+RESAMPLE create_resample ( int run, int size, double* in, double* out, int in_rate, int out_rate, double gain)
 {
 	RESAMPLE a = (RESAMPLE) malloc0 (sizeof (resample));
 	int x, y, z;
 	int i, j, k;
 	int min_rate;
 	double full_rate;
+	double fc;
 	double fc_norm;
 	double* impulse;
 	a->run = run;
@@ -59,17 +59,16 @@ RESAMPLE create_resample ( int run, int size, double* in, double* out, int in_ra
 	a->M = in_rate / x;
 	if (in_rate < out_rate) min_rate = in_rate;
 	else min_rate = out_rate;
-	if (fc == 0.0) fc = 0.45 * (double)min_rate;
+	fc = 0.45 * (double)min_rate;
 	full_rate = (double)(in_rate * a->L);
 	fc_norm = fc / full_rate;
-	if (ncoef == 0) a->ncoef = (int)(140.0 * full_rate / min_rate);
-	else a->ncoef = ncoef;
+	a->ncoef = (int)(60.0 / fc_norm);
 	a->ncoef = (a->ncoef / a->L + 1) * a->L;
 	a->cpp = a->ncoef / a->L;
 	a->h = (double *) malloc0 (a->ncoef * sizeof (double));
 	impulse = fir_bandpass (a->ncoef, -fc_norm, +fc_norm, 1.0, 1, 0, a->gain * (double)a->L);
 	i = 0;
-	for (j = 0; j < a->L; j++)
+	for (j = 0; j < a->L; j ++)
 		for (k = 0; k < a->ncoef; k += a->L)
 			a->h[i++] = impulse[j + k];
 	a->ringsize = a->cpp;
@@ -80,7 +79,6 @@ RESAMPLE create_resample ( int run, int size, double* in, double* out, int in_ra
 	return a;
 }
 
-PORT
 void destroy_resample (RESAMPLE a)
 {
 	_aligned_free (a->ring);
@@ -88,7 +86,6 @@ void destroy_resample (RESAMPLE a)
 	_aligned_free (a);
 }
 
-PORT
 void flush_resample (RESAMPLE a)
 {
 	memset (a->ring, 0, a->ringsize * sizeof (complex));
@@ -96,7 +93,6 @@ void flush_resample (RESAMPLE a)
 	a->phnum = 0;
 }
 
-PORT
 int xresample (RESAMPLE a)
 {
 	int outsamps = 0;
@@ -133,30 +129,6 @@ int xresample (RESAMPLE a)
 	else if (a->in != a->out)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
 	return outsamps;
-}
-
-// exported calls
-
-PORT
-void* create_resampleV (int in_rate, int out_rate)
-{
-	return (void *)create_resample (1, 0, 0, 0, in_rate, out_rate, 0.0, 0, 1.0);
-}
-
-PORT
-void xresampleV (double* input, double* output, int numsamps, int* outsamps, void* ptr)
-{
-	RESAMPLE a = (RESAMPLE)ptr;
-	a->in = input;
-	a->out = output;
-	a->size = numsamps;
-	*outsamps = xresample(a);
-}
-
-PORT
-void destroy_resampleV (void* ptr)
-{
-	destroy_resample ( (RESAMPLE)ptr );
 }
 
 /************************************************************************************************

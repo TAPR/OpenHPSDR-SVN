@@ -48,11 +48,8 @@ typedef struct _iob
 	int   r2_inidx;								// in 'double', actual index into the buffer is 2 times this
 	int   r2_outidx;							// in 'double', actual index into the buffer is 2 times this
 	int   r2_havesamps;							// number of processed samples in output pseudo-ring
-	int   r2_unqueuedsamps;						// number of output samples not yet queued / released for output
 	CRITICAL_SECTION r2_ControlSection;
 
-	int bfo;									// block_for_output, wait until output is available before proceeding
-	HANDLE Sem_OutReady;						// count = number of 'out_size' buffers processed and available for output
 	HANDLE Sem_BuffReady;						// count = number of 'dsp_size' buffers queued for processing
 
 	struct
