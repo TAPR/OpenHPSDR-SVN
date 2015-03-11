@@ -9,8 +9,8 @@
  * Signature: (IIIIIIIIDDDD)V
  */
 JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_OpenChannel
-  (JNIEnv *env, jobject obj, jint channel, jint in_size, jint dsp_size, jint input_samplerate, jint dsp_rate, jint output_samplerate, jint type, jint state, jdouble tdelayup, jdouble tslewup, jdouble tdelaydown, jdouble tslewdown, jint bfo) {
-	OpenChannel(channel,in_size,dsp_size,input_samplerate,dsp_rate,output_samplerate,type,state,tdelayup,tslewup,tdelaydown,tslewdown,bfo);
+  (JNIEnv *env, jobject obj, jint channel, jint in_size, jint dsp_size, jint input_samplerate, jint dsp_rate, jint output_samplerate, jint type, jint state, jdouble tdelayup, jdouble tslewup, jdouble tdelaydown, jdouble tslewdown) {
+	OpenChannel(channel,in_size,dsp_size,input_samplerate,dsp_rate,output_samplerate,type,state,tdelayup,tslewup,tdelaydown,tslewdown);
 }
 
 /*

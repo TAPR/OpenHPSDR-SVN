@@ -50,7 +50,7 @@ void initBlanker(ANB a)
 	memset(a->dline, 0, a->dline_size * sizeof(complex));
 }
 
-PORT
+
 ANB create_anb	(
 	int run,
 	int buffsize,
@@ -85,7 +85,6 @@ ANB create_anb	(
 	return a;
 }
 
-PORT
 void destroy_anb (ANB a)
 { 
 	DeleteCriticalSection (&a->cs_update);
@@ -95,7 +94,6 @@ void destroy_anb (ANB a)
 	_aligned_free (a);
 }
 
-PORT
 void flush_anb (ANB a)
 {
 	EnterCriticalSection (&a->cs_update);
@@ -103,7 +101,6 @@ void flush_anb (ANB a)
 	LeaveCriticalSection (&a->cs_update);
 }
 
-PORT
 void xanb (ANB a)
 {
     double scale;
@@ -204,80 +201,6 @@ void xanb (ANB a)
 //	 LeaveCriticalSection (&a->cs_update);
 // }
 
-/********************************************************************************************************
-*																										*
-*										POINTER-BASED PROPERTIES										*
-*																										*
-********************************************************************************************************/
-
-PORT
-void pSetRCVRANBRun (ANB a, int run)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->run = run;
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRANBBuffsize (ANB a, int size)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->buffsize = size;
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRANBSamplerate (ANB a, int rate)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->samplerate = (double) rate;
-	initBlanker (a);
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRANBTau (ANB a, double tau)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->tau = tau;
-	initBlanker (a);
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRANBHangtime (ANB a, double time)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->hangtime = time;
-	initBlanker (a);
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRANBAdvtime (ANB a, double time)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->advtime = time;
-	initBlanker (a);
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRANBBacktau (ANB a, double tau)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->backtau = tau;
-	initBlanker (a);
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRANBThreshold (ANB a, double thresh)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->threshold = thresh;
-	LeaveCriticalSection (&a->cs_update);
-}
 
 /********************************************************************************************************
 *																										*

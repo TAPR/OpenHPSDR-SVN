@@ -30,7 +30,7 @@ public class WDSP {
 	
 	public native void OpenChannel (int channel, int in_size, int dsp_size, int input_samplerate,         
 			int dsp_rate, int output_samplerate, int type, int state, double tdelayup,          
-			double tslewup, double tdelaydown, double tslewdown, int bfo);
+			double tslewup, double tdelaydown, double tslewdown/*, int bfo*/);
 	public native void CloseChannel (int channel);
 	public native void fexchange0 (int channel, double[] in, double[] out, int[] error);
 	public native void fexchange2 (int channel, float[] Iin, float[] Qin, float[] Iout, float[] Qout, 

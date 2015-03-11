@@ -89,8 +89,6 @@ void xdiv (MDIV a)
 		}
 		LeaveCriticalSection (&a->cs_update);
 	}
-	else
-		memcpy (a->out, a->in[0], a->size * sizeof (complex));
 }
 
 
@@ -122,11 +120,10 @@ void flush_divEXT (int id)
 }
 
 PORT
-void xdivEXT (int id, int nsamples, double **in, double *out)
+void xdivEXT (int id, double **in, double *out)
 {
 	int i;
 	MDIV a = pdiv[id];
-	a->size = nsamples;
 	a->out = out;
 	for (i = 0; i < a->nr; i++) a->in[i] = in[i];
 	xdiv (a);

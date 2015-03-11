@@ -60,7 +60,6 @@ void init_nob (NOB a)
     flush_nob (a);
 }
 
-PORT
 NOB create_nob (
 	int run,
 	int buffsize,
@@ -123,7 +122,6 @@ NOB create_nob (
 	return a;
 }
 
-PORT
 void destroy_nob (NOB a)
 {
 	_aligned_free (a->legacy);																					   ///////////////  remove
@@ -137,7 +135,6 @@ void destroy_nob (NOB a)
 	_aligned_free (a);
 }
 
-PORT
 void flush_nob (NOB a)
 {
 	a->out_idx = 0;
@@ -154,7 +151,6 @@ void flush_nob (NOB a)
 	memset (a->ffbuff, 0, a->filterlen * sizeof (complex));
 }
 
-PORT
 void xnob (NOB a)
 {
 	double scale;
@@ -491,90 +487,6 @@ void xnob (NOB a)
 	}
 	else if (a->in != a->out)
 		memcpy (a->out, a->in, a->buffsize * sizeof (complex));
-	LeaveCriticalSection (&a->cs_update);
-}
-
-/********************************************************************************************************
-*																										*
-*										POINTER-BASED PROPERTIES										*
-*																										*
-********************************************************************************************************/
-
-PORT
-void pSetRCVRNOBRun (NOB a, int run)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->run = run;
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRNOBMode (NOB a, int mode)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->mode = mode;
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRNOBBuffsize (NOB a, int size)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->buffsize = size;
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRNOBSamplerate (NOB a, int rate)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->samplerate = (double) rate;
-	init_nob (a);
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRNOBTau (NOB a, double tau)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->advslewtime = tau;
-	a->hangslewtime = tau;
-	init_nob (a);
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRNOBHangtime (NOB a, double time)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->hangtime = time;
-	init_nob (a);
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRNOBAdvtime (NOB a, double time)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->advtime = time;
-	init_nob (a);
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRNOBBacktau (NOB a, double tau)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->backtau = tau;
-	init_nob (a);
-	LeaveCriticalSection (&a->cs_update);
-}
-
-PORT
-void pSetRCVRNOBThreshold (NOB a, double thresh)
-{
-	EnterCriticalSection (&a->cs_update);
-	a->threshold = thresh;
 	LeaveCriticalSection (&a->cs_update);
 }
 

@@ -24,7 +24,7 @@ warren@wpratt.com
 
 */
 
-__declspec (dllexport) void *malloc0 (int size);
+extern void *malloc0 (int size);
 
 extern void print_impulse (const char* filename, int N, double* impulse, int rtype, int pr_mode);
 
@@ -39,7 +39,3 @@ extern void print_message (const char* filename, const char* message, int p0, in
 extern void print_deviation (const char* filename, double dpmax, double rate);
 
 extern void doCalccPrintSamples(int channel);
-
-__declspec (dllexport) void print_buffer_parameters (const char* filename, int channel);
-
-extern void print_anb_parms (const char* filename, ANB a);

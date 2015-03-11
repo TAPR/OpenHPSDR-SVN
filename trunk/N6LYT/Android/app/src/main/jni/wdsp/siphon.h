@@ -70,14 +70,4 @@ extern __declspec (dllexport) void TXAGetaSipF1 (int channel, float* out, int si
 
 extern __declspec (dllexport) void TXAGetSpecF1 (int channel, float* out);
 
-// Calls for External Use
-
-extern __declspec (dllexport) void create_siphonEXT (int id, int run, int insize, int sipsize, int fftsize, int specmode);
-
-extern __declspec (dllexport) void destroy_siphonEXT (int id);
-
-extern __declspec (dllexport) void xsiphonEXT (int id, double* buff);
-
-extern __declspec (dllexport) void SetSiphonInsize (int id, int size);
-
 #endif

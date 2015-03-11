@@ -48,7 +48,6 @@ struct _ch
 	double tslewup;
 	double tdelaydown;
 	double tslewdown;
-	int bfo;					// 'block_for_output', block fexchange until output is available
 	volatile long flushflag;
 	struct	//io buffers
 	{
@@ -56,7 +55,7 @@ struct _ch
 	} iob;
 } ch[MAX_CHANNELS];
 
-PORT void OpenChannel (int channel, int in_size, int dsp_size, int input_samplerate, int dsp_rate, int output_samplerate, int type, int state, double tdelayup, double tslewup, double tdelaydown, double tslewdown, int bfo);
+PORT void OpenChannel (int channel, int in_size, int dsp_size, int input_samplerate, int dsp_rate, int output_samplerate, int type, int state, double tdelayup, double tslewup, double tdelaydown, double tslewdown);
 
 PORT void CloseChannel (int channel);
 

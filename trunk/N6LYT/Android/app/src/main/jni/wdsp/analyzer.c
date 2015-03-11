@@ -62,7 +62,7 @@ void new_window(int disp, int type, int size, double PiAlpha)
 				a->window[i] = inv_coherent_gain * 1.0;
 			break;
 		}
-	case 1:					// blackman-harris window (4 term)
+	case 1:					// blackman-harris window
 		{
 			arg0 = 2.0 * PI / ((double)size - 1.0);
 			sum = 0.0;
@@ -121,33 +121,12 @@ void new_window(int disp, int type, int size, double PiAlpha)
 			break;
 		}
 	case 5:					// Kaiser window
-		{	arg0 = bessi0(PiAlpha);
+		{	arg0 = bessi0(a->PiAlpha);
 			arg1 = (double)(size - 1);
 			sum = 0.0;
 			for (i = 0; i < size; ++i)
 			{
-				a->window[i] = bessi0(PiAlpha * sqrt(1.0 - pow(2.0 * (double)i / arg1 - 1.0, 2))) / arg0;
-				sum += a->window[i];
-			}
-			inv_coherent_gain = (double)size / sum;
-			for (i = 0; i < size; i++)
-				a->window[i] *= inv_coherent_gain;
-			break;
-		}
-	case 6:					// Blackman-Harris 7-term
-		{
-			arg0 = 2.0 * PI / ((double)size - 1.0);
-			sum = 0.0;
-			for (i = 0; i < size; ++i)
-			{
-				arg1 = cos (arg0 * (double)i);
-				a->window[i]   =	+ 6.3964424114390378e-02
-						+ arg1 *  ( - 2.3993864599352804e-01
-						+ arg1 *  ( + 3.5015956323820469e-01
-						+ arg1 *  ( - 2.4774111897080783e-01
-						+ arg1 *  ( + 8.5438256055858031e-02
-						+ arg1 *  ( - 1.2320203369293225e-02
-						+ arg1 *  ( + 4.3778825791773474e-04 ))))));
+				a->window[i] = bessi0(a->PiAlpha * sqrt(1.0 - pow(2.0 * (double)i / arg1 - 1.0, 2))) / arg0;
 				sum += a->window[i];
 			}
 			inv_coherent_gain = (double)size / sum;
@@ -484,7 +463,11 @@ DWORD WINAPI spectra (void *pargs)
 
 	if (a->stop)
 	{
-		InterlockedDecrement(a->pnum_threads);
+#ifdef linux
+                InterlockedDecrement(&a->pnum_threads);
+#else
+                InterlockedDecrement(a->pnum_threads);
+#endif
 		return 0;
 	}
 
@@ -499,14 +482,22 @@ DWORD WINAPI spectra (void *pargs)
 
 		if (a->stop)
 		{
-			InterlockedDecrement(a->pnum_threads);
+#ifdef linux
+                        InterlockedDecrement(&a->pnum_threads);
+#else
+                        InterlockedDecrement(a->pnum_threads);
+#endif
 			return 0;
 		}
 		fftw_execute (a->plan[ss][LO]);
 	}
 	if (a->stop)
 	{
-		InterlockedDecrement(a->pnum_threads);
+#ifdef linux
+                InterlockedDecrement(&a->pnum_threads);
+#else
+                InterlockedDecrement(a->pnum_threads);
+#endif
 		return 0;
 	}
 
@@ -522,15 +513,15 @@ DWORD WINAPI spectra (void *pargs)
 
 		EnterCriticalSection (&a->StitchSection);
 #ifdef linux
-		a->stitch_flag |= 1L << ss;
+                a->stitch_flag |= 1L << ss;
 #else
-		a->stitch_flag |= 1i64 << ss;
+                a->stitch_flag |= 1i64 << ss;
 #endif
 
 #ifdef linux
-		if (a->stitch_flag == ((1L << a->num_stitch) - 1))
+                if (a->stitch_flag == ((1L << a->num_stitch) - 1))
 #else
-		if (a->stitch_flag == ((1i64 << a->num_stitch) - 1))
+                if (a->stitch_flag == ((1i64 << a->num_stitch) - 1))
 #endif
 		{
 			a->stitch_flag = 0;
@@ -546,7 +537,11 @@ DWORD WINAPI spectra (void *pargs)
 	else
 		LeaveCriticalSection (&(a->EliminateSection[ss]));
 
-		InterlockedDecrement(a->pnum_threads);
+#ifdef linux
+                InterlockedDecrement(&a->pnum_threads);
+#else
+                InterlockedDecrement(a->pnum_threads);
+#endif
 		return 1;
 }
 
@@ -561,7 +556,11 @@ DWORD WINAPI Cspectra (void *pargs)
 
 	if (a->stop)
 	{
-		InterlockedDecrement(a->pnum_threads);
+#ifdef linux
+                InterlockedDecrement(&a->pnum_threads);
+#else
+                InterlockedDecrement(a->pnum_threads);
+#endif
 		return 0;
 	}
 
@@ -577,14 +576,22 @@ DWORD WINAPI Cspectra (void *pargs)
 
 		if (a->stop)
 		{
-			InterlockedDecrement(a->pnum_threads);
+#ifdef linux
+                        InterlockedDecrement(&a->pnum_threads);
+#else
+                        InterlockedDecrement(a->pnum_threads);
+#endif
 			return 0;
 		}
 		fftw_execute (a->Cplan[ss][LO]);
 	}
 	if (a->stop)
 	{
-		InterlockedDecrement(a->pnum_threads);
+#ifdef linux
+                InterlockedDecrement(&a->pnum_threads);
+#else
+                InterlockedDecrement(a->pnum_threads);
+#endif
 		return 0;
 	}
 
@@ -592,7 +599,11 @@ DWORD WINAPI Cspectra (void *pargs)
 	{
 		memcpy((char *)(a->snap_buff[ss][LO]), (char *)(a->fft_out[ss][LO]) + trans_size, trans_size);
 		memcpy((char *)(a->snap_buff[ss][LO]) + trans_size, (char *)(a->fft_out[ss][LO]), trans_size);
-		SetEvent(a->hSnapEvent[ss][LO]);
+#ifdef linux
+                SetEvent(&(a->hSnapEvent[ss][LO]));
+#else
+                SetEvent(a->hSnapEvent[ss][LO]);
+#endif
 	}
 
 	EnterCriticalSection(&(a->EliminateSection[ss]));
@@ -607,15 +618,15 @@ DWORD WINAPI Cspectra (void *pargs)
 
 		EnterCriticalSection (&a->StitchSection);
 #ifdef linux
-		a->stitch_flag |= 1L << ss;
+                a->stitch_flag |= 1L << ss;
 #else
-		a->stitch_flag |= 1i64 << ss;
+                a->stitch_flag |= 1i64 << ss;
 #endif
 
 #ifdef linux
-		if (a->stitch_flag == ((1L << a->num_stitch) - 1))
+                if (a->stitch_flag == ((1L << a->num_stitch) - 1))
 #else
-		if (a->stitch_flag == ((1i64 << a->num_stitch) - 1))
+                if (a->stitch_flag == ((1i64 << a->num_stitch) - 1))
 #endif
 		{
 			a->stitch_flag = 0;
@@ -631,7 +642,11 @@ DWORD WINAPI Cspectra (void *pargs)
 	else
 		LeaveCriticalSection (&(a->EliminateSection[ss]));
 
-		InterlockedDecrement(a->pnum_threads);
+#ifdef linux
+                InterlockedDecrement(&a->pnum_threads);
+#else
+                InterlockedDecrement(a->pnum_threads);
+#endif
 		return 1;
 }
 
@@ -786,11 +801,23 @@ void __cdecl sendbuf(void *arg)
 
 					a->IQO_idx[a->ss][a->LO] = a->IQout_index[a->ss][a->LO];
 					
-					InterlockedIncrement(a->pnum_threads);
+#ifdef linux
+                                        InterlockedIncrement(&a->pnum_threads);
+#else
+                                        InterlockedIncrement(a->pnum_threads);
+#endif
 					if (a->type == 0)
-						QueueUserWorkItem(spectra, (void *)(((int)arg << 12) + (a->ss << 4) + a->LO), 0);
+#ifdef linux
+                                                QueueUserWorkItem(&spectra, (void *)(((int)arg << 12) + (a->ss << 4) + a->LO), 0);
+#else
+                                                QueueUserWorkItem(spectra, (void *)(((int)arg << 12) + (a->ss << 4) + a->LO), 0);
+#endif
 					else
-						QueueUserWorkItem(Cspectra, (void *)(((int)arg << 12) + (a->ss << 4) + a->LO), 0);
+#ifdef linux
+                                                QueueUserWorkItem(&Cspectra, (void *)(((int)arg << 12) + (a->ss << 4) + a->LO), 0);
+#else
+                                                QueueUserWorkItem(Cspectra, (void *)(((int)arg << 12) + (a->ss << 4) + a->LO), 0);
+#endif
 
 					if((a->IQout_index[a->ss][a->LO] += a->incr) >= a->bsize)
 						a->IQout_index[a->ss][a->LO] -= a->bsize;
@@ -1052,9 +1079,9 @@ void XCreateAnalyzer(	int disp,
 		for (j = 0; j < a->max_num_fft; j++)
 		{
 #ifdef linux
-			CreateEvent(&a->hSnapEvent[i][j],NULL, FALSE, FALSE, "snap");
+                        CreateEvent(&a->hSnapEvent[i][j],NULL, FALSE, FALSE, "snap");
 #else
-			a->hSnapEvent[i][j] = CreateEvent(NULL, FALSE, FALSE, TEXT("snap"));
+                        a->hSnapEvent[i][j] = CreateEvent(NULL, FALSE, FALSE, TEXT("snap"));
 #endif
 			a->snap[i][j] = 0;
 		}
@@ -1285,7 +1312,11 @@ void SnapSpectrum(	int disp,
 	DP a = pdisp[disp];
 	a->snap_buff[ss][LO] = snap_buff;
 	InterlockedBitTestAndSet(&(a->snap[ss][LO]), 0);
-	WaitForSingleObject(a->hSnapEvent[ss][LO], INFINITE);
+#ifdef linux
+        WaitForSingleObject(&a->hSnapEvent[ss][LO], INFINITE);
+#else
+        WaitForSingleObject(a->hSnapEvent[ss][LO], INFINITE);
+#endif
 }
 
 int calcompare (const void * a, const void * b)
@@ -1449,50 +1480,4 @@ void Spectrum2(int disp, int ss, int LO, dINREAL* pbuff)
 	}
 	else
 		LeaveCriticalSection(&a->SetAnalyzerSection);
-}
-
-PORT
-void Spectrum0(int run, int disp, int ss, int LO, double* pbuff)
-{
-	if (run)
-	{
-		int i;
-		dINREAL *Ipointer;
-		dINREAL *Qpointer;
-		DP a = pdisp[disp];
-		EnterCriticalSection(&a->SetAnalyzerSection);
-		Ipointer = &((a->I_samples[ss][LO])[a->IQin_index[ss][LO]]);
-		Qpointer = &((a->Q_samples[ss][LO])[a->IQin_index[ss][LO]]);
-		LeaveCriticalSection(&a->SetAnalyzerSection);
-
-		for (i = 0; i < a->buff_size; i++)
-		{
-			Ipointer[i] = (dINREAL)pbuff[2 * i + 1];
-			Qpointer[i] = (dINREAL)pbuff[2 * i + 0];
-		}
-
-		EnterCriticalSection(&a->SetAnalyzerSection);
-		EnterCriticalSection(&(a->BufferControlSection[ss][LO]));
-			if (a->have_samples[ss][LO] > a->max_writeahead)
-				{
-					//if we're receiving samples too much faster than we're consuming them, skip some
-					if ((a->IQout_index[ss][LO] += a->have_samples[ss][LO] - a->max_writeahead) >= a->bsize)
-					 	a->IQout_index[ss][LO] -= a->bsize;
-					a->have_samples[ss][LO] = a->max_writeahead;
-				}
-			if ((a->have_samples[ss][LO] += a->buff_size) >= a->size)
-				InterlockedBitTestAndSet(&(a->buff_ready[ss][LO]), 0);
-		LeaveCriticalSection(&(a->BufferControlSection[ss][LO]));
-		if((a->IQin_index[ss][LO] += a->buff_size) >= a->bsize)	//REQUIRES buff_size IS A SUB-MULTIPLE OF SIZE OF INPUT SAMPLE BUFFS!
-			a->IQin_index[ss][LO] = 0;
-
-		if (!a->dispatcher)
-		{
-			a->dispatcher = 1;
-			LeaveCriticalSection(&a->SetAnalyzerSection);
-			_beginthread(sendbuf, 0, (void *)disp);
-		}
-		else
-			LeaveCriticalSection(&a->SetAnalyzerSection);
-	}
 }
