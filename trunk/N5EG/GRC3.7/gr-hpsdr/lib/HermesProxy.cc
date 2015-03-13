@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /* 
- * Copyright 2013, 2014 Tom McDermott, N5EG
+ * Copyright 2013-2015 Tom McDermott, N5EG
  * 
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,7 +54,8 @@
 HermesProxy::HermesProxy(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
 			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
 			 unsigned char TxDr, int RxSmp, const char* Intfc, 
-			 const char * ClkS, const char * AlexC, int NumRx)	// constructor
+			 const char * ClkS, int AlexRA, int AlexTA,
+			 int AlexHPF, int AlexLPF, int Verb, int NumRx)	// constructor
 {
 
 
@@ -87,9 +88,14 @@ HermesProxy::HermesProxy(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
 	sscanf(ClkS, "%x", &cs);
 	ClockSource = (cs & 0xFC);
 
-	unsigned int ac;		// Convert AlexControl string to unsigned, then initialize
-	sscanf(AlexC, "%x", &ac);
-	AlexControl = ac;
+//	Initialize the Alex control registers.
+
+	AlexRxAnt = AlexRA;		// Select Alex Receive Antenna or from T/R relay
+	AlexTxAnt = AlexTA;		// Select Alex Tx Antenna
+	AlexRxHPF = AlexHPF;		// Select Alex Receive High Pass Filter
+	AlexTxLPF = AlexLPF;		// Select Alex Transmit Low Pass Filter
+
+	Verbose = Verb;			// Turn Verbose mode on/off
 
 	Receive0Frequency = (unsigned)RxFreq0;
 	Receive1Frequency = (unsigned)RxFreq1; 
@@ -241,7 +247,7 @@ void HermesProxy::ReceiveRxIQ(unsigned char * inbuf)	// called by metis Rx threa
 	
 
 	// Metis Rx thread gives us collection of samples including the Ethernet header
-	// plus 2 x HPSSDR USB frames.
+	// plus 2 x HPSDR USB frames.
 
 	// TODO - Handle Mic audio from Hermes.
 
@@ -267,12 +273,6 @@ void HermesProxy::ReceiveRxIQ(unsigned char * inbuf)	// called by metis Rx threa
 
 	inbuf += 8;			// skip past Ethernet header
 
-	unsigned char c0 = inbuf[3];	// control register 0
-	unsigned char c1 = inbuf[4];	// control register 1
-	unsigned char c2 = inbuf[5];	// control register 2
-	unsigned char c3 = inbuf[6];	// control register 3
-	unsigned char c4 = inbuf[7];	// control register 4
-
 	IQBuf_t outbuf;			// RxWrite output buffer selector
 	
 	outbuf = RxIQBuf[RxWriteCounter];	// initialize buffer pointer
@@ -281,70 +281,126 @@ void HermesProxy::ReceiveRxIQ(unsigned char * inbuf)	// called by metis Rx threa
 
 	ScheduleTxFrame(TotalRxBufCount); // Schedule a Tx ethernet frame to Hermes if ready.
 
+	// Need to check for both 1st and 2nd USB frames for the status registers.
+	// Some status come in only in the first, and some only in the second.
+
 	// check for proper frame sync
-	if(inbuf[0] == 0x7f && inbuf[1] == 0x7f && inbuf[2] == 0x7f)
+
+	for (int USBFrameOffset = 0; USBFrameOffset<=512; USBFrameOffset += 512)
 	{
-		if(c0 == 0) 
+
+		unsigned char s0 = inbuf[0+USBFrameOffset];	// sync register 0
+		unsigned char s1 = inbuf[1+USBFrameOffset];	// sync register 0
+		unsigned char s2 = inbuf[2+USBFrameOffset];	// sync register 0
+		unsigned char c0 = inbuf[3+USBFrameOffset];	// control register 0
+		unsigned char c1 = inbuf[4+USBFrameOffset];	// control register 1
+		unsigned char c2 = inbuf[5+USBFrameOffset];	// control register 2
+		unsigned char c3 = inbuf[6+USBFrameOffset];	// control register 3
+		unsigned char c4 = inbuf[7+USBFrameOffset];	// control register 4
+
+		if(s0 == 0x7f && s1 == 0x7f && s2 == 0x7f)
 		{
-		  if(c1 & 0x01)
-		    ADCoverload = true;
-		  else
-		    ADCoverload = false;
+			if((c0 & 0xf8) == 0x00) // Overflow and Version
+			{
+//			  fprintf(stderr, "Reg:0x00   c0:0x%x c1:0x%x c2:0x%x c3:0x%u c4:0x%x\n", c0, c1, c2, c3, c4);
 
-		  HermesVersion = c4;
-		  //fprintf(stderr, "HermesVersion: %d (dec)  %X (hex)\n", HermesVersion, HermesVersion);
+			  if(c1 & 0x01)
+			    ADCoverload = true;
+			  else
+			    ADCoverload = false;
+
+			  HermesVersion = c4;
+			}
+
+			if((c0 & 0xf8) == 0x08)  //AIN5 and AIN1
+			{
+//			  fprintf(stderr, "Reg:0x08   c0:0x%x c1:0x%x c2:0x%x c3:0x%u c4:0x%x\n", c0, c1, c2, c3, c4);
+			  AIN5 = (unsigned int)c1 * 256 + (unsigned int)c2;
+			  AIN1 = (unsigned int)c3 * 256 + (unsigned int)c4;
+			}
+
+			if((c0 & 0xf8) == 0x10)  //AIN2 and AIN3
+			{
+//			  fprintf(stderr, "Reg:0x10   c0:0x%x c1:0x%x c2:0x%x c3:0x%u c4:0x%x\n", c0, c1, c2, c3, c4);
+			  AIN2 = (unsigned int)c1 * 256 + (unsigned int)c2;
+			  AIN3 = (unsigned int)c3 * 256 + (unsigned int)c4;
+
+			}
+
+			if((c0 & 0xf8) == 0x18)  //AIN4 and AIN6
+			{
+//			  fprintf(stderr, "Reg:0x18   c0:0x%x c1:0x%x c2:0x%x c3:0x%u c4:0x%x\n", c0, c1, c2, c3, c4);
+			  AIN4 = (unsigned int)c1 * 256 + (unsigned int)c2;
+			  AIN6 = (unsigned int)c3 * 256 + (unsigned int)c4;
+			}
+
+			if (Verbose)
+			{
+			  SlowCount++;
+			  if ((SlowCount & 0x1ff) == 0x1ff)
+			  {
+			    float FwdPwr = (float)AIN1 * (float)AIN1 / 145000.0;
+			    float RevPwr = (float)AIN2 * (float)AIN2 / 145000.0;
+
+			    fprintf(stderr, "AlexFwdPwr = %4.0f  AlexRevPwr = %4.0f   ", FwdPwr, RevPwr);
+			    fprintf(stderr, "ADCOver: %u  HermesVersion: %d (dec)  %X (hex)\n", ADCoverload, HermesVersion, HermesVersion);
+			    //fprintf(stderr, "AIN1:%u  AIN2:%u  AIN3:%u  AIN4:%u  AIN5:%u  AIN6:%u\n", AIN1, AIN2, AIN3, AIN4, AIN5, AIN6);  
+			    } 
+			}
+		} //endif sync is valid
+		
+		else
+		{
+			CorruptRxCount++;
+			//fprintf(stderr, "HermesProxy: EP6 received from Hermes failed sync header check.\n");
+			//PrintRawBuf(inbuf-8);	// include Ethernet header
+			return;
 		}
 
-		// Use write and read counters to select from the Rx buffers,
-		// these are circular.
-
-		if ((outbuf = GetNextRxBuf(outbuf)) == NULL)
-		    return;			// all buffers full. Throw away data
-
-		// Convert 24-bit 2's complement integer samples to float with
-		// maximum value of +1.0 and minimum of -1.0
-		// skip sync/register headers (i=0 and i=64)
+	}	// end for two USB frames
 
 
-		if (NumReceivers == 1)		// one receiver
-						// 8 byte header + 8 bytes per row * 63 rows = 512 byte USB
-		  for (int i=1; i<128; i++)	// both USB frames, skip header on first frame
-		  {
-		    if (i==64)			// skip header for 2nd frame
-		      continue;
+	// Use write and read counters to select from the Rx buffers,
+	// these are circular.
 
-		    Unpack1RxIQ(&inbuf[i*8], outbuf);  // convert 2's comp to float and place in outbuf
+	if ((outbuf = GetNextRxBuf(outbuf)) == NULL)
+	    return;			// all buffers full. Throw away data
 
-		    if ((outbuf = GetNextRxBuf(outbuf)) == NULL)  // if needed, get next buffer
-		        return;			// all buffers full. Throw away data      
-		  } 
-		else				// two receivers
-		{				// 8 byte header + 14 bytes per row * 36 rows = 512 byte USB
+	// Convert 24-bit 2's complement integer samples to float with
+	// maximum value of +1.0 and minimum of -1.0
+	// skip sync/register headers (i=0 and i=64)
 
 
-		//PrintRawBuf(inbuf-8);
+	if (NumReceivers == 1)		// one receiver
+	{					// 8 byte header + 8 bytes per row * 63 rows = 512 byte USB
+	  for (int i=1; i<128; i++)	// both USB frames, skip header on first frame
+	  {
+	    if (i==64)			// skip header for 2nd frame
+	      continue;
 
-		  for (int i=0; i<36; i++)	// first USB frame
-		  {
-		    Unpack2RxIQ(&inbuf[(i*14) + 8], outbuf);  // convert 2's comp to float and place in outbuf
+	    Unpack1RxIQ(&inbuf[i*8], outbuf);  // convert 2's comp to float and place in outbuf
 
-		    if ((outbuf = GetNextRxBuf(outbuf)) == NULL)  // if needed, get next buffer
-		        return;			// all buffers full. Throw away data
-    		  } 
-		  for (int i=0; i<36; i++)	// second USB frame
-		  {
-		    Unpack2RxIQ(&inbuf[(i*14) + 520], outbuf);  // convert 2's comp to float and place in outbuf
-
-		    if ((outbuf = GetNextRxBuf(outbuf)) == NULL)  // if needed, get next buffer
-		      return;			// all buffers full. Throw away data
-		  }
-		}
+	    if ((outbuf = GetNextRxBuf(outbuf)) == NULL)  // if needed, get next buffer
+	        return;			// all buffers full. Throw away data      
+	  } 
 	}
-	else
-	{
-		CorruptRxCount++;
-		//fprintf(stderr, "HermesProxy: EP6 received from Hermes failed sync header check.\n");
-		//PrintRawBuf(inbuf-8);	// include Ethernet header
+	else				// two receivers
+	{				// 8 byte header + 14 bytes per row * 36 rows = 512 byte USB
+	//PrintRawBuf(inbuf-8);
+	  for (int i=0; i<36; i++)	// first USB frame
+	  {
+	    Unpack2RxIQ(&inbuf[(i*14) + 8], outbuf);  // convert 2's comp to float and place in outbuf
+
+	    if ((outbuf = GetNextRxBuf(outbuf)) == NULL)  // if needed, get next buffer
+	        return;			// all buffers full. Throw away data
+	  } 
+	  for (int i=0; i<36; i++)	// second USB frame
+	  {
+	    Unpack2RxIQ(&inbuf[(i*14) + 520], outbuf);  // convert 2's comp to float and place in outbuf
+
+	    if ((outbuf = GetNextRxBuf(outbuf)) == NULL)  // if needed, get next buffer
+	      return;			// all buffers full. Throw away data
+	  }
 	}
 
 	return;			// normal return;
@@ -668,7 +724,7 @@ void HermesProxy::BuildControlRegs(unsigned RegNum, RawBuf_t outbuf)
 	    if(RxSampleRate == 48000)
 		Speed |= 0x00;
 
-	    RxCtrl = ((AlexControl & 0x00010000) >> 16);
+	    RxCtrl = 0x00;
 	    if(RxPreamp)
 		RxCtrl |= 0x04;
 	    if(ADCdither)
@@ -682,18 +738,17 @@ void HermesProxy::BuildControlRegs(unsigned RegNum, RawBuf_t outbuf)
 		Ctrl4 |= 0x04;
 
 	    outbuf[4] = Speed;				// C1
-	    outbuf[5] = ((AlexControl & 0xc0000000) >> 24); // C2
-	    outbuf[6] = RxCtrl;				// C3
-	    outbuf[7] = Ctrl4;				// C4 - #Rx, Duplex
-
-            break;
+	    outbuf[5] = 0x00;				// C2
+	    outbuf[6] = RxCtrl | AlexRxAnt;		// C3
+	    outbuf[7] = Ctrl4 | AlexTxAnt;		// C4 - #Rx, Duplex
+          break;
 
 	  case 2:					// Tx NCO freq (and Rx1 NCO for special case)
 	    outbuf[4] = ((unsigned char)(TransmitFrequency >> 24)) & 0xff;	// c1 RxFreq MSB
 	    outbuf[5] = ((unsigned char)(TransmitFrequency >> 16)) & 0xff;	// c2
 	    outbuf[6] = ((unsigned char)(TransmitFrequency >> 8)) & 0xff;	// c3
 	    outbuf[7] = ((unsigned char)(TransmitFrequency)) & 0xff;		// c4 RxFreq LSB
-           break;
+          break;
 
 	  case 4:					// Rx1 NCO freq
 	    outbuf[4] = ((unsigned char)(Receive0Frequency >> 24)) & 0xff;	// c1 RxFreq MSB
@@ -724,11 +779,50 @@ void HermesProxy::BuildControlRegs(unsigned RegNum, RawBuf_t outbuf)
 	    if (PTTOffMutesTx & (PTTMode == PTTOff))
 		outbuf[4] = 0;				// (almost) kill Tx when PTTOff and PTTControlsTx
 	    else
-		outbuf[4] = TxDrive;
+		outbuf[4] = TxDrive;			// c1
 
-	    outbuf[5] = 0;				// Apollo selections
-	    outbuf[6] = ((AlexControl & 0xff00) >> 8);	// Alex filter selections 1
-	    outbuf[7] = (AlexControl & 0xff);		// Alex filter selections 2
+
+	    unsigned char RxHPF, TxLPF;
+
+	    RxHPF = AlexRxHPF;
+	    if (AlexRxHPF == 0)				// if Rx autotrack
+	    {
+		if (Receive0Frequency < 1500000)
+		  RxHPF = 0x20;				// bypass
+		else if (Receive0Frequency < 6500000)
+	          RxHPF = 0x10;				// 1.5 MHz HPF
+		else if (Receive0Frequency < 9500000)
+		  RxHPF = 0x08;				// 6.5 MHz HPF
+		else if (Receive0Frequency < 13000000)
+		  RxHPF = 0x04;				// 9.5 mHz HPF
+		else if (Receive0Frequency < 20000000)
+		  RxHPF = 0x01;				// 13 Mhz HPF
+		else if (Receive0Frequency < 50000000)
+		  RxHPF = 0x02;				// 20 MHz HPF
+		else RxHPF = 0x40;			// 6M BPF + LNA
+	    }
+
+	    TxLPF = AlexTxLPF;
+	    if (AlexTxLPF == 0)				// if Tx autotrack
+	    {
+		if (TransmitFrequency > 30000000)
+		  TxLPF = 0x10;				// 6m LPF
+		else if (TransmitFrequency > 19000000)
+		  TxLPF = 0x20;				// 10/12m LPF
+		else if (TransmitFrequency > 14900000)
+		  TxLPF = 0x40;				// 15/17m LPF
+		else if (TransmitFrequency > 9900000)
+		  TxLPF = 0x01;				// 30/20m LPF
+		else if (TransmitFrequency > 4900000)
+		  TxLPF = 0x02;				// 60/40m LPF
+		else if (TransmitFrequency > 3400000)
+		  TxLPF = 0x04;				// 80m LPF
+		else TxLPF = 0x08;			// 160m LPF
+	    }
+
+	    outbuf[5] = 0x40;				// c2 - Alex Manual filter control enabled
+	    outbuf[6] = RxHPF & 0x7f;			// c3 - Alex HPF filter selection
+	    outbuf[7] = TxLPF & 0x7f;			// c4 - Alex LPF filter selection
 	  break;
 
 	  case 20:					// Hermes input attenuator setting

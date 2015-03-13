@@ -4,7 +4,7 @@
   <key>hpsdr_hermesNB</key>
   <category>hpsdr</category>
   <import>import hpsdr</import>
-  <make>hpsdr.hermesNB($Rx0F, $Rx1F, $TxF, $RxPre, $PTTmode, $PTTTx, $PTTRx, $TxDrive, $RxSmp, $Intfc, $CkS, $AlexC, $num_outputs)</make>
+  <make>hpsdr.hermesNB($Rx0F, $Rx1F, $TxF, $RxPre, $PTTmode, $PTTTx, $PTTRx, $TxDrive, $RxSmp, $Intfc, $CkS, $AlexRA, $AlexTA, $AlexHPF, $AlexLPF, $Verbose, $num_outputs)</make>
   <callback>set_Receive0Frequency($Rx0F)</callback>
   <callback>set_Receive1Frequency($Rx1F)</callback>
   <callback>set_RxSampRate($RxSmp)</callback>
@@ -15,8 +15,11 @@
   <callback>set_TxDrive($TxDrive)</callback>
   <callback>set_TransmitFrequency($TxF)</callback>
   <callback>set_ClockSource($CkS)</callback>
-  <callback>set_AlexControl($AlexC)</callback>
-
+  <callback>set_AlexRxAntenna($AlexRA)</callback>
+  <callback>set_AlexTxAntenna($AlexTA)</callback>
+  <callback>set_AlexRxHPF($AlexHPF)</callback>
+  <callback>set_AlexTxLPF($AlexLPF)</callback>
+  <callback>set_Verbose($Verbose)</callback>
  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
@@ -45,6 +48,22 @@
     <key>RxSmp</key>
     <value>192000</value>
     <type>int</type>
+    <option>
+      <name>48000</name>
+      <key>48000</key>
+    </option>
+    <option>
+      <name>96000</name>
+      <key>96000</key>
+    </option>
+    <option>
+      <name>192000</name>
+      <key>192000</key>
+    </option>
+    <option>
+      <name>384000</name>
+      <key>384000</key>
+    </option>
   </param>
   <param>
     <name>Rx Preamp Off/On</name>
@@ -95,10 +114,134 @@
     <type>raw</type>
   </param>
   <param>
-    <name>Alex Control</name>
-    <key>AlexC</key>
-    <value>"0x00000000"</value>
-    <type>raw</type>
+    <name>Alex Tx Antenna</name>
+    <key>AlexTA</key>
+    <value>0</value>
+    <type>enum</type>
+    <option>
+      <name>Tx1</name>
+      <key>0</key>
+    </option>
+    <option>
+      <name>Tx2</name>
+      <key>1</key>
+    </option>
+    <option>
+      <name>Tx3</name>
+      <key>2</key>
+    </option>
+  </param>
+  <param>
+    <name>Alex Rx Antenna</name>
+    <key>AlexRA</key>
+    <value>0</value>
+    <type>enum</type>
+    <option>
+      <name>Tx Ant via T/R Relay</name>
+      <key>0</key>
+    </option>
+    <option>
+      <name>Rx1</name>
+      <key>0xa0</key>
+    </option>
+    <option>
+      <name>Rx2</name>
+      <key>0xc0</key>
+    </option>
+    <option>
+      <name>RxXvrtr</name>
+      <key>0xe0</key>
+    </option>
+  </param>
+  <param>
+    <name>Alex Rx HPF</name>
+    <key>AlexHPF</key>
+    <value>0x00</value>
+    <type>enum</type>
+   <option>
+      <name>AutoTrack Rx0Freq</name>
+      <key>0x00</key>
+    </option>
+     <option>
+      <name>Bypass</name>
+      <key>0x20</key>
+    </option>
+    <option>
+      <name>1.5 MHz HPF</name>
+      <key>0x10</key>
+    </option>
+    <option>
+      <name>6.5 MHz HPF</name>
+      <key>0x08</key>
+    </option>
+    <option>
+      <name>9.5 MHz HPF</name>
+      <key>0x04</key>
+    </option>
+    <option>
+      <name>13 MHz HPF</name>
+      <key>0x01</key>
+    </option>
+    <option>
+      <name>20 MHz HPF</name>
+      <key>0x02</key>
+    </option>
+    <option>
+      <name>6M LNA+LPF</name>
+      <key>0x40</key>
+    </option>
+  </param>
+  <param>
+    <name>Alex Tx LPF</name>
+    <key>AlexLPF</key>
+    <value>0x00</value>
+    <type>enum</type>
+    <option>
+      <name>AutoTrack TxFreq</name>
+      <key>0x00</key>
+    </option>
+    <option>
+      <name>160m LPF</name>
+      <key>0x08</key>
+    </option>
+    <option>
+      <name>80m LPF</name>
+      <key>0x04</key>
+    </option>
+    <option>
+      <name>60/40m LPF</name>
+      <key>0x02</key>
+    </option>
+    <option>
+      <name>30/20m LPF</name>
+      <key>0x01</key>
+    </option>
+    <option>
+      <name>17/15m LPF</name>
+      <key>0x40</key>
+    </option>
+    <option>
+      <name>12/10m LPF</name>
+      <key>0x20</key>
+    </option>
+    <option>
+      <name>6m LPF</name>
+      <key>0x10</key>
+    </option>
+  </param>
+  <param>
+    <name>Verbose (1=on, 0=off)</name>
+    <key>Verbose</key>
+    <value>0</value>
+    <type>int</type>
+    <option>
+      <name>Off</name>
+      <key>0</key>
+    </option>
+    <option>
+      <name>On</name>
+      <key>1</key>
+    </option>
   </param>
 
 <check>$num_outputs >= 1</check> 
@@ -143,10 +286,11 @@
   6 bits are used (lower 2 bits are overwritten by receive sample speed
   selection. Hermes ignores this register. Default value selects Mercury.
     Example: "0xfc" {including quote marks}
-  *Alex Control = HPSDR Alex Controls - 4 bytes, each assigned to one register.
-  MSB->C3, 3rd byte->C4 for C0=0,  2nd byte->C3, LSB->C4 for C0 = 0x12.
-    Example: "0x00000000" {including quote marks}
-  See "HPSDR - USB Data Protocol" document.
+  *Alex Tx Ant = selects transmit antenna (Tx1, Tx2, or Tx3).
+  *Alex Rx ant = selects receive antenna connector, or Tx antenna via T/R relay.
+  *Alex Tx LPF = selects transmit Low Pass Filter. Auto tracks the Transmit Frequency.
+  *Alex Rx HPF = selects receive High Pass filter. Auto tracks Receiver 0 Frequency.
+  *Verbose = if =1 then prints Hermes/Metis FPGA rev, Fwd and Rev log voltage from Alex
   Update: 03-13-2014: Reverse transmit I and Q samples (FPGA reverses them).
   </doc>
 </block>
