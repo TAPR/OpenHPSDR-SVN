@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /* 
- * Copyright 2013 Tom McDermott, N5EG
+ * Copyright 2013-2015 Tom McDermott, N5EG
  * 
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -94,7 +94,11 @@ public:
 	unsigned char RxAtten;		// not yet used (requires Hermes firmware V2.0)
 
 	unsigned int ClockSource;	// upper 6-bits of clock control register
-	unsigned int AlexControl;	// 32 bits of Alex control word
+
+	unsigned char AlexRxAnt;	// Select Alex Receive Antenna or from T/R relay
+	unsigned char AlexTxAnt;	// Select Alex Tx Antenna
+	unsigned char AlexRxHPF;	// Select Alex Receive High Pass Filter
+	unsigned char AlexTxLPF;	// Select Alex Transmit Low Pass Filter
 
 	int PTTMode;
 	bool RxPreamp;
@@ -104,6 +108,11 @@ public:
 	bool Duplex;
 
 	unsigned char HermesVersion;
+	unsigned int AIN1, AIN2, AIN3, AIN4, AIN5, AIN6;  // Analog inputs to Hermes
+	unsigned int AlexRevPwr;
+	unsigned int SlowCount;
+	int Verbose;
+
 	bool TxStop;
 	bool PTTOffMutesTx;		// PTT Off mutes the transmitter
 	bool PTTOnMutesRx;		// PTT On receiver
@@ -113,7 +122,8 @@ public:
 	HermesProxy(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
 			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
 			 unsigned char TxDr, int RxSmp, const char* Intfc, 
-			 const char * ClkS, const char * AlexC, int NumRx);	// constructor
+			 const char * ClkS, int AlexRA, int AlexTA,
+			 int AlexHPF, int AlexRPF, int Verbose, int NumRx);	// constructor
 
 	~HermesProxy();			// destructor
 
