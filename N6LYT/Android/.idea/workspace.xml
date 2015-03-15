@@ -46,7 +46,7 @@
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/MainActivity.java" line="198" mnemonic="1" />
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" line="1380" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" line="1383" />
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="a55701af-2f6f-4ad8-a17e-cff519115f5b" name="Default" comment="">
@@ -74,7 +74,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anr.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anr.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anr.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anr.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anr.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anr.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="$PROJECT_DIR$/app/app-release.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/bandpass.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/bandpass.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/bandpass.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/bandpass.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/bandpass.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/bandpass.o" />
@@ -153,7 +152,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meterlog10.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meterlog10.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meterlog10.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meterlog10.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meterlog10.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meterlog10.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/nob.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/nob.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/nob.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/nob.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/nob.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/nob.o" />
@@ -190,6 +188,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wisdom.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wisdom.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wisdom.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wisdom.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wisdom.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wisdom.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/org/g0orx/openhpsdr/BuildConfig.java" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/org/g0orx/openhpsdr/BuildConfig.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/Makefile" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/Makefile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/RXA.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/RXA.c" />
@@ -221,9 +221,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/analyzer.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/analyzer.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/analyzer.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/analyzer.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/analyzer.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/analyzer.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/anf.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/anf.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anf.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anf.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anf.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anf.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anf.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anf.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/anr.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/anr.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anr.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anr.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anr.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anr.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anr.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anr.o.d" />
@@ -237,6 +239,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/calcc.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/calcc.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/calcc.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/calcc.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/calcc.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/calcc.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/cblock.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/cblock.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/cblock.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/cblock.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/cblock.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/cblock.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/cblock.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/cblock.o.d" />
@@ -266,6 +269,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/emph.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/emph.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/emph.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/emph.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/emph.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/emph.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/eq.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/eq.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eq.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eq.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eq.o.d" />
@@ -275,12 +279,14 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fir.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fir.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fir.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/fmd.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/fmd.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmd.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmd.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmd.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmd.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmd.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmd.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmmod.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmmod.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmmod.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmmod.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmmod.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmmod.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/fmsq.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/fmsq.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmsq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmsq.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmsq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmsq.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmsq.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmsq.o.d" />
@@ -289,9 +295,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gain.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gain.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gain.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gain.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gain.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gain.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/gen.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/gen.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gen.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gen.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gen.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gen.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gen.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gen.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/iir.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/iir.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iir.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iir.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iir.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iir.o.d" />
@@ -313,6 +321,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/main.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/main.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/main.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/main.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/main.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/main.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/meter.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/meter.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meter.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/meter.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meter.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/meter.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meter.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/meter.o.d" />
@@ -347,6 +356,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/sender.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/sender.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/sender.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/sender.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/sender.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/sender.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/shift.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/shift.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/shift.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/shift.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/shift.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/shift.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/shift.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/shift.o.d" />
@@ -364,6 +374,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/utilities.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/utilities.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/utilities.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/utilities.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/utilities.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/utilities.o.d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/wcpAGC.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/wcpAGC.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wcpAGC.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/wcpAGC.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wcpAGC.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/wcpAGC.o.d" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wcpAGC.o.d" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/wcpAGC.o.d" />
@@ -398,91 +409,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RadioActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="RadioActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2059" max-vertical-offset="22350">
-              <caret line="203" column="40" selection-start-line="203" selection-start-column="40" selection-end-line="203" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.22344323" vertical-offset="2068" max-vertical-offset="22395">
+              <caret line="192" column="26" selection-start-line="192" selection-start-column="13" selection-end-line="192" selection-end-column="26" />
               <folding>
-                <element signature="e#8351#8359#0" expanded="true" />
-                <element signature="e#9697#10913#0" expanded="true" />
-                <element signature="e#10865#10866#0" expanded="true" />
-                <element signature="e#11244#12711#0" expanded="true" />
-                <element signature="e#12696#12697#0" expanded="true" />
-                <element signature="e#13026#14493#0" expanded="true" />
-                <element signature="e#14478#14479#0" expanded="true" />
-                <element signature="e#14686#15081#0" expanded="true" />
-                <element signature="e#15069#15070#0" expanded="true" />
-                <element signature="e#15202#19111#0" expanded="true" />
-                <element signature="e#19099#19100#0" expanded="true" />
-                <element signature="e#19221#27208#0" expanded="true" />
-                <element signature="e#20090#20619#0" expanded="true" />
-                <element signature="e#20588#20589#0" expanded="true" />
-                <element signature="e#21928#26860#0" expanded="true" />
-                <element signature="e#26833#26834#0" expanded="true" />
-                <element signature="e#27197#27198#0" expanded="true" />
-                <element signature="e#27329#29078#0" expanded="true" />
-                <element signature="e#29067#29068#0" expanded="true" />
-                <element signature="e#29236#30664#0" expanded="true" />
-                <element signature="e#30649#30650#0" expanded="true" />
-                <element signature="e#30821#40852#0" expanded="true" />
-                <element signature="e#31633#32162#0" expanded="true" />
-                <element signature="e#32131#32132#0" expanded="true" />
-                <element signature="e#32617#35801#0" expanded="true" />
-                <element signature="e#35778#35779#0" expanded="true" />
-                <element signature="e#35931#36204#0" expanded="true" />
-                <element signature="e#36181#36182#0" expanded="true" />
-                <element signature="e#36334#36607#0" expanded="true" />
-                <element signature="e#36584#36585#0" expanded="true" />
-                <element signature="e#36737#37010#0" expanded="true" />
-                <element signature="e#36987#36988#0" expanded="true" />
-                <element signature="e#37140#37413#0" expanded="true" />
-                <element signature="e#37390#37391#0" expanded="true" />
-                <element signature="e#37543#37816#0" expanded="true" />
-                <element signature="e#37793#37794#0" expanded="true" />
-                <element signature="e#37946#38219#0" expanded="true" />
-                <element signature="e#38196#38197#0" expanded="true" />
-                <element signature="e#38349#38622#0" expanded="true" />
-                <element signature="e#38599#38600#0" expanded="true" />
-                <element signature="e#38752#39025#0" expanded="true" />
-                <element signature="e#39002#39003#0" expanded="true" />
-                <element signature="e#39155#39428#0" expanded="true" />
-                <element signature="e#39405#39406#0" expanded="true" />
-                <element signature="e#39558#39900#0" expanded="true" />
-                <element signature="e#39877#39878#0" expanded="true" />
-                <element signature="e#40046#40388#0" expanded="true" />
-                <element signature="e#40365#40366#0" expanded="true" />
-                <element signature="e#40530#40778#0" expanded="true" />
-                <element signature="e#40755#40756#0" expanded="true" />
-                <element signature="e#40841#40842#0" expanded="true" />
-                <element signature="e#40999#41354#0" expanded="true" />
-                <element signature="e#41343#41344#0" expanded="true" />
-                <element signature="e#41464#46485#0" expanded="true" />
-                <element signature="e#42333#42862#0" expanded="true" />
-                <element signature="e#42831#42832#0" expanded="true" />
-                <element signature="e#44000#46135#0" expanded="true" />
-                <element signature="e#46108#46109#0" expanded="true" />
-                <element signature="e#46474#46475#0" expanded="true" />
-                <element signature="e#46601#51750#0" expanded="true" />
-                <element signature="e#47526#48055#0" expanded="true" />
-                <element signature="e#48024#48025#0" expanded="true" />
-                <element signature="e#49312#51408#0" expanded="true" />
-                <element signature="e#51381#51382#0" expanded="true" />
-                <element signature="e#51739#51740#0" expanded="true" />
-                <element signature="e#51998#57190#0" expanded="true" />
-                <element signature="e#55393#57116#0" expanded="true" />
-                <element signature="e#57093#57094#0" expanded="true" />
-                <element signature="e#57179#57180#0" expanded="true" />
-                <element signature="e#59158#59360#0" expanded="true" />
-                <element signature="e#59345#59346#0" expanded="true" />
-                <element signature="e#59404#59613#0" expanded="true" />
-                <element signature="e#59598#59599#0" expanded="true" />
-                <element signature="e#59781#59782#0" expanded="true" />
-                <element signature="e#59814#59815#0" expanded="true" />
-                <element signature="e#61085#61461#0" expanded="true" />
-                <element signature="e#61454#61455#0" expanded="true" />
-                <element signature="e#61498#62358#0" expanded="true" />
-                <element signature="e#62351#62352#0" expanded="true" />
+                <element signature="e#8470#8478#0" expanded="true" />
+                <element signature="e#9816#11032#0" expanded="true" />
+                <element signature="e#10984#10985#0" expanded="true" />
+                <element signature="e#11363#12830#0" expanded="true" />
+                <element signature="e#12815#12816#0" expanded="true" />
+                <element signature="e#13145#14612#0" expanded="true" />
+                <element signature="e#14597#14598#0" expanded="true" />
+                <element signature="e#14805#15200#0" expanded="true" />
+                <element signature="e#15188#15189#0" expanded="true" />
+                <element signature="e#15321#19230#0" expanded="true" />
+                <element signature="e#19218#19219#0" expanded="true" />
+                <element signature="e#19340#27327#0" expanded="true" />
+                <element signature="e#20209#20738#0" expanded="true" />
+                <element signature="e#20707#20708#0" expanded="true" />
+                <element signature="e#22047#26979#0" expanded="true" />
+                <element signature="e#26952#26953#0" expanded="true" />
+                <element signature="e#27316#27317#0" expanded="true" />
+                <element signature="e#27448#29197#0" expanded="true" />
+                <element signature="e#29186#29187#0" expanded="true" />
+                <element signature="e#29355#30783#0" expanded="true" />
+                <element signature="e#30768#30769#0" expanded="true" />
+                <element signature="e#30940#40971#0" expanded="true" />
+                <element signature="e#31752#32281#0" expanded="true" />
+                <element signature="e#32250#32251#0" expanded="true" />
+                <element signature="e#32736#35920#0" expanded="true" />
+                <element signature="e#35897#35898#0" expanded="true" />
+                <element signature="e#36050#36323#0" expanded="true" />
+                <element signature="e#36300#36301#0" expanded="true" />
+                <element signature="e#36453#36726#0" expanded="true" />
+                <element signature="e#36703#36704#0" expanded="true" />
+                <element signature="e#36856#37129#0" expanded="true" />
+                <element signature="e#37106#37107#0" expanded="true" />
+                <element signature="e#37259#37532#0" expanded="true" />
+                <element signature="e#37509#37510#0" expanded="true" />
+                <element signature="e#37662#37935#0" expanded="true" />
+                <element signature="e#37912#37913#0" expanded="true" />
+                <element signature="e#38065#38338#0" expanded="true" />
+                <element signature="e#38315#38316#0" expanded="true" />
+                <element signature="e#38468#38741#0" expanded="true" />
+                <element signature="e#38718#38719#0" expanded="true" />
+                <element signature="e#38871#39144#0" expanded="true" />
+                <element signature="e#39121#39122#0" expanded="true" />
+                <element signature="e#39274#39547#0" expanded="true" />
+                <element signature="e#39524#39525#0" expanded="true" />
+                <element signature="e#39677#40019#0" expanded="true" />
+                <element signature="e#39996#39997#0" expanded="true" />
+                <element signature="e#40165#40507#0" expanded="true" />
+                <element signature="e#40484#40485#0" expanded="true" />
+                <element signature="e#40649#40897#0" expanded="true" />
+                <element signature="e#40874#40875#0" expanded="true" />
+                <element signature="e#40960#40961#0" expanded="true" />
+                <element signature="e#41118#41473#0" expanded="true" />
+                <element signature="e#41462#41463#0" expanded="true" />
+                <element signature="e#41583#46604#0" expanded="true" />
+                <element signature="e#42452#42981#0" expanded="true" />
+                <element signature="e#42950#42951#0" expanded="true" />
+                <element signature="e#44119#46254#0" expanded="true" />
+                <element signature="e#46227#46228#0" expanded="true" />
+                <element signature="e#46593#46594#0" expanded="true" />
+                <element signature="e#46720#51869#0" expanded="true" />
+                <element signature="e#47645#48174#0" expanded="true" />
+                <element signature="e#48143#48144#0" expanded="true" />
+                <element signature="e#49431#51527#0" expanded="true" />
+                <element signature="e#51500#51501#0" expanded="true" />
+                <element signature="e#51858#51859#0" expanded="true" />
+                <element signature="e#52117#57309#0" expanded="true" />
+                <element signature="e#55512#57235#0" expanded="true" />
+                <element signature="e#57212#57213#0" expanded="true" />
+                <element signature="e#57298#57299#0" expanded="true" />
+                <element signature="e#59277#59479#0" expanded="true" />
+                <element signature="e#59464#59465#0" expanded="true" />
+                <element signature="e#59523#59732#0" expanded="true" />
+                <element signature="e#59717#59718#0" expanded="true" />
+                <element signature="e#59900#59901#0" expanded="true" />
+                <element signature="e#59933#59934#0" expanded="true" />
+                <element signature="e#61204#61580#0" expanded="true" />
+                <element signature="e#61573#61574#0" expanded="true" />
+                <element signature="e#61617#62477#0" expanded="true" />
+                <element signature="e#62470#62471#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -498,21 +509,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Microphone.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Microphone.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="1785">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.27986348" vertical-offset="539" max-vertical-offset="1530">
-              <caret line="25" column="64" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
+              <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -521,8 +522,8 @@
       <file leaf-file-name="WDSP.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="194" max-vertical-offset="4425">
-              <caret line="32" column="76" selection-start-line="32" selection-start-column="76" selection-end-line="32" selection-end-column="76" />
+            <state vertical-scroll-proportion="-9.592592" vertical-offset="3941" max-vertical-offset="4500">
+              <caret line="284" column="45" selection-start-line="284" selection-start-column="4" selection-end-line="284" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -551,8 +552,8 @@
       <file leaf-file-name="Metis.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="11839" max-vertical-offset="19980">
-              <caret line="835" column="52" selection-start-line="835" selection-start-column="52" selection-end-line="835" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="7879" max-vertical-offset="19980">
+              <caret line="603" column="36" selection-start-line="603" selection-start-column="36" selection-end-line="603" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -1313,7 +1314,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Filter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Filters.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/FiltersAM.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/TransverterUpdateActivity.java" />
@@ -1359,9 +1359,10 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_configure.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/ConfigureDialog.java" />
         <option value="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.c" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" />
+        <option value="$PROJECT_DIR$/app/src/main/jni/wdsp/fmd.c" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
       </list>
@@ -1371,8 +1372,8 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="186" />
-    <option name="y" value="52" />
+    <option name="x" value="225" />
+    <option name="y" value="82" />
     <option name="width" value="1450" />
     <option name="height" value="968" />
   </component>
@@ -1765,7 +1766,11 @@
       <created>1425824145373</created>
       <updated>1425824145373</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="reverted back to wdsp r3325.&#10;fixed Hermes/Apollo code.">
+      <created>1426075349204</created>
+      <updated>1426075349204</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1789,21 +1794,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="186" y="52" width="1450" height="968" extended-state="0" />
-    <editor active="false" />
+    <frame x="225" y="82" width="1450" height="968" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3278481" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3204983" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3200469" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32283464" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329904" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31823328" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31770223" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3260606" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32590857" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2813599" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32283464" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1862,14 +1867,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1440">
-          <caret line="87" column="107" selection-start-line="87" selection-start-column="107" selection-end-line="87" selection-end-column="107" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/AboutActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
@@ -2220,115 +2217,123 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
+          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11839" max-vertical-offset="19980">
-          <caret line="835" column="52" selection-start-line="835" selection-start-column="52" selection-end-line="835" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="7879" max-vertical-offset="19980">
+          <caret line="603" column="36" selection-start-line="603" selection-start-column="36" selection-end-line="603" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/jni/wdsp/fmd.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3505535" vertical-offset="1485" max-vertical-offset="3330">
+          <caret line="118" column="3" selection-start-line="118" selection-start-column="3" selection-end-line="118" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="194" max-vertical-offset="4425">
-          <caret line="32" column="76" selection-start-line="32" selection-start-column="76" selection-end-line="32" selection-end-column="76" />
+        <state vertical-scroll-proportion="-9.592592" vertical-offset="3941" max-vertical-offset="4500">
+          <caret line="284" column="45" selection-start-line="284" selection-start-column="4" selection-end-line="284" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2059" max-vertical-offset="22350">
-          <caret line="203" column="40" selection-start-line="203" selection-start-column="40" selection-end-line="203" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.22344323" vertical-offset="2068" max-vertical-offset="22395">
+          <caret line="192" column="26" selection-start-line="192" selection-start-column="13" selection-end-line="192" selection-end-column="26" />
           <folding>
-            <element signature="e#8351#8359#0" expanded="true" />
-            <element signature="e#9697#10913#0" expanded="true" />
-            <element signature="e#10865#10866#0" expanded="true" />
-            <element signature="e#11244#12711#0" expanded="true" />
-            <element signature="e#12696#12697#0" expanded="true" />
-            <element signature="e#13026#14493#0" expanded="true" />
-            <element signature="e#14478#14479#0" expanded="true" />
-            <element signature="e#14686#15081#0" expanded="true" />
-            <element signature="e#15069#15070#0" expanded="true" />
-            <element signature="e#15202#19111#0" expanded="true" />
-            <element signature="e#19099#19100#0" expanded="true" />
-            <element signature="e#19221#27208#0" expanded="true" />
-            <element signature="e#20090#20619#0" expanded="true" />
-            <element signature="e#20588#20589#0" expanded="true" />
-            <element signature="e#21928#26860#0" expanded="true" />
-            <element signature="e#26833#26834#0" expanded="true" />
-            <element signature="e#27197#27198#0" expanded="true" />
-            <element signature="e#27329#29078#0" expanded="true" />
-            <element signature="e#29067#29068#0" expanded="true" />
-            <element signature="e#29236#30664#0" expanded="true" />
-            <element signature="e#30649#30650#0" expanded="true" />
-            <element signature="e#30821#40852#0" expanded="true" />
-            <element signature="e#31633#32162#0" expanded="true" />
-            <element signature="e#32131#32132#0" expanded="true" />
-            <element signature="e#32617#35801#0" expanded="true" />
-            <element signature="e#35778#35779#0" expanded="true" />
-            <element signature="e#35931#36204#0" expanded="true" />
-            <element signature="e#36181#36182#0" expanded="true" />
-            <element signature="e#36334#36607#0" expanded="true" />
-            <element signature="e#36584#36585#0" expanded="true" />
-            <element signature="e#36737#37010#0" expanded="true" />
-            <element signature="e#36987#36988#0" expanded="true" />
-            <element signature="e#37140#37413#0" expanded="true" />
-            <element signature="e#37390#37391#0" expanded="true" />
-            <element signature="e#37543#37816#0" expanded="true" />
-            <element signature="e#37793#37794#0" expanded="true" />
-            <element signature="e#37946#38219#0" expanded="true" />
-            <element signature="e#38196#38197#0" expanded="true" />
-            <element signature="e#38349#38622#0" expanded="true" />
-            <element signature="e#38599#38600#0" expanded="true" />
-            <element signature="e#38752#39025#0" expanded="true" />
-            <element signature="e#39002#39003#0" expanded="true" />
-            <element signature="e#39155#39428#0" expanded="true" />
-            <element signature="e#39405#39406#0" expanded="true" />
-            <element signature="e#39558#39900#0" expanded="true" />
-            <element signature="e#39877#39878#0" expanded="true" />
-            <element signature="e#40046#40388#0" expanded="true" />
-            <element signature="e#40365#40366#0" expanded="true" />
-            <element signature="e#40530#40778#0" expanded="true" />
-            <element signature="e#40755#40756#0" expanded="true" />
-            <element signature="e#40841#40842#0" expanded="true" />
-            <element signature="e#40999#41354#0" expanded="true" />
-            <element signature="e#41343#41344#0" expanded="true" />
-            <element signature="e#41464#46485#0" expanded="true" />
-            <element signature="e#42333#42862#0" expanded="true" />
-            <element signature="e#42831#42832#0" expanded="true" />
-            <element signature="e#44000#46135#0" expanded="true" />
-            <element signature="e#46108#46109#0" expanded="true" />
-            <element signature="e#46474#46475#0" expanded="true" />
-            <element signature="e#46601#51750#0" expanded="true" />
-            <element signature="e#47526#48055#0" expanded="true" />
-            <element signature="e#48024#48025#0" expanded="true" />
-            <element signature="e#49312#51408#0" expanded="true" />
-            <element signature="e#51381#51382#0" expanded="true" />
-            <element signature="e#51739#51740#0" expanded="true" />
-            <element signature="e#51998#57190#0" expanded="true" />
-            <element signature="e#55393#57116#0" expanded="true" />
-            <element signature="e#57093#57094#0" expanded="true" />
-            <element signature="e#57179#57180#0" expanded="true" />
-            <element signature="e#59158#59360#0" expanded="true" />
-            <element signature="e#59345#59346#0" expanded="true" />
-            <element signature="e#59404#59613#0" expanded="true" />
-            <element signature="e#59598#59599#0" expanded="true" />
-            <element signature="e#59781#59782#0" expanded="true" />
-            <element signature="e#59814#59815#0" expanded="true" />
-            <element signature="e#61085#61461#0" expanded="true" />
-            <element signature="e#61454#61455#0" expanded="true" />
-            <element signature="e#61498#62358#0" expanded="true" />
-            <element signature="e#62351#62352#0" expanded="true" />
+            <element signature="e#8470#8478#0" expanded="true" />
+            <element signature="e#9816#11032#0" expanded="true" />
+            <element signature="e#10984#10985#0" expanded="true" />
+            <element signature="e#11363#12830#0" expanded="true" />
+            <element signature="e#12815#12816#0" expanded="true" />
+            <element signature="e#13145#14612#0" expanded="true" />
+            <element signature="e#14597#14598#0" expanded="true" />
+            <element signature="e#14805#15200#0" expanded="true" />
+            <element signature="e#15188#15189#0" expanded="true" />
+            <element signature="e#15321#19230#0" expanded="true" />
+            <element signature="e#19218#19219#0" expanded="true" />
+            <element signature="e#19340#27327#0" expanded="true" />
+            <element signature="e#20209#20738#0" expanded="true" />
+            <element signature="e#20707#20708#0" expanded="true" />
+            <element signature="e#22047#26979#0" expanded="true" />
+            <element signature="e#26952#26953#0" expanded="true" />
+            <element signature="e#27316#27317#0" expanded="true" />
+            <element signature="e#27448#29197#0" expanded="true" />
+            <element signature="e#29186#29187#0" expanded="true" />
+            <element signature="e#29355#30783#0" expanded="true" />
+            <element signature="e#30768#30769#0" expanded="true" />
+            <element signature="e#30940#40971#0" expanded="true" />
+            <element signature="e#31752#32281#0" expanded="true" />
+            <element signature="e#32250#32251#0" expanded="true" />
+            <element signature="e#32736#35920#0" expanded="true" />
+            <element signature="e#35897#35898#0" expanded="true" />
+            <element signature="e#36050#36323#0" expanded="true" />
+            <element signature="e#36300#36301#0" expanded="true" />
+            <element signature="e#36453#36726#0" expanded="true" />
+            <element signature="e#36703#36704#0" expanded="true" />
+            <element signature="e#36856#37129#0" expanded="true" />
+            <element signature="e#37106#37107#0" expanded="true" />
+            <element signature="e#37259#37532#0" expanded="true" />
+            <element signature="e#37509#37510#0" expanded="true" />
+            <element signature="e#37662#37935#0" expanded="true" />
+            <element signature="e#37912#37913#0" expanded="true" />
+            <element signature="e#38065#38338#0" expanded="true" />
+            <element signature="e#38315#38316#0" expanded="true" />
+            <element signature="e#38468#38741#0" expanded="true" />
+            <element signature="e#38718#38719#0" expanded="true" />
+            <element signature="e#38871#39144#0" expanded="true" />
+            <element signature="e#39121#39122#0" expanded="true" />
+            <element signature="e#39274#39547#0" expanded="true" />
+            <element signature="e#39524#39525#0" expanded="true" />
+            <element signature="e#39677#40019#0" expanded="true" />
+            <element signature="e#39996#39997#0" expanded="true" />
+            <element signature="e#40165#40507#0" expanded="true" />
+            <element signature="e#40484#40485#0" expanded="true" />
+            <element signature="e#40649#40897#0" expanded="true" />
+            <element signature="e#40874#40875#0" expanded="true" />
+            <element signature="e#40960#40961#0" expanded="true" />
+            <element signature="e#41118#41473#0" expanded="true" />
+            <element signature="e#41462#41463#0" expanded="true" />
+            <element signature="e#41583#46604#0" expanded="true" />
+            <element signature="e#42452#42981#0" expanded="true" />
+            <element signature="e#42950#42951#0" expanded="true" />
+            <element signature="e#44119#46254#0" expanded="true" />
+            <element signature="e#46227#46228#0" expanded="true" />
+            <element signature="e#46593#46594#0" expanded="true" />
+            <element signature="e#46720#51869#0" expanded="true" />
+            <element signature="e#47645#48174#0" expanded="true" />
+            <element signature="e#48143#48144#0" expanded="true" />
+            <element signature="e#49431#51527#0" expanded="true" />
+            <element signature="e#51500#51501#0" expanded="true" />
+            <element signature="e#51858#51859#0" expanded="true" />
+            <element signature="e#52117#57309#0" expanded="true" />
+            <element signature="e#55512#57235#0" expanded="true" />
+            <element signature="e#57212#57213#0" expanded="true" />
+            <element signature="e#57298#57299#0" expanded="true" />
+            <element signature="e#59277#59479#0" expanded="true" />
+            <element signature="e#59464#59465#0" expanded="true" />
+            <element signature="e#59523#59732#0" expanded="true" />
+            <element signature="e#59717#59718#0" expanded="true" />
+            <element signature="e#59900#59901#0" expanded="true" />
+            <element signature="e#59933#59934#0" expanded="true" />
+            <element signature="e#61204#61580#0" expanded="true" />
+            <element signature="e#61573#61574#0" expanded="true" />
+            <element signature="e#61617#62477#0" expanded="true" />
+            <element signature="e#62470#62471#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.27986348" vertical-offset="539" max-vertical-offset="1530">
-          <caret line="25" column="64" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -601,7 +601,7 @@ public class Metis extends Thread {
                             } else {
                                 wdsp.fexchange2(Channel.RX, inlsamples, inrsamples, outlsamples, outrsamples, error);
                                 if (error[0] != 0) {
-                                    //Log.i("Metis", "fexchange2 returned " + error[0]);
+                                    Log.i("Metis", "fexchange2 returned " + error[0]);
                                 }
                                 if (configuration.subrx) {
                                     wdsp.fexchange2(Channel.SUBRX, inlsamples, inrsamples, suboutlsamples, suboutrsamples, error);

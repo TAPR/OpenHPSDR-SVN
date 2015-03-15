@@ -164,6 +164,9 @@ void xgen (GEN a)
 {
 	if (a->run)
 	{
+#ifdef __ANDROID__
+LOGD(APPNAME,"xgen");
+#endif
 		switch (a->mode)
 		{
 		case 0:	// tone

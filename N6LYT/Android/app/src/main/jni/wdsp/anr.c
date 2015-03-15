@@ -87,6 +87,9 @@ void xanr (ANR a, int position)
 	double nel, nev;
     if (a->run && (a->position == position))
 	{
+#ifdef __ANDROID__
+LOGD(APPNAME,"xanr");
+#endif
 		for (i = 0; i < a->buff_size; i++)
 		{
 			a->d[a->in_idx] = a->in_buff[2 * i + 0];

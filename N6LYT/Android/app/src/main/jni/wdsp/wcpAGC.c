@@ -154,6 +154,9 @@ void xwcpagc (WCPAGC a)
 	double mult;
 	if (a->run)
 	{
+//#ifdef __ANDROID__
+//LOGD(APPNAME,"xwcpagc");
+//#endif
 		if (a->mode == 0)
 		{
 			for (i = 0; i < a->io_buffsize; i++)

@@ -133,6 +133,9 @@ void xfmsq (FMSQ a)
 {
 	if (a->run)
 	{
+#ifdef __ANDROID__
+LOGD(APPNAME,"xfmsq");
+#endif
 		int i;
 		double I, Q, noise, lnlimit;
 		memcpy (&(a->infilt[2 * a->size]), a->trigger, a->size * sizeof (complex));

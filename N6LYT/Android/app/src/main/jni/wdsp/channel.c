@@ -76,7 +76,7 @@ void build_channel (int channel)
 }
 
 PORT
-void OpenChannel (int channel, int in_size, int dsp_size, int input_samplerate, int dsp_rate, int output_samplerate, int type, int state, double tdelayup, double tslewup, double tdelaydown, double tslewdown)
+void OpenChannel (int channel, int in_size, int dsp_size, int input_samplerate, int dsp_rate, int output_samplerate, int type, int state, double tdelayup, double tslewup, double tdelaydown, double tslewdown, int bfo)
 {
 	ch[channel].in_size = in_size;
 	ch[channel].dsp_size = dsp_size;
@@ -89,6 +89,7 @@ void OpenChannel (int channel, int in_size, int dsp_size, int input_samplerate, 
 	ch[channel].tslewup = tslewup;
 	ch[channel].tdelaydown = tdelaydown;
 	ch[channel].tslewdown = tslewdown;
+	ch[channel].bfo = bfo;
 	InterlockedBitTestAndReset (&ch[channel].exchange, 0);
 	build_channel (channel);
 	if (ch[channel].state)
@@ -107,11 +108,7 @@ void pre_main_destroy (int channel)
 	IOB a = ch[channel].iob.pc;
 	InterlockedBitTestAndReset (&ch[channel].exchange, 0);
 	InterlockedBitTestAndReset (&ch[channel].run, 0);
-#ifdef linux
-        ReleaseSemaphore (&a->Sem_BuffReady, 1, 0);
-#else
 	ReleaseSemaphore (a->Sem_BuffReady, 1, 0);
-#endif
 	Sleep (25);
 }
 

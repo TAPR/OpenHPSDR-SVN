@@ -77,6 +77,9 @@ void xmeter (METER a)
 		srun = 1;
 	if (a->run && srun)
 	{
+//#ifdef __ANDROID__
+//LOGD(APPNAME,"xmeter");
+//#endif
 		int i;
 		double smag;
 		double np = 0.0;

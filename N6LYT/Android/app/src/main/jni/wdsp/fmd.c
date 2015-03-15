@@ -116,6 +116,9 @@ void xfmd (FMD a)
 {
 	if (a->run)
 	{
+#ifdef __ANDROID__
+LOGD(APPNAME,"xfmd");
+#endif
 		int i;
 		double I, Q;
 		double det, del_out;

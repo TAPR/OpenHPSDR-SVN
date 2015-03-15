@@ -107,6 +107,9 @@ void xamsq (AMSQ a)
 {
 	if (a->run)
 	{
+#ifdef __ANDROID__
+LOGD(APPNAME,"xamsq");
+#endif
 		int i;
 		double sig, siglimit;
 		for (i = 0; i < a->size; i++)
@@ -190,6 +193,17 @@ void SetRXAAMSQThreshold (int channel, double threshold)
 	EnterCriticalSection (&ch[channel].csDSP);
 	rxa[channel].amsq.p->tail_thresh = 0.9 * thresh;
 	rxa[channel].amsq.p->unmute_thresh =  thresh;
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
+PORT
+void SetRXAAMSQMaxTail (int channel, double tail)
+{
+	AMSQ a;
+	EnterCriticalSection (&ch[channel].csDSP);
+	a = rxa[channel].amsq.p;
+	if (tail < a->min_tail) tail = a->min_tail;
+	a->max_tail = tail;
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
 

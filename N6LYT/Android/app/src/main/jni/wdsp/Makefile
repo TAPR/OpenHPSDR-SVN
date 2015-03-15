@@ -23,11 +23,13 @@ anr.c \
 bandpass.c \
 calcc.c \
 cblock.c \
+cfir.c \
 channel.c \
 compress.c \
 delay.c \
 div.c \
 eer.c \
+emnr.c \
 emph.c \
 eq.c \
 fcurve.c \
@@ -57,7 +59,7 @@ utilities.c \
 wcpAGC.c \
 wisdom.c
 
-JAVA_SOURCES= org_g0orx_hpsdr_wdsp_WDSP.c
+JAVA_SOURCES= org_g0orx_openhpsdr_wdsp_WDSP.c
 
 HEADERS=amd.h \
 ammod.h \
@@ -68,12 +70,14 @@ anr.h \
 bandpass.h \
 calcc.h \
 cblock.h \
+cfir.h \
 channel.h \
 comm.h \
 compress.h \
 delay.h \
 div.h \
 eer.h \
+emnr.h \
 emph.h \
 eq.h \
 fastmath.h \
@@ -104,7 +108,7 @@ TXA.h \
 utilities.h \
 wcpAGC.h
 
-JAVA_HEADERS= org_g0orx_hpsdr_wdsp_WDSP.h
+JAVA_HEADERS= org_g0orx_openhpsdr_wdsp_WDSP.h
 
 OBJS=linux_port.o \
 amd.o \
@@ -116,11 +120,13 @@ anr.o \
 bandpass.o \
 calcc.o \
 cblock.o \
+cfir.o \
 channel.o \
 compress.o \
 delay.o \
 div.o \
 eer.o \
+emnr.o \
 emph.o \
 eq.o \
 fcurve.o \
@@ -149,7 +155,7 @@ utilities.o \
 wcpAGC.o \
 wisdom.o
 
-JAVA_OBJS= org_g0orx_hpsdr_wdsp_WDSP.o
+JAVA_OBJS= org_g0orx_openhpsdr_wdsp_WDSP.o
 
 all: $(PROGRAM) $(HEADERS) $(SOURCES)
 

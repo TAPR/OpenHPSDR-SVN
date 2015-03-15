@@ -70,6 +70,8 @@ extern __declspec (dllexport) void SetRXAAMSQRun (int channel, int run);
 
 extern __declspec (dllexport) void SetRXAAMSQThreshold (int channel, double threshold);
 
+extern __declspec (dllexport) void SetRXAAMSQMaxTail (int channel, double tail);
+
 // TXA Properties
 
 extern __declspec (dllexport) void SetTXAAMSQRun (int channel, int run);

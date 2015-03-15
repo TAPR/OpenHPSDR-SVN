@@ -181,7 +181,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
         // setup receiver
         wdsp.OpenChannel(Channel.RX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
                 (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 1/*RUNNING*/, 0.010,
-                0.025, 0.0, 0.010/*, 0*/);
+                0.025, 0.0, 0.010, 0);
 
         wdsp.SetRXAMode(Channel.RX, bandstack.getMode());
         wdsp.SetRXABandpassFreqs(Channel.RX, low, high);
@@ -189,11 +189,13 @@ public class RadioActivity extends Activity implements OnTouchListener {
         setAGC(Channel.RX,band.getAGC());
         wdsp.SetRXAAGCTop(Channel.RX,band.getAGCGain());
         wdsp.SetRXAAMDSBMode(Channel.RX, 0);
+        wdsp.SetRXAShiftRun(Channel.RX, 0);
+        wdsp.SetRXAEMNRRun(Channel.RX,0);
 
         // setup transmitter
         wdsp.OpenChannel(Channel.TX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
                 (int) configuration.samplerate, (int) configuration.samplerate, 1/*tx*/, 0/*NOT RUNNING*/, 0.010,
-                0.025, 0.0, 0.010/*, 0*/);
+                0.025, 0.0, 0.010, 0);
         wdsp.SetTXAMode(Channel.TX, bandstack.getMode());
         wdsp.SetTXABandpassFreqs(Channel.TX, low, high);
         wdsp.SetTXABandpassRun(Channel.TX, 1);
@@ -201,7 +203,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
         // setup sub receiver
         wdsp.OpenChannel(Channel.SUBRX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
                 (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 0/*NOT RUNNING*/, 0.010,
-                0.025, 0.0, 0.010/*, 0*/);
+                0.025, 0.0, 0.010, 0);
 
         wdsp.SetRXAMode(Channel.SUBRX, bandstack.getMode());
         wdsp.SetRXABandpassFreqs(Channel.SUBRX, low, high);
@@ -211,6 +213,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
         wdsp.SetRXAAMDSBMode(Channel.SUBRX, 0);
         wdsp.SetRXAShiftRun(Channel.SUBRX, configuration.subrx ? 1 : 0);
         wdsp.SetRXAShiftFreq(Channel.SUBRX, bandstack.getSubRxFrequency());
+        wdsp.SetRXAEMNRRun(Channel.SUBRX,0);
 
         // start the Metis interface
         metis.start();

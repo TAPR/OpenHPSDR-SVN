@@ -247,6 +247,9 @@ void xspeak (SPEAK a)
 	EnterCriticalSection (&a->cs_update);
 	if (a->run)
 	{
+#ifdef __ANDROID__
+LOGD(APPNAME,"xspeak");
+#endif
 		int i, j, n;
 		for (i = 0; i < a->size; i++)
 		{
@@ -390,6 +393,9 @@ void xmpeak (MPEAK a)
 	EnterCriticalSection (&a->cs_update);
 	if (a->run)
 	{
+#ifdef __ANDROID__
+LOGD(APPNAME,"xmpeak");
+#endif
 		int i, j;
 		memset (a->mix, 0, a->size * sizeof (complex));
 		for (i = 0; i < a->npeaks; i++)
