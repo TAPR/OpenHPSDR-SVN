@@ -124,6 +124,9 @@ void xamd (AMD a)
 	int j, k;
 	if (a->run)
 	{
+#ifdef __ANDROID__
+LOGD(APPNAME,"xamd");
+#endif
 		switch (a->mode)
 		{
 
@@ -199,12 +202,12 @@ void xamd (AMD a)
 							}
 						case 1:	//LSB
 							{
-								audio = (ai_ps + bi_ps) - (aq_ps - bq_ps);
+								audio = (ai_ps - bi_ps) + (aq_ps + bq_ps);
 								break;
 							}
 						case 2:	//USB
 							{
-								audio = (ai_ps - bi_ps) + (aq_ps + bq_ps);
+								audio = (ai_ps + bi_ps) - (aq_ps - bq_ps);
 								break;
 							}
 						}

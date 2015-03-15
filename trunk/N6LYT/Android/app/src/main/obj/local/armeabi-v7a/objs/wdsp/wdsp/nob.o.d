@@ -59,10 +59,12 @@
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/calcc.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/delay.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/cblock.h \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/cfir.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/channel.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/compress.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/div.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/eer.h \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/emnr.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/emph.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/eq.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/fcurve.h \
@@ -80,6 +82,7 @@
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/meterlog10.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/nob.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/nobII.h \
+ /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/osctrl.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/patchpanel.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/resample.h \
  /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/RXA.h \
@@ -209,6 +212,8 @@
 
 /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/cblock.h:
 
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/cfir.h:
+
 /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/channel.h:
 
 /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/compress.h:
@@ -216,6 +221,8 @@
 /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/div.h:
 
 /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/eer.h:
+
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/emnr.h:
 
 /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/emph.h:
 
@@ -250,6 +257,8 @@
 /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/nob.h:
 
 /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/nobII.h:
+
+/home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/osctrl.h:
 
 /home/john/AndroidstudioProjects/openHPSDR/app/src/main/jni/wdsp/patchpanel.h:
 

@@ -9,7 +9,7 @@
  * Signature: (IIIIIIIIDDDD)V
  */
 JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_OpenChannel
-  (JNIEnv *env, jobject obj, jint channel, jint in_size, jint dsp_size, jint input_samplerate, jint dsp_rate, jint output_samplerate, jint type, jint state, jdouble tdelayup, jdouble tslewup, jdouble tdelaydown, jdouble tslewdown);
+  (JNIEnv *env, jobject obj, jint channel, jint in_size, jint dsp_size, jint input_samplerate, jint dsp_rate, jint output_samplerate, jint type, jint state, jdouble tdelayup, jdouble tslewup, jdouble tdelaydown, jdouble tslewdown, jint bfo);
 
 /*
  * Class:     org_g0orx_openhpsdr_wdsp_WDSP
@@ -622,4 +622,11 @@ JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_GetNAPixels
 JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_WDSPwisdom
   (JNIEnv *env, jobject obj, jstring dir);
 
+/*
+ * Class:     org_g0orx_openhpsdr_wdsp_WDSP
+ * Method:    SetRXAEMNRRun
+ * Signature: (II)V
+ */
+JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_SetRXAEMNRRun
+  (JNIEnv *env, jobject obj, jint channel, jint run);
 #endif

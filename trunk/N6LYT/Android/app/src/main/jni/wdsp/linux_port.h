@@ -53,6 +53,10 @@ john.d.melton@googlemail.com
 #define max(x,y) (x<y?y:x)
 #define THREAD_PRIORITY_HIGHEST 0
 
+#define WaitForSingleObject(x, y) LinuxWaitForSingleObject(&(x), y)
+#define ReleaseSemaphore(x,y,z) LinuxReleaseSemaphore(&(x),y,z)
+#define SetEvent(x) LinuxSetEvent(&(x))
+
 #define INFINITE -1
 
 void QueueUserWorkItem(void *function,void *context,int flags);
@@ -65,13 +69,13 @@ void LeaveCritiaclSection(pthread_mutex_t *mutex);
 
 void DeleteCriticalSection(pthread_mutex_t *mutex);
 
-int WaitForSingleObject(sem_t *sem,int x);
+int LinuxWaitForSingleObject(sem_t *sem,int x);
 
-void ReleaseSemaphore(sem_t *sem,int release_count, int* previous_count);
+void LinuxReleaseSemaphore(sem_t *sem,int release_count, int* previous_count);
 
 int CreateEvent(sem_t *sem,void* security_attributes,int bManualReset,int bInitialState,char* name);
 
-void SetEvent(sem_t* sem);
+void LinuxSetEvent(sem_t* sem);
 
 pthread_t _beginthread( void( __cdecl *start_address )( void * ), unsigned stack_size, void *arglist);
 

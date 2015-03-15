@@ -212,6 +212,9 @@ extern __declspec( dllexport )
 void Spectrum2(int disp, int ss, int LO, dINREAL* pbuff);
 
 extern __declspec( dllexport )
+void Spectrum0(int run, int disp, int ss, int LO, double* pbuff);
+
+extern __declspec( dllexport )
 void SnapSpectrum(	int disp,
 					int ss,
 					int LO,
