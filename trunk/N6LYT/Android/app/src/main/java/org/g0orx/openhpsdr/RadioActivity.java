@@ -179,32 +179,80 @@ public class RadioActivity extends Activity implements OnTouchListener {
         wdsp = WDSP.getInstance();
 
         // setup receiver
+        Log.i("RadioActivity","OpenChannel RX");
         wdsp.OpenChannel(Channel.RX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
-                (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 1/*RUNNING*/, 0.010,
+                (int) configuration.dsprate, (int) configuration.samplerate, 0/*rx*/, 1/*RUNNING*/, 0.010,
                 0.025, 0.0, 0.010, 0);
 
+        Log.i("RadioActivity","SetRXAMode RX");
         wdsp.SetRXAMode(Channel.RX, bandstack.getMode());
+        Log.i("RadioActivity","SetRXABandpassFreqs RX");
         wdsp.SetRXABandpassFreqs(Channel.RX, low, high);
+        Log.i("RadioActivity","SetRXABandpassRun RX");
         wdsp.SetRXABandpassRun(Channel.RX, 1);
+        Log.i("RadioActivity","setAGC RX");
         setAGC(Channel.RX,band.getAGC());
+        Log.i("RadioActivity","SetRXAGCTop RX");
         wdsp.SetRXAAGCTop(Channel.RX,band.getAGCGain());
+        Log.i("RadioActivity","SetRXAAMDSBMode RX");
         wdsp.SetRXAAMDSBMode(Channel.RX, 0);
+        Log.i("RadioActivity","SetRXAShiftRun RX");
         wdsp.SetRXAShiftRun(Channel.RX, 0);
-        wdsp.SetRXAEMNRRun(Channel.RX,0);
+        Log.i("RadioActivity","SetRXAEMNRRun RX");
+        wdsp.SetRXAEMNRRun(Channel.RX,configuration.NB2?1:0);
+        Log.i("RadioActivity","SetRXAEMNRgainMethod RX");
+        wdsp.SetRXAEMNRgainMethod (Channel.RX, configuration.NB2_GAIN);
+        Log.i("RadioActivity","SetRXAEMNRnpeMethod RX");
+        wdsp.SetRXAEMNRnpeMethod (Channel.RX, configuration.NB2_NPE);
+        Log.i("RadioActivity","SetRXAEMNRaeRun RX");
+        wdsp.SetRXAEMNRaeRun (Channel.RX, configuration.NB2_AE?1:0);
+        Log.i("RadioActivity","SetRXAEMNRPosition RX");
+        wdsp.SetRXAEMNRPosition (Channel.RX, configuration.NB2_POSITION);
+
 
         // setup transmitter
+        Log.i("RadioActivity","OpenChannel TX");
         wdsp.OpenChannel(Channel.TX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
-                (int) configuration.samplerate, (int) configuration.samplerate, 1/*tx*/, 0/*NOT RUNNING*/, 0.010,
+                (int) configuration.dsprate, (int) configuration.samplerate, 1/*tx*/, 0/*NOT RUNNING*/, 0.010,
                 0.025, 0.0, 0.010, 0);
         wdsp.SetTXAMode(Channel.TX, bandstack.getMode());
         wdsp.SetTXABandpassFreqs(Channel.TX, low, high);
         wdsp.SetTXABandpassRun(Channel.TX, 1);
 
         // setup sub receiver
+        Log.i("RadioActivity","OpenChannel SUBRX");
         wdsp.OpenChannel(Channel.SUBRX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
-                (int) configuration.samplerate, (int) configuration.samplerate, 0/*rx*/, 0/*NOT RUNNING*/, 0.010,
+                (int) configuration.dsprate, (int) configuration.samplerate, 0/*rx*/, 0/*NOT RUNNING*/, 0.010,
                 0.025, 0.0, 0.010, 0);
 
+        Log.i("RadioActivity","SetRXAMode SUBRX");
+        wdsp.SetRXAMode(Channel.SUBRX, bandstack.getMode());
+        Log.i("RadioActivity","SetRXABandpassFreqs SUBRX");
+        wdsp.SetRXABandpassFreqs(Channel.SUBRX, low, high);
+        Log.i("RadioActivity","SetRXABandpassRun SUBRX");
+        wdsp.SetRXABandpassRun(Channel.SUBRX, 1);
+        Log.i("RadioActivity","setAGC SUBRX");
+        setAGC(Channel.SUBRX,band.getAGC());
+        Log.i("RadioActivity","SetRXAGCTop SUBRX");
+        wdsp.SetRXAAGCTop(Channel.SUBRX,band.getAGCGain());
+        Log.i("RadioActivity","SetRXAAMDSBMode SUBRX");
+        wdsp.SetRXAAMDSBMode(Channel.SUBRX, 0);
+        Log.i("RadioActivity","SetRXAShiftRun SUBRX");
+        wdsp.SetRXAShiftRun(Channel.SUBRX, 0);
+        Log.i("RadioActivity","SetRXAShiftFreq SUBRX");
+        wdsp.SetRXAShiftFreq(Channel.SUBRX, bandstack.getSubRxFrequency());
+        Log.i("RadioActivity","SetRXAEMNRRun SUBRX");
+        wdsp.SetRXAEMNRRun(Channel.SUBRX,configuration.NB2?1:0);
+        Log.i("RadioActivity","SetRXAEMNRgainMethod SUBRX");
+        wdsp.SetRXAEMNRgainMethod (Channel.SUBRX, configuration.NB2_GAIN);
+        Log.i("RadioActivity","SetRXAEMNRnpeMethod SUBRX");
+        wdsp.SetRXAEMNRnpeMethod (Channel.SUBRX, configuration.NB2_NPE);
+        Log.i("RadioActivity","SetRXAEMNRaeRun SUBRX");
+        wdsp.SetRXAEMNRaeRun (Channel.SUBRX, configuration.NB2_AE?1:0);
+        Log.i("RadioActivity","SetRXAEMNRPosition SUBRX");
+        wdsp.SetRXAEMNRPosition (Channel.SUBRX, configuration.NB2_POSITION);
+
+        /*
         wdsp.SetRXAMode(Channel.SUBRX, bandstack.getMode());
         wdsp.SetRXABandpassFreqs(Channel.SUBRX, low, high);
         wdsp.SetRXABandpassRun(Channel.SUBRX, 1);
@@ -213,9 +261,15 @@ public class RadioActivity extends Activity implements OnTouchListener {
         wdsp.SetRXAAMDSBMode(Channel.SUBRX, 0);
         wdsp.SetRXAShiftRun(Channel.SUBRX, configuration.subrx ? 1 : 0);
         wdsp.SetRXAShiftFreq(Channel.SUBRX, bandstack.getSubRxFrequency());
-        wdsp.SetRXAEMNRRun(Channel.SUBRX,0);
+        wdsp.SetRXAEMNRRun(Channel.SUBRX,configuration.NB2?1:0);
+        wdsp.SetRXAEMNRgainMethod (Channel.SUBRX, configuration.NB2_GAIN);
+        wdsp.SetRXAEMNRnpeMethod (Channel.SUBRX, configuration.NB2_NPE);
+        wdsp.SetRXAEMNRaeRun (Channel.SUBRX, configuration.NB2_AE?1:0);
+        wdsp.SetRXAEMNRPosition (Channel.SUBRX, configuration.NB2_POSITION);
+        */
 
         // start the Metis interface
+        Log.i("RadioActivity","metis.start");
         metis.start();
 
 

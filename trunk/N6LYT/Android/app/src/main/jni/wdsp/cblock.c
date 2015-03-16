@@ -69,9 +69,9 @@ void xcbl (CBL a)
 {
 	if (a->run)
 	{
-#ifdef __ANDROID__
-LOGD(APPNAME,"xcbl");
-#endif
+//#ifdef __ANDROID__
+//LOGD(APPNAME,"xcbl");
+//#endif
 		int i;
 		for (i = 0; i < a->buff_size; i++)
 		{

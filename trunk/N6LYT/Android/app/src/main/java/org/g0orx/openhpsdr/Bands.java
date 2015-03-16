@@ -108,7 +108,7 @@ public class Bands implements Serializable {
         band.setBandEdge(bandedge);
         band.setBandStack(0, makeBandStack(473000,Modes.CWL,7));
         band.setBandStack(1, makeBandStack(475000,Modes.CWL,7));
-        band.setBandStack(2, makeBandStack(478000,Modes.LSB,3));
+        band.setBandStack(2, makeBandStack(478000,Modes.LSB,5));
         band.setTransmit(true);
         bands.add(band);
 
@@ -119,8 +119,8 @@ public class Bands implements Serializable {
         band.setName("160");
         band.setBandEdge(bandedge);
         band.setBandStack(0, makeBandStack(1801000,Modes.CWL,7));
-        band.setBandStack(1, makeBandStack(1835000,Modes.LSB,3));
-        band.setBandStack(2, makeBandStack(1840000,Modes.LSB,3));
+        band.setBandStack(1, makeBandStack(1835000,Modes.LSB,5));
+        band.setBandStack(2, makeBandStack(1840000,Modes.LSB,5));
         band.setTransmit(true);
         bands.add(band);
 		
@@ -131,8 +131,8 @@ public class Bands implements Serializable {
 		band.setName("80");
 		band.setBandEdge(bandedge);
 		band.setBandStack(0, makeBandStack(3501000,Modes.CWL,7));
-		band.setBandStack(1, makeBandStack(3751000,Modes.LSB,3));
-		band.setBandStack(2, makeBandStack(3850000,Modes.LSB,3));
+		band.setBandStack(1, makeBandStack(3751000,Modes.LSB,5));
+		band.setBandStack(2, makeBandStack(3850000,Modes.LSB,5));
         band.setTransmit(true);
 		bands.add(band);
 		
@@ -155,8 +155,8 @@ public class Bands implements Serializable {
 		band.setName("40");
 		band.setBandEdge(bandedge);
 		band.setBandStack(0, makeBandStack(7001000,Modes.CWL,7));
-		band.setBandStack(1, makeBandStack(7100000,Modes.LSB,3));
-		band.setBandStack(2, makeBandStack(7200000,Modes.LSB,3));
+		band.setBandStack(1, makeBandStack(7100000,Modes.LSB,5));
+		band.setBandStack(2, makeBandStack(7200000,Modes.LSB,5));
         band.setTransmit(true);
 		bands.add(band);
 		
@@ -167,8 +167,8 @@ public class Bands implements Serializable {
 		band.setName("30");
 		band.setBandEdge(bandedge);
 		band.setBandStack(0, makeBandStack(10120000,Modes.CWU,7));
-		band.setBandStack(1, makeBandStack(10130000,Modes.USB,3));
-		band.setBandStack(2, makeBandStack(10140000,Modes.USB,3));
+		band.setBandStack(1, makeBandStack(10130000,Modes.USB,5));
+		band.setBandStack(2, makeBandStack(10140000,Modes.USB,5));
         band.setTransmit(true);
 		bands.add(band);
 		
@@ -179,8 +179,8 @@ public class Bands implements Serializable {
 		band.setName("20");
 		band.setBandEdge(bandedge);
 		band.setBandStack(0, makeBandStack(14010000,Modes.CWU,7));
-		band.setBandStack(1, makeBandStack(14230000,Modes.USB,3));
-		band.setBandStack(2, makeBandStack(14330000,Modes.USB,3));
+		band.setBandStack(1, makeBandStack(14230000,Modes.USB,5));
+		band.setBandStack(2, makeBandStack(14330000,Modes.USB,5));
         band.setTransmit(true);
 		bands.add(band);
 		
@@ -191,8 +191,8 @@ public class Bands implements Serializable {
 		band.setName("17");
 		band.setBandEdge(bandedge);
 		band.setBandStack(0, makeBandStack(18068600,Modes.CWU,7));
-		band.setBandStack(1, makeBandStack(18125000,Modes.USB,3));
-		band.setBandStack(2, makeBandStack(18140000,Modes.USB,3));
+		band.setBandStack(1, makeBandStack(18125000,Modes.USB,5));
+		band.setBandStack(2, makeBandStack(18140000,Modes.USB,5));
         band.setTransmit(true);
 		bands.add(band);
 		
@@ -203,8 +203,8 @@ public class Bands implements Serializable {
 		band.setName("15");
 		band.setBandEdge(bandedge);
 		band.setBandStack(0, makeBandStack(21001000,Modes.CWU,7));
-		band.setBandStack(1, makeBandStack(21255000,Modes.USB,3));
-		band.setBandStack(2, makeBandStack(21300000,Modes.USB,3));
+		band.setBandStack(1, makeBandStack(21255000,Modes.USB,5));
+		band.setBandStack(2, makeBandStack(21300000,Modes.USB,5));
         band.setTransmit(true);
 		bands.add(band);
 		
@@ -215,8 +215,8 @@ public class Bands implements Serializable {
 		band.setName("12");
 		band.setBandEdge(bandedge);
 		band.setBandStack(0, makeBandStack(24895000,Modes.CWU,7));
-		band.setBandStack(1, makeBandStack(24900000,Modes.USB,3));
-		band.setBandStack(2, makeBandStack(24910000,Modes.USB,3));
+		band.setBandStack(1, makeBandStack(24900000,Modes.USB,5));
+		band.setBandStack(2, makeBandStack(24910000,Modes.USB,5));
         band.setTransmit(true);
 		bands.add(band);
 		
@@ -227,8 +227,8 @@ public class Bands implements Serializable {
 		band.setName("10");
 		band.setBandEdge(bandedge);
 		band.setBandStack(0, makeBandStack(28001000,Modes.CWU,7));
-		band.setBandStack(1, makeBandStack(28300000,Modes.USB,3));
-		band.setBandStack(2, makeBandStack(28500000,Modes.USB,3));
+		band.setBandStack(1, makeBandStack(28300000,Modes.USB,5));
+		band.setBandStack(2, makeBandStack(28500000,Modes.USB,5));
         band.setTransmit(true);
 		bands.add(band);
 		
@@ -239,8 +239,8 @@ public class Bands implements Serializable {
 		band.setName("6");
 		band.setBandEdge(bandedge);
 		band.setBandStack(0, makeBandStack(50001000,Modes.CWU,7));
-		band.setBandStack(1, makeBandStack(50125000,Modes.USB,3));
-		band.setBandStack(2, makeBandStack(50200000,Modes.USB,3));
+		band.setBandStack(1, makeBandStack(50125000,Modes.USB,5));
+		band.setBandStack(2, makeBandStack(50200000,Modes.USB,5));
         band.setTransmit(true);
 		bands.add(band);
 		

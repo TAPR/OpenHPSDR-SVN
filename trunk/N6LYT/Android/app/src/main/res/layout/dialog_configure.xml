@@ -102,23 +102,150 @@
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/textViewAGCGain" />
 
-                <CheckBox
-                    android:id="@+id/checkBoxDither"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dither" />
+                    android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/checkBoxRandom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Random" />
+                    <CheckBox
+                        android:id="@+id/checkBoxDither"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dither" />
 
-                <CheckBox
-                    android:id="@+id/checkBoxPreamp"
+                    <CheckBox
+                        android:id="@+id/checkBoxRandom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Random" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxPreamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Preamp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Preamp" />
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxNB2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NB2" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxNB2AE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AE Filter" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewNB2GainMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="NB2 Gain Method: " />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupNB2GainMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2Linear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Linear" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2Log"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Log" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewNB2NPEMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="NB2 NPE Method: " />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupNB2NPEMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2OSMS"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="OSMS" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2MMSE"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MMSE" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewNB2Position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="NB2 Position: " />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupNB2Position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2PreAGC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pre AGC" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2PostAGC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Post AGC" />
+
+                    </RadioGroup>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textViewAttenuation"
@@ -131,7 +258,7 @@
                     android:id="@+id/seekBarAttenuation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"/>
+                    android:layout_alignParentLeft="true" />
 
 
             </LinearLayout>

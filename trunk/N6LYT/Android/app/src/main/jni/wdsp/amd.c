@@ -124,9 +124,9 @@ void xamd (AMD a)
 	int j, k;
 	if (a->run)
 	{
-#ifdef __ANDROID__
-LOGD(APPNAME,"xamd");
-#endif
+//#ifdef __ANDROID__
+//LOGD(APPNAME,"xamd");
+//#endif
 		switch (a->mode)
 		{
 

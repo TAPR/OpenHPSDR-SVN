@@ -135,9 +135,9 @@ void xeq (EQ a)
 	double I, Q;
 	if (a->run)
 	{
-#ifdef __ANDROID__
-LOGD(APPNAME,"xeq");
-#endif
+//#ifdef __ANDROID__
+//LOGD(APPNAME,"xeq");
+//#endif
 		memcpy (&(a->infilt[2 * a->size]), a->in, a->size * sizeof (complex));
 		fftw_execute (a->CFor);
 		for (i = 0; i < 2 * a->size; i++)

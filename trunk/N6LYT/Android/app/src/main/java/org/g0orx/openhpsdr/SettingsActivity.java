@@ -48,7 +48,7 @@ public class SettingsActivity extends Activity {
 
                 s.setTitle("Radio");
                 if (configuration.radio == Configuration.RADIO_UNKNOWN) {
-                    configuration.radio = Configuration.METIS_PENELOPE;
+                    configuration.radio = Configuration.METIS_PENELOPE_ALEX;
                 }
                 switch (configuration.radio) {
                     case Configuration.METIS_PENELOPE:
@@ -93,7 +93,7 @@ public class SettingsActivity extends Activity {
                 s = new Setting();
                 s.setTitle("Radio");
                 if (configuration.radio == Configuration.RADIO_UNKNOWN) {
-                    configuration.radio = Configuration.HERMES_BOARD_ONLY;
+                    configuration.radio = Configuration.HERMES_ALEX;
                 }
 
                 switch (configuration.radio) {
@@ -120,7 +120,7 @@ public class SettingsActivity extends Activity {
                 s = new Setting();
                 s.setTitle("Radio");
                 if (configuration.radio == Configuration.RADIO_UNKNOWN) {
-                    configuration.radio = Configuration.ANGELIA_BOARD_ONLY;
+                    configuration.radio = Configuration.ANGELIA_ANAN100D;
                 }
 
                 switch (configuration.radio) {
@@ -137,7 +137,7 @@ public class SettingsActivity extends Activity {
                 s = new Setting();
                 s.setTitle("Radio");
                 if (configuration.radio == Configuration.RADIO_UNKNOWN) {
-                    configuration.radio = Configuration.ORION_BOARD_ONLY;
+                    configuration.radio = Configuration.ORION_ANAN200D;
                 }
 
                 switch (configuration.radio) {
@@ -192,6 +192,11 @@ public class SettingsActivity extends Activity {
         s = new Setting();
         s.setTitle("Sample Rate");
         s.setValue(Integer.toString((int) configuration.samplerate));
+        settings.add(s);
+
+        s = new Setting();
+        s.setTitle("DSP Rate");
+        s.setValue(Integer.toString((int) configuration.dsprate));
         settings.add(s);
 
         s = new Setting();
@@ -367,19 +372,54 @@ public class SettingsActivity extends Activity {
                                     Log.i("Configuration", "onClick:" + i);
                                     switch (i) {
                                         case 0:
-                                            configuration.samplerate = 48000;
+                                            configuration.samplerate = 48000.0;
                                             break;
                                         case 1:
-                                            configuration.samplerate = 96000;
+                                            configuration.samplerate = 96000.0;
                                             break;
                                         case 2:
-                                            configuration.samplerate = 192000;
+                                            configuration.samplerate = 192000.0;
                                             break;
                                         case 3:
-                                            configuration.samplerate = 384000;
+                                            configuration.samplerate = 384000.0;
                                             break;
                                     }
                                     setting.setValue(Integer.toString((int) configuration.samplerate));
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+                    d.show();
+                } else if ("DSP Rate".equals(option)) {
+
+                    AlertDialog.Builder d = new AlertDialog.Builder(context);
+
+                    String title = "DSP Rate";
+                    String[] options = {"24000", "48000", "96000", "192000", "384000"};
+
+                    d.setTitle(title);
+                    d.setItems(options,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialoginterface, int i) {
+                                    Configuration configuration = Configuration.getInstance();
+                                    Log.i("Configuration", "onClick:" + i);
+                                    switch (i) {
+                                        case 0:
+                                            configuration.dsprate = 24000.0;
+                                            break;
+                                        case 1:
+                                            configuration.dsprate = 48000.0;
+                                            break;
+                                        case 2:
+                                            configuration.dsprate = 96000.0;
+                                            break;
+                                        case 3:
+                                            configuration.dsprate = 192000.0;
+                                            break;
+                                        case 4:
+                                            configuration.dsprate = 384000.0;
+                                            break;
+                                    }
+                                    setting.setValue(Integer.toString((int) configuration.dsprate));
                                     adapter.notifyDataSetChanged();
                                 }
                             });

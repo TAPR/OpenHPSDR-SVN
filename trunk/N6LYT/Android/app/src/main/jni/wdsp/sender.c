@@ -57,9 +57,9 @@ void xsender (SENDER a)
 {
 	if (a->run && a->flag)
 	{
-#ifdef __ANDROID__
-LOGD(APPNAME,"xsender");
-#endif
+//#ifdef __ANDROID__
+//LOGD(APPNAME,"xsender");
+//#endif
 		switch (a->mode)
 		{
 		case 0:
