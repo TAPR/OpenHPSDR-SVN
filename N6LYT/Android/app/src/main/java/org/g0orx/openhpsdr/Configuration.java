@@ -6,7 +6,7 @@ import org.g0orx.openhpsdr.discovery.Discovered;
 
 public class Configuration  implements Serializable {
 
-	private static final long serialVersionUID = 7L;
+	private static final long serialVersionUID = 8L;
 	
 	public static Configuration getInstance() {
 		if(instance==null) {
@@ -30,6 +30,7 @@ public class Configuration  implements Serializable {
 	public Discovered discovered;
 	
 	public double samplerate=96000.0;
+    public double dsprate=24000.0;
 	public int fftsize=1024;
 	public int receivers=1;
 	public int receiver=0;
@@ -153,4 +154,10 @@ public class Configuration  implements Serializable {
     static final int MIC_PTT_ENABLE=0;
     static final int MIC_PTT_DISABLE=1;
     int orionmicptt=MIC_PTT_ENABLE;
+
+    boolean NB2=false;
+    boolean NB2_AE=true;
+    int NB2_GAIN=1; // 0:Linear 1:Log
+    int NB2_NPE=0; // 0:OSMS 1:MMSE
+    int NB2_POSITION=1; // 0:PRE-AGC 1:POST-AGC
 }

@@ -629,4 +629,37 @@ JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_WDSPwisdom
  */
 JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_SetRXAEMNRRun
   (JNIEnv *env, jobject obj, jint channel, jint run);
+
+/*
+ * Class:     org_g0orx_openhpsdr_wdsp_WDSP
+ * Method:    SetRXAEMNRgainMethod
+ * Signature: (II)V
+ */
+JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_SetRXAEMNRgainMethod
+  (JNIEnv *env, jobject obj, jint channel, jint method);
+
+/*
+ * Class:     org_g0orx_openhpsdr_wdsp_WDSP
+ * Method:    SetRXAEMNRnpeMethod
+ * Signature: (II)V
+ */
+JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_SetRXAEMNRnpeMethod
+  (JNIEnv *env, jobject obj, jint channel, jint method);
+
+/*
+ * Class:     org_g0orx_openhpsdr_wdsp_WDSP
+ * Method:    SetRXAEMNRaeRun
+ * Signature: (II)V
+ */
+JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_SetRXAEMNRaeRun
+  (JNIEnv *env, jobject obj, jint channel, jint run);
+
+/*
+ * Class:     org_g0orx_openhpsdr_wdsp_WDSP
+ * Method:    SetRXAEMNRPosition
+ * Signature: (II)V
+ */
+JNIEXPORT void JNICALL Java_org_g0orx_openhpsdr_wdsp_WDSP_SetRXAEMNRPosition
+  (JNIEnv *env, jobject obj, jint channel, jint position);
+
 #endif

@@ -102,9 +102,9 @@ int xresample (RESAMPLE a)
 	int outsamps = 0;
 	if (a->run)
 	{
-#ifdef __ANDROID__
-LOGD(APPNAME,"xresample");
-#endif
+//#ifdef __ANDROID__
+//LOGD(APPNAME,"xresample");
+//#endif
 		int i, j, n;
 		int idx_out;
 		double I, Q;

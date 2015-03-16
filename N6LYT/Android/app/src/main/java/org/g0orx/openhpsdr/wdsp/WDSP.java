@@ -283,6 +283,10 @@ public class WDSP {
 
     // new for r3385
     public native void SetRXAEMNRRun(int channel, int setit);
+    public native void SetRXAEMNRgainMethod (int channel, int method);
+    public native void SetRXAEMNRnpeMethod (int channel, int method);
+    public native void SetRXAEMNRaeRun (int channel, int run);
+    public native void SetRXAEMNRPosition (int channel, int position);
     
 	private static WDSP instance=null;
 
@@ -292,7 +296,9 @@ public class WDSP {
 
 	static {
         // must load fftw3 as wdsp is dependent on it
+        Log.i("WDSP","Loading fftw3 library");
         System.loadLibrary("fftw3");
+        Log.i("WDSP","Loading wdsp library");
     	System.loadLibrary("wdsp");
     }
 }

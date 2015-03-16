@@ -298,6 +298,100 @@ public class ConfigureDialog extends Dialog {
             checkBoxPreamp.setVisibility(View.GONE);
         }
 
+        CheckBox checkBoxNB2 = (CheckBox) this.findViewById(R.id.checkBoxNB2);
+        checkBoxNB2.setChecked(configuration.NB2);
+        checkBoxNB2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                configuration.NB2 = isChecked;
+                wdsp.SetRXAEMNRRun(Channel.RX,isChecked?1:0);
+            }
+        });
+
+        CheckBox checkBoxNB2AE = (CheckBox) this.findViewById(R.id.checkBoxNB2AE);
+        checkBoxNB2AE.setChecked(configuration.NB2_AE);
+        checkBoxNB2AE.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                configuration.NB2_AE = isChecked;
+                wdsp.SetRXAEMNRaeRun(Channel.RX,isChecked?1:0);
+            }
+        });
+
+        final RadioButton radioButtonNB2Linear = (RadioButton) this.findViewById(R.id.radioButtonNB2Linear);
+        radioButtonNB2Linear.setChecked(configuration.NB2_GAIN==0);
+        radioButtonNB2Linear.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    configuration.NB2_GAIN = 0;
+                    wdsp.SetRXAEMNRgainMethod(Channel.RX,0);
+                }
+            }
+        });
+
+        final RadioButton radioButtonNB2Log = (RadioButton) this.findViewById(R.id.radioButtonNB2Log);
+        radioButtonNB2Log.setChecked(configuration.NB2_GAIN==1);
+        radioButtonNB2Log.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    configuration.NB2_GAIN = 1;
+                    wdsp.SetRXAEMNRgainMethod(Channel.RX,1);
+                }
+            }
+        });
+
+        final RadioButton radioButtonNB2OSMS = (RadioButton) this.findViewById(R.id.radioButtonNB2OSMS);
+        radioButtonNB2OSMS.setChecked(configuration.NB2_NPE==0);
+        radioButtonNB2OSMS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    configuration.NB2_NPE = 0;
+                    wdsp.SetRXAEMNRnpeMethod(Channel.RX,0);
+                }
+            }
+        });
+
+        final RadioButton radioButtonNB2MMSE = (RadioButton) this.findViewById(R.id.radioButtonNB2MMSE);
+        radioButtonNB2MMSE.setChecked(configuration.NB2_NPE==1);
+        radioButtonNB2MMSE.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    configuration.NB2_NPE = 1;
+                    wdsp.SetRXAEMNRnpeMethod(Channel.RX,1);
+                }
+            }
+        });
+
+        final RadioButton radioButtonNB2PreAGC = (RadioButton) this.findViewById(R.id.radioButtonNB2PreAGC);
+        radioButtonNB2PreAGC.setChecked(configuration.NB2_POSITION==0);
+        radioButtonNB2PreAGC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    configuration.NB2_POSITION = 0;
+                    wdsp.SetRXAEMNRPosition(Channel.RX,0);
+                }
+            }
+        });
+
+        final RadioButton radioButtonNB2PostAGC = (RadioButton) this.findViewById(R.id.radioButtonNB2PostAGC);
+        radioButtonNB2PostAGC.setChecked(configuration.NB2_POSITION==1);
+        radioButtonNB2PostAGC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    configuration.NB2_POSITION = 1;
+                    wdsp.SetRXAEMNRPosition(Channel.RX,1);
+                }
+            }
+        });
+
+
+
         final TextView textViewSpectrumHigh = (TextView) this.findViewById(R.id.textViewSpectrumHigh);
         textViewSpectrumHigh.setText("Spectrum High: "+configuration.spectrumHigh);
         final SeekBar seekBarSpectrumHigh = (SeekBar) this.findViewById(R.id.seekBarSpectrumHigh);

@@ -62,9 +62,9 @@ void xshift (SHIFT a)
 {
 	if (a->run)
 	{
-#ifdef __ANDROID__
-LOGD(APPNAME,"xshift");
-#endif
+//#ifdef __ANDROID__
+//LOGD(APPNAME,"xshift");
+//#endif
 		int i;
 		double I1, Q1, t1, t2;
 		double cos_phase = cos (a->phase);

@@ -107,9 +107,9 @@ void xamsq (AMSQ a)
 {
 	if (a->run)
 	{
-#ifdef __ANDROID__
-LOGD(APPNAME,"xamsq");
-#endif
+//#ifdef __ANDROID__
+//LOGD(APPNAME,"xamsq");
+//#endif
 		int i;
 		double sig, siglimit;
 		for (i = 0; i < a->size; i++)
