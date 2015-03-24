@@ -50,78 +50,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="a55701af-2f6f-4ad8-a17e-cff519115f5b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amd.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amd.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amd.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/amsq.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/amsq.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/amsq.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anf.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anf.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anf.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anf.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anf.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anf.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anr.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/anr.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anr.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/anr.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anr.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/anr.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="$PROJECT_DIR$/app/app-release.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/cblock.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/cblock.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/cblock.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/cblock.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/cblock.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/cblock.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/eq.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/eq.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/eq.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmd.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmd.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmd.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmd.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/fmsq.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/fmsq.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmsq.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/fmsq.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gen.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/gen.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gen.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/gen.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gen.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/gen.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iir.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iir.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iir.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iir.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iir.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iir.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iobuffs.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/iobuffs.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iobuffs.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/iobuffs.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iobuffs.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/iobuffs.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/libs/armeabi/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/libs/armeabi/libwdsp.so" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/libs/armeabi-v7a/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/libs/armeabi-v7a/libwdsp.so" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/libs/x86/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/libs/x86/libwdsp.so" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/libwdsp.so" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/libwdsp.so" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/libwdsp.so" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/libwdsp.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/resample.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/resample.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/resample.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/resample.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/resample.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/resample.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/sender.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/sender.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/sender.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/sender.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/sender.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/sender.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/shift.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/shift.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/shift.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/shift.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/shift.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/shift.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Bands.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Bands.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Configuration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/ConfigureDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/ConfigureDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/g0orx/openhpsdr/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/g0orx/openhpsdr/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/SettingsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/amd.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/amd.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/amsq.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/amsq.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/anf.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/anf.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/anr.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/anr.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/cblock.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/cblock.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_configure.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_configure.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/eq.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/eq.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/fmd.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/fmd.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/fmsq.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/fmsq.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/gen.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/gen.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/iir.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/iir.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.h" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/resample.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/resample.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/sender.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/sender.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/shift.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/shift.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/linux_port.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi-v7a/objs/wdsp/wdsp/linux_port.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/linux_port.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/armeabi/objs/wdsp/wdsp/linux_port.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/linux_port.o" afterPath="$PROJECT_DIR$/app/src/main/obj/local/x86/objs/wdsp/wdsp/linux_port.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/org/g0orx/openhpsdr/BuildConfig.java" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/org/g0orx/openhpsdr/BuildConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/iobuffs.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/iobuffs.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/wdsp/linux_port.c" afterPath="$PROJECT_DIR$/app/src/main/jni/wdsp/linux_port.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HPSDR-WDSP.iws" />
@@ -153,89 +98,9 @@
       <file leaf-file-name="RadioActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="23205">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4020" max-vertical-offset="23895">
               <caret line="268" column="10" selection-start-line="268" selection-start-column="10" selection-end-line="268" selection-end-column="10" />
-              <folding>
-                <element signature="e#11470#11478#0" expanded="true" />
-                <element signature="e#12816#14032#0" expanded="true" />
-                <element signature="e#13984#13985#0" expanded="true" />
-                <element signature="e#14363#15830#0" expanded="true" />
-                <element signature="e#15815#15816#0" expanded="true" />
-                <element signature="e#16145#17612#0" expanded="true" />
-                <element signature="e#17597#17598#0" expanded="true" />
-                <element signature="e#17805#18200#0" expanded="true" />
-                <element signature="e#18188#18189#0" expanded="true" />
-                <element signature="e#18321#22230#0" expanded="true" />
-                <element signature="e#22218#22219#0" expanded="true" />
-                <element signature="e#22340#30327#0" expanded="true" />
-                <element signature="e#23209#23738#0" expanded="true" />
-                <element signature="e#23707#23708#0" expanded="true" />
-                <element signature="e#25047#29979#0" expanded="true" />
-                <element signature="e#29952#29953#0" expanded="true" />
-                <element signature="e#30316#30317#0" expanded="true" />
-                <element signature="e#30448#32197#0" expanded="true" />
-                <element signature="e#32186#32187#0" expanded="true" />
-                <element signature="e#32355#33783#0" expanded="true" />
-                <element signature="e#33768#33769#0" expanded="true" />
-                <element signature="e#33940#43971#0" expanded="true" />
-                <element signature="e#34752#35281#0" expanded="true" />
-                <element signature="e#35250#35251#0" expanded="true" />
-                <element signature="e#35736#38920#0" expanded="true" />
-                <element signature="e#38897#38898#0" expanded="true" />
-                <element signature="e#39050#39323#0" expanded="true" />
-                <element signature="e#39300#39301#0" expanded="true" />
-                <element signature="e#39453#39726#0" expanded="true" />
-                <element signature="e#39703#39704#0" expanded="true" />
-                <element signature="e#39856#40129#0" expanded="true" />
-                <element signature="e#40106#40107#0" expanded="true" />
-                <element signature="e#40259#40532#0" expanded="true" />
-                <element signature="e#40509#40510#0" expanded="true" />
-                <element signature="e#40662#40935#0" expanded="true" />
-                <element signature="e#40912#40913#0" expanded="true" />
-                <element signature="e#41065#41338#0" expanded="true" />
-                <element signature="e#41315#41316#0" expanded="true" />
-                <element signature="e#41468#41741#0" expanded="true" />
-                <element signature="e#41718#41719#0" expanded="true" />
-                <element signature="e#41871#42144#0" expanded="true" />
-                <element signature="e#42121#42122#0" expanded="true" />
-                <element signature="e#42274#42547#0" expanded="true" />
-                <element signature="e#42524#42525#0" expanded="true" />
-                <element signature="e#42677#43019#0" expanded="true" />
-                <element signature="e#42996#42997#0" expanded="true" />
-                <element signature="e#43165#43507#0" expanded="true" />
-                <element signature="e#43484#43485#0" expanded="true" />
-                <element signature="e#43649#43897#0" expanded="true" />
-                <element signature="e#43874#43875#0" expanded="true" />
-                <element signature="e#43960#43961#0" expanded="true" />
-                <element signature="e#44118#44473#0" expanded="true" />
-                <element signature="e#44462#44463#0" expanded="true" />
-                <element signature="e#44583#49604#0" expanded="true" />
-                <element signature="e#45452#45981#0" expanded="true" />
-                <element signature="e#45950#45951#0" expanded="true" />
-                <element signature="e#47119#49254#0" expanded="true" />
-                <element signature="e#49227#49228#0" expanded="true" />
-                <element signature="e#49593#49594#0" expanded="true" />
-                <element signature="e#49720#54869#0" expanded="true" />
-                <element signature="e#50645#51174#0" expanded="true" />
-                <element signature="e#51143#51144#0" expanded="true" />
-                <element signature="e#52431#54527#0" expanded="true" />
-                <element signature="e#54500#54501#0" expanded="true" />
-                <element signature="e#54858#54859#0" expanded="true" />
-                <element signature="e#55117#60309#0" expanded="true" />
-                <element signature="e#58512#60235#0" expanded="true" />
-                <element signature="e#60212#60213#0" expanded="true" />
-                <element signature="e#60298#60299#0" expanded="true" />
-                <element signature="e#62277#62479#0" expanded="true" />
-                <element signature="e#62464#62465#0" expanded="true" />
-                <element signature="e#62523#62732#0" expanded="true" />
-                <element signature="e#62717#62718#0" expanded="true" />
-                <element signature="e#62900#62901#0" expanded="true" />
-                <element signature="e#62933#62934#0" expanded="true" />
-                <element signature="e#64204#64580#0" expanded="true" />
-                <element signature="e#64573#64574#0" expanded="true" />
-                <element signature="e#64617#65477#0" expanded="true" />
-                <element signature="e#65470#65471#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -243,7 +108,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4125">
+            <state vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="4650">
               <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
               <folding />
             </state>
@@ -293,11 +158,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WDSP.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="WDSP.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.4095563" vertical-offset="3599" max-vertical-offset="4590">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2774" max-vertical-offset="4590">
               <caret line="299" column="36" selection-start-line="299" selection-start-column="36" selection-end-line="299" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.5085324" vertical-offset="944" max-vertical-offset="1530">
+              <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -308,16 +183,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="14385">
               <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Discovered.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/discovery/Discovered.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1635" max-vertical-offset="1920">
-              <caret line="109" column="46" selection-start-line="109" selection-start-column="46" selection-end-line="109" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -1107,7 +972,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/BandscopeView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_configuration.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/DisplayUpdate.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Metis.java" />
         <option value="$PROJECT_DIR$/app/src/main/jni/wdsp/fmd.c" />
         <option value="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.h" />
@@ -1119,6 +983,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Bands.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/RadioActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -1126,7 +991,7 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="161" />
+    <option name="x" value="142" />
     <option name="y" value="82" />
     <option name="width" value="1450" />
     <option name="height" value="968" />
@@ -1158,8 +1023,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1288,6 +1151,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1299,7 +1164,7 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="015d24bc9c381803" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/jni/wdsp/org_g0orx_openhpsdr_wdsp_WDSP.c" />
+    <property name="last_opened_file_path" value="$USER_HOME$/images" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
     <property name="ExportApk.Flavors" value="" />
     <property name="ExportApk.BuildType" value="release" />
@@ -1585,7 +1450,11 @@
       <created>1426429857532</created>
       <updated>1426429857532</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Added support for NB2.">
+      <created>1426519390352</created>
+      <updated>1426519390352</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1609,8 +1478,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="161" y="82" width="1450" height="968" extended-state="0" />
-    <editor active="true" />
+    <frame x="142" y="82" width="1450" height="968" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270809" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282532" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1624,7 +1493,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31770223" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32590857" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2813599" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2813599" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32283464" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1846591" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1716,18 +1585,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Band.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="1575">
-          <caret line="106" column="61" selection-start-line="106" selection-start-column="61" selection-end-line="106" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/Channel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
           <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1735,7 +1596,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1065">
           <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1988,14 +1848,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
-          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/jni/wdsp/emnr.c">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="11609" max-vertical-offset="12435">
@@ -2007,7 +1859,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="9465" max-vertical-offset="10065">
           <caret line="652" column="3" selection-start-line="632" selection-start-column="0" selection-end-line="663" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2015,7 +1866,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="11622" max-vertical-offset="13365">
           <caret line="883" column="45" selection-start-line="883" selection-start-column="45" selection-end-line="883" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2023,7 +1873,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2475">
           <caret line="65" column="45" selection-start-line="65" selection-start-column="45" selection-end-line="65" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2031,7 +1880,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1620">
           <caret line="109" column="46" selection-start-line="109" selection-start-column="46" selection-end-line="109" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2098,94 +1946,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2502" max-vertical-offset="23205">
           <caret line="268" column="10" selection-start-line="268" selection-start-column="10" selection-end-line="268" selection-end-column="10" />
-          <folding>
-            <element signature="e#11470#11478#0" expanded="true" />
-            <element signature="e#12816#14032#0" expanded="true" />
-            <element signature="e#13984#13985#0" expanded="true" />
-            <element signature="e#14363#15830#0" expanded="true" />
-            <element signature="e#15815#15816#0" expanded="true" />
-            <element signature="e#16145#17612#0" expanded="true" />
-            <element signature="e#17597#17598#0" expanded="true" />
-            <element signature="e#17805#18200#0" expanded="true" />
-            <element signature="e#18188#18189#0" expanded="true" />
-            <element signature="e#18321#22230#0" expanded="true" />
-            <element signature="e#22218#22219#0" expanded="true" />
-            <element signature="e#22340#30327#0" expanded="true" />
-            <element signature="e#23209#23738#0" expanded="true" />
-            <element signature="e#23707#23708#0" expanded="true" />
-            <element signature="e#25047#29979#0" expanded="true" />
-            <element signature="e#29952#29953#0" expanded="true" />
-            <element signature="e#30316#30317#0" expanded="true" />
-            <element signature="e#30448#32197#0" expanded="true" />
-            <element signature="e#32186#32187#0" expanded="true" />
-            <element signature="e#32355#33783#0" expanded="true" />
-            <element signature="e#33768#33769#0" expanded="true" />
-            <element signature="e#33940#43971#0" expanded="true" />
-            <element signature="e#34752#35281#0" expanded="true" />
-            <element signature="e#35250#35251#0" expanded="true" />
-            <element signature="e#35736#38920#0" expanded="true" />
-            <element signature="e#38897#38898#0" expanded="true" />
-            <element signature="e#39050#39323#0" expanded="true" />
-            <element signature="e#39300#39301#0" expanded="true" />
-            <element signature="e#39453#39726#0" expanded="true" />
-            <element signature="e#39703#39704#0" expanded="true" />
-            <element signature="e#39856#40129#0" expanded="true" />
-            <element signature="e#40106#40107#0" expanded="true" />
-            <element signature="e#40259#40532#0" expanded="true" />
-            <element signature="e#40509#40510#0" expanded="true" />
-            <element signature="e#40662#40935#0" expanded="true" />
-            <element signature="e#40912#40913#0" expanded="true" />
-            <element signature="e#41065#41338#0" expanded="true" />
-            <element signature="e#41315#41316#0" expanded="true" />
-            <element signature="e#41468#41741#0" expanded="true" />
-            <element signature="e#41718#41719#0" expanded="true" />
-            <element signature="e#41871#42144#0" expanded="true" />
-            <element signature="e#42121#42122#0" expanded="true" />
-            <element signature="e#42274#42547#0" expanded="true" />
-            <element signature="e#42524#42525#0" expanded="true" />
-            <element signature="e#42677#43019#0" expanded="true" />
-            <element signature="e#42996#42997#0" expanded="true" />
-            <element signature="e#43165#43507#0" expanded="true" />
-            <element signature="e#43484#43485#0" expanded="true" />
-            <element signature="e#43649#43897#0" expanded="true" />
-            <element signature="e#43874#43875#0" expanded="true" />
-            <element signature="e#43960#43961#0" expanded="true" />
-            <element signature="e#44118#44473#0" expanded="true" />
-            <element signature="e#44462#44463#0" expanded="true" />
-            <element signature="e#44583#49604#0" expanded="true" />
-            <element signature="e#45452#45981#0" expanded="true" />
-            <element signature="e#45950#45951#0" expanded="true" />
-            <element signature="e#47119#49254#0" expanded="true" />
-            <element signature="e#49227#49228#0" expanded="true" />
-            <element signature="e#49593#49594#0" expanded="true" />
-            <element signature="e#49720#54869#0" expanded="true" />
-            <element signature="e#50645#51174#0" expanded="true" />
-            <element signature="e#51143#51144#0" expanded="true" />
-            <element signature="e#52431#54527#0" expanded="true" />
-            <element signature="e#54500#54501#0" expanded="true" />
-            <element signature="e#54858#54859#0" expanded="true" />
-            <element signature="e#55117#60309#0" expanded="true" />
-            <element signature="e#58512#60235#0" expanded="true" />
-            <element signature="e#60212#60213#0" expanded="true" />
-            <element signature="e#60298#60299#0" expanded="true" />
-            <element signature="e#62277#62479#0" expanded="true" />
-            <element signature="e#62464#62465#0" expanded="true" />
-            <element signature="e#62523#62732#0" expanded="true" />
-            <element signature="e#62717#62718#0" expanded="true" />
-            <element signature="e#62900#62901#0" expanded="true" />
-            <element signature="e#62933#62934#0" expanded="true" />
-            <element signature="e#64204#64580#0" expanded="true" />
-            <element signature="e#64573#64574#0" expanded="true" />
-            <element signature="e#64617#65477#0" expanded="true" />
-            <element signature="e#65470#65471#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/images/200.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/g0orx/openhpsdr/wdsp/WDSP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4095563" vertical-offset="3599" max-vertical-offset="4590">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2774" max-vertical-offset="4590">
           <caret line="299" column="36" selection-start-line="299" selection-start-column="36" selection-end-line="299" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.5085324" vertical-offset="944" max-vertical-offset="1530">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
           <folding />
         </state>
       </provider>

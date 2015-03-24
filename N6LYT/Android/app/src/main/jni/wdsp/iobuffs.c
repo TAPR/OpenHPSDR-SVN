@@ -452,7 +452,7 @@ void flush_iobuffs (int channel)
 	a->r2_unqueuedsamps = a->r2_havesamps - n * a->out_size;
 	CloseHandle (a->Sem_OutReady);
 #ifdef linux
-	CreateSemaphore(a->Sem_OutReady, 0, n, 1000, 0);
+	CreateSemaphore(&a->Sem_OutReady, 0, n, 1000, 0);
 #else
 	a->Sem_OutReady  = CreateSemaphore(0, n, 1000, 0);
 #endif
