@@ -654,7 +654,8 @@ void HermesProxy::ScheduleTxFrame(unsigned long RxBufCount) // Transmit one ethe
 void HermesProxy::UpdateHermes()	// send a set of control registers to hardware with naught Tx data
 {
 
-	// Repurposed to send the initial registers to Hermes before starting the stream
+	// Repurposed to send the initial registers to Hermes before starting the stream.
+	// Ought to rename this as InitializeHermes or something similar.
 
 	// DEBUG
 	//fprintf(stderr, "UpdateHermes called\n");

@@ -24,10 +24,9 @@ include(GrPlatform) #define LIB_SUFFIX
 
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
-
 list(APPEND hpsdr_sources
     hermesNB_impl.cc HermesProxy.cc metis.cc
-)
+    hermesWB_impl.cc HermesProxyW.cc)
 
 add_library(gnuradio-hpsdr SHARED ${hpsdr_sources})
 target_link_libraries(gnuradio-hpsdr ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES})

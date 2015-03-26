@@ -9,8 +9,12 @@
 
 %{
 #include "hpsdr/hermesNB.h"
+#include "hpsdr/hermesWB.h"
 %}
 
 
 %include "hpsdr/hermesNB.h"
 GR_SWIG_BLOCK_MAGIC2(hpsdr, hermesNB);
+
+%include "hpsdr/hermesWB.h"
+GR_SWIG_BLOCK_MAGIC2(hpsdr, hermesWB);

@@ -22,5 +22,6 @@
 ########################################################################
 install(FILES
     api.h
-    hermesNB.h DESTINATION include/hpsdr
+    hermesNB.h
+    hermesWB.h DESTINATION include/hpsdr
 )
