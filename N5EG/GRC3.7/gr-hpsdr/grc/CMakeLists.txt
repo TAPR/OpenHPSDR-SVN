@@ -18,5 +18,6 @@
 # Boston, MA 02110-1301, USA.
 install(FILES
     hpsdr_hermesNB.xml
+    hpsdr_hermesWB.xml
     DESTINATION share/gnuradio/grc/blocks
 )
