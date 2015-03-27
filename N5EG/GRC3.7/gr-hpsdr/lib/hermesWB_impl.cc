@@ -156,8 +156,8 @@ int hermesWB_impl::general_work (int noutput_items,
 
 	for (int i=0; i<64; i++)
 	{
-	  //for (int j=0; j<256; j++)
-	  //  out0[i*256+j] = Readbuf[j];
+//	  for (int j=0; j<256; j++)
+//	    out0[i*256+j] = ReadBuf[j];
 	  memcpy(out, ReadBuf, 256*sizeof(float));
 	  out += 256;  
 	  ReadBuf = HermesW->GetNextRxReadBuf();
