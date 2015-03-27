@@ -109,7 +109,6 @@ public:
 	bool PTTOnMutesRx;		// PTT On receiver
 	char interface[16];
 
-
 	HermesProxyW(bool RxPre, const char* Intfc, const char * ClkS,
 			int AlexRA, int AlexTA, int AlexHPF, int AlexRPF);	// constructor
 

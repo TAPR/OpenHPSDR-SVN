@@ -92,6 +92,7 @@ HermesProxyW::HermesProxyW(bool RxPre, const char* Intfc, const char * ClkS,
 	LostEthernetRx = 0;	//
 	CurrentEthSeqNum = 0;	//
 
+
 	
 	// allocate the receiver buffers
 	for(int i=0; i<NUMRXIQBUFS; i++)
@@ -231,14 +232,22 @@ void HermesProxyW::ReceiveRxIQ(unsigned char * inbuf)	// called by metis Rx thre
 	    {
 	      if (RxBufFillCount() >= (NUMRXIQBUFS - 1)) // buffers full, drop ethernet frame
 		return;		
+
 	      IQBuf_t dummy = GetNextRxWriteBuf();  	// fill a buffer with trash
 	      if (RxWriteBufAligned())
 		break;						// now aligned
 	    }
+
 	}
 
 	if (RxBufFillCount() >= (NUMRXIQBUFS - 2))	// We're full. throw away ethernet frame
 	  return;
+
+
+// BUGBUG
+//for (int c=0; c<1024; c++)
+//  fwrite(&inbuf[c], 1, 1, f);
+//fwrite(inbuf, 1, 1024, f);
 
 	IQBuf_t outbuf = GetCurrentRxWriteBuf();
 	for (int j = 0; j<256; j++)	// read 256 floats
@@ -251,13 +260,12 @@ void HermesProxyW::ReceiveRxIQ(unsigned char * inbuf)	// called by metis Rx thre
 	outbuf = GetNextRxWriteBuf();
 	for (int j = 0; j<256; j++)	// read 256 floats
 	{
-	  int I = (((inbuf[j*2+1]) << 8) & 0xff00) | (inbuf[j*2+0] & 0xff);
+	  int I = (((inbuf[j*2+513]) << 8) & 0xff00) | (inbuf[j*2+512] & 0xff);
 	  if(I >= 32768) I -= 65536;
  	  outbuf[j] = ((float)I/32767.0);  // should exactly fill one buffer
 	}
 
 	outbuf = GetNextRxWriteBuf();
-
 	return;
 };
 
@@ -288,11 +296,11 @@ int HermesProxyW::RxBufFillCount()		// how many RxBuffers are filled?
 IQBuf_t HermesProxyW::GetNextRxReadBuf()	
 {						// used to be called GetIQBuf()
 
-	if(RxReadCounter == RxWriteCounter)
+	if(RxReadCounter == RxWriteCounter)	
 	  return NULL;				// empty - no buffers to return
-
-	IQBuf_t ReturnBuffer = RxIQBuf[RxReadCounter];	// get the next receiver buffer
+	
 	++RxReadCounter &= (NUMRXIQBUFS - 1);		// increment read counter modulo
+	IQBuf_t ReturnBuffer = RxIQBuf[RxReadCounter];	// get the next receiver buffer
 
 	return ReturnBuffer;
 };
@@ -304,14 +312,15 @@ IQBuf_t HermesProxyW::GetCurrentRxReadBuf()
 
 IQBuf_t HermesProxyW::GetNextRxWriteBuf()	
 {						// used to be called GetIQBuf()
-	  if (((RxWriteCounter+1) & (NUMRXIQBUFS - 1)) == RxReadCounter)
-	  {
-		LostRxBufCount++;	// No Rx Buffers available. Throw away the data
-		return NULL;
-	  }
-	  ++RxWriteCounter &= (NUMRXIQBUFS - 1); // get next writeable buffer
-	  RxWriteFill = 0;
-	  return RxIQBuf[RxWriteCounter];
+	if (((RxWriteCounter+1) & (NUMRXIQBUFS - 1)) == RxReadCounter)
+	{
+	  LostRxBufCount++;	// No Rx Buffers available. Throw away the data
+ 	  return NULL;
+	}
+	  
+	++RxWriteCounter &= (NUMRXIQBUFS - 1); // get next writeable buffer
+	RxWriteFill = 0;
+	return RxIQBuf[RxWriteCounter];
 };
 
 IQBuf_t HermesProxyW::GetCurrentRxWriteBuf()
