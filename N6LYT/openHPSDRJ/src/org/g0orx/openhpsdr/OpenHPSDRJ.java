@@ -5,6 +5,8 @@
  */
 package org.g0orx.openhpsdr;
 
+import java.io.File;
+
 /**
  *
  * @author john
@@ -16,6 +18,9 @@ public class OpenHPSDRJ {
      */
     public static void main(String[] args) {
         Log.i("OpenHPSDRJ", "Running on: "+System.getProperty("os.name"));
+        Log.i("OpenHPSDRJ", "Current working directory: "+System.getProperty("user.dir"));
+        System.setProperty("java.library.path", System.getProperty("user.dir")+File.separator+"libs");
+        Log.i("OpenHPSDRJ", "java.library.path: "+System.getProperty("java.library.path"));
         Radio radio=new Radio();
         radio.setVisible(true);
     }

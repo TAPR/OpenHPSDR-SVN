@@ -48,7 +48,7 @@ public class WaterfallPanel extends JPanel {
                 float max = -400.0F;
 
                 int average = 0;
-                for (int i = 0; i < this.getWidth(); i++) {
+                for (int i = 0; i < samples.length; i++) {
                     float s = samples[i] + configuration.displayCalibrationOffset + configuration.preampOffset;
                     average += (int) s;
                     pixels[i] = calculatePixel(s);
@@ -62,6 +62,8 @@ public class WaterfallPanel extends JPanel {
                 image.setRGB(0, 0, this.getWidth(), this.getHeight(), pixels, 0, this.getWidth());
                 
                 this.repaint();
+            } else {
+                Log.i("WaterfallPanel","update: samples:"+samples.length+" width:"+this.getWidth());
             }
         }
     }

@@ -137,7 +137,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }
 
     public void componentResized(ComponentEvent e) {
-        //Log.i("Radio", "componentResized: width="+e.getComponent().getWidth()+" height="+e.getComponent().getHeight());
+        Log.i("Radio", "componentResized: width="+e.getComponent().getWidth()+" height="+e.getComponent().getHeight());
         if (metis != null) {
             metis.setPixels(e.getComponent().getWidth());
         }

@@ -283,13 +283,7 @@ public class Metis extends Thread {
     }
     
     public synchronized void setPixels(int pixels) {
-        //wdsp.DestroyAnalyzer(Display.RX);
-        
-        // rx spectrum
-        //wdsp.XCreateAnalyzer(Display.RX, success, 262144, 1, 1, "");
-        //if (success[0] != 0) {
-        //    Log.i("Metis", "XCreateAnalyzer Display.RX failed:" + success[0]);
-        //}
+        Log.i("Metis","setPixels: "+pixels);
         int flp[] = {0};
         double KEEP_TIME = 0.1;
         int spur_elimination_ffts = 1;
@@ -319,7 +313,7 @@ public class Metis extends Thread {
                 data_type,                        //0 for real input data (I only); 1 for complex input data (I & Q)
                 flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
                 fft_size,                         //size of the fft, i.e., number of input samples
-                configuration.fftsize,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
+                configuration.buffersize,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
                 window_type,           //integer specifying which window function to use
                 kaiser_pi,                      //PiAlpha parameter for Kaiser window
                 overlap,                      //number of samples each fft (other than the first) is to re-use from the previous
