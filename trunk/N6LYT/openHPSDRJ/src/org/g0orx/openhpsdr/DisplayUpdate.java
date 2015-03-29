@@ -47,6 +47,7 @@ public class DisplayUpdate {
 
     private void update() {
         if(samples.length!=panadapterView.getWidth()) {
+            Log.i("DisplayUpdate","update: new width"+panadapterView.getWidth());
             samples = new float[panadapterView.getWidth()];
         }
         if (firsttime) {

@@ -354,7 +354,9 @@ public class WDSP {
         }
         Log.i("WDSP","load wdsp");
         System.loadLibrary("wdsp");
-        //System.loadLibrary("wdspj");
+        if(System.getProperty("os.name").startsWith("Linux")) {
+            System.loadLibrary("wdspj");
+        }
         Log.i("WDSP","shared libraries loaded");
     }
 }
