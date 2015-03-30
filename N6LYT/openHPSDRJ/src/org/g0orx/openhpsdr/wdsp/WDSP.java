@@ -350,11 +350,13 @@ public class WDSP {
         if(System.getProperty("os.name").startsWith("Windows")) {
             System.loadLibrary("libfftw3-3");
         } else {
+            // Linux and Mac
             System.loadLibrary("fftw3");
         }
         Log.i("WDSP","load wdsp");
         System.loadLibrary("wdsp");
-        if(System.getProperty("os.name").startsWith("Linux")) {
+        if(!System.getProperty("os.name").startsWith("Windows")) {
+            // Linux and Mac
             System.loadLibrary("wdspj");
         }
         Log.i("WDSP","shared libraries loaded");

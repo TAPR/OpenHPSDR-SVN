@@ -62,6 +62,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         configuration = Configuration.getInstance();
         discovered.clear();
         this.jButtonDiscover.setEnabled(false);
+        this.jButtonConfigure.setEnabled(false);
         this.jButtonStart.setEnabled(false);
         this.jButtonBand.setEnabled(false);
         this.jButtonFilter.setEnabled(false);
@@ -99,7 +100,10 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.jButtonDiscover.setEnabled(true);
         this.jButtonStart.setEnabled(!discovered.isEmpty());
 
-        if (discovered.size() == 1) {
+        if(discovered.size()==0) {
+            this.setTitle("openHPSDR: No devices found");
+            return;
+        } else if (discovered.size() == 1) {
             configuration.discovered = this.discovered.get(0);
         } else {
             DeviceJDialog dialog = new DeviceJDialog(this, true, discovered);
@@ -109,6 +113,8 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         Log.i("Radio", "selected: " + selected.toString());
         this.setTitle("openHPSDR: " + selected.getDeviceName() + " " + selected.getAddress() + " (" + selected.getMac() + ")");
     
+        this.jButtonConfigure.setEnabled(true);
+            
         filename = selected.getMac() + ".conf";
         filename=filename.replace(":", "-");
         try {
