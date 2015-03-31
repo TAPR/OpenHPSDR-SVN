@@ -61,12 +61,16 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         });
         configuration = Configuration.getInstance();
         discovered.clear();
+        this.bandJPanel.addListener(this);
+        this.modeJPanel.addListener(this);
+        this.filterJPanel.addListener(this);
+        
+        this.bandJPanel.setEnabled(false);
+        this.modeJPanel.setEnabled(false);
+        this.filterJPanel.setEnabled(false);
         this.jButtonDiscover.setEnabled(false);
         this.jButtonConfigure.setEnabled(false);
         this.jButtonStart.setEnabled(false);
-        this.jButtonBand.setEnabled(false);
-        this.jButtonFilter.setEnabled(false);
-        this.jButtonMode.setEnabled(false);
         this.jButtonMOX.setEnabled(false);
         this.jButtonTune.setEnabled(false);
 
@@ -113,6 +117,8 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         Log.i("Radio", "selected: " + selected.toString());
         this.setTitle("openHPSDR: " + selected.getDeviceName() + " " + selected.getAddress() + " (" + selected.getMac() + ")");
     
+        
+        
         this.jButtonConfigure.setEnabled(true);
             
         filename = selected.getMac() + ".conf";
@@ -130,6 +136,10 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             configuration = Configuration.getInstance();
             configuration.discovered = selected;
         }
+        
+        this.bandJPanel.init();
+        this.modeJPanel.init();
+        this.filterJPanel.init();
         
         this.vfoPanel.repaint();
         this.panadapterPanel.repaint();
@@ -160,14 +170,15 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.setTitle(title+": Starting - Please wait ...");
 
         this.jButtonDiscover.setEnabled(false);
-        this.jButtonBand.setEnabled(true);
-        this.jButtonFilter.setEnabled(true);
-        this.jButtonMode.setEnabled(true);
         this.jButtonMOX.setEnabled(true);
         this.jButtonTune.setEnabled(true);
 
         this.jButtonStart.setText("Stop");
         this.jButtonStart.setEnabled(true);
+        
+        this.bandJPanel.setEnabled(true);
+        this.modeJPanel.setEnabled(true);
+        this.filterJPanel.setEnabled(true);
 
         metis = new Metis(this.panadapterPanel.getWidth(), configuration.bandscope);
         
@@ -277,11 +288,13 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
         this.jButtonStart.setText("Start");
         this.jButtonDiscover.setEnabled(true);
-        this.jButtonBand.setEnabled(false);
-        this.jButtonMode.setEnabled(false);
-        this.jButtonFilter.setEnabled(false);
         this.jButtonMOX.setEnabled(false);
         this.jButtonTune.setEnabled(false);
+        
+        this.bandJPanel.setEnabled(false);
+        this.modeJPanel.setEnabled(false);
+        this.filterJPanel.setEnabled(false);
+        
         wdsp = null;
         metis = null;
         update = null;
@@ -315,15 +328,15 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         jButtonDiscover = new javax.swing.JButton();
         jButtonConfigure = new javax.swing.JButton();
         jButtonStart = new javax.swing.JButton();
-        jButtonBand = new javax.swing.JButton();
-        jButtonMode = new javax.swing.JButton();
-        jButtonFilter = new javax.swing.JButton();
         jButtonMOX = new javax.swing.JButton();
         jButtonTune = new javax.swing.JButton();
         vfoPanel = new org.g0orx.openhpsdr.VFOPanel();
         panadapterPanel = new org.g0orx.openhpsdr.PanadapterPanel();
         frequencyPanel = new org.g0orx.openhpsdr.FrequencyPanel();
         waterfallPanel = new org.g0orx.openhpsdr.WaterfallPanel();
+        bandJPanel = new org.g0orx.openhpsdr.BandJPanel();
+        modeJPanel = new org.g0orx.openhpsdr.ModeJPanel();
+        filterJPanel = new org.g0orx.openhpsdr.FilterJPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 1024, 400));
@@ -364,39 +377,6 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         });
         jToolBar1.add(jButtonStart);
 
-        jButtonBand.setText("Band");
-        jButtonBand.setFocusable(false);
-        jButtonBand.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonBand.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonBand.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBandActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButtonBand);
-
-        jButtonMode.setText("Mode");
-        jButtonMode.setFocusable(false);
-        jButtonMode.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonMode.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonMode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModeActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButtonMode);
-
-        jButtonFilter.setText("Filter");
-        jButtonFilter.setFocusable(false);
-        jButtonFilter.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonFilter.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonFilter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFilterActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButtonFilter);
-
         jButtonMOX.setText("MOX");
         jButtonMOX.setFocusable(false);
         jButtonMOX.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -423,42 +403,60 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         frequencyPanel.setLayout(frequencyPanelLayout);
         frequencyPanelLayout.setHorizontalGroup(
             frequencyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 711, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         frequencyPanelLayout.setVerticalGroup(
             frequencyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
+            .addGap(0, 27, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout waterfallPanelLayout = new javax.swing.GroupLayout(waterfallPanel);
         waterfallPanel.setLayout(waterfallPanelLayout);
         waterfallPanelLayout.setHorizontalGroup(
             waterfallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 711, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         waterfallPanelLayout.setVerticalGroup(
             waterfallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
+            .addGap(0, 193, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(vfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(frequencyPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(waterfallPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(bandJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(modeJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 60, Short.MAX_VALUE))
+            .addComponent(vfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(105, 105, 105))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(modeJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bandJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, 0)
                 .addComponent(vfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(frequencyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -467,23 +465,6 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonBandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBandActionPerformed
-        // popup dialog to select band
-        BandJDialog dialog = new BandJDialog(this, true);
-        dialog.setVisible(true);
-    }//GEN-LAST:event_jButtonBandActionPerformed
-
-    private void jButtonModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModeActionPerformed
-        // popup dialog to select mode
-        ModeJDialog dialog = new ModeJDialog(this, true);
-        dialog.setVisible(true);
-    }//GEN-LAST:event_jButtonModeActionPerformed
-
-    private void jButtonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterActionPerformed
-        FilterJDialog dialog=new FilterJDialog(this, true);
-        dialog.setVisible(true);
-    }//GEN-LAST:event_jButtonFilterActionPerformed
 
     private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
         if (stopped) {
@@ -589,6 +570,13 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     public void bandChanged(Band band) {
 
         Log.i("Radio", "bandChanged: " + band.getName());
+        
+        // update mode and filter
+        this.modeJPanel.init();
+        this.filterJPanel.init();
+        
+        if(this.stopped) return;
+                
         BandStack bandstack = band.get();
         Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
 
@@ -637,10 +625,15 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }
 
     public void modeChanged(int mode) {
+        // update filter
+        this.filterJPanel.init();
+        
+        if(this.stopped) return;
         setMode(mode);
     }
     
     public void filterChanged(int f) {
+        if(this.stopped) return;
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
         Filter filter = Modes.getMode(bandstack.getMode()).getFilter(f);
@@ -658,6 +651,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }
 
     public void PTTChanged(boolean ptt) {
+        if(this.stopped) return;
         processPTT(ptt);
     }
     
@@ -905,16 +899,16 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     private boolean stopped=true;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.g0orx.openhpsdr.BandJPanel bandJPanel;
+    private org.g0orx.openhpsdr.FilterJPanel filterJPanel;
     private org.g0orx.openhpsdr.FrequencyPanel frequencyPanel;
-    private javax.swing.JButton jButtonBand;
     private javax.swing.JButton jButtonConfigure;
     private javax.swing.JButton jButtonDiscover;
-    private javax.swing.JButton jButtonFilter;
     private javax.swing.JButton jButtonMOX;
-    private javax.swing.JButton jButtonMode;
     private javax.swing.JButton jButtonStart;
     private javax.swing.JButton jButtonTune;
     private javax.swing.JToolBar jToolBar1;
+    private org.g0orx.openhpsdr.ModeJPanel modeJPanel;
     private org.g0orx.openhpsdr.PanadapterPanel panadapterPanel;
     private org.g0orx.openhpsdr.VFOPanel vfoPanel;
     private org.g0orx.openhpsdr.WaterfallPanel waterfallPanel;

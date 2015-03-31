@@ -347,7 +347,6 @@ public class WDSP {
     //private WisdomActivity activity;
     static {
         // must load fftw3 as wdsp is dependent on it
-        Log.i("WDSP","load fftw3");
         if(System.getProperty("os.name").startsWith("Windows")) {
             String libraryPath=System.getProperty("user.dir")+File.separator+"lib"+File.separator+"windows";
             Log.i("WDSP","libraryPath: "+libraryPath);

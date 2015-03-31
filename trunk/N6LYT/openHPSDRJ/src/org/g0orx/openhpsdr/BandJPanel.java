@@ -1,49 +1,83 @@
+package org.g0orx.openhpsdr;
+
+import java.awt.Color;
+
+import org.g0orx.openhpsdr.modes.Modes;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.g0orx.openhpsdr;
-
-import org.g0orx.openhpsdr.modes.Modes;
-
 /**
  *
  * @author john
  */
-public class FilterJDialog extends javax.swing.JDialog {
+public class BandJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form BandJDialog
+     * Creates new form BandJPanel
      */
-    public FilterJDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        this.parent = (FilterChanged) parent;
+    public BandJPanel() {
         initComponents();
-        this.configuration = Configuration.getInstance();
 
+        this.configuration = Configuration.getInstance();
+        
         javax.swing.JButton[] buttons = {jButton1, jButton2, jButton3, jButton4, jButton5,
             jButton6, jButton7, jButton8, jButton9, jButton10,
             jButton11, jButton12, jButton13, jButton14, jButton15,
             jButton16, jButton17, jButton18, jButton19, jButton20,
             jButton21, jButton22, jButton23, jButton24, jButton25
         };
-
-        Band band = configuration.bands.get();
-        BandStack bandstack = band.get();
-        int length = Modes.getMode(bandstack.getMode()).length();
-
-        String filter = null;
-        for (int i = 0; i < length; i++) {
-            filter = Modes.getMode(bandstack.getMode()).getFilter(i).getName();
-            buttons[i].setText(filter + "Hz");
+        this.buttons=new javax.swing.JButton[buttons.length];
+        for(int i=0;i<buttons.length;i++) {
+            this.buttons[i] = buttons[i];
+            this.buttons[i].setBackground(Color.WHITE);
         }
 
-        for (int i = length; i < 25; i++) {
+        Band[] bands = configuration.bands.getBands();
+        for (int i = 0; i < bands.length; i++) {
+            buttons[i].setText(bands[i].getName());
+        }
+        for (int i = bands.length; i < 25; i++) {
             buttons[i].setVisible(false);
         }
 
-        this.setTitle("Filter " + Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter()).getName()+"Hz");
+        Band band = configuration.bands.get();
+        BandStack bandstack = band.get();
+
+        buttons[configuration.bands.getCurrent()].setBackground(Color.YELLOW);
+    }
+
+    public void addListener(BandChanged listener) {
+        this.listener = listener;
+    }
+    
+    public void init() {
+        this.configuration=Configuration.getInstance();
+        Band[] bands = configuration.bands.getBands();
+        for (int i = 0; i < bands.length; i++) {
+            buttons[i].setText(bands[i].getName());
+            buttons[i].setBackground(Color.WHITE);
+            buttons[i].setVisible(true);
+        }
+        for (int i = bands.length; i < 25; i++) {
+            buttons[i].setVisible(false);
+        }
+
+        Band band = configuration.bands.get();
+        BandStack bandstack = band.get();
+
+        buttons[configuration.bands.getCurrent()].setBackground(Color.YELLOW);
+        
+    }
+    
+    @Override
+    public void setEnabled(boolean state) {
+        Band[] bands = configuration.bands.getBands();
+        for (int i = 0; i < bands.length; i++) {
+            buttons[i].setEnabled(state);
+        }
     }
 
     /**
@@ -55,7 +89,6 @@ public class FilterJDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -81,11 +114,8 @@ public class FilterJDialog extends javax.swing.JDialog {
         jButton23 = new javax.swing.JButton();
         jButton24 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
-        jButtonClose = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jPanel1.setLayout(new java.awt.GridLayout(5, 5));
+        setLayout(new java.awt.GridLayout(5, 5));
 
         jButton1.setText("xxx");
         jButton1.setMinimumSize(new java.awt.Dimension(18, 29));
@@ -95,7 +125,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
+        add(jButton1);
 
         jButton2.setText("xxx");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +133,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
+        add(jButton2);
 
         jButton3.setText("xxx");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +141,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3);
+        add(jButton3);
 
         jButton4.setText("xxx");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +149,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4);
+        add(jButton4);
 
         jButton5.setText("xxx");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +157,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5);
+        add(jButton5);
 
         jButton6.setText("xxx");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +165,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6);
+        add(jButton6);
 
         jButton7.setText("xxx");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +173,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7);
+        add(jButton7);
 
         jButton8.setText("xxx");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +181,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton8);
+        add(jButton8);
 
         jButton9.setText("xxx");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +189,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton9);
+        add(jButton9);
 
         jButton10.setText("xxx");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +197,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton10);
+        add(jButton10);
 
         jButton11.setText("xxx");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +205,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton11);
+        add(jButton11);
 
         jButton12.setText("xxx");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -183,7 +213,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton12ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton12);
+        add(jButton12);
 
         jButton13.setText("xxx");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +221,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton13ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton13);
+        add(jButton13);
 
         jButton14.setText("xxx");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +229,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton14ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton14);
+        add(jButton14);
 
         jButton15.setText("xxx");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +237,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton15ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton15);
+        add(jButton15);
 
         jButton16.setText("xxx");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +245,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton16ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton16);
+        add(jButton16);
 
         jButton17.setText("xxx");
         jButton17.addActionListener(new java.awt.event.ActionListener() {
@@ -223,7 +253,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton17ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton17);
+        add(jButton17);
 
         jButton18.setText("xxx");
         jButton18.addActionListener(new java.awt.event.ActionListener() {
@@ -231,7 +261,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton18ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton18);
+        add(jButton18);
 
         jButton19.setText("xxx");
         jButton19.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +269,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton19ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton19);
+        add(jButton19);
 
         jButton20.setText("xxx");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +277,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton20ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton20);
+        add(jButton20);
 
         jButton21.setText("xxx");
         jButton21.addActionListener(new java.awt.event.ActionListener() {
@@ -255,7 +285,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton21ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton21);
+        add(jButton21);
 
         jButton22.setText("xxx");
         jButton22.addActionListener(new java.awt.event.ActionListener() {
@@ -263,7 +293,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton22ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton22);
+        add(jButton22);
 
         jButton23.setText("xxx");
         jButton23.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +301,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton23ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton23);
+        add(jButton23);
 
         jButton24.setText("xxx");
         jButton24.addActionListener(new java.awt.event.ActionListener() {
@@ -279,7 +309,7 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton24ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton24);
+        add(jButton24);
 
         jButton25.setText("xxx");
         jButton25.addActionListener(new java.awt.event.ActionListener() {
@@ -287,44 +317,8 @@ public class FilterJDialog extends javax.swing.JDialog {
                 jButton25ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton25);
-
-        jButtonClose.setText("Close");
-        jButtonClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCloseActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(jButtonClose)
-                .addContainerGap(175, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonClose)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pack();
+        add(jButton25);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        select(9);
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButtonCloseActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         select(0);
@@ -361,6 +355,10 @@ public class FilterJDialog extends javax.swing.JDialog {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         select(8);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        select(9);
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         select(10);
@@ -422,18 +420,30 @@ public class FilterJDialog extends javax.swing.JDialog {
         select(24);
     }//GEN-LAST:event_jButton25ActionPerformed
 
-    private void select(int f) {
-        BandStack bandstack = configuration.bands.get().get();
-        bandstack.setFilter(f);
-        Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
-        this.setTitle("Filter " + Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter()).getName()+"Hz");
+    private void select(int b) {
+        if (configuration.bands.getCurrent() == b) {
+            // step through bandstack
+            Band band = configuration.bands.get();
+            band.next();
+        } else {
+            // changing band
+            buttons[configuration.bands.getCurrent()].setBackground(Color.WHITE);
+            configuration.bands.set(b);
+            buttons[b].setBackground(Color.YELLOW);
+        }
 
-        parent.filterChanged(f);
+        Band band = configuration.bands.get();
+        BandStack bandstack = band.get();
+        Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
+
+        if (listener != null) {
+            listener.bandChanged(band);
+        }
     }
 
-    Configuration configuration;
+    BandChanged listener;
 
-    FilterChanged parent;
+    private Configuration configuration;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -461,8 +471,8 @@ public class FilterJDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JButton jButtonClose;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private javax.swing.JButton[] buttons;
 
 }
