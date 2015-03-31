@@ -30,7 +30,7 @@ public class WaterfallPanel extends JPanel {
         if (samples != null) {
             if (samples.length == this.getWidth()) {
 
-                if(image==null || image.getWidth()!=samples.length) {
+                if(image==null || image.getWidth()!=samples.length || image.getHeight()!=this.getHeight()) {
                     image=new BufferedImage(this.getWidth(),this.getHeight(),BufferedImage.TYPE_INT_RGB);
                     pixels = new int[samples.length * this.getHeight()];
                     for (int i = 0; i < samples.length * this.getHeight(); i++) {
