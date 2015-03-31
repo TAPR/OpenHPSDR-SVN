@@ -117,6 +117,7 @@ public class BandJPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.GridLayout(5, 5));
 
+        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton1.setText("xxx");
         jButton1.setMinimumSize(new java.awt.Dimension(18, 29));
         jButton1.setPreferredSize(new java.awt.Dimension(18, 29));
@@ -127,6 +128,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton1);
 
+        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton2.setText("xxx");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +137,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton2);
 
+        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton3.setText("xxx");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +146,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton3);
 
+        jButton4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton4.setText("xxx");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +155,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton4);
 
+        jButton5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton5.setText("xxx");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +164,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton5);
 
+        jButton6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton6.setText("xxx");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +173,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton6);
 
+        jButton7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton7.setText("xxx");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +182,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton7);
 
+        jButton8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton8.setText("xxx");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,6 +191,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton8);
 
+        jButton9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton9.setText("xxx");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,6 +200,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton9);
 
+        jButton10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton10.setText("xxx");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,6 +209,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton10);
 
+        jButton11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton11.setText("xxx");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,6 +218,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton11);
 
+        jButton12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton12.setText("xxx");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,6 +227,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton12);
 
+        jButton13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton13.setText("xxx");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +236,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton13);
 
+        jButton14.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton14.setText("xxx");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,6 +245,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton14);
 
+        jButton15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton15.setText("xxx");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,6 +254,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton15);
 
+        jButton16.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton16.setText("xxx");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,6 +263,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton16);
 
+        jButton17.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton17.setText("xxx");
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,6 +272,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton17);
 
+        jButton18.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton18.setText("xxx");
         jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,6 +281,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton18);
 
+        jButton19.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton19.setText("xxx");
         jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,6 +290,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton19);
 
+        jButton20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton20.setText("xxx");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,6 +299,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton20);
 
+        jButton21.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton21.setText("xxx");
         jButton21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,6 +308,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton21);
 
+        jButton22.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton22.setText("xxx");
         jButton22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,6 +317,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton22);
 
+        jButton23.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton23.setText("xxx");
         jButton23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,6 +326,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton23);
 
+        jButton24.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton24.setText("xxx");
         jButton24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,6 +335,7 @@ public class BandJPanel extends javax.swing.JPanel {
         });
         add(jButton24);
 
+        jButton25.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton25.setText("xxx");
         jButton25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

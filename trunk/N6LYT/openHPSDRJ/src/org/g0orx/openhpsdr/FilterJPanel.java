@@ -25,9 +25,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         
         javax.swing.JButton[] buttons = {jButton1, jButton2, jButton3, jButton4, jButton5,
             jButton6, jButton7, jButton8, jButton9, jButton10,
-            jButton11, jButton12, jButton13, jButton14, jButton15,
-            jButton16, jButton17, jButton18, jButton19, jButton20,
-            jButton21, jButton22, jButton23, jButton24, jButton25
+            jButton11, jButton12
         };
         this.buttons=new javax.swing.JButton[buttons.length];
         for(int i=0;i<buttons.length;i++) {
@@ -45,7 +43,7 @@ public class FilterJPanel extends javax.swing.JPanel {
             buttons[i].setText(filter + "Hz");
         }
 
-        for (int i = length; i < 25; i++) {
+        for (int i = length; i < 12; i++) {
             buttons[i].setVisible(false);
         }
 
@@ -71,7 +69,7 @@ public class FilterJPanel extends javax.swing.JPanel {
             buttons[i].setVisible(true);
         }
 
-        for (int i = length; i < 25; i++) {
+        for (int i = length; i < 12; i++) {
             buttons[i].setVisible(false);
         }
 
@@ -110,22 +108,10 @@ public class FilterJPanel extends javax.swing.JPanel {
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        jButton20 = new javax.swing.JButton();
-        jButton21 = new javax.swing.JButton();
-        jButton22 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridLayout(5, 5));
+        setLayout(new java.awt.GridLayout(4, 3));
 
+        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton1.setText("xxx");
         jButton1.setMinimumSize(new java.awt.Dimension(18, 29));
         jButton1.setPreferredSize(new java.awt.Dimension(18, 29));
@@ -136,6 +122,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton1);
 
+        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton2.setText("xxx");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +131,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton2);
 
+        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton3.setText("xxx");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +140,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton3);
 
+        jButton4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton4.setText("xxx");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,6 +149,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton4);
 
+        jButton5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton5.setText("xxx");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,6 +158,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton5);
 
+        jButton6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton6.setText("xxx");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,6 +167,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton6);
 
+        jButton7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton7.setText("xxx");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,6 +176,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton7);
 
+        jButton8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton8.setText("xxx");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,6 +185,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton8);
 
+        jButton9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton9.setText("xxx");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,6 +194,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton9);
 
+        jButton10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton10.setText("xxx");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,6 +203,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton10);
 
+        jButton11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton11.setText("xxx");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,6 +212,7 @@ public class FilterJPanel extends javax.swing.JPanel {
         });
         add(jButton11);
 
+        jButton12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton12.setText("xxx");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,110 +220,6 @@ public class FilterJPanel extends javax.swing.JPanel {
             }
         });
         add(jButton12);
-
-        jButton13.setText("xxx");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-        add(jButton13);
-
-        jButton14.setText("xxx");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
-            }
-        });
-        add(jButton14);
-
-        jButton15.setText("xxx");
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
-            }
-        });
-        add(jButton15);
-
-        jButton16.setText("xxx");
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
-            }
-        });
-        add(jButton16);
-
-        jButton17.setText("xxx");
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
-            }
-        });
-        add(jButton17);
-
-        jButton18.setText("xxx");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
-            }
-        });
-        add(jButton18);
-
-        jButton19.setText("xxx");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
-            }
-        });
-        add(jButton19);
-
-        jButton20.setText("xxx");
-        jButton20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton20ActionPerformed(evt);
-            }
-        });
-        add(jButton20);
-
-        jButton21.setText("xxx");
-        jButton21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton21ActionPerformed(evt);
-            }
-        });
-        add(jButton21);
-
-        jButton22.setText("xxx");
-        jButton22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton22ActionPerformed(evt);
-            }
-        });
-        add(jButton22);
-
-        jButton23.setText("xxx");
-        jButton23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton23ActionPerformed(evt);
-            }
-        });
-        add(jButton23);
-
-        jButton24.setText("xxx");
-        jButton24.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton24ActionPerformed(evt);
-            }
-        });
-        add(jButton24);
-
-        jButton25.setText("xxx");
-        jButton25.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton25ActionPerformed(evt);
-            }
-        });
-        add(jButton25);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -377,58 +270,6 @@ public class FilterJPanel extends javax.swing.JPanel {
         select(11);
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        select(12);
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        select(13);
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        select(14);
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        select(15);
-    }//GEN-LAST:event_jButton16ActionPerformed
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        select(16);
-    }//GEN-LAST:event_jButton17ActionPerformed
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        select(17);
-    }//GEN-LAST:event_jButton18ActionPerformed
-
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        select(18);
-    }//GEN-LAST:event_jButton19ActionPerformed
-
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        select(19);
-    }//GEN-LAST:event_jButton20ActionPerformed
-
-    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        select(20);
-    }//GEN-LAST:event_jButton21ActionPerformed
-
-    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        select(21);
-    }//GEN-LAST:event_jButton22ActionPerformed
-
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        select(22);
-    }//GEN-LAST:event_jButton23ActionPerformed
-
-    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        select(23);
-    }//GEN-LAST:event_jButton24ActionPerformed
-
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        select(24);
-    }//GEN-LAST:event_jButton25ActionPerformed
-
     private void select(int f) {
         BandStack bandstack = configuration.bands.get().get();
         buttons[bandstack.getFilter()].setBackground(Color.WHITE);
@@ -447,20 +288,7 @@ public class FilterJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
