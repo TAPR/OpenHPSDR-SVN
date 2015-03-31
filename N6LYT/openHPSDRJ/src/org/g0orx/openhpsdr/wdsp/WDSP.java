@@ -347,30 +347,32 @@ public class WDSP {
     //private WisdomActivity activity;
     static {
         // must load fftw3 as wdsp is dependent on it
-        
-        if(System.getProperty("os.name").startsWith("Windows")) {
-            System.setProperty("java.library.path", System.getProperty("user.dir")+File.separator+"lib"+File.separator+"windows");
-        } else if(System.getProperty("os.name").startsWith("Mac")) {
-            System.setProperty("java.library.path", System.getProperty("user.dir")+File.separator+"lib"+File.separator+"mac");
-        } else if(System.getProperty("os.name").startsWith("Linux")) {
-            System.setProperty("java.library.path", System.getProperty("user.dir")+File.separator+"lib"+File.separator+"linux");
-        } else {
-            System.setProperty("java.library.path", System.getProperty("user.dir")+File.separator+"lib");
-        }
-
-        Log.i("WDSP", "java.library.path: "+System.getProperty("java.library.path"));
         Log.i("WDSP","load fftw3");
         if(System.getProperty("os.name").startsWith("Windows")) {
-            System.loadLibrary("libfftw3-3");
-        } else {
-            // Linux and Mac
-            System.loadLibrary("fftw3");
-        }
-        Log.i("WDSP","load wdsp");
-        System.loadLibrary("wdsp");
-        if(!System.getProperty("os.name").startsWith("Windows")) {
-            // Linux and Mac
-            System.loadLibrary("wdspj");
+            String libraryPath=System.getProperty("user.dir")+File.separator+"lib"+File.separator+"windows";
+            Log.i("WDSP","libraryPath: "+libraryPath);
+            Log.i("WDSP","load libfftw3-3.dll");
+            System.load(libraryPath+File.separator+"libfftw3-3.dll");
+            Log.i("WDSP","load wdsp.dll");
+            System.load(libraryPath+File.separator+"wdsp.dll");
+        } else if(System.getProperty("os.name").startsWith("Linux")) {
+            String libraryPath=System.getProperty("user.dir")+File.separator+"lib"+File.separator+"linux";
+            Log.i("WDSP","libraryPath: "+libraryPath);
+            Log.i("WDSP","load libfftw3.so");
+            System.load(libraryPath+File.separator+"libfftw3.so");
+            Log.i("WDSP","load libwdsp.so");
+            System.load(libraryPath+File.separator+"libwdsp.so");
+            Log.i("WDSP","load libwdspj.so");
+            System.load(libraryPath+File.separator+"libwdspj.so");
+        } else if(System.getProperty("os.name").startsWith("Mac")) {
+            String libraryPath=System.getProperty("user.dir")+File.separator+"lib"+File.separator+"mac";
+            Log.i("WDSP","libraryPath: "+libraryPath);
+            Log.i("WDSP","load libfftw3.so");
+            System.load(libraryPath+File.separator+"libfftw3.so");
+            Log.i("WDSP","load libwdsp.so");
+            System.load(libraryPath+File.separator+"libwdsp.so");
+            Log.i("WDSP","load libwdspj.so");
+            System.load(libraryPath+File.separator+"libwdspj.so");
         }
         Log.i("WDSP","shared libraries loaded");
     }
