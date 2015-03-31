@@ -14,6 +14,10 @@ import org.g0orx.openhpsdr.modes.Modes;
 
 public class PanadapterPanel extends javax.swing.JPanel {
 
+    public void setMetis(Metis metis) {
+        this.metis=metis;
+    }
+    
     public void paintComponent(Graphics g) {
         if (this.getWidth() == 0 || this.getHeight() == 0) {
             return;
@@ -23,6 +27,11 @@ public class PanadapterPanel extends javax.swing.JPanel {
         try {
 
             Configuration configuration = Configuration.getInstance();
+            
+            int samplerate=(int)configuration.samplerate;
+            if(metis!=null && metis.isTransmitting()) {
+                samplerate=48000;
+            }
 
             Band band = configuration.bands.get();
             BandStack bandstack = band.get();
@@ -36,8 +45,8 @@ public class PanadapterPanel extends javax.swing.JPanel {
                 low = configuration.cwsidetonefrequency - low;
                 high = configuration.cwsidetonefrequency + high;
             }
-            filterLeft = ((int) low - (-(int) configuration.samplerate / 2)) * this.getWidth() / (int) configuration.samplerate;
-            filterRight = ((int) high - (-(int) configuration.samplerate / 2)) * this.getWidth() / (int) configuration.samplerate;
+            filterLeft = ((int) low - (-samplerate / 2)) * this.getWidth() / samplerate;
+            filterRight = ((int) high - (-samplerate / 2)) * this.getWidth() / samplerate;
             if (filterLeft == filterRight) {
                 filterRight++;
             }
@@ -78,11 +87,11 @@ public class PanadapterPanel extends javax.swing.JPanel {
             }
 
             // plot the vertical frequency markers
-            float hzPerPixel = (float) configuration.samplerate / (float) this.getWidth();
-            long f = frequency - ((long) configuration.samplerate / 2);
+            float hzPerPixel = samplerate / (float) this.getWidth();
+            long f = frequency - ((long)samplerate / 2);
             String fs;
             for (int i = 0; i < this.getWidth(); i++) {
-                f = frequency - ((long) configuration.samplerate / 2) + (long) (hzPerPixel * i);
+                f = frequency - ((long)samplerate / 2) + (long) (hzPerPixel * i);
                 if (f > 0) {
                     if ((f % 20000) < (long) hzPerPixel) {
                         g2d.setColor(Color.YELLOW);
@@ -125,9 +134,9 @@ public class PanadapterPanel extends javax.swing.JPanel {
             // plot the band edge
             BandEdge bandedge = band.getBandEdge();
             if (bandedge.getLow() != 0) {
-                long minfrequency = frequency - ((long) configuration.samplerate / 2);
-                long maxfrequency = frequency + ((long) configuration.samplerate / 2);
-                double hzperpixel = configuration.samplerate / (double) this.getWidth();
+                long minfrequency = frequency - ((long)samplerate / 2);
+                long maxfrequency = frequency + ((long)samplerate / 2);
+                double hzperpixel = samplerate / (double) this.getWidth();
                 if (bandedge.getLow() > minfrequency && bandedge.getLow() < maxfrequency) {
                     // show lower band edge
                     float x = (float) (bandedge.getLow() - minfrequency) / (float) hzperpixel;

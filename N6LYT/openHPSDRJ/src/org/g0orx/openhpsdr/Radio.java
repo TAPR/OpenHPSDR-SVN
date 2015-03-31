@@ -43,7 +43,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if(metis!=null) {
+                if (metis != null) {
                     stop();
                 }
                 if (filename != null) {
@@ -64,10 +64,16 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.bandJPanel.addListener(this);
         this.modeJPanel.addListener(this);
         this.filterJPanel.addListener(this);
-        
+
         this.bandJPanel.setEnabled(false);
         this.modeJPanel.setEnabled(false);
         this.filterJPanel.setEnabled(false);
+        
+        this.jButtonDiscover.setBackground(Color.WHITE);
+        this.jButtonConfigure.setBackground(Color.WHITE);
+        this.jButtonStart.setBackground(Color.WHITE);
+        this.jButtonMOX.setBackground(Color.WHITE);
+        this.jButtonTune.setBackground(Color.WHITE);
         this.jButtonDiscover.setEnabled(false);
         this.jButtonConfigure.setEnabled(false);
         this.jButtonStart.setEnabled(false);
@@ -85,12 +91,12 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         waterfallPanel.addMouseListener(this);
         waterfallPanel.addMouseMotionListener(this);
         waterfallPanel.addMouseWheelListener(this);
-        
-        this.discoverDialog=new DiscoverJDialog(this, true);
+
+        this.discoverDialog = new DiscoverJDialog(this, true);
         Discovery discovery = new Discovery(this);
         discovery.start();
         this.discoverDialog.setVisible(true);
-        
+
     }
 
     public void discovered(Discovered d) {
@@ -104,7 +110,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.jButtonDiscover.setEnabled(true);
         this.jButtonStart.setEnabled(!discovered.isEmpty());
 
-        if(discovered.size()==0) {
+        if (discovered.size() == 0) {
             this.setTitle("openHPSDR: No devices found");
             return;
         } else if (discovered.size() == 1) {
@@ -116,13 +122,11 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         selected = configuration.discovered;
         Log.i("Radio", "selected: " + selected.toString());
         this.setTitle("openHPSDR: " + selected.getDeviceName() + " " + selected.getAddress() + " (" + selected.getMac() + ")");
-    
-        
-        
+
         this.jButtonConfigure.setEnabled(true);
-            
+
         filename = selected.getMac() + ".conf";
-        filename=filename.replace(":", "-");
+        filename = filename.replace(":", "-");
         try {
             FileInputStream fis = new FileInputStream(filename);
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -132,15 +136,15 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             configuration = Configuration.getInstance();
             configuration.discovered = selected;
         } catch (Exception e) {
-            Log.i("Radio", "Read configuration: "+e.toString());
+            Log.i("Radio", "Read configuration: " + e.toString());
             configuration = Configuration.getInstance();
             configuration.discovered = selected;
         }
-        
+
         this.bandJPanel.init();
         this.modeJPanel.init();
         this.filterJPanel.init();
-        
+
         this.vfoPanel.repaint();
         this.panadapterPanel.repaint();
         this.frequencyPanel.repaint();
@@ -153,7 +157,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }
 
     public void componentResized(ComponentEvent e) {
-        Log.i("Radio", "componentResized: width="+e.getComponent().getWidth()+" height="+e.getComponent().getHeight());
+        Log.i("Radio", "componentResized: width=" + e.getComponent().getWidth() + " height=" + e.getComponent().getHeight());
         if (metis != null) {
             metis.setPixels(e.getComponent().getWidth());
         }
@@ -164,10 +168,10 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }
 
     public void start() {
-        
+
         Log.i("Radio", "start: " + selected.toString());
-        String title=this.getTitle();
-        this.setTitle(title+": Starting - Please wait ...");
+        String title = this.getTitle();
+        this.setTitle(title + ": Starting - Please wait ...");
 
         this.jButtonDiscover.setEnabled(false);
         this.jButtonMOX.setEnabled(true);
@@ -175,17 +179,21 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
         this.jButtonStart.setText("Stop");
         this.jButtonStart.setEnabled(true);
-        
+
         this.bandJPanel.setEnabled(true);
         this.modeJPanel.setEnabled(true);
         this.filterJPanel.setEnabled(true);
 
-        metis = new Metis(this.panadapterPanel.getWidth(), configuration.bandscope);
-        
-        this.setTitle(title+": Initializing WDSP - Please wait ...");
-        Log.i("Radio","load WDSP");
+        this.metis = new Metis(this.panadapterPanel.getWidth(), configuration.bandscope);
+
+        this.vfoPanel.setMetis(metis);
+        this.panadapterPanel.setMetis(metis);
+        this.frequencyPanel.setMetis(metis);
+
+        this.setTitle(title + ": Initializing WDSP - Please wait ...");
+        Log.i("Radio", "load WDSP");
         wdsp = WDSP.getInstance();
-        Log.i("Radio","WDSP loaded");
+        Log.i("Radio", "WDSP loaded");
 
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
@@ -200,13 +208,13 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             high = configuration.cwsidetonefrequency + high;
         }
 
-        Log.i("Radio", "OpenChannel (RX): buffersize="+configuration.buffersize+" fftsize="+configuration.fftsize+" samperate="+configuration.samplerate+" dsprate="+configuration.dsprate);
+        Log.i("Radio", "OpenChannel (RX): buffersize=" + configuration.buffersize + " fftsize=" + configuration.fftsize + " samperate=" + configuration.samplerate + " dsprate=" + configuration.dsprate);
         // setup receiver
         wdsp.OpenChannel(Channel.RX,
                 configuration.buffersize,
                 configuration.fftsize,
-                (int)configuration.samplerate,
-                (int)configuration.dsprate,
+                (int) configuration.samplerate,
+                (int) configuration.dsprate,
                 48000,
                 0/*rx*/, 1/*RUNNING*/,
                 0.010, 0.025, 0.0, 0.010, 0);
@@ -222,18 +230,17 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         wdsp.SetRXAEMNRnpeMethod(Channel.RX, configuration.NB2_NPE);
         wdsp.SetRXAEMNRaeRun(Channel.RX, configuration.NB2_AE ? 1 : 0);
         wdsp.SetRXAEMNRPosition(Channel.RX, configuration.NB2_POSITION);
-        
-        wdsp.SetRXAANRRun(Channel.RX, configuration.NR?1:0);
-        wdsp.SetRXAANFRun(Channel.RX, configuration.ANF?1:0);
-        
+
+        wdsp.SetRXAANRRun(Channel.RX, configuration.NR ? 1 : 0);
+        wdsp.SetRXAANFRun(Channel.RX, configuration.ANF ? 1 : 0);
 
         // setup transmitter
-        Log.i("Radio", "OpenChannel (TX): buffersize="+configuration.buffersize+" fftsize="+configuration.fftsize+" samperate="+configuration.samplerate+" dsprate="+configuration.dsprate);
+        Log.i("Radio", "OpenChannel (TX): buffersize=" + configuration.buffersize + " fftsize=" + configuration.fftsize + " samperate=" + configuration.samplerate + " dsprate=" + configuration.dsprate);
         wdsp.OpenChannel(Channel.TX,
                 configuration.buffersize,
                 configuration.fftsize,
-                (int)configuration.samplerate,
-                (int)configuration.dsprate,
+                (int) configuration.samplerate,
+                (int) configuration.dsprate,
                 48000,
                 1/*tx*/, 0/*NOT RUNNING*/,
                 0.010, 0.025, 0.0, 0.010, 0);
@@ -242,12 +249,12 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         wdsp.SetTXABandpassRun(Channel.TX, 1);
 
         // setup sub receiver
-        Log.i("Radio", "OpenChannel (SUBRX): buffersize="+configuration.buffersize+" fftsize="+configuration.fftsize+" samperate="+configuration.samplerate+" dsprate="+configuration.dsprate);
+        Log.i("Radio", "OpenChannel (SUBRX): buffersize=" + configuration.buffersize + " fftsize=" + configuration.fftsize + " samperate=" + configuration.samplerate + " dsprate=" + configuration.dsprate);
         wdsp.OpenChannel(Channel.SUBRX,
                 configuration.buffersize,
                 configuration.fftsize,
                 (int) configuration.samplerate,
-                (int)configuration.dsprate,
+                (int) configuration.dsprate,
                 48000,
                 0/*rx*/, 0/*NOT RUNNING*/,
                 0.010, 0.025, 0.0, 0.010, 0);
@@ -266,16 +273,16 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         wdsp.SetRXAEMNRaeRun(Channel.SUBRX, configuration.NB2_AE ? 1 : 0);
         wdsp.SetRXAEMNRPosition(Channel.SUBRX, configuration.NB2_POSITION);
 
-        wdsp.SetRXAANRRun(Channel.SUBRX, configuration.NR?1:0);
-        wdsp.SetRXAANFRun(Channel.SUBRX, configuration.ANF?1:0);
-        
+        wdsp.SetRXAANRRun(Channel.SUBRX, configuration.NR ? 1 : 0);
+        wdsp.SetRXAANFRun(Channel.SUBRX, configuration.ANF ? 1 : 0);
+
         bandChanged(band);
 
         metis.start();
 
         update = new DisplayUpdate(vfoPanel, panadapterPanel, waterfallPanel, metis);
         update.startTimer();
-        Log.i("Radio","Start completed");
+        Log.i("Radio", "Start completed");
         this.setTitle(title);
     }
 
@@ -290,11 +297,15 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.jButtonDiscover.setEnabled(true);
         this.jButtonMOX.setEnabled(false);
         this.jButtonTune.setEnabled(false);
-        
+
         this.bandJPanel.setEnabled(false);
         this.modeJPanel.setEnabled(false);
         this.filterJPanel.setEnabled(false);
-        
+
+        this.vfoPanel.setMetis(null);
+        this.panadapterPanel.setMetis(null);
+        this.frequencyPanel.setMetis(null);
+
         wdsp = null;
         metis = null;
         update = null;
@@ -360,9 +371,10 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         );
         waterfallPanelLayout.setVerticalGroup(
             waterfallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 181, Short.MAX_VALUE)
+            .addGap(0, 179, Short.MAX_VALUE)
         );
 
+        jButtonDiscover.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jButtonDiscover.setText("Discover");
         jButtonDiscover.setFocusable(false);
         jButtonDiscover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -373,6 +385,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             }
         });
 
+        jButtonConfigure.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jButtonConfigure.setText("Configure");
         jButtonConfigure.setFocusable(false);
         jButtonConfigure.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -383,6 +396,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             }
         });
 
+        jButtonStart.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jButtonStart.setText("Start");
         jButtonStart.setFocusable(false);
         jButtonStart.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -393,6 +407,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             }
         });
 
+        jButtonMOX.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jButtonMOX.setText("MOX");
         jButtonMOX.setFocusable(false);
         jButtonMOX.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -403,6 +418,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             }
         });
 
+        jButtonTune.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jButtonTune.setText("Tune");
         jButtonTune.setFocusable(false);
         jButtonTune.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -421,23 +437,22 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(waterfallPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(bandJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(modeJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonMOX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonDiscover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonDiscover))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonConfigure, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonTune, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonTune, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonStart)
-                .addGap(0, 257, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(bandJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(modeJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 256, Short.MAX_VALUE))
             .addComponent(vfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -460,7 +475,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonMOX, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                             .addComponent(jButtonTune, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(82, 82, 82)))
+                        .addGap(65, 65, 65)))
                 .addComponent(vfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
@@ -476,11 +491,11 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
         if (stopped) {
             this.start();
-            stopped=false;
+            stopped = false;
         } else {
             // Stop
             this.stop();
-            stopped=true;
+            stopped = true;
         }
     }//GEN-LAST:event_jButtonStartActionPerformed
 
@@ -488,7 +503,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         discovered.clear();
         this.jButtonStart.setEnabled(false);
         this.jButtonConfigure.setEnabled(false);
-        this.discoverDialog=new DiscoverJDialog(this, true);
+        this.discoverDialog = new DiscoverJDialog(this, true);
         Discovery discovery = new Discovery(this);
         discovery.start();
         this.discoverDialog.setVisible(true);
@@ -503,7 +518,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             RadioJDialog dialog = new RadioJDialog(this, true);
             dialog.setVisible(true);
         }
-        
+
         this.vfoPanel.repaint();
         this.panadapterPanel.repaint();
         this.frequencyPanel.repaint();
@@ -516,75 +531,78 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }//GEN-LAST:event_jButtonMOXActionPerformed
 
     private void jButtonTuneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTuneActionPerformed
-         cantransmit = false;
-                    switch (configuration.discovered.getDevice()) {
-                        case Discovered.DEVICE_METIS:
-                            if (metis.penelope_software_version > 0) {
-                                cantransmit = true;
-                            }
-                            break;
-                        case Discovered.DEVICE_HERMES:
-                        case Discovered.DEVICE_GRIFFIN:
-                        case Discovered.DEVICE_ANGELIA:
-                        case Discovered.DEVICE_ORION:
-                            cantransmit = true;
-                            break;
-                    }
-                    if (!cantransmit) {
-                        Log.i("Radio", "Cannot Transmit: No Penelope or Pennylane");
-                    } else if (outofband && !configuration.allowoutofband) {
-                        Log.i("Radio", "Out of Band");
-                    } else {
-                        if (metis.isTransmitting() && metis.isTuning()) {
+        cantransmit = false;
+        switch (configuration.discovered.getDevice()) {
+            case Discovered.DEVICE_METIS:
+                if (metis.penelope_software_version > 0) {
+                    cantransmit = true;
+                }
+                break;
+            case Discovered.DEVICE_HERMES:
+            case Discovered.DEVICE_GRIFFIN:
+            case Discovered.DEVICE_ANGELIA:
+            case Discovered.DEVICE_ORION:
+                cantransmit = true;
+                break;
+        }
+        if (!cantransmit) {
+            Log.i("Radio", "Cannot Transmit: No Penelope or Pennylane");
+        } else if (outofband && !configuration.allowoutofband) {
+            Log.i("Radio", "Out of Band");
+        } else {
+            if (metis.isTransmitting() && metis.isTuning()) {
                             //Log.i("RadioActivity","Tune button: stop tuning");
 
-                            //Log.i("RadioActivity","TUN: SetChannelState(1,0,1)");
-                            wdsp.SetChannelState(Channel.TX, 0, 1);
-                            //Log.i("RadioActivity","TUN: SetChannelState(0,1,0)");
-                            wdsp.SetChannelState(Channel.RX, 1, 0);
-                            if (configuration.subrx) {
-                                wdsp.SetChannelState(Channel.SUBRX, 1, 0);
-                            }
+                //Log.i("RadioActivity","TUN: SetChannelState(1,0,1)");
+                wdsp.SetChannelState(Channel.TX, 0, 1);
+                //Log.i("RadioActivity","TUN: SetChannelState(0,1,0)");
+                wdsp.SetChannelState(Channel.RX, 1, 0);
+                if (configuration.subrx) {
+                    wdsp.SetChannelState(Channel.SUBRX, 1, 0);
+                }
 
-                            metis.setTransmit(false, false);
-                            this.jButtonTune.setBackground(Color.white);
-                        } else {
-                            if (metis.isTransmitting() && !metis.isTuning()) {
-                                //Log.i("RadioActivity","Tune button: stop transmitting");
-                                this.jButtonMOX.setBackground(Color.white);
-                                this.jButtonTune.setBackground(Color.white);
-                            }
-                            Log.i("RadioActivity", "Tune button: start tuning:" + configuration.tunegain);
+                metis.setTransmit(false, false);
+                this.jButtonTune.setBackground(Color.white);
+            } else {
+                if (metis.isTransmitting() && !metis.isTuning()) {
+                    //Log.i("RadioActivity","Tune button: stop transmitting");
+                    this.jButtonMOX.setBackground(Color.white);
+                    this.jButtonTune.setBackground(Color.white);
+                }
+                Log.i("RadioActivity", "Tune button: start tuning:" + configuration.tunegain);
 
                             // receive to transmit
-                            //Log.i("RadioActivity","TUN: SetChannelState(0,0,1)");
-                            wdsp.SetChannelState(Channel.RX, 0, 1);
-                            if (configuration.subrx) {
-                                wdsp.SetChannelState(Channel.SUBRX, 0, 1);
-                            }
-                            //Log.i("RadioActivity","TUN: SetChannelState(1,1,0)");
-                            wdsp.SetChannelState(Channel.TX, 1, 0);
+                //Log.i("RadioActivity","TUN: SetChannelState(0,0,1)");
+                wdsp.SetChannelState(Channel.RX, 0, 1);
+                if (configuration.subrx) {
+                    wdsp.SetChannelState(Channel.SUBRX, 0, 1);
+                }
+                //Log.i("RadioActivity","TUN: SetChannelState(1,1,0)");
+                wdsp.SetChannelState(Channel.TX, 1, 0);
 
                             //configuration.transmit=true;
-                            //configuration.tuning=true;
-                            metis.setTransmit(true, true);
-                            this.jButtonTune.setBackground(Color.red);
-                        }
-                    }
-                    this.vfoPanel.repaint();
+                //configuration.tuning=true;
+                metis.setTransmit(true, true);
+                this.jButtonTune.setBackground(Color.red);
+            }
+        }
+        this.vfoPanel.repaint();
+        this.frequencyPanel.repaint();
 
     }//GEN-LAST:event_jButtonTuneActionPerformed
 
     public void bandChanged(Band band) {
 
         Log.i("Radio", "bandChanged: " + band.getName());
-        
+
         // update mode and filter
         this.modeJPanel.init();
         this.filterJPanel.init();
-        
-        if(this.stopped) return;
-                
+
+        if (this.stopped) {
+            return;
+        }
+
         BandStack bandstack = band.get();
         Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
 
@@ -635,13 +653,17 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     public void modeChanged(int mode) {
         // update filter
         this.filterJPanel.init();
-        
-        if(this.stopped) return;
+
+        if (this.stopped) {
+            return;
+        }
         setMode(mode);
     }
-    
+
     public void filterChanged(int f) {
-        if(this.stopped) return;
+        if (this.stopped) {
+            return;
+        }
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
         Filter filter = Modes.getMode(bandstack.getMode()).getFilter(f);
@@ -654,16 +676,18 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             low = configuration.cwsidetonefrequency - low;
             high = configuration.cwsidetonefrequency + high;
         }
-        
-        setFilter(low,high);
+
+        setFilter(low, high);
     }
 
     public void PTTChanged(boolean ptt) {
-        if(this.stopped) return;
+        if (this.stopped) {
+            return;
+        }
         processPTT(ptt);
     }
-    
-     private void processPTT(boolean state) {
+
+    private void processPTT(boolean state) {
 
         Log.i("Radio", "processPTT:" + state);
 
@@ -706,11 +730,11 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 Log.i("Radio", "processPTT: metis.setTransmit(true,false)");
                 metis.setTransmit(true, false);
                 /*
-                if (configuration.micsource == Configuration.MIC_SOURCE_LOCAL) {
-                    microphone = new Microphone(metis, Channel.TX);
-                    microphone.start();
-                }
-                */
+                 if (configuration.micsource == Configuration.MIC_SOURCE_LOCAL) {
+                 microphone = new Microphone(metis, Channel.TX);
+                 microphone.start();
+                 }
+                 */
                 Log.i("Radio", "Set PTT button red");
                 this.jButtonMOX.setBackground(Color.red);
             }
@@ -726,6 +750,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         }
 
         this.vfoPanel.repaint();
+        this.frequencyPanel.repaint();
     }
 
     private void setFrequency(long f) {
@@ -801,8 +826,8 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Log.i("Radio", "mouseClicked: "+e.getX());
-        double hzperpixel = configuration.samplerate / (double)this.getWidth();
+        Log.i("Radio", "mouseClicked: " + e.getX());
+        double hzperpixel = configuration.samplerate / (double) this.getWidth();
         int step = Step.getStep(configuration.step);
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
@@ -810,8 +835,8 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         long f = start + (long) (e.getX() * hzperpixel);
 
         // make it step resolution
-        f = f / (long)step * (long)step;
-        
+        f = f / (long) step * (long) step;
+
         bandstack.setFrequency(f);
         vfoPanel.repaint();
         frequencyPanel.repaint();
@@ -843,7 +868,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
         int step = Step.getStep(configuration.step);
-        bandstack.setFrequency(bandstack.getFrequency()/step*step);
+        bandstack.setFrequency(bandstack.getFrequency() / step * step);
         vfoPanel.repaint();
         frequencyPanel.repaint();
     }
@@ -862,7 +887,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
         //int step = Step.getStep(configuration.step);
-        int step=(int)configuration.samplerate/this.getWidth();
+        int step = (int) configuration.samplerate / this.getWidth();
         bandstack.setFrequency(bandstack.getFrequency() + (step * increment));
         vfoPanel.repaint();
         frequencyPanel.repaint();
@@ -899,13 +924,13 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     private Discovered selected;
 
     private int mouseX;
-    
-    private boolean cantransmit=false;
-    
+
+    private boolean cantransmit = false;
+
     private DiscoverJDialog discoverDialog;
 
-    private boolean stopped=true;
-    
+    private boolean stopped = true;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.g0orx.openhpsdr.BandJPanel bandJPanel;
     private org.g0orx.openhpsdr.FilterJPanel filterJPanel;
