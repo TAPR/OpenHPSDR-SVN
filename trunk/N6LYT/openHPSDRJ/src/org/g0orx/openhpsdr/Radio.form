@@ -33,25 +33,24 @@
           <Component id="panadapterPanel" max="32767" attributes="0"/>
           <Component id="waterfallPanel" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Component id="bandJPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-              <Component id="modeJPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="filterJPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jButtonMOX" max="32767" attributes="0"/>
-                  <Component id="jButtonDiscover" max="32767" attributes="0"/>
+                  <Component id="jButtonDiscover" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jButtonConfigure" max="32767" attributes="0"/>
-                  <Component id="jButtonTune" max="32767" attributes="0"/>
+                  <Component id="jButtonTune" min="-2" pref="82" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButtonStart" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="257" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="bandJPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="modeJPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="filterJPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="256" max="32767" attributes="0"/>
           </Group>
           <Component id="vfoPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
@@ -80,7 +79,7 @@
                           <Component id="jButtonMOX" pref="52" max="32767" attributes="0"/>
                           <Component id="jButtonTune" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Component id="vfoPanel" min="-2" pref="34" max="-2" attributes="0"/>
@@ -124,7 +123,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="181" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="179" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -137,6 +136,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonDiscover">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="15" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Discover"/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -148,6 +150,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonConfigure">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="15" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Configure"/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -159,6 +164,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonStart">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="15" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Start"/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -170,6 +178,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonMOX">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="15" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="MOX"/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -181,6 +192,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonTune">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="15" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Tune"/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>

@@ -1,6 +1,7 @@
 package org.g0orx.openhpsdr;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
@@ -8,12 +9,21 @@ import org.g0orx.openhpsdr.modes.Modes;
 
 public class FrequencyPanel extends JPanel {
     
+    public void setMetis(Metis metis) {
+        this.metis=metis;
+    }
+    
     public void paintComponent(Graphics g) {
         if (this.getWidth() == 0 || this.getHeight() == 0) {
             return;
         }
-
+        
         Configuration configuration=Configuration.getInstance();
+        
+        int samplerate=(int)configuration.samplerate;
+        if(metis!=null && metis.isTransmitting()) {
+            samplerate=48000;
+        }
         
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
@@ -27,8 +37,8 @@ public class FrequencyPanel extends JPanel {
             low=configuration.cwsidetonefrequency-low;
             high=configuration.cwsidetonefrequency+high;
         }
-        int filterLeft = ((int) low - (-(int) configuration.samplerate / 2)) * this.getWidth() / (int) configuration.samplerate;
-        int filterRight = ((int) high - (-(int) configuration.samplerate / 2)) * this.getWidth() / (int) configuration.samplerate;
+        int filterLeft = ((int) low - (-samplerate / 2)) * this.getWidth() / samplerate;
+        int filterRight = ((int) high - (-samplerate / 2)) * this.getWidth() / samplerate;
         if (filterLeft == filterRight) {
             filterRight++;
         }
@@ -49,11 +59,11 @@ public class FrequencyPanel extends JPanel {
 
 
         // plot the vertical frequency markers
-        float hzPerPixel = (float) configuration.samplerate / (float) this.getWidth();
-        long f = frequency - ((long) configuration.samplerate / 2);
+        float hzPerPixel = (float) samplerate / (float) this.getWidth();
+        long f = frequency - ((long)samplerate / 2);
         String fs;
         for (int i = 0; i < this.getWidth(); i++) {
-            f = frequency - ((long) configuration.samplerate / 2) + (long) (hzPerPixel * i);
+            f = frequency - ((long)samplerate / 2) + (long) (hzPerPixel * i);
             if (f > 0) {
                 if ((f % 20000) < (long) hzPerPixel) {
                     g.drawLine(i, 0, i, this.getHeight() - 20);
@@ -71,4 +81,6 @@ public class FrequencyPanel extends JPanel {
 
     }
     
+    private Metis metis;
+
 }
