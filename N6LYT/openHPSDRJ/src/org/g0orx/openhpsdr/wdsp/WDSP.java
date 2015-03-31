@@ -1,5 +1,6 @@
 package org.g0orx.openhpsdr.wdsp;
 
+import java.io.File;
 import org.g0orx.openhpsdr.Log;
 
 public class WDSP {
@@ -346,6 +347,18 @@ public class WDSP {
     //private WisdomActivity activity;
     static {
         // must load fftw3 as wdsp is dependent on it
+        
+        if(System.getProperty("os.name").startsWith("Windows")) {
+            System.setProperty("java.library.path", System.getProperty("user.dir")+File.separator+"lib"+File.separator+"windows");
+        } else if(System.getProperty("os.name").startsWith("Mac")) {
+            System.setProperty("java.library.path", System.getProperty("user.dir")+File.separator+"lib"+File.separator+"mac");
+        } else if(System.getProperty("os.name").startsWith("Linux")) {
+            System.setProperty("java.library.path", System.getProperty("user.dir")+File.separator+"lib"+File.separator+"linux");
+        } else {
+            System.setProperty("java.library.path", System.getProperty("user.dir")+File.separator+"lib");
+        }
+
+        Log.i("WDSP", "java.library.path: "+System.getProperty("java.library.path"));
         Log.i("WDSP","load fftw3");
         if(System.getProperty("os.name").startsWith("Windows")) {
             System.loadLibrary("libfftw3-3");
