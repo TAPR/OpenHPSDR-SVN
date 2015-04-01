@@ -149,9 +149,10 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.panadapterPanel.repaint();
         this.frequencyPanel.repaint();
 
-        this.jSliderAFGain.setValue((int) (configuration.afgain * 255.0));
+        this.jSliderAFGain.setValue((int) (configuration.afgain * 100.0));
         this.jSliderAGCGain.setValue((int) configuration.bands.get().getAGCGain());
         this.jComboBoxAGC.setSelectedIndex(configuration.bands.get().getAGC());
+        this.jSliderRFGain.setValue((int)(configuration.rfgain * 255.0));
     }
 
     public void componentShown(ComponentEvent e) {
@@ -284,7 +285,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
         metis.start();
 
-        update = new DisplayUpdate(vfoPanel, panadapterPanel, waterfallPanel, metis);
+        update = new DisplayUpdate(vfoPanel, panadapterPanel, waterfallPanel, meterPanel, metis);
         update.startTimer();
         Log.i("Radio", "Start completed");
         this.setTitle(title);
@@ -355,10 +356,12 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         jLabelAFGain = new javax.swing.JLabel();
         jSliderAFGain = new javax.swing.JSlider();
         jLabelAGCGain = new javax.swing.JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
         jSliderAGCGain = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
         jComboBoxAGC = new javax.swing.JComboBox();
+        jLabelRFGain = new javax.swing.JLabel();
+        jSliderRFGain = new javax.swing.JSlider();
+        meterPanel = new org.g0orx.openhpsdr.MeterPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 1024, 400));
@@ -383,7 +386,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         );
         waterfallPanelLayout.setVerticalGroup(
             waterfallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 179, Short.MAX_VALUE)
+            .addGap(0, 186, Short.MAX_VALUE)
         );
 
         jButtonDiscover.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
@@ -443,7 +446,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
         jLabelAFGain.setText("AF Gain:");
 
-        jSliderAFGain.setMaximum(255);
+        jSliderAFGain.setMaximum(200);
         jSliderAFGain.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderAFGainStateChanged(evt);
@@ -456,17 +459,6 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         });
 
         jLabelAGCGain.setText("AGC Gain:");
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         jSliderAGCGain.setMaximum(120);
         jSliderAGCGain.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -484,26 +476,38 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             }
         });
 
+        jLabelRFGain.setText("RF Gain:");
+
+        jSliderRFGain.setMaximum(255);
+        jSliderRFGain.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSliderRFGainStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelAFGain)
                     .addComponent(jLabelAGCGain)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabelRFGain))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderAFGain, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jSliderAGCGain, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jComboBoxAGC, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 13, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(104, 104, 104))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSliderAFGain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSliderAGCGain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSliderRFGain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,22 +515,30 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelAFGain)
                     .addComponent(jSliderAFGain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelAGCGain))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSliderAGCGain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelAGCGain)
+                    .addComponent(jSliderAGCGain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxAGC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelRFGain)
+                    .addComponent(jSliderRFGain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout meterPanelLayout = new javax.swing.GroupLayout(meterPanel);
+        meterPanel.setLayout(meterPanelLayout);
+        meterPanelLayout.setHorizontalGroup(
+            meterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        meterPanelLayout.setVerticalGroup(
+            meterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -554,7 +566,10 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 .addComponent(filterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(vfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(vfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(meterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,21 +581,21 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                             .addComponent(jButtonConfigure)
                             .addComponent(jButtonStart)
                             .addComponent(jButtonDiscover))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonMOX, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                            .addComponent(jButtonTune, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(65, 65, 65))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modeJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bandJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(filterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)))
-                .addComponent(vfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonMOX, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonTune, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(modeJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bandJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
-                .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(meterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(vfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)))
+                .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(frequencyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -688,6 +703,11 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 this.jButtonTune.setBackground(Color.red);
             }
         }
+        if(metis.isTuning()) {
+            this.jSliderRFGain.setValue((int)(configuration.tunegain * 255.0));
+        } else {
+            this.jSliderRFGain.setValue((int)(configuration.rfgain * 255.0));
+        }
         this.vfoPanel.repaint();
         this.frequencyPanel.repaint();
 
@@ -698,7 +718,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }//GEN-LAST:event_jSliderAFGainVetoableChange
 
     private void jSliderAFGainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderAFGainStateChanged
-        configuration.afgain = (float) this.jSliderAFGain.getValue() / 255.0F;
+        configuration.afgain = (float) this.jSliderAFGain.getValue() / 100.0F;
     }//GEN-LAST:event_jSliderAFGainStateChanged
 
     private void jSliderAGCGainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderAGCGainStateChanged
@@ -719,6 +739,15 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         setAGC(Channel.SUBRX, agc);
 
     }//GEN-LAST:event_jComboBoxAGCItemStateChanged
+
+    private void jSliderRFGainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderRFGainStateChanged
+        float gain = (float) this.jSliderRFGain.getValue() / 255.0F;
+        if(metis!=null && metis.isTuning()) {
+            configuration.tunegain = gain;
+        } else {
+            configuration.rfgain = gain;
+        }
+    }//GEN-LAST:event_jSliderRFGainStateChanged
 
     public void bandChanged(Band band) {
 
@@ -1077,10 +1106,12 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAFGain;
     private javax.swing.JLabel jLabelAGCGain;
-    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLabel jLabelRFGain;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSliderAFGain;
     private javax.swing.JSlider jSliderAGCGain;
+    private javax.swing.JSlider jSliderRFGain;
+    private org.g0orx.openhpsdr.MeterPanel meterPanel;
     private org.g0orx.openhpsdr.ModeJPanel modeJPanel;
     private org.g0orx.openhpsdr.PanadapterPanel panadapterPanel;
     private org.g0orx.openhpsdr.VFOPanel vfoPanel;

@@ -55,7 +55,7 @@ public class Configuration implements Serializable {
 
     public float afgain = 0.5F;
 
-    public float micgain = 0.5F;
+    public float micgain = 1.0F;
 
     public boolean subrx = false;
 
@@ -151,7 +151,7 @@ public class Configuration implements Serializable {
 
     static final int MIC_BIAS_DISABLE = 0;
     static final int MIC_BIAS_ENABLE = 1;
-    int orionmicbias = MIC_BIAS_DISABLE;
+    int orionmicbias = MIC_BIAS_ENABLE;
 
     static final int MIC_PTT_ENABLE = 0;
     static final int MIC_PTT_DISABLE = 1;

@@ -577,13 +577,24 @@ public class Metis extends Thread {
                                 break;
                             case 1:
                                 // forward power
-                                penelope_forward_power = (rxcontrol1 << 8) + (rxcontrol2 & 0xFF);
-                                alex_forward_power = (rxcontrol3 << 8) + (rxcontrol4 & 0xFF);
+                                avg_penelope_forward_power += ((rxcontrol1 << 8)&0xFF00) | (rxcontrol2 & 0xFF);
+                                avg_alex_forward_power += ((rxcontrol3 << 8) & 0xFF00) | (rxcontrol4 & 0xFF);
                                 break;
                             case 2:
                                 // reverse power
-                                alex_reverse_power = (rxcontrol1 << 8) + (rxcontrol2 & 0xFF);
+                                avg_alex_reverse_power += ((rxcontrol1 << 8) & 0xFF00) | (rxcontrol2 & 0xFF);
                                 ain3 = (rxcontrol3 << 8) + (rxcontrol4 & 0xFF);
+                                power_samples++;
+                                if(power_samples==4) {
+                                    penelope_forward_power=avg_penelope_forward_power/4;
+                                    alex_forward_power=avg_alex_forward_power/4;
+                                    alex_reverse_power=avg_alex_reverse_power/4;
+                                    
+                                    avg_penelope_forward_power=0;
+                                    avg_alex_forward_power=0;
+                                    avg_alex_reverse_power=0;
+                                    power_samples=0;
+                                }
                                 break;
                             case 3:
                                 ain4 = (rxcontrol1 << 8) + (rxcontrol2 & 0xFF);
@@ -881,9 +892,9 @@ public class Metis extends Thread {
                     case 1: {
                         sendbuffer[11] = 0x12;
                         if (tuning) {
-                            sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getTxGain() * configuration.tunegain);
+                            sendbuffer[12] = (byte) (255.0F * /*configuration.bands.get().getTxGain() * */configuration.tunegain);
                         } else {
-                            sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getTxGain() * configuration.rfgain);
+                            sendbuffer[12] = (byte) (255.0F * /*configuration.bands.get().getTxGain() * */configuration.rfgain);
                         }
                         byte c2=0x00;
                         if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES) {
@@ -1372,6 +1383,11 @@ public class Metis extends Thread {
     public int mercury_software_version = 0;
     public int penelope_software_version = 0;
 
+    private int power_samples=0;
+    private int avg_penelope_forward_power=0;
+    private int avg_alex_forward_power = 0;
+    private int avg_alex_reverse_power = 0;
+    
     private int penelope_forward_power = 0;
     private int alex_forward_power = 0;
     private int alex_reverse_power = 0;

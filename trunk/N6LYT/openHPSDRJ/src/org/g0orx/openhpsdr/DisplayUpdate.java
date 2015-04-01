@@ -7,12 +7,12 @@ import java.util.TimerTask;
 
 public class DisplayUpdate {
 
-    public DisplayUpdate(VFOPanel vfoView,PanadapterPanel panadapterView, WaterfallPanel waterfallView,/* MeterView meterView, FrequencyView frequencyView, BandscopeView bandscopeView,*/ Metis metis) {
+    public DisplayUpdate(VFOPanel vfoView,PanadapterPanel panadapterView, WaterfallPanel waterfallView, MeterPanel meterView, /*FrequencyView frequencyView, BandscopeView bandscopeView,*/ Metis metis) {
         this.vfoView = vfoView;
         this.panadapterView = panadapterView;
         this.waterfallView = waterfallView;
-        /*
         this.meterView = meterView;
+        /*
         this.frequencyView = frequencyView;
         this.bandscopeView = bandscopeView;
         */
@@ -57,17 +57,10 @@ public class DisplayUpdate {
         }
         if (metis.isTransmitting()) {
             if (metis.Process_Panadapter(Display.TX, samples)) {
-                /*
-                for (int i = 0; i < samples.length; i++) {
-                    samples[i] += -68.0F;
-                }
-                */
                 if(panadapterView!=null) {
                     panadapterView.plotSpectrum(samples);
                 }
-                /*
                 meterView.setPower(metis.getPenelopeForwardPower(), metis.getAlexForwardPower(), metis.getAlexReversePower());
-                */
             }
         } else {
             if (metis.Process_Panadapter(Display.RX, samples)) {
@@ -78,9 +71,7 @@ public class DisplayUpdate {
                     waterfallView.update(samples);
                 }
                 int meter = (int) wdsp.GetRXAMeter(configuration.subrx ? Channel.SUBRX : Channel.RX, WDSP.S_AV);
-                /*
                 meterView.setMeter(meter);
-                */
             }
 
             /*
@@ -123,8 +114,8 @@ public class DisplayUpdate {
     private VFOPanel vfoView;
     private PanadapterPanel panadapterView;
     private WaterfallPanel waterfallView;
+    private MeterPanel meterView;
     /*
-    private MeterView meterView;
     private FrequencyView frequencyView;
     private BandscopeView bandscopeView;
     */
