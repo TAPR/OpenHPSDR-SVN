@@ -8,6 +8,7 @@ package org.g0orx.openhpsdr;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.text.DecimalFormat;
 
 import org.g0orx.openhpsdr.discovery.Discovered;
 import org.g0orx.openhpsdr.modes.Modes;
@@ -36,8 +37,8 @@ public class MeterPanel extends javax.swing.JPanel {
 
         String value;
         if (receiving) {
+            value = sunits + " (" + Integer.toString(meter) + " dBm)";
             g.setColor(Color.GREEN);
-            value = Integer.toString(meter) + " dBm";
         } else {
             double volts = 0.0;
             double watts = 0.0;
@@ -96,14 +97,14 @@ public class MeterPanel extends javax.swing.JPanel {
             volts = (double) alex_forward_power / 4095.0 * refvoltage;
             watts = (volts * volts) / bridgevoltage;
             fwdpower = watts;
-            
-            if(fwdpower>peak_power) {
-                peak_power=fwdpower;
+
+            if (fwdpower > peak_power) {
+                peak_power = fwdpower;
             } else {
-                peak_count++;
-                if(peak_count==configuration.fps) {
-                    peak_count=0;
-                    peak_power=fwdpower;
+                peak_power_count++;
+                if (peak_power_count == configuration.fps) {
+                    peak_power_count = 0;
+                    peak_power = fwdpower;
                 }
             }
 
@@ -113,7 +114,17 @@ public class MeterPanel extends javax.swing.JPanel {
             double rho = Math.sqrt(revpower / fwdpower);
             swr = Math.abs((1 + Math.abs(rho)) / (1 - Math.abs(rho)));
 
-            value=(int)peak_power+" Watts";
+            if (swr > peak_swr) {
+                peak_swr = swr;
+            } else {
+                peak_swr_count++;
+                if (peak_swr_count == configuration.fps) {
+                    peak_swr_count = 0;
+                    peak_swr = swr;
+                }
+            }
+
+            value = (int) peak_power + " Watts" + " SWR " + decimalFormat.format(peak_swr) + ":1";
             //value = "peak="+(int)peak_power+" fwd=" + (int)fwdpower + " rev=" + (int)revpower + " swr=" + (int)swr+":1";
             g.setColor(Color.RED);
         }
@@ -124,6 +135,37 @@ public class MeterPanel extends javax.swing.JPanel {
 
     public void setMeter(int meter) {
         this.meter = meter + (int) configuration.preampOffset + (int) configuration.meterCalibrationOffset;
+        if (this.meter <= -121) {
+            this.sunits = "S1";
+        } else if (this.meter <= -115) {
+            this.sunits = "S2";
+        } else if (this.meter <= -109) {
+            this.sunits = "S3";
+        } else if (this.meter <= -103) {
+            this.sunits = "S4";
+        } else if (this.meter <= -97) {
+            this.sunits = "S5";
+        } else if (this.meter <= -91) {
+            this.sunits = "S6";
+        } else if (this.meter <= -85) {
+            this.sunits = "S7";
+        } else if (this.meter <= -79) {
+            this.sunits = "S8";
+        } else if (this.meter <= -73) {
+            this.sunits = "S9";
+        } else if (this.meter <= -63) {
+            this.sunits = "S9+10";
+        } else if (this.meter <= -53) {
+            this.sunits = "S9+20";
+        } else if (this.meter <= -43) {
+            this.sunits = "S9+30";
+        } else if (this.meter <= -33) {
+            this.sunits = "S9+40";
+        } else if (this.meter <= -23) {
+            this.sunits = "S9+50";
+        } else {
+            this.sunits = "S9+60";
+        }
         receiving = true;
         this.repaint();
     }
@@ -162,14 +204,18 @@ public class MeterPanel extends javax.swing.JPanel {
     private float density;
 
     private int meter;
+    private String sunits = "";
     private int penelope_forward_power;
     private int alex_forward_power;
     private int alex_reverse_power;
 
-    private int peak_count=0;
-    private double peak_power;
-    
-    private boolean receiving=true;
+    private int peak_power_count = 0;
+    private double peak_power = 0.0;
+    private int peak_swr_count = 0;
+    private double peak_swr = 0.0;
+
+    private DecimalFormat decimalFormat = new DecimalFormat("0.0");
+    private boolean receiving = true;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
