@@ -201,7 +201,7 @@ public class PanadapterPanel extends javax.swing.JPanel {
 
         int spectrumhigh = configuration.spectrumHigh;
         int spectrumlow = configuration.spectrumLow;
-        if (metis.isTransmitting()) {
+        if (metis!=null && metis.isTransmitting()) {
             spectrumhigh = 30;
             spectrumlow = -100;
         }
