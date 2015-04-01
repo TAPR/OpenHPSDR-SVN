@@ -6,16 +6,40 @@ import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import org.g0orx.openhpsdr.discovery.Discovered;
 import org.g0orx.openhpsdr.modes.Modes;
 
-public class PanadapterPanel extends javax.swing.JPanel {
+public class PanadapterPanel extends javax.swing.JPanel implements ComponentListener {
 
+    public PanadapterPanel() {
+        super();
+        this.addComponentListener(this);
+    }
+    
     public void setMetis(Metis metis) {
         this.metis = metis;
+    }
+    
+    public void componentShown(ComponentEvent e) {
+    }
+
+    public void componentHidden(ComponentEvent e) {
+    }
+
+    public void componentResized(ComponentEvent e) {
+        Log.i("PanadapterPanel", "componentResized: width=" + e.getComponent().getWidth() + " height=" + e.getComponent().getHeight());
+        if (metis != null) {
+            metis.setPixels(this.getWidth());
+        }
+
+    }
+
+    public void componentMoved(ComponentEvent e) {
     }
 
     public void paintComponent(Graphics g) {
