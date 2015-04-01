@@ -53,7 +53,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
           </Group>
-          <Component id="vfoPanel" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="vfoPanel" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="meterPanel" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -67,26 +71,26 @@
                           <Component id="jButtonStart" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonDiscover" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButtonMOX" pref="52" max="32767" attributes="0"/>
-                          <Component id="jButtonTune" max="32767" attributes="0"/>
+                          <Component id="jButtonMOX" min="-2" pref="52" max="-2" attributes="0"/>
+                          <Component id="jButtonTune" min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="modeJPanel" alignment="0" max="-2" attributes="0"/>
+                  <Component id="filterJPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="bandJPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel1" alignment="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="meterPanel" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="modeJPanel" max="-2" attributes="0"/>
-                          <Component id="bandJPanel" max="-2" attributes="0"/>
-                          <Component id="filterJPanel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="vfoPanel" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="vfoPanel" min="-2" pref="34" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="panadapterPanel" pref="140" max="32767" attributes="0"/>
+              <Component id="panadapterPanel" pref="154" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="frequencyPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -125,7 +129,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="179" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="186" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -212,24 +216,29 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabelAFGain" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelAGCGain" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelRFGain" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jSliderAFGain" pref="0" max="32767" attributes="0"/>
-                      <Component id="jSliderAGCGain" pref="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Component id="jComboBoxAGC" min="-2" pref="114" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jSliderAFGain" max="32767" attributes="0"/>
+                              <Component id="jSliderAGCGain" max="32767" attributes="0"/>
+                              <Component id="jSliderRFGain" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -240,26 +249,21 @@
                       <Component id="jLabelAFGain" min="-2" max="-2" attributes="0"/>
                       <Component id="jSliderAFGain" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAGCGain" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jSliderAGCGain" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelAGCGain" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSliderAGCGain" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="jComboBoxAGC" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="jComboBoxAGC" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabelRFGain" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSliderRFGain" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -273,7 +277,7 @@
         </Component>
         <Component class="javax.swing.JSlider" name="jSliderAFGain">
           <Properties>
-            <Property name="maximum" type="int" value="255"/>
+            <Property name="maximum" type="int" value="200"/>
           </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderAFGainStateChanged"/>
@@ -285,21 +289,6 @@
             <Property name="text" type="java.lang.String" value="AGC Gain:"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JLayeredPane" name="jLayeredPane1">
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
         <Component class="javax.swing.JSlider" name="jSliderAGCGain">
           <Properties>
             <Property name="maximum" type="int" value="120"/>
@@ -329,7 +318,35 @@
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxAGCItemStateChanged"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabelRFGain">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="RF Gain:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSlider" name="jSliderRFGain">
+          <Properties>
+            <Property name="maximum" type="int" value="255"/>
+          </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderRFGainStateChanged"/>
+          </Events>
+        </Component>
       </SubComponents>
+    </Container>
+    <Container class="org.g0orx.openhpsdr.MeterPanel" name="meterPanel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="37" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
     </Container>
   </SubComponents>
 </Form>
