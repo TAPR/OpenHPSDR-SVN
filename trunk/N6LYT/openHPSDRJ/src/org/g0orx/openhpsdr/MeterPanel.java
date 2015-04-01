@@ -35,9 +35,12 @@ public class MeterPanel extends javax.swing.JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-        String value;
+        String value1=null;
+        String value2=null;
+        
         if (receiving) {
-            value = sunits + " (" + Integer.toString(meter) + " dBm)";
+            value1 = sunits;
+            value2=Integer.toString(meter) + " dBm";
             g.setColor(Color.GREEN);
         } else {
             double volts = 0.0;
@@ -124,12 +127,14 @@ public class MeterPanel extends javax.swing.JPanel {
                 }
             }
 
-            value = (int) peak_power + " Watts" + " SWR " + decimalFormat.format(peak_swr) + ":1";
+            value1 = (int) peak_power + " Watts";
+            value2 = "SWR " + decimalFormat.format(peak_swr) + ":1";
             //value = "peak="+(int)peak_power+" fwd=" + (int)fwdpower + " rev=" + (int)revpower + " swr=" + (int)swr+":1";
             g.setColor(Color.RED);
         }
 
-        g.drawString(value, 10, this.getHeight() - 10);
+        g.drawString(value1, 10, this.getHeight() - 10);
+        g.drawString(value2, (this.getWidth()/2)+10, this.getHeight() - 10);
 
     }
 
