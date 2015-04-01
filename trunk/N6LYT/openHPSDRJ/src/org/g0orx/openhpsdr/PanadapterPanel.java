@@ -15,9 +15,9 @@ import org.g0orx.openhpsdr.modes.Modes;
 public class PanadapterPanel extends javax.swing.JPanel {
 
     public void setMetis(Metis metis) {
-        this.metis=metis;
+        this.metis = metis;
     }
-    
+
     public void paintComponent(Graphics g) {
         if (this.getWidth() == 0 || this.getHeight() == 0) {
             return;
@@ -27,10 +27,17 @@ public class PanadapterPanel extends javax.swing.JPanel {
         try {
 
             Configuration configuration = Configuration.getInstance();
-            
-            int samplerate=(int)configuration.samplerate;
-            if(metis!=null && metis.isTransmitting()) {
-                samplerate=48000;
+
+            int samplerate = (int) configuration.samplerate;
+            if (metis != null && metis.isTransmitting()) {
+                samplerate = 48000;
+            }
+
+            int spectrumhigh = configuration.spectrumHigh;
+            int spectrumlow = configuration.spectrumLow;
+            if (metis != null && metis.isTransmitting()) {
+                spectrumhigh = 30;
+                spectrumlow = -100;
             }
 
             Band band = configuration.bands.get();
@@ -69,15 +76,15 @@ public class PanadapterPanel extends javax.swing.JPanel {
             }
 
             // plot the spectrum levels
-            int V = configuration.spectrumHigh - configuration.spectrumLow;
+            int V = spectrumhigh - spectrumlow;
             int numSteps = V / 20;
 
-            Stroke stroke=g2d.getStroke();
+            Stroke stroke = g2d.getStroke();
             g2d.setStroke(dotted);
             //paint.setTextSize(20.0F);
             for (int i = 1; i < numSteps; i++) {
-                int num = configuration.spectrumHigh - i * 20;
-                int y = (int) Math.floor((configuration.spectrumHigh - num) * this.getHeight() / V);
+                int num = spectrumhigh - i * 20;
+                int y = (int) Math.floor((spectrumhigh - num) * this.getHeight() / V);
 
                 g2d.setColor(Color.YELLOW);
                 g2d.drawLine(0, y, this.getWidth(), y);
@@ -88,20 +95,20 @@ public class PanadapterPanel extends javax.swing.JPanel {
 
             // plot the vertical frequency markers
             float hzPerPixel = samplerate / (float) this.getWidth();
-            long f = frequency - ((long)samplerate / 2);
+            long f = frequency - ((long) samplerate / 2);
             String fs;
             for (int i = 0; i < this.getWidth(); i++) {
-                f = frequency - ((long)samplerate / 2) + (long) (hzPerPixel * i);
+                f = frequency - ((long) samplerate / 2) + (long) (hzPerPixel * i);
                 if (f > 0) {
                     if ((f % 20000) < (long) hzPerPixel) {
                         g2d.setColor(Color.YELLOW);
 
-                    //g.setPathEffect(dashPath);
+                        //g.setPathEffect(dashPath);
                         //g.setStrokeWidth(1);
                         g2d.drawLine(i, 0, i, this.getHeight());
 
                         g2d.setColor(Color.WHITE);
-                    //g.setPathEffect(null);
+                        //g.setPathEffect(null);
                     /*
                          fs = String.format("%d.%02d", f / 1000000, (f % 1000000) / 10000);
                          canvas.drawText(fs, i - 20, this.getHeight() - 5, paint);
@@ -134,8 +141,8 @@ public class PanadapterPanel extends javax.swing.JPanel {
             // plot the band edge
             BandEdge bandedge = band.getBandEdge();
             if (bandedge.getLow() != 0) {
-                long minfrequency = frequency - ((long)samplerate / 2);
-                long maxfrequency = frequency + ((long)samplerate / 2);
+                long minfrequency = frequency - ((long) samplerate / 2);
+                long maxfrequency = frequency + ((long) samplerate / 2);
                 double hzperpixel = samplerate / (double) this.getWidth();
                 if (bandedge.getLow() > minfrequency && bandedge.getLow() < maxfrequency) {
                     // show lower band edge
@@ -158,7 +165,7 @@ public class PanadapterPanel extends javax.swing.JPanel {
                 g2d.drawPolyline(xpoints, ypoints, xpoints.length);
             }
 
-        // paint the radio details
+            // paint the radio details
             //float sz=paint.getTextSize();
             //paint.setTextSize(sz*2.0F);
         /*
@@ -192,6 +199,13 @@ public class PanadapterPanel extends javax.swing.JPanel {
             ypoints = new int[samples.length];
         }
 
+        int spectrumhigh = configuration.spectrumHigh;
+        int spectrumlow = configuration.spectrumLow;
+        if (metis.isTransmitting()) {
+            spectrumhigh = 30;
+            spectrumlow = -100;
+        }
+
         float sample;
 
         float max = -400.0F;
@@ -207,9 +221,9 @@ public class PanadapterPanel extends javax.swing.JPanel {
             }
 
             sample = (float) Math
-                    .floor(((float) configuration.spectrumHigh - sample)
+                    .floor(((float) spectrumhigh - sample)
                             * (float) this.getHeight()
-                            / (float) (configuration.spectrumHigh - configuration.spectrumLow));
+                            / (float) (spectrumhigh - spectrumlow));
             xpoints[i] = i;
             ypoints[i] = (int) sample;
         }
@@ -218,7 +232,7 @@ public class PanadapterPanel extends javax.swing.JPanel {
 
     }
 
-    private Stroke dotted = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{1,4}, 0);
+    private Stroke dotted = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{1, 4}, 0);
     private Metis metis;
 
     private int[] xpoints;
