@@ -24,6 +24,7 @@ public class Metis extends Thread {
     public Metis(int pixels, boolean bandscope) {
 
         Log.i("Metis", "pixels=" + pixels + " bandscope=" + bandscope);
+        this.pixels=pixels;
         this.bandscope = bandscope;
 
         configuration = Configuration.getInstance();
@@ -306,6 +307,9 @@ public class Metis extends Thread {
         double span_min_freq = 0.0;
         double span_max_freq = 0.0;
 
+        
+        this.pixels=pixels;
+        
         int max_w = fft_size + (int) Math.min(KEEP_TIME * (double) configuration.fps, KEEP_TIME * (double) fft_size * (double) configuration.fps);
 
         wdsp.SetAnalyzer(Display.RX,
@@ -1200,7 +1204,13 @@ public class Metis extends Thread {
 
     public synchronized boolean Process_Panadapter(int channel, float[] samples) {
         int[] result = new int[1];
+        
+        if(samples.length!=pixels) {
+            return false;
+        }
+        
         wdsp.GetPixels(channel, samples, result);
+        
         return (result[0] == 1);
     }
 
@@ -1220,6 +1230,7 @@ public class Metis extends Thread {
         return adc4overflow;
     }
 
+    private int pixels;
     private boolean bandscope;
 
     private PTTListener pttListener;

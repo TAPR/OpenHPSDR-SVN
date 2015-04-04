@@ -32,11 +32,9 @@ public class PanadapterPanel extends javax.swing.JPanel implements ComponentList
     }
 
     public void componentResized(ComponentEvent e) {
-        Log.i("PanadapterPanel", "componentResized: width=" + e.getComponent().getWidth() + " height=" + e.getComponent().getHeight());
         if (metis != null) {
             metis.setPixels(this.getWidth());
         }
-
     }
 
     public void componentMoved(ComponentEvent e) {
