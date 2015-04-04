@@ -14,6 +14,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -52,6 +56,14 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                         oos.writeObject(Configuration.getInstance());
                         oos.close();
                         fos.close();
+                        /*
+                         XMLEncoder encoder
+                         = new XMLEncoder(
+                         new BufferedOutputStream(
+                         new FileOutputStream(filename)));
+                         encoder.writeObject(Configuration.getInstance());
+                         encoder.close();
+                         */
                     } catch (Exception e) {
                         Log.i("Radio", "windowClosing: " + e.toString());
                     }
@@ -122,6 +134,37 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         Log.i("Radio", "selected: " + selected.toString());
         this.setTitle("openHPSDR: " + selected.getDeviceName() + " " + selected.getAddress() + " (" + selected.getMac() + ")");
 
+        if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES_LITE) {
+            this.jLabelAttenuation.setText("LNA Gain: ");
+        } else {
+            this.jLabelAttenuation.setText("Attenuation: ");
+        }
+        
+         switch(configuration.discovered.getDevice()) {
+            case Discovered.DEVICE_HERMES_LITE:
+                this.jSliderAttenuation.setMaximum(60); // -12 .. 48
+                this.jSliderAttenuation.setValue(configuration.attenuation+12);
+                break;
+            case Discovered.DEVICE_HERMES:
+            case Discovered.DEVICE_ANGELIA:
+            case Discovered.DEVICE_ORION:
+                if(configuration.radio==Configuration.HERMES_ALEX ||
+                        configuration.radio==Configuration.ANGELIA_ANAN100D ||
+                        configuration.radio==Configuration.ORION_ANAN200D) {
+                    this.jSliderAttenuation.setMaximum(61); // 0 .. 61
+                } else {
+                    this.jSliderAttenuation.setMaximum(31); // 0 .. 31
+                }
+                this.jSliderAttenuation.setValue(configuration.attenuation);
+                break;
+            case Discovered.DEVICE_METIS:
+                this.jSliderAttenuation.setMaximum(30); // 0 .. 30
+                this.jSliderAttenuation.setValue(configuration.attenuation/10);
+                break;
+            default:
+                break;
+        }
+
         this.jButtonConfigure.setEnabled(true);
 
         filename = selected.getMac() + ".conf";
@@ -132,8 +175,14 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             Configuration.setInstance((Configuration) ois.readObject());
             ois.close();
             fis.close();
-            configuration = Configuration.getInstance();
-            configuration.discovered = selected;
+            /*
+             XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(
+             new FileInputStream(filename)));
+             Configuration.setInstance((Configuration) decoder.readObject());
+             decoder.close();
+             */
+             configuration = Configuration.getInstance();
+             configuration.discovered = selected;
         } catch (Exception e) {
             Log.i("Radio", "Read configuration: " + e.toString());
             configuration = Configuration.getInstance();
@@ -151,7 +200,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.jSliderAFGain.setValue((int) (configuration.afgain * 100.0));
         this.jSliderAGCGain.setValue((int) configuration.bands.get().getAGCGain());
         this.jComboBoxAGC.setSelectedIndex(configuration.bands.get().getAGC());
-        this.jSliderRFGain.setValue((int)(configuration.rfgain * 255.0));
+        this.jSliderRFGain.setValue((int) (configuration.rfgain * 255.0));
         this.jSliderAttenuation.setValue(configuration.attenuation);
     }
 
@@ -344,7 +393,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         jComboBoxAGC = new javax.swing.JComboBox();
         jLabelRFGain = new javax.swing.JLabel();
         jSliderRFGain = new javax.swing.JSlider();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelAttenuation = new javax.swing.JLabel();
         jSliderAttenuation = new javax.swing.JSlider();
         meterPanel = new org.g0orx.openhpsdr.MeterPanel();
 
@@ -470,7 +519,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             }
         });
 
-        jLabel2.setText("Attenuation:");
+        jLabelAttenuation.setText("Attenuation:");
 
         jSliderAttenuation.setMajorTickSpacing(10);
         jSliderAttenuation.setMaximum(61);
@@ -492,7 +541,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                     .addComponent(jLabelAGCGain)
                     .addComponent(jLabel1)
                     .addComponent(jLabelRFGain)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabelAttenuation))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelGainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelGainLayout.createSequentialGroup()
@@ -529,7 +578,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                     .addComponent(jLabelRFGain))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelGainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelAttenuation)
                     .addComponent(jSliderAttenuation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -569,7 +618,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelGain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelGain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(vfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
@@ -592,7 +641,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                     .addComponent(modeJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bandJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelGain, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanelGain, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(meterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -705,10 +754,10 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 this.jButtonTune.setBackground(Color.red);
             }
         }
-        if(metis.isTuning()) {
-            this.jSliderRFGain.setValue((int)(configuration.tunegain * 255.0));
+        if (metis.isTuning()) {
+            this.jSliderRFGain.setValue((int) (configuration.tunegain * 255.0));
         } else {
-            this.jSliderRFGain.setValue((int)(configuration.rfgain * 255.0));
+            this.jSliderRFGain.setValue((int) (configuration.rfgain * 255.0));
         }
         this.vfoPanel.repaint();
         this.frequencyPanel.repaint();
@@ -727,7 +776,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         double gain = (double) this.jSliderAGCGain.getValue();
         Band band = configuration.bands.get();
         band.setAGCGain(gain);
-        if(wdsp!=null) {
+        if (wdsp != null) {
             wdsp.SetRXAAGCTop(Channel.RX, gain);
             wdsp.SetRXAAGCTop(Channel.SUBRX, gain);
         }
@@ -735,7 +784,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
     private void jComboBoxAGCItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxAGCItemStateChanged
         Band band = configuration.bands.get();
-        int agc=this.jComboBoxAGC.getSelectedIndex();
+        int agc = this.jComboBoxAGC.getSelectedIndex();
         band.setAGC(agc);
         setAGC(Channel.RX, agc);
         setAGC(Channel.SUBRX, agc);
@@ -744,7 +793,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
     private void jSliderRFGainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderRFGainStateChanged
         float gain = (float) this.jSliderRFGain.getValue() / 255.0F;
-        if(metis!=null && metis.isTuning()) {
+        if (metis != null && metis.isTuning()) {
             configuration.tunegain = gain;
         } else {
             configuration.rfgain = gain;
@@ -752,8 +801,22 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }//GEN-LAST:event_jSliderRFGainStateChanged
 
     private void jSliderAttenuationStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderAttenuationStateChanged
-        int attenuation=this.jSliderAttenuation.getValue();
-        configuration.attenuation=attenuation;
+        int attenuation = this.jSliderAttenuation.getValue();
+         switch(configuration.discovered.getDevice()) {
+                    case Discovered.DEVICE_HERMES_LITE:
+                        configuration.attenuation = attenuation - 12;
+                        break;
+                    case Discovered.DEVICE_HERMES:
+                    case Discovered.DEVICE_ANGELIA:
+                    case Discovered.DEVICE_ORION:
+                        configuration.attenuation = attenuation;
+                        break;
+                    case Discovered.DEVICE_METIS:
+                        configuration.attenuation = attenuation*10;
+                        break;
+                    default:
+                        break;
+                }
     }//GEN-LAST:event_jSliderAttenuationStateChanged
 
     public void bandChanged(Band band) {
@@ -1111,9 +1174,9 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     private javax.swing.JButton jButtonTune;
     private javax.swing.JComboBox jComboBoxAGC;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelAFGain;
     private javax.swing.JLabel jLabelAGCGain;
+    private javax.swing.JLabel jLabelAttenuation;
     private javax.swing.JLabel jLabelRFGain;
     private javax.swing.JPanel jPanelGain;
     private javax.swing.JSlider jSliderAFGain;

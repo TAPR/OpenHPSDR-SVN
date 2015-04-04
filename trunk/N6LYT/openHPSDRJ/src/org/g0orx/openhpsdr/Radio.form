@@ -51,7 +51,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="filterJPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanelGain" max="32767" attributes="0"/>
+              <Component id="jPanelGain" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Component id="vfoPanel" max="32767" attributes="0"/>
@@ -80,7 +80,7 @@
                   <Component id="modeJPanel" alignment="0" max="-2" attributes="0"/>
                   <Component id="filterJPanel" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="bandJPanel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPanelGain" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jPanelGain" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -219,7 +219,7 @@
                       <Component id="jLabelAGCGain" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelRFGain" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelAttenuation" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -268,7 +268,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelAttenuation" min="-2" max="-2" attributes="0"/>
                       <Component id="jSliderAttenuation" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -338,7 +338,7 @@
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderRFGainStateChanged"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="jLabelAttenuation">
           <Properties>
             <Property name="text" type="java.lang.String" value="Attenuation:"/>
           </Properties>

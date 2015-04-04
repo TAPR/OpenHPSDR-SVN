@@ -6,7 +6,7 @@ import org.g0orx.openhpsdr.discovery.Discovered;
 
 public class Configuration implements Serializable {
 
-    private static final long serialVersionUID = 8L;
+    static final long serialVersionUID = 8L;
 
     public static Configuration getInstance() {
         if (instance == null) {
@@ -15,11 +15,11 @@ public class Configuration implements Serializable {
         return instance;
     }
 
-    private Configuration() {
+    protected Configuration() {
         bands = new Bands();
     }
 
-    private static Configuration instance;
+    static Configuration instance;
 
     public static void setInstance(Configuration i) {
         instance = i;
@@ -147,23 +147,23 @@ public class Configuration implements Serializable {
 
     static final int MIC_PTT_TO_RING_BIAS_TO_TIP = 0;
     static final int MIC_PTT_TO_TIP_BIAS_TO_RING = 1;
-    int oriontipring = MIC_PTT_TO_RING_BIAS_TO_TIP;
+    public int oriontipring = MIC_PTT_TO_RING_BIAS_TO_TIP;
 
     static final int MIC_BIAS_DISABLE = 0;
     static final int MIC_BIAS_ENABLE = 1;
-    int orionmicbias = MIC_BIAS_ENABLE;
+    public int orionmicbias = MIC_BIAS_ENABLE;
 
     static final int MIC_PTT_ENABLE = 0;
     static final int MIC_PTT_DISABLE = 1;
-    int orionmicptt = MIC_PTT_ENABLE;
+    public int orionmicptt = MIC_PTT_ENABLE;
 
-    boolean NB2 = false;
-    boolean NB2_AE = true;
-    int NB2_GAIN = 1; // 0:Linear 1:Log
-    int NB2_NPE = 0; // 0:OSMS 1:MMSE
-    int NB2_POSITION = 1; // 0:PRE-AGC 1:POST-AGC
+    public boolean NB2 = false;
+    public boolean NB2_AE = true;
+    public int NB2_GAIN = 1; // 0:Linear 1:Log
+    public int NB2_NPE = 0; // 0:OSMS 1:MMSE
+    public int NB2_POSITION = 1; // 0:PRE-AGC 1:POST-AGC
     
-    boolean NR = false;
-    boolean NB = false;
-    boolean ANF = false;
+    public boolean NR = false;
+    public boolean NB = false;
+    public boolean ANF = false;
 }

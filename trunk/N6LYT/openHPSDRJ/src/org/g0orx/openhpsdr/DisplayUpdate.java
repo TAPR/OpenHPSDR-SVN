@@ -49,6 +49,7 @@ public class DisplayUpdate {
         if(samples.length!=panadapterView.getWidth()) {
             Log.i("DisplayUpdate","update: new width"+panadapterView.getWidth());
             samples = new float[panadapterView.getWidth()];
+            metis.setPixels(panadapterView.getWidth());
         }
         if (firsttime) {
             //if(frequencyView.update() && vfoView.update()) {
