@@ -17,8 +17,6 @@ public class Discovery extends Thread {
 
     public Discovery(Discover handler) {
         this.handler = handler;
-        running = true;
-        //init();
     }
 
     public void run() {
@@ -32,7 +30,9 @@ public class Discovery extends Thread {
                         result = inetAddress.getHostAddress().toString();
                         if (result.contains(".")) {
                             Log.i("Discovery", "Using interface " + intf.toString() + " " + result);
-                            discover(result, intf.getName());
+                            openSocket(inetAddress, intf.getName());
+                            sendDiscoveryPacket();
+                            receiveDiscoveryPackets(result, intf.getName());
                         }
                     }
                 }
@@ -44,20 +44,20 @@ public class Discovery extends Thread {
         handler.endDiscovery();
     }
 
-    public void discover(String myaddress, String name) {
-
+    public void openSocket(InetAddress myaddress, String name) {
+        Log.i("Discovery", "openSocket: "+myaddress.getHostAddress()+" "+name);
         try {
-            InetSocketAddress socketaddress = new InetSocketAddress(myaddress, myport);
-
-            socket = new DatagramSocket(socketaddress);
+            //InetSocketAddress socketaddress = new InetSocketAddress(myaddress, myport);
+            socket = new DatagramSocket(myport,myaddress);
             socket.setReuseAddress(true);
             socket.setBroadcast(true);
             socket.setSoTimeout(0);
+            running=true;
         } catch (Exception e) {
-            Log.i("Discovery", "init: exception:" + e.toString());
-            return;
+            Log.i("Discovery", "openSocket: exception:" + e.toString());
         }
-
+    }
+    public void sendDiscoveryPacket() {
         // send a discovery packet
         byte buffer[] = new byte[63];
         buffer[0] = (byte) 0xEF;
@@ -66,7 +66,6 @@ public class Discovery extends Thread {
         for (int i = 3; i < 63; i++) {
             buffer[i] = (byte) 0x00;
         }
-
         try {
             InetAddress address = InetAddress.getByName(toaddress);
             DatagramPacket datagram = new DatagramPacket(buffer, buffer.length, address, toport);
@@ -83,7 +82,9 @@ public class Discovery extends Thread {
             Log.i("DiscoverActivity", "DiscoveryAsyncTask.doInBackground: " + ioe.toString());
             running = false;
         }
-
+    }
+    
+    public void receiveDiscoveryPackets(String myaddress, String name) {
         while (running) {
             try {
                 rxdatagram = new DatagramPacket(rxbuffer, rxbuffer.length);
@@ -91,6 +92,7 @@ public class Discovery extends Thread {
                 socket.receive(rxdatagram);
 
                 String deviceaddress = rxdatagram.getAddress().toString();
+                Log.i("Discovery", "received: "+deviceaddress);
                 if (deviceaddress.startsWith("/")) {
                     deviceaddress = deviceaddress.substring(1);
                 }
@@ -137,6 +139,7 @@ public class Discovery extends Thread {
                     }
                 }
             } catch (SocketTimeoutException e) {
+                Log.i("Discovery", e.toString());
                 running = false;
             } catch (Exception e) {
                 Log.i("Discovery", "run: Exception: " + e.toString());
@@ -145,6 +148,7 @@ public class Discovery extends Thread {
         }
 
         if (socket != null) {
+            Log.i("Discovery", "close socket");
             socket.close();
         }
 
@@ -153,23 +157,7 @@ public class Discovery extends Thread {
     public void terminate() {
         running = false;
     }
-
-    private void init() {
-        myaddress = getLocalIpAddress();
-
-        try {
-            InetSocketAddress socketaddress = new InetSocketAddress(myaddress, myport);
-
-            socket = new DatagramSocket(socketaddress);
-            socket.setReuseAddress(true);
-            socket.setBroadcast(true);
-            socket.setSoTimeout(0);
-        } catch (Exception e) {
-            Log.i("Discovery", "init: exception:" + e.toString());
-        }
-
-    }
-
+    
     private String getLocalIpAddress() {
         String result = "";
         try {
@@ -191,19 +179,15 @@ public class Discovery extends Thread {
         }
         return result;
     }
-
-    public static final int ADD_DEVICE = 0;
-    public static final int END_DISCOVERY = 1;
-
+    
     private boolean running;
     private DatagramSocket socket;
-    private String myaddress = "127.0.0.1";
     private int myport = 1024;
     private int toport = 1024;
     private String toaddress = "255.255.255.255";
 
     private DatagramPacket rxdatagram;
-    private byte rxbuffer[] = new byte[4096];
+    private byte rxbuffer[] = new byte[102];
 
     private Discover handler;
 }

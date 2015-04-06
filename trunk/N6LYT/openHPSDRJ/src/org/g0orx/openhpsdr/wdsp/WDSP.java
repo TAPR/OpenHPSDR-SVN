@@ -366,12 +366,10 @@ public class WDSP {
         } else if(System.getProperty("os.name").startsWith("Mac")) {
             String libraryPath=System.getProperty("user.dir")+File.separator+"lib"+File.separator+"mac";
             Log.i("WDSP","libraryPath: "+libraryPath);
-            Log.i("WDSP","load libfftw3.so");
-            System.load(libraryPath+File.separator+"libfftw3.so");
-            Log.i("WDSP","load libwdsp.so");
-            System.load(libraryPath+File.separator+"libwdsp.so");
-            Log.i("WDSP","load libwdspj.so");
-            System.load(libraryPath+File.separator+"libwdspj.so");
+            Log.i("WDSP","load libfftw3.3.dylib");
+            System.load(libraryPath+File.separator+"libfftw3.3.dylib");
+            Log.i("WDSP","load libwdsp.dylib");
+            System.load(libraryPath+File.separator+"libwdsp.dylib");
         }
         Log.i("WDSP","shared libraries loaded");
     }

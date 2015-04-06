@@ -6,6 +6,7 @@
 package org.g0orx.openhpsdr;
 
 import java.io.File;
+import org.g0orx.openhpsdr.wdsp.WDSP;
 
 /**
  *
@@ -23,6 +24,7 @@ public class OpenHPSDRJ {
         //Log.i("OpenHPSDRJ", "java.library.path: "+System.getProperty("java.library.path"));
         Radio radio=new Radio();
         radio.setVisible(true);
+        //WDSP wdsp=WDSP.getInstance();
     }
     
 }
