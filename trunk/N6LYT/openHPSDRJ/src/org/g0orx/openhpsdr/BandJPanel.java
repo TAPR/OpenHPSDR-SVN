@@ -70,6 +70,7 @@ public class BandJPanel extends javax.swing.JPanel {
 
         buttons[configuration.bands.getCurrent()].setBackground(Color.YELLOW);
         
+        
     }
     
     @Override

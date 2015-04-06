@@ -6,6 +6,7 @@
 package org.g0orx.openhpsdr;
 
 import java.io.File;
+import javax.swing.UIManager;
 import org.g0orx.openhpsdr.wdsp.WDSP;
 
 /**
@@ -22,6 +23,11 @@ public class OpenHPSDRJ {
         Log.i("OpenHPSDRJ", "Current working directory: "+System.getProperty("user.dir"));
         //System.setProperty("java.library.path", System.getProperty("user.dir")+File.separator+"lib");
         //Log.i("OpenHPSDRJ", "java.library.path: "+System.getProperty("java.library.path"));
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            Log.i("OpenHPSDRJ",e.toString());
+        }
         Radio radio=new Radio();
         radio.setVisible(true);
         //WDSP wdsp=WDSP.getInstance();
