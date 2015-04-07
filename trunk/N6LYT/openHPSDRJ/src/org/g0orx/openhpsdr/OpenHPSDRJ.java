@@ -29,8 +29,6 @@ public class OpenHPSDRJ {
             Log.i("OpenHPSDRJ",e.toString());
         }
         Radio radio=new Radio();
-        radio.setVisible(true);
-        //WDSP wdsp=WDSP.getInstance();
     }
     
 }

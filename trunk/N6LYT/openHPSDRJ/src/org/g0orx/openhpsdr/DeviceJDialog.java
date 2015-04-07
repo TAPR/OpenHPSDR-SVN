@@ -23,7 +23,6 @@ public class DeviceJDialog extends javax.swing.JDialog {
         this.discovered=discovered;
         initComponents();
         this.setTitle("Discovery detected more than one device. Select the one required.");
-        jList1.setSelectedIndex(0);
     }
 
     /**
