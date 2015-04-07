@@ -34,19 +34,8 @@ public class BandJPanel extends javax.swing.JPanel {
             this.buttons[i] = buttons[i];
             this.buttons[i].setBackground(Color.WHITE);
         }
-
-        Band[] bands = configuration.bands.getBands();
-        for (int i = 0; i < bands.length; i++) {
-            buttons[i].setText(bands[i].getName());
-        }
-        for (int i = bands.length; i < 25; i++) {
-            buttons[i].setVisible(false);
-        }
-
-        Band band = configuration.bands.get();
-        BandStack bandstack = band.get();
-
-        buttons[configuration.bands.getCurrent()].setBackground(Color.YELLOW);
+        
+        init();
     }
 
     public void addListener(BandChanged listener) {
@@ -70,7 +59,7 @@ public class BandJPanel extends javax.swing.JPanel {
 
         buttons[configuration.bands.getCurrent()].setBackground(Color.YELLOW);
         
-        
+        Log.i("BandJPanel", "band="+configuration.bands.get().getName());
     }
     
     @Override
