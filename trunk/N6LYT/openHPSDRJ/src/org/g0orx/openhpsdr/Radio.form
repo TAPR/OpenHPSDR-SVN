@@ -391,6 +391,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JSlider" name="jSliderDrive">
+          <Properties>
+            <Property name="maximum" type="int" value="255"/>
+          </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderDriveStateChanged"/>
           </Events>
