@@ -32,6 +32,7 @@
           <Component id="frequencyPanel" alignment="1" max="32767" attributes="0"/>
           <Component id="panadapterPanel" max="32767" attributes="0"/>
           <Component id="waterfallPanel" alignment="0" max="32767" attributes="0"/>
+          <Component id="vfoPanel" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -63,13 +64,12 @@
               <Component id="filterJPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="meterJPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" pref="861" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
-          <Component id="vfoPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -267,51 +267,57 @@
                       <Component id="jLabel1" min="-2" pref="86" max="-2" attributes="0"/>
                       <Component id="jComboBoxAGC" min="-2" pref="114" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jSliderAttenuation" min="-2" pref="150" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelAttenuation" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelAttenuation" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSliderAttenuation" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jSliderDrive" min="-2" pref="150" max="-2" attributes="0"/>
-                      <Component id="jLabelDrive" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSliderDrive" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="jLabelDrive" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="697" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabelMicGain" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSliderMicGain" min="-2" pref="150" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelAFGain" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelAGCGain" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jLabelAttenuation" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelDrive" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelMicGain" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jSliderDrive" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jSliderAGCGain" min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="jSliderAFGain" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jSliderDrive" alignment="1" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jSliderAGCGain" min="-2" pref="42" max="-2" attributes="0"/>
+                                      <Component id="jSliderAFGain" min="-2" pref="42" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jSliderAttenuation" alignment="1" min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxAGC" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jSliderAttenuation" alignment="1" min="-2" pref="42" max="-2" attributes="0"/>
-                              <Component id="jComboBoxAGC" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jSliderMicGain" min="-2" pref="42" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -385,11 +391,21 @@
           </Events>
         </Component>
         <Component class="javax.swing.JSlider" name="jSliderDrive">
-          <Properties>
-            <Property name="maximum" type="int" value="255"/>
-          </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderDriveStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelMicGain">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mic Gain:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSlider" name="jSliderMicGain">
+          <Properties>
+            <Property name="maximum" type="int" value="200"/>
+          </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderMicGainStateChanged"/>
           </Events>
         </Component>
       </SubComponents>
