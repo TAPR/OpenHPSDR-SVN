@@ -195,7 +195,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.jComboBoxAGC.setSelectedIndex(configuration.bands.get().getAGC());
         this.jSliderRFGain.setValue((int) (configuration.rfgain * 255.0));
         this.jSliderAttenuation.setValue(configuration.attenuation);
-        
+
         this.jCheckBoxNB2.setSelected(configuration.NB2);
         this.jCheckBoxNR.setSelected(configuration.NR);
         this.jCheckBoxANF.setSelected(configuration.ANF);
@@ -321,6 +321,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
         bandChanged(band);
 
+        metis.setPTTListener(this);
         metis.start();
 
         update = new DisplayUpdate(vfoPanel, panadapterPanel, waterfallPanel, meterPanel, metis);
@@ -331,7 +332,19 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
     private void stop() {
         update.terminate();
+        while(update.isRunning()) {
+            try {
+                Thread.sleep(10);
+            } catch (Exception e) {
+            }
+        }
         metis.terminate();
+        while(metis.isRunning()) {
+            try {
+                Thread.sleep(10);
+            } catch (Exception e) {
+            }
+        }
         wdsp.CloseChannel(Channel.SUBRX);
         wdsp.CloseChannel(Channel.TX);
         wdsp.CloseChannel(Channel.RX);
@@ -772,6 +785,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }//GEN-LAST:event_jButtonConfigureActionPerformed
 
     private void jButtonMOXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMOXActionPerformed
+        Log.i("Radio", "event:"+evt.toString());
         processPTT(!metis.isTransmitting());
     }//GEN-LAST:event_jButtonMOXActionPerformed
 
@@ -1003,10 +1017,13 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }
 
     public void PTTChanged(boolean ptt) {
-        if (this.stopped) {
-            return;
+        Log.i("Radio", "PTTChanged:"+ptt);
+        if (!this.stopped) {
+            java.awt.event.ActionEvent event = new java.awt.event.ActionEvent(this.jButtonMOX, java.awt.event.ActionEvent.ACTION_PERFORMED, "MOX",System.currentTimeMillis(),java.awt.event.InputEvent.BUTTON1_MASK);
+            Log.i("Radio","postEvent:"+event.toString());
+            java.awt.Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(event);
+            //processPTT(ptt);
         }
-        processPTT(ptt);
     }
 
     private void processPTT(boolean state) {
@@ -1062,11 +1079,15 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             }
         } else {
             // stop transmitting
+            Log.i("Radio", "processPTT: SetChannelState(Channel.TX,0,1)");
             wdsp.SetChannelState(Channel.TX, 0, 1);
+            Log.i("Radio", "processPTT: SetChannelState(Channel.RX,1,0)");
             wdsp.SetChannelState(Channel.RX, 1, 0);
             if (configuration.subrx) {
+                Log.i("Radio", "processPTT: SetChannelState(Channel.SUBRX,1,0)");
                 wdsp.SetChannelState(Channel.SUBRX, 1, 0);
             }
+            Log.i("Radio", "processPTT: metis.setTransmit(false,false)");
             metis.setTransmit(false, false);
             this.jButtonMOX.setBackground(Color.white);
         }
