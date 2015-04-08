@@ -30,8 +30,8 @@ public class Band implements Serializable {
                 this.bandedge=bandedge;
         }
 
-        public void setTxGain(float gain) {
-                txgain=gain;
+        public void setDrive(float gain) {
+                drive=gain;
         }
 
         public void setSquelch(boolean state) {
@@ -67,8 +67,8 @@ public class Band implements Serializable {
         return agcgain;
     }
 
-    public float getTxGain() {
-        return txgain;
+    public float getDrive() {
+        return drive;
     }
 
     public byte getOCRx() { return OCRx; }
@@ -118,7 +118,7 @@ public class Band implements Serializable {
     private int agc=0;
     private double agcgain=60.0;
 
-        private float txgain=0.30F;
+        private float drive=0.30F;
 
     private byte OCRx=0x00;
     private byte OCTx=0x00;

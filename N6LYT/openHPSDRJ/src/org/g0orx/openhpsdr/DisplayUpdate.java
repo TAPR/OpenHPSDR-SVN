@@ -7,7 +7,7 @@ import java.util.TimerTask;
 
 public class DisplayUpdate {
 
-    public DisplayUpdate(VFOPanel vfoView,PanadapterPanel panadapterView, WaterfallPanel waterfallView, MeterPanel meterView, /*FrequencyView frequencyView, BandscopeView bandscopeView,*/ Metis metis) {
+    public DisplayUpdate(VFOPanel vfoView,PanadapterPanel panadapterView, WaterfallPanel waterfallView, MeterJPanel meterView, /*FrequencyView frequencyView, BandscopeView bandscopeView,*/ Metis metis) {
         this.vfoView = vfoView;
         this.panadapterView = panadapterView;
         this.waterfallView = waterfallView;
@@ -47,7 +47,6 @@ public class DisplayUpdate {
 
     private void update() {
         if(samples.length!=panadapterView.getWidth()) {
-            Log.i("DisplayUpdate","update: new width"+panadapterView.getWidth());
             samples = new float[panadapterView.getWidth()];
             metis.setPixels(panadapterView.getWidth());
         }
@@ -115,7 +114,7 @@ public class DisplayUpdate {
     private VFOPanel vfoView;
     private PanadapterPanel panadapterView;
     private WaterfallPanel waterfallView;
-    private MeterPanel meterView;
+    private MeterJPanel meterView;
     /*
     private FrequencyView frequencyView;
     private BandscopeView bandscopeView;

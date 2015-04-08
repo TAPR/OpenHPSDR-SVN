@@ -284,7 +284,6 @@ public class Metis extends Thread {
     }
     
     public synchronized void setPixels(int pixels) {
-        Log.i("Metis","setPixels: "+pixels);
         int flp[] = {0};
         double KEEP_TIME = 0.1;
         int spur_elimination_ffts = 1;
@@ -444,7 +443,7 @@ public class Metis extends Thread {
 
 
     public void setTransmit(boolean transmit, boolean tuning) {
-        Log.i("Metis", "setTransmit: transmit=" + transmit + " tuning=" + tuning);
+        //Log.i("Metis", "setTransmit: transmit=" + transmit + " tuning=" + tuning);
         this.transmit = transmit;
         this.tuning = tuning;
     }
@@ -662,14 +661,14 @@ public class Metis extends Thread {
 
                                     wdsp.fexchange2(Channel.TX, inmiclsamples, inmicrsamples, outlsamples, outrsamples, error);
                                     if (error[0] != 0) {
-                                        Log.i("Metis", "fexchange2 returned " + error[0]);
+                                        //Log.i("Metis", "fexchange2 returned " + error[0]);
                                     }
 
                                 } else if (configuration.micsource == Configuration.MIC_SOURCE_RADIO) {
 
                                     wdsp.fexchange2(Channel.TX, inmiclsamples, inmicrsamples, outlsamples, outrsamples, error);
                                     if (error[0] != 0) {
-                                        Log.i("Metis", "fexchange2 returned " + error[0]);
+                                        //Log.i("Metis", "fexchange2 returned " + error[0]);
                                     }
 
                                 }
@@ -679,12 +678,12 @@ public class Metis extends Thread {
                             } else {
                                 wdsp.fexchange2(Channel.RX, inlsamples, inrsamples, outlsamples, outrsamples, error);
                                 if (error[0] != 0) {
-                                    Log.i("Metis", "fexchange2 returned " + error[0]);
+                                    //Log.i("Metis", "fexchange2 returned " + error[0]);
                                 }
                                 if (configuration.subrx) {
                                     wdsp.fexchange2(Channel.SUBRX, inlsamples, inrsamples, suboutlsamples, suboutrsamples, error);
                                     if (error[0] != 0) {
-                                        Log.i("Metis", "Channel.SUBRX fexchange2 returned " + error[0]);
+                                        //Log.i("Metis", "Channel.SUBRX fexchange2 returned " + error[0]);
                                     }
                                 }
                                 //Log.i("Metis","calling Spectrum with "+inoffset+" samples");
@@ -750,11 +749,11 @@ public class Metis extends Thread {
         BandStack bandstack = band.get();
         float rfgain = 1.0F;  // for PENNYLANE
         if (configuration.radio == Configuration.METIS_PENELOPE || configuration.radio == Configuration.METIS_PENELOPE_ALEX) {
-            rfgain = configuration.rfgain;
+            rfgain = configuration.drive;
             if (tuning) {
                 rfgain = configuration.tunegain;
             }
-            rfgain = rfgain * configuration.bands.get().getTxGain();
+            rfgain = rfgain * configuration.bands.get().getDrive();
         }
 
         // send data back to Metis
@@ -895,10 +894,11 @@ public class Metis extends Thread {
                     }
                     case 1: {
                         sendbuffer[11] = 0x12;
+                        sendbuffer[12] = 0x00;
                         if (tuning) {
-                            sendbuffer[12] = (byte) (255.0F * /*configuration.bands.get().getTxGain() * */configuration.tunegain);
-                        } else {
-                            sendbuffer[12] = (byte) (255.0F * /*configuration.bands.get().getTxGain() * */configuration.rfgain);
+                            sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getDrive() * configuration.tunegain);
+                        } else if(transmit) {
+                            sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getDrive() * configuration.drive);
                         }
                         byte c2=0x00;
                         if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES) {

@@ -50,10 +50,10 @@ public class Configuration implements Serializable {
     public byte clock10 = Metis.MERCURY_10MHZ_SOURCE;
     public byte clock122 = Metis.MERCURY_122_88MHZ_SOURCE;
 
-    public float rfgain = 1.0F;
+    public float drive = 0.5F;
     public float tunegain = 0.1F;
 
-    public float afgain = 0.5F;
+    public float afgain = 1.0F;
 
     public float micgain = 1.0F;
 

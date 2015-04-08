@@ -114,8 +114,28 @@ public class RadioJDialog extends javax.swing.JDialog {
             jRadioButtonRXXV.setEnabled(false);
         }
 
-    }
+        this.jLabelPASettings.setText("Band: "+band.getName());
+        this.jSliderPASettings.setValue((int)(band.getDrive()*100.0));
+        
+        this.jLabelOCBand.setText("Band: "+band.getName());
+        this.jCheckBoxOCRx1.setSelected((band.getOCRx()&0x01)==0x01);
+        this.jCheckBoxOCRx2.setSelected((band.getOCRx()&0x02)==0x02);
+        this.jCheckBoxOCRx3.setSelected((band.getOCRx()&0x04)==0x04);
+        this.jCheckBoxOCRx4.setSelected((band.getOCRx()&0x08)==0x08);
+        this.jCheckBoxOCRx5.setSelected((band.getOCRx()&0x10)==0x10);
+        this.jCheckBoxOCRx6.setSelected((band.getOCRx()&0x20)==0x20);
+        this.jCheckBoxOCRx7.setSelected((band.getOCRx()&0x40)==0x40);
+        this.jCheckBoxOCTx1.setSelected((band.getOCTx()&0x01)==0x01);
+        this.jCheckBoxOCTx2.setSelected((band.getOCTx()&0x02)==0x02);
+        this.jCheckBoxOCTx3.setSelected((band.getOCTx()&0x04)==0x04);
+        this.jCheckBoxOCTx4.setSelected((band.getOCTx()&0x08)==0x08);
+        this.jCheckBoxOCTx5.setSelected((band.getOCTx()&0x10)==0x10);
+        this.jCheckBoxOCTx6.setSelected((band.getOCTx()&0x20)==0x20);
+        this.jCheckBoxOCTx7.setSelected((band.getOCTx()&0x40)==0x40);
 
+        this.jCheckBox20dBMicBoost.setSelected(configuration.micboost);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,6 +172,29 @@ public class RadioJDialog extends javax.swing.JDialog {
         jRadioButtonPreAGC = new javax.swing.JRadioButton();
         jRadioButtonPostAGC = new javax.swing.JRadioButton();
         jCheckBoxAEFilter = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
+        jLabelPASettings = new javax.swing.JLabel();
+        jSliderPASettings = new javax.swing.JSlider();
+        jPanel4 = new javax.swing.JPanel();
+        jLabelOCBand = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jCheckBoxOCRx1 = new javax.swing.JCheckBox();
+        jCheckBoxOCRx2 = new javax.swing.JCheckBox();
+        jCheckBoxOCRx3 = new javax.swing.JCheckBox();
+        jCheckBoxOCRx4 = new javax.swing.JCheckBox();
+        jCheckBoxOCRx5 = new javax.swing.JCheckBox();
+        jCheckBoxOCRx6 = new javax.swing.JCheckBox();
+        jCheckBoxOCRx7 = new javax.swing.JCheckBox();
+        jCheckBoxOCTx1 = new javax.swing.JCheckBox();
+        jCheckBoxOCTx2 = new javax.swing.JCheckBox();
+        jCheckBoxOCTx3 = new javax.swing.JCheckBox();
+        jCheckBoxOCTx4 = new javax.swing.JCheckBox();
+        jCheckBoxOCTx5 = new javax.swing.JCheckBox();
+        jCheckBoxOCTx6 = new javax.swing.JCheckBox();
+        jCheckBoxOCTx7 = new javax.swing.JCheckBox();
+        jPanel5 = new javax.swing.JPanel();
+        jCheckBox20dBMicBoost = new javax.swing.JCheckBox();
         jButtonClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -302,7 +345,7 @@ public class RadioJDialog extends javax.swing.JDialog {
                     .addComponent(jRadioButtonRX2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButtonRXXV)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Antenna", jPanel3);
@@ -422,10 +465,250 @@ public class RadioJDialog extends javax.swing.JDialog {
                     .addComponent(jRadioButtonMMSE)
                     .addComponent(jRadioButtonPostAGC)
                     .addComponent(jRadioButtonLog))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("NB2", jPanel1);
+
+        jLabelPASettings.setText("Band:");
+
+        jSliderPASettings.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSliderPASettingsStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelPASettings, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jSliderPASettings, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSliderPASettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPASettings))
+                .addContainerGap(173, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("PA Settings", jPanel2);
+
+        jLabelOCBand.setText("Band:");
+
+        jLabel7.setText("RX Pins");
+
+        jLabel8.setText("TX Pins");
+
+        jCheckBoxOCRx1.setText("1");
+        jCheckBoxOCRx1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCRx1ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCRx2.setText("2");
+        jCheckBoxOCRx2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCRx2ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCRx3.setText("3");
+        jCheckBoxOCRx3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCRx3ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCRx4.setText("4");
+        jCheckBoxOCRx4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCRx4ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCRx5.setText("5");
+        jCheckBoxOCRx5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCRx5ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCRx6.setText("6");
+        jCheckBoxOCRx6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCRx6ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCRx7.setText("7");
+        jCheckBoxOCRx7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCRx7ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCTx1.setText("1");
+        jCheckBoxOCTx1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCTx1ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCTx2.setText("2");
+        jCheckBoxOCTx2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCTx2ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCTx3.setText("3");
+        jCheckBoxOCTx3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCTx3ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCTx4.setText("4");
+        jCheckBoxOCTx4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCTx4ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCTx5.setText("5");
+        jCheckBoxOCTx5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCTx5ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCTx6.setText("6");
+        jCheckBoxOCTx6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCTx6ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxOCTx7.setText("7");
+        jCheckBoxOCTx7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOCTx7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabelOCBand, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxOCRx2)
+                            .addComponent(jCheckBoxOCRx1)
+                            .addComponent(jCheckBoxOCRx3)
+                            .addComponent(jCheckBoxOCRx4)
+                            .addComponent(jCheckBoxOCRx5)
+                            .addComponent(jCheckBoxOCRx6)
+                            .addComponent(jCheckBoxOCRx7))))
+                .addGap(121, 121, 121)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxOCTx2)
+                            .addComponent(jCheckBoxOCTx1)
+                            .addComponent(jCheckBoxOCTx3)
+                            .addComponent(jCheckBoxOCTx4)
+                            .addComponent(jCheckBoxOCTx5)
+                            .addComponent(jCheckBoxOCTx6)
+                            .addComponent(jCheckBoxOCTx7))))
+                .addContainerGap(134, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabelOCBand))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBoxOCRx1)
+                            .addComponent(jCheckBoxOCTx1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxOCRx2)
+                    .addComponent(jCheckBoxOCTx2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxOCRx3)
+                    .addComponent(jCheckBoxOCTx3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxOCRx4)
+                    .addComponent(jCheckBoxOCTx4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxOCRx5)
+                    .addComponent(jCheckBoxOCTx5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxOCRx6)
+                    .addComponent(jCheckBoxOCTx6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxOCRx7)
+                    .addComponent(jCheckBoxOCTx7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("OC Outputs", jPanel4);
+
+        jCheckBox20dBMicBoost.setText("20dB Mic Boost");
+        jCheckBox20dBMicBoost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox20dBMicBoostActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBox20dBMicBoost)
+                .addContainerGap(308, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jCheckBox20dBMicBoost)
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Audio", jPanel5);
 
         jButtonClose.setText("Close");
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
@@ -551,6 +834,141 @@ public class RadioJDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonRXXVActionPerformed
 
+    private void jSliderPASettingsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderPASettingsStateChanged
+        int value=this.jSliderPASettings.getValue();
+        configuration.bands.get().setDrive((float)value/100.0F);
+    }//GEN-LAST:event_jSliderPASettingsStateChanged
+
+    private void jCheckBoxOCRx1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx1ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCRx1.isSelected()) {
+            band.setOCRx((byte)(band.getOCRx()|0x01));
+        } else {
+            band.setOCRx((byte)(band.getOCRx()&0xFE));
+        }
+    }//GEN-LAST:event_jCheckBoxOCRx1ActionPerformed
+
+    private void jCheckBoxOCRx2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx2ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCRx2.isSelected()) {
+            band.setOCRx((byte)(band.getOCRx()|0x02));
+        } else {
+            band.setOCRx((byte)(band.getOCRx()&0xFD));
+        }
+    }//GEN-LAST:event_jCheckBoxOCRx2ActionPerformed
+
+    private void jCheckBoxOCRx3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx3ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCRx3.isSelected()) {
+            band.setOCRx((byte)(band.getOCRx()|0x04));
+        } else {
+            band.setOCRx((byte)(band.getOCRx()&0xFB));
+        }
+    }//GEN-LAST:event_jCheckBoxOCRx3ActionPerformed
+
+    private void jCheckBoxOCRx4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx4ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCRx4.isSelected()) {
+            band.setOCRx((byte)(band.getOCRx()|0x08));
+        } else {
+            band.setOCRx((byte)(band.getOCRx()&0xF7));
+        }
+    }//GEN-LAST:event_jCheckBoxOCRx4ActionPerformed
+
+    private void jCheckBoxOCRx5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx5ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCRx5.isSelected()) {
+            band.setOCRx((byte)(band.getOCRx()|0x10));
+        } else {
+            band.setOCRx((byte)(band.getOCRx()&0xEF));
+        }
+    }//GEN-LAST:event_jCheckBoxOCRx5ActionPerformed
+
+    private void jCheckBoxOCRx6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx6ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCRx6.isSelected()) {
+            band.setOCRx((byte)(band.getOCRx()|0x20));
+        } else {
+            band.setOCRx((byte)(band.getOCRx()&0xDF));
+        }
+    }//GEN-LAST:event_jCheckBoxOCRx6ActionPerformed
+
+    private void jCheckBoxOCRx7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx7ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCRx7.isSelected()) {
+            band.setOCRx((byte)(band.getOCRx()|0x40));
+        } else {
+            band.setOCRx((byte)(band.getOCRx()&0xBF));
+        }
+    }//GEN-LAST:event_jCheckBoxOCRx7ActionPerformed
+
+    private void jCheckBoxOCTx1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx1ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCTx1.isSelected()) {
+            band.setOCTx((byte)(band.getOCTx()|0x01));
+        } else {
+            band.setOCTx((byte)(band.getOCTx()&0xFE));
+        }
+    }//GEN-LAST:event_jCheckBoxOCTx1ActionPerformed
+
+    private void jCheckBoxOCTx2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx2ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCTx2.isSelected()) {
+            band.setOCTx((byte)(band.getOCTx()|0x02));
+        } else {
+            band.setOCTx((byte)(band.getOCTx()&0xFD));
+        }
+    }//GEN-LAST:event_jCheckBoxOCTx2ActionPerformed
+
+    private void jCheckBoxOCTx3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx3ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCTx3.isSelected()) {
+            band.setOCTx((byte)(band.getOCTx()|0x04));
+        } else {
+            band.setOCTx((byte)(band.getOCTx()&0xFB));
+        }
+    }//GEN-LAST:event_jCheckBoxOCTx3ActionPerformed
+
+    private void jCheckBoxOCTx4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx4ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCTx4.isSelected()) {
+            band.setOCTx((byte)(band.getOCTx()|0x08));
+        } else {
+            band.setOCTx((byte)(band.getOCTx()&0xF7));
+        }
+    }//GEN-LAST:event_jCheckBoxOCTx4ActionPerformed
+
+    private void jCheckBoxOCTx5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx5ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCTx5.isSelected()) {
+            band.setOCTx((byte)(band.getOCTx()|0x10));
+        } else {
+            band.setOCTx((byte)(band.getOCTx()&0xEF));
+        }
+    }//GEN-LAST:event_jCheckBoxOCTx5ActionPerformed
+
+    private void jCheckBoxOCTx6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx6ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCTx6.isSelected()) {
+            band.setOCTx((byte)(band.getOCTx()|0x20));
+        } else {
+            band.setOCTx((byte)(band.getOCTx()&0xDF));
+        }
+    }//GEN-LAST:event_jCheckBoxOCTx6ActionPerformed
+
+    private void jCheckBoxOCTx7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx7ActionPerformed
+        Band band=configuration.bands.get();
+        if(jCheckBoxOCTx7.isSelected()) {
+            band.setOCTx((byte)(band.getOCTx()|0x40));
+        } else {
+            band.setOCTx((byte)(band.getOCTx()&0xBF));
+        }
+    }//GEN-LAST:event_jCheckBoxOCTx7ActionPerformed
+
+    private void jCheckBox20dBMicBoostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox20dBMicBoostActionPerformed
+        configuration.micboost=this.jCheckBox20dBMicBoost.isSelected();
+    }//GEN-LAST:event_jCheckBox20dBMicBoostActionPerformed
+
     private Configuration configuration;
     private WDSP wdsp;
 
@@ -561,14 +979,36 @@ public class RadioJDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroupRXAnt;
     private javax.swing.ButtonGroup buttonGroupTXAnt;
     private javax.swing.JButton jButtonClose;
+    private javax.swing.JCheckBox jCheckBox20dBMicBoost;
     private javax.swing.JCheckBox jCheckBoxAEFilter;
+    private javax.swing.JCheckBox jCheckBoxOCRx1;
+    private javax.swing.JCheckBox jCheckBoxOCRx2;
+    private javax.swing.JCheckBox jCheckBoxOCRx3;
+    private javax.swing.JCheckBox jCheckBoxOCRx4;
+    private javax.swing.JCheckBox jCheckBoxOCRx5;
+    private javax.swing.JCheckBox jCheckBoxOCRx6;
+    private javax.swing.JCheckBox jCheckBoxOCRx7;
+    private javax.swing.JCheckBox jCheckBoxOCTx1;
+    private javax.swing.JCheckBox jCheckBoxOCTx2;
+    private javax.swing.JCheckBox jCheckBoxOCTx3;
+    private javax.swing.JCheckBox jCheckBoxOCTx4;
+    private javax.swing.JCheckBox jCheckBoxOCTx5;
+    private javax.swing.JCheckBox jCheckBoxOCTx6;
+    private javax.swing.JCheckBox jCheckBoxOCTx7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelOCBand;
+    private javax.swing.JLabel jLabelPASettings;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JRadioButton jRadioButtonAnt1;
     private javax.swing.JRadioButton jRadioButtonAnt2;
     private javax.swing.JRadioButton jRadioButtonAnt3;
@@ -582,6 +1022,7 @@ public class RadioJDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonRX1;
     private javax.swing.JRadioButton jRadioButtonRX2;
     private javax.swing.JRadioButton jRadioButtonRXXV;
+    private javax.swing.JSlider jSliderPASettings;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
