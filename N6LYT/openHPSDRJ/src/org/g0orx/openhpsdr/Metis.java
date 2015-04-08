@@ -901,6 +901,9 @@ public class Metis extends Thread {
                             sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getDrive() * configuration.drive);
                         }
                         byte c2=0x00;
+                        if(configuration.micboost) {
+                            c2|=0x01;
+                        }
                         if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES) {
                             if(configuration.radio==Configuration.HERMES_APOLLO) {
                                 c2=(byte)(APOLLO_BOARD | APOLLO_FILTER | APOLLO_TUNER);
