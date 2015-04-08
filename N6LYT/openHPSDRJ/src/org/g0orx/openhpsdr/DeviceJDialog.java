@@ -18,11 +18,12 @@ public class DeviceJDialog extends javax.swing.JDialog {
     /**
      * Creates new form DeviceJDialog
      */
-    public DeviceJDialog(java.awt.Frame parent, boolean modal,ArrayList<Discovered> discovered) {
+    public DeviceJDialog(java.awt.Frame parent, boolean modal, ArrayList<Discovered> discovered) {
         super(parent, modal);
-        this.discovered=discovered;
+        this.discovered = discovered;
         initComponents();
         this.setTitle("Discovery detected more than one device. Select the one required.");
+        this.jButtonSelect.setEnabled(false);
     }
 
     /**
@@ -37,6 +38,7 @@ public class DeviceJDialog extends javax.swing.JDialog {
         jButtonSelect = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        jLabelStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -47,6 +49,11 @@ public class DeviceJDialog extends javax.swing.JDialog {
             }
         });
 
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         String[] strings = new String[discovered.size()];
         for(int i=0;i<discovered.size();i++) {
             strings[i]=discovered.get(i).toString();
@@ -62,37 +69,55 @@ public class DeviceJDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(181, Short.MAX_VALUE)
-                .addComponent(jButtonSelect)
-                .addGap(163, 163, 163))
-            .addComponent(jScrollPane1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonSelect)
+                        .addGap(167, 167, 167))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(125, 125, 125))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonSelect)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jButtonSelect))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
-        Configuration configuration=Configuration.getInstance();
-        configuration.discovered=this.discovered.get(jList1.getSelectedIndex());
-        Log.i("DeviceJDialog", "selected: "+configuration.discovered.toString());
+        Configuration configuration = Configuration.getInstance();
+        Discovered d = this.discovered.get(jList1.getSelectedIndex());
+        configuration.discovered = this.discovered.get(jList1.getSelectedIndex());
+        Log.i("DeviceJDialog", "selected: " + configuration.discovered.toString());
         this.dispose();
     }//GEN-LAST:event_jButtonSelectActionPerformed
 
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        int i = jList1.getSelectedIndex();
+        if (this.discovered.get(i).getState() == Discovered.STATE_AVAILABLE) {
+            this.jButtonSelect.setEnabled(true);
+            this.jLabelStatus.setText("");
+        } else {
+            this.jButtonSelect.setEnabled(false);
+            this.jLabelStatus.setText("Device is in use!");
+        }
+    }//GEN-LAST:event_jList1ValueChanged
 
     ArrayList<Discovered> discovered;
-            
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSelect;
+    private javax.swing.JLabel jLabelStatus;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
