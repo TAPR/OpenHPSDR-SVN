@@ -5,6 +5,7 @@
  */
 package org.g0orx.openhpsdr;
 
+import com.sun.glass.ui.Cursor;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.event.ComponentEvent;
@@ -231,6 +232,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     public void start() {
 
         Log.i("Radio", "start: " + selected.toString());
+        this.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.WAIT_CURSOR));
         String title = this.getTitle();
         this.setTitle(title + ": Starting - Please wait ...");
 
@@ -356,6 +358,9 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         update.startTimer();
         Log.i("Radio", "Start completed");
         this.setTitle(title);
+        
+                
+        this.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.DEFAULT_CURSOR));
     }
 
     private void stop() {
