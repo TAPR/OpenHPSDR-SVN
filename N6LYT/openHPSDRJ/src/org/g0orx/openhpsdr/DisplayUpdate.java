@@ -49,6 +49,7 @@ public class DisplayUpdate {
         }, 0, 1000 / configuration.fps);
     }
 
+    
     private void update() {
         if (samples.length != panadapterView.getWidth()) {
             samples = new float[panadapterView.getWidth()];
