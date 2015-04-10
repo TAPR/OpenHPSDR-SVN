@@ -7,15 +7,15 @@ import java.util.TimerTask;
 
 public class DisplayUpdate {
 
-    public DisplayUpdate(VFOPanel vfoView,PanadapterPanel panadapterView, WaterfallPanel waterfallView, MeterJPanel meterView, /*FrequencyView frequencyView, BandscopeView bandscopeView,*/ Metis metis) {
+    public DisplayUpdate(VFOPanel vfoView, PanadapterPanel panadapterView, WaterfallPanel waterfallView, MeterJPanel meterView, /*FrequencyView frequencyView,*/ BandscopeJDialog bandscopeView, Metis metis) {
         this.vfoView = vfoView;
         this.panadapterView = panadapterView;
         this.waterfallView = waterfallView;
         this.meterView = meterView;
         /*
-        this.frequencyView = frequencyView;
+         this.frequencyView = frequencyView;
+         */
         this.bandscopeView = bandscopeView;
-        */
         this.metis = metis;
         configuration = Configuration.getInstance();
 
@@ -24,9 +24,13 @@ public class DisplayUpdate {
         samples = new float[panadapterView.getWidth()];
         Log.i("DisplayUpdate", "fps=" + configuration.fps);
     }
-    
+
     public void setPixels(int pixels) {
         // change number of pixels
+    }
+    
+    public void setBandscope(BandscopeJDialog bandscope) {
+        this.bandscopeView=bandscope;
     }
 
     public void startTimer() {
@@ -46,55 +50,58 @@ public class DisplayUpdate {
     }
 
     private void update() {
-        if(samples.length!=panadapterView.getWidth()) {
+        if (samples.length != panadapterView.getWidth()) {
             samples = new float[panadapterView.getWidth()];
             metis.setPixels(panadapterView.getWidth());
         }
         if (firsttime) {
             //if(frequencyView.update() && vfoView.update()) {
-                firsttime = false;
+            firsttime = false;
             //}
         }
         if (metis.isTransmitting()) {
             if (metis.Process_Panadapter(Display.TX, samples)) {
-                if(panadapterView!=null) {
+                if (panadapterView != null) {
                     panadapterView.plotSpectrum(samples);
                 }
                 meterView.setPower(metis.getPenelopeForwardPower(), metis.getAlexForwardPower(), metis.getAlexReversePower());
             }
         } else {
             if (metis.Process_Panadapter(Display.RX, samples)) {
-                if(panadapterView!=null) {
+                if (panadapterView != null) {
                     panadapterView.plotSpectrum(samples);
                 }
-                if (waterfallView!=null) {
+                if (waterfallView != null) {
                     waterfallView.update(samples);
                 }
                 int meter = (int) wdsp.GetRXAMeter(configuration.subrx ? Channel.SUBRX : Channel.RX, WDSP.S_AV);
                 meterView.setMeter(meter);
             }
 
-            /*
-            if(bandscopeView!=null) {
-                if(metis.Process_Panadapter(Display.BS, samples)) {
-                    bandscopeView.update(samples);
+            if (bandscopeView != null) {
+                if (bandscopesamples==null || bandscopesamples.length != bandscopeView.getWidth()) {
+                    bandscopesamples = new float[bandscopeView.getWidth()];
+                    metis.setBandscopePixels(bandscopeView.getWidth());
+                }
+                if (metis.Process_Panadapter(Display.BS, bandscopesamples)) {
+                    bandscopeView.update(bandscopesamples);
                 } else {
-                    Log.i("DisplayUpdate", "Process_Panadapter FALSE");
+                    //Log.i("DisplayUpdate", "Process_Panadapter (BS) FALSE");
                 }
             }
-            */
+
         }
         /*
-        frames++;
-        if (frames == configuration.fps) {
-            long elapsed = System.currentTimeMillis() - time;
-            if (elapsed > 1000L) {
-                Log.i("DisplayUpdate", "time for " + configuration.fps + " =" + elapsed + "ms");
-            }
-            frames = 0;
-            time = System.currentTimeMillis();
-        }
-        */
+         frames++;
+         if (frames == configuration.fps) {
+         long elapsed = System.currentTimeMillis() - time;
+         if (elapsed > 1000L) {
+         Log.i("DisplayUpdate", "time for " + configuration.fps + " =" + elapsed + "ms");
+         }
+         frames = 0;
+         time = System.currentTimeMillis();
+         }
+         */
     }
 
     public boolean isRunning() {
@@ -111,14 +118,16 @@ public class DisplayUpdate {
     private float[] samples;
     private int meter = 0;
 
+    private float[] bandscopesamples;
+
     private VFOPanel vfoView;
     private PanadapterPanel panadapterView;
     private WaterfallPanel waterfallView;
     private MeterJPanel meterView;
     /*
-    private FrequencyView frequencyView;
-    private BandscopeView bandscopeView;
-    */
+     private FrequencyView frequencyView;
+     */
+    private BandscopeJDialog bandscopeView;
     private Metis metis;
     private WDSP wdsp;
 
@@ -128,4 +137,3 @@ public class DisplayUpdate {
 
     private boolean firsttime = true;
 }
-

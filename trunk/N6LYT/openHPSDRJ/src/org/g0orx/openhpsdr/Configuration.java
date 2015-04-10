@@ -70,7 +70,6 @@ public class Configuration implements Serializable {
 
     public boolean panadapter = true;
     public boolean waterfall = true;
-    public boolean bandscope = true;
 
     public boolean micboost = false;
 
@@ -166,4 +165,16 @@ public class Configuration implements Serializable {
     public boolean NR = false;
     public boolean NB = false;
     public boolean ANF = false;
+    
+    public int myX=0;
+    public int myY=0;
+    public int myWidth=0;
+    public int myHeight=0;
+    
+    public int bandscopeX=0;
+    public int bandscopeY=0;
+    public int bandscopeWidth=0;
+    public int bandscopeHeight=0;
+    
+    
 }
