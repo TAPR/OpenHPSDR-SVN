@@ -794,13 +794,18 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     }//GEN-LAST:event_jButtonDiscoverActionPerformed
 
     private void jButtonConfigureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfigureActionPerformed
-        // different configuration if active
-        if (wdsp == null) {
-            SystemJDialog dialog = new SystemJDialog(this, true);
-            dialog.setVisible(true);
-        } else {
-            RadioJDialog dialog = new RadioJDialog(this, true);
-            dialog.setVisible(true);
+        
+        RadioJDialog dialog = new RadioJDialog(this, true, wdsp);
+        dialog.setVisible(true);
+        
+        try {
+            FileOutputStream fos = new FileOutputStream(filename);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(Configuration.getInstance());
+            oos.close();
+            fos.close();
+        } catch (Exception e) {
+            Log.i("Radio", "stop: " + e.toString());
         }
 
         this.vfoPanel.repaint();
