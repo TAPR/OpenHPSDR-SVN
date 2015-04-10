@@ -33,7 +33,7 @@ public class RadioJDialog extends javax.swing.JDialog {
         this.jRadioButtonMMSE.setSelected(configuration.NB2_NPE == 1);
         this.jRadioButtonPreAGC.setSelected(configuration.NB2_POSITION == 0);
         this.jRadioButtonPostAGC.setSelected(configuration.NB2_POSITION == 1);
-            
+
         Band band = configuration.bands.get();
         JRadioButton rb;
         if (configuration.radio != Configuration.METIS_PENELOPE
@@ -114,28 +114,47 @@ public class RadioJDialog extends javax.swing.JDialog {
             jRadioButtonRXXV.setEnabled(false);
         }
 
-        this.jLabelPASettings.setText("Band: "+band.getName());
-        this.jSliderPASettings.setValue((int)(band.getDrive()*100.0));
-        
-        this.jLabelOCBand.setText("Band: "+band.getName());
-        this.jCheckBoxOCRx1.setSelected((band.getOCRx()&0x01)==0x01);
-        this.jCheckBoxOCRx2.setSelected((band.getOCRx()&0x02)==0x02);
-        this.jCheckBoxOCRx3.setSelected((band.getOCRx()&0x04)==0x04);
-        this.jCheckBoxOCRx4.setSelected((band.getOCRx()&0x08)==0x08);
-        this.jCheckBoxOCRx5.setSelected((band.getOCRx()&0x10)==0x10);
-        this.jCheckBoxOCRx6.setSelected((band.getOCRx()&0x20)==0x20);
-        this.jCheckBoxOCRx7.setSelected((band.getOCRx()&0x40)==0x40);
-        this.jCheckBoxOCTx1.setSelected((band.getOCTx()&0x01)==0x01);
-        this.jCheckBoxOCTx2.setSelected((band.getOCTx()&0x02)==0x02);
-        this.jCheckBoxOCTx3.setSelected((band.getOCTx()&0x04)==0x04);
-        this.jCheckBoxOCTx4.setSelected((band.getOCTx()&0x08)==0x08);
-        this.jCheckBoxOCTx5.setSelected((band.getOCTx()&0x10)==0x10);
-        this.jCheckBoxOCTx6.setSelected((band.getOCTx()&0x20)==0x20);
-        this.jCheckBoxOCTx7.setSelected((band.getOCTx()&0x40)==0x40);
+        this.jLabelPASettings.setText("Band: " + band.getName());
+        this.jSliderPASettings.setValue((int) (band.getDrive() * 100.0));
+
+        this.jLabelOCBand.setText("Band: " + band.getName());
+        this.jCheckBoxOCRx1.setSelected((band.getOCRx() & 0x01) == 0x01);
+        this.jCheckBoxOCRx2.setSelected((band.getOCRx() & 0x02) == 0x02);
+        this.jCheckBoxOCRx3.setSelected((band.getOCRx() & 0x04) == 0x04);
+        this.jCheckBoxOCRx4.setSelected((band.getOCRx() & 0x08) == 0x08);
+        this.jCheckBoxOCRx5.setSelected((band.getOCRx() & 0x10) == 0x10);
+        this.jCheckBoxOCRx6.setSelected((band.getOCRx() & 0x20) == 0x20);
+        this.jCheckBoxOCRx7.setSelected((band.getOCRx() & 0x40) == 0x40);
+        this.jCheckBoxOCTx1.setSelected((band.getOCTx() & 0x01) == 0x01);
+        this.jCheckBoxOCTx2.setSelected((band.getOCTx() & 0x02) == 0x02);
+        this.jCheckBoxOCTx3.setSelected((band.getOCTx() & 0x04) == 0x04);
+        this.jCheckBoxOCTx4.setSelected((band.getOCTx() & 0x08) == 0x08);
+        this.jCheckBoxOCTx5.setSelected((band.getOCTx() & 0x10) == 0x10);
+        this.jCheckBoxOCTx6.setSelected((band.getOCTx() & 0x20) == 0x20);
+        this.jCheckBoxOCTx7.setSelected((band.getOCTx() & 0x40) == 0x40);
 
         this.jCheckBox20dBMicBoost.setSelected(configuration.micboost);
+
+        if (configuration.discovered.getDevice() == Discovered.DEVICE_ORION) {
+
+            this.jCheckBoxPTTEnabled.setSelected(configuration.orionmicptt==Configuration.MIC_PTT_ENABLE);
+            this.jCheckBoxBiasEnabled.setSelected(configuration.orionmicbias==Configuration.MIC_BIAS_ENABLE);
+
+            if(this.configuration.oriontipring==Configuration.MIC_PTT_TO_RING_BIAS_TO_TIP) {
+                this.jRadioButtonPTTtoRing.setSelected(true);
+            }
+            if(this.configuration.oriontipring==Configuration.MIC_PTT_TO_TIP_BIAS_TO_RING) {
+                this.jRadioButtonPTTtoTip.setSelected(true);
+            }
+
+        } else {
+            this.jCheckBoxPTTEnabled.setEnabled(false);
+            this.jCheckBoxBiasEnabled.setEnabled(false);
+            this.jRadioButtonPTTtoRing.setEnabled(false);
+            this.jRadioButtonPTTtoTip.setEnabled(false);
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -150,6 +169,7 @@ public class RadioJDialog extends javax.swing.JDialog {
         buttonGroupPosition = new javax.swing.ButtonGroup();
         buttonGroupTXAnt = new javax.swing.ButtonGroup();
         buttonGroupRXAnt = new javax.swing.ButtonGroup();
+        buttonGroupTipRing = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jRadioButtonAnt1 = new javax.swing.JRadioButton();
@@ -195,6 +215,10 @@ public class RadioJDialog extends javax.swing.JDialog {
         jCheckBoxOCTx7 = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         jCheckBox20dBMicBoost = new javax.swing.JCheckBox();
+        jRadioButtonPTTtoRing = new javax.swing.JRadioButton();
+        jRadioButtonPTTtoTip = new javax.swing.JRadioButton();
+        jCheckBoxPTTEnabled = new javax.swing.JCheckBox();
+        jCheckBoxBiasEnabled = new javax.swing.JCheckBox();
         jButtonClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -430,9 +454,7 @@ public class RadioJDialog extends javax.swing.JDialog {
                                 .addGap(53, 53, 53)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jRadioButtonMMSE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jRadioButtonOSMS)
-                                        .addGap(165, 165, 165))))
+                                    .addComponent(jRadioButtonOSMS)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(30, 30, 30)
@@ -442,7 +464,7 @@ public class RadioJDialog extends javax.swing.JDialog {
                                     .addComponent(jRadioButtonPreAGC)
                                     .addComponent(jLabel3)
                                     .addComponent(jRadioButtonPostAGC))))
-                        .addContainerGap(74, Short.MAX_VALUE))))
+                        .addContainerGap(108, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -691,21 +713,64 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupTipRing.add(jRadioButtonPTTtoRing);
+        jRadioButtonPTTtoRing.setText("Orion PTT to ring, Mic/Bias to tip");
+        jRadioButtonPTTtoRing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonPTTtoRingActionPerformed(evt);
+            }
+        });
+
+        buttonGroupTipRing.add(jRadioButtonPTTtoTip);
+        jRadioButtonPTTtoTip.setText("Orion PTT to tip, Mic/Bias to ring");
+        jRadioButtonPTTtoTip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonPTTtoTipActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxPTTEnabled.setText("Orion PTT Enabled");
+        jCheckBoxPTTEnabled.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxPTTEnabledActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxBiasEnabled.setText("Orion Bias Enabled");
+        jCheckBoxBiasEnabled.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxBiasEnabledActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCheckBox20dBMicBoost)
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox20dBMicBoost)
+                    .addComponent(jRadioButtonPTTtoRing)
+                    .addComponent(jRadioButtonPTTtoTip)
+                    .addComponent(jCheckBoxBiasEnabled)
+                    .addComponent(jCheckBoxPTTEnabled))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jCheckBox20dBMicBoost)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jCheckBoxPTTEnabled)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxBiasEnabled)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButtonPTTtoRing)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButtonPTTtoTip)
+                .addGap(73, 73, 73))
         );
 
         jTabbedPane1.addTab("Audio", jPanel5);
@@ -835,139 +900,155 @@ public class RadioJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonRXXVActionPerformed
 
     private void jSliderPASettingsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderPASettingsStateChanged
-        int value=this.jSliderPASettings.getValue();
-        configuration.bands.get().setDrive((float)value/100.0F);
+        int value = this.jSliderPASettings.getValue();
+        configuration.bands.get().setDrive((float) value / 100.0F);
     }//GEN-LAST:event_jSliderPASettingsStateChanged
 
     private void jCheckBoxOCRx1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx1ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCRx1.isSelected()) {
-            band.setOCRx((byte)(band.getOCRx()|0x01));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCRx1.isSelected()) {
+            band.setOCRx((byte) (band.getOCRx() | 0x01));
         } else {
-            band.setOCRx((byte)(band.getOCRx()&0xFE));
+            band.setOCRx((byte) (band.getOCRx() & 0xFE));
         }
     }//GEN-LAST:event_jCheckBoxOCRx1ActionPerformed
 
     private void jCheckBoxOCRx2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx2ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCRx2.isSelected()) {
-            band.setOCRx((byte)(band.getOCRx()|0x02));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCRx2.isSelected()) {
+            band.setOCRx((byte) (band.getOCRx() | 0x02));
         } else {
-            band.setOCRx((byte)(band.getOCRx()&0xFD));
+            band.setOCRx((byte) (band.getOCRx() & 0xFD));
         }
     }//GEN-LAST:event_jCheckBoxOCRx2ActionPerformed
 
     private void jCheckBoxOCRx3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx3ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCRx3.isSelected()) {
-            band.setOCRx((byte)(band.getOCRx()|0x04));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCRx3.isSelected()) {
+            band.setOCRx((byte) (band.getOCRx() | 0x04));
         } else {
-            band.setOCRx((byte)(band.getOCRx()&0xFB));
+            band.setOCRx((byte) (band.getOCRx() & 0xFB));
         }
     }//GEN-LAST:event_jCheckBoxOCRx3ActionPerformed
 
     private void jCheckBoxOCRx4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx4ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCRx4.isSelected()) {
-            band.setOCRx((byte)(band.getOCRx()|0x08));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCRx4.isSelected()) {
+            band.setOCRx((byte) (band.getOCRx() | 0x08));
         } else {
-            band.setOCRx((byte)(band.getOCRx()&0xF7));
+            band.setOCRx((byte) (band.getOCRx() & 0xF7));
         }
     }//GEN-LAST:event_jCheckBoxOCRx4ActionPerformed
 
     private void jCheckBoxOCRx5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx5ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCRx5.isSelected()) {
-            band.setOCRx((byte)(band.getOCRx()|0x10));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCRx5.isSelected()) {
+            band.setOCRx((byte) (band.getOCRx() | 0x10));
         } else {
-            band.setOCRx((byte)(band.getOCRx()&0xEF));
+            band.setOCRx((byte) (band.getOCRx() & 0xEF));
         }
     }//GEN-LAST:event_jCheckBoxOCRx5ActionPerformed
 
     private void jCheckBoxOCRx6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx6ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCRx6.isSelected()) {
-            band.setOCRx((byte)(band.getOCRx()|0x20));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCRx6.isSelected()) {
+            band.setOCRx((byte) (band.getOCRx() | 0x20));
         } else {
-            band.setOCRx((byte)(band.getOCRx()&0xDF));
+            band.setOCRx((byte) (band.getOCRx() & 0xDF));
         }
     }//GEN-LAST:event_jCheckBoxOCRx6ActionPerformed
 
     private void jCheckBoxOCRx7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCRx7ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCRx7.isSelected()) {
-            band.setOCRx((byte)(band.getOCRx()|0x40));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCRx7.isSelected()) {
+            band.setOCRx((byte) (band.getOCRx() | 0x40));
         } else {
-            band.setOCRx((byte)(band.getOCRx()&0xBF));
+            band.setOCRx((byte) (band.getOCRx() & 0xBF));
         }
     }//GEN-LAST:event_jCheckBoxOCRx7ActionPerformed
 
     private void jCheckBoxOCTx1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx1ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCTx1.isSelected()) {
-            band.setOCTx((byte)(band.getOCTx()|0x01));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCTx1.isSelected()) {
+            band.setOCTx((byte) (band.getOCTx() | 0x01));
         } else {
-            band.setOCTx((byte)(band.getOCTx()&0xFE));
+            band.setOCTx((byte) (band.getOCTx() & 0xFE));
         }
     }//GEN-LAST:event_jCheckBoxOCTx1ActionPerformed
 
     private void jCheckBoxOCTx2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx2ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCTx2.isSelected()) {
-            band.setOCTx((byte)(band.getOCTx()|0x02));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCTx2.isSelected()) {
+            band.setOCTx((byte) (band.getOCTx() | 0x02));
         } else {
-            band.setOCTx((byte)(band.getOCTx()&0xFD));
+            band.setOCTx((byte) (band.getOCTx() & 0xFD));
         }
     }//GEN-LAST:event_jCheckBoxOCTx2ActionPerformed
 
     private void jCheckBoxOCTx3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx3ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCTx3.isSelected()) {
-            band.setOCTx((byte)(band.getOCTx()|0x04));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCTx3.isSelected()) {
+            band.setOCTx((byte) (band.getOCTx() | 0x04));
         } else {
-            band.setOCTx((byte)(band.getOCTx()&0xFB));
+            band.setOCTx((byte) (band.getOCTx() & 0xFB));
         }
     }//GEN-LAST:event_jCheckBoxOCTx3ActionPerformed
 
     private void jCheckBoxOCTx4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx4ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCTx4.isSelected()) {
-            band.setOCTx((byte)(band.getOCTx()|0x08));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCTx4.isSelected()) {
+            band.setOCTx((byte) (band.getOCTx() | 0x08));
         } else {
-            band.setOCTx((byte)(band.getOCTx()&0xF7));
+            band.setOCTx((byte) (band.getOCTx() & 0xF7));
         }
     }//GEN-LAST:event_jCheckBoxOCTx4ActionPerformed
 
     private void jCheckBoxOCTx5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx5ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCTx5.isSelected()) {
-            band.setOCTx((byte)(band.getOCTx()|0x10));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCTx5.isSelected()) {
+            band.setOCTx((byte) (band.getOCTx() | 0x10));
         } else {
-            band.setOCTx((byte)(band.getOCTx()&0xEF));
+            band.setOCTx((byte) (band.getOCTx() & 0xEF));
         }
     }//GEN-LAST:event_jCheckBoxOCTx5ActionPerformed
 
     private void jCheckBoxOCTx6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx6ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCTx6.isSelected()) {
-            band.setOCTx((byte)(band.getOCTx()|0x20));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCTx6.isSelected()) {
+            band.setOCTx((byte) (band.getOCTx() | 0x20));
         } else {
-            band.setOCTx((byte)(band.getOCTx()&0xDF));
+            band.setOCTx((byte) (band.getOCTx() & 0xDF));
         }
     }//GEN-LAST:event_jCheckBoxOCTx6ActionPerformed
 
     private void jCheckBoxOCTx7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOCTx7ActionPerformed
-        Band band=configuration.bands.get();
-        if(jCheckBoxOCTx7.isSelected()) {
-            band.setOCTx((byte)(band.getOCTx()|0x40));
+        Band band = configuration.bands.get();
+        if (jCheckBoxOCTx7.isSelected()) {
+            band.setOCTx((byte) (band.getOCTx() | 0x40));
         } else {
-            band.setOCTx((byte)(band.getOCTx()&0xBF));
+            band.setOCTx((byte) (band.getOCTx() & 0xBF));
         }
     }//GEN-LAST:event_jCheckBoxOCTx7ActionPerformed
 
     private void jCheckBox20dBMicBoostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox20dBMicBoostActionPerformed
-        configuration.micboost=this.jCheckBox20dBMicBoost.isSelected();
+        configuration.micboost = this.jCheckBox20dBMicBoost.isSelected();
     }//GEN-LAST:event_jCheckBox20dBMicBoostActionPerformed
+
+    private void jRadioButtonPTTtoTipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPTTtoTipActionPerformed
+        configuration.oriontipring = Configuration.MIC_PTT_TO_TIP_BIAS_TO_RING;
+    }//GEN-LAST:event_jRadioButtonPTTtoTipActionPerformed
+
+    private void jCheckBoxPTTEnabledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxPTTEnabledActionPerformed
+        configuration.orionmicptt = this.jCheckBoxPTTEnabled.isSelected() ? Configuration.MIC_PTT_ENABLE : Configuration.MIC_PTT_DISABLE;
+    }//GEN-LAST:event_jCheckBoxPTTEnabledActionPerformed
+
+    private void jCheckBoxBiasEnabledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxBiasEnabledActionPerformed
+        configuration.orionmicbias = this.jCheckBoxBiasEnabled.isSelected() ? Configuration.MIC_BIAS_ENABLE : Configuration.MIC_BIAS_DISABLE;
+    }//GEN-LAST:event_jCheckBoxBiasEnabledActionPerformed
+
+    private void jRadioButtonPTTtoRingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPTTtoRingActionPerformed
+        configuration.oriontipring = Configuration.MIC_PTT_TO_RING_BIAS_TO_TIP;
+    }//GEN-LAST:event_jRadioButtonPTTtoRingActionPerformed
 
     private Configuration configuration;
     private WDSP wdsp;
@@ -978,9 +1059,11 @@ public class RadioJDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroupPosition;
     private javax.swing.ButtonGroup buttonGroupRXAnt;
     private javax.swing.ButtonGroup buttonGroupTXAnt;
+    private javax.swing.ButtonGroup buttonGroupTipRing;
     private javax.swing.JButton jButtonClose;
     private javax.swing.JCheckBox jCheckBox20dBMicBoost;
     private javax.swing.JCheckBox jCheckBoxAEFilter;
+    private javax.swing.JCheckBox jCheckBoxBiasEnabled;
     private javax.swing.JCheckBox jCheckBoxOCRx1;
     private javax.swing.JCheckBox jCheckBoxOCRx2;
     private javax.swing.JCheckBox jCheckBoxOCRx3;
@@ -995,6 +1078,7 @@ public class RadioJDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxOCTx5;
     private javax.swing.JCheckBox jCheckBoxOCTx6;
     private javax.swing.JCheckBox jCheckBoxOCTx7;
+    private javax.swing.JCheckBox jCheckBoxPTTEnabled;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1017,6 +1101,8 @@ public class RadioJDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonMMSE;
     private javax.swing.JRadioButton jRadioButtonNone;
     private javax.swing.JRadioButton jRadioButtonOSMS;
+    private javax.swing.JRadioButton jRadioButtonPTTtoRing;
+    private javax.swing.JRadioButton jRadioButtonPTTtoTip;
     private javax.swing.JRadioButton jRadioButtonPostAGC;
     private javax.swing.JRadioButton jRadioButtonPreAGC;
     private javax.swing.JRadioButton jRadioButtonRX1;
