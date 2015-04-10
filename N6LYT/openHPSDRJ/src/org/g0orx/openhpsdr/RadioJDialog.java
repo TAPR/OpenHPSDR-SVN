@@ -5,6 +5,7 @@
  */
 package org.g0orx.openhpsdr;
 
+import javax.swing.DefaultListModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JRadioButton;
@@ -21,11 +22,11 @@ public class RadioJDialog extends javax.swing.JDialog {
     /**
      * Creates new form RadioJDialog
      */
-    public RadioJDialog(java.awt.Frame parent, boolean modal) {
+    public RadioJDialog(java.awt.Frame parent, boolean modal, WDSP wdsp) {
         super(parent, modal);
         initComponents();
         configuration = Configuration.getInstance();
-        wdsp = WDSP.getInstance();
+        this.wdsp = wdsp;
         this.jCheckBoxAEFilter.setSelected(configuration.NB2_AE);
         this.jRadioButtonLinear.setSelected(configuration.NB2_GAIN == 0);
         this.jRadioButtonLog.setSelected(configuration.NB2_GAIN == 1);
@@ -137,13 +138,13 @@ public class RadioJDialog extends javax.swing.JDialog {
 
         if (configuration.discovered.getDevice() == Discovered.DEVICE_ORION) {
 
-            this.jCheckBoxPTTEnabled.setSelected(configuration.orionmicptt==Configuration.MIC_PTT_ENABLE);
-            this.jCheckBoxBiasEnabled.setSelected(configuration.orionmicbias==Configuration.MIC_BIAS_ENABLE);
+            this.jCheckBoxPTTEnabled.setSelected(configuration.orionmicptt == Configuration.MIC_PTT_ENABLE);
+            this.jCheckBoxBiasEnabled.setSelected(configuration.orionmicbias == Configuration.MIC_BIAS_ENABLE);
 
-            if(this.configuration.oriontipring==Configuration.MIC_PTT_TO_RING_BIAS_TO_TIP) {
+            if (this.configuration.oriontipring == Configuration.MIC_PTT_TO_RING_BIAS_TO_TIP) {
                 this.jRadioButtonPTTtoRing.setSelected(true);
             }
-            if(this.configuration.oriontipring==Configuration.MIC_PTT_TO_TIP_BIAS_TO_RING) {
+            if (this.configuration.oriontipring == Configuration.MIC_PTT_TO_TIP_BIAS_TO_RING) {
                 this.jRadioButtonPTTtoTip.setSelected(true);
             }
 
@@ -152,6 +153,162 @@ public class RadioJDialog extends javax.swing.JDialog {
             this.jCheckBoxBiasEnabled.setEnabled(false);
             this.jRadioButtonPTTtoRing.setEnabled(false);
             this.jRadioButtonPTTtoTip.setEnabled(false);
+        }
+
+        switch ((int) configuration.samplerate) {
+            case 48000:
+                this.jRadioButtonRate48K.setSelected(true);
+                break;
+            case 96000:
+                this.jRadioButtonRate96K.setSelected(true);
+                break;
+            case 192000:
+                this.jRadioButtonRate192K.setSelected(true);
+                break;
+            case 384000:
+                this.jRadioButtonRate384K.setSelected(true);
+                break;
+        }
+        switch ((int) configuration.buffersize) {
+            case 64:
+                this.jRadioButtonBuffer64.setSelected(true);
+                break;
+            case 128:
+                this.jRadioButtonBuffer128.setSelected(true);
+                break;
+            case 256:
+                this.jRadioButtonBuffer256.setSelected(true);
+                break;
+            case 512:
+                this.jRadioButtonBuffer512.setSelected(true);
+                break;
+            case 1024:
+                this.jRadioButtonBuffer1024.setSelected(true);
+                break;
+            case 2048:
+                this.jRadioButtonBuffer2048.setSelected(true);
+                break;
+        }
+        switch (configuration.fftsize) {
+            case 256:
+                this.jRadioButton256.setSelected(true);
+                break;
+            case 512:
+                this.jRadioButton512.setSelected(true);
+                break;
+            case 1024:
+                this.jRadioButton1024.setSelected(true);
+                break;
+            case 2048:
+                this.jRadioButton2048.setSelected(true);
+                break;
+            case 4096:
+                this.jRadioButton4096.setSelected(true);
+                break;
+            case 8192:
+                this.jRadioButton8192.setSelected(true);
+                break;
+            case 16384:
+                this.jRadioButton16384.setSelected(true);
+                break;
+        }
+
+        DefaultListModel listModel = new DefaultListModel();
+        jListRadio.setModel(listModel);
+        switch (configuration.discovered.getDevice()) {
+            case Discovered.DEVICE_METIS:
+                listModel.addElement("Metis, Mercury, Penelope");
+                listModel.addElement("Metis, Mercury, Pennylane");
+                listModel.addElement("Metis, Mercury, Penelope, Alex");
+                listModel.addElement("Metis, Mercury, Pennylane, Alex");
+                switch (configuration.radio) {
+                    case Configuration.RADIO_UNKNOWN:
+                        configuration.radio = Configuration.METIS_PENELOPE;
+                        jListRadio.setSelectedIndex(0);
+                        break;
+                    case Configuration.METIS_PENELOPE:
+                        jListRadio.setSelectedIndex(0);
+                        break;
+                    case Configuration.METIS_PENNYLANE:
+                        jListRadio.setSelectedIndex(1);
+                        break;
+                    case Configuration.METIS_PENELOPE_ALEX:
+                        jListRadio.setSelectedIndex(2);
+                        break;
+                    case Configuration.METIS_PENNYLANE_ALEX:
+                        jListRadio.setSelectedIndex(3);
+                        break;
+                }
+                break;
+            case Discovered.DEVICE_HERMES:
+                listModel.addElement("Hermes");
+                listModel.addElement("Hermes, Alex");
+                listModel.addElement("Hermes, Apollo");
+                listModel.addElement("ANAN-10");
+                listModel.addElement("ANAN-100");
+                switch (configuration.radio) {
+                    case Configuration.RADIO_UNKNOWN:
+                        configuration.radio = Configuration.HERMES_ANAN100;
+                        jListRadio.setSelectedIndex(4);
+                        break;
+                    case Configuration.HERMES_BOARD_ONLY:
+                        jListRadio.setSelectedIndex(0);
+                        break;
+                    case Configuration.HERMES_ALEX:
+                        jListRadio.setSelectedIndex(1);
+                        break;
+                    case Configuration.HERMES_APOLLO:
+                        jListRadio.setSelectedIndex(2);
+                        break;
+                    case Configuration.HERMES_ANAN10:
+                        jListRadio.setSelectedIndex(3);
+                        break;
+                    case Configuration.HERMES_ANAN100:
+                        jListRadio.setSelectedIndex(4);
+                        break;
+                }
+                break;
+            case Discovered.DEVICE_ANGELIA:
+                listModel.addElement("Angelia");
+                listModel.addElement("ANAN-100D");
+                switch (configuration.radio) {
+                    case Configuration.RADIO_UNKNOWN:
+                        configuration.radio = Configuration.ANGELIA_ANAN100D;
+                        jListRadio.setSelectedIndex(1);
+                        break;
+                    case Configuration.ANGELIA_BOARD_ONLY:
+                        jListRadio.setSelectedIndex(0);
+                        break;
+                    case Configuration.ANGELIA_ANAN100D:
+                        jListRadio.setSelectedIndex(1);
+                        break;
+                }
+                break;
+            case Discovered.DEVICE_ORION:
+                listModel.addElement("Orion");
+                listModel.addElement("ANAN-200D");
+                switch (configuration.radio) {
+                    case Configuration.RADIO_UNKNOWN:
+                        configuration.radio = Configuration.ORION_ANAN200D;
+                        jListRadio.setSelectedIndex(1);
+                        break;
+                    case Configuration.ORION_BOARD_ONLY:
+                        jListRadio.setSelectedIndex(0);
+                        break;
+                    case Configuration.ORION_ANAN200D:
+                        jListRadio.setSelectedIndex(1);
+                        break;
+                }
+                break;
+            case Discovered.DEVICE_HERMES_LITE:
+                listModel.addElement("Hermes Lite");
+                configuration.radio = Configuration.HERMES_LITE_ONLY;
+                jListRadio.setSelectedIndex(0);
+                break;
+        }
+        if (wdsp != null) {
+            this.jTabbedPane1.setEnabledAt(0, false);
+            this.jTabbedPane1.setEnabledAt(1, false);
         }
     }
 
@@ -171,6 +328,30 @@ public class RadioJDialog extends javax.swing.JDialog {
         buttonGroupRXAnt = new javax.swing.ButtonGroup();
         buttonGroupTipRing = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListRadio = new javax.swing.JList();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jRadioButtonRate48K = new javax.swing.JRadioButton();
+        jRadioButtonRate96K = new javax.swing.JRadioButton();
+        jRadioButtonRate192K = new javax.swing.JRadioButton();
+        jRadioButtonRate384K = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
+        jRadioButton256 = new javax.swing.JRadioButton();
+        jRadioButton512 = new javax.swing.JRadioButton();
+        jRadioButton1024 = new javax.swing.JRadioButton();
+        jRadioButton2048 = new javax.swing.JRadioButton();
+        jRadioButton4096 = new javax.swing.JRadioButton();
+        jRadioButton8192 = new javax.swing.JRadioButton();
+        jRadioButton16384 = new javax.swing.JRadioButton();
+        jLabel10 = new javax.swing.JLabel();
+        jRadioButtonBuffer64 = new javax.swing.JRadioButton();
+        jRadioButtonBuffer128 = new javax.swing.JRadioButton();
+        jRadioButtonBuffer256 = new javax.swing.JRadioButton();
+        jRadioButtonBuffer512 = new javax.swing.JRadioButton();
+        jRadioButtonBuffer1024 = new javax.swing.JRadioButton();
+        jRadioButtonBuffer2048 = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jRadioButtonAnt1 = new javax.swing.JRadioButton();
         jRadioButtonAnt2 = new javax.swing.JRadioButton();
@@ -181,17 +362,6 @@ public class RadioJDialog extends javax.swing.JDialog {
         jRadioButtonRXXV = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jRadioButtonLinear = new javax.swing.JRadioButton();
-        jRadioButtonLog = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
-        jRadioButtonOSMS = new javax.swing.JRadioButton();
-        jRadioButtonMMSE = new javax.swing.JRadioButton();
-        jLabel3 = new javax.swing.JLabel();
-        jRadioButtonPreAGC = new javax.swing.JRadioButton();
-        jRadioButtonPostAGC = new javax.swing.JRadioButton();
-        jCheckBoxAEFilter = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabelPASettings = new javax.swing.JLabel();
         jSliderPASettings = new javax.swing.JSlider();
@@ -219,9 +389,261 @@ public class RadioJDialog extends javax.swing.JDialog {
         jRadioButtonPTTtoTip = new javax.swing.JRadioButton();
         jCheckBoxPTTEnabled = new javax.swing.JCheckBox();
         jCheckBoxBiasEnabled = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jRadioButtonLinear = new javax.swing.JRadioButton();
+        jRadioButtonLog = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        jRadioButtonOSMS = new javax.swing.JRadioButton();
+        jRadioButtonMMSE = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
+        jRadioButtonPreAGC = new javax.swing.JRadioButton();
+        jRadioButtonPostAGC = new javax.swing.JRadioButton();
+        jCheckBoxAEFilter = new javax.swing.JCheckBox();
         jButtonClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jListRadio.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListRadioValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jListRadio);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(167, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1)
+                .addGap(23, 23, 23))
+        );
+
+        jTabbedPane1.addTab("Radio", jPanel7);
+
+        jLabel6.setText("Sample Rate:");
+
+        jRadioButtonRate48K.setText("48K");
+        jRadioButtonRate48K.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonRate48KActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonRate96K.setText("96K");
+        jRadioButtonRate96K.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonRate96KActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonRate192K.setText("192K");
+        jRadioButtonRate192K.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonRate192KActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonRate384K.setText("384K");
+        jRadioButtonRate384K.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonRate384KActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("FFT Size:");
+
+        jRadioButton256.setText("256");
+        jRadioButton256.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton256ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton512.setText("512");
+        jRadioButton512.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton512ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton1024.setText("1024");
+        jRadioButton1024.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1024ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton2048.setText("2048");
+        jRadioButton2048.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2048ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton4096.setText("4096");
+        jRadioButton4096.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4096ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton8192.setText("8192");
+        jRadioButton8192.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton8192ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton16384.setText("16384");
+        jRadioButton16384.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton16384ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Buffer Size:");
+
+        jRadioButtonBuffer64.setText("64");
+        jRadioButtonBuffer64.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBuffer64ActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonBuffer128.setText("128");
+        jRadioButtonBuffer128.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBuffer128ActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonBuffer256.setText("256");
+        jRadioButtonBuffer256.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBuffer256ActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonBuffer512.setText("512");
+        jRadioButtonBuffer512.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBuffer512ActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonBuffer1024.setText("1024");
+        jRadioButtonBuffer1024.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBuffer1024ActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonBuffer2048.setText("2048");
+        jRadioButtonBuffer2048.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBuffer2048ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonRate192K)
+                            .addComponent(jRadioButtonRate96K)
+                            .addComponent(jRadioButtonRate48K)
+                            .addComponent(jRadioButtonRate384K))
+                        .addGap(19, 19, 19)))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonBuffer128)
+                            .addComponent(jRadioButtonBuffer64)
+                            .addComponent(jRadioButtonBuffer256)
+                            .addComponent(jRadioButtonBuffer512)
+                            .addComponent(jRadioButtonBuffer1024)
+                            .addComponent(jRadioButtonBuffer2048))))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButton16384)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton512)
+                            .addComponent(jRadioButton256)
+                            .addComponent(jRadioButton1024))
+                        .addComponent(jRadioButton2048)
+                        .addComponent(jRadioButton4096)
+                        .addComponent(jRadioButton8192)))
+                .addContainerGap(177, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonBuffer64)
+                            .addComponent(jRadioButtonRate48K))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonBuffer128)
+                            .addComponent(jRadioButtonRate96K))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonBuffer256)
+                            .addComponent(jRadioButtonRate192K))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonBuffer512)
+                            .addComponent(jRadioButtonRate384K))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonBuffer1024)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonBuffer2048))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jRadioButton256)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton512)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton1024)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton2048)
+                        .addGap(7, 7, 7)
+                        .addComponent(jRadioButton4096, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton8192)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton16384)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("DSP", jPanel6);
 
         buttonGroupTXAnt.add(jRadioButtonAnt1);
         jRadioButtonAnt1.setText("Ant 1");
@@ -346,7 +768,7 @@ public class RadioJDialog extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jRadioButtonNone))))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,128 +791,10 @@ public class RadioJDialog extends javax.swing.JDialog {
                     .addComponent(jRadioButtonRX2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButtonRXXV)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Antenna", jPanel3);
-
-        jLabel1.setText("Gain Method:");
-
-        buttonGroupGain.add(jRadioButtonLinear);
-        jRadioButtonLinear.setText("Linear");
-        jRadioButtonLinear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonLinearActionPerformed(evt);
-            }
-        });
-
-        buttonGroupGain.add(jRadioButtonLog);
-        jRadioButtonLog.setText("Log");
-        jRadioButtonLog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonLogActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("NPE Method:");
-
-        buttonGroupNPEMethod.add(jRadioButtonOSMS);
-        jRadioButtonOSMS.setText("OSMS");
-        jRadioButtonOSMS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonOSMSActionPerformed(evt);
-            }
-        });
-
-        buttonGroupNPEMethod.add(jRadioButtonMMSE);
-        jRadioButtonMMSE.setText("MMSE");
-        jRadioButtonMMSE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMMSEActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Position:");
-
-        buttonGroupPosition.add(jRadioButtonPreAGC);
-        jRadioButtonPreAGC.setText("Pre AGC");
-        jRadioButtonPreAGC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonPreAGCActionPerformed(evt);
-            }
-        });
-
-        buttonGroupPosition.add(jRadioButtonPostAGC);
-        jRadioButtonPostAGC.setText("Post AGC");
-        jRadioButtonPostAGC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonPostAGCActionPerformed(evt);
-            }
-        });
-
-        jCheckBoxAEFilter.setText("AE Filter");
-        jCheckBoxAEFilter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxAEFilterActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCheckBoxAEFilter)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButtonLinear)
-                                    .addComponent(jRadioButtonLog))
-                                .addGap(53, 53, 53)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButtonMMSE)
-                                    .addComponent(jRadioButtonOSMS)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButtonPreAGC)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jRadioButtonPostAGC))))
-                        .addContainerGap(108, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jCheckBoxAEFilter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButtonOSMS)
-                    .addComponent(jRadioButtonPreAGC)
-                    .addComponent(jRadioButtonLinear))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButtonMMSE)
-                    .addComponent(jRadioButtonPostAGC)
-                    .addComponent(jRadioButtonLog))
-                .addContainerGap(122, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("NB2", jPanel1);
 
         jLabelPASettings.setText("Band:");
 
@@ -508,7 +812,7 @@ public class RadioJDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabelPASettings, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(jSliderPASettings, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                .addComponent(jSliderPASettings, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -518,7 +822,7 @@ public class RadioJDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSliderPASettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelPASettings))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("PA Settings", jPanel2);
@@ -659,7 +963,7 @@ public class RadioJDialog extends javax.swing.JDialog {
                             .addComponent(jCheckBoxOCTx5)
                             .addComponent(jCheckBoxOCTx6)
                             .addComponent(jCheckBoxOCTx7))))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -755,7 +1059,7 @@ public class RadioJDialog extends javax.swing.JDialog {
                     .addComponent(jRadioButtonPTTtoTip)
                     .addComponent(jCheckBoxBiasEnabled)
                     .addComponent(jCheckBoxPTTEnabled))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -775,6 +1079,124 @@ public class RadioJDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Audio", jPanel5);
 
+        jLabel1.setText("Gain Method:");
+
+        buttonGroupGain.add(jRadioButtonLinear);
+        jRadioButtonLinear.setText("Linear");
+        jRadioButtonLinear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonLinearActionPerformed(evt);
+            }
+        });
+
+        buttonGroupGain.add(jRadioButtonLog);
+        jRadioButtonLog.setText("Log");
+        jRadioButtonLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonLogActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("NPE Method:");
+
+        buttonGroupNPEMethod.add(jRadioButtonOSMS);
+        jRadioButtonOSMS.setText("OSMS");
+        jRadioButtonOSMS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonOSMSActionPerformed(evt);
+            }
+        });
+
+        buttonGroupNPEMethod.add(jRadioButtonMMSE);
+        jRadioButtonMMSE.setText("MMSE");
+        jRadioButtonMMSE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMMSEActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Position:");
+
+        buttonGroupPosition.add(jRadioButtonPreAGC);
+        jRadioButtonPreAGC.setText("Pre AGC");
+        jRadioButtonPreAGC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonPreAGCActionPerformed(evt);
+            }
+        });
+
+        buttonGroupPosition.add(jRadioButtonPostAGC);
+        jRadioButtonPostAGC.setText("Post AGC");
+        jRadioButtonPostAGC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonPostAGCActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxAEFilter.setText("AE Filter");
+        jCheckBoxAEFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxAEFilterActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCheckBoxAEFilter)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonLinear)
+                                    .addComponent(jRadioButtonLog))
+                                .addGap(53, 53, 53)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonMMSE)
+                                    .addComponent(jRadioButtonOSMS)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonPreAGC)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jRadioButtonPostAGC))))
+                        .addContainerGap(199, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jCheckBoxAEFilter)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonOSMS)
+                    .addComponent(jRadioButtonPreAGC)
+                    .addComponent(jRadioButtonLinear))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonMMSE)
+                    .addComponent(jRadioButtonPostAGC)
+                    .addComponent(jRadioButtonLog))
+                .addContainerGap(120, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("NB2", jPanel1);
+
         jButtonClose.setText("Close");
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -786,9 +1208,11 @@ public class RadioJDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(174, 174, 174)
+                .addGap(249, 249, 249)
                 .addComponent(jButtonClose)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -810,37 +1234,51 @@ public class RadioJDialog extends javax.swing.JDialog {
 
     private void jRadioButtonOSMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOSMSActionPerformed
         configuration.NB2_NPE = 0;
-        wdsp.SetRXAEMNRnpeMethod(Channel.RX, 0);
+        if (wdsp != null) {
+            wdsp.SetRXAEMNRnpeMethod(Channel.RX, 0);
+        }
     }//GEN-LAST:event_jRadioButtonOSMSActionPerformed
 
     private void jCheckBoxAEFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxAEFilterActionPerformed
         configuration.NB2_AE = this.jCheckBoxAEFilter.isSelected();
-        wdsp.SetRXAEMNRaeRun(Channel.RX, configuration.NB2_AE ? 1 : 0);
+        if (wdsp != null) {
+            wdsp.SetRXAEMNRaeRun(Channel.RX, configuration.NB2_AE ? 1 : 0);
+        }
     }//GEN-LAST:event_jCheckBoxAEFilterActionPerformed
 
     private void jRadioButtonLinearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLinearActionPerformed
         configuration.NB2_GAIN = 0;
-        wdsp.SetRXAEMNRgainMethod(Channel.RX, 0);
+        if (wdsp != null) {
+            wdsp.SetRXAEMNRgainMethod(Channel.RX, 0);
+        }
     }//GEN-LAST:event_jRadioButtonLinearActionPerformed
 
     private void jRadioButtonLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLogActionPerformed
         configuration.NB2_GAIN = 1;
-        wdsp.SetRXAEMNRgainMethod(Channel.RX, 1);
+        if (wdsp != null) {
+            wdsp.SetRXAEMNRgainMethod(Channel.RX, 1);
+        }
     }//GEN-LAST:event_jRadioButtonLogActionPerformed
 
     private void jRadioButtonMMSEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMMSEActionPerformed
         configuration.NB2_NPE = 1;
-        wdsp.SetRXAEMNRnpeMethod(Channel.RX, 1);
+        if (wdsp != null) {
+            wdsp.SetRXAEMNRnpeMethod(Channel.RX, 1);
+        }
     }//GEN-LAST:event_jRadioButtonMMSEActionPerformed
 
     private void jRadioButtonPreAGCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPreAGCActionPerformed
         configuration.NB2_POSITION = 0;
-        wdsp.SetRXAEMNRPosition(Channel.RX, 0);
+        if (wdsp != null) {
+            wdsp.SetRXAEMNRPosition(Channel.RX, 0);
+        }
     }//GEN-LAST:event_jRadioButtonPreAGCActionPerformed
 
     private void jRadioButtonPostAGCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPostAGCActionPerformed
         configuration.NB2_POSITION = 1;
-        wdsp.SetRXAEMNRPosition(Channel.RX, 1);
+        if (wdsp != null) {
+            wdsp.SetRXAEMNRPosition(Channel.RX, 1);
+        }
     }//GEN-LAST:event_jRadioButtonPostAGCActionPerformed
 
     private void jRadioButtonAnt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAnt2ActionPerformed
@@ -1050,6 +1488,120 @@ public class RadioJDialog extends javax.swing.JDialog {
         configuration.oriontipring = Configuration.MIC_PTT_TO_RING_BIAS_TO_TIP;
     }//GEN-LAST:event_jRadioButtonPTTtoRingActionPerformed
 
+    private void jRadioButtonRate48KActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonRate48KActionPerformed
+        configuration.samplerate = 48000;
+    }//GEN-LAST:event_jRadioButtonRate48KActionPerformed
+
+    private void jRadioButtonRate96KActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonRate96KActionPerformed
+        configuration.samplerate = 96000;
+    }//GEN-LAST:event_jRadioButtonRate96KActionPerformed
+
+    private void jRadioButtonRate192KActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonRate192KActionPerformed
+        configuration.samplerate = 192000;
+    }//GEN-LAST:event_jRadioButtonRate192KActionPerformed
+
+    private void jRadioButtonRate384KActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonRate384KActionPerformed
+        configuration.samplerate = 384000;
+    }//GEN-LAST:event_jRadioButtonRate384KActionPerformed
+
+    private void jRadioButton256ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton256ActionPerformed
+        configuration.fftsize = 256;
+    }//GEN-LAST:event_jRadioButton256ActionPerformed
+
+    private void jRadioButton512ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton512ActionPerformed
+        configuration.fftsize = 512;
+    }//GEN-LAST:event_jRadioButton512ActionPerformed
+
+    private void jRadioButton1024ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1024ActionPerformed
+        configuration.fftsize = 1024;
+    }//GEN-LAST:event_jRadioButton1024ActionPerformed
+
+    private void jRadioButton2048ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2048ActionPerformed
+        configuration.fftsize = 2048;
+    }//GEN-LAST:event_jRadioButton2048ActionPerformed
+
+    private void jRadioButton4096ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4096ActionPerformed
+        configuration.fftsize = 4096;
+    }//GEN-LAST:event_jRadioButton4096ActionPerformed
+
+    private void jRadioButton8192ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8192ActionPerformed
+        configuration.fftsize = 8192;
+    }//GEN-LAST:event_jRadioButton8192ActionPerformed
+
+    private void jRadioButtonBuffer64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBuffer64ActionPerformed
+        configuration.buffersize = 64;
+    }//GEN-LAST:event_jRadioButtonBuffer64ActionPerformed
+
+    private void jRadioButtonBuffer128ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBuffer128ActionPerformed
+        configuration.buffersize = 128;
+    }//GEN-LAST:event_jRadioButtonBuffer128ActionPerformed
+
+    private void jRadioButtonBuffer256ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBuffer256ActionPerformed
+        configuration.buffersize = 256;
+    }//GEN-LAST:event_jRadioButtonBuffer256ActionPerformed
+
+    private void jRadioButtonBuffer512ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBuffer512ActionPerformed
+        configuration.buffersize = 512;
+    }//GEN-LAST:event_jRadioButtonBuffer512ActionPerformed
+
+    private void jRadioButtonBuffer1024ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBuffer1024ActionPerformed
+        configuration.buffersize = 1024;
+    }//GEN-LAST:event_jRadioButtonBuffer1024ActionPerformed
+
+    private void jRadioButton16384ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton16384ActionPerformed
+        configuration.fftsize = 16384;
+    }//GEN-LAST:event_jRadioButton16384ActionPerformed
+
+    private void jRadioButtonBuffer2048ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBuffer2048ActionPerformed
+        configuration.buffersize = 2048;
+    }//GEN-LAST:event_jRadioButtonBuffer2048ActionPerformed
+
+    private void jListRadioValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListRadioValueChanged
+        switch (jListRadio.getSelectedIndex()) {
+            case 0:
+                if (configuration.discovered.getDevice() == Discovered.DEVICE_METIS) {
+                    configuration.radio = Configuration.METIS_PENELOPE;
+                } else if (configuration.discovered.getDevice() == Discovered.DEVICE_HERMES) {
+                    configuration.radio = Configuration.HERMES_BOARD_ONLY;
+                } else if (configuration.discovered.getDevice() == Discovered.DEVICE_ANGELIA) {
+                    configuration.radio = Configuration.ANGELIA_BOARD_ONLY;
+                } else if (configuration.discovered.getDevice() == Discovered.DEVICE_ORION) {
+                    configuration.radio = Configuration.ORION_BOARD_ONLY;
+                }
+                break;
+            case 1:
+                if (configuration.discovered.getDevice() == Discovered.DEVICE_METIS) {
+                    configuration.radio = Configuration.METIS_PENNYLANE;
+                } else if (configuration.discovered.getDevice() == Discovered.DEVICE_HERMES) {
+                    configuration.radio = Configuration.HERMES_ALEX;
+                } else if (configuration.discovered.getDevice() == Discovered.DEVICE_ANGELIA) {
+                    configuration.radio = Configuration.ANGELIA_ANAN100D;
+                } else if (configuration.discovered.getDevice() == Discovered.DEVICE_ORION) {
+                    configuration.radio = Configuration.ORION_ANAN200D;
+                }
+                break;
+            case 2:
+                if (configuration.discovered.getDevice() == Discovered.DEVICE_METIS) {
+                    configuration.radio = Configuration.METIS_PENELOPE_ALEX;
+                } else if (configuration.discovered.getDevice() == Discovered.DEVICE_HERMES) {
+                    configuration.radio = Configuration.HERMES_APOLLO;
+                }
+                break;
+            case 3:
+                if (configuration.discovered.getDevice() == Discovered.DEVICE_METIS) {
+                    configuration.radio = Configuration.METIS_PENNYLANE_ALEX;
+                } else if (configuration.discovered.getDevice() == Discovered.DEVICE_HERMES) {
+                    configuration.radio = Configuration.HERMES_ANAN10;
+                }
+                break;
+            case 4:
+                if (configuration.discovered.getDevice() == Discovered.DEVICE_HERMES) {
+                    configuration.radio = Configuration.HERMES_ANAN100;
+                }
+                break;
+        }
+    }//GEN-LAST:event_jListRadioValueChanged
+
     private Configuration configuration;
     private WDSP wdsp;
 
@@ -1080,22 +1632,41 @@ public class RadioJDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxOCTx7;
     private javax.swing.JCheckBox jCheckBoxPTTEnabled;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelOCBand;
     private javax.swing.JLabel jLabelPASettings;
+    private javax.swing.JList jListRadio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JRadioButton jRadioButton1024;
+    private javax.swing.JRadioButton jRadioButton16384;
+    private javax.swing.JRadioButton jRadioButton2048;
+    private javax.swing.JRadioButton jRadioButton256;
+    private javax.swing.JRadioButton jRadioButton4096;
+    private javax.swing.JRadioButton jRadioButton512;
+    private javax.swing.JRadioButton jRadioButton8192;
     private javax.swing.JRadioButton jRadioButtonAnt1;
     private javax.swing.JRadioButton jRadioButtonAnt2;
     private javax.swing.JRadioButton jRadioButtonAnt3;
+    private javax.swing.JRadioButton jRadioButtonBuffer1024;
+    private javax.swing.JRadioButton jRadioButtonBuffer128;
+    private javax.swing.JRadioButton jRadioButtonBuffer2048;
+    private javax.swing.JRadioButton jRadioButtonBuffer256;
+    private javax.swing.JRadioButton jRadioButtonBuffer512;
+    private javax.swing.JRadioButton jRadioButtonBuffer64;
     private javax.swing.JRadioButton jRadioButtonLinear;
     private javax.swing.JRadioButton jRadioButtonLog;
     private javax.swing.JRadioButton jRadioButtonMMSE;
@@ -1108,6 +1679,11 @@ public class RadioJDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonRX1;
     private javax.swing.JRadioButton jRadioButtonRX2;
     private javax.swing.JRadioButton jRadioButtonRXXV;
+    private javax.swing.JRadioButton jRadioButtonRate192K;
+    private javax.swing.JRadioButton jRadioButtonRate384K;
+    private javax.swing.JRadioButton jRadioButtonRate48K;
+    private javax.swing.JRadioButton jRadioButtonRate96K;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSliderPASettings;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
