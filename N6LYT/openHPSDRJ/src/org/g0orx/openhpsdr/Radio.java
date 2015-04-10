@@ -5,7 +5,6 @@
  */
 package org.g0orx.openhpsdr;
 
-import com.sun.glass.ui.Cursor;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.event.ComponentEvent;

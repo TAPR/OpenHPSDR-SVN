@@ -14,11 +14,6 @@ import org.g0orx.openhpsdr.discovery.Discovered;
 import org.g0orx.openhpsdr.modes.Modes;
 import org.g0orx.openhpsdr.wdsp.WDSP;
 
-//import android.media.AudioFormat;
-//import android.media.AudioManager;
-//import android.media.AudioTrack;
-//import android.util.Log;
-
 public class Metis extends Thread {
 
     public Metis(int pixels) {
