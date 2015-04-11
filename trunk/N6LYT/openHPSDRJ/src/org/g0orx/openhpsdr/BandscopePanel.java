@@ -19,37 +19,20 @@ import org.g0orx.openhpsdr.discovery.Discovered;
  *
  * @author john
  */
-public class BandscopePanel extends javax.swing.JPanel implements ComponentListener {
+public class BandscopePanel extends javax.swing.JPanel {
 
     public BandscopePanel() {
         super();
-        this.configuration = Configuration.getInstance();
+
         setVisible(true);
     }
 
-    public void setMetis(Metis metis) {
-        this.metis = metis;
-    }
-
-    public void componentShown(ComponentEvent e) {
-    }
-
-    public void componentHidden(ComponentEvent e) {
-    }
-
-    public void componentResized(ComponentEvent e) {
-        if (metis != null) {
-            metis.setBandscopePixels(this.getWidth());
-        }
-    }
-    
-    public void componentMoved(ComponentEvent e) {
-    }
-    
     public void paintComponent(Graphics g) {
         if (this.getWidth() == 0 || this.getHeight() == 0) {
             return;
         }
+
+        this.configuration = Configuration.getInstance();
 
         final Graphics2D g2d = (Graphics2D) g.create();
         try {
@@ -58,11 +41,9 @@ public class BandscopePanel extends javax.swing.JPanel implements ComponentListe
             //g2d.setTextSize(16.0F);
             g2d.setColor(Color.BLUE);
             g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
-            
-            
 
-            float hzPerPixel = 62440000F / (float) this.getWidth(); // 124.88 MHz xtal
-            if (configuration.discovered!=null && configuration.discovered.getDevice() == Discovered.DEVICE_HERMES_LITE) {
+            float hzPerPixel = 61440000/*62440000F*/ / (float) this.getWidth(); // 124.88 MHz xtal
+            if (configuration.discovered != null && configuration.discovered.getDevice() == Discovered.DEVICE_HERMES_LITE) {
                 hzPerPixel = 30720000F / (float) this.getWidth(); // 61.44 MHz xtal
             }
 
@@ -75,7 +56,7 @@ public class BandscopePanel extends javax.swing.JPanel implements ComponentListe
                     int x2 = (int) ((float) edges.getHigh() / hzPerPixel);
                     if (x1 != x2) {
                         g2d.setColor(Color.DARK_GRAY);
-                        g2d.fillRect(x1, 0, x2-x1, this.getHeight() - 30);
+                        g2d.fillRect(x1, 0, x2 - x1, this.getHeight());
                         g2d.setColor(Color.WHITE);
                         g2d.drawString(band.getName(), x1, 20);
                     }
@@ -104,7 +85,7 @@ public class BandscopePanel extends javax.swing.JPanel implements ComponentListe
             String fs;
 
             int maxfrequency = 65;
-            if (configuration.discovered!=null && configuration.discovered.getDevice() == Discovered.DEVICE_HERMES_LITE) {
+            if (configuration.discovered != null && configuration.discovered.getDevice() == Discovered.DEVICE_HERMES_LITE) {
                 maxfrequency = 32;
             }
 
@@ -112,14 +93,18 @@ public class BandscopePanel extends javax.swing.JPanel implements ComponentListe
                 f = (float) i * 1000000.0F;
                 int x = (int) (f / hzPerPixel);
                 g2d.setColor(Color.LIGHT_GRAY);
-                g2d.drawLine(x, 0, x, this.getHeight() - 30);
+                g2d.drawLine(x, 0, x, this.getHeight());
                 fs = String.format("%d", i);
                 g2d.setColor(Color.WHITE);
                 g2d.drawString(fs, x - 10, this.getHeight() - 5);
             }
-
-            g2d.setColor(Color.YELLOW);
+            
             g2d.setStroke(stroke);
+            g2d.setColor(Color.RED);
+            int x=(int)((float)configuration.bands.get().get().getFrequency()/hzPerPixel);
+            g2d.drawLine(x, 0, x, this.getHeight());
+            
+            g2d.setColor(Color.YELLOW);
             if (xpoints != null) {
                 g2d.drawPolyline(xpoints, ypoints, xpoints.length);
             }
@@ -130,9 +115,9 @@ public class BandscopePanel extends javax.swing.JPanel implements ComponentListe
     }
 
     public void update(float[] samples) {
-        //Log.i("BandscopeView","update");
-
         if (this.getWidth() == samples.length) {
+
+            this.configuration = Configuration.getInstance();
 
             BandStack bandstack = configuration.bands.get().get();
 
@@ -155,13 +140,15 @@ public class BandscopePanel extends javax.swing.JPanel implements ComponentListe
                         .floor(((float) HIGH - sample)
                                 * (float) this.getHeight()
                                 / (float) (HIGH - LOW));
-                
+
                 xpoints[i] = i;
                 ypoints[i] = (int) sample;
-            
+
             }
 
             this.repaint();
+        } else {
+            Log.i("BandscopeView", "update samples=" + samples.length + " width=" + getWidth());
         }
 
     }
@@ -174,7 +161,7 @@ public class BandscopePanel extends javax.swing.JPanel implements ComponentListe
 
     private int[] xpoints;
     private int[] ypoints;
-    
+
     private Stroke dotted = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{1, 4}, 0);
 
 }

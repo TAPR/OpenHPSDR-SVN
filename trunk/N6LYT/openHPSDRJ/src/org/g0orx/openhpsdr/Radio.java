@@ -64,14 +64,12 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.jButtonDiscover.setBackground(Color.WHITE);
         this.jButtonConfigure.setBackground(Color.WHITE);
         this.jButtonStart.setBackground(Color.WHITE);
-        this.jButtonBandscope.setBackground(Color.WHITE);
         this.jButtonMOX.setBackground(Color.WHITE);
         this.jButtonTune.setBackground(Color.WHITE);
         this.jButtonDiscover.setEnabled(false);
         this.jButtonConfigure.setEnabled(false);
         this.jButtonStart.setEnabled(false);
         this.jButtonMOX.setEnabled(false);
-        this.jButtonBandscope.setEnabled(false);
         this.jButtonTune.setEnabled(false);
         this.jSliderAFGain.setEnabled(false);
         this.jSliderAGCGain.setEnabled(false);
@@ -246,7 +244,6 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
         this.jButtonDiscover.setEnabled(false);
         this.jButtonMOX.setEnabled(true);
-        this.jButtonBandscope.setEnabled(true);
         this.jButtonTune.setEnabled(true);
 
         this.jButtonStart.setText("Stop");
@@ -363,7 +360,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         metis.setPTTListener(this);
         metis.start();
 
-        update = new DisplayUpdate(vfoPanel, panadapterPanel, waterfallPanel, meterJPanel, bandscope, metis);
+        update = new DisplayUpdate(vfoPanel, panadapterPanel, waterfallPanel, meterJPanel, this.bandscopePanel, metis);
         update.startTimer();
         Log.i("Radio", "Start completed");
         this.setTitle(title);
@@ -397,7 +394,6 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.jButtonStart.setText("Start");
         this.jButtonDiscover.setEnabled(true);
         this.jButtonMOX.setEnabled(false);
-        this.jButtonBandscope.setEnabled(false);
         this.jButtonTune.setEnabled(false);
         this.jSliderAFGain.setEnabled(false);
         this.jSliderAGCGain.setEnabled(false);
@@ -425,13 +421,6 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         configuration.myHeight = this.getHeight();
         configuration.myX = this.getLocation().x;
         configuration.myY = this.getLocation().y;
-
-        if (bandscope != null) {
-            configuration.bandscopeWidth = bandscope.getWidth();
-            configuration.bandscopeHeight = bandscope.getHeight();
-            configuration.bandscopeX = bandscope.getLocation().x;
-            configuration.bandscopeY = bandscope.getLocation().y;
-        }
 
         try {
             FileOutputStream fos = new FileOutputStream(filename);
@@ -489,7 +478,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         jLabel2 = new javax.swing.JLabel();
         jComboBoxStep = new javax.swing.JComboBox();
         meterJPanel = new org.g0orx.openhpsdr.MeterJPanel();
-        jButtonBandscope = new javax.swing.JButton();
+        bandscopePanel = new org.g0orx.openhpsdr.BandscopePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 1024, 400));
@@ -510,11 +499,11 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         waterfallPanel.setLayout(waterfallPanelLayout);
         waterfallPanelLayout.setHorizontalGroup(
             waterfallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1057, Short.MAX_VALUE)
         );
         waterfallPanelLayout.setVerticalGroup(
             waterfallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 104, Short.MAX_VALUE)
+            .addGap(0, 138, Short.MAX_VALUE)
         );
 
         jButtonDiscover.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
@@ -740,13 +729,16 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             .addGap(0, 102, Short.MAX_VALUE)
         );
 
-        jButtonBandscope.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
-        jButtonBandscope.setText("Bandscope");
-        jButtonBandscope.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBandscopeActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout bandscopePanelLayout = new javax.swing.GroupLayout(bandscopePanel);
+        bandscopePanel.setLayout(bandscopePanelLayout);
+        bandscopePanelLayout.setHorizontalGroup(
+            bandscopePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        bandscopePanelLayout.setVerticalGroup(
+            bandscopePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -766,20 +758,15 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonTune, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonConfigure))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonBandscope))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jButtonStart))))
+                        .addGap(28, 28, 28)
+                        .addComponent(jButtonStart))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jCheckBoxNB2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBoxNR)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBoxANF)))
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addComponent(bandJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(modeJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -790,7 +777,8 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(bandscopePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -804,8 +792,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonMOX, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                            .addComponent(jButtonTune, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                            .addComponent(jButtonBandscope, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonTune, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCheckBoxNB2)
@@ -818,11 +805,14 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(vfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(frequencyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(waterfallPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(waterfallPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bandscopePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -1018,45 +1008,6 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         configuration.micgain = (float) this.jSliderMicGain.getValue() / 100.0F;
         this.jLabelMicGain.setText("Mic Gain: " + (int) (configuration.micgain * 100.0F) + "%");
     }//GEN-LAST:event_jSliderMicGainStateChanged
-
-    private void jButtonBandscopeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBandscopeActionPerformed
-        //Log.i("Radio", "Bandscope");
-        if (bandscope == null) {
-            //Log.i("Radio", "bandscope is null - create one");
-            bandscope = new BandscopeJDialog(this, false);
-            bandscope.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                    //Log.i("Radio", "bandscope windowClosing");
-                    update.setBandscope(null);
-                    configuration.bandscopeWidth = bandscope.getWidth();
-                    configuration.bandscopeHeight = bandscope.getHeight();
-                    configuration.bandscopeX = bandscope.getLocation().x;
-                    configuration.bandscopeY = bandscope.getLocation().y;
-                    bandscope.setVisible(false);
-                    bandscope.dispose();
-                    bandscope = null;
-                }
-            });
-            //Log.i("Radio", "bandscope setVisible");
-            //bandscope.setVisible(true);
-            if (configuration.bandscopeWidth != 0 && configuration.bandscopeHeight != 0) {
-                bandscope.setSize(configuration.bandscopeWidth, configuration.bandscopeHeight);
-                bandscope.setLocation(configuration.bandscopeX, configuration.bandscopeY);
-            }
-            update.setBandscope(bandscope);
-        } else {
-            //Log.i("Radio", "bandscope is not null");
-            update.setBandscope(null);
-            configuration.bandscopeWidth = bandscope.getWidth();
-            configuration.bandscopeHeight = bandscope.getHeight();
-            configuration.bandscopeX = bandscope.getLocation().x;
-            configuration.bandscopeY = bandscope.getLocation().y;
-            bandscope.setVisible(false);
-            bandscope.dispose();
-            bandscope = null;
-        }
-    }//GEN-LAST:event_jButtonBandscopeActionPerformed
 
     private void jComboBoxStepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStepActionPerformed
         configuration.step = this.jComboBoxStep.getSelectedIndex();
@@ -1407,13 +1358,11 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
     private String[] agclabels = {"Off", "Long", "Slow", "Medium", "Fast"};
 
-    private BandscopeJDialog bandscope;
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.g0orx.openhpsdr.BandJPanel bandJPanel;
+    private org.g0orx.openhpsdr.BandscopePanel bandscopePanel;
     private org.g0orx.openhpsdr.FilterJPanel filterJPanel;
     private org.g0orx.openhpsdr.FrequencyPanel frequencyPanel;
-    private javax.swing.JButton jButtonBandscope;
     private javax.swing.JButton jButtonConfigure;
     private javax.swing.JButton jButtonDiscover;
     private javax.swing.JButton jButtonMOX;

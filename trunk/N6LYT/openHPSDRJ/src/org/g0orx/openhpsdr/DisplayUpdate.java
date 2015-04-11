@@ -7,7 +7,7 @@ import java.util.TimerTask;
 
 public class DisplayUpdate {
 
-    public DisplayUpdate(VFOPanel vfoView, PanadapterPanel panadapterView, WaterfallPanel waterfallView, MeterJPanel meterView, /*FrequencyView frequencyView,*/ BandscopeJDialog bandscopeView, Metis metis) {
+    public DisplayUpdate(VFOPanel vfoView, PanadapterPanel panadapterView, WaterfallPanel waterfallView, MeterJPanel meterView, /*FrequencyView frequencyView,*/ BandscopePanel bandscopeView, Metis metis) {
         this.vfoView = vfoView;
         this.panadapterView = panadapterView;
         this.waterfallView = waterfallView;
@@ -22,15 +22,12 @@ public class DisplayUpdate {
         wdsp = WDSP.getInstance();
 
         samples = new float[panadapterView.getWidth()];
+        bandscopesamples = new float[bandscopeView.getWidth()];
         Log.i("DisplayUpdate", "fps=" + configuration.fps);
     }
 
     public void setPixels(int pixels) {
         // change number of pixels
-    }
-    
-    public void setBandscope(BandscopeJDialog bandscope) {
-        this.bandscopeView=bandscope;
     }
 
     public void startTimer() {
@@ -53,6 +50,7 @@ public class DisplayUpdate {
     private void update() {
         if (samples.length != panadapterView.getWidth()) {
             samples = new float[panadapterView.getWidth()];
+            bandscopesamples = new float[bandscopeView.getWidth()];
             metis.setPixels(panadapterView.getWidth());
         }
         if (firsttime) {
@@ -80,29 +78,13 @@ public class DisplayUpdate {
             }
 
             if (bandscopeView != null) {
-                if (bandscopesamples==null || bandscopesamples.length != bandscopeView.getWidth()) {
-                    bandscopesamples = new float[bandscopeView.getWidth()];
-                    metis.setBandscopePixels(bandscopeView.getWidth());
-                }
                 if (metis.Process_Panadapter(Display.BS, bandscopesamples)) {
                     bandscopeView.update(bandscopesamples);
-                } else {
-                    //Log.i("DisplayUpdate", "Process_Panadapter (BS) FALSE");
                 }
             }
 
         }
-        /*
-         frames++;
-         if (frames == configuration.fps) {
-         long elapsed = System.currentTimeMillis() - time;
-         if (elapsed > 1000L) {
-         Log.i("DisplayUpdate", "time for " + configuration.fps + " =" + elapsed + "ms");
-         }
-         frames = 0;
-         time = System.currentTimeMillis();
-         }
-         */
+
     }
 
     public boolean isRunning() {
@@ -128,7 +110,7 @@ public class DisplayUpdate {
     /*
      private FrequencyView frequencyView;
      */
-    private BandscopeJDialog bandscopeView;
+    private BandscopePanel bandscopeView;
     private Metis metis;
     private WDSP wdsp;
 
