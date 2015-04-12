@@ -7,6 +7,8 @@ package org.g0orx.openhpsdr;
 
 import java.awt.Color;
 import java.awt.Event;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
@@ -14,15 +16,18 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 import org.g0orx.openhpsdr.discovery.Discover;
 import org.g0orx.openhpsdr.discovery.Discovered;
@@ -43,6 +48,14 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     public Radio() {
         initComponents();
         this.setTitle("openHPSDR");
+        try {
+            Image im=Toolkit.getDefaultToolkit().getImage("/images/hpsdr.png");
+            //InputStream inputstream = Radio.class.getResourceAsStream("/images/hpsdr.png");
+            //BufferedImage hpsdrimg = ImageIO.read(inputstream);
+            this.setIconImage(im);
+        } catch(Exception e) {
+            Log.i("Radio", e.toString());
+        }
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -102,6 +115,8 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
         this.discoverDialog.setVisible(true);
 
+        
+        
     }
 
     public void discovered(Discovered d) {
@@ -387,8 +402,11 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             } catch (Exception e) {
             }
         }
+        wdsp.SetChannelState(Channel.SUBRX, 0, 0);
         wdsp.CloseChannel(Channel.SUBRX);
+        wdsp.SetChannelState(Channel.TX, 0, 0);
         wdsp.CloseChannel(Channel.TX);
+        wdsp.SetChannelState(Channel.RX, 0, 0);
         wdsp.CloseChannel(Channel.RX);
 
         this.jButtonStart.setText("Start");
