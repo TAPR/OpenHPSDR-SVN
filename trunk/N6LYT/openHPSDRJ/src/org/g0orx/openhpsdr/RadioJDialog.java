@@ -309,6 +309,28 @@ public class RadioJDialog extends javax.swing.JDialog {
         if (wdsp != null) {
             this.jTabbedPane1.setEnabledAt(0, false);
             this.jTabbedPane1.setEnabledAt(1, false);
+            this.jTabbedPane1.setSelectedIndex(2);
+        }
+
+        switch (configuration.audiooutput) {
+            case Configuration.AUDIO_OUTPUT_RADIO:
+                this.jRadioButtonAudioOutputRadio.setSelected(true);
+                break;
+            case Configuration.AUDIO_OUTPUT_LOCAL:
+                this.jRadioButtonAudioOutputLocal.setSelected(true);
+                break;
+            case Configuration.AUDIO_OUTPUT_BOTH:
+                this.jRadioButtonAudioOutputBoth.setSelected(true);
+                break;
+        }
+
+        switch (configuration.micsource) {
+            case Configuration.MIC_SOURCE_RADIO:
+                this.jRadioButtonMicInputRadio.setSelected(true);
+                break;
+            case Configuration.MIC_SOURCE_LOCAL:
+                this.jRadioButtonMicInputLocal.setSelected(true);
+                break;
         }
     }
 
@@ -327,6 +349,8 @@ public class RadioJDialog extends javax.swing.JDialog {
         buttonGroupTXAnt = new javax.swing.ButtonGroup();
         buttonGroupRXAnt = new javax.swing.ButtonGroup();
         buttonGroupTipRing = new javax.swing.ButtonGroup();
+        buttonGroupAudioOutput = new javax.swing.ButtonGroup();
+        buttonGroupMicSource = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -389,6 +413,11 @@ public class RadioJDialog extends javax.swing.JDialog {
         jRadioButtonPTTtoTip = new javax.swing.JRadioButton();
         jCheckBoxPTTEnabled = new javax.swing.JCheckBox();
         jCheckBoxBiasEnabled = new javax.swing.JCheckBox();
+        jRadioButtonAudioOutputRadio = new javax.swing.JRadioButton();
+        jRadioButtonAudioOutputLocal = new javax.swing.JRadioButton();
+        jRadioButtonAudioOutputBoth = new javax.swing.JRadioButton();
+        jRadioButtonMicInputRadio = new javax.swing.JRadioButton();
+        jRadioButtonMicInputLocal = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jRadioButtonLinear = new javax.swing.JRadioButton();
@@ -1047,6 +1076,46 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupAudioOutput.add(jRadioButtonAudioOutputRadio);
+        jRadioButtonAudioOutputRadio.setText("Audio Output Radio");
+        jRadioButtonAudioOutputRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonAudioOutputRadioActionPerformed(evt);
+            }
+        });
+
+        buttonGroupAudioOutput.add(jRadioButtonAudioOutputLocal);
+        jRadioButtonAudioOutputLocal.setText("Audio Output Local");
+        jRadioButtonAudioOutputLocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonAudioOutputLocalActionPerformed(evt);
+            }
+        });
+
+        buttonGroupAudioOutput.add(jRadioButtonAudioOutputBoth);
+        jRadioButtonAudioOutputBoth.setText("Audio Output Both");
+        jRadioButtonAudioOutputBoth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonAudioOutputBothActionPerformed(evt);
+            }
+        });
+
+        buttonGroupMicSource.add(jRadioButtonMicInputRadio);
+        jRadioButtonMicInputRadio.setText("Mic Input Radio");
+        jRadioButtonMicInputRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMicInputRadioActionPerformed(evt);
+            }
+        });
+
+        buttonGroupMicSource.add(jRadioButtonMicInputLocal);
+        jRadioButtonMicInputLocal.setText("Mic Input Local");
+        jRadioButtonMicInputLocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMicInputLocalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -1054,21 +1123,41 @@ public class RadioJDialog extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox20dBMicBoost)
                     .addComponent(jRadioButtonPTTtoRing)
                     .addComponent(jRadioButtonPTTtoTip)
-                    .addComponent(jCheckBoxBiasEnabled)
-                    .addComponent(jCheckBoxPTTEnabled))
-                .addContainerGap(284, Short.MAX_VALUE))
+                    .addComponent(jRadioButtonAudioOutputBoth)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonAudioOutputRadio)
+                            .addComponent(jRadioButtonAudioOutputLocal)
+                            .addComponent(jCheckBoxPTTEnabled))
+                        .addGap(67, 67, 67)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonMicInputLocal)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jRadioButtonMicInputRadio)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCheckBox20dBMicBoost))))
+                    .addComponent(jCheckBoxBiasEnabled))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jCheckBox20dBMicBoost)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(jCheckBoxPTTEnabled)
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonAudioOutputRadio)
+                    .addComponent(jRadioButtonMicInputRadio)
+                    .addComponent(jCheckBox20dBMicBoost))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonAudioOutputLocal)
+                    .addComponent(jRadioButtonMicInputLocal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButtonAudioOutputBoth)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBoxPTTEnabled)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jCheckBoxBiasEnabled)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonPTTtoRing)
@@ -1602,11 +1691,33 @@ public class RadioJDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jListRadioValueChanged
 
+    private void jRadioButtonAudioOutputRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAudioOutputRadioActionPerformed
+        configuration.audiooutput = Configuration.AUDIO_OUTPUT_RADIO;
+    }//GEN-LAST:event_jRadioButtonAudioOutputRadioActionPerformed
+
+    private void jRadioButtonAudioOutputLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAudioOutputLocalActionPerformed
+        configuration.audiooutput = Configuration.AUDIO_OUTPUT_LOCAL;
+    }//GEN-LAST:event_jRadioButtonAudioOutputLocalActionPerformed
+
+    private void jRadioButtonAudioOutputBothActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAudioOutputBothActionPerformed
+        configuration.audiooutput = Configuration.AUDIO_OUTPUT_BOTH;
+    }//GEN-LAST:event_jRadioButtonAudioOutputBothActionPerformed
+
+    private void jRadioButtonMicInputRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMicInputRadioActionPerformed
+        configuration.micsource = Configuration.MIC_SOURCE_RADIO;
+    }//GEN-LAST:event_jRadioButtonMicInputRadioActionPerformed
+
+    private void jRadioButtonMicInputLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMicInputLocalActionPerformed
+        configuration.micsource = Configuration.MIC_SOURCE_LOCAL;
+    }//GEN-LAST:event_jRadioButtonMicInputLocalActionPerformed
+
     private Configuration configuration;
     private WDSP wdsp;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupAudioOutput;
     private javax.swing.ButtonGroup buttonGroupGain;
+    private javax.swing.ButtonGroup buttonGroupMicSource;
     private javax.swing.ButtonGroup buttonGroupNPEMethod;
     private javax.swing.ButtonGroup buttonGroupPosition;
     private javax.swing.ButtonGroup buttonGroupRXAnt;
@@ -1661,6 +1772,9 @@ public class RadioJDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonAnt1;
     private javax.swing.JRadioButton jRadioButtonAnt2;
     private javax.swing.JRadioButton jRadioButtonAnt3;
+    private javax.swing.JRadioButton jRadioButtonAudioOutputBoth;
+    private javax.swing.JRadioButton jRadioButtonAudioOutputLocal;
+    private javax.swing.JRadioButton jRadioButtonAudioOutputRadio;
     private javax.swing.JRadioButton jRadioButtonBuffer1024;
     private javax.swing.JRadioButton jRadioButtonBuffer128;
     private javax.swing.JRadioButton jRadioButtonBuffer2048;
@@ -1670,6 +1784,8 @@ public class RadioJDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonLinear;
     private javax.swing.JRadioButton jRadioButtonLog;
     private javax.swing.JRadioButton jRadioButtonMMSE;
+    private javax.swing.JRadioButton jRadioButtonMicInputLocal;
+    private javax.swing.JRadioButton jRadioButtonMicInputRadio;
     private javax.swing.JRadioButton jRadioButtonNone;
     private javax.swing.JRadioButton jRadioButtonOSMS;
     private javax.swing.JRadioButton jRadioButtonPTTtoRing;
