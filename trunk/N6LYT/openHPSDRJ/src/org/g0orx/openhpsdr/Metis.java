@@ -38,7 +38,6 @@ public class Metis extends Thread {
         txcontrol3 = (byte) (ALEX_ATTENUATION_0DB | configuration.dither | configuration.random | configuration.preamp);
         txcontrol4 = (byte) (DUPLEX | (((receivers - 1) << 3) & 0x038));
 
-        Log.i("Metis", "samplerate: " + configuration.samplerate);
         // set speed and output buffer size
         if (configuration.samplerate == 48000.0) {
             outsize = configuration.buffersize;
@@ -358,8 +357,9 @@ public class Metis extends Thread {
         int endpoint;
         Log.i("Metis", "run: " + this.getName());
 
-        myaddress = getLocalIpAddress();
-        Log.i("Metis", "run: myAddress:" + myaddress);
+        myaddress = configuration.discovered.getInterface();
+        //myaddress = getLocalIpAddress();
+        Log.i("Metis", "run: myAddress:" + myaddress+" ("+configuration.discovered.getInterfaceName()+")");
 
         running = true;
 
