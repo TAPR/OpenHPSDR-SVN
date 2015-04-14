@@ -351,6 +351,9 @@ public class RadioJDialog extends javax.swing.JDialog {
         buttonGroupTipRing = new javax.swing.ButtonGroup();
         buttonGroupAudioOutput = new javax.swing.ButtonGroup();
         buttonGroupMicSource = new javax.swing.ButtonGroup();
+        buttonGroupSampleRate = new javax.swing.ButtonGroup();
+        buttonGroupBufferSize = new javax.swing.ButtonGroup();
+        buttonGroupFFTSize = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -461,6 +464,7 @@ public class RadioJDialog extends javax.swing.JDialog {
 
         jLabel6.setText("Sample Rate:");
 
+        buttonGroupSampleRate.add(jRadioButtonRate48K);
         jRadioButtonRate48K.setText("48K");
         jRadioButtonRate48K.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -468,6 +472,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupSampleRate.add(jRadioButtonRate96K);
         jRadioButtonRate96K.setText("96K");
         jRadioButtonRate96K.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -475,6 +480,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupSampleRate.add(jRadioButtonRate192K);
         jRadioButtonRate192K.setText("192K");
         jRadioButtonRate192K.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -482,6 +488,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupSampleRate.add(jRadioButtonRate384K);
         jRadioButtonRate384K.setText("384K");
         jRadioButtonRate384K.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -491,6 +498,7 @@ public class RadioJDialog extends javax.swing.JDialog {
 
         jLabel9.setText("FFT Size:");
 
+        buttonGroupFFTSize.add(jRadioButton256);
         jRadioButton256.setText("256");
         jRadioButton256.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -498,6 +506,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupFFTSize.add(jRadioButton512);
         jRadioButton512.setText("512");
         jRadioButton512.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -505,6 +514,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupFFTSize.add(jRadioButton1024);
         jRadioButton1024.setText("1024");
         jRadioButton1024.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -512,6 +522,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupFFTSize.add(jRadioButton2048);
         jRadioButton2048.setText("2048");
         jRadioButton2048.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,6 +530,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupFFTSize.add(jRadioButton4096);
         jRadioButton4096.setText("4096");
         jRadioButton4096.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -526,6 +538,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupFFTSize.add(jRadioButton8192);
         jRadioButton8192.setText("8192");
         jRadioButton8192.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -533,6 +546,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupFFTSize.add(jRadioButton16384);
         jRadioButton16384.setText("16384");
         jRadioButton16384.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -542,6 +556,7 @@ public class RadioJDialog extends javax.swing.JDialog {
 
         jLabel10.setText("Buffer Size:");
 
+        buttonGroupBufferSize.add(jRadioButtonBuffer64);
         jRadioButtonBuffer64.setText("64");
         jRadioButtonBuffer64.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -549,6 +564,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupBufferSize.add(jRadioButtonBuffer128);
         jRadioButtonBuffer128.setText("128");
         jRadioButtonBuffer128.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -556,6 +572,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupBufferSize.add(jRadioButtonBuffer256);
         jRadioButtonBuffer256.setText("256");
         jRadioButtonBuffer256.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -563,6 +580,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupBufferSize.add(jRadioButtonBuffer512);
         jRadioButtonBuffer512.setText("512");
         jRadioButtonBuffer512.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -570,6 +588,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupBufferSize.add(jRadioButtonBuffer1024);
         jRadioButtonBuffer1024.setText("1024");
         jRadioButtonBuffer1024.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -577,6 +596,7 @@ public class RadioJDialog extends javax.swing.JDialog {
             }
         });
 
+        buttonGroupBufferSize.add(jRadioButtonBuffer2048);
         jRadioButtonBuffer2048.setText("2048");
         jRadioButtonBuffer2048.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1716,11 +1736,14 @@ public class RadioJDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupAudioOutput;
+    private javax.swing.ButtonGroup buttonGroupBufferSize;
+    private javax.swing.ButtonGroup buttonGroupFFTSize;
     private javax.swing.ButtonGroup buttonGroupGain;
     private javax.swing.ButtonGroup buttonGroupMicSource;
     private javax.swing.ButtonGroup buttonGroupNPEMethod;
     private javax.swing.ButtonGroup buttonGroupPosition;
     private javax.swing.ButtonGroup buttonGroupRXAnt;
+    private javax.swing.ButtonGroup buttonGroupSampleRate;
     private javax.swing.ButtonGroup buttonGroupTXAnt;
     private javax.swing.ButtonGroup buttonGroupTipRing;
     private javax.swing.JButton jButtonClose;

@@ -18,6 +18,12 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupMicSource">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupSampleRate">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupBufferSize">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupFFTSize">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -244,6 +250,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonRate48K">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupSampleRate"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="48K"/>
               </Properties>
               <Events>
@@ -252,6 +261,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonRate96K">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupSampleRate"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="96K"/>
               </Properties>
               <Events>
@@ -260,6 +272,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonRate192K">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupSampleRate"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="192K"/>
               </Properties>
               <Events>
@@ -268,6 +283,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonRate384K">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupSampleRate"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="384K"/>
               </Properties>
               <Events>
@@ -281,6 +299,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButton256">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupFFTSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="256"/>
               </Properties>
               <Events>
@@ -289,6 +310,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButton512">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupFFTSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="512"/>
               </Properties>
               <Events>
@@ -297,6 +321,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButton1024">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupFFTSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="1024"/>
               </Properties>
               <Events>
@@ -305,6 +332,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButton2048">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupFFTSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="2048"/>
               </Properties>
               <Events>
@@ -313,6 +343,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButton4096">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupFFTSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="4096"/>
               </Properties>
               <Events>
@@ -321,6 +354,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButton8192">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupFFTSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="8192"/>
               </Properties>
               <Events>
@@ -329,6 +365,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButton16384">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupFFTSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="16384"/>
               </Properties>
               <Events>
@@ -342,6 +381,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonBuffer64">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupBufferSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="64"/>
               </Properties>
               <Events>
@@ -350,6 +392,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonBuffer128">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupBufferSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="128"/>
               </Properties>
               <Events>
@@ -358,6 +403,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonBuffer256">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupBufferSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="256"/>
               </Properties>
               <Events>
@@ -366,6 +414,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonBuffer512">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupBufferSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="512"/>
               </Properties>
               <Events>
@@ -374,6 +425,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonBuffer1024">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupBufferSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="1024"/>
               </Properties>
               <Events>
@@ -382,6 +436,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonBuffer2048">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupBufferSize"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="2048"/>
               </Properties>
               <Events>
