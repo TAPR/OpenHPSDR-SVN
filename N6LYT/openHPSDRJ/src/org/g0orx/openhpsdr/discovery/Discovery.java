@@ -85,6 +85,7 @@ public class Discovery extends Thread {
     }
     
     public void receiveDiscoveryPackets(String myaddress, String name) {
+        Log.i("Discovery", "receiveDiscoveryPackets: "+myaddress);
         while (running) {
             try {
                 rxdatagram = new DatagramPacket(rxbuffer, rxbuffer.length);
