@@ -66,7 +66,7 @@ public class Configuration implements Serializable {
 
     public static final int MIC_SOURCE_RADIO = 0;
     public static final int MIC_SOURCE_LOCAL = 1;
-    public int micsource = MIC_SOURCE_RADIO;
+    public int micsource = MIC_SOURCE_LOCAL;
 
     public boolean panadapter = true;
     public boolean waterfall = true;

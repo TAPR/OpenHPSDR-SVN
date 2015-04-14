@@ -252,28 +252,6 @@ public class Metis extends Thread {
     }
 
     public void initializeLocalAudioOutput() {
-        /*
-         Mixer.Info[] mixers = AudioSystem.getMixerInfo();
-         for (Mixer.Info mixerInfo : mixers) {
-         Log.i("Mixer", mixerInfo.toString());
-
-         Mixer m = AudioSystem.getMixer(mixerInfo);
-
-         Line.Info[] lines = m.getSourceLineInfo();
-
-         for (Line.Info li : lines) {
-         if (li instanceof DataLine.Info) {
-         Log.i("Found source line", li.toString());
-         AudioFormat[] forms = ((DataLine.Info) li).getFormats();
-         for (int n = 0; n < forms.length; ++n) {
-         Log.i("AudioFormat", forms[n].toString());
-         }
-         } else {
-         Log.i("Source Line",li.getClass().getName());
-         }
-         }
-         }
-         */
 
         try {
             audioformat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 48000F, 16, 2, 4, 48000F, true);
@@ -284,6 +262,14 @@ public class Metis extends Thread {
             Log.i("Metis", "initializeLocalAudioOutput: " + e.toString());
         }
 
+    }
+    
+    public void stopLocalAudioOutput() {
+        if(audioline!=null) {
+            audioline.flush();
+            audioline.close();
+            audioline=null;
+        }
     }
 
     public void setPTTListener(PTTListener listener) {
@@ -459,10 +445,8 @@ public class Metis extends Thread {
         wdsp.DestroyAnalyzer(Display.TX);
         wdsp.DestroyAnalyzer(Display.BS);
         
-        if(audioline!=null) {
-            audioline.flush();
-            audioline.close();
-        }
+        stopLocalAudioOutput();
+
     }
 
     public void terminate() {
