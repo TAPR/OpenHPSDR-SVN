@@ -1170,12 +1170,12 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 wdsp.SetChannelState(Channel.TX, 1, 0);
 
                 metis.setTransmit(true, false);
-                /*
-                 if (configuration.micsource == Configuration.MIC_SOURCE_LOCAL) {
-                 microphone = new Microphone(metis, Channel.TX);
-                 microphone.start();
-                 }
-                 */
+
+                if (configuration.micsource == Configuration.MIC_SOURCE_LOCAL) {
+                    microphone = new Microphone(metis, Channel.TX);
+                    microphone.start();
+                }
+
                 this.jButtonMOX.setBackground(Color.red);
             }
         } else {
@@ -1360,6 +1360,8 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     private Metis metis;
     private DisplayUpdate update;
 
+    private Microphone microphone;
+    
     private boolean locked = false;
     private boolean outofband = false;
 
