@@ -62,7 +62,7 @@ public class Configuration implements Serializable {
     public static final int AUDIO_OUTPUT_RADIO = 0;
     public static final int AUDIO_OUTPUT_LOCAL = 1;
     public static final int AUDIO_OUTPUT_BOTH = 2;
-    public int audiooutput = AUDIO_OUTPUT_RADIO;
+    public int audiooutput = AUDIO_OUTPUT_BOTH;
 
     public static final int MIC_SOURCE_RADIO = 0;
     public static final int MIC_SOURCE_LOCAL = 1;

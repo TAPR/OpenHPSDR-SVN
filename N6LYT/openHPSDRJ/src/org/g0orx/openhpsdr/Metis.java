@@ -8,7 +8,16 @@ import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.SourceDataLine;
 
 import org.g0orx.openhpsdr.discovery.Discovered;
 import org.g0orx.openhpsdr.modes.Modes;
@@ -19,37 +28,35 @@ public class Metis extends Thread {
     public Metis(int pixels) {
 
         Log.i("Metis", "pixels=" + pixels);
-        this.pixels=pixels;
+        this.pixels = pixels;
 
         configuration = Configuration.getInstance();
-        
-        Log.i("Metis","using: "+configuration.discovered.toString());
+
+        Log.i("Metis", "using: " + configuration.discovered.toString());
 
         txcontrol1 = (byte) (CONFIG_BOTH | MIC_SOURCE_PENELOPE | configuration.clock10 | configuration.clock122);
         txcontrol3 = (byte) (ALEX_ATTENUATION_0DB | configuration.dither | configuration.random | configuration.preamp);
         txcontrol4 = (byte) (DUPLEX | (((receivers - 1) << 3) & 0x038));
-        
-        Log.i("Metis","samplerate: "+configuration.samplerate);
+
+        Log.i("Metis", "samplerate: " + configuration.samplerate);
         // set speed and output buffer size
         if (configuration.samplerate == 48000.0) {
-            outsize=configuration.buffersize;
+            outsize = configuration.buffersize;
             txcontrol1 |= SPEED_48KHZ;
         } else if (configuration.samplerate == 96000.0) {
-            outsize=configuration.buffersize/2;
+            outsize = configuration.buffersize / 2;
             txcontrol1 |= SPEED_96KHZ;
         } else if (configuration.samplerate == 192000.0) {
-            outsize=configuration.buffersize/4;
+            outsize = configuration.buffersize / 4;
             txcontrol1 |= SPEED_192KHZ;
         } else if (configuration.samplerate == 384000.0) {
-            outsize=configuration.buffersize/8;
+            outsize = configuration.buffersize / 8;
             txcontrol1 |= SPEED_384KHZ;
         }
-        
-        Log.i("Metis","samplerate: "+configuration.samplerate+" buffersize="+configuration.buffersize+" fftsize="+configuration.fftsize+" outsize="+outsize);
-        
-        this.wdsp = WDSP.getInstance();
 
-        
+        Log.i("Metis", "samplerate: " + configuration.samplerate + " buffersize=" + configuration.buffersize + " fftsize=" + configuration.fftsize + " outsize=" + outsize);
+
+        this.wdsp = WDSP.getInstance();
 
         // allocate space for the input/output samples
         inlsamples = new float[configuration.buffersize];
@@ -67,10 +74,6 @@ public class Metis extends Thread {
             bsrsamples[i] = 0.0F;
         }
 
-
-        
-
-
         // build the toaddress InetAddress
         try {
             toaddress = InetAddress.getByName(configuration.discovered.getAddress());
@@ -82,18 +85,21 @@ public class Metis extends Thread {
         commanddatagram = new DatagramPacket(commandbuffer, commandbuffer.length, toaddress, toport);
         samplesdatagram = new DatagramPacket(sendbuffer, sendbuffer.length, toaddress, toport);
 
-        /*
-        try {
-            audiotrack = new AudioTrack(AudioManager.STREAM_MUSIC, 48000,
-                    AudioFormat.CHANNEL_OUT_STEREO,
-                    AudioFormat.ENCODING_PCM_16BIT, 1024,
-                    AudioTrack.MODE_STREAM);
-        } catch (IllegalArgumentException e) {
-            Log.i("Metis", "new AudioTrack Error: " + e.getMessage());
-            audiotrack = null;
+        if (configuration.audiooutput == Configuration.AUDIO_OUTPUT_LOCAL || configuration.audiooutput == Configuration.AUDIO_OUTPUT_BOTH) {
+            initializeLocalAudioOutput();
         }
-        */
 
+        /*
+         try {
+         audiotrack = new AudioTrack(AudioManager.STREAM_MUSIC, 48000,
+         AudioFormat.CHANNEL_OUT_STEREO,
+         AudioFormat.ENCODING_PCM_16BIT, 1024,
+         AudioTrack.MODE_STREAM);
+         } catch (IllegalArgumentException e) {
+         Log.i("Metis", "new AudioTrack Error: " + e.getMessage());
+         audiotrack = null;
+         }
+         */
         // Calculate sample values for baseband CW note^M
         double deltaf = Math.PI / 40.0;     // (2 PI f / 48k) gives an 600 Hz note at 48 ksps
         for (int i = 0; i < 240; ++i) {
@@ -102,17 +108,16 @@ public class Metis extends Thread {
         }
 
         /*
-        if (audiotrack != null) {
-            audiotrack.play();
-        }
-        */
-
+         if (audiotrack != null) {
+         audiotrack.play();
+         }
+         */
         // rx spectrum
         wdsp.XCreateAnalyzer(Display.RX, success, 262144, 1, 1, "");
         if (success[0] != 0) {
             Log.i("Metis", "XCreateAnalyzer Display.RX failed:" + success[0]);
         }
-        
+
         int flp[] = {0};
         double KEEP_TIME = 0.1;
         int spur_elimination_ffts = 1;
@@ -138,26 +143,26 @@ public class Metis extends Thread {
         int max_w = fft_size + (int) Math.min(KEEP_TIME * (double) configuration.fps, KEEP_TIME * (double) fft_size * (double) configuration.fps);
 
         wdsp.SetAnalyzer(Display.RX,
-                spur_elimination_ffts,                      //number of LO frequencies = number of ffts used in elimination
-                data_type,                        //0 for real input data (I only); 1 for complex input data (I & Q)
-                flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
-                fft_size,                         //size of the fft, i.e., number of input samples
-                configuration.buffersize,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
-                window_type,           //integer specifying which window function to use
-                kaiser_pi,                      //PiAlpha parameter for Kaiser window
-                overlap,                      //number of samples each fft (other than the first) is to re-use from the previous
-                clip,                        //number of fft output bins to be clipped from EACH side of each sub-span
-                span_clip_l,                     //number of bins to clip from low end of entire span
-                span_clip_h,                     //number of bins to clip from high end of entire span
-                pixels,                      //number of pixel values to return.  may be either <= or > number of bins
-                stitches,                     //number of sub-spans to concatenate to form a complete span
-                avm,                       //averaging mode
-                display_average,                       //number of spans to (moving) average for pixel result
-                avb,            //back multiplier for weighted averaging
-                calibration_data_set,                     //identifier of which set of calibration data to use
-                span_min_freq,            //frequency at first pixel value8192
-                span_max_freq,            //frequency at last pixel value
-                max_w                       //max samples to hold in input ring buffers
+                spur_elimination_ffts, //number of LO frequencies = number of ffts used in elimination
+                data_type, //0 for real input data (I only); 1 for complex input data (I & Q)
+                flp, //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
+                fft_size, //size of the fft, i.e., number of input samples
+                configuration.buffersize, //number of samples transferred for each OpenBuffer()/CloseBuffer()
+                window_type, //integer specifying which window function to use
+                kaiser_pi, //PiAlpha parameter for Kaiser window
+                overlap, //number of samples each fft (other than the first) is to re-use from the previous
+                clip, //number of fft output bins to be clipped from EACH side of each sub-span
+                span_clip_l, //number of bins to clip from low end of entire span
+                span_clip_h, //number of bins to clip from high end of entire span
+                pixels, //number of pixel values to return.  may be either <= or > number of bins
+                stitches, //number of sub-spans to concatenate to form a complete span
+                avm, //averaging mode
+                display_average, //number of spans to (moving) average for pixel result
+                avb, //back multiplier for weighted averaging
+                calibration_data_set, //identifier of which set of calibration data to use
+                span_min_freq, //frequency at first pixel value8192
+                span_max_freq, //frequency at last pixel value
+                max_w //max samples to hold in input ring buffers
         );
 
         // tx spectrum
@@ -165,58 +170,56 @@ public class Metis extends Thread {
         if (success[0] != 0) {
             Log.i("Metis", "XCreateAnalyzer txchannel failed:" + success[0]);
         }
-        
-          // use same params as rx channel
+
+        // use same params as rx channel
         /*
-        int flp[] = {0};
-        double KEEP_TIME=0.1;
-        int spur_elimination_ffts=1;
-        int data_type=1;
-        int fft_size=8192;
-        int window_type=4;
-        double kaiser_pi=14.0;
-        int overlap=2048;
-        int clip=0;
-        int span_clip_l=0;
-        int span_clip_h=0;
-        int pixels=1280;
-        int stitches=1;
-        int avm=0;
-        double tau=0.001*120.0;
-        int MAX_AV_FRAMES=60;
-        int display_average = Math.max(2, (int)Math.min((double)MAX_AV_FRAMES, (double)configuration.fps * tau));
-        double avb = Math.exp(-1.0 / (configuration.fps * tau));
-        int calibration_data_set=0;
-        double span_min_freq=0.0;
-        double span_max_freq=0.0;
+         int flp[] = {0};
+         double KEEP_TIME=0.1;
+         int spur_elimination_ffts=1;
+         int data_type=1;
+         int fft_size=8192;
+         int window_type=4;
+         double kaiser_pi=14.0;
+         int overlap=2048;
+         int clip=0;
+         int span_clip_l=0;
+         int span_clip_h=0;
+         int pixels=1280;
+         int stitches=1;
+         int avm=0;
+         double tau=0.001*120.0;
+         int MAX_AV_FRAMES=60;
+         int display_average = Math.max(2, (int)Math.min((double)MAX_AV_FRAMES, (double)configuration.fps * tau));
+         double avb = Math.exp(-1.0 / (configuration.fps * tau));
+         int calibration_data_set=0;
+         double span_min_freq=0.0;
+         double span_max_freq=0.0;
 
-        int max_w=fft_size + (int)Math.min(KEEP_TIME * (double)configuration.fps, KEEP_TIME * (double)fft_size * (double)configuration.fps);
-        */
-
+         int max_w=fft_size + (int)Math.min(KEEP_TIME * (double)configuration.fps, KEEP_TIME * (double)fft_size * (double)configuration.fps);
+         */
         wdsp.SetAnalyzer(Display.TX,
-                spur_elimination_ffts,                      //number of LO frequencies = number of ffts used in elimination
-                data_type,                        //0 for real input data (I only); 1 for complex input data (I & Q)
-                flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
-                fft_size,                         //size of the fft, i.e., number of input samples
-                outsize /*configuration.buffersize*/,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
-                window_type,           //integer specifying which window function to use
-                kaiser_pi,                      //PiAlpha parameter for Kaiser window
-                overlap,                      //number of samples each fft (other than the first) is to re-use from the previous
-                clip,                        //number of fft output bins to be clipped from EACH side of each sub-span
-                span_clip_l,                     //number of bins to clip from low end of entire span
-                span_clip_h,                     //number of bins to clip from high end of entire span
-                pixels,                      //number of pixel values to return.  may be either <= or > number of bins
-                stitches,                     //number of sub-spans to concatenate to form a complete span
-                avm,                       //averaging mode
-                display_average,                       //number of spans to (moving) average for pixel result
-                avb,            //back multiplier for weighted averaging
-                calibration_data_set,                     //identifier of which set of calibration data to use
-                span_min_freq,            //frequency at first pixel value8192
-                span_max_freq,            //frequency at last pixel value
-                max_w                       //max samples to hold in input ring buffers
+                spur_elimination_ffts, //number of LO frequencies = number of ffts used in elimination
+                data_type, //0 for real input data (I only); 1 for complex input data (I & Q)
+                flp, //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
+                fft_size, //size of the fft, i.e., number of input samples
+                outsize /*configuration.buffersize*/, //number of samples transferred for each OpenBuffer()/CloseBuffer()
+                window_type, //integer specifying which window function to use
+                kaiser_pi, //PiAlpha parameter for Kaiser window
+                overlap, //number of samples each fft (other than the first) is to re-use from the previous
+                clip, //number of fft output bins to be clipped from EACH side of each sub-span
+                span_clip_l, //number of bins to clip from low end of entire span
+                span_clip_h, //number of bins to clip from high end of entire span
+                pixels, //number of pixel values to return.  may be either <= or > number of bins
+                stitches, //number of sub-spans to concatenate to form a complete span
+                avm, //averaging mode
+                display_average, //number of spans to (moving) average for pixel result
+                avb, //back multiplier for weighted averaging
+                calibration_data_set, //identifier of which set of calibration data to use
+                span_min_freq, //frequency at first pixel value8192
+                span_max_freq, //frequency at last pixel value
+                max_w //max samples to hold in input ring buffers
         );
 
-        
         // bandscope spectrum
         wdsp.XCreateAnalyzer(Display.BS, success, 262144, 1, 1, "");
         if (success[0] != 0) {
@@ -224,34 +227,69 @@ public class Metis extends Thread {
         }
 
         wdsp.SetAnalyzer(Display.BS,
-                spur_elimination_ffts,                      //number of LO frequencies = number of ffts used in elimination
-                WDSP.REAL,                        //0 for real input data (I only); 1 for complex input data (I & Q)
-                flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
-                BS_FFT_SIZE,                         //size of the fft, i.e., number of input samples
-                BS_BUFFER_SIZE,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
-                WDSP.BLACKMAN_HARRIS,           //integer specifying which window function to use (Blackman-Harris)
-                kaiser_pi,                      //PiAlpha parameter for Kaiser window
-                overlap,                      //number of samples each fft (other than the first) is to re-use from the previous
-                clip,                        //number of fft output bins to be clipped from EACH side of each sub-span
-                span_clip_l,                     //number of bins to clip from low end of entire span
-                span_clip_h,                     //number of bins to clip from high end of entire span
-                pixels,                      //number of pixel values to return.  may be either <= or > number of bins
-                stitches,                     //number of sub-spans to concatenate to form a complete span
-                WDSP.NO_AVERAGING,                       //averaging mode
-                display_average,                       //number of spans to (moving) average for pixel result
-                avb,            //back multiplier for weighted averaging
-                calibration_data_set,                     //identifier of which set of calibration data to use
-                span_min_freq,            //frequency at first pixel value8192
-                span_max_freq,            //frequency at last pixel value
-                max_w                       //max samples to hold in input ring buffers
+                spur_elimination_ffts, //number of LO frequencies = number of ffts used in elimination
+                WDSP.REAL, //0 for real input data (I only); 1 for complex input data (I & Q)
+                flp, //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
+                BS_FFT_SIZE, //size of the fft, i.e., number of input samples
+                BS_BUFFER_SIZE, //number of samples transferred for each OpenBuffer()/CloseBuffer()
+                WDSP.BLACKMAN_HARRIS, //integer specifying which window function to use (Blackman-Harris)
+                kaiser_pi, //PiAlpha parameter for Kaiser window
+                overlap, //number of samples each fft (other than the first) is to re-use from the previous
+                clip, //number of fft output bins to be clipped from EACH side of each sub-span
+                span_clip_l, //number of bins to clip from low end of entire span
+                span_clip_h, //number of bins to clip from high end of entire span
+                pixels, //number of pixel values to return.  may be either <= or > number of bins
+                stitches, //number of sub-spans to concatenate to form a complete span
+                WDSP.NO_AVERAGING, //averaging mode
+                display_average, //number of spans to (moving) average for pixel result
+                avb, //back multiplier for weighted averaging
+                calibration_data_set, //identifier of which set of calibration data to use
+                span_min_freq, //frequency at first pixel value8192
+                span_max_freq, //frequency at last pixel value
+                max_w //max samples to hold in input ring buffers
         );
+
+    }
+
+    public void initializeLocalAudioOutput() {
+        /*
+         Mixer.Info[] mixers = AudioSystem.getMixerInfo();
+         for (Mixer.Info mixerInfo : mixers) {
+         Log.i("Mixer", mixerInfo.toString());
+
+         Mixer m = AudioSystem.getMixer(mixerInfo);
+
+         Line.Info[] lines = m.getSourceLineInfo();
+
+         for (Line.Info li : lines) {
+         if (li instanceof DataLine.Info) {
+         Log.i("Found source line", li.toString());
+         AudioFormat[] forms = ((DataLine.Info) li).getFormats();
+         for (int n = 0; n < forms.length; ++n) {
+         Log.i("AudioFormat", forms[n].toString());
+         }
+         } else {
+         Log.i("Source Line",li.getClass().getName());
+         }
+         }
+         }
+         */
+
+        try {
+            audioformat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 48000F, 16, 2, 4, 48000F, true);
+            audioline = AudioSystem.getSourceDataLine(audioformat);
+            audioline.open(audioformat, 48000);
+            audioline.start();
+        } catch (Exception e) {
+            Log.i("Metis", "initializeLocalAudioOutput: " + e.toString());
+        }
 
     }
 
     public void setPTTListener(PTTListener listener) {
         this.pttListener = listener;
     }
-    
+
     public synchronized void setPixels(int pixels) {
         int flp[] = {0};
         double KEEP_TIME = 0.1;
@@ -275,68 +313,67 @@ public class Metis extends Thread {
         double span_min_freq = 0.0;
         double span_max_freq = 0.0;
 
-        
-        this.pixels=pixels;
-        
+        this.pixels = pixels;
+
         int max_w = fft_size + (int) Math.min(KEEP_TIME * (double) configuration.fps, KEEP_TIME * (double) fft_size * (double) configuration.fps);
 
         wdsp.SetAnalyzer(Display.RX,
-                spur_elimination_ffts,                      //number of LO frequencies = number of ffts used in elimination
-                data_type,                        //0 for real input data (I only); 1 for complex input data (I & Q)
-                flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
-                fft_size,                         //size of the fft, i.e., number of input samples
-                configuration.buffersize,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
-                window_type,           //integer specifying which window function to use
-                kaiser_pi,                      //PiAlpha parameter for Kaiser window
-                overlap,                      //number of samples each fft (other than the first) is to re-use from the previous
-                clip,                        //number of fft output bins to be clipped from EACH side of each sub-span
-                span_clip_l,                     //number of bins to clip from low end of entire span
-                span_clip_h,                     //number of bins to clip from high end of entire span
-                pixels,                      //number of pixel values to return.  may be either <= or > number of bins
-                stitches,                     //number of sub-spans to concatenate to form a complete span
-                avm,                       //averaging mode
-                display_average,                       //number of spans to (moving) average for pixel result
-                avb,            //back multiplier for weighted averaging
-                calibration_data_set,                     //identifier of which set of calibration data to use
-                span_min_freq,            //frequency at first pixel value8192
-                span_max_freq,            //frequency at last pixel value
-                max_w                       //max samples to hold in input ring buffers
+                spur_elimination_ffts, //number of LO frequencies = number of ffts used in elimination
+                data_type, //0 for real input data (I only); 1 for complex input data (I & Q)
+                flp, //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
+                fft_size, //size of the fft, i.e., number of input samples
+                configuration.buffersize, //number of samples transferred for each OpenBuffer()/CloseBuffer()
+                window_type, //integer specifying which window function to use
+                kaiser_pi, //PiAlpha parameter for Kaiser window
+                overlap, //number of samples each fft (other than the first) is to re-use from the previous
+                clip, //number of fft output bins to be clipped from EACH side of each sub-span
+                span_clip_l, //number of bins to clip from low end of entire span
+                span_clip_h, //number of bins to clip from high end of entire span
+                pixels, //number of pixel values to return.  may be either <= or > number of bins
+                stitches, //number of sub-spans to concatenate to form a complete span
+                avm, //averaging mode
+                display_average, //number of spans to (moving) average for pixel result
+                avb, //back multiplier for weighted averaging
+                calibration_data_set, //identifier of which set of calibration data to use
+                span_min_freq, //frequency at first pixel value8192
+                span_max_freq, //frequency at last pixel value
+                max_w //max samples to hold in input ring buffers
         );
-        
+
         wdsp.SetAnalyzer(Display.BS,
-                spur_elimination_ffts,                      //number of LO frequencies = number of ffts used in elimination
-                WDSP.REAL,                        //0 for real input data (I only); 1 for complex input data (I & Q)
-                flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
-                BS_FFT_SIZE,                         //size of the fft, i.e., number of input samples
-                BS_BUFFER_SIZE,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
-                WDSP.BLACKMAN_HARRIS,           //integer specifying which window function to use (Blackman-Harris)
-                kaiser_pi,                      //PiAlpha parameter for Kaiser window
-                overlap,                      //number of samples each fft (other than the first) is to re-use from the previous
-                clip,                        //number of fft output bins to be clipped from EACH side of each sub-span
-                span_clip_l,                     //number of bins to clip from low end of entire span
-                span_clip_h,                     //number of bins to clip from high end of entire span
-                pixels,                      //number of pixel values to return.  may be either <= or > number of bins
-                stitches,                     //number of sub-spans to concatenate to form a complete span
-                WDSP.NO_AVERAGING,                       //averaging mode
-                display_average,                       //number of spans to (moving) average for pixel result
-                avb,            //back multiplier for weighted averaging
-                calibration_data_set,                     //identifier of which set of calibration data to use
-                span_min_freq,            //frequency at first pixel value8192
-                span_max_freq,            //frequency at last pixel value
-                max_w                       //max samples to hold in input ring buffers
+                spur_elimination_ffts, //number of LO frequencies = number of ffts used in elimination
+                WDSP.REAL, //0 for real input data (I only); 1 for complex input data (I & Q)
+                flp, //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
+                BS_FFT_SIZE, //size of the fft, i.e., number of input samples
+                BS_BUFFER_SIZE, //number of samples transferred for each OpenBuffer()/CloseBuffer()
+                WDSP.BLACKMAN_HARRIS, //integer specifying which window function to use (Blackman-Harris)
+                kaiser_pi, //PiAlpha parameter for Kaiser window
+                overlap, //number of samples each fft (other than the first) is to re-use from the previous
+                clip, //number of fft output bins to be clipped from EACH side of each sub-span
+                span_clip_l, //number of bins to clip from low end of entire span
+                span_clip_h, //number of bins to clip from high end of entire span
+                pixels, //number of pixel values to return.  may be either <= or > number of bins
+                stitches, //number of sub-spans to concatenate to form a complete span
+                WDSP.NO_AVERAGING, //averaging mode
+                display_average, //number of spans to (moving) average for pixel result
+                avb, //back multiplier for weighted averaging
+                calibration_data_set, //identifier of which set of calibration data to use
+                span_min_freq, //frequency at first pixel value8192
+                span_max_freq, //frequency at last pixel value
+                max_w //max samples to hold in input ring buffers
         );
 
     }
-    
+
     // run the thread to read/write samples from/to Metis
     public void run() {
         int status;
         long sequence;
         int endpoint;
-        Log.i("Metis","run: "+this.getName());
+        Log.i("Metis", "run: " + this.getName());
 
         myaddress = getLocalIpAddress();
-        Log.i("Metis","run: myAddress:"+myaddress);
+        Log.i("Metis", "run: myAddress:" + myaddress);
 
         running = true;
 
@@ -346,7 +383,6 @@ public class Metis extends Thread {
             InetSocketAddress socketaddress = new InetSocketAddress(myaddress, myport);
 
             //Log.i("Metis","run: socketaddress: "+socketaddress.toString());
-
             socket = new DatagramSocket(socketaddress);
             socket.setReuseAddress(true);
             socket.setBroadcast(true);
@@ -363,10 +399,10 @@ public class Metis extends Thread {
                     if (status == 1) {
                         endpoint = rxbuffer[3] & 0xFF;
                         if (endpoint == 6) {
-                            sequence = ((rxbuffer[4] & 0xFF) << 24) |
-                                    ((rxbuffer[5] & 0xFF) << 16) |
-                                    ((rxbuffer[6] & 0xFF) << 8) |
-                                    ((rxbuffer[7] & 0xFF));
+                            sequence = ((rxbuffer[4] & 0xFF) << 24)
+                                    | ((rxbuffer[5] & 0xFF) << 16)
+                                    | ((rxbuffer[6] & 0xFF) << 8)
+                                    | ((rxbuffer[7] & 0xFF));
                             packetsreceived++;
                             ep6sequence++;
                             if (sequence != ep6sequence) {
@@ -402,12 +438,11 @@ public class Metis extends Thread {
         //Log.i("Metis","run ending: "+this.getName());
 
         /*
-        if (audiotrack != null) {
-            audiotrack.stop();
-            audiotrack.release();
-        }
-        */
-
+         if (audiotrack != null) {
+         audiotrack.stop();
+         audiotrack.release();
+         }
+         */
         // send stop command
         commandbuffer[0] = (byte) 0xEF;
         commandbuffer[1] = (byte) 0xFE;
@@ -423,6 +458,11 @@ public class Metis extends Thread {
         wdsp.DestroyAnalyzer(Display.RX);
         wdsp.DestroyAnalyzer(Display.TX);
         wdsp.DestroyAnalyzer(Display.BS);
+        
+        if(audioline!=null) {
+            audioline.flush();
+            audioline.close();
+        }
     }
 
     public void terminate() {
@@ -432,7 +472,6 @@ public class Metis extends Thread {
     public boolean isRunning() {
         return running;
     }
-
 
     public void setTransmit(boolean transmit, boolean tuning) {
         //Log.i("Metis", "setTransmit: transmit=" + transmit + " tuning=" + tuning);
@@ -448,7 +487,6 @@ public class Metis extends Thread {
         return this.tuning;
     }
 
-
     private void processBandscope(byte[] bytes, int offset) {
         if (running) {
             short sample;
@@ -462,7 +500,7 @@ public class Metis extends Thread {
             }
         }
     }
-    
+
     private void demuxBuffer(byte[] bytes, int offset) {
 
         if (running) {
@@ -481,7 +519,6 @@ public class Metis extends Thread {
             //    8,9,10:   I   for 1 receiver  |
             //    11,12,13: Q   for 1 receiver  |  repeated 63 times from 1 receiver
             //    14,15:    MIC                 |
-
             boolean mydebug = dbg;
             dbg = false;
             state = STATE_SYNC0;
@@ -572,7 +609,7 @@ public class Metis extends Thread {
                                 break;
                             case 1:
                                 // forward power
-                                avg_penelope_forward_power += ((rxcontrol1 << 8)&0xFF00) | (rxcontrol2 & 0xFF);
+                                avg_penelope_forward_power += ((rxcontrol1 << 8) & 0xFF00) | (rxcontrol2 & 0xFF);
                                 avg_alex_forward_power += ((rxcontrol3 << 8) & 0xFF00) | (rxcontrol4 & 0xFF);
                                 break;
                             case 2:
@@ -580,15 +617,15 @@ public class Metis extends Thread {
                                 avg_alex_reverse_power += ((rxcontrol1 << 8) & 0xFF00) | (rxcontrol2 & 0xFF);
                                 ain3 = (rxcontrol3 << 8) + (rxcontrol4 & 0xFF);
                                 power_samples++;
-                                if(power_samples==4) {
-                                    penelope_forward_power=avg_penelope_forward_power/4;
-                                    alex_forward_power=avg_alex_forward_power/4;
-                                    alex_reverse_power=avg_alex_reverse_power/4;
-                                    
-                                    avg_penelope_forward_power=0;
-                                    avg_alex_forward_power=0;
-                                    avg_alex_reverse_power=0;
-                                    power_samples=0;
+                                if (power_samples == 4) {
+                                    penelope_forward_power = avg_penelope_forward_power / 4;
+                                    alex_forward_power = avg_alex_forward_power / 4;
+                                    alex_reverse_power = avg_alex_reverse_power / 4;
+
+                                    avg_penelope_forward_power = 0;
+                                    avg_alex_forward_power = 0;
+                                    avg_alex_reverse_power = 0;
+                                    power_samples = 0;
                                 }
                                 break;
                             case 3:
@@ -634,7 +671,7 @@ public class Metis extends Thread {
                         break;
                     case STATE_M1:
                         msample |= bytes[i] & 0xFF;
-                        
+
                         // we now have an I, Q and Microphone sample
                         inlsamples[inoffset] = (float) isample / 8388607.0F; // 24 bit sample convert to -1..+1
                         inrsamples[inoffset] = (float) qsample / 8388607.0F; // 24 bit sample convert to -1..+1
@@ -696,19 +733,31 @@ public class Metis extends Thread {
                                 }
                                 if (configuration.audiooutput == Configuration.AUDIO_OUTPUT_LOCAL || configuration.audiooutput == Configuration.AUDIO_OUTPUT_BOTH) {
                                     for (int j = 0; j < outlsamples.length; j++) {
+                                        short lsample;
+                                        short rsample;
                                         if (configuration.subrx) {
-                                            audiooutput[audiooutputindex++] = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
-                                            audiooutput[audiooutputindex++] = (short) (suboutrsamples[j] * 32767.0F * configuration.afgain);
+                                            lsample = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
+                                            rsample = (short) (suboutrsamples[j] * 32767.0F * configuration.afgain);
+                                            //audiooutput[audiooutputindex++] = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
+                                            //audiooutput[audiooutputindex++] = (short) (suboutrsamples[j] * 32767.0F * configuration.afgain);
                                         } else {
-                                            audiooutput[audiooutputindex++] = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
-                                            audiooutput[audiooutputindex++] = (short) (outrsamples[j] * 32767.0F * configuration.afgain);
+                                            lsample = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
+                                            rsample = (short) (outrsamples[j] * 32767.0F * configuration.afgain);
+                                            //audiooutput[audiooutputindex++] = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
+                                            //audiooutput[audiooutputindex++] = (short) (outrsamples[j] * 32767.0F * configuration.afgain);
                                         }
+                                        audiooutput[audiooutputindex++] = (byte) ((lsample >> 8) & 0xFF);
+                                        audiooutput[audiooutputindex++] = (byte) (lsample & 0xFF);
+                                        audiooutput[audiooutputindex++] = (byte) ((rsample >> 8) & 0xFF);
+                                        audiooutput[audiooutputindex++] = (byte) (rsample & 0xFF);
                                         if (audiooutputindex == audiooutput.length) {
-                                            /*
-                                            if (audiotrack != null) {
-                                                int sent = audiotrack.write(audiooutput, 0, audiooutput.length);
+
+                                            if (audioline != null) {
+                                                int sent = audioline.write(audiooutput, 0, audiooutput.length);
+                                                if (sent != audiooutput.length) {
+                                                    Log.i("Metis", "write audio returned " + sent + " when sending " + audiooutput.length);
+                                                }
                                             }
-                                            */
                                             audiooutputindex = 0;
                                         }
                                     }
@@ -776,7 +825,7 @@ public class Metis extends Thread {
                 sendbuffer[txoffset++] = (byte) 0; // tx
                 sendbuffer[txoffset++] = (byte) 0; // tx
             }
-            
+
             if (txoffset == 520) {
                 // first OZY buffer filled
                 txoffset = 528;
@@ -843,8 +892,8 @@ public class Metis extends Thread {
                                 }
                                 break;
                         }
-                        if (configuration.radio != Configuration.METIS_PENELOPE &&
-                                configuration.radio != Configuration.METIS_PENNYLANE) {
+                        if (configuration.radio != Configuration.METIS_PENELOPE
+                                && configuration.radio != Configuration.METIS_PENNYLANE) {
                             BandStack bs = configuration.bands.get().get();
                             switch (bs.getRxAntenna()) {
                                 case BandStack.NONE:
@@ -863,8 +912,8 @@ public class Metis extends Thread {
                         }
                         sendbuffer[14] = tx3;
                         byte tx4 = txcontrol4;
-                        if (configuration.radio != Configuration.METIS_PENELOPE &&
-                                configuration.radio != Configuration.METIS_PENNYLANE) {
+                        if (configuration.radio != Configuration.METIS_PENELOPE
+                                && configuration.radio != Configuration.METIS_PENNYLANE) {
                             BandStack bs = configuration.bands.get().get();
                             switch (bs.getTxAntenna()) {
                                 case BandStack.ANT1:
@@ -881,7 +930,6 @@ public class Metis extends Thread {
                         sendbuffer[15] = tx4;
                         command++;
 
-
                         break;
                     }
                     case 1: {
@@ -889,18 +937,18 @@ public class Metis extends Thread {
                         sendbuffer[12] = 0x00;
                         if (tuning) {
                             sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getDrive() * configuration.tunegain);
-                        } else if(transmit) {
+                        } else if (transmit) {
                             sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getDrive() * configuration.drive);
                         }
-                        byte c2=0x00;
-                        if(configuration.micboost) {
-                            c2|=0x01;
+                        byte c2 = 0x00;
+                        if (configuration.micboost) {
+                            c2 |= 0x01;
                         }
-                        if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES) {
-                            if(configuration.radio==Configuration.HERMES_APOLLO) {
-                                c2=(byte)(APOLLO_BOARD | APOLLO_FILTER | APOLLO_TUNER);
-                                if(tuning) {
-                                    c2|=APOLLO_TUNE;
+                        if (configuration.discovered.getDevice() == Discovered.DEVICE_HERMES) {
+                            if (configuration.radio == Configuration.HERMES_APOLLO) {
+                                c2 = (byte) (APOLLO_BOARD | APOLLO_FILTER | APOLLO_TUNER);
+                                if (tuning) {
+                                    c2 |= APOLLO_TUNE;
                                 }
                             }
                         }
@@ -915,17 +963,17 @@ public class Metis extends Thread {
                         sendbuffer[11] = 0x14;
                         byte c1 = 0x00;
                         /*
-                        if(receivers.length>0) {
-                            if(receivers[0].getPreamp()) {
-                                c1|=0x01;
-                            }
-                        }
-                        if(receivers.length>1) {
-                            if(receivers[1].getPreamp()) {
-                                c1|=0x02;
-                            }
-                        }
-                        */
+                         if(receivers.length>0) {
+                         if(receivers[0].getPreamp()) {
+                         c1|=0x01;
+                         }
+                         }
+                         if(receivers.length>1) {
+                         if(receivers[1].getPreamp()) {
+                         c1|=0x02;
+                         }
+                         }
+                         */
                         int mode = bandstack.getMode();
                         if (mode != Modes.CWU && mode != Modes.CWL) {
                             c1 = (byte) ((configuration.oriontipring << 4) | (configuration.orionmicbias << 5) | (configuration.orionmicptt << 6));
@@ -1014,7 +1062,6 @@ public class Metis extends Thread {
                     frequency = frequency - xvtr.getIfFrequency();
                 }
 
-
                 sendbuffer[520] = SYNC;
                 sendbuffer[521] = SYNC;
                 sendbuffer[522] = SYNC;
@@ -1095,7 +1142,6 @@ public class Metis extends Thread {
         sendbuffer[6] = (byte) ((txsequence >> 8) & 0xF);
         sendbuffer[7] = (byte) (txsequence & 0xF);
 
-
         for (int i = 0; i < 2; i++) {
             sendbuffer[(i * 512) + 8] = SYNC;
             sendbuffer[(i * 512) + 9] = SYNC;
@@ -1124,7 +1170,7 @@ public class Metis extends Thread {
         commandbuffer[1] = (byte) 0xFE;
         commandbuffer[2] = (byte) 0x04;
         //if (bandscope) {
-            commandbuffer[3] = (byte) 0x03;
+        commandbuffer[3] = (byte) 0x03;
         //} else {
         //    commandbuffer[3] = (byte) 0x01;
         //}
@@ -1139,9 +1185,9 @@ public class Metis extends Thread {
     private String getLocalIpAddress() {
         String result = "";
         try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
                 NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
                     InetAddress inetAddress = enumIpAddr.nextElement();
                     if (!inetAddress.isLoopbackAddress()) {
                         result = inetAddress.getHostAddress().toString();
@@ -1199,14 +1245,14 @@ public class Metis extends Thread {
 
     public synchronized boolean Process_Panadapter(int channel, float[] samples) {
         int[] result = new int[1];
-        
-        if(samples.length!=pixels) {
-            Log.i("Metis", "Process_Panadapter: channel="+channel+" samples="+samples.length+" pixels="+pixels);
+
+        if (samples.length != pixels) {
+            Log.i("Metis", "Process_Panadapter: channel=" + channel + " samples=" + samples.length + " pixels=" + pixels);
             return false;
         }
-        
+
         wdsp.GetPixels(channel, samples, result);
-        
+
         return (result[0] == 1);
     }
 
@@ -1260,7 +1306,6 @@ public class Metis extends Thread {
     private byte rxcontrol3;
     private byte rxcontrol4;
 
-
     private int receivers = 1;
     private int receiver = 0;
 
@@ -1289,10 +1334,10 @@ public class Metis extends Thread {
     public static byte MODE_CLASS_E = (byte) 0x01;
     public static byte MODE_OTHERS = (byte) 0x00;
 
-    public static byte APOLLO_FILTER = (byte)0x04;
-    public static byte APOLLO_TUNER = (byte)0x08;
-    public static byte APOLLO_TUNE = (byte)0x10;
-    public static byte APOLLO_BOARD = (byte)0x20;
+    public static byte APOLLO_FILTER = (byte) 0x04;
+    public static byte APOLLO_TUNER = (byte) 0x08;
+    public static byte APOLLO_TUNE = (byte) 0x10;
+    public static byte APOLLO_BOARD = (byte) 0x20;
 
     // control 3
     public static byte ALEX_ATTENUATION_0DB = (byte) 0x00;
@@ -1309,12 +1354,11 @@ public class Metis extends Thread {
     // control 4
     private static byte DUPLEX = (byte) 0x04;
 
-
     // default tx control bytes
     private byte txcontrol0 = (byte) (MOX_DISABLED);
     private byte txcontrol1 = (byte) (CONFIG_BOTH /*| MERCURY_122_88MHZ_SOURCE | MERCURY_10MHZ_SOURCE*/ | MIC_SOURCE_PENELOPE | SPEED_48KHZ);
     private byte txcontrol2 = (byte) (MODE_OTHERS);
-    private byte txcontrol3 = (byte) (ALEX_ATTENUATION_0DB  /* |LT2208_GAIN_OFF  | LT2208_DITHER_ON | LT2208_RANDOM_ON */);
+    private byte txcontrol3 = (byte) (ALEX_ATTENUATION_0DB /* |LT2208_GAIN_OFF  | LT2208_DITHER_ON | LT2208_RANDOM_ON */);
     private byte txcontrol4 = (byte) (DUPLEX);
 
     private long txsequence = 0L;
@@ -1353,8 +1397,8 @@ public class Metis extends Thread {
     private float[] suboutrsamples;
     private int inoffset = 0;
 
-    private static final int BS_FFT_SIZE=8192;
-    private static final int BS_BUFFER_SIZE=2048;
+    private static final int BS_FFT_SIZE = 8192;
+    private static final int BS_BUFFER_SIZE = 2048;
     private float[] bslsamples;
     private float[] bsrsamples;
     private int bsoffset = 0;
@@ -1370,11 +1414,11 @@ public class Metis extends Thread {
 
     // local audio
     /*
-    private AudioTrack audiotrack;
-    */
-
+     private AudioTrack audiotrack;
+     */
     private int outsize;
-    private short[] audiooutput = new short[1024 * 2];
+    //private short[] audiooutput = new short[1024 * 2];
+    private byte[] audiooutput = new byte[1024 * 4]; // 2 channels of shorts
     private int audiooutputindex = 0;
 
     private long time;
@@ -1390,11 +1434,11 @@ public class Metis extends Thread {
     public int mercury_software_version = 0;
     public int penelope_software_version = 0;
 
-    private int power_samples=0;
-    private int avg_penelope_forward_power=0;
+    private int power_samples = 0;
+    private int avg_penelope_forward_power = 0;
     private int avg_alex_forward_power = 0;
     private int avg_alex_reverse_power = 0;
-    
+
     private int penelope_forward_power = 0;
     private int alex_forward_power = 0;
     private int alex_reverse_power = 0;
@@ -1408,7 +1452,6 @@ public class Metis extends Thread {
     private boolean adc2overflow = false;
     private boolean adc3overflow = false;
     private boolean adc4overflow = false;
-
 
     private int ain3 = 0;
     private int ain4 = 0;
@@ -1429,29 +1472,30 @@ public class Metis extends Thread {
     private int command = 0;
     private int freqcommand = 0;
 
-
     private boolean transmit = false;
     private boolean tuning = false;
 
     boolean last_ptt = false;
     boolean last_dot = false;
     boolean last_dash = false;
-    
-    boolean lna_dither[] = {true, true, true, true, true, true, true, true,
-            true, true, true, true, true, true, true, true,
-            true, true, true, true, true, true, true, true,
-            true, true, true, true, true, true, true, true,
-            false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false};
-    byte lna_att[] = {31, 30, 29, 28, 27, 26, 25, 24,
-            23, 22, 21, 20, 19, 18, 17, 16,
-            15, 14, 13, 12, 11, 10, 9, 8,
-            7, 6, 5, 4, 3, 2, 1, 0,
-            31, 30, 29, 28, 27, 26, 25, 24,
-            23, 22, 21, 20, 19, 18, 17, 16,
-            15, 14, 13, 12, 11, 10, 9, 8,
-            7, 6, 5, 4, 3, 2, 1, 0};
 
+    boolean lna_dither[] = {true, true, true, true, true, true, true, true,
+        true, true, true, true, true, true, true, true,
+        true, true, true, true, true, true, true, true,
+        true, true, true, true, true, true, true, true,
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false};
+    byte lna_att[] = {31, 30, 29, 28, 27, 26, 25, 24,
+        23, 22, 21, 20, 19, 18, 17, 16,
+        15, 14, 13, 12, 11, 10, 9, 8,
+        7, 6, 5, 4, 3, 2, 1, 0,
+        31, 30, 29, 28, 27, 26, 25, 24,
+        23, 22, 21, 20, 19, 18, 17, 16,
+        15, 14, 13, 12, 11, 10, 9, 8,
+        7, 6, 5, 4, 3, 2, 1, 0};
+
+    private AudioFormat audioformat;
+    private SourceDataLine audioline;
 }
