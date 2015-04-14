@@ -1342,7 +1342,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             Band band = configuration.bands.get();
             BandStack bandstack = band.get();
             int step = Step.getStep(configuration.step);
-            bandstack.setFrequency(bandstack.getFrequency() + (step * e.getWheelRotation()));
+            bandstack.setFrequency(bandstack.getFrequency() - (step * e.getWheelRotation()));
             vfoPanel.repaint();
             frequencyPanel.repaint();
         }
